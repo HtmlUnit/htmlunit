@@ -42,16 +42,20 @@ import static org.junit.Assert.fail;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -74,14 +78,18 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
  * @author Bruce Faulkner
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class HTMLElementTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testAll_IndexByInt() throws Exception {
-        final String firstContent = "<html><head>\n"
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts(IE = { "all node for body: DIV A IMG DIV ", "all node for testDiv: A IMG ",
+            "all node for testA: IMG ", "all node for testImg: ", "all node for testDiv2: " })
+    public void all_IndexByInt() throws Exception {
+        final String html = "<html><head>\n"
             + "<script>\n"
             + "function test()\n"
             + "{\n"
@@ -109,20 +117,16 @@ public class HTMLElementTest extends WebTestCase {
             + "<div id='testDiv2'>foo</div>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"all node for body: DIV A IMG DIV ", "all node for testDiv: A IMG ",
-            "all node for testA: IMG ", "all node for testImg: ", "all node for testDiv2: "};
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, firstContent, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
         
     /**
      * @throws Exception on test failure
      */
     @Test
-    public void testGetAttribute() throws Exception {
-        final String content = "<html>\n"
+    @Alerts({ "a", "a", "undefined", "null" })
+    public void getAttribute() throws Exception {
+        final String html = "<html>\n"
                 + "<head>\n"
                 + "    <title>test</title>\n"
                 + "    <script>\n"
@@ -140,20 +144,18 @@ public class HTMLElementTest extends WebTestCase {
                 + "</p>\n"
                 + "</body>\n"
                 + "</html>";
-        final String[] expectedAlerts = {"a", "a", "undefined", "null"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPageWithAlerts(html);
         assertEquals("test", page.getTitleText());
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
      * @throws Exception on test failure
      */
     @Test
-    public void testGetSetAttributeNS() throws Exception {
-        final String content = "<html>\n"
+    @Browsers(Browser.FIREFOX_2)
+    @Alerts({ "", "bla" })
+    public void getSetAttributeNS() throws Exception {
+        final String html = "<html>\n"
                 + "<head>\n"
                 + "    <title>test</title>\n"
                 + "    <script>\n"
@@ -171,20 +173,16 @@ public class HTMLElementTest extends WebTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        final String[] expectedAlerts = {"", "bla"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception on test failure
      */
     @Test
-    public void testSetAttribute() throws Exception {
-        final String content = "<html>\n"
+    @Alerts({ "a", "b", "undefined", "foo" })
+    public void setAttribute() throws Exception {
+        final String html = "<html>\n"
             + "<head>\n"
             + "    <title>test</title>\n"
             + "    <script>\n"
@@ -204,19 +202,31 @@ public class HTMLElementTest extends WebTestCase {
             + "</p>\n"
             + "</body>\n"
             + "</html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPageWithAlerts(html);
         assertEquals("test", page.getTitleText());
-        final String[] expectedAlerts = {"a", "b", "undefined", "foo"};
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
      * @throws Exception on test failure
      */
     @Test
-    public void testGetAttributeNode() throws Exception {
-        final String content =
+    @Alerts({
+            "expando=true",
+            "firstChild=null",
+            "lastChild=null",
+            "name=customAttribute",
+            "nextSibling=null",
+            "nodeName=customAttribute",
+            "nodeType=2",
+            "nodeValue=bleh",
+            "(ownerDocument==document)=true",
+            "parentNode=null",
+            "previousSibling=null",
+            "specified=true",
+            "value=bleh"
+        })
+    public void getAttributeNode() throws Exception {
+        final String html =
               "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
@@ -249,34 +259,17 @@ public class HTMLElementTest extends WebTestCase {
             + "  <div id='div3'></div>\n"
             + "</body>\n"
             + "</html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPageWithAlerts(html);
         assertEquals("test", page.getTitleText());
-        final String[] expectedAlerts = {
-            "expando=true",
-            "firstChild=null",
-            "lastChild=null",
-            "name=customAttribute",
-            "nextSibling=null",
-            "nodeName=customAttribute",
-            "nodeType=2",
-            "nodeValue=bleh",
-            "(ownerDocument==document)=true",
-            "parentNode=null",
-            "previousSibling=null",
-            "specified=true",
-            "value=bleh",
-        };
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
      * @throws Exception on test failure
      */
     @Test
-    public void testSetAttributeNode() throws Exception {
-        final String content =
+    @Alerts({ "left", "left", "right", "right" })
+    public void setAttributeNode() throws Exception {
+        final String html =
               "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
@@ -300,11 +293,8 @@ public class HTMLElementTest extends WebTestCase {
             + "  <div id='div1' align='left'></div>\n"
             + "</body>\n"
             + "</html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPageWithAlerts(html);
         assertEquals("test", page.getTitleText());
-        final String[] expectedAlerts = {"left", "left", "right", "right"};
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -312,8 +302,9 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetElementsByTagName() throws Exception {
-        final String content
+    @Alerts({ "all = 4", "row = 2", "by wrong name: 0" })
+    public void getElementsByTagName() throws Exception {
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "  var a1 = document.getElementsByTagName('td');\n"
@@ -329,12 +320,29 @@ public class HTMLElementTest extends WebTestCase {
             + "<tr id='r2'><td>3</td><td>4</td></tr>\n"
             + "</table>\n"
             + "</body></html>";
-        final String[] expectedAlerts = {"all = 4", "row = 2", "by wrong name: 0"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        loadPageWithAlerts(html);
+    }
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "div1", "div2" })
+    public void getElementsByTagName2() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    for (var f = 0; (formnode = document.getElementsByTagName('form').item(f)); f++)\n"
+            + "      for (var i = 0; (node = formnode.getElementsByTagName('div').item(i)); i++)\n"
+            + "        alert(node.id);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <div id='div1'/>\n"
+            + "    <div id='div2'/>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -343,8 +351,9 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetElementsByTagNameCollection() throws Exception {
-        final String content
+    @Alerts({ "first", "second", "third" })
+    public void getElementsByTagNameCollection() throws Exception {
+        final String html
             = "<html><head>\n"
             + "<script>\n"
             + "function test()\n"
@@ -364,12 +373,7 @@ public class HTMLElementTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"first", "second", "third"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -378,7 +382,8 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetElementsByTagNameAsterisk() throws Exception {
+    @Alerts({ "8", "3" })
+    public void getElementsByTagNameAsterisk() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test() {\n"
             + "      alert(document.getElementsByTagName('*').length);\n"
@@ -387,10 +392,7 @@ public class HTMLElementTest extends WebTestCase {
             + "</script>\n"
             + "<div id='div'><p>a</p><p>b</p><p>c</p></div>\n"
             + "</body></html>";
-        final String[] expected = {"8", "3"};
-        final List<String> actual = new ArrayList<String>();
-        loadPage(html, actual);
-        assertEquals(expected, actual);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -398,8 +400,9 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetClassName() throws Exception {
-        final String content
+    @Alerts("the class is x")
+    public void getClassName() throws Exception {
+        final String html
             = "<html><head><style>.x {  font: 8pt Arial bold;  }</style>\n"
             + "<script>\n"
             + "function doTest() {\n"
@@ -411,10 +414,7 @@ public class HTMLElementTest extends WebTestCase {
             + "<p id='pid' class='x'>text</p>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        final String[] expectedAlerts = {"the class is x"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -422,8 +422,9 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetClassName() throws Exception {
-        final String content
+    @Alerts("the class is z")
+    public void setClassName() throws Exception {
+        final String html
             = "<html><head><style>.x {  font: 8pt Arial bold;  }</style>\n"
             + "<script>\n"
             + "function doTest() {\n"
@@ -436,18 +437,16 @@ public class HTMLElementTest extends WebTestCase {
             + "<p id='pid' class='x'>text</p>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        final String[] expectedAlerts = {"the class is z"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetInnerHTML() throws Exception {
-        final String content = "<html>\n"
+    @Alerts("if (1 > 2 & 3 < 2) willNotHappen('yo');")
+    public void getInnerHTML() throws Exception {
+        final String html = "<html>\n"
             + "<head>\n"
             + "    <title>test</title>\n"
             + "    <script id='theScript'>"
@@ -464,33 +463,17 @@ public class HTMLElementTest extends WebTestCase {
             + "<form id='myNode'></form>\n"
             + "</body>\n"
             + "</html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final String[] expectedAlerts = {"if (1 > 2 & 3 < 2) willNotHappen('yo');"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetSetInnerHTMLSimple_FF() throws Exception {
-        final String[] expected = {"Old = <b>Old innerHTML</b>", "New = New cell value"};
-        testGetSetInnerHTMLSimple(BrowserVersion.FIREFOX_2, expected);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testGetSetInnerHTMLSimple_IE() throws Exception {
-        final String[] expected = {"Old = <B>Old innerHTML</B>", "New = New cell value"};
-        testGetSetInnerHTMLSimple(BrowserVersion.INTERNET_EXPLORER_6_0, expected);
-    }
-
-    private void testGetSetInnerHTMLSimple(final BrowserVersion version, final String[] expected) throws Exception {
-        final String content = "<html>\n"
+    @Alerts(IE = { "Old = <B>Old innerHTML</B>", "New = New cell value" },
+            FF = { "Old = <b>Old innerHTML</b>", "New = New cell value" })
+    public void getSetInnerHTMLSimple_FF() throws Exception {
+        final String html = "<html>\n"
             + "<head>\n"
             + "    <title>test</title>\n"
             + "    <script>\n"
@@ -506,40 +489,24 @@ public class HTMLElementTest extends WebTestCase {
             + "<p id='myNode'><b>Old innerHTML</b></p>\n"
             + "</body>\n"
             + "</html>";
-        final List<String> actual = new ArrayList<String>();
-        loadPage(version, content, actual);
-        assertEquals(expected, actual);
+        loadPageWithAlerts(html);
     }
 
     /**
-     * Test the use of innerHTML to set new HTML code in Firefox.
+     * Test the use of innerHTML to set new HTML code.
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetSetInnerHTMLComplex_FF() throws Exception {
-        final String[] expected = {
-            "Old = <b>Old innerHTML</b><!-- old comment -->",
-            "New =  <b><i id=\"newElt\">New cell value</i></b>",
-            "I" };
-        testGetSetInnerHTMLComplex(BrowserVersion.FIREFOX_2, expected);
-    }
-
-    /**
-     * Test the use of innerHTML to set new HTML code in IE.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testGetSetInnerHTMLComplex_IE() throws Exception {
-        final String[] expected = {
+    @Alerts(IE = {
             "Old = <B>Old innerHTML</B><!-- old comment -->",
             "New =  <B><I id=newElt>New cell value</I></B>",
-            "I" };
-        testGetSetInnerHTMLComplex(BrowserVersion.INTERNET_EXPLORER_6_0, expected);
-    }
-
-    private void testGetSetInnerHTMLComplex(final BrowserVersion version, final String[] expected)
-        throws Exception {
-        final String content = "<html>\n"
+            "I" },
+            FF = {
+            "Old = <b>Old innerHTML</b><!-- old comment -->",
+            "New =  <b><i id=\"newElt\">New cell value</i></b>",
+             "I" })
+    public void getSetInnerHTMLComplex_FF() throws Exception {
+        final String html = "<html>\n"
             + "<head>\n"
             + "    <title>test</title>\n"
             + "    <script>\n"
@@ -557,9 +524,7 @@ public class HTMLElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final List<String> actual = new ArrayList<String>();
-        final HtmlPage page = loadPage(version, content, actual);
-        assertEquals(expected, actual);
+        final HtmlPage page = loadPageWithAlerts(html);
 
         final HtmlElement pElt = page.getHtmlElementById("myNode");
         assertEquals("p", pElt.getNodeName());
@@ -573,8 +538,9 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetSetInnerHTMLNewInput() throws Exception {
-        final String content = "<html>\n"
+    @Alerts("true")
+    public void getSetInnerHTMLNewInput() throws Exception {
+        final String html = "<html>\n"
             + "<head>\n"
             + "    <title>test</title>\n"
             + "    <script>\n"
@@ -589,38 +555,21 @@ public class HTMLElementTest extends WebTestCase {
             + "<form id='myNode'></form>\n"
             + "</body>\n"
             + "</html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final String[] expectedAlerts = {"true"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetSetInnerHTMLChar_FF() throws Exception {
-        final String[] expected = {
-            "Old = <b>Old innerHTML</b>",
-            "New = New cell value &amp; \u0110 \u0110" };
-        testGetSetInnerHTMLChar(BrowserVersion.FIREFOX_2, expected);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testGetSetInnerHTMLChar_IE() throws Exception {
-        final String[] expected = {
+    @Alerts(IE = {
             "Old = <B>Old innerHTML</B>",
-            "New = New cell value &amp; \u0110 \u0110" };
-        testGetSetInnerHTMLChar(BrowserVersion.INTERNET_EXPLORER_6_0, expected);
-    }
-
-    private void testGetSetInnerHTMLChar(final BrowserVersion version, final String[] expected)
-        throws Exception {
-        final String content = "<html>\n"
+            "New = New cell value &amp; \u0110 \u0110" },
+            FF = {
+            "Old = <b>Old innerHTML</b>",
+            "New = New cell value &amp; \u0110 \u0110" })
+    public void getSetInnerHTMLChar_FF() throws Exception {
+        final String html = "<html>\n"
             + "<head>\n"
             + "    <title>test</title>\n"
             + "    <script>\n"
@@ -636,10 +585,7 @@ public class HTMLElementTest extends WebTestCase {
             + "<p id='myNode'><b>Old innerHTML</b></p>\n"
             + "</body>\n"
             + "</html>";
-        createTestPageForRealBrowserIfNeeded(content, expected);
-        final List<String> actual = new ArrayList<String>();
-        loadPage(version, content, actual);
-        assertEquals(expected, actual);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -647,24 +593,10 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetSetInnerHtmlEmptyTag_FF() throws Exception {
-        final String[] expected = {"undefined", "<ul></ul>", "undefined"};
-        testGetSetInnerHtmlEmptyTag(BrowserVersion.FIREFOX_2, expected);
-    }
-
-    /**
-     * Verifies that empty tags are not abbreviated into their &lt;tag/&gt; form.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testGetSetInnerHtmlEmptyTag_IE() throws Exception {
-        final String[] expected = {"<DIV id=div><UL></UL></DIV>", "<UL></UL>", ""};
-        testGetSetInnerHtmlEmptyTag(BrowserVersion.INTERNET_EXPLORER_6_0, expected);
-    }
-
-    private void testGetSetInnerHtmlEmptyTag(final BrowserVersion version, final String[] expected)
-        throws Exception {
-        final String content = "<html><body onload='test()'><script>\n"
+    @Alerts(IE = { "<DIV id=div><UL></UL></DIV>", "<UL></UL>", "" },
+            FF = { "undefined", "<ul></ul>", "undefined" })
+    public void getSetInnerHtmlEmptyTag_FF() throws Exception {
+        final String html = "<html><body onload='test()'><script>\n"
             + "   function test() {\n"
             + "      var div = document.getElementById('div');\n"
             + "      alert(div.outerHTML);\n"
@@ -674,9 +606,7 @@ public class HTMLElementTest extends WebTestCase {
             + "</script>\n"
             + "<div id='div'><ul/></div>\n"
             + "</body></html>";
-        final List<String> actual = new ArrayList<String>();
-        loadPage(version, content, actual);
-        assertEquals(expected, actual);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -684,24 +614,10 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetSetInnerHtmlAttributeWithWhitespace_FF() throws Exception {
-        final String[] expected = {"undefined", "<span class=\"a b\"></span>", "undefined"};
-        testGetSetInnerHtmlAttributeWithWhitespace(BrowserVersion.FIREFOX_2, expected);
-    }
-
-    /**
-     * Verifies that attributes containing whitespace are always quoted.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testGetSetInnerHtmlAttributeWithWhitespace_IE() throws Exception {
-        final String[] expected = {"<DIV id=div><SPAN class=\"a b\"></SPAN></DIV>", "<SPAN class=\"a b\"></SPAN>", ""};
-        testGetSetInnerHtmlAttributeWithWhitespace(BrowserVersion.INTERNET_EXPLORER_6_0, expected);
-    }
-
-    private void testGetSetInnerHtmlAttributeWithWhitespace(final BrowserVersion version, final String[] expected)
-        throws Exception {
-        final String content = "<html><body onload='test()'><script>\n"
+    @Alerts(IE = { "<DIV id=div><SPAN class=\"a b\"></SPAN></DIV>", "<SPAN class=\"a b\"></SPAN>", "" },
+            FF = { "undefined", "<span class=\"a b\"></span>", "undefined" })
+    public void getSetInnerHtmlAttributeWithWhitespace_FF() throws Exception {
+        final String html = "<html><body onload='test()'><script>\n"
             + "   function test() {\n"
             + "      var div = document.getElementById('div');\n"
             + "      alert(div.outerHTML);\n"
@@ -711,9 +627,7 @@ public class HTMLElementTest extends WebTestCase {
             + "</script>\n"
             + "<div id='div'><span class='a b'></span></div>\n"
             + "</body></html>";
-        final List<String> actual = new ArrayList<String>();
-        loadPage(version, content, actual);
-        assertEquals(expected, actual);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -721,20 +635,16 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetInnerHTMLEmpty() throws Exception {
-        final String content = "<html><head></head><body>\n"
+    @Alerts("Empty ChildrenLength: 0")
+    public void setInnerHTMLEmpty() throws Exception {
+        final String html = "<html><head></head><body>\n"
                 + "<div id='testDiv'>foo</div>\n"
                 + "<script language='javascript'>\n"
                 + "    var node = document.getElementById('testDiv');\n"
                 + "    node.innerHTML = '';\n"
                 + "    alert('Empty ChildrenLength: ' + node.childNodes.length);\n"
                 + "</script></body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final String[] expectedAlerts = {"Empty ChildrenLength: 0"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -742,20 +652,9 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetInnerHTMLNull() throws Exception {
-        final String[] alertsIE = {"Null ChildrenLength: 1"};
-        testSetInnerHTMLNull(BrowserVersion.INTERNET_EXPLORER_6_0, alertsIE);
-        final String[] alertsFF = {"Null ChildrenLength: 0"};
-        testSetInnerHTMLNull(BrowserVersion.FIREFOX_2, alertsFF);
-    }
-
-    /**
-     * Test setting innerHTML to null.
-     * @see #testSetInnerHTMLNull()
-     */
-    private void testSetInnerHTMLNull(final BrowserVersion browserVersion, final String[] expectedAlerts)
-        throws Exception {
-        final String content = "<html><head></head><body>\n"
+    @Alerts(IE = "Null ChildrenLength: 1", FF = "Null ChildrenLength: 0")
+    public void setInnerHTMLNull() throws Exception {
+        final String html = "<html><head></head><body>\n"
                 + "<div id='testDiv'>foo</div>\n"
                 + "<script language='javascript'>\n"
                 + "    var node = document.getElementById('testDiv');\n"
@@ -763,18 +662,17 @@ public class HTMLElementTest extends WebTestCase {
                 + "    alert('Null ChildrenLength: ' + node.childNodes.length);\n"
                 + "</script></body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        loadPage(browserVersion, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetSetOuterHTMLSimple() throws Exception {
-        final String content = "<html>\n"
+    @Alerts(IE = { "Old = <B id=innerNode>Old outerHTML</B>", "New = New cell value" },
+            FF = { "Old = undefined", "New = <b id=\"innerNode\">Old outerHTML</b>" })
+    public void getSetOuterHTMLSimple() throws Exception {
+        final String html = "<html>\n"
             + "<head>\n"
             + "    <title>test</title>\n"
             + "    <script>\n"
@@ -791,14 +689,7 @@ public class HTMLElementTest extends WebTestCase {
             + "<p id='myNode'><b id='innerNode'>Old outerHTML</b></p>\n"
             + "</body>\n"
             + "</html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final String[] expectedAlerts = {
-            "Old = <B id=innerNode>Old outerHTML</B>",
-            "New = New cell value"
-        };
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -806,8 +697,10 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetSetOuterHTMLComplex() throws Exception {
-        final String content = "<html>\n"
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts(IE = { "Old = <B id=innerNode>Old outerHTML</B>", "New =  <B><I id=newElt>New cell value</I></B>", "I" })
+    public void getSetOuterHTMLComplex() throws Exception {
+        final String html = "<html>\n"
             + "<head>\n"
             + "    <title>test</title>\n"
             + "    <script>\n"
@@ -825,15 +718,7 @@ public class HTMLElementTest extends WebTestCase {
             + "<p id='myNode'><b id='innerNode'>Old outerHTML</b></p>\n"
             + "</body>\n"
             + "</html>";
-        final String[] expectedAlerts = {
-            "Old = <B id=innerNode>Old outerHTML</B>",
-            "New =  <B><I id=newElt>New cell value</I></B>",
-            "I"
-        };
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        final HtmlPage page = loadPageWithAlerts(html);
         final HtmlElement pElt = page.getHtmlElementById("myNode");
         assertEquals("p", pElt.getNodeName());
         final HtmlElement elt = page.getHtmlElementById("newElt");
@@ -844,9 +729,11 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testInsertAdjacentHTML() throws Exception {
-        testInsertAdjacentHTML("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");
-        testInsertAdjacentHTML("BeforeEnd", "AfterEnd", "BeFoReBeGiN", "afterbegin");
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts({ "outside", "1", "middle", "2", "3", "4" })
+    public void insertAdjacentHTML() throws Exception {
+        insertAdjacentHTML("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");
+        insertAdjacentHTML("BeforeEnd", "AfterEnd", "BeFoReBeGiN", "afterbegin");
     }
 
     /**
@@ -856,10 +743,9 @@ public class HTMLElementTest extends WebTestCase {
      * @param afterBegin data to insert
      * @throws Exception if the test fails
      */
-    private void testInsertAdjacentHTML(final String beforeEnd,
-            final String afterEnd, final String beforeBegin, final String afterBegin)
-        throws Exception {
-        final String content = "<html><head><title>First</title>\n"
+    private void insertAdjacentHTML(final String beforeEnd,
+            final String afterEnd, final String beforeBegin, final String afterBegin) throws Exception {
+        final String html = "<html><head><title>First</title>\n"
                 + "<script>\n"
                 + "function test()\n"
                 + "{\n"
@@ -882,12 +768,7 @@ public class HTMLElementTest extends WebTestCase {
                 + "</div>\n"
                 + "</div>\n"
                 + "</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content,
-                collectedAlerts);
-        final String[] expectedAlerts = {"outside", "1", "middle", "2", "3", "4"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        final HtmlPage page = loadPageWithAlerts(html);
         final HtmlElement elt = page.getHtmlElementById("outside");
         assertEquals("before begin after begin inside before end after end", elt.asText());
     }
@@ -896,15 +777,16 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testInsertAdjacentElement() throws Exception {
-        testInsertAdjacentElement("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");
-        testInsertAdjacentElement("BeforeEnd", "AfterEnd", "BeFoReBeGiN", "afterbegin");
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts({ "outside", "1", "middle", "2", "3", "4" })
+    public void insertAdjacentElement() throws Exception {
+        insertAdjacentElement("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");
+        insertAdjacentElement("BeforeEnd", "AfterEnd", "BeFoReBeGiN", "afterbegin");
     }
 
-    private void testInsertAdjacentElement(final String beforeEnd,
-            final String afterEnd, final String beforeBegin, final String afterBegin)
-        throws Exception {
-        final String content = "<html><head><title>First</title>\n"
+    private void insertAdjacentElement(final String beforeEnd,
+            final String afterEnd, final String beforeBegin, final String afterBegin) throws Exception {
+        final String html = "<html><head><title>First</title>\n"
                 + "<script>\n"
                 + "function test()\n"
                 + "{\n"
@@ -933,12 +815,7 @@ public class HTMLElementTest extends WebTestCase {
                 + "</div>\n"
                 + "</div>\n"
                 + "</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content,
-                collectedAlerts);
-        final String[] expectedAlerts = {"outside", "1", "middle", "2", "3", "4"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        final HtmlPage page = loadPageWithAlerts(html);
         final HtmlElement elt = page.getHtmlElementById("outside");
         assertEquals("before begin after begin inside before end after end", elt.asText());
     }
@@ -949,8 +826,13 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAddBehaviorDefaultClientCaps() throws Exception {
-        final String content = "<html>\n"
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts(IE = {
+            "body.cpuClass = undefined",
+            "body.cpuClass = x86",
+            "body.cpuClass = undefined" })
+    public void addBehaviorDefaultClientCaps() throws Exception {
+        final String html = "<html>\n"
             + "<head>\n"
             + "    <title>Test</title>\n"
             + "    <script>\n"
@@ -967,16 +849,7 @@ public class HTMLElementTest extends WebTestCase {
             + "</head>\n"
             + "<body onload='doTest()'>Test</body>\n"
             + "</html>";
-        final String[] expectedAlerts = {
-            "body.cpuClass = undefined",
-            "body.cpuClass = " + BrowserVersion.getDefault().getCpuClass(),
-            "body.cpuClass = undefined"
-        };
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -984,10 +857,12 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAddBehaviorDefaultHomePage() throws Exception {
-        final URL content1Url = new URL("http://www.domain1.com/");
-        final URL content2Url = new URL("http://www.domain2.com/");
-        final String content1 =
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts(IE = { "isHomePage = false", "isHomePage = true", "isHomePage = true", "isHomePage = false" })
+    public void addBehaviorDefaultHomePage() throws Exception {
+        final URL url1 = new URL("http://www.domain1.com/");
+        final URL url2 = new URL("http://www.domain2.com/");
+        final String html1 =
               "<html>\n"
             + "  <head>\n"
             + "    <title>Test</title>\n"
@@ -998,7 +873,7 @@ public class HTMLElementTest extends WebTestCase {
             + "       // document, otherwise isHomePage() always returns false.\n"
             + "       var body = document.body;\n"
             + "       body.addBehavior('#default#homePage');\n"
-            + "       var url = '" + content1Url.toExternalForm() + "';\n"
+            + "       var url = '" + url1.toExternalForm() + "';\n"
             + "       alert('isHomePage = ' + body.isHomePage(url));\n"
             + "       body.setHomePage(url);\n"
             + "       alert('isHomePage = ' + body.isHomePage(url));\n"
@@ -1008,7 +883,7 @@ public class HTMLElementTest extends WebTestCase {
             + "       // Make sure that (as mentioned above) isHomePage() always\n"
             + "       // returns false when the url specified is the actual\n"
             + "       // homepage, but the document checking is on a DIFFERENT domain.\n"
-            + "       hp.setHomePage('" + content2Url.toExternalForm() + "');\n"
+            + "       hp.setHomePage('" + url2.toExternalForm() + "');\n"
             + "       alert('isHomePage = ' + hp.isHomePage(url));\n"
             + "       // Test navigation to homepage.\n"
             + "       body.navigateHomePage();\n"
@@ -1019,24 +894,18 @@ public class HTMLElementTest extends WebTestCase {
             + "    <span id='hp' style='behavior:url(#default#homepage)'></span>\n"
             + "  </body>\n"
             + "</html>";
-        final String content2 = "<html></html>";
+        final String html2 = "<html></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection webConnection = new MockWebConnection(client);
-        webConnection.setResponse(content1Url, content1);
-        webConnection.setResponse(content2Url, content2);
+        webConnection.setResponse(url1, html1);
+        webConnection.setResponse(url2, html2);
         client.setWebConnection(webConnection);
-        final HtmlPage page = (HtmlPage) client.getPage(content1Url);
-        final String[] expectedAlerts = {
-            "isHomePage = false",
-            "isHomePage = true",
-            "isHomePage = true",
-            "isHomePage = false"
-        };
-        assertEquals(expectedAlerts, collectedAlerts);
-        assertEquals(content2Url.toExternalForm(), page.getWebResponse().getUrl().toExternalForm());
+        final HtmlPage page = (HtmlPage) client.getPage(url1);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+        assertEquals(url2.toExternalForm(), page.getWebResponse().getUrl().toExternalForm());
     }
 
     /**
@@ -1045,13 +914,15 @@ public class HTMLElementTest extends WebTestCase {
     * @throws Exception if the test fails
     */
     @Test
-    public void testAddBehaviorDefaultDownload() throws Exception {
-        final URL content1Url = new URL("http://htmlunit.sourceforge.net/");
-        final URL content2Url = new URL("http://htmlunit.sourceforge.net/test.txt");
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts(IE = { "Refused", "foo" })
+    public void addBehaviorDefaultDownload() throws Exception {
+        final URL url1 = new URL("http://htmlunit.sourceforge.net/");
+        final URL url2 = new URL("http://htmlunit.sourceforge.net/test.txt");
         // The download behavior doesn't accept downloads from a different domain ...
-        final URL content3Url = new URL("http://www.domain2.com/test.txt");
+        final URL url3 = new URL("http://www.domain2.com/test.txt");
 
-        final String content1 =
+        final String html1 =
              "<html>\n"
             + "  <head>\n"
             + "    <title>Test</title>\n"
@@ -1076,17 +947,17 @@ public class HTMLElementTest extends WebTestCase {
             + "  </body>\n"
             + "</html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection webConnection = new MockWebConnection(client);
-        webConnection.setResponse(content1Url, content1);
-        webConnection.setResponse(content2Url, "foo");
-        webConnection.setResponse(content3Url, "foo2");
+        webConnection.setResponse(url1, html1);
+        webConnection.setResponse(url2, "foo");
+        webConnection.setResponse(url3, "foo2");
         client.setWebConnection(webConnection);
-        client.getPage(content1Url);
+        client.getPage(url1);
 
-        final String[] expectedAlerts = {"Refused", "foo"};
+        final String[] expectedAlerts = getExpectedAlerts();
         final int waitTime = 50;
         final int maxTime = 1000;
         for (int time = 0; time < maxTime; time += waitTime) {
@@ -1105,8 +976,10 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testRemoveBehavior() throws Exception {
-        final String content = "<html>\n"
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts({ "body.isHomePage = undefined", "body.isHomePage = false", "body.isHomePage = undefined" })
+    public void removeBehavior() throws Exception {
+        final String html = "<html>\n"
             + "<head>\n"
             + "    <title>Test</title>\n"
             + "    <script>\n"
@@ -1122,26 +995,20 @@ public class HTMLElementTest extends WebTestCase {
             + "</head>\n"
             + "<body onload='doTest()'>Test</body>\n"
             + "</html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        final String[] expectedAlerts = {
-            "body.isHomePage = undefined",
-            "body.isHomePage = false",
-            "body.isHomePage = undefined"
-        };
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testChildren() throws Exception {
-        final String content = "<html>\n"
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts({ "BR", "DIV", "2", "3" })
+    public void children() throws Exception {
+        final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
-            + "function test()\n"
-            + "{\n"
+            + "function test() {\n"
             + "    var oDiv = document.getElementById('myDiv');\n"
             + "    for (var i=0; i<oDiv.children.length; i++) \n"
             + "        alert(oDiv.children(i).tagName);\n"
@@ -1156,18 +1023,14 @@ public class HTMLElementTest extends WebTestCase {
             + "<div id='myDiv'><br/><div><span>test</span></div></div>\n"
             + "</body>\n"
             + "</html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final String[] expectedAlerts = {"BR", "DIV", "2", "3"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetOnclick() throws Exception {
+    public void setOnclick() throws Exception {
         eventHandlerSetterGetterTest("onclick");
     }
 
@@ -1175,7 +1038,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetOndblclick() throws Exception {
+    public void setOndblclick() throws Exception {
         eventHandlerSetterGetterTest("ondblclick");
     }
 
@@ -1183,7 +1046,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetOnblur() throws Exception {
+    public void setOnblur() throws Exception {
         eventHandlerSetterGetterTest("onblur");
     }
 
@@ -1191,7 +1054,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetOnfocus() throws Exception {
+    public void setOnfocus() throws Exception {
         eventHandlerSetterGetterTest("onfocus");
     }
 
@@ -1199,7 +1062,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetOnkeydown() throws Exception {
+    public void setOnkeydown() throws Exception {
         eventHandlerSetterGetterTest("onkeydown");
     }
 
@@ -1207,7 +1070,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetOnkeypress() throws Exception {
+    public void setOnkeypress() throws Exception {
         eventHandlerSetterGetterTest("onkeypress");
     }
 
@@ -1215,7 +1078,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetOnkeyup() throws Exception {
+    public void setOnkeyup() throws Exception {
         eventHandlerSetterGetterTest("onkeyup");
     }
 
@@ -1223,7 +1086,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetOnmousedown() throws Exception {
+    public void setOnmousedown() throws Exception {
         eventHandlerSetterGetterTest("onmousedown");
     }
 
@@ -1231,7 +1094,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetOnmouseup() throws Exception {
+    public void setOnmouseup() throws Exception {
         eventHandlerSetterGetterTest("onmouseup");
     }
 
@@ -1239,7 +1102,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetOnmouseover() throws Exception {
+    public void setOnmouseover() throws Exception {
         eventHandlerSetterGetterTest("onmouseover");
     }
 
@@ -1247,7 +1110,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetOnmouseout() throws Exception {
+    public void setOnmouseout() throws Exception {
         eventHandlerSetterGetterTest("onmouseout");
     }
 
@@ -1255,7 +1118,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetOnmousemove() throws Exception {
+    public void setOnmousemove() throws Exception {
         eventHandlerSetterGetterTest("onmousemove");
     }
 
@@ -1263,7 +1126,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetOnresize() throws Exception {
+    public void setOnresize() throws Exception {
         eventHandlerSetterGetterTest("onresize");
     }
 
@@ -1272,7 +1135,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     private void eventHandlerSetterGetterTest(final String eventName) throws Exception {
-        final String content = "<html>\n"
+        final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "function handler(event) {}\n"
@@ -1294,8 +1157,7 @@ public class HTMLElementTest extends WebTestCase {
             + "</html>";
         final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {"success"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
         final HtmlElement div = page.getHtmlElementById("myDiv");
 
         assertNotNull("Event handler was not set", div.getEventHandler(eventName));
@@ -1307,8 +1169,10 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetSetInnerTextSimple() throws Exception {
-        final String content = "<html>\n"
+    @Alerts(IE = { "Old = Old \r\ninnerText", "New = New cell value" },
+            FF = { "Old = undefined", "New = New cell value" })
+    public void getSetInnerTextSimple() throws Exception {
+        final String html = "<html>\n"
             + "<head>\n"
             + "    <title>test</title>\n"
             + "    <script>\n"
@@ -1324,19 +1188,15 @@ public class HTMLElementTest extends WebTestCase {
             + "<div id='myNode'><b>Old <p>innerText</p></b></div>\n"
             + "</body>\n"
             + "</html>";
-        final String[] expectedAlerts = {"Old = Old \r\ninnerText", "New = New cell value"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testClickHashAnchor() throws Exception {
-        final String content
+    public void clickHashAnchor() throws Exception {
+        final String html
             = "<html><head><title>HashAnchor</title></head>\n"
             + "<body>\n"
             + "  <script language='javascript'>\n"
@@ -1348,16 +1208,16 @@ public class HTMLElementTest extends WebTestCase {
         final String[] expectedAlerts = {"test hash"};
         // first use direct load
         final List<String> loadCollectedAlerts = new ArrayList<String>();
-        final HtmlPage loadPage = loadPage(content, loadCollectedAlerts);
+        final HtmlPage loadPage = loadPage(getBrowserVersion(), html, loadCollectedAlerts);
         final HtmlAnchor loadHashAnchor = loadPage.getAnchorByName("hash");
         loadHashAnchor.click();
 
         assertEquals(expectedAlerts, loadCollectedAlerts);
 
         // finally try via the client
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
-        webConnection.setResponse(URL_FIRST, content);
+        webConnection.setResponse(URL_FIRST, html);
         webClient.setWebConnection(webConnection);
         final CollectingAlertHandler clientCollectedAlertsHandler = new CollectingAlertHandler();
         webClient.setAlertHandler(clientCollectedAlertsHandler);
@@ -1374,8 +1234,9 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testRemoveAttribute() throws Exception {
-        final String content = "<html>\n"
+    @Alerts({ "removeMe", "null" })
+    public void removeAttribute() throws Exception {
+        final String html = "<html>\n"
             + "<head>\n"
             + "    <title>Test</title>\n"
             + "    <script>\n"
@@ -1390,11 +1251,7 @@ public class HTMLElementTest extends WebTestCase {
             + "<body onload='doTest()'><div id='aDiv' name='removeMe'>\n"
             + "</div></body>\n"
             + "</html>";
-        final String[] expectedAlerts = {"removeMe", "null"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -1403,8 +1260,9 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testOffsets() throws Exception {
-        final String content = "<html>\n"
+    @Alerts({ "number", "number", "number", "number", "number", "number", "number", "number" })
+    public void offsets() throws Exception {
+        final String html = "<html>\n"
               + "<head>\n"
               + "    <title>Test</title>\n"
               + "</head>\n"
@@ -1412,8 +1270,7 @@ public class HTMLElementTest extends WebTestCase {
               + "</div></body>\n"
               + "<div id='div1'>foo</div>\n"
               + "<script>\n"
-              + "function alertOffsets(_oElt)\n"
-              + "{\n"
+              + "function alertOffsets(_oElt) {\n"
               + "  alert(typeof _oElt.offsetHeight);\n"
               + "  alert(typeof _oElt.offsetWidth);\n"
               + "  alert(typeof _oElt.offsetLeft);\n"
@@ -1422,19 +1279,16 @@ public class HTMLElementTest extends WebTestCase {
               + "alertOffsets(document.body);\n"
               + "alertOffsets(document.getElementById('div1'));\n"
               + "</script></body></html>";
-        final List<String> expectedAlerts = Collections.nCopies(8, "number");
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    public void testOffsetWidthAndHeight() throws Exception {
-        final String content =
+    @Alerts({ "30px", "46", "55px", "71" })
+    public void offsetWidthAndHeight() throws Exception {
+        final String html =
               "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -1452,28 +1306,16 @@ public class HTMLElementTest extends WebTestCase {
             + "<body onload='test()'>\n"
             + "  <div id='myDiv' style='border: 3px solid #fff; padding: 5px;'></div>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"30px", "46", "55px", "71"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    public void testOffsetTopAndLeft_Padding() throws Exception {
-        testOffsetTopAndLeft_Padding(BrowserVersion.FIREFOX_2, "15", "15");
-        testOffsetTopAndLeft_Padding(BrowserVersion.INTERNET_EXPLORER_7_0, "15", "15");
-        testOffsetTopAndLeft_Padding(BrowserVersion.INTERNET_EXPLORER_6_0, "15", "15");
-    }
-
-    private void testOffsetTopAndLeft_Padding(final BrowserVersion version, final String... expected)
-        throws Exception {
-        final String content =
+    @Alerts({ "15", "15" })
+    public void offsetTopAndLeft_Padding() throws Exception {
+        final String html =
               "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
@@ -1492,24 +1334,16 @@ public class HTMLElementTest extends WebTestCase {
             + "    </div>\n"
             + "  </body>\n"
             + "</html>";
-        final List<String> actual = new ArrayList<String>();
-        loadPage(version, content, actual);
-        assertEquals(expected, actual);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    public void testOffsetTopAndLeft_Margins() throws Exception {
-        testOffsetTopAndLeft_Margins(BrowserVersion.FIREFOX_2, "13", "28");
-        testOffsetTopAndLeft_Margins(BrowserVersion.INTERNET_EXPLORER_7_0, "13", "28");
-        testOffsetTopAndLeft_Margins(BrowserVersion.INTERNET_EXPLORER_6_0, "13", "28");
-    }
-
-    private void testOffsetTopAndLeft_Margins(final BrowserVersion version, final String... expected)
-        throws Exception {
-        final String content =
+    @Alerts({ "13", "28" })
+    public void offsetTopAndLeft_Margins() throws Exception {
+        final String html =
               "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
@@ -1528,24 +1362,16 @@ public class HTMLElementTest extends WebTestCase {
             + "    </div>\n"
             + "  </body>\n"
             + "</html>";
-        final List<String> actual = new ArrayList<String>();
-        loadPage(version, content, actual);
-        assertEquals(expected, actual);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    public void testOffsetTopAndLeft_Borders() throws Exception {
-        testOffsetTopAndLeft_Borders(BrowserVersion.FIREFOX_2, "12", "12");
-        testOffsetTopAndLeft_Borders(BrowserVersion.INTERNET_EXPLORER_7_0, "12", "12");
-        testOffsetTopAndLeft_Borders(BrowserVersion.INTERNET_EXPLORER_6_0, "12", "12");
-    }
-
-    private void testOffsetTopAndLeft_Borders(final BrowserVersion version, final String... expected)
-        throws Exception {
-        final String content =
+    @Alerts({ "12", "12" })
+    public void offsetTopAndLeft_Borders() throws Exception {
+        final String html =
               "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
@@ -1564,24 +1390,16 @@ public class HTMLElementTest extends WebTestCase {
             + "    </div>\n"
             + "  </body>\n"
             + "</html>";
-        final List<String> actual = new ArrayList<String>();
-        loadPage(version, content, actual);
-        assertEquals(expected, actual);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    public void testOffsetTopAndLeft_Nothing() throws Exception {
-        testOffsetTopAndLeft_Nothing(BrowserVersion.FIREFOX_2, "0", "0");
-        testOffsetTopAndLeft_Nothing(BrowserVersion.INTERNET_EXPLORER_7_0, "0", "0");
-        testOffsetTopAndLeft_Nothing(BrowserVersion.INTERNET_EXPLORER_6_0, "0", "0");
-    }
-
-    private void testOffsetTopAndLeft_Nothing(final BrowserVersion version, final String... expected)
-        throws Exception {
-        final String content =
+    @Alerts({ "0", "0" })
+    public void offsetTopAndLeft_Nothing() throws Exception {
+        final String html =
               "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
@@ -1600,24 +1418,16 @@ public class HTMLElementTest extends WebTestCase {
             + "    </div>\n"
             + "  </body>\n"
             + "</html>";
-        final List<String> actual = new ArrayList<String>();
-        loadPage(version, content, actual);
-        assertEquals(expected, actual);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    public void testOffsetTopAndLeft_AbsolutelyPositioned() throws Exception {
-        testOffsetTopAndLeft_AbsolutelyPositioned(BrowserVersion.FIREFOX_2, "50", "50");
-        testOffsetTopAndLeft_AbsolutelyPositioned(BrowserVersion.INTERNET_EXPLORER_7_0, "50", "50");
-        testOffsetTopAndLeft_AbsolutelyPositioned(BrowserVersion.INTERNET_EXPLORER_6_0, "50", "50");
-    }
-
-    private void testOffsetTopAndLeft_AbsolutelyPositioned(final BrowserVersion version, final String... expected)
-        throws Exception {
-        final String content =
+    @Alerts({ "50", "50" })
+    public void offsetTopAndLeft_AbsolutelyPositioned() throws Exception {
+        final String html =
               "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
@@ -1636,9 +1446,7 @@ public class HTMLElementTest extends WebTestCase {
             + "    </div>\n"
             + "  </body>\n"
             + "</html>";
-        final List<String> actual = new ArrayList<String>();
-        loadPage(version, content, actual);
-        assertEquals(expected, actual);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -1650,7 +1458,8 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testOffsetTopWithPreviousSiblings() throws Exception {
+    @Alerts({ "false", "true" })
+    public void offsetTopWithPreviousSiblings() throws Exception {
         final String html = "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
@@ -1665,10 +1474,7 @@ public class HTMLElementTest extends WebTestCase {
             + "    <div id='d2'>bar</div>\n"
             + "  </body>\n"
             + "</html>";
-        final String[] expected = new String[] {"false", "true"};
-        final List<String> actual = new ArrayList<String>();
-        loadPage(html, actual);
-        assertEquals(expected, actual);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -1677,17 +1483,17 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testScrolls() throws Exception {
-        final String content = "<html>\n"
+    @Alerts({ "number", "number", "number", "number", "number", "number", "number", "number" })
+    public void scrolls() throws Exception {
+        final String html = "<html>\n"
               + "<head>\n"
-              + "    <title>Test</title>\n"
+              + "  <title>Test</title>\n"
               + "</head>\n"
               + "<body>\n"
               + "</div></body>\n"
               + "<div id='div1'>foo</div>\n"
               + "<script>\n"
-              + "function alertScrolls(_oElt)\n"
-              + "{\n"
+              + "function alertScrolls(_oElt) {\n"
               + "  alert(typeof _oElt.scrollHeight);\n"
               + "  alert(typeof _oElt.scrollWidth);\n"
               + "  alert(typeof _oElt.scrollLeft);\n"
@@ -1698,11 +1504,7 @@ public class HTMLElementTest extends WebTestCase {
               + "alertScrolls(document.body);\n"
               + "alertScrolls(document.getElementById('div1'));\n"
               + "</script></body></html>";
-        final List<String> expectedAlerts = Collections.nCopies(8, "number");
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -1710,15 +1512,13 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testScrollIntoView() throws Exception {
-        final String content = "<html>\n"
+    @Alerts("ok")
+    public void scrollIntoView() throws Exception {
+        final String html = "<html>\n"
               + "<body>\n"
               + "<script id='me'>document.getElementById('me').scrollIntoView(); alert('ok');</script>\n"
               + "</body></html>";
-        final String[] expectedAlerts = {"ok"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -1726,8 +1526,15 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testOffsetParent_Basic() throws Exception {
-        final String content = "<html><head>\n"
+    @Alerts({
+            "element: span3 offsetParent: td2", "element: td2 offsetParent: table2",
+            "element: tr2 offsetParent: table2", "element: table2 offsetParent: td1",
+            "element: td1 offsetParent: table1", "element: tr1 offsetParent: table1",
+            "element: table1 offsetParent: body1", "element: span2 offsetParent: body1",
+            "element: span1 offsetParent: body1", "element: div1 offsetParent: body1",
+            "element: body1 offsetParent: null" })
+    public void offsetParent_Basic() throws Exception {
+        final String html = "<html><head>\n"
             + "<script type='text/javascript'>\n"
             + "function alertOffsetParent(id) {\n"
             + "  var element = document.getElementById(id);\n"
@@ -1777,18 +1584,7 @@ public class HTMLElementTest extends WebTestCase {
             + "  </span>\n"
             + "</div>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {
-            "element: span3 offsetParent: td2", "element: td2 offsetParent: table2",
-            "element: tr2 offsetParent: table2", "element: table2 offsetParent: td1",
-            "element: td1 offsetParent: table1", "element: tr1 offsetParent: table1",
-            "element: table1 offsetParent: body1", "element: span2 offsetParent: body1",
-            "element: span1 offsetParent: body1", "element: div1 offsetParent: body1",
-            "element: body1 offsetParent: null"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -1797,14 +1593,11 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testOffsetParent_WithCSS() throws Exception {
-        testOffsetParent_WithCSS(BrowserVersion.FIREFOX_2, "null", "body", "body", "body", "body", "body",
-            "f1", "body", "h1", "i1", "td", "body", "td", "body", "body");
-        testOffsetParent_WithCSS(BrowserVersion.INTERNET_EXPLORER_7_0, "null", "body", "body", "body", "body", "body",
-            "body", "body", "h1", "i1", "td", "td", "td", "body", "body");
-    }
-
-    private void testOffsetParent_WithCSS(final BrowserVersion version, final String... expected) throws Exception {
+    @Alerts(IE = { "null", "body", "body", "body", "body", "body",
+            "body", "body", "h1", "i1", "td", "td", "td", "body", "body" },
+            FF = { "null", "body", "body", "body", "body", "body",
+            "f1", "body", "h1", "i1", "td", "body", "td", "body", "body" })
+    public void offsetParent_WithCSS() throws Exception {
         final String html = "<html>\n"
             + "  <body id='body' onload='test()'>\n"
             + "    <div id='a1'><div id='a2'>x</div></div>\n"
@@ -1849,9 +1642,7 @@ public class HTMLElementTest extends WebTestCase {
             + "    </script>\n"
             + "  </body>\n"
             + "</html>";
-        final List<String> actual = new ArrayList<String>();
-        loadPage(version, html, actual);
-        assertEquals(expected, actual);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -1876,16 +1667,18 @@ public class HTMLElementTest extends WebTestCase {
             + "<div id='outer'></div>"
             + "</body>"
             + "</html>";
-        
-        loadPage(html);
+        loadPage(getBrowserVersion(), html, null);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testPrototype() throws Exception {
-        final String content = "<html><head><title>Prototype test</title>\n"
+    @Browsers(Browser.FIREFOX_2)
+    @Alerts({ "undefined", "undefined", "undefined", "undefined",
+            "123", "from myFunction", "123", "from myFunction" })
+    public void prototype() throws Exception {
+        final String html = "<html><head><title>Prototype test</title>\n"
             + "<script>\n"
             + "function test()\n"
             + "{\n"
@@ -1906,13 +1699,7 @@ public class HTMLElementTest extends WebTestCase {
             + "<div id='foo'>bla</div>\n"
             + "<a id='testLink' href='foo'>bla</a>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"undefined", "undefined", "undefined", "undefined",
-            "123", "from myFunction", "123", "from myFunction"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -1921,8 +1708,10 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testPrototype_Element() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+    @Browsers(Browser.FIREFOX_2)
+    @Alerts("in selectNodes")
+    public void prototype_Element() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    Element.prototype.selectNodes = function(sExpr){\n"
             + "      alert('in selectNodes');\n"
@@ -1932,19 +1721,17 @@ public class HTMLElementTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myDiv'></div>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"in selectNodes"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testInstanceOf() throws Exception {
-        final String content = "<html><head><title>instanceof test</title>\n"
+    @Browsers(Browser.FIREFOX_2)
+    @Alerts({ "true", "true" })
+    public void instanceOf() throws Exception {
+        final String html = "<html><head><title>instanceof test</title>\n"
             + "<script>\n"
             + "function test()\n"
             + "{\n"
@@ -1957,28 +1744,16 @@ public class HTMLElementTest extends WebTestCase {
             + "<div id='foo'>bla</div>\n"
             + "<a id='testLink' href='foo'>bla</a>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"true", "true"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testParentElement() throws Exception {
-        final String[] alertsIE = {"null", "[object]"};
-        testParentElement(BrowserVersion.INTERNET_EXPLORER_6_0, alertsIE);
-        testParentElement(BrowserVersion.INTERNET_EXPLORER_7_0, alertsIE);
-        final String[] alertsFF = {"undefined", "undefined"};
-        testParentElement(BrowserVersion.FIREFOX_2, alertsFF);
-    }
-
-    private void testParentElement(final BrowserVersion browser, final String[] expectedAlerts) throws Exception {
-        final String content
+    @Alerts(IE = { "null", "[object]" }, FF = { "undefined", "undefined" })
+    public void parentElement() throws Exception {
+        final String html
             = "<html id='htmlID'>\n"
             + "<head>\n"
             + "</head>\n"
@@ -1990,48 +1765,31 @@ public class HTMLElementTest extends WebTestCase {
             + "</script>\n"
             + "</body>\n"
             + "</html>";
-
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browser, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testCurrentStyle() throws Exception {
-        testStyle(BrowserVersion.INTERNET_EXPLORER_6_0, "currentStyle", "rgb(0, 0, 0)");
-        try {
-            testStyle(BrowserVersion.FIREFOX_2, "currentStyle", "");
-            fail("'currentStyle' is defined for only IE");
-        }
-        catch (final Exception e) {
-            //expected
-        }
+    @Alerts("rgb(0, 0, 0)")
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    public void currentStyle() throws Exception {
+        style("currentStyle");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testRuntimeStyle() throws Exception {
-        testStyle(BrowserVersion.INTERNET_EXPLORER_6_0, "runtimeStyle", "");
-        try {
-            testStyle(BrowserVersion.FIREFOX_2, "runtimeStyle", "");
-            fail("'runtimeStyle' is defined for only IE");
-        }
-        catch (final Exception e) {
-            //expected
-        }
+    @Alerts("")
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    public void runtimeStyle() throws Exception {
+        style("runtimeStyle");
     }
 
-    private void testStyle(final BrowserVersion browserVersion, final String styleProperty, final String expectedAlert)
-        throws Exception {
-
-        final String content = "<html>\n"
+    private void style(final String styleProperty) throws Exception {
+        final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -2042,30 +1800,16 @@ public class HTMLElementTest extends WebTestCase {
             + "<body onload='test()'>\n"
             + "<div id='myDiv'></div>\n"
             + "</body></html>";
-        
-        final String[] expectedAlerts = {expectedAlert};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetBoundingClientRect() throws Exception {
-        testGetBoundingClientRect(BrowserVersion.INTERNET_EXPLORER_7_0);
-        try {
-            testGetBoundingClientRect(BrowserVersion.FIREFOX_2);
-            fail("'getBoundingClientRect' is defined for only IE");
-        }
-        catch (final Exception e) {
-            //expected
-        }
-    }
-
-    private void testGetBoundingClientRect(final BrowserVersion browserVersion) throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    public void getBoundingClientRect() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var d1 = document.getElementById('div1');\n"
             + "    d1.getBoundingClientRect().left;\n"
@@ -2073,26 +1817,16 @@ public class HTMLElementTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "<div id='div1'/>\n"
             + "</body></html>";
-        loadPage(browserVersion, content, null);
+        loadPage(getBrowserVersion(), html, null);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetClientRects() throws Exception {
-        testGetClientRects(BrowserVersion.INTERNET_EXPLORER_7_0);
-        try {
-            testGetClientRects(BrowserVersion.FIREFOX_2);
-            fail("'getClientRects' is defined for only IE");
-        }
-        catch (final Exception e) {
-            //expected
-        }
-    }
-
-    private void testGetClientRects(final BrowserVersion browserVersion) throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    public void getClientRects() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var d1 = document.getElementById('div1');\n"
             + "    d1.getClientRects();\n"
@@ -2100,23 +1834,16 @@ public class HTMLElementTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "<div id='div1'/>\n"
             + "</body></html>";
-        loadPage(browserVersion, content, null);
+        loadPage(getBrowserVersion(), html, null);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testInnerHTML_parentNode() throws Exception {
-        final String[] expectedAlertsIE = {"null", "#document-fragment"};
-        testInnerHTML_parentNode(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlertsIE);
-        final String[] expectedAlertsFF = {"null", "null"};
-        testInnerHTML_parentNode(BrowserVersion.FIREFOX_2, expectedAlertsFF);
-    }
-
-    private void testInnerHTML_parentNode(final BrowserVersion browserVersion, final String[] expectedAlerts)
-        throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+    @Alerts(IE = { "null", "#document-fragment" }, FF = { "null", "null" })
+    public void innerHTML_parentNode() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var div1 = document.createElement('div');\n"
             + "    alert(div1.parentNode);\n"
@@ -2128,25 +1855,16 @@ public class HTMLElementTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testInnerText_parentNode() throws Exception {
-        final String[] expectedAlertsIE = {"null", "#document-fragment"};
-        testInnerText_parentNode(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlertsIE);
-        final String[] expectedAlertsFF = {"null", "null"};
-        testInnerText_parentNode(BrowserVersion.FIREFOX_2, expectedAlertsFF);
-    }
-
-    private void testInnerText_parentNode(final BrowserVersion browserVersion, final String[] expectedAlerts)
-        throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+    @Alerts(IE = { "null", "#document-fragment" }, FF = { "null", "null" })
+    public void innerText_parentNode() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var div1 = document.createElement('div');\n"
             + "    alert(div1.parentNode);\n"
@@ -2158,23 +1876,16 @@ public class HTMLElementTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testUniqueID() throws Exception {
-        testUniqueID(BrowserVersion.INTERNET_EXPLORER_6_0, false, new String[] {"true", "false"});
-        testUniqueID(BrowserVersion.FIREFOX_2, true, new String[] {"true", "true"});
-    }
-
-    private void testUniqueID(final BrowserVersion browserVersion, final boolean isUndefined,
-        final String[] expectedAlerts) throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+    @Alerts(IE = { "true", "false" }, FF = { "true", "true" })
+    public void uniqueID() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "     var div1 = document.getElementById('div1');\n"
             + "     var div2 = document.getElementById('div2');\n"
@@ -2187,15 +1898,23 @@ public class HTMLElementTest extends WebTestCase {
             + "  <div id='div2'/>\n"
             + "</body></html>";
         
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, content, collectedAlerts);
-        if (isUndefined) {
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_GARGOYLE, html);
+        client.setWebConnection(webConnection);
+
+        client.getPage(URL_GARGOYLE);
+
+        if (!getBrowserVersion().isIE()) {
             assertEquals("undefined", collectedAlerts.get(0));
         }
         else {
             assertFalse("undefined".equals(collectedAlerts.get(0)));
         }
-        assertEquals(expectedAlerts, collectedAlerts.subList(1, collectedAlerts.size()));
+        assertEquals(getExpectedAlerts(), collectedAlerts.subList(1, collectedAlerts.size()));
     }
 
     /**
@@ -2204,8 +1923,10 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testUniqueIDFormatIE() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts({ "true", "true" })
+    public void uniqueIDFormatIE() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "     var div1 = document.getElementById('div1');\n"
             + "     var div2 = document.getElementById('div2');\n"
@@ -2221,11 +1942,7 @@ public class HTMLElementTest extends WebTestCase {
             + "  <div id='div1'/>\n"
             + "  <div id='div2'/>\n"
             + "</body></html>";
-        
-        final String[] expectedAlerts = {"true", "true"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -2233,14 +1950,8 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetAttribute_eventHandler() throws Exception {
-        testSetAttribute_eventHandler(BrowserVersion.INTERNET_EXPLORER_7_0, 0);
-        testSetAttribute_eventHandler(BrowserVersion.FIREFOX_2, 3);
-    }
-    
-    private void testSetAttribute_eventHandler(final BrowserVersion browserVersion, final int expectedAlertNumber)
-        throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+    public void setAttribute_eventHandler() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var text = document.getElementById('login');\n"
             + "    var password = document.getElementById('password');\n"
@@ -2257,7 +1968,7 @@ public class HTMLElementTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(browserVersion, content, collectedAlerts);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
         final HtmlForm form = page.getForms().get(0);
         final HtmlTextInput inputLogin = (HtmlTextInput) form.getInputByName("login");
         final HtmlPasswordInput inputPassword = (HtmlPasswordInput) form.getInputByName("password");
@@ -2265,6 +1976,13 @@ public class HTMLElementTest extends WebTestCase {
         inputLogin.focus();
         inputPassword.focus();
 
+        final int expectedAlertNumber;
+        if (getBrowserVersion().isIE()) {
+            expectedAlertNumber = 0;
+        }
+        else {
+            expectedAlertNumber = 3;
+        }
         assertEquals(expectedAlertNumber, collectedAlerts.size());
     }
 
@@ -2272,7 +1990,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testFireEvent_WithoutTemplate() throws Exception {
+    public void fireEvent_WithoutTemplate() throws Exception {
         final String html =
               "<html><body>\n"
             + "<div id='a' onclick='alert(\"clicked\")'>foo</div>\n"
@@ -2290,7 +2008,8 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testFireEvent_WithTemplate() throws Exception {
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    public void fireEvent_WithTemplate() throws Exception {
         final String html =
               "<html><body>\n"
             + "<script>var template = document.createEventObject();</script>\n"
@@ -2300,7 +2019,7 @@ public class HTMLElementTest extends WebTestCase {
             + "<div id='c' onmouseover='document.getElementById(\"a\").fireEvent(\"onclick\", template)'>baz</div>\n"
             + "</body></html>";
         final List<String> actual = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, actual);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, actual);
         ((HtmlDivision) page.getHtmlElementById("a")).click();
         ((HtmlDivision) page.getHtmlElementById("b")).mouseOver();
         ((HtmlDivision) page.getHtmlElementById("c")).mouseOver();
@@ -2312,19 +2031,9 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testSetExpression() throws Exception {
-        testSetExpression(BrowserVersion.INTERNET_EXPLORER_7_0);
-        try {
-            testSetExpression(BrowserVersion.FIREFOX_2);
-            fail("setExpression is not defined for Firefox");
-        }
-        catch (final Exception e) {
-            //expected
-        }
-    }
-    
-    private void testSetExpression(final BrowserVersion browserVersion) throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    public void setExpression() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "     var div1 = document.getElementById('div1');\n"
             + "     div1.setExpression('title','id');\n"
@@ -2332,27 +2041,16 @@ public class HTMLElementTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "  <div id='div1'/>\n"
             + "</body></html>";
-
-        loadPage(browserVersion, content, null);
+        loadPage(getBrowserVersion(), html, null);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    public void testRemoveExpression() throws Exception {
-        testRemoveExpression(BrowserVersion.INTERNET_EXPLORER_7_0);
-        try {
-            testRemoveExpression(BrowserVersion.FIREFOX_2);
-            fail("removeExpression is not defined for Firefox");
-        }
-        catch (final Exception e) {
-            //expected
-        }
-    }
-
-    private void testRemoveExpression(final BrowserVersion browserVersion) throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    public void removeExpression() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "     var div1 = document.getElementById('div1');\n"
             + "     div1.setExpression('title','id');\n"
@@ -2361,15 +2059,16 @@ public class HTMLElementTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "  <div id='div1'/>\n"
             + "</body></html>";
-
-        loadPage(browserVersion, content, null);
+        loadPage(getBrowserVersion(), html, null);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    public void testDispatchEvent() throws Exception {
+    @Browsers(Browser.FIREFOX_2)
+    @Alerts("clicked")
+    public void dispatchEvent() throws Exception {
         final String html =
             "<html>\n"
             + "<script>\n"
@@ -2382,17 +2081,16 @@ public class HTMLElementTest extends WebTestCase {
             + "</script>\n"
             + "<body onload='click()'><div id='d' onclick='alert(\"clicked\")'>foo</div></body>\n"
             + "</html>";
-        final List<String> actual = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, html, actual);
-        final String[] expected = {"clicked"};
-        assertEquals(expected, actual);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    public void testHasAttribute() throws Exception {
+    @Browsers(Browser.FIREFOX_2)
+    @Alerts({ "true", "true", "false" })
+    public void hasAttribute() throws Exception {
         final String html =
               "<html>\n"
             + "<head>\n"
@@ -2407,21 +2105,15 @@ public class HTMLElementTest extends WebTestCase {
             + "</head>\n"
             + "<body onload='test()'></body>\n"
             + "</html>";
-
-        final String[] expectedAlerts = {"true", "true", "false"};
-        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
-
-        final List<String> actual = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, html, actual);
-
-        assertEquals(expectedAlerts, actual);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    public void testDispatchEvent2() throws Exception {
+    @Browsers(Browser.NONE)
+    public void dispatchEvent2() throws Exception {
         testHTMLFile("HTMLElementTest_dispatchEvent2.html");
     }
 
@@ -2429,7 +2121,9 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetComponentVersion() throws Exception {
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts({ "undefined", "x86", "0", "undefined" })
+    public void getComponentVersion() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  alert(document.body.cpuClass);\n"
@@ -2442,25 +2136,16 @@ public class HTMLElementTest extends WebTestCase {
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"undefined", "x86", "0", "undefined"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(IE = { "30", "40" }, FF = { "36", "46" })
     public void clientWidthAndHeight() throws Exception {
-        clientWidthAndHeight(BrowserVersion.FIREFOX_2, "36", "46");
-        clientWidthAndHeight(BrowserVersion.INTERNET_EXPLORER_7_0, "30", "40");
-        clientWidthAndHeight(BrowserVersion.INTERNET_EXPLORER_6_0, "30", "40");
-    }
-
-    private void clientWidthAndHeight(final BrowserVersion version, final String... expected) throws Exception {
-        final String content =
+        final String html =
               "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var myDiv = document.getElementById('myDiv');\n"
@@ -2473,32 +2158,7 @@ public class HTMLElementTest extends WebTestCase {
             + "<body onload='test()'>\n"
             + "  <div id='myDiv'/>\n"
             + "</body></html>";
-        final List<String> actual = new ArrayList<String>();
-        loadPage(version, content, actual);
-        assertEquals(expected, actual);
+        loadPageWithAlerts(html);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void getElementsByTagName() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    for (var f = 0; (formnode = document.getElementsByTagName('form').item(f)); f++)\n"
-            + "      for (var i = 0; (node = formnode.getElementsByTagName('div').item(i)); i++)\n"
-            + "        alert(node.id);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "  <form>\n"
-            + "    <div id='div1'/>\n"
-            + "    <div id='div2'/>\n"
-            + "  </form>\n"
-            + "</body></html>";
-
-        final String[] expectedAlerts = {"div1", "div2"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
 }
