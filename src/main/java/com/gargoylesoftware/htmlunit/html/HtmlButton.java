@@ -46,6 +46,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
  * Wrapper for the HTML element "button".
@@ -76,7 +77,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlButton(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlButton(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

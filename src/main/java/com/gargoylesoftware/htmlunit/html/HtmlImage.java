@@ -47,6 +47,7 @@ import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -81,7 +82,7 @@ public class HtmlImage extends ClickableElement {
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlImage(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlImage(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

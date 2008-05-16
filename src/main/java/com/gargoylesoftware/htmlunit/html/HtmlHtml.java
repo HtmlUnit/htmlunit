@@ -39,6 +39,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
+import com.gargoylesoftware.htmlunit.SgmlPage;
+
 /**
  * A representation of an HTML element "html".
  *
@@ -61,7 +63,7 @@ public final class HtmlHtml extends HtmlElement {
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlHtml(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlHtml(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

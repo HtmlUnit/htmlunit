@@ -42,6 +42,7 @@ import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
 /**
@@ -73,7 +74,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlRadioButtonInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlRadioButtonInput(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
 

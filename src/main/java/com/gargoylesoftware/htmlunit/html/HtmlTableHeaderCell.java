@@ -39,6 +39,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
+import com.gargoylesoftware.htmlunit.SgmlPage;
+
 /**
  * Wrapper for the HTML "th" tag.
  *
@@ -63,7 +65,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * @param page the page that this element is contained within
      * @param attributes the initial attributes
      */
-    HtmlTableHeaderCell(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlTableHeaderCell(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

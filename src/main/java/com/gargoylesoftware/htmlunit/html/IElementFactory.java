@@ -39,6 +39,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.xml.sax.Attributes;
 
+import com.gargoylesoftware.htmlunit.SgmlPage;
+
 /**
  * Specification of a factory capable of creating {@link HtmlElement} objects.
  *
@@ -58,7 +60,7 @@ public interface IElementFactory {
      *        if no attributes specified
      * @return the newly created and initialized element
      */
-    HtmlElement createElement(final HtmlPage page, final String tagName, final Attributes attributes);
+    HtmlElement createElement(final SgmlPage page, final String tagName, final Attributes attributes);
 
     /**
      * Creates an element according to this factory's specification. Note that even though this method
@@ -71,6 +73,6 @@ public interface IElementFactory {
      *        if no attributes specified
      * @return the newly created and initialized element
      */
-    HtmlElement createElementNS(final HtmlPage page, final String namespaceURI, final String qualifiedName,
+    HtmlElement createElementNS(final SgmlPage page, final String namespaceURI, final String qualifiedName,
         final Attributes attributes);
 }

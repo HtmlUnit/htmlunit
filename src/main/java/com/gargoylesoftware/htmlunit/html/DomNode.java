@@ -237,7 +237,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      */
     public Document getOwnerDocument() {
-        return (Document) getPage();
+        return (Document) simpleGetPage();
     }
 
     /**
@@ -847,7 +847,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public ScriptableObject getScriptObject() {
         if (scriptObject_ == null) {
-            if (this == getPage()) {
+            if (this == simpleGetPage()) {
                 throw new IllegalStateException("No script object associated with the Page");
             }
             scriptObject_ = ((SimpleScriptable) ((DomNode) page_).getScriptObject()).makeScriptableFor(this);
@@ -879,7 +879,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             }
 
             // trigger events
-            if (!(this instanceof DomDocumentFragment) && (getPage() instanceof HtmlPage || this instanceof HtmlPage)) {
+            if (!(this instanceof DomDocumentFragment) && (simpleGetPage() instanceof HtmlPage)) {
                 ((HtmlPage) getPage()).notifyNodeAdded(domNode);
             }
             fireNodeAdded(this, domNode);
@@ -923,7 +923,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param node the node to append to this node's children
      */
     private void basicAppend(final DomNode node) {
-        node.setPage(getPage());
+        node.setPage(simpleGetPage());
         if (firstChild_ == null) {
             firstChild_ = node;
             firstChild_.previousSibling_ = node;
@@ -936,6 +936,20 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             firstChild_.previousSibling_ = node; // new last node
         }
         node.parent_ = this;
+    }
+
+    /**
+     * Method getPage should do the job, but currently it returns HtmlPage on HtmlElement
+     * which shouldn't be the case as HtmlElement can be located in XmlPage
+     * @return the page
+     */
+    private Page simpleGetPage() {
+        if (page_ == null) {
+            return getPage();
+        }
+        else {
+            return page_;
+        }
     }
 
     /**
@@ -1014,7 +1028,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         newNode.parent_ = parent_;
         newNode.setPage(page_);
 
-        if (getPage() instanceof HtmlPage) {
+        if (simpleGetPage() instanceof HtmlPage) {
             ((HtmlPage) getPage()).notifyNodeAdded(newNode);
         }
         fireNodeAdded(this, newNode);
@@ -1064,7 +1078,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         final DomNode exParent = parent_;
         basicRemove();
         
-        if (getPage() instanceof HtmlPage) {
+        if (simpleGetPage() instanceof HtmlPage) {
             ((HtmlPage) getPage()).notifyNodeRemoved(this);
         }
 

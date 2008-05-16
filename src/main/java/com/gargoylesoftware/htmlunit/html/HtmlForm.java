@@ -58,6 +58,7 @@ import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
@@ -96,7 +97,7 @@ public class HtmlForm extends ClickableElement {
      * @param htmlPage the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlForm(final String namespaceURI, final String qualifiedName, final HtmlPage htmlPage,
+    HtmlForm(final String namespaceURI, final String qualifiedName, final SgmlPage htmlPage,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, htmlPage, attributes);
     }

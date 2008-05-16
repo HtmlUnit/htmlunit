@@ -45,6 +45,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
  * Wrapper for the HTML element "input".
@@ -74,7 +75,7 @@ public class HtmlImageInput extends HtmlInput {
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlImageInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlImageInput(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

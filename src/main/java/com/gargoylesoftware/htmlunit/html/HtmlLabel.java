@@ -42,6 +42,7 @@ import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
  * Wrapper for the HTML element "label".
@@ -68,7 +69,7 @@ public class HtmlLabel extends ClickableElement {
      * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
-    HtmlLabel(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlLabel(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

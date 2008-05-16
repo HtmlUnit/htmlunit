@@ -45,6 +45,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
  * Wrapper for the HTML element "table".
@@ -70,7 +71,7 @@ public class HtmlTable extends ClickableElement {
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlTable(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlTable(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

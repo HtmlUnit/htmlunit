@@ -48,6 +48,7 @@ import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 
 /**
@@ -78,7 +79,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlSelect(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlSelect(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

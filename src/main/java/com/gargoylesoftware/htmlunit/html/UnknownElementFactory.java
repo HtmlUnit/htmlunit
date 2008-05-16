@@ -39,6 +39,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.xml.sax.Attributes;
 
+import com.gargoylesoftware.htmlunit.SgmlPage;
+
 import java.util.Map;
 
 /**
@@ -63,7 +65,7 @@ public final class UnknownElementFactory implements IElementFactory {
      * {@inheritDoc}
      */
     public HtmlElement createElement(
-            final HtmlPage page, final String tagName,
+            final SgmlPage page, final String tagName,
             final Attributes attributes) {
         return createElementNS(page, null, tagName, attributes);
     }
@@ -71,7 +73,7 @@ public final class UnknownElementFactory implements IElementFactory {
     /**
      * {@inheritDoc}
      */
-    public HtmlElement createElementNS(final HtmlPage page, final String namespaceURI,
+    public HtmlElement createElementNS(final SgmlPage page, final String namespaceURI,
             final String qualifiedName, final Attributes attributes) {
         final Map<String, DomAttr> attributeMap = DefaultElementFactory.setAttributes(page, attributes);
         return new HtmlUnknownElement(page, namespaceURI, qualifiedName, attributeMap);

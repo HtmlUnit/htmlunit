@@ -45,6 +45,7 @@ import org.apache.commons.httpclient.NameValuePair;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
@@ -74,7 +75,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    public HtmlInput(final HtmlPage page, final Map<String, DomAttr> attributes) {
+    public HtmlInput(final SgmlPage page, final Map<String, DomAttr> attributes) {
         this(null, TAG_NAME, page, attributes);
     }
 
@@ -86,7 +87,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    public HtmlInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    public HtmlInput(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
         defaultValue_ = getValueAttribute();

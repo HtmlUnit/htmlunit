@@ -43,6 +43,7 @@ import java.util.Map;
 import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
  * Wrapper for the HTML element "option".
@@ -72,7 +73,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlOption(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlOption(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
         initialSelectedState_ = isAttributeDefined("selected");

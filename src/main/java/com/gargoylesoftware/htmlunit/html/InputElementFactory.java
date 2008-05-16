@@ -41,6 +41,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xml.sax.Attributes;
 
+import com.gargoylesoftware.htmlunit.SgmlPage;
+
 import java.util.Map;
 import java.util.HashMap;
 
@@ -75,7 +77,7 @@ public final class InputElementFactory implements IElementFactory {
      * @return a new HtmlInput element
      */
     public HtmlElement createElement(
-            final HtmlPage page, final String tagName,
+            final SgmlPage page, final String tagName,
             final Attributes attributes) {
         return createElementNS(page, null, tagName, attributes);
     }
@@ -83,7 +85,7 @@ public final class InputElementFactory implements IElementFactory {
     /**
      * {@inheritDoc}
      */
-    public HtmlElement createElementNS(final HtmlPage page, final String namespaceURI,
+    public HtmlElement createElementNS(final SgmlPage page, final String namespaceURI,
             final String qualifiedName, final Attributes attributes) {
 
         Map<String, DomAttr> attributeMap = DefaultElementFactory.setAttributes(page, attributes);

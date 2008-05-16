@@ -41,6 +41,9 @@ import java.util.Map;
 
 import org.xml.sax.Attributes;
 
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
+
 /**
  * Element factory which creates elements by calling the constructor on a
  * given {@link com.gargoylesoftware.htmlunit.html.HtmlElement} subclass.
@@ -62,7 +65,7 @@ class DefaultElementFactory implements IElementFactory {
      * @param attributes initial attributes, possibly <code>null</code>
      * @return the newly created element
      */
-    public HtmlElement createElement(final HtmlPage page, final String tagName, final Attributes attributes) {
+    public HtmlElement createElement(final SgmlPage page, final String tagName, final Attributes attributes) {
         return createElementNS(page, null, tagName, attributes);
     }
 
@@ -73,7 +76,7 @@ class DefaultElementFactory implements IElementFactory {
      * @param attributes initial attributes, possibly <code>null</code>
      * @return the newly created element
      */
-    public HtmlElement createElementNS(final HtmlPage page, final String namespaceURI,
+    public HtmlElement createElementNS(final SgmlPage page, final String namespaceURI,
             final String qualifiedName, final Attributes attributes) {
         final Map<String, DomAttr> attributeMap = setAttributes(page, attributes);
 
@@ -350,7 +353,7 @@ class DefaultElementFactory implements IElementFactory {
      * @param attributes the SAX attributes
      * @return the map of attribute values for {@link HtmlElement}s
      */
-    static Map<String, DomAttr> setAttributes(final HtmlPage page, final Attributes attributes) {
+    static Map<String, DomAttr> setAttributes(final Page page, final Attributes attributes) {
         Map<String, DomAttr> attributeMap = null;
         if (attributes != null) {
             attributeMap = HtmlElement.createAttributeMap(attributes.getLength());

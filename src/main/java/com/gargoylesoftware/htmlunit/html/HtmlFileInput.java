@@ -46,6 +46,7 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.lang.StringUtils;
 
 import com.gargoylesoftware.htmlunit.KeyDataPair;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
  * Wrapper for the HTML element "input".
@@ -70,7 +71,7 @@ public class HtmlFileInput extends HtmlInput {
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlFileInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlFileInput(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
         setAttributeValue("value", "");

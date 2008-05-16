@@ -52,20 +52,24 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.Attributes;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
+import org.xml.sax.helpers.AttributesImpl;
 
-import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.IElementFactory;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
@@ -151,15 +155,21 @@ public final class XmlUtil {
      * @param parent the parent DomNode
      * @param child the child Node
      */
-    public static void appendChild(final Page page, final DomNode parent, final Node child) {
+    public static void appendChild(final SgmlPage page, final DomNode parent, final Node child) {
         final DomNode childXml = createFrom(page, child);
         parent.appendChild(childXml);
         copy(page, child, childXml);
     }
 
-    private static DomNode createFrom(final Page page, final org.w3c.dom.Node source) {
+    private static DomNode createFrom(final SgmlPage page, final org.w3c.dom.Node source) {
         if (source.getNodeType() == Node.TEXT_NODE) {
             return new DomText(page, source.getNodeValue());
+        }
+        final String ns = source.getNamespaceURI();
+        String localName = source.getLocalName();
+        if ("http://www.w3.org/1999/xhtml".equals(ns)) {
+            final IElementFactory factory = HTMLParser.getFactory(localName.toLowerCase());
+            return factory.createElementNS(page, ns, localName, namedNodeMapToSaxAttributes(source.getAttributes()));
         }
         final Map<String, DomAttr> attributes = new HashMap<String, DomAttr>();
         final NamedNodeMap nodeAttributes = source.getAttributes();
@@ -176,7 +186,6 @@ public final class XmlUtil {
                 new DomAttr(page, attribute.getNamespaceURI(), qualifiedName, attribute.getNodeValue());
             attributes.put(attribute.getNodeName(), xmlAttribute);
         }
-        String localName = source.getLocalName();
         if (page instanceof HtmlPage) {
             localName = localName.toUpperCase();
         }
@@ -190,12 +199,24 @@ public final class XmlUtil {
         return new XmlElement(source.getNamespaceURI(), qualifiedName, page, attributes);
     }
 
+    private static Attributes namedNodeMapToSaxAttributes(final NamedNodeMap attributesMap) {
+        final AttributesImpl attributes = new AttributesImpl();
+        final int length = attributesMap.getLength();
+        for (int i = 0; i < length; ++i) {
+            final Node attr = attributesMap.item(i);
+            attributes.addAttribute(attr.getNamespaceURI(), attr.getLocalName(),
+                attr.getNodeName(), null, attr.getNodeValue());
+        }
+
+        return attributes;
+    }
+
     /**
      * Copy all children from 'source' to 'dest'
      * @param source the Node to copy from
      * @param dest the DomNode to copy to
      */
-    private static void copy(final Page page, final org.w3c.dom.Node source, final DomNode dest) {
+    private static void copy(final SgmlPage page, final org.w3c.dom.Node source, final DomNode dest) {
         final NodeList nodeChildren = source.getChildNodes();
         for (int i = 0; i < nodeChildren.getLength(); i++) {
             final Node child = nodeChildren.item(i);

@@ -39,6 +39,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
+import com.gargoylesoftware.htmlunit.SgmlPage;
+
 /**
  * Wrapper for the HTML element "link". <b>Note:</b> This is not a clickable link,
  * that one is an HtmlAnchor
@@ -64,7 +66,7 @@ public class HtmlLink extends ClickableElement {
      * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
-    HtmlLink(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlLink(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

@@ -44,6 +44,8 @@ import org.apache.commons.httpclient.util.DateParseException;
 import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.lang.StringUtils;
 
+import com.gargoylesoftware.htmlunit.SgmlPage;
+
 /**
  * Wrapper for the HTML element "meta".
  *
@@ -67,7 +69,7 @@ public class HtmlMeta extends HtmlElement {
      * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
-    HtmlMeta(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlMeta(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
         

@@ -58,6 +58,7 @@ import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.xml.XmlElement;
@@ -183,7 +184,8 @@ public class XMLDocument extends Document {
     @Override
     public SimpleScriptable makeScriptableFor(final DomNode domNode) {
         final SimpleScriptable scriptable;
-        
+
+        // TODO: cleanup, getScriptObject() should be used!!!
         if (domNode instanceof XmlElement) {
             scriptable = new XMLElement();
         }
@@ -196,13 +198,21 @@ public class XMLDocument extends Document {
             scriptable = new TextImpl();
         }
         else {
-            throw new IllegalArgumentException("Cannot make scriptable for " + domNode);
+            scriptable = super.makeScriptableFor(domNode);
         }
         
         scriptable.setPrototype(getPrototype(scriptable.getClass()));
         scriptable.setParentScope(getParentScope());
         scriptable.setDomNode(domNode);
         return scriptable;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void initParentScope(final DomNode domNode, final SimpleScriptable scriptable) {
+        scriptable.setParentScope(getParentScope());
     }
 
     /**
@@ -322,7 +332,19 @@ public class XMLDocument extends Document {
      */
     @Override
     public Object jsxFunction_getElementById(final String id) {
-        return null;
+        final XmlPage xmlPage = (XmlPage) getDomNodeOrDie();
+        final Object domElement = xmlPage.getFirstByXPath("//*[@id = \"" + id + "\"]");
+        if (domElement == null) {
+            return null;
+        }
+
+        if (domElement instanceof HtmlElement) {
+            return ((HtmlElement) domElement).getScriptObject();
+        }
+        else {
+            getLog().debug("getElementById(" + id + "): no HTML DOM node found with this id");
+            return null;
+        }
     }
 
     /**

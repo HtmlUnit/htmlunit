@@ -38,6 +38,8 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -63,7 +65,7 @@ public class HtmlResetInput extends HtmlInput {
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlResetInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlResetInput(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

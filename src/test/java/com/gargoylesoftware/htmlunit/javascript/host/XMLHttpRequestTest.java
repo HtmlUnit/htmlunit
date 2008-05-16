@@ -1013,7 +1013,10 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
             + "        request.open('GET', '" + URL_SECOND + "', false);\n"
             + "        request.send('');\n"
-            + "        alert(request.responseXML.getElementById('myID'));\n"
+            + "        alert(request.responseXML.getElementById('id1'));\n"
+            + "        alert(request.responseXML.getElementById('myID').id);\n"
+            + "        alert(request.responseXML.getElementById('myID').innerHTML);\n"
+            + "        alert(request.responseXML.getElementById('myID').tagName);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1023,8 +1026,11 @@ public class XMLHttpRequestTest extends WebTestCase {
 
         final String xml =
               "<xml>\n"
-            + "<content>blah</content>\n"
+            + "<content id='id1'>blah</content>\n"
             + "<content>blah2</content>\n"
+            + "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
+            + "<span id='myID'>blah</span>"
+            + "</html>"
             + "</xml>";
 
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
@@ -1036,7 +1042,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setWebConnection(webConnection);
         client.getPage(URL_FIRST);
 
-        final String[] expectedAlerts = {"null"};
+        final String[] expectedAlerts = {"null", "myID", "blah", "SPAN"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

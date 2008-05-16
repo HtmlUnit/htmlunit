@@ -47,6 +47,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -77,7 +78,7 @@ public abstract class BaseFrame extends StyledElement {
      * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
-    protected BaseFrame(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    protected BaseFrame(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
 

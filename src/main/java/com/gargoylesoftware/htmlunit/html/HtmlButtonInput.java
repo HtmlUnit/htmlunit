@@ -39,6 +39,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
+import com.gargoylesoftware.htmlunit.SgmlPage;
+
 /**
  * Wrapper for the HTML element "input" where type is "button".
  *
@@ -60,7 +62,7 @@ public class HtmlButtonInput extends HtmlInput {
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlButtonInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlButtonInput(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="update" dev="mguillem" id="1964731">
+                JavaScript: XMLDocumet.getElementById retrieve elements with html namespace (FF only).
+            </action>
             <action type="update" dev="mguillem">
                 Improved logic to detect the window with the focus.
             </action>

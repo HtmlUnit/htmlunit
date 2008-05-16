@@ -233,6 +233,20 @@ public class SimpleScriptable extends ScriptableObject {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
         }
+        initParentScope(domNode, scriptable);
+        
+        scriptable.setPrototype(getPrototype(javaScriptClass));
+        scriptable.setDomNode(domNode);
+
+        return scriptable;
+    }
+
+    /**
+     * Initialize the parent scope of a newly created scriptable.
+     * @param domNode the DOM node for the script object
+     * @param scriptable the script object to initialize
+     */
+    protected void initParentScope(final DomNode domNode, final SimpleScriptable scriptable) {
         // parent scope needs to be set to the enclosing "window" (no simple unit test found to illustrate the
         // necessity) if navigation has continued, the window may contain an other page as the one to which
         // the current node belongs to.
@@ -244,11 +258,6 @@ public class SimpleScriptable extends ScriptableObject {
             scriptable.setParentScope(ScriptableObject.getTopLevelScope(
                     ((HtmlPage) domNode.getPage()).getScriptObject()));
         }
-        
-        scriptable.setPrototype(getPrototype(javaScriptClass));
-        scriptable.setDomNode(domNode);
-
-        return scriptable;
     }
 
     /**

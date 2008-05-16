@@ -39,6 +39,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
+import com.gargoylesoftware.htmlunit.SgmlPage;
+
 /**
  * An element that is returned for an HTML tag that is not supported by this framework.
  *
@@ -60,7 +62,7 @@ public class HtmlUnknownElement extends ClickableElement {
      * @param tagName the HTML tag represented by this object
      * @param attributes the initial attributes
      */
-    HtmlUnknownElement(final HtmlPage page, final String tagName, final Map<String, DomAttr> attributes) {
+    HtmlUnknownElement(final SgmlPage page, final String tagName, final Map<String, DomAttr> attributes) {
         this(page, null, tagName, attributes);
     }
 
@@ -72,7 +74,7 @@ public class HtmlUnknownElement extends ClickableElement {
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param attributes the initial attributes
      */
-    HtmlUnknownElement(final HtmlPage page, final String namespaceURI, final String qualifiedName,
+    HtmlUnknownElement(final SgmlPage page, final String namespaceURI, final String qualifiedName,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

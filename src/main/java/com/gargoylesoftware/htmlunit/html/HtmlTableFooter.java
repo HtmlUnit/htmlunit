@@ -39,6 +39,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
+import com.gargoylesoftware.htmlunit.SgmlPage;
+
 /**
  * Wrapper for the HTML element "tfoot".
  *
@@ -62,7 +64,7 @@ public class HtmlTableFooter extends TableRowGroup {
      * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
-    HtmlTableFooter(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlTableFooter(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

@@ -128,13 +128,13 @@ public abstract class HtmlElement extends DomElement implements Element {
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
-     * @param htmlPage the page that contains this element
+     * @param page the page that contains this element
      * @param attributes a map ready initialized with the attributes for this element, or
      * <code>null</code>. The map will be stored as is, not copied.
      */
-    protected HtmlElement(final String namespaceURI, final String qualifiedName, final HtmlPage htmlPage,
+    protected HtmlElement(final String namespaceURI, final String qualifiedName, final Page page,
             final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, htmlPage);
+        super(namespaceURI, qualifiedName, page);
         if (attributes != null) {
             attributes_ = attributes;
             // The HtmlAttr objects are created before the HtmlElement, so we need to go set the
@@ -1084,7 +1084,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @param qualifiedName the qualified name of the attribute
      * @param value the value of the attribute
      */
-    static DomAttr addAttributeToMap(final HtmlPage page, final Map<String, DomAttr> attributeMap,
+    static DomAttr addAttributeToMap(final Page page, final Map<String, DomAttr> attributeMap,
             final String namespaceURI, final String qualifiedName, final String value) {
         final DomAttr newAttr = new DomAttr(page, namespaceURI, qualifiedName, value);
         attributeMap.put(qualifiedName, newAttr);

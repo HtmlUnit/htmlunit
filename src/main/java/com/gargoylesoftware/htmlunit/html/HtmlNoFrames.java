@@ -39,6 +39,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
+import com.gargoylesoftware.htmlunit.SgmlPage;
+
 /**
  * Wrapper for the HTML element "noframes".
  *
@@ -63,7 +65,7 @@ public class HtmlNoFrames extends ClickableElement {
      * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
-    HtmlNoFrames(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlNoFrames(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

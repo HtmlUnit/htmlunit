@@ -41,6 +41,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.gargoylesoftware.htmlunit.SgmlPage;
+
 /**
  * Wrapper for the HTML element "tfoot".
  *
@@ -60,7 +62,7 @@ public abstract class TableRowGroup extends ClickableElement {
      * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
-    protected TableRowGroup(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    protected TableRowGroup(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

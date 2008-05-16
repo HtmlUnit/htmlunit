@@ -50,6 +50,7 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
@@ -80,7 +81,7 @@ public class HtmlArea extends ClickableElement {
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlArea(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlArea(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

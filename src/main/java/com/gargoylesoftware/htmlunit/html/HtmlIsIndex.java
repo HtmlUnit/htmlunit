@@ -41,6 +41,7 @@ import java.util.Map;
 
 import org.apache.commons.httpclient.NameValuePair;
 
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 
 /**
@@ -71,7 +72,7 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
      * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
-    HtmlIsIndex(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlIsIndex(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

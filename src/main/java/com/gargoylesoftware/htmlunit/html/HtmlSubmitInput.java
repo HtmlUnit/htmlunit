@@ -45,6 +45,7 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.lang.StringEscapeUtils;
 
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
  * Wrapper for the HTML element "input".
@@ -73,7 +74,7 @@ public class HtmlSubmitInput extends HtmlInput {
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlSubmitInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlSubmitInput(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
         if (getPage().getWebClient().getBrowserVersion().isIE() && !isAttributeDefined("value")) {

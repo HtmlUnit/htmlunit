@@ -48,6 +48,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -79,7 +80,7 @@ public class HtmlAnchor extends ClickableElement {
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlAnchor(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlAnchor(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

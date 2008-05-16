@@ -44,6 +44,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import com.gargoylesoftware.htmlunit.SgmlPage;
+
 /**
  * Wrapper for the HTML element "tr".
  *
@@ -68,7 +70,7 @@ public class HtmlTableRow extends ClickableElement {
      * @param page the page that this element is contained within
      * @param attributes the initial attributes
      */
-    HtmlTableRow(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlTableRow(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

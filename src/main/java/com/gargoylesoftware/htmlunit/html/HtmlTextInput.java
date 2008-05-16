@@ -41,6 +41,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
  * Wrapper for the HTML element "input".
@@ -69,7 +70,7 @@ public class HtmlTextInput extends HtmlInput {
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlTextInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlTextInput(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

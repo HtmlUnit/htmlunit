@@ -44,6 +44,7 @@ import java.util.Map;
 import org.apache.commons.httpclient.NameValuePair;
 
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
  * Wrapper for the HTML element "textarea".
@@ -81,7 +82,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlTextArea(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlTextArea(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

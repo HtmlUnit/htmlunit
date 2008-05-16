@@ -147,5 +147,4 @@ public abstract class SgmlPage extends DomNode implements Page {
     public Page getPage() {
         return this;
     }
-
 }

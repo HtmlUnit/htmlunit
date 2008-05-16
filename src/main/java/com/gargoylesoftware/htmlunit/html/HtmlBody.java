@@ -39,6 +39,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
+import com.gargoylesoftware.htmlunit.SgmlPage;
+
 /**
  * Wrapper for the HTML element "body".
  *
@@ -69,7 +71,7 @@ public class HtmlBody extends ClickableElement {
      * @param temporary whether or not this body is temporary (created because the <tt>body</tt>
      *        tag does not exist or has not yet been parsed)
      */
-    public HtmlBody(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    public HtmlBody(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes, final boolean temporary) {
 
         super(namespaceURI, qualifiedName, page, attributes);

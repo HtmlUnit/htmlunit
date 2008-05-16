@@ -48,6 +48,7 @@ import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Function;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLScriptElement;
 
 /**
@@ -93,7 +94,7 @@ public class HtmlScript extends HtmlElement {
      * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
-    HtmlScript(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlScript(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

@@ -39,6 +39,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
+import com.gargoylesoftware.htmlunit.SgmlPage;
+
 /**
  * Wrapper for the HTML element "h6".
  *
@@ -63,7 +65,7 @@ public class HtmlHeading6 extends ClickableElement {
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlHeading6(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlHeading6(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
