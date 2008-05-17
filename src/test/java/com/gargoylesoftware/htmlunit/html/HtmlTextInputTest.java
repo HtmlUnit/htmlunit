@@ -37,15 +37,14 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link HtmlTextInput}.
@@ -53,19 +52,20 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class HtmlTextInputTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testType() throws Exception {
+    public void type() throws Exception {
         final String html =
             "<html><head></head>\n"
             + "<body>\n"
             + "<input id='text1'/>\n"
             + "</body></html>";
-        final HtmlPage page = loadPage(html);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
         final HtmlTextInput text1 = (HtmlTextInput) page.getHtmlElementById("text1");
         text1.type("abcd");
         assertEquals("abcd", text1.getValueAttribute());
@@ -75,12 +75,7 @@ public class HtmlTextInputTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testPreventDefault() throws Exception {
-        testPreventDefault(BrowserVersion.FIREFOX_2);
-        testPreventDefault(BrowserVersion.INTERNET_EXPLORER_7_0);
-    }
-
-    private void testPreventDefault(final BrowserVersion browserVersion) throws Exception {
+    public void preventDefault() throws Exception {
         final String html =
               "<html><head><script>\n"
             + "  function handler(e) {\n"
@@ -97,7 +92,7 @@ public class HtmlTextInputTest extends WebTestCase {
             + "<input id='text1'/>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(browserVersion, html, null);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
         final HtmlTextInput text1 = (HtmlTextInput) page.getHtmlElementById("text1");
         text1.type("abcd");
         assertEquals("abc", text1.getValueAttribute());
@@ -107,7 +102,7 @@ public class HtmlTextInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testTypeNewLine() throws Exception {
+    public void typeNewLine() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<form action='" + URL_SECOND + "'>\n"
@@ -116,7 +111,7 @@ public class HtmlTextInputTest extends WebTestCase {
             + "</body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -136,12 +131,8 @@ public class HtmlTextInputTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testSelection() throws Exception {
-        testSelection(BrowserVersion.INTERNET_EXPLORER_7_0);
-        testSelection(BrowserVersion.FIREFOX_2);
-    }
-
-    private void testSelection(final BrowserVersion browserVersion) throws Exception {
+    @Alerts("0")
+    public void selection() throws Exception {
         final String html =
               "<html><head><script>\n"
             + "  function test() {\n"
@@ -158,36 +149,40 @@ public class HtmlTextInputTest extends WebTestCase {
             + "<body onload='test()'>\n"
             + "<input id='text1'/>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"0"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if test fails
      */
     @Test
-    public void testSelection2() throws Exception {
-        testSelection2(3, 10, BrowserVersion.INTERNET_EXPLORER_6_0,
-                new String[] {"undefined,undefined", "3,undefined", "3,10"});
-        testSelection2(3, 10, BrowserVersion.FIREFOX_2,
-                new String[] {"11,11", "3,11", "3,10"});
-        
-        testSelection2(-3, 15, BrowserVersion.INTERNET_EXPLORER_6_0,
-                new String[] {"undefined,undefined", "-3,undefined", "-3,15"});
-        testSelection2(-3, 15, BrowserVersion.FIREFOX_2,
-                new String[] {"11,11", "0,11", "0,11"});
-
-        testSelection2(10, 5, BrowserVersion.INTERNET_EXPLORER_6_0,
-                new String[] {"undefined,undefined", "10,undefined", "10,5"});
-        testSelection2(10, 5, BrowserVersion.FIREFOX_2,
-                new String[] {"11,11", "10,11", "5,5"});
+    @Alerts(IE = { "undefined,undefined", "3,undefined", "3,10" },
+            FF = { "11,11", "3,11", "3,10" })
+    public void selection2_1() throws Exception {
+        selection2(3, 10);
     }
 
-    private void testSelection2(final int selectionStart, final int selectionEnd,
-            final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
+    /**
+     * @throws Exception if test fails
+     */
+    @Test
+    @Alerts(IE = { "undefined,undefined", "-3,undefined", "-3,15" },
+            FF = { "11,11", "0,11", "0,11" })
+    public void selection2_2() throws Exception {
+        selection2(-3, 15);
+    }
+
+    /**
+     * @throws Exception if test fails
+     */
+    @Test
+    @Alerts(IE = { "undefined,undefined", "10,undefined", "10,5" },
+            FF = { "11,11", "10,11", "5,5" })
+    public void selection2_3() throws Exception {
+        selection2(10, 5);
+    }
+
+    private void selection2(final int selectionStart, final int selectionEnd) throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "<input id='myTextInput'>\n"
@@ -202,9 +197,6 @@ public class HtmlTextInputTest extends WebTestCase {
             + "</script>\n"
             + "</body>\n"
             + "</html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 }
