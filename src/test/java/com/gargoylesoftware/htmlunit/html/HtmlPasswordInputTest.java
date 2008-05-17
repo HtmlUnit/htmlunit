@@ -37,62 +37,35 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.io.IOException;
-import java.util.Map;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * Wrapper for the HTML element "input".
+ * Tests for {@link HtmlPasswordInput}.
  *
  * @version $Revision$
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
- * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public class HtmlPasswordInput extends HtmlInput {
-
-    private static final long serialVersionUID = -1074283471317076942L;
-
-    /**
-     * Create an instance.
-     * @param namespaceURI the URI that identifies an XML namespace
-     * @param qualifiedName the qualified name of the element type to instantiate
-     * @param page the page that contains this element
-     * @param attributes the initial attributes
-     */
-    HtmlPasswordInput(final String namespaceURI, final String qualifiedName, final SgmlPage page,
-            final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, page, attributes);
-    }
+@RunWith(BrowserRunner.class)
+public class HtmlPasswordInputTest extends WebTestCase {
 
     /**
-     * {@inheritDoc}
+     * @throws Exception if the test fails
      */
-    @Override
-    protected boolean isSubmittableByEnter() {
-        return true;
+    @Test
+    public void type() throws Exception {
+        final String html =
+            "<html><head></head>\n"
+            + "<body>\n"
+            + "<input type='password' id='text1'/>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPasswordInput password = (HtmlPasswordInput) page.getHtmlElementById("text1");
+        password.type("abcd");
+        assertEquals("abcd", password.getValueAttribute());
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Page type(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
-        throws IOException {
-        if (isDisabled()) {
-            return getPage();
-        }
-        final Page page = super.type(c, shiftKey, ctrlKey, altKey);
-
-        //TODO: handle backspace
-        if (c == ' ' || !Character.isWhitespace(c)) {
-            setValueAttribute(getValueAttribute() + c);
-        }
-        return page;
-    }
-    
 }

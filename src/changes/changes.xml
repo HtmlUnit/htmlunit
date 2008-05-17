@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="add" dev="asashour">
+                HtmlPasswordInput: type() appends text to the value.
+            </action>
             <action type="update" dev="mguillem" id="1964731">
                 JavaScript: XMLDocumet.getElementById retrieve elements with html namespace (FF only).
             </action>
@@ -14,7 +17,7 @@
                 Improved logic to detect the window with the focus.
             </action>
             <action type="add" dev="mguillem" id="1962847" due-to="Stuart Begg">
-                JavaScript: improved behaviorof XMLHttpRequest in network error handling.
+                JavaScript: improved behavior of XMLHttpRequest in network error handling.
                 Added support for the onError callback (FF only).
             </action>
             <action type="fix" dev="mguillem" id="1960512">
