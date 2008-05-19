@@ -160,7 +160,7 @@
     <inceptionYear>2002</inceptionYear>
     <licenses>
         <license>
-            <name>The HtmlUnit Software License</name>
+            <name>Apache License, Version 2.0</name>
             <url>http://htmlunit.sourceforge.net/license.html</url>
             <distribution>repo</distribution>
         </license>

@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="update" dev="mguillem">
+                Change license to Apache 2.
+            </action>
             <action type="fix" dev="mguillem" id="1950462">
                 Fix IllegalStateException that occured using document.write assigned to a variable (IE only).
             </action>
