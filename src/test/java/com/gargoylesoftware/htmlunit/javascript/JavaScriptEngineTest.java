@@ -1478,28 +1478,4 @@ public class JavaScriptEngineTest extends WebTestCase {
         final HtmlPage page = (HtmlPage) client.getPage(new WebRequestSettings(URL_GARGOYLE, HttpMethod.POST));
         return page;
     }
-
-    /**
-     * Test for bug 1950462: calling document.write inside a function (after assigning
-     * document.write to a local variable) tries to invoke document.write on the prototype
-     * document instance, rather than the actual document host object. This leads to an
-     * {@link IllegalStateException} (DomNode has not been set for this SimpleScriptable).
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void functionScopeAndLocalVariableWrite() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        final HtmlPage page = loadPage(
-              "<html><head><title>Test</title></head><body>\n"
-            + "<script>\n"
-            + "  function foo() { var d = document.write; d(4); }\n"
-            + "  foo();"
-            + "</script>\n"
-            + "</body></html>");
-        assertEquals("Test", page.getTitleText());
-        assertEquals("4", page.getBody().asText());
-    }
-
 }

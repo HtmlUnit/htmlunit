@@ -308,7 +308,9 @@ public class Document extends EventNode {
     private static Document getDocument(final Scriptable thisObj) {
         // if function is used "detached", then thisObj is the top scope (ie Window), not the real object
         // cf unit test DocumentTest#testDocumentWrite_AssignedToVar
-        if (thisObj instanceof Document) {
+        // may be the prototype too
+        // cf DocumentTest#testDocumentWrite_AssignedToVar2
+        if (thisObj instanceof Document && thisObj.getPrototype() instanceof Document) {
             return (Document) thisObj;
         }
         final Window window = getWindow(thisObj);

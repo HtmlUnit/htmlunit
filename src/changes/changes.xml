@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="fix" dev="mguillem" id="1950462">
+                Fix IllegalStateException that occured using document.write assigned to a variable (IE only).
+            </action>
             <action type="add" dev="asashour">
                 HtmlPasswordInput: type() appends text to the value.
             </action>
