@@ -70,7 +70,7 @@ public class CSSRule extends SimpleScriptable {
 
     /**
      * Creates a CSSRule according to the given rule.type.
-     * @param stylesheet the Stylesheet of this rule.
+     * @param stylesheet the Stylesheet of this rule
      * @param rule the wrapped rule
      * @return a CSSRule subclass according to the rule type
      */

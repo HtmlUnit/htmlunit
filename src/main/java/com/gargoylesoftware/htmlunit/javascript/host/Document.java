@@ -143,9 +143,10 @@ public class Document extends EventNode {
     }
 
     /**
-     * Create an instance. JavaScript objects must have a default constructor.
+     * Creates a new instance. JavaScript objects must have a default constructor.
      */
     public Document() {
+        // Empty.
     }
 
     /**
@@ -153,11 +154,11 @@ public class Document extends EventNode {
      * the rhino engine won't walk up the hierarchy looking for constructors.
      */
     public void jsConstructor() {
+        // Empty.
     }
 
     /**
-     * Define the Window JavaScript object that encloses this Document object.
-     *
+     * Sets the Window JavaScript object that encloses this document.
      * @param window the Window JavaScript object that encloses this document
      */
     void setWindow(final Window window) {
@@ -165,17 +166,16 @@ public class Document extends EventNode {
     }
 
     /**
-     * Returns the HTML page that this document is modeling..
-     * @return the page
+     * Returns the HTML page that this document is modeling.
+     * @return the HTML page that this document is modeling
      */
     public HtmlPage getHtmlPage() {
         return (HtmlPage) getDomNodeOrDie();
     }
 
     /**
-     * Returns the HTML page that this document is modeling or null if the
-     * page is empty.
-     * @return the page
+     * Returns the HTML page that this document is modeling, or <tt>null</tt> if the page is empty.
+     * @return the HTML page that this document is modeling, or <tt>null</tt> if the page is empty
      */
     public HtmlPage getHtmlPageOrNull() {
         return (HtmlPage) getDomNodeOrNull();
@@ -183,7 +183,7 @@ public class Document extends EventNode {
 
     /**
      * Returns the value of the JavaScript attribute "forms".
-     * @return the value of this attribute
+     * @return the value of the JavaScript attribute "forms"
      */
     public Object jsxGet_forms() {
         if (forms_ == null) {
@@ -312,7 +312,7 @@ public class Document extends EventNode {
         // If the page isn't currently being parsed (i.e. this call to write() or writeln()
         // was triggered by an event, setTimeout(), etc), then the new content will replace
         // the entire page. Basically, we make an implicit open() call.
-        final HtmlPage page = (HtmlPage) getDomNodeOrDie();
+        final HtmlPage page = getHtmlPage();
         if (!page.isBeingParsed()) {
             writeInCurrentDocument_ = false;
         }
@@ -654,7 +654,7 @@ public class Document extends EventNode {
         // Any open() invocations are ignored during the parsing stage, because write() and
         // writeln() invocations will directly append content to the current insertion point.
         final Document document = (Document) scriptable;
-        final HtmlPage page = (HtmlPage) document.getDomNodeOrDie();
+        final HtmlPage page = document.getHtmlPage();
         if (page.isBeingParsed()) {
             document.getLog().warn("Ignoring call to open() during the parsing stage.");
             return null;
@@ -682,7 +682,7 @@ public class Document extends EventNode {
             getLog().warn("close() called when document is not open.");
         }
         else {
-            final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
+            final HtmlPage page = getHtmlPage();
             final WebResponse webResponse = new StringWebResponse(writeBuffer_.toString(),
                 page.getWebResponse().getUrl());
             final WebClient webClient = page.getWebClient();
@@ -700,7 +700,7 @@ public class Document extends EventNode {
      * @return the root node for the document
      */
     public SimpleScriptable jsxGet_documentElement() {
-        return getScriptableFor(((HtmlPage) getDomNodeOrDie()).getDocumentElement());
+        return getScriptableFor(getHtmlPage().getDocumentElement());
     }
 
     /**
@@ -760,8 +760,7 @@ public class Document extends EventNode {
             //IE can handle HTML
             if (tagName.startsWith("<") && browserVersion.isIE()) {
                 try {
-                    final HtmlElement proxyNode =
-                        new HtmlDivision(null, HtmlDivision.TAG_NAME, (HtmlPage) getDomNodeOrDie().getPage(), null);
+                    final HtmlElement proxyNode = new HtmlDivision(null, HtmlDivision.TAG_NAME, getHtmlPage(), null);
                     HTMLParser.parseFragment(proxyNode, tagName);
                     final DomNode resultNode = proxyNode.getFirstChild();
                     resultNode.removeAllChildren();
@@ -820,8 +819,7 @@ public class Document extends EventNode {
     public Object jsxFunction_createElementNS(final String namespaceURI, final String qualifiedName) {
         Object result = NOT_FOUND;
         try {
-            final HtmlElement htmlElement =
-                ((HtmlPage) getDomNodeOrDie().getPage()).createHtmlElementNS(namespaceURI, qualifiedName);
+            final HtmlElement htmlElement = getHtmlPage().createHtmlElementNS(namespaceURI, qualifiedName);
             final Object jsElement = getScriptableFor(htmlElement);
 
             if (jsElement == NOT_FOUND) {

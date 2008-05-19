@@ -38,7 +38,7 @@ import org.junit.Test;
 public class CodeStyleTest {
 
     private List<String> errors_;
-    
+
     /**
      * Before.
      */
@@ -56,7 +56,7 @@ public class CodeStyleTest {
         for (final String error : errors_) {
             sb.append("\n" + error);
         }
-        
+
         final int errorsNumber = errors_.size();
         if (errorsNumber == 1) {
             fail("CodeStyle error: " + sb);

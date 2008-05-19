@@ -201,8 +201,8 @@ public class HtmlImage extends ClickableElement {
      * If the image is not already downloaded it triggers a download. Then it stores the image in the HtmlImage
      * object for later use.<br/>
      *
-     * @return returns the real height of the image.
-     * @throws IOException if an error occurs while downloading the image or reading it.
+     * @return returns the real height of the image
+     * @throws IOException if an error occurs while downloading the image or reading it
      */
     public int getHeight() throws IOException {
         readImageIfNeeded();
@@ -214,8 +214,8 @@ public class HtmlImage extends ClickableElement {
      * If the image is not already downloaded it triggers a download. Then it stores the image in the HtmlImage
      * object for later use.<br/>
      *
-     * @return returns the real width of the image.
-     * @throws IOException if an error occurs while downloading the image or reading it.
+     * @return returns the real width of the image
+     * @throws IOException if an error occurs while downloading the image or reading it
      */
     public int getWidth() throws IOException {
         readImageIfNeeded();
@@ -227,9 +227,8 @@ public class HtmlImage extends ClickableElement {
      * If the image is not already downloaded it triggers a download. Then it stores the image in the HtmlImage
      * object for later use.<br/>
      *
-     * @return the ImageReader representing the image from the download stream.
-     * @throws IOException if an error occurs while downloading the image and if its of a
-     * unsupported content-type.
+     * @return the ImageReader representing the image from the download stream
+     * @throws IOException if an error occurs while downloading the image and if its of an unsupported content-type
      */
     public ImageReader getImageReader() throws IOException {
         readImageIfNeeded();
@@ -242,9 +241,9 @@ public class HtmlImage extends ClickableElement {
      * object for later use.<br/>
      *
      * @param downloadIfNeeded indicates if a request should be performed this hasn't been done previously
-     * @return <code>null</code> if no download should be performed and when this wasn't already done. The response
-     * received when performing a request for the image referenced by this tag otherwise.
-     * @throws IOException if an error occurs while downloading the image.
+     * @return <code>null</code> if no download should be performed and when this wasn't already done; the response
+     * received when performing a request for the image referenced by this tag otherwise
+     * @throws IOException if an error occurs while downloading the image
      */
     public WebResponse getWebResponse(final boolean downloadIfNeeded) throws IOException {
         if (downloadIfNeeded) {
@@ -258,9 +257,9 @@ public class HtmlImage extends ClickableElement {
      * If the image is not already downloaded it triggers a download. Then it stores the image in the HtmlImage
      * object for later use.<br/>
      *
-     * Download the image specified in the src attribute.
+     * Downloads the image specified in the src attribute.
      *
-     * @throws IOException if an error occurs while downloading the image or if the stream is of a
+     * @throws IOException if an error occurs while downloading the image or if the stream is of an
      * unsupported content-type
      */
     private void downloadImageIfNeeded() throws IOException {
