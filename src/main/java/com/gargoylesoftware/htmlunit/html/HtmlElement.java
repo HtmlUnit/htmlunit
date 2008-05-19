@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -98,6 +99,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     /** The map holding the namespaces, keyed by URI. */
     private Map<String, String> namespaces_ = new HashMap<String, String>();
 
+    /** The listeners which are to be notified of attribute changes. */
     private List<HtmlAttributeChangeListener> attributeListeners_;
 
     /**
@@ -1436,4 +1438,35 @@ public abstract class HtmlElement extends DomElement implements Element {
         }
         super.checkChildHierarchy(childNode);
     }
+
+    /**
+     * Custom serialization logic which ensures that {@link NonSerializable} {@link HtmlAttributeChangeListener}s
+     * are not serialized.
+     * @param stream the stream to write the object to
+     * @throws IOException if an error occurs during writing
+     */
+    private void writeObject(final ObjectOutputStream stream) throws IOException {
+        synchronized (this) {
+            // Store the original list of listeners in a temporary variable, and then
+            // modify the listener list by removing any NonSerializable listeners.
+            final List<HtmlAttributeChangeListener> temp;
+            if (attributeListeners_ != null) {
+                temp = new ArrayList<HtmlAttributeChangeListener>(attributeListeners_);
+                for (final Iterator<HtmlAttributeChangeListener> i = attributeListeners_.iterator(); i.hasNext();) {
+                    final HtmlAttributeChangeListener listener = i.next();
+                    if (listener instanceof NonSerializable) {
+                        i.remove();
+                    }
+                }
+            }
+            else {
+                temp = null;
+            }
+            // Perform object serialization, now that NonSerializable listeners have been removed.
+            stream.defaultWriteObject();
+            // Restore the old listeners, now that serialization has been performed.
+            attributeListeners_ = temp;
+        }
+    }
+
 }

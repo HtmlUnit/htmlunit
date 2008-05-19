@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
@@ -51,6 +50,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
+import com.gargoylesoftware.htmlunit.html.NonSerializable;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -405,7 +405,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             document_.setDomNode((DomNode) webWindow.getEnclosedPage());
         }
 
-        final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl(computedStyles_);
+        final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
         final DomNode docNode = document_.getDomNodeOrNull();
         if (docNode != null) {
             docNode.addDomChangeListener(listener);
@@ -1106,22 +1106,11 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      *
      * <p>Additionally, whenever a <tt>style</tt> node or a <tt>link</tt> node with <tt>rel=stylesheet</tt> is added or
      * removed, all elements should be removed from the computed style cache.</p>
-     *
-     * <p>This listener is serialized whenever an {@link HtmlPage} is serialized, because every HTML document has one
-     * of these listeners. The map instance variable is transient so that we can continue to serialize pages, but cache
-     * eviction won't work correctly on deserialized pages...</p>
      */
-    private static class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener,
-        Serializable {
+    private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener,
+        NonSerializable {
 
         private static final long serialVersionUID = -4651000523078926322L;
-
-        // TODO: shouldn't be transient
-        private transient Map<Node, ComputedCSSStyleDeclaration> cache_;
-
-        public DomHtmlAttributeChangeListenerImpl(final Map<Node, ComputedCSSStyleDeclaration> cache) {
-            cache_ = cache;
-        }
 
         /**
          * {@inheritDoc}
@@ -1161,18 +1150,18 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         private void nodeChanged(final DomNode changed) {
             // If a stylesheet was changed, all of our calculations could be off; clear the cache.
             if (changed instanceof HtmlStyle) {
-                cache_.clear();
+                computedStyles_.clear();
                 return;
             }
             if (changed instanceof HtmlLink) {
                 final String rel = ((HtmlLink) changed).getRelAttribute().toLowerCase();
                 if ("stylesheet".equals(rel)) {
-                    cache_.clear();
+                    computedStyles_.clear();
                     return;
                 }
             }
             // Apparently it wasn't a stylesheet that changed; be semi-smart about what we evict and when.
-            final Iterator<Map.Entry<Node, ComputedCSSStyleDeclaration>> i = cache_.entrySet().iterator();
+            final Iterator<Map.Entry<Node, ComputedCSSStyleDeclaration>> i = computedStyles_.entrySet().iterator();
             while (i.hasNext()) {
                 final Map.Entry<Node, ComputedCSSStyleDeclaration> entry = i.next();
                 final DomNode node = entry.getKey().getDomNodeOrDie();

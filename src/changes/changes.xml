@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="fix" dev="sdanig" id="1951047">
+                Fix serialization of HtmlPages (was broken in some scenarios).
+            </action>
             <action type="update" dev="mguillem">
                 Change license to Apache 2.
             </action>

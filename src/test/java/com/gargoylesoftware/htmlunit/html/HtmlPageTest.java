@@ -1356,8 +1356,15 @@ public class HtmlPageTest extends WebTestCase {
      */
     @Test
     public void testSerialization() throws Exception {
-        final String content = "<html><body>\n"
+        // The document.all and form.elements calls are important because they trigger the creation
+        // of HTMLCollections, which have caused serialization problems in the past (see bug 1951047).
+
+        final String content =
+              "<html><body>\n"
             + "<div id='myId'>Hello there!</div>\n"
+            + "<script>var x = document.all;</script>\n"
+            + "<form name='f' id='f'></form>\n"
+            + "<script>var y = document.getElementById('f').elements;</script>\n"
             + "</body></html>";
 
         final HtmlPage page1 = loadPage(content);
