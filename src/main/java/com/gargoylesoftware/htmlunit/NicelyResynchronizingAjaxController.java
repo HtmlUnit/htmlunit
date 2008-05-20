@@ -28,8 +28,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * are directly useful for the user. To easily have a testable state, these calls
  * are performed synchron.
  *
- * <span style="color:red">EXPERIMENTAL - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
- *
  * @version $Revision$
  * @author Marc Guillemot
  */

@@ -521,19 +521,18 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Sets a header which will be sent up on EVERY request from this client.
-     *
-     * @param name the name of the header
-     * @param value the value of the header
+     * Adds a header which will be sent with EVERY request from this client.
+     * @param name the name of the header to add
+     * @param value the value of the header to add
+     * @see #removeRequestHeader(String)
      */
     public void addRequestHeader(final String name, final String value) {
         requestHeaders_.put(name, value);
     }
 
     /**
-     * Removes a header.
-     *
-     * @param name Name of the header
+     * Removes a header from being sent with EVERY request from this client.
+     * @param name the name of the header to remove
      * @see #addRequestHeader
      */
     public void removeRequestHeader(final String name) {
@@ -1702,25 +1701,27 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Sets the flag on the HtmlParse to ignore the content that is outside of the BODY
-     * and HTML tags.
+     * Sets the flag on the HtmlParser telling it to ignore the content that is outside
+     * of the BODY and HTML tags.
      * @param ignoreOutsideContent the boolean flag to enable or disable the support of
-     * content outside of the HTML and BODY tags
+     *        content outside of the HTML and BODY tags
      */
     public static void setIgnoreOutsideContent(final boolean ignoreOutsideContent) {
         HTMLParser.setIgnoreOutsideContent(ignoreOutsideContent);
     }
 
     /**
-     * Gets the state of the flag to ignore content outside the BODY and HTML tags.
-     * @return - The current state
+     * Gets the state of the flag indicating whether or not to ignore content outside the
+     * BODY and HTML tags.
+     * @return the state of the flag indicating whether or not to ignore content outside
+     *         the BODY and HTML tags
      */
     public static boolean getIgnoreOutsideContent() {
         return HTMLParser.getIgnoreOutsideContent();
     }
 
     /**
-     * Gets the timeout value for the WebConnection.
+     * Gets the timeout value for the {@link WebConnection}.
      *
      * @return the timeout value in milliseconds
      * @see WebClient#setTimeout(int)
@@ -1730,11 +1731,10 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Sets the timeout of the WebConnection. Set to zero (the default) for an infinite wait.
+     * <p>Sets the timeout of the {@link WebConnection}. Set to zero (the default) for an infinite wait.</p>
      *
-     * Note: The timeout is used twice. The first is for making the socket connection, the
-     * second is for data retrieval. If the time is critical you must allow for twice the
-     * time specified here.
+     * <p>Note: The timeout is used twice. The first is for making the socket connection, the second is
+     * for data retrieval. If the time is critical you must allow for twice the time specified here.</p>
      *
      * @param timeout the value of the timeout in milliseconds
      */
@@ -1782,7 +1782,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Gets the current Ajax controller.
+     * Gets the current AJAX controller.
      * @return the controller
      */
     public AjaxController getAjaxController() {
@@ -1790,8 +1790,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Sets the current Ajax controller.
-     * <span style="color:red">EXPERIMENTAL - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * Sets the current AJAX controller.
      * @param newValue the controller
      */
     public void setAjaxController(final AjaxController newValue) {
@@ -1818,7 +1817,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Gets the cache currently used.
+     * Gets the cache currently being used.
      * @return the cache (may not be null)
      */
     public Cache getCache() {
@@ -1837,11 +1836,14 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Inspired from WebTest's logic to track the current response
+     * Inspired by WebTest's logic to track the current response.
      */
     class CurrentWindowTracker implements WebWindowListener, Serializable {
         private static final long serialVersionUID = -987538223249485123L;
 
+        /**
+         * {@inheritDoc}
+         */
         public void webWindowClosed(final WebWindowEvent event) {
             final WebWindow window = event.getWebWindow();
             windows_.remove(window);
@@ -1850,6 +1852,9 @@ public class WebClient implements Serializable {
             }
         }
 
+        /**
+         * {@inheritDoc}
+         */
         public void webWindowContentChanged(final WebWindowEvent event) {
             final WebWindow window = event.getWebWindow();
 
@@ -1883,6 +1888,8 @@ public class WebClient implements Serializable {
         }
 
         /**
+         * {@inheritDoc}
+         *
          * @see com.gargoylesoftware.htmlunit.WebWindowListener#webWindowOpened
          */
         public void webWindowOpened(final WebWindowEvent event) {

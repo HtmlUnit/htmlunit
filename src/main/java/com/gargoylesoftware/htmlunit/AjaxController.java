@@ -23,8 +23,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * For instance, it can turn asynchronous AJAX calls into synchronous AJAX calls, making test code
  * deterministic and avoiding calls to <tt>Thread.sleep()</tt>.
  *
- * <span style="color:red">EXPERIMENTAL - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
- *
  * @version $Revision$
  * @author Marc Guillemot
  */
