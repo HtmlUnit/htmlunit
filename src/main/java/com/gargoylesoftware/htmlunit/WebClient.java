@@ -1721,6 +1721,26 @@ public class WebClient implements Serializable {
     }
 
     /**
+     * Sets the number of milliseconds a script is allowed to execute before being terminated.
+     * A value of 0 or less means no timeout.
+     *
+     * @param timeout the timeout value
+     */
+    public static void setJavaScriptTimeout(final long timeout) {
+        HtmlUnitContextFactory.setTimeout(timeout);
+    }
+
+    /**
+     * Returns the number of milliseconds a script is allowed to execute before being terminated.
+     * A value of 0 or less means no timeout.
+     *
+     * @return the timeout value
+     */
+    public static long getJavaScriptTimeout() {
+        return HtmlUnitContextFactory.getTimeout();
+    }
+
+    /**
      * Gets the timeout value for the {@link WebConnection}.
      *
      * @return the timeout value in milliseconds

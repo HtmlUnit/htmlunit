@@ -1746,4 +1746,50 @@ public class WebClientTest extends WebTestCase {
         webClient.getPage("javascript:void(document.body.setAttribute('foo', window.screen.availWidth))");
         assertEquals("1024", ((HtmlPage) page).getBody().getAttribute("foo"));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testJavaScriptTimeout() throws Exception {
+        final long timeout = 2000;
+        final long oldTimeout = WebClient.getJavaScriptTimeout();
+        WebClient.setJavaScriptTimeout(timeout);
+
+        try {
+            final WebClient client = new WebClient();
+            client.setThrowExceptionOnScriptError(false);
+
+            final String content = "<html><body><script>while(1) {}</script></body></html>";
+            final MockWebConnection webConnection = new MockWebConnection(client);
+            webConnection.setDefaultResponse(content);
+            client.setWebConnection(webConnection);
+
+            final Exception[] exceptions = {null};
+            final Thread runner = new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        client.getPage(URL_FIRST);
+                    }
+                    catch (final Exception e) {
+                        exceptions[0] = e;
+                    }
+                }
+            };
+
+            runner.start();
+
+            runner.join(timeout * 2);
+            if (runner.isAlive()) {
+                runner.interrupt();
+                fail("Script was still running after timeout");
+            }
+            assertNull(exceptions[0]);
+        }
+        finally {
+            WebClient.setJavaScriptTimeout(oldTimeout);
+        }
+    }
+
 }

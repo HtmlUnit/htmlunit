@@ -488,7 +488,9 @@ public class JavaScriptEngine implements Serializable {
      * being terminated. A value of 0 or less means no timeout.
      *
      * @param timeout the timeout value
+     * @deprecated use WebClient.setJavaScriptTimeout() instead
      */
+    @Deprecated
     public static void setTimeout(final long timeout) {
         HtmlUnitContextFactory.setTimeout(timeout);
     }
@@ -498,7 +500,9 @@ public class JavaScriptEngine implements Serializable {
      * being terminated. A value of 0 or less means no timeout.
      *
      * @return the timeout value
+     * @deprecated use WebClient.getJavaScriptTimeout() instead
      */
+    @Deprecated
     public static long getTimeout() {
         return HtmlUnitContextFactory.getTimeout();
     }
