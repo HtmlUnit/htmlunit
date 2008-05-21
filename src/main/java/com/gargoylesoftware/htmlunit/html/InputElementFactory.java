@@ -79,6 +79,7 @@ public final class InputElementFactory implements IElementFactory {
         }
         else {
             type = type.toLowerCase();
+            attributeMap.get("type").setValue(type); // type value has to be lower case
         }
 
         final HtmlInput result;

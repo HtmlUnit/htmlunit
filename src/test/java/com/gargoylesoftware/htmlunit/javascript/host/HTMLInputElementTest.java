@@ -723,4 +723,47 @@ public class HTMLInputElementTest extends WebTestCase {
         final HtmlTextInput input = (HtmlTextInput) page.getHtmlElementById("myInput");
         assertEquals("me te", input.getSelectedText());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typeCase() throws Exception {
+        final String content
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var t = document.getElementById('aText');\n"
+            + "  alert(t.type + ' ' + t.getAttribute('type'));\n"
+            + "  var p = document.getElementById('aPassword');\n"
+            + "  alert(p.type + ' ' + p.getAttribute('type'));\n"
+            + "  var h = document.getElementById('aHidden');\n"
+            + "  alert(h.type + ' ' + h.getAttribute('type'));\n"
+            + "  var cb = document.getElementById('aCb');\n"
+            + "  alert(cb.type + ' ' + cb.getAttribute('type'));\n"
+            + "  var r = document.getElementById('aRadio');\n"
+            + "  alert(r.type + ' ' + r.getAttribute('type'));\n"
+            + "  var f = document.getElementById('aFile');\n"
+            + "  alert(f.type + ' ' + f.getAttribute('type'));\n"
+            + "  f.type = 'CHECKBOX';\n"
+            + "  alert(f.type + ' ' + f.getAttribute('type'));\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<form action='foo'>\n"
+            + "<input Type='TeXt' id='aText' value='some test'>\n"
+            + "<input tYpe='PassWord' id='aPassword' value='some test'>\n"
+            + "<input tyPe='Hidden' id='aHidden' value='some test'>\n"
+            + "<input typE='CheckBox' id='aCb'>\n"
+            + "<input TYPE='rAdiO' id='aRadio'>\n"
+            + "<input type='FILE' id='aFile'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"text text", "password password", "hidden hidden",
+            "checkbox checkbox", "radio radio", "file file", "checkbox checkbox"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+    
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
