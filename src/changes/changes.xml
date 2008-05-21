@@ -7,8 +7,8 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
-            <action type="fix" dev="mguillem" id="1968329">
-                JavaScript: fix ClassCastException on parsing XHR responseXML with html content.
+            <action type="fix" dev="mguillem" id="1968708">
+                Invalid HTML: when the same attribute appears more than one time, consider the first value rather than the last one.
             </action>
             <action type="fix" dev="mguillem">
                 JavaScript: HtmlInput.type value is always lower case.

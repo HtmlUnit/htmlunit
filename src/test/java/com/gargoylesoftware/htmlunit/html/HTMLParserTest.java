@@ -153,4 +153,33 @@ public class HTMLParserTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         assertEquals("foo", page.getTitleText());
     }
+
+    /**
+     * @throws Exception failure
+     */
+    @Test
+    public void duplicatedAttribute() throws Exception {
+        final String content
+            = "<html><head>\n"
+            + "</head>\n"
+            + "<script>\n"
+            + "function test()\n"
+            + "{\n"
+            + "  alert(document.getElementById('foo') == null);\n"
+            + "  alert(document.getElementById('bla') == null);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<span id='foo' id='bla'></span>"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final String[] expectedAlerts = {"false", "true"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        loadPage(content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
