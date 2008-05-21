@@ -50,7 +50,7 @@ public class StyleSheetTest extends WebTestCase {
     public void selects_miscSelectors() throws Exception {
         final String html = "<html><head><title>test</title>\n"
             + "</head><body>\n"
-            + "<form name='f1' class='foo' class='yui-log'>\n"
+            + "<form name='f1' action='foo' class='yui-log'>\n"
             + "<div><div><input name='i1' id='m1'></div></div>\n"
             + "<input name='i2' class='yui-log'>\n"
             + "<button name='b1' class='yui-log'>\n"
