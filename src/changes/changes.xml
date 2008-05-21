@@ -7,6 +7,12 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="fix" dev="mguillem" id="1968329">
+                JavaScript: fix ClassCastException on parsing XHR responseXML with html content.
+            </action>
+            <action type="fix" dev="mguillem">
+                JavaScript: HtmlInput.type value is always lower case.
+            </action>
             <action type="fix" dev="sdanig" id="1643275">
                 Deprecated JavaScriptEngine.get/setTimeout(), added replacement methods WebClient.get/setJavaScriptTimeout().
             </action>

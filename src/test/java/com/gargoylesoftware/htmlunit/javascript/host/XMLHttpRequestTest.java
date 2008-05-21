@@ -1007,6 +1007,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "<content>blah2</content>\n"
             + "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
             + "<span id='myID'>blah</span>"
+            + "<script src='foo.js'></script>"
             + "</html>"
             + "</xml>";
 

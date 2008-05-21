@@ -27,6 +27,7 @@ import org.mozilla.javascript.Function;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLScriptElement;
+import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
  * Wrapper for the HTML element "script".<br>
@@ -189,6 +190,9 @@ public class HtmlScript extends HtmlElement {
      */
     @Override
     protected void onAllChildrenAddedToPage() {
+        if (getOwnerDocument() instanceof XmlPage) {
+            return;
+        }
         if (mainLog_.isDebugEnabled()) {
             mainLog_.debug("Script node added: " + asXml());
         }

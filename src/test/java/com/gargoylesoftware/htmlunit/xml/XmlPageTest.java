@@ -235,4 +235,16 @@ public class XmlPageTest extends WebTestCase {
         loadPage(getBrowserVersion(), content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+        
+    /**
+     * Tests a simplified real-life response from Ajax4jsf.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testA4jResponse() throws Exception {
+        final String content = "<html xmlns='http://www.w3.org/1999/xhtml'><head>"
+            + "<script src='/a4j_3_2_0-SNAPSHOTorg.ajax4jsf.javascript.PrototypeScript.jsf'></script>"
+            + "</head><body><span id='j_id216:outtext'>Echo Hello World</span></body></html>";
+        testXmlDocument(content, "text/xml");
+    }
 }

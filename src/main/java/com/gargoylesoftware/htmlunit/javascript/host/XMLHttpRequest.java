@@ -229,7 +229,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                 doc.setDomNode(page);
                 return doc;
             }
-            catch (final Exception e) {
+            catch (final IOException e) {
                 getLog().warn("Failed parsing XML document " + webResponse_.getUrl() + ": " + e.getMessage());
                 return null;
             }

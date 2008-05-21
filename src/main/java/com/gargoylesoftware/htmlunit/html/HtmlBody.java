@@ -56,7 +56,9 @@ public class HtmlBody extends ClickableElement {
         temporary_ = temporary;
 
         // Force script object creation now to forward onXXX handlers to window.
-        getScriptObject();
+        if (getOwnerDocument() instanceof HtmlPage) {
+            getScriptObject();
+        }
     }
 
     /**
