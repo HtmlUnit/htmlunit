@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Daniel Gredler
  * @author Chris Erskine
  * @author Ahmed Ashour
+ * @author Rodney Gitzel
  */
 public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
@@ -3998,10 +3999,61 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public Object jsxGet_zIndex() {
+        final String value = getStyleAttribute("zIndex", true);
         if (getBrowserVersion().isIE()) {
-            return 0;
+            if (value == null || value.length() == 0) {
+                return 0;
+            }
+            return Integer.parseInt(value);
         }
-        return "";
+        return value;
+    }
+
+    /**
+     * Sets the specified style attribute, which is presumed to be a numeric, taking into consideration
+     * its {@link Math#round(float)}ed value.
+     * @param name the attribute name (camel-cased)
+     * @param value the attribute value
+     */
+    protected void setRoundedStyleAttribute(final String name, final Object value) {
+        if (value == null || value.toString().length() == 0) {
+            setStyleAttribute(name, "0");
+        }
+        else {
+            final Double d;
+            if (value instanceof Double) {
+                d = (Double) value;
+            }
+            else {
+                d = Double.parseDouble(value.toString());
+            }
+            setStyleAttribute(name, ((Integer) Math.round(d.floatValue())).toString());
+        }
+    }
+    
+    /**
+     * Sets the specified style attribute, if it's only an integer.
+     * @param name the attribute name (camel-cased)
+     * @param value the attribute value
+     */
+    protected void setIntegerStyleAttribute(final String name, final Object value) {
+        if ((value == null) || value.toString().length() == 0) {
+            setStyleAttribute(name, "0");
+        }
+        else {
+            final String valueString = value.toString();
+            if (value instanceof Number) {
+                final Number number = (Number) value;
+                if (number.doubleValue() % 1 == 0) {
+                    setStyleAttribute(name, ((Integer) number.intValue()).toString());
+                }
+            }
+            else {
+                if (valueString.indexOf('.') == -1) {
+                    setStyleAttribute(name, valueString);
+                }
+            }
+        }
     }
 
     /**
@@ -4009,7 +4061,12 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @param zIndex the new attribute
      */
     public void jsxSet_zIndex(final Object zIndex) {
-        //empty
+        if (getBrowserVersion().isIE()) {
+            setRoundedStyleAttribute("zIndex", zIndex);
+        }
+        else {
+            setIntegerStyleAttribute("zIndex", zIndex);
+        }
     }
 
     /**

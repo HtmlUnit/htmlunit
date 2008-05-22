@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
@@ -1024,8 +1023,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      */
     @Test
     @Alerts(IE = {"number", "0", "1", "2", "3", "5", "5", "6", "7", "9" },
-            FF = {"string", "", "1", "2", "2", "2", "5",  "5", "5", "5" })
-    @NotYetImplemented
+            FF = {"string", "", "1", "2", "2", "2", "5", "5", "5", "5" })
     public void zIndex() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
