@@ -54,6 +54,19 @@ public class TextRange extends SimpleScriptable {
      * @param text the text contained within the range
      */
     public void jsxSet_text(final String text) {
-        //Empty
+        final HtmlPage page = (HtmlPage) getWindow().getDomNodeOrDie();
+        final HtmlElement focused = page.getFocusedElement();
+        if (focused instanceof HtmlTextInput) {
+            final HtmlTextInput input = (HtmlTextInput) focused;
+            final String oldValue = input.getValueAttribute();
+            input.setValueAttribute(oldValue.substring(0, input.getSelectionStart()) + text
+                    + oldValue.substring(input.getSelectionEnd()));
+        }
+        else if (focused instanceof HtmlTextArea) {
+            final HtmlTextArea input = (HtmlTextArea) focused;
+            final String oldValue = input.getText();
+            input.setText(oldValue.substring(0, input.getSelectionStart()) + text
+                    + oldValue.substring(input.getSelectionEnd()));
+        }
     }
 }

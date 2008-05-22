@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="add" dev="asashour">
+                JavaScript: implement textRange.text setter (IE only).
+            </action>
             <action type="add" dev="asashour" id="1955515" due-to="Rodney Gitzel">
                 JavaScript: implement style.zIndex.
             </action>

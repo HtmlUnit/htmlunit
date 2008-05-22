@@ -22,6 +22,8 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 
 /**
  * Tests for {@link HtmlTextInput}.
@@ -175,5 +177,32 @@ public class HtmlTextInputTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
         loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    public void setSelectionText() throws Exception {
+        final String html =
+              "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    document.selection.createRange().text = 'new';\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body>\n"
+            + "<input id='myInput' value='My old value'><br>\n"
+            + "<input id='myButton' type='button' value='Test' onclick='test()'>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlTextInput input = (HtmlTextInput) page.getHtmlElementById("myInput");
+        final HtmlButtonInput button = (HtmlButtonInput) page.getHtmlElementById("myButton");
+        page.setFocusedElement(input);
+        input.setSelectionStart(3);
+        input.setSelectionEnd(6);
+        button.click();
+        assertEquals("My new value", input.getValueAttribute());
     }
 }
