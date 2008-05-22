@@ -26,7 +26,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.xml.XmlElement;
 
 /**
- * A collection of nodes that can be accessed by name.
+ * A collection of nodes that can be accessed by name. String comparisons in this class are case-insensitive when
+ * used with an {@link HtmlElement}, but case-sensitive when used with an {@link XmlElement}.
  *
  * @version $Revision$
  * @author Daniel Gredler
@@ -39,6 +40,14 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     private static final long serialVersionUID = -1910087049570242560L;
 
     private final ListOrderedMap nodes_ = new ListOrderedMap();
+
+    /**
+     * As per the <a href="http://www.w3.org/TR/REC-DOM-Level-1/level-one-core.html#ID-5DFED1F0">W3C</a> (and
+     * some browser testing), this class should be case-sensitive when dealing with XML, and case-insensitive
+     * when dealing with HTML.
+     */
+    private final boolean caseInsensitive_;
+
     /**
      * Empty instance.
      */
@@ -48,7 +57,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * Rhino requires default constructors.
      */
     public NamedNodeMap() {
-        // Empty.
+        caseInsensitive_ = true;
     }
 
     /**
@@ -57,8 +66,9 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * @param element the owning element
      */
     public NamedNodeMap(final HtmlElement element) {
+        caseInsensitive_ = true;
         for (final DomAttr attr : element.getAttributesCollection()) {
-            nodes_.put(attr.getName(), attr);
+            nodes_.put(attr.getName().toLowerCase(), attr);
         }
         setParentScope(element.getScriptObject());
         setPrototype(getPrototype(getClass()));
@@ -70,6 +80,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * @param element the owning element
      */
     public NamedNodeMap(final XmlElement element) {
+        caseInsensitive_ = false;
         for (final DomAttr attr : element.getAttributesMap().values()) {
             nodes_.put(attr.getName(), attr);
         }
@@ -97,20 +108,26 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      *
      * {@inheritDoc}
      */
-    public Object getWithFallback(final String name) {
+    public Object getWithFallback(String name) {
+        if (caseInsensitive_) {
+            name = name.toLowerCase();
+        }
         final DomNode attr = (DomNode) nodes_.get(name);
         if (attr != null) {
             return attr.getScriptObject();
         }
         return NOT_FOUND;
     }
-    
+
     /**
      * Gets the specified attribute.
      * @param name attribute name
      * @return the attribute node, <code>null</code> if the attribute is not defined
      */
-    public Object jsxFunction_getNamedItem(final String name) {
+    public Object jsxFunction_getNamedItem(String name) {
+        if (caseInsensitive_) {
+            name = name.toLowerCase();
+        }
         final DomNode attr = (DomNode) nodes_.get(name);
         if (attr != null) {
             return attr.getScriptObject();
@@ -136,7 +153,10 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     /**
      * {@inheritDoc}
      */
-    public Attr getNamedItem(final String name) {
+    public Attr getNamedItem(String name) {
+        if (caseInsensitive_) {
+            name = name.toLowerCase();
+        }
         return (Attr) nodes_.get(name);
     }
 

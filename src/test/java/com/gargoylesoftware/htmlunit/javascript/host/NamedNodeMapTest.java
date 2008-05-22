@@ -14,11 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -26,6 +31,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Daniel Gredler
  */
 public class NamedNodeMapTest extends WebTestCase {
 
@@ -60,7 +66,7 @@ public class NamedNodeMapTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testGetNamedItem() throws Exception {
+    public void testGetNamedItem_HTML() throws Exception {
         final String html =
               "<html>\n"
             + "<head>\n"
@@ -69,6 +75,12 @@ public class NamedNodeMapTest extends WebTestCase {
             + "    var f = document.getElementById('f');\n"
             + "    alert(f.attributes.getNamedItem('name').nodeName);\n"
             + "    alert(f.attributes.getNamedItem('name').nodeValue);\n"
+            + "    alert(f.attributes.getNamedItem('NaMe').nodeName);\n"
+            + "    alert(f.attributes.getNamedItem('nAmE').nodeValue);\n"
+            + "    alert(f.attributes.name.nodeName);\n"
+            + "    alert(f.attributes.name.nodeValue);\n"
+            + "    alert(f.attributes.NaMe.nodeName);\n"
+            + "    alert(f.attributes.nAmE.nodeValue);\n"
             + "    alert(f.attributes.getNamedItem('notExisting'));\n"
             + "  }\n"
             + "</script>\n"
@@ -77,11 +89,57 @@ public class NamedNodeMapTest extends WebTestCase {
             + "<form name='f' id='f' foo='bar' baz='blah'></form>\n"
             + "</body>\n"
             + "</html>";
-        final String[] expected = {"name", "f", "null"};
+        final String[] expected = {"name", "f", "name", "f", "name", "f", "name", "f", "null"};
         createTestPageForRealBrowserIfNeeded(html, expected);
 
         final List<String> actual = new ArrayList<String>();
         loadPage(html, actual);
         assertEquals(expected, actual);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testGetNamedItem_XML() throws Exception {
+        final URL firstURL = new URL("http://htmlunit/first.html");
+        final URL secondURL = new URL("http://htmlunit/second.xml");
+
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    doc.async = false;\n"
+            + "    doc.load('" + "second.xml" + "');\n"
+            + "    alert(doc.documentElement.attributes.getNamedItem('name').nodeName);\n"
+            + "    alert(doc.documentElement.attributes.getNamedItem('name').nodeValue);\n"
+            + "    alert(doc.documentElement.attributes.name.nodeName);\n"
+            + "    alert(doc.documentElement.attributes.name.nodeValue);\n"
+            + "    alert(doc.documentElement.attributes.getNamedItem('NaMe'));\n"
+            + "    alert(doc.documentElement.attributes.NaMe);\n"
+            + "    alert(doc.documentElement.attributes.getNamedItem('nonExistent'));\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String xml = "<blah name='y'></blah>";
+
+        final String[] expectedAlerts = new String[] {"name", "y", "name", "y", "null", "undefined", "null"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection(client);
+        conn.setResponse(firstURL, html);
+        conn.setResponse(secondURL, xml, "text/xml");
+        client.setWebConnection(conn);
+
+        client.getPage(firstURL);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
 }

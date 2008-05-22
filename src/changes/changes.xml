@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="fix" dev="sdanig">
+                NamedNodeMap instances (element.attributes) are case-insensitive in HTML documents (but not XML documents).
+            </action>
             <action type="fix" dev="mguillem" id="1968708">
                 Invalid HTML: when the same attribute appears more than one time, consider the first value rather than the last one.
             </action>
