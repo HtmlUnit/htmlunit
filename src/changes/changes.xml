@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="fix" dev="mguillem" id="1969664">
+                Fix HtmlPage.getHtmlElementsByIdAndOrName() returns same element twice.
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: implement textRange.text setter (IE only).
             </action>

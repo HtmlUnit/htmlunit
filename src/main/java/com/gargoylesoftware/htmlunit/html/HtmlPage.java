@@ -1564,7 +1564,11 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             list.addAll(list1);
         }
         if (list2 != null) {
-            list.addAll(list2);
+            for (final HtmlElement elt : list2) {
+                if (!list.contains(elt)) {
+                    list.add(elt);
+                }
+            }
         }
         return Collections.unmodifiableList(list);
     }

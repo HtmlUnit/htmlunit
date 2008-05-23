@@ -1172,6 +1172,28 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
+     * @exception Exception if the test fails
+     */
+    @Test
+    public void testGetHtmlElementsByIdAndOrName() throws Exception {
+        final String html = "<html><body><div name='a' id='a'>foo</div><div name='b' id='c'>bar</div>"
+                            + "<div name='b' id='d'>bar</div></body></html>";
+        final HtmlPage page = loadPage(html);
+        assertEquals(1, page.getHtmlElementsByIdAndOrName("a").size());
+        assertEquals(2, page.getHtmlElementsByIdAndOrName("b").size());
+        assertEquals(1, page.getHtmlElementsByIdAndOrName("c").size());
+        assertEquals(1, page.getHtmlElementsByIdAndOrName("d").size());
+        
+        final HtmlElement a = page.getHtmlElementsByIdAndOrName("a").get(0);
+        a.remove();
+        assertEquals(0, page.getHtmlElementsByIdAndOrName("a").size());
+        
+        final HtmlElement b1 = page.getHtmlElementsByIdAndOrName("b").get(0);
+        b1.appendChild(a);
+        assertEquals(1, page.getHtmlElementsByIdAndOrName("a").size());
+    }
+    
+    /**
      * Regression test for bug 1233519.
      * @exception Exception If the test fails
      */
