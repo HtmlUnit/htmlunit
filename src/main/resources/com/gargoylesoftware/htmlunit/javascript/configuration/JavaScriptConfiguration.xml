@@ -844,6 +844,9 @@
         <property name="eventPhase" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
+        <property name="propertyName" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
         <property name="returnValue" readable="true" writable="true"/>
         <property name="cancelBubble" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
@@ -916,6 +919,9 @@
             <browser name="Firefox"/>
         </property>
         <property name="oncontextmenu" readable="true" writable="true"/>
+        <property name="onpropertychange" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
         <property name="onresize" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Firefox"/>

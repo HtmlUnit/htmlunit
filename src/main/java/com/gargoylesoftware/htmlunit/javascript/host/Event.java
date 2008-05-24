@@ -88,6 +88,9 @@ public class Event extends SimpleScriptable {
     /** Triggered after the DOM has loaded but before images etc. */
     public static final String TYPE_DOM_DOCUMENT_LOADED = "DOMContentLoaded";
 
+    /** The property change event type, triggered by "onpropertychange" event handlers. */
+    public static final String TYPE_PROPERTY_CHANGE = "propertychange";
+
     /** The first event phase: the capturing phase. */
     public static final short CAPTURING_PHASE = 1;
 
@@ -107,6 +110,7 @@ public class Event extends SimpleScriptable {
     private boolean shiftKey_;         // Exposed here in IE, only in mouse events in FF.
     private boolean ctrlKey_;          // Exposed here in IE, only in mouse events in FF.
     private boolean altKey_;           // Exposed here in IE, only in mouse events in FF.
+    private String propertyName_;
     private boolean stopPropagation_;
     private Object returnValue_;
     private boolean preventDefault_;
@@ -184,6 +188,18 @@ public class Event extends SimpleScriptable {
             final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         this(domNode, type, shiftKey, ctrlKey, altKey);
         keyCode_ = new Integer(keyCode);
+    }
+
+    /**
+     * Creates a new Event with {@link #TYPE_PROPERTY_CHANGE} type.
+     * @param domNode the DOM node that triggered the event
+     * @param propertyName the property name that was changed
+     * @return the new Event object
+     */
+    public static Event createPropertyChangeEvent(final DomNode domNode, final String propertyName) {
+        final Event event = new Event(domNode, TYPE_PROPERTY_CHANGE);
+        event.propertyName_ = propertyName;
+        return event;
     }
 
     /**
@@ -399,6 +415,14 @@ public class Event extends SimpleScriptable {
      */
     public Object jsxGet_returnValue() {
         return returnValue_;
+    }
+    
+    /**
+     * Returns the property name associated with the event.
+     * @return the property name associated with the event
+     */
+    public String jsxGet_propertyName() {
+        return propertyName_;
     }
     
     /**

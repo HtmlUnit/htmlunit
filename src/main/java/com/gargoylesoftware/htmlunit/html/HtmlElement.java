@@ -303,21 +303,24 @@ public abstract class HtmlElement extends DomElement implements Element {
         }
         getPage().addMappedElement(this);
 
-        final HtmlAttributeChangeEvent event;
+        final HtmlAttributeChangeEvent htmlEvent;
         if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
-            event = new HtmlAttributeChangeEvent(this, qualifiedName, attributeValue);
+            htmlEvent = new HtmlAttributeChangeEvent(this, qualifiedName, attributeValue);
         }
         else {
-            event = new HtmlAttributeChangeEvent(this, qualifiedName, oldAttributeValue);
+            htmlEvent = new HtmlAttributeChangeEvent(this, qualifiedName, oldAttributeValue);
         }
         
         if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
-            fireHtmlAttributeAdded(event);
-            getPage().fireHtmlAttributeAdded(event);
+            fireHtmlAttributeAdded(htmlEvent);
+            getPage().fireHtmlAttributeAdded(htmlEvent);
         }
         else {
-            fireHtmlAttributeReplaced(event);
-            getPage().fireHtmlAttributeReplaced(event);
+            fireHtmlAttributeReplaced(htmlEvent);
+            getPage().fireHtmlAttributeReplaced(htmlEvent);
+        }
+        if (getPage().getWebClient().getBrowserVersion().isIE()) {
+            fireEvent(Event.createPropertyChangeEvent(this, qualifiedName));
         }
     }
 

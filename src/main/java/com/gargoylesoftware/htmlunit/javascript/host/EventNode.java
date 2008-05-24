@@ -292,6 +292,22 @@ public class EventNode extends Node {
     }
 
     /**
+     * Sets the <tt>onpropertychange</tt> event handler for this element.
+     * @param handler the <tt>onpropertychange</tt> event handler for this element
+     */
+    public void jsxSet_onpropertychange(final Object handler) {
+        setEventHandlerProp("onpropertychange", handler);
+    }
+
+    /**
+     * Returns the <tt>onpropertychange</tt> event handler for this element.
+     * @return the <tt>onpropertychange</tt> event handler for this element
+     */
+    public Object jsxGet_onpropertychange() {
+        return getEventHandlerProp("onpropertychange");
+    }
+
+    /**
      * Fires a specified event on this element (IE only). See the
      * <a href="http://msdn2.microsoft.com/en-us/library/ms536423.aspx">MSDN documentation</a>
      * for more information.
@@ -299,7 +315,7 @@ public class EventNode extends Node {
      * @param thisObj the element instance on which this method was invoked
      * @param args contains the event type as a string, and an optional event template
      * @param f the function being invoked
-     * @return <tt>true</tt> if the event fired successfully, <tt>false</tt> if it was cancelled
+     * @return <tt>true</tt> if the event fired successfully, <tt>false</tt> if it was canceled
      */
     public static ScriptResult jsxFunction_fireEvent(final Context cx, final Scriptable thisObj,
         final Object[] args, final Function f) {

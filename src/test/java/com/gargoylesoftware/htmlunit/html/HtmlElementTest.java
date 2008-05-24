@@ -964,4 +964,27 @@ public class HtmlElementTest extends WebTestCase {
         ((HtmlButtonInput) page.getHtmlElementById("myButton")).click();
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void onpropertychange() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    document.getElementById('input1').value = 'New Value';\n"
+            + "  }\n"
+            + "  function handler() {\n"
+            + "    alert(event.propertyName);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='input1' onpropertychange='handler()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"value"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
