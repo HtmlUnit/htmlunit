@@ -7,8 +7,12 @@ com.google.gwt.sample.dynatable.client.Student, true
 [Lcom.google.gwt.sample.dynatable.client.Student;, true
 com.google.gwt.sample.dynatable.client.TimeSlot, true
 com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException, true
+java.lang.Exception, false
+java.lang.RuntimeException, false
 java.lang.String, true
+java.lang.Throwable, false
 java.util.ArrayList, true
+java.util.Arrays$ArrayList, true
 java.util.LinkedList, true
 java.util.Stack, true
 java.util.Vector, true

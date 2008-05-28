@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
@@ -39,13 +38,13 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 
 /**
- * Tests for 1.5 milestone 1 of <a href="http://code.google.com/webtoolkit">Google Web Toolkit</a>.
+ * Tests for 1.5 release candidate 1 of <a href="http://code.google.com/webtoolkit">Google Web Toolkit</a>.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class GWT15M1Test extends WebTestCase {
+public class GWT15RC1Test extends WebTestCase {
 
     private Server server_;
 
@@ -90,7 +89,7 @@ public class GWT15M1Test extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(Browser.FIREFOX_2)
+    @NotYetImplemented
     public void dynaTable() throws Exception {
         server_ = HttpWebConnectionTest.startWebServer("src/test/resources/gwt/" + getDirectory() + "/DynaTable",
                 new String[] {"src/test/resources/gwt/" + getDirectory() + "/gwt-servlet.jar"});
@@ -130,7 +129,7 @@ public class GWT15M1Test extends WebTestCase {
      * @return the GWT directory being tested
      */
     protected String getDirectory() {
-        return "1.5M1";
+        return "1.5RC1";
     }
 
     /**
