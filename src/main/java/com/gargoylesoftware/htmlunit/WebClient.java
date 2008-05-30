@@ -898,9 +898,11 @@ public class WebClient implements Serializable {
         }
         else {
             initializeEmptyWindow(window);
-            final Window jsWindow = (Window) window.getScriptObject();
-            jsWindow.setDomNode(openerPage);
-            jsWindow.jsxGet_document().setDomNode(openerPage);
+            if (openerPage != null) {
+                final Window jsWindow = (Window) window.getScriptObject();
+                jsWindow.setDomNode(openerPage);
+                jsWindow.jsxGet_document().setDomNode(openerPage);
+            }
         }
         return window;
     }

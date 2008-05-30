@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="fix" dev="sdanig" id="1975445">
+                Allow calls to WebClient.openWindow() with null URLs.
+            </action>
             <action type="add" dev="asashour" id="1957900">
                 JavaScript: add support for onpropertychange event type (IE only).
             </action>

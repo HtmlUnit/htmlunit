@@ -1792,4 +1792,15 @@ public class WebClientTest extends WebTestCase {
         }
     }
 
+    /**
+     * Protects against the regression detailed in bug 1975445.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testOpenWindowWithNullUrl() throws Exception {
+        final WebClient client = new WebClient();
+        final WebWindow window = client.openWindow(null, "TestingWindow");
+        Assert.assertNotNull(window);
+    }
+
 }
