@@ -2085,6 +2085,25 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
+     * Verifies that cookies work when working with local files (not remote sites with real domains).
+     * Required for local testing of Dojo 1.1.1.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void cookieInLocalFile() throws Exception {
+        final WebClient client = new WebClient();
+
+        final List<String> actual = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(actual));
+
+        final URL url = getClass().getResource("DocumentTest_cookieInLocalFile.html");
+        client.getPage(url);
+
+        final String[] expected = new String[] {"", "", "blah=bleh"};
+        assertEquals(expected, actual);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

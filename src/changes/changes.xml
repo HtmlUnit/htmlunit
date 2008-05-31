@@ -7,6 +7,10 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="fix" dev="sdanig">
+                Fix document.cookie so that it works correctly when loading HTML pages from the local filesystem,
+                when there is no real domain available.
+            </action>
             <action type="fix" dev="sdanig" id="1975445">
                 Allow calls to WebClient.openWindow() with null URLs.
             </action>

@@ -14,7 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.util.UrlUtils.getUrlWithNewHost;
+import static com.gargoylesoftware.htmlunit.util.UrlUtils.getUrlWithNewPort;
+
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Collections;
@@ -468,8 +472,12 @@ public class Document extends EventNode {
     public String jsxGet_cookie() {
         final HtmlPage page = getHtmlPage();
         final HttpState state = page.getWebClient().getWebConnection().getState();
-        final URL url = page.getWebResponse().getUrl();
+
+        URL url = page.getWebResponse().getUrl();
+        url = replaceForCookieIfNecessary(url);
+
         final boolean secure = "https".equals(url.getProtocol());
+
         final int port;
         if (url.getPort() != -1) {
             port = url.getPort();
@@ -507,13 +515,37 @@ public class Document extends EventNode {
         final WebClient client = getHtmlPage().getWebClient();
         if (client.isCookiesEnabled()) {
             final HttpState state = client.getWebConnection().getState();
-            final Cookie cookie = buildCookie(newCookie, getHtmlPage().getWebResponse().getUrl());
+            URL url = getHtmlPage().getWebResponse().getUrl();
+            url = replaceForCookieIfNecessary(url);
+            final Cookie cookie = buildCookie(newCookie, url);
             state.addCookie(cookie);
             getLog().debug("Added cookie: " + cookie);
         }
         else {
             getLog().debug("Skipped adding cookie:" + newCookie);
         }
+    }
+
+    /**
+     * {@link CookieSpec#match(String, int, String, boolean, Cookie[])} doesn't like empty hosts and
+     * negative ports, but these things happen if we're dealing with a local file. This method
+     * allows us to work around this limitation in HttpClient by feeding it a bogus host and port.
+     *
+     * @param url the URL to replace if necessary
+     * @return the replacement URL, or the original URL if no replacement was necessary
+     */
+    private URL replaceForCookieIfNecessary(URL url) {
+        final String protocol = url.getProtocol();
+        final boolean file = "file".equals(protocol);
+        if (file) {
+            try {
+                url = getUrlWithNewPort(getUrlWithNewHost(url, "LOCAL_FILESYSTEM"), 0);
+            }
+            catch (final MalformedURLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return url;
     }
 
     /**
