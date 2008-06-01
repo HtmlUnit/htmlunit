@@ -1159,7 +1159,8 @@ public class WebClient implements Serializable {
         if (StringUtils.isEmpty(relativeUrl)) {
             return baseUrl;
         }
-        String parseUrl = relativeUrl;
+
+        String parseUrl = relativeUrl.trim();
 
         // section 2.4.2 - parsing scheme
         final int schemeIndex = parseUrl.indexOf(":");

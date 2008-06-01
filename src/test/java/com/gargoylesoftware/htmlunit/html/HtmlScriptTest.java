@@ -281,4 +281,29 @@ public class HtmlScriptTest extends WebTestCase {
         loadPage(xml, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Verifies that we're lenient about whitespace before and after URLs in the "src" attribute.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testWhitespaceInSrc() throws Exception {
+        final String html = "<html><head><script src=' " + URL_SECOND + " '></script></head><body>abc</body></html>";
+        final String js = "alert('ok')";
+
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, html);
+        webConnection.setResponse(URL_SECOND, js);
+        client.setWebConnection(webConnection);
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        client.getPage(URL_FIRST);
+        final String[] expectedAlerts = {"ok"};
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
 }
