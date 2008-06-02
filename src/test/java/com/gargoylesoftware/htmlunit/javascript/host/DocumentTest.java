@@ -2882,7 +2882,7 @@ public class DocumentTest extends WebTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"outer", "inner"};
+        final String[] expectedAlerts = {"outer", "inner1"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
