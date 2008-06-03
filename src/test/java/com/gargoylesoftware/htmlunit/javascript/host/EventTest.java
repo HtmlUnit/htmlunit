@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersion.FIREFOX_2;
+import static com.gargoylesoftware.htmlunit.BrowserVersion.INTERNET_EXPLORER_7_0;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 
 import java.io.IOException;
@@ -24,8 +27,12 @@ import java.util.List;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
@@ -802,4 +809,83 @@ public class EventTest extends WebTestCase {
     public void testPreventDefault() throws Exception {
         testHTMLFile("EventTest_preventDefault.html");
     }
+
+    /**
+     * Test for bug 1976960: what happens with different return values at different levels?
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testEventBubblingReturns() throws Exception {
+        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "             ", "             ", "             ", true);
+        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "return false;", "             ", "             ", false);
+        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "             ", "return false;", "             ", false);
+        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "             ", "             ", "return false;", false);
+
+        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "return true; ", "return true; ", "return true; ", true);
+        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "return false;", "return true; ", "return true; ", false);
+        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "return true; ", "return false;", "return true; ", true);
+        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "return true; ", "return true; ", "return false;", true);
+
+        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "return true; ", "             ", "return false;", true);
+        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "             ", "return true; ", "return false;", true);
+        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "return true; ", "return false;", "             ", true);
+        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "             ", "return false;", "return true; ", false);
+        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "return false;", "return true; ", "             ", false);
+        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "return false;", "             ", "return true; ", false);
+
+        testEventBubblingReturns(FIREFOX_2, "             ", "             ", "             ", true);
+        testEventBubblingReturns(FIREFOX_2, "return false;", "             ", "             ", false);
+        testEventBubblingReturns(FIREFOX_2, "             ", "return false;", "             ", false);
+        testEventBubblingReturns(FIREFOX_2, "             ", "             ", "return false;", false);
+
+        testEventBubblingReturns(FIREFOX_2, "return true; ", "return true; ", "return true; ", true);
+        testEventBubblingReturns(FIREFOX_2, "return false;", "return true; ", "return true; ", false);
+        testEventBubblingReturns(FIREFOX_2, "return true; ", "return false;", "return true; ", false);
+        testEventBubblingReturns(FIREFOX_2, "return true; ", "return true; ", "return false;", false);
+
+        testEventBubblingReturns(FIREFOX_2, "return true; ", "             ", "return false;", false);
+        testEventBubblingReturns(FIREFOX_2, "             ", "return true; ", "return false;", false);
+        testEventBubblingReturns(FIREFOX_2, "return true; ", "return false;", "             ", false);
+        testEventBubblingReturns(FIREFOX_2, "             ", "return false;", "return true; ", false);
+        testEventBubblingReturns(FIREFOX_2, "return false;", "return true; ", "             ", false);
+        testEventBubblingReturns(FIREFOX_2, "return false;", "             ", "return true; ", false);
+    }
+
+    private void testEventBubblingReturns(final BrowserVersion version, final String onclick1,
+        final String onclick2, final String onclick3, final boolean changesPage) throws Exception {
+
+        final String html1
+            = "<html><head><title>First</title></head><body>\n"
+            + "<div onclick='alert(\"d\"); " + onclick1 + "'>\n"
+            + "<span onclick='alert(\"s\"); " + onclick2 + "'>\n"
+            + "<a href='" + URL_SECOND + "' id='a' onclick='alert(\"a\"); " + onclick3 + "'>go</a>\n"
+            + "</span>\n"
+            + "</div>\n"
+            + "</body></html>";
+
+        final String html2 = "<html><head><title>Second</title></head><body></body></html>";
+
+        final WebClient client = new WebClient(version);
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, html1);
+        webConnection.setResponse(URL_SECOND, html2);
+        client.setWebConnection(webConnection);
+
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlAnchor anchor = (HtmlAnchor) page.getHtmlElementById("a");
+
+        final HtmlPage secondPage = (HtmlPage) anchor.click();
+        assertEquals(new String[] {"a", "s", "d"}, collectedAlerts);
+
+        if (changesPage) {
+            assertNotSame(page, secondPage);
+        }
+        else {
+            assertSame(page, secondPage);
+        }
+    }
+
 }

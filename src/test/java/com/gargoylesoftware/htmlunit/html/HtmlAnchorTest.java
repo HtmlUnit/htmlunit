@@ -334,7 +334,7 @@ public class HtmlAnchorTest extends WebTestCase {
         Assert.assertEquals("url", URL_SECOND, secondPage.getWebResponse().getUrl());
         Assert.assertEquals("title", "Page B", secondPage.getTitleText());
     }
-    
+
     /**
      * Test for new openLinkInNewWindow() method.
      * @throws Exception on test failure
@@ -456,4 +456,5 @@ public class HtmlAnchorTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) a1.click();
         assertEquals(URL_GARGOYLE, secondPage.getWebResponse().getUrl());
     }
+
 }

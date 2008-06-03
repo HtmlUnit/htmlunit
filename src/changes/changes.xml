@@ -7,6 +7,10 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="fix" dev="sdanig" id="1976960">
+                Fix incorrect handling of conflicting return values in different event handlers during
+                event bubbling.
+            </action>
             <action type="fix" dev="mguillem">
                 Malformed HTML code: associate form elements situated before closing form tag to the form
                 even if tag balancing forced form to be closed earlier.

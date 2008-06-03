@@ -84,4 +84,66 @@ public final class ScriptResult {
         return scriptResult != null && scriptResult.getJavaScriptResult() instanceof Undefined;
     }
 
+    /**
+     * Creates and returns a composite {@link ScriptResult} based on the two input {@link ScriptResult}s. This
+     * method defines how the return values for multiple event handlers are combined during event capturing and
+     * bubbling. The behavior of this method varies based on whether or not we are emulating IE.
+     *
+     * @param newResult the new {@link ScriptResult} (may be <tt>null</tt>)
+     * @param originalResult the original {@link ScriptResult} (may be <tt>null</tt>)
+     * @param ie whether or not we are emulating IE
+     * @return a composite {@link ScriptResult}, based on the two input {@link ScriptResult}s
+     */
+    public static ScriptResult combine(final ScriptResult newResult, final ScriptResult originalResult,
+        final boolean ie) {
+
+        final Object jsResult;
+        final Page page;
+
+        // If we're emulating IE, the overall JavaScript return value is the last return value.
+        // If we're emulating FF, the overall JavaScript return value is false if the return value
+        // was false at any level.
+        if (ie) {
+            if (newResult != null && !ScriptResult.isUndefined(newResult)) {
+                jsResult = newResult.getJavaScriptResult();
+            }
+            else if (originalResult != null) {
+                jsResult = originalResult.getJavaScriptResult();
+            }
+            else {
+                jsResult = null;
+            }
+        }
+        else {
+            if (ScriptResult.isFalse(newResult)) {
+                jsResult = newResult.getJavaScriptResult();
+            }
+            else if (originalResult != null) {
+                jsResult = originalResult.getJavaScriptResult();
+            }
+            else {
+                jsResult = null;
+            }
+        }
+
+        // The new page is always the newest page.
+        if (newResult != null) {
+            page = newResult.getNewPage();
+        }
+        else if (originalResult != null) {
+            page = originalResult.getNewPage();
+        }
+        else {
+            page = null;
+        }
+
+        // Build and return the composite script result.
+        if (jsResult == null && page == null) {
+            return null;
+        }
+        else {
+            return new ScriptResult(jsResult, page);
+        }
+    }
+
 }

@@ -493,19 +493,20 @@ public class Node extends SimpleScriptable {
      */
     public ScriptResult fireEvent(final Event event) {
         final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
-        final boolean isIE = getBrowserVersion().isIE();
+        final boolean ie = getBrowserVersion().isIE();
         final Window window = (Window) page.getEnclosingWindow().getScriptObject();
         final Object[] args = new Object[] {event};
 
         event.startFire();
         ScriptResult result = null;
-        if (isIE) {
+        if (ie) {
             window.setEvent(event);
         }
+
         try {
             // window's listeners
             final EventListenersContainer windowsListeners = getWindow().getEventListenersContainer();
-    
+
             // capturing phase
             event.setEventPhase(Event.CAPTURING_PHASE);
             result = windowsListeners.executeCapturingListeners(event, args);
@@ -521,44 +522,44 @@ public class Node extends SimpleScriptable {
             for (int i = parents.size() - 1; i >= 0; i--) {
                 final DomNode curNode = parents.get(i);
                 final Node jsNode = (Node) curNode.getScriptObject();
-                if (jsNode.eventListenersContainer_ != null) {
-                    result = defaultResult(jsNode.eventListenersContainer_.executeCapturingListeners(event, args),
-                            result);
+                final EventListenersContainer elc = jsNode.eventListenersContainer_;
+                if (elc != null) {
+                    final ScriptResult r = elc.executeCapturingListeners(event, args);
+                    result = ScriptResult.combine(r, result, ie);
                     if (event.isPropagationStopped()) {
                         return result;
                     }
                 }
             }
-    
+
             // handlers declared as property on a node don't receive the event as argument for IE
             final Object[] propHandlerArgs;
-            if (isIE) {
+            if (ie) {
                 propHandlerArgs = ArrayUtils.EMPTY_OBJECT_ARRAY;
             }
             else {
                 propHandlerArgs = args;
             }
-    
+
             // bubbling phase
             event.setEventPhase(Event.AT_TARGET);
             node = getDomNodeOrDie();
             while (node != null) {
                 final Node jsNode = (Node) node.getScriptObject();
-                
-                if (jsNode.eventListenersContainer_ != null) {
-                    result = defaultResult(
-                            jsNode.eventListenersContainer_.executeBubblingListeners(event, args, propHandlerArgs),
-                            result);
+                final EventListenersContainer elc = jsNode.eventListenersContainer_;
+                if (elc != null) {
+                    final ScriptResult r = elc.executeBubblingListeners(event, args, propHandlerArgs);
+                    result = ScriptResult.combine(r, result, ie);
                     if (event.isPropagationStopped()) {
                         return result;
                     }
                 }
-
                 node = node.getParentNode();
                 event.setEventPhase(Event.BUBBLING_PHASE);
             }
 
-            result = defaultResult(windowsListeners.executeBubblingListeners(event, args, propHandlerArgs), result);
+            final ScriptResult r = windowsListeners.executeBubblingListeners(event, args, propHandlerArgs);
+            result = ScriptResult.combine(r, result, ie);
         }
         finally {
             event.endFire();
@@ -566,13 +567,6 @@ public class Node extends SimpleScriptable {
         }
 
         return result;
-    }
-
-    private ScriptResult defaultResult(final ScriptResult newResult, final ScriptResult defaultResult) {
-        if (newResult != null) {
-            return newResult;
-        }
-        return defaultResult;
     }
 
     /**
