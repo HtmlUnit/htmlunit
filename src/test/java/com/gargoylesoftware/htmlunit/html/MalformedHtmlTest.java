@@ -53,7 +53,6 @@ public class MalformedHtmlTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     @Alerts({"2", "3", "text3", "null" })
     public void testLostFormChildren() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
@@ -66,9 +65,9 @@ public class MalformedHtmlTest extends WebTestCase {
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "<div>\n"
-            + "<form action='foo'>\n"
-            + "<input type='text' name='text1'/>\n"
-            + "<input type='text' name='text2'/>\n"
+            + "<form action='foo'>"
+            + "<input type='text' name='text1'/>"
+            + "<input type='text' name='text2'/>"
             + "</div>\n"
             + "<input type='text' name='text3'/>\n"
             + "</form>\n"

@@ -226,57 +226,67 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     }
 
     /**
-     * Gets the HTML elements. Avoid calling it multiple times within a method because the evaluation
-     * needs to be performed each time again
+     * Gets the HTML elements from cache or retrieve them at first call.
      * @return the list of {@link HtmlElement} contained in this collection
      */
     @SuppressWarnings("unchecked")
-    private List<Object> getElements() {
+    protected List<Object> getElements() {
         if (cachedElements_ == null) {
-            if (node_ != null) {
-                if (xpath_ != null) {
-                    cachedElements_ = XPathUtils.getByXPath(node_, xpath_);
-                }
-                else {
-                    cachedElements_ = new ArrayList<Object>();
-                    Node node = node_.getFirstChild();
-                    while (node != null) {
-                        cachedElements_.add(node);
-                        node = node.getNextSibling();
-                    }
-                }
+            cachedElements_ = computeElements();
+        }
+        return cachedElements_;
+    }
+
+    /**
+     * Compute the elements which associated host objects are available through this collection.
+     * @return the elements
+     */
+    protected List<Object> computeElements() {
+        final List<Object> response;
+        if (node_ != null) {
+            if (xpath_ != null) {
+                response = XPathUtils.getByXPath(node_, xpath_);
             }
             else {
-                cachedElements_ = new ArrayList<Object>();
-            }
-            final boolean isXmlPage = node_ != null && node_.getPage() instanceof XmlPage;
-
-            final boolean isIE = getBrowserVersion().isIE();
-
-            for (int i = 0; i < cachedElements_.size(); i++) {
-                final DomNode element = (DomNode) cachedElements_.get(i);
-                
-                //IE: XmlPage ignores all empty text nodes
-                if (isIE && isXmlPage && element instanceof DomText
-                        && ((DomText) element).getNodeValue().trim().length() == 0) {
-
-                    //and 'xml:space' is 'default'
-                    final Boolean xmlSpaceDefault = isXMLSpaceDefault(element.getParentNode());
-                    if (xmlSpaceDefault != Boolean.FALSE) {
-                        cachedElements_.remove(i--);
-                        continue;
-                    }
-                }
-                for (DomNode parent = element.getParentNode(); parent != null;
-                    parent = parent.getParentNode()) {
-                    if (parent instanceof HtmlNoScript) {
-                        cachedElements_.remove(i--);
-                        break;
-                    }
+                response = new ArrayList<Object>();
+                Node node = node_.getFirstChild();
+                while (node != null) {
+                    response.add(node);
+                    node = node.getNextSibling();
                 }
             }
         }
-        return cachedElements_;
+        else {
+            response = new ArrayList<Object>();
+        }
+        final boolean isXmlPage = node_ != null && node_.getPage() instanceof XmlPage;
+
+        final boolean isIE = getBrowserVersion().isIE();
+
+        for (int i = 0; i < response.size(); i++) {
+            final DomNode element = (DomNode) response.get(i);
+            
+            //IE: XmlPage ignores all empty text nodes
+            if (isIE && isXmlPage && element instanceof DomText
+                    && ((DomText) element).getNodeValue().trim().length() == 0) {
+
+                //and 'xml:space' is 'default'
+                final Boolean xmlSpaceDefault = isXMLSpaceDefault(element.getParentNode());
+                if (xmlSpaceDefault != Boolean.FALSE) {
+                    response.remove(i--);
+                    continue;
+                }
+            }
+            for (DomNode parent = element.getParentNode(); parent != null;
+                parent = parent.getParentNode()) {
+                if (parent instanceof HtmlNoScript) {
+                    response.remove(i--);
+                    break;
+                }
+            }
+        }
+        
+        return response;
     }
 
     /**

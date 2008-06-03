@@ -94,10 +94,21 @@ public class HTMLFormElement extends HTMLElement {
     public HTMLCollection jsxGet_elements() {
         if (elements_ == null) {
             final HtmlForm htmlForm = getHtmlForm();
-            elements_ = new HTMLCollection(this);
+            
+            elements_ = new HTMLCollection(this) {
+                private static final long serialVersionUID = -2554743215194459203L;
+
+                @Override
+                protected List<Object> computeElements() {
+                    final List<Object> response = super.computeElements();
+                    response.addAll(htmlForm.getLostChildren());
+                    return response;
+                }
+            };
             final String xpath = ".//*[(name() = 'input' or name() = 'button'"
                     + " or name() = 'select' or name() = 'textarea')]";
             elements_.init(htmlForm, xpath);
+            
         }
         return elements_;
     }

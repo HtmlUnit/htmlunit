@@ -66,6 +66,8 @@ public class HtmlForm extends ClickableElement {
     private static final Collection<String> SUBMITTABLE_ELEMENT_NAMES =
         Arrays.asList(new String[]{"input", "button", "select", "textarea", "isindex"});
 
+    private final List<HtmlElement> lostChildren_ = new ArrayList<HtmlElement>();
+
     /**
      * Creates an instance.
      *
@@ -244,13 +246,19 @@ public class HtmlForm extends ClickableElement {
                 submittableElements.add((SubmittableElement) element);
             }
         }
+        
+        for (final HtmlElement element : lostChildren_) {
+            if (isSubmittable(element, submitElement)) {
+                submittableElements.add((SubmittableElement) element);
+            }
+        }
 
         return submittableElements;
     }
 
     private boolean isValidForSubmission(final HtmlElement element, final SubmittableElement submitElement) {
         final String tagName = element.getTagName();
-        if (!SUBMITTABLE_ELEMENT_NAMES.contains(tagName.toLowerCase())) {
+        if (!SUBMITTABLE_ELEMENT_NAMES.contains(tagName)) {
             return false;
         }
         if (element.isAttributeDefined("disabled")) {
@@ -269,7 +277,7 @@ public class HtmlForm extends ClickableElement {
             return false;
         }
 
-        if (tagName.equals("input")) {
+        if (element instanceof HtmlInput) {
             final String type = element.getAttributeValue("type").toLowerCase();
             if (type.equals("radio") || type.equals("checkbox")) {
                 return element.isAttributeDefined("checked");
@@ -300,7 +308,7 @@ public class HtmlForm extends ClickableElement {
         if (element == submitElement) {
             return true;
         }
-        if (tagName.equals("input")) {
+        if (element instanceof HtmlInput) {
             final HtmlInput input = (HtmlInput) element;
             final String type = input.getTypeAttribute().toLowerCase();
             if (type.equals("submit") || type.equals("image") || type.equals("reset") || type.equals("button")) {
@@ -333,8 +341,9 @@ public class HtmlForm extends ClickableElement {
      * @throws ElementNotFoundException if there is not input in this form with the specified name
      */
     public final HtmlInput getInputByName(final String name) throws ElementNotFoundException {
-        final List< ? extends HtmlElement> inputs = getHtmlElementsByAttribute("input", "name", name);
-        if (inputs.size() == 0) {
+        final List< ? extends HtmlElement> inputs = getInputsByName(name);
+        
+        if (inputs.isEmpty()) {
             throw new ElementNotFoundException("input", "name", name);
         }
         return (HtmlInput) inputs.get(0);
@@ -664,5 +673,24 @@ public class HtmlForm extends ClickableElement {
     @SuppressWarnings("unchecked")
     public List<HtmlInput> getInputsByValue(final String value) {
         return (List<HtmlInput>) getHtmlElementsByAttribute("input", "value", value);
+    }
+
+    /**
+     * Allows the parser to notify the form of a field that doesn't belong to its DOM children
+     * due to malformed HTML code
+     * @param element the form field
+     */
+    void addLostChild(final HtmlElement field) {
+        lostChildren_.add(field);
+        field.setOwningForm(this);
+    }
+
+    /**
+     * Gets the form elements that may be submitted but that don't belong to the form's children
+     * in the DOM due to incorrect html code.
+     * @return the elements
+     */
+    public List<HtmlElement> getLostChildren() {
+        return lostChildren_;
     }
 }

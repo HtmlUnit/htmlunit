@@ -7,6 +7,10 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="fix" dev="mguillem">
+                Malformed HTML code: associate form elements situated before closing form tag to the form
+                even if tag balancing forced form to be closed earlier.
+            </action>
             <action type="fix" dev="sdanig" id="1977736">
                 Be more lenient about spurious whitespace in node attributes containing relative URLs (image.src,
                 script.src, link.href, etc).

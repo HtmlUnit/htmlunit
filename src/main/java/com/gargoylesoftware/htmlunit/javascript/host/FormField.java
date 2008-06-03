@@ -94,7 +94,13 @@ public class FormField extends HTMLElement {
      * @return the value of this attribute
      */
     public HTMLFormElement jsxGet_form() {
-        return (HTMLFormElement) getScriptableFor(getHtmlElementOrDie().getEnclosingForm());
+        final HtmlForm form = getHtmlElementOrDie().getEnclosingForm();
+        if (form == null) {
+            return null;
+        }
+        else {
+            return (HTMLFormElement) getScriptableFor(form);
+        }
     }
 
     /**

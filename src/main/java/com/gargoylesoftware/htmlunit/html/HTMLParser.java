@@ -33,6 +33,7 @@ import org.apache.xerces.xni.XNIException;
 import org.apache.xerces.xni.parser.XMLInputSource;
 import org.apache.xerces.xni.parser.XMLParseException;
 import org.cyberneko.html.HTMLConfiguration;
+import org.cyberneko.html.HTMLEventInfo;
 import org.cyberneko.html.HTMLTagBalancingListener;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -333,6 +334,10 @@ public final class HTMLParser {
         private StringBuilder characters_;
         private boolean headParsed_ = false;
         private HtmlElement body_;
+        private Augmentations augmentations_;
+
+        private HtmlForm formWaitingForLostChildren_;
+        private static final String FEATURE_AUGMENTATIONS = "http://cyberneko.org/html/features/augmentations";
 
         /**
          * Creates a new builder for parsing the given response contents
@@ -357,7 +362,7 @@ public final class HTMLParser {
             }
 
             try {
-                setFeature("http://cyberneko.org/html/features/augmentations", true);
+                setFeature(FEATURE_AUGMENTATIONS, true);
                 setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
                 setFeature("http://cyberneko.org/html/features/report-errors", reportErrors);
                 setFeature("http://cyberneko.org/html/features/balance-tags/ignore-outside-content",
@@ -448,6 +453,15 @@ public final class HTMLParser {
 
         }
 
+        /** @inheritDoc */
+        @Override
+        public void endElement(final QName element, final Augmentations augs)
+            throws XNIException {
+            // just to have local access to the augmentations. A better way?
+            augmentations_ = augs;
+            super.endElement(element, augs);
+        }
+        
         /** @inheritDoc ContentHandler@endElement(String,String,String) */
         public void endElement(final String namespaceURI, final String localName, final String qName)
             throws SAXException {
@@ -457,6 +471,15 @@ public final class HTMLParser {
             final DomNode previousNode = stack_.pop(); //remove currentElement from stack
             previousNode.setEndLocation(locator_.getLineNumber(), locator_.getColumnNumber());
             previousNode.onAllChildrenAddedToPage();
+
+            // special handling for form lost children (malformed html code where </form> is synthesized)
+            if (previousNode instanceof HtmlForm
+                && ((HTMLEventInfo) augmentations_.getItem(FEATURE_AUGMENTATIONS)).isSynthesized()) {
+                formWaitingForLostChildren_ = (HtmlForm) previousNode;
+            }
+            else if (formWaitingForLostChildren_ != null && previousNode instanceof SubmittableElement) {
+                formWaitingForLostChildren_.addLostChild((HtmlElement) previousNode);
+            }
 
             // if we have added a extra node (tbody), we should remove it
             if (!currentNode_.getNodeName().equalsIgnoreCase(localName)) {
@@ -568,7 +591,10 @@ public final class HTMLParser {
          * {@inheritDoc}
          */
         public void ignoredEndElement(final QName element, final Augmentations augs) {
-            // nothing
+            // if real </form> is reached, don't accept fields anymore as lost children
+            if (formWaitingForLostChildren_ != null && "form".equals(element.localpart)) {
+                formWaitingForLostChildren_ = null;
+            }
         }
 
         /**

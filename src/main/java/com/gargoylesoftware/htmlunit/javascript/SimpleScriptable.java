@@ -242,8 +242,13 @@ public class SimpleScriptable extends ScriptableObject {
      * @param javaScriptClass the host class
      * @return the prototype
      */
+    @SuppressWarnings("unchecked")
     protected Scriptable getPrototype(final Class< ? extends SimpleScriptable> javaScriptClass) {
-        return getWindow().getPrototype(javaScriptClass);
+        final Scriptable prototype = getWindow().getPrototype(javaScriptClass);
+        if (prototype == null && javaScriptClass != SimpleScriptable.class) {
+            return getPrototype((Class< ? extends SimpleScriptable>) javaScriptClass.getSuperclass());
+        }
+        return prototype;
     }
 
     /**

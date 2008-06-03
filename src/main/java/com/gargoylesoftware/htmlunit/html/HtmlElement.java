@@ -102,6 +102,8 @@ public abstract class HtmlElement extends DomElement implements Element {
     /** The listeners which are to be notified of attribute changes. */
     private List<HtmlAttributeChangeListener> attributeListeners_;
 
+    private HtmlForm owningForm_; // the owning form for lost form children
+
     /**
      * Creates an instance.
      *
@@ -671,7 +673,12 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @return the form which contains this element
      */
     public HtmlForm getEnclosingForm() {
-        return (HtmlForm) getEnclosingElement("form");
+        if (owningForm_ != null) {
+            return owningForm_;
+        }
+        else {
+            return (HtmlForm) getEnclosingElement("form");
+        }
     }
 
     /**
@@ -1470,6 +1477,10 @@ public abstract class HtmlElement extends DomElement implements Element {
             // Restore the old listeners, now that serialization has been performed.
             attributeListeners_ = temp;
         }
+    }
+
+    void setOwningForm(final HtmlForm form) {
+        owningForm_ = form;
     }
 
 }
