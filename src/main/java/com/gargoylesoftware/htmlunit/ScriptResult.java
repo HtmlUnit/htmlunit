@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import org.mozilla.javascript.Undefined;
+
 /**
  * This object contains the result of executing a chunk of script code.
  *
@@ -22,15 +24,18 @@ package com.gargoylesoftware.htmlunit;
  * @author Marc Guillemot
  */
 public final class ScriptResult {
+
+    /** The object that was returned from the script engine. */
     private final Object javaScriptResult_;
+
+    /** The page that is currently loaded at the end of the script execution. */
     private final Page newPage_;
 
     /**
-     * Creates an instance.
+     * Creates a new instance.
      *
      * @param javaScriptResult the object that was returned from the script engine
-     * @param newPage the page that is currently loaded at the end of the script
-     * execution.
+     * @param newPage the page that is currently loaded at the end of the script execution
      */
     public ScriptResult(final Object javaScriptResult, final Page newPage) {
         javaScriptResult_ = javaScriptResult;
@@ -52,13 +57,31 @@ public final class ScriptResult {
     public Page getNewPage() {
         return newPage_;
     }
-    
+
     /**
-     * Utility method testing if a script result is <code>false</code>.
-     * @param scriptResult a script result (may be <code>null</code>)
-     * @return <code>true</code> if <code>scriptResult</code> is <code>false</code>
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return "ScriptResult[result=" + javaScriptResult_ + " page=" + newPage_ + "]";
+    }
+
+    /**
+     * Utility method testing if a script result is <tt>false</tt>.
+     * @param scriptResult a script result (may be <tt>null</tt>)
+     * @return <tt>true</tt> if <tt>scriptResult</tt> is <tt>false</tt>
      */
     public static boolean isFalse(final ScriptResult scriptResult) {
         return scriptResult != null && Boolean.FALSE.equals(scriptResult.getJavaScriptResult());
     }
+
+    /**
+     * Utility method testing if a script result is undefined (there was no return value).
+     * @param scriptResult a script result (may be <tt>null</tt>)
+     * @return <tt>true</tt> if <tt>scriptResult</tt> is undefined (there was no return value)
+     */
+    public static boolean isUndefined(final ScriptResult scriptResult) {
+        return scriptResult != null && scriptResult.getJavaScriptResult() instanceof Undefined;
+    }
+
 }
