@@ -7,6 +7,10 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="add" dev="sdanig" id="1982331">
+                JavaScript: add support for methods getAttribute(), setAttribute() and removeAttribute() on
+                element.style and element.runtimeStyle (IE only).
+            </action>
             <action type="fix" dev="sdanig" id="1976960">
                 Fix incorrect handling of conflicting return values in different event handlers during
                 event bubbling.

@@ -22,6 +22,8 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.WebAssert;
@@ -4121,6 +4123,154 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      */
     public boolean jsxFunction_removeExpression(final String propertyName) {
         return true;
+    }
+
+    /**
+     * Returns the value of the specified attribute, or an empty string if it does not exist.
+     * This method exists only in IE.
+     *
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536429(VS.85).aspx">MSDN Documentation</a>
+     * @param cx the JavaScript context
+     * @param thisObj the scriptable
+     * @param args the arguments (the attribute name and an optional flag parameter)
+     * @param f the function
+     * @return the value of the specified attribute
+     */
+    public static Object jsxFunction_getAttribute(final Context cx, final Scriptable thisObj,
+        final Object[] args,  final Function f) {
+
+        if (args.length == 0) {
+            return null;
+        }
+
+        final CSSStyleDeclaration dec = (CSSStyleDeclaration) thisObj;
+        final String name = Context.toString(args[0]);
+
+        final int flag;
+        if (args.length > 1) {
+            flag = (int) Context.toNumber(args[1]);
+        }
+        else {
+            flag = 0;
+        }
+
+        if (flag == 1) {
+            // Case-sensitive.
+            return dec.getStyleAttribute(name, true);
+        }
+        else {
+            // Case-insensitive.
+            final SortedMap<String, StyleElement> map = dec.getStyleMap(true);
+            for (final String key : map.keySet()) {
+                if (key.equalsIgnoreCase(name)) {
+                    return map.get(key).getValue();
+                }
+            }
+            return "";
+        }
+    }
+
+    /**
+     * Sets the value of the specified attribute. This method exists only in IE.
+     *
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536739(VS.85).aspx">MSDN Documentation</a>
+     * @param cx the JavaScript context
+     * @param thisObj the scriptable
+     * @param args the arguments (the attribute name, the attribute value and an optional flag parameter)
+     * @param f the function
+     */
+    public static void jsxFunction_setAttribute(final Context cx, final Scriptable thisObj,
+        final Object[] args,  final Function f) {
+
+        if (args.length < 2) {
+            return;
+        }
+
+        final CSSStyleDeclaration dec = (CSSStyleDeclaration) thisObj;
+        final String name = Context.toString(args[0]);
+        final String value = Context.toString(args[1]);
+
+        final int flag;
+        if (args.length > 2) {
+            flag = (int) Context.toNumber(args[2]);
+        }
+        else {
+            flag = 1;
+        }
+
+        if (flag == 0) {
+            // Case-insensitive.
+            final SortedMap<String, StyleElement> map = dec.getStyleMap(true);
+            for (final String key : map.keySet()) {
+                if (key.equalsIgnoreCase(name)) {
+                    dec.setStyleAttribute(key, value);
+                }
+            }
+        }
+        else {
+            // Case-sensitive.
+            if (dec.getStyleAttribute(name, true).length() > 0) {
+                dec.setStyleAttribute(name, value);
+            }
+        }
+    }
+
+    /**
+     * Removes the specified attribute. This method exists only in IE.
+     *
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536696(VS.85).aspx">MSDN Documentation</a>
+     * @param cx the JavaScript context
+     * @param thisObj the scriptable
+     * @param args the arguments (the attribute name and an optional flag parameter)
+     * @param f the function
+     * @return <tt>true</tt> if the attribute was successfully removed, <tt>false</tt> otherwise
+     */
+    public static boolean jsxFunction_removeAttribute(final Context cx, final Scriptable thisObj,
+        final Object[] args,  final Function f) {
+
+        if (args.length == 0) {
+            return false;
+        }
+
+        final CSSStyleDeclaration dec = (CSSStyleDeclaration) thisObj;
+        final String name = Context.toString(args[0]);
+
+        final int flag;
+        if (args.length > 1) {
+            flag = (int) Context.toNumber(args[1]);
+        }
+        else {
+            flag = 1;
+        }
+
+        if (flag == 0) {
+            // Case-insensitive.
+            String lastName = null;
+            final SortedMap<String, StyleElement> map = dec.getStyleMap(true);
+            for (final String key : map.keySet()) {
+                if (key.equalsIgnoreCase(name)) {
+                    lastName = key;
+                }
+            }
+            if (lastName != null) {
+                dec.removeStyleAttribute(lastName);
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            // Case-sensitive.
+            final String s = dec.getStyleAttribute(name, true);
+            if (s.length() > 0) {
+                dec.removeStyleAttribute(name);
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
     }
 
     /**

@@ -1352,4 +1352,99 @@ public class CSSStyleDeclarationTest extends WebTestCase {
         loadPage(getBrowserVersion(), html, actual);
         assertEquals(expected, actual);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers({Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    public void getAttribute() throws Exception {
+        getAttribute("\"font\"", "");
+        getAttribute("\"color\"", "green");
+        getAttribute("\"ColoR\"", "green");
+        getAttribute("\"font\", 0", "");
+        getAttribute("\"color\", 0", "green");
+        getAttribute("\"coLOr\", 0", "green");
+        getAttribute("\"font\", 1", "");
+        getAttribute("\"color\", 1", "green");
+        getAttribute("\"ColOR\", 1", "");
+    }
+
+    private void getAttribute(final String params, final String... expected) throws Exception {
+        final String html =
+              "<html><body onload='alert(document.all[\"a\"].style.getAttribute(" + params + "))'>\n"
+            + "<a id='a' href='#' style='color:green'>go</a></body></html>";
+        final List<String> actual = new ArrayList<String>();
+        loadPage(getBrowserVersion(), html, actual);
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers({Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    public void setAttribute() throws Exception {
+        setAttribute("'font', 'blah'", "green", "green");
+        setAttribute("'color', 'red'", "green", "red");
+        setAttribute("'ColoR', 'red'", "green", "green");
+        setAttribute("'font', 'blah', 0", "green", "green");
+        setAttribute("'color', 'red', 0", "green", "red");
+        setAttribute("'ColoR', 'red', 0", "green", "red");
+        setAttribute("'font', 'blah', 1", "green", "green");
+        setAttribute("'color', 'red', 1", "green", "red");
+        setAttribute("'ColoR', 'red', 1", "green", "green");
+    }
+
+    private void setAttribute(final String params, final String... expected) throws Exception {
+        final String html =
+              "<html><body onload='test()'>\n"
+            + "<a id='a' href='#' style='color:green'>go</a>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.all['a'].style.getAttribute('color'));\n"
+            + "    document.all['a'].style.setAttribute(" + params + ");\n"
+            + "    alert(document.all['a'].style.getAttribute('color'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+        final List<String> actual = new ArrayList<String>();
+        loadPage(getBrowserVersion(), html, actual);
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers({Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    public void removeAttribute() throws Exception {
+        removeAttribute("'font'", "green", "false", "green");
+        removeAttribute("'color'", "green", "true", "");
+        removeAttribute("'ColoR'", "green", "false", "green");
+        removeAttribute("'font', 0", "green", "false", "green");
+        removeAttribute("'color', 0", "green", "true", "");
+        removeAttribute("'ColoR', 0", "green", "true", "");
+        removeAttribute("'font', 1", "green", "false", "green");
+        removeAttribute("'color', 1", "green", "true", "");
+        removeAttribute("'ColoR', 1", "green", "false", "green");
+    }
+
+    private void removeAttribute(final String params, final String... expected) throws Exception {
+        final String html =
+              "<html><body onload='test()'>\n"
+            + "<a id='a' href='#' style='color:green'>go</a>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.all['a'].style.getAttribute('color'));\n"
+            + "    alert(document.all['a'].style.removeAttribute(" + params + "));\n"
+            + "    alert(document.all['a'].style.getAttribute('color'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+        final List<String> actual = new ArrayList<String>();
+        loadPage(getBrowserVersion(), html, actual);
+        assertEquals(expected, actual);
+    }
+
 }
