@@ -38,11 +38,12 @@ import org.apache.commons.logging.LogFactory;
  * @author Ahmed Ashour
  */
 public class MockWebConnection extends WebConnectionImpl {
+
     private final Map<String, WebResponseData> responseMap_ = new HashMap<String, WebResponseData>(10);
     private WebResponseData defaultResponse_;
-
     private WebRequestSettings lastRequest_;
     private HttpState httpState_ = new HttpState();
+    private int requestCount_ = 0;
 
     /**
      * Creates an instance.
@@ -71,6 +72,7 @@ public class MockWebConnection extends WebConnectionImpl {
         getLog().debug("Getting response for " + url.toExternalForm());
 
         lastRequest_ = webRequestSettings;
+        requestCount_++;
 
         WebResponseData response = responseMap_.get(url.toExternalForm());
         if (response == null) {
@@ -255,4 +257,13 @@ public class MockWebConnection extends WebConnectionImpl {
     public WebRequestSettings getLastWebRequestSettings() {
         return lastRequest_;
     }
+
+    /**
+     * Returns the number of requests made to this mock web connection.
+     * @return the number of requests made to this mock web connection
+     */
+    public int getRequestCount() {
+        return requestCount_;
+    }
+
 }
