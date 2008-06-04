@@ -292,7 +292,9 @@ public abstract class HtmlElement extends DomElement implements Element {
 
     /**
      * Sets the value of the specified attribute. This method may be overridden by subclasses
-     * which are interested in specific attribute value changes, if necessary.
+     * which are interested in specific attribute value changes, but such methods <b>must</b>
+     * invoke <tt>super.setAttributeValue()</tt>, and <b>should</b> consider the value of the
+     * <tt>cloning</tt> parameter when deciding whether or not to execute custom logic.
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the attribute
