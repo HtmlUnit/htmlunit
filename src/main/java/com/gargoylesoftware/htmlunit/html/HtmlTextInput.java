@@ -156,9 +156,11 @@ public class HtmlTextInput extends HtmlInput {
      */
     @Override
     public void setAttributeValue(final String namespaceURI, final String qualifiedName,
-            final String attributeValue) {
-        super.setAttributeValue(namespaceURI, qualifiedName, attributeValue);
-        if (qualifiedName.equals("value")) {
+        final String attributeValue, final boolean cloning) {
+
+        super.setAttributeValue(namespaceURI, qualifiedName, attributeValue, cloning);
+
+        if (qualifiedName.equals("value") && !cloning) {
             setSelectionStart(attributeValue.length());
             setSelectionEnd(attributeValue.length());
         }

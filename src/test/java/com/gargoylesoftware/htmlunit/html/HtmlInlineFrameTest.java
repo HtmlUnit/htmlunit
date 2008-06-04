@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Daniel Gredler
  */
 public class HtmlInlineFrameTest extends WebTestCase {
 
@@ -216,11 +217,11 @@ public class HtmlInlineFrameTest extends WebTestCase {
         webConnection.setResponse(URL_THIRD, thirdContent, "text/javascript");
 
         client.setWebConnection(webConnection);
-        
+
         final String[] expectedAlerts = {"2"};
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        
+
         client.getPage(URL_FIRST);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -246,4 +247,54 @@ public class HtmlInlineFrameTest extends WebTestCase {
         assertTrue(HtmlInlineFrame.class.isInstance(page.getHtmlElementById("myId")));
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Verifies that cloned frames do no reload their content (bug 1954869).
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testFrameCloneDoesNotReloadFrame() throws Exception {
+        final String html1 = "<html><body><iframe src='" + URL_SECOND + "'></iframe></body></html>";
+        final String html2 = "<html><body>abc</body></html>";
+
+        final WebClient client = new WebClient();
+
+        final MockWebConnection conn = new MockWebConnection(client);
+        conn.setResponse(URL_FIRST, html1);
+        conn.setResponse(URL_SECOND, html2);
+        client.setWebConnection(conn);
+
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        assertEquals(2, conn.getRequestCount());
+
+        page.cloneNode(true);
+        assertEquals(2, conn.getRequestCount());
+    }
+
+    /**
+     * Verifies that frames added via document.write() don't get their contents loaded twice (bug 1156009).
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testFrameWriteDoesNotReloadFrame() throws Exception {
+        final String html1 =
+              "<html><body>\n"
+            + "<script>document.write('<iframe id=\"f\" src=\"" + URL_SECOND + "\"></iframe>')</script>\n"
+            + "</body></html>";
+        final String html2 = "<html><body>abc</body></html>";
+
+        final WebClient client = new WebClient();
+
+        final MockWebConnection conn = new MockWebConnection(client);
+        conn.setResponse(URL_FIRST, html1);
+        conn.setResponse(URL_SECOND, html2);
+        client.setWebConnection(conn);
+
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        assertEquals("iframe", page.getElementById("f").getTagName());
+
+        page.getEnclosingWindow().getThreadManager().joinAll(3000);
+        assertEquals(2, conn.getRequestCount());
+    }
+
 }

@@ -166,9 +166,11 @@ public class HtmlScript extends HtmlElement {
      * (behavior varies by browser version). {@inheritDoc}
      */
     @Override
-    public void setAttributeValue(final String namespaceURI, final String qualifiedName, final String attributeValue) {
+    protected void setAttributeValue(final String namespaceURI, final String qualifiedName,
+        final String attributeValue, final boolean cloning) {
+
         boolean execute = false;
-        if (namespaceURI == null && "src".equals(qualifiedName)) {
+        if (namespaceURI == null && "src".equals(qualifiedName) && !cloning) {
             final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
             if (ie || (getAttribute("src").length() == 0 && getFirstChild() == null)) {
                 // Always execute if IE; if FF, only execute if the "src" attribute
@@ -177,7 +179,7 @@ public class HtmlScript extends HtmlElement {
             }
         }
 
-        super.setAttributeValue(namespaceURI, qualifiedName, attributeValue);
+        super.setAttributeValue(namespaceURI, qualifiedName, attributeValue, cloning);
 
         if (execute) {
             executeScriptIfNeeded(true);

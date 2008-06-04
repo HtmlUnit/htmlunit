@@ -306,4 +306,33 @@ public class HtmlScriptTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /**
+     * Verifies that cloned script nodes do not reload or re-execute their content (bug 1954869).
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testScriptCloneDoesNotReloadScript() throws Exception {
+        final String html = "<html><body><script src='" + URL_SECOND + "'></script></body></html>";
+        final String js = "alert('loaded')";
+
+        final WebClient client = new WebClient();
+
+        final MockWebConnection conn = new MockWebConnection(client);
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(URL_SECOND, js, "text/javascript");
+        client.setWebConnection(conn);
+
+        final List<String> actual = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(actual));
+
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        assertEquals(2, conn.getRequestCount());
+
+        page.cloneNode(true);
+        assertEquals(2, conn.getRequestCount());
+
+        final String[] expected = {"loaded"};
+        assertEquals(expected, actual);
+    }
+
 }

@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author Stefan Anzinger
  * @author Ahmed Ashour
  * @author Dmitri Zoubkov
+ * @author Daniel Gredler
  */
 public abstract class BaseFrame extends StyledElement {
 
@@ -283,14 +284,18 @@ public abstract class BaseFrame extends StyledElement {
      * {@inheritDoc}
      */
     @Override
-    public final void setAttributeValue(final String namespaceURI, final String qualifiedName,
-            String attributeValue) {
+    protected final void setAttributeValue(final String namespaceURI, final String qualifiedName,
+        String attributeValue, final boolean cloning) {
+
         if (qualifiedName.equals("src")) {
             attributeValue = attributeValue.trim();
         }
-        super.setAttributeValue(namespaceURI, qualifiedName, attributeValue);
-        if (qualifiedName.equals("src")) {
+
+        super.setAttributeValue(namespaceURI, qualifiedName, attributeValue, cloning);
+
+        if (qualifiedName.equals("src") && !cloning) {
             loadInnerPageIfPossible(attributeValue);
         }
     }
+
 }

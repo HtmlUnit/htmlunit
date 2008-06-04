@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="fix" dev="sdanig" id="1954869">
+                Fix extraneous load of frame contents cause by frame node cloning.
+            </action>
             <action type="add" dev="sdanig" id="1982331">
                 JavaScript: add support for methods getAttribute(), setAttribute() and removeAttribute() on
                 element.style and element.runtimeStyle (IE only).

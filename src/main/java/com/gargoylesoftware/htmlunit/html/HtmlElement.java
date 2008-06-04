@@ -142,7 +142,7 @@ public abstract class HtmlElement extends DomElement implements Element {
         final HtmlElement newNode = (HtmlElement) super.cloneNode(deep);
         newNode.attributes_ = createAttributeMap(attributes_.size());
         for (final DomAttr attr : attributes_.values()) {
-            newNode.setAttributeValue(attr.getNamespaceURI(), attr.getQualifiedName(), attr.getNodeValue());
+            newNode.setAttributeValue(attr.getNamespaceURI(), attr.getQualifiedName(), attr.getNodeValue(), true);
         }
         return newNode;
     }
@@ -285,8 +285,23 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @param qualifiedName the qualified name of the attribute
      * @param attributeValue the value of the attribute
      */
-    public void setAttributeValue(final String namespaceURI, final String qualifiedName,
-            final String attributeValue) {
+    public final void setAttributeValue(final String namespaceURI, final String qualifiedName,
+        final String attributeValue) {
+        setAttributeValue(namespaceURI, qualifiedName, attributeValue, false);
+    }
+
+    /**
+     * Sets the value of the specified attribute. This method may be overridden by subclasses
+     * which are interested in specific attribute value changes, if necessary.
+     *
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the attribute
+     * @param attributeValue the value of the attribute
+     * @param cloning whether or not this attribute value change is the result of a node clone operation
+     */
+    protected void setAttributeValue(final String namespaceURI, final String qualifiedName,
+        final String attributeValue, final boolean cloning) {
+
         final String oldAttributeValue = getAttributeValue(qualifiedName);
         String value = attributeValue;
 
