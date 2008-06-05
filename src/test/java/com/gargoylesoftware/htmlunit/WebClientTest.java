@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 package com.gargoylesoftware.htmlunit;
+import static java.util.Arrays.asList;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
@@ -486,7 +487,7 @@ public class WebClientTest extends WebTestCase {
         final HtmlPage page2 = getPageWithRedirectionsSameURL(30);
         assertEquals("Redirect needed 21", page2.getWebResponse().getStatusMessage());
     }
-    
+
     private HtmlPage getPageWithRedirectionsSameURL(final int nbRedirections) throws Exception {
         final String firstContent = "<html><head><title>First</title></head><body></body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
@@ -520,6 +521,35 @@ public class WebClientTest extends WebTestCase {
         webClient.setThrowExceptionOnFailingStatusCode(false);
         
         return (HtmlPage) webClient.getPage(url);
+    }
+
+    /**
+     * Verifies that any additional headers in the original {@link WebRequestSettings} instance are kept
+     * and sent to the redirect location. Specifically, the "Referer" header set in various locations was
+     * being lost during redirects.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testRedirection_AdditionalHeadersMaintained() throws Exception {
+        testRedirection_AdditionalHeadersMaintained(301);
+        testRedirection_AdditionalHeadersMaintained(302);
+    }
+
+    private void testRedirection_AdditionalHeadersMaintained(final int statusCode) throws Exception {
+        final WebClient client = new WebClient();
+        final MockWebConnection conn = new MockWebConnection(client);
+        client.setWebConnection(conn);
+
+        final List<NameValuePair> headers = asList(new NameValuePair("Location", URL_SECOND.toString()));
+        conn.setResponse(URL_FIRST, "", statusCode, "", "text/html", headers);
+        conn.setResponse(URL_SECOND, "<html><body>abc</body></html>");
+
+        final WebRequestSettings request = new WebRequestSettings(URL_FIRST);
+        request.addAdditionalHeader("foo", "bar");
+        client.getPage(request);
+
+        assertEquals(URL_SECOND, conn.getLastWebRequestSettings().getUrl());
+        assertEquals("bar", conn.getLastAdditionalHeaders().get("foo"));
     }
 
     /**

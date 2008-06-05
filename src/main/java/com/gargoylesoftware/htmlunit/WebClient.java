@@ -1543,14 +1543,19 @@ public class WebClient implements Serializable {
             }
             else if ((statusCode == HttpStatus.SC_MOVED_PERMANENTLY || statusCode == HttpStatus.SC_TEMPORARY_REDIRECT)
                 && method.equals(HttpMethod.GET)) {
-
                 final WebRequestSettings wrs = new WebRequestSettings(newUrl);
                 wrs.setRequestParameters(parameters);
+                for (Map.Entry<String, String> entry : webRequestSettings.getAdditionalHeaders().entrySet()) {
+                    wrs.addAdditionalHeader(entry.getKey(), entry.getValue());
+                }
                 return loadWebResponse(wrs);
             }
             else if (statusCode <= HttpStatus.SC_SEE_OTHER) {
                 final WebRequestSettings wrs = new WebRequestSettings(newUrl);
                 wrs.setHttpMethod(HttpMethod.GET);
+                for (Map.Entry<String, String> entry : webRequestSettings.getAdditionalHeaders().entrySet()) {
+                    wrs.addAdditionalHeader(entry.getKey(), entry.getValue());
+                }
                 return loadWebResponse(wrs);
             }
         }
