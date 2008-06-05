@@ -196,13 +196,13 @@ public class WebRequestSettings implements Serializable {
      * @throws RuntimeException if the request parameters have already been set or this is not a <tt>POST</tt> request
      */
     public void setRequestBody(final String requestBody) throws RuntimeException {
-        if (requestParameters_ != null && requestParameters_.size() > 0) {
+        if (requestParameters_ != null && !requestParameters_.isEmpty()) {
             final String msg = "Trying to set the request body, but the request parameters have already been specified;"
                        + "the two are mutually exclusive!";
             throw new RuntimeException(msg);
         }
-        if (httpMethod_ != HttpMethod.POST) {
-            final String msg = "The request body may only be set for POST requests!";
+        if (httpMethod_ != HttpMethod.POST && httpMethod_ != HttpMethod.PUT) {
+            final String msg = "The request body may only be set for POST or PUT requests!";
             throw new RuntimeException(msg);
         }
         requestBody_ = requestBody;

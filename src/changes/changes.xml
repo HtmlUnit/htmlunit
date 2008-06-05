@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="fix" dev="mguillem" due-to="Andreas Hartmann">
+                Allow PUT request with body content.
+            </action>
             <action type="fix" dev="sdanig" id="1954869">
                 Fix extraneous load of frame contents cause by frame node cloning.
             </action>

@@ -221,7 +221,7 @@ public class HttpWebConnection extends WebConnectionImpl {
                     postMethod.addParameter(pair.getName(), pair.getValue());
                 }
             }
-            else {
+            else if (FormEncodingType.MULTIPART == webRequestSettings.getEncodingType()) {
                 final List<PartBase> partList = new ArrayList<PartBase>();
                 for (final NameValuePair pair : webRequestSettings.getRequestParameters()) {
                     final PartBase newPart;
@@ -240,6 +240,12 @@ public class HttpWebConnection extends WebConnectionImpl {
                 Part[] parts = new Part[partList.size()];
                 parts = partList.toArray(parts);
                 method.setRequestEntity(new MultipartRequestEntity(parts, method.getParams()));
+            }
+            else { // for instance a PUT request
+                final String body = webRequestSettings.getRequestBody();
+                final String contentType = webRequestSettings.getAdditionalHeaders().get("Content-type");
+                final String charset = webRequestSettings.getCharset();
+                method.setRequestEntity(new StringRequestEntity(body, contentType, charset));
             }
         }
 
