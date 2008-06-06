@@ -1221,4 +1221,36 @@ public class HtmlFormTest extends WebTestCase {
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test page can't be loaded
+     */
+    @Test
+    public void malformedHtml_fieldGetters() throws Exception {
+        final String content
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<div>\n"
+            + "<form id='form1' method='get' action='foo'>\n"
+            + "    <input name='field1' value='val1'/>\n"
+            + "    <input name='field2' value='val2'/>\n"
+            + "    <input type='radio' name='radio1' value='val2'/>\n"
+            + "    <input type='submit' id='submitButton'/>\n"
+            + "</div>\n"
+            + "    <input name='field3' value='val1'/>\n"
+            + "    <input name='field4' value='val2'/>\n"
+            + "    <input type='radio' name='radio1' value='val3'/>\n"
+            + "    <input type='submit' id='submitButton'/>\n"
+            + "</form></body></html>";
+
+        final HtmlPage page = loadPage(content);
+        final HtmlForm form = page.getForms().get(0);
+
+        assertEquals("val1", form.getInputByName("field3").getValueAttribute());
+        assertEquals(2, form.getInputsByName("radio1").size());
+
+        assertEquals(3, form.getInputsByValue("val2").size());
+        assertEquals("radio1", form.getInputByValue("val3").getNameAttribute());
+
+        assertEquals(2, form.getRadioButtonsByName("radio1").size());
+    }
 }

@@ -330,7 +330,15 @@ public class HtmlForm extends ClickableElement {
      */
     @SuppressWarnings("unchecked")
     public List<HtmlInput> getInputsByName(final String name) {
-        return (List<HtmlInput>) getHtmlElementsByAttribute("input", "name", name);
+        final List<HtmlInput> list = (List<HtmlInput>) getHtmlElementsByAttribute("input", "name", name);
+        
+        // collect inputs from lost children
+        for (final HtmlElement elt : getLostChildren()) {
+            if (elt instanceof HtmlInput && name.equals(elt.getAttribute("name"))) {
+                list.add((HtmlInput) elt);
+            }
+        }
+        return list;
     }
 
     /**
@@ -357,7 +365,15 @@ public class HtmlForm extends ClickableElement {
      */
     @SuppressWarnings("unchecked")
     public List<HtmlSelect> getSelectsByName(final String name) {
-        return (List<HtmlSelect>) getHtmlElementsByAttribute("select", "name", name);
+        final List<HtmlSelect> list = (List<HtmlSelect>) getHtmlElementsByAttribute("select", "name", name);
+        
+        // collect selects from lost children
+        for (final HtmlElement elt : getLostChildren()) {
+            if (elt instanceof HtmlSelect && name.equals(elt.getAttribute("name"))) {
+                list.add((HtmlSelect) elt);
+            }
+        }
+        return list;
     }
 
     /**
@@ -384,7 +400,15 @@ public class HtmlForm extends ClickableElement {
      */
     @SuppressWarnings("unchecked")
     public List<HtmlButton> getButtonsByName(final String name) {
-        return (List<HtmlButton>) getHtmlElementsByAttribute("button", "name", name);
+        final List<HtmlButton> list = (List<HtmlButton>) getHtmlElementsByAttribute("button", "name", name);
+        
+        // collect buttons from lost children
+        for (final HtmlElement elt : getLostChildren()) {
+            if (elt instanceof HtmlButton && name.equals(elt.getAttribute("name"))) {
+                list.add((HtmlButton) elt);
+            }
+        }
+        return list;
     }
 
     /**
@@ -411,7 +435,15 @@ public class HtmlForm extends ClickableElement {
      */
     @SuppressWarnings("unchecked")
     public List<HtmlTextArea> getTextAreasByName(final String name) {
-        return (List<HtmlTextArea>) getHtmlElementsByAttribute("textarea", "name", name);
+        final List<HtmlTextArea> list = (List<HtmlTextArea>) getHtmlElementsByAttribute("textarea", "name", name);
+        
+        // collect buttons from lost children
+        for (final HtmlElement elt : getLostChildren()) {
+            if (elt instanceof HtmlTextArea && name.equals(elt.getAttribute("name"))) {
+                list.add((HtmlTextArea) elt);
+            }
+        }
+        return list;
     }
 
     /**
@@ -441,9 +473,8 @@ public class HtmlForm extends ClickableElement {
 
         final List<HtmlRadioButtonInput> results = new ArrayList<HtmlRadioButtonInput>();
 
-        for (final HtmlElement element : getAllHtmlChildElements()) {
-            if (element instanceof HtmlRadioButtonInput
-                     && element.getAttributeValue("name").equals(name)) {
+        for (final HtmlElement element : getInputsByName(name)) {
+            if (element instanceof HtmlRadioButtonInput) {
                 results.add((HtmlRadioButtonInput) element);
             }
         }
@@ -459,12 +490,10 @@ public class HtmlForm extends ClickableElement {
      */
     @SuppressWarnings("unchecked")
     void setCheckedRadioButton(final HtmlRadioButtonInput radioButtonInput) {
-        if (!isAncestorOf(radioButtonInput)) {
+        if (!isAncestorOf(radioButtonInput) && !lostChildren_.contains(radioButtonInput)) {
             throw new IllegalArgumentException("HtmlRadioButtonInput is not child of this HtmlForm");
         }
-        final List<HtmlRadioButtonInput> radios = (List<HtmlRadioButtonInput>) getByXPath(
-                ".//input[lower-case(@type)='radio' and @name='" + radioButtonInput.getNameAttribute() + "']"
-        );
+        final List<HtmlRadioButtonInput> radios = getRadioButtonsByName(radioButtonInput.getNameAttribute());
             
         for (final HtmlRadioButtonInput input : radios) {
             if (input == radioButtonInput) {
@@ -486,14 +515,9 @@ public class HtmlForm extends ClickableElement {
     public HtmlRadioButtonInput getCheckedRadioButton(final String name) {
         WebAssert.notNull("name", name);
 
-        for (final HtmlElement element : getAllHtmlChildElements()) {
-            if (element instanceof HtmlRadioButtonInput
-                     && element.getAttributeValue("name").equals(name)) {
-
-                final HtmlRadioButtonInput input = (HtmlRadioButtonInput) element;
-                if (input.isChecked()) {
-                    return input;
-                }
+        for (final HtmlRadioButtonInput input : getRadioButtonsByName(name)) {
+            if (input.isChecked()) {
+                return input;
             }
         }
         return null;
@@ -662,7 +686,11 @@ public class HtmlForm extends ClickableElement {
      * @throws ElementNotFoundException if this form does not contain any inputs with the specified value
      */
     public HtmlInput getInputByValue(final String value) throws ElementNotFoundException {
-        return (HtmlInput) getOneHtmlElementByAttribute("input", "value", value);
+        final List<HtmlInput> list = getInputsByValue(value);
+        if (list.isEmpty()) {
+            throw new ElementNotFoundException("input", "value", value);
+        }
+        return list.get(0);
     }
 
     /**
@@ -672,7 +700,15 @@ public class HtmlForm extends ClickableElement {
      */
     @SuppressWarnings("unchecked")
     public List<HtmlInput> getInputsByValue(final String value) {
-        return (List<HtmlInput>) getHtmlElementsByAttribute("input", "value", value);
+        final List<HtmlInput> results = (List<HtmlInput>) getHtmlElementsByAttribute("input", "value", value);
+
+        for (final HtmlElement element : getLostChildren()) {
+            if (element instanceof HtmlInput && value.equals(element.getAttribute("value"))) {
+                results.add((HtmlInput) element);
+            }
+        }
+
+        return results;
     }
 
     /**
