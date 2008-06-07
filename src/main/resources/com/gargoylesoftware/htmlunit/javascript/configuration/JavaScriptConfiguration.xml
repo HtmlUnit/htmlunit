@@ -1414,11 +1414,13 @@
 
     <class name="HTMLOptGroupElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLOptGroupElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOptionGroup">
+        <property name="disabled" readable="true" writable="true"/>
     </class>
 
     <class name="HTMLOptionElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLOptionElement"
         jsConstructor="jsConstructor" JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOption">
         <property name="defaultSelected" readable="true" writable="false"/>
+        <property name="disabled" readable="true" writable="true"/>
         <property name="label" readable="true" writable="true"/>
         <property name="selected" readable="true" writable="true"/>
         <property name="text" readable="true" writable="true"/>

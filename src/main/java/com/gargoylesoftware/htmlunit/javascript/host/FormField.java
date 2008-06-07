@@ -137,30 +137,6 @@ public class FormField extends HTMLElement {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean jsxGet_disabled() {
-        // TODO: is this method necessary?
-        return getHtmlElementOrDie().isAttributeDefined("disabled");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void jsxSet_disabled(final boolean disabled) {
-        // TODO: is this method necessary?
-        final HtmlElement element = getHtmlElementOrDie();
-        if (disabled) {
-            element.setAttributeValue("disabled", "disabled");
-        }
-        else {
-            element.removeAttribute("disabled");
-        }
-    }
-
-    /**
      * Returns the value of the tabIndex attribute.
      * @return the value of the tabIndex attribute
      */

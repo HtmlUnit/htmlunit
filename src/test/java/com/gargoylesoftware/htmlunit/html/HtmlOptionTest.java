@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Daniel Gredler
  */
 public class HtmlOptionTest extends WebTestCase {
 
@@ -195,4 +196,44 @@ public class HtmlOptionTest extends WebTestCase {
         assertTrue(HtmlOption.class.isInstance(page.getHtmlElementById("myId")));
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testDisabled() throws Exception {
+        testDisabled(BrowserVersion.FIREFOX_2, true, false);
+        testDisabled(BrowserVersion.INTERNET_EXPLORER_6_0, false, false);
+        testDisabled(BrowserVersion.INTERNET_EXPLORER_7_0, false, false);
+    }
+
+    private void testDisabled(final BrowserVersion version, final boolean d1, final boolean d2) throws Exception {
+        final String html = "<html><body onload='test()'><form name='f'>\n"
+            + "  <select name='s' id='s'>\n"
+            + "    <option value='o1' id='o1'>One</option>\n"
+            + "    <option value='o2' id='o2' disabled='disabled'>Two</option>\n"
+            + "  </select>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var s = document.getElementById('s');\n"
+            + "      var o1 = document.getElementById('o1');\n"
+            + "      var o2 = document.getElementById('o2');\n"
+            + "      alert(s.disabled);\n"
+            + "      alert(o1.disabled);\n"
+            + "      alert(o2.disabled);\n"
+            + "      o1.disabled = true;\n"
+            + "      o2.disabled = false;\n"
+            + "      alert(o1.disabled);\n"
+            + "      alert(o2.disabled);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</form></body></html>";
+        final String[] expected = {"false", "false", "true", "true", "false"};
+        final List<String> actual = new ArrayList<String>();
+        final HtmlPage page = loadPage(version, html, actual);
+        assertEquals(expected, actual);
+        assertEquals(d1, ((HtmlOption) page.getElementById("o1")).isDisabled());
+        assertEquals(d2, ((HtmlOption) page.getElementById("o2")).isDisabled());
+    }
+
 }

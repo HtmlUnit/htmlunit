@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author David D. Kilzer
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Daniel Gredler
  */
 public class HtmlOption extends ClickableElement implements DisabledElement {
 
@@ -143,10 +144,20 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns <tt>true</tt> if the disabled attribute is set for this element. Note that this
+     * method always returns <tt>false</tt> when emulating IE, because IE does not allow individual
+     * options to be disabled.
+     *
+     * @return <tt>true</tt> if the disabled attribute is set for this element (always <tt>false</tt>
+     *         when emulating IE)
      */
     public final boolean isDisabled() {
-        return isAttributeDefined("disabled");
+        if (getPage().getWebClient().getBrowserVersion().isIE()) {
+            return false;
+        }
+        else {
+            return isAttributeDefined("disabled");
+        }
     }
 
     /**
