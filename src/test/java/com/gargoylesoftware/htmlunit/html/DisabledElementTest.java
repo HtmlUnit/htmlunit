@@ -25,6 +25,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -121,10 +122,11 @@ public class DisabledElementTest extends WebTestCase {
 
         final String htmlContent = MessageFormat.format(htmlContent_, new Object[]{disabledAttribute});
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-        
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, htmlContent, collectedAlerts);
+
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
         final DisabledElement element = (DisabledElement) form.getHtmlElementById("element1");
         assertEquals(expectedIsDisabled, element.isDisabled());
     }
+
 }
