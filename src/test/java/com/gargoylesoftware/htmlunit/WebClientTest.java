@@ -526,7 +526,7 @@ public class WebClientTest extends WebTestCase {
     /**
      * Verifies that any additional headers in the original {@link WebRequestSettings} instance are kept
      * and sent to the redirect location. Specifically, the "Referer" header set in various locations was
-     * being lost during redirects.
+     * being lost during redirects (see bug 1987911).
      * @throws Exception if an error occurs
      */
     @Test

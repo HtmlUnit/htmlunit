@@ -22,7 +22,7 @@
             <action type="fix" dev="sdanig" id="1986764">
                 HtmlOption.isDisabled() and HtmlOptionGroup.isDisabled() always return false when emulating IE.
             </action>
-            <action type="fix" dev="sdanig">
+            <action type="fix" dev="sdanig" id="1987911">
                 Don't lose any custom request headers during redirection.
             </action>
             <action type="fix" dev="mguillem" due-to="Andreas Hartmann">
