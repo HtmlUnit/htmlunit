@@ -791,7 +791,6 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @param shiftKey <tt>true</tt> if SHIFT is pressed during the typing
      * @param ctrlKey <tt>true</tt> if CTRL is pressed during the typing
      * @param altKey <tt>true</tt> if ALT is pressed during the typing
-     * @return the page that occupies this window after typing
      * @exception IOException if an IO error occurs
      */
     protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
