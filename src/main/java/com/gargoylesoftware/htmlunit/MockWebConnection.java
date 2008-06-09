@@ -230,6 +230,24 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
+     * Sets the response that will be returned when the specified URL is requested.
+     * @param content the content to return
+     * @param statusCode the status code to return
+     * @param statusMessage the status message to return
+     * @param contentType the content type to return
+     * @param responseHeaders the response headers to return
+     */
+    public void setDefaultResponse(final String content, final int statusCode,
+            final String statusMessage, final String contentType,
+            final List< ? extends NameValuePair> responseHeaders) {
+
+        final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>(responseHeaders);
+        compiledHeaders.add(new NameValuePair("Content-Type", contentType));
+        defaultResponse_ = new WebResponseData(TextUtil.stringToByteArray(content),
+            statusCode, statusMessage, compiledHeaders);
+    }
+
+    /**
      * Returns the {@link HttpState}.
      * @return the state
      */

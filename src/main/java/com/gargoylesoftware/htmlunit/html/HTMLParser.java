@@ -19,7 +19,6 @@ import java.io.InputStream;
 import java.io.StringReader;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
-import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -45,7 +44,6 @@ import org.xml.sax.ext.LexicalHandler;
 
 import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -226,10 +224,7 @@ public final class HTMLParser {
         webWindow.setEnclosedPage(page);
 
         final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(page, webResponse.getUrl());
-        String charSet = webResponse.getContentCharSet();
-        if (!Charset.isSupported(charSet)) {
-            charSet = TextUtil.DEFAULT_CHARSET;
-        }
+        final String charSet = webResponse.getContentCharSet();
 
         final InputStream content = webResponse.getContentAsStream();
         final XMLInputSource in = new XMLInputSource(null, url.toString(), null, content, charSet);

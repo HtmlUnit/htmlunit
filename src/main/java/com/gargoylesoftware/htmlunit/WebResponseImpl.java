@@ -20,7 +20,11 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.charset.IllegalCharsetNameException;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.lang.ArrayUtils;
@@ -38,6 +42,7 @@ import org.apache.commons.logging.LogFactory;
 public class WebResponseImpl implements WebResponse, Serializable {
 
     private static final long serialVersionUID = 2842434739251092348L;
+    private static final Pattern patternEncoding_ = Pattern.compile("[a-zA-Z0-9][\\w:\\.-]*");
 
     private final transient Log log_ = LogFactory.getLog(WebResponseImpl.class);
     private long loadTime_;
@@ -241,9 +246,26 @@ public class WebResponseImpl implements WebResponse, Serializable {
                 }
             }
         }
-        else if (charset.charAt(0) == '"' && charset.charAt(charset.length() - 1) == '"'
-            || charset.charAt(0) == '\'' && charset.charAt(charset.length() - 1) == '\'') {
-            charset = charset.substring(1, charset.length() - 1);
+        else {
+            final Matcher matcher = patternEncoding_.matcher(charset);
+            if (!matcher.find()) {
+                charset = TextUtil.DEFAULT_CHARSET;
+            }
+            else {
+                // TODO: notify incorrectness if !charset.equals(matcher.group())
+                charset = matcher.group();
+                try {
+                    if (!Charset.isSupported(charset)) {
+                        log_.info("Unsupported charset: " + charset
+                            + ". Using default one: " + TextUtil.DEFAULT_CHARSET);
+                        charset = TextUtil.DEFAULT_CHARSET;
+                    }
+                }
+                catch (final IllegalCharsetNameException e) {
+                    log_.info("Illegal charset: " + charset + ". Using default one: " + TextUtil.DEFAULT_CHARSET);
+                    charset = TextUtil.DEFAULT_CHARSET;
+                }
+            }
         }
         return charset;
     }

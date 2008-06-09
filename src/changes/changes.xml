@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="update" dev="mguillem" id="1964258">
+                Be more tolerant while extracting charset from incorrect Content-Type header.
+            </action>
             <action type="fix" dev="sdanig">
                 JavaScript: add optionElement.disabled and optionGroupElement.disabled attributes.
             </action>

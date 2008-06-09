@@ -116,4 +116,30 @@ public class WebResponseImplTest extends WebTestCase {
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
     }
+
+    /**
+     * Test that extracting charset from Content-Type header is forgiving.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void illegalCharset() throws Exception {
+        testIllegalCharset("text/html; text/html; charset=ISO-8859-1;", "ISO-8859-1");
+        testIllegalCharset("text/html; charset=UTF-8; charset=UTF-8", "UTF-8");
+        testIllegalCharset("text/html; charset=#sda+s", TextUtil.DEFAULT_CHARSET);
+        testIllegalCharset("text/html; charset=UnknownCharset", TextUtil.DEFAULT_CHARSET);
+    }
+
+    private void testIllegalCharset(final String cntTypeHeader, final String expectedCharset) throws Exception {
+        final WebClient client = new WebClient();
+        final MockWebConnection conn = new MockWebConnection(client);
+        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        headers.add(new NameValuePair("Content-Type", cntTypeHeader));
+        conn.setDefaultResponse("<html/>", 200, "OK", "text/html", headers);
+        final WebClient webClient = new WebClient();
+        webClient.setWebConnection(conn);
+        
+        final Page page = webClient.getPage(URL_FIRST);
+        assertEquals(expectedCharset, page.getWebResponse().getContentCharSet());
+        assertEquals(cntTypeHeader, page.getWebResponse().getResponseHeaderValue("Content-Type"));
+    }
 }

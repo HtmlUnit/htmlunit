@@ -104,6 +104,8 @@ public interface WebResponse {
 
     /**
      * Returns the content charset value.
+     * The charset returned by this method is a valid, supported charset determined
+     * from the "Content-Type" header and from the response content.
      * @return the charset value
      */
     String getContentCharSet();
