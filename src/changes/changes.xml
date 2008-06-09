@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="add" dev="sdanig" id="1900452">
+                Add methods setProxyHost() and setProxyPort() to WebClient.
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: value of form elements is set before triggering keyUp event (was after).
             </action>

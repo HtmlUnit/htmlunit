@@ -113,8 +113,8 @@ public class WebClient implements Serializable {
     private boolean printContentOnFailingStatusCode_ = true;
     private boolean throwExceptionOnFailingStatusCode_ = true;
     private CredentialsProvider credentialsProvider_ = new DefaultCredentialsProvider();
-    private final String proxyHost_;
-    private final int proxyPort_;
+    private String proxyHost_;
+    private int proxyPort_;
     private final Map<String, Pattern> proxyBypassHosts_;
     private JavaScriptEngine scriptEngine_;
     private boolean javaScriptEnabled_ = true;
@@ -668,6 +668,22 @@ public class WebClient implements Serializable {
      */
     public void setHomePage(final String homePage) {
         homePage_ = homePage;
+    }
+
+    /**
+     * Sets the proxy host used to perform HTTP requests.
+     * @param proxyHost the proxy host used to perform HTTP requests
+     */
+    public void setProxyHost(final String proxyHost) {
+        proxyHost_ = proxyHost;
+    }
+
+    /**
+     * Sets the proxy port used to perform HTTP requests.
+     * @param proxyPort the proxy port used to perform HTTP requests
+     */
+    public void setProxyPort(final int proxyPort) {
+        proxyPort_ = proxyPort;
     }
 
     /**
@@ -1473,12 +1489,11 @@ public class WebClient implements Serializable {
      * Loads a {@link WebResponse} from the server through the WebConnection.
      * @param webRequestSettings settings to use when making the request
      * @throws IOException if an IO problem occurs
-     * @return the WebResponse
+     * @return the resultant {@link WebResponse}
      */
     private WebResponse loadWebResponseFromWebConnection(final WebRequestSettings webRequestSettings,
-                final int nbAllowedRedirections)
-        throws
-            IOException {
+        final int nbAllowedRedirections) throws IOException {
+
         final URL url = webRequestSettings.getUrl();
         final HttpMethod method = webRequestSettings.getHttpMethod();
         final List<NameValuePair> parameters = webRequestSettings.getRequestParameters();
