@@ -36,8 +36,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 
 /**
  * Tests that when DOM events such as "onclick" have access
@@ -245,20 +245,30 @@ public class EventTest extends WebTestCase {
      */
     @Test
     public void testTyping() throws Exception {
+        testTyping("<input type='text'", "");
+        testTyping("<input type='password'", "");
+        testTyping("<textarea", "</textarea>");
+    }
+
+    private void testTyping(final String opening, final String closing) throws Exception {
         final String html =
               "<html><body>\n"
-            + "<script>var x = '';</script>\n"
-            + "<form><input type='text' id='t' onkeydown='x+=\"1\"' onkeypress='x+=\"2\"' onkeyup='x+=\"3\"'/></form>\n"
-            + "<div id='d' onclick='alert(x)'>abc</div>\n"
+            + "<script>var x = '';\n"
+            + "function log(s) { x += s; }</script>\n"
+            + "<form>\n"
+            + opening + " id='t' onkeydown='log(1 + this.value)' "
+            + "onkeypress='log(2 + this.value)' onkeyup='log(3 + this.value)'>" + closing
+            + "</form>\n"
+            + "<div id='d' onclick='alert(x); x=\"\"'>abc</div>\n"
             + "</body></html>";
 
-        final String[] expected = {"123", "123123123"};
+        final String[] expected = {"123A", "1A2A3AB1AB2AB3ABC"};
         final List<String> actual = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, actual);
-        ((HtmlTextInput) page.getHtmlElementById("t")).type('A');
+        final HtmlPage page = loadPage(html, actual);
+        ((HtmlElement) page.getHtmlElementById("t")).type('A');
         ((HtmlDivision) page.getHtmlElementById("d")).click();
 
-        ((HtmlTextInput) page.getHtmlElementById("t")).type("BC");
+        ((HtmlElement) page.getHtmlElementById("t")).type("BC");
         ((HtmlDivision) page.getHtmlElementById("d")).click();
 
         assertEquals(expected, actual);

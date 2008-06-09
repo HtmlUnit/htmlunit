@@ -63,13 +63,17 @@ public class HtmlPasswordInput extends HtmlInput {
         if (isDisabled()) {
             return getPage();
         }
-        final Page page = super.type(c, shiftKey, ctrlKey, altKey);
-
-        //TODO: handle backspace
-        if (c == ' ' || !Character.isWhitespace(c)) {
-            setValueAttribute(getValueAttribute() + c);
-        }
-        return page;
+        return super.type(c, shiftKey, ctrlKey, altKey);
     }
     
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+        //TODO: handle backspace
+        if ((c == ' ' || !Character.isWhitespace(c))) {
+            setValueAttribute(getValueAttribute() + c);
+        }
+    }
 }

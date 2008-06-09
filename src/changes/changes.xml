@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="fix" dev="mguillem">
+                JavaScript: value of form elements is set before triggering keyUp event (was after).
+            </action>
             <action type="update" dev="mguillem" id="1964258">
                 Be more tolerant while extracting charset from incorrect Content-Type header.
             </action>

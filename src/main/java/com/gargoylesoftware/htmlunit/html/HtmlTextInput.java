@@ -62,13 +62,18 @@ public class HtmlTextInput extends HtmlInput {
             return getPage();
         }
         preventDefault_ = false;
-        final Page page = super.type(c, shiftKey, ctrlKey, altKey);
-
+        return super.type(c, shiftKey, ctrlKey, altKey);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         //TODO: handle backspace
         if ((c == ' ' || !Character.isWhitespace(c)) && !preventDefault_) {
             setValueAttribute(getValueAttribute() + c);
         }
-        return page;
     }
     
     /**

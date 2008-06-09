@@ -391,15 +391,20 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
             return getPage();
         }
         preventDefault_ = false;
-        final Page page = super.type(c, shiftKey, ctrlKey, altKey);
-
+        return super.type(c, shiftKey, ctrlKey, altKey);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         //TODO: handle backspace
         if ((c == ' ' || !Character.isWhitespace(c)) && !preventDefault_) {
             setText(getText() + c);
         }
-        return page;
     }
-    
+
     /**
      * {@inheritDoc}
      */

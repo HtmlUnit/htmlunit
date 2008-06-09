@@ -775,6 +775,7 @@ public abstract class HtmlElement extends DomElement implements Element {
 
         fireEvent(new Event(this, Event.TYPE_KEY_DOWN, c, shiftKey, ctrlKey, altKey));
         fireEvent(new Event(this, Event.TYPE_KEY_PRESS, c, shiftKey, ctrlKey, altKey));
+        doType(c, shiftKey, ctrlKey, altKey);
         fireEvent(new Event(this, Event.TYPE_KEY_UP, c, shiftKey, ctrlKey, altKey));
 
         final HtmlForm form = getEnclosingForm();
@@ -782,6 +783,20 @@ public abstract class HtmlElement extends DomElement implements Element {
             return form.submit((SubmittableElement) this);
         }
         return getPage();
+    }
+
+    /**
+     * Performs the effective type action, called after the keyPress event and before the keyUp event.
+     * @param c the character you with to simulate typing
+     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the typing
+     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the typing
+     * @param altKey <tt>true</tt> if ALT is pressed during the typing
+     * @return the page that occupies this window after typing
+     * @exception IOException if an IO error occurs
+     */
+    protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
+        throws IOException {
+        // nothing
     }
 
     /**
