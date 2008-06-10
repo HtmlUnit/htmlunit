@@ -1119,19 +1119,16 @@ public class HtmlFormTest extends WebTestCase {
     }
 
     /**
-     * Regression test for https://sf.net/tracker/index.php?func=detail&aid=1822108&group_id=47038&atid=448266.
+     * Regression test for bug 1822108.
      * @throws Exception if the test fails
      */
     @Test
     public void testSubmitWithOnClickThatReturnsFalse() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String firstContent = "<html><head><title>foo</title></haed><body>\n"
             + "<form action='" + URL_SECOND + "' method='post'>\n"
             + "  <input type='submit' name='mySubmit' onClick='document.forms[0].submit(); return false;'>\n"
             + "</form></body></html>";
-        
+
         final String secondContent = "<html><head><title>foo</title><script>\n"
             + "  Number.prototype.gn = false;\n"
             + "  function test() {\n"

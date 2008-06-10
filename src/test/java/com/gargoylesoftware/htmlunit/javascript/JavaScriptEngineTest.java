@@ -1035,6 +1035,14 @@ public class JavaScriptEngineTest extends WebTestCase {
      */
     @Test
     public void prototypeScope() throws Exception {
+        prototypeScope("String", "'some string'");
+        prototypeScope("Number", "9");
+        prototypeScope("Date", "new Date()");
+        prototypeScope("Function", "function(){}");
+        prototypeScope("Array", "[]");
+    }
+
+    private void prototypeScope(final String name, final String value) throws Exception {
         final String content1
             = "<html><head>\n"
             + "<script>\n"
@@ -1046,12 +1054,12 @@ public class JavaScriptEngineTest extends WebTestCase {
             = "<html><head>\n"
             + "<script>\n"
             + "alert('in page 2');\n"
-            + "String.prototype.foo = function()\n"
+            + name + ".prototype.foo = function()\n"
             + "{\n"
             + "   alert('in foo');\n"
             + "};\n"
-            + "var testString = 'some string';\n"
-            + "testString.foo();\n"
+            + "var x = " + value + ";\n"
+            + "x.foo();\n"
             + "</script>\n"
             + "</head><body></body></html>";
 

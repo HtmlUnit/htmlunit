@@ -36,6 +36,7 @@ import org.mozilla.javascript.ScriptableObject;
  * @author Marc Guillemot
  */
 public class StringPrimitivePrototypeBugFixer implements Scriptable {
+
     private static final Field FieldPrototypeProperty_;
     private static final Field FieldContextLastInterpreterFrame_;
     private static Field FieldInterpreterCallFrameScope_;
@@ -50,26 +51,32 @@ public class StringPrimitivePrototypeBugFixer implements Scriptable {
             FieldContextLastInterpreterFrame_.setAccessible(true);
         }
         catch (final Exception e) {
-            throw new Error("Bad Rhino version: can't install custom String primitive prototype fix");
+            throw new Error("Bad Rhino version: Can't install custom String primitive prototype fix!");
         }
     }
 
     /**
-     * Install the workaround for the Rhino bug
+     * Installs the workaround for the Rhino bug.
      * @param topScope the top scope (which contains the standard objects)
      * @throws Exception if initialization fails
      */
     static void installWorkaround(final Scriptable topScope) throws Exception {
-        final BaseFunction stringObj = (BaseFunction) topScope.get("String", topScope);
-        final Scriptable stringObjPrototype = (Scriptable) FieldPrototypeProperty_.get(stringObj);
-        final StringPrimitivePrototypeBugFixer prototypeWrapper =
-            new StringPrimitivePrototypeBugFixer(stringObjPrototype);
-        FieldPrototypeProperty_.set(stringObj, prototypeWrapper);
+        installWorkaround(topScope, "String");
+        installWorkaround(topScope, "Number");
     }
 
+    private static void installWorkaround(final Scriptable topScope, final String name) throws Exception {
+        final BaseFunction stringObj = (BaseFunction) topScope.get(name, topScope);
+        final Scriptable stringPrototype = (Scriptable) FieldPrototypeProperty_.get(stringObj);
+        final StringPrimitivePrototypeBugFixer wrapper = new StringPrimitivePrototypeBugFixer(name, stringPrototype);
+        FieldPrototypeProperty_.set(stringObj, wrapper);
+    }
+
+    private final String name_;
     private final Scriptable wrapped_;
 
-    StringPrimitivePrototypeBugFixer(final Scriptable wrapped) {
+    StringPrimitivePrototypeBugFixer(final String name, final Scriptable wrapped) {
+        name_ = name;
         wrapped_ = wrapped;
     }
 
@@ -115,7 +122,7 @@ public class StringPrimitivePrototypeBugFixer implements Scriptable {
             final Scriptable originalTopScope = ScriptableObject.getTopLevelScope(originalScope);
             final Scriptable currentTopScope = ScriptableObject.getTopLevelScope(this);
             if (originalTopScope != currentTopScope) {
-                final Scriptable s = (Scriptable) originalTopScope.get("String", originalTopScope);
+                final Scriptable s = (Scriptable) originalTopScope.get(name_, originalTopScope);
                 final Scriptable p = (Scriptable) s.get("prototype", s);
                 return p.get(name, p);
             }
@@ -123,13 +130,12 @@ public class StringPrimitivePrototypeBugFixer implements Scriptable {
         catch (final Exception e) {
             throw new RuntimeException(e);
         }
-
         if (start == this) {
             start = wrapped_;
         }
         return wrapped_.get(name, start);
     }
-    
+
     /**
      * {@inheritDoc}
      */
