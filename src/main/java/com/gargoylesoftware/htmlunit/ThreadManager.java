@@ -239,7 +239,7 @@ public class ThreadManager {
         final JavaScriptBackgroundJob job = createJavaScriptBackgroundJob(codeToExec, interval, true, description);
         return startThread(job, description);
     }
-    
+
     /**
      * Makes the job object for setTimeout and setInterval
      *

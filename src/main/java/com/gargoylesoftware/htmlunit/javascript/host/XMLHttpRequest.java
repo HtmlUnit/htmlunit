@@ -116,7 +116,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      */
     private void setState(final int state, Context context) {
         state_ = state;
-        
+
         //Firefox doesn't trigger onreadystatechange handler for sync requests
         final boolean isIE = getBrowserVersion().isIE();
         if (stateChangeHandler_ != null && (isIE || async_)) {
@@ -125,7 +125,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             }
             final Scriptable scope = stateChangeHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
-            
+
             final int nbExecutions;
             if (async_ && STATE_LOADING == state) {
                 // quite strange but IE and Mozilla seem both to fire state loading twice
@@ -135,7 +135,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             else {
                 nbExecutions = 1;
             }
-            
+
             for (int i = 0; i < nbExecutions; i++) {
                 getLog().debug("Calling onreadystatechange handler for state " + state);
                 jsEngine.callFunction(containingPage_, stateChangeHandler_, context,

@@ -67,13 +67,13 @@ public class CacheTest extends WebTestCase {
 
         headers.put("Last-Modified", DateUtil.formatDate(DateUtils.addMinutes(new Date(), -5)));
         assertTrue(cache.isDynamicContent(response));
-        
+
         headers.put("Expires", DateUtil.formatDate(DateUtils.addMinutes(new Date(), 5)));
         assertTrue(cache.isDynamicContent(response));
 
         headers.put("Expires", DateUtil.formatDate(DateUtils.addHours(new Date(), 1)));
         assertFalse(cache.isDynamicContent(response));
-        
+
         headers.remove("Last-Modified");
         assertFalse(cache.isDynamicContent(response));
     }
@@ -98,7 +98,7 @@ public class CacheTest extends WebTestCase {
                 return url[0];
             }
         };
-        
+
         assertFalse(cache.isJavaScript(response));
 
         contentType[0] = "text/javascript";
@@ -106,7 +106,7 @@ public class CacheTest extends WebTestCase {
 
         contentType[0] = "application/x-javascript";
         assertTrue(cache.isJavaScript(response));
-        
+
         contentType[0] = "text/plain";
         assertFalse(cache.isJavaScript(response));
 
@@ -146,7 +146,7 @@ public class CacheTest extends WebTestCase {
         connection.setResponse(urlPage1, content);
         final URL urlPage2 = new URL(URL_FIRST, "page2.html");
         connection.setResponse(urlPage2, content2);
-        
+
         final List<Header> headers = new ArrayList<Header>();
         headers.add(new Header("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
         connection.setResponse(new URL(URL_FIRST, "foo1.js"), script1, 200, "ok", "text/javascript", headers);
@@ -158,10 +158,10 @@ public class CacheTest extends WebTestCase {
         final HtmlPage page1 = (HtmlPage) webClient.getPage(urlPage1);
         final String[] expectedAlerts = {"in foo1", "in foo2"};
         assertEquals(expectedAlerts, collectedAlerts);
-        
+
         collectedAlerts.clear();
         page1.getAnchors().get(0).click();
-        
+
         assertEquals(new String[] {"in foo2"}, collectedAlerts);
         assertEquals("no request for scripts should have been performed",
                 urlPage2, connection.getLastWebRequestSettings().getUrl());
@@ -249,7 +249,7 @@ class DummyWebResponse implements WebResponse {
     public URL getUrl() {
         throw new RuntimeException("not implemented");
     }
-    
+
     public WebRequestSettings getRequestSettings() {
         throw new RuntimeException("not implemented");
     }

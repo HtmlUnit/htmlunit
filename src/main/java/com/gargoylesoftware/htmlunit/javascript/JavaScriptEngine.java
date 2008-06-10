@@ -133,7 +133,7 @@ public class JavaScriptEngine implements Serializable {
                     getLog().error("Exception while initializing JavaScript for the page", e);
                     throw new ScriptException(null, e); // BUG: null is not useful.
                 }
-                
+
                 return null;
             }
         };
@@ -175,7 +175,7 @@ public class JavaScriptEngine implements Serializable {
             }
         };
         ScriptableObject.getObjectPrototype(window).setPrototype(fallbackCaller);
-        
+
         for (final String jsClassName : jsConfig.keySet()) {
             final ClassConfiguration config = jsConfig.getClassConfiguration(jsClassName);
             final boolean isWindow = Window.class.getName().equals(config.getLinkedClass().getName());
@@ -226,13 +226,13 @@ public class JavaScriptEngine implements Serializable {
                 prototype.setPrototype(objectPrototype);
             }
         }
-        
+
         // eval hack (cf unit tests testEvalScopeOtherWindow and testEvalScopeLocal
         final Class< ? >[] evalFnTypes = {String.class};
         final Member evalFn = Window.class.getMethod("custom_eval", evalFnTypes);
         final FunctionObject jsCustomEval = new FunctionObject("eval", evalFn, window);
         window.associateValue("custom_eval", jsCustomEval);
-        
+
         for (final String jsClassName : jsConfig.keySet()) {
             final ClassConfiguration config = jsConfig.getClassConfiguration(jsClassName);
             final Method jsConstructor = config.getJsConstructor();
@@ -266,7 +266,7 @@ public class JavaScriptEngine implements Serializable {
         prototype.setParentScope(window);
 
         configureConstantsPropertiesAndFunctions(config, prototype);
-        
+
         return prototype;
     }
 
@@ -277,7 +277,7 @@ public class JavaScriptEngine implements Serializable {
      */
     private void configureConstantsPropertiesAndFunctions(final ClassConfiguration config,
             final ScriptableObject scriptable) {
-        
+
         // the constants
         for (final String constant : config.constants()) {
             final Class< ? > linkedClass = config.getLinkedClass();
@@ -331,7 +331,7 @@ public class JavaScriptEngine implements Serializable {
 
         // Pre process the source code
         sourceCode = preProcess(htmlPage, sourceCode, sourceName, null);
-        
+
         // PreProcess IE Conditional Compilation if needed
         final BrowserVersion browserVersion = htmlPage.getWebClient().getBrowserVersion();
         if (browserVersion.isIE() && browserVersion.getBrowserVersionNumeric() >= 4) {
@@ -409,7 +409,7 @@ public class JavaScriptEngine implements Serializable {
                 return null;
             }
         };
-        
+
         return ContextFactory.getGlobal().call(action);
     }
 
@@ -430,7 +430,7 @@ public class JavaScriptEngine implements Serializable {
             final DomNode htmlElement) {
 
         final Scriptable scope = getScope(htmlPage, htmlElement);
-        
+
         final Function function = (Function) javaScriptFunction;
         final ContextAction action = new HtmlUnitContextAction(scope, htmlPage) {
             @Override

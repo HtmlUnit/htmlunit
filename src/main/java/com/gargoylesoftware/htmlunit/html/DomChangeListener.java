@@ -29,7 +29,7 @@ public interface DomChangeListener {
      * @param event the node addition event
      */
     void nodeAdded(final DomChangeEvent event);
-    
+
     /**
      * Notification that a new node was deleted. Called after the node is deleted.
      *

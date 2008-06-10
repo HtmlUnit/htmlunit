@@ -71,7 +71,7 @@ public class HtmlImageInput extends HtmlInput {
         else {
             prefix = name + ".";
         }
-            
+
         if (wasPositionSpecified_) {
             return new NameValuePair[]{
                 new NameValuePair(prefix + 'x', String.valueOf(xPosition_)),

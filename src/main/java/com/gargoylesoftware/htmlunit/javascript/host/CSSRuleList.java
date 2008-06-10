@@ -49,7 +49,7 @@ public class CSSRuleList extends SimpleScriptable {
         setParentScope(stylesheet.getParentScope());
         setPrototype(getPrototype(getClass()));
     }
-    
+
     /**
      * Returns the length of this list.
      * @return the length of this list.

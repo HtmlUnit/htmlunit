@@ -58,12 +58,12 @@ public class Cache implements Serializable {
         private static final long serialVersionUID = 588400350259242484L;
         private final WebResponse response_;
         private long lastAccess_;
-        
+
         Entry(final WebResponse response) {
             response_ = response;
             lastAccess_ = System.currentTimeMillis();
         }
-        
+
         public int compareTo(final Entry other) {
             return NumberUtils.compare(lastAccess_, other.lastAccess_);
         }
@@ -130,7 +130,7 @@ public class Cache implements Serializable {
     protected boolean isDynamicContent(final WebResponse response) {
         final Date lastModified = parseDateHeader(response, "Last-Modified");
         final Date expires = parseDateHeader(response, "Expires");
-        
+
         final long delay = 10 * DateUtils.MILLIS_PER_MINUTE;
         final long now = System.currentTimeMillis();
 

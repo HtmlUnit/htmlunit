@@ -74,7 +74,7 @@ public class Stylesheet extends SimpleScriptable {
 
     /** The HTML element which owns this stylesheet. */
     private final HTMLElement ownerNode_;
-    
+
     private com.gargoylesoftware.htmlunit.javascript.host.CSSRuleList cssRules_;
 
     private static final ErrorHandler CSS_ERROR_HANDLER = new ErrorHandler() {
@@ -323,7 +323,7 @@ public class Stylesheet extends SimpleScriptable {
         }
         return ss;
     }
-    
+
     /**
      * Parses the selectors at the specified input source. If anything at all goes wrong, this
      * method returns an empty selector list.
@@ -377,7 +377,7 @@ public class Stylesheet extends SimpleScriptable {
     public Object jsxGet_owningElement() {
         return ownerNode_;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -392,7 +392,7 @@ public class Stylesheet extends SimpleScriptable {
         }
         return super.getDefaultValue(hint);
     }
-    
+
     /**
      * Retrieves a collection of rules defined in a style sheet.
      * @return a collection of rules defined in a style sheet.

@@ -236,7 +236,7 @@ public class ScriptException extends RuntimeException {
     public HtmlPage getPage() {
         return page_;
     }
-    
+
     /**
      * Prints the script stack trace.
      * This represents only the script calls.

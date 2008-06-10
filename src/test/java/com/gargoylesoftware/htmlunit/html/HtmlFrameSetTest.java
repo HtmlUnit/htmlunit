@@ -279,11 +279,11 @@ public class HtmlFrameSetTest extends WebTestCase {
         webConnection.setResponse(URL_THIRD, thirdContent, "text/javascript");
 
         client.setWebConnection(webConnection);
-        
+
         final String[] expectedAlerts = {"2"};
         final ArrayList<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        
+
         client.getPage(URL_FIRST);
         assertEquals(expectedAlerts, collectedAlerts);
     }

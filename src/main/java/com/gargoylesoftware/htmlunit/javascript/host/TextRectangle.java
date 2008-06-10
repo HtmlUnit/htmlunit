@@ -61,7 +61,7 @@ public class TextRectangle extends SimpleScriptable {
     public void jsxSet_bottom(final int bottom) {
         this.bottom_ = bottom;
     }
-    
+
     /**
      * Returns the bottom coordinate of the rectangle surrounding the object content.
      * @return the bottom coordinate of the rectangle surrounding the object content
@@ -77,7 +77,7 @@ public class TextRectangle extends SimpleScriptable {
     public void jsxSet_left(final int left) {
         this.left_ = left;
     }
-    
+
     /**
      * Returns the left coordinate of the rectangle surrounding the object content.
      * @return the left coordinate of the rectangle surrounding the object content
@@ -93,7 +93,7 @@ public class TextRectangle extends SimpleScriptable {
     public void jsxSet_right(final int right) {
         this.right_ = right;
     }
-    
+
     /**
      * Returns the right coordinate of the rectangle surrounding the object content.
      * @return the right coordinate of the rectangle surrounding the object content
@@ -109,7 +109,7 @@ public class TextRectangle extends SimpleScriptable {
     public void jsxSet_top(final int top) {
         this.top_ = top;
     }
-    
+
     /**
      * Returns the top coordinate of the rectangle surrounding the object content.
      * @return the top coordinate of the rectangle surrounding the object content

@@ -198,7 +198,7 @@ public class DomNodeTest extends WebTestCase {
         attributes.addAttribute(null, "id", "id", null, "tag2"); // with the same id as the node to replace
         final DomNode node2 = page.getHtmlElementById("tag2");
         assertEquals("div", node2.getNodeName());
-        
+
         final DomNode node3 = HTMLParser.getFactory(HtmlSpan.TAG_NAME).createElement(
                 page, HtmlSpan.TAG_NAME, attributes);
         node2.replace(node3);
@@ -490,7 +490,7 @@ public class DomNodeTest extends WebTestCase {
             + "<p id='p1' title='myTitle'></p>\n"
             + "<input id='myButton' type='button' onclick='clickMe()'>\n"
             + "</body></html>";
-        
+
         final String[] expectedValues = {"nodeAdded: p,div", "nodeAdded: p,div"};
         final HtmlPage page = loadPage(htmlContent);
         final HtmlElement p1 = page.getHtmlElementById("p1");
@@ -498,7 +498,7 @@ public class DomNodeTest extends WebTestCase {
         p1.addDomChangeListener(listenerImpl);
         page.addDomChangeListener(listenerImpl);
         final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
-        
+
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
     }
@@ -522,7 +522,7 @@ public class DomNodeTest extends WebTestCase {
             + "<p id='p1' title='myTitle'></p>\n"
             + "<input id='myButton' type='button' onclick='clickMe()'>\n"
             + "</body></html>";
-        
+
         final String[] expectedValues = {"nodeAdded: p,div", "nodeAdded: p,div"};
         final HtmlPage page = loadPage(htmlContent);
         final HtmlElement p1 = page.getHtmlElementById("p1");
@@ -530,7 +530,7 @@ public class DomNodeTest extends WebTestCase {
         p1.addDomChangeListener(listenerImpl);
         page.addDomChangeListener(listenerImpl);
         final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
-        
+
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
     }
@@ -554,7 +554,7 @@ public class DomNodeTest extends WebTestCase {
             + "<div id='myDiv'><p id='p1' title='myTitle'></p></div>\n"
             + "<input id='myButton' type='button' onclick='clickMe()'>\n"
             + "</body></html>";
-        
+
         final String[] expectedValues = {"nodeDeleted: div,p", "nodeDeleted: div,p"};
         final HtmlPage page = loadPage(htmlContent);
         final HtmlElement p1 = page.getHtmlElementById("p1");
@@ -562,7 +562,7 @@ public class DomNodeTest extends WebTestCase {
         p1.addDomChangeListener(listenerImpl);
         page.addDomChangeListener(listenerImpl);
         final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
-        
+
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
     }

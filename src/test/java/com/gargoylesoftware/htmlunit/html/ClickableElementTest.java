@@ -990,7 +990,7 @@ public class ClickableElementTest extends WebTestCase {
             + "<body id='myBody' onclick='clickMe()' ondblclick='dblClickMe()'>\n"
             + "<textarea id='myTextarea'></textarea>\n"
             + "</body></html>";
-        
+
         final HtmlPage page = loadPage(content);
         final HtmlBody body = (HtmlBody) page.getHtmlElementById("myBody");
         body.dblClick();

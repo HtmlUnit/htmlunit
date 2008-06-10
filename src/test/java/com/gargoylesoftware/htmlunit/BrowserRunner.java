@@ -64,7 +64,7 @@ public class BrowserRunner extends CompositeRunner {
     public enum Browser {
         /** Internet Explorer 6. */
         INTERNET_EXPLORER_6,
-        
+
         /** Internet Explorer 7. */
         INTERNET_EXPLORER_7,
 
@@ -74,7 +74,7 @@ public class BrowserRunner extends CompositeRunner {
         /** Not Browser-specific, it will run only once. Don't use this with other Browsers. */
         NONE;
     }
-    
+
     /**
      * The only {@link Browser}s that are expected to succeed, default value is all.
      * For example, if you use <tt>@Browsers(Browser.INTERNET_EXPLORER_6)</tt> that means only IE6 is expected
@@ -91,7 +91,7 @@ public class BrowserRunner extends CompositeRunner {
             Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7, Browser.FIREFOX_2
         };
     }
-    
+
     /**
      * Expected alerts.
      */
@@ -101,7 +101,7 @@ public class BrowserRunner extends CompositeRunner {
 
         /** Alerts that is used for all browsers (if defined, the other values are ignored). */
         String[] value() default {EMPTY_DEFAULT };
-        
+
         /** Alerts for any Internet Explorer, it can be overridden by specific IE version. */
         String[] IE() default {EMPTY_DEFAULT };
 
@@ -117,7 +117,7 @@ public class BrowserRunner extends CompositeRunner {
         /** Alerts for Firefox 2. */
         String[] FF2() default {EMPTY_DEFAULT };
     }
-    
+
     /**
      * Browsers with which the case is not yet implemented, default value is all.
      * @see Browser
@@ -137,7 +137,7 @@ public class BrowserRunner extends CompositeRunner {
     static class TestClassRunnerForBrowserVersion extends JUnit4ClassRunner {
 
         private final BrowserVersion browserVersion_;
-        
+
         public TestClassRunnerForBrowserVersion(final Class< ? extends WebTestCase> klass,
             final BrowserVersion browserVersion) throws InitializationError {
             super(klass);
@@ -165,7 +165,7 @@ public class BrowserRunner extends CompositeRunner {
             }
             final Browsers browsers = method.getAnnotation(Browsers.class);
             final boolean shouldFail = browsers != null && !isDefinedIn(browsers.value());
-            
+
             final NotYetImplemented notYetImplementedBrowsers = method.getAnnotation(NotYetImplemented.class);
             final boolean notYetImplemented = notYetImplementedBrowsers != null
                 && isDefinedIn(notYetImplementedBrowsers.value());
@@ -263,7 +263,7 @@ public class BrowserRunner extends CompositeRunner {
         private boolean isDefined(final String[] alerts) {
             return alerts.length != 1 || !alerts[0].equals(EMPTY_DEFAULT);
         }
-        
+
         /**
          * Returns true if current {@link #browserVersion_} is contained in the specific <tt>browsers</tt>.
          */

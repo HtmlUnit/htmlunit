@@ -81,7 +81,7 @@ public class BrowserVersion implements Serializable {
         NETSCAPE, "5.0 (Windows; en-US)",
         "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.4) Gecko/20070515 Firefox/2.0.0.4",
         "1.2", 6);
-    
+
     static {
         final PluginConfiguration pluginFlash = new PluginConfiguration("Shockwave Flash",
             "Shockwave Flash 9.0 r31", "libflashplayer.so");
@@ -366,21 +366,21 @@ public class BrowserVersion implements Serializable {
     public void setUserLanguage(final String userLanguage) {
         userLanguage_ = userLanguage;
     }
-    
+
     /**
      * @param browserVersion the browserVersion to set
      */
     public void setBrowserVersion(final float browserVersion) {
         browserVersionNumeric_ = browserVersion;
     }
-    
+
     /**
      * @return the browserVersionNumeric
      */
     public float getBrowserVersionNumeric() {
         return browserVersionNumeric_;
     }
-    
+
     /**
      * @return the javaScriptVersionNumeric
      */
@@ -403,7 +403,7 @@ public class BrowserVersion implements Serializable {
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this);
     }
-    
+
     /**
      * Gets the configured plugins. This makes only sense for Firefox as only this browser makes this kind
      * of information available through JavaScript

@@ -69,7 +69,7 @@ public class XMLElement extends Node {
     public String jsxGet_tagName() {
         return ((XmlElement) getDomNodeOrDie()).getTagName();
     }
-    
+
     /**
      * Returns the attributes of this XML element.
      * @return the attributes of this XML element
@@ -118,7 +118,7 @@ public class XMLElement extends Node {
         collection.init(domNode, xpath);
         return collection;
     }
-    
+
     /**
      * Retrieves an attribute node by name.
      * @param name the name of the attribute to retrieve
@@ -171,7 +171,7 @@ public class XMLElement extends Node {
             }
         }
     }
-    
+
     /**
      * Returns a list of elements with the given tag name belonging to the given namespace.
      * @param namespaceURI the namespace URI of elements to look for

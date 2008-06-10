@@ -47,12 +47,12 @@ public final class IncorrectnessListenerTest extends WebTestCase {
             }
         };
         webClient.setIncorrectnessListener(listener);
-        
+
         final MockWebConnection webConnection = new MockWebConnection(webClient);
         webClient.setWebConnection(webConnection);
         webConnection.setDefaultResponse(html);
         webClient.getPage(URL_FIRST);
-        
+
         final String[] expectedIncorrectness = {
             "set-cookie http-equiv meta tag: can't parse expiration date >abcdef<."
         };

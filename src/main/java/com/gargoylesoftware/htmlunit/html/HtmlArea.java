@@ -235,7 +235,7 @@ public class HtmlArea extends ClickableElement {
             final double centerX = Double.parseDouble(coords[0].trim());
             final double centerY = Double.parseDouble(coords[1].trim());
             final String radiusString = coords[2].trim();
-            
+
             final int radius;
             try {
                 radius = Integer.parseInt(radiusString);
@@ -265,7 +265,7 @@ public class HtmlArea extends ClickableElement {
                 return true;
             }
         }
-        
+
         return false;
     }
 }

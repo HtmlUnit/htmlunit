@@ -43,7 +43,7 @@ public class XSLTProcessorTest extends WebTestCase {
         final String[] expectedAlertsFF = {"97", "null"};
         test(BrowserVersion.FIREFOX_2, expectedAlertsFF);
     }
-    
+
     private void test(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -86,7 +86,7 @@ public class XSLTProcessorTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
- 
+
         final String xml
             = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n"
             + "<catalog>\n"
@@ -116,7 +116,7 @@ public class XSLTProcessorTest extends WebTestCase {
             + "  </html>\n"
             + "  </xsl:template>\n"
             + "</xsl:stylesheet>";
-        
+
         final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient(browserVersion);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));

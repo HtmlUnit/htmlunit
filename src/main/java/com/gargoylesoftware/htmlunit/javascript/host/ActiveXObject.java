@@ -85,7 +85,7 @@ public class ActiveXObject extends SimpleScriptable {
         if (isXMLDocument(activeXName)) {
             return buildXMLDocument(getWindow(ctorObj).getWebWindow());
         }
-        
+
         if (isXMLTemplate(activeXName)) {
             return buildXSLTemplate();
         }
@@ -192,7 +192,7 @@ public class ActiveXObject extends SimpleScriptable {
         addProperty(document, "parseError", true, false);
         addProperty(document, "preserveWhiteSpace", true, true);
         addProperty(document, "xml", true, false);
-        
+
         // the functions
         addFunction(document, "load");
         addFunction(document, "loadXML");
@@ -223,7 +223,7 @@ public class ActiveXObject extends SimpleScriptable {
             final String jsMethodName) {
         addFunction(scriptable, jsMethodName, "jsxFunction_" + jsMethodName);
     }
-    
+
     private static void addFunction(final SimpleScriptable scriptable,
             final String jsMethodName, final String javaMethodName) {
         final Method javaFunction = getMethod(scriptable.getClass(), javaMethodName);
@@ -243,7 +243,7 @@ public class ActiveXObject extends SimpleScriptable {
         }
         addProperty(scriptable, propertyName, getterName, setterName);
     }
-    
+
     static void addProperty(final SimpleScriptable scriptable, final String propertyName,
             final String getterName, final String setterName) {
         scriptable.defineProperty(propertyName, null,

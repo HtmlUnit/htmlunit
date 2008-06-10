@@ -37,7 +37,7 @@ public final class InputElementFactory implements IElementFactory {
 
     /** The singleton instance. */
     public static final InputElementFactory instance = new InputElementFactory();
-    
+
     private final transient Log mainLog_ = LogFactory.getLog(getClass());
 
     /** Private singleton constructor. */
@@ -58,7 +58,7 @@ public final class InputElementFactory implements IElementFactory {
             final Attributes attributes) {
         return createElementNS(page, null, tagName, attributes);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -69,7 +69,7 @@ public final class InputElementFactory implements IElementFactory {
         if (attributeMap == null) {
             attributeMap = new HashMap<String, DomAttr>();
         }
-    
+
         String type = null;
         if (attributes != null) {
             type = attributes.getValue("type");

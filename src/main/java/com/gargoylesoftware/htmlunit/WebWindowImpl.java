@@ -140,14 +140,14 @@ public abstract class WebWindowImpl implements WebWindow {
             iter.remove();
         }
     }
-    
+
     /**
      * {@inheritDoc}
      */
     public String getName() {
         return name_;
     }
-    
+
     /**
      * {@inheritDoc}
      */

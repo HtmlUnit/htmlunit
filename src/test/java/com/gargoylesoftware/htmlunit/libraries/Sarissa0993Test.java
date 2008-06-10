@@ -62,7 +62,7 @@ public class Sarissa0993Test extends WebTestCase {
 
     private static Server Server_;
     private static HtmlPage Page_;
-    
+
     /**
      * Returns the Sarissa version being tested.
      *
@@ -166,7 +166,7 @@ public class Sarissa0993Test extends WebTestCase {
                 final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/test/testsarissa.html";
                 Page_ = (HtmlPage) client.getPage(url);
                 ((HtmlButton) Page_.getFirstByXPath("//button")).click();
-                
+
                 // dump the result page
                 if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null) {
                     final File tmpDir = new File(System.getProperty("java.io.tmpdir"));

@@ -337,7 +337,7 @@ public class HTMLAnchorElement extends HTMLElement {
     public Object getDefaultValue(final Class hint) {
         final HtmlAnchor link = (HtmlAnchor) getHtmlElementOrDie();
         final String href = link.getHrefAttribute();
-        
+
         final String response;
         if (href == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
             response = ""; // for example for named anchors
@@ -362,10 +362,10 @@ public class HTMLAnchorElement extends HTMLElement {
                 return href;
             }
         }
-        
+
         return response;
     }
-    
+
     /**
      * Click this element. This simulates the action of the user clicking with the mouse.
      * @throws IOException if this click triggers a page load that encounters problems

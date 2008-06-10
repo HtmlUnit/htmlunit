@@ -94,7 +94,7 @@ public class HTMLFormElement extends HTMLElement {
     public HTMLCollection jsxGet_elements() {
         if (elements_ == null) {
             final HtmlForm htmlForm = getHtmlForm();
-            
+
             elements_ = new HTMLCollection(this) {
                 private static final long serialVersionUID = -2554743215194459203L;
 
@@ -108,7 +108,7 @@ public class HTMLFormElement extends HTMLElement {
             final String xpath = ".//*[(name() = 'input' or name() = 'button'"
                     + " or name() = 'select' or name() = 'textarea')]";
             elements_.init(htmlForm, xpath);
-            
+
         }
         return elements_;
     }
@@ -221,7 +221,7 @@ public class HTMLFormElement extends HTMLElement {
     public void jsxFunction_submit() throws IOException {
         getHtmlForm().submit((SubmittableElement) null);
     }
-    
+
     /**
      * Resets this form.
      */

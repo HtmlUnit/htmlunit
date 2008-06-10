@@ -92,7 +92,7 @@ public class HtmlOptionTest extends WebTestCase {
         assertEquals("option1", option1.getValueAttribute());
         assertEquals("Number Two", option2.getValueAttribute());
     }
-    
+
     /**
      * @throws Exception if the test fails
      */

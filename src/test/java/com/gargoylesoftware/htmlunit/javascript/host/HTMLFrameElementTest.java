@@ -146,7 +146,7 @@ public class HTMLFrameElementTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
     /**
      * Regression test for bug 1236048.
      * See http://sourceforge.net/tracker/index.php?func=detail&aid=1236048&group_id=47038&atid=448266.

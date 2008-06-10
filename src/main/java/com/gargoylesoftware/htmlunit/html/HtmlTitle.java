@@ -47,7 +47,7 @@ public class HtmlTitle extends HtmlElement {
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
-    
+
     /**
      * Allows the text value for the title element be replaced.
      * {@inheritDoc}

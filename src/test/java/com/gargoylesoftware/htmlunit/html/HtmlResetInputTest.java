@@ -55,7 +55,7 @@ public class HtmlResetInputTest extends WebTestCase {
             + "<input type='reset' name='resetButton' value='pushme'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
-        
+
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
         final HtmlResetInput resetInput = (HtmlResetInput) form.getInputByName("resetButton");
 
@@ -112,7 +112,7 @@ public class HtmlResetInputTest extends WebTestCase {
         final HtmlPage page = loadPage(html, collectedAlerts);
         final HtmlResetInput input = (HtmlResetInput) page.getHtmlElementById("myInput");
         input.click();
-        
+
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

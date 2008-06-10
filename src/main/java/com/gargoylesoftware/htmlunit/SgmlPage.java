@@ -44,7 +44,7 @@ public abstract class SgmlPage extends DomNode implements Page {
         enclosingWindow_ = webWindow;
         webClient_ = webWindow.getWebClient();
     }
-    
+
     /**
      * {@inheritDoc}
      */

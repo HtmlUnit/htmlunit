@@ -57,7 +57,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /** The element to which this style belongs. */
     private HTMLElement jsElement_;
-    
+
     /** The wrapped CSSStyleDeclaration (if created from CSSStyleRule). */
     private org.w3c.dom.css.CSSStyleDeclaration styleDeclaration_;
 
@@ -4032,7 +4032,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
             setStyleAttribute(name, ((Integer) Math.round(d.floatValue())).toString());
         }
     }
-    
+
     /**
      * Sets the specified style attribute, if it's only an integer.
      * @param name the attribute name (camel-cased)
@@ -4114,7 +4114,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
     public void jsxFunction_setExpression(final String propertyName, final String expression, final String language) {
         // empty implementation
     }
-    
+
     /**
      * Removes the expression from the specified property.
      *
@@ -4348,7 +4348,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
             || token.equalsIgnoreCase("silver") || token.equalsIgnoreCase("teal")
             || token.equalsIgnoreCase("white") || token.equalsIgnoreCase("yellow");
     }
-    
+
     /**
      * Returns if the specified token is a border style.
      * @param token the token to check
@@ -4381,7 +4381,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
         if (token.endsWith("em") || token.endsWith("ex") || token.endsWith("px") || token.endsWith("in")
             || token.endsWith("cm") || token.endsWith("mm") || token.endsWith("pt") || token.endsWith("pc")
             || token.endsWith("%")) {
-            
+
             if (token.endsWith("%")) {
                 token = token.substring(0, token.length() - 1);
             }

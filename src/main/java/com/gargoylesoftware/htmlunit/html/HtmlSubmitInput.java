@@ -42,7 +42,7 @@ public class HtmlSubmitInput extends HtmlInput {
      * Value to use if no specified <tt>value</tt> attribute.
      */
     private static final String DEFAULT_VALUE = "Submit Query";
-    
+
     /**
      * Creates an instance.
      *

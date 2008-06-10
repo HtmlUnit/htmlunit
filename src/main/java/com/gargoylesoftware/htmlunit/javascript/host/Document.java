@@ -96,7 +96,7 @@ public class Document extends EventNode {
      * have a no-arg constructor.
      */
     private static final Map<String, Class< ? extends Event>> SUPPORTED_EVENT_TYPE_MAP;
-    
+
     private static final String[] EXECUTE_CMDS_IE_ARR = {
         "2D-Position", "AbsolutePosition", "BackColor", "BackgroundImageCache" /* Undocumented */,
         "BlockDirLTR", "BlockDirRTL", "Bold", "BrowseMode", "ClearAuthenticationCache", "Copy", "CreateBookmark",
@@ -881,7 +881,7 @@ public class Document extends EventNode {
         node.setDomNode(fragment);
         return getScriptableFor(fragment);
     }
-    
+
     /**
      * Creates a new HTML attribute with the specified name.
      *
@@ -948,7 +948,7 @@ public class Document extends EventNode {
     public BoxObject jsxFunction_getBoxObjectFor(final HTMLElement element) {
         return element.getBoxObject();
     }
-    
+
     /**
      * Returns the element with the specified ID, or <tt>null</tt> if that element could not be found.
      * @param id the ID to search for
@@ -1214,7 +1214,7 @@ public class Document extends EventNode {
     public Object jsxGet_frames() {
         return getWindow().jsxGet_frames();
     }
-    
+
     /**
      * Returns the implementation object of the current document.
      * @return implementation-specific object
@@ -1330,7 +1330,7 @@ public class Document extends EventNode {
         resolver.setPrototype(getPrototype(resolver.getClass()));
         return resolver;
     }
-    
+
     /**
      * Evaluates an XPath expression string and returns a result of the specified type if possible.
      * @param expression the XPath expression string to be parsed and evaluated
@@ -1379,7 +1379,7 @@ public class Document extends EventNode {
         if (!EXECUTE_CMDS_IE.contains(cmd)) {
             throw Context.reportRuntimeError("execCommand: invalid command >" + cmd + "<");
         }
-        
+
         getLog().warn("Nothing done for execCommand(" + cmd + ", ...) (feature not implemented)");
         return true;
     }

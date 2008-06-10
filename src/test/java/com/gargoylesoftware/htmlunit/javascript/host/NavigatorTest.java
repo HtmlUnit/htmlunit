@@ -251,7 +251,7 @@ public class NavigatorTest extends WebTestCase {
         final String[] expectedAlerts = {"Netscape"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
     /**
      * Test language property (only for Mozilla).
      * @throws Exception if the test fails

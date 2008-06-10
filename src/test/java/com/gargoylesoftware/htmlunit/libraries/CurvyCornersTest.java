@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class CurvyCornersTest extends WebTestCase {
 
     private static final String BASE_FILE_PATH = "curvyCorners/1.2.9-beta/";
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -81,7 +81,7 @@ public class CurvyCornersTest extends WebTestCase {
     public void demo2FF2() throws Exception {
         doTest("demo2.html", BrowserVersion.FIREFOX_2);
     }
-    
+
     private void doTest(final String fileName, final BrowserVersion version) throws Exception {
         final URL url = getClass().getClassLoader().getResource(BASE_FILE_PATH + fileName);
         assertNotNull(url);

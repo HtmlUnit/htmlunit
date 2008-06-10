@@ -703,7 +703,7 @@ public class HtmlFormTest extends WebTestCase {
             // Expected path.
         }
     }
-    
+
     /**
      * Test that {@link HtmlForm#getTextAreaByName(String)} returns
      * the first textarea with the given name.
@@ -720,14 +720,14 @@ public class HtmlFormTest extends WebTestCase {
             + "    <textarea id='ta2_1' name='ta2'>!</textarea>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
-    
+
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
-        
+
         Assert.assertEquals("First textarea with name 'ta1'", form.getHtmlElementById("ta1_1"),
             form.getTextAreaByName("ta1"));
         Assert.assertEquals("First textarea with name 'ta2'", form.getHtmlElementById("ta2_1"),
             form.getTextAreaByName("ta2"));
-        
+
         try {
             form.getTextAreaByName("ta3");
             fail("Expected ElementNotFoundException as there is no textarea with name 'ta3'");
@@ -753,14 +753,14 @@ public class HtmlFormTest extends WebTestCase {
             + "    <button id='b2_1' name='b2' value='!' type='button'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
-        
+
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
-        
+
         Assert.assertEquals("First button with name 'b1'", form.getHtmlElementById("b1_1"),
             form.getButtonByName("b1"));
         Assert.assertEquals("First button with name 'b2'", form.getHtmlElementById("b2_1"),
             form.getButtonByName("b2"));
-        
+
         try {
             form.getTextAreaByName("b3");
             fail("Expected ElementNotFoundException as there is no button with name 'b3'");
@@ -1173,7 +1173,7 @@ public class HtmlFormTest extends WebTestCase {
             + "<form action='" + URL_SECOND + "'>\n"
             + "  <input type='submit' name='mySubmit' onClick='document.forms[0].submit(); return false;'>\n"
             + "</form></body></html>";
-        
+
         final String secondContent = "<html><head><title>second</title></head></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();

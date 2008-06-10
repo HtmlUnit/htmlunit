@@ -30,7 +30,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Marc Guillemot
  */
 public interface HTMLParserListener {
-   
+
     /**
      * Simple implementation of {@link HTMLParserListener} logging the received warnings
      * and errors in the "com.gargoylesoftware.htmlunit.html.HTMLParserListener" log.<br/>
@@ -70,7 +70,7 @@ public interface HTMLParserListener {
      * @param key the key identifying the "type" of problem
      */
     void error(final String message, final URL url, final int line, final int column, final String key);
-    
+
     /**
      * Called when the HTML parser reports a warning.
      * @param message the description of the problem

@@ -61,7 +61,7 @@ public class HtmlScript extends HtmlElement {
 
     /** Not really used? */
     private static int EventHandlerId_;
-    
+
     private final transient Log mainLog_ = LogFactory.getLog(getClass());
 
     /**

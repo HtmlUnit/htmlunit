@@ -312,7 +312,7 @@ public final class HTMLParser {
         }
         return originalException;
     }
-    
+
     /**
      * The parser and DOM builder. This class subclasses Xerces's AbstractSAXParser and implements
      * the ContentHandler interface. Thus all parser APIs are kept private. The ContentHandler methods
@@ -345,7 +345,7 @@ public final class HTMLParser {
 
             currentNode_ = page;
             stack_.push(currentNode_);
-            
+
             final HTMLParserListener listener = page_.getWebClient().getHTMLParserListener();
             final boolean reportErrors;
             if (listener != null) {
@@ -438,7 +438,7 @@ public final class HTMLParser {
             if (oldBody != null) {
                 oldBody.quietlyRemoveAndMoveChildrenTo(newElement);
             }
-            
+
             if (tagLower.equals("body")) {
                 body_ = newElement;
             }
@@ -456,7 +456,7 @@ public final class HTMLParser {
             augmentations_ = augs;
             super.endElement(element, augs);
         }
-        
+
         /** @inheritDoc ContentHandler@endElement(String,String,String) */
         public void endElement(final String namespaceURI, final String localName, final String qName)
             throws SAXException {
@@ -557,7 +557,7 @@ public final class HTMLParser {
             final DomComment comment = new DomComment(page_, String.valueOf(ch, start, length));
             currentNode_.appendChild(comment);
         }
-        
+
         /** @inheritDoc LexicalHandler#endCDATA() */
         public void endCDATA() {
         }

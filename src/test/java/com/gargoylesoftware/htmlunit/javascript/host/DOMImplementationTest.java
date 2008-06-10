@@ -69,7 +69,7 @@ public class DOMImplementationTest extends WebTestCase {
 
         assertEquals(Boolean.toString(expected), collectedAlerts.get(0));
     }
-    
+
     /**
      * @throws Exception if the test fails
      */

@@ -55,12 +55,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  */
 public class HttpWebConnectionTest {
-    
+
     /**
      * The listener port for the web server.
      */
     public static final int PORT = 12345;
-    
+
     private Server server_;
 
     /**
@@ -265,7 +265,7 @@ public class HttpWebConnectionTest {
         final Context context = new Context();
         context.setContextPath("/");
         context.setResourceBase(resouceBase);
-        
+
         final ResourceHandler resourceHandler = new ResourceHandler();
         resourceHandler.setResourceBase(resouceBase);
 
@@ -273,7 +273,7 @@ public class HttpWebConnectionTest {
         handlers.setHandlers(new Handler[]{resourceHandler, context});
         server.setHandler(handlers);
         server.setHandler(resourceHandler);
-        
+
         server.start();
         return server;
     }
@@ -325,11 +325,10 @@ public class HttpWebConnectionTest {
         final WebAppContext context = new WebAppContext();
         context.setContextPath("/");
         context.setResourceBase(resouceBase);
-        
+
         for (final String pathSpec : servlets.keySet()) {
             final Class< ? extends Servlet> servlet = servlets.get(pathSpec);
             context.addServlet(servlet, pathSpec);
-            
         }
         final WebAppClassLoader loader = new WebAppClassLoader(context);
         if (classpath != null) {
@@ -409,7 +408,7 @@ public class HttpWebConnectionTest {
         final FilePart part = new HttpWebConnection(new WebClient()).buildFilePart(pair, encoding);
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         part.send(baos);
-        
+
         final String expected = "------------------314159265358979323846\r\n"
             + "Content-Disposition: form-data; name=\"myFile\"; filename=\"doesnt_exist.txt\"\r\n"
             + "Content-Type: text/plain\r\n"

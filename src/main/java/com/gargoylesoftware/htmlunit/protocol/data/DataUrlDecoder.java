@@ -85,7 +85,7 @@ public class DataUrlDecoder {
         else {
             data = URLCodec.decodeUrl(data);
         }
-        
+
         return new DataUrlDecoder(data, mediaType, charset);
     }
 

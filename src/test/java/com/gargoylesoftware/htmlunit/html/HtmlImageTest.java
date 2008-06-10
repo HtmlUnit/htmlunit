@@ -58,9 +58,9 @@ public class HtmlImageTest extends WebTestCase {
             + "<img id='img4' src='foo.png'>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
-        
+
         final HtmlImage img = (HtmlImage) page.getHtmlElementById(imgId);
-        
+
         final Page page2 = img.click();
         Assert.assertEquals("same page after click", samePage, (page == page2));
         if (!samePage) {
@@ -99,9 +99,9 @@ public class HtmlImageTest extends WebTestCase {
             + "</map>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
-        
+
         final HtmlImage img = (HtmlImage) page.getHtmlElementById("myImg");
-        
+
         final Page page2 = img.click(x, y);
         final URL url = page2.getWebResponse().getUrl();
         assertTrue(url.toExternalForm(), url.toExternalForm().endsWith(urlSuffix));
@@ -126,9 +126,9 @@ public class HtmlImageTest extends WebTestCase {
             + "</map>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
-        
+
         final HtmlImage img = (HtmlImage) page.getHtmlElementById("myImg");
-        
+
         img.click(0, 0);
     }
 

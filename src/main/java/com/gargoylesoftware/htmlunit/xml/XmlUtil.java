@@ -66,7 +66,7 @@ public final class XmlUtil {
         public void error(final SAXParseException exception) throws SAXException {
             // Does nothing as we're not interested in.
         }
-        
+
         /**
          * Does nothing as we're not interested in.
          * @see org.xml.sax.ErrorHandler#fatalError(org.xml.sax.SAXParseException)

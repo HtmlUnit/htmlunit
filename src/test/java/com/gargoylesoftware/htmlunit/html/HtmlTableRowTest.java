@@ -60,7 +60,7 @@ public class HtmlTableRowTest extends WebTestCase {
     @Before
     public void setUp() throws Exception {
         page_ = loadPage(htmlContent);
-        
+
         table_ = (HtmlTable) page_.getHtmlElementById("table");
         tbody_ = (HtmlTableBody) table_.getFirstChild();
         row_ = table_.getRow(0);

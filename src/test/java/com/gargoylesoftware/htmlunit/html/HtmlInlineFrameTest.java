@@ -129,21 +129,21 @@ public class HtmlInlineFrameTest extends WebTestCase {
         final String secondContent = "<html><head><title>Second</title></head>\n"
             + "<body><iframe id='iframe2_1' src='" + URL_FIRST + "'></iframe></body></html>";
         final WebClient client = new WebClient();
-    
+
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
-    
+
         client.setWebConnection(webConnection);
-    
+
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         assertEquals("First", page.getTitleText());
-    
+
         final HtmlInlineFrame iframe = (HtmlInlineFrame) page.getHtmlElementById("iframe1");
         assertEquals(URL_SECOND.toExternalForm(), iframe.getSrcAttribute());
         final HtmlPage iframePage = (HtmlPage) iframe.getEnclosedPage();
         assertEquals("Second", iframePage.getTitleText());
-    
+
         // the nested frame should not have been loaded
         final HtmlInlineFrame iframeIn2 = (HtmlInlineFrame) iframePage.getHtmlElementById("iframe2_1");
         assertEquals(URL_FIRST.toExternalForm(), iframeIn2.getSrcAttribute());

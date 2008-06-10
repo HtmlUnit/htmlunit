@@ -36,7 +36,7 @@ public final class ImmediateRefreshHandlerTest extends WebTestCase {
     public void testRefreshSamePageAfterPost() throws Exception {
         final WebClient client = getWebClient();
         client.setRefreshHandler(new ImmediateRefreshHandler());
-        
+
         // connection will return a page with <meta ... refresh> for the first call
         // and the same page without it for the other calls
         final MockWebConnection webConnection = new MockWebConnection(client) {
@@ -62,7 +62,7 @@ public final class ImmediateRefreshHandlerTest extends WebTestCase {
             }
         };
         client.setWebConnection(webConnection);
-        
+
         final WebRequestSettings settings = new WebRequestSettings(URL_GARGOYLE);
         settings.setHttpMethod(HttpMethod.POST);
         client.getPage(settings);

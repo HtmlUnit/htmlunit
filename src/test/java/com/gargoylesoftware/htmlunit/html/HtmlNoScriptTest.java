@@ -48,7 +48,7 @@ public class HtmlNoScriptTest extends WebTestCase {
             + "    <input type='text' id='second' name='button'/>\n"
             + "    </noscript>\n"
             + "</body></html>";
-        
+
         final String[] expectedAlerts = {"null"};
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(htmlContent, collectedAlerts);
@@ -73,7 +73,7 @@ public class HtmlNoScriptTest extends WebTestCase {
             + "        <input type='text' name='button'/>\n"
             + "      </noscript></div>\n"
             + "</body></html>";
-        
+
         final String[] expectedAlerts = {"0"};
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(htmlContent, collectedAlerts);
@@ -97,7 +97,7 @@ public class HtmlNoScriptTest extends WebTestCase {
             + "</noscript>\n"
             + "</head><body>\n"
             + "</body></html>";
-        
+
         final String[] expectedAlerts = {"1"};
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(htmlContent, collectedAlerts);
@@ -119,11 +119,11 @@ public class HtmlNoScriptTest extends WebTestCase {
             + "  <input type='submit'>\n"
             + "</form>\n"
             + "</body></html>";
-        
+
         final HtmlPage firstPage = loadPage(htmlContent);
         final HtmlForm form = firstPage.getForms().get(0);
         final HtmlPage secondPage = (HtmlPage) form.submit((SubmittableElement) null);
-        
+
         final MockWebConnection mockWebConnection = getMockConnection(secondPage);
         assertEquals(1, mockWebConnection.getLastParameters().size());
         assertTrue(secondPage.asXml().indexOf("__webpage_no_js__") > -1);

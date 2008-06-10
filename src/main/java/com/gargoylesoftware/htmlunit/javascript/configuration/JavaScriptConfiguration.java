@@ -444,7 +444,7 @@ public final class JavaScriptConfiguration {
         final ClassConfiguration myConfig = configuration_.get(classname);
         return config.equals(myConfig);
     }
-    
+
     /**
      * @return the browser
      */
@@ -577,7 +577,7 @@ public final class JavaScriptConfiguration {
         }
         return null;
     }
-    
+
     /**
      * Gets the method that implements the setter for the given property based upon the class object.
      * @param clazz the actual class to use as reference

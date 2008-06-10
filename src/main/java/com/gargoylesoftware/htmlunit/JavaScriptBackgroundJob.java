@@ -33,7 +33,7 @@ class JavaScriptBackgroundJob implements Runnable {
     private Log getLog() {
         return LogFactory.getLog(getClass());
     }
-    
+
     private final Window window_;
     private final int timeout_;
     private final String script_;
@@ -50,7 +50,7 @@ class JavaScriptBackgroundJob implements Runnable {
         function_ = null;
         label_ = label;
     }
-    
+
     JavaScriptBackgroundJob(final Window window, final int timeout, final Function function,
             final boolean loopForever, final String label) {
         window_ = window;
@@ -60,7 +60,7 @@ class JavaScriptBackgroundJob implements Runnable {
         function_ = function;
         label_ = label;
     }
-    
+
     public void run() {
         final Page page = window_.getWebWindow().getEnclosedPage();
         try {

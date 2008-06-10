@@ -465,13 +465,13 @@ public class HtmlPageTest extends WebTestCase {
             }
         };
         webClient.setIncorrectnessListener(listener);
-        
+
         final MockWebConnection webConnection = new MockWebConnection(webClient);
         webClient.setWebConnection(webConnection);
         webConnection.setDefaultResponse(html);
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         page.getAnchors().get(0).click();
-        
+
         final String[] expectedIncorrectness = {"Multiple 'base' detected, only the first is used."};
         assertEquals(expectedIncorrectness, collectedIncorrectness);
     }
@@ -498,14 +498,14 @@ public class HtmlPageTest extends WebTestCase {
             }
         };
         webClient.setIncorrectnessListener(listener);
-        
+
         final MockWebConnection webConnection = new MockWebConnection(webClient);
         webClient.setWebConnection(webConnection);
         webConnection.setDefaultResponse(html);
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         final HtmlAnchor anchor = page.getAnchors().get(0);
         final HtmlPage secondPage = (HtmlPage) anchor.click();
-        
+
         final String[] expectedIncorrectness = {
             "Element 'base' must appear in <head>, it is ignored."
         };
@@ -1070,7 +1070,7 @@ public class HtmlPageTest extends WebTestCase {
         xml = xml.substring(prefix.length());
         assertEquals(htmlContent, xml.replaceAll("\\s", ""));
     }
-        
+
     /**
      * Tests that the generated XML is valid as HTML code too.
      * @exception Exception If the test fails
@@ -1131,7 +1131,7 @@ public class HtmlPageTest extends WebTestCase {
 
         final WebClient client = new WebClient(BrowserVersion.getDefault());
         final MockWebConnection webConnection = new MockWebConnection(client);
-        
+
         webConnection.setDefaultResponse(TextUtil.stringToByteArray(html, "UTF-8"), 200, "OK", "text/html");
         client.setWebConnection(webConnection);
 
@@ -1183,16 +1183,16 @@ public class HtmlPageTest extends WebTestCase {
         assertEquals(2, page.getHtmlElementsByIdAndOrName("b").size());
         assertEquals(1, page.getHtmlElementsByIdAndOrName("c").size());
         assertEquals(1, page.getHtmlElementsByIdAndOrName("d").size());
-        
+
         final HtmlElement a = page.getHtmlElementsByIdAndOrName("a").get(0);
         a.remove();
         assertEquals(0, page.getHtmlElementsByIdAndOrName("a").size());
-        
+
         final HtmlElement b1 = page.getHtmlElementsByIdAndOrName("b").get(0);
         b1.appendChild(a);
         assertEquals(1, page.getHtmlElementsByIdAndOrName("a").size());
     }
-    
+
     /**
      * Regression test for bug 1233519.
      * @exception Exception If the test fails
@@ -1270,7 +1270,7 @@ public class HtmlPageTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
-        
+
         final Cookie[] cookies = page.getWebClient().getWebConnection().getState().getCookies();
         assertEquals(1, cookies.length);
         final Cookie cookie = cookies[0];
@@ -1279,7 +1279,7 @@ public class HtmlPageTest extends WebTestCase {
         assertEquals("none", cookie.getValue());
         assertEquals("/", cookie.getPath());
     }
-    
+
     /**
      * Regression test for bug 1658273.
      * @throws Exception if the test fails
@@ -1294,7 +1294,7 @@ public class HtmlPageTest extends WebTestCase {
             + "alert(document.getElementById('id3').className);\n"
             + "</script>\n"
             + "</head><body></body></html>";
-        
+
         final String[] expectedAlerts = {"cl2", "cl1"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
@@ -1303,7 +1303,7 @@ public class HtmlPageTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
     /**
      * Test for bug 1714767.
      * @throws Exception if the test fails
@@ -1319,7 +1319,7 @@ public class HtmlPageTest extends WebTestCase {
             = "<html><body>\n"
             + "<iframe id='myIFrame' src='" + url + "'></iframe>\n"
             + "</body></html>";
-    
+
         final String secondContent
             = "<html><body></body></html>";
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
@@ -1329,10 +1329,10 @@ public class HtmlPageTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
 
         client.setWebConnection(webConnection);
-    
+
         final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
         final HtmlInlineFrame iframe = (HtmlInlineFrame) firstPage.getHtmlElementById("myIFrame");
-        
+
         assertEquals(URL_SECOND, iframe.getEnclosedPage().getWebResponse().getUrl());
     }
 
@@ -1343,7 +1343,7 @@ public class HtmlPageTest extends WebTestCase {
     public void testMetaTagWithEmptyURL() throws Exception {
         final WebClient client = new WebClient();
         client.setRefreshHandler(new ImmediateRefreshHandler());
-        
+
         // connection will return a page with <meta ... refresh> for the first call
         // and the same page without it for the other calls
         final MockWebConnection webConnection = new MockWebConnection(client) {
@@ -1367,7 +1367,7 @@ public class HtmlPageTest extends WebTestCase {
             }
         };
         client.setWebConnection(webConnection);
-        
+
         final WebRequestSettings settings = new WebRequestSettings(URL_GARGOYLE);
         settings.setHttpMethod(HttpMethod.POST);
         client.getPage(settings);
@@ -1394,11 +1394,11 @@ public class HtmlPageTest extends WebTestCase {
         final ByteArrayOutputStream byteOS = new ByteArrayOutputStream();
         final ObjectOutputStream objectOS = new ObjectOutputStream(byteOS);
         objectOS.writeObject(page1);
-        
+
         final ByteArrayInputStream byteIS = new ByteArrayInputStream(byteOS.toByteArray());
         final ObjectInputStream objectIS = new ObjectInputStream(byteIS);
         final HtmlPage page2 = (HtmlPage) objectIS.readObject();
-        
+
         final Iterator<HtmlElement> iterator1 = page1.getAllHtmlChildElements().iterator();
         final Iterator<HtmlElement> iterator2 = page2.getAllHtmlChildElements().iterator();
         while (iterator1.hasNext()) {
@@ -1421,7 +1421,7 @@ public class HtmlPageTest extends WebTestCase {
             + "<body>"
             + "<div id='id1' class='cl1'><div id='id2' class='cl2'></div></div>"
             + "</body></html>";
-        
+
         final HtmlPage page = loadPage(content);
         final HtmlElement id1 = (HtmlElement) page.getDocumentElement().getLastChild().getLastChild();
         assertEquals("id1", id1.getId());
@@ -1456,7 +1456,7 @@ public class HtmlPageTest extends WebTestCase {
             + "<body>\n"
             + "<div id='id1' class='cl1'><div id='id2' class='cl2'></div></div>\n"
             + "</body></html>";
-        
+
         final HtmlPage page = loadPage(content);
         final HtmlPage clone = page.cloneNode(true);
         assertTrue(page != clone);
@@ -1489,7 +1489,7 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlAttributeChangeListenerTestImpl listenerImpl = new HtmlAttributeChangeListenerTestImpl();
         page.addHtmlAttributeChangeListener(listenerImpl);
         final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
-        
+
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
     }
@@ -1512,13 +1512,13 @@ public class HtmlPageTest extends WebTestCase {
             + "<p id='p1' title='myTitle'></p>\n"
             + "<input id='myButton' type='button' onclick='clickMe()'>\n"
             + "</body></html>";
-        
+
         final String[] expectedValues = {"attributeReplaced: p,title,myTitle"};
         final HtmlPage page = loadPage(htmlContent);
         final HtmlAttributeChangeListenerTestImpl listenerImpl = new HtmlAttributeChangeListenerTestImpl();
         page.addHtmlAttributeChangeListener(listenerImpl);
         final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
-        
+
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
     }
@@ -1541,13 +1541,13 @@ public class HtmlPageTest extends WebTestCase {
             + "<p id='p1' title='myTitle'></p>\n"
             + "<input id='myButton' type='button' onclick='clickMe()'>\n"
             + "</body></html>";
-        
+
         final String[] expectedValues = {"attributeRemoved: p,title,myTitle"};
         final HtmlPage page = loadPage(htmlContent);
         final HtmlAttributeChangeListenerTestImpl listenerImpl = new HtmlAttributeChangeListenerTestImpl();
         page.addHtmlAttributeChangeListener(listenerImpl);
         final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
-        
+
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
     }
@@ -1570,13 +1570,13 @@ public class HtmlPageTest extends WebTestCase {
             + "<p id='p1' title='myTitle'></p>\n"
             + "<input id='myButton' type='button' onclick='clickMe()'>\n"
             + "</body></html>";
-        
+
         final String[] expectedValues = {"attributeReplaced: p,title,myTitle"};
         final HtmlPage page = loadPage(htmlContent);
         final HtmlAttributeChangeListenerTestImpl listenerImpl = new HtmlAttributeChangeListenerTestImpl();
         page.addHtmlAttributeChangeListener(listenerImpl);
         final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
-        
+
         myButton.click();
         page.removeHtmlAttributeChangeListener(listenerImpl);
         myButton.click();
@@ -1735,7 +1735,7 @@ public class HtmlPageTest extends WebTestCase {
         final MockWebConnection conn = new MockWebConnection(client);
         conn.setResponse(URL_FIRST, htmlContent);
         client.setWebConnection(conn);
-        
+
         client.getPage(URL_FIRST);
         client.getPage(URL_FIRST);
 
@@ -1793,7 +1793,7 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         final HtmlAnchor anchor = page.getAnchors().get(0);
         final HtmlPage secondPage = (HtmlPage) anchor.click();
-        
+
         assertEquals(new String[] {expectedMessage}, collectedConfirms);
         assertEquals(expectedPageTitle, secondPage.getTitleText());
     }

@@ -62,7 +62,7 @@ public class IEConditionalCompilationTest extends WebTestCase {
         final String script = "/*@cc_on@if(@_jscript_version>=5){alert(@_jscript_version)}@end@*/";
         testScript(script);
     }
-    
+
     /**
      * @throws Exception if the test fails
      */

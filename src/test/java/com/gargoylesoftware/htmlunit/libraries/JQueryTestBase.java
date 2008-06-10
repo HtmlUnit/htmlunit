@@ -102,7 +102,7 @@ public abstract class JQueryTestBase extends WebTestCase {
 
         final HtmlPage page = (HtmlPage) client.getPage(url);
         page.getEnclosingWindow().getThreadManager().joinAll(2 * 60 * 1000);
-        
+
         // dump the result page if not OK
         if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null) {
             final File tmpDir = new File(System.getProperty("java.io.tmpdir"));

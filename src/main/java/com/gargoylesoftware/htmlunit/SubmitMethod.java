@@ -77,7 +77,7 @@ public final class SubmitMethod implements Serializable {
     private final String name_;
     private static final Map<String, SubmitMethod> methods_ =
         toMap(new SubmitMethod[] {OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE});
-    
+
     private static Map<String, SubmitMethod> toMap(final SubmitMethod[] methods) {
         final HashMap<String, SubmitMethod> map = new HashMap<String, SubmitMethod>(methods.length);
         for (final SubmitMethod method : methods) {
@@ -109,7 +109,7 @@ public final class SubmitMethod implements Serializable {
         if (method == null) {
             throw new IllegalArgumentException("No method found for [" + name + "]");
         }
-        
+
         return method;
     }
 

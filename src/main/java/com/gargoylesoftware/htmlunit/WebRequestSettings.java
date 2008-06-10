@@ -232,14 +232,14 @@ public class WebRequestSettings implements Serializable {
     public void setSubmitMethod(final SubmitMethod submitMethod) {
         setHttpMethod(HttpMethod.valueOf(submitMethod.getName().toUpperCase()));
     }
-    
+
     /**
      * @param submitMethod the submitMethod to set
      */
     public void setHttpMethod(final HttpMethod submitMethod) {
         httpMethod_ = submitMethod;
     }
-    
+
     /**
      * @return the additionalHeaders
      */
@@ -269,7 +269,7 @@ public class WebRequestSettings implements Serializable {
     public CredentialsProvider getCredentialsProvider() {
         return credentialsProvider_;
     }
-    
+
     /**
      * @param credentialsProvider the credentialProvider to set
      */

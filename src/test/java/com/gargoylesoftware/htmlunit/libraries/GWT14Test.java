@@ -110,7 +110,7 @@ public class GWT14Test extends WebTestCase {
         map.put("userID", "123");
         map.put("lastLogOn", "2/2/2006");
         i18nDictionary(page, map);
-        
+
         Locale.setDefault(locale);
     }
 
@@ -122,7 +122,7 @@ public class GWT14Test extends WebTestCase {
     public void i18n_fr() throws Exception {
         final Locale locale = Locale.getDefault();
         Locale.setDefault(Locale.US);
-        
+
         server_ = HttpWebConnectionTest.startWebServer("src/test/resources/gwt/" + getDirectory() + "/I18N");
         final WebClient client = getWebClient();
 
@@ -161,7 +161,7 @@ public class GWT14Test extends WebTestCase {
         map.put("userID", "123");
         map.put("lastLogOn", "2/2/2006");
         i18nDictionary(page, map);
-        
+
         Locale.setDefault(locale);
     }
 
@@ -344,7 +344,7 @@ public class GWT14Test extends WebTestCase {
     public void dynaTable() throws Exception {
         server_ = HttpWebConnectionTest.startWebServer("src/test/resources/gwt/" + getDirectory() + "/DynaTable",
                 new String[] {"src/test/resources/gwt/" + getDirectory() + "/gwt-servlet.jar"});
-        
+
         final WebClient client = getWebClient();
 
         final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/DynaTable.html";

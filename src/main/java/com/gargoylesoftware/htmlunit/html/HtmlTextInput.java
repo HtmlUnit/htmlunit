@@ -36,7 +36,7 @@ public class HtmlTextInput extends HtmlInput {
     private boolean preventDefault_;
 
     private int selectionStart_;
-    
+
     private int selectionEnd_;
 
     /**
@@ -64,7 +64,7 @@ public class HtmlTextInput extends HtmlInput {
         preventDefault_ = false;
         return super.type(c, shiftKey, ctrlKey, altKey);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -75,7 +75,7 @@ public class HtmlTextInput extends HtmlInput {
             setValueAttribute(getValueAttribute() + c);
         }
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -103,7 +103,7 @@ public class HtmlTextInput extends HtmlInput {
         }
         return text;
     }
-    
+
     /**
      * Returns the selected text's start position (Firefox only).
      * @return the start position >= 0
@@ -129,7 +129,7 @@ public class HtmlTextInput extends HtmlInput {
         }
         this.selectionStart_ = selectionStart;
     }
-    
+
     /**
      * Returns the selected text's end position (Firefox only).
      * @return the end position >= 0
@@ -137,7 +137,7 @@ public class HtmlTextInput extends HtmlInput {
     public int getSelectionEnd() {
         return selectionEnd_;
     }
- 
+
     /**
      * Sets the selection end to the specified position (Firefox only).
      * @param selectionEnd the end position of the text >= 0

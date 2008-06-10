@@ -1044,7 +1044,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
         final byte[] data = webResponse.getResponseBody();
         final String scriptCode = EncodingUtil.getString(data, 0, data.length, scriptEncoding);
-        
+
         final Script script = javaScriptEngine.compile(this, scriptCode, url.toExternalForm(), 1);
         javaScriptEngine.cacheScript(webResponse, script);
         return script;
@@ -1183,7 +1183,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         }
         return true;
     }
-    
+
     /**
      * If a refresh has been specified either through a meta tag or an HTTP
      * response header, then perform that refresh.
@@ -1604,7 +1604,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         }
         return false;
     }
-    
+
     private void addElement(final Map<String, List<HtmlElement>> map, final HtmlElement element,
             final String attribute, final boolean recurse) {
         final String value = element.getAttributeValue(attribute);
@@ -1791,7 +1791,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         if (elementWithFocus_ != null) {
             elementWithFocus_.fireEvent(Event.TYPE_BLUR);
         }
-        
+
         elementWithFocus_ = newElement;
 
         if (newElement != null) {
@@ -1942,7 +1942,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             }
         }
     }
-    
+
     /**
      * Notifies all registered listeners for the given event to add an attribute.
      * @param event the event to fire
@@ -1968,7 +1968,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             }
         }
     }
-    
+
     /**
      * Notifies all registered listeners for the given event to remove an attribute.
      * @param event the event to fire

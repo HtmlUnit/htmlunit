@@ -314,7 +314,7 @@ public class HttpWebConnection extends WebConnectionImpl {
         };
         // Firefox and IE seem not to specify a charset for a file part
         part.setCharSet(null);
-        
+
         return part;
     }
 
@@ -324,31 +324,31 @@ public class HttpWebConnection extends WebConnectionImpl {
             case GET:
                 method = new GetMethod(path);
                 break;
-                
+
             case POST:
                 method = new PostMethod(path);
                 break;
-                
+
             case PUT:
                 method = new PutMethod(path);
                 break;
-                
+
             case DELETE:
                 method = new DeleteMethod(path);
                 break;
-                
+
             case OPTIONS:
                 method = new OptionsMethod(path);
                 break;
-                
+
             case HEAD:
                 method = new HeadMethod(path);
                 break;
-                
+
             case TRACE:
                 method = new TraceMethod(path);
                 break;
-                
+
             default:
                 throw new IllegalStateException("Submit method not yet supported: " + submitMethod);
         }
@@ -383,7 +383,7 @@ public class HttpWebConnection extends WebConnectionImpl {
 
         return httpClient_;
     }
-    
+
     /**
      * Returns the timeout to use for socket and connection timeouts for HttpConnectionManager.
      * is overridden to 0 by StreamingWebConnection which keeps reading after a timeout and

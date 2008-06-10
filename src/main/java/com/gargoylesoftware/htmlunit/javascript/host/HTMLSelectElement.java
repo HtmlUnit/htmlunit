@@ -86,7 +86,7 @@ public class HTMLSelectElement extends FormField {
             add(newOptionObject, arg2);
         }
     }
-    
+
     /**
      * Adds a new item to the list (optionally) at the specified index in IE way.
      * @param newOptionObject the DomNode to insert
@@ -107,7 +107,7 @@ public class HTMLSelectElement extends FormField {
                 beforeOption = select.getOption(intIndex);
             }
         }
-        
+
         addBefore(newOptionObject, beforeOption);
     }
 
@@ -129,7 +129,7 @@ public class HTMLSelectElement extends FormField {
         }
         addBefore(newOptionObject, beforeOption);
     }
-    
+
     /**
      * Adds the option (and create the associated DOM node if needed) before the specified one
      * or at the end if the specified one in null.
@@ -314,7 +314,7 @@ public class HTMLSelectElement extends FormField {
         }
         return size;
     }
-    
+
     /**
      * Sets the <tt>size</tt> attribute.
      * @param size the <tt>size</tt> attribute

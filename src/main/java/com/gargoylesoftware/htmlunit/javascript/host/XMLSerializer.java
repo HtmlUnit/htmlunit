@@ -91,7 +91,7 @@ public class XMLSerializer extends SimpleScriptable {
                     break;
 
                 default:
-                        
+
             }
         }
         if (!startTagClosed) {

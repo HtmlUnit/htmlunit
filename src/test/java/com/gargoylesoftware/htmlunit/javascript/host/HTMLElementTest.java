@@ -96,7 +96,7 @@ public class HTMLElementTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
-        
+
     /**
      * @throws Exception on test failure
      */
@@ -1874,7 +1874,7 @@ public class HTMLElementTest extends WebTestCase {
             + "  <div id='div1'/>\n"
             + "  <div id='div2'/>\n"
             + "</body></html>";
-        
+
         final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));

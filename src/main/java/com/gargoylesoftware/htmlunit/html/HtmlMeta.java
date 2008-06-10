@@ -49,7 +49,7 @@ public class HtmlMeta extends HtmlElement {
     HtmlMeta(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
-        
+
         if ("set-cookie".equalsIgnoreCase(getHttpEquivAttribute())) {
             performSetCookie();
         }

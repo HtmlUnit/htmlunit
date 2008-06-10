@@ -78,9 +78,9 @@ public abstract class WebTestCase {
         = "com.gargoylesoftware.htmlunit.WebTestCase.GenerateTestpages";
 
     private BrowserVersion browserVersion_;
-    
+
     private String[] expectedAlerts_;
-    
+
     static {
         try {
             URL_FIRST = new URL("http://first");
@@ -539,7 +539,7 @@ public abstract class WebTestCase {
     protected void testHTMLFile(final String fileName) throws Exception {
         final String resourcePath = getClass().getPackage().getName().replace('.', '/') + '/' + fileName;
         final URL url = getClass().getClassLoader().getResource(resourcePath);
-        
+
         final Map<String, BrowserVersion> testedBrowser = new HashMap<String, BrowserVersion>();
         testedBrowser.put("FIREFOX_2", BrowserVersion.FIREFOX_2);
         testedBrowser.put("INTERNET_EXPLORER_6_0", BrowserVersion.INTERNET_EXPLORER_6_0);
@@ -549,15 +549,15 @@ public abstract class WebTestCase {
             final BrowserVersion browserVersion = entry.getValue();
 
             final WebClient client = new WebClient(browserVersion);
-        
+
             final HtmlPage page = (HtmlPage) client.getPage(url);
             final HtmlElement want = page.getHtmlElementById(browserKey);
-            
+
             final HtmlElement got = page.getHtmlElementById("log");
-            
+
             final List<String> expected = readChildElementsText(want);
             final List<String> actual = readChildElementsText(got);
-            
+
             Assert.assertEquals(expected, actual);
         }
     }
@@ -569,11 +569,11 @@ public abstract class WebTestCase {
         }
         return list;
     }
-    
+
     void setBrowserVersion(final BrowserVersion browserVersion) {
         browserVersion_ = browserVersion;
     }
-    
+
     /**
      * Returns a newly created WebClient with the current {@link BrowserVersion}.
      * @return a newly created WebClient with the current {@link BrowserVersion}
@@ -581,7 +581,7 @@ public abstract class WebTestCase {
     protected final WebClient getWebClient() {
         return new WebClient(getBrowserVersion());
     }
-    
+
     /**
      * Returns the current {@link BrowserVersion}.
      * @return current {@link BrowserVersion}
@@ -616,9 +616,9 @@ public abstract class WebTestCase {
             throw new IllegalStateException("You must annotate the test method with '@Alerts(...)' "
                     + "and annotate the test class with '@RunWith(BrowserRunner.class)'");
         }
-        
+
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts_);
-        
+
         final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));

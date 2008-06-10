@@ -284,7 +284,7 @@ public final class HtmlInputTest extends WebTestCase {
             + "<input type='submit' name='button' value='foo'/>\n"
             + "<textarea name='t'></textarea>\n"
             + "</form></body></html>";
-        
+
         createTestPageForRealBrowserIfNeeded(content, new String[] {});
         loadPage(content);
     }

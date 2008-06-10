@@ -53,7 +53,7 @@ public class XMLDocument extends Document {
     private boolean async_ = true;
     private boolean preserveWhiteSpace_;
     private XMLDOMParseError parseError_;
-    
+
     /**
      * Creates a new instance. JavaScript objects must have a default constructor.
      */
@@ -177,7 +177,7 @@ public class XMLDocument extends Document {
         else {
             scriptable = super.makeScriptableFor(domNode);
         }
-        
+
         scriptable.setPrototype(getPrototype(scriptable.getClass()));
         scriptable.setParentScope(getParentScope());
         scriptable.setDomNode(domNode);
@@ -205,7 +205,7 @@ public class XMLDocument extends Document {
         }
         return getScriptableFor(documentElement);
     }
-    
+
     /**
      * Gets the JavaScript property "parseError" for the document.
      * @return the ParserError object for the document
@@ -245,7 +245,7 @@ public class XMLDocument extends Document {
     public void jsxSet_preserveWhiteSpace(final boolean preserveWhiteSpace) {
         this.preserveWhiteSpace_ = preserveWhiteSpace;
     }
-    
+
     /**
      * This method is used to set
      * <a href="http://msdn2.microsoft.com/en-us/library/ms766391.aspx">second-level properties</a>

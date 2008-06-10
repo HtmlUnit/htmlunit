@@ -215,7 +215,7 @@ public class ScriptableWrapper extends ScriptableObject {
     public String getClassName() {
         return jsClassName_;
     }
-    
+
     /**
      * Gets the java object made availabe to JavaScript through this wrapper.
      * @return the wrapped object

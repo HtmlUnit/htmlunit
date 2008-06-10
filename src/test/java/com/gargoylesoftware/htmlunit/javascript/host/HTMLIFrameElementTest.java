@@ -276,7 +276,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
               "<html><body><a href='2.html' target='theFrame'>page 2 in frame</a>\n"
             + "<iframe name='theFrame' src='1.html'></iframe>\n"
             + "</body></html>";
-        
+
         final String frame1 = "<html><head><script>window.foo = 123; alert(window.foo);</script></head></html>";
         final String frame2 = "<html><head><script>alert(window.foo);</script></head></html>";
         final String[] expected = {"123", "undefined"};

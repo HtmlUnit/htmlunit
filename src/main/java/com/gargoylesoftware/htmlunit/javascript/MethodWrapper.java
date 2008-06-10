@@ -98,16 +98,16 @@ public class MethodWrapper extends ScriptableObject implements Function {
             else {
                 throw buildInvalidCallException(thisObj);
             }
-            
+
         }
         else {
             throw buildInvalidCallException(thisObj);
         }
-        
+
         final Object jsResp = Context.javaToJS(javaResp, ScriptableObject.getTopLevelScope(scope));
         return jsResp;
     }
-    
+
     private RuntimeException buildInvalidCallException(final Scriptable thisObj) {
         return Context.reportRuntimeError("Function " + method_.getName()
                 + " called on incompatible object: " + thisObj);

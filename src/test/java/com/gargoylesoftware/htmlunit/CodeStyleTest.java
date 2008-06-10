@@ -318,7 +318,7 @@ public class CodeStyleTest {
         }
         addFailure("Incorrect year in Version.getCopyright()");
     }
-    
+
     /**
      * Verifies that no direct instantiation of WebClient from a test that runs with BrowserRunner.
      */

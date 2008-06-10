@@ -60,7 +60,7 @@ public class NicelyResynchronizingAjaxController extends AjaxController {
     @Override
     public boolean processSynchron(final HtmlPage page, final WebRequestSettings requestSettings,
             final boolean async) {
-        
+
         if (async && isInOriginalThread()) {
             getLog().info("Re-synchronized call to " + requestSettings.getUrl());
             return true;

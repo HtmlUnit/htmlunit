@@ -70,7 +70,7 @@ public class XMLElementTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        
+
         final String secondContent
             = "<books attrName=\"attrValue\">\n"
             + "  <book>\n"
@@ -118,7 +118,7 @@ public class XMLElementTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        
+
         final String xml
             = "<books>\n"
             + "  <book>\n"
@@ -163,7 +163,7 @@ public class XMLElementTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        
+
         final String xml = "<books><book><title>Immortality</title><author>John Smith</author></book></books>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -223,7 +223,7 @@ public class XMLElementTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "  <div id='lbl_SettingName'/>\n"
             + "</body></html>";
-        
+
         final String xml
             = "<responsexml>\n"
             + "  <control id='lbl_SettingName'>\n"
@@ -339,7 +339,7 @@ public class XMLElementTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        
+
         final String xml
             = "<books>\n"
             + "  <book>\n"
@@ -381,7 +381,7 @@ public class XMLElementTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        
+
         final String xml
             = "<books library=\"Hope\">\n"
             + "  <book>\n"

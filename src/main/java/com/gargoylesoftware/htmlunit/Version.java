@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  */
 public final class Version {
-    
+
     private Version() {
     }
 
@@ -45,7 +45,7 @@ public final class Version {
 
         System.out.println("Version: " + getProductVersion());
     }
-    
+
     private void runSanityCheck() throws Exception {
         final WebClient webClient = new WebClient();
         final HtmlPage page = (HtmlPage) webClient.getPage("http://htmlunit.sourceforge.net/index.html");
@@ -60,7 +60,7 @@ public final class Version {
     public static String getProductName() {
         return "HTMLUnit";
     }
-    
+
     /**
      * Returns the current implementation version.
      * @return the current implementation version
@@ -68,7 +68,7 @@ public final class Version {
     public static String getProductVersion() {
         return Version.class.getPackage().getImplementationVersion();
     }
-    
+
     /**
      * Returns the copyright notice.
      * @return the copyright notice

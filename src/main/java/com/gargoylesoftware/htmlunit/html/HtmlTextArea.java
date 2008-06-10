@@ -46,9 +46,9 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     private String defaultValue_;
 
     private int selectionStart_;
-    
+
     private int selectionEnd_;
-    
+
     private boolean preventDefault_;
 
     /**
@@ -311,7 +311,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
         }
         return text;
     }
-    
+
     /**
      * Returns the selected text's start position (Firefox only).
      * @return the start position >= 0
@@ -337,7 +337,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
         }
         this.selectionStart_ = selectionStart;
     }
-    
+
     /**
      * Returns the selected text's end position (Firefox only).
      * @return the end position >= 0
@@ -345,7 +345,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     public int getSelectionEnd() {
         return selectionEnd_;
     }
- 
+
     /**
      * Sets the selection end to the specified position (Firefox only).
      * @param selectionEnd the end position of the text >= 0
@@ -364,7 +364,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
         }
         this.selectionEnd_ = selectionEnd;
     }
-    
+
     /**
      * Recursively write the XML data for the node tree starting at <code>node</code>.
      *
@@ -393,7 +393,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
         preventDefault_ = false;
         return super.type(c, shiftKey, ctrlKey, altKey);
     }
-    
+
     /**
      * {@inheritDoc}
      */

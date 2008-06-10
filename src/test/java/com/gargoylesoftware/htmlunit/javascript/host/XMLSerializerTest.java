@@ -43,7 +43,7 @@ public class XMLSerializerTest extends WebTestCase {
             + "32<outer>10323232<inner>Some32Value</inner></outer>32</note>";
         test(BrowserVersion.FIREFOX_2, expectedStringFF);
     }
-    
+
     private void test(final BrowserVersion browserVersion, final String expectedString)
         throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
@@ -78,7 +78,7 @@ public class XMLSerializerTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
             + "</body></html>";
-        
+
         final HtmlPage page = loadPage(browserVersion, content, null);
         final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextArea");
         assertEquals(expectedString, textArea.getText());
@@ -103,7 +103,7 @@ public class XMLSerializerTest extends WebTestCase {
             + "</xsl:template>10</xsl:stylesheet>";
         testNameSpaces(BrowserVersion.FIREFOX_2, expectedStringFF);
     }
-    
+
     private void testNameSpaces(final BrowserVersion browserVersion, final String expectedString) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

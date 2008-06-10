@@ -509,7 +509,7 @@ public class HTMLTableElementTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
     /**
      * Tests string default values.
      * See https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1538136&group_id=47038.
@@ -558,7 +558,7 @@ public class HTMLTableElementTest extends WebTestCase {
             + "    </table>\n"
             + "  </body>\n"
             + "</html>";
-        
+
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();

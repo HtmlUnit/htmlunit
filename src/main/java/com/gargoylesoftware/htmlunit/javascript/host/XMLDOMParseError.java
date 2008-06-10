@@ -34,14 +34,14 @@ public class XMLDOMParseError extends SimpleScriptable {
     private String reason_ = "";
     private String srcText_ = "";
     private String url_ = "";
-    
+
     /**
      * JavaScript constructor.
      */
     public void jsConstructor() {
         // Empty.
     }
-    
+
     /**
      * Returns the error code of the last parse error.
      * @return the error code of the last parse error

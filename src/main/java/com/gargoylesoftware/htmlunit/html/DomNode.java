@@ -158,7 +158,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         startLineNumber_ = startLineNumber;
         startColumnNumber_ = startColumnNumber;
     }
-    
+
     /**
      * Sets the line and column numbers in the source page where the DOM node ends.
      *
@@ -211,7 +211,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     public Page getPage() {
         return page_;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -598,7 +598,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     protected boolean isTrimmedText() {
         return true;
     }
-    
+
     /**
      * Returns a textual representation of this element that represents what would
      * be visible to the user if this page was shown in a web browser. For example,
@@ -611,7 +611,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     public String asText() {
         String text = getChildrenAsText();
         text = reduceWhitespace(text);
-        
+
         if (isTrimmedText()) {
             text = text.trim();
         }
@@ -641,7 +641,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                     textBuffer.setLength(0);
                     previousNodeWasText = false;
                 }
-                
+
                 if (node.isRenderedVisible()) {
                     buffer.append(" ");
                     buffer.append(node.asText());
@@ -1025,7 +1025,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         if (page_ == newPage) {
             return; // nothing to do
         }
-        
+
         page_ = newPage;
         for (final DomNode node : getChildren()) {
             node.setPage(newPage);
@@ -1056,7 +1056,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     public void remove() {
         final DomNode exParent = parent_;
         basicRemove();
-        
+
         if (simpleGetPage() instanceof HtmlPage) {
             ((HtmlPage) getPage()).notifyNodeRemoved(this);
         }
@@ -1159,7 +1159,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     public Iterator<DomNode> getChildIterator() {
         return new ChildIterator();
     }
-    
+
     /**
      * An iterator over all children of this node.
      */
@@ -1309,7 +1309,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         if (getFirstChild() == null) {
             return;
         }
-        
+
         for (final Iterator<DomNode> it = getChildren().iterator(); it.hasNext();) {
             it.next().removeAllChildren();
             it.remove();

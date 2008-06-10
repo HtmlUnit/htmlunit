@@ -424,7 +424,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
         // By default this is no different than a click without coordinates.
         return click();
     }
-    
+
     /**
      * Executes the onchange script code for this element if this is appropriate.
      * This means that the element must have an onchange script, script must be enabled

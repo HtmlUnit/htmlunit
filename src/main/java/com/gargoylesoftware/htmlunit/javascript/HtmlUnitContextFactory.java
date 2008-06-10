@@ -39,7 +39,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
     private static final int INSTRUCTION_COUNT_THRESHOLD = 10000;
     private static long Timeout_;
     private static boolean DebuggerEnabled_;
-    
+
     private static final ThreadLocal<BrowserVersion> browserVersion_ = new ThreadLocal<BrowserVersion>();
 
     /**
@@ -168,7 +168,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
         tcx.startClock();
         return super.doTopCall(callable, cx, scope, thisObj, args);
     }
-    
+
     /**
      * {@inheritDoc}
      */

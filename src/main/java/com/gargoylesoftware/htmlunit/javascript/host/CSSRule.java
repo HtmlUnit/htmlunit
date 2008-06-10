@@ -112,7 +112,7 @@ public class CSSRule extends SimpleScriptable {
     public String jsxGet_cssText() {
         return rule_.getCssText();
     }
-    
+
     /**
      * Sets the parsable textual representation of the rule.
      * @param cssText the parsable textual representation of the rule
@@ -120,7 +120,7 @@ public class CSSRule extends SimpleScriptable {
     public void jsxSet_cssText(final String cssText) {
         rule_.setCssText(cssText);
     }
-    
+
     /**
      * Returns the style sheet that contains this rule.
      * @return the style sheet that contains this rule.

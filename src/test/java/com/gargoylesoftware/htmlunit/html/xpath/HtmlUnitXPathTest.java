@@ -242,11 +242,11 @@ public class HtmlUnitXPathTest extends WebTestCase {
         xpath(page, "//table/following::*", new Object[] {});
         xpath(page, "//td[@id='td11']/following::*", new Object[] {td12, tr2, td21, td22});
     }
-    
+
     private void xpath(final HtmlPage page, final String xpathExpr, final Object[] expectedNodes) throws Exception {
         assertEquals(Arrays.asList(expectedNodes), page.getByXPath(xpathExpr));
     }
-    
+
     /**
      * @throws Exception if test fails
      */

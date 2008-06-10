@@ -804,7 +804,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final DomNode currentNode = getDomNodeOrDie();
         final DomNode node;
         final boolean append;
-        
+
         // compute the where and how the new nodes should be added
         if (POSITION_AFTER_BEGIN.equalsIgnoreCase(where)) {
             if (currentNode.getFirstChild() == null) {
@@ -843,13 +843,13 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         else {
             throw Context.reportRuntimeError("Illegal position value: \"" + where + "\"");
         }
-        
+
         if (append) {
             return new Object[] {node, Boolean.TRUE};
         }
         return new Object[] {node, Boolean.FALSE};
     }
-    
+
     /**
      * Adds the specified behavior to this HTML element. Currently only supports
      * the following default IE behaviors:
@@ -1586,7 +1586,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * is just to prevent scripts that call that method from failing
      */
     public void jsxFunction_scrollIntoView() { }
-    
+
     /**
      * Retrieves an object that specifies the bounds of a collection of TextRectangle objects.
      * @return an object that specifies the bounds of a collection of TextRectangle objects
@@ -1619,7 +1619,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public void jsxFunction_setExpression(final String propertyName, final String expression, final String language) {
         //empty implementation
     }
-    
+
     /**
      * Removes the expression from the specified property.
      *
@@ -1700,7 +1700,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public final HtmlElement getHtmlElementOrNull() {
         return (HtmlElement) getDomNodeOrNull();
     }
-    
+
     /**
      * Remove focus from this element.
      */

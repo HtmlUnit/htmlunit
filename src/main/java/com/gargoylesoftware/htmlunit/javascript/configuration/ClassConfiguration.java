@@ -163,7 +163,7 @@ public final class ClassConfiguration {
     public Set<String> functionKeys() {
         return functionMap_.keySet();
     }
-    
+
     /**
      * Returns the constant list.
      * @return a list
@@ -334,7 +334,7 @@ public final class ClassConfiguration {
     public Method getJsConstructor() {
         return jsConstructor_;
     }
-    
+
     /**
      * @return the htmlClassname
      */
@@ -348,7 +348,7 @@ public final class ClassConfiguration {
     public boolean isJsObject() {
         return jsObject_;
     }
-    
+
     /**
      * Class used to contain the property information if the property is readable, writeable and the
      * methods that implement the get and set functions.

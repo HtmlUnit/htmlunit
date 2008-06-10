@@ -501,7 +501,7 @@ public class LocationTest extends WebTestCase {
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals(3, webClient.getWebWindows().size());
         assertEquals("Start content", ((HtmlPage) page.getFrameByName("content").getEnclosedPage()).getTitleText());
-        
+
         final HtmlPage menuPage = (HtmlPage) page.getFrameByName("menu").getEnclosedPage();
         ((ClickableElement) menuPage.getHtmlElementById("myLink")).click();
         assertEquals(3, webClient.getWebWindows().size());
@@ -548,7 +548,7 @@ public class LocationTest extends WebTestCase {
         final String[] expectedAlerts = {"foo"};
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(html, collectedAlerts);
-        
+
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

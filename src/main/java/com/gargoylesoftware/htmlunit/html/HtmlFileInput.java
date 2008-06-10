@@ -67,7 +67,7 @@ public class HtmlFileInput extends HtmlInput {
         if (StringUtils.isEmpty(value)) {
             return new NameValuePair[] {new KeyDataPair(getNameAttribute(), new File(""), null, null)};
         }
-        
+
         File file = null;
         // to tolerate file://
         if (value.startsWith("file:/")) {
@@ -81,7 +81,7 @@ public class HtmlFileInput extends HtmlInput {
                 // nothing here
             }
         }
-        
+
         if (file == null) {
             file = new File(value);
         }
@@ -127,7 +127,7 @@ public class HtmlFileInput extends HtmlInput {
     public void setContentType(final String contentType) {
         contentType_ = contentType;
     }
-    
+
     /**
      * Gets the content type that should be send together with the uploaded file.
      * @return the content type, <code>null</code> if this has not been explicitly set

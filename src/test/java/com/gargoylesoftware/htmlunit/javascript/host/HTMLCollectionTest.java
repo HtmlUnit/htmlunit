@@ -52,10 +52,10 @@ public class HTMLCollectionTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
-    
+
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
     /**
      * Test that <tt>toString</tt> is accessible.
      * @throws Exception if the test fails
@@ -79,7 +79,7 @@ public class HTMLCollectionTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
-    
+
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -113,7 +113,7 @@ public class HTMLCollectionTest extends WebTestCase {
         testChildNodes(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "1"});
         testChildNodes(BrowserVersion.FIREFOX_2, new String[] {"true", "1"});
     }
-    
+
     private void testChildNodes(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
         final String firstContent = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -130,7 +130,7 @@ public class HTMLCollectionTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        
+
         final String secondContent = "<title>Immortality</title>";
 
         final List<String> collectedAlerts = new ArrayList<String>();

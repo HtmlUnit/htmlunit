@@ -51,7 +51,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
      */
     public String preProcess(final HtmlPage htmlPage, final String sourceCode,
             final String sourceName, final HtmlElement htmlElement) {
-        
+
         final int startPos = sourceCode.indexOf("/*@cc_on");
         if (startPos == -1) {
             return sourceCode;
@@ -74,7 +74,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
         }
         return sb.toString();
     }
-    
+
     private String processConditionalCompilation(final String precompilationBody,
             final BrowserVersion browserVersion) {
         String body = processIfs(precompilationBody);
@@ -153,7 +153,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
     private String replaceOneVariable(final String variable, final BrowserVersion browserVersion) {
         final String[] varNaN = {"@_win16", "@_mac", "@_alpha", "@_mc680x0", "@_PowerPC", "@_debug", "@_fast"};
         final String[] varTrue = {"@_win32", "@_x86", "@_jscript"};
-        
+
         if (ArrayUtils.contains(varTrue, variable)) {
             return "true";
         }

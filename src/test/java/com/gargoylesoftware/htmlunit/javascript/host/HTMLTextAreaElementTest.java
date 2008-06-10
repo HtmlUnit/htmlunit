@@ -61,7 +61,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
         final String[] expectedAlerts = {"1234", "PoohBear"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -155,7 +155,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
         testSelection(3, 10, BrowserVersion.INTERNET_EXPLORER_6_0,
                 new String[] {"undefined,undefined", "3,undefined", "3,10"});
         testSelection(3, 10, BrowserVersion.FIREFOX_2, new String[] {"11,11", "3,11", "3,10"});
-        
+
         testSelection(-3, 15, BrowserVersion.INTERNET_EXPLORER_6_0,
                 new String[] {"undefined,undefined", "-3,undefined", "-3,15"});
         testSelection(-3, 15, BrowserVersion.FIREFOX_2, new String[] {"11,11", "0,11", "0,11"});

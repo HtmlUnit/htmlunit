@@ -31,7 +31,7 @@ public class HTMLBodyElement extends HTMLElement {
     public HTMLBodyElement() {
         // Empty.
     }
-    
+
     /**
      * Creates the event handler from the attribute value. This has to be done no matter
      * which browser is simulated to handle ill formed html code with may body (may be generated) elements.

@@ -155,7 +155,7 @@ public class Node extends SimpleScriptable {
             // Append the child to the parent node
             parentNode.appendChild(childDomNode);
             appendedChild = childObject;
-            
+
             //if the parentNode has null parentNode in IE,
             //create a DocumentFragment to be the parentNode's parentNode.
             if (!(parentNode instanceof SgmlPage)
@@ -465,7 +465,7 @@ public class Node extends SimpleScriptable {
             if (isIE) {
                 window.setEvent(event);
             }
-            
+
             // handlers declared as property on a node don't receive the event as argument for IE
             final Object[] propHandlerArgs;
             if (isIE) {
@@ -474,7 +474,7 @@ public class Node extends SimpleScriptable {
             else {
                 propHandlerArgs = args;
             }
-            
+
             try {
                 return eventListenersContainer_.executeListeners(event, args, propHandlerArgs);
             }
@@ -482,7 +482,7 @@ public class Node extends SimpleScriptable {
                 window.setEvent(null); // reset event
             }
         }
-        
+
         return null;
     }
 

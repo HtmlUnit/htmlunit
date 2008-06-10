@@ -130,7 +130,7 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
         checkBox.setChecked(true);
         assertEquals("checked", checkBox.asText());
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -166,7 +166,7 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
             + "</body></html>";
         final String secondContent
             = "<html><head><title>Second</title></head><body></body></html>";
-        
+
         final WebClient client = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection(client);

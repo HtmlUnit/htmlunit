@@ -44,7 +44,7 @@ class XPathAdapter {
     private Expression mainExp_;
 
     private transient FunctionTable funcTable_;
-    
+
     /** Represents a select type expression. */
     public static final int SELECT = 0;
 

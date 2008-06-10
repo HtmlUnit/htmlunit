@@ -1101,7 +1101,7 @@ public class WindowTest extends WebTestCase {
         };
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
     /**
      * Variables that are defined inside JavaScript should be accessible through the
      * window object (ie window.myVariable). Test that this works.
@@ -1626,7 +1626,7 @@ public class WindowTest extends WebTestCase {
         loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
     /**
      * Test that Window.execScript method gets called correctly.
      * @throws Exception if the test fails
@@ -1888,7 +1888,7 @@ public class WindowTest extends WebTestCase {
         loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -1905,7 +1905,7 @@ public class WindowTest extends WebTestCase {
 
         loadPage(content);
     }
-    
+
     /**
      * Open a window with only an image for content, then try to set focus to it.
      *
@@ -2170,10 +2170,10 @@ public class WindowTest extends WebTestCase {
 
         conn.setResponse(URL_FIRST, firstContent);
         conn.setResponse(URL_SECOND, secondContent);
-        
+
         final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
         final HtmlButton buttonA = (HtmlButton) firstPage.getHtmlElementById("clickme");
-        
+
         buttonA.click();
         final Map<String, String> lastAdditionalHeaders = conn.getLastAdditionalHeaders();
         assertEquals(expectedRefererHeader, lastAdditionalHeaders.get("Referer"));
@@ -2305,7 +2305,7 @@ public class WindowTest extends WebTestCase {
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
     /**
      * Test for 1225021.
      * @throws Exception if the test fails
@@ -2323,7 +2323,7 @@ public class WindowTest extends WebTestCase {
             + "</script></head><body>\n"
             + "<div id='theDiv' onclick='alert(123)'>foo</div>\n"
             + "</body></html>";
-        
+
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         ((ClickableElement) page.getHtmlElementById("theDiv")).click();
@@ -2360,7 +2360,7 @@ public class WindowTest extends WebTestCase {
             + "<body onload='test()'>\n"
             + "<div id='myDiv'></div>\n"
             + "</body></html>";
-        
+
         final String[] expectedAlerts = {"rgb(0, 0, 0)"};
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(browserVersion, content, collectedAlerts);
@@ -2422,7 +2422,7 @@ public class WindowTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"INPUT"};
-        
+
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         ((ClickableElement) page.getHtmlElementById("myButton")).click();

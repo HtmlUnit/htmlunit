@@ -61,7 +61,7 @@ public class XmlPage extends SgmlPage implements Document {
     private Element documentElement_;
 
     private final transient Log mainLog_ = LogFactory.getLog(getClass());
-    
+
     /**
      * Create an instance.
      * A warning is logged if an exception is thrown while parsing the XML content

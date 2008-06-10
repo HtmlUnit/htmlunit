@@ -103,7 +103,7 @@ public class PrimitivePrototypeBugFixer implements Scriptable {
         }
         return wrapped_.get(index, start);
     }
-    
+
     private Scriptable getRealScope() throws Exception {
         final Object o = FieldContextLastInterpreterFrame_.get(Context.getCurrentContext());
         if (FieldInterpreterCallFrameScope_ == null) {

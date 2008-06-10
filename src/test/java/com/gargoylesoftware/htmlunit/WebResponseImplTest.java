@@ -137,7 +137,7 @@ public class WebResponseImplTest extends WebTestCase {
         conn.setDefaultResponse("<html/>", 200, "OK", "text/html", headers);
         final WebClient webClient = new WebClient();
         webClient.setWebConnection(conn);
-        
+
         final Page page = webClient.getPage(URL_FIRST);
         assertEquals(expectedCharset, page.getWebResponse().getContentCharSet());
         assertEquals(cntTypeHeader, page.getWebResponse().getResponseHeaderValue("Content-Type"));

@@ -79,7 +79,7 @@ public class HTMLImageElementTest extends WebTestCase {
         final HtmlImage image = (HtmlImage) page.getHtmlElementById("anImage");
         assertEquals("bar.gif", image.getSrcAttribute());
     }
-    
+
     /**
      * JavaScript can be used to preload images, as follows:
      * <code>var newImage = new Image(); newImage.src = 'foo.gif';</code>.
@@ -109,7 +109,7 @@ public class HTMLImageElementTest extends WebTestCase {
         final String[] expectedAlerts = {
             "http://www.gargoylesoftware.com/bar.gif"
         };
-        
+
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }

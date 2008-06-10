@@ -90,7 +90,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @see #getTabIndex()
      */
     public static final Short TAB_INDEX_OUT_OF_BOUNDS = new Short(Short.MIN_VALUE);
-    
+
     private final transient Log mainLog_ = LogFactory.getLog(getClass());
 
     /** The map holding the attributes, keyed by name. */
@@ -329,7 +329,7 @@ public abstract class HtmlElement extends DomElement implements Element {
         else {
             htmlEvent = new HtmlAttributeChangeEvent(this, qualifiedName, oldAttributeValue);
         }
-        
+
         if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
             fireHtmlAttributeAdded(htmlEvent);
             getPage().fireHtmlAttributeAdded(htmlEvent);
@@ -828,7 +828,7 @@ public abstract class HtmlElement extends DomElement implements Element {
             printWriter.println(indent + "</" + getTagName() + ">");
         }
     }
-    
+
     /**
      * Indicates if a node without children should be written in expanded form as XML
      * (i.e. with closing tag rather than with "/&gt;")

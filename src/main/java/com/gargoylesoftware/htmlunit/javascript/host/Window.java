@@ -274,7 +274,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         popup.setParentScope(thisWindow);
         popup.setPrototype(thisWindow.getPrototype(Popup.class));
         popup.init(thisWindow);
-        
+
         return popup;
     }
 
@@ -863,7 +863,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                     return document;
                 }
             }
-            
+
         }
         return superValue;
     }

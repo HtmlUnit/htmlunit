@@ -293,7 +293,7 @@ public class WebClientTest extends WebTestCase {
 
         final List<NameValuePair> headers =
             Collections.singletonList(new NameValuePair("Location", URL_FIRST.toExternalForm()));
-        
+
         // builds a webconnection that first sends a redirect and then a "normal" response for
         // the same requested URL
         final MockWebConnection webConnection = new MockWebConnection(webClient) {
@@ -519,7 +519,7 @@ public class WebClientTest extends WebTestCase {
         webConnection.setResponse(url, firstContent, 302, "Redirect needed", "text/html", headers);
         webClient.setWebConnection(webConnection);
         webClient.setThrowExceptionOnFailingStatusCode(false);
-        
+
         return (HtmlPage) webClient.getPage(url);
     }
 
@@ -688,7 +688,7 @@ public class WebClientTest extends WebTestCase {
         public CollectingPageCreator(final List<Page> list) {
             collectedPages_ = list;
         }
-        
+
         /**
          * Creates a page.
          * @param webResponse the web response
@@ -1202,7 +1202,7 @@ public class WebClientTest extends WebTestCase {
                 defaultProxyHost, defaultProxyPort);
 
         webClient.addHostsToProxyBypass("hostToByPass");
-        
+
         final String location2 = "http://hostToByPass/foo.html";
         final List<NameValuePair> headers = Collections.singletonList(new NameValuePair("Location", location2));
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -1493,7 +1493,7 @@ public class WebClientTest extends WebTestCase {
         WebClient.setIgnoreOutsideContent(true);
         assertTrue("Ignore content did not get set", WebClient.getIgnoreOutsideContent());
     }
-    
+
     /**
      * Unset the static items set in tests here.
      * @throws Exception if an error occurs
@@ -1776,17 +1776,17 @@ public class WebClientTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        
+
         Page page = webClient.getPage("javascript:void(alert(document.location))");
         assertEquals("about:blank", page.getWebResponse().getUrl());
         assertEquals(new String[] {"about:blank"}, collectedAlerts);
         collectedAlerts.clear();
-        
+
         page = webClient.getPage(URL_FIRST);
         final Page page2 = webClient.getPage("javascript:void(alert(document.title))");
         assertSame(page, page2);
         assertEquals(new String[] {"Hello World"}, collectedAlerts);
-        
+
         webClient.getPage("javascript:void(document.body.setAttribute('foo', window.screen.availWidth))");
         assertEquals("1024", ((HtmlPage) page).getBody().getAttribute("foo"));
     }

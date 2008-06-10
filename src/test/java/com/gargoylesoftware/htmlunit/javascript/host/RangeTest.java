@@ -58,12 +58,12 @@ public class RangeTest extends WebTestCase {
 
     private void test(final String script, final String[] expectedAlerts) throws Exception {
         final String content = contentStart + script + contentEnd;
-        
+
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-        
+
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -74,7 +74,7 @@ public class RangeTest extends WebTestCase {
     public void testEmptyRange() throws Exception {
         final String[] expectedAlerts = {"true", "undefined", "undefined", "0", "undefined", "0"};
         final String script = "alertRange(r);";
-        
+
         test(script, expectedAlerts);
     }
 
@@ -86,7 +86,7 @@ public class RangeTest extends WebTestCase {
         final String script = "r.selectNode(document.getElementById('theDiv'));"
             + "alertRange(r);";
         final String[] expectedAlerts = {"false", "BODY", "BODY", "1", "BODY", "2"};
-        
+
         test(script, expectedAlerts);
     }
 
@@ -98,7 +98,7 @@ public class RangeTest extends WebTestCase {
         final String script = "r.selectNodeContents(document.getElementById('theDiv'));"
             + "alertRange(r);";
         final String[] expectedAlerts = {"false", "DIV", "DIV", "0", "DIV", "2"};
-        
+
         test(script, expectedAlerts);
     }
 

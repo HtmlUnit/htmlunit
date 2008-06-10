@@ -522,7 +522,7 @@ public class DocumentTest extends WebTestCase {
             + "</script>\n"
             + "<div id='div'></div>\n"
             + "</body></html>";
-        
+
         final List<String> actual = new ArrayList<String>();
         loadPage(browserVersion, html, actual);
         assertEquals(expected, actual);
@@ -1916,7 +1916,7 @@ public class DocumentTest extends WebTestCase {
 
         final String[] expectedAlerts = {"a", "b", "a", "b", "0"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        
+
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage firstPage = loadPage(browerVersion, content, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
@@ -2640,10 +2640,10 @@ public class DocumentTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
-        
+
         assertEquals(expectedAlerts, collectedAlerts);
     }
-  
+
     /**
      * @throws Exception if the test fails
      */
@@ -2853,7 +2853,7 @@ public class DocumentTest extends WebTestCase {
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
-   
+
    /**
     * Test for bug 1678826.
     * https://sourceforge.net/tracker/index.php?func=detail&aid=1678826&group_id=47038&atid=448266
@@ -2889,7 +2889,7 @@ public class DocumentTest extends WebTestCase {
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
-     
+
      /**
      * @throws Exception if the test fails
      */
@@ -3009,7 +3009,7 @@ public class DocumentTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(html, collectedAlerts);
-        
+
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -3022,7 +3022,7 @@ public class DocumentTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        
+
         final String html = "<html><body id='hello' onload='doTest()'>\n"
                 + "  <script id='jscript'>\n"
                 + "    function doTest() {\n"
@@ -3213,7 +3213,7 @@ public class DocumentTest extends WebTestCase {
         createElementWithAngleBrackets(BrowserVersion.INTERNET_EXPLORER_7_0);
         createElementWithAngleBrackets(BrowserVersion.FIREFOX_2);
     }
-    
+
     private void createElementWithAngleBrackets(final BrowserVersion browserVersion) throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

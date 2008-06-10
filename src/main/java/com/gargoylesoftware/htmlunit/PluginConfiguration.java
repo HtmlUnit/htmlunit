@@ -34,7 +34,7 @@ public class PluginConfiguration implements Serializable {
     private String filename_;
     private String name_;
     private Set<PluginConfiguration.MimeType> mimeTypes_ = new HashSet<PluginConfiguration.MimeType>();
-    
+
     /**
      * Holds information about a single mime type associated with a plugin.
      */
@@ -126,7 +126,7 @@ public class PluginConfiguration implements Serializable {
     public String getName() {
         return name_;
     }
-    
+
     /**
      * Gets the associated mime types.
      * @return a set of {@link MimeType}
@@ -134,7 +134,7 @@ public class PluginConfiguration implements Serializable {
     public Set<PluginConfiguration.MimeType> getMimeTypes() {
         return mimeTypes_;
     }
-    
+
     /**
      * @return the hashCode of the plugin name
      */

@@ -590,7 +590,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "}\n"
             + "-->\n</script></head>\n"
             + "<body onload='doTest()'></body></html>";
-    
+
         final HtmlPage page = loadPage(htmlContent);
         assertEquals("foo", page.getTitleText());
     }
@@ -1159,7 +1159,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             scriptCompileCount_++;
             return super.compile(htmlPage, sourceCode, sourceName, startLine);
         }
-        
+
         /** @inheritDoc ScriptEngine#callFunction(HtmlPage,Object,Object,Object[],HtmlElement) */
         @Override
         public Object callFunction(
@@ -1243,7 +1243,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         comment(BrowserVersion.INTERNET_EXPLORER_6_0);
         comment(BrowserVersion.FIREFOX_2);
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -1288,10 +1288,10 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "  </head>\n"
             + "  <body>abc</body>\n"
             + "</html>";
-        
+
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(html, collectedAlerts);
-        
+
         final String[] expectedAlerts = {
             "rstlne-rstlne-rstlne",
             "rstlno-rstlne-rstlne",
@@ -1299,7 +1299,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             "rstlne-rstlne-rstlne",
             "rstlni-rstlni-rstlni",
             "rstlna-rstlna-rstlna" };
-        
+
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1351,7 +1351,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
-            
+
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1373,7 +1373,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "</head><body>\n"
             + "</body></html>";
         final String script = "alert(document.title)";
-        
+
         final WebClient client = new WebClient();
         final MockWebConnection connection = new MockWebConnection(client);
         client.setWebConnection(connection);
@@ -1394,7 +1394,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertEquals(new String[] {"foo"}, collectedAlerts);
         assertEquals(1, countingJavaScriptEngine.getExecuteScriptCount());
         assertEquals(1, countingJavaScriptEngine.getCompileCount());
-        
+
         collectedAlerts.clear();
         page1.getAnchors().get(0).click();
         assertEquals(new String[] {"page 2"}, collectedAlerts);

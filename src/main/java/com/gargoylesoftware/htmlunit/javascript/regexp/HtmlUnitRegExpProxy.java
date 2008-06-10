@@ -39,7 +39,7 @@ import org.mozilla.javascript.regexp.RegExpImpl;
  */
 public class HtmlUnitRegExpProxy extends RegExpImpl {
     private final RegExpProxy wrapped_;
-    
+
     /**
      * Wraps a proxy to enhance it.
      * @param wrapped the original proxy
@@ -47,7 +47,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
     public HtmlUnitRegExpProxy(final RegExpProxy wrapped) {
         wrapped_ = wrapped;
     }
-    
+
     /**
      * Use the wrapped proxy except for replacement with string arg where it uses Java regular expression.
      * {@inheritDoc}
@@ -55,7 +55,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
     @Override
     public Object action(final Context cx, final Scriptable scope, final Scriptable thisObj,
             final Object[] args, final int actionType) {
-        
+
         // in a first time just improve replacement with a String (not a function)
         if (RA_REPLACE == actionType && args.length == 2 && (args[1] instanceof String)) {
             final String thisString = Context.toString(thisObj);
@@ -122,16 +122,16 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             response.put("input", response, thisString);
             return response;
         }
-        
+
         return wrappedAction(cx, scope, thisObj, args, actionType);
     }
-    
+
     /**
      * Calls action on the wrapped RegExp proxy.
      */
     private Object wrappedAction(final Context cx, final Scriptable scope, final Scriptable thisObj,
             final Object[] args, final int actionType) {
-        
+
         // take care to set the context's RegExp proxy to the original one as this is checked
         // (cf org.mozilla.javascript.regexp.RegExpImp:334)
         try {
@@ -188,7 +188,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
     private static class RegExpData {
         private final String jsSource_;
         private final String jsFlags_;
-        
+
         RegExpData(final NativeRegExp re) {
             final String str = re.toString(); // the form is /regex/flags
             jsSource_ = StringUtils.substringBeforeLast(str.substring(1), "/");
@@ -215,14 +215,14 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         public String getJavaPattern() {
             return jsRegExpToJavaRegExp(jsSource_);
         }
-        
+
         private String jsRegExpToJavaRegExp(String re) {
             re = re.replaceAll("\\[\\^\\\\\\d\\]", ".");
             re = re.replaceAll("\\[([^\\]]*)\\\\b([^\\]]*)\\]", "[$1\\\\cH$2]"); // [...\b...] -> [...\cH...]
             re = escapeJSCurly(re);
             return re;
         }
-        
+
         boolean hasFlag(final char c) {
             return jsFlags_.indexOf(c) != -1;
         }

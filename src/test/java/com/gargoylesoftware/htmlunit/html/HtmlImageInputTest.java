@@ -50,7 +50,7 @@ public class HtmlImageInputTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
-        
+
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
         final HtmlImageInput imageInput = (HtmlImageInput) form.getInputByName("button");
@@ -145,7 +145,7 @@ public class HtmlImageInputTest extends WebTestCase {
         final HtmlPage page = loadPage(html, collectedAlerts);
         final HtmlImageInput input = (HtmlImageInput) page.getHtmlElementById("myInput");
         input.click();
-        
+
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

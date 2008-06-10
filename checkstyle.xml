@@ -169,8 +169,8 @@
         </module>
 
         <module name="GenericIllegalRegexp">
-            <property name="format" value="\S +$"/>
-            <property name="message" value="Trailing space found."/>
+            <property name="format" value="\s$"/>
+            <property name="message" value="Trailing whitespace found."/>
         </module>
 
         <module name="UpperEll"/>

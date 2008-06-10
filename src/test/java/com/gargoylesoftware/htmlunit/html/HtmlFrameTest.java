@@ -107,7 +107,7 @@ public class HtmlFrameTest extends WebTestCase {
             + "frame1.document.close()\"  id='frame2'>\n"
             + "</frameset></html>";
         final HtmlPage page = loadPage(firstContent);
-        
+
         assertEquals("first", page.getTitleText());
 
         final HtmlFrame frame1 = (HtmlFrame) page.getHtmlElementById("frame1");
@@ -138,7 +138,7 @@ public class HtmlFrameTest extends WebTestCase {
 
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("first", page.getTitleText());
-        
+
         // loads something else to trigger frame de-registration
         webClient.getPage(URL_SECOND);
     }
@@ -150,7 +150,7 @@ public class HtmlFrameTest extends WebTestCase {
     public void testFailingHttpStatusCodeException() throws Exception {
         final String failingContent
             = "<html><head><body>Not found</body></html>";
-        
+
         final String firstContent
             = "<html><head><title>First</title></head>\n"
             + "<frameset cols='130,*'>\n"
@@ -199,7 +199,7 @@ public class HtmlFrameTest extends WebTestCase {
             + "<frame name='f2' src='2.html'/>\n"
             + "</frameset>\n"
             + "</html>";
-        
+
         final String frame1 = "<html><head><title>1</title></head>\n"
             + "<body>1"
             + "<script>\n"
@@ -212,7 +212,7 @@ public class HtmlFrameTest extends WebTestCase {
         final WebClient webClient = new WebClient();
         final MockWebConnection conn = new MockWebConnection(webClient);
         webClient.setWebConnection(conn);
-        
+
         conn.setDefaultResponse("<html><head><title>default</title></head><body></body></html>");
         conn.setResponse(URL_FIRST, mainContent);
         conn.setResponse(new URL(URL_FIRST, "1.html"), frame1);

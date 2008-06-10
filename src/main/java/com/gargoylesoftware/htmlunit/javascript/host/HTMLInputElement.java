@@ -77,7 +77,7 @@ public class HTMLInputElement extends FormField {
                 // new Input instance created in the code above
                 input = newInput;
             }
-            
+
             input.setScriptObject(null);
             setDomNode(newInput, true);
         }
@@ -249,7 +249,7 @@ public class HTMLInputElement extends FormField {
     public void jsxSet_maxLength(final int length) {
         getHtmlElementOrDie().setAttribute("maxLength", String.valueOf(length));
     }
-    
+
     /**
      * Sets the selected portion of this input element.
      * @param start the index of the first character to select

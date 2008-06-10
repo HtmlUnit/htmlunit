@@ -84,7 +84,7 @@ public class HtmlTextAreaTest extends WebTestCase {
                 secondPage.getWebResponse().getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
     }
-    
+
     /**
      * @throws Exception if the test fails
      */

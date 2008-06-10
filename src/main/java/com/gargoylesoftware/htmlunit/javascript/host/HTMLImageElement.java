@@ -48,7 +48,7 @@ public class HTMLImageElement extends HTMLElement {
      */
     public void jsConstructor() {
     }
-    
+
     /**
      * Sets the src property, either on the DOM node which corresponds to this
      * JavaScript object, or if none exists (as when using JavaScript to preload
@@ -62,7 +62,7 @@ public class HTMLImageElement extends HTMLElement {
             htmlImageElement.setAttributeValue("src", src);
         }
     }
-    
+
     /**
      * Returns the value of the src property, either from the DOM node which
      * corresponds to this JavaScript object, or if that doesn't exist (as

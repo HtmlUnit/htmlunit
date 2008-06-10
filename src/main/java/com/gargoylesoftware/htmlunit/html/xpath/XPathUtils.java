@@ -61,7 +61,7 @@ public final class XPathUtils {
         final List<Object> list = new ArrayList<Object>();
         try {
             final XObject result = evaluateXPath(node, xpathExpr);
-            
+
             if (result instanceof XNodeSet) {
                 final NodeList nodelist = ((XNodeSet) result).nodelist();
                 for (int i = 0; i < nodelist.getLength(); i++) {

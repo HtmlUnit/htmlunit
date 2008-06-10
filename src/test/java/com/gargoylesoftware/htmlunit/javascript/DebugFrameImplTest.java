@@ -44,11 +44,11 @@ public class DebugFrameImplTest extends WebTestCase {
     @Before
     public void setUp() throws Exception {
         HtmlUnitContextFactory.setDebuggerEnabled(true);
-        
+
         originalLogLevel_ = loggerDebugFrameImpl_.getLevel();
         loggerDebugFrameImpl_.setLevel(Level.TRACE);
     }
-    
+
     /**
      * Resets the log to its original state.
      * @throws Exception when a problem occurs
@@ -70,7 +70,7 @@ public class DebugFrameImplTest extends WebTestCase {
             + "window.__defineGetter__('foo', function(a) { return counter++ });"
             + "alert(window.foo);"
             + "</script></head><body></body></html>";
-        
+
         loadPage(BrowserVersion.FIREFOX_2, content, new ArrayList<String>());
     }
 

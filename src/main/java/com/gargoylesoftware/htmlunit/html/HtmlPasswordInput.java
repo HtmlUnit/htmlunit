@@ -65,7 +65,7 @@ public class HtmlPasswordInput extends HtmlInput {
         }
         return super.type(c, shiftKey, ctrlKey, altKey);
     }
-    
+
     /**
      * {@inheritDoc}
      */

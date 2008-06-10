@@ -122,7 +122,7 @@ public class RowContainer extends HTMLElement {
         else {
             r = rowIndex;
         }
-        
+
         if (r < 0 || r > rowCount) {
             throw Context.reportRuntimeError("Index or size is negative or greater than the allowed amount "
                     + "(index: " + rowIndex + ", " + rowCount + " rows)");

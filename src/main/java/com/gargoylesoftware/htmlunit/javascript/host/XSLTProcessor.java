@@ -52,7 +52,7 @@ public class XSLTProcessor extends SimpleScriptable {
     private Node input_;
     private Object output_;
     private Map<String, Object> parameters_ = new HashMap<String, Object>();
-    
+
     /**
      * JavaScript constructor.
      */
@@ -113,13 +113,13 @@ public class XSLTProcessor extends SimpleScriptable {
             containerDocument.appendChild(containerElement);
 
             final DOMResult result = new DOMResult(containerElement);
- 
+
             final Transformer transformer = TransformerFactory.newInstance().newTransformer(xsltSource);
             for (final String qualifiedName : parameters_.keySet()) {
                 transformer.setParameter(qualifiedName, parameters_.get(qualifiedName));
             }
             transformer.transform(xmlSource, result);
-            
+
             final org.w3c.dom.Node transformedNode = result.getNode();
             if (transformedNode.getFirstChild().getNodeType() == Node.ELEMENT_NODE) {
                 return transformedNode;
@@ -234,7 +234,7 @@ public class XSLTProcessor extends SimpleScriptable {
     public Object jsxGet_output() {
         return output_;
     }
-    
+
     /**
      * Adds parameters into an XSL Transformations (XSLT) style sheet.
      *
@@ -253,7 +253,7 @@ public class XSLTProcessor extends SimpleScriptable {
         }
         jsxFunction_setParameter(nsString, baseName, parameter);
     }
-    
+
     /**
      * Starts the transformation process or resumes a previously failed transformation.
      */

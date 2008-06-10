@@ -43,7 +43,7 @@ public class HtmlAttributeChangeEvent extends EventObject {
         this.name_ = name;
         this.value_ = value;
     }
-    
+
     /**
      * Returns the HtmlElement that changed.
      * @return the HtmlElement that sent the event
@@ -51,7 +51,7 @@ public class HtmlAttributeChangeEvent extends EventObject {
     public HtmlElement getHtmlElement() {
         return (HtmlElement) getSource();
     }
-    
+
     /**
      * Returns the name of the attribute that changed on the element.
      * @return the name of the attribute that changed on the element
@@ -59,7 +59,7 @@ public class HtmlAttributeChangeEvent extends EventObject {
     public String getName() {
         return name_;
     }
-    
+
     /**
      * Returns the value of the attribute that has been added, removed, or replaced.
      * If the attribute was added, this is the value of the attribute.

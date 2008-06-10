@@ -72,19 +72,19 @@ public class HTMLAnchorElementTest extends WebTestCase {
             + "<a href='testsite1.html' id='13' name='testanchor' onClick='doTest(this);return false'>bla</a>\n"
             + "<a href='mailto:' id='link2'>mail</a>\n"
             + "</body></html>";
-        
+
         webConnection.setDefaultResponse(html);
         client.setWebConnection(webConnection);
-        
+
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = (HtmlPage) (client.getPage("http://x"));
-                
+
         final HtmlAnchor anchor = page.getAnchorByName("testanchor");
-        
+
         anchor.click();
-        
+
         final String[] expectedAlerts = {"http://x/testsite1.html", "testsite1.html",
             "http://x/testsite2.html", "testsite2.html", "13", "testanchor", "mailto:"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -109,7 +109,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
             + "<a href='foo.html' onClick='alert(\"on click\")'>\n"
             + "<a href='foo2.html'>\n"
             + "</body></html>";
-        
+
         loadPageWithAlerts(html);
     }
 
@@ -152,7 +152,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
             + "<input name='testText'>\n"
             + "</form>\n"
             + "</body></html>";
-        
+
         final HtmlPage page1 = loadPage(getBrowserVersion(), html, null);
         final Page page2 = page1.getAnchorByHref("#").click();
 
@@ -192,7 +192,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
 
         assertEquals("Second",  page2.getTitleText());
     }
-    
+
     /**
      * Regression test for https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1689798&group_id=47038.
      * In href, "this" should be the window and not the link.
@@ -205,7 +205,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
             + "<body>\n"
             + "<a href='javascript:alert(this == window)'>link 1</a>\n"
             + "</body></html>";
-        
+
         final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {"true"};
         final HtmlPage page1 = loadPage(getBrowserVersion(), content, collectedAlerts);
@@ -229,7 +229,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
         final HtmlAnchor link = page1.getAnchors().get(0);
         assertEquals("OK", link.getTargetAttribute());
     }
-    
+
     /**
      * @throws Exception if the test fails
      */

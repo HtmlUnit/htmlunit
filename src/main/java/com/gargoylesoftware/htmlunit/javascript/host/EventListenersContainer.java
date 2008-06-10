@@ -42,7 +42,7 @@ class EventListenersContainer {
             return bubblingHandlers_;
         }
     }
-    
+
     private final Map<String, Handlers> eventHandlers_ = new HashMap<String, Handlers>();
     private final SimpleScriptable jsNode_;
 
@@ -130,7 +130,7 @@ class EventListenersContainer {
                 }
             }
         }
-        
+
         return null;
     }
 
@@ -143,7 +143,7 @@ class EventListenersContainer {
             return page.executeJavaScriptFunctionIfPossible(
                     handler, jsNode_, propHandlerArgs, node);
         }
-        
+
         return null;
     }
 

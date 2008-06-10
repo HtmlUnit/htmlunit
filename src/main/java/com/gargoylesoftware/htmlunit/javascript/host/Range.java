@@ -167,7 +167,7 @@ public class Range extends SimpleScriptable {
         endContainer_ = refNode;
         endOffset_ = ((HTMLCollection) refNode.jsxGet_childNodes()).jsxGet_length();
     }
-    
+
     /**
      * Selects a node and its contents.
      * @param refNode the node to select
@@ -191,7 +191,7 @@ public class Range extends SimpleScriptable {
             startOffset_ = endOffset_;
         }
     }
-    
+
     /**
      * Gets the deepest common ancestor container of the Range's two boundary-points.
      * @return the ancestor
@@ -204,7 +204,7 @@ public class Range extends SimpleScriptable {
 
         final List<Node> startContainerAncestor = getAncestorsAndSelf(startContainer_);
         final List<Node> endContainerAncestor = getAncestorsAndSelf(endContainer_);
-        
+
         final List<Node> commonAncestors = ListUtils.intersection(startContainerAncestor, endContainerAncestor);
         return commonAncestors.get(commonAncestors.size() - 1);
     }

@@ -480,7 +480,7 @@ public class EventTest extends WebTestCase {
             + "<span id='theSpan'>blabla</span>\n"
             + "</div>\n"
             + "</body></html>";
-       
+
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         ((ClickableElement) page.getHtmlElementById("theSpan")).click();
@@ -520,7 +520,7 @@ public class EventTest extends WebTestCase {
             + "<span id='theSpan'>blabla</span>\n"
             + "</div>\n"
             + "</body></html>";
-       
+
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
         ((ClickableElement) page.getHtmlElementById("theSpan")).click();
@@ -556,7 +556,7 @@ public class EventTest extends WebTestCase {
             + "<span id='theSpan'>blabla</span>\n"
             + "</div>\n"
             + "</body></html>";
-   
+
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         ((ClickableElement) page.getHtmlElementById("theSpan")).click();
@@ -581,7 +581,7 @@ public class EventTest extends WebTestCase {
         testNullEventHandler(BrowserVersion.INTERNET_EXPLORER_7_0, "null");
         testNullEventHandler(BrowserVersion.FIREFOX_2, "undefined");
     }
-    
+
     private void testNullEventHandler(final BrowserVersion browserVersion, final String expectedAlert)
         throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"

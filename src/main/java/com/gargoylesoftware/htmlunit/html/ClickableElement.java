@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
 public abstract class ClickableElement extends StyledElement {
 
     private final transient Log mainLog_ = LogFactory.getLog(getClass());
-    
+
     /**
      * Creates an instance.
      *
@@ -162,7 +162,7 @@ public abstract class ClickableElement extends StyledElement {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return getPage();
         }
-        
+
         //call click event first
         final Page clickPage = click(shiftKey, ctrlKey, altKey);
         if (clickPage != getPage()) {

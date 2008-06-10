@@ -51,7 +51,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
-        
+
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
         final HtmlSubmitInput submitInput = (HtmlSubmitInput) form.getInputByName("button");
@@ -75,7 +75,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
             + "</form></body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-        
+
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
         final HtmlSubmitInput submitInput = (HtmlSubmitInput) form.getInputByName("button");
 
@@ -193,7 +193,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
         final HtmlPage page = loadPage(html, collectedAlerts);
         final HtmlSubmitInput input = (HtmlSubmitInput) page.getHtmlElementById("myInput");
         input.click();
-        
+
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

@@ -145,15 +145,15 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
             p0 = p1 + 1;
         }
         values.add(string.substring(p0, string.length() - 1));
-        
+
         Collections.sort(values, new Comparator<String>() {
-        
+
             public int compare(String o1, String o2) {
                 o1 = o1.substring(0, o1.indexOf('='));
                 o2 = o2.substring(0, o2.indexOf('='));
                 return o1.compareToIgnoreCase(o2);
             }
-        
+
         });
         return values;
     }

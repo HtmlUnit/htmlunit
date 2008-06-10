@@ -125,7 +125,7 @@ public class HTMLOptionElement extends HTMLElement {
     public void jsxSet_selected(final boolean selected) {
         getHtmlOption().setSelected(selected);
     }
-    
+
     /**
      * Returns the value of the "defaultSelected" property.
      * @return the text property

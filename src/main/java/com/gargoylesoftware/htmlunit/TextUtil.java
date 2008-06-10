@@ -35,7 +35,7 @@ public final class TextUtil {
      * Default encoding used.
      */
     public static final String DEFAULT_CHARSET = "ISO-8859-1";
-    
+
     /** Private constructor to prevent instantiation. */
     private TextUtil() { }
 

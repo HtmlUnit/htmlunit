@@ -174,7 +174,7 @@ public class HtmlButtonTest extends WebTestCase {
         assertEquals("foo", ((HtmlPasswordInput) page.getHtmlElementById("password1")).getValueAttribute());
         assertEquals("", ((HtmlIsIndex) page.getHtmlElementById("isindex1")).getValue());
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -221,7 +221,7 @@ public class HtmlButtonTest extends WebTestCase {
     public void testDefaultButtonType_InternetExplorer() throws Exception {
         doTestDefaultButtonType(BrowserVersion.INTERNET_EXPLORER_6_0, "button");
     }
-    
+
     private void doTestDefaultButtonType(final BrowserVersion browserVersion,
             final String expectedType) throws Exception {
         final String firstContent
@@ -241,7 +241,7 @@ public class HtmlButtonTest extends WebTestCase {
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
         assertEquals(expectedType, button.getTypeAttribute());
-        
+
         final HtmlPage page2 = (HtmlPage) button.click();
         final List<NameValuePair> expectedParameters;
         final String expectedSecondPageTitle;

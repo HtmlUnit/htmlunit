@@ -113,7 +113,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     public boolean avoidObjectDetection() {
         return avoidObjectDetection_;
     }
-    
+
     /**
      * @param newValue the new value
      */
@@ -177,7 +177,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     public final Object call(
             final Context context, final Scriptable scope,
             final Scriptable thisObj, final Object[] args) throws JavaScriptException {
-        
+
         if (args.length == 0) {
             throw Context.reportRuntimeError("Zero arguments; need an index or a key.");
         }
@@ -265,7 +265,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
 
         for (int i = 0; i < response.size(); i++) {
             final DomNode element = (DomNode) response.get(i);
-            
+
             //IE: XmlPage ignores all empty text nodes
             if (isIE && isXmlPage && element instanceof DomText
                     && ((DomText) element).getNodeValue().trim().length() == 0) {
@@ -285,7 +285,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
                 }
             }
         }
-        
+
         return response;
     }
 
@@ -307,7 +307,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         }
         return null;
     }
-    
+
     /**
      * Returns the element or elements that match the specified key. If it is the name
      * of a property, the property value is returned. If it is the id of an element in
@@ -486,7 +486,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         catch (final Exception e) {
             //ignore
         }
-        
+
         if (name.equals("length")) {
             return true;
         }

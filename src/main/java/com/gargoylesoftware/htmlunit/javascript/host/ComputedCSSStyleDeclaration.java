@@ -58,7 +58,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         map.put("TH", "table-cell");
         map.put("THEAD", "table-header-group");
         map.put("TR", "table-row");
-        
+
         DEFAULT_DISPLAY = Collections.unmodifiableMap(map);
     }
 

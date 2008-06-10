@@ -242,7 +242,7 @@ public class Prototype160Test extends WebTestCase {
             FileUtils.writeStringToFile(f, page.asXml(), "UTF-8");
             getLog().info("Test result for " + filename + " written to: " + f.getAbsolutePath());
         }
-            
+
         assertEquals(expected, summary);
     }
 

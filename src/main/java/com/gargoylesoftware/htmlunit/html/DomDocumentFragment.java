@@ -37,7 +37,7 @@ public class DomDocumentFragment extends DomNode implements DocumentFragment {
     public DomDocumentFragment(final Page page) {
         super(page);
     }
-    
+
     /**
      * {@inheritDoc}
      * @return the node name, in this case {@link #NODE_NAME}

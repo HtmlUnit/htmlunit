@@ -136,7 +136,7 @@ public class HtmlForm extends ClickableElement {
             final NameValuePair[] pairs = new NameValuePair[parameters.size()];
             parameters.toArray(pairs);
             final String queryFromFields = EncodingUtil.formUrlEncode(pairs, getPage().getPageEncoding());
-            
+
             // action may already contain some query parameters: they have to be removed
             actionUrl = StringUtils.substringBefore(actionUrl, "?");
             final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
@@ -246,7 +246,7 @@ public class HtmlForm extends ClickableElement {
                 submittableElements.add((SubmittableElement) element);
             }
         }
-        
+
         for (final HtmlElement element : lostChildren_) {
             if (isSubmittable(element, submitElement)) {
                 submittableElements.add((SubmittableElement) element);
@@ -331,7 +331,7 @@ public class HtmlForm extends ClickableElement {
     @SuppressWarnings("unchecked")
     public List<HtmlInput> getInputsByName(final String name) {
         final List<HtmlInput> list = (List<HtmlInput>) getHtmlElementsByAttribute("input", "name", name);
-        
+
         // collect inputs from lost children
         for (final HtmlElement elt : getLostChildren()) {
             if (elt instanceof HtmlInput && name.equals(elt.getAttribute("name"))) {
@@ -350,7 +350,7 @@ public class HtmlForm extends ClickableElement {
      */
     public final HtmlInput getInputByName(final String name) throws ElementNotFoundException {
         final List< ? extends HtmlElement> inputs = getInputsByName(name);
-        
+
         if (inputs.isEmpty()) {
             throw new ElementNotFoundException("input", "name", name);
         }
@@ -366,7 +366,7 @@ public class HtmlForm extends ClickableElement {
     @SuppressWarnings("unchecked")
     public List<HtmlSelect> getSelectsByName(final String name) {
         final List<HtmlSelect> list = (List<HtmlSelect>) getHtmlElementsByAttribute("select", "name", name);
-        
+
         // collect selects from lost children
         for (final HtmlElement elt : getLostChildren()) {
             if (elt instanceof HtmlSelect && name.equals(elt.getAttribute("name"))) {
@@ -401,7 +401,7 @@ public class HtmlForm extends ClickableElement {
     @SuppressWarnings("unchecked")
     public List<HtmlButton> getButtonsByName(final String name) {
         final List<HtmlButton> list = (List<HtmlButton>) getHtmlElementsByAttribute("button", "name", name);
-        
+
         // collect buttons from lost children
         for (final HtmlElement elt : getLostChildren()) {
             if (elt instanceof HtmlButton && name.equals(elt.getAttribute("name"))) {
@@ -436,7 +436,7 @@ public class HtmlForm extends ClickableElement {
     @SuppressWarnings("unchecked")
     public List<HtmlTextArea> getTextAreasByName(final String name) {
         final List<HtmlTextArea> list = (List<HtmlTextArea>) getHtmlElementsByAttribute("textarea", "name", name);
-        
+
         // collect buttons from lost children
         for (final HtmlElement elt : getLostChildren()) {
             if (elt instanceof HtmlTextArea && name.equals(elt.getAttribute("name"))) {
@@ -494,7 +494,7 @@ public class HtmlForm extends ClickableElement {
             throw new IllegalArgumentException("HtmlRadioButtonInput is not child of this HtmlForm");
         }
         final List<HtmlRadioButtonInput> radios = getRadioButtonsByName(radioButtonInput.getNameAttribute());
-            
+
         for (final HtmlRadioButtonInput input : radios) {
             if (input == radioButtonInput) {
                 input.setAttributeValue("checked", "checked");

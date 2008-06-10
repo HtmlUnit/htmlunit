@@ -37,7 +37,7 @@ public class DataURLConnection extends URLConnection {
 
     /** The JavaScript code. */
     private final byte[] content_;
-    
+
     private transient Log log_ = LogFactory.getLog(DataURLConnection.class);
 
     /**

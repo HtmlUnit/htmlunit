@@ -44,7 +44,7 @@ public class DomTextTest extends WebTestCase {
         testPlainText("&nbsp; a&nbsp;", "  a ");
         testPlainText("&nbsp;a &nbsp;", " a  ");
     }
-    
+
     /**
      * Test font formats, as per bug #1731042.
      * See http://sourceforge.net/tracker/index.php?func=detail&aid=1731042&group_id=47038&atid=448266.
@@ -78,11 +78,11 @@ public class DomTextTest extends WebTestCase {
         testAsText("a<span>b</span> c",   "ab c");
         testAsText("a <span>b</span>c",   "a bc");
         testAsText("a<span>b</span>c",    "abc");
-        
+
         testAsText("a<b><font><i>b</i></font></b>c",  "abc");
         testAsText("a<b><font> <i>b</i></font></b>c", "a bc");
     }
-    
+
     /**
      * These worked before the changes for bug #1731042, and should afterwards, too.
      * @throws Exception if the test fails
@@ -107,14 +107,14 @@ public class DomTextTest extends WebTestCase {
         final String content = "<html><body><span id='foo'>" + html + "</span></body></html>";
 
         final HtmlPage page = loadPage(content);
-        
+
         assertEquals("b", page.getHtmlElementById("cell").asText());
         assertEquals("b", page.getHtmlElementById("row").asText());
         assertEquals("b", page.getHtmlElementById("table").asText());
     }
-    
+
     // ====================================================================================
-        
+
     private void testPlainText(final String html, final String expectedText) throws Exception {
         final String content = "<html><body><span id='foo'>" + html + "</span></body></html>";
 
@@ -148,7 +148,7 @@ public class DomTextTest extends WebTestCase {
 
         final WebClient client = new WebClient(BrowserVersion.getDefault());
         final MockWebConnection webConnection = new MockWebConnection(client);
-        
+
         webConnection.setDefaultResponse(TextUtil.stringToByteArray(html, "UTF-8"), 200, "OK", "text/html");
         client.setWebConnection(webConnection);
 

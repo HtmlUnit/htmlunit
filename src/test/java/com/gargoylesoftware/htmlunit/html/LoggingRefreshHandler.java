@@ -30,14 +30,14 @@ import com.gargoylesoftware.htmlunit.RefreshHandler;
  */
 public class LoggingRefreshHandler implements RefreshHandler {
     private final List<Object> list_;
-    
+
     /**
      * @param list the list to add data to
      */
     public LoggingRefreshHandler(final List<Object> list) {
         list_ = list;
     }
-    
+
     /**
      * Logs the requested refresh, but does not actually refresh anything.
      * @param page the page that is going to be refreshed

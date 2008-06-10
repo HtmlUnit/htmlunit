@@ -30,7 +30,7 @@ public final class Util {
     private Util() {
         // does nothing
     }
-    
+
     /**
      * Gets an iterator over all following nodes, depth-first.
      *
@@ -68,7 +68,7 @@ public final class Util {
             }
         };
     }
-    
+
     /**
      * Gets an iterator over all following nodes, depth-first.
      *
@@ -160,12 +160,12 @@ abstract class NodeIterator implements Iterator<DomNode> {
     public NodeIterator(final DomNode contextNode) {
         node_ = getFirstNode(contextNode);
     }
-    
+
     /** @inheritDoc Iterator#hasNext() */
     public boolean hasNext() {
         return (node_ != null);
     }
-    
+
     /** @inheritDoc Iterator#next() */
     public DomNode next() {
         if (node_ == null) {
@@ -175,12 +175,12 @@ abstract class NodeIterator implements Iterator<DomNode> {
         node_ = getNextNode(node_);
         return ret;
     }
-    
+
     /** @inheritDoc Iterator#remove() */
     public void remove() {
         throw new UnsupportedOperationException();
     }
-    
+
     /**
      * Gets the first node for iteration.
      *
@@ -192,7 +192,7 @@ abstract class NodeIterator implements Iterator<DomNode> {
      * @see #getNextNode
      */
     protected abstract DomNode getFirstNode(final DomNode contextNode);
-    
+
     /**
      * Gets the next node for iteration.
      *

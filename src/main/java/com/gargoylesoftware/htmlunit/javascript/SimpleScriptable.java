@@ -211,7 +211,7 @@ public class SimpleScriptable extends ScriptableObject {
             }
         }
         initParentScope(domNode, scriptable);
-        
+
         scriptable.setPrototype(getPrototype(javaScriptClass));
         scriptable.setDomNode(domNode);
 
@@ -434,7 +434,7 @@ public class SimpleScriptable extends ScriptableObject {
         }
         return null;
     }
-    
+
     /**
      * Gets the browser version currently used.
      * @return the browser version

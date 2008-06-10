@@ -87,7 +87,7 @@ public class HTMLTableRowElement extends HTMLElement {
             final Object[] args, final Function f) {
         final HTMLTableRowElement row = (HTMLTableRowElement) s;
         final HtmlTableRow htmlRow = (HtmlTableRow) row.getDomNodeOrDie();
-        
+
         final int position = getIntArg(0, args, -1);
 
         final boolean indexValid = (position >= -1 && position <= htmlRow.getCells().size());

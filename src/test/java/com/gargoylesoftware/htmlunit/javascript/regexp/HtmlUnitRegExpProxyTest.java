@@ -105,11 +105,11 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
     public void needCustomFix() {
         final Context ctx = ContextFactory.getGlobal().enterContext();
         final ScriptableObject topScope = ctx.initStandardObjects();
-        
+
         topScope.put("str", topScope, str_);
         topScope.put("text", topScope, text_);
         topScope.put("expected", topScope, expected_);
-        
+
         assertEquals(begin_ + end_, text_.replaceAll(str_, ""));
         try {
             ctx.evaluateString(topScope, src_, "test script", 0, null);
@@ -151,7 +151,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        
+
         final String[] expectedAlerts = {"123456"};
         final List<String> collectedAlerts = new ArrayList<String>();
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
@@ -195,7 +195,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
     /**
      * Test if the custom fix is needed or not. When this test fails, then it means that the problem is solved in
      * Rhino and that custom fix for String.match in {@link HtmlUnitRegExpProxy} is not needed anymore (and that
@@ -206,7 +206,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
     public void matchFixNeeded() throws Exception {
         final Context ctx = ContextFactory.getGlobal().enterContext();
         final ScriptableObject topScope = ctx.initStandardObjects();
-        
+
         ctx.evaluateString(topScope, scriptTestMatch_, "test script String.match", 0, null);
         try {
             ctx.evaluateString(topScope, scriptTestMatch_, "test script String.match", 0, null);
@@ -228,7 +228,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        
+
         final String[] expectedAlerts = {"0"};
         final List<String> collectedAlerts = new ArrayList<String>();
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
@@ -247,7 +247,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        
+
         final String[] expectedAlerts = {"ab,a"};
         final List<String> collectedAlerts = new ArrayList<String>();
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
@@ -272,7 +272,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        
+
         final String[] expectedAlerts = {"boo();"};
         final List<String> collectedAlerts = new ArrayList<String>();
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
@@ -293,7 +293,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        
+
         final String[] expectedAlerts = {"<script>boo();</script>"};
         final List<String> collectedAlerts = new ArrayList<String>();
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
@@ -320,14 +320,14 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        
+
         final String[] expectedAlerts = {"true"};
         final List<String> collectedAlerts = new ArrayList<String>();
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
         loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
     /**
      * Verifies that curly braces can be used non escaped in JS regexp.
      */
@@ -358,7 +358,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        
+
         final String[] expectedAlerts = {"{#abcd},{,abcd,}"};
         final List<String> collectedAlerts = new ArrayList<String>();
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
@@ -380,7 +380,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        
+
         final String[] expectedAlerts = {"aa-b-b-"};
         final List<String> collectedAlerts = new ArrayList<String>();
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts);

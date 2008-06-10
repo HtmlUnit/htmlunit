@@ -87,7 +87,7 @@ public class FrameWindow extends WebWindowImpl {
     public HtmlPage getEnclosingPage() {
         return frame_.getPage();
     }
-    
+
     /**
      * Gets the DOM node of the (i)frame containing this window.
      * @return the DOM node

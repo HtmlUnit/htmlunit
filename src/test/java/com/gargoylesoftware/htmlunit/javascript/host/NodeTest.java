@@ -67,7 +67,7 @@ public class NodeTest extends WebTestCase {
         final String[] expectedAlerts = {"true"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
     /**
      * @throws Exception on test failure
      */
@@ -325,7 +325,7 @@ public class NodeTest extends WebTestCase {
             assertTrue(message, message.indexOf("not enough arguments") > -1);
         }
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -413,7 +413,7 @@ public class NodeTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
     /**
      * @throws Exception if the test fails
      */

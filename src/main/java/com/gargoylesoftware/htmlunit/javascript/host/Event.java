@@ -400,7 +400,7 @@ public class Event extends SimpleScriptable {
     public void jsxFunction_stopPropagation() {
         stopPropagation_ = true;
     }
-    
+
     /**
      * Indicates if event propagation is stopped.
      * @return the status
@@ -416,7 +416,7 @@ public class Event extends SimpleScriptable {
     public Object jsxGet_returnValue() {
         return returnValue_;
     }
-    
+
     /**
      * Returns the property name associated with the event.
      * @return the property name associated with the event
@@ -424,7 +424,7 @@ public class Event extends SimpleScriptable {
     public String jsxGet_propertyName() {
         return propertyName_;
     }
-    
+
     /**
      * Sets the return value associated with the event.
      * @param returnValue the return value associated with the event
@@ -461,7 +461,7 @@ public class Event extends SimpleScriptable {
     public boolean isPreventDefault() {
         return preventDefault_;
     }
-    
+
     /**
      * Copies properties from another event to this event. This method should
      * be overridden in subclasses in order to account for extra properties.

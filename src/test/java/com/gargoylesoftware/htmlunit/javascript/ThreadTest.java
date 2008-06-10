@@ -79,7 +79,7 @@ public class ThreadTest extends TestCase {
         }
         return suite;
     }
-    
+
     /** A test object for threads*/
     private static class TestThread extends Thread {
 
@@ -132,7 +132,7 @@ public class ThreadTest extends TestCase {
 
             final List<String> collectedAlerts = new ArrayList<String>();
             final HtmlPage page = WebTestCase.loadPage(content, collectedAlerts);
-            
+
             assertEquals("foo", page.getTitleText());
             assertEquals("focus not changed to textfield1",
                          page.getFormByName("form1").getInputByName("textfield1"),

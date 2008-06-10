@@ -48,7 +48,7 @@ public class HtmlAnchor extends ClickableElement {
     public static final String TAG_NAME = "a";
 
     private final transient Log mainLog_ = LogFactory.getLog(getClass());
-    
+
     /**
      * Creates a new instance.
      *
@@ -274,7 +274,7 @@ public class HtmlAnchor extends ClickableElement {
     public final String getTargetAttribute() {
         return getAttributeValue("target");
     }
-    
+
     /**
      * Open this link in a new window, much as web browsers do when you shift-click a link or use the context
      * menu to open in a new window.

@@ -447,7 +447,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         testSend(BrowserVersion.FIREFOX_2, "'foo'");
         testSend(BrowserVersion.INTERNET_EXPLORER_6_0, "'foo'");
     }
-    
+
     /**
      * Test calls to send() without any arguments.
      * @throws Exception if the test fails
@@ -937,7 +937,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             @Override
             public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
                 final String url = webRequestSettings.getUrl().toExternalForm();
-                
+
                 synchronized (this) {
                     while (!gotFoo1_ && url.endsWith("foo2.txt")) {
                         try {

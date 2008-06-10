@@ -63,7 +63,7 @@ public class XPathResult extends SimpleScriptable {
      * The result is a node set that will be accessed iteratively, which will produce document-ordered nodes.
      */
     public static final int ORDERED_NODE_ITERATOR_TYPE = 5;
-    
+
     /**
      * The result is a node set that will be accessed as a snapshot list of nodes
      * that may not be in a particular order.
@@ -117,7 +117,7 @@ public class XPathResult extends SimpleScriptable {
                 resultType_ = BOOLEAN_TYPE;
             }
         }
-        
+
         if (resultType_ == -1) {
             if (type != ANY_TYPE) {
                 resultType_ = type;
@@ -128,7 +128,7 @@ public class XPathResult extends SimpleScriptable {
         }
         iteratorIndex_ = 0;
     }
-    
+
     /**
      * The code representing the type of this result, as defined by the type constants.
      * @return the code representing the type of this result
@@ -136,7 +136,7 @@ public class XPathResult extends SimpleScriptable {
     public int jsxGet_resultType() {
         return resultType_;
     }
-    
+
     /**
      * The number of nodes in the result snapshot.
      * @return the number of nodes in the result snapshot
@@ -147,7 +147,7 @@ public class XPathResult extends SimpleScriptable {
         }
         return result_.size();
     }
-    
+
     /**
      * The value of this single node result, which may be null.
      * @return the value of this single node result, which may be null
@@ -191,7 +191,7 @@ public class XPathResult extends SimpleScriptable {
         }
         return null;
     }
-    
+
     /**
      * Returns the value of this number result.
      * @return the value of this number result

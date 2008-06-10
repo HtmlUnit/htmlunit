@@ -98,7 +98,7 @@ public class WebResponseData implements Serializable {
         statusMessage_ = statusMessage;
         responseHeaders_ = Collections.unmodifiableList(responseHeaders);
     }
-    
+
     /**
      * Returns the body byte array contained by the specified input stream.
      * If the response headers indicate that the data has been compressed,

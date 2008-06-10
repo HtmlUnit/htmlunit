@@ -126,7 +126,7 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
         Assert.assertEquals("Element should not have attribute", "", node.getAttribute("foo"));
     }
-    
+
     /**
      * Test getAttribute() on an element with the attribute.
      * @throws Exception if the test fails
@@ -338,7 +338,7 @@ public class HtmlElementTest extends WebTestCase {
         node.setAttribute("foo", "other");
         Assert.assertEquals("Element should have attribute", "other", node.getAttribute("foo"));
     }
-    
+
     /**
      * Test setAttribute() on an element with the attribute.
      * @throws Exception if the test fails
@@ -402,7 +402,7 @@ public class HtmlElementTest extends WebTestCase {
         node.removeAttribute("foo");
         Assert.assertEquals("Element should not have attribute", "", node.getAttribute("foo"));
     }
-    
+
     /**
      * Test removeAttribute() on an element with the attribute.
      * @throws Exception if the test fails
@@ -544,7 +544,7 @@ public class HtmlElementTest extends WebTestCase {
             collectedValues_.add("attributeRemoved: " + event.getHtmlElement().getTagName() + ','
                     + event.getName() + ',' + event.getValue());
         }
-    
+
         @Test
         public void attributeReplaced(final HtmlAttributeChangeEvent event) {
             collectedValues_.add("attributeReplaced: " + event.getHtmlElement().getTagName() + ','
@@ -581,13 +581,13 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final HtmlBody body = (HtmlBody) page.getHtmlElementById("myBody");
         final HtmlElement p1 = page.getHtmlElementById("p1");
-        
+
         final HtmlAttributeChangeListenerTestImpl listenerImpl = new HtmlAttributeChangeListenerTestImpl();
         p1.addHtmlAttributeChangeListener(listenerImpl);
         body.addHtmlAttributeChangeListener(listenerImpl);
         page.addHtmlAttributeChangeListener(listenerImpl);
         final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
-        
+
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
     }
@@ -610,7 +610,7 @@ public class HtmlElementTest extends WebTestCase {
             + "<p id='p1' title='myTitle'></p>\n"
             + "<input id='myButton' type='button' onclick='clickMe()'>\n"
             + "</body></html>";
-        
+
         final String[] expectedValues =
         {"attributeReplaced: p,title,myTitle",
             "attributeReplaced: p,title,myTitle",
@@ -623,7 +623,7 @@ public class HtmlElementTest extends WebTestCase {
         body.addHtmlAttributeChangeListener(listenerImpl);
         p1.addHtmlAttributeChangeListener(listenerImpl);
         final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
-        
+
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
         assertEquals("myTitle" + 'a', p1.getAttributeValue("title"));
@@ -647,7 +647,7 @@ public class HtmlElementTest extends WebTestCase {
             + "<p id='p1' title='myTitle'></p>\n"
             + "<input id='myButton' type='button' onclick='clickMe()'>\n"
             + "</body></html>";
-        
+
         final String[] expectedValues =
         {"attributeRemoved: p,title,myTitle",
             "attributeRemoved: p,title,myTitle",
@@ -660,7 +660,7 @@ public class HtmlElementTest extends WebTestCase {
         body.addHtmlAttributeChangeListener(listenerImpl);
         p1.addHtmlAttributeChangeListener(listenerImpl);
         final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
-        
+
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
         assertSame(HtmlElement.ATTRIBUTE_NOT_DEFINED, p1.getAttributeValue("title"));
@@ -684,21 +684,21 @@ public class HtmlElementTest extends WebTestCase {
             + "<p id='p1' title='myTitle'></p>\n"
             + "<input id='myButton' type='button' onclick='clickMe()'>\n"
             + "</body></html>";
-        
+
         final String[] expectedValues = {"attributeReplaced: p,title,myTitle"};
         final HtmlPage page = loadPage(htmlContent);
         final HtmlElement p1 = page.getHtmlElementById("p1");
         final HtmlAttributeChangeListenerTestImpl listenerImpl = new HtmlAttributeChangeListenerTestImpl();
         p1.addHtmlAttributeChangeListener(listenerImpl);
         final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
-        
+
         myButton.click();
         p1.removeHtmlAttributeChangeListener(listenerImpl);
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
         assertEquals("myTitle" + 'a' + 'a', p1.getAttributeValue("title"));
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -721,7 +721,7 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextarea");
         assertEquals("mouseover-", textArea.getText());
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -744,7 +744,7 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextarea");
         assertEquals("mousemove-", textArea.getText());
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -796,7 +796,7 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextarea");
         assertEquals(expected, textArea.getText());
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -819,7 +819,7 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextarea");
         assertEquals("mouseup-", textArea.getText());
     }
-    
+
     /**
      * @throws Exception if the test fails
      */

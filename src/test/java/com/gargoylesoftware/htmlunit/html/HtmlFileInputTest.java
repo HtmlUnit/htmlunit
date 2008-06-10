@@ -196,18 +196,18 @@ public class HtmlFileInputTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        
+
         final String filename = "\u6A94\u6848\uD30C\uC77C\u30D5\u30A1\u30A4\u30EB\u0645\u0644\u0641.txt";
         final String path = getClass().getClassLoader().getResource(filename).toExternalForm();
         final File file = new File(new URI(path));
         assertTrue(file.exists());
-        
+
         final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
         servlets.put("/upload2", Upload2Servlet.class);
 
         server_ = HttpWebConnectionTest.startWebServer("./", null, servlets);
         final PostMethod filePost = new PostMethod("http://localhost:" + HttpWebConnectionTest.PORT + "/upload2");
-        
+
         final FilePart part = new FilePart("myInput", file);
         part.setCharSet("UTF-8");
 
@@ -243,7 +243,7 @@ public class HtmlFileInputTest extends WebTestCase {
         final String path = getClass().getClassLoader().getResource(filename).toExternalForm();
         final File file = new File(new URI(path));
         assertTrue(file.exists());
-        
+
         final WebClient client = new WebClient(browserVersion);
         final HtmlPage firstPage = (HtmlPage) client.getPage(
                 new URL("http://localhost:" + HttpWebConnectionTest.PORT + "/upload1"));
@@ -251,7 +251,7 @@ public class HtmlFileInputTest extends WebTestCase {
         final HtmlForm form = firstPage.getForms().get(0);
         final HtmlFileInput fileInput = (HtmlFileInput) form.getInputByName("myInput");
         fileInput.setValueAttribute(path);
-        
+
         final HtmlSubmitInput submitInput = (HtmlSubmitInput) form.getInputByValue("Upload");
         final HtmlPage secondPage = (HtmlPage) submitInput.click();
 
@@ -259,9 +259,9 @@ public class HtmlFileInputTest extends WebTestCase {
 
         //this is the value with UTF-8 encoding
         final String expectedResponse = "6A94 6848 D30C C77C 30D5 30A1 30A4 30EB 645 644 641 2E 74 78 74 <br>myInput";
-        
+
         assertTrue("Invalid Response: " + response, response.contains(expectedResponse));
-        
+
         if (browserVersion.isIE()) {
             assertTrue(expectedResponse.length() < response.length());
         }

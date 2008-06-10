@@ -295,7 +295,7 @@ public class HTMLInputElementTest extends WebTestCase {
         final HtmlForm form = page.getFormByName("form1");
         form.submit((SubmittableElement) null);
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -693,11 +693,11 @@ public class HTMLInputElementTest extends WebTestCase {
             + "<form name='myForm' action='foo'>\n"
             + "<input type='text' id='text1' maxlength='30'/>\n"
             + "</form></body></html>";
-    
+
         final String[] expectedAlerts = {"undefined", "30", "undefined", "30", "30", "30",
             "40", "50", "string", "number"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-    
+
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
@@ -761,7 +761,7 @@ public class HTMLInputElementTest extends WebTestCase {
         final String[] expectedAlerts = {"text text", "password password", "hidden hidden",
             "checkbox checkbox", "radio radio", "file file", "checkbox checkbox"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-    
+
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);

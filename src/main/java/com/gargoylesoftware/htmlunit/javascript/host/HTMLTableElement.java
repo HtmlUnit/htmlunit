@@ -184,7 +184,7 @@ public class HTMLTableElement extends RowContainer {
     protected String getXPathRows() {
         return "./node()/tr";
     }
-  
+
     /**
      * Handle special case where table is empty.
      * {@inheritDoc}
@@ -209,7 +209,7 @@ public class HTMLTableElement extends RowContainer {
     public String jsxGet_width() {
         return getHtmlElementOrDie().getAttributeValue("width");
     }
-    
+
     /**
      * Sets the <tt>width</tt> attribute.
      * @param width the <tt>width</tt> attribute
@@ -225,7 +225,7 @@ public class HTMLTableElement extends RowContainer {
     public String jsxGet_cellSpacing() {
         return getHtmlElementOrDie().getAttributeValue("cellspacing");
     }
-    
+
     /**
      * Sets the <tt>cellSpacing</tt> attribute.
      * @param cellSpacing the <tt>cellSpacing</tt> attribute
@@ -241,7 +241,7 @@ public class HTMLTableElement extends RowContainer {
     public String jsxGet_cellPadding() {
         return getHtmlElementOrDie().getAttributeValue("cellpadding");
     }
-    
+
     /**
      * Sets the <tt>cellPadding</tt> attribute.
      * @param cellPadding the <tt>cellPadding</tt> attribute

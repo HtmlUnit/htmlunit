@@ -69,7 +69,7 @@ public final class ScriptExceptionTest extends WebTestCase {
             assertEquals(URL_GARGOYLE, e.getPage().getWebResponse().getUrl());
         }
     }
-    
+
     /**
      * Test the JavaScript stacktrace.
      * Note: this test will fail when the information (line, col, source name) provided to execute
@@ -89,16 +89,16 @@ public final class ScriptExceptionTest extends WebTestCase {
             final Locale locale = Locale.getDefault();
             // Set the default locale to US because Rhino messages are localized
             Locale.setDefault(Locale.US);
-            
+
             loadPage(getBrowserVersion(), getFileContent(baseFileName + ".html"), null);
-            
+
             Locale.setDefault(locale);
         }
         catch (final ScriptException e) {
             final StringWriter stringWriter = new StringWriter();
             final PrintWriter printWriter = new PrintWriter(stringWriter);
             e.printScriptStackTrace(printWriter);
-            
+
             final String expectedTrace = getFileContent(baseFileName + ".txt");
             assertEquals(expectedTrace, stringWriter.toString());
             return;

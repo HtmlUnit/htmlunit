@@ -131,7 +131,7 @@ public class HTMLFormElementTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -1090,7 +1090,7 @@ public class HTMLFormElementTest extends WebTestCase {
         createTestPageForRealBrowserIfNeeded(content, emptyList);
         loadPage(content);
     }
-    
+
     /**
      * Test that the form from the right page is returned after browsing.
      * Regression test for
@@ -1206,7 +1206,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "<input type='submit' id='theButton'>\n"
             + "</form>\n"
             + "</body></html>";
-        
+
         final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {"true"};
         final HtmlPage page1 = loadPage(content, collectedAlerts);
@@ -1236,7 +1236,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "<body onload=test()>\n"
             + "  <form id='myForm'></form>\n"
             + "</body></html>";
-        
+
         final String[] expectedAlerts = {"\nfunction handler() {\n}\n", "null"};
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(html, collectedAlerts);

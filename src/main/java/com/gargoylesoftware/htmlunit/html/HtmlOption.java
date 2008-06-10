@@ -89,7 +89,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
         setSelectedInternal(selected);
         return getPage();
     }
-    
+
     /**
      * {@inheritDoc}
      * @see DomNode#insertBefore(DomNode)
@@ -131,7 +131,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     public final String getSelectedAttribute() {
         return getAttributeValue("selected");
     }
-    
+
     /**
      * Returns whether this Option is selected by default.
      * That is whether the "selected"

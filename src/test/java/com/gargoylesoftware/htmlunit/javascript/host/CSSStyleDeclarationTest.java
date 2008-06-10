@@ -343,7 +343,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "<div id='div1'>foo</div></body></html>";
         loadPageWithAlerts(html);
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -686,7 +686,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
         Collections.sort(collectedStyles);
         assertEquals(expectedStyles.toString(), collectedStyles.toString());
     }
-    
+
     /**
      * Test types of properties.
      * @throws Exception if the test fails

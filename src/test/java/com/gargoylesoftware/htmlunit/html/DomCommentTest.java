@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  */
 public class DomCommentTest extends WebTestCase {
-    
+
     /**
      * Test the comment not visible when viewed by user.
      * @throws Exception if the test fails
@@ -50,7 +50,7 @@ public class DomCommentTest extends WebTestCase {
         final HtmlPage page = loadPage(content);
         final HtmlElement elt = page.getHtmlElementById("foo");
         final DomNode node = elt.getFirstChild();
-        
+
         assertEquals(comment, node.asXml());
     }
 

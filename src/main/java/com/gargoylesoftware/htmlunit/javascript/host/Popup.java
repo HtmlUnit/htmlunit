@@ -46,10 +46,10 @@ public class Popup extends SimpleScriptable {
     public Popup() {
         opened_ = false;
     }
-    
+
     void init(final Window openerJSWindow) {
         // build document
-        
+
         document_ = new Document();
         document_.setPrototype(openerJSWindow.getPrototype(Document.class));
         document_.setParentScope(this);
@@ -111,7 +111,7 @@ class PopupPseudoWebWindow implements WebWindow {
     private final WebClient webClient_;
     private Object scriptObject_;
     private Page enclosedPage_;
-    
+
     PopupPseudoWebWindow(final WebClient webClient) {
         webClient_ = webClient;
 

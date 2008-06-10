@@ -79,7 +79,7 @@ public class XMLDocumentTest extends WebTestCase {
         testLoad(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "books", "books", "1", "book", "0"});
         testLoad(BrowserVersion.FIREFOX_2, new String[] {"true", "books", "books", "3", "#text", "0"});
     }
-    
+
     private void testLoad(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -100,7 +100,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        
+
         final String xml
             = "<books>\n"
             + "  <book>\n"
@@ -131,12 +131,12 @@ public class XMLDocumentTest extends WebTestCase {
         testLoad_relativeURL(BrowserVersion.FIREFOX_2,
                 new String[] {"true", "books", "books", "3", "#text"});
     }
-    
+
     private void testLoad_relativeURL(final BrowserVersion browserVersion, final String[] expectedAlerts)
         throws Exception {
         final URL firstURL = new URL("http://htmlunit/first.html");
         final URL secondURL = new URL("http://htmlunit/second.xml");
-        
+
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
@@ -155,7 +155,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        
+
         final String xml
             = "<books>\n"
             + "  <book>\n"
@@ -224,7 +224,7 @@ public class XMLDocumentTest extends WebTestCase {
             //expected
         }
     }
-    
+
     private void testSelectNodes(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -243,7 +243,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        
+
         final String xml
             = "<books>\n"
             + "  <book>\n"
@@ -263,7 +263,7 @@ public class XMLDocumentTest extends WebTestCase {
         client.getPage(URL_FIRST);
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -452,7 +452,7 @@ public class XMLDocumentTest extends WebTestCase {
         final String[] expectedAlerts = {"true", "true", "true", "true", "true", "true", "true", "true",
             "false",
             "true", "true", "true", "true", "true", "true", "true", "true"};
-        
+
         final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7_0);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -520,7 +520,7 @@ public class XMLDocumentTest extends WebTestCase {
         testLoad_Encoding(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlerts);
         testLoad_Encoding(BrowserVersion.FIREFOX_2, expectedAlerts);
     }
-    
+
     private void testLoad_Encoding(final BrowserVersion browserVersion, final String[] expectedAlerts)
         throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -541,7 +541,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        
+
         final String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
             + "<something>\u064A\u0627 \u0644\u064A\u064A\u064A\u064A\u064A\u064A\u0644</something>";
 
@@ -577,7 +577,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "    </columns>\n"
             + "  </xml>\n"
             + "</body></html>";
-        
+
         final String[] expectedAlerts = {"columns"};
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, collectedAlerts);
@@ -604,7 +604,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "    </columns>\n"
             + "  </xml>\n"
             + "</body></html>";
-        
+
         final String[] expectedAlerts = {"true"};
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);

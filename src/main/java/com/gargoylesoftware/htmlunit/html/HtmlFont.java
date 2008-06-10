@@ -121,7 +121,7 @@ public class HtmlFont extends StyledElement {
     protected boolean isRenderedVisible() {
         return false;
     }
-    
+
     /**
      * {@inheritDoc}
      */

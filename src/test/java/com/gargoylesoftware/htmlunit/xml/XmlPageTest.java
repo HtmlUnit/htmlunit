@@ -165,7 +165,7 @@ public class XmlPageTest extends WebTestCase {
     public void testLoad_XMLComment() throws Exception {
         final URL firstURL = new URL("http://htmlunit/first.html");
         final URL secondURL = new URL("http://htmlunit/second.xml");
-        
+
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
@@ -181,7 +181,7 @@ public class XmlPageTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        
+
         final String xml = "<test><!-- --></test>";
 
         final String[] expectedAlerts = new String[] {"true", "8"};
@@ -235,7 +235,7 @@ public class XmlPageTest extends WebTestCase {
         loadPage(getBrowserVersion(), content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
-        
+
     /**
      * Tests a simplified real-life response from Ajax4jsf.
      * @throws Exception if the test fails

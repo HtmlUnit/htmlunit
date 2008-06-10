@@ -95,7 +95,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         assertTrue("Documnet should now be loaded", JavaScriptConfiguration.isDocumentLoaded());
     }
-    
+
     /**
      * Tests loading a configuration from the supplied stream.
      */
@@ -105,7 +105,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration();
         assertTrue("Documnet should now be loaded", JavaScriptConfiguration.isDocumentLoaded());
     }
-        
+
     /**
      * Tests getting the configuration for the full browser.
      * @throws Exception - Exception on error
@@ -138,7 +138,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         expectedConfig.addProperty("readyState", true, false);
         assertTrue("Document property did not match", configuration.classConfigEquals("Document", expectedConfig));
     }
-    
+
     /**
      * Test getting the configuration for the Netscape browser. The readyState property should not be available
      * in this case.
@@ -171,7 +171,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             Document.class.getName(), null, null, null, true);
         assertTrue("Document property did not match", configuration.classConfigEquals("Document", expectedConfig));
     }
-    
+
     /**
      * Test that the JSObject is being set correctly.
      * @throws Exception on error
@@ -297,7 +297,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         assertTrue("Document should not property did not match",
             configuration.classConfigEquals("Document", expectedConfig));
     }
-    
+
     /**
      * Test getting the configuration for the browser max version. The readyState property should not be
      * available in this case.
@@ -455,7 +455,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
 
         parser.parse(createInputSourceForFile(directory + "JavaScriptConfiguration.xml"));
     }
-    
+
     private InputSource createInputSourceForFile(final String fileName) throws FileNotFoundException {
         return new InputSource(getFileAsStream(fileName));
     }
@@ -474,7 +474,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     @Test
     public void testConfigurationFile() throws Exception {
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getAllEntries();
-        
+
         for (final String classname : configuration.keySet()) {
             getLog().debug("Now testing for class " + classname);
             final Class< ? > clazz = configuration.getClassObject(classname);
@@ -509,7 +509,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
 //        Now test the config for each class and test for methods being defined in the config file
 //        This is the place
     }
-    
+
     private boolean checkForIgnore(final String methodName, final String classname) {
         final String[] ignoreList = {"Button|jsxGet_form",
             "FormField|jsxGet_form",
@@ -563,7 +563,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         assertTrue("Requested property should have existed",
             configuration.propertyExists(Document.class, "readyState"));
     }
-    
+
     /**
      * Tests for if the property exists for the configuration.
      * @throws Exception if an error occurs
@@ -632,7 +632,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
 
         final org.w3c.dom.Document doc =
             documentBuilder.parse(createInputSourceForFile(directory + "JavaScriptConfiguration.xml"));
-        
+
         String lastClassName = null;
         Node node = doc.getDocumentElement().getFirstChild();
         while (node != null) {

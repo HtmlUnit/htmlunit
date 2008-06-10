@@ -80,7 +80,7 @@ public class StyleSheetListTest extends WebTestCase {
             + "</html>";
 
         final String css = "div {color:red}";
-        
+
         final String[] expectedAlerts = {"red"};
         final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_2);
