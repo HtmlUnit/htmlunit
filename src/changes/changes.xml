@@ -7,6 +7,10 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="fix" dev="sdanig">
+                Fix HtmlTextInput.type(), HtmlTextArea.type() and HtmlPasswordInput.type() to handle backspaces
+                correctly.
+            </action>
             <action type="fix" dev="sdanig" id="1822108">
                 JavaScript: implemented a workaround for Rhino bug in number primitive resolution (Rhino bug 374918).
             </action>

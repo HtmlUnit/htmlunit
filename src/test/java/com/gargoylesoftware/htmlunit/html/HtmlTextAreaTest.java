@@ -155,4 +155,25 @@ public class HtmlTextAreaTest extends WebTestCase {
         text1.type("abcd");
         assertEquals("abc", text1.getText());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void type() throws Exception {
+        final String html = "<html><head></head><body><textarea id='t'></textarea></body></html>";
+        final HtmlPage page = loadPage(html, null);
+        final HtmlTextArea t = (HtmlTextArea) page.getHtmlElementById("t");
+        t.type("abc");
+        assertEquals("abc", t.getText());
+        t.type('\b');
+        assertEquals("ab", t.getText());
+        t.type('\b');
+        assertEquals("a", t.getText());
+        t.type('\b');
+        assertEquals("", t.getText());
+        t.type('\b');
+        assertEquals("", t.getText());
+    }
+
 }

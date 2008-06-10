@@ -39,15 +39,19 @@ public class HtmlTextInputTest extends WebTestCase {
      */
     @Test
     public void type() throws Exception {
-        final String html =
-            "<html><head></head>\n"
-            + "<body>\n"
-            + "<input id='text1'/>\n"
-            + "</body></html>";
+        final String html = "<html><head></head><body><input id='t'/></body></html>";
         final HtmlPage page = loadPage(getBrowserVersion(), html, null);
-        final HtmlTextInput text1 = (HtmlTextInput) page.getHtmlElementById("text1");
-        text1.type("abcd");
-        assertEquals("abcd", text1.getValueAttribute());
+        final HtmlTextInput t = (HtmlTextInput) page.getHtmlElementById("t");
+        t.type("abc");
+        assertEquals("abc", t.getValueAttribute());
+        t.type('\b');
+        assertEquals("ab", t.getValueAttribute());
+        t.type('\b');
+        assertEquals("a", t.getValueAttribute());
+        t.type('\b');
+        assertEquals("", t.getValueAttribute());
+        t.type('\b');
+        assertEquals("", t.getValueAttribute());
     }
 
     /**

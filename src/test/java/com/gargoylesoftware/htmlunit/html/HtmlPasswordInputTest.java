@@ -34,15 +34,19 @@ public class HtmlPasswordInputTest extends WebTestCase {
      */
     @Test
     public void type() throws Exception {
-        final String html =
-            "<html><head></head>\n"
-            + "<body>\n"
-            + "<input type='password' id='text1'/>\n"
-            + "</body></html>";
+        final String html = "<html><head></head><body><input type='password' id='p'/></body></html>";
         final HtmlPage page = loadPage(getBrowserVersion(), html, null);
-        final HtmlPasswordInput password = (HtmlPasswordInput) page.getHtmlElementById("text1");
-        password.type("abcd");
-        assertEquals("abcd", password.getValueAttribute());
+        final HtmlPasswordInput p = (HtmlPasswordInput) page.getHtmlElementById("p");
+        p.type("abc");
+        assertEquals("abc", p.getValueAttribute());
+        p.type('\b');
+        assertEquals("ab", p.getValueAttribute());
+        p.type('\b');
+        assertEquals("a", p.getValueAttribute());
+        p.type('\b');
+        assertEquals("", p.getValueAttribute());
+        p.type('\b');
+        assertEquals("", p.getValueAttribute());
     }
 
 }
