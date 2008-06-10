@@ -1124,7 +1124,7 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSubmitWithOnClickThatReturnsFalse() throws Exception {
-        final String firstContent = "<html><head><title>foo</title></haed><body>\n"
+        final String firstContent = "<html><head><title>foo</title></head><body>\n"
             + "<form action='" + URL_SECOND + "' method='post'>\n"
             + "  <input type='submit' name='mySubmit' onClick='document.forms[0].submit(); return false;'>\n"
             + "</form></body></html>";
@@ -1169,7 +1169,7 @@ public class HtmlFormTest extends WebTestCase {
 
     private void testSubmitURLWithoutParameters(final BrowserVersion browserVersion, final String expectedURL)
         throws Exception {
-        final String firstContent = "<html><head><title>foo</title></haed><body>\n"
+        final String firstContent = "<html><head><title>foo</title></head><body>\n"
             + "<form action='" + URL_SECOND + "'>\n"
             + "  <input type='submit' name='mySubmit' onClick='document.forms[0].submit(); return false;'>\n"
             + "</form></body></html>";
