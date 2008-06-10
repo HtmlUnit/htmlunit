@@ -35,7 +35,7 @@ import org.mozilla.javascript.ScriptableObject;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class StringPrimitivePrototypeBugFixer implements Scriptable {
+public class PrimitivePrototypeBugFixer implements Scriptable {
 
     private static final Field FieldPrototypeProperty_;
     private static final Field FieldContextLastInterpreterFrame_;
@@ -68,14 +68,14 @@ public class StringPrimitivePrototypeBugFixer implements Scriptable {
     private static void installWorkaround(final Scriptable topScope, final String name) throws Exception {
         final BaseFunction stringObj = (BaseFunction) topScope.get(name, topScope);
         final Scriptable stringPrototype = (Scriptable) FieldPrototypeProperty_.get(stringObj);
-        final StringPrimitivePrototypeBugFixer wrapper = new StringPrimitivePrototypeBugFixer(name, stringPrototype);
+        final PrimitivePrototypeBugFixer wrapper = new PrimitivePrototypeBugFixer(name, stringPrototype);
         FieldPrototypeProperty_.set(stringObj, wrapper);
     }
 
     private final String name_;
     private final Scriptable wrapped_;
 
-    StringPrimitivePrototypeBugFixer(final String name, final Scriptable wrapped) {
+    PrimitivePrototypeBugFixer(final String name, final Scriptable wrapped) {
         name_ = name;
         wrapped_ = wrapped;
     }

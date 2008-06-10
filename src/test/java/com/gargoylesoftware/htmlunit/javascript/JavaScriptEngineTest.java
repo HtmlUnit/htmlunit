@@ -1305,7 +1305,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
     /**
      * Test for Rhino bug https://bugzilla.mozilla.org/show_bug.cgi?id=374918
-     * Once this bug is fixed, {@link StringPrimitivePrototypeBugFixer} can be completely removed
+     * Once this bug is fixed, {@link PrimitivePrototypeBugFixer} can be completely removed
      * as well as this unit test.
      * Correct string primitive prototype resolution within HtmlUnit is tested
      * by {@link #prototypeScope()}
