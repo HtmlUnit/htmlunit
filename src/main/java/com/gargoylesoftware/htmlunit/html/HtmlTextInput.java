@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 public class HtmlTextInput extends HtmlInput {
 
     private static final long serialVersionUID = -2473799124286935674L;
+
     private boolean preventDefault_;
 
     private int selectionStart_;
@@ -70,13 +71,16 @@ public class HtmlTextInput extends HtmlInput {
      */
     @Override
     protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+        if (preventDefault_) {
+            return;
+        }
         final String value = getValueAttribute();
         if (c == '\b') {
             if (value.length() > 0) {
                 setValueAttribute(value.substring(0, value.length() - 1));
             }
         }
-        else if ((c == ' ' || !Character.isWhitespace(c)) && !preventDefault_) {
+        else if ((c == ' ' || !Character.isWhitespace(c))) {
             setValueAttribute(value + c);
         }
     }
