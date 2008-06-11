@@ -653,146 +653,36 @@
         <property name="style" readable="true" writable="false"/>
     </class>
 
-    <class name="Document" extends="EventNode" classname="com.gargoylesoftware.htmlunit.javascript.host.Document"
-        JSObject="true">
-        <!-- NOT FINISHED -->
-
-        <doclink
-            url="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919"
-            descr="WC3 Documentation (Level 1)"/>
-        <doclink
-            url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_document.asp"
-            descr="MSDN documentation"/>
-
-        <property name="all" readable="true" writable="false">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox" min-version="1.5"/>
-        </property>
-        <property name="alinkColor" notImplemented="true" readable="true" writable="false"/>
-        <property name="anchors" readable="true" writable="false">
-            <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/anchors.asp"
-                descr="MSDN documentation"/>
-            <doclink
-                url="http://www.mozilla.org/docs/dom/domref/dom_doc_ref4.html#1024543"
-                descr="Gecko DOM reference"/>
-        </property>
-        <property name="applets" notImplemented="true" readable="true" writable="false"/>
-        <property name="body" readable="true" writable="false"/>
-        <property name="bgColor" notImplemented="true" readable="true" writable="false"/>
-        <property name="cookie" readable="true" writable="true">
-            <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/cookie.asp"
-                descr="MSDN documentation"/>
-        </property>
+    <class name="Document" extends="EventNode" classname="com.gargoylesoftware.htmlunit.javascript.host.Document" JSObject="true">
         <property name="defaultView" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
         <property name="documentElement" readable="true" writable="false"/>
-        <property name="domain" readable="true" writable="true">
-            <doclink
-                url="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-2250147"
-                descr="WC3 Documentation (Level 1)"/>
-        </property>
-        <property name="embeds" notImplemented="true" readable="true" writable="false">
-            <javascript min-version="1.1"/>
-        </property>
-        <property name="fgColor" notImplemented="true" readable="true" writable="false"/>
-        <property name="forms" readable="true" writable="false"/>
-        <property name="frames" readable="true" writable="false">
-            <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/frames.asp"
-                descr="MSDN documentation"/>
-            <browser name="Microsoft Internet Explorer"/>
-        </property>
-        <property name="images" readable="true" writable="false">
-            <javascript min-version="1.1"/>
-        </property>
         <property name="implementation" readable="true" writable="false"/>
-        <property name="lastModified" notImplemented="true" readable="true" writable="false"/>
-        <property name="linkColor" notImplemented="true" readable="true" writable="false"/>
-        <property name="links" readable="true" writable="false"/>
         <property name="location" readable="true" writable="true">
             <doclink
                 url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_location.asp"
                 descr="MSDN documentation"/>
         </property>
-        <property name="parentWindow" readable="true" writable="false">
-            <browser name="Microsoft Internet Explorer"/>
-        </property>
-        <property name="plugins" notImplemented="true" readable="true" writable="false">
-            <javascript min-version="1.1"/>
-        </property>
-        <property name="readyState" readable="true" writable="false">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-        </property>
         <property name="referrer" readable="true" writable="false"/>
-        <property name="scripts" readable="true" writable="false"/>
-        <property name="selection" readable="true" writable="false">
-            <browser name="Microsoft Internet Explorer"/>
-        </property>
-        <property name="styleSheets" readable="true" writable="false"/>
-        <property name="title" readable="true" writable="true"/>
-        <property name="URL" readable="true" writable="false"/>
-        <property name="vlinkColor" notImplemented="true" readable="true" writable="false"/>
-
-        <function name="clear" notImplemented="true"/>
-        <function name="close"/>
         <function name="createAttribute"/>
         <function name="createDocumentFragment"/>
         <function name="createElement"/>
-        <function name="createElementNS">
-            <browser name="Firefox"/>
-        </function>
         <function name="createNSResolver">
             <browser name="Firefox"/>
         </function>
-        <function name="createStyleSheet">
-            <browser name="Microsoft Internet Explorer"/>
-        </function>
-        <function name="createRange">
-            <doclink
-                url="http://www.xulplanet.com/references/objref/HTMLDocument.html#method_createRange"
-                descr="XUL Planet"/>
-            <browser name="Firefox"/>
-        </function>
         <function name="createTextNode"/>
-        <function name="elementFromPoint">
-            <browser name="Microsoft Internet Explorer"/>
-        </function>
         <function name="evaluate">
             <browser name="Firefox"/>
         </function>
-        <function name="execCommand"/>
         <function name="getBoxObjectFor">
             <doclink
                 url="http://www.xulplanet.com/references/xpcomref/ifaces/nsIDOMNSDocument.html#method_getBoxObjectFor"
                 descr="XUL Planet"/>
             <browser name="Firefox"/>
         </function>
-        <function name="getElementById"/>
-        <function name="getElementsByName"/>
-        <function name="getElementsByTagName"/>
         <function name="importNode">
             <browser name="Firefox"/>
-        </function>
-        <function name="open">
-            <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/open_1.asp"
-                descr="MSDN documentation"/>
-        </function>
-        <function name="queryCommandSupported">
-            <doclink
-                url="http://msdn2.microsoft.com/en-us/library/ms536681(VS.85).aspx"
-                descr="MSDN documentation"/>
-        </function>
-        <function name="write"/>
-        <function name="writeln"/>
-        <function name="createEvent">
-            <browser name="Firefox"/>
-        </function>
-        <function name="createEventObject">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
         </function>
     </class>
 
@@ -1060,6 +950,119 @@
 
     <class name="HTMLDListElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDListElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlDefinitionList">
+    </class>
+
+    <class name="HTMLDocument" extends="Document" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDocument"
+        JSObject="true">
+        <!-- NOT FINISHED -->
+
+        <doclink
+            url="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919"
+            descr="WC3 Documentation (Level 1)"/>
+        <doclink
+            url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_document.asp"
+            descr="MSDN documentation"/>
+
+        <property name="all" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Firefox" min-version="1.5"/>
+        </property>
+        <property name="alinkColor" notImplemented="true" readable="true" writable="false"/>
+        <property name="anchors" readable="true" writable="false">
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/anchors.asp"
+                descr="MSDN documentation"/>
+            <doclink
+                url="http://www.mozilla.org/docs/dom/domref/dom_doc_ref4.html#1024543"
+                descr="Gecko DOM reference"/>
+        </property>
+        <property name="applets" notImplemented="true" readable="true" writable="false"/>
+        <property name="body" readable="true" writable="false"/>
+        <property name="bgColor" notImplemented="true" readable="true" writable="false"/>
+        <property name="cookie" readable="true" writable="true">
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/cookie.asp"
+                descr="MSDN documentation"/>
+        </property>
+        <property name="domain" readable="true" writable="true">
+            <doclink
+                url="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-2250147"
+                descr="WC3 Documentation (Level 1)"/>
+        </property>
+        <property name="embeds" notImplemented="true" readable="true" writable="false">
+            <javascript min-version="1.1"/>
+        </property>
+        <property name="fgColor" notImplemented="true" readable="true" writable="false"/>
+        <property name="forms" readable="true" writable="false"/>
+        <property name="frames" readable="true" writable="false">
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/frames.asp"
+                descr="MSDN documentation"/>
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="images" readable="true" writable="false">
+            <javascript min-version="1.1"/>
+        </property>
+        <property name="lastModified" notImplemented="true" readable="true" writable="false"/>
+        <property name="linkColor" notImplemented="true" readable="true" writable="false"/>
+        <property name="links" readable="true" writable="false"/>
+        <property name="parentWindow" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="plugins" notImplemented="true" readable="true" writable="false">
+            <javascript min-version="1.1"/>
+        </property>
+        <property name="readyState" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+        </property>
+        <property name="scripts" readable="true" writable="false"/>
+        <property name="selection" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="styleSheets" readable="true" writable="false"/>
+        <property name="title" readable="true" writable="true"/>
+        <property name="URL" readable="true" writable="false"/>
+        <property name="vlinkColor" notImplemented="true" readable="true" writable="false"/>
+
+        <function name="clear" notImplemented="true"/>
+        <function name="close"/>
+        <function name="createElementNS">
+            <browser name="Firefox"/>
+        </function>
+        <function name="createStyleSheet">
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
+        <function name="createRange">
+            <doclink
+                url="http://www.xulplanet.com/references/objref/HTMLDocument.html#method_createRange"
+                descr="XUL Planet"/>
+            <browser name="Firefox"/>
+        </function>
+        <function name="elementFromPoint">
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
+        <function name="execCommand"/>
+        <function name="getElementById"/>
+        <function name="getElementsByName"/>
+        <function name="getElementsByTagName"/>
+        <function name="open">
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/open_1.asp"
+                descr="MSDN documentation"/>
+        </function>
+        <function name="queryCommandSupported">
+            <doclink
+                url="http://msdn2.microsoft.com/en-us/library/ms536681(VS.85).aspx"
+                descr="MSDN documentation"/>
+        </function>
+        <function name="write"/>
+        <function name="writeln"/>
+        <function name="createEvent">
+            <browser name="Firefox"/>
+        </function>
+        <function name="createEventObject">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+        </function>
     </class>
 
     <class name="HTMLElement" extends="Element" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLElement"
@@ -2091,6 +2094,10 @@
                     descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer"/>
         </property>
+        <function name="getElementById">
+            <browser name="Firefox"/>
+        </function>
+        <function name="getElementsByTagName"/>
         <function name="load">
             <doclink url="http://msdn2.microsoft.com/en-us/library/ms762722.aspx"
                     descr="MSDN documentation"/>

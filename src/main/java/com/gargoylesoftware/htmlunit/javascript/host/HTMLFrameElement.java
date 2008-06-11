@@ -47,7 +47,7 @@ public class HTMLFrameElement extends HTMLElement {
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_frame_ref4.html">
      * Gecko DOM Reference</a>
      */
-    public Document jsxGet_contentDocument() {
+    public HTMLDocument jsxGet_contentDocument() {
         return ((Window) getFrame().getEnclosedWindow().getScriptObject()).jsxGet_document();
     }
 

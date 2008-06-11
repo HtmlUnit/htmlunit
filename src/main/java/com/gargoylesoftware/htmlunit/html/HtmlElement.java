@@ -314,11 +314,20 @@ public abstract class HtmlElement extends DomElement implements Element {
             value = ATTRIBUTE_VALUE_EMPTY;
         }
 
-        getPage().removeMappedElement(this);
-        final DomAttr newAttr = addAttributeToMap(getPage(), attributes_, namespaceURI,
+        // TODO: cleanup. This is a hack for HtmlElement living within an XmlPage
+        if ((getOwnerDocument() instanceof HtmlPage)) {
+            getPage().removeMappedElement(this);
+        }
+
+        final DomAttr newAttr = addAttributeToMap((Page) getOwnerDocument(), attributes_, namespaceURI,
             qualifiedName.toLowerCase(), value);
         if (namespaceURI != null) {
             namespaces_.put(namespaceURI, newAttr.getPrefix());
+        }
+
+        // TODO: cleanup. This is a hack for HtmlElement living within an XmlPage
+        if (!(getOwnerDocument() instanceof HtmlPage)) {
+            return;
         }
         getPage().addMappedElement(this);
 

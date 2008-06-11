@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 /**
- * Tests for {@link Document}.
+ * Tests for {@link HTMLDocument}.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -2421,24 +2421,24 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void buildCookie() throws Exception {
-        checkCookie(Document.buildCookie("toto=foo", URL_FIRST), "toto", "foo", "", "first", false, null);
-        checkCookie(Document.buildCookie("toto=", URL_FIRST), "toto", "", "", "first", false, null);
-        checkCookie(Document.buildCookie("toto=foo;secure", URL_FIRST), "toto", "foo", "", "first", true, null);
-        checkCookie(Document.buildCookie("toto=foo;path=/myPath;secure", URL_FIRST),
+        checkCookie(HTMLDocument.buildCookie("toto=foo", URL_FIRST), "toto", "foo", "", "first", false, null);
+        checkCookie(HTMLDocument.buildCookie("toto=", URL_FIRST), "toto", "", "", "first", false, null);
+        checkCookie(HTMLDocument.buildCookie("toto=foo;secure", URL_FIRST), "toto", "foo", "", "first", true, null);
+        checkCookie(HTMLDocument.buildCookie("toto=foo;path=/myPath;secure", URL_FIRST),
                 "toto", "foo", "/myPath", "first", true, null);
 
         // Check that leading and trailing whitespaces are ignored
-        checkCookie(Document.buildCookie("   toto=foo;  path=/myPath  ; secure  ", URL_FIRST),
+        checkCookie(HTMLDocument.buildCookie("   toto=foo;  path=/myPath  ; secure  ", URL_FIRST),
                 "toto", "foo", "/myPath", "first", true, null);
 
         // Check that we accept reserved attribute names (e.g expires, domain) in any case
-        checkCookie(Document.buildCookie("toto=foo; PATH=/myPath; SeCURE", URL_FIRST),
+        checkCookie(HTMLDocument.buildCookie("toto=foo; PATH=/myPath; SeCURE", URL_FIRST),
                 "toto", "foo", "/myPath", "first", true, null);
 
         // Check that we are able to parse and set the expiration date correctly
         final String dateString = "Fri, 21 Jul 2006 20:47:11 UTC";
         final Date date = DateUtil.parseDate(dateString);
-        checkCookie(Document.buildCookie("toto=foo; expires=" + dateString, URL_FIRST),
+        checkCookie(HTMLDocument.buildCookie("toto=foo; expires=" + dateString, URL_FIRST),
                 "toto", "foo", "", "first", false, date);
     }
 
@@ -3015,6 +3015,7 @@ public class DocumentTest extends WebTestCase {
 
     /**
      * Tests <tt>document.cloneNode()</tt>.
+     * IE specific.
      * @throws Exception if the test fails
      */
     @Test
@@ -3022,18 +3023,17 @@ public class DocumentTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-
         final String html = "<html><body id='hello' onload='doTest()'>\n"
                 + "  <script id='jscript'>\n"
                 + "    function doTest() {\n"
                 + "      var clone = document.cloneNode(true);\n"
                 + "      alert(clone.body);\n"
-                + "      assert(clone,'clone.body !== document.body');\n"
-                + "      assert(clone,'clone.getElementById(\"id1\") !== document.getElementById(\"id1\")');\n"
-                + "      assert(clone,'document.ownerDocument == null');\n"
-                + "      assert(clone,'clone.ownerDocument == document');\n"
-                + "      assert(clone,'document.getElementById(\"id1\").ownerDocument === document');\n"
-                + "      assert(clone,'clone.getElementById(\"id1\").ownerDocument === document');\n"
+                + "      alert(clone.body !== document.body);\n"
+                + "      alert(clone.getElementById(\"id1\") !== document.getElementById(\"id1\"));\n"
+                + "      alert(document.ownerDocument == null);\n"
+                + "      alert(clone.ownerDocument == document);\n"
+                + "      alert(document.getElementById(\"id1\").ownerDocument === document);\n"
+                + "      alert(clone.getElementById(\"id1\").ownerDocument === document);\n"
                 + "    }\n"
                 + "    function assert(clone, expr, info) {\n"
                 + "      if (!eval(expr)) {\n"
@@ -3044,7 +3044,8 @@ public class DocumentTest extends WebTestCase {
                 + "  <div id='id1'>hello</div>\n"
                 + "</body>\n" + "</html>";
 
-        final String[] expectedAlerts = {"[object]"};
+        final String[] expectedAlerts = {"[object]", "true", "true", "true", "true", "true", "true"};
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(html, collectedAlerts);
 
@@ -3485,5 +3486,27 @@ public class DocumentTest extends WebTestCase {
         final HtmlSpan span = (HtmlSpan) page.getHtmlElementById("s");
         span.click();
         assertEquals(expected, actual);
+    }
+
+    /**
+     * Test the value of document.ownerDocument.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void ownerDocument() throws Exception {
+        final String html = "<html><body id='hello' onload='doTest()'>\n"
+                + "  <script>\n"
+                + "    function doTest() {\n"
+                + "      alert(document.ownerDocument);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</body>\n" + "</html>";
+
+        final String[] expectedAlerts = {"null"};
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(html, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

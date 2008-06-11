@@ -16,6 +16,9 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
 
+import org.w3c.dom.DOMException;
+import org.w3c.dom.Element;
+
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 
@@ -124,4 +127,14 @@ public abstract class SgmlPage extends DomNode implements Page {
     public Page getPage() {
         return this;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public abstract Element getDocumentElement();
+
+    /**
+     * {@inheritDoc}
+     */
+    public abstract Element createElement(final String tagName) throws DOMException;
 }

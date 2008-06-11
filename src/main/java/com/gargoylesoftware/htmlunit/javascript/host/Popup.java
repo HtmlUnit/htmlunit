@@ -38,7 +38,7 @@ public class Popup extends SimpleScriptable {
 
     private static final long serialVersionUID = 2016351591254223906L;
     private boolean opened_;
-    private Document document_;
+    private HTMLDocument document_;
 
     /**
      * Creates a new instance. JavaScript objects must have a default constructor.
@@ -50,8 +50,8 @@ public class Popup extends SimpleScriptable {
     void init(final Window openerJSWindow) {
         // build document
 
-        document_ = new Document();
-        document_.setPrototype(openerJSWindow.getPrototype(Document.class));
+        document_ = new HTMLDocument();
+        document_.setPrototype(openerJSWindow.getPrototype(HTMLDocument.class));
         document_.setParentScope(this);
 
         final WebWindow openerWindow = openerJSWindow.getWebWindow();

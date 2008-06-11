@@ -46,6 +46,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class XMLDocument extends Document {
 
@@ -151,14 +152,6 @@ public class XMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    protected Object getWithPreemption(final String name) {
-        return NOT_FOUND;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public SimpleScriptable makeScriptableFor(final DomNode domNode) {
         final SimpleScriptable scriptable;
 
@@ -190,20 +183,6 @@ public class XMLDocument extends Document {
     @Override
     protected void initParentScope(final DomNode domNode, final SimpleScriptable scriptable) {
         scriptable.setParentScope(getParentScope());
-    }
-
-    /**
-     * Gets the JavaScript property "documentElement" for the document.
-     * @return the root node for the document
-     */
-    //TODO: should be removed, as super.jsxGet_documentElement should not be Html dependent
-    @Override
-    public SimpleScriptable jsxGet_documentElement() {
-        final XmlElement documentElement = ((XmlPage) getDomNodeOrDie()).getDocumentXmlElement();
-        if (documentElement == null) {
-            return null;
-        }
-        return getScriptableFor(documentElement);
     }
 
     /**
@@ -288,7 +267,6 @@ public class XMLDocument extends Document {
      * @param tagName the name to search for
      * @return all the descendant elements with the specified tag name
      */
-    @Override
     public HTMLCollection jsxFunction_getElementsByTagName(final String tagName) {
         final HTMLCollection collection = new HTMLCollection(this);
         collection.init(getDomNodeOrDie().getFirstChild(), "//" + tagName);
@@ -297,17 +275,7 @@ public class XMLDocument extends Document {
 
     /**
      * {@inheritDoc}
-     * Returns {@link #NOT_FOUND}.
      */
-    @Override
-    public Object jsxGet_body() {
-        return NOT_FOUND;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public Object jsxFunction_getElementById(final String id) {
         final XmlPage xmlPage = (XmlPage) getDomNodeOrDie();
         final Object domElement = xmlPage.getFirstByXPath("//*[@id = \"" + id + "\"]");
@@ -323,13 +291,4 @@ public class XMLDocument extends Document {
             return null;
         }
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean limitAppendChildToIE() {
-        return false;
-    }
-
 }

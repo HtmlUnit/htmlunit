@@ -70,7 +70,7 @@ public class StyleSheetList extends SimpleScriptable {
      *
      * @param document the owning document
      */
-    public StyleSheetList(final Document document) {
+    public StyleSheetList(final HTMLDocument document) {
         setParentScope(document);
         setPrototype(getPrototype(getClass()));
 

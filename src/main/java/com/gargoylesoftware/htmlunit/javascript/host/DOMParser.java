@@ -42,7 +42,7 @@ public class DOMParser extends SimpleScriptable {
      *        either <tt>text/xml</tt>, <tt>application/xml</tt>, or <tt>application/xhtml+xml</tt>. Must not be NULL.
      * @return the generated document
      */
-    public Document jsxFunction_parseFromString(final String str, final String contentType) {
+    public XMLDocument jsxFunction_parseFromString(final String str, final String contentType) {
         final XMLDocument document = new XMLDocument();
         document.setParentScope(getParentScope());
         document.setPrototype(getPrototype(XMLDocument.class));

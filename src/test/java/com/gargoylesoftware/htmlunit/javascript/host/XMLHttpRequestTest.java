@@ -1085,9 +1085,6 @@ public class XMLHttpRequestTest extends WebTestCase {
      */
     @Test
     public void testResponseXML_getElementById() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String[] expectedAlertsIE = {"[object]", "[object]", "[object]"};
         testResponseXML_getElementById(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlertsIE);
         final String[] expectedAlertsFF =

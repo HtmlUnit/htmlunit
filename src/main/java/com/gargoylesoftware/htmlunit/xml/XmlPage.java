@@ -252,10 +252,9 @@ public class XmlPage extends SgmlPage implements Document {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     public Element createElement(final String tagName) throws DOMException {
-        throw new UnsupportedOperationException("XmlPage.createElement is not yet implemented.");
+        return createXmlElement(tagName);
     }
 
     /**

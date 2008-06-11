@@ -202,4 +202,12 @@ public class XMLElement extends Node {
     public boolean jsxFunction_hasAttribute(final String name) {
         return ((XmlElement) getDomNodeOrDie()).hasAttribute(name);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getClassName() {
+        return "Element";
+    }
 }

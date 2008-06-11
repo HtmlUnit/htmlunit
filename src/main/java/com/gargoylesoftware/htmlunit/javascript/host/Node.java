@@ -618,6 +618,10 @@ public class Node extends SimpleScriptable {
      * @return the document
      */
     public Object jsxGet_ownerDocument() {
-        return ((SgmlPage) getDomNodeOrDie().getPage()).getScriptObject();
+        final Object document = getDomNodeOrDie().getOwnerDocument();
+        if (document == null) {
+            return null;
+        }
+        return ((SgmlPage) document).getScriptObject();
     }
 }

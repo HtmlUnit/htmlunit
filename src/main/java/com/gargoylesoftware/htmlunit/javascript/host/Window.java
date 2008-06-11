@@ -76,7 +76,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 public class Window extends SimpleScriptable implements ScriptableWithFallbackGetter {
 
     private static final long serialVersionUID = -7730298149962810325L;
-    private Document document_;
+    private HTMLDocument document_;
     private Navigator navigator_;
     private WebWindow webWindow_;
     private Screen screen_;
@@ -184,7 +184,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the JavaScript property "document".
      * @return the document
      */
-    public Document jsxGet_document() {
+    public HTMLDocument jsxGet_document() {
         return document_;
     }
 
@@ -397,9 +397,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         webWindow_ = webWindow;
         webWindow_.setScriptObject(this);
 
-        document_ = new Document();
+        document_ = new HTMLDocument();
         document_.setParentScope(this);
-        document_.setPrototype(getPrototype(Document.class));
+        document_.setPrototype(getPrototype(HTMLDocument.class));
         document_.setWindow(this);
         if (webWindow.getEnclosedPage() instanceof DomNode) {
             document_.setDomNode((DomNode) webWindow.getEnclosedPage());

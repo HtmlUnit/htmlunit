@@ -259,7 +259,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         else {
             response = new ArrayList<Object>();
         }
-        final boolean isXmlPage = node_ != null && node_.getPage() instanceof XmlPage;
+        final boolean isXmlPage = node_ != null && node_.getOwnerDocument() instanceof XmlPage;
 
         final boolean isIE = getBrowserVersion().isIE();
 

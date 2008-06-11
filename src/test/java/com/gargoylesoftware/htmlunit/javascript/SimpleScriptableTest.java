@@ -128,6 +128,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("History");
         names.remove("HTMLCollection");
         names.remove("HTMLCollectionTags");
+        names.remove("HTMLDocument");
         names.remove("HTMLOptionsCollection");
         names.remove("JavaScriptBackgroundJob");
         names.remove("Location");
