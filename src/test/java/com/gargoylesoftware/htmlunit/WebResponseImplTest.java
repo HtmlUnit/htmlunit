@@ -14,14 +14,25 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.Servlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.lang.ArrayUtils;
+import org.junit.After;
 import org.junit.Test;
+import org.mortbay.jetty.Server;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -33,6 +44,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  */
 public class WebResponseImplTest extends WebTestCase {
+
+    private Server server_;
 
     /**
      * Verifies that when no encoding header is provided, encoding may be recognized with its Byte Order Mark.
@@ -141,5 +154,48 @@ public class WebResponseImplTest extends WebTestCase {
         final Page page = webClient.getPage(URL_FIRST);
         assertEquals(expectedCharset, page.getWebResponse().getContentCharSet());
         assertEquals(cntTypeHeader, page.getWebResponse().getResponseHeaderValue("Content-Type"));
+    }
+
+    /**
+     * Performs post-test deconstruction.
+     * @throws Exception if an error occurs
+     */
+    @After
+    public void tearDown() throws Exception {
+        HttpWebConnectionTest.stopWebServer(server_);
+        server_ = null;
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void responseHeaders() throws Exception {
+        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        servlets.put("/test", ResponseHeadersServlet.class);
+        server_ = HttpWebConnectionTest.startWebServer("./", null, servlets);
+        final WebClient client = new WebClient();
+        final HtmlPage page = (HtmlPage) client.getPage("http://localhost:" + HttpWebConnectionTest.PORT + "/test");
+        assertEquals("some_value", page.getWebResponse().getResponseHeaderValue("some_header"));
+    }
+
+    /**
+     * Servlet for {@link #responseHeaders()}.
+     */
+    public static class ResponseHeadersServlet extends HttpServlet {
+
+        private static final long serialVersionUID = -8815307540281233182L;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            response.setContentType("text/html");
+            response.setHeader("some_header", "some_value");
+            final Writer writer = response.getWriter();
+            writer.write("<html/>");
+            writer.close();
+        }
     }
 }
