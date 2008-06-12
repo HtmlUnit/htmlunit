@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="fix" dev="mguillem" id="1990648" due-to="Sudhan Moghe">
+                Style attributes in upper case are not recognized.
+            </action>
             <action type="fix" dev="mguillem" id="1678826">
                 JavaScript: fixed document.write(ln) handling of &lt;br&gt; and &lt;hr&gt;.
             </action>

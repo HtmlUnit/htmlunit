@@ -40,6 +40,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Rodney Gitzel
+ * @author Sudhan Moghe
  */
 @RunWith(BrowserRunner.class)
 public class CSSStyleDeclarationTest extends WebTestCase {
@@ -1447,4 +1448,25 @@ public class CSSStyleDeclarationTest extends WebTestCase {
         assertEquals(expected, actual);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "BLACK", "pink", "color: pink;" })
+    public void caseInsensitive() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    var node = document.getElementById('div1');\n"
+            + "    var style = node.style;\n"
+            + "    alert(style.color);\n"
+            + "    style.color = 'pink';\n"
+            + "    alert(style.color);\n"
+            + "    alert(node.getAttribute('style'));\n"
+            + "}\n</script></head>\n"
+            + "<body onload='doTest()'><div id='div1' style='COLOR: BLACK'>foo</div></body></html>";
+
+        final HtmlPage page = loadPageWithAlerts(html);
+        assertEquals("color: pink;", page.getHtmlElementById("div1").getAttributeValue("style"));
+    }
 }

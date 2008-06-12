@@ -39,6 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Chris Erskine
  * @author Ahmed Ashour
  * @author Rodney Gitzel
+ * @author Sudhan Moghe
  */
 public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
@@ -288,7 +289,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
         for (final String token : styleAttribute.split(";")) {
             final int index = token.indexOf(":");
             if (index != -1) {
-                String key = token.substring(0, index).trim();
+                String key = token.substring(0, index).trim().toLowerCase();
                 if (camelCase) {
                     key = camelize(key);
                 }
