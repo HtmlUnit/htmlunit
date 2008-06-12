@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLBodyElement;
 
 /**
- * SAX parser implementation that uses the neko {@link org.cyberneko.html.HTMLConfiguration}
+ * SAX parser implementation that uses the NekoHTML {@link org.cyberneko.html.HTMLConfiguration}
  * to parse HTML into a HtmlUnit-specific DOM (HU-DOM) tree.
  * <p>
  * <em>Note that the parser currently does not handle CDATA or comment sections, i.e. these
@@ -61,6 +61,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.HTMLBodyElement;
  * @author David K. Taylor
  * @author Chris Erskine
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public final class HTMLParser {
 
@@ -318,7 +319,7 @@ public final class HTMLParser {
      * the ContentHandler interface. Thus all parser APIs are kept private. The ContentHandler methods
      * consume SAX events to build the page DOM
      */
-    private static final class HtmlUnitDOMBuilder extends AbstractSAXParser
+    static final class HtmlUnitDOMBuilder extends AbstractSAXParser
             implements ContentHandler, LexicalHandler, HTMLTagBalancingListener {
         private final HtmlPage page_;
 
@@ -330,9 +331,20 @@ public final class HTMLParser {
         private boolean headParsed_ = false;
         private HtmlElement body_;
         private Augmentations augmentations_;
-
         private HtmlForm formWaitingForLostChildren_;
         private static final String FEATURE_AUGMENTATIONS = "http://cyberneko.org/html/features/augmentations";
+
+        /**
+         * Calls {@link HTMLConfiguration#pushInputSource(XMLInputSource)} on the configuration.
+         * @param sourceString the string to push
+         */
+        public void pushInputString(final String sourceString) {
+            final WebResponse webResponse = page_.getWebResponse();
+            final String charSet = webResponse.getContentCharSet();
+            final XMLInputSource in = new XMLInputSource(null, webResponse.getUrl().toString(), null,
+                    new StringReader(sourceString), charSet);
+            ((HTMLConfiguration) fConfiguration).evaluateInputSource(in);
+        }
 
         /**
          * Creates a new builder for parsing the given response contents
@@ -379,19 +391,16 @@ public final class HTMLParser {
             return locator_;
         }
 
-        /**
-         * Sets the document locator.
-         * @param locator
-         */
+        /** {@inheritDoc ContentHandler#setDocumentLocator} */
         public void setDocumentLocator(final Locator locator) {
             locator_ = locator;
         }
 
-        /** @inheritDoc ContentHandler#startDocument() */
+        /** {@inheritDoc ContentHandler#startDocument()} */
         public void startDocument() throws SAXException {
         }
 
-        /** @inheritDoc ContentHandler#startElement(String,String,String,Attributes) */
+        /** {@inheritDoc ContentHandler#startElement(String,String,String,Attributes)} */
         public void startElement(
                 final String namespaceURI, final String localName,
                 final String qName, final Attributes atts)
@@ -448,7 +457,7 @@ public final class HTMLParser {
 
         }
 
-        /** @inheritDoc */
+        /** {@inheritDoc} */
         @Override
         public void endElement(final QName element, final Augmentations augs)
             throws XNIException {
@@ -457,7 +466,7 @@ public final class HTMLParser {
             super.endElement(element, augs);
         }
 
-        /** @inheritDoc ContentHandler@endElement(String,String,String) */
+        /** {@inheritDoc ContentHandler@endElement(String,String,String)} */
         public void endElement(final String namespaceURI, final String localName, final String qName)
             throws SAXException {
 
@@ -465,7 +474,6 @@ public final class HTMLParser {
 
             final DomNode previousNode = stack_.pop(); //remove currentElement from stack
             previousNode.setEndLocation(locator_.getLineNumber(), locator_.getColumnNumber());
-            previousNode.onAllChildrenAddedToPage();
 
             // special handling for form lost children (malformed html code where </form> is synthesized)
             if (previousNode instanceof HtmlForm
@@ -484,6 +492,9 @@ public final class HTMLParser {
             if (!stack_.isEmpty()) {
                 currentNode_ = stack_.peek();
             }
+
+            previousNode.onAllChildrenAddedToPage();
+
         }
 
         /** @inheritDoc ContentHandler#characters(char,int,int) */
@@ -508,8 +519,8 @@ public final class HTMLParser {
         private void handleCharacters() {
             if (characters_ != null && characters_.length() > 0) {
                 final DomText text = new DomText(page_, characters_.toString());
-                currentNode_.appendChild(text);
                 characters_.setLength(0);
+                currentNode_.appendChild(text);
             }
         }
 
@@ -526,59 +537,59 @@ public final class HTMLParser {
             return UnknownElementFactory.instance;
         }
 
-        /** @inheritDoc ContentHandler#endDocument() */
+        /** {@inheritDoc} */
         public void endDocument() throws SAXException {
             handleCharacters();
             final DomNode currentPage = page_;
             currentPage.setEndLocation(locator_.getLineNumber(), locator_.getColumnNumber());
         }
 
-        /** @inheritDoc ContentHandler#startPrefixMapping(String,String) */
+        /** {@inheritDoc} */
         public void startPrefixMapping(final String prefix, final String uri) throws SAXException {
         }
 
-        /** @inheritDoc ContentHandler#endPrefixMapping(String) */
+        /** {@inheritDoc} */
         public void endPrefixMapping(final String prefix) throws SAXException {
         }
 
-        /** @inheritDoc ContentHandler#processingInstrucction(String,String) */
+        /** {@inheritDoc} */
         public void processingInstruction(final String target, final String data) throws SAXException {
         }
 
-        /** @inheritDoc ContentHandler#skippedEntity(String) */
+        /** {@inheritDoc} */
         public void skippedEntity(final String name) throws SAXException {
         }
 
         // LexicalHandler methods
 
-        /** @inheritDoc LexicalHandler#comment(char[],int,int) */
+        /** {@inheritDoc} */
         public void comment(final char[] ch, final int start, final int length) {
             handleCharacters();
             final DomComment comment = new DomComment(page_, String.valueOf(ch, start, length));
             currentNode_.appendChild(comment);
         }
 
-        /** @inheritDoc LexicalHandler#endCDATA() */
+        /** {@inheritDoc} */
         public void endCDATA() {
         }
 
-        /** @inheritDoc LexicalHandler#endDTD() */
+        /** {@inheritDoc} */
         public void endDTD() {
         }
 
-        /** @inheritDoc LexicalHandler#endEntity() */
+        /** {@inheritDoc} */
         public void endEntity(final String name) {
         }
 
-        /** @inheritDoc LexicalHandler#startCDATA() */
+        /** {@inheritDoc} */
         public void startCDATA() {
         }
 
-        /** @inheritDoc LexicalHandler#startDTD(String,String,String) */
+        /** {@inheritDoc} */
         public void startDTD(final String name, final String publicId, final String systemId) {
         }
 
-        /** @inheritDoc LexicalHandler#startEntity(String) */
+        /** {@inheritDoc} */
         public void startEntity(final String name) {
         }
 
@@ -611,6 +622,19 @@ public final class HTMLParser {
                         }
                     }
                 }
+            }
+        }
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void parse(final XMLInputSource inputSource) throws XNIException, IOException {
+            page_.setBuilder(this);
+            try {
+                super.parse(inputSource);
+            }
+            finally {
+                page_.setBuilder(null);
             }
         }
     }

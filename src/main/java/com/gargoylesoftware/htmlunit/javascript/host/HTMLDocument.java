@@ -49,12 +49,10 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
-import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
-import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
 
@@ -296,10 +294,7 @@ public class HTMLDocument extends Document {
     protected void write(final String content) {
         getLog().debug("write: " + content);
 
-        // If the page isn't currently being parsed (i.e. this call to write() or writeln()
-        // was triggered by an event, setTimeout(), etc), then the new content will replace
-        // the entire page. Basically, we make an implicit open() call.
-        final HtmlPage page = getHtmlPage();
+        final HtmlPage page = (HtmlPage) getDomNodeOrDie();
         if (!page.isBeingParsed()) {
             writeInCurrentDocument_ = false;
         }
@@ -312,49 +307,14 @@ public class HTMLDocument extends Document {
             getLog().debug("wrote content to buffer");
             return;
         }
-
-        // If the buffered content isn't complete and wellformed; don't write to doc yet.
         final String bufferedContent = writeBuffer_.toString();
         if (!canAlreadyBeParsed(bufferedContent)) {
             getLog().debug("write: not enough content to parsed it now");
             return;
         }
 
-        // Let the user know that we can (and will) go ahead and write to the document.
-        getLog().debug("parsing buffered content: " + bufferedContent);
-
-        // Clear the buffer.
         writeBuffer_.setLength(0);
-
-        // Get the node at which the parsed content should be added.
-        HtmlElement current;
-        final HtmlElement doc = page.getDocumentElement();
-        HtmlElement body = page.getBody();
-        if (body == null) {
-            // The body doesn't exist yet! Add it.
-            body = new HtmlBody(null, "body", page, null, true);
-            doc.appendChild(body);
-            current = body;
-        }
-        else {
-            if (body instanceof HtmlBody && ((HtmlBody) body).isTemporary()) {
-                // Add inside the (temporary) body.
-                current = body;
-            }
-            else {
-                // Add inside the current / last element.
-                current = getLastHtmlElement(doc);
-            }
-        }
-
-        // Quick and dirty workaround for target (IFRAME JS object aren't an HTMLElement).
-        if (current instanceof HtmlInlineFrame) {
-            current = (HtmlElement) current.getParentNode();
-        }
-
-        // Append the new content.
-        ((HTMLElement) getJavaScriptNode(current)).jsxFunction_insertAdjacentHTML(HTMLElement.POSITION_BEFORE_END,
-                        bufferedContent);
+        page.writeInParsedStream(bufferedContent.toString());
     }
 
     /**

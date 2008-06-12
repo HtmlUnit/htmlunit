@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="fix" dev="mguillem" id="1990313" due-to="kkolman">
+                JavaScript: improved document.write(ln) support to add nodes to the right parent.
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: HTMLDocument.ownerDocument is always null.
             </action>

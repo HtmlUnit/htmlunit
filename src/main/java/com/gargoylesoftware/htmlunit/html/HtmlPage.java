@@ -65,6 +65,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.HTMLParser.HtmlUnitDOMBuilder;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
@@ -109,6 +110,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  */
 public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
+    private HtmlUnitDOMBuilder builder_;
     private static final long serialVersionUID = 1779746292119944291L;
 
     private String originalCharset_;
@@ -2053,5 +2055,25 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      */
     public Page refresh() throws IOException {
         return getWebClient().getPage(getWebResponse().getRequestSettings());
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <p>
+     * Parses the given string as would it belong to the content being parsed
+     * at the current parsing position
+     * </p>
+     * @param string the HTML code to write in place
+     */
+    public void writeInParsedStream(final String string) {
+        builder_.pushInputString(string);
+    }
+
+    /**
+     * Sets the builder to allow page to send content from document.write(ln) calls.
+     * @param htmlUnitDOMBuilder the builder
+     */
+    void setBuilder(final HtmlUnitDOMBuilder htmlUnitDOMBuilder) {
+        builder_ = htmlUnitDOMBuilder;
     }
 }

@@ -2830,9 +2830,6 @@ public class DocumentTest extends WebTestCase {
     */
     @Test
     public void writeAddNodesToCorrectParent() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
 
         final String content = "<html><head><title>foo</title></head>\n"
             + "<body id=\"theBody\">\n"
