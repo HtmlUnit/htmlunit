@@ -173,7 +173,7 @@ public class DomNodeTest extends WebTestCase {
     public void testReplace() throws Exception {
         final String content
             = "<html><head></head><body>\n"
-            + "<br><div id='tag'/><br><div id='tag2'/></body></html>";
+            + "<br><div id='tag'></div><br><div id='tag2'/></body></html>";
         final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getDocumentElement().getHtmlElementById("tag");
@@ -251,7 +251,7 @@ public class DomNodeTest extends WebTestCase {
     public void testAppendChild() throws Exception {
         final String content
             = "<html><head></head><body>\n"
-            + "<br><div><div id='tag'/></div><br></body></html>";
+            + "<br><div><div id='tag'></div></div><br></body></html>";
         final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getDocumentElement().getHtmlElementById("tag");
@@ -281,7 +281,7 @@ public class DomNodeTest extends WebTestCase {
     public void testInsertBefore() throws Exception {
         final String content
             = "<html><head></head><body>\n"
-            + "<br><div id='tag'/><br></body></html>";
+            + "<br><div id='tag'></div><br></body></html>";
         final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getDocumentElement().getHtmlElementById("tag");

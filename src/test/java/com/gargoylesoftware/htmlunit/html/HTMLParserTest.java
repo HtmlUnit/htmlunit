@@ -94,10 +94,6 @@ public class HTMLParserTest extends WebTestCase {
      */
     @Test
     public void unknownTagInHead() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-
         // Note: the <meta> tag in this test is quite important because
         // I could adapt the TagBalancer to make it work except with this <meta http-equiv...
         // (it worked with <meta name=...)
