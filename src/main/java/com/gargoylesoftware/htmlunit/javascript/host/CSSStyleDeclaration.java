@@ -16,9 +16,10 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.text.MessageFormat;
 import java.text.ParseException;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -184,7 +185,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
     private String getStyleAttribute(final String name1, final String name2, final Shorthand shorthand,
         final boolean camelCase) {
 
-        final SortedMap<String, StyleElement> styleMap = getStyleMap(camelCase);
+        final Map<String, StyleElement> styleMap = getStyleMap(camelCase);
         final StyleElement element1 = styleMap.get(name1);
         final StyleElement element2 = styleMap.get(name2);
         if (element1 == null && element2 == null) {
@@ -254,37 +255,45 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
             styleDeclaration_.setProperty(name, newValue, null);
         }
         else {
-            removeStyleAttribute(name);
+            Long index = removeStyleAttribute(name);
             final Map<String, StyleElement> styleMap = getStyleMap(false);
             if (newValue.trim().length() != 0) {
-                final StyleElement element = new StyleElement(name, newValue, getCurrentElementIndex());
-                styleMap.put(name, element);
-
-                final StringBuilder buffer = new StringBuilder();
-                for (final StyleElement e : styleMap.values()) {
-                    buffer.append(" ");
-                    buffer.append(e.getName());
-                    buffer.append(": ");
-                    buffer.append(e.getValue());
-                    buffer.append(";");
+                if (index == null) {
+                    index = getCurrentElementIndex();
                 }
-                buffer.deleteCharAt(0);
-
-                jsElement_.getHtmlElementOrDie().setAttributeValue("style", buffer.toString());
+                final StyleElement element = new StyleElement(name, newValue, index);
+                styleMap.put(name, element);
+                writeToElement(styleMap);
             }
         }
     }
 
     /**
-     * Returns a sorted map containing style elements, keyed on style element name. We use a sorted
-     * map so that results are deterministic and are thus testable.
+     * Removes the specified style attribute, returning the element index of the removed attribute.
+     * @param name the attribute name (delimiter-separated, not camel-cased)
+     * @return the style element index of the removed attribute, or <tt>null</tt> if no attribute was removed
+     */
+    protected Long removeStyleAttribute(final String name) {
+        final Map<String, StyleElement> styleMap = getStyleMap(false);
+        if (!styleMap.containsKey(name)) {
+            return null;
+        }
+        final StyleElement removed = styleMap.remove(name);
+        writeToElement(styleMap);
+        return removed.getIndex();
+    }
+
+    /**
+     * Returns a sorted map containing style elements, keyed on style element name. We use a
+     * {@link LinkedHashMap} map so that results are deterministic and are thus testable.
      *
      * @param camelCase if <tt>true</tt>, the keys are camel cased (i.e. <tt>fontSize</tt>),
      *        if <tt>false</tt>, the keys are delimiter-separated (i.e. <tt>font-size</tt>).
      * @return a sorted map containing style elements, keyed on style element name
      */
-    protected SortedMap<String, StyleElement> getStyleMap(final boolean camelCase) {
-        final SortedMap<String, StyleElement> styleMap = new TreeMap<String, StyleElement>();
+    @SuppressWarnings("unchecked")
+    protected Map<String, StyleElement> getStyleMap(final boolean camelCase) {
+        final Map<String, StyleElement> styleMap = new LinkedHashMap<String, StyleElement>();
         final String styleAttribute = jsElement_.getHtmlElementOrDie().getAttributeValue("style");
         for (final String token : styleAttribute.split(";")) {
             final int index = token.indexOf(":");
@@ -301,19 +310,17 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
         return styleMap;
     }
 
-    /**
-     * Removes the specified style attribute.
-     * @param name the attribute name (delimiter-separated, not camel-cased)
-     */
-    protected void removeStyleAttribute(final String name) {
-        final SortedMap<String, StyleElement> styleMap = getStyleMap(false);
-        styleMap.remove(name);
+    private void writeToElement(final Map<String, StyleElement> styleMap) {
         final StringBuilder buffer = new StringBuilder();
-        for (final String style : styleMap.keySet()) {
-            buffer.append(style).append(':').append(styleMap.get(style).getValue()).append(';');
-        }
-        if (buffer.length() != 0) {
-            buffer.setLength(buffer.length() - 1);
+        final SortedSet<StyleElement> sortedValues = new TreeSet<StyleElement>(styleMap.values());
+        for (final StyleElement e : sortedValues) {
+            if (buffer.length() > 0) {
+                buffer.append(" ");
+            }
+            buffer.append(e.getName());
+            buffer.append(": ");
+            buffer.append(e.getValue());
+            buffer.append(";");
         }
         jsElement_.getHtmlElementOrDie().setAttributeValue("style", buffer.toString());
     }
@@ -4161,7 +4168,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
         }
         else {
             // Case-insensitive.
-            final SortedMap<String, StyleElement> map = dec.getStyleMap(true);
+            final Map<String, StyleElement> map = dec.getStyleMap(true);
             for (final String key : map.keySet()) {
                 if (key.equalsIgnoreCase(name)) {
                     return map.get(key).getValue();
@@ -4201,7 +4208,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
         if (flag == 0) {
             // Case-insensitive.
-            final SortedMap<String, StyleElement> map = dec.getStyleMap(true);
+            final Map<String, StyleElement> map = dec.getStyleMap(true);
             for (final String key : map.keySet()) {
                 if (key.equalsIgnoreCase(name)) {
                     dec.setStyleAttribute(key, value);
@@ -4247,7 +4254,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
         if (flag == 0) {
             // Case-insensitive.
             String lastName = null;
-            final SortedMap<String, StyleElement> map = dec.getStyleMap(true);
+            final Map<String, StyleElement> map = dec.getStyleMap(true);
             for (final String key : map.keySet()) {
                 if (key.equalsIgnoreCase(name)) {
                     lastName = key;
@@ -4417,7 +4424,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * Contains information about a single style element, including its name, its value, and an index which
      * can be compared against other indices in order to determine precedence.
      */
-    protected static class StyleElement {
+    protected static class StyleElement implements Comparable<StyleElement> {
         private final String name_;
         private final String value_;
         private final long index_;
@@ -4475,7 +4482,18 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
          */
         @Override
         public String toString() {
-            return name_ + "," + index_ + "=" + value_;
+            return "[" + index_ + "]" + name_  + "=" + value_;
+        }
+        /**
+         * {@inheritDoc}
+         */
+        public int compareTo(final StyleElement e) {
+            if (e != null) {
+                return new Long(index_).compareTo(e.index_);
+            }
+            else {
+                return 1;
+            }
         }
     }
 

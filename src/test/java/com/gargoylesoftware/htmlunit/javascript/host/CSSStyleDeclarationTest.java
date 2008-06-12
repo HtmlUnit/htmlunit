@@ -87,7 +87,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
         final HtmlPage page = loadPageWithAlerts(html);
 
         assertEquals(
-            "background: blue; color: pink; foo: bar;",
+            "color: pink; background: blue; foo: bar;",
             page.getHtmlElementById("div1").getAttributeValue("style"));
     }
 

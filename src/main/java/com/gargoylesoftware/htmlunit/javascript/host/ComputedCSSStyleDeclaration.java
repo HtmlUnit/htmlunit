@@ -115,8 +115,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    protected SortedMap<String, StyleElement> getStyleMap(final boolean camelCase) {
-        final SortedMap<String, StyleElement> styleMap = super.getStyleMap(camelCase);
+    protected Map<String, StyleElement> getStyleMap(final boolean camelCase) {
+        final Map<String, StyleElement> styleMap = super.getStyleMap(camelCase);
         if (localModifications_ != null) {
             for (final StyleElement e : localModifications_.values()) {
                 String key = e.getName();
