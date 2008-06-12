@@ -2857,10 +2857,6 @@ public class DocumentTest extends WebTestCase {
     */
     @Test
     public void writeAddNodesToCorrectParent_Bug1678826() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-
         final String content = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    alert(document.getElementById('inner1').parentNode.id);\n"

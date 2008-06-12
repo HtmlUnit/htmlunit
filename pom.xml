@@ -508,6 +508,7 @@
         <repository>
             <snapshots>
                 <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
             </snapshots>
             <id>htmlUnitSnapshots</id>
             <name>HtmlUnit Snapshots</name>
@@ -517,6 +518,7 @@
         <repository>
             <snapshots>
                 <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
             </snapshots>
             <id>nekoHtmlSnapshots</id>
             <name>NekoHtTML Snapshots</name>
