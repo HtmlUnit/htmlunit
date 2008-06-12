@@ -581,7 +581,7 @@ public class HTMLElementTest extends WebTestCase {
             + "      alert(div.innerText);\n"
             + "   }\n"
             + "</script>\n"
-            + "<div id='div'><ul/></div>\n"
+            + "<div id='div'><ul/></div>"
             + "</body></html>";
         loadPageWithAlerts(html);
     }

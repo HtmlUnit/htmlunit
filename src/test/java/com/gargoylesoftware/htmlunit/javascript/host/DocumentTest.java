@@ -750,23 +750,26 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void getElementById_setNewId() throws Exception {
-        final String firstContent
+        final String content
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
-            + "    var div1=top.document.getElementById('div1');\n"
-            + "    div1.nextSibling.id='newId';\n"
-            + "    alert(top.document.getElementById('newId').value);\n"
+            + "    var div1 = document.getElementById('div1');\n"
+            + "    div1.firstChild.id='newId';\n"
+            + "    alert(document.getElementById('newId').value);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<form id='form1'>\n"
-            + "<div id='div1'/><input name='foo' type='text' value='bar' />\n"
+            + "<div id='div1'><input name='foo' type='text' value='bar'></div>\n"
             + "</form>\n"
             + "</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
-        assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"bar"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage firstPage = loadPage(content, collectedAlerts);
+        
+        assertEquals("First", firstPage.getTitleText());
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1060,25 +1063,27 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void lastChild_Nested() throws Exception {
-        final String lastContent
+        final String content
             = "<html><head><title>Last</title><script>\n"
             + "function doTest() {\n"
             + "    var div1=document.getElementById('parentDiv');\n"
             + "    alert(div1.lastChild.id);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
-            + "<div id='parentDiv'><div id='childDiv1'/><div id='childDiv'/></div>\n"
+            + "<div id='parentDiv'><div id='childDiv1'></div><div id='childDiv'></div></div>\n"
             + "</body></html>";
 
+        final String[] expectedAlerts = {"childDiv"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage lastPage = loadPage(lastContent, collectedAlerts);
+        final HtmlPage lastPage = loadPage(content, collectedAlerts);
         assertEquals("Last", lastPage.getTitleText());
+
+        assertEquals(expectedAlerts, collectedAlerts);
 
         final HtmlElement parentDiv = lastPage.getHtmlElementById("parentDiv");
         assertEquals("childDiv", ((HtmlElement) parentDiv.getLastChild()).getAttributeValue("id"));
-
-        final String[] expectedAlerts = {"childDiv"};
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -1118,24 +1123,26 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void nextSibling_Nested() throws Exception {
-        final String lastContent
+        final String content
             = "<html><head><title>Last</title><script>\n"
             + "function doTest() {\n"
-            + "    var div1=document.getElementById('previousDiv');\n"
+            + "    var div1 = document.getElementById('previousDiv');\n"
             + "    alert(div1.nextSibling.id);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
-            + "<div id='parentDiv'><div id='previousDiv'/><div id='nextDiv'/></div>\n"
+            + "<div id='parentDiv'><div id='previousDiv'></div><div id='nextDiv'></div></div>\n"
             + "</body></html>";
 
+        final String[] expectedAlerts = {"nextDiv"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage lastPage = loadPage(lastContent, collectedAlerts);
+        final HtmlPage lastPage = loadPage(content, collectedAlerts);
         assertEquals("Last", lastPage.getTitleText());
 
         final HtmlElement div1 = lastPage.getHtmlElementById("previousDiv");
         assertEquals("nextDiv", ((HtmlElement) div1.getNextSibling()).getAttributeValue("id"));
 
-        final String[] expectedAlerts = {"nextDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1176,24 +1183,26 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void previousSibling_Nested() throws Exception {
-        final String lastContent
+        final String content
             = "<html><head><title>Last</title><script>\n"
             + "function doTest() {\n"
-            + "    var div1=document.getElementById('nextDiv');\n"
+            + "    var div1 = document.getElementById('nextDiv');\n"
             + "    alert(div1.previousSibling.id);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
-            + "<div id='parentDiv'><div id='previousDiv'/><div id='nextDiv'/></div>\n"
+            + "<div id='parentDiv'><div id='previousDiv'></div><div id='nextDiv'></div></div>\n"
             + "</body></html>";
 
+        final String[] expectedAlerts = {"previousDiv"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage lastPage = loadPage(lastContent, collectedAlerts);
+        final HtmlPage lastPage = loadPage(content, collectedAlerts);
         assertEquals("Last", lastPage.getTitleText());
 
         final HtmlElement div1 = lastPage.getHtmlElementById("nextDiv");
         assertEquals("previousDiv", ((HtmlElement) div1.getPreviousSibling()).getAttributeValue("id"));
 
-        final String[] expectedAlerts = {"previousDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
