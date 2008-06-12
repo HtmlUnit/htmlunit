@@ -768,7 +768,7 @@ public class DocumentTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage firstPage = loadPage(content, collectedAlerts);
-        
+
         assertEquals("First", firstPage.getTitleText());
         assertEquals(expectedAlerts, collectedAlerts);
     }
