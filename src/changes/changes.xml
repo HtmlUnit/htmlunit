@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="remove" dev="asashour">
+                Remove ant build file.
+            </action>
             <action type="fix" dev="sdanig">
                 Maintain CSS style attribute order, according to document definition.
             </action>
