@@ -179,6 +179,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * {@inheritDoc}
      */
+    @Override
     public HtmlElement getDocumentElement() {
         if (documentElement_ == null) {
             DomNode childNode = getFirstChild();
@@ -404,6 +405,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Element createElement(final String tagName) {
         return createHtmlElement(tagName);
     }

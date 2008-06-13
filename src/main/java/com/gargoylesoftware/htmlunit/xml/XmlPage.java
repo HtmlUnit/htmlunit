@@ -253,6 +253,7 @@ public class XmlPage extends SgmlPage implements Document {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Element createElement(final String tagName) throws DOMException {
         return createXmlElement(tagName);
     }
@@ -301,6 +302,7 @@ public class XmlPage extends SgmlPage implements Document {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Element getDocumentElement() {
         if (documentElement_ == null) {
             DomNode childNode = getFirstChild();

@@ -678,6 +678,7 @@ public class HTMLDocument extends Document {
      * @param tagName the tag name
      * @return the new HTML element, or NOT_FOUND if the tag is not supported
      */
+    @Override
     public Object jsxFunction_createElement(final String tagName) {
         Object result = NOT_FOUND;
         try {
