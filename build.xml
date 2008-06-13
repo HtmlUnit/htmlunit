@@ -232,7 +232,7 @@ JUnit results available here: ${test.reports.dir}/index.html
     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <target name="checkstyle" depends="-getCheckstyle" description="Checks the constistency of htmlunit source code">
 
-        <taskdef resource="checkstyletask.properties" classpath="${jars.dir}/checkstyle/checkstyle-4.3/checkstyle-all-4.3.jar"/>
+        <taskdef resource="checkstyletask.properties" classpath="${jars.dir}/checkstyle/checkstyle-4.4/checkstyle-all-4.4.jar"/>
 
         <checkstyle config="checkstyle.xml" maxWarnings="0">
             <property key="checkstyle.cache.file" file="${target.dir}/checkstyle-cachefile"/>
@@ -245,12 +245,12 @@ JUnit results available here: ${test.reports.dir}/index.html
         </checkstyle>
     </target>
 
-    <available file="${jars.dir}/checkstyle/checkstyle-4.3/checkstyle-all-4.3.jar" property="checkstyle.available"/>
+    <available file="${jars.dir}/checkstyle/checkstyle-4.4/checkstyle-all-4.4.jar" property="checkstyle.available"/>
     <target name="-getCheckstyle" unless="checkstyle.available" description="Get checkstyle">
         <!-- checkstyle-all not available by ibiblio, get cs distribution from sf and unzip it -->
         <mkdir dir="${jars.dir}/checkstyle"/>
-        <get dest="${jars.dir}/checkstyle/checkstyle-4.3.zip" src="http://heanet.dl.sourceforge.net/sourceforge/checkstyle/checkstyle-4.3.zip"/>
-        <unzip src="${jars.dir}/checkstyle/checkstyle-4.3.zip" dest="${jars.dir}/checkstyle"/>
+        <get dest="${jars.dir}/checkstyle/checkstyle-4.4.zip" src="http://heanet.dl.sourceforge.net/sourceforge/checkstyle/checkstyle-4.4.zip"/>
+        <unzip src="${jars.dir}/checkstyle/checkstyle-4.4.zip" dest="${jars.dir}/checkstyle"/>
     </target>
 
 </project>
