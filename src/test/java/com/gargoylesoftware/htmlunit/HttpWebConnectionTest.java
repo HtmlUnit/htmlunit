@@ -383,7 +383,7 @@ public class HttpWebConnectionTest {
         };
 
         webClient.setWebConnection(myWebConnection);
-        webClient.getPage("http://localhost:" + PORT + "/README");
+        webClient.getPage("http://localhost:" + PORT + "/LICENSE.txt");
         Assert.assertTrue("createHttpClient has not been called", tabCalled[0]);
     }
 
