@@ -1085,11 +1085,12 @@ public class XMLHttpRequestTest extends WebTestCase {
      */
     @Test
     public void testResponseXML_getElementById() throws Exception {
-        final String[] expectedAlertsIE = {"[object]", "[object]", "[object]"};
+        final String[] expectedAlertsIE = {"[object]", "[object]", "[object]",
+            "<body xmlns=\"http://www.w3.org/1999/xhtml\"><span id=\"out\">Hello Bob Dole!</span></body>"};
         testResponseXML_getElementById(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlertsIE);
-        final String[] expectedAlertsFF =
-        {"[object Element]", "[object Element]", "[object HTMLBodyElement]",
-            "[object HTMLSpanElement]", "[object XMLDocument]"};
+
+        final String[] expectedAlertsFF = {"[object Element]", "[object Element]", "[object HTMLBodyElement]",
+            "[object HTMLSpanElement]", "[object XMLDocument]", "undefined"};
         testResponseXML_getElementById(BrowserVersion.FIREFOX_2, expectedAlertsFF);
     }
 
@@ -1116,6 +1117,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "          alert(doc.getElementById('out'));\n"
             + "          alert(doc.getElementById('out').ownerDocument);\n"
             + "        }\n"
+            + "        alert(doc.documentElement.childNodes[1].xml);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"

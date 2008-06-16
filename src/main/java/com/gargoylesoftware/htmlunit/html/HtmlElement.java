@@ -203,7 +203,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      */
     @Override
     public boolean hasAttributes() {
-        return attributes_.size() > 0;
+        return !attributes_.isEmpty();
     }
 
     /**

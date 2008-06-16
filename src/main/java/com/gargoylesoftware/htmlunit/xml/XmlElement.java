@@ -414,4 +414,12 @@ public class XmlElement extends DomElement implements Element {
         return ClassUtils.getShortClassName(getClass())
             + "[<" + getTagName() + " ...>]";
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasAttributes() {
+        return !attributes_.isEmpty();
+    }
 }

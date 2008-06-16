@@ -6,7 +6,10 @@
     </properties>
 
     <body>
-        <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+        <release version="2.2-SNAPSHOT" description="Bugfixes (handling of ill formed HTML code, document.write, ...) and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="add" dev="mguillem">
+                JavaScript: add support for property xml on XML dom nodes (IE only).
+            </action>
             <action type="remove" dev="asashour">
                 Remove ant build file.
             </action>
@@ -65,7 +68,7 @@
                 event bubbling.
             </action>
             <action type="fix" dev="mguillem">
-                Malformed HTML code: associate form elements situated before closing form tag to the form
+                Malformed HTML code: associate form elements located before closing form tag to the form
                 even if tag balancing forced form to be closed earlier.
             </action>
             <action type="fix" dev="sdanig" id="1977736">
@@ -116,7 +119,7 @@
                 HtmlPasswordInput: type() appends text to the value.
             </action>
             <action type="update" dev="mguillem" id="1964731">
-                JavaScript: XMLDocumet.getElementById retrieve elements with html namespace (FF only).
+                JavaScript: XMLDocumet.getElementById retrieve elements with HTML namespace (FF only).
             </action>
             <action type="update" dev="mguillem">
                 Improved logic to detect the window with the focus.

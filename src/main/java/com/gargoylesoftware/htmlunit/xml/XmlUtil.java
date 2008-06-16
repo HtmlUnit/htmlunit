@@ -144,7 +144,7 @@ public final class XmlUtil {
         }
         final String ns = source.getNamespaceURI();
         String localName = source.getLocalName();
-        if ("http://www.w3.org/1999/xhtml".equals(ns)) {
+        if (!page.getWebClient().getBrowserVersion().isIE() && "http://www.w3.org/1999/xhtml".equals(ns)) {
             final IElementFactory factory = HTMLParser.getFactory(localName.toLowerCase());
             return factory.createElementNS(page, ns, localName, namedNodeMapToSaxAttributes(source.getAttributes()));
         }

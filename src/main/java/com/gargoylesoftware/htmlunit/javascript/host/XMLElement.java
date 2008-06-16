@@ -14,10 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.xml.serialize.OutputFormat;
+import org.apache.xml.serialize.XMLSerializer;
 import org.mozilla.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.html.DomAttr;
@@ -201,6 +204,26 @@ public class XMLElement extends Node {
      */
     public boolean jsxFunction_hasAttribute(final String name) {
         return ((XmlElement) getDomNodeOrDie()).hasAttribute(name);
+    }
+
+    /**
+     * Represents the xml content of the node and its descendants.
+     * @return the xml content of the node and its descendants
+     */
+    public String jsxGet_xml() {
+        final OutputFormat format = new OutputFormat();
+        format.setOmitXMLDeclaration(true);
+        final StringWriter writer = new StringWriter();
+        final XMLSerializer serializer = new XMLSerializer(format);
+        serializer.setOutputCharStream(writer);
+        try {
+            serializer.serialize(((XmlElement) getDomNodeOrDie()));
+        }
+        catch (final Exception e) {
+            throw new RuntimeException("Internal error: failed to serialize", e);
+        }
+
+        return writer.toString();
     }
 
     /**
