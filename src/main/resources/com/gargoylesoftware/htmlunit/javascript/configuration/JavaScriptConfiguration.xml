@@ -1922,6 +1922,7 @@
     <class name="TextRange" classname="com.gargoylesoftware.htmlunit.javascript.host.TextRange" JSObject="true">
         <browser name="Microsoft Internet Explorer"/>
         <property name="text" readable="true" writable="true"/>
+        <function name="duplicate"/>
     </class>
 
     <class name="TextRectangle" classname="com.gargoylesoftware.htmlunit.javascript.host.TextRectangle"

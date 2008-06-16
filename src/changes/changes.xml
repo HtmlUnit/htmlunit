@@ -8,7 +8,10 @@
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes (handling of ill formed HTML code, document.write, ...) and move to HtmlUnit-core-js (Rhino fork)">
             <action type="add" dev="mguillem">
-                JavaScript: add support for property xml on XML dom nodes (IE only).
+                JavaScript: add support for TextRange.duplicate() (IE only).
+            </action>
+            <action type="add" dev="mguillem">
+                JavaScript: add support for property xml on XML DOM nodes (IE only).
             </action>
             <action type="remove" dev="asashour">
                 Remove ant build file.

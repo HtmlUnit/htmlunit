@@ -69,4 +69,16 @@ public class TextRange extends SimpleScriptable {
                     + oldValue.substring(input.getSelectionEnd()));
         }
     }
+
+    /**
+     * Duplicates this instance.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536416(VS.85).aspx">MSDN doc</a>
+     * @return a duplicate
+     */
+    public Object jsxFunction_duplicate() {
+        final TextRange range = new TextRange();
+        range.setParentScope(getParentScope());
+        range.setPrototype(getPrototype());
+        return range;
+    }
 }
