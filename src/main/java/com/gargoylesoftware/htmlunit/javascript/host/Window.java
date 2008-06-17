@@ -19,6 +19,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -791,33 +792,39 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Looks at attributes with the given name.
+     * Looks at attributes with the specified name.
      * {@inheritDoc}
      */
     public Object getWithFallback(final String name) {
         Object result = NOT_FOUND;
+
         final DomNode domNode = getDomNodeOrNull();
         if (domNode != null) {
-            result = getFrameByName((HtmlPage) domNode.getPage(), name);
-        }
 
-        // See if it is an attempt to access an element directly by name or id
-        // IE does since a long time and FF does it too
-        if (result == NOT_FOUND) {
-            // this tests are quite silly and should be removed when custom JS objects have a clean
-            // way to get the WebClient they are running in.
-            if (domNode != null) {
-                final HTMLCollection array = document_.jsxFunction_getElementsByName(name);
-                final int length = array.jsxGet_length();
-                if (length == 1) {
-                    result = array.get(0, array);
+            // May be attempting to retrieve a frame by name.
+            final HtmlPage page = (HtmlPage) domNode.getPage();
+            result = getFrameByName(page, name);
+
+            if (result == NOT_FOUND) {
+                // May be attempting to retrieve element(s) by name. IMPORTANT: We're using map-backed operations
+                // like getHtmlElementsByName() and getHtmlElementById() as much as possible, so as to avoid XPath
+                // overhead. We only use an XPath-based operation when we have to (where there is more than one
+                // matching element). This optimization appears to improve performance in certain situations by ~15%
+                // vs using XPath-based operations throughout.
+                List<HtmlElement> elements = page.getHtmlElementsByName(name);
+                if (elements.size() == 1) {
+                    result = getScriptableFor(elements.get(0));
                 }
-                else if (length > 1) {
-                    result = array;
+                else if (elements.size() > 1) {
+                    result = document_.jsxFunction_getElementsByName(name);
                 }
                 else {
-                    result = document_.jsxFunction_getElementById(name);
-                    if (result == null) {
+                    // May be attempting to retrieve element by ID (again, try a map-back operation instead of XPath).
+                    try {
+                        final HtmlElement htmlElement = page.getHtmlElementById(name);
+                        result = getScriptableFor(htmlElement);
+                    }
+                    catch (ElementNotFoundException e) {
                         result = NOT_FOUND;
                     }
                 }
