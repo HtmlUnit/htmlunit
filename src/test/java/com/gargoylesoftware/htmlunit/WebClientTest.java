@@ -104,8 +104,8 @@ public class WebClientTest extends WebTestCase {
                                     && method.getAnnotation(Test.class) == null
                                     && method.getReturnType() == Void.TYPE
                                     && method.getParameterTypes().length == 0) {
-                                    fail("Method \"" + method.getName()
-                                            + "\" in " + name + " does not declare @Test annoatation");
+                                    fail("Method '" + method.getName()
+                                            + "' in " + name + " does not declare @Test annotation");
                                 }
                             }
                         }
