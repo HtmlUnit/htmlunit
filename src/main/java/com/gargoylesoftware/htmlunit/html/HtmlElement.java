@@ -462,13 +462,15 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Support for reporting HTML attribute changes.
-     * This method can be called when an attribute has been added and it will send the
-     * appropriate HtmlAttributeChangeEvent to any registered HtmlAttributeChangeListener.
+     * Support for reporting HTML attribute changes. This method can be called when an attribute
+     * has been added and it will send the appropriate {@link HtmlAttributeChangeEvent} to any
+     * registered {@link HtmlAttributeChangeListener}s.
      *
-     * Note that this methods recursively calls this parent fireHtmlAttributeAdded.
+     * Note that this method recursively calls this element's parent's
+     * {@link #fireHtmlAttributeAdded(HtmlAttributeChangeEvent)} method.
      *
      * @param event the event
+     * @see #addHtmlAttributeChangeListener(HtmlAttributeChangeListener)
      */
     protected void fireHtmlAttributeAdded(final HtmlAttributeChangeEvent event) {
         if (attributeListeners_ != null) {
@@ -485,19 +487,21 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Support for reporting HTML attribute changes.
-     * This method can be called when an attribute has been replaced and it will send the
-     * appropriate HtmlAttributeChangeEvent to any registered HtmlAttributeChangeListener.
+     * Support for reporting HTML attribute changes. This method can be called when an attribute
+     * has been replaced and it will send the appropriate {@link HtmlAttributeChangeEvent} to any
+     * registered {@link HtmlAttributeChangeListener}s.
      *
-     * Note that this methods recursively calls this parent fireHtmlAttributeReplaced.
+     * Note that this method recursively calls this element's parent's
+     * {@link #fireHtmlAttributeReplaced(HtmlAttributeChangeEvent)} method.
      *
      * @param event the event
+     * @see #addHtmlAttributeChangeListener(HtmlAttributeChangeListener)
      */
     protected void fireHtmlAttributeReplaced(final HtmlAttributeChangeEvent event) {
         if (attributeListeners_ != null) {
             synchronized (this) {
-                for (final HtmlAttributeChangeListener listner : attributeListeners_) {
-                    listner.attributeReplaced(event);
+                for (final HtmlAttributeChangeListener listener : attributeListeners_) {
+                    listener.attributeReplaced(event);
                 }
             }
         }
@@ -508,13 +512,15 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Support for reporting HTML attribute changes.
-     * This method can be called when an attribute has been removed and it will send the
-     * appropriate HtmlAttributeChangeEvent to any registered HtmlAttributeChangeListener.
+     * Support for reporting HTML attribute changes. This method can be called when an attribute
+     * has been removed and it will send the appropriate {@link HtmlAttributeChangeEvent} to any
+     * registered {@link HtmlAttributeChangeListener}s.
      *
-     * Note that this methods recursively calls this parent fireHtmlAttributeRemoved.
+     * Note that this method recursively calls this element's parent's
+     * {@link #fireHtmlAttributeRemoved(HtmlAttributeChangeEvent)} method.
      *
      * @param event the event
+     * @see #addHtmlAttributeChangeListener(HtmlAttributeChangeListener)
      */
     protected void fireHtmlAttributeRemoved(final HtmlAttributeChangeEvent event) {
         if (attributeListeners_ != null) {
