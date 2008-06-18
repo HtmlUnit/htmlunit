@@ -1703,11 +1703,10 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Loads the content of the contained frames. This is done after the page is completely
-     * loaded to allow script contained in the frames to reference elements from the
-     * page located after the closing </frame> tag.
+     * Loads the content of the contained frames. This is done after the page is completely loaded, to allow script
+     * contained in the frames to reference elements from the page located after the closing &lt;/frame&gt; tag.
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
-     * {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
+     *         {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to <tt>true</tt>
      */
     @SuppressWarnings("unchecked")
     void loadFrames() throws FailingHttpStatusCodeException {
