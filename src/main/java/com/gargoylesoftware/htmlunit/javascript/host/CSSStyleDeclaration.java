@@ -255,16 +255,33 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
             styleDeclaration_.setProperty(name, newValue, null);
         }
         else {
-            Long index = removeStyleAttribute(name);
+            replaceStyleAttribute(name, newValue);
+        }
+    }
+
+    /**
+     * Replaces the value of the named style attribute. If there is no style attribute with the
+     * specified name, a new one is added. If the specified value is an empty (or all whitespace)
+     * string, this method actually removes the named style attribute.
+     * @param name the attribute name (delimiter-separated, not camel-cased)
+     */
+    private void replaceStyleAttribute(final String name, final String value) {
+        if (value.trim().length() == 0) {
+            removeStyleAttribute(name);
+        }
+        else {
             final Map<String, StyleElement> styleMap = getStyleMap(false);
-            if (newValue.trim().length() != 0) {
-                if (index == null) {
-                    index = getCurrentElementIndex();
-                }
-                final StyleElement element = new StyleElement(name, newValue, index);
-                styleMap.put(name, element);
-                writeToElement(styleMap);
+            final StyleElement old = styleMap.get(name);
+            final Long index;
+            if (old != null) {
+                index = old.getIndex();
             }
+            else {
+                index = getCurrentElementIndex();
+            }
+            final StyleElement element = new StyleElement(name, value, index);
+            styleMap.put(name, element);
+            writeToElement(styleMap);
         }
     }
 
@@ -273,7 +290,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @param name the attribute name (delimiter-separated, not camel-cased)
      * @return the style element index of the removed attribute, or <tt>null</tt> if no attribute was removed
      */
-    protected Long removeStyleAttribute(final String name) {
+    private Long removeStyleAttribute(final String name) {
         final Map<String, StyleElement> styleMap = getStyleMap(false);
         if (!styleMap.containsKey(name)) {
             return null;
