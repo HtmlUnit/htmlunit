@@ -93,7 +93,7 @@ public class HtmlForm extends ClickableElement {
      * @exception IOException If an IO error occurs
      */
     public Page submit(final SubmittableElement submitElement) throws IOException {
-        final HtmlPage htmlPage = getPage();
+        final HtmlPage htmlPage = (HtmlPage) getPage();
         if (htmlPage.getWebClient().isJavaScriptEnabled()) {
             if (submitElement != null) {
                 final ScriptResult scriptResult = fireEvent(Event.TYPE_SUBMIT);
@@ -215,7 +215,7 @@ public class HtmlForm extends ClickableElement {
      * @return the page contained by this form's window after the reset
      */
     public Page reset() {
-        final HtmlPage htmlPage = getPage();
+        final SgmlPage htmlPage = getPage();
         final ScriptResult scriptResult = fireEvent(Event.TYPE_RESET);
         if (scriptResult != null && Boolean.FALSE.equals(scriptResult.getJavaScriptResult())) {
             return scriptResult.getNewPage();

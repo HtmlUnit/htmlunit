@@ -267,7 +267,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      */
     public Page setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected) {
         if (isSelected) {
-            getPage().setFocusedElement(this);
+            ((HtmlPage) getPage()).setFocusedElement(this);
         }
 
         final boolean changeSelectedState  = (selectedOption.isSelected() != isSelected);

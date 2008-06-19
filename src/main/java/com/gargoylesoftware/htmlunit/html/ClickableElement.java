@@ -22,6 +22,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
 
@@ -110,7 +111,7 @@ public abstract class ClickableElement extends StyledElement {
             return getPage();
         }
 
-        final HtmlPage page = getPage();
+        final SgmlPage page = getPage();
 
         boolean stateUpdated = false;
         if (isStateUpdateFirst()) {

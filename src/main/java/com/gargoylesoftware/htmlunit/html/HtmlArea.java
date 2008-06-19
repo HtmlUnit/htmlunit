@@ -68,12 +68,12 @@ public class HtmlArea extends ClickableElement {
      */
     @Override
     protected Page doClickAction(final Page defaultPage) throws IOException {
-        final HtmlPage enclosingPage = getPage();
+        final HtmlPage enclosingPage = (HtmlPage) getPage();
         final WebClient webClient = enclosingPage.getWebClient();
 
         final String href = getHrefAttribute();
         if (href != null && href.length() > 0) {
-            final HtmlPage page = getPage();
+            final HtmlPage page = (HtmlPage) getPage();
             if (TextUtil.startsWithIgnoreCase(href, JAVASCRIPT_PREFIX)) {
                 return page.executeJavaScriptIfPossible(
                     href, "javascript url", getStartLineNumber()).getNewPage();

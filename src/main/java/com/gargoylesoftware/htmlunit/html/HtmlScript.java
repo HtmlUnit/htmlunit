@@ -254,7 +254,7 @@ public class HtmlScript extends HtmlElement {
         final int col1 = getStartColumnNumber();
         final int col2 = getEndColumnNumber();
         final String desc = "script in " + url + " from (" + line1 + ", " + col1 + ") to (" + line2 + ", " + col2 + ")";
-        getPage().executeJavaScriptIfPossible(scriptCode, desc, line1);
+        ((HtmlPage) getPage()).executeJavaScriptIfPossible(scriptCode, desc, line1);
     }
 
     /**
@@ -292,7 +292,7 @@ public class HtmlScript extends HtmlElement {
                             if (mainLog_.isDebugEnabled()) {
                                 mainLog_.debug("Executing JavaScript: " + code);
                             }
-                            getPage().executeJavaScriptIfPossible(code, code, getStartLineNumber());
+                            ((HtmlPage) getPage()).executeJavaScriptIfPossible(code, code, getStartLineNumber());
                         }
                     }
                 }
@@ -302,7 +302,7 @@ public class HtmlScript extends HtmlElement {
                 if (mainLog_.isDebugEnabled()) {
                     mainLog_.debug("Loading external JavaScript: " + src);
                 }
-                getPage().loadExternalJavaScriptFile(src, getCharsetAttribute());
+                ((HtmlPage) getPage()).loadExternalJavaScriptFile(src, getCharsetAttribute());
             }
         }
         else if (getFirstChild() != null) {
@@ -317,7 +317,7 @@ public class HtmlScript extends HtmlElement {
      * @return <code>true</code> if the script should be executed
      */
     private boolean isExecutionNeeded() {
-        final HtmlPage page = getPage();
+        final SgmlPage page = getPage();
 
         // If JavaScript is disabled, we don't need to execute.
         if (!page.getWebClient().isJavaScriptEnabled()) {
@@ -375,7 +375,7 @@ public class HtmlScript extends HtmlElement {
         final HTMLScriptElement script = (HTMLScriptElement) getScriptObject();
         final Function handler = script.getOnReadyStateChangeHandler();
         if (handler != null) {
-            getPage().executeJavaScriptFunctionIfPossible(handler, script, new Object[0], this);
+            ((HtmlPage) getPage()).executeJavaScriptFunctionIfPossible(handler, script, new Object[0], this);
         }
     }
 

@@ -52,6 +52,7 @@ import org.w3c.dom.TypeInfo;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
@@ -316,7 +317,7 @@ public abstract class HtmlElement extends DomElement implements Element {
 
         // TODO: cleanup. This is a hack for HtmlElement living within an XmlPage
         if ((getOwnerDocument() instanceof HtmlPage)) {
-            getPage().removeMappedElement(this);
+            ((HtmlPage) getPage()).removeMappedElement(this);
         }
 
         final DomAttr newAttr = addAttributeToMap((Page) getOwnerDocument(), attributes_, namespaceURI,
@@ -329,7 +330,7 @@ public abstract class HtmlElement extends DomElement implements Element {
         if (!(getOwnerDocument() instanceof HtmlPage)) {
             return;
         }
-        getPage().addMappedElement(this);
+        ((HtmlPage) getPage()).addMappedElement(this);
 
         final HtmlAttributeChangeEvent htmlEvent;
         if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
@@ -341,11 +342,11 @@ public abstract class HtmlElement extends DomElement implements Element {
 
         if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
             fireHtmlAttributeAdded(htmlEvent);
-            getPage().fireHtmlAttributeAdded(htmlEvent);
+            ((HtmlPage) getPage()).fireHtmlAttributeAdded(htmlEvent);
         }
         else {
             fireHtmlAttributeReplaced(htmlEvent);
-            getPage().fireHtmlAttributeReplaced(htmlEvent);
+            ((HtmlPage) getPage()).fireHtmlAttributeReplaced(htmlEvent);
         }
         if (getPage().getWebClient().getBrowserVersion().isIE()) {
             fireEvent(Event.createPropertyChangeEvent(this, qualifiedName));
@@ -443,13 +444,13 @@ public abstract class HtmlElement extends DomElement implements Element {
     public final void removeAttribute(final String attributeName) {
         final String value = getAttributeValue(attributeName);
 
-        getPage().removeMappedElement(this);
+        ((HtmlPage) getPage()).removeMappedElement(this);
         attributes_.remove(attributeName.toLowerCase());
-        getPage().addMappedElement(this);
+        ((HtmlPage) getPage()).addMappedElement(this);
 
         final HtmlAttributeChangeEvent event = new HtmlAttributeChangeEvent(this, attributeName, value);
         fireHtmlAttributeRemoved(event);
-        getPage().fireHtmlAttributeRemoved(event);
+        ((HtmlPage) getPage()).fireHtmlAttributeRemoved(event);
     }
 
     /**
@@ -928,7 +929,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @exception ElementNotFoundException if no element has the specified ID
      */
     public HtmlElement getHtmlElementById(final String id) throws ElementNotFoundException {
-        return getPage().getHtmlElementById(id);
+        return ((HtmlPage) getPage()).getHtmlElementById(id);
     }
 
     /**
@@ -999,7 +1000,7 @@ public abstract class HtmlElement extends DomElement implements Element {
         final List< ? extends HtmlElement> children = getHtmlElementsByTagName(tagName);
         if (children.isEmpty()) {
             // Add a new child and return it.
-            child = getPage().createHtmlElement(tagName);
+            child = ((HtmlPage) getPage()).createHtmlElement(tagName);
             appendChild(child);
         }
         else {
@@ -1446,7 +1447,7 @@ public abstract class HtmlElement extends DomElement implements Element {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return getPage();
         }
-        final HtmlPage page = getPage();
+        final HtmlPage page = (HtmlPage) getPage();
         final Event event = new MouseEvent(this, eventType, shiftKey, ctrlKey, altKey, button);
         final ScriptResult scriptResult = fireEvent(event);
         final Page currentPage;
@@ -1463,22 +1464,22 @@ public abstract class HtmlElement extends DomElement implements Element {
      * Removes focus from this element.
      */
     public void blur() {
-        getPage().setFocusedElement(null);
+        ((HtmlPage) getPage()).setFocusedElement(null);
     }
 
     /**
      * Sets the focus on this element.
      */
     public void focus() {
-        getPage().setFocusedElement(this);
+        ((HtmlPage) getPage()).setFocusedElement(this);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public HtmlPage getPage() {
-        return (HtmlPage) super.getPage();
+    public SgmlPage getPage() {
+        return (SgmlPage) super.getPage();
     }
 
     /**

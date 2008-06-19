@@ -113,7 +113,7 @@ public class StyleSheetList extends SimpleScriptable {
             else {
                 final HtmlLink link = (HtmlLink) node;
                 try {
-                    final HtmlPage htmlPage = link.getPage();
+                    final HtmlPage htmlPage = (HtmlPage) link.getPage();
                     final WebRequestSettings webRequestSettings =
                         new WebRequestSettings(htmlPage.getFullyQualifiedUrl(link.getHrefAttribute()));
                     final String content =

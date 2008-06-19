@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.net.MalformedURLException;
 
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * The JavaScript object "HTMLLinkElement".
@@ -55,7 +56,7 @@ public class HTMLLinkElement extends HTMLElement {
             return href;
         }
         try {
-            return link.getPage().getFullyQualifiedUrl(href).toString();
+            return ((HtmlPage) link.getPage()).getFullyQualifiedUrl(href).toString();
         }
         catch (final MalformedURLException e) {
             return href;

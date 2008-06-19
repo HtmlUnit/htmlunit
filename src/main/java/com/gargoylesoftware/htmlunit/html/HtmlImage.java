@@ -264,7 +264,7 @@ public class HtmlImage extends ClickableElement {
      */
     private void downloadImageIfNeeded() throws IOException {
         if (!downloaded_) {
-            final HtmlPage page = getPage();
+            final HtmlPage page = (HtmlPage) getPage();
             final WebClient webclient = page.getWebClient();
 
             final URL url = page.getFullyQualifiedUrl(getSrcAttribute());
@@ -327,7 +327,7 @@ public class HtmlImage extends ClickableElement {
         if (getUseMapAttribute() != ATTRIBUTE_NOT_DEFINED) {
             // remove initial '#'
             final String mapName = getUseMapAttribute().substring(1);
-            final HtmlElement doc = getPage().getDocumentElement();
+            final HtmlElement doc = ((HtmlPage) getPage()).getDocumentElement();
             final HtmlMap map = (HtmlMap) doc.getOneHtmlElementByAttribute("map", "name", mapName);
             for (final HtmlElement element : map.getChildElements()) {
                 if (element instanceof HtmlArea) {

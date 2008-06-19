@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
  * @author Chris Erskine
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class HTMLImageElement extends HTMLElement {
 
@@ -75,7 +76,7 @@ public class HTMLImageElement extends HTMLElement {
         if (htmlImageElement != null) {
             final String srcValue = htmlImageElement.getSrcAttribute();
             try {
-                return htmlImageElement.getPage().getFullyQualifiedUrl(srcValue).toExternalForm();
+                return ((HtmlPage) htmlImageElement.getPage()).getFullyQualifiedUrl(srcValue).toExternalForm();
             }
             catch (final MalformedURLException e) {
                 throw Context.reportRuntimeError("Unable to create fully qualified URL for src attribute of image: "

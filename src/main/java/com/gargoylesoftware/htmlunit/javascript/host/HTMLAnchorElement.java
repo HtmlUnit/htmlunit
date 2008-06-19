@@ -23,6 +23,7 @@ import org.apache.commons.lang.StringUtils;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
@@ -116,7 +117,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     private URL getUrl() throws Exception {
         final HtmlAnchor anchor = (HtmlAnchor) getHtmlElementOrDie();
-        return anchor.getPage().getFullyQualifiedUrl(anchor.getHrefAttribute());
+        return ((HtmlPage) anchor.getPage()).getFullyQualifiedUrl(anchor.getHrefAttribute());
     }
 
     /**
@@ -356,7 +357,8 @@ public class HTMLAnchorElement extends HTMLElement {
             }
 
             try {
-                response = link.getPage().getFullyQualifiedUrl(beforeAnchor).toExternalForm() + anchorPart;
+                response =
+                    ((HtmlPage) link.getPage()).getFullyQualifiedUrl(beforeAnchor).toExternalForm() + anchorPart;
             }
             catch (final MalformedURLException e) {
                 return href;

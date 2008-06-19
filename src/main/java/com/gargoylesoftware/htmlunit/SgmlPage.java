@@ -137,4 +137,10 @@ public abstract class SgmlPage extends DomNode implements Page {
      * {@inheritDoc}
      */
     public abstract Element createElement(final String tagName) throws DOMException;
+
+    /**
+     * Returns the page encoding.
+     * @return the page encoding.
+     */
+    public abstract String getPageEncoding();
 }

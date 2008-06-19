@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes (handling of ill formed HTML code, document.write, ...) and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="update" dev="asashour">
+                INCOMPATIBLE CHANGE: HtmlElement.getPage() now returns SgmlPage instead of HtmlPage.
+            </action>
             <action type="add" dev="mguillem">
                 JavaScript: add support for TextRange.duplicate() (IE only).
             </action>

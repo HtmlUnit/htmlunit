@@ -23,6 +23,7 @@ import com.gargoylesoftware.htmlunit.WebWindowImpl;
  *
  * @version $Revision$
  * @author Brad Clarke
+ * @author Ahmed Ashour
  */
 public class FrameWindow extends WebWindowImpl {
     private final BaseFrame frame_;
@@ -85,7 +86,7 @@ public class FrameWindow extends WebWindowImpl {
      * @return the page in the parent window
      */
     public HtmlPage getEnclosingPage() {
-        return frame_.getPage();
+        return (HtmlPage) frame_.getPage();
     }
 
     /**

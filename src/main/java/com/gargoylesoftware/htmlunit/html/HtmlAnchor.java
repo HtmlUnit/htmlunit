@@ -82,7 +82,7 @@ public class HtmlAnchor extends ClickableElement {
         }
 
         if (href.length() > 0 && !href.startsWith("#")) {
-            final HtmlPage page = getPage();
+            final HtmlPage page = (HtmlPage) getPage();
             if (TextUtil.startsWithIgnoreCase(href, JAVASCRIPT_PREFIX)) {
                 return page.executeJavaScriptIfPossible(
                     href, "javascript url", getStartLineNumber()).getNewPage();
@@ -287,7 +287,7 @@ public class HtmlAnchor extends ClickableElement {
      * @throws MalformedURLException if the href could not be converted to a valid URL
      */
     public final Page openLinkInNewWindow() throws MalformedURLException {
-        final URL target = getPage().getFullyQualifiedUrl(getHrefAttribute());
+        final URL target = ((HtmlPage) getPage()).getFullyQualifiedUrl(getHrefAttribute());
         final String windowName = "HtmlAnchor.openLinkInNewWindow() target";
         final WebWindow newWindow = getPage().getWebClient().openWindow(target, windowName);
         return newWindow.getEnclosedPage();

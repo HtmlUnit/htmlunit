@@ -94,7 +94,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
                 form.setCheckedRadioButton(this);
             }
             else {
-                getPage().setCheckedRadioButton(this);
+                ((HtmlPage) getPage()).setCheckedRadioButton(this);
             }
         }
         else {

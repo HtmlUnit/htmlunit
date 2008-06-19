@@ -380,6 +380,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * the response header.
      * @return the value of charset
      */
+    @Override
     public String getPageEncoding() {
         if (originalCharset_ != null) {
             return originalCharset_;
@@ -1162,7 +1163,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
                 }
                 final Event event = new Event(frame, eventType);
                 ((Node) frame.getScriptObject()).executeEvent(event);
-                if (!isOnbeforeunloadAccepted(frame.getPage(), event)) {
+                if (!isOnbeforeunloadAccepted((HtmlPage) frame.getPage(), event)) {
                     return false;
                 }
             }

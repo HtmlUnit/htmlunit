@@ -457,4 +457,13 @@ public class XmlPage extends SgmlPage implements Document {
     public void setXmlVersion(final String xmlVersion) throws DOMException {
         throw new UnsupportedOperationException("XmlPage.setXmlVersion is not yet implemented.");
     }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    @Override
+    public String getPageEncoding() {
+        throw new UnsupportedOperationException("XmlPage.getPageEncoding is not yet implemented.");
+    }
 }

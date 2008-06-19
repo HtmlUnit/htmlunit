@@ -435,7 +435,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      *         may not be the same as the original page)
      */
     static Page executeOnChangeHandlerIfAppropriate(final HtmlElement htmlElement) {
-        final HtmlPage page = htmlElement.getPage();
+        final SgmlPage page = htmlElement.getPage();
 
         final JavaScriptEngine engine = htmlElement.getPage().getWebClient().getJavaScriptEngine();
         if (engine.isScriptRunning()) {

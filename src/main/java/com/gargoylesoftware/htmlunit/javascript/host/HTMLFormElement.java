@@ -238,7 +238,7 @@ public class HTMLFormElement extends HTMLElement {
     @Override
     protected Object getWithPreemption(final String name) {
         final HtmlForm form = getHtmlForm();
-        final HtmlPage page = form.getPage();
+        final HtmlPage page = (HtmlPage) form.getPage();
         if (page != null) {
             // Try to satisfy this request using a map-backed operation before punting and using XPath.
             // XPath operations are very expensive, and this method gets invoked quite a bit.

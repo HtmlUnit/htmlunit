@@ -43,6 +43,7 @@ import org.w3c.dom.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlHtml;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.steadystate.css.dom.CSSStyleRuleImpl;
 import com.steadystate.css.dom.CSSStyleSheetImpl;
@@ -288,7 +289,7 @@ public class Stylesheet extends SimpleScriptable {
                 return false;
             case Condition.SAC_ONLY_TYPE_CONDITION:
                 final String tagName = element.getTagName();
-                return element.getPage().getElementsByTagName(tagName).getLength() == 1;
+                return ((HtmlPage) element.getPage()).getElementsByTagName(tagName).getLength() == 1;
             case Condition.SAC_POSITIONAL_CONDITION:
             case Condition.SAC_PSEUDO_CLASS_CONDITION:
                 return false;
