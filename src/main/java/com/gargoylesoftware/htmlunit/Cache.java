@@ -24,11 +24,13 @@ import org.apache.commons.httpclient.util.DateParseException;
 import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.lang.time.DateUtils;
+import org.mozilla.javascript.Script;
+import org.w3c.dom.css.CSSStyleSheet;
 
 /**
- * <p>Simple cache implementation.</p>
- *
- * <p>The current implementation's main purpose is to provide the ability to cache <tt>.js</tt> files.</p>
+ * <p>Simple cache implementation which caches compiled JavaScript files and parsed CSS snippets. Caching
+ * compiled JavaScript files avoids unnecessary web requests and additional compilation overhead, while
+ * caching parsed CSS snippets avoids very expensive CSS parsing.</p>
  *
  * @version $Revision$
  * @author Marc Guillemot
@@ -39,14 +41,14 @@ public class Cache implements Serializable {
     private static final long serialVersionUID = -3864114727885057419L;
 
     /** The maximum size of the cache. */
-    private int maxSize_ = 20;
+    private int maxSize_ = 25;
 
     /**
-     * The map which holds the cached responses. Note that we key on the string version of URLs, rather than
-     * on the URLs themselves. This is done for performance, because a) the {@link java.net.URL#hashCode()}
-     * method is synchronized, and b) the {@link java.net.URL#hashCode()} method triggers DNS lookups of the
-     * URL hostnames' IPs. As of this writing, the HtmlUnit unit tests run ~20% faster whey keying on strings
-     * rather than on {@link java.net.URL} instances.
+     * The map which holds the cached responses. Note that when keying on URLs, we key on the string version
+     * of the URLs, rather than on the URLs themselves. This is done for performance, because a) the
+     * {@link java.net.URL#hashCode()} method is synchronized, and b) the {@link java.net.URL#hashCode()}
+     * method triggers DNS lookups of the URL hostnames' IPs. As of this writing, the HtmlUnit unit tests
+     * run ~20% faster whey keying on strings rather than on {@link java.net.URL} instances.
      */
     private final Map<String, Entry> entries_ = Collections.synchronizedMap(new HashMap<String, Entry>(maxSize_));
 
@@ -56,11 +58,13 @@ public class Cache implements Serializable {
     private class Entry implements Comparable<Entry>, Serializable {
 
         private static final long serialVersionUID = 588400350259242484L;
-        private final WebResponse response_;
+        private final String key_;
+        private final Object value_;
         private long lastAccess_;
 
-        Entry(final WebResponse response) {
-            response_ = response;
+        Entry(final String key, final Object value) {
+            key_ = key;
+            value_ = value;
             lastAccess_ = System.currentTimeMillis();
         }
 
@@ -69,7 +73,7 @@ public class Cache implements Serializable {
         }
 
         /**
-         * Updates the last access date
+         * Updates the last access date.
          */
         public void touch() {
             lastAccess_ = System.currentTimeMillis();
@@ -77,16 +81,37 @@ public class Cache implements Serializable {
     }
 
     /**
-     * Cache the response if needed. The current implementation only caches JavaScript files.
+     * Caches the specified compiled script, if the corresponding request and response objects indicate
+     * that it is cacheable.
      *
-     * @param request the request
-     * @param response the response
+     * @param request the request corresponding to the specified compiled script
+     * @param response the response corresponding to the specified compiled script
+     * @param script the compiled script that is to be cached, if possible
      */
-    public void cacheIfNeeded(final WebRequestSettings request, final WebResponse response) {
+    public void cacheIfPossible(final WebRequestSettings request, final WebResponse response, final Script script) {
         if (isCacheable(request, response)) {
-            entries_.put(response.getUrl().toString(), new Entry(response));
+            final String url = response.getUrl().toString();
+            final Entry entry = new Entry(url, script);
+            entries_.put(entry.key_, entry);
             deleteOverflow();
         }
+    }
+
+    /**
+     * Caches the parsed version of the specified CSS snippet. We key the cache based on CSS snippets (rather
+     * than requests and responses as is done above) because a) this allows us to cache inline CSS, b) CSS is
+     * extremely expensive to parse, so we want to avoid it as much as possible, c) CSS files aren't usually
+     * nearly as large as JavaScript files, so memory bloat won't be too bad, and d) caching on requests and
+     * responses requires checking dynamicity (see {@link #isDynamicContent(WebResponse)}), and headers often
+     * aren't set up correctly, disallowing caching when in fact it should be allowed.
+     *
+     * @param css the CSS snippet from which <tt>styleSheet</tt> is derived
+     * @param styleSheet the parsed version of <tt>css</tt>
+     */
+    public void cache(final String css, final CSSStyleSheet styleSheet) {
+        final Entry entry = new Entry(css, styleSheet);
+        entries_.put(entry.key_, entry);
+        deleteOverflow();
     }
 
     /**
@@ -96,17 +121,17 @@ public class Cache implements Serializable {
         synchronized (entries_) {
             while (entries_.size() > maxSize_) {
                 final Entry oldestEntry = Collections.min(entries_.values());
-                entries_.remove(oldestEntry.response_.getUrl().toString());
+                entries_.remove(oldestEntry.key_);
             }
         }
     }
 
     /**
-     * Determines if the response should be cached.
+     * Determines if the specified response can be cached.
      *
      * @param request the performed request
      * @param response the received response
-     * @return <code>true</code> if the response should be cached
+     * @return <code>true</code> if the response can be cached
      */
     protected boolean isCacheable(final WebRequestSettings request, final  WebResponse response) {
         return HttpMethod.GET == response.getRequestMethod() && isJavaScript(response) && !isDynamicContent(response);
@@ -157,35 +182,35 @@ public class Cache implements Serializable {
                 date = DateUtil.parseDate(value);
             }
             catch (final DateParseException e) {
-                //empty
+                // Empty.
             }
         }
         return date;
     }
 
     /**
-     * Indicates if the provided response is JavaScript content.
+     * Returns <tt>true</tt> if the provided response is JavaScript content. This method
+     * checks file extensions in addition to content types, because many web applications
+     * are badly configured and have incorrect headers.
      *
      * @param webResponse the response to analyze
      * @return <code>true</code> if it can be considered as JavaScript
      */
     protected boolean isJavaScript(final WebResponse webResponse) {
         final String contentType = webResponse.getContentType().toLowerCase();
-
-        // many web applications are badly configured and have wrong headers, look at file extension too
         return "text/javascript".equals(contentType)
                 || "application/x-javascript".equals(contentType)
                 || webResponse.getUrl().getPath().endsWith(".js");
     }
 
     /**
-     * Returns the cached content corresponding to the specified request. If there is
-     * no corresponding cached content, this method returns <tt>null</tt>.
+     * Returns the cached compiled script corresponding to the specified request. If there is
+     * no corresponding cached compiled script, this method returns <tt>null</tt>.
      *
-     * @param request the request whose cached content is sought
-     * @return the cached content corresponding to the specified request
+     * @param request the request whose corresponding cached compiled script is sought
+     * @return the cached compiled script corresponding to the specified request
      */
-    public WebResponse getCachedContent(final WebRequestSettings request) {
+    public Script getCachedScript(final WebRequestSettings request) {
         if (HttpMethod.GET != request.getHttpMethod()) {
             return null;
         }
@@ -196,12 +221,30 @@ public class Cache implements Serializable {
         synchronized (entries_) {
             cachedEntry.touch();
         }
-        return cachedEntry.response_;
+        return (Script) cachedEntry.value_;
+    }
+
+    /**
+     * Returns the cached parsed version of the specified CSS snippet. If there is no
+     * corresponding cached stylesheet, this method returns <tt>null</tt>.
+     *
+     * @param css the CSS snippet whose cached stylesheet is sought
+     * @return the cached stylesheet corresponding to the specified CSS snippet
+     */
+    public CSSStyleSheet getCachedStyleSheet(final String css) {
+        final Entry cachedEntry = entries_.get(css);
+        if (cachedEntry == null) {
+            return null;
+        }
+        synchronized (entries_) {
+            cachedEntry.touch();
+        }
+        return (CSSStyleSheet) cachedEntry.value_;
     }
 
     /**
      * Returns the cache's maximum size. This is the maximum number of files that will
-     * be cached. The default is <tt>20</tt>.
+     * be cached. The default is <tt>25</tt>.
      *
      * @return the cache's maximum size
      */
@@ -211,7 +254,7 @@ public class Cache implements Serializable {
 
     /**
      * Sets the cache's maximum size. This is the maximum number of files that will
-     * be cached. The default is <tt>20</tt>.
+     * be cached. The default is <tt>25</tt>.
      *
      * @param maxSize the cache's maximum size (must be &gt;= 0)
      */

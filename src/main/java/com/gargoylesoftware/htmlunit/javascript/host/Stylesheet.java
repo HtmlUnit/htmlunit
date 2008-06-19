@@ -64,14 +64,8 @@ public class Stylesheet extends SimpleScriptable {
 
     private static final long serialVersionUID = -8341675386925348206L;
 
-    /**
-     * The input source which contains the CSS stylesheet which this stylesheet host object
-     * represents.
-     */
-    private InputSource source_;
-
-    /** The parsed stylesheet which this host object wraps (initialized lazily). */
-    private CSSStyleSheet wrapped_;
+    /** The parsed stylesheet which this host object wraps. */
+    private final CSSStyleSheet wrapped_;
 
     /** The HTML element which owns this stylesheet. */
     private final HTMLElement ownerNode_;
@@ -101,36 +95,39 @@ public class Stylesheet extends SimpleScriptable {
      * Creates a new empty stylesheet.
      */
     public Stylesheet() {
+        wrapped_ = new CSSStyleSheetImpl();
         ownerNode_ = null;
     }
 
     /**
-     * Creates a new stylesheet representing the CSS stylesheet at the specified input source.
+     * Creates a new stylesheet representing the CSS stylesheet for the specified input source.
      * @param element the owning node
-     *
      * @param source the input source which contains the CSS stylesheet which this stylesheet host object represents
      */
     public Stylesheet(final HTMLElement element, final InputSource source) {
-        source_ = source;
+        wrapped_ = parseCSS(source);
         ownerNode_ = element;
         setParentScope(element.getWindow());
         setPrototype(getPrototype(Stylesheet.class));
     }
 
     /**
-     * Returns the wrapped stylesheet, initializing it first if necessary.
-     *
+     * Creates a new stylesheet representing the specified CSS stylesheet.
+     * @param element the owning node
+     * @param wrapped the CSS stylesheet which this stylesheet host object represents
+     */
+    public Stylesheet(final HTMLElement element, final CSSStyleSheet wrapped) {
+        wrapped_ = wrapped;
+        ownerNode_ = element;
+        setParentScope(element.getWindow());
+        setPrototype(getPrototype(Stylesheet.class));
+    }
+
+    /**
+     * Returns the wrapped stylesheet.
      * @return the wrapped stylesheet
      */
     CSSStyleSheet getWrappedSheet() {
-        if (wrapped_ == null) {
-            if (source_ != null) {
-                wrapped_ = parseCSS(source_);
-            }
-            else {
-                wrapped_ = new CSSStyleSheetImpl();
-            }
-        }
         return wrapped_;
     }
 
@@ -412,4 +409,5 @@ public class Stylesheet extends SimpleScriptable {
         }
         return cssRules_;
     }
+
 }

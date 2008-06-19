@@ -17,10 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript;
 import java.io.Serializable;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.WeakHashMap;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -39,7 +37,6 @@ import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.ScriptPreProcessor;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -73,15 +70,7 @@ public class JavaScriptEngine implements Serializable {
     private static final long serialVersionUID = -5414040051465432088L;
     private final WebClient webClient_;
     private static final Log ScriptEngineLog_ = LogFactory.getLog(JavaScriptEngine.class);
-
     private static final ThreadLocal<Boolean> javaScriptRunning_ = new ThreadLocal<Boolean>();
-    /**
-     * Cache parsed scripts (only for js files, not for js code embedded in HTML code).
-     * The WeakHashMap allows cached scripts to be GCed when the WebResponses are not retained
-     * in the {@link com.gargoylesoftware.htmlunit.Cache} anymore.
-     */
-    private final transient Map<WebResponse, Script> cachedScripts_ =
-        Collections.synchronizedMap(new WeakHashMap<WebResponse, Script>());
 
     /**
      * Key used to place the scope in which the execution of some JavaScript code
@@ -255,7 +244,6 @@ public class JavaScriptEngine implements Serializable {
      * @param window the scope within which to configure the class
      * @throws InstantiationException if the new class cannot be instantiated
      * @throws IllegalAccessException if we don't have access to create the new instance
-     * @throws InvocationTargetException if an exception is thrown during creation of the new object
      * @return the created prototype
      */
     private Scriptable configureClass(final ClassConfiguration config, final Scriptable window)
@@ -591,22 +579,4 @@ public class JavaScriptEngine implements Serializable {
         return newSourceCode;
     }
 
-    /**
-     * Gets the cached script for the given response.
-     * @param webResponse the response corresponding to the script code
-     * @return the parsed script
-     */
-    public Script getCachedScript(final WebResponse webResponse) {
-        return cachedScripts_.get(webResponse);
-    }
-
-    /**
-     * Caches a parsed script.
-     * @param webResponse the response corresponding to the script code; a weak reference to this object
-     *        will be used as the key for the cache
-     * @param script the parsed script to cache
-     */
-    public void cacheScript(final WebResponse webResponse, final Script script) {
-        cachedScripts_.put(webResponse, script);
-    }
 }

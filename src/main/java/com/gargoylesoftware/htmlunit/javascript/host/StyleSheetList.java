@@ -15,13 +15,16 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.StringReader;
-import java.util.WeakHashMap;
+import java.net.URL;
 
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 import org.w3c.css.sac.InputSource;
+import org.w3c.dom.css.CSSStyleSheet;
 
+import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -51,12 +54,6 @@ public class StyleSheetList extends SimpleScriptable {
      * must be "live".
      */
     private HTMLCollection nodes_;
-
-    /**
-     * Cache the stylesheets parsed for each style/link node, but don't keep the garbage collector
-     * from releasing the associated nodes if they are removed from the document.
-     */
-    private WeakHashMap<DomNode, Stylesheet> sheets_ = new WeakHashMap<DomNode, Stylesheet>();
 
     /**
      * Rhino requires default constructors.
@@ -98,35 +95,53 @@ public class StyleSheetList extends SimpleScriptable {
      * @return the style sheet at the specified index
      */
     public Stylesheet jsxFunction_item(final int index) {
+        final Cache cache = getWindow().getWebWindow().getWebClient().getCache();
+
         final HTMLElement element = (HTMLElement) nodes_.jsxFunction_item(new Integer(index));
         final DomNode node = element.getDomNodeOrDie();
-        Stylesheet sheet = sheets_.get(node);
-        if (sheet == null) {
-            if (node instanceof HtmlStyle) {
-                final HtmlStyle style = (HtmlStyle) node;
-                String styleText = "";
-                if (style.getFirstChild() != null) {
-                    styleText = style.getFirstChild().asText();
-                }
-                sheet = new Stylesheet(element, new InputSource(new StringReader(styleText)));
+
+        Stylesheet sheet;
+        if (node instanceof HtmlStyle) {
+            // <style type="text/css"> ... </style>
+            final HtmlStyle style = (HtmlStyle) node;
+            String css = "";
+            if (style.getFirstChild() != null) {
+                css = style.getFirstChild().asText();
+            }
+            final CSSStyleSheet cached = cache.getCachedStyleSheet(css);
+            if (cached != null) {
+                sheet = new Stylesheet(element, cached);
             }
             else {
-                final HtmlLink link = (HtmlLink) node;
-                try {
-                    final HtmlPage htmlPage = (HtmlPage) link.getPage();
-                    final WebRequestSettings webRequestSettings =
-                        new WebRequestSettings(htmlPage.getFullyQualifiedUrl(link.getHrefAttribute()));
-                    final String content =
-                        htmlPage.getWebClient().loadWebResponse(webRequestSettings).getContentAsString();
-                    final InputSource source = new InputSource(new StringReader(content));
-                    sheet = new Stylesheet(element, source);
+                final InputSource source = new InputSource(new StringReader(css));
+                sheet = new Stylesheet(element, source);
+                cache.cache(css, sheet.getWrappedSheet());
+            }
+        }
+        else {
+            // <link rel="stylesheet" type="text/css" href="..." />
+            final HtmlLink link = (HtmlLink) node;
+            try {
+                final HtmlPage page = (HtmlPage) link.getPage();
+                final URL url = page.getFullyQualifiedUrl(link.getHrefAttribute());
+                final WebRequestSettings wrs = new WebRequestSettings(url);
+                final WebResponse response = page.getWebClient().loadWebResponse(wrs);
+                final String css = response.getContentAsString();
+                final CSSStyleSheet cached = cache.getCachedStyleSheet(css);
+                if (cached != null) {
+                    sheet = new Stylesheet(element, cached);
                 }
-                catch (final Exception e) {
-                    throw Context.reportRuntimeError("Exception: " + e);
+                else {
+                    final InputSource source = new InputSource(new StringReader(css));
+                    sheet = new Stylesheet(element, source);
+                    cache.cache(css, sheet.getWrappedSheet());
                 }
             }
-            sheets_.put(node, sheet);
+            catch (final Exception e) {
+                throw Context.reportRuntimeError("Exception: " + e);
+            }
         }
+
         return sheet;
     }
 

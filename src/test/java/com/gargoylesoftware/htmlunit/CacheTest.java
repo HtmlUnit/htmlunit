@@ -198,6 +198,34 @@ public class CacheTest extends WebTestCase {
         assertEquals(0, client.getCache().getSize());
     }
 
+    /**
+     *@throws Exception if the test fails
+     */
+    @Test
+    public void cssIsCached() throws Exception {
+        final String html = "<html><head><title>page 1</title>\n"
+            + "<style>.x { color: red; }</style>\n"
+            + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
+            + "</head>\n"
+            + "<body onload='document.styleSheets.item(0); document.styleSheets.item(1);'>x</body>\n"
+            + "</html>";
+
+        final WebClient client = getWebClient();
+
+        final MockWebConnection connection = new MockWebConnection(client);
+        client.setWebConnection(connection);
+
+        final URL pageUrl = new URL(URL_FIRST, "page1.html");
+        connection.setResponse(pageUrl, html);
+
+        final List<Header> headers =
+            Collections.singletonList(new Header("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
+        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", "text/javascript", headers);
+
+        client.getPage(pageUrl);
+        assertEquals(2, client.getCache().getSize());
+    }
+
 }
 
 class DummyWebResponse implements WebResponse {

@@ -52,6 +52,7 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
 
+import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.OnbeforeunloadHandler;
@@ -997,10 +998,18 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         String scriptEncoding = charset;
         getPageEncoding();
 
-        WebResponse webResponse;
+        final WebClient client = getWebClient();
+        final Cache cache = client.getCache();
+
+        final WebRequestSettings request = new WebRequestSettings(url);
+        final Script cachedScript = cache.getCachedScript(request);
+        if (cachedScript != null) {
+            return cachedScript;
+        }
+
+        WebResponse response;
         try {
-            final WebRequestSettings requestSettings = new WebRequestSettings(url);
-            webResponse = getWebClient().loadWebResponse(requestSettings);
+            response = client.loadWebResponse(request);
         }
         catch (final IOException e) {
             if (mainLog_.isErrorEnabled()) {
@@ -1009,22 +1018,16 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             return null;
         }
 
-        final JavaScriptEngine javaScriptEngine = getWebClient().getJavaScriptEngine();
-        final Script cachedScript = javaScriptEngine.getCachedScript(webResponse);
-        if (cachedScript != null) {
-            return cachedScript;
-        }
+        client.printContentIfNecessary(response);
+        client.throwFailingHttpStatusCodeExceptionIfNecessary(response);
 
-        getWebClient().printContentIfNecessary(webResponse);
-        getWebClient().throwFailingHttpStatusCodeExceptionIfNecessary(webResponse);
-
-        final int statusCode = webResponse.getStatusCode();
+        final int statusCode = response.getStatusCode();
         final boolean successful = (statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES);
         if (!successful) {
             return null;
         }
 
-        final String contentType = webResponse.getContentType();
+        final String contentType = response.getContentType();
         if (!contentType.equalsIgnoreCase("text/javascript")
             && !contentType.equalsIgnoreCase("application/x-javascript")) {
             if (mainLog_.isWarnEnabled()) {
@@ -1035,7 +1038,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         }
 
         if (StringUtils.isEmpty(scriptEncoding)) {
-            final String contentCharset = webResponse.getContentCharSet();
+            final String contentCharset = response.getContentCharSet();
             if (!contentCharset.equals(TextUtil.DEFAULT_CHARSET)) {
                 scriptEncoding = contentCharset;
             }
@@ -1047,11 +1050,12 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             }
         }
 
-        final byte[] data = webResponse.getResponseBody();
+        final byte[] data = response.getResponseBody();
         final String scriptCode = EncodingUtil.getString(data, 0, data.length, scriptEncoding);
 
+        final JavaScriptEngine javaScriptEngine = client.getJavaScriptEngine();
         final Script script = javaScriptEngine.compile(this, scriptCode, url.toExternalForm(), 1);
-        javaScriptEngine.cacheScript(webResponse, script);
+        cache.cacheIfPossible(request, response, script);
         return script;
     }
 

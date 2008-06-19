@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes (handling of ill formed HTML code, document.write, ...) and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="add" dev="sdanig">
+                Cache compiled scripts and parsed stylesheets at the WebClient level.
+            </action>
             <action type="update" dev="asashour">
                 INCOMPATIBLE CHANGE: HtmlElement.getPage() now returns SgmlPage instead of HtmlPage.
             </action>

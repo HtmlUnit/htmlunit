@@ -1453,13 +1453,7 @@ public class WebClient implements Serializable {
      * @return the WebResponse
      */
     public WebResponse loadWebResponse(final WebRequestSettings webRequestSettings)
-        throws
-            IOException {
-
-        final WebResponse responseFromCache = cache_.getCachedContent(webRequestSettings);
-        if (responseFromCache != null) {
-            return responseFromCache;
-        }
+        throws IOException {
 
         final WebResponse response;
         final String protocol = webRequestSettings.getUrl().getProtocol();
@@ -1481,7 +1475,6 @@ public class WebClient implements Serializable {
             response = loadWebResponseFromWebConnection(webRequestSettings, ALLOWED_REDIRECTIONS_SAME_URL);
         }
 
-        cache_.cacheIfNeeded(webRequestSettings, response);
         return response;
     }
 
