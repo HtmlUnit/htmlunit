@@ -1710,9 +1710,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      */
     @SuppressWarnings("unchecked")
     void loadFrames() throws FailingHttpStatusCodeException {
-        final List<BaseFrame> frames = (List<BaseFrame>) getDocumentElement().getByXPath("//frame | //iframe");
-        for (final HtmlElement element : frames) {
-            final BaseFrame frame = (BaseFrame) element;
+        for (final FrameWindow w : getFrames()) {
+            final BaseFrame frame = w.getFrameElement();
             // test if the frame should really be loaded:
             // if a script has already changed its content, it should be skipped
             // use == and not equals(...) to identify initial content (versus URL set to "about:blank")
