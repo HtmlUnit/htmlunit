@@ -994,6 +994,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "        alert(request.responseXML.getElementById('myID').id);\n"
             + "        alert(request.responseXML.getElementById('myID').innerHTML);\n"
             + "        alert(request.responseXML.getElementById('myID').tagName);\n"
+            + "        alert(request.responseXML.getElementById('myID').ownerDocument);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1006,9 +1007,9 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "<content id='id1'>blah</content>\n"
             + "<content>blah2</content>\n"
             + "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
-            + "<span id='myID'>blah</span>"
-            + "<script src='foo.js'></script>"
-            + "</html>"
+            + "<span id='myID'>blah</span>\n"
+            + "<script src='foo.js'></script>\n"
+            + "</html>\n"
             + "</xml>";
 
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
@@ -1020,7 +1021,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setWebConnection(webConnection);
         client.getPage(URL_FIRST);
 
-        final String[] expectedAlerts = {"null", "myID", "blah", "SPAN"};
+        final String[] expectedAlerts = {"null", "myID", "blah", "SPAN", "[object XMLDocument]"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
