@@ -188,9 +188,9 @@ public class ThreadManagerTest extends WebTestCase {
      */
     @Test
     public void contextFactory_Browser() throws Exception {
-    	if (notYetImplemented()) {
-    		return;
-    	}
+        if (notYetImplemented()) {
+            return;
+        }
         final String firstHtml =
             "<html>\n"
             + "<head>\n"
