@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes (handling of ill formed HTML code, document.write, ...), speed improvements, and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="fix" dev="mguillem" id="1950004" due-to="Sudhan Moghe">
+                JavaScript: fix variable scope after document.write.
+            </action>
             <action type="fix" dev="mguillem" id="1990198">
                 Parsing: handle quotes in comments correctly within script nodes.
             </action>

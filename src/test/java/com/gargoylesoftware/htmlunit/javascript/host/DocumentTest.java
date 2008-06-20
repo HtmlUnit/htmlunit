@@ -1633,6 +1633,36 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void newElementsAfterWrite() throws Exception {
+        final String html =
+              "<html><head><script>\n"
+            + "function test() { \n"
+            + "  alert(document.title);\n"
+            + "  document.open();\n"
+            + "  document.write('<html><head><title>First</title></head>');"
+            + "  document.write('<body onload=\"alert(document.title)\">');"
+            + "  document.write('<form name=\"submitForm\" method=\"post\">');"
+            + "  document.write('</form></body></html>');\n"
+            + "  document.close();\n"
+            + "  alert(document.title);\n"
+            + "  alert(document.submitForm.tagName);\n"
+            + "  alert(window.document == document);\n"
+            + "  alert(document.submitForm == document.getElementsByTagName('form')[0]);\n"
+            + "}"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+
+        final String[] expectedAlerts = {"", "First", "First", "FORM", "true", "true"};
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
      * Verifies that calls to document.open() are ignored while the page's HTML is being parsed.
      * @throws Exception if an error occurs
      */

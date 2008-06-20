@@ -63,7 +63,9 @@ public class TopLevelWindow extends WebWindowImpl implements Serializable  {
      */
     @Override
     protected boolean isJavaScriptInitializationNeeded() {
-        return true;
+        return this.getScriptObject() == null
+            || !(getEnclosedPage().getWebResponse() instanceof StringWebResponse);
+        // TODO: find a better way to distinguish content written by document.open(),...
     }
 
     /**
