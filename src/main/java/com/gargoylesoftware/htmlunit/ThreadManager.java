@@ -104,7 +104,7 @@ public class ThreadManager {
         final Thread newThread = new Thread(job, "HtmlUnit Managed Thread #" + myThreadID + ": " + label) {
             @Override
             public void run() {
-            	HtmlUnitContextFactory.putThreadLocal(window_.getWebClient().getBrowserVersion());
+                HtmlUnitContextFactory.putThreadLocal(window_.getWebClient().getBrowserVersion());
                 try {
                     super.run();
                 }
