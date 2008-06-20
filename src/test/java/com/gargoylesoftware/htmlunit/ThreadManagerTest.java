@@ -16,10 +16,13 @@ package com.gargoylesoftware.htmlunit;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -166,5 +169,63 @@ public class ThreadManagerTest extends WebTestCase {
         // this thread manager really is not accessible anymore, but this is a unit test
         innerThreadManager.joinAll(1000);
         Assert.assertEquals("thread should stop", 0, innerThreadManager.activeCount());
+    }
+
+    private String getContent(final String resourceName) throws IOException {
+        InputStream in = null;
+        try {
+            in = getClass().getClassLoader().getResourceAsStream(resourceName);
+            return IOUtils.toString(in);
+        }
+        finally {
+            in.close();
+        }
+    }
+
+    /**
+     * This case throws a non-failing Exception.
+     * Test for http://sourceforge.net/tracker/index.php?func=detail&aid=1997280&group_id=47038&atid=448266
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void contextFactory_Browser() throws Exception {
+        final String firstHtml =
+            "<html>\n"
+            + "<head>\n"
+            + "   <title>1</title>\n"
+            + "   <script src='" + URL_THIRD + "' type='text/javascript'></script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "   setTimeout('finishCreateAccount()', 2500);\n"
+            + "   function finishCreateAccount() {\n"
+            + "       completionUrl = '" + URL_SECOND + "';\n"
+            + "       document.location.replace(completionUrl);\n"
+            + "   }\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+        final String secondHtml =
+            "<html>\n"
+            + "<head>\n"
+            + "   <title>2</title>\n"
+            + "   <script src='" + URL_THIRD + "' type='text/javascript'></script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<div id='id2'>Page2</div>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebClient webClient =  new WebClient(BrowserVersion.FIREFOX_2);
+
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        webClient.setWebConnection(webConnection);
+
+        webConnection.setResponse(URL_FIRST, firstHtml);
+        webConnection.setResponse(URL_SECOND, secondHtml);
+        webConnection.setResponse(URL_THIRD, getContent("prototype/1.6.0/dist/prototype.js"), "text/javascript");
+
+        final HtmlPage initialPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        initialPage.getEnclosingWindow().getThreadManager().joinAll(5000);
     }
 }
