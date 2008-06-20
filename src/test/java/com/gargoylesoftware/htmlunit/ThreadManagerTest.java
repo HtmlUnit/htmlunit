@@ -35,7 +35,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version $Revision$
  * @author Brad Clarke
- *
+ * @author Ahmed Ashour
  */
 public class ThreadManagerTest extends WebTestCase {
     private long startTime_;
@@ -183,12 +183,14 @@ public class ThreadManagerTest extends WebTestCase {
     }
 
     /**
-     * This case throws a non-failing Exception.
-     * Test for http://sourceforge.net/tracker/index.php?func=detail&aid=1997280&group_id=47038&atid=448266
+     * Test for http://sourceforge.net/tracker/index.php?func=detail&aid=1997280&group_id=47038&atid=448266.
      * @throws Exception if the test fails
      */
     @Test
     public void contextFactory_Browser() throws Exception {
+    	if (notYetImplemented()) {
+    		return;
+    	}
         final String firstHtml =
             "<html>\n"
             + "<head>\n"
@@ -211,12 +213,15 @@ public class ThreadManagerTest extends WebTestCase {
             + "   <title>2</title>\n"
             + "   <script src='" + URL_THIRD + "' type='text/javascript'></script>\n"
             + "</head>\n"
-            + "<body>\n"
+            + "<body onload='alert(2)'>\n"
             + "<div id='id2'>Page2</div>\n"
             + "</body>\n"
             + "</html>";
 
+        final String[] expectedAlerts = {"2"};
+        final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient webClient =  new WebClient(BrowserVersion.FIREFOX_2);
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection(webClient);
         webClient.setWebConnection(webConnection);
@@ -227,5 +232,6 @@ public class ThreadManagerTest extends WebTestCase {
 
         final HtmlPage initialPage = (HtmlPage) webClient.getPage(URL_FIRST);
         initialPage.getEnclosingWindow().getThreadManager().joinAll(5000);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }
