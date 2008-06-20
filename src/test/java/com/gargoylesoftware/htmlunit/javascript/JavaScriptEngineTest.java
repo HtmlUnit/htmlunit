@@ -324,11 +324,12 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     /**
-     * An odd case, if two external scripts are referenced and the <script> element
+     * An odd case, if two external scripts are referenced and the &lt;script&gt; element
      * of the first contain a comment which contain an apostrophe, then the second script
      * is ignored.
      * https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1990198&group_id=47038
      * This works fine in IE6 and FF 2.0.  Remove the apostrophe from "shouldn't" to make it work here.
+     * @throws Exception if the test fails
      */
     @Test
     public void externalScriptWithApostrophesInComment() throws Exception {
