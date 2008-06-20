@@ -382,6 +382,9 @@
         <contributor>
             <name>Stuart Begg</name>
         </contributor>
+        <contributor>
+            <name>Rene Schwietzke</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

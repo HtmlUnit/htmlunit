@@ -25,6 +25,7 @@ import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
@@ -103,6 +104,7 @@ public class ThreadManager {
         final Thread newThread = new Thread(job, "HtmlUnit Managed Thread #" + myThreadID + ": " + label) {
             @Override
             public void run() {
+            	HtmlUnitContextFactory.putThreadLocal(window_.getWebClient().getBrowserVersion());
                 try {
                     super.run();
                 }
