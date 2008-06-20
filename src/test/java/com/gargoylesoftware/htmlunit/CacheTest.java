@@ -123,14 +123,14 @@ public class CacheTest extends WebTestCase {
     @Test
     public void usage() throws Exception {
         final String content = "<html><head><title>page 1</title>\n"
-            + "<script src='foo1.js' type='text/javascript'/>\n"
-            + "<script src='foo2.js' type='text/javascript'/>\n"
+            + "<script src='foo1.js'></script>\n"
+            + "<script src='foo2.js'></script>\n"
             + "</head><body>\n"
             + "<a href='page2.html'>to page 2</a>\n"
             + "</body></html>";
 
         final String content2 = "<html><head><title>page 2</title>\n"
-            + "<script src='foo2.js' type='text/javascript'/>\n"
+            + "<script src='foo2.js'></script>\n"
             + "</head><body>\n"
             + "<a href='page1.html'>to page 1</a>\n"
             + "</body></html>";
