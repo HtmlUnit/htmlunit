@@ -323,6 +323,43 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /*
+     * An odd case, if two external scripts are referenced and the <script> element
+     * of the first contain a comment which contain an apostrophe, then the second script
+     * is ignored.
+     * https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1990198&group_id=47038
+     * This works fine in IE6 and FF 2.0.  Remove the apostrophe from "shouldn't" to make it work here.
+     */
+    @Test
+    public void externalScriptWithApostrophesInComment() throws Exception {
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection(client);
+
+        final String htmlContent
+            = "<html><head><title>foo</title>\n"
+            + "<script src='/foo.js' id='script1'><!-- this shouldn't be a problem --></script>\n"
+            + "<script src='/foo2.js' id='script2'><!-- this shouldn't be a problem --></script>\n"
+            + "</head><body>\n"
+            + "<p>hello world</p>\n"
+            + "</body></html>";
+
+        webConnection.setResponse(URL_FIRST, htmlContent);
+        webConnection.setResponse(new URL(URL_FIRST, "foo.js"),  "alert('got here');", "text/javascript");
+        webConnection.setResponse(new URL(URL_FIRST, "foo2.js"), "alert('got here 2');", "text/javascript");
+        client.setWebConnection(webConnection);
+
+        final String[] expectedAlerts = {"got here", "got here 2"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        getLog().debug(page.asXml());
+        assertEquals(expectedAlerts, collectedAlerts);
+
+        assertNotNull(page.getHtmlElementById("script1"));
+        assertNotNull(page.getHtmlElementById("script2"));
+    }
+    
     /**
      * Test that the URL of the page containing the script is contained in the exception's message.
      * @throws Exception if the test fails
