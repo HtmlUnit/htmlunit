@@ -323,7 +323,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
-    /*
+    /**
      * An odd case, if two external scripts are referenced and the <script> element
      * of the first contain a comment which contain an apostrophe, then the second script
      * is ignored.
@@ -359,7 +359,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertNotNull(page.getHtmlElementById("script1"));
         assertNotNull(page.getHtmlElementById("script2"));
     }
-    
+
     /**
      * Test that the URL of the page containing the script is contained in the exception's message.
      * @throws Exception if the test fails
