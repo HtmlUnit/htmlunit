@@ -47,6 +47,7 @@ import org.junit.Test;
 
 import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -67,6 +68,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Paul King
  * @author Ahmed Ashour
  * @author Daniel Gredler
+ * @author Sudhan Moghe
  */
 public class WebClientTest extends WebTestCase {
 
@@ -1847,4 +1849,38 @@ public class WebClientTest extends WebTestCase {
         Assert.assertNotNull(window);
     }
 
+    /**
+     * Regression test for currentWindow_
+     * Previous window should become current window after current window is closed in onLoad event.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testCurrentWindowAfterWindowCloseInOnload() throws Exception {
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+
+        final String firstContent = "<html><head><title>First</title></head>\n"
+            + "<body><form name='form1'>\n"
+            + "<button id='clickme' onClick='window.open(\"" + URL_SECOND + "\");'>Click me</a>\n"
+            + "</form></body></html>";
+        webConnection.setResponse(URL_FIRST, firstContent);
+
+        final String secondContent = "<html><head><title>Second</title></head>\n"
+            + "<body  onload='doTest()'>\n"
+            + "<script>\n"
+            + "     function doTest() {\n"
+            + "         window.close();\n"
+            + "    }\n"
+            + "</script></body></html>";
+        webConnection.setResponse(URL_SECOND, secondContent);
+
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
+
+        final HtmlButton buttonA = (HtmlButton) firstPage.getHtmlElementById("clickme");
+        buttonA.click();
+
+        assertEquals("First", ((HtmlPage) webClient.getCurrentWindow().getEnclosedPage()).getTitleText());
+    }
 }

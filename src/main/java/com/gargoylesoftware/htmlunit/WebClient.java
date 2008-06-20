@@ -97,6 +97,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Hans Donner
  * @author Paul King
  * @author Ahmed Ashour
+ * @author Sudhan Moghe
  */
 public class WebClient implements Serializable {
 
@@ -434,12 +435,13 @@ public class WebClient implements Serializable {
             }
         }
 
+        fireWindowContentChanged(new WebWindowEvent(webWindow, WebWindowEvent.CHANGE, oldPage, newPage));
+
         // the page being loaded may already have been replaced by an other one through js code
         if (webWindow.getEnclosedPage() == newPage) {
             newPage.initialize();
         }
 
-        fireWindowContentChanged(new WebWindowEvent(webWindow, WebWindowEvent.CHANGE, oldPage, newPage));
         return newPage;
     }
 

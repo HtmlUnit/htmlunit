@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes (handling of ill formed HTML code, document.write, ...), speed improvements, and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="fix" dev="mguillem" id="1995196" due-to="Sudhan Moghe">
+                Fix current window's computation when a window is closed by JavaScript during onload processing.
+            </action>
             <action type="fix" dev="asashour" id="1997280" due-to="Rene Schwietzke">
                 ThreadManager: set BrowserVersion of HtmlUnitContextFactory of newly created threads.
             </action>
