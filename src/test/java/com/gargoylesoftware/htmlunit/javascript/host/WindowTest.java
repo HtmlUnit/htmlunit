@@ -2641,4 +2641,23 @@ public class WindowTest extends WebTestCase {
         final HtmlButtonInput input = (HtmlButtonInput) page.getFirstByXPath("//input");
         input.click();
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void execScript() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    window.execScript('alert(1);');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"1"};
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
