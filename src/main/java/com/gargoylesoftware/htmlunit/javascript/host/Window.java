@@ -893,7 +893,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Executes the specified script code as long as the laguage is JavaScript or JScript. Does
+     * Executes the specified script code as long as the language is JavaScript or JScript. Does
      * nothing if the language specified is VBScript.
      * @param script the script code to execute
      * @param language the language of the specified code ("JavaScript", "JScript" or "VBScript")
