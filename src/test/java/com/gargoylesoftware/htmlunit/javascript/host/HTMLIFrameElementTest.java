@@ -334,4 +334,28 @@ public class HTMLIFrameElementTest extends WebTestCase {
         assertEquals(URL_THIRD.toExternalForm(), iframe.getSrcAttribute());
         assertEquals("Third", ((HtmlPage) iframe.getEnclosedPage()).getTitleText());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testSetSrc_javascriptUrl() throws Exception {
+        final String content
+            = "<html><head><title>First</title></head><script>\n"
+            + "  function test() {\n"
+            + "   document.getElementById('iframe1').src = 'javascript:void(0)';\n"
+            + "   alert(window.frames[0].location);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<body onload='test()'>\n"
+            + "<iframe id='iframe1'></iframe>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"about:blank"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

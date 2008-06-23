@@ -53,7 +53,6 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.mozilla.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
@@ -1436,11 +1435,12 @@ public class WebClient implements Serializable {
             }
             page = (HtmlPage) currentPage;
         }
+
         final ScriptResult scriptResult = page.executeJavaScriptIfPossible(
             url.toExternalForm(), "JavaScript URL", 1);
-        if (scriptResult.getJavaScriptResult() instanceof Undefined) {
+        if (ScriptResult.isUndefined(scriptResult)) {
             // no new webresponse to produce
-            return page.getWebResponse();
+            return webWindow.getEnclosedPage().getWebResponse();
         }
         else {
             final String contentString = scriptResult.getJavaScriptResult().toString();
