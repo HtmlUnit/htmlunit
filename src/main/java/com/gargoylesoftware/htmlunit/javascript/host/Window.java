@@ -897,8 +897,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * nothing if the language specified is VBScript.
      * @param script the script code to execute
      * @param language the language of the specified code ("JavaScript", "JScript" or "VBScript")
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/execscript.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536420.aspx">MSDN documentation</a>
      * @return this method always returns <code>null</code>, like Internet Explorer
      */
     public Object jsxFunction_execScript(final String script, final String language) {
