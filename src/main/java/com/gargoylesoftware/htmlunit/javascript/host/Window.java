@@ -902,7 +902,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return this method always returns <code>null</code>, like Internet Explorer
      */
     public Object jsxFunction_execScript(final String script, final Object language) {
-    	final String languageStr = Context.toString(language);
+        final String languageStr = Context.toString(language);
         if (language == Undefined.instance
             || "javascript".equalsIgnoreCase(languageStr) || "jscript".equalsIgnoreCase(languageStr)) {
             custom_eval(script);
