@@ -28,6 +28,7 @@ import org.apache.commons.lang.StringUtils;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.ConfirmHandler;
@@ -900,13 +901,14 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536420.aspx">MSDN documentation</a>
      * @return this method always returns <code>null</code>, like Internet Explorer
      */
-    public Object jsxFunction_execScript(final String script, final String language) {
-        if ("undefined".equals(language)
-            || "javascript".equalsIgnoreCase(language) || "jscript".equalsIgnoreCase(language)) {
+    public Object jsxFunction_execScript(final String script, final Object language) {
+    	final String languageStr = Context.toString(language);
+        if (language == Undefined.instance
+            || "javascript".equalsIgnoreCase(languageStr) || "jscript".equalsIgnoreCase(languageStr)) {
             custom_eval(script);
             return null;
         }
-        else if ("vbscript".equalsIgnoreCase(language)) {
+        else if ("vbscript".equalsIgnoreCase(languageStr)) {
             getLog().warn("VBScript not supported in Window.execScript().");
         }
         else {
