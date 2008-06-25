@@ -147,7 +147,6 @@ public class GWT15RC1Test extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void loadingJavaScript() throws Exception {
         final String firstContent = " <html>\n"
             + "<head><title>First Page</title>\n"
@@ -165,7 +164,7 @@ public class GWT15RC1Test extends WebTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "<div id='debugDiv'/>\n"
+            + "<div id='debugDiv'></div>\n"
             + "</body>\n"
             + "</html>";
         final String secondContent

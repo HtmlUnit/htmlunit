@@ -28,6 +28,8 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 
 /**
  * Base class for frame and iframe.
@@ -294,7 +296,24 @@ public abstract class BaseFrame extends StyledElement {
         super.setAttributeValue(namespaceURI, qualifiedName, attributeValue, cloning);
 
         if (qualifiedName.equals("src") && !cloning) {
-            loadInnerPageIfPossible(attributeValue);
+            final JavaScriptEngine jsEngine = getPage().getWebClient().getJavaScriptEngine();
+            // when src is set from a script, loading is postponed until script finishes
+            // in fact this implementation is probably wrong: javascript url should be first evaluated
+            // and only loading, when any, should be postponed
+            if (!jsEngine.isScriptRunning() || attributeValue.startsWith("javascript:")) {
+                loadInnerPageIfPossible(attributeValue);
+            }
+            else {
+                final String src = attributeValue;
+                final PostponedAction action = new PostponedAction() {
+                    public void execute() throws Exception {
+                        if (getSrcAttribute().equals(src)) {
+                            loadInnerPage();
+                        }
+                    }
+                };
+                jsEngine.addPostponedAction(action);
+            }
         }
     }
 

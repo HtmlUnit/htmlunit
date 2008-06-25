@@ -17,7 +17,9 @@ package com.gargoylesoftware.htmlunit.javascript;
 import java.io.Serializable;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -71,6 +73,8 @@ public class JavaScriptEngine implements Serializable {
     private final WebClient webClient_;
     private static final Log ScriptEngineLog_ = LogFactory.getLog(JavaScriptEngine.class);
     private static final ThreadLocal<Boolean> javaScriptRunning_ = new ThreadLocal<Boolean>();
+    private static final ThreadLocal<List<PostponedAction>> postponedActions_
+        = new ThreadLocal<List<PostponedAction>>();
 
     /**
      * Key used to place the scope in which the execution of some JavaScript code
@@ -515,7 +519,9 @@ public class JavaScriptEngine implements Serializable {
             try {
                 cx.putThreadLocal(KEY_STARTING_SCOPE, scope_);
                 synchronized (htmlPage_) { // 2 scripts can't be executed in parallel for one page
-                    return doRun(cx);
+                    final Object response = doRun(cx);
+                    processPostponedActions(cx);
+                    return response;
                 }
             }
             catch (final Exception e) {
@@ -537,6 +543,16 @@ public class JavaScriptEngine implements Serializable {
             }
             finally {
                 javaScriptRunning_.set(javaScriptAlreadyRunning);
+            }
+        }
+
+        private void processPostponedActions(final Context cx) throws Exception {
+            final List<PostponedAction> actions = postponedActions_.get();
+            postponedActions_.set(null);
+            if (actions != null) {
+                for (final PostponedAction action : actions) {
+                    action.execute();
+                }
             }
         }
 
@@ -579,4 +595,16 @@ public class JavaScriptEngine implements Serializable {
         return newSourceCode;
     }
 
+    /**
+     * Adds an action that should be executed first when the script currently being executed has finished.
+     * @param action the action
+     */
+    public void addPostponedAction(final PostponedAction action) {
+        List<PostponedAction> actions = postponedActions_.get();
+        if (actions == null) {
+            actions = new ArrayList<PostponedAction>();
+            postponedActions_.set(actions);
+        }
+        actions.add(action);
+    }
 }
