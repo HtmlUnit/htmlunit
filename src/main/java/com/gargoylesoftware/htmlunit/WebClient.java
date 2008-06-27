@@ -302,7 +302,7 @@ public class WebClient implements Serializable {
      * @return the page returned by the server when the specified request was made in the specified window
      * @throws IOException if an IO error occurs
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
-     * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true
+     *         {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true
      *
      * @see WebRequestSettings
      */
@@ -352,7 +352,7 @@ public class WebClient implements Serializable {
      * @param params any parameters
      * @return the new page
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
-     * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
+     *         {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      * @throws IOException if an IO problem occurs
      */
     public Page getPage(final WebWindow opener, final String target, final WebRequestSettings params)
@@ -366,7 +366,7 @@ public class WebClient implements Serializable {
      * @param url the URL of the new content
      * @return the new page
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
-     * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
+     *         {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      * @throws IOException if an IO problem occurs
      * @throws MalformedURLException if no URL can be created from the provided string
      */
@@ -380,7 +380,7 @@ public class WebClient implements Serializable {
      * @param url the URL of the new content
      * @return the new page
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
-     * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
+     *         {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      * @throws IOException if an IO problem occurs
      */
     public Page getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
@@ -392,12 +392,11 @@ public class WebClient implements Serializable {
      * @param request the request parameters
      * @return the new page
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
-     * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
+     *         {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      * @throws IOException if an IO problem occurs
      * @see #getPage(WebWindow,WebRequestSettings)
      */
-    public Page getPage(final WebRequestSettings request) throws IOException,
-            FailingHttpStatusCodeException {
+    public Page getPage(final WebRequestSettings request) throws IOException, FailingHttpStatusCodeException {
         return getPage(getCurrentWindow(), request);
     }
 
@@ -410,7 +409,7 @@ public class WebClient implements Serializable {
      * @param webWindow the window that the new page will be placed within
      * @throws IOException if an IO error occurs
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
-     * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true
+     *         {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true
      * @return the newly created page
      */
     public Page loadWebResponseInto(final WebResponse webResponse, final WebWindow webWindow)
@@ -436,7 +435,7 @@ public class WebClient implements Serializable {
 
         fireWindowContentChanged(new WebWindowEvent(webWindow, WebWindowEvent.CHANGE, oldPage, newPage));
 
-        // the page being loaded may already have been replaced by an other one through js code
+        // The page being loaded may already have been replaced by another page via JavaScript code.
         if (webWindow.getEnclosedPage() == newPage) {
             newPage.initialize();
         }
