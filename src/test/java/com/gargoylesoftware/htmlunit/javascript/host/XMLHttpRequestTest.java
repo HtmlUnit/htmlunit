@@ -20,14 +20,23 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.Servlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.httpclient.NameValuePair;
 import org.junit.Test;
+import org.mortbay.jetty.Server;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.HttpMethod;
+import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -38,6 +47,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -1190,13 +1200,40 @@ public class XMLHttpRequestTest extends WebTestCase {
     }
 
     /**
+     * Regression test for bug 1209686 (onreadystatechange not called with partial data when emulating FF).
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testStreaming() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+
+        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        servlets.put("/test", StreamingServlet.class);
+
+        final String resourceBase = "./src/test/resources/com/gargoylesoftware/htmlunit/javascript/host";
+        final Server server = HttpWebConnectionTest.startWebServer(resourceBase, null, servlets);
+        try {
+            final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
+            final HtmlPage page = (HtmlPage) client.getPage("http://localhost:12345/XMLHttpRequestTest_streaming.html");
+            final HtmlElement body = page.getBody();
+            Thread.sleep(5000);
+            assertEquals(10, body.asText().split("\n").length);
+        }
+        finally {
+            HttpWebConnectionTest.stopWebServer(server);
+        }
+    }
+
+    /**
      * Connection refused WebConnection for URL_SECOND.
      */
     private static final class DisconnectedMockWebConnection extends MockWebConnection {
         private DisconnectedMockWebConnection(final WebClient webClient) {
             super(webClient);
         }
-
+        /** {@inheritDoc} */
         @Override
         public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
             if (webRequestSettings.getUrl().equals(URL_SECOND)) {
@@ -1205,4 +1242,28 @@ public class XMLHttpRequestTest extends WebTestCase {
             return super.getResponse(webRequestSettings);
         }
     }
+
+    /**
+     * Custom servlet which streams content to the client little by little.
+     */
+    public static final class StreamingServlet extends HttpServlet {
+        private static final long serialVersionUID = -5892710154241871545L;
+        /** {@inheritDoc} */
+        @Override
+        protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
+            resp.setStatus(200);
+            resp.addHeader("Content-Type", "text/html");
+            try {
+                for (int i = 0; i < 10; i++) {
+                    resp.getOutputStream().print(String.valueOf(i));
+                    resp.flushBuffer();
+                    Thread.sleep(150);
+                }
+            }
+            catch (final InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
 }

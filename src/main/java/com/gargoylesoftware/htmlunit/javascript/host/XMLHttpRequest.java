@@ -87,6 +87,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * JavaScript constructor.
      */
     public void jsConstructor() {
+        // Empty.
     }
 
     /**
