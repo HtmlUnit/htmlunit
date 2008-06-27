@@ -406,12 +406,13 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * <p>Creates a page based on the specified response and inserts it into the specified page. All page
+     * <p>Creates a page based on the specified response and inserts it into the specified window. All page
      * initialization and event notification is handled here.</p>
      *
      * <p>Note that if the page created is an attachment page, and an {@link AttachmentHandler} has been
      * registered with this client, the page is <b>not</b> loaded into the specified window; in this case,
-     * attachment handling is delegated to the registered <tt>AttachmentHandler</tt>.</p>
+     * the page is loaded into a new window, and attachment handling is delegated to the registered
+     * <tt>AttachmentHandler</tt>.</p>
      *
      * @param webResponse the response that will be used to create the new page
      * @param webWindow the window that the new page will be placed within
