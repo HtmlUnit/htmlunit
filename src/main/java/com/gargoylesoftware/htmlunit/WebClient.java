@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.attachment.Attachment.isAttachment;
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -54,6 +56,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.htmlunit.attachment.AttachmentHandler;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
@@ -96,6 +99,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Hans Donner
  * @author Paul King
  * @author Ahmed Ashour
+ * @author Bruce Chapman
  * @author Sudhan Moghe
  */
 public class WebClient implements Serializable {
@@ -134,6 +138,7 @@ public class WebClient implements Serializable {
     private ConfirmHandler confirmHandler_;
     private PromptHandler  promptHandler_;
     private StatusHandler  statusHandler_;
+    private AttachmentHandler attachmentHandler_;
     private AjaxController ajaxController_ = new AjaxController();
 
     private BrowserVersion browserVersion_;
@@ -401,9 +406,12 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Use the specified WebResponse to create a Page object which will then
-     * get inserted into the WebWindow. All initialization and event notification
-     * will be handled here.
+     * <p>Creates a page based on the specified response and inserts it into the specified page. All page
+     * initialization and event notification is handled here.</p>
+     *
+     * <p>Note that if the page created is an attachment page, and an {@link AttachmentHandler} has been
+     * registered with this client, the page is <b>not</b> loaded into the specified window; in this case,
+     * attachment handling is delegated to the registered <tt>AttachmentHandler</tt>.</p>
      *
      * @param webResponse the response that will be used to create the new page
      * @param webWindow the window that the new page will be placed within
@@ -411,12 +419,20 @@ public class WebClient implements Serializable {
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      *         {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true
      * @return the newly created page
+     * @see #setAttachmentHandler(AttachmentHandler)
      */
     public Page loadWebResponseInto(final WebResponse webResponse, final WebWindow webWindow)
         throws IOException, FailingHttpStatusCodeException {
 
         WebAssert.notNull("webResponse", webResponse);
         WebAssert.notNull("webWindow", webWindow);
+
+        if (attachmentHandler_ != null && isAttachment(webResponse)) {
+            final WebWindow w = openWindow(null, null, webWindow);
+            final Page page = pageCreator_.createPage(webResponse, w);
+            attachmentHandler_.handleAttachment(page);
+            return page;
+        }
 
         final Page oldPage = webWindow.getEnclosedPage();
         if (oldPage != null) {
@@ -1835,6 +1851,22 @@ public class WebClient implements Serializable {
             throw new NullPointerException();
         }
         ajaxController_ = newValue;
+    }
+
+    /**
+     * Sets the attachment handler.
+     * @param handler the new attachment handler
+     */
+    public void setAttachmentHandler(final AttachmentHandler handler) {
+        this.attachmentHandler_ = handler;
+    }
+
+    /**
+     * Returns the current attachment handler.
+     * @return the current attachment handler
+     */
+    public AttachmentHandler getAttachmentHandler() {
+        return attachmentHandler_;
     }
 
     /**
