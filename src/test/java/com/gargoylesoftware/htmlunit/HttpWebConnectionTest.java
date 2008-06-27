@@ -255,19 +255,19 @@ public class HttpWebConnectionTest {
      * The given resourceBase is used to be the ROOT directory that serves the default context.
      * <p><b>Don't forget to stop the returned HttpServer after the test</b>
      *
-     * @param resouceBase the base of resources for the default context
+     * @param resourceBase the base of resources for the default context
      * @return the started web server
      * @throws Exception if the test fails
      */
-    public static Server startWebServer(final String resouceBase) throws Exception {
+    public static Server startWebServer(final String resourceBase) throws Exception {
         final Server server = new Server(PORT);
 
         final Context context = new Context();
         context.setContextPath("/");
-        context.setResourceBase(resouceBase);
+        context.setResourceBase(resourceBase);
 
         final ResourceHandler resourceHandler = new ResourceHandler();
-        resourceHandler.setResourceBase(resouceBase);
+        resourceHandler.setResourceBase(resourceBase);
 
         final HandlerList handlers = new HandlerList();
         handlers.setHandlers(new Handler[]{resourceHandler, context});
@@ -283,17 +283,17 @@ public class HttpWebConnectionTest {
      * The given resourceBase is used to be the ROOT directory that serves the default context.
      * <p><b>Don't forget to stop the returned HttpServer after the test</b>
      *
-     * @param resouceBase the base of resources for the default context
+     * @param resourceBase the base of resources for the default context
      * @param classpath additional classpath entries to add (may be null)
      * @return the started web server
      * @throws Exception if the test fails
      */
-    public static Server startWebServer(final String resouceBase, final String[] classpath) throws Exception {
+    public static Server startWebServer(final String resourceBase, final String[] classpath) throws Exception {
         final Server server = new Server(PORT);
 
         final WebAppContext context = new WebAppContext();
         context.setContextPath("/");
-        context.setResourceBase(resouceBase);
+        context.setResourceBase(resourceBase);
         final WebAppClassLoader loader = new WebAppClassLoader(context);
         if (classpath != null) {
             for (final String path : classpath) {
@@ -311,20 +311,20 @@ public class HttpWebConnectionTest {
      * The given resourceBase is used to be the ROOT directory that serves the default context.
      * <p><b>Don't forget to stop the returned HttpServer after the test</b>
      *
-     * @param resouceBase the base of resources for the default context
+     * @param resourceBase the base of resources for the default context
      * @param classpath additional classpath entries to add (may be null)
      * @param servlets map of {String, Class} pairs: String is the path spec, while class is the class
      * @return the started web server
      * @throws Exception if the test fails
      */
-    public static Server startWebServer(final String resouceBase, final String[] classpath,
+    public static Server startWebServer(final String resourceBase, final String[] classpath,
             final Map<String, Class< ? extends Servlet>> servlets)
         throws Exception {
         final Server server = new Server(PORT);
 
         final WebAppContext context = new WebAppContext();
         context.setContextPath("/");
-        context.setResourceBase(resouceBase);
+        context.setResourceBase(resourceBase);
 
         for (final String pathSpec : servlets.keySet()) {
             final Class< ? extends Servlet> servlet = servlets.get(pathSpec);
