@@ -1895,8 +1895,8 @@ public class WebClientTest extends WebTestCase {
     }
 
     private void testOpenWindowWithAboutBlank(final BrowserVersion browserVersion) throws Exception {
-        final WebClient client1 = new WebClient(browserVersion);
-        final WebWindow window1 = client1.openWindow(WebClient.URL_ABOUT_BLANK, "TestingWindow");
-        Assert.assertNotNull(window1);
+        final WebClient client = new WebClient(browserVersion);
+        final WebWindow window = client.openWindow(WebClient.URL_ABOUT_BLANK, "TestingWindow");
+        Assert.assertNotNull(window);
     }
 }
