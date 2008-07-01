@@ -308,7 +308,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      *        if <tt>false</tt>, the keys are delimiter-separated (i.e. <tt>font-size</tt>).
      * @return a sorted map containing style elements, keyed on style element name
      */
-    @SuppressWarnings("unchecked")
     protected Map<String, StyleElement> getStyleMap(final boolean camelCase) {
         final Map<String, StyleElement> styleMap = new LinkedHashMap<String, StyleElement>();
         final String styleAttribute = jsElement_.getHtmlElementOrDie().getAttributeValue("style");
@@ -4183,16 +4182,15 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
             // Case-sensitive.
             return dec.getStyleAttribute(name, true);
         }
-        else {
-            // Case-insensitive.
-            final Map<String, StyleElement> map = dec.getStyleMap(true);
-            for (final String key : map.keySet()) {
-                if (key.equalsIgnoreCase(name)) {
-                    return map.get(key).getValue();
-                }
-            }
-            return "";
+
+        // Case-insensitive.
+        final Map<String, StyleElement> map = dec.getStyleMap(true);
+        for (final String key : map.keySet()) {
+        	if (key.equalsIgnoreCase(name)) {
+        		return map.get(key).getValue();
+        	}
         }
+        return "";
     }
 
     /**
@@ -4281,21 +4279,16 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
                 dec.removeStyleAttribute(lastName);
                 return true;
             }
-            else {
-                return false;
-            }
+            return false;
         }
-        else {
-            // Case-sensitive.
-            final String s = dec.getStyleAttribute(name, true);
-            if (s.length() > 0) {
-                dec.removeStyleAttribute(name);
-                return true;
-            }
-            else {
-                return false;
-            }
+
+        // Case-sensitive.
+        final String s = dec.getStyleAttribute(name, true);
+        if (s.length() > 0) {
+        	dec.removeStyleAttribute(name);
+        	return true;
         }
+        return false;
     }
 
     /**
@@ -4508,9 +4501,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
             if (e != null) {
                 return new Long(index_).compareTo(e.index_);
             }
-            else {
-                return 1;
-            }
+            return 1;
         }
     }
 

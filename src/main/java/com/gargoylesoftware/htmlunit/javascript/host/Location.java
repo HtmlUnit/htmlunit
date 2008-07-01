@@ -247,26 +247,23 @@ public class Location extends SimpleScriptable {
         if (hash != null) {
             return "#" + hash;
         }
-        else {
-            return "";
-        }
+        return "";
     }
 
     private String getHash(final boolean encoded) {
         if (hash_ == null || hash_.length() == 0) {
             return null;
         }
-        else {
-            if (encoded) {
-                try {
-                    return URIUtil.encodeQuery(hash_);
-                }
-                catch (final URIException e) {
-                    getLog().error(e.getMessage(), e);
-                }
-            }
-            return hash_;
+
+        if (encoded) {
+        	try {
+        		return URIUtil.encodeQuery(hash_);
+        	}
+        	catch (final URIException e) {
+        		getLog().error(e.getMessage(), e);
+        	}
         }
+        return hash_;
     }
 
     /**

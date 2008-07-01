@@ -229,7 +229,6 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      * Gets the HTML elements from cache or retrieve them at first call.
      * @return the list of {@link HtmlElement} contained in this collection
      */
-    @SuppressWarnings("unchecked")
     protected List<Object> getElements() {
         if (cachedElements_ == null) {
             cachedElements_ = computeElements();
@@ -510,7 +509,6 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      * {@inheritDoc}.
      */
     @Override
-    @SuppressWarnings("unused")
     public Object[] getIds() {
         final List<String> idList = new ArrayList<String>();
 

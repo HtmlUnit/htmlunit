@@ -98,9 +98,7 @@ public class FormField extends HTMLElement {
         if (form == null) {
             return null;
         }
-        else {
-            return (HTMLFormElement) getScriptableFor(form);
-        }
+        return (HTMLFormElement) getScriptableFor(form);
     }
 
     /**

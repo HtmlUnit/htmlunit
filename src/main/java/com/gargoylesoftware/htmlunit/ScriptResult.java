@@ -141,9 +141,7 @@ public final class ScriptResult {
         if (jsResult == null && page == null) {
             return null;
         }
-        else {
-            return new ScriptResult(jsResult, page);
-        }
+        return new ScriptResult(jsResult, page);
     }
 
 }

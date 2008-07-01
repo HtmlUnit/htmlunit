@@ -1458,10 +1458,8 @@ public class WebClient implements Serializable {
             // no new webresponse to produce
             return webWindow.getEnclosedPage().getWebResponse();
         }
-        else {
-            final String contentString = scriptResult.getJavaScriptResult().toString();
-            return new StringWebResponse(contentString, charset, url);
-        }
+        final String contentString = scriptResult.getJavaScriptResult().toString();
+        return new StringWebResponse(contentString, charset, url);
     }
 
     /**
