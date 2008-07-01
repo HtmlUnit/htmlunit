@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes (handling of ill formed HTML code, document.write, ...), speed improvements, and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="fix" dev="asashour" id="2006861">
+                Fix exception when opening about:blank with Firefox.
+            </action>
             <action type="add" dev="sdanig">
                 Add classes AttachmentHandler, CollectingAttachmentHandler and Attachment to handle attachments
                 outside of the normal page flow (disabled by default for backwards compatibility).

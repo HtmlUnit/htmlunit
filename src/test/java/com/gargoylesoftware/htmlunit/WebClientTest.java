@@ -1883,4 +1883,20 @@ public class WebClientTest extends WebTestCase {
 
         assertEquals("First", ((HtmlPage) webClient.getCurrentWindow().getEnclosedPage()).getTitleText());
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testOpenWindowWithAboutBlank() throws Exception {
+        testOpenWindowWithAboutBlank(BrowserVersion.INTERNET_EXPLORER_6_0);
+        testOpenWindowWithAboutBlank(BrowserVersion.INTERNET_EXPLORER_7_0);
+        testOpenWindowWithAboutBlank(BrowserVersion.FIREFOX_2);
+    }
+
+    private void testOpenWindowWithAboutBlank(final BrowserVersion browserVersion) throws Exception {
+        final WebClient client1 = new WebClient(browserVersion);
+        final WebWindow window1 = client1.openWindow(WebClient.URL_ABOUT_BLANK, "TestingWindow");
+        Assert.assertNotNull(window1);
+    }
 }

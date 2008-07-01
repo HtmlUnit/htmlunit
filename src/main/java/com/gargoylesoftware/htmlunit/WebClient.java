@@ -920,7 +920,7 @@ public class WebClient implements Serializable {
         if (url != null) {
             try {
                 final WebRequestSettings settings = new WebRequestSettings(url);
-                if (!getBrowserVersion().isIE()) {
+                if (!getBrowserVersion().isIE() && openerPage != null) {
                     settings.addAdditionalHeader("Referer", openerPage.getWebResponse().getUrl().toExternalForm());
                 }
                 getPage(window, settings);
