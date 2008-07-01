@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import org.mozilla.javascript.Function;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.DomText;
 
 /**
  * The JavaScript object that represents an "HTMLScriptElement".
@@ -51,6 +52,33 @@ public class HTMLScriptElement extends HTMLElement {
      */
     public void jsxSet_src(final String src) {
         getHtmlElementOrDie().setAttributeValue("src", src);
+    }
+
+    /**
+     * Returns the <tt>text</tt> attribute.
+     * @return the <tt>text</tt> attribute
+     */
+    public String jsxGet_text() {
+        final DomNode firstChild = getHtmlElementOrDie().getFirstChild();
+        if (firstChild != null) {
+            return firstChild.getNodeValue();
+        }
+        return "";
+    }
+
+    /**
+     * Sets the <tt>text</tt> attribute.
+     * @param text the <tt>text</tt> attribute
+     */
+    public void jsxSet_text(final String text) {
+        DomNode firstChild = getHtmlElementOrDie().getFirstChild();
+        if (firstChild == null) {
+            firstChild = new DomText(getHtmlElementOrDie().getPage(), text);
+            getHtmlElementOrDie().appendChild(firstChild);
+        }
+        else {
+            firstChild.setNodeValue(text);
+        }
     }
 
     /**

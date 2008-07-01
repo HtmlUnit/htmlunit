@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes (handling of ill formed HTML code, document.write, ...), speed improvements, and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="add" dev="asashour" id="2005930">
+                JavaScript: add support for script.text.
+            </action>
             <action type="fix" dev="asashour" id="2006861">
                 Fix exception when opening about:blank with Firefox.
             </action>

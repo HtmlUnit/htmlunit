@@ -213,4 +213,39 @@ public class HTMLScriptElementTest extends WebTestCase {
         assertEquals(expected, actual);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void text() throws Exception {
+        text(BrowserVersion.INTERNET_EXPLORER_6_0);
+        text(BrowserVersion.INTERNET_EXPLORER_7_0);
+        text(BrowserVersion.FIREFOX_2);
+    }
+
+    private void text(final BrowserVersion browserVersion) throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        execMe('alert(1)');\n"
+            + "      }\n"
+            + "      function execMe(text) {\n"
+            + "        document.head = document.getElementsByTagName('head')[0];\n"
+            + "        var script = document.createElement('script');\n"
+            + "        script.text = text;\n"
+            + "        document.head.appendChild(script);\n"
+            + "        document.head.removeChild(script);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+        final String[] expectedAlerts = {"1"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(browserVersion, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

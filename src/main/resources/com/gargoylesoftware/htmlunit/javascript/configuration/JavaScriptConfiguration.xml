@@ -1470,6 +1470,7 @@
         </property>
         <property name="src" readable="true" writable="true"/>
         <property name="type" readable="true" writable="true"/>
+        <property name="text" readable="true" writable="true"/>
     </class>
 
     <class name="HTMLSelectElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSelectElement"
