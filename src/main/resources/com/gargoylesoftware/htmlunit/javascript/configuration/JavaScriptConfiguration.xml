@@ -657,6 +657,11 @@
         <property name="defaultView" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
+        <property name="designMode" notImplemented="true" readable="true" writable="true">
+            <doclink
+                url="http://msdn.microsoft.com/en-us/library/ms533720.aspx"
+                descr="MSDN documentation"/>
+        </property>
         <property name="documentElement" readable="true" writable="false"/>
         <property name="implementation" readable="true" writable="false"/>
         <property name="location" readable="true" writable="true">
