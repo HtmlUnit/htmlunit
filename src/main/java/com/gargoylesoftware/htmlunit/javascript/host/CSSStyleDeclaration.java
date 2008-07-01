@@ -4186,9 +4186,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
         // Case-insensitive.
         final Map<String, StyleElement> map = dec.getStyleMap(true);
         for (final String key : map.keySet()) {
-        	if (key.equalsIgnoreCase(name)) {
-        		return map.get(key).getValue();
-        	}
+            if (key.equalsIgnoreCase(name)) {
+                return map.get(key).getValue();
+            }
         }
         return "";
     }
@@ -4285,8 +4285,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
         // Case-sensitive.
         final String s = dec.getStyleAttribute(name, true);
         if (s.length() > 0) {
-        	dec.removeStyleAttribute(name);
-        	return true;
+            dec.removeStyleAttribute(name);
+            return true;
         }
         return false;
     }

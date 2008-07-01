@@ -71,7 +71,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @param text the <tt>text</tt> attribute
      */
     public void jsxSet_text(final String text) {
-    	final DomNode htmlElement = getHtmlElementOrDie();
+        final DomNode htmlElement = getHtmlElementOrDie();
         DomNode firstChild = htmlElement.getFirstChild();
         if (firstChild == null) {
             firstChild = new DomText(htmlElement.getPage(), text);

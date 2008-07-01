@@ -256,12 +256,12 @@ public class Location extends SimpleScriptable {
         }
 
         if (encoded) {
-        	try {
-        		return URIUtil.encodeQuery(hash_);
-        	}
-        	catch (final URIException e) {
-        		getLog().error(e.getMessage(), e);
-        	}
+            try {
+                return URIUtil.encodeQuery(hash_);
+            }
+            catch (final URIException e) {
+                getLog().error(e.getMessage(), e);
+            }
         }
         return hash_;
     }
