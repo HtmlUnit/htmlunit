@@ -89,6 +89,7 @@ public abstract class ClickableElement extends StyledElement {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return getPage();
         }
+        focus();
         final Event event = new MouseEvent(this, MouseEvent.TYPE_CLICK, shiftKey, ctrlKey, altKey,
                 MouseEvent.BUTTON_LEFT);
         return click(event);
@@ -163,6 +164,7 @@ public abstract class ClickableElement extends StyledElement {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return getPage();
         }
+        focus();
 
         //call click event first
         final Page clickPage = click(shiftKey, ctrlKey, altKey);

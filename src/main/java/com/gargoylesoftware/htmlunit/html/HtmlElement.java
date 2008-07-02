@@ -709,9 +709,7 @@ public abstract class HtmlElement extends DomElement implements Element {
         if (owningForm_ != null) {
             return owningForm_;
         }
-        else {
-            return (HtmlForm) getEnclosingElement("form");
-        }
+        return (HtmlForm) getEnclosingElement("form");
     }
 
     /**
@@ -789,6 +787,7 @@ public abstract class HtmlElement extends DomElement implements Element {
             return getPage();
         }
 
+        focus();
         fireEvent(new Event(this, Event.TYPE_KEY_DOWN, c, shiftKey, ctrlKey, altKey));
         fireEvent(new Event(this, Event.TYPE_KEY_PRESS, c, shiftKey, ctrlKey, altKey));
         doType(c, shiftKey, ctrlKey, altKey);

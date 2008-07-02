@@ -998,4 +998,23 @@ public class ClickableElementTest extends WebTestCase {
         assertEquals("click-dblclick-", textArea.getText());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void clickOnFocus() throws Exception {
+        final String content
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form>\n"
+            + "    <input type='button' id='textfield1' onfocus='alert(1)'>\n"
+            + "</form>\n"
+            + "</body></html>";
+        final String[] expectedAlerts = {"1"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        ((ClickableElement) page.getHtmlElementById("textfield1")).click();
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
 }

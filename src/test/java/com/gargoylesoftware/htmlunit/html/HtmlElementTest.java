@@ -987,4 +987,23 @@ public class HtmlElementTest extends WebTestCase {
         loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typeOnFocus() throws Exception {
+        final String html
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form>\n"
+            + "    <input type='text' id='textfield1' onfocus='alert(1)'>\n"
+            + "</form>\n"
+            + "</body></html>";
+        final String[] expectedAlerts = {"1"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(html, collectedAlerts);
+
+        ((ClickableElement) page.getHtmlElementById("textfield1")).type('a');
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
