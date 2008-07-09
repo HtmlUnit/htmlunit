@@ -2449,8 +2449,8 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Regression test for: https://sf.net/tracker/index.php?func=detail&aid=1153708&group_id=47038&atid=448266
-     * Root cause: https://bugzilla.mozilla.org/show_bug.cgi?id=443491
+     * Regression test for https://sf.net/tracker/index.php?func=detail&aid=1153708&group_id=47038&atid=448266
+     * and https://bugzilla.mozilla.org/show_bug.cgi?id=443491.
      * @throws Exception if the test fails
      */
     @Test
