@@ -2449,15 +2449,12 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Regression test for https://sf.net/tracker/index.php?func=detail&aid=1153708&group_id=47038&atid=448266.
+     * Regression test for: https://sf.net/tracker/index.php?func=detail&aid=1153708&group_id=47038&atid=448266
+     * Root cause: https://bugzilla.mozilla.org/show_bug.cgi?id=443491
      * @throws Exception if the test fails
      */
     @Test
     public void testOverwriteFunctions() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-
         final String content = "<html><head><script language='JavaScript'>\n"
             + "function alert()\n"
             + "{\n"
@@ -2470,7 +2467,8 @@ public class WindowTest extends WebTestCase {
             + "}\n"
             + "navigator();\n"
             + "</script></head><body></body></html>";
-        loadPage(content);
+        final HtmlPage page = loadPage(content);
+        assertEquals("xxx", page.getBody().asText());
     }
 
     /**
