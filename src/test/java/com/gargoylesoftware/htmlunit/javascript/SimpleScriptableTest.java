@@ -373,13 +373,12 @@ public class SimpleScriptableTest extends WebTestCase {
     }
 
     /**
-     * Test for
-     * <a href="https://sourceforge.net/tracker/index.php?func=detail&aid=1933943&group_id=47038&atid=448266">bug</a>.
+     * Test for https://sourceforge.net/tracker/index.php?func=detail&aid=1933943&group_id=47038&atid=448266.
+     * See also http://groups.google.com/group/mozilla.dev.tech.js-engine.rhino/browse_thread/thread/1f1c24f58f662c58.
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void passFunctionAsParameter() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
