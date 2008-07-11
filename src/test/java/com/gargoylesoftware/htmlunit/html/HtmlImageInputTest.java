@@ -148,4 +148,41 @@ public class HtmlImageInputTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Test for bug: http://sourceforge.net/tracker/index.php?func=detail&aid=2013891&group_id=47038&atid=448266.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testClickFiresOnMouseDown() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String s = "<html><body><input type='image' src='x.png' id='i' onmousedown='alert(1)'></body></html>";
+        final String[] expectedAlerts = {"1"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(s, collectedAlerts);
+        final ClickableElement element = (ClickableElement) page.getHtmlElementById("i");
+        element.click();
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Test for bug: http://sourceforge.net/tracker/index.php?func=detail&aid=2013891&group_id=47038&atid=448266.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testClickFiresOnMouseUp() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String s = "<html><body><input type='image' src='x.png' id='i' onmouseup='alert(1)'></body></html>";
+        final String[] expectedAlerts = {"1"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(s, collectedAlerts);
+        final ClickableElement element = (ClickableElement) page.getHtmlElementById("i");
+        element.click();
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
 }
