@@ -171,22 +171,22 @@ public class FocusableElementTest extends WebTestCase {
             "<html>\n"
             + "<head>\n"
             + "<script>\n"
-            + "var bCalled = false;\n"
-            + "function testOnBlur()\n"
-            + "{\n"
-            + "  if (bCalled)\n"
-            + "    throw 'problem!'; // to get the error immediately rather than an infinite loop\n"
-            + "  bCalled = true;\n"
-            + "  document.getElementById('text2').focus();\n"
-            + "}\n"
+            + "  var bCalled = false;\n"
+            + "  function testOnBlur() {\n"
+            + "    if (bCalled)\n"
+            + "      throw 'problem!'; // to get the error immediately rather than an infinite loop\n"
+            + "    bCalled = true;\n"
+            + "    document.getElementById('text2').focus();\n"
+            + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onLoad='document.getElementById(\"text1\").focus()'>\n"
-            + "<input type='text' id='text1' onblur='testOnBlur()'>\n"
-            + "<input type='text' id='text2'>\n"
-            + "<a href='foo'>this page again</a>\n"
+            + "  <input type='text' id='text1' onblur='testOnBlur()'>\n"
+            + "  <input type='text' id='text2'>\n"
+            + "  <a href='foo'>this page again</a>\n"
             + "</body></html>";
 
+        System.out.println(html);
         final HtmlPage page = loadPage(getBrowserVersion(), html, null);
         page.getAnchors().get(0).click();
     }
