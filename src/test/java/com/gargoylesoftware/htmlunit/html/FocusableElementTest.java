@@ -186,7 +186,6 @@ public class FocusableElementTest extends WebTestCase {
             + "  <a href='foo'>this page again</a>\n"
             + "</body></html>";
 
-        System.out.println(html);
         final HtmlPage page = loadPage(getBrowserVersion(), html, null);
         page.getAnchors().get(0).click();
     }

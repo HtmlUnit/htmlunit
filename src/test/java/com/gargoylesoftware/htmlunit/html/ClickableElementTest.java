@@ -1003,6 +1003,9 @@ public class ClickableElementTest extends WebTestCase {
      */
     @Test
     public void clickOnFocus() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
         final String content
             = "<html><head><title>foo</title></head><body>\n"
             + "<form>\n"
