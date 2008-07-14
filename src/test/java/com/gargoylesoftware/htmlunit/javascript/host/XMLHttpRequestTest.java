@@ -421,7 +421,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     }
 
     /**
-     * Regression test for IE specific properties attribute.text & attribute.xml
+     * Regression test for IE specific properties attribute.text & attribute.xml.
      * @throws Exception if the test fails
      */
     @Test
@@ -462,7 +462,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         final String[] alerts = {"1", "someAttr", "someValue", "someAttr=\"someValue\""};
         assertEquals(alerts, collectedAlerts);
     }
-    
+
     /**
      * @throws Exception if the test fails
      */

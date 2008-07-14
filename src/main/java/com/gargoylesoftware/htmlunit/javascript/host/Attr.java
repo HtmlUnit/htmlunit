@@ -232,7 +232,7 @@ public class Attr extends SimpleScriptable {
             value_ = value;
         }
     }
-    
+
     /**
      * Returns the text of this attribute.
      * @return the value of this attribute
@@ -240,7 +240,7 @@ public class Attr extends SimpleScriptable {
     public String jsxGet_text() {
         return jsxGet_value();
     }
-    
+
     /**
      * Sets the text of this attribute.
      * @param value the new value of this attribute
@@ -248,13 +248,13 @@ public class Attr extends SimpleScriptable {
     public void jsxSet_text(final String value) {
         jsxSet_value(value);
     }
-    
+
     /**
      * Returns the XML of this attribute.
      * @return the XML of this attribute
      */
     public String jsxGet_xml() {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         sb.append(jsxGet_name());
         sb.append('=');
         sb.append('"');
