@@ -35,7 +35,19 @@
         <property name="parentNode" readable="true" writable="false"/>
         <property name="previousSibling" readable="true" writable="false"/>
         <property name="specified" readable="true" writable="false"/>
+        <property name="text" readable="true" writable="true">
+            <doclink
+                url="http://msdn.microsoft.com/en-us/library/ms767677(VS.85).aspx"
+                descr="MSDN documentation"/>
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
         <property name="value" readable="true" writable="true"/>
+        <property name="xml" readable="true" writable="false">
+            <doclink
+                url="http://msdn.microsoft.com/en-us/library/ms767677(VS.85).aspx"
+                descr="MSDN documentation"/>
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
     </class>
 
     <class name="BoxObject" classname="com.gargoylesoftware.htmlunit.javascript.host.BoxObject" JSObject="true">
@@ -1028,6 +1040,10 @@
         <property name="title" readable="true" writable="true"/>
         <property name="URL" readable="true" writable="false"/>
         <property name="vlinkColor" notImplemented="true" readable="true" writable="false"/>
+        <property name="activeElement" readable="true" writable="false">
+            <doclink url="http://msdn.microsoft.com/en-us/library/ms533065.aspx" descr="MSDN documentation"/>
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
 
         <function name="clear" notImplemented="true"/>
         <function name="close"/>
@@ -1236,6 +1252,12 @@
             <browser name="Microsoft Internet Explorer"/>
         </function>
         <function name="scrollIntoView"/>
+        <function name="setActive">
+            <doclink
+                url="http://msdn.microsoft.com/en-us/library/ms536738.aspx"
+                descr="MSDN documentation"/>
+            <browser name="Microsoft Internet Explorer" min-version="5.5"/>
+        </function>
         <function name="setAttribute"/>
         <function name="setAttributeNS">
             <browser name="Firefox"/>

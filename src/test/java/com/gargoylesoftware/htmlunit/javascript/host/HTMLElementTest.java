@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -54,6 +55,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
  * @author Bruce Faulkner
  * @author Ahmed Ashour
+ * @author Sudhan Moghe
  */
 @RunWith(BrowserRunner.class)
 public class HTMLElementTest extends WebTestCase {
@@ -2138,4 +2140,140 @@ public class HTMLElementTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts({"null", "text1", "null", "onfocus text2", "text2", "onfocus text1", "onfocus text2" })
+    public void setActiveAndFocus() throws Exception {
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final List<String> collectedAlerts = new ArrayList<String>();
+
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final String firstContent = "<html><head><title>First</title>\n"
+            + "<script>var win2;</script></head>\n"
+            + "<body><form name='form1'>\n"
+            + "<input id='text1' onfocus='alert(\"onfocus text1\");win2.focus();'>\n"
+            + "<button id='button1' onClick='win2=window.open(\"" + URL_SECOND + "\");'>Click me</a>\n"
+            + "</form></body></html>";
+        webConnection.setResponse(URL_FIRST, firstContent);
+
+        final String secondContent = "<html><head><title>Second</title></head>\n"
+            + "<body>\n"
+            + "<input id='text2'  onfocus='alert(\"onfocus text2\")'>\n"
+            + "<button id='button2' onClick='doTest();'>Click me</a>\n"
+            + "<script>\n"
+            + "     function doTest() {\n"
+            + "         alert(opener.document.activeElement);\n"
+            + "         opener.document.getElementById('text1').setActive();\n"
+            + "         alert(opener.document.activeElement.id);\n"
+            + "         alert(document.activeElement);\n"
+            + "         document.getElementById('text2').setActive();\n"
+            + "         alert(document.activeElement.id);\n"
+            + "         opener.focus();"
+            + "    }\n"
+            + "</script></body></html>";
+        webConnection.setResponse(URL_SECOND, secondContent);
+
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        assertEquals("First", firstPage.getTitleText());
+
+        final HtmlButton button1 = (HtmlButton) firstPage
+                .getHtmlElementById("button1");
+        final HtmlPage secondPage = (HtmlPage) button1.click();
+        assertEquals("Second", secondPage.getTitleText());
+        ((HtmlButton) secondPage.getHtmlElementById("button2")).click();
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"onfocus text1", "onfocus text2", "onfocus text1", "onfocus text2" })
+    public void onFocusOnWindowFocusGain() throws Exception {
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final List<String> collectedAlerts = new ArrayList<String>();
+
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final String firstContent = "<html><head><title>First</title></head>\n"
+                + "<body><form name='form1'>\n"
+                + "<input id='text1' onfocus='alert(\"onfocus text1\")'>\n"
+                + "<button type='button' id='clickme' onClick='window.open(\"" + URL_SECOND + "\");'>Click me</a>\n"
+                + "</form></body></html>";
+        webConnection.setResponse(URL_FIRST, firstContent);
+
+        final String secondContent = "<html><head><title>Second</title></head>\n"
+                + "<body onLoad='doTest()'>\n"
+                + "<input id='text2'  onfocus='alert(\"onfocus text2\")'>\n"
+                + "<script>\n"
+                + "     function doTest() {\n"
+                + "         opener.document.getElementById('text1').focus();\n"
+                + "         document.getElementById('text2').focus();\n"
+                + "    }\n"
+                + "</script></body></html>";
+
+        webConnection.setResponse(URL_SECOND, secondContent);
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        assertEquals("First", firstPage.getTitleText());
+
+        final HtmlButton buttonA = (HtmlButton) firstPage.getHtmlElementById("clickme");
+        final HtmlPage secondPage = (HtmlPage) buttonA.click();
+        assertEquals("Second", secondPage.getTitleText());
+        webClient.setCurrentWindow(firstPage.getEnclosingWindow());
+        webClient.setCurrentWindow(secondPage.getEnclosingWindow());
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"onblur text2", "onblur text1" })
+    public void onBlurOnWindowFocusChange() throws Exception {
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final List<String> collectedAlerts = new ArrayList<String>();
+
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final String firstContent = "<html><head><title>First</title></head>\n"
+                + "<body><form name='form1'>\n"
+                + "<input id='text1' onblur='alert(\"onblur text1\")'>\n"
+                + "<button type='button' id='clickme' onClick='window.open(\"" + URL_SECOND + "\");'>Click me</a>\n"
+                + "</form></body></html>";
+        webConnection.setResponse(URL_FIRST, firstContent);
+
+        final String secondContent = "<html><head><title>Second</title></head>\n"
+                + "<body onLoad='doTest()'>\n"
+                + "<input id='text2' onblur='alert(\"onblur text2\")'>\n"
+                + "<script>\n"
+                + "     function doTest() {\n"
+                + "         opener.document.getElementById('text1').focus();\n"
+                + "         document.getElementById('text2').focus();\n"
+                + "    }\n"
+                + "</script></body></html>";
+
+        webConnection.setResponse(URL_SECOND, secondContent);
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        assertEquals("First", firstPage.getTitleText());
+
+        final HtmlButton buttonA = (HtmlButton) firstPage.getHtmlElementById("clickme");
+        final HtmlPage secondPage = (HtmlPage) buttonA.click();
+        assertEquals("Second", secondPage.getTitleText());
+        webClient.setCurrentWindow(firstPage.getEnclosingWindow());
+        webClient.setCurrentWindow(secondPage.getEnclosingWindow());
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
 }

@@ -54,6 +54,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
@@ -75,6 +76,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Dmitri Zoubkov
+ * @author Sudhan Moghe
  */
 public abstract class HtmlElement extends DomElement implements Element {
 
@@ -1471,6 +1473,11 @@ public abstract class HtmlElement extends DomElement implements Element {
      */
     public void focus() {
         ((HtmlPage) getPage()).setFocusedElement(this);
+        final WebClient webClient = getPage().getWebClient();
+        if (webClient.getBrowserVersion().isIE()) {
+            final HTMLElement jsElt = (HTMLElement) getScriptObject();
+            jsElt.jsxFunction_setActive();
+        }
     }
 
     /**

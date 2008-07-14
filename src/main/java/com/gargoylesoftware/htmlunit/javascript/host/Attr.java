@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import org.apache.commons.lang.StringEscapeUtils;
+
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -29,6 +31,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlElement;
  * @author Daniel Gredler
  * @author Chris Erskine
  * @author Ahmed Ashour
+ * @author Sudhan Moghe
  */
 public class Attr extends SimpleScriptable {
 
@@ -228,5 +231,35 @@ public class Attr extends SimpleScriptable {
         else {
             value_ = value;
         }
+    }
+    
+    /**
+     * Returns the text of this attribute.
+     * @return the value of this attribute
+     */
+    public String jsxGet_text() {
+        return jsxGet_value();
+    }
+    
+    /**
+     * Sets the text of this attribute.
+     * @param value the new value of this attribute
+     */
+    public void jsxSet_text(final String value) {
+        jsxSet_value(value);
+    }
+    
+    /**
+     * Returns the XML of this attribute.
+     * @return the XML of this attribute
+     */
+    public String jsxGet_xml() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(jsxGet_name());
+        sb.append('=');
+        sb.append('"');
+        sb.append(StringEscapeUtils.escapeXml(jsxGet_value()));
+        sb.append('"');
+        return sb.toString();
     }
 }

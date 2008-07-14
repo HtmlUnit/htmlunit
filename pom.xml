@@ -235,6 +235,12 @@
             <email>asashour@users.sourceforge.net</email>
             <timezone>+3</timezone>
         </developer>
+        <developer>
+            <name>Sudhan Moghe</name>
+            <id>sudhan_moghe</id>
+            <email>sudhan_moghe@users.sourceforge.net</email>
+            <timezone>+5:30</timezone>
+        </developer>
     </developers>
     <contributors>
         <contributor>
@@ -372,9 +378,6 @@
         </contributor>
         <contributor>
             <name>David Bylsma</name>
-        </contributor>
-        <contributor>
-            <name>Sudhan Moghe</name>
         </contributor>
         <contributor>
             <name>Dmitri Zoubkov</name>

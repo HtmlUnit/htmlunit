@@ -58,6 +58,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Stuart Begg
+ * @author Sudhan Moghe
  */
 public class XMLHttpRequestTest extends WebTestCase {
 
@@ -419,6 +420,49 @@ public class XMLHttpRequestTest extends WebTestCase {
         assertEquals(alerts, collectedAlerts);
     }
 
+    /**
+     * Regression test for IE specific properties attribute.text & attribute.xml
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testResponseXML2() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "function test()\n"
+            + "{\n"
+            + "  var request;\n"
+            + "  if (window.XMLHttpRequest)\n"
+            + "    request = new XMLHttpRequest();\n"
+            + "  else if (window.ActiveXObject)\n"
+            + "    request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "  request.open('GET', 'foo.xml', false);\n"
+            + "  request.send('');\n"
+            + "  var childNodes = request.responseXML.childNodes;\n"
+            + "  alert(childNodes.length);\n"
+            + "  var rootNode = childNodes[0];\n"
+            + "  alert(rootNode.attributes[0].nodeName);\n"
+            + "  alert(rootNode.attributes[0].text);\n"
+            + "  alert(rootNode.attributes[0].xml);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_6_0);
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, html);
+        final URL urlPage2 = new URL(URL_FIRST + "/foo.xml");
+        webConnection.setResponse(urlPage2, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
+                "text/xml");
+        client.setWebConnection(webConnection);
+        client.getPage(URL_FIRST);
+
+        final String[] alerts = {"1", "someAttr", "someValue", "someAttr=\"someValue\""};
+        assertEquals(alerts, collectedAlerts);
+    }
+    
     /**
      * @throws Exception if the test fails
      */

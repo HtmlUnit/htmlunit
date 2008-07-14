@@ -40,8 +40,8 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
+import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
@@ -74,6 +74,7 @@ import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
  * @author Hans Donner
  * @author Bruce Faulkner
  * @author Ahmed Ashour
+ * @author Sudhan Moghe
  */
 public class HTMLElement extends Element implements ScriptableWithFallbackGetter {
 
@@ -1715,5 +1716,19 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public void jsxFunction_focus() {
         final HtmlElement element = (HtmlElement) getDomNodeOrDie();
         element.focus();
+    }
+
+    /**
+     * Sets the object as active without setting focus to the object.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536738.aspx">MSDN documentation</a>
+     */
+    public void jsxFunction_setActive() {
+        final Window window = getWindow();
+        final HTMLDocument document = window.jsxGet_document();
+        document.setActiveElement(this);
+        if (window.getWebWindow() == window.getWebWindow().getWebClient().getCurrentWindow()) {
+            final HtmlElement element = (HtmlElement) getDomNodeOrDie();
+            ((HtmlPage) element.getPage()).setFocusedElement(element);
+        }
     }
 }

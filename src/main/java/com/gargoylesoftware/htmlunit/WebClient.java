@@ -60,9 +60,12 @@ import com.gargoylesoftware.htmlunit.attachment.AttachmentHandler;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.host.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.protocol.data.DataUrlDecoder;
 import com.gargoylesoftware.htmlunit.ssl.InsecureSSLProtocolSocketFactory;
@@ -828,7 +831,40 @@ public class WebClient implements Serializable {
      */
     public void setCurrentWindow(final WebWindow window) {
         WebAssert.notNull("window", window);
+        if (currentWindow_ == window) {
+            return;
+        }
+        //onBlur event is triggered for focused element of old current window
+        if (currentWindow_ != null) {
+            final Page enclosedPage = currentWindow_.getEnclosedPage();
+            if (enclosedPage instanceof HtmlPage) {
+                final HtmlElement focusedElement = ((HtmlPage) enclosedPage).getFocusedElement();
+                if (focusedElement != null) {
+                    focusedElement.fireEvent(Event.TYPE_BLUR);
+                }
+            }
+        }
         currentWindow_ = window;
+        //1. In IE activeElement becomes focused element for new current window
+        //2. onFocus event is triggered for focusedElement of new current window
+        final Page enclosedPage = currentWindow_.getEnclosedPage();
+        if (enclosedPage instanceof HtmlPage) {
+            final Window jsWindow = (Window) currentWindow_.getScriptObject();
+            if (jsWindow != null) {
+                if (getBrowserVersion().isIE()) {
+                    final HTMLElement activeElement = (HTMLElement) jsWindow.jsxGet_document().jsxGet_activeElement();
+                    if (activeElement != null) {
+                        ((HtmlPage) enclosedPage).setFocusedElement(activeElement.getHtmlElementOrDie(), true);
+                    }
+                }
+                else {
+                    final HtmlElement focusedElement = ((HtmlPage) enclosedPage).getFocusedElement();
+                    if (focusedElement != null) {
+                        ((HtmlPage) enclosedPage).setFocusedElement(focusedElement, true);
+                    }
+                }
+            }
+        }
     }
 
     /**

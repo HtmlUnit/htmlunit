@@ -71,6 +71,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlScript;
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
  * @author Ahmed Ashour
  * @author Rob Di Marco
+ * @author Sudhan Moghe
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_document.asp">
  * MSDN documentation</a>
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919">
@@ -116,6 +117,7 @@ public class HTMLDocument extends Document {
     private HTMLCollection scripts_; // has to be a member to have equality (==) working
     private HTMLCollection anchors_; // has to be a member to have equality (==) working
     private StyleSheetList styleSheets_; // has to be a member to have equality (==) working
+    private HTMLElement activeElement_;
 
     /** The buffer that will be used for calls to document.write(). */
     private final StringBuilder writeBuffer_ = new StringBuilder();
@@ -1123,5 +1125,23 @@ public class HTMLDocument extends Document {
 
         getLog().warn("Nothing done for execCommand(" + cmd + ", ...) (feature not implemented)");
         return true;
+    }
+
+    /**
+     * Returns the value of the "activeElement" property.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533065.aspx">MSDN documentation</a>
+     * @return the value of the "activeElement" property
+     */
+    public Object jsxGet_activeElement() {
+        return activeElement_;
+    }
+
+    /**
+     * Sets the element as the active element of the document.
+     * @see HTMLElement.jsxFunction_setActive()
+     * @param element the new active element
+     */
+    public void setActiveElement(final HTMLElement element) {
+        activeElement_ = element;
     }
 }

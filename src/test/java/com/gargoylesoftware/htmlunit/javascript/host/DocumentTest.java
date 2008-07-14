@@ -44,6 +44,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
+import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 
 /**
  * Tests for {@link HTMLDocument}.
@@ -58,6 +59,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
  * @author Ahmed Ashour
  * @author Rob Di Marco
+ * @author Sudhan Moghe
  */
 public class DocumentTest extends WebTestCase {
 
@@ -3539,5 +3541,30 @@ public class DocumentTest extends WebTestCase {
         loadPage(html, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void activeElement() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  alert(document.activeElement);"
+            + "  function test() { \n"
+            + "     alert(document.activeElement.id);\n"
+            + "     document.getElementById('text2').setActive();\n"
+            + "     alert(document.activeElement.id);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body>\n"
+            + "<input id='text1' onclick='test()'>\n"
+            + "<input id='text2' onfocus='alert(\"onfocus text2\")'>\n"
+            + "</body></html>";
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, html, collectedAlerts);
+        final HtmlTextInput text1 = (HtmlTextInput) page.getHtmlElementById("text1");
+        text1.focus();
+        text1.click();
+        assertEquals(new String[]{"null", "text1", "onfocus text2", "text2"}, collectedAlerts);
     }
 }

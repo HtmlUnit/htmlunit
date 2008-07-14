@@ -108,6 +108,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Dmitri Zoubkov
+ * @author Sudhan Moghe
  */
 public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
@@ -1779,7 +1780,24 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @see WebAssert#assertAllTabIndexAttributesSet(HtmlPage)
      */
     public boolean setFocusedElement(final HtmlElement newElement) {
-        if (elementWithFocus_ == newElement) {
+        return setFocusedElement(newElement, false);
+    }
+
+    /**
+     * Moves the focus to the specified element. This will trigger any relevant JavaScript
+     * event handlers.
+     *
+     * @param newElement the element that will receive the focus, use <code>null</code> to remove focus from any element
+     * @param windowActivated - whether the enclosing window got focus resulting in specified element getting focus
+     * @return true if the specified element now has the focus
+     * @see #getFocusedElement()
+     * @see #tabToNextElement()
+     * @see #tabToPreviousElement()
+     * @see #pressAccessKey(char)
+     * @see WebAssert#assertAllTabIndexAttributesSet(HtmlPage)
+     */
+    public boolean setFocusedElement(final HtmlElement newElement, final boolean windowActivated) {
+        if (elementWithFocus_ == newElement && (!windowActivated)) {
             // nothing to do
             return true;
         }
@@ -1787,16 +1805,18 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             throw new IllegalArgumentException("Can't move focus to an element from an other page");
         }
 
-        if (elementWithFocus_ != null) {
-            elementWithFocus_.fireEvent(Event.TYPE_FOCUS_OUT);
-        }
+        if (!windowActivated) {
+            if (elementWithFocus_ != null) {
+                elementWithFocus_.fireEvent(Event.TYPE_FOCUS_OUT);
+            }
 
-        if (newElement != null) {
-            newElement.fireEvent(Event.TYPE_FOCUS_IN);
-        }
+            if (newElement != null) {
+                newElement.fireEvent(Event.TYPE_FOCUS_IN);
+            }
 
-        if (elementWithFocus_ != null) {
-            elementWithFocus_.fireEvent(Event.TYPE_BLUR);
+            if (elementWithFocus_ != null) {
+                elementWithFocus_.fireEvent(Event.TYPE_BLUR);
+            }
         }
 
         elementWithFocus_ = newElement;
