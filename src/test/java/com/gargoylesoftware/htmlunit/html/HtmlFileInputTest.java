@@ -89,6 +89,39 @@ public class HtmlFileInputTest extends WebTestCase {
         testFileInput("file:///" + path);
     }
 
+    /**
+     * Tests setData method.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testSetData() throws Exception {
+        final String firstContent = "<html><head></head><body>\n"
+            + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
+            + "  <input type='file' name='image' />\n"
+            + "</form>\n"
+            + "</body>\n"
+            + "</html>";
+        final String secondContent = "<html><head><title>second</title></head></html>";
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+
+        client.setWebConnection(webConnection);
+
+        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlForm f = firstPage.getForms().get(0);
+        final HtmlFileInput fileInput = (HtmlFileInput) f.getInputByName("image");
+        fileInput.setValueAttribute("dummy.txt");
+        fileInput.setContentType("text/csv");
+        fileInput.setData("My file data".getBytes());
+        f.submit((SubmittableElement) null);
+        final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
+        assertNotNull(pair.getData());
+        assertTrue(pair.getData().length != 0);
+    }
+
     private void testFileInput(final String fileURL) throws Exception {
         final String firstContent = "<html><head></head><body>\n"
             + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"

@@ -33,6 +33,7 @@ public class KeyDataPair extends NameValuePair {
     private final File fileObject_;
     private final String contentType_;
     private final String charset_;
+    private byte[] data_;
 
     /**
      * Create an instance.
@@ -79,5 +80,21 @@ public class KeyDataPair extends NameValuePair {
      */
     public String getContentType() {
         return contentType_;
+    }
+
+    /**
+     * Gets in-memory data assigned to file value.
+     * @return <code>null</code> if the file content should be used.
+     */
+    public byte[] getData() {
+        return data_;
+    }
+
+    /**
+     * Sets file value data. If nothing is set, the file content will be used.
+     * @param data byte array with file data.
+     */
+    public void setData(final byte[] data) {
+        data_ = data;
     }
 }

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -44,6 +45,7 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.PutMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.httpclient.methods.TraceMethod;
+import org.apache.commons.httpclient.methods.multipart.ByteArrayPartSource;
 import org.apache.commons.httpclient.methods.multipart.FilePart;
 import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.Part;
@@ -274,44 +276,19 @@ public class HttpWebConnection extends WebConnectionImpl {
     }
 
     FilePart buildFilePart(final KeyDataPair pairWithFile, final String charset) throws FileNotFoundException {
-        final FilePart part = new FilePart(pairWithFile.getName(), pairWithFile.getValue(), pairWithFile.getFile(),
-                pairWithFile.getContentType(), null) {
+        final FilePartPageCharSet part;
+        if (pairWithFile.getData() != null) {
+            part = new FilePartPageCharSet(pairWithFile.getName(),
+                    new ByteArrayPartSource(pairWithFile.getValue(), pairWithFile.getData()),
+                    pairWithFile.getContentType(), charset);
+        }
+        else {
+            part = new FilePartPageCharSet(pairWithFile.getName(), pairWithFile.getValue(), pairWithFile.getFile(),
+                pairWithFile.getContentType(), charset);
+        }
+        part.pairWithFile_ = pairWithFile;
+        part.webClient_ = getWebClient();
 
-            /**
-             * {@inheritDoc}
-             *
-             * This implementation overrides the super one by encoding filename
-             * according to the page charset.
-             *
-             * @see <a href="http://issues.apache.org/jira/browse/HTTPCLIENT-293">HTTPCLIENT-293</a>
-             */
-            @Override
-            protected void sendDispositionHeader(final OutputStream out) throws IOException {
-                out.write(CONTENT_DISPOSITION_BYTES);
-                out.write(QUOTE_BYTES);
-                out.write(EncodingUtil.getAsciiBytes(getName()));
-                out.write(QUOTE_BYTES);
-                final String filename = getSource().getFileName();
-                if (filename != null) {
-                    out.write(EncodingUtil.getAsciiBytes(FILE_NAME));
-                    out.write(QUOTE_BYTES);
-                    out.write(EncodingUtil.getBytes(getFileName(), charset));
-                    out.write(QUOTE_BYTES);
-                }
-            }
-
-            private String getFileName() {
-                if (pairWithFile.getFile() == null) {
-                    return pairWithFile.getValue();
-                }
-                else if (getWebClient().getBrowserVersion().isIE()) {
-                    return pairWithFile.getFile().getAbsolutePath();
-                }
-                else {
-                    return pairWithFile.getValue();
-                }
-            }
-        };
         // Firefox and IE seem not to specify a charset for a file part
         part.setCharSet(null);
 
@@ -528,4 +505,54 @@ public class HttpWebConnection extends WebConnectionImpl {
         }
     }
 
+    /**
+     * This implementation overrides the super one by encoding filename
+     * according to the page charset.
+     * @see http://issues.apache.org/jira/browse/HTTPCLIENT-293
+     * {@inheritDoc}
+     */
+    private static class FilePartPageCharSet extends FilePart {
+        private KeyDataPair pairWithFile_;
+        private WebClient webClient_;
+        private String pageCharset_;
+
+        public FilePartPageCharSet(final String name, final ByteArrayPartSource byteArrayPartSource,
+                final String contentType, final String charset) {
+            super(name, byteArrayPartSource, contentType, charset);
+            pageCharset_ = charset;
+        }
+
+        public FilePartPageCharSet(final String name, final String value, final File file, final String contentType,
+                final String charset) throws FileNotFoundException {
+            super(name, value, file, contentType, charset);
+            pageCharset_ = charset;
+        }
+
+        @Override
+        protected void sendDispositionHeader(final OutputStream out) throws IOException {
+            out.write(CONTENT_DISPOSITION_BYTES);
+            out.write(QUOTE_BYTES);
+            out.write(EncodingUtil.getAsciiBytes(getName()));
+            out.write(QUOTE_BYTES);
+            final String filename = getSource().getFileName();
+            if (filename != null) {
+                out.write(EncodingUtil.getAsciiBytes(FILE_NAME));
+                out.write(QUOTE_BYTES);
+                out.write(EncodingUtil.getBytes(getFileName(), pageCharset_));
+                out.write(QUOTE_BYTES);
+            }
+        }
+
+        private String getFileName() {
+            if (pairWithFile_.getFile() == null) {
+                return pairWithFile_.getValue();
+            }
+            else if (webClient_.getBrowserVersion().isIE()) {
+                return pairWithFile_.getFile().getAbsolutePath();
+            }
+            else {
+                return pairWithFile_.getValue();
+            }
+        }
+    }
 }

@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes (handling of ill formed HTML code, document.write, ...), speed improvements, and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="add" dev="mguillem" id="2001001" due-to="Andrew_WOT">
+                HtmlFileInput: allow to load data from memory.
+            </action>
             <action type="add" dev="sudhan_moghe">
                 JavaScript: add support for attribute.text and attribute.xml (IE only).
             </action>

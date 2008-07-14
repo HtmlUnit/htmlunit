@@ -39,6 +39,7 @@ public class HtmlFileInput extends HtmlInput {
 
     private static final long serialVersionUID = 7925479292349207154L;
     private String contentType_;
+    private byte[] data_;
 
     /**
      * Creates an instance.
@@ -55,6 +56,24 @@ public class HtmlFileInput extends HtmlInput {
         if (page.getWebClient().getBrowserVersion().isIE()) {
             setDefaultValue("");
         }
+    }
+
+    /**
+     * Returns in-memory data assigned to element.
+     * @return <code>null</code> if {@link #setData(byte[])} hasn't be used.
+     */
+    public final byte[] getData() {
+        return data_;
+    }
+
+    /**
+     * Assigns data to element.
+     * During submission instead of loading data from file, the data is read from
+     * in-memory byte array.
+     * @param data byte array containing file data
+     */
+    public final void setData(final byte[] data) {
+        data_ = data;
     }
 
     /**
@@ -97,7 +116,9 @@ public class HtmlFileInput extends HtmlInput {
             contentType = contentType_;
         }
         final String charset = getPage().getPageEncoding();
-        return new NameValuePair[] {new KeyDataPair(getNameAttribute(), file, contentType, charset)};
+        final KeyDataPair keyDataPair = new KeyDataPair(getNameAttribute(), file, contentType, charset);
+        keyDataPair.setData(data_);
+        return new NameValuePair[] {keyDataPair};
     }
 
     /**
