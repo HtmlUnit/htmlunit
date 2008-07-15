@@ -627,7 +627,7 @@
         </property>
         <function name="getAttribute">
             <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms536429(VS.85).aspx"
+                url="http://msdn.microsoft.com/en-us/library/ms536429.aspx"
                 descr="MSDN Documentation"/>
             <browser name="Microsoft Internet Explorer"/>
         </function>
@@ -636,7 +636,7 @@
         </function>
         <function name="removeAttribute">
             <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms536696(VS.85).aspx"
+                url="http://msdn.microsoft.com/en-us/library/ms536696.aspx"
                 descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer"/>
         </function>
@@ -648,7 +648,7 @@
         </function>
         <function name="setAttribute">
             <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms536739(VS.85).aspx"
+                url="http://msdn.microsoft.com/en-us/library/ms536739.aspx"
                 descr="MSDN Documentation"/>
             <browser name="Microsoft Internet Explorer"/>
         </function>
@@ -1073,7 +1073,7 @@
         </function>
         <function name="queryCommandSupported">
             <doclink
-                url="http://msdn2.microsoft.com/en-us/library/ms536681(VS.85).aspx"
+                url="http://msdn2.microsoft.com/en-us/library/ms536681.aspx"
                 descr="MSDN documentation"/>
         </function>
         <function name="write"/>
@@ -2175,7 +2175,7 @@
             <browser name="Microsoft Internet Explorer"/>
         </property>
         <property name="xml" readable="true" writable="false">
-            <doclink url="http://msdn.microsoft.com/en-us/library/ms755989(VS.85).aspx" descr="MSDN documentation"/>
+            <doclink url="http://msdn.microsoft.com/en-us/library/ms755989.aspx" descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer"/>
         </property>
 

@@ -4153,7 +4153,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * Returns the value of the specified attribute, or an empty string if it does not exist.
      * This method exists only in IE.
      *
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536429(VS.85).aspx">MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536429.aspx">MSDN Documentation</a>
      * @param cx the JavaScript context
      * @param thisObj the scriptable
      * @param args the arguments (the attribute name and an optional flag parameter)
@@ -4196,7 +4196,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
     /**
      * Sets the value of the specified attribute. This method exists only in IE.
      *
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536739(VS.85).aspx">MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536739.aspx">MSDN Documentation</a>
      * @param cx the JavaScript context
      * @param thisObj the scriptable
      * @param args the arguments (the attribute name, the attribute value and an optional flag parameter)
@@ -4241,7 +4241,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
     /**
      * Removes the specified attribute. This method exists only in IE.
      *
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536696(VS.85).aspx">MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536696.aspx">MSDN Documentation</a>
      * @param cx the JavaScript context
      * @param thisObj the scriptable
      * @param args the arguments (the attribute name and an optional flag parameter)

@@ -99,6 +99,7 @@ public class CodeStyleTest {
                     svnProperties(file, relativePath);
                     runWith(lines, relativePath);
                     twoEmptyLines(lines, relativePath);
+                    vs85aspx(lines, relativePath);
                 }
             }
         }
@@ -233,6 +234,9 @@ public class CodeStyleTest {
         processXML(new File("src/main/resources"), true);
         processXML(new File("src/assembly"), true);
         processXML(new File("src/changes"), true);
+        final String config = "src/main/resources/com/gargoylesoftware/htmlunit/javascript/configuration"
+            + "/JavaScriptConfiguration.xml";
+        vs85aspx(getLines(new File(config)), config);
     }
 
     private void processXML(final File dir, final boolean recursive) throws Exception {
@@ -358,4 +362,18 @@ public class CodeStyleTest {
         }
     }
 
+    /**
+     * Verifies that no "(VS.85).aspx" token exists (which is sometimes used in MSDN documentation).
+     */
+    private void vs85aspx(final List<String> lines, final String relativePath) {
+        if (!relativePath.contains("CodeStyleTest")) {
+            int i = 0;
+            for (final String line : lines) {
+                if (line.contains("(VS.85).aspx")) {
+                    addFailure("\"(VS.85)\" is found in " + relativePath + ", line: " + (i + 1));
+                }
+                i++;
+            }
+        }
+    }
 }
