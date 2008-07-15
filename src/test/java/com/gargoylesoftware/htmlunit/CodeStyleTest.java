@@ -370,7 +370,8 @@ public class CodeStyleTest {
             int i = 0;
             for (final String line : lines) {
                 if (line.contains("(VS.85).aspx")) {
-                    addFailure("\"(VS.85)\" is found in " + relativePath + ", line: " + (i + 1));
+                    addFailure("Please remove \"(VS.85)\" from the URL found in "
+                        + relativePath + ", line: " + (i + 1));
                 }
                 i++;
             }
