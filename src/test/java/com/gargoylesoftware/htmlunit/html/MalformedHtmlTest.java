@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  * Set of tests for ill formed HTML code.
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Sudhan Moghe
  */
 @RunWith(BrowserRunner.class)
 public class MalformedHtmlTest extends WebTestCase {
@@ -53,13 +54,14 @@ public class MalformedHtmlTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2", "3", "text3", "null" })
+    @Alerts({"2", "3", "text3", "text3", "null" })
     public void testLostFormChildren() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "function test(){\n"
             + "    alert(document.forms[0].childNodes.length);\n"
             + "    alert(document.forms[0].elements.length);\n"
             + "    alert(document.forms[0].elements[2].name);\n"
+            + "    alert(document.forms[0].text3.name);\n"
             + "    alert(document.getElementById('text4').form);\n"
             + "}\n"
             + "</script>\n"

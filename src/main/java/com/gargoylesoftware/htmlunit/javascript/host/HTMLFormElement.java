@@ -40,6 +40,7 @@ import com.gargoylesoftware.htmlunit.html.SubmittableElement;
  * @author Chris Erskine
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Sudhan Moghe
  *
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/form.asp">MSDN documentation</a>
  */
@@ -259,7 +260,7 @@ public class HTMLFormElement extends HTMLElement {
                         || HtmlSelect.TAG_NAME.equals(tagName)
                         || HtmlTextArea.TAG_NAME.equals(tagName)
                         || HtmlImage.TAG_NAME.equals(tagName)) {
-                    if (form.isAncestorOf(element)) {
+                    if (form.isAncestorOf(element) || form.getLostChildren().contains(element)) {
                         return getScriptableFor(element);
                     }
                 }
