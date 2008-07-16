@@ -42,7 +42,6 @@ import org.xml.sax.SAXException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 
 /**
@@ -54,6 +53,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  * @author Marc Guillemot
  * @author David K. Taylor
  * @author Ahmed Ashour
+ * @author Sudhan Moghe
  */
 public class XmlPage extends SgmlPage implements Document {
     private static final long serialVersionUID = -1430136241030261308L;
@@ -182,7 +182,7 @@ public class XmlPage extends SgmlPage implements Document {
      * @return the new HTML element
      */
     public XmlElement createXmlElementNS(final String namespaceURI, final String qualifiedName) {
-        return new XmlElement(namespaceURI, qualifiedName, this, new HashMap<String, DomAttr>());
+        return new XmlElement(namespaceURI, qualifiedName, this, new HashMap<String, XmlDomAttr>());
     }
 
     /**

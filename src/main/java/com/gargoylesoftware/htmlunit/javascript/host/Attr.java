@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import org.apache.commons.lang.StringEscapeUtils;
-
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -26,7 +24,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlElement;
  * A JavaScript object for an Attribute.
  *
  * @see <a href="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/core.html#ID-63764602">W3C DOM Level 2</a>
- * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/attribute.asp">MSDN documentation</a>
+ * @see <a href="http://msdn.microsoft.com/en-us/library/ms535187.aspx">MSDN documentation</a>
  * @version $Revision$
  * @author Daniel Gredler
  * @author Chris Erskine
@@ -231,35 +229,5 @@ public class Attr extends SimpleScriptable {
         else {
             value_ = value;
         }
-    }
-
-    /**
-     * Returns the text of this attribute.
-     * @return the value of this attribute
-     */
-    public String jsxGet_text() {
-        return jsxGet_value();
-    }
-
-    /**
-     * Sets the text of this attribute.
-     * @param value the new value of this attribute
-     */
-    public void jsxSet_text(final String value) {
-        jsxSet_value(value);
-    }
-
-    /**
-     * Returns the XML of this attribute.
-     * @return the XML of this attribute
-     */
-    public String jsxGet_xml() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append(jsxGet_name());
-        sb.append('=');
-        sb.append('"');
-        sb.append(StringEscapeUtils.escapeXml(jsxGet_value()));
-        sb.append('"');
-        return sb.toString();
     }
 }

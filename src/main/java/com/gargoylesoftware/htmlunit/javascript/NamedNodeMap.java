@@ -23,6 +23,7 @@ import org.w3c.dom.Node;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.xml.XmlDomAttr;
 import com.gargoylesoftware.htmlunit.xml.XmlElement;
 
 /**
@@ -32,6 +33,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlElement;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Sudhan Moghe
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core.html#ID-1780488922">DOM Level 2 Core Spec</a>
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms763824.aspx">IXMLDOMNamedNodeMap</a>
  */
@@ -81,7 +83,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      */
     public NamedNodeMap(final XmlElement element) {
         caseInsensitive_ = false;
-        for (final DomAttr attr : element.getAttributesMap().values()) {
+        for (final XmlDomAttr attr : element.getAttributesMap().values()) {
             nodes_.put(attr.getName(), attr);
         }
         setParentScope(element.getScriptObject());

@@ -16,9 +16,9 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.Map;
 
-import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.xml.XmlDomAttr;
 import com.gargoylesoftware.htmlunit.xml.XmlElement;
 
 /**
@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlElement;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Sudhan Moghe
  */
 public class XMLSerializer extends SimpleScriptable {
 
@@ -56,9 +57,9 @@ public class XMLSerializer extends SimpleScriptable {
     private void toXml(final int indent, final DomNode node, final StringBuilder buffer, final boolean isIE) {
         buffer.append('<').append(node.getNodeName());
         if (node instanceof XmlElement) {
-            final Map<String, DomAttr> attributes = ((XmlElement) node).getAttributesMap();
+            final Map<String, XmlDomAttr> attributes = ((XmlElement) node).getAttributesMap();
             for (final String name : attributes.keySet()) {
-                final DomAttr attrib = attributes.get(name);
+                final XmlDomAttr attrib = attributes.get(name);
                 buffer.append(' ').append(attrib.getQualifiedName()).append('=')
                     .append('"').append(attrib.getValue()).append('"');
             }

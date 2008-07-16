@@ -29,7 +29,6 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.TypeInfo;
 
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 
@@ -39,6 +38,7 @@ import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Sudhan Moghe
  */
 public class XmlElement extends DomElement implements Element {
 
@@ -51,7 +51,7 @@ public class XmlElement extends DomElement implements Element {
     private Map<String, String> namespaces_ = new HashMap<String, String>();
 
     /** The map holding the attributes, keyed by name. */
-    private Map<String, DomAttr> attributes_;
+    private Map<String, XmlDomAttr> attributes_;
 
     /**
      * Create an instance of a DOM node that can have a namespace.
@@ -62,10 +62,10 @@ public class XmlElement extends DomElement implements Element {
      * @param attributes the attributes of this element
      */
     protected XmlElement(final String namespaceURI, final String qualifiedName, final Page page,
-            final Map<String, DomAttr> attributes) {
+            final Map<String, XmlDomAttr> attributes) {
         super(namespaceURI, qualifiedName, page);
         attributes_ = attributes;
-        for (final DomAttr attr : attributes.values()) {
+        for (final XmlDomAttr attr : attributes.values()) {
             attr.setParentNode(this);
         }
     }
@@ -105,7 +105,7 @@ public class XmlElement extends DomElement implements Element {
      * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED}
      */
     public final String getAttributeValue(final String attributeName) {
-        final DomAttr attr = attributes_.get(attributeName);
+        final XmlDomAttr attr = attributes_.get(attributeName);
 
         if (attr != null) {
             return attr.getNodeValue();
@@ -117,7 +117,7 @@ public class XmlElement extends DomElement implements Element {
      * Returns the map holding the attributes, keyed by name.
      * @return the attributes map
      */
-    public Map<String, DomAttr> getAttributesMap() {
+    public Map<String, XmlDomAttr> getAttributesMap() {
         return attributes_;
     }
     /**
@@ -166,7 +166,7 @@ public class XmlElement extends DomElement implements Element {
         if (attributes_ == Collections.EMPTY_MAP) {
             attributes_ = createAttributeMap(1);
         }
-        final DomAttr newAttr = addAttributeToMap((XmlPage) getPage(), attributes_, namespaceURI,
+        final XmlDomAttr newAttr = addAttributeToMap((XmlPage) getPage(), attributes_, namespaceURI,
             qualifiedName, value);
         if (namespaceURI != null) {
             namespaces_.put(namespaceURI, newAttr.getPrefix());
@@ -221,7 +221,7 @@ public class XmlElement extends DomElement implements Element {
      * @return the attribute map
      */
     @SuppressWarnings("unchecked")
-    static Map<String, DomAttr> createAttributeMap(final int attributeCount) {
+    static Map<String, XmlDomAttr> createAttributeMap(final int attributeCount) {
         return ListOrderedMap.decorate(new HashMap(attributeCount)); // preserve insertion order
     }
 
@@ -232,9 +232,9 @@ public class XmlElement extends DomElement implements Element {
      * @param qualifiedName the qualified name of the attribute
      * @param value the value of the attribute
      */
-    static DomAttr addAttributeToMap(final XmlPage page, final Map<String, DomAttr> attributeMap,
+    static XmlDomAttr addAttributeToMap(final XmlPage page, final Map<String, XmlDomAttr> attributeMap,
             final String namespaceURI, final String qualifiedName, final String value) {
-        final DomAttr newAttr = new DomAttr(page, namespaceURI, qualifiedName, value);
+        final XmlDomAttr newAttr = new XmlDomAttr(page, namespaceURI, qualifiedName, value);
         attributeMap.put(qualifiedName, newAttr);
         return newAttr;
     }
@@ -286,7 +286,7 @@ public class XmlElement extends DomElement implements Element {
      * {@inheritDoc}
      */
     public String getAttribute(final String name) {
-        final DomAttr attr = attributes_.get(name);
+        final XmlDomAttr attr = attributes_.get(name);
         if (attr != null) {
             return attr.getValue();
         }
