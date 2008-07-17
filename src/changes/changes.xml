@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes (handling of ill formed HTML code, document.write, ...), speed improvements, and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="fix" dev="mguillem" id="2019665">
+                Accept \r and \n for HtmlTextArea.type().
+            </action>
             <action type="fix" dev="mguillem">
                 Avoid to perform multiple request for the same external stylesheet. Add facility to access referred content
                 from HtmlLink.

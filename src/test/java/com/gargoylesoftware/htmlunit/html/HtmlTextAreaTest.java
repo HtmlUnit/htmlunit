@@ -174,6 +174,10 @@ public class HtmlTextAreaTest extends WebTestCase {
         assertEquals("", t.getText());
         t.type('\b');
         assertEquals("", t.getText());
+        t.type("ab\ncd");
+        assertEquals("ab\ncd", t.getText());
+        t.type("\r\nef");
+        assertEquals("ab\ncd\r\nef", t.getText());
     }
 
 }

@@ -408,7 +408,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
                 setText(text.substring(0, text.length() - 1));
             }
         }
-        else if ((c == ' ' || !Character.isWhitespace(c))) {
+        else if ((c == ' ' || c == '\n' || c == '\r' || !Character.isWhitespace(c))) {
             setText(text + c);
         }
     }
