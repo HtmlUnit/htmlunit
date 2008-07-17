@@ -7,6 +7,10 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes (handling of ill formed HTML code, document.write, ...), speed improvements, and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="fix" dev="sdanig" id="2014629">
+                Fix memory leak of window objects when the windows contain long-running background JavaScript tasks
+                scheduled via setInterval() or setTimeout().
+            </action>
             <action type="fix" dev="sudhan_moghe" id="2019116">
                 JavaScript: fix JavaScript error with form.element, when element is located before closing form tag
                 but the tag balancing forces form to be closed earlier.

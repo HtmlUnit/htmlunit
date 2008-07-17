@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -31,13 +32,16 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
  *
- * This is a class that provides thread handling services to internal clients
- * as well as exposes some of the status of these threads to the public API.
+ * <p>This is a class that provides thread handling services to internal clients, as well as exposing
+ * some of the status of these threads to a public API.</p>
+ *
+ * <p>This thread manager class is guaranteed not to keep old windows in memory (no window memory leaks).</p>
  *
  * @version $Revision$
  * @author Brad Clarke
  * @author Marc Guillemot
  * @author Daniel Gredler
+ * @see MemoryLeakTest
  */
 public class ThreadManager {
 
@@ -47,10 +51,11 @@ public class ThreadManager {
     /** Map of threads, keyed on thread ID. Use a tree map for deterministic iteration. */
     private Map<Integer, Thread> threadMap_ = Collections.synchronizedMap(new TreeMap<Integer, Thread>());
 
-    private final WebWindow window_;
+    /** The window to which this thread manager belongs (weakly referenced, so as not to leak memory). */
+    private final WeakReference<WebWindow> window_;
 
     ThreadManager(final WebWindow window) {
-        window_ = window;
+        window_ = new WeakReference<WebWindow>(window);
     }
 
     /**
@@ -100,11 +105,25 @@ public class ThreadManager {
      * when calling {@link #stopThread(int)}
      */
     public int startThread(final Runnable job, final String label) {
+
+        if (job == null) {
+            // The window was garbage collected earlier, so no job was created! Can't start anything, obviously.
+            return 0;
+        }
+
+        final WebWindow ww = window_.get();
+        if (ww == null) {
+            // The window has been garbage collected! Can't start anything, obviously.
+            return 0;
+        }
+
+        final BrowserVersion version = ww.getWebClient().getBrowserVersion();
         final int myThreadID = getNextThreadId();
+
         final Thread newThread = new Thread(job, "HtmlUnit Managed Thread #" + myThreadID + ": " + label) {
             @Override
             public void run() {
-                HtmlUnitContextFactory.putThreadLocal(window_.getWebClient().getBrowserVersion());
+                HtmlUnitContextFactory.putThreadLocal(version);
                 try {
                     super.run();
                 }
@@ -243,17 +262,25 @@ public class ThreadManager {
     }
 
     /**
-     * Makes the job object for setTimeout and setInterval
+     * Makes the job object for <tt>setTimeout</tt> and <tt>setInterval</tt>.
      *
      * @param codeToExec either a Function or a String of the JavaScript code
      * @param timeout time to wait
      * @param thisWindow the window to associate the thread with
      * @param loopForever if the thread should keep looping (setTimeout vs setInterval)
-     * @return the job
+     * @return the job, or <tt>null</tt> if the window has been garbage collected and a job shouldn't be started
      */
     private JavaScriptBackgroundJob createJavaScriptBackgroundJob(final Object codeToExec,
             final int timeout, final boolean loopForever, final String label) {
-        final Window thisWindow = (Window) window_.getScriptObject();
+
+        final WebWindow ww = window_.get();
+        if (ww == null) {
+            // The window has been garbage collected! Can't start anything, obviously.
+            return null;
+        }
+
+        final Window thisWindow = (Window) ww.getScriptObject();
+
         if (codeToExec == null) {
             throw Context.reportRuntimeError("Function not provided");
         }
@@ -269,4 +296,5 @@ public class ThreadManager {
             throw Context.reportRuntimeError("Unknown type for function");
         }
     }
+
 }

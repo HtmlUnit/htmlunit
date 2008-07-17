@@ -14,27 +14,31 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.lang.ref.WeakReference;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Function;
 
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
- * Background job.
+ * <p>A JavaScript background job (eg setTimeout(), setInterval(), etc).</p>
+ *
+ * <p>This background job, once started, is guaranteed not to keep old windows in memory (no window
+ * memory leaks).</p>
  *
  * @version $Revision$
  * @author Brad Clarke
  * @author Ahmed Ashour
+ * @author Daniel Gredler
+ * @see MemoryLeakTest
  */
 class JavaScriptBackgroundJob implements Runnable {
 
-    private Log getLog() {
-        return LogFactory.getLog(getClass());
-    }
-
-    private final Window window_;
+    private final WeakReference<Window> window_;
     private final int timeout_;
     private final String script_;
     private final boolean loopForever_;
@@ -43,7 +47,7 @@ class JavaScriptBackgroundJob implements Runnable {
 
     JavaScriptBackgroundJob(final Window window, final int timeout, final String script,
             final boolean loopForever, final String label) {
-        window_ = window;
+        window_ = new WeakReference<Window>(window);
         timeout_ = timeout;
         loopForever_ = loopForever;
         script_ = script;
@@ -53,7 +57,7 @@ class JavaScriptBackgroundJob implements Runnable {
 
     JavaScriptBackgroundJob(final Window window, final int timeout, final Function function,
             final boolean loopForever, final String label) {
-        window_ = window;
+        window_ = new WeakReference<Window>(window);
         timeout_ = timeout;
         loopForever_ = loopForever;
         script_ = null;
@@ -62,43 +66,45 @@ class JavaScriptBackgroundJob implements Runnable {
     }
 
     public void run() {
-        final Page page = window_.getWebWindow().getEnclosedPage();
         try {
             do {
                 Thread.sleep(timeout_);
-                String message = "Executing JavaScriptBackgroundJob (" + label_ + "):";
+
+                final Window w = window_.get();
+                if (w == null) {
+                    // The window has been garbage collected! No need to execute, obviously.
+                    break;
+                }
+
+                final WebWindow ww = w.getWebWindow();
+                final Page page = ww.getEnclosedPage();
+
+                if (getLog().isDebugEnabled()) {
+                    String message = "Executing JavaScriptBackgroundJob (" + label_ + "):";
+                    if (function_ == null) {
+                        message += script_;
+                    }
+                    else {
+                        message += "(function reference)";
+                    }
+                    getLog().debug(message);
+                }
+
+                // Verify that the window is still open and the current page is the same.
+                if (!ww.getWebClient().getWebWindows().contains(ww) || ww.getEnclosedPage() != page) {
+                    getLog().debug("The page that originated this job doesn't exist anymore. Execution cancelled.");
+                    break;
+                }
+
+                final HtmlPage htmlPage = (HtmlPage) page;
                 if (function_ == null) {
-                    message += script_;
+                    htmlPage.executeJavaScriptIfPossible(script_, "JavaScriptBackgroundJob", 1);
                 }
                 else {
-                    message += "(function reference)";
-                }
-                getLog().debug(message);
-
-                final WebWindow webWindow = window_.getWebWindow();
-                // test that the window is always opened and the page the same
-                if (!webWindow.getWebClient().getWebWindows().contains(webWindow)
-                    || webWindow.getEnclosedPage() != page) {
-
-                    getLog().debug(
-                            "the page that originated this job doesnt exist anymore. "
-                                + "Execution cancelled.");
-                    return;
+                    final HtmlElement doc = htmlPage.getDocumentElement();
+                    htmlPage.executeJavaScriptFunctionIfPossible(function_, w, new Object[0], doc);
                 }
 
-                final HtmlPage htmlPage = (HtmlPage) window_.getWebWindow().getEnclosedPage();
-                if (function_ == null) {
-                    htmlPage.executeJavaScriptIfPossible(
-                            script_,
-                            "JavaScriptBackgroundJob", 1);
-                }
-                else {
-                    htmlPage.executeJavaScriptFunctionIfPossible(
-                            function_,
-                            window_,
-                            new Object[0],
-                            htmlPage.getDocumentElement());
-                }
                 if (Thread.currentThread().isInterrupted()) {
                     getLog().debug("JavaScript " + label_ + " thread interrupted; clearTimeout() probably called.");
                     break;
@@ -110,7 +116,12 @@ class JavaScriptBackgroundJob implements Runnable {
             getLog().debug("JavaScript timeout thread interrupted; clearTimeout() probably called.");
         }
         catch (final Exception e) {
-            getLog().error("Caught exception in Window.setTimeout()", e);
+            getLog().error("Caught exception in Window.setTimeout().", e);
         }
     }
+
+    private Log getLog() {
+        return LogFactory.getLog(getClass());
+    }
+
 }
