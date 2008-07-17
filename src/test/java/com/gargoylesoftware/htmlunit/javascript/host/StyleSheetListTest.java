@@ -71,17 +71,20 @@ public class StyleSheetListTest extends WebTestCase {
             + "      function test() {\n"
             + "        var div = document.getElementById('myDiv');\n"
             + "        alert(window.getComputedStyle(div, null).color);\n"
+            + "        var div2 = document.getElementById('myDiv2');\n"
+            + "        alert(window.getComputedStyle(div2, null).color);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
             + "  <body onload='test()'>\n"
-            + "    <div id='myDiv'/>\n"
+            + "    <div id='myDiv'></div>\n"
+            + "    <div id='myDiv2'></div>\n"
             + "  </body>\n"
             + "</html>";
 
         final String css = "div {color:red}";
 
-        final String[] expectedAlerts = {"red"};
+        final String[] expectedAlerts = {"red", "red"};
         final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_2);
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -92,5 +95,6 @@ public class StyleSheetListTest extends WebTestCase {
 
         webClient.getPage(URL_FIRST);
         assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(2, webConnection.getRequestCount());
     }
 }

@@ -7,6 +7,10 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes (handling of ill formed HTML code, document.write, ...), speed improvements, and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="fix" dev="mguillem">
+                Avoid to perform multiple request for the same external stylesheet. Add facility to access referred content
+                from HtmlLink.
+            </action>
             <action type="fix" dev="sdanig" id="2014629">
                 Fix memory leak of window objects when the windows contain long-running background JavaScript tasks
                 scheduled via setInterval() or setTimeout().

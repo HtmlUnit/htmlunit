@@ -14,9 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebResponse;
 
 /**
  * Wrapper for the HTML element "link". <b>Note:</b> This is not a clickable link,
@@ -34,6 +39,7 @@ public class HtmlLink extends ClickableElement {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "link";
+    private WebResponse cachedWebResponse_;
 
     /**
      * Create an instance of HtmlLink
@@ -142,5 +148,26 @@ public class HtmlLink extends ClickableElement {
      */
     public final String getTargetAttribute() {
         return getAttributeValue("target");
+    }
+
+    /**
+     * <span style="color:red">POTENIAL PERFORMANCE KILLER - DOWNLOADS THE IMAGE - USE AT YOUR OWN RISK.</span><br/>
+     * If the linked content is not already downloaded it triggers a download. Then it stores the response
+     * for later use.<br/>
+     *
+     * @param downloadIfNeeded indicates if a request should be performed this hasn't been done previously
+     * @return <code>null</code> if no download should be performed and when this wasn't already done; the response
+     * received when performing a request for the content referenced by this tag otherwise
+     * @throws IOException if an error occurs while downloading the content
+     */
+    public WebResponse getWebResponse(final boolean downloadIfNeeded) throws IOException {
+        if (downloadIfNeeded && cachedWebResponse_ == null) {
+            final HtmlPage page = (HtmlPage) getPage();
+            final WebClient webclient = page.getWebClient();
+
+            final URL url = page.getFullyQualifiedUrl(getHrefAttribute());
+            cachedWebResponse_ = webclient.loadWebResponse(new WebRequestSettings(url));
+        }
+        return cachedWebResponse_;
     }
 }

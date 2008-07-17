@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.StringReader;
-import java.net.URL;
 
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
@@ -23,11 +22,9 @@ import org.w3c.css.sac.InputSource;
 import org.w3c.dom.css.CSSStyleSheet;
 
 import com.gargoylesoftware.htmlunit.Cache;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
@@ -122,10 +119,7 @@ public class StyleSheetList extends SimpleScriptable {
             // <link rel="stylesheet" type="text/css" href="..." />
             final HtmlLink link = (HtmlLink) node;
             try {
-                final HtmlPage page = (HtmlPage) link.getPage();
-                final URL url = page.getFullyQualifiedUrl(link.getHrefAttribute());
-                final WebRequestSettings wrs = new WebRequestSettings(url);
-                final WebResponse response = page.getWebClient().loadWebResponse(wrs);
+                final WebResponse response = link.getWebResponse(true);
                 final String css = response.getContentAsString();
                 final CSSStyleSheet cached = cache.getCachedStyleSheet(css);
                 if (cached != null) {
