@@ -35,7 +35,7 @@ import org.apache.commons.logging.LogFactory;
 public class WaitingRefreshHandler implements RefreshHandler {
 
     /** Logging support. */
-    private static final Log LOG = LogFactory.getLog(ThreadManager.class);
+    private static final Log LOG = LogFactory.getLog(WaitingRefreshHandler.class);
 
     private final int maxwait_;
 
