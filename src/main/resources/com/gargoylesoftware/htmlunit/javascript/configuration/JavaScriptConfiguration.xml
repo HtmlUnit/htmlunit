@@ -2090,7 +2090,7 @@
     </class>
 
     <class name="XMLAttr" extends="Attr" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLAttr"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.xml.XmlDomAttr">
+        JSObject="true">
         <property name="text" readable="true" writable="true">
             <doclink
                 url="http://msdn.microsoft.com/en-us/library/ms762687.aspx"

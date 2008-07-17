@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Denis N. Antonioli
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Sudhan Moghe
  */
 public class HtmlElementTest extends WebTestCase {
 
@@ -1004,6 +1005,29 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlPage page = loadPage(html, collectedAlerts);
 
         ((ClickableElement) page.getHtmlElementById("textfield1")).type('a');
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Test attribute.text and attribute.xml added for XmlElement attributes
+     * are undefined for HtmlElement.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testTextAndXmlUndefined() throws Exception {
+        final String html
+            = "<html><head><title>foo</title></head><body>\n"
+            + "    <input type='text' id='textfield1' onfocus='alert(1)'>\n"
+            + "    <script>\n"
+            + "         var node = document.getElementById('textfield1');\n"
+            + "         alert(node.attributes[0].nodeName);\n"
+            + "         alert(node.attributes[0].text);\n"
+            + "         alert(node.attributes[0].xml);\n"
+            + "    </script>\n"
+            + "</body></html>";
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, html, collectedAlerts);
+        final String[] expectedAlerts = {"type", "undefined", "undefined"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

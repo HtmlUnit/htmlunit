@@ -19,8 +19,8 @@ import java.util.Map;
 import org.apache.xml.utils.PrefixResolverDefault;
 import org.w3c.dom.Node;
 
+import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.xml.XmlDomAttr;
 import com.gargoylesoftware.htmlunit.xml.XmlElement;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  *
  * @version $Revision$
  * @author Ahmed Ashour
- * @author Sudhan Moghe
  */
 final class HtmlUnitPrefixResolver extends PrefixResolverDefault {
 
@@ -62,7 +61,7 @@ final class HtmlUnitPrefixResolver extends PrefixResolverDefault {
     }
 
     private String getNamespace(final XmlElement element, final String prefix) {
-        final Map<String, XmlDomAttr> attributes = element.getAttributesMap();
+        final Map<String, DomAttr> attributes = element.getAttributesMap();
         for (final String name : attributes.keySet()) {
             if (name.startsWith("xmlns:")) {
                 if (name.substring("xmlns:".length()).equals(prefix)) {

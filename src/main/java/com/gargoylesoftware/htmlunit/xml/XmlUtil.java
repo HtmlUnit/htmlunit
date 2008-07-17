@@ -38,6 +38,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -148,7 +149,7 @@ public final class XmlUtil {
             final IElementFactory factory = HTMLParser.getFactory(localName.toLowerCase());
             return factory.createElementNS(page, ns, localName, namedNodeMapToSaxAttributes(source.getAttributes()));
         }
-        final Map<String, XmlDomAttr> attributes = new HashMap<String, XmlDomAttr>();
+        final Map<String, DomAttr> attributes = new HashMap<String, DomAttr>();
         final NamedNodeMap nodeAttributes = source.getAttributes();
         for (int i = 0; i < nodeAttributes.getLength(); i++) {
             final Node attribute = nodeAttributes.item(i);
@@ -159,8 +160,8 @@ public final class XmlUtil {
             else {
                 qualifiedName = attribute.getLocalName();
             }
-            final XmlDomAttr xmlAttribute =
-                new XmlDomAttr(page, attribute.getNamespaceURI(), qualifiedName, attribute.getNodeValue());
+            final DomAttr xmlAttribute =
+                new DomAttr(page, attribute.getNamespaceURI(), qualifiedName, attribute.getNodeValue());
             attributes.put(attribute.getNodeName(), xmlAttribute);
         }
         if (page instanceof HtmlPage) {
@@ -269,7 +270,7 @@ public final class XmlUtil {
      * @return the prefix bound to the namespace URI; or null if there is no such namespace
      */
     public static String lookupPrefix(final XmlElement element, final String namespace) {
-        final Map<String, XmlDomAttr> attributes = element.getAttributesMap();
+        final Map<String, DomAttr> attributes = element.getAttributesMap();
         for (final String name : attributes.keySet()) {
             if (name.startsWith("xmlns:") && attributes.get(name).getValue().equals(namespace)) {
                 return name.substring(6);

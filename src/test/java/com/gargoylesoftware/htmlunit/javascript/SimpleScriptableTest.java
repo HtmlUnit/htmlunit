@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author Ahmed Ashour
+ * @author Sudhan Moghe
  */
 @RunWith(BrowserRunner.class)
 public class SimpleScriptableTest extends WebTestCase {
@@ -160,6 +161,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("XPathResult");
         names.remove("XSLTProcessor");
         names.remove("XSLTemplate");
+        names.remove("XMLAttr");
 
         final Collection<String> hostClassNames = new ArrayList<String>();
         for (final Class< ? extends SimpleScriptable> clazz : map.values()) {
