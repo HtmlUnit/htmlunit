@@ -87,7 +87,7 @@ public class GWT15RC1Test extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void dynaTable() throws Exception {
+    public void dynaTable_1_5() throws Exception {
         server_ = HttpWebConnectionTest.startWebServer("src/test/resources/gwt/" + getDirectory() + "/DynaTable",
                 new String[] {"src/test/resources/gwt/" + getDirectory() + "/gwt-servlet.jar"});
 
