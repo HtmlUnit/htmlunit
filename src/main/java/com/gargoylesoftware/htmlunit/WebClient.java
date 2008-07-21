@@ -38,7 +38,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 import java.util.StringTokenizer;
-import java.util.regex.Pattern;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.httpclient.HttpStatus;
@@ -120,9 +119,7 @@ public class WebClient implements Serializable {
     private boolean printContentOnFailingStatusCode_ = true;
     private boolean throwExceptionOnFailingStatusCode_ = true;
     private CredentialsProvider credentialsProvider_ = new DefaultCredentialsProvider();
-    private String proxyHost_;
-    private int proxyPort_;
-    private final Map<String, Pattern> proxyBypassHosts_;
+    private ProxyConfig proxyConfig_;
     private JavaScriptEngine scriptEngine_;
     private boolean javaScriptEnabled_ = true;
     private boolean cookiesEnabled_ = true;
@@ -208,9 +205,7 @@ public class WebClient implements Serializable {
 
         homePage_ = "http://www.gargoylesoftware.com/";
         browserVersion_ = browserVersion;
-        proxyHost_ = null;
-        proxyPort_ = 0;
-        proxyBypassHosts_ = new HashMap<String, Pattern>();
+        proxyConfig_ = new ProxyConfig();
         try {
             scriptEngine_ = createJavaScriptEngineIfPossible(this);
         }
@@ -236,9 +231,7 @@ public class WebClient implements Serializable {
 
         homePage_ = "http://www.gargoylesoftware.com/";
         browserVersion_ = browserVersion;
-        proxyHost_ = proxyHost;
-        proxyPort_ = proxyPort;
-        proxyBypassHosts_ = new HashMap<String, Pattern>();
+        proxyConfig_ = new ProxyConfig(proxyHost, proxyPort);
         try {
             scriptEngine_ = createJavaScriptEngineIfPossible(this);
         }
@@ -691,56 +684,63 @@ public class WebClient implements Serializable {
     }
 
     /**
+     * Returns the proxy configuration for this client.
+     * @return the proxy configuration for this client
+     */
+    public ProxyConfig getProxyConfig() {
+        return proxyConfig_;
+    }
+
+    /**
+     * Sets the proxy configuration for this client.
+     * @param proxyConfig the proxy configuration for this client
+     */
+    public void setProxyConfig(final ProxyConfig proxyConfig) {
+        WebAssert.notNull("proxyConfig", proxyConfig);
+        this.proxyConfig_ = proxyConfig;
+    }
+
+    /**
      * Sets the proxy host used to perform HTTP requests.
      * @param proxyHost the proxy host used to perform HTTP requests
+     * @deprecated use {@link ProxyConfig} instead (see {@link #getProxyConfig()})
      */
+    @Deprecated
     public void setProxyHost(final String proxyHost) {
-        proxyHost_ = proxyHost;
+        getProxyConfig().setProxyHost(proxyHost);
     }
 
     /**
      * Sets the proxy port used to perform HTTP requests.
      * @param proxyPort the proxy port used to perform HTTP requests
+     * @deprecated use {@link ProxyConfig} instead (see {@link #getProxyConfig()})
      */
+    @Deprecated
     public void setProxyPort(final int proxyPort) {
-        proxyPort_ = proxyPort;
+        getProxyConfig().setProxyPort(proxyPort);
     }
 
     /**
      * Any hosts matched by the specified regular expression pattern will bypass the configured proxy.
      * @param pattern a regular expression pattern that matches the hostnames of the hosts which should
      *                bypass the configured proxy.
-     * @see Pattern
+     * @see java.util.regex.Pattern
+     * @deprecated use {@link ProxyConfig} instead (see {@link #getProxyConfig()})
      */
+    @Deprecated
     public void addHostsToProxyBypass(final String pattern) {
-        proxyBypassHosts_.put(pattern, Pattern.compile(pattern));
+        getProxyConfig().addHostsToProxyBypass(pattern);
     }
 
     /**
      * Any hosts matched by the specified regular expression pattern will no longer bypass the configured proxy.
      * @param pattern the previously added regular expression pattern
-     * @see Pattern
+     * @see java.util.regex.Pattern
+     * @deprecated use {@link ProxyConfig} instead (see {@link #getProxyConfig()})
      */
+    @Deprecated
     public void removeHostsFromProxyBypass(final String pattern) {
-        proxyBypassHosts_.remove(pattern);
-    }
-
-    /**
-     * Returns <tt>true</tt> if the host with the specified hostname should be accessed bypassing the
-     * configured proxy.
-     * @param hostname the name of the host to check
-     * @return <tt>true</tt> if the host with the specified hostname should be accessed bypassing the
-     * configured proxy, <tt>false</tt> otherwise.
-     */
-    private boolean shouldBypassProxy(final String hostname) {
-        boolean bypass = false;
-        for (final Pattern p : proxyBypassHosts_.values()) {
-            if (p.matcher(hostname).find()) {
-                bypass = true;
-                break;
-            }
-        }
-        return bypass;
+        getProxyConfig().removeHostsFromProxyBypass(pattern);
     }
 
     /**
@@ -1115,7 +1115,7 @@ public class WebClient implements Serializable {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * Initialize a new web window for JavaScript.
+     * Initializes a new web window for JavaScript.
      * @param webWindow the new WebWindow
      */
     public void initialize(final WebWindow webWindow) {
@@ -1128,7 +1128,7 @@ public class WebClient implements Serializable {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * Initialize a new page for JavaScript.
+     * Initializes a new page for JavaScript.
      * @param newPage the new page
      */
     public void initialize(final Page newPage) {
@@ -1141,7 +1141,8 @@ public class WebClient implements Serializable {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * Initialize a new empty web window for JavaScript.
+     * Initializes a new empty window for JavaScript.
+     *
      * @param webWindow the new WebWindow
      */
     public void initializeEmptyWindow(final WebWindow webWindow) {
@@ -1155,7 +1156,8 @@ public class WebClient implements Serializable {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * Add a new web window to the list of available windows.
+     * Adds a new window to the list of available windows.
+     *
      * @param webWindow the new WebWindow
      */
     public void registerWebWindow(final WebWindow webWindow) {
@@ -1166,13 +1168,13 @@ public class WebClient implements Serializable {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * Remove a web window from the list of available windows.
-     * @param webWindow the WebWindow to remove
+     * Removes a window from the list of available windows.
+     *
+     * @param webWindow the window to remove
      */
     public void deregisterWebWindow(final WebWindow webWindow) {
         WebAssert.notNull("webWindow", webWindow);
         webWindows_.remove(webWindow);
-
         if (getCurrentWindow() == webWindow) {
             if (webWindows_.size() == 0) {
                 // Create a new one - we always have to have at least one window.
@@ -1186,8 +1188,8 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Returns the log object for this web client.
-     * @return the log object
+     * Returns this client's log object.
+     * @return this client's log object
      */
     protected final Log getLog() {
         return LogFactory.getLog(getClass());
@@ -1552,9 +1554,9 @@ public class WebClient implements Serializable {
         // If the request settings don't specify a custom proxy, use the default client proxy...
         if (webRequestSettings.getProxyHost() == null) {
             // ...unless the host needs to bypass the configured client proxy!
-            if (!shouldBypassProxy(webRequestSettings.getUrl().getHost())) {
-                webRequestSettings.setProxyHost(proxyHost_);
-                webRequestSettings.setProxyPort(proxyPort_);
+            if (!proxyConfig_.shouldBypassProxy(webRequestSettings.getUrl().getHost())) {
+                webRequestSettings.setProxyHost(proxyConfig_.getProxyHost());
+                webRequestSettings.setProxyPort(proxyConfig_.getProxyPort());
             }
         }
 
@@ -1580,7 +1582,6 @@ public class WebClient implements Serializable {
             catch (final MalformedURLException e) {
                 getIncorrectnessListener().notify("Got a redirect status code [" + statusCode + " "
                     + webResponse.getStatusMessage()
-
                     + "] but the location is not a valid URL [" + locationString
                     + "]. Skipping redirection processing.", this);
                 return webResponse;

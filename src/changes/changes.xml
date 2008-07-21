@@ -100,7 +100,7 @@
                 JavaScript: implemented a workaround for Rhino bug in number primitive resolution (Rhino bug 374918).
             </action>
             <action type="add" dev="sdanig" id="1900452">
-                Add methods setProxyHost() and setProxyPort() to WebClient.
+                Move proxy-related methods from WebClient to new class ProxyConfig.
             </action>
             <action type="fix" dev="mguillem">
                 JavaScript: value of form elements is set before triggering keyUp event (was after).
