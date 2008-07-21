@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.util;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>A memory leak detector which can be used during testing.</p>
@@ -28,7 +29,7 @@ import java.util.HashMap;
 public class MemoryLeakDetector {
 
     /** Weak references to the objects being tracked by the detector. */
-    private HashMap< String , WeakReference< Object > > map_ = new HashMap< String , WeakReference< Object > >();
+    private Map< String , WeakReference< Object > > map_ = new HashMap< String , WeakReference< Object > >();
 
     /**
      * Registers the specified object with the memory leak detector. Once an object has been registered
