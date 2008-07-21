@@ -36,7 +36,6 @@ public class MemoryLeakTest extends WebTestCase {
      */
     @Test
     public void testWindowLeaks() throws Exception {
-
         final MemoryLeakDetector detector = new MemoryLeakDetector();
 
         WebClient client = new WebClient();

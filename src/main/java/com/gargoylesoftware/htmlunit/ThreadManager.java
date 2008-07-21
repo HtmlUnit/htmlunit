@@ -105,7 +105,6 @@ public class ThreadManager {
      * when calling {@link #stopThread(int)}
      */
     public int startThread(final Runnable job, final String label) {
-
         if (job == null) {
             // The window was garbage collected earlier, so no job was created! Can't start anything, obviously.
             return 0;
