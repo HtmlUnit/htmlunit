@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -26,7 +27,9 @@ import java.util.regex.Pattern;
  * @author Daniel Gredler
  * @see WebClient#getProxyConfig()
  */
-public class ProxyConfig {
+public class ProxyConfig implements Serializable {
+
+    private static final long serialVersionUID = -9164636437071690421L;
 
     private String proxyHost_;
     private int proxyPort_;
