@@ -25,7 +25,6 @@ import org.mortbay.jetty.Server;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -38,8 +37,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 
 /**
  * Tests for 1.5 release candidate 1 of <a href="http://code.google.com/webtoolkit">Google Web Toolkit</a>.
- * If this test is deleted (due to version upgrade), please make sure to preserve {@link #loadingJavaScript()}
- * and {@link #loadingJavaScript2()}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
@@ -142,79 +139,4 @@ public class GWT15RC1Test extends WebTestCase {
         server_ = null;
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void loadingJavaScript() throws Exception {
-        final String firstContent = " <html>\n"
-            + "<head><title>First Page</title>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    document.getElementById('debugDiv').innerHTML += 'before, ';\n"
-            + "    var iframe2 = document.createElement('iframe');\n"
-            + "    iframe2.src = '" + URL_SECOND + "';\n"
-            + "    document.body.appendChild(iframe2);\n"
-            + "    var iframe3 = document.createElement('iframe');\n"
-            + "    document.body.appendChild(iframe3);\n"
-            + "    iframe3.src = '" + URL_THIRD + "';\n"
-            + "    document.getElementById('debugDiv').innerHTML += 'after, ';\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "<div id='debugDiv'></div>\n"
-            + "</body>\n"
-            + "</html>";
-        final String secondContent
-            = "<script>parent.document.getElementById('debugDiv').innerHTML += 'second.html, ';</script>";
-        final String thirdContent
-            = "<script>parent.document.getElementById('debugDiv').innerHTML += 'third.html, ';</script>";
-
-        final WebClient client = getWebClient();
-        final MockWebConnection conn = new MockWebConnection(client);
-        conn.setResponse(URL_FIRST, firstContent);
-        conn.setResponse(URL_SECOND, secondContent);
-        conn.setResponse(URL_THIRD, thirdContent);
-        client.setWebConnection(conn);
-
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
-        final HtmlDivision div = (HtmlDivision) page.getHtmlElementById("debugDiv");
-        assertEquals("before, after, second.html, third.html, ", div.getFirstChild().getNodeValue());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void loadingJavaScript2() throws Exception {
-        final String firstContent = " <html>\n"
-            + "<head><title>First Page</title>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    document.getElementById('debugDiv').innerHTML += 'before, ';\n"
-            + "    var iframe = document.createElement('iframe');\n"
-            + "    document.body.appendChild(iframe);\n"
-            + "    iframe.contentWindow.location.replace('" + URL_SECOND + "');\n"
-            + "    document.getElementById('debugDiv').innerHTML += 'after, ';\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "<div id='debugDiv'></div>\n"
-            + "</body>\n"
-            + "</html>";
-        final String secondContent
-            = "<script>parent.document.getElementById('debugDiv').innerHTML += 'second.html, ';</script>";
-
-        final WebClient client = getWebClient();
-        final MockWebConnection conn = new MockWebConnection(client);
-        conn.setResponse(URL_FIRST, firstContent);
-        conn.setResponse(URL_SECOND, secondContent);
-        client.setWebConnection(conn);
-
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
-        final HtmlDivision div = (HtmlDivision) page.getHtmlElementById("debugDiv");
-        assertEquals("before, after, second.html, ", div.getFirstChild().getNodeValue());
-    }
 }
