@@ -52,12 +52,12 @@ public class MemoryLeakDetector {
      * @return <tt>true</tt> if the object registered with the specified ID can be garbage collected
      */
     public boolean canBeGCed(final String id) {
-        final WeakReference ref = (WeakReference) map_.get(id);
+        final WeakReference< Object > ref = map_.get(id);
         if (ref == null) {
             throw new IllegalArgumentException("No object registered with ID '" + id + "'.");
         }
         gc();
-        return (ref.get() == null);
+        return ref.get() == null;
     }
 
     /**

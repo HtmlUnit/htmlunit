@@ -27,6 +27,8 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
@@ -140,7 +142,13 @@ public class Location extends SimpleScriptable {
      * MSDN Documentation</a>
      */
     public void jsxFunction_replace(final String url) throws IOException {
-        jsxSet_href(url);
+        final JavaScriptEngine jsEngine = getWindow().getWebWindow().getWebClient().getJavaScriptEngine();
+        final PostponedAction action = new PostponedAction() {
+            public void execute() throws Exception {
+                jsxSet_href(url);
+            }
+        };
+        jsEngine.addPostponedAction(action);
     }
 
     /**
