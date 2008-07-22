@@ -50,9 +50,6 @@ public class Dojo102Test extends WebTestCase {
      */
     @Test
     public void dojo() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
         final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/util/doh/runner.html";
 
