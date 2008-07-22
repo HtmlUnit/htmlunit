@@ -203,10 +203,12 @@ public final class HTMLParser {
 
         try {
             page.registerParsingStart();
+            page.registerSnippetParsingStart();
             domBuilder.parse(in);
         }
         finally {
             page.registerParsingEnd();
+            page.registerSnippetParsingEnd();
         }
     }
 

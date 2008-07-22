@@ -2108,7 +2108,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * parsing HTML snippet for innerHTML or outerHTML of some element on
      * this page.
      */
-    public void registerSnippetParsingStart() {
+    void registerSnippetParsingStart() {
         snippetParserCount_++;
     }
 
@@ -2117,7 +2117,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * parsing HTML snippet for innerHTML or outerHTML of some element on
      * this page.
      */
-    public void registerSnippetParsingEnd() {
+    void registerSnippetParsingEnd() {
         snippetParserCount_--;
     }
 
@@ -2128,7 +2128,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @return <tt>true</tt> if an HTML parser is operating on html snippet
      *         for adding content to to some element on this page
      */
-    public boolean isParsingHtmlSnippet() {
+    boolean isParsingHtmlSnippet() {
         return snippetParserCount_ > 0;
     }
 }

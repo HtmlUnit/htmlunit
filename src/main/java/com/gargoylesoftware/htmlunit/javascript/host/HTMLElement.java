@@ -718,7 +718,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         };
 
         try {
-            page.registerSnippetParsingStart();
             HTMLParser.parseFragment(proxyNode, source);
         }
         catch (final IOException e) {
@@ -730,9 +729,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             LogFactory.getLog(HtmlElement.class).error("Unexpected exception occurred while parsing HTML snippet", e);
             throw Context.reportRuntimeError("Unexpected exception occurred while parsing HTML snippet: "
                     + e.getMessage());
-        }
-        finally {
-            page.registerSnippetParsingEnd();
         }
     }
 
