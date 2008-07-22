@@ -410,7 +410,7 @@ public class GWT14Test extends WebTestCase {
     }
 
     /**
-     * Loads the GWT unit test index page using the specified browser version, and test name.
+     * Loads the GWT unit test index page using the specified test name.
      *
      * @param testName the test name
      * @param collectedAlerts the List to collect alerts into

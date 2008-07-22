@@ -14,8 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.After;
@@ -24,11 +27,13 @@ import org.junit.runner.RunWith;
 import org.mortbay.jetty.Server;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -45,6 +50,21 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 public class GWT15RC1Test extends WebTestCase {
 
     private Server server_;
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void hello() throws Exception {
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadGWTPage("Hello", collectedAlerts);
+        final HtmlButton button = (HtmlButton) page.getFirstByXPath("//button");
+        final DomText buttonLabel = (DomText) button.getChildren().iterator().next();
+        assertEquals("Click me", buttonLabel.getData());
+        button.click();
+        final String[] expectedAlerts = {"Hello, AJAX"};
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 
     /**
      * Test value inside {@link HtmlDivision}, {@link HtmlInput} or {@link DomText}
@@ -127,6 +147,29 @@ public class GWT15RC1Test extends WebTestCase {
      */
     protected String getDirectory() {
         return "1.5RC1";
+    }
+
+    /**
+     * Loads the GWT unit test index page using the specified test name.
+     *
+     * @param testName the test name
+     * @param collectedAlerts the List to collect alerts into
+     * @throws Exception if an error occurs
+     * @return the loaded page
+     */
+    protected HtmlPage loadGWTPage(final String testName, final List<String> collectedAlerts) throws Exception {
+        final String resource = "gwt/" + getDirectory() + "/" + testName + "/" + testName + ".html";
+        final URL url = getClass().getClassLoader().getResource(resource);
+        assertNotNull(url);
+
+        final WebClient client = getWebClient();
+        if (collectedAlerts != null) {
+            client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        }
+
+        final HtmlPage page = (HtmlPage) client.getPage(url);
+        page.getEnclosingWindow().getThreadManager().joinAll(10000);
+        return page;
     }
 
     /**
