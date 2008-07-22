@@ -703,7 +703,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param htmlSnippet the HTML code extract to parse
      */
     static void parseHtmlSnippet(final DomNode target, final boolean append, final String source) {
-        final DomNode proxyNode = new HtmlDivision(null, HtmlDivision.TAG_NAME, (HtmlPage) target.getPage(), null) {
+        final HtmlPage page = (HtmlPage) target.getPage();
+        final DomNode proxyNode = new HtmlDivision(null, HtmlDivision.TAG_NAME, page, null) {
             private static final long serialVersionUID = 2108037256628269797L;
             @Override
             public DomNode appendChild(final org.w3c.dom.Node node) {
@@ -717,6 +718,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         };
 
         try {
+            page.registerSnippetParsingStart();
             HTMLParser.parseFragment(proxyNode, source);
         }
         catch (final IOException e) {
@@ -728,6 +730,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             LogFactory.getLog(HtmlElement.class).error("Unexpected exception occurred while parsing HTML snippet", e);
             throw Context.reportRuntimeError("Unexpected exception occurred while parsing HTML snippet: "
                     + e.getMessage());
+        }
+        finally {
+            page.registerSnippetParsingEnd();
         }
     }
 

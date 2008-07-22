@@ -46,6 +46,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Dmitri Zoubkov
+ * @author Sudhan Moghe
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-81598695">DOM Level 1</a>
  * @see <a href="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-81598695">DOM Level 2</a>
  */
@@ -321,6 +322,11 @@ public class HtmlScript extends HtmlElement {
 
         // If JavaScript is disabled, we don't need to execute.
         if (!page.getWebClient().isJavaScriptEnabled()) {
+            return false;
+        }
+
+        //If innerHTML or outerHTML is being parsed
+        if (page instanceof HtmlPage && ((HtmlPage) page).isParsingHtmlSnippet()) {
             return false;
         }
 

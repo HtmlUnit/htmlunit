@@ -121,6 +121,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     private HtmlElement documentElement_;
     private HtmlElement elementWithFocus_;
     private int parserCount_;
+    private int snippetParserCount_;
 
     private final transient Log javascriptLog_ = LogFactory.getLog("com.gargoylesoftware.htmlunit.javascript");
     private final transient Log mainLog_ = LogFactory.getLog(getClass());
@@ -2100,5 +2101,34 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      */
     void setBuilder(final HtmlUnitDOMBuilder htmlUnitDOMBuilder) {
         builder_ = htmlUnitDOMBuilder;
+    }
+
+    /**
+     * Called by the HTML parser to let the page know that it has started
+     * parsing HTML snippet for innerHTML or outerHTML of some element on
+     * this page.
+     */
+    public void registerSnippetParsingStart() {
+        snippetParserCount_++;
+    }
+
+    /**
+     * Called by the HTML parser to let the page know that it has finished
+     * parsing HTML snippet for innerHTML or outerHTML of some element on
+     * this page.
+     */
+    public void registerSnippetParsingEnd() {
+        snippetParserCount_--;
+    }
+
+    /**
+     * Returns <tt>true</tt> if an HTML parser is operating on some HTML
+     * snippet for adding content to some element on this page.
+     *
+     * @return <tt>true</tt> if an HTML parser is operating on html snippet
+     *         for adding content to to some element on this page
+     */
+    public boolean isParsingHtmlSnippet() {
+        return snippetParserCount_ > 0;
     }
 }

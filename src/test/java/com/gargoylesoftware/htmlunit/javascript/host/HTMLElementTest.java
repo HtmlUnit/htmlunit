@@ -2276,4 +2276,19 @@ public class HTMLElementTest extends WebTestCase {
         webClient.setCurrentWindow(secondPage.getEnclosingWindow());
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
+
+    /**
+     * Regression test for https://sourceforge.net/tracker/?func=detail&aid=2022578&group_id=47038&atid=448266.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void stackOverflowWithInnerHTML() throws Exception {
+        final String html = "<html><head><title>Recursion</title></head>\n"
+            + "<body>\n"
+            + "<script>"
+            + "     document.body.innerHTML = unescape(document.body.innerHTML);"
+            + "</script></body></html>\n";
+        final HtmlPage page = loadPage(html);
+        assertEquals("Recursion", page.getTitleText());
+    }
 }
