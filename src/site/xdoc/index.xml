@@ -30,14 +30,15 @@
                 for an introduction.
             </p>
             <p>
-                HtmlUnit is used as the underlying "browser" by the Open Source testing tools <a href="http://webtest.canoo.com/">Canoo WebTest</a>
-                and <a href="http://jwebunit.sourceforge.net/">JWebUnit</a>.
+                HtmlUnit is used as underlying "browser" by different Open Source tools like <a href="http://webtest.canoo.com/">Canoo WebTest</a>,
+                <a href="http://jwebunit.sourceforge.net/">JWebUnit</a>, <a href="http://webdriver.googlecode.com/">WebDriver</a>, <a href="http://www.jboss.org/jsfunit/">JSFUnit</a>,
+                <a href="http://celerity.rubyforge.org/">Celerity</a>, ...
             </p>
             <p>
                 HtmlUnit was originally written by
                 <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a> of
                 <a href="http://www.GargoyleSoftware.com">Gargoyle Software</a>
-                and is released under an <a href="license.html">Apache-style license</a>.  
+                and is released under the <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2 license</a>.  
                 Since then, it has received many contributions from <a href="team-list.html">
                 other developers</a>, and would not be where it is today without their
                 assistance.
