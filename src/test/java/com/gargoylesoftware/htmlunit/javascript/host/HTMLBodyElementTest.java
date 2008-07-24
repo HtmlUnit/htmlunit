@@ -21,12 +21,15 @@ import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Unit tests for {@link HTMLBodyElement}.
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public class HTMLBodyElementTest extends WebTestCase {
 
@@ -58,9 +61,36 @@ public class HTMLBodyElementTest extends WebTestCase {
             + "  </head>\n"
             + "  <body id='body' onload='test()'>blah</body>\n"
             + "</html>";
-        final List<String> actual = new ArrayList<String>();
-        loadPage(version, html, actual);
-        assertEquals(expected, actual);
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(version, html, collectedAlerts);
+        assertEquals(expected, collectedAlerts);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void attachEvent() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function handler() {\n"
+            + "        alert(event);\n"
+            + "      }\n"
+            + "      function test() {\n"
+            + "        document.body.attachEvent('onclick', handler);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body' onload='test()'>\n"
+            + "    <input type='button' id='myInput' value='Test me'>\n"
+            + "  </body>\n"
+            + "</html>";
+        final String[] expectedAlerts = {"[object]"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, collectedAlerts);
+		((HtmlButtonInput) page.getHtmlElementById("myInput")).click();
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
