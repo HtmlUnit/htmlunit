@@ -90,7 +90,7 @@ public class HTMLBodyElementTest extends WebTestCase {
         final String[] expectedAlerts = {"[object]"};
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, collectedAlerts);
-		((HtmlButtonInput) page.getHtmlElementById("myInput")).click();
+        ((HtmlButtonInput) page.getHtmlElementById("myInput")).click();
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }
