@@ -2658,4 +2658,59 @@ public class WindowTest extends WebTestCase {
         loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void event() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String firstContent = "<html>\n"
+            + "<head><title>First Page</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var iframe = document.createElement('iframe');\n"
+            + "    document.body.appendChild(iframe);\n"
+            + "    iframe.contentWindow.location.replace('" + URL_SECOND + "');\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "    <input type='button' id='myInput' value='Test me'>\n"
+            + "    <div id='myDiv'></div>\n"
+            + "</body>\n"
+            + "</html>";
+        final String secondContent =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      var handler = function() {\n"
+            + "        alert(parent.event);\n"
+            + "        parent.document.getElementById('myDiv').style.display = 'none';\n"
+            + "        alert(parent.event);\n"
+            + "      }\n"
+            + "      function test() {\n"
+            + "        parent.document.body.attachEvent('onclick', handler);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String[] expectedAlerts = {"[object]", "[object]"};
+        final WebClient client = new WebClient();
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection(client);
+        conn.setResponse(URL_FIRST, firstContent);
+        conn.setResponse(URL_SECOND, secondContent);
+        client.setWebConnection(conn);
+
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        ((HtmlButtonInput) page.getHtmlElementById("myInput")).click();
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
