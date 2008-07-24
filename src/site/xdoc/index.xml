@@ -5,6 +5,7 @@
         <title>Welcome to HtmlUnit</title>
         <revision>$Revision$</revision>
         <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+        <author email="mguillem@users.sourceforge.net">Marc Guillemot</author>
         <author email="asashour@users.sourceforge.net">Ahmed Ashour</author>
     </properties>
 
@@ -53,10 +54,10 @@
                         <a href="http://build.canoo.com/htmlunit">Cruise Control server</a> 
                     </dd>
                     
-                    <dt>Latest stable release <date>Apr 15, 2008</date></dt>
+                    <dt>Latest stable release <date>Jul 24, 2008</date></dt>
                     <dd>
                         <a href="http://sourceforge.net/project/showfiles.php?group_id=47038">
-                            version 2.1
+                            version 2.2
                         </a>
                     </dd>
                 </dl>

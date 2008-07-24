@@ -3,10 +3,11 @@
     <properties>
         <title>Changes</title>
         <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+        <author email="mguillem@users.sourceforge.net">Marc Guillemot</author>
     </properties>
 
     <body>
-        <release version="2.2-SNAPSHOT" description="Bugfixes (handling of ill formed HTML code, document.write, ...), speed improvements, and move to HtmlUnit-core-js (Rhino fork)">
+        <release version="2.2" date="Jul 24, 2008" description="Numerous bugfixes (handling of ill formed HTML code, document.write, ...), speed improvements, and move to HtmlUnit-core-js (Rhino fork)">
             <action type="fix" dev="sudhan_moghe" id="2022578">
                 JavaScript: fix endless recursion when innerHTML has script that modifies the innerHTML.
             </action>
