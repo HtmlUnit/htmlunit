@@ -83,7 +83,7 @@ public class HTMLBodyElementTest extends WebTestCase {
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
-            + "  <body id='body' onload='test()'>\n"
+            + "  <body onload='test()'>\n"
             + "    <input type='button' id='myInput' value='Test me'>\n"
             + "  </body>\n"
             + "</html>";

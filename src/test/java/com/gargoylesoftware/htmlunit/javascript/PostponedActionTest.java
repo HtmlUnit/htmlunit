@@ -14,13 +14,21 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -38,7 +46,7 @@ public class PostponedActionTest extends WebTestCase {
      */
     @Test
     public void loadingJavaScript() throws Exception {
-        final String firstContent = " <html>\n"
+        final String firstContent = "<html>\n"
             + "<head><title>First Page</title>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -79,7 +87,7 @@ public class PostponedActionTest extends WebTestCase {
      */
     @Test
     public void loadingJavaScript2() throws Exception {
-        final String firstContent = " <html>\n"
+        final String firstContent = "<html>\n"
             + "<head><title>First Page</title>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -108,4 +116,5 @@ public class PostponedActionTest extends WebTestCase {
         final HtmlDivision div = (HtmlDivision) page.getHtmlElementById("debugDiv");
         assertEquals("before, after, second.html, ", div.getFirstChild().getNodeValue());
     }
+
 }
