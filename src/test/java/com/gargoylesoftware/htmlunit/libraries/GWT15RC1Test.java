@@ -256,6 +256,34 @@ public class GWT15RC1Test extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    public void simpleXML() throws Exception {
+        final HtmlPage page = loadGWTPage("SimpleXML", null);
+
+        final String[] pendingOrders =
+        {"123-2", "3 45122 34566", "2/2/2004", "43 Butcher lane", "Atlanta", "Georgia", "30366"};
+
+        //try 20 times to wait .5 second each for filling the page.
+        for (int i = 0; i < 20; i++) {
+            if (page.getByXPath("//table[@class='userTable'][1]//tr[2]/td").size() == pendingOrders.length) {
+                break;
+            }
+            synchronized (page) {
+                page.wait(500);
+            }
+        }
+
+        final List< ? > cells = page.getByXPath("//table[@class='userTable'][1]//tr[2]/td");
+        assertEquals(pendingOrders.length, cells.size());
+        for (int i = 0; i < pendingOrders.length; i++) {
+            final HtmlTableDataCell cell = (HtmlTableDataCell) cells.get(i);
+            tableDataCell(cell, pendingOrders[i]);
+        }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     public void mail() throws Exception {
         final HtmlPage page = loadGWTPage("Mail", null);
         final HtmlTableDataCell cell = (HtmlTableDataCell)
