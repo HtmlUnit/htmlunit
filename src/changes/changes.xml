@@ -7,6 +7,11 @@
     </properties>
 
     <body>
+        <release version="2.3-SNAPSHOT" description="bugfix">
+            <action type="fix" dev="asashour">
+                JavaScript: 'window.event' should be preserved after another event firing.
+            </action>
+        </release>
         <release version="2.2" date="Jul 24, 2008" description="Numerous bugfixes (handling of ill formed HTML code, document.write, ...), speed improvements, and move to HtmlUnit-core-js (Rhino fork)">
             <action type="fix" dev="sudhan_moghe" id="2022578">
                 JavaScript: fix endless recursion when innerHTML has script that modifies the innerHTML.

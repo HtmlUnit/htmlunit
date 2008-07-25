@@ -499,6 +499,7 @@ public class Node extends SimpleScriptable {
 
         event.startFire();
         ScriptResult result = null;
+        final Object previousEvent = window.jsxGet_event();
         if (ie) {
             window.setEvent(event);
         }
@@ -563,7 +564,7 @@ public class Node extends SimpleScriptable {
         }
         finally {
             event.endFire();
-            window.setEvent(null); // reset event
+            window.setEvent(previousEvent); // reset event
         }
 
         return result;
