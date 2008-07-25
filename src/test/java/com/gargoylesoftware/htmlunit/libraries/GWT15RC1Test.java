@@ -37,7 +37,6 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
@@ -49,6 +48,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
+import com.gargoylesoftware.htmlunit.javascript.host.WindowTest;
 
 /**
  * Tests for 1.5 release candidate 1 of <a href="http://code.google.com/webtoolkit">Google Web Toolkit</a>.
@@ -258,7 +258,6 @@ public class GWT15RC1Test extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented
     public void json() throws Exception {
         final HtmlPage page = loadGWTPage("JSON", null);
         final HtmlButton button = (HtmlButton) page.getFirstByXPath("//button");
@@ -275,7 +274,7 @@ public class GWT15RC1Test extends WebTestCase {
         }
 
         final HtmlSpan span = (HtmlSpan)
-            page.getFirstByXPath("//div[@class='JSON-JSONResponseObject']/span/div/table//td[2]/span/span");
+            page.getFirstByXPath("//div[@class='JSON-JSONResponseObject']/div/div/table//td[2]/span/span");
         assertEquals("ResultSet", span.getFirstChild().getNodeValue());
     }
 
