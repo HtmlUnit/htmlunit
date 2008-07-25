@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.3-SNAPSHOT" description="bugfix">
+            <action type="update" dev="asashour">
+                Upgrade Commons Collections to 3.2.1
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: 'window.event' should be preserved after another event firing.
             </action>
