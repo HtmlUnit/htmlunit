@@ -48,7 +48,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
-import com.gargoylesoftware.htmlunit.javascript.host.WindowTest;
 
 /**
  * Tests for 1.5 release candidate 1 of <a href="http://code.google.com/webtoolkit">Google Web Toolkit</a>.
@@ -282,7 +281,6 @@ public class GWT15RC1Test extends WebTestCase {
     }
 
     /**
-     * Currently does not succeed because of {@link WindowTest#event()}.
      * @throws Exception if an error occurs
      */
     @Test
