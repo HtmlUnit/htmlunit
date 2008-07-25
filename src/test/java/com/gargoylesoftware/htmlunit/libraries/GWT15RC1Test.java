@@ -254,6 +254,34 @@ public class GWT15RC1Test extends WebTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void mail() throws Exception {
+        final HtmlPage page = loadGWTPage("Mail", null);
+        final HtmlTableDataCell cell = (HtmlTableDataCell)
+            page.getFirstByXPath("//table[@class='mail-TopPanel']//div[@class='gwt-HTML']//..");
+        tableDataCell(cell, "Welcome back, foo@example.com");
+
+        final String[] selectedRow = {"markboland05", "mark@example.com", "URGENT -[Mon, 24 Apr 2006 02:17:27 +0000]"};
+
+        final List< ? > selectedRowCells = page.getByXPath("//tr[@class='mail-SelectedRow']/td");
+        assertEquals(selectedRow.length, selectedRowCells.size());
+        for (int i = 0; i < selectedRow.length; i++) {
+            final HtmlTableDataCell selectedRowCell = (HtmlTableDataCell) selectedRowCells.get(i);
+            tableDataCell(selectedRowCell, selectedRow[i]);
+        }
+
+        final List< ? > detailsCells = page.getByXPath("//div[@class='mail-DetailBody']/text()");
+        final String[] details = {"Dear Friend,",
+            "I am Mr. Mark Boland the Bank Manager of ABN AMRO BANK 101 Moorgate, London, EC2M 6SB."};
+        for (int i = 0; i < details.length; i++) {
+            final DomText text = (DomText) detailsCells.get(i);
+            assertEquals(details[i], text.getData());
+        }
+    }
+
+    /**
      * Currently does not succeed because of {@link WindowTest#event()}.
      * @throws Exception if an error occurs
      */
