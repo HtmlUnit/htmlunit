@@ -304,4 +304,25 @@ public class NavigatorTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
+    /**
+     * Test some Mozilla properties (minimal tests are support is not completed).
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void product() throws Exception {
+        final String content
+            = "<html><head><title>First</title></head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  alert(navigator.product);\n"
+            + "}\n"
+            + "</script>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        final String[] expectedAlerts = {"Gecko"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

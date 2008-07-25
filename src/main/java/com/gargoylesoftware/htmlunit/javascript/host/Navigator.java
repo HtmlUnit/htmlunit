@@ -123,6 +123,14 @@ public final class Navigator extends SimpleScriptable {
     }
 
     /**
+     * Returns the property "product".
+     * @return the property "product"
+     */
+    public String jsxGet_product() {
+        return "Gecko";
+    }
+
+    /**
      * Returns the property "systemLanguage".
      * @return the property "systemLanguage"
      */

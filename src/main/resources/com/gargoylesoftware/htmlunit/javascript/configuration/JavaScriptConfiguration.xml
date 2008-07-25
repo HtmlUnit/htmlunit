@@ -1739,6 +1739,7 @@
         <property name="onLine" readable="true" writable="false"/>
         <property name="platform" readable="true" writable="false"/>
         <property name="plugins" readable="true" writable="false"/>
+        <property name="product" readable="true" writable="false"/>
         <property name="systemLanguage" readable="true" writable="false"/>
         <property name="userAgent" readable="true" writable="false"/>
         <property name="userLanguage" readable="true" writable="false"/>
