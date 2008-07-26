@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -677,4 +678,39 @@ public class NodeTest extends WebTestCase {
         ((HtmlButtonInput) page.getHtmlElementById("myInput")).click();
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Verifies that attributes belonging to cloned nodes are available via JavaScript.
+     * http://sourceforge.net/tracker/index.php?func=detail&aid=2024741&group_id=47038&atid=448266
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testCloneAttributesAvailable() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "  <script type='text/javascript'>\n"
+            + "    function go() {\n"
+            + "        var node = document.getElementById('foo');\n"
+            + "        var clone = node.cloneNode(true);\n"
+            + "        clone.id = 'bar';\n"
+            + "        node.appendChild(clone);\n"
+            + "        alert(clone.attributes[0].nodeName + '=' + clone.attributes[0].nodeValue);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "  </head>\n"
+            + "  <body onload='go()'>\n"
+            + "    <div id='foo'></div>\n"
+            + "  </body>\n"
+            + "</html>";
+        final String[] expectedAlerts = {"id=bar"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = (HtmlPage) loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+
+        final HtmlElement element = page.getHtmlElementById("bar");
+        final String value = element.getAttribute("id");
+        assertEquals("bar", value);
+    }
+
 }

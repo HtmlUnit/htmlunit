@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="2.3-SNAPSHOT" description="bugfix">
+        <release version="2.3-SNAPSHOT" description="Bugfixes.">
+            <action type="fix" dev="sdanig" id="2024741">
+                Attribute values for cloned nodes were not available via JavaScript.
+            </action>
             <action type="add" dev="asashour" id="2028071">
                 JavaScript: add support for navigator.product (FF only).
             </action>

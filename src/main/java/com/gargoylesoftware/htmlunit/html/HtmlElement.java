@@ -317,18 +317,19 @@ public abstract class HtmlElement extends DomElement implements Element {
             value = ATTRIBUTE_VALUE_EMPTY;
         }
 
-        // TODO: cleanup. This is a hack for HtmlElement living within an XmlPage
+        // TODO: Clean up; this is a hack for HtmlElement living within an XmlPage.
         if ((getOwnerDocument() instanceof HtmlPage)) {
             ((HtmlPage) getPage()).removeMappedElement(this);
         }
 
         final DomAttr newAttr = addAttributeToMap((Page) getOwnerDocument(), attributes_, namespaceURI,
             qualifiedName.toLowerCase(), value);
+        newAttr.setParentNode(this);
         if (namespaceURI != null) {
             namespaces_.put(namespaceURI, newAttr.getPrefix());
         }
 
-        // TODO: cleanup. This is a hack for HtmlElement living within an XmlPage
+        // TODO: Clean up; this is a hack for HtmlElement living within an XmlPage.
         if (!(getOwnerDocument() instanceof HtmlPage)) {
             return;
         }
@@ -1115,7 +1116,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-      * Add an attribute to the attribute map. This is just used by the element factories.
+     * Adds an attribute to the attribute map. This is just used by the element factories.
      * @param attributeMap the attribute map where the attribute will be added
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the attribute
