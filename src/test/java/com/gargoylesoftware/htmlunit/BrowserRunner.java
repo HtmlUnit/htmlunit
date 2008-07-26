@@ -224,7 +224,9 @@ public class BrowserRunner extends CompositeRunner {
 
         @Override
         protected String testName(final Method method) {
-            return String.format("%s[%s]", method.getName(), getShortname(browserVersion_));
+            String className = method.getDeclaringClass().getName();
+            className = className.substring(className.lastIndexOf('.') + 1);
+            return String.format("%s[%s]", className + '.' + method.getName(), getShortname(browserVersion_));
         }
 
         @Override
@@ -349,7 +351,9 @@ public class BrowserRunner extends CompositeRunner {
 
         @Override
         protected String testName(final Method method) {
-            return String.format("%s[No Browser]", method.getName());
+            String className = method.getDeclaringClass().getName();
+            className = className.substring(className.lastIndexOf('.') + 1);
+            return String.format("%s[No Browser]", className + '.' + method.getName());
         }
 
         @Override
