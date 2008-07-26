@@ -77,6 +77,8 @@ svn co https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit .
             <p>
                 This will force a recompile of the java classes if needed.
             </p>
+            If you have <tt>java.net.BindException: Address already in use: JVM_Bind</tt>,
+            then change the <code>PORT</code> of <code>HttpWebConnectionTest</code>.
         </section>
 
         <section name="Packaging">
