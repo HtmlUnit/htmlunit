@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><data jsxid="jsxroot">
+	<record group="object" include="master.xml"/>
+	<record group="position" include="master.xml"/>
+	
+	<record group="1" jsxid="linechart" jsxtext="LineChart">
+		<record docdefault="overlay (&lt;code&gt;jsx3.chart.LineChart.TYPE_OVERLAY&lt;/code&gt;)" docgetter="getType" docsetter="setType" eval="0" jsxexecute="objJSX.setType(vntValue);objJSX.repaint();" jsxid="type" jsxmask="jsxselect" jsxtext="Type" jsxtip="Sets the type of line chart." nullable="0">
+			<enum jsxid="jsx3.chart.LineChart.TYPE_OVERLAY" jsxtext="overlay"/>
+			<enum jsxid="jsx3.chart.LineChart.TYPE_STACKED" jsxtext="stacked"/>
+			<enum jsxid="jsx3.chart.LineChart.TYPE_STACKED100" jsxtext="stacked 100%"/>
+		</record>
+	</record>
+	
+	<record group="blockx" include="master.xml"/>
+	<record group="background" include="master.xml"/>
+	<record group="chart" include="master.xml"/>
+	<record group="interaction_menuonly" include="master.xml"/>
+</data>

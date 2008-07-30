@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Operator Assisted Form Fill</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+  <script type='text/javascript' src='../dwr/engine.js'> </script>
+  <script type='text/javascript' src='../dwr/util.js'> </script>
+  <script type='text/javascript' src='../dwr/interface/LiveHelp.js'> </script>
+  <script type="text/javascript" src='index.js'> </script>
+  <link rel="stylesheet" type="text/css" href="../generic.css" />
+</head>
+
+<body onload="init()">
+<div id="page-title">[
+  <a href="http://getahead.org/dwr/">DWR Website</a> |
+  <a href="..">Web Application Index</a>
+]</div>
+
+<h1>Operator Assisted Form Fill</h1>
+
+<table class="form plain">
+  <tr>
+    <th>Name:</th>
+    <td>
+      <div id="helpNameTip" class="tip" onclick='document.getElementById("helpName").focus();'></div>
+      <input type=text" id="helpName" style="width:200px;" onkeyup="notifyTyping(this)" onfocus="notifyFocus(this)" onblur="notifyBlur(this)"/>
+    </td>
+  </tr>
+
+  <tr>
+    <th>Email:</th>
+    <td>
+      <div id="helpEmailTip" class="tip" onclick='document.getElementById("helpEmail").focus();'></div>
+      <input type=text" id="helpEmail" style="width:200px;" onkeyup="notifyTyping(this)" onfocus="notifyFocus(this)" onblur="notifyBlur(this)"/>
+    </td>
+  </tr>
+
+  <tr>
+    <th>Account Num:</th>
+    <td>
+      <div id="helpAcctTip" class="tip" onclick='document.getElementById("helpAcct").focus();'></div>
+      <input type=text" id="helpAcct" style="width:200px;" onkeyup="notifyTyping(this)" onfocus="notifyFocus(this)" onblur="notifyBlur(this)"/>
+    </td>
+  </tr>
+
+  <tr>
+    <th>Sort Code:</th>
+    <td>
+      <div id="helpSortTip" class="tip" onclick='document.getElementById("helpSort").focus();'></div>
+      <input type=text" id="helpSort" style="width:200px;" onkeyup="notifyTyping(this)" onfocus="notifyFocus(this)" onblur="notifyBlur(this)"/>
+    </td>
+  </tr>
+
+  <tr>
+    <th>Address Line 1:</th>
+    <td>
+      <div id="helpAddr1Tip" class="tip" onclick='document.getElementById("helpAddr1").focus();'></div>
+      <input type=text" id="helpAddr1" style="width:200px;" onkeyup="notifyTyping(this)" onfocus="notifyFocus(this)" onblur="notifyBlur(this)"/>
+    </td>
+  </tr>
+
+  <tr>
+    <th>Address Line 2:</th>
+    <td>
+      <div id="helpAddr2Tip" class="tip" onclick='document.getElementById("helpAddr2").focus();'></div>
+      <input type=text" id="helpAddr2" style="width:200px;" onkeyup="notifyTyping(this)" onfocus="notifyFocus(this)" onblur="notifyBlur(this)"/>
+    </td>
+  </tr>
+
+  <tr>
+    <th>Address Line 3:</th>
+    <td>
+      <div id="helpAddr3Tip" class="tip" onclick='document.getElementById("helpAddr3").focus();'></div>
+      <input type=text" id="helpAddr3" style="width:200px;" onkeyup="notifyTyping(this)" onfocus="notifyFocus(this)" onblur="notifyBlur(this)"/>
+    </td>
+  </tr>
+
+  <tr>
+    <th>Zipcode / Postcode:</th>
+    <td>
+      <div id="helpAddr4Tip" class="tip" onclick='document.getElementById("helpAddr4").focus();'></div>
+      <input type=text" id="helpAddr4" style="width:200px;" onkeyup="notifyTyping(this)" onfocus="notifyFocus(this)" onblur="notifyBlur(this)"/>
+    </td>
+  </tr>
+
+  <tr>
+    <th>&nbsp;</th>
+    <td><input id="submit" type="submit" value="Submit Query" onclick="process()"/></td>
+  </tr>
+</table>
+
+</body>
+</html>

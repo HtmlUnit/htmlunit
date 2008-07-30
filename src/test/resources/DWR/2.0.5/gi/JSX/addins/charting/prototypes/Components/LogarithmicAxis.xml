@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><serialization xmlns="urn:tibco.com/v3.0">
+ <name><![CDATA[Axis - Logarithmic]]></name>
+ <icon><![CDATA[icons/logarithmicAxis.gif]]></icon>
+ <description><![CDATA[an axis that displays a range of numerical values on a logarithmic scale]]></description>
+ <onBeforeDeserialize/>
+ <onAfterDeserialize/>
+  <object type="jsx3.chart.LogarithmicAxis">
+   <dynamics/>
+   <variants autoAdjust="1" base="10" baseAtZero="1" horizontal="1" labelGap="3" majorDivisions="1" minorTickDivisions="9" minorTickLength="2" primary="1" showAxis="1" showLabels="1" tickLength="3"/>
+   <strings axisStroke="#000000" jsxname="logarithmicAxis" labelPlacement="axis" minorTickPlacement="outside" minorTickStroke="#666666 1" tickPlacement="outside" tickStroke="#000000"/>
+    <object type="jsx3.chart.ChartLabel">
+     <dynamics/>
+     <variants labelRotation="0"/>
+     <strings jsxname="logAxisTitle" jsxtext="Logarithmic Axis"/>
+    </object>
+  </object>
+</serialization>

@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Simple Text Generation Demo</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+  <script type='text/javascript' src='../tabs/tabs.js'> </script>
+  <script type='text/javascript' src='../dwr/engine.js'> </script>
+  <script type='text/javascript' src='../dwr/util.js'> </script>
+  <script type='text/javascript' src='../dwr/interface/Demo.js'> </script>
+  <script type="text/javascript" src='index.js'> </script>
+  <link rel="stylesheet" type="text/css" href="../tabs/tabs.css" />
+  <link rel="stylesheet" type="text/css" href="../generic.css" />
+</head>
+<body onload="dwr.util.useLoadingMessage();Tabs.init('tabList', 'tabContents');">
+<div id="page-title">[
+  <a href="http://getahead.org/dwr/">DWR Website</a> |
+  <a href="..">Web Application Index</a>
+]</div>
+
+<h1>Dynamically Updating Text</h1>
+
+<p>This is a simple demonstration of how to dynamically update a web-page with
+text fetched from a web server.</p>
+
+<ul id="tabList">
+  <li><a href="#" tabId="demoDiv">Demo</a></li>
+  <li><a href="#" tabId="explainDiv">How it works</a></li>
+  <li><a href="#" tabId="sourceDiv">Source</a></li>
+</ul>
+
+<div id="tabContents">
+
+  <div id="demoDiv">
+
+    <p>
+      Name:
+      <input type="text" id="demoName" value="Joe"/>
+      <input value="Send" type="button" onclick="update()"/>
+      <br/>
+      Reply: <span id="demoReply" style="background:#eeffdd; padding-left:4px; padding-right:4px;"></span>
+    </p>
+
+  </div>
+
+  <div id="explainDiv">
+    <p>When you click on the "Send" button the browser calls the onclick event,
+    which calls the <code>update()</code> function:</p>
+    
+<pre>
+function update() {
+  var name = dwr.util.getValue("demoName");
+  Demo.sayHello(name, loadinfo);
+}
+</pre>
+
+    <p><code>dwr.util.getValue()</code> is a utility to get the value of any
+    element, in this case an input field, but it could be a div or a select
+    box.</p>
+
+    <p>DWR is asynchronous due to the way Javascript works so it won't halt the web
+    browser while we are waiting for the background HTTP request to return.
+    So the parameter <code>loadinfo</code> names a function to be called when the
+    call has returned.</p>
+    
+    <p>On the server, DWR calls the <code>Demo.sayHello()</code> Java method:</p>
+    
+<pre>
+public String sayHello(String name) {
+    return "Hello, " + name;
+}
+</pre>
+    
+    <p>When this method returns, DWR calls <code>loadinfo()</code> function which
+    moves the text to the reply span:</p>
+    
+<pre>
+function loadinfo(data) {
+  dwr.util.setValue("demoReply", data);
+}
+</pre>
+
+    <p><code>dwr.util.setValue()</code> is a utility that takes the data you pass in
+    the second parameter and works out how to fit it to go into the HTML element
+    specified by id in the first parameter. This function is one of several neat
+    Javascript utilities that make working with DWR much easier.</p>
+
+    <p>We could simplify things by writing the 2 Javascript functions together like
+    this:</p>
+
+<pre>
+function update() {
+  var name = dwr.util.getValue("demoName");
+  Demo.sayHello(name, function(data) {
+    dwr.util.setValue("demoReply", data);
+  });
+}
+</pre>
+    
+    <p>And that's it. In effect we have written much less than 10 lines of code to
+    get data from the server, and display it in the browser.</p>
+    
+  </div>
+
+  <div id="sourceDiv">
+
+<h2>HTML source:</h2>
+<pre>
+&lt;p&gt;
+  Name:
+  &lt;input type="text" id="demoName"/&gt;
+  &lt;input value="Send" type="button" onclick="update()"/&gt;
+  &lt;br/&gt;
+  Reply: &lt;span id="demoReply"&gt;&lt;/span&gt;
+&lt;/p&gt;
+</pre>
+
+<h2>Javascript source:</h2>
+<pre>
+function update() {
+  var name = dwr.util.getValue("demoName");
+  Demo.sayHello(name, function(data) {
+    dwr.util.setValue("demoReply", data);
+  });
+}
+</pre>
+
+<h2>Java source:</h2>
+<pre>
+package org.getahead.dwrdemo.simpletext;
+
+public class Demo {
+    public String sayHello(String name) {
+        return "Hello, " + name;
+    }
+}
+</pre>
+
+<h2>dwr.xml</h2>
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE dwr PUBLIC
+    "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN"
+    "http://getahead.org/dwr/dwr20.dtd"&gt;
+
+&lt;dwr&gt;
+  &lt;allow&gt;
+    &lt;create creator="new" javascript="Demo"&gt;
+      &lt;param name="class" value="org.getahead.dwrdemo.simpletext.Demo"/&gt;
+    &lt;/create&gt;
+  &lt;/allow&gt;
+&lt;/dwr&gt;
+</pre>
+
+  </div>
+
+</div>
+
+</body>
+</html>

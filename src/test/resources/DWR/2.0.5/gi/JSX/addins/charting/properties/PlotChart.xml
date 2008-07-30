@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><data jsxid="jsxroot">
+	<record group="object" include="master.xml"/>
+	<record group="position" include="master.xml"/>
+	
+	<record group="1" jsxid="plotchart" jsxtext="PlotChart">
+		<record disallow="[^0-9]" docdefault="DEFAULT_MAX_POINT_RADIUS (&lt;code&gt;jsx3.chart.PlotChart.DEFAULT_MAX_POINT_RADIUS&lt;/code&gt;)" docgetter="getMaxPointRadius" docsetter="setMaxPointRadius" eval="1" jsxid="maxPointRadius" jsxmask="jsxtext" jsxtext="Max Radius" jsxtip="Sets the maximum point radius to display on this chart. Larger points are constrained to this value."/>
+		<record docdefault="radius (&lt;code&gt;jsx3.chart.PlotChart.MAG_RADIUS&lt;/code&gt;)" docgetter="getMagnitudeMethod" docsetter="setMagnitudeMethod" eval="0" jsxid="magnitudeMethod" jsxmask="jsxselect" jsxtext="Magnitude Method" jsxtip="Sets the method for converting magnitude values to point size." nullable="0">
+			<enum jsxid="jsx3.chart.PlotChart.MAG_RADIUS" jsxtext="radius"/>
+			<enum jsxid="jsx3.chart.PlotChart.MAG_DIAMETER" jsxtext="diameter"/>
+			<enum jsxid="jsx3.chart.PlotChart.MAG_AREA" jsxtext="area"/>
+		</record>
+	</record>
+	
+	<record group="blockx" include="master.xml"/>
+	<record group="background" include="master.xml"/>
+	<record group="chart" include="master.xml"/>
+	<record group="interaction_menuonly" include="master.xml"/>
+
+</data>

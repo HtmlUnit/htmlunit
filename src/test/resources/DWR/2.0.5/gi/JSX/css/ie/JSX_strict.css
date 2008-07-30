@@ -1,0 +1,963 @@
+/*
+ * Copyright (c) 2001-2007, TIBCO Software Inc.
+ * Use, modification, and distribution subject to terms of license.
+ */
+
+*._bmcss3flagsyntax {box-sizing: border-box;}
+
+
+v\:* {
+  behavior: url(#default#VML);
+}
+
+/* jsx3.gui.Block */
+#JSX .jsx30block {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+}
+
+/* jsx3.gui.Image */
+#JSX img.jsx30image {
+  vertical-align: top;
+}
+
+/* jsx3.gui.Button */
+#JSX .jsx30button {
+  vertical-align: top;
+  white-space: nowrap;
+  cursor: pointer;
+}
+#JSX .jsx30button_text {
+  text-align: center;
+}
+
+/* jsx3.gui.TextBox */
+#JSX .jsx30textbox {
+  vertical-align: top;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+}
+
+/* jsx3.gui.ToolbarButton */
+#JSX .jsx30toolbarbutton {
+  vertical-align: top;
+  white-space: nowrap;
+}
+#JSX .jsx30toolbarbutton_img {
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position-x: 3px;
+  background-position-y: center;
+}
+#JSX .jsx30toolbarbutton_cap {
+  overflow: hidden;
+}
+#JSX .jsx30toolbarbutton_mnu {
+  overflow: hidden;
+}
+#JSX .jsx30toolbarbutton_lbl {
+}
+
+/* jsx3.gui.WindowBar */
+#JSX .jsx30windowbar {
+  overflow: hidden;
+}
+#JSX .jsx30windowbar_lbl {
+  white-space: nowrap;
+  z-index: -1;
+}
+
+/* jsx3.gui.Menu */
+.jsx30menu_2_itemlist {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  border: solid 1px #9898a5;
+  border-left-color: #b8b8c5;
+  border-top-color: #b8b8c5;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=95,FinishOpacity=0,Style=0,StartX=0,FinishX=100,StartY=0,FinishY=100)progid:DXImageTransform.Microsoft.Shadow(direction=225,color=#a8a8cf,strength=2)progid:DXImageTransform.Microsoft.Shadow(direction=135,color=#8888cf,strength=2)progid:DXImageTransform.Microsoft.Shadow(direction=180,color=#8888cf,strength=3);
+}
+.jsx30menu_2_item {
+  position: relative;
+  height: 16px;
+  padding-left: 36px;
+  padding-top: 4px;
+  white-space: nowrap;
+  font-family: Verdana, sans-serif;
+  font-size: 10px;
+  cursor: default;
+  background-image: url( ../../images/spc.gif );
+  background-repeat: repeat-x;
+}
+.jsx30menu_2_item_disabled {
+  position: relative;
+  font-family: Verdana, sans-serif;
+  font-size: 10px;
+  padding-left: 36px;
+  height: 16px;
+  padding-top: 4px;
+  white-space: nowrap;
+  cursor: not-allowed;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40,FinishOpacity=0,Style=0,StartX=0,FinishX=100,StartY=0,FinishY=100);
+}
+.jsx30menu_2_item_divider {
+  position: relative;
+  height: 5px;
+  margin: 5px 6px 0px 36px;
+  border-top: solid 1px #cccccc;
+}
+.jsx30menu_2_selected {
+  position: absolute;
+  left: 25px;
+  top: 8px;
+  width: 7px;
+  height: 7px;
+}
+.jsx30menu_2_text {
+  position: relative;
+  padding-right: 6px;
+  height: 12px;
+}
+span.jsx30menu_2_kc {
+  position: relative;
+  width: 100%;
+  padding: 0px;
+  height: 15px;
+  white-space: nowrap;
+}
+table.jsx30menu_2_kct {
+  position: relative;
+  width: 100%;
+  padding: 0px;
+  border-spacing: 0px;
+  height: 12px;
+}
+table.jsx30menu_2_kct td {
+  padding: 0px;
+  margin: 0px;
+  white-space: nowrap;
+  font-family: Verdana, sans-serif;
+  font-size: 10px;
+  vertical-align: top;
+}
+table.jsx30menu_2_kct td.keycode {
+  padding-right: 4px;
+  text-align: right;
+}
+.jsx30menu_0_itemlist {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  border: solid 1px #9898a5;
+  border-left-color: #b8b8c5;
+  border-top-color: #b8b8c5;
+  filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=95,FinishOpacity=0,Style=0,StartX=0,FinishX=100,StartY=0,FinishY=100)progid:DXImageTransform.Microsoft.Shadow(direction=225,color=#a8a8cf,strength=2)progid:DXImageTransform.Microsoft.Shadow(direction=135,color=#8888cf,strength=2)progid:DXImageTransform.Microsoft.Shadow(direction=180,color=#8888cf,strength=3);
+}
+.jsx30menu_0_item {
+  position: relative;
+  height: 20px;
+  padding-left: 36px;
+  padding-top: 4px;
+  white-space: nowrap;
+  font-family: Verdana, sans-serif;
+  font-size: 10px;
+  cursor: default;
+  background-image: url( ../../images/spc.gif );
+  background-repeat: repeat-x;
+}
+.jsx30menu_0_item_disabled {
+  position: relative;
+  font-family: Verdana, sans-serif;
+  font-size: 10px;
+  padding-left: 36px;
+  height: 20px;
+  padding-top: 4px;
+  white-space: nowrap;
+  cursor: not-allowed;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40,FinishOpacity=0,Style=0,StartX=0,FinishX=100,StartY=0,FinishY=100);
+}
+.jsx30menu_0_item_divider {
+  position: relative;
+  height: 5px;
+  margin: 5px 6px 0px 36px;
+  border-top: solid 1px #cccccc;
+}
+.jsx30menu_0_selected {
+  position: absolute;
+  left: 25px;
+  top: 8px;
+  width: 7px;
+  height: 7px;
+}
+.jsx30menu_0_text {
+  position: relative;
+  padding-right: 6px;
+  height: 15px;
+}
+span.jsx30menu_0_kc {
+  position: relative;
+  width: 100%;
+  padding: 0px;
+  height: 15px;
+  white-space: nowrap;
+}
+table.jsx30menu_0_kct {
+  position: relative;
+  width: 100%;
+  padding: 0px;
+  border-spacing: 0px;
+  margin: -2px 0px 0px -2px;
+}
+table.jsx30menu_0_kct td {
+  padding: 0px;
+  margin: 0px;
+  white-space: nowrap;
+  font-family: Verdana, sans-serif;
+  font-size: 10px;
+  vertical-align: top;
+}
+table.jsx30menu_0_kct td.keycode {
+  padding-right: 4px;
+  text-align: right;
+}
+
+/* jsx3.gui.Splitter */
+#JSX .jsx30splitter {
+  overflow: hidden;
+  text-align: left;
+}
+#JSX .jsx30splitter_vbar {
+  position: absolute;
+  left: 0px;
+  height: 8px;
+  width: 100%;
+  cursor: row-resize;
+  overflow: hidden;
+  z-index: 10;
+  filter: alpha(opacity=70);
+}
+#JSX .jsx30splitter_hbar {
+  position: absolute;
+  top: 0px;
+  width: 8px;
+  height: 100%;
+  cursor: col-resize;
+  overflow: hidden;
+  z-index: 10;
+  filter: alpha(opacity=70);
+}
+
+/* jsx3.gui.Stack */
+#JSX .jsx30stack_textv {
+  white-space: nowrap;
+}
+#JSX .jsx30stack_texth {
+  white-space: nowrap;
+  writing-mode: tb-rl;
+  filter: flipv fliph;
+}
+#JSX .jsx30stack_handle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+/** jsx3.gui.Tab and jsx3.gui.TabbedPane */
+#JSX .jsx30tab {
+  white-space: nowrap;
+}
+#JSX .jsx30tabbedpane_controlbox {
+  white-space: nowrap;
+  overflow: hidden;
+  z-index: 10;
+}
+#JSX .jsx30tab_text {
+
+}
+
+/* jsx3.gui.Interactive */
+.jsx30spyglassbuffer {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  padding: 12px;
+}
+.jsx30spyglass {
+  color: #000000;
+  background-color: #ffffcc;
+  width: 100%;
+  height: 100%;
+  padding: 3px;
+  border: solid 1px #9898a5;
+  font-family: Verdana, sans-serif;
+  font-size: 10px;
+  filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=95, FinishOpacity=0, Style=0, StartX=0, FinishX=100, StartY=0, FinishY=100) progid:DXImageTransform.Microsoft.Shadow(direction=225,color=#a8a8cf,strength=2) progid:DXImageTransform.Microsoft.Shadow(direction=135,color=#8888cf,strength=2) progid:DXImageTransform.Microsoft.Shadow(direction=180,color=#8888cf,strength=3);
+}
+
+/* jsx3.gui.Select (and combo) */
+.jsx30select_select {
+  cursor: default;
+  overflow: hidden;
+  white-space: nowrap;
+  background-position: right 0px;
+  background-repeat: no-repeat;
+  vertical-align: top;
+}
+.jsx30select_optionlist {
+  position: absolute;
+  cursor: default;
+  width: 100%;
+  left: 0px;
+  top: 0px;
+  border: solid 1px #9898a5;
+  border-left-color: #b8b8c5;
+  border-top-color: #b8b8c5;
+  filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=95,FinishOpacity=0,Style=0,StartX=0,FinishX=100,StartY=0,FinishY=100)progid:DXImageTransform.Microsoft.Shadow(direction=225,color=#a8a8cf,strength=2)progid:DXImageTransform.Microsoft.Shadow(direction=135,color=#8888cf,strength=2)progid:DXImageTransform.Microsoft.Shadow(direction=180,color=#8888cf,strength=3);
+}
+.jsx30select_option {
+  position: relative;
+  font-family: Verdana, sans-serif;
+  font-size: 10px;
+  width: 100%;
+  height: 20px;
+  padding-top: 3px;
+  padding-left: 4px;
+  cursor: default;
+  background-image: url(../../images/spc.gif);
+  background-repeat: repeat-x;
+  white-space: nowrap;
+}
+.jsx30select_check {
+  position: relative;
+  width: 7px;
+  height: 7px;
+  margin: 4px 0px 0px 0px;
+  vertical-align: top;
+}
+.jsx30select_icon {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  margin: 0px 0px 0px 2px;
+  vertical-align: top;
+}
+.jsx30select_option span {
+  position:relative; padding:2px 0px 0px 4px; overflow:hidden; height:17px;
+}
+.jsx30select_none {
+  color: #666666;
+}
+#JSX .jsx30select_display {
+  overflow: hidden;
+}
+#JSX .jsx30select_text {
+  overflow: hidden;
+  vertical-align: top;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+#JSX .jsx30combo {
+  min-width: 40px;
+}
+#JSX .jsx30combo_text {
+  background-color: transparent;
+  font-family: Verdana, sans-serif;
+  font-size: 10px;
+  text-indent: 1px;
+  overflow: hidden;
+  height: 13px;
+  margin: 1px;
+  vertical-align: top;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-left: 0px;
+  padding-top: 1px;
+}
+
+/* jsx3.gui.Tree */
+#JSX .jsx30tree {
+
+}
+#JSX .jsx30tree_text {
+  position: relative;
+  padding: 2px 3px 2px 3px;
+  cursor: default;
+  background-position: 0px 2px;
+  background-repeat: repeat-y;
+}
+#JSX .jsx30tree_empty {
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+#JSX .jsx30tree_pm {
+  position: relative;
+  width: 9px;
+  height: 9px;
+  margin: 3px 2px 4px 2px;
+  vertical-align: middle;
+}
+#JSX .jsx30tree_icon {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  margin: 0px 2px 0px 3px;
+  vertical-align: middle;
+}
+#JSX .jsx30tree_caption {
+  position: relative;
+  height: 18px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  white-space: nowrap;
+}
+#JSX .jsx30tree_content {
+  position: relative;
+  display: none;
+}
+#JSX .jsx30tree_item {
+  position: relative;
+  height: 18px;
+}
+.jsx30tree_dragicon {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  height: 20px;
+  width: 200px;
+  white-space: nowrap;
+  font-family: Verdana, sans-serif;
+  font-size: 10px;
+  padding: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #888888;
+}
+
+/* jsx3.gui.List, jsx3.gui.Grid, and jsx3.gui.Column */
+#JSX .jsx30list {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+#JSX .jsx30list_table {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  table-layout: fixed;
+  width: 100%;
+  height: 100%;
+}
+#JSX .jsx30list_headspan {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+}
+#JSX .jsx30list_headspan table {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+}
+#JSX .jsx30list_bodyspan {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  z-index: 0;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+}
+#JSX .jsx30list_bodyspan table {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+}
+#JSX .jsx30list_ghost {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  padding: 3px;
+  padding-left: 4px;
+  padding-right: 8px;
+  filter: alpha(opacity=70);
+  width: 100px;
+  height: 20px;
+  color: #000000;
+  overflow: hidden;
+  z-index: 1;
+  border: solid 1px #9898a5;
+  border-left-color: #ffffff;
+  border-top-color: #ffffff;
+  cursor: pointer;
+  visibility: hidden;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+}
+#JSX .jsx30list_colresize {
+  z-index: 1;
+  left: -10px;
+  overflow: hidden;
+  width: 4px;
+  cursor: col-resize;
+  position: absolute;
+  top: 0px;
+  height: 100%;
+  filter: alpha(opacity=70);
+}
+#JSX .jsx30list_r1 {
+  height: 20px;
+}
+#JSX .jsx30list_r2 {
+  min-height: 20px;
+}
+#JSX .jsx30list_r4 {
+  height: 20px;
+  background-color: #f8f8ff;
+}
+#JSX .jsx30column_cell {
+  border: solid 1px #9898a5;
+  border-left-color: #ffffff;
+  border-top-color: #ffffff;
+  padding-left: 4px;
+  padding-right: 8px;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+#JSX .jsx30column_anchor {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  width: 4px;
+  cursor: col-resize;
+}
+#JSX .jsx30column_c1 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-right: 8px;
+}
+#JSX .jsx30column_c2 {
+  border-bottom: solid 1px #8caedf;
+  padding-right: 8px;
+}
+#JSX .jsx30column_c3 {
+  border-bottom: solid 1px #8caedf;
+  border-right: solid 1px #8caedf;
+  padding-right: 8px;
+}
+#JSX .jsx30column_c4 {
+  border-bottom: solid 1px #8caedf;
+  border-right: solid 1px #8caedf;
+  height: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-right: 8px;
+}
+#JSX .jsx30column_d1 {
+  background-color: #e8e8f8;
+  padding-right: 8px;
+}
+#JSX .jsx30column_d2 {
+  background-color: #c8c8d8;
+  padding-right: 8px;
+}
+#JSX .jsx30column_checkbox {
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: top;
+  padding: 0px 2px 0px 2px;
+}
+
+/** jsx3.gui.Checkbox */
+#JSX .jsx30checkbox {
+  white-space: nowrap;
+  cursor: pointer;
+  vertical-align: top;
+}
+#JSX .jsx30checkbox_tristate {
+  float: left;
+}
+#JSX .jsx30checkbox input {
+  margin: -4px 0px 0px -4px;
+  padding: 0px;
+  left: 0px;
+  top: 2px;
+  position: absolute;
+}
+#JSX .jsx30checkbox_partial {
+  background-color: #333333;
+  font-size: 1px;
+  overflow: hidden;
+}
+
+/** jsx3.gui.RadioButton */
+#JSX .jsx30radio {
+  white-space: nowrap;
+  cursor: pointer;
+  vertical-align: top;
+}
+#JSX .jsx30radio_tristate {
+  float: left;
+}
+#JSX .jsx30radio input {
+  margin: -5px 0px 0px -5px;
+  padding: 0px;
+  left: 1px;
+  top: 3px;
+  position: absolute;
+}
+
+/* jsx3.gui.Dialog */
+#JSX div.jsx30dialog_modal {
+  width: 100%;
+  height: 100%;
+  filter: alpha(opacity=50);
+  background-color: #FFFFFF;
+}
+#JSX .jsx30dialog_alert {
+  font-weight: normal;
+  font-size: 10px;
+  font-family: Verdana, Arial, sans-serif;
+}
+
+#JSX .prettyxml .root  {text-indent: -20px; padding-left: 20px;} /* all lines after first line are indented x1 */
+#JSX .prettyxml .indent  {text-indent: -20px; padding-left: 20px; margin-left:-10px;} /* all lines after first line are indented x1 */
+#JSX .prettyxml .ts  {font-family: Monaco, "Courier New", Courier, monospace; font-size:11px;} /* base font */
+#JSX .prettyxml .ps  {color:#999999;} /* punctuation */
+#JSX .prettyxml .nns {color:#000000; } /* in tag */
+#JSX .prettyxml .eln {background-color: #F4F4F4; } /* element name */
+#JSX .prettyxml .tns {color:#000000;} /* text node */
+#JSX .prettyxml .cs  {color:#999999; font-style: italic; font-weight:normal;} /* comment */
+#JSX .prettyxml .pis {color:#009933;} /* processing instruction */
+#JSX .prettyxml .avs {color:#009933; font-weight:normal;} /* attribute value */
+#JSX .prettyxml .ans {color:#0033FF; background-color: #EEF4FF; } /* attribute name */
+
+
+
+/* jsx3.gui.Matrix */
+#JSX div.jsx30matrix
+{
+				overflow:hidden;
+}
+/* removed #JSX root, since style is used for default drag icon */
+table.jsx30matrix_rowtable
+{
+				table-layout:fixed;
+				font-family:Verdana;
+				font-size:10px;
+}
+div.jsx30matrix_dragicon
+{
+				position:relative;
+				height:20px;
+				width:300px;
+}
+#JSX table.jsx30matrix_ghost
+{
+				position:absolute;
+				left:0px;
+				top:0px;
+				z-index:10;
+				filter:alpha(opacity=60);
+				color:#000000;
+				background-color:#c8c8c8;
+				table-layout:fixed;
+}
+#JSX div.jsx30matrix_scroll_info
+{
+				position:absolute;
+				width:100%;
+				text-align:center;
+				top:50%;
+				left:0px;
+				height:20px;
+				padding-right:19px;
+				display:none;
+				white-space:nowrap;
+				filter:alpha(opacity=75);
+}
+#JSX span.jsx30matrix_scroll_info
+{
+				border:solid 1px #c6c6c6;
+				padding:3px;
+				background-color:#ffffcc;
+				color:#333366;
+				font-size:11px;
+				font-weight:bold;
+				font-family:Verdana;
+				margin-right:19px;
+}
+#JSX div.jsx30matrix_resize_anchor
+{
+				cursor:col-resize;
+				position:absolute;
+				top:0px;
+				overflow:hidden;
+}
+#JSX div.jsx30matrix_resize_bar
+{
+				filter:alpha(opacity=60);
+				position:absolute;
+				left:-6px;
+				top:0px;
+				width:4px;
+				height:100%;
+				background-color:blue;
+				z-index:10;
+}
+#JSX div.jsx30matrix_drop_icon {
+				position:absolute;
+				left:0px;
+				top:0px;
+				width:100px;
+				height:7px;
+				overflow:hidden;
+				display:none;
+				z-index: 10;
+				background-repeat:no-repeat;
+}
+#JSX img.jsx30matrix_plusminus
+{
+				-moz-user-select:none;
+				-moz-user-focus:ignore;
+}
+#JSX div.jsx30matrix_head
+{
+				overflow:hidden;
+}
+#JSX table.jsx30matrix_head_table
+{
+				table-layout:fixed;
+}
+#JSX div.jsx30matrix_body
+{
+				overflow:hidden;
+}
+#JSX table.jsx30matrix_body_table
+{
+				table-layout:fixed;
+}
+#JSX div.jsx30matrix_scrollv
+{
+}
+#JSX div.jsx30matrix_scrollh
+{
+}
+
+/* jsx3.gui.Matrix.Column */
+#JSX td.jsx30matrixcolumn {
+  cursor:default;
+}
+#JSX div.jsx30matrixcolumn_value {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  background-repeat:no-repeat;
+  background-position:right center;
+  cursor:default;
+}
+#JSX td.jsx30matrixcolumn_cell {
+  cursor:default;
+}
+#JSX div.jsx30matrixcolumn_cell_value {
+  width:100%;
+}
+
+/* jsx3.gui.Slider */
+#JSX span.jsx30slider {
+  vertical-align: top;
+}
+#JSX .jsx30slider_track {
+  background-color: #cccccc;
+  cursor: default;
+  overflow: hidden;
+}
+#JSX span.jsx30slider div.handle {
+  filter: alpha(opacity=100);
+}
+#JSX span.jsx30slider div.handle_disabled {
+  filter: alpha(opacity=50);
+}
+
+/** jsx3.gui.Sound */
+#JSX embed.jsx30sound {
+  width: 0px;
+  height: 0px;
+  position: absolute;
+}
+
+/** jsx3.gui.Window */
+body.jsx30window {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+  overflow: hidden;
+}
+
+/** jsx3.gui.ImageButton */
+#JSX span.jsx30imagebutton {
+  cursor: pointer;
+  vertical-align: top;
+}
+#JSX span.jsx30imagebutton_disabled {
+}
+
+/** jsx3.app.Monitor */
+#JSX pre.jsx_appmonitor {
+  padding: 0px;
+  margin: 0px;
+}
+
+/** jsx3.gui.DatePicker */
+#JSX span.jsx30datepicker {
+  vertical-align: top;
+}
+#JSX span.jsx30datepicker span.open {
+  background-repeat: no-repeat;
+  background-position: 1px 1px;
+  z-index: 1;
+  cursor: pointer;
+}
+#JSX span.jsx30datepicker input {
+  z-index: 2;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+}
+span.jsx3_dp_cal {
+	width: 140px;
+	background-color: #FFFFFF;
+}
+table.jsx3_dp_cal {
+	width: 100%;
+	border: 1px solid #336699;
+	padding: 0px; margin: 0px;
+}
+table.jsx3_dp_cal tr.year {
+	background-color: #CCDDFF;
+	font-family: Verdana, Arial, sans-serif; font-size: 10px; font-weight: bold;
+	vertical-align: middle;
+}
+table.jsx3_dp_cal tr.year td {
+	padding-bottom: 0px;
+}
+table.jsx3_dp_cal tr.month {
+	background-color: #CCDDFF;
+	font-family: Verdana, Arial, sans-serif; font-size: 11px; font-weight: bold;
+	vertical-align: middle;
+}
+table.jsx3_dp_cal td.prev {
+	text-align: left;
+	width: 15%;
+}
+table.jsx3_dp_cal td.next {
+	text-align: right;
+	width: 15%;
+}
+table.jsx3_dp_cal td.prev img, table.jsx3_dp_cal td.next img {
+	width: 14px; height: 15px;
+	cursor: pointer;
+}
+table.jsx3_dp_cal td.title {
+	text-align: center;
+	color: #333366;
+	width: 70%;
+}
+table.jsx3_dp_cal tr.days {
+}
+table.jsx3_dp_cal tr.days td.cal {
+	padding: 0px;
+}
+table.jsx3_dp_month {
+	width: 100%;
+	border-spacing: 0px;
+}
+table.jsx3_dp_month th {
+	padding: 2px;
+	font-family: Verdana, Arial, sans-serif; font-size: 10px; font-weight: bold; color: #FFFFFF;
+	text-align: center;
+	width: 17%;
+	background-color: #336699;
+}
+table.jsx3_dp_month td {
+	padding: 2px;
+	font-family: Verdana, Arial, sans-serif; font-size: 10px; font-weight: normal;
+	text-align: right;
+	cursor: pointer;
+}
+table.jsx3_dp_month td.normal {
+	background-color: #FFFFFF;
+	text-decoration: none;
+	text-align: right;
+}
+table.jsx3_dp_month td.over {
+	background-color: #FFFF99;
+	text-decoration: underline;
+	text-align: right;
+}
+table.jsx3_dp_month td.selected {
+	background-color: #FFCC00;
+	text-align: right;
+}
+table.jsx3_dp_month td.prev {
+	background-color: #CCCCCC; color: #666666;
+	text-align: right;
+}
+table.jsx3_dp_month td.next {
+	background-color: #CCCCCC; color: #666666;
+	text-align: right;
+}
+table.jsx3_dp_month td.today {
+	border: 1px solid #FF6600;
+}
+
+/** jsx3.gui.TimePicker */
+#JSX span.jsx30timepicker {
+  vertical-align: top;
+}
+#JSX span.jsx30timepicker input {
+  text-align: right;
+  background-color: transparent;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+}
+#JSX span.jsx30timepicker span.spinner {
+  overflow: hidden;
+  vertical-align: top;
+}
+#JSX span.jsx30timepicker span.spinner img {
+  border: none;
+}
+#JSX span.jsx30timepicker div.fields {
+  overflow: hidden;
+  vertical-align: top;
+}
+
+#JSX body.jsx30form { background-color:#FFFFFF; font-family:Verdana, sans-serif; font-size: 11px; }
+#JSX span.disable-output-escaping { display:none; }
+
+/** jsx3.gui.ColorPicker */
+#JSX .jsx30colorpicker {
+  vertical-align: top;
+}
+#JSX .jsx30colorpicker .gradient {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+#JSX .jsx30colorpicker span {
+}
+#JSX .jsx30colorpicker img {
+}

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><data jsxid="jsxroot">
+
+  <record group="object" include="../../../../GI_Builder/components/properties/templates/master.xml" jsxid="object"/>
+
+  <record group="1" jsxid="position" jsxtext="Positioning">
+    <record disallow="[^0-9]" docdefault="If absolutely positioned, the default is &lt;code&gt;0&lt;/code&gt;. If relatively positioned, the default is empty." docgetter="getLeft" docsetter="setLeft" eval="1" jsxexecute="objJSX.setLeft(vntValue,true);" jsxid="jsxleft" jsxmask="jsxtext" jsxtext="Left" jsxtip="Sets the distance from left edge of bounding box in pixels. Other units not supported."/>
+    <record disallow="[^0-9]" docdefault="If absolutely positioned, the default is &lt;code&gt;0&lt;/code&gt;. If relatively positioned, the default is empty." docgetter="getTop" docsetter="setTop" eval="1" jsxexecute="objJSX.setTop(vntValue,true);" jsxid="jsxtop" jsxmask="jsxtext" jsxtext="Top" jsxtip="Sets the distance from top edge of bounding box in pixels. Other units not supported."/>
+    <record docgetter="getWidth" docsetter="setWidth" eval="0" jsxexecute="objJSX.setWidth(vntValue,true);" jsxid="jsxwidth" jsxmask="jsxtext" jsxtext="Width" jsxtip="Sets the width of the chart in implied pixels or as a percentage. For exmaple, &lt;code&gt;100&lt;/code&gt; or &lt;code&gt;25%&lt;/code&gt;." validate="^([0-9]+%?)?$"/>
+    <record docgetter="getHeight" docsetter="setHeight" eval="0" jsxexecute="objJSX.setHeight(vntValue,true);" jsxid="jsxheight" jsxmask="jsxtext" jsxtext="Height" jsxtip="Sets the height of the chart in implied pixels or as a percentage. For exmaple, &lt;code&gt;100&lt;/code&gt; or &lt;code&gt;25%&lt;/code&gt;." validate="([0-9]+%?)?"/>
+    <record default="jsx3.gui.Block.RELATIVE" docdefault="Relative (&lt;code&gt;jsx3.gui.Block.RELATIVE&lt;/code&gt;)" docgetter="getRelativePosition" docsetter="setRelativePosition" eval="1" jsxexecute="objJSX.setRelativePosition(vntValue,true);" jsxid="jsxrelativeposition" jsxmask="jsxselect" jsxtext="Relative XY" jsxtip="Sets whether to place this chart relatively or absolutely with respect to its container.">
+      <enum jsxid="jsx3.gui.Block.ABSOLUTE" jsxtext="Absolute"/>
+      <enum jsxid="jsx3.gui.Block.RELATIVE" jsxtext="Relative"/>
+    </record>
+  </record>
+
+  <record group="blockx-xml" include="../../../../GI_Builder/components/properties/templates/master.xml" jsxid="blockx"/>
+
+  <record group="font" include="../../../../GI_Builder/components/properties/templates/master.xml" jsxid="font"/>
+
+  <record group="1" jsxid="jsxdisplay">
+    <record docdefault="Block (&lt;code&gt;jsx3.gui.Block.DISPLAYBLOCK&lt;/code&gt;)" docgetter="getDisplay" docsetter="setDisplay" eval="0" jsxexecute="objJSX.jsxdisplay=vntValue;objJSX.getChart().repaint();" jsxid="jsxdisplay" jsxmask="jsxselect" jsxtext="Display" jsxtip="Used to hide this chart component without removing it from the DOM hierarchy.">
+      <enum jsxid="jsx3.gui.Block.DISPLAYBLOCK" jsxtext="Block"/>
+      <enum jsxid="jsx3.gui.Block.DISPLAYNONE" jsxtext="None"/>
+    </record>
+  </record>
+
+  <record group="1" jsxid="component" jsxtext="Component">
+    <record include="master.xml" path="/data/record[@jsxid='jsxdisplay']/*"/>
+  </record>
+
+  <record group="1" jsxid="background" jsxtext="Background">
+    <record disallow="'" docdefault="Empty" docgetter="getBackgroundColor" docsetter="setBackgroundColor" eval="0" jsxid="jsxbgcolor" jsxmask="jsxcolor" jsxtext="BG Color" jsxtip="Sets the background color of this component. Accepts valid CSS values, such as predefined color names, RGB, or hexadecimal values. For example, &lt;code&gt;red&lt;/code&gt;, &lt;code&gt;rgb(255,0,0)&lt;/code&gt;, or &lt;code&gt;#ff0000&lt;/code&gt;."/>
+    <record disallow="[^0-9\.]" docdefault="&lt;code&gt;1&lt;/code&gt;" docgetter="getAlpha" docsetter="setAlpha" eval="1" jsxid="alpha" jsxmask="jsxtext" jsxtext="BG Alpha" jsxtip="Sets the background alpha (opacity) of this component (&lt;code&gt;0.0 - 1.0&lt;/code&gt;)."/>
+    <record disallow="'" docdefault="No border" docgetter="getBorderColor" docsetter="setBorderColor" eval="0" jsxid="borderColor" jsxmask="jsxtext" jsxtext="Border Color" jsxtip="Sets the border color of this component. Accepts valid CSS values, such as predefined color names, RGB, or hexadecimal values. For example, &lt;code&gt;red&lt;/code&gt;, &lt;code&gt;rgb(255,0,0)&lt;/code&gt;, or &lt;code&gt;#ff0000&lt;/code&gt;."/>
+    <record disallow="[^0-9]" docdefault="&lt;code&gt;1&lt;/code&gt;" docgetter="getBorderWidth" docsetter="setBorderWidth" eval="1" jsxid="borderWidth" jsxmask="jsxtext" jsxtext="Border Width" jsxtip="Sets the border width of this component in pixels."/>
+    <record disallow="[^0-9\.]" docdefault="&lt;code&gt;1&lt;/code&gt;" docgetter="getBorderAlpha" docsetter="setBorderAlpha" eval="1" jsxid="borderAlpha" jsxmask="jsxtext" jsxtext="Border Alpha" jsxtip="The border alpha (opacity) of this component (&lt;code&gt;0.0 - 1.0&lt;/code&gt;)."/>
+  </record>
+
+  <record group="1" jsxid="chart" jsxtext="Misc. Chart">
+    <record disallow="'" docdefault="&lt;code&gt;0&lt;/code&gt;" docgetter="getPadding" docsetter="setPadding" eval="0" jsxid="jsxpadding" jsxmask="jsxtext" jsxtext="Padding" jsxtip="Sets the white-space gap between outer edge/border of this component to its inner content. Specified as one or four pixel values (top, right, bottom, and left). For example, &lt;code&gt;5&lt;/code&gt; or &lt;code&gt;8 4 8 4&lt;/code&gt;. CSS syntax is also supported but reduces performance."/>
+    <record disallow="'" docdefault="&lt;code&gt;0&lt;/code&gt;" docgetter="getDataPadding" docsetter="setDataPadding" eval="0" jsxid="dataPadding" jsxmask="jsxtext" jsxtext="Data Area Padding" jsxtip="Sets the white-space gap between data area and its containing box. Specified as one or four pixel values (top, right, bottom, and left). For example, &lt;code&gt;5&lt;/code&gt; or &lt;code&gt;8 4 8 4&lt;/code&gt;."/>
+    <record docdefault="top (&lt;code&gt;jsx3.chart.QTOP&lt;/code&gt;)" docgetter="getTitlePlacement" docsetter="setTitlePlacement" eval="0" jsxid="titlePlacement" jsxmask="jsxselect" jsxtext="Title Placement" jsxtip="Sets the direction in which to render the title." nullable="0">
+      <enum jsxid="jsx3.chart.QTOP" jsxtext="top"/>
+      <enum jsxid="jsx3.chart.QRIGHT" jsxtext="right"/>
+      <enum jsxid="jsx3.chart.QBOTTOM" jsxtext="bottom"/>
+      <enum jsxid="jsx3.chart.QLEFT" jsxtext="left"/>
+    </record>
+    <record docdefault="right (&lt;code&gt;jsx3.chart.QRIGHT&lt;/code&gt;)" docgetter="getLegendPlacement" docsetter="setLegendPlacement" eval="0" jsxid="legendPlacement" jsxmask="jsxselect" jsxtext="Legend Placement" jsxtip="Sets the direction in which to render the legend." nullable="0">
+      <enum jsxid="jsx3.chart.QTOP" jsxtext="top"/>
+      <enum jsxid="jsx3.chart.QRIGHT" jsxtext="right"/>
+      <enum jsxid="jsx3.chart.QBOTTOM" jsxtext="bottom"/>
+      <enum jsxid="jsx3.chart.QLEFT" jsxtext="left"/>
+    </record>
+  </record>
+
+  <record group="1" jsxid="series" jsxtext="Series">
+    <record docgetter="getSeriesName" docsetter="setSeriesName" eval="0" jsxexecute="objJSX.seriesName=vntValue;objJSX.getChart().repaintParts(jsx3.chart.Chart.PART_LEGEND);" jsxid="seriesName" jsxmask="jsxtext" jsxtext="Series Name" jsxtip="Sets the jsxname of the data series displayed in the legend."/>
+    <record docgetter="getXField" docsetter="setXField" eval="0" jsxexecute="objJSX.xField=vntValue;objJSX.getChart().repaint();" jsxid="xField" jsxmask="jsxtext" jsxtext="X Field" jsxtip="Sets the attribute of the data provider containing the x value." validate="^([_a-zA-Z]\w*|)$"/>
+    <record docgetter="getYField" docsetter="setYField" eval="0" jsxexecute="objJSX.yField=vntValue;objJSX.getChart().repaint();" jsxid="yField" jsxmask="jsxtext" jsxtext="Y Field" jsxtip="Sets the attribute of the data provider containing the y value." validate="^([_a-zA-Z]\w*|)$"/>
+    <record docgetter="getMinField" docsetter="setMinField" eval="0" jsxexecute="objJSX.minField=vntValue;objJSX.getChart().repaint();" jsxid="minField" jsxmask="jsxtext" jsxtext="Min Field" jsxtip="Sets the attribute of the data provider containing the minimum value." validate="^([_a-zA-Z]\w*|)$"/>
+  </record>
+
+  <record group="1" jsxid="series_none" jsxtext="Series">
+    <record include="master.xml" path="/data/record[@jsxid='series']/record[@jsxid='seriesName']"/>
+  </record>
+
+  <record group="1" jsxid="series_xy" jsxtext="Series">
+    <record include="master.xml" path="/data/record[@jsxid='series']/record[@jsxid!='minField']"/>
+  </record>
+
+  <record group="1" jsxid="seriesfill" jsxtext="Fill">
+    <record docdefault="Default color scheme" docgetter="getFill" docsetter="setFill" eval="0" jsxexecute="objJSX.fill=vntValue;objJSX.repaint();objJSX.getChart().repaintParts(jsx3.chart.Chart.PART_LEGEND);" jsxid="fill" jsxmask="jsxtext" jsxtext="Fill" jsxtip="Sets the vector fill for this series. Specified as &lt;i&gt;color alpha&lt;/i&gt;. For example, &lt;code&gt;black 1&lt;/code&gt;."/>
+    <record docdefault="Empty" docgetter="getStroke" docsetter="setStroke" eval="0" jsxexecute="objJSX.stroke=vntValue;objJSX.repaint();objJSX.getChart().repaintParts(jsx3.chart.Chart.PART_LEGEND);" jsxid="stroke" jsxmask="jsxtext" jsxtext="Stroke" jsxtip="Sets the vector stroke for this series. Specified as &lt;i&gt;color width alpha&lt;/i&gt;. For example, &lt;code&gt;black 1 1&lt;/code&gt;."/>
+    <record docdefault="Empty" docgetter="getFillGradient" docsetter="setFillGradient" eval="0" jsxexecute="objJSX.fillGradient=vntValue;objJSX.repaint();objJSX.getChart().repaintParts(jsx3.chart.Chart.PART_LEGEND);" jsxid="fillGradient" jsxmask="jsxtext" jsxtext="Fill Gradient" jsxtip="Sets the optional gradient settings for this series. Specified as &lt;i&gt;color2 [angle [alpha2 [percent stop_color,]*]]&lt;/i&gt;. The gradient is rendered starting from the main fill color/fill alpha and ending at color2/alpha2 along the specified angle. The angle is measured in degrees counter-clockwise from 12 o'clock. Optional intermediate colors along the way are defined by percent and stop_color pairs. Pairs are separated by commas. For example, &lt;code&gt;red 0 1 50% white, 75% black&lt;/code&gt;."/>
+  </record>
+
+  <record group="1" jsxid="seriesfill_nofill" jsxtext="Fill">
+    <record include="master.xml" path="/data/record[@jsxid='seriesfill']/record[@jsxid='stroke']"/>
+  </record>
+
+  <record group="1" jsxid="point" jsxtext="Point">
+    <record docgetter="getPointRenderer" docsetter="setPointRenderer" eval="0" jsxexecute="objJSX.setPointRenderer(vntValue);objJSX.repaint();objJSX.getChart().repaintParts(jsx3.chart.Chart.PART_LEGEND);" jsxid="pointRenderer" jsxmask="jsxtext" jsxtext="Point Renderer" jsxtip="Sets the renderer to use for rendering points in this series.  Built-in renderers are fields in &lt;code&gt;jsx3.chart.PointRenderer&lt;/code&gt;. If empty, points aren't rendered." jsxtype="jsxchartrenderer"/>
+    <record docdefault="&lt;code&gt;4&lt;/code&gt;" docgetter="getPointRadius" docsetter="setPointRadius" eval="1" jsxid="pointRadius" jsxmask="jsxtext" jsxtext="Point Radius" jsxtip="Sets the radius of points in this series."/>
+    <record docdefault="Default color scheme" docgetter="getPointFill" docsetter="setPointFill" eval="0" jsxexecute="objJSX.pointFill=vntValue;objJSX.repaint();objJSX.getChart().repaintParts(jsx3.chart.Chart.PART_LEGEND);" jsxid="pointFill" jsxmask="jsxtext" jsxtext="Point Fill" jsxtip="Sets the vector fill for points in this series. Specified as &lt;i&gt;color alpha&lt;/i&gt;. For example, &lt;code&gt;black 1&lt;/code&gt;."/>
+    <record docdefault="Default color scheme" docgetter="getPointStroke" docsetter="setPointStroke" eval="0" jsxexecute="objJSX.pointStroke=vntValue;objJSX.repaint();objJSX.getChart().repaintParts(jsx3.chart.Chart.PART_LEGEND);" jsxid="pointStroke" jsxmask="jsxtext" jsxtext="Point Stroke" jsxtip="Sets the vector stroke for points in this series. Specified as &lt;i&gt;color width alpha&lt;/i&gt;. For example, &lt;code&gt;black 1 1&lt;/code&gt;."/>
+    <record docdefault="Empty" docgetter="getPointGradient" docsetter="setPointGradient" eval="0" jsxexecute="objJSX.pointGradient=vntValue;objJSX.repaint();objJSX.getChart().repaintParts(jsx3.chart.Chart.PART_LEGEND);" jsxid="pointGradient" jsxmask="jsxtext" jsxtext="Point Gradient" jsxtip="Sets the optional gradient settings for points in this series. Specified as &lt;i&gt;color2 [angle [alpha2 [percent stop_color,]*]]&lt;/i&gt;. The gradient is rendered starting from the main fill color/fill alpha and ending at color2/alpha2 along the specified angle. The angle is measured in degrees counter-clockwise from 12 o'clock. Optional intermediate colors along the way are defined by percent and stop_color pairs. Pairs are separated by commas. For example, &lt;code&gt;red 0 1 50% white, 75% black&lt;/code&gt;."/>
+  </record>
+
+  <record group="1" jsxid="pointsonly" jsxtext="Point">
+    <record docgetter="getRenderer" docsetter="setRenderer" eval="0" jsxexecute="objJSX.setRenderer(vntValue);objJSX.repaint();objJSX.getChart().repaintParts(jsx3.chart.Chart.PART_LEGEND);" jsxid="renderer" jsxmask="jsxtext" jsxtext="Renderer" jsxtip="Sets the renderer to use for rendering points in this series. Built-in renderers are fields in &lt;code&gt;jsx3.chart.PointRenderer&lt;/code&gt;. If empty, points aren't rendered." jsxtype="jsxchartrenderer"/>
+    <record include="master.xml" path="/data/record[@jsxid='seriesfill']/*"/>
+  </record>
+
+  <record group="1" jsxid="interaction" jsxtext="Interaction">
+    <record docgetter="getTooltipFunction" docsetter="setTooltipFunction" eval="0" jsxexecute="objJSX.setTooltipFunction(vntValue);objJSX.repaint();" jsxid="tooltipFunction" jsxmask="jsxtext" jsxtext="Tooltip Function" jsxtip="A static function determines what is displayed in the tooltip when the user moves the mouse over a data point, with signature &lt;code&gt;function(series, datum) : String&lt;/code&gt;. If &lt;code&gt;null&lt;/code&gt;, toolitp isn't rendered."/>
+    <record docgetter="getMenu" docsetter="setMenu" eval="0" jsxid="jsxmenu" jsxmask="jsxtext" jsxtext="Bound Menu" jsxtip="Sets the jsxname property for the context menu instance to display on a right-click."/>
+  </record>
+
+  <record group="1" jsxid="interaction_menuonly" jsxtext="Interaction">
+    <record include="master.xml" path="/data/record[@jsxid='interaction']/record[@jsxid='jsxmenu']"/>
+  </record>
+
+  <record group="1" jsxid="axis" jsxtext="Axis">
+    <record docdefault="Horizontal (&lt;code&gt;jsx3.Boolean.TRUE&lt;/code&gt;)" docgetter="getHorizontal" docsetter="setHorizontal" eval="1" jsxexecute="objJSX.horizontal=vntValue;objJSX.getChart().repaint();" jsxid="horizontal" jsxmask="jsxselect" jsxtext="Orientation" jsxtip="Sets whether the axis is horizontal or vertical.">
+      <enum jsxid="jsx3.Boolean.TRUE" jsxtext="Horizontal"/>
+      <enum jsxid="jsx3.Boolean.FALSE" jsxtext="Vertical"/>
+    </record>
+    <record docdefault="&lt;code&gt;50 vertical, 12 horizontal&lt;/code&gt;" docgetter="getDisplayWidth" docsetter="setDisplayWidth" eval="1" jsxexecute="objJSX.displayWidth=vntValue;objJSX.getChart().repaint();" jsxid="displayWidth" jsxmask="jsxtext" jsxtext="Width" jsxtip="Sets the amount of space in pixels that the axis ticks, labels, and title occupy."/>
+  </record>
+
+  <record group="1" jsxid="axisticks" jsxtext="Tick">
+    <record docdefault="&lt;code&gt;FALSE (jsx3.Boolean.FALSE)&lt;/code&gt;" docgetter="getShowAxis" docsetter="setShowAxis" eval="1" jsxid="showAxis" jsxmask="jsxselect" jsxtext="Show Axis" jsxtip="Sets whether to show a line along the axis.">
+      <enum jsxid="jsx3.Boolean.TRUE" jsxtext="TRUE"/>
+      <enum jsxid="jsx3.Boolean.FALSE" jsxtext="FALSE"/>
+    </record>
+    <record docdefault="&lt;code&gt;black 1 1&lt;/code&gt;" docgetter="getAxisStroke" docsetter="setAxisStroke" eval="0" jsxid="axisStroke" jsxmask="jsxtext" jsxtext="Axis Stroke" jsxtip="Sets the vector stroke to use for drawing the line along the axis. Specified as &lt;i&gt;color width alpha&lt;/i&gt;. For example, &lt;code&gt;black 1 1&lt;/code&gt;."/>
+    <record docdefault="&lt;code&gt;0&lt;/code&gt;" docgetter="getTickLength" docsetter="setTickLength" eval="1" jsxid="tickLength" jsxmask="jsxtext" jsxtext="Mj Tick Length" jsxtip="Sets the length of major ticks."/>
+    <record docdefault="Empty" docgetter="getTickStroke" docsetter="setTickStroke" eval="0" jsxid="tickStroke" jsxmask="jsxtext" jsxtext="Mj Tick Stroke" jsxtip="Sets the vector stroke to use for drawing major ticks. Specified as &lt;i&gt;color width alpha&lt;/i&gt;. For example, &lt;code&gt;black 1 1&lt;/code&gt;. If empty, ticks aren't rendered."/>
+    <record docdefault="none (&lt;code&gt;jsx3.chart.Axis.TICK_NONE&lt;/code&gt;)" docgetter="getTickPlacement" docsetter="setTickPlacement" eval="0" jsxid="tickPlacement" jsxmask="jsxselect" jsxtext="Mj Tick Placement" jsxtip="Sets the placement of major ticks." nullable="0">
+      <enum jsxid="jsx3.chart.Axis.TICK_INSIDE" jsxtext="inside"/>
+      <enum jsxid="jsx3.chart.Axis.TICK_OUTSIDE" jsxtext="outside"/>
+      <enum jsxid="jsx3.chart.Axis.TICK_CROSS" jsxtext="cross"/>
+      <enum jsxid="jsx3.chart.Axis.TICK_NONE" jsxtext="none"/>
+    </record>
+    <record docdefault="&lt;code&gt;0&lt;/code&gt;" docgetter="getMinorTickLength" docsetter="setMinorTickLength" eval="1" jsxid="minorTickLength" jsxmask="jsxtext" jsxtext="Mn Tick Length" jsxtip="Sets the length of minor ticks."/>
+    <record docdefault="Empty" docgetter="getMinorTickStroke" docsetter="setMinorTickStroke" eval="0" jsxid="minorTickStroke" jsxmask="jsxtext" jsxtext="Mn Tick Stroke" jsxtip="Sets the vector stroke to use for drawing minor ticks. Specified as &lt;i&gt;color width alpha&lt;/i&gt;. For example, &lt;code&gt;black 1 1&lt;/code&gt;. If empty, ticks aren't rendered."/>
+    <record docdefault="none (&lt;code&gt;jsx3.chart.Axis.TICK_NONE&lt;/code&gt;)" docgetter="getMinorTickPlacement" docsetter="setMinorTickPlacement" eval="0" jsxid="minorTickPlacement" jsxmask="jsxselect" jsxtext="Mn Tick Placement" jsxtip="Sets the placement of minor ticks." nullable="0">
+      <enum jsxid="jsx3.chart.Axis.TICK_INSIDE" jsxtext="inside"/>
+      <enum jsxid="jsx3.chart.Axis.TICK_OUTSIDE" jsxtext="outside"/>
+      <enum jsxid="jsx3.chart.Axis.TICK_CROSS" jsxtext="cross"/>
+      <enum jsxid="jsx3.chart.Axis.TICK_NONE" jsxtext="none"/>
+    </record>
+    <record docdefault="&lt;code&gt;0&lt;/code&gt;" docgetter="getMinorTickDivisions" docsetter="setMinorTickDivisions" eval="1" jsxexecute="objJSX.minorTickDivisions=vntValue;objJSX.getChart().repaint();" jsxid="minorTickDivisions" jsxmask="jsxtext" jsxtext="Mn Tick Divisions" jsxtip="Sets the number of minor tick divisions between major ticks. The number of minor ticks shown are less than this value."/>
+  </record>
+
+  <record group="1" jsxid="axislabels" jsxtext="Label">
+    <record docdefault="&lt;code&gt;FALSE (jsx3.Boolean.FALSE)&lt;/code&gt;" docgetter="getShowLabels" docsetter="setShowLabels" eval="1" jsxexecute="objJSX.showLabels=vntValue;objJSX.getChart().repaint();" jsxid="showLabels" jsxmask="jsxselect" jsxtext="Show Labels" jsxtip="Sets whether to show data labels along the axis.">
+      <enum jsxid="jsx3.Boolean.TRUE" jsxtext="TRUE"/>
+      <enum jsxid="jsx3.Boolean.FALSE" jsxtext="FALSE"/>
+    </record>
+    <record docdefault="&lt;code&gt;0&lt;/code&gt;" docgetter="getLabelGap" docsetter="setLabelGap" eval="1" jsxid="labelGap" jsxmask="jsxtext" jsxtext="Label Gap" jsxtip="Sets the gap between tick marks and labels in pixels."/>
+    <record docdefault="axis (&lt;code&gt;jsx3.chart.Axis.LABEL_AXIS&lt;/code&gt;)" docgetter="getLabelPlacement" docsetter="setLabelPlacement" eval="0" jsxexecute="objJSX.labelPlacement=vntValue;objJSX.getChart().repaint();" jsxid="labelPlacement" jsxmask="jsxselect" jsxtext="Label Placement" jsxtip="Sets the placement of axis labels with respect to the axis." nullable="0">
+      <enum jsxid="jsx3.chart.Axis.LABEL_AXIS" jsxtext="axis"/>
+      <enum jsxid="jsx3.chart.Axis.LABEL_HIGH" jsxtext="high"/>
+      <enum jsxid="jsx3.chart.Axis.LABEL_LOW" jsxtext="low"/>
+    </record>
+    <record docgetter="getLabelFunction" docsetter="setLabelFunction" eval="0" jsxexecute="objJSX.setLabelFunction(vntValue);objJSX.repaint();" jsxid="labelFunction" jsxmask="jsxtext" jsxtext="Label Function" jsxtip="A function that formats the labels to be displayed next to major ticks with signature function(value) : String. Static methods in &lt;code&gt;jsx3.chart.Axis&lt;/code&gt; can be used here." jsxtype="jsxchartaxisformatter"/>
+    <record docdefault="Empty" docgetter="getLabelClass" docsetter="setLabelClass" eval="0" jsxid="labelClass" jsxmask="jsxtext" jsxtext="Label CSS Class" jsxtip="Sets the jsxname of a CSS class to use to format major tick labels."/>
+    <record docdefault="Empty" docgetter="getLabelStyle" docsetter="setLabelStyle" eval="0" jsxid="labelStyle" jsxmask="jsxtext" jsxtext="Label CSS Styles" jsxtip="Sets the additional styles attribute to use to format the axis value labels."/>
+  </record>
+
+  <record group="1" jsxid="colorFunction">
+    <record docgetter="getColorFunction" docsetter="setColorFunction" eval="0" jsxexecute="objJSX.setColorFunction(vntValue);objJSX.repaint();" jsxid="colorFunction" jsxmask="jsxtext" jsxtext="Color Function" jsxtip="A static function used to color per-category regions in a series. The signature of the function is &lt;code&gt;function(record:jsx3.xml.Entity, index:int) : jsx3.vector.Fill&lt;/code&gt;."/>
+  </record>
+
+</data>

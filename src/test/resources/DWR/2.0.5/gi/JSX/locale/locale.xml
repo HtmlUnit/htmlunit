@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><data jsxid="jsxroot" jsxns="urn:tibco.com/v3.0/dynamicproperties/1">
+
+  <!-- Localize DatePicker, DateFormat, and NumberFormat -->
+  <record eval="1" jsxid="date.month" jsxtext="['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',         'November', 'December']"/>
+  <record eval="1" jsxid="date.day" jsxtext="['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']"/>
+  <record eval="1" jsxid="date.era" jsxtext="['BC', 'AD']"/>
+  <record eval="1" jsxid="date.firstWeekDay" jsxtext="0"/>
+
+  <record jsxid="format.date.full" jsxtext="EEEE, MMMM d, yyyy"/>
+  <record jsxid="format.date.long" jsxtext="MMMM d, yyyy"/>
+  <record jsxid="format.date.medium" jsxtext="MMM d, yyyy"/>
+  <record jsxid="format.date.short" jsxtext="M/d/yy"/>
+  
+  <record eval="1" jsxid="time.ampm" jsxtext="['AM', 'PM']"/>
+  <record eval="1" jsxid="time.24hour" jsxtext="false"/>
+  <record jsxid="time.sep.hour-min" jsxtext=":"/>
+  <record jsxid="time.sep.min-sec" jsxtext=":"/>
+  <record jsxid="time.sep.sec-milli" jsxtext="."/>
+  <record jsxid="time.sep.ampm" jsxtext=" "/>
+
+  <record jsxid="format.time.full" jsxtext="h:mm:ss aa zzz"/>
+  <record jsxid="format.time.long" jsxtext="h:mm:ss aa zzz"/>
+  <record jsxid="format.time.medium" jsxtext="h:mm:ss aa"/>
+  <record jsxid="format.time.short" jsxtext="h:mm aa"/>
+
+  <record jsxid="number.zero" jsxtext="0"/>
+  <record jsxid="number.minus" jsxtext="-"/>
+  <record jsxid="number.grouping" jsxtext=","/>
+  <record jsxid="number.decimal" jsxtext="."/>
+  <record jsxid="number.percent" jsxtext="%"/>
+  <record jsxid="number.currency" jsxtext="$"/>
+  <record jsxid="number.currency.decimal" jsxtext="."/>
+  <!--<record jsxid="number.sci" jsxtext="E"/>-->
+  <!--<record jsxid="number.NaN" eval="1" jsxtext="'\uFFFD'"/>-->
+  <record jsxid="number.NaN" jsxtext="NaN"/>
+  <record eval="1" jsxid="number.infinity" jsxtext="'\u221E'"/>
+
+  <record jsxid="format.number" jsxtext="#,##0.#################"/>
+  <record jsxid="format.number.integer" jsxtext="#,##0"/>
+  <record jsxid="format.number.currency" jsxtext="$#,##0.00"/>
+  <record jsxid="format.number.percent" jsxtext="#,##0%"/>
+  
+  <!-- Localize the other GUI controls -->
+  <record jsxid="jsx3.gui.Select.defaultText" jsxtext="- Select -"/>  
+  <record jsxid="jsx3.gui.Select.dataUnavailable" jsxtext="- Data Unavailable -"/>  
+  <record jsxid="jsx3.gui.Select.noMatch" jsxtext="- No Match Found -"/>  
+  
+  <!-- Localize Locale -->
+  <record jsxid="format.locale.displayname" jsxtext="{0} ({1})"/>
+  
+  <record eval="1" jsxid="string.languages" jsxtext="t = {     en: 'English', es: 'Spanish', de: 'German', it: 'Italian', fr: 'French'   }"/>
+  
+  <record eval="1" jsxid="string.countries" jsxtext="t = {     US: 'United States of America', GB: 'United Kingdom', ES: 'Spain', MX: 'Mexico'   }"/>
+  
+</data>

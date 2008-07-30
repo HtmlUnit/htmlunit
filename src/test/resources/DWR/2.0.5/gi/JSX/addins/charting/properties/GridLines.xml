@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><data jsxid="jsxroot">
+	<record group="object" include="master.xml"/>
+	
+	<record group="1" jsxid="gridlines" jsxtext="GridLines">
+		<record docdefault="false (jsx3.Boolean.FALSE)" docgetter="getInForeground" docsetter="setInForeground" eval="1" jsxexecute="objJSX.inForeground=vntValue;objJSX.getChart().repaintParts(jsx3.chart.CartesianChart.PART_GRIDLINES);" jsxid="inForeground" jsxmask="jsxselect" jsxtext="Draw in Foreground" jsxtip="Sets whether to draw this component in front of or behind the data series.">
+			<enum jsxid="jsx3.Boolean.TRUE" jsxtext="TRUE"/>
+			<enum jsxid="jsx3.Boolean.FALSE" jsxtext="FALSE"/>
+		</record>
+		<record docdefault="Horizontal Above Vertical (jsx3.Boolean.TRUE)" docgetter="getHorizontalAbove" docsetter="setHorizontalAbove" eval="1" jsxid="horizontalAbove" jsxmask="jsxselect" jsxtext="Layering" jsxtip="Sets whether to draw the horizontal fill and strokes above the vertical fill and strokes.">
+			<enum jsxid="jsx3.Boolean.TRUE" jsxtext="Horizontal Above Vertical"/>
+			<enum jsxid="jsx3.Boolean.FALSE" jsxtext="Vertical Above Horizontal"/>
+		</record>
+	</record>
+	
+	<record group="1" jsxid="fillstroke" jsxtext="Fill &amp; Stroke">
+		<record docdefault="Empty" docgetter="getBorderStroke" docsetter="setBorderStroke" eval="0" jsxid="borderStroke" jsxmask="jsxtext" jsxtext="Border" jsxtip="Sets the vector stroke for the outline of this component. Specified as &lt;i&gt;color width alpha[, color2 width2 alpha2, ...]&lt;/i&gt;. For example, &lt;code&gt;black 1 1&lt;/code&gt;."/>
+		<record docdefault="Empty" docgetter="getFillV" docsetter="setFillV" eval="0" jsxexecute="objJSX.fillV=jsx3.chart.o9(vntValue);objJSX.repaint();" jsxid="fillV" jsxmask="jsxtext" jsxtext="Ver. Fill" jsxtip="Sets the vector fill between vertical major ticks. Specified as &lt;i&gt;color alpha[, color2 alpha2, ...]&lt;/i&gt;. For example, &lt;code&gt;black 1&lt;/code&gt;."/>
+		<record docdefault="Empty" docgetter="getStrokeMajorV" docsetter="setStrokeMajorV" eval="0" jsxexecute="objJSX.strokeMajorV=jsx3.chart.o9(vntValue);objJSX.repaint();" jsxid="strokeMajorV" jsxmask="jsxtext" jsxtext="Ver. Major Stroke" jsxtip="Sets the vector stroke for the vertical major ticks. Specified as &lt;i&gt;color width alpha[, color2 width2 alpha2, ...]&lt;/i&gt;. For example, &lt;code&gt;black 1 1&lt;/code&gt;."/>
+		<record docdefault="Empty" docgetter="getStrokeMinorV" docsetter="setStrokeMinorV" eval="0" jsxexecute="objJSX.strokeMinorV=jsx3.chart.o9(vntValue);objJSX.repaint();" jsxid="strokeMinorV" jsxmask="jsxtext" jsxtext="Ver. Minor Stroke" jsxtip="Sets the vector stroke for the vertical minor ticks. Specified as &lt;i&gt;color width alpha[, color2 width2 alpha2, ...]&lt;/i&gt;. For example, &lt;code&gt;black 1 1&lt;/code&gt;."/>
+		<record docdefault="Empty" docgetter="getFillH" docsetter="setFillH" eval="0" jsxexecute="objJSX.fillH=jsx3.chart.o9(vntValue);objJSX.repaint();" jsxid="fillH" jsxmask="jsxtext" jsxtext="Hor. Fill" jsxtip="Sets the vector fill between horizontal major ticks. Specified as &lt;i&gt;color alpha[, color2 alpha2, ...]&lt;/i&gt;. For example, &lt;code&gt;black 1&lt;/code&gt;."/>
+		<record docdefault="Empty" docgetter="getStrokeMajorH" docsetter="setStrokeMajorH" eval="0" jsxexecute="objJSX.strokeMajorH=jsx3.chart.o9(vntValue);objJSX.repaint();" jsxid="strokeMajorH" jsxmask="jsxtext" jsxtext="Hor. Major Stroke" jsxtip="Sets the vector stroke for the horizontal major ticks. Specified as &lt;i&gt;color width alpha[, color2 width2 alpha2, ...]&lt;/i&gt;. For example, &lt;code&gt;black 1 1&lt;/code&gt;."/>
+		<record docdefault="Empty" docgetter="getStrokeMinorrH" docsetter="setStrokeMinorH" eval="0" jsxexecute="objJSX.strokeMinorH=jsx3.chart.o9(vntValue);objJSX.repaint();" jsxid="strokeMinorH" jsxmask="jsxtext" jsxtext="Hor. Minor Stroke" jsxtip="Sets the vector stroke for the horizontal minor ticks. Specified as &lt;i&gt;color width alpha[, color2 width2 alpha2, ...]&lt;/i&gt;. For example, &lt;code&gt;black 1 1&lt;/code&gt;."/>
+	</record>
+
+	<record group="component" include="master.xml"/>
+	<record group="interaction_menuonly" include="master.xml"/>
+
+</data>
