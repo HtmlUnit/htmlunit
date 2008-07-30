@@ -25,6 +25,8 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Martin Tamme
+ * @author Sudhan Moghe
  */
 public class UrlUtilsTest extends WebTestCase {
 
@@ -96,4 +98,80 @@ public class UrlUtilsTest extends WebTestCase {
         assertEquals("http://my.home.com/index.html?xyz#ref", b.toExternalForm());
     }
 
+    /**
+     * Test {@link UrlUtils#resolveUrl(String, String)} with the normal examples taken from
+     * <a href="http://www.faqs.org/rfcs/rfc1808.html">RFC1808</a> Section 5.1.
+     */
+    @Test
+    public void resolveUrlWithNormalExamples() {
+        final String baseUrl = "http://a/b/c/d;p?q#f";
+
+        assertEquals("g:h",                  UrlUtils.resolveUrl(baseUrl, "g:h"));
+        assertEquals("http://a/b/c/g",       UrlUtils.resolveUrl(baseUrl, "g"));
+        assertEquals("http://a/b/c/g",       UrlUtils.resolveUrl(baseUrl, "./g"));
+        assertEquals("http://a/b/c/g/",      UrlUtils.resolveUrl(baseUrl, "g/"));
+        assertEquals("http://a/g",           UrlUtils.resolveUrl(baseUrl, "/g"));
+        assertEquals("http://g",             UrlUtils.resolveUrl(baseUrl, "//g"));
+        assertEquals("http://a/b/c/d;p?y",   UrlUtils.resolveUrl(baseUrl, "?y"));
+        assertEquals("http://a/b/c/g?y",     UrlUtils.resolveUrl(baseUrl, "g?y"));
+        assertEquals("http://a/b/c/g?y/./x", UrlUtils.resolveUrl(baseUrl, "g?y/./x"));
+        assertEquals("http://a/b/c/d;p?q#s", UrlUtils.resolveUrl(baseUrl, "#s"));
+        assertEquals("http://a/b/c/g#s",     UrlUtils.resolveUrl(baseUrl, "g#s"));
+        assertEquals("http://a/b/c/g#s/./x", UrlUtils.resolveUrl(baseUrl, "g#s/./x"));
+        assertEquals("http://a/b/c/g?y#s",   UrlUtils.resolveUrl(baseUrl, "g?y#s"));
+        assertEquals("http://a/b/c/d;x",     UrlUtils.resolveUrl(baseUrl, ";x"));
+        assertEquals("http://a/b/c/g;x",     UrlUtils.resolveUrl(baseUrl, "g;x"));
+        assertEquals("http://a/b/c/g;x?y#s", UrlUtils.resolveUrl(baseUrl, "g;x?y#s"));
+        assertEquals("http://a/b/c/",        UrlUtils.resolveUrl(baseUrl, "."));
+        assertEquals("http://a/b/c/",        UrlUtils.resolveUrl(baseUrl, "./"));
+        assertEquals("http://a/b/",          UrlUtils.resolveUrl(baseUrl, ".."));
+        assertEquals("http://a/b/",          UrlUtils.resolveUrl(baseUrl, "../"));
+        assertEquals("http://a/b/g",         UrlUtils.resolveUrl(baseUrl, "../g"));
+        assertEquals("http://a/",            UrlUtils.resolveUrl(baseUrl, "../.."));
+        assertEquals("http://a/",            UrlUtils.resolveUrl(baseUrl, "../../"));
+        assertEquals("http://a/g",           UrlUtils.resolveUrl(baseUrl, "../../g"));
+
+        //Following two cases were failing when original implementation was modified to handle
+        //the cases given in RFC 1808. Lots of other test cases failed because of that.
+        assertEquals(URL_FIRST + "/foo.xml", UrlUtils.resolveUrl(URL_FIRST, "/foo.xml"));
+        assertEquals(URL_FIRST + "/foo.xml", UrlUtils.resolveUrl(URL_FIRST, "foo.xml"));
+    }
+
+    /**
+     * Test {@link UrlUtils#resolveUrl(String, String)} with the abnormal examples taken from
+     * <a href="http://www.faqs.org/rfcs/rfc1808.html">RFC1808</a> Section 5.2.
+     */
+    @Test
+    public void resolveUrlWithAbnormalExamples() {
+        final String baseUrl = "http://a/b/c/d;p?q#f";
+
+        assertEquals("http://a/b/c/d;p?q#f", UrlUtils.resolveUrl(baseUrl, ""));
+        assertEquals("http://a/../g",        UrlUtils.resolveUrl(baseUrl, "../../../g"));
+        assertEquals("http://a/../../g",     UrlUtils.resolveUrl(baseUrl, "../../../../g"));
+        assertEquals("http://a/./g",         UrlUtils.resolveUrl(baseUrl, "/./g"));
+        assertEquals("http://a/../g",        UrlUtils.resolveUrl(baseUrl, "/../g"));
+        assertEquals("http://a/b/c/g.",      UrlUtils.resolveUrl(baseUrl, "g."));
+        assertEquals("http://a/b/c/.g",      UrlUtils.resolveUrl(baseUrl, ".g"));
+        assertEquals("http://a/b/c/g..",     UrlUtils.resolveUrl(baseUrl, "g.."));
+        assertEquals("http://a/b/c/..g",     UrlUtils.resolveUrl(baseUrl, "..g"));
+        assertEquals("http://a/b/g",         UrlUtils.resolveUrl(baseUrl, "./../g"));
+        assertEquals("http://a/b/c/g/",      UrlUtils.resolveUrl(baseUrl, "./g/."));
+        assertEquals("http://a/b/c/g/h",     UrlUtils.resolveUrl(baseUrl, "g/./h"));
+        assertEquals("http://a/b/c/h",       UrlUtils.resolveUrl(baseUrl, "g/../h"));
+        assertEquals("http:g",               UrlUtils.resolveUrl(baseUrl, "http:g"));
+        assertEquals("http:",                UrlUtils.resolveUrl(baseUrl, "http:"));
+    }
+
+    /**
+     * Test {@link UrlUtils#resolveUrl(String, String)} with extra examples.
+     */
+    @Test
+    public void resolveUrlWithExtraExamples() {
+        final String baseUrl = "http://a/b/c/d;p?q#f";
+
+        assertEquals("http://a/b/c/d;",      UrlUtils.resolveUrl(baseUrl, ";"));
+        assertEquals("http://a/b/c/d;p?",    UrlUtils.resolveUrl(baseUrl, "?"));
+        assertEquals("http://a/b/c/d;p?q#",  UrlUtils.resolveUrl(baseUrl, "#"));
+        assertEquals("http://a/b/c/d;p?q#s", UrlUtils.resolveUrl(baseUrl, "#s"));
+    }
 }

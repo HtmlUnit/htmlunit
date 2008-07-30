@@ -37,7 +37,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
-import java.util.StringTokenizer;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.httpclient.HttpStatus;
@@ -103,6 +102,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Ahmed Ashour
  * @author Bruce Chapman
  * @author Sudhan Moghe
+ * @author Martin Tamme
  */
 public class WebClient implements Serializable {
 
@@ -1224,125 +1224,10 @@ public class WebClient implements Serializable {
      * @return the expansion of the specified base and relative URLs
      * @throws MalformedURLException if an error occurred when creating a URL object
      */
-    public static URL expandUrl(final URL baseUrl, final String relativeUrl)
-        throws MalformedURLException {
+    public static URL expandUrl(final URL baseUrl, final String relativeUrl) throws MalformedURLException {
+        final String newUrl = UrlUtils.resolveUrl(baseUrl, relativeUrl);
 
-        if (StringUtils.isEmpty(relativeUrl)) {
-            return baseUrl;
-        }
-
-        String parseUrl = relativeUrl.trim();
-
-        // section 2.4.2 - parsing scheme
-        final int schemeIndex = parseUrl.indexOf(":");
-        if (schemeIndex != -1) {
-            boolean isProtocolSpecified = true;
-            for (int i = 0; i < schemeIndex; i++) {
-                if (Character.isLetter(parseUrl.charAt(i)) == false) {
-                    isProtocolSpecified = false;
-                    break;
-                }
-            }
-            if (isProtocolSpecified) {
-                return makeUrl(parseUrl);
-            }
-        }
-
-        // section 2.4.3 - parsing network location/login
-        if (parseUrl.startsWith("//")) {
-            return makeUrl(baseUrl.getProtocol() + ":" + parseUrl);
-        }
-
-        // section 2.4.1 - parsing fragment
-        final int fragmentIndex = parseUrl.lastIndexOf("#");
-        String reference = null;
-        if (fragmentIndex != -1) {
-            reference = StringUtils.substringAfterLast(parseUrl, "#");
-            parseUrl = parseUrl.substring(0, fragmentIndex);
-        }
-
-        // section 2.4.4 - parsing query
-        String stringQuery = null;
-        final int queryIndex = parseUrl.lastIndexOf("?");
-        if (queryIndex != -1) {
-            stringQuery = parseUrl.substring(queryIndex);
-            parseUrl = parseUrl.substring(0, queryIndex);
-        }
-
-        // section 2.4.5 - parsing parameters
-        String stringParameters = null;
-        final int parametersIndex = parseUrl.lastIndexOf(";");
-        if (parametersIndex != -1) {
-            stringParameters = parseUrl.substring(parametersIndex);
-            parseUrl = parseUrl.substring(0, parametersIndex);
-        }
-
-        // section 2.4.6 - parse path
-        final List<String> tokens = new ArrayList<String>();
-        final String stringToTokenize;
-        if (parseUrl.trim().length() == 0) {
-            stringToTokenize = baseUrl.getPath();
-        }
-        else if (parseUrl.startsWith("/")) {
-            stringToTokenize = parseUrl;
-        }
-        else {
-            String path = baseUrl.getPath();
-            if (!path.endsWith("/") && parseUrl.length() != 0) {
-                path += "/..";
-            }
-            stringToTokenize = path + "/" + parseUrl;
-        }
-
-        final String pathToTokenize = stringToTokenize;
-        final StringTokenizer tokenizer = new StringTokenizer(pathToTokenize, "/");
-        while (tokenizer.hasMoreTokens()) {
-            tokens.add(tokenizer.nextToken());
-        }
-
-        for (int i = 0; i < tokens.size(); i++) {
-            final String oneToken = tokens.get(i);
-            if (oneToken.length() == 0 || oneToken.equals(".")) {
-                tokens.remove(i--);
-            }
-            else if (oneToken.equals("..")) {
-                tokens.remove(i--);
-                if (i >= 0) {
-                    tokens.remove(i--);
-                }
-            }
-        }
-
-        final StringBuilder buffer = new StringBuilder();
-        buffer.append(baseUrl.getProtocol());
-        buffer.append("://");
-        buffer.append(baseUrl.getHost());
-        final int port = baseUrl.getPort();
-        if (port != -1) {
-            buffer.append(":");
-            buffer.append(port);
-        }
-
-        for (final String token : tokens) {
-            buffer.append("/");
-            buffer.append(token);
-        }
-
-        if (pathToTokenize.endsWith("/")) {
-            buffer.append("/");
-        }
-
-        if (stringParameters != null) {
-            buffer.append(stringParameters);
-        }
-        if (stringQuery != null) {
-            buffer.append(stringQuery);
-        }
-        if (reference != null) {
-            buffer.append("#").append(reference);
-        }
-        final String newUrlString = buffer.toString();
-        return makeUrl(newUrlString);
+        return makeUrl(newUrl);
     }
 
     private WebResponse makeWebResponseForDataUrl(final WebRequestSettings webRequestSettings) throws IOException {

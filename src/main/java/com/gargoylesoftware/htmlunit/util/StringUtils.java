@@ -20,6 +20,7 @@ package com.gargoylesoftware.htmlunit.util;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Martin Tamme
  */
 public final class StringUtils {
 
@@ -57,5 +58,28 @@ public final class StringUtils {
             }
         }
         return false;
+    }
+
+    /**
+     * Returns the index within a given string of the first occurrence of
+     * the specified search character.
+     *
+     * @param s          a string.
+     * @param searchChar a search character.
+     * @param beginIndex the index to start the search from.
+     * @param endIndex   the index to stop the search.
+     * @return the index of the first occurrence of the character in the string or <tt>-1</tt>.
+     */
+    public static int indexOf(
+            final String s,
+            final char searchChar,
+            final int beginIndex,
+            final int endIndex) {
+        for (int i = beginIndex; i < endIndex; i++) {
+            if (s.charAt(i) == searchChar) {
+                return i;
+            }
+        }
+        return -1;
     }
 }
