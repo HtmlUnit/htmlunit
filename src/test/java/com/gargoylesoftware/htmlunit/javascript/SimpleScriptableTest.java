@@ -17,7 +17,9 @@ package com.gargoylesoftware.htmlunit.javascript;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -395,5 +397,44 @@ public class SimpleScriptableTest extends WebTestCase {
             + "</body></html>";
 
         loadPageWithAlerts(html);
+    }
+
+    /**
+     * Test JavaScript: 'new Date().getTimezoneOffset()' compared to java.text.SimpleDateFormat.format().
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.NONE)
+    public void dateGetTimezoneOffset() throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var offset = Math.abs(new Date().getTimezoneOffset());\n"
+            + "    var timezone = '' + (offset/60);\n"
+            + "    if (timezone.length == 1)\n"
+            + "      timezone = '0' + timezone;\n"
+            + "    alert(timezone);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        final String timeZone = new SimpleDateFormat("Z").format(Calendar.getInstance().getTime());
+        final String hour = timeZone.substring(1, 3);
+        String strMinutes = timeZone.substring(3, 5);
+        final int minutes = Integer.parseInt(strMinutes);
+        final StringBuilder sb = new StringBuilder();
+        if (minutes != 0) {
+            sb.append(hour.substring(1));
+            strMinutes = String.valueOf((double) minutes / 60);
+            strMinutes = strMinutes.substring(1);
+            sb.append(strMinutes);
+        }
+        else {
+            sb.append(hour);
+        }
+        final String[] expectedAlerts = {sb.toString()};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }
