@@ -25,7 +25,7 @@ public class HTMLHtmlElement extends HTMLElement {
     private static final long serialVersionUID = 4942983761903195465L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLHtmlElement() {
         // Empty.
