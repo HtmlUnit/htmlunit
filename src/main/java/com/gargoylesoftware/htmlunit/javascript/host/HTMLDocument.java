@@ -40,6 +40,7 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.UniqueTag;
 import org.w3c.dom.DOMException;
+import org.xml.sax.SAXException;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -146,7 +147,7 @@ public class HTMLDocument extends Document {
 
     /**
      * JavaScript constructor. This must be declared in every JavaScript file because
-     * the rhino engine won't walk up the hierarchy looking for constructors.
+     * the Rhino engine won't walk up the hierarchy looking for constructors.
      */
     public void jsConstructor() {
         // Empty.
@@ -211,7 +212,6 @@ public class HTMLDocument extends Document {
             else {
                 xpath = ".//a[@name]";
             }
-
             anchors_.init(getDomNodeOrDie(), xpath);
         }
         return anchors_;
@@ -265,9 +265,9 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Gets the document instance.
-     * @param document maybe the prototype when function is used without "this"
-     * @return the current document
+     * Returns the current document instance, using <tt>thisObj</tt> as a hint.
+     * @param thisObj a hint as to the current document (may be the prototype when function is used without "this")
+     * @return the current document instance
      */
     private static HTMLDocument getDocument(final Scriptable thisObj) {
         // if function is used "detached", then thisObj is the top scope (ie Window), not the real object
@@ -684,10 +684,8 @@ public class HTMLDocument extends Document {
     public Object jsxFunction_createElement(final String tagName) {
         Object result = NOT_FOUND;
         try {
-            final BrowserVersion browserVersion = getBrowserVersion();
-
             //IE can handle HTML
-            if (tagName.startsWith("<") && browserVersion.isIE()) {
+            if (tagName.startsWith("<") && getBrowserVersion().isIE()) {
                 try {
                     final HtmlElement proxyNode = new HtmlDivision(null, HtmlDivision.TAG_NAME, getHtmlPage(), null);
                     HTMLParser.parseFragment(proxyNode, tagName);
@@ -695,10 +693,15 @@ public class HTMLDocument extends Document {
                     resultNode.removeAllChildren();
                     result = resultNode.getScriptObject();
                 }
-                catch (final Exception e) {
-                    getLog().error("Unexpected exception occurred while parsing HTML snippet", e);
-                    throw Context.reportRuntimeError("Unexpected exception occurred while parsing HTML snippet: "
-                            + e.getMessage());
+                catch (final SAXException e) {
+                    final String msg = "Unexpected exception occurred while parsing HTML snippet";
+                    getLog().error(msg, e);
+                    throw Context.reportRuntimeError(msg + ": " + e.getMessage());
+                }
+                catch (final IOException e) {
+                    final String msg = "Unexpected exception occurred while parsing HTML snippet";
+                    getLog().error(msg, e);
+                    throw Context.reportRuntimeError(msg + ": " + e.getMessage());
                 }
             }
             else {
@@ -751,7 +754,6 @@ public class HTMLDocument extends Document {
         final Stylesheet stylesheet = new Stylesheet();
         stylesheet.setPrototype(getPrototype(Stylesheet.class));
         stylesheet.setParentScope(getWindow());
-
         return stylesheet;
     }
 
@@ -908,9 +910,9 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * The domain name of the server that served the document,
-     * or null if the server cannot be identified by a domain name.
-     * @return domain name
+     * Returns the domain name of the server that served the document, or <tt>null</tt> if the server
+     * cannot be identified by a domain name.
+     * @return the domain name of the server that served the document
      * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-2250147">
      * W3C documentation</a>
      */
@@ -976,8 +978,8 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Returns the value of the JavaScript attribute "scripts".
-     * @return the value of this attribute
+     * Returns the value of the JavaScript attribute <tt>scripts</tt>.
+     * @return the value of the JavaScript attribute <tt>scripts</tt>
      */
     public Object jsxGet_scripts() {
         if (scripts_ == null) {
@@ -988,8 +990,8 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Returns the value of the JavaScript attribute "selection".
-     * @return the value of this attribute
+     * Returns the value of the JavaScript attribute <tt>selection</tt>.
+     * @return the value of the JavaScript attribute <tt>selection</tt>
      */
     public Selection jsxGet_selection() {
         final Selection selection = new Selection();
@@ -999,10 +1001,10 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Returns the value of the frames property.
+     * Returns the value of the <tt>frames</tt> property.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/frames.asp">
      * MSDN documentation</a>
-     * @return the live collection of frames
+     * @return the live collection of frames contained by this document
      */
     public Object jsxGet_frames() {
         return getWindow().jsxGet_frames();
@@ -1072,11 +1074,10 @@ public class HTMLDocument extends Document {
 
     /**
      * Returns the element for the specified x coordinate and the specified y coordinate.
-     * The current implementation returns the &lt;body&gt; element.
+     * The current implementation always returns the &lt;body&gt; element.
      *
-     * @param x Specifies the X-offset, in pixels
-     * @param y Specifies the Y-offset, in pixels
-     *
+     * @param x the x offset, in pixels
+     * @param y the y offset, in pixels
      * @return the element for the specified x coordinate and the specified y coordinate
      */
     public Object jsxFunction_elementFromPoint(final int x, final int y) {
@@ -1084,10 +1085,9 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Create a new range.
-     * @return the range
-     * @see <a href="http://www.xulplanet.com/references/objref/HTMLDocument.html#method_createRange">
-     * XUL Planet</a>
+     * Creates and returns a new range.
+     * @return a new range
+     * @see <a href="http://www.xulplanet.com/references/objref/HTMLDocument.html#method_createRange">XUL Planet</a>
      */
     public Object jsxFunction_createRange() {
         final Range r = new Range();
@@ -1116,13 +1116,12 @@ public class HTMLDocument extends Document {
      * @param cmd the command identifier
      * @param userInterface display a user interface if the command supports one
      * @param value the string, number, or other value to assign (possible values depend on the command)
-     * @return <code>true></code> if the command is successful
+     * @return <code>true</code> if the command is successful
      */
     public boolean jsxFunction_execCommand(final String cmd, final boolean userInterface, final Object value) {
         if (!EXECUTE_CMDS_IE.contains(cmd)) {
             throw Context.reportRuntimeError("execCommand: invalid command >" + cmd + "<");
         }
-
         getLog().warn("Nothing done for execCommand(" + cmd + ", ...) (feature not implemented)");
         return true;
     }
@@ -1137,9 +1136,9 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Sets the element as the active element of the document.
-     * @see HTMLElement.jsxFunction_setActive()
-     * @param element the new active element
+     * Sets the specified element as the document's active element.
+     * @see HTMLElement#jsxFunction_setActive()
+     * @param element the new active element for this document
      */
     public void setActiveElement(final HTMLElement element) {
         activeElement_ = element;
