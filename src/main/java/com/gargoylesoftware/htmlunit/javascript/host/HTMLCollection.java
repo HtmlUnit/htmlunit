@@ -22,7 +22,6 @@ import org.apache.commons.collections.Transformer;
 import org.apache.commons.collections.functors.NOPTransformer;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
-import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 import org.w3c.dom.Node;
@@ -105,8 +104,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     }
 
     /**
-     * Only needed to make collections like document.all available but "invisible" when
-     * simulating Firefox.
+     * Only needed to make collections like <tt>document.all</tt> available but "invisible" when simulating Firefox.
      * {@inheritDoc}
      */
     @Override
@@ -174,10 +172,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     /**
      * {@inheritDoc}
      */
-    public final Object call(
-            final Context context, final Scriptable scope,
-            final Scriptable thisObj, final Object[] args) throws JavaScriptException {
-
+    public final Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
         if (args.length == 0) {
             throw Context.reportRuntimeError("Zero arguments; need an index or a key.");
         }
@@ -187,9 +182,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     /**
      * {@inheritDoc}
      */
-    public final Scriptable construct(
-            final Context arg0, final Scriptable arg1, final Object[] arg2)
-        throws JavaScriptException {
+    public final Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
         return null;
     }
 
@@ -210,8 +203,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     }
 
     /**
-     * Returns the element at the specified index, or <tt>NOT_FOUND</tt> if the
-     * index is invalid.
+     * Returns the element at the specified index, or <tt>NOT_FOUND</tt> if the index is invalid.
      * {@inheritDoc}
      */
     @Override
@@ -237,8 +229,8 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     }
 
     /**
-     * Compute the elements which associated host objects are available through this collection.
-     * @return the elements
+     * Returns the elements whose associated host objects are available through this collection.
+     * @return the elements whose associated host objects are available through this collection
      */
     protected List<Object> computeElements() {
         final List<Object> response;
@@ -393,7 +385,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     }
 
     /**
-     * Retrieves the item or items corresponding to the specified index or key.
+     * Returns the item or items corresponding to the specified index or key.
      * @param index the index or key corresponding to the element or elements to return
      * @return the element or elements corresponding to the specified index or key
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/item.asp">MSDN doc</a>
@@ -402,6 +394,13 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         return nullIfNotFound(get(index));
     }
 
+    /**
+     * Returns the specified object, unless it is the <tt>NOT_FOUND</tt> constant, in which case <tt>null</tt>
+     * is returned.
+     * @param object the object to return
+     * @return the specified object, unless it is the <tt>NOT_FOUND</tt> constant, in which case <tt>null</tt>
+     *         is returned
+     */
     private Object nullIfNotFound(final Object object) {
         if (object == NOT_FOUND) {
             return null;
@@ -435,7 +434,6 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     }
 
     /**
-     * Just for debug purpose.
      * {@inheritDoc}
      */
     @Override
@@ -477,13 +475,12 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             final int index = Integer.parseInt(name);
             final List<Object> elements = getElements();
             CollectionUtils.transform(elements, transformer_);
-
             if (index >= 0 && index < elements.size()) {
                 return true;
             }
         }
-        catch (final Exception e) {
-            //ignore
+        catch (final NumberFormatException e) {
+            // Ignore.
         }
 
         if (name.equals("length")) {
@@ -566,8 +563,6 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
 
     private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener,
         NonSerializable {
-
-        private static final long serialVersionUID = 5296270270141251350L;
 
         /**
          * {@inheritDoc}
