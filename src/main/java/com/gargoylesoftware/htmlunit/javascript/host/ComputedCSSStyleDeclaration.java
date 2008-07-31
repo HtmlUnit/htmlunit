@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static org.apache.commons.lang.StringUtils.defaultIfEmpty;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -133,19 +135,12 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         return styleMap;
     }
 
-    private String getValue(final String currentValue, final String defaultValue) {
-        if (currentValue.length() == 0) {
-            return defaultValue;
-        }
-        return currentValue;
-    }
-
     /**
      * {@inheritDoc}
      */
     @Override
     public String jsxGet_backgroundAttachment() {
-        return getValue(super.jsxGet_backgroundAttachment(), "scroll");
+        return defaultIfEmpty(super.jsxGet_backgroundAttachment(), "scroll");
     }
 
     /**
@@ -153,7 +148,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_backgroundColor() {
-        return getValue(super.jsxGet_backgroundColor(), "transparent");
+        return defaultIfEmpty(super.jsxGet_backgroundColor(), "transparent");
     }
 
     /**
@@ -161,7 +156,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_backgroundImage() {
-        return getValue(super.jsxGet_backgroundImage(), "none");
+        return defaultIfEmpty(super.jsxGet_backgroundImage(), "none");
     }
 
     /**
@@ -169,7 +164,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_backgroundRepeat() {
-        return getValue(super.jsxGet_backgroundRepeat(), "repeat");
+        return defaultIfEmpty(super.jsxGet_backgroundRepeat(), "repeat");
     }
 
     /**
@@ -177,7 +172,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_borderBottomColor() {
-        return getValue(super.jsxGet_borderBottomColor(), "rgb(0, 0, 0)");
+        return defaultIfEmpty(super.jsxGet_borderBottomColor(), "rgb(0, 0, 0)");
     }
 
     /**
@@ -185,7 +180,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_borderBottomStyle() {
-        return getValue(super.jsxGet_borderBottomStyle(), "none");
+        return defaultIfEmpty(super.jsxGet_borderBottomStyle(), "none");
     }
 
     /**
@@ -193,7 +188,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_borderBottomWidth() {
-        return getValue(super.jsxGet_borderBottomWidth(), "0px");
+        return defaultIfEmpty(super.jsxGet_borderBottomWidth(), "0px");
     }
 
     /**
@@ -201,7 +196,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_borderCollapse() {
-        return getValue(super.jsxGet_borderCollapse(), "separate");
+        return defaultIfEmpty(super.jsxGet_borderCollapse(), "separate");
     }
 
     /**
@@ -209,7 +204,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_borderLeftColor() {
-        return getValue(super.jsxGet_borderLeftColor(), "rgb(0, 0, 0)");
+        return defaultIfEmpty(super.jsxGet_borderLeftColor(), "rgb(0, 0, 0)");
     }
 
     /**
@@ -217,7 +212,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_borderLeftStyle() {
-        return getValue(super.jsxGet_borderLeftStyle(), "none");
+        return defaultIfEmpty(super.jsxGet_borderLeftStyle(), "none");
     }
 
     /**
@@ -225,7 +220,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_borderLeftWidth() {
-        return getValue(super.jsxGet_borderLeftWidth(), "0px");
+        return defaultIfEmpty(super.jsxGet_borderLeftWidth(), "0px");
     }
 
     /**
@@ -233,7 +228,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_borderRightColor() {
-        return getValue(super.jsxGet_borderRightColor(), "rgb(0, 0, 0)");
+        return defaultIfEmpty(super.jsxGet_borderRightColor(), "rgb(0, 0, 0)");
     }
 
     /**
@@ -241,7 +236,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_borderRightStyle() {
-        return getValue(super.jsxGet_borderRightStyle(), "none");
+        return defaultIfEmpty(super.jsxGet_borderRightStyle(), "none");
     }
 
     /**
@@ -249,7 +244,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_borderRightWidth() {
-        return getValue(super.jsxGet_borderRightWidth(), "0px");
+        return defaultIfEmpty(super.jsxGet_borderRightWidth(), "0px");
     }
 
     /**
@@ -257,7 +252,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_borderSpacing() {
-        return getValue(super.jsxGet_borderSpacing(), "0px 0px");
+        return defaultIfEmpty(super.jsxGet_borderSpacing(), "0px 0px");
     }
 
     /**
@@ -265,7 +260,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_borderTopColor() {
-        return getValue(super.jsxGet_borderTopColor(), "rgb(0, 0, 0)");
+        return defaultIfEmpty(super.jsxGet_borderTopColor(), "rgb(0, 0, 0)");
     }
 
     /**
@@ -273,7 +268,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_borderTopStyle() {
-        return getValue(super.jsxGet_borderTopStyle(), "none");
+        return defaultIfEmpty(super.jsxGet_borderTopStyle(), "none");
     }
 
     /**
@@ -281,7 +276,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_borderTopWidth() {
-        return getValue(super.jsxGet_borderTopWidth(), "0px");
+        return defaultIfEmpty(super.jsxGet_borderTopWidth(), "0px");
     }
 
     /**
@@ -289,7 +284,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_bottom() {
-        return getValue(super.jsxGet_bottom(), "auto");
+        return defaultIfEmpty(super.jsxGet_bottom(), "auto");
     }
 
     /**
@@ -297,7 +292,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_captionSide() {
-        return getValue(super.jsxGet_captionSide(), "top");
+        return defaultIfEmpty(super.jsxGet_captionSide(), "top");
     }
 
     /**
@@ -305,7 +300,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_clear() {
-        return getValue(super.jsxGet_clear(), "none");
+        return defaultIfEmpty(super.jsxGet_clear(), "none");
     }
 
     /**
@@ -313,7 +308,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_clip() {
-        return getValue(super.jsxGet_clip(), "auto");
+        return defaultIfEmpty(super.jsxGet_clip(), "auto");
     }
 
     /**
@@ -321,7 +316,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_color() {
-        return getValue(super.jsxGet_color(), "rgb(0, 0, 0)");
+        return defaultIfEmpty(super.jsxGet_color(), "rgb(0, 0, 0)");
     }
 
     /**
@@ -329,7 +324,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_counterIncrement() {
-        return getValue(super.jsxGet_counterIncrement(), "none");
+        return defaultIfEmpty(super.jsxGet_counterIncrement(), "none");
     }
 
     /**
@@ -337,7 +332,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_counterReset() {
-        return getValue(super.jsxGet_counterReset(), "none");
+        return defaultIfEmpty(super.jsxGet_counterReset(), "none");
     }
 
     /**
@@ -345,7 +340,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_cssFloat() {
-        return getValue(super.jsxGet_cssFloat(), "none");
+        return defaultIfEmpty(super.jsxGet_cssFloat(), "none");
     }
 
     /**
@@ -353,7 +348,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_cursor() {
-        return getValue(super.jsxGet_cursor(), "auto");
+        return defaultIfEmpty(super.jsxGet_cursor(), "auto");
     }
 
     /**
@@ -361,7 +356,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_direction() {
-        return getValue(super.jsxGet_direction(), "ltr");
+        return defaultIfEmpty(super.jsxGet_direction(), "ltr");
     }
 
     /**
@@ -369,7 +364,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_display() {
-        return getValue(super.jsxGet_display(), getDefaultStyleDisplay());
+        return defaultIfEmpty(super.jsxGet_display(), getDefaultStyleDisplay());
     }
 
     private String getDefaultStyleDisplay() {
@@ -385,7 +380,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_emptyCells() {
-        return getValue(super.jsxGet_emptyCells(), "-moz-show-background");
+        return defaultIfEmpty(super.jsxGet_emptyCells(), "-moz-show-background");
     }
 
     /**
@@ -393,7 +388,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_fontFamily() {
-        return getValue(super.jsxGet_fontFamily(), "serif");
+        return defaultIfEmpty(super.jsxGet_fontFamily(), "serif");
     }
 
     /**
@@ -401,7 +396,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_fontSize() {
-        return getValue(super.jsxGet_fontSize(), "16px");
+        return defaultIfEmpty(super.jsxGet_fontSize(), "16px");
     }
 
     /**
@@ -409,7 +404,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_fontSizeAdjust() {
-        return getValue(super.jsxGet_fontSizeAdjust(), "none");
+        return defaultIfEmpty(super.jsxGet_fontSizeAdjust(), "none");
     }
 
     /**
@@ -417,7 +412,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_fontStyle() {
-        return getValue(super.jsxGet_fontStyle(), "normal");
+        return defaultIfEmpty(super.jsxGet_fontStyle(), "normal");
     }
 
     /**
@@ -425,7 +420,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_fontVariant() {
-        return getValue(super.jsxGet_fontVariant(), "normal");
+        return defaultIfEmpty(super.jsxGet_fontVariant(), "normal");
     }
 
     /**
@@ -433,7 +428,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_fontWeight() {
-        return getValue(super.jsxGet_fontWeight(), "400");
+        return defaultIfEmpty(super.jsxGet_fontWeight(), "400");
     }
 
     /**
@@ -441,7 +436,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_height() {
-        return getValue(super.jsxGet_height(), "363px");
+        return defaultIfEmpty(super.jsxGet_height(), "363px");
     }
 
     /**
@@ -449,7 +444,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_left() {
-        return getValue(super.jsxGet_left(), "auto");
+        return defaultIfEmpty(super.jsxGet_left(), "auto");
     }
 
     /**
@@ -457,7 +452,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_letterSpacing() {
-        return getValue(super.jsxGet_letterSpacing(), "normal");
+        return defaultIfEmpty(super.jsxGet_letterSpacing(), "normal");
     }
 
     /**
@@ -465,7 +460,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_lineHeight() {
-        return getValue(super.jsxGet_lineHeight(), "normal");
+        return defaultIfEmpty(super.jsxGet_lineHeight(), "normal");
     }
 
     /**
@@ -473,7 +468,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_listStyleImage() {
-        return getValue(super.jsxGet_listStyleImage(), "none");
+        return defaultIfEmpty(super.jsxGet_listStyleImage(), "none");
     }
 
     /**
@@ -481,7 +476,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_listStylePosition() {
-        return getValue(super.jsxGet_listStylePosition(), "outside");
+        return defaultIfEmpty(super.jsxGet_listStylePosition(), "outside");
     }
 
     /**
@@ -489,7 +484,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_listStyleType() {
-        return getValue(super.jsxGet_listStyleType(), "disc");
+        return defaultIfEmpty(super.jsxGet_listStyleType(), "disc");
     }
 
     /**
@@ -497,7 +492,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_marginBottom() {
-        return getValue(super.jsxGet_marginBottom(), "0px");
+        return defaultIfEmpty(super.jsxGet_marginBottom(), "0px");
     }
 
     /**
@@ -505,7 +500,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_marginLeft() {
-        return getValue(super.jsxGet_marginLeft(), "0px");
+        return defaultIfEmpty(super.jsxGet_marginLeft(), "0px");
     }
 
     /**
@@ -513,7 +508,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_marginRight() {
-        return getValue(super.jsxGet_marginRight(), "0px");
+        return defaultIfEmpty(super.jsxGet_marginRight(), "0px");
     }
 
     /**
@@ -521,7 +516,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_marginTop() {
-        return getValue(super.jsxGet_marginTop(), "0px");
+        return defaultIfEmpty(super.jsxGet_marginTop(), "0px");
     }
 
     /**
@@ -529,7 +524,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_markerOffset() {
-        return getValue(super.jsxGet_markerOffset(), "none");
+        return defaultIfEmpty(super.jsxGet_markerOffset(), "none");
     }
 
     /**
@@ -537,7 +532,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_maxHeight() {
-        return getValue(super.jsxGet_maxHeight(), "none");
+        return defaultIfEmpty(super.jsxGet_maxHeight(), "none");
     }
 
     /**
@@ -545,7 +540,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_maxWidth() {
-        return getValue(super.jsxGet_maxWidth(), "none");
+        return defaultIfEmpty(super.jsxGet_maxWidth(), "none");
     }
 
     /**
@@ -553,7 +548,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_minHeight() {
-        return getValue(super.jsxGet_minHeight(), "0px");
+        return defaultIfEmpty(super.jsxGet_minHeight(), "0px");
     }
 
     /**
@@ -561,7 +556,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_minWidth() {
-        return getValue(super.jsxGet_minWidth(), "0px");
+        return defaultIfEmpty(super.jsxGet_minWidth(), "0px");
     }
 
     /**
@@ -569,7 +564,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozAppearance() {
-        return getValue(super.jsxGet_MozAppearance(), "none");
+        return defaultIfEmpty(super.jsxGet_MozAppearance(), "none");
     }
 
     /**
@@ -577,7 +572,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozBackgroundClip() {
-        return getValue(super.jsxGet_MozBackgroundClip(), "border");
+        return defaultIfEmpty(super.jsxGet_MozBackgroundClip(), "border");
     }
 
     /**
@@ -585,7 +580,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozBackgroundInlinePolicy() {
-        return getValue(super.jsxGet_MozBackgroundInlinePolicy(), "continuous");
+        return defaultIfEmpty(super.jsxGet_MozBackgroundInlinePolicy(), "continuous");
     }
 
     /**
@@ -593,7 +588,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozBackgroundOrigin() {
-        return getValue(super.jsxGet_MozBackgroundOrigin(), "padding");
+        return defaultIfEmpty(super.jsxGet_MozBackgroundOrigin(), "padding");
     }
 
     /**
@@ -601,7 +596,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozBinding() {
-        return getValue(super.jsxGet_MozBinding(), "none");
+        return defaultIfEmpty(super.jsxGet_MozBinding(), "none");
     }
 
     /**
@@ -609,7 +604,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozBorderBottomColors() {
-        return getValue(super.jsxGet_MozBorderBottomColors(), "none");
+        return defaultIfEmpty(super.jsxGet_MozBorderBottomColors(), "none");
     }
 
     /**
@@ -617,7 +612,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozBorderLeftColors() {
-        return getValue(super.jsxGet_MozBorderLeftColors(), "none");
+        return defaultIfEmpty(super.jsxGet_MozBorderLeftColors(), "none");
     }
 
     /**
@@ -625,7 +620,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozBorderRadiusBottomleft() {
-        return getValue(super.jsxGet_MozBorderRadiusBottomleft(), "0px");
+        return defaultIfEmpty(super.jsxGet_MozBorderRadiusBottomleft(), "0px");
     }
 
     /**
@@ -633,7 +628,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozBorderRadiusBottomright() {
-        return getValue(super.jsxGet_MozBorderRadiusBottomright(), "0px");
+        return defaultIfEmpty(super.jsxGet_MozBorderRadiusBottomright(), "0px");
     }
 
     /**
@@ -641,7 +636,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozBorderRadiusTopleft() {
-        return getValue(super.jsxGet_MozBorderRadiusTopleft(), "0px");
+        return defaultIfEmpty(super.jsxGet_MozBorderRadiusTopleft(), "0px");
     }
 
     /**
@@ -649,7 +644,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozBorderRadiusTopright() {
-        return getValue(super.jsxGet_MozBorderRadiusTopright(), "0px");
+        return defaultIfEmpty(super.jsxGet_MozBorderRadiusTopright(), "0px");
     }
 
     /**
@@ -657,7 +652,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozBorderRightColors() {
-        return getValue(super.jsxGet_MozBorderRightColors(), "none");
+        return defaultIfEmpty(super.jsxGet_MozBorderRightColors(), "none");
     }
 
     /**
@@ -665,7 +660,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozBorderTopColors() {
-        return getValue(super.jsxGet_MozBorderTopColors(), "none");
+        return defaultIfEmpty(super.jsxGet_MozBorderTopColors(), "none");
     }
 
     /**
@@ -673,7 +668,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozBoxAlign() {
-        return getValue(super.jsxGet_MozBoxAlign(), "stretch");
+        return defaultIfEmpty(super.jsxGet_MozBoxAlign(), "stretch");
     }
 
     /**
@@ -681,7 +676,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozBoxDirection() {
-        return getValue(super.jsxGet_MozBoxDirection(), "normal");
+        return defaultIfEmpty(super.jsxGet_MozBoxDirection(), "normal");
     }
 
     /**
@@ -689,7 +684,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozBoxFlex() {
-        return getValue(super.jsxGet_MozBoxFlex(), "0");
+        return defaultIfEmpty(super.jsxGet_MozBoxFlex(), "0");
     }
 
     /**
@@ -697,7 +692,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozBoxOrdinalGroup() {
-        return getValue(super.jsxGet_MozBoxOrdinalGroup(), "1");
+        return defaultIfEmpty(super.jsxGet_MozBoxOrdinalGroup(), "1");
     }
 
     /**
@@ -705,7 +700,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozBoxOrient() {
-        return getValue(super.jsxGet_MozBoxOrient(), "horizontal");
+        return defaultIfEmpty(super.jsxGet_MozBoxOrient(), "horizontal");
     }
 
     /**
@@ -713,7 +708,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozBoxPack() {
-        return getValue(super.jsxGet_MozBoxPack(), "start");
+        return defaultIfEmpty(super.jsxGet_MozBoxPack(), "start");
     }
 
     /**
@@ -721,7 +716,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozBoxSizing() {
-        return getValue(super.jsxGet_MozBoxSizing(), "content-box");
+        return defaultIfEmpty(super.jsxGet_MozBoxSizing(), "content-box");
     }
 
     /**
@@ -729,7 +724,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozColumnCount() {
-        return getValue(super.jsxGet_MozColumnCount(), "auto");
+        return defaultIfEmpty(super.jsxGet_MozColumnCount(), "auto");
     }
 
     /**
@@ -737,7 +732,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozColumnGap() {
-        return getValue(super.jsxGet_MozColumnGap(), "0px");
+        return defaultIfEmpty(super.jsxGet_MozColumnGap(), "0px");
     }
 
     /**
@@ -745,7 +740,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozColumnWidth() {
-        return getValue(super.jsxGet_MozColumnWidth(), "auto");
+        return defaultIfEmpty(super.jsxGet_MozColumnWidth(), "auto");
     }
 
     /**
@@ -753,7 +748,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozFloatEdge() {
-        return getValue(super.jsxGet_MozFloatEdge(), "content-box");
+        return defaultIfEmpty(super.jsxGet_MozFloatEdge(), "content-box");
     }
 
     /**
@@ -761,7 +756,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozImageRegion() {
-        return getValue(super.jsxGet_MozImageRegion(), "auto");
+        return defaultIfEmpty(super.jsxGet_MozImageRegion(), "auto");
     }
 
     /**
@@ -769,7 +764,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozOpacity() {
-        return getValue(super.jsxGet_MozOpacity(), "1");
+        return defaultIfEmpty(super.jsxGet_MozOpacity(), "1");
     }
 
     /**
@@ -777,7 +772,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozOutlineColor() {
-        return getValue(super.jsxGet_MozOutlineColor(), "rgb(0, 0, 0)");
+        return defaultIfEmpty(super.jsxGet_MozOutlineColor(), "rgb(0, 0, 0)");
     }
 
     /**
@@ -785,7 +780,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozOutlineOffset() {
-        return getValue(super.jsxGet_MozOutlineOffset(), "0px");
+        return defaultIfEmpty(super.jsxGet_MozOutlineOffset(), "0px");
     }
 
     /**
@@ -793,7 +788,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozOutlineRadiusBottomleft() {
-        return getValue(super.jsxGet_MozOutlineRadiusBottomleft(), "0px");
+        return defaultIfEmpty(super.jsxGet_MozOutlineRadiusBottomleft(), "0px");
     }
 
     /**
@@ -801,7 +796,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozOutlineRadiusBottomright() {
-        return getValue(super.jsxGet_MozOutlineRadiusBottomright(), "0px");
+        return defaultIfEmpty(super.jsxGet_MozOutlineRadiusBottomright(), "0px");
     }
 
     /**
@@ -809,7 +804,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozOutlineRadiusTopleft() {
-        return getValue(super.jsxGet_MozOutlineRadiusTopleft(), "0px");
+        return defaultIfEmpty(super.jsxGet_MozOutlineRadiusTopleft(), "0px");
     }
 
     /**
@@ -817,7 +812,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozOutlineRadiusTopright() {
-        return getValue(super.jsxGet_MozOutlineRadiusTopright(), "0px");
+        return defaultIfEmpty(super.jsxGet_MozOutlineRadiusTopright(), "0px");
     }
 
     /**
@@ -825,7 +820,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozOutlineStyle() {
-        return getValue(super.jsxGet_MozOutlineStyle(), "none");
+        return defaultIfEmpty(super.jsxGet_MozOutlineStyle(), "none");
     }
 
     /**
@@ -833,7 +828,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozOutlineWidth() {
-        return getValue(super.jsxGet_MozOutlineWidth(), "0px");
+        return defaultIfEmpty(super.jsxGet_MozOutlineWidth(), "0px");
     }
 
     /**
@@ -841,7 +836,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozUserFocus() {
-        return getValue(super.jsxGet_MozUserFocus(), "none");
+        return defaultIfEmpty(super.jsxGet_MozUserFocus(), "none");
     }
 
     /**
@@ -849,7 +844,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozUserInput() {
-        return getValue(super.jsxGet_MozUserInput(), "auto");
+        return defaultIfEmpty(super.jsxGet_MozUserInput(), "auto");
     }
 
     /**
@@ -857,7 +852,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozUserModify() {
-        return getValue(super.jsxGet_MozUserModify(), "read-only");
+        return defaultIfEmpty(super.jsxGet_MozUserModify(), "read-only");
     }
 
     /**
@@ -865,7 +860,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozUserSelect() {
-        return getValue(super.jsxGet_MozUserSelect(), "auto");
+        return defaultIfEmpty(super.jsxGet_MozUserSelect(), "auto");
     }
 
     /**
@@ -873,7 +868,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_opacity() {
-        return getValue(super.jsxGet_opacity(), "1");
+        return defaultIfEmpty(super.jsxGet_opacity(), "1");
     }
 
     /**
@@ -881,7 +876,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_outlineColor() {
-        return getValue(super.jsxGet_outlineColor(), "rgb(0, 0, 0)");
+        return defaultIfEmpty(super.jsxGet_outlineColor(), "rgb(0, 0, 0)");
     }
 
     /**
@@ -889,7 +884,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_outlineOffset() {
-        return getValue(super.jsxGet_outlineOffset(), "0px");
+        return defaultIfEmpty(super.jsxGet_outlineOffset(), "0px");
     }
 
     /**
@@ -897,7 +892,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_outlineStyle() {
-        return getValue(super.jsxGet_outlineStyle(), "none");
+        return defaultIfEmpty(super.jsxGet_outlineStyle(), "none");
     }
 
     /**
@@ -905,7 +900,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_outlineWidth() {
-        return getValue(super.jsxGet_outlineWidth(), "0px");
+        return defaultIfEmpty(super.jsxGet_outlineWidth(), "0px");
     }
 
     /**
@@ -913,7 +908,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_overflow() {
-        return getValue(super.jsxGet_overflow(), "visible");
+        return defaultIfEmpty(super.jsxGet_overflow(), "visible");
     }
 
     /**
@@ -921,7 +916,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_overflowX() {
-        return getValue(super.jsxGet_overflowX(), "visible");
+        return defaultIfEmpty(super.jsxGet_overflowX(), "visible");
     }
 
     /**
@@ -929,7 +924,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_overflowY() {
-        return getValue(super.jsxGet_overflowY(), "visible");
+        return defaultIfEmpty(super.jsxGet_overflowY(), "visible");
     }
 
     /**
@@ -937,7 +932,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_paddingBottom() {
-        return getValue(super.jsxGet_paddingBottom(), "0px");
+        return defaultIfEmpty(super.jsxGet_paddingBottom(), "0px");
     }
 
     /**
@@ -945,7 +940,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_paddingLeft() {
-        return getValue(super.jsxGet_paddingLeft(), "0px");
+        return defaultIfEmpty(super.jsxGet_paddingLeft(), "0px");
     }
 
     /**
@@ -953,7 +948,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_paddingRight() {
-        return getValue(super.jsxGet_paddingRight(), "0px");
+        return defaultIfEmpty(super.jsxGet_paddingRight(), "0px");
     }
 
     /**
@@ -961,7 +956,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_paddingTop() {
-        return getValue(super.jsxGet_paddingTop(), "0px");
+        return defaultIfEmpty(super.jsxGet_paddingTop(), "0px");
     }
 
     /**
@@ -969,7 +964,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_position() {
-        return getValue(super.jsxGet_position(), "static");
+        return defaultIfEmpty(super.jsxGet_position(), "static");
     }
 
     /**
@@ -977,7 +972,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_right() {
-        return getValue(super.jsxGet_right(), "auto");
+        return defaultIfEmpty(super.jsxGet_right(), "auto");
     }
 
     /**
@@ -985,7 +980,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_tableLayout() {
-        return getValue(super.jsxGet_tableLayout(), "auto");
+        return defaultIfEmpty(super.jsxGet_tableLayout(), "auto");
     }
 
     /**
@@ -993,7 +988,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_textAlign() {
-        return getValue(super.jsxGet_textAlign(), "start");
+        return defaultIfEmpty(super.jsxGet_textAlign(), "start");
     }
 
     /**
@@ -1001,7 +996,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_textDecoration() {
-        return getValue(super.jsxGet_textDecoration(), "none");
+        return defaultIfEmpty(super.jsxGet_textDecoration(), "none");
     }
 
     /**
@@ -1009,7 +1004,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_textIndent() {
-        return getValue(super.jsxGet_textIndent(), "0px");
+        return defaultIfEmpty(super.jsxGet_textIndent(), "0px");
     }
 
     /**
@@ -1017,7 +1012,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_textTransform() {
-        return getValue(super.jsxGet_textTransform(), "none");
+        return defaultIfEmpty(super.jsxGet_textTransform(), "none");
     }
 
     /**
@@ -1025,7 +1020,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_top() {
-        return getValue(super.jsxGet_top(), "auto");
+        return defaultIfEmpty(super.jsxGet_top(), "auto");
     }
 
     /**
@@ -1033,7 +1028,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_unicodeBidi() {
-        return getValue(super.jsxGet_unicodeBidi(), "normal");
+        return defaultIfEmpty(super.jsxGet_unicodeBidi(), "normal");
     }
 
     /**
@@ -1041,7 +1036,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_verticalAlign() {
-        return getValue(super.jsxGet_verticalAlign(), "baseline");
+        return defaultIfEmpty(super.jsxGet_verticalAlign(), "baseline");
     }
 
     /**
@@ -1049,7 +1044,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_visibility() {
-        return getValue(super.jsxGet_visibility(), "visible");
+        return defaultIfEmpty(super.jsxGet_visibility(), "visible");
     }
 
     /**
@@ -1057,7 +1052,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_whiteSpace() {
-        return getValue(super.jsxGet_whiteSpace(), "normal");
+        return defaultIfEmpty(super.jsxGet_whiteSpace(), "normal");
     }
 
     /**
@@ -1072,11 +1067,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         else {
             defaultWidth = "1256px";
         }
-        return getValue(super.jsxGet_width(), defaultWidth);
+        return defaultIfEmpty(super.jsxGet_width(), defaultWidth);
     }
 
     /**
-     * Returns the element's width, possibly including its padding and border
+     * Returns the element's width, possibly including its padding and border.
+     * @param includeBorder whether or not to include the border width in the returned value
+     * @param includePadding whether or not to include the padding width in the returned value
      * @return the element's width, possibly including its padding and border
      */
     int getCalculatedWidth(final boolean includeBorder, final boolean includePadding) {
@@ -1095,7 +1092,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     /**
-     * Returns the element's height, possibly including its padding and border
+     * Returns the element's height, possibly including its padding and border.
+     * @param includeBorder whether or not to include the border height in the returned value
+     * @param includePadding whether or not to include the padding height in the returned value
      * @return the element's height, possibly including its padding and border
      */
     int getCalculatedHeight(final boolean includeBorder, final boolean includePadding) {
@@ -1115,6 +1114,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     /**
      * Returns the computed top (Y coordinate), relative to the node's parent's top edge.
+     * @param includeMargin whether or not to take the margin into account in the calculation
+     * @param includeBorder whether or not to take the border into account in the calculation
+     * @param includePadding whether or not to take the padding into account in the calculation
      * @return the computed top (Y coordinate), relative to the node's parent's top edge
      */
     int getTop(final boolean includeMargin, final boolean includeBorder, final boolean includePadding) {
@@ -1176,6 +1178,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     /**
      * Returns the computed left (X coordinate), relative to the node's parent's left edge.
+     * @param includeMargin whether or not to take the margin into account in the calculation
+     * @param includeBorder whether or not to take the border into account in the calculation
+     * @param includePadding whether or not to take the padding into account in the calculation
      * @return the computed left (X coordinate), relative to the node's parent's left edge
      */
     int getLeft(final boolean includeMargin, final boolean includeBorder, final boolean includePadding) {
@@ -1221,6 +1226,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         return left;
     }
 
+    /**
+     * Converts the specified length string value into an integer number of pixels.
+     * @param value the length string value to convert to an integer number of pixels
+     * @return the integer number of pixels corresponding to the specified length string value
+     */
     private int intValue(final String value) {
         return NumberUtils.toInt(value.replaceAll("(\\d+).*", "$1"), 0);
     }
@@ -1230,7 +1240,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_wordSpacing() {
-        return getValue(super.jsxGet_wordSpacing(), "normal");
+        return defaultIfEmpty(super.jsxGet_wordSpacing(), "normal");
     }
 
     /**
