@@ -74,7 +74,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
     }
 
     /**
-     * Creates an instance and set its parent scope to the one of the provided element.
+     * Creates an instance and sets its parent scope to the one of the provided element.
      * @param element the element to which this style is bound
      */
     CSSStyleDeclaration(final HTMLElement element) {
@@ -84,8 +84,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
     }
 
     /**
-     * Creates an instance and set its parent scope to the one of the provided element.
-     * @param element the element to which this style is bound
+     * Creates an instance which wraps the specified style declaration.
+     * @param parentScope the parent scope to use
+     * @param styleDeclaration the style declaration to wrap
      */
     CSSStyleDeclaration(final Scriptable parentScope, final org.w3c.dom.css.CSSStyleDeclaration styleDeclaration) {
         setParentScope(parentScope);
@@ -264,6 +265,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * specified name, a new one is added. If the specified value is an empty (or all whitespace)
      * string, this method actually removes the named style attribute.
      * @param name the attribute name (delimiter-separated, not camel-cased)
+     * @param value the attribute value
      */
     private void replaceStyleAttribute(final String name, final String value) {
         if (value.trim().length() == 0) {
@@ -3050,7 +3052,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @param posBottom the new attribute
      */
     public void jsxSet_posBottom(final int posBottom) {
-        //empty
+        // Empty.
     }
 
     /**
@@ -3066,7 +3068,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @param posHeight the new attribute
      */
     public void jsxSet_posHeight(final int posHeight) {
-        //empty
+        // Empty.
     }
 
     /**
@@ -3098,7 +3100,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @param posLeft the new attribute
      */
     public void jsxSet_posLeft(final int posLeft) {
-        //empty
+        // Empty.
     }
 
     /**
@@ -3114,7 +3116,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @param posRight the new attribute
      */
     public void jsxSet_posRight(final int posRight) {
-        //empty
+        // Empty.
     }
 
     /**
@@ -3130,7 +3132,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @param posTop the new attribute
      */
     public void jsxSet_posTop(final int posTop) {
-        //empty
+        // Empty.
     }
 
     /**
@@ -3146,7 +3148,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @param posWidth the new attribute
      */
     public void jsxSet_posWidth(final int posWidth) {
-        //empty
+        // Empty.
     }
 
     /**
@@ -3594,7 +3596,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @param textDecorationBlink the new attribute
      */
     public void jsxSet_textDecorationBlink(final boolean textDecorationBlink) {
-        //empty
+        // Empty.
     }
 
     /**
@@ -3610,7 +3612,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @param textDecorationLineThrough the new attribute
      */
     public void jsxSet_textDecorationLineThrough(final boolean textDecorationLineThrough) {
-        //empty
+        // Empty.
     }
 
     /**
@@ -3626,7 +3628,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @param textDecorationNone the new attribute
      */
     public void jsxSet_textDecorationNone(final boolean textDecorationNone) {
-        //empty
+        // Empty.
     }
 
     /**
@@ -3642,7 +3644,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @param textDecorationOverline the new attribute
      */
     public void jsxSet_textDecorationOverline(final boolean textDecorationOverline) {
-        //empty
+        // Empty.
     }
 
     /**
@@ -3658,7 +3660,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @param textDecorationUnderline the new attribute
      */
     public void jsxSet_textDecorationUnderline(final boolean textDecorationUnderline) {
-        //empty
+        // Empty.
     }
 
     /**
@@ -4130,19 +4132,19 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * Sets an expression for the specified Style.
      *
      * @param propertyName Specifies the name of the property to which expression is added
-     * @param expression specifies any valid script statement without quotations or semicolons
-     *        This string can include references to other properties on the current page.
+     * @param expression specifies any valid script statement without quotations or semicolons;
+     *        this string can include references to other properties on the current page.
      *        Array references are not allowed on object properties included in this script.
      * @param language specified the language used
      */
     public void jsxFunction_setExpression(final String propertyName, final String expression, final String language) {
-        // empty implementation
+        // Empty.
     }
 
     /**
      * Removes the expression from the specified property.
      *
-     * @param propertyName Specifies the name of the property from which to remove an expression
+     * @param propertyName the name of the property from which to remove an expression
      * @return true if the expression was successfully removed
      */
     public boolean jsxFunction_removeExpression(final String propertyName) {
@@ -4410,15 +4412,14 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
                 Float.parseFloat(token);
                 return true;
             }
-            catch (final Exception e) {
-                //ignore
+            catch (final NumberFormatException e) {
+                // Ignore.
             }
         }
         return false;
     }
 
     /**
-     * Just for debug purposes.
      * {@inheritDoc}
      */
     @Override
@@ -4444,7 +4445,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
          * @param value the style element's value
          * @param index the style element's index
          */
-        public StyleElement(final String name, final String value, final long index) {
+        protected StyleElement(final String name, final String value, final long index) {
             this.name_ = name;
             this.value_ = value;
             this.index_ = index;
@@ -4454,7 +4455,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
          * @param name the style element's name
          * @param value the style element's value
          */
-        public StyleElement(final String name, final String value) {
+        protected StyleElement(final String name, final String value) {
             this.name_ = name;
             this.value_ = value;
             this.index_ = Long.MIN_VALUE;
