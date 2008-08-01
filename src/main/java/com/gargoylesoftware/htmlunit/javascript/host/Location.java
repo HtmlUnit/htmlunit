@@ -119,7 +119,7 @@ public class Location extends SimpleScriptable {
     /**
      * Reloads the current page, possibly forcing retrieval from the server even if
      * the browser cache contains the latest version of the document.
-     * @param force If <tt>true</tt>, force reload from server; otherwise, may reload from cache
+     * @param force if <tt>true</tt>, force reload from server; otherwise, may reload from cache
      * @throws IOException if there is a problem reloading the page
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/reload.asp">
      * MSDN Documentation</a>
@@ -135,13 +135,12 @@ public class Location extends SimpleScriptable {
     }
 
     /**
-     * Reloads the window using the specified URL.
+     * Reloads the window using the specified URL via a postponed action.
      * @param url the new URL to use to reload the window
-     * @throws IOException if there is a problem loading the new page
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/replace.asp">
      * MSDN Documentation</a>
      */
-    public void jsxFunction_replace(final String url) throws IOException {
+    public void jsxFunction_replace(final String url) {
         final JavaScriptEngine jsEngine = getWindow().getWebWindow().getWebClient().getJavaScriptEngine();
         final PostponedAction action = new PostponedAction() {
             public void execute() throws Exception {
