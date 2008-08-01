@@ -20,7 +20,6 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.css.sac.AttributeCondition;
-import org.w3c.css.sac.CSSException;
 import org.w3c.css.sac.CSSParseException;
 import org.w3c.css.sac.CombinatorCondition;
 import org.w3c.css.sac.Condition;
@@ -74,14 +73,13 @@ public class Stylesheet extends SimpleScriptable {
 
     private static final ErrorHandler CSS_ERROR_HANDLER = new ErrorHandler() {
         private final Log log_ = LogFactory.getLog(Stylesheet.class);
-
-        public void error(final CSSParseException exception) throws CSSException {
+        public void error(final CSSParseException exception) {
             log_.warn("CSS error: " + buildMessage(exception));
         }
-        public void fatalError(final CSSParseException exception) throws CSSException {
+        public void fatalError(final CSSParseException exception) {
             log_.warn("CSS fatal error: " + buildMessage(exception));
         }
-        public void warning(final CSSParseException exception) throws CSSException {
+        public void warning(final CSSParseException exception) {
             log_.warn("CSS warning: " + buildMessage(exception));
         }
         private String buildMessage(final CSSParseException exception) {
@@ -349,9 +347,11 @@ public class Stylesheet extends SimpleScriptable {
     }
 
     /**
-     * Returns the contents of the specified input source.
+     * Returns the contents of the specified input source, ignoring any {@link IOException}s.
+     * @param source the input source from which to read
+     * @return the contents of the specified input source, or an empty string if an {@link IOException} occurs
      */
-    private String toString(final InputSource source) {
+    private static String toString(final InputSource source) {
         try {
             return IOUtils.toString(source.getCharacterStream());
         }
