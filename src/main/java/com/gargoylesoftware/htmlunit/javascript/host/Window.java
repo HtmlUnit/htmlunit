@@ -233,7 +233,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
         if (features != null || replaceCurrentEntryInBrowsingHistory) {
             thisWindow.getLog().debug(
-                "Window.open: features and replaceCurrentEntryInBrowsingHistory "
+                "window.open: features and replaceCurrentEntryInBrowsingHistory "
                 + "not implemented: url=[" + url
                 + "] windowName=[" + windowName
                 + "] features=[" + features
@@ -391,11 +391,10 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Initialize the object.
-     * @param webWindow the web window containing the JavaScript
-     * @exception Exception If an error occurs.
+     * Initializes this window.
+     * @param webWindow the web window corresponding to this window
      */
-    public void initialize(final WebWindow webWindow) throws Exception {
+    public void initialize(final WebWindow webWindow) {
         webWindow_ = webWindow;
         webWindow_.setScriptObject(this);
 
@@ -546,7 +545,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Removes focus from this element.
      */
     public void jsxFunction_blur() {
-        getLog().debug("Window.blur() not implemented");
+        getLog().debug("window.blur() not implemented");
     }
 
     /**
@@ -570,7 +569,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param y the vertical position
      */
     public void jsxFunction_moveTo(final int x, final int y) {
-        getLog().debug("Window.moveTo() not implemented");
+        getLog().debug("window.moveTo() not implemented");
     }
 
     /**
@@ -579,7 +578,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param y the vertical position
      */
     public void jsxFunction_moveBy(final int x, final int y) {
-        getLog().debug("Window.moveBy() not implemented");
+        getLog().debug("window.moveBy() not implemented");
     }
 
     /**
@@ -588,7 +587,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param height the height offset
      */
     public void jsxFunction_resizeBy(final int width, final int height) {
-        getLog().debug("Window.resizeBy() not implemented");
+        getLog().debug("window.resizeBy() not implemented");
     }
 
     /**
@@ -597,7 +596,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param height the height of the Window in pixel after resize
      */
     public void jsxFunction_resizeTo(final int width, final int height) {
-        getLog().debug("Window.resizeTo() not implemented");
+        getLog().debug("window.resizeTo() not implemented");
     }
 
     /**
@@ -606,7 +605,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param y the vertical position to scroll to
      */
     public void jsxFunction_scroll(final int x, final int y) {
-        getLog().debug("Window.scroll() not implemented");
+        getLog().debug("window.scroll() not implemented");
     }
 
     /**
@@ -615,7 +614,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param y the vertical distance to scroll by
      */
     public void jsxFunction_scrollBy(final int x, final int y) {
-        getLog().debug("Window.scrollBy() not implemented");
+        getLog().debug("window.scrollBy() not implemented");
     }
 
     /**
@@ -623,7 +622,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param lines the number of lines to scroll down
      */
     public void jsxFunction_scrollByLines(final int lines) {
-        getLog().debug("Window.scrollByLines() not implemented");
+        getLog().debug("window.scrollByLines() not implemented");
     }
 
     /**
@@ -631,7 +630,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param pages the number of pages to scroll down
      */
     public void jsxFunction_scrollByPages(final int pages) {
-        getLog().debug("Window.scrollByPages() not implemented");
+        getLog().debug("window.scrollByPages() not implemented");
     }
 
     /**
@@ -640,7 +639,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param y the vertical position to scroll to
      */
     public void jsxFunction_scrollTo(final int x, final int y) {
-        getLog().debug("Window.scrollTo() not implemented");
+        getLog().debug("window.scrollTo() not implemented");
     }
 
     /**
@@ -780,7 +779,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the value
      */
     public String jsxGet_onerror() {
-        getLog().debug("Window.onerror not implemented");
+        getLog().debug("window.onerror not implemented");
         return "";
     }
 
@@ -789,7 +788,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param newValue the value
      */
     public void jsxSet_onerror(final String newValue) {
-        getLog().debug("Window.onerror not implemented");
+        getLog().debug("window.onerror not implemented");
     }
 
     /**
@@ -876,7 +875,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         return superValue;
     }
 
-    private Scriptable getTopScope(final Scriptable s) {
+    private static Scriptable getTopScope(final Scriptable s) {
         Scriptable top = s;
         while (top != null && top.getParentScope() != null) {
             top = top.getParentScope();
@@ -884,7 +883,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         return top;
     }
 
-    private Object getFrameByName(final HtmlPage page, final String name) {
+    private static Object getFrameByName(final HtmlPage page, final String name) {
         try {
             return page.getFrameByName(name).getScriptObject();
         }
@@ -1119,8 +1118,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener,
         NonSerializable {
 
-        private static final long serialVersionUID = -4651000523078926322L;
-
         /**
          * {@inheritDoc}
          */
@@ -1182,4 +1179,5 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             }
         }
     }
+
 }
