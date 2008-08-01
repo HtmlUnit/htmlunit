@@ -37,15 +37,17 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Chris Erskine
  * @author Ahmed Ashour
  * @author Sudhan Moghe
+ * @author Daniel Gredler
  */
 public class HTMLAnchorElement extends HTMLElement {
 
     private static final long serialVersionUID = -816365374422492967L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLAnchorElement() {
+        // Empty.
     }
 
     /**
@@ -53,22 +55,22 @@ public class HTMLAnchorElement extends HTMLElement {
      * the rhino engine won't walk up the hierarchy looking for constructors.
      */
     public void jsConstructor() {
+        // Empty.
     }
 
     /**
-     * Sets the href property.
-     * @param href href attribute value
+     * Sets the <tt>href</tt> property.
+     * @param href the <tt>href</tt> property value
      */
     public void jsxSet_href(final String href) {
         getHtmlElementOrDie().setAttributeValue("href", href);
     }
 
     /**
-     * Returns the value of the href property of this link.
-     * @return the href property
-     * @throws Exception if an error occurs
+     * Returns the value of this link's <tt>href</tt> property.
+     * @return the value of this link's <tt>href</tt> property
      */
-    public String jsxGet_href() throws Exception {
+    public String jsxGet_href() {
         try {
             return getUrl().toString();
         }
@@ -88,9 +90,8 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * Returns the value of the name property of this link.
      * @return the name property
-     * @throws Exception if an error occurs
      */
-    public String jsxGet_name() throws Exception {
+    public String jsxGet_name() {
         return getHtmlElementOrDie().getAttributeValue("name");
     }
 
@@ -113,15 +114,16 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * Returns this link's current URL.
      * @return this link's current URL
-     * @throws Exception if an error occurs
+     * @throws MalformedURLException if an error occurs
      */
-    private URL getUrl() throws Exception {
+    private URL getUrl() throws MalformedURLException {
         final HtmlAnchor anchor = (HtmlAnchor) getHtmlElementOrDie();
         return ((HtmlPage) anchor.getPage()).getFullyQualifiedUrl(anchor.getHrefAttribute());
     }
 
     /**
-     * Sets the href attribute of this link to the specified URL.
+     * Sets the <tt>href</tt> attribute of this link to the specified URL.
+     * @param url the new value of the <tt>href</tt> attribute
      */
     private void setUrl(final URL url) {
         getHtmlElementOrDie().setAttributeValue("href", url.toString());
