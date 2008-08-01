@@ -636,7 +636,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public final void setIdAttribute(final String name, final boolean isId) throws DOMException {
+    public final void setIdAttribute(final String name, final boolean isId) {
         throw new UnsupportedOperationException("HtmlElement.setIdAttribute is not yet implemented.");
     }
 
@@ -644,8 +644,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public final void setIdAttributeNS(final String namespaceURI, final String localName, final boolean isId)
-        throws DOMException {
+    public final void setIdAttributeNS(final String namespaceURI, final String localName, final boolean isId) {
         throw new UnsupportedOperationException("HtmlElement.setIdAttributeNS is not yet implemented.");
     }
 
@@ -653,7 +652,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public final void setIdAttributeNode(final Attr idAttr, final boolean isId) throws DOMException {
+    public final void setIdAttributeNode(final Attr idAttr, final boolean isId) {
         throw new UnsupportedOperationException("HtmlElement.setIdAttributeNode is not yet implemented.");
     }
 
@@ -809,11 +808,9 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @param shiftKey <tt>true</tt> if SHIFT is pressed during the typing
      * @param ctrlKey <tt>true</tt> if CTRL is pressed during the typing
      * @param altKey <tt>true</tt> if ALT is pressed during the typing
-     * @exception IOException if an IO error occurs
      */
-    protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
-        throws IOException {
-        // nothing
+    protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+        // Empty.
     }
 
     /**
@@ -1054,7 +1051,7 @@ public abstract class HtmlElement extends DomElement implements Element {
         private HtmlElement nextElement_;
 
         /** Constructor. */
-        public ChildElementsIterator() {
+        protected ChildElementsIterator() {
             if (getFirstChild() != null) {
                 if (getFirstChild() instanceof HtmlElement) {
                     nextElement_ = (HtmlElement) getFirstChild();
@@ -1116,11 +1113,13 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Adds an attribute to the attribute map. This is just used by the element factories.
+     * Adds an attribute to the specified attribute map. This is just used by the element factories.
+     * @param page the page which contains the attribute being created
      * @param attributeMap the attribute map where the attribute will be added
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the attribute
      * @param value the value of the attribute
+     * @return the new attribute which was added to the specified attribute map
      */
     static DomAttr addAttributeToMap(final Page page, final Map<String, DomAttr> attributeMap,
             final String namespaceURI, final String qualifiedName, final String value) {
@@ -1437,6 +1436,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * Simulates the specified mouse event, returning the page which this element's window contains after the event.
      * The returned page may or may not be the same as the original page, depending on JavaScript event handlers, etc.
      *
+     * @param eventType the mouse event type to simulate
      * @param shiftKey <tt>true</tt> if SHIFT is pressed during the mouse event
      * @param ctrlKey <tt>true</tt> if CTRL is pressed during the mouse event
      * @param altKey <tt>true</tt> if ALT is pressed during the mouse event
