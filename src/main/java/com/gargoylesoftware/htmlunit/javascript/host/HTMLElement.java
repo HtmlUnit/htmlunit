@@ -114,7 +114,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     private CSSStyleDeclaration style_;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLElement() {
         // Empty.
@@ -699,8 +699,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Parses the HTML code
-     * @param htmlSnippet the HTML code extract to parse
+     * Parses the specified HTML source code, appending the resultant content at the specified target location.
+     * @param target the node indicating the position at which the parsed content should be placed
+     * @param append if <tt>true</tt>, append the parsed content as a child of the specified target;
+     *               if <tt>false</tt>, append the parsed content as the previous sibling of the specified target
+     * @param source the HTML code extract to parse
      */
     static void parseHtmlSnippet(final DomNode target, final boolean append, final String source) {
         final HtmlPage page = (HtmlPage) target.getPage();
@@ -1138,9 +1141,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the version of the specified component
      */
     public String getComponentVersion(final String id, final String idType) {
-        if ("{E5D12C4E-7B4F-11D3-B5C9-0050045C3C96}".equals(id)) { //Yahoo Messenger
+        if ("{E5D12C4E-7B4F-11D3-B5C9-0050045C3C96}".equals(id)) {
+            // Yahoo Messenger.
             return "";
         }
+        // Everything else.
         return "1.0";
     }
 
@@ -1183,7 +1188,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @see #startDownload(String, Function)
      * @author <a href="mailto:stefan@anzinger.net">Stefan Anzinger</a>
      */
-    private class DownloadBehaviorDownloader extends Thread {
+    private final class DownloadBehaviorDownloader extends Thread {
         private final  URL url_;
         private final Function callback_;
 
@@ -1191,14 +1196,14 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
          * @param url the URL to download
          * @param callback the function to callback
          */
-        public DownloadBehaviorDownloader(final URL url, final Function callback) {
+        private DownloadBehaviorDownloader(final URL url, final Function callback) {
             super("Downloader for behavior #default#download '" + url + "'");
             url_ = url;
             callback_ = callback;
         }
 
         /**
-         * Does the download and calls the callback method
+         * Performs the download and calls the callback method.
          */
         @Override
         public void run() {
@@ -1219,7 +1224,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 };
                 ContextFactory.getGlobal().call(action);
             }
-            catch (final Exception e) {
+            catch (final IOException e) {
                 getLog().error("Behavior #default#download: Cannot download " + url_, e);
             }
         }
@@ -1398,7 +1403,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         // Add the offset for the final ancestor node (the offset parent).
         if (node != null && node.getScriptObject() instanceof HTMLElement) {
-            element = (HTMLElement) node.getScriptObject();
             left += offsetParent.jsxGet_currentStyle().getLeft(true, false, true);
         }
 
@@ -1445,7 +1449,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         // Add the offset for the final ancestor node (the offset parent).
         if (node != null && node.getScriptObject() instanceof HTMLElement) {
-            element = (HTMLElement) node.getScriptObject();
             top += offsetParent.jsxGet_currentStyle().getTop(false, false, true);
         }
 
@@ -1504,7 +1507,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Just for debug purposes.
      * {@inheritDoc}
      */
     @Override
@@ -1619,7 +1621,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param language specified the language used
      */
     public void jsxFunction_setExpression(final String propertyName, final String expression, final String language) {
-        //empty implementation
+        // Empty.
     }
 
     /**
