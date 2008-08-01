@@ -326,7 +326,7 @@ public class HTMLDocument extends Document {
      * @param content the HTML snippet
      * @return <code>false</code> if it not well formed
      */
-    private boolean canAlreadyBeParsed(final String content) {
+    private static boolean canAlreadyBeParsed(final String content) {
         // all <script> must have their </script> because the parser doesn't close automatically this tag
         // All tags must be complete, that is from '<' to '>'.
         final int tagOutside = 0;
@@ -479,7 +479,7 @@ public class HTMLDocument extends Document {
      * @param url the URL to replace if necessary
      * @return the replacement URL, or the original URL if no replacement was necessary
      */
-    private URL replaceForCookieIfNecessary(URL url) {
+    private static URL replaceForCookieIfNecessary(URL url) {
         final String protocol = url.getProtocol();
         final boolean file = "file".equals(protocol);
         if (file) {
