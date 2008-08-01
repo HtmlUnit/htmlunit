@@ -405,8 +405,8 @@ public class BrowserVersion implements Serializable {
     }
 
     /**
-     * Gets the configured plugins. This makes only sense for Firefox as only this browser makes this kind
-     * of information available through JavaScript
+     * Returns the available plugins. This makes only sense for Firefox as only this
+     * browser makes this kind of information available via JavaScript.
      * @return the available plugins
      */
     public Set<PluginConfiguration> getPlugins() {
