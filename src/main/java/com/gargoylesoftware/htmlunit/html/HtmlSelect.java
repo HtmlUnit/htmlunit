@@ -136,10 +136,8 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * Returns all of the options in this select element.
      * @return all of the options in this select element
      */
-    @SuppressWarnings("unchecked")
     public List<HtmlOption> getOptions() {
-        final List<HtmlOption> elementList = (List<HtmlOption>) getHtmlElementsByTagName("option");
-        return Collections.unmodifiableList(elementList);
+        return Collections.unmodifiableList(this.<HtmlOption>getHtmlElementsByTagName("option"));
     }
 
     /**
@@ -148,10 +146,8 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * @param index the index
      * @return the option specified by the index
      */
-    @SuppressWarnings("unchecked")
     public HtmlOption getOption(final int index) {
-        final List<HtmlOption> elementList = (List<HtmlOption>) getHtmlElementsByTagName("option");
-        return elementList.get(index);
+        return this.<HtmlOption>getHtmlElementsByTagName("option").get(index);
     }
 
     /**

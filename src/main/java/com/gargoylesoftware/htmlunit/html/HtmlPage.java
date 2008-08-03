@@ -546,9 +546,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * Returns a list of all anchors contained in this page.
      * @return the list of {@link HtmlAnchor} in this page
      */
-    @SuppressWarnings("unchecked")
     public List<HtmlAnchor> getAnchors() {
-        return (List<HtmlAnchor>) getDocumentElement().getHtmlElementsByTagName("a");
+        return getDocumentElement().getHtmlElementsByTagName("a");
     }
 
     /**
@@ -587,9 +586,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * Returns a list of all the forms in this page.
      * @return all the forms in this page
      */
-    @SuppressWarnings("unchecked")
     public List<HtmlForm> getForms() {
-        return (List<HtmlForm>) getDocumentElement().getHtmlElementsByTagName("form");
+        return getDocumentElement().getHtmlElementsByTagName("form");
     }
 
     /**
@@ -600,11 +598,10 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @return the fully-qualified URL for the specified relative URL
      * @exception MalformedURLException If an error occurred when creating a URL object
      */
-    @SuppressWarnings("unchecked")
     public URL getFullyQualifiedUrl(String relativeUrl)
         throws MalformedURLException {
 
-        final List<HtmlBase> baseElements = (List<HtmlBase>) getDocumentElement().getHtmlElementsByTagName("base");
+        final List<HtmlBase> baseElements = getDocumentElement().getHtmlElementsByTagName("base");
         URL baseUrl;
         if (baseElements.isEmpty()) {
             baseUrl = getWebResponse().getUrl();
@@ -1139,7 +1136,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @param eventType either {@link Event#TYPE_LOAD}, {@link Event#TYPE_UNLOAD}, or {@link Event#TYPE_BEFORE_UNLOAD}
      * @return true if user accepted onbeforeunload (not relevant to other events)
      */
-    @SuppressWarnings("unchecked")
     private boolean executeEventHandlersIfNeeded(final String eventType) {
         // If JavaScript isn't enabled, there's nothing for us to do.
         if (!getWebClient().isJavaScriptEnabled()) {
@@ -1297,7 +1293,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * Executes any deferred scripts, if necessary.
      */
-    @SuppressWarnings("unchecked")
     private void executeDeferredScriptsIfNeeded() {
         if (!getWebClient().isJavaScriptEnabled()) {
             return;
@@ -1306,7 +1301,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             return;
         }
         final HtmlElement doc = getDocumentElement();
-        for (final HtmlScript script : (List<HtmlScript>) doc.getHtmlElementsByTagName("script")) {
+        for (final HtmlScript script : doc.<HtmlScript>getHtmlElementsByTagName("script")) {
             if (script.isDeferred()) {
                 script.executeScriptIfNeeded(true);
             }
@@ -1316,7 +1311,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * Sets the ready state on any deferred scripts, if necessary.
      */
-    @SuppressWarnings("unchecked")
     private void setReadyStateOnDeferredScriptsIfNeeded() {
         if (!getWebClient().isJavaScriptEnabled()) {
             return;
@@ -1325,7 +1319,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             return;
         }
         final HtmlElement doc = getDocumentElement();
-        for (final HtmlScript script : (List<HtmlScript>) doc.getHtmlElementsByTagName("script")) {
+        for (final HtmlScript script : doc.<HtmlScript>getHtmlElementsByTagName("script")) {
             if (script.isDeferred()) {
                 script.setReadyStateComplete();
             }
@@ -1715,7 +1709,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      *         {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to <tt>true</tt>
      */
-    @SuppressWarnings("unchecked")
     void loadFrames() throws FailingHttpStatusCodeException {
         for (final FrameWindow w : getFrames()) {
             final BaseFrame frame = w.getFrameElement();
@@ -1856,10 +1849,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @param httpEquiv the http-equiv value
      * @return a list of {@link HtmlMeta}
      */
-    @SuppressWarnings("unchecked")
     protected List<HtmlMeta> getMetaTags(final String httpEquiv) {
         final String nameLC = httpEquiv.toLowerCase();
-        final List<HtmlMeta> tags = (List<HtmlMeta>) getDocumentElement().getHtmlElementsByTagName("meta");
+        final List<HtmlMeta> tags = getDocumentElement().<HtmlMeta>getHtmlElementsByTagName("meta");
         for (final Iterator<HtmlMeta> iter = tags.iterator(); iter.hasNext();) {
             final HtmlMeta element = iter.next();
             if (!nameLC.equals(element.getHttpEquivAttribute().toLowerCase())) {

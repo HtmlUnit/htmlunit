@@ -387,12 +387,14 @@ public abstract class HtmlElement extends DomElement implements Element {
     /**
      * Returns the HTML elements that are descendants of this element and that have the specified tag name.
      * @param tagName the tag name to match (case-insensitive)
+     * @param <X> the sub-element
      * @return the HTML elements that are descendants of this element and that have the specified tag name
      */
-    public final List< ? extends HtmlElement> getHtmlElementsByTagName(final String tagName) {
-        final List<HtmlElement> list = new ArrayList<HtmlElement>();
+    public final <X extends HtmlElement> List<X> getHtmlElementsByTagName(final String tagName) {
+        final List<X> list = new ArrayList<X>();
         final String lowerCaseTagName = tagName.toLowerCase();
-        for (final HtmlElement element : getAllHtmlChildElements()) {
+        final Iterable<X> iterable = getAllHtmlChildElements();
+        for (final X element : iterable) {
             if (lowerCaseTagName.equals(element.getTagName())) {
                 list.add(element);
             }
