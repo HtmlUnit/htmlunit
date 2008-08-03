@@ -411,4 +411,17 @@ public class GWT15RC1Test extends WebTestCase {
         server_ = null;
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void showcase() throws Exception {
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadGWTPage("Showcase", collectedAlerts);
+        assertEquals("Male",
+                page.getHtmlElementById("gwt-debug-cwCheckBox-male-label").getFirstChild().getNodeValue());
+        assertEquals("Female",
+                page.getHtmlElementById("gwt-debug-cwCheckBox-female-label").getFirstChild().getNodeValue());
+    }
+
 }
