@@ -19,85 +19,30 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Contains information about a plugin as available in JavaScript through document.navigator.plugins
+ * Contains information about a plugin as available in JavaScript via <tt>document.navigator.plugins</tt>,
  * as well as the associated mime types (for Firefox browser simulation).
+ *
  * @version $Revision$
  * @author Marc Guillemot
- *
- * @see <a href="http://www.xulplanet.com/references/objref/Plugin.html">XUL Planet</a>
+ * @see <a href="http://www.xulplanet.com/references/objref/Plugin.html">XUL Planet Documentation</a>
  */
 public class PluginConfiguration implements Serializable {
 
     private static final long serialVersionUID = -3160049910272683027L;
 
-    private String description_;
-    private String filename_;
-    private String name_;
-    private Set<PluginConfiguration.MimeType> mimeTypes_ = new HashSet<PluginConfiguration.MimeType>();
+    private final String description_;
+    private final String filename_;
+    private final String name_;
+    private final Set<PluginConfiguration.MimeType> mimeTypes_ = new HashSet<PluginConfiguration.MimeType>();
 
     /**
-     * Holds information about a single mime type associated with a plugin.
-     */
-    public static class MimeType implements Serializable {
-
-        private static final long serialVersionUID = 3775313058008352464L;
-
-        private String description_;
-        private String suffixes_;
-        private String type_;
-
-        /**
-         * Constructor initializing fields.
-         * @param type the mime type
-         * @param description the type description
-         * @param suffixes the file suffixes
-         */
-        public MimeType(final String type, final String description, final String suffixes) {
-            type_ = type;
-            description_ = description;
-            suffixes_ = suffixes;
-        }
-
-        /**
-         * Returns the mime type's description.
-         * @return the description
-         */
-        public String getDescription() {
-            return description_;
-        }
-
-        /**
-         * Returns the mime type's suffixes.
-         * @return the suffixes
-         */
-        public String getSuffixes() {
-            return suffixes_;
-        }
-
-        /**
-         * Returns the mime type.
-         * @return the type
-         */
-        public String getType() {
-            return type_;
-        }
-
-        /**
-         * @return the hashCode of the type
-         */
-        @Override
-        public int hashCode() {
-            return type_.hashCode();
-        }
-    }
-
-    /**
-     * Constructor initializing fields.
+     * Creates a new instance.
      * @param name the plugin name
      * @param description the plugin description
      * @param filename the plugin filename
      */
     public PluginConfiguration(final String name, final String description, final String filename) {
+        WebAssert.notNull("name", name);
         name_ = name;
         description_ = description;
         filename_ = filename;
@@ -136,10 +81,92 @@ public class PluginConfiguration implements Serializable {
     }
 
     /**
-     * @return the hashCode of the plugin name
+     * {@inheritDoc}
      */
     @Override
     public int hashCode() {
         return name_.hashCode();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(final Object o) {
+        if (!(o instanceof PluginConfiguration)) {
+            return false;
+        }
+        final PluginConfiguration other = (PluginConfiguration) o;
+        return this.name_.equals(other.name_);
+    }
+
+    /**
+     * Holds information about a single mime type associated with a plugin.
+     */
+    public static class MimeType implements Serializable {
+
+        private static final long serialVersionUID = 3775313058008352464L;
+
+        private final String description_;
+        private final String suffixes_;
+        private final String type_;
+
+        /**
+         * Creates a new instance.
+         * @param type the mime type
+         * @param description the type description
+         * @param suffixes the file suffixes
+         */
+        public MimeType(final String type, final String description, final String suffixes) {
+            WebAssert.notNull("type", type);
+            type_ = type;
+            description_ = description;
+            suffixes_ = suffixes;
+        }
+
+        /**
+         * Returns the mime type's description.
+         * @return the description
+         */
+        public String getDescription() {
+            return description_;
+        }
+
+        /**
+         * Returns the mime type's suffixes.
+         * @return the suffixes
+         */
+        public String getSuffixes() {
+            return suffixes_;
+        }
+
+        /**
+         * Returns the mime type.
+         * @return the type
+         */
+        public String getType() {
+            return type_;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public int hashCode() {
+            return type_.hashCode();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public boolean equals(final Object o) {
+            if (!(o instanceof PluginConfiguration.MimeType)) {
+                return false;
+            }
+            final PluginConfiguration.MimeType other = (PluginConfiguration.MimeType) o;
+            return this.type_.equals(other.type_);
+        }
+    }
+
 }

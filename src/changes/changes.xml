@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.3-SNAPSHOT" description="Bugfixes.">
+            <action type="fix" dev="sdanig">
+                Add missing equals() methods to the PluginConfiguration and PluginConfiguration.MimeType classes.
+            </action>
             <action type="fix" dev="sudhan_moghe" id="2027723" due-to="Martin Tamme">
                 WebClient.expandUrl doesn't handle references correctly.
             </action>
