@@ -36,7 +36,7 @@ final class HtmlUnitPrefixResolver extends PrefixResolverDefault {
      * Creates a new instance.
      * @param xpathExpressionContext the context from which XPath expression prefixes will be resolved
      */
-    public HtmlUnitPrefixResolver(final Node xpathExpressionContext) {
+    HtmlUnitPrefixResolver(final Node xpathExpressionContext) {
         super(xpathExpressionContext);
     }
 

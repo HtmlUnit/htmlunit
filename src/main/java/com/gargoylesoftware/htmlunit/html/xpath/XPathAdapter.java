@@ -42,8 +42,7 @@ import org.apache.xpath.res.XPATHErrorResources;
  */
 class XPathAdapter {
     private Expression mainExp_;
-
-    private transient FunctionTable funcTable_;
+    private FunctionTable funcTable_;
 
     /** Represents a select type expression. */
     public static final int SELECT = 0;
@@ -100,10 +99,12 @@ class XPathAdapter {
     }
 
     /**
-     * Processes the XPath string before passing it to the engine.
-     * The current implementation lower-case the attribute name.
+     * Pre-processes the specified XPath expression before passing it to the engine.
+     * The current implementation lower-cases the attribute name.
+     * @param string the XPath expression to pre-process
+     * @return the processed XPath expression
      */
-    private String preProcessXPath(String string) {
+    private static String preProcessXPath(String string) {
         //Not a very clean way
         final Pattern pattern = Pattern.compile("(@[a-zA-Z]+)");
         final Matcher matcher = pattern.matcher(string);

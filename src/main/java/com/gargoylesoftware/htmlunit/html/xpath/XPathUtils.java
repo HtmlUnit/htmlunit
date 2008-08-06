@@ -92,6 +92,7 @@ public final class XPathUtils {
      * @param contextNode the node to start searching from
      * @param str a valid XPath string
      * @return an XObject, which can be used to obtain a string, number, nodelist, etc (should never be <tt>null</tt>)
+     * @throws TransformerException if a syntax or other error occurs
      */
     private static XObject evaluateXPath(final Node contextNode, final String str) throws TransformerException {
         final XPathContext xpathSupport = new XPathContext(false);
