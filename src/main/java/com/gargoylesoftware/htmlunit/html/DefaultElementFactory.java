@@ -327,6 +327,7 @@ class DefaultElementFactory implements IElementFactory {
     /**
      * Converts {@link Attributes} into the map needed by {@link HtmlElement}s.
      *
+     * @param page the page which contains the specified attributes
      * @param attributes the SAX attributes
      * @return the map of attribute values for {@link HtmlElement}s
      */
