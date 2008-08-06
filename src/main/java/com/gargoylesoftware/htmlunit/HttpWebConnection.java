@@ -124,8 +124,7 @@ public class HttpWebConnection extends WebConnectionImpl {
                 newRequest.setAdditionalHeaders(webRequestSettings.getAdditionalHeaders());
                 return getResponse(newRequest);
             }
-            e.printStackTrace();
-            throw new RuntimeException("HTTP Error: " + e.getMessage());
+            throw new RuntimeException("HTTP Error: " + e.getMessage(), e);
         }
         finally {
             onResponseGenerated(httpMethod);
@@ -142,11 +141,11 @@ public class HttpWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Gets the host configuration for the request.
-     * @param webRequestSettings the current request settings
-     * @return the host configuration to use for this request
+     * Returns a new HttpClient host configuration, initialized based on the specified request settings.
+     * @param webRequestSettings the request settings to use to initialize the returned host configuration
+     * @return a new HttpClient host configuration, initialized based on the specified request settings
      */
-    private HostConfiguration getHostConfiguration(final WebRequestSettings webRequestSettings) {
+    private static HostConfiguration getHostConfiguration(final WebRequestSettings webRequestSettings) {
         final HostConfiguration hostConfiguration = new HostConfiguration();
         final URL url = webRequestSettings.getUrl();
         final URI uri;
@@ -295,7 +294,13 @@ public class HttpWebConnection extends WebConnectionImpl {
         return part;
     }
 
-    private HttpMethodBase buildHttpMethod(final HttpMethod submitMethod, final String path) {
+    /**
+     * Creates and returns a new HttpClient HTTP method based on the specified parameters.
+     * @param submitMethod the submit method being used
+     * @param path the path being used
+     * @return a new HttpClient HTTP method based on the specified parameters
+     */
+    private static HttpMethodBase buildHttpMethod(final HttpMethod submitMethod, final String path) {
         final HttpMethodBase method;
         switch (submitMethod) {
             case GET:
@@ -333,8 +338,8 @@ public class HttpWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Lazily initializes the httpClient.
-     * @return the initialized client
+     * Lazily initializes the internal HTTP client.
+     * @return the initialized HTTP client
      */
     protected synchronized HttpClient getHttpClient() {
         if (httpClient_ == null) {
@@ -409,8 +414,7 @@ public class HttpWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Returns the {@link HttpState} that is being used.
-     * @return the state
+     * {@inheritDoc}
      */
     @Override
     public HttpState getState() {
@@ -418,7 +422,7 @@ public class HttpWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Converts the HttpMethod into a WebResponse.
+     * Converts an HttpMethod into a WebResponse.
      */
     private WebResponse makeWebResponse(final int statusCode, final HttpMethodBase method,
             final WebRequestSettings requestSettings, final long loadTime, final String charset) throws IOException {
@@ -496,8 +500,8 @@ public class HttpWebConnection extends WebConnectionImpl {
         return new WebResponseImpl(responseData, charset, requestSettings, loadTime);
     }
 
-    private void writeRequestHeadersToHttpMethod(final org.apache.commons.httpclient.HttpMethod httpMethod,
-            final Map<String, String> requestHeaders) {
+    private static void writeRequestHeadersToHttpMethod(final org.apache.commons.httpclient.HttpMethod httpMethod,
+        final Map<String, String> requestHeaders) {
         synchronized (requestHeaders) {
             for (final Map.Entry<String, String> entry : requestHeaders.entrySet()) {
                 httpMethod.setRequestHeader(entry.getKey(), entry.getValue());
@@ -506,24 +510,23 @@ public class HttpWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * This implementation overrides the super one by encoding filename
-     * according to the page charset.
-     * @see http://issues.apache.org/jira/browse/HTTPCLIENT-293
+     * This implementation overrides the superclass' method by encoding filename according to the page charset.
+     * @see <a href="http://issues.apache.org/jira/browse/HTTPCLIENT-293">HTTPCLIENT-293</a>
      * {@inheritDoc}
      */
-    private static class FilePartPageCharSet extends FilePart {
+    private static final class FilePartPageCharSet extends FilePart {
         private KeyDataPair pairWithFile_;
         private WebClient webClient_;
         private String pageCharset_;
 
-        public FilePartPageCharSet(final String name, final ByteArrayPartSource byteArrayPartSource,
-                final String contentType, final String charset) {
+        private FilePartPageCharSet(final String name, final ByteArrayPartSource byteArrayPartSource,
+            final String contentType, final String charset) {
             super(name, byteArrayPartSource, contentType, charset);
             pageCharset_ = charset;
         }
 
-        public FilePartPageCharSet(final String name, final String value, final File file, final String contentType,
-                final String charset) throws FileNotFoundException {
+        private FilePartPageCharSet(final String name, final String value, final File file, final String contentType,
+            final String charset) throws FileNotFoundException {
             super(name, value, file, contentType, charset);
             pageCharset_ = charset;
         }
