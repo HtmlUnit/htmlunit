@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.3-SNAPSHOT" description="Bugfixes.">
+            <action type="fix" dev="asashour" id="2042339">
+                HtmlElement: asText() respects hidden visibility style attribute.
+            </action>
             <action type="fix" dev="sdanig">
                 Add missing equals() methods to the PluginConfiguration and PluginConfiguration.MimeType classes.
             </action>

@@ -1030,4 +1030,22 @@ public class HtmlElementTest extends WebTestCase {
         final String[] expectedAlerts = {"type", "undefined", "undefined"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    public void asText() throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "    <title>test</title>\n"
+            + "</head>\n"
+            + "<body>Welcome\n"
+            + "<div style='visibility:hidden'>to the big world</div>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final HtmlPage page = loadPage(content);
+        assertEquals("test Welcome", page.asText());
+    }
 }
