@@ -1544,11 +1544,11 @@ public abstract class HtmlElement extends DomElement implements Element {
      */
     @Override
     public String asText() {
-    	final String style = getAttribute("style");
-    	//TODO: style may contain other values as well
-    	if (style.equalsIgnoreCase("visibility:hidden")) {
-    		return "";
-    	}
-    	return super.asText();
+        final String style = getAttribute("style");
+        //TODO: style may contain other values as well
+        if (style.equalsIgnoreCase("visibility:hidden")) {
+            return "";
+        }
+        return super.asText();
     }
 }
