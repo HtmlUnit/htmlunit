@@ -1301,9 +1301,13 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             return;
         }
         final HtmlElement doc = getDocumentElement();
-        for (final HtmlScript script : doc.<HtmlScript>getHtmlElementsByTagName("script")) {
-            if (script.isDeferred()) {
-                script.executeScriptIfNeeded(true);
+        final List<HtmlElement> elements = doc.getHtmlElementsByTagName("script");
+        for (final HtmlElement e : elements) {
+            if (e instanceof HtmlScript) {
+                final HtmlScript script = (HtmlScript) e;
+                if (script.isDeferred()) {
+                    script.executeScriptIfNeeded(true);
+                }
             }
         }
     }
@@ -1318,10 +1322,13 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         if (!getWebClient().getBrowserVersion().isIE()) {
             return;
         }
-        final HtmlElement doc = getDocumentElement();
-        for (final HtmlScript script : doc.<HtmlScript>getHtmlElementsByTagName("script")) {
-            if (script.isDeferred()) {
-                script.setReadyStateComplete();
+        final List<HtmlElement> elements = getDocumentElement().getHtmlElementsByTagName("script");
+        for (final HtmlElement e : elements) {
+            if (e instanceof HtmlScript) {
+                final HtmlScript script = (HtmlScript) e;
+                if (script.isDeferred()) {
+                    script.setReadyStateComplete();
+                }
             }
         }
     }

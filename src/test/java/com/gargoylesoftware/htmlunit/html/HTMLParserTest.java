@@ -184,9 +184,6 @@ public class HTMLParserTest extends WebTestCase {
      */
     @Test
     public void namespace() throws Exception {
-    	if (notYetImplemented()) {
-    	    return;
-    	}
         namespace(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {"1", "3", "[object]", "[object]", "[object]"});
         namespace(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"1", "3", "[object]", "[object]", "[object]"});
         namespace(BrowserVersion.FIREFOX_2, new String[] {"1", "3", "[object HTMLScriptElement]",

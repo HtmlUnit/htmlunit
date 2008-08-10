@@ -417,14 +417,14 @@ public final class HTMLParser {
             }
             // add a head if none was there
             else if (!headParsed_ && (tagLower.equals("body") || tagLower.equals("frameset"))) {
-                final IElementFactory factory = getElementFactory("head");
+                final IElementFactory factory = getElementFactory(namespaceURI, "head");
                 final HtmlElement newElement = factory.createElement(page_, "head", null);
                 currentNode_.appendChild(newElement);
                 headParsed_ = true;
             }
             // add a <tbody> if a <tr> is directly in <table>
             else if (tagLower.equals("tr") && currentNode_.getNodeName().equals("table")) {
-                final IElementFactory factory = getElementFactory("tbody");
+                final IElementFactory factory = getElementFactory(namespaceURI, "tbody");
                 final HtmlElement newElement = factory.createElement(page_, "tbody", null);
                 currentNode_.appendChild(newElement);
                 currentNode_ = newElement;
@@ -439,7 +439,7 @@ public final class HTMLParser {
             }
 
             // Add the new node.
-            final IElementFactory factory = getElementFactory(tagLower);
+            final IElementFactory factory = getElementFactory(namespaceURI, tagLower);
             final HtmlElement newElement = factory.createElement(page_, tagLower, atts);
             newElement.setStartLocation(locator_.getLineNumber(), locator_.getColumnNumber());
             currentNode_.appendChild(newElement);
@@ -530,11 +530,13 @@ public final class HTMLParser {
          * @param tagName an HTML tag name, in lowercase
          * @return the pre-registered element factory for the tag, or an UnknownElementFactory
          */
-        private IElementFactory getElementFactory(final String tagName) {
-            final IElementFactory factory = ELEMENT_FACTORIES.get(tagName);
+        private IElementFactory getElementFactory(final String namespaceURI, final String tagName) {
+            if (namespaceURI.length() == 0 || namespaceURI.equals("http://www.w3.org/1999/xhtml")) {
+                final IElementFactory factory = ELEMENT_FACTORIES.get(tagName);
 
-            if (factory != null) {
-                return factory;
+                if (factory != null) {
+                    return factory;
+                }
             }
             return UnknownElementFactory.instance;
         }
