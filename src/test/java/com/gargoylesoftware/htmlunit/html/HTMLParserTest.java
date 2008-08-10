@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -159,8 +160,7 @@ public class HTMLParserTest extends WebTestCase {
             = "<html><head>\n"
             + "</head>\n"
             + "<script>\n"
-            + "function test()\n"
-            + "{\n"
+            + "function test() {\n"
             + "  alert(document.getElementById('foo') == null);\n"
             + "  alert(document.getElementById('bla') == null);\n"
             + "}\n"
@@ -176,6 +176,44 @@ public class HTMLParserTest extends WebTestCase {
 
         loadPage(content, collectedAlerts);
 
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception failure
+     */
+    @Test
+    public void namespace() throws Exception {
+    	if (notYetImplemented()) {
+    	    return;
+    	}
+        namespace(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {"1", "3", "[object]", "[object]", "[object]"});
+        namespace(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"1", "3", "[object]", "[object]", "[object]"});
+        namespace(BrowserVersion.FIREFOX_2, new String[] {"1", "3", "[object HTMLScriptElement]",
+            "[object HTMLUnknownElement]", "[object HTMLUnknownElement]"});
+    }
+
+    private void namespace(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
+        final String content
+            = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n"
+            + "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:app='http://www.appcelerator.org'>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('script1'));\n"
+            + "    alert(document.getElementById('script2'));\n"
+            + "    alert(document.getElementById('message1'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<script id='script1'>alert(1)</script>\n"
+            + "<app:script id='script2'>alert(2)</app:script>\n"
+            + "<script>alert(3)</script>\n"
+            + "<app:message name='r:tasks.request' id='message1'>hello</app:message>\n"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }
