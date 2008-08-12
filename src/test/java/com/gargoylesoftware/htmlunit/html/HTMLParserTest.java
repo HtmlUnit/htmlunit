@@ -221,6 +221,18 @@ public class HTMLParserTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
+        namespace2(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {
+            "1", "SCRIPT", "undefined", "undefined", "undefined", "script", "undefined", "undefined", "undefined"
+        });
+        namespace2(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {
+            "1", "SCRIPT", "undefined", "undefined", "undefined", "script", "undefined", "undefined", "undefined"
+        });
+        namespace2(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {
+            "1", "SCRIPT", "SCRIPT", "null", "null", "APP:SCRIPT", "APP:SCRIPT", "null", "null"
+        });
+    }
+
+    private void namespace2(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
         final String content
             = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n"
             + "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:app='http://www.appcelerator.org'>\n"
@@ -242,10 +254,8 @@ public class HTMLParserTest extends WebTestCase {
             + "<app:script id='script2'>alert(2)</app:script>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"1",
-            "SCRIPT", "SCRIPT", "null", "null", "APP:SCRIPT", "APP:SCRIPT", "null", "null"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }
