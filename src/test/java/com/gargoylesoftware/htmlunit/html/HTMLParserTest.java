@@ -224,10 +224,10 @@ public class HTMLParserTest extends WebTestCase {
         namespace2(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {
             "1", "SCRIPT", "undefined", "undefined", "undefined", "script", "undefined", "undefined", "undefined"
         });
-        namespace2(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {
+        namespace2(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {
             "1", "SCRIPT", "undefined", "undefined", "undefined", "script", "undefined", "undefined", "undefined"
         });
-        namespace2(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {
+        namespace2(BrowserVersion.FIREFOX_2, new String[] {
             "1", "SCRIPT", "SCRIPT", "null", "null", "APP:SCRIPT", "APP:SCRIPT", "null", "null"
         });
     }
