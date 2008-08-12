@@ -50,13 +50,13 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 
 /**
- * Tests for 1.5 release candidate 1 of <a href="http://code.google.com/webtoolkit">Google Web Toolkit</a>.
+ * Tests for 1.5 release candidate 2 of <a href="http://code.google.com/webtoolkit">Google Web Toolkit</a>.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class GWT15RC1Test extends WebTestCase {
+public class GWT15RC2Test extends WebTestCase {
 
     private Server server_;
 
@@ -97,7 +97,7 @@ public class GWT15RC1Test extends WebTestCase {
         i18n(page, "constantsFirstNameText", "Amelie");
         i18n(page, "constantsLastNameText", "Crutcher");
         i18n(page, "constantsFavoriteColorList",
-                new String[] {"Black", "Blue", "Green", "Grey", "Light Grey", "Red", "White", "Yellow"});
+                new String[] {"Red", "White", "Yellow", "Black", "Blue", "Green", "Grey", "Light Grey"});
         i18n(page, "constantsWithLookupResultsText", "Red");
         final Map<String, String> map = new HashMap<String, String>();
         map.put("name", "Amelie Crutcher");
@@ -375,7 +375,7 @@ public class GWT15RC1Test extends WebTestCase {
      * @return the GWT directory being tested
      */
     protected String getDirectory() {
-        return "1.5RC1";
+        return "1.5RC2";
     }
 
     /**
@@ -418,10 +418,10 @@ public class GWT15RC1Test extends WebTestCase {
     public void showcase() throws Exception {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadGWTPage("Showcase", collectedAlerts);
-        assertEquals("Male",
-                page.getHtmlElementById("gwt-debug-cwCheckBox-male-label").getFirstChild().getNodeValue());
-        assertEquals("Female",
-                page.getHtmlElementById("gwt-debug-cwCheckBox-female-label").getFirstChild().getNodeValue());
+        assertEquals("Monday",
+                page.getHtmlElementById("gwt-debug-cwCheckBox-Monday-label").getFirstChild().getNodeValue());
+        assertEquals("Tuesday",
+                page.getHtmlElementById("gwt-debug-cwCheckBox-Tuesday-label").getFirstChild().getNodeValue());
     }
 
 }
