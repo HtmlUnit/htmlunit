@@ -27,8 +27,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
- * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_screen.asp">
- * MSDN documentation</a>
+ * @see <a href="http://msdn.microsoft.com/en-us/library/ms535868.aspx">MSDN documentation</a>
  * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref.html">Mozilla documentation</a>
  */
 public class ScreenTest extends WebTestCase {
