@@ -213,4 +213,39 @@ public class HTMLParserTest extends WebTestCase {
         loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+    /**
+     * @throws Exception failure
+     */
+    @Test
+    public void namespace2() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String content
+            = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n"
+            + "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:app='http://www.appcelerator.org'>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    debug(document.getElementById('script1'));\n"
+            + "    debug(document.getElementById('script2'));\n"
+            + "  }\n"
+            + "  function debug(e) {\n"
+            + "    alert(e.tagName);\n"
+            + "    alert(e.localName);\n"
+            + "    alert(e.prefix);\n"
+            + "    alert(e.namespaceURI);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<script id='script1'>alert(1)</script>\n"
+            + "<app:script id='script2'>alert(2)</app:script>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"1",
+            "SCRIPT", "SCRIPT", "null", "null", "APP:SCRIPT", "APP:SCRIPT", "null", "null"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
