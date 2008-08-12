@@ -13,7 +13,7 @@
         url="http://www.mozilla.org/docs/dom/"
         descr="The Document Object Model in Mozilla"/>
     <doclink
-        url="http://msdn.microsoft.com/workshop/author/dhtml/reference/dhtml_reference_entry.asp"
+        url="http://msdn.microsoft.com/en-us/library/ms533050.aspx"
         descr="HTML and DHTML Reference on MSDN"/>
 
     <class name="ActiveXObject" classname="com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject"
@@ -666,7 +666,7 @@
         <property name="implementation" readable="true" writable="false"/>
         <property name="location" readable="true" writable="true">
             <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_location.asp"
+                url="http://msdn.microsoft.com/en-us/library/ms535866.aspx"
                 descr="MSDN documentation"/>
         </property>
         <property name="referrer" readable="true" writable="false"/>
@@ -730,7 +730,7 @@
         </property>
         <property name="srcElement" readable="true" writable="true">
             <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/srcelement.asp"
+                url="http://msdn.microsoft.com/en-us/library/ms534638.aspx"
                 descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer" min-version="5"/>
         </property>
@@ -965,7 +965,7 @@
             url="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919"
             descr="WC3 Documentation (Level 1)"/>
         <doclink
-            url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_document.asp"
+            url="http://msdn.microsoft.com/en-us/library/ms535862.aspx"
             descr="MSDN documentation"/>
 
         <property name="all" readable="true" writable="false">
@@ -975,7 +975,7 @@
         <property name="alinkColor" notImplemented="true" readable="true" writable="false"/>
         <property name="anchors" readable="true" writable="false">
             <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/anchors.asp"
+                url="http://msdn.microsoft.com/en-us/library/ms537435.aspx"
                 descr="MSDN documentation"/>
             <doclink
                 url="http://www.mozilla.org/docs/dom/domref/dom_doc_ref4.html#1024543"
@@ -986,7 +986,7 @@
         <property name="bgColor" notImplemented="true" readable="true" writable="false"/>
         <property name="cookie" readable="true" writable="true">
             <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/cookie.asp"
+                url="http://msdn.microsoft.com/en-us/library/ms533693.aspx"
                 descr="MSDN documentation"/>
         </property>
         <property name="domain" readable="true" writable="true">
@@ -1001,7 +1001,7 @@
         <property name="forms" readable="true" writable="false"/>
         <property name="frames" readable="true" writable="false">
             <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/frames.asp"
+                url="http://msdn.microsoft.com/en-us/library/ms537459.aspx"
                 descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer"/>
         </property>
@@ -1056,12 +1056,12 @@
         <function name="getElementsByTagName"/>
         <function name="open">
             <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/open_1.asp"
+                url="http://msdn.microsoft.com/en-us/library/ms536652.aspx"
                 descr="MSDN documentation"/>
         </function>
         <function name="queryCommandSupported">
             <doclink
-                url="http://msdn2.microsoft.com/en-us/library/ms536681.aspx"
+                url="http://msdn.microsoft.com/en-us/library/ms536681.aspx"
                 descr="MSDN documentation"/>
         </function>
         <function name="write"/>
@@ -1082,7 +1082,7 @@
         <property name="attributes" readable="true" writable="false"/>
         <property name="children" readable="true" writable="false">
             <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/children.asp"
+                url="http://msdn.microsoft.com/en-us/library/ms537446.aspx"
                 descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer" min-version="5.5"/>
         </property>
@@ -1120,7 +1120,7 @@
         <property name="offsetLeft" readable="true" writable="false"/>
         <property name="offsetParent" readable="true" writable="false">
             <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/offsetparent.asp"
+                url="http://msdn.microsoft.com/en-us/library/ms534302.aspx"
                 descr="MSDN documentation"/>
             <doclink
                 url="http://www.mozilla.org/docs/dom/domref/dom_el_ref20.html"
@@ -1133,7 +1133,7 @@
         <property name="offsetWidth" readable="true" writable="false"/>
         <property name="outerHTML" readable="true" writable="true">
             <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/outerhtml.asp"
+                url="http://msdn.microsoft.com/en-us/library/ms534310.aspx"
                 descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
@@ -1275,7 +1275,7 @@
         <!-- NOT FINISHED -->
 
         <doclink
-            url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/form.asp"
+            url="http://msdn.microsoft.com/en-us/library/ms535249.aspx"
             descr="MSDN documentation"/>
 
         <property name="action" readable="true" writable="true"/>
@@ -1354,12 +1354,12 @@
         <property name="checked" readable="true" writable="true"/>
         <property name="defaultChecked" readable="true" writable="true">
             <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultchecked.asp"
+                url="http://msdn.microsoft.com/en-us/library/ms533715.aspx"
                 descr="MSDN documentation"/>
         </property>
         <property name="defaultValue" readable="true" writable="true">
             <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultvalue.asp"
+                url="http://msdn.microsoft.com/en-us/library/ms533718.aspx"
                 descr="MSDN documentation"/>
         </property>
         <property name="maxLength" readable="true" writable="true"/>
@@ -1515,17 +1515,17 @@
             url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-82915075"
             descr="W3C DOM Level 2"/>
         <doclink
-            url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/th.asp"
+            url="http://msdn.microsoft.com/en-us/library/ms535908.aspx"
             descr="MSDN documentation (TH)"/>
         <doclink
-            url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/td.asp"
+            url="http://msdn.microsoft.com/en-us/library/ms535903.aspx"
             descr="MSDN documentation (TD)"/>
         <property name="cellIndex" readable="true" writable="false">
             <doclink
                 url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-80748363"
                 descr="W3C DOM Level 2"/>
             <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/cellindex.asp"
+                url="http://msdn.microsoft.com/en-us/library/ms533549.aspx"
                 descr="MSDN documentation"/>
         </property>
     </class>
@@ -1546,32 +1546,32 @@
 
         <function name="createCaption">
             <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createcaption.asp"
+                url="http://msdn.microsoft.com/en-us/library/ms536381.aspx"
                 descr="MSDN documentation"/>
         </function>
         <function name="createTFoot">
             <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createtfoot.asp"
+                url="http://msdn.microsoft.com/en-us/library/ms536402.aspx"
                 descr="MSDN documentation"/>
         </function>
         <function name="createTHead">
             <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createthead.asp"
+                url="http://msdn.microsoft.com/en-us/library/ms536403.aspx"
                 descr="MSDN documentation"/>
         </function>
         <function name="deleteCaption">
             <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletecaption.asp"
+                url="http://msdn.microsoft.com/en-us/library/ms536405.aspx"
                 descr="MSDN documentation"/>
         </function>
         <function name="deleteTFoot">
             <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletecaption.asp"
+                url="http://msdn.microsoft.com/en-us/library/ms536409.aspx"
                 descr="MSDN documentation"/>
         </function>
         <function name="deleteTHead">
             <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletethead.asp"
+                url="http://msdn.microsoft.com/en-us/library/ms536410.aspx"
                 descr="MSDN documentation"/>
         </function>
         <function name="refresh">
@@ -1587,7 +1587,7 @@
             url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-6986576"
             descr="W3c DOM Level 2"/>
         <doclink
-            url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/tr.asp"
+            url="http://msdn.microsoft.com/en-us/library/ms535911.aspx"
             descr="MSDN documentation"/>
         <property name="cells" readable="true" writable="false"/>
         <property name="rowIndex" readable="true" writable="false">
@@ -1595,7 +1595,7 @@
                 url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-67347567"
                 descr="W3c DOM Level 2"/>
             <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/rowindex.asp"
+                url="http://msdn.microsoft.com/en-us/library/ms534377.aspx"
                 descr="MSDN documentation"/>
         </property>
         <function name="insertCell">
@@ -1603,7 +1603,7 @@
                 url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-68927016"
                 descr="W3c DOM Level 2"/>
             <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/insertcell.asp"
+                url="http://msdn.microsoft.com/en-us/library/ms536455.aspx"
                 descr="MSDN documentation"/>
         </function>
     </class>
@@ -1620,7 +1620,7 @@
         <!-- NOT FINISHED -->
         <property name="defaultValue" readable="true" writable="true">
             <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultvalue.asp"
+                url="http://msdn.microsoft.com/en-us/library/ms533718.aspx"
                 descr="MSDN documentation"/>
         </property>
         <property name="textLength" readable="true" writable="false">
@@ -1720,7 +1720,7 @@
     <class name="Navigator" classname="com.gargoylesoftware.htmlunit.javascript.host.Navigator"
         JSObject="true">
         <doclink
-            url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_navigator.asp"
+            url="http://msdn.microsoft.com/en-us/library/ms535867.aspx"
             descr="MSDN documentation"/>
 
         <property name="appCodeName" readable="true" writable="false"/>
@@ -1781,7 +1781,7 @@
             <browser name="Firefox"/>
         </function>
         <function name="attachEvent">
-            <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/attachevent.asp"
+            <doclink url="http://msdn.microsoft.com/en-us/library/ms536343.aspx"
                     descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer"/>
         </function>
@@ -1791,7 +1791,7 @@
             <browser name="Firefox"/>
         </function>
         <function name="detachEvent">
-            <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/detachevent.asp"
+            <doclink url="http://msdn.microsoft.com/en-us/library/ms536411.aspx"
                     descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer"/>
         </function>
@@ -1820,7 +1820,7 @@
     </class>
 
     <class name="Popup" classname="com.gargoylesoftware.htmlunit.javascript.host.Popup" JSObject="true">
-        <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/popup.asp" descr="MSDN documentation"/>
+        <doclink url="http://msdn.microsoft.com/en-us/library/ms535882.aspx" descr="MSDN documentation"/>
         <browser name="Microsoft Internet Explorer"/>
         <property name="document" readable="true" writable="false"/>
         <property name="isOpen" readable="true" writable="false"/>
@@ -1855,12 +1855,12 @@
 
         <function name="deleteRow">
             <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deleterow.asp"
+                url="http://msdn.microsoft.com/en-us/library/ms536408.aspx"
                 descr="MSDN documentation"/>
         </function>
         <function name="insertRow">
             <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/insertrow.asp"
+                url="http://msdn.microsoft.com/en-us/library/ms536457.aspx"
                 descr="MSDN documentation"/>
             <doclink
                 url="http://www.mozilla.org/docs/dom/domref/dom_html_ref31.html"
@@ -1874,7 +1874,7 @@
 
     <class name="Screen" classname="com.gargoylesoftware.htmlunit.javascript.host.Screen" JSObject="true">
         <doclink
-            url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_screen.asp"
+            url="http://msdn.microsoft.com/en-us/library/ms535868.aspx"
             descr="MSDN documentation"/>
         <doclink
             url="http://www.mozilla.org/docs/dom/domref/dom_window_ref.html"
@@ -1979,7 +1979,7 @@
         JSObject="true">
         <!-- NOT FINISHED -->
 
-        <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_window.asp"
+        <doclink url="http://msdn.microsoft.com/en-us/library/ms535873.aspx"
                 descr="MSDN documentation"/>
 
         <property name="closed" readable="true" writable="false"/>
@@ -2030,7 +2030,7 @@
         </function>
         <function name="alert"/>
         <function name="attachEvent">
-            <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/attachevent.asp"
+            <doclink url="http://msdn.microsoft.com/en-us/library/ms536343.aspx"
                     descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer"/>
         </function>
@@ -2039,7 +2039,7 @@
             <browser name="Firefox"/>
         </function>
         <function name="clearInterval">
-            <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/clearinterval.asp"
+            <doclink url="http://msdn.microsoft.com/en-us/library/ms536353.aspx"
                     descr="MSDN documentation"/>
         </function>
         <function name="clearTimeout"/>
@@ -2049,17 +2049,17 @@
         </function>
         <function name="confirm"/>
         <function name="createPopup">
-            <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createpopup.asp"
+            <doclink url="http://msdn.microsoft.com/en-us/library/ms536392.aspx"
                     descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer"/>
         </function>
         <function name="detachEvent">
-            <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/detachevent.asp"
+            <doclink url="http://msdn.microsoft.com/en-us/library/ms536411.aspx"
                     descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer"/>
         </function>
         <function name="execScript">
-            <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/execscript.asp"
+            <doclink url="http://msdn.microsoft.com/en-us/library/ms536420.aspx"
                     descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer"/>
         </function>
@@ -2086,7 +2086,7 @@
         <function name="scrollTo"/>
         <function name="setInterval">
             <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/setinterval.asp"
+                url="http://msdn.microsoft.com/en-us/library/ms536749.aspx"
                 descr="MSDN documentation"/>
         </function>
         <function name="setTimeout"/>
