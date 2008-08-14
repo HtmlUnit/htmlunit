@@ -612,21 +612,21 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     protected boolean isStyleVisible() {
         boolean isVisible = true;
-        Page page = getPage();
+        final Page page = getPage();
         if (page instanceof HtmlPage) {
-            boolean isNotIE = !((HtmlPage)page).getWebClient().getBrowserVersion().isIE();
+            final boolean isNotIE = !((HtmlPage) page).getWebClient().getBrowserVersion().isIE();
             DomNode node = this;
             do {
                 final ScriptableObject scriptableObject = node.getScriptObject();
-                if(scriptableObject instanceof HTMLElement) {
-                    final CSSStyleDeclaration style = ((HTMLElement)scriptableObject).jsxGet_style();
+                if (scriptableObject instanceof HTMLElement) {
+                    final CSSStyleDeclaration style = ((HTMLElement) scriptableObject).jsxGet_style();
                     final String visibility = style.jsxGet_visibility();
                     if (visibility.length() > 0) {
                         if (visibility.equals("visible")) {
                             isVisible = true;
                             break;
                         }
-                        else if(visibility.equals("hidden") || (isNotIE && visibility.equals("collapse"))){
+                        else if (visibility.equals("hidden") || (isNotIE && visibility.equals("collapse"))) {
                             isVisible = false;
                             break;
                         }
@@ -637,7 +637,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
         return isVisible;
     }
-    
+
     /**
      * Returns a textual representation of this element that represents what would
      * be visible to the user if this page was shown in a web browser. For example,

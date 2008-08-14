@@ -205,7 +205,7 @@ public class HtmlTextAreaTest extends WebTestCase {
      */
     @Test
     public void testParentAsText() throws Exception {
-        if(notYetImplemented()) {
+        if (notYetImplemented()) {
             return;
         }
         final String htmlContent
@@ -219,7 +219,7 @@ public class HtmlTextAreaTest extends WebTestCase {
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
         Assert.assertEquals("White space must be preserved!", "foo \n bar <p>html snippet</p>", form.asText());
     }
-    
+
     /**
      * Style=visibility:hidden should not affect getText().
      * @throws Exception if the test fails

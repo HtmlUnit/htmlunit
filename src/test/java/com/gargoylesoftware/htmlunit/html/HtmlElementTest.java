@@ -1048,7 +1048,7 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlPage page = loadPage(content);
         assertEquals("test Welcome", page.asText());
     }
-    
+
     /**
      * @throws Exception on test failure
      */
@@ -1068,7 +1068,7 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlPage page = loadPage(content);
         assertEquals("test Welcome to the world", page.asText());
     }
-    
+
     /**
      * @throws Exception on test failure
      */

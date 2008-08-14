@@ -110,7 +110,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
         }
         return "";
     }
-    
+
     /**
      * Sets the new value of this text area.
      *
