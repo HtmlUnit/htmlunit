@@ -1538,17 +1538,4 @@ public abstract class HtmlElement extends DomElement implements Element {
     void setOwningForm(final HtmlForm form) {
         owningForm_ = form;
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String asText() {
-        final String style = getAttribute("style");
-        //TODO: style may contain other values as well
-        if (style.equalsIgnoreCase("visibility:hidden")) {
-            return "";
-        }
-        return super.asText();
-    }
 }

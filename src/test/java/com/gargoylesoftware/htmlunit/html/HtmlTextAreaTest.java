@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Sudhan Moghe
  */
 public class HtmlTextAreaTest extends WebTestCase {
 
@@ -180,4 +181,62 @@ public class HtmlTextAreaTest extends WebTestCase {
         assertEquals("ab\ncd\r\nef", t.getText());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asText() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "<textarea name='textArea1'> foo \n bar "
+            + "<p>html snippet</p>\n"
+            + "</textarea>\n"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(htmlContent);
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
+        assertNotNull(textArea);
+        Assert.assertEquals("White space must be preserved!", " foo \n bar <p>html snippet</p>\n", textArea.asText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testParentAsText() throws Exception {
+        if(notYetImplemented()) {
+            return;
+        }
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "<textarea name='textArea1'> foo \n bar "
+            + "<p>html snippet</p>\n"
+            + "</textarea>\n"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(htmlContent);
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        Assert.assertEquals("White space must be preserved!", "foo \n bar <p>html snippet</p>", form.asText());
+    }
+    
+    /**
+     * Style=visibility:hidden should not affect getText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getTextAndVisibility() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "<textarea name='textArea1' style='visibility:hidden'> foo \n bar "
+            + "</textarea>\n"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(htmlContent);
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
+        assertNotNull(textArea);
+        assertEquals(" foo \n bar ", textArea.getText());
+        assertEquals("", textArea.asText());
+    }
 }

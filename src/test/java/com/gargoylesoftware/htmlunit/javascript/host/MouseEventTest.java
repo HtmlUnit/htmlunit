@@ -58,19 +58,19 @@ public class MouseEventTest extends WebTestCase {
         assertEquals("", textarea.asText());
 
         ((ClickableElement) page.getHtmlElementById("div1")).click();
-        assertEquals("Click on DIV(id=div1): true, true, false, false", textarea.asText());
+        assertEquals("Click on DIV(id=div1): true, true, false, false\n", textarea.asText());
         textarea.reset();
 
         ((ClickableElement) page.getHtmlElementById("span1")).click();
-        assertEquals("Click on SPAN(id=span1): true, true, true, false", textarea.asText());
+        assertEquals("Click on SPAN(id=span1): true, true, true, false\n", textarea.asText());
         textarea.reset();
 
         ((ClickableElement) page.getHtmlElementById("span2")).click();
-        assertEquals("Click on SPAN(id=span2): true, false, false, true", textarea.asText());
+        assertEquals("Click on SPAN(id=span2): true, false, false, true\n", textarea.asText());
         textarea.reset();
 
         textarea.click();
-        assertEquals("Click on TEXTAREA(id=myTextarea): true, false, false, false", textarea.asText());
+        assertEquals("Click on TEXTAREA(id=myTextarea): true, false, false, false\n", textarea.asText());
     }
 
     /**

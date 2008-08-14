@@ -40,6 +40,8 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.host.CSSStyleDeclaration;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
 
 /**
  * Base class for nodes in the HTML DOM tree. This class is modeled after the
@@ -57,6 +59,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Rodney Gitzel
+ * @author Sudhan Moghe
  */
 public abstract class DomNode implements Cloneable, Serializable, Node {
 
@@ -600,6 +603,42 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
+     * Returns true if the node has or inherits style attribute with visibility:visible.
+     * Node is visible if visibility is not specified or inherited. Child element can override
+     * the parent visibility.
+     * @see <a href="http://www.w3.org/TR/REC-CSS2/visufx.html#visibility">CSS2</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms531180.aspx">MSDN Documentation</a>
+     * @return true if the node is visible.
+     */
+    protected boolean isStyleVisible() {
+        boolean isVisible = true;
+        Page page = getPage();
+        if (page instanceof HtmlPage) {
+            boolean isNotIE = !((HtmlPage)page).getWebClient().getBrowserVersion().isIE();
+            DomNode node = this;
+            do {
+                final ScriptableObject scriptableObject = node.getScriptObject();
+                if(scriptableObject instanceof HTMLElement) {
+                    final CSSStyleDeclaration style = ((HTMLElement)scriptableObject).jsxGet_style();
+                    final String visibility = style.jsxGet_visibility();
+                    if (visibility.length() > 0) {
+                        if (visibility.equals("visible")) {
+                            isVisible = true;
+                            break;
+                        }
+                        else if(visibility.equals("hidden") || (isNotIE && visibility.equals("collapse"))){
+                            isVisible = false;
+                            break;
+                        }
+                    }
+                }
+                node = node.getParentNode();
+            } while(node != null);
+        }
+        return isVisible;
+    }
+    
+    /**
      * Returns a textual representation of this element that represents what would
      * be visible to the user if this page was shown in a web browser. For example,
      * a single-selection select element would return the currently selected value
@@ -630,18 +669,19 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         boolean previousNodeWasText = false;
         for (final DomNode node : getChildren()) {
             if (node instanceof DomText) {
-                textBuffer.append(((DomText) node).getData());
-                previousNodeWasText = true;
+                if (node.isStyleVisible()) {
+                    textBuffer.append(((DomText) node).getData());
+                    previousNodeWasText = true;
+                }
             }
             else {
                 if (previousNodeWasText) {
-                    // Whitespace between adjacent text nodes should reamin as a single
+                    // Whitespace between adjacent text nodes should remain as a single
                     // space. So, append raw adjacent text and reduce it as a whole.
                     buffer.append(reduceWhitespace(textBuffer.toString()));
                     textBuffer.setLength(0);
                     previousNodeWasText = false;
                 }
-
                 if (node.isRenderedVisible()) {
                     buffer.append(" ");
                     buffer.append(node.asText());

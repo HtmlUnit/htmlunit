@@ -1048,4 +1048,46 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlPage page = loadPage(content);
         assertEquals("test Welcome", page.asText());
     }
+    
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    public void asTextOverridingVisibility() throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "    <title>test</title>\n"
+            + "</head>\n"
+            + "<body>Welcome\n"
+            + "<p style='visibility:hidden'>hidden text\n"
+            + "<FONT COLOR='#FF0000' style='visibility:visible'>to the world</FONT>\n"
+            + "some more hidden text</p>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final HtmlPage page = loadPage(content);
+        assertEquals("test Welcome to the world", page.asText());
+    }
+    
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    public void asTextVisibilityCollapse() throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "    <title>test</title>\n"
+            + "</head>\n"
+            + "<body>Welcome\n"
+            + "<p style='visibility:collapse'>hidden text\n"
+            + "<FONT COLOR='#FF0000' style='visibility:visible'>to the world</FONT>\n"
+            + "some more hidden text</p>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final HtmlPage iePage = loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, null);
+        assertEquals("test Welcome hidden text to the world some more hidden text", iePage.asText());
+        final HtmlPage ffPage = loadPage(BrowserVersion.FIREFOX_2, content, null);
+        assertEquals("test Welcome to the world", ffPage.asText());
+    }
 }

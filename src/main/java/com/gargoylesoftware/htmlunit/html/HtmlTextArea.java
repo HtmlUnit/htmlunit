@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Sudhan Moghe
  */
 public class HtmlTextArea extends ClickableElement implements DisabledElement, SubmittableElement {
 
@@ -90,9 +91,26 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * @return the text
      */
     public final String getText() {
-        return getChildrenAsText();
+        final StringBuilder buffer = new StringBuilder();
+        for (final DomNode node : getChildren()) {
+            if (node instanceof DomText) {
+                buffer.append(((DomText) node).getData());
+            }
+        }
+        return buffer.toString();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String asText() {
+        if (isStyleVisible()) {
+            return getText();
+        }
+        return "";
+    }
+    
     /**
      * Sets the new value of this text area.
      *
