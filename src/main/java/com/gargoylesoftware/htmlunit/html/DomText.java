@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Rodney Gitzel
  * @author Ahmed Ashour
+ * @author Sudhan Moghe
  */
 public class DomText extends DomCharacterData implements Text {
 
@@ -84,10 +85,18 @@ public class DomText extends DomCharacterData implements Text {
         if (getParentNode() != null) {
             newText.setParentNode(getParentNode());
             newText.setPreviousSibling(this);
-            newText.setNextSibling(getNextSibling());
+            final DomNode nextSibling = getNextSibling();
+            newText.setNextSibling(nextSibling);
+            if (nextSibling != null) {
+                nextSibling.setPreviousSibling(newText);
+            }
+            else {
+                // newText is the last child
+                // last child is stored as the previous sibling of first child
+                getParentNode().getFirstChild().setPreviousSibling(newText);
+            }
             setNextSibling(newText);
         }
-
         return newText;
     }
 
