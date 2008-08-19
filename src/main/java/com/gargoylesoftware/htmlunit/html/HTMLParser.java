@@ -62,6 +62,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.HTMLBodyElement;
  * @author Chris Erskine
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ethan Glasser-Camp
  */
 public final class HTMLParser {
 
@@ -633,12 +634,13 @@ public final class HTMLParser {
          */
         @Override
         public void parse(final XMLInputSource inputSource) throws XNIException, IOException {
+            final HtmlUnitDOMBuilder oldBuilder = page_.getBuilder();
             page_.setBuilder(this);
             try {
                 super.parse(inputSource);
             }
             finally {
-                page_.setBuilder(null);
+                page_.setBuilder(oldBuilder);
             }
         }
     }

@@ -239,7 +239,7 @@
             <name>Sudhan Moghe</name>
             <id>sudhan_moghe</id>
             <email>sudhan_moghe@users.sourceforge.net</email>
-            <timezone>+5:30</timezone>
+            <timezone>+5.5</timezone>
         </developer>
     </developers>
     <contributors>
@@ -387,6 +387,9 @@
         </contributor>
         <contributor>
             <name>Rene Schwietzke</name>
+        </contributor>
+        <contributor>
+            <name>Ethan Glasser-Camp</name>
         </contributor>
     </contributors>
     <dependencies>

@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
  * @author Bruce Faulkner
  * @author Ahmed Ashour
  * @author Sudhan Moghe
+ * @author Ethan Glasser-Camp
  */
 @RunWith(BrowserRunner.class)
 public class HTMLElementTest extends WebTestCase {
@@ -2285,10 +2286,27 @@ public class HTMLElementTest extends WebTestCase {
     public void stackOverflowWithInnerHTML() throws Exception {
         final String html = "<html><head><title>Recursion</title></head>\n"
             + "<body>\n"
-            + "<script>"
-            + "     document.body.innerHTML = unescape(document.body.innerHTML);"
-            + "</script></body></html>\n";
+            + "<script>\n"
+            + "     document.body.innerHTML = unescape(document.body.innerHTML);\n"
+            + "</script></body></html>";
         final HtmlPage page = loadPage(html);
         assertEquals("Recursion", page.getTitleText());
+    }
+
+    /**
+     * Document.write after setting innerHTML.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setInnerHTMLDocumentWrite() throws Exception {
+        final String html = "<html><head><title>test</title></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "     var a = document.createElement('a');\n"
+            + "     a.innerHTML = 'break';\n"
+            + "     document.write('hello');\n"
+            + "</script></body></html>";
+        final HtmlPage page = loadPage(html);
+        assertEquals("test hello", page.asText());
     }
 }

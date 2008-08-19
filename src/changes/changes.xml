@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.3-SNAPSHOT" description="Bugfixes.">
+            <action type="fix" dev="sudhan_moghe" id="2052115" due-to="Ethan Glasser-Camp">
+                Fixed NullPointerException occurring in HtmlPage.writeInParsedStream() when document.write is called after setting innerHTML of some element in page.
+            </action>
             <action type="fix" dev="asashour" id="2043322">
                 HTMLParser: now considers namespaces.
             </action>

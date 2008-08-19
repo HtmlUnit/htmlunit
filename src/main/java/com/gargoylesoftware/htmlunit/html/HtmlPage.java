@@ -109,6 +109,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Daniel Gredler
  * @author Dmitri Zoubkov
  * @author Sudhan Moghe
+ * @author Ethan Glasser-Camp
  */
 public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
@@ -2100,6 +2101,14 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      */
     void setBuilder(final HtmlUnitDOMBuilder htmlUnitDOMBuilder) {
         builder_ = htmlUnitDOMBuilder;
+    }
+
+    /**
+     * Returns the current builder.
+     * @return the current builder
+     */
+    HtmlUnitDOMBuilder getBuilder() {
+        return builder_;
     }
 
     /**
