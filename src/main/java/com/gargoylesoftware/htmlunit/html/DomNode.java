@@ -473,7 +473,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
-    public String getTextContent() throws DOMException {
+    public String getTextContent() {
         switch (getNodeType()) {
             case ELEMENT_NODE:
             case ATTRIBUTE_NODE:
@@ -503,7 +503,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
-    public void setTextContent(final String textContent) throws DOMException {
+    public void setTextContent(final String textContent) {
         removeAllChildren();
         appendChild(new DomText(getPage(), textContent));
     }
@@ -988,7 +988,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
-    public Node insertBefore(final Node newChild, final Node refChild) throws DOMException {
+    public Node insertBefore(final Node newChild, final Node refChild) {
         if (refChild == null) {
             appendChild(newChild);
         }
@@ -1010,7 +1010,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public void insertBefore(final DomNode newNode) throws IllegalStateException {
         if (previousSibling_ == null) {
-            throw new IllegalStateException();
+            throw new IllegalStateException("Previous sibling for " + this + " is null.");
         }
 
         if (newNode == this) {

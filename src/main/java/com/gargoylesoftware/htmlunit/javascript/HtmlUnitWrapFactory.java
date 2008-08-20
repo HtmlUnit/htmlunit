@@ -32,22 +32,20 @@ public class HtmlUnitWrapFactory extends WrapFactory {
      * Constructor.
      */
     public HtmlUnitWrapFactory() {
-        setJavaPrimitiveWrap(false); // we don't want to wrap String and Co
+        setJavaPrimitiveWrap(false); // We don't want to wrap String & Co.
     }
 
     /**
-     * Wraps Objects used by htmlunit (like {@link NodeList}) or delegates to
-     * parent class.
+     * Wraps some objects used by HtmlUnit (like {@link NodeList}), or delegates directly to the parent class.
      * {@inheritDoc}
-     * @see org.mozilla.javascript.WrapFactory#wrapAsJavaObject(org.mozilla.javascript.Context,
-     * org.mozilla.javascript.Scriptable, java.lang.Object, java.lang.Class)
+     * @see WrapFactory#wrapAsJavaObject(Context, Scriptable, Object, Class)
      */
     @Override
     @SuppressWarnings("unchecked")
     public Scriptable wrapAsJavaObject(final Context context,
             final Scriptable scope, final Object javaObject, final Class staticType) {
 
-        // TODO: should depend from the js configuration file
+        // TODO: should depend on the js configuration file
         final Scriptable resp;
         if (NodeList.class.equals(staticType)
                 || NamedNodeMap.class.equals(staticType)) {

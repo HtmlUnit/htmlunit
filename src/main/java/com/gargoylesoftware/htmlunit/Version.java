@@ -18,7 +18,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Class to display version information about HtmlUnit. This is the class
- * that will be executed if the jar file is run.
+ * that will be executed if the JAR file is run.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -26,7 +26,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 public final class Version {
 
+    /** Prevent instantiation. */
     private Version() {
+        // Empty.
     }
 
     /**
@@ -34,23 +36,25 @@ public final class Version {
      * @param args the arguments passed on the command line
      * @throws Exception if an error occurs
      */
-    public static void main(final String args[]) throws Exception {
+    public static void main(final String[] args) throws Exception {
         if (args.length == 1 && args[0].equals("-SanityCheck")) {
-            new Version().runSanityCheck();
+            runSanityCheck();
             return;
         }
-
         System.out.println(getProductName());
         System.out.println(getCopyright());
-
         System.out.println("Version: " + getProductVersion());
     }
 
-    private void runSanityCheck() throws Exception {
+    /**
+     * Runs the sanity check.
+     * @throws Exception if anything goes wrong
+     */
+    private static void runSanityCheck() throws Exception {
         final WebClient webClient = new WebClient();
         final HtmlPage page = (HtmlPage) webClient.getPage("http://htmlunit.sourceforge.net/index.html");
         page.executeJavaScript("document.location");
-        System.out.println("SanityCheck complete.");
+        System.out.println("Sanity check complete.");
     }
 
     /**

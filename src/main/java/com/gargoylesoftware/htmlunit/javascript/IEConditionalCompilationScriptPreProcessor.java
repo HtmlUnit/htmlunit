@@ -120,7 +120,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
         return sb.toString();
     }
 
-    private String processIfs(String code) {
+    private static String processIfs(String code) {
         code = code.replaceAll("@if\\s*\\(([^\\)]+)\\)", "if ($1) {");
         code = code.replaceAll("@elif\\s*\\(([^\\)]+)\\)", "} else if ($1) {");
         code = code.replaceAll("@else", "} else {");
@@ -150,7 +150,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
      * @param variable something like "@_win32"
      * @return the value
      */
-    private String replaceOneVariable(final String variable, final BrowserVersion browserVersion) {
+    private static String replaceOneVariable(final String variable, final BrowserVersion browserVersion) {
         final String[] varNaN = {"@_win16", "@_mac", "@_alpha", "@_mc680x0", "@_PowerPC", "@_debug", "@_fast"};
         final String[] varTrue = {"@_win32", "@_x86", "@_jscript"};
 
