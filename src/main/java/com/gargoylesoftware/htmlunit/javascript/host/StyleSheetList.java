@@ -91,8 +91,15 @@ public class StyleSheetList extends SimpleScriptable {
      * @param index the index of the style sheet to return
      * @return the style sheet at the specified index
      */
-    public Stylesheet jsxFunction_item(final int index) {
+    public Object jsxFunction_item(final int index) {
         final Cache cache = getWindow().getWebWindow().getWebClient().getCache();
+
+        if (index < 0) {
+            throw Context.reportRuntimeError("Invalid negative index: " + index);
+        }
+        else if (index >= nodes_.jsxGet_length()) {
+            return Context.getUndefinedValue();
+        }
 
         final HTMLElement element = (HTMLElement) nodes_.jsxFunction_item(new Integer(index));
         final DomNode node = element.getDomNodeOrDie();

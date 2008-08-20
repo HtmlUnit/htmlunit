@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class StyleSheetListTest extends WebTestCase {
 
@@ -96,5 +97,39 @@ public class StyleSheetListTest extends WebTestCase {
         webClient.getPage(URL_FIRST);
         assertEquals(expectedAlerts, collectedAlerts);
         assertEquals(2, webConnection.getRequestCount());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testArrayIndexOutOfBoundAccess() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        alert(document.styleSheets.length);\n"
+            + "        alert(document.styleSheets[0]);\n"
+            + "        alert(document.styleSheets[46]);\n"
+            + "        try {\n"
+            + "          alert(document.styleSheets[-2]);\n"
+            + "        }\n"
+            + "        catch (e) {\n"
+            + "          alert('exception for -2');\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String[] expectedAlerts = {"0", "undefined", "undefined", "exception for -2"};
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
+
+        final List<String> actual = new ArrayList<String>();
+        loadPage(BrowserVersion.FIREFOX_2, html, actual);
+        assertEquals(expectedAlerts, actual);
     }
 }
