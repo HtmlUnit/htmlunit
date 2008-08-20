@@ -38,8 +38,10 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * Examples:
  * mvn -Dtest=SimpleWebDriverTest (runs the test with HtmlUnit)<br/>
  * mvn -Dtest=SimpleWebDriverTest -Dhtmlunit.webdriver=firefox (runs the test with Firefox from the path)<br/>
- * mvn -Dtest=SimpleWebDriverTest -Dhtmlunit.webdriver=firefox -Dwebdriver.firefox.bin=/home/marc/misc/firefox/firefox-3.0.1/firefox (runs the test with the specified Firefox version)<br/>
- * </p> 
+ * mvn -Dtest=SimpleWebDriverTest -Dhtmlunit.webdriver=firefox
+ * -Dwebdriver.firefox.bin=/home/marc/misc/firefox/firefox-3.0.1/firefox
+ * (runs the test with the specified Firefox version)<br/>
+ * </p>
  * @version $Revision$
  * @author Marc Guillemot
  */
