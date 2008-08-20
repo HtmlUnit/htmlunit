@@ -102,6 +102,22 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <systemProperties>
+                        <property>
+                            <name>htmlunit.webdriver</name>
+                            <value>${htmlunit.webdriver}</value>
+                        </property>
+                        <property>
+                            <name>webdriver.firefox.bin</name>
+                            <value>${webdriver.firefox.bin}</value>
+                        </property>
+                    </systemProperties>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <reporting>
@@ -487,6 +503,25 @@
             <version>1.4.3</version>
             <scope>test</scope>
         </dependency>
+        <!-- WebDriver -->
+        <dependency>
+            <groupId>org.openqa.selenium</groupId>
+            <artifactId>webdriver-htmlunit</artifactId>
+            <version>0.5-SNAPSHOT</version>
+            <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>net.sourceforge.htmlunit</groupId>
+                        <artifactId>htmlunit</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.openqa.selenium</groupId>
+            <artifactId>webdriver-firefox</artifactId>
+            <version>0.5-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <distributionManagement>
         <site>
@@ -511,4 +546,17 @@
             <name>HtmlUnit Maven 2 Snapshots Repository</name>
         </snapshotRepository>
     </distributionManagement>
+    <!-- Custom repositories  -->
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <id>htmlUnitSnapshots</id>
+            <name>HtmlUnit Snapshots</name>
+            <url>http://htmlunit.sourceforge.net/m2-repo-snapshots</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
 </project>

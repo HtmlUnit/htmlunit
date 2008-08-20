@@ -1538,4 +1538,11 @@ public abstract class HtmlElement extends DomElement implements Element {
     void setOwningForm(final HtmlForm form) {
         owningForm_ = form;
     }
+
+    /**
+     * Gets notified that it has lost the focus
+     */
+    void removeFocus() {
+        // nothing
+    }
 }

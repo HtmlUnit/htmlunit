@@ -21,7 +21,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
- * Wrapper for the HTML element "input".
+ * Wrapper for the HTML element "input" with type="text".
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -29,15 +29,15 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class HtmlTextInput extends HtmlInput {
 
     private static final long serialVersionUID = -2473799124286935674L;
 
+    private String valueAtFocus_;
     private boolean preventDefault_;
-
     private int selectionStart_;
-
     private int selectionEnd_;
 
     /**
@@ -77,11 +77,11 @@ public class HtmlTextInput extends HtmlInput {
         final String value = getValueAttribute();
         if (c == '\b') {
             if (value.length() > 0) {
-                setValueAttribute(value.substring(0, value.length() - 1));
+                setAttributeValue("value", value.substring(0, value.length() - 1));
             }
         }
         else if ((c == ' ' || !Character.isWhitespace(c))) {
-            setValueAttribute(value + c);
+            setAttributeValue("value", value + c);
         }
     }
 
@@ -187,5 +187,25 @@ public class HtmlTextInput extends HtmlInput {
         focus();
         setSelectionStart(0);
         setSelectionEnd(getValueAttribute().length());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void focus() {
+        super.focus();
+        // store current value to trigger onchange when needed at focus lost
+        valueAtFocus_ = getValueAttribute();
+    }
+
+    @Override
+    void removeFocus() {
+        super.removeFocus();
+
+        if (!valueAtFocus_.equals(getValueAttribute())) {
+            executeOnChangeHandlerIfAppropriate(this);
+        }
+        valueAtFocus_ = null;
     }
 }

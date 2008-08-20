@@ -1817,6 +1817,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             }
 
             if (elementWithFocus_ != null) {
+                elementWithFocus_.removeFocus();
                 elementWithFocus_.fireEvent(Event.TYPE_BLUR);
             }
         }
@@ -1824,6 +1825,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         elementWithFocus_ = newElement;
 
         if (newElement != null) {
+            elementWithFocus_.focus();
             newElement.fireEvent(Event.TYPE_FOCUS);
         }
 

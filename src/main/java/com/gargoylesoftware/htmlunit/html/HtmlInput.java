@@ -72,10 +72,10 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
 
     /**
      * Sets the content of the "value" attribute, executing onchange handlers if appropriate.
-     * This method returns the page conained by this element's window after the value is set,
+     * This method returns the page contained by this element's window after the value is set,
      * which may or may not be the same as the original page.
      * @param newValue the new content
-     * @return the page conained by this element's window after the value is set
+     * @return the page contained by this element's window after the value is set
      */
     public Page setValueAttribute(final String newValue) {
         WebAssert.notNull("newValue", newValue);

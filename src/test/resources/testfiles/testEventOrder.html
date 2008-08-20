@@ -1,0 +1,33 @@
+<html>
+<head>
+    <title>Test event order</title>
+	<script>
+	function log(text)
+	{
+		var log = document.getElementById("log");
+		var item = document.createElement("li");
+		item.appendChild(document.createTextNode(text))
+		log.appendChild(item);
+	}
+	</script>
+</head>
+<body>
+<form>
+<input name="foo" id='foo' onfocus="log('focus')" onblur="log('blur')" onchange="log('change')" onkeydown="log('keydown')" onkeypress="log('keypress')" onkeyup="log('keyup')">
+<input name="other" id='other'>
+</form>
+
+<ol id="log">
+</ol>
+
+<ol id="expected">
+	<li>focus</li>
+	<li>keydown</li>
+	<li>keypress</li>
+	<li>keyup</li>
+	<li>change</li>
+	<li>blur</li>
+</ol>
+
+</body>
+</html>
