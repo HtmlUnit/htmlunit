@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.3-SNAPSHOT" description="Bugfixes.">
+            <action type="update" dev="sdanig">
+                Make IE7 the default BrowserVersion (was IE6).
+            </action>
+            <action type="add" dev="sdanig">
+                Add BrowserVersion for Firefox 3 emulation.
+            </action>
             <action type="fix" dev="mguillem" id="2060550">
                 Fixed NullPointerException occurring document.styleSheets[x] with out of bound index.
             </action>

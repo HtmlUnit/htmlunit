@@ -82,12 +82,20 @@ public class BrowserVersion implements Serializable {
         "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.4) Gecko/20070515 Firefox/2.0.0.4",
         "1.2", 6);
 
+    /** Firefox 3. */
+    public static final BrowserVersion FIREFOX_3 = new BrowserVersion(
+        NETSCAPE, "5.0 (Windows; en-US)",
+        "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.1) Gecko/2008070208 Firefox/3.0.1",
+        "1.2", 7);
+
+    /** Register plugins for the Firefox browser versions. */
     static {
-        final PluginConfiguration pluginFlash = new PluginConfiguration("Shockwave Flash",
+        final PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
             "Shockwave Flash 9.0 r31", "libflashplayer.so");
-        pluginFlash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
+        flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
             "Shockwave Flash", "swf"));
-        FIREFOX_2.getPlugins().add(pluginFlash);
+        FIREFOX_2.getPlugins().add(flash);
+        FIREFOX_3.getPlugins().add(flash);
     }
 
     /** Internet Explorer 6. */
@@ -101,7 +109,7 @@ public class BrowserVersion implements Serializable {
         "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322)", "1.2", 7);
 
     /** The default browser version. */
-    private static BrowserVersion DefaultBrowserVersion_ = INTERNET_EXPLORER_6_0;
+    private static BrowserVersion DefaultBrowserVersion_ = INTERNET_EXPLORER_7_0;
 
     /**
      * Instantiate one.
@@ -124,7 +132,7 @@ public class BrowserVersion implements Serializable {
 
     /**
      * Returns the default browser version that is used whenever a specific version isn't specified.
-     * Defaults to {@link #INTERNET_EXPLORER_6_0}.
+     * Defaults to {@link #INTERNET_EXPLORER_7_0}.
      * @return the default browser version
      */
     public static BrowserVersion getDefault() {
