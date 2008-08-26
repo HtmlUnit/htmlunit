@@ -1554,7 +1554,7 @@ public class WindowTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {"form1", "form2", "2", "4"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        loadPage(content, collectedAlerts);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1588,7 +1588,7 @@ public class WindowTest extends WebTestCase {
         final String[] expectedAlerts = {"form1", "form2", "1", "DIV"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1657,7 +1657,7 @@ public class WindowTest extends WebTestCase {
         final String[] expectedAlerts = {"JavaScript", "JScript", "Invalid class string"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
