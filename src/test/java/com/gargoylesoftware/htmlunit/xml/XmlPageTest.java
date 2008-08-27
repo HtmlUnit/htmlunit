@@ -203,11 +203,11 @@ public class XmlPageTest extends WebTestCase {
     @Test
     public void testCreateElement() throws Exception {
         final String[] expectedAlerts;
-        if (getBrowserVersion() == BrowserVersion.FIREFOX_2) {
-            expectedAlerts = new String[] {"true", "14"};
+        if (getBrowserVersion().isIE()) {
+            expectedAlerts = new String[] {"true", "16"};
         }
         else {
-            expectedAlerts = new String[] {"true", "16"};
+            expectedAlerts = new String[] {"true", "14"};
         }
 
         final String content = "<html><head><title>foo</title><script>\n"

@@ -57,7 +57,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public class Sarissa0993Test extends WebTestCase {
 
     /** Number of browsers this case will use. */
-    private static final int BROWSERS_COUNTER = 3;
+    private static final int BROWSERS_COUNTER = 4;
     private static int Counter_;
 
     private static Server Server_;

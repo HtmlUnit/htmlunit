@@ -288,7 +288,7 @@ public class XMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FIREFOX_2)
+    @Browsers({Browser.FIREFOX_2, Browser.FIREFOX_3})
     @Alerts("1")
     public void getElementsByTagNameNS() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -322,7 +322,7 @@ public class XMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FIREFOX_2)
+    @Browsers({Browser.FIREFOX_2, Browser.FIREFOX_3})
     @Alerts("false")
     public void hasAttribute() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

@@ -71,6 +71,9 @@ public class BrowserRunner extends CompositeRunner {
         /** Firefox 2. */
         FIREFOX_2,
 
+        /** Firefox 3. */
+        FIREFOX_3,
+
         /** Not Browser-specific, it will run only once. Don't use this with other Browsers. */
         NONE;
     }
@@ -88,7 +91,7 @@ public class BrowserRunner extends CompositeRunner {
          * The browsers which the case succeeds (but fails with remaining ones).
          */
         Browser[] value() default {
-            Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7, Browser.FIREFOX_2
+            Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7, Browser.FIREFOX_2, Browser.FIREFOX_3
         };
     }
 
@@ -116,6 +119,9 @@ public class BrowserRunner extends CompositeRunner {
 
         /** Alerts for Firefox 2. */
         String[] FF2() default {EMPTY_DEFAULT };
+
+        /** Alerts for Firefox 3. */
+        String[] FF3() default {EMPTY_DEFAULT };
     }
 
     /**
@@ -130,7 +136,7 @@ public class BrowserRunner extends CompositeRunner {
          * The browsers with which the case is not yet implemented.
          */
         Browser[] value() default {
-            Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7, Browser.FIREFOX_2
+            Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7, Browser.FIREFOX_2, Browser.FIREFOX_3
         };
     }
 
@@ -201,6 +207,14 @@ public class BrowserRunner extends CompositeRunner {
                 else if (browserVersion_ == BrowserVersion.FIREFOX_2) {
                     if (isDefined(alerts.FF2())) {
                         expectedAlerts = alerts.FF2();
+                    }
+                    else if (isDefined(alerts.FF())) {
+                        expectedAlerts = alerts.FF();
+                    }
+                }
+                else if (browserVersion_ == BrowserVersion.FIREFOX_3) {
+                    if (isDefined(alerts.FF3())) {
+                        expectedAlerts = alerts.FF3();
                     }
                     else if (isDefined(alerts.FF())) {
                         expectedAlerts = alerts.FF();
@@ -290,6 +304,12 @@ public class BrowserRunner extends CompositeRunner {
                         }
                         break;
 
+                    case FIREFOX_3:
+                        if (browserVersion_ == BrowserVersion.FIREFOX_3) {
+                            return true;
+                        }
+                        break;
+
                     default:
                 }
             }
@@ -306,6 +326,9 @@ public class BrowserRunner extends CompositeRunner {
         }
         else if (browserVersion == BrowserVersion.FIREFOX_2) {
             return "Firefox 2";
+        }
+        else if (browserVersion == BrowserVersion.FIREFOX_3) {
+            return "Firefox 3";
         }
         else {
             return browserVersion.getApplicationName() + browserVersion.getApplicationVersion();
@@ -385,6 +408,8 @@ public class BrowserRunner extends CompositeRunner {
             new TestClassRunnerForBrowserVersion(klass, BrowserVersion.INTERNET_EXPLORER_7_0);
         final TestClassRunnerForBrowserVersion ff2Runner =
             new TestClassRunnerForBrowserVersion(klass, BrowserVersion.FIREFOX_2);
+        final TestClassRunnerForBrowserVersion ff3Runner =
+            new TestClassRunnerForBrowserVersion(klass, BrowserVersion.FIREFOX_3);
         final TestClassRunnerForNoBrowser noBrowserRunner = new TestClassRunnerForNoBrowser(klass);
 
         //If a browser runner is not empty, add all browser runners
@@ -392,6 +417,7 @@ public class BrowserRunner extends CompositeRunner {
             add(ie6Runner);
             add(ie7Runner);
             add(ff2Runner);
+            add(ff3Runner);
         }
         if (!noBrowserRunner.isEmpty()) {
             add(noBrowserRunner);
