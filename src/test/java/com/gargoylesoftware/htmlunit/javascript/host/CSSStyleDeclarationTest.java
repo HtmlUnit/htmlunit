@@ -217,7 +217,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({Browser.FIREFOX_2, Browser.FIREFOX_3})
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @Alerts("blue")
     public void getPropertyValue() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
@@ -235,7 +235,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({Browser.FIREFOX_2, Browser.FIREFOX_3})
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @Alerts({ "30px", "", "30px", "arial", "", "arial" })
     public void getPropertyValue_WithDash() throws Exception {
         final String html =
@@ -1085,7 +1085,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({Browser.FIREFOX_2, Browser.FIREFOX_3})
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @Alerts({ "1px", "solid", "red" })
     public void border() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -1105,7 +1105,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({Browser.FIREFOX_2, Browser.FIREFOX_3})
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @Alerts({ "1256px", "auto" })
     public void computedWidthOfHiddenElements() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"

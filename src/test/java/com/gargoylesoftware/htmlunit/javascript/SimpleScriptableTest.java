@@ -253,7 +253,7 @@ public class SimpleScriptableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({Browser.FIREFOX_2, Browser.FIREFOX_3})
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @NotYetImplemented
     public void hostClassNames() throws Exception {
         testHostClassNames("HTMLAnchorElement");
@@ -302,7 +302,7 @@ public class SimpleScriptableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({Browser.FIREFOX_2, Browser.FIREFOX_3})
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     public void isParentOf() throws Exception {
         isParentOf("Node", "Element", true);
         isParentOf("Document", "XMLDocument", true);
@@ -341,7 +341,7 @@ public class SimpleScriptableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({Browser.FIREFOX_2, Browser.FIREFOX_3})
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     public void windowPropertyToString() throws Exception {
         final String content = "<html id='myId'><head><title>foo</title><script>\n"
             + "  function test() {\n"

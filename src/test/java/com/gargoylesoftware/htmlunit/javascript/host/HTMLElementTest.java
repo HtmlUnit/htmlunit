@@ -132,7 +132,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Browsers({Browser.FIREFOX_2, Browser.FIREFOX_3})
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @Alerts({ "", "bla" })
     public void getSetAttributeNS() throws Exception {
         final String html = "<html>\n"
@@ -1654,7 +1654,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({Browser.FIREFOX_2, Browser.FIREFOX_3})
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @Alerts({ "undefined", "undefined", "undefined", "undefined",
             "123", "from myFunction", "123", "from myFunction" })
     public void prototype() throws Exception {
@@ -1688,7 +1688,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({Browser.FIREFOX_2, Browser.FIREFOX_3})
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @Alerts("in selectNodes")
     public void prototype_Element() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -1708,7 +1708,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({Browser.FIREFOX_2, Browser.FIREFOX_3})
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @Alerts({ "true", "true" })
     public void instanceOf() throws Exception {
         final String html = "<html><head><title>instanceof test</title>\n"
@@ -2046,7 +2046,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({Browser.FIREFOX_2, Browser.FIREFOX_3})
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @Alerts("clicked")
     public void dispatchEvent() throws Exception {
         final String html =
@@ -2068,7 +2068,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({Browser.FIREFOX_2, Browser.FIREFOX_3})
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @Alerts({ "true", "true", "false" })
     public void hasAttribute() throws Exception {
         final String html =
