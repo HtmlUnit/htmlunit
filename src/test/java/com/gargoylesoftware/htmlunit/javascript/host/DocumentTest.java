@@ -86,11 +86,13 @@ public class DocumentTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
+        final String[] expectedAlerts = {"2", "form1", "form2"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final String[] expectedAlerts = {"2", "form1", "form2"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -2183,25 +2185,29 @@ public class DocumentTest extends WebTestCase {
             + "<body id='IAmTheBody' onload='alert(document.body.id)'>\n"
             + "</body></html>";
 
-        final List<String> expectedAlerts  = new ArrayList<String>();
-        expectedAlerts.add("IAmTheBody");
+        final String[] expectedAlerts = {"IAmTheBody"};
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
+    }
 
-        final String html2 = "<html>\n"
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void body_readFrameset() throws Exception {
+        final String html = "<html>\n"
             + "<frameset onload='alert(document.body.tagName)'>\n"
             + "<frame src='about:blank' name='foo'>\n"
             + "</frameset></html>";
 
-        expectedAlerts.clear();
-        collectedAlerts.clear();
+        final String[] expectedAlerts = {"FRAMESET"};
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
-        expectedAlerts.add("FRAMESET");
-
-        loadPage(html2, collectedAlerts);
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -2572,14 +2578,7 @@ public class DocumentTest extends WebTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
-        client.setWebConnection(webConnection);
-        webConnection.setResponse(URL_FIRST, content);
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = loadPage(content);
         assertTrue(page.asText().indexOf("Hello World") >= 0);
     }
 
@@ -2595,14 +2594,7 @@ public class DocumentTest extends WebTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
-        client.setWebConnection(webConnection);
-        webConnection.setResponse(URL_FIRST, content);
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = loadPage(content);
         final List<HtmlAnchor> anchorList = page.getAnchors();
         assertEquals(1, anchorList.size());
         final HtmlAnchor anchor = anchorList.get(0);
@@ -2626,7 +2618,6 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"foo", "foo2"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final URL scriptUrl = new URL(URL_FIRST + "/script.js");
         final WebClient client = new WebClient();

@@ -1037,7 +1037,6 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "</html>";
 
         final String[] expectedAlerts = {"1", "3", "4"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);

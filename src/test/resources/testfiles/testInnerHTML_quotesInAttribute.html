@@ -1,0 +1,34 @@
+<html>
+<head>
+    <title>Test innerHTML getter with &quot; in attribute [2062406]</title>
+	<script>
+	function log(text)
+	{
+		var log = document.getElementById("log");
+		var item = document.createElement("li");
+		item.appendChild(document.createTextNode(text))
+		log.appendChild(item);
+	}
+	
+	function test()
+	{
+		log(document.getElementById("foo").innerHTML);
+	}
+	</script>
+</head>
+<body onload="test()">
+
+<div id="foo"><span onclick="var f = &quot;hello&quot; + 'world'">test span</span></div>
+
+<ol id="log">
+</ol>
+
+<ol id="expected_FF">
+	<li>&lt;span onclick="var f = &amp;quot;hello&amp;quot; + 'world'"&gt;test span&lt;/span&gt;</li>
+</ol>
+<ol id="expected_IE">
+	<li>&lt;SPAN onclick="var f = &amp;quot;hello&amp;quot; + 'world'"&gt;test span&lt;/SPAN&gt;</li>
+</ol>
+
+</body>
+</html>

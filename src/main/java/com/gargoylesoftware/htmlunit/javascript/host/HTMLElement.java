@@ -596,7 +596,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             // Add the attributes. IE does not use quotes, FF does.
             for (final DomAttr attr : element.getAttributesCollection()) {
                 final String name = attr.getName();
-                final String value = attr.getValue();
+                final String value = attr.getValue().replaceAll("\"", "&quot;");
                 final boolean quote = !ie || com.gargoylesoftware.htmlunit.util.StringUtils.containsWhitespace(value);
                 buffer.append(' ').append(name).append("=");
                 if (quote) {

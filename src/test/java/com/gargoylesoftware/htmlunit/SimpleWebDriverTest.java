@@ -16,11 +16,13 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -45,23 +47,31 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @version $Revision$
  * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public class SimpleWebDriverTest extends WebTestCase {
-    private WebDriver webDriver_;
+    private static Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<BrowserVersion, WebDriver>();
 
     /**
-     * Configures the driver.
+     * Configure the driver only once.
+     * @return the driver
      */
-    @Before
-    public void setUp() {
-        webDriver_ = buildWebDriver();
+    protected WebDriver getWebDriver() {
+        WebDriver webDriver = WEB_DRIVERS_.get(getBrowserVersion());
+        if (webDriver == null) {
+            webDriver = buildWebDriver();
+            WEB_DRIVERS_.put(getBrowserVersion(), webDriver);
+        }
+        return webDriver;
     }
 
     /**
-     * Closes the driver.
+     * Closes the drivers.
      */
-    @After
-    public void tearDown() {
-        webDriver_.close();
+    @AfterClass
+    public static void shutDownAll() {
+        for (final WebDriver webDriver : WEB_DRIVERS_.values()) {
+            webDriver.close();
+        }
     }
 
     /**
@@ -74,18 +84,60 @@ public class SimpleWebDriverTest extends WebTestCase {
         final File testsDir = new File("src/test/resources/testfiles");
         final File testFile = new File(testsDir, "testEventOrder.html");
 
-        webDriver_.get(testFile.toURL().toExternalForm());
-        final WebElement textField = webDriver_.findElement(By.id("foo"));
+        final WebDriver webDriver = getWebDriver();
+
+        webDriver.get(testFile.toURL().toExternalForm());
+        final WebElement textField = webDriver.findElement(By.id("foo"));
         textField.click(); // to give focus
         textField.sendKeys("a");
-        webDriver_.findElement(By.id("other")).click();
+        webDriver.findElement(By.id("other")).click();
 
         // verifications
-        assertEquals(getEntries("expected"), getEntries("log"));
+        assertEquals(getExpectedEntries(), getEntries("log"));
     }
 
-    private List<String> getEntries(final String id) {
-        final List<WebElement> log = webDriver_.findElements(By.xpath("id('" + id + "')/li"));
+    private List<String> getExpectedEntries() {
+        final WebDriver webDriver = getWebDriver();
+        final BrowserVersion browserVersion = getBrowserVersion();
+
+        String expectationNodeId = "expected";
+        final List<WebElement> nodes = webDriver.findElements(By.xpath("//*[starts-with(@id, 'expected')]"));
+        if (nodes.isEmpty()) {
+            throw new RuntimeException("No expectations found in html code");
+        }
+        else {
+            final String specificName = "expected_" + browserVersion.getNickName();
+            for (final WebElement node : nodes) {
+                final String nodeId = node.getAttribute("id");
+                if (specificName.contains(nodeId) && nodeId.length() > expectationNodeId.length()) {
+                    expectationNodeId = nodeId;
+                }
+            }
+        }
+        return getEntries(expectationNodeId);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void innerHTMLwithQuotes() throws Exception {
+        final File testsDir = new File("src/test/resources/testfiles");
+        final File testFile = new File(testsDir, "testInnerHTML_quotesInAttribute.html");
+
+        getWebDriver().get(testFile.toURL().toExternalForm());
+
+        // verifications
+        assertEquals(getExpectedEntries(), getEntries("log"));
+    }
+
+    /**
+     * Get the log entries for the node with the given id.
+     * @param id the node id
+     * @return the log entries
+     */
+    protected List<String> getEntries(final String id) {
+        final List<WebElement> log = getWebDriver().findElements(By.xpath("id('" + id + "')/li"));
         final List<String> entries = new ArrayList<String>();
         for (final WebElement elt : log) {
             entries.add(elt.getText());
@@ -100,7 +152,13 @@ public class SimpleWebDriverTest extends WebTestCase {
         }
         // TODO: IEDriver
         else {
-            final HtmlUnitDriver driver = new HtmlUnitDriver();
+            final HtmlUnitDriver driver = new HtmlUnitDriver()
+            {
+                @Override
+                protected WebClient newWebClient() {
+                    return new WebClient(getBrowserVersion());
+                }
+            };
             driver.setJavascriptEnabled(true);
             return driver;
         }

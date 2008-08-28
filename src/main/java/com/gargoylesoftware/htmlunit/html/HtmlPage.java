@@ -1817,8 +1817,14 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             }
 
             if (elementWithFocus_ != null) {
-                elementWithFocus_.removeFocus();
-                elementWithFocus_.fireEvent(Event.TYPE_BLUR);
+                if (getWebClient().getBrowserVersion().hasProperty("blurBeforeOnchange")) {
+                    elementWithFocus_.fireEvent(Event.TYPE_BLUR);
+                    elementWithFocus_.removeFocus();
+                }
+                else { // IE, FF3
+                    elementWithFocus_.removeFocus();
+                    elementWithFocus_.fireEvent(Event.TYPE_BLUR);
+                }
             }
         }
 

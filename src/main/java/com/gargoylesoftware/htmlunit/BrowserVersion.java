@@ -15,7 +15,9 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -57,6 +59,8 @@ public class BrowserVersion implements Serializable {
     private float javaScriptVersionNumeric_;
     private float browserVersionNumeric_;
     private Set<PluginConfiguration> plugins_ = new HashSet<PluginConfiguration>();
+    private final Map<String, String> properties_ = new HashMap<String, String>();
+    private final String nickName_;
 
     /** Application code name for both Microsoft Internet Explorer and Netscape series. */
     public static final String APP_CODE_NAME = "Mozilla";
@@ -80,13 +84,13 @@ public class BrowserVersion implements Serializable {
     public static final BrowserVersion FIREFOX_2 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows; en-US)",
         "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.4) Gecko/20070515 Firefox/2.0.0.4",
-        "1.2", 6);
+        "1.2", 2, "FF2");
 
     /** Firefox 3. */
     public static final BrowserVersion FIREFOX_3 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows; en-US)",
         "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.1) Gecko/2008070208 Firefox/3.0.1",
-        "1.2", 7);
+        "1.2", 3, "FF3");
 
     /** Register plugins for the Firefox browser versions. */
     static {
@@ -96,17 +100,18 @@ public class BrowserVersion implements Serializable {
             "Shockwave Flash", "swf"));
         FIREFOX_2.getPlugins().add(flash);
         FIREFOX_3.getPlugins().add(flash);
+        FIREFOX_2.properties_.put("blurBeforeOnchange", "true");
     }
 
     /** Internet Explorer 6. */
     public static final BrowserVersion INTERNET_EXPLORER_6_0 = new BrowserVersion(
         INTERNET_EXPLORER, "4.0 (compatible; MSIE 6.0b; Windows 98)",
-        "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98)", "1.2", 6);
+        "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98)", "1.2", 6, "IE6");
 
     /** Internet Explorer 7. */
     public static final BrowserVersion INTERNET_EXPLORER_7_0 = new BrowserVersion(
         INTERNET_EXPLORER, "4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322)",
-        "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322)", "1.2", 7);
+        "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322)", "1.2", 7, "IE7");
 
     /** The default browser version. */
     private static BrowserVersion DefaultBrowserVersion_ = INTERNET_EXPLORER_7_0;
@@ -123,11 +128,30 @@ public class BrowserVersion implements Serializable {
     public BrowserVersion(final String applicationName, final String applicationVersion,
         final String userAgent, final String javaScriptVersion, final float browserVersionNumeric) {
 
+        this(applicationName, applicationVersion, userAgent, javaScriptVersion,
+                browserVersionNumeric, applicationName + browserVersionNumeric);
+    }
+
+    /**
+     * Instantiate one.
+     *
+     * @param applicationName the name of the application
+     * @param applicationVersion the version string of the application
+     * @param userAgent the user agent string that will be sent to the server
+     * @param javaScriptVersion the version of JavaScript
+     * @param browserVersionNumeric the floating number version of the browser
+     * @param nickName the short name of the browser (like "FF2", "FF3", "IE6", ...)
+     */
+    public BrowserVersion(final String applicationName, final String applicationVersion,
+        final String userAgent, final String javaScriptVersion, final float browserVersionNumeric,
+        final String nickName) {
+
         applicationName_ = applicationName;
         setApplicationVersion(applicationVersion);
         userAgent_ = userAgent;
         setJavaScriptVersion(javaScriptVersion);
         browserVersionNumeric_ = browserVersionNumeric;
+        nickName_ = nickName;
     }
 
     /**
@@ -419,5 +443,23 @@ public class BrowserVersion implements Serializable {
      */
     public Set<PluginConfiguration> getPlugins() {
         return plugins_;
+    }
+
+    /**
+     * Indicates if this instance has the given property. Used for HtmlUnit internal processing.
+     * @param property the property name
+     * @return <code>false</code> if this browser doesn't have this property of if it is not set to <code>true</code>
+     */
+    public boolean hasProperty(final String property) {
+        return "true".equals(properties_.get(property));
+    }
+
+    /**
+     * Get the short name of the browser like "FF3", "IE7", ...
+     * This is used in different tests to reference the browser to which it applies.
+     * @return the short name (if any)
+     */
+    public String getNickName() {
+        return nickName_;
     }
 }
