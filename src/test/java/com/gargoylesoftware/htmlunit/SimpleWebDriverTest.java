@@ -152,11 +152,11 @@ public class SimpleWebDriverTest extends WebTestCase {
         }
         // TODO: IEDriver
         else {
-            final HtmlUnitDriver driver = new HtmlUnitDriver()
-            {
+            final WebClient webClient = getWebClient();
+            final HtmlUnitDriver driver = new HtmlUnitDriver() {
                 @Override
                 protected WebClient newWebClient() {
-                    return new WebClient(getBrowserVersion());
+                    return webClient;
                 }
             };
             driver.setJavascriptEnabled(true);
