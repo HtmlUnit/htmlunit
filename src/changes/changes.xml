@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.3-SNAPSHOT" description="Bugfixes.">
+            <action type="fix" dev="mguillem" id="2014596">
+                JavaScript: copy dynamic properties from template in fireEvent (IE only).
+            </action>
             <action type="fix" dev="mguillem" id="2025912">
                 JavaScript: fixed event order when setting the value of a text field.
             </action>

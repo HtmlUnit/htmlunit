@@ -309,7 +309,7 @@ public class EventNode extends Node {
 
     /**
      * Fires a specified event on this element (IE only). See the
-     * <a href="http://msdn2.microsoft.com/en-us/library/ms536423.aspx">MSDN documentation</a>
+     * <a href="http://msdn.microsoft.com/en-us/library/ms536423.aspx">MSDN documentation</a>
      * for more information.
      * @param cx the JavaScript context
      * @param thisObj the element instance on which this method was invoked

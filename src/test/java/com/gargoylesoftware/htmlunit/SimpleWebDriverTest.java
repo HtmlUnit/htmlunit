@@ -29,6 +29,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+
 /**
  * Proof of concept for using WebDriver to run (some) HtmlUnit tests and have the possibility
  * to check in "real" browsers if our expectations are correct.
@@ -122,13 +125,26 @@ public class SimpleWebDriverTest extends WebTestCase {
      */
     @Test
     public void innerHTMLwithQuotes() throws Exception {
+        doTest("testInnerHTML_quotesInAttribute.html");
+    }
+
+    private void doTest(final String fileName) throws Exception {
         final File testsDir = new File("src/test/resources/testfiles");
-        final File testFile = new File(testsDir, "testInnerHTML_quotesInAttribute.html");
+        final File testFile = new File(testsDir, fileName);
 
         getWebDriver().get(testFile.toURL().toExternalForm());
 
         // verifications
         assertEquals(getExpectedEntries(), getEntries("log"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Test
+    public void fireEventCopyTemplateProperties() throws Exception {
+        doTest("testFireEvent_initFromTemplate.html");
     }
 
     /**

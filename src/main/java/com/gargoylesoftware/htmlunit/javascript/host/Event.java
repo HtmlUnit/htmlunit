@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 
@@ -481,6 +484,20 @@ public class Event extends SimpleScriptable {
         eventPhase_ = event.eventPhase_;
         bubbles_ = event.bubbles_;
         cancelable_ = event.cancelable_;
+
+        // copy dynamic properties as well
+        final List<Object> localIds = Arrays.asList(getAllIds());
+        final List<Object> fromIds = Arrays.asList(event.getAllIds());
+        for (final Object id : fromIds) {
+            if (!localIds.contains(id)) {
+                if (id instanceof String) {
+                    putProperty(this, (String) id, getProperty(event, (String) id));
+                }
+                else {
+                    putProperty(this, (Integer) id, getProperty(event, (Integer) id));
+                }
+            }
+        }
     }
 
     /**
