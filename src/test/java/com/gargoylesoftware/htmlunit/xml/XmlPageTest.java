@@ -246,4 +246,19 @@ public class XmlPageTest extends WebTestCase {
             + "</head><body><span id='j_id216:outtext'>Echo Hello World</span></body></html>";
         testXmlDocument(content, "text/xml");
     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void xpath() throws Exception {
+        final String content
+            = "<?xml version=\"1.0\"?>\n"
+             + "<foo>\n"
+             + "    <foofoo name='first'>something</foofoo>\n"
+             + "    <foofoo name='second'>something else</foofoo>\n"
+             + "</foo>";
+
+        final XmlPage xmlPage = testXmlDocument(content, "text/xml");
+        assertEquals(1, xmlPage.getByXPath("//foo").size());
+    }
 }
