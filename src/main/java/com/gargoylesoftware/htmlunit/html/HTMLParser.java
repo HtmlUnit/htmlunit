@@ -336,6 +336,8 @@ public final class HTMLParser {
         private Augmentations augmentations_;
         private HtmlForm formWaitingForLostChildren_;
         private static final String FEATURE_AUGMENTATIONS = "http://cyberneko.org/html/features/augmentations";
+        private static final String FEATURE_PARSE_NOSCRIPT
+            = "http://cyberneko.org/html/features/parse-noscript-content";
 
         /**
          * Calls {@link HTMLConfiguration#pushInputSource(XMLInputSource)} on the configuration.
@@ -377,6 +379,7 @@ public final class HTMLParser {
                 setFeature("http://cyberneko.org/html/features/report-errors", reportErrors);
                 setFeature("http://cyberneko.org/html/features/balance-tags/ignore-outside-content",
                     IgnoreOutsideContent_);
+                setFeature(FEATURE_PARSE_NOSCRIPT, !page_.getWebClient().isJavaScriptEnabled());
 
                 setContentHandler(this);
                 setLexicalHandler(this); //comments and CDATA

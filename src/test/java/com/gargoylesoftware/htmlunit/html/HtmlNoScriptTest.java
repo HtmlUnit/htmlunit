@@ -20,6 +20,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -27,6 +28,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class HtmlNoScriptTest extends WebTestCase {
 
@@ -127,5 +129,52 @@ public class HtmlNoScriptTest extends WebTestCase {
         final MockWebConnection mockWebConnection = getMockConnection(secondPage);
         assertEquals(1, mockWebConnection.getLastParameters().size());
         assertTrue(secondPage.asXml().indexOf("__webpage_no_js__") > -1);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asXml_jsEnabled() throws Exception {
+        final String htmlContent
+            = "<html><body>\n"
+            + "<noscript><div>hello</noscript>"
+            + "</body></html>";
+
+        final String expected = "<body>\n"
+            + "  <noscript>\n"
+            + "    &lt;div&gt;hello\n"
+            + "  </noscript>\n"
+            + "</body>\n";
+        final HtmlPage page = loadPage(htmlContent);
+        assertEquals(expected, page.getBody().asXml());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asXml_jsDisabled() throws Exception {
+        final String html = "<html><body>\n"
+            + "<noscript><div>hello</noscript>"
+            + "</body></html>";
+
+        final String expected = "<body>\n"
+            + "  <noscript>\n"
+            + "    <div>\n"
+            + "      hello\n"
+            + "    </div>\n"
+            + "  </noscript>\n"
+            + "</body>\n";
+
+        final WebClient client = new WebClient();
+        client.setJavaScriptEnabled(false);
+
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setDefaultResponse(html);
+        client.setWebConnection(webConnection);
+
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        assertEquals(expected, page.getBody().asXml());
     }
 }
