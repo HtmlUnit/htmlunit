@@ -99,6 +99,25 @@ public class SimpleWebDriverTest extends WebTestCase {
         assertEquals(getExpectedEntries(), getEntries("log"));
     }
 
+    /**
+     * Test handling of &lt;script event=".." for=".."&gt;.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void scriptEventFor() throws Exception {
+        final File testsDir = new File("src/test/resources/testfiles");
+        final File testFile = new File(testsDir, "testScriptEventFor.html");
+
+        final WebDriver webDriver = getWebDriver();
+
+        webDriver.get(testFile.toURL().toExternalForm());
+        webDriver.findElement(By.id("div1")).click();
+        webDriver.findElement(By.id("div2")).click();
+
+        // verifications
+        assertEquals(getExpectedEntries(), getEntries("log"));
+    }
+
     private List<String> getExpectedEntries() {
         final WebDriver webDriver = getWebDriver();
         final BrowserVersion browserVersion = getBrowserVersion();

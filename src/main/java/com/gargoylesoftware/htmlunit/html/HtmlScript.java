@@ -22,11 +22,15 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.mozilla.javascript.BaseFunction;
 import org.mozilla.javascript.Function;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLScriptElement;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -59,9 +63,6 @@ public class HtmlScript extends HtmlElement {
 
     /** Invalid source attribute which should be ignored (used by JS libraries like jQuery). */
     private static final String SLASH_SLASH_COLON = "//:";
-
-    /** Not really used? */
-    private static int EventHandlerId_;
 
     private final transient Log mainLog_ = LogFactory.getLog(getClass());
 
@@ -233,29 +234,43 @@ public class HtmlScript extends HtmlElement {
         final String forr = getHtmlForAttribute();
         String event = getEventAttribute();
 
-        final String scriptCode;
+        final String scriptCode = textNode.getData();
         if (event != ATTRIBUTE_NOT_DEFINED && forr != ATTRIBUTE_NOT_DEFINED) {
             // The event name can be like "onload" or "onload()".
             if (event.endsWith("()")) {
                 event = event.substring(0, event.length() - 2);
             }
-            final String handler = forr + "." + event;
-            final String functionName = "htmlunit_event_handler_JJLL" + EventHandlerId_;
-            scriptCode = "function " + functionName + "()\n"
-                + "{" + textNode.getData() + "}\n"
-                + handler + "=" + functionName + ";";
+
+            if ("window".equals(forr)) {
+                // everything fine, accepted by IE and FF
+                final Window window = (Window) getPage().getEnclosingWindow().getScriptObject();
+                final BaseFunction function = new EventHandler(this, event, scriptCode);
+                window.jsxFunction_attachEvent(event, function);
+            }
+            else if (ie) {
+                try {
+                    final HtmlElement elt = ((HtmlPage) getPage()).getHtmlElementById(forr);
+                    elt.setEventHandler(event, scriptCode);
+                }
+                catch (final ElementNotFoundException e) {
+                    mainLog_.warn("<script for='" + forr + "' ...>: no element found with id \""
+                        + forr + "\". Ignoring.");
+                }
+            }
+            else {
+                return; // FF seems to handle this IE stuff only for window
+            }
         }
         else {
-            scriptCode = textNode.getData();
+            final String url = getPage().getWebResponse().getUrl().toExternalForm();
+            final int line1 = getStartLineNumber();
+            final int line2 = getEndLineNumber();
+            final int col1 = getStartColumnNumber();
+            final int col2 = getEndColumnNumber();
+            final String desc = "script in " + url + " from (" + line1 + ", " + col1
+                + ") to (" + line2 + ", " + col2 + ")";
+            ((HtmlPage) getPage()).executeJavaScriptIfPossible(scriptCode, desc, line1);
         }
-
-        final String url = getPage().getWebResponse().getUrl().toExternalForm();
-        final int line1 = getStartLineNumber();
-        final int line2 = getEndLineNumber();
-        final int col1 = getStartColumnNumber();
-        final int col2 = getEndColumnNumber();
-        final String desc = "script in " + url + " from (" + line1 + ", " + col1 + ") to (" + line2 + ", " + col2 + ")";
-        ((HtmlPage) getPage()).executeJavaScriptIfPossible(scriptCode, desc, line1);
     }
 
     /**
