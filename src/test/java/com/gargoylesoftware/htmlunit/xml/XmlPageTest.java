@@ -246,6 +246,7 @@ public class XmlPageTest extends WebTestCase {
             + "</head><body><span id='j_id216:outtext'>Echo Hello World</span></body></html>";
         testXmlDocument(content, "text/xml");
     }
+
     /**
      * @throws Exception if the test fails
      */
