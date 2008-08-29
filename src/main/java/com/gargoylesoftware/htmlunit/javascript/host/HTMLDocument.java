@@ -839,7 +839,14 @@ public class HTMLDocument extends Document {
         // Try to satisfy this request using a map-backed operation before punting and using XPath.
         // XPath operations are very expensive, and this method gets invoked quite a bit.
         // This little shortcut shaves ~35% off the build time (3 min -> 2 min, as of 8/10/2007).
-        final List<HtmlElement> elements = page.getHtmlElementsByName(name);
+        final List<HtmlElement> elements;
+        if (getBrowserVersion().isIE()) {
+            elements = page.getHtmlElementsByIdAndOrName(name);
+        }
+        else {
+            elements = page.getHtmlElementsByName(name);
+        }
+
         if (elements.isEmpty()) {
             return NOT_FOUND;
         }

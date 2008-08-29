@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.3-SNAPSHOT" description="Bugfixes.">
+            <action type="fix" dev="mguillem">
+                JavaScript: document.XXX allow to access forms by id (IE only).
+            </action>
             <action type="fix" dev="mguillem" id="2037685">
                 JavaScript: silently ignore script nodes with event="..." for="..." when the target element can't be found (IE only).
             </action>

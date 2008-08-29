@@ -147,6 +147,14 @@ public class SimpleWebDriverTest extends WebTestCase {
         doTest("testInnerHTML_quotesInAttribute.html");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void document_xxx_formAccess() throws Exception {
+        doTest("testDocument.xxx_accessToForm.html");
+    }
+
     private void doTest(final String fileName) throws Exception {
         final File testsDir = new File("src/test/resources/testfiles");
         final File testFile = new File(testsDir, fileName);
