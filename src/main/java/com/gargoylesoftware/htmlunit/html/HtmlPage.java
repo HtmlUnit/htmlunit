@@ -575,12 +575,11 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @exception ElementNotFoundException If no forms match the specified result.
      */
     public HtmlForm getFormByName(final String name) throws ElementNotFoundException {
-        final List< ? extends HtmlElement> forms =
-            getDocumentElement().getHtmlElementsByAttribute("form", "name", name);
+        final List<HtmlForm> forms = getDocumentElement().getHtmlElementsByAttribute("form", "name", name);
         if (forms.size() == 0) {
             throw new ElementNotFoundException("form", "name", name);
         }
-        return (HtmlForm) forms.get(0);
+        return forms.get(0);
     }
 
     /**

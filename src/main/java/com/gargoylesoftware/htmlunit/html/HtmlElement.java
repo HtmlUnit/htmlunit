@@ -374,12 +374,13 @@ public abstract class HtmlElement extends DomElement implements Element {
     /**
      * Returns the HTML elements that are descendants of this element and that have one of the specified tag names.
      * @param tagNames the tag names to match (case-insensitive)
+     * @param <X> the sub-element
      * @return the HTML elements that are descendants of this element and that have one of the specified tag name
      */
-    public final List< ? extends HtmlElement> getHtmlElementsByTagNames(final List<String> tagNames) {
-        final List<HtmlElement> list = new ArrayList<HtmlElement>();
+    public final <X extends HtmlElement> List<X> getHtmlElementsByTagNames(final List<String> tagNames) {
+        final List<X> list = new ArrayList<X>();
         for (final String tagName : tagNames) {
-            list.addAll(getHtmlElementsByTagName(tagName));
+            list.addAll(this.<X>getHtmlElementsByTagName(tagName));
         }
         return list;
     }
@@ -969,19 +970,20 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @param attributeValue the value of the attribute to search for
      * @return all elements which are descendants of this element and match the specified search criteria
      */
-    public final List< ? extends HtmlElement> getHtmlElementsByAttribute(
+    @SuppressWarnings("unchecked")
+    public final <X extends HtmlElement> List<X> getHtmlElementsByAttribute(
             final String elementName,
             final String attributeName,
             final String attributeValue) {
 
-        final List<HtmlElement> list = new ArrayList<HtmlElement>();
+        final List<X> list = new ArrayList<X>();
         final String lowerCaseTagName = elementName.toLowerCase();
 
         for (final HtmlElement next : getAllHtmlChildElements()) {
             if (next.getTagName().equals(lowerCaseTagName)) {
                 final String attValue = next.getAttributeValue(attributeName);
                 if (attValue != null && attValue.equals(attributeValue)) {
-                    list.add(next);
+                    list.add((X) next);
                 }
             }
         }

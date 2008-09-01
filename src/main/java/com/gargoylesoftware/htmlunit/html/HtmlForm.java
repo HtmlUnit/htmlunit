@@ -328,9 +328,8 @@ public class HtmlForm extends ClickableElement {
      * @param name the input name to search for
      * @return all input elements which are members of this form and have the specified name
      */
-    @SuppressWarnings("unchecked")
     public List<HtmlInput> getInputsByName(final String name) {
-        final List<HtmlInput> list = (List<HtmlInput>) getHtmlElementsByAttribute("input", "name", name);
+        final List<HtmlInput> list = getHtmlElementsByAttribute("input", "name", name);
 
         // collect inputs from lost children
         for (final HtmlElement elt : getLostChildren()) {
@@ -363,9 +362,8 @@ public class HtmlForm extends ClickableElement {
      * @param name the name to search for
      * @return all the {@link HtmlSelect} elements in this form that have the specified name
      */
-    @SuppressWarnings("unchecked")
     public List<HtmlSelect> getSelectsByName(final String name) {
-        final List<HtmlSelect> list = (List<HtmlSelect>) getHtmlElementsByAttribute("select", "name", name);
+        final List<HtmlSelect> list = getHtmlElementsByAttribute("select", "name", name);
 
         // collect selects from lost children
         for (final HtmlElement elt : getLostChildren()) {
@@ -398,9 +396,8 @@ public class HtmlForm extends ClickableElement {
      * @param name the name to search for
      * @return all the {@link HtmlButton} elements in this form that have the specified name
      */
-    @SuppressWarnings("unchecked")
     public List<HtmlButton> getButtonsByName(final String name) {
-        final List<HtmlButton> list = (List<HtmlButton>) getHtmlElementsByAttribute("button", "name", name);
+        final List<HtmlButton> list = getHtmlElementsByAttribute("button", "name", name);
 
         // collect buttons from lost children
         for (final HtmlElement elt : getLostChildren()) {
@@ -433,9 +430,8 @@ public class HtmlForm extends ClickableElement {
      * @param name the name to search for
      * @return all the {@link HtmlTextArea} elements in this form that have the specified name
      */
-    @SuppressWarnings("unchecked")
     public List<HtmlTextArea> getTextAreasByName(final String name) {
-        final List<HtmlTextArea> list = (List<HtmlTextArea>) getHtmlElementsByAttribute("textarea", "name", name);
+        final List<HtmlTextArea> list = getHtmlElementsByAttribute("textarea", "name", name);
 
         // collect buttons from lost children
         for (final HtmlElement elt : getLostChildren()) {
@@ -698,9 +694,8 @@ public class HtmlForm extends ClickableElement {
      * @param value the value to search for
      * @return all the inputs in this form with the specified value
      */
-    @SuppressWarnings("unchecked")
     public List<HtmlInput> getInputsByValue(final String value) {
-        final List<HtmlInput> results = (List<HtmlInput>) getHtmlElementsByAttribute("input", "value", value);
+        final List<HtmlInput> results = getHtmlElementsByAttribute("input", "value", value);
 
         for (final HtmlElement element : getLostChildren()) {
             if (element instanceof HtmlInput && value.equals(element.getAttribute("value"))) {

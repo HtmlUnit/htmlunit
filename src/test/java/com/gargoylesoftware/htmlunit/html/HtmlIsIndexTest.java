@@ -54,7 +54,7 @@ public class HtmlIsIndexTest extends WebTestCase {
 
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
-        final HtmlIsIndex isInput = (HtmlIsIndex) form.getHtmlElementsByAttribute(
+        final HtmlIsIndex isInput = form.<HtmlIsIndex>getHtmlElementsByAttribute(
                 "isindex", "prompt", "enterSomeText").get(0);
         isInput.setValue("Flintstone");
         final Page secondPage = form.submit((SubmittableElement) null);
