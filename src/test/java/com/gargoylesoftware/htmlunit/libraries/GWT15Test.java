@@ -50,13 +50,13 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 
 /**
- * Tests for 1.5 release candidate 2 of <a href="http://code.google.com/webtoolkit">Google Web Toolkit</a>.
+ * Tests for 1.5 version of <a href="http://code.google.com/webtoolkit">Google Web Toolkit</a>.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class GWT15RC2Test extends WebTestCase {
+public class GWT15Test extends WebTestCase {
 
     private Server server_;
 
@@ -375,7 +375,7 @@ public class GWT15RC2Test extends WebTestCase {
      * @return the GWT directory being tested
      */
     protected String getDirectory() {
-        return "1.5RC2";
+        return "1.5.2";
     }
 
     /**
