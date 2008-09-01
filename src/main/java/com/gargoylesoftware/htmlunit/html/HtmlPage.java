@@ -529,7 +529,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @throws ElementNotFoundException if the anchor could not be found
      */
     public HtmlAnchor getAnchorByName(final String name) throws ElementNotFoundException {
-        return (HtmlAnchor) getDocumentElement().getOneHtmlElementByAttribute("a", "name", name);
+        return getDocumentElement().getOneHtmlElementByAttribute("a", "name", name);
     }
 
     /**
@@ -540,7 +540,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @throws ElementNotFoundException if the anchor could not be found
      */
     public HtmlAnchor getAnchorByHref(final String href) throws ElementNotFoundException {
-        return (HtmlAnchor) getDocumentElement().getOneHtmlElementByAttribute("a", "href", href);
+        return getDocumentElement().getOneHtmlElementByAttribute("a", "href", href);
     }
 
     /**

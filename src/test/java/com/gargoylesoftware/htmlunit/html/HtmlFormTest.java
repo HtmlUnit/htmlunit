@@ -384,7 +384,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
 
         final HtmlSubmitInput loginButton
-            = (HtmlSubmitInput) page.getDocumentElement().getOneHtmlElementByAttribute("input", "value", "Login");
+            = page.getDocumentElement().getOneHtmlElementByAttribute("input", "value", "Login");
         loginButton.click();
     }
 

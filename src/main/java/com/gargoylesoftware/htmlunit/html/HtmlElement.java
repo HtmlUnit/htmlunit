@@ -901,18 +901,19 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @param elementName the name of the element to search for
      * @param attributeName the name of the attribute to search for
      * @param attributeValue the value of the attribute to search for
+     * @param <X> the sub-element
      * @return the first element which matches the specified search criteria
      * @exception ElementNotFoundException if no element matches the specified search criteria
      */
-    public final HtmlElement getOneHtmlElementByAttribute(final String elementName, final String attributeName,
+    public final <X extends HtmlElement> X getOneHtmlElementByAttribute(final String elementName,
+            final String attributeName,
         final String attributeValue) throws ElementNotFoundException {
 
         WebAssert.notNull("elementName", elementName);
         WebAssert.notNull("attributeName", attributeName);
         WebAssert.notNull("attributeValue", attributeValue);
 
-        final List< ? extends HtmlElement> list =
-            getHtmlElementsByAttribute(elementName, attributeName, attributeValue);
+        final List<X> list = getHtmlElementsByAttribute(elementName, attributeName, attributeValue);
 
         final int listSize = list.size();
         if (listSize == 0) {

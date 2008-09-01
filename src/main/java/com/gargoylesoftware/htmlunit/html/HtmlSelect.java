@@ -387,7 +387,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
         throws ElementNotFoundException {
         WebAssert.notNull("value", value);
 
-        return (HtmlOption) getOneHtmlElementByAttribute("option", "value", value);
+        return getOneHtmlElementByAttribute("option", "value", value);
     }
 
     /**
