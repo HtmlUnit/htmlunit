@@ -661,7 +661,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @return the resolved target to use for the element
      */
     public String getResolvedTarget(final String elementTarget) {
-        final List< ? extends HtmlElement> baseElements = getDocumentElement().getHtmlElementsByTagName("base");
+        final List<HtmlBase> baseElements = getDocumentElement().getHtmlElementsByTagName("base");
         final String resolvedTarget;
         if (baseElements.isEmpty()) {
             resolvedTarget = elementTarget;
@@ -670,7 +670,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             resolvedTarget = elementTarget;
         }
         else {
-            final HtmlBase htmlBase = (HtmlBase) baseElements.get(0);
+            final HtmlBase htmlBase = baseElements.get(0);
             resolvedTarget = htmlBase.getTargetAttribute();
         }
         return resolvedTarget;

@@ -155,8 +155,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * @return the number of options
      */
     public int getOptionSize() {
-        final List< ? extends HtmlElement> elementList = getHtmlElementsByTagName("option");
-        return elementList.size();
+        return getHtmlElementsByTagName("option").size();
     }
 
     /**

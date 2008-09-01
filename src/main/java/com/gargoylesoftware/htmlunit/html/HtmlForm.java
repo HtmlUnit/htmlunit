@@ -348,12 +348,12 @@ public class HtmlForm extends ClickableElement {
      * @throws ElementNotFoundException if there is not input in this form with the specified name
      */
     public final HtmlInput getInputByName(final String name) throws ElementNotFoundException {
-        final List< ? extends HtmlElement> inputs = getInputsByName(name);
+        final List<HtmlInput> inputs = getInputsByName(name);
 
         if (inputs.isEmpty()) {
             throw new ElementNotFoundException("input", "name", name);
         }
-        return (HtmlInput) inputs.get(0);
+        return inputs.get(0);
     }
 
     /**
