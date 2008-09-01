@@ -969,6 +969,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @param elementName the name of the element to search for
      * @param attributeName the name of the attribute to search for
      * @param attributeValue the value of the attribute to search for
+     * @param <X> the sub-element
      * @return all elements which are descendants of this element and match the specified search criteria
      */
     @SuppressWarnings("unchecked")
