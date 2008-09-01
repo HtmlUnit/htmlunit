@@ -138,7 +138,7 @@ public final class WebAssert {
      * @param xpath the XPath expression which is expected to not match an element in the page
      */
     public static void assertElementNotPresentByXPath(final HtmlPage page, final String xpath) {
-        final List< ? > elements = page.getByXPath(xpath);
+        final List<?> elements = page.getByXPath(xpath);
         if (!elements.isEmpty()) {
             final String msg = "The page does not contain any elements matching the XPath expression '" + xpath
                             + "'.";
