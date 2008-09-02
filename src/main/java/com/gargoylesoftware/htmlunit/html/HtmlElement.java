@@ -374,7 +374,6 @@ public abstract class HtmlElement extends DomElement implements Element {
     /**
      * Returns the HTML elements that are descendants of this element and that have one of the specified tag names.
      * @param tagNames the tag names to match (case-insensitive)
-     * @param <X> the sub-element
      * @return the HTML elements that are descendants of this element and that have one of the specified tag name
      */
     public final List<HtmlElement> getHtmlElementsByTagNames(final List<String> tagNames) {
