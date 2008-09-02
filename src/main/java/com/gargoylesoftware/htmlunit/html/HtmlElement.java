@@ -377,10 +377,10 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @param <X> the sub-element
      * @return the HTML elements that are descendants of this element and that have one of the specified tag name
      */
-    public final <X extends HtmlElement> List<X> getHtmlElementsByTagNames(final List<String> tagNames) {
-        final List<X> list = new ArrayList<X>();
+    public final List<HtmlElement> getHtmlElementsByTagNames(final List<String> tagNames) {
+        final List<HtmlElement> list = new ArrayList<HtmlElement>();
         for (final String tagName : tagNames) {
-            list.addAll(this.<X>getHtmlElementsByTagName(tagName));
+            list.addAll(getHtmlElementsByTagName(tagName));
         }
         return list;
     }
