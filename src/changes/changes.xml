@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.3-SNAPSHOT" description="Bugfixes">
+            <action type="fix" dev="sdanig" id="2089341">
+                JavaScript: StackOverflowError when setting the location hash via the location.href attribute.
+            </action>
             <action type="add" dev="sdanig" id="2063012">
                 JavaScript: add stylesheet.href attribute.
             </action>

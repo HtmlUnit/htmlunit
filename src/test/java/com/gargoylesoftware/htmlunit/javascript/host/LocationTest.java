@@ -264,6 +264,39 @@ public class LocationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void testSetHash2() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "  function test() {\n"
+            + "    window.location.hash = 'hello';\n"
+            + "    alert(window.location.hash);\n"
+            + "    window.location.hash = '#hi';\n"
+            + "    alert(window.location.hash);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"#hello", "#hi"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Verifies that setting <tt>location.href</tt> to a hash behaves like setting <tt>location.hash</tt>
+     * (ie doesn't result in a server hit). See bug 2089341.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testSetHrefWithOnlyHash() throws Exception {
+        final String html = "<html><body><script>document.location.href = '#x';</script></body></html>";
+        loadPage(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void testSetHostname() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -571,25 +604,4 @@ public class LocationTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void hash() throws Exception {
-        final String html
-            = "<html><head><title>First</title><script>\n"
-            + "  function test() {\n"
-            + "    window.location.hash = 'hello';\n"
-            + "    alert(window.location.hash);\n"
-            + "    window.location.hash = '#hi';\n"
-            + "    alert(window.location.hash);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        final String[] expectedAlerts = {"#hello", "#hi"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
 }

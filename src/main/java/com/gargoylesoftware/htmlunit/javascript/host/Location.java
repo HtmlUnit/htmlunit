@@ -191,9 +191,16 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/href_3.asp">
      * MSDN Documentation</a>
      */
-    public void jsxSet_href(final String newLocation) throws IOException {
-        // URL should be resolved from the page in which the js is executed
-        // cf test FrameTest#testLocation
+    public void jsxSet_href(final String newLocation)
+        throws IOException {
+
+        // If just setting the hash, avoid a server hit.
+        if (newLocation.startsWith("#")) {
+            jsxSet_hash(newLocation);
+            return;
+        }
+
+        // URL should be resolved from the page in which the JS is executed; cf test FrameTest#testLocation.
         final HtmlPage page = (HtmlPage) getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
 
         if (newLocation.startsWith(JAVASCRIPT_PREFIX)) {
