@@ -52,6 +52,7 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
@@ -1816,7 +1817,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             }
 
             if (elementWithFocus_ != null) {
-                if (getWebClient().getBrowserVersion().hasProperty("blurBeforeOnchange")) {
+                if (getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.BLUR_BEFORE_ONCHANGE)) {
                     elementWithFocus_.fireEvent(Event.TYPE_BLUR);
                     elementWithFocus_.removeFocus();
                 }

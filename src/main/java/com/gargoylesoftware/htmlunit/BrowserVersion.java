@@ -15,13 +15,15 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Map;
+import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Objects of this class represent one specific version of a given browser. Predefined
@@ -59,7 +61,7 @@ public class BrowserVersion implements Serializable {
     private float javaScriptVersionNumeric_;
     private float browserVersionNumeric_;
     private Set<PluginConfiguration> plugins_ = new HashSet<PluginConfiguration>();
-    private final Map<String, String> properties_ = new HashMap<String, String>();
+    private final List<String> properties_ = new ArrayList<String>();
     private final String nickName_;
 
     /** Application code name for both Microsoft Internet Explorer and Netscape series. */
@@ -100,7 +102,6 @@ public class BrowserVersion implements Serializable {
             "Shockwave Flash", "swf"));
         FIREFOX_2.getPlugins().add(flash);
         FIREFOX_3.getPlugins().add(flash);
-        FIREFOX_2.properties_.put("blurBeforeOnchange", "true");
     }
 
     /** Internet Explorer 6. */
@@ -152,6 +153,17 @@ public class BrowserVersion implements Serializable {
         setJavaScriptVersion(javaScriptVersion);
         browserVersionNumeric_ = browserVersionNumeric;
         nickName_ = nickName;
+        try {
+            final Properties props = new Properties();
+            props.load(getClass().getResourceAsStream("/com/gargoylesoftware/htmlunit/javascript/configuration/"
+                    + nickName + ".properties"));
+            for (final Object key : props.keySet()) {
+                properties_.add(key.toString());
+            }
+        }
+        catch (final Exception io) {
+            LogFactory.getLog(getClass()).warn("Configuration file not found for BrowserVersion: " + nickName);
+        }
     }
 
     /**
@@ -446,12 +458,12 @@ public class BrowserVersion implements Serializable {
     }
 
     /**
-     * Indicates if this instance has the given property. Used for HtmlUnit internal processing.
+     * Indicates if this instance has the given feature. Used for HtmlUnit internal processing.
      * @param property the property name
-     * @return <code>false</code> if this browser doesn't have this property of if it is not set to <code>true</code>
+     * @return <code>false</code> if this browser doesn't have this feature
      */
-    public boolean hasProperty(final String property) {
-        return "true".equals(properties_.get(property));
+    public boolean hasFeature(final BrowserVersionFeatures property) {
+        return properties_.contains(property.name());
     }
 
     /**

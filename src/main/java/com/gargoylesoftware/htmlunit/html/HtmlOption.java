@@ -19,6 +19,7 @@ import java.util.Map;
 
 import org.w3c.dom.Node;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
@@ -152,7 +153,8 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      *         when emulating IE)
      */
     public final boolean isDisabled() {
-        if (getPage().getWebClient().getBrowserVersion().isIE()) {
+        if (getPage().getWebClient().getBrowserVersion().hasFeature(
+                BrowserVersionFeatures.HTMLOPTION_PREVENT_DISABLED)) {
             return false;
         }
         return isAttributeDefined("disabled");
