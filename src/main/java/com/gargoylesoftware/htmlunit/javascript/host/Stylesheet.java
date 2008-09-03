@@ -419,7 +419,6 @@ public class Stylesheet extends SimpleScriptable {
      * @return the URL of the stylesheet
      */
     public String jsxGet_href() {
-
         final BrowserVersion version = getBrowserVersion();
 
         if (ownerNode_ != null) {
