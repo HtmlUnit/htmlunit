@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
@@ -23,7 +24,6 @@ import java.util.Set;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * Objects of this class represent one specific version of a given browser. Predefined
@@ -61,7 +61,7 @@ public class BrowserVersion implements Serializable {
     private float javaScriptVersionNumeric_;
     private float browserVersionNumeric_;
     private Set<PluginConfiguration> plugins_ = new HashSet<PluginConfiguration>();
-    private final List<String> properties_ = new ArrayList<String>();
+    private final List<BrowserVersionFeatures> features_ = new ArrayList<BrowserVersionFeatures>();
     private final String nickName_;
 
     /** Application code name for both Microsoft Internet Explorer and Netscape series. */
@@ -86,16 +86,33 @@ public class BrowserVersion implements Serializable {
     public static final BrowserVersion FIREFOX_2 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows; en-US)",
         "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.4) Gecko/20070515 Firefox/2.0.0.4",
-        "1.2", 2, "FF2");
+        "1.2", 2, "FF2", null);
 
     /** Firefox 3. */
     public static final BrowserVersion FIREFOX_3 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows; en-US)",
         "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.1) Gecko/2008070208 Firefox/3.0.1",
-        "1.2", 3, "FF3");
+        "1.2", 3, "FF3", null);
+
+    /** Internet Explorer 6. */
+    public static final BrowserVersion INTERNET_EXPLORER_6_0 = new BrowserVersion(
+        INTERNET_EXPLORER, "4.0 (compatible; MSIE 6.0b; Windows 98)",
+        "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98)", "1.2", 6, "IE6", null);
+
+    /** Internet Explorer 7. */
+    public static final BrowserVersion INTERNET_EXPLORER_7_0 = new BrowserVersion(
+        INTERNET_EXPLORER, "4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322)",
+        "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322)", "1.2", 7, "IE7", null);
+
+    /** The default browser version. */
+    private static BrowserVersion DefaultBrowserVersion_ = INTERNET_EXPLORER_7_0;
 
     /** Register plugins for the Firefox browser versions. */
     static {
+        INTERNET_EXPLORER_6_0.initDefaultFeatures();
+        INTERNET_EXPLORER_7_0.initDefaultFeatures();
+        FIREFOX_2.initDefaultFeatures();
+        FIREFOX_3.initDefaultFeatures();
         final PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
             "Shockwave Flash 9.0 r31", "libflashplayer.so");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
@@ -103,19 +120,6 @@ public class BrowserVersion implements Serializable {
         FIREFOX_2.getPlugins().add(flash);
         FIREFOX_3.getPlugins().add(flash);
     }
-
-    /** Internet Explorer 6. */
-    public static final BrowserVersion INTERNET_EXPLORER_6_0 = new BrowserVersion(
-        INTERNET_EXPLORER, "4.0 (compatible; MSIE 6.0b; Windows 98)",
-        "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98)", "1.2", 6, "IE6");
-
-    /** Internet Explorer 7. */
-    public static final BrowserVersion INTERNET_EXPLORER_7_0 = new BrowserVersion(
-        INTERNET_EXPLORER, "4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322)",
-        "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322)", "1.2", 7, "IE7");
-
-    /** The default browser version. */
-    private static BrowserVersion DefaultBrowserVersion_ = INTERNET_EXPLORER_7_0;
 
     /**
      * Instantiate one.
@@ -130,7 +134,25 @@ public class BrowserVersion implements Serializable {
         final String userAgent, final String javaScriptVersion, final float browserVersionNumeric) {
 
         this(applicationName, applicationVersion, userAgent, javaScriptVersion,
-                browserVersionNumeric, applicationName + browserVersionNumeric);
+                browserVersionNumeric, applicationName + browserVersionNumeric, null);
+    }
+
+    /**
+     * Instantiate one.
+     *
+     * @param applicationName the name of the application
+     * @param applicationVersion the version string of the application
+     * @param userAgent the user agent string that will be sent to the server
+     * @param javaScriptVersion the version of JavaScript
+     * @param browserVersionNumeric the floating number version of the browser
+     * @param features the browser features
+     */
+    public BrowserVersion(final String applicationName, final String applicationVersion,
+        final String userAgent, final String javaScriptVersion, final float browserVersionNumeric,
+        final BrowserVersionFeatures[] features) {
+
+        this(applicationName, applicationVersion, userAgent, javaScriptVersion,
+                browserVersionNumeric, applicationName + browserVersionNumeric, features);
     }
 
     /**
@@ -142,10 +164,11 @@ public class BrowserVersion implements Serializable {
      * @param javaScriptVersion the version of JavaScript
      * @param browserVersionNumeric the floating number version of the browser
      * @param nickName the short name of the browser (like "FF2", "FF3", "IE6", ...)
+     * @param features the browser features
      */
-    public BrowserVersion(final String applicationName, final String applicationVersion,
+    private BrowserVersion(final String applicationName, final String applicationVersion,
         final String userAgent, final String javaScriptVersion, final float browserVersionNumeric,
-        final String nickName) {
+        final String nickName, final BrowserVersionFeatures[] features) {
 
         applicationName_ = applicationName;
         setApplicationVersion(applicationVersion);
@@ -153,16 +176,22 @@ public class BrowserVersion implements Serializable {
         setJavaScriptVersion(javaScriptVersion);
         browserVersionNumeric_ = browserVersionNumeric;
         nickName_ = nickName;
+        if (features != null) {
+        	features_.addAll(Arrays.asList(features));
+        }
+    }
+
+    private void initDefaultFeatures() {
         try {
             final Properties props = new Properties();
             props.load(getClass().getResourceAsStream("/com/gargoylesoftware/htmlunit/javascript/configuration/"
-                    + nickName + ".properties"));
+                    + nickName_ + ".properties"));
             for (final Object key : props.keySet()) {
-                properties_.add(key.toString());
+                features_.add(BrowserVersionFeatures.valueOf(key.toString()));
             }
         }
         catch (final Exception io) {
-            LogFactory.getLog(getClass()).warn("Configuration file not found for BrowserVersion: " + nickName);
+            throw new RuntimeException("Configuration file not found for BrowserVersion: " + nickName_);
         }
     }
 
@@ -463,7 +492,7 @@ public class BrowserVersion implements Serializable {
      * @return <code>false</code> if this browser doesn't have this feature
      */
     public boolean hasFeature(final BrowserVersionFeatures property) {
-        return properties_.contains(property.name());
+        return features_.contains(property.name());
     }
 
     /**
