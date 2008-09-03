@@ -177,7 +177,7 @@ public class BrowserVersion implements Serializable {
         browserVersionNumeric_ = browserVersionNumeric;
         nickName_ = nickName;
         if (features != null) {
-        	features_.addAll(Arrays.asList(features));
+            features_.addAll(Arrays.asList(features));
         }
     }
 
