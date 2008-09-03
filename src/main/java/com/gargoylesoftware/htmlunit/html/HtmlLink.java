@@ -151,7 +151,7 @@ public class HtmlLink extends ClickableElement {
     }
 
     /**
-     * <span style="color:red">POTENIAL PERFORMANCE KILLER - DOWNLOADS THE IMAGE - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">POTENIAL PERFORMANCE KILLER - DOWNLOADS THE RESOURCE - USE AT YOUR OWN RISK.</span><br/>
      * If the linked content is not already downloaded it triggers a download. Then it stores the response
      * for later use.<br/>
      *
@@ -164,7 +164,6 @@ public class HtmlLink extends ClickableElement {
         if (downloadIfNeeded && cachedWebResponse_ == null) {
             final HtmlPage page = (HtmlPage) getPage();
             final WebClient webclient = page.getWebClient();
-
             final URL url = page.getFullyQualifiedUrl(getHrefAttribute());
             cachedWebResponse_ = webclient.loadWebResponse(new WebRequestSettings(url));
         }
