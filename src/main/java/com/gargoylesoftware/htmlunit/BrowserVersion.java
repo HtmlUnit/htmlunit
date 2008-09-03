@@ -492,7 +492,7 @@ public class BrowserVersion implements Serializable {
      * @return <code>false</code> if this browser doesn't have this feature
      */
     public boolean hasFeature(final BrowserVersionFeatures property) {
-        return features_.contains(property.name());
+        return features_.contains(property);
     }
 
     /**
