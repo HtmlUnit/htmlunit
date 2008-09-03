@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
@@ -39,9 +41,11 @@ import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSRuleList;
 import org.w3c.dom.css.CSSStyleSheet;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlHtml;
+import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.steadystate.css.dom.CSSStyleRuleImpl;
@@ -408,6 +412,56 @@ public class Stylesheet extends SimpleScriptable {
             cssRules_ = new com.gargoylesoftware.htmlunit.javascript.host.CSSRuleList(this);
         }
         return cssRules_;
+    }
+
+    /**
+     * Returns the URL of the stylesheet.
+     * @return the URL of the stylesheet
+     */
+    public String jsxGet_href() {
+
+        final BrowserVersion version = getBrowserVersion();
+
+        if (ownerNode_ != null) {
+            final DomNode node = ownerNode_.getDomNodeOrDie();
+            if (node instanceof HtmlLink) {
+                // <link rel="stylesheet" type="text/css" href="..." />
+                final HtmlLink link = (HtmlLink) node;
+                final HtmlPage page = (HtmlPage) link.getPage();
+                final String href = link.getHrefAttribute();
+                if (version.isIE()) {
+                    // Don't expand relative URLs.
+                    return href;
+                }
+                else {
+                    // Expand relative URLs.
+                    try {
+                        final URL url = page.getFullyQualifiedUrl(href);
+                        return url.toExternalForm();
+                    }
+                    catch (final MalformedURLException e) {
+                        // Log the error and fall through to the return values below.
+                        getLog().warn(e.getMessage(), e);
+                    }
+                }
+            }
+        }
+
+        // <style type="text/css"> ... </style>
+        if (version.isIE()) {
+            return "";
+        }
+        else {
+            if (version.isNetscape() && version.getBrowserVersionNumeric() >= 7) {
+                return null;
+            }
+            else {
+                final DomNode node = ownerNode_.getDomNodeOrDie();
+                final HtmlPage page = (HtmlPage) node.getPage();
+                final URL url = page.getWebResponse().getUrl();
+                return url.toExternalForm();
+            }
+        }
     }
 
 }

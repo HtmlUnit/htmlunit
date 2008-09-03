@@ -15,6 +15,9 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.StringReader;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +26,9 @@ import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SelectorList;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
@@ -221,4 +227,48 @@ public class StyleSheetTest extends WebTestCase {
                 + "</body></html>";
         loadPageWithAlerts(html);
     }
+
+    /**
+     * Test for bug 2063012 (missing href attribute).
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF2 = { "4", "http://x/style2.css", "http://x/style4.css", "http://x/test.html", "http://x/test.html" },
+            FF3 = { "4", "http://x/style2.css", "http://x/style4.css", "null", "null" },
+            IE = { "4", "http://x/style2.css", "style4.css", "", "" })
+    public void href() throws Exception {
+        final String html = "<html>\n"
+            + "  <head>\n"
+            + "    <link href='http://x/style1.css' type='text/css'></link>\n" // Ignored.
+            + "    <link href='http://x/style2.css' rel='stylesheet'></link>\n"
+            + "    <link href='http://x/style3.css'></link>\n" // Ignored.
+            + "    <link href='style4.css' rel='stylesheet'></link>\n"
+            + "    <style>div.x { color: red; }</style>\n"
+            + "  </head>\n" + "  <body>\n"
+            + "    <style>div.y { color: green; }</style>\n"
+            + "    <script>\n"
+            + "      alert(document.styleSheets.length);\n"
+            + "      alert(document.styleSheets[0].href);\n"
+            + "      alert(document.styleSheets[1].href);\n"
+            + "      alert(document.styleSheets[2].href);\n"
+            + "      alert(document.styleSheets[3].href);\n"
+            + "    </script>\n" + "  </body>\n"
+            + "</html>";
+
+        final WebClient client = getWebClient();
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection conn = new MockWebConnection(client);
+        conn.setResponse(new URL("http://x/test.html"), html);
+        conn.setResponse(new URL("http://x/style1.css"), "");
+        conn.setResponse(new URL("http://x/style2.css"), "");
+        conn.setResponse(new URL("http://x/style3.css"), "");
+        conn.setResponse(new URL("http://x/style4.css"), "");
+        client.setWebConnection(conn);
+
+        client.getPage("http://x/test.html");
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
+
 }

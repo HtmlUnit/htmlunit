@@ -1917,6 +1917,7 @@
         <property name="cssRules" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
+        <property name="href" readable="true" writable="false"/>
         <property name="ownerNode" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
