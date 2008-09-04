@@ -155,9 +155,6 @@ public class HtmlImageInputTest extends WebTestCase {
      */
     @Test
     public void testClickFiresOnMouseDown() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String s = "<html><body><input type='image' src='x.png' id='i' onmousedown='alert(1)'></body></html>";
         final String[] expectedAlerts = {"1"};
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -173,9 +170,6 @@ public class HtmlImageInputTest extends WebTestCase {
      */
     @Test
     public void testClickFiresOnMouseUp() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String s = "<html><body><input type='image' src='x.png' id='i' onmouseup='alert(1)'></body></html>";
         final String[] expectedAlerts = {"1"};
         final List<String> collectedAlerts = new ArrayList<String>();

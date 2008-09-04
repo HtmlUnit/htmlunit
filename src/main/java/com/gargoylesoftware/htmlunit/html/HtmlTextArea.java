@@ -19,6 +19,7 @@ import java.io.PrintWriter;
 import java.util.Map;
 
 import org.apache.commons.httpclient.NameValuePair;
+import org.w3c.dom.ranges.Range;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -45,10 +46,6 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     public static final String TAG_NAME = "textarea";
 
     private String defaultValue_;
-
-    private int selectionStart_;
-
-    private int selectionEnd_;
 
     private boolean preventDefault_;
 
@@ -323,11 +320,24 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * @return the selected text contained in this text area
      */
     public String getSelectedText() {
-        String text = null;
-        if (selectionStart_ != selectionEnd_) {
-            text = getText().substring(selectionStart_, selectionEnd_);
+        final Range selection = getThisSelection();
+        if (selection != null) {
+            return getText().substring(selection.getStartOffset(), selection.getEndOffset());
         }
-        return text;
+        else {
+            return null;
+        }
+    }
+
+    private Range getThisSelection() {
+        if (getPage() instanceof HtmlPage) {
+            final Range selection = ((HtmlPage) getPage()).getSelection();
+            if (selection.getStartContainer() == this && selection.getEndContainer() == this) {
+                return selection;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -335,7 +345,13 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * @return the start position >= 0
      */
     public int getSelectionStart() {
-        return selectionStart_;
+        final Range selection = getThisSelection();
+        if (selection != null) {
+            return selection.getStartOffset();
+        }
+        else {
+            return 0;
+        }
     }
 
     /**
@@ -343,17 +359,18 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * @param selectionStart the start position of the text >= 0
      */
     public void setSelectionStart(int selectionStart) {
-        if (selectionStart < 0) {
-            selectionStart = 0;
+        if (getPage() instanceof HtmlPage) {
+            final HtmlPage page = (HtmlPage) getPage();
+            final int length = getText().length();
+            selectionStart = Math.max(0, Math.min(selectionStart, length));
+            page.getSelection().setStart(this, selectionStart);
+            if (page.getSelection().getEndContainer() != this) {
+                page.getSelection().setEnd(this, length);
+            }
+            else if (page.getSelection().getEndOffset() < selectionStart) {
+                page.getSelection().setEnd(this, selectionStart);
+            }
         }
-        final int length = getText().length();
-        if (selectionStart > length) {
-            selectionStart = length;
-        }
-        if (selectionEnd_ < selectionStart) {
-            selectionEnd_ = selectionStart;
-        }
-        this.selectionStart_ = selectionStart;
     }
 
     /**
@@ -361,7 +378,13 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * @return the end position >= 0
      */
     public int getSelectionEnd() {
-        return selectionEnd_;
+        final Range selection = getThisSelection();
+        if (selection != null) {
+            return selection.getEndOffset();
+        }
+        else {
+            return 0;
+        }
     }
 
     /**
@@ -370,17 +393,18 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
 
      */
     public void setSelectionEnd(int selectionEnd) {
-        if (selectionEnd < 0) {
-            selectionEnd = 0;
+        if (getPage() instanceof HtmlPage) {
+            final HtmlPage page = (HtmlPage) getPage();
+            final int length = getText().length();
+            selectionEnd = Math.min(length, Math.max(selectionEnd, 0));
+            page.getSelection().setEnd(this, selectionEnd);
+            if (page.getSelection().getStartContainer() != this) {
+                page.getSelection().setStart(this, 0);
+            }
+            else if (page.getSelection().getStartOffset() > selectionEnd) {
+                page.getSelection().setStart(this, selectionEnd);
+            }
         }
-        final int length = getText().length();
-        if (selectionEnd > length) {
-            selectionEnd = length;
-        }
-        if (selectionEnd < selectionStart_) {
-            selectionStart_ = selectionEnd;
-        }
-        this.selectionEnd_ = selectionEnd;
     }
 
     /**
@@ -446,5 +470,18 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
         focus();
         setSelectionStart(0);
         setSelectionEnd(getText().length());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void focus() {
+        super.focus();
+        if (getPage() instanceof HtmlPage) {
+            final Range selection = ((HtmlPage) getPage()).getSelection();
+            selection.setStart(this, 0);
+            selection.setEnd(this, getText().length());
+        }
     }
 }

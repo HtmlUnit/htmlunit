@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,9 +29,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.html.ClickableElement;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 
 /**
  * Proof of concept for using WebDriver to run (some) HtmlUnit tests and have the possibility
@@ -79,7 +83,6 @@ public class SimpleWebDriverTest extends WebTestCase {
 
     /**
      * Test event order.
-     * In fact the assumption is is correct for FF3 and IE but not for FF2.
      * @throws Exception if the test fails
      */
     @Test
@@ -94,6 +97,26 @@ public class SimpleWebDriverTest extends WebTestCase {
         textField.click(); // to give focus
         textField.sendKeys("a");
         webDriver.findElement(By.id("other")).click();
+
+        // verifications
+        assertEquals(getExpectedEntries(), getEntries("log"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void clickEvents() throws Exception {
+        final File testsDir = new File("src/test/resources/testfiles");
+        final File testFile = new File(testsDir, "testClickEvents.html");
+
+        final WebDriver webDriver = getWebDriver();
+
+        webDriver.get(testFile.toURL().toExternalForm());
+        
+        webDriver.findElement(By.id("testSpan")).click();
+        webDriver.findElement(By.id("testInput")).click();
+        webDriver.findElement(By.id("testImage")).click();
 
         // verifications
         assertEquals(getExpectedEntries(), getEntries("log"));
@@ -190,20 +213,51 @@ public class SimpleWebDriverTest extends WebTestCase {
     }
 
     private WebDriver buildWebDriver() {
+
         if ("firefox".equalsIgnoreCase(System.getProperty("htmlunit.webdriver"))) {
             return new FirefoxDriver();
         }
         // TODO: IEDriver
         else {
             final WebClient webClient = getWebClient();
-            final HtmlUnitDriver driver = new HtmlUnitDriver() {
+            final HtmlUnitDriver driver = new HtmlUnitDriver(true) {
                 @Override
                 protected WebClient newWebClient() {
                     return webClient;
                 }
+                
+                @Override
+                protected WebElement newHtmlUnitWebElement(HtmlElement element) {
+                	return new FixedWebDriverHtmlUnitWebElement(this, element);
+                }
             };
-            driver.setJavascriptEnabled(true);
             return driver;
         }
     }
+}
+
+/**
+ * As HtmlUnit didn't generate the right events, WebDriver did it for us, but now that we do it correctly,
+ * WebDriver shouldn't do it anymore
+ * http://code.google.com/p/webdriver/issues/detail?id=93
+ */
+class FixedWebDriverHtmlUnitWebElement extends HtmlUnitWebElement {
+
+	public FixedWebDriverHtmlUnitWebElement(HtmlUnitDriver parent, HtmlElement element) {
+		super(parent, element);
+	}
+	
+	@Override
+	public void click() {
+        if (!(getElement() instanceof ClickableElement))
+            return;
+
+        final ClickableElement clickableElement = ((ClickableElement) getElement());
+        try {
+			clickableElement.click();
+		}
+        catch (final IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

@@ -51,6 +51,8 @@ import org.w3c.dom.EntityReference;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
+import org.w3c.dom.ranges.Range;
+import org.w3c.dom.ranges.RangeException;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Cache;
@@ -130,6 +132,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
     private List<HtmlAttributeChangeListener> attributeListeners_;
     private final transient Object lock_ = new Object(); // used for synchronization
+    private final Range selection_ = new SimpleRange(getDocumentElement());
 
     /**
      * Creates an instance of HtmlPage.
@@ -2146,5 +2149,129 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      */
     boolean isParsingHtmlSnippet() {
         return snippetParserCount_ > 0;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * @return the current selection
+     */
+    public Range getSelection() {
+        return selection_;
+    }
+}
+
+
+/**
+ * TODO: promote it for a larger usage
+ */
+class SimpleRange implements Range {
+    private static final long serialVersionUID = 1774567829279434291L;
+    private org.w3c.dom.Node startContainer_, endContainer_;
+    private int startOffset_, endOffset_;
+
+    SimpleRange(final DomElement documentElement) {
+        startContainer_ = documentElement;
+        endContainer_ = documentElement;
+        startOffset_ = 0;
+        endOffset_ = 0;
+    }
+
+    public DocumentFragment cloneContents() throws DOMException {
+        throw new RuntimeException("Not implemented!");
+    }
+
+    public Range cloneRange() throws DOMException {
+        throw new RuntimeException("Not implemented!");
+    }
+
+    public void collapse(final boolean toStart) throws DOMException {
+        throw new RuntimeException("Not implemented!");
+    }
+
+    public short compareBoundaryPoints(final short how, final Range sourceRange) throws DOMException {
+        throw new RuntimeException("Not implemented!");
+    }
+
+    public void deleteContents() throws DOMException {
+        throw new RuntimeException("Not implemented!");
+    }
+
+    public void detach() throws DOMException {
+        throw new RuntimeException("Not implemented!");
+    }
+
+    public DocumentFragment extractContents() throws DOMException {
+        throw new RuntimeException("Not implemented!");
+    }
+
+    public boolean getCollapsed() throws DOMException {
+        throw new RuntimeException("Not implemented!");
+    }
+
+    public org.w3c.dom.Node getCommonAncestorContainer() throws DOMException {
+        throw new RuntimeException("Not implemented!");
+    }
+
+    public org.w3c.dom.Node getEndContainer() throws DOMException {
+        return endContainer_;
+    }
+
+    public int getEndOffset() throws DOMException {
+        return endOffset_;
+    }
+
+    public org.w3c.dom.Node getStartContainer() throws DOMException {
+        return startContainer_;
+    }
+
+    public int getStartOffset() throws DOMException {
+        return startOffset_;
+    }
+
+    public void insertNode(final org.w3c.dom.Node newNode) throws DOMException, RangeException {
+        throw new RuntimeException("Not implemented!");
+    }
+
+    public void selectNode(final org.w3c.dom.Node refNode) throws RangeException, DOMException {
+        throw new RuntimeException("Not implemented!");
+    }
+
+    public void selectNodeContents(final org.w3c.dom.Node refNode) throws RangeException,
+            DOMException {
+        throw new RuntimeException("Not implemented!");
+    }
+
+    public void setEnd(final org.w3c.dom.Node refNode, final int offset) throws RangeException,
+            DOMException {
+        endContainer_ = refNode;
+        endOffset_ = offset;
+    }
+
+    public void setEndAfter(final org.w3c.dom.Node refNode) throws RangeException, DOMException {
+        throw new RuntimeException("Not implemented!");
+    }
+
+    public void setEndBefore(final org.w3c.dom.Node refNode) throws RangeException, DOMException {
+        throw new RuntimeException("Not implemented!");
+    }
+
+    public void setStart(final org.w3c.dom.Node refNode, final int offset) throws RangeException,
+            DOMException {
+        startContainer_ = refNode;
+        startOffset_ = offset;
+    }
+
+    public void setStartAfter(final org.w3c.dom.Node refNode) throws RangeException, DOMException {
+        throw new RuntimeException("Not implemented!");
+    }
+
+    public void setStartBefore(final org.w3c.dom.Node refNode) throws RangeException,
+            DOMException {
+        throw new RuntimeException("Not implemented!");
+    }
+
+    public void surroundContents(final org.w3c.dom.Node newParent) throws DOMException,
+            RangeException {
+        throw new RuntimeException("Not implemented!");
     }
 }

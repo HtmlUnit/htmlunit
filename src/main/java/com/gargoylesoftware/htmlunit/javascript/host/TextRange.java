@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import org.w3c.dom.ranges.Range;
+
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
@@ -26,6 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms535872.aspx">MSDN doc</a>
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class TextRange extends SimpleScriptable {
 
@@ -37,14 +39,17 @@ public class TextRange extends SimpleScriptable {
      */
     public String jsxGet_text() {
         final HtmlPage page = (HtmlPage) getWindow().getDomNodeOrDie();
-        final HtmlElement focused = page.getFocusedElement();
-        if (focused instanceof HtmlTextInput) {
-            final HtmlTextInput input = (HtmlTextInput) focused;
-            return input.getValueAttribute().substring(input.getSelectionStart(), input.getSelectionEnd());
-        }
-        else if (focused instanceof HtmlTextArea) {
-            final HtmlTextArea input = (HtmlTextArea) focused;
-            return input.getText().substring(input.getSelectionStart(), input.getSelectionEnd());
+        final Range selection = page.getSelection();
+        // currently only working for text input and textarea
+        if (selection.getStartContainer() == selection.getEndContainer()) {
+            if (selection.getStartContainer() instanceof HtmlTextInput) {
+                final HtmlTextInput input = (HtmlTextInput) selection.getStartContainer();
+                return input.getValueAttribute().substring(input.getSelectionStart(), input.getSelectionEnd());
+            }
+            else if (selection.getStartContainer() instanceof HtmlTextArea) {
+                final HtmlTextArea input = (HtmlTextArea) selection.getStartContainer();
+                return input.getText().substring(input.getSelectionStart(), input.getSelectionEnd());
+            }
         }
         return "";
     }
@@ -55,18 +60,21 @@ public class TextRange extends SimpleScriptable {
      */
     public void jsxSet_text(final String text) {
         final HtmlPage page = (HtmlPage) getWindow().getDomNodeOrDie();
-        final HtmlElement focused = page.getFocusedElement();
-        if (focused instanceof HtmlTextInput) {
-            final HtmlTextInput input = (HtmlTextInput) focused;
-            final String oldValue = input.getValueAttribute();
-            input.setValueAttribute(oldValue.substring(0, input.getSelectionStart()) + text
-                    + oldValue.substring(input.getSelectionEnd()));
-        }
-        else if (focused instanceof HtmlTextArea) {
-            final HtmlTextArea input = (HtmlTextArea) focused;
-            final String oldValue = input.getText();
-            input.setText(oldValue.substring(0, input.getSelectionStart()) + text
-                    + oldValue.substring(input.getSelectionEnd()));
+        final Range selection = page.getSelection();
+        // currently only working for text input and textarea
+        if (selection.getStartContainer() == selection.getEndContainer()) {
+            if (selection.getStartContainer() instanceof HtmlTextInput) {
+                final HtmlTextInput input = (HtmlTextInput) selection.getStartContainer();
+                final String oldValue = input.getValueAttribute();
+                input.setValueAttribute(oldValue.substring(0, input.getSelectionStart()) + text
+                        + oldValue.substring(input.getSelectionEnd()));
+            }
+            else if (selection.getStartContainer() instanceof HtmlTextArea) {
+                final HtmlTextArea input = (HtmlTextArea) selection.getStartContainer();
+                final String oldValue = input.getText();
+                input.setText(oldValue.substring(0, input.getSelectionStart()) + text
+                        + oldValue.substring(input.getSelectionEnd()));
+            }
         }
     }
 
