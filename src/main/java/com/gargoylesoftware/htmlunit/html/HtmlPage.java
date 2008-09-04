@@ -2161,7 +2161,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 }
 
-
 /**
  * TODO: promote it for a larger usage
  */

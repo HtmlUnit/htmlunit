@@ -213,7 +213,6 @@ public class SimpleWebDriverTest extends WebTestCase {
     }
 
     private WebDriver buildWebDriver() {
-
         if ("firefox".equalsIgnoreCase(System.getProperty("htmlunit.webdriver"))) {
             return new FirefoxDriver();
         }
