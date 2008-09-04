@@ -113,7 +113,7 @@ public class SimpleWebDriverTest extends WebTestCase {
         final WebDriver webDriver = getWebDriver();
 
         webDriver.get(testFile.toURL().toExternalForm());
-        
+
         webDriver.findElement(By.id("testSpan")).click();
         webDriver.findElement(By.id("testInput")).click();
         webDriver.findElement(By.id("testImage")).click();
@@ -225,10 +225,10 @@ public class SimpleWebDriverTest extends WebTestCase {
                 protected WebClient newWebClient() {
                     return webClient;
                 }
-                
+
                 @Override
-                protected WebElement newHtmlUnitWebElement(HtmlElement element) {
-                	return new FixedWebDriverHtmlUnitWebElement(this, element);
+                protected WebElement newHtmlUnitWebElement(final HtmlElement element) {
+                    return new FixedWebDriverHtmlUnitWebElement(this, element);
                 }
             };
             return driver;
@@ -243,21 +243,22 @@ public class SimpleWebDriverTest extends WebTestCase {
  */
 class FixedWebDriverHtmlUnitWebElement extends HtmlUnitWebElement {
 
-	public FixedWebDriverHtmlUnitWebElement(HtmlUnitDriver parent, HtmlElement element) {
-		super(parent, element);
-	}
-	
-	@Override
-	public void click() {
-        if (!(getElement() instanceof ClickableElement))
+    public FixedWebDriverHtmlUnitWebElement(final HtmlUnitDriver parent, final HtmlElement element) {
+        super(parent, element);
+    }
+
+    @Override
+    public void click() {
+        if (!(getElement() instanceof ClickableElement)) {
             return;
+        }
 
         final ClickableElement clickableElement = ((ClickableElement) getElement());
         try {
-			clickableElement.click();
-		}
+            clickableElement.click();
+        }
         catch (final IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
+            throw new RuntimeException(e);
+        }
+    }
 }
