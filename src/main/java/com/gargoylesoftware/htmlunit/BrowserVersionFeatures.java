@@ -19,6 +19,7 @@ package com.gargoylesoftware.htmlunit;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public enum BrowserVersionFeatures {
 
@@ -26,5 +27,17 @@ public enum BrowserVersionFeatures {
     HTMLOPTION_PREVENT_DISABLED,
 
     /** */
-    BLUR_BEFORE_ONCHANGE;
+    BLUR_BEFORE_ONCHANGE,
+
+    /**
+     * Indicates if href property for a &lt;link rel="stylesheet" type="text/css" href="..." /&gt;
+     * is the fully qualified url.
+     */
+    STYLESHEET_HREF_EXPANDURL,
+
+    /** Indicates the the href property for a &lt;style type="text/css"&gt; ... &lt;/style&gt; is "" */
+    STYLESHEET_HREF_STYLE_EMPTY,
+
+    /** Indicates the the href property for a &lt;style type="text/css"&gt; ... &lt;/style&gt; is null */
+    STYLESHEET_HREF_STYLE_NULL;
 }

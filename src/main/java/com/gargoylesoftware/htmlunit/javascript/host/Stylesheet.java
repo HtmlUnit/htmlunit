@@ -42,6 +42,7 @@ import org.w3c.dom.css.CSSRuleList;
 import org.w3c.dom.css.CSSStyleSheet;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlHtml;
@@ -428,7 +429,7 @@ public class Stylesheet extends SimpleScriptable {
                 final HtmlLink link = (HtmlLink) node;
                 final HtmlPage page = (HtmlPage) link.getPage();
                 final String href = link.getHrefAttribute();
-                if (version.isIE()) {
+                if (!version.hasFeature(BrowserVersionFeatures.STYLESHEET_HREF_EXPANDURL)) {
                     // Don't expand relative URLs.
                     return href;
                 }
@@ -447,19 +448,17 @@ public class Stylesheet extends SimpleScriptable {
         }
 
         // <style type="text/css"> ... </style>
-        if (version.isIE()) {
+        if (version.hasFeature(BrowserVersionFeatures.STYLESHEET_HREF_STYLE_EMPTY)) {
             return "";
         }
+        else if (version.hasFeature(BrowserVersionFeatures.STYLESHEET_HREF_STYLE_NULL)) {
+            return null;
+        }
         else {
-            if (version.isNetscape() && version.getBrowserVersionNumeric() >= 7) {
-                return null;
-            }
-            else {
-                final DomNode node = ownerNode_.getDomNodeOrDie();
-                final HtmlPage page = (HtmlPage) node.getPage();
-                final URL url = page.getWebResponse().getUrl();
-                return url.toExternalForm();
-            }
+            final DomNode node = ownerNode_.getDomNodeOrDie();
+            final HtmlPage page = (HtmlPage) node.getPage();
+            final URL url = page.getWebResponse().getUrl();
+            return url.toExternalForm();
         }
     }
 
