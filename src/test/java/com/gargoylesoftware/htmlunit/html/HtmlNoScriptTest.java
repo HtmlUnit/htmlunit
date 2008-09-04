@@ -147,7 +147,7 @@ public class HtmlNoScriptTest extends WebTestCase {
             + "  </noscript>\n"
             + "</body>\n";
         final HtmlPage page = loadPage(htmlContent);
-        assertEquals(expected, page.getBody().asXml());
+        assertEquals(expected, page.getBody().asXml().replaceAll("\\r", ""));
     }
 
     /**
@@ -175,6 +175,6 @@ public class HtmlNoScriptTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
-        assertEquals(expected, page.getBody().asXml());
+        assertEquals(expected, page.getBody().asXml().replaceAll("\\r", ""));
     }
 }
