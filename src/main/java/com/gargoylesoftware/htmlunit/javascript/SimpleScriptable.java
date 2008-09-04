@@ -25,11 +25,11 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -233,7 +233,7 @@ public class SimpleScriptable extends ScriptableObject {
         }
         else {
             scriptable.setParentScope(ScriptableObject.getTopLevelScope(
-                    ((HtmlPage) domNode.getPage()).getScriptObject()));
+                    ((SgmlPage) domNode.getPage()).getScriptObject()));
         }
     }
 

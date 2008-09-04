@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.3-SNAPSHOT" description="Bugfixes">
+            <action type="fix" dev="asashour" id="2091788">
+                XmlPage: ClassCastException should not be thrown by .getByXPath().
+            </action>
             <action type="fix" dev="mguillem" id="1985241">
                 JavaScript: trigger focus event when clicking an element or typing in it.
             </action>
