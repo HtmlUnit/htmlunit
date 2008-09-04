@@ -119,7 +119,8 @@ public class ThreadManager {
         final BrowserVersion version = ww.getWebClient().getBrowserVersion();
         final int myThreadID = getNextThreadId();
 
-        final Thread newThread = new Thread(job, "HtmlUnit Managed Thread #" + myThreadID + ": " + label) {
+        final Thread newThread = new Thread(job, "HtmlUnit Managed Thread #" + myThreadID
+            + " for WebWindow(" + ww.getName() + "): " + label) {
             @Override
             public void run() {
                 HtmlUnitContextFactory.putThreadLocal(version);
