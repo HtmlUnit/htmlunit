@@ -9,7 +9,7 @@
     <body>
         <release version="2.3-SNAPSHOT" description="Bugfixes">
             <action type="fix" dev="mguillem" id="1985241">
-                JavaScript: trigger focus event when clicking an element or typing in it. 
+                JavaScript: trigger focus event when clicking an element or typing in it.
             </action>
             <action type="fix" dev="mguillem" id="2013891">
                 JavaScript: trigger mousedown and mouseup event when an element is clicked.
