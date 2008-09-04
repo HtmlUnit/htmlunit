@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.3-SNAPSHOT" description="Bugfixes">
+            <action type="fix" dev="sdanig" id="2070940">
+                JavaScript: make document.styleSheets[x] respect WebClient.printContentOnFailingStatusCode
+                and WebClient.throwExceptionOnFailingStatusCode settings when downloading external CSS files.
+            </action>
             <action type="fix" dev="sdanig" id="2089341">
                 JavaScript: StackOverflowError when setting the location hash via the location.href attribute.
             </action>

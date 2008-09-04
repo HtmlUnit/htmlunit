@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.io.IOException;
 import java.io.StringReader;
 
 import org.mozilla.javascript.Context;
@@ -22,6 +23,8 @@ import org.w3c.css.sac.InputSource;
 import org.w3c.dom.css.CSSStyleSheet;
 
 import com.gargoylesoftware.htmlunit.Cache;
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
@@ -126,7 +129,12 @@ public class StyleSheetList extends SimpleScriptable {
             // <link rel="stylesheet" type="text/css" href="..." />
             final HtmlLink link = (HtmlLink) node;
             try {
+                // Retrieve the associated content and respect client settings regarding failing HTTP status codes.
                 final WebResponse response = link.getWebResponse(true);
+                final WebClient client = getWindow().getWebWindow().getWebClient();
+                client.printContentIfNecessary(response);
+                client.throwFailingHttpStatusCodeExceptionIfNecessary(response);
+                // CSS content must have downloaded OK; go ahead and build the corresponding stylesheet.
                 final String css = response.getContentAsString();
                 final CSSStyleSheet cached = cache.getCachedStyleSheet(css);
                 if (cached != null) {
@@ -138,7 +146,20 @@ public class StyleSheetList extends SimpleScriptable {
                     cache.cache(css, sheet.getWrappedSheet());
                 }
             }
+            catch (final FailingHttpStatusCodeException e) {
+                // Got a 404 response or something like that; behave nicely.
+                getLog().error(e.getMessage());
+                final InputSource source = new InputSource(new StringReader(""));
+                sheet = new Stylesheet(element, source);
+            }
+            catch (final IOException e) {
+                // Got a basic IO error; behave nicely.
+                getLog().error(e.getMessage());
+                final InputSource source = new InputSource(new StringReader(""));
+                sheet = new Stylesheet(element, source);
+            }
             catch (final Exception e) {
+                // Got something unexpected; we can throw an exception in this case.
                 throw Context.reportRuntimeError("Exception: " + e);
             }
         }

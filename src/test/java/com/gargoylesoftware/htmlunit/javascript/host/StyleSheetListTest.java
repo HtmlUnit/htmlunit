@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.httpclient.NameValuePair;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -63,7 +64,7 @@ public class StyleSheetListTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testgetComputedStyle_Link() throws Exception {
+    public void testGetComputedStyle_Link() throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -132,4 +133,42 @@ public class StyleSheetListTest extends WebTestCase {
         loadPage(BrowserVersion.FIREFOX_2, html, actual);
         assertEquals(expectedAlerts, actual);
     }
+
+    /**
+     * Test for a stylesheet link which points to a non-existent file (bug 2070940).
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testNonExistentStylesheet() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <link rel='stylesheet' type='text/css' href='" + URL_SECOND + "'/>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        alert(document.styleSheets.length);\n"
+            + "        alert(document.styleSheets.item(0));\n"
+            + "        alert(document.styleSheets[0]);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>abc</body>\n"
+            + "</html>";
+
+        final WebClient client = new WebClient();
+
+        final List<String> actual = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(actual));
+
+        final MockWebConnection conn = new MockWebConnection(client);
+        conn.setDefaultResponse(html);
+        conn.setResponse(URL_SECOND, "Not Found", 404, "Not Found", "text/html", new ArrayList<NameValuePair>());
+        client.setWebConnection(conn);
+
+        client.getPage(URL_FIRST);
+
+        final String[] expected = new String[] {"1", "[object]", "[object]"};
+        assertEquals(expected, actual);
+    }
+
 }
