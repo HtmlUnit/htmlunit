@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.html;
 import static com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection.JAVASCRIPT_PREFIX;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -2164,8 +2165,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 /**
  * TODO: promote it for a larger usage
  */
-class SimpleRange implements Range {
-    private static final long serialVersionUID = 1774567829279434291L;
+class SimpleRange implements Range, Serializable {
+    private static final long serialVersionUID = 5779974839466976193L;
     private org.w3c.dom.Node startContainer_, endContainer_;
     private int startOffset_, endOffset_;
 
