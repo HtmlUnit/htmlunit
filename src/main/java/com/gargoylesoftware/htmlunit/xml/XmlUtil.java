@@ -59,45 +59,37 @@ import com.gargoylesoftware.htmlunit.html.IElementFactory;
  * @author Sudhan Moghe
  */
 public final class XmlUtil {
+
     private static final ErrorHandler DISCARD_MESSAGES_HANDLER = new ErrorHandler() {
         /**
-         * Does nothing as we're not interested in.
-         * @see org.xml.sax.ErrorHandler#error(org.xml.sax.SAXParseException)
+         * Does nothing as we're not interested in this.
          */
-        public void error(final SAXParseException exception) throws SAXException {
-            // Does nothing as we're not interested in.
+        public void error(final SAXParseException exception) {
+            // Does nothing as we're not interested in this.
         }
-
         /**
-         * Does nothing as we're not interested in.
-         * @see org.xml.sax.ErrorHandler#fatalError(org.xml.sax.SAXParseException)
+         * Does nothing as we're not interested in this.
          */
-        public void fatalError(final SAXParseException exception)
-            throws SAXException {
-
-            // Does nothing as we're not interested in.
+        public void fatalError(final SAXParseException exception) {
+            // Does nothing as we're not interested in this.
         }
-
         /**
-         * Does nothing as we're not interested in.
-         * @see org.xml.sax.ErrorHandler#warning(org.xml.sax.SAXParseException)
+         * Does nothing as we're not interested in this.
          */
-        public void warning(final SAXParseException exception)
-            throws SAXException {
-
-            // Does nothing as we're not interested in.
+        public void warning(final SAXParseException exception) {
+            // Does nothing as we're not interested in this.
         }
     };
 
     /**
-     * Utility class, hide constructor
+     * Utility class, hide constructor.
      */
     private XmlUtil() {
-        // nothing
+        // Empty.
     }
 
     /**
-     * Builds a document from the content of the webresponse.
+     * Builds a document from the content of the web response.
      * A warning is logged if an exception is thrown while parsing the XML content
      * (for instance when the content is not a valid XML and can't be parsed).
      *
@@ -122,7 +114,7 @@ public final class XmlUtil {
      * Returns the log object for this utility class.
      * @return the log object for this utility class
      */
-    protected static Log getLog() {
+    private static Log getLog() {
         return LogFactory.getLog(XmlUtil.class);
     }
 
@@ -190,9 +182,10 @@ public final class XmlUtil {
     }
 
     /**
-     * Copy all children from 'source' to 'dest'
-     * @param source the Node to copy from
-     * @param dest the DomNode to copy to
+     * Copy all children from 'source' to 'dest', within the context of the specified page.
+     * @param page the page which the nodes belong to
+     * @param source the node to copy from
+     * @param dest the node to copy to
      */
     private static void copy(final SgmlPage page, final Node source, final DomNode dest) {
         final NodeList nodeChildren = source.getChildNodes();

@@ -23,7 +23,6 @@ import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.lang.ClassUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.w3c.dom.Attr;
-import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.TypeInfo;
@@ -226,14 +225,16 @@ public class XmlElement extends DomElement implements Element {
     }
 
     /**
-     * Add an attribute to the attribute map. This is just used by the element factories.
+     * Adds an attribute to the specified attribute map. This is just used by the element factories.
+     * @param page the XML page containing the attribute
      * @param attributeMap the attribute map where the attribute will be added
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the attribute
      * @param value the value of the attribute
+     * @return the new attribute that was added to the specified attribute map
      */
     static DomAttr addAttributeToMap(final XmlPage page, final Map<String, DomAttr> attributeMap,
-            final String namespaceURI, final String qualifiedName, final String value) {
+        final String namespaceURI, final String qualifiedName, final String value) {
         final DomAttr newAttr = new DomAttr(page, namespaceURI, qualifiedName, value);
         attributeMap.put(qualifiedName, newAttr);
         return newAttr;
@@ -297,7 +298,7 @@ public class XmlElement extends DomElement implements Element {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public String getAttributeNS(final String namespaceURI, final String localName) throws DOMException {
+    public String getAttributeNS(final String namespaceURI, final String localName) {
         throw new UnsupportedOperationException("XmlElement.getAttributeNS is not yet implemented.");
     }
 
@@ -313,7 +314,7 @@ public class XmlElement extends DomElement implements Element {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public Attr getAttributeNodeNS(final String namespaceURI, final String localName) throws DOMException {
+    public Attr getAttributeNodeNS(final String namespaceURI, final String localName) {
         throw new UnsupportedOperationException("XmlElement.getAttributeNodeNS is not yet implemented.");
     }
 
@@ -352,7 +353,7 @@ public class XmlElement extends DomElement implements Element {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public boolean hasAttributeNS(final String namespaceURI, final String localName) throws DOMException {
+    public boolean hasAttributeNS(final String namespaceURI, final String localName) {
         throw new UnsupportedOperationException("XmlElement.hasAttributeNS is not yet implemented.");
     }
 
@@ -360,7 +361,7 @@ public class XmlElement extends DomElement implements Element {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public Attr removeAttributeNode(final Attr oldAttr) throws DOMException {
+    public Attr removeAttributeNode(final Attr oldAttr) {
         throw new UnsupportedOperationException("XmlElement.removeAttributeNode is not yet implemented.");
     }
 
@@ -368,7 +369,7 @@ public class XmlElement extends DomElement implements Element {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public Attr setAttributeNode(final Attr newAttr) throws DOMException {
+    public Attr setAttributeNode(final Attr newAttr) {
         throw new UnsupportedOperationException("XmlElement.setAttributeNode is not yet implemented.");
     }
 
@@ -376,7 +377,7 @@ public class XmlElement extends DomElement implements Element {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public Attr setAttributeNodeNS(final Attr newAttr) throws DOMException {
+    public Attr setAttributeNodeNS(final Attr newAttr) {
         throw new UnsupportedOperationException("XmlElement.setAttributeNodeNS is not yet implemented.");
     }
 
@@ -384,7 +385,7 @@ public class XmlElement extends DomElement implements Element {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public void setIdAttribute(final String name, final boolean isId) throws DOMException {
+    public void setIdAttribute(final String name, final boolean isId) {
         throw new UnsupportedOperationException("XmlElement.setIdAttribute is not yet implemented.");
     }
 
@@ -392,8 +393,7 @@ public class XmlElement extends DomElement implements Element {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public void setIdAttributeNS(final String namespaceURI, final String localName, final boolean isId)
-        throws DOMException {
+    public void setIdAttributeNS(final String namespaceURI, final String localName, final boolean isId) {
         throw new UnsupportedOperationException("XmlElement.setIdAttributeNS is not yet implemented.");
     }
 
@@ -401,18 +401,16 @@ public class XmlElement extends DomElement implements Element {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public void setIdAttributeNode(final Attr idAttr, final boolean isId) throws DOMException {
+    public void setIdAttributeNode(final Attr idAttr, final boolean isId) {
         throw new UnsupportedOperationException("XmlElement.setIdAttributeNode is not yet implemented.");
     }
 
     /**
-     * Just for debug purposes.
      * {@inheritDoc}
      */
     @Override
     public String toString() {
-        return ClassUtils.getShortClassName(getClass())
-            + "[<" + getTagName() + " ...>]";
+        return ClassUtils.getShortClassName(getClass()) + "[<" + getTagName() + " ...>]";
     }
 
     /**

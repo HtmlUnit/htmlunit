@@ -17,17 +17,15 @@ package com.gargoylesoftware.htmlunit.xml;
 import java.util.Map;
 
 import org.w3c.dom.Attr;
-import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.TypeInfo;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.DomNamespaceNode;
-import com.gargoylesoftware.htmlunit.html.DomNode;
 
 /**
- * An attribute of an element. Attributes are stored in {@link XmlElement},
- * but the XPath engine expects attributes to be in a {@link DomNode}.
+ * An attribute of an element. Attributes are stored in {@link XmlElement}, but the XPath engine
+ * expects attributes to be in a {@link com.gargoylesoftware.htmlunit.html.DomNode}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
@@ -109,22 +107,12 @@ public class XmlAttr extends DomNamespaceNode implements Attr {
     /**
      * {@inheritDoc}
      */
-    public void setValue(final String value) throws DOMException {
+    public void setValue(final String value) {
         value_ = value;
     }
 
     /**
-     * Sets the parent node.
-     * @param parent the parent node
-     */
-    @Override
-    public void setParentNode(final DomNode parent) {
-        super.setParentNode(parent);
-    }
-
-    /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     public Element getOwnerElement() {
         return (Element) getParentNode();

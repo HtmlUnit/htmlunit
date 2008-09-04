@@ -26,7 +26,6 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;
 import org.w3c.dom.DOMConfiguration;
-import org.w3c.dom.DOMException;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentFragment;
@@ -56,7 +55,9 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  * @author Ahmed Ashour
  */
 public class XmlPage extends SgmlPage implements Document {
+
     private static final long serialVersionUID = -1430136241030261308L;
+
     private Node node_;
     private Element documentElement_;
 
@@ -206,7 +207,7 @@ public class XmlPage extends SgmlPage implements Document {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public Node adoptNode(final Node source) throws DOMException {
+    public Node adoptNode(final Node source) {
         throw new UnsupportedOperationException("XmlPage.adoptNode is not yet implemented.");
     }
 
@@ -214,7 +215,7 @@ public class XmlPage extends SgmlPage implements Document {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public Attr createAttribute(final String name) throws DOMException {
+    public Attr createAttribute(final String name) {
         throw new UnsupportedOperationException("XmlPage.createAttribute is not yet implemented.");
     }
 
@@ -222,7 +223,7 @@ public class XmlPage extends SgmlPage implements Document {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public Attr createAttributeNS(final String namespaceURI, final String qualifiedName) throws DOMException {
+    public Attr createAttributeNS(final String namespaceURI, final String qualifiedName) {
         throw new UnsupportedOperationException("XmlPage.createAttributeNS is not yet implemented.");
     }
 
@@ -230,7 +231,7 @@ public class XmlPage extends SgmlPage implements Document {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public CDATASection createCDATASection(final String data) throws DOMException {
+    public CDATASection createCDATASection(final String data) {
         throw new UnsupportedOperationException("XmlPage.createCDATASection is not yet implemented.");
     }
 
@@ -254,7 +255,7 @@ public class XmlPage extends SgmlPage implements Document {
      * {@inheritDoc}
      */
     @Override
-    public Element createElement(final String tagName) throws DOMException {
+    public Element createElement(final String tagName) {
         return createXmlElement(tagName);
     }
 
@@ -262,7 +263,7 @@ public class XmlPage extends SgmlPage implements Document {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public Element createElementNS(final String namespaceURI, final String qualifiedName) throws DOMException {
+    public Element createElementNS(final String namespaceURI, final String qualifiedName) {
         throw new UnsupportedOperationException("XmlPage.createElementNS is not yet implemented.");
     }
 
@@ -270,7 +271,7 @@ public class XmlPage extends SgmlPage implements Document {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public EntityReference createEntityReference(final String name) throws DOMException {
+    public EntityReference createEntityReference(final String name) {
         throw new UnsupportedOperationException("XmlPage.createEntityReference is not yet implemented.");
     }
 
@@ -278,8 +279,7 @@ public class XmlPage extends SgmlPage implements Document {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public ProcessingInstruction createProcessingInstruction(final String target, final String data)
-        throws DOMException {
+    public ProcessingInstruction createProcessingInstruction(final String target, final String data) {
         throw new UnsupportedOperationException("XmlPage.createProcessingInstruction is not yet implemented.");
     }
 
@@ -406,7 +406,7 @@ public class XmlPage extends SgmlPage implements Document {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public Node importNode(final Node importedNode, final boolean deep) throws DOMException {
+    public Node importNode(final Node importedNode, final boolean deep) {
         throw new UnsupportedOperationException("XmlPage.importNode is not yet implemented.");
     }
 
@@ -422,7 +422,7 @@ public class XmlPage extends SgmlPage implements Document {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public Node renameNode(final Node n, final String namespaceURI, final String qualifiedName) throws DOMException {
+    public Node renameNode(final Node n, final String namespaceURI, final String qualifiedName) {
         throw new UnsupportedOperationException("XmlPage.renameNode is not yet implemented.");
     }
 
@@ -446,7 +446,7 @@ public class XmlPage extends SgmlPage implements Document {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public void setXmlStandalone(final boolean xmlStandalone) throws DOMException {
+    public void setXmlStandalone(final boolean xmlStandalone) {
         throw new UnsupportedOperationException("XmlPage.setXmlStandalone is not yet implemented.");
     }
 
@@ -454,7 +454,7 @@ public class XmlPage extends SgmlPage implements Document {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public void setXmlVersion(final String xmlVersion) throws DOMException {
+    public void setXmlVersion(final String xmlVersion) {
         throw new UnsupportedOperationException("XmlPage.setXmlVersion is not yet implemented.");
     }
 
