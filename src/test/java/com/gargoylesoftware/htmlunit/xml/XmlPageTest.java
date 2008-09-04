@@ -260,6 +260,6 @@ public class XmlPageTest extends WebTestCase {
              + "</foo>";
 
         final XmlPage xmlPage = testXmlDocument(content, "text/xml");
-        assertEquals(1, xmlPage.getByXPath("//foo").size());
+        assertEquals(1, xmlPage.getByXPath("//foofoo[@name='first']").size());
     }
 }
