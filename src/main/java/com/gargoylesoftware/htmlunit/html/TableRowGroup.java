@@ -31,6 +31,8 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public abstract class TableRowGroup extends ClickableElement {
 
+    private static final long serialVersionUID = 7770034627964024386L;
+
     /**
      * Creates an instance of TableRowGroup.
      *

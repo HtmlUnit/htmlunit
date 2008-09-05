@@ -108,8 +108,7 @@ public class XmlPage extends SgmlPage implements Document {
 
         try {
             if (webResponse == null || webResponse.getContentAsString().trim().length() == 0) {
-                node_ =
-                    DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument().getDocumentElement();
+                node_ = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument().getDocumentElement();
             }
             else {
                 node_ = XmlUtil.buildDocument(webResponse).getDocumentElement();

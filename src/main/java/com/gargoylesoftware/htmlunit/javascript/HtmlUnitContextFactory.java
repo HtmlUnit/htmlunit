@@ -97,6 +97,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
     }
 
     // Custom Context to store execution time.
+    @SuppressWarnings("deprecation")
     private static class TimeoutContext extends Context {
         private long startTime_;
 

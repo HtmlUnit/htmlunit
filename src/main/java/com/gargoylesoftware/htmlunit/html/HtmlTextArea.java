@@ -324,9 +324,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
         if (selection != null) {
             return getText().substring(selection.getStartOffset(), selection.getEndOffset());
         }
-        else {
-            return null;
-        }
+        return null;
     }
 
     private Range getThisSelection() {
@@ -349,9 +347,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
         if (selection != null) {
             return selection.getStartOffset();
         }
-        else {
-            return 0;
-        }
+        return 0;
     }
 
     /**
@@ -382,9 +378,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
         if (selection != null) {
             return selection.getEndOffset();
         }
-        else {
-            return 0;
-        }
+        return 0;
     }
 
     /**

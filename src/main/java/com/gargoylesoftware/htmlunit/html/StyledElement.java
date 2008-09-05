@@ -33,6 +33,8 @@ import com.gargoylesoftware.htmlunit.Page;
  */
 public abstract class StyledElement extends HtmlElement {
 
+    private static final long serialVersionUID = -8844888802297454454L;
+
     /**
      * Creates an instance.
      *

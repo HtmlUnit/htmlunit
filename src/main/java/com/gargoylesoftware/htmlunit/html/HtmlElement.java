@@ -80,6 +80,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
  */
 public abstract class HtmlElement extends DomElement implements Element {
 
+    private static final long serialVersionUID = -2841932584831342634L;
+
     /** Constant meaning that the specified attribute was not defined. */
     public static final String ATTRIBUTE_NOT_DEFINED = new String("");
 

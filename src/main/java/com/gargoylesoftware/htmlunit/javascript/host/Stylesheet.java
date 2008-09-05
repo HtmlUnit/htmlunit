@@ -432,16 +432,14 @@ public class Stylesheet extends SimpleScriptable {
                     // Don't expand relative URLs.
                     return href;
                 }
-                else {
-                    // Expand relative URLs.
-                    try {
-                        final URL url = page.getFullyQualifiedUrl(href);
-                        return url.toExternalForm();
-                    }
-                    catch (final MalformedURLException e) {
-                        // Log the error and fall through to the return values below.
-                        getLog().warn(e.getMessage(), e);
-                    }
+                // Expand relative URLs.
+                try {
+                    final URL url = page.getFullyQualifiedUrl(href);
+                    return url.toExternalForm();
+                }
+                catch (final MalformedURLException e) {
+                    // Log the error and fall through to the return values below.
+                    getLog().warn(e.getMessage(), e);
                 }
             }
         }

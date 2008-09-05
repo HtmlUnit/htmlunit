@@ -45,6 +45,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
  */
 public abstract class ClickableElement extends StyledElement {
 
+    private static final long serialVersionUID = 5708324473968728785L;
     private final transient Log mainLog_ = LogFactory.getLog(getClass());
 
     /**

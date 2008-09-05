@@ -110,9 +110,7 @@ public class HtmlTextInput extends HtmlInput {
         if (selection != null) {
             return getValueAttribute().substring(selection.getStartOffset(), selection.getEndOffset());
         }
-        else {
-            return null;
-        }
+        return null;
     }
 
     private Range getThisSelection() {
@@ -134,9 +132,7 @@ public class HtmlTextInput extends HtmlInput {
         if (selection != null) {
             return selection.getStartOffset();
         }
-        else {
-            return 0;
-        }
+        return 0;
     }
 
     /**
@@ -167,9 +163,7 @@ public class HtmlTextInput extends HtmlInput {
         if (selection != null) {
             return selection.getEndOffset();
         }
-        else {
-            return 0;
-        }
+        return 0;
     }
 
     /**

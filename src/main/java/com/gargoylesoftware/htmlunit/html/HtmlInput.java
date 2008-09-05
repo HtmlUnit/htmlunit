@@ -41,6 +41,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
  */
 public abstract class HtmlInput extends ClickableElement implements DisabledElement, SubmittableElement {
 
+    private static final long serialVersionUID = 3602129443357463947L;
+
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "input";
 

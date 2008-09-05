@@ -22,6 +22,8 @@ import com.gargoylesoftware.htmlunit.Page;
  */
 public abstract class DomElement extends DomNamespaceNode {
 
+    private static final long serialVersionUID = 8573853996234946066L;
+
     /**
      * Create an instance of a DOM element that can have a namespace.
      *

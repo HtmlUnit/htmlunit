@@ -223,13 +223,11 @@ public class DebugFrameImpl implements DebugFrame {
         if (source == null) {
             return "unknown";
         }
-        else {
-            // only the file name is interesting the rest of the url is mostly noise
-            source = StringUtils.substringAfterLast(source, "/");
-            // embedded scripts have something like "foo.html from (3, 10) to (10, 13)"
-            source = StringUtils.substringBefore(source, " ");
-            return source;
-        }
+        // only the file name is interesting the rest of the url is mostly noise
+        source = StringUtils.substringAfterLast(source, "/");
+        // embedded scripts have something like "foo.html from (3, 10) to (10, 13)"
+        source = StringUtils.substringBefore(source, " ");
+        return source;
     }
 
     /**
@@ -244,9 +242,7 @@ public class DebugFrameImpl implements DebugFrame {
         if (line == null) {
             return "unknown";
         }
-        else {
-            return String.valueOf(line);
-        }
+        return String.valueOf(line);
     }
 
 }

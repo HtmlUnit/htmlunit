@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.WebAssert;
  */
 public abstract class DomNamespaceNode extends DomNode {
 
+    private static final long serialVersionUID = 4121331154432606647L;
     private final String namespaceURI_;
     private String qualifiedName_;
     private final String localName_;
