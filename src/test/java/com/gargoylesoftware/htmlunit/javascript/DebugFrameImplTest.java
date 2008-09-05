@@ -85,7 +85,6 @@ public class DebugFrameImplTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Test
     public void loggedCalls() throws Exception {
         final URL url = getClass().getResource("debugFrameImplTest.html");
         final String expectedLog = IOUtils.toString(getClass().getResourceAsStream("debugFrameImplTest.txt"));
