@@ -61,7 +61,7 @@ public void homePage_Firefox() throws Exception {
                 'get' methods, or by using XPath.
             </p>
             <p>
-                Below is an example of finding a 'div' by and ID, and getting an anchor by name:
+                Below is an example of finding a 'div' by an ID, and getting an anchor by name:
             </p>
             <source><![CDATA[
 public void getElements() throws Exception {
