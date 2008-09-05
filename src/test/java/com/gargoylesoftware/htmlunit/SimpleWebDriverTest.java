@@ -53,6 +53,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  * </p>
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class SimpleWebDriverTest extends WebTestCase {
@@ -92,7 +93,7 @@ public class SimpleWebDriverTest extends WebTestCase {
 
         final WebDriver webDriver = getWebDriver();
 
-        webDriver.get(testFile.toURL().toExternalForm());
+        webDriver.get(testFile.toURI().toURL().toExternalForm());
         final WebElement textField = webDriver.findElement(By.id("foo"));
         textField.click(); // to give focus
         textField.sendKeys("a");
@@ -112,7 +113,7 @@ public class SimpleWebDriverTest extends WebTestCase {
 
         final WebDriver webDriver = getWebDriver();
 
-        webDriver.get(testFile.toURL().toExternalForm());
+        webDriver.get(testFile.toURI().toURL().toExternalForm());
 
         webDriver.findElement(By.id("testSpan")).click();
         webDriver.findElement(By.id("testInput")).click();
@@ -133,7 +134,7 @@ public class SimpleWebDriverTest extends WebTestCase {
 
         final WebDriver webDriver = getWebDriver();
 
-        webDriver.get(testFile.toURL().toExternalForm());
+        webDriver.get(testFile.toURI().toURL().toExternalForm());
         webDriver.findElement(By.id("div1")).click();
         webDriver.findElement(By.id("div2")).click();
 
@@ -150,13 +151,11 @@ public class SimpleWebDriverTest extends WebTestCase {
         if (nodes.isEmpty()) {
             throw new RuntimeException("No expectations found in html code");
         }
-        else {
-            final String specificName = "expected_" + browserVersion.getNickName();
-            for (final WebElement node : nodes) {
-                final String nodeId = node.getAttribute("id");
-                if (specificName.contains(nodeId) && nodeId.length() > expectationNodeId.length()) {
-                    expectationNodeId = nodeId;
-                }
+        final String specificName = "expected_" + browserVersion.getNickName();
+        for (final WebElement node : nodes) {
+            final String nodeId = node.getAttribute("id");
+            if (specificName.contains(nodeId) && nodeId.length() > expectationNodeId.length()) {
+                expectationNodeId = nodeId;
             }
         }
         return getEntries(expectationNodeId);
@@ -182,7 +181,7 @@ public class SimpleWebDriverTest extends WebTestCase {
         final File testsDir = new File("src/test/resources/testfiles");
         final File testFile = new File(testsDir, fileName);
 
-        getWebDriver().get(testFile.toURL().toExternalForm());
+        getWebDriver().get(testFile.toURI().toURL().toExternalForm());
 
         // verifications
         assertEquals(getExpectedEntries(), getEntries("log"));
@@ -217,21 +216,19 @@ public class SimpleWebDriverTest extends WebTestCase {
             return new FirefoxDriver();
         }
         // TODO: IEDriver
-        else {
-            final WebClient webClient = getWebClient();
-            final HtmlUnitDriver driver = new HtmlUnitDriver(true) {
-                @Override
-                protected WebClient newWebClient() {
-                    return webClient;
-                }
+        final WebClient webClient = getWebClient();
+        final HtmlUnitDriver driver = new HtmlUnitDriver(true) {
+            @Override
+            protected WebClient newWebClient() {
+                return webClient;
+            }
 
-                @Override
-                protected WebElement newHtmlUnitWebElement(final HtmlElement element) {
-                    return new FixedWebDriverHtmlUnitWebElement(this, element);
-                }
-            };
-            return driver;
-        }
+            @Override
+            protected WebElement newHtmlUnitWebElement(final HtmlElement element) {
+                return new FixedWebDriverHtmlUnitWebElement(this, element);
+            }
+        };
+        return driver;
     }
 }
 
