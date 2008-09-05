@@ -66,10 +66,9 @@ public class ThreadManager {
     }
 
     /**
-     * Threads are given numeric IDs in JavaScript and that number is
-     * stored here.
+     * Threads are given numeric IDs in JavaScript and that number is stored here.
      */
-    private int nextThreadID_ = 1;
+    private static int nextThreadID_ = 1;
 
     /**
      * HtmlUnit threads are started at a higher priority than the priority
@@ -86,7 +85,7 @@ public class ThreadManager {
      * Gets the next thread ID in a threadsafe way.
      * @return the next ID
      */
-    private synchronized int getNextThreadId() {
+    private synchronized static int getNextThreadId() {
         return nextThreadID_++;
     }
 
