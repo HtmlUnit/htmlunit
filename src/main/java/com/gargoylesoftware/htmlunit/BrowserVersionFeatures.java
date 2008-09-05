@@ -24,10 +24,10 @@ package com.gargoylesoftware.htmlunit;
 public enum BrowserVersionFeatures {
 
     /** */
-    HTMLOPTION_PREVENT_DISABLED,
+    BLUR_BEFORE_ONCHANGE,
 
     /** */
-    BLUR_BEFORE_ONCHANGE,
+    HTMLOPTION_PREVENT_DISABLED,
 
     /**
      * Indicates if href property for a &lt;link rel="stylesheet" type="text/css" href="..." /&gt;
