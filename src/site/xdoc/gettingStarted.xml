@@ -51,8 +51,42 @@ public void homePage_Firefox() throws Exception {
 }]]></source>
             <p>
                 Specifying this BrowserVersion will change the user agent header that is sent up to the
-                server and will change the behaviour of some of the JavaScript.
+                server and will change the behavior of some of the JavaScript.
             </p>
+        </section>
+
+        <section name="Finding a specific element">
+            <p>
+                Once you have a reference to an HtmlPage, you can search for a specific HtmlElement by one of
+                'get' methods, or by using XPath.
+            </p>
+            <p>
+                Below is an example of finding a 'div' by and ID, and getting an anchor by name:
+            </p>
+            <source><![CDATA[
+public void getElements() throws Exception {
+    final WebClient webClient = new WebClient();
+    final HtmlPage page = (HtmlPage) webClient.getPage("http://htmlunit.sourceforge.net");
+    final HtmlDivision div = (HtmlDivision) page.getHtmlElementById("some_div_id");
+    final HtmlAnchor anchor = page.getAnchorByName("anchor_name");
+}
+]]></source>
+            <p>
+                XPath is a suggested way for more complex searches, a brief tutorial can be found in
+                <a href="http://www.w3schools.com/XPath/default.asp">W3Schools</a>
+            </p>
+            <source><![CDATA[
+public void xpath() throws Exception {
+    final WebClient webClient = new WebClient();
+    final HtmlPage page = (HtmlPage) webClient.getPage("http://htmlunit.sourceforge.net");
+
+    //get list of all divs
+    final List<?> divs = page.getByXPath("//div");
+
+    //get div which has a 'name' attribute of 'John'
+    final HtmlDivision div = (HtmlDivision) page.getByXPath("//div[@name='John']").get(0);
+}
+]]></source>
         </section>
 
         <section name="Using a proxy server">
