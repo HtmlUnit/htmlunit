@@ -842,12 +842,11 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Execute the specified JavaScript within the page.
-     * The usage would be similar to what can be achieved to execute JavaScript in the current page
-     * by entering a "javascript:...some js code..." in the URL field of a "normal" browser.
-     * <p>
-     * <b>Note:</b> the provided code won't be executed if JavaScript has been disabled on the WebClient
-     * (see {@link WebClient#isJavaScriptEnabled()}.
+     * <p>Executes the specified JavaScript code within the page. The usage would be similar to what can
+     * be achieved to execute JavaScript in the current page by entering "javascript:...some JS code..."
+     * in the URL field of a native browser.</p>
+     * <p><b>Note:</b> the provided code won't be executed if JavaScript has been disabled on the WebClient
+     * (see {@link WebClient#isJavaScriptEnabled()}.</p>
      * @param sourceCode the JavaScript code to execute
      * @return a ScriptResult which will contain both the current page (which may be different than
      * the previous page) and a JavaScript result object
@@ -1136,10 +1135,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Look for and execute any appropriate event handlers. Look for body
-     * and frame tags.
+     * Looks for and executes any appropriate event handlers. Looks for body and frame tags.
      * @param eventType either {@link Event#TYPE_LOAD}, {@link Event#TYPE_UNLOAD}, or {@link Event#TYPE_BEFORE_UNLOAD}
-     * @return true if user accepted onbeforeunload (not relevant to other events)
+     * @return <tt>true</tt> if user accepted <tt>onbeforeunload</tt> (not relevant to other events)
      */
     private boolean executeEventHandlersIfNeeded(final String eventType) {
         // If JavaScript isn't enabled, there's nothing for us to do.
