@@ -47,9 +47,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  * Examples:
  * mvn test -Dtest=SimpleWebDriverTest (runs the test with HtmlUnit)<br/>
  * mvn test -Dtest=SimpleWebDriverTest -Dhtmlunit.webdriver=firefox (runs the test with Firefox from the path)<br/>
- * mvn test -Dtest=SimpleWebDriverTest -Dhtmlunit.webdriver=firefox
- * -Dwebdriver.firefox.bin=/home/user/firefox-3.0.1
- * (runs the test with the specified Firefox version)<br/>
+ * mvn test -Dtest=SimpleWebDriverTest -Dhtmlunit.webdriver=firefox -Dwebdriver.firefox.bin=/home/user/firefox-3.0.1
+ *     (runs the test with the specified Firefox version)<br/>
  * </p>
  * @version $Revision$
  * @author Marc Guillemot
@@ -190,8 +189,8 @@ public class SimpleWebDriverTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     @Test
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     public void fireEventCopyTemplateProperties() throws Exception {
         doTest("testFireEvent_initFromTemplate.html");
     }
