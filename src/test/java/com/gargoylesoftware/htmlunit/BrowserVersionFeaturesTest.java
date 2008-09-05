@@ -37,7 +37,7 @@ public class BrowserVersionFeaturesTest extends WebTestCase {
         String lastFeatureName = null;
         for (BrowserVersionFeatures feature : BrowserVersionFeatures.values()) {
             final String featureName = feature.name();
-            if (lastFeatureName != null && featureName.compareToIgnoreCase(lastFeatureName) < 1) {
+            if (lastFeatureName != null && featureName.compareTo(lastFeatureName) < 1) {
                 fail("BrowserVersionFeatures.java: \""
                     + featureName + "\" should be before \"" + lastFeatureName + '"');
             }
@@ -66,7 +66,7 @@ public class BrowserVersionFeaturesTest extends WebTestCase {
             String line;
             while ((line = reader.readLine()) != null) {
                 final String featureName = line.trim();
-                if (lastFeatureName != null && featureName.compareToIgnoreCase(lastFeatureName) < 1) {
+                if (lastFeatureName != null && featureName.compareTo(lastFeatureName) < 1) {
                     fail(path + ": \"" + featureName + "\" should be before \"" + lastFeatureName + '"');
                 }
                 lastFeatureName = featureName;

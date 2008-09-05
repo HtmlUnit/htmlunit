@@ -190,7 +190,10 @@ public class BrowserVersion implements Serializable {
                 features_.add(BrowserVersionFeatures.valueOf(key.toString()));
             }
         }
-        catch (final Exception io) {
+        catch (final IllegalArgumentException iae) {
+            throw new RuntimeException("Invalid entry found in configuration file for BrowserVersion: " + nickName_);
+        }
+        catch (final Exception e) {
             throw new RuntimeException("Configuration file not found for BrowserVersion: " + nickName_);
         }
     }
