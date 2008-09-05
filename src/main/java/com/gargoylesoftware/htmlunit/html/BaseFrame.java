@@ -77,11 +77,10 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     /**
-     * Called after the node for <frame...> or <iframe> has been added to the containing page.
-     * The node needs to be added first to allow js in the frame to see the frame in the parent
-     * @throws FailingHttpStatusCodeException if the server returns a
-     *      failing status code AND the property
-     *      {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
+     * Called after the node for the &lt;frame&gt; or &lt;iframe&gt; has been added to the containing page.
+     * The node needs to be added first to allow JavaScript in the frame to see the frame in the parent.
+     * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
+     *      {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to true
      */
     void loadInnerPage() throws FailingHttpStatusCodeException {
         String source = getSrcAttribute();
@@ -95,9 +94,8 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     /**
-     * @throws FailingHttpStatusCodeException if the server returns a
-     *      failing status code AND the property
-     *      {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
+     * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
+     *      {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to true
      */
     private void loadInnerPageIfPossible(final String src) throws FailingHttpStatusCodeException {
         if (src.length() != 0) {
