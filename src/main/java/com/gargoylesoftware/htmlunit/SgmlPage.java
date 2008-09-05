@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  */
 public abstract class SgmlPage extends DomNode implements Page {
 
+    private static final long serialVersionUID = -8803248938782701094L;
     private final WebResponse webResponse_;
     private WebWindow enclosingWindow_;
     private final WebClient webClient_;

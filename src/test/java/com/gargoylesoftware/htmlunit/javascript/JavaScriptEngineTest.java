@@ -1121,8 +1121,8 @@ public class JavaScriptEngineTest extends WebTestCase {
     @Test
     public void timeout() throws Exception {
         final long timeout = 2000;
-        final long oldTimeout = JavaScriptEngine.getTimeout();
-        JavaScriptEngine.setTimeout(timeout);
+        final long oldTimeout = WebClient.getJavaScriptTimeout();
+        WebClient.setJavaScriptTimeout(timeout);
 
         try {
             final WebClient client = new WebClient();
@@ -1156,7 +1156,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             assertNull(exceptions[0]);
         }
         finally {
-            JavaScriptEngine.setTimeout(oldTimeout);
+            WebClient.setJavaScriptTimeout(oldTimeout);
         }
     }
 
