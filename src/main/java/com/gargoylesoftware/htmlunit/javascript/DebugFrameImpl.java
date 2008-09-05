@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Callable;
@@ -50,6 +51,8 @@ public class DebugFrameImpl implements DebugFrame {
     private static final Log LOG = LogFactory.getLog(DebugFrameImpl.class);
 
     private final DebuggableScript functionOrScript_;
+    private static final String KEY_LAST_LINE = "DebugFrameImpl#line";
+    private static final String KEY_LAST_SOURCE = "DebugFrameImpl#source";
 
     /**
      * Creates a new debug frame.
@@ -66,22 +69,41 @@ public class DebugFrameImpl implements DebugFrame {
     public void onEnter(final Context cx, final Scriptable activation, final Scriptable thisObj, final Object[] args) {
         if (LOG.isTraceEnabled()) {
             final StringBuilder sb = new StringBuilder();
+
+            final String line = getFirstLine(cx);
+            final String source = getSourceName(cx);
+            sb.append(source).append(":").append(line).append(" ");
+
             Scriptable parent = activation.getParentScope();
             while (parent != null) {
                 sb.append("   ");
                 parent = parent.getParentScope();
             }
-            sb.append(this.getFunctionName(thisObj)).append("(");
+            final String functionName = getFunctionName(thisObj);
+            sb.append(functionName).append("(");
             for (int i = 0; i < args.length; i++) {
-                sb.append(this.getParamName(i)).append(" : ").append(args[i]);
+                final String argAsString = stringValue(args[i]);
+                sb.append(getParamName(i)).append(": ").append(argAsString);
                 if (i < args.length - 1) {
                     sb.append(", ");
                 }
             }
-            sb.append(") @ line ").append(this.getFirstLine());
-            sb.append(" of ").append(this.getSourceName());
+            sb.append(")");
             LOG.trace(sb);
         }
+    }
+
+    private String stringValue(final Object arg) {
+        String asString = null;
+        try {
+            // try to get the js representation
+            asString = Context.toString(arg);
+        }
+        catch (final Throwable e) {
+            // seems to be a bug (many bugs) in rhino (TODO: investigate it)
+            asString = String.valueOf(arg);
+        }
+        return asString;
     }
 
     /**
@@ -104,7 +126,8 @@ public class DebugFrameImpl implements DebugFrame {
      * {@inheritDoc}
      */
     public void onLineChange(final Context cx, final int lineNumber) {
-        // Ignore.
+        cx.putThreadLocal(KEY_LAST_LINE, lineNumber);
+        cx.putThreadLocal(KEY_LAST_SOURCE, functionOrScript_.getSourceName());
     }
 
     /**
@@ -135,29 +158,39 @@ public class DebugFrameImpl implements DebugFrame {
             // An anonymous function -- try to figure out how it was referenced.
             // For example, someone may have set foo.prototype.bar = function() { ... };
             // And then called fooInstance.bar() -- in which case it's "named" bar.
-            for (final Object id : thisObj.getIds()) {
-                if (id instanceof String) {
-                    final String s = (String) id;
-                    if (thisObj instanceof ScriptableObject) {
-                        Object o = ((ScriptableObject) thisObj).getGetterOrSetter(s, 0, false);
-                        if (o == null) {
-                            o = ((ScriptableObject) thisObj).getGetterOrSetter(s, 0, true);
-                            if (o != null && o instanceof Callable) {
-                                return "__defineSetter__ " + s;
+
+            // on our SimpleScriptable we need to avoid looking at the properties we have defined => TODO: improve it
+            if (thisObj instanceof SimpleScriptable) {
+                return "[anonymous]";
+            }
+
+            Scriptable obj = thisObj;
+            while (obj != null) {
+                for (final Object id : obj.getIds()) {
+                    if (id instanceof String) {
+                        final String s = (String) id;
+                        if (obj instanceof ScriptableObject) {
+                            Object o = ((ScriptableObject) obj).getGetterOrSetter(s, 0, false);
+                            if (o == null) {
+                                o = ((ScriptableObject) obj).getGetterOrSetter(s, 0, true);
+                                if (o != null && o instanceof Callable) {
+                                    return "__defineSetter__ " + s;
+                                }
+                            }
+                            else if (o instanceof Callable) {
+                                return "__defineGetter__ " + s;
                             }
                         }
-                        else if (o instanceof Callable) {
-                            return "__defineGetter__ " + s;
-                        }
-                    }
-                    final Object o = thisObj.get(s, thisObj);
-                    if (o instanceof NativeFunction) {
-                        final NativeFunction f = (NativeFunction) o;
-                        if (f.getDebuggableView() == this.functionOrScript_) {
-                            return s;
+                        final Object o = obj.get(s, obj);
+                        if (o instanceof NativeFunction) {
+                            final NativeFunction f = (NativeFunction) o;
+                            if (f.getDebuggableView() == this.functionOrScript_) {
+                                return s;
+                            }
                         }
                     }
                 }
+                obj = obj.getPrototype();
             }
             // Unable to intuit a name -- doh!
             return "[anonymous]";
@@ -185,8 +218,18 @@ public class DebugFrameImpl implements DebugFrame {
      *
      * @return the name of this frame's source
      */
-    private String getSourceName() {
-        return this.functionOrScript_.getSourceName().trim();
+    private String getSourceName(final Context cx) {
+        String source = (String) cx.getThreadLocal(KEY_LAST_SOURCE);
+        if (source == null) {
+            return "unknown";
+        }
+        else {
+            // only the file name is interesting the rest of the url is mostly noise
+            source = StringUtils.substringAfterLast(source, "/");
+            // embedded scripts have something like "foo.html from (3, 10) to (10, 13)"
+            source = StringUtils.substringBefore(source, " ");
+            return source;
+        }
     }
 
     /**
@@ -196,17 +239,14 @@ public class DebugFrameImpl implements DebugFrame {
      * @return the line number of the first line in this frame's function or script, or <tt>???</tt>
      *         if it cannot be determined
      */
-    private String getFirstLine() {
-        int first = Integer.MAX_VALUE;
-        for (final int current : functionOrScript_.getLineNumbers()) {
-            if (current < first) {
-                first = current;
-            }
+    private String getFirstLine(final Context cx) {
+        final Object line = cx.getThreadLocal(KEY_LAST_LINE);
+        if (line == null) {
+            return "unknown";
         }
-        if (first != Integer.MAX_VALUE) {
-            return String.valueOf(first);
+        else {
+            return String.valueOf(line);
         }
-        return "???";
     }
 
 }

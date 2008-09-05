@@ -14,15 +14,23 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import java.io.StringWriter;
+import java.net.URL;
 import java.util.ArrayList;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Appender;
+import org.apache.log4j.Layout;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
+import org.apache.log4j.WriterAppender;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -74,4 +82,26 @@ public class DebugFrameImplTest extends WebTestCase {
         loadPage(BrowserVersion.FIREFOX_2, content, new ArrayList<String>());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void loggedCalls() throws Exception {
+        final URL url = getClass().getResource("debugFrameImplTest.html");
+        final String expectedLog = IOUtils.toString(getClass().getResourceAsStream("debugFrameImplTest.txt"));
+
+        final StringWriter sw = new StringWriter();
+        final Layout layout = new PatternLayout("%m%n");
+        final Appender appender = new WriterAppender(layout, sw);
+        loggerDebugFrameImpl_.addAppender(appender);
+        try {
+            final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_2);
+            webClient.getPage(url);
+        }
+        finally {
+            loggerDebugFrameImpl_.removeAppender(appender);
+        }
+
+        assertEquals(expectedLog, sw.toString());
+    }
 }

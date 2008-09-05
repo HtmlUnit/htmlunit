@@ -1,0 +1,6 @@
+unknown:unknown [script]()
+unknown:unknown       [anonymous](event: [object Event])
+unknown:unknown    test()
+debugFrameImplTest.html:19    bar()
+debugFrameImplTest.html:20    bli()
+debugFrameImplTest.html:21    [anonymous]()

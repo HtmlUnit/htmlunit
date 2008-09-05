@@ -71,7 +71,8 @@ public class EventHandler extends BaseFunction {
         final SimpleScriptable jsObj = (SimpleScriptable) node_.getScriptObject();
         // compile "just in time"
         if (realFunction_ == null) {
-            realFunction_ = cx.compileFunction(jsObj, jsSnippet_, eventName_ + " event for " + node_, 1, null);
+            realFunction_ = cx.compileFunction(jsObj, jsSnippet_, eventName_ + " event for " + node_
+                + " in " + node_.getPage().getWebResponse().getUrl(), 0, null);
         }
 
         final Object result = realFunction_.call(cx, scope, thisObj, args);
