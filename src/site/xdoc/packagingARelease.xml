@@ -86,6 +86,9 @@
                         <source>mvn deploy</source>
                     </li>
                     <li>
+                        Delete online website API.
+                    </li>
+                    <li>
                         Deploy the site documentation.
                         <source>mvn site:deploy</source>
                     </li>
