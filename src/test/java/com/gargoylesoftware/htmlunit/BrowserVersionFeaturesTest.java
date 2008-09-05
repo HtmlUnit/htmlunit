@@ -31,6 +31,7 @@ import org.junit.Test;
 public class BrowserVersionFeaturesTest extends WebTestCase {
 
     /**
+     * Test of alphabetical order.
      */
     @Test
     public void lexicographicOrder() {
