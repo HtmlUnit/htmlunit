@@ -70,7 +70,7 @@ public class AttachmentTest extends WebTestCase {
         assertEquals(0, attachments.size());
 
         final HtmlPage result = (HtmlPage) client.getPage(URL_FIRST);
-        final HtmlAnchor anchor = (HtmlAnchor) result.getAnchors().get(0);
+        final HtmlAnchor anchor = result.getAnchors().get(0);
         final Page clickResult = anchor.click();
         assertEquals(result, clickResult);
         assertEquals(1, attachments.size());

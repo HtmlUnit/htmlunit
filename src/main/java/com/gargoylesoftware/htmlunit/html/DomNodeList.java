@@ -82,7 +82,6 @@ class DomNodeList implements NodeList, Serializable {
      * Returns the nodes in this node list, caching as necessary.
      * @return the nodes in this node list
      */
-    @SuppressWarnings("unchecked")
     private List<Object> getNodes() {
         if (cachedElements_ == null) {
             if (node_ != null) {

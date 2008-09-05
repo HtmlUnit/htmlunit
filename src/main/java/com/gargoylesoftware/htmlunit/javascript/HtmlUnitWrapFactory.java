@@ -41,9 +41,8 @@ public class HtmlUnitWrapFactory extends WrapFactory {
      * @see WrapFactory#wrapAsJavaObject(Context, Scriptable, Object, Class)
      */
     @Override
-    @SuppressWarnings("unchecked")
     public Scriptable wrapAsJavaObject(final Context context,
-            final Scriptable scope, final Object javaObject, final Class staticType) {
+            final Scriptable scope, final Object javaObject, final Class< ? > staticType) {
 
         // TODO: should depend on the js configuration file
         final Scriptable resp;

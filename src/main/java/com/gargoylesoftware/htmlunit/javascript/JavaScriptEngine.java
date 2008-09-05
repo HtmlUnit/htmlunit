@@ -190,7 +190,7 @@ public class JavaScriptEngine implements Serializable {
 
                         if (obj.getClass() == Element.class && webWindow.getEnclosedPage() instanceof HtmlPage) {
                             final DomNode domNode =
-                                new HtmlElement(null, "", (HtmlPage) webWindow.getEnclosedPage(), null) {
+                                new HtmlElement(null, "", webWindow.getEnclosedPage(), null) {
                                     private static final long serialVersionUID = -5614158965497997095L;
                                 };
                             ((SimpleScriptable) obj).setDomNode(domNode);

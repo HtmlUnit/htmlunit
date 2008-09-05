@@ -146,8 +146,7 @@ public class PrimitivePrototypeBugFixer implements Scriptable {
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("unchecked")
-    public Object getDefaultValue(final Class hint) {
+    public Object getDefaultValue(final Class< ? > hint) {
         return wrapped_.getDefaultValue(hint);
     }
 

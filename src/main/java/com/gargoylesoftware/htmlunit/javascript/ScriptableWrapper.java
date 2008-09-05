@@ -191,8 +191,7 @@ public class ScriptableWrapper extends ScriptableObject {
      * @see org.mozilla.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
      */
     @Override
-    @SuppressWarnings("unchecked")
-    public Object getDefaultValue(final Class hint) {
+    public Object getDefaultValue(final Class< ? > hint) {
         if (hint == null || String.class == null) {
             return jsToString();
         }

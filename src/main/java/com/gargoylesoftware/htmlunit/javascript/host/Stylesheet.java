@@ -385,8 +385,7 @@ public class Stylesheet extends SimpleScriptable {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("unchecked")
-    public Object getDefaultValue(final Class hint) {
+    public Object getDefaultValue(final Class< ? > hint) {
         if (String.class.equals(hint) || hint == null) {
             if (getBrowserVersion().isIE()) {
                 return "[object]"; // the super helpful IE solution

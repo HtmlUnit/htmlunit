@@ -484,7 +484,6 @@ public class HtmlForm extends ClickableElement {
      *
      * @param radioButtonInput the radio button to select
      */
-    @SuppressWarnings("unchecked")
     void setCheckedRadioButton(final HtmlRadioButtonInput radioButtonInput) {
         if (!isAncestorOf(radioButtonInput) && !lostChildren_.contains(radioButtonInput)) {
             throw new IllegalArgumentException("HtmlRadioButtonInput is not child of this HtmlForm");

@@ -190,10 +190,9 @@ public class HTMLTableElement extends RowContainer {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("unchecked")
     protected Object insertRow(final int index) {
         // check if a tbody should be created
-        final List< ? extends HtmlElement> rowContainers = (List< ? extends HtmlElement>)
+        final List< ? > rowContainers =
             getHtmlElementOrDie().getByXPath("//tbody | //thead | //tfoot");
         if (rowContainers.isEmpty() || index == 0) {
             final HtmlElement tBody = getHtmlElementOrDie().appendChildIfNoneExists("tbody");

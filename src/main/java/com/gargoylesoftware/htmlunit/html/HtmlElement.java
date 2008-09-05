@@ -390,13 +390,14 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @param <X> the sub-element
      * @return the HTML elements that are descendants of this element and that have the specified tag name
      */
+    @SuppressWarnings("unchecked")
     public final <X extends HtmlElement> List<X> getHtmlElementsByTagName(final String tagName) {
         final List<X> list = new ArrayList<X>();
         final String lowerCaseTagName = tagName.toLowerCase();
-        final Iterable<X> iterable = getAllHtmlChildElements();
-        for (final X element : iterable) {
+        final Iterable<HtmlElement> iterable = getAllHtmlChildElements();
+        for (final HtmlElement element : iterable) {
             if (lowerCaseTagName.equals(element.getTagName())) {
-                list.add(element);
+                list.add((X) element);
             }
         }
         return list;

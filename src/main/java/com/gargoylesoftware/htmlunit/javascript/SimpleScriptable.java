@@ -328,8 +328,7 @@ public class SimpleScriptable extends ScriptableObject {
      * @return the default value
      */
     @Override
-    @SuppressWarnings("unchecked")
-    public Object getDefaultValue(final Class hint) {
+    public Object getDefaultValue(final Class< ? > hint) {
         if (String.class.equals(hint) || hint == null) {
             if (getBrowserVersion().isIE()) {
                 return "[object]"; // the super helpful IE solution
@@ -380,8 +379,7 @@ public class SimpleScriptable extends ScriptableObject {
      * Same as base implementation, but includes all methods inherited from super classes as well.
      */
     @Override
-    @SuppressWarnings("unchecked")
-    public void defineProperty(final String propertyName, final Class clazz, int attributes) {
+    public void defineProperty(final String propertyName, final Class< ? > clazz, int attributes) {
         final int length = propertyName.length();
         if (length == 0) {
             throw new IllegalArgumentException();
@@ -410,8 +408,7 @@ public class SimpleScriptable extends ScriptableObject {
      * Same as base implementation, but includes all methods inherited from super classes as well.
      */
     @Override
-    @SuppressWarnings("unchecked")
-    public void defineFunctionProperties(final String[] names, final Class clazz, final int attributes) {
+    public void defineFunctionProperties(final String[] names, final Class< ? > clazz, final int attributes) {
         final Method[] methods = clazz.getMethods();
         for (final String name : names) {
             final Method method = findMethod(methods, name);

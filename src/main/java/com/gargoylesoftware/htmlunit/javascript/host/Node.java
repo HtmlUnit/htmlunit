@@ -323,12 +323,10 @@ public class Node extends SimpleScriptable {
             // Get XML nodes for the DOM nodes passed in
             final DomNode newChildNode = ((Node) newChildObject).getDomNodeOrDie();
             final DomNode oldChildNode;
-            if (oldChildObject != null) {
-                // Replace the old child with the new child.
-                oldChildNode = ((Node) oldChildObject).getDomNodeOrDie();
-                oldChildNode.replace(newChildNode);
-                removedChild = oldChildObject;
-            }
+            // Replace the old child with the new child.
+            oldChildNode = ((Node) oldChildObject).getDomNodeOrDie();
+            oldChildNode.replace(newChildNode);
+            removedChild = oldChildObject;
         }
 
         return removedChild;
@@ -609,9 +607,7 @@ public class Node extends SimpleScriptable {
         if (eventListenersContainer_ == null) {
             return null;
         }
-        else {
-            return eventListenersContainer_.getEventHandlerProp(StringUtils.substring(eventName.toLowerCase(), 2));
-        }
+        return eventListenersContainer_.getEventHandlerProp(StringUtils.substring(eventName.toLowerCase(), 2));
     }
 
     /**

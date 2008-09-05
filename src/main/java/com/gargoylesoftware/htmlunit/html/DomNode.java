@@ -1220,13 +1220,12 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * Returns an {@link Iterable} that will recursively iterate over all of this node's descendants.
-     * @param <X> the sub-element
      * @return an {@link Iterable} that will recursively iterate over all of this node's descendants
      */
-    public final <X extends HtmlElement> Iterable<X> getAllHtmlChildElements() {
-        return new Iterable<X>() {
-            public Iterator<X> iterator() {
-                return new DescendantElementsIterator<X>();
+    public final Iterable<HtmlElement> getAllHtmlChildElements() {
+        return new Iterable<HtmlElement>() {
+            public Iterator<HtmlElement> iterator() {
+                return new DescendantElementsIterator();
             }
         };
     }
@@ -1234,9 +1233,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * An iterator over all HtmlElement descendants in document order.
      */
-    protected class DescendantElementsIterator<X extends HtmlElement> implements Iterator<X> {
+    protected class DescendantElementsIterator implements Iterator<HtmlElement> {
 
-        private X nextElement_ = getFirstChildElement(DomNode.this);
+        private HtmlElement nextElement_ = getFirstChildElement(DomNode.this);
 
         /** @return is there a next one? */
         public boolean hasNext() {
@@ -1244,7 +1243,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
 
         /** @return the next one */
-        public X next() {
+        public HtmlElement next() {
             return nextElement();
         }
 
@@ -1254,14 +1253,14 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
 
         /** @return is there a next one? */
-        public X nextElement() {
-            final X result = nextElement_;
+        public HtmlElement nextElement() {
+            final HtmlElement result = nextElement_;
             setNextElement();
             return result;
         }
 
         private void setNextElement() {
-            X next = getFirstChildElement(nextElement_);
+            HtmlElement next = getFirstChildElement(nextElement_);
             if (next == null) {
                 next = getNextDomSibling(nextElement_);
             }
@@ -1271,7 +1270,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             nextElement_ = next;
         }
 
-        private X getNextElementUpwards(final DomNode startingNode) {
+        private HtmlElement getNextElementUpwards(final DomNode startingNode) {
             if (startingNode == DomNode.this) {
                 return null;
             }
@@ -1289,10 +1288,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             if (next == null) {
                 return getNextElementUpwards(parent);
             }
-            return (X) next;
+            return (HtmlElement) next;
         }
 
-        private X getFirstChildElement(final DomNode parent) {
+        private HtmlElement getFirstChildElement(final DomNode parent) {
             if (parent instanceof HtmlNoScript
                     && getPage().getEnclosingWindow().getWebClient().isJavaScriptEnabled()) {
                 return null;
@@ -1301,15 +1300,15 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             while (node != null && node instanceof HtmlElement == false) {
                 node = node.getNextSibling();
             }
-            return (X) node;
+            return (HtmlElement) node;
         }
 
-        private X getNextDomSibling(final HtmlElement element) {
+        private HtmlElement getNextDomSibling(final HtmlElement element) {
             DomNode node = element.getNextSibling();
             while (node != null && node instanceof HtmlElement == false) {
                 node = node.getNextSibling();
             }
-            return (X) node;
+            return (HtmlElement) node;
         }
     }
 

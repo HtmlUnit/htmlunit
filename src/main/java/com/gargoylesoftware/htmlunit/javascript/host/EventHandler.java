@@ -86,8 +86,7 @@ public class EventHandler extends BaseFunction {
      * @return the js code of the function declaration
      */
     @Override
-    @SuppressWarnings("unchecked")
-    public Object getDefaultValue(final Class typeHint) {
+    public Object getDefaultValue(final Class< ? > typeHint) {
         return jsSnippet_;
     }
 

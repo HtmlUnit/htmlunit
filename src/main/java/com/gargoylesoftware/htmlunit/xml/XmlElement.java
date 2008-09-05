@@ -221,7 +221,7 @@ public class XmlElement extends DomElement implements Element {
      */
     @SuppressWarnings("unchecked")
     static Map<String, DomAttr> createAttributeMap(final int attributeCount) {
-        return ListOrderedMap.decorate(new HashMap(attributeCount)); // preserve insertion order
+        return ListOrderedMap.decorate(new HashMap<String, DomAttr>(attributeCount)); // preserve insertion order
     }
 
     /**

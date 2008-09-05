@@ -705,7 +705,7 @@ public class NodeTest extends WebTestCase {
             + "</html>";
         final String[] expectedAlerts = {"id=bar"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = (HtmlPage) loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
 
         final HtmlElement element = page.getHtmlElementById("bar");
