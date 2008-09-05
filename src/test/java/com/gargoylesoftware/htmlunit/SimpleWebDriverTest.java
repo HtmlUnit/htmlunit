@@ -45,10 +45,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  * </p>
  * <p>
  * Examples:
- * mvn -Dtest=SimpleWebDriverTest (runs the test with HtmlUnit)<br/>
- * mvn -Dtest=SimpleWebDriverTest -Dhtmlunit.webdriver=firefox (runs the test with Firefox from the path)<br/>
- * mvn -Dtest=SimpleWebDriverTest -Dhtmlunit.webdriver=firefox
- * -Dwebdriver.firefox.bin=/home/marc/misc/firefox/firefox-3.0.1/firefox
+ * mvn test -Dtest=SimpleWebDriverTest (runs the test with HtmlUnit)<br/>
+ * mvn test -Dtest=SimpleWebDriverTest -Dhtmlunit.webdriver=firefox (runs the test with Firefox from the path)<br/>
+ * mvn test -Dtest=SimpleWebDriverTest -Dhtmlunit.webdriver=firefox
+ * -Dwebdriver.firefox.bin=/home/user/firefox-3.0.1
  * (runs the test with the specified Firefox version)<br/>
  * </p>
  * @version $Revision$
