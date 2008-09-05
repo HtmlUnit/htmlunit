@@ -703,7 +703,7 @@ public class WebClient implements Serializable {
     /**
      * Sets the proxy host used to perform HTTP requests.
      * @param proxyHost the proxy host used to perform HTTP requests
-     * @deprecated use {@link ProxyConfig} instead (see {@link #getProxyConfig()})
+     * @deprecated As of 2.2, use {@link ProxyConfig} instead (see {@link #getProxyConfig()})
      */
     @Deprecated
     public void setProxyHost(final String proxyHost) {
@@ -713,7 +713,7 @@ public class WebClient implements Serializable {
     /**
      * Sets the proxy port used to perform HTTP requests.
      * @param proxyPort the proxy port used to perform HTTP requests
-     * @deprecated use {@link ProxyConfig} instead (see {@link #getProxyConfig()})
+     * @deprecated As of 2.2, use {@link ProxyConfig} instead (see {@link #getProxyConfig()})
      */
     @Deprecated
     public void setProxyPort(final int proxyPort) {
@@ -725,7 +725,7 @@ public class WebClient implements Serializable {
      * @param pattern a regular expression pattern that matches the hostnames of the hosts which should
      *                bypass the configured proxy.
      * @see java.util.regex.Pattern
-     * @deprecated use {@link ProxyConfig} instead (see {@link #getProxyConfig()})
+     * @deprecated As of 2.2, use {@link ProxyConfig} instead (see {@link #getProxyConfig()})
      */
     @Deprecated
     public void addHostsToProxyBypass(final String pattern) {
@@ -736,7 +736,7 @@ public class WebClient implements Serializable {
      * Any hosts matched by the specified regular expression pattern will no longer bypass the configured proxy.
      * @param pattern the previously added regular expression pattern
      * @see java.util.regex.Pattern
-     * @deprecated use {@link ProxyConfig} instead (see {@link #getProxyConfig()})
+     * @deprecated As of 2.2, use {@link ProxyConfig} instead (see {@link #getProxyConfig()})
      */
     @Deprecated
     public void removeHostsFromProxyBypass(final String pattern) {
