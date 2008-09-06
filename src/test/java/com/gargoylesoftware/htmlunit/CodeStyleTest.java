@@ -387,7 +387,7 @@ public class CodeStyleTest {
     	for (String line : lines) {
     		line = line.trim().toLowerCase();
     		if (line.startsWith("* @deprecated") && !line.startsWith("* @deprecated as of ") && !line.startsWith("* @deprecated since ")) {
-    			addFailure("@deprecated by me immediately followed by \"as of \" or \"since \" in "
+    			addFailure("@deprecated must be immediately followed by \"as of \" or \"since \" in "
     					+ relativePath + ", line: " + (i + 1));
     		}
     		i++;
