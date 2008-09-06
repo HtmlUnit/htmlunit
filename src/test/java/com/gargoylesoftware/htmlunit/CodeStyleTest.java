@@ -383,14 +383,15 @@ public class CodeStyleTest {
      * Verifies that deprecated tag is followed by "As of " or "since ".
      */
     private void deprecation(final List<String> lines, final String relativePath) {
-    	int i = 0;
-    	for (String line : lines) {
-    		line = line.trim().toLowerCase();
-    		if (line.startsWith("* @deprecated") && !line.startsWith("* @deprecated as of ") && !line.startsWith("* @deprecated since ")) {
-    			addFailure("@deprecated must be immediately followed by \"as of \" or \"since \" in "
-    					+ relativePath + ", line: " + (i + 1));
-    		}
-    		i++;
-    	}
+        int i = 0;
+        for (String line : lines) {
+            line = line.trim().toLowerCase();
+            if (line.startsWith("* @deprecated") && !line.startsWith("* @deprecated as of ")
+                    && !line.startsWith("* @deprecated since ")) {
+                addFailure("@deprecated must be immediately followed by \"As of \" or \"since \" in "
+                    + relativePath + ", line: " + (i + 1));
+            }
+            i++;
+        }
     }
 }
