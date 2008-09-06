@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.3-SNAPSHOT" description="Bugfixes">
+            <action type="remove" dev="asashour">
+                XmlAttr: remove deprecated constructor with Map.Entry.
+            </action>
             <action type="fix" dev="asashour" id="2093427">
                 ThreadManager: add WebWindow name to the background threads name.
             </action>

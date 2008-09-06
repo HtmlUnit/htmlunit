@@ -42,20 +42,6 @@ public class XmlAttr extends DomNamespaceNode implements Attr {
     /**
      * Instantiates a new attribute.
      *
-     * @param xmlElement the parent element
-     * @param mapEntry the wrapped map entry
-     * @deprecated Use constructor with explicit names.
-     */
-    @Deprecated
-    public XmlAttr(final XmlElement xmlElement, final Map.Entry<String, String> mapEntry) {
-        super(null, mapEntry.getKey(), xmlElement.getPage());
-        value_ = mapEntry.getValue();
-        setParentNode(xmlElement);
-    }
-
-    /**
-     * Instantiates a new attribute.
-     *
      * @param page the page that the attribute belongs to
      * @param namespaceURI the namespace that defines the attribute name (may be <tt>null</tt>)
      * @param qualifiedName the name of the attribute
