@@ -26,13 +26,13 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Darrell DeBoer
  */
 public class XMLSerializerTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
-    @Test
     public void test() throws Exception {
         final String expectedStringIE =
             "<note>13109<to>Tove</to>13109<from>Jani</from>13109<body>Do32not32forget32me32this32weekend!</body>"
@@ -46,40 +46,53 @@ public class XMLSerializerTest extends WebTestCase {
 
     private void test(final BrowserVersion browserVersion, final String expectedString)
         throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var text='<note> ';\n"
-            + "    text += '<to>Tove</to> \\n';\n"
-            + "    text += '<from>Jani</from> \\n ';\n"
-            + "    text += '<body>Do not forget me this weekend!</body> ';\n"
-            + "    text += '<outer>\\n ';\n"
-            + "    text += '  <inner>Some Value</inner>';\n"
-            + "    text += '</outer> ';\n"
-            + "    text += '</note>';\n"
-            + "    if (window.ActiveXObject) {\n"
-            + "      var doc=new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "      doc.async=false;\n"
-            + "      doc.loadXML(text);\n"
-            + "      var xml = doc.xml;\n"
-            + "    } else {\n"
-            + "      var parser=new DOMParser();\n"
-            + "      var doc=parser.parseFromString(text,'text/xml');\n"
-            + "      var serializer = new XMLSerializer();\n"
-            + "      var xml = serializer.serializeToString(doc.documentElement);\n"
-            + "    }\n"
-            + "    var ta = document.getElementById('myTextArea');\n"
-            + "    for (var i=0; i < xml.length; i++) {\n"
-            + "      if (xml.charCodeAt(i) < 33)\n"
-            + "        ta.value += xml.charCodeAt(i);\n"
-            + "      else\n"
-            + "        ta.value += xml.charAt(i);\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
-            + "</body></html>";
+        final String serializationText =
+                "<note> "
+                + "<to>Tove</to> \\n"
+                + "<from>Jani</from> \\n "
+                + "<body>Do not forget me this weekend!</body> "
+                + "<outer>\\n "
+                + "  <inner>Some Value</inner>"
+                + "</outer> "
+                + "</note>";
 
-        final HtmlPage page = loadPage(browserVersion, content, null);
+        final HtmlPage page = loadPage(browserVersion, constructPageContent(serializationText), null);
+        final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextArea");
+        assertEquals(expectedString, textArea.getText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void nameSpaces() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String expectedStringIE =
+            "<?xml32version=\"1.0\"?>1310<xsl:stylesheet32version=\"1.0\"32"
+            + "xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">13109<xsl:template32match=\"/\">131099<html>1310999"
+            + "<body>1310999</body>131099</html>13109</xsl:template>1310</xsl:stylesheet>1310";
+        nameSpaces(BrowserVersion.INTERNET_EXPLORER_7_0, expectedStringIE);
+        final String expectedStringFF =
+            "<xsl:stylesheet32version=\"1.0\"32xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">103232"
+            + "<xsl:template32match=\"/\">103232<html>1032323232<body>1032323232</body>103232</html>103232"
+            + "</xsl:template>10</xsl:stylesheet>";
+        nameSpaces(BrowserVersion.FIREFOX_2, expectedStringFF);
+    }
+
+    private void nameSpaces(final BrowserVersion browserVersion, final String expectedString) throws Exception {
+        final String serializationText =
+                "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\n"
+                + "<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\\n"
+                + "  <xsl:template match=\"/\">\\n"
+                + "  <html>\\n"
+                + "    <body>\\n"
+                + "    </body>\\n"
+                + "  </html>\\n"
+                + "  </xsl:template>\\n"
+                + "</xsl:stylesheet>";
+
+        final HtmlPage page = loadPage(browserVersion, constructPageContent(serializationText), null);
         final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextArea");
         assertEquals(expectedString, textArea.getText());
     }
@@ -88,35 +101,73 @@ public class XMLSerializerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testNameSpaces() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        final String expectedStringIE =
-            "<?xml32version=\"1.0\"?>1310<xsl:stylesheet32version=\"1.0\"32"
-            + "xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">13109<xsl:template32match=\"/\">131099<html>1310999"
-            + "<body>1310999</body>131099</html>13109</xsl:template>1310</xsl:stylesheet>1310";
-        testNameSpaces(BrowserVersion.INTERNET_EXPLORER_7_0, expectedStringIE);
-        final String expectedStringFF =
-            "<xsl:stylesheet32version=\"1.0\"32xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">103232"
-            + "<xsl:template32match=\"/\">103232<html>1032323232<body>1032323232</body>103232</html>103232"
-            + "</xsl:template>10</xsl:stylesheet>";
-        testNameSpaces(BrowserVersion.FIREFOX_2, expectedStringFF);
+    public void attributes() throws Exception {
+        final String expected = "<document32attrib=\"attribValue\">"
+                          + "<outer32attrib=\"attribValue\">"
+                          + "<inner32attrib=\"attribValue\"/>"
+                          + "</outer>"
+                          + "</document>";
+        attributes(BrowserVersion.FIREFOX_2, expected);
+        attributes(BrowserVersion.INTERNET_EXPLORER_7_0, expected + "1310");
     }
 
-    private void testNameSpaces(final BrowserVersion browserVersion, final String expectedString) throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var text='<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\n';\n"
-            + "    text += '<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\\n';\n"
-            + "    text += '  <xsl:template match=\"/\">\\n';\n"
-            + "    text += '  <html>\\n';\n"
-            + "    text += '    <body>\\n';\n"
-            + "    text += '    </body>\\n';\n"
-            + "    text += '  </html>\\n';\n"
-            + "    text += '  </xsl:template>\\n';\n"
-            + "    text += '</xsl:stylesheet>';\n"
-            + "    if (window.ActiveXObject) {\n"
+    private void attributes(final BrowserVersion browserVersion, final String expectedString)
+        throws Exception {
+        final String serializationContent = "<document attrib=\"attribValue\">"
+                                            + "<outer attrib=\"attribValue\">"
+                                            + "<inner attrib=\"attribValue\"/>"
+                                            + "</outer></document>";
+
+        final HtmlPage page = loadPage(browserVersion, constructPageContent(serializationContent), null);
+        final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextArea");
+        assertEquals(expectedString, textArea.getText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void htmlAttributes() throws Exception {
+        final String expected = "<html32xmlns=\"http://www.w3.org/1999/xhtml\">"
+                          + "<head><title>html</title></head>"
+                          + "<body32id=\"bodyId\">"
+                          + "<span32class=\"spanClass\">foo</span>"
+                          + "</body>"
+                          + "</html>";
+        htmlAttributes(BrowserVersion.FIREFOX_2, expected);
+        htmlAttributes(BrowserVersion.INTERNET_EXPLORER_7_0, expected + "1310");
+    }
+
+    private void htmlAttributes(final BrowserVersion browserVersion, final String expectedString)
+        throws Exception {
+        final String serializationValue = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>"
+                                          + "<html xmlns=\"http://www.w3.org/1999/xhtml\">"
+                                          + "<head><title>html</title></head>"
+                                          + "<body id=\"bodyId\">"
+                                          + "<span class=\"spanClass\">foo</span>"
+                                          + "</body>"
+                                          + "</html>";
+
+        final HtmlPage page = loadPage(browserVersion, constructPageContent(serializationValue), null);
+        final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextArea");
+        assertEquals(expectedString, textArea.getText());
+    }
+
+    /**
+     * Constructs an HTML page that when loaded will parse and serialize the provided text.
+     * First the provided text is parsed into a Document. Then the Document is serialized (browser-specific).
+     * Finally the result is placed into the text area "myTextArea".
+     */
+    private String constructPageContent(final String serializationText) {
+        final String escapedText = serializationText.replace("\n", "\\n");
+
+        final StringBuffer buffer = new StringBuffer();
+        buffer.append(
+              "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n");
+
+        buffer.append("    var text = '").append(escapedText).append("';\n").append(
+              "    if (window.ActiveXObject) {\n"
             + "      var doc=new ActiveXObject('Microsoft.XMLDOM');\n"
             + "      doc.async=false;\n"
             + "      doc.loadXML(text);\n"
@@ -137,10 +188,7 @@ public class XMLSerializerTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
-            + "</body></html>";
-
-        final HtmlPage page = loadPage(browserVersion, html, null);
-        final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextArea");
-        assertEquals(expectedString, textArea.getText());
+            + "</body></html>");
+        return buffer.toString();
     }
 }

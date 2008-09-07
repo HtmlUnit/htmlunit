@@ -14,18 +14,17 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.Map;
-
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.xml.XmlElement;
+import org.w3c.dom.NamedNodeMap;
 
 /**
  * A JavaScript object for XMLSerializer.
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Darrell DeBoer
  */
 public class XMLSerializer extends SimpleScriptable {
 
@@ -55,13 +54,11 @@ public class XMLSerializer extends SimpleScriptable {
 
     private void toXml(final int indent, final DomNode node, final StringBuilder buffer, final boolean isIE) {
         buffer.append('<').append(node.getNodeName());
-        if (node instanceof XmlElement) {
-            final Map<String, DomAttr> attributes = ((XmlElement) node).getAttributesMap();
-            for (final String name : attributes.keySet()) {
-                final DomAttr attrib = attributes.get(name);
-                buffer.append(' ').append(attrib.getQualifiedName()).append('=')
-                    .append('"').append(attrib.getValue()).append('"');
-            }
+        final NamedNodeMap attributesMap = node.getAttributes();
+        for (int i = 0; i < attributesMap.getLength(); i++) {
+            final DomAttr attrib = (DomAttr) attributesMap.item(i);
+            buffer.append(' ').append(attrib.getQualifiedName()).append('=')
+                .append('"').append(attrib.getValue()).append('"');
         }
         boolean startTagClosed = false;
         for (final DomNode child : node.getChildren()) {
