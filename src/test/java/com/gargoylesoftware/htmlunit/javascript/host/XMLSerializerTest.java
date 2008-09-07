@@ -33,6 +33,7 @@ public class XMLSerializerTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void test() throws Exception {
         final String expectedStringIE =
             "<note>13109<to>Tove</to>13109<from>Jani</from>13109<body>Do32not32forget32me32this32weekend!</body>"
@@ -64,6 +65,7 @@ public class XMLSerializerTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void nameSpaces() throws Exception {
         if (notYetImplemented()) {
             return;
