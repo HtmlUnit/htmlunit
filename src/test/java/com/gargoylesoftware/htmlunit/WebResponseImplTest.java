@@ -175,7 +175,7 @@ public class WebResponseImplTest extends WebTestCase {
         servlets.put("/test", ResponseHeadersServlet.class);
         server_ = HttpWebConnectionTest.startWebServer("./", null, servlets);
         final WebClient client = new WebClient();
-        final HtmlPage page = (HtmlPage) client.getPage("http://localhost:" + HttpWebConnectionTest.PORT + "/test");
+        final HtmlPage page = client.getPage("http://localhost:" + HttpWebConnectionTest.PORT + "/test");
         assertEquals("some_value", page.getWebResponse().getResponseHeaderValue("some_header"));
     }
 

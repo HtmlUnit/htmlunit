@@ -52,7 +52,7 @@ public final class Version {
      */
     private static void runSanityCheck() throws Exception {
         final WebClient webClient = new WebClient();
-        final HtmlPage page = (HtmlPage) webClient.getPage("http://htmlunit.sourceforge.net/index.html");
+        final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net/index.html");
         page.executeJavaScript("document.location");
         System.out.println("Sanity check complete.");
     }
