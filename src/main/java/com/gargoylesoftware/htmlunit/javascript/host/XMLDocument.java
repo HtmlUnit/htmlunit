@@ -275,7 +275,9 @@ public class XMLDocument extends Document {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the element with the specified ID, as long as it is an HTML element; <tt>null</tt> otherwise.
+     * @param id the ID to search for
+     * @return the element with the specified ID, as long as it is an HTML element; <tt>null</tt> otherwise
      */
     public Object jsxFunction_getElementById(final String id) {
         final XmlPage xmlPage = (XmlPage) getDomNodeOrDie();
@@ -287,7 +289,8 @@ public class XMLDocument extends Document {
         if (domElement instanceof HtmlElement) {
             return ((HtmlElement) domElement).getScriptObject();
         }
-        getLog().debug("getElementById(" + id + "): no HTML DOM node found with this id");
+        getLog().debug("getElementById(" + id + "): no HTML DOM node found with this ID");
         return null;
     }
+
 }
