@@ -300,6 +300,7 @@ public class WebClient implements Serializable {
      *
      * @param webWindow the WebWindow to load the result of the request into
      * @param parameters Parameter object for the web request
+     * @param <P> the page
      * @return the page returned by the server when the specified request was made in the specified window
      * @throws IOException if an IO error occurs
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
@@ -307,7 +308,8 @@ public class WebClient implements Serializable {
      *
      * @see WebRequestSettings
      */
-    public Page getPage(final WebWindow webWindow, final WebRequestSettings parameters)
+    @SuppressWarnings("unchecked")
+    public <P extends Page> P getPage(final WebWindow webWindow, final WebRequestSettings parameters)
         throws IOException, FailingHttpStatusCodeException {
 
         final Page page = webWindow.getEnclosedPage();
@@ -315,7 +317,7 @@ public class WebClient implements Serializable {
             final HtmlPage htmlPage = (HtmlPage) page;
             if (!htmlPage.isOnbeforeunloadAccepted()) {
                 getLog().debug("The registered OnbeforeunloadHandler rejected to load a new page.");
-                return page;
+                return (P) page;
             }
         }
 
@@ -327,7 +329,7 @@ public class WebClient implements Serializable {
             webResponse = makeWebResponseForJavaScriptUrl(webWindow, parameters.getUrl(), parameters.getCharset());
             if (webWindow.getEnclosedPage() != null && webWindow.getEnclosedPage().getWebResponse() == webResponse) {
                 // a javascript:... url with result of type undefined didn't changed the page
-                return webWindow.getEnclosedPage();
+                return (P) webWindow.getEnclosedPage();
             }
         }
         else {
@@ -338,7 +340,7 @@ public class WebClient implements Serializable {
         loadWebResponseInto(webResponse, webWindow);
         throwFailingHttpStatusCodeExceptionIfNecessary(webResponse);
 
-        return webWindow.getEnclosedPage();
+        return (P) webWindow.getEnclosedPage();
     }
 
     /**
@@ -351,54 +353,64 @@ public class WebClient implements Serializable {
      * @param target the name of the window to be opened (the name that will be passed into the
      *        JavaScript <tt>open()</tt> method)
      * @param params any parameters
+     * @param <P> the page
      * @return the new page
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      *         {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      * @throws IOException if an IO problem occurs
      */
-    public Page getPage(final WebWindow opener, final String target, final WebRequestSettings params)
+    @SuppressWarnings("unchecked")
+    public <P extends Page> P getPage(final WebWindow opener, final String target, final WebRequestSettings params)
         throws FailingHttpStatusCodeException, IOException {
-        return getPage(openTargetWindow(opener, target, "_self"), params);
+        return (P) getPage(openTargetWindow(opener, target, "_self"), params);
     }
 
     /**
      * Convenient method to build an URL and load it into the current WebWindow as it would be done
      * by {@link #getPage(WebWindow, WebRequestSettings)}.
      * @param url the URL of the new content
+     * @param <P> the page
      * @return the new page
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      *         {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      * @throws IOException if an IO problem occurs
      * @throws MalformedURLException if no URL can be created from the provided string
      */
-    public Page getPage(final String url) throws IOException, FailingHttpStatusCodeException, MalformedURLException {
-        return getPage(makeUrl(url));
+    @SuppressWarnings("unchecked")
+    public <P extends Page> P getPage(final String url) throws IOException, FailingHttpStatusCodeException,
+        MalformedURLException {
+        return (P) getPage(makeUrl(url));
     }
 
     /**
      * Convenient method to load a URL into the current WebWindow as it would be done
      * by {@link #getPage(WebWindow, WebRequestSettings)}.
      * @param url the URL of the new content
+     * @param <P> the page
      * @return the new page
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      *         {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      * @throws IOException if an IO problem occurs
      */
-    public Page getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
-        return getPage(getCurrentWindow(), new WebRequestSettings(url));
+    @SuppressWarnings("unchecked")
+    public <P extends Page> P getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
+        return (P) getPage(getCurrentWindow(), new WebRequestSettings(url));
     }
 
     /**
      * Convenient method to load a web request into the current WebWindow.
      * @param request the request parameters
+     * @param <P> the page
      * @return the new page
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      *         {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      * @throws IOException if an IO problem occurs
      * @see #getPage(WebWindow,WebRequestSettings)
      */
-    public Page getPage(final WebRequestSettings request) throws IOException, FailingHttpStatusCodeException {
-        return getPage(getCurrentWindow(), request);
+    @SuppressWarnings("unchecked")
+    public <P extends Page> P getPage(final WebRequestSettings request) throws IOException,
+        FailingHttpStatusCodeException {
+        return (P) getPage(getCurrentWindow(), request);
     }
 
     /**
