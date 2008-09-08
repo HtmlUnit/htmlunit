@@ -44,40 +44,44 @@ public class WebDriverOldTestsTest extends WebDriverTestCase {
     private static final Log log_ = LogFactory.getLog(WebDriverOldTestsTest.class);
     private final URL testFile_;
     private final List<String> expectedLog_ = new ArrayList<String>();
-    
+
+    /**
+     * @param expectedFile the expected file
+     * @throws Exception if the test fails
+     */
     @SuppressWarnings("unchecked")
     public WebDriverOldTestsTest(final File expectedFile) throws Exception {
         final FileInputStream fis = new FileInputStream(expectedFile);
         final ObjectInputStream oos = new ObjectInputStream(fis);
         final List<String> list = (List<String>) oos.readObject();
-        for (final String s: list) {
+        for (final String s : list) {
             expectedLog_.add(s.trim());
         }
         oos.close();
-        
+
         final String testFileName = expectedFile.getName().replaceFirst("\\.html\\..*", ".html");
         testFile_ = new File(expectedFile.getParentFile(), testFileName).toURL();
     }
 
     /**
      * Provides the data, ie the files on which the tests should run.
-     * TODO: use a dedicated test runner instead of this parameterized runner. 
+     * TODO: use a dedicated test runner instead of this parameterized runner.
      * @return the tests files on which to run the tests
      */
     @org.junit.runners.Parameterized.Parameters
     public static Collection<File[]> data() {
         final File testsDir = new File("target/generated_tests");
-        
+
         final File[] testFiles = testsDir.listFiles(new FileFilter() {
-            public boolean accept(File pathname) {
+            public boolean accept(final File pathname) {
                 final String name = pathname.getName();
                 return (name.endsWith(".html.expected") || name.endsWith(".html.FF2.expected"));
             }
         });
-        
+
         final List<File[]> response = new ArrayList<File[]>();
         for (final File f : testFiles) {
-            response.add(new File[] { f });
+            response.add(new File[] {f});
         }
         log_.info(response.size() + " tests found in folder " + testsDir);
         return response;
