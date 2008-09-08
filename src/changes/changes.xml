@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.3-SNAPSHOT" description="Bugfixes">
+            <action type="fix" dev="sdanig" id="2060931">
+                Fix condition where CSS warnings and errors did not have a systemID to easily identify error origin.
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: add support for properties style (FF) and styleSheet (IE) on HTMLStyleElement
                 and dummy support for the methods insertRule (FF) and addRule (IE) on CSSStyleSheet.
