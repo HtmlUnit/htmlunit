@@ -192,7 +192,7 @@ public class ScriptableWrapper extends ScriptableObject {
      */
     @Override
     public Object getDefaultValue(final Class< ? > hint) {
-        if (hint == null || String.class == null) {
+        if (String.class.equals(hint) || hint == null) {
             return jsToString();
         }
         return super.getDefaultValue(hint);
