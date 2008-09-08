@@ -17,7 +17,9 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.io.StringReader;
 
 import org.w3c.css.sac.InputSource;
+import org.w3c.dom.css.CSSStyleSheet;
 
+import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 
 /**
@@ -30,10 +32,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 public class HTMLStyleElement extends HTMLElement {
 
     private static final long serialVersionUID = 944381786297995169L;
+
     private Stylesheet sheet_;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLStyleElement() {
         // Empty.
@@ -45,15 +48,25 @@ public class HTMLStyleElement extends HTMLElement {
      * @return the sheet
      */
     public Stylesheet jsxGet_sheet() {
-        final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
+        if (sheet_ != null) {
+            return sheet_;
+        }
+
         String css = "";
+        final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
         if (style.getFirstChild() != null) {
             css = style.getFirstChild().asText();
         }
 
-        if (sheet_ == null) {
+        final Cache cache = getWindow().getWebWindow().getWebClient().getCache();
+        final CSSStyleSheet cached = cache.getCachedStyleSheet(css);
+        if (cached != null) {
+            sheet_ = new Stylesheet(this, cached);
+        }
+        else {
             final InputSource source = new InputSource(new StringReader(css));
             sheet_ = new Stylesheet(this, source);
+            cache.cache(css, sheet_.getWrappedSheet());
         }
 
         return sheet_;

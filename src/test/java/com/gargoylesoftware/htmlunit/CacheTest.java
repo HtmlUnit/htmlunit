@@ -224,7 +224,7 @@ public class CacheTest extends WebTestCase {
         connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", "text/javascript", headers);
 
         client.getPage(pageUrl);
-        assertEquals(1, client.getCache().getSize());
+        assertEquals(2, client.getCache().getSize());
     }
 
 }
