@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.html.DomNamespaceNode;
  *
  * @version $Revision$
  * @author Ahmed Ashour
- * @deprecated As of 2.2, no more used, please use {@link DomAttr} instead.
+ * @deprecated As of 2.2, no more used, please use {@link com.gargoylesoftware.htmlunit.html.DomAttr} instead.
  */
 @Deprecated
 public class XmlAttr extends DomNamespaceNode implements Attr {
