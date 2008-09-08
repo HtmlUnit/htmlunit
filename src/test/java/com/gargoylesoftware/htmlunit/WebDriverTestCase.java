@@ -62,7 +62,6 @@ public class WebDriverTestCase extends WebTestCase {
         }
     }
 
-
     /**
      * Reads the expected entries from the node "expected" or "expected_FF" or ... according to the browser used.
      * @return the expected entries
