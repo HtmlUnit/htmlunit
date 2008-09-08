@@ -15,26 +15,15 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import org.junit.AfterClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.html.ClickableElement;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 
 /**
  * Proof of concept for using WebDriver to run (some) HtmlUnit tests and have the possibility
@@ -55,32 +44,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class SimpleWebDriverTest extends WebTestCase {
-    private static Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<BrowserVersion, WebDriver>();
-
-    /**
-     * Configure the driver only once.
-     * @return the driver
-     */
-    protected WebDriver getWebDriver() {
-        WebDriver webDriver = WEB_DRIVERS_.get(getBrowserVersion());
-        if (webDriver == null) {
-            webDriver = buildWebDriver();
-            WEB_DRIVERS_.put(getBrowserVersion(), webDriver);
-        }
-        return webDriver;
-    }
-
-    /**
-     * Closes the drivers.
-     */
-    @AfterClass
-    public static void shutDownAll() {
-        for (final WebDriver webDriver : WEB_DRIVERS_.values()) {
-            webDriver.close();
-        }
-    }
-
+public class SimpleWebDriverTest extends WebDriverTestCase {
     /**
      * Test event order.
      * @throws Exception if the test fails
@@ -141,25 +105,6 @@ public class SimpleWebDriverTest extends WebTestCase {
         assertEquals(getExpectedEntries(), getEntries("log"));
     }
 
-    private List<String> getExpectedEntries() {
-        final WebDriver webDriver = getWebDriver();
-        final BrowserVersion browserVersion = getBrowserVersion();
-
-        String expectationNodeId = "expected";
-        final List<WebElement> nodes = webDriver.findElements(By.xpath("//*[starts-with(@id, 'expected')]"));
-        if (nodes.isEmpty()) {
-            throw new RuntimeException("No expectations found in html code");
-        }
-        final String specificName = "expected_" + browserVersion.getNickName();
-        for (final WebElement node : nodes) {
-            final String nodeId = node.getAttribute("id");
-            if (specificName.contains(nodeId) && nodeId.length() > expectationNodeId.length()) {
-                expectationNodeId = nodeId;
-            }
-        }
-        return getEntries(expectationNodeId);
-    }
-
     /**
      * @throws Exception if the test fails
      */
@@ -193,67 +138,5 @@ public class SimpleWebDriverTest extends WebTestCase {
     @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     public void fireEventCopyTemplateProperties() throws Exception {
         doTest("testFireEvent_initFromTemplate.html");
-    }
-
-    /**
-     * Get the log entries for the node with the given id.
-     * @param id the node id
-     * @return the log entries
-     */
-    protected List<String> getEntries(final String id) {
-        final List<WebElement> log = getWebDriver().findElements(By.xpath("id('" + id + "')/li"));
-        final List<String> entries = new ArrayList<String>();
-        for (final WebElement elt : log) {
-            entries.add(elt.getText());
-        }
-
-        return entries;
-    }
-
-    private WebDriver buildWebDriver() {
-        if ("firefox".equalsIgnoreCase(System.getProperty("htmlunit.webdriver"))) {
-            return new FirefoxDriver();
-        }
-        // TODO: IEDriver
-        final WebClient webClient = getWebClient();
-        final HtmlUnitDriver driver = new HtmlUnitDriver(true) {
-            @Override
-            protected WebClient newWebClient() {
-                return webClient;
-            }
-
-            @Override
-            protected WebElement newHtmlUnitWebElement(final HtmlElement element) {
-                return new FixedWebDriverHtmlUnitWebElement(this, element);
-            }
-        };
-        return driver;
-    }
-}
-
-/**
- * As HtmlUnit didn't generate the right events, WebDriver did it for us, but now that we do it correctly,
- * WebDriver shouldn't do it anymore
- * http://code.google.com/p/webdriver/issues/detail?id=93
- */
-class FixedWebDriverHtmlUnitWebElement extends HtmlUnitWebElement {
-
-    public FixedWebDriverHtmlUnitWebElement(final HtmlUnitDriver parent, final HtmlElement element) {
-        super(parent, element);
-    }
-
-    @Override
-    public void click() {
-        if (!(getElement() instanceof ClickableElement)) {
-            return;
-        }
-
-        final ClickableElement clickableElement = ((ClickableElement) getElement());
-        try {
-            clickableElement.click();
-        }
-        catch (final IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
