@@ -199,6 +199,7 @@ public class CacheTest extends WebTestCase {
     }
 
     /**
+     * TODO: improve CSS caching to cache a COPY of the object as stylesheet objects can be modified dynamically.
      *@throws Exception if the test fails
      */
     @Test
@@ -223,7 +224,7 @@ public class CacheTest extends WebTestCase {
         connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", "text/javascript", headers);
 
         client.getPage(pageUrl);
-        assertEquals(2, client.getCache().getSize());
+        assertEquals(1, client.getCache().getSize());
     }
 
 }

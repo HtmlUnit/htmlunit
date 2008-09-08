@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.3-SNAPSHOT" description="Bugfixes">
+            <action type="fix" dev="mguillem">
+                JavaScript: add support for properties style (FF) and styleSheet (IE) on HTMLStyleElement
+                and dummy support for the methods insertRule (FF) and addRule (IE) on CSSStyleSheet.
+            </action>
             <action type="update" dev="asashour" id="2098021" due-to="Darrell DeBoer">
                 XMLSerializer: includes attributes from HTMLElements.
             </action>

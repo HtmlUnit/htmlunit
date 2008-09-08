@@ -459,4 +459,27 @@ public class Stylesheet extends SimpleScriptable {
         }
     }
 
+    /**
+     * Insert a new rule.
+     * @param rule the CSS rule
+     * @param position the position at which to insert the rule
+     * @see <a href="http://www.w3.org/TR/DOM-Level-2-Style/css.html#CSS-CSSStyleSheet">DOM level 2</a>
+     * @return the position of the inserted rule
+     */
+    public int jsxFunction_insertRule(final String rule, final int position) {
+        // TODO: parse the rule and add it!!!
+        return position;
+    }
+
+    /**
+     * Adds a new rule.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/aa358796.aspx">MSDN</a>
+     * @param selector the selector name
+     * @param rule the rule
+     * @return always return -1 as of MSDN documentation
+     */
+    public int jsxFunction_addRule(final String selector, final String rule) {
+        // TODO: parse the rule and add it!!!
+        return -1;
+    }
 }

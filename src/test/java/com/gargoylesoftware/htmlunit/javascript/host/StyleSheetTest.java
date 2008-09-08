@@ -271,4 +271,29 @@ public class StyleSheetTest extends WebTestCase {
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
+    /**
+     * Minimal test for addRule / insertRule.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "false", "true", "0" },
+            IE = { "true", "false", "-1" })
+    public void addRule_insertRule() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "  var f = document.getElementById('myStyle');\n"
+            + "  var s = f.sheet ? f.sheet : f.styleSheet;\n"
+            + "  alert(s.insertRule == undefined);\n"
+            + "  alert(s.addRule == undefined);\n"
+            + "  if (s.insertRule)\n"
+            + "    alert(s.insertRule('div { color: red; }', 0));\n"
+            + "  else\n"
+            + "    alert(s.addRule('div', '{ color: red; }', 1));\n"
+            + "}</script>\n"
+            + "<style id='myStyle'>p: vertical-align:top</style>\n"
+            + "</head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }

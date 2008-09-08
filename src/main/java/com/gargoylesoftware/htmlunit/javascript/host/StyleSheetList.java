@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
-import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -108,22 +107,9 @@ public class StyleSheetList extends SimpleScriptable {
         final DomNode node = element.getDomNodeOrDie();
 
         Stylesheet sheet;
-        if (node instanceof HtmlStyle) {
-            // <style type="text/css"> ... </style>
-            final HtmlStyle style = (HtmlStyle) node;
-            String css = "";
-            if (style.getFirstChild() != null) {
-                css = style.getFirstChild().asText();
-            }
-            final CSSStyleSheet cached = cache.getCachedStyleSheet(css);
-            if (cached != null) {
-                sheet = new Stylesheet(element, cached);
-            }
-            else {
-                final InputSource source = new InputSource(new StringReader(css));
-                sheet = new Stylesheet(element, source);
-                cache.cache(css, sheet.getWrappedSheet());
-            }
+        // <style type="text/css"> ... </style>
+        if (element instanceof HTMLStyleElement) {
+            sheet = ((HTMLStyleElement) element).jsxGet_sheet();
         }
         else {
             // <link rel="stylesheet" type="text/css" href="..." />

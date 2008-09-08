@@ -1503,6 +1503,12 @@
 
     <class name="HTMLStyleElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLStyleElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlStyle">
+        <property name="sheet" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="styleSheet" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
     </class>
 
     <class name="HTMLTableCaptionElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableCaptionElement"
@@ -1927,6 +1933,12 @@
         <property name="rules" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer"/>
         </property>
+        <function name="addRule">
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
+        <function name="insertRule">
+            <browser name="Firefox"/>
+        </function>
     </class>
 
     <class name="StyleSheetList" classname="com.gargoylesoftware.htmlunit.javascript.host.StyleSheetList" JSObject="true">

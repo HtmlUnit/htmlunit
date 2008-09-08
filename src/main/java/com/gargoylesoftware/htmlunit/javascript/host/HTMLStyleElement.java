@@ -14,15 +14,23 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.io.StringReader;
+
+import org.w3c.css.sac.InputSource;
+
+import com.gargoylesoftware.htmlunit.html.HtmlStyle;
+
 /**
  * The JavaScript object "HTMLStyleElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class HTMLStyleElement extends HTMLElement {
 
     private static final long serialVersionUID = 944381786297995169L;
+    private Stylesheet sheet_;
 
     /**
      * Create an instance.
@@ -31,4 +39,31 @@ public class HTMLStyleElement extends HTMLElement {
         // Empty.
     }
 
+    /**
+     * Gets the associated sheet.
+     * @see <a href="http://www.xulplanet.com/references/objref/HTMLStyleElement.html">Mozilla doc</a>
+     * @return the sheet
+     */
+    public Stylesheet jsxGet_sheet() {
+        final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
+        String css = "";
+        if (style.getFirstChild() != null) {
+            css = style.getFirstChild().asText();
+        }
+
+        if (sheet_ == null) {
+            final InputSource source = new InputSource(new StringReader(css));
+            sheet_ = new Stylesheet(this, source);
+        }
+
+        return sheet_;
+    }
+
+    /**
+     * Gets the associated sheet (IE).
+     * @return the sheet
+     */
+    public Stylesheet jsxGet_styleSheet() {
+        return jsxGet_sheet();
+    }
 }
