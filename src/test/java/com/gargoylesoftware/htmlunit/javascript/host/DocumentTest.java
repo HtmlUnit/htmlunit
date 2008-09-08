@@ -2204,7 +2204,6 @@ public class DocumentTest extends WebTestCase {
             + "</frameset></html>";
 
         final String[] expectedAlerts = {"FRAMESET"};
-        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(html, collectedAlerts);

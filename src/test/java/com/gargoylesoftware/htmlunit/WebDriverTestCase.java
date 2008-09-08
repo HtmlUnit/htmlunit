@@ -36,7 +36,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class WebDriverTestCase extends WebTestCase {
+public abstract class WebDriverTestCase extends WebTestCase {
     private static Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<BrowserVersion, WebDriver>();
 
     /**

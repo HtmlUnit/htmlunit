@@ -116,6 +116,9 @@
                             <value>${webdriver.firefox.bin}</value>
                         </property>
                     </systemProperties>
+                    <excludes>
+                        <exclude>**/WebDriverOldTestsTest.java</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
         </plugins>

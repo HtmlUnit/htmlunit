@@ -18,8 +18,10 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectOutputStream;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.net.ConnectException;
@@ -39,7 +41,9 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -81,6 +85,13 @@ public abstract class WebTestCase {
 
     private String[] expectedAlerts_;
 
+    private static final BrowserVersion FLAG_ALL_BROWSERS = new BrowserVersion("", "", "", "1", 0);
+    private static final ThreadLocal<BrowserVersion> generateTest_browserVersion_ = new ThreadLocal<BrowserVersion>();
+    private String generateTest_content_;
+    private List<String> generateTest_expectedAlerts_;
+    private boolean generateTest_notYetImplemented_;
+    private String generateTest_testName_;
+
     static {
         try {
             URL_FIRST = new URL("http://first");
@@ -114,6 +125,9 @@ public abstract class WebTestCase {
      */
     public static final HtmlPage loadPage(final BrowserVersion browserVersion,
             final String html, final List<String> collectedAlerts) throws Exception {
+        if (generateTest_browserVersion_.get() == null) {
+            generateTest_browserVersion_.set(browserVersion);
+        }
         return loadPage(browserVersion, html, collectedAlerts, URL_GARGOYLE);
     }
 
@@ -126,6 +140,7 @@ public abstract class WebTestCase {
      * @throws Exception if something goes wrong
      */
     public static final HtmlPage loadPage(final String html, final List<String> collectedAlerts) throws Exception {
+        generateTest_browserVersion_.set(FLAG_ALL_BROWSERS);
         return loadPage(BrowserVersion.getDefault(), html, collectedAlerts, URL_GARGOYLE);
     }
 
@@ -373,6 +388,13 @@ public abstract class WebTestCase {
      */
     protected void createTestPageForRealBrowserIfNeeded(final String content, final List<String> expectedAlerts)
         throws IOException {
+
+        // save the information to create a test for WebDriver
+        generateTest_content_ = content;
+        generateTest_expectedAlerts_ = expectedAlerts;
+        final Method testMethod = findRunningJUnitTestMethod();
+        generateTest_testName_ = testMethod.getDeclaringClass().getSimpleName() + "_" + testMethod.getName() + ".html";
+
         final Log log = LogFactory.getLog(WebTestCase.class);
         if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null) {
             // should be optimized....
@@ -462,6 +484,7 @@ public abstract class WebTestCase {
      * @return <tt>false</tt> when not itself already in the call stack
      */
     protected boolean notYetImplemented() {
+        generateTest_notYetImplemented_ = true;
         if (notYetImplementedFlag.get() != null) {
             return false;
         }
@@ -630,5 +653,69 @@ public abstract class WebTestCase {
         final HtmlPage page = client.getPage(URL_GARGOYLE);
         assertEquals(expectedAlerts_, collectedAlerts);
         return page;
+    }
+
+    /**
+     * Resets variable to record what is tested when possible.
+     */
+    @Before
+    public void prepareTestForWebDriver() {
+        generateTest_browserVersion_.remove();
+        generateTest_notYetImplemented_ = false;
+        generateTest_content_ = null;
+        generateTest_expectedAlerts_ = null;
+    }
+
+    /**
+     * Generates an HTML file that can be loaded and understood as a test.
+     * @throws IOException in case of problem
+     */
+    @After
+    public void generateTestForWebDriver() throws IOException {
+        if (generateTest_content_ != null && !generateTest_notYetImplemented_) {
+            final File targetDir = new File("target/generated_tests");
+            targetDir.mkdirs();
+
+            final File outFile = new File(targetDir, generateTest_testName_);
+
+            String newContent = StringUtils.replace(generateTest_content_, "alert(", "log(");
+
+            final InputStream is = getClass().getResourceAsStream("/logWriter.js");
+            final String logWriter = "\n<script>\n" + IOUtils.toString(is) + "\n</script>\n";
+            IOUtils.closeQuietly(is);
+
+            if (newContent.indexOf("<head>") > -1) {
+                newContent = StringUtils.replaceOnce(newContent, "<head>", "<head>" + logWriter);
+            }
+            else {
+                newContent = StringUtils.replaceOnce(newContent, "<html>",
+                        "<html>\n<head>" + logWriter + "</head>\n");
+            }
+
+            FileUtils.writeStringToFile(outFile, newContent);
+
+            // write the expected alerts
+            final String suffix;
+            BrowserVersion browser = generateTest_browserVersion_.get();
+            if (browser == null) {
+                browser = getBrowserVersion();
+            }
+            if (browser == FLAG_ALL_BROWSERS) {
+                suffix = ".expected";
+            }
+            else if (browser.isIE()) {
+                suffix = ".IE" + browser.getBrowserVersionNumeric() + ".expected";
+            }
+            else {
+                suffix = ".FF" + browser.getBrowserVersionNumeric() + ".expected";
+            }
+
+            final File expectedLog = new File(outFile.getParentFile(), outFile.getName() + suffix);
+
+            final FileOutputStream fos = new FileOutputStream(expectedLog);
+            final ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(generateTest_expectedAlerts_);
+            oos.close();
+        }
     }
 }
