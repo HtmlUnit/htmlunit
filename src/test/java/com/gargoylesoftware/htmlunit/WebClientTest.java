@@ -1900,4 +1900,32 @@ public class WebClientTest extends WebTestCase {
         final WebWindow window = client.openWindow(WebClient.URL_ABOUT_BLANK, "TestingWindow");
         Assert.assertNotNull(window);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void location_href() throws Exception {
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+
+        final String content
+            = "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  alert(window.location.href);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final URL url = new URL("http://myHostName");
+        webConnection.setResponse(url, content);
+        webClient.setWebConnection(webConnection);
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        webClient.getPage(url);
+        final String[] expectedAlerts = {"http://myHostName/" };
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
