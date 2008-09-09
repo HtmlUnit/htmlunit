@@ -36,19 +36,19 @@ public class CookieManagerTest extends TestCase {
     @Test
     public void basicBehavior() throws Exception {
         // Create a new cookie manager.
-        CookieManager mgr = new CookieManager();
+        final CookieManager mgr = new CookieManager();
         assertFalse(mgr.isCookiesModified());
         assertTrue(mgr.isCookiesEnabled());
         assertTrue(mgr.getCookies().isEmpty());
 
         // Add a cookie to the manager.
-        Cookie cookie = new Cookie("a", "b", "c");
+        final Cookie cookie = new Cookie("a", "b", "c");
         mgr.addCookie(cookie);
         assertTrue(mgr.isCookiesModified());
         assertFalse(mgr.getCookies().isEmpty());
 
         // Update an HTTP state.
-        HttpState state = new HttpState();
+        final HttpState state = new HttpState();
         mgr.updateState(state);
         assertFalse(mgr.isCookiesModified());
         assertEquals(1, state.getCookies().length);
