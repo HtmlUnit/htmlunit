@@ -67,11 +67,13 @@ public abstract class ClickableElement extends StyledElement {
      * as the original page, depending on the type of element being clicked, the presence of JavaScript
      * action listeners, etc.
      *
+     * @param <P> the page
      * @return the page that occupies this element's window after the element has been clicked
      * @exception IOException if an IO error occurs
      */
-    public Page click() throws IOException {
-        return click(false, false, false);
+    @SuppressWarnings("unchecked")
+    public <P extends Page> P click() throws IOException {
+        return (P) click(false, false, false);
     }
 
     /**
@@ -83,12 +85,15 @@ public abstract class ClickableElement extends StyledElement {
      * @param shiftKey <tt>true</tt> if SHIFT is pressed during the click
      * @param ctrlKey <tt>true</tt> if CTRL is pressed during the click
      * @param altKey <tt>true</tt> if ALT is pressed during the click
+     * @param <P> the page
      * @return the page that occupies this element's window after the element has been clicked
      * @exception IOException if an IO error occurs
      */
-    public Page click(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) throws IOException {
+    @SuppressWarnings("unchecked")
+    public <P extends Page> P click(final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
+        throws IOException {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
-            return getPage();
+            return (P) getPage();
         }
 
         mouseDown(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
@@ -99,7 +104,7 @@ public abstract class ClickableElement extends StyledElement {
 
         final Event event = new MouseEvent(this, MouseEvent.TYPE_CLICK, shiftKey, ctrlKey, altKey,
                 MouseEvent.BUTTON_LEFT);
-        return click(event);
+        return (P) click(event);
     }
 
     /**
@@ -111,12 +116,14 @@ public abstract class ClickableElement extends StyledElement {
      * action listeners, etc.
      *
      * @param event the click event used
+     * @param <P> the page
      * @return the page that occupies this element's window after the element has been clicked
      * @exception IOException if an IO error occurs
      */
-    public Page click(final Event event) throws IOException {
+    @SuppressWarnings("unchecked")
+    public <P extends Page> P click(final Event event) throws IOException {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
-            return getPage();
+            return (P) getPage();
         }
 
         final SgmlPage page = getPage();
@@ -136,9 +143,9 @@ public abstract class ClickableElement extends StyledElement {
         }
 
         if (stateUpdated || ScriptResult.isFalse(scriptResult) || event.isPreventDefault()) {
-            return currentPage;
+            return (P) currentPage;
         }
-        return doClickAction(currentPage);
+        return (P) doClickAction(currentPage);
     }
 
     /**
