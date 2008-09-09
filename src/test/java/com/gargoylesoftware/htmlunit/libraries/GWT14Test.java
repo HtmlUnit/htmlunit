@@ -35,7 +35,6 @@ import org.mortbay.jetty.Server;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -387,12 +386,12 @@ public class GWT14Test extends WebTestCase {
         final HtmlDivision infoDiv = (HtmlDivision) page.getFirstByXPath("//div[@class='ks-Info']");
         assertEquals("Introduction to the Kitchen Sink", infoDiv.getFirstChild().getFirstChild().getNodeValue());
 
-        final Page page2 = page.getAnchorByHref("#Widgets").click();
+        /*final Page page2 =*/ page.getAnchorByHref("#Widgets").click();
         page.getEnclosingWindow().getThreadManager().joinAll(10000);
         //assertSame(page, page2);
         assertEquals("Basic Widgets", infoDiv.getFirstChild().getFirstChild().getNodeValue());
 
-        final Page page3 = page.getAnchorByHref("#Panels").click();
+        /*final Page page3 =*/ page.getAnchorByHref("#Panels").click();
         page.getEnclosingWindow().getThreadManager().joinAll(10000);
         //assertSame(page, page3);
         assertEquals("Panels", infoDiv.getFirstChild().getFirstChild().getNodeValue());
