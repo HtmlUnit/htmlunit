@@ -44,7 +44,6 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.auth.CredentialsProvider;
-import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.protocol.Protocol;
 import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
 import org.apache.commons.httpclient.util.URIUtil;
@@ -106,33 +105,25 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  */
 public class WebClient implements Serializable {
 
+    /** Serial version UID. */
     private static final long serialVersionUID = -7214321203864969635L;
 
-    /**
-     * HtmlUnit's cookie policy is to be browser-compatible. Code which requires access to
-     * HtmlUnit's cookie policy should use this constant, rather than making assumptions
-     * and using one of the HttpClient {@link CookiePolicy} constants directly.
-     */
-    public static final String HTMLUNIT_COOKIE_POLICY = CookiePolicy.BROWSER_COMPATIBILITY;
+    /** Like the Firefox default value for network.http.redirection-limit. */
+    private static final int ALLOWED_REDIRECTIONS_SAME_URL = 20;
 
     private transient WebConnection webConnection_;
     private boolean printContentOnFailingStatusCode_ = true;
     private boolean throwExceptionOnFailingStatusCode_ = true;
     private CredentialsProvider credentialsProvider_ = new DefaultCredentialsProvider();
     private ProxyConfig proxyConfig_;
+    private CookieManager cookieManager_ = new CookieManager();
     private JavaScriptEngine scriptEngine_;
     private boolean javaScriptEnabled_ = true;
-    private boolean cookiesEnabled_ = true;
     private boolean cssEnabled_ = true;
     private boolean popupBlockerEnabled_;
     private String homePage_;
     private final Map<String, String> requestHeaders_ = Collections.synchronizedMap(new HashMap<String, String>(89));
     private IncorrectnessListener incorrectnessListener_ = new IncorrectnessListenerImpl();
-
-    /**
-     * Like Firefox default value for network.http.redirection-limit
-     */
-    private static final int ALLOWED_REDIRECTIONS_SAME_URL = 20;
 
     private AlertHandler   alertHandler_;
     private ConfirmHandler confirmHandler_;
@@ -163,9 +154,7 @@ public class WebClient implements Serializable {
     private static URLStreamHandler DataUrlStreamHandler_
         = new com.gargoylesoftware.htmlunit.protocol.data.Handler();
 
-    /**
-     * URL for "about:blank".
-     */
+    /** URL for "about:blank". */
     public static final URL URL_ABOUT_BLANK;
     static {
         URL tmpUrl = null;
@@ -179,7 +168,7 @@ public class WebClient implements Serializable {
         URL_ABOUT_BLANK = tmpUrl;
     }
 
-    //singleton WebResponse for "about:blank"
+    /** Singleton {@link WebResponse} for "about:blank". */
     private static final WebResponse WEB_RESPONSE_FOR_ABOUT_BLANK = new StringWebResponse("", URL_ABOUT_BLANK);
 
     private ScriptPreProcessor scriptPreProcessor_;
@@ -625,20 +614,20 @@ public class WebClient implements Serializable {
 
     /**
      * Enables/disables cookie support. By default, this property is enabled.
-     *
      * @param enabled <tt>true</tt> to enable cookie support
+     * @deprecated as of 2.3, use {@link CookieManager#setCookiesEnabled(boolean)} instead
      */
     public void setCookiesEnabled(final boolean enabled) {
-        cookiesEnabled_ = enabled;
+        cookieManager_.setCookiesEnabled(enabled);
     }
 
     /**
      * Returns <tt>true</tt> if cookies are enabled.
-     *
      * @return <tt>true</tt> if cookies are enabled
+     * @deprecated as of 2.3 use {@link CookieManager#isCookiesEnabled()} instead
      */
     public boolean isCookiesEnabled() {
-        return cookiesEnabled_;
+        return cookieManager_.isCookiesEnabled();
     }
 
     /**
@@ -709,7 +698,24 @@ public class WebClient implements Serializable {
      */
     public void setProxyConfig(final ProxyConfig proxyConfig) {
         WebAssert.notNull("proxyConfig", proxyConfig);
-        this.proxyConfig_ = proxyConfig;
+        proxyConfig_ = proxyConfig;
+    }
+
+    /**
+     * Returns the cookie manager used by this web client.
+     * @return the cookie manager used by this web client
+     */
+    public CookieManager getCookieManager() {
+        return cookieManager_;
+    }
+
+    /**
+     * Sets the cookie manager used by this web client.
+     * @param cookieManager the cookie manager used by this web client
+     */
+    public void setCookieManager(final CookieManager cookieManager) {
+        WebAssert.notNull("cookieManager", cookieManager);
+        cookieManager_ = cookieManager;
     }
 
     /**

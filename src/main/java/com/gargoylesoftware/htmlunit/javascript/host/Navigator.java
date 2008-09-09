@@ -95,7 +95,7 @@ public final class Navigator extends SimpleScriptable {
      * @return the property "cookieEnabled"
      */
     public boolean jsxGet_cookieEnabled() {
-        return getWindow().getWebWindow().getWebClient().isCookiesEnabled();
+        return getWindow().getWebWindow().getWebClient().getCookieManager().isCookiesEnabled();
     }
 
     /**

@@ -82,7 +82,7 @@ public class HtmlMeta extends HtmlElement {
             else {
                 notifyIncorrectness("set-cookie http-equiv meta tag: unknown attribute >" + partName + "<");
             }
-            getPage().getWebClient().getWebConnection().getState().addCookie(cookie);
+            getPage().getWebClient().getCookieManager().addCookie(cookie);
         }
     }
 

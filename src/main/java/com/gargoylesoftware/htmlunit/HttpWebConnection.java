@@ -92,6 +92,7 @@ public class HttpWebConnection extends WebConnectionImpl {
         final URL url = webRequestSettings.getUrl();
 
         final HttpClient httpClient = getHttpClient();
+        getWebClient().getCookieManager().updateState(httpClient.getState());
 
         final HttpMethodBase httpMethod = makeHttpMethod(webRequestSettings);
         try {
@@ -260,11 +261,11 @@ public class HttpWebConnection extends WebConnectionImpl {
                     webRequestSettings.getCredentialsProvider());
         }
 
-        if (getWebClient().isCookiesEnabled()) {
+        if (getWebClient().getCookieManager().isCookiesEnabled()) {
             // Cookies are enabled. Note that it's important that we enable single cookie headers,
             // for compatibility purposes.
             httpMethod.getParams().setBooleanParameter(HttpMethodParams.SINGLE_COOKIE_HEADER, true);
-            httpMethod.getParams().setCookiePolicy(WebClient.HTMLUNIT_COOKIE_POLICY);
+            httpMethod.getParams().setCookiePolicy(CookieManager.HTMLUNIT_COOKIE_POLICY);
         }
         else {
             // Cookies are disabled.

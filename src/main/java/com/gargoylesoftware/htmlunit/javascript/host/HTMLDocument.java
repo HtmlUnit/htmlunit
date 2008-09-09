@@ -29,7 +29,6 @@ import java.util.Map;
 import java.util.StringTokenizer;
 
 import org.apache.commons.httpclient.Cookie;
-import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.cookie.CookieSpec;
 import org.apache.commons.httpclient.util.DateParseException;
@@ -43,6 +42,7 @@ import org.w3c.dom.DOMException;
 import org.xml.sax.SAXException;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.CookieManager;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -416,7 +416,6 @@ public class HTMLDocument extends Document {
      */
     public String jsxGet_cookie() {
         final HtmlPage page = getHtmlPage();
-        final HttpState state = page.getWebClient().getWebConnection().getState();
 
         URL url = page.getWebResponse().getUrl();
         url = replaceForCookieIfNecessary(url);
@@ -431,14 +430,15 @@ public class HTMLDocument extends Document {
             port = url.getDefaultPort();
         }
 
-        final CookieSpec spec = CookiePolicy.getCookieSpec(WebClient.HTMLUNIT_COOKIE_POLICY);
-        final Cookie[] cookies = spec.match(url.getHost(), port, url.getPath(), secure, state.getCookies());
-        if (cookies == null) {
+        final CookieSpec spec = CookiePolicy.getCookieSpec(CookieManager.HTMLUNIT_COOKIE_POLICY);
+        final Cookie[] allCookies = page.getWebClient().getCookieManager().getCookies().toArray(new Cookie[0]);
+        final Cookie[] matchingCookies = spec.match(url.getHost(), port, url.getPath(), secure, allCookies);
+        if (matchingCookies == null) {
             return "";
         }
 
         final StringBuilder buffer = new StringBuilder();
-        for (final Cookie cookie : cookies) {
+        for (final Cookie cookie : matchingCookies) {
             if (buffer.length() != 0) {
                 buffer.append("; ");
             }
@@ -457,13 +457,12 @@ public class HTMLDocument extends Document {
      * @param newCookie in the format "name=value[;expires=date][;domain=domainname][;path=path][;secure]
      */
     public void jsxSet_cookie(final String newCookie) {
-        final WebClient client = getHtmlPage().getWebClient();
-        if (client.isCookiesEnabled()) {
-            final HttpState state = client.getWebConnection().getState();
+        final CookieManager cookieManager = getHtmlPage().getWebClient().getCookieManager();
+        if (cookieManager.isCookiesEnabled()) {
             URL url = getHtmlPage().getWebResponse().getUrl();
             url = replaceForCookieIfNecessary(url);
             final Cookie cookie = buildCookie(newCookie, url);
-            state.addCookie(cookie);
+            cookieManager.addCookie(cookie);
             getLog().debug("Added cookie: " + cookie);
         }
         else {
@@ -760,7 +759,7 @@ public class HTMLDocument extends Document {
     /**
      * Returns the element with the specified ID, or <tt>null</tt> if that element could not be found.
      * @param id the ID to search for
-     * @return the element or null
+     * @return the element, or <tt>null</tt> if it could not be found
      */
     public Object jsxFunction_getElementById(final String id) {
         Object result = null;

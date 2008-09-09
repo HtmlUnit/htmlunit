@@ -31,6 +31,7 @@ import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.CookieManager;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
@@ -2067,9 +2068,9 @@ public class DocumentTest extends WebTestCase {
         webConnection.setResponse(url, firstContent);
         webClient.setWebConnection(webConnection);
 
-        final HttpState state = webConnection.getState();
-        state.addCookie(new Cookie("first", "one", "two", "/", -1, false));
-        state.addCookie(new Cookie("first", "three", "four", "/", -1, false));
+        final CookieManager mgr = webClient.getCookieManager();
+        mgr.addCookie(new Cookie("first", "one", "two", "/", -1, false));
+        mgr.addCookie(new Cookie("first", "three", "four", "/", -1, false));
 
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -2105,7 +2106,7 @@ public class DocumentTest extends WebTestCase {
             + "</html>";
 
         final WebClient client = new WebClient();
-        client.setCookiesEnabled(cookiesEnabled);
+        client.getCookieManager().setCookiesEnabled(cookiesEnabled);
 
         final List<String> actual = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(actual));

@@ -106,7 +106,7 @@ public class NavigatorTest extends WebTestCase {
         final String[] expectedAlerts = {Boolean.toString(cookieEnabled)};
         final WebClient webClient = new WebClient();
         if (!cookieEnabled) {
-            webClient.setCookiesEnabled(cookieEnabled);
+            webClient.getCookieManager().setCookiesEnabled(cookieEnabled);
         }
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 

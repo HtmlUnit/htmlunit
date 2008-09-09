@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.Servlet;
 import javax.servlet.http.HttpServlet;
@@ -1271,9 +1272,9 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
 
-        final Cookie[] cookies = page.getWebClient().getWebConnection().getState().getCookies();
-        assertEquals(1, cookies.length);
-        final Cookie cookie = cookies[0];
+        final Set<Cookie> cookies = page.getWebClient().getCookieManager().getCookies();
+        assertEquals(1, cookies.size());
+        final Cookie cookie = cookies.iterator().next();
         assertEquals(page.getWebResponse().getUrl().getHost(), cookie.getDomain());
         assertEquals("webm", cookie.getName());
         assertEquals("none", cookie.getValue());
