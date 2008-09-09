@@ -617,6 +617,7 @@ public class WebClient implements Serializable {
      * @param enabled <tt>true</tt> to enable cookie support
      * @deprecated as of 2.3, use {@link CookieManager#setCookiesEnabled(boolean)} instead
      */
+    @Deprecated
     public void setCookiesEnabled(final boolean enabled) {
         cookieManager_.setCookiesEnabled(enabled);
     }
@@ -626,6 +627,7 @@ public class WebClient implements Serializable {
      * @return <tt>true</tt> if cookies are enabled
      * @deprecated as of 2.3 use {@link CookieManager#isCookiesEnabled()} instead
      */
+    @Deprecated
     public boolean isCookiesEnabled() {
         return cookieManager_.isCookiesEnabled();
     }
