@@ -154,7 +154,7 @@ public class CookieManager implements Serializable {
      * Updates the specified HTTP state's cookie configuration according to the current cookie settings.
      * @param state the HTTP state to update
      */
-    protected void updateState(HttpState state) {
+    protected void updateState(final HttpState state) {
         // Optimization: if cookies aren't enabled, we can exit immediately.
         if (!cookiesEnabled_) {
             return;
