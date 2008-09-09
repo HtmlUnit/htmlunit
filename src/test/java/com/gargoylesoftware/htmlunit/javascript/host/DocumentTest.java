@@ -24,7 +24,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.httpclient.Cookie;
-import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.util.DateUtil;
 import org.junit.Test;
