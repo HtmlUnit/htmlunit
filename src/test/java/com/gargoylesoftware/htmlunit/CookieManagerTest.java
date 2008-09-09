@@ -14,7 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpState;
@@ -26,7 +28,7 @@ import org.junit.Test;
  * @version $Revision$
  * @author Daniel Gredler
  */
-public class CookieManagerTest extends TestCase {
+public class CookieManagerTest {
 
     /**
      * Verifies the basic cookie manager behavior, whose main complexity lies in the
