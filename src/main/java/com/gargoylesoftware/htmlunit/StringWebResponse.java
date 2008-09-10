@@ -22,8 +22,7 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
 
 /**
- * A simple WebResponse created from a string. Content is assumed to be
- * of type text/html.
+ * A simple WebResponse created from a string. Content is assumed to be of type <tt>text/html</tt>.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -36,11 +35,11 @@ public class StringWebResponse extends WebResponseImpl {
     private static final long serialVersionUID = 8001886227379566491L;
 
     /**
-     * Helper method for constructors. Converts the passed string into
-     * WebResponseData with other defaults specified.
+     * Helper method for constructors. Converts the specified string into {@link WebResponseData}
+     * with other defaults specified.
      *
-     * @param contentString String to be converted to WebResponseData
-     * @return a simple WebResponseData with defaults specified
+     * @param contentString the string to be converted to a <tt>WebResponseData</tt>
+     * @return a simple <tt>WebResponseData</tt> with defaults specified
      */
     private static WebResponseData getWebResponseData(final String contentString, final String charset) {
         final byte[] content = TextUtil.stringToByteArray(contentString, charset);
@@ -50,7 +49,7 @@ public class StringWebResponse extends WebResponseImpl {
     }
 
     /**
-     * Creates an instance associated with an originating URL.
+     * Creates an instance associated with the specified originating URL.
      * @param content the content to return
      * @param originatingURL the URL that this should be associated with
      */
@@ -59,7 +58,7 @@ public class StringWebResponse extends WebResponseImpl {
     }
 
     /**
-     * Creates an instance associated with an originating URL.
+     * Creates an instance associated with the specified originating URL.
      * @param content the content to return
      * @param charset the charset used to convert the content
      * @param originatingURL the URL that this should be associated with
