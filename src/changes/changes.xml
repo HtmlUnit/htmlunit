@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.3-SNAPSHOT" description="Bugfixes">
+        <release version="2.3-SNAPSHOT" description="Bugfixes, better generics">
             <action type="update" dev="asashour">
                 WebRequestSettings: Add trailing slash to any URL that contains only hostname (with or without port).
             </action>
