@@ -178,7 +178,8 @@ public abstract class ClickableElement extends StyledElement {
      * @exception IOException if an IO error occurs
      */
     @SuppressWarnings("unchecked")
-    public <P extends Page> P dblClick(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) throws IOException {
+    public <P extends Page> P dblClick(final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
+        throws IOException {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return (P) getPage();
         }
