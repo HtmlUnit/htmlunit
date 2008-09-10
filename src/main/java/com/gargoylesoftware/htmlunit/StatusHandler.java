@@ -15,17 +15,18 @@
 package com.gargoylesoftware.htmlunit;
 
 /**
- * A handler for JavaScript alerts. Alerts are triggered when the JavaScript method Window.alert()
- * is called.
+ * A handler for changes to <tt>window.status</tt>.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public interface StatusHandler {
+
     /**
-     * Handle an alert for the given page.
-     * @param page the page on which the alert occurred
-     * @param message the message in the alert
+     * Handles a change to <tt>window.status</tt>.
+     * @param page the page on which the status change occurred
+     * @param message the new status message
      */
     void statusMessageChanged(final Page page, final String message);
+
 }
