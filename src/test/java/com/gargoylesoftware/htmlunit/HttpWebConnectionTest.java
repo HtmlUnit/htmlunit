@@ -90,6 +90,7 @@ public class HttpWebConnectionTest {
      * @param actual the actual value
      * @param length How many characters at the beginning of each byte array will be compared
      */
+    @SuppressWarnings("null")
     public static void assertEquals(
             final String message, final byte[] expected, final byte[] actual, final int length) {
         if (expected == null && actual == null) {

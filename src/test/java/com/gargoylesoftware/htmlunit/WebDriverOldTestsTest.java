@@ -60,7 +60,7 @@ public class WebDriverOldTestsTest extends WebDriverTestCase {
         oos.close();
 
         final String testFileName = expectedFile.getName().replaceFirst("\\.html\\..*", ".html");
-        testFile_ = new File(expectedFile.getParentFile(), testFileName).toURL();
+        testFile_ = new File(expectedFile.getParentFile(), testFileName).toURI().toURL();
     }
 
     /**
