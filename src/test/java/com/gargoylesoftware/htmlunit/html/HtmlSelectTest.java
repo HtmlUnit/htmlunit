@@ -619,7 +619,8 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
 
         final HtmlOption option1 = (HtmlOption) page.getHtmlElementById("option1");
-        assertEquals("about:blank", option1.click().getWebResponse().getUrl());
+        final HtmlPage page2 = option1.click();
+        assertEquals("about:blank", page2.getWebResponse().getUrl());
     }
 
     /**
