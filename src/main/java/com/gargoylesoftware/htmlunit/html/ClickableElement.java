@@ -154,11 +154,13 @@ public abstract class ClickableElement extends StyledElement {
      * as the original page, depending on the type of element being clicked, the presence of JavaScript
      * action listeners, etc. Note also that {@link #click()} is automatically called first.
      *
+     * @param <P> the page
      * @return the page that occupies this element's window after the element has been double-clicked
      * @exception IOException if an IO error occurs
      */
-    public Page dblClick() throws IOException {
-        return dblClick(false, false, false);
+    @SuppressWarnings("unchecked")
+    public <P extends Page> P dblClick() throws IOException {
+        return (P) dblClick(false, false, false);
     }
 
     /**
@@ -171,12 +173,14 @@ public abstract class ClickableElement extends StyledElement {
      * @param shiftKey <tt>true</tt> if SHIFT is pressed during the double-click
      * @param ctrlKey <tt>true</tt> if CTRL is pressed during the double-click
      * @param altKey <tt>true</tt> if ALT is pressed during the double-click
+     * @param <P> the page
      * @return the page that occupies this element's window after the element has been double-clicked
      * @exception IOException if an IO error occurs
      */
-    public Page dblClick(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) throws IOException {
+    @SuppressWarnings("unchecked")
+    public <P extends Page> P dblClick(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) throws IOException {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
-            return getPage();
+            return (P) getPage();
         }
 
         //call click event first
@@ -185,16 +189,16 @@ public abstract class ClickableElement extends StyledElement {
             if (mainLog_.isDebugEnabled()) {
                 mainLog_.debug("dblClick() is ignored, as click() loaded a different page.");
             }
-            return clickPage;
+            return (P) clickPage;
         }
 
         final Event event = new MouseEvent(this, MouseEvent.TYPE_DBL_CLICK, shiftKey, ctrlKey, altKey,
                 MouseEvent.BUTTON_LEFT);
         final ScriptResult scriptResult = fireEvent(event);
         if (scriptResult == null) {
-            return clickPage;
+            return (P) clickPage;
         }
-        return scriptResult.getNewPage();
+        return (P) scriptResult.getNewPage();
     }
 
     /**
