@@ -1907,7 +1907,7 @@ public class WebClientTest extends WebTestCase {
     @Test
     public void location_href() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String content
             = "<html><head><title>First</title><script>\n"
