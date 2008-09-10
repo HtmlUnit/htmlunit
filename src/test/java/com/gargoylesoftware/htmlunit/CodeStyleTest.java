@@ -406,10 +406,9 @@ public class CodeStyleTest {
      */
     private List<String> getAnnotations(final List<String> lines, int index) {
         final List<String> annotations = new ArrayList<String>();
-        while (!lines.get(index).trim().endsWith("*/")) {
-            index++;
+        while (!lines.get(index++).trim().endsWith("*/")) {
+            //empty;
         }
-        index++;
         while (lines.get(index).trim().startsWith("@")) {
             annotations.add(lines.get(index++).trim());
         }
