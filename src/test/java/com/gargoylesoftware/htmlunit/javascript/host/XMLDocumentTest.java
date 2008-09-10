@@ -112,7 +112,7 @@ public class XMLDocumentTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient(browserVersion);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
         conn.setResponse(URL_SECOND, xml, "text/xml");
         client.setWebConnection(conn);
@@ -167,7 +167,7 @@ public class XMLDocumentTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient(browserVersion);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(firstURL, html);
         conn.setResponse(secondURL, xml, "text/xml");
         client.setWebConnection(conn);
@@ -255,7 +255,7 @@ public class XMLDocumentTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient(browserVersion);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
         conn.setResponse(URL_SECOND, xml, "text/xml");
         client.setWebConnection(conn);
@@ -305,7 +305,7 @@ public class XMLDocumentTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7_0);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
         conn.setResponse(URL_SECOND, xml, "text/xml");
         client.setWebConnection(conn);
@@ -456,7 +456,7 @@ public class XMLDocumentTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7_0);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
         conn.setResponse(URL_SECOND, xml, "text/xml");
         client.setWebConnection(conn);
@@ -548,7 +548,7 @@ public class XMLDocumentTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient(browserVersion);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
         final List< ? extends NameValuePair> emptyList = Collections.emptyList();
         conn.setResponse(URL_SECOND, xml.getBytes("UTF-8"), 200, "OK", "text/xml", emptyList);
@@ -685,7 +685,7 @@ public class XMLDocumentTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, content);
         conn.setResponse(new URL(URL_FIRST.toExternalForm() + "/foo.xml"), xml, "text/xml");
         client.setWebConnection(conn);

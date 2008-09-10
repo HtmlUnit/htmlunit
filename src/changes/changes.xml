@@ -8,6 +8,14 @@
 
     <body>
         <release version="2.3-SNAPSHOT" description="Bugfixes">
+            <action type="update" dev="sdanig">
+                Rework WebConnection class hierarchy: remove unnecessary WebConnection.getWebClient() and
+                WebConnection.getState() methods, delete unnecessary WebConnectionImpl abstract class, make
+                WebConnection classes part of the public API by removing their internal API warning.
+            </action>
+            <action type="add" dev="sdanig" id="1965338">
+                Add CookieManager class which can be used to manage cookies on a per-WebClient basis.
+            </action>
             <action type="fix" dev="sdanig" id="2060931">
                 Fix condition where CSS warnings and errors did not have a systemID to easily identify error origin.
             </action>

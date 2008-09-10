@@ -139,7 +139,7 @@ public class CacheTest extends WebTestCase {
         final String script2 = "alert('in foo2');";
 
         final WebClient webClient = getWebClient();
-        final MockWebConnection connection = new MockWebConnection(webClient);
+        final MockWebConnection connection = new MockWebConnection();
         webClient.setWebConnection(connection);
 
         final URL urlPage1 = new URL(URL_FIRST, "page1.html");
@@ -180,7 +180,7 @@ public class CacheTest extends WebTestCase {
         final WebClient client = getWebClient();
         client.getCache().setMaxSize(1);
 
-        final MockWebConnection connection = new MockWebConnection(client);
+        final MockWebConnection connection = new MockWebConnection();
         client.setWebConnection(connection);
 
         final URL pageUrl = new URL(URL_FIRST, "page1.html");
@@ -200,7 +200,7 @@ public class CacheTest extends WebTestCase {
 
     /**
      * TODO: improve CSS caching to cache a COPY of the object as stylesheet objects can be modified dynamically.
-     *@throws Exception if the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void cssIsCached() throws Exception {
@@ -213,7 +213,7 @@ public class CacheTest extends WebTestCase {
 
         final WebClient client = getWebClient();
 
-        final MockWebConnection connection = new MockWebConnection(client);
+        final MockWebConnection connection = new MockWebConnection();
         client.setWebConnection(connection);
 
         final URL pageUrl = new URL(URL_FIRST, "page1.html");

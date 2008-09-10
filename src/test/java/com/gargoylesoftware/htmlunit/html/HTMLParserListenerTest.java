@@ -127,7 +127,7 @@ public class HTMLParserListenerTest extends WebTestCase {
         };
         webClient.setHTMLParserListener(collecter);
 
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(htmlContent);
         webClient.setWebConnection(webConnection);
 

@@ -73,7 +73,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     public void setJavascriptEnabled_false() throws Exception {
         final WebClient client = new WebClient();
         client.setJavaScriptEnabled(false);
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -234,7 +234,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "</script></head></html>";
 
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(secondContent);
         webConnection.setResponse(URL_FIRST, firstContent);
         client.setWebConnection(webConnection);
@@ -269,7 +269,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "</html>";
 
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse("<html></html>");
         webConnection.setResponse(URL_FIRST, firstContent);
         client.setWebConnection(webConnection);
@@ -294,7 +294,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     @Test
     public void externalScript() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String htmlContent
             = "<html><head><title>foo</title><script src='/foo.js' id='script1'/>\n"
@@ -334,7 +334,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     @Test
     public void externalScriptWithApostrophesInComment() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String htmlContent
             = "<html><head><title>foo</title>\n"
@@ -382,7 +382,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         // external script
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String content2
             = "<html><head><title>foo</title><script src='/foo.js'/>\n"
@@ -410,7 +410,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     @Test
     public void externalScriptEncoding() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         /*
          * this page has meta element , and script tag has no charset attribute
          */
@@ -529,7 +529,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     @Test
     public void referencingVariablesFromOneScriptToAnother_Regression() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String htmlContent
             = "<html><head><title>foo</title><script src='./test.js'></script>\n"
@@ -718,7 +718,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     @Test
     public void functionDefinedInExternalFile_CalledFromInlineScript() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String htmlContent
             = "<html><head><title>foo</title><script src='./test.js'></script>\n"
@@ -754,7 +754,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     @Test
     public void externalScriptWithNewLineBeforeClosingScriptTag() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String htmlContent
             = "<html><head><title>foo</title>\n"
@@ -848,7 +848,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     @Test
     public void javaScriptEngineCallsForVariableAccess() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -954,7 +954,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         activexToJavaMapping.put("BadObject", null);
 
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         client.setWebConnection(webConnection);
         client.setActiveXObjectMap(activexToJavaMapping);
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -1039,7 +1039,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final String[] expectedAlerts = {"1", "3", "4"};
 
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(content);
         client.setWebConnection(webConnection);
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -1103,7 +1103,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final String[] expectedAlerts = {"in page 2", "in foo"};
 
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(content2);
         webConnection.setResponse(URL_FIRST, content1);
         client.setWebConnection(webConnection);
@@ -1129,7 +1129,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             client.setThrowExceptionOnScriptError(false);
 
             final String content = "<html><body><script>while(1) {}</script></body></html>";
-            final MockWebConnection webConnection = new MockWebConnection(client);
+            final MockWebConnection webConnection = new MockWebConnection();
             webConnection.setDefaultResponse(content);
             client.setWebConnection(webConnection);
 
@@ -1412,7 +1412,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final String script = "alert(document.title)";
 
         final WebClient client = new WebClient();
-        final MockWebConnection connection = new MockWebConnection(client);
+        final MockWebConnection connection = new MockWebConnection();
         client.setWebConnection(connection);
         connection.setResponse(URL_FIRST, content1);
         connection.setResponse(new URL(URL_FIRST, "page2.html"), content2);
@@ -1492,7 +1492,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             }
         });
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         webConnection.setDefaultResponse(html);
         client.setWebConnection(webConnection);

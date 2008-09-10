@@ -22,13 +22,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * A fake WebConnection designed to mock out the actual HTTP connections.
+ * A fake {@link WebConnection} designed to mock out the actual HTTP connections.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -37,41 +36,22 @@ import org.apache.commons.logging.LogFactory;
  * @author Brad Clarke
  * @author Ahmed Ashour
  */
-public class MockWebConnection extends WebConnectionImpl {
+public class MockWebConnection implements WebConnection {
 
     private final Map<String, WebResponseData> responseMap_ = new HashMap<String, WebResponseData>(10);
     private WebResponseData defaultResponse_;
     private WebRequestSettings lastRequest_;
-    private HttpState httpState_ = new HttpState();
     private int requestCount_ = 0;
-
-    /**
-     * Creates an instance.
-     *
-     * @param webClient the web client
-     */
-    public MockWebConnection(final WebClient webClient) {
-        super(webClient);
-    }
-
-    /**
-     * Returns the log that is being used for all scripting objects.
-     * @return the log
-     */
-    protected final Log getLog() {
-        return LogFactory.getLog(getClass());
-    }
 
     /**
      * {@inheritDoc}
      */
-    @Override
-    public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
-        final URL url = webRequestSettings.getUrl();
+    public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
+        final URL url = settings.getUrl();
 
         getLog().debug("Getting response for " + url.toExternalForm());
 
-        lastRequest_ = webRequestSettings;
+        lastRequest_ = settings;
         requestCount_++;
 
         WebResponseData response = responseMap_.get(url.toExternalForm());
@@ -84,7 +64,7 @@ public class MockWebConnection extends WebConnectionImpl {
             }
         }
 
-        return new WebResponseImpl(response, webRequestSettings.getCharset(), webRequestSettings, 0);
+        return new WebResponseImpl(response, settings.getCharset(), settings, 0);
     }
 
     /**
@@ -248,15 +228,6 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Returns the {@link HttpState}.
-     * @return the state
-     */
-    @Override
-    public HttpState getState() {
-        return httpState_;
-    }
-
-    /**
      * Returns the additional headers that were used in the in the last call
      * to {@link #getResponse(WebRequestSettings)}.
      * @return the additional headers that were used in the in the last call
@@ -282,6 +253,14 @@ public class MockWebConnection extends WebConnectionImpl {
      */
     public int getRequestCount() {
         return requestCount_;
+    }
+
+    /**
+     * Returns the class logger.
+     * @return the class logger
+     */
+    protected final Log getLog() {
+        return LogFactory.getLog(getClass());
     }
 
 }

@@ -213,7 +213,7 @@ public abstract class WebTestCase {
             client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         }
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(html);
         client.setWebConnection(webConnection);
 
@@ -646,7 +646,7 @@ public abstract class WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_GARGOYLE, html);
         client.setWebConnection(webConnection);
 

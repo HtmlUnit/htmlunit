@@ -387,16 +387,6 @@ public class HttpWebConnectionTest {
     }
 
     /**
-     * Was throwing a NPE on 14/04/06.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testStateAccess() throws Exception {
-        final WebClient webClient = new WebClient();
-        webClient.getWebConnection().getState();
-    }
-
-    /**
      * Test that the right file part is built for a file that doesn't exist.
      * @throws Exception if the test fails
      */

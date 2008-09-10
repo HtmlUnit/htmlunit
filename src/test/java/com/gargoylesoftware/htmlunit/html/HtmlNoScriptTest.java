@@ -170,7 +170,7 @@ public class HtmlNoScriptTest extends WebTestCase {
         final WebClient client = new WebClient();
         client.setJavaScriptEnabled(false);
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(html);
         client.setWebConnection(webConnection);
 

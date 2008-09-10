@@ -28,7 +28,6 @@ import org.apache.commons.httpclient.HostConfiguration;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpMethodBase;
-import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
 import org.apache.commons.httpclient.NameValuePair;
@@ -58,10 +57,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.commons.logging.impl.SimpleLog;
 
 /**
- * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
- *
- * An object that handles the actual communication portion of page
- * retrieval/submission
+ * Default implementation of {@link WebConnection}, using the HttpClient library to perform HTTP requests.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -71,37 +67,36 @@ import org.apache.commons.logging.impl.SimpleLog;
  * @author Brad Clarke
  * @author Ahmed Ashour
  */
-public class HttpWebConnection extends WebConnectionImpl {
-    private HttpClient httpClient_;
+public class HttpWebConnection implements WebConnection {
 
+    private final WebClient webClient_;
+    private HttpClient httpClient_;
     private String virtualHost_;
 
     /**
-     * Create a new HTTP web connection instance.
+     * Creates a new HTTP web connection instance.
      * @param webClient the WebClient that is using this connection
      */
     public HttpWebConnection(final WebClient webClient) {
-        super(webClient);
+        webClient_ = webClient;
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
-    public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
-        final URL url = webRequestSettings.getUrl();
+    public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
+        final URL url = settings.getUrl();
 
         final HttpClient httpClient = getHttpClient();
-        getWebClient().getCookieManager().updateState(httpClient.getState());
+        webClient_.getCookieManager().updateState(httpClient.getState());
 
-        final HttpMethodBase httpMethod = makeHttpMethod(webRequestSettings);
+        final HttpMethodBase httpMethod = makeHttpMethod(settings);
         try {
-            final HostConfiguration hostConfiguration = getHostConfiguration(webRequestSettings);
+            final HostConfiguration hostConfiguration = getHostConfiguration(settings);
             final long startTime = System.currentTimeMillis();
             final int responseCode = httpClient.executeMethod(hostConfiguration, httpMethod);
             final long endTime = System.currentTimeMillis();
-            return makeWebResponse(responseCode, httpMethod, webRequestSettings, endTime - startTime,
-                webRequestSettings.getCharset());
+            return makeWebResponse(responseCode, httpMethod, settings, endTime - startTime, settings.getCharset());
         }
         catch (final HttpException e) {
             // KLUDGE: hitting www.yahoo.com will cause an exception to be thrown while
@@ -120,9 +115,9 @@ public class HttpWebConnection extends WebConnectionImpl {
                 }
                 //TODO: There might be a bug here since the original encoding type is lost.
                 final WebRequestSettings newRequest = new WebRequestSettings(new URL(buffer.toString()));
-                newRequest.setHttpMethod(webRequestSettings.getHttpMethod());
-                newRequest.setRequestParameters(webRequestSettings.getRequestParameters());
-                newRequest.setAdditionalHeaders(webRequestSettings.getAdditionalHeaders());
+                newRequest.setHttpMethod(settings.getHttpMethod());
+                newRequest.setRequestParameters(settings.getRequestParameters());
+                newRequest.setAdditionalHeaders(settings.getAdditionalHeaders());
                 return getResponse(newRequest);
             }
             throw new RuntimeException("HTTP Error: " + e.getMessage(), e);
@@ -251,7 +246,7 @@ public class HttpWebConnection extends WebConnectionImpl {
             }
         }
 
-        httpMethod.setRequestHeader("User-Agent", getWebClient().getBrowserVersion().getUserAgent());
+        httpMethod.setRequestHeader("User-Agent", webClient_.getBrowserVersion().getUserAgent());
 
         writeRequestHeadersToHttpMethod(httpMethod, webRequestSettings.getAdditionalHeaders());
         httpMethod.setFollowRedirects(false);
@@ -261,7 +256,7 @@ public class HttpWebConnection extends WebConnectionImpl {
                     webRequestSettings.getCredentialsProvider());
         }
 
-        if (getWebClient().getCookieManager().isCookiesEnabled()) {
+        if (webClient_.getCookieManager().isCookiesEnabled()) {
             // Cookies are enabled. Note that it's important that we enable single cookie headers,
             // for compatibility purposes.
             httpMethod.getParams().setBooleanParameter(HttpMethodParams.SINGLE_COOKIE_HEADER, true);
@@ -287,7 +282,7 @@ public class HttpWebConnection extends WebConnectionImpl {
                 pairWithFile.getContentType(), charset);
         }
         part.pairWithFile_ = pairWithFile;
-        part.webClient_ = getWebClient();
+        part.webClient_ = webClient_;
 
         // Firefox and IE seem not to specify a charset for a file part
         part.setCharSet(null);
@@ -362,19 +357,19 @@ public class HttpWebConnection extends WebConnectionImpl {
 
         // Tell the client where to get its credentials from
         // (it may have changed on the webClient since last call to getHttpClientFor(...))
-        httpClient_.getParams().setParameter(CredentialsProvider.PROVIDER, getWebClient().getCredentialsProvider());
+        httpClient_.getParams().setParameter(CredentialsProvider.PROVIDER, webClient_.getCredentialsProvider());
 
         return httpClient_;
     }
 
     /**
      * Returns the timeout to use for socket and connection timeouts for HttpConnectionManager.
-     * is overridden to 0 by StreamingWebConnection which keeps reading after a timeout and
+     * Is overridden to 0 by StreamingWebConnection which keeps reading after a timeout and
      * must have long running connections explicitly terminated.
      * @return the WebClient's timeout
      */
     protected int getTimeout() {
-        return getWebClient().getTimeout();
+        return webClient_.getTimeout();
     }
 
     /**
@@ -412,14 +407,6 @@ public class HttpWebConnection extends WebConnectionImpl {
      */
     public String getVirtualHost() {
         return virtualHost_;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public HttpState getState() {
-        return getHttpClient().getState();
     }
 
     /**

@@ -60,7 +60,7 @@ public class HtmlFrameSetTest extends WebTestCase {
 
         final WebClient webClient = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent);
@@ -95,7 +95,7 @@ public class HtmlFrameSetTest extends WebTestCase {
 
         final WebClient webClient = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
 
@@ -152,7 +152,7 @@ public class HtmlFrameSetTest extends WebTestCase {
 
         final WebClient webClient = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(framesURL, framesContent);
         webConnection.setResponse(menuURL, menuContent);
         webConnection.setResponse(firstURL, firstContent);
@@ -205,7 +205,7 @@ public class HtmlFrameSetTest extends WebTestCase {
 
         final WebClient webClient = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {"Success"};
@@ -240,7 +240,7 @@ public class HtmlFrameSetTest extends WebTestCase {
 
         final WebClient webClient = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
 
@@ -273,7 +273,7 @@ public class HtmlFrameSetTest extends WebTestCase {
             = "alert('3');\n";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent, "text/javascript");
@@ -342,7 +342,7 @@ public class HtmlFrameSetTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(framesetURL, framesetHtml);
         webConnection.setResponse(leftURL, leftHtml);
         webConnection.setResponse(rightURL, rightHtml);

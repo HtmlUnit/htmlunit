@@ -259,7 +259,7 @@ public class StyleSheetTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(new URL("http://x/test.html"), html);
         conn.setResponse(new URL("http://x/style1.css"), "");
         conn.setResponse(new URL("http://x/style2.css"), "");

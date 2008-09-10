@@ -51,7 +51,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent);
@@ -83,7 +83,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent);
@@ -130,7 +130,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
             + "<body><iframe id='iframe2_1' src='" + URL_FIRST + "'></iframe></body></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
 
@@ -178,7 +178,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent);
@@ -211,7 +211,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
             = "alert('3');";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent, "text/javascript");
@@ -259,7 +259,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
 
         final WebClient client = new WebClient();
 
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html1);
         conn.setResponse(URL_SECOND, html2);
         client.setWebConnection(conn);
@@ -285,7 +285,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
 
         final WebClient client = new WebClient();
 
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html1);
         conn.setResponse(URL_SECOND, html2);
         client.setWebConnection(conn);

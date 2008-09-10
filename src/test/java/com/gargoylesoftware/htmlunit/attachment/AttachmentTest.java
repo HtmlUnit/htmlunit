@@ -63,7 +63,7 @@ public class AttachmentTest extends WebTestCase {
         final List<NameValuePair> headers = new ArrayList<NameValuePair>();
         headers.add(new NameValuePair("Content-Disposition", "attachment"));
 
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, content1);
         conn.setResponse(URL_SECOND, content2, 200, "OK", "text/html", headers);
         client.setWebConnection(conn);
@@ -95,7 +95,7 @@ public class AttachmentTest extends WebTestCase {
         final String content = "<html>But is it really?</html>";
 
         final WebClient client = new WebClient();
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         client.setWebConnection(conn);
         final List<Attachment> attachments = new ArrayList<Attachment>();
         client.setAttachmentHandler(new CollectingAttachmentHandler(attachments));

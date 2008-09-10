@@ -149,7 +149,7 @@ public class ThreadManagerTest extends WebTestCase {
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent);
@@ -220,7 +220,7 @@ public class ThreadManagerTest extends WebTestCase {
         final WebClient webClient =  new WebClient(BrowserVersion.FIREFOX_2);
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         webClient.setWebConnection(webConnection);
 
         webConnection.setResponse(URL_FIRST, firstHtml);

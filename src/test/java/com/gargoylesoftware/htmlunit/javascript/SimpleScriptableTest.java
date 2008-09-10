@@ -69,7 +69,7 @@ public class SimpleScriptableTest extends WebTestCase {
     @Test
     public void callInheritedFunction() throws Exception {
         final WebClient client = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String content
             = "<html><head><title>foo</title><script>\n"

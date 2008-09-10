@@ -385,7 +385,7 @@ public class DomNodeTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7_0);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
         conn.setResponse(URL_SECOND, xml, "text/xml");
         client.setWebConnection(conn);
@@ -634,7 +634,7 @@ public class DomNodeTest extends WebTestCase {
             + "</books>";
 
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, xml, "text/xml");
         client.setWebConnection(webConnection);
         final XmlPage page = (XmlPage) client.getPage(URL_FIRST);

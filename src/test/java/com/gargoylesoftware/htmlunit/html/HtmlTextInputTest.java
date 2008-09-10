@@ -96,7 +96,7 @@ public class HtmlTextInputTest extends WebTestCase {
 
         final WebClient client = getWebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setDefaultResponse(secondContent);
 

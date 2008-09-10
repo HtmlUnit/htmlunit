@@ -81,9 +81,9 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
      * {@inheritDoc}
      */
     @Override
-    public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
-        final WebResponse response = wrappedWebConnection_.getResponse(webRequestSettings);
-        saveResponse(response, webRequestSettings);
+    public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
+        final WebResponse response = wrappedWebConnection_.getResponse(settings);
+        saveResponse(response, settings);
         return response;
     }
 

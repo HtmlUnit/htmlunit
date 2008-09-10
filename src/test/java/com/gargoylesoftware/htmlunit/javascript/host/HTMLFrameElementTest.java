@@ -70,10 +70,9 @@ public class HTMLFrameElementTest extends WebTestCase {
 
     private void testLocation(final String jsExpr) throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection =
-            new MockWebConnection(webClient);
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final MockWebConnection webConnection = new MockWebConnection();
 
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
@@ -164,7 +163,7 @@ public class HTMLFrameElementTest extends WebTestCase {
         final String content2 = "<html><head><script>alert(2)</script></head></html>";
 
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         webClient.setWebConnection(webConnection);
 
         webConnection.setDefaultResponse(content2);
@@ -188,7 +187,7 @@ public class HTMLFrameElementTest extends WebTestCase {
     @Test
     public void testFrameLoadedAfterParent() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String mainContent
             = "<html><head><title>first</title></head><body>\n"

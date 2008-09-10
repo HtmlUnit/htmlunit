@@ -286,7 +286,7 @@ public class HTMLInputElementTest extends WebTestCase {
 
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
@@ -315,7 +315,7 @@ public class HTMLInputElementTest extends WebTestCase {
 
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
@@ -656,7 +656,7 @@ public class HTMLInputElementTest extends WebTestCase {
             + "</body></html>";
 
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         webConnection.setDefaultResponse("<html><title>page 2</title><body></body></html>");
         webConnection.setResponse(URL_FIRST, content);

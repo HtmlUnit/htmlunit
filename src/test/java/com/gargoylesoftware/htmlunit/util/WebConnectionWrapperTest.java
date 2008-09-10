@@ -19,13 +19,11 @@ import static org.junit.Assert.assertSame;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.HttpMethod;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebConnection;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -46,38 +44,20 @@ public class WebConnectionWrapperTest extends WebTestCase {
      */
     @Test
     public void wrapper() throws Exception {
-        final HttpState state = new HttpState();
         final List<NameValuePair> emptyList = Collections.emptyList();
         final WebResponseData data = new WebResponseData(new byte[]{}, HttpStatus.SC_OK, "", emptyList);
         final WebResponse response = new WebResponseImpl(data, URL_FIRST, HttpMethod.GET, 0);
-        final WebClient webClient = new WebClient();
-        final WebRequestSettings settings = new WebRequestSettings(URL_FIRST);
-        final String[] lastMethodCalled = {""};
+        final WebRequestSettings wrs = new WebRequestSettings(URL_FIRST);
 
         final WebConnection realConnection = new WebConnection() {
-            public WebResponse getResponse(final WebRequestSettings webRequestSettings) {
-                assertSame(settings, webRequestSettings);
-                lastMethodCalled[0] = "getResponse";
+            public WebResponse getResponse(final WebRequestSettings settings) {
+                assertSame(wrs, settings);
                 return response;
-            }
-            public HttpState getState() {
-                lastMethodCalled[0] = "getState";
-                return state;
-            }
-            public WebClient getWebClient() {
-                lastMethodCalled[0] = "getWebClient";
-                return webClient;
             }
         };
 
         final WebConnectionWrapper wrapper = new WebConnectionWrapper(realConnection);
-
-        assertSame(response, wrapper.getResponse(settings));
-        assertEquals("getResponse", lastMethodCalled[0]);
-        assertSame(state, wrapper.getState());
-        assertEquals("getState", lastMethodCalled[0]);
-        assertSame(webClient, wrapper.getWebClient());
-        assertEquals("getWebClient", lastMethodCalled[0]);
+        assertSame(response, wrapper.getResponse(wrs));
     }
 
 }

@@ -89,7 +89,7 @@ public class XmlPageTest extends WebTestCase {
      */
     private XmlPage testXmlDocument(final String content, final String mimeType) throws Exception {
         final WebClient client = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(content, 200, "OK", mimeType);
         client.setWebConnection(webConnection);
         final Page page = client.getPage(URL_FIRST);
@@ -111,7 +111,7 @@ public class XmlPageTest extends WebTestCase {
     @Test
     public void testInvalidDocument() throws Exception {
         final WebClient client = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String content
             = "<?xml version=\"1.0\"?>\n"
@@ -187,7 +187,7 @@ public class XmlPageTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(firstURL, html);
         conn.setResponse(secondURL, xml, "text/xml");
         client.setWebConnection(conn);

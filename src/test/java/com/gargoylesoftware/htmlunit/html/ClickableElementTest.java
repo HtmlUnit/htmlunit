@@ -77,7 +77,7 @@ public class ClickableElementTest extends WebTestCase {
         final BrowserVersion bv = new BrowserVersion("Netscape", "7", "", "1.2", 7);
         final WebClient client = new WebClient(bv);
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
         client.setThrowExceptionOnScriptError(exceptionOnError);

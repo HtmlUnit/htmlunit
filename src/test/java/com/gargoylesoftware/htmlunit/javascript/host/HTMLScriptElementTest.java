@@ -66,7 +66,7 @@ public class HTMLScriptElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, html);
         webConnection.setResponse(URL_SECOND, js, "text/javascript");
         client.setWebConnection(webConnection);

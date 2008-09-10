@@ -48,7 +48,7 @@ public final class IncorrectnessListenerTest extends WebTestCase {
         };
         webClient.setIncorrectnessListener(listener);
 
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         webClient.setWebConnection(webConnection);
         webConnection.setDefaultResponse(html);
         webClient.getPage(URL_FIRST);

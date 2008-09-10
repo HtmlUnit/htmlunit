@@ -233,7 +233,7 @@ public class HtmlButtonTest extends WebTestCase {
             = "<html><head><title>Second</title></head><body'></body></html>";
         final WebClient client = new WebClient(browserVersion);
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);

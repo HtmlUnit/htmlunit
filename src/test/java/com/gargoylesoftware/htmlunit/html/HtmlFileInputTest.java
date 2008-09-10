@@ -104,7 +104,7 @@ public class HtmlFileInputTest extends WebTestCase {
         final String secondContent = "<html><head><title>second</title></head></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
 
@@ -132,7 +132,7 @@ public class HtmlFileInputTest extends WebTestCase {
         final String secondContent = "<html><head><title>second</title></head></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
 
@@ -163,7 +163,7 @@ public class HtmlFileInputTest extends WebTestCase {
         final String secondContent = "<html><head><title>second</title></head></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
 
@@ -191,7 +191,7 @@ public class HtmlFileInputTest extends WebTestCase {
         final String secondContent = "<html><head><title>second</title></head></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
 

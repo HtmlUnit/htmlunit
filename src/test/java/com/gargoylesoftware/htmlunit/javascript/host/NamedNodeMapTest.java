@@ -133,7 +133,7 @@ public class NamedNodeMapTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(firstURL, html);
         conn.setResponse(secondURL, xml, "text/xml");
         client.setWebConnection(conn);

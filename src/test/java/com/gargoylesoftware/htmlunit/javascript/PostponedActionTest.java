@@ -63,7 +63,7 @@ public class PostponedActionTest extends WebTestCase {
             = "<script>parent.document.getElementById('debugDiv').innerHTML += 'third.html, ';</script>";
 
         final WebClient client = getWebClient();
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, firstContent);
         conn.setResponse(URL_SECOND, secondContent);
         conn.setResponse(URL_THIRD, thirdContent);
@@ -99,7 +99,7 @@ public class PostponedActionTest extends WebTestCase {
             = "<script>parent.document.getElementById('debugDiv').innerHTML += 'second.html, ';</script>";
 
         final WebClient client = getWebClient();
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, firstContent);
         conn.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(conn);

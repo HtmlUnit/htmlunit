@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.WebResponseData;
 import com.gargoylesoftware.htmlunit.WebResponseImpl;
 
 /**
- * Extension of {@link WebConnectionWrapper} providing facility methods to deliver something else than
+ * Extension of {@link WebConnectionWrapper} providing facility methods to deliver something other than
  * what the wrapped connection would deliver.
  *
  * @version $Revision$

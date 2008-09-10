@@ -169,13 +169,12 @@ public class AttributeCaseTest extends WebTestCase {
 
     private void setupAttributeTest(final String content, final String elementId) throws IOException {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
 
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(content);
         client.setWebConnection(webConnection);
 
         page_ = (HtmlPage) client.getPage(URL_GARGOYLE);
-
         element_ = page_.getHtmlElementById(elementId);
     }
 

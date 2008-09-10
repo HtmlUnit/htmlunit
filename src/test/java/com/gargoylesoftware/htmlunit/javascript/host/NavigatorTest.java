@@ -108,7 +108,7 @@ public class NavigatorTest extends WebTestCase {
         if (!cookieEnabled) {
             webClient.getCookieManager().setCookiesEnabled(cookieEnabled);
         }
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -233,7 +233,7 @@ public class NavigatorTest extends WebTestCase {
     @Test
     public void testUseConfiguredBrowser() throws Exception {
         final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_2);
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -259,7 +259,7 @@ public class NavigatorTest extends WebTestCase {
     @Test
     public void testLanguage() throws Exception {
         final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_2);
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));

@@ -90,7 +90,7 @@ public class StyleSheetListTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_2);
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, html);
         webConnection.setResponse(URL_SECOND, css, "text/css");
         webClient.setWebConnection(webConnection);
@@ -160,7 +160,7 @@ public class StyleSheetListTest extends WebTestCase {
         final List<String> actual = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(actual));
 
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         conn.setDefaultResponse(html);
         conn.setResponse(URL_SECOND, "Not Found", 404, "Not Found", "text/html", new ArrayList<NameValuePair>());
         client.setWebConnection(conn);

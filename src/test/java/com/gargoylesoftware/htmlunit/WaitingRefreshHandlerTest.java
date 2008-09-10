@@ -54,7 +54,7 @@ public final class WaitingRefreshHandlerTest extends WebTestCase {
             + "</html>";
 
         final WebClient client = new WebClient();
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, firstContent);
         conn.setResponse(URL_SECOND, secondContent);
         conn.setResponse(URL_THIRD, thirdContent);

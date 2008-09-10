@@ -509,7 +509,7 @@ public class HTMLFormElementTest extends WebTestCase {
     @Test
     public void testFormSubmit() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String firstContent
             = "<html><head><title>first</title></head><body>\n"
@@ -542,7 +542,7 @@ public class HTMLFormElementTest extends WebTestCase {
     @Test
     public void testOnSubmitChangesAction() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String firstContent
             = "<html><body>\n"
@@ -569,7 +569,7 @@ public class HTMLFormElementTest extends WebTestCase {
     @Test
     public void testFormSubmit_target() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String firstContent
             = "<html><head><title>first</title></head><body>\n"
@@ -602,7 +602,7 @@ public class HTMLFormElementTest extends WebTestCase {
     @Test
     public void testFormSubmitDoesntCallOnSubmit() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String firstContent
             = "<html><head><title>first</title></head><body>\n"
@@ -676,7 +676,7 @@ public class HTMLFormElementTest extends WebTestCase {
     @Test
     public void testAccessingRadioButtonArrayByName_Regression() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -742,7 +742,7 @@ public class HTMLFormElementTest extends WebTestCase {
     @Test
     public void testFormSubmit_MultipleButtons() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String firstContent
             = "<html><head><title>first</title></head><body>\n"
@@ -1100,7 +1100,7 @@ public class HTMLFormElementTest extends WebTestCase {
     @Test
     public void testFormAccessAfterBrowsing() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String firstContent = "<html><head><title>first</title>\n"
             + "<script>\n"
@@ -1163,7 +1163,7 @@ public class HTMLFormElementTest extends WebTestCase {
     protected void testOnSubmitEvent(final BrowserVersion browserVersion, final String[] expectedAlerts)
         throws Exception {
         final WebClient client = new WebClient(browserVersion);
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String content = "<html><head><title>first</title>\n"
             + "<script>\n"

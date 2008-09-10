@@ -39,7 +39,7 @@ public final class ImmediateRefreshHandlerTest extends WebTestCase {
 
         // connection will return a page with <meta ... refresh> for the first call
         // and the same page without it for the other calls
-        final MockWebConnection webConnection = new MockWebConnection(client) {
+        final MockWebConnection webConnection = new MockWebConnection() {
             private int nbCalls_ = 0;
             @Override
             public WebResponse getResponse(final WebRequestSettings settings) throws IOException {

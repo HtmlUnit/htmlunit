@@ -150,7 +150,7 @@ public class DomTextTest extends WebTestCase {
         final int[] expectedValues = {1610, 1575, 32, 1604, 1610, 1610, 1604};
 
         final WebClient client = new WebClient(BrowserVersion.getDefault());
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         webConnection.setDefaultResponse(TextUtil.stringToByteArray(html, "UTF-8"), 200, "OK", "text/html");
         client.setWebConnection(webConnection);

@@ -73,7 +73,7 @@ public class LocationTest extends WebTestCase {
     @Test
     public void testDocumentLocationSet() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String html1 =
               "<html>\n"
@@ -141,7 +141,7 @@ public class LocationTest extends WebTestCase {
     @Test
     public void testGetVariousAttributes() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -205,7 +205,7 @@ public class LocationTest extends WebTestCase {
     @Test
     public void testSetHash() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection conn = new MockWebConnection(webClient);
+        final MockWebConnection conn = new MockWebConnection();
 
         final String html
             = "<html><head><title>Test</title></head><body>\n"
@@ -299,7 +299,7 @@ public class LocationTest extends WebTestCase {
     @Test
     public void testSetHostname() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         final URL url = new URL("http://abc.com/index.html#bottom");
         final URL url2 = new URL("http://xyz.com/index.html#bottom");
         final String html
@@ -321,7 +321,7 @@ public class LocationTest extends WebTestCase {
     @Test
     public void testSetHostWithoutPort() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         final URL url = new URL("http://abc.com/index.html#bottom");
         final URL url2 = new URL("http://xyz.com/index.html#bottom");
         final String html
@@ -343,7 +343,7 @@ public class LocationTest extends WebTestCase {
     @Test
     public void testSetHostWithPort() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         final URL url = new URL("http://abc.com/index.html#bottom");
         final URL url2 = new URL("http://xyz.com:8080/index.html#bottom");
         final String html
@@ -365,7 +365,7 @@ public class LocationTest extends WebTestCase {
     @Test
     public void testSetPathname() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         final URL url = new URL("http://abc.com/index.html?blah=bleh");
         final URL url2 = new URL("http://abc.com/en/index.html?blah=bleh");
         final String html
@@ -387,7 +387,7 @@ public class LocationTest extends WebTestCase {
     @Test
     public void testSetPort() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         final URL url = new URL("http://abc.com/index.html#bottom");
         final URL url2 = new URL("http://abc.com:88/index.html#bottom");
         final String html
@@ -409,7 +409,7 @@ public class LocationTest extends WebTestCase {
     @Test
     public void testSetProtocol() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         final URL url = new URL("http://abc.com/index.html?blah=bleh");
         final URL url2 = new URL("ftp://abc.com/index.html?blah=bleh");
         final String html
@@ -432,7 +432,7 @@ public class LocationTest extends WebTestCase {
     @Test
     public void testReplace() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -458,7 +458,7 @@ public class LocationTest extends WebTestCase {
     @Test
     public void testAssign() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -507,7 +507,7 @@ public class LocationTest extends WebTestCase {
     @Test
     public void testReplaceWithFrame() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String mainContent
             = " <html>\n"
@@ -547,7 +547,7 @@ public class LocationTest extends WebTestCase {
     @Test
     public void testChangeLocationToNonHtml() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String html =
               "<html><head>\n"

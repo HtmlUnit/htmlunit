@@ -879,7 +879,7 @@ public class HTMLElementTest extends WebTestCase {
         final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(url1, html1);
         webConnection.setResponse(url2, html2);
         client.setWebConnection(webConnection);
@@ -930,7 +930,7 @@ public class HTMLElementTest extends WebTestCase {
         final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(url1, html1);
         webConnection.setResponse(url2, "foo");
         webConnection.setResponse(url3, "foo2");
@@ -1196,7 +1196,7 @@ public class HTMLElementTest extends WebTestCase {
 
         // finally try via the client
         final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, html);
         webClient.setWebConnection(webConnection);
         final CollectingAlertHandler clientCollectedAlertsHandler = new CollectingAlertHandler();
@@ -1882,7 +1882,7 @@ public class HTMLElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_GARGOYLE, html);
         client.setWebConnection(webConnection);
 
@@ -2149,7 +2149,7 @@ public class HTMLElementTest extends WebTestCase {
     @Alerts({"null", "text1", "null", "onfocus text2", "text2", "onfocus text1", "onfocus text2" })
     public void setActiveAndFocus() throws Exception {
         final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         final List<String> collectedAlerts = new ArrayList<String>();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -2199,7 +2199,7 @@ public class HTMLElementTest extends WebTestCase {
     @Alerts({"onfocus text1", "onfocus text2", "onfocus text1", "onfocus text2" })
     public void onFocusOnWindowFocusGain() throws Exception {
         final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         final List<String> collectedAlerts = new ArrayList<String>();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -2242,7 +2242,7 @@ public class HTMLElementTest extends WebTestCase {
     @Alerts({"onblur text2", "onblur text1" })
     public void onBlurOnWindowFocusChange() throws Exception {
         final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         final List<String> collectedAlerts = new ArrayList<String>();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));

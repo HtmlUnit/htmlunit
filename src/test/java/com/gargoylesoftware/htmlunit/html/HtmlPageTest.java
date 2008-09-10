@@ -366,7 +366,7 @@ public class HtmlPageTest extends WebTestCase {
             + "</form></body></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
@@ -467,7 +467,7 @@ public class HtmlPageTest extends WebTestCase {
         };
         webClient.setIncorrectnessListener(listener);
 
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         webClient.setWebConnection(webConnection);
         webConnection.setDefaultResponse(html);
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
@@ -500,7 +500,7 @@ public class HtmlPageTest extends WebTestCase {
         };
         webClient.setIncorrectnessListener(listener);
 
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         webClient.setWebConnection(webConnection);
         webConnection.setDefaultResponse(html);
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
@@ -709,7 +709,7 @@ public class HtmlPageTest extends WebTestCase {
 
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
@@ -731,7 +731,7 @@ public class HtmlPageTest extends WebTestCase {
 
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
@@ -755,7 +755,7 @@ public class HtmlPageTest extends WebTestCase {
         final List<Object> collectedItems = new ArrayList<Object>();
         client.setRefreshHandler(new LoggingRefreshHandler(collectedItems));
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         client.setWebConnection(webConnection);
 
@@ -804,7 +804,7 @@ public class HtmlPageTest extends WebTestCase {
 
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
@@ -827,7 +827,7 @@ public class HtmlPageTest extends WebTestCase {
 
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
@@ -852,7 +852,7 @@ public class HtmlPageTest extends WebTestCase {
 
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
@@ -880,7 +880,7 @@ public class HtmlPageTest extends WebTestCase {
         final List<Object> collectedItems = new ArrayList<Object>();
         client.setRefreshHandler(new LoggingRefreshHandler(collectedItems));
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
@@ -909,7 +909,7 @@ public class HtmlPageTest extends WebTestCase {
 
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
@@ -931,7 +931,7 @@ public class HtmlPageTest extends WebTestCase {
 
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections
                 .singletonList(new NameValuePair("Refresh", "3;URL=" + URL_SECOND + "")));
         webConnection.setResponse(URL_SECOND, secondContent);
@@ -1085,7 +1085,7 @@ public class HtmlPageTest extends WebTestCase {
             + "</html>";
 
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(html);
         webConnection.setResponse(new URL(URL_FIRST, "script.js"), "", "text/javascript");
         client.setWebConnection(webConnection);
@@ -1131,7 +1131,7 @@ public class HtmlPageTest extends WebTestCase {
             + "<body><span id='foo'>" + unicodeString + "</span></body></html>";
 
         final WebClient client = new WebClient(BrowserVersion.getDefault());
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         webConnection.setDefaultResponse(TextUtil.stringToByteArray(html, "UTF-8"), 200, "OK", "text/html");
         client.setWebConnection(webConnection);
@@ -1325,7 +1325,7 @@ public class HtmlPageTest extends WebTestCase {
             = "<html><body></body></html>";
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
 
@@ -1347,7 +1347,7 @@ public class HtmlPageTest extends WebTestCase {
 
         // connection will return a page with <meta ... refresh> for the first call
         // and the same page without it for the other calls
-        final MockWebConnection webConnection = new MockWebConnection(client) {
+        final MockWebConnection webConnection = new MockWebConnection() {
             private int nbCalls_ = 0;
             @Override
             public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
@@ -1733,7 +1733,7 @@ public class HtmlPageTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, htmlContent);
         client.setWebConnection(conn);
 
@@ -1762,7 +1762,7 @@ public class HtmlPageTest extends WebTestCase {
     private void testOnbeforeunloadHandler(final BrowserVersion browserVersion, final boolean handlerOk,
         final String expectedPageTitle) throws Exception {
         final WebClient webClient = new WebClient(browserVersion);
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         final List<String> collectedConfirms = new ArrayList<String>();
 
         webClient.setOnbeforeunloadHandler(new OnbeforeunloadHandler() {

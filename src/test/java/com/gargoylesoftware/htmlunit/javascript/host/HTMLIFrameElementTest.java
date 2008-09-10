@@ -124,7 +124,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
             + "</body></html>";
 
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         webConnection.setDefaultResponse(frameContent);
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -156,7 +156,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
         final String frameHtml = "<html><body>foo</body></html>";
 
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         webConnection.setDefaultResponse(frameHtml);
         webConnection.setResponse(URL_FIRST, html);
@@ -282,7 +282,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
         final String[] expected = {"123", "undefined"};
 
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         webConnection.setResponse(URL_FIRST, html);
         webConnection.setResponse(new URL(URL_FIRST, "1.html"), frame1);
@@ -316,7 +316,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent);

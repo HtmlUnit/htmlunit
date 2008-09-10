@@ -878,7 +878,7 @@ public class EventTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, html1);
         webConnection.setResponse(URL_SECOND, html2);
         client.setWebConnection(webConnection);

@@ -61,7 +61,7 @@ public class WebResponseImplTest extends WebTestCase {
     private void testRecognizeBOM(final String encoding, final byte[] markerBytes) throws Exception {
         final WebClient webClient = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String html = "<html><head><script src='foo.js'></script></head><body></body></html>";
 
@@ -97,7 +97,7 @@ public class WebResponseImplTest extends WebTestCase {
 
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         final List< ? extends NameValuePair> emptyList = Collections.emptyList();
         webConnection.setResponse(URL_FIRST, content.getBytes("UTF-8"), 200, "OK", "text/html", emptyList);
         client.setWebConnection(webConnection);
@@ -123,7 +123,7 @@ public class WebResponseImplTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         final List< ? extends NameValuePair> emptyList = Collections.emptyList();
         conn.setResponse(URL_FIRST, xml, HttpStatus.SC_OK, "OK", "text/xml; charset=\"ISO-8859-1\"", emptyList);
         client.setWebConnection(conn);
@@ -143,8 +143,7 @@ public class WebResponseImplTest extends WebTestCase {
     }
 
     private void testIllegalCharset(final String cntTypeHeader, final String expectedCharset) throws Exception {
-        final WebClient client = new WebClient();
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         final List<NameValuePair> headers = new ArrayList<NameValuePair>();
         headers.add(new NameValuePair("Content-Type", cntTypeHeader));
         conn.setDefaultResponse("<html/>", 200, "OK", "text/html", headers);

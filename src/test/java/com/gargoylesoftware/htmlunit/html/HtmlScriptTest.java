@@ -55,7 +55,7 @@ public class HtmlScriptTest extends WebTestCase {
 
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse("inexistent", 404, "Not Found", "text/html");
         webConnection.setResponse(URL_FIRST, html);
         client.setWebConnection(webConnection);
@@ -130,7 +130,7 @@ public class HtmlScriptTest extends WebTestCase {
 
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstPage);
         webConnection.setResponse(URL_SECOND, secondPage);
         client.setWebConnection(webConnection);
@@ -247,7 +247,7 @@ public class HtmlScriptTest extends WebTestCase {
         final WebClient client = new WebClient(version);
         client.setAlertHandler(new CollectingAlertHandler(actual));
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(html);
         webConnection.setResponse(new URL("http://abc/script2.js"), "alert(2);");
         webConnection.setResponse(new URL("http://abc/script3.js"), "alert(3);");
@@ -293,7 +293,7 @@ public class HtmlScriptTest extends WebTestCase {
 
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, html);
         webConnection.setResponse(URL_SECOND, js);
         client.setWebConnection(webConnection);
@@ -317,7 +317,7 @@ public class HtmlScriptTest extends WebTestCase {
 
         final WebClient client = new WebClient();
 
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
         conn.setResponse(URL_SECOND, js, "text/javascript");
         client.setWebConnection(conn);

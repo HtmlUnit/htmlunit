@@ -153,7 +153,7 @@ public class DocumentTest extends WebTestCase {
     @Test
     public void formArray() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String firstContent
             = "<html><head><SCRIPT lang='JavaScript'>\n"
@@ -852,7 +852,7 @@ public class DocumentTest extends WebTestCase {
     @Test
     public void getElementById_scriptSrc() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         webClient.setWebConnection(webConnection);
 
         final String firstContent
@@ -1323,7 +1323,7 @@ public class DocumentTest extends WebTestCase {
     @Test
     public void write_LoadScript() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         webClient.setWebConnection(webConnection);
 
         final String firstContent
@@ -1357,7 +1357,7 @@ public class DocumentTest extends WebTestCase {
     @Test
     public void write_script() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         webClient.setWebConnection(webConnection);
 
         final String mainContent
@@ -1683,7 +1683,7 @@ public class DocumentTest extends WebTestCase {
     @Test
     public void referrer() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String firstContent
             = "<html><head><title>First</title></head><body onload='alert(document.referrer);'>\n"
@@ -1812,7 +1812,7 @@ public class DocumentTest extends WebTestCase {
     @Test
     public void getElementsByTagName_LoadScript() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         webClient.setWebConnection(webConnection);
 
         final String firstContent
@@ -2045,7 +2045,7 @@ public class DocumentTest extends WebTestCase {
     @Test
     public void cookie_read() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -2110,7 +2110,7 @@ public class DocumentTest extends WebTestCase {
         final List<String> actual = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(actual));
 
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         conn.setDefaultResponse(html);
         client.setWebConnection(conn);
 
@@ -2339,7 +2339,7 @@ public class DocumentTest extends WebTestCase {
     @Test
     public void readyStateNonIE() throws Exception {
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         final String content = "<html><head>\n"
             + "<script>\n"
             + "function testIt() {\n"
@@ -2370,7 +2370,7 @@ public class DocumentTest extends WebTestCase {
     @Test
     public void readyStateIE() throws Exception {
         final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_6_0);
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         final String content = "<html><head>\n"
             + "<script>\n"
             + "function testIt() {\n"
@@ -2440,7 +2440,7 @@ public class DocumentTest extends WebTestCase {
     @Test
     public void getElementByIdForNetscape() throws Exception {
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         final String content
             = "<html><head><title>foo</title></head>\n"
             + "<body>\n"
@@ -2620,7 +2620,7 @@ public class DocumentTest extends WebTestCase {
 
         final URL scriptUrl = new URL(URL_FIRST + "/script.js");
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         client.setWebConnection(webConnection);
         webConnection.setDefaultResponse(content);
         webConnection.setResponse(scriptUrl, "alert('foo');\n", "text/javascript");
@@ -2707,7 +2707,7 @@ public class DocumentTest extends WebTestCase {
         final URL urlGargoyleUpperCase = new URL("http://WWW.GARGOYLESOFTWARE.COM");
 
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String content = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -2841,7 +2841,7 @@ public class DocumentTest extends WebTestCase {
         final URL blankURL = new URL(baseURL.toExternalForm() + "blank.html");
 
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(framesetURL, framesetContent);
         webConnection.setResponseAsGenericHtml(frameURL, "frame");
         webConnection.setResponseAsGenericHtml(blankURL, "blank");

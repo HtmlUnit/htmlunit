@@ -53,7 +53,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
     @Test
     public void getAttribute_and_href() throws Exception {
         final WebClient client = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String html
             = "<html><head><title>AnchorTest</title><script>\n"
@@ -181,7 +181,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
             + "</html>";
 
         final WebClient client = getWebClient();
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
         conn.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(conn);

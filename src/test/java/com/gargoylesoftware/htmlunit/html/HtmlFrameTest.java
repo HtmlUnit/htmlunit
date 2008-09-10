@@ -65,7 +65,7 @@ public class HtmlFrameTest extends WebTestCase {
     public void testOnLoadHandler() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection =
-            new MockWebConnection(webClient);
+            new MockWebConnection();
         final List<String> collectedAlerts = new ArrayList<String>();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -125,7 +125,7 @@ public class HtmlFrameTest extends WebTestCase {
     public void testDeregisterNonHtmlFrame() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection =
-            new MockWebConnection(webClient);
+            new MockWebConnection();
 
         final String firstContent
             = "<html><head><title>first</title></head>\n"
@@ -167,7 +167,7 @@ public class HtmlFrameTest extends WebTestCase {
 
         final WebClient webClient = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(
                 failingContent, 404, "No Found", "text/html");
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -210,7 +210,7 @@ public class HtmlFrameTest extends WebTestCase {
         final String frame3 = "<html><head><title>page 3</title></head><body></body></html>";
 
         final WebClient webClient = new WebClient();
-        final MockWebConnection conn = new MockWebConnection(webClient);
+        final MockWebConnection conn = new MockWebConnection();
         webClient.setWebConnection(conn);
 
         conn.setDefaultResponse("<html><head><title>default</title></head><body></body></html>");

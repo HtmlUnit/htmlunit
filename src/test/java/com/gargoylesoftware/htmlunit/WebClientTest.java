@@ -130,7 +130,7 @@ public class WebClientTest extends WebTestCase {
         final WebClient client = new WebClient();
         client.setPrintContentOnFailingStatusCode(false);
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(htmlContent, 401, "Credentials missing or just plain wrong", "text/plain");
         client.setWebConnection(webConnection);
 
@@ -158,7 +158,7 @@ public class WebClientTest extends WebTestCase {
         final EventCatcher eventCatcher = new EventCatcher();
         eventCatcher.listenTo(client);
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
@@ -199,7 +199,7 @@ public class WebClientTest extends WebTestCase {
         final EventCatcher eventCatcher = new EventCatcher();
         eventCatcher.listenTo(client);
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, page1Content);
         webConnection.setResponse(URL_SECOND, page2Content);
 
@@ -237,7 +237,7 @@ public class WebClientTest extends WebTestCase {
         final String thirdContent = "<html><head><title>third</title></head><body></body></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent);
@@ -298,7 +298,7 @@ public class WebClientTest extends WebTestCase {
 
         // builds a webconnection that first sends a redirect and then a "normal" response for
         // the same requested URL
-        final MockWebConnection webConnection = new MockWebConnection(webClient) {
+        final MockWebConnection webConnection = new MockWebConnection() {
             private int count_ = 0;
             @Override
             public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
@@ -499,7 +499,7 @@ public class WebClientTest extends WebTestCase {
         final URL url = URL_FIRST;
         final List<NameValuePair> headers =
             Collections.singletonList(new NameValuePair("Location", URL_FIRST.toExternalForm()));
-        final MockWebConnection webConnection = new MockWebConnection(webClient) {
+        final MockWebConnection webConnection = new MockWebConnection() {
             private int count_ = 0;
             @Override
             public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
@@ -539,7 +539,7 @@ public class WebClientTest extends WebTestCase {
 
     private void testRedirection_AdditionalHeadersMaintained(final int statusCode) throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         client.setWebConnection(conn);
 
         final List<NameValuePair> headers = asList(new NameValuePair("Location", URL_SECOND.toString()));
@@ -594,7 +594,7 @@ public class WebClientTest extends WebTestCase {
         webClient.setPrintContentOnFailingStatusCode(false);
 
         final List<NameValuePair> headers = Collections.singletonList(new NameValuePair("Location", newLocation));
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent, statusCode, "Some error", "text/html", headers);
         webConnection.setResponse(new URL(newLocation), secondContent);
 
@@ -665,7 +665,7 @@ public class WebClientTest extends WebTestCase {
             + "</body></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, page1Content);
 
         client.setWebConnection(webConnection);
@@ -717,7 +717,7 @@ public class WebClientTest extends WebTestCase {
             + "</body></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
@@ -741,7 +741,7 @@ public class WebClientTest extends WebTestCase {
 
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
@@ -762,7 +762,7 @@ public class WebClientTest extends WebTestCase {
 
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
@@ -891,7 +891,7 @@ public class WebClientTest extends WebTestCase {
 
         final WebClient webClient = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
 
@@ -1075,7 +1075,7 @@ public class WebClientTest extends WebTestCase {
 
         buffer.append("</form></body></html>");
 
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, buffer.toString());
         webClient.setWebConnection(webConnection);
 
@@ -1111,7 +1111,7 @@ public class WebClientTest extends WebTestCase {
 
         final WebClient webClient = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         final List< ? extends NameValuePair> emptyList = Collections.emptyList();
         webConnection.setResponse(URL_FIRST, firstContent, 500, "BOOM", "text/html", emptyList);
         webClient.setWebConnection(webConnection);
@@ -1143,7 +1143,7 @@ public class WebClientTest extends WebTestCase {
 
         // Configure the mock web connection.
         final String html = "<html><head><title>Hello World</title></head><body></body></html>";
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, html);
         webClient.setWebConnection(webConnection);
 
@@ -1207,7 +1207,7 @@ public class WebClientTest extends WebTestCase {
 
         final String location2 = "http://hostToByPass/foo.html";
         final List<NameValuePair> headers = Collections.singletonList(new NameValuePair("Location", location2));
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, html, 302, "Some error", "text/html", headers);
         webConnection.setResponse(new URL(location2), "<html><head><title>2nd page</title></head></html>");
         webClient.setWebConnection(webConnection);
@@ -1239,7 +1239,7 @@ public class WebClientTest extends WebTestCase {
             + "</head><body></body></html>";
         final WebClient webClient = new WebClient(BrowserVersion.INTERNET_EXPLORER_6_0,
                 defaultProxyHost, defaultProxyPort);
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, html);
         webConnection.setResponse(new URL(URL_FIRST, "foo.js"), "", "text/javascript");
         webClient.setWebConnection(webConnection);
@@ -1306,7 +1306,7 @@ public class WebClientTest extends WebTestCase {
     @Test
     public void testScriptPreProcessor() throws IOException {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         final String alertText = "content";
         final String newAlertText = "newcontent";
         final String content
@@ -1368,7 +1368,7 @@ public class WebClientTest extends WebTestCase {
     @Test
     public void testScriptPreProcessor_UnimplementedJavascript() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         final String content = "<html><head><title>foo</title></head><body>\n"
             + "<p>hello world</p>\n"
             + "<script>document.unimplementedFunction();</script>\n"
@@ -1407,7 +1407,7 @@ public class WebClientTest extends WebTestCase {
             + "</head><body></body></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, page1Content, "text/html; charset=garbage");
 
         client.setWebConnection(webConnection);
@@ -1443,7 +1443,7 @@ public class WebClientTest extends WebTestCase {
 
         final WebClient webClient = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setDefaultResponse(secondContent);
 
@@ -1469,7 +1469,7 @@ public class WebClientTest extends WebTestCase {
 
         final WebClient webClient = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webClient.setWebConnection(webConnection);
@@ -1587,7 +1587,7 @@ public class WebClientTest extends WebTestCase {
         final String content = "<html></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(content);
         client.setWebConnection(webConnection);
 
@@ -1617,7 +1617,7 @@ public class WebClientTest extends WebTestCase {
             + "</head></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection(client);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse("alert('foo')", 200, "OK", "Text/Javascript");
         client.setWebConnection(webConnection);
 
@@ -1733,7 +1733,7 @@ public class WebClientTest extends WebTestCase {
     @Test
     public void testCssEnablementControlsCssLoading() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection conn = new MockWebConnection(client);
+        final MockWebConnection conn = new MockWebConnection();
         client.setWebConnection(conn);
 
         final String html =
@@ -1773,7 +1773,7 @@ public class WebClientTest extends WebTestCase {
     @Test
     public void testGetPageJavascriptProtocol() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse("<html><head><title>Hello World</title></head><body></body></html>");
         webClient.setWebConnection(webConnection);
 
@@ -1808,7 +1808,7 @@ public class WebClientTest extends WebTestCase {
             client.setThrowExceptionOnScriptError(false);
 
             final String content = "<html><body><script>while(1) {}</script></body></html>";
-            final MockWebConnection webConnection = new MockWebConnection(client);
+            final MockWebConnection webConnection = new MockWebConnection();
             webConnection.setDefaultResponse(content);
             client.setWebConnection(webConnection);
 
@@ -1858,7 +1858,7 @@ public class WebClientTest extends WebTestCase {
     @Test
     public void testCurrentWindowAfterWindowCloseInOnload() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection();
 
         final String firstContent = "<html><head><title>First</title></head>\n"
             + "<body><form name='form1'>\n"
