@@ -569,7 +569,7 @@ public class LocationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testJSLocation() throws Exception {
+    public void jsLocation() throws Exception {
         final String html =
               "<html><head>\n"
             + "  <script>\n"
@@ -604,4 +604,30 @@ public class LocationTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void href() throws Exception {
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+
+        final String content
+            = "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  alert(window.location.href);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        webConnection.setResponse(new URL("http://myHostName/"), content);
+        webClient.setWebConnection(webConnection);
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        webClient.getPage("http://myHostName");
+        final String[] expectedAlerts = {"http://myHostName/" };
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

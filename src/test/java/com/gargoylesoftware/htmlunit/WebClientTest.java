@@ -1901,34 +1901,4 @@ public class WebClientTest extends WebTestCase {
         Assert.assertNotNull(window);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void location_href() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
-
-        final String content
-            = "<html><head><title>First</title><script>\n"
-            + "function test() {\n"
-            + "  alert(window.location.href);\n"
-            + "}\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        final URL url = new URL("http://myHostName");
-        webConnection.setResponse(url, content);
-        webClient.setWebConnection(webConnection);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        webClient.getPage(url);
-        final String[] expectedAlerts = {"http://myHostName/" };
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
 }
