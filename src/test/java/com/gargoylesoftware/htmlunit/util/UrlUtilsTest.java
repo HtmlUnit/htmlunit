@@ -133,8 +133,8 @@ public class UrlUtilsTest extends WebTestCase {
 
         //Following two cases were failing when original implementation was modified to handle
         //the cases given in RFC 1808. Lots of other test cases failed because of that.
-        assertEquals(URL_FIRST + "/foo.xml", UrlUtils.resolveUrl(URL_FIRST, "/foo.xml"));
-        assertEquals(URL_FIRST + "/foo.xml", UrlUtils.resolveUrl(URL_FIRST, "foo.xml"));
+        assertEquals(URL_FIRST + "foo.xml", UrlUtils.resolveUrl(URL_FIRST, "/foo.xml"));
+        assertEquals(URL_FIRST + "foo.xml", UrlUtils.resolveUrl(URL_FIRST, "foo.xml"));
     }
 
     /**

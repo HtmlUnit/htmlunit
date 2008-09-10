@@ -328,7 +328,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
-        final URL urlPage2 = new URL(URL_FIRST + "/foo.xml");
+        final URL urlPage2 = new URL(URL_FIRST + "foo.xml");
         conn.setResponse(urlPage2, xml, "text/xml");
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
@@ -364,7 +364,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
-        final URL urlPage2 = new URL(URL_FIRST + "/foo.txt");
+        final URL urlPage2 = new URL(URL_FIRST + "foo.txt");
         conn.setResponse(urlPage2, "bla bla", "text/plain");
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
@@ -410,7 +410,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
-        final URL urlPage2 = new URL(URL_FIRST + "/foo.xml");
+        final URL urlPage2 = new URL(URL_FIRST + "foo.xml");
         conn.setResponse(urlPage2, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
                 "text/xml");
         client.setWebConnection(conn);
@@ -453,7 +453,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
-        final URL urlPage2 = new URL(URL_FIRST + "/foo.xml");
+        final URL urlPage2 = new URL(URL_FIRST + "foo.xml");
         conn.setResponse(urlPage2, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
                 "text/xml");
         client.setWebConnection(conn);
@@ -608,7 +608,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
-        final URL urlPage2 = new URL(URL_FIRST + "/foo.xml.txt");
+        final URL urlPage2 = new URL(URL_FIRST + "foo.xml.txt");
         conn.setResponse(urlPage2, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
                 "text/plain");
         client.setWebConnection(conn);
@@ -780,7 +780,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             }
         };
         conn.setResponse(URL_FIRST, content);
-        final URL urlPage2 = new URL(URL_FIRST + "/foo.xml");
+        final URL urlPage2 = new URL(URL_FIRST + "foo.xml");
         conn.setResponse(urlPage2, "<foo/>\n", "text/xml");
         client.setWebConnection(conn);
         final Page page = client.getPage(URL_FIRST);
@@ -817,7 +817,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         final WebClient client = new WebClient();
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, content);
-        final URL urlPage2 = new URL(URL_FIRST + "/foo.xml");
+        final URL urlPage2 = new URL(URL_FIRST + "foo.xml");
         conn.setResponse(urlPage2, "<foo/>\n", "text/xml");
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
@@ -885,7 +885,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         final WebClient client = new WebClient();
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, content);
-        final URL urlPage2 = new URL(URL_FIRST + "/foo.xml");
+        final URL urlPage2 = new URL(URL_FIRST + "foo.xml");
         conn.setResponse(urlPage2, "<foo/>\n", "text/xml");
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);

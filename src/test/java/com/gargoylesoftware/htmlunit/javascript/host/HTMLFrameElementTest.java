@@ -86,7 +86,7 @@ public class HTMLFrameElementTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setDefaultResponse(defaultContent);
 
-        final String[] expectedAlerts = {URL_FIRST + "/subdir/frame.html", URL_FIRST + "/frame.html"};
+        final String[] expectedAlerts = {URL_FIRST + "subdir/frame.html", URL_FIRST + "frame.html"};
 
         webClient.setWebConnection(webConnection);
 

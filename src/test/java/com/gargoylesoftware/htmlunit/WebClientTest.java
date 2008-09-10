@@ -725,7 +725,7 @@ public class WebClientTest extends WebTestCase {
         final URL url = new URL(urlString);
         final HtmlPage page = client.getPage(new WebRequestSettings(url, HttpMethod.POST));
 
-        assertEquals(urlString, page.getWebResponse().getUrl());
+        assertEquals("http://first/?a=b", page.getWebResponse().getUrl());
     }
 
     /**
@@ -768,23 +768,23 @@ public class WebClientTest extends WebTestCase {
 
         // with query string not encoded
         HtmlPage page = client.getPage("http://first?a=b c&d=" + ((char) 0xE9) + ((char) 0xE8));
-        assertEquals("http://first?a=b%20c&d=%C3%A9%C3%A8", page.getWebResponse().getUrl());
+        assertEquals("http://first/?a=b%20c&d=%C3%A9%C3%A8", page.getWebResponse().getUrl());
 
         // with query string already encoded
         page = client.getPage("http://first?a=b%20c&d=%C3%A9%C3%A8");
-        assertEquals("http://first?a=b%20c&d=%C3%A9%C3%A8", page.getWebResponse().getUrl());
+        assertEquals("http://first/?a=b%20c&d=%C3%A9%C3%A8", page.getWebResponse().getUrl());
 
         // with query string partially encoded
         page = client.getPage("http://first?a=b%20c&d=e f");
-        assertEquals("http://first?a=b%20c&d=e%20f", page.getWebResponse().getUrl());
+        assertEquals("http://first/?a=b%20c&d=e%20f", page.getWebResponse().getUrl());
 
         // with anchor
         page = client.getPage("http://first?a=b c#myAnchor");
-        assertEquals("http://first?a=b%20c#myAnchor", page.getWebResponse().getUrl());
+        assertEquals("http://first/?a=b%20c#myAnchor", page.getWebResponse().getUrl());
 
         // with query string containing encoded "&", "=", "+", ",", and "$"
         page = client.getPage("http://first?a=%26%3D%20%2C%24");
-        assertEquals("http://first?a=%26%3D%20%2C%24", page.getWebResponse().getUrl());
+        assertEquals("http://first/?a=%26%3D%20%2C%24", page.getWebResponse().getUrl());
 
         // with character to encode in path
         page = client.getPage("http://first/page 1.html");
@@ -1269,7 +1269,7 @@ public class WebClientTest extends WebTestCase {
      */
     @Test
     public void testExpandUrl() throws Exception {
-        assertEquals("http://first#second", WebClient.expandUrl(URL_FIRST, "#second"));
+        assertEquals("http://first/#second", WebClient.expandUrl(URL_FIRST, "#second"));
         assertEquals("http://first?a=1&b=2", WebClient.expandUrl(new URL("http://first?a=1&b=2"), ""));
         assertEquals("http://first?b=2&c=3", WebClient.expandUrl(new URL("http://first?a=1&b=2"), "?b=2&c=3"));
         assertEquals("file:/home/myself/test.js",

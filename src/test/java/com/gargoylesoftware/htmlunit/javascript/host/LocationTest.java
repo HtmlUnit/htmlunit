@@ -143,7 +143,7 @@ public class LocationTest extends WebTestCase {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        final String firstContent
+        final String content
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var location = document.location;\n"
@@ -158,7 +158,7 @@ public class LocationTest extends WebTestCase {
             + "}\n</script></head>\n"
             + "<body onload='doTest()'></body></html>";
 
-        webConnection.setDefaultResponse(firstContent);
+        webConnection.setDefaultResponse(content);
         client.setWebConnection(webConnection);
 
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -170,8 +170,8 @@ public class LocationTest extends WebTestCase {
             "",               // hash
             "first",          // host
             "first",          // hostname
-            "http://first",   // href
-            "",               // pathname
+            "http://first/",  // href
+            "/",              // pathname
             "",               // port
             "http:",          // protocol
             ""                // search
@@ -525,9 +525,9 @@ public class LocationTest extends WebTestCase {
         final String frameTest = "<html><head><title>Test</title></head><body></body></html>";
 
         webConnection.setResponse(URL_FIRST, mainContent);
-        webConnection.setResponse(new URL(URL_FIRST + "/menu.html"), frameMenu);
-        webConnection.setResponse(new URL(URL_FIRST + "/content.html"), frameContent);
-        webConnection.setResponse(new URL(URL_FIRST + "/test.html"), frameTest);
+        webConnection.setResponse(new URL(URL_FIRST + "menu.html"), frameMenu);
+        webConnection.setResponse(new URL(URL_FIRST + "content.html"), frameContent);
+        webConnection.setResponse(new URL(URL_FIRST + "test.html"), frameTest);
 
         webClient.setWebConnection(webConnection);
 
@@ -558,7 +558,7 @@ public class LocationTest extends WebTestCase {
             + "<body></body></html>";
 
         webConnection.setResponse(URL_FIRST, html);
-        webConnection.setResponse(new URL(URL_FIRST + "/foo.txt"), "bla bla", "text/plain");
+        webConnection.setResponse(new URL(URL_FIRST + "foo.txt"), "bla bla", "text/plain");
         webClient.setWebConnection(webConnection);
 
         final Page page = webClient.getPage(URL_FIRST);

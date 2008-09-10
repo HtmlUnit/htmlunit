@@ -966,7 +966,7 @@ public class HtmlFormTest extends WebTestCase {
         testUrlAfterSubmit("post", "foo?foo=12", "foo?foo=12");
         testUrlAfterSubmit("post", "", "");
         testUrlAfterSubmit("post", "?a=1&b=2", "?a=1&b=2");
-        testUrlAfterSubmit(new URL("http://first?a=1&b=2"), "post", "", "");
+        testUrlAfterSubmit(new URL("http://first/?a=1&b=2"), "post", "", "");
     }
 
     /**
@@ -1002,8 +1002,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
         final Page page2 = form.submit((HtmlSubmitInput) page.getHtmlElementById("submitButton"));
 
-        assertEquals(url.toExternalForm() + expectedUrlEnd,
-                page2.getWebResponse().getUrl());
+        assertEquals(url.toExternalForm() + expectedUrlEnd, page2.getWebResponse().getUrl());
     }
 
     /**

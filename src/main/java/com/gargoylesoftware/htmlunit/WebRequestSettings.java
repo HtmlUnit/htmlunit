@@ -110,13 +110,25 @@ public class WebRequestSettings implements Serializable {
      */
     @Deprecated
     public void setURL(final URL url) {
-        url_ = url;
+        setUrl(url);
     }
 
     /**
      * @param url the new URL
      */
-    public void setUrl(final URL url) {
+    public void setUrl(URL url) {
+        if (url != null && url.getPath().length() == 0) {
+            try {
+                String file = "/" + url.getFile();
+                if (url.getRef() != null) {
+                    file += '#' + url.getRef();
+                }
+                url = new URL(url.getProtocol(), url.getHost(), url.getPort(), file);
+            }
+            catch (final Exception e) {
+                throw new RuntimeException("WebRequestSettings: Can not set URL: " + url.toExternalForm());
+            }
+        }
         url_ = url;
     }
 

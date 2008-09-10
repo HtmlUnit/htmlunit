@@ -88,7 +88,7 @@ public class HtmlAnchorTest extends WebTestCase {
         final List<NameValuePair> expectedParameters = Collections.emptyList();
         final MockWebConnection webConnection = getMockConnection(secondPage);
 
-        assertEquals("url", "http://www.foo2.com", secondPage.getWebResponse().getUrl());
+        assertEquals("url", "http://www.foo2.com/", secondPage.getWebResponse().getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
         Assert.assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
         assertNotNull(secondPage);
@@ -217,7 +217,7 @@ public class HtmlAnchorTest extends WebTestCase {
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
         final List< ? > expectedParameters = Collections.EMPTY_LIST;
 
-        assertEquals("url", "http://www.foo2.com", secondPage.getWebResponse().getUrl());
+        assertEquals("url", "http://www.foo2.com/", secondPage.getWebResponse().getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
         Assert.assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
         assertNotNull(secondPage);

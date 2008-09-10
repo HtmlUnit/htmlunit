@@ -511,7 +511,7 @@ public class HtmlPageTest extends WebTestCase {
             "Element 'base' must appear in <head>, it is ignored."
         };
         assertEquals(expectedIncorrectness, collectedIncorrectness);
-        assertEquals(URL_FIRST + "/somepage.html", secondPage.getWebResponse().getUrl());
+        assertEquals(URL_FIRST + "somepage.html", secondPage.getWebResponse().getUrl());
     }
 
     /**

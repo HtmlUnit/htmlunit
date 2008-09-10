@@ -687,7 +687,7 @@ public class XMLDocumentTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, content);
-        conn.setResponse(new URL(URL_FIRST.toExternalForm() + "/foo.xml"), xml, "text/xml");
+        conn.setResponse(new URL(URL_FIRST + "foo.xml"), xml, "text/xml");
         client.setWebConnection(conn);
 
         client.getPage(URL_FIRST);

@@ -338,7 +338,7 @@ public class WindowTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent);
-        webConnection.setResponse(new URL("http://fourth"), fourthContent);
+        webConnection.setResponse(new URL("http://fourth/"), fourthContent);
         webClient.setWebConnection(webConnection);
 
         final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
@@ -405,7 +405,7 @@ public class WindowTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent);
-        webConnection.setResponse(new URL("http://fourth"), fourthContent);
+        webConnection.setResponse(new URL("http://fourth/"), fourthContent);
         webClient.setWebConnection(webConnection);
 
         final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
@@ -1146,7 +1146,7 @@ public class WindowTest extends WebTestCase {
             + "alert('parent.third.myVariable = ' + parent.third.myVariable);\n"
             + "}\n"
             + "</script></body></html>";
-        webConnection.setResponse(new URL("http://fourth"), fourthContent);
+        webConnection.setResponse(new URL("http://fourth/"), fourthContent);
 
         webClient.setWebConnection(webConnection);
 
@@ -1213,7 +1213,7 @@ public class WindowTest extends WebTestCase {
             + "alert('fourth-third='+parent.third.document.location);\n"
             + "}\n"
             + "</script></body></html>";
-        webConnection.setResponse(new URL("http://fourth"), fourthContent);
+        webConnection.setResponse(new URL("http://fourth/"), fourthContent);
 
         webClient.setWebConnection(webConnection);
 

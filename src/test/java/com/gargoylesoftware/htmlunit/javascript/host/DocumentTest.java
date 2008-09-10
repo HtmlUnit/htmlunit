@@ -866,7 +866,7 @@ public class DocumentTest extends WebTestCase {
             = "doTest=function () {\n"
             + "    alert(top.document.getElementById('script1').src);\n"
             + "}";
-        webConnection.setResponse(new URL("http://script"), scriptContent, "text/javascript");
+        webConnection.setResponse(new URL("http://script/"), scriptContent, "text/javascript");
 
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -1334,7 +1334,7 @@ public class DocumentTest extends WebTestCase {
 
         final String scriptContent
             = "document.write(\"<div id='div1'></div>\");\n";
-        webConnection.setResponse(new URL("http://script"), scriptContent, "text/javascript");
+        webConnection.setResponse(new URL("http://script/"), scriptContent, "text/javascript");
 
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -1366,7 +1366,7 @@ public class DocumentTest extends WebTestCase {
             + "<script type='text/javascript'>\n"
             + "document.write('<script type=\"text/javascript\" src=\"http://script\"></' + 'script>');\n"
             + "</script></body></html>";
-        webConnection.setResponse(new URL("http://main"), mainContent);
+        webConnection.setResponse(new URL("http://main/"), mainContent);
 
         final String firstContent
             = "<html><body><h1 id='first'>First</h1></body></html>";
@@ -1376,7 +1376,7 @@ public class DocumentTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
 
         final String scriptContent = "document.getElementById('iframe').src = '" + URL_SECOND + "';\n";
-        webConnection.setResponse(new URL("http://script"), scriptContent, "text/javascript");
+        webConnection.setResponse(new URL("http://script/"), scriptContent, "text/javascript");
 
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -1821,7 +1821,7 @@ public class DocumentTest extends WebTestCase {
 
         final String scriptContent
             = "alert(document.getElementsByTagName('script').length);\n";
-        webConnection.setResponse(new URL("http://script"), scriptContent, "text/javascript");
+        webConnection.setResponse(new URL("http://script/"), scriptContent, "text/javascript");
 
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -2618,7 +2618,7 @@ public class DocumentTest extends WebTestCase {
 
         final String[] expectedAlerts = {"foo", "foo2"};
 
-        final URL scriptUrl = new URL(URL_FIRST + "/script.js");
+        final URL scriptUrl = new URL(URL_FIRST + "script.js");
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         client.setWebConnection(webConnection);
@@ -2704,7 +2704,7 @@ public class DocumentTest extends WebTestCase {
     */
     @Test
     public void domainMixedCaseNetscape() throws Exception {
-        final URL urlGargoyleUpperCase = new URL("http://WWW.GARGOYLESOFTWARE.COM");
+        final URL urlGargoyleUpperCase = new URL("http://WWW.GARGOYLESOFTWARE.COM/");
 
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
         final MockWebConnection webConnection = new MockWebConnection();

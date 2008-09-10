@@ -94,9 +94,9 @@ public abstract class WebTestCase {
 
     static {
         try {
-            URL_FIRST = new URL("http://first");
-            URL_SECOND = new URL("http://second");
-            URL_THIRD = new URL("http://third");
+            URL_FIRST = new URL("http://first/");
+            URL_SECOND = new URL("http://second/");
+            URL_THIRD = new URL("http://third/");
             URL_GARGOYLE = new URL("http://www.gargoylesoftware.com/");
         }
         catch (final MalformedURLException e) {
