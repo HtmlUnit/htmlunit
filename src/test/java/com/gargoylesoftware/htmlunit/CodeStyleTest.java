@@ -100,7 +100,7 @@ public class CodeStyleTest {
                     runWith(lines, relativePath);
                     twoEmptyLines(lines, relativePath);
                     vs85aspx(lines, relativePath);
-                    deprecation(lines, relativePath);
+                    deprecated(lines, relativePath);
                 }
             }
         }
@@ -380,18 +380,39 @@ public class CodeStyleTest {
     }
 
     /**
-     * Verifies that deprecated tag is followed by "As of " or "since ".
+     * Verifies that deprecated tag is followed by "As of " or "since ", and '@Deprecated' annotation follows.
      */
-    private void deprecation(final List<String> lines, final String relativePath) {
+    private void deprecated(final List<String> lines, final String relativePath) {
         int i = 0;
         for (String line : lines) {
             line = line.trim().toLowerCase();
-            if (line.startsWith("* @deprecated") && !line.startsWith("* @deprecated as of ")
-                    && !line.startsWith("* @deprecated since ")) {
-                addFailure("@deprecated must be immediately followed by \"As of \" or \"since \" in "
-                    + relativePath + ", line: " + (i + 1));
+            if (line.startsWith("* @deprecated")) {
+                if (!line.startsWith("* @deprecated as of ") && !line.startsWith("* @deprecated since ")) {
+                    addFailure("@deprecated must be immediately followed by \"As of \" or \"since \" in "
+                        + relativePath + ", line: " + (i + 1));
+                }
+                if (!getAnnotations(lines, i).contains("@Deprecated")) {
+                    addFailure("No \"@Deprecated\" annotation for " + relativePath + ", line: " + (i + 1));
+                }
             }
             i++;
         }
+    }
+
+    /**
+     * Returns all annotation lines that comes after the given 'javadoc' line.
+     * @param lines source code lines
+     * @param index the index to start searching from, must be a 'javadoc' line.
+     */
+    private List<String> getAnnotations(final List<String> lines, int index) {
+        final List<String> annotations = new ArrayList<String>();
+        while (!lines.get(index).trim().endsWith("*/")) {
+            index++;
+        }
+        index++;
+        while (lines.get(index).trim().startsWith("@")) {
+            annotations.add(lines.get(index++).trim());
+        }
+        return annotations;
     }
 }
