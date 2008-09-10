@@ -1906,6 +1906,9 @@ public class WebClientTest extends WebTestCase {
      */
     @Test
     public void location_href() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
