@@ -19,11 +19,16 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Callable;
 import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Function;
+import org.mozilla.javascript.IdFunctionObject;
+import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.NativeFunction;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 import org.mozilla.javascript.debug.DebugFrame;
 import org.mozilla.javascript.debug.DebuggableScript;
+
+import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
 /**
  * <p>
@@ -81,23 +86,46 @@ public class DebugFrameImpl implements DebugFrame {
             }
             final String functionName = getFunctionName(thisObj);
             sb.append(functionName).append("(");
-            for (int i = 0; i < args.length; i++) {
-                final String argAsString = stringValue(args[i]);
+            final int nbParams = functionOrScript_.getParamCount();
+            for (int i = 0; i < nbParams; i++) {
+                final String argAsString;
+                if (i < args.length) {
+                    argAsString = stringValue(args[i]);
+                }
+                else {
+                    argAsString = "undefined";
+                }
                 sb.append(getParamName(i)).append(": ").append(argAsString);
-                if (i < args.length - 1) {
+                if (i < nbParams - 1) {
                     sb.append(", ");
                 }
             }
             sb.append(")");
+
             LOG.trace(sb);
         }
     }
 
     private String stringValue(final Object arg) {
+        if (arg instanceof NativeFunction) {
+            // Don't return the string value of the function, because it's usually
+            // multiple lines of content and messes up the log.
+            final String name = StringUtils.defaultIfEmpty(((NativeFunction) arg).getFunctionName(), "anonymous");
+            return "[function " + name + "]";
+        }
+        else if (arg instanceof IdFunctionObject) {
+            return "[function " + ((IdFunctionObject) arg).getFunctionName() + "]";
+        }
+        else if (arg instanceof Function) {
+            return "[function anonymous]";
+        }
         String asString = null;
         try {
             // try to get the js representation
             asString = Context.toString(arg);
+            if (arg instanceof Event) {
+                asString += "<" + ((Event) arg).jsxGet_type() + ">";
+            }
         }
         catch (final Throwable e) {
             // seems to be a bug (many bugs) in rhino (TODO: investigate it)
@@ -111,7 +139,9 @@ public class DebugFrameImpl implements DebugFrame {
      */
     public void onExceptionThrown(final Context cx, final Throwable t) {
         if (LOG.isTraceEnabled()) {
-            LOG.trace("Throwing exception: " + t.getMessage(), t);
+            final JavaScriptException e = (JavaScriptException) t;
+            LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx)
+                + " Exception thrown: " + Context.toString(e.getValue()));
         }
     }
 
