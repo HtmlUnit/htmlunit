@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public class Dojo102Test extends WebTestCase {
 
     private Server server_;
+    private WebClient client_;
 
     private static final String GROUP_DELIMITER = "------------------------------------------------------------";
 
@@ -50,10 +51,10 @@ public class Dojo102Test extends WebTestCase {
      */
     @Test
     public void dojo() throws Exception {
-        final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
+        client_ = new WebClient(BrowserVersion.FIREFOX_2);
         final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/util/doh/runner.html";
 
-        final HtmlPage page = (HtmlPage) client.getPage(url);
+        final HtmlPage page = (HtmlPage) client_.getPage(url);
         page.getEnclosingWindow().getThreadManager().joinAll(10000);
 
         final HtmlElement logBody = page.getHtmlElementById("logBody");
@@ -812,5 +813,6 @@ public class Dojo102Test extends WebTestCase {
     public void tearDown() throws Exception {
         HttpWebConnectionTest.stopWebServer(server_);
         server_ = null;
+        client_.closeAllWindows();
     }
 }

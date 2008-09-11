@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.3-SNAPSHOT" description="Bugfixes, better generics">
+            <action type="add" dev="mguillem">
+                Add facility method WebClient.closeAllWindows().
+            </action>
             <action type="fix" dev="sudhan_moghe">
                 JavaScript: StackOverFlowError when setting html fragment containing BODY tag to innerHTML of
                 an element inside BODY. Updated the parser to ignore HTML, HEAD (with contents in IE) and BODY tag

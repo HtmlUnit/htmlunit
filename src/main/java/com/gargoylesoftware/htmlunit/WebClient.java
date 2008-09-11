@@ -1907,4 +1907,24 @@ public class WebClient implements Serializable {
             // page is not loaded yet, don't set it now as current window
         }
     }
+
+    /**
+     * Closes all opened windows (and therefore stops all background JS processing).
+     */
+    public void closeAllWindows() {
+        // NB: this implementation is too simple as a new TopLevelWindow may be opened by
+        // some JS script while we are closing the others
+        final List<TopLevelWindow> topWindows = new ArrayList<TopLevelWindow>();
+        for (final WebWindow window : windows_) {
+            if (window instanceof TopLevelWindow) {
+                topWindows.add((TopLevelWindow) window);
+            }
+        }
+      
+        for (final TopLevelWindow topWindow : topWindows) {
+            if (windows_.contains(topWindow)) {
+                topWindow.close();
+            }
+        }
+    }
 }

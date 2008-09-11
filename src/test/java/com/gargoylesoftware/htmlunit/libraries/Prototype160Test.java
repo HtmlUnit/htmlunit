@@ -34,10 +34,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class Prototype160Test extends WebTestCase {
 
     private Server server_;
+    private WebClient client_;
 
     /**
      * @throws Exception if test fails
@@ -226,9 +228,9 @@ public class Prototype160Test extends WebTestCase {
 
     private void test(final BrowserVersion browserVersion, final String filename, final int tests,
             final int assertions, final int failures, final int errors) throws Exception {
-        final WebClient client = new WebClient(browserVersion);
+        client_ = new WebClient(browserVersion);
         final HtmlPage page = (HtmlPage)
-            client.getPage("http://localhost:" + HttpWebConnectionTest.PORT + "/test/unit/" + filename);
+            client_.getPage("http://localhost:" + HttpWebConnectionTest.PORT + "/test/unit/" + filename);
         page.getEnclosingWindow().getThreadManager().joinAll(25000);
 
         final String summary = page.getHtmlElementById("logsummary").asText();
@@ -263,5 +265,6 @@ public class Prototype160Test extends WebTestCase {
     public void tearDown() throws Exception {
         HttpWebConnectionTest.stopWebServer(server_);
         server_ = null;
+        client_.closeAllWindows();
     }
 }
