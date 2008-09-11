@@ -261,7 +261,26 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      *         may not be the same as the original page)
      */
     public Page setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected) {
-        if (isSelected) {
+        return setSelectedAttribute(selectedOption, isSelected, true);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Sets the "selected" state of the specified option. If this "select" element
+     * is single-select, then calling this method will deselect all other options.
+     *
+     * Only options that are actually in the document may be selected.
+     *
+     * @param isSelected true if the option is to become selected
+     * @param selectedOption the value of the option that is to change
+     * @param invokeOnFocus whether to set focus or no.
+     * @return the page that occupies this window after this change is made (may or
+     *         may not be the same as the original page)
+     */
+    public Page setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected,
+        final boolean invokeOnFocus) {
+        if (isSelected && invokeOnFocus) {
             ((HtmlPage) getPage()).setFocusedElement(this);
         }
 

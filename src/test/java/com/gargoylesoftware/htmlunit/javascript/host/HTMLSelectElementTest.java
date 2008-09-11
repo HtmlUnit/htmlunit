@@ -984,4 +984,25 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "</body></html>";
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts()
+    public void selectedIndex_onfocus() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var s = document.getElementById('mySelect');\n"
+            + "    s.selectedIndex = 1;\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<body onload='test()'>\n"
+            + "<select id='mySelect' onfocus='alert(1)'><option>hello</option><option>there</option></select>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }

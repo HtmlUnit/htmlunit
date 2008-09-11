@@ -212,7 +212,7 @@ public class HTMLSelectElement extends FormField {
 
         if (index < allOptions.size()) {
             final HtmlOption itemToSelect = allOptions.get(index);
-            htmlSelect.setSelectedAttribute(itemToSelect, true);
+            htmlSelect.setSelectedAttribute(itemToSelect, true, false);
         }
     }
 
