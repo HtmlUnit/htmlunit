@@ -13,6 +13,9 @@
     <packaging>jar</packaging>
     <description>A headless browser intended for use in testing web-based applications.</description>
     <url>http://htmlunit.sourceforge.net</url>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
     <build>
         <plugins>
             <plugin>
