@@ -1920,7 +1920,7 @@ public class WebClient implements Serializable {
                 topWindows.add((TopLevelWindow) window);
             }
         }
-      
+
         for (final TopLevelWindow topWindow : topWindows) {
             if (windows_.contains(topWindow)) {
                 topWindow.close();
