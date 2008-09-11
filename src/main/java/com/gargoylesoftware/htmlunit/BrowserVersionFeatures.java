@@ -20,6 +20,7 @@ package com.gargoylesoftware.htmlunit;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Sudhan Moghe
  */
 public enum BrowserVersionFeatures {
 
@@ -28,6 +29,9 @@ public enum BrowserVersionFeatures {
 
     /** */
     HTMLOPTION_PREVENT_DISABLED,
+
+    /** */
+    IGNORE_CONTENTS_OF_INNER_HEAD,
 
     /**
      * Indicates if href property for a &lt;link rel="stylesheet" type="text/css" href="..." /&gt;

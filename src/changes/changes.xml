@@ -8,6 +8,23 @@
 
     <body>
         <release version="2.3-SNAPSHOT" description="Bugfixes, better generics">
+            <action type="fix" dev="sudhan_moghe">
+                JavaScript: StackOverFlowError when setting html fragment containing BODY tag to innerHTML of
+                an element inside BODY. Updated the parser to ignore HTML, HEAD (with contents in IE) and BODY tag
+                while parsing fragment.
+            </action>
+            <action type="fix" dev="sudhan_moghe">
+                JavaScript: Make innerHTML property read only in IE for following elements col, colgroup,
+                frameset, head, html, style, table, tbody, tfoot, thead, title, tr.
+                Property is writable for all the elements in FF.
+            </action>
+            <action type="fix" dev="sudhan_moghe">
+                JavaScript: Make innerText property read only for following elements html, table, tbody,
+                tfoot, thead, tr. FF do not have the property.
+            </action>
+            <action type="add" dev="sudhan_moghe">
+                JavaScript: Add support for title.text.
+            </action>
             <action type="update" dev="asashour">
                 WebRequestSettings: Add trailing slash to any URL that contains only hostname (with or without port).
             </action>

@@ -104,7 +104,21 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     private String uniqueID_;
 
     /**
-     * The tag names of the objects for which outerHTML is readonly
+     * The tag names of the objects for which innerHTML is read only in IE
+     */
+    private static final List<String> INNER_HTML_READONLY_IN_IE =
+        Arrays.asList(new String[] {
+            "col", "colgroup", "frameset", "head", "html", "style", "table",
+            "tbody", "tfoot", "thead", "title", "tr"});
+
+    /**
+     * The tag names of the objects for which innerText is read only
+     */
+    private static final List<String> INNER_TEXT_READONLY =
+        Arrays.asList(new String[] {"html", "table", "tbody", "tfoot", "thead", "tr"});
+
+    /**
+     * The tag names of the objects for which outerHTML is read only
      */
     private static final List<String> OUTER_HTML_READONLY =
         Arrays.asList(new String[] {
@@ -630,9 +644,13 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     public void jsxSet_innerHTML(final Object value) {
         final DomNode domNode = getDomNodeOrDie();
-        domNode.removeAllChildren();
-
         final BrowserVersion browserVersion = getBrowserVersion();
+
+        if (browserVersion.isIE() && INNER_HTML_READONLY_IN_IE.contains(domNode.getNodeName())) {
+            throw Context.reportRuntimeError("innerHTML is read-only for tag " + domNode.getNodeName());
+        }
+
+        domNode.removeAllChildren();
 
         // null && IE     -> add child
         // null && non-IE -> Don't add
@@ -659,6 +677,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     public void jsxSet_innerText(final String value) {
         final DomNode domNode = getDomNodeOrDie();
+
+        if (INNER_TEXT_READONLY.contains(domNode.getNodeName())) {
+            throw Context.reportRuntimeError("innerText is read-only for tag " + domNode.getNodeName());
+        }
+
         domNode.removeAllChildren();
 
         final DomNode node = new DomText(getDomNodeOrDie().getPage(), value);

@@ -1643,6 +1643,7 @@
 
     <class name="HTMLTitleElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTitleElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTitle">
+        <property name="text" readable="true" writable="true"/>
     </class>
 
     <class name="HTMLUListElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLUListElement"

@@ -14,11 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.DomText;
+
 /**
  * The JavaScript object "HTMLTitleElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Sudhan Moghe
  */
 public class HTMLTitleElement extends HTMLElement {
 
@@ -31,4 +35,31 @@ public class HTMLTitleElement extends HTMLElement {
         // Empty.
     }
 
+    /**
+     * Returns the <tt>text</tt> attribute.
+     * @return the <tt>text</tt> attribute
+     */
+    public String jsxGet_text() {
+        final DomNode firstChild = getHtmlElementOrDie().getFirstChild();
+        if (firstChild != null) {
+            return firstChild.getNodeValue();
+        }
+        return "";
+    }
+
+    /**
+     * Sets the <tt>text</tt> attribute.
+     * @param text the <tt>text</tt> attribute
+     */
+    public void jsxSet_text(final String text) {
+        final DomNode htmlElement = getHtmlElementOrDie();
+        DomNode firstChild = htmlElement.getFirstChild();
+        if (firstChild == null) {
+            firstChild = new DomText(htmlElement.getPage(), text);
+            htmlElement.appendChild(firstChild);
+        }
+        else {
+            firstChild.setNodeValue(text);
+        }
+    }
 }

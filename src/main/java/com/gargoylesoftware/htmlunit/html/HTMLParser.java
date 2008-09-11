@@ -42,6 +42,7 @@ import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.LexicalHandler;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebAssert;
@@ -63,6 +64,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.HTMLBodyElement;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ethan Glasser-Camp
+ * @author Sudhan Moghe
  */
 public final class HTMLParser {
 
@@ -246,7 +248,8 @@ public final class HTMLParser {
             page.registerParsingEnd();
         }
 
-        addBodyToPageIfNecessary(page, true);
+        addBodyToPageIfNecessary(page, true, domBuilder.body_ != null);
+
         return page;
     }
 
@@ -256,8 +259,12 @@ public final class HTMLParser {
      * we may be able to get rid of this code.
      *
      * http://sourceforge.net/tracker/index.php?func=detail&aid=1898038&group_id=195122&atid=952178
+     * @param page
+     * @param originalCall
+     * @param checkInsideFrameOnly true if the original page had body that was removed by JavaScript
      */
-    private static void addBodyToPageIfNecessary(final HtmlPage page, final boolean originalCall) {
+    private static void addBodyToPageIfNecessary(
+            final HtmlPage page, final boolean originalCall, final boolean checkInsideFrameOnly) {
         // IE waits for the whole page to load before initializing bodies for frames.
         final boolean ie = page.getWebClient().getBrowserVersion().isIE();
         if (page.getEnclosingWindow() instanceof FrameWindow && ie && originalCall) {
@@ -275,7 +282,7 @@ public final class HTMLParser {
         }
 
         // If the document does not have a body, add it.
-        if (!hasBody) {
+        if (!hasBody && !checkInsideFrameOnly) {
             final HtmlBody body = new HtmlBody(null, "body", page, null, false);
             doc.appendChild(body);
         }
@@ -286,7 +293,7 @@ public final class HTMLParser {
             for (final FrameWindow frame : page.getFrames()) {
                 final Page containedPage = frame.getEnclosedPage();
                 if (containedPage instanceof HtmlPage) {
-                    addBodyToPageIfNecessary((HtmlPage) containedPage, false);
+                    addBodyToPageIfNecessary((HtmlPage) containedPage, false, false);
                 }
             }
         }
@@ -332,6 +339,7 @@ public final class HTMLParser {
         private DomNode currentNode_;
         private StringBuilder characters_;
         private boolean headParsed_ = false;
+        private boolean parsingInnerHead_ = false;
         private HtmlElement body_;
         private Augmentations augmentations_;
         private HtmlForm formWaitingForLostChildren_;
@@ -416,7 +424,20 @@ public final class HTMLParser {
 
             final String tagLower = localName.toLowerCase();
 
+            if (page_.isParsingHtmlSnippet() && (tagLower.equals("html") || tagLower.equals("body"))) {
+                return;
+            }
+
+            if (parsingInnerHead_ && page_.getWebClient().getBrowserVersion().hasFeature(
+                    BrowserVersionFeatures.IGNORE_CONTENTS_OF_INNER_HEAD)) {
+                return;
+            }
+
             if (tagLower.equals("head")) {
+                if (headParsed_ || page_.isParsingHtmlSnippet()) {
+                    parsingInnerHead_ = true;
+                    return;
+                }
                 headParsed_ = true;
             }
             // add a head if none was there
@@ -477,6 +498,22 @@ public final class HTMLParser {
             throws SAXException {
 
             handleCharacters();
+
+            final String tagLower = localName.toLowerCase();
+
+            if (page_.isParsingHtmlSnippet() && (tagLower.equals("html") || tagLower.equals("body"))) {
+                return;
+            }
+
+            if (parsingInnerHead_) {
+                if (tagLower.equals("head")) {
+                    parsingInnerHead_ = false;
+                }
+                if (tagLower.equals("head") || page_.getWebClient().getBrowserVersion().hasFeature(
+                        BrowserVersionFeatures.IGNORE_CONTENTS_OF_INNER_HEAD)) {
+                    return;
+                }
+            }
 
             final DomNode previousNode = stack_.pop(); //remove currentElement from stack
             previousNode.setEndLocation(locator_.getLineNumber(), locator_.getColumnNumber());
