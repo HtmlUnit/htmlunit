@@ -1308,4 +1308,50 @@ public class XMLHttpRequestTest extends WebTestCase {
         }
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void responseXML_html_select() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>XMLHttpRequest Test</title>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var request;\n"
+            + "        if (window.XMLHttpRequest)\n"
+            + "          request = new XMLHttpRequest();\n"
+            + "        else if (window.ActiveXObject)\n"
+            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        request.open('GET', '" + URL_SECOND + "', false);\n"
+            + "        request.send('');\n"
+            + "        alert(request.responseXML.getElementById('myID').id);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+              "<xml>\n"
+            + "<content id='id1'>blah</content>\n"
+            + "<content>blah2</content>\n"
+            + "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
+            + "<select id='myID'><option>One</option></select>\n"
+            + "</html>\n"
+            + "</xml>";
+        final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(URL_SECOND, xml, "text/xml");
+        client.setWebConnection(conn);
+        client.getPage(URL_FIRST);
+
+        final String[] expectedAlerts = {"myID"};
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

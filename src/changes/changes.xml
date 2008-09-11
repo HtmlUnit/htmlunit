@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.3-SNAPSHOT" description="Bugfixes, better generics">
+            <action type="fix" dev="asashour" id="2105645">
+                Select element can be included as HTML inside XML.
+            </action>
             <action type="fix" dev="asashour" id="2021810">
                 JavaScript: setting select.selectedIndex should not change page focus.
             </action>

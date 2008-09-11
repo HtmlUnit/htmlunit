@@ -452,13 +452,17 @@ public abstract class HtmlElement extends DomElement implements Element {
     public final void removeAttribute(final String attributeName) {
         final String value = getAttributeValue(attributeName);
 
-        ((HtmlPage) getPage()).removeMappedElement(this);
+        if (getPage() instanceof HtmlPage) {
+            ((HtmlPage) getPage()).removeMappedElement(this);
+        }
         attributes_.remove(attributeName.toLowerCase());
-        ((HtmlPage) getPage()).addMappedElement(this);
+        if (getPage() instanceof HtmlPage) {
+            ((HtmlPage) getPage()).addMappedElement(this);
 
-        final HtmlAttributeChangeEvent event = new HtmlAttributeChangeEvent(this, attributeName, value);
-        fireHtmlAttributeRemoved(event);
-        ((HtmlPage) getPage()).fireHtmlAttributeRemoved(event);
+            final HtmlAttributeChangeEvent event = new HtmlAttributeChangeEvent(this, attributeName, value);
+            fireHtmlAttributeRemoved(event);
+            ((HtmlPage) getPage()).fireHtmlAttributeRemoved(event);
+        }
     }
 
     /**
