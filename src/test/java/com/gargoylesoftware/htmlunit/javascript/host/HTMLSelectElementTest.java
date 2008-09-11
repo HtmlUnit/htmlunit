@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static org.junit.Assert.assertSame;
-import static org.junit.Assert.fail;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -23,14 +22,17 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
@@ -49,14 +51,16 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
+@RunWith(BrowserRunner.class)
 public class HTMLSelectElementTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "3", "1" })
     public void testGetSelectedIndex() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.form1.select1.length);\n"
@@ -72,13 +76,7 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals("foo", page.getTitleText());
-
-        final String[] expectedAlerts = {"3", "1"};
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -86,7 +84,7 @@ public class HTMLSelectElementTest extends WebTestCase {
      */
     @Test
     public void testSetSelectedIndex() throws Exception {
-        final String content
+        final String hrml
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.form1.select1.length);\n"
@@ -108,7 +106,7 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(getBrowserVersion(), hrml, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
         final String[] expectedAlerts = {"3", "1", "3", "2"};
@@ -128,7 +126,7 @@ public class HTMLSelectElementTest extends WebTestCase {
      */
     @Test
     public void testSetSelectedIndexInvalidValue() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    document.form1.select1.selectedIndex = -1;\n"
@@ -145,7 +143,7 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(content);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
         final HtmlSubmitInput button = (HtmlSubmitInput) page.getHtmlElementById("clickMe");
         final HtmlPage newPage = (HtmlPage) button.click();
 
@@ -156,8 +154,9 @@ public class HTMLSelectElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "value1", "One", "value2", "Two", "value3", "Three" })
     public void testGetOptions() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var options = document.form1.select1.options;\n"
@@ -175,22 +174,16 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals("foo", page.getTitleText());
-
-        final String[] expectedAlerts = {"value1", "One", "value2", "Two", "value3", "Three"};
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "value1", "OneLabel", "value2", "TwoLabel", "value3", "ThreeLabel" })
     public void testGetOptionLabel() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var options = document.form1.select1.options;\n"
@@ -208,22 +201,16 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals("foo", page.getTitleText());
-
-        final String[] expectedAlerts = {"value1", "OneLabel", "value2", "TwoLabel", "value3", "ThreeLabel"};
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "false", "true", "true", "false" })
     public void testGetOptionSelected() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var options = document.form1.select1.options;\n"
@@ -243,21 +230,16 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-
-        final String[] expectedAlerts = {"false", "true", "true", "false"};
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("true")
     public void testGetOptionByIndex() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>first</title><script language='JavaScript'>\n"
             //+ "//<!--"
             + "function buggy(){\n"
@@ -270,19 +252,16 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "<OPTION value='A'>111</OPTION>\n"
             + "<OPTION value='B'>222</OPTION>\n"
             + "</SELECT></form></body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-
-        assertEquals("first", page.getTitleText());
-        assertEquals(new String[] {"true"}, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("One")
     public void testGetOptionByOptionIndex() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>first</title><script language='JavaScript'>\n"
             //+ "//<!--"
             + "function buggy(){\n"
@@ -299,18 +278,16 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</form></body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals("first", page.getTitleText());
-        assertEquals(new String[] {"One"}, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "4", "Four", "value4" })
     public void testAddOption() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var options = document.form1.select1.options;\n"
@@ -329,22 +306,16 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals("foo", page.getTitleText());
-
-        final String[] expectedAlerts = {"4", "Four", "value4"};
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "1", "true", "4", "Four", "value4", "true", "3", "false" })
     public void testAddOptionSelected() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var oSelect = document.form1.select1;\n"
@@ -372,22 +343,17 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"1", "true", "4", "Four", "value4", "true", "3", "false"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals("foo", page.getTitleText());
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "4", "Four", "value4" })
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     public void testAddOptionWithAddMethod_FF() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var options = document.form1.select1;\n"
@@ -406,14 +372,7 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"4", "Four", "value4"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -421,8 +380,10 @@ public class HTMLSelectElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "4", "Four", "value4", "Three b", "value3b" })
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     public void testAddOptionWithAddMethod_IE() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var oSelect = document.form1.select1;\n"
@@ -443,14 +404,7 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"4", "Four", "value4", "Three b", "value3b"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -459,8 +413,10 @@ public class HTMLSelectElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "0", "1" })
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     public void testAddWith1Arg() throws Exception {
-        final String content
+        final String html
             = "<html><head>\n"
             + "<script>\n"
             + "function test()\n"
@@ -479,22 +435,16 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "<select name='testSelect'></select>\n"
             + "</form>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"0", "1"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "2", "Three", "value3" })
     public void testRemoveOption() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var options = document.form1.select1.options;\n"
@@ -512,21 +462,16 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals("foo", page.getTitleText());
-
-        final String[] expectedAlerts = {"2", "Three", "value3"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "2", "Three", "value3" })
     public void testRemoveOptionWithRemoveMethod() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var options = document.form1.select1;\n"
@@ -544,21 +489,16 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals("foo", page.getTitleText());
-
-        final String[] expectedAlerts = {"2", "Three", "value3"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("0")
     public void testClearOptions() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var options = document.form1.select1.options;\n"
@@ -574,23 +514,18 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals("foo", page.getTitleText());
-
-        final String[] expectedAlerts = {"0"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
-     * Test that option array is filled with empty options when lenght is increased.
+     * Test that option array is filled with empty options when length is increased.
      * Test case for bug 1370484
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "1", "2", "", "", "foo", "fooValue" })
     public void testIncreaseOptionsSettingLength() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var options = document.form1.select1.options;\n"
@@ -612,22 +547,16 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"1", "2", "", "", "foo", "fooValue"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "One", "value1" })
     public void testOptionArrayHasItemMethod() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var options = document.form1.select1.options;\n"
@@ -643,21 +572,16 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals("foo", page.getTitleText());
-
-        final String[] expectedAlerts = {"One", "value1"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "Two", "", "Two", "", "" })
     public void testGetValue() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    for (var i=1; i<6; i++)\n"
@@ -686,14 +610,7 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"Two", "", "Two", "", ""};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -702,7 +619,7 @@ public class HTMLSelectElementTest extends WebTestCase {
      */
     @Test
     public void testNoOnchangeFromJS() throws Exception {
-        final String content = "<html><head><title>Test infinite loop on js onchange</title></head>\n"
+        final String html = "<html><head><title>Test infinite loop on js onchange</title></head>\n"
             + "<body><form name='myForm'>\n"
             + "<select name='a' onchange='this.form.b.selectedIndex=0'>\n"
             + "<option value='1'>one</option>\n"
@@ -716,7 +633,7 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
         final HtmlSelect selectA = page.getFormByName("myForm").getSelectByName("a");
         final HtmlOption optionA2 = selectA.getOption(1);
 
@@ -739,8 +656,9 @@ public class HTMLSelectElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "0", "1" })
     public void testSetValue() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.form1.select1.selectedIndex);\n"
@@ -755,14 +673,7 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"0", "1"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals("foo", page.getTitleText());
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -771,7 +682,7 @@ public class HTMLSelectElementTest extends WebTestCase {
      */
     @Test
     public void testRightPageAfterOnchange() throws Exception {
-        final String content
+        final String html
             = "<html><body>\n"
             + "<iframe src='fooIFrame.html'></iframe>\n"
             + "<form name='form1' action='http://first' method='post'>\n"
@@ -782,11 +693,11 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
         webConnection.setDefaultResponse("<html><body></body></html>");
-        webConnection.setResponse(URL_FIRST, content);
+        webConnection.setResponse(URL_FIRST, html);
         webClient.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
@@ -801,8 +712,10 @@ public class HTMLSelectElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "2-2", "1-1", "2-2", "0-0", "2-2", "1-1" })
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     public void testOptionsDelegateToSelect() throws Exception {
-        final String content
+        final String html
             = "<html><head>\n"
             + "<script>\n"
             + "function doTest() {\n"
@@ -828,21 +741,7 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "<option selected='selected'>b</option>"
             + "</select></form>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"2-2", "1-1", "2-2", "0-0", "2-2", "1-1"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
-
-        try {
-            loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-            fail("Should have thrown a JS error");
-        }
-        catch (final ScriptException e) {
-            // that's ok
-        }
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -850,8 +749,9 @@ public class HTMLSelectElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "2", "b", "3", "c" })
     public void testOptionsArrayAdd() throws Exception {
-        final String content
+        final String html
             = "<html><head>\n"
             + "<script>\n"
             + "function doTest() {\n"
@@ -876,13 +776,7 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "<option selected='selected'>b</option>\n"
             + "</select></form>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"2", "b", "3", "c"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -891,7 +785,7 @@ public class HTMLSelectElementTest extends WebTestCase {
      */
     @Test
     public void testOnChangeCallsFormSubmit() throws Exception {
-        final String content
+        final String html
             = "<html><head>\n"
             + "</head>\n"
             + "<body>\n"
@@ -902,11 +796,11 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "</select></form>\n"
             + "</body></html>";
 
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
         webConnection.setDefaultResponse("<html><title>page 2</title><body></body></html>");
-        webConnection.setResponse(URL_FIRST, content);
+        webConnection.setResponse(URL_FIRST, html);
         webClient.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
@@ -920,7 +814,7 @@ public class HTMLSelectElementTest extends WebTestCase {
      */
     @Test
     public void testSelectedIndexReset() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>first</title></head>\n"
             + "<body onload='document.forms[0].testSelect.selectedIndex = -1; "
             + "document.forms[0].testSelect.options[0].selected=true;'>\n"
@@ -932,7 +826,7 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(content);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
         final Page page2 = ((ClickableElement) page.getHtmlElementById("testButton")).click();
         final URL url2 = page2.getWebResponse().getUrl();
         assertTrue("Select in URL " + url2, url2.toExternalForm().contains("testSelect=testValue"));
@@ -942,6 +836,7 @@ public class HTMLSelectElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("-1")
     public void testSelectedIndex() throws Exception {
         final String html =
             "<html><head>\n"
@@ -956,10 +851,7 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "<body onload='test()'>\n"
             + "<select id='mySelect'><option>hello</option></select>\n"
             + "</body></html>";
-        final String[] expectedAlerts = {"-1"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -1042,7 +934,7 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
         final List<String> actual = new ArrayList<String>();
-        loadPage(html, actual);
+        loadPage(getBrowserVersion(), html, actual);
         assertEquals(expected, actual);
     }
 
@@ -1050,8 +942,9 @@ public class HTMLSelectElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("5")
     public void testSize() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var select = document.getElementById('mySelect');\n"
             + "    alert(select.size + 5);//to test if int or string\n"
@@ -1059,16 +952,14 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "<select id='mySelect'/>\n"
             + "</body></html>";
-        final String[] expectedAlerts = {"5"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({ "true", "false", "false" })
     public void testMultiple() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -1091,9 +982,6 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-        final String[] expected = {"true", "false", "false"};
-        final List<String> actual = new ArrayList<String>();
-        loadPage(html, actual);
-        assertEquals(expected, actual);
+        loadPageWithAlerts(html);
     }
 }
