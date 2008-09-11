@@ -19,8 +19,9 @@ import static org.junit.Assert.assertNotNull;
 import java.net.URL;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
@@ -30,6 +31,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Gareth Davis
  */
+@RunWith(BrowserRunner.class)
 public class CurvyCornersTest extends WebTestCase {
 
     private static final String BASE_FILE_PATH = "curvyCorners/1.2.9-beta/";
@@ -38,55 +40,23 @@ public class CurvyCornersTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void demoIE7() throws Exception {
-        doTest("demo.html", BrowserVersion.INTERNET_EXPLORER_7_0);
+    public void demo() throws Exception {
+        doTest("demo.html");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void demo2IE7() throws Exception {
-        doTest("demo2.html", BrowserVersion.INTERNET_EXPLORER_7_0);
+    public void demo2() throws Exception {
+        doTest("demo2.html");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void demoDefault() throws Exception {
-        doTest("demo.html", BrowserVersion.getDefault());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void demo2Default() throws Exception {
-        doTest("demo2.html", BrowserVersion.getDefault());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void demoFF2() throws Exception {
-        doTest("demo.html", BrowserVersion.FIREFOX_2);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void demo2FF2() throws Exception {
-        doTest("demo2.html", BrowserVersion.FIREFOX_2);
-    }
-
-    private void doTest(final String fileName, final BrowserVersion version) throws Exception {
+    private void doTest(final String fileName) throws Exception {
         final URL url = getClass().getClassLoader().getResource(BASE_FILE_PATH + fileName);
         assertNotNull(url);
 
-        final WebClient client = new WebClient(version);
+        final WebClient client = getWebClient();
         client.getPage(url);
     }
 
