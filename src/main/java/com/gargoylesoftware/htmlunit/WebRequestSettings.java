@@ -300,7 +300,7 @@ public class WebRequestSettings implements Serializable {
         buffer.append(ClassUtils.getShortClassName(getClass()));
 
         buffer.append("[<");
-        buffer.append("url=\"" + url_.toExternalForm() + "\"");
+        buffer.append("url=\"" + url_ + '"');
         buffer.append(", " + httpMethod_);
         buffer.append(", " + encodingType_);
         buffer.append(", " + requestParameters_);

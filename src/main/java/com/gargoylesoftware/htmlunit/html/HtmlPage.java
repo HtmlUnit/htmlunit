@@ -1016,7 +1016,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         }
         catch (final IOException e) {
             if (mainLog_.isErrorEnabled()) {
-                mainLog_.error("Error loading JavaScript from [" + url.toExternalForm() + "].", e);
+                mainLog_.error("Error loading JavaScript from [" + url + "].", e);
             }
             return null;
         }

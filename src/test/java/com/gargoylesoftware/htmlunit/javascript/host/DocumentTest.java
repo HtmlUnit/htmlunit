@@ -2836,9 +2836,9 @@ public class DocumentTest extends WebTestCase {
             + "</html>";
 
         final URL baseURL = new URL("http://base/subdir/");
-        final URL framesetURL = new URL(baseURL.toExternalForm() + "test.html");
-        final URL frameURL = new URL(baseURL.toExternalForm() + "frame.html");
-        final URL blankURL = new URL(baseURL.toExternalForm() + "blank.html");
+        final URL framesetURL = new URL(baseURL + "test.html");
+        final URL frameURL = new URL(baseURL + "frame.html");
+        final URL blankURL = new URL(baseURL + "blank.html");
 
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection();

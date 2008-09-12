@@ -831,7 +831,7 @@ public class WebClientTest extends WebTestCase {
 
         // Test a file URL with a query portion (needs to work for Dojo, for example).
 
-        final URL url2 = new URL(url.toExternalForm() + "?with=query");
+        final URL url2 = new URL(url + "?with=query");
         final HtmlPage page2 = client.getPage(url2);
 
         assertEquals(htmlContent, page2.getWebResponse().getContentAsString());
@@ -841,7 +841,7 @@ public class WebClientTest extends WebTestCase {
 
         // Test a file URL with a ref portion (needs to work for Dojo, for example).
 
-        final URL url3 = new URL(url.toExternalForm() + "#reference");
+        final URL url3 = new URL(url + "#reference");
         final HtmlPage page3 = client.getPage(url3);
 
         assertEquals(htmlContent, page3.getWebResponse().getContentAsString());

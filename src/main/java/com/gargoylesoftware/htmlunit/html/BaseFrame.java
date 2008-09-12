@@ -120,7 +120,7 @@ public abstract class BaseFrame extends StyledElement {
             catch (final IOException e) {
                 if (mainLog_.isErrorEnabled()) {
                     mainLog_.error("IOException when getting content for " + getTagName()
-                            + ": url=[" + url.toExternalForm() + "]", e);
+                            + ": url=[" + url + "]", e);
                 }
             }
         }
