@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.3-SNAPSHOT" description="Bugfixes, better generics">
+        <release version="2.3-SNAPSHOT" description="Bugfixes, better generics, firefox3">
             <action type="fix" dev="asashour">
                 HtmlTextArea: replace new lines with '%0D%0A' and remove first occurrence in form submission.
             </action>
