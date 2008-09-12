@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.Serializable;
+
 import org.w3c.css.sac.CSSParseException;
 import org.w3c.css.sac.ErrorHandler;
 
@@ -24,7 +26,10 @@ import org.w3c.css.sac.ErrorHandler;
  * @author Daniel Gredler
  * @see DefaultCssErrorHandler
  */
-public class SilentCssErrorHandler implements ErrorHandler {
+public class SilentCssErrorHandler implements ErrorHandler, Serializable {
+
+    /** Serial version UID. */
+    private static final long serialVersionUID = -1338175203288447931L;
 
     /**
      * {@inheritDoc}

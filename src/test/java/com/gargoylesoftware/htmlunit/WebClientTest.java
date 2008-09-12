@@ -1911,7 +1911,6 @@ public class WebClientTest extends WebTestCase {
      */
     @Test
     public void testCssErrorHandler() throws Exception {
-
         final WebClient client = new WebClient();
         assertTrue(client.getCssErrorHandler() instanceof DefaultCssErrorHandler);
 

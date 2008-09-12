@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.Serializable;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.css.sac.CSSParseException;
@@ -26,7 +28,10 @@ import org.w3c.css.sac.ErrorHandler;
  * @author Daniel Gredler
  * @see SilentCssErrorHandler
  */
-public class DefaultCssErrorHandler implements ErrorHandler {
+public class DefaultCssErrorHandler implements ErrorHandler, Serializable {
+
+    /**Serial version UID. */
+    private static final long serialVersionUID = 4655126263007765782L;
 
     /** Logging support. */
     private final Log log_ = LogFactory.getLog(DefaultCssErrorHandler.class);
