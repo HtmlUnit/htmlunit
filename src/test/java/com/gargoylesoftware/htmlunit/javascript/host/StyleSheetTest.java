@@ -23,7 +23,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.w3c.css.sac.InputSource;
 import org.w3c.css.sac.Selector;
-import org.w3c.css.sac.SelectorList;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -37,6 +36,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 
 /**
  * Unit tests for {@link Stylesheet}.
@@ -55,7 +55,7 @@ public class StyleSheetTest extends WebTestCase {
     @Browsers(Browser.NONE)
     public void selects_miscSelectors() throws Exception {
         final String html = "<html><head><title>test</title>\n"
-            + "</head><body>\n"
+            + "</head><body><style></style>\n"
             + "<form name='f1' action='foo' class='yui-log'>\n"
             + "<div><div><input name='i1' id='m1'></div></div>\n"
             + "<input name='i2' class='yui-log'>\n"
@@ -72,18 +72,21 @@ public class StyleSheetTest extends WebTestCase {
         final HtmlElement button1 = page.getHtmlElementsByName("b1").get(0);
         final HtmlElement button2 = page.getHtmlElementsByName("b2").get(0);
 
-        final Stylesheet stylesheet = new Stylesheet();
-        Selector selector = parseSelector("*.yui-log input { }");
-        assertFalse(stylesheet.selects(selector, body));
-        assertFalse(stylesheet.selects(selector, form));
-        assertTrue(stylesheet.selects(selector, input1));
-        assertTrue(stylesheet.selects(selector, input2));
-        assertFalse(stylesheet.selects(selector, button1));
-        assertFalse(stylesheet.selects(selector, button2));
+        final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
+        final HTMLStyleElement host = (HTMLStyleElement) node.getScriptObject();
+        final Stylesheet sheet = host.jsxGet_sheet();
 
-        selector = parseSelector("#m1 { margin: 3px; }");
-        assertTrue(stylesheet.selects(selector, input1));
-        assertFalse(stylesheet.selects(selector, input2));
+        Selector selector = sheet.parseSelectors(new InputSource(new StringReader("*.yui-log input { }"))).item(0);
+        assertFalse(sheet.selects(selector, body));
+        assertFalse(sheet.selects(selector, form));
+        assertTrue(sheet.selects(selector, input1));
+        assertTrue(sheet.selects(selector, input2));
+        assertFalse(sheet.selects(selector, button1));
+        assertFalse(sheet.selects(selector, button2));
+
+        selector = sheet.parseSelectors(new InputSource(new StringReader("#m1 { margin: 3px; }"))).item(0);
+        assertTrue(sheet.selects(selector, input1));
+        assertFalse(sheet.selects(selector, input2));
     }
 
     /**
@@ -155,21 +158,17 @@ public class StyleSheetTest extends WebTestCase {
 
     private void testSelects(final String css, final boolean b, final boolean d, final boolean s) throws Exception {
         final String html =
-              "<html><body id='b'>\n"
+              "<html><body id='b'><style></style>\n"
             + "<div id='d' class='foo bar'><span>x</span><span id='s'>a</span>b</div>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(html);
-        final Selector selector = parseSelector(css);
-        final Stylesheet sheet = new Stylesheet();
+        final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
+        final HTMLStyleElement host = (HTMLStyleElement) node.getScriptObject();
+        final Stylesheet sheet = host.jsxGet_sheet();
+        final Selector selector = sheet.parseSelectors(new InputSource(new StringReader(css))).item(0);
         assertEquals(b, sheet.selects(selector, page.getHtmlElementById("b")));
         assertEquals(d, sheet.selects(selector, page.getHtmlElementById("d")));
         assertEquals(s, sheet.selects(selector, page.getHtmlElementById("s")));
-    }
-
-    private Selector parseSelector(final String rule) {
-        final Stylesheet stylesheet = new Stylesheet();
-        final SelectorList selectors = stylesheet.parseSelectors(new InputSource(new StringReader(rule)));
-        return selectors.item(0);
     }
 
     /**

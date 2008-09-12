@@ -52,6 +52,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.w3c.css.sac.ErrorHandler;
 
 import com.gargoylesoftware.htmlunit.attachment.AttachmentHandler;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
@@ -144,6 +145,7 @@ public class WebClient implements Serializable {
     private final Stack<WebWindow> windows_ = new Stack<WebWindow>();
     private int timeout_;
     private HTMLParserListener htmlParserListener_;
+    private ErrorHandler cssErrorHandler_ = new DefaultCssErrorHandler();
     private OnbeforeunloadHandler onbeforeunloadHandler_;
     private Cache cache_ = new Cache();
 
@@ -1672,6 +1674,27 @@ public class WebClient implements Serializable {
      */
     public HTMLParserListener getHTMLParserListener() {
         return htmlParserListener_;
+    }
+
+    /**
+     * Returns the CSS error handler used by this web client when CSS problems are encountered.
+     * @return the CSS error handler used by this web client when CSS problems are encountered
+     * @see DefaultCssErrorHandler
+     * @see SilentCssErrorHandler
+     */
+    public ErrorHandler getCssErrorHandler() {
+        return cssErrorHandler_;
+    }
+
+    /**
+     * Sets the CSS error handler used by this web client when CSS problems are encountered.
+     * @param cssErrorHandler the CSS error handler used by this web client when CSS problems are encountered
+     * @see DefaultCssErrorHandler
+     * @see SilentCssErrorHandler
+     */
+    public void setCssErrorHandler(final ErrorHandler cssErrorHandler) {
+        WebAssert.notNull("cssErrorHandler", cssErrorHandler);
+        cssErrorHandler_ = cssErrorHandler;
     }
 
     /**

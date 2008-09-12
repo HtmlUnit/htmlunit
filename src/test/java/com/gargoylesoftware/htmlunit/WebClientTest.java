@@ -38,12 +38,16 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.mutable.MutableInt;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.w3c.css.sac.CSSException;
+import org.w3c.css.sac.CSSParseException;
+import org.w3c.css.sac.ErrorHandler;
 
 import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
@@ -52,6 +56,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.SubmittableElement;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLStyleElement;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -1899,6 +1904,49 @@ public class WebClientTest extends WebTestCase {
         final WebClient client = new WebClient(browserVersion);
         final WebWindow window = client.openWindow(WebClient.URL_ABOUT_BLANK, "TestingWindow");
         Assert.assertNotNull(window);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testCssErrorHandler() throws Exception {
+
+        final WebClient client = new WebClient();
+        assertTrue(client.getCssErrorHandler() instanceof DefaultCssErrorHandler);
+
+        final MutableInt errors = new MutableInt();
+        final ErrorHandler handler = new ErrorHandler() {
+            public void warning(final CSSParseException exception) throws CSSException {
+                errors.increment();
+            }
+            public void fatalError(final CSSParseException exception) throws CSSException {
+                errors.increment();
+            }
+            public void error(final CSSParseException exception) throws CSSException {
+                errors.increment();
+            }
+        };
+        client.setCssErrorHandler(handler);
+        assertEquals(handler, client.getCssErrorHandler());
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, "<html><body><style></style></body></html>");
+        conn.setResponse(URL_SECOND, "<html><body><style>.x{color:red;}</style></body></html>");
+        conn.setResponse(URL_THIRD, "<html><body><style>.x{color</style></body></html>");
+        client.setWebConnection(conn);
+
+        final HtmlPage page1 = client.getPage(URL_FIRST);
+        ((HTMLStyleElement) page1.getBody().getFirstChild().getScriptObject()).jsxGet_sheet();
+        assertEquals(0, errors.intValue());
+
+        final HtmlPage page2 = client.getPage(URL_SECOND);
+        ((HTMLStyleElement) page2.getBody().getFirstChild().getScriptObject()).jsxGet_sheet();
+        assertEquals(0, errors.intValue());
+
+        final HtmlPage page3 = client.getPage(URL_THIRD);
+        ((HTMLStyleElement) page3.getBody().getFirstChild().getScriptObject()).jsxGet_sheet();
+        assertEquals(3, errors.intValue());
     }
 
 }

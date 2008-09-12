@@ -19,10 +19,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.w3c.css.sac.AttributeCondition;
-import org.w3c.css.sac.CSSParseException;
 import org.w3c.css.sac.CombinatorCondition;
 import org.w3c.css.sac.Condition;
 import org.w3c.css.sac.ConditionalSelector;
@@ -74,25 +71,8 @@ public class Stylesheet extends SimpleScriptable {
     /** The HTML element which owns this stylesheet. */
     private final HTMLElement ownerNode_;
 
+    /** The collection of rules defined in this style sheet. */
     private com.gargoylesoftware.htmlunit.javascript.host.CSSRuleList cssRules_;
-
-    private static final ErrorHandler CSS_ERROR_HANDLER = new ErrorHandler() {
-        private final Log log_ = LogFactory.getLog(Stylesheet.class);
-        public void error(final CSSParseException exception) {
-            log_.warn("CSS error: " + buildMessage(exception));
-        }
-        public void fatalError(final CSSParseException exception) {
-            log_.warn("CSS fatal error: " + buildMessage(exception));
-        }
-        public void warning(final CSSParseException exception) {
-            log_.warn("CSS warning: " + buildMessage(exception));
-        }
-        private String buildMessage(final CSSParseException exception) {
-            return exception.getURI()
-                + " [" + exception.getLineNumber() + ":" + exception.getColumnNumber() + "] "
-                + exception.getMessage();
-        }
-    };
 
     /**
      * Creates a new empty stylesheet.
@@ -108,10 +88,10 @@ public class Stylesheet extends SimpleScriptable {
      * @param source the input source which contains the CSS stylesheet which this stylesheet host object represents
      */
     public Stylesheet(final HTMLElement element, final InputSource source) {
-        wrapped_ = parseCSS(source);
-        ownerNode_ = element;
         setParentScope(element.getWindow());
         setPrototype(getPrototype(Stylesheet.class));
+        wrapped_ = parseCSS(source);
+        ownerNode_ = element;
     }
 
     /**
@@ -120,10 +100,10 @@ public class Stylesheet extends SimpleScriptable {
      * @param wrapped the CSS stylesheet which this stylesheet host object represents
      */
     public Stylesheet(final HTMLElement element, final CSSStyleSheet wrapped) {
-        wrapped_ = wrapped;
-        ownerNode_ = element;
         setParentScope(element.getWindow());
         setPrototype(getPrototype(Stylesheet.class));
+        wrapped_ = wrapped;
+        ownerNode_ = element;
     }
 
     /**
@@ -309,8 +289,9 @@ public class Stylesheet extends SimpleScriptable {
     private CSSStyleSheet parseCSS(final InputSource source) {
         CSSStyleSheet ss;
         try {
+            final ErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
             final CSSOMParser parser = new CSSOMParser(new SACParserCSS21());
-            parser.setErrorHandler(CSS_ERROR_HANDLER);
+            parser.setErrorHandler(errorHandler);
             ss = parser.parseStyleSheet(source, null, null);
         }
         catch (final Exception e) {
@@ -335,8 +316,9 @@ public class Stylesheet extends SimpleScriptable {
     SelectorList parseSelectors(final InputSource source) {
         SelectorList selectors;
         try {
+            final ErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
             final CSSOMParser parser = new CSSOMParser(new SACParserCSS21());
-            parser.setErrorHandler(CSS_ERROR_HANDLER);
+            parser.setErrorHandler(errorHandler);
             selectors = parser.parseSelectors(source);
         }
         catch (final Exception e) {
@@ -396,16 +378,16 @@ public class Stylesheet extends SimpleScriptable {
     }
 
     /**
-     * Retrieves a collection of rules defined in a style sheet.
-     * @return a collection of rules defined in a style sheet.
+     * Retrieves the collection of rules defined in this style sheet.
+     * @return the collection of rules defined in this style sheet
      */
     public com.gargoylesoftware.htmlunit.javascript.host.CSSRuleList jsxGet_rules() {
         return jsxGet_cssRules();
     }
 
     /**
-     * Returns a collection of rules defined in a style sheet.
-     * @return a collection of rules defined in a style sheet.
+     * Returns the collection of rules defined in this style sheet.
+     * @return the collection of rules defined in this style sheet
      */
     public com.gargoylesoftware.htmlunit.javascript.host.CSSRuleList jsxGet_cssRules() {
         if (cssRules_ == null) {
