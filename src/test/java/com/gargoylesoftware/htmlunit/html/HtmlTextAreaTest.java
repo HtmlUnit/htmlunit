@@ -41,11 +41,18 @@ public class HtmlTextAreaTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testFormSubmission_OriginalData() throws Exception {
+    public void formSubmission() throws Exception {
+        formSubmission("foo", "foo");
+        formSubmission("\r\nfoo\r\n", "foo%0D%0A");
+        formSubmission("\nfoo\n", "foo%0D%0A");
+        formSubmission("\r\n\r\nfoo\r\n", "%0D%0Afoo%0D%0A");
+    }
+
+    private void formSubmission(final String textAreaText, final String expectedValue) throws Exception {
         final String content
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
-            + "<textarea name='textArea1'>foo</textarea>\n"
+            + "<textarea name='textArea1'>" + textAreaText + "</textarea>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(content);
         final MockWebConnection webConnection = getMockConnection(page);
@@ -56,7 +63,7 @@ public class HtmlTextAreaTest extends WebTestCase {
 
         final Page secondPage = form.submit((SubmittableElement) null);
 
-        assertEquals("url", URL_GARGOYLE + "?textArea1=foo", secondPage.getWebResponse().getUrl());
+        assertEquals("url", URL_GARGOYLE + "?textArea1=" + expectedValue, secondPage.getWebResponse().getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
     }
 

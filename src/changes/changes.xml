@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.3-SNAPSHOT" description="Bugfixes, better generics">
+            <action type="fix" dev="asashour">
+                HtmlTextArea: replace new lines with '%0D%0A' and remove first occurrence in form submission.
+            </action>
             <action type="fix" dev="sdanig" id="2101735">
                 JavaScript: when setting location.href, if the only real change is in the hash then just change the hash
                 and don't hit the server.

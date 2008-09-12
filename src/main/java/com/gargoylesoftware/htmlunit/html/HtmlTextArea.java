@@ -134,7 +134,12 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * {@inheritDoc}
      */
     public NameValuePair[] getSubmitKeyValuePairs() {
-        return new NameValuePair[]{new NameValuePair(getNameAttribute(), getText())};
+        String text = getText();
+        text = text.replace("\r\n", "\n").replace("\n", "\r\n");
+        if (text.startsWith("\r\n")) {
+            text = text.substring(2);
+        }
+        return new NameValuePair[]{new NameValuePair(getNameAttribute(), text)};
     }
 
     /**
