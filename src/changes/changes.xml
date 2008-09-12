@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.3-SNAPSHOT" description="Bugfixes, better generics">
+            <action type="update" dev="asashour">
+                Upgrade NekoHtml to 1.9.9.
+            </action>
             <action type="fix" dev="asashour" id="2105645">
                 Select element can be included as HTML inside XML.
             </action>

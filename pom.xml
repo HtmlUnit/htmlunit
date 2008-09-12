@@ -448,7 +448,7 @@
         <dependency>
             <groupId>net.sourceforge.nekohtml</groupId>
             <artifactId>nekohtml</artifactId>
-            <version>1.9.9-SNAPSHOT</version>
+            <version>1.9.9</version>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.cssparser</groupId>
@@ -562,16 +562,6 @@
             <id>htmlUnitSnapshots</id>
             <name>HtmlUnit Snapshots</name>
             <url>http://htmlunit.sourceforge.net/m2-repo-snapshots</url>
-            <layout>default</layout>
-        </repository>
-        <repository>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-            <id>NekoHTMLSnapshots</id>
-            <name>NekoHTML Snapshots</name>
-            <url>http://build.canoo.com/NekoHTML/artifacts/m2-repo</url>
             <layout>default</layout>
         </repository>
     </repositories>
