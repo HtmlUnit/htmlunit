@@ -29,6 +29,11 @@ import java.util.Map;
 import org.apache.commons.httpclient.NameValuePair;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mozilla.javascript.BaseFunction;
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Function;
+import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.ScriptableObject;
 
 import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -2656,6 +2661,72 @@ public class WindowTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Regression test for bug #2093370 with clearInterval.
+     * @see <a href="http://sourceforge.net/tracker/index.php?func=detail&aid=2093370&group_id=47038&atid=448266">
+     * bug details</a>
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void clearInterval_threadInterrupt() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        doTestClearX_threadInterrupt("Interval");
+    }
+
+    /**
+     * Regression test for bug #2093370 with clearTimeout.
+     * @see <a href="http://sourceforge.net/tracker/index.php?func=detail&aid=2093370&group_id=47038&atid=448266">
+     * bug details</a>
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void clearTimeout_threadInterrupt() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        doTestClearX_threadInterrupt("Interval");
+    }
+
+    private void doTestClearX_threadInterrupt(final String x) throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function f() {\n"
+            + "    alert('started');\n"
+            + "    clear" + x + "(window.timeoutId);\n"
+            + "    mySpecialFunction();\n"
+            + "    alert('finished');\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    window.timeoutId = set" + x + "(f, 10);\n"
+            + "  }\n"
+            + "</script></head><body>\n"
+            + "<span id='clickMe' onclick='test()'>click me</span>"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"started", "finished"};
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(html, collectedAlerts);
+        final Function mySpecialFunction = new BaseFunction() {
+            private static final long serialVersionUID = -2445994102698852899L;
+
+            @Override
+            public Object call(final Context cx, final Scriptable scope,
+                    final Scriptable thisObj, final Object[] args) {
+                if (Thread.currentThread().isInterrupted()) {
+                    throw new RuntimeException("My thread is already interrupted");
+                }
+                return null;
+            }
+        };
+        final Window window = (Window) page.getEnclosingWindow().getScriptObject();
+        ScriptableObject.putProperty(window, "mySpecialFunction", mySpecialFunction);
+        ((ClickableElement) page.getHtmlElementById("clickMe")).click();
+        page.getEnclosingWindow().getThreadManager().joinAll(5000);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }
