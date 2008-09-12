@@ -22,6 +22,7 @@ import java.net.URL;
 
 import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.util.URIUtil;
+import org.apache.commons.lang.StringUtils;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
@@ -193,34 +194,32 @@ public class Location extends SimpleScriptable {
     public void jsxSet_href(final String newLocation)
         throws IOException {
 
-        // If just setting the hash, avoid a server hit.
-        if (newLocation.startsWith("#")) {
-            jsxSet_hash(newLocation);
-            return;
-        }
-
-        // URL should be resolved from the page in which the JS is executed; cf test FrameTest#testLocation.
         final HtmlPage page = (HtmlPage) getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
 
         if (newLocation.startsWith(JAVASCRIPT_PREFIX)) {
             final String script = newLocation.substring(11);
             page.executeJavaScriptIfPossible(script, "new location value", 1);
+            return;
         }
-        else {
-            try {
-                final URL url = page.getFullyQualifiedUrl(newLocation);
 
-                final WebWindow webWindow = getWindow().getWebWindow();
-                webWindow.getWebClient().getPage(webWindow, new WebRequestSettings(url));
+        try {
+            final URL url = page.getFullyQualifiedUrl(newLocation);
+            final URL oldUrl = page.getWebResponse().getUrl();
+            if (url.sameFile(oldUrl) && !StringUtils.equals(url.getRef(), oldUrl.getRef())) {
+                // If we're just setting or modifying the hash, avoid a server hit.
+                jsxSet_hash(newLocation);
+                return;
             }
-            catch (final MalformedURLException e) {
-                getLog().error("jsxSet_location(\"" + newLocation + "\") Got MalformedURLException", e);
-                throw e;
-            }
-            catch (final IOException e) {
-                getLog().error("jsxSet_location(\"" + newLocation + "\") Got IOException", e);
-                throw e;
-            }
+            final WebWindow webWindow = getWindow().getWebWindow();
+            webWindow.getWebClient().getPage(webWindow, new WebRequestSettings(url));
+        }
+        catch (final MalformedURLException e) {
+            getLog().error("jsxSet_location('" + newLocation + "') Got MalformedURLException", e);
+            throw e;
+        }
+        catch (final IOException e) {
+            getLog().error("jsxSet_location('" + newLocation + "') Got IOException", e);
+            throw e;
         }
     }
 

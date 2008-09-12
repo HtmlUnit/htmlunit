@@ -294,6 +294,18 @@ public class LocationTest extends WebTestCase {
     }
 
     /**
+     * Verifies that setting <tt>location.href</tt> to a new URL with a hash, where the only difference between the
+     * new URL and the old URL is the hash, behaves like setting <tt>location.hash</tt> (ie doesn't result in a
+     * server hit). See bug 2101735.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testSetHrefWithOnlyHash2() throws Exception {
+        final String html = "<script>document.location.href = '" + URL_GARGOYLE + "#x';</script>";
+        loadPage(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

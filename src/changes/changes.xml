@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.3-SNAPSHOT" description="Bugfixes, better generics">
+            <action type="fix" dev="sdanig" id="2101735">
+                JavaScript: when setting location.href, if the only real change is in the hash then just change the hash
+                and don't hit the server.
+            </action>
             <action type="add" dev="sdanig" id="2065694">
                 Allow custom CSS error handlers (via WebClient.getCssErrorHandler() and WebClient.setCssErrorHandler())
                 and provide two error handler implementations out of the box (DefaultCssErrorHandler and
