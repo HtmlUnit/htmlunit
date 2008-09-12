@@ -94,7 +94,7 @@ public class WebClientTest extends WebTestCase {
                 }
             }
             else {
-                if (file.getName().endsWith(".java")) {
+                if (file.getName().endsWith(".java") && !file.getName().contains("WebDriver")) {
                     final int index = new File("src/test/java").getAbsolutePath().length();
                     String name = file.getAbsolutePath();
                     name = name.substring(index + 1, name.length() - 5);

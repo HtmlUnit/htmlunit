@@ -37,6 +37,9 @@
                     <!-- Update the links reference in javadoc, PDM and clover plugins when this changes -->
                     <source>1.5</source>
                     <target>1.5</target>
+                    <testExcludes>
+                        <exclude>**/*WebDriver*.java</exclude>
+                    </testExcludes>
                 </configuration>
             </plugin>
             <plugin>
@@ -509,25 +512,6 @@
             <version>1.4.3</version>
             <scope>test</scope>
         </dependency>
-        <!-- WebDriver -->
-        <dependency>
-            <groupId>org.openqa.selenium</groupId>
-            <artifactId>webdriver-htmlunit</artifactId>
-            <version>0.5-SNAPSHOT</version>
-            <scope>test</scope>
-                <exclusions>
-                    <exclusion>
-                        <groupId>net.sourceforge.htmlunit</groupId>
-                        <artifactId>htmlunit</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.openqa.selenium</groupId>
-            <artifactId>webdriver-firefox</artifactId>
-            <version>0.5-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
     <distributionManagement>
         <site>
@@ -552,17 +536,4 @@
             <name>HtmlUnit Maven 2 Snapshots Repository</name>
         </snapshotRepository>
     </distributionManagement>
-    <!-- Custom repositories  -->
-    <repositories>
-        <repository>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-            <id>htmlUnitSnapshots</id>
-            <name>HtmlUnit Snapshots</name>
-            <url>http://htmlunit.sourceforge.net/m2-repo-snapshots</url>
-            <layout>default</layout>
-        </repository>
-    </repositories>
 </project>
