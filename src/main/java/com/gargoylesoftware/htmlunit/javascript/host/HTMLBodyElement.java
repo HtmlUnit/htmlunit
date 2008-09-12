@@ -20,6 +20,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Daniel Gredler
  */
 public class HTMLBodyElement extends HTMLElement {
 
@@ -61,6 +62,14 @@ public class HTMLBodyElement extends HTMLElement {
             style.setDefaultLocalStyleAttribute("margin-top", "8px");
             style.setDefaultLocalStyleAttribute("margin-bottom", "8px");
         }
+    }
+
+    /**
+     * Simulates a click on a scrollbar component (IE only).
+     * @param scrollAction the type of scroll action to simulate
+     */
+    public void jsxFunction_doScroll(final String scrollAction) {
+        // Ignore because we aren't displaying anything!
     }
 
 }

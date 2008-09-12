@@ -19,16 +19,25 @@ package com.gargoylesoftware.htmlunit.javascript.host;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Daniel Gredler
  */
 public class HTMLDivElement extends HTMLElement {
 
     private static final long serialVersionUID = 7038120861175708271L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLDivElement() {
         // Empty.
+    }
+
+    /**
+     * Simulates a click on a scrollbar component (IE only).
+     * @param scrollAction the type of scroll action to simulate
+     */
+    public void jsxFunction_doScroll(final String scrollAction) {
+        // Ignore because we aren't displaying anything!
     }
 
 }

@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Daniel Gredler
  */
 public class HTMLTextAreaElementTest extends WebTestCase {
 
@@ -184,6 +185,41 @@ public class HTMLTextAreaElementTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(browserVersion, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testDoScroll() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var t = document.getElementById('t');\n"
+            + "        if(t.doScroll) {\n"
+            + "          alert('yes');\n"
+            + "          t.doScroll();\n"
+            + "          t.doScroll('down');\n"
+            + "        } else {\n"
+            + "          alert('no');\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'><textarea id='t'>abc</textarea></body>\n"
+            + "</html>";
+
+        String[] expectedAlerts = new String[] {"no"};
+        List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+
+        expectedAlerts = new String[] {"yes"};
+        collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

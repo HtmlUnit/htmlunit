@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author Ahmed Ashour
+ * @author Daniel Gredler
  */
 public class HTMLTextAreaElement extends FormField {
 
@@ -127,6 +128,14 @@ public class HTMLTextAreaElement extends FormField {
      */
     public void jsxSet_selectionEnd(final int end) {
         ((HtmlTextArea) getHtmlElementOrDie()).setSelectionEnd(end);
+    }
+
+    /**
+     * Simulates a click on a scrollbar component (IE only).
+     * @param scrollAction the type of scroll action to simulate
+     */
+    public void jsxFunction_doScroll(final String scrollAction) {
+        // Ignore because we aren't displaying anything!
     }
 
     /**

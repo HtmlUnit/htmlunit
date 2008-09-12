@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="2.3-SNAPSHOT" description="Bugfixes, better generics, firefox3">
+        <release version="2.3-SNAPSHOT" description="Bugfixes, better generics, add Firefox 3 emulation">
+            <action type="fix" dev="sdanig" id="2088921">
+                JavaScript: add doScroll() method to bodies, divs, spans and textareas (IE only).
+            </action>
             <action type="fix" dev="asashour">
                 HtmlTextArea: replace new lines with '%0D%0A' and remove first occurrence in form submission.
             </action>

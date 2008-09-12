@@ -93,4 +93,40 @@ public class HTMLBodyElementTest extends WebTestCase {
         ((HtmlButtonInput) page.getHtmlElementById("myInput")).click();
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void doScroll() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        if(document.body.doScroll) {\n"
+            + "          alert('yes');\n"
+            + "          document.body.doScroll();\n"
+            + "          document.body.doScroll('down');\n"
+            + "        } else {\n"
+            + "          alert('no');\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        String[] expectedAlerts = new String[] {"no"};
+        List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+
+        expectedAlerts = new String[] {"yes"};
+        collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
 }
