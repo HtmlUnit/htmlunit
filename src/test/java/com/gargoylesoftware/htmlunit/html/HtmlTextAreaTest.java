@@ -41,14 +41,13 @@ public class HtmlTextAreaTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testFormSubmission_OriginalData()
-        throws Exception {
-        final String htmlContent
+    public void testFormSubmission_OriginalData() throws Exception {
+        final String content
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<textarea name='textArea1'>foo</textarea>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(content);
         final MockWebConnection webConnection = getMockConnection(page);
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
@@ -65,14 +64,13 @@ public class HtmlTextAreaTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testFormSubmission_NewValue()
-        throws Exception {
-        final String htmlContent
+    public void testFormSubmission_NewValue() throws Exception {
+        final String content
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<textarea name='textArea1'>foo</textarea>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(content);
         final MockWebConnection webConnection = getMockConnection(page);
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
@@ -89,12 +87,12 @@ public class HtmlTextAreaTest extends WebTestCase {
      */
     @Test
     public void testGetText() throws Exception {
-        final String htmlContent
+        final String content
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<textarea name='textArea1'> foo \n bar </textarea>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(content);
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
         final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
@@ -107,13 +105,13 @@ public class HtmlTextAreaTest extends WebTestCase {
      */
     @Test
     public void testAsXml() throws Exception {
-        final String htmlContent
+        final String content
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<textarea name='textArea1'> foo \n bar </textarea>\n"
             + "<textarea name='textArea2'></textarea>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(content);
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
         final HtmlTextArea textArea1 = form.getTextAreaByName("textArea1");
@@ -184,14 +182,14 @@ public class HtmlTextAreaTest extends WebTestCase {
      */
     @Test
     public void asText() throws Exception {
-        final String htmlContent
+        final String content
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<textarea name='textArea1'> foo \n bar "
             + "<p>html snippet</p>\n"
             + "</textarea>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(content);
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
         final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
         assertNotNull(textArea);
@@ -206,14 +204,14 @@ public class HtmlTextAreaTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        final String htmlContent
+        final String content
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<textarea name='textArea1'> foo \n bar "
             + "<p>html snippet</p>\n"
             + "</textarea>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(content);
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
         Assert.assertEquals("White space must be preserved!", "foo \n bar <p>html snippet</p>", form.asText());
     }
@@ -224,13 +222,13 @@ public class HtmlTextAreaTest extends WebTestCase {
      */
     @Test
     public void getTextAndVisibility() throws Exception {
-        final String htmlContent
+        final String content
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<textarea name='textArea1' style='visibility:hidden'> foo \n bar "
             + "</textarea>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(content);
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
         final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
         assertNotNull(textArea);
