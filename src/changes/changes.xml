@@ -14,7 +14,7 @@
                 SilentCssErrorHandler).
             </action>
             <action type="update" dev="asashour">
-                Upgrade NekoHtml to 1.9.9, log4j to 1.2.15, and JUnit to 4.5.
+                Upgrade NekoHtml to 1.9.9 and JUnit to 4.5.
             </action>
             <action type="fix" dev="asashour" id="2105645">
                 Select element can be included as HTML inside XML.
