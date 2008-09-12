@@ -389,7 +389,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     /**
      * Returns the HTML elements that are descendants of this element and that have the specified tag name.
      * @param tagName the tag name to match (case-insensitive)
-     * @param <X> the sub-element
+     * @param <X> the sub-element type
      * @return the HTML elements that are descendants of this element and that have the specified tag name
      */
     @SuppressWarnings("unchecked")
@@ -907,7 +907,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @param elementName the name of the element to search for
      * @param attributeName the name of the attribute to search for
      * @param attributeValue the value of the attribute to search for
-     * @param <X> the sub-element
+     * @param <X> the sub-element type
      * @return the first element which matches the specified search criteria
      * @exception ElementNotFoundException if no element matches the specified search criteria
      */
@@ -975,7 +975,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @param elementName the name of the element to search for
      * @param attributeName the name of the attribute to search for
      * @param attributeValue the value of the attribute to search for
-     * @param <X> the sub-element
+     * @param <X> the sub-element type
      * @return all elements which are descendants of this element and match the specified search criteria
      */
     @SuppressWarnings("unchecked")

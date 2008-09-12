@@ -67,7 +67,7 @@ public abstract class ClickableElement extends StyledElement {
      * as the original page, depending on the type of element being clicked, the presence of JavaScript
      * action listeners, etc.
      *
-     * @param <P> the page
+     * @param <P> the page type
      * @return the page that occupies this element's window after the element has been clicked
      * @exception IOException if an IO error occurs
      */
@@ -85,7 +85,7 @@ public abstract class ClickableElement extends StyledElement {
      * @param shiftKey <tt>true</tt> if SHIFT is pressed during the click
      * @param ctrlKey <tt>true</tt> if CTRL is pressed during the click
      * @param altKey <tt>true</tt> if ALT is pressed during the click
-     * @param <P> the page
+     * @param <P> the page type
      * @return the page that occupies this element's window after the element has been clicked
      * @exception IOException if an IO error occurs
      */
@@ -116,7 +116,7 @@ public abstract class ClickableElement extends StyledElement {
      * action listeners, etc.
      *
      * @param event the click event used
-     * @param <P> the page
+     * @param <P> the page type
      * @return the page that occupies this element's window after the element has been clicked
      * @exception IOException if an IO error occurs
      */
@@ -154,7 +154,7 @@ public abstract class ClickableElement extends StyledElement {
      * as the original page, depending on the type of element being clicked, the presence of JavaScript
      * action listeners, etc. Note also that {@link #click()} is automatically called first.
      *
-     * @param <P> the page
+     * @param <P> the page type
      * @return the page that occupies this element's window after the element has been double-clicked
      * @exception IOException if an IO error occurs
      */
@@ -173,7 +173,7 @@ public abstract class ClickableElement extends StyledElement {
      * @param shiftKey <tt>true</tt> if SHIFT is pressed during the double-click
      * @param ctrlKey <tt>true</tt> if CTRL is pressed during the double-click
      * @param altKey <tt>true</tt> if ALT is pressed during the double-click
-     * @param <P> the page
+     * @param <P> the page type
      * @return the page that occupies this element's window after the element has been double-clicked
      * @exception IOException if an IO error occurs
      */
