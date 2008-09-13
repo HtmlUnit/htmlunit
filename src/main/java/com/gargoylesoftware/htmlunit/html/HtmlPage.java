@@ -1536,13 +1536,15 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * first one.
      *
      * @param id the ID value to search by
+     * @param <E> the sub-element type
      * @return the HTML element with the specified ID
      * @throws ElementNotFoundException if no element was found that matches the id
      */
-    public HtmlElement getHtmlElementById(final String id) throws ElementNotFoundException {
+    @SuppressWarnings("unchecked")
+    public <E extends HtmlElement> E getHtmlElementById(final String id) throws ElementNotFoundException {
         final List<HtmlElement> elements = idMap_.get(id);
         if (elements != null) {
-            return elements.get(0);
+            return (E) elements.get(0);
         }
         throw new ElementNotFoundException("*", "id", id);
     }

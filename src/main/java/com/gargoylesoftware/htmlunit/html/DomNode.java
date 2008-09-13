@@ -1361,16 +1361,18 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * or <tt>null</tt> if no node matches the specified XPath expression.
      *
      * @param xpathExpr the XPath expression
+     * @param <X> the expression type
      * @return the first element matching the specified XPath expression
      * @see #getByXPath(String)
      * @see #getCanonicalXPath()
      */
-    public Object getFirstByXPath(final String xpathExpr) {
+    @SuppressWarnings("unchecked")
+    public <X> X getFirstByXPath(final String xpathExpr) {
         final List< ? > results = getByXPath(xpathExpr);
         if (results.isEmpty()) {
             return null;
         }
-        return results.get(0);
+        return (X) results.get(0);
     }
 
     /**
