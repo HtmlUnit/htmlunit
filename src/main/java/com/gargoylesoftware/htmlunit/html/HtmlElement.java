@@ -389,17 +389,17 @@ public abstract class HtmlElement extends DomElement implements Element {
     /**
      * Returns the HTML elements that are descendants of this element and that have the specified tag name.
      * @param tagName the tag name to match (case-insensitive)
-     * @param <X> the sub-element type
+     * @param <E> the sub-element type
      * @return the HTML elements that are descendants of this element and that have the specified tag name
      */
     @SuppressWarnings("unchecked")
-    public final <X extends HtmlElement> List<X> getHtmlElementsByTagName(final String tagName) {
-        final List<X> list = new ArrayList<X>();
+    public final <E extends HtmlElement> List<E> getHtmlElementsByTagName(final String tagName) {
+        final List<E> list = new ArrayList<E>();
         final String lowerCaseTagName = tagName.toLowerCase();
         final Iterable<HtmlElement> iterable = getAllHtmlChildElements();
         for (final HtmlElement element : iterable) {
             if (lowerCaseTagName.equals(element.getTagName())) {
-                list.add((X) element);
+                list.add((E) element);
             }
         }
         return list;
@@ -907,11 +907,11 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @param elementName the name of the element to search for
      * @param attributeName the name of the attribute to search for
      * @param attributeValue the value of the attribute to search for
-     * @param <X> the sub-element type
+     * @param <E> the sub-element type
      * @return the first element which matches the specified search criteria
      * @exception ElementNotFoundException if no element matches the specified search criteria
      */
-    public final <X extends HtmlElement> X getOneHtmlElementByAttribute(final String elementName,
+    public final <E extends HtmlElement> E getOneHtmlElementByAttribute(final String elementName,
             final String attributeName,
         final String attributeValue) throws ElementNotFoundException {
 
@@ -919,7 +919,7 @@ public abstract class HtmlElement extends DomElement implements Element {
         WebAssert.notNull("attributeName", attributeName);
         WebAssert.notNull("attributeValue", attributeValue);
 
-        final List<X> list = getHtmlElementsByAttribute(elementName, attributeName, attributeValue);
+        final List<E> list = getHtmlElementsByAttribute(elementName, attributeName, attributeValue);
 
         final int listSize = list.size();
         if (listSize == 0) {
@@ -975,23 +975,23 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @param elementName the name of the element to search for
      * @param attributeName the name of the attribute to search for
      * @param attributeValue the value of the attribute to search for
-     * @param <X> the sub-element type
+     * @param <E> the sub-element type
      * @return all elements which are descendants of this element and match the specified search criteria
      */
     @SuppressWarnings("unchecked")
-    public final <X extends HtmlElement> List<X> getHtmlElementsByAttribute(
+    public final <E extends HtmlElement> List<E> getHtmlElementsByAttribute(
             final String elementName,
             final String attributeName,
             final String attributeValue) {
 
-        final List<X> list = new ArrayList<X>();
+        final List<E> list = new ArrayList<E>();
         final String lowerCaseTagName = elementName.toLowerCase();
 
         for (final HtmlElement next : getAllHtmlChildElements()) {
             if (next.getTagName().equals(lowerCaseTagName)) {
                 final String attValue = next.getAttributeValue(attributeName);
                 if (attValue != null && attValue.equals(attributeValue)) {
-                    list.add((X) next);
+                    list.add((E) next);
                 }
             }
         }
