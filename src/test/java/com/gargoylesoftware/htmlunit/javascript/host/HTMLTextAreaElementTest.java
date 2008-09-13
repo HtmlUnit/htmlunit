@@ -18,9 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -35,14 +37,16 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
+@RunWith(BrowserRunner.class)
 public class HTMLTextAreaElementTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "1234", "PoohBear" })
     public void testGetValue() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "alert(document.form1.textarea1.value )\n"
@@ -55,12 +59,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
             + "<textarea name='textarea1' cols='45' rows='4'>1234</textarea>\n"
             + "</form></body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-        assertEquals("foo", page.getTitleText());
-
-        final String[] expectedAlerts = {"1234", "PoohBear"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -95,6 +94,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "TEXTAREA", "INPUT" })
     public void testSetValue() throws Exception {
         final String content = "<html><head></head>\n"
             + "<body>\n"
@@ -110,26 +110,16 @@ public class HTMLTextAreaElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final String[] expectedAlerts = {"TEXTAREA", "INPUT"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        loadPage(content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(content);
     }
 
     /**
      * @throws Exception if test fails
      */
     @Test
+    @Alerts(IE = {"undefined", "undefined" },
+            FF = {"11", "0" })
     public void testTextLength() throws Exception {
-        final String[] alertsIE = {"undefined", "undefined"};
-        testTextLength(BrowserVersion.INTERNET_EXPLORER_6_0, alertsIE);
-        final String[] alertsFF = {"11", "0"};
-        testTextLength(BrowserVersion.FIREFOX_2, alertsFF);
-    }
-
-    private void testTextLength(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
         final String content = "<html>\n"
             + "<body>\n"
             + "<textarea id='myTextArea'></textarea>\n"
@@ -143,31 +133,40 @@ public class HTMLTextAreaElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(content);
     }
 
     /**
      * @throws Exception if test fails
      */
     @Test
+    @Alerts(IE = {"undefined,undefined", "3,undefined", "3,10" },
+            FF = {"11,11", "3,11", "3,10" })
     public void testSelection() throws Exception {
-        testSelection(3, 10, BrowserVersion.INTERNET_EXPLORER_6_0,
-                new String[] {"undefined,undefined", "3,undefined", "3,10"});
-        testSelection(3, 10, BrowserVersion.FIREFOX_2, new String[] {"11,11", "3,11", "3,10"});
-
-        testSelection(-3, 15, BrowserVersion.INTERNET_EXPLORER_6_0,
-                new String[] {"undefined,undefined", "-3,undefined", "-3,15"});
-        testSelection(-3, 15, BrowserVersion.FIREFOX_2, new String[] {"11,11", "0,11", "0,11"});
-
-        testSelection(10, 5, BrowserVersion.INTERNET_EXPLORER_6_0,
-                new String[] {"undefined,undefined", "10,undefined", "10,5"});
-        testSelection(10, 5, BrowserVersion.FIREFOX_2, new String[] {"11,11", "10,11", "5,5"});
+        testSelection(3, 10);
     }
 
-    private void testSelection(final int selectionStart, final int selectionEnd,
-            final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
+    /**
+     * @throws Exception if test fails
+     */
+    @Test
+    @Alerts(IE = {"undefined,undefined", "-3,undefined", "-3,15" },
+            FF = {"11,11", "0,11", "0,11" })
+    public void testSelection_outOfBounds() throws Exception {
+        testSelection(-3, 15);
+    }
+
+    /**
+     * @throws Exception if test fails
+     */
+    @Test
+    @Alerts(IE = {"undefined,undefined", "10,undefined", "10,5" },
+            FF = {"11,11", "10,11", "5,5" })
+    public void testSelection_reverseOrder() throws Exception {
+        testSelection(10, 5);
+    }
+
+    private void testSelection(final int selectionStart, final int selectionEnd) throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "<textarea id='myTextArea'></textarea>\n"
@@ -183,15 +182,15 @@ public class HTMLTextAreaElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(IE = { "yes" },
+            FF = { "no" })
     public void testDoScroll() throws Exception {
         final String html =
             "<html>\n"
@@ -212,15 +211,6 @@ public class HTMLTextAreaElementTest extends WebTestCase {
             + "  <body onload='test()'><textarea id='t'>abc</textarea></body>\n"
             + "</html>";
 
-        String[] expectedAlerts = new String[] {"no"};
-        List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
-
-        expectedAlerts = new String[] {"yes"};
-        collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
-
 }
