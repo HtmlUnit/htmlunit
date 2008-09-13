@@ -1380,7 +1380,7 @@ public class DocumentTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage mainPage = (HtmlPage) webClient.getPage("http://main");
+        final HtmlPage mainPage = webClient.getPage("http://main");
         assertEquals("Main", mainPage.getTitleText());
 
         final HtmlInlineFrame iFrame = (HtmlInlineFrame) mainPage.getHtmlElementById("iframe");

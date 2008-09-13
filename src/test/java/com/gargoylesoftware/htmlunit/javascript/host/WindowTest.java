@@ -533,7 +533,7 @@ public class WindowTest extends WebTestCase {
         webConnection.setDefaultResponse(html);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage("http://foo");
+        final HtmlPage page = client.getPage("http://foo");
         ((HtmlDivision) page.getHtmlElementById("d")).click();
         final String[] expected = {"null"};
         assertEquals(expected, actual);
@@ -1257,16 +1257,16 @@ public class WindowTest extends WebTestCase {
 
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = (HtmlPage) webClient.getPage("http://opener/test/a.html");
+        final HtmlPage firstPage = webClient.getPage("http://opener/test/a.html");
         assertEquals("A", firstPage.getTitleText());
 
-        final HtmlButton buttonA = (HtmlButton) firstPage.getHtmlElementById("clickme");
+        final HtmlButton buttonA = firstPage.getHtmlElementById("clickme");
         final HtmlPage secondPage = (HtmlPage) buttonA.click();
         assertNotNull("B", secondPage);
         assertEquals("B", secondPage.getTitleText());
 
-        final HtmlButton buttonB = (HtmlButton) secondPage.getHtmlElementById("clickme");
-        final HtmlPage thirdPage = (HtmlPage) buttonB.click();
+        final HtmlButton buttonB = secondPage.getHtmlElementById("clickme");
+        final HtmlPage thirdPage = buttonB.click();
         assertNotNull("C", thirdPage);
         assertEquals("C", thirdPage.getTitleText());
     }

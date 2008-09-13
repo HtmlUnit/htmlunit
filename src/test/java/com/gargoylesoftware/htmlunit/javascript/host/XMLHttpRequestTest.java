@@ -1261,7 +1261,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         final Server server = HttpWebConnectionTest.startWebServer(resourceBase, null, servlets);
         try {
             final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
-            final HtmlPage page = (HtmlPage) client.getPage("http://localhost:12345/XMLHttpRequestTest_streaming.html");
+            final HtmlPage page = client.getPage("http://localhost:12345/XMLHttpRequestTest_streaming.html");
             final HtmlElement body = page.getBody();
             Thread.sleep(5000);
             assertEquals(10, body.asText().split("\n").length);

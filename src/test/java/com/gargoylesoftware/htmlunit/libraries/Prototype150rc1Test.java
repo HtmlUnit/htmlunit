@@ -174,7 +174,7 @@ public class Prototype150rc1Test extends WebTestCase {
     private void test(final BrowserVersion browserVersion, final String filename, final int tests,
             final int assertions, final int failures, final int errors) throws Exception {
         final WebClient client = new WebClient(browserVersion);
-        final HtmlPage page = (HtmlPage)
+        final HtmlPage page =
             client.getPage("http://localhost:" + HttpWebConnectionTest.PORT + "/test/unit/" + filename);
 
         page.getEnclosingWindow().getThreadManager().joinAll(25000);

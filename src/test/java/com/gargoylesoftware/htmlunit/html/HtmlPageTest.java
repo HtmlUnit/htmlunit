@@ -382,13 +382,13 @@ public class HtmlPageTest extends WebTestCase {
         assertEquals(urlString + "bbb", page.getFullyQualifiedUrl("aaa/../bbb"));
         assertEquals(urlString + "c/d", page.getFullyQualifiedUrl("c/./d"));
 
-        final HtmlPage secondPage = (HtmlPage) client.getPage(urlString + "foo/bar?a=b&c=d");
+        final HtmlPage secondPage = client.getPage(urlString + "foo/bar?a=b&c=d");
         assertEquals(urlString + "foo/bar?a=b&c=d", secondPage.getFullyQualifiedUrl(""));
         assertEquals(urlString + "foo/one", secondPage.getFullyQualifiedUrl("one"));
         assertEquals(urlString + "two", secondPage.getFullyQualifiedUrl("/two"));
         assertEquals(urlString + "foo/two?a=b", secondPage.getFullyQualifiedUrl("two?a=b"));
 
-        final HtmlPage thirdPage = (HtmlPage) client.getPage("http://foo.com/dog/cat/one.html");
+        final HtmlPage thirdPage = client.getPage("http://foo.com/dog/cat/one.html");
         assertEquals("http://foo.com/dog/cat/one.html", thirdPage.getFullyQualifiedUrl(""));
         assertEquals("http://foo.com/dog/cat/two.html", thirdPage.getFullyQualifiedUrl("two.html"));
     }
@@ -1897,9 +1897,9 @@ public class HtmlPageTest extends WebTestCase {
         map.put("/two.html", RefreshServlet.class);
         server_ = HttpWebConnectionTest.startWebServer(".", null, map);
         final WebClient client = new WebClient();
-        final HtmlPage page = (HtmlPage) client.getPage("http://localhost:" + HttpWebConnectionTest.PORT + "/one.html");
+        final HtmlPage page = client.getPage("http://localhost:" + HttpWebConnectionTest.PORT + "/one.html");
         final HtmlSubmitInput submit = (HtmlSubmitInput) page.getHtmlElementById("myButton");
-        final HtmlPage secondPage = (HtmlPage) submit.click();
+        final HtmlPage secondPage = submit.click();
         assertEquals("0\nPOST\nsome_name some_value\n", secondPage.getWebResponse().getContentAsString());
         final HtmlPage secondPage2 = (HtmlPage) secondPage.refresh();
         assertEquals("1\nPOST\nsome_name some_value\n", secondPage2.getWebResponse().getContentAsString());

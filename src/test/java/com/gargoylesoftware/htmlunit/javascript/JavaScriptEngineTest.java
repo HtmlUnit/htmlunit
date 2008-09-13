@@ -488,8 +488,8 @@ public class JavaScriptEngineTest extends WebTestCase {
          * detect encoding from charset attribute of script tag
          */
         collectedAlerts.clear();
-        final HtmlPage page2 = (HtmlPage) client.getPage("http://www.gargoylesoftware.com/hidden");
-        final HtmlScript htmlScript2 = (HtmlScript) page2.getHtmlElementById("script2");
+        final HtmlPage page2 = client.getPage("http://www.gargoylesoftware.com/hidden");
+        final HtmlScript htmlScript2 = page2.getHtmlElementById("script2");
 
         assertNotNull(htmlScript2);
         assertEquals(expectedAlerts, collectedAlerts);
@@ -742,7 +742,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = (HtmlPage) client.getPage("http://first/index.html");
+        final HtmlPage page = client.getPage("http://first/index.html");
         assertEquals("foo", page.getTitleText());
         assertEquals(new String[] {"Got to external method"}, collectedAlerts);
     }
