@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
@@ -64,7 +65,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "<body onload='doTest()'><div id='div1' style='color: black'>foo</div></body></html>";
 
         final HtmlPage page = loadPageWithAlerts(html);
-        assertEquals("color: pink;", page.getHtmlElementById("div1").getAttributeValue("style"));
+        assertEquals("color: pink;", page.<HtmlElement>getHtmlElementById("div1").getAttributeValue("style"));
     }
 
     /**
@@ -88,7 +89,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
 
         assertEquals(
             "color: pink; background: blue; foo: bar;",
-            page.getHtmlElementById("div1").getAttributeValue("style"));
+            page.<HtmlElement>getHtmlElementById("div1").getAttributeValue("style"));
     }
 
     /**
@@ -109,7 +110,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "<body onload='doTest()'><div id='div1'>foo</div></body></html>";
 
         final HtmlPage page = loadPageWithAlerts(html);
-        assertEquals("color: pink;", page.getHtmlElementById("div1").getAttributeValue("style"));
+        assertEquals("color: pink;", page.<HtmlElement>getHtmlElementById("div1").getAttributeValue("style"));
     }
 
     /**
@@ -1467,6 +1468,6 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "<body onload='doTest()'><div id='div1' style='COLOR: BLACK'>foo</div></body></html>";
 
         final HtmlPage page = loadPageWithAlerts(html);
-        assertEquals("color: pink;", page.getHtmlElementById("div1").getAttributeValue("style"));
+        assertEquals("color: pink;", page.<HtmlElement>getHtmlElementById("div1").getAttributeValue("style"));
     }
 }

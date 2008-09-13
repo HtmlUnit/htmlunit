@@ -23,6 +23,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -178,7 +179,7 @@ public class Prototype150rc1Test extends WebTestCase {
 
         page.getEnclosingWindow().getThreadManager().joinAll(25000);
 
-        final String summary = page.getHtmlElementById("logsummary").asText();
+        final String summary = page.<HtmlElement>getHtmlElementById("logsummary").asText();
         final String expected = tests + " tests, " + assertions + " assertions, " + failures + " failures, "
              + errors + " errors";
         assertEquals(expected, summary);

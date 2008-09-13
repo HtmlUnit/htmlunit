@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -264,10 +265,10 @@ public class EventTest extends WebTestCase {
         final String[] expected = {"123A", "1A2A3AB1AB2AB3ABC"};
         final List<String> actual = new ArrayList<String>();
         final HtmlPage page = loadPage(html, actual);
-        page.getHtmlElementById("t").type('A');
+        page.<HtmlElement>getHtmlElementById("t").type('A');
         ((HtmlDivision) page.getHtmlElementById("d")).click();
 
-        page.getHtmlElementById("t").type("BC");
+        page.<HtmlElement>getHtmlElementById("t").type("BC");
         ((HtmlDivision) page.getHtmlElementById("d")).click();
 
         assertEquals(expected, actual);
@@ -326,8 +327,8 @@ public class EventTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        page.getHtmlElementById("textField").focus();
-        page.getHtmlElementById("otherField").focus();
+        page.<HtmlElement>getHtmlElementById("textField").focus();
+        page.<HtmlElement>getHtmlElementById("otherField").focus();
         final String[] expectedAlerts = {"true"};
         assertEquals(expectedAlerts, collectedAlerts);
     }

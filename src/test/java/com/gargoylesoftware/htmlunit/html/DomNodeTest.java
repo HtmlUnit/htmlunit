@@ -202,7 +202,7 @@ public class DomNodeTest extends WebTestCase {
         final DomNode node3 = HTMLParser.getFactory(HtmlSpan.TAG_NAME).createElement(
                 page, HtmlSpan.TAG_NAME, attributes);
         node2.replace(node3);
-        assertEquals("span", page.getHtmlElementById("tag2").getTagName());
+        assertEquals("span", page.<HtmlElement>getHtmlElementById("tag2").getTagName());
     }
 
     /**

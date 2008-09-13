@@ -20,6 +20,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.net.MalformedURLException;
 
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
@@ -213,16 +214,17 @@ public final class SanityCheck {
         final WebClient webClient = new WebClient();
         final HtmlPage firstPage = (HtmlPage) webClient.getPage(getPrintEnvUrl());
 
-        assertEquals("GET", firstPage.getHtmlElementById("REQUEST_METHOD").asText());
+        assertEquals("GET", firstPage.<HtmlElement>getHtmlElementById("REQUEST_METHOD").asText());
 
         final HtmlForm form = firstPage.getFormByName("form1");
         assertEquals("get", form.getMethodAttribute());
 
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button1");
         final HtmlPage secondPage = (HtmlPage) button.click();
-        assertEquals("GET", secondPage.getHtmlElementById("REQUEST_METHOD").asText());
-        assertEquals("textfield1=*&button1=PushMe", secondPage.getHtmlElementById("QUERY_STRING").asText());
-        assertEquals("", secondPage.getHtmlElementById("CONTENT").asText());
+        assertEquals("GET", secondPage.<HtmlElement>getHtmlElementById("REQUEST_METHOD").asText());
+        assertEquals("textfield1=*&button1=PushMe",
+            secondPage.<HtmlElement>getHtmlElementById("QUERY_STRING").asText());
+        assertEquals("", secondPage.<HtmlElement>getHtmlElementById("CONTENT").asText());
     }
 
     /**
@@ -233,7 +235,7 @@ public final class SanityCheck {
         final WebClient webClient = new WebClient();
         final HtmlPage firstPage = (HtmlPage) webClient.getPage(getPrintEnvUrl());
 
-        assertEquals("GET", firstPage.getHtmlElementById("REQUEST_METHOD").asText());
+        assertEquals("GET", firstPage.<HtmlElement>getHtmlElementById("REQUEST_METHOD").asText());
 
         final HtmlForm form = firstPage.getFormByName("form1");
         form.setMethodAttribute("post");
@@ -242,9 +244,10 @@ public final class SanityCheck {
         button.setAttributeValue("name", "textfield1");
 
         final HtmlPage secondPage = (HtmlPage) button.click();
-        assertEquals("POST", secondPage.getHtmlElementById("REQUEST_METHOD").asText());
-        assertEquals("", secondPage.getHtmlElementById("QUERY_STRING").asText());
-        assertEquals("textfield1=*&textfield1=PushMe", secondPage.getHtmlElementById("CONTENT").asText());
+        assertEquals("POST", secondPage.<HtmlElement>getHtmlElementById("REQUEST_METHOD").asText());
+        assertEquals("", secondPage.<HtmlElement>getHtmlElementById("QUERY_STRING").asText());
+        assertEquals("textfield1=*&textfield1=PushMe",
+            secondPage.<HtmlElement>getHtmlElementById("CONTENT").asText());
     }
 
     /**
@@ -256,15 +259,15 @@ public final class SanityCheck {
         final WebClient webClient = new WebClient();
         final HtmlPage firstPage = (HtmlPage) webClient.getPage(getPrintEnvUrl());
 
-        assertEquals("GET", firstPage.getHtmlElementById("REQUEST_METHOD").asText());
+        assertEquals("GET", firstPage.<HtmlElement>getHtmlElementById("REQUEST_METHOD").asText());
 
         final HtmlForm form = firstPage.getFormByName("form1");
         form.setMethodAttribute("post");
 
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button1");
         final HtmlPage secondPage = (HtmlPage) button.click();
-        assertEquals("POST", secondPage.getHtmlElementById("REQUEST_METHOD").asText());
-        assertEquals("", secondPage.getHtmlElementById("QUERY_STRING").asText());
-        assertEquals("textfield1=*&button1=PushMe", secondPage.getHtmlElementById("CONTENT").asText());
+        assertEquals("POST", secondPage.<HtmlElement>getHtmlElementById("REQUEST_METHOD").asText());
+        assertEquals("", secondPage.<HtmlElement>getHtmlElementById("QUERY_STRING").asText());
+        assertEquals("textfield1=*&button1=PushMe", secondPage.<HtmlElement>getHtmlElementById("CONTENT").asText());
     }
 }

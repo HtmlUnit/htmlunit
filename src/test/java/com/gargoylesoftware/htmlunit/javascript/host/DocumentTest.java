@@ -468,8 +468,7 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("First", page.getTitleText());
 
-        final DomNode div1 =
-            page.getHtmlElementById("body").getLastChild();
+        final DomNode div1 = page.<HtmlElement>getHtmlElementById("body").getLastChild();
         assertEquals((short) 3, div1.getNodeType());
         assertEquals("Some Text", div1.getNodeValue());
         assertEquals("#text", div1.getNodeName());
