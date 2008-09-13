@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.3-SNAPSHOT" description="Bugfixes, better generics, add Firefox 3 emulation">
+            <action type="fix" dev="asashour">
+                JavaScript: document.cookie value to be surrounded by double quotes if it contains space.
+            </action>
+            <action type="update" dev="asashour">
+                CookieManager: process server-side cookies.
+            </action>
             <action type="fix" dev="sdanig">
                 Avoid NullPointerException when iframe.src is a "javascript:..." URL and JavaScript has been disabled.
             </action>

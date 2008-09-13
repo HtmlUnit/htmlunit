@@ -444,7 +444,13 @@ public class HTMLDocument extends Document {
             }
             buffer.append(cookie.getName());
             buffer.append("=");
+            if (cookie.getValue().contains(" ")) {
+                buffer.append('"');
+            }
             buffer.append(cookie.getValue());
+            if (cookie.getValue().contains(" ")) {
+                buffer.append('"');
+            }
         }
 
         return buffer.toString();

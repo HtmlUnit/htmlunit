@@ -16,7 +16,9 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.Servlet;
@@ -135,17 +137,16 @@ public class CookieManagerTest extends WebTestCase {
      */
     @Test
     public void comma() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
         servlets.put("/test", CommaCookieServlet.class);
         server_ = HttpWebConnectionTest.startWebServer("./", null, servlets);
+
+        final String[] expectedAlerts = {"my_key=\"Hello, big, big, world\"; another_key=Hi"};
         final WebClient client = new WebClient();
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         client.getPage("http://localhost:" + HttpWebConnectionTest.PORT + "/test");
-        assertEquals("1", client.getCookieManager().getCookies().size());
-//        assertEquals("Hello, big, big, world",
-//            client.getCookieManager().getCookies().iterator().next().getValue());
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -153,7 +154,7 @@ public class CookieManagerTest extends WebTestCase {
      */
     public static class CommaCookieServlet extends HttpServlet {
 
-        private static final long serialVersionUID = -8815307540281233182L;
+        private static final long serialVersionUID = 4094440276952531020L;
 
         /**
          * {@inheritDoc}
@@ -162,13 +163,10 @@ public class CookieManagerTest extends WebTestCase {
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
             response.setContentType("text/html");
             response.addCookie(new javax.servlet.http.Cookie("my_key", "Hello, big, big, world"));
+            response.addCookie(new javax.servlet.http.Cookie("another_key", "Hi"));
             final Writer writer = response.getWriter();
-//            if (request.getCookies() != null) {
-//                for (javax.servlet.http.Cookie cookie : request.getCookies()) {
-//                    writer.write(cookie.getName() + ',' + cookie.getValue() + "<br>\n");
-//                }
-//            }
-            writer.write("<html/>");
+            writer.write("<html><head><script>function test() {alert(document.cookie)}</script>"
+                + "<body onload='test()'></body></html>");
             writer.close();
         }
     }

@@ -30,6 +30,7 @@ import org.apache.commons.lang.StringUtils;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public class CookieManager implements Serializable {
 
@@ -153,6 +154,7 @@ public class CookieManager implements Serializable {
     /**
      * Updates the specified HTTP state's cookie configuration according to the current cookie settings.
      * @param state the HTTP state to update
+     * @see #updateFromState(HttpState)
      */
     protected void updateState(final HttpState state) {
         // Optimization: if cookies aren't enabled, we can exit immediately.
@@ -181,6 +183,18 @@ public class CookieManager implements Serializable {
         // Keep track of the last updated HTTP state and cookie modifications, so we can optimize next time through.
         lastStateUpdated_ = new WeakReference<HttpState>(state);
         cookiesModified_ = false;
+    }
+
+    /**
+     * Updates the current cookie settings from the specified HTTP state's cookie configuration.
+     * @param state the HTTP state to update from
+     * @see #updateState(HttpState)
+     */
+    protected void updateFromState(final HttpState state) {
+        clearCookies();
+        for (final Cookie cookie : state.getCookies()) {
+            addCookie(cookie);
+        }
     }
 
     /**
