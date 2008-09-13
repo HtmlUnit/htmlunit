@@ -339,7 +339,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetSrc_javascriptUrl() throws Exception {
+    public void testSetSrc_JavascriptUrl() throws Exception {
         final String content
             = "<html><head><title>First</title></head><script>\n"
             + "  function test() {\n"
@@ -358,4 +358,26 @@ public class HTMLIFrameElementTest extends WebTestCase {
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Verify that an iframe.src with a "javascript:..." URL loaded by a client with JavaScript
+     * disabled does not cause a NullPointerException (reported on the mailing list).
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testSrcJavaScriptUrl_JavaScriptDisabled()
+        throws Exception {
+
+        final String html = "<html><body><iframe src='javascript:false;'></iframe></body></html>";
+
+        final WebClient client = new WebClient();
+        client.setJavaScriptEnabled(false);
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setDefaultResponse(html);
+        client.setWebConnection(conn);
+
+        client.getPage(URL_FIRST);
+    }
+
 }

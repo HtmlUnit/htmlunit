@@ -97,7 +97,7 @@ public class HtmlForm extends ClickableElement {
         if (htmlPage.getWebClient().isJavaScriptEnabled()) {
             if (submitElement != null) {
                 final ScriptResult scriptResult = fireEvent(Event.TYPE_SUBMIT);
-                if (scriptResult != null && Boolean.FALSE.equals(scriptResult.getJavaScriptResult())) {
+                if (ScriptResult.isFalse(scriptResult)) {
                     return scriptResult.getNewPage();
                 }
             }
@@ -217,7 +217,7 @@ public class HtmlForm extends ClickableElement {
     public Page reset() {
         final SgmlPage htmlPage = getPage();
         final ScriptResult scriptResult = fireEvent(Event.TYPE_RESET);
-        if (scriptResult != null && Boolean.FALSE.equals(scriptResult.getJavaScriptResult())) {
+        if (ScriptResult.isFalse(scriptResult)) {
             return scriptResult.getNewPage();
         }
 

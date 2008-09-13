@@ -1380,7 +1380,7 @@ public class WebClient implements Serializable {
     }
 
     private WebResponse makeWebResponseForJavaScriptUrl(final WebWindow webWindow, final URL url,
-            final String charset) throws FailingHttpStatusCodeException, IOException {
+        final String charset) throws FailingHttpStatusCodeException, IOException {
 
         final HtmlPage page;
         if (webWindow instanceof FrameWindow) {
@@ -1390,19 +1390,19 @@ public class WebClient implements Serializable {
         else {
             Page currentPage = webWindow.getEnclosedPage();
             if (currentPage == null) {
-                // starting with a javascript url, quickly fill an about:blank
+                // Starting with a JavaScript URL; quickly fill an "about:blank".
                 currentPage = getPage(webWindow, new WebRequestSettings(WebClient.URL_ABOUT_BLANK));
             }
             page = (HtmlPage) currentPage;
         }
 
-        final ScriptResult scriptResult = page.executeJavaScriptIfPossible(
-            url.toExternalForm(), "JavaScript URL", 1);
-        if (ScriptResult.isUndefined(scriptResult)) {
-            // no new webresponse to produce
+        final ScriptResult r = page.executeJavaScriptIfPossible(url.toExternalForm(), "JavaScript URL", 1);
+        if ((r != null && r.getJavaScriptResult() == null) || ScriptResult.isUndefined(r)) {
+            // No new WebResponse to produce.
             return webWindow.getEnclosedPage().getWebResponse();
         }
-        final String contentString = scriptResult.getJavaScriptResult().toString();
+
+        final String contentString = r.getJavaScriptResult().toString();
         return new StringWebResponse(contentString, charset, url);
     }
 

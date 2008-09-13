@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.3-SNAPSHOT" description="Bugfixes, better generics, add Firefox 3 emulation">
+            <action type="fix" dev="sdanig">
+                Avoid NullPointerException when iframe.src is a "javascript:..." URL and JavaScript has been disabled.
+            </action>
             <action type="fix" dev="sdanig" id="2088921">
                 JavaScript: add doScroll() method to bodies, divs, spans and textareas (IE only).
             </action>
