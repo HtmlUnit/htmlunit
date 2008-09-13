@@ -14,21 +14,32 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.Servlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpState;
+import org.junit.After;
 import org.junit.Test;
+import org.mortbay.jetty.Server;
 
 /**
  * Unit tests for {@link CookieManager}.
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
-public class CookieManagerTest {
+public class CookieManagerTest extends WebTestCase {
+
+    private Server server_;
 
     /**
      * Verifies the basic cookie manager behavior, whose main complexity lies in the
@@ -109,4 +120,56 @@ public class CookieManagerTest {
         assertEquals(1, state.getCookies().length);
     }
 
+    /**
+     * Performs post-test deconstruction.
+     * @throws Exception if an error occurs
+     */
+    @After
+    public void tearDown() throws Exception {
+        HttpWebConnectionTest.stopWebServer(server_);
+        server_ = null;
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void comma() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        servlets.put("/test", CommaCookieServlet.class);
+        server_ = HttpWebConnectionTest.startWebServer("./", null, servlets);
+        final WebClient client = new WebClient();
+        client.getPage("http://localhost:" + HttpWebConnectionTest.PORT + "/test");
+        assertEquals("1", client.getCookieManager().getCookies().size());
+//        assertEquals("Hello, big, big, world",
+//            client.getCookieManager().getCookies().iterator().next().getValue());
+    }
+
+    /**
+     * Servlet for {@link #responseHeaders()}.
+     */
+    public static class CommaCookieServlet extends HttpServlet {
+
+        private static final long serialVersionUID = -8815307540281233182L;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            response.setContentType("text/html");
+            response.addCookie(new javax.servlet.http.Cookie("my_key", "Hello, big, big, world"));
+            final Writer writer = response.getWriter();
+//            if (request.getCookies() != null) {
+//                for (javax.servlet.http.Cookie cookie : request.getCookies()) {
+//                    writer.write(cookie.getName() + ',' + cookie.getValue() + "<br>\n");
+//                }
+//            }
+            writer.write("<html/>");
+            writer.close();
+        }
+    }
 }
