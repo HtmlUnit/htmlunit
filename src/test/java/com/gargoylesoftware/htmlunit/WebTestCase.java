@@ -448,7 +448,8 @@ public abstract class WebTestCase {
             if (iter.hasPrevious()) {
                 sb.append(", ");
             }
-            final String message = iter.next();
+            String message = iter.next();
+            message = message.replaceAll("\n", "\\\\n").replaceAll("\r", "\\\\r");
             sb.append("{expected: \"").append(message).append("\"}");
         }
         sb.append("];\n\n");

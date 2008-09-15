@@ -43,5 +43,8 @@ public enum BrowserVersionFeatures {
     STYLESHEET_HREF_STYLE_EMPTY,
 
     /** Indicates the the href property for a &lt;style type="text/css"&gt; ... &lt;/style&gt; is null */
-    STYLESHEET_HREF_STYLE_NULL;
+    STYLESHEET_HREF_STYLE_NULL,
+
+    /** Indicates that \n are replaced by \r\n in textarea values. */
+    TEXTAREA_CRNL;
 }

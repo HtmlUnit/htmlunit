@@ -94,6 +94,10 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
                 buffer.append(((DomText) node).getData());
             }
         }
+        // if content starts with new line, it is ignored (=> for the parser?)
+        if (buffer.length() > 0 && buffer.charAt(0) == '\n') {
+            buffer.deleteCharAt(0);
+        }
         return buffer.toString();
     }
 
@@ -136,9 +140,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     public NameValuePair[] getSubmitKeyValuePairs() {
         String text = getText();
         text = text.replace("\r\n", "\n").replace("\n", "\r\n");
-        if (text.startsWith("\r\n")) {
-            text = text.substring(2);
-        }
+
         return new NameValuePair[]{new NameValuePair(getNameAttribute(), text)};
     }
 

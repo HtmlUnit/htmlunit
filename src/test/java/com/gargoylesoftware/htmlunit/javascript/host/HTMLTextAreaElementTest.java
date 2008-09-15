@@ -49,7 +49,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
-            + "alert(document.form1.textarea1.value )\n"
+            + "alert(document.form1.textarea1.value)\n"
             + "document.form1.textarea1.value='PoohBear';\n"
             + "alert(document.form1.textarea1.value )\n"
             + "}\n"
@@ -210,6 +210,42 @@ public class HTMLTextAreaElementTest extends WebTestCase {
             + "  </head>\n"
             + "  <body onload='test()'><textarea id='t'>abc</textarea></body>\n"
             + "</html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * Test that the new line immediately following opening tag is ignored.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "Hello\r\nworld\r\n" },
+            FF = { "Hello\nworld\n" })
+    public void value_ignoreFirstNewLine() throws Exception {
+        testValue("\nHello\nworld\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { " \r\nHello\r\nworld\r\n" },
+            FF = { " \nHello\nworld\n" })
+    public void value_spaceBeforeFirstNewLine() throws Exception {
+        testValue(" \nHello\nworld\n");
+    }
+
+    private void testValue(final String textAreaBody) throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "  alert(document.form1.textarea1.value)\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<form name='form1' method='post' >\n"
+            + "<textarea name='textarea1'>" + textAreaBody + "</textarea>\n"
+            + "</textarea>\n"
+            + "</form></body></html>";
 
         loadPageWithAlerts(html);
     }
