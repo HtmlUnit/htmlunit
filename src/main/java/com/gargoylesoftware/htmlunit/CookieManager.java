@@ -16,8 +16,11 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
 import java.lang.ref.WeakReference;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.httpclient.Cookie;
@@ -191,9 +194,21 @@ public class CookieManager implements Serializable {
      * @see #updateState(HttpState)
      */
     protected void updateFromState(final HttpState state) {
-        clearCookies();
-        for (final Cookie cookie : state.getCookies()) {
-            addCookie(cookie);
+        // Add missing cookies.
+        final List<Cookie> stateCookies = Arrays.asList(state.getCookies());
+        for (final Cookie stateCookie : stateCookies) {
+            if (!cookies_.contains(stateCookie)) {
+                cookies_.add(stateCookie);
+                cookiesModified_ = true;
+            }
+        }
+        // Remove extraneous cookies.
+        for (final Iterator<Cookie> i = cookies_.iterator(); i.hasNext();) {
+            final Cookie cookie = i.next();
+            if (!stateCookies.contains(cookie)) {
+                i.remove();
+                cookiesModified_ = true;
+            }
         }
     }
 

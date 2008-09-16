@@ -120,6 +120,15 @@ public class CookieManagerTest extends WebTestCase {
         mgr.updateState(state);
         assertFalse(mgr.isCookiesModified());
         assertEquals(1, state.getCookies().length);
+
+        // Update the manager with a new state.
+        final Cookie cookie2 = new Cookie("x", "y", "z");
+        final HttpState state2 = new HttpState();
+        state2.addCookie(cookie2);
+        mgr.updateFromState(state2);
+        assertTrue(mgr.isCookiesModified());
+        assertEquals(1, mgr.getCookies().size());
+        assertEquals(cookie2, mgr.getCookies().iterator().next());
     }
 
     /**
@@ -150,7 +159,7 @@ public class CookieManagerTest extends WebTestCase {
     }
 
     /**
-     * Servlet for {@link #responseHeaders()}.
+     * Servlet for {@link #comma()}.
      */
     public static class CommaCookieServlet extends HttpServlet {
 
