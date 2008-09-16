@@ -10,9 +10,9 @@
         <release version="2.3" date="Sept 16, 2008" description="Bugfixes, better generics, add Firefox 3 emulation, GWT 1.5 support">
             <action type="update" dev="asashour">
                 Better generics: avoid the need for casting when calling methods like WebClient.getPage(), HtmlPage.getHtmlElementById(), ...
-                NOTE: This change avoids casting so that code like &lt;br&gt;
+                NOTE: This change avoids casting so that code like
                 'HtmlImage e = (HtmlImage) page.getHtmlElementById("myImage")'
-                can be written 'HtmlImage e = page.getHtmlElementById("myImage")'.
+                can be written as 'HtmlImage e = page.getHtmlElementById("myImage")'.
                 HOWEVER, due to a bug in Sun Java 5 compiler (fixed in Java 6 and not existing for instance in Eclipse),
                 calling directly a method from the base return type without assigning the result to a variable will produce a compilation error.
                 A simple workaround consists in changing
