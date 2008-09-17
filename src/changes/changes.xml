@@ -3668,7 +3668,7 @@
 
         <release version="1.2.1" date="March 20, 2003">
             <action type="add" dev="mbowler">
-                Added method <javadoc>com.gargoylesoftware.htmlunit.html.HtmlButtonInput#click()</javadoc>
+                Added method HtmlButtonInput#click().
             </action>
             <action type="update" dev="mbowler">
                 Fixed a bug in JavaScript loading where external scripts were being loaded after the page was fully
@@ -3681,9 +3681,7 @@
                 uppercase value for "radio"
             </action>
             <action type="update" dev="mbowler">
-                Fixed a bunch of places that were declared to throw
-                <javadoc>com.gargoylesoftware.htmlunit.ElementNotFoundException</javadoc> but never actually
-                did.
+                Fixed a bunch of places that were declared to throw ElementNotFoundException but never actually did.
             </action>
         </release>
 
@@ -3720,8 +3718,7 @@
                 Initial draft of a howto for keyboard navigation
             </action>
             <action type="add" dev="mbowler">
-                New method:
-                <javadoc>com.gargoylesoftware.htmlunit.html.HtmlButton#isDisabled()</javadoc>
+                New method: HtmlButton#isDisabled()
             </action>
             <action type="update" dev="mbowler">
                 The click() method on buttons now do nothing if that element is disabled
@@ -3757,8 +3754,7 @@
                 is now done within HtmlUnit to avoid this problem.
             </action>
             <action type="add" dev="mbowler">
-                New method
-                <javadoc>com.gargoylesoftware.htmlunit.WebResponse#getLoadTimeInMilliSeconds()</javadoc>
+                New method WebResponse#getLoadTimeInMilliSeconds()
                 to measure load times of specific pages.  This is intended for performance tuning of
                 web applications
             </action>
@@ -3817,12 +3813,11 @@
                 Cleaned up some javadoc warnings
             </action>
             <action type="add" dev="mbowler">
-                New method
-                <javadoc>com.gargoylesoftware.htmlunit.WebClient#loadWebResponse(java.net.URL, com.gargoylesoftware.htmlunit.SubmitMethod, java.util.List)</javadoc>
+                New method WebClient#loadWebResponse(URL, SubmitMethod, List)
             </action>
             <action type="update" dev="mbowler">
                 Removed the need for HiddenWebWindow - JavaScript files are now loaded via
-                <javadoc>com.gargoylesoftware.htmlunit.WebClient#loadWebResponse(java.net.URL, com.gargoylesoftware.htmlunit.SubmitMethod, java.util.List)</javadoc>.
+                WebClient#loadWebResponse(URL, SubmitMethod, List).
                 This should fix an intermittent bug where an UnsupportedOperationException was being called from
                 the HiddenWebWindow if a JavaScript file was returned with a content type of "text/html"
             </action>
@@ -3851,7 +3846,7 @@
                 Changed window.open() to understand the magic name _self
             </action>
             <action type="add" dev="mbowler">
-                Added <javadoc>com.gargoylesoftware.htmlunit.html.HtmlOption#setSelected(boolean)</javadoc>
+                Added HtmlOption#setSelected(boolean)
             </action>
             <action type="add" dev="mbowler">
                 Completed support for reset buttons
@@ -3865,25 +3860,24 @@
                 Added support for the JavaScript method Window.confirm()
             </action>
             <action type="add" dev="mbowler">
-                New interface <javadoc>com.gargoylesoftware.htmlunit.ConfirmHandler</javadoc>
+                New interface ConfirmHandler
             </action>
             <action type="add" dev="mbowler">
-                New method <javadoc>com.gargoylesoftware.htmlunit.WebClient#setConfirmHandler(com.gargoylesoftware.htmlunit.ConfirmHandler)</javadoc>
-                and <javadoc>com.gargoylesoftware.htmlunit.WebClient#getConfirmHandler()</javadoc>
+                New method WebClient#setConfirmHandler(ConfirmHandler) and WebClient#getConfirmHandler()
             </action>
             <action type="add" dev="mbowler">
                 Added support for the JavaScript method Window.prompt()
             </action>
             <action type="add" dev="mbowler">
-                New interface <javadoc>com.gargoylesoftware.htmlunit.PromptHandler</javadoc>
+                New interface PromptHandler
             </action>
             <action type="add" dev="mbowler">
                 New method
-                <javadoc>com.gargoylesoftware.htmlunit.WebClient#setPromptHandler(com.gargoylesoftware.htmlunit.PromptHandler)</javadoc> and
-                <javadoc>com.gargoylesoftware.htmlunit.WebClient#getPromptHandler()</javadoc>
+                WebClient#setPromptHandler(PromptHandler) and
+                WebClient#getPromptHandler()
             </action>
             <action type="add" dev="mbowler">
-                New method <javadoc>com.gargoylesoftware.htmlunit.html.HtmlForm#getParameterListForSubmit()</javadoc>.
+                New method HtmlForm#getParameterListForSubmit().
                 This method is intended as a debugging aid.
             </action>
             <action type="update" dev="mbowler">
@@ -3897,7 +3891,7 @@
                 Improved some error messages during initialization
             </action>
             <action type="add" dev="mbowler">
-                New class <javadoc>com.gargoylesoftware.htmlunit.ObjectInstantiationException</javadoc>
+                New class ObjectInstantiationException
             </action>
             <action type="add" dev="mbowler">
                 Added protocol package for URL protocols and added protocol/javascript package for
@@ -3959,13 +3953,13 @@
                 change then behaviour would be very unpredictable.
             </action>
             <action type="add" dev="mbowler">
-                Added method <javadoc>com.gargoylesoftware.htmlunit.html.HtmlPage#getFirstAnchorByText(java.lang.String)</javadoc>
+                Added method HtmlPage#getFirstAnchorByText(java.lang.String)
             </action>
             <action type="update" dev="mbowler">
                 First steps towards having property/function information in a configuration file
             </action>
             <action type="add" dev="mbowler">
-                Added method <javadoc>com.gargoylesoftware.htmlunit.html.HtmlPage#getHtmlElementsByAccessKey(char)</javadoc>
+                Added method HtmlPage#getHtmlElementsByAccessKey(char)
             </action>
             <action type="add" dev="mbowler">
                 Added support for javascript:document.getElementById()
@@ -3983,17 +3977,16 @@
                 Upgraded commons-httpclient.jar and commons-logging.jar to the Aug 30 gump build
             </action>
             <action type="add" dev="mbowler">
-                Added <javadoc>com.gargoylesoftware.htmlunit.html.HtmlElement#asXml()</javadoc>
+                Added HtmlElement#asXml()
             </action>
             <action type="add" dev="mbowler">
-                Added <javadoc>com.gargoylesoftware.htmlunit.WebClient#expandUrl(java.net.URL, java.lang.String)</javadoc>
+                Added WebClient#expandUrl(URL, String)
             </action>
             <action type="update" dev="mbowler">
                 Fixed bug where relative URLs in redirects were not being expanded.
             </action>
             <action type="update" dev="mbowler">
-                Fixed bug in
-                <javadoc>com.gargoylesoftware.htmlunit.html.HtmlSelect#getOptionByValue(java.lang.String)</javadoc>
+                Fixed bug in HtmlSelect#getOptionByValue(String)
                 where searching for the option would start at the top of the page instead of at the select.
             </action>
             <action type="update" dev="mbowler">
@@ -4002,9 +3995,7 @@
                 responses to bug reports.
             </action>
             <action type="add" dev="mbowler">
-                Added support for
-                <javadoc>com.gargoylesoftware.htmlunit.html.HtmlImageInput#click()</javadoc> and
-                <javadoc>com.gargoylesoftware.htmlunit.html.HtmlImageInput#click(int, int)</javadoc>
+                Added support for HtmlImageInput#click() and HtmlImageInput#click(int, int)
             </action>
             <action type="update" dev="mbowler">
                 Changed redirect logic so that on a 302 or 303 status, if the method changes
