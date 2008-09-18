@@ -62,7 +62,7 @@ public class BrowserVersion implements Serializable {
     private float browserVersionNumeric_;
     private Set<PluginConfiguration> plugins_ = new HashSet<PluginConfiguration>();
     private final List<BrowserVersionFeatures> features_ = new ArrayList<BrowserVersionFeatures>();
-    private final String nickName_;
+    private final String nickname_;
 
     /** Application code name for both Microsoft Internet Explorer and Netscape series. */
     public static final String APP_CODE_NAME = "Mozilla";
@@ -156,26 +156,26 @@ public class BrowserVersion implements Serializable {
     }
 
     /**
-     * Instantiate one.
+     * Creates a new browser version instance.
      *
      * @param applicationName the name of the application
      * @param applicationVersion the version string of the application
      * @param userAgent the user agent string that will be sent to the server
      * @param javaScriptVersion the version of JavaScript
      * @param browserVersionNumeric the floating number version of the browser
-     * @param nickName the short name of the browser (like "FF2", "FF3", "IE6", ...)
+     * @param nickname the short name of the browser (like "FF2", "FF3", "IE6", ...)
      * @param features the browser features
      */
     private BrowserVersion(final String applicationName, final String applicationVersion,
         final String userAgent, final String javaScriptVersion, final float browserVersionNumeric,
-        final String nickName, final BrowserVersionFeatures[] features) {
+        final String nickname, final BrowserVersionFeatures[] features) {
 
         applicationName_ = applicationName;
         setApplicationVersion(applicationVersion);
         userAgent_ = userAgent;
         setJavaScriptVersion(javaScriptVersion);
         browserVersionNumeric_ = browserVersionNumeric;
-        nickName_ = nickName;
+        nickname_ = nickname;
         if (features != null) {
             features_.addAll(Arrays.asList(features));
         }
@@ -185,16 +185,16 @@ public class BrowserVersion implements Serializable {
         try {
             final Properties props = new Properties();
             props.load(getClass().getResourceAsStream("/com/gargoylesoftware/htmlunit/javascript/configuration/"
-                    + nickName_ + ".properties"));
+                    + nickname_ + ".properties"));
             for (final Object key : props.keySet()) {
                 features_.add(BrowserVersionFeatures.valueOf(key.toString()));
             }
         }
         catch (final IllegalArgumentException iae) {
-            throw new RuntimeException("Invalid entry found in configuration file for BrowserVersion: " + nickName_);
+            throw new RuntimeException("Invalid entry found in configuration file for BrowserVersion: " + nickname_);
         }
         catch (final Exception e) {
-            throw new RuntimeException("Configuration file not found for BrowserVersion: " + nickName_);
+            throw new RuntimeException("Configuration file not found for BrowserVersion: " + nickname_);
         }
     }
 
@@ -502,8 +502,20 @@ public class BrowserVersion implements Serializable {
      * Get the short name of the browser like "FF3", "IE7", ...
      * This is used in different tests to reference the browser to which it applies.
      * @return the short name (if any)
+     * @deprecated since 2.4, use {@link #getNickname()} instead
      */
+    @Deprecated
     public String getNickName() {
-        return nickName_;
+        return nickname_;
     }
+
+    /**
+     * Returns the short name of the browser like "FF3", "IE7", ...
+     * This is used in different tests to reference the browser to which it applies.
+     * @return the short name (if any)
+     */
+    public String getNickname() {
+        return nickname_;
+    }
+
 }

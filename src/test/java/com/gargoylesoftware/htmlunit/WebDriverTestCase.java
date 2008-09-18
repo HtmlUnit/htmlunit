@@ -75,7 +75,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         if (nodes.isEmpty()) {
             throw new RuntimeException("No expectations found in html code");
         }
-        final String specificName = "expected_" + browserVersion.getNickName();
+        final String specificName = "expected_" + browserVersion.getNickname();
         for (final WebElement node : nodes) {
             final String nodeId = node.getAttribute("id");
             if (specificName.contains(nodeId) && nodeId.length() > expectationNodeId.length()) {
@@ -84,6 +84,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
         return getEntries(expectationNodeId);
     }
+
     /**
      * Get the log entries for the node with the given id.
      * @param id the node id

@@ -58,7 +58,7 @@ public class BrowserVersionFeaturesTest extends WebTestCase {
     }
 
     private void lexicographicOrder_properties(final BrowserVersion browserVersion) throws Exception {
-        final String path = "com/gargoylesoftware/htmlunit/javascript/configuration/" + browserVersion.getNickName()
+        final String path = "com/gargoylesoftware/htmlunit/javascript/configuration/" + browserVersion.getNickname()
             + ".properties";
         final InputStream is = getClass().getClassLoader().getResourceAsStream(path);
         final BufferedReader reader = new BufferedReader(new InputStreamReader(is));
