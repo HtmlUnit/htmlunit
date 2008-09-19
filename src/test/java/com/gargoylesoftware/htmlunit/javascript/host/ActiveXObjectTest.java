@@ -89,7 +89,7 @@ public class ActiveXObjectTest extends WebTestCase {
             + "    try {\n"
             + "      var ie = new ActiveXObject('InternetExplorer.Application');\n"
             + "      alert(ie);\n"
-            + "    } catch(e){'exception: ' + alert(e.message);}\n"
+            + "    } catch(e) {alert('exception: ' + e.message);}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
