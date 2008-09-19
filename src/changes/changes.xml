@@ -2565,8 +2565,7 @@
                 Created new WebClient.getPage() methods and deprecated old ones.
             </action>
             <action type="update" dev="yourgod">
-                Stopped httpclient from automatically retrying failed connections 5 times:
-                <a href="http://jakarta.apache.org/commons/httpclient/3.0/exception-handling.html#Automatic%20exception%20recovery">Reference Link</a>
+                Stopped httpclient from automatically retrying failed connections 5 times.
             </action>
             <action type="update" dev="yourgod">
                 A failure when setting a location from JavaScript now throws an exception
@@ -3759,7 +3758,7 @@
                 web applications
             </action>
             <action type="update" dev="mbowler">
-                Moved submission guidelines into their own <a href="submittingPatches.html">document</a>.
+                Moved submission guidelines into their own document (submittingPatches.html).
             </action>
             <action type="update" dev="mbowler">
                 Fixed bug where the variable "this" in an onclick handler was a Window rather than the
@@ -3925,11 +3924,9 @@
 
         <release version="1.1-pre5" date="September 24, 2002">
             <action type="update" dev="mbowler">
-                Changed html parser from
-                <a href="http://sourceforge.net/projects/jtidy">JTidy</a> to
-                <a href="http://www.apache.org/~andyc/neko/doc/index.html">CyberNeko</a>.
+                Changed html parser from JTidy to CyberNeko.
                 CyberNeko is better at parsing really bad html but this now gives us a dependency on the
-                <a href="http://xml.apache.org/xerces2-j/">xerces parser from apache</a>.
+                xerces parser from apache.
             </action>
             <action type="update" dev="mbowler">
                 The directory structure has undergone a significant change and is now checked in under
@@ -4010,7 +4007,7 @@
 
         <release version="1.1-pre4" date="August 23, 2002">
             <action type="update" dev="mbowler">
-                Changed the <a href="license.html">license</a> used by HtmlUnit to an apache style one
+                Changed the license used by HtmlUnit to an apache style one
             </action>
             <action type="update" dev="mbowler">
                 Changed default value of WebClient.isRedirectEnabled() to false to be
@@ -4021,7 +4018,7 @@
             </action>
             <action type="add" dev="mbowler">
                 Started migrating System.out.println calls over to commons-logging.  Refer
-                to the <a href="logging.html">logging tutorial</a> for information on customizing this.
+                to the logging tutorial (logging.html) for information on customizing this.
             </action>
             <action type="add" dev="mbowler">
                 Support for onClick handlers in HtmlSubmitInput
@@ -4105,10 +4102,10 @@
                 Added HtmlFrameSet class
             </action>
             <action type="add" dev="mbowler">
-                Added a <a href="codingConventions.html">coding conventions</a> document
+                Added a coding conventions document (codingConventions.html)
             </action>
             <action type="add" dev="mbowler">
-                Added a <a href="buildingFromCvs.html">"how to get the latest code from cvs"</a> document
+                Added a "how to get the latest code from cvs" document (buildingFromCvs.html)
             </action>
             <action type="update" dev="mbowler">
                 Renamed WebWindow.getPage() and setPage() to getEnclosedPage() and setEnclosedPage() to

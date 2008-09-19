@@ -86,7 +86,7 @@
                         <source>mvn deploy</source>
                     </li>
                     <li>
-                        Delete online website API.
+                        Delete online website javadoc.
                     </li>
                     <li>
                         Deploy the site documentation.
