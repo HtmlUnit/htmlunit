@@ -81,7 +81,7 @@ public class ActiveXObjectTest extends WebTestCase {
      */
     @Test
     @Browsers({Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
-    @Alerts("Automation server can't create object")
+    @Alerts("exception: Automation server can't create object")
     @NotYetImplemented
     public void activex() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -89,7 +89,7 @@ public class ActiveXObjectTest extends WebTestCase {
             + "    try {\n"
             + "      var ie = new ActiveXObject('InternetExplorer.Application');\n"
             + "      alert(ie);\n"
-            + "    } catch(e){alert(e.message);}\n"
+            + "    } catch(e){'exception: ' + alert(e.message);}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
