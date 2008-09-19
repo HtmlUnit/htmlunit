@@ -436,7 +436,7 @@ public class Stylesheet extends SimpleScriptable {
         else {
             final DomNode node = ownerNode_.getDomNodeOrDie();
             final HtmlPage page = (HtmlPage) node.getPage();
-            final URL url = page.getWebResponse().getUrl();
+            final URL url = page.getWebResponse().getRequestUrl();
             return url.toExternalForm();
         }
     }

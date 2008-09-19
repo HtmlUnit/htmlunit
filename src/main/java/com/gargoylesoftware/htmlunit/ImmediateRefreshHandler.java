@@ -49,7 +49,7 @@ public class ImmediateRefreshHandler implements RefreshHandler, Serializable  {
             return;
         }
         final WebClient client = window.getWebClient();
-        if (page.getWebResponse().getUrl().toExternalForm().equals(url.toExternalForm())
+        if (page.getWebResponse().getRequestUrl().toExternalForm().equals(url.toExternalForm())
                 && HttpMethod.GET == page.getWebResponse().getRequestMethod()) {
             final String msg = "Refresh Aborted by HtmlUnit: "
                 + "Attempted to refresh a page using an ImmediateRefreshHandler "

@@ -323,7 +323,7 @@ public class WebClientTest extends WebTestCase {
         final WebResponse webResponse = page.getWebResponse();
         // A redirect should have happened
         assertEquals(200, webResponse.getStatusCode());
-        assertEquals(URL_FIRST, webResponse.getUrl());
+        assertEquals(URL_FIRST, webResponse.getRequestUrl());
         assertEquals("Second", page.getTitleText());
         assertSame(HttpMethod.GET, webResponse.getRequestMethod());
     }
@@ -623,7 +623,7 @@ public class WebClientTest extends WebTestCase {
         else {
             // A redirect should have happened
             assertEquals(HttpStatus.SC_OK, webResponse.getStatusCode());
-            assertEquals(newLocation, webResponse.getUrl());
+            assertEquals(newLocation, webResponse.getRequestUrl());
             assertEquals("Second", page.getTitleText());
             assertEquals(expectedRedirectedRequestMethod, webConnection.getLastMethod());
         }
@@ -730,7 +730,7 @@ public class WebClientTest extends WebTestCase {
         final URL url = new URL(urlString);
         final HtmlPage page = client.getPage(new WebRequestSettings(url, HttpMethod.POST));
 
-        assertEquals("http://first/?a=b", page.getWebResponse().getUrl());
+        assertEquals("http://first/?a=b", page.getWebResponse().getRequestUrl());
     }
 
     /**
@@ -752,7 +752,7 @@ public class WebClientTest extends WebTestCase {
 
         final HtmlPage page = client.getPage(URL_FIRST);
         final Page page2 = page.getAnchors().get(0).click();
-        assertEquals("http://first/foo.html?id=UYIUYTY//YTYUY..F", page2.getWebResponse().getUrl());
+        assertEquals("http://first/foo.html?id=UYIUYTY//YTYUY..F", page2.getWebResponse().getRequestUrl());
     }
 
     /**
@@ -773,31 +773,31 @@ public class WebClientTest extends WebTestCase {
 
         // with query string not encoded
         HtmlPage page = client.getPage("http://first?a=b c&d=" + ((char) 0xE9) + ((char) 0xE8));
-        assertEquals("http://first/?a=b%20c&d=%C3%A9%C3%A8", page.getWebResponse().getUrl());
+        assertEquals("http://first/?a=b%20c&d=%C3%A9%C3%A8", page.getWebResponse().getRequestUrl());
 
         // with query string already encoded
         page = client.getPage("http://first?a=b%20c&d=%C3%A9%C3%A8");
-        assertEquals("http://first/?a=b%20c&d=%C3%A9%C3%A8", page.getWebResponse().getUrl());
+        assertEquals("http://first/?a=b%20c&d=%C3%A9%C3%A8", page.getWebResponse().getRequestUrl());
 
         // with query string partially encoded
         page = client.getPage("http://first?a=b%20c&d=e f");
-        assertEquals("http://first/?a=b%20c&d=e%20f", page.getWebResponse().getUrl());
+        assertEquals("http://first/?a=b%20c&d=e%20f", page.getWebResponse().getRequestUrl());
 
         // with anchor
         page = client.getPage("http://first?a=b c#myAnchor");
-        assertEquals("http://first/?a=b%20c#myAnchor", page.getWebResponse().getUrl());
+        assertEquals("http://first/?a=b%20c#myAnchor", page.getWebResponse().getRequestUrl());
 
         // with query string containing encoded "&", "=", "+", ",", and "$"
         page = client.getPage("http://first?a=%26%3D%20%2C%24");
-        assertEquals("http://first/?a=%26%3D%20%2C%24", page.getWebResponse().getUrl());
+        assertEquals("http://first/?a=%26%3D%20%2C%24", page.getWebResponse().getRequestUrl());
 
         // with character to encode in path
         page = client.getPage("http://first/page 1.html");
-        assertEquals("http://first/page%201.html", page.getWebResponse().getUrl());
+        assertEquals("http://first/page%201.html", page.getWebResponse().getRequestUrl());
 
         // with character to encode in path
         page = client.getPage("http://first/page 1.html");
-        assertEquals("http://first/page%201.html", page.getWebResponse().getUrl());
+        assertEquals("http://first/page%201.html", page.getWebResponse().getRequestUrl());
     }
 
     /**
@@ -1221,7 +1221,7 @@ public class WebClientTest extends WebTestCase {
         webClient.getPage(URL_FIRST);
         assertEquals(null, webConnection.getLastWebRequestSettings().getProxyHost());
         assertEquals(0, webConnection.getLastWebRequestSettings().getProxyPort());
-        assertEquals(location2, page2.getWebResponse().getUrl());
+        assertEquals(location2, page2.getWebResponse().getRequestUrl());
 
         // Make sure default proxy settings are used.
         webClient.setThrowExceptionOnFailingStatusCode(false);
@@ -1229,7 +1229,7 @@ public class WebClientTest extends WebTestCase {
         final Page page1 = webClient.getPage(URL_FIRST);
         assertEquals(defaultProxyHost, webConnection.getLastWebRequestSettings().getProxyHost());
         assertEquals(defaultProxyPort, webConnection.getLastWebRequestSettings().getProxyPort());
-        assertEquals(URL_FIRST, page1.getWebResponse().getUrl());
+        assertEquals(URL_FIRST, page1.getWebResponse().getRequestUrl());
     }
 
     /**
@@ -1729,7 +1729,7 @@ public class WebClientTest extends WebTestCase {
     public void testPlusNotEncodedInUrl() throws Exception {
         final URL url = new URL("http://host/search/my+category/");
         final HtmlPage page = loadPage("<html></html>", new ArrayList<String>(), url);
-        assertEquals("http://host/search/my+category/", page.getWebResponse().getUrl());
+        assertEquals("http://host/search/my+category/", page.getWebResponse().getRequestUrl());
     }
 
     /**
@@ -1786,7 +1786,7 @@ public class WebClientTest extends WebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         Page page = webClient.getPage("javascript:void(alert(document.location))");
-        assertEquals("about:blank", page.getWebResponse().getUrl());
+        assertEquals("about:blank", page.getWebResponse().getRequestUrl());
         assertEquals(new String[] {"about:blank"}, collectedAlerts);
         collectedAlerts.clear();
 

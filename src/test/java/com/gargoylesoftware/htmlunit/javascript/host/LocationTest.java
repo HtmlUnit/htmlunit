@@ -324,7 +324,7 @@ public class LocationTest extends WebTestCase {
 
         final HtmlPage page = (HtmlPage) webClient.getPage(url);
         assertEquals("Test 2", page.getTitleText());
-        assertEquals(url2.toExternalForm(), page.getWebResponse().getUrl().toExternalForm());
+        assertEquals(url2.toExternalForm(), page.getWebResponse().getRequestUrl().toExternalForm());
     }
 
     /**
@@ -346,7 +346,7 @@ public class LocationTest extends WebTestCase {
 
         final HtmlPage page = (HtmlPage) webClient.getPage(url);
         assertEquals("Test 2", page.getTitleText());
-        assertEquals(url2.toExternalForm(), page.getWebResponse().getUrl().toExternalForm());
+        assertEquals(url2.toExternalForm(), page.getWebResponse().getRequestUrl().toExternalForm());
     }
 
     /**
@@ -368,7 +368,7 @@ public class LocationTest extends WebTestCase {
 
         final HtmlPage page = (HtmlPage) webClient.getPage(url);
         assertEquals("Test 2", page.getTitleText());
-        assertEquals(url2.toExternalForm(), page.getWebResponse().getUrl().toExternalForm());
+        assertEquals(url2.toExternalForm(), page.getWebResponse().getRequestUrl().toExternalForm());
     }
 
     /**
@@ -390,7 +390,7 @@ public class LocationTest extends WebTestCase {
 
         final HtmlPage page = (HtmlPage) webClient.getPage(url);
         assertEquals("Test 2", page.getTitleText());
-        assertEquals(url2.toExternalForm(), page.getWebResponse().getUrl().toExternalForm());
+        assertEquals(url2.toExternalForm(), page.getWebResponse().getRequestUrl().toExternalForm());
     }
 
     /**
@@ -412,7 +412,7 @@ public class LocationTest extends WebTestCase {
 
         final HtmlPage page = (HtmlPage) webClient.getPage(url);
         assertEquals("Test 2", page.getTitleText());
-        assertEquals(url2.toExternalForm(), page.getWebResponse().getUrl().toExternalForm());
+        assertEquals(url2.toExternalForm(), page.getWebResponse().getRequestUrl().toExternalForm());
     }
 
     /**
@@ -434,7 +434,7 @@ public class LocationTest extends WebTestCase {
 
         final HtmlPage page = (HtmlPage) webClient.getPage(url);
         assertEquals("Test 2", page.getTitleText());
-        assertEquals(url2.toExternalForm(), page.getWebResponse().getUrl().toExternalForm());
+        assertEquals(url2.toExternalForm(), page.getWebResponse().getRequestUrl().toExternalForm());
     }
 
     /**

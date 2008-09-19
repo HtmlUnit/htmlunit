@@ -95,8 +95,8 @@ public class HttpWebConnection implements WebConnection {
             final HostConfiguration hostConfiguration = getHostConfiguration(settings);
             final long startTime = System.currentTimeMillis();
             final int responseCode = httpClient.executeMethod(hostConfiguration, httpMethod);
-            webClient_.getCookieManager().updateFromState(httpClient.getState());
             final long endTime = System.currentTimeMillis();
+            webClient_.getCookieManager().updateFromState(httpClient.getState());
             return makeWebResponse(responseCode, httpMethod, settings, endTime - startTime, settings.getCharset());
         }
         catch (final HttpException e) {

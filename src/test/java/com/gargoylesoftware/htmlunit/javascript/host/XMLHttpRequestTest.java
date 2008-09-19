@@ -576,7 +576,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         conn.setDefaultResponse("");
         client.setWebConnection(conn);
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
-        assertEquals(URL_FIRST, page.getWebResponse().getUrl());
+        assertEquals(URL_FIRST, page.getWebResponse().getRequestUrl());
         assertEquals("foo", page.getTitleText());
     }
 
@@ -729,7 +729,7 @@ public class XMLHttpRequestTest extends WebTestCase {
 
         final WebWindow window = loadPage(content).getEnclosingWindow();
         assertTrue("thread failed to stop in 4 seconds", window.getThreadManager().joinAll(4000));
-        assertEquals("about:blank", window.getEnclosedPage().getWebResponse().getUrl());
+        assertEquals("about:blank", window.getEnclosedPage().getWebResponse().getRequestUrl());
     }
 
     /**

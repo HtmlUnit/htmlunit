@@ -93,7 +93,7 @@ public class XmlPageTest extends WebTestCase {
         webConnection.setDefaultResponse(content, 200, "OK", mimeType);
         client.setWebConnection(webConnection);
         final Page page = client.getPage(URL_FIRST);
-        assertEquals(URL_FIRST, page.getWebResponse().getUrl());
+        assertEquals(URL_FIRST, page.getWebResponse().getRequestUrl());
         assertEquals("OK", page.getWebResponse().getStatusMessage());
         assertEquals(HttpStatus.SC_OK, page.getWebResponse().getStatusCode());
         assertEquals(mimeType, page.getWebResponse().getContentType());
@@ -125,7 +125,7 @@ public class XmlPageTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final Page page = client.getPage(URL_FIRST);
-        assertEquals(URL_FIRST, page.getWebResponse().getUrl());
+        assertEquals(URL_FIRST, page.getWebResponse().getRequestUrl());
         assertEquals("OK", page.getWebResponse().getStatusMessage());
         assertEquals(HttpStatus.SC_OK, page.getWebResponse().getStatusCode());
         assertEquals("text/xml", page.getWebResponse().getContentType());

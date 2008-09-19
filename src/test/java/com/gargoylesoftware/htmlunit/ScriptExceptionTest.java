@@ -61,12 +61,11 @@ public final class ScriptExceptionTest extends WebTestCase {
     @Test
     public void getPage() throws Exception {
         final String html = "<html><script>notExisting()</script></html>";
-
         try {
             loadPage(getBrowserVersion(), html, null);
         }
         catch (final ScriptException e) {
-            assertEquals(URL_GARGOYLE, e.getPage().getWebResponse().getUrl());
+            assertEquals(URL_GARGOYLE, e.getPage().getWebResponse().getRequestUrl());
         }
     }
 

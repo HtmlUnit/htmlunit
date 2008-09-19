@@ -68,6 +68,22 @@ public class WebResponseWrapper implements WebResponse {
 
     /**
      * {@inheritDoc}
+     * The default behavior of this method is to return getContentAsString(String) on the wrapped connection object.
+     */
+    public String getContentAsString(final String encoding) {
+        return wrappedWebResponse_.getContentAsString(encoding);
+    }
+
+    /**
+     * {@inheritDoc}
+     * The default behavior of this method is to return getContentAsBytes() on the wrapped connection object.
+     */
+    public byte[] getContentAsBytes() {
+        return wrappedWebResponse_.getContentAsBytes();
+    }
+
+    /**
+     * {@inheritDoc}
      * The default behavior of this method is to return getContentCharSet() on the wrapped connection object.
      */
     public String getContentCharSet() {
@@ -85,9 +101,19 @@ public class WebResponseWrapper implements WebResponse {
     /**
      * {@inheritDoc}
      * The default behavior of this method is to return getLoadTimeInMilliSeconds() on the wrapped connection object.
+     * @deprecated since 2.4, please use {@link #getLoadTime()} instead
      */
+    @Deprecated
     public long getLoadTimeInMilliSeconds() {
-        return wrappedWebResponse_.getLoadTimeInMilliSeconds();
+        return wrappedWebResponse_.getLoadTime();
+    }
+
+    /**
+     * {@inheritDoc}
+     * The default behavior of this method is to return getLoadTime() on the wrapped connection object.
+     */
+    public long getLoadTime() {
+        return wrappedWebResponse_.getLoadTime();
     }
 
     /**
@@ -101,9 +127,11 @@ public class WebResponseWrapper implements WebResponse {
     /**
      * {@inheritDoc}
      * The default behavior of this method is to return getResponseBody() on the wrapped connection object.
+     * @deprecated since 2.4, please use {@link #getContentAsBytes()} instead
      */
+    @Deprecated
     public byte[] getResponseBody() {
-        return wrappedWebResponse_.getResponseBody();
+        return wrappedWebResponse_.getContentAsBytes();
     }
 
     /**
@@ -141,9 +169,19 @@ public class WebResponseWrapper implements WebResponse {
     /**
      * {@inheritDoc}
      * The default behavior of this method is to return getUrl() on the wrapped connection object.
+     * @deprecated since 2.4, please use {@link #getRequestUrl()} instead
      */
+    @Deprecated
     public URL getUrl() {
-        return wrappedWebResponse_.getUrl();
+        return wrappedWebResponse_.getRequestUrl();
+    }
+
+    /**
+     * {@inheritDoc}
+     * The default behavior of this method is to return getRequestUrl() on the wrapped connection object.
+     */
+    public URL getRequestUrl() {
+        return wrappedWebResponse_.getRequestUrl();
     }
 
     /**

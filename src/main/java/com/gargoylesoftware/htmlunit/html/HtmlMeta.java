@@ -63,7 +63,7 @@ public class HtmlMeta extends HtmlElement {
         final String[] parts = getContentAttribute().split("\\s*;\\s*");
         final String name = StringUtils.substringBefore(parts[0], "=");
         final String value = StringUtils.substringAfter(parts[0], "=");
-        final Cookie cookie = new Cookie(getPage().getWebResponse().getUrl().getHost(), name, value);
+        final Cookie cookie = new Cookie(getPage().getWebResponse().getRequestUrl().getHost(), name, value);
         for (int i = 1; i < parts.length; i++) {
             final String partName = StringUtils.substringBefore(parts[i], "=").trim().toLowerCase();
             final String partValue = StringUtils.substringAfter(parts[i], "=").trim();

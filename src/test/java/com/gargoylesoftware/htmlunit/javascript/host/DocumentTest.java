@@ -2846,12 +2846,13 @@ public class DocumentTest extends WebTestCase {
         webConnection.setResponseAsGenericHtml(blankURL, "blank");
         client.setWebConnection(webConnection);
 
-        final HtmlPage framesetPage = (HtmlPage) client.getPage(framesetURL);
+        final HtmlPage framesetPage = client.getPage(framesetURL);
         final FrameWindow frame = framesetPage.getFrames().get(0);
+        final HtmlPage framePage = (HtmlPage) frame.getEnclosedPage();
 
         assertNotNull(frame);
-        assertEquals(frameURL.toExternalForm(), frame.getEnclosedPage().getWebResponse().getUrl().toExternalForm());
-        assertEquals("frame", ((HtmlPage) frame.getEnclosedPage()).getTitleText());
+        assertEquals(frameURL.toExternalForm(), framePage.getWebResponse().getRequestUrl().toExternalForm());
+        assertEquals("frame", framePage.getTitleText());
     }
 
    /**
@@ -2931,7 +2932,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Any document.XXX should first look at elements named XXX before using standard functions.
+     * Any document.foo should first look at elements named "foo" before using standard functions.
      * @throws Exception if the test fails
      */
     @Test

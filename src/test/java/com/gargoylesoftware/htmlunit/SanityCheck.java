@@ -103,7 +103,7 @@ public final class SanityCheck {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
         webClient.setRedirectEnabled(true);
         final HtmlPage page = webClient.getPage("http://www.ibm.com/");
-        assertEquals("http://www.ibm.com/us/", page.getWebResponse().getUrl());
+        assertEquals("http://www.ibm.com/us/", page.getWebResponse().getRequestUrl());
     }
 
     /**

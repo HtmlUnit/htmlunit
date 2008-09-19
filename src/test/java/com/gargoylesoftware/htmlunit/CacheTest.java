@@ -239,6 +239,14 @@ class DummyWebResponse implements WebResponse {
         throw new RuntimeException("not implemented");
     }
 
+    public String getContentAsString(final String encoding) {
+        throw new RuntimeException("not implemented");
+    }
+
+    public byte[] getContentAsBytes() {
+        throw new RuntimeException("not implemented");
+    }
+
     public String getContentCharSet() {
         throw new RuntimeException("not implemented");
     }
@@ -248,6 +256,10 @@ class DummyWebResponse implements WebResponse {
     }
 
     public long getLoadTimeInMilliSeconds() {
+        throw new RuntimeException("not implemented");
+    }
+
+    public long getLoadTime() {
         throw new RuntimeException("not implemented");
     }
 
@@ -276,6 +288,10 @@ class DummyWebResponse implements WebResponse {
     }
 
     public URL getUrl() {
+        throw new RuntimeException("not implemented");
+    }
+
+    public URL getRequestUrl() {
         throw new RuntimeException("not implemented");
     }
 

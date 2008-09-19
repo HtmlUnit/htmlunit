@@ -73,16 +73,16 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
 
     /**
      * Builds a WebResponse with new content, preserving all other information.
-     * @param webResponse the web response to adapt
+     * @param wr the web response to adapt
      * @param newContent the new content to place in the response
      * @return a web response with the new content
      * @throws IOException if an encoding problem occurred
      */
-    protected WebResponse replaceContent(final WebResponse webResponse, final String newContent) throws IOException {
-        final byte[] body = newContent.getBytes(webResponse.getContentCharSet());
-        final WebResponseData wrd = new WebResponseData(body, webResponse.getStatusCode(),
-                webResponse.getStatusMessage(), webResponse.getResponseHeaders());
-        return new WebResponseImpl(wrd, webResponse.getUrl(), webResponse.getRequestMethod(),
-                webResponse.getLoadTimeInMilliSeconds());
+    protected WebResponse replaceContent(final WebResponse wr, final String newContent) throws IOException {
+        final byte[] body = newContent.getBytes(wr.getContentCharSet());
+        final WebResponseData wrd = new WebResponseData(body, wr.getStatusCode(), wr.getStatusMessage(),
+            wr.getResponseHeaders());
+        return new WebResponseImpl(wrd, wr.getRequestUrl(), wr.getRequestMethod(), wr.getLoadTime());
     }
+
 }

@@ -156,7 +156,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
         final HtmlPage page1 = loadPage(getBrowserVersion(), html, null);
         final Page page2 = page1.getAnchorByHref("#").click();
 
-        assertEquals("http://www.gargoylesoftware.com/foo.html",  page2.getWebResponse().getUrl());
+        assertEquals("http://www.gargoylesoftware.com/foo.html",  page2.getWebResponse().getRequestUrl());
     }
 
     /**

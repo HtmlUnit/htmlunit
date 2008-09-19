@@ -90,7 +90,7 @@ public class Cache implements Serializable {
      */
     public void cacheIfPossible(final WebRequestSettings request, final WebResponse response, final Script script) {
         if (isCacheable(request, response)) {
-            final String url = response.getUrl().toString();
+            final String url = response.getRequestUrl().toString();
             final Entry entry = new Entry(url, script);
             entries_.put(entry.key_, entry);
             deleteOverflow();
@@ -200,7 +200,7 @@ public class Cache implements Serializable {
         final String contentType = webResponse.getContentType().toLowerCase();
         return "text/javascript".equals(contentType)
                 || "application/x-javascript".equals(contentType)
-                || webResponse.getUrl().getPath().endsWith(".js");
+                || webResponse.getRequestUrl().getPath().endsWith(".js");
     }
 
     /**

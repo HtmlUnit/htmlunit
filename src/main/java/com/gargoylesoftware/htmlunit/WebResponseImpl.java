@@ -113,6 +113,46 @@ public class WebResponseImpl implements WebResponse, Serializable {
     /**
      * {@inheritDoc}
      */
+    public WebRequestSettings getRequestSettings() {
+        return requestSettings_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public HttpMethod getRequestMethod() {
+        return getRequestSettings().getHttpMethod();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public URL getRequestUrl() {
+        return getRequestSettings().getUrl();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public List<NameValuePair> getResponseHeaders() {
+        return responseData_.getResponseHeaders();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getResponseHeaderValue(final String headerName) {
+        for (final NameValuePair pair : responseData_.getResponseHeaders()) {
+            if (pair.getName().equalsIgnoreCase(headerName)) {
+                return pair.getValue();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public int getStatusCode() {
         return responseData_.getStatusCode();
     }
@@ -138,73 +178,6 @@ public class WebResponseImpl implements WebResponse, Serializable {
             return contentTypeHeader;
         }
         return contentTypeHeader.substring(0, index);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public String getContentAsString() {
-        try {
-            final byte[] body = responseData_.getBody();
-            if (body != null) {
-                return new String(body, getContentCharSet());
-            }
-            return null;
-        }
-        catch (final UnsupportedEncodingException e) {
-            return null;
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public InputStream getContentAsStream() throws IOException {
-        final byte[] body = responseData_.getBody();
-        if (body != null) {
-            return new ByteArrayInputStream(body);
-        }
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public URL getUrl() {
-        return getRequestSettings().getUrl();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public HttpMethod getRequestMethod() {
-        return getRequestSettings().getHttpMethod();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public List<NameValuePair> getResponseHeaders() {
-        return responseData_.getResponseHeaders();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public String getResponseHeaderValue(final String headerName) {
-        for (final NameValuePair pair : responseData_.getResponseHeaders()) {
-            if (pair.getName().equalsIgnoreCase(headerName)) {
-                return pair.getValue();
-            }
-        }
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public long getLoadTimeInMilliSeconds() {
-        return loadTime_;
     }
 
     /**
@@ -271,6 +244,82 @@ public class WebResponseImpl implements WebResponse, Serializable {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public String getContentAsString() {
+        return getContentAsString(getContentCharSet());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getContentAsString(final String encoding) {
+        final byte[] body = responseData_.getBody();
+        if (body != null) {
+            try {
+                return new String(body, encoding);
+            }
+            catch (final UnsupportedEncodingException e) {
+                log_.warn("Attempted to use unsupported encoding '" + encoding + "'; using default system encoding.");
+                return new String(body);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public InputStream getContentAsStream() throws IOException {
+        final byte[] body = responseData_.getBody();
+        if (body != null) {
+            return new ByteArrayInputStream(body);
+        }
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public byte[] getContentAsBytes() {
+        return responseData_.getBody();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public long getLoadTime() {
+        return loadTime_;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @deprecated since 2.4, please use {@link #getRequestUrl()} instead
+     */
+    @Deprecated
+    public URL getUrl() {
+        return getRequestSettings().getUrl();
+    }
+
+    /**
+     * {@inheritDoc}
+     * @deprecated since 2.4, please use {@link #getLoadTime()} instead
+     */
+    @Deprecated
+    public long getLoadTimeInMilliSeconds() {
+        return loadTime_;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @deprecated since 2.4, please use {@link #getContentAsBytes()} instead
+     */
+    @Deprecated
+    public byte[] getResponseBody() {
+        return responseData_.getBody();
+    }
+
+    /**
      * Searches for XML declaration and returns the <tt>encoding</tt> if found, otherwise returns <code>null</code>.
      */
     private String getXMLEncoding(final byte[] body) {
@@ -306,17 +355,4 @@ public class WebResponseImpl implements WebResponse, Serializable {
         return encoding;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public byte[] getResponseBody() {
-        return responseData_.getBody();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public WebRequestSettings getRequestSettings() {
-        return requestSettings_;
-    }
 }

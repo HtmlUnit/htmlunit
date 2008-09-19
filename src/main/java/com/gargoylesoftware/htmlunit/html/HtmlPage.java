@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.httpclient.util.EncodingUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -609,7 +608,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         final List<HtmlBase> baseElements = getDocumentElement().getHtmlElementsByTagName("base");
         URL baseUrl;
         if (baseElements.isEmpty()) {
-            baseUrl = getWebResponse().getUrl();
+            baseUrl = getWebResponse().getRequestUrl();
         }
         else {
             if (baseElements.size() > 1) {
@@ -631,7 +630,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
             final String href = htmlBase.getHrefAttribute();
             if (!insideHead || StringUtils.isEmpty(href)) {
-                baseUrl = getWebResponse().getUrl();
+                baseUrl = getWebResponse().getRequestUrl();
             }
             else {
                 try {
@@ -639,7 +638,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
                 }
                 catch (final MalformedURLException e) {
                     notifyIncorrectness("Invalid base url: \"" + href + "\", ignoring it");
-                    baseUrl = getWebResponse().getUrl();
+                    baseUrl = getWebResponse().getRequestUrl();
                 }
             }
         }
@@ -1053,9 +1052,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             }
         }
 
-        final byte[] data = response.getResponseBody();
-        final String scriptCode = EncodingUtil.getString(data, 0, data.length, scriptEncoding);
-
+        final String scriptCode = response.getContentAsString(scriptEncoding);
         final JavaScriptEngine javaScriptEngine = client.getJavaScriptEngine();
         final Script script = javaScriptEngine.compile(this, scriptCode, url.toExternalForm(), 1);
         cache.cacheIfPossible(request, response, script);
@@ -1230,7 +1227,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
                 }
                 return;
             }
-            url = getWebResponse().getUrl();
+            url = getWebResponse().getRequestUrl();
         }
         else {
             // Format: <meta http-equiv='refresh' content='10;url=http://www.blah.com'>
@@ -1253,7 +1250,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             final StringBuilder buffer = new StringBuilder(refreshString.substring(index + 4));
             if (buffer.toString().trim().length() == 0) {
                 //content='10; URL=' is treated as content='10'
-                url = getWebResponse().getUrl();
+                url = getWebResponse().getRequestUrl();
             }
             else {
                 if (buffer.charAt(0) == '"' || buffer.charAt(0) == 0x27) {
@@ -1727,7 +1724,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             // test if the frame should really be loaded:
             // if a script has already changed its content, it should be skipped
             // use == and not equals(...) to identify initial content (versus URL set to "about:blank")
-            if (frame.getEnclosedPage().getWebResponse().getUrl() == WebClient.URL_ABOUT_BLANK) {
+            if (frame.getEnclosedPage().getWebResponse().getRequestUrl() == WebClient.URL_ABOUT_BLANK) {
                 frame.loadInnerPage();
             }
         }
@@ -1749,7 +1746,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     public String toString() {
         final StringBuilder buffer = new StringBuilder();
         buffer.append("HtmlPage(");
-        buffer.append(getWebResponse().getUrl());
+        buffer.append(getWebResponse().getRequestUrl());
         buffer.append(")@");
         buffer.append(hashCode());
         return buffer.toString();

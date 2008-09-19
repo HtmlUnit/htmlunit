@@ -7,6 +7,13 @@
     </properties>
 
     <body>
+        <release version="2.4" date="?" description="Bugfixes">
+            <action type="update" dev="sdanig">
+                WebResponse interface: deprecate getResponseBody() in favor of getContentAsByteArray(),
+                deprecate getLoadTimeInMillSeconds() in favor of getLoadTime(), deprecate getUrl() in
+                favor of getRequestUrl(), add getContentAsString(String).
+            </action>
+        </release>
         <release version="2.3" date="Sept 16, 2008" description="Bugfixes, better generics, add Firefox 3 emulation, GWT 1.5 support">
             <action type="update" dev="asashour">
                 Better generics: avoid the need for casting when calling methods like WebClient.getPage(), HtmlPage.getHtmlElementById(), ...

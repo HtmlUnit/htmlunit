@@ -197,7 +197,7 @@ public final class HTMLParser {
      */
     public static void parseFragment(final DomNode parent, final String source) throws SAXException, IOException {
         final HtmlPage page = (HtmlPage) parent.getPage();
-        final URL url = page.getWebResponse().getUrl();
+        final URL url = page.getWebResponse().getRequestUrl();
 
         final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(parent, url);
         domBuilder.setFeature("http://cyberneko.org/html/features/balance-tags/document-fragment", true);
@@ -225,11 +225,11 @@ public final class HTMLParser {
      * @throws IOException if there is an IO error
      */
     public static HtmlPage parse(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
-        final URL url = webResponse.getUrl();
+        final URL url = webResponse.getRequestUrl();
         final HtmlPage page = new HtmlPage(url, webResponse, webWindow);
         webWindow.setEnclosedPage(page);
 
-        final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(page, webResponse.getUrl());
+        final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(page, url);
         final String charSet = webResponse.getContentCharSet();
 
         final InputStream content = webResponse.getContentAsStream();
@@ -242,7 +242,7 @@ public final class HTMLParser {
         catch (final XNIException e) {
             // extract enclosed exception
             final Throwable origin = extractNestedException(e);
-            throw new RuntimeException("Failed parsing content from " + webResponse.getUrl(), origin);
+            throw new RuntimeException("Failed parsing content from " + url, origin);
         }
         finally {
             page.registerParsingEnd();
@@ -354,8 +354,8 @@ public final class HTMLParser {
         public void pushInputString(final String sourceString) {
             final WebResponse webResponse = page_.getWebResponse();
             final String charSet = webResponse.getContentCharSet();
-            final XMLInputSource in = new XMLInputSource(null, webResponse.getUrl().toString(), null,
-                    new StringReader(sourceString), charSet);
+            final XMLInputSource in = new XMLInputSource(null, webResponse.getRequestUrl().toString(),
+                null, new StringReader(sourceString), charSet);
             ((HTMLConfiguration) fConfiguration).evaluateInputSource(in);
         }
 

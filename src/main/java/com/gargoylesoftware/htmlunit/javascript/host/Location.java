@@ -78,7 +78,7 @@ public class Location extends SimpleScriptable {
     public void initialize(final Window window) {
         window_ = window;
         if (window_ != null && window_.getWebWindow().getEnclosedPage() != null) {
-            hash_ = window_.getWebWindow().getEnclosedPage().getWebResponse().getUrl().getRef();
+            hash_ = window_.getWebWindow().getEnclosedPage().getWebResponse().getRequestUrl().getRef();
         }
     }
 
@@ -170,7 +170,7 @@ public class Location extends SimpleScriptable {
             return UNKNOWN;
         }
         try {
-            URL url = page.getWebResponse().getUrl();
+            URL url = page.getWebResponse().getRequestUrl();
             final boolean encodeHash = !getBrowserVersion().isIE();
             final String hash = getHash(encodeHash);
             if (hash != null) {
@@ -180,7 +180,7 @@ public class Location extends SimpleScriptable {
         }
         catch (final MalformedURLException e) {
             getLog().error(e.getMessage(), e);
-            return page.getWebResponse().getUrl().toExternalForm();
+            return page.getWebResponse().getRequestUrl().toExternalForm();
         }
     }
 
@@ -204,7 +204,7 @@ public class Location extends SimpleScriptable {
 
         try {
             final URL url = page.getFullyQualifiedUrl(newLocation);
-            final URL oldUrl = page.getWebResponse().getUrl();
+            final URL oldUrl = page.getWebResponse().getRequestUrl();
             if (url.sameFile(oldUrl) && !StringUtils.equals(url.getRef(), oldUrl.getRef())) {
                 // If we're just setting or modifying the hash, avoid a server hit.
                 jsxSet_hash(newLocation);
@@ -441,7 +441,7 @@ public class Location extends SimpleScriptable {
      * @return this location's current URL
      */
     private URL getUrl() {
-        return window_.getWebWindow().getEnclosedPage().getWebResponse().getUrl();
+        return window_.getWebWindow().getEnclosedPage().getWebResponse().getRequestUrl();
     }
 
     /**

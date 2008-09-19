@@ -62,7 +62,7 @@ public class HtmlImageDownloadTest extends WebTestCase {
     @Test
     public void testImageFileSize() throws Exception {
         final HtmlImage htmlimage = getHtmlElementToTest("image1");
-        Assert.assertEquals("Image filesize", 140144, htmlimage.getWebResponse(true).getResponseBody().length);
+        Assert.assertEquals("Image filesize", 140144, htmlimage.getWebResponse(true).getContentAsBytes().length);
     }
 
     /**

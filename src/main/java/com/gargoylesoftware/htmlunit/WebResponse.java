@@ -31,94 +31,120 @@ import org.apache.commons.httpclient.NameValuePair;
  * @author Ahmed Ashour
  */
 public interface WebResponse {
+
+    /**
+     * Returns the request settings used to load this response.
+     * @return the request settings used to load this response
+     */
+    WebRequestSettings getRequestSettings();
+
+    /**
+     * Returns the method used for the request resulting in this response.
+     * @return the method used for the request resulting in this response
+     */
+    HttpMethod getRequestMethod();
+
+    /**
+     * Returns the URL that was used to load this page.
+     * @return the URL that was used to load this page
+     */
+    URL getRequestUrl();
+
+    /**
+     * Returns the response headers as a list of {@link NameValuePair}s.
+     * @return the response headers as a list of {@link NameValuePair}s
+     */
+    List<NameValuePair> getResponseHeaders();
+
+    /**
+     * Returns the value of the specified response header.
+     * @param headerName the name of the header whose value is to be returned
+     * @return the value of the specified response header
+     */
+    String getResponseHeaderValue(final String headerName);
+
     /**
      * Returns the status code that was returned by the server.
-     *
      * @return the status code that was returned by the server
      */
     int getStatusCode();
 
     /**
      * Returns the status message that was returned from the server.
-     *
      * @return the status message that was returned from the server
      */
     String getStatusMessage();
 
     /**
      * Returns the content type returned from the server, i.e. "text/html".
-     *
      * @return the content type returned from the server, i.e. "text/html"
      */
     String getContentType();
 
     /**
-     * Returns the content from the server as a string.
-     *
+     * Returns the content charset. The charset returned by this method is a valid, supported
+     * charset determined from the "Content-Type" header and from the response content.
+     * @return the content charset
+     */
+    String getContentCharSet();
+
+    /**
+     * Returns the content from the server as a string, using the charset/encoding
+     * specified in the server response.
      * @return the content from the server as a string
      */
     String getContentAsString();
 
     /**
+     * Returns the content from the server as a string, using the specified charset/encoding,
+     * rather than the charset/encoding specified in the server response. If the specified
+     * charset/encoding is not supported, the default system encoding is used.
+     * @param encoding the charset/encoding to use the convert the content into a string
+     * @return the content from the server as a string
+     */
+    String getContentAsString(String encoding);
+
+    /**
      * Returns the content from the server as an input stream.
-     *
      * @return the content from the server as an input stream
      * @exception IOException if an IO problem occurs
      */
-    InputStream getContentAsStream()
-        throws IOException;
+    InputStream getContentAsStream() throws IOException;
 
     /**
-     * Returns the URL that was used to load this page.
-     *
-     * @return the originating URL
+     * Returns the content from the server as a byte array.
+     * @return the content from the server as a byte array
      */
-    URL getUrl();
+    byte[] getContentAsBytes();
 
     /**
-     * Returns the method used for the request resulting into this response.
-     * @return the method
+     * Returns the time it took to load this web response, in milliseconds.
+     * @return the time it took to load this web response, in milliseconds
      */
-    HttpMethod getRequestMethod();
+    long getLoadTime();
 
     /**
-     * Returns the response headers as a list of {@link org.apache.commons.httpclient.NameValuePair}s.
-     *
-     * @return the response headers as a list of {@link org.apache.commons.httpclient.NameValuePair}s
+     * Returns the time it took to load this web response, in milliseconds.
+     * @return the time it took to load this web response, in milliseconds
+     * @deprecated since 2.4, please use {@link #getLoadTime()} instead
      */
-    List<NameValuePair> getResponseHeaders();
-
-    /**
-     * Returns the value of the specified header from this response.
-     *
-     * @param headerName the name of the header
-     * @return the value of the specified header
-     */
-    String getResponseHeaderValue(final String headerName);
-
-    /**
-     * Returns the time it took to load this web response in milliseconds.
-     * @return the load time
-     */
+    @Deprecated
     long getLoadTimeInMilliSeconds();
 
     /**
-     * Returns the content charset value.
-     * The charset returned by this method is a valid, supported charset determined
-     * from the "Content-Type" header and from the response content.
-     * @return the charset value
+     * Returns the response body, as a byte array.
+     * @return the response body, as a byte array
+     * @deprecated since 2.4, please use {@link #getContentAsBytes()} instead
      */
-    String getContentCharSet();
-
-    /**
-     * Returns the response body as byte array.
-     * @return response body
-     */
+    @Deprecated
     byte[] getResponseBody();
 
     /**
-     * Returns the request settings.
-     * @return the request settings
+     * Returns the URL that was used to load this page.
+     * @return the URL that was used to load this page
+     * @deprecated since 2.4, please use {@link #getRequestUrl()} instead
      */
-    WebRequestSettings getRequestSettings();
+    @Deprecated
+    URL getUrl();
+
 }

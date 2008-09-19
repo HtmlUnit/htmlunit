@@ -417,7 +417,7 @@ public class HTMLDocument extends Document {
     public String jsxGet_cookie() {
         final HtmlPage page = getHtmlPage();
 
-        URL url = page.getWebResponse().getUrl();
+        URL url = page.getWebResponse().getRequestUrl();
         url = replaceForCookieIfNecessary(url);
 
         final boolean secure = "https".equals(url.getProtocol());
@@ -465,7 +465,7 @@ public class HTMLDocument extends Document {
     public void jsxSet_cookie(final String newCookie) {
         final CookieManager cookieManager = getHtmlPage().getWebClient().getCookieManager();
         if (cookieManager.isCookiesEnabled()) {
-            URL url = getHtmlPage().getWebResponse().getUrl();
+            URL url = getHtmlPage().getWebResponse().getRequestUrl();
             url = replaceForCookieIfNecessary(url);
             final Cookie cookie = buildCookie(newCookie, url);
             cookieManager.addCookie(cookie);
@@ -567,7 +567,7 @@ public class HTMLDocument extends Document {
      * @return the value of the "URL" property
      */
     public String jsxGet_URL() {
-        return getHtmlPage().getWebResponse().getUrl().toExternalForm();
+        return getHtmlPage().getWebResponse().getRequestUrl().toExternalForm();
     }
 
     /**
@@ -632,8 +632,8 @@ public class HTMLDocument extends Document {
         }
         else {
             final HtmlPage page = getHtmlPage();
-            final WebResponse webResponse = new StringWebResponse(writeBuffer_.toString(),
-                page.getWebResponse().getUrl());
+            final URL url = page.getWebResponse().getRequestUrl();
+            final WebResponse webResponse = new StringWebResponse(writeBuffer_.toString(), url);
             final WebClient webClient = page.getWebClient();
             final WebWindow window = page.getEnclosingWindow();
 
@@ -930,7 +930,7 @@ public class HTMLDocument extends Document {
      */
     public String jsxGet_domain() {
         if (domain_ == null) {
-            domain_ = getHtmlPage().getWebResponse().getUrl().getHost();
+            domain_ = getHtmlPage().getWebResponse().getRequestUrl().getHost();
             final BrowserVersion browser = getBrowserVersion();
             if (browser.isNetscape()) {
                 domain_ = domain_.toLowerCase();

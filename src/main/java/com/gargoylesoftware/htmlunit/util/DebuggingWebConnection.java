@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.util;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 import org.apache.commons.httpclient.NameValuePair;
@@ -108,16 +109,16 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         }
         final File f = File.createTempFile(reportBaseName_ + counter_ + "-", extension);
         final String content = response.getContentAsString();
+        final URL url = response.getRequestUrl();
         FileUtils.writeStringToFile(f, content, response.getContentCharSet());
-        LOG.info("Created file " + f.getAbsolutePath()
-                + " for response " + counter_ + ": " + response.getUrl());
+        LOG.info("Created file " + f.getAbsolutePath() + " for response " + counter_ + ": " + url);
 
         final StringBuilder buffer = new StringBuilder();
         buffer.append("tab[tab.length] = {code: " + response.getStatusCode() + ", ");
         buffer.append("fileName: '" + f.getName() + "', ");
         buffer.append("contentType: '" + response.getContentType() + "', ");
         buffer.append("method: '" + settings.getHttpMethod().name() + "', ");
-        buffer.append("url: '" + response.getUrl() + "', ");
+        buffer.append("url: '" + url + "', ");
         buffer.append("headers: " + nameValueListToJsMap(response.getResponseHeaders()));
         buffer.append("};\n");
         final FileWriter jsFileWriter = new FileWriter(javaScriptFile_, true);

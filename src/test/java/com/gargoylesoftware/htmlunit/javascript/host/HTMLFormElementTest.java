@@ -560,7 +560,7 @@ public class HTMLFormElementTest extends WebTestCase {
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         final Page page2 = ((ClickableElement) page.getHtmlElementById("button1")).click();
 
-        assertEquals(URL_THIRD.toExternalForm(), page2.getWebResponse().getUrl());
+        assertEquals(URL_THIRD.toExternalForm(), page2.getWebResponse().getRequestUrl());
     }
 
     /**
@@ -767,7 +767,7 @@ public class HTMLFormElementTest extends WebTestCase {
         final HtmlButton button = (HtmlButton) page.getHtmlElementById("button1");
         final HtmlPage secondPage = (HtmlPage) button.click();
         assertEquals("second", secondPage.getTitleText());
-        assertEquals(URL_SECOND + "?button1=", secondPage.getWebResponse().getUrl());
+        assertEquals(URL_SECOND + "?button1=", secondPage.getWebResponse().getRequestUrl());
     }
 
     /**

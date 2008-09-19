@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.net.URL;
+
 /**
  * An exception that is thrown when the server returns a failing status code.
  *
@@ -58,7 +60,7 @@ public class FailingHttpStatusCodeException extends RuntimeException {
     public String getMessage() {
         final int code = getStatusCode();
         final String msg = getStatusMessage();
-        final String url = getResponse().getUrl().toExternalForm();
+        final URL url = getResponse().getRequestUrl();
         return code + " " + msg + " for " + url;
     }
 

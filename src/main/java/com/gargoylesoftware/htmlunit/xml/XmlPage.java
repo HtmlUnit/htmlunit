@@ -119,7 +119,7 @@ public class XmlPage extends SgmlPage implements Document {
         }
         catch (final SAXException e) {
             if (mainLog_.isWarnEnabled()) {
-                mainLog_.warn("Failed parsing XML document " + webResponse.getUrl() + ": " + e.getMessage());
+                mainLog_.warn("Failed parsing XML document " + webResponse.getRequestUrl() + ": " + e.getMessage());
             }
             if (!ignoreSAXException) {
                 throw new IOException(e.getMessage());
@@ -127,7 +127,7 @@ public class XmlPage extends SgmlPage implements Document {
         }
         catch (final ParserConfigurationException e) {
             if (mainLog_.isWarnEnabled()) {
-                mainLog_.warn("Failed parsing XML document " + webResponse.getUrl() + ": " + e.getMessage());
+                mainLog_.warn("Failed parsing XML document " + webResponse.getRequestUrl() + ": " + e.getMessage());
             }
         }
     }
