@@ -94,7 +94,7 @@ public class CacheTest extends WebTestCase {
                 return contentType[0];
             }
             @Override
-            public URL getUrl() {
+            public URL getRequestUrl() {
                 return url[0];
             }
         };
