@@ -31,7 +31,6 @@
             <source>
 final HtmlTable table = page.getHtmlElementById("table1");
 for (final HtmlTableRow row : table.getRows()) {
-    final HtmlTableRow row = (HtmlTableRow) rowIterator.next();
     System.out.println("Found row");
     for (final HtmlTableCell cell : row.getCells()) {
         System.out.println("   Found cell: " + cell.asText());
@@ -47,7 +46,7 @@ final WebClient webClient = new WebClient();
 final HtmlPage page = webClient.getPage("http://foo.com");
 
 final HtmlTable table = page.getHtmlElementById("table1");
-System.out.println("Cell (1,2)="+ table.getCellAt(1,2));
+System.out.println("Cell (1,2)=" + table.getCellAt(1,2));
             </source>
             </p>
         </section>

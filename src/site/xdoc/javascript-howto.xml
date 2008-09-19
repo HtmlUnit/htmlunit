@@ -28,10 +28,10 @@
     <form action='/foo' name='form1'>
     <table id="table1">
         <script type="text/javascript">
-            for( i=1; i <= 5; i++ ) {
-                document.write("<tr><td>"+i
-                    +"</td><td><input name='textfield"+i
-                    +"' type='text'></td></tr>");
+            for (i = 1; i <= 5; i++) {
+                document.write("<tr><td>" + i
+                    + "</td><td><input name='textfield" + i
+                    + "' type='text'></td></tr>");
             }
         </script>
     </table></form>
@@ -49,7 +49,7 @@ public void testDocumentWrite() throws Exception {
     final HtmlPage page = webClient.getPage("http://myserver/test.html");
     final HtmlForm form = page.getFormByName("form1");
     for (int i = 1; i <= 5; i++) {
-        final String expectedName = "textfield"+i;
+        final String expectedName = "textfield" + i;
         assertEquals(
             "text", 
             form.<HtmlInput>getInputByName(expectedName).getTypeAttribute());
@@ -111,7 +111,7 @@ public void testAlerts() throws Exception {
     webClient.getPage("http://tciludev01/test.html");
 
     final List expectedAlerts = Collections.singletonList("foo");
-    assertEquals( expectedAlerts, collectedAlerts );
+    assertEquals(expectedAlerts, collectedAlerts);
 }
             ]]></source>
         </section>
