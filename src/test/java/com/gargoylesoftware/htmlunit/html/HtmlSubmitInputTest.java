@@ -52,9 +52,9 @@ public class HtmlSubmitInputTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
-        final HtmlSubmitInput submitInput = (HtmlSubmitInput) form.getInputByName("button");
+        final HtmlSubmitInput submitInput = form.getInputByName("button");
         final HtmlPage secondPage = (HtmlPage) submitInput.click();
         assertEquals("foo", secondPage.getTitleText());
 
@@ -76,8 +76,8 @@ public class HtmlSubmitInputTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
-        final HtmlSubmitInput submitInput = (HtmlSubmitInput) form.getInputByName("button");
+        final HtmlForm form = page.getHtmlElementById("form1");
+        final HtmlSubmitInput submitInput = form.getInputByName("button");
 
         submitInput.click();
 

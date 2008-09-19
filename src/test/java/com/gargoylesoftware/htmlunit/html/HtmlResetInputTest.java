@@ -56,8 +56,8 @@ public class HtmlResetInputTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
-        final HtmlResetInput resetInput = (HtmlResetInput) form.getInputByName("resetButton");
+        final HtmlForm form = page.getHtmlElementById("form1");
+        final HtmlResetInput resetInput = form.getInputByName("resetButton");
 
         // change all the values to something else
         ((HtmlRadioButtonInput) form.getFirstByXPath(

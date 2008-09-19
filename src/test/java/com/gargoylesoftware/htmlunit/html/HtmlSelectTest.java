@@ -58,10 +58,10 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlSelect select = form.getSelectsByName("select1").get(0);
-        final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
+        final HtmlSubmitInput button = form.getInputByName("button");
 
         // Test that the select is being correctly identified as a submittable element
         assertEquals(Arrays.asList(new Object[] {select, button}), form.getSubmittableElements(button));
@@ -91,12 +91,12 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlSelect select = form.getSelectsByName("select1").get(0);
         assertNotNull(select);
 
-        final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
+        final HtmlSubmitInput button = form.getInputByName("button");
 
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = (HtmlPage) button.click();
@@ -123,10 +123,10 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlSelect select = form.getSelectsByName("select1").get(0);
-        final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
+        final HtmlSubmitInput button = form.getInputByName("button");
 
         // Change the value
         select.setSelectedAttribute("option3", true);
@@ -156,10 +156,10 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlSelect select = form.getSelectsByName("select1").get(0);
-        final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
+        final HtmlSubmitInput button = form.getInputByName("button");
 
         // Change the value
         select.setSelectedAttribute("option3", true);

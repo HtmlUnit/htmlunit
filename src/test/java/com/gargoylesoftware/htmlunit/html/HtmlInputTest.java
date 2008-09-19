@@ -55,12 +55,12 @@ public final class HtmlInputTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlRadioButtonInput radioButton = (HtmlRadioButtonInput) form.getFirstByXPath(
             "//input[@type='radio' and @name='foo' and @value='2']");
 
-        final HtmlSubmitInput pushButton = (HtmlSubmitInput) form.getInputByName("button");
+        final HtmlSubmitInput pushButton = form.getInputByName("button");
 
         radioButton.setChecked(true);
 
@@ -86,9 +86,9 @@ public final class HtmlInputTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
-        final HtmlCheckBoxInput checkbox = (HtmlCheckBoxInput) form.getInputByName("foo");
+        final HtmlCheckBoxInput checkbox = form.getInputByName("foo");
         Assert.assertFalse("Initial state", checkbox.isChecked());
         checkbox.setChecked(true);
         assertTrue("After setSelected(true)", checkbox.isChecked());
@@ -132,8 +132,8 @@ public final class HtmlInputTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
-        final HtmlTextInput input = (HtmlTextInput) form.getInputByName("text1");
+        final HtmlForm form = page.getHtmlElementById("form1");
+        final HtmlTextInput input = form.getInputByName("text1");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
         input.setValueAttribute("foo");
@@ -152,8 +152,8 @@ public final class HtmlInputTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
-        final HtmlCheckBoxInput input = (HtmlCheckBoxInput) form.getInputByName("checkbox1");
+        final HtmlForm form = page.getHtmlElementById("form1");
+        final HtmlCheckBoxInput input = form.getInputByName("checkbox1");
         assertEquals("on", input.getValueAttribute());
     }
 

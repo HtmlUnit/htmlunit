@@ -51,9 +51,9 @@ public class HtmlImageInputTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
-        final HtmlImageInput imageInput = (HtmlImageInput) form.getInputByName("button");
+        final HtmlImageInput imageInput = form.getInputByName("button");
         final HtmlPage secondPage = (HtmlPage) imageInput.click();
         assertNotNull(secondPage);
 
@@ -82,9 +82,9 @@ public class HtmlImageInputTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
-        final HtmlImageInput imageInput = (HtmlImageInput) form.getInputByName("button");
+        final HtmlImageInput imageInput = form.getInputByName("button");
         final HtmlPage secondPage = (HtmlPage) imageInput.click(100, 200);
         assertNotNull(secondPage);
 
@@ -113,9 +113,9 @@ public class HtmlImageInputTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
-        final HtmlImageInput imageInput = (HtmlImageInput) form.getInputByValue("foo");
+        final HtmlImageInput imageInput = form.getInputByValue("foo");
         final HtmlPage secondPage = (HtmlPage) imageInput.click(100, 200);
         assertNotNull(secondPage);
 

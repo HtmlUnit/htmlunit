@@ -219,8 +219,8 @@ public final class SanityCheck {
         final HtmlForm form = firstPage.getFormByName("form1");
         assertEquals("get", form.getMethodAttribute());
 
-        final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button1");
-        final HtmlPage secondPage = (HtmlPage) button.click();
+        final HtmlSubmitInput button = form.getInputByName("button1");
+        final HtmlPage secondPage = button.click();
         assertEquals("GET", secondPage.<HtmlElement>getHtmlElementById("REQUEST_METHOD").asText());
         assertEquals("textfield1=*&button1=PushMe",
             secondPage.<HtmlElement>getHtmlElementById("QUERY_STRING").asText());
@@ -240,10 +240,10 @@ public final class SanityCheck {
         final HtmlForm form = firstPage.getFormByName("form1");
         form.setMethodAttribute("post");
 
-        final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button1");
+        final HtmlSubmitInput button = form.getInputByName("button1");
         button.setAttributeValue("name", "textfield1");
 
-        final HtmlPage secondPage = (HtmlPage) button.click();
+        final HtmlPage secondPage = button.click();
         assertEquals("POST", secondPage.<HtmlElement>getHtmlElementById("REQUEST_METHOD").asText());
         assertEquals("", secondPage.<HtmlElement>getHtmlElementById("QUERY_STRING").asText());
         assertEquals("textfield1=*&textfield1=PushMe",
@@ -264,8 +264,8 @@ public final class SanityCheck {
         final HtmlForm form = firstPage.getFormByName("form1");
         form.setMethodAttribute("post");
 
-        final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button1");
-        final HtmlPage secondPage = (HtmlPage) button.click();
+        final HtmlSubmitInput button = form.getInputByName("button1");
+        final HtmlPage secondPage = button.click();
         assertEquals("POST", secondPage.<HtmlElement>getHtmlElementById("REQUEST_METHOD").asText());
         assertEquals("", secondPage.<HtmlElement>getHtmlElementById("QUERY_STRING").asText());
         assertEquals("textfield1=*&button1=PushMe", secondPage.<HtmlElement>getHtmlElementById("CONTENT").asText());

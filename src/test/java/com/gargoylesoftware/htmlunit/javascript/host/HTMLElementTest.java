@@ -1950,8 +1950,8 @@ public class HTMLElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
         final HtmlForm form = page.getForms().get(0);
-        final HtmlTextInput inputLogin = (HtmlTextInput) form.getInputByName("login");
-        final HtmlPasswordInput inputPassword = (HtmlPasswordInput) form.getInputByName("password");
+        final HtmlTextInput inputLogin = form.getInputByName("login");
+        final HtmlPasswordInput inputPassword = form.getInputByName("password");
 
         inputLogin.focus();
         inputPassword.focus();

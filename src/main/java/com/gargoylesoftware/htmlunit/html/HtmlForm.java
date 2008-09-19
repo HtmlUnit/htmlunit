@@ -344,16 +344,18 @@ public class HtmlForm extends ClickableElement {
      * Returns the first input element which is a member of this form and has the specified name.
      *
      * @param name the input name to search for
+     * @param <I> the input type
      * @return the first input element which is a member of this form and has the specified name
      * @throws ElementNotFoundException if there is not input in this form with the specified name
      */
-    public final HtmlInput getInputByName(final String name) throws ElementNotFoundException {
+    @SuppressWarnings("unchecked")
+    public final <I extends HtmlInput> I getInputByName(final String name) throws ElementNotFoundException {
         final List<HtmlInput> inputs = getInputsByName(name);
 
         if (inputs.isEmpty()) {
             throw new ElementNotFoundException("input", "name", name);
         }
-        return inputs.get(0);
+        return (I) inputs.get(0);
     }
 
     /**
@@ -677,15 +679,17 @@ public class HtmlForm extends ClickableElement {
     /**
      * Returns the first input in this form with the specified value.
      * @param value the value to search for
+     * @param <I> the input type
      * @return the first input in this form with the specified value
      * @throws ElementNotFoundException if this form does not contain any inputs with the specified value
      */
-    public HtmlInput getInputByValue(final String value) throws ElementNotFoundException {
+    @SuppressWarnings("unchecked")
+    public <I extends HtmlInput> I getInputByValue(final String value) throws ElementNotFoundException {
         final List<HtmlInput> list = getInputsByValue(value);
         if (list.isEmpty()) {
             throw new ElementNotFoundException("input", "value", value);
         }
-        return list.get(0);
+        return (I) list.get(0);
     }
 
     /**

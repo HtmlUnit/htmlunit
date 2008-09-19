@@ -82,7 +82,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
         final HtmlForm form = page.getFormByName("form1");
         final HtmlTextArea textarea = form.getTextAreaByName("textarea1");
         textarea.setText("foo");
-        final HtmlButtonInput button = (HtmlButtonInput) form.getInputByName("myButton");
+        final HtmlButtonInput button = form.getInputByName("myButton");
         button.click();
 
         final String[] expectedAlerts = {"foo"};

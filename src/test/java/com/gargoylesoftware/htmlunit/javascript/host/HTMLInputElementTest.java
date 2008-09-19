@@ -251,9 +251,9 @@ public class HTMLInputElementTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         final HtmlForm form = page.getFormByName("form1");
 
-        final HtmlSubmitInput button1 = (HtmlSubmitInput) form.getInputByName("button1");
-        final HtmlSubmitInput button2 = (HtmlSubmitInput) form.getInputByName("button2");
-        final HtmlSubmitInput button3 = (HtmlSubmitInput) form.getInputByName("button3");
+        final HtmlSubmitInput button1 = form.getInputByName("button1");
+        final HtmlSubmitInput button2 = form.getInputByName("button2");
+        final HtmlSubmitInput button3 = form.getInputByName("button3");
         assertFalse(button1.isDisabled());
         assertTrue(button2.isDisabled());
         assertFalse(button3.isDisabled());
@@ -434,9 +434,9 @@ public class HTMLInputElementTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
         final HtmlForm form = page.getFormByName("form1");
-        final HtmlTextInput textinput = (HtmlTextInput) form.getInputByName("text1");
+        final HtmlTextInput textinput = form.getInputByName("text1");
         textinput.setValueAttribute("foo");
-        final HtmlButtonInput button = (HtmlButtonInput) form.getInputByName("myButton");
+        final HtmlButtonInput button = form.getInputByName("myButton");
         button.click();
         assertEquals("from button", textinput.getValueAttribute());
 
@@ -465,9 +465,9 @@ public class HTMLInputElementTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
         final HtmlForm form = page.getFormByName("form1");
-        final HtmlTextInput textinput = (HtmlTextInput) form.getInputByName("text1");
+        final HtmlTextInput textinput = form.getInputByName("text1");
         textinput.setValueAttribute("foo");
-        final HtmlButtonInput button = (HtmlButtonInput) form.getInputByName("myButton");
+        final HtmlButtonInput button = form.getInputByName("myButton");
         button.click();
         assertEquals("from button", textinput.getValueAttribute());
 
@@ -662,7 +662,7 @@ public class HTMLInputElementTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, content);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage page = webClient.getPage(URL_FIRST);
         final HtmlPage page2 = (HtmlPage) page.getFormByName("test").getInputByName("field1").setValueAttribute("bla");
         assertEquals("page 2", page2.getTitleText());
     }

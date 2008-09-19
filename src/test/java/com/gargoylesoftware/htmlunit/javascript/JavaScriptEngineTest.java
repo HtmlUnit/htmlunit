@@ -830,10 +830,10 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertEquals("First", page.getTitleText());
 
         final HtmlForm form = page.getFormByName("form1");
-        final HtmlTextInput textInput = (HtmlTextInput) form.getInputByName("text1");
+        final HtmlTextInput textInput = form.getInputByName("text1");
         textInput.setValueAttribute("flintstone");
 
-        final HtmlButtonInput button = (HtmlButtonInput) form.getInputByName("button1");
+        final HtmlButtonInput button = form.getInputByName("button1");
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
 
         button.click();

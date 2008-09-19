@@ -124,7 +124,7 @@ public class HtmlPageTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
         final HtmlInput input = form.getInputByName("textInput1");
         Assert.assertEquals("name", "textInput1", input.getNameAttribute());
 
@@ -151,11 +151,11 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
         final HtmlInput textInput = form.getInputByName("textInput1");
         textInput.setValueAttribute("foo");
 
-        final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("submitInput1");
+        final HtmlSubmitInput button = form.getInputByName("submitInput1");
         final HtmlPage secondPage = (HtmlPage) button.click();
 
         final List<NameValuePair> expectedParameters = new ArrayList<NameValuePair>();
