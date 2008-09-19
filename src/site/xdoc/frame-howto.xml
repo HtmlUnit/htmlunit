@@ -36,7 +36,7 @@
             </p>
             <source><![CDATA[
         final WebClient client = new WebClient();
-        final HtmlPage mainPage = (HtmlPage) client.getPage("http://htmlunit.sourceforge.net/apidocs/index.html");
+        final HtmlPage mainPage = client.getPage("http://htmlunit.sourceforge.net/apidocs/index.html");
             ]]></source>
 
             <p>

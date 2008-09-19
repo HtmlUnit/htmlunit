@@ -46,14 +46,13 @@
 public void testDocumentWrite() throws Exception {
     final WebClient webClient = new WebClient();
 
-    final HtmlPage page = (HtmlPage)webClient.getPage(
-        new URL( "http://myserver/test.html" ) );
+    final HtmlPage page = webClient.getPage("http://myserver/test.html");
     final HtmlForm form = page.getFormByName("form1");
-    for( int i=1; i<= 5; i++ ) {
+    for (int i = 1; i <= 5; i++) {
         final String expectedName = "textfield"+i;
         assertEquals(
             "text", 
-            form.getInputByName(expectedName).getTypeAttribute());
+            form.<HtmlInput>getInputByName(expectedName).getTypeAttribute());
     }
 }
             ]]></source>
@@ -105,11 +104,11 @@ public void testAlerts() throws Exception {
     final WebClient webClient = new WebClient();
 
     final List collectedAlerts = new ArrayList();
-    webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+    webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
     // Since we aren't actually manipulating the page, we don't assign
     // it to a variable - it's enough to know that it loaded.
-    webClient.getPage( new URL( "http://tciludev01/test.html" ) );
+    webClient.getPage("http://tciludev01/test.html");
 
     final List expectedAlerts = Collections.singletonList("foo");
     assertEquals( expectedAlerts, collectedAlerts );

@@ -110,7 +110,7 @@ public final class HtmlInputTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
         final List<HtmlRadioButtonInput> radioButtons = form.getRadioButtonsByName("radio1");
         assertEquals(2, radioButtons.size());
@@ -196,9 +196,9 @@ public final class HtmlInputTest extends WebTestCase {
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
-        assertEquals("text", form.getInputByName("foo").getTypeAttribute());
+        assertEquals("text", form.<HtmlInput>getInputByName("foo").getTypeAttribute());
     }
 
     /**

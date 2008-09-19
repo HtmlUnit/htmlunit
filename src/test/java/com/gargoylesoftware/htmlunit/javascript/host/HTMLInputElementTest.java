@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlImageInput;
+import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
@@ -404,7 +405,7 @@ public class HTMLInputElementTest extends WebTestCase {
         final MockWebConnection connection = (MockWebConnection) page.getWebClient().getWebConnection();
 
         final HtmlForm form = page.getFormByName("form1");
-        form.getInputByName("button1").click();
+        form.<HtmlInput>getInputByName("button1").click();
 
         final String[] expectedAlerts = {"changed"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -663,7 +664,8 @@ public class HTMLInputElementTest extends WebTestCase {
         webClient.setWebConnection(webConnection);
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
-        final HtmlPage page2 = (HtmlPage) page.getFormByName("test").getInputByName("field1").setValueAttribute("bla");
+        final HtmlPage page2 = (HtmlPage)
+            page.getFormByName("test").<HtmlInput>getInputByName("field1").setValueAttribute("bla");
         assertEquals("page 2", page2.getTitleText());
     }
 
