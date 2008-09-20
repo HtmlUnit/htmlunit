@@ -891,30 +891,6 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Returns the "first" window for this client. This is the first window
-     * opened since pushClearFirstWindow() was last called.
-     * @return the first window
-     * @deprecated since 2.0
-     */
-    @Deprecated
-    public WebWindow popFirstWindow() {
-        synchronized (firstWindowStack_) {
-            return firstWindowStack_.pop();
-        }
-    }
-
-    /**
-     * Clears the first window for this client.
-     * @deprecated since 2.0
-     */
-    @Deprecated
-    public void pushClearFirstWindow() {
-        synchronized (firstWindowStack_) {
-            firstWindowStack_.push(null);
-        }
-    }
-
-    /**
      * Adds a listener for {@link WebWindowEvent}s. All events from all windows associated with this
      * client will be sent to the specified listener.
      * @param listener a listener

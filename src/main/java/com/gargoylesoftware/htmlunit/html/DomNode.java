@@ -248,30 +248,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Returns this node's last child node, or <tt>null</tt> if this node doesn't have any children.
-     * @return this node's last child node, or <tt>null</tt> if this node doesn't have any children
-     * @deprecated As of 2.0, please use {@link #getLastChild()} instead.
-     */
-    @Deprecated
-    public DomNode getLastDomChild() {
-        return getLastChild();
-    }
-
-    /**
      * {@inheritDoc}
      */
     public DomNode getParentNode() {
         return parent_;
-    }
-
-    /**
-     * Returns this node's parent node, or <tt>null</tt> if this is the root node.
-     * @return this node's parent node, or <tt>null</tt> if this is the root node
-     * @deprecated As of 2.0, please use {@link #getParentNode()} instead.
-     */
-    @Deprecated
-    public DomNode getParentDomNode() {
-        return getParentNode();
     }
 
     /**
@@ -295,16 +275,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Returns this node's previous sibling, or <tt>null</tt> if this node is its parent's first child.
-     * @return this node's previous sibling, or <tt>null</tt> if this node is its parent's first child
-     * @deprecated As of 2.0, please use {@link #getPreviousSibling()} instead.
-     */
-    @Deprecated
-    public DomNode getPreviousDomSibling() {
-        return getPreviousSibling();
-    }
-
-    /**
      * {@inheritDoc}
      */
     public DomNode getNextSibling() {
@@ -312,30 +282,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Returns this node's next sibling node, or <tt>null</tt> if this node is its parent's last child.
-     * @return this node's next sibling node, or <tt>null</tt> if this node is its parent's last child
-     * @deprecated As of 2.0, please use {@link #getNextSibling()} instead.
-     */
-    @Deprecated
-    public DomNode getNextDomSibling() {
-        return getNextSibling();
-    }
-
-    /**
      * {@inheritDoc}
      */
     public DomNode getFirstChild() {
         return firstChild_;
-    }
-
-    /**
-     * Returns this node's first child node, or <tt>null</tt> if this node does not have any children.
-     * @return this node's first child node, or <tt>null</tt> if this node does not have any children
-     * @deprecated As of 2.0, please use {@link #getFirstChild()} instead.
-     */
-    @Deprecated
-    public DomNode getFirstDomChild() {
-        return getFirstChild();
     }
 
     /**
@@ -746,16 +696,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Returns the log object for this element.
-     * @return the log object for this element
-     * @deprecated As of 2.0, use local log variables enclosed in a conditional block.
-     */
-    @Deprecated
-    protected final Log getLog() {
-        return LogFactory.getLog(getClass());
-    }
-
-    /**
      * Returns a string representation of the XML document from this element and all it's children (recursively).
      * The charset used is the current page encoding.
      *
@@ -843,20 +783,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Makes a clone of this node.
-     *
-     * @param deep if <code>true</code>, the clone will be propagated to the whole subtree
-     * below this one. Otherwise, the new node will not have any children. The page reference
-     * will always be the same as this node's.
-     * @return a new node
-     * @deprecated As of 2.0, please use {@link #cloneNode(boolean)} instead.
-     */
-    @Deprecated
-    public DomNode cloneDomNode(final boolean deep) {
-        return cloneNode(deep);
-    }
-
-    /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * Returns the JavaScript object that corresponds to this node, lazily initializing a new one if necessary.
@@ -906,17 +832,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             fireNodeAdded(this, domNode);
         }
         return domNode;
-    }
-
-    /**
-     * Appends a child node to this node.
-     * @param node the node to append
-     * @return the node added
-     * @deprecated As of 2.0, please use {@link #appendChild(Node)} instead.
-     */
-    @Deprecated
-    public DomNode appendDomChild(final DomNode node) {
-        return appendChild(node);
     }
 
     /**
@@ -1177,15 +1092,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 return new ChildIterator();
             }
         };
-    }
-
-    /**
-     * @return an iterator over the children of this node
-     * @deprecated As of 2.0, use {@link #getChildren()}.
-     */
-    @Deprecated
-    public Iterator<DomNode> getChildIterator() {
-        return new ChildIterator();
     }
 
     /**

@@ -53,7 +53,7 @@ public class MockWebConnection implements WebConnection {
     /**
      * Creates an instance.
      * @param webClient the web client
-     * @deprecated as of HtmlUnit-2.3. Use {@link #MockWebConnection()} instead.
+     * @deprecated as of 2.3. Use {@link #MockWebConnection()} instead.
      */
     @Deprecated
     public MockWebConnection(final WebClient webClient) {

@@ -200,16 +200,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Gets the root HtmlElement of this document.
-     * @return the root element
-     * @deprecated As of 2.1, please use {@link #getDocumentElement()} instead.
-     */
-    @Deprecated
-    public HtmlElement getDocumentHtmlElement() {
-        return getDocumentElement();
-    }
-
-    /**
      * Returns the <tt>body</tt> element (or <tt>frameset</tt> element), or <tt>null</tt> if it does not yet exist.
      * @return the <tt>body</tt> element (or <tt>frameset</tt> element), or <tt>null</tt> if it does not yet exist
      */
@@ -1753,24 +1743,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Moves the focus to the specified component. This will trigger any relevant JavaScript
-     * event handlers.
-     *
-     * @param newElement the element that will receive the focus, use <code>null</code> to remove focus from any element
-     * @return true if the specified element now has the focus
-     * @see #getElementWithFocus()
-     * @see #tabToNextElement()
-     * @see #tabToPreviousElement()
-     * @see #pressAccessKey(char)
-     * @see WebAssert#assertAllTabIndexAttributesSet(HtmlPage)
-     * @deprecated As of 2.0, please use {@link #setFocusedElement(HtmlElement)} instead.
-     */
-    @Deprecated
-    public boolean moveFocusToElement(final HtmlElement newElement) {
-        return setFocusedElement(newElement);
-    }
-
-    /**
      * Moves the focus to the specified element. This will trigger any relevant JavaScript
      * event handlers.
      *
@@ -1839,17 +1811,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         // If a page reload happened as a result of the focus change then obviously this
         // element will not have the focus because its page has gone away.
         return this == getEnclosingWindow().getEnclosedPage();
-    }
-
-    /**
-     * Returns the element with the focus or null if no element has the focus.
-     * @return the element with focus or null
-     * @see #moveFocusToElement(HtmlElement)
-     * @deprecated As of 2.0, please use {@link #getFocusedElement()} instead.
-     */
-    @Deprecated
-    public HtmlElement getElementWithFocus() {
-        return getFocusedElement();
     }
 
     /**

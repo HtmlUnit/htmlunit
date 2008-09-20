@@ -8,6 +8,11 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes">
+            <action type="remove" dev="asashour">
+                Deprecation: remove HtmlUnitXPath class, DomNode.getXXXDomYYY(), HtmlPage.getDocumentHtmlElement(), 
+                HtmlPage.moveFocusToElement(), HtmlPage.getFocusedElement(), WebClient.popFirstWindow(),
+                and WebClient.pushClearFirstWindow().
+            </action>
             <action type="add" dev="asashour">
                 ActiveX: add initial support for native ActiveX controls (using Jacob).
             </action>
