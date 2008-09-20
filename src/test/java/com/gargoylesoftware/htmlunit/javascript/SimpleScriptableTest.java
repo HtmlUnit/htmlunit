@@ -114,6 +114,7 @@ public class SimpleScriptableTest extends WebTestCase {
 
         // Now pull out those names that we know don't have HTML equivalents
         names.remove("ActiveXObject");
+        names.remove("ActiveXObjectImpl");
         names.remove("BoxObject");
         names.remove("ComputedCSSStyleDeclaration");
         names.remove("CSSRule");
