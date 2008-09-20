@@ -176,6 +176,7 @@ public class WebClient implements Serializable {
     private ScriptPreProcessor scriptPreProcessor_;
 
     private Map<String, String> activeXObjectMap_ = Collections.emptyMap();
+    private boolean activeXNative_;
     private RefreshHandler refreshHandler_ = new ImmediateRefreshHandler();
     private boolean throwExceptionOnScriptError_ = true;
 
@@ -1653,6 +1654,25 @@ public class WebClient implements Serializable {
      */
     public Map<String, String> getActiveXObjectMap() {
         return activeXObjectMap_;
+    }
+
+    /**
+     * Sets whether to allow native ActiveX or no. Default value is false.
+     * Beware that you should never allow running native ActiveX components unless you fully trust
+     * the JavaScript code, as it is not controlled by the Java Virtual Machine.
+     *
+     * @param allow allow or no
+     */
+    public void setActiveXNative(final boolean allow) {
+        activeXNative_ = allow;
+    }
+
+    /**
+     * Returns whether native ActiveX components are allowed or no.
+     * @return whether native ActiveX components are allowed or no
+     */
+    public boolean isActiveXNative() {
+        return activeXNative_;
     }
 
     /**

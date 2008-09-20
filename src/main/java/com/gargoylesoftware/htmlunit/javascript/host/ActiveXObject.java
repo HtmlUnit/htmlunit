@@ -17,12 +17,15 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.lang.reflect.Method;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.FunctionObject;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
@@ -41,6 +44,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
  */
 public class ActiveXObject extends SimpleScriptable {
     private static final long serialVersionUID = 7327032075131452226L;
+
+    private static final transient Log mainLog_ = LogFactory.getLog(SimpleScriptable.class);
 
     /**
      * The default constructor.
@@ -90,26 +95,36 @@ public class ActiveXObject extends SimpleScriptable {
             return buildXSLTemplate();
         }
 
-        final Map<String, String> map = getWindow(ctorObj).getWebWindow().getWebClient().getActiveXObjectMap();
-        if (map == null) {
-            throw Context.reportRuntimeError("ActiveXObject Error: the map is null.");
+        final WebClient webClient = getWindow(ctorObj).getWebWindow().getWebClient();
+        final Map<String, String> map = webClient.getActiveXObjectMap();
+        if (map != null) {
+            final Object mapValue = map.get(activeXName);
+            if (mapValue != null) {
+                final String xClassString = (String) mapValue;
+                Object object = null;
+                try {
+                    final Class< ? > xClass = Class.forName(xClassString);
+                    object = xClass.newInstance();
+                }
+                catch (final Exception e) {
+                    throw Context.reportRuntimeError("ActiveXObject Error: failed instantiating class " + xClassString
+                            + " because " + e.getMessage() + ".");
+                }
+                return Context.toObject(object, ctorObj);
+            }
         }
-        final Object mapValue = map.get(activeXName);
-        if (mapValue == null) {
-            throw Context.reportRuntimeError("ActiveXObject Error: no value for " + activeXName + ".");
+        if (webClient.isActiveXNative() && System.getProperty("os.name").contains("Windows")) {
+            try {
+                return new ActiveXObjectImpl(activeXName);
+            }
+            catch (final Exception e) {
+                if (mainLog_.isWarnEnabled()) {
+                    mainLog_.warn("Error initiating Jacob", e);
+                }
+            }
         }
 
-        final String xClassString = (String) mapValue;
-        Object object = null;
-        try {
-            final Class< ? > xClass = Class.forName(xClassString);
-            object = xClass.newInstance();
-        }
-        catch (final Exception e) {
-            throw Context.reportRuntimeError("ActiveXObject Error: failed instantiating class " + xClassString
-                    + " because " + e.getMessage() + ".");
-        }
-        return Context.toObject(object, ctorObj);
+        throw Context.throwAsScriptRuntimeEx(new Exception("Automation server can't create object"));
     }
 
     /**
