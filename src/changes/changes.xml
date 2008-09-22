@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes">
+            <action type="fix" dev="mguillem">
+                JavaScript: finished implementation of insertRule (FF) and addRule (IE) on CSSStyleSheet.
+            </action>
+            <action type="fix" dev="mguillem">
+                JavaScript: CSSStyleRule.selectorText should return values like ".foo" rather than "*.foo".
+            </action>
             <action type="remove" dev="asashour">
                 Deprecation: remove HtmlUnitXPath class, DomNode.getXXXDomYYY(), HtmlPage.getDocumentHtmlElement(),
                 HtmlPage.moveFocusToElement(), HtmlPage.getFocusedElement(), WebClient.popFirstWindow(),

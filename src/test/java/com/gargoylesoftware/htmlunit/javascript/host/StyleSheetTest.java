@@ -275,21 +275,25 @@ public class StyleSheetTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "false", "true", "0" },
-            IE = { "true", "false", "-1" })
+    @Alerts(FF = { "1", "false", "true", "0", "2", "p" },
+            IE = { "1", "true", "false", "-1", "2", "DIV" })
     public void addRule_insertRule() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "  var f = document.getElementById('myStyle');\n"
             + "  var s = f.sheet ? f.sheet : f.styleSheet;\n"
+            + "  var rules = s.cssRules || s.rules;\n"
+            + "  alert(rules.length);\n"
             + "  alert(s.insertRule == undefined);\n"
             + "  alert(s.addRule == undefined);\n"
             + "  if (s.insertRule)\n"
             + "    alert(s.insertRule('div { color: red; }', 0));\n"
             + "  else\n"
-            + "    alert(s.addRule('div', '{ color: red; }', 1));\n"
+            + "    alert(s.addRule('div', 'color: red;', 1));\n"
+            + "  alert(rules.length);\n"
+            + "  alert(rules[1].selectorText);\n"
             + "}</script>\n"
-            + "<style id='myStyle'>p: vertical-align:top</style>\n"
+            + "<style id='myStyle'>p { vertical-align:top }</style>\n"
             + "</head><body onload='doTest()'>\n"
             + "</body></html>";
 

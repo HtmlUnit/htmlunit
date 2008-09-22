@@ -104,4 +104,32 @@ public class CSSStyleRuleTest extends WebTestCase {
                 + "</body></html>";
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(FF = { "body", "h1", "a.foo", ".foo", ".foo .foo2" },
+            IE = { "BODY", "H1", "A.foo", ".foo", ".foo .foo2" })
+    public void selectorText() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+                + "<style>\n"
+                + "  BoDY { background-color: white; color: black; }\n"
+                + "  H1 { font: 8pt Arial bold; }\n"
+                + "  A.foo  { color: blue; }\n"
+                + "  .foo  { color: blue; }\n"
+                + "  .foo .foo2 { font: 8pt; }\n"
+                + "</style>\n"
+                + "<script>\n"
+                + "  function test(){\n"
+                + "    var sheet = document.styleSheets[0];\n"
+                + "    var rules = sheet.cssRules || sheet.rules;\n"
+                + "    for (var i=0; i<rules.length; ++i)\n"
+                + "      alert(rules[i].selectorText);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "</body></html>";
+        loadPageWithAlerts(html);
+    }
 }

@@ -449,8 +449,7 @@ public class Stylesheet extends SimpleScriptable {
      * @return the position of the inserted rule
      */
     public int jsxFunction_insertRule(final String rule, final int position) {
-        // TODO: parse the rule and add it!!!
-        return position;
+        return wrapped_.insertRule(rule, position);
     }
 
     /**
@@ -461,7 +460,9 @@ public class Stylesheet extends SimpleScriptable {
      * @return always return -1 as of MSDN documentation
      */
     public int jsxFunction_addRule(final String selector, final String rule) {
-        // TODO: parse the rule and add it!!!
+        final String completeRule = selector + " {" + rule + "}";
+        wrapped_.insertRule(completeRule, wrapped_.getCssRules().getLength());
+
         return -1;
     }
 }

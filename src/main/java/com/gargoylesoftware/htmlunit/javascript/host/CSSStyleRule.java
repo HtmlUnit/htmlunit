@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * A JavaScript object for a CSSStyleRule.
  *
@@ -46,9 +49,25 @@ public class CSSStyleRule extends CSSRule {
      */
     public String jsxGet_selectorText() {
         String selectorText = ((org.w3c.dom.css.CSSStyleRule) getRule()).getSelectorText();
-        if (!getBrowserVersion().isIE()) {
-            selectorText = selectorText.toLowerCase();
+        final Pattern p = Pattern.compile("\\.?[a-zA-Z]+");
+        final Matcher m = p.matcher(selectorText);
+        final StringBuffer sb = new StringBuffer();
+        while (m.find()) {
+            String fixedName = m.group();
+            if (fixedName.startsWith(".")) { // this should be handled with the right regex but...
+                // nothing
+            }
+            else if (getBrowserVersion().isIE()) {
+                fixedName = fixedName.toUpperCase();
+            }
+            else {
+                fixedName = fixedName.toLowerCase();
+            }
+            m.appendReplacement(sb, fixedName);
         }
+        m.appendTail(sb);
+
+        selectorText = sb.toString().replaceAll("\\*\\.", "."); // ".foo" and not "*.foo"
         return selectorText;
     }
 
