@@ -41,6 +41,15 @@ class EventListenersContainer {
             }
             return bubblingHandlers_;
         }
+
+        @Override
+        protected Handlers clone() {
+            final Handlers clone = new Handlers();
+            clone.handler_ = handler_;
+            clone.capturingHandlers_.addAll(capturingHandlers_);
+            clone.bubblingHandlers_.addAll(bubblingHandlers_);
+            return clone;
+        }
     }
 
     private final Map<String, Handlers> eventHandlers_ = new HashMap<String, Handlers>();
@@ -220,4 +229,14 @@ class EventListenersContainer {
         return result;
     }
 
+    /**
+     * Copies all the events from the provided container
+     * @param eventListenersContainer where to copy from
+     */
+    void copyFrom(final EventListenersContainer eventListenersContainer) {
+        for (final Map.Entry<String, Handlers> entry : eventListenersContainer.eventHandlers_.entrySet()) {
+            final Handlers handlers = entry.getValue().clone();
+            eventHandlers_.put(entry.getKey(), handlers);
+        }
+    }
 }

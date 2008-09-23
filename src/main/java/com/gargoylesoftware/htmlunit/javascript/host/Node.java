@@ -177,7 +177,29 @@ public class Node extends SimpleScriptable {
     public Object jsxFunction_cloneNode(final boolean deep) {
         final DomNode domNode = getDomNodeOrDie();
         final DomNode clonedNode = domNode.cloneNode(deep);
-        return getJavaScriptNode(clonedNode);
+
+        final Node jsClonedNode = (Node) getJavaScriptNode(clonedNode);
+        if (getBrowserVersion().isIE()) { // need to copy the event listener when they exist
+            copyEventListenersWhenNeeded(domNode, clonedNode);
+        }
+        return jsClonedNode;
+    }
+
+    private void copyEventListenersWhenNeeded(final DomNode domNode, final DomNode clonedNode) {
+        final Node jsNode = (Node) domNode.getScriptObject();
+        if (jsNode != null) {
+            final Node jsClonedNode = (Node) getJavaScriptNode(clonedNode);
+            jsClonedNode.getEventListenersContainer().copyFrom(jsNode.getEventListenersContainer());
+        }
+
+        // look through the children
+        DomNode child =  domNode.getFirstChild();
+        DomNode clonedChild =  clonedNode.getFirstChild();
+        while (child != null && clonedChild != null) {
+            copyEventListenersWhenNeeded(child, clonedChild);
+            child = child.getNextSibling();
+            clonedChild = clonedChild.getNextSibling();
+        }
     }
 
     /**

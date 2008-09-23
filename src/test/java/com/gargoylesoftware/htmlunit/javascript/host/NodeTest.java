@@ -625,4 +625,43 @@ public class NodeTest extends WebTestCase {
         final String value = element.getAttribute("id");
         assertEquals("bar", value);
     }
+
+    /**
+     * Verifies that listeners are copied only for IE.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "in click" }, IE = { "in click", "in click", "in click" })
+    public void testCloneNode_copiesListenerOnlyForIE() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "  <script type='text/javascript'>\n"
+            + "    function go() {\n"
+            + "        var node = document.createElement('button');\n"
+            + "        var f = function() { alert('in click') };\n"
+            + "        if (node.attachEvent)\n"
+            + "          node.attachEvent('onclick', f);\n"
+            + "        else\n"
+            + "          node.addEventListener('click', f, true);\n"
+            + "        document.body.appendChild(node);\n"
+            + "        node.click();\n"
+            + "        var clone = node.cloneNode(true);\n"
+            + "        document.body.appendChild(clone);\n"
+            + "        clone.click();\n"
+            + "        var div = document.createElement('div');\n"
+            + "        div.appendChild(node);\n"
+            + "        var cloneDiv = div.cloneNode(true);\n"
+            + "        document.body.appendChild(cloneDiv);\n"
+            + "        cloneDiv.firstChild.click();\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "  </head>\n"
+            + "  <body onload='go()'>\n"
+            + "    <div id='foo'></div>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts(html);
+    }
 }
