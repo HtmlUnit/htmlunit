@@ -923,10 +923,11 @@ public abstract class HtmlElement extends DomElement implements Element {
      * has the specified ID (not allowed by the HTML spec), this method returns the first one.
      *
      * @param id the ID value to search for
+     * @param <E> the sub-element type
      * @return the element in this element's page with the specified ID
      * @exception ElementNotFoundException if no element has the specified ID
      */
-    public HtmlElement getHtmlElementById(final String id) throws ElementNotFoundException {
+    public <E extends HtmlElement> E getHtmlElementById(final String id) throws ElementNotFoundException {
         return ((HtmlPage) getPage()).getHtmlElementById(id);
     }
 

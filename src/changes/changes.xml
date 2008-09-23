@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes">
+            <action type="update" dev="asashour">
+                Better generics: avoid the need for casting when calling HtmlElement.getHtmlElementById(),
+                HtmlForm.getInputByName(), and .getInputByValue().
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: implemented workaround for NPE in CSSParser in some usage of CSSStyleSheet.insertRule.
             </action>
