@@ -15,21 +15,23 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.httpclient.NameValuePair;
+import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -45,12 +47,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class NodeTest extends WebTestCase {
 
     /**
      * @throws Exception on test failure
      */
     @Test
+    @Alerts({ "true" })
     public void test_hasChildNodes_true() throws Exception {
         final String content = "<html><head><title>test_hasChildNodes</title>\n"
                 + "<script>\n"
@@ -62,18 +66,14 @@ public class NodeTest extends WebTestCase {
                 + "<p id='myNode'>hello world<span>Child Node</span></p>\n"
                 + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals("test_hasChildNodes", page.getTitleText());
-
-        final String[] expectedAlerts = {"true"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(content);
     }
 
     /**
      * @throws Exception on test failure
      */
     @Test
+    @Alerts({ "false" })
     public void test_hasChildNodes_false() throws Exception {
         final String content = "<html><head><title>test_hasChildNodes</title>\n"
                 + "<script>\n"
@@ -85,12 +85,7 @@ public class NodeTest extends WebTestCase {
                 + "<p id='myNode'></p>\n"
                 + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals("test_hasChildNodes", page.getTitleText());
-
-        final String[] expectedAlerts = {"false"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(content);
     }
 
     /**
@@ -98,11 +93,8 @@ public class NodeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "true", "true" })
     public void testRemoveChild() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
-        webClient.setWebConnection(webConnection);
-
         final String content
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -116,18 +108,7 @@ public class NodeTest extends WebTestCase {
             + "<form name='form1'><div id='formChild'/></form>\n"
             + "</body></html>";
 
-        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
-        webConnection.setResponse(URL_FIRST, content, 200, "OK", "text/html", emptyList);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
-        assertEquals("foo", page.getTitleText());
-
-        final String[] expectedAlerts = {"true", "true"};
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(content);
     }
 
     /**
@@ -135,6 +116,7 @@ public class NodeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "true", "true", "true" })
     public void testReplaceChild_Normal() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -153,13 +135,7 @@ public class NodeTest extends WebTestCase {
             + "<form name='form1'><div id='formChild'/></form>\n"
             + "</body><div id='newChild'/></html>";
 
-        final String[] expectedAlerts = {"true", "true", "true"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(content);
     }
 
     /**
@@ -184,8 +160,9 @@ public class NodeTest extends WebTestCase {
      * @throws Exception on test failure
      */
     @Test
+    @Alerts({ "DIV" })
     public void testNodeNameIsUppercase() throws Exception {
-        final String content = "<html><head><title>test_hasChildNodes</title>\n"
+        final String content = "<html><head>\n"
                 + "<script>\n"
                 + "function doTest(){\n"
                 + "    alert(document.getElementById('myNode').nodeName);\n"
@@ -195,20 +172,16 @@ public class NodeTest extends WebTestCase {
                 + "<div id='myNode'>hello world<span>Child Node</span></div>\n"
                 + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals("test_hasChildNodes", page.getTitleText());
-
-        final String[] expectedAlerts = {"DIV"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(content);
     }
 
     /**
      * @throws Exception on test failure
      */
     @Test
+    @Alerts({ "2", "SPAN", "2", "#text", "H1", "H2" })
     public void test_getChildNodes() throws Exception {
-        final String content = "<html><head><title>test_getChildNodes</title>\n"
+        final String content = "<html><head>\n"
             + "<script>\n"
             + "function doTest() {\n"
             + "var aNode = document.getElementById('myNode');\n"
@@ -226,20 +199,14 @@ public class NodeTest extends WebTestCase {
             + "<h2>Child Node 2-A</h2></div>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"2", "SPAN", "2", "#text", "H1", "H2"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals("test_getChildNodes", page.getTitleText());
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(content);
     }
 
     /**
      * @throws Exception on test failure
      */
     @Test
+    @Alerts({ "nb nodes: 2", "8", "1" })
     public void testChildNodes_Comments() throws Exception {
         final String content = "<html><head><title>test</title>\n"
             + "<html><head></head>\n"
@@ -252,19 +219,16 @@ public class NodeTest extends WebTestCase {
             + "}\n"
             + "</script></body></html>";
 
-        final String[] expectedAlerts = {"nb nodes: 2", "8", "1"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(content);
     }
 
     /**
      * @throws Exception on test failure
      */
     @Test
+    @Alerts({ "length: 5",
+        "tempNode.name: undefined", "tempNode.name: input1", "tempNode.name: undefined",
+        "tempNode.name: input2", "tempNode.name: undefined" })
     public void test_getChildNodesProperties() throws Exception {
         final String content = "<html><head><title>test_getChildNodes</title>\n"
             + "<script>\n"
@@ -286,17 +250,7 @@ public class NodeTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"length: 5",
-            "tempNode.name: undefined", "tempNode.name: input1", "tempNode.name: undefined",
-            "tempNode.name: input2", "tempNode.name: undefined"};
-
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-
-        assertEquals("test_getChildNodes", page.getTitleText());
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(content);
     }
 
     /**
@@ -305,9 +259,9 @@ public class NodeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "3", "H2" })
     public void test_insertBefore_nullRef() throws Exception {
-        test_insertBefore(BrowserVersion.FIREFOX_2, "aNode.insertBefore(nodeToInsert, null);");
-        test_insertBefore(BrowserVersion.INTERNET_EXPLORER_6_0, "aNode.insertBefore(nodeToInsert, null);");
+        test_insertBefore("aNode.insertBefore(nodeToInsert, null);");
     }
 
     /**
@@ -316,11 +270,13 @@ public class NodeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "3", "H2" })
     public void test_insertBefore_noSecondArg() throws Exception {
-        test_insertBefore(BrowserVersion.INTERNET_EXPLORER_6_0, "aNode.insertBefore(nodeToInsert);");
         try {
-            test_insertBefore(BrowserVersion.FIREFOX_2, "aNode.insertBefore(nodeToInsert);");
-            fail();
+            test_insertBefore("aNode.insertBefore(nodeToInsert);");
+            if (!getBrowserVersion().isIE()) {
+                Assert.fail();
+            }
         }
         catch (final ScriptException e) {
             final String message = e.getMessage();
@@ -331,7 +287,7 @@ public class NodeTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    void test_insertBefore(final BrowserVersion browserVersion, final String insertJSLine) throws Exception {
+    void test_insertBefore(final String insertJSLine) throws Exception {
         final String content = "<html><head><title>test_insertBefore</title>\n"
             + "<script>\n"
             + "function doTest() {\n"
@@ -348,13 +304,7 @@ public class NodeTest extends WebTestCase {
             + "<h1>Child Node 2-A</h1></div>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-
-        final String[] expectedAlerts = {"3", "H2"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        loadPage(browserVersion, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(content);
     }
 
     /**
@@ -362,6 +312,7 @@ public class NodeTest extends WebTestCase {
      * @throws Exception on test failure
      */
     @Test
+    @Alerts({ "document: 9", "document.body: 1", "body child 1: 3", "body child 2: 8" })
     public void testNodeType() throws Exception {
         final String content = "<html><head><title>test</title>\n"
                 + "<script>\n"
@@ -376,14 +327,7 @@ public class NodeTest extends WebTestCase {
                 + "some text<!-- some comment -->\n"
                 + "</body></html>";
 
-        final String[] expectedAlerts = {"document: 9", "document.body: 1",
-            "body child 1: 3", "body child 2: 8"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(content);
     }
 
     /**
@@ -391,6 +335,7 @@ public class NodeTest extends WebTestCase {
      * @throws Exception on test failure
      */
     @Test
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     public void testAttachEvent() throws Exception {
         final String content = "<html><head>\n"
             + "<title>First</title>\n"
@@ -410,7 +355,7 @@ public class NodeTest extends WebTestCase {
         final String[] expectedAlerts = {"in foo1", "in foo2"};
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
+        final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
         ((ClickableElement) page.getHtmlElementById("div1")).click();
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -420,33 +365,24 @@ public class NodeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "true", "false" }, IE = { "isSameNode not supported" })
     public void testIsSameNode() throws Exception {
-        testIsSameNode(BrowserVersion.FIREFOX_2);
-        try {
-            testIsSameNode(BrowserVersion.INTERNET_EXPLORER_7_0);
-            fail("'isSameNode' is not supported in IE7.");
-        }
-        catch (final Exception e) {
-            //expected
-        }
-    }
-
-    private void testIsSameNode(final BrowserVersion browserVersion) throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var d1 = document.getElementById('div1');\n"
             + "    var d2 = document.getElementById('div2');\n"
-            + "    alert(d1.isSameNode(d1));\n"
-            + "    alert(d1.isSameNode(d2));\n"
+            + "    try {\n"
+            + "      alert(d1.isSameNode(d1));\n"
+            + "      alert(d1.isSameNode(d2));\n"
+            + "    } catch(e) {\n"
+            + "      alert('isSameNode not supported');\n"
+            + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "<div id='div1'/>\n"
             + "<div id='div2'/>\n"
             + "</body></html>";
-        final String[] expectedAlerts = {"true", "false"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(content);
     }
 
     /**
@@ -456,15 +392,8 @@ public class NodeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "null", "null" }, IE = { "null", "#document-fragment" })
     public void testAppendChild_parentNode() throws Exception {
-        final String[] expectedAlertsIE = {"null", "#document-fragment"};
-        testAppendChild_parentNode(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlertsIE);
-        final String[] expectedAlertsFF = {"null", "null"};
-        testAppendChild_parentNode(BrowserVersion.FIREFOX_2, expectedAlertsFF);
-    }
-
-    private void testAppendChild_parentNode(final BrowserVersion browserVersion, final String[] expectedAlerts)
-        throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var div1 = document.createElement('div');\n"
@@ -478,9 +407,8 @@ public class NodeTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+
+        loadPageWithAlerts(content);
     }
 
     /**
@@ -490,15 +418,8 @@ public class NodeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "null", "null" }, IE = { "null", "#document-fragment" })
     public void testInsertBefore_parentNode() throws Exception {
-        final String[] expectedAlertsIE = {"null", "#document-fragment"};
-        testInsertBefore_parentNode(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlertsIE);
-        final String[] expectedAlertsFF = {"null", "null"};
-        testInsertBefore_parentNode(BrowserVersion.FIREFOX_2, expectedAlertsFF);
-    }
-
-    private void testInsertBefore_parentNode(final BrowserVersion browserVersion, final String[] expectedAlerts)
-        throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var div1 = document.createElement('div');\n"
@@ -512,15 +433,15 @@ public class NodeTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+
+        loadPageWithAlerts(content);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "2" })
     public void testAppendChild_of_DocumentFragment() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -539,98 +460,92 @@ public class NodeTest extends WebTestCase {
             + "<div id='myDiv'></div>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"2"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(content);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "3" }, IE = { "not supported" })
     public void testNodePrototype() throws Exception {
-        testNodePrototype(BrowserVersion.FIREFOX_2, new String[] {"3"});
-        try {
-            testNodePrototype(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"3"});
-            fail("'Node' is not supported in IE.");
-        }
-        catch (final Exception e) {
-            //expected
-        }
-    }
-    private void testNodePrototype(final BrowserVersion browserVersion, final String[] expectedAlerts)
-        throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    alert(Node.TEXT_NODE);\n"
+            + "    try {\n"
+            + "      alert(Node.TEXT_NODE);\n"
+            + "    } catch(e) {\n"
+            + "      alert('not supported');\n"
+            + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
+            "<div>one</div><div>two</div><div id=\"myDiv3\"></div>" }, IE = { "exception thrown" })
     public void testReplaceChild() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var element = document.getElementById('myDiv2');\n"
-            + "    var range = element.ownerDocument.createRange();\n"
-            + "    range.setStartAfter(element);\n"
-            + "    var fragment = range.createContextualFragment('<div>one</div><div>two</div>');\n"
-            + "    var parent = element.parentNode;\n"
-            + "    alert(parent.innerHTML);\n"
-            + "    alert(parent.replaceChild(fragment, parent.firstChild).id);\n"
-            + "    alert(parent.innerHTML);\n"
+            + "    try {\n"
+            + "      var element = document.getElementById('myDiv2');\n"
+            + "      var range = element.ownerDocument.createRange();\n"
+            + "      range.setStartAfter(element);\n"
+            + "      var fragment = range.createContextualFragment('<div>one</div><div>two</div>');\n"
+            + "      var parent = element.parentNode;\n"
+            + "      alert(parent.innerHTML);\n"
+            + "      alert(parent.replaceChild(fragment, parent.firstChild).id);\n"
+            + "      alert(parent.innerHTML);\n"
+            + "    } catch(e) {\n"
+            + "      alert('exception thrown');\n"
+            + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myDiv'><div id='myDiv2'></div><div id='myDiv3'></div></div>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
-            "<div>one</div><div>two</div><div id=\"myDiv3\"></div>"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
+            "<div id=\"myDiv3\"></div>" }, IE = { "exception thrown" })
     public void testReplaceChild_EmptyDocumentFragment() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var element = document.getElementById('myDiv2');\n"
-            + "    var range = element.ownerDocument.createRange();\n"
-            + "    range.setStartAfter(element);\n"
-            + "    var fragment = range.createContextualFragment('');\n"
-            + "    var parent = element.parentNode;\n"
-            + "    alert(parent.innerHTML);\n"
-            + "    alert(parent.replaceChild(fragment, parent.firstChild).id);\n"
-            + "    alert(parent.innerHTML);\n"
+            + "    try {\n"
+            + "      var range = element.ownerDocument.createRange();\n"
+            + "      range.setStartAfter(element);\n"
+            + "      var fragment = range.createContextualFragment('');\n"
+            + "      var parent = element.parentNode;\n"
+            + "      alert(parent.innerHTML);\n"
+            + "      alert(parent.replaceChild(fragment, parent.firstChild).id);\n"
+            + "      alert(parent.innerHTML);\n"
+            + "    } catch(e) {\n"
+            + "      alert('exception thrown');\n"
+            + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myDiv'><div id='myDiv2'></div><div id='myDiv3'></div></div>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
-            "<div id=\"myDiv3\"></div>"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     public void event() throws Exception {
         final String firstContent = "<html>\n"
             + "<head><title>First Page</title>\n"
@@ -666,7 +581,7 @@ public class NodeTest extends WebTestCase {
             + "</html>";
 
         final String[] expectedAlerts = {"[object]", "[object]"};
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
@@ -685,6 +600,7 @@ public class NodeTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({ "id=bar" })
     public void testCloneAttributesAvailable() throws Exception {
         final String html =
               "<html>\n"
@@ -703,14 +619,10 @@ public class NodeTest extends WebTestCase {
             + "    <div id='foo'></div>\n"
             + "  </body>\n"
             + "</html>";
-        final String[] expectedAlerts = {"id=bar"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
 
+        final HtmlPage page = loadPageWithAlerts(html);
         final HtmlElement element = page.getHtmlElementById("bar");
         final String value = element.getAttribute("id");
         assertEquals("bar", value);
     }
-
 }
