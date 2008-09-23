@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.lang.reflect.Method;
 
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -32,6 +34,7 @@ public class ActiveXObjectImpl extends SimpleScriptable {
 
     private final Object activXComponent_;
     private final Method getMethod_;
+    private final Method callMethod_;
 
     /**
      * Constructs a new instance.
@@ -41,9 +44,11 @@ public class ActiveXObjectImpl extends SimpleScriptable {
      */
     @SuppressWarnings("unchecked")
     public ActiveXObjectImpl(final String activeXName) throws Exception {
-        final Class clazz = Class.forName("com.jacob.activeX.ActiveXComponent");
-        getMethod_ = clazz.getMethod("getProperty", String.class);
-        activXComponent_ = clazz.getConstructor(String.class).newInstance(activeXName);
+        final Class activeXComponentClass = Class.forName("com.jacob.activeX.ActiveXComponent");
+        getMethod_ = activeXComponentClass.getMethod("getProperty", String.class);
+        activXComponent_ = activeXComponentClass.getConstructor(String.class).newInstance(activeXName);
+        final Class dispatchClass = Class.forName("com.jacob.com.Dispatch");
+        callMethod_ = dispatchClass.getMethod("callN", dispatchClass, String.class, Object[].class);
     }
 
     /**
@@ -55,7 +60,85 @@ public class ActiveXObjectImpl extends SimpleScriptable {
             return getMethod_.invoke(activXComponent_, name);
         }
         catch (final Exception e) {
-            throw new RuntimeException(e);
+            return new Function() {
+                public Object call(final Context arg0, final Scriptable arg1, final Scriptable arg2,
+                    final Object[] arg3) {
+                    try {
+                        return callMethod_.invoke(null, activXComponent_, name, arg3);
+                    }
+                    catch (final Exception e) {
+                        throw Context.throwAsScriptRuntimeEx(e);
+                    }
+                }
+
+                public Scriptable construct(final Context arg0, final Scriptable arg1, final Object[] arg2) {
+                    throw new UnsupportedOperationException();
+                }
+
+                public void delete(final String arg0) {
+                    throw new UnsupportedOperationException();
+                }
+
+                public void delete(final int arg0) {
+                    throw new UnsupportedOperationException();
+                }
+
+                public Object get(final String arg0, final Scriptable arg1) {
+                    throw new UnsupportedOperationException();
+                }
+
+                public Object get(final int arg0, final Scriptable arg1) {
+                    throw new UnsupportedOperationException();
+                }
+
+                public String getClassName() {
+                    throw new UnsupportedOperationException();
+                }
+
+                public Object getDefaultValue(final Class< ? > arg0) {
+                    throw new UnsupportedOperationException();
+                }
+
+                public Object[] getIds() {
+                    throw new UnsupportedOperationException();
+                }
+
+                public Scriptable getParentScope() {
+                    throw new UnsupportedOperationException();
+                }
+
+                public Scriptable getPrototype() {
+                    throw new UnsupportedOperationException();
+                }
+
+                public boolean has(final String arg0, final Scriptable arg1) {
+                    throw new UnsupportedOperationException();
+                }
+
+                public boolean has(final int arg0, final Scriptable arg1) {
+                    throw new UnsupportedOperationException();
+                }
+
+                public boolean hasInstance(final Scriptable arg0) {
+                    throw new UnsupportedOperationException();
+                }
+
+                public void put(final String arg0, final Scriptable arg1, final Object arg2) {
+                    throw new UnsupportedOperationException();
+                }
+
+                public void put(final int arg0, final Scriptable arg1, final Object arg2) {
+                    throw new UnsupportedOperationException();
+                }
+
+                public void setParentScope(final Scriptable arg0) {
+                    throw new UnsupportedOperationException();
+                }
+
+                public void setPrototype(final Scriptable arg0) {
+                    throw new UnsupportedOperationException();
+                }
+            };
         }
     }
 }

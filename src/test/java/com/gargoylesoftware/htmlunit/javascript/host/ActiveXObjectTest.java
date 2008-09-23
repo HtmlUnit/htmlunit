@@ -161,4 +161,43 @@ public class ActiveXObjectTest extends WebTestCase {
         final Object activXComponenet = clazz.getConstructor(String.class).newInstance(activeXName);
         return method.invoke(activXComponenet, property);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    public void method() throws Exception {
+        if (!getBrowserVersion().isIE()) {
+            throw new Exception();
+        }
+        if (!isJacobInstalled()) {
+            return;
+        }
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var ie = new ActiveXObject('InternetExplorer.Application');\n"
+            + "      ie.PutProperty('Hello', 'There');\n"
+            + "      alert(ie.GetProperty('Hello'));\n"
+            + "    } catch(e) {alert('exception: ' + e.message);}\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"There"};
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
+
+        final WebClient client = getWebClient();
+        client.setActiveXNative(true);
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(URL_GARGOYLE, html);
+        client.setWebConnection(webConnection);
+
+        client.getPage(URL_GARGOYLE);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
