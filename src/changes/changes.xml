@@ -9,6 +9,9 @@
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes">
             <action type="fix" dev="mguillem">
+                JavaScript: implemented workaround for NPE in CSSParser in some usage of CSSStyleSheet.insertRule.
+            </action>
+            <action type="fix" dev="mguillem">
                 JavaScript: finished implementation of insertRule (FF) and addRule (IE) on CSSStyleSheet.
             </action>
             <action type="fix" dev="mguillem">

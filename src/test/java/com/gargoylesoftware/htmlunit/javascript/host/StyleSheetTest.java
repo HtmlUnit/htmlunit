@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.w3c.css.sac.InputSource;
 import org.w3c.css.sac.Selector;
+import org.w3c.dom.css.CSSStyleSheet;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -32,11 +33,14 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
+import com.steadystate.css.parser.CSSOMParser;
+import com.steadystate.css.parser.SACParserCSS21;
 
 /**
  * Unit tests for {@link Stylesheet}.
@@ -298,5 +302,48 @@ public class StyleSheetTest extends WebTestCase {
             + "</body></html>";
 
         loadPageWithAlerts(html);
+    }
+
+    /**
+     * Test that we have a workaround for a bug in CSSParser.
+     * @see {@link #npe_root()}
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "2" })
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    public void npe() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "  var f = document.getElementById('myStyle');\n"
+            + "  var s = f.sheet ? f.sheet : f.styleSheet;\n"
+            + "  var rules = s.cssRules || s.rules;\n"
+            + "  s.insertRule('.testStyle { width: 24px; }', 0);\n"
+            + "  s.insertRule(' .testStyleDef { height: 42px; }', 0)\n"
+            + "  alert(rules.length)\n"
+            + "}</script>\n"
+            + "<style id='myStyle'></style>\n"
+            + "</head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * This seems to be a bug in CSSParser. This test can be removed once the problem in CSSParser is fixed.
+     * @see <a href="http://sourceforge.net/tracker/index.php?func=detail&aid=2123264&group_id=82996&atid=567969">
+     * CSSParser bug [2123264] NPE in insertRule</a>
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.NONE)
+    @NotYetImplemented
+    public void npe_root() throws Exception {
+        final CSSOMParser parser = new CSSOMParser(new SACParserCSS21());
+        final InputSource source = new InputSource(new StringReader(""));
+        final CSSStyleSheet ss = parser.parseStyleSheet(source, null, null);
+
+        ss.insertRule(".testStyle { width: 24px;}", 0);
+        ss.insertRule(" .testStyleDef { height: 42px; }", 0);
     }
 }
