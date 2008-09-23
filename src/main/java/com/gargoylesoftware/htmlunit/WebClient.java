@@ -80,7 +80,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * <br>
  * <code>
  * final WebClient webClient = new WebClient();<br/>
- * final {@link HtmlPage} startPage = ({@link HtmlPage}) webClient.getPage("http://htmlunit.sf.net");<br/>
+ * final {@link HtmlPage} startPage = webClient.getPage("http://htmlunit.sf.net");<br/>
  * assertEquals("HtmlUnit - Welcome to HtmlUnit", startPage.{@link HtmlPage#getTitleText() getTitleText}());
  * </code>
  *

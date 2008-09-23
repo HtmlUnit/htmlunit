@@ -94,8 +94,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * <b>Example:</b><br/>
  * <br/>
  * <code>
- * final HtmlPage page =
- * (HtmlPage) webClient.{@link WebClient#getPage(String) getPage}("http://mywebsite/some/page.html");
+ * final HtmlPage page = webClient.{@link WebClient#getPage(String) getPage}("http://mywebsite/some/page.html");
  * </code>
  * </p>
  *
