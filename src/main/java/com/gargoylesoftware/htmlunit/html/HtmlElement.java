@@ -927,8 +927,9 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @return the element in this element's page with the specified ID
      * @exception ElementNotFoundException if no element has the specified ID
      */
+    @SuppressWarnings("unchecked")
     public <E extends HtmlElement> E getHtmlElementById(final String id) throws ElementNotFoundException {
-        return ((HtmlPage) getPage()).getHtmlElementById(id);
+        return (E) ((HtmlPage) getPage()).getHtmlElementById(id);
     }
 
     /**
