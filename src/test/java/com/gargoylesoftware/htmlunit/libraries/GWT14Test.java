@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 
 /**
  * Tests for 1.4 version of <a href="http://code.google.com/webtoolkit">Google Web Toolkit</a>.
+ * Note that we use 1.4.60, not 1.4.62, because the latter's loading is similar to GWT 1.5.
  *
  * @version $Revision$
  * @author Ahmed Ashour
