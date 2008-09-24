@@ -200,4 +200,45 @@ public class ActiveXObjectTest extends WebTestCase {
         client.getPage(URL_GARGOYLE);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    public void setProperty() throws Exception {
+        if (!getBrowserVersion().isIE()) {
+            throw new Exception();
+        }
+        if (!isJacobInstalled()) {
+            return;
+        }
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var ie = new ActiveXObject('InternetExplorer.Application');\n"
+            + "      var full = ie.FullScreen;\n"
+            + "      ie.FullScreen = true;\n"
+            + "      alert(ie.FullScreen);\n"
+            + "      ie.FullScreen = full;\n"
+            + "    } catch(e) {alert('exception: ' + e.message);}\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"true"};
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
+
+        final WebClient client = getWebClient();
+        client.setActiveXNative(true);
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(URL_GARGOYLE, html);
+        client.setWebConnection(webConnection);
+
+        client.getPage(URL_GARGOYLE);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

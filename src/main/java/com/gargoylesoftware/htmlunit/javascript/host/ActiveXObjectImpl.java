@@ -32,6 +32,7 @@ public class ActiveXObjectImpl extends SimpleScriptable {
 
     private static final long serialVersionUID = 6954481782205807262L;
 
+    private final Class< ? > activeXComponentClass_ = Class.forName("com.jacob.activeX.ActiveXComponent");
     private final Object activXComponent_;
     private final Method getMethod_;
     private final Method callMethod_;
@@ -44,9 +45,8 @@ public class ActiveXObjectImpl extends SimpleScriptable {
      */
     @SuppressWarnings("unchecked")
     public ActiveXObjectImpl(final String activeXName) throws Exception {
-        final Class activeXComponentClass = Class.forName("com.jacob.activeX.ActiveXComponent");
-        getMethod_ = activeXComponentClass.getMethod("getProperty", String.class);
-        activXComponent_ = activeXComponentClass.getConstructor(String.class).newInstance(activeXName);
+        getMethod_ = activeXComponentClass_.getMethod("getProperty", String.class);
+        activXComponent_ = activeXComponentClass_.getConstructor(String.class).newInstance(activeXName);
         final Class dispatchClass = Class.forName("com.jacob.com.Dispatch");
         callMethod_ = dispatchClass.getMethod("callN", dispatchClass, String.class, Object[].class);
     }
@@ -139,6 +139,20 @@ public class ActiveXObjectImpl extends SimpleScriptable {
                     throw new UnsupportedOperationException();
                 }
             };
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void put(final String name, final Scriptable start, final Object value) {
+        try {
+            final Method setMethod = activeXComponentClass_.getMethod("setProperty", String.class, value.getClass());
+            setMethod.invoke(activXComponent_, name, value);
+        }
+        catch (final Exception e) {
+            throw Context.throwAsScriptRuntimeEx(e);
         }
     }
 }
