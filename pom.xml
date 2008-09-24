@@ -529,6 +529,12 @@
             <version>0.5.524</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.openqa.selenium.webdriver</groupId>
+            <artifactId>webdriver-ie</artifactId>
+            <version>0.5.524</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <distributionManagement>
         <site>
