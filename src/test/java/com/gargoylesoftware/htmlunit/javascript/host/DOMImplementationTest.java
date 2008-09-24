@@ -14,79 +14,91 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static org.junit.Assert.fail;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 
 /**
  * Tests for {@link DOMImplementation}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public class DOMImplementationTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void getFeature() throws Exception {
-        getFeature(BrowserVersion.INTERNET_EXPLORER_7_0, "HTML", "1.0", true);
-        getFeature(BrowserVersion.INTERNET_EXPLORER_7_0, "HTML", "2.0", false);
-        getFeature(BrowserVersion.INTERNET_EXPLORER_7_0, "XML", "1.0", false);
-        getFeature(BrowserVersion.INTERNET_EXPLORER_7_0, "CSS2", "1.0", false);
-        getFeature(BrowserVersion.INTERNET_EXPLORER_7_0, "XPath", "3.0", false);
-        getFeature(BrowserVersion.FIREFOX_2, "HTML", "1.0", true);
-        getFeature(BrowserVersion.FIREFOX_2, "HTML", "2.0", true);
-        getFeature(BrowserVersion.FIREFOX_2, "HTML", "3.0", false);
-        getFeature(BrowserVersion.FIREFOX_2, "XML", "1.0", true);
-        getFeature(BrowserVersion.FIREFOX_2, "XML", "2.0", true);
-        getFeature(BrowserVersion.FIREFOX_2, "XML", "3.0", false);
-        getFeature(BrowserVersion.FIREFOX_2, "CSS2", "1.0", false);
-        getFeature(BrowserVersion.FIREFOX_2, "CSS2", "2.0", true);
-        getFeature(BrowserVersion.FIREFOX_2, "CSS2", "3.0", false);
-        getFeature(BrowserVersion.FIREFOX_2, "XPath", "3.0", true);
-    }
-
-    private void getFeature(final BrowserVersion browserVersion, final String feature, final String version,
-            final boolean expected) throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    alert(document.implementation.hasFeature('" + feature + "', '" + version + "'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'></body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, html, collectedAlerts);
-
-        assertEquals(Boolean.toString(expected), collectedAlerts.get(0));
+    @Alerts(FF = { "HTML 1.0: true", "HTML 2.0: true", "HTML 3.0: false" },
+            IE = { "HTML 1.0: true", "HTML 2.0: false", "HTML 3.0: false" })
+    public void hasFeature_HTML() throws Exception {
+        hasFeature("HTML", "['1.0', '2.0', '3.0']");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void createDocument() throws Exception {
-        createDocument(BrowserVersion.FIREFOX_2);
-        try {
-            createDocument(BrowserVersion.INTERNET_EXPLORER_7_0);
-            fail("document.implementation.createDocument is not supported in IE.");
-        }
-        catch (final Exception e) {
-            //expected
-        }
+    @Alerts(FF = { "XML 1.0: true", "XML 2.0: true", "XML 3.0: false" },
+            IE = { "XML 1.0: false", "XML 2.0: false", "XML 3.0: false" })
+    public void hasFeature_XML() throws Exception {
+        hasFeature("XML", "['1.0', '2.0', '3.0']");
     }
 
-    private void createDocument(final BrowserVersion browserVersion) throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "CSS2 1.0: false", "CSS2 2.0: true", "CSS2 3.0: false" },
+            IE = { "CSS2 1.0: false", "CSS2 2.0: false", "CSS2 3.0: false" })
+    public void hasFeature_CSS2() throws Exception {
+        hasFeature("CSS2", "['1.0', '2.0', '3.0']");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "XPath 3.0: true" },
+            IE = { "XPath 3.0: false" })
+    public void hasFeature_XPath() throws Exception {
+        hasFeature("XPath", "['3.0']");
+    }
+
+    private void hasFeature(final String feature, final String versions) throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var feature = '" + feature + "';\n"
+            + "    var versions = " + versions + ";\n"
+            + "    for (var j=0; j<versions.length; ++j) {\n"
+            + "      var version = versions[j];\n"
+            + "      alert(feature + ' ' + version + ': ' + document.implementation.hasFeature(feature, version));\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts({ "[object XMLDocument]" })
+    public void createDocument() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    alert(doc);\n"
@@ -94,18 +106,17 @@ public class DOMImplementationTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"[object XMLDocument]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts({ "mydoc" })
     public void createDocument_qualifiedName() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = document.implementation.createDocument('', 'mydoc', null);\n"
             + "    alert(doc.documentElement.tagName);\n"
@@ -113,9 +124,6 @@ public class DOMImplementationTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"mydoc"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 }

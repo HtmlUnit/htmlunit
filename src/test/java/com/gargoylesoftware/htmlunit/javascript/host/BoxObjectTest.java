@@ -14,13 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 
 /**
  * Unit tests for {@link BoxObject}.
@@ -28,6 +29,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Daniel Gredler
  */
+@RunWith(BrowserRunner.class)
 public class BoxObjectTest extends WebTestCase {
 
     /**
@@ -35,6 +37,8 @@ public class BoxObjectTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts({ "true", "true", "true", "true", "true" })
     public void testElementAttributes() throws Exception {
         final String html =
               "<html>\n"
@@ -58,10 +62,8 @@ public class BoxObjectTest extends WebTestCase {
             + "    </script>\n"
             + "  </body>\n"
             + "</html>";
-        final String[] expected = {"true", "true", "true", "true", "true"};
-        final List<String> actual = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, html, actual);
-        assertEquals(expected, actual);
+
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -69,6 +71,8 @@ public class BoxObjectTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts({ "73-123", "73-244", "510-410" })
     public void testPositionAndSizeAttributes() throws Exception {
         final String html =
               "<html>\n"
@@ -86,10 +90,8 @@ public class BoxObjectTest extends WebTestCase {
             + "    </script>\n"
             + "  </body>\n"
             + "</html>";
-        final String[] expected = {"73-123", "73-244", "510-410"};
-        final List<String> actual = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, html, actual);
-        assertEquals(expected, actual);
+
+        loadPageWithAlerts(html);
     }
 
 }
