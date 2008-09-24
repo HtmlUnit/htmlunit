@@ -38,9 +38,7 @@ svn co https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit .
 
         <section name="Compiling the code">
             <p>
-                Although it is still possible to compile the code with 
-                <a href="http://ant.apache.org">Ant</a> 1.5 or higher, the preferred way
-                to build HtmlUnit is with <a href="http://maven.apache.org">maven 2</a>.
+                The preferred way to build HtmlUnit is with <a href="http://maven.apache.org">maven 2</a>.
             </p>
             <source>mvn compile</source>
             <p>
@@ -54,12 +52,15 @@ svn co https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit .
 
         <section name="Dependencies for IDE">
             <p>
-                Usually, you need to get the JARs for your IDE.
-                You can do that by:
+                Usually, you need to get the JARs for your IDE. You can do that by something like:
             </p>
-            <source>ant initialize</source>
+            <source>mvn eclipse:eclipse</source>
             <p>
-                This will download all required and optional JARs into <tt>ant-jars</tt> folder.
+                or
+            </p>
+            <source>mvn idea:idea</source>
+            <p>
+                This will create appropriate IDE project.
                 Note that HtmlUnit is mostly at the bleeding edge, to the extent that an HtmlUnit-local repository
                 has been created to store snapshots of various dependencies. 
             </p>
@@ -67,11 +68,7 @@ svn co https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit .
 
         <section name="Running the tests">
             <p>
-                All the tests are based on <a href="http://www.junit.org/">JUnit</a>.  The standard
-                maven way of running the tests results in a large number of test reports which can
-                be difficult to sift through to find failures.  The fast-test goal has been created
-                to provide a quick run of the tests that dumps easy status information to the command
-                line.
+                All the tests are based on <a href="http://www.junit.org/">JUnit</a>.
             </p>
             <source>mvn test</source>
             <p>
