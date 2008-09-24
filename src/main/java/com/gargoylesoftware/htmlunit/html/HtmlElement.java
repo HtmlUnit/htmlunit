@@ -60,6 +60,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.UIEvent;
 
 /**
  * An abstract wrapper for HTML elements.
@@ -788,10 +789,10 @@ public abstract class HtmlElement extends DomElement implements Element {
         }
 
         focus();
-        fireEvent(new Event(this, Event.TYPE_KEY_DOWN, c, shiftKey, ctrlKey, altKey));
-        fireEvent(new Event(this, Event.TYPE_KEY_PRESS, c, shiftKey, ctrlKey, altKey));
+        fireEvent(new UIEvent(this, Event.TYPE_KEY_DOWN, c, shiftKey, ctrlKey, altKey));
+        fireEvent(new UIEvent(this, Event.TYPE_KEY_PRESS, c, shiftKey, ctrlKey, altKey));
         doType(c, shiftKey, ctrlKey, altKey);
-        fireEvent(new Event(this, Event.TYPE_KEY_UP, c, shiftKey, ctrlKey, altKey));
+        fireEvent(new UIEvent(this, Event.TYPE_KEY_UP, c, shiftKey, ctrlKey, altKey));
 
         final HtmlForm form = getEnclosingForm();
         if (form != null && c == '\n' && isSubmittableByEnter()) {

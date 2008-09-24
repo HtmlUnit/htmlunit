@@ -9,6 +9,12 @@
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes">
             <action type="fix" dev="mguillem">
+                JavaScript: define properties altKey, ctrlKey and shiftKey on UIEvent when simulating Firefox.
+            </action>
+            <action type="fix" dev="mguillem">
+                JavaScript: use UIEvent for keyboard events.
+            </action>
+            <action type="fix" dev="mguillem">
                 JavaScript: cloneNode copies event handlers when simulating IE.
             </action>
             <action type="update" dev="asashour">

@@ -14,23 +14,25 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersion.FIREFOX_2;
-import static com.gargoylesoftware.htmlunit.BrowserVersion.INTERNET_EXPLORER_7_0;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
@@ -47,7 +49,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author <a href="mailto:chriseldredge@comcast.net">Chris Eldredge</a>
  * @author Ahmed Ashour
  * @author Daniel Gredler
+ * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public class EventTest extends WebTestCase {
 
     /**
@@ -56,9 +60,8 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("clickId")
     public void testThisDefined() throws Exception {
-        final String[] expectedAlerts = {"clickId"};
-
         final String content
             = "<html><head></head><body>\n"
             + "<input type='button' id='clickId'/>\n"
@@ -66,7 +69,7 @@ public class EventTest extends WebTestCase {
             + "function handler(event) { alert(this.getAttribute('id')); }\n"
             + "document.getElementById('clickId').onclick = handler;</script>\n"
             + "</body></html>";
-        onClickPageTest(content, expectedAlerts);
+        onClickPageTest(content);
     }
 
     /**
@@ -75,9 +78,8 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("foo")
     public void testSetPropOnThisDefined() throws Exception {
-        final String[] expectedAlerts = {"foo"};
-
         final String content
             = "<html><head></head><body>\n"
             + "<input type='button' id='clickId'/>\n"
@@ -87,7 +89,7 @@ public class EventTest extends WebTestCase {
             + "document.getElementById('clickId').madeUpProperty = 'foo';\n"
             + "</script>\n"
             + "</body></html>";
-        onClickPageTest(content, expectedAlerts);
+        onClickPageTest(content);
     }
 
     /**
@@ -95,15 +97,13 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("defined")
     public void testEventArgDefinedByWrapper() throws Exception {
-        final String[] expectedAlerts = {"defined"};
-
         final String content
             = "<html><head></head><body>\n"
             + "<input type='button' id='clickId' onclick=\"alert(event ? 'defined' : 'undefined')\"/>\n"
             + "</body></html>";
-        onClickPageTest(BrowserVersion.FIREFOX_2, content, expectedAlerts);
-        onClickPageTest(BrowserVersion.INTERNET_EXPLORER_6_0, content, expectedAlerts);
+        onClickPageTest(content);
     }
 
     /**
@@ -111,8 +111,9 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("defined")
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     public void testEventArgDefined() throws Exception {
-        final String[] expectedAlerts = {"defined"};
         final String content
             = "<html><head></head><body>\n"
             + "<input type='button' id='clickId'/>\n"
@@ -120,15 +121,16 @@ public class EventTest extends WebTestCase {
             + "function handler(event) { alert(event ? 'defined' : 'undefined'); }\n"
             + "document.getElementById('clickId').onclick = handler;</script>\n"
             + "</body></html>";
-        onClickPageTest(BrowserVersion.FIREFOX_2, content, expectedAlerts);
+        onClickPageTest(content);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("pass")
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     public void testEventTargetSameAsThis() throws Exception {
-        final String[] expectedAlerts = {"pass"};
         final String content
             = "<html><head></head><body>\n"
             + "<input type='button' id='clickId'/>\n"
@@ -137,15 +139,16 @@ public class EventTest extends WebTestCase {
             + "alert(event.target == this ? 'pass' : event.target + '!=' + this); }\n"
             + "document.getElementById('clickId').onclick = handler;</script>\n"
             + "</body></html>";
-        onClickPageTest(BrowserVersion.FIREFOX_2, content, expectedAlerts);
+        onClickPageTest(content);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("pass")
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     public void testEventSrcElementSameAsThis() throws Exception {
-        final String[] expectedAlerts = {"pass"};
         final String content
             = "<html><head></head><body>\n"
             + "<input type='button' id='clickId'/>\n"
@@ -155,7 +158,7 @@ public class EventTest extends WebTestCase {
             + "alert(event.srcElement == this ? 'pass' : event.srcElement + '!=' + this); }\n"
             + "document.getElementById('clickId').onclick = handler;</script>\n"
             + "</body></html>";
-        onClickPageTest(BrowserVersion.INTERNET_EXPLORER_6_0, content, expectedAlerts);
+        onClickPageTest(content);
     }
 
     /**
@@ -163,8 +166,9 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("pass")
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     public void testEventCurrentTargetSameAsThis() throws Exception {
-        final String[] expectedAlerts = {"pass"};
         final String content
             = "<html><head></head><body>\n"
             + "<input type='button' id='clickId'/>\n"
@@ -173,7 +177,7 @@ public class EventTest extends WebTestCase {
             + "alert(event.currentTarget == this ? 'pass' : event.currentTarget + '!=' + this); }\n"
             + "document.getElementById('clickId').onclick = handler;</script>\n"
             + "</body></html>";
-        onClickPageTest(BrowserVersion.FIREFOX_2, content, expectedAlerts);
+        onClickPageTest(content);
     }
 
     /**
@@ -198,7 +202,7 @@ public class EventTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
         final ClickableElement element = (ClickableElement) page.getHtmlElementById("clickId");
         element.type('A');
         element.type('B');
@@ -234,7 +238,7 @@ public class EventTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
         final ClickableElement element = (ClickableElement) page.getHtmlElementById("clickId");
         element.type('A', shiftKey, ctrlKey, altKey);
         assertEquals(expectedAlerts, collectedAlerts);
@@ -264,7 +268,7 @@ public class EventTest extends WebTestCase {
 
         final String[] expected = {"123A", "1A2A3AB1AB2AB3ABC"};
         final List<String> actual = new ArrayList<String>();
-        final HtmlPage page = loadPage(html, actual);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, actual);
         page.<HtmlElement>getHtmlElementById("t").type('A');
         ((HtmlDivision) page.getHtmlElementById("d")).click();
 
@@ -291,7 +295,7 @@ public class EventTest extends WebTestCase {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
-            + "    <button name='button' id='button'>Push me</button>\n"
+            + "    <button name='button' type='button' id='button'>Push me</button>\n"
             + "</form>\n"
             + "<script>\n"
             + "function handler(_e) {\n"
@@ -302,7 +306,7 @@ public class EventTest extends WebTestCase {
             + "</script>\n"
             + "</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+        final HtmlPage page = loadPage(getBrowserVersion(), htmlContent, collectedAlerts);
         final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
 
         final HtmlPage secondPage = (HtmlPage) button.click(shiftKey, ctrlKey, altKey);
@@ -326,25 +330,19 @@ public class EventTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
         page.<HtmlElement>getHtmlElementById("textField").focus();
         page.<HtmlElement>getHtmlElementById("otherField").focus();
         final String[] expectedAlerts = {"true"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
-    private void onClickPageTest(final String content, final String[] expectedAlerts) throws Exception, IOException {
-        onClickPageTest(BrowserVersion.getDefault(), content, expectedAlerts);
-    }
-
-    private void onClickPageTest(final BrowserVersion version, final String content, final String[] expectedAlerts)
-        throws Exception, IOException {
-
+    private void onClickPageTest(final String content) throws Exception {
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(version, content, collectedAlerts);
+        final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
         final ClickableElement clickable = (ClickableElement) page.getHtmlElementById("clickId");
         clickable.click();
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
@@ -352,9 +350,9 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("frame1")
     public void testEventScope() throws Exception {
-        final List<String> expectedAlerts = Collections.singletonList("frame1");
-        final String content
+        final String html
             = "<html><head></head>\n"
             + "<body>\n"
             + "<button name='button1' id='button1' onclick='alert(this.name)'>1</button>\n"
@@ -363,11 +361,8 @@ public class EventTest extends WebTestCase {
             + "document.getElementById('frame1').onload = document.getElementById('button1').onclick;\n"
             + "</script>\n"
             + "</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -375,6 +370,8 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "false", "true", "SPAN" },
+            IE = { "true", "false", "SPAN" })
     public void testEventTransmission() throws Exception {
         final String content =
             "<html><body><span id='clickMe'>foo</span>\n"
@@ -390,18 +387,10 @@ public class EventTest extends WebTestCase {
             + "</script></body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
         ((ClickableElement) page.getHtmlElementById("clickMe")).click();
 
-        String[] expectedAlerts = {"false", "true", "SPAN"};
-        assertEquals(expectedAlerts, collectedAlerts);
-
-        collectedAlerts.clear();
-        page = loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
-        ((ClickableElement) page.getHtmlElementById("clickMe")).click();
-
-        expectedAlerts = new String[] {"true", "false", "SPAN"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
@@ -409,8 +398,10 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts({ "false", "false" })
     public void testIEWindowEvent() throws Exception {
-        final String content =
+        final String html =
             "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -420,11 +411,7 @@ public class EventTest extends WebTestCase {
             + "</script>\n"
             + "</head><body onload='test()'></body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
-
-        final String[] expectedAlerts = {"false", "false"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -436,19 +423,16 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "1", "2" })
     public void testCommentInEventHandlerDeclaration() throws Exception {
-        final String content
+        final String html
             = "<html><head></head>\n"
             + "<body onload='alert(1);\n"
             + "// a comment within the onload declaration\n"
             + "alert(2)'>\n"
             + "</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        final String[] expectedAlerts = {"1", "2"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -456,6 +440,9 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts({ "window capturing", "div capturing", "span capturing",
+        "span bubbling", "div", "div bubbling", "window bubbling" })
     public void testFF_EventCapturingAndBubbling() throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -482,12 +469,10 @@ public class EventTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
         ((ClickableElement) page.getHtmlElementById("theSpan")).click();
 
-        final String[] expectedAlerts = {"window capturing", "div capturing", "span capturing",
-            "span bubbling", "div", "div bubbling", "window bubbling"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
@@ -495,11 +480,9 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented // TODO: in IE no click event can be registered for the window
+    @Alerts({ "span bubbling", "div", "div bubbling" })
     public void testIE_EventBubbling() throws Exception {
-        // TODO: in IE no click event can be registered for the window
-        if (notYetImplemented()) {
-            return;
-        }
         final String content = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "function t(_s)\n"
@@ -522,11 +505,10 @@ public class EventTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
+        final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
         ((ClickableElement) page.getHtmlElementById("theSpan")).click();
 
-        final String[] expectedAlerts = {"span bubbling", "div", "div bubbling"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
@@ -534,6 +516,7 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     public void testFF_StopPropagation() throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -558,7 +541,7 @@ public class EventTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
         ((ClickableElement) page.getHtmlElementById("theSpan")).click();
         final String[] expectedAlerts1 = {"window capturing", "div capturing", "span capturing", "div"};
         assertEquals(expectedAlerts1, collectedAlerts);
@@ -574,17 +557,11 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts(FF = { "undefined" },
+            IE = { "null" })
     public void testNullEventHandler() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        testNullEventHandler(BrowserVersion.INTERNET_EXPLORER_7_0, "null");
-        testNullEventHandler(BrowserVersion.FIREFOX_2, "undefined");
-    }
-
-    private void testNullEventHandler(final BrowserVersion browserVersion, final String expectedAlert)
-        throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var div = document.getElementById('myDiv');\n"
             + "    alert(div.onclick);\n"
@@ -593,28 +570,16 @@ public class EventTest extends WebTestCase {
             + "<div id='myDiv'/>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, content, collectedAlerts);
-        assertEquals(expectedAlert, collectedAlerts.get(0));
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    public void testBubbles_IE() throws Exception {
-        testBubbles(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"object", "undefined"});
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void testBubbles_FF() throws Exception {
-        testBubbles(BrowserVersion.FIREFOX_2, new String[] {"object", "true"});
-    }
-
-    private void testBubbles(final BrowserVersion browser, final String[] expected) throws Exception {
+    @Alerts(FF = {"object", "true" },
+            IE = {"object", "undefined" })
+    public void testBubbles() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
             + "    function test(e) {\n"
@@ -622,28 +587,17 @@ public class EventTest extends WebTestCase {
             + "        alert(e.bubbles);\n"
             + "    }\n"
             + "</script></body></html>";
-        final List<String> actual = new ArrayList<String>();
-        loadPage(browser, html, actual);
-        assertEquals(expected, actual);
+
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    public void testCancelable_IE() throws Exception {
-        testCancelable(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"object", "undefined"});
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void testCancelable_FF() throws Exception {
-        testCancelable(BrowserVersion.FIREFOX_2, new String[] {"object", "true"});
-    }
-
-    private void testCancelable(final BrowserVersion browser, final String[] expected) throws Exception {
+    @Alerts(FF = {"object", "true" },
+            IE = {"object", "undefined" })
+    public void testCancelable() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
             + "    function test(e) {\n"
@@ -651,37 +605,24 @@ public class EventTest extends WebTestCase {
             + "        alert(e.cancelable);\n"
             + "    }\n"
             + "</script></body></html>";
-        final List<String> actual = new ArrayList<String>();
-        loadPage(browser, html, actual);
-        assertEquals(expected, actual);
+
+        loadPageWithAlerts(html);
     }
 
     /**
      * Verifies that in IE, the <tt>shiftKey</tt>, <tt>ctrlKey</tt> and <tt>altKey</tt>
      * event attributes are defined for all events, but <tt>metaKey</tt> is not defined
-     * for any events.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void testKeys_IE() throws Exception {
-        testKeys(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {
-            "object", "false", "false", "false", "undefined",
-            "object", "false", "false", "false", "undefined" });
-    }
-
-    /**
+     * for any events.<br/>
      * Verifies that in FF, the <tt>shiftKey</tt>, <tt>ctrlKey</tt>, <tt>altKey</tt> and
      * <tt>metaKey</tt> attributes are defined for mouse events only.
      * @throws Exception if an error occurs
      */
     @Test
-    public void testKeys_FF() throws Exception {
-        testKeys(BrowserVersion.FIREFOX_2, new String[] {
-            "object", "undefined", "undefined", "undefined", "undefined",
-            "object", "false", "false", "false", "false" });
-    }
-
-    private void testKeys(final BrowserVersion browser, final String[] expected) throws Exception {
+    @Alerts(FF = {"object", "undefined", "undefined", "undefined", "undefined",
+            "object", "false", "false", "false", "false" },
+            IE = {"object", "false", "false", "false", "undefined",
+            "object", "false", "false", "false", "undefined" })
+    public void testKeys() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
             + "    function test(e) {\n"
@@ -695,29 +636,19 @@ public class EventTest extends WebTestCase {
             + "<div id='div' onclick='test(event)'>abc</div>\n"
             + "</body></html>";
         final List<String> actual = new ArrayList<String>();
-        final HtmlPage page = loadPage(browser, html, actual);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, actual);
         final HtmlDivision div = (HtmlDivision) page.getHtmlElementById("div");
         div.click();
-        assertEquals(expected, actual);
+        assertEquals(Arrays.toString(getExpectedAlerts()), actual.toString());
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    public void testTimeStamp_IE() throws Exception {
-        testTimeStamp(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"object", "undefined"});
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void testTimeStamp_FF() throws Exception {
-        testTimeStamp(BrowserVersion.FIREFOX_2, new String[] {"object", "number"});
-    }
-
-    private void testTimeStamp(final BrowserVersion browser, final String[] expected) throws Exception {
+    @Alerts(FF = {"object", "number" },
+            IE = {"object", "undefined" })
+    public void testTimeStamp() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
             + "    function test(e) {\n"
@@ -725,15 +656,16 @@ public class EventTest extends WebTestCase {
             + "        alert(typeof e.timeStamp);\n"
             + "    }\n"
             + "</script></body></html>";
-        final List<String> actual = new ArrayList<String>();
-        loadPage(browser, html, actual);
-        assertEquals(expected, actual);
+
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts({ "capturing", "at target", "bubbling" })
     public void testEventPhase() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -754,18 +686,19 @@ public class EventTest extends WebTestCase {
             + "<body onload='init()'>\n"
             + "<form><input type='button' onclick='alertPhase(event)' id='b'></form>\n"
             + "</body></html>";
-        final String[] expected = {"capturing", "at target", "bubbling"};
+
         final List<String> actual = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, actual);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, actual);
         final HtmlButtonInput button = (HtmlButtonInput) page.getHtmlElementById("b");
         button.click();
-        assertEquals(expected, actual);
+        assertEquals(getExpectedAlerts(), actual);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Browsers(Browser.NONE)
     public void testSetEventPhaseToInvalidValue() throws Exception {
         boolean thrown = false;
         try {
@@ -781,6 +714,8 @@ public class EventTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts({ "click", "true", "true", "dblclick", "false", "false" })
     public void testInitEvent() throws Exception {
         final String html =
               "<html><body onload='test()'><script>\n"
@@ -797,10 +732,8 @@ public class EventTest extends WebTestCase {
             + "    alert(e.cancelable);\n"
             + "  }\n"
             + "</script></body></html>";
-        final String[] expected = {"click", "true", "true", "dblclick", "false", "false"};
-        final List<String> actual = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, html, actual);
-        assertEquals(expected, actual);
+
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -808,6 +741,7 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.NONE) // TODO: use browsers to test for all
     public void testDOMContentLoaded() throws Exception {
         testHTMLFile("EventTest_DOMContentLoaded.html");
     }
@@ -816,6 +750,7 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.NONE) // TODO: use browsers to test for all
     public void testPreventDefault() throws Exception {
         testHTMLFile("EventTest_preventDefault.html");
     }
@@ -825,43 +760,37 @@ public class EventTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testEventBubblingReturns() throws Exception {
-        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "             ", "             ", "             ", true);
-        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "return false;", "             ", "             ", false);
-        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "             ", "return false;", "             ", false);
-        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "             ", "             ", "return false;", false);
+    public void testEventBubblingReturns_1() throws Exception {
+        testEventBubblingReturns("", "", "", true);
+        testEventBubblingReturns("return false;", "             ", "             ", false);
+        testEventBubblingReturns("             ", "return false;", "             ", false);
+        testEventBubblingReturns("             ", "             ", "return false;", false);
 
-        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "return true; ", "return true; ", "return true; ", true);
-        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "return false;", "return true; ", "return true; ", false);
-        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "return true; ", "return false;", "return true; ", true);
-        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "return true; ", "return true; ", "return false;", true);
+        testEventBubblingReturns("return true; ", "return true; ", "return true; ", true);
+        testEventBubblingReturns("return false;", "return true; ", "return true; ", false);
 
-        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "return true; ", "             ", "return false;", true);
-        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "             ", "return true; ", "return false;", true);
-        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "return true; ", "return false;", "             ", true);
-        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "             ", "return false;", "return true; ", false);
-        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "return false;", "return true; ", "             ", false);
-        testEventBubblingReturns(INTERNET_EXPLORER_7_0, "return false;", "             ", "return true; ", false);
-
-        testEventBubblingReturns(FIREFOX_2, "             ", "             ", "             ", true);
-        testEventBubblingReturns(FIREFOX_2, "return false;", "             ", "             ", false);
-        testEventBubblingReturns(FIREFOX_2, "             ", "return false;", "             ", false);
-        testEventBubblingReturns(FIREFOX_2, "             ", "             ", "return false;", false);
-
-        testEventBubblingReturns(FIREFOX_2, "return true; ", "return true; ", "return true; ", true);
-        testEventBubblingReturns(FIREFOX_2, "return false;", "return true; ", "return true; ", false);
-        testEventBubblingReturns(FIREFOX_2, "return true; ", "return false;", "return true; ", false);
-        testEventBubblingReturns(FIREFOX_2, "return true; ", "return true; ", "return false;", false);
-
-        testEventBubblingReturns(FIREFOX_2, "return true; ", "             ", "return false;", false);
-        testEventBubblingReturns(FIREFOX_2, "             ", "return true; ", "return false;", false);
-        testEventBubblingReturns(FIREFOX_2, "return true; ", "return false;", "             ", false);
-        testEventBubblingReturns(FIREFOX_2, "             ", "return false;", "return true; ", false);
-        testEventBubblingReturns(FIREFOX_2, "return false;", "return true; ", "             ", false);
-        testEventBubblingReturns(FIREFOX_2, "return false;", "             ", "return true; ", false);
+        testEventBubblingReturns("             ", "return false;", "return true; ", false);
+        testEventBubblingReturns("return false;", "return true; ", "             ", false);
+        testEventBubblingReturns("return false;", "             ", "return true; ", false);
     }
 
-    private void testEventBubblingReturns(final BrowserVersion version, final String onclick1,
+    /**
+     * Test for bug 1976960: what happens with different return values at different levels?
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "false", IE = "true") // here not alerts! ;-)
+    public void testEventBubblingReturns_2() throws Exception {
+        final boolean changesPage = Boolean.parseBoolean(getExpectedAlerts()[0]);
+        testEventBubblingReturns("return true; ", "return false;", "return true; ", changesPage);
+        testEventBubblingReturns("return true; ", "return true; ", "return false;", changesPage);
+
+        testEventBubblingReturns("return true; ", "             ", "return false;", changesPage);
+        testEventBubblingReturns("             ", "return true; ", "return false;", changesPage);
+        testEventBubblingReturns("return true; ", "return false;", "             ", changesPage);
+    }
+
+    private void testEventBubblingReturns(final String onclick1,
         final String onclick2, final String onclick3, final boolean changesPage) throws Exception {
 
         final String html1
@@ -875,7 +804,7 @@ public class EventTest extends WebTestCase {
 
         final String html2 = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient client = new WebClient(version);
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 

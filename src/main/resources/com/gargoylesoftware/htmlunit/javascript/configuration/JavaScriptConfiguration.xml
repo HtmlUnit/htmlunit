@@ -1990,6 +1990,15 @@
         <doclink
             url="http://www.w3.org/TR/DOM-Level-3-Events/events.html#Events-UIEvent"
             descr="W3C Document Object Model (DOM) Level 3 - UI event types"/>
+        <property name="shiftKey" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="ctrlKey" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="altKey" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
         <property name="detail" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
