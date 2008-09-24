@@ -109,8 +109,8 @@ public class CSSStyleRuleTest extends WebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = { "body", "h1", "a.foo", ".foo", ".foo .foo2" },
-            IE = { "BODY", "H1", "A.foo", ".foo", ".foo .foo2" })
+    @Alerts(FF = { "body", "h1", "a.foo", ".foo", ".foo .foo2", "#byId" },
+            IE = { "BODY", "H1", "A.foo", ".foo", ".foo .foo2", "#byId" })
     public void selectorText() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
@@ -119,6 +119,7 @@ public class CSSStyleRuleTest extends WebTestCase {
                 + "  A.foo  { color: blue; }\n"
                 + "  .foo  { color: blue; }\n"
                 + "  .foo .foo2 { font: 8pt; }\n"
+                + "  #byId { font: 8pt; }\n"
                 + "</style>\n"
                 + "<script>\n"
                 + "  function test(){\n"

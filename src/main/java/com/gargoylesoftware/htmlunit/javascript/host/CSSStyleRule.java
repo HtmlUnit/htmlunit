@@ -22,6 +22,7 @@ import java.util.regex.Pattern;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class CSSStyleRule extends CSSRule {
 
@@ -49,12 +50,13 @@ public class CSSStyleRule extends CSSRule {
      */
     public String jsxGet_selectorText() {
         String selectorText = ((org.w3c.dom.css.CSSStyleRule) getRule()).getSelectorText();
-        final Pattern p = Pattern.compile("\\.?[a-zA-Z]+");
+        final Pattern p = Pattern.compile("[\\.#]?[a-zA-Z]+");
         final Matcher m = p.matcher(selectorText);
         final StringBuffer sb = new StringBuffer();
         while (m.find()) {
             String fixedName = m.group();
-            if (fixedName.startsWith(".")) { // this should be handled with the right regex but...
+            // this should be handled with the right regex but...
+            if (fixedName.startsWith(".") || fixedName.startsWith("#")) {
                 // nothing
             }
             else if (getBrowserVersion().isIE()) {
@@ -67,7 +69,7 @@ public class CSSStyleRule extends CSSRule {
         }
         m.appendTail(sb);
 
-        selectorText = sb.toString().replaceAll("\\*\\.", "."); // ".foo" and not "*.foo"
+        selectorText = sb.toString().replaceAll("\\*([\\.#])", "$1"); // ".foo" and not "*.foo"
         return selectorText;
     }
 
