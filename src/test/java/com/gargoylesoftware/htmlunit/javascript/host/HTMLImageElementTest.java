@@ -14,12 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -28,7 +28,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version $Revision$
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
+ * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public class HTMLImageElementTest extends WebTestCase {
 
     /**
@@ -37,8 +39,9 @@ public class HTMLImageElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("http://www.gargoylesoftware.com/foo.gif")
     public void test_getSrc() throws Exception {
-        final String content
+        final String html
             = "<html><head><title></title><script>\n"
             + "function doTest(){\n"
             + "    alert(document.getElementById('anImage').src);\n"
@@ -47,15 +50,7 @@ public class HTMLImageElementTest extends WebTestCase {
             + "<img src='foo.gif' id='anImage'/>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-
-        final String[] expectedAlerts = {
-            "http://www.gargoylesoftware.com/foo.gif"
-        };
-
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -66,7 +61,7 @@ public class HTMLImageElementTest extends WebTestCase {
      */
     @Test
     public void test_setSrc() throws Exception {
-        final String content
+        final String html
             = "<html><head><title></title><script>\n"
             + "function doTest(){\n"
             + "    document.getElementById('anImage').src = 'bar.gif';\n"
@@ -75,7 +70,7 @@ public class HTMLImageElementTest extends WebTestCase {
             + "<img src='foo.gif' id='anImage'/>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(content, null);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null, URL_FIRST);
         final HtmlImage image = (HtmlImage) page.getHtmlElementById("anImage");
         assertEquals("bar.gif", image.getSrcAttribute());
     }
@@ -92,8 +87,9 @@ public class HTMLImageElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("http://www.gargoylesoftware.com/bar.gif")
     public void test_setSrc_newImage() throws Exception {
-        final String content
+        final String html
             = "<html><head><title></title><script>\n"
             + "function doTest(){\n"
             + "    var preloadImage = new Image();\n"
@@ -103,23 +99,16 @@ public class HTMLImageElementTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-
-        final String[] expectedAlerts = {
-            "http://www.gargoylesoftware.com/bar.gif"
-        };
-
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("foo")
     public void test_AttributeName() throws Exception {
-        final String content
+        final String html
             = "<html><head><title></title><script>\n"
             + "function test()\n"
             + "{\n"
@@ -131,12 +120,6 @@ public class HTMLImageElementTest extends WebTestCase {
             + "<img src='foo.png' id='myImage'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"foo"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 }

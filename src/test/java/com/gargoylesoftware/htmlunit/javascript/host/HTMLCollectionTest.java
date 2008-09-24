@@ -18,12 +18,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link HTMLCollection}.
@@ -32,14 +37,16 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class HTMLCollectionTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("true")
     public void testImplicitToStringConversion() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "    alert(document.links != 'foo')\n"
             + "}\n"
@@ -47,13 +54,7 @@ public class HTMLCollectionTest extends WebTestCase {
             + "<a href='bla.html'>link</a>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"true"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -61,12 +62,10 @@ public class HTMLCollectionTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented
+    @Alerts("function")
     public void testToStringFunction() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "    alert(typeof document.links.toString)\n"
             + "}\n"
@@ -74,21 +73,17 @@ public class HTMLCollectionTest extends WebTestCase {
             + "<a href='bla.html'>link</a>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"function"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "5", "6" })
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     public void testGetElements() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.all.length);\n"
@@ -98,23 +93,15 @@ public class HTMLCollectionTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(firstContent, collectedAlerts);
-
-        final String[] expectedAlerts = {"5", "6"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "true", "1" })
     public void testChildNodes() throws Exception {
-        testChildNodes(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "1"});
-        testChildNodes(BrowserVersion.FIREFOX_2, new String[] {"true", "1"});
-    }
-
-    private void testChildNodes(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
         final String firstContent = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
@@ -134,7 +121,7 @@ public class HTMLCollectionTest extends WebTestCase {
         final String secondContent = "<title>Immortality</title>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = new WebClient(browserVersion);
+        final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, firstContent);
@@ -142,21 +129,16 @@ public class HTMLCollectionTest extends WebTestCase {
         client.setWebConnection(conn);
 
         client.getPage(URL_FIRST);
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = {"string 0", "string length", "string item", "string namedItem" },
+            IE = {"string length", "string myForm" })
     public void testFor_in() throws Exception {
-        final String[] expectedAlertsIE = {"string length", "string myForm"};
-        testFor_in(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlertsIE);
-        final String[] expectedAlertsFF = {"string 0", "string length", "string item", "string namedItem"};
-        testFor_in(BrowserVersion.FIREFOX_2, expectedAlertsFF);
-    }
-
-    private void testFor_in(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    for (i in document.forms) {\n"
@@ -167,25 +149,18 @@ public class HTMLCollectionTest extends WebTestCase {
             + "<form name='myForm'></form>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = {"string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
+            "string length", "string item", "string namedItem" },
+            IE = {"string length", "string val1", "string 1", "string val2",
+            "string first_submit", "string second_submit", "string action" })
     public void testFor_in2() throws Exception {
-        final String[] expectedAlertsIE = {"string length", "string val1", "string 1", "string val2",
-            "string first_submit", "string second_submit", "string action"};
-        testFor_in2(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlertsIE);
-        final String[] expectedAlertsFF = {"string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
-            "string length", "string item", "string namedItem"};
-        testFor_in2(BrowserVersion.FIREFOX_2, expectedAlertsFF);
-    }
-
-    private void testFor_in2(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var form = document.getElementById('myForm');\n"
@@ -205,9 +180,7 @@ public class HTMLCollectionTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -215,12 +188,9 @@ public class HTMLCollectionTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = {"true", "false" },
+            IE = {"true", "true" })
     public void testTags() throws Exception {
-        testTags(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "true"});
-        testTags(BrowserVersion.FIREFOX_2, new String[] {"true", "false"});
-    }
-
-    private void testTags(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    alert(document.all.tags != undefined);\n"
@@ -230,27 +200,18 @@ public class HTMLCollectionTest extends WebTestCase {
             + "<form name='myForm'></form>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * Depending on the method used, out of bound access give different responses.
+     * In fact this is not fully correct as FF support the col(index) syntax only for special
+     *  collections where it simulates IE like document.all
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "null", "null", "undefined", "null" })
     public void testOutOfBoundAccess() throws Exception {
-        final String[] expectedAlerts = {"null", "null", "undefined", "null"};
-        // in fact this is not fully correct as FF support the col(index) syntax only for special
-        // collections where it simulates IE like document.all
-        testOutOfBoundAccess(BrowserVersion.FIREFOX_2, expectedAlerts);
-        testOutOfBoundAccess(BrowserVersion.INTERNET_EXPLORER_6_0, expectedAlerts);
-    }
-
-    private void testOutOfBoundAccess(final BrowserVersion browserVersion, final String[] expectedAlerts)
-        throws Exception {
-
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var col = document.getElementsByTagName('a');\n"
@@ -262,8 +223,6 @@ public class HTMLCollectionTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, html, collectedAlerts);
-        assertEquals("Using " + browserVersion.getApplicationName(), expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 }

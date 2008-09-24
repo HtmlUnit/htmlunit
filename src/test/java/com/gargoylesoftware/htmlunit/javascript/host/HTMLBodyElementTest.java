@@ -18,9 +18,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -30,7 +34,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public class HTMLBodyElementTest extends WebTestCase {
 
     /**
@@ -38,13 +44,9 @@ public class HTMLBodyElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(FF = {",0px,0px,0px,0px", ",,,,", ",8px,8px,8px,8px", ",,,," },
+            IE = {"0px,0px,0px,0px,0px", ",,,,", "15px 10px,10px,10px,15px,15px", ",,,," })
     public void testDefaultPaddingAndMargins() throws Exception {
-        testDefaultPaddingAndMargins(BrowserVersion.FIREFOX_2, ",0px,0px,0px,0px", ",,,,", ",8px,8px,8px,8px", ",,,,");
-        testDefaultPaddingAndMargins(BrowserVersion.INTERNET_EXPLORER_7_0, "0px,0px,0px,0px,0px", ",,,,", "15px 10px,10px,10px,15px,15px", ",,,,");
-        testDefaultPaddingAndMargins(BrowserVersion.INTERNET_EXPLORER_6_0, "0px,0px,0px,0px,0px", ",,,,", "15px 10px,10px,10px,15px,15px", ",,,,");
-    }
-
-    private void testDefaultPaddingAndMargins(final BrowserVersion version, final String... expected) throws Exception {
         final String html =
             "<html>\n"
             + "  <head>\n"
@@ -61,15 +63,15 @@ public class HTMLBodyElementTest extends WebTestCase {
             + "  </head>\n"
             + "  <body id='body' onload='test()'>blah</body>\n"
             + "</html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(version, html, collectedAlerts);
-        assertEquals(expected, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("[object]")
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     public void attachEvent() throws Exception {
         final String html =
             "<html>\n"
@@ -87,17 +89,19 @@ public class HTMLBodyElementTest extends WebTestCase {
             + "    <input type='button' id='myInput' value='Test me'>\n"
             + "  </body>\n"
             + "</html>";
-        final String[] expectedAlerts = {"[object]"};
+
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, collectedAlerts);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
         ((HtmlButtonInput) page.getHtmlElementById("myInput")).click();
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(FF = "no",
+            IE = "yes")
     public void doScroll() throws Exception {
         final String html =
             "<html>\n"
@@ -117,16 +121,6 @@ public class HTMLBodyElementTest extends WebTestCase {
             + "  <body onload='test()'>\n"
             + "  </body>\n"
             + "</html>";
-
-        String[] expectedAlerts = new String[] {"no"};
-        List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
-
-        expectedAlerts = new String[] {"yes"};
-        collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
-
 }
