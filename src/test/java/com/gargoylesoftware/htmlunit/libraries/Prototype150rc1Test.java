@@ -152,11 +152,21 @@ public class Prototype150rc1Test extends WebTestCase {
      * @throws Exception if test fails
      */
     @Test
-    public void selector() throws Exception {
+    public void selectorIE() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
         final String filename = "selector.html";
         //HtmlUnit with IE succeeds for all :)
-        // It should be test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 18, 35, 9, 1);
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 18, 46, 0, 0);
+        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 18, 35, 9, 1);
+    }
+
+    /**
+     * @throws Exception if test fails
+     */
+    @Test
+    public void selectorFF() throws Exception {
+        final String filename = "selector.html";
         test(BrowserVersion.FIREFOX_2, filename, 18, 46, 0, 0);
     }
 

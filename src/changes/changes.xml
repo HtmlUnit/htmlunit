@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes">
+            <action type="fix" dev="mguillem">
+                JavaScript: use 'className' instead of 'class' to get/set class attribute (IE only).
+            </action>
+            <action type="fix" dev="mguillem">
+                JavaScript: Node.getAttributeNode returns null if no attribute exists with the specified name.
+            </action>
             <action type="fix" dev="asashour" id="2105645">
                 Form element can be included as HTML inside XML.
             </action>

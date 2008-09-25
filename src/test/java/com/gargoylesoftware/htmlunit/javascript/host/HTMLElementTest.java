@@ -191,6 +191,7 @@ public class HTMLElementTest extends WebTestCase {
      */
     @Test
     @Alerts({
+            "null",
             "expando=true",
             "firstChild=null",
             "lastChild=null",
@@ -213,6 +214,7 @@ public class HTMLElementTest extends WebTestCase {
             + "  <script>\n"
             + "    function test() {\n"
             + "      var div = document.getElementById('div2');\n"
+            + "      alert(div.getAttributeNode('notExisting'));\n"
             + "      var customAtt = div.getAttributeNode('customAttribute');\n"
             + "      alertAttributeProperties(customAtt);\n"
             + "    }\n"
@@ -2308,5 +2310,33 @@ public class HTMLElementTest extends WebTestCase {
             + "</script></body></html>";
         final HtmlPage page = loadPage(html);
         assertEquals("test hello", page.asText());
+    }
+
+    /**
+     * Test setting the class for the element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "x", "null", "[object Attr]", "null", "x", "byClassname" },
+            IE = { "null", "x", "[object]", "null", "null", "byClassname" })
+    public void class_className_attribute() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "    var e = document.getElementById('pid');\n"
+            + "    alert(e.getAttribute('class'));\n"
+            + "    alert(e.getAttribute('className'));\n"
+            + "    alert(e.getAttributeNode('class'));\n"
+            + "    alert(e.getAttributeNode('className'));\n"
+            + "    e.setAttribute('className', 'byClassname');\n"
+            + "    alert(e.getAttribute('class'));\n"
+            + "    alert(e.getAttribute('className'));\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<p id='pid' class='x'>text</p>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
     }
 }

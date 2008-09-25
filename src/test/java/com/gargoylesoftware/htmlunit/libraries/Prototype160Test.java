@@ -133,9 +133,6 @@ public class Prototype160Test extends WebTestCase {
      */
     @Test
     public void form() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String filename = "form.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 15, 110, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 15, 109, 0, 0);

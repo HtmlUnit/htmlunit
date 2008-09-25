@@ -360,12 +360,31 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param attributeName attribute name
      * @return the value of the specified attribute, <code>null</code> if the attribute is not defined
      */
-    public String jsxFunction_getAttribute(final String attributeName) {
+    public String jsxFunction_getAttribute(String attributeName) {
+        attributeName = fixAttributeName(attributeName);
         final String value = getHtmlElementOrDie().getAttributeValue(attributeName);
         if (value == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
             return null;
         }
         return value;
+    }
+
+    /**
+     * For IE, foo.getAttribute(x) uses same names as foo.x  
+     * @param attributeName the name
+     * @return the real name
+     */
+    private String fixAttributeName(final String attributeName) {
+        if (getBrowserVersion().isIE()) {
+            if ("className".equals(attributeName)) {
+                return "class";
+            }
+            else if ("class".equals(attributeName)) {
+                return "_class"; // attribute should not be retrieved with "class"
+            }
+        }
+
+           return attributeName;
     }
 
     /**
@@ -411,7 +430,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param name Name of the attribute to set
      * @param value Value to set the attribute to
      */
-    public void jsxFunction_setAttribute(final String name, final String value) {
+    public void jsxFunction_setAttribute(String name, final String value) {
+        name = fixAttributeName(name);
         getHtmlElementOrDie().setAttributeValue(name, value);
 
         //FF: call corresponding event handler jsxSet_onxxx if found
@@ -459,6 +479,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the attribute node for the specified attribute
      */
     public Object jsxFunction_getAttributeNode(final String attributeName) {
+        if (getHtmlElementOrDie().getAttributeValue(attributeName) == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+            return null;
+        }
+
         final Attr att = new Attr();
         att.setPrototype(getPrototype(Attr.class));
         att.setParentScope(getWindow());
