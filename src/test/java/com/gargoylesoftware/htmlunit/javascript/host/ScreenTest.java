@@ -14,12 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link Screen}.
@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535868.aspx">MSDN documentation</a>
  * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref.html">Mozilla documentation</a>
  */
+@RunWith(BrowserRunner.class)
 public class ScreenTest extends WebTestCase {
 
     /**
@@ -37,8 +38,9 @@ public class ScreenTest extends WebTestCase {
      * @throws Exception on test failure
      */
     @Test
+    @Alerts("16")
     public void testProperties() throws Exception {
-        final String content = "<html><head><title>test</title>\n"
+        final String html = "<html><head><title>test</title>\n"
             + "    <script>\n"
             + "    function doTest(){\n"
             + "       var props = {\n"
@@ -74,9 +76,7 @@ public class ScreenTest extends WebTestCase {
             + "</head>\n"
             + "<body onload='doTest()'>\n"
             + "</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        final String[] expectedAlerts = {"16"};
-        assertEquals(expectedAlerts, collectedAlerts);
+
+        loadPageWithAlerts(html);
     }
 }

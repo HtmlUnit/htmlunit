@@ -18,12 +18,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link Navigator}.
@@ -34,6 +37,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class NavigatorTest extends WebTestCase {
 
     /**
@@ -104,7 +108,7 @@ public class NavigatorTest extends WebTestCase {
             + "</html>";
 
         final String[] expectedAlerts = {Boolean.toString(cookieEnabled)};
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         if (!cookieEnabled) {
             webClient.getCookieManager().setCookiesEnabled(cookieEnabled);
         }
@@ -231,25 +235,15 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "Netscape" },
+            IE = { "Microsoft Internet Explorer" })
     public void testUseConfiguredBrowser() throws Exception {
-        final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_2);
-        final MockWebConnection webConnection = new MockWebConnection();
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final String content
+        final String html
             = "<html><head><title>First</title></head>\n"
             + "<body onload='alert(window.navigator.appName)'></body>\n"
             + "</html>";
 
-        webConnection.setDefaultResponse(content);
-        webClient.setWebConnection(webConnection);
-
-        webClient.getPage(URL_FIRST);
-
-        final String[] expectedAlerts = {"Netscape"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -257,25 +251,15 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { BrowserVersion.LANGUAGE_ENGLISH_US },
+            IE = { "undefined" })
     public void testLanguage() throws Exception {
-        final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_2);
-        final MockWebConnection webConnection = new MockWebConnection();
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final String content
+        final String html
             = "<html><head><title>First</title></head>\n"
             + "<body onload='alert(window.navigator.language)'></body>\n"
             + "</html>";
 
-        webConnection.setDefaultResponse(content);
-        webClient.setWebConnection(webConnection);
-
-        webClient.getPage(URL_FIRST);
-
-        final String[] expectedAlerts = {BrowserVersion.FIREFOX_2.getBrowserLanguage()};
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -283,8 +267,9 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "number", "number" })
     public void testMozilla() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>First</title></head>\n"
             + "<script>\n"
             + "function test()\n"
@@ -296,21 +281,17 @@ public class NavigatorTest extends WebTestCase {
             + "<body onload='test()'></body>\n"
             + "</html>";
 
-        final String[] expectedAlerts = {"number", "number"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
     /**
      * Test some Mozilla properties (minimal tests are support is not completed).
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "Gecko" },
+            IE = { "undefined" })
     public void product() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>First</title></head>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -320,9 +301,6 @@ public class NavigatorTest extends WebTestCase {
             + "<body onload='test()'></body>\n"
             + "</html>";
 
-        final String[] expectedAlerts = {"Gecko"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 }

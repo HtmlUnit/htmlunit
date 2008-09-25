@@ -19,12 +19,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link com.gargoylesoftware.htmlunit.javascript.NamedNodeMap}.
@@ -33,12 +35,14 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Daniel Gredler
  */
+@RunWith(BrowserRunner.class)
 public class NamedNodeMapTest extends WebTestCase {
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({ "name=f", "id=f", "foo=bar", "baz=blah" })
     public void testAttributes() throws Exception {
         final String html =
               "<html>\n"
@@ -56,16 +60,15 @@ public class NamedNodeMapTest extends WebTestCase {
             + "<form name='f' id='f' foo='bar' baz='blah'></form>\n"
             + "</body>\n"
             + "</html>";
-        final List<String> actual = new ArrayList<String>();
-        loadPage(html, actual);
-        final String[] expected = {"name=f", "id=f", "foo=bar", "baz=blah"};
-        assertEquals(expected, actual);
+
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({ "name", "f", "name", "f", "name", "f", "name", "f", "null" })
     public void testGetNamedItem_HTML() throws Exception {
         final String html =
               "<html>\n"
@@ -89,12 +92,8 @@ public class NamedNodeMapTest extends WebTestCase {
             + "<form name='f' id='f' foo='bar' baz='blah'></form>\n"
             + "</body>\n"
             + "</html>";
-        final String[] expected = {"name", "f", "name", "f", "name", "f", "name", "f", "null"};
-        createTestPageForRealBrowserIfNeeded(html, expected);
 
-        final List<String> actual = new ArrayList<String>();
-        loadPage(html, actual);
-        assertEquals(expected, actual);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -131,7 +130,7 @@ public class NamedNodeMapTest extends WebTestCase {
 
         final String[] expectedAlerts = new String[] {"name", "y", "name", "y", "null", "undefined", "null"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
+        final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(firstURL, html);

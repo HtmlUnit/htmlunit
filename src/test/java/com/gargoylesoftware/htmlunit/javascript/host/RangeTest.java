@@ -14,13 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 
 /**
  * Tests for {@link Range}.
@@ -29,6 +30,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class RangeTest extends WebTestCase {
 
     private static final String contentStart = "<html><head><title>Range Test</title>\n"
@@ -48,6 +50,7 @@ public class RangeTest extends WebTestCase {
         + "}\n"
         + "function test() {\n"
         + "var r = document.createRange();\n";
+
     private static final String contentEnd = "\n}\n</script></head>\n"
         + "<body onload='test()'>\n"
         + "<div id='theDiv'>Hello, <span id='theSpan'>this is a test for"
@@ -56,56 +59,48 @@ public class RangeTest extends WebTestCase {
         + "<p id='theP'>for Range</p>\n"
         + "</body></html>";
 
-    private void test(final String script, final String[] expectedAlerts) throws Exception {
-        final String content = contentStart + script + contentEnd;
-
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts({ "true", "undefined", "undefined", "0", "undefined", "0" })
     public void testEmptyRange() throws Exception {
-        final String[] expectedAlerts = {"true", "undefined", "undefined", "0", "undefined", "0"};
-        final String script = "alertRange(r);";
-
-        test(script, expectedAlerts);
+        loadPageWithAlerts(contentStart + "alertRange(r);" + contentEnd);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts({ "false", "BODY", "BODY", "1", "BODY", "2" })
     public void testSelectNode() throws Exception {
         final String script = "r.selectNode(document.getElementById('theDiv'));"
             + "alertRange(r);";
-        final String[] expectedAlerts = {"false", "BODY", "BODY", "1", "BODY", "2"};
 
-        test(script, expectedAlerts);
+        loadPageWithAlerts(contentStart + script + contentEnd);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts({ "false", "DIV", "DIV", "0", "DIV", "2" })
     public void testSelectNodeContents() throws Exception {
         final String script = "r.selectNodeContents(document.getElementById('theDiv'));"
             + "alertRange(r);";
-        final String[] expectedAlerts = {"false", "DIV", "DIV", "0", "DIV", "2"};
 
-        test(script, expectedAlerts);
+        loadPageWithAlerts(contentStart + script + contentEnd);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts("<div id=\"myDiv2\"></div><div>harhar</div><div id=\"myDiv3\"></div>")
     public void testCreateContextualFragment() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -120,9 +115,6 @@ public class RangeTest extends WebTestCase {
             + "  <div id='myDiv'><div id='myDiv2'></div><div id='myDiv3'></div></div>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"<div id=\"myDiv2\"></div><div>harhar</div><div id=\"myDiv3\"></div>"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 }
