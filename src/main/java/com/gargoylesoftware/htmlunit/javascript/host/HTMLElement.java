@@ -370,7 +370,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * For IE, foo.getAttribute(x) uses same names as foo.x  
+     * For IE, foo.getAttribute(x) uses same names as foo.x
      * @param attributeName the name
      * @return the real name
      */
@@ -384,7 +384,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             }
         }
 
-           return attributeName;
+        return attributeName;
     }
 
     /**
