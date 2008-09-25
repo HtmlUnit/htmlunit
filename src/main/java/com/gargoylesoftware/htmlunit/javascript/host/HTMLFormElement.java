@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.mozilla.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -239,15 +240,15 @@ public class HTMLFormElement extends HTMLElement {
     @Override
     protected Object getWithPreemption(final String name) {
         final HtmlForm form = getHtmlForm();
-        final HtmlPage page = (HtmlPage) form.getPage();
-        if (page != null) {
+        final Page page = form.getPage();
+        if (page instanceof HtmlPage) {
             // Try to satisfy this request using a map-backed operation before punting and using XPath.
             // XPath operations are very expensive, and this method gets invoked quite a bit.
             // Approach: Try to match the string to a name or ID, accepting only inputs (not type=image),
             // buttons, selects and textareas that are in this form. We also include img elements
             // (the second XPath search below) in the search, because any results with more than one element
             // will end up using the XPath search anyway, so it doesn't hurt when looking for single elements.
-            final List<HtmlElement> elements = page.getHtmlElementsByIdAndOrName(name);
+            final List<HtmlElement> elements = ((HtmlPage) page).getHtmlElementsByIdAndOrName(name);
             if (elements.isEmpty()) {
                 return NOT_FOUND;
             }

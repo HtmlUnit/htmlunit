@@ -1360,9 +1360,6 @@ public class XMLHttpRequestTest extends WebTestCase {
      */
     @Test
     public void responseXML_html_form() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String html =
               "<html>\n"
             + "  <head>\n"
