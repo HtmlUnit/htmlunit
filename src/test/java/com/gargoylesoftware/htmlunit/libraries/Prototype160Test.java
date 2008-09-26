@@ -191,9 +191,6 @@ public class Prototype160Test extends WebTestCase {
      */
     @Test
     public void selector() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String filename = "selector.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 37, 169, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 37, 171, 0, 0);
