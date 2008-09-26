@@ -439,4 +439,19 @@ public class SimpleScriptable extends ScriptableObject {
     protected BrowserVersion getBrowserVersion() {
         return getWindow().getWebWindow().getWebClient().getBrowserVersion();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasInstance(final Scriptable instance) {
+        if (getPrototype() == null) {
+            // to handle cases like "x instanceof HTMLElement",
+            // but HTMLElement is not in the prototype chain of any element
+            final ScriptableObject p = (ScriptableObject) get("prototype", this);
+            return p.hasInstance(instance);
+        }
+
+        return super.hasInstance(instance);
+    }
 }

@@ -1658,7 +1658,7 @@ public class HTMLElementTest extends WebTestCase {
     @Test
     @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @Alerts({ "undefined", "undefined", "undefined", "undefined",
-            "123", "from myFunction", "123", "from myFunction" })
+            "undefined", "123", "from myFunction", "123", "from myFunction" })
     public void prototype() throws Exception {
         final String html = "<html><head><title>Prototype test</title>\n"
             + "<script>\n"
@@ -1671,6 +1671,7 @@ public class HTMLElementTest extends WebTestCase {
             + "    alert(link.foo);\n"
             + "    alert(link.myFunction);\n"
             + "    HTMLElement.prototype.foo = 123;\n"
+            + "    alert(HTMLElement.foo);\n"
             + "    HTMLElement.prototype.myFunction = function() { return 'from myFunction'; };\n"
             + "    alert(d.foo);\n"
             + "    alert(d.myFunction());\n"

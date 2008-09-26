@@ -176,17 +176,16 @@ public class JavaScriptEngine implements Serializable {
                 configureConstantsPropertiesAndFunctions(config, window);
             }
             else {
-                Scriptable prototype = configureClass(config, window);
+                final Scriptable prototype = configureClass(config, window);
                 if (config.isJsObject()) {
                     // for FF, place object with prototype property in Window scope
                     if (!getWebClient().getBrowserVersion().isIE()) {
-                        final Scriptable obj = config.getLinkedClass().newInstance();
-                        obj.put("prototype", obj, prototype);
-                        obj.setPrototype(prototype);
+                        final SimpleScriptable obj = config.getLinkedClass().newInstance();
+                        obj.put("prototype", obj, prototype); // but not setPrototype!
                         obj.setParentScope(window);
                         ScriptableObject.defineProperty(window, config.getClassName(), obj, ScriptableObject.DONTENUM);
-                        // use this instance in prototype map to allow instanceof to work
-                        prototype = obj;
+                        // this obj won't have prototype, constants need to be configured on it again
+                        configureConstants(config, obj);
 
                         if (obj.getClass() == Element.class && webWindow.getEnclosedPage() instanceof HtmlPage) {
                             final DomNode domNode =
@@ -271,17 +270,8 @@ public class JavaScriptEngine implements Serializable {
             final ScriptableObject scriptable) {
 
         // the constants
-        for (final String constant : config.constants()) {
-            final Class< ? > linkedClass = config.getLinkedClass();
-            try {
-                final Object value = linkedClass.getField(constant).get(null);
-                scriptable.defineProperty(constant, value, ScriptableObject.CONST);
-            }
-            catch (final Exception e) {
-                throw Context.reportRuntimeError("Cannot get field '" + constant + "' for type: "
-                    + config.getClassName());
-            }
-        }
+        configureConstants(config, scriptable);
+
         // the properties
         for (final String entryKey : config.propertyKeys()) {
             final Method readMethod = config.getPropertyReadMethod(entryKey);
@@ -294,6 +284,21 @@ public class JavaScriptEngine implements Serializable {
             final Method method = config.getFunctionMethod(entryKey);
             final FunctionObject functionObject = new FunctionObject(entryKey, method, scriptable);
             scriptable.defineProperty(entryKey, functionObject, ScriptableObject.EMPTY);
+        }
+    }
+
+    private void configureConstants(final ClassConfiguration config,
+            final ScriptableObject scriptable) {
+        for (final String constant : config.constants()) {
+            final Class< ? > linkedClass = config.getLinkedClass();
+            try {
+                final Object value = linkedClass.getField(constant).get(null);
+                scriptable.defineProperty(constant, value, ScriptableObject.EMPTY);
+            }
+            catch (final Exception e) {
+                throw Context.reportRuntimeError("Cannot get field '" + constant + "' for type: "
+                    + config.getClassName());
+            }
         }
     }
 

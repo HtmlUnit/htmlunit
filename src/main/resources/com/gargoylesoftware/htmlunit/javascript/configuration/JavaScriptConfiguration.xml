@@ -1771,18 +1771,42 @@
 
     <class name="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.Node"
         JSObject="true">
-        <constant name="ELEMENT_NODE"/>
-        <constant name="ATTRIBUTE_NODE"/>
-        <constant name="TEXT_NODE"/>
-        <constant name="CDATA_SECTION_NODE"/>
-        <constant name="ENTITY_REFERENCE_NODE"/>
-        <constant name="ENTITY_NODE"/>
-        <constant name="PROCESSING_INSTRUCTION_NODE"/>
-        <constant name="COMMENT_NODE"/>
-        <constant name="DOCUMENT_NODE"/>
-        <constant name="DOCUMENT_TYPE_NODE"/>
-        <constant name="DOCUMENT_FRAGMENT_NODE"/>
-        <constant name="NOTATION_NODE"/>
+        <constant name="ELEMENT_NODE">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="ATTRIBUTE_NODE">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="TEXT_NODE">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="CDATA_SECTION_NODE">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="ENTITY_REFERENCE_NODE">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="ENTITY_NODE">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="PROCESSING_INSTRUCTION_NODE">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="COMMENT_NODE">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="DOCUMENT_NODE">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="DOCUMENT_TYPE_NODE">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="DOCUMENT_FRAGMENT_NODE">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="NOTATION_NODE">
+            <browser name="Firefox"/>
+        </constant>
         <property name="childNodes" readable="true" writable="false"/>
         <property name="firstChild" readable="true" writable="false"/>
         <property name="lastChild" readable="true" writable="false"/>

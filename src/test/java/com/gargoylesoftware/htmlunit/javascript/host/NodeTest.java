@@ -467,11 +467,22 @@ public class NodeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "3" }, IE = { "not supported" })
+    @Alerts(FF = { "3", "3", "123", "3", "123", "456", "3", "undefined" }, IE = { "undefined", "not supported" })
     public void testNodePrototype() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
+            + "      alert(document.body.TEXT_NODE);\n"
+            + "      alert(Node.TEXT_NODE);\n"
+            + "      document.body.TEXT_NODE = 123;\n"
+            + "      alert(document.body.TEXT_NODE);\n"
+            + "      alert(Node.TEXT_NODE);\n"
+            + "      Node.TEXT_NODE = 456;\n"
+            + "      alert(document.body.TEXT_NODE);\n"
+            + "      alert(Node.TEXT_NODE);\n"
+            + "      delete Node.TEXT_NODE;\n"
+            + "      delete document.body.TEXT_NODE;\n"
+            + "      alert(document.body.TEXT_NODE);\n"
             + "      alert(Node.TEXT_NODE);\n"
             + "    } catch(e) {\n"
             + "      alert('not supported');\n"

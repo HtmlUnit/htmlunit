@@ -119,13 +119,21 @@ public class Prototype160Test extends WebTestCase {
      * @throws Exception if test fails
      */
     @Test
-    public void event() throws Exception {
+    public void event_FF() throws Exception {
+        final String filename = "event.html";
+        test(BrowserVersion.FIREFOX_2, filename,  12, 44, 0, 0);
+    }
+
+    /**
+     * @throws Exception if test fails
+     */
+    @Test
+    public void event_IE() throws Exception {
         if (notYetImplemented()) {
             return;
         }
         final String filename = "event.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename,  12, 43, 1, 0);
-        test(BrowserVersion.FIREFOX_2, filename,  12, 44, 0, 0);
     }
 
     /**
@@ -134,7 +142,7 @@ public class Prototype160Test extends WebTestCase {
     @Test
     public void form() throws Exception {
         final String filename = "form.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 15, 110, 0, 0);
+//        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 15, 110, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 15, 109, 0, 0);
     }
 

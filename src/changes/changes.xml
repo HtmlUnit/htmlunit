@@ -9,6 +9,12 @@
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
             <action type="fix" dev="mguillem">
+                JavaScript: constant values like TEXT_NODE on elements are not available when simulating IE.
+            </action>
+            <action type="fix" dev="mguillem">
+                JavaScript: objects like HTMLElement don't have a their prototype property in their prototype chain (FF only).
+            </action>
+            <action type="fix" dev="mguillem">
                 JavaScript: use 'className' instead of 'class' to get/set class attribute (IE only).
             </action>
             <action type="fix" dev="mguillem">
