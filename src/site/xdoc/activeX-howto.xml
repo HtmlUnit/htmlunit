@@ -26,7 +26,8 @@
                 i.e. Jacob jar is not needed for compiling or usual usage of HtmlUnit.
             </p>
             <p>
-                To use Jacob, add jacob.jar and configure the .dll so that the following code works for you:
+                To use Jacob, add jacob.jar to the classpath and configure the .dll so that the following code
+                works for you:
             </p>
             <source><![CDATA[
 final ActiveXComponent activeXComponent = new ActiveXComponent("InternetExplorer.Application");
@@ -36,7 +37,7 @@ System.out.println(busy);]]></source>
 
         <section name="Permit HtmlUnit to use ActiveX">
             <p>
-                The only thing need is setting WebClient property:
+                The only thing needed is setting WebClient property:
             </p>
             <source><![CDATA[
 webClient.setActiveXNative(true);
