@@ -32,10 +32,35 @@ public class ActiveXObjectImpl extends SimpleScriptable {
 
     private static final long serialVersionUID = 6954481782205807262L;
 
-    private final Class< ? > activeXComponentClass_ = Class.forName("com.jacob.activeX.ActiveXComponent");
-    private final Object activXComponent_;
-    private final Method getMethod_;
-    private final Method callMethod_;
+    private static final Class< ? > activeXComponentClass_;
+
+    /** ActiveXComponent.getProperty(String) */
+    private static final Method METHOD_getProperty_;
+    private final Object object_;
+
+    /** Dispatch.callN(Dispatch, String, Object[]) */
+    private static final Method METHOD_callN_;
+
+    /** Variant.getvt() */
+    private static final Method METHOD_getvt_;
+
+    /** Variant.getDispatch() */
+    private static final Method METHOD_getDispatch_;
+
+    static {
+        try {
+            activeXComponentClass_ = Class.forName("com.jacob.activeX.ActiveXComponent");
+            METHOD_getProperty_ = activeXComponentClass_.getMethod("getProperty", String.class);
+            final Class< ? > dispatchClass = Class.forName("com.jacob.com.Dispatch");
+            METHOD_callN_ = dispatchClass.getMethod("callN", dispatchClass, String.class, Object[].class);
+            final Class< ? > variantClass = Class.forName("com.jacob.com.Variant");
+            METHOD_getvt_ = variantClass.getMethod("getvt");
+            METHOD_getDispatch_ = variantClass.getMethod("getDispatch");
+        }
+        catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     /**
      * Constructs a new instance.
@@ -43,12 +68,12 @@ public class ActiveXObjectImpl extends SimpleScriptable {
      * @param activeXName ActiveX object name
      * @throws Exception if failed to initiate Jacob
      */
-    @SuppressWarnings("unchecked")
     public ActiveXObjectImpl(final String activeXName) throws Exception {
-        getMethod_ = activeXComponentClass_.getMethod("getProperty", String.class);
-        activXComponent_ = activeXComponentClass_.getConstructor(String.class).newInstance(activeXName);
-        final Class dispatchClass = Class.forName("com.jacob.com.Dispatch");
-        callMethod_ = dispatchClass.getMethod("callN", dispatchClass, String.class, Object[].class);
+        this(activeXComponentClass_.getConstructor(String.class).newInstance(activeXName));
+    }
+
+    private ActiveXObjectImpl(final Object object) {
+        object_ = object;
     }
 
     /**
@@ -57,14 +82,16 @@ public class ActiveXObjectImpl extends SimpleScriptable {
     @Override
     public Object get(final String name, final Scriptable start) {
         try {
-            return getMethod_.invoke(activXComponent_, name);
+            final Object variant = METHOD_getProperty_.invoke(object_, name);
+            return wrapIfNecessary(variant);
         }
         catch (final Exception e) {
             return new Function() {
                 public Object call(final Context arg0, final Scriptable arg1, final Scriptable arg2,
                     final Object[] arg3) {
                     try {
-                        return callMethod_.invoke(null, activXComponent_, name, arg3);
+                        final Object rv = METHOD_callN_.invoke(null, object_, name, arg3);
+                        return wrapIfNecessary(rv);
                     }
                     catch (final Exception e) {
                         throw Context.throwAsScriptRuntimeEx(e);
@@ -143,13 +170,25 @@ public class ActiveXObjectImpl extends SimpleScriptable {
     }
 
     /**
+     * Wrap the specified variable into {@link ActiveXObjectImpl} if its type is Variant.VariantDispatch.
+     * @param variant the variant to potentially wrap
+     * @return either the variant if it is basic type or wrapped {@link ActiveXObjectImpl}
+     */
+    private Object wrapIfNecessary(final Object variant) throws Exception {
+        if (((Short) METHOD_getvt_.invoke(variant)) == 9) { //Variant.VariantDispatch
+            return new ActiveXObjectImpl(METHOD_getDispatch_.invoke(variant));
+        }
+        return variant;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public void put(final String name, final Scriptable start, final Object value) {
         try {
             final Method setMethod = activeXComponentClass_.getMethod("setProperty", String.class, value.getClass());
-            setMethod.invoke(activXComponent_, name, value);
+            setMethod.invoke(object_, name, value);
         }
         catch (final Exception e) {
             throw Context.throwAsScriptRuntimeEx(e);

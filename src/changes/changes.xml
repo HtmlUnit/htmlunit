@@ -48,7 +48,7 @@
                 and WebClient.pushClearFirstWindow().
             </action>
             <action type="add" dev="asashour">
-                ActiveX: add initial support for native ActiveX controls (using Jacob).
+                ActiveX: add support for native ActiveX controls (using Jacob).
             </action>
             <action type="update" dev="sdanig">
                 WebResponse interface: deprecate getResponseBody() in favor of getContentAsByteArray(),
