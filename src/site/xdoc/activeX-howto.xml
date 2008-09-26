@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<document>
+
+    <properties>
+        <title>ActiveX support</title>
+        <revision>$Revision$</revision>
+    </properties>
+
+    <body>
+        <section>
+            <p>
+                Although HtmlUnit is a pure Java implementation that simulates browsers, there are some cases
+                where platform-specific features require integration of other libraries, and ActiveX is one of them.
+            </p>
+            <p>
+                Internet Explorer on Windows can run arbitrary ActiveX components (provided that security level is
+                lowered on purpose, if the user trusts the website). Neither HtmlUnit nor Internet Explorer has any
+                control on the behavior of the run ActiveX, so you have to be careful before using that feature.
+            </p>
+        </section>
+
+        <section name="Jacob">
+            <p>
+                The current implementation depends on <a href="http://jacob-project.wiki.sourceforge.net/">Jacob</a>,
+                and because it has .dll dependency, it was not uploaded to maven repository. The dependency is optional,
+                i.e. Jacob jar is not needed for compiling or usual usage of HtmlUnit.
+            </p>
+            <p>
+                To use Jacob, add jacob.jar and configure the .dll so that the following code works for you:
+            </p>
+            <source><![CDATA[
+final ActiveXComponent activeXComponent = new ActiveXComponent("InternetExplorer.Application");
+final boolean busy = activeXComponent.getProperty("Busy").getBoolean();
+System.out.println(busy);]]></source>
+        </section>
+
+        <section name="Permit HtmlUnit to use ActiveX">
+            <p>
+                The only thing need is setting WebClient property:
+            </p>
+            <source><![CDATA[
+webClient.setActiveXNative(true);
+]]></source>
+            <p>
+                and there you go!
+            </p>
+        </section>
+    </body>
+</document>

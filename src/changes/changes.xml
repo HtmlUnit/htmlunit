@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.4-SNAPSHOT" date="?" description="Bugfixes">
+        <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
             <action type="fix" dev="mguillem">
                 JavaScript: use 'className' instead of 'class' to get/set class attribute (IE only).
             </action>

@@ -63,22 +63,21 @@ public void testDocumentWrite() throws Exception {
                 so we could add this to the end of the previous test.
             </p>
             <source><![CDATA[
-    try {
-        form.getInputByName("textfield0");
-        fail("Expected an ElementNotFoundException");
-    }
-    catch (final ElementNotFoundException e) {
-        // Expected path
-    }
+try {
+    form.getInputByName("textfield0");
+    fail("Expected an ElementNotFoundException");
+}
+catch (final ElementNotFoundException e) {
+    // Expected path
+}
 
-    try {
-        form.getInputByName("textfield6");
-        fail("Expected an ElementNotFoundException");
-    }
-    catch (final ElementNotFoundException e) {
-        // Expected path
-    }
-            ]]></source>
+try {
+    form.getInputByName("textfield6");
+    fail("Expected an ElementNotFoundException");
+}
+catch (final ElementNotFoundException e) {
+    // Expected path
+}]]></source>
         </section>
         
         <section name="Example: Watching for 'alerts'">

@@ -1637,7 +1637,7 @@ public class WebClient implements Serializable {
      * Beware that you should never allow running native ActiveX components unless you fully trust
      * the JavaScript code, as it is not controlled by the Java Virtual Machine.
      *
-     * @param allow allow or no
+     * @param allow whether to allow or no
      */
     public void setActiveXNative(final boolean allow) {
         activeXNative_ = allow;
