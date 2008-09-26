@@ -14,13 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -33,14 +32,16 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class HTMLTableElementTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "caption1", "caption2", "null", "caption3" })
     public void testTableCaptions() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "  <table id='table_1'><caption>caption1</caption><caption>caption2</caption>\n"
             + "    <tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>\n"
@@ -61,19 +62,16 @@ public class HTMLTableElementTest extends WebTestCase {
             + "  </script>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(htmlContent, collectedAlerts);
-
-        final String[] expectedAlerts = {"caption1", "caption2", "null", "caption3"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "thead1", "thead2", "null", "thead3" })
     public void testTableHeaders() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "  <table id='table_1'>\n"
             + "    <thead id='thead1'><tr><td>cell1</td><td>cell2</td><td>cell3</td></tr></thead>\n"
@@ -96,19 +94,16 @@ public class HTMLTableElementTest extends WebTestCase {
             + "  </script>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(htmlContent, collectedAlerts);
-
-        final String[] expectedAlerts = {"thead1", "thead2", "null", "thead3"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "2", "true", "4 2 2", "6 3 3" })
     public void testTableBodies() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "  <table id='table_1'>\n"
             + "    <tbody id='tbody1'>\n"
@@ -134,21 +129,16 @@ public class HTMLTableElementTest extends WebTestCase {
             + "  </script>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"2", "true", "4 2 2", "6 3 3"};
-        createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(htmlContent, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "2", "true", "3", "2", "3", "2" })
     public void testTableRows() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "  <table id='table_1'>\n"
             + "    <tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>\n"
@@ -170,13 +160,7 @@ public class HTMLTableElementTest extends WebTestCase {
             + "  </script>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"2", "true", "3", "2", "3", "2"};
-        createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(htmlContent, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -185,6 +169,7 @@ public class HTMLTableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "1", "1" })
     public void testTableHeadRows() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -204,21 +189,17 @@ public class HTMLTableElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final String[] expectedAlerts = {"1", "1"};
-        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(html, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "2", "true", "8 2 2 2 2",
+        "9 2 2 2 3", "8 2 2 1 3", "9 2 3 1 3", "8 1 3 1 3" })
     public void testTableRowsWithManySections() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+        final String html = "<html><head><title>foo</title></head><body>\n"
             + "  <table id='table_1'>\n"
             + "    <thead>\n"
             + "      <tr><td>cell1</td><td>cell2</td></tr>\n"
@@ -265,20 +246,16 @@ public class HTMLTableElementTest extends WebTestCase {
             + "  </script>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(htmlContent, collectedAlerts);
-
-        final String[] expectedAlerts = {"2", "true", "8 2 2 2 2",
-            "9 2 2 2 3", "8 2 2 1 3", "9 2 3 1 3", "8 1 3 1 3"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "tfoot1", "tfoot2", "null", "tfoot3" })
     public void testTableFooters() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "  <table id='table_1'>\n"
             + "    <tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>\n"
@@ -301,19 +278,16 @@ public class HTMLTableElementTest extends WebTestCase {
             + "  </script>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(htmlContent, collectedAlerts);
-
-        final String[] expectedAlerts = {"tfoot1", "tfoot2", "null", "tfoot3"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "0", "1", "0", "1" })
     public void testCellIndex() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>Test</title>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -328,21 +302,16 @@ public class HTMLTableElementTest extends WebTestCase {
             + "<tr><td id='td1'>c</td><td id='td2'>d</td></tr>\n"
             + "</table></body></html>";
 
-        final String[] expectedAlerts = {"0", "1", "0", "1"};
-        createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(htmlContent, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "1", "2", "1", "0", "TD", "1", "2" })
     public void testInsertRow() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "  <table id='table_1'>\n"
             + "  <tr><td>foo</td></tr>\n"
@@ -362,13 +331,7 @@ public class HTMLTableElementTest extends WebTestCase {
             + "  </script>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"1", "2", "1", "0", "TD", "1", "2"};
-        createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(htmlContent, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -376,8 +339,9 @@ public class HTMLTableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "mytable", "mytable" })
     public void testInsertRowNested() throws Exception {
-        final String content =
+        final String html =
             "<html><head>\n"
             + "<script>\n"
             + "function test()\n"
@@ -399,13 +363,7 @@ public class HTMLTableElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final String[] expectedAlerts = {"mytable", "mytable"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -413,8 +371,9 @@ public class HTMLTableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "TBODY", "TABLE" })
     public void testInsertRowInEmptyTable() throws Exception {
-        final String content =
+        final String html =
             "<html><head>\n"
             + "<script>\n"
             + "function test()\n"
@@ -432,13 +391,7 @@ public class HTMLTableElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final String[] expectedAlerts = {"TBODY", "TABLE"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -446,8 +399,9 @@ public class HTMLTableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "TBODY", "TBODY", "TBODY" })
     public void testInsertRowInTableWithEmptyTbody() throws Exception {
-        final String content =
+        final String html =
             "<html><head>\n"
             + "<script>\n"
             + "function test()\n"
@@ -465,13 +419,7 @@ public class HTMLTableElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final String[] expectedAlerts = {"TBODY", "TBODY", "TBODY"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -479,8 +427,9 @@ public class HTMLTableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "1", "1" })
     public void testNestedTables() throws Exception {
-        final String content =
+        final String html =
             "<html><head>\n"
             + "<script>\n"
             + "function test()\n"
@@ -501,45 +450,21 @@ public class HTMLTableElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final String[] expectedAlerts = {"1", "1"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * Tests string default values.
      * See https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1538136&group_id=47038.
+     * Currently not working for FF as HtmlUnit's object names don't map to FF ones.
      * @throws Exception if the test fails
      */
     @Test
-    public void testStringValuesIE() throws Exception {
-        final String[] expectedAlerts = {"table: [object]", "row: [object]", "cell: [object]"};
-        testStringValues(BrowserVersion.INTERNET_EXPLORER_6_0, expectedAlerts);
-    }
-
-    /**
-     * Test string values for FF. Currently not working as HtmlUnit's object names don't map to FF ones.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testStringValuesFF() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        final String[] expectedAlerts = {"table: [object HTMLTableElement]",
-            "row: [object HTMLRowElement]", "cell: [object HTMLCellElement]"};
-        testStringValues(BrowserVersion.FIREFOX_2, expectedAlerts);
-    }
-
-    /**
-     * Utility method.
-     */
-    private void testStringValues(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
-        final String content =
+    @Alerts(IE = { "table: [object]", "row: [object]", "cell: [object]" },
+            FF = { "table: [object HTMLTableElement]",
+                    "row: [object HTMLTableRowElement]", "cell: [object HTMLTableCellElement]" })
+    public void testStringValues() throws Exception {
+        final String html =
             "<html><head>\n"
             + "  <script>\n"
             + "    function test()\n"
@@ -559,11 +484,7 @@ public class HTMLTableElementTest extends WebTestCase {
             + "  </body>\n"
             + "</html>";
 
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -579,7 +500,7 @@ public class HTMLTableElementTest extends WebTestCase {
                 + "    table.width = '200';\n"
                 + "</script></body></html>";
 
-        final HtmlPage page = loadPage(content);
+        final HtmlPage page = loadPage(getBrowserVersion(), content, null);
         final String xml = page.asXml();
         assertTrue(xml.contains("width=\"200\""));
     }
@@ -588,8 +509,9 @@ public class HTMLTableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("21")
     public void testCellSpacing() throws Exception {
-        final String content
+        final String html
             = "<html><head></head><body>\n"
                 + "<table id='tableID' cellspacing='2'><tr><td></td></tr></table>\n"
                 + "<script language='javascript'>\n"
@@ -598,18 +520,16 @@ public class HTMLTableElementTest extends WebTestCase {
                 + "    alert(table.cellSpacing);\n"
                 + "</script></body></html>";
 
-        final String[] expectedAlerts = {"21"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts).asXml();
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("21")
     public void testCellPadding() throws Exception {
-        final String content
+        final String html
             = "<html><head></head><body>\n"
                 + "<table id='tableID' cellpadding='2'><tr><td></td></tr></table>\n"
                 + "<script language='javascript'>\n"
@@ -618,10 +538,7 @@ public class HTMLTableElementTest extends WebTestCase {
                 + "    alert(table.cellPadding);\n"
                 + "</script></body></html>";
 
-        final String[] expectedAlerts = {"21"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts).asXml();
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -629,7 +546,7 @@ public class HTMLTableElementTest extends WebTestCase {
      */
     @Test
     public void testRefresh() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><script>\n"
             + "  function test() {\n"
             + "    document.getElementById('myTable').refresh();\n"
@@ -637,6 +554,6 @@ public class HTMLTableElementTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "<table id='myTable'></table>\n"
             + "</body></html>";
-        loadPage(htmlContent);
+        loadPage(getBrowserVersion(), html, null);
     }
 }
