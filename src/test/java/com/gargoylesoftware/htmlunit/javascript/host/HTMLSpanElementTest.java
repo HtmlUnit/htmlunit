@@ -14,26 +14,28 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Unit tests for {@link HTMLSpanElement}.
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public class HTMLSpanElementTest extends WebTestCase {
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(IE = "yes", FF = "no")
     public void doScroll() throws Exception {
         final String html =
             "<html>\n"
@@ -54,15 +56,7 @@ public class HTMLSpanElementTest extends WebTestCase {
             + "  <body onload='test()'><span id='s'>abc</span></body>\n"
             + "</html>";
 
-        String[] expectedAlerts = new String[] {"no"};
-        List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
-
-        expectedAlerts = new String[] {"yes"};
-        collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
 }
