@@ -168,8 +168,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             executeEventHandlersIfNeeded(Event.TYPE_DOM_DOCUMENT_LOADED);
         }
         executeDeferredScriptsIfNeeded();
-        executeEventHandlersIfNeeded(Event.TYPE_LOAD);
         setReadyStateOnDeferredScriptsIfNeeded();
+        executeEventHandlersIfNeeded(Event.TYPE_LOAD);
         executeRefreshIfNeeded();
     }
 

@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 
@@ -463,41 +460,6 @@ public class Event extends SimpleScriptable {
      */
     public boolean isPreventDefault() {
         return preventDefault_;
-    }
-
-    /**
-     * Copies properties from another event to this event. This method should
-     * be overridden in subclasses in order to account for extra properties.
-     * @param event the event to copy the properties from
-     */
-    public void copyPropertiesFrom(final Event event) {
-        srcElement_ = event.srcElement_;
-        target_ = event.target_;
-        currentTarget_ = event.currentTarget_;
-        type_ = event.type_;
-        keyCode_ = event.keyCode_;
-        shiftKey_ = event.shiftKey_;
-        ctrlKey_ = event.ctrlKey_;
-        altKey_ = event.altKey_;
-        stopPropagation_ = event.stopPropagation_;
-        returnValue_ = event.returnValue_;
-        eventPhase_ = event.eventPhase_;
-        bubbles_ = event.bubbles_;
-        cancelable_ = event.cancelable_;
-
-        // copy dynamic properties as well
-        final List<Object> localIds = Arrays.asList(getAllIds());
-        final List<Object> fromIds = Arrays.asList(event.getAllIds());
-        for (final Object id : fromIds) {
-            if (!localIds.contains(id)) {
-                if (id instanceof String) {
-                    putProperty(this, (String) id, getProperty(event, (String) id));
-                }
-                else {
-                    putProperty(this, (Integer) id, getProperty(event, (Integer) id));
-                }
-            }
-        }
     }
 
     /**

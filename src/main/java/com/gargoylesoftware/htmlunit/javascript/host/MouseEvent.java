@@ -115,21 +115,6 @@ public class MouseEvent extends UIEvent {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void copyPropertiesFrom(final Event event) {
-        super.copyPropertiesFrom(event);
-        if (event instanceof MouseEvent) {
-            final MouseEvent mouseEvent = (MouseEvent) event;
-            screenX_ = mouseEvent.screenX_;
-            screenY_ = mouseEvent.screenY_;
-            button_ = mouseEvent.button_;
-            metaKey_ = mouseEvent.metaKey_;
-        }
-    }
-
-    /**
      * The horizontal coordinate at which the event occurred relative to the DOM implementation's client area.
      * @return the horizontal coordinate (currently the same as {@link #jsxGet_screenX()})
      */

@@ -1078,7 +1078,7 @@ public class HTMLDocument extends Document {
      * @return an uninitialized event object
      */
     public Event jsxFunction_createEventObject() {
-        final Event event = new Event();
+        final Event event = new MouseEvent();
         event.setParentScope(getWindow());
         event.setPrototype(getPrototype(event.getClass()));
         return event;

@@ -320,35 +320,28 @@ public class EventNode extends Node {
     public static ScriptResult jsxFunction_fireEvent(final Context cx, final Scriptable thisObj,
         final Object[] args, final Function f) {
 
+        final String type = (String) args[0];
+
         final EventNode me = (EventNode) thisObj;
 
         // Extract the function arguments.
-        final String type = (String) args[0];
-        final Event template;
+        final Event event;
         if (args.length > 1) {
-            template = (Event) args[1];
+            event = (Event) args[1];
         }
         else {
-            template = null;
+            event = new MouseEvent();
         }
 
         // Create the event, whose class will depend on the type specified.
-        final Event event;
         final String cleanedType = StringUtils.removeStart(type.toLowerCase(), "on");
         if (MouseEvent.isMouseEvent(cleanedType)) {
-            event = new MouseEvent();
             event.setPrototype(me.getPrototype(MouseEvent.class));
         }
         else {
-            event = new Event();
             event.setPrototype(me.getPrototype(Event.class));
         }
         event.setParentScope(me.getWindow());
-
-        // Initialize the event using the template, if provided.
-        if (template != null) {
-            event.copyPropertiesFrom(template);
-        }
 
         // These four properties have predefined values, independent of the template.
         event.jsxSet_cancelBubble(false);

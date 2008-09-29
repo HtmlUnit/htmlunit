@@ -27,10 +27,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Unit tests for {@link HTMLScriptElement}.
- *
+ * TODO: check event order with defer in real browser WITHOUT using alert(...) as it impacts ordering.
+ * Some expectations seems to be incorrect.
  * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class HTMLScriptElementTest extends WebTestCase {
 
@@ -247,5 +249,25 @@ public class HTMLScriptElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(browserVersion, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void onload_after_deferReadStateComplete() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>test</title>\n"
+            + "    <script onreadystatechange='if(this.readyState==\"complete\") alert(\"defer\");' defer></script>\n"
+            + "  </head>\n"
+            + "  <body onload='alert(\"onload\")'>\n"
+            + "  </body>\n"
+            + "</html>";
+        final List<String> actual = new ArrayList<String>();
+        final String[] expected = {"defer", "onload"};
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, html, actual);
+        assertEquals(expected, actual);
     }
 }

@@ -827,4 +827,44 @@ public class EventTest extends WebTestCase {
         }
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "true", "I was here" })
+    public void firedEvent_equals_original_event() throws Exception {
+        final String html =
+            "<html><head><title>First</title></head>\n"
+            + "<script>\n"
+            + "function test()\n"
+            + "{\n"
+            + "  var e = document.getElementById('myDiv');\n"
+            + "  \n"
+            + "  var myEvent\n"
+            + "  var listener = function(x) { \n"
+            + "    alert(x == myEvent);\n"
+            + "    x.foo = 'I was here'\n"
+            + "  }\n"
+            + "  \n"
+            + "  if (document.createEvent) {\n"
+            + "    e.addEventListener('click', listener, false);\n"
+            + "    myEvent = document.createEvent('HTMLEvents');\n"
+            + "    myEvent.initEvent('click', true, true);\n"
+            + "    e.dispatchEvent(myEvent);\n"
+            + "  }\n"
+            + "  else {\n"
+            + "    e.attachEvent('onclick', listener);\n"
+            + "    myEvent = document.createEventObject();\n"
+            + "    myEvent.eventType = 'onclick';\n"
+            + "    e.fireEvent(myEvent.eventType, myEvent);\n"
+            + "  }\n"
+            + "  alert(myEvent.foo);\n"
+            + "}\n"
+            + "</script>\n"
+            + "<body onload='test()'>\n"
+            + "<div id='myDiv'>toti</div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }

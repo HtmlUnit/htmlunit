@@ -9,6 +9,12 @@
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
             <action type="fix" dev="mguillem">
+                JavaScript: fireEvent calls handlers with received event object rather than with a copy (IE only).
+            </action>
+            <action type="fix" dev="mguillem">
+                JavaScript: trigger defer'red scripts' onreadystatechange handler before onload event (IE only).
+            </action>
+            <action type="fix" dev="mguillem">
                 JavaScript: constant values like TEXT_NODE on elements are not available when simulating IE.
             </action>
             <action type="fix" dev="mguillem">
