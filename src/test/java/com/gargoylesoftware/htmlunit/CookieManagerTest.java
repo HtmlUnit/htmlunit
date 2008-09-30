@@ -179,4 +179,47 @@ public class CookieManagerTest extends WebTestCase {
             writer.close();
         }
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void serverModifiesCookieValue() throws Exception {
+        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        servlets.put("/test", SimpleCookieServlet.class);
+        server_ = HttpWebConnectionTest.startWebServer("./", null, servlets);
+
+        final String[] expectedAlerts = {"nbCalls=\"1\"", "nbCalls=\"2\""};
+        final WebClient client = new WebClient();
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        // get the page a first time
+        client.getPage("http://localhost:" + HttpWebConnectionTest.PORT + "/test");
+
+        // and a second one
+        client.getPage("http://localhost:" + HttpWebConnectionTest.PORT + "/test");
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Servlet for {@link #serverModifiesCookieValue()}.
+     */
+    public static class SimpleCookieServlet extends HttpServlet {
+        private static final long serialVersionUID = -2581456646146725479L;
+        private int nbCalls_ = 0;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            response.setContentType("text/html");
+            response.addCookie(new javax.servlet.http.Cookie("nbCalls", String.valueOf(++nbCalls_)));
+            final Writer writer = response.getWriter();
+            writer.write("<html><head><script>function test() {alert(document.cookie)}</script>"
+                + "<body onload='test()'></body></html>");
+            writer.close();
+        }
+    }
 }
