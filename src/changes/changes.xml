@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="update" dev="asashour">
+                Upgrade JUnit to 4.5.
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: fireEvent calls handlers with received event object rather than with a copy (IE only).
             </action>

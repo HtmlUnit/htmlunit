@@ -14,23 +14,24 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static org.junit.Assert.assertTrue;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import org.junit.internal.runners.CompositeRunner;
-import org.junit.internal.runners.InitializationError;
-import org.junit.internal.runners.JUnit4ClassRunner;
-import org.junit.internal.runners.TestMethod;
-import org.junit.runner.Description;
-import org.junit.runner.notification.RunNotifier;
+import org.junit.Test;
+import org.junit.internal.runners.model.ReflectiveCallable;
+import org.junit.internal.runners.statements.Fail;
+import org.junit.runner.Runner;
+import org.junit.runners.BlockJUnit4ClassRunner;
+import org.junit.runners.Suite;
+import org.junit.runners.model.FrameworkMethod;
+import org.junit.runners.model.InitializationError;
+import org.junit.runners.model.Statement;
 
 /**
  * The custom runner <code>BrowserRunner</code> implements browser parameterized
@@ -53,7 +54,37 @@ import org.junit.runner.notification.RunNotifier;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class BrowserRunner extends CompositeRunner {
+public class BrowserRunner extends Suite {
+
+    private final ArrayList<Runner> runners_ = new ArrayList<Runner>();
+
+    /**
+     * Constructor.
+     *
+     * @param klass the test case class
+     * @throws Throwable If an exception occurs
+     */
+    public BrowserRunner(final Class<WebTestCase> klass) throws Throwable {
+        super(klass, Collections.<Runner>emptyList());
+
+        if (!TestClassRunnerForBrowserVersion.getTestMethods(klass).isEmpty()) {
+            runners_.add(new TestClassRunnerForBrowserVersion(klass, BrowserVersion.INTERNET_EXPLORER_6_0));
+            runners_.add(new TestClassRunnerForBrowserVersion(klass, BrowserVersion.INTERNET_EXPLORER_7_0));
+            runners_.add(new TestClassRunnerForBrowserVersion(klass, BrowserVersion.FIREFOX_2));
+            runners_.add(new TestClassRunnerForBrowserVersion(klass, BrowserVersion.FIREFOX_3));
+        }
+        if (!TestClassRunnerForNoBrowser.getTestMethods(klass).isEmpty()) {
+            runners_.add(new TestClassRunnerForNoBrowser(klass));
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected List<Runner> getChildren() {
+        return runners_;
+    }
 
     private static final String EMPTY_DEFAULT = "~InTerNal_To_BrowSeRRunNer#@$";
 
@@ -140,45 +171,14 @@ public class BrowserRunner extends CompositeRunner {
         };
     }
 
-    static class TestClassRunnerForBrowserVersion extends JUnit4ClassRunner {
+    static class TestClassRunnerForBrowserVersion extends BlockJUnit4ClassRunner {
 
         private final BrowserVersion browserVersion_;
 
-        public TestClassRunnerForBrowserVersion(final Class< ? extends WebTestCase> klass,
+        public TestClassRunnerForBrowserVersion(final Class<WebTestCase> klass,
             final BrowserVersion browserVersion) throws InitializationError {
             super(klass);
             this.browserVersion_ = browserVersion;
-        }
-
-        public boolean isEmpty() {
-            return getTestMethods().isEmpty();
-        }
-
-        @Override
-        protected void invokeTestMethod(final Method method, final RunNotifier notifier) {
-            final Description description = methodDescription(method);
-            Object test;
-            try {
-                test = createTest();
-            }
-            catch (final InvocationTargetException e) {
-                notifier.testAborted(description, e.getCause());
-                return;
-            }
-            catch (final Exception e) {
-                notifier.testAborted(description, e);
-                return;
-            }
-            final Browsers browsers = method.getAnnotation(Browsers.class);
-            final boolean shouldFail = browsers != null && !isDefinedIn(browsers.value());
-
-            final NotYetImplemented notYetImplementedBrowsers = method.getAnnotation(NotYetImplemented.class);
-            final boolean notYetImplemented = notYetImplementedBrowsers != null
-                && isDefinedIn(notYetImplementedBrowsers.value());
-            final TestMethod testMethod = wrapMethod(method);
-            setAlerts((WebTestCase) test, method);
-            new BrowserRoadie(test, testMethod, notifier, description, method, shouldFail, notYetImplemented,
-                getShortname(browserVersion_)).run();
         }
 
         private void setAlerts(final WebTestCase testCase, final Method method) {
@@ -237,43 +237,36 @@ public class BrowserRunner extends CompositeRunner {
         }
 
         @Override
-        protected String testName(final Method method) {
-            String className = method.getDeclaringClass().getName();
+        protected String testName(final FrameworkMethod method) {
+            String className = method.getMethod().getDeclaringClass().getName();
             className = className.substring(className.lastIndexOf('.') + 1);
             return String.format("%s[%s]", className + '.' + method.getName(), getShortname(browserVersion_));
         }
 
         @Override
-        protected void validate() throws InitializationError {
-            super.validate();
-            final List<Throwable> errors = new ArrayList<Throwable>();
-            for (final Method method : getTestMethods()) {
-                final Browsers browsers = method.getAnnotation(Browsers.class);
-                if (browsers != null) {
-                    for (final Browser browser : browsers.value()) {
-                        if (browser == Browser.NONE && browsers.value().length > 1) {
-                            errors.add(new Exception("Method " + method.getName()
-                                    + " cannot have Browser.NONE along with other Browsers."));
-                        }
-                    }
-                }
-            }
-            if (!errors.isEmpty()) {
-                throw new InitializationError(errors);
-            }
-        }
-
-        @Override
-        protected List<Method> getTestMethods() {
-            final List<Method> methods = super.getTestMethods();
+        protected List<FrameworkMethod> computeTestMethods() {
+            final List<FrameworkMethod> methods = super.computeTestMethods();
             for (int i = 0; i < methods.size(); i++) {
-                final Method method = methods.get(i);
+                final Method method = methods.get(i).getMethod();
                 final Browsers browsers = method.getAnnotation(Browsers.class);
                 if (browsers != null && browsers.value()[0] == Browser.NONE) {
                     methods.remove(i--);
                 }
             }
             return methods;
+        }
+
+        private static List<Method> getTestMethods(final Class<WebTestCase> klass) {
+            final List<Method> list = new ArrayList<Method>();
+            for (final Method method : klass.getMethods()) {
+                if (method.getAnnotation(Test.class) != null) {
+                    final Browsers browsers = method.getAnnotation(Browsers.class);
+                    if (browsers == null || browsers.value()[0] != Browser.NONE) {
+                        list.add(method);
+                    }
+                }
+            }
+            return list;
         }
 
         private boolean isDefined(final String[] alerts) {
@@ -315,6 +308,41 @@ public class BrowserRunner extends CompositeRunner {
             }
             return false;
         }
+
+        @Override
+        protected Statement methodBlock(final FrameworkMethod method) {
+            final Object test;
+            final WebTestCase testCase;
+            try {
+                testCase = (WebTestCase) createTest();
+                test = new ReflectiveCallable() {
+                    @Override
+                    protected Object runReflectiveCall() throws Throwable {
+                        return testCase;
+                    }
+                } .run();
+            }
+            catch (final Throwable e) {
+                return new Fail(e);
+            }
+
+            Statement statement = methodInvoker(method, test);
+            statement = possiblyExpectingExceptions(method, test, statement);
+            statement = withPotentialTimeout(method, test, statement);
+            statement = withBefores(method, test, statement);
+            statement = withAfters(method, test, statement);
+
+            final Browsers browsers = method.getAnnotation(Browsers.class);
+            final boolean shouldFail = browsers != null && !isDefinedIn(browsers.value());
+
+            final NotYetImplemented notYetImplementedBrowsers = method.getAnnotation(NotYetImplemented.class);
+            final boolean notYetImplemented = notYetImplementedBrowsers != null
+                && isDefinedIn(notYetImplementedBrowsers.value());
+            setAlerts(testCase, method.getMethod());
+            statement = new BrowserStatement(statement, method.getMethod(), shouldFail,
+                    notYetImplemented, getShortname(browserVersion_));
+            return statement;
+        }
     }
 
     private static String getShortname(final BrowserVersion browserVersion) {
@@ -335,36 +363,40 @@ public class BrowserRunner extends CompositeRunner {
         }
     }
 
-    static class TestClassRunnerForNoBrowser extends JUnit4ClassRunner {
+    static class TestClassRunnerForNoBrowser extends BlockJUnit4ClassRunner {
 
-        public TestClassRunnerForNoBrowser(final Class< ? extends WebTestCase> klass) throws InitializationError {
+        public TestClassRunnerForNoBrowser(final Class<WebTestCase> klass) throws InitializationError {
             super(klass);
         }
 
-        public boolean isEmpty() {
-            return getTestMethods().isEmpty();
-        }
-
         @Override
-        protected void invokeTestMethod(final Method method, final RunNotifier notifier) {
-            final Description description = methodDescription(method);
-            Object test;
+        protected Statement methodBlock(final FrameworkMethod method) {
+            final Object test;
+            final WebTestCase testCase;
             try {
-                test = createTest();
+                testCase = (WebTestCase) createTest();
+                test = new ReflectiveCallable() {
+                    @Override
+                    protected Object runReflectiveCall() throws Throwable {
+                        return testCase;
+                    }
+                } .run();
             }
-            catch (final InvocationTargetException e) {
-                notifier.testAborted(description, e.getCause());
-                return;
+            catch (final Throwable e) {
+                return new Fail(e);
             }
-            catch (final Exception e) {
-                notifier.testAborted(description, e);
-                return;
-            }
+
+            Statement statement = methodInvoker(method, test);
+            statement = possiblyExpectingExceptions(method, test, statement);
+            statement = withPotentialTimeout(method, test, statement);
+            statement = withBefores(method, test, statement);
+            statement = withAfters(method, test, statement);
+
             final NotYetImplemented notYetImplementedBrowsers = method.getAnnotation(NotYetImplemented.class);
             final boolean notYetImplemented = notYetImplementedBrowsers != null;
-            final TestMethod testMethod = wrapMethod(method);
-            new BrowserRoadie(test, testMethod, notifier, description, method, false, notYetImplemented,
-                "").run();
+            statement = new BrowserStatement(statement, method.getMethod(), false,
+                    notYetImplemented, "");
+            return statement;
         }
 
         @Override
@@ -373,17 +405,17 @@ public class BrowserRunner extends CompositeRunner {
         }
 
         @Override
-        protected String testName(final Method method) {
-            String className = method.getDeclaringClass().getName();
+        protected String testName(final FrameworkMethod method) {
+            String className = method.getMethod().getDeclaringClass().getName();
             className = className.substring(className.lastIndexOf('.') + 1);
             return String.format("%s[No Browser]", className + '.' + method.getName());
         }
 
         @Override
-        protected List<Method> getTestMethods() {
-            final List<Method> methods = super.getTestMethods();
+        protected List<FrameworkMethod> computeTestMethods() {
+            final List<FrameworkMethod> methods = super.computeTestMethods();
             for (int i = 0; i < methods.size(); i++) {
-                final Method method = methods.get(i);
+                final Method method = methods.get(i).getMethod();
                 final Browsers browsers = method.getAnnotation(Browsers.class);
                 if (browsers == null || browsers.value()[0] != Browser.NONE) {
                     methods.remove(i--);
@@ -391,37 +423,91 @@ public class BrowserRunner extends CompositeRunner {
             }
             return methods;
         }
+
+        private static List<Method> getTestMethods(final Class<WebTestCase> klass) {
+            final List<Method> list = new ArrayList<Method>();
+            for (final Method method : klass.getMethods()) {
+                if (method.getAnnotation(Test.class) != null) {
+                    final Browsers browsers = method.getAnnotation(Browsers.class);
+                    if (browsers != null && browsers.value()[0] == Browser.NONE) {
+                        list.add(method);
+                    }
+                }
+            }
+            return list;
+        }
+
+        @Override
+        protected void validateTestMethods(final List<Throwable> errors) {
+            super.validateTestMethods(errors);
+            final List<Throwable> collectederrors = new ArrayList<Throwable>();
+            for (final FrameworkMethod method : computeTestMethods()) {
+                final Browsers browsers = method.getAnnotation(Browsers.class);
+                if (browsers != null) {
+                    for (final Browser browser : browsers.value()) {
+                        System.out.println(browsers.value().length);
+                        if (browser == Browser.NONE && browsers.value().length > 1) {
+                            collectederrors.add(new Exception("Method " + method.getName()
+                                    + "() cannot have Browser.NONE along with other Browsers."));
+                        }
+                    }
+                }
+            }
+            for (final Throwable error : collectederrors) {
+                errors.add(error);
+            }
+        }
     }
 
-    /**
-     * Constructs a new instance.
-     *
-     * @param klass test case
-     * @throws Exception if an error occurs
-     */
-    public BrowserRunner(final Class< ? extends WebTestCase> klass) throws Exception {
-        super(klass.getName());
-        assertTrue("Test case must extend WebTestCase", WebTestCase.class.isAssignableFrom(klass));
-        final TestClassRunnerForBrowserVersion ie6Runner =
-            new TestClassRunnerForBrowserVersion(klass, BrowserVersion.INTERNET_EXPLORER_6_0);
-        final TestClassRunnerForBrowserVersion ie7Runner =
-            new TestClassRunnerForBrowserVersion(klass, BrowserVersion.INTERNET_EXPLORER_7_0);
-        final TestClassRunnerForBrowserVersion ff2Runner =
-            new TestClassRunnerForBrowserVersion(klass, BrowserVersion.FIREFOX_2);
-        final TestClassRunnerForBrowserVersion ff3Runner =
-            new TestClassRunnerForBrowserVersion(klass, BrowserVersion.FIREFOX_3);
-        final TestClassRunnerForNoBrowser noBrowserRunner = new TestClassRunnerForNoBrowser(klass);
+    private static final class BrowserStatement extends Statement {
 
-        //If a browser runner is not empty, add all browser runners
-        if (!ie6Runner.isEmpty()) {
-            add(ie6Runner);
-            add(ie7Runner);
-            add(ff2Runner);
-            add(ff3Runner);
+        private Statement next_;
+        private final boolean shouldFail_;
+        private final boolean notYetImplemented_;
+        private final Method method_;
+        private final String browserVersionString_;
+
+        private BrowserStatement(final Statement next, final Method method, final boolean shouldFail,
+                final boolean notYetImplemented, final String browserVersionString) {
+            next_ = next;
+            method_ = method;
+            shouldFail_ = shouldFail;
+            notYetImplemented_ = notYetImplemented;
+            browserVersionString_ = browserVersionString;
         }
-        if (!noBrowserRunner.isEmpty()) {
-            add(noBrowserRunner);
+
+        @Override
+        public void evaluate() throws Throwable {
+            try {
+                next_.evaluate();
+                if (shouldFail_) {
+                    final String errorMessage;
+                    if (browserVersionString_ == null) {
+                        errorMessage = method_.getName() + " is marked to fail with "
+                            + browserVersionString_ + ", but succeeds";
+                    }
+                    else {
+                        errorMessage = method_.getName() + " is marked to fail, but succeeds";
+                    }
+                    throw new Exception(errorMessage);
+                }
+                else if (notYetImplemented_) {
+                    final String errorMessage;
+                    if (browserVersionString_ == null) {
+                        errorMessage = method_.getName() + " is marked as not implemented but already works";
+                    }
+                    else {
+                        errorMessage = method_.getName() + " is marked as not implemented with "
+                            + browserVersionString_ + " but already works";
+                    }
+                    throw new Exception(errorMessage);
+                }
+            }
+            catch (final Throwable e) {
+                if (!shouldFail_ && !notYetImplemented_) {
+                    throw new Exception(e.getCause());
+                }
+            }
         }
     }
-
 }
