@@ -44,58 +44,58 @@ public class CookieManagerTest extends WebTestCase {
     private Server server_;
 
     /**
-     * Verifies the basic cookie manager behavior, whose main complexity lies in the
-     * optimization of {@link CookieManager#updateState(HttpState)}.
+     * Performs post-test deconstruction.
+     * @throws Exception if an error occurs
+     */
+    @After
+    public void tearDown() throws Exception {
+        HttpWebConnectionTest.stopWebServer(server_);
+        server_ = null;
+    }
+
+    /**
+     * Verifies the basic cookie manager behavior.
      * @throws Exception if an error occurs
      */
     @Test
     public void basicBehavior() throws Exception {
         // Create a new cookie manager.
         final CookieManager mgr = new CookieManager();
-        assertFalse(mgr.isCookiesModified());
         assertTrue(mgr.isCookiesEnabled());
         assertTrue(mgr.getCookies().isEmpty());
 
         // Add a cookie to the manager.
         final Cookie cookie = new Cookie("a", "b", "c");
         mgr.addCookie(cookie);
-        assertTrue(mgr.isCookiesModified());
         assertFalse(mgr.getCookies().isEmpty());
 
         // Update an HTTP state.
         final HttpState state = new HttpState();
         mgr.updateState(state);
-        assertFalse(mgr.isCookiesModified());
         assertEquals(1, state.getCookies().length);
 
         // Remove the cookie from the manager.
         mgr.removeCookie(cookie);
-        assertTrue(mgr.isCookiesModified());
         assertTrue(mgr.getCookies().isEmpty());
 
         // Update an HTTP state after removing the cookie.
         mgr.updateState(state);
-        assertFalse(mgr.isCookiesModified());
         assertEquals(0, state.getCookies().length);
 
         // Add the cookie back to the manager.
         mgr.addCookie(cookie);
-        assertTrue(mgr.isCookiesModified());
         assertFalse(mgr.getCookies().isEmpty());
 
         // Update an HTTP state after adding the cookie back to the manager.
         mgr.updateState(state);
-        assertFalse(mgr.isCookiesModified());
         assertEquals(1, state.getCookies().length);
 
         // Clear all cookies from the manager.
         mgr.clearCookies();
-        assertTrue(mgr.isCookiesModified());
         assertTrue(mgr.getCookies().isEmpty());
 
         // Update an HTTP state after clearing all cookies from the manager.
         mgr.updateState(state);
-        assertFalse(mgr.isCookiesModified());
         assertEquals(0, state.getCookies().length);
 
         // Disable cookies.
@@ -104,12 +104,10 @@ public class CookieManagerTest extends WebTestCase {
 
         // Add a cookie after disabling cookies.
         mgr.addCookie(cookie);
-        assertTrue(mgr.isCookiesModified());
         assertFalse(mgr.getCookies().isEmpty());
 
         // Update an HTTP state after adding a cookie while cookies are disabled.
         mgr.updateState(state);
-        assertTrue(mgr.isCookiesModified());
         assertEquals(0, state.getCookies().length);
 
         // Enable cookies again.
@@ -118,7 +116,6 @@ public class CookieManagerTest extends WebTestCase {
 
         // Update an HTTP state after enabling cookies again.
         mgr.updateState(state);
-        assertFalse(mgr.isCookiesModified());
         assertEquals(1, state.getCookies().length);
 
         // Update the manager with a new state.
@@ -126,19 +123,8 @@ public class CookieManagerTest extends WebTestCase {
         final HttpState state2 = new HttpState();
         state2.addCookie(cookie2);
         mgr.updateFromState(state2);
-        assertTrue(mgr.isCookiesModified());
         assertEquals(1, mgr.getCookies().size());
         assertEquals(cookie2, mgr.getCookies().iterator().next());
-    }
-
-    /**
-     * Performs post-test deconstruction.
-     * @throws Exception if an error occurs
-     */
-    @After
-    public void tearDown() throws Exception {
-        HttpWebConnectionTest.stopWebServer(server_);
-        server_ = null;
     }
 
     /**
@@ -189,7 +175,7 @@ public class CookieManagerTest extends WebTestCase {
         servlets.put("/test", SimpleCookieServlet.class);
         server_ = HttpWebConnectionTest.startWebServer("./", null, servlets);
 
-        final String[] expectedAlerts = {"nbCalls=\"1\"", "nbCalls=\"2\""};
+        final String[] expectedAlerts = {"nbCalls=1", "nbCalls=2"};
         final WebClient client = new WebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -222,4 +208,5 @@ public class CookieManagerTest extends WebTestCase {
             writer.close();
         }
     }
+
 }
