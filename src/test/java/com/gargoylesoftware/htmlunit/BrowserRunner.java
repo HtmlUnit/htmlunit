@@ -43,6 +43,13 @@ import org.junit.runners.Suite;
  * }
  * </pre>
  *
+ * -  If the test case is not an instance of {@link WebDriverTestCase},
+ *        it will test HtmlUnit with all browser simulations.
+ * -  If the test case is an instance of {@link WebDriverTestCase}, it will check system-defined properties:
+ *      - If no 'htmlunit.webdriver.*' property is defined, it will test HtmlUnit with all browser simulations.
+ *      - If 'htmlunit.webdriver.ie6/7' and/or 'htmlunit.webdriver.ff2/3' it will test only those real browsers,
+ *        without testing with HtmlUnit at all.
+ *
  * @version $Revision$
  * @author Ahmed Ashour
  */
