@@ -70,7 +70,7 @@ class BrowserStatement extends Statement {
         }
         catch (final Throwable e) {
             if (!shouldFail_ && !notYetImplemented_) {
-                throw new Exception(e.getCause());
+                throw e;
             }
         }
     }
