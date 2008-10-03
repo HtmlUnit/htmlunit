@@ -164,7 +164,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * @param newLength the new length property value
      */
     public void setOptionSize(final int newLength) {
-        final List< ? extends HtmlElement> elementList = getHtmlElementsByTagName("option");
+        final List<HtmlElement> elementList = getHtmlElementsByTagName("option");
 
         for (int i = elementList.size() - 1; i >= newLength; i--) {
             elementList.get(i).remove();
@@ -177,11 +177,14 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      */
     public void removeOption(final int index) {
         final ChildElementsIterator iterator = new ChildElementsIterator();
-        for (int i = 0; iterator.hasNext(); i++) {
+        for (int i = 0; iterator.hasNext();) {
             final HtmlElement element = iterator.nextElement();
-            if (i == index) {
-                element.remove();
-                return;
+            if (element instanceof HtmlOption) {
+                if (i == index) {
+                    element.remove();
+                    return;
+                }
+                i++;
             }
         }
     }
@@ -193,11 +196,14 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      */
     public void replaceOption(final int index, final HtmlOption newOption) {
         final ChildElementsIterator iterator = new ChildElementsIterator();
-        for (int i = 0; iterator.hasNext(); i++) {
+        for (int i = 0; iterator.hasNext();) {
             final HtmlElement element = iterator.nextElement();
-            if (i == index) {
-                element.replace(newOption);
-                return;
+            if (element instanceof HtmlOption) {
+                if (i == index) {
+                    element.replace(newOption);
+                    return;
+                }
+                i++;
             }
         }
 

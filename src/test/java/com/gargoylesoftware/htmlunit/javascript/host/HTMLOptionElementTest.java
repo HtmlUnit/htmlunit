@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class HTMLOptionElementTest extends WebTestCase {
 
@@ -33,8 +34,8 @@ public class HTMLOptionElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testReadPropsBeforeAdding() throws Exception {
-        final String content
+    public void readPropsBeforeAdding() throws Exception {
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var oOption = new Option('some text', 'some value');\n"
@@ -56,10 +57,10 @@ public class HTMLOptionElementTest extends WebTestCase {
             "some other text", "some other value", "true"
         };
 
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
+        loadPage(html, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -70,8 +71,8 @@ public class HTMLOptionElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSelectingOrphanedOptionCreatedByDocument() throws Exception {
-        final String content = "<html>\n"
+    public void selectingOrphanedOptionCreatedByDocument() throws Exception {
+        final String html = "<html>\n"
             + "<body>\n"
             + "<form name='myform'/>\n"
             + "<script language='javascript'>\n"
@@ -83,7 +84,7 @@ public class HTMLOptionElementTest extends WebTestCase {
             + "document.myform.appendChild(select);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPage(content);
+        loadPage(html);
     }
 
     /**
@@ -91,8 +92,8 @@ public class HTMLOptionElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetSelected() throws Exception {
-        final String content
+    public void setSelected() throws Exception {
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "  var sel = document.form1.select1;\n"
@@ -111,10 +112,10 @@ public class HTMLOptionElementTest extends WebTestCase {
 
         final String[] expectedAlerts = {"2", "2"};
 
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
+        loadPage(html, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -124,8 +125,8 @@ public class HTMLOptionElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetAttribute() throws Exception {
-        final String content
+    public void setAttribute() throws Exception {
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "  document.getElementById('option1').setAttribute('class', 'bla bla');\n"
@@ -141,10 +142,10 @@ public class HTMLOptionElementTest extends WebTestCase {
 
         final String[] expectedAlerts = {};
 
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
+        loadPage(html, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -153,8 +154,8 @@ public class HTMLOptionElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testOptionIndexOutOfBound() throws Exception {
-        final String content
+    public void optionIndexOutOfBound() throws Exception {
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest()\n"
             + "{\n"
@@ -179,10 +180,10 @@ public class HTMLOptionElementTest extends WebTestCase {
 
         final String[] expectedAlerts = {"undefined", "caught exception for negative index"};
 
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
+        loadPage(html, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -191,8 +192,8 @@ public class HTMLOptionElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testConstructor() throws Exception {
-        final String content
+    public void constructor() throws Exception {
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function dumpOption(_o) {\n"
             + "  return 'text: ' + _o.text\n"
@@ -225,10 +226,40 @@ public class HTMLOptionElementTest extends WebTestCase {
             "0",
             "1"
         };
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
+        loadPage(html, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void insideBold() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var sel = document.form1.select1;\n"
+            + "  sel.options[0] = null;\n"
+            + "  alert(sel.options.length);\n"
+            + "}</script></head><body onload='test()'>\n"
+            + "<form name='form1'>\n"
+            + "  <b>\n"
+            + "    <select name='select1'>\n"
+            + "        <option>One</option>\n"
+            + "    </select>\n"
+            + "  </b>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"0"};
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(html, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
