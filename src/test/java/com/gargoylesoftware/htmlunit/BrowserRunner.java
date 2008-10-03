@@ -46,9 +46,9 @@ import org.junit.runners.Suite;
  * -  If the test case is not an instance of {@link WebDriverTestCase},
  *        it will test HtmlUnit with all browser simulations.
  * -  If the test case is an instance of {@link WebDriverTestCase}, it will check system-defined properties:
- *      - If no 'htmlunit.webdriver.*' property is defined, it will test HtmlUnit with all browser simulations.
- *      - If 'htmlunit.webdriver.ie6/7' and/or 'htmlunit.webdriver.ff2/3' it will test only those real browsers,
- *        without testing with HtmlUnit at all.
+ *      - If no 'htmlunit.webdriver' property is defined, it will test HtmlUnit with all browser simulations.
+ *      - If 'htmlunit.webdriver' property contains any combination of ie6, ie7, ff2, ff33; it will test
+ *        only those real browsers, without testing with HtmlUnit at all.
  *
  * @version $Revision$
  * @author Ahmed Ashour
@@ -66,11 +66,22 @@ public class BrowserRunner extends Suite {
     public BrowserRunner(final Class<WebTestCase> klass) throws Throwable {
         super(klass, Collections.<Runner>emptyList());
 
+        final String property = System.getProperty(WebDriverTestCase.PROPERTY);
+        final boolean runAll = !WebDriverTestCase.class.isAssignableFrom(klass) || property == null;
+
         if (BrowserVersionClassRunner.containsTestMethods(klass)) {
-            runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_6_0));
-            runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_7_0));
-            runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_2));
-            runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3));
+            if (runAll || property.contains("ie6")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_6_0));
+            }
+            if (runAll || property.contains("ie7")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_7_0));
+            }
+            if (runAll || property.contains("ff2")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_2));
+            }
+            if (runAll || property.contains("ff3")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3));
+            }
         }
         if (BrowserNoneClassRunner.containsTestMethods(klass)) {
             runners_.add(new BrowserNoneClassRunner(klass));
@@ -170,7 +181,7 @@ public class BrowserRunner extends Suite {
         };
     }
 
-    static String getShortname(final BrowserVersion browserVersion) {
+    static String getDescription(final BrowserVersion browserVersion) {
         if (browserVersion == BrowserVersion.INTERNET_EXPLORER_6_0) {
             return "Internet Explorer 6";
         }

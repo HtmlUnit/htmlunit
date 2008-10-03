@@ -35,9 +35,11 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
  * <p>
  * Examples:
  * mvn test -Dtest=SimpleWebDriverTest (runs the test with HtmlUnit)<br/>
- * mvn test -Dtest=SimpleWebDriverTest -Dhtmlunit.webdriver=firefox (runs the test with Firefox from the path)<br/>
- * mvn test -Dtest=SimpleWebDriverTest -Dhtmlunit.webdriver=firefox -Dwebdriver.firefox.bin=/home/user/firefox-3.0.1
- *     (runs the test with the specified Firefox version)<br/>
+ * mvn test -Dtest=SimpleWebDriverTest -Dhtmlunit.webdriver=ff2 (runs the test with Firefox 2 from the path)<br/>
+ * mvn test -Dtest=SimpleWebDriverTest -Dhtmlunit.webdriver=ie6,ff3
+ *          (runs the test with Internet Explorer 6 and Firefox 2 from the path)<br/>
+ * mvn test -Dtest=SimpleWebDriverTest -Dhtmlunit.webdriver=ff3 -Dwebdriver.firefox.bin=/home/user/firefox-3.0.1
+ *     (runs the test with Firefox 3 from the specified location)<br/>
  * </p>
  * @version $Revision$
  * @author Marc Guillemot

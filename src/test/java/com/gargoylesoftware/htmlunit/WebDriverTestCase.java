@@ -27,6 +27,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -35,8 +36,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  * Base class for tests using WebDriver.
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public abstract class WebDriverTestCase extends WebTestCase {
+
+    static final String PROPERTY = "htmlunit.webdriver";
     private static Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<BrowserVersion, WebDriver>();
 
     /**
@@ -63,19 +67,19 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
-     * Reads the expected entries from the node "expected" or "expected_FF" or ... according to the browser used.
+     * Reads the expected entries from the node "expected_FF" or "expected_FF3" or ... according to the browser used.
      * @return the expected entries
      */
     protected List<String> getExpectedEntries() {
         final WebDriver webDriver = getWebDriver();
         final BrowserVersion browserVersion = getBrowserVersion();
 
-        String expectationNodeId = "expected";
         final List<WebElement> nodes = webDriver.findElements(By.xpath("//*[starts-with(@id, 'expected')]"));
         if (nodes.isEmpty()) {
             throw new RuntimeException("No expectations found in html code");
         }
         final String specificName = "expected_" + browserVersion.getNickname();
+        String expectationNodeId = "expected";
         for (final WebElement node : nodes) {
             final String nodeId = node.getAttribute("id");
             if (specificName.contains(nodeId) && nodeId.length() > expectationNodeId.length()) {
@@ -101,10 +105,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     private WebDriver buildWebDriver() {
-        if ("firefox".equalsIgnoreCase(System.getProperty("htmlunit.webdriver"))) {
+        final String property = System.getProperty(PROPERTY);
+        if (property.contains("ff2") || property.contains("ff3")) {
             return new FirefoxDriver();
         }
-        // TODO: IEDriver
+        if (property.contains("ie6") || property.contains("ie7")) {
+            return new InternetExplorerDriver();
+        }
         final WebClient webClient = getWebClient();
         final HtmlUnitDriver driver = new HtmlUnitDriver(true) {
             @Override

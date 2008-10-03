@@ -98,14 +98,15 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
     @Override
     protected String getName() {
-        return String.format("[%s]", BrowserRunner.getShortname(browserVersion_));
+        return String.format("[%s]", BrowserRunner.getDescription(browserVersion_));
     }
 
     @Override
     protected String testName(final FrameworkMethod method) {
         String className = method.getMethod().getDeclaringClass().getName();
         className = className.substring(className.lastIndexOf('.') + 1);
-        return String.format("%s[%s]", className + '.' + method.getName(), BrowserRunner.getShortname(browserVersion_));
+        return String.format("%s[%s]", className + '.' + method.getName(),
+            BrowserRunner.getDescription(browserVersion_));
     }
 
     @Override
@@ -204,7 +205,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
             && isDefinedIn(notYetImplementedBrowsers.value());
         setAlerts(testCase, method.getMethod());
         statement = new BrowserStatement(statement, method.getMethod(), shouldFail,
-                notYetImplemented, BrowserRunner.getShortname(browserVersion_));
+                notYetImplemented, BrowserRunner.getDescription(browserVersion_));
         return statement;
     }
 }
