@@ -174,7 +174,7 @@ public class HTMLOptionElement extends HTMLElement {
             att.init(attributeName, getHtmlElementOrDie());
             return att;
         }
-        
+
         return response;
     }
 }
