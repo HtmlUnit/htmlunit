@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import java.io.File;
+
+import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -192,6 +195,15 @@ public class Prototype150rc1Test extends WebTestCase {
         final String summary = page.<HtmlElement>getHtmlElementById("logsummary").asText();
         final String expected = tests + " tests, " + assertions + " assertions, " + failures + " failures, "
              + errors + " errors";
+
+        // dump the result page if not ok
+        if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null && !expected.equals(summary)) {
+            final File tmpDir = new File(System.getProperty("java.io.tmpdir"));
+            final File f = new File(tmpDir, "prototype150rc1_result_" + filename);
+            FileUtils.writeStringToFile(f, page.asXml(), "UTF-8");
+            getLog().info("Test result for " + filename + " written to: " + f.getAbsolutePath());
+        }
+
         assertEquals(expected, summary);
     }
 

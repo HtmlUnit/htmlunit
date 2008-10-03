@@ -198,6 +198,12 @@ public class Attr extends SimpleScriptable {
      * @return <tt>true</tt> if this attribute has been specified
      */
     public boolean jsxGet_specified() {
+        if (parent_ != null) {
+            if (parent_ instanceof HtmlElement) {
+                return ((HtmlElement) parent_).isAttributeDefined(name_);
+            }
+            return ((XmlElement) parent_).hasAttribute(name_);
+        }
         return true;
     }
 

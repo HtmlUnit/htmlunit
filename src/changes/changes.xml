@@ -8,6 +8,16 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="fix" dev="mguillem">
+                JavaScript: Attr.specified queries owner node for attribute's existence.
+            </action>
+            <action type="fix" dev="mguillem">
+                JavaScript: HtmlOptionsElement.getAttributeNode returns a node for attributes "id", "value" and "selected"
+                even if these attributes weren't specified in HTML code (IE only).
+            </action>
+            <action type="fix" dev="mguillem">
+                JavaScript: HtmlOptionsCollection delegates to enclosing select for FF as well.
+            </action>
             <action type="fix" dev="asashour" id="2116569">
                 HtmlSelect: removeOption() and replaceOption() to inspect only HtmlOption children.
             </action>

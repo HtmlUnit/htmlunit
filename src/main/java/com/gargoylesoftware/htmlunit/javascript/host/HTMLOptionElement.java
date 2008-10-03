@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.html.DomText;
@@ -33,7 +36,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 public class HTMLOptionElement extends HTMLElement {
     private static final long serialVersionUID = 947015932373556314L;
+    private static final Set<String> namesIEAttributeAlwaysAvailable_ = new HashSet<String>();
 
+    static {
+        final String[] names = {"id", "value", "selected"};
+        for (final String name : names) {
+            namesIEAttributeAlwaysAvailable_.add(name);
+        }
+    }
     /**
      * Create an instance.
      */
@@ -148,5 +158,23 @@ public class HTMLOptionElement extends HTMLElement {
      */
     public void jsxSet_label(final String label) {
         getHtmlOption().setLabelAttribute(label);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object jsxFunction_getAttributeNode(final String attributeName) {
+        final Object response = super.jsxFunction_getAttributeNode(attributeName);
+        if (response == null && getBrowserVersion().isIE()
+            && namesIEAttributeAlwaysAvailable_.contains(attributeName)) {
+            final Attr att = new Attr();
+            att.setPrototype(getPrototype(Attr.class));
+            att.setParentScope(getWindow());
+            att.init(attributeName, getHtmlElementOrDie());
+            return att;
+        }
+        
+        return response;
     }
 }

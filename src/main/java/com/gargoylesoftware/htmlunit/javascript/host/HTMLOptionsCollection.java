@@ -109,10 +109,9 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
             return;
         }
 
-        final boolean ie = getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE();
         final HTMLSelectElement parent = (HTMLSelectElement) htmlSelect_.getScriptObject();
 
-        if (ie && !has(name, start) && ScriptableObject.hasProperty(parent, name)) {
+        if (!has(name, start) && ScriptableObject.hasProperty(parent, name)) {
             ScriptableObject.putProperty(parent, name, value);
         }
         else {
@@ -121,7 +120,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
     }
 
     /**
-     * <p>If IE is emulated, this method delegates the call to the parent select element.</p>
+     * <p>This method delegates the call to the parent select element.</p>
      *
      * <p>See {@link #put(String, Scriptable, Object)} for the corresponding setter behavior.</p>
      *
@@ -129,14 +128,10 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * @return {@inheritDoc}
      */
     public Object getWithFallback(final String name) {
-        final boolean ie = getBrowserVersion().isIE();
-        if (ie) {
-            // If the name was NOT_FOUND on the prototype, then just drop through
-            // to search on the select element for IE only.
-            final HTMLSelectElement select = (HTMLSelectElement) htmlSelect_.getScriptObject();
-            return ScriptableObject.getProperty(select, name);
-        }
-        return NOT_FOUND;
+        // If the name was NOT_FOUND on the prototype, then just drop through
+        // to search on the select element for IE only AND FF.
+        final HTMLSelectElement select = (HTMLSelectElement) htmlSelect_.getScriptObject();
+        return ScriptableObject.getProperty(select, name);
     }
 
     /**
