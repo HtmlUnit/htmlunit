@@ -106,11 +106,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     private WebDriver buildWebDriver() {
         final String property = System.getProperty(PROPERTY);
-        if (property.contains("ff2") || property.contains("ff3")) {
-            return new FirefoxDriver();
-        }
-        if (property.contains("ie6") || property.contains("ie7")) {
-            return new InternetExplorerDriver();
+        if (property != null) {
+            if (property.contains("ff2") || property.contains("ff3")) {
+                return new FirefoxDriver();
+            }
+            if (property.contains("ie6") || property.contains("ie7")) {
+                return new InternetExplorerDriver();
+            }
         }
         final WebClient webClient = getWebClient();
         final HtmlUnitDriver driver = new HtmlUnitDriver(true) {
