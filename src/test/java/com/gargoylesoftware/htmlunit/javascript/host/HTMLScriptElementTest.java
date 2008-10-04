@@ -24,6 +24,8 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 /**
  * Unit tests for {@link HTMLScriptElement}.
@@ -42,28 +44,46 @@ public class HTMLScriptElementTest extends WebTestCase {
      */
     @Test
     public void onReadyStateChangeHandler() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        //IE gives "1 2 3 b=complete " if 'Check new version of stored pages' is set to 'NEVER'
+        onReadyStateChangeHandler(BrowserVersion.INTERNET_EXPLORER_6_0, "1 2 b=loading 3 b=loaded ");
+        onReadyStateChangeHandler(BrowserVersion.INTERNET_EXPLORER_7_0, "1 2 b=loading 3 b=loaded ");
+        onReadyStateChangeHandler(BrowserVersion.FIREFOX_2, "1 2 3 b=loaded ");
+        onReadyStateChangeHandler(BrowserVersion.FIREFOX_3, "1 2 3 b=loaded ");
+    }
+
+    private void onReadyStateChangeHandler(final BrowserVersion browserVersion, final String expectedValue)
+        throws Exception {
         final String html = "<html>\n"
             + "  <head>\n"
             + "    <title>test</title>\n"
-            + "    <script id='a'>\n"
-            + "      var script = document.createElement('script');\n"
-            + "      script.id = 'b';\n"
-            + "      script.type = 'text/javascript';\n"
-            + "      script.onreadystatechange = function() {\n"
-            + "        alert(script.id + '=' + script.readyState);\n"
-            + "      }\n"
-            + "      alert('1');\n"
-            + "      script.src = '" + URL_SECOND + "';\n"
-            + "      alert('2');\n"
-            + "      document.getElementsByTagName('head')[0].appendChild(script);\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var script = document.createElement('script');\n"
+            + "        script.id = 'b';\n"
+            + "        script.type = 'text/javascript';\n"
+            + "        script.onreadystatechange = function() {\n"
+            + "          document.getElementById('myTextarea').value += script.id + '=' + script.readyState + ' ';\n"
+            + "        }\n"
+            + "        script.onload = function () {\n"
+            + "          document.getElementById('myTextarea').value += 'onload ';\n"
+            + "        }\n"
+            + "        document.getElementById('myTextarea').value += '1 ';\n"
+            + "        script.src = '" + URL_SECOND + "';\n"
+            + "        document.getElementById('myTextarea').value += '2 ';\n"
+            + "        document.getElementsByTagName('head')[0].appendChild(script);\n"
+            + "      }"
             + "    </script>\n"
             + "  </head>\n"
-            + "  <body>abc</body>\n"
-            + "</html>";
+            + "  <body onload='test()'>\n"
+            + "    <textarea id='myTextarea' cols='40'></textarea>\n"
+            + "  </body></html>";
 
-        final String js = "alert('3')";
+        final String js = "document.getElementById('myTextarea').value += '3 ';";
 
-        final WebClient client = new WebClient();
+        final WebClient client = new WebClient(browserVersion);
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -72,9 +92,9 @@ public class HTMLScriptElementTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, js, "text/javascript");
         client.setWebConnection(webConnection);
 
-        client.getPage(URL_FIRST);
-        final String[] expectedAlerts = {"1", "2", "b=complete", "3" };
-        assertEquals(expectedAlerts, collectedAlerts);
+        final HtmlPage page = client.getPage(URL_FIRST);
+        final HtmlTextArea textArea = page.getHtmlElementById("myTextarea");
+        assertEquals(expectedValue, textArea.getText());
     }
 
     /**
