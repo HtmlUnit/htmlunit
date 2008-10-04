@@ -75,7 +75,7 @@ public class Prototype150rc1Test extends WebTestCase {
      * @throws Exception if test fails
      */
     @Test
-    public void testDom() throws Exception {
+    public void dom() throws Exception {
         if (notYetImplemented()) {
             return;
         }
