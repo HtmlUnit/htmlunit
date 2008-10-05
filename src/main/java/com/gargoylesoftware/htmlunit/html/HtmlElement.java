@@ -1000,7 +1000,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      */
     public final HtmlElement appendChildIfNoneExists(final String tagName) {
         final HtmlElement child;
-        final List< ? extends HtmlElement> children = getHtmlElementsByTagName(tagName);
+        final List<HtmlElement> children = getHtmlElementsByTagName(tagName);
         if (children.isEmpty()) {
             // Add a new child and return it.
             child = ((HtmlPage) getPage()).createHtmlElement(tagName);
@@ -1020,10 +1020,9 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @param i the index of the child to remove
      */
     public final void removeChild(final String tagName, final int i) {
-        final List< ? extends HtmlElement> children = getHtmlElementsByTagName(tagName);
+        final List<HtmlElement> children = getHtmlElementsByTagName(tagName);
         if (i >= 0 && i < children.size()) {
-            final HtmlElement child = children.get(i);
-            child.remove();
+            children.get(i).remove();
         }
     }
 

@@ -1290,13 +1290,10 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             return;
         }
         final HtmlElement doc = getDocumentElement();
-        final List<HtmlElement> elements = doc.getHtmlElementsByTagName("script");
-        for (final HtmlElement e : elements) {
-            if (e instanceof HtmlScript) {
-                final HtmlScript script = (HtmlScript) e;
-                if (script.isDeferred()) {
-                    script.executeScriptIfNeeded(true);
-                }
+        final List<HtmlScript> elements = doc.getHtmlElementsByTagName("script");
+        for (final HtmlScript script : elements) {
+            if (script.isDeferred()) {
+                script.executeScriptIfNeeded(true);
             }
         }
     }
@@ -1311,13 +1308,10 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         if (!getWebClient().getBrowserVersion().isIE()) {
             return;
         }
-        final List<HtmlElement> elements = getDocumentElement().getHtmlElementsByTagName("script");
-        for (final HtmlElement e : elements) {
-            if (e instanceof HtmlScript) {
-                final HtmlScript script = (HtmlScript) e;
-                if (script.isDeferred()) {
-                    script.setAndExecuteReadyState(READY_STATE_COMPLETE);
-                }
+        final List<HtmlScript> elements = getDocumentElement().getHtmlElementsByTagName("script");
+        for (final HtmlScript script : elements) {
+            if (script.isDeferred()) {
+                script.setAndExecuteReadyState(READY_STATE_COMPLETE);
             }
         }
     }
@@ -1828,7 +1822,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      */
     protected List<HtmlMeta> getMetaTags(final String httpEquiv) {
         final String nameLC = httpEquiv.toLowerCase();
-        final List<HtmlMeta> tags = getDocumentElement().<HtmlMeta>getHtmlElementsByTagName("meta");
+        final List<HtmlMeta> tags = getDocumentElement().getHtmlElementsByTagName("meta");
         for (final Iterator<HtmlMeta> iter = tags.iterator(); iter.hasNext();) {
             final HtmlMeta element = iter.next();
             if (!nameLC.equals(element.getHttpEquivAttribute().toLowerCase())) {

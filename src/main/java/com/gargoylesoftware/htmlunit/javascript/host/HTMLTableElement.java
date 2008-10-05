@@ -54,7 +54,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the table's caption element
      */
     public Object jsxGet_caption() {
-        final List< ? extends HtmlElement> captions = getHtmlElementOrDie().getHtmlElementsByTagName("caption");
+        final List<HtmlElement> captions = getHtmlElementOrDie().getHtmlElementsByTagName("caption");
         if (captions.isEmpty()) {
             return null;
         }
@@ -67,7 +67,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the table's tfoot element
      */
     public Object jsxGet_tFoot() {
-        final List< ? extends HtmlElement> tfoots = getHtmlElementOrDie().getHtmlElementsByTagName("tfoot");
+        final List<HtmlElement> tfoots = getHtmlElementOrDie().getHtmlElementsByTagName("tfoot");
         if (tfoots.isEmpty()) {
             return null;
         }
@@ -80,7 +80,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the table's thead element
      */
     public Object jsxGet_tHead() {
-        final List< ? extends HtmlElement> theads = getHtmlElementOrDie().getHtmlElementsByTagName("thead");
+        final List<HtmlElement> theads = getHtmlElementOrDie().getHtmlElementsByTagName("thead");
         if (theads.isEmpty()) {
             return null;
         }
