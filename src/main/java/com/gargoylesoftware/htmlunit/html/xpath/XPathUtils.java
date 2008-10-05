@@ -95,7 +95,7 @@ public final class XPathUtils {
      * @throws TransformerException if a syntax or other error occurs
      */
     private static XObject evaluateXPath(final Node contextNode, final String str) throws TransformerException {
-        final XPathContext xpathSupport = new XPathContext(false);
+        final XPathContext xpathSupport = new XPathContext();
 
         final Node xpathExpressionContext;
         if (contextNode.getNodeType() == Node.DOCUMENT_NODE) {

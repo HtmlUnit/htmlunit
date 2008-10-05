@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="update" dev="asashour" id="2129180">
+                Upgrade Xalan to 2.7.1
+            </action>
             <action type="fix" dev="asashour">
                 FrameWindow: should be Serializable.
             </action>
