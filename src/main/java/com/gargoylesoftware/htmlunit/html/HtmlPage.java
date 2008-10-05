@@ -1316,7 +1316,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             if (e instanceof HtmlScript) {
                 final HtmlScript script = (HtmlScript) e;
                 if (script.isDeferred()) {
-                    script.setReadyStateComplete();
+                    script.setAndExecuteReadyState(READY_STATE_COMPLETE);
                 }
             }
         }

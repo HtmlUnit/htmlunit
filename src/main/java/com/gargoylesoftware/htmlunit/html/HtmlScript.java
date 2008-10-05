@@ -203,7 +203,7 @@ public class HtmlScript extends HtmlElement {
         final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
         final boolean pageFinishedLoading = (getPage().getReadyState() == READY_STATE_COMPLETE);
         if (!ie || pageFinishedLoading || !isDeferred()) {
-            setReadyStateComplete();
+            setAndExecuteReadyState(READY_STATE_COMPLETE);
             executeScriptIfNeeded(true);
         }
         super.onAllChildrenAddedToPage();
@@ -385,18 +385,16 @@ public class HtmlScript extends HtmlElement {
      * Sets the <tt>readyState</tt> to {@link DomNode#READY_STATE_COMPLETE} and executes the
      * <tt>onreadystatechange</tt> handler when simulating IE. Note that script nodes go
      * straight to the {@link DomNode#READY_STATE_COMPLETE} state, skipping all previous states.
+     * @param state this script ready state
      */
-    protected void setReadyStateComplete() {
-        final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
-        if (!ie) {
-            return;
-        }
-
-        setReadyState(READY_STATE_COMPLETE);
-        final HTMLScriptElement script = (HTMLScriptElement) getScriptObject();
-        final Function handler = script.getOnReadyStateChangeHandler();
-        if (handler != null) {
-            ((HtmlPage) getPage()).executeJavaScriptFunctionIfPossible(handler, script, new Object[0], this);
+    protected void setAndExecuteReadyState(final String state) {
+        if (getPage().getWebClient().getBrowserVersion().isIE()) {
+            setReadyState(state);
+            final HTMLScriptElement script = (HTMLScriptElement) getScriptObject();
+            final Function handler = script.getOnReadyStateChangeHandler();
+            if (handler != null) {
+                ((HtmlPage) getPage()).executeJavaScriptFunctionIfPossible(handler, script, new Object[0], this);
+            }
         }
     }
 
