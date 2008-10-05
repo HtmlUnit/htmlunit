@@ -1290,10 +1290,13 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             return;
         }
         final HtmlElement doc = getDocumentElement();
-        final List<HtmlScript> elements = doc.getHtmlElementsByTagName("script");
-        for (final HtmlScript script : elements) {
-            if (script.isDeferred()) {
-                script.executeScriptIfNeeded(true);
+        final List<HtmlElement> elements = doc.getHtmlElementsByTagName("script");
+        for (final HtmlElement e : elements) {
+            if (e instanceof HtmlScript) {
+                final HtmlScript script = (HtmlScript) e;
+                if (script.isDeferred()) {
+                    script.executeScriptIfNeeded(true);
+                }
             }
         }
     }
@@ -1302,16 +1305,15 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * Sets the ready state on any deferred scripts, if necessary.
      */
     private void setReadyStateOnDeferredScriptsIfNeeded() {
-        if (!getWebClient().isJavaScriptEnabled()) {
-            return;
-        }
-        if (!getWebClient().getBrowserVersion().isIE()) {
-            return;
-        }
-        final List<HtmlScript> elements = getDocumentElement().getHtmlElementsByTagName("script");
-        for (final HtmlScript script : elements) {
-            if (script.isDeferred()) {
-                script.setAndExecuteReadyState(READY_STATE_COMPLETE);
+        if (getWebClient().isJavaScriptEnabled() && getWebClient().getBrowserVersion().isIE()) {
+            final List<HtmlElement> elements = getDocumentElement().getHtmlElementsByTagName("script");
+            for (final HtmlElement e : elements) {
+                if (e instanceof HtmlScript) {
+                    final HtmlScript script = (HtmlScript) e;
+                    if (script.isDeferred()) {
+                        script.setAndExecuteReadyState(READY_STATE_COMPLETE);
+                    }
+                }
             }
         }
     }

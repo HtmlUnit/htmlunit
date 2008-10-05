@@ -201,8 +201,7 @@ public class HtmlScript extends HtmlElement {
             mainLog_.debug("Script node added: " + asXml());
         }
         final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
-        final boolean pageFinishedLoading = (getPage().getReadyState() == READY_STATE_COMPLETE);
-        if (!ie || pageFinishedLoading || !isDeferred()) {
+        if (!ie || !isDeferred()) {
             setAndExecuteReadyState(READY_STATE_COMPLETE);
             executeScriptIfNeeded(true);
         }
