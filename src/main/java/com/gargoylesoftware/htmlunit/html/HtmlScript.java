@@ -201,9 +201,26 @@ public class HtmlScript extends HtmlElement {
             mainLog_.debug("Script node added: " + asXml());
         }
         final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
-        if (!ie || !isDeferred()) {
-            setAndExecuteReadyState(READY_STATE_COMPLETE);
+        if (ie) {
+            if (!isDeferred()) {
+                if (!getSrcAttribute().equals("//:")) {
+                    setAndExecuteReadyState(READY_STATE_LOADING);
+                    executeScriptIfNeeded(true);
+                    setAndExecuteReadyState(READY_STATE_LOADED);
+                }
+                else {
+                    setAndExecuteReadyState(READY_STATE_COMPLETE);
+                    executeScriptIfNeeded(true);
+                }
+            }
+        }
+        else {
             executeScriptIfNeeded(true);
+            final HTMLScriptElement script = (HTMLScriptElement) getScriptObject();
+            final Function handler = script.getOnLoadHandler();
+            if (handler != null) {
+                ((HtmlPage) getPage()).executeJavaScriptFunctionIfPossible(handler, script, new Object[0], this);
+            }
         }
         super.onAllChildrenAddedToPage();
     }

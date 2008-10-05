@@ -44,14 +44,11 @@ public class HTMLScriptElementTest extends WebTestCase {
      */
     @Test
     public void onReadyStateChangeHandler() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        //IE gives "1 2 3 b=complete " if 'Check new version of stored pages' is set to 'NEVER'
+        //IE gives "1 2 3 b=complete " if 'Check new version of stored pages' is set to 'Never'
         onReadyStateChangeHandler(BrowserVersion.INTERNET_EXPLORER_6_0, "1 2 b=loading 3 b=loaded ");
         onReadyStateChangeHandler(BrowserVersion.INTERNET_EXPLORER_7_0, "1 2 b=loading 3 b=loaded ");
-        onReadyStateChangeHandler(BrowserVersion.FIREFOX_2, "1 2 3 b=loaded ");
-        onReadyStateChangeHandler(BrowserVersion.FIREFOX_3, "1 2 3 b=loaded ");
+        onReadyStateChangeHandler(BrowserVersion.FIREFOX_2, "1 2 3 onload ");
+        onReadyStateChangeHandler(BrowserVersion.FIREFOX_3, "1 2 3 onload ");
     }
 
     private void onReadyStateChangeHandler(final BrowserVersion browserVersion, final String expectedValue)

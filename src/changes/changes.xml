@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="fix" dev="asashour">
+                JavaScript: correct script.onreadystatechange behavior for external JavaScript files.
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: add support for script.onload (FF only).
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: Attr.specified queries owner node for attribute's existence.
             </action>

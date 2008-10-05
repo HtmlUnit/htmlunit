@@ -123,6 +123,30 @@ public class HTMLScriptElement extends HTMLElement {
     }
 
     /**
+     * Returns the event handler that fires on load.
+     * @return the event handler that fires on load
+     */
+    public Object jsxGet_onload() {
+        return getEventHandlerProp("onload");
+    }
+
+    /**
+     * Returns the event handler that fires on load.
+     * @return the event handler that fires on load
+     */
+    public Function getOnLoadHandler() {
+        return getEventHandler("onload");
+    }
+
+    /**
+     * Sets the event handler that fires on load.
+     * @param handler the event handler that fires on load
+     */
+    public void jsxSet_onload(final Object handler) {
+        setEventHandlerProp("onload", handler);
+    }
+
+    /**
      * Returns the ready state of the script. This is an IE-only property.
      * @return the ready state of the script
      * @see DomNode#READY_STATE_UNINITIALIZED

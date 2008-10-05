@@ -1478,6 +1478,9 @@
 
     <class name="HTMLScriptElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLScriptElement" JSObject="true"
         htmlClass="com.gargoylesoftware.htmlunit.html.HtmlScript" extends="HTMLElement">
+        <property name="onload" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
         <property name="onreadystatechange" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
