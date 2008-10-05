@@ -9,6 +9,9 @@
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
             <action type="fix" dev="asashour">
+                FrameWindow: should be Serializable.
+            </action>
+            <action type="fix" dev="asashour">
                 JavaScript: postpone the execution of dynamically added external scripts.
             </action>
             <action type="fix" dev="asashour">

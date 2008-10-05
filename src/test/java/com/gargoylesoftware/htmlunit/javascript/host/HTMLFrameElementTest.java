@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -281,5 +283,23 @@ public class HTMLFrameElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void serialization() throws Exception {
+        final String html
+            = "<html><head><title>first</title></head>\n"
+            + "<frameset cols='20%,80%'>\n"
+            + "    <frame id='frame1'>\n"
+            + "    <frame name='Frame2' onload='alert(this.name)' id='frame2'>\n"
+            + "</frameset></html>";
+
+        final HtmlPage page = loadPage(html);
+
+        final ObjectOutputStream objectOS = new ObjectOutputStream(new ByteArrayOutputStream());
+        objectOS.writeObject(page);
     }
 }

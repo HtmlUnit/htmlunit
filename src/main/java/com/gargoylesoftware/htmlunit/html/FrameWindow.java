@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.Serializable;
+
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowImpl;
@@ -25,8 +27,11 @@ import com.gargoylesoftware.htmlunit.WebWindowImpl;
  * @author Brad Clarke
  * @author Ahmed Ashour
  */
-public class FrameWindow extends WebWindowImpl {
+public class FrameWindow extends WebWindowImpl implements Serializable {
+
+    private static final long serialVersionUID = -4767759560108055220L;
     private final BaseFrame frame_;
+
     /**
      * Creates an instance for a given frame.
      */
