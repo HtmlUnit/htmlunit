@@ -536,7 +536,7 @@ public final class HTMLParser {
                 currentNode_ = stack_.peek();
             }
 
-            previousNode.onAllChildrenAddedToPage();
+            previousNode.onAllChildrenAddedToPage(false);
 
         }
 

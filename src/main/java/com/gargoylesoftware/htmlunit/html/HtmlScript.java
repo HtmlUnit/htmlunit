@@ -28,6 +28,8 @@ import org.mozilla.javascript.Function;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLScriptElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -193,36 +195,57 @@ public class HtmlScript extends HtmlElement {
      * the script itself, if necessary. {@inheritDoc}
      */
     @Override
-    protected void onAllChildrenAddedToPage() {
+    protected void onAllChildrenAddedToPage(final boolean postponed) {
         if (getOwnerDocument() instanceof XmlPage) {
             return;
         }
         if (mainLog_.isDebugEnabled()) {
             mainLog_.debug("Script node added: " + asXml());
         }
-        final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
-        if (ie) {
-            if (!isDeferred()) {
-                if (!getSrcAttribute().equals("//:")) {
-                    setAndExecuteReadyState(READY_STATE_LOADING);
-                    executeScriptIfNeeded(true);
-                    setAndExecuteReadyState(READY_STATE_LOADED);
+        final PostponedAction action = new PostponedAction() {
+            public void execute() {
+                final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
+                if (ie) {
+                    if (!isDeferred()) {
+                        if (!getSrcAttribute().equals("//:")) {
+                            setAndExecuteReadyState(READY_STATE_LOADING);
+                            executeScriptIfNeeded(true);
+                            setAndExecuteReadyState(READY_STATE_LOADED);
+                        }
+                        else {
+                            setAndExecuteReadyState(READY_STATE_COMPLETE);
+                            executeScriptIfNeeded(true);
+                        }
+                    }
                 }
                 else {
-                    setAndExecuteReadyState(READY_STATE_COMPLETE);
                     executeScriptIfNeeded(true);
+                    final HTMLScriptElement script = (HTMLScriptElement) getScriptObject();
+                    final Function handler = script.getOnLoadHandler();
+                    if (handler != null) {
+                        ((HtmlPage) getPage()).executeJavaScriptFunctionIfPossible(handler, script, new Object[0],
+                            HtmlScript.this);
+                    }
+                }
+            }
+        };
+        if (postponed && getTextContent().length() == 0) {
+            final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
+            engine.addPostponedAction(action);
+        }
+        else {
+            try {
+                action.execute();
+            }
+            catch (final Exception e) {
+                if (e instanceof RuntimeException) {
+                    throw (RuntimeException) e;
+                }
+                else {
+                    throw new RuntimeException(e);
                 }
             }
         }
-        else {
-            executeScriptIfNeeded(true);
-            final HTMLScriptElement script = (HTMLScriptElement) getScriptObject();
-            final Function handler = script.getOnLoadHandler();
-            if (handler != null) {
-                ((HtmlPage) getPage()).executeJavaScriptFunctionIfPossible(handler, script, new Object[0], this);
-            }
-        }
-        super.onAllChildrenAddedToPage();
     }
 
     /**

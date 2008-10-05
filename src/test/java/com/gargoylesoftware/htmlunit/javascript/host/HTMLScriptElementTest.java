@@ -45,10 +45,10 @@ public class HTMLScriptElementTest extends WebTestCase {
     @Test
     public void onReadyStateChangeHandler() throws Exception {
         //IE gives "1 2 3 b=complete " if 'Check new version of stored pages' is set to 'Never'
-        onReadyStateChangeHandler(BrowserVersion.INTERNET_EXPLORER_6_0, "1 2 b=loading 3 b=loaded ");
-        onReadyStateChangeHandler(BrowserVersion.INTERNET_EXPLORER_7_0, "1 2 b=loading 3 b=loaded ");
-        onReadyStateChangeHandler(BrowserVersion.FIREFOX_2, "1 2 3 onload ");
-        onReadyStateChangeHandler(BrowserVersion.FIREFOX_3, "1 2 3 onload ");
+        onReadyStateChangeHandler(BrowserVersion.INTERNET_EXPLORER_6_0, "1 2 3 b=loading 4 b=loaded ");
+        onReadyStateChangeHandler(BrowserVersion.INTERNET_EXPLORER_7_0, "1 2 3 b=loading 4 b=loaded ");
+        onReadyStateChangeHandler(BrowserVersion.FIREFOX_2, "1 2 3 4 onload ");
+        onReadyStateChangeHandler(BrowserVersion.FIREFOX_3, "1 2 3 4 onload ");
     }
 
     private void onReadyStateChangeHandler(final BrowserVersion browserVersion, final String expectedValue)
@@ -71,14 +71,15 @@ public class HTMLScriptElementTest extends WebTestCase {
             + "        script.src = '" + URL_SECOND + "';\n"
             + "        document.getElementById('myTextarea').value += '2 ';\n"
             + "        document.getElementsByTagName('head')[0].appendChild(script);\n"
-            + "      }"
+            + "        document.getElementById('myTextarea').value += '3 ';\n"
+            + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
             + "  <body onload='test()'>\n"
             + "    <textarea id='myTextarea' cols='40'></textarea>\n"
             + "  </body></html>";
 
-        final String js = "document.getElementById('myTextarea').value += '3 ';";
+        final String js = "document.getElementById('myTextarea').value += '4 ';";
 
         final WebClient client = new WebClient(browserVersion);
         final List<String> collectedAlerts = new ArrayList<String>();
