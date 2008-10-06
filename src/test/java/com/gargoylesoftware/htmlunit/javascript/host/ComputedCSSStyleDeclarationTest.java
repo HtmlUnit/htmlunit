@@ -127,7 +127,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
         final HtmlPage page = loadPage(getBrowserVersion(), html, null);
         final List<String> expectedValues = stringProperties(expectedText);
         final List<String> collectedValues =
-            stringProperties(((HtmlTextArea) page.getHtmlElementById("myTextarea")).getText());
+            stringProperties(page.<HtmlTextArea>getHtmlElementById("myTextarea").getText());
         assertEquals(expectedValues, collectedValues);
     }
 

@@ -200,7 +200,7 @@ public class HtmlPageTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
         assertSame("form1", form, page.getHtmlElementById("form1")); //huh??
 
         final HtmlInput input = form.getInputByName("textInput1");
@@ -215,7 +215,7 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlOption option = select.getOptionByValue("option1");
         assertSame("option1", option, select.getOptionByValue("option1"));
 
-        final HtmlTable table = (HtmlTable) page.getHtmlElementById("table1");
+        final HtmlTable table = page.getHtmlElementById("table1");
         assertSame("table1", table, page.getHtmlElementById("table1"));
 
         final HtmlAnchor anchor = page.getAnchorByName("anchor1");
@@ -1488,7 +1488,7 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final HtmlAttributeChangeListenerTestImpl listenerImpl = new HtmlAttributeChangeListenerTestImpl();
         page.addHtmlAttributeChangeListener(listenerImpl);
-        final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
+        final HtmlButtonInput myButton = page.getHtmlElementById("myButton");
 
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
@@ -1517,7 +1517,7 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final HtmlAttributeChangeListenerTestImpl listenerImpl = new HtmlAttributeChangeListenerTestImpl();
         page.addHtmlAttributeChangeListener(listenerImpl);
-        final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
+        final HtmlButtonInput myButton = page.getHtmlElementById("myButton");
 
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
@@ -1546,7 +1546,7 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final HtmlAttributeChangeListenerTestImpl listenerImpl = new HtmlAttributeChangeListenerTestImpl();
         page.addHtmlAttributeChangeListener(listenerImpl);
-        final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
+        final HtmlButtonInput myButton = page.getHtmlElementById("myButton");
 
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
@@ -1575,7 +1575,7 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final HtmlAttributeChangeListenerTestImpl listenerImpl = new HtmlAttributeChangeListenerTestImpl();
         page.addHtmlAttributeChangeListener(listenerImpl);
-        final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
+        final HtmlButtonInput myButton = page.getHtmlElementById("myButton");
 
         myButton.click();
         page.removeHtmlAttributeChangeListener(listenerImpl);

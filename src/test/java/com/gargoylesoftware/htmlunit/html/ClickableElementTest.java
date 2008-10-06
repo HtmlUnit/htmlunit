@@ -87,7 +87,7 @@ public class ClickableElementTest extends WebTestCase {
         client.setAlertHandler(alertHandler);
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
-        final ClickableElement clickable = (ClickableElement) page.getHtmlElementById("clickId");
+        final ClickableElement clickable = page.getHtmlElementById("clickId");
 
         for (int i = 0; i < numClicks; i++) {
             clickable.click();
@@ -992,9 +992,9 @@ public class ClickableElementTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(content);
-        final HtmlBody body = (HtmlBody) page.getHtmlElementById("myBody");
+        final HtmlBody body = page.getHtmlElementById("myBody");
         body.dblClick();
-        final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextarea");
+        final HtmlTextArea textArea = page.getHtmlElementById("myTextarea");
         assertEquals("click-dblclick-", textArea.getText());
     }
 
@@ -1013,7 +1013,7 @@ public class ClickableElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
-        ((ClickableElement) page.getHtmlElementById("textfield1")).click();
+        page.<ClickableElement>getHtmlElementById("textfield1").click();
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

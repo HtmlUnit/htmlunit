@@ -497,7 +497,7 @@ public class DomNodeTest extends WebTestCase {
         final DomChangeListenerTestImpl listenerImpl = new DomChangeListenerTestImpl();
         p1.addDomChangeListener(listenerImpl);
         page.addDomChangeListener(listenerImpl);
-        final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
+        final HtmlButtonInput myButton = page.getHtmlElementById("myButton");
 
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
@@ -529,7 +529,7 @@ public class DomNodeTest extends WebTestCase {
         final DomChangeListenerTestImpl listenerImpl = new DomChangeListenerTestImpl();
         p1.addDomChangeListener(listenerImpl);
         page.addDomChangeListener(listenerImpl);
-        final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
+        final HtmlButtonInput myButton = page.getHtmlElementById("myButton");
 
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
@@ -561,7 +561,7 @@ public class DomNodeTest extends WebTestCase {
         final DomChangeListenerTestImpl listenerImpl = new DomChangeListenerTestImpl();
         p1.addDomChangeListener(listenerImpl);
         page.addDomChangeListener(listenerImpl);
-        final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
+        final HtmlButtonInput myButton = page.getHtmlElementById("myButton");
 
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
@@ -608,7 +608,7 @@ public class DomNodeTest extends WebTestCase {
 
         page.addDomChangeListener(listener1);
 
-        final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
+        final HtmlButtonInput myButton = page.getHtmlElementById("myButton");
         myButton.click();
 
         final String[] expectedValues = {"in listener 1"};

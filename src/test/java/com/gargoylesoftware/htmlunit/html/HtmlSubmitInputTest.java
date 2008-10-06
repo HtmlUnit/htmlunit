@@ -191,7 +191,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
         final String[] expectedAlerts = {"1"};
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
-        final HtmlSubmitInput input = (HtmlSubmitInput) page.getHtmlElementById("myInput");
+        final HtmlSubmitInput input = page.getHtmlElementById("myInput");
         input.click();
 
         assertEquals(expectedAlerts, collectedAlerts);

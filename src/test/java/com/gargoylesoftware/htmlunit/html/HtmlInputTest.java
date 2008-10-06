@@ -173,7 +173,7 @@ public final class HtmlInputTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlRadioButtonInput radioButton = (HtmlRadioButtonInput) form.getFirstByXPath(
                 "//input[@type='radio' and @name='foo' and @value='2']");

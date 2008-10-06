@@ -52,7 +52,7 @@ public class HtmlIsIndexTest extends WebTestCase {
         final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlIsIndex isInput = form.<HtmlIsIndex>getHtmlElementsByAttribute(
                 "isindex", "prompt", "enterSomeText").get(0);

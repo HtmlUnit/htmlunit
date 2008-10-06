@@ -94,7 +94,7 @@ public class HtmlScriptTest extends WebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlScript script = (HtmlScript) page.getHtmlElementById("script1");
+        final HtmlScript script = page.getHtmlElementById("script1");
         assertEquals("", script.asText());
     }
 

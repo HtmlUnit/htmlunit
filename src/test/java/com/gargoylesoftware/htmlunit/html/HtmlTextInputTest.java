@@ -41,7 +41,7 @@ public class HtmlTextInputTest extends WebTestCase {
     public void type() throws Exception {
         final String html = "<html><head></head><body><input id='t'/></body></html>";
         final HtmlPage page = loadPage(getBrowserVersion(), html, null);
-        final HtmlTextInput t = (HtmlTextInput) page.getHtmlElementById("t");
+        final HtmlTextInput t = page.getHtmlElementById("t");
         t.type("abc");
         assertEquals("abc", t.getValueAttribute());
         t.type('\b');
@@ -76,7 +76,7 @@ public class HtmlTextInputTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(getBrowserVersion(), html, null);
-        final HtmlTextInput text1 = (HtmlTextInput) page.getHtmlElementById("text1");
+        final HtmlTextInput text1 = page.getHtmlElementById("text1");
         text1.type("abcd");
         assertEquals("abc", text1.getValueAttribute());
     }
@@ -201,8 +201,8 @@ public class HtmlTextInputTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(getBrowserVersion(), html, null);
-        final HtmlTextInput input = (HtmlTextInput) page.getHtmlElementById("myInput");
-        final HtmlButtonInput button = (HtmlButtonInput) page.getHtmlElementById("myButton");
+        final HtmlTextInput input = page.getHtmlElementById("myInput");
+        final HtmlButtonInput button = page.getHtmlElementById("myButton");
         page.setFocusedElement(input);
         input.setSelectionStart(3);
         input.setSelectionEnd(6);

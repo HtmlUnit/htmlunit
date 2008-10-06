@@ -69,8 +69,8 @@ public class PostponedActionTest extends WebTestCase {
         conn.setResponse(URL_THIRD, thirdContent);
         client.setWebConnection(conn);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
-        final HtmlDivision div = (HtmlDivision) page.getHtmlElementById("debugDiv");
+        final HtmlPage page = client.getPage(URL_FIRST);
+        final HtmlDivision div = page.getHtmlElementById("debugDiv");
         assertEquals("before, after, second.html, third.html, ", div.getFirstChild().getNodeValue());
     }
 
@@ -104,9 +104,8 @@ public class PostponedActionTest extends WebTestCase {
         conn.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(conn);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
-        final HtmlDivision div = (HtmlDivision) page.getHtmlElementById("debugDiv");
+        final HtmlPage page = client.getPage(URL_FIRST);
+        final HtmlDivision div = page.getHtmlElementById("debugDiv");
         assertEquals("before, after, second.html, ", div.getFirstChild().getNodeValue());
     }
-
 }

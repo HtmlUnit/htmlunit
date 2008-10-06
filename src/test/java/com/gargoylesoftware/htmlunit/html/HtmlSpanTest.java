@@ -90,7 +90,7 @@ public class HtmlSpanTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(html);
-        final HtmlSpan htmlSpan = (HtmlSpan) page.getHtmlElementById("myId");
+        final HtmlSpan htmlSpan = page.getHtmlElementById("myId");
         assertTrue(htmlSpan.asXml().contains("</span>"));
     }
 }

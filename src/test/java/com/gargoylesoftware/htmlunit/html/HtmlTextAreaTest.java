@@ -56,7 +56,7 @@ public class HtmlTextAreaTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(content);
         final MockWebConnection webConnection = getMockConnection(page);
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
         assertNotNull(textArea);
@@ -79,7 +79,7 @@ public class HtmlTextAreaTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(content);
         final MockWebConnection webConnection = getMockConnection(page);
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
         textArea.setText("Flintstone");
@@ -100,7 +100,7 @@ public class HtmlTextAreaTest extends WebTestCase {
             + "<textarea name='textArea1'> foo \n bar </textarea>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(content);
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
         assertNotNull(textArea);
@@ -119,7 +119,7 @@ public class HtmlTextAreaTest extends WebTestCase {
             + "<textarea name='textArea2'></textarea>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(content);
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlTextArea textArea1 = form.getTextAreaByName("textArea1");
         assertEquals("<textarea name=\"textArea1\"> foo \n bar </textarea>", textArea1.asXml());
@@ -155,7 +155,7 @@ public class HtmlTextAreaTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(browserVersion, html, null);
-        final HtmlTextArea text1 = (HtmlTextArea) page.getHtmlElementById("text1");
+        final HtmlTextArea text1 = page.getHtmlElementById("text1");
         text1.type("abcd");
         assertEquals("abc", text1.getText());
     }
@@ -167,7 +167,7 @@ public class HtmlTextAreaTest extends WebTestCase {
     public void type() throws Exception {
         final String html = "<html><head></head><body><textarea id='t'></textarea></body></html>";
         final HtmlPage page = loadPage(html, null);
-        final HtmlTextArea t = (HtmlTextArea) page.getHtmlElementById("t");
+        final HtmlTextArea t = page.getHtmlElementById("t");
         t.type("abc");
         assertEquals("abc", t.getText());
         t.type('\b');
@@ -197,7 +197,7 @@ public class HtmlTextAreaTest extends WebTestCase {
             + "</textarea>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(content);
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
         final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
         assertNotNull(textArea);
         Assert.assertEquals("White space must be preserved!", " foo \n bar <p>html snippet</p>\n", textArea.asText());
@@ -219,7 +219,7 @@ public class HtmlTextAreaTest extends WebTestCase {
             + "</textarea>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(content);
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
         Assert.assertEquals("White space must be preserved!", "foo \n bar <p>html snippet</p>", form.asText());
     }
 
@@ -236,7 +236,7 @@ public class HtmlTextAreaTest extends WebTestCase {
             + "</textarea>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(content);
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
         final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
         assertNotNull(textArea);
         assertEquals(" foo \n bar ", textArea.getText());

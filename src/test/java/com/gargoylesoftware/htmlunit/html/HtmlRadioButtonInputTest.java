@@ -48,7 +48,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlRadioButtonInput radio = (HtmlRadioButtonInput) page.getHtmlElementById("radio");
+        final HtmlRadioButtonInput radio = page.getHtmlElementById("radio");
         assertEquals("unchecked", radio.asText());
         radio.setChecked(true);
         assertEquals("checked", radio.asText());
@@ -68,7 +68,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlRadioButtonInput radio = (HtmlRadioButtonInput) page.getHtmlElementById("radio");
+        final HtmlRadioButtonInput radio = page.getHtmlElementById("radio");
 
         assertFalse(radio.isChecked());
 
@@ -93,7 +93,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlRadioButtonInput radio = (HtmlRadioButtonInput) page.getHtmlElementById("radio");
+        final HtmlRadioButtonInput radio = page.getHtmlElementById("radio");
 
         assertFalse(radio.isChecked());
 
@@ -130,8 +130,8 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
-        final HtmlRadioButtonInput oneItem = (HtmlRadioButtonInput) page.getHtmlElementById("oneItem");
-        final HtmlRadioButtonInput twoItems = (HtmlRadioButtonInput) page.getHtmlElementById("twoItems");
+        final HtmlRadioButtonInput oneItem = page.getHtmlElementById("oneItem");
+        final HtmlRadioButtonInput twoItems = page.getHtmlElementById("twoItems");
 
         assertTrue(oneItem.isChecked());
         assertFalse(twoItems.isChecked());
@@ -174,7 +174,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
-        final HtmlRadioButtonInput radio = (HtmlRadioButtonInput) page.getHtmlElementById("myRadio");
+        final HtmlRadioButtonInput radio = page.getHtmlElementById("myRadio");
 
         final HtmlPage secondPage = (HtmlPage) radio.setChecked(true);
 
@@ -232,10 +232,10 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
-        final HtmlRadioButtonInput radio1 = (HtmlRadioButtonInput) page.getHtmlElementById("radio1");
-        final HtmlRadioButtonInput radio2 = (HtmlRadioButtonInput) page.getHtmlElementById("radio2");
-        final HtmlRadioButtonInput radio3 = (HtmlRadioButtonInput) page.getHtmlElementById("radio3");
-        final HtmlRadioButtonInput radio4 = (HtmlRadioButtonInput) page.getHtmlElementById("radio4");
+        final HtmlRadioButtonInput radio1 = page.getHtmlElementById("radio1");
+        final HtmlRadioButtonInput radio2 = page.getHtmlElementById("radio2");
+        final HtmlRadioButtonInput radio3 = page.getHtmlElementById("radio3");
+        final HtmlRadioButtonInput radio4 = page.getHtmlElementById("radio4");
 
         assertFalse(radio1.isChecked());
         assertFalse(radio2.isChecked());

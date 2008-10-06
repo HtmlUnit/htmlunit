@@ -36,7 +36,7 @@ public class HtmlPasswordInputTest extends WebTestCase {
     public void type() throws Exception {
         final String html = "<html><head></head><body><input type='password' id='p'/></body></html>";
         final HtmlPage page = loadPage(getBrowserVersion(), html, null);
-        final HtmlPasswordInput p = (HtmlPasswordInput) page.getHtmlElementById("p");
+        final HtmlPasswordInput p = page.getHtmlElementById("p");
         p.type("abc");
         assertEquals("abc", p.getValueAttribute());
         p.type('\b');
