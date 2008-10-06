@@ -116,6 +116,7 @@ public class CookieManager implements Serializable {
      * @param cookie the cookie to add
      */
     public void addCookie(final Cookie cookie) {
+        cookies_.remove(cookie);
         cookies_.add(cookie);
     }
 
