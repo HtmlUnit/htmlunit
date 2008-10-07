@@ -528,7 +528,7 @@ public class HTMLFormElementTest extends WebTestCase {
         webConnection.setDefaultResponse(secondContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals("first", page.getTitleText());
 
         final HtmlPage secondPage =
@@ -557,7 +557,7 @@ public class HTMLFormElementTest extends WebTestCase {
         webConnection.setDefaultResponse(defaultContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
         final Page page2 = ((ClickableElement) page.getHtmlElementById("button1")).click();
 
         assertEquals(URL_THIRD.toExternalForm(), page2.getWebResponse().getRequestUrl());
@@ -587,7 +587,7 @@ public class HTMLFormElementTest extends WebTestCase {
         webConnection.setDefaultResponse(secondContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals("first", page.getTitleText());
 
         final HtmlPage secondPage
@@ -623,7 +623,7 @@ public class HTMLFormElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
         final HtmlAnchor link = (HtmlAnchor) page.getHtmlElementById("link1");
         link.click();
 
@@ -702,7 +702,7 @@ public class HTMLFormElementTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, firstContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals("Button Test", page.getTitleText());
 
         final String[] expectedAlerts = {"value = 2"};
@@ -761,7 +761,7 @@ public class HTMLFormElementTest extends WebTestCase {
         webConnection.setDefaultResponse(secondContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals("first", page.getTitleText());
 
         final HtmlButton button = (HtmlButton) page.getHtmlElementById("button1");
@@ -1187,7 +1187,7 @@ public class HTMLFormElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
         ((ClickableElement) page.getHtmlElementById("theButton")).click();
 
         assertEquals(expectedAlerts, collectedAlerts);

@@ -100,7 +100,7 @@ public abstract class JQueryTestBase extends WebTestCase {
 
         final WebClient client = new WebClient(version);
 
-        final HtmlPage page = (HtmlPage) client.getPage(url);
+        final HtmlPage page = client.getPage(url);
         page.getEnclosingWindow().getThreadManager().joinAll(2 * 60 * 1000);
 
         // dump the result page if not OK

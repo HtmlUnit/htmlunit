@@ -165,7 +165,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage page = webClient.getPage(URL_FIRST);
         ((HtmlDivision) page.getHtmlElementById("d1")).click();
         ((HtmlDivision) page.getHtmlElementById("d2")).click();
 
@@ -292,7 +292,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage page = webClient.getPage(URL_FIRST);
         page.getAnchors().get(0).click();
         assertEquals(expected, collectedAlerts);
     }
@@ -323,7 +323,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
 
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals("First", page.getTitleText());
 
         final HtmlInlineFrame iframe = (HtmlInlineFrame) page.getHtmlElementById("iframe1");

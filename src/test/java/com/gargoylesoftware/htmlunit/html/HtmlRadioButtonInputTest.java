@@ -173,7 +173,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
         final HtmlRadioButtonInput radio = page.getHtmlElementById("myRadio");
 
         final HtmlPage secondPage = (HtmlPage) radio.setChecked(true);

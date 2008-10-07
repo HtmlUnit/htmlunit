@@ -186,9 +186,9 @@ public class HTMLAnchorElementTest extends WebTestCase {
         conn.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(conn);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
-        final HtmlButtonInput button = (HtmlButtonInput) page.getHtmlElementById("button1");
-        final HtmlPage page2 = (HtmlPage) button.click();
+        final HtmlPage page = client.getPage(URL_FIRST);
+        final HtmlButtonInput button = page.getHtmlElementById("button1");
+        final HtmlPage page2 = button.click();
 
         assertEquals("Second",  page2.getTitleText());
     }

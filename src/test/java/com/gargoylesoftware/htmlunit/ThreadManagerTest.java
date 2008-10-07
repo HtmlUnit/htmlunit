@@ -227,7 +227,7 @@ public class ThreadManagerTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondHtml);
         webConnection.setResponse(URL_THIRD, getContent("prototype/1.6.0/dist/prototype.js"), "text/javascript");
 
-        final HtmlPage initialPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage initialPage = webClient.getPage(URL_FIRST);
         initialPage.getEnclosingWindow().getThreadManager().joinAll(5000);
         assertEquals(expectedAlerts, collectedAlerts);
     }

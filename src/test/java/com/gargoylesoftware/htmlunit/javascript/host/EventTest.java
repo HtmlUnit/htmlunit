@@ -813,8 +813,8 @@ public class EventTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, html2);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
-        final HtmlAnchor anchor = (HtmlAnchor) page.getHtmlElementById("a");
+        final HtmlPage page = client.getPage(URL_FIRST);
+        final HtmlAnchor anchor = page.getHtmlElementById("a");
 
         final HtmlPage secondPage = (HtmlPage) anchor.click();
         assertEquals(new String[] {"a", "s", "d"}, collectedAlerts);

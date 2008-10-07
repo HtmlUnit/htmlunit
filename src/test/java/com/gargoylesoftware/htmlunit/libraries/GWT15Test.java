@@ -397,7 +397,7 @@ public class GWT15Test extends WebTestCase {
             client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         }
 
-        final HtmlPage page = (HtmlPage) client.getPage(url);
+        final HtmlPage page = client.getPage(url);
         page.getEnclosingWindow().getThreadManager().joinAll(10000);
         return page;
     }

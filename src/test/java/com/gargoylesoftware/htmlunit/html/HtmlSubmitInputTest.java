@@ -108,9 +108,9 @@ public class HtmlSubmitInputTest extends WebTestCase {
 
         client.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
-        final HtmlSubmitInput input = (HtmlSubmitInput) firstPage.getHtmlElementById("button1");
-        final HtmlPage secondPage = (HtmlPage) input.click();
+        final HtmlPage firstPage = client.getPage(URL_FIRST);
+        final HtmlSubmitInput input = firstPage.getHtmlElementById("button1");
+        final HtmlPage secondPage = input.click();
         assertEquals("Second", secondPage.getTitleText());
     }
 

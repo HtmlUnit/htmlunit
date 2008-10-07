@@ -131,7 +131,7 @@ public class HTMLParserListenerTest extends WebTestCase {
         webConnection.setDefaultResponse(htmlContent);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage page = webClient.getPage(URL_FIRST);
         assertEquals("foo", page.getTitleText());
 
         // ignore column and key

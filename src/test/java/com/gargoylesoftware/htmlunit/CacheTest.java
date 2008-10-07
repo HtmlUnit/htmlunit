@@ -155,7 +155,7 @@ public class CacheTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page1 = (HtmlPage) webClient.getPage(urlPage1);
+        final HtmlPage page1 = webClient.getPage(urlPage1);
         final String[] expectedAlerts = {"in foo1", "in foo2"};
         assertEquals(expectedAlerts, collectedAlerts);
 

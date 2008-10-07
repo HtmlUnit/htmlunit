@@ -291,10 +291,10 @@ public class HTMLInputElementTest extends WebTestCase {
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
+        final HtmlPage page = client.getPage(URL_GARGOYLE);
 
         final HtmlForm form = page.getFormByName("form1");
-        form.submit((SubmittableElement) null);
+        form.submit(null);
     }
 
     /**
@@ -320,10 +320,10 @@ public class HTMLInputElementTest extends WebTestCase {
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
+        final HtmlPage page = client.getPage(URL_GARGOYLE);
 
         final HtmlForm form = page.getFormByName("form1");
-        form.submit((SubmittableElement) null);
+        form.submit(null);
     }
 
     /**

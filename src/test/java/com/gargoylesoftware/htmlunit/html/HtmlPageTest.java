@@ -371,7 +371,7 @@ public class HtmlPageTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final String urlString = URL_GARGOYLE.toExternalForm();
-        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
+        final HtmlPage page = client.getPage(URL_GARGOYLE);
 
         assertEquals(urlString, page.getFullyQualifiedUrl(""));
         assertEquals(urlString + "foo", page.getFullyQualifiedUrl("foo"));
@@ -469,7 +469,7 @@ public class HtmlPageTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection();
         webClient.setWebConnection(webConnection);
         webConnection.setDefaultResponse(html);
-        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage page = webClient.getPage(URL_FIRST);
         page.getAnchors().get(0).click();
 
         final String[] expectedIncorrectness = {"Multiple 'base' detected, only the first is used."};
@@ -502,7 +502,7 @@ public class HtmlPageTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection();
         webClient.setWebConnection(webConnection);
         webConnection.setDefaultResponse(html);
-        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage page = webClient.getPage(URL_FIRST);
         final HtmlAnchor anchor = page.getAnchors().get(0);
         final HtmlPage secondPage = (HtmlPage) anchor.click();
 
@@ -713,7 +713,7 @@ public class HtmlPageTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
 
         assertEquals("second", page.getTitleText());
     }
@@ -735,7 +735,7 @@ public class HtmlPageTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
 
         assertEquals("second", page.getTitleText());
     }
@@ -808,7 +808,7 @@ public class HtmlPageTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
 
         assertEquals("second", page.getTitleText());
     }
@@ -831,7 +831,7 @@ public class HtmlPageTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
 
         assertEquals("second", page.getTitleText());
     }
@@ -856,11 +856,11 @@ public class HtmlPageTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
 
-        HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        HtmlPage page = client.getPage(URL_FIRST);
         assertEquals("first", page.getTitleText());
 
         client.setJavaScriptEnabled(false);
-        page = (HtmlPage) client.getPage(URL_FIRST);
+        page = client.getPage(URL_FIRST);
         assertEquals("second", page.getTitleText());
     }
 
@@ -884,7 +884,7 @@ public class HtmlPageTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
 
         assertEquals("first", page.getTitleText());
 
@@ -913,7 +913,7 @@ public class HtmlPageTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
 
         assertEquals("second", page.getTitleText());
     }
@@ -936,7 +936,7 @@ public class HtmlPageTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
 
         assertEquals("second", page.getTitleText());
     }
@@ -1089,7 +1089,7 @@ public class HtmlPageTest extends WebTestCase {
         webConnection.setResponse(new URL(URL_FIRST, "script.js"), "", "text/javascript");
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
 
         String xml = page.asXml();
         final String prefix = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>";
@@ -1135,7 +1135,7 @@ public class HtmlPageTest extends WebTestCase {
         webConnection.setDefaultResponse(TextUtil.stringToByteArray(html, "UTF-8"), 200, "OK", "text/html");
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
+        final HtmlPage page = client.getPage(URL_GARGOYLE);
         final String xml = page.asXml();
         assertTrue(xml.contains("<?xml "));
         assertTrue(xml.contains(unicodeString));
@@ -1330,8 +1330,8 @@ public class HtmlPageTest extends WebTestCase {
 
         client.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
-        final HtmlInlineFrame iframe = (HtmlInlineFrame) firstPage.getHtmlElementById("myIFrame");
+        final HtmlPage firstPage = client.getPage(URL_FIRST);
+        final HtmlInlineFrame iframe = firstPage.getHtmlElementById("myIFrame");
 
         assertEquals(URL_SECOND, iframe.getEnclosedPage().getWebResponse().getRequestUrl());
     }
@@ -1790,9 +1790,9 @@ public class HtmlPageTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage page = webClient.getPage(URL_FIRST);
         final HtmlAnchor anchor = page.getAnchors().get(0);
-        final HtmlPage secondPage = (HtmlPage) anchor.click();
+        final HtmlPage secondPage = anchor.click();
 
         assertEquals(new String[] {expectedMessage}, collectedConfirms);
         assertEquals(expectedPageTitle, secondPage.getTitleText());

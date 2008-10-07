@@ -174,7 +174,7 @@ public class HtmlNoScriptTest extends WebTestCase {
         webConnection.setDefaultResponse(html);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals(expected, page.getBody().asXml().replaceAll("\\r", ""));
     }
 }

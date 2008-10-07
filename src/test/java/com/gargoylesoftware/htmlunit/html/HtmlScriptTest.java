@@ -325,7 +325,7 @@ public class HtmlScriptTest extends WebTestCase {
         final List<String> actual = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(actual));
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals(2, conn.getRequestCount());
 
         page.cloneNode(true);

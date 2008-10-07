@@ -885,7 +885,7 @@ public class HTMLElementTest extends WebTestCase {
         webConnection.setResponse(url1, html1);
         webConnection.setResponse(url2, html2);
         client.setWebConnection(webConnection);
-        final HtmlPage page = (HtmlPage) client.getPage(url1);
+        final HtmlPage page = client.getPage(url1);
         assertEquals(getExpectedAlerts(), collectedAlerts);
         assertEquals(url2.toExternalForm(), page.getWebResponse().getRequestUrl().toExternalForm());
     }
@@ -1203,7 +1203,7 @@ public class HTMLElementTest extends WebTestCase {
         webClient.setWebConnection(webConnection);
         final CollectingAlertHandler clientCollectedAlertsHandler = new CollectingAlertHandler();
         webClient.setAlertHandler(clientCollectedAlertsHandler);
-        final HtmlPage clientPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage clientPage = webClient.getPage(URL_FIRST);
         final HtmlAnchor clientHashAnchor = clientPage.getAnchorByName("hash");
         clientHashAnchor.click();
 
@@ -2184,7 +2184,7 @@ public class HTMLElementTest extends WebTestCase {
 
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         final HtmlButton button1 = (HtmlButton) firstPage
@@ -2227,7 +2227,7 @@ public class HTMLElementTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         final HtmlButton buttonA = (HtmlButton) firstPage.getHtmlElementById("clickme");
@@ -2270,7 +2270,7 @@ public class HTMLElementTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         final HtmlButton buttonA = (HtmlButton) firstPage.getHtmlElementById("clickme");

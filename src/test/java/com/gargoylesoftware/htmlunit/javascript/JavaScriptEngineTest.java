@@ -89,7 +89,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         webConnection.setDefaultResponse(content);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
+        final HtmlPage page = client.getPage(URL_GARGOYLE);
 
         final HtmlTextInput textInput = (HtmlTextInput) page.getHtmlElementById("textfield1");
         assertEquals("foo", textInput.getValueAttribute());
@@ -278,7 +278,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
         final ClickableElement div = ((ClickableElement) page.getHtmlElementById("testdiv"));
 
         page.getAnchors().get(0).click();
@@ -317,7 +317,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
+        final HtmlPage page = client.getPage(URL_GARGOYLE);
         final HtmlScript htmlScript = (HtmlScript) page.getHtmlElementById("script1");
         assertNotNull(htmlScript);
         assertEquals(expectedAlerts, collectedAlerts);
@@ -353,7 +353,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
         getLog().debug(page.asXml());
         assertEquals(expectedAlerts, collectedAlerts);
 
@@ -478,7 +478,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         /*
          * detect encoding from meta tag
          */
-        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
+        final HtmlPage page = client.getPage(URL_GARGOYLE);
         final HtmlScript htmlScript = (HtmlScript) page.getHtmlElementById("script1");
 
         assertNotNull(htmlScript);
@@ -549,7 +549,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         webConnection.setResponse(new URL("http://first/test.js"), jsContent, "text/javascript");
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals("foo", page.getTitleText());
     }
 
@@ -873,7 +873,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final CountingJavaScriptEngine countingJavaScriptEngine = new CountingJavaScriptEngine(client);
         client.setJavaScriptEngine(countingJavaScriptEngine);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
+        final HtmlPage page = client.getPage(URL_GARGOYLE);
 
         assertEquals(1, countingJavaScriptEngine.getExecutionCount());
         assertEquals(0, countingJavaScriptEngine.getCallCount());
@@ -1427,7 +1427,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final HtmlPage page1 = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page1 = client.getPage(URL_FIRST);
         assertEquals(new String[] {"foo"}, collectedAlerts);
         assertEquals(1, countingJavaScriptEngine.getExecuteScriptCount());
         assertEquals(1, countingJavaScriptEngine.getCompileCount());
@@ -1497,7 +1497,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         webConnection.setDefaultResponse(html);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(new WebRequestSettings(URL_GARGOYLE, HttpMethod.POST));
+        final HtmlPage page = client.getPage(new WebRequestSettings(URL_GARGOYLE, HttpMethod.POST));
         return page;
     }
 }

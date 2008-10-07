@@ -600,7 +600,7 @@ public class NodeTest extends WebTestCase {
         conn.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(conn);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
         ((HtmlButtonInput) page.getHtmlElementById("myInput")).click();
         assertEquals(expectedAlerts, collectedAlerts);
     }

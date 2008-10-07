@@ -103,7 +103,7 @@ public class WebResponseImplTest extends WebTestCase {
         client.setWebConnection(webConnection);
         final WebRequestSettings settings = new WebRequestSettings(URL_FIRST);
         settings.setCharset("UTF-8");
-        final HtmlPage page = (HtmlPage) client.getPage(settings);
+        final HtmlPage page = client.getPage(settings);
         assertEquals(title, page.getTitleText());
     }
 

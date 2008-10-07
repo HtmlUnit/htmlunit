@@ -700,7 +700,7 @@ public class HTMLSelectElementTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, html);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage page = webClient.getPage(URL_FIRST);
         final HtmlForm form = page.getFormByName("form1");
         final HtmlSelect select = form.getSelectByName("select1");
         final Page page2 = select.setSelectedAttribute("option2", true);
@@ -803,8 +803,8 @@ public class HTMLSelectElementTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, html);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
-        final HtmlPage page2 = (HtmlPage) page.getFormByName("test").getSelectByName("select1").getOption(0).click();
+        final HtmlPage page = webClient.getPage(URL_FIRST);
+        final HtmlPage page2 = page.getFormByName("test").getSelectByName("select1").getOption(0).click();
         assertEquals("page 2", page2.getTitleText());
     }
 
