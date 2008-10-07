@@ -44,7 +44,7 @@ public abstract class DomNamespaceNode extends DomNode {
         super(page);
         WebAssert.notNull("qualifiedName", qualifiedName);
         qualifiedName_ = qualifiedName;
-        if (namespaceURI != null && namespaceURI.length() > 0 && qualifiedName.indexOf(':') != -1) {
+        if (qualifiedName.indexOf(':') != -1) {
             namespaceURI_ = namespaceURI;
             final int colonPosition = qualifiedName_.indexOf(':');
             localName_ = qualifiedName_.substring(colonPosition + 1);

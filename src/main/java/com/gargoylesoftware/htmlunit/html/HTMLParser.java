@@ -68,6 +68,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.HTMLBodyElement;
  */
 public final class HTMLParser {
 
+    /** XHTML namespace. */
+    public static final String XHTML_NAMESPACE = "http://www.w3.org/1999/xhtml";
+
     private static final Map<String, IElementFactory> ELEMENT_FACTORIES = new HashMap<String, IElementFactory>();
     private static boolean IgnoreOutsideContent_;
 
@@ -464,8 +467,8 @@ public final class HTMLParser {
             }
 
             // Add the new node.
-            final IElementFactory factory = getElementFactory(namespaceURI, tagLower);
-            final HtmlElement newElement = factory.createElement(page_, tagLower, atts);
+            final IElementFactory factory = getElementFactory(namespaceURI, qName);
+            final HtmlElement newElement = factory.createElementNS(page_, namespaceURI, qName, atts);
             newElement.setStartLocation(locator_.getLineNumber(), locator_.getColumnNumber());
             currentNode_.appendChild(newElement);
 
@@ -528,7 +531,7 @@ public final class HTMLParser {
             }
 
             // if we have added a extra node (tbody), we should remove it
-            if (!currentNode_.getNodeName().equalsIgnoreCase(localName)) {
+            if (!currentNode_.getLocalName().equalsIgnoreCase(localName)) {
                 stack_.pop(); //remove extra node from stack
             }
 
@@ -568,11 +571,16 @@ public final class HTMLParser {
         }
 
         /**
-         * @param tagName an HTML tag name, in lowercase
+         * @param qualifiedName the qualified name
          * @return the pre-registered element factory for the tag, or an UnknownElementFactory
          */
-        private IElementFactory getElementFactory(final String namespaceURI, final String tagName) {
-            if (namespaceURI.length() == 0 || namespaceURI.equals("http://www.w3.org/1999/xhtml")) {
+        public static IElementFactory getElementFactory(final String namespaceURI, final String qualifiedName) {
+            if ((namespaceURI.length() == 0 && !qualifiedName.contains(":")) || namespaceURI.equals(XHTML_NAMESPACE)) {
+                String tagName = qualifiedName;
+                final int index = tagName.indexOf(":");
+                if (index != -1) {
+                    tagName = tagName.substring(index + 1);
+                }
                 final IElementFactory factory = ELEMENT_FACTORIES.get(tagName);
 
                 if (factory != null) {

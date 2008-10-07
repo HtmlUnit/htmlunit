@@ -434,8 +434,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @return the new HTML element
      */
     public HtmlElement createHtmlElementNS(final String namespaceURI, final String qualifiedName) {
-        final String tagLower = qualifiedName.toLowerCase().substring(qualifiedName.indexOf(':') + 1);
-        return HTMLParser.getFactory(tagLower).createElementNS(this, namespaceURI, qualifiedName, null);
+        return HtmlUnitDOMBuilder.getElementFactory(namespaceURI, qualifiedName)
+            .createElementNS(this, namespaceURI, qualifiedName, null);
     }
 
     /**

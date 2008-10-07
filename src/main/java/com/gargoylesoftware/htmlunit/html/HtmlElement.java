@@ -590,7 +590,7 @@ public abstract class HtmlElement extends DomElement implements Element {
         if (getNamespaceURI() == null) {
             return getLocalName().toLowerCase();
         }
-        return getQualifiedName();
+        return getLocalName();
     }
 
     /** @return the node type */

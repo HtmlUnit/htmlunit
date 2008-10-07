@@ -108,6 +108,10 @@ public class Node extends SimpleScriptable {
     public String jsxGet_nodeName() {
         final DomNode domNode = getDomNodeOrDie();
         String nodeName = domNode.getNodeName();
+        final String prefix = getDomNodeOrDie().getPrefix();
+        if (prefix != null) {
+            nodeName = prefix + ':' + nodeName;
+        }
 
         // If this is an HtmlElement then flip the result to uppercase. This should really be
         // changed in HtmlElement itself but that would break backwards compatibility fairly

@@ -163,7 +163,7 @@ public class XMLSerializerTest extends WebTestCase {
     private String constructPageContent(final String serializationText) {
         final String escapedText = serializationText.replace("\n", "\\n");
 
-        final StringBuffer buffer = new StringBuffer();
+        final StringBuilder buffer = new StringBuilder();
         buffer.append(
               "<html><head><title>foo</title><script>\n"
             + "  function test() {\n");

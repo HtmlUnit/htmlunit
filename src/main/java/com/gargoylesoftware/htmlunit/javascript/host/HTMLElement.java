@@ -281,6 +281,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     public String jsxGet_tagName() {
         String tagName = getHtmlElementOrDie().getTagName();
+        final String prefix = getDomNodeOrDie().getPrefix();
+        if (prefix != null) {
+            tagName = prefix + ':' + tagName;
+        }
         if (jsxGet_namespaceURI() == null) {
             tagName = tagName.toUpperCase();
         }
@@ -301,6 +305,13 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     public String jsxGet_localName() {
         String localName = getHtmlElementOrDie().getLocalName();
+        final String namespaceURI = getHtmlElementOrDie().getNamespaceURI();
+        if (namespaceURI == null || namespaceURI.length() == 0 || namespaceURI.equals(HTMLParser.XHTML_NAMESPACE)) {
+            final String prefix = getDomNodeOrDie().getPrefix();
+            if (prefix != null) {
+                localName = prefix + ':' + localName;
+            }
+        }
         if (jsxGet_namespaceURI() == null) {
             localName = localName.toUpperCase();
         }
@@ -312,6 +323,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the Namespace prefix
      */
     public String jsxGet_prefix() {
+        final String namespaceURI = getHtmlElementOrDie().getNamespaceURI();
+        if (namespaceURI == null || namespaceURI.length() == 0 || namespaceURI.equals(HTMLParser.XHTML_NAMESPACE)) {
+            return null;
+        }
         return getHtmlElementOrDie().getPrefix();
     }
 
