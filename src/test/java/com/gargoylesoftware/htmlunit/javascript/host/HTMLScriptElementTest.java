@@ -44,8 +44,8 @@ public class HTMLScriptElementTest extends WebTestCase {
      */
     @Test
     public void onReadyStateChangeHandler() throws Exception {
-        //IE gives "1 2 3 b=complete " if 'Check new version of stored pages' is set to 'Never'
-        onReadyStateChangeHandler(BrowserVersion.INTERNET_EXPLORER_6_0, "1 2 3 b=loading 4 b=loaded ");
+        //onReadyStateChangeHandler(BrowserVersion.INTERNET_EXPLORER_6_0, "1 2 4 3 b=complete ");
+        //IE7 gives "1 2 3 b=complete " if 'Check new version of stored pages' is set to 'Never'
         onReadyStateChangeHandler(BrowserVersion.INTERNET_EXPLORER_7_0, "1 2 3 b=loading 4 b=loaded ");
         onReadyStateChangeHandler(BrowserVersion.FIREFOX_2, "1 2 3 4 onload ");
         onReadyStateChangeHandler(BrowserVersion.FIREFOX_3, "1 2 3 4 onload ");
@@ -61,6 +61,7 @@ public class HTMLScriptElementTest extends WebTestCase {
             + "        var script = document.createElement('script');\n"
             + "        script.id = 'b';\n"
             + "        script.type = 'text/javascript';\n"
+            + "        script.onreadystatechange = null;\n"
             + "        script.onreadystatechange = function() {\n"
             + "          document.getElementById('myTextarea').value += script.id + '=' + script.readyState + ' ';\n"
             + "        }\n"
