@@ -54,7 +54,7 @@ public class PopupTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6, content, collectedAlerts);
     }
 
     /**

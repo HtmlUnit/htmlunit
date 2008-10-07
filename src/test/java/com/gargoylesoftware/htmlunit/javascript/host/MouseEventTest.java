@@ -43,7 +43,7 @@ public class MouseEventTest extends WebTestCase {
     @Test
     public void testEventCoordinates() throws Exception {
         testEventCoordinates(BrowserVersion.FIREFOX_2);
-        testEventCoordinates(BrowserVersion.INTERNET_EXPLORER_6_0);
+        testEventCoordinates(BrowserVersion.INTERNET_EXPLORER_6);
     }
 
     private void testEventCoordinates(final BrowserVersion browser) throws Exception {

@@ -219,7 +219,7 @@ public class HtmlButtonTest extends WebTestCase {
      */
     @Test
     public void testDefaultButtonType_InternetExplorer() throws Exception {
-        doTestDefaultButtonType(BrowserVersion.INTERNET_EXPLORER_6_0, "button");
+        doTestDefaultButtonType(BrowserVersion.INTERNET_EXPLORER_6, "button");
     }
 
     private void doTestDefaultButtonType(final BrowserVersion browserVersion,

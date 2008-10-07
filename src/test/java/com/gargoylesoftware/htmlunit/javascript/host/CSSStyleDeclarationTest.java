@@ -352,7 +352,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void properties() throws Exception {
-        properties(BrowserVersion.INTERNET_EXPLORER_6_0, new String[]{
+        properties(BrowserVersion.INTERNET_EXPLORER_6, new String[]{
             "background",
             "backgroundAttachment",
             "backgroundColor",
@@ -696,7 +696,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void properties2() throws Exception {
-        properties2(BrowserVersion.INTERNET_EXPLORER_6_0, new String[]{
+        properties2(BrowserVersion.INTERNET_EXPLORER_6, new String[]{
             "background",
             "backgroundAttachment",
             "backgroundColor",

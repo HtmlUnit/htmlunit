@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="update" dev="asashour" id="2129180">
+                BrowserVersion: deprecate INTERNET_EXPLORER_6_0 and INTERNET_EXPLORER_7_0.
+            </action>
             <action type="fix" dev="asashour" id="2136953" due-to="David Bylsma">
                 JavaScript: document.cookie should overwrite existing cookie.
             </action>

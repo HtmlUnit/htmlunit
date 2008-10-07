@@ -131,7 +131,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             + "</configuration>\n";
         final Reader reader = new StringReader(configurationString);
         JavaScriptConfiguration.loadConfiguration(reader);
-        final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6_0;
+        final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
         final ClassConfiguration expectedConfig = new ClassConfiguration("HTMLDocument",
             HTMLDocument.class.getName(), null, null, null, true);
@@ -189,7 +189,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             + "</configuration>\n";
         final Reader reader = new StringReader(configurationString);
         JavaScriptConfiguration.loadConfiguration(reader);
-        final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6_0;
+        final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
         final ClassConfiguration config = configuration.getClassConfiguration("Document");
         assertTrue("JSObject is not set", config.isJsObject());
@@ -290,7 +290,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             + "</configuration>\n";
         final Reader reader = new StringReader(configurationString);
         JavaScriptConfiguration.loadConfiguration(reader);
-        final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6_0;
+        final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
         final ClassConfiguration expectedConfig = new ClassConfiguration("Document",
             HTMLDocument.class.getName(), null, null, null, true);
@@ -325,7 +325,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             + "</configuration>\n";
         final Reader reader = new StringReader(configurationString);
         JavaScriptConfiguration.loadConfiguration(reader);
-        final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6_0;
+        final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
         final ClassConfiguration expectedConfig = new ClassConfiguration("Document",
             HTMLDocument.class.getName(), null, null, null, true);
@@ -360,7 +360,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             + "</configuration>\n";
         final Reader reader = new StringReader(configurationString);
         JavaScriptConfiguration.loadConfiguration(reader);
-        final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6_0;
+        final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
         final ClassConfiguration expectedConfig = new ClassConfiguration("Document",
             HTMLDocument.class.getName(), null, null, null, true);
@@ -387,7 +387,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             + "</configuration>\n";
         final Reader reader = new StringReader(configurationString);
         JavaScriptConfiguration.loadConfiguration(reader);
-        final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6_0;
+        final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
         final ClassConfiguration expectedConfig = new ClassConfiguration("Document",
             HTMLDocument.class.getName(), null, null, null, true);
@@ -416,7 +416,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             + "</configuration>\n";
         final Reader reader = new StringReader(configurationString);
         JavaScriptConfiguration.loadConfiguration(reader);
-        final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6_0;
+        final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
         final ClassConfiguration expectedConfig = new ClassConfiguration("Document",
             HTMLDocument.class.getName(), null, null, null, true);
@@ -558,7 +558,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             + "</configuration>\n";
         final Reader reader = new StringReader(configurationString);
         JavaScriptConfiguration.loadConfiguration(reader);
-        final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6_0;
+        final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
         assertTrue("Requested property should have existed",
             configuration.propertyExists(HTMLDocument.class, "readyState"));
@@ -589,7 +589,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             + "</configuration>\n";
         final Reader reader = new StringReader(configurationString);
         JavaScriptConfiguration.loadConfiguration(reader);
-        final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6_0;
+        final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
         Assert.assertFalse("Requested property should not exist",
             configuration.propertyExists(HTMLDocument.class, "noreadyState"));

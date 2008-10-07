@@ -46,7 +46,7 @@ public class HTMLScriptElementTest extends WebTestCase {
     public void onReadyStateChangeHandler() throws Exception {
         //onReadyStateChangeHandler(BrowserVersion.INTERNET_EXPLORER_6_0, "1 2 4 3 b=complete ");
         //IE7 gives "1 2 3 b=complete " if 'Check new version of stored pages' is set to 'Never'
-        onReadyStateChangeHandler(BrowserVersion.INTERNET_EXPLORER_7_0, "1 2 3 b=loading 4 b=loaded ");
+        onReadyStateChangeHandler(BrowserVersion.INTERNET_EXPLORER_7, "1 2 3 b=loading 4 b=loaded ");
         onReadyStateChangeHandler(BrowserVersion.FIREFOX_2, "1 2 3 4 onload ");
         onReadyStateChangeHandler(BrowserVersion.FIREFOX_3, "1 2 3 4 onload ");
     }
@@ -102,8 +102,8 @@ public class HTMLScriptElementTest extends WebTestCase {
      */
     @Test
     public void srcWithJavaScriptProtocol_Static() throws Exception {
-        srcWithJavaScriptProtocol_Static(BrowserVersion.INTERNET_EXPLORER_6_0, "1");
-        srcWithJavaScriptProtocol_Static(BrowserVersion.INTERNET_EXPLORER_7_0);
+        srcWithJavaScriptProtocol_Static(BrowserVersion.INTERNET_EXPLORER_6, "1");
+        srcWithJavaScriptProtocol_Static(BrowserVersion.INTERNET_EXPLORER_7);
         srcWithJavaScriptProtocol_Static(BrowserVersion.FIREFOX_2, "1");
     }
 
@@ -120,8 +120,8 @@ public class HTMLScriptElementTest extends WebTestCase {
      */
     @Test
     public void srcWithJavaScriptProtocol_Dynamic() throws Exception {
-        srcWithJavaScriptProtocol_Dynamic(BrowserVersion.INTERNET_EXPLORER_6_0, "1");
-        srcWithJavaScriptProtocol_Dynamic(BrowserVersion.INTERNET_EXPLORER_7_0);
+        srcWithJavaScriptProtocol_Dynamic(BrowserVersion.INTERNET_EXPLORER_6, "1");
+        srcWithJavaScriptProtocol_Dynamic(BrowserVersion.INTERNET_EXPLORER_7);
         srcWithJavaScriptProtocol_Dynamic(BrowserVersion.FIREFOX_2, "1");
     }
 
@@ -211,8 +211,8 @@ public class HTMLScriptElementTest extends WebTestCase {
     @Test
     public void onReadyStateChange_Order_NoBody() throws Exception {
         onReadyStateChange_Order_NoBody(BrowserVersion.FIREFOX_2, "3", "4", "2");
-        onReadyStateChange_Order_NoBody(BrowserVersion.INTERNET_EXPLORER_6_0, "1", "2", "3", "4", "5", "6");
-        onReadyStateChange_Order_NoBody(BrowserVersion.INTERNET_EXPLORER_7_0, "1", "2", "3", "4", "5", "6");
+        onReadyStateChange_Order_NoBody(BrowserVersion.INTERNET_EXPLORER_6, "1", "2", "3", "4", "5", "6");
+        onReadyStateChange_Order_NoBody(BrowserVersion.INTERNET_EXPLORER_7, "1", "2", "3", "4", "5", "6");
     }
 
     private void onReadyStateChange_Order_NoBody(final BrowserVersion version, final String... expected)
@@ -238,8 +238,8 @@ public class HTMLScriptElementTest extends WebTestCase {
      */
     @Test
     public void text() throws Exception {
-        text(BrowserVersion.INTERNET_EXPLORER_6_0);
-        text(BrowserVersion.INTERNET_EXPLORER_7_0);
+        text(BrowserVersion.INTERNET_EXPLORER_6);
+        text(BrowserVersion.INTERNET_EXPLORER_7);
         text(BrowserVersion.FIREFOX_2);
     }
 
@@ -285,7 +285,7 @@ public class HTMLScriptElementTest extends WebTestCase {
             + "</html>";
         final List<String> actual = new ArrayList<String>();
         final String[] expected = {"defer", "onload"};
-        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, html, actual);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6, html, actual);
         assertEquals(expected, actual);
     }
 }

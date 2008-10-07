@@ -95,22 +95,36 @@ public class BrowserVersion implements Serializable {
         "1.2", 3, "FF3", null);
 
     /** Internet Explorer 6. */
-    public static final BrowserVersion INTERNET_EXPLORER_6_0 = new BrowserVersion(
+    public static final BrowserVersion INTERNET_EXPLORER_6 = new BrowserVersion(
         INTERNET_EXPLORER, "4.0 (compatible; MSIE 6.0b; Windows 98)",
         "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98)", "1.2", 6, "IE6", null);
 
+    /**
+     * Internet Explorer 6.
+     * @deprecated As of 2.4, please use {@link #INTERNET_EXPLORER_6} instead.
+     */
+    @Deprecated
+    public static final BrowserVersion INTERNET_EXPLORER_6_0 = INTERNET_EXPLORER_6;
+
     /** Internet Explorer 7. */
-    public static final BrowserVersion INTERNET_EXPLORER_7_0 = new BrowserVersion(
+    public static final BrowserVersion INTERNET_EXPLORER_7 = new BrowserVersion(
         INTERNET_EXPLORER, "4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322)",
         "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322)", "1.2", 7, "IE7", null);
 
+    /**
+     * Internet Explorer 7.
+     * @deprecated As of 2.4, please use {@link #INTERNET_EXPLORER_7} instead.
+     */
+    @Deprecated
+    public static final BrowserVersion INTERNET_EXPLORER_7_0 = INTERNET_EXPLORER_7;
+
     /** The default browser version. */
-    private static BrowserVersion DefaultBrowserVersion_ = INTERNET_EXPLORER_7_0;
+    private static BrowserVersion DefaultBrowserVersion_ = INTERNET_EXPLORER_7;
 
     /** Register plugins for the Firefox browser versions. */
     static {
-        INTERNET_EXPLORER_6_0.initDefaultFeatures();
-        INTERNET_EXPLORER_7_0.initDefaultFeatures();
+        INTERNET_EXPLORER_6.initDefaultFeatures();
+        INTERNET_EXPLORER_7.initDefaultFeatures();
         FIREFOX_2.initDefaultFeatures();
         FIREFOX_3.initDefaultFeatures();
         final PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
@@ -200,7 +214,7 @@ public class BrowserVersion implements Serializable {
 
     /**
      * Returns the default browser version that is used whenever a specific version isn't specified.
-     * Defaults to {@link #INTERNET_EXPLORER_7_0}.
+     * Defaults to {@link #INTERNET_EXPLORER_7}.
      * @return the default browser version
      */
     public static BrowserVersion getDefault() {

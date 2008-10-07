@@ -45,7 +45,7 @@ public class XMLDocumentTest extends WebTestCase {
      */
     @Test
     public void testAsync() throws Exception {
-        testAsync(BrowserVersion.INTERNET_EXPLORER_7_0);
+        testAsync(BrowserVersion.INTERNET_EXPLORER_7);
         testAsync(BrowserVersion.FIREFOX_2);
     }
 
@@ -76,7 +76,7 @@ public class XMLDocumentTest extends WebTestCase {
      */
     @Test
     public void testLoad() throws Exception {
-        testLoad(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "books", "books", "1", "book", "0"});
+        testLoad(BrowserVersion.INTERNET_EXPLORER_7, new String[] {"true", "books", "books", "1", "book", "0"});
         testLoad(BrowserVersion.FIREFOX_2, new String[] {"true", "books", "books", "3", "#text", "0"});
     }
 
@@ -126,7 +126,7 @@ public class XMLDocumentTest extends WebTestCase {
      */
     @Test
     public void testLoad_relativeURL() throws Exception {
-        testLoad_relativeURL(BrowserVersion.INTERNET_EXPLORER_7_0,
+        testLoad_relativeURL(BrowserVersion.INTERNET_EXPLORER_7,
                 new String[] {"true", "books", "books", "1", "book"});
         testLoad_relativeURL(BrowserVersion.FIREFOX_2,
                 new String[] {"true", "books", "books", "3", "#text"});
@@ -190,7 +190,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "</body></html>";
         final String[] expectedAlerts = {"false"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, content, collectedAlerts);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -207,7 +207,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, content, null);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7, content, null);
     }
 
     /**
@@ -215,7 +215,7 @@ public class XMLDocumentTest extends WebTestCase {
      */
     @Test
     public void testSelectNodes() throws Exception {
-        testSelectNodes(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "1", "books"});
+        testSelectNodes(BrowserVersion.INTERNET_EXPLORER_7, new String[] {"true", "1", "books"});
         try {
             testSelectNodes(BrowserVersion.FIREFOX_2, new String[] {"true", "1", "books"});
             fail("selectNodes is not supported in Firefox.");
@@ -303,7 +303,7 @@ public class XMLDocumentTest extends WebTestCase {
 
         final String[] expectedAlerts = {"true", "2", "1"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7_0);
+        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
@@ -335,7 +335,7 @@ public class XMLDocumentTest extends WebTestCase {
 
         final String[] expectedAlerts = {"book", "#document", "book", "#document"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, content, collectedAlerts);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -344,7 +344,7 @@ public class XMLDocumentTest extends WebTestCase {
      */
     @Test
     public void testLoadXML_Namespace() throws Exception {
-        testLoadXML_Namespace(BrowserVersion.INTERNET_EXPLORER_7_0);
+        testLoadXML_Namespace(BrowserVersion.INTERNET_EXPLORER_7);
         testLoadXML_Namespace(BrowserVersion.FIREFOX_2);
     }
 
@@ -386,7 +386,7 @@ public class XMLDocumentTest extends WebTestCase {
      */
     @Test
     public void testLoadXML_XMLSpaceAttribute() throws Exception {
-        testLoadXML_XMLSpaceAttribute(BrowserVersion.INTERNET_EXPLORER_7_0);
+        testLoadXML_XMLSpaceAttribute(BrowserVersion.INTERNET_EXPLORER_7);
         testLoadXML_XMLSpaceAttribute(BrowserVersion.FIREFOX_2);
     }
 
@@ -454,7 +454,7 @@ public class XMLDocumentTest extends WebTestCase {
             "true", "true", "true", "true", "true", "true", "true", "true"};
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7_0);
+        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
@@ -472,7 +472,7 @@ public class XMLDocumentTest extends WebTestCase {
     public void testCreateNSResolver() throws Exception {
         testCreateNSResolver(BrowserVersion.FIREFOX_2, new String[] {"http://myNS"});
         try {
-            testCreateNSResolver(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"http://myNS"});
+            testCreateNSResolver(BrowserVersion.INTERNET_EXPLORER_7, new String[] {"http://myNS"});
             fail("'createNSResolver' is not supported in IE.");
         }
         catch (final Exception e) {
@@ -517,7 +517,7 @@ public class XMLDocumentTest extends WebTestCase {
     public void testLoad_Encoding() throws Exception {
         final String[] expectedAlerts =
         {"1610", "1575", "32", "1604", "1610", "1610", "1610", "1610", "1610", "1610", "1604"};
-        testLoad_Encoding(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlerts);
+        testLoad_Encoding(BrowserVersion.INTERNET_EXPLORER_7, expectedAlerts);
         testLoad_Encoding(BrowserVersion.FIREFOX_2, expectedAlerts);
     }
 
@@ -580,7 +580,7 @@ public class XMLDocumentTest extends WebTestCase {
 
         final String[] expectedAlerts = {"columns"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, collectedAlerts);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

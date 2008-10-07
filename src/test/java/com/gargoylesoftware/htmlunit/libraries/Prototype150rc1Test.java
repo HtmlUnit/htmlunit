@@ -47,7 +47,7 @@ public class Prototype150rc1Test extends WebTestCase {
     @Test
     public void ajax() throws Exception {
         final String filename = "ajax.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 3, 11, 0, 0);
+        test(BrowserVersion.INTERNET_EXPLORER_7, filename, 3, 11, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 3, 11, 0, 0);
     }
 
@@ -57,7 +57,7 @@ public class Prototype150rc1Test extends WebTestCase {
     @Test
     public void array() throws Exception {
         final String filename = "array.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 12, 49, 0, 0);
+        test(BrowserVersion.INTERNET_EXPLORER_7, filename, 12, 49, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 12, 49, 0, 0);
     }
 
@@ -67,7 +67,7 @@ public class Prototype150rc1Test extends WebTestCase {
     @Test
     public void base() throws Exception {
         final String filename = "base.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 4, 48, 0, 0);
+        test(BrowserVersion.INTERNET_EXPLORER_7, filename, 4, 48, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 4, 48, 0, 0);
     }
 
@@ -80,7 +80,7 @@ public class Prototype150rc1Test extends WebTestCase {
             return;
         }
         final String filename = "dom.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 25, 253, 1, 0);
+        test(BrowserVersion.INTERNET_EXPLORER_7, filename, 25, 253, 1, 0);
         test(BrowserVersion.FIREFOX_2, filename, 25, 254, 0, 0);
     }
 
@@ -90,7 +90,7 @@ public class Prototype150rc1Test extends WebTestCase {
     @Test
     public void elementMixins() throws Exception {
         final String filename = "element_mixins.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 4, 7, 0, 0);
+        test(BrowserVersion.INTERNET_EXPLORER_7, filename, 4, 7, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 4, 7, 0, 0);
     }
 
@@ -100,7 +100,7 @@ public class Prototype150rc1Test extends WebTestCase {
     @Test
     public void enumerable() throws Exception {
         final String filename = "enumerable.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename,  23, 67, 0, 0);
+        test(BrowserVersion.INTERNET_EXPLORER_7, filename,  23, 67, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename,  23, 67, 0, 0);
     }
 
@@ -113,7 +113,7 @@ public class Prototype150rc1Test extends WebTestCase {
             return;
         }
         final String filename = "form.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 4, 21, 0, 0);
+        test(BrowserVersion.INTERNET_EXPLORER_7, filename, 4, 21, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 4, 21, 0, 0);
     }
 
@@ -124,7 +124,7 @@ public class Prototype150rc1Test extends WebTestCase {
     @Test
     public void hash() throws Exception {
         final String filename = "hash.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 5, 19, 0, 0);
+        test(BrowserVersion.INTERNET_EXPLORER_7, filename, 5, 19, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 5, 19, 0, 0);
     }
 
@@ -137,7 +137,7 @@ public class Prototype150rc1Test extends WebTestCase {
             return;
         }
         final String filename = "position.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 5, 25, 3, 0);
+        test(BrowserVersion.INTERNET_EXPLORER_7, filename, 5, 25, 3, 0);
         test(BrowserVersion.FIREFOX_2, filename, 5, 28, 0, 0);
     }
 
@@ -147,7 +147,7 @@ public class Prototype150rc1Test extends WebTestCase {
     @Test
     public void range() throws Exception {
         final String filename = "range.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 6, 21, 0, 0);
+        test(BrowserVersion.INTERNET_EXPLORER_7, filename, 6, 21, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 6, 21, 0, 0);
     }
 
@@ -161,7 +161,7 @@ public class Prototype150rc1Test extends WebTestCase {
         }
         final String filename = "selector.html";
         //HtmlUnit with IE succeeds for all :)
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 18, 35, 9, 1);
+        test(BrowserVersion.INTERNET_EXPLORER_7, filename, 18, 35, 9, 1);
     }
 
     /**
@@ -180,7 +180,7 @@ public class Prototype150rc1Test extends WebTestCase {
     @Test
     public void string() throws Exception {
         final String filename = "string.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 19, 76, 0, 0);
+        test(BrowserVersion.INTERNET_EXPLORER_7, filename, 19, 76, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 19, 76, 0, 0);
     }
 

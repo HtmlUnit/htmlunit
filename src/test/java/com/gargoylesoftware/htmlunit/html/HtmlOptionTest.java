@@ -203,8 +203,8 @@ public class HtmlOptionTest extends WebTestCase {
     @Test
     public void testDisabled() throws Exception {
         testDisabled(BrowserVersion.FIREFOX_2, true, false);
-        testDisabled(BrowserVersion.INTERNET_EXPLORER_6_0, false, false);
-        testDisabled(BrowserVersion.INTERNET_EXPLORER_7_0, false, false);
+        testDisabled(BrowserVersion.INTERNET_EXPLORER_6, false, false);
+        testDisabled(BrowserVersion.INTERNET_EXPLORER_7, false, false);
     }
 
     private void testDisabled(final BrowserVersion version, final boolean d1, final boolean d2) throws Exception {

@@ -36,7 +36,7 @@ public class HTMLLabelElementTest extends WebTestCase {
      */
     @Test
     public void testHtmlFor() throws Exception {
-        testHtmlFor(BrowserVersion.INTERNET_EXPLORER_7_0);
+        testHtmlFor(BrowserVersion.INTERNET_EXPLORER_7);
         testHtmlFor(BrowserVersion.FIREFOX_2);
     }
 
@@ -69,7 +69,7 @@ public class HTMLLabelElementTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        testHtmlFor_click(BrowserVersion.INTERNET_EXPLORER_7_0, true);
+        testHtmlFor_click(BrowserVersion.INTERNET_EXPLORER_7, true);
         testHtmlFor_click(BrowserVersion.FIREFOX_2, false);
     }
 

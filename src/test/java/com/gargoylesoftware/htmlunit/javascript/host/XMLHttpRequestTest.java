@@ -78,7 +78,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     @Test
     public void testSyncUse() throws Exception {
         testSyncUse(BrowserVersion.FIREFOX_2);
-        testSyncUse(BrowserVersion.INTERNET_EXPLORER_6_0);
+        testSyncUse(BrowserVersion.INTERNET_EXPLORER_6);
     }
 
     /**
@@ -88,7 +88,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     @Test
     public void testCreation() throws Exception {
         testCreation(BrowserVersion.FIREFOX_2, new String[] {"[object XMLHttpRequest]"});
-        testCreation(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {"activeX created"});
+        testCreation(BrowserVersion.INTERNET_EXPLORER_6, new String[] {"activeX created"});
     }
 
     /**
@@ -176,7 +176,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     @Test
     public void testAsyncUse() throws Exception {
         testAsyncUse(BrowserVersion.FIREFOX_2);
-        testAsyncUse(BrowserVersion.INTERNET_EXPLORER_6_0);
+        testAsyncUse(BrowserVersion.INTERNET_EXPLORER_6);
     }
 
     void testAsyncUse(final BrowserVersion browserVersion) throws Exception {
@@ -236,7 +236,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     public void testAsyncUseWithNetworkConnectionFailure() throws Exception {
         testAsyncUseWithNetworkConnectionFailure(BrowserVersion.FIREFOX_2,
             UNINITIALIZED, LOADING, LOADING, LOADED, COMPLETED, MSG_NO_CONTENT, MSG_PROCESSING_ERROR);
-        testAsyncUseWithNetworkConnectionFailure(BrowserVersion.INTERNET_EXPLORER_6_0,
+        testAsyncUseWithNetworkConnectionFailure(BrowserVersion.INTERNET_EXPLORER_6,
             UNINITIALIZED, LOADING, LOADING, LOADED, COMPLETED, MSG_NO_CONTENT);
     }
 
@@ -448,7 +448,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_6_0);
+        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_6);
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
@@ -499,7 +499,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     @Test
     public void testSendGETWithContent() throws Exception {
         testSend(BrowserVersion.FIREFOX_2, "'foo'");
-        testSend(BrowserVersion.INTERNET_EXPLORER_6_0, "'foo'");
+        testSend(BrowserVersion.INTERNET_EXPLORER_6, "'foo'");
     }
 
     /**
@@ -508,7 +508,7 @@ public class XMLHttpRequestTest extends WebTestCase {
      */
     @Test
     public void testSendNoArg() throws Exception {
-        testSendNoArg(BrowserVersion.INTERNET_EXPLORER_6_0);
+        testSendNoArg(BrowserVersion.INTERNET_EXPLORER_6);
         testSendNoArg(BrowserVersion.FIREFOX_2);
     }
 
@@ -630,7 +630,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         final String[] expectedAlertsFF = {};
         testReplaceOnTextData(BrowserVersion.FIREFOX_2, expectedAlertsFF);
         final String[] expectedAlertsIE = {"ibcdefg", "xxxxxfg"};
-        testReplaceOnTextData(BrowserVersion.INTERNET_EXPLORER_6_0, expectedAlertsIE);
+        testReplaceOnTextData(BrowserVersion.INTERNET_EXPLORER_6, expectedAlertsIE);
     }
 
     /**
@@ -697,7 +697,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     @Test
     public void testSetLocation() throws Exception {
         testSetLocation(BrowserVersion.FIREFOX_2);
-        testSetLocation(BrowserVersion.INTERNET_EXPLORER_6_0);
+        testSetLocation(BrowserVersion.INTERNET_EXPLORER_6);
     }
 
     void testSetLocation(final BrowserVersion browserVersion) throws Exception {
@@ -843,7 +843,7 @@ public class XMLHttpRequestTest extends WebTestCase {
 
         final String[] expectedAlerts = {"0"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, content, collectedAlerts);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -927,7 +927,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "<content>blah2</content>\n"
             + "</xml>";
 
-        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7_0);
+        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7);
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
@@ -1089,7 +1089,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         final String[] expectedAlertsFF = {};
         testOnreadystatechange_sync(BrowserVersion.FIREFOX_2, expectedAlertsFF);
         final String[] expectedAlertsIE = {"1", "2", "3", "4"};
-        testOnreadystatechange_sync(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlertsIE);
+        testOnreadystatechange_sync(BrowserVersion.INTERNET_EXPLORER_7, expectedAlertsIE);
     }
 
     private void testOnreadystatechange_sync(final BrowserVersion browserVersion, final String[] expectedAlerts)
@@ -1143,7 +1143,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     public void testResponseXML_getElementById() throws Exception {
         final String[] expectedAlertsIE = {"[object]", "[object]", "[object]",
             "<body xmlns=\"http://www.w3.org/1999/xhtml\"><span id=\"out\">Hello Bob Dole!</span></body>"};
-        testResponseXML_getElementById(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlertsIE);
+        testResponseXML_getElementById(BrowserVersion.INTERNET_EXPLORER_7, expectedAlertsIE);
 
         final String[] expectedAlertsFF = {"[object Element]", "[object Element]", "[object HTMLBodyElement]",
             "[object HTMLSpanElement]", "[object XMLDocument]", "undefined"};

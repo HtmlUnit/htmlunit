@@ -1143,7 +1143,7 @@ public class WebClientTest extends WebTestCase {
         // Create the client.
         final String defaultProxyHost = "defaultProxyHost";
         final int defaultProxyPort = 777;
-        final WebClient webClient = new WebClient(BrowserVersion.INTERNET_EXPLORER_6_0,
+        final WebClient webClient = new WebClient(BrowserVersion.INTERNET_EXPLORER_6,
             defaultProxyHost, defaultProxyPort);
 
         // Configure the mock web connection.
@@ -1205,7 +1205,7 @@ public class WebClientTest extends WebTestCase {
         final String defaultProxyHost = "defaultProxyHost";
         final int defaultProxyPort = 777;
         final String html = "<html><head><title>Hello World</title></head><body></body></html>";
-        final WebClient webClient = new WebClient(BrowserVersion.INTERNET_EXPLORER_6_0,
+        final WebClient webClient = new WebClient(BrowserVersion.INTERNET_EXPLORER_6,
                 defaultProxyHost, defaultProxyPort);
 
         webClient.getProxyConfig().addHostsToProxyBypass("hostToByPass");
@@ -1242,7 +1242,7 @@ public class WebClientTest extends WebTestCase {
         final String html = "<html><head><title>Hello World</title>\n"
             + "<script language='javascript' type='text/javascript' src='foo.js'></script>\n"
             + "</head><body></body></html>";
-        final WebClient webClient = new WebClient(BrowserVersion.INTERNET_EXPLORER_6_0,
+        final WebClient webClient = new WebClient(BrowserVersion.INTERNET_EXPLORER_6,
                 defaultProxyHost, defaultProxyPort);
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, html);
@@ -1538,7 +1538,7 @@ public class WebClientTest extends WebTestCase {
     @Test
     public void testBinaryFileFromFileSystem() throws Exception {
         testBinaryFileFromFileSystem(BrowserVersion.FIREFOX_2);
-        testBinaryFileFromFileSystem(BrowserVersion.INTERNET_EXPLORER_6_0);
+        testBinaryFileFromFileSystem(BrowserVersion.INTERNET_EXPLORER_6);
     }
 
     private void testBinaryFileFromFileSystem(final BrowserVersion browser) throws Exception {
@@ -1895,8 +1895,8 @@ public class WebClientTest extends WebTestCase {
      */
     @Test
     public void testOpenWindowWithAboutBlank() throws Exception {
-        testOpenWindowWithAboutBlank(BrowserVersion.INTERNET_EXPLORER_6_0);
-        testOpenWindowWithAboutBlank(BrowserVersion.INTERNET_EXPLORER_7_0);
+        testOpenWindowWithAboutBlank(BrowserVersion.INTERNET_EXPLORER_6);
+        testOpenWindowWithAboutBlank(BrowserVersion.INTERNET_EXPLORER_7);
         testOpenWindowWithAboutBlank(BrowserVersion.FIREFOX_2);
     }
 

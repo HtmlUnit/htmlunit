@@ -268,7 +268,7 @@ public class HtmlFileInputTest extends WebTestCase {
         server_ = HttpWebConnectionTest.startWebServer("./", null, servlets);
 
         testUploadFileWithNonASCIIName(BrowserVersion.FIREFOX_2);
-        testUploadFileWithNonASCIIName(BrowserVersion.INTERNET_EXPLORER_7_0);
+        testUploadFileWithNonASCIIName(BrowserVersion.INTERNET_EXPLORER_7);
     }
 
     private void testUploadFileWithNonASCIIName(final BrowserVersion browserVersion) throws Exception {

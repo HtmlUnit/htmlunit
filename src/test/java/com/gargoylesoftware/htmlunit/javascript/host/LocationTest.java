@@ -239,10 +239,10 @@ public class LocationTest extends WebTestCase {
         testSetHash_Encoding(BrowserVersion.FIREFOX_2,
             "#a b", "http://www.gargoylesoftware.com/#a%20b",
             "#a b", "http://www.gargoylesoftware.com/#a%20b");
-        testSetHash_Encoding(BrowserVersion.INTERNET_EXPLORER_6_0,
+        testSetHash_Encoding(BrowserVersion.INTERNET_EXPLORER_6,
             "#a b", "http://www.gargoylesoftware.com/#a b",
             "#a%20b", "http://www.gargoylesoftware.com/#a%20b");
-        testSetHash_Encoding(BrowserVersion.INTERNET_EXPLORER_7_0,
+        testSetHash_Encoding(BrowserVersion.INTERNET_EXPLORER_7,
             "#a b", "http://www.gargoylesoftware.com/#a b",
             "#a%20b", "http://www.gargoylesoftware.com/#a%20b");
     }

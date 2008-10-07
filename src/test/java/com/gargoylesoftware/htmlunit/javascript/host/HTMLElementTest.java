@@ -1980,7 +1980,7 @@ public class HTMLElementTest extends WebTestCase {
             + "<div id='b' onmouseover='document.getElementById(\"a\").fireEvent(\"onclick\")'>bar</div>\n"
             + "</body></html>";
         final List<String> actual = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, actual);
+        final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_7, html, actual);
         ((HtmlDivision) page.getHtmlElementById("a")).click();
         ((HtmlDivision) page.getHtmlElementById("b")).mouseOver();
         final String[] expected = {"clicked", "clicked"};

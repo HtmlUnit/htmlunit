@@ -566,7 +566,7 @@ public abstract class WebTestCase {
 
         final Map<String, BrowserVersion> testedBrowser = new HashMap<String, BrowserVersion>();
         testedBrowser.put("FIREFOX_2", BrowserVersion.FIREFOX_2);
-        testedBrowser.put("INTERNET_EXPLORER_6_0", BrowserVersion.INTERNET_EXPLORER_6_0);
+        testedBrowser.put("INTERNET_EXPLORER_6_0", BrowserVersion.INTERNET_EXPLORER_6);
 
         for (final Map.Entry<String, BrowserVersion> entry : testedBrowser.entrySet()) {
             final String browserKey = entry.getKey();

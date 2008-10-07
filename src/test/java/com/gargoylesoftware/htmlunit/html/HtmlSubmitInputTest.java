@@ -120,7 +120,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
     @Test
     public void testDefaultValue() throws Exception {
         final String[] expectedAlertsIE = {"Submit Query"};
-        testDefaultValue(BrowserVersion.INTERNET_EXPLORER_6_0, expectedAlertsIE);
+        testDefaultValue(BrowserVersion.INTERNET_EXPLORER_6, expectedAlertsIE);
         final String[] expectedAlertsFF = {""};
         testDefaultValue(BrowserVersion.FIREFOX_2, expectedAlertsFF);
     }

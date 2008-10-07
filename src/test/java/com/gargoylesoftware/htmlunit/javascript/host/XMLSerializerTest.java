@@ -38,7 +38,7 @@ public class XMLSerializerTest extends WebTestCase {
         final String expectedStringIE =
             "<note>13109<to>Tove</to>13109<from>Jani</from>13109<body>Do32not32forget32me32this32weekend!</body>"
             + "13109<outer>131099<inner>Some32Value</inner></outer>1310</note>1310";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, expectedStringIE);
+        test(BrowserVersion.INTERNET_EXPLORER_7, expectedStringIE);
         final String expectedStringFF =
             "<note>32<to>Tove</to>3210<from>Jani</from>321032<body>Do32not32forget32me32this32weekend!</body>"
             + "32<outer>10323232<inner>Some32Value</inner></outer>32</note>";
@@ -74,7 +74,7 @@ public class XMLSerializerTest extends WebTestCase {
             "<?xml32version=\"1.0\"?>1310<xsl:stylesheet32version=\"1.0\"32"
             + "xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">13109<xsl:template32match=\"/\">131099<html>1310999"
             + "<body>1310999</body>131099</html>13109</xsl:template>1310</xsl:stylesheet>1310";
-        nameSpaces(BrowserVersion.INTERNET_EXPLORER_7_0, expectedStringIE);
+        nameSpaces(BrowserVersion.INTERNET_EXPLORER_7, expectedStringIE);
         final String expectedStringFF =
             "<xsl:stylesheet32version=\"1.0\"32xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">103232"
             + "<xsl:template32match=\"/\">103232<html>1032323232<body>1032323232</body>103232</html>103232"
@@ -110,7 +110,7 @@ public class XMLSerializerTest extends WebTestCase {
                           + "</outer>"
                           + "</document>";
         attributes(BrowserVersion.FIREFOX_2, expected);
-        attributes(BrowserVersion.INTERNET_EXPLORER_7_0, expected + "1310");
+        attributes(BrowserVersion.INTERNET_EXPLORER_7, expected + "1310");
     }
 
     private void attributes(final BrowserVersion browserVersion, final String expectedString)
@@ -137,7 +137,7 @@ public class XMLSerializerTest extends WebTestCase {
                           + "</body>"
                           + "</html>";
         htmlAttributes(BrowserVersion.FIREFOX_2, expected);
-        htmlAttributes(BrowserVersion.INTERNET_EXPLORER_7_0, expected + "1310");
+        htmlAttributes(BrowserVersion.INTERNET_EXPLORER_7, expected + "1310");
     }
 
     private void htmlAttributes(final BrowserVersion browserVersion, final String expectedString)

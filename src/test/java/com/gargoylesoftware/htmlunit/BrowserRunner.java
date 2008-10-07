@@ -71,10 +71,10 @@ public class BrowserRunner extends Suite {
 
         if (BrowserVersionClassRunner.containsTestMethods(klass)) {
             if (runAll || property.contains("ie6")) {
-                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_6_0));
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_6));
             }
             if (runAll || property.contains("ie7")) {
-                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_7_0));
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_7));
             }
             if (runAll || property.contains("ff2")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_2));
@@ -182,10 +182,10 @@ public class BrowserRunner extends Suite {
     }
 
     static String getDescription(final BrowserVersion browserVersion) {
-        if (browserVersion == BrowserVersion.INTERNET_EXPLORER_6_0) {
+        if (browserVersion == BrowserVersion.INTERNET_EXPLORER_6) {
             return "Internet Explorer 6";
         }
-        else if (browserVersion == BrowserVersion.INTERNET_EXPLORER_7_0) {
+        else if (browserVersion == BrowserVersion.INTERNET_EXPLORER_7) {
             return "Internet Explorer 7";
         }
         else if (browserVersion == BrowserVersion.FIREFOX_2) {

@@ -499,7 +499,7 @@ public class WindowTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
 
         collectedAlerts.clear();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6, content, collectedAlerts);
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -1559,7 +1559,7 @@ public class WindowTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {"form1", "form2", "2", "4"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1593,7 +1593,7 @@ public class WindowTest extends WebTestCase {
         final String[] expectedAlerts = {"form1", "form2", "1", "DIV"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1662,7 +1662,7 @@ public class WindowTest extends WebTestCase {
         final String[] expectedAlerts = {"JavaScript", "JScript", "Invalid class string"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1776,7 +1776,7 @@ public class WindowTest extends WebTestCase {
             "onload", "test1, param null: false", "test2"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1800,7 +1800,7 @@ public class WindowTest extends WebTestCase {
         final String[] expectedAlerts = {"detached"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -2150,8 +2150,8 @@ public class WindowTest extends WebTestCase {
     @Test
     public void testOpenWindow_refererHeader() throws Exception {
         final String headerIE = null;
-        testOpenWindow_refererHeader(BrowserVersion.INTERNET_EXPLORER_6_0, headerIE);
-        testOpenWindow_refererHeader(BrowserVersion.INTERNET_EXPLORER_7_0, headerIE);
+        testOpenWindow_refererHeader(BrowserVersion.INTERNET_EXPLORER_6, headerIE);
+        testOpenWindow_refererHeader(BrowserVersion.INTERNET_EXPLORER_7, headerIE);
         final String headerFF = URL_FIRST.toString();
         testOpenWindow_refererHeader(BrowserVersion.FIREFOX_2, headerFF);
     }
@@ -2344,7 +2344,7 @@ public class WindowTest extends WebTestCase {
     public void testGetComputedStyle() throws Exception {
         testGetComputedStyle(BrowserVersion.FIREFOX_2);
         try {
-            testGetComputedStyle(BrowserVersion.INTERNET_EXPLORER_6_0);
+            testGetComputedStyle(BrowserVersion.INTERNET_EXPLORER_6);
             fail("'getComputedStyle' is not defined for IE");
         }
         catch (final Exception e) {
@@ -2554,7 +2554,7 @@ public class WindowTest extends WebTestCase {
      */
     @Test
     public void testWindowProperties() throws Exception {
-        testWindowProperties(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"undefined", "undefined"});
+        testWindowProperties(BrowserVersion.INTERNET_EXPLORER_7, new String[] {"undefined", "undefined"});
         testWindowProperties(BrowserVersion.FIREFOX_2, new String[] {"[Node]", "[Element]"});
     }
 
@@ -2603,7 +2603,7 @@ public class WindowTest extends WebTestCase {
      */
     @Test
     public void testCollectGarbage() throws Exception {
-        testCollectGarbage(BrowserVersion.INTERNET_EXPLORER_6_0, "function");
+        testCollectGarbage(BrowserVersion.INTERNET_EXPLORER_6, "function");
         testCollectGarbage(BrowserVersion.FIREFOX_2, "undefined");
     }
 
@@ -2660,7 +2660,7 @@ public class WindowTest extends WebTestCase {
         final String[] expectedAlerts = {"1"};
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, collectedAlerts);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

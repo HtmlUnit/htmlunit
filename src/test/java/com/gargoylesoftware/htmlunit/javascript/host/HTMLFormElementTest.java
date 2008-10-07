@@ -342,7 +342,7 @@ public class HTMLFormElementTest extends WebTestCase {
             "password: default9 default9 false false",
             "checkbox: default10 default10 false false",
             "textarea: default11 default11 undefined undefined" };
-        formResetTest(BrowserVersion.INTERNET_EXPLORER_6_0, expected);
+        formResetTest(BrowserVersion.INTERNET_EXPLORER_6, expected);
     }
 
     /**
@@ -1148,7 +1148,7 @@ public class HTMLFormElementTest extends WebTestCase {
     public void testOnSubmitEvent() throws Exception {
         final String[] expectedAlertsIE = {"srcElement null: false", "srcElement==form: true",
             "target null: true", "target==form: false"};
-        testOnSubmitEvent(BrowserVersion.INTERNET_EXPLORER_6_0, expectedAlertsIE);
+        testOnSubmitEvent(BrowserVersion.INTERNET_EXPLORER_6, expectedAlertsIE);
 
         final String[] expectedAlertsFF = {"srcElement null: true", "srcElement==form: false",
             "target null: false", "target==form: true"};

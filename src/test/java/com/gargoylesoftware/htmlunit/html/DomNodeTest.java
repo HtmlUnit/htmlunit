@@ -383,7 +383,7 @@ public class DomNodeTest extends WebTestCase {
 
         final String[] expectedAlerts = {"book", "0", "1"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7_0);
+        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);

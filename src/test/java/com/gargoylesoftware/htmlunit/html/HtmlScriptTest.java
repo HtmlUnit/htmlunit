@@ -177,7 +177,7 @@ public class HtmlScriptTest extends WebTestCase {
         assertEquals(expectedFF, actualFF);
 
         final List<String> actualIE = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, actualIE);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7, html, actualIE);
         final String[] expectedIE = new String[] {"normal", "deferred", "onload"};
         assertEquals(expectedIE, actualIE);
     }
@@ -211,8 +211,8 @@ public class HtmlScriptTest extends WebTestCase {
     @Test
     public void testSettingSrcAttribute() throws Exception {
         testSettingSrcAttribute(BrowserVersion.FIREFOX_2, new String[] {"1", "2", "3"});
-        testSettingSrcAttribute(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {"1", "2", "3", "4", "5"});
-        testSettingSrcAttribute(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"1", "2", "3", "4", "5"});
+        testSettingSrcAttribute(BrowserVersion.INTERNET_EXPLORER_6, new String[] {"1", "2", "3", "4", "5"});
+        testSettingSrcAttribute(BrowserVersion.INTERNET_EXPLORER_7, new String[] {"1", "2", "3", "4", "5"});
     }
 
     /**

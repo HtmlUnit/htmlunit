@@ -1747,8 +1747,8 @@ public class HtmlPageTest extends WebTestCase {
      */
     @Test
     public void testOnbeforeunloadHandler() throws Exception {
-        testOnbeforeunloadHandler(BrowserVersion.INTERNET_EXPLORER_7_0, false, "first");
-        testOnbeforeunloadHandler(BrowserVersion.INTERNET_EXPLORER_7_0, true, "second");
+        testOnbeforeunloadHandler(BrowserVersion.INTERNET_EXPLORER_7, false, "first");
+        testOnbeforeunloadHandler(BrowserVersion.INTERNET_EXPLORER_7, true, "second");
         testOnbeforeunloadHandler(BrowserVersion.FIREFOX_2, false, "first");
         testOnbeforeunloadHandler(BrowserVersion.FIREFOX_2, true, "second");
     }

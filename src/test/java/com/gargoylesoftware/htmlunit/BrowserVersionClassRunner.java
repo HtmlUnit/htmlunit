@@ -53,7 +53,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
             if (isDefined(alerts.value())) {
                 expectedAlerts = alerts.value();
             }
-            else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_6_0) {
+            else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_6) {
                 if (isDefined(alerts.IE6())) {
                     expectedAlerts = alerts.IE6();
                 }
@@ -61,7 +61,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                     expectedAlerts = alerts.IE();
                 }
             }
-            else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_7_0) {
+            else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_7) {
                 if (isDefined(alerts.IE7())) {
                     expectedAlerts = alerts.IE7();
                 }
@@ -145,13 +145,13 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         for (final Browser browser : browsers) {
             switch(browser) {
                 case INTERNET_EXPLORER_6:
-                    if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_6_0) {
+                    if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_6) {
                         return true;
                     }
                     break;
 
                 case INTERNET_EXPLORER_7:
-                    if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_7_0) {
+                    if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_7) {
                         return true;
                     }
                     break;

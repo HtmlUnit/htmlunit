@@ -1277,7 +1277,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      */
     @Test
     public void comment() throws Exception {
-        comment(BrowserVersion.INTERNET_EXPLORER_6_0);
+        comment(BrowserVersion.INTERNET_EXPLORER_6);
         comment(BrowserVersion.FIREFOX_2);
     }
 

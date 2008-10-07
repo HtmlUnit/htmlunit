@@ -227,7 +227,7 @@ public class DocumentTest extends WebTestCase {
     public void anchors() throws Exception {
         anchors(BrowserVersion.FIREFOX_2,
                 new String[] {"0", "1", "1", "true", "name: end"});
-        anchors(BrowserVersion.INTERNET_EXPLORER_6_0,
+        anchors(BrowserVersion.INTERNET_EXPLORER_6,
             new String[] {"0", "3", "3", "true", "id: firstLink"});
     }
 
@@ -372,7 +372,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void documentCreateElement2() throws Exception {
-        documentCreateElement2(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {
+        documentCreateElement2(BrowserVersion.INTERNET_EXPLORER_6, new String[] {
             "DIV,DIV,undefined,undefined,undefined", "HI:DIV,HI:DIV,undefined,undefined,undefined"});
         documentCreateElement2(BrowserVersion.FIREFOX_2, new String[] {
             "DIV,DIV,null,null,DIV", "HI:DIV,HI:DIV,null,null,HI:DIV"});
@@ -410,7 +410,7 @@ public class DocumentTest extends WebTestCase {
     @Test
     public void createElementNS() throws Exception {
         try {
-            createElementNS(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {});
+            createElementNS(BrowserVersion.INTERNET_EXPLORER_6, new String[] {});
             fail("IE6 does not support createElementNS");
         }
         catch (final Exception e) {
@@ -498,7 +498,7 @@ public class DocumentTest extends WebTestCase {
         final String escaped = "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '";
         final String divPlusEscaped = "<DIV id=div>" + escaped + "</DIV>";
         final String[] expected = {original, original, divPlusEscaped, escaped, original};
-        createTextNodeWithHtml(BrowserVersion.INTERNET_EXPLORER_6_0, expected);
+        createTextNodeWithHtml(BrowserVersion.INTERNET_EXPLORER_6, expected);
     }
 
     /**
@@ -567,8 +567,8 @@ public class DocumentTest extends WebTestCase {
     @Test
     public void appendChildAtDocumentLevel() throws Exception {
         appendChildAtDocumentLevel(BrowserVersion.FIREFOX_2, "1", "exception");
-        appendChildAtDocumentLevel(BrowserVersion.INTERNET_EXPLORER_6_0, "1", "2", "HTML", "DIV", "1");
-        appendChildAtDocumentLevel(BrowserVersion.INTERNET_EXPLORER_7_0, "1", "2", "HTML", "DIV", "1");
+        appendChildAtDocumentLevel(BrowserVersion.INTERNET_EXPLORER_6, "1", "2", "HTML", "DIV", "1");
+        appendChildAtDocumentLevel(BrowserVersion.INTERNET_EXPLORER_7, "1", "2", "HTML", "DIV", "1");
     }
 
     private void appendChildAtDocumentLevel(final BrowserVersion version, final String... expected)
@@ -1423,8 +1423,8 @@ public class DocumentTest extends WebTestCase {
     @Test
     public void write_Destination() throws Exception {
         write_Destination(BrowserVersion.FIREFOX_2, "null", "[object HTMLBodyElement]", "s1 s2 s3 s4 s5");
-        write_Destination(BrowserVersion.INTERNET_EXPLORER_6_0, "null", "[object]", "s1 s2 s3 s4 s5");
-        write_Destination(BrowserVersion.INTERNET_EXPLORER_7_0, "null", "[object]", "s1 s2 s3 s4 s5");
+        write_Destination(BrowserVersion.INTERNET_EXPLORER_6, "null", "[object]", "s1 s2 s3 s4 s5");
+        write_Destination(BrowserVersion.INTERNET_EXPLORER_7, "null", "[object]", "s1 s2 s3 s4 s5");
     }
 
     private void write_Destination(final BrowserVersion version, final String... expected)
@@ -1468,8 +1468,8 @@ public class DocumentTest extends WebTestCase {
     @Test
     public void write_BodyAttributesKept() throws Exception {
         write_BodyAttributesKept(BrowserVersion.FIREFOX_2, "null", "[object HTMLBodyElement]", "", "foo");
-        write_BodyAttributesKept(BrowserVersion.INTERNET_EXPLORER_6_0, "null", "[object]", "", "foo");
-        write_BodyAttributesKept(BrowserVersion.INTERNET_EXPLORER_7_0, "null", "[object]", "", "foo");
+        write_BodyAttributesKept(BrowserVersion.INTERNET_EXPLORER_6, "null", "[object]", "", "foo");
+        write_BodyAttributesKept(BrowserVersion.INTERNET_EXPLORER_7, "null", "[object]", "", "foo");
     }
 
     private void write_BodyAttributesKept(final BrowserVersion version, final String... expected)
@@ -1500,8 +1500,8 @@ public class DocumentTest extends WebTestCase {
     @Test
     public void write_ScriptExecutionOrder() throws Exception {
         write_ScriptExecutionOrder(BrowserVersion.FIREFOX_2, "1", "2", "3");
-        write_ScriptExecutionOrder(BrowserVersion.INTERNET_EXPLORER_6_0, "1", "2", "3");
-        write_ScriptExecutionOrder(BrowserVersion.INTERNET_EXPLORER_7_0, "1", "2", "3");
+        write_ScriptExecutionOrder(BrowserVersion.INTERNET_EXPLORER_6, "1", "2", "3");
+        write_ScriptExecutionOrder(BrowserVersion.INTERNET_EXPLORER_7, "1", "2", "3");
     }
 
     private void write_ScriptExecutionOrder(final BrowserVersion version, final String... expected)
@@ -1529,7 +1529,7 @@ public class DocumentTest extends WebTestCase {
     public void write_AssignedToVar() throws Exception {
         // IE accepts the use of detached functions
         final String[] expectedAlertsIE = {};
-        write_AssignedToVar(BrowserVersion.INTERNET_EXPLORER_6_0, expectedAlertsIE);
+        write_AssignedToVar(BrowserVersion.INTERNET_EXPLORER_6, expectedAlertsIE);
 
         // but FF doesn't
         final String[] expectedAlertsFF = {"exception occurred"};
@@ -1592,8 +1592,8 @@ public class DocumentTest extends WebTestCase {
     @Test
     public void write_WhenParsingFinished() throws Exception {
         write_WhenParsingFinished(BrowserVersion.FIREFOX_2);
-        write_WhenParsingFinished(BrowserVersion.INTERNET_EXPLORER_6_0);
-        write_WhenParsingFinished(BrowserVersion.INTERNET_EXPLORER_7_0);
+        write_WhenParsingFinished(BrowserVersion.INTERNET_EXPLORER_6);
+        write_WhenParsingFinished(BrowserVersion.INTERNET_EXPLORER_7);
     }
 
     private void write_WhenParsingFinished(final BrowserVersion browserVersion) throws Exception {
@@ -1932,7 +1932,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void all_tags() throws Exception {
-        all_tags(BrowserVersion.INTERNET_EXPLORER_6_0);
+        all_tags(BrowserVersion.INTERNET_EXPLORER_6);
         all_tags(BrowserVersion.FIREFOX_2);
     }
 
@@ -1973,7 +1973,7 @@ public class DocumentTest extends WebTestCase {
     @Test
     public void all_AsBoolean() throws Exception {
         final String[] alertsIE = {"true", "true"};
-        all_AsBoolean(BrowserVersion.INTERNET_EXPLORER_6_0, alertsIE);
+        all_AsBoolean(BrowserVersion.INTERNET_EXPLORER_6, alertsIE);
         final String[] alertsFF = {"false", "true"};
         all_AsBoolean(BrowserVersion.FIREFOX_2, alertsFF);
     }
@@ -2368,7 +2368,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void readyStateIE() throws Exception {
-        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_6_0);
+        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_6);
         final MockWebConnection webConnection = new MockWebConnection();
         final String content = "<html><head>\n"
             + "<script>\n"
@@ -2976,7 +2976,7 @@ public class DocumentTest extends WebTestCase {
         // test for IE
         final String[] expectedAlerts = {"true", "1", "about:blank", "about:blank"};
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
-        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, html, collectedAlerts);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
 
         // test for Mozilla
@@ -3010,7 +3010,7 @@ public class DocumentTest extends WebTestCase {
         final String[] expectedAlertsIE = {"false", "true"};
         collectedAlerts.clear();
         createTestPageForRealBrowserIfNeeded(html, expectedAlertsIE);
-        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, html, collectedAlerts);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6, html, collectedAlerts);
         assertEquals(expectedAlertsIE, collectedAlerts);
     }
 
@@ -3196,7 +3196,7 @@ public class DocumentTest extends WebTestCase {
             + "</script></head><body>\n"
             + "</body></html>";
         final List<String> actual = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, actual);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6, content, actual);
         final String[] expected = {"true", "object", "[object]"};
         assertEquals(expected, actual);
     }
@@ -3206,7 +3206,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void lementFromPoint() throws Exception {
-        elementFromPoint(BrowserVersion.INTERNET_EXPLORER_7_0);
+        elementFromPoint(BrowserVersion.INTERNET_EXPLORER_7);
         try {
             elementFromPoint(BrowserVersion.FIREFOX_2);
             fail("elementFromPoint is not supported in Firefox.");
@@ -3234,7 +3234,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void createElementWithAngleBrackets() throws Exception {
-        createElementWithAngleBrackets(BrowserVersion.INTERNET_EXPLORER_7_0);
+        createElementWithAngleBrackets(BrowserVersion.INTERNET_EXPLORER_7);
         createElementWithAngleBrackets(BrowserVersion.FIREFOX_2);
     }
 
@@ -3256,7 +3256,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void createElementWithHtml() throws Exception {
-        createElementWithHtml(BrowserVersion.INTERNET_EXPLORER_7_0);
+        createElementWithHtml(BrowserVersion.INTERNET_EXPLORER_7);
         try {
             createElementWithHtml(BrowserVersion.FIREFOX_2);
             fail("document.createElement(html) is not supported with Firefox");
@@ -3370,7 +3370,7 @@ public class DocumentTest extends WebTestCase {
             return;
         }
         writeStyle(BrowserVersion.FIREFOX_2, new String[] {"SCRIPT", "TITLE"});
-        writeStyle(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"STYLE", "SCRIPT"});
+        writeStyle(BrowserVersion.INTERNET_EXPLORER_7, new String[] {"STYLE", "SCRIPT"});
     }
 
     private void writeStyle(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
@@ -3429,8 +3429,8 @@ public class DocumentTest extends WebTestCase {
     @Test
     public void noBodyTag() throws Exception {
         noBodyTag(BrowserVersion.FIREFOX_2, new String[] {"1: null", "2: null", "3: [object HTMLBodyElement]"});
-        noBodyTag(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {"1: null", "2: [object]", "3: [object]"});
-        noBodyTag(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"1: null", "2: [object]", "3: [object]"});
+        noBodyTag(BrowserVersion.INTERNET_EXPLORER_6, new String[] {"1: null", "2: [object]", "3: [object]"});
+        noBodyTag(BrowserVersion.INTERNET_EXPLORER_7, new String[] {"1: null", "2: [object]", "3: [object]"});
     }
 
     private void noBodyTag(final BrowserVersion version, final String[] expected) throws Exception {
@@ -3457,8 +3457,8 @@ public class DocumentTest extends WebTestCase {
     @Test
     public void noBodyTag_IFrame() throws Exception {
         noBodyTag_IFrame(BrowserVersion.FIREFOX_2, "1: [object HTMLBodyElement]", "2: [object HTMLBodyElement]");
-        noBodyTag_IFrame(BrowserVersion.INTERNET_EXPLORER_6_0, "1: null", "2: [object]");
-        noBodyTag_IFrame(BrowserVersion.INTERNET_EXPLORER_7_0, "1: null", "2: [object]");
+        noBodyTag_IFrame(BrowserVersion.INTERNET_EXPLORER_6, "1: null", "2: [object]");
+        noBodyTag_IFrame(BrowserVersion.INTERNET_EXPLORER_7, "1: null", "2: [object]");
     }
 
     private void noBodyTag_IFrame(final BrowserVersion version, final String... expected) throws Exception {
@@ -3490,8 +3490,8 @@ public class DocumentTest extends WebTestCase {
     @Test
     public void fireEvent() throws Exception {
         fireEvent(BrowserVersion.FIREFOX_2);
-        fireEvent(BrowserVersion.INTERNET_EXPLORER_6_0, "x");
-        fireEvent(BrowserVersion.INTERNET_EXPLORER_7_0, "x");
+        fireEvent(BrowserVersion.INTERNET_EXPLORER_6, "x");
+        fireEvent(BrowserVersion.INTERNET_EXPLORER_7, "x");
     }
 
     private void fireEvent(final BrowserVersion version, final String... expected) throws Exception {
@@ -3551,7 +3551,7 @@ public class DocumentTest extends WebTestCase {
             + "<input id='text2' onfocus='alert(\"onfocus text2\")'>\n"
             + "</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, html, collectedAlerts);
+        final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_6, html, collectedAlerts);
         final HtmlTextInput text1 = (HtmlTextInput) page.getHtmlElementById("text1");
         text1.focus();
         text1.click();
