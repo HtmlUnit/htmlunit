@@ -112,8 +112,8 @@ public class HTMLSelectElementTest extends WebTestCase {
         final String[] expectedAlerts = {"3", "1", "3", "2"};
         assertEquals(expectedAlerts, collectedAlerts);
 
-        final HtmlSubmitInput button = (HtmlSubmitInput) page.getHtmlElementById("clickMe");
-        final HtmlPage newPage = (HtmlPage) button.click();
+        final HtmlSubmitInput button = page.getHtmlElementById("clickMe");
+        final HtmlPage newPage = button.click();
 
         final MockWebConnection webConnection = (MockWebConnection) newPage.getWebClient().getWebConnection();
 
@@ -144,8 +144,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(getBrowserVersion(), html, null);
-        final HtmlSubmitInput button = (HtmlSubmitInput) page.getHtmlElementById("clickMe");
-        final HtmlPage newPage = (HtmlPage) button.click();
+        final HtmlSubmitInput button = page.getHtmlElementById("clickMe");
+        final HtmlPage newPage = button.click();
 
         assertEquals("http://test/?select1=option3&submit=button", newPage.getWebResponse().getRequestUrl());
     }
@@ -827,7 +827,7 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(getBrowserVersion(), html, null);
-        final Page page2 = ((ClickableElement) page.getHtmlElementById("testButton")).click();
+        final Page page2 = page.<ClickableElement>getHtmlElementById("testButton").click();
         final URL url2 = page2.getWebResponse().getRequestUrl();
         assertTrue("Select in URL " + url2, url2.toExternalForm().contains("testSelect=testValue"));
     }

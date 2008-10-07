@@ -169,7 +169,7 @@ public class GWT15Test extends WebTestCase {
      * @throws Exception if the test fails
      */
     private void i18n(final HtmlPage page, final String id, final String expectedValue) {
-        final HtmlTableDataCell cell = (HtmlTableDataCell) page.getHtmlElementById(id);
+        final HtmlTableDataCell cell = page.getHtmlElementById(id);
         tableDataCell(cell, expectedValue);
     }
 
@@ -182,7 +182,7 @@ public class GWT15Test extends WebTestCase {
      * @throws Exception if the test fails
      */
     private void i18n(final HtmlPage page, final String id, final String[] expectedValues) {
-        final HtmlTableDataCell cell = (HtmlTableDataCell) page.getHtmlElementById(id);
+        final HtmlTableDataCell cell = page.getHtmlElementById(id);
         final Object child = cell.getFirstChild();
         if (child instanceof HtmlSelect) {
             final HtmlSelect select = (HtmlSelect) child;

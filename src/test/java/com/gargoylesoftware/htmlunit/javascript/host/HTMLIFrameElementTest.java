@@ -166,8 +166,8 @@ public class HTMLIFrameElementTest extends WebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
-        ((HtmlDivision) page.getHtmlElementById("d1")).click();
-        ((HtmlDivision) page.getHtmlElementById("d2")).click();
+        page.<HtmlDivision>getHtmlElementById("d1").click();
+        page.<HtmlDivision>getHtmlElementById("d2").click();
 
         final String[] expectedAlerts = {"loaded", "loaded", "loaded"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -326,7 +326,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
         final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals("First", page.getTitleText());
 
-        final HtmlInlineFrame iframe = (HtmlInlineFrame) page.getHtmlElementById("iframe1");
+        final HtmlInlineFrame iframe = page.getHtmlElementById("iframe1");
         assertEquals(URL_SECOND.toExternalForm(), iframe.getSrcAttribute());
         assertEquals("Second", ((HtmlPage) iframe.getEnclosedPage()).getTitleText());
 

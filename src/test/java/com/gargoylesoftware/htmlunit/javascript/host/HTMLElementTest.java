@@ -1981,8 +1981,8 @@ public class HTMLElementTest extends WebTestCase {
             + "</body></html>";
         final List<String> actual = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_7, html, actual);
-        ((HtmlDivision) page.getHtmlElementById("a")).click();
-        ((HtmlDivision) page.getHtmlElementById("b")).mouseOver();
+        page.<HtmlDivision>getHtmlElementById("a").click();
+        page.<HtmlDivision>getHtmlElementById("b").mouseOver();
         final String[] expected = {"clicked", "clicked"};
         assertEquals(expected, actual);
     }
@@ -2003,9 +2003,9 @@ public class HTMLElementTest extends WebTestCase {
             + "</body></html>";
         final List<String> actual = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), html, actual);
-        ((HtmlDivision) page.getHtmlElementById("a")).click();
-        ((HtmlDivision) page.getHtmlElementById("b")).mouseOver();
-        ((HtmlDivision) page.getHtmlElementById("c")).mouseOver();
+        page.<HtmlDivision>getHtmlElementById("a").click();
+        page.<HtmlDivision>getHtmlElementById("b").mouseOver();
+        page.<HtmlDivision>getHtmlElementById("c").mouseOver();
         final String[] expected = {"click", "click", "click"};
         assertEquals(expected, actual);
     }
@@ -2187,11 +2187,10 @@ public class HTMLElementTest extends WebTestCase {
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
-        final HtmlButton button1 = (HtmlButton) firstPage
-                .getHtmlElementById("button1");
-        final HtmlPage secondPage = (HtmlPage) button1.click();
+        final HtmlButton button1 = firstPage.getHtmlElementById("button1");
+        final HtmlPage secondPage = button1.click();
         assertEquals("Second", secondPage.getTitleText());
-        ((HtmlButton) secondPage.getHtmlElementById("button2")).click();
+        secondPage.<HtmlButton>getHtmlElementById("button2").click();
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
@@ -2230,8 +2229,8 @@ public class HTMLElementTest extends WebTestCase {
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
-        final HtmlButton buttonA = (HtmlButton) firstPage.getHtmlElementById("clickme");
-        final HtmlPage secondPage = (HtmlPage) buttonA.click();
+        final HtmlButton buttonA = firstPage.getHtmlElementById("clickme");
+        final HtmlPage secondPage = buttonA.click();
         assertEquals("Second", secondPage.getTitleText());
         webClient.setCurrentWindow(firstPage.getEnclosingWindow());
         webClient.setCurrentWindow(secondPage.getEnclosingWindow());
@@ -2273,8 +2272,8 @@ public class HTMLElementTest extends WebTestCase {
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
-        final HtmlButton buttonA = (HtmlButton) firstPage.getHtmlElementById("clickme");
-        final HtmlPage secondPage = (HtmlPage) buttonA.click();
+        final HtmlButton buttonA = firstPage.getHtmlElementById("clickme");
+        final HtmlPage secondPage = buttonA.click();
         assertEquals("Second", secondPage.getTitleText());
         webClient.setCurrentWindow(firstPage.getEnclosingWindow());
         webClient.setCurrentWindow(secondPage.getEnclosingWindow());

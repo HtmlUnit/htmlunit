@@ -39,7 +39,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
-import com.gargoylesoftware.htmlunit.html.SubmittableElement;
 
 /**
  * Tests for {@link HTMLInputElement} and buttons.
@@ -167,9 +166,9 @@ public class HTMLInputElementTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        final HtmlCheckBoxInput checkBox = (HtmlCheckBoxInput) page.getHtmlElementById("checkbox1");
+        final HtmlCheckBoxInput checkBox = page.getHtmlElementById("checkbox1");
         assertFalse(checkBox.isChecked());
-        ((HtmlAnchor) page.getHtmlElementById("clickme")).click();
+        page.<HtmlAnchor>getHtmlElementById("clickme").click();
         assertTrue(checkBox.isChecked());
 
         final String[] expectedAlerts = {"false", "true"};
@@ -204,13 +203,13 @@ public class HTMLInputElementTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        final HtmlRadioButtonInput radioA = (HtmlRadioButtonInput) page.getHtmlElementById("radioA");
-        final HtmlRadioButtonInput radioB = (HtmlRadioButtonInput) page.getHtmlElementById("radioB");
-        final HtmlRadioButtonInput radioC = (HtmlRadioButtonInput) page.getHtmlElementById("radioC");
+        final HtmlRadioButtonInput radioA = page.getHtmlElementById("radioA");
+        final HtmlRadioButtonInput radioB = page.getHtmlElementById("radioB");
+        final HtmlRadioButtonInput radioC = page.getHtmlElementById("radioC");
         assertTrue(radioA.isChecked());
         assertFalse(radioB.isChecked());
         assertFalse(radioC.isChecked());
-        ((HtmlAnchor) page.getHtmlElementById("clickme")).click();
+        page.<HtmlAnchor>getHtmlElementById("clickme").click();
         assertFalse(radioA.isChecked());
         assertTrue(radioB.isChecked());
         assertFalse(radioC.isChecked());
@@ -258,7 +257,7 @@ public class HTMLInputElementTest extends WebTestCase {
         assertFalse(button1.isDisabled());
         assertTrue(button2.isDisabled());
         assertFalse(button3.isDisabled());
-        ((HtmlAnchor) page.getHtmlElementById("clickme")).click();
+        page.<HtmlAnchor>getHtmlElementById("clickme").click();
         assertTrue(button1.isDisabled());
         assertFalse(button2.isDisabled());
         assertTrue(button3.isDisabled());
@@ -632,7 +631,7 @@ public class HTMLInputElementTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-        final Page page2 = ((ClickableElement) page.getHtmlElementById("clickMe")).click();
+        final Page page2 = page.<ClickableElement>getHtmlElementById("clickMe").click();
 
         assertSame(page, page2);
 
@@ -722,7 +721,7 @@ public class HTMLInputElementTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, null);
-        final HtmlTextInput input = (HtmlTextInput) page.getHtmlElementById("myInput");
+        final HtmlTextInput input = page.getHtmlElementById("myInput");
         assertEquals("me te", input.getSelectedText());
     }
 

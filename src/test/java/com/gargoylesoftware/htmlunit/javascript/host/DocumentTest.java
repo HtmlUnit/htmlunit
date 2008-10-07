@@ -1383,7 +1383,7 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage mainPage = webClient.getPage("http://main");
         assertEquals("Main", mainPage.getTitleText());
 
-        final HtmlInlineFrame iFrame = (HtmlInlineFrame) mainPage.getHtmlElementById("iframe");
+        final HtmlInlineFrame iFrame = mainPage.getHtmlElementById("iframe");
 
         assertEquals(URL_SECOND.toExternalForm(), iFrame.getSrcAttribute());
 
@@ -1607,8 +1607,8 @@ public class DocumentTest extends WebTestCase {
         HtmlPage page = loadPage(browserVersion, html, actual);
         assertEquals("click", page.getBody().asText());
 
-        final HtmlSpan span = (HtmlSpan) page.getHtmlElementById("s");
-        page = (HtmlPage) span.click();
+        final HtmlSpan span = page.getHtmlElementById("s");
+        page = span.click();
         assertEquals("12", page.getBody().asText());
     }
 
@@ -3115,7 +3115,7 @@ public class DocumentTest extends WebTestCase {
 
         final String expected = "#document-fragment_null_11_null_0_";
         final HtmlPage page = loadPage(content);
-        final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextarea");
+        final HtmlTextArea textArea = page.getHtmlElementById("myTextarea");
         assertEquals(expected, textArea.getText());
     }
 
@@ -3506,7 +3506,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
         final List<String> actual = new ArrayList<String>();
         final HtmlPage page = loadPage(version, html, actual);
-        final HtmlSpan span = (HtmlSpan) page.getHtmlElementById("s");
+        final HtmlSpan span = page.getHtmlElementById("s");
         span.click();
         assertEquals(expected, actual);
     }
@@ -3552,7 +3552,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_6, html, collectedAlerts);
-        final HtmlTextInput text1 = (HtmlTextInput) page.getHtmlElementById("text1");
+        final HtmlTextInput text1 = page.getHtmlElementById("text1");
         text1.focus();
         text1.click();
         assertEquals(new String[]{"null", "text1", "onfocus text2", "text2"}, collectedAlerts);

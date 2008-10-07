@@ -75,9 +75,9 @@ public class PopupTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        final ClickableElement button = (ClickableElement) page.getHtmlElementById("button");
+        final ClickableElement button = page.getHtmlElementById("button");
 
-        final HtmlPage secondPage = (HtmlPage) button.click();
+        final HtmlPage secondPage = button.click();
         final String[] expectedAlerts = {"Pop-up window is Open"};
         assertEquals(expectedAlerts, collectedAlerts);
         assertEquals("about:blank", secondPage.getWebResponse().getRequestUrl());

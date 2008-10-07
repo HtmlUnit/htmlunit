@@ -67,7 +67,7 @@ public class HtmlSelectTest extends WebTestCase {
         assertEquals(Arrays.asList(new Object[] {select, button}), form.getSubmittableElements(button));
 
         // Test that the correct value is being passed back up to the server
-        final HtmlPage secondPage = (HtmlPage) button.click();
+        final HtmlPage secondPage = button.click();
 
         assertEquals("url", URL_GARGOYLE + "?select1=option2&button=foo", secondPage.getWebResponse().getRequestUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
@@ -99,7 +99,7 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlSubmitInput button = form.getInputByName("button");
 
         // Test that the correct value is being passed back up to the server
-        final HtmlPage secondPage = (HtmlPage) button.click();
+        final HtmlPage secondPage = button.click();
 
         assertEquals("url", URL_GARGOYLE + "?button=foo", secondPage.getWebResponse().getRequestUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
@@ -166,7 +166,7 @@ public class HtmlSelectTest extends WebTestCase {
         select.setSelectedAttribute("option2", true);
 
         // Test that the correct value is being passed back up to the server
-        final HtmlPage secondPage = (HtmlPage) button.click();
+        final HtmlPage secondPage = button.click();
 
         assertEquals("url", URL_GARGOYLE + "?select1=option1&select1=option2&select1=option3&button=foo",
                 secondPage.getWebResponse().getRequestUrl());
@@ -424,7 +424,7 @@ public class HtmlSelectTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
-        final HtmlOption option = (HtmlOption) page.getHtmlElementById("option2");
+        final HtmlOption option = page.getHtmlElementById("option2");
         option.setSelected(true);
     }
 
@@ -614,7 +614,7 @@ public class HtmlSelectTest extends WebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlOption option1 = (HtmlOption) page.getHtmlElementById("option1");
+        final HtmlOption option1 = page.getHtmlElementById("option1");
         final HtmlPage page2 = option1.click();
         assertEquals("about:blank", page2.getWebResponse().getRequestUrl());
     }

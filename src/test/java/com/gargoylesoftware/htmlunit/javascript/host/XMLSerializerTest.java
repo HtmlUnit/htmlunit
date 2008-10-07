@@ -58,7 +58,7 @@ public class XMLSerializerTest extends WebTestCase {
                 + "</note>";
 
         final HtmlPage page = loadPage(browserVersion, constructPageContent(serializationText), null);
-        final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextArea");
+        final HtmlTextArea textArea = page.getHtmlElementById("myTextArea");
         assertEquals(expectedString, textArea.getText());
     }
 
@@ -95,7 +95,7 @@ public class XMLSerializerTest extends WebTestCase {
                 + "</xsl:stylesheet>";
 
         final HtmlPage page = loadPage(browserVersion, constructPageContent(serializationText), null);
-        final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextArea");
+        final HtmlTextArea textArea = page.getHtmlElementById("myTextArea");
         assertEquals(expectedString, textArea.getText());
     }
 
@@ -121,7 +121,7 @@ public class XMLSerializerTest extends WebTestCase {
                                             + "</outer></document>";
 
         final HtmlPage page = loadPage(browserVersion, constructPageContent(serializationContent), null);
-        final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextArea");
+        final HtmlTextArea textArea = page.getHtmlElementById("myTextArea");
         assertEquals(expectedString, textArea.getText());
     }
 
@@ -151,7 +151,7 @@ public class XMLSerializerTest extends WebTestCase {
                                           + "</html>";
 
         final HtmlPage page = loadPage(browserVersion, constructPageContent(serializationValue), null);
-        final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextArea");
+        final HtmlTextArea textArea = page.getHtmlElementById("myTextArea");
         assertEquals(expectedString, textArea.getText());
     }
 

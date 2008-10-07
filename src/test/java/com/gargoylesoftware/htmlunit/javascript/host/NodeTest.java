@@ -356,7 +356,7 @@ public class NodeTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        ((ClickableElement) page.getHtmlElementById("div1")).click();
+        page.<ClickableElement>getHtmlElementById("div1").click();
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -601,7 +601,7 @@ public class NodeTest extends WebTestCase {
         client.setWebConnection(conn);
 
         final HtmlPage page = client.getPage(URL_FIRST);
-        ((HtmlButtonInput) page.getHtmlElementById("myInput")).click();
+        page.<HtmlButtonInput>getHtmlElementById("myInput").click();
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

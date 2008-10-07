@@ -110,7 +110,7 @@ public class HtmlResetInputTest extends WebTestCase {
         final String[] expectedAlerts = {"1"};
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
-        final HtmlResetInput input = (HtmlResetInput) page.getHtmlElementById("myInput");
+        final HtmlResetInput input = page.getHtmlElementById("myInput");
         input.click();
 
         assertEquals(expectedAlerts, collectedAlerts);

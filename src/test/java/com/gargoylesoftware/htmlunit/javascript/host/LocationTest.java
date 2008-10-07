@@ -219,8 +219,8 @@ public class LocationTest extends WebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(actual));
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
-        final HtmlAnchor anchor = (HtmlAnchor) page.getHtmlElementById("a");
-        final HtmlPage page2 = (HtmlPage) anchor.click();
+        final HtmlAnchor anchor = page.getHtmlElementById("a");
+        final HtmlPage page2 = anchor.click();
 
         // Verify that it worked.
         final String[] expected = new String[] {"", "#b"};
@@ -255,8 +255,8 @@ public class LocationTest extends WebTestCase {
             + "</body></html>";
         final List<String> actual = new ArrayList<String>();
         final HtmlPage page = loadPage(version, html, actual);
-        ((HtmlAnchor) page.getHtmlElementById("a")).click();
-        ((HtmlAnchor) page.getHtmlElementById("b")).click();
+        page.<HtmlAnchor>getHtmlElementById("a").click();
+        page.<HtmlAnchor>getHtmlElementById("b").click();
         assertEquals(expected, actual);
     }
 
@@ -505,8 +505,8 @@ public class LocationTest extends WebTestCase {
             + "</html>";
 
         final HtmlPage page1 = loadPage(content);
-        final HtmlAnchor link = (HtmlAnchor) page1.getHtmlElementById("link1");
-        final HtmlPage page2 = (HtmlPage) link.click();
+        final HtmlAnchor link = page1.getHtmlElementById("link1");
+        final HtmlPage page2 = link.click();
 
         assertEquals(page1.getTitleText(), page2.getTitleText());
         assertNotSame(page1, page2);
@@ -548,7 +548,7 @@ public class LocationTest extends WebTestCase {
         assertEquals("Start content", ((HtmlPage) page.getFrameByName("content").getEnclosedPage()).getTitleText());
 
         final HtmlPage menuPage = (HtmlPage) page.getFrameByName("menu").getEnclosedPage();
-        ((ClickableElement) menuPage.getHtmlElementById("myLink")).click();
+        menuPage.<ClickableElement>getHtmlElementById("myLink").click();
         assertEquals(3, webClient.getWebWindows().size());
         assertEquals("Test", ((HtmlPage) page.getFrameByName("content").getEnclosedPage()).getTitleText());
     }

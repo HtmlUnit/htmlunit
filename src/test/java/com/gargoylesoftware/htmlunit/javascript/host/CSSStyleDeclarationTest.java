@@ -1015,7 +1015,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
         final List<String> expectedStyles = Arrays.asList(expectedProperties);
         Collections.sort(expectedStyles);
         final List<String> collectedStyles =
-            Arrays.asList(((HtmlTextArea) page.getHtmlElementById("myTextarea")).getText().split(" "));
+            Arrays.asList(page.<HtmlTextArea>getHtmlElementById("myTextarea").getText().split(" "));
         Collections.sort(collectedStyles);
         assertEquals(expectedStyles, collectedStyles);
     }

@@ -199,10 +199,10 @@ public class HtmlFormTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = client.getPage(URL_FIRST);
-        final HtmlSubmitInput button = (HtmlSubmitInput) firstPage.getHtmlElementById("button");
+        final HtmlSubmitInput button = firstPage.getHtmlElementById("button");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
-        final HtmlPage secondPage = (HtmlPage) button.click();
+        final HtmlPage secondPage = button.click();
         assertEquals("Second", secondPage.getTitleText());
 
         assertEquals(new String[] {"clicked"}, collectedAlerts);
@@ -232,10 +232,10 @@ public class HtmlFormTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = client.getPage(URL_FIRST);
-        final HtmlSubmitInput button = (HtmlSubmitInput) firstPage.getHtmlElementById("button");
+        final HtmlSubmitInput button = firstPage.getHtmlElementById("button");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
-        final HtmlPage secondPage = (HtmlPage) button.click();
+        final HtmlPage secondPage = button.click();
         assertEquals(firstPage.getTitleText(), secondPage.getTitleText());
 
         assertEquals(new String[] {"clicked"}, collectedAlerts);
@@ -262,8 +262,8 @@ public class HtmlFormTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = client.getPage(URL_FIRST);
-        final HtmlSubmitInput button = (HtmlSubmitInput) firstPage.getHtmlElementById("button");
-        final HtmlPage secondPage = (HtmlPage) button.click();
+        final HtmlSubmitInput button = firstPage.getHtmlElementById("button");
+        final HtmlPage secondPage = button.click();
         assertEquals("Second", secondPage.getTitleText());
     }
 
@@ -292,7 +292,7 @@ public class HtmlFormTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = client.getPage(URL_FIRST);
-        final HtmlSubmitInput button = (HtmlSubmitInput) firstPage.getHtmlElementById("button");
+        final HtmlSubmitInput button = firstPage.getHtmlElementById("button");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
         final HtmlPage secondPage = (HtmlPage) button.click();
@@ -325,10 +325,10 @@ public class HtmlFormTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = client.getPage(URL_FIRST);
-        final HtmlSubmitInput button = (HtmlSubmitInput) firstPage.getHtmlElementById("button");
+        final HtmlSubmitInput button = firstPage.getHtmlElementById("button");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
-        final HtmlPage secondPage = (HtmlPage) button.click();
+        final HtmlPage secondPage = button.click();
         assertEquals(firstPage.getTitleText(), secondPage.getTitleText());
 
         assertEquals(new String[] {"clicked"}, collectedAlerts);
@@ -357,7 +357,7 @@ public class HtmlFormTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = client.getPage(URL_FIRST);
-        final HtmlSubmitInput button = (HtmlSubmitInput) firstPage.getHtmlElementById("button");
+        final HtmlSubmitInput button = firstPage.getHtmlElementById("button");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
         final HtmlPage secondPage = (HtmlPage) button.click();
@@ -520,7 +520,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
+        final HtmlButton button = page.getHtmlElementById("button");
         button.click();
 
         final List<NameValuePair> expectedParameters =
@@ -919,7 +919,7 @@ public class HtmlFormTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = client.getPage(URL_FIRST);
-        final HtmlSubmitInput button = (HtmlSubmitInput) firstPage.getHtmlElementById("button");
+        final HtmlSubmitInput button = firstPage.getHtmlElementById("button");
 
         button.click();
 
@@ -1111,8 +1111,8 @@ public class HtmlFormTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage firstPage = loadPage(browserVersion, html, null);
-        final HtmlSubmitInput submitInput = (HtmlSubmitInput) firstPage.getHtmlElementById("myButton");
-        final HtmlPage secondPage = (HtmlPage) (submitInput).click();
+        final HtmlSubmitInput submitInput = firstPage.getHtmlElementById("myButton");
+        final HtmlPage secondPage = submitInput.click();
         assertEquals(URL_SECOND + "?Save=Submit+Query", secondPage.getWebResponse().getRequestUrl());
     }
 

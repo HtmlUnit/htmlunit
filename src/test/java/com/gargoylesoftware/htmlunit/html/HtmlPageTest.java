@@ -1898,7 +1898,7 @@ public class HtmlPageTest extends WebTestCase {
         server_ = HttpWebConnectionTest.startWebServer(".", null, map);
         final WebClient client = new WebClient();
         final HtmlPage page = client.getPage("http://localhost:" + HttpWebConnectionTest.PORT + "/one.html");
-        final HtmlSubmitInput submit = (HtmlSubmitInput) page.getHtmlElementById("myButton");
+        final HtmlSubmitInput submit = page.getHtmlElementById("myButton");
         final HtmlPage secondPage = submit.click();
         assertEquals("0\nPOST\nsome_name some_value\n", secondPage.getWebResponse().getContentAsString());
         final HtmlPage secondPage2 = (HtmlPage) secondPage.refresh();

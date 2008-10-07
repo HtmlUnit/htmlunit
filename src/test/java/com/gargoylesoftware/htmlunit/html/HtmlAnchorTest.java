@@ -329,8 +329,8 @@ public class HtmlAnchorTest extends WebTestCase {
         conn.setResponse(URL_THIRD, thirdContent);
         client.setWebConnection(conn);
         final HtmlPage firstPage = client.getPage(URL_FIRST);
-        final HtmlAnchor a = (HtmlAnchor) firstPage.getHtmlElementById("link");
-        final HtmlPage secondPage = (HtmlPage) a.click();
+        final HtmlAnchor a = firstPage.getHtmlElementById("link");
+        final HtmlPage secondPage = a.click();
         Assert.assertEquals("url", URL_SECOND, secondPage.getWebResponse().getRequestUrl());
         Assert.assertEquals("title", "Page B", secondPage.getTitleText());
     }

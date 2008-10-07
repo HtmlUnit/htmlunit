@@ -1024,7 +1024,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             }
         };
         page.addDomChangeListener(listener);
-        ((ClickableElement) page.getHtmlElementById("p1")).click();
+        page.<ClickableElement>getHtmlElementById("p1").click();
     }
 
     /**

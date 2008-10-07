@@ -203,7 +203,7 @@ public class EventTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        final ClickableElement element = (ClickableElement) page.getHtmlElementById("clickId");
+        final ClickableElement element = page.getHtmlElementById("clickId");
         element.type('A');
         element.type('B');
         element.click();
@@ -239,7 +239,7 @@ public class EventTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        final ClickableElement element = (ClickableElement) page.getHtmlElementById("clickId");
+        final ClickableElement element = page.getHtmlElementById("clickId");
         element.type('A', shiftKey, ctrlKey, altKey);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -270,10 +270,10 @@ public class EventTest extends WebTestCase {
         final List<String> actual = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), html, actual);
         page.<HtmlElement>getHtmlElementById("t").type('A');
-        ((HtmlDivision) page.getHtmlElementById("d")).click();
+        page.<HtmlDivision>getHtmlElementById("d").click();
 
         page.<HtmlElement>getHtmlElementById("t").type("BC");
-        ((HtmlDivision) page.getHtmlElementById("d")).click();
+        page.<HtmlDivision>getHtmlElementById("d").click();
 
         assertEquals(expected, actual);
     }
@@ -307,9 +307,9 @@ public class EventTest extends WebTestCase {
             + "</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), htmlContent, collectedAlerts);
-        final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
+        final HtmlButton button = page.getHtmlElementById("button");
 
-        final HtmlPage secondPage = (HtmlPage) button.click(shiftKey, ctrlKey, altKey);
+        final HtmlPage secondPage = button.click(shiftKey, ctrlKey, altKey);
 
         assertEquals(expectedAlerts, collectedAlerts);
 
@@ -340,7 +340,7 @@ public class EventTest extends WebTestCase {
     private void onClickPageTest(final String content) throws Exception {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        final ClickableElement clickable = (ClickableElement) page.getHtmlElementById("clickId");
+        final ClickableElement clickable = page.getHtmlElementById("clickId");
         clickable.click();
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
@@ -388,7 +388,7 @@ public class EventTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        ((ClickableElement) page.getHtmlElementById("clickMe")).click();
+        page.<ClickableElement>getHtmlElementById("clickMe").click();
 
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
@@ -470,7 +470,7 @@ public class EventTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        ((ClickableElement) page.getHtmlElementById("theSpan")).click();
+        page.<ClickableElement>getHtmlElementById("theSpan").click();
 
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
@@ -506,7 +506,7 @@ public class EventTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        ((ClickableElement) page.getHtmlElementById("theSpan")).click();
+        page.<ClickableElement>getHtmlElementById("theSpan").click();
 
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
@@ -542,12 +542,12 @@ public class EventTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        ((ClickableElement) page.getHtmlElementById("theSpan")).click();
+        page.<ClickableElement>getHtmlElementById("theSpan").click();
         final String[] expectedAlerts1 = {"window capturing", "div capturing", "span capturing", "div"};
         assertEquals(expectedAlerts1, collectedAlerts);
         collectedAlerts.clear();
 
-        ((ClickableElement) page.getHtmlElementById("theSpan")).click();
+        page.<ClickableElement>getHtmlElementById("theSpan").click();
         final String[] expectedAlerts2 = {"window capturing"};
         assertEquals(expectedAlerts2, collectedAlerts);
     }
@@ -637,7 +637,7 @@ public class EventTest extends WebTestCase {
             + "</body></html>";
         final List<String> actual = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), html, actual);
-        final HtmlDivision div = (HtmlDivision) page.getHtmlElementById("div");
+        final HtmlDivision div = page.getHtmlElementById("div");
         div.click();
         assertEquals(Arrays.toString(getExpectedAlerts()), actual.toString());
     }
@@ -689,7 +689,7 @@ public class EventTest extends WebTestCase {
 
         final List<String> actual = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), html, actual);
-        final HtmlButtonInput button = (HtmlButtonInput) page.getHtmlElementById("b");
+        final HtmlButtonInput button = page.getHtmlElementById("b");
         button.click();
         assertEquals(getExpectedAlerts(), actual);
     }
@@ -816,7 +816,7 @@ public class EventTest extends WebTestCase {
         final HtmlPage page = client.getPage(URL_FIRST);
         final HtmlAnchor anchor = page.getHtmlElementById("a");
 
-        final HtmlPage secondPage = (HtmlPage) anchor.click();
+        final HtmlPage secondPage = anchor.click();
         assertEquals(new String[] {"a", "s", "d"}, collectedAlerts);
 
         if (changesPage) {

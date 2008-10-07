@@ -52,8 +52,8 @@ public class HTMLLabelElementTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(html);
-        final HtmlLabel label = (HtmlLabel) page.getHtmlElementById("label1");
-        final HtmlCheckBoxInput checkbox = (HtmlCheckBoxInput) page.getHtmlElementById("checkbox1");
+        final HtmlLabel label = page.getHtmlElementById("label1");
+        final HtmlCheckBoxInput checkbox = page.getHtmlElementById("checkbox1");
         assertFalse(checkbox.isChecked());
         label.click();
         assertTrue(checkbox.isChecked());
@@ -89,8 +89,8 @@ public class HTMLLabelElementTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(html);
-        final HtmlCheckBoxInput checkbox = (HtmlCheckBoxInput) page.getHtmlElementById("checkbox1");
-        final HtmlButtonInput button = (HtmlButtonInput) page.getHtmlElementById("button1");
+        final HtmlCheckBoxInput checkbox = page.getHtmlElementById("checkbox1");
+        final HtmlButtonInput button = page.getHtmlElementById("button1");
         assertFalse(checkbox.isChecked());
         button.click();
         assertTrue(checkbox.isChecked() == changedByClick);

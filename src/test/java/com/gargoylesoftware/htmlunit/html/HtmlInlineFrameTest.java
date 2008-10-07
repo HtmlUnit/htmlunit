@@ -145,7 +145,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
         assertEquals("Second", iframePage.getTitleText());
 
         // the nested frame should not have been loaded
-        final HtmlInlineFrame iframeIn2 = (HtmlInlineFrame) iframePage.getHtmlElementById("iframe2_1");
+        final HtmlInlineFrame iframeIn2 = iframePage.getHtmlElementById("iframe2_1");
         assertEquals(URL_FIRST.toExternalForm(), iframeIn2.getSrcAttribute());
         assertEquals("about:blank", iframeIn2.getEnclosedPage().getWebResponse().getRequestUrl());
     }

@@ -135,8 +135,8 @@ public class HtmlButtonTest extends WebTestCase {
             + "<button type='reset' id='resetButton' value='pushme'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
-        final HtmlButton resetInput = (HtmlButton) page.getHtmlElementById("resetButton");
+        final HtmlForm form = page.getHtmlElementById("form1");
+        final HtmlButton resetInput = page.getHtmlElementById("resetButton");
 
         // change all the values to something else
         ((HtmlRadioButtonInput) form.getFirstByXPath(
