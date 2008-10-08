@@ -30,6 +30,10 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link XmlPage}.
@@ -219,7 +223,7 @@ public class XmlPageTest extends WebTestCase {
             + "    else\n"
             + "      xml = new XMLSerializer().serializeToString(doc.documentElement);\n"
             + "    alert(xml.indexOf('<elementName/>') != -1);\n"
-            + "    alert(xml.length);"
+            + "    alert(xml.length);\n"
             + "  }\n"
             + "  function createXmlDocument() {\n"
             + "    if (document.implementation && document.implementation.createDocument)\n"
@@ -261,5 +265,30 @@ public class XmlPageTest extends WebTestCase {
 
         final XmlPage xmlPage = testXmlDocument(content, "text/xml");
         assertEquals(1, xmlPage.getByXPath("//foofoo[@name='first']").size());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts("[object Element]")
+    public void createElementNS() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    alert(doc.createElementNS('myNS', 'ppp:eee'));\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
     }
 }
