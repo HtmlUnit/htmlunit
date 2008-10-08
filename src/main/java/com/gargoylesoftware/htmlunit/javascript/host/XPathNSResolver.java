@@ -44,7 +44,7 @@ public class XPathNSResolver extends SimpleScriptable {
      * @return the associated namespace URI or null if none is found
      */
     public String jsxFunction_lookupNamespaceURI(final String prefix) {
-        return XmlUtil.lookupNamespaceURI((DomElement) ((HTMLElement) element_).getDomNodeOrDie(), prefix);
+        return XmlUtil.lookupNamespaceURI((DomElement) ((SimpleScriptable) element_).getDomNodeOrDie(), prefix);
     }
 
 }
