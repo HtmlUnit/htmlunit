@@ -65,7 +65,7 @@ public class DefaultElementFactoryTest extends WebTestCase {
      */
     private void verifyAttributes(final HtmlAnchor anchor) {
         // Get the attributes iterator
-        final Iterator<DomAttr> attributeEntriesIterator = anchor.getAttributesCollection().iterator();
+        final Iterator<DomAttr> attributeEntriesIterator = anchor.getAttributesMap().values().iterator();
 
         // Verify if the attributes are in ascending order of name.
         DomAttr htmlAttr = attributeEntriesIterator.next();

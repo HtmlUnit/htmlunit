@@ -269,4 +269,12 @@ public class DomElement extends DomNamespaceNode {
         return attributes().get(getQualifiedName(namespaceURI, localName)) != null;
     }
 
+    /**
+     * Returns the map holding the attributes, keyed by name.
+     * @return the attributes map
+     */
+    public final Map<String, DomAttr> getAttributesMap() {
+        return attributes_;
+    }
+
 }

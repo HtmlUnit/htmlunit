@@ -55,14 +55,6 @@ public class XmlElement extends DomElement implements Element {
     }
 
     /**
-     * Returns the map holding the attributes, keyed by name.
-     * @return the attributes map
-     */
-    public Map<String, DomAttr> getAttributesMap() {
-        return attributes();
-    }
-
-    /**
      * Sets the value of the attribute specified by name.
      *
      * @param attributeName the name of the attribute

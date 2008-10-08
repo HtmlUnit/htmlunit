@@ -471,9 +471,11 @@ public abstract class HtmlElement extends DomElement implements Element {
     /**
      * @return a collection of {@link DomAttr} objects representing the
      * attributes of this element. The elements are ordered as found in the HTML source code.
+     * @deprecated As of 2.4, please use {@link #getAttributesMap()} instead.
      */
+    @Deprecated
     public Collection<DomAttr> getAttributesCollection() {
-        return attributes().values();
+        return getAttributesMap().values();
     }
 
     /**

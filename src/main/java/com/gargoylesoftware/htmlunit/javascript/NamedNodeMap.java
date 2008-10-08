@@ -67,7 +67,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      */
     public NamedNodeMap(final HtmlElement element) {
         caseInsensitive_ = true;
-        for (final DomAttr attr : element.getAttributesCollection()) {
+        for (final DomAttr attr : element.getAttributesMap().values()) {
             nodes_.put(attr.getName().toLowerCase(), attr);
         }
         setParentScope(element.getScriptObject());
