@@ -14,9 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.commons.lang.StringEscapeUtils;
 
 import com.gargoylesoftware.htmlunit.Page;
 
@@ -111,6 +114,49 @@ public class DomElement extends DomNamespaceNode {
     //TODO: must be removed.
     protected void setAttributes(final Map<String, DomAttr> attributes) {
         attributes_ = attributes;
+    }
+
+    /**
+     * Returns the tag name of this element.
+     * @return the tag name of this element
+     */
+    public final String getTagName() {
+        return getNodeName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final boolean hasAttributes() {
+        return !attributes().isEmpty();
+    }
+
+    /**
+     * Returns whether the attribute specified by name has a value.
+     *
+     * @param attributeName the name of the attribute
+     * @return true if an attribute with the given name is specified on this element or has a
+     * default value, false otherwise.
+     */
+    public final boolean hasAttribute(final String attributeName) {
+        return attributes_.containsKey(attributeName);
+    }
+
+    /**
+     * Prints the content between "&lt;" and "&gt;" (or "/&gt;") in the output of the tag name
+     * and its attributes in XML format.
+     * @param printWriter the writer to print in
+     */
+    protected void printOpeningTagContentAsXml(final PrintWriter printWriter) {
+        printWriter.print(getTagName());
+        for (final String name : attributes().keySet()) {
+            printWriter.print(" ");
+            printWriter.print(name);
+            printWriter.print("=\"");
+            printWriter.print(StringEscapeUtils.escapeXml(attributes().get(name).getNodeValue()));
+            printWriter.print("\"");
+        }
     }
 
 }

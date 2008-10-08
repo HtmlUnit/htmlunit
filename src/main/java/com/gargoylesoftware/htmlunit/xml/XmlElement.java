@@ -21,7 +21,6 @@ import java.util.Map;
 
 import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.lang.ClassUtils;
-import org.apache.commons.lang.StringEscapeUtils;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -54,14 +53,6 @@ public class XmlElement extends DomElement implements Element {
     protected XmlElement(final String namespaceURI, final String qualifiedName, final Page page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
-    }
-
-    /**
-     * Returns the tag name of this element.
-     * @return the tag name of this element
-     */
-    public String getTagName() {
-        return getNodeName();
     }
 
     /**
@@ -228,22 +219,6 @@ public class XmlElement extends DomElement implements Element {
     }
 
     /**
-     * Prints the content between "&lt;" and "&gt;" (or "/&gt;") in the output of the tag name
-     * and its attributes in XML format.
-     * @param printWriter the writer to print in
-     */
-    protected void printOpeningTagContentAsXml(final PrintWriter printWriter) {
-        printWriter.print(getTagName());
-        for (final String name : attributes().keySet()) {
-            printWriter.print(" ");
-            printWriter.print(name);
-            printWriter.print("=\"");
-            printWriter.print(StringEscapeUtils.escapeXml(attributes().get(name).getNodeValue()));
-            printWriter.print("\"");
-        }
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -312,13 +287,6 @@ public class XmlElement extends DomElement implements Element {
 
     /**
      * {@inheritDoc}
-     */
-    public boolean hasAttribute(final String name) {
-        return attributes().containsKey(name);
-    }
-
-    /**
-     * {@inheritDoc}
      * Not yet implemented.
      */
     public boolean hasAttributeNS(final String namespaceURI, final String localName) {
@@ -381,11 +349,4 @@ public class XmlElement extends DomElement implements Element {
         return ClassUtils.getShortClassName(getClass()) + "[<" + getTagName() + " ...>]";
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasAttributes() {
-        return !attributes().isEmpty();
-    }
 }

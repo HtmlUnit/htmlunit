@@ -29,7 +29,6 @@ import java.util.NoSuchElementException;
 
 import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.lang.ClassUtils;
-import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.BaseFunction;
@@ -175,25 +174,6 @@ public abstract class HtmlElement extends DomElement implements Element {
      */
     public final String getAttributeNS(final String namespaceURI, final String localName) {
         return getAttributeValue(getQualifiedName(namespaceURI, localName));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasAttributes() {
-        return !attributes().isEmpty();
-    }
-
-    /**
-     * Returns whether the attribute specified by name has a value.
-     *
-     * @param attributeName the name of the attribute
-     * @return true if an attribute with the given name is specified on this element or has a
-     * default value, false otherwise.
-     */
-    public final boolean hasAttribute(final String attributeName) {
-        return attributes().get(attributeName) != null;
     }
 
     /**
@@ -552,18 +532,6 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Returns the tag name of this element. The tag name is the actual HTML name. For example
-     * the tag name for HtmlAnchor is "a" and the tag name for HtmlTable is "table".
-     * This tag name will always be in lowercase, no matter what case was used in the original
-     * document, when no namespace is defined.
-     *
-     * @return the tag name of this element
-     */
-    public String getTagName() {
-        return getNodeName();
-    }
-
-    /**
      * @return the same value as returned by {@link #getTagName()}
      */
     @Override
@@ -817,23 +785,6 @@ public abstract class HtmlElement extends DomElement implements Element {
      */
     protected boolean isEmptyXmlTagExpanded() {
         return false;
-    }
-
-    /**
-     * Prints the content between "&lt;" and "&gt;" (or "/&gt;") in the output of the tag name
-     * and its attributes in XML format.
-     * @param printWriter the writer to print in
-     */
-    protected void printOpeningTagContentAsXml(final PrintWriter printWriter) {
-        printWriter.print(getTagName());
-
-        for (final String name : attributes().keySet()) {
-            printWriter.print(" ");
-            printWriter.print(name);
-            printWriter.print("=\"");
-            printWriter.print(StringEscapeUtils.escapeXml(attributes().get(name).getNodeValue()));
-            printWriter.print("\"");
-        }
     }
 
     /**
