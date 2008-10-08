@@ -12,7 +12,7 @@
                 XmlElement: is deprecated, use DomElement instead.
             </action>
             <action type="update" dev="asashour">
-                HtmlElement: deprecate getAttributesCollection().
+                HtmlElement: deprecate getAttributesCollection() and isAttributeDefined().
             </action>
             <action type="update" dev="asashour" id="2129180">
                 BrowserVersion: deprecate INTERNET_EXPLORER_6_0 and INTERNET_EXPLORER_7_0.

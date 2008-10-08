@@ -489,7 +489,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * {@inheritDoc}
      */
     public final boolean isDisabled() {
-        return isAttributeDefined("disabled");
+        return hasAttribute("disabled");
     }
 
     /**

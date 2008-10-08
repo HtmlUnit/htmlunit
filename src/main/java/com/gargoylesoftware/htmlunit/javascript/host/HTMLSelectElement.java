@@ -328,7 +328,7 @@ public class HTMLSelectElement extends FormField {
      * @return <tt>true</tt> if the <tt>multiple</tt> attribute is set
      */
     public boolean jsxGet_multiple() {
-        return getHtmlElementOrDie().isAttributeDefined("multiple");
+        return getHtmlElementOrDie().hasAttribute("multiple");
     }
 
     /**

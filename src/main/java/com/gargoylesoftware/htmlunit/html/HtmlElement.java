@@ -347,9 +347,22 @@ public abstract class HtmlElement extends DomElement {
      *
      * @param attributeName the attribute to check
      * @return true if the attribute is defined
+     * @deprecated As of 2.4, please use {@link #hasAttribute(String)} instead.
      */
+    @Deprecated
     public boolean isAttributeDefined(final String attributeName) {
-        return attributes().get(attributeName.toLowerCase()) != null;
+        return hasAttribute(attributeName);
+    }
+
+    /**
+     * Returns whether the attribute specified by name has a value.
+     *
+     * @param attributeName the name of the attribute
+     * @return true if an attribute with the given name is specified on this element or has a
+     * default value, false otherwise.
+     */
+    public final boolean hasAttribute(final String attributeName) {
+        return super.hasAttribute(attributeName.toLowerCase());
     }
 
     /**

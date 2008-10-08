@@ -54,7 +54,7 @@ public class HtmlSubmitInput extends HtmlInput {
     HtmlSubmitInput(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
-        if (getPage().getWebClient().getBrowserVersion().isIE() && !isAttributeDefined("value")) {
+        if (getPage().getWebClient().getBrowserVersion().isIE() && !hasAttribute("value")) {
             setAttributeValue("value", DEFAULT_VALUE);
         }
     }
@@ -127,7 +127,7 @@ public class HtmlSubmitInput extends HtmlInput {
      */
     @Override
     public NameValuePair[] getSubmitKeyValuePairs() {
-        if (getNameAttribute().length() != 0 && !isAttributeDefined("value")) {
+        if (getNameAttribute().length() != 0 && !hasAttribute("value")) {
             return new NameValuePair[]{new NameValuePair(getNameAttribute(), DEFAULT_VALUE)};
         }
         return super.getSubmitKeyValuePairs();

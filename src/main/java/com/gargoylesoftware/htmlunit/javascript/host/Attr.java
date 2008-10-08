@@ -193,9 +193,6 @@ public class Attr extends SimpleScriptable {
      */
     public boolean jsxGet_specified() {
         if (parent_ != null) {
-            if (parent_ instanceof HtmlElement) {
-                return ((HtmlElement) parent_).isAttributeDefined(name_);
-            }
             return ((DomElement) parent_).hasAttribute(name_);
         }
         return true;

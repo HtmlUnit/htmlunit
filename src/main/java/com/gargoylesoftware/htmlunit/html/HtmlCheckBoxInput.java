@@ -55,7 +55,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
         super(namespaceURI, qualifiedName, page, attributes);
 
         //From the checkbox creator
-        defaultCheckedState_ = isAttributeDefined("checked");
+        defaultCheckedState_ = hasAttribute("checked");
 
         // default value for both IE6 and Mozilla 1.7 even if spec says it is unspecified
         if (getAttributeValue("value") == ATTRIBUTE_NOT_DEFINED) {

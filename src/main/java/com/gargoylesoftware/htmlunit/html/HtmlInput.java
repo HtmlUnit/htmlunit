@@ -156,7 +156,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * {@inheritDoc}
      */
     public final boolean isDisabled() {
-        return isAttributeDefined("disabled");
+        return hasAttribute("disabled");
     }
 
     /**
@@ -405,7 +405,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * @return <tt>true</tt> if this element is currently selected
      */
     public boolean isChecked() {
-        return isAttributeDefined("checked");
+        return hasAttribute("checked");
     }
 
     /**

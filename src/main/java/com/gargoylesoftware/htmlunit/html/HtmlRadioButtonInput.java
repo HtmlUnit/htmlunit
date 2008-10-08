@@ -60,7 +60,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
             setAttributeValue("value", "on");
         }
 
-        defaultCheckedState_ = isAttributeDefined("checked");
+        defaultCheckedState_ = hasAttribute("checked");
     }
 
     /**

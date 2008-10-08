@@ -261,7 +261,7 @@ public class HtmlForm extends ClickableElement {
         if (!SUBMITTABLE_ELEMENT_NAMES.contains(tagName)) {
             return false;
         }
-        if (element.isAttributeDefined("disabled")) {
+        if (element.hasAttribute("disabled")) {
             return false;
         }
         // clicked input type="image" is submitted even if it hasn't a name
@@ -269,7 +269,7 @@ public class HtmlForm extends ClickableElement {
             return true;
         }
 
-        if (!tagName.equals("isindex") && !element.isAttributeDefined("name")) {
+        if (!tagName.equals("isindex") && !element.hasAttribute("name")) {
             return false;
         }
 

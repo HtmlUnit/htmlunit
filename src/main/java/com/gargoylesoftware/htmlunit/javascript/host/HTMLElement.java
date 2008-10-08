@@ -258,7 +258,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return true if this element is disabled
      */
     public boolean jsxGet_disabled() {
-        return getHtmlElementOrDie().isAttributeDefined("disabled");
+        return getHtmlElementOrDie().hasAttribute("disabled");
     }
 
     /**

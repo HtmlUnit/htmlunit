@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+<table name="USER">
+<column>ID</column>
+<row>
+<value>116517</value>
+</row>
+</table>
+</dataset>

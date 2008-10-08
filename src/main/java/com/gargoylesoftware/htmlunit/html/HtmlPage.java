@@ -719,7 +719,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         for (final HtmlElement element : getAllHtmlChildElements()) {
             final String tagName = element.getTagName();
             if (tags.contains(tagName)) {
-                final boolean disabled = element.isAttributeDefined("disabled");
+                final boolean disabled = element.hasAttribute("disabled");
                 if (!disabled && element.getTabIndex() != HtmlElement.TAB_INDEX_OUT_OF_BOUNDS) {
                     tabbableElements.add(element);
                 }

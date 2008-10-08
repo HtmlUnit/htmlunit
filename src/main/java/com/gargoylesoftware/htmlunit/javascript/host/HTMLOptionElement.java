@@ -102,7 +102,7 @@ public class HTMLOptionElement extends HTMLElement {
      */
     public String jsxGet_text() {
         final HtmlOption htmlOption = getHtmlOption();
-        if (htmlOption.isAttributeDefined("label")) {
+        if (htmlOption.hasAttribute("label")) {
             return htmlOption.getLabelAttribute();
         }
         return htmlOption.asText();

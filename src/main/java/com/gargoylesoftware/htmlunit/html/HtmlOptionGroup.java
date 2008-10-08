@@ -61,7 +61,7 @@ public class HtmlOptionGroup extends ClickableElement implements DisabledElement
         if (getPage().getWebClient().getBrowserVersion().isIE()) {
             return false;
         }
-        return isAttributeDefined("disabled");
+        return hasAttribute("disabled");
     }
 
     /**

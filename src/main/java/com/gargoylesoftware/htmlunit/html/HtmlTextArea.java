@@ -235,7 +235,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * {@inheritDoc}
      */
     public final boolean isDisabled() {
-        return isAttributeDefined("disabled");
+        return hasAttribute("disabled");
     }
 
     /**

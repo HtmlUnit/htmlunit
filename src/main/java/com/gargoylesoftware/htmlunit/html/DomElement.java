@@ -146,7 +146,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @return true if an attribute with the given name is specified on this element or has a
      * default value, false otherwise.
      */
-    public final boolean hasAttribute(final String attributeName) {
+    public boolean hasAttribute(final String attributeName) {
         return attributes_.containsKey(attributeName);
     }
 

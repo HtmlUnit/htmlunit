@@ -55,7 +55,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     HtmlOption(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
-        initialSelectedState_ = isAttributeDefined("selected");
+        initialSelectedState_ = hasAttribute("selected");
     }
 
     /**
@@ -63,7 +63,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * @return <tt>true</tt> if this option is currently selected
      */
     public boolean isSelected() {
-        return isAttributeDefined("selected");
+        return hasAttribute("selected");
     }
 
     /**
@@ -157,7 +157,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
                 BrowserVersionFeatures.HTMLOPTION_PREVENT_DISABLED)) {
             return false;
         }
-        return isAttributeDefined("disabled");
+        return hasAttribute("disabled");
     }
 
     /**

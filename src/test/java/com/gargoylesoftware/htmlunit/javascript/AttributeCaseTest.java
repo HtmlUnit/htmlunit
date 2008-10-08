@@ -142,9 +142,9 @@ public class AttributeCaseTest extends WebTestCase {
      * @throws IOException if the test fails
      */
     @Test
-    public void isAttributeDefinedLowerCase() throws IOException {
+    public void hasAttributeLowerCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
-        assertTrue(page_.asXml(), element_.isAttributeDefined(ATTRIBUTE_NAME.toLowerCase()));
+        assertTrue(page_.asXml(), element_.hasAttribute(ATTRIBUTE_NAME.toLowerCase()));
     }
 
     /**
@@ -152,9 +152,9 @@ public class AttributeCaseTest extends WebTestCase {
      * @throws IOException if the test fails
      */
     @Test
-    public void isAttributeDefinedMixedCase() throws IOException {
+    public void hasAttributeMixedCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
-        assertTrue(page_.asXml(), element_.isAttributeDefined(ATTRIBUTE_NAME));
+        assertTrue(page_.asXml(), element_.hasAttribute(ATTRIBUTE_NAME));
     }
 
     /**
@@ -162,9 +162,9 @@ public class AttributeCaseTest extends WebTestCase {
      * @throws IOException if the test fails
      */
     @Test
-    public void isAttributeDefinedUpperCase() throws IOException {
+    public void hasAttributeUpperCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
-        assertTrue(page_.asXml(), element_.isAttributeDefined(ATTRIBUTE_NAME.toUpperCase()));
+        assertTrue(page_.asXml(), element_.hasAttribute(ATTRIBUTE_NAME.toUpperCase()));
     }
 
     private void setupAttributeTest(final String content, final String elementId) throws IOException {
