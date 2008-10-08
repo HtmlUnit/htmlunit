@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -72,7 +71,8 @@ public class Attr extends SimpleScriptable {
     }
 
     /**
-     * Ensures that all attributes are initialized correctly via {@link #init(String, HtmlElement)}.
+     * Ensures that all attributes are initialized correctly via
+     * {@link #init(String, com.gargoylesoftware.htmlunit.html.HtmlElement)}.
      *
      * {@inheritDoc}
      */

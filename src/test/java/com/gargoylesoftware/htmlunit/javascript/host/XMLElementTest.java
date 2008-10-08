@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 
 /**
- * Tests for {@link XMLElement}.
+ * Tests for {@link Element}.
  *
  * @version $Revision$
  * @author Ahmed Ashour

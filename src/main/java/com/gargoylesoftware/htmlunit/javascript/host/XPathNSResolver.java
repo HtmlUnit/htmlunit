@@ -32,7 +32,7 @@ public class XPathNSResolver extends SimpleScriptable {
 
     /**
      * Sets the element to start lookup from.
-     * @param element {@link HTMLElement} or {@link XMLElement} to start lookup from
+     * @param element {@link HTMLElement} or {@link Element} to start lookup from
      */
     public void setElement(final Node element) {
         element_ = element;

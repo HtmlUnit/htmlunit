@@ -157,7 +157,7 @@ public class XMLDocument extends Document {
 
         // TODO: cleanup, getScriptObject() should be used!!!
         if (domNode instanceof DomElement && !(domNode instanceof HtmlElement)) {
-            scriptable = new XMLElement();
+            scriptable = new Element();
         }
         else if (domNode instanceof DomAttr) {
             final XMLAttr attribute = new XMLAttr();

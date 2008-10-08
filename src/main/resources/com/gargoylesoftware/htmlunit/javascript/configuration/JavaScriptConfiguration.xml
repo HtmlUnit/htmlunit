@@ -716,6 +716,37 @@
 
     <class name="Element" extends="EventNode" classname="com.gargoylesoftware.htmlunit.javascript.host.Element"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomElement">
+        <property name="attributes" readable="true" writable="false"/>
+        <property name="tagName" readable="true" writable="false"/>
+        <property name="text" readable="true" writable="false">
+            <doclink url="http://msdn2.microsoft.com/en-us/library/ms762687.aspx" descr="MSDN documentation"/>
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="xml" readable="true" writable="false">
+            <doclink url="http://msdn.microsoft.com/en-us/library/ms755989.aspx" descr="MSDN documentation"/>
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+
+        <function name="getAttribute"/>
+        <function name="getAttributeNode"/>
+        <function name="getElementsByTagName"/>
+        <function name="getElementsByTagNameNS">
+            <browser name="Firefox"/>
+        </function>
+        <function name="hasAttribute">
+            <browser name="Firefox"/>
+        </function>
+        <function name="selectNodes">
+            <doclink url="http://msdn2.microsoft.com/en-us/library/ms754523.aspx"
+                    descr="MSDN documentation"/>
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
+        <function name="selectSingleNode">
+            <doclink url="http://msdn2.microsoft.com/en-us/library/ms757846.aspx"
+                    descr="MSDN documentation"/>
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
+        <function name="setAttribute"/>
     </class>
 
     <class name="Event" classname="com.gargoylesoftware.htmlunit.javascript.host.Event" JSObject="true">
@@ -2232,42 +2263,6 @@
         <property name="reason" readable="true" writable="false"/>
         <property name="srcText" readable="true" writable="false"/>
         <property name="url" readable="true" writable="false"/>
-    </class>
-
-    <class name="XMLElement" extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLElement"
-        htmlClass="com.gargoylesoftware.htmlunit.xml.XmlElement"
-        JSObject="true">
-        <property name="attributes" readable="true" writable="false"/>
-        <property name="tagName" readable="true" writable="false"/>
-        <property name="text" readable="true" writable="false">
-            <doclink url="http://msdn2.microsoft.com/en-us/library/ms762687.aspx" descr="MSDN documentation"/>
-            <browser name="Microsoft Internet Explorer"/>
-        </property>
-        <property name="xml" readable="true" writable="false">
-            <doclink url="http://msdn.microsoft.com/en-us/library/ms755989.aspx" descr="MSDN documentation"/>
-            <browser name="Microsoft Internet Explorer"/>
-        </property>
-
-        <function name="getAttribute"/>
-        <function name="getAttributeNode"/>
-        <function name="getElementsByTagName"/>
-        <function name="getElementsByTagNameNS">
-            <browser name="Firefox"/>
-        </function>
-        <function name="hasAttribute">
-            <browser name="Firefox"/>
-        </function>
-        <function name="selectNodes">
-            <doclink url="http://msdn2.microsoft.com/en-us/library/ms754523.aspx"
-                    descr="MSDN documentation"/>
-            <browser name="Microsoft Internet Explorer"/>
-        </function>
-        <function name="selectSingleNode">
-            <doclink url="http://msdn2.microsoft.com/en-us/library/ms757846.aspx"
-                    descr="MSDN documentation"/>
-            <browser name="Microsoft Internet Explorer"/>
-        </function>
-        <function name="setAttribute"/>
     </class>
 
     <class name="XMLHttpRequest" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLHttpRequest"
