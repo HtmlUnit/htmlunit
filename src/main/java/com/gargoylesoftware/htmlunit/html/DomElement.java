@@ -159,4 +159,59 @@ public class DomElement extends DomNamespaceNode {
         }
     }
 
+    /**
+     * Recursively write the XML data for the node tree starting at <code>node</code>.
+     *
+     * @param indent white space to indent child nodes
+     * @param printWriter writer where child nodes are written
+     */
+    @Override
+    protected void printXml(final String indent, final PrintWriter printWriter) {
+        final boolean hasChildren = (getFirstChild() != null);
+        printWriter.print(indent + "<");
+        printOpeningTagContentAsXml(printWriter);
+
+        if (!hasChildren && !isEmptyXmlTagExpanded()) {
+            printWriter.println("/>");
+        }
+        else {
+            printWriter.println(">");
+            printChildrenAsXml(indent, printWriter);
+            printWriter.println(indent + "</" + getTagName() + ">");
+        }
+    }
+
+    /**
+     * Indicates if a node without children should be written in expanded form as XML
+     * (i.e. with closing tag rather than with "/&gt;")
+     * @return <code>false</code> by default
+     */
+    protected boolean isEmptyXmlTagExpanded() {
+        return false;
+    }
+
+    /**
+     * Returns the qualified name (prefix:local) for the namespace and local name.
+     *
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param localName the name within the namespace
+     * @return the qualified name or just local name if the namespace is not fully defined
+     */
+    //TODO: this must be private
+    protected final String getQualifiedName(final String namespaceURI, final String localName) {
+        final String qualifiedName;
+        if (namespaceURI != null) {
+            final String prefix = namespaces().get(namespaceURI);
+            if (prefix != null) {
+                qualifiedName = prefix + ':' + localName;
+            }
+            else {
+                qualifiedName = localName;
+            }
+        }
+        else {
+            qualifiedName = localName;
+        }
+        return qualifiedName;
+    }
 }

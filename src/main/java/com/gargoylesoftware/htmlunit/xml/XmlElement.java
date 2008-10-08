@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.xml;
 
-import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -150,30 +149,6 @@ public class XmlElement extends DomElement implements Element {
     }
 
     /**
-     * Returns the qualified name (prefix:local) for the namespace and local name.
-     *
-     * @param namespaceURI the URI that identifies an XML namespace
-     * @param localName the name within the namespace
-     * @return the qualified name or just local name if the namespace is not fully defined
-     */
-    private String getQualifiedName(final String namespaceURI, final String localName) {
-        final String qualifiedName;
-        if (namespaceURI != null) {
-            final String prefix = namespaces().get(namespaceURI);
-            if (prefix != null) {
-                qualifiedName = prefix + ':' + localName;
-            }
-            else {
-                qualifiedName = localName;
-            }
-        }
-        else {
-            qualifiedName = localName;
-        }
-        return qualifiedName;
-    }
-
-    /**
      * Create an attribute map as needed by HtmlElement. This is just used by the element factories.
      * @param attributeCount the initial number of attributes to be added to the map
      * @return the attribute map
@@ -197,25 +172,6 @@ public class XmlElement extends DomElement implements Element {
         final DomAttr newAttr = new DomAttr(page, namespaceURI, qualifiedName, value);
         attributeMap.put(qualifiedName, newAttr);
         return newAttr;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void printXml(final String indent, final PrintWriter printWriter) {
-        final boolean hasChildren = (getFirstChild() != null);
-        printWriter.print(indent + "<");
-        printOpeningTagContentAsXml(printWriter);
-
-        if (!hasChildren) {
-            printWriter.println("/>");
-        }
-        else {
-            printWriter.println(">");
-            printChildrenAsXml(indent, printWriter);
-            printWriter.println(indent + "</" + getTagName() + ">");
-        }
     }
 
     /**
