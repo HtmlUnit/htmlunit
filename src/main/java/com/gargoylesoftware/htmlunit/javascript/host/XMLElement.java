@@ -24,9 +24,9 @@ import org.apache.xml.serialize.XMLSerializer;
 import org.mozilla.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.html.DomAttr;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
-import com.gargoylesoftware.htmlunit.xml.XmlElement;
 import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 
 /**
@@ -71,7 +71,7 @@ public class XMLElement extends Node {
      * @return the tag name
      */
     public String jsxGet_tagName() {
-        return ((XmlElement) getDomNodeOrDie()).getTagName();
+        return ((DomElement) getDomNodeOrDie()).getTagName();
     }
 
     /**
@@ -79,12 +79,12 @@ public class XMLElement extends Node {
      * @return the attributes of this XML element
      */
     public Object jsxGet_attributes() {
-        final Map<String, DomAttr> attributes = ((XmlElement) getDomNodeOrDie()).getAttributesMap();
+        final Map<String, DomAttr> attributes = ((DomElement) getDomNodeOrDie()).getAttributesMap();
         final List<ScriptableObject> list = new ArrayList<ScriptableObject>();
         for (final DomAttr attr : attributes.values()) {
             list.add(attr.getScriptObject());
         }
-        return new NamedNodeMap((XmlElement) getDomNodeOrDie(), false);
+        return new NamedNodeMap((DomElement) getDomNodeOrDie(), false);
     }
 
     /**
@@ -93,8 +93,8 @@ public class XMLElement extends Node {
      * @return the value of the specified attribute, <code>null</code> if the attribute is not defined
      */
     public String jsxFunction_getAttribute(final String attributeName) {
-        final String value = ((XmlElement) getDomNodeOrDie()).getAttributeValue(attributeName);
-        if (value == XmlElement.ATTRIBUTE_NOT_DEFINED) {
+        final String value = ((DomElement) getDomNodeOrDie()).getAttributeValue(attributeName);
+        if (value == DomElement.ATTRIBUTE_NOT_DEFINED) {
             return null;
         }
         return value;
@@ -107,7 +107,7 @@ public class XMLElement extends Node {
      * @param value Value to set the attribute to
      */
     public void jsxFunction_setAttribute(final String name, final String value) {
-        ((XmlElement) getDomNodeOrDie()).setAttributeValue(name, value);
+        ((DomElement) getDomNodeOrDie()).setAttributeValue(name, value);
     }
 
     /**
@@ -129,7 +129,7 @@ public class XMLElement extends Node {
      * @return the XMLAttr node with the specified name or <code>null</code> if there is no such attribute
      */
     public Object jsxFunction_getAttributeNode(final String name) {
-        final Map<String, DomAttr> attributes = ((XmlElement) getDomNodeOrDie()).getAttributesMap();
+        final Map<String, DomAttr> attributes = ((DomElement) getDomNodeOrDie()).getAttributesMap();
         for (final DomAttr attr : attributes.values()) {
             if (attr.getName().equals(name)) {
                 return attr.getScriptObject();
@@ -191,7 +191,7 @@ public class XMLElement extends Node {
             xpath = ".//" + localName;
         }
         else {
-            final String prefix = XmlUtil.lookupPrefix((XmlElement) domNode, namespaceURI);
+            final String prefix = XmlUtil.lookupPrefix((DomElement) domNode, namespaceURI);
             xpath = ".//" + prefix + ':' + localName;
         }
         collection.init(domNode, xpath);
@@ -204,7 +204,7 @@ public class XMLElement extends Node {
      * @return true if an attribute with the given name is specified on this element or has a default value
      */
     public boolean jsxFunction_hasAttribute(final String name) {
-        return ((XmlElement) getDomNodeOrDie()).hasAttribute(name);
+        return ((DomElement) getDomNodeOrDie()).hasAttribute(name);
     }
 
     /**
@@ -218,7 +218,7 @@ public class XMLElement extends Node {
         final XMLSerializer serializer = new XMLSerializer(format);
         serializer.setOutputCharStream(writer);
         try {
-            serializer.serialize(((XmlElement) getDomNodeOrDie()));
+            serializer.serialize(((DomElement) getDomNodeOrDie()));
         }
         catch (final Exception e) {
             throw new RuntimeException("Internal error: failed to serialize", e);

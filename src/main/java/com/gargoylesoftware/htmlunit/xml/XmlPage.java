@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 
 /**
@@ -156,12 +157,12 @@ public class XmlPage extends SgmlPage implements Document {
      * @return the root element
      */
     //TODO: should be removed later to SgmlPage
-    public XmlElement getDocumentXmlElement() {
+    public DomElement getDocumentXmlElement() {
         DomNode childNode = getFirstChild();
-        while (childNode != null && !(childNode instanceof XmlElement)) {
+        while (childNode != null && !(childNode instanceof DomElement)) {
             childNode = childNode.getNextSibling();
         }
-        return (XmlElement) childNode;
+        return (DomElement) childNode;
     }
 
     /**
@@ -170,7 +171,7 @@ public class XmlPage extends SgmlPage implements Document {
      * @param tagName the tag name
      * @return the new XML element
      */
-    public XmlElement createXmlElement(final String tagName) {
+    public DomElement createXmlElement(final String tagName) {
         return createXmlElementNS(null, tagName);
     }
 
@@ -181,7 +182,7 @@ public class XmlPage extends SgmlPage implements Document {
      * @param qualifiedName the qualified name of the element type to instantiate
      * @return the new HTML element
      */
-    public XmlElement createXmlElementNS(final String namespaceURI, final String qualifiedName) {
+    public DomElement createXmlElementNS(final String namespaceURI, final String qualifiedName) {
         return new XmlElement(namespaceURI, qualifiedName, this, new HashMap<String, DomAttr>());
     }
 

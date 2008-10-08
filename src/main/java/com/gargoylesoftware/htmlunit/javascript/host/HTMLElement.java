@@ -476,7 +476,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param value the new attribute value
      */
     public void jsxFunction_setAttributeNS(final String namespaceURI, final String qualifiedName, final String value) {
-        getHtmlElementOrDie().setAttributeValue(namespaceURI, qualifiedName, value);
+        getHtmlElementOrDie().setAttributeNS(namespaceURI, qualifiedName, value);
     }
 
     /**

@@ -19,17 +19,22 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.w3c.dom.Attr;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.TypeInfo;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
+import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class DomElement extends DomNamespaceNode {
+public class DomElement extends DomNamespaceNode implements Element {
 
     private static final long serialVersionUID = 8573853996234946066L;
 
@@ -199,8 +204,7 @@ public class DomElement extends DomNamespaceNode {
      * @param localName the name within the namespace
      * @return the qualified name or just local name if the namespace is not fully defined
      */
-    //TODO: this must be private
-    protected final String getQualifiedName(final String namespaceURI, final String localName) {
+    private String getQualifiedName(final String namespaceURI, final String localName) {
         final String qualifiedName;
         if (namespaceURI != null) {
             final String prefix = namespaces().get(namespaceURI);
@@ -215,6 +219,19 @@ public class DomElement extends DomNamespaceNode {
             qualifiedName = localName;
         }
         return qualifiedName;
+    }
+
+    /**
+     * Returns the value of the attribute specified by name or an empty string. If the
+     * result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
+     * if the attribute wasn't specified or {@link #ATTRIBUTE_VALUE_EMPTY} if the
+     * attribute was specified but it was empty.
+     *
+     * @param attributeName the name of the attribute
+     * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED} or {@link #ATTRIBUTE_VALUE_EMPTY}
+     */
+    public final String getAttribute(final String attributeName) {
+        return getAttributeValue(attributeName);
     }
 
     /**
@@ -282,7 +299,171 @@ public class DomElement extends DomNamespaceNode {
      * {@inheritDoc}
      */
     @Override
-    public org.w3c.dom.NamedNodeMap getAttributes() {
+    public NamedNodeMap getAttributes() {
         return new NamedNodeMap(this, false);
+    }
+
+    /**
+     * Sets the value of the attribute specified by name.
+     *
+     * @param attributeName the name of the attribute
+     * @param attributeValue the value of the attribute
+     */
+    public final void setAttribute(final String attributeName, final String attributeValue) {
+        setAttributeValue(null, attributeName, attributeValue);
+    }
+
+    /**
+     * Sets the value of the attribute specified by namespace and qualified name.
+     *
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name (prefix:local) of the attribute
+     * @param attributeValue the value of the attribute
+     */
+    public final void setAttributeNS(final String namespaceURI, final String qualifiedName,
+            final String attributeValue) {
+        setAttributeValue(namespaceURI, qualifiedName, attributeValue);
+    }
+
+    /**
+     * Sets the value of the specified attribute.
+     *
+     * @param attributeName the name of the attribute
+     * @param attributeValue the value of the attribute
+     */
+    public void setAttributeValue(final String attributeName, final String attributeValue) {
+        setAttributeValue(null, attributeName, attributeValue);
+    }
+
+    /**
+     * Sets the value of the specified attribute.
+     *
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the attribute
+     * @param attributeValue the value of the attribute
+     */
+    @SuppressWarnings("unchecked")
+    public void setAttributeValue(final String namespaceURI, final String qualifiedName,
+            final String attributeValue) {
+        final String value = attributeValue;
+
+        if (attributes() == Collections.EMPTY_MAP) {
+            setAttributes(ListOrderedMap.decorate(new HashMap<String, DomAttr>(1)));
+        }
+        final DomAttr newAttr = addAttributeToMap((XmlPage) getPage(), attributes(), namespaceURI,
+            qualifiedName, value);
+        if (namespaceURI != null) {
+            namespaces().put(namespaceURI, newAttr.getPrefix());
+        }
+        attributes().put(newAttr.getName(), newAttr);
+    }
+
+    /**
+     * Adds an attribute to the specified attribute map. This is just used by the element factories.
+     * @param page the XML page containing the attribute
+     * @param attributeMap the attribute map where the attribute will be added
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the attribute
+     * @param value the value of the attribute
+     * @return the new attribute that was added to the specified attribute map
+     */
+    private static DomAttr addAttributeToMap(final XmlPage page, final Map<String, DomAttr> attributeMap,
+        final String namespaceURI, final String qualifiedName, final String value) {
+        final DomAttr newAttr = new DomAttr(page, namespaceURI, qualifiedName, value);
+        attributeMap.put(qualifiedName, newAttr);
+        return newAttr;
+    }
+
+    /**
+     * Returns the value of the attribute specified by namespace and local name or an empty
+     * string. If the result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
+     * if the attribute wasn't specified or {@link #ATTRIBUTE_VALUE_EMPTY} if the
+     * attribute was specified but it was empty.
+     *
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param localName the name within the namespace
+     * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED} or {@link #ATTRIBUTE_VALUE_EMPTY}
+     */
+    public final String getAttributeNS(final String namespaceURI, final String localName) {
+        return getAttributeValue(getQualifiedName(namespaceURI, localName));
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Attr getAttributeNode(final String name) {
+        throw new UnsupportedOperationException("DomElement.getAttributeNode is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Attr getAttributeNodeNS(final String namespaceURI, final String localName) {
+        throw new UnsupportedOperationException("DomElement.getAttributeNodeNS is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public NodeList getElementsByTagName(final String tagName) {
+        return new DomNodeList(this, "//" + tagName);
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public NodeList getElementsByTagNameNS(final String namespace, final String localName) {
+        throw new UnsupportedOperationException("DomElement.getElementsByTagNameNS is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public TypeInfo getSchemaTypeInfo() {
+        throw new UnsupportedOperationException("DomElement.getSchemaTypeInfo is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public void setIdAttribute(final String name, final boolean isId) {
+        throw new UnsupportedOperationException("DomElement.setIdAttribute is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public void setIdAttributeNS(final String namespaceURI, final String localName, final boolean isId) {
+        throw new UnsupportedOperationException("DomElement.setIdAttributeNS is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Attr setAttributeNode(final Attr attribute) {
+        throw new UnsupportedOperationException("DomElement.setAttributeNode is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Attr setAttributeNodeNS(final Attr attribute) {
+        throw new UnsupportedOperationException("DomElement.setAttributeNodeNS is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public final void setIdAttributeNode(final Attr idAttr, final boolean isId) {
+        throw new UnsupportedOperationException("DomElement.setIdAttributeNode is not yet implemented.");
     }
 }

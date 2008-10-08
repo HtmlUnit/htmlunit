@@ -36,17 +36,14 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
 import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.Function;
-import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.EntityReference;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
-import org.w3c.dom.TypeInfo;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
@@ -78,7 +75,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.UIEvent;
  * @author Dmitri Zoubkov
  * @author Sudhan Moghe
  */
-public abstract class HtmlElement extends DomElement implements Element {
+public abstract class HtmlElement extends DomElement {
 
     private static final long serialVersionUID = -2841932584831342634L;
 
@@ -126,33 +123,6 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Returns the value of the attribute specified by name or an empty string. If the
-     * result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
-     * if the attribute wasn't specified or {@link #ATTRIBUTE_VALUE_EMPTY} if the
-     * attribute was specified but it was empty.
-     *
-     * @param attributeName the name of the attribute
-     * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED} or {@link #ATTRIBUTE_VALUE_EMPTY}
-     */
-    public final String getAttribute(final String attributeName) {
-        return getAttributeValue(attributeName);
-    }
-
-    /**
-     * Returns the value of the attribute specified by namespace and local name or an empty
-     * string. If the result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
-     * if the attribute wasn't specified or {@link #ATTRIBUTE_VALUE_EMPTY} if the
-     * attribute was specified but it was empty.
-     *
-     * @param namespaceURI the URI that identifies an XML namespace
-     * @param localName the name within the namespace
-     * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED} or {@link #ATTRIBUTE_VALUE_EMPTY}
-     */
-    public final String getAttributeNS(final String namespaceURI, final String localName) {
-        return getAttributeValue(getQualifiedName(namespaceURI, localName));
-    }
-
-    /**
      * Returns the value of the specified attribute or an empty string. If the
      * result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
      * if the attribute wasn't specified or {@link #ATTRIBUTE_VALUE_EMPTY} if the
@@ -163,38 +133,6 @@ public abstract class HtmlElement extends DomElement implements Element {
      */
     public final String getAttributeValue(final String attributeName) {
         return super.getAttributeValue(attributeName.toLowerCase());
-    }
-
-    /**
-     * Sets the value of the attribute specified by name.
-     *
-     * @param attributeName the name of the attribute
-     * @param attributeValue the value of the attribute
-     */
-    public final void setAttribute(final String attributeName, final String attributeValue) {
-        setAttributeValue(null, attributeName, attributeValue);
-    }
-
-    /**
-     * Sets the value of the attribute specified by namespace and qualified name.
-     *
-     * @param namespaceURI the URI that identifies an XML namespace
-     * @param qualifiedName the qualified name (prefix:local) of the attribute
-     * @param attributeValue the value of the attribute
-     */
-    public final void setAttributeNS(final String namespaceURI, final String qualifiedName,
-            final String attributeValue) {
-        setAttributeValue(namespaceURI, qualifiedName, attributeValue);
-    }
-
-    /**
-     * Sets the value of the specified attribute.
-     *
-     * @param attributeName the name of the attribute
-     * @param attributeValue the value of the attribute
-     */
-    public final void setAttributeValue(final String attributeName, final String attributeValue) {
-        setAttributeValue(null, attributeName, attributeValue);
     }
 
     /**
@@ -273,20 +211,6 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    public NodeList getElementsByTagName(final String tagName) {
-        return new DomNodeList(this, "//" + tagName);
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
-    public NodeList getElementsByTagNameNS(final String namespace, final String name) {
-        throw new UnsupportedOperationException("HtmlElement.getElementsByTagNameNS is not yet implemented.");
-    }
-
     /**
      * Returns the HTML elements that are descendants of this element and that have one of the specified tag names.
      * @param tagNames the tag names to match (case-insensitive)
@@ -317,38 +241,6 @@ public abstract class HtmlElement extends DomElement implements Element {
             }
         }
         return list;
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
-    public Attr setAttributeNodeNS(final Attr attribute) {
-        throw new UnsupportedOperationException("HtmlElement.setAttributeNodeNS is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
-    public Attr setAttributeNode(final Attr attribute) {
-        throw new UnsupportedOperationException("HtmlElement.setAttributeNode is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
-    public Attr getAttributeNodeNS(final String namespaceURI, final String localName) {
-        throw new UnsupportedOperationException("HtmlElement.getAttributeNodeNS is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
-    public Attr getAttributeNode(final String name) {
-        throw new UnsupportedOperationException("HtmlElement.getAttributeNode is not yet implemented.");
     }
 
     /**
@@ -464,7 +356,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * {@inheritDoc}
      */
     @Override
-    public org.w3c.dom.NamedNodeMap getAttributes() {
+    public NamedNodeMap getAttributes() {
         return new NamedNodeMap(this, true);
     }
 
@@ -503,38 +395,6 @@ public abstract class HtmlElement extends DomElement implements Element {
      */
     public final void setId(final String newId) {
         setAttributeValue("id", newId);
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
-    public TypeInfo getSchemaTypeInfo() {
-        throw new UnsupportedOperationException("HtmlElement.getSchemaTypeInfo is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
-    public final void setIdAttribute(final String name, final boolean isId) {
-        throw new UnsupportedOperationException("HtmlElement.setIdAttribute is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
-    public final void setIdAttributeNS(final String namespaceURI, final String localName, final boolean isId) {
-        throw new UnsupportedOperationException("HtmlElement.setIdAttributeNS is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
-    public final void setIdAttributeNode(final Attr idAttr, final boolean isId) {
-        throw new UnsupportedOperationException("HtmlElement.setIdAttributeNode is not yet implemented.");
     }
 
     /**

@@ -38,7 +38,6 @@ import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.xml.XmlElement;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -157,7 +156,7 @@ public class XMLDocument extends Document {
         final SimpleScriptable scriptable;
 
         // TODO: cleanup, getScriptObject() should be used!!!
-        if (domNode instanceof XmlElement) {
+        if (domNode instanceof DomElement) {
             scriptable = new XMLElement();
         }
         else if (domNode instanceof DomAttr) {

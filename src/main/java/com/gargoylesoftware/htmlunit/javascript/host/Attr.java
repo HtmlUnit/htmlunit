@@ -18,7 +18,6 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.xml.XmlElement;
 
 /**
  * A JavaScript object for an Attribute.
@@ -91,12 +90,7 @@ public class Attr extends SimpleScriptable {
      */
     public void detachFromParent() {
         if (parent_ != null) {
-            if (parent_ instanceof HtmlElement) {
-                value_ = ((HtmlElement) parent_).getAttributeValue(name_);
-            }
-            else {
-                value_ = ((XmlElement) parent_).getAttributeValue(name_);
-            }
+            value_ = parent_.getAttributeValue(name_);
         }
         parent_ = null;
     }
@@ -202,7 +196,7 @@ public class Attr extends SimpleScriptable {
             if (parent_ instanceof HtmlElement) {
                 return ((HtmlElement) parent_).isAttributeDefined(name_);
             }
-            return ((XmlElement) parent_).hasAttribute(name_);
+            return ((DomElement) parent_).hasAttribute(name_);
         }
         return true;
     }
@@ -213,10 +207,7 @@ public class Attr extends SimpleScriptable {
      */
     public String jsxGet_value() {
         if (parent_ != null) {
-            if (parent_ instanceof HtmlElement) {
-                return ((HtmlElement) parent_).getAttributeValue(name_);
-            }
-            return ((XmlElement) parent_).getAttributeValue(name_);
+            return parent_.getAttributeValue(name_);
         }
         return value_;
     }
@@ -227,10 +218,7 @@ public class Attr extends SimpleScriptable {
      */
     public void jsxSet_value(final String value) {
         if (parent_ != null) {
-            if (parent_ instanceof HtmlElement) {
-                ((HtmlElement) parent_).setAttributeValue(name_, value);
-            }
-            ((XmlElement) parent_).setAttributeValue(name_, value);
+            parent_.setAttributeValue(name_, value);
         }
         else {
             value_ = value;

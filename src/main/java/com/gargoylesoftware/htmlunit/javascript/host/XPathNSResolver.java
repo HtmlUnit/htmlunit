@@ -14,9 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.xml.XmlElement;
 import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 
 /**
@@ -45,10 +44,7 @@ public class XPathNSResolver extends SimpleScriptable {
      * @return the associated namespace URI or null if none is found
      */
     public String jsxFunction_lookupNamespaceURI(final String prefix) {
-        if (element_ instanceof HTMLElement) {
-            return XmlUtil.lookupNamespaceURI((HtmlElement) ((HTMLElement) element_).getDomNodeOrDie(), prefix);
-        }
-        return XmlUtil.lookupNamespaceURI((XmlElement) ((XMLElement) element_).getDomNodeOrDie(), prefix);
+        return XmlUtil.lookupNamespaceURI((DomElement) ((HTMLElement) element_).getDomNodeOrDie(), prefix);
     }
 
 }

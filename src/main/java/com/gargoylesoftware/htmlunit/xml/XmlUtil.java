@@ -41,10 +41,10 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.IElementFactory;
 
@@ -121,7 +121,7 @@ public final class XmlUtil {
     /**
      * Recursively appends a {@link Node} child to {@link DomNode} parent.
      *
-     * @param page the owner page of {@link XmlElement}s to be created
+     * @param page the owner page of {@link DomElement}s to be created
      * @param parent the parent DomNode
      * @param child the child Node
      */
@@ -227,30 +227,12 @@ public final class XmlUtil {
      * @return the namespace URI bound to the prefix; or null if there is no such namespace
      * @see #lookupNamespaceURI(HtmlElement, String)
      */
-    public static String lookupNamespaceURI(final XmlElement element, final String prefix) {
+    public static String lookupNamespaceURI(final DomElement element, final String prefix) {
         String uri = element.getAttributeValue("xmlns:" + prefix);
-        if (uri == XmlElement.ATTRIBUTE_NOT_DEFINED) {
+        if (uri == DomElement.ATTRIBUTE_NOT_DEFINED) {
             final DomNode parentNode = element.getParentNode();
-            if (parentNode instanceof XmlElement) {
-                uri = lookupNamespaceURI((XmlElement) parentNode, prefix);
-            }
-        }
-        return uri;
-    }
-
-    /**
-     * Search for the namespace URI of the given prefix, starting from the specified element.
-     * @param element the element to start searching from
-     * @param prefix the namespace prefix
-     * @return the namespace URI bound to the prefix; or null if there is no such namespace
-     * @see #lookupNamespaceURI(XmlElement, String)
-     */
-    public static String lookupNamespaceURI(final HtmlElement element, final String prefix) {
-        String uri = element.getAttributeValue("xmlns:" + prefix);
-        if (uri == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
-            final DomNode parentNode = element.getParentNode();
-            if (parentNode instanceof HtmlElement) {
-                uri = lookupNamespaceURI((HtmlElement) parentNode, prefix);
+            if (parentNode instanceof DomElement) {
+                uri = lookupNamespaceURI((DomElement) parentNode, prefix);
             }
         }
         return uri;
@@ -262,7 +244,7 @@ public final class XmlUtil {
      * @param namespace the namespace prefix
      * @return the prefix bound to the namespace URI; or null if there is no such namespace
      */
-    public static String lookupPrefix(final XmlElement element, final String namespace) {
+    public static String lookupPrefix(final DomElement element, final String namespace) {
         final Map<String, DomAttr> attributes = element.getAttributesMap();
         for (final String name : attributes.keySet()) {
             if (name.startsWith("xmlns:") && attributes.get(name).getValue().equals(namespace)) {
@@ -270,8 +252,8 @@ public final class XmlUtil {
             }
         }
         for (final DomNode child : element.getChildren()) {
-            if (child instanceof XmlElement) {
-                final String prefix = lookupPrefix((XmlElement) child, namespace);
+            if (child instanceof DomElement) {
+                final String prefix = lookupPrefix((DomElement) child, namespace);
                 if (prefix != null) {
                     return prefix;
                 }

@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 
 /**
  * A collection of nodes that can be accessed by name. String comparisons in this class are case-insensitive when
- * used with an {@link HtmlElement}, but case-sensitive when used with an {@link XmlElement}.
+ * used with an {@link HtmlElement}, but case-sensitive when used with a {@link DomElement}.
  *
  * @version $Revision$
  * @author Daniel Gredler

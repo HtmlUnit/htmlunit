@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
@@ -41,7 +42,6 @@ import com.gargoylesoftware.htmlunit.html.NonSerializable;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
-import com.gargoylesoftware.htmlunit.xml.XmlElement;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -287,8 +287,8 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      *         or null if nothing is set.
      */
     private static Boolean isXMLSpaceDefault(DomNode node) {
-        for ( ; node instanceof XmlElement; node = node.getParentNode()) {
-            final String value = ((XmlElement) node).getAttributeValue("xml:space");
+        for ( ; node instanceof DomElement; node = node.getParentNode()) {
+            final String value = ((DomElement) node).getAttributeValue("xml:space");
             if (value.length() != 0) {
                 if (value.equals("default")) {
                     return Boolean.TRUE;
@@ -320,14 +320,8 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
 
         // See if there is an element in the element array with the specified id.
         for (final Object next : elements) {
-            if (next instanceof HtmlElement || next instanceof XmlElement) {
-                final String id;
-                if (next instanceof HtmlElement) {
-                    id = ((HtmlElement) next).getId();
-                }
-                else {
-                    id = ((XmlElement) next).getAttributeValue("id");
-                }
+            if (next instanceof DomElement) {
+                final String id = ((DomElement) next).getAttributeValue("id");
                 if (id != null && id.equals(name)) {
                     getLog().debug("Property \"" + name + "\" evaluated (by id) to " + next);
                     return getScriptableFor(next);

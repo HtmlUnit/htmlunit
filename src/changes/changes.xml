@@ -9,6 +9,9 @@
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
             <action type="update" dev="asashour">
+                XmlElement: is deprecated, use DomElement instead.
+            </action>
+            <action type="update" dev="asashour">
                 HtmlElement: deprecate getAttributesCollection().
             </action>
             <action type="update" dev="asashour" id="2129180">
