@@ -70,30 +70,11 @@ public class XmlElement extends DomElement implements Element {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public short getNodeType() {
-        return org.w3c.dom.Node.ELEMENT_NODE;
-    }
-
-    /**
-     * @return the same value as returned by {@link #getTagName()},
-     */
-    @Override
-    public String getNodeName() {
-        return getTagName();
-    }
-
-    /**
      * Returns the tag name of this element.
      * @return the tag name of this element
      */
     public String getTagName() {
-        if (getNamespaceURI() == null) {
-            return getLocalName();
-        }
-        return getQualifiedName();
+        return getNodeName();
     }
 
     /**

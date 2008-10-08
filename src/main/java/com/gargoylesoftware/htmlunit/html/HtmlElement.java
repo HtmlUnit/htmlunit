@@ -587,16 +587,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @return the tag name of this element
      */
     public String getTagName() {
-        if (getNamespaceURI() == null) {
-            return getLocalName().toLowerCase();
-        }
-        return getLocalName();
-    }
-
-    /** @return the node type */
-    @Override
-    public short getNodeType() {
-        return org.w3c.dom.Node.ELEMENT_NODE;
+        return getNodeName();
     }
 
     /**
@@ -604,7 +595,10 @@ public abstract class HtmlElement extends DomElement implements Element {
      */
     @Override
     public String getNodeName() {
-        return getTagName();
+        if (getNamespaceURI() == null) {
+            return getLocalName().toLowerCase();
+        }
+        return getLocalName();
     }
 
     /**

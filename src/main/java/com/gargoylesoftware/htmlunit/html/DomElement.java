@@ -20,7 +20,7 @@ import com.gargoylesoftware.htmlunit.Page;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public abstract class DomElement extends DomNamespaceNode {
+public class DomElement extends DomNamespaceNode {
 
     private static final long serialVersionUID = 8573853996234946066L;
 
@@ -33,5 +33,24 @@ public abstract class DomElement extends DomNamespaceNode {
      */
     protected DomElement(final String namespaceURI, final String qualifiedName, final Page page) {
         super(namespaceURI, qualifiedName, page);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getNodeName() {
+        if (getNamespaceURI() == null) {
+            return getLocalName();
+        }
+        return getQualifiedName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final short getNodeType() {
+        return ELEMENT_NODE;
     }
 }
