@@ -28,7 +28,6 @@ import org.w3c.dom.TypeInfo;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
-import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 
 /**
  * An XML element.
@@ -132,14 +131,6 @@ public class XmlElement extends DomElement implements Element {
         final DomAttr newAttr = new DomAttr(page, namespaceURI, qualifiedName, value);
         attributeMap.put(qualifiedName, newAttr);
         return newAttr;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public org.w3c.dom.NamedNodeMap getAttributes() {
-        return new NamedNodeMap(this);
     }
 
     /**

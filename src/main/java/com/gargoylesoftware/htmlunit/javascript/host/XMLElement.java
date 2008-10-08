@@ -84,7 +84,7 @@ public class XMLElement extends Node {
         for (final DomAttr attr : attributes.values()) {
             list.add(attr.getScriptObject());
         }
-        return new NamedNodeMap((XmlElement) getDomNodeOrDie());
+        return new NamedNodeMap((XmlElement) getDomNodeOrDie(), false);
     }
 
     /**

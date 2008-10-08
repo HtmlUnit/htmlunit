@@ -23,6 +23,7 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.w3c.dom.Attr;
 
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 
 /**
  * @version $Revision$
@@ -277,4 +278,11 @@ public class DomElement extends DomNamespaceNode {
         return attributes_;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public org.w3c.dom.NamedNodeMap getAttributes() {
+        return new NamedNodeMap(this, false);
+    }
 }

@@ -21,9 +21,8 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.html.DomAttr;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.xml.XmlElement;
 
 /**
  * A collection of nodes that can be accessed by name. String comparisons in this class are case-insensitive when
@@ -64,25 +63,16 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * Creates a new named node map for the specified element.
      *
      * @param element the owning element
+     * @param caseInsensitive whether to ignore case or no
      */
-    public NamedNodeMap(final HtmlElement element) {
-        caseInsensitive_ = true;
+    public NamedNodeMap(final DomElement element, final boolean caseInsensitive) {
+        caseInsensitive_ = caseInsensitive;
         for (final DomAttr attr : element.getAttributesMap().values()) {
-            nodes_.put(attr.getName().toLowerCase(), attr);
-        }
-        setParentScope(element.getScriptObject());
-        setPrototype(getPrototype(getClass()));
-    }
-
-    /**
-     * Creates a new named node map for the specified element.
-     *
-     * @param element the owning element
-     */
-    public NamedNodeMap(final XmlElement element) {
-        caseInsensitive_ = false;
-        for (final DomAttr attr : element.getAttributesMap().values()) {
-            nodes_.put(attr.getName(), attr);
+            String name = attr.getName();
+            if (caseInsensitive) {
+                name = name.toLowerCase();
+            }
+            nodes_.put(name, attr);
         }
         setParentScope(element.getScriptObject());
         setPrototype(getPrototype(getClass()));

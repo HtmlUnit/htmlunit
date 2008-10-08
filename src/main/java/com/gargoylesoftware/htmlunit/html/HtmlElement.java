@@ -465,13 +465,13 @@ public abstract class HtmlElement extends DomElement implements Element {
      */
     @Override
     public org.w3c.dom.NamedNodeMap getAttributes() {
-        return new NamedNodeMap(this);
+        return new NamedNodeMap(this, true);
     }
 
     /**
      * @return a collection of {@link DomAttr} objects representing the
      * attributes of this element. The elements are ordered as found in the HTML source code.
-     * @deprecated As of 2.4, please use {@link #getAttributesMap()} instead.
+     * @deprecated As of 2.4, please use {@link #getAttributes()} instead.
      */
     @Deprecated
     public Collection<DomAttr> getAttributesCollection() {

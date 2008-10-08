@@ -367,7 +367,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.attributes">Gecko DOM Reference</a>
      */
     public NamedNodeMap jsxGet_attributes() {
-        return new NamedNodeMap(getHtmlElementOrDie());
+        return new NamedNodeMap(getHtmlElementOrDie(), true);
     }
 
     /**
