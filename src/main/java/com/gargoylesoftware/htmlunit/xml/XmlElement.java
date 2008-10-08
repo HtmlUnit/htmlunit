@@ -55,28 +55,13 @@ public class XmlElement extends DomElement implements Element {
     }
 
     /**
-     * Returns the value of the specified attribute or an empty string. If the
-     * result is an empty string then it will be {@link #ATTRIBUTE_NOT_DEFINED}
-     *
-     * @param attributeName the name of the attribute
-     * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED}
-     */
-    public final String getAttributeValue(final String attributeName) {
-        final DomAttr attr = attributes().get(attributeName);
-
-        if (attr != null) {
-            return attr.getNodeValue();
-        }
-        return ATTRIBUTE_NOT_DEFINED;
-    }
-
-    /**
      * Returns the map holding the attributes, keyed by name.
      * @return the attributes map
      */
     public Map<String, DomAttr> getAttributesMap() {
         return attributes();
     }
+
     /**
      * Sets the value of the attribute specified by name.
      *
@@ -129,23 +114,6 @@ public class XmlElement extends DomElement implements Element {
             namespaces().put(namespaceURI, newAttr.getPrefix());
         }
         attributes().put(newAttr.getName(), newAttr);
-    }
-
-    /**
-     * Removes an attribute specified by name from this element.
-     * @param attributeName the attribute attributeName
-     */
-    public final void removeAttribute(final String attributeName) {
-        attributes().remove(attributeName.toLowerCase());
-    }
-
-    /**
-     * Removes an attribute specified by namespace and local name from this element.
-     * @param namespaceURI the URI that identifies an XML namespace
-     * @param localName the name within the namespace
-     */
-    public final void removeAttributeNS(final String namespaceURI, final String localName) {
-        removeAttribute(getQualifiedName(namespaceURI, localName));
     }
 
     /**
@@ -239,22 +207,6 @@ public class XmlElement extends DomElement implements Element {
      */
     public TypeInfo getSchemaTypeInfo() {
         throw new UnsupportedOperationException("XmlElement.getSchemaTypeInfo is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
-    public boolean hasAttributeNS(final String namespaceURI, final String localName) {
-        throw new UnsupportedOperationException("XmlElement.hasAttributeNS is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
-    public Attr removeAttributeNode(final Attr oldAttr) {
-        throw new UnsupportedOperationException("XmlElement.removeAttributeNode is not yet implemented.");
     }
 
     /**

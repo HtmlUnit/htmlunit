@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringEscapeUtils;
+import org.w3c.dom.Attr;
 
 import com.gargoylesoftware.htmlunit.Page;
 
@@ -214,4 +215,58 @@ public class DomElement extends DomNamespaceNode {
         }
         return qualifiedName;
     }
+
+    /**
+     * Returns the value of the specified attribute or an empty string. If the
+     * result is an empty string then it will be {@link #ATTRIBUTE_NOT_DEFINED}
+     *
+     * @param attributeName the name of the attribute
+     * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED}
+     */
+    public String getAttributeValue(final String attributeName) {
+        final DomAttr attr = attributes().get(attributeName);
+
+        if (attr != null) {
+            return attr.getNodeValue();
+        }
+        return ATTRIBUTE_NOT_DEFINED;
+    }
+
+    /**
+     * Removes an attribute specified by name from this element.
+     * @param attributeName the attribute attributeName
+     */
+    public void removeAttribute(final String attributeName) {
+        attributes().remove(attributeName.toLowerCase());
+    }
+
+    /**
+     * Removes an attribute specified by namespace and local name from this element.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param localName the name within the namespace
+     */
+    public final void removeAttributeNS(final String namespaceURI, final String localName) {
+        removeAttribute(getQualifiedName(namespaceURI, localName));
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public final Attr removeAttributeNode(final Attr attribute) {
+        throw new UnsupportedOperationException("DomElement.removeAttributeNode is not yet implemented.");
+    }
+
+    /**
+     * Returns whether the attribute specified by namespace and local name has a value.
+     *
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param localName the name within the namespace
+     * @return true if an attribute with the given name is specified on this element or has a
+     * default value, false otherwise.
+     */
+    public final boolean hasAttributeNS(final String namespaceURI, final String localName) {
+        return attributes().get(getQualifiedName(namespaceURI, localName)) != null;
+    }
+
 }

@@ -153,18 +153,6 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Returns whether the attribute specified by namespace and local name has a value.
-     *
-     * @param namespaceURI the URI that identifies an XML namespace
-     * @param localName the name within the namespace
-     * @return true if an attribute with the given name is specified on this element or has a
-     * default value, false otherwise.
-     */
-    public final boolean hasAttributeNS(final String namespaceURI, final String localName) {
-        return attributes().get(getQualifiedName(namespaceURI, localName)) != null;
-    }
-
-    /**
      * Returns the value of the specified attribute or an empty string. If the
      * result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
      * if the attribute wasn't specified or {@link #ATTRIBUTE_VALUE_EMPTY} if the
@@ -174,11 +162,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED} or {@link #ATTRIBUTE_VALUE_EMPTY}
      */
     public final String getAttributeValue(final String attributeName) {
-        final DomAttr attr = attributes().get(attributeName.toLowerCase());
-        if (attr != null) {
-            return attr.getNodeValue();
-        }
-        return ATTRIBUTE_NOT_DEFINED;
+        return super.getAttributeValue(attributeName.toLowerCase());
     }
 
     /**
@@ -355,14 +339,6 @@ public abstract class HtmlElement extends DomElement implements Element {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public Attr removeAttributeNode(final Attr attribute) {
-        throw new UnsupportedOperationException("HtmlElement.removeAttributeNode is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
     public Attr getAttributeNodeNS(final String namespaceURI, final String localName) {
         throw new UnsupportedOperationException("HtmlElement.getAttributeNodeNS is not yet implemented.");
     }
@@ -385,7 +361,9 @@ public abstract class HtmlElement extends DomElement implements Element {
         if (getPage() instanceof HtmlPage) {
             ((HtmlPage) getPage()).removeMappedElement(this);
         }
-        attributes().remove(attributeName.toLowerCase());
+
+        super.removeAttribute(attributeName);
+
         if (getPage() instanceof HtmlPage) {
             ((HtmlPage) getPage()).addMappedElement(this);
 
@@ -393,15 +371,6 @@ public abstract class HtmlElement extends DomElement implements Element {
             fireHtmlAttributeRemoved(event);
             ((HtmlPage) getPage()).fireHtmlAttributeRemoved(event);
         }
-    }
-
-    /**
-     * Removes an attribute specified by namespace and local name from this element.
-     * @param namespaceURI the URI that identifies an XML namespace
-     * @param localName the name within the namespace
-     */
-    public final void removeAttributeNS(final String namespaceURI, final String localName) {
-        removeAttribute(getQualifiedName(namespaceURI, localName));
     }
 
     /**
