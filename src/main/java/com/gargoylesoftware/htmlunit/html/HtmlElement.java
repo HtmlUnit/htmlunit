@@ -83,12 +83,6 @@ public abstract class HtmlElement extends DomElement implements Element {
 
     private static final long serialVersionUID = -2841932584831342634L;
 
-    /** Constant meaning that the specified attribute was not defined. */
-    public static final String ATTRIBUTE_NOT_DEFINED = new String("");
-
-    /** Constant meaning that the specified attribute was found but its value was empty. */
-    public static final String ATTRIBUTE_VALUE_EMPTY = new String("");
-
     /**
      * Constant indicating that a tab index value is out of bounds (less than <tt>0</tt> or greater
      * than <tt>32767</tt>).
@@ -98,12 +92,6 @@ public abstract class HtmlElement extends DomElement implements Element {
     public static final Short TAB_INDEX_OUT_OF_BOUNDS = new Short(Short.MIN_VALUE);
 
     private final transient Log mainLog_ = LogFactory.getLog(getClass());
-
-    /** The map holding the attributes, keyed by name. */
-    private Map<String, DomAttr> attributes_;
-
-    /** The map holding the namespaces, keyed by URI. */
-    private Map<String, String> namespaces_ = new HashMap<String, String>();
 
     /** The listeners which are to be notified of attribute changes. */
     private List<HtmlAttributeChangeListener> attributeListeners_;
@@ -121,22 +109,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      */
     protected HtmlElement(final String namespaceURI, final String qualifiedName, final Page page,
             final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, page);
-        if (attributes != null) {
-            attributes_ = attributes;
-            // The HtmlAttr objects are created before the HtmlElement, so we need to go set the
-            // parent HtmlElement, now. Also index the namespaces while we are at it.
-            for (final DomAttr entry : attributes_.values()) {
-                entry.setParentNode(this);
-                final String attrNamespaceURI = entry.getNamespaceURI();
-                if (attrNamespaceURI != null) {
-                    namespaces_.put(attrNamespaceURI, entry.getPrefix());
-                }
-            }
-        }
-        else {
-            attributes_ = Collections.emptyMap();
-        }
+        super(namespaceURI, qualifiedName, page, attributes);
     }
 
     /**
@@ -146,8 +119,8 @@ public abstract class HtmlElement extends DomElement implements Element {
     @Override
     public DomNode cloneNode(final boolean deep) {
         final HtmlElement newNode = (HtmlElement) super.cloneNode(deep);
-        newNode.attributes_ = createAttributeMap(attributes_.size());
-        for (final DomAttr attr : attributes_.values()) {
+        newNode.setAttributes(createAttributeMap(attributes().size()));
+        for (final DomAttr attr : attributes().values()) {
             newNode.setAttributeValue(attr.getNamespaceURI(), attr.getQualifiedName(), attr.getNodeValue(), true);
         }
         return newNode;
@@ -176,7 +149,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     private String getQualifiedName(final String namespaceURI, final String localName) {
         final String qualifiedName;
         if (namespaceURI != null) {
-            final String prefix = namespaces_.get(namespaceURI);
+            final String prefix = namespaces().get(namespaceURI);
             if (prefix != null) {
                 qualifiedName = prefix + ':' + localName;
             }
@@ -209,7 +182,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      */
     @Override
     public boolean hasAttributes() {
-        return !attributes_.isEmpty();
+        return !attributes().isEmpty();
     }
 
     /**
@@ -220,7 +193,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * default value, false otherwise.
      */
     public final boolean hasAttribute(final String attributeName) {
-        return attributes_.get(attributeName) != null;
+        return attributes().get(attributeName) != null;
     }
 
     /**
@@ -232,7 +205,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * default value, false otherwise.
      */
     public final boolean hasAttributeNS(final String namespaceURI, final String localName) {
-        return attributes_.get(getQualifiedName(namespaceURI, localName)) != null;
+        return attributes().get(getQualifiedName(namespaceURI, localName)) != null;
     }
 
     /**
@@ -245,7 +218,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED} or {@link #ATTRIBUTE_VALUE_EMPTY}
      */
     public final String getAttributeValue(final String attributeName) {
-        final DomAttr attr = attributes_.get(attributeName.toLowerCase());
+        final DomAttr attr = attributes().get(attributeName.toLowerCase());
         if (attr != null) {
             return attr.getNodeValue();
         }
@@ -313,8 +286,8 @@ public abstract class HtmlElement extends DomElement implements Element {
         final String oldAttributeValue = getAttributeValue(qualifiedName);
         String value = attributeValue;
 
-        if (attributes_ == Collections.EMPTY_MAP) {
-            attributes_ = createAttributeMap(1);
+        if (attributes() == Collections.EMPTY_MAP) {
+            setAttributes(createAttributeMap(1));
         }
         if (value.length() == 0) {
             value = ATTRIBUTE_VALUE_EMPTY;
@@ -325,11 +298,11 @@ public abstract class HtmlElement extends DomElement implements Element {
             ((HtmlPage) getPage()).removeMappedElement(this);
         }
 
-        final DomAttr newAttr = addAttributeToMap((Page) getOwnerDocument(), attributes_, namespaceURI,
+        final DomAttr newAttr = addAttributeToMap((Page) getOwnerDocument(), attributes(), namespaceURI,
             qualifiedName.toLowerCase(), value);
         newAttr.setParentNode(this);
         if (namespaceURI != null) {
-            namespaces_.put(namespaceURI, newAttr.getPrefix());
+            namespaces().put(namespaceURI, newAttr.getPrefix());
         }
 
         // TODO: Clean up; this is a hack for HtmlElement living within an XmlPage.
@@ -456,7 +429,7 @@ public abstract class HtmlElement extends DomElement implements Element {
         if (getPage() instanceof HtmlPage) {
             ((HtmlPage) getPage()).removeMappedElement(this);
         }
-        attributes_.remove(attributeName.toLowerCase());
+        attributes().remove(attributeName.toLowerCase());
         if (getPage() instanceof HtmlPage) {
             ((HtmlPage) getPage()).addMappedElement(this);
 
@@ -559,7 +532,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @return true if the attribute is defined
      */
     public boolean isAttributeDefined(final String attributeName) {
-        return attributes_.get(attributeName.toLowerCase()) != null;
+        return attributes().get(attributeName.toLowerCase()) != null;
     }
 
     /**
@@ -575,7 +548,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * attributes of this element. The elements are ordered as found in the HTML source code.
      */
     public Collection<DomAttr> getAttributesCollection() {
-        return attributes_.values();
+        return attributes().values();
     }
 
     /**
@@ -854,11 +827,11 @@ public abstract class HtmlElement extends DomElement implements Element {
     protected void printOpeningTagContentAsXml(final PrintWriter printWriter) {
         printWriter.print(getTagName());
 
-        for (final String name : attributes_.keySet()) {
+        for (final String name : attributes().keySet()) {
             printWriter.print(" ");
             printWriter.print(name);
             printWriter.print("=\"");
-            printWriter.print(StringEscapeUtils.escapeXml(attributes_.get(name).getNodeValue()));
+            printWriter.print(StringEscapeUtils.escapeXml(attributes().get(name).getNodeValue()));
             printWriter.print("\"");
         }
     }

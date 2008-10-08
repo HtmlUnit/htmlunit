@@ -43,15 +43,6 @@ public class XmlElement extends DomElement implements Element {
 
     private static final long serialVersionUID = -8119109851558707854L;
 
-    /** Constant meaning that the specified attribute was not defined. */
-    public static final String ATTRIBUTE_NOT_DEFINED = new String("");
-
-    /** The map holding the namespaces, keyed by URI. */
-    private Map<String, String> namespaces_ = new HashMap<String, String>();
-
-    /** The map holding the attributes, keyed by name. */
-    private Map<String, DomAttr> attributes_;
-
     /**
      * Create an instance of a DOM node that can have a namespace.
      *
@@ -62,11 +53,7 @@ public class XmlElement extends DomElement implements Element {
      */
     protected XmlElement(final String namespaceURI, final String qualifiedName, final Page page,
             final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, page);
-        attributes_ = attributes;
-        for (final DomAttr attr : attributes.values()) {
-            attr.setParentNode(this);
-        }
+        super(namespaceURI, qualifiedName, page, attributes);
     }
 
     /**
@@ -85,7 +72,7 @@ public class XmlElement extends DomElement implements Element {
      * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED}
      */
     public final String getAttributeValue(final String attributeName) {
-        final DomAttr attr = attributes_.get(attributeName);
+        final DomAttr attr = attributes().get(attributeName);
 
         if (attr != null) {
             return attr.getNodeValue();
@@ -98,7 +85,7 @@ public class XmlElement extends DomElement implements Element {
      * @return the attributes map
      */
     public Map<String, DomAttr> getAttributesMap() {
-        return attributes_;
+        return attributes();
     }
     /**
      * Sets the value of the attribute specified by name.
@@ -143,15 +130,15 @@ public class XmlElement extends DomElement implements Element {
             final String attributeValue) {
         final String value = attributeValue;
 
-        if (attributes_ == Collections.EMPTY_MAP) {
-            attributes_ = createAttributeMap(1);
+        if (attributes() == Collections.EMPTY_MAP) {
+            setAttributes(createAttributeMap(1));
         }
-        final DomAttr newAttr = addAttributeToMap((XmlPage) getPage(), attributes_, namespaceURI,
+        final DomAttr newAttr = addAttributeToMap((XmlPage) getPage(), attributes(), namespaceURI,
             qualifiedName, value);
         if (namespaceURI != null) {
-            namespaces_.put(namespaceURI, newAttr.getPrefix());
+            namespaces().put(namespaceURI, newAttr.getPrefix());
         }
-        attributes_.put(newAttr.getName(), newAttr);
+        attributes().put(newAttr.getName(), newAttr);
     }
 
     /**
@@ -159,7 +146,7 @@ public class XmlElement extends DomElement implements Element {
      * @param attributeName the attribute attributeName
      */
     public final void removeAttribute(final String attributeName) {
-        attributes_.remove(attributeName.toLowerCase());
+        attributes().remove(attributeName.toLowerCase());
     }
 
     /**
@@ -181,7 +168,7 @@ public class XmlElement extends DomElement implements Element {
     private String getQualifiedName(final String namespaceURI, final String localName) {
         final String qualifiedName;
         if (namespaceURI != null) {
-            final String prefix = namespaces_.get(namespaceURI);
+            final String prefix = namespaces().get(namespaceURI);
             if (prefix != null) {
                 qualifiedName = prefix + ':' + localName;
             }
@@ -247,11 +234,11 @@ public class XmlElement extends DomElement implements Element {
      */
     protected void printOpeningTagContentAsXml(final PrintWriter printWriter) {
         printWriter.print(getTagName());
-        for (final String name : attributes_.keySet()) {
+        for (final String name : attributes().keySet()) {
             printWriter.print(" ");
             printWriter.print(name);
             printWriter.print("=\"");
-            printWriter.print(StringEscapeUtils.escapeXml(attributes_.get(name).getNodeValue()));
+            printWriter.print(StringEscapeUtils.escapeXml(attributes().get(name).getNodeValue()));
             printWriter.print("\"");
         }
     }
@@ -268,7 +255,7 @@ public class XmlElement extends DomElement implements Element {
      * {@inheritDoc}
      */
     public String getAttribute(final String name) {
-        final DomAttr attr = attributes_.get(name);
+        final DomAttr attr = attributes().get(name);
         if (attr != null) {
             return attr.getValue();
         }
@@ -327,7 +314,7 @@ public class XmlElement extends DomElement implements Element {
      * {@inheritDoc}
      */
     public boolean hasAttribute(final String name) {
-        return attributes_.containsKey(name);
+        return attributes().containsKey(name);
     }
 
     /**
@@ -399,6 +386,6 @@ public class XmlElement extends DomElement implements Element {
      */
     @Override
     public boolean hasAttributes() {
-        return !attributes_.isEmpty();
+        return !attributes().isEmpty();
     }
 }
