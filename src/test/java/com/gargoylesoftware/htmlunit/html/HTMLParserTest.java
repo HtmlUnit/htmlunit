@@ -205,25 +205,29 @@ public class HTMLParserTest extends WebTestCase {
      * @throws Exception failure
      */
     @Test
-    @Browsers({Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7, Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @NotYetImplemented
-    @Alerts(IE = {"1", "SCRIPT", "undefined", "undefined", "undefined",
-                "script", "undefined", "undefined", "undefined" },
-            FF = {"1", "SCRIPT", "SCRIPT", "null", "null", "APP:SCRIPT", "APP:SCRIPT", "null", "null" })
+    @Browsers({Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7, Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts(IE = {"1", "createElementNS() is not defined",
+                "[object]", "SCRIPT,SCRIPT,undefined,undefined,undefined",
+                "[object]", "script,script,undefined,undefined,undefined" },
+            FF = {"1", "[object Element]", "app:script,app:script,http://www.appcelerator.org,app,script",
+                "[object HTMLScriptElement]", "SCRIPT,SCRIPT,null,null,SCRIPT",
+                "[object HTMLUnknownElement]", "APP:SCRIPT,APP:SCRIPT,null,null,APP:SCRIPT" })
     public void namespace2() throws Exception {
         final String html
-            = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n"
-            + "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:app='http://www.appcelerator.org'>\n"
+            = "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:app='http://www.appcelerator.org'>\n"
             + "<script>\n"
             + "  function test() {\n"
+            + "    try {\n"
+            + "      div = document.createElementNS('http://www.appcelerator.org', 'app:script');\n"
+            + "      debug(div);\n"
+            + "    } catch (e) {alert('createElementNS() is not defined')}\n"
             + "    debug(document.getElementById('script1'));\n"
             + "    debug(document.getElementById('script2'));\n"
             + "  }\n"
             + "  function debug(e) {\n"
-            + "    alert(e.tagName);\n"
-            + "    alert(e.localName);\n"
-            + "    alert(e.prefix);\n"
-            + "    alert(e.namespaceURI);\n"
+            + "    alert(e);\n"
+            + "    alert(e.nodeName + ',' + e.tagName + ',' + e.namespaceURI + ',' + e.prefix + ',' + e.localName);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
