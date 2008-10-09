@@ -280,7 +280,7 @@ public class HtmlForm extends ClickableElement {
         if (element instanceof HtmlInput) {
             final String type = element.getAttributeValue("type").toLowerCase();
             if (type.equals("radio") || type.equals("checkbox")) {
-                return element.isAttributeDefined("checked");
+                return element.hasAttribute("checked");
             }
         }
         if (tagName.equals("select")) {

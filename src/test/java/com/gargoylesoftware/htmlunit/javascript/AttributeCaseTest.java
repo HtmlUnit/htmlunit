@@ -138,7 +138,7 @@ public class AttributeCaseTest extends WebTestCase {
     }
 
     /**
-     * Tests {@link HtmlElement#isAttributeDefined(String)} with a lower case name.
+     * Tests {@link HtmlElement#hasAttribute(String)} with a lower case name.
      * @throws IOException if the test fails
      */
     @Test
@@ -148,7 +148,7 @@ public class AttributeCaseTest extends WebTestCase {
     }
 
     /**
-     * Tests {@link HtmlElement#isAttributeDefined(String)} with a mixed case name.
+     * Tests {@link HtmlElement#hasAttribute(String)} with a mixed case name.
      * @throws IOException if the test fails
      */
     @Test
@@ -158,7 +158,7 @@ public class AttributeCaseTest extends WebTestCase {
     }
 
     /**
-     * Tests {@link HtmlElement#isAttributeDefined(String)} with an upper case name.
+     * Tests {@link HtmlElement#hasAttribute(String)} with an upper case name.
      * @throws IOException if the test fails
      */
     @Test

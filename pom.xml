@@ -569,7 +569,7 @@
         </repository>
         <repository>
             <id>jboss-releases</id>
-            <name>JBOSS Releases</name>
+            <name>JBoss Releases</name>
             <url>http://repository.jboss.com/maven2</url>
         </repository>
     </repositories>
