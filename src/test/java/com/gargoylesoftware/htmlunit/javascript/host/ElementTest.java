@@ -448,7 +448,7 @@ public class ElementTest extends WebTestCase {
                 "[object HTMLDivElement],DIV",
                 "[object HTMLUnknownElement],APP:DIV"
                 })
-    public void normal_nodeName() throws Exception {
+    public void html_nodeName() throws Exception {
         html("nodeName");
     }
 
@@ -458,12 +458,10 @@ public class ElementTest extends WebTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      div = document.createElement('dIv');\n"
-            + "      debug(div);\n"
-            + "      div = document.createElement('app:dIv');\n"
-            + "      debug(div);\n"
-            + "      div = document.createElementNS('http://www.appcelerator.org', 'app:dIv');\n"
-            + "      debug(div);\n"
+            + "      div = ;\n"
+            + "      debug(document.createElement('dIv'));\n"
+            + "      debug(document.createElement('app:dIv'));\n"
+            + "      debug(document.createElementNS('http://www.appcelerator.org', 'app:dIv'));\n"
             + "    } catch (e) {alert('createElementNS() is not defined')}\n"
             + "    debug(document.getElementById('dIv1'));\n"
             + "    debug(document.getElementById('dIv2'));\n"
@@ -488,15 +486,19 @@ public class ElementTest extends WebTestCase {
     @NotYetImplemented
     @Alerts(IE = {"[object],DIV",
                 "[object],dIv",
+                "[object],ANOTHER:DIV",
                 "createElementNS() is not defined",
                 "[object],DIV",
-                "[object],dIv"
+                "[object],dIv",
+                "[object],ANOTHER:DIV"
                 },
             FF = {"[object HTMLDivElement],DIV",
                 "[object HTMLUnknownElement],APP:DIV",
+                "[object HTMLUnknownElement],ANOTHER:DIV",
                 "[object Element],app:dIv",
                 "[object HTMLDivElement],DIV",
-                "[object HTMLUnknownElement],APP:DIV"
+                "[object HTMLUnknownElement],APP:DIV",
+                "[object HTMLUnknownElement],ANOTHER:DIV",
                 })
     public void namespace_nodeName() throws Exception {
         namespace("nodeName");
@@ -508,15 +510,14 @@ public class ElementTest extends WebTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      div = document.createElement('dIv');\n"
-            + "      debug(div);\n"
-            + "      div = document.createElement('app:dIv');\n"
-            + "      debug(div);\n"
-            + "      div = document.createElementNS('http://www.appcelerator.org', 'app:dIv');\n"
-            + "      debug(div);\n"
+            + "      debug(document.createElement('dIv'));\n"
+            + "      debug(document.createElement('app:dIv'));\n"
+            + "      debug(document.createElement('another:dIv'));\n"
+            + "      debug(document.createElementNS('http://www.appcelerator.org', 'app:dIv'));\n"
             + "    } catch (e) {alert('createElementNS() is not defined')}\n"
             + "    debug(document.getElementById('dIv1'));\n"
             + "    debug(document.getElementById('dIv2'));\n"
+            + "    debug(document.getElementById('dIv3'));\n"
             + "  }\n"
             + "  function debug(e) {\n"
             + "    alert(e + ',' + e." + methodName + ");\n"
@@ -525,9 +526,11 @@ public class ElementTest extends WebTestCase {
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "<dIv id='dIv1'></dIv>\n"
-            + "<app:dIv id='dIv2'>alert(2)</app:dIv>\n"
+            + "<app:dIv id='dIv2'></app:dIv>\n"
+            + "<another:dIv id='dIv3'></another:dIv>\n"
             + "</body></html>";
 
+        System.out.println(html);
         loadPageWithAlerts(html);
     }
 
