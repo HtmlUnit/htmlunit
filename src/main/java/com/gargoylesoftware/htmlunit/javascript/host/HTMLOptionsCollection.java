@@ -128,6 +128,9 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * @return {@inheritDoc}
      */
     public Object getWithFallback(final String name) {
+        if (!getBrowserVersion().isIE() && name.equals("childNodes")) {
+            return NOT_FOUND;
+        }
         // If the name was NOT_FOUND on the prototype, then just drop through
         // to search on the select element for IE only AND FF.
         final HTMLSelectElement select = (HTMLSelectElement) htmlSelect_.getScriptObject();

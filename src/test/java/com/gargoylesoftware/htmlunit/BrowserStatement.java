@@ -43,6 +43,7 @@ class BrowserStatement extends Statement {
 
     @Override
     public void evaluate() throws Throwable {
+        Exception toBeThrown = null;
         try {
             next_.evaluate();
             if (shouldFail_) {
@@ -54,7 +55,7 @@ class BrowserStatement extends Statement {
                 else {
                     errorMessage = method_.getName() + " is marked to fail, but succeeds";
                 }
-                throw new Exception(errorMessage);
+                toBeThrown = new Exception(errorMessage);
             }
             else if (notYetImplemented_) {
                 final String errorMessage;
@@ -65,13 +66,16 @@ class BrowserStatement extends Statement {
                     errorMessage = method_.getName() + " is marked as not implemented with "
                         + browserVersionString_ + " but already works";
                 }
-                throw new Exception(errorMessage);
+                toBeThrown = new Exception(errorMessage);
             }
         }
         catch (final Throwable e) {
             if (!shouldFail_ && !notYetImplemented_) {
                 throw e;
             }
+        }
+        if (toBeThrown != null) {
+            throw toBeThrown;
         }
     }
 }

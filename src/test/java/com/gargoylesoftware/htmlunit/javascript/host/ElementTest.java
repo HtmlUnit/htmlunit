@@ -22,7 +22,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -431,6 +430,7 @@ public class ElementTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
     /**
      * @throws Exception failure
      */
@@ -588,7 +588,7 @@ public class ElementTest extends WebTestCase {
             + "</html>"
             + "</xml>";
 
-        final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="fix" dev="asashour">
+                JavaScript: Firefox doesn't support select.options.childNodes.
+            </action>
             <action type="update" dev="asashour">
                 XmlElement: is deprecated, use DomElement instead.
             </action>
