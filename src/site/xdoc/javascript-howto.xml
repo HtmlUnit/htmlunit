@@ -10,9 +10,19 @@
     <body>
         <section name="Introduction">
             <p>
-                A frequent question we get is "how do I test my JavaScript?".  It
-                really isn't very different from testing the page itself so lets walk
-                through some examples.
+                A frequent question we get is "how do I test my JavaScript?".
+                There is nothing really specific for using JavaScript, it is automatically processed.
+                So, you just need to .getPage(), find the element to click(), and then check the result.
+                Tests for complex JavaScript libraries are included in HtmlUnit test base, you can find it
+                <a href="http://htmlunit.svn.sourceforge.net/viewvc/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/">here</a>
+                which is useful to get an idea.
+            </p>
+            <p>
+                Usually, you should wait() or sleep() a little, as HtmlUnit can finish before the AJAX response is
+                retrieved from the server, please read <a href="http://htmlunit.sourceforge.net/faq.html#AJAXDoesNotWork">this FAQ</a>.
+            </p>
+            <p>
+                Below are some examples:
             </p>
         </section>
 
