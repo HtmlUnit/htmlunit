@@ -2112,6 +2112,28 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     public Range getSelection() {
         return selection_;
     }
+
+    /**
+     * Returns all namespaces defined in the root element of this page.
+     * <p> The default namespace has a key of an empty string.
+     * @return namespaces
+     */
+    public Map<String, String> getNamespaces() {
+        final org.w3c.dom.NamedNodeMap attributes = getDocumentElement().getAttributes();
+        final Map<String, String> namespaces = new HashMap<String, String>();
+        for (int i = 0; i < attributes.getLength(); i++) {
+            final Attr attr = (Attr) attributes.item(i);
+            String name = attr.getName();
+            if (name.startsWith("xmlns")) {
+                name = name.substring(5);
+                if (name.startsWith(":")) {
+                    name = name.substring(1);
+                }
+                namespaces.put(name, attr.getValue());
+            }
+        }
+        return namespaces;
+    }
 }
 
 /**

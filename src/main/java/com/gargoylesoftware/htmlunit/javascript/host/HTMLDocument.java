@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.util.UrlUtils.getUrlWithNewPort;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
@@ -36,6 +37,7 @@ import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.lang.StringUtils;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
+import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.UniqueTag;
 import org.w3c.dom.DOMException;
@@ -73,8 +75,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlScript;
  * @author Ahmed Ashour
  * @author Rob Di Marco
  * @author Sudhan Moghe
- * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_document.asp">
- * MSDN documentation</a>
+ * @see <a href="http://msdn.microsoft.com/en-us/library/ms535862.aspx">MSDN documentation</a>
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919">
  * W3C Dom Level 1</a>
  */
@@ -183,7 +184,7 @@ public class HTMLDocument extends Document {
 
     /**
      * Returns the value of the JavaScript attribute "links". Refer also to the
-     * <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/links.asp">MSDN documentation</a>.
+     * <a href="http://msdn.microsoft.com/en-us/library/ms537465.aspx">MSDN documentation</a>.
      * @return the value of this attribute
      */
     public Object jsxGet_links() {
@@ -192,6 +193,21 @@ public class HTMLDocument extends Document {
             links_.init(getDomNodeOrDie(), ".//a[@href] | .//area[@href]");
         }
         return links_;
+    }
+
+    /**
+     * Returns the value of the JavaScript attribute "namespaces".
+     * @return the value of this attribute
+     */
+    public Object jsxGet_namespaces() {
+        final Map<String, String> namespacesMap = getHtmlPage().getNamespaces();
+        final List<Namespace> namespaces = new ArrayList<Namespace>();
+        for (final String key : namespacesMap.keySet()) {
+            if (key.length() != 0) {
+                namespaces.add(new Namespace(this, key, namespacesMap.get(key)));
+            }
+        }
+        return new NativeArray(namespaces.toArray());
     }
 
     /**
