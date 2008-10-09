@@ -38,7 +38,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class XMLElementTest extends WebTestCase {
+public class ElementTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
