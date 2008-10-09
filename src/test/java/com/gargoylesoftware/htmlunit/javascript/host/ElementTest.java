@@ -22,6 +22,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -29,6 +30,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link Element}.
@@ -428,5 +430,173 @@ public class ElementTest extends WebTestCase {
             + "</body></html>";
 
         loadPageWithAlerts(html);
+    }
+    /**
+     * @throws Exception failure
+     */
+    @Test
+    @NotYetImplemented
+    @Alerts(IE = {"[object],DIV",
+                "[object],APP:DIV",
+                "createElementNS() is not defined",
+                "[object],DIV",
+                "[object],APP:DIV"
+                },
+            FF = {"[object HTMLDivElement],DIV",
+                "[object HTMLUnknownElement],APP:DIV",
+                "[object Element],app:dIv",
+                "[object HTMLDivElement],DIV",
+                "[object HTMLUnknownElement],APP:DIV"
+                })
+    public void normal_nodeName() throws Exception {
+        html("nodeName");
+    }
+
+    private void html(final String methodName) throws Exception {
+        final String html
+            = "<html>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      div = document.createElement('dIv');\n"
+            + "      debug(div);\n"
+            + "      div = document.createElement('app:dIv');\n"
+            + "      debug(div);\n"
+            + "      div = document.createElementNS('http://www.appcelerator.org', 'app:dIv');\n"
+            + "      debug(div);\n"
+            + "    } catch (e) {alert('createElementNS() is not defined')}\n"
+            + "    debug(document.getElementById('dIv1'));\n"
+            + "    debug(document.getElementById('dIv2'));\n"
+            + "  }\n"
+            + "  function debug(e) {\n"
+            + "    alert(e + ',' + e." + methodName + ");\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<dIv id='dIv1'></dIv>\n"
+            + "<app:dIv id='dIv2'>alert(2)</app:dIv>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception failure
+     */
+    @Test
+    @NotYetImplemented
+    @Alerts(IE = {"[object],DIV",
+                "[object],dIv",
+                "createElementNS() is not defined",
+                "[object],DIV",
+                "[object],dIv"
+                },
+            FF = {"[object HTMLDivElement],DIV",
+                "[object HTMLUnknownElement],APP:DIV",
+                "[object Element],app:dIv",
+                "[object HTMLDivElement],DIV",
+                "[object HTMLUnknownElement],APP:DIV"
+                })
+    public void namespace_nodeName() throws Exception {
+        namespace("nodeName");
+    }
+
+    private void namespace(final String methodName) throws Exception {
+        final String html
+            = "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:app='http://www.appcelerator.org'>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      div = document.createElement('dIv');\n"
+            + "      debug(div);\n"
+            + "      div = document.createElement('app:dIv');\n"
+            + "      debug(div);\n"
+            + "      div = document.createElementNS('http://www.appcelerator.org', 'app:dIv');\n"
+            + "      debug(div);\n"
+            + "    } catch (e) {alert('createElementNS() is not defined')}\n"
+            + "    debug(document.getElementById('dIv1'));\n"
+            + "    debug(document.getElementById('dIv2'));\n"
+            + "  }\n"
+            + "  function debug(e) {\n"
+            + "    alert(e + ',' + e." + methodName + ");\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<dIv id='dIv1'></dIv>\n"
+            + "<app:dIv id='dIv2'>alert(2)</app:dIv>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    @Alerts(IE = {"[object],dIv",
+            "[object],html",
+            "[object],div",
+            "[object],dIv"
+            },
+        FF = {"[object Element]", "dIv",
+            "[object HTMLHtmlElement]", "html",
+            "[object HTMLDivElement]", "div",
+            "[object HTMLUnknownElement]", "dIv"
+            })
+    public void xml_nodeName() throws Exception {
+        xml("nodeName");
+    }
+
+    private void xml(final String methodName) throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var request;\n"
+            + "        if (window.XMLHttpRequest)\n"
+            + "          request = new XMLHttpRequest();\n"
+            + "        else if (window.ActiveXObject)\n"
+            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        request.open('GET', '" + URL_SECOND + "', false);\n"
+            + "        request.send('');\n"
+            + "        var doc = request.responseXML;\n"
+            + "        debug(doc.documentElement.childNodes[0]);\n"
+            + "        debug(doc.documentElement.childNodes[1]);\n"
+            + "        debug(doc.documentElement.childNodes[1].childNodes[0]);\n"
+            + "        debug(doc.documentElement.childNodes[1].childNodes[1]);\n"
+            + "      }\n"
+            + "      function debug(e) {\n"
+            + "        alert(e);\n"
+            + "        alert(e." + methodName + ");\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+              "<xml>"
+            + "<dIv></dIv>"
+            + "<html xmlns='http://www.w3.org/1999/xhtml'>"
+            + "<div></div>"
+            + "<dIv></dIv>"
+            + "</html>"
+            + "</xml>";
+
+        final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(URL_SECOND, xml, "text/xml");
+        client.setWebConnection(conn);
+        client.getPage(URL_FIRST);
+
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 }
