@@ -328,7 +328,7 @@ public class GWT15Test extends WebTestCase {
             }
         }
 
-        final HtmlSpan span = (HtmlSpan)
+        final HtmlSpan span =
             page.getFirstByXPath("//div[@class='JSON-JSONResponseObject']/div/div/table//td[2]/span/span");
         assertEquals("ResultSet", span.getFirstChild().getNodeValue());
     }

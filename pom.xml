@@ -525,6 +525,12 @@
             <version>0.5.524</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.eclipse.jdt</groupId>
+            <artifactId>core</artifactId>
+            <version>3.4.2.v_883_R34x</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <distributionManagement>
         <site>
@@ -560,6 +566,11 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
+        </repository>
+        <repository>
+            <id>JBOSS-released</id>
+            <name>JBOSS Releases</name>
+            <url>http://repository.jboss.com/maven2</url>
         </repository>
     </repositories>
 </project>
