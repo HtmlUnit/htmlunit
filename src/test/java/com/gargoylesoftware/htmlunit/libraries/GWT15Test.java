@@ -68,7 +68,7 @@ public class GWT15Test extends WebTestCase {
     public void hello() throws Exception {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadGWTPage("Hello", collectedAlerts);
-        final HtmlButton button = (HtmlButton) page.getFirstByXPath("//button");
+        final HtmlButton button = page.getFirstByXPath("//button");
         final DomText buttonLabel = (DomText) button.getChildren().iterator().next();
         assertEquals("Click me", buttonLabel.getData());
         button.click();
@@ -197,7 +197,7 @@ public class GWT15Test extends WebTestCase {
     }
 
     private void i18nDictionary(final HtmlPage page, final Map<String, String> expectedMap) throws Exception {
-        final HtmlTableRow headerRow = (HtmlTableRow) page.getFirstByXPath("//*[@class='i18n-dictionary-header-row']");
+        final HtmlTableRow headerRow = page.getFirstByXPath("//*[@class='i18n-dictionary-header-row']");
         final HtmlTableRow valueRow = (HtmlTableRow) headerRow.getNextSibling();
         DomNode headerNode = headerRow.getFirstChild();
         DomNode valueNode = valueRow.getFirstChild();
@@ -287,7 +287,7 @@ public class GWT15Test extends WebTestCase {
     @Test
     public void mail() throws Exception {
         final HtmlPage page = loadGWTPage("Mail", null);
-        final HtmlTableDataCell cell = (HtmlTableDataCell)
+        final HtmlTableDataCell cell =
             page.getFirstByXPath("//table[@class='mail-TopPanel']//div[@class='gwt-HTML']//..");
         tableDataCell(cell, "Welcome back, foo@example.com");
 
@@ -315,7 +315,7 @@ public class GWT15Test extends WebTestCase {
     @Test
     public void json() throws Exception {
         final HtmlPage page = loadGWTPage("JSON", null);
-        final HtmlButton button = (HtmlButton) page.getFirstByXPath("//button");
+        final HtmlButton button = page.getFirstByXPath("//button");
         button.click();
 
         //try 20 times to wait .5 second each for filling the page.

@@ -56,7 +56,7 @@ public class HTMLParserTest extends WebTestCase {
 
         final HtmlPage page = HTMLParser.parse(webResponse, webClient.getCurrentWindow());
 
-        final String stringVal = ((HtmlNoScript) page.getFirstByXPath("//noscript")).getFirstChild().getNodeValue();
+        final String stringVal = page.<HtmlNoScript>getFirstByXPath("//noscript").getFirstChild().getNodeValue();
         assertEquals("TEST", stringVal);
 
         final HtmlElement node = (HtmlElement) page.getFirstByXPath("//*[./text() = 'TEST']");
@@ -130,7 +130,7 @@ public class HTMLParserTest extends WebTestCase {
         if (page != null) {
             // No connectivity issues.
             final String stringVal =
-                ((HtmlDivision) page.getFirstByXPath("//div[@id='footer']/div[@class='xright']")).asText().trim();
+                page.<HtmlDivision>getFirstByXPath("//div[@id='footer']/div[@class='xright']").asText().trim();
             assertTrue(stringVal.matches("\u00A9 2002-\\d\\d\\d\\d Gargoyle Software Inc."));
         }
     }

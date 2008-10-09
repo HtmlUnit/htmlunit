@@ -345,13 +345,13 @@ public class DomNodeTest extends WebTestCase {
         assertEquals(0, head.getByXPath("/title").size());
         assertEquals(results, head.getByXPath("title"));
 
-        final HtmlParagraph p = (HtmlParagraph) page.getFirstByXPath("//p");
+        final HtmlParagraph p = page.getFirstByXPath("//p");
         assertSame(p, page.getHtmlElementById("p1"));
         final List< ? > lis = p.getByXPath("ul/li");
         assertEquals(2, lis.size());
         assertEquals(lis, page.getByXPath("//ul/li"));
 
-        assertEquals(2, ((Number) p.getFirstByXPath("count(//li)")).intValue());
+        assertEquals(2, p.<Number>getFirstByXPath("count(//li)").intValue());
     }
 
     /**
@@ -406,7 +406,7 @@ public class DomNodeTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlTitle title = (HtmlTitle) page.getFirstByXPath("//title");
+        final HtmlTitle title = page.getFirstByXPath("//title");
         assertEquals("my title", title.asText());
 
         final HtmlHead head = (HtmlHead) title.getParentNode();

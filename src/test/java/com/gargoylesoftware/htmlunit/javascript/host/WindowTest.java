@@ -2641,7 +2641,7 @@ public class WindowTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, null);
-        final HtmlButtonInput input = (HtmlButtonInput) page.getFirstByXPath("//input");
+        final HtmlButtonInput input = page.getFirstByXPath("//input");
         input.click();
     }
 

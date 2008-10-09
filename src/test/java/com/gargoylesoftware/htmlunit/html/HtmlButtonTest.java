@@ -139,8 +139,8 @@ public class HtmlButtonTest extends WebTestCase {
         final HtmlButton resetInput = page.getHtmlElementById("resetButton");
 
         // change all the values to something else
-        ((HtmlRadioButtonInput) form.getFirstByXPath(
-                "//input[@type='radio' and @name='radioButton' and @value='bar']")).setChecked(true);
+        form.<HtmlRadioButtonInput>getFirstByXPath(
+            "//input[@type='radio' and @name='radioButton' and @value='bar']").setChecked(true);
         ((HtmlCheckBoxInput) form.getInputByName("checkBox")).setChecked(true);
         page.<HtmlOption>getHtmlElementById("option1").setSelected(false);
         page.<HtmlOption>getHtmlElementById("option2").setSelected(true);

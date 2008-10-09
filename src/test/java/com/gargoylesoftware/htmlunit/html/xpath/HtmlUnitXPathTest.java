@@ -67,7 +67,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
             + "</html>";
 
         final HtmlPage page = loadPage(content);
-        final HtmlBody body = (HtmlBody) page.getFirstByXPath("/html/body");
+        final HtmlBody body = page.getFirstByXPath("/html/body");
 
         assertEquals(page.getHtmlElementById("myLink"), body.getFirstByXPath("./a"));
     }
@@ -124,10 +124,10 @@ public class HtmlUnitXPathTest extends WebTestCase {
         final HtmlPage page = loadPage(content);
         assertEquals("foo", page.getTitleText());
 
-        assertEquals(3, ((Double) page.getFirstByXPath("count(//select[@name='select1']/option)")).intValue());
+        assertEquals(3, page.<Number>getFirstByXPath("count(//select[@name='select1']/option)").intValue());
 
         page.getAnchors().get(0).click();
-        assertEquals(4, ((Double) page.getFirstByXPath("count(//select[@name='select1']/option)")).intValue());
+        assertEquals(4, page.<Number>getFirstByXPath("count(//select[@name='select1']/option)").intValue());
     }
 
     /**
@@ -201,7 +201,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(content);
-        final String value = (String) page.getFirstByXPath("string(//option)");
+        final String value = page.getFirstByXPath("string(//option)");
         final int[] expectedValues = {102, 111, 111, 160, 97, 110, 100, 160, 102, 111, 111};
         int index = 0;
         for (final int v : expectedValues) {

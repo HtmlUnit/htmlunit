@@ -75,8 +75,8 @@ public class HtmlFormTest extends WebTestCase {
 
         final HtmlSubmitInput pushButton = form.getInputByName("button");
 
-        ((HtmlRadioButtonInput) form.getFirstByXPath(
-                "//input[@type='radio' and @name='foo' and @value='2']")).setChecked(true);
+        form.<HtmlRadioButtonInput>getFirstByXPath(
+                "//input[@type='radio' and @name='foo' and @value='2']").setChecked(true);
 
         assertFalse(page.<HtmlRadioButtonInput>getHtmlElementById("input1").isChecked());
         assertTrue(page.<HtmlRadioButtonInput>getHtmlElementById("input2").isChecked());

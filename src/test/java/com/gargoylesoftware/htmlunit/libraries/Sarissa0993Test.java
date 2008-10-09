@@ -143,7 +143,7 @@ public class Sarissa0993Test extends WebTestCase {
      */
     private void test(final String testName, final String expectedResult) throws Exception {
         final HtmlAnchor anchor =
-            (HtmlAnchor) Page_.getFirstByXPath("//div[@class='placeholder']/a[@name='#" + testName + "']");
+            Page_.getFirstByXPath("//div[@class='placeholder']/a[@name='#" + testName + "']");
         final StringBuilder builder = new StringBuilder();
         for (Node node = anchor.getNextSibling().getNextSibling(); node instanceof DomText;
             node = node.getNextSibling()) {
@@ -165,7 +165,7 @@ public class Sarissa0993Test extends WebTestCase {
                 final WebClient client = getWebClient();
                 final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/test/testsarissa.html";
                 Page_ = client.getPage(url);
-                ((HtmlButton) Page_.getFirstByXPath("//button")).click();
+                Page_.<HtmlButton>getFirstByXPath("//button").click();
 
                 // dump the result page
                 if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null) {
