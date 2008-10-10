@@ -1108,9 +1108,9 @@ public class HtmlElementTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(html);
-        assertEquals("div", page.getHtmlElementById("dIv1").getNodeName());
-        assertEquals("app:div", page.getHtmlElementById("dIv2").getNodeName());
-        assertEquals("another:div", page.getHtmlElementById("dIv3").getNodeName());
+        assertEquals("div", page.<HtmlElement>getHtmlElementById("dIv1").getNodeName());
+        assertEquals("app:div", page.<HtmlElement>getHtmlElementById("dIv2").getNodeName());
+        assertEquals("another:div", page.<HtmlElement>getHtmlElementById("dIv3").getNodeName());
         assertTrue(page.asXml().contains("<app:div "));
     }
 }
