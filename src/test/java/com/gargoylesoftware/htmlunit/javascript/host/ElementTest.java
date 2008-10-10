@@ -452,13 +452,33 @@ public class ElementTest extends WebTestCase {
         html("nodeName");
     }
 
+    /**
+     * @throws Exception failure
+     */
+    @Test
+    @NotYetImplemented
+    @Alerts(IE = {"[object],DIV",
+                "[object],APP:DIV",
+                "createElementNS() is not defined",
+                "[object],DIV",
+                "[object],APP:DIV"
+                },
+            FF = {"[object HTMLDivElement],DIV",
+                "[object HTMLUnknownElement],APP:DIV",
+                "[object Element],app:dIv",
+                "[object HTMLDivElement],DIV",
+                "[object HTMLUnknownElement],APP:DIV"
+                })
+    public void html_tagName() throws Exception {
+        html("tagName");
+    }
+
     private void html(final String methodName) throws Exception {
         final String html
             = "<html>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      div = ;\n"
             + "      debug(document.createElement('dIv'));\n"
             + "      debug(document.createElement('app:dIv'));\n"
             + "      debug(document.createElementNS('http://www.appcelerator.org', 'app:dIv'));\n"
@@ -504,6 +524,31 @@ public class ElementTest extends WebTestCase {
         namespace("nodeName");
     }
 
+    /**
+     * @throws Exception failure
+     */
+    @Test
+    @NotYetImplemented
+    @Alerts(IE = {"[object],DIV",
+                "[object],dIv",
+                "[object],ANOTHER:DIV",
+                "createElementNS() is not defined",
+                "[object],DIV",
+                "[object],dIv",
+                "[object],ANOTHER:DIV"
+                },
+            FF = {"[object HTMLDivElement],DIV",
+                "[object HTMLUnknownElement],APP:DIV",
+                "[object HTMLUnknownElement],ANOTHER:DIV",
+                "[object Element],app:dIv",
+                "[object HTMLDivElement],DIV",
+                "[object HTMLUnknownElement],APP:DIV",
+                "[object HTMLUnknownElement],ANOTHER:DIV"
+                })
+    public void namespace_tagName() throws Exception {
+        namespace("tagName");
+    }
+
     private void namespace(final String methodName) throws Exception {
         final String html
             = "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:app='http://www.appcelerator.org'>\n"
@@ -530,7 +575,6 @@ public class ElementTest extends WebTestCase {
             + "<another:dIv id='dIv3'></another:dIv>\n"
             + "</body></html>";
 
-        System.out.println(html);
         loadPageWithAlerts(html);
     }
 
@@ -539,10 +583,10 @@ public class ElementTest extends WebTestCase {
      */
     @Test
     @NotYetImplemented
-    @Alerts(IE = {"[object],dIv",
-            "[object],html",
-            "[object],div",
-            "[object],dIv"
+    @Alerts(IE = {"[object]", "dIv",
+            "[object]", "html",
+            "[object]", "div",
+            "[object]", "dIv"
             },
         FF = {"[object Element]", "dIv",
             "[object HTMLHtmlElement]", "html",
@@ -551,6 +595,25 @@ public class ElementTest extends WebTestCase {
             })
     public void xml_nodeName() throws Exception {
         xml("nodeName");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    @Alerts(IE = {"[object]", "dIv",
+            "[object]", "html",
+            "[object]", "div",
+            "[object]", "dIv"
+            },
+        FF = {"[object Element]", "dIv",
+            "[object HTMLHtmlElement]", "html",
+            "[object HTMLDivElement]", "div",
+            "[object HTMLUnknownElement]", "dIv"
+            })
+    public void xml_tagName() throws Exception {
+        xml("tagName");
     }
 
     private void xml(final String methodName) throws Exception {
