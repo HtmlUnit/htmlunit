@@ -21,6 +21,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
@@ -260,6 +261,30 @@ public class HTMLOptionElementTest extends WebTestCase {
             + "        <option name='option1'>One</option>\n"
             + "        <option>Two</option>\n"
             + "    </select>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @NotYetImplemented
+    @Alerts("1")
+    public void without_new() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "  var s = document.getElementById('testSelect');\n"
+            + "  s.options[0] = Option('one', 'two');\n"
+            + "  alert(s.length);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "  <select id='testSelect'>\n"
+            + "  </select>\n"
             + "</form>\n"
             + "</body></html>";
 
