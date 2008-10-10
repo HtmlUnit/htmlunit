@@ -498,7 +498,7 @@ public class ElementTest extends WebTestCase {
                 "[object Element],app:dIv",
                 "[object HTMLDivElement],DIV",
                 "[object HTMLUnknownElement],APP:DIV",
-                "[object HTMLUnknownElement],ANOTHER:DIV",
+                "[object HTMLUnknownElement],ANOTHER:DIV"
                 })
     public void namespace_nodeName() throws Exception {
         namespace("nodeName");
