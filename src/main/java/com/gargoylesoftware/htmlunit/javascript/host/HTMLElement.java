@@ -1789,10 +1789,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public String jsxGet_nodeName() {
         final DomNode domNode = getDomNodeOrDie();
         String nodeName = domNode.getNodeName();
-        final String prefix = getDomNodeOrDie().getPrefix();
-        if (prefix != null) {
-            nodeName = prefix + ':' + nodeName;
-        }
 
         if (domNode.getPage() instanceof HtmlPage) {
             nodeName = nodeName.toUpperCase();

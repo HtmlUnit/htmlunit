@@ -1090,4 +1090,27 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlPage ffPage = loadPage(BrowserVersion.FIREFOX_2, content, null);
         assertEquals("test Welcome to the world", ffPage.asText());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getNodeName() throws Exception {
+        final String html
+            = "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:app='http://www.appcelerator.org'>\n"
+            + "<script>\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<dIv id='dIv1'></dIv>\n"
+            + "<app:dIv id='dIv2'></app:dIv>\n"
+            + "<another:dIv id='dIv3'></another:dIv>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        assertEquals("div", page.getHtmlElementById("dIv1").getNodeName());
+        assertEquals("app:div", page.getHtmlElementById("dIv2").getNodeName());
+        assertEquals("another:div", page.getHtmlElementById("dIv3").getNodeName());
+        assertTrue(page.asXml().contains("<app:div "));
+    }
 }

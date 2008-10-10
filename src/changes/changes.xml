@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="fix" dev="asashour" id="2043322">
+                HtmlElement: correctly handle getNodeName().
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: correctly handle element.nodeName, .tagName, .prefix, .localName, and .namespaceURI.
             </action>

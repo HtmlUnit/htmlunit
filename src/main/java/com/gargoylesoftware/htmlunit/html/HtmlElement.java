@@ -388,10 +388,12 @@ public abstract class HtmlElement extends DomElement {
      */
     @Override
     public String getNodeName() {
-        if (getNamespaceURI() == null) {
-            return getLocalName().toLowerCase();
+        String name = getLocalName();
+        if (getPrefix() != null) {
+            name = getPrefix() + ':' + name;
         }
-        return getLocalName();
+        name = name.toLowerCase();
+        return name;
     }
 
     /**

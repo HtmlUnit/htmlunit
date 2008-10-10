@@ -431,7 +431,7 @@ public class ElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception failure
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(IE = {"[object],DIV",
@@ -451,7 +451,7 @@ public class ElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception failure
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(IE = {"[object],DIV",
@@ -471,7 +471,7 @@ public class ElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception failure
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(IE = {"[object],undefined",
@@ -491,7 +491,7 @@ public class ElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception failure
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(IE = {"[object],undefined",
@@ -511,7 +511,7 @@ public class ElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception failure
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(IE = {"[object],undefined",
@@ -557,7 +557,7 @@ public class ElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception failure
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(IE = {"[object],DIV",
@@ -581,7 +581,7 @@ public class ElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception failure
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(IE = {"[object],DIV",
@@ -605,7 +605,7 @@ public class ElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception failure
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(IE = {"[object],undefined",
@@ -629,7 +629,7 @@ public class ElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception failure
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(IE = {"[object],undefined",
@@ -653,7 +653,7 @@ public class ElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception failure
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(IE = {"[object],undefined",
