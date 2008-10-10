@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.xml.XmlPage;
+
 /**
  * The JavaScript object "HTMLUnknownElement".
  *
@@ -31,4 +35,16 @@ public class HTMLUnknownElement extends HTMLElement {
         // Empty.
     }
 
+    /**
+     * Gets the JavaScript property "nodeName" for the current node.
+     * @return the node name
+     */
+    public String jsxGet_nodeName() {
+        final Page page = (Page) getHtmlElementOrDie().getPage();
+        if (page instanceof XmlPage || (getBrowserVersion().isIE()
+            && ((HtmlPage) page).getNamespaces().containsKey(getHtmlElementOrDie().getPrefix()))) {
+            return getDomNodeOrDie().getLocalName();
+        }
+        return super.jsxGet_nodeName();
+    }
 }

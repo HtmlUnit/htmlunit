@@ -386,7 +386,7 @@ public final class HTMLParser {
 
             try {
                 setFeature(FEATURE_AUGMENTATIONS, true);
-                setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
+                setProperty("http://cyberneko.org/html/properties/names/elems", "default");
                 setFeature("http://cyberneko.org/html/features/report-errors", reportErrors);
                 setFeature("http://cyberneko.org/html/features/balance-tags/ignore-outside-content",
                     IgnoreOutsideContent_);
@@ -580,6 +580,9 @@ public final class HTMLParser {
                 final int index = tagName.indexOf(":");
                 if (index != -1) {
                     tagName = tagName.substring(index + 1);
+                }
+                else {
+                    tagName = tagName.toLowerCase();
                 }
                 final IElementFactory factory = ELEMENT_FACTORIES.get(tagName);
 

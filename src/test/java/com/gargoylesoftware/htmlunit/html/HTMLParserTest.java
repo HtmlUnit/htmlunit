@@ -205,7 +205,6 @@ public class HTMLParserTest extends WebTestCase {
      * @throws Exception failure
      */
     @Test
-    @NotYetImplemented
     @Browsers({Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7, Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @Alerts(IE = {"1", "createElementNS() is not defined",
                 "[object]", "SCRIPT,SCRIPT,undefined,undefined,undefined",

@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link Element}.
@@ -435,7 +434,6 @@ public class ElementTest extends WebTestCase {
      * @throws Exception failure
      */
     @Test
-    @NotYetImplemented
     @Alerts(IE = {"[object],DIV",
                 "[object],APP:DIV",
                 "createElementNS() is not defined",
@@ -456,7 +454,6 @@ public class ElementTest extends WebTestCase {
      * @throws Exception failure
      */
     @Test
-    @NotYetImplemented
     @Alerts(IE = {"[object],DIV",
                 "[object],APP:DIV",
                 "createElementNS() is not defined",
@@ -477,7 +474,6 @@ public class ElementTest extends WebTestCase {
      * @throws Exception failure
      */
     @Test
-    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @Alerts(IE = {"[object],undefined",
                 "[object],undefined",
                 "createElementNS() is not defined",
@@ -498,7 +494,6 @@ public class ElementTest extends WebTestCase {
      * @throws Exception failure
      */
     @Test
-    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @Alerts(IE = {"[object],undefined",
                 "[object],undefined",
                 "createElementNS() is not defined",
@@ -506,10 +501,10 @@ public class ElementTest extends WebTestCase {
                 "[object],undefined"
                 },
             FF = {"[object HTMLDivElement],DIV",
-                "[object HTMLUnknownElement],APP:DEV",
+                "[object HTMLUnknownElement],APP:DIV",
                 "[object Element],dIv",
                 "[object HTMLDivElement],DIV",
-                "[object HTMLUnknownElement],APP:DEV"
+                "[object HTMLUnknownElement],APP:DIV"
                 })
     public void html_localName() throws Exception {
         html("localName");
@@ -519,7 +514,6 @@ public class ElementTest extends WebTestCase {
      * @throws Exception failure
      */
     @Test
-    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @Alerts(IE = {"[object],undefined",
                 "[object],undefined",
                 "createElementNS() is not defined",
@@ -566,7 +560,6 @@ public class ElementTest extends WebTestCase {
      * @throws Exception failure
      */
     @Test
-    @NotYetImplemented
     @Alerts(IE = {"[object],DIV",
                 "[object],dIv",
                 "[object],ANOTHER:DIV",
@@ -591,7 +584,6 @@ public class ElementTest extends WebTestCase {
      * @throws Exception failure
      */
     @Test
-    @NotYetImplemented
     @Alerts(IE = {"[object],DIV",
                 "[object],dIv",
                 "[object],ANOTHER:DIV",
@@ -616,7 +608,6 @@ public class ElementTest extends WebTestCase {
      * @throws Exception failure
      */
     @Test
-    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @Alerts(IE = {"[object],undefined",
                 "[object],undefined",
                 "[object],undefined",
@@ -641,7 +632,6 @@ public class ElementTest extends WebTestCase {
      * @throws Exception failure
      */
     @Test
-    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @Alerts(IE = {"[object],undefined",
                 "[object],undefined",
                 "[object],undefined",
@@ -651,12 +641,12 @@ public class ElementTest extends WebTestCase {
                 "[object],undefined"
                 },
             FF = {"[object HTMLDivElement],DIV",
-                "[object HTMLUnknownElement],APP:DEV",
-                "[object HTMLUnknownElement],ANOTHER:DEV",
+                "[object HTMLUnknownElement],APP:DIV",
+                "[object HTMLUnknownElement],ANOTHER:DIV",
                 "[object Element],dIv",
                 "[object HTMLDivElement],DIV",
-                "[object HTMLUnknownElement],APP:DEV",
-                "[object HTMLUnknownElement],ANOTHER:DEV"
+                "[object HTMLUnknownElement],APP:DIV",
+                "[object HTMLUnknownElement],ANOTHER:DIV"
                 })
     public void namespace_localName() throws Exception {
         namespace("localName");
@@ -666,7 +656,6 @@ public class ElementTest extends WebTestCase {
      * @throws Exception failure
      */
     @Test
-    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @Alerts(IE = {"[object],undefined",
                 "[object],undefined",
                 "[object],undefined",
@@ -720,7 +709,6 @@ public class ElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @Alerts(IE = {"[object]", "dIv",
             "[object]", "html",
             "[object]", "div",
@@ -739,7 +727,6 @@ public class ElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @Alerts(IE = {"[object]", "dIv",
             "[object]", "html",
             "[object]", "div",
@@ -758,7 +745,6 @@ public class ElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     @Alerts(IE = {"[object]", "",
             "[object]", "",
             "[object]", "",
@@ -777,7 +763,6 @@ public class ElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @Alerts(IE = {"[object]", "undefined",
             "[object]", "undefined",
             "[object]", "undefined",
@@ -796,7 +781,6 @@ public class ElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     @Alerts(IE = {"[object]", "",
             "[object]", "http://www.w3.org/1999/xhtml",
             "[object]", "http://www.w3.org/1999/xhtml",

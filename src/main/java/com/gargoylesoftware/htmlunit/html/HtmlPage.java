@@ -414,9 +414,11 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @param tagName the tag name, preferably in lowercase
      * @return the new HTML element
      */
-    public HtmlElement createHtmlElement(final String tagName) {
-        final String tagLower = tagName.toLowerCase();
-        return HTMLParser.getFactory(tagLower).createElement(this, tagLower, null);
+    public HtmlElement createHtmlElement(String tagName) {
+        if (tagName.indexOf(':') == -1) {
+            tagName = tagName.toLowerCase();
+        }
+        return HTMLParser.getFactory(tagName).createElement(this, tagName, null);
     }
 
     /**

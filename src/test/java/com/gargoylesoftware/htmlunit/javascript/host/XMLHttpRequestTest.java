@@ -1076,7 +1076,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
 
-        final String[] expectedAlerts = {"null", "myID", "blah", "SPAN", "[object XMLDocument]"};
+        final String[] expectedAlerts = {"null", "myID", "blah", "span", "[object XMLDocument]"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

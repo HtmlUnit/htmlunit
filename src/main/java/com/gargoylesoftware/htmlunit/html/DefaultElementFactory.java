@@ -61,7 +61,7 @@ class DefaultElementFactory implements IElementFactory {
         final String tagName;
         final int colonIndex = qualifiedName.indexOf(':');
         if (colonIndex == -1) {
-            tagName = qualifiedName;
+            tagName = qualifiedName.toLowerCase();
         }
         else {
             tagName = qualifiedName.substring(colonIndex + 1).toLowerCase();

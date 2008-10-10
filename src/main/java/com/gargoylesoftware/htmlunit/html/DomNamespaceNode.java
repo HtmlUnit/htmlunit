@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebAssert;
+import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
  * Intermediate base class for DOM Nodes that have namespaces. That includes HtmlElement
@@ -51,7 +52,12 @@ public abstract class DomNamespaceNode extends DomNode {
             prefix_ = qualifiedName_.substring(0, colonPosition);
         }
         else {
-            namespaceURI_ = null;
+            if (page instanceof XmlPage) {
+                namespaceURI_ = namespaceURI;
+            }
+            else {
+                namespaceURI_ = null;
+            }
             localName_ = qualifiedName_;
             prefix_ = null;
         }

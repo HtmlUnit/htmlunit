@@ -26,6 +26,7 @@ import org.mozilla.javascript.ScriptableObject;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 
@@ -70,8 +71,8 @@ public class Element extends EventNode {
      * Returns the tag name of this element.
      * @return the tag name
      */
-    public String jsxGet_tagName() {
-        return ((DomElement) getDomNodeOrDie()).getTagName();
+    public final String jsxGet_tagName() {
+        return jsxGet_nodeName();
     }
 
     /**
@@ -225,5 +226,50 @@ public class Element extends EventNode {
         }
 
         return writer.toString();
+    }
+
+    /**
+     * Returns The Namespace prefix.
+     * @return the Namespace prefix
+     */
+    public Object jsxGet_prefix() {
+        if (getBrowserVersion().isIE()) {
+            if (getDomNodeOrDie().getPage() instanceof HtmlPage) {
+                return NOT_FOUND;
+            }
+            return "";
+        }
+        else {
+            return getDomNodeOrDie().getPrefix();
+        }
+    }
+
+    /**
+     * Returns the local name of this element.
+     * @return the local name of this element
+     */
+    public Object jsxGet_localName() {
+        if (getBrowserVersion().isIE()) {
+            return NOT_FOUND;
+        }
+        else {
+            return getDomNodeOrDie().getLocalName();
+        }
+    }
+
+    /**
+     * Returns The URI that identifies an XML namespace.
+     * @return the URI that identifies an XML namespace
+     */
+    public Object jsxGet_namespaceURI() {
+        if (getBrowserVersion().isIE()) {
+            if (getDomNodeOrDie().getPage() instanceof HtmlPage) {
+                return NOT_FOUND;
+            }
+            return "";
+        }
+        else {
+            return getDomNodeOrDie().getNamespaceURI();
+        }
     }
 }

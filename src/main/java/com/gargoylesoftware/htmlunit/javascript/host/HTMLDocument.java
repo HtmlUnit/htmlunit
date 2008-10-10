@@ -50,6 +50,7 @@ import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
@@ -743,24 +744,8 @@ public class HTMLDocument extends Document {
      * @return the new HTML element, or NOT_FOUND if the tag is not supported
      */
     public Object jsxFunction_createElementNS(final String namespaceURI, final String qualifiedName) {
-        Object result = NOT_FOUND;
-        try {
-            final HtmlElement htmlElement = getHtmlPage().createHtmlElementNS(namespaceURI, qualifiedName);
-            final Object jsElement = getScriptableFor(htmlElement);
-
-            if (jsElement == NOT_FOUND) {
-                getLog().debug("createElementNS(" + namespaceURI + ',' + qualifiedName
-                    + ") cannot return a result as there isn't a JavaScript object for the HTML element "
-                    + htmlElement.getClass().getName());
-            }
-            else {
-                result = jsElement;
-            }
-        }
-        catch (final ElementNotFoundException e) {
-            // Just fall through - result is already set to NOT_FOUND
-        }
-        return result;
+        final DomElement element = new DomElement(namespaceURI, qualifiedName, getPage(), null);
+        return getScriptableFor(element);
     }
 
     /**
@@ -824,7 +809,13 @@ public class HTMLDocument extends Document {
      */
     public HTMLCollection jsxFunction_getElementsByTagName(final String tagName) {
         final HTMLCollection collection = new HTMLCollection(this);
-        final String exp = "//" + tagName.toLowerCase();
+        final String exp;
+        if (tagName.equals("*")) {
+            exp = "//*";
+        }
+        else {
+            exp = "//*[lower-case(name()) = '" + tagName.toLowerCase() + "']";
+        }
         collection.init(getDomNodeOrDie(), exp);
         return collection;
     }

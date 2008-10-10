@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
@@ -106,24 +105,7 @@ public class Node extends SimpleScriptable {
      * @return the node name
      */
     public String jsxGet_nodeName() {
-        final DomNode domNode = getDomNodeOrDie();
-        String nodeName = domNode.getNodeName();
-        final String prefix = getDomNodeOrDie().getPrefix();
-        if (prefix != null) {
-            nodeName = prefix + ':' + nodeName;
-        }
-
-        // If this is an HtmlElement then flip the result to uppercase. This should really be
-        // changed in HtmlElement itself but that would break backwards compatibility fairly
-        // significantly as that one is documented as always returning a lowercase value.
-        // Update: not sure how accurate the previous comment is. It seems that uppercase only
-        // applies within an Html document and not for HtmlElement within an xml document
-        if (domNode instanceof HtmlElement
-            && ((HtmlElement) domNode).getNamespaceURI() == null
-            && (domNode.getOwnerDocument() instanceof HtmlPage)) {
-            nodeName = nodeName.toUpperCase();
-        }
-        return nodeName;
+        return getDomNodeOrDie().getNodeName();
     }
 
     /**
@@ -310,7 +292,7 @@ public class Node extends SimpleScriptable {
      * Returns the child nodes of the current element.
      * @return the child nodes of the current element
      */
-    public Object jsxGet_childNodes() {
+    public final Object jsxGet_childNodes() {
         if (childNodes_ == null) {
             childNodes_ = new HTMLCollection(this);
             childNodes_.initFromChildren(getDomNodeOrDie());

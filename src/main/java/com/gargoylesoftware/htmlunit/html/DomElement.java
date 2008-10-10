@@ -59,7 +59,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param attributes a map ready initialized with the attributes for this element, or
      * <code>null</code>. The map will be stored as is, not copied.
      */
-    protected DomElement(final String namespaceURI, final String qualifiedName, final Page page,
+    public DomElement(final String namespaceURI, final String qualifiedName, final Page page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page);
         if (attributes != null) {

@@ -276,58 +276,44 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns the tag name of this element.
-     * @return the tag name in uppercase
+     * {@inheritDoc}
      */
-    public String jsxGet_tagName() {
-        String tagName = getHtmlElementOrDie().getTagName();
-        final String prefix = getDomNodeOrDie().getPrefix();
-        if (prefix != null) {
-            tagName = prefix + ':' + tagName;
+    public Object jsxGet_namespaceURI() {
+        if (getBrowserVersion().isIE()) {
+            if (getDomNodeOrDie().getPage() instanceof HtmlPage) {
+                return NOT_FOUND;
+            }
+            return getHtmlElementOrDie().getNamespaceURI();
         }
-        if (jsxGet_namespaceURI() == null) {
-            tagName = tagName.toUpperCase();
+        else {
+            if (getDomNodeOrDie().getPage() instanceof HtmlPage) {
+                return null;
+            }
+            return getHtmlElementOrDie().getNamespaceURI();
         }
-        return tagName;
     }
 
     /**
-     * Returns The URI that identifies an XML namespace.
-     * @return the URI that identifies an XML namespace
+     * Gets the "prefix" attribute.
+     * @return the "prefix" attribute
      */
-    public String jsxGet_namespaceURI() {
-        return getHtmlElementOrDie().getNamespaceURI();
-    }
-
-    /**
-     * Returns The local name (without prefix).
-     * @return the local name (without prefix)
-     */
-    public String jsxGet_localName() {
-        String localName = getHtmlElementOrDie().getLocalName();
-        final String namespaceURI = getHtmlElementOrDie().getNamespaceURI();
-        if (namespaceURI == null || namespaceURI.length() == 0 || namespaceURI.equals(HTMLParser.XHTML_NAMESPACE)) {
-            final String prefix = getDomNodeOrDie().getPrefix();
-            if (prefix != null) {
-                localName = prefix + ':' + localName;
+    public Object jsxGet_localName() {
+        if (getBrowserVersion().isIE()) {
+            return NOT_FOUND;
+        }
+        else {
+            final DomNode domNode = getDomNodeOrDie();
+            String localName = domNode.getLocalName();
+            if (domNode.getPage() instanceof HtmlPage) {
+                if (domNode.getPrefix() != null) {
+                    localName = domNode.getPrefix() + ':' + localName;
+                }
+                return localName.toUpperCase();
+            }
+            else {
+                return localName;
             }
         }
-        if (jsxGet_namespaceURI() == null) {
-            localName = localName.toUpperCase();
-        }
-        return localName;
-    }
-
-    /**
-     * Returns The Namespace prefix.
-     * @return the Namespace prefix
-     */
-    public String jsxGet_prefix() {
-        final String namespaceURI = getHtmlElementOrDie().getNamespaceURI();
-        if (namespaceURI == null || namespaceURI.length() == 0 || namespaceURI.equals(HTMLParser.XHTML_NAMESPACE)) {
-            return null;
-        }
-        return getHtmlElementOrDie().getPrefix();
     }
 
     /**
@@ -1794,6 +1780,35 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         if (window.getWebWindow() == window.getWebWindow().getWebClient().getCurrentWindow()) {
             final HtmlElement element = (HtmlElement) getDomNodeOrDie();
             ((HtmlPage) element.getPage()).setFocusedElement(element);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String jsxGet_nodeName() {
+        final DomNode domNode = getDomNodeOrDie();
+        String nodeName = domNode.getNodeName();
+        final String prefix = getDomNodeOrDie().getPrefix();
+        if (prefix != null) {
+            nodeName = prefix + ':' + nodeName;
+        }
+
+        if (domNode.getPage() instanceof HtmlPage) {
+            nodeName = nodeName.toUpperCase();
+        }
+        return nodeName;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Object jsxGet_prefix() {
+        if (getBrowserVersion().isIE()) {
+            return super.jsxGet_prefix();
+        }
+        else {
+            return null;
         }
     }
 }

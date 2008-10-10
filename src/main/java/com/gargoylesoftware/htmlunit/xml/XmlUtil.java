@@ -137,8 +137,8 @@ public final class XmlUtil {
         }
         final String ns = source.getNamespaceURI();
         String localName = source.getLocalName();
-        if (!page.getWebClient().getBrowserVersion().isIE() && HTMLParser.XHTML_NAMESPACE.equals(ns)) {
-            final IElementFactory factory = HTMLParser.getFactory(localName.toLowerCase());
+        if (HTMLParser.XHTML_NAMESPACE.equals(ns)) {
+            final IElementFactory factory = HTMLParser.getFactory(localName);
             return factory.createElementNS(page, ns, localName, namedNodeMapToSaxAttributes(source.getAttributes()));
         }
         final Map<String, DomAttr> attributes = new HashMap<String, DomAttr>();
