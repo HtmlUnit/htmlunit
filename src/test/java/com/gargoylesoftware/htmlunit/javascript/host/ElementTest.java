@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link Element}.
@@ -843,5 +844,34 @@ public class ElementTest extends WebTestCase {
         client.getPage(URL_FIRST);
 
         assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts(IE = { "button", "getAttributeNS() not supported" }, FF = { "button", "", "false", "true" })
+    public void attributeNS() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var e = document.getElementById('foo');\n"
+            + "    alert(e.getAttribute('type'));\n"
+            + "    try {\n"
+            + "      alert(e.getAttributeNS('bar', 'type'));\n"
+            + "      alert(e.hasAttributeNS('bar', 'type'));\n"
+            + "      e.removeAttributeNS('bar', 'type');\n"
+            + "      alert(e.hasAttribute('type'));\n"
+            + "    } catch (e) {alert('getAttributeNS() not supported')}\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='foo' type='button' value='someValue'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
     }
 }
