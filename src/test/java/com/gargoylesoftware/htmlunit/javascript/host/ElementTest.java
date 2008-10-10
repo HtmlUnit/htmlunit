@@ -473,6 +473,69 @@ public class ElementTest extends WebTestCase {
         html("tagName");
     }
 
+    /**
+     * @throws Exception failure
+     */
+    @Test
+    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts(IE = {"[object],undefined",
+                "[object],undefined",
+                "createElementNS() is not defined",
+                "[object],undefined",
+                "[object],undefined"
+                },
+            FF = {"[object HTMLDivElement],null",
+                "[object HTMLUnknownElement],null",
+                "[object Element],app",
+                "[object HTMLDivElement],null",
+                "[object HTMLUnknownElement],null"
+                })
+    public void html_prefix() throws Exception {
+        html("prefix");
+    }
+
+    /**
+     * @throws Exception failure
+     */
+    @Test
+    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts(IE = {"[object],undefined",
+                "[object],undefined",
+                "createElementNS() is not defined",
+                "[object],undefined",
+                "[object],undefined"
+                },
+            FF = {"[object HTMLDivElement],DIV",
+                "[object HTMLUnknownElement],APP:DEV",
+                "[object Element],dIv",
+                "[object HTMLDivElement],DIV",
+                "[object HTMLUnknownElement],APP:DEV"
+                })
+    public void html_localName() throws Exception {
+        html("localName");
+    }
+
+    /**
+     * @throws Exception failure
+     */
+    @Test
+    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts(IE = {"[object],undefined",
+                "[object],undefined",
+                "createElementNS() is not defined",
+                "[object],undefined",
+                "[object],undefined"
+                },
+            FF = {"[object HTMLDivElement],null",
+                "[object HTMLUnknownElement],null",
+                "[object Element],http://www.appcelerator.org",
+                "[object HTMLDivElement],null",
+                "[object HTMLUnknownElement],null"
+                })
+    public void html_namespaceURI() throws Exception {
+        html("namespaceURI");
+    }
+
     private void html(final String methodName) throws Exception {
         final String html
             = "<html>\n"
@@ -549,6 +612,81 @@ public class ElementTest extends WebTestCase {
         namespace("tagName");
     }
 
+    /**
+     * @throws Exception failure
+     */
+    @Test
+    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts(IE = {"[object],undefined",
+                "[object],undefined",
+                "[object],undefined",
+                "createElementNS() is not defined",
+                "[object],undefined",
+                "[object],undefined",
+                "[object],undefined"
+                },
+            FF = {"[object HTMLDivElement],null",
+                "[object HTMLUnknownElement],null",
+                "[object HTMLUnknownElement],null",
+                "[object Element],app",
+                "[object HTMLDivElement],null",
+                "[object HTMLUnknownElement],null",
+                "[object HTMLUnknownElement],null"
+                })
+    public void namespace_prefix() throws Exception {
+        namespace("prefix");
+    }
+
+    /**
+     * @throws Exception failure
+     */
+    @Test
+    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts(IE = {"[object],undefined",
+                "[object],undefined",
+                "[object],undefined",
+                "createElementNS() is not defined",
+                "[object],undefined",
+                "[object],undefined",
+                "[object],undefined"
+                },
+            FF = {"[object HTMLDivElement],DIV",
+                "[object HTMLUnknownElement],APP:DEV",
+                "[object HTMLUnknownElement],ANOTHER:DEV",
+                "[object Element],dIv",
+                "[object HTMLDivElement],DIV",
+                "[object HTMLUnknownElement],APP:DEV",
+                "[object HTMLUnknownElement],ANOTHER:DEV"
+                })
+    public void namespace_localName() throws Exception {
+        namespace("localName");
+    }
+
+    /**
+     * @throws Exception failure
+     */
+    @Test
+    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts(IE = {"[object],undefined",
+                "[object],undefined",
+                "[object],undefined",
+                "createElementNS() is not defined",
+                "[object],undefined",
+                "[object],undefined",
+                "[object],undefined"
+                },
+            FF = {"[object HTMLDivElement],null",
+                "[object HTMLUnknownElement],null",
+                "[object HTMLUnknownElement],null",
+                "[object Element],http://www.appcelerator.org",
+                "[object HTMLDivElement],null",
+                "[object HTMLUnknownElement],null",
+                "[object HTMLUnknownElement],null"
+                })
+    public void namespace_namespaceURI() throws Exception {
+        namespace("namespaceURI");
+    }
+
     private void namespace(final String methodName) throws Exception {
         final String html
             = "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:app='http://www.appcelerator.org'>\n"
@@ -582,7 +720,7 @@ public class ElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
+    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @Alerts(IE = {"[object]", "dIv",
             "[object]", "html",
             "[object]", "div",
@@ -601,7 +739,7 @@ public class ElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
+    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @Alerts(IE = {"[object]", "dIv",
             "[object]", "html",
             "[object]", "div",
@@ -614,6 +752,63 @@ public class ElementTest extends WebTestCase {
             })
     public void xml_tagName() throws Exception {
         xml("tagName");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    @Alerts(IE = {"[object]", "",
+            "[object]", "",
+            "[object]", "",
+            "[object]", ""
+            },
+        FF = {"[object Element]", "null",
+            "[object HTMLHtmlElement]", "null",
+            "[object HTMLDivElement]", "null",
+            "[object HTMLUnknownElement]", "null"
+            })
+    public void xml_prefix() throws Exception {
+        xml("prefix");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts(IE = {"[object]", "undefined",
+            "[object]", "undefined",
+            "[object]", "undefined",
+            "[object]", "undefined"
+            },
+        FF = {"[object Element]", "dIv",
+            "[object HTMLHtmlElement]", "html",
+            "[object HTMLDivElement]", "div",
+            "[object HTMLUnknownElement]", "dIv"
+            })
+    public void xml_localName() throws Exception {
+        xml("localName");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    @Alerts(IE = {"[object]", "",
+            "[object]", "http://www.w3.org/1999/xhtml",
+            "[object]", "http://www.w3.org/1999/xhtml",
+            "[object]", "http://www.w3.org/1999/xhtml"
+            },
+        FF = {"[object Element]", "null",
+            "[object HTMLHtmlElement]", "http://www.w3.org/1999/xhtml",
+            "[object HTMLDivElement]", "http://www.w3.org/1999/xhtml",
+            "[object HTMLUnknownElement]", "http://www.w3.org/1999/xhtml"
+            })
+    public void xml_namespaceURI() throws Exception {
+        xml("namespaceURI");
     }
 
     private void xml(final String methodName) throws Exception {
