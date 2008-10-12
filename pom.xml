@@ -531,6 +531,12 @@
             <version>3.4.2.v_883_R34x</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.eclipse.equinox</groupId>
+            <artifactId>common</artifactId>
+            <version>3.3.0-v20070426</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <distributionManagement>
         <site>
