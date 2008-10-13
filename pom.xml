@@ -25,6 +25,9 @@
                     <!-- Update the links reference in javadoc, PDM and clover plugins when this changes -->
                     <source>1.5</source>
                     <target>1.5</target>
+                    <testExcludes>
+                        <exclude>**/CodeChecker.java</exclude>
+                    </testExcludes>
                 </configuration>
             </plugin>
             <plugin>
