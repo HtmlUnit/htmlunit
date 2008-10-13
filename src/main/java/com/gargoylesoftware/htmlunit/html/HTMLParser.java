@@ -544,7 +544,7 @@ public final class HTMLParser {
         }
 
         /** @inheritDoc ContentHandler#characters(char,int,int) */
-        public void characters(final char ch[], final int start, final int length) throws SAXException {
+        public void characters(final char[] ch, final int start, final int length) throws SAXException {
             if (characters_ == null) {
                 characters_ = new StringBuilder();
             }
@@ -552,7 +552,7 @@ public final class HTMLParser {
         }
 
         /** @inheritDoc ContentHandler#ignorableWhitespace(char,int,int) */
-        public void ignorableWhitespace(final char ch[], final int start, final int length) throws SAXException {
+        public void ignorableWhitespace(final char[] ch, final int start, final int length) throws SAXException {
             if (characters_ == null) {
                 characters_ = new StringBuilder();
             }

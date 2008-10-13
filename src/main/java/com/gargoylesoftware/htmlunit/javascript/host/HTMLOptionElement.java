@@ -100,6 +100,7 @@ public class HTMLOptionElement extends HTMLElement {
      * Returns the value of the "text" property.
      * @return the text property
      */
+    @Override
     public String jsxGet_text() {
         final HtmlOption htmlOption = getHtmlOption();
         if (htmlOption.hasAttribute("label")) {

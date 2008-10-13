@@ -39,6 +39,7 @@ public class HTMLUnknownElement extends HTMLElement {
      * Gets the JavaScript property "nodeName" for the current node.
      * @return the node name
      */
+    @Override
     public String jsxGet_nodeName() {
         final Page page = (Page) getHtmlElementOrDie().getPage();
         if (page instanceof XmlPage || (getBrowserVersion().isIE()

@@ -215,7 +215,7 @@ public class CodeStyleTest {
      * @return the list of lines
      * @throws IOException if an error occurs
      */
-    private static List<String> getLines(final File file) throws IOException {
+    static List<String> getLines(final File file) throws IOException {
         final List<String> rv = new ArrayList<String>();
         final BufferedReader reader = new BufferedReader(new FileReader(file));
         String line;

@@ -45,7 +45,7 @@ public final class SanityCheck {
      * @param args the arguments
      * @throws Exception if a problem occurs
      */
-    public static void main(final String args[]) throws Exception {
+    public static void main(final String[] args) throws Exception {
         final SanityCheck test = new SanityCheck();
         test.yahooMail();
         test.yahoo();

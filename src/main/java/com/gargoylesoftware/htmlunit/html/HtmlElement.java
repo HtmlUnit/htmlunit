@@ -131,6 +131,7 @@ public abstract class HtmlElement extends DomElement {
      * @param attributeName the name of the attribute
      * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED} or {@link #ATTRIBUTE_VALUE_EMPTY}
      */
+    @Override
     public final String getAttributeValue(final String attributeName) {
         return super.getAttributeValue(attributeName.toLowerCase());
     }
@@ -142,6 +143,7 @@ public abstract class HtmlElement extends DomElement {
      * @param qualifiedName the qualified name of the attribute
      * @param attributeValue the value of the attribute
      */
+    @Override
     public final void setAttributeValue(final String namespaceURI, final String qualifiedName,
         final String attributeValue) {
         setAttributeValue(namespaceURI, qualifiedName, attributeValue, false);
@@ -247,6 +249,7 @@ public abstract class HtmlElement extends DomElement {
      * Removes an attribute specified by name from this element.
      * @param attributeName the attribute attributeName
      */
+    @Override
     public final void removeAttribute(final String attributeName) {
         final String value = getAttributeValue(attributeName);
 
@@ -361,6 +364,7 @@ public abstract class HtmlElement extends DomElement {
      * @return true if an attribute with the given name is specified on this element or has a
      * default value, false otherwise.
      */
+    @Override
     public final boolean hasAttribute(final String attributeName) {
         return super.hasAttribute(attributeName.toLowerCase());
     }

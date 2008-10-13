@@ -39,6 +39,7 @@ public class HTMLTitleElement extends HTMLElement {
      * Returns the <tt>text</tt> attribute.
      * @return the <tt>text</tt> attribute
      */
+    @Override
     public String jsxGet_text() {
         final DomNode firstChild = getHtmlElementOrDie().getFirstChild();
         if (firstChild != null) {

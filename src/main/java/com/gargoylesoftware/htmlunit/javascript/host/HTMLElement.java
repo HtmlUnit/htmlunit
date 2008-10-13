@@ -278,6 +278,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * {@inheritDoc}
      */
+    @Override
     public Object jsxGet_namespaceURI() {
         if (getBrowserVersion().isIE()) {
             if (getDomNodeOrDie().getPage() instanceof HtmlPage) {
@@ -297,6 +298,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Gets the "prefix" attribute.
      * @return the "prefix" attribute
      */
+    @Override
     public Object jsxGet_localName() {
         if (getBrowserVersion().isIE()) {
             return NOT_FOUND;
@@ -352,6 +354,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return a collection of the attributes of this element
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.attributes">Gecko DOM Reference</a>
      */
+    @Override
     public NamedNodeMap jsxGet_attributes() {
         return new NamedNodeMap(getHtmlElementOrDie(), true);
     }
@@ -361,6 +364,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param attributeName attribute name
      * @return the value of the specified attribute, <code>null</code> if the attribute is not defined
      */
+    @Override
     public String jsxFunction_getAttribute(String attributeName) {
         attributeName = fixAttributeName(attributeName);
         final String value = getHtmlElementOrDie().getAttributeValue(attributeName);
@@ -406,6 +410,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param name Name of the attribute to test
      * @return <code>true</code> if the node has this attribute
      */
+    @Override
     public boolean jsxFunction_hasAttribute(final String name) {
         return getHtmlElementOrDie().getAttribute(name) != HtmlElement.ATTRIBUTE_NOT_DEFINED;
     }
@@ -431,6 +436,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param name Name of the attribute to set
      * @param value Value to set the attribute to
      */
+    @Override
     public void jsxFunction_setAttribute(String name, final String value) {
         name = fixAttributeName(name);
         getHtmlElementOrDie().setAttributeValue(name, value);
@@ -479,6 +485,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param attributeName the name of the attribute to retrieve
      * @return the attribute node for the specified attribute
      */
+    @Override
     public Object jsxFunction_getAttributeNode(final String attributeName) {
         if (getHtmlElementOrDie().getAttributeValue(attributeName) == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
             return null;
@@ -510,6 +517,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param tagName the name to search for
      * @return all the descendant elements with the specified tag name
      */
+    @Override
     public Object jsxFunction_getElementsByTagName(final String tagName) {
         final DomNode node = getDomNodeOrDie();
         final HTMLCollection collection = new HTMLCollection(this);
@@ -1786,6 +1794,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * {@inheritDoc}
      */
+    @Override
     public String jsxGet_nodeName() {
         final DomNode domNode = getDomNodeOrDie();
         String nodeName = domNode.getNodeName();
@@ -1799,6 +1808,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * {@inheritDoc}
      */
+    @Override
     public Object jsxGet_prefix() {
         if (getBrowserVersion().isIE()) {
             return super.jsxGet_prefix();
