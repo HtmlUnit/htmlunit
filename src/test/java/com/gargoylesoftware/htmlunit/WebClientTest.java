@@ -94,12 +94,18 @@ public class WebClientTest extends WebTestCase {
                 }
             }
             else {
-                if (file.getName().endsWith(".java") && !file.getName().contains("WebDriver")) {
+                if (file.getName().endsWith(".java")) {
                     final int index = new File("src/test/java").getAbsolutePath().length();
                     String name = file.getAbsolutePath();
                     name = name.substring(index + 1, name.length() - 5);
                     name = name.replace(File.separatorChar, '.');
-                    final Class< ? > clazz = Class.forName(name);
+                    final Class< ? > clazz;
+                    try {
+                        clazz = Class.forName(name);
+                    }
+                    catch (final Exception e) {
+                        continue;
+                    }
                     for (Constructor< ? > ctor : clazz.getConstructors()) {
                         if (ctor.getParameterTypes().length == 0) {
                             for (final Method method : clazz.getDeclaredMethods()) {
