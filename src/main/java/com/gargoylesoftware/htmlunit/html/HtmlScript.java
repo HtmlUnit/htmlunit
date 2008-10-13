@@ -241,9 +241,7 @@ public class HtmlScript extends HtmlElement {
                 if (e instanceof RuntimeException) {
                     throw (RuntimeException) e;
                 }
-                else {
-                    throw new RuntimeException(e);
-                }
+                throw new RuntimeException(e);
             }
         }
     }

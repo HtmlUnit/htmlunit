@@ -192,7 +192,7 @@ public class JavaScriptEngine implements Serializable {
                                 new HtmlElement(null, "", webWindow.getEnclosedPage(), null) {
                                     private static final long serialVersionUID = -5614158965497997095L;
                                 };
-                            ((SimpleScriptable) obj).setDomNode(domNode);
+                            obj.setDomNode(domNode);
                         }
                     }
                     prototypes.put(config.getLinkedClass(), prototype);

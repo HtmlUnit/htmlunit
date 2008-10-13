@@ -193,7 +193,7 @@ public class Attr extends SimpleScriptable {
      */
     public boolean jsxGet_specified() {
         if (parent_ != null) {
-            return ((DomElement) parent_).hasAttribute(name_);
+            return parent_.hasAttribute(name_);
         }
         return true;
     }

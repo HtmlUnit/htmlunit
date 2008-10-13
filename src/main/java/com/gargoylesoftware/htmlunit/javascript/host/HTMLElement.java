@@ -286,12 +286,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             }
             return getHtmlElementOrDie().getNamespaceURI();
         }
-        else {
-            if (getDomNodeOrDie().getPage() instanceof HtmlPage) {
-                return null;
-            }
-            return getHtmlElementOrDie().getNamespaceURI();
+        if (getDomNodeOrDie().getPage() instanceof HtmlPage) {
+            return null;
         }
+        return getHtmlElementOrDie().getNamespaceURI();
     }
 
     /**
@@ -303,19 +301,15 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         if (getBrowserVersion().isIE()) {
             return NOT_FOUND;
         }
-        else {
-            final DomNode domNode = getDomNodeOrDie();
-            String localName = domNode.getLocalName();
-            if (domNode.getPage() instanceof HtmlPage) {
-                if (domNode.getPrefix() != null) {
-                    localName = domNode.getPrefix() + ':' + localName;
-                }
-                return localName.toUpperCase();
+        final DomNode domNode = getDomNodeOrDie();
+        String localName = domNode.getLocalName();
+        if (domNode.getPage() instanceof HtmlPage) {
+            if (domNode.getPrefix() != null) {
+                localName = domNode.getPrefix() + ':' + localName;
             }
-            else {
-                return localName;
-            }
+            return localName.toUpperCase();
         }
+        return localName;
     }
 
     /**
@@ -1813,8 +1807,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         if (getBrowserVersion().isIE()) {
             return super.jsxGet_prefix();
         }
-        else {
-            return null;
-        }
+        return null;
     }
 }

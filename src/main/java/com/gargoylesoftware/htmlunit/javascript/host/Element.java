@@ -239,9 +239,7 @@ public class Element extends EventNode {
             }
             return "";
         }
-        else {
-            return getDomNodeOrDie().getPrefix();
-        }
+        return getDomNodeOrDie().getPrefix();
     }
 
     /**
@@ -252,9 +250,7 @@ public class Element extends EventNode {
         if (getBrowserVersion().isIE()) {
             return NOT_FOUND;
         }
-        else {
-            return getDomNodeOrDie().getLocalName();
-        }
+        return getDomNodeOrDie().getLocalName();
     }
 
     /**
@@ -268,8 +264,6 @@ public class Element extends EventNode {
             }
             return "";
         }
-        else {
-            return getDomNodeOrDie().getNamespaceURI();
-        }
+        return getDomNodeOrDie().getNamespaceURI();
     }
 }
