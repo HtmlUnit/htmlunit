@@ -57,4 +57,12 @@ public class HtmlBreak extends StyledElement {
     public final String getClearAttribute() {
         return getAttributeValue("clear");
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected String asTextInternal() {
+        return AS_TEXT_NEW_LINE;
+    }
 }

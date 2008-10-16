@@ -423,6 +423,8 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      *
      * @return the element as text
      */
+    // we need to preserve this method as it is there since many versions with the above documentation.
+    // This doesn't mean that asTextInternal() has to return the same.
     @Override
     public String asText() {
         final List<HtmlOption> options;
@@ -441,6 +443,33 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
             }
             if (i.hasNext()) {
                 buffer.append("\n");
+            }
+        }
+
+        return buffer.toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected String asTextInternal() {
+        final List<HtmlOption> options;
+        if (isMultipleSelectEnabled()) {
+            options = getOptions();
+        }
+        else {
+            options = getSelectedOptions();
+        }
+
+        final StringBuilder buffer = new StringBuilder();
+        for (final Iterator<HtmlOption> i = options.iterator(); i.hasNext();) {
+            final HtmlOption currentOption = i.next();
+            if (currentOption != null) {
+                buffer.append(currentOption.asText());
+            }
+            if (i.hasNext()) {
+                buffer.append(AS_TEXT_BLOCK_SEPARATOR);
             }
         }
 

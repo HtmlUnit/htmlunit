@@ -105,9 +105,13 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * {@inheritDoc}
      */
     @Override
-    public String asText() {
+    protected String asTextInternal() {
         if (isStyleVisible()) {
-            return getText();
+            String text = getText();
+            text = text.replaceAll(" ", AS_TEXT_BLANK);
+            text = text.replaceAll("\r?\n", AS_TEXT_NEW_LINE);
+            text = text.replaceAll("\r", AS_TEXT_NEW_LINE);
+            return text;
         }
         return "";
     }

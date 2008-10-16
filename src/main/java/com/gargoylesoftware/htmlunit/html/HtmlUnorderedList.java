@@ -70,4 +70,32 @@ public class HtmlUnorderedList extends ClickableElement {
     public final String getCompactAttribute() {
         return getAttributeValue("compact");
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected String asTextInternal() {
+        final StringBuilder sb = new StringBuilder();
+        boolean first = true;
+        for (final DomNode item : getChildren()) {
+            if (!(item instanceof HtmlListItem)) {
+                continue;
+            }
+            if (!first) {
+                sb.append(AS_TEXT_BLOCK_SEPARATOR);
+            }
+            first = false;
+            sb.append(item.asTextInternal());
+        }
+        return sb.toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isBlock() {
+        return true;
+    }
 }

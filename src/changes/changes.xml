@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="update" dev="mguillem" id="1509340">
+                Better formatting for asText() particularly with new lines for TR, BR or LI and tabs between cells.
+            </action>
             <action type="fix" dev="asashour" id="2043322">
                 HtmlElement: correctly handle getNodeName().
             </action>
@@ -38,6 +41,7 @@
             <action type="fix" dev="asashour">
                 FrameWindow: should be Serializable.
             </action>
+>>>>>>> .r3566
             <action type="fix" dev="asashour">
                 JavaScript: postpone the execution of dynamically added external scripts.
             </action>

@@ -60,6 +60,14 @@ import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
  * @author Sudhan Moghe
  */
 public abstract class DomNode implements Cloneable, Serializable, Node {
+    /** Indicates a block. Will be rendered as line separator (multiple block marks are ignored) */
+    protected static final String AS_TEXT_BLOCK_SEPARATOR = "§bs§";
+    /** Indicates a new line. Will be rendered as line separator. */
+    protected static final String AS_TEXT_NEW_LINE = "§nl§";
+    /** Indicates a non blank that can't be trimmed or reduced. */
+    protected static final String AS_TEXT_BLANK = "§blank§";
+    /** Indicates a tab. */
+    protected static final String AS_TEXT_TAB = "§tab§";
 
     private static final long serialVersionUID = -2013573303678006763L;
 
@@ -529,18 +537,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Returns a flag indicating whether or not this node itself results in any space taken up
-     * in browser windows; for instance, "&lt;b&gt;" affects the specified text, but does not
-     * use up any space itself.
-     *
-     * @return a flag indicating whether or not this node itself results in any space taken up
-     *         in browser windows
-     */
-    protected boolean isRenderedVisible() {
-        return false;
-    }
-
-    /**
      * Returns a flag indicating whether or not this node should have any leading and trailing
      * whitespace removed when {@link #asText()} is called. This method should usually return
      * <tt>true</tt>, but must return <tt>false</tt> for such things as text formatting tags.
@@ -598,13 +594,36 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *         be visible to the user if this page was shown in a web browser
      */
     public String asText() {
-        String text = getChildrenAsText();
-        text = reduceWhitespace(text);
+        String text = asTextInternal();
 
-        if (isTrimmedText()) {
-            text = text.trim();
-        }
+        // ignore <br/> at the end of a block
+        text = text.replaceAll(AS_TEXT_NEW_LINE + AS_TEXT_BLOCK_SEPARATOR, AS_TEXT_BLOCK_SEPARATOR);
+        text = reduceWhitespace(text);
+        text = text.replaceAll(AS_TEXT_BLANK, " ");
+        final String ls = System.getProperty("line.separator");
+        text = text.replaceAll(AS_TEXT_NEW_LINE, ls);
+        text = text.replaceAll("(?:" + AS_TEXT_BLOCK_SEPARATOR + ")+", ls); // many block sep => 1 new line
+        text = text.replaceAll(AS_TEXT_TAB, "\t");
+
         return text;
+    }
+
+    /**
+     * Gets internal text representation. This will be formatted at the very end of {@link #asText()} to handle multiple
+     * spaces, new lines, ...
+     * @return the "internal" text representation
+     */
+    protected String asTextInternal() {
+        return getChildrenAsText();
+    }
+
+    /**
+     * Indicates if the text representation of this element is made as a block, ie if new lines need
+     * to be inserted before and after it.
+     * @return <code>true</code> if this element represents a block
+     */
+    protected boolean isBlock() {
+        return false;
     }
 
     /**
@@ -614,46 +633,24 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     protected final String getChildrenAsText() {
         final StringBuilder buffer = new StringBuilder();
-        final StringBuilder textBuffer = new StringBuilder();
 
-        boolean previousNodeWasText = false;
         for (final DomNode node : getChildren()) {
             if (node instanceof DomText) {
                 if (node.isStyleVisible()) {
-                    textBuffer.append(((DomText) node).getData());
-                    previousNodeWasText = true;
+                    buffer.append(node.asTextInternal());
                 }
             }
             else {
-                if (previousNodeWasText) {
-                    // Whitespace between adjacent text nodes should remain as a single
-                    // space. So, append raw adjacent text and reduce it as a whole.
-                    buffer.append(reduceWhitespace(textBuffer.toString()));
-                    textBuffer.setLength(0);
-                    previousNodeWasText = false;
+                final boolean block = node.isBlock();
+                if (block) {
+                    buffer.append(AS_TEXT_BLOCK_SEPARATOR);
                 }
-                if (node.isRenderedVisible()) {
-                    buffer.append(" ");
-                    buffer.append(node.asText());
-                    buffer.append(" ");
-                }
-                else if (node.getNodeName().equals("p")) {
-                    // this is a bit kludgey, but we can't add the space
-                    //  inside the node's asText(), since it doesn't belong
-                    //  with the contents of the 'p' tag
-                    buffer.append(" ");
-                    buffer.append(node.asText());
-                }
-                else {
-                    buffer.append(node.asText());
+                buffer.append(node.asTextInternal());
+                if (block) {
+                    buffer.append(AS_TEXT_BLOCK_SEPARATOR);
                 }
             }
         }
-        if (previousNodeWasText) {
-            // we ended with text
-            buffer.append(textBuffer.toString());
-        }
-
         return buffer.toString();
     }
 
@@ -662,8 +659,25 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param text the text to clean up
      * @return the clean text
      */
-    protected static String reduceWhitespace(final String text) {
+    protected String reduceWhitespace(String text) {
+        text = text.trim();
+
+        // remove white spaces before or after block separators
+        text = text.replaceAll("\\s*" + AS_TEXT_BLOCK_SEPARATOR + "\\s*", AS_TEXT_BLOCK_SEPARATOR);
+
+        // remove leading block separators
+        while (text.startsWith(AS_TEXT_BLOCK_SEPARATOR)) {
+            text = text.substring(AS_TEXT_BLOCK_SEPARATOR.length());
+        }
+
+        // remove trailing block separators
+        while (text.endsWith(AS_TEXT_BLOCK_SEPARATOR)) {
+            text = text.substring(0, text.length() - AS_TEXT_BLOCK_SEPARATOR.length());
+        }
+        text = text.trim();
+
         final StringBuilder buffer = new StringBuilder(text.length());
+
         boolean whitespace = false;
         for (final char ch : text.toCharArray()) {
 

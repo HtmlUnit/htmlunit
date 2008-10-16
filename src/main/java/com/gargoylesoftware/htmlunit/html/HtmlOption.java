@@ -259,11 +259,21 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * This implementation will show the label attribute before the
      * content of the tag if the attribute exists.
      */
+    // we need to preserve this method as it is there since many versions with the above documentation.
+    // This doesn't mean that asTextInternal() has to return the same.
     @Override
     public String asText() {
         if (getLabelAttribute() != ATTRIBUTE_NOT_DEFINED) {
             return getLabelAttribute();
         }
-        return super.asText();
+        return super.asTextInternal();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected String asTextInternal() {
+        return asText();
     }
 }

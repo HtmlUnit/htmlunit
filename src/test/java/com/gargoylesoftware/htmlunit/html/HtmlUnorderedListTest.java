@@ -27,8 +27,10 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class HtmlUnorderedListTest extends WebTestCase {
+    private static final String LS = System.getProperty("line.separator");
 
     /**
      * @throws Exception if the test fails
@@ -50,5 +52,26 @@ public class HtmlUnorderedListTest extends WebTestCase {
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
         assertTrue(HtmlUnorderedList.class.isInstance(page.getHtmlElementById("myId")));
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asText() throws Exception {
+        final String html = "<html><head>\n"
+            + "</head><body>\n"
+            + "  <ul id='foo'>"
+            + "  <li>first item</li>\n"
+            + "  <li>second item</li>\n"
+            + "  </ul>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlElement node = page.getHtmlElementById("foo");
+        final String expectedText = "first item" + LS + "second item";
+
+        assertEquals(expectedText, node.asText());
+        assertEquals(expectedText, page.asText());
     }
 }

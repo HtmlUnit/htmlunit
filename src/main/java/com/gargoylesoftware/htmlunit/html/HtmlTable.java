@@ -315,7 +315,7 @@ public class HtmlTable extends ClickableElement {
      * An iterator that moves over all rows in this table. The iterator will also
      * enter into nested row group elements (header, footer and body).
      */
-    private class RowIterator implements Iterator<HtmlTableRow> {
+    private class RowIterator implements Iterator<HtmlTableRow>, Iterable<HtmlTableRow> {
         private HtmlTableRow nextRow_;
         private TableRowGroup currentGroup_;
 
@@ -390,5 +390,34 @@ public class HtmlTable extends ClickableElement {
                 setNextRow(group.getNextSibling());
             }
         }
+
+        public Iterator<HtmlTableRow> iterator() {
+            return this;
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected String asTextInternal() {
+        final StringBuilder sb = new StringBuilder();
+        boolean first = true;
+        for (final HtmlTableRow row : getRowIterator()) {
+            if (!first) {
+                sb.append(AS_TEXT_BLOCK_SEPARATOR);
+            }
+            first = false;
+            sb.append(row.asTextInternal());
+        }
+        return sb.toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isBlock() {
+        return true;
     }
 }

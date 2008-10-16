@@ -93,4 +93,29 @@ public class HtmlSpanTest extends WebTestCase {
         final HtmlSpan htmlSpan = page.getHtmlElementById("myId");
         assertTrue(htmlSpan.asXml().contains("</span>"));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asText() throws Exception {
+        final String html = "<html><head></head><body>\n"
+            + "<span id='outside'>"
+            + "<span>\n"
+            + "before\n"
+            + "</span>\n"
+            + "<span>\n"
+            + "inside\n"
+            + "</span>\n"
+            + "<span>\n"
+            + "after\n"
+            + "</span>\n"
+            + "</span>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlElement elt = page.getHtmlElementById("outside");
+        assertEquals("before inside after", elt.asText());
+        assertEquals("before inside after", page.asText());
+    }
 }

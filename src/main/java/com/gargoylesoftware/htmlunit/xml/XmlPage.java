@@ -191,7 +191,7 @@ public class XmlPage extends SgmlPage implements Document {
      * Exactly behaves as {@link #asXml()}.
      */
     @Override
-    public String asText() {
+    protected String asTextInternal() {
         return asXml();
     }
 

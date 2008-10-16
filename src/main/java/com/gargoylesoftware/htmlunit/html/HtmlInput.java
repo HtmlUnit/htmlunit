@@ -97,7 +97,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * {@inheritDoc}
      */
     @Override
-    public String asText() {
+    protected String asTextInternal() {
         return getValueAttribute();
     }
 

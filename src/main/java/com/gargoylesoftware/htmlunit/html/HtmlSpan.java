@@ -53,14 +53,6 @@ public class HtmlSpan extends ClickableElement {
      * {@inheritDoc}
      */
     @Override
-    protected boolean isRenderedVisible() {
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     protected boolean isTrimmedText() {
         return false;
     }

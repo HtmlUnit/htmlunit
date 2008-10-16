@@ -128,13 +128,8 @@ public class DomText extends DomCharacterData implements Text {
      * {@inheritDoc}
      */
     @Override
-    public String asText() {
-        String text = getData();
-        if (!(getParentNode() instanceof HtmlTextArea)) {
-            // Remove extra whitespace
-            text = reduceWhitespace(text);
-        }
-        return text;
+    protected String asTextInternal() {
+        return getData();
     }
 
     /**

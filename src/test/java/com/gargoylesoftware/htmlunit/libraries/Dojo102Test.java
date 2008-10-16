@@ -793,7 +793,7 @@ public class Dojo102Test extends WebTestCase {
     }
 
     private void eq(final String expected, final Iterator<HtmlElement> i) {
-        assertEquals(expected, i.next().asText());
+        assertEquals(expected, i.next().asText().trim());
     }
 
     /**

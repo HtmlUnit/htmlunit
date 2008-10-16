@@ -65,7 +65,7 @@ public class DomComment extends DomCharacterData implements Comment {
      * {@inheritDoc}
      */
     @Override
-    public String asText() {
+    protected String asTextInternal() {
         return "";
     }
 

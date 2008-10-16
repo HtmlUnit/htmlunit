@@ -68,4 +68,12 @@ public class HtmlDivision extends ClickableElement {
     protected boolean isEmptyXmlTagExpanded() {
         return true;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isBlock() {
+        return true;
+    }
 }

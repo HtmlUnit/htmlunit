@@ -38,6 +38,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Sudhan Moghe
  */
 public class HtmlElementTest extends WebTestCase {
+    private static final String LS = System.getProperty("line.separator");
 
     /**
      * Test hasAttribute() on an element with the attribute.
@@ -1066,7 +1067,7 @@ public class HtmlElementTest extends WebTestCase {
             + "</html>";
 
         final HtmlPage page = loadPage(content);
-        assertEquals("test Welcome to the world", page.asText());
+        assertEquals("test Welcome" + LS + "to the world", page.asText());
     }
 
     /**
@@ -1086,9 +1087,9 @@ public class HtmlElementTest extends WebTestCase {
             + "</html>";
 
         final HtmlPage iePage = loadPage(BrowserVersion.INTERNET_EXPLORER_6, content, null);
-        assertEquals("test Welcome hidden text to the world some more hidden text", iePage.asText());
+        assertEquals("test Welcome" + LS + "hidden text to the world some more hidden text", iePage.asText());
         final HtmlPage ffPage = loadPage(BrowserVersion.FIREFOX_2, content, null);
-        assertEquals("test Welcome to the world", ffPage.asText());
+        assertEquals("test Welcome" + LS + "to the world", ffPage.asText());
     }
 
     /**

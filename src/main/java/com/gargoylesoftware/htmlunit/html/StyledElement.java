@@ -95,12 +95,4 @@ public abstract class StyledElement extends HtmlElement {
     public final String getTitleAttribute() {
         return getAttributeValue("title");
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean isRenderedVisible() {
-        return true;
-    }
 }

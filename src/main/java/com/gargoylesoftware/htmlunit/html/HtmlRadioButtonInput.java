@@ -117,12 +117,22 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * but we invent one for it because it is useful for testing.
      * @return "checked" or "unchecked" according to the radio state
      */
+    // we need to preserve this method as it is there since many versions with the above documentation.
+    // This doesn't mean that asTextInternal() has to return the same.
     @Override
     public String asText() {
         if (isChecked()) {
             return "checked";
         }
         return "unchecked";
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected String asTextInternal() {
+        return asText();
     }
 
     /**

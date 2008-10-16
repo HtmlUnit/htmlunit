@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Sudhan Moghe
  */
 public class DomTextTest extends WebTestCase {
+    private static final String LS = System.getProperty("line.separator");
 
     /**
      * Test the clean up of &amp;nbsp; in strings.
@@ -87,17 +88,20 @@ public class DomTextTest extends WebTestCase {
     }
 
     /**
-     * These worked before the changes for bug #1731042, and should afterwards, too.
+     * This test once tested regression for bug #1731042 but the expectations have been changed
+     * as asText() should now use new lines when appropriate.
      * @throws Exception if the test fails
      */
     @Test
     public void testAsText_regression() throws Exception {
-        testAsText("a<ul><li>b</ul>c",                     "a b c");
-        testAsText("a<p>b<br>c",                           "a b c");
-        testAsText("a<table><tr><td>b</td></tr></table>c", "a b c");
-        testAsText("a<div>b</div>c",                       "a b c");
+        String expected = "a" + LS + "b" + LS + "c";
+        testAsText("a<ul><li>b</ul>c", expected);
+        testAsText("a<p>b<br>c", expected);
+        testAsText("a<table><tr><td>b</td></tr></table>c", expected);
+        testAsText("a<div>b</div>c", expected);
 
-        testAsText("a<table><tr><td> b </td></tr>\n<tr><td> b </td></tr></table>c", "a b b c");
+        expected = "a" + LS + "b" + LS + "b" + LS + "c";
+        testAsText("a<table><tr><td> b </td></tr>\n<tr><td> b </td></tr></table>c", expected);
     }
 
     /**
@@ -122,6 +126,8 @@ public class DomTextTest extends WebTestCase {
         final String content = "<html><body><span id='foo'>" + html + "</span></body></html>";
 
         final HtmlPage page = loadPage(content);
+        assertEquals(expectedText, page.asText());
+
         final HtmlElement elt = page.getHtmlElementById("foo");
         assertEquals(expectedText, elt.asText());
 

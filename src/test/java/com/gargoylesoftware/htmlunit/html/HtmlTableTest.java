@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  */
 public class HtmlTableTest extends WebTestCase {
+    static final String LS = System.getProperty("line.separator");
 
     /**
      * Tests getTableCell(int,int).
@@ -352,5 +353,32 @@ public class HtmlTableTest extends WebTestCase {
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
         assertTrue(HtmlTable.class.isInstance(page.getHtmlElementById("myId")));
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asText() throws Exception {
+        final String html = "<html><head>\n"
+            + "</head><body>\n"
+            + "  <table id='myId'>\n"
+            + "  <tr>\n"
+            + "  <td>cell 1,1</td>\n"
+            + "  <td>cell 1,2</td>\n"
+            + "  </tr>\n"
+            + "  <tr>\n"
+            + "  <td>cell 2,1</td>\n"
+            + "  <td>cell 2,2</td>\n"
+            + "  </tr>\n"
+            + "  </table>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlElement table = page.getHtmlElementById("myId");
+        final String expectedText = "cell 1,1\tcell 1,2" + LS
+            + "cell 2,1\tcell 2,2";
+
+        assertEquals(expectedText, table.asText());
     }
 }
