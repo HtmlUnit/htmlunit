@@ -263,10 +263,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     // This doesn't mean that asTextInternal() has to return the same.
     @Override
     public String asText() {
-        if (getLabelAttribute() != ATTRIBUTE_NOT_DEFINED) {
-            return getLabelAttribute();
-        }
-        return super.asTextInternal();
+    	return super.asText();
     }
 
     /**
@@ -274,6 +271,9 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      */
     @Override
     protected String asTextInternal() {
-        return asText();
+        if (getLabelAttribute() != ATTRIBUTE_NOT_DEFINED) {
+            return getLabelAttribute();
+        }
+        return super.asTextInternal();
     }
 }

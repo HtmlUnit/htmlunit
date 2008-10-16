@@ -96,7 +96,7 @@ public class HtmlSubmitInput extends HtmlInput {
     // This doesn't mean that asTextInternal() has to return the same.
     @Override
     public String asText() {
-        String text = super.asText();
+        String text = super.asTextInternal();
         if (text == ATTRIBUTE_NOT_DEFINED) {
             text = DEFAULT_VALUE;
         }
