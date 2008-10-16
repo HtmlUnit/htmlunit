@@ -14,20 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import java.io.File;
-
-import org.apache.commons.io.FileUtils;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import org.mortbay.jetty.Server;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for compatibility with version 1.5.0-rc1 of
@@ -36,19 +28,17 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
-public class Prototype150rc1Test extends WebTestCase {
-
-    private Server server_;
+@RunWith(BrowserRunner.class)
+public class Prototype150rc1Test extends PrototypeTestBase {
 
     /**
      * @throws Exception if test fails
      */
     @Test
     public void ajax() throws Exception {
-        final String filename = "ajax.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7, filename, 3, 11, 0, 0);
-        test(BrowserVersion.FIREFOX_2, filename, 3, 11, 0, 0);
+        test("ajax.html");
     }
 
     /**
@@ -56,9 +46,7 @@ public class Prototype150rc1Test extends WebTestCase {
      */
     @Test
     public void array() throws Exception {
-        final String filename = "array.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7, filename, 12, 49, 0, 0);
-        test(BrowserVersion.FIREFOX_2, filename, 12, 49, 0, 0);
+        test("array.html");
     }
 
     /**
@@ -66,22 +54,16 @@ public class Prototype150rc1Test extends WebTestCase {
      */
     @Test
     public void base() throws Exception {
-        final String filename = "base.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7, filename, 4, 48, 0, 0);
-        test(BrowserVersion.FIREFOX_2, filename, 4, 48, 0, 0);
+        test("base.html");
     }
 
     /**
      * @throws Exception if test fails
      */
     @Test
+    @NotYetImplemented({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     public void dom() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        final String filename = "dom.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7, filename, 25, 253, 1, 0);
-        test(BrowserVersion.FIREFOX_2, filename, 25, 254, 0, 0);
+        test("dom.html");
     }
 
     /**
@@ -89,9 +71,7 @@ public class Prototype150rc1Test extends WebTestCase {
      */
     @Test
     public void elementMixins() throws Exception {
-        final String filename = "element_mixins.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7, filename, 4, 7, 0, 0);
-        test(BrowserVersion.FIREFOX_2, filename, 4, 7, 0, 0);
+        test("element_mixins.html");
     }
 
     /**
@@ -99,9 +79,7 @@ public class Prototype150rc1Test extends WebTestCase {
      */
     @Test
     public void enumerable() throws Exception {
-        final String filename = "enumerable.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7, filename,  23, 67, 0, 0);
-        test(BrowserVersion.FIREFOX_2, filename,  23, 67, 0, 0);
+        test("enumerable.html");
     }
 
     /**
@@ -109,36 +87,24 @@ public class Prototype150rc1Test extends WebTestCase {
      */
     @Test
     public void form() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        final String filename = "form.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7, filename, 4, 21, 0, 0);
-        test(BrowserVersion.FIREFOX_2, filename, 4, 21, 0, 0);
+        test("form.html");
     }
 
     /**
-     * Blocked by Rhino bug 370279 (https://bugzilla.mozilla.org/show_bug.cgi?id=370279).
      * @throws Exception if test fails
      */
     @Test
     public void hash() throws Exception {
-        final String filename = "hash.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7, filename, 5, 19, 0, 0);
-        test(BrowserVersion.FIREFOX_2, filename, 5, 19, 0, 0);
+        test("hash.html");
     }
 
     /**
      * @throws Exception if test fails
      */
     @Test
+    @NotYetImplemented
     public void position() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        final String filename = "position.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7, filename, 5, 25, 3, 0);
-        test(BrowserVersion.FIREFOX_2, filename, 5, 28, 0, 0);
+        test("position.html");
     }
 
     /**
@@ -146,31 +112,16 @@ public class Prototype150rc1Test extends WebTestCase {
      */
     @Test
     public void range() throws Exception {
-        final String filename = "range.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7, filename, 6, 21, 0, 0);
-        test(BrowserVersion.FIREFOX_2, filename, 6, 21, 0, 0);
+        test("range.html");
     }
 
     /**
      * @throws Exception if test fails
      */
     @Test
-    public void selectorIE() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        final String filename = "selector.html";
-        //HtmlUnit with IE succeeds for all :)
-        test(BrowserVersion.INTERNET_EXPLORER_7, filename, 18, 35, 9, 1);
-    }
-
-    /**
-     * @throws Exception if test fails
-     */
-    @Test
-    public void selectorFF() throws Exception {
-        final String filename = "selector.html";
-        test(BrowserVersion.FIREFOX_2, filename, 18, 46, 0, 0);
+    @NotYetImplemented({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    public void selector() throws Exception {
+        test("selector.html");
     }
 
     /**
@@ -179,50 +130,14 @@ public class Prototype150rc1Test extends WebTestCase {
      */
     @Test
     public void string() throws Exception {
-        final String filename = "string.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7, filename, 19, 76, 0, 0);
-        test(BrowserVersion.FIREFOX_2, filename, 19, 76, 0, 0);
-    }
-
-    private void test(final BrowserVersion browserVersion, final String filename, final int tests,
-            final int assertions, final int failures, final int errors) throws Exception {
-        final WebClient client = new WebClient(browserVersion);
-        final HtmlPage page =
-            client.getPage("http://localhost:" + HttpWebConnectionTest.PORT + "/test/unit/" + filename);
-
-        page.getEnclosingWindow().getThreadManager().joinAll(25000);
-
-        final String summary = page.<HtmlElement>getHtmlElementById("logsummary").asText();
-        final String expected = tests + " tests, " + assertions + " assertions, " + failures + " failures, "
-             + errors + " errors";
-
-        // dump the result page if not ok
-        if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null && !expected.equals(summary)) {
-            final File tmpDir = new File(System.getProperty("java.io.tmpdir"));
-            final File f = new File(tmpDir, "prototype150rc1_result_" + filename);
-            FileUtils.writeStringToFile(f, page.asXml(), "UTF-8");
-            getLog().info("Test result for " + filename + " written to: " + f.getAbsolutePath());
-        }
-
-        assertEquals(expected, summary);
+        test("string.html");
     }
 
     /**
-     * Performs pre-test initialization.
-     * @throws Exception if an error occurs
+     * {@inheritDoc}
      */
-    @Before
-    public void setUp() throws Exception {
-        server_ = HttpWebConnectionTest.startWebServer("src/test/resources/prototype/1.5.0-rc1");
-    }
-
-    /**
-     * Performs post-test deconstruction.
-     * @throws Exception if an error occurs
-     */
-    @After
-    public void tearDown() throws Exception {
-        HttpWebConnectionTest.stopWebServer(server_);
-        server_ = null;
+    @Override
+    protected String getVersion() {
+        return "1.5.0-rc1";
     }
 }
