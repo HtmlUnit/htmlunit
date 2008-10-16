@@ -566,6 +566,16 @@
     </distributionManagement>
     <repositories>
         <repository>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <id>htmlUnitSnapshots</id>
+            <name>HtmlUnit Snapshots</name>
+            <url>http://htmlunit.sourceforge.net/m2-repo-snapshots</url>
+            <layout>default</layout>
+        </repository>
+        <repository>
             <id>openqa-releases</id>
             <name>OpenQA Releases</name>
             <url>http://archiva.openqa.org/repository/releases</url>
