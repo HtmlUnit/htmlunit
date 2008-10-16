@@ -263,7 +263,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     // This doesn't mean that asTextInternal() has to return the same.
     @Override
     public String asText() {
-    	return super.asText();
+        return super.asText();
     }
 
     /**
