@@ -134,11 +134,12 @@ public final class XmlUtil {
      * @param parent the parent DomNode
      * @param child the child Node
      */
-    public static void appendChild(final XmlPage page, final DomNode parent, final Node child) {
+    public static void appendChild(final SgmlPage page, final DomNode parent, final Node child) {
         final DocumentType documentType = child.getOwnerDocument().getDoctype();
-        if (documentType != null) {
-            page.setDocumentType(new DomDocumentType(
-                    page, documentType.getName(), documentType.getPublicId(), documentType.getSystemId()));
+        if (documentType != null && page instanceof XmlPage) {
+            final DomDocumentType domDoctype = new DomDocumentType(
+                    page, documentType.getName(), documentType.getPublicId(), documentType.getSystemId());
+            ((XmlPage) page).setDocumentType(domDoctype);
         }
         final DomNode childXml = createFrom(page, child);
         parent.appendChild(childXml);

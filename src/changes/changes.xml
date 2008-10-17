@@ -9,7 +9,7 @@
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
             <action type="add" dev="asashour">
-                Add initial support for DocumentType.
+                Add support for DocumentType.
             </action>
             <action type="update" dev="mguillem" id="1509340">
                 Better formatting for asText() particularly with new lines for TR, BR or LI and tabs between cells.
