@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
- * Tests for {@link HTMLDocument}.
+ * Tests for {@link DocumentType}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
@@ -41,7 +41,6 @@ public class DocumentTypeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     @Alerts(IE = { "null" }, FF = { "[object DocumentType]", "html,10,null,null,null,null",
             "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,,null,null" })
     public void doctype() throws Exception {
@@ -74,7 +73,6 @@ public class DocumentTypeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     @Alerts(IE = { "[object]", "greeting,10,null,,undefined,", "greeting,undefined,undefined,undefined,," },
         FF = {
             "[object DocumentType]", "greeting,10,null,null,null,null", "greeting,MyIdentifier,hello.dtd,,null,null" })
@@ -92,7 +90,7 @@ public class DocumentTypeTest extends WebTestCase {
             + "        request.open('GET', '" + URL_SECOND + "', false);\n"
             + "        request.send('');\n"
             + "        var doc = request.responseXML;\n"
-            + "        var t = document.doctype;\n"
+            + "        var t = doc.doctype;\n"
             + "        alert(t);\n"
             + "        if (t != null) {\n"
             + "          alert(t.nodeName + ',' + t.nodeType + ',' + t.nodeValue + ',' + t.prefix "

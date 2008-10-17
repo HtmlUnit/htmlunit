@@ -18,7 +18,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import org.w3c.dom.DocumentFragment;
 
 /**
- * A JavaScript object for DocumentFragment.
+ * A DOM object for DocumentFragment.
  *
  * @version $Revision$
  * @author Ahmed Ashour

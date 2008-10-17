@@ -643,6 +643,8 @@ public final class HTMLParser {
 
         /** {@inheritDoc} */
         public void startDTD(final String name, final String publicId, final String systemId) {
+            final DomDocumentType type = new DomDocumentType(page_, name, publicId, systemId);
+            page_.setDocumentType(type);
         }
 
         /** {@inheritDoc} */

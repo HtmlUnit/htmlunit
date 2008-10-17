@@ -663,6 +663,7 @@
                 descr="MSDN documentation"/>
         </property>
         <property name="documentElement" readable="true" writable="false"/>
+        <property name="doctype" readable="true" writable="false"/>
         <property name="implementation" readable="true" writable="false"/>
         <property name="location" readable="true" writable="true">
             <doclink
@@ -695,6 +696,28 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomDocumentFragment">
     </class>
 
+    <class name="DocumentType" extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.DocumentType"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomDocumentType">
+        <doclink
+            url="http://msdn.microsoft.com/en-us/library/ms762752.aspx"
+            descr="MSDN documentation"/>
+        <doclink
+            url="http://www.xulplanet.com/references/objref/DocumentType.html"
+            descr="XUL Planet"/>
+        <property name="name" readable="true" writable="false"/>
+        <property name="publicId" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="systemId" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="internalSubset" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="entities" readable="true" writable="false"/>
+        <property name="notations" readable="true" writable="false"/>
+    </class>
+
     <class name="DOMImplementation" classname="com.gargoylesoftware.htmlunit.javascript.host.DOMImplementation"
         JSObject="true">
         <function name="createDocument">
@@ -717,9 +740,6 @@
     <class name="Element" extends="EventNode" classname="com.gargoylesoftware.htmlunit.javascript.host.Element"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomElement">
         <property name="attributes" readable="true" writable="false"/>
-        <property name="localName" readable="true" writable="false"/>
-        <property name="namespaceURI" readable="true" writable="false"/>
-        <property name="prefix" readable="true" writable="false"/>
         <property name="tagName" readable="true" writable="false"/>
         <property name="text" readable="true" writable="false">
             <doclink url="http://msdn2.microsoft.com/en-us/library/ms762687.aspx" descr="MSDN documentation"/>
@@ -1859,6 +1879,9 @@
         <property name="ownerDocument" readable="true" writable="false"/>
         <property name="parentNode" readable="true" writable="false"/>
         <property name="previousSibling" readable="true" writable="false"/>
+        <property name="localName" readable="true" writable="false"/>
+        <property name="namespaceURI" readable="true" writable="false"/>
+        <property name="prefix" readable="true" writable="false"/>
 
         <function name="addEventListener">
             <doclink url="http://developer.mozilla.org/en/docs/DOM:element.addEventListener"

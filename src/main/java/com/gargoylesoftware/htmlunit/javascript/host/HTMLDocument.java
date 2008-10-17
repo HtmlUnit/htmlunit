@@ -59,6 +59,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
  * A JavaScript object for a Document.
@@ -1162,4 +1163,16 @@ public class HTMLDocument extends Document {
     public void setActiveElement(final HTMLElement element) {
         activeElement_ = element;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SimpleScriptable jsxGet_doctype() {
+        if (getBrowserVersion().isIE()) {
+            return null;
+        }
+        return super.jsxGet_doctype();
+    }
+
 }

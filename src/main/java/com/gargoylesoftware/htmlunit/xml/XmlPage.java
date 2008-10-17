@@ -29,7 +29,6 @@ import org.w3c.dom.DOMConfiguration;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentFragment;
-import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
 import org.w3c.dom.EntityReference;
 import org.w3c.dom.Node;
@@ -42,6 +41,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
+import com.gargoylesoftware.htmlunit.html.DomDocumentType;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 
@@ -293,14 +293,6 @@ public class XmlPage extends SgmlPage implements Document {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
-     */
-    public DocumentType getDoctype() {
-        throw new UnsupportedOperationException("XmlPage.getDoctype is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
      */
     @Override
     public Element getDocumentElement() {
@@ -465,5 +457,13 @@ public class XmlPage extends SgmlPage implements Document {
     @Override
     public String getPageEncoding() {
         throw new UnsupportedOperationException("XmlPage.getPageEncoding is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void setDocumentType(final DomDocumentType type) {
+        super.setDocumentType(type);
     }
 }

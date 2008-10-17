@@ -629,4 +629,43 @@ public class Node extends SimpleScriptable {
         }
         return ((SgmlPage) document).getScriptObject();
     }
+
+    /**
+     * Returns The Namespace prefix.
+     * @return the Namespace prefix
+     */
+    public Object jsxGet_prefix() {
+        if (getBrowserVersion().isIE()) {
+            if (getDomNodeOrDie().getPage() instanceof HtmlPage) {
+                return NOT_FOUND;
+            }
+            return "";
+        }
+        return getDomNodeOrDie().getPrefix();
+    }
+
+    /**
+     * Returns the local name of this element.
+     * @return the local name of this element
+     */
+    public Object jsxGet_localName() {
+        if (getBrowserVersion().isIE()) {
+            return NOT_FOUND;
+        }
+        return getDomNodeOrDie().getLocalName();
+    }
+
+    /**
+     * Returns The URI that identifies an XML namespace.
+     * @return the URI that identifies an XML namespace
+     */
+    public Object jsxGet_namespaceURI() {
+        if (getBrowserVersion().isIE()) {
+            if (getDomNodeOrDie().getPage() instanceof HtmlPage) {
+                return NOT_FOUND;
+            }
+            return "";
+        }
+        return getDomNodeOrDie().getNamespaceURI();
+    }
 }

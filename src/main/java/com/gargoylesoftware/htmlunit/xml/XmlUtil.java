@@ -26,10 +26,12 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
+import org.w3c.dom.DocumentType;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.Attributes;
+import org.xml.sax.EntityResolver;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -41,6 +43,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
+import com.gargoylesoftware.htmlunit.html.DomDocumentType;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
@@ -107,6 +110,12 @@ public final class XmlUtil {
         final InputSource source = new InputSource(new StringReader(webResponse.getContentAsString()));
         final DocumentBuilder builder = factory.newDocumentBuilder();
         builder.setErrorHandler(DISCARD_MESSAGES_HANDLER);
+        builder.setEntityResolver(new EntityResolver() {
+            public InputSource resolveEntity(final String publicId, final String systemId)
+                throws SAXException, IOException {
+                return new InputSource(new StringReader(""));
+            }
+        });
         return builder.parse(source);
     }
 
@@ -125,7 +134,12 @@ public final class XmlUtil {
      * @param parent the parent DomNode
      * @param child the child Node
      */
-    public static void appendChild(final SgmlPage page, final DomNode parent, final Node child) {
+    public static void appendChild(final XmlPage page, final DomNode parent, final Node child) {
+        final DocumentType documentType = child.getOwnerDocument().getDoctype();
+        if (documentType != null) {
+            page.setDocumentType(new DomDocumentType(
+                    page, documentType.getName(), documentType.getPublicId(), documentType.getSystemId()));
+        }
         final DomNode childXml = createFrom(page, child);
         parent.appendChild(childXml);
         copy(page, child, childXml);

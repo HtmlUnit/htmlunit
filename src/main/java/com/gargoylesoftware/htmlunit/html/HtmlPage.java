@@ -496,14 +496,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public DocumentType getDoctype() {
-        throw new UnsupportedOperationException("HtmlPage.getDoctype is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
     public EntityReference createEntityReference(final String id) {
         throw new UnsupportedOperationException("HtmlPage.createEntityReference is not yet implemented.");
     }
@@ -2135,6 +2127,14 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             }
         }
         return namespaces;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void setDocumentType(final DomDocumentType type) {
+        super.setDocumentType(type);
     }
 }
 

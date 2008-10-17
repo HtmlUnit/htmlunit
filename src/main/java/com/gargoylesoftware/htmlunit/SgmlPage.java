@@ -16,9 +16,11 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
 
+import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
 
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
+import com.gargoylesoftware.htmlunit.html.DomDocumentType;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 
 /**
@@ -31,6 +33,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 public abstract class SgmlPage extends DomNode implements Page {
 
     private static final long serialVersionUID = -8803248938782701094L;
+    private DomDocumentType documentType_;
     private final WebResponse webResponse_;
     private WebWindow enclosingWindow_;
     private final WebClient webClient_;
@@ -118,6 +121,21 @@ public abstract class SgmlPage extends DomNode implements Page {
      */
     public DomDocumentFragment createDomDocumentFragment() {
         return new DomDocumentFragment(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public final DocumentType getDoctype() {
+        return documentType_;
+    }
+
+    /**
+     * Sets the document type.
+     * @param type the document type
+     */
+    protected void setDocumentType(final DomDocumentType type) {
+        documentType_ = type;
     }
 
     /**

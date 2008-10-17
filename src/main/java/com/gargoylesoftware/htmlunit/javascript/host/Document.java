@@ -41,10 +41,8 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
  * @author Ahmed Ashour
  * @author Rob Di Marco
- * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_document.asp">
- * MSDN documentation</a>
- * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919">
- * W3C Dom Level 1</a>
+ * @see <a href="http://msdn.microsoft.com/en-us/library/ms531073.aspx">MSDN documentation</a>
+ * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919">W3C Dom Level 1</a>
  */
 public class Document extends EventNode {
     private static final long serialVersionUID = 3700830050839613384L;
@@ -103,6 +101,18 @@ public class Document extends EventNode {
             return null;
         }
         return getScriptableFor(documentElement);
+    }
+
+    /**
+     * Gets the JavaScript property "doctype" for the document.
+     * @return the DocumentType of the document
+     */
+    public SimpleScriptable jsxGet_doctype() {
+        final Object documentType = getPage().getDoctype();
+        if (documentType == null) {
+            return null;
+        }
+        return getScriptableFor(documentType);
     }
 
     /**
