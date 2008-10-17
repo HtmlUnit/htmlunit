@@ -14,14 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xml.sax.Attributes;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
-
-import java.util.Map;
-import java.util.HashMap;
 
 /**
  * A specialized creator that knows how to create input objects.

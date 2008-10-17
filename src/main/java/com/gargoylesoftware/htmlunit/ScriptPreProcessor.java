@@ -14,8 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * A script pre processor call back. This interface is called when ScriptEngine.execute()

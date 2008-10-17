@@ -14,8 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.Page;
 import org.w3c.dom.DocumentFragment;
+
+import com.gargoylesoftware.htmlunit.Page;
 
 /**
  * A DOM object for DocumentFragment.

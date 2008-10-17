@@ -14,8 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.io.PrintWriter;
 import java.io.PrintStream;
+import java.io.PrintWriter;
 
 /**
  * Thrown if an object could not be instantiated for some reason.

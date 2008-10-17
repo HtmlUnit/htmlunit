@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.PrintWriter;
+
 import org.w3c.dom.CDATASection;
 
 import com.gargoylesoftware.htmlunit.Page;

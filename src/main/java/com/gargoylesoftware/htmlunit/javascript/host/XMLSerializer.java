@@ -14,10 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import org.w3c.dom.NamedNodeMap;
+
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import org.w3c.dom.NamedNodeMap;
 
 /**
  * A JavaScript object for XMLSerializer.

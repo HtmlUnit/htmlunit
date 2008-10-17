@@ -239,7 +239,6 @@ public final class XmlUtil {
      * @param element the element to start searching from
      * @param prefix the namespace prefix
      * @return the namespace URI bound to the prefix; or null if there is no such namespace
-     * @see #lookupNamespaceURI(HtmlElement, String)
      */
     public static String lookupNamespaceURI(final DomElement element, final String prefix) {
         String uri = element.getAttributeValue("xmlns:" + prefix);

@@ -14,17 +14,17 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.Before;
+import java.io.IOException;
+import java.net.URL;
+
 import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.mortbay.jetty.Server;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
-
-import java.net.URL;
-import java.io.IOException;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link HtmlImage}.

@@ -1090,7 +1090,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * after they and all their child nodes have been processed by the HTML parser. This method is
      * not recursive, and the default implementation is empty, so there is no need to call
      * <tt>super.onAllChildrenAddedToPage()</tt> if you implement this method.
-     * @param postponed whether to use {@link PostponedAction} or no
+     * @param postponed whether to use {@link com.gargoylesoftware.htmlunit.javascript.PostponedAction} or no
      */
     protected void onAllChildrenAddedToPage(final boolean postponed) {
         // Empty by default.

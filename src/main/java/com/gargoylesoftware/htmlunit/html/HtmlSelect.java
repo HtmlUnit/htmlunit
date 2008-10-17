@@ -65,7 +65,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * If we were given an invalid <tt>size</tt> attribute, normalize it.
      * Then set a default selected option if none was specified and the size is 1 or less
      * and this isn't a multiple selection input.
-     * @param postponed whether to use {@link PostponedAction} or no
+     * @param postponed whether to use {@link com.gargoylesoftware.htmlunit.javascript.PostponedAction} or no
      */
     @Override
     protected void onAllChildrenAddedToPage(final boolean postponed) {
