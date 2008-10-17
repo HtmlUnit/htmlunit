@@ -23,6 +23,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -64,10 +65,8 @@ public class HtmlFrameTest extends WebTestCase {
     @Test
     public void testOnLoadHandler() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection =
-            new MockWebConnection();
+        final MockWebConnection webConnection = new MockWebConnection();
         final List<String> collectedAlerts = new ArrayList<String>();
-
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
@@ -221,5 +220,38 @@ public class HtmlFrameTest extends WebTestCase {
         final HtmlPage page = webClient.getPage(URL_FIRST);
 
         assertEquals("page 3", ((HtmlPage) page.getFrameByName("f2").getEnclosedPage()).getTitleText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void frames() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String mainContent =
+            "<html><head><title>frames</title></head>\n"
+            + "<frameset>\n"
+            + "<frame id='f1' src='1.html'/>\n"
+            + "</frameset>\n"
+            + "</html>";
+
+        final String frame1 = "<html><head><title>1</title></head>\n"
+            + "<body onload=\"alert(parent.frames['f1'])\"></body>"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"[object]"};
+        final WebClient webClient = new WebClient(BrowserVersion.INTERNET_EXPLORER_7);
+        final List<String> collectedAlerts = new ArrayList<String>();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection();
+        webClient.setWebConnection(conn);
+
+        conn.setResponse(URL_FIRST, mainContent);
+        conn.setResponse(new URL(URL_FIRST, "1.html"), frame1);
+
+        webClient.getPage(URL_FIRST);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }
