@@ -227,9 +227,13 @@ public class HtmlFrameTest extends WebTestCase {
      */
     @Test
     public void frames() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
+        frames(BrowserVersion.INTERNET_EXPLORER_6, new String[] {"[object]"});
+        frames(BrowserVersion.INTERNET_EXPLORER_7, new String[] {"[object]"});
+        frames(BrowserVersion.FIREFOX_2, new String[] {"undefined"});
+        frames(BrowserVersion.FIREFOX_3, new String[] {"undefined"});
+    }
+
+    private void frames(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
         final String mainContent =
             "<html><head><title>frames</title></head>\n"
             + "<frameset>\n"
@@ -241,8 +245,7 @@ public class HtmlFrameTest extends WebTestCase {
             + "<body onload=\"alert(parent.frames['f1'])\"></body>"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"[object]"};
-        final WebClient webClient = new WebClient(BrowserVersion.INTERNET_EXPLORER_7);
+        final WebClient webClient = new WebClient(browserVersion);
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();

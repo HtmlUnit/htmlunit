@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="fix" dev="asashour" id="2174320">
+                JavaScript: window.frames should return the ones with id attribute (IE only).
+            </action>
             <action type="add" dev="asashour">
                 Add support for DocumentType.
             </action>

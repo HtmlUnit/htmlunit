@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.html.DomChangeListener;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -332,6 +333,11 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
                 final String windowName = window.getName();
                 if (windowName != null && windowName.equals(name)) {
                     getLog().debug("Property \"" + name + "\" evaluated (by name) to " + window);
+                    return getScriptableFor(window);
+                }
+                if (getBrowserVersion().isIE() && window instanceof FrameWindow
+                        && ((FrameWindow) window).getFrameElement().getAttributeValue("id").equals(name)) {
+                    getLog().debug("Property \"" + name + "\" evaluated (by id) to " + window);
                     return getScriptableFor(window);
                 }
             }
