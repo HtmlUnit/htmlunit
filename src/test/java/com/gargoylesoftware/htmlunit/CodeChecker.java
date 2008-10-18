@@ -43,7 +43,7 @@ import org.junit.Test;
 
 /**
  * Test of coding style using Eclipse JDT.
- * Currently checks for missing @Override annotation.
+ * Currently checks for missing @Override annotations.
  *
  * To run it, you need:
  * <ul>
