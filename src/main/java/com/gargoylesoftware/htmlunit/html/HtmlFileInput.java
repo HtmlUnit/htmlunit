@@ -50,7 +50,7 @@ public class HtmlFileInput extends HtmlInput {
      * @param attributes the initial attributes
      */
     HtmlFileInput(final String namespaceURI, final String qualifiedName, final SgmlPage page,
-            final Map<String, DomAttr> attributes) {
+        final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
         setAttributeValue("value", "");
         if (page.getWebClient().getBrowserVersion().isIE()) {
@@ -59,18 +59,22 @@ public class HtmlFileInput extends HtmlInput {
     }
 
     /**
-     * Returns in-memory data assigned to element.
-     * @return <code>null</code> if {@link #setData(byte[])} hasn't be used.
+     * Returns the in-memory data assigned to this file input element, if any.
+     * @return <code>null</code> if {@link #setData(byte[])} hasn't be used
      */
     public final byte[] getData() {
         return data_;
     }
 
     /**
-     * Assigns data to element.
-     * During submission instead of loading data from file, the data is read from
-     * in-memory byte array.
-     * @param data byte array containing file data
+     * <p>Assigns in-memory data to this file input element. During submission, instead
+     * of loading data from a file, the data is read from in-memory byte array.</p>
+     *
+     * <p>NOTE: Only use this method if you wish to upload in-memory data; if you instead
+     * wish to upload the contents of an actual file, use {@link #setValueAttribute(String)},
+     * passing in the path to the file.</p>
+     *
+     * @param data the in-memory data assigned to this file input element
      */
     public final void setData(final byte[] data) {
         data_ = data;
@@ -141,18 +145,18 @@ public class HtmlFileInput extends HtmlInput {
     }
 
     /**
-     * Sets the content type value that should be send together with the uploaded file.
+     * Sets the content type value that should be sent together with the uploaded file.
      * If content type is not explicitly set, HtmlUnit will try to guess it from the file content.
-     * @param contentType the content type, <code>null</code> resets it
+     * @param contentType the content type (<tt>null</tt> resets it)
      */
     public void setContentType(final String contentType) {
         contentType_ = contentType;
     }
 
     /**
-     * Gets the content type that should be send together with the uploaded file.
-     * @return the content type, <code>null</code> if this has not been explicitly set
-     * and should be guessed from file content.
+     * Gets the content type that should be sent together with the uploaded file.
+     * @return the content type, or <tt>null</tt> if this has not been explicitly set
+     * and should be guessed from file content
      */
     public String getContentType() {
         return contentType_;
