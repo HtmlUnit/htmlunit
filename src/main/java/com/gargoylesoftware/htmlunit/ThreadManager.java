@@ -122,7 +122,7 @@ public class ThreadManager {
             + " for WebWindow(" + ww.getName() + "): " + label) {
             @Override
             public void run() {
-                HtmlUnitContextFactory.putThreadLocal(version);
+                HtmlUnitContextFactory.getGlobal2().putThreadLocal(version);
                 try {
                     super.run();
                 }

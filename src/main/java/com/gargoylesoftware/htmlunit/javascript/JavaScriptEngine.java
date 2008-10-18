@@ -489,7 +489,7 @@ public class JavaScriptEngine implements Serializable {
      */
     @Deprecated
     public static void setTimeout(final long timeout) {
-        HtmlUnitContextFactory.setTimeout(timeout);
+        HtmlUnitContextFactory.getGlobal2().setTimeout(timeout);
     }
 
     /**
@@ -501,7 +501,7 @@ public class JavaScriptEngine implements Serializable {
      */
     @Deprecated
     public static long getTimeout() {
-        return HtmlUnitContextFactory.getTimeout();
+        return HtmlUnitContextFactory.getGlobal2().getTimeout();
     }
 
     /**

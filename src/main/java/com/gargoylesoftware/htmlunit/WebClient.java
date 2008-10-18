@@ -208,7 +208,7 @@ public class WebClient implements Serializable {
         // The window must be constructed after the script engine.
         addWebWindowListener(new CurrentWindowTracker());
         currentWindow_ = new TopLevelWindow("", this);
-        HtmlUnitContextFactory.putThreadLocal(browserVersion);
+        HtmlUnitContextFactory.getGlobal2().putThreadLocal(browserVersion);
     }
 
     /**
@@ -232,7 +232,7 @@ public class WebClient implements Serializable {
         }
         // The window must be constructed after the script engine.
         currentWindow_ = new TopLevelWindow("", this);
-        HtmlUnitContextFactory.putThreadLocal(browserVersion);
+        HtmlUnitContextFactory.getGlobal2().putThreadLocal(browserVersion);
     }
 
     /**
@@ -1720,7 +1720,7 @@ public class WebClient implements Serializable {
      * @param timeout the timeout value
      */
     public static void setJavaScriptTimeout(final long timeout) {
-        HtmlUnitContextFactory.setTimeout(timeout);
+        HtmlUnitContextFactory.getGlobal2().setTimeout(timeout);
     }
 
     /**
@@ -1730,7 +1730,7 @@ public class WebClient implements Serializable {
      * @return the timeout value
      */
     public static long getJavaScriptTimeout() {
-        return HtmlUnitContextFactory.getTimeout();
+        return HtmlUnitContextFactory.getGlobal2().getTimeout();
     }
 
     /**

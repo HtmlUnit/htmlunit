@@ -35,12 +35,12 @@ import com.gargoylesoftware.htmlunit.javascript.regexp.HtmlUnitRegExpProxy;
  */
 public class HtmlUnitContextFactory extends ContextFactory {
 
-    private final Log log_;
     private static final int INSTRUCTION_COUNT_THRESHOLD = 10000;
-    private static long Timeout_;
-    private static boolean DebuggerEnabled_;
 
-    private static final ThreadLocal<BrowserVersion> browserVersion_ = new ThreadLocal<BrowserVersion>();
+    private final Log log_;
+    private final ThreadLocal<BrowserVersion> browserVersion_;
+    private long timeout_;
+    private boolean debuggerEnabled_;
 
     /**
      * Creates a new instance of HtmlUnitContextFactory.
@@ -50,6 +50,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
     public HtmlUnitContextFactory(final Log log) {
         WebAssert.notNull("log", log);
         log_ = log;
+        browserVersion_ = new ThreadLocal<BrowserVersion>();
     }
 
     /**
@@ -58,8 +59,8 @@ public class HtmlUnitContextFactory extends ContextFactory {
      *
      * @param timeout the timeout value
      */
-    public static void setTimeout(final long timeout) {
-        Timeout_ = timeout;
+    public void setTimeout(final long timeout) {
+        timeout_ = timeout;
     }
 
     /**
@@ -68,8 +69,8 @@ public class HtmlUnitContextFactory extends ContextFactory {
      *
      * @return the timeout value (default value is <tt>0</tt>)
      */
-    public static long getTimeout() {
-        return Timeout_;
+    public long getTimeout() {
+        return timeout_;
     }
 
     /**
@@ -81,8 +82,8 @@ public class HtmlUnitContextFactory extends ContextFactory {
      * @see DebuggerImpl
      * @see DebugFrameImpl
      */
-    public static void setDebuggerEnabled(final boolean enabled) {
-        DebuggerEnabled_ = enabled;
+    public void setDebuggerEnabled(final boolean enabled) {
+        debuggerEnabled_ = enabled;
     }
 
     /**
@@ -92,26 +93,34 @@ public class HtmlUnitContextFactory extends ContextFactory {
      * @see DebuggerImpl
      * @see DebugFrameImpl
      */
-    public static boolean getDebuggerEnabled() {
-        return DebuggerEnabled_;
+    public boolean getDebuggerEnabled() {
+        return debuggerEnabled_;
     }
 
-    // Custom Context to store execution time.
-    @SuppressWarnings("deprecation")
-    private static class TimeoutContext extends Context {
-        private long startTime_;
+    /**
+     * Puts the specified {@link BrowserVersion} as a thread local variable.
+     * @param browserVersion the BrowserVersion that is currently used
+     */
+    public void putThreadLocal(final BrowserVersion browserVersion) {
+        browserVersion_.set(browserVersion);
+    }
 
+    /**
+     * Custom context to store execution time and handle timeouts.
+     */
+    @SuppressWarnings("deprecation")
+    private class TimeoutContext extends Context {
+        private long startTime_;
         public void startClock() {
             startTime_ = System.currentTimeMillis();
         }
-
         public void terminateScriptIfNecessary() {
-            if (Timeout_ > 0) {
+            if (timeout_ > 0) {
                 final long currentTime = System.currentTimeMillis();
-                if (currentTime - startTime_ > Timeout_) {
+                if (currentTime - startTime_ > timeout_) {
                     // Terminate script by throwing an Error instance to ensure that the
                     // script will never get control back through catch or finally.
-                    throw new TimeoutError(Timeout_, currentTime - startTime_);
+                    throw new TimeoutError(timeout_, currentTime - startTime_);
                 }
             }
         }
@@ -133,7 +142,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
         cx.setErrorReporter(new StrictErrorReporter(log_));
         cx.setWrapFactory(new HtmlUnitWrapFactory());
 
-        if (DebuggerEnabled_) {
+        if (debuggerEnabled_) {
             cx.setDebugger(new DebuggerImpl(), null);
         }
 
@@ -185,11 +194,19 @@ public class HtmlUnitContextFactory extends ContextFactory {
             return super.hasFeature(cx, featureIndex);
         }
     }
+
     /**
-     * Puts the specified {@link BrowserVersion} as a thread local variable.
-     * @param browserVersion the BrowserVersion that is currently used
+     * <p>Returns the global {@link ContextFactory}, assuming that it's an {@link HtmlUnitContextFactory}.</p>
+     *
+     * <p>This method, {@link #getGlobal()}, and all uses of both methods may disappear if we decide to move
+     * to a per-{@link com.gargoylesoftware.htmlunit.WebClient} or per-{@link JavaScriptEngine}
+     * <tt>ContextFactory</tt> model, which would make it easier to use multiple independent
+     * <tt>WebClient</tt> instances within a single JVM.</p>
+     *
+     * @return the global {@link ContextFactory}, assuming that it's an {@link HtmlUnitContextFactory}
      */
-    public static void putThreadLocal(final BrowserVersion browserVersion) {
-        browserVersion_.set(browserVersion);
+    public static HtmlUnitContextFactory getGlobal2() {
+        return (HtmlUnitContextFactory) ContextFactory.getGlobal();
     }
+
 }

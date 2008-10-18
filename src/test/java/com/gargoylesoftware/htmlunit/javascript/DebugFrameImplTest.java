@@ -51,8 +51,7 @@ public class DebugFrameImplTest extends WebTestCase {
      */
     @Before
     public void setUp() throws Exception {
-        HtmlUnitContextFactory.setDebuggerEnabled(true);
-
+        HtmlUnitContextFactory.getGlobal2().setDebuggerEnabled(true);
         originalLogLevel_ = loggerDebugFrameImpl_.getLevel();
         loggerDebugFrameImpl_.setLevel(Level.TRACE);
     }
@@ -63,7 +62,7 @@ public class DebugFrameImplTest extends WebTestCase {
      */
     @After
     public void tearDown() throws Exception {
-        HtmlUnitContextFactory.setDebuggerEnabled(false);
+        HtmlUnitContextFactory.getGlobal2().setDebuggerEnabled(false);
         loggerDebugFrameImpl_.setLevel(originalLogLevel_);
     }
 
