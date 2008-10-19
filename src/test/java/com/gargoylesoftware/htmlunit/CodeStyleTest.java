@@ -37,14 +37,14 @@ import org.junit.Test;
  */
 public class CodeStyleTest {
 
-    private List<String> errors_;
+    private List<String> failures_;
 
     /**
      * Before.
      */
     @Before
     public void before() {
-        errors_ = new ArrayList<String>();
+        failures_ = new ArrayList<String>();
     }
 
     /**
@@ -53,11 +53,11 @@ public class CodeStyleTest {
     @After
     public void after() {
         final StringBuilder sb = new StringBuilder();
-        for (final String error : errors_) {
+        for (final String error : failures_) {
             sb.append('\n').append(error);
         }
 
-        final int errorsNumber = errors_.size();
+        final int errorsNumber = failures_.size();
         if (errorsNumber == 1) {
             fail("CodeStyle error: " + sb);
         }
@@ -67,7 +67,7 @@ public class CodeStyleTest {
     }
 
     private void addFailure(final String error) {
-        errors_.add(error);
+        failures_.add(error);
     }
 
     /**

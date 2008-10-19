@@ -48,14 +48,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 @RunWith(BrowserRunner.class)
 public class JQuery126Test extends WebTestCase {
 
-    private List<String> errors_;
+    private List<String> failures_;
 
     /**
      * Before.
      */
     @Before
     public void before() {
-        errors_ = new ArrayList<String>();
+        failures_ = new ArrayList<String>();
     }
 
     /**
@@ -64,11 +64,11 @@ public class JQuery126Test extends WebTestCase {
     @After
     public void after() {
         final StringBuilder sb = new StringBuilder();
-        for (final String error : errors_) {
+        for (final String error : failures_) {
             sb.append('\n').append(error);
         }
 
-        final int errorsNumber = errors_.size();
+        final int errorsNumber = failures_.size();
         if (errorsNumber == 1) {
             fail("Failure: " + sb);
         }
@@ -78,7 +78,7 @@ public class JQuery126Test extends WebTestCase {
     }
 
     private void addFailure(final String error) {
-        errors_.add(error);
+        failures_.add(error);
     }
 
     /**
@@ -137,8 +137,14 @@ public class JQuery126Test extends WebTestCase {
         final HtmlElement doc = page.getDocumentElement();
         final HtmlOrderedList tests = (HtmlOrderedList) doc.getHtmlElementById("tests");
         final Iterable<HtmlElement> i = tests.getChildElements();
-        FileUtils.writeStringToFile(new File("c:\\use\\jquery.out.txt"), page.asXml(), "UTF-8");
         return i.iterator();
+    }
+
+    private String getExpected(String expected) {
+        if (!getBrowserVersion().isIE()) {
+            expected = expected.substring(expected.indexOf('.') + 2);
+        }
+        return expected;
     }
 
     /**
@@ -152,19 +158,16 @@ public class JQuery126Test extends WebTestCase {
     @SuppressWarnings("unchecked")
     protected void ok(final Iterator<HtmlElement> iterator, final Iterator<String> expected) throws Exception {
         final HtmlListItem li = (HtmlListItem) iterator.next();
-        String expectedStringLI = expected.next();
-        if (!getBrowserVersion().isIE()) {
-            expectedStringLI = expectedStringLI.substring(expectedStringLI.indexOf('.') + 2);
+        final String expectedLI = getExpected(expected.next());
+        final String actualLI = ((HtmlElement) ((List) li.getByXPath("./strong")).get(0)).asText();
+        if (!expectedLI.equals(actualLI)) {
+            addFailure(new ComparisonFailure("", expectedLI, actualLI).getMessage());
         }
-        assertEquals(expectedStringLI, ((HtmlElement) ((List) li.getByXPath("./strong")).get(0)).asText());
         for (HtmlListItem item : (List<HtmlListItem>) li.getByXPath("./ol/li")) {
-            String expectedString = expected.next();
-            if (!getBrowserVersion().isIE()) {
-                expectedString = expectedString.substring(expectedString.indexOf('.') + 2);
-            }
-            final String actualString = item.asText();
-            if (!expectedString.equals(actualString)) {
-                addFailure(new ComparisonFailure("", expectedString, actualString).getMessage());
+            final String expectedItem = getExpected(expected.next());
+            final String actualItem = item.asText();
+            if (!expectedItem.equals(actualItem)) {
+                addFailure(new ComparisonFailure("", expectedItem, actualItem).getMessage());
             }
         }
     }
