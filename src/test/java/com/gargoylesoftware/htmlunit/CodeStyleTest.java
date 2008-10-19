@@ -54,7 +54,7 @@ public class CodeStyleTest {
     public void after() {
         final StringBuilder sb = new StringBuilder();
         for (final String error : errors_) {
-            sb.append("\n" + error);
+            sb.append('\n').append(error);
         }
 
         final int errorsNumber = errors_.size();
