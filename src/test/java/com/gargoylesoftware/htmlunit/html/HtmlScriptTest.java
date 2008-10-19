@@ -19,6 +19,7 @@ import static org.junit.Assert.fail;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -333,6 +334,30 @@ public class HtmlScriptTest extends WebTestCase {
 
         final String[] expected = {"loaded"};
         assertEquals(expected, actual);
+    }
+
+    /**
+     * Tests the 'Referer' HTTP header.
+     * @throws Exception on test failure
+     */
+    @Test
+    public void testRefererHeader() throws Exception {
+        final String firstContent
+            = "<html><head><title>Page A</title></head>\n"
+            + "<body><script src='" + URL_SECOND + "' id='link'/></body>\n"
+            + "</html>";
+
+        final String secondContent = "alert('test')";
+
+        final WebClient client = new WebClient();
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, firstContent);
+        conn.setResponse(URL_SECOND, secondContent);
+        client.setWebConnection(conn);
+        client.getPage(URL_FIRST);
+
+        final Map<String, String> lastAdditionalHeaders = conn.getLastAdditionalHeaders();
+        assertEquals(URL_FIRST.toString(), lastAdditionalHeaders.get("Referer"));
     }
 
 }

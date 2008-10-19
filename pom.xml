@@ -407,6 +407,9 @@
         <contributor>
             <name>Ethan Glasser-Camp</name>
         </contributor>
+        <contributor>
+            <name>Marco Cova</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
