@@ -58,4 +58,101 @@ public class HTMLDocumentTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("BackCompat")
+    public void compatMode() throws Exception {
+        compatMode("");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("BackCompat")
+    public void compatMode_no_url() throws Exception {
+        compatMode("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("CSS1Compat")
+    public void compatMode_strict() throws Exception {
+        compatMode("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("CSS1Compat")
+    public void compatMode_strict_40() throws Exception {
+        compatMode("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "CSS1Compat" }, FF = { "BackCompat" })
+    public void compatMode_loose_40() throws Exception {
+        compatMode("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" "
+            + "\"http://www.w3.org/TR/html4/loose.dtd\">");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("CSS1Compat")
+    public void compatMode_loose() throws Exception {
+        compatMode("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" "
+            + "\"http://www.w3.org/TR/html4/loose.dtd\">");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("CSS1Compat")
+    public void compatMode_xhtml_traditional() throws Exception {
+        compatMode("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" "
+            + "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("CSS1Compat")
+    public void compatMode_xhtml_strict() throws Exception {
+        compatMode("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" "
+            + "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
+    }
+
+    private void compatMode(final String doctype) throws Exception {
+        final String html = doctype + "<html>\n"
+            + "<head>\n"
+            + "    <title>Test</title>\n"
+            + "    <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.compatMode);\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>"
+            + ""
+            + "</body>\n"
+            + "<div id='myDiv'>\n"
+            + "  <div></div>\n"
+            + "</div>"
+            + "</html>";
+
+        loadPageWithAlerts(html);
+    }
 }

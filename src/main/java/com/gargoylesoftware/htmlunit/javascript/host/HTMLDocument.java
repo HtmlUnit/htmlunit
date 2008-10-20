@@ -475,6 +475,40 @@ public class HTMLDocument extends Document {
     }
 
     /**
+     * Returns the "compatMode" attribute.
+     * Note that it is deprecated in Internet Explorer 8 in favor of the documentMode.
+     * @return the "compatMode" attribute
+     */
+    public String jsxGet_compatMode() {
+        boolean strict = false;
+        final org.w3c.dom.DocumentType docType = getPage().getDoctype();
+        if (docType != null) {
+            final String publicId = docType.getPublicId();
+            final String systemId = docType.getSystemId();
+            if (systemId != null) {
+                if (systemId.equals("http://www.w3.org/TR/html4/strict.dtd")) {
+                    strict = true;
+                }
+                else if (systemId.equals("http://www.w3.org/TR/html4/loose.dtd")) {
+                    if (publicId.equals("-//W3C//DTD HTML 4.01 Transitional//EN")
+                        || publicId.equals("-//W3C//DTD HTML 4.0 Transitional//EN") && getBrowserVersion().isIE()) {
+                        strict = true;
+                    }
+                }
+                else if (systemId.equals("http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd")
+                    || systemId.equals("http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd")) {
+                    strict = true;
+                }
+            }
+        }
+
+        if (strict) {
+            return "CSS1Compat";
+        }
+        return "BackCompat";
+    }
+
+    /**
      * Adds a cookie, as long as cookies are enabled.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/cookie.asp">
      * MSDN documentation</a>
