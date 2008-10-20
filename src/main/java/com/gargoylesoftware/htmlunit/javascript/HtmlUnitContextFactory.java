@@ -20,6 +20,7 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.ScriptRuntime;
 import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.debug.Debugger;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebAssert;
@@ -40,7 +41,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
     private final Log log_;
     private final ThreadLocal<BrowserVersion> browserVersion_;
     private long timeout_;
-    private boolean debuggerEnabled_;
+    private Debugger debugger_;
 
     /**
      * Creates a new instance of HtmlUnitContextFactory.
@@ -74,27 +75,24 @@ public class HtmlUnitContextFactory extends ContextFactory {
     }
 
     /**
-     * Enables or disables the debugger, which logs stack entries and exceptions. Enabling the
-     * debugger may be useful if HtmlUnit is having trouble with JavaScript, especially if you are
-     * using some of the more advanced libraries like Dojo, Prototype or jQuery.
+     * Sets the JavaScript debugger to use to receive JavaScript execution debugging information.
+     * The HtmlUnit default implementation ({@link DebuggerImpl}, {@link DebugFrameImpl}) may be
+     * used, or a custom debugger may be used instead. By default, no debugger is used.
      *
-     * @param enabled whether or not the debugger should be enabled
-     * @see DebuggerImpl
-     * @see DebugFrameImpl
+     * @param debugger the JavaScript debugger to use (may be <tt>null</tt>)
      */
-    public void setDebuggerEnabled(final boolean enabled) {
-        debuggerEnabled_ = enabled;
+    public void setDebugger(final Debugger debugger) {
+        debugger_ = debugger;
     }
 
     /**
-     * Returns <tt>true</tt> if the debugger is enabled, <tt>false</tt> otherwise.
+     * Returns the JavaScript debugger to use to receive JavaScript execution debugging information.
+     * By default, no debugger is used, and this method returns <tt>null</tt>.
      *
-     * @return <tt>true</tt> if the debugger is enabled, <tt>false</tt> otherwise
-     * @see DebuggerImpl
-     * @see DebugFrameImpl
+     * @return the JavaScript debugger to use to receive JavaScript execution debugging information
      */
-    public boolean getDebuggerEnabled() {
-        return debuggerEnabled_;
+    public Debugger getDebugger() {
+        return debugger_;
     }
 
     /**
@@ -142,8 +140,8 @@ public class HtmlUnitContextFactory extends ContextFactory {
         cx.setErrorReporter(new StrictErrorReporter(log_));
         cx.setWrapFactory(new HtmlUnitWrapFactory());
 
-        if (debuggerEnabled_) {
-            cx.setDebugger(new DebuggerImpl(), null);
+        if (debugger_ != null) {
+            cx.setDebugger(debugger_, null);
         }
 
         // register custom RegExp processing
