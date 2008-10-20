@@ -230,6 +230,9 @@ public class HTMLInputElement extends FormField {
             return "maxLength".equals(name);
         }
 
+        if ("readOnly".equals(name.toLowerCase())) {
+            return "readOnly".equals(name);
+        }
         return super.isAttributeName(name);
     }
 
@@ -248,6 +251,22 @@ public class HTMLInputElement extends FormField {
      */
     public void jsxSet_maxLength(final int length) {
         getHtmlElementOrDie().setAttribute("maxLength", String.valueOf(length));
+    }
+
+    /**
+     * Gets the value of "readOnly" attribute.
+     * @return the readOnly attribute
+     */
+    public boolean jsxGet_readOnly() {
+        return Boolean.parseBoolean(getHtmlElementOrDie().getAttribute("readOnly"));
+    }
+
+    /**
+     * Sets the value of "readOnly" attribute.
+     * @param readOnly the new value
+     */
+    public void jsxSet_readOnly(final boolean readOnly) {
+        getHtmlElementOrDie().setAttribute("readOnly", Boolean.toString(readOnly));
     }
 
     /**

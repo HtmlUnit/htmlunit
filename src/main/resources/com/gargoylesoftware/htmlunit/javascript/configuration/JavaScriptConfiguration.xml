@@ -1417,6 +1417,7 @@
                 descr="MSDN documentation"/>
         </property>
         <property name="maxLength" readable="true" writable="true"/>
+        <property name="readOnly" readable="true" writable="true"/>
         <property name="textLength" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
