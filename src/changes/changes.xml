@@ -9,7 +9,7 @@
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
             <action type="add" dev="asashour">
-                JavaScript: add support for input.readOnly attribute.
+                HtmlInput: add isReadOnly() and setReadOnly().
             </action>
             <action type="fix" dev="asashour">
                 JavaScript: node.appendBefore() should run added script element.

@@ -381,7 +381,7 @@ public class HtmlScriptTest extends WebTestCase {
 
         final String[] expectedAlerts = {"myValue"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_7, html, collectedAlerts);
+        loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

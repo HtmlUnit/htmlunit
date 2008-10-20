@@ -767,4 +767,25 @@ public class HTMLInputElementTest extends WebTestCase {
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void readOnly() throws Exception {
+        final String content
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "    var input = document.getElementById('myInput');\n"
+            + "    alert(input.readOnly);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<input id='myInput' value='some test' readonly='false'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"true"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

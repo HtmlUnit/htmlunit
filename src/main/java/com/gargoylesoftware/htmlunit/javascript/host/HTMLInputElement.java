@@ -258,7 +258,7 @@ public class HTMLInputElement extends FormField {
      * @return the readOnly attribute
      */
     public boolean jsxGet_readOnly() {
-        return Boolean.parseBoolean(getHtmlElementOrDie().getAttribute("readOnly"));
+        return ((HtmlInput) getDomNodeOrDie()).isReadOnly();
     }
 
     /**
@@ -266,7 +266,7 @@ public class HTMLInputElement extends FormField {
      * @param readOnly the new value
      */
     public void jsxSet_readOnly(final boolean readOnly) {
-        getHtmlElementOrDie().setAttribute("readOnly", Boolean.toString(readOnly));
+        ((HtmlInput) getDomNodeOrDie()).setReadOnly(readOnly);
     }
 
     /**

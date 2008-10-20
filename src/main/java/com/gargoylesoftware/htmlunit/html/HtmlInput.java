@@ -401,11 +401,33 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
     }
 
     /**
+     * Sets the "readOnly" attribute.
+     *
+     * @param isReadOnly <tt>true</tt> if this element is to be read only
+     */
+    public void setReadOnly(final boolean isReadOnly) {
+        if (isReadOnly) {
+            setAttributeValue("readOnly", "readOnly");
+        }
+        else {
+            removeAttribute("readOnly");
+        }
+    }
+
+    /**
      * Returns <tt>true</tt> if this element is currently selected.
      * @return <tt>true</tt> if this element is currently selected
      */
     public boolean isChecked() {
         return hasAttribute("checked");
+    }
+
+    /**
+     * Returns <tt>true</tt> if this element is read only.
+     * @return <tt>true</tt> if this element is read only
+     */
+    public boolean isReadOnly() {
+        return hasAttribute("readOnly");
     }
 
     /**
