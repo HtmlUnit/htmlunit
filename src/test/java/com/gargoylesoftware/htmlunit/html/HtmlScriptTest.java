@@ -360,4 +360,28 @@ public class HtmlScriptTest extends WebTestCase {
         assertEquals(URL_FIRST.toString(), lastAdditionalHeaders.get("Referer"));
     }
 
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    public void insertBefore() throws Exception {
+        final String html
+            = "<html><head><title>Page A</title>"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var script = document.createElement('script');\n"
+            + "    script.text = \"foo = 'myValue';\";\n"
+            + "    document.body.insertBefore(script, document.body.firstChild);\n"
+            + "    alert(foo);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        final String[] expectedAlerts = {"myValue"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

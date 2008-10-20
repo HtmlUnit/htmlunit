@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="fix" dev="asashour">
+                JavaScript: node.appendBefore() should run added script element.
+            </action>
             <action type="fix" dev="asashour" id="2178172" due-to="Marco Cova">
                 Set 'referer' header and other additional headers on loading external JavaScript files.
             </action>

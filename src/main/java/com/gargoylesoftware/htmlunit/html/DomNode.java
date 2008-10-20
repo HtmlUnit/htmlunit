@@ -962,6 +962,11 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         newNode.parent_ = parent_;
         newNode.setPage(page_);
 
+        if (newNode.getStartLineNumber() == -1) { // dynamically added node, not parsed
+            newNode.onAddedToPage();
+            newNode.onAllChildrenAddedToPage(true);
+        }
+
         if (getPage() instanceof HtmlPage) {
             ((HtmlPage) getPage()).notifyNodeAdded(newNode);
         }
