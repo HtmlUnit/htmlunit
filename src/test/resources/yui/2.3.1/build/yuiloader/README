@@ -1,8 +1,0 @@
-yuiloader - Release Notes
-
-2.3.1
-   * The "skin.overrides" property is now applied correctly.  Previously
-     it was looking for "skin.override".
-
-2.3.0
-   * Initial release
