@@ -1045,7 +1045,7 @@
         <property name="body" readable="true" writable="false"/>
         <property name="bgColor" notImplemented="true" readable="true" writable="false"/>
         <!-- Note that compatMode is deprecated in Internet Explorer 8 in favor of the documentMode -->
-        <property name="compatMode" readable="true" writable="false"/>
+        <property name="compatMode" notImplemented="true" readable="true" writable="false"/>
         <property name="cookie" readable="true" writable="true">
             <doclink
                 url="http://msdn.microsoft.com/en-us/library/ms533693.aspx"
