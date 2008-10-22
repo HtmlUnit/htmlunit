@@ -9,6 +9,9 @@
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
             <action type="add" dev="asashour">
+                JavaScript: add support for document.compatMode.
+            </action>
+            <action type="add" dev="asashour">
                 HtmlInput: add isReadOnly() and setReadOnly().
             </action>
             <action type="fix" dev="asashour">

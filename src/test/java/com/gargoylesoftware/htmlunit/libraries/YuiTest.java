@@ -204,7 +204,7 @@ public class YuiTest extends WebTestCase {
      */
     @Test
     public void imageLoader() throws Exception {
-        doTest(BrowserVersion.FIREFOX_2, "imageloader.html", emptyList_);
+        doTest(BrowserVersion.FIREFOX_2, "imageloader.html", Collections.singletonList("testFoldCheck"));
     }
 
     /**
