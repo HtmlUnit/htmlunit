@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.source;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +37,7 @@ public final class Patch {
      * base. If you are calling this method from another project, this specifies HtmlUnit home folder.
      * @param patchPath the path to the patch
      * @param authorName the author name, e.g. "John Smith"
-     * @throws IOException if an exception occurs
+     * @throws Exception if an exception occurs
      */
     @SuppressWarnings("unchecked")
     public static void checkAutor(final String baseDir, final String patchPath, final String authorName)
