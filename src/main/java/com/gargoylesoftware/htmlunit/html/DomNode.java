@@ -261,11 +261,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * Sets the parent node.
      * @param parent the parent node
      */
-    public void setParentNode(final DomNode parent) {
+    protected void setParentNode(final DomNode parent) {
         parent_ = parent;
     }
 
