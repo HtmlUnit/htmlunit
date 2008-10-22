@@ -22,7 +22,7 @@ import org.apache.commons.io.FileUtils;
 /**
  * Subversion utilities.
  *
- * @version $Revision: 3547 $
+ * @version $Revision$
  * @author Ahmed Ashour
  */
 public final class SVN {
