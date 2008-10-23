@@ -27,6 +27,7 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mortbay.jetty.Server;
@@ -63,10 +64,10 @@ public class Sarissa0993Test extends WebTestCase {
     private static HtmlPage Page_;
 
     /**
-     * Constructor.
      * @throws Exception if an error occurs
      */
-    public Sarissa0993Test() throws Exception {
+    @Before
+    public void init() throws Exception {
         if (Counter_ < BROWSERS_COUNTER) {
             if (Server_ == null) {
                 Server_ = HttpWebConnectionTest.startWebServer("src/test/resources/sarissa/" + getVersion());
