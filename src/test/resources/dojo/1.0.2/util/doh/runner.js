@@ -679,7 +679,7 @@ doh._runFixture = function(groupName, fixture){
 					// ret.cancel();
 					// retEnd();
 					ret.errback(new Error("test timeout in "+fixture.name.toString()));
-				}, fixture["timeout"]||2000);
+				}, fixture["timeout"]||1000);
 
 				ret.addBoth(function(arg){
 					clearTimeout(timer);
