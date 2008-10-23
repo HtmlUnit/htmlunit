@@ -38,9 +38,9 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
  *   4- Save all possibilities in a single folder, namely: "expected.FF2.txt", "expected.FF3.txt",
  *      "expected.IE6.txt", and "expected.IE7.txt"
  *   5- Call {@link JQueryExtractor#run(File, File)} with appropriate parameters
- *   6- Add the generated code to {@link JJQueryExtractorSample}
+ *   6- Add the generated code to {@link JQueryExtractorSample}
  *
- * @version $Revision: 3611 $
+ * @version $Revision$
  * @author Ahmed Ashour
  */
 public final class JQueryExtractor {
