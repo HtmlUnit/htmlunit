@@ -21,7 +21,6 @@ import static org.junit.Assert.assertSame;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.mozilla.javascript.ScriptableObject;
 
@@ -54,11 +53,10 @@ public class HtmlTableRowTest extends WebTestCase {
     private HtmlTableCell cellClone_;
 
     /**
-     * Performs pre-test initialization.
-     * @throws Exception if an error occurs
+     * Constructor.
+     * @throws Exception if an exception occurs
      */
-    @Before
-    public void setUp() throws Exception {
+    public HtmlTableRowTest() throws Exception {
         page_ = loadPage(htmlContent);
 
         table_ = page_.getHtmlElementById("table");

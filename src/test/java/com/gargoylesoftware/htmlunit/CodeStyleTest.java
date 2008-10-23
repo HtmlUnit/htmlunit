@@ -26,7 +26,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -37,15 +36,7 @@ import org.junit.Test;
  */
 public class CodeStyleTest {
 
-    private List<String> failures_;
-
-    /**
-     * Before.
-     */
-    @Before
-    public void before() {
-        failures_ = new ArrayList<String>();
-    }
+    private List<String> failures_ = new ArrayList<String>();
 
     /**
      * After.

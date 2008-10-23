@@ -21,7 +21,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -37,7 +36,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class HtmlAttrTest extends WebTestCase {
 
     /** Test object. */
-    private DomAttr htmlAttr_;
+    private final DomAttr htmlAttr_ = new DomAttr(null, null, ENTRY_KEY, ENTRY_VALUE);
 
     /** Single test key value. */
     private static final String ENTRY_KEY = "key";
@@ -61,11 +60,9 @@ public class HtmlAttrTest extends WebTestCase {
     }
 
     /**
-     * Performs pre-test initialization.
+     * Constructor.
      */
-    @Before
-    public void setUp() {
-        htmlAttr_ = new DomAttr(null, null, ENTRY_KEY, ENTRY_VALUE);
+    public HtmlAttrTest() {
         htmlAttr_.setParentNode(HTML_ELEMENT);
     }
 

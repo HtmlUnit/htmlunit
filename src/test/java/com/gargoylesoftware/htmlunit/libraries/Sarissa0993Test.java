@@ -27,7 +27,6 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mortbay.jetty.Server;
@@ -62,6 +61,32 @@ public class Sarissa0993Test extends WebTestCase {
 
     private static Server Server_;
     private static HtmlPage Page_;
+
+    /**
+     * Constructor.
+     * @throws Exception if an error occurs
+     */
+    public Sarissa0993Test() throws Exception {
+        if (Counter_ < BROWSERS_COUNTER) {
+            if (Server_ == null) {
+                Server_ = HttpWebConnectionTest.startWebServer("src/test/resources/sarissa/" + getVersion());
+            }
+            if (Page_ == null) {
+                final WebClient client = getWebClient();
+                final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/test/testsarissa.html";
+                Page_ = client.getPage(url);
+                Page_.<HtmlButton>getFirstByXPath("//button").click();
+
+                // dump the result page
+                if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null) {
+                    final File tmpDir = new File(System.getProperty("java.io.tmpdir"));
+                    final File f = new File(tmpDir, "sarissa0993_result.html");
+                    FileUtils.writeStringToFile(f, Page_.asXml(), "UTF-8");
+                    getLog().info("Test result written to: " + f.getAbsolutePath());
+                }
+            }
+        }
+    }
 
     /**
      * Returns the Sarissa version being tested.
@@ -150,32 +175,6 @@ public class Sarissa0993Test extends WebTestCase {
             builder.append(((DomText) node).asText());
         }
         assertEquals(expectedResult, builder.toString());
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Before
-    public void init() throws Exception {
-        if (Counter_ < BROWSERS_COUNTER) {
-            if (Server_ == null) {
-                Server_ = HttpWebConnectionTest.startWebServer("src/test/resources/sarissa/" + getVersion());
-            }
-            if (Page_ == null) {
-                final WebClient client = getWebClient();
-                final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/test/testsarissa.html";
-                Page_ = client.getPage(url);
-                Page_.<HtmlButton>getFirstByXPath("//button").click();
-
-                // dump the result page
-                if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null) {
-                    final File tmpDir = new File(System.getProperty("java.io.tmpdir"));
-                    final File f = new File(tmpDir, "sarissa0993_result.html");
-                    FileUtils.writeStringToFile(f, Page_.asXml(), "UTF-8");
-                    getLog().info("Test result written to: " + f.getAbsolutePath());
-                }
-            }
-        }
     }
 
     /**

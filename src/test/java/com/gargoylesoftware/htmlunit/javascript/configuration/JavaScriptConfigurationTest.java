@@ -30,7 +30,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -57,11 +56,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.HTMLDocument;
 public class JavaScriptConfigurationTest extends WebTestCase {
 
     /**
-     * Resets the JavaScriptConfiguration file for each test to it's initial clean state.
-     * @throws Exception if the test fails
+     * Constructor.
      */
-    @Before
-    public void setUp() throws Exception {
+    public JavaScriptConfigurationTest() {
         JavaScriptConfiguration.resetClassForTesting();
     }
 

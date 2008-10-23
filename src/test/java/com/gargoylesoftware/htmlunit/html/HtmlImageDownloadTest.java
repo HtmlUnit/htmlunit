@@ -19,7 +19,6 @@ import java.net.URL;
 
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.mortbay.jetty.Server;
 
@@ -34,9 +33,17 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  */
 
 public class HtmlImageDownloadTest extends WebTestCase {
-    private Server server_;
-    private final String base_file_path_ = "src/test/resources/com/gargoylesoftware/htmlunit/html";
-    private URL url_;
+    private static final String base_file_path_ = "src/test/resources/com/gargoylesoftware/htmlunit/html";
+    private Server server_ = HttpWebConnectionTest.startWebServer(base_file_path_);
+    private URL url_ = new URL("http", "localhost", HttpWebConnectionTest.PORT, "");
+
+    /**
+     * Constructor.
+     * @throws Exception if an exception occurs
+     */
+    public HtmlImageDownloadTest() throws Exception {
+        //not very empty :)
+    }
 
     /**
      * @throws Exception if the test fails
@@ -99,16 +106,6 @@ public class HtmlImageDownloadTest extends WebTestCase {
         final HtmlImage htmlimage = getHtmlElementToTest("image1");
         Assert.assertNull(htmlimage.getWebResponse(false));
         Assert.assertNotNull(htmlimage.getWebResponse(true));
-    }
-
-    /**
-     * Performs pre-test initialization.
-     * @throws Exception if an error occurs
-     */
-    @Before
-    public void setup() throws Exception {
-        server_ = HttpWebConnectionTest.startWebServer(base_file_path_);
-        url_ = new URL("http", "localhost", HttpWebConnectionTest.PORT, "");
     }
 
     /**

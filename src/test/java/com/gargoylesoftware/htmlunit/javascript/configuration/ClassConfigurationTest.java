@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.configuration;
 import static org.junit.Assert.fail;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -32,11 +31,9 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class ClassConfigurationTest extends WebTestCase {
 
     /**
-     * Resets the JavaScriptConfiguration file for each test to it's inital clean state.
-     * @throws Exception if the test fails
+     * Constructor.
      */
-    @Before
-    public void setUp() throws Exception {
+    public ClassConfigurationTest() {
         JavaScriptConfiguration.resetClassForTesting();
     }
 

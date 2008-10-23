@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.libraries;
 import java.util.Iterator;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.mortbay.jetty.Server;
 
@@ -45,6 +44,14 @@ public class Dojo102Test extends WebTestCase {
     private WebClient client_;
 
     private static final String GROUP_DELIMITER = "------------------------------------------------------------";
+
+    /**
+     * Constructor.
+     * @throws Exception if an error occurs
+     */
+    public Dojo102Test() throws Exception {
+        server_ = HttpWebConnectionTest.startWebServer("src/test/resources/dojo/1.0.2");
+    }
 
     /**
      * @throws Exception if an error occurs
@@ -794,15 +801,6 @@ public class Dojo102Test extends WebTestCase {
 
     private void eq(final String expected, final Iterator<HtmlElement> i) {
         assertEquals(expected, i.next().asText().trim());
-    }
-
-    /**
-     * Performs pre-test initialization.
-     * @throws Exception if an error occurs
-     */
-    @Before
-    public void setUp() throws Exception {
-        server_ = HttpWebConnectionTest.startWebServer("src/test/resources/dojo/1.0.2");
     }
 
     /**

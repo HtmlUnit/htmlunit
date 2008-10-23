@@ -38,7 +38,6 @@ import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
 import org.eclipse.jdt.core.dom.Type;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -60,17 +59,8 @@ import org.junit.Test;
  */
 public class CodeChecker {
 
-    private List<String> errors_;
-    private ASTParser parser_;
-
-    /**
-     * Before.
-     */
-    @Before
-    public void before() {
-        errors_ = new ArrayList<String>();
-        parser_ = ASTParser.newParser(AST.JLS3);
-    }
+    private List<String> errors_ = new ArrayList<String>();
+    private ASTParser parser_ = ASTParser.newParser(AST.JLS3);
 
     /**
      * After.

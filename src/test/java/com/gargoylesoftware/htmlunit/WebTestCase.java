@@ -43,7 +43,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -103,6 +102,13 @@ public abstract class WebTestCase {
             // This is theoretically impossible.
             throw new IllegalStateException("Unable to create URL constants");
         }
+    }
+
+    /**
+     * Constructor.
+     */
+    protected WebTestCase() {
+        generateTest_browserVersion_.remove();
     }
 
     /**
@@ -654,17 +660,6 @@ public abstract class WebTestCase {
         final HtmlPage page = client.getPage(URL_GARGOYLE);
         assertEquals(expectedAlerts_, collectedAlerts);
         return page;
-    }
-
-    /**
-     * Resets variable to record what is tested when possible.
-     */
-    @Before
-    public void prepareTestForWebDriver() {
-        generateTest_browserVersion_.remove();
-        generateTest_notYetImplemented_ = false;
-        generateTest_content_ = null;
-        generateTest_expectedAlerts_ = null;
     }
 
     /**

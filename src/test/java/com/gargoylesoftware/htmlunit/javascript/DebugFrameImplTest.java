@@ -26,7 +26,6 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 import org.apache.log4j.WriterAppender;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -46,11 +45,10 @@ public class DebugFrameImplTest extends WebTestCase {
     private Level originalLogLevel_;
 
     /**
-     * Prepares the log to trigger problematic code.
-     * @throws Exception when a problem occurs
+     * Constructor.
+     * @throws Exception if an exception occurs
      */
-    @Before
-    public void setUp() throws Exception {
+    public DebugFrameImplTest() throws Exception {
         HtmlUnitContextFactory.getGlobal2().setDebugger(new DebuggerImpl());
         originalLogLevel_ = loggerDebugFrameImpl_.getLevel();
         loggerDebugFrameImpl_.setLevel(Level.TRACE);
