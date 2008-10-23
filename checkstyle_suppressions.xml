@@ -10,6 +10,7 @@
     <suppress checks="FileLength" files="DocumentTest.java"/>
     <suppress checks="FileLength" files="WindowTest.java"/>
     <suppress checks="FileLength" files="HTMLElementTest.java"/>
+    <suppress checks="FileLength" files="JQuery126Test.java"/>
     <suppress checks="LineLength" files="JavaScriptEngine.java" lines="67"/>
     <suppress checks="LineLength" files="HTMLScriptElementTest.java"/>
     <suppress checks="LineLength" files="Dojo102Test.java"/>

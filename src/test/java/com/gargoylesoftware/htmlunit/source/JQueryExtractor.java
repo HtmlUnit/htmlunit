@@ -88,7 +88,7 @@ public final class JQueryExtractor {
         }
         writer_.write("\n");
         writer_.write("    /**\n");
-        writer_.write("     * @throws Exception if an error occurs\n");
+        writer_.write("     * Test.\n");
         writer_.write("     */\n");
         writer_.write("    @Test\n");
         writer_.write("    public void " + methodName + "() {\n");

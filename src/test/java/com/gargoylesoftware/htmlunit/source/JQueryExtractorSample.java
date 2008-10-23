@@ -57,7 +57,6 @@ public class JQueryExtractorSample extends WebTestCase {
             try {
                 ITERATOR_ = loadPage();
                 BROWSER_VERSION_ = getBrowserVersion();
-                System.out.println("Loading page for " + BROWSER_VERSION_.getNickname());
             }
             catch (final Exception e) {
                 throw new RuntimeException(e);
@@ -75,7 +74,7 @@ public class JQueryExtractorSample extends WebTestCase {
 
     @SuppressWarnings("unchecked")
     private void assertAssertion(final String expectedAssertion) {
-        final String actual = ((HtmlListItem) ((List) listItem_.getByXPath("./ol/li")).get(itemIndex_)).asText();
+        final String actual = ((HtmlListItem) ((List) listItem_.getByXPath("./ol/li")).get(itemIndex_++)).asText();
         assertEquals(expectedAssertion, actual);
     }
 
