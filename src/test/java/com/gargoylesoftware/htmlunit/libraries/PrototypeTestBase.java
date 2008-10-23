@@ -32,8 +32,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for compatibility with version 1.5.0-rc1 of
- * <a href="http://prototype.conio.net/">Prototype JavaScript library</a>.
+ * Base class for tests for compatibility with <a href="http://prototype.conio.net/">Prototype</a>.
  *
  * @version $Revision$
  * @author Daniel Gredler
