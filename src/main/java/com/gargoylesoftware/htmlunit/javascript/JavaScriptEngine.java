@@ -27,7 +27,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
-import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.FunctionObject;
 import org.mozilla.javascript.Script;
@@ -70,7 +69,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 public class JavaScriptEngine implements Serializable {
 
     private static final long serialVersionUID = -5414040051465432088L;
+
     private final WebClient webClient_;
+    private final HtmlUnitContextFactory contextFactory_;
+
     private static final Log ScriptEngineLog_ = LogFactory.getLog(JavaScriptEngine.class);
     private static final ThreadLocal<Boolean> javaScriptRunning_ = new ThreadLocal<Boolean>();
     private static final ThreadLocal<List<PostponedAction>> postponedActions_
@@ -85,21 +87,13 @@ public class JavaScriptEngine implements Serializable {
     public static final String KEY_STARTING_SCOPE = "startingScope";
 
     /**
-     * Initialize a context listener so we can count JS contexts and make sure we
-     * are freeing them as necessary.
-     */
-    static {
-        final HtmlUnitContextFactory contextFactory = new HtmlUnitContextFactory(getScriptEngineLog());
-        ContextFactory.initGlobal(contextFactory);
-    }
-
-    /**
      * Creates an instance for the specified webclient.
      *
-     * @param webClient the webClient that will own this engine
+     * @param webClient the client that will own this engine
      */
     public JavaScriptEngine(final WebClient webClient) {
         webClient_ = webClient;
+        contextFactory_ = new HtmlUnitContextFactory(webClient.getBrowserVersion(), getScriptEngineLog());
     }
 
     /**
@@ -108,6 +102,14 @@ public class JavaScriptEngine implements Serializable {
      */
     public final WebClient getWebClient() {
         return webClient_;
+    }
+
+    /**
+     * Returns this JavaScript engine's Rhino {@link org.mozilla.javascript.ContextFactory}.
+     * @return this JavaScript engine's Rhino {@link org.mozilla.javascript.ContextFactory}
+     */
+    public HtmlUnitContextFactory getContextFactory() {
+        return contextFactory_;
     }
 
     /**
@@ -131,7 +133,7 @@ public class JavaScriptEngine implements Serializable {
             }
         };
 
-        ContextFactory.getGlobal().call(action);
+        getContextFactory().call(action);
     }
 
     /**
@@ -364,7 +366,7 @@ public class JavaScriptEngine implements Serializable {
             }
         };
 
-        return (Script) ContextFactory.getGlobal().call(action);
+        return (Script) getContextFactory().call(action);
     }
 
     /**
@@ -407,7 +409,7 @@ public class JavaScriptEngine implements Serializable {
             }
         };
 
-        return ContextFactory.getGlobal().call(action);
+        return getContextFactory().call(action);
     }
 
     /**
@@ -439,7 +441,7 @@ public class JavaScriptEngine implements Serializable {
                 return cx.decompileFunction(function, 2);
             }
         };
-        return ContextFactory.getGlobal().call(action);
+        return getContextFactory().call(action);
     }
 
     private Scriptable getScope(final HtmlPage htmlPage, final DomNode htmlElement) {
@@ -478,30 +480,6 @@ public class JavaScriptEngine implements Serializable {
      */
     public boolean isScriptRunning() {
         return Boolean.TRUE.equals(javaScriptRunning_.get());
-    }
-
-    /**
-     * Sets the number of milliseconds a script is allowed to execute before
-     * being terminated. A value of 0 or less means no timeout.
-     *
-     * @param timeout the timeout value
-     * @deprecated As of 2.2, use WebClient.setJavaScriptTimeout() instead
-     */
-    @Deprecated
-    public static void setTimeout(final long timeout) {
-        HtmlUnitContextFactory.getGlobal2().setTimeout(timeout);
-    }
-
-    /**
-     * Returns the number of milliseconds a script is allowed to execute before
-     * being terminated. A value of 0 or less means no timeout.
-     *
-     * @return the timeout value
-     * @deprecated As of 2.2, use WebClient.getJavaScriptTimeout() instead
-     */
-    @Deprecated
-    public static long getTimeout() {
-        return HtmlUnitContextFactory.getGlobal2().getTimeout();
     }
 
     /**
@@ -612,4 +590,5 @@ public class JavaScriptEngine implements Serializable {
         }
         actions.add(action);
     }
+
 }

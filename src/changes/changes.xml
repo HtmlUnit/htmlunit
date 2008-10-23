@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="update" dev="sdanig" id="2089599">
+                Made static WebClient methods getJavaScriptTimeout() and setJavaScriptTimeout() non-static, so
+                that they can be configured on a per-WebClient basis.
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: add support for document.compatMode.
             </action>

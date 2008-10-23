@@ -26,7 +26,6 @@ import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 
-import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
@@ -115,27 +114,24 @@ public class ThreadManager {
             return 0;
         }
 
-        final BrowserVersion version = ww.getWebClient().getBrowserVersion();
-        final int myThreadID = getNextThreadId();
-
-        final Thread newThread = new Thread(job, "HtmlUnit Managed Thread #" + myThreadID
-            + " for WebWindow(" + ww.getName() + "): " + label) {
+        final int threadId = getNextThreadId();
+        final Thread newThread = new Thread(job, "HtmlUnit Managed Thread #" + threadId
+            + " for WebWindow " + ww.getName() + ": " + label) {
             @Override
             public void run() {
-                HtmlUnitContextFactory.getGlobal2().putThreadLocal(version);
                 try {
                     super.run();
                 }
                 finally {
-                    threadMap_.remove(new Integer(myThreadID));
+                    threadMap_.remove(new Integer(threadId));
                 }
             }
         };
         newThread.setPriority(PRIORITY);
         newThread.setDaemon(true);
-        threadMap_.put(new Integer(myThreadID), newThread);
+        threadMap_.put(new Integer(threadId), newThread);
         newThread.start();
-        return myThreadID;
+        return threadId;
     }
 
     /**

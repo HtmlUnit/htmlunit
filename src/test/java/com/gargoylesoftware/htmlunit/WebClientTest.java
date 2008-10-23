@@ -1810,12 +1810,12 @@ public class WebClientTest extends WebTestCase {
      */
     @Test
     public void testJavaScriptTimeout() throws Exception {
+        final WebClient client = new WebClient();
         final long timeout = 2000;
-        final long oldTimeout = WebClient.getJavaScriptTimeout();
-        WebClient.setJavaScriptTimeout(timeout);
+        final long oldTimeout = client.getJavaScriptTimeout();
+        client.setJavaScriptTimeout(timeout);
 
         try {
-            final WebClient client = new WebClient();
             client.setThrowExceptionOnScriptError(false);
 
             final String content = "<html><body><script>while(1) {}</script></body></html>";
@@ -1846,7 +1846,7 @@ public class WebClientTest extends WebTestCase {
             assertNull(exceptions[0]);
         }
         finally {
-            WebClient.setJavaScriptTimeout(oldTimeout);
+            client.setJavaScriptTimeout(oldTimeout);
         }
     }
 

@@ -23,6 +23,7 @@ import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.ScriptableObject;
 
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -103,19 +104,24 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      */
     @Test
     public void needCustomFix() {
-        final Context ctx = ContextFactory.getGlobal().enterContext();
-        final ScriptableObject topScope = ctx.initStandardObjects();
-
-        topScope.put("str", topScope, str_);
-        topScope.put("text", topScope, text_);
-        topScope.put("expected", topScope, expected_);
-
-        assertEquals(begin_ + end_, text_.replaceAll(str_, ""));
+        final WebClient client = new WebClient();
+        final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
+        final Context ctx = cf.enterContext();
         try {
-            ctx.evaluateString(topScope, src_, "test script", 0, null);
+            final ScriptableObject topScope = ctx.initStandardObjects();
+            topScope.put("str", topScope, str_);
+            topScope.put("text", topScope, text_);
+            topScope.put("expected", topScope, expected_);
+            assertEquals(begin_ + end_, text_.replaceAll(str_, ""));
+            try {
+                ctx.evaluateString(topScope, src_, "test script", 0, null);
+            }
+            catch (final JavaScriptException e) {
+                assertTrue(e.getMessage().indexOf("Expected >") == 0);
+            }
         }
-        catch (final JavaScriptException e) {
-            assertTrue(e.getMessage().indexOf("Expected >") == 0);
+        finally {
+            Context.exit();
         }
     }
 
@@ -204,15 +210,21 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      */
     @Test
     public void matchFixNeeded() throws Exception {
-        final Context ctx = ContextFactory.getGlobal().enterContext();
-        final ScriptableObject topScope = ctx.initStandardObjects();
-
-        ctx.evaluateString(topScope, scriptTestMatch_, "test script String.match", 0, null);
+        final WebClient client = new WebClient();
+        final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
+        final Context cx = cf.enterContext();
         try {
-            ctx.evaluateString(topScope, scriptTestMatch_, "test script String.match", 0, null);
+            final ScriptableObject topScope = cx.initStandardObjects();
+            cx.evaluateString(topScope, scriptTestMatch_, "test script String.match", 0, null);
+            try {
+                cx.evaluateString(topScope, scriptTestMatch_, "test script String.match", 0, null);
+            }
+            catch (final JavaScriptException e) {
+                assertTrue(e.getMessage().indexOf("Expected >") == 0);
+            }
         }
-        catch (final JavaScriptException e) {
-            assertTrue(e.getMessage().indexOf("Expected >") == 0);
+        finally {
+            Context.exit();
         }
     }
 

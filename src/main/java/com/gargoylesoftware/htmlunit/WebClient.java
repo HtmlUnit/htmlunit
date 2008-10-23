@@ -60,7 +60,6 @@ import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
@@ -194,21 +193,7 @@ public class WebClient implements Serializable {
      */
     public WebClient(final BrowserVersion browserVersion) {
         WebAssert.notNull("browserVersion", browserVersion);
-
-        homePage_ = "http://www.gargoylesoftware.com/";
-        browserVersion_ = browserVersion;
-        proxyConfig_ = new ProxyConfig();
-        try {
-            scriptEngine_ = createJavaScriptEngineIfPossible(this);
-        }
-        catch (final NoClassDefFoundError e) {
-            scriptEngine_ = null;
-        }
-
-        // The window must be constructed after the script engine.
-        addWebWindowListener(new CurrentWindowTracker());
-        currentWindow_ = new TopLevelWindow("", this);
-        HtmlUnitContextFactory.getGlobal2().putThreadLocal(browserVersion);
+        init(browserVersion, new ProxyConfig());
     }
 
     /**
@@ -220,19 +205,28 @@ public class WebClient implements Serializable {
     public WebClient(final BrowserVersion browserVersion, final String proxyHost, final int proxyPort) {
         WebAssert.notNull("browserVersion", browserVersion);
         WebAssert.notNull("proxyHost", proxyHost);
+        init(browserVersion, new ProxyConfig(proxyHost, proxyPort));
+    }
 
+    /**
+     * Generic initialization logic used by all constructors. This method does not perform any
+     * parameter validation; such validation must be handled by the constructors themselves.
+     * @param browserVersion the browser version to simulate
+     * @param proxyConfig the proxy configuration to use
+     */
+    private void init(final BrowserVersion browserVersion, final ProxyConfig proxyConfig) {
         homePage_ = "http://www.gargoylesoftware.com/";
         browserVersion_ = browserVersion;
-        proxyConfig_ = new ProxyConfig(proxyHost, proxyPort);
+        proxyConfig_ = proxyConfig;
         try {
             scriptEngine_ = createJavaScriptEngineIfPossible(this);
         }
         catch (final NoClassDefFoundError e) {
             scriptEngine_ = null;
         }
-        // The window must be constructed after the script engine.
+        // The window must be constructed AFTER the script engine.
+        addWebWindowListener(new CurrentWindowTracker());
         currentWindow_ = new TopLevelWindow("", this);
-        HtmlUnitContextFactory.getGlobal2().putThreadLocal(browserVersion);
     }
 
     /**
@@ -1714,23 +1708,23 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Sets the number of milliseconds a script is allowed to execute before being terminated.
+     * Sets the number of milliseconds that a script is allowed to execute before being terminated.
      * A value of 0 or less means no timeout.
      *
-     * @param timeout the timeout value
+     * @param timeout the timeout value, in milliseconds
      */
-    public static void setJavaScriptTimeout(final long timeout) {
-        HtmlUnitContextFactory.getGlobal2().setTimeout(timeout);
+    public void setJavaScriptTimeout(final long timeout) {
+        scriptEngine_.getContextFactory().setTimeout(timeout);
     }
 
     /**
-     * Returns the number of milliseconds a script is allowed to execute before being terminated.
+     * Returns the number of milliseconds that a script is allowed to execute before being terminated.
      * A value of 0 or less means no timeout.
      *
-     * @return the timeout value
+     * @return the timeout value, in milliseconds
      */
-    public static long getJavaScriptTimeout() {
-        return HtmlUnitContextFactory.getGlobal2().getTimeout();
+    public long getJavaScriptTimeout() {
+        return scriptEngine_.getContextFactory().getTimeout();
     }
 
     /**

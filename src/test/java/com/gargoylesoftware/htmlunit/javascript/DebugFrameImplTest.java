@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import java.io.StringWriter;
 import java.net.URL;
-import java.util.ArrayList;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Appender;
@@ -29,7 +28,9 @@ import org.junit.After;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebConnection;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -43,24 +44,26 @@ public class DebugFrameImplTest extends WebTestCase {
     private final Logger loggerDebugFrameImpl_ = Logger.getLogger(DebugFrameImpl.class);
 
     private Level originalLogLevel_;
+    private WebClient client_;
 
     /**
      * Constructor.
      * @throws Exception if an exception occurs
      */
     public DebugFrameImplTest() throws Exception {
-        HtmlUnitContextFactory.getGlobal2().setDebugger(new DebuggerImpl());
+        client_ = new WebClient(BrowserVersion.FIREFOX_2);
+        client_.getJavaScriptEngine().getContextFactory().setDebugger(new DebuggerImpl());
         originalLogLevel_ = loggerDebugFrameImpl_.getLevel();
         loggerDebugFrameImpl_.setLevel(Level.TRACE);
     }
 
     /**
-     * Resets the log to its original state.
+     * Cleans up the client, and resets the log to its original state.
      * @throws Exception when a problem occurs
      */
     @After
     public void tearDown() throws Exception {
-        HtmlUnitContextFactory.getGlobal2().setDebugger(null);
+        client_.getJavaScriptEngine().getContextFactory().setDebugger(null);
         loggerDebugFrameImpl_.setLevel(originalLogLevel_);
     }
 
@@ -75,8 +78,16 @@ public class DebugFrameImplTest extends WebTestCase {
             + "window.__defineGetter__('foo', function(a) { return counter++ });"
             + "alert(window.foo);"
             + "</script></head><body></body></html>";
-
-        loadPage(BrowserVersion.FIREFOX_2, content, new ArrayList<String>());
+        final WebConnection old = client_.getWebConnection();
+        try {
+            final MockWebConnection mock = new MockWebConnection();
+            mock.setDefaultResponse(content);
+            client_.setWebConnection(mock);
+            client_.getPage(URL_FIRST);
+        }
+        finally {
+            client_.setWebConnection(old);
+        }
     }
 
     /**
@@ -91,8 +102,7 @@ public class DebugFrameImplTest extends WebTestCase {
         final Appender appender = new WriterAppender(layout, sw);
         loggerDebugFrameImpl_.addAppender(appender);
         try {
-            final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_2);
-            webClient.getPage(url);
+            client_.getPage(url);
         }
         finally {
             loggerDebugFrameImpl_.removeAppender(appender);

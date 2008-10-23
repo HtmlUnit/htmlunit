@@ -344,7 +344,8 @@ public class XMLHttpRequest extends SimpleScriptable {
     public void jsxFunction_send(final Object content) {
         prepareRequest(content);
 
-        final AjaxController ajaxController = getWindow().getWebWindow().getWebClient().getAjaxController();
+        final WebClient client = getWindow().getWebWindow().getWebClient();
+        final AjaxController ajaxController = client.getAjaxController();
         final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
         final boolean synchron = ajaxController.processSynchron(page, requestSettings_, async_);
         if (synchron) {
@@ -353,7 +354,7 @@ public class XMLHttpRequest extends SimpleScriptable {
         else {
             // Create and start a thread in which to execute the request.
             final Object startingScope = getWindow();
-
+            final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
             final ContextAction action = new ContextAction() {
                 public Object run(final Context cx) {
                     cx.putThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE, startingScope);
@@ -363,10 +364,9 @@ public class XMLHttpRequest extends SimpleScriptable {
             };
             final Runnable t = new Runnable() {
                 public void run() {
-                    ContextFactory.getGlobal().call(action);
+                    cf.call(action);
                 }
             };
-
             getLog().debug("Starting XMLHttpRequest thread for asynchronous request");
             threadID_ = getWindow().getWebWindow().getThreadManager().startThread(t, "XMLHttpRequest.send");
         }

@@ -933,7 +933,8 @@ public abstract class HtmlElement extends DomElement {
      * @return the execution result, or <tt>null</tt> if nothing is executed
      */
     public ScriptResult fireEvent(final Event event) {
-        if (!getPage().getWebClient().isJavaScriptEnabled()) {
+        final WebClient client = getPage().getWebClient();
+        if (!client.isJavaScriptEnabled()) {
             return null;
         }
 
@@ -947,8 +948,9 @@ public abstract class HtmlElement extends DomElement {
             }
         };
 
-        final ScriptResult result = (ScriptResult) ContextFactory.getGlobal().call(action);
-        final boolean isIE = getPage().getWebClient().getBrowserVersion().isIE();
+        final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
+        final ScriptResult result = (ScriptResult) cf.call(action);
+        final boolean isIE = client.getBrowserVersion().isIE();
         if ((!isIE && event.isPreventDefault()) || (isIE && ScriptResult.isFalse(result))) {
             preventDefault();
         }

@@ -1211,6 +1211,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     //----------------------- START #default#download BEHAVIOR -----------------------
+
     /**
      * Implementation of the IE behavior #default#download.
      * @param uri the URI of the download source
@@ -1257,12 +1258,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
          */
         @Override
         public void run() {
-            final WebClient wc = getWindow().getWebWindow().getWebClient();
+            final WebClient client = getWindow().getWebWindow().getWebClient();
             final Scriptable scope = callback_.getParentScope();
             final WebRequestSettings settings = new WebRequestSettings(url_);
 
             try {
-                final WebResponse webResponse = wc.loadWebResponse(settings);
+                final WebResponse webResponse = client.loadWebResponse(settings);
                 final String content = webResponse.getContentAsString();
                 getLog().debug("Downloaded content: " + StringUtils.abbreviate(content, 512));
                 final Object[] args = new Object[] {content};
@@ -1272,13 +1273,15 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                         return null;
                     }
                 };
-                ContextFactory.getGlobal().call(action);
+                final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
+                cf.call(action);
             }
             catch (final IOException e) {
                 getLog().error("Behavior #default#download: Cannot download " + url_, e);
             }
         }
     }
+
     //----------------------- END #default#download BEHAVIOR -----------------------
 
     //----------------------- START #default#homePage BEHAVIOR -----------------------

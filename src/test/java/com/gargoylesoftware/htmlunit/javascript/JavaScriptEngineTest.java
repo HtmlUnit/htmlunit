@@ -1120,12 +1120,12 @@ public class JavaScriptEngineTest extends WebTestCase {
      */
     @Test
     public void timeout() throws Exception {
+        final WebClient client = new WebClient();
         final long timeout = 2000;
-        final long oldTimeout = WebClient.getJavaScriptTimeout();
-        WebClient.setJavaScriptTimeout(timeout);
+        final long oldTimeout = client.getJavaScriptTimeout();
+        client.setJavaScriptTimeout(timeout);
 
         try {
-            final WebClient client = new WebClient();
             client.setThrowExceptionOnScriptError(false);
 
             final String content = "<html><body><script>while(1) {}</script></body></html>";
@@ -1156,7 +1156,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             assertNull(exceptions[0]);
         }
         finally {
-            WebClient.setJavaScriptTimeout(oldTimeout);
+            client.setJavaScriptTimeout(oldTimeout);
         }
     }
 
@@ -1352,23 +1352,29 @@ public class JavaScriptEngineTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        final Context cx = ContextFactory.getGlobal().enterContext();
-        final Scriptable scope1 = cx.initStandardObjects();
-        final Scriptable scope2 = cx.initStandardObjects();
-        final String str2 = "function f() { String.prototype.foo = 'from 2'; \n"
-            + "var s1 = new String('s1');\n"
-            + "if (s1.foo != 'from 2') throw 's1 got: ' + s1.foo;\n" // works
-            + "var s2 = 's2';\n"
-            + "if (s2.foo != 'from 2') throw 's2 got: ' + s2.foo;\n" // fails
-            + "}";
-        cx.evaluateString(scope2, str2, "source2", 1, null);
 
-        scope1.put("scope2", scope1, scope2);
+        final WebClient client = new WebClient();
+        final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
+        final Context cx = cf.enterContext();
 
-        final String str1 = "String.prototype.foo = 'from 1'; scope2.f()";
-        cx.evaluateString(scope1, str1, "source1", 1, null);
-
-        Context.exit();
+        try {
+            final Scriptable scope1 = cx.initStandardObjects();
+            final Scriptable scope2 = cx.initStandardObjects();
+            final String str2 =
+                  "function f() { String.prototype.foo = 'from 2'; \n"
+                + "var s1 = new String('s1');\n"
+                + "if (s1.foo != 'from 2') throw 's1 got: ' + s1.foo;\n" // works
+                + "var s2 = 's2';\n"
+                + "if (s2.foo != 'from 2') throw 's2 got: ' + s2.foo;\n" // fails
+                + "}";
+            cx.evaluateString(scope2, str2, "source2", 1, null);
+            scope1.put("scope2", scope1, scope2);
+            final String str1 = "String.prototype.foo = 'from 1'; scope2.f()";
+            cx.evaluateString(scope1, str1, "source1", 1, null);
+        }
+        finally {
+            Context.exit();
+        }
     }
 
     /**
@@ -1500,4 +1506,22 @@ public class JavaScriptEngineTest extends WebTestCase {
         final HtmlPage page = client.getPage(new WebRequestSettings(URL_GARGOYLE, HttpMethod.POST));
         return page;
     }
+
+    /**
+     * Verifies that we're not using a global context factory, so that we can cleanly run multiple
+     * WebClient instances concurrently within a single JVM. See bug 2089599.
+     */
+    @Test
+    public void noGlobalContextFactoryUsed() {
+        final WebClient client1 = new WebClient();
+        final WebClient client2 = new WebClient();
+
+        final ContextFactory cf1 = client1.getJavaScriptEngine().getContextFactory();
+        final ContextFactory cf2 = client2.getJavaScriptEngine().getContextFactory();
+
+        assertFalse(cf1 == cf2);
+        assertFalse(cf1 == ContextFactory.getGlobal());
+        assertFalse(cf2 == ContextFactory.getGlobal());
+    }
+
 }

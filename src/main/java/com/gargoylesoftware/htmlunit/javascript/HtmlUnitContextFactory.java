@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import java.io.Serializable;
+
 import org.apache.commons.logging.Log;
 import org.mozilla.javascript.Callable;
 import org.mozilla.javascript.Context;
@@ -34,24 +36,28 @@ import com.gargoylesoftware.htmlunit.javascript.regexp.HtmlUnitRegExpProxy;
  * @author Andre Soereng
  * @author Ahmed Ashour
  */
-public class HtmlUnitContextFactory extends ContextFactory {
+public class HtmlUnitContextFactory extends ContextFactory implements Serializable {
+
+    private static final long serialVersionUID = -1282169475857079041L;
 
     private static final int INSTRUCTION_COUNT_THRESHOLD = 10000;
 
+    private final BrowserVersion browserVersion_;
     private final Log log_;
-    private final ThreadLocal<BrowserVersion> browserVersion_;
     private long timeout_;
     private Debugger debugger_;
 
     /**
      * Creates a new instance of HtmlUnitContextFactory.
      *
+     * @param browserVersion the browser version being used
      * @param log the log that the error reporter should use
      */
-    public HtmlUnitContextFactory(final Log log) {
+    public HtmlUnitContextFactory(final BrowserVersion browserVersion, final Log log) {
+        WebAssert.notNull("browserVersion", browserVersion);
         WebAssert.notNull("log", log);
+        browserVersion_ = browserVersion;
         log_ = log;
-        browserVersion_ = new ThreadLocal<BrowserVersion>();
     }
 
     /**
@@ -96,19 +102,14 @@ public class HtmlUnitContextFactory extends ContextFactory {
     }
 
     /**
-     * Puts the specified {@link BrowserVersion} as a thread local variable.
-     * @param browserVersion the BrowserVersion that is currently used
-     */
-    public void putThreadLocal(final BrowserVersion browserVersion) {
-        browserVersion_.set(browserVersion);
-    }
-
-    /**
      * Custom context to store execution time and handle timeouts.
      */
     @SuppressWarnings("deprecation")
     private class TimeoutContext extends Context {
         private long startTime_;
+        protected TimeoutContext(final ContextFactory factory) {
+            super(factory);
+        }
         public void startClock() {
             startTime_ = System.currentTimeMillis();
         }
@@ -129,7 +130,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
      */
     @Override
     protected Context makeContext() {
-        final TimeoutContext cx = new TimeoutContext();
+        final TimeoutContext cx = new TimeoutContext(this);
 
         // Use pure interpreter mode to get observeInstructionCount() callbacks.
         cx.setOptimizationLevel(-1);
@@ -186,25 +187,11 @@ public class HtmlUnitContextFactory extends ContextFactory {
             return true;
         }
         else if (Context.FEATURE_PARENT_PROTO_PROPERTIES == featureIndex) {
-            return !browserVersion_.get().isIE();
+            return !browserVersion_.isIE();
         }
         else {
             return super.hasFeature(cx, featureIndex);
         }
-    }
-
-    /**
-     * <p>Returns the global {@link ContextFactory}, assuming that it's an {@link HtmlUnitContextFactory}.</p>
-     *
-     * <p>This method, {@link #getGlobal()}, and all uses of both methods may disappear if we decide to move
-     * to a per-{@link com.gargoylesoftware.htmlunit.WebClient} or per-{@link JavaScriptEngine}
-     * <tt>ContextFactory</tt> model, which would make it easier to use multiple independent
-     * <tt>WebClient</tt> instances within a single JVM.</p>
-     *
-     * @return the global {@link ContextFactory}, assuming that it's an {@link HtmlUnitContextFactory}
-     */
-    public static HtmlUnitContextFactory getGlobal2() {
-        return (HtmlUnitContextFactory) ContextFactory.getGlobal();
     }
 
 }
