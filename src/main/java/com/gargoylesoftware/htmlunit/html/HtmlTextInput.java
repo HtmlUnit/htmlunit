@@ -71,6 +71,8 @@ public class HtmlTextInput extends HtmlInput {
      */
     @Override
     protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+        //TODO: HtmlTextInput, HtmlPasswordArea, and HtmlTextArea should have synchronized logic (helper class?)
+        //TODO: Also, what about adding set/getCursor(int index)
         if (preventDefault_) {
             return;
         }
@@ -81,8 +83,16 @@ public class HtmlTextInput extends HtmlInput {
             }
         }
         else if ((c == ' ' || !Character.isWhitespace(c))) {
-            value = value.substring(0, getSelectionStart()) + value.substring(getSelectionEnd());
-            setAttributeValue("value", value + c);
+            if (getSelectionStart() != getSelectionEnd()) {
+                value = value.substring(0, getSelectionStart()) + c + value.substring(getSelectionEnd());
+                final int newSelectionPoint = getSelectionStart() + 1;
+                setAttributeValue("value", value);
+                setSelectionStart(newSelectionPoint);
+                setSelectionEnd(newSelectionPoint);
+            }
+            else {
+                setAttributeValue("value", value + c);
+            }
         }
     }
 

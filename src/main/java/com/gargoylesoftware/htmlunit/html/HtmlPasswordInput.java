@@ -71,6 +71,8 @@ public class HtmlPasswordInput extends HtmlInput {
      */
     @Override
     protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+        //TODO: HtmlTextInput, HtmlPasswordArea, and HtmlTextArea should have synchronized logic (helper class?)
+        //TODO: Also, what about adding set/getCursor(int index)
         final String value = getValueAttribute();
         if (c == '\b') {
             if (value.length() > 0) {

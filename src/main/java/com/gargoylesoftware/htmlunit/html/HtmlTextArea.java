@@ -446,17 +446,18 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      */
     @Override
     protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+        //TODO: HtmlTextInput, HtmlPasswordArea, and HtmlTextArea should have synchronized logic (helper class?)
+        //TODO: Also, what about adding set/getCursor(int index)
         if (preventDefault_) {
             return;
         }
-        String text = getText();
+        final String text = getText();
         if (c == '\b') {
             if (text.length() > 0) {
                 setText(text.substring(0, text.length() - 1));
             }
         }
         else if ((c == ' ' || c == '\n' || c == '\r' || !Character.isWhitespace(c))) {
-            text = text.substring(0, getSelectionStart()) + text.substring(getSelectionEnd());
             setText(text + c);
         }
     }

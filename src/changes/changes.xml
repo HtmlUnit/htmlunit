@@ -12,7 +12,7 @@
                 HtmlPage.asXml(): expand empty style nodes to make generated xml readable as HTML on Firefox 3.
             </action>
             <action type="fix" dev="asashour" id="2187741">
-                HtmlTextInput and HtmlTextArea: type() should remove selected text().
+                HtmlTextInput: type() should remove selected text().
             </action>
             <action type="add" dev="asashour" id="2187687">
                 JavaScript: add support for document.uniqueID (IE only).
