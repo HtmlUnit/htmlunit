@@ -49,11 +49,10 @@ public class HTMLDocumentTest extends WebTestCase {
             + "    </script>\n"
             + "</head>\n"
             + "<body onload='test()'>"
-            + ""
-            + "</body>\n"
             + "<div id='myDiv'>\n"
             + "  <div></div>\n"
-            + "</div>"
+            + "</div>\n"
+            + "</body>\n"
             + "</html>";
 
         loadPageWithAlerts(html);
@@ -145,12 +144,30 @@ public class HTMLDocumentTest extends WebTestCase {
             + "    }\n"
             + "    </script>\n"
             + "</head>\n"
-            + "<body onload='test()'>"
-            + ""
+            + "<body onload='test()'>\n"
             + "</body>\n"
-            + "<div id='myDiv'>\n"
-            + "  <div></div>\n"
-            + "</div>"
+            + "</html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "true", FF = "false")
+    public void uniquID() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "    <title>Test</title>\n"
+            + "    <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.uniqueID != undefined);\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
             + "</html>";
 
         loadPageWithAlerts(html);

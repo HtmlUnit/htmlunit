@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="add" dev="asashour" id="2089599">
+                JavaScript: add support for document.uniqueID (IE only).
+            </action>
             <action type="update" dev="sdanig" id="2089599">
                 Made static WebClient methods getJavaScriptTimeout() and setJavaScriptTimeout() non-static, so
                 that they can be configured on a per-WebClient basis.

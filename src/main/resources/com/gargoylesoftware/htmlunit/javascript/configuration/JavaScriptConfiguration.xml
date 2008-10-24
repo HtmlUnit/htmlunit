@@ -1028,6 +1028,10 @@
             url="http://msdn.microsoft.com/en-us/library/ms535862.aspx"
             descr="MSDN documentation"/>
 
+        <property name="activeElement" readable="true" writable="false">
+            <doclink url="http://msdn.microsoft.com/en-us/library/ms533065.aspx" descr="MSDN documentation"/>
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
         <property name="all" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Firefox" min-version="1.5"/>
@@ -1091,12 +1095,11 @@
         </property>
         <property name="styleSheets" readable="true" writable="false"/>
         <property name="title" readable="true" writable="true"/>
-        <property name="URL" readable="true" writable="false"/>
-        <property name="vlinkColor" notImplemented="true" readable="true" writable="false"/>
-        <property name="activeElement" readable="true" writable="false">
-            <doclink url="http://msdn.microsoft.com/en-us/library/ms533065.aspx" descr="MSDN documentation"/>
+        <property name="uniqueID" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer"/>
         </property>
+        <property name="URL" readable="true" writable="false"/>
+        <property name="vlinkColor" notImplemented="true" readable="true" writable="false"/>
 
         <function name="clear" notImplemented="true"/>
         <function name="close"/>

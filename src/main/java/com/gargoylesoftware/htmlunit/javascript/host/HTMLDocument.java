@@ -114,6 +114,11 @@ public class HTMLDocument extends Document {
     };
     private static final List<String> EXECUTE_CMDS_IE = Arrays.asList(EXECUTE_CMDS_IE_ARR);
 
+    /**
+     * Static counter for {@link #uniqueID_}.
+     */
+    private static int UniqueID_Counter_ = 1;
+
     private HTMLCollection all_; // has to be a member to have equality (==) working
     private HTMLCollection forms_; // has to be a member to have equality (==) working
     private HTMLCollection links_; // has to be a member to have equality (==) working
@@ -127,6 +132,7 @@ public class HTMLDocument extends Document {
     private final StringBuilder writeBuffer_ = new StringBuilder();
     private boolean writeInCurrentDocument_ = true;
     private String domain_;
+    private String uniqueID_;
 
     /** Initializes the supported event type map. */
     static {
@@ -620,6 +626,18 @@ public class HTMLDocument extends Document {
      */
     public String jsxGet_URL() {
         return getHtmlPage().getWebResponse().getRequestUrl().toExternalForm();
+    }
+
+    /**
+     * Retrieves an auto-generated, unique identifier for the object.
+     * <b>Note</b> The unique ID generated is not guaranteed to be the same every time the page is loaded.
+     * @return an auto-generated, unique identifier for the object
+     */
+    public String jsxGet_uniqueID() {
+        if (uniqueID_ == null) {
+            uniqueID_ = "ms__id" + UniqueID_Counter_++;
+        }
+        return uniqueID_;
     }
 
     /**
