@@ -8,7 +8,7 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
-            <action type="add" dev="asashour" id="2089599">
+            <action type="add" dev="asashour" id="2187687">
                 JavaScript: add support for document.uniqueID (IE only).
             </action>
             <action type="update" dev="sdanig" id="2089599">
