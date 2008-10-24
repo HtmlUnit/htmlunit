@@ -75,4 +75,22 @@ public class HtmlStyleTest extends WebTestCase {
         assertTrue(HtmlStyle.class.isInstance(page.getHtmlElementById("myId")));
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Verifies that a asText() returns "checked" or "unchecked" according to the state of the checkbox.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testAsXml() throws Exception {
+        final String html
+            = "<html><head><title>foo</title>\n"
+            + "<style type='text/css'></style>\n"
+            + "</head><body>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+
+        final String xml = page.asXml();
+        assertTrue("Style node not expanded in: " + xml, xml.contains("</style>"));
+    }
 }
