@@ -74,13 +74,14 @@ public class HtmlTextInput extends HtmlInput {
         if (preventDefault_) {
             return;
         }
-        final String value = getValueAttribute();
+        String value = getValueAttribute();
         if (c == '\b') {
             if (value.length() > 0) {
                 setAttributeValue("value", value.substring(0, value.length() - 1));
             }
         }
         else if ((c == ' ' || !Character.isWhitespace(c))) {
+            value = value.substring(0, getSelectionStart()) + value.substring(getSelectionEnd());
             setAttributeValue("value", value + c);
         }
     }

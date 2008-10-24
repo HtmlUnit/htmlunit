@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="fix" dev="asashour" id="2187741">
+                HtmlTextInput and HtmlTextArea: type() should remove selected text().
+            </action>
             <action type="add" dev="asashour" id="2187687">
                 JavaScript: add support for document.uniqueID (IE only).
             </action>

@@ -209,4 +209,22 @@ public class HtmlTextInputTest extends WebTestCase {
         button.click();
         assertEquals("My new value", input.getValueAttribute());
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void typeWhenSelected() throws Exception {
+        final String html =
+              "<html><head></head>\n"
+            + "<body>\n"
+            + "<input id='myInput' value='Hello world'><br>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlTextInput input = page.getHtmlElementById("myInput");
+        input.select();
+        input.type("Bye World");
+        assertEquals("Bye World", input.getValueAttribute());
+    }
 }

@@ -449,13 +449,14 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
         if (preventDefault_) {
             return;
         }
-        final String text = getText();
+        String text = getText();
         if (c == '\b') {
             if (text.length() > 0) {
                 setText(text.substring(0, text.length() - 1));
             }
         }
         else if ((c == ' ' || c == '\n' || c == '\r' || !Character.isWhitespace(c))) {
+            text = text.substring(0, getSelectionStart()) + text.substring(getSelectionEnd());
             setText(text + c);
         }
     }
