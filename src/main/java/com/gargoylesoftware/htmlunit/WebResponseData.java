@@ -21,6 +21,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
+import java.util.zip.InflaterInputStream;
 
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.io.IOUtils;
@@ -123,6 +124,9 @@ public class WebResponseData implements Serializable {
         }
         if (encoding != null && StringUtils.contains(encoding, "gzip")) {
             stream = new GZIPInputStream(stream);
+        }
+        else if (encoding != null && StringUtils.contains(encoding, "deflate")) {
+            stream = new InflaterInputStream(stream);
         }
         return IOUtils.toByteArray(stream);
     }

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,11 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
+import org.junit.After;
 import org.junit.Test;
+import org.mortbay.jetty.Server;
+
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for {@link WebResponseData}.
@@ -34,6 +39,8 @@ import org.junit.Test;
 public class WebResponseDataTest extends WebTestCase {
 
     private static final String GZIPPED_FILE = "testfiles/test.html.gz";
+
+    private Server server_;
 
     /**
      * Tests that gzipped content is handled correctly.
@@ -63,6 +70,30 @@ public class WebResponseDataTest extends WebTestCase {
         final List<NameValuePair> headers = new ArrayList<NameValuePair>();
         final WebResponseData data = new WebResponseData(body, 304, "NOT_MODIFIED", headers);
         assertNull(data.getBody());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void deflateCompression() throws Exception {
+        server_ = HttpWebConnectionTest.startWebServer("src/test/resources/pjl-comp-filter", null);
+        final  WebRequestSettings settings = new WebRequestSettings(new URL("http://localhost:"
+            + HttpWebConnectionTest.PORT + "/index.html"));
+        settings.addAdditionalHeader("Accept-Encoding", "deflate");
+        final WebClient webClient = new WebClient();
+        final HtmlPage page = webClient.getPage(settings);
+        assertEquals("Hello Compressed World!", page.asText());
+    }
+
+    /**
+     * Performs post-test deconstruction.
+     * @throws Exception if an error occurs
+     */
+    @After
+    public void tearDown() throws Exception {
+        HttpWebConnectionTest.stopWebServer(server_);
+        server_ = null;
     }
 
 }
