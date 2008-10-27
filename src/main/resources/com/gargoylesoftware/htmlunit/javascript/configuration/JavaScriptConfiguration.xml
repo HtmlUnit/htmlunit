@@ -1115,6 +1115,12 @@
                 descr="XUL Planet"/>
             <browser name="Firefox"/>
         </function>
+        <function name="createTreeWalker">
+            <doclink
+                url="http://www.w3.org/TR/DOM-Level-2-Traversal-Range/traversal.html"
+                descr="DOM-Level-2-Traversal-Range"/>
+            <browser name="Firefox"/>
+        </function>
         <function name="elementFromPoint">
             <browser name="Microsoft Internet Explorer"/>
         </function>
@@ -1920,6 +1926,25 @@
         <function name="replaceChild"/>
     </class>
 
+    <class name="NodeFilter" classname="com.gargoylesoftware.htmlunit.javascript.host.NodeFilter" JSObject="true">
+        <constant name="FILTER_ACCEPT"/>
+        <constant name="FILTER_REJECT"/>
+        <constant name="FILTER_SKIP"/>
+        <constant name="SHOW_ALL"/>
+        <constant name="SHOW_ATTRIBUTE"/>
+        <constant name="SHOW_CDATA_SECTION"/>
+        <constant name="SHOW_COMMENT"/>
+        <constant name="SHOW_DOCUMENT"/>
+        <constant name="SHOW_DOCUMENT_FRAGMENT"/>
+        <constant name="SHOW_DOCUMENT_TYPE"/>
+        <constant name="SHOW_ELEMENT"/>
+        <constant name="SHOW_ENTITY"/>
+        <constant name="SHOW_ENTITY_REFERENCE"/>
+        <constant name="SHOW_NOTATION"/>
+        <constant name="SHOW_PROCESSING_INSTRUCTION"/>
+        <constant name="SHOW_TEXT"/>
+    </class>
+
     <class name="Plugin" extends="SimpleArray" classname="com.gargoylesoftware.htmlunit.javascript.host.Plugin"
         JSObject="true">
         <browser name="Firefox"/>
@@ -2079,6 +2104,22 @@
         <property name="top" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
+    </class>
+
+    <class name="TreeWalker" classname="com.gargoylesoftware.htmlunit.javascript.host.TreeWalker" JSObject="true">
+        <property name="currentNode" readable="true" writable="true"/>
+        <property name="expandEntityReferences" readable="true" writable="false"/>
+        <property name="filter" readable="true" writable="false"/>
+        <property name="root" readable="true" writable="false"/>
+        <property name="whatToShow" readable="true" writable="false"/>
+
+        <function name="firstChild"/>
+        <function name="lastChild"/>
+        <function name="nextNode"/>
+        <function name="nextSibling"/>
+        <function name="parentNode"/>
+        <function name="previousNode"/>
+        <function name="previousSibling"/>
     </class>
 
     <class name="UIEvent" extends="Event" classname="com.gargoylesoftware.htmlunit.javascript.host.UIEvent" JSObject="true">

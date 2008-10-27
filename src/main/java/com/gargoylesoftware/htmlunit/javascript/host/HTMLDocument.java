@@ -38,7 +38,9 @@ import org.apache.commons.lang.StringUtils;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.NativeArray;
+import org.mozilla.javascript.NativeObject;
 import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.ScriptableObject;
 import org.mozilla.javascript.UniqueTag;
 import org.w3c.dom.DOMException;
 import org.xml.sax.SAXException;
@@ -77,6 +79,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Ahmed Ashour
  * @author Rob Di Marco
  * @author Sudhan Moghe
+ * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535862.aspx">MSDN documentation</a>
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919">
  * W3C Dom Level 1</a>
@@ -1166,6 +1169,62 @@ public class HTMLDocument extends Document {
         r.setParentScope(getWindow());
         r.setPrototype(getPrototype(Range.class));
         return r;
+    }
+
+    /**
+     * Creates and returns a new TreeWalker.
+     *
+     * @see <a href="http://www.w3.org/TR/DOM-Level-2-Traversal-Range/traversal.html">DOM-Level-2-Traversal-Range</a>
+     * JavaScript param 1 The root node of the TreeWalker. Must not be
+     *          <code>null</code>.
+     * JavaScript param 2 Flag specifying which types of nodes appear in the
+     *          logical view of the TreeWalker. See {@link NodeFilter} for the
+     *          set of possible Show_ values.
+     * JavaScript param 3 The {@link NodeFilter} to be used with this TreeWalker,
+     *          or <code>null</code> to indicate no filter.
+     * JavaScript param 4 If false, the contents of
+     *          EntityReference nodes are not present in the logical view.
+     * @throws DOMException on attempt to create a TreeWalker with a root that
+     *          is <code>null</code>.
+     * @param context the JavaScript Context
+     * @param scriptable the object that the function was called on
+     * @param args the arguments passed to the function
+     * @param function the function object that was invoked
+     * @return a new TreeWalker
+     */
+    public static Object jsxFunction_createTreeWalker(final Context context, final Scriptable scriptable,
+            final Object[] args, final Function function) throws DOMException {
+
+        final Node root = (Node) args[0];
+        final int whatToShow = ((Number) args[1]).intValue();
+        final NativeObject filter = (NativeObject) args[2];
+        final boolean expandEntityReferences = (Boolean) args[3];
+
+        NodeFilter filterWrapper = null;
+        if (filter != null) {
+            filterWrapper = new NodeFilter() {
+                private static final long serialVersionUID = -7572357836681155579L;
+
+                public short acceptNode(final Node n) {
+                    return (Short) ScriptableObject.callMethod(filter, "acceptNode", new Object[] {n});
+                }
+            };
+        }
+
+        final TreeWalker t = new TreeWalker((Node) root, whatToShow, filterWrapper, expandEntityReferences);
+
+        t.setParentScope(getWindow(scriptable));
+        t.setPrototype(staticGetPrototype(getWindow(scriptable), TreeWalker.class));
+        return t;
+    }
+
+    private static Scriptable staticGetPrototype(final Window window,
+            final Class< ? extends SimpleScriptable> javaScriptClass) {
+        final Scriptable prototype = window.getPrototype(javaScriptClass);
+        if (prototype == null && javaScriptClass != SimpleScriptable.class) {
+            return staticGetPrototype(window, (Class< ? extends SimpleScriptable>) javaScriptClass.getSuperclass());
+        }
+        return prototype;
     }
 
     /**

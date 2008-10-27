@@ -410,6 +410,9 @@
         <contributor>
             <name>Marco Cova</name>
         </contributor>
+        <contributor>
+            <name>Mike Dirolf</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

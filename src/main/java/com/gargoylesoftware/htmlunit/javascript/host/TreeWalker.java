@@ -1,0 +1,513 @@
+/*
+ * Copyright (c) 2002-2008 Gargoyle Software Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.gargoylesoftware.htmlunit.javascript.host;
+
+import org.w3c.dom.DOMException;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+
+/**
+ * The JavaScript object that represents a TreeWalker.
+ *
+ * @see <a href="http://www.w3.org/TR/DOM-Level-2-Traversal-Range/traversal.html">
+ * DOM-Level-2-Traversal-Range</a>
+ * @version $Revision$
+ * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
+ */
+public class TreeWalker extends SimpleScriptable {
+    private Node root_, currentNode_;
+    private int whatToShow_;
+    private NodeFilter filter_;
+    private Boolean expandEntityReferences_;
+
+    /**
+     * Create an instance.
+     */
+    public TreeWalker() {
+    }
+
+    /**
+     * Create an instance.
+     *
+     * @param root The root node of the TreeWalker. Must not be
+     *          <code>null</code>.
+     * @param whatToShow Flag specifying which types of nodes appear in the
+     *          logical view of the TreeWalker. See {@link NodeFilter} for the
+     *          set of possible Show_ values.
+     * @param filter The {@link NodeFilter} to be used with this TreeWalker,
+     *          or <code>null</code> to indicate no filter.
+     * @param expandEntityReferences If false, the contents of
+     *          EntityReference nodes are not present in the logical view.
+     * @throws DOMException on attempt to create a TreeWalker with a root that
+     *          is <code>null</code>.
+     */
+    protected TreeWalker(final Node root,
+                      final int whatToShow,
+                      final NodeFilter filter,
+                      final Boolean expandEntityReferences) throws DOMException {
+        if (root == null) {
+            throw new DOMException(DOMException.NOT_SUPPORTED_ERR,
+                                   "root must not be null");
+        }
+        root_ = root;
+        whatToShow_ = whatToShow;
+        filter_ = filter;
+        expandEntityReferences_ = expandEntityReferences;
+        currentNode_ = root_;
+    }
+
+    /**
+     * Gets the root node of the TreeWalker, as specified when it was created.
+     *
+     * @return the root node of the TreeWalker
+     */
+    public Node jsxGet_root() {
+        return root_;
+    }
+
+    /**
+     * Gets the whatToShow attribute of the TreeWalker. This attribute
+     * determines which node types are presented via the TreeWalker. The set
+     * of available constants is defined in {@link NodeFilter}.
+     *
+     * @return the value of the whatToShow attribute of the TreeWalker
+     */
+    public int jsxGet_whatToShow() {
+        return whatToShow_;
+    }
+
+    /**
+     * Gets the filter used to screen nodes.
+     *
+     * @return the filter used to screen nodes
+     */
+    public NodeFilter jsxGet_filter() {
+        return filter_;
+    }
+
+    /**
+     * Gets the flag specifying wherether or not to reject EntityReference nodes.
+     *
+     * @return the value of the expandEntityReferences flag
+     */
+    public boolean jsxGet_expandEntityReferences() {
+        return expandEntityReferences_;
+    }
+
+    /**
+     * Gets the node at which the TreeWalker is currently positioned.
+     *
+     * @return the currentNode
+     */
+    public Node jsxGet_currentNode() {
+        return currentNode_;
+    }
+
+    /**
+     * Sets the node at which the TreeWalker is currently positioned.
+     *
+     * @param currentNode The node to be used as the current position of the
+     *          TreeWalker.
+     * @throws DOMException on attempt to set currentNode to
+     *          <code>null</code>.
+     */
+    public void jsxSet_currentNode(final Node currentNode) throws DOMException {
+        if (currentNode == null) {
+            throw new DOMException(DOMException.NOT_SUPPORTED_ERR,
+                                   "currentNode cannot be set to null");
+        }
+        currentNode_ = currentNode;
+    }
+
+    /**
+     * Given a node type, as defined in {@link Node}, return the appropriate
+     * constant for whatToShow.
+     *
+     * @param type The node type to lookup.
+     * @return the whatToShow constant for this node type.
+     */
+    private static int getFlagForNodeType(final short type) {
+        final NodeFilter nodeFilter = new NodeFilter();
+        switch (type) {
+            case Node.ELEMENT_NODE:
+                return nodeFilter.SHOW_ELEMENT;
+            case Node.ATTRIBUTE_NODE:
+                return nodeFilter.SHOW_ATTRIBUTE;
+            case Node.TEXT_NODE:
+                return nodeFilter.SHOW_TEXT;
+            case Node.CDATA_SECTION_NODE:
+                return nodeFilter.SHOW_CDATA_SECTION;
+            case Node.ENTITY_REFERENCE_NODE:
+                return nodeFilter.SHOW_ENTITY_REFERENCE;
+            case Node.ENTITY_NODE:
+                return nodeFilter.SHOW_ENTITY;
+            case Node.PROCESSING_INSTRUCTION_NODE:
+                return nodeFilter.SHOW_PROCESSING_INSTRUCTION;
+            case Node.COMMENT_NODE:
+                return nodeFilter.SHOW_COMMENT;
+            case Node.DOCUMENT_NODE:
+                return nodeFilter.SHOW_DOCUMENT;
+            case Node.DOCUMENT_TYPE_NODE:
+                return nodeFilter.SHOW_DOCUMENT_TYPE;
+            case Node.DOCUMENT_FRAGMENT_NODE:
+                return nodeFilter.SHOW_DOCUMENT_FRAGMENT;
+            case Node.NOTATION_NODE:
+                return nodeFilter.SHOW_NOTATION;
+            default:
+                return 0;
+        }
+    }
+
+    /**
+     * Test whether a specified node is visible in the logical view of a
+     * TreeWalker, based solely on the whatToShow constant.
+     *
+     * @param n The node to check to see if it should be shown or not
+     * @return a constant to determine whether the node is accepted, rejected,
+     *          or skipped.
+     */
+    private short acceptNode(final Node n) {
+        final NodeFilter nodeFilter = new NodeFilter();
+
+        final short type = n.jsxGet_nodeType();
+        final int flag = getFlagForNodeType(type);
+
+        if ((whatToShow_ & flag) != 0) {
+            return nodeFilter.FILTER_ACCEPT;
+        }
+        // Skip, don't reject.
+        return nodeFilter.FILTER_SKIP;
+    }
+
+    /* Returns whether the node is visible by the TreeWalker. */
+    private boolean isNodeVisible(final Node n) {
+        final NodeFilter nodeFilter = new NodeFilter();
+
+        if (acceptNode(n) == nodeFilter.FILTER_ACCEPT) {
+            if (filter_ == null || filter_.acceptNode(n) == nodeFilter.FILTER_ACCEPT) {
+                if (!expandEntityReferences_) {
+                    if (n.jsxGet_parentNode() != null
+                            && ((Node) n.jsxGet_parentNode()).jsxGet_nodeType() == Node.ENTITY_REFERENCE_NODE) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /* Returns whether the node is rejected by the TreeWalker. */
+    private boolean isNodeRejected(final Node n) {
+        final NodeFilter nodeFilter = new NodeFilter();
+
+        if (acceptNode(n) == nodeFilter.FILTER_REJECT) {
+            return true;
+        }
+        if (filter_ != null && filter_.acceptNode(n) == nodeFilter.FILTER_REJECT) {
+            return true;
+        }
+        if (!expandEntityReferences_) {
+            if (n.jsxGet_parentNode() != null
+                    && ((Node) n.jsxGet_parentNode()).jsxGet_nodeType() == Node.ENTITY_REFERENCE_NODE) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /* Returns whether the node is skipped by the TreeWalker. */
+    private boolean isNodeSkipped(final Node n) {
+        return (!isNodeVisible(n) && !isNodeRejected(n));
+    }
+
+    /**
+     * Moves to and returns the closest visible ancestor node of the current
+     * node. If the search for parentNode attempts to step upward from the
+     * TreeWalker's root node, or if it fails to find a visible ancestor node,
+     * this method retains the current position and returns null.
+     *
+     * @return The new parent node, or <code>null</code> if the current node
+     *          has no parent in the TreeWalker's logical view.
+     */
+    public Node jsxFunction_parentNode() {
+        if (currentNode_ == root_) {
+            return null;
+        }
+
+        Node newNode = currentNode_;
+
+        do {
+            newNode = (Node) newNode.jsxGet_parentNode();
+        } while (newNode != null && !isNodeVisible(newNode) && newNode != root_);
+
+        if (newNode == null || !isNodeVisible(newNode)) {
+            return null;
+        }
+        else {
+            currentNode_ = newNode;
+            return newNode;
+        }
+    }
+
+    /**
+     * Recursively find the logical node occupying the same position as this
+     * _actual_ node. It could be the same node, a different node, or null
+     * depending on filtering.
+     *
+     * @param n The actual node we are trying to find the "equivalent" of
+     * @param lookLeft If true, traverse the tree in the left direction. If
+     *          false, traverse the tree to the right.
+     * @return the logical node in the same position as n
+     */
+    private Node getEquivalentLogical(final Node n, final boolean lookLeft) {
+        // Base cases
+        if (n == null) {
+            return null;
+        }
+        if (isNodeVisible(n)) {
+            return n;
+        }
+
+        // If a node is skipped, try getting one of its decendants
+        if (isNodeSkipped(n)) {
+            final Node child;
+            if (lookLeft) {
+                child = getEquivalentLogical((Node) n.jsxGet_lastChild(), lookLeft);
+            }
+            else {
+                child = getEquivalentLogical((Node) n.jsxGet_firstChild(), lookLeft);
+            }
+
+            if (child != null) {
+                return child;
+            }
+        }
+
+        // If this node is rejected or has no decendants that will work, go
+        // to its sibling.
+        return getSibling(n, lookLeft);
+    }
+    // Helper method for getEquivalentLogical
+    private Node getSibling(final Node n, final boolean lookLeft) {
+        if (n == null) {
+            return null;
+        }
+
+        if (isNodeVisible(n)) {
+            return null;
+        }
+
+        final Node sibling;
+        if (lookLeft) {
+            sibling = (Node) n.jsxGet_previousSibling();
+        }
+        else {
+            sibling = (Node) n.jsxGet_nextSibling();
+        }
+
+        if (sibling == null) {
+            // If this node has no logical siblings at or below it's "level", it might have one above
+            if (n == root_) {
+                return null;
+            }
+            return getSibling((Node) n.jsxGet_parentNode(), lookLeft);
+
+        }
+        return getEquivalentLogical(sibling, lookLeft);
+    }
+
+    /**
+     * Moves the TreeWalker to the first visible child of the current node,
+     * and returns the new node. If the current node has no visible children,
+     * returns <code>null</code>, and retains the current node.
+     *
+     * @return The new node, or <code>null</code> if the current node has no
+     *          visible children in the TreeWalker's logical view.
+     */
+    public Node jsxFunction_firstChild() {
+        final Node newNode = getEquivalentLogical((Node) currentNode_.jsxGet_firstChild(), false);
+
+        if (newNode != null) {
+            currentNode_ = newNode;
+        }
+
+        return newNode;
+    }
+
+    /**
+     * Moves the TreeWalker to the last visible child of the current node,
+     * and returns the new node. If the current node has no visible children,
+     * returns <code>null</code>, and retains the current node.
+     *
+     * @return The new node, or <code>null</code> if the current node has no
+     *          visible children in the TreeWalker's logical view.
+     */
+    public Node jsxFunction_lastChild() {
+        final Node newNode = getEquivalentLogical((Node) currentNode_.jsxGet_lastChild(), true);
+
+        if (newNode != null) {
+            currentNode_ = newNode;
+        }
+
+        return newNode;
+    }
+
+    /**
+      * Moves the TreeWalker to the previous sibling of the current node, and
+      * returns the new node. If the current node has no visible previous
+      * sibling, returns <code>null</code>, and retains the current node.
+      *
+      * @return The new node, or <code>null</code> if the current node has no
+      *          previous sibling in the TreeWalker's logical view.
+      */
+    public Node jsxFunction_previousSibling() {
+        if (currentNode_ == root_) {
+            return null;
+        }
+
+        final Node newNode = getEquivalentLogical((Node) currentNode_.jsxGet_previousSibling(), true);
+
+        if (newNode != null) {
+            currentNode_ = newNode;
+        }
+
+        return newNode;
+    }
+
+     /**
+      * Moves the TreeWalker to the next sibling of the current node, and
+      * returns the new node. If the current node has no visible next sibling,
+      * returns <code>null</code>, and retains the current node.
+      *
+      * @return The new node, or <code>null</code> if the current node has no
+      *          next sibling in the TreeWalker's logical view.
+      */
+    public Node jsxFunction_nextSibling() {
+        if (currentNode_ == root_) {
+            return null;
+        }
+
+        final Node newNode = getEquivalentLogical((Node) currentNode_.jsxGet_nextSibling(), false);
+
+        if (newNode != null) {
+            currentNode_ = newNode;
+        }
+
+        return newNode;
+    }
+
+    /**
+     * Moves the TreeWalker to the previous visible node in document order
+     * relative to the current node, and returns the new node. If the current
+     * node has no previous node, or if the search for previousNode attempts
+     * to step upward from the TreeWalker's root node, returns
+     * <code>null</code>, and retains the current node.
+     *
+     * @return The new node, or <code>null</code> if the current node has no
+     *          previous node in the TreeWalker's logical view.
+     */
+    public Node jsxFunction_previousNode() {
+        final Node newNode = getPreviousNode(currentNode_);
+
+        if (newNode != null) {
+            currentNode_ = newNode;
+        }
+
+        return newNode;
+    }
+
+    /**
+     * Helper method to get the previous node in document order (preorder
+     * traversal) from the given node.
+     */
+    private Node getPreviousNode(final Node n) {
+        if (n == root_) {
+            return null;
+        }
+        final Node left = getEquivalentLogical((Node) n.jsxGet_previousSibling(), true);
+        if (left == null) {
+            final Node parent = (Node) n.jsxGet_parentNode();
+            if (parent == null) {
+                return null;
+            }
+            if (isNodeVisible(parent)) {
+                return parent;
+            }
+        }
+
+        Node follow = left;
+        while (follow.jsxFunction_hasChildNodes()) {
+            final Node toFollow = getEquivalentLogical((Node) follow.jsxGet_lastChild(), true);
+            if (toFollow == null) {
+                break;
+            }
+            follow = toFollow;
+        }
+        return follow;
+    }
+
+    /**
+     * Moves the TreeWalker to the next visible node in document order
+     * relative to the current node, and returns the new node. If the current
+     * node has no next node, or if the search for nextNode attempts to step
+     * upward from the TreeWalker's root node, returns <code>null</code>, and
+     * retains the current node.
+     *
+     * @return The new node, or <code>null</code> if the current node has no
+     *          next node in the TreeWalker's logical view.
+     */
+    public Node jsxFunction_nextNode() {
+        final Node leftChild = getEquivalentLogical((Node) currentNode_.jsxGet_firstChild(), false);
+        if (leftChild != null) {
+            currentNode_ = leftChild;
+            return leftChild;
+        }
+        final Node rightSibling = getEquivalentLogical((Node) currentNode_.jsxGet_nextSibling(), false);
+        if (rightSibling != null) {
+            currentNode_ = rightSibling;
+            return rightSibling;
+        }
+
+        final Node uncle = getFirstUncleNode(currentNode_);
+        if (uncle != null) {
+            currentNode_ = uncle;
+            return uncle;
+        }
+
+        return null;
+    }
+
+    /**
+     * Helper method to get the first uncle node in document order (preorder
+     * traversal) from the given node.
+     */
+    private Node getFirstUncleNode(final Node n) {
+        if (n == root_ || n == null) {
+            return null;
+        }
+
+        final Node parent = (Node) n.jsxGet_parentNode();
+        if (parent == null) {
+            return null;
+        }
+
+        final Node uncle = getEquivalentLogical((Node) parent.jsxGet_nextSibling(), false);
+        if (uncle != null) {
+            return uncle;
+        }
+
+        return getFirstUncleNode(parent);
+    }
+}

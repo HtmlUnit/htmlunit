@@ -59,6 +59,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
  * @author Chris Erskine
  * @author Ahmed Ashour
  * @author Sudhan Moghe
+ * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
  */
 @RunWith(BrowserRunner.class)
 public class SimpleScriptableTest extends WebTestCase {
@@ -142,6 +143,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("Namespace");
         names.remove("Navigator");
         names.remove("Node");
+        names.remove("NodeFilter");
         names.remove("Plugin");
         names.remove("PluginArray");
         names.remove("Popup");
@@ -155,6 +157,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("StyleSheetList");
         names.remove("TextRange");
         names.remove("TextRectangle");
+        names.remove("TreeWalker");
         names.remove("UIEvent");
         names.remove("Window");
         names.remove("XMLDocument");
