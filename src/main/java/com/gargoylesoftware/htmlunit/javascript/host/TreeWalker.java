@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import org.w3c.dom.DOMException;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -26,6 +27,8 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
  */
 public class TreeWalker extends SimpleScriptable {
+
+    private static final long serialVersionUID = 9110192216193735497L;
     private Node root_, currentNode_;
     private int whatToShow_;
     private NodeFilter filter_;
@@ -138,32 +141,31 @@ public class TreeWalker extends SimpleScriptable {
      * @return the whatToShow constant for this node type.
      */
     private static int getFlagForNodeType(final short type) {
-        final NodeFilter nodeFilter = new NodeFilter();
         switch (type) {
             case Node.ELEMENT_NODE:
-                return nodeFilter.SHOW_ELEMENT;
+                return NodeFilter.SHOW_ELEMENT;
             case Node.ATTRIBUTE_NODE:
-                return nodeFilter.SHOW_ATTRIBUTE;
+                return NodeFilter.SHOW_ATTRIBUTE;
             case Node.TEXT_NODE:
-                return nodeFilter.SHOW_TEXT;
+                return NodeFilter.SHOW_TEXT;
             case Node.CDATA_SECTION_NODE:
-                return nodeFilter.SHOW_CDATA_SECTION;
+                return NodeFilter.SHOW_CDATA_SECTION;
             case Node.ENTITY_REFERENCE_NODE:
-                return nodeFilter.SHOW_ENTITY_REFERENCE;
+                return NodeFilter.SHOW_ENTITY_REFERENCE;
             case Node.ENTITY_NODE:
-                return nodeFilter.SHOW_ENTITY;
+                return NodeFilter.SHOW_ENTITY;
             case Node.PROCESSING_INSTRUCTION_NODE:
-                return nodeFilter.SHOW_PROCESSING_INSTRUCTION;
+                return NodeFilter.SHOW_PROCESSING_INSTRUCTION;
             case Node.COMMENT_NODE:
-                return nodeFilter.SHOW_COMMENT;
+                return NodeFilter.SHOW_COMMENT;
             case Node.DOCUMENT_NODE:
-                return nodeFilter.SHOW_DOCUMENT;
+                return NodeFilter.SHOW_DOCUMENT;
             case Node.DOCUMENT_TYPE_NODE:
-                return nodeFilter.SHOW_DOCUMENT_TYPE;
+                return NodeFilter.SHOW_DOCUMENT_TYPE;
             case Node.DOCUMENT_FRAGMENT_NODE:
-                return nodeFilter.SHOW_DOCUMENT_FRAGMENT;
+                return NodeFilter.SHOW_DOCUMENT_FRAGMENT;
             case Node.NOTATION_NODE:
-                return nodeFilter.SHOW_NOTATION;
+                return NodeFilter.SHOW_NOTATION;
             default:
                 return 0;
         }
@@ -178,24 +180,20 @@ public class TreeWalker extends SimpleScriptable {
      *          or skipped.
      */
     private short acceptNode(final Node n) {
-        final NodeFilter nodeFilter = new NodeFilter();
-
         final short type = n.jsxGet_nodeType();
         final int flag = getFlagForNodeType(type);
 
         if ((whatToShow_ & flag) != 0) {
-            return nodeFilter.FILTER_ACCEPT;
+            return NodeFilter.FILTER_ACCEPT;
         }
         // Skip, don't reject.
-        return nodeFilter.FILTER_SKIP;
+        return NodeFilter.FILTER_SKIP;
     }
 
     /* Returns whether the node is visible by the TreeWalker. */
     private boolean isNodeVisible(final Node n) {
-        final NodeFilter nodeFilter = new NodeFilter();
-
-        if (acceptNode(n) == nodeFilter.FILTER_ACCEPT) {
-            if (filter_ == null || filter_.acceptNode(n) == nodeFilter.FILTER_ACCEPT) {
+        if (acceptNode(n) == NodeFilter.FILTER_ACCEPT) {
+            if (filter_ == null || filter_.acceptNode(n) == NodeFilter.FILTER_ACCEPT) {
                 if (!expandEntityReferences_) {
                     if (n.jsxGet_parentNode() != null
                             && ((Node) n.jsxGet_parentNode()).jsxGet_nodeType() == Node.ENTITY_REFERENCE_NODE) {
@@ -210,12 +208,10 @@ public class TreeWalker extends SimpleScriptable {
 
     /* Returns whether the node is rejected by the TreeWalker. */
     private boolean isNodeRejected(final Node n) {
-        final NodeFilter nodeFilter = new NodeFilter();
-
-        if (acceptNode(n) == nodeFilter.FILTER_REJECT) {
+        if (acceptNode(n) == NodeFilter.FILTER_REJECT) {
             return true;
         }
-        if (filter_ != null && filter_.acceptNode(n) == nodeFilter.FILTER_REJECT) {
+        if (filter_ != null && filter_.acceptNode(n) == NodeFilter.FILTER_REJECT) {
             return true;
         }
         if (!expandEntityReferences_) {
@@ -255,10 +251,8 @@ public class TreeWalker extends SimpleScriptable {
         if (newNode == null || !isNodeVisible(newNode)) {
             return null;
         }
-        else {
-            currentNode_ = newNode;
-            return newNode;
-        }
+        currentNode_ = newNode;
+        return newNode;
     }
 
     /**

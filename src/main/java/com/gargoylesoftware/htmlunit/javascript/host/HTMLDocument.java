@@ -1205,19 +1205,21 @@ public class HTMLDocument extends Document {
             filterWrapper = new NodeFilter() {
                 private static final long serialVersionUID = -7572357836681155579L;
 
+                @Override
                 public short acceptNode(final Node n) {
                     return (Short) ScriptableObject.callMethod(filter, "acceptNode", new Object[] {n});
                 }
             };
         }
 
-        final TreeWalker t = new TreeWalker((Node) root, whatToShow, filterWrapper, expandEntityReferences);
+        final TreeWalker t = new TreeWalker(root, whatToShow, filterWrapper, expandEntityReferences);
 
         t.setParentScope(getWindow(scriptable));
         t.setPrototype(staticGetPrototype(getWindow(scriptable), TreeWalker.class));
         return t;
     }
 
+    @SuppressWarnings("unchecked")
     private static Scriptable staticGetPrototype(final Window window,
             final Class< ? extends SimpleScriptable> javaScriptClass) {
         final Scriptable prototype = window.getPrototype(javaScriptClass);

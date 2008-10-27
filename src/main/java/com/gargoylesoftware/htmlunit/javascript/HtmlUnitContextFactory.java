@@ -104,7 +104,6 @@ public class HtmlUnitContextFactory extends ContextFactory implements Serializab
     /**
      * Custom context to store execution time and handle timeouts.
      */
-    @SuppressWarnings("deprecation")
     private class TimeoutContext extends Context {
         private long startTime_;
         protected TimeoutContext(final ContextFactory factory) {
