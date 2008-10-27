@@ -515,14 +515,13 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public Object jsxFunction_getElementsByTagName(final String tagName) {
         final DomNode node = getDomNodeOrDie();
         final HTMLCollection collection = new HTMLCollection(this);
-        final String xpath;
         if ("*".equals(tagName)) {
-            xpath = ".//*";
+            collection.initFromChildren(node);
         }
         else {
-            xpath = ".//node()[name() = '" + tagName.toLowerCase() + "']";
+            String xpath = ".//node()[name() = '" + tagName.toLowerCase() + "']";
+            collection.init(node, xpath);
         }
-        collection.init(node, xpath);
         return collection;
     }
 
