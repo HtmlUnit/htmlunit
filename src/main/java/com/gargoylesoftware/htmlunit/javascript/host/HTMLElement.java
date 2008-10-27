@@ -519,7 +519,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             collection.initFromChildren(node);
         }
         else {
-            String xpath = ".//node()[name() = '" + tagName.toLowerCase() + "']";
+            final String xpath = ".//node()[name() = '" + tagName.toLowerCase() + "']";
             collection.init(node, xpath);
         }
         return collection;
