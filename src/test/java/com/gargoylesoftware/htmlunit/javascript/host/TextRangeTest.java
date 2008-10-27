@@ -22,12 +22,14 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link TextRange}.
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class TextRangeTest extends WebTestCase {
@@ -36,7 +38,7 @@ public class TextRangeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(value = { Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     @Alerts(IE = { "", "bla bla", "bla blabli bli" })
     public void text() throws Exception {
         final String html = "<html>\n"
@@ -57,6 +59,30 @@ public class TextRangeTest extends WebTestCase {
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "<textarea id='foo'></textarea>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts(IE = "BODY")
+    @NotYetImplemented
+    public void parentElement() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <title>test</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.body.createTextRange().parentElement().tagName);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
 

@@ -1244,6 +1244,9 @@
         <function name="contains" notImplemented="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </function>
+        <function name="createTextRange">
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
         <function name="dispatchEvent">
             <doclink
                 url="http://developer.mozilla.org/en/docs/DOM:element.dispatchEvent"
@@ -2088,6 +2091,7 @@
         <browser name="Microsoft Internet Explorer"/>
         <property name="text" readable="true" writable="true"/>
         <function name="duplicate"/>
+        <function name="parentElement"/>
     </class>
 
     <class name="TextRectangle" classname="com.gargoylesoftware.htmlunit.javascript.host.TextRectangle"

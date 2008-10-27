@@ -89,4 +89,41 @@ public class TextRange extends SimpleScriptable {
         range.setPrototype(getPrototype());
         return range;
     }
+
+    /**
+     * Retrieves the parent element for the given text range.
+     * The parent element is the element that completely encloses the text in the range.
+     * If the text range spans text in more than one element, this method returns the smallest element that encloses
+     * all the elements. When you insert text into a range that spans multiple elements, the text is placed in the
+     * parent element rather than in any of the contained elements.
+     *
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536654.aspx">MSDN doc</a>
+     * @return the parent element object if successful, or null otherwise.
+     */
+    public Object jsxFunction_parentElement() {
+        final HtmlPage page = (HtmlPage) getWindow().getDomNodeOrDie();
+        final Range selection = page.getSelection();
+        org.w3c.dom.Node parent = selection.getStartContainer();
+        final org.w3c.dom.Node child = selection.getEndContainer();
+        while (parent != null) {
+            if (isChildOf(child, parent)) {
+                return parent;
+            }
+            parent = parent.getParentNode();
+        }
+        return null;
+    }
+
+    /**
+     * Returns if child is a (grand)child of the specified parent.
+     */
+    private boolean isChildOf(org.w3c.dom.Node child, final org.w3c.dom.Node parent) {
+        while (child != null) {
+            if (child == parent) {
+                return true;
+            }
+            child = child.getParentNode();
+        }
+        return false;
+    }
 }
