@@ -47,8 +47,6 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 
 /**
  * A page that will be returned for response with content type "text/xml".
- * It doesn't implement itself {@link org.w3c.dom.Document} to allow to see the source of badly formed
- * XML responses.
  *
  * @version $Revision$
  * @author Marc Guillemot
@@ -166,7 +164,7 @@ public class XmlPage extends SgmlPage implements Document {
     }
 
     /**
-     * Create a new XML element with the given tag name.
+     * Creates a new XML element with the given tag name.
      *
      * @param tagName the tag name
      * @return the new XML element
@@ -176,11 +174,11 @@ public class XmlPage extends SgmlPage implements Document {
     }
 
     /**
-     * Create a new HtmlElement with the given namespace and qualified name.
+     * Creates a new XML element with the given namespace and qualified name.
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
-     * @return the new HTML element
+     * @return the new XML element
      */
     public DomElement createXmlElementNS(final String namespaceURI, final String qualifiedName) {
         return new XmlElement(namespaceURI, qualifiedName, this, new HashMap<String, DomAttr>());
