@@ -41,6 +41,7 @@ import org.w3c.dom.Comment;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.EntityReference;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
@@ -51,7 +52,6 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
@@ -89,10 +89,14 @@ public abstract class HtmlElement extends DomElement {
 
     private final transient Log mainLog_ = LogFactory.getLog(getClass());
 
+    /** The "live" attribute map required for {@link #getAttributes()}. */
+    private NamedNodeMap attributeMap_;
+
     /** The listeners which are to be notified of attribute changes. */
     private List<HtmlAttributeChangeListener> attributeListeners_;
 
-    private HtmlForm owningForm_; // the owning form for lost form children
+    /** The owning form for lost form children. */
+    private HtmlForm owningForm_;
 
     /**
      * Creates an instance.
@@ -374,7 +378,10 @@ public abstract class HtmlElement extends DomElement {
      */
     @Override
     public NamedNodeMap getAttributes() {
-        return new NamedNodeMap(this, true);
+        if (attributeMap_ == null) {
+            attributeMap_ = new com.gargoylesoftware.htmlunit.javascript.NamedNodeMap(this, true);
+        }
+        return attributeMap_;
     }
 
     /**

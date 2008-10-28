@@ -23,11 +23,11 @@ import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.TypeInfo;
 
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -46,6 +46,9 @@ public class DomElement extends DomNamespaceNode implements Element {
 
     /** The map holding the attributes, keyed by name. */
     private Map<String, DomAttr> attributes_;
+
+    /** The "live" attribute map required for {@link #getAttributes()}. */
+    private NamedNodeMap attributeMap_;
 
     /** The map holding the namespaces, keyed by URI. */
     private Map<String, String> namespaces_ = new HashMap<String, String>();
@@ -300,7 +303,10 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     @Override
     public NamedNodeMap getAttributes() {
-        return new NamedNodeMap(this, false);
+        if (attributeMap_ == null) {
+            attributeMap_ = new com.gargoylesoftware.htmlunit.javascript.NamedNodeMap(this, false);
+        }
+        return attributeMap_;
     }
 
     /**
@@ -466,4 +472,5 @@ public class DomElement extends DomNamespaceNode implements Element {
     public final void setIdAttributeNode(final Attr idAttr, final boolean isId) {
         throw new UnsupportedOperationException("DomElement.setIdAttributeNode is not yet implemented.");
     }
+
 }
