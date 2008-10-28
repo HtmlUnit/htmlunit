@@ -378,6 +378,24 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "true", "true", "true", "false", "false" })
+    public void getElementsByTagNameEquality() throws Exception {
+        final String html =
+              "<html><body><div id='d'><script>\n"
+            + "var div = document.getElementById('d');\n"
+            + "alert(document.getElementsByTagName('*') == document.getElementsByTagName('*'));\n"
+            + "alert(document.getElementsByTagName('script') == document.getElementsByTagName('script'));\n"
+            + "alert(document.getElementsByTagName('foo') == document.getElementsByTagName('foo'));\n"
+            + "alert(document.getElementsByTagName('script') == document.getElementsByTagName('body'));\n"
+            + "alert(document.getElementsByTagName('script') == div.getElementsByTagName('script'));\n"
+            + "</script></div></body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
      * Test getting the class for the element.
      * @throws Exception if the test fails
      */
