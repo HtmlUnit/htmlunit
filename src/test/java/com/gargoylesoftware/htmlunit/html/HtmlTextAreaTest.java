@@ -201,7 +201,8 @@ public class HtmlTextAreaTest extends WebTestCase {
         final HtmlForm form = page.getHtmlElementById("form1");
         final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
         assertNotNull(textArea);
-        Assert.assertEquals("White space must be preserved!", " foo " + LS + " bar <p>html snippet</p>" + LS, textArea.asText());
+        Assert.assertEquals("White space must be preserved!",
+            " foo " + LS + " bar <p>html snippet</p>" + LS, textArea.asText());
     }
 
     /**
