@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 
 /**
- * Tests for {@link HTMLDocument}.
+ * Tests for {@link Document}.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -68,7 +68,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void formsAccessor_TwoForms() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.forms.length)\n"
@@ -87,10 +87,10 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"2", "form1", "form2"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -102,7 +102,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void formsAccessor_FormWithNoName() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    alert(document.forms.length)\n"
@@ -115,7 +115,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
         final String[] expectedAlerts = {"1"};
@@ -127,7 +127,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void formsAccessor_NoForms() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    alert(document.forms.length)\n"
@@ -140,7 +140,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
         final String[] expectedAlerts = {"0"};
@@ -155,7 +155,7 @@ public class DocumentTest extends WebTestCase {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        final String firstContent
+        final String firstHtml
             = "<html><head><SCRIPT lang='JavaScript'>\n"
             + "    function doSubmit(formName){\n"
             + "        var form = document.forms[formName];\n" // This line used to blow up
@@ -168,13 +168,13 @@ public class DocumentTest extends WebTestCase {
             + "Test Link </a><input type='submit' value='Login' "
             + "name='loginButton'></form>\n"
             + "</body></html> ";
-        final String secondContent
+        final String secondHtml
             = "<html><head><title>second</title></head><body>\n"
             + "<p>hello world</p>\n"
             + "</body></html>";
 
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(URL_FIRST, firstHtml);
+        webConnection.setResponse(URL_SECOND, secondHtml);
         client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_FIRST);
@@ -191,7 +191,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void formsLive() throws Exception {
-        final String content =
+        final String html =
             "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -213,8 +213,8 @@ public class DocumentTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {"0", "1", "1", "true"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        loadPage(content, collectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
+        loadPage(html, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -236,7 +236,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     void anchors(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
-        final String content =
+        final String html =
             "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -264,8 +264,8 @@ public class DocumentTest extends WebTestCase {
             + "</html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        loadPage(browserVersion, content, collectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
+        loadPage(browserVersion, html, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -276,7 +276,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void links() throws Exception {
-        final String content =
+        final String html =
             "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -301,8 +301,8 @@ public class DocumentTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {"0", "3", "3", "true", "firstLink"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        loadPage(content, collectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
+        loadPage(html, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -313,7 +313,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void createElement() throws Exception {
-        final String htmlContent
+        final String html
             = "<html>\n"
             + "  <head>\n"
             + "    <title>First</title>\n"
@@ -352,10 +352,10 @@ public class DocumentTest extends WebTestCase {
 
         final String[] expectedAlerts = {"parentNode: null", "DIV", "1", "null",
             "DIV", "button1value", "text1value", "text"};
-        createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         assertEquals("First", page.getTitleText());
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -380,7 +380,7 @@ public class DocumentTest extends WebTestCase {
 
     private void documentCreateElement2(final BrowserVersion browserVersion, final String[] expectedAlerts)
         throws Exception {
-        final String htmlContent
+        final String html
             = "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
@@ -399,7 +399,7 @@ public class DocumentTest extends WebTestCase {
             + "</html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, htmlContent, collectedAlerts);
+        loadPage(browserVersion, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -423,7 +423,7 @@ public class DocumentTest extends WebTestCase {
 
     private void createElementNS(final BrowserVersion browserVersion, final String[] expectedAlerts)
         throws Exception {
-        final String htmlContent
+        final String html
             = "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
@@ -439,7 +439,7 @@ public class DocumentTest extends WebTestCase {
             + "</html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, htmlContent, collectedAlerts);
+        loadPage(browserVersion, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -449,7 +449,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void createTextNode() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var text1=document.createTextNode('Some Text');\n"
@@ -465,7 +465,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         assertEquals("First", page.getTitleText());
 
         final DomNode div1 = page.<HtmlElement>getHtmlElementById("body").getLastChild();
@@ -537,7 +537,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void appendChild() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    var form = document.forms['form1'];\n"
@@ -553,7 +553,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
         final String[] expectedAlerts = {"1"};
@@ -607,7 +607,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void appendChild_textNode() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    var form = document.forms['form1'];\n"
@@ -622,7 +622,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
         final String[] expectedAlerts = {"Some Text"};
@@ -635,7 +635,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void cloneNode() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    var form = document.forms['form1'];\n"
@@ -653,7 +653,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
         final String[] expectedAlerts = {"true", "true", "true", "true"};
@@ -666,7 +666,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void insertBefore() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    var form = document.forms['form1'];\n"
@@ -679,7 +679,7 @@ public class DocumentTest extends WebTestCase {
             + "<form name='form1'><div id='oldChild'/></form>\n"
             + "</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
         final String[] expectedAlerts = {"true"};
@@ -699,7 +699,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void getElementById() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    alert(top.document.getElementById('input1').value);\n"
@@ -713,11 +713,11 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         assertEquals("First", page.getTitleText());
 
         final String[] expectedAlerts = {"bar", "null", "null"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -726,7 +726,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void getElementById_resetId() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var input1=top.document.getElementById('input1');\n"
@@ -741,7 +741,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         assertEquals("First", page.getTitleText());
 
         final String[] expectedAlerts = {"bar", "null"};
@@ -753,7 +753,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void getElementById_setNewId() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var div1 = document.getElementById('div1');\n"
@@ -767,10 +767,10 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"bar"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(content, collectedAlerts);
+        final HtmlPage firstPage = loadPage(html, collectedAlerts);
 
         assertEquals("First", firstPage.getTitleText());
         assertEquals(expectedAlerts, collectedAlerts);
@@ -782,7 +782,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void getElementById_divId() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var element = document.getElementById('id1');\n"
@@ -792,7 +792,7 @@ public class DocumentTest extends WebTestCase {
             + "<div id='id1'></div></body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        final HtmlPage firstPage = loadPage(html, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"id1"};
@@ -805,7 +805,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void getElementById_scriptId() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script id='script1'>\n"
             + "function doTest() {\n"
             + "    alert(top.document.getElementById('script1').id);\n"
@@ -814,7 +814,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        final HtmlPage firstPage = loadPage(html, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"script1"};
@@ -827,7 +827,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void getElementById_scriptType() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title>\n"
             + "<script id='script1' type='text/javascript'>\n"
             + "doTest=function () {\n"
@@ -837,7 +837,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        final HtmlPage firstPage = loadPage(html, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"text/javascript"};
@@ -854,18 +854,18 @@ public class DocumentTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection();
         webClient.setWebConnection(webConnection);
 
-        final String firstContent
+        final String html
             = "<html><head><title>First</title>\n"
             + "<script id='script1' src='http://script'>\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
-        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_FIRST, html);
 
-        final String scriptContent
+        final String script
             = "doTest=function () {\n"
             + "    alert(top.document.getElementById('script1').src);\n"
             + "}";
-        webConnection.setResponse(new URL("http://script/"), scriptContent, "text/javascript");
+        webConnection.setResponse(new URL("http://script/"), script, "text/javascript");
 
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -883,7 +883,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void parentNode_Nested() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var div1=document.getElementById('childDiv');\n"
@@ -894,7 +894,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        final HtmlPage firstPage = loadPage(html, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
         final HtmlElement div1 = firstPage.getHtmlElementById("childDiv");
@@ -910,7 +910,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void parentNode_Document() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.parentNode==null);\n"
@@ -919,7 +919,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        final HtmlPage firstPage = loadPage(html, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"true"};
@@ -932,7 +932,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void parentNode_CreateElement() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var div1=document.createElement('div');\n"
@@ -942,7 +942,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        final HtmlPage firstPage = loadPage(html, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"true"};
@@ -955,7 +955,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void parentNode_AppendChild() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var childDiv=document.getElementById('childDiv');\n"
@@ -968,7 +968,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        final HtmlPage firstPage = loadPage(html, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
         final HtmlElement childDiv = firstPage.getHtmlElementById("childDiv");
@@ -984,7 +984,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void documentElement() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.documentElement!=null);\n"
@@ -995,7 +995,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        final HtmlPage firstPage = loadPage(html, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"true", "HTML", "true"};
@@ -1008,7 +1008,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void firstChild_Nested() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var div1=document.getElementById('parentDiv');\n"
@@ -1019,7 +1019,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        final HtmlPage firstPage = loadPage(html, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
         final HtmlElement div1 = firstPage.getHtmlElementById("parentDiv");
@@ -1035,7 +1035,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void firstChild_AppendChild() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var childDiv=document.getElementById('childDiv');\n"
@@ -1050,7 +1050,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        final HtmlPage firstPage = loadPage(html, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
         final HtmlElement parentDiv = firstPage.getHtmlElementById("parentDiv");
@@ -1066,7 +1066,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void lastChild_Nested() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>Last</title><script>\n"
             + "function doTest() {\n"
             + "    var div1=document.getElementById('parentDiv');\n"
@@ -1077,10 +1077,10 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"childDiv"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage lastPage = loadPage(content, collectedAlerts);
+        final HtmlPage lastPage = loadPage(html, collectedAlerts);
         assertEquals("Last", lastPage.getTitleText());
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1095,7 +1095,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void lastChild_AppendChild() throws Exception {
-        final String lastContent
+        final String html
             = "<html><head><title>Last</title><script>\n"
             + "function doTest() {\n"
             + "    var childDiv1=document.getElementById('childDiv1');\n"
@@ -1110,7 +1110,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage lastPage = loadPage(lastContent, collectedAlerts);
+        final HtmlPage lastPage = loadPage(html, collectedAlerts);
         assertEquals("Last", lastPage.getTitleText());
 
         final HtmlElement parentDiv = lastPage.getHtmlElementById("parentDiv");
@@ -1126,7 +1126,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void nextSibling_Nested() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>Last</title><script>\n"
             + "function doTest() {\n"
             + "    var div1 = document.getElementById('previousDiv');\n"
@@ -1137,10 +1137,10 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"nextDiv"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage lastPage = loadPage(content, collectedAlerts);
+        final HtmlPage lastPage = loadPage(html, collectedAlerts);
         assertEquals("Last", lastPage.getTitleText());
 
         final HtmlElement div1 = lastPage.getHtmlElementById("previousDiv");
@@ -1155,7 +1155,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void nextSibling_AppendChild() throws Exception {
-        final String lastContent
+        final String html
             = "<html><head><title>Last</title><script>\n"
             + "function doTest() {\n"
             + "    var previousDiv=document.getElementById('previousDiv');\n"
@@ -1170,7 +1170,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage lastPage = loadPage(lastContent, collectedAlerts);
+        final HtmlPage lastPage = loadPage(html, collectedAlerts);
         assertEquals("Last", lastPage.getTitleText());
 
         final HtmlElement previousDiv = lastPage.getHtmlElementById("previousDiv");
@@ -1186,7 +1186,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void previousSibling_Nested() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>Last</title><script>\n"
             + "function doTest() {\n"
             + "    var div1 = document.getElementById('nextDiv');\n"
@@ -1197,10 +1197,10 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"previousDiv"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage lastPage = loadPage(content, collectedAlerts);
+        final HtmlPage lastPage = loadPage(html, collectedAlerts);
         assertEquals("Last", lastPage.getTitleText());
 
         final HtmlElement div1 = lastPage.getHtmlElementById("nextDiv");
@@ -1215,7 +1215,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void previousSibling_AppendChild() throws Exception {
-        final String lastContent
+        final String html
             = "<html><head><title>Last</title><script>\n"
             + "function doTest() {\n"
             + "    var previousDiv=document.getElementById('previousDiv');\n"
@@ -1230,7 +1230,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage lastPage = loadPage(lastContent, collectedAlerts);
+        final HtmlPage lastPage = loadPage(html, collectedAlerts);
         assertEquals("Last", lastPage.getTitleText());
 
         final HtmlElement nextDiv = lastPage.getHtmlElementById("nextDiv");
@@ -1245,7 +1245,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void allProperty_KeyByName() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.all['input1'].value);\n"
@@ -1258,7 +1258,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        final HtmlPage firstPage = loadPage(html, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"tangerine", "ginger"};
@@ -1271,7 +1271,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void allProperty_CalledDuringPageLoad() throws Exception {
-        final String firstContent
+        final String html
             = "<html><body>\n"
             + "<div id='ARSMenuDiv1' style='VISIBILITY: hidden; POSITION: absolute; z-index: 1000000'></div>\n"
             + "<script language='Javascript'>\n"
@@ -1280,7 +1280,7 @@ public class DocumentTest extends WebTestCase {
             + "</script></body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        final HtmlPage firstPage = loadPage(html, collectedAlerts);
         assertEquals("", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"DIV"};
@@ -1292,7 +1292,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void write() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title></head><body>\n"
             + "<script>\n"
             + "document.write(\"<div id='div1'></div>\");\n"
@@ -1302,13 +1302,13 @@ public class DocumentTest extends WebTestCase {
             + "</form></body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
-        assertEquals("First", firstPage.getTitleText());
+        final HtmlPage page = loadPage(html, collectedAlerts);
+        assertEquals("First", page.getTitleText());
 
         try {
-            firstPage.getHtmlElementById("div1");
-            firstPage.getHtmlElementById("div2");
-            firstPage.getHtmlElementById("div3");
+            page.getHtmlElementById("div1");
+            page.getHtmlElementById("div2");
+            page.getHtmlElementById("div3");
         }
         catch (final ElementNotFoundException e) {
             fail("Element not written to page as expected: " + e.getMessage());
@@ -1325,24 +1325,23 @@ public class DocumentTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection();
         webClient.setWebConnection(webConnection);
 
-        final String firstContent
+        final String html
             = "<html><head><title>First</title></head><body>\n"
             + "<script src='http://script'></script>\n"
             + "</form></body></html>";
-        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_FIRST, html);
 
-        final String scriptContent
-            = "document.write(\"<div id='div1'></div>\");\n";
-        webConnection.setResponse(new URL("http://script/"), scriptContent, "text/javascript");
+        final String script = "document.write(\"<div id='div1'></div>\");\n";
+        webConnection.setResponse(new URL("http://script/"), script, "text/javascript");
 
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = webClient.getPage(URL_FIRST);
-        assertEquals("First", firstPage.getTitleText());
+        final HtmlPage page = webClient.getPage(URL_FIRST);
+        assertEquals("First", page.getTitleText());
 
         try {
-            firstPage.getHtmlElementById("div1");
+            page.getHtmlElementById("div1");
         }
         catch (final ElementNotFoundException e) {
             fail("Element not written to page as expected");
@@ -1359,23 +1358,22 @@ public class DocumentTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection();
         webClient.setWebConnection(webConnection);
 
-        final String mainContent
+        final String mainHtml
             = "<html><head><title>Main</title></head><body>\n"
             + "<iframe name='iframe' id='iframe' src='http://first'></iframe>\n"
             + "<script type='text/javascript'>\n"
             + "document.write('<script type=\"text/javascript\" src=\"http://script\"></' + 'script>');\n"
             + "</script></body></html>";
-        webConnection.setResponse(new URL("http://main/"), mainContent);
+        webConnection.setResponse(new URL("http://main/"), mainHtml);
 
-        final String firstContent
-            = "<html><body><h1 id='first'>First</h1></body></html>";
-        webConnection.setResponse(URL_FIRST, firstContent);
+        final String firstHtml = "<html><body><h1 id='first'>First</h1></body></html>";
+        webConnection.setResponse(URL_FIRST, firstHtml);
 
-        final String secondContent = "<html><body><h1 id='second'>Second</h1></body></html>";
-        webConnection.setResponse(URL_SECOND, secondContent);
+        final String secondHtml = "<html><body><h1 id='second'>Second</h1></body></html>";
+        webConnection.setResponse(URL_SECOND, secondHtml);
 
-        final String scriptContent = "document.getElementById('iframe').src = '" + URL_SECOND + "';\n";
-        webConnection.setResponse(new URL("http://script/"), scriptContent, "text/javascript");
+        final String script = "document.getElementById('iframe').src = '" + URL_SECOND + "';\n";
+        webConnection.setResponse(new URL("http://script/"), script, "text/javascript");
 
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -1542,7 +1540,7 @@ public class DocumentTest extends WebTestCase {
     private void write_AssignedToVar(final BrowserVersion browserVersion, final String[] expectedAlerts)
         throws Exception {
 
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTheFoo() {\n"
             + "var d = document.writeln\n"
@@ -1555,10 +1553,10 @@ public class DocumentTest extends WebTestCase {
             + "<p>hello world</p>\n"
             + "</body></html>";
 
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(browserVersion, content, collectedAlerts);
+        final HtmlPage page = loadPage(browserVersion, html, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1684,13 +1682,13 @@ public class DocumentTest extends WebTestCase {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        final String firstContent
+        final String html
             = "<html><head><title>First</title></head><body onload='alert(document.referrer);'>\n"
             + "</form></body></html>";
 
         final List<NameValuePair> responseHeaders =
             Collections.singletonList(new NameValuePair("referrer", "http://ref"));
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", responseHeaders);
+        webConnection.setResponse(URL_FIRST, html, 200, "OK", "text/html", responseHeaders);
         webClient.setWebConnection(webConnection);
 
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -1707,12 +1705,12 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void referrer_NoneSpecified() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title></head><body onload='alert(document.referrer);'>\n"
             + "</form></body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        final HtmlPage firstPage = loadPage(html, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
         assertEquals(new String[] {""}, collectedAlerts);
@@ -1723,12 +1721,12 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void url() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title></head><body onload='alert(document.URL);'>\n"
             + "</form></body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        final HtmlPage firstPage = loadPage(html, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
         assertEquals(new String[] {URL_GARGOYLE.toExternalForm()}, collectedAlerts);
@@ -1739,7 +1737,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void getElementsByTagName() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var elements = document.getElementsByTagName('input');\n"
@@ -1754,10 +1752,10 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"button", "button", "true"};
-        createTestPageForRealBrowserIfNeeded(firstContent, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(firstContent, collectedAlerts);
+        loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1767,7 +1765,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void getElementsByTagName_CaseInsensitive() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var elements = document.getElementsByTagName('InPuT');\n"
@@ -1780,7 +1778,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        final HtmlPage firstPage = loadPage(html, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"button"};
@@ -1793,13 +1791,13 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void getElementsByTagName_Inline() throws Exception {
-        final String firstContent
+        final String html
             = "<html><body><script type=\"text/javascript\">\n"
             + "alert(document.getElementsByTagName('script').length);\n"
             + "</script></body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(firstContent, collectedAlerts);
+        loadPage(html, collectedAlerts);
         final String[] expectedAlerts = {"1"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -1814,13 +1812,11 @@ public class DocumentTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection();
         webClient.setWebConnection(webConnection);
 
-        final String firstContent
-            = "<html><body><script src=\"http://script\"></script></body></html>";
-        webConnection.setResponse(URL_FIRST, firstContent);
+        final String html = "<html><body><script src=\"http://script\"></script></body></html>";
+        webConnection.setResponse(URL_FIRST, html);
 
-        final String scriptContent
-            = "alert(document.getElementsByTagName('script').length);\n";
-        webConnection.setResponse(new URL("http://script/"), scriptContent, "text/javascript");
+        final String script = "alert(document.getElementsByTagName('script').length);\n";
+        webConnection.setResponse(new URL("http://script/"), script, "text/javascript");
 
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -1836,7 +1832,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void all_WithParentheses() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var length = document.all.length;\n"
@@ -1848,7 +1844,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        final HtmlPage firstPage = loadPage(html, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"HTML", "HEAD", "TITLE", "SCRIPT", "BODY"};
@@ -1860,7 +1856,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void all_IndexByInt() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var length = document.all.length;\n"
@@ -1872,7 +1868,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        final HtmlPage firstPage = loadPage(html, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"HTML", "HEAD", "TITLE", "SCRIPT", "BODY"};
@@ -1884,7 +1880,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void all_Item() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.all.item(0).tagName);\n"
@@ -1893,7 +1889,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        final HtmlPage firstPage = loadPage(html, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"HTML"};
@@ -1905,7 +1901,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void all_NamedItem() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.all.namedItem('form1').name);\n"
@@ -1920,7 +1916,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        final HtmlPage firstPage = loadPage(html, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"form1", "form2", "2"};
@@ -1937,7 +1933,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     private void all_tags(final BrowserVersion browerVersion) throws Exception {
-        final String content
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var inputs = document.all.tags('input');\n"
@@ -1957,10 +1953,10 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"a", "b", "a", "b", "0"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(browerVersion, content, collectedAlerts);
+        final HtmlPage firstPage = loadPage(browerVersion, html, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1980,7 +1976,7 @@ public class DocumentTest extends WebTestCase {
 
     private void all_AsBoolean(final BrowserVersion browser,
         final String[] expectedAlerts) throws Exception {
-        final String content = "<html><head><title>First</title><script>\n"
+        final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.all ? true : false);\n"
             + "    alert(Boolean(document.all));\n"
@@ -1988,9 +1984,9 @@ public class DocumentTest extends WebTestCase {
             + "</script><body onload='doTest()'>\n"
             + "</body></html>";
 
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browser, content, collectedAlerts);
+        loadPage(browser, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -2001,7 +1997,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void all_Caching() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>Test</title></head>\n"
             + "<body onload='alert(document.all.b.value)'>\n"
             + "<input type='text' name='a' value='1'>\n"
@@ -2010,7 +2006,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        final HtmlPage firstPage = loadPage(html, collectedAlerts);
         assertEquals("Test", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"1", "2"};
@@ -2022,7 +2018,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void all_NotExisting() throws Exception {
-        final String content = "<html><head><title>First</title><script>\n"
+        final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.all('notExisting'));\n"
             + "}\n"
@@ -2030,10 +2026,10 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"null"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
+        loadPage(html, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -2046,7 +2042,7 @@ public class DocumentTest extends WebTestCase {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var cookieSet = document.cookie.split('; ');\n"
@@ -2063,7 +2059,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final URL url = URL_FIRST;
-        webConnection.setResponse(url, firstContent);
+        webConnection.setResponse(url, html);
         webClient.setWebConnection(webConnection);
 
         final CookieManager mgr = webClient.getCookieManager();
@@ -2150,7 +2146,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void getElementsByName() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var elements = document.getElementsByName('name1');\n"
@@ -2168,10 +2164,10 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"value1", "value1", "value2", "value2"};
-        createTestPageForRealBrowserIfNeeded(firstContent, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(firstContent, collectedAlerts);
+        loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -2215,7 +2211,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void images() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.images.length);\n"
@@ -2234,11 +2230,11 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        final HtmlPage firstPage = loadPage(html, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"1", "2", "2", "true"};
-        createTestPageForRealBrowserIfNeeded(firstContent, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -2248,7 +2244,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void settingTitle() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>Bad Title</title></head>\n"
             + "<body>\n"
             + "<script>\n"
@@ -2258,7 +2254,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         assertEquals("correct title", page.getTitleText());
 
         final String[] expectedAlerts = {"correct title"};
@@ -2271,7 +2267,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void settingMissingTitle() throws Exception {
-        final String content = "<html><head></head>\n"
+        final String html = "<html><head></head>\n"
             + "<body>\n"
             + "<script>\n"
             + "    document.title = 'correct title';\n"
@@ -2280,7 +2276,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
+        loadPage(html, collectedAlerts);
         final String[] expectedAlerts = {"correct title"};
         assertEquals("Test the alert", expectedAlerts, collectedAlerts);
     }
@@ -2291,7 +2287,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void settingBlankTitle() throws Exception {
-        final String content = "<html><head><title></title></head>\n"
+        final String html = "<html><head><title></title></head>\n"
             + "<body>\n"
             + "<script>\n"
             + "    document.title = 'correct title';\n"
@@ -2300,7 +2296,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         assertEquals("correct title", page.getTitleText());
 
         final String[] expectedAlerts = {"correct title"};
@@ -2312,7 +2308,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void title() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    alert(document.title)\n"
             + "}\n"
@@ -2321,7 +2317,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
         final String[] expectedAlerts = {"foo"};
@@ -2339,7 +2335,7 @@ public class DocumentTest extends WebTestCase {
     public void readyStateNonIE() throws Exception {
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
         final MockWebConnection webConnection = new MockWebConnection();
-        final String content = "<html><head>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
             + "function testIt() {\n"
             + "  alert(document.readyState);\n"
@@ -2349,7 +2345,7 @@ public class DocumentTest extends WebTestCase {
             + "</head>\n"
             + "<body onLoad='testIt()'></body></html>";
 
-        webConnection.setResponse(URL_FIRST, content);
+        webConnection.setResponse(URL_FIRST, html);
         client.setWebConnection(webConnection);
 
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -2370,7 +2366,7 @@ public class DocumentTest extends WebTestCase {
     public void readyStateIE() throws Exception {
         final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_6);
         final MockWebConnection webConnection = new MockWebConnection();
-        final String content = "<html><head>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
             + "function testIt() {\n"
             + "  alert(document.readyState);\n"
@@ -2379,7 +2375,7 @@ public class DocumentTest extends WebTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onLoad='testIt()'></body></html>";
-        webConnection.setResponse(URL_FIRST, content);
+        webConnection.setResponse(URL_FIRST, html);
         client.setWebConnection(webConnection);
 
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -2397,13 +2393,13 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void documentWithNoBody() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "alert(document.body)\n"
             + "</script></head><body></body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
+        loadPage(html, collectedAlerts);
 
         final String[] expectedAlerts = {"null"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -2415,7 +2411,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void getElementByIdForIE() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title></head>\n"
             + "<body>\n"
             + "<input type='text' name='findMe'>\n"
@@ -2426,7 +2422,7 @@ public class DocumentTest extends WebTestCase {
             + "</script></body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
+        loadPage(html, collectedAlerts);
 
         final String[] expectedAlerts = {"findMe", "byId"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -2440,7 +2436,7 @@ public class DocumentTest extends WebTestCase {
     public void getElementByIdForNetscape() throws Exception {
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
         final MockWebConnection webConnection = new MockWebConnection();
-        final String content
+        final String html
             = "<html><head><title>foo</title></head>\n"
             + "<body>\n"
             + "<input type='text' name='findMe'>\n"
@@ -2450,7 +2446,7 @@ public class DocumentTest extends WebTestCase {
             + "alert(document.getElementById('findMe2').name)\n"
             + "</script></body></html>";
 
-        webConnection.setResponse(URL_FIRST, content);
+        webConnection.setResponse(URL_FIRST, html);
         client.setWebConnection(webConnection);
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -2506,7 +2502,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void directAccessByName() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    alert(document.myImage.id);\n"
             + "    alert(document.myImage2.length);\n"
@@ -2531,10 +2527,10 @@ public class DocumentTest extends WebTestCase {
 
         final String[] expectedAlerts
             = {"myImageId", "2", "FORM", "undefined", "undefined", "undefined", "undefined"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         assertEquals("foo", page.getTitleText());
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -2544,7 +2540,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void writeInManyTimes() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    alert(document.getElementById('inner').parentNode.id);\n"
             + "}\n"
@@ -2558,10 +2554,10 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"outer"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
+        loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -2570,13 +2566,13 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void writeWithSpace() throws Exception {
-        final String content = "<html><body><script>\n"
+        final String html = "<html><body><script>\n"
             + "document.write('Hello ');\n"
             + "document.write('World');\n"
             + "</script>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(content);
+        final HtmlPage page = loadPage(html);
         assertTrue(page.asText().indexOf("Hello World") >= 0);
     }
 
@@ -2585,14 +2581,14 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void writeWithSplitAnchorTag() throws Exception {
-        final String content = "<html><body><script>\n"
+        final String html = "<html><body><script>\n"
             + "document.write(\"<a href=\'start.html\");\n"
             + "document.write(\"\'>\");\n"
             + "document.write('click here</a>');\n"
             + "</script>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(content);
+        final HtmlPage page = loadPage(html);
         final List<HtmlAnchor> anchorList = page.getAnchors();
         assertEquals(1, anchorList.size());
         final HtmlAnchor anchor = anchorList.get(0);
@@ -2605,7 +2601,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void writeScriptInManyTimes() throws Exception {
-        final String content = "<html><head><title>foo</title>\n"
+        final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "document.write('<script src=\"script.js\">');\n"
             + "document.write('<' + '/script>');\n"
@@ -2621,7 +2617,7 @@ public class DocumentTest extends WebTestCase {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         client.setWebConnection(webConnection);
-        webConnection.setDefaultResponse(content);
+        webConnection.setDefaultResponse(html);
         webConnection.setResponse(scriptUrl, "alert('foo');\n", "text/javascript");
 
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -2637,7 +2633,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void writeAddNodesInCorrectPositions() throws Exception {
-        final String content = "<html><head><title>foo</title></head>\n"
+        final String html = "<html><head><title>foo</title></head>\n"
             + "<body id=\"theBody\">\n"
             + "<div id='target1'></div>\n"
             + "<script>\n"
@@ -2666,10 +2662,10 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"scr1", "scr2"/*, "scr3", "scr4"*/};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
+        loadPage(html, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -2679,7 +2675,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void domain() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    alert(document.domain);\n"
             + "    document.domain = 'gargoylesoftware.com';\n"
@@ -2689,12 +2685,10 @@ public class DocumentTest extends WebTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {
-            "www.gargoylesoftware.com", "gargoylesoftware.com"
-        };
+        final String[] expectedAlerts = {"www.gargoylesoftware.com", "gargoylesoftware.com"};
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
+        loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -2708,7 +2702,7 @@ public class DocumentTest extends WebTestCase {
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
         final MockWebConnection webConnection = new MockWebConnection();
 
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    alert(document.domain);\n"
             + "    document.domain = 'GaRgOyLeSoFtWaRe.CoM';\n"
@@ -2718,7 +2712,7 @@ public class DocumentTest extends WebTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        webConnection.setResponse(urlGargoyleUpperCase, content);
+        webConnection.setResponse(urlGargoyleUpperCase, html);
         client.setWebConnection(webConnection);
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -2734,7 +2728,7 @@ public class DocumentTest extends WebTestCase {
     */
     @Test
     public void domainMixedCase() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    alert(document.domain);\n"
             + "    document.domain = 'GaRgOyLeSoFtWaRe.CoM';\n"
@@ -2745,7 +2739,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
+        loadPage(html, collectedAlerts);
         final String[] expectedAlerts = {"www.gargoylesoftware.com", "GaRgOyLeSoFtWaRe.CoM"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -2755,7 +2749,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void domainLong() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    alert(document.domain);\n"
             + "    document.domain = 'd4.d3.d2.d1.gargoylesoftware.com';\n"
@@ -2771,7 +2765,7 @@ public class DocumentTest extends WebTestCase {
         {"d4.d3.d2.d1.gargoylesoftware.com", "d4.d3.d2.d1.gargoylesoftware.com", "d1.gargoylesoftware.com"};
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts, new URL("http://d4.d3.d2.d1.gargoylesoftware.com"));
+        loadPage(html, collectedAlerts, new URL("http://d4.d3.d2.d1.gargoylesoftware.com"));
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -2780,7 +2774,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void domainSetSelf() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    alert(document.domain);\n"
             + "    document.domain = 'localhost';\n"
@@ -2793,7 +2787,7 @@ public class DocumentTest extends WebTestCase {
         final String[] expectedAlerts = {"localhost", "localhost"};
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts, new URL("http://localhost"));
+        loadPage(html, collectedAlerts, new URL("http://localhost"));
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -2802,7 +2796,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void domainTooShort() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    alert(document.domain);\n"
             + "    document.domain = 'com';\n"
@@ -2814,7 +2808,7 @@ public class DocumentTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         try {
-            loadPage(content, collectedAlerts);
+            loadPage(html, collectedAlerts);
         }
         catch (final ScriptException ex) {
             return;
@@ -2827,7 +2821,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void writeFrameRelativeURLMultipleFrameset() throws Exception {
-        final String framesetContent = "<html><head><title>frameset</title></head>\n"
+        final String html = "<html><head><title>frameset</title></head>\n"
             + "<script>\n"
             + "    document.write('<frameset><frame src=\"frame.html\"/></frameset>');\n"
             + "</script>\n"
@@ -2841,7 +2835,7 @@ public class DocumentTest extends WebTestCase {
 
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(framesetURL, framesetContent);
+        webConnection.setResponse(framesetURL, html);
         webConnection.setResponseAsGenericHtml(frameURL, "frame");
         webConnection.setResponseAsGenericHtml(blankURL, "blank");
         client.setWebConnection(webConnection);
@@ -2861,7 +2855,7 @@ public class DocumentTest extends WebTestCase {
     */
     @Test
     public void writeAddNodesToCorrectParent() throws Exception {
-        final String content = "<html><head><title>foo</title></head>\n"
+        final String html = "<html><head><title>foo</title></head>\n"
             + "<body id=\"theBody\">\n"
             + "<script>\n"
             + "document.write('<p id=\"para1\">Paragraph #1</p>');\n"
@@ -2874,10 +2868,10 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"theBody", "theBody", "theBody"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
+        loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -2888,7 +2882,7 @@ public class DocumentTest extends WebTestCase {
     */
     @Test
     public void writeAddNodesToCorrectParent_Bug1678826() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    alert(document.getElementById('inner1').parentNode.id);\n"
             + "    alert(document.getElementById('inner2').parentNode.id);\n"
@@ -2906,10 +2900,10 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"outer", "inner1"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
+        loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -2918,7 +2912,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void scriptsArray() throws Exception {
-        final String htmlContent = "<html><head><script lang='JavaScript'>\n"
+        final String html = "<html><head><script lang='JavaScript'>\n"
             + "    function doTest(){\n"
             + "        alert(document.scripts.length);\n" // This line used to blow up
             + "}\n"
@@ -2927,7 +2921,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html> ";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(htmlContent, collectedAlerts);
+        loadPage(html, collectedAlerts);
         assertEquals(new String[] {"2"}, collectedAlerts);
     }
 
@@ -2937,16 +2931,16 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void precedence() throws Exception {
-        final String htmlContent = "<html><head></head>\n"
+        final String html = "<html><head></head>\n"
             + "<body>\n"
             + "<form name='writeln'>foo</form>\n"
             + "<script>alert(document.writeln.tagName);</script>\n"
             + "</body></html>";
         final String[] expectedAlerts = {"FORM"};
-        createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(htmlContent, collectedAlerts);
+        loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -3080,7 +3074,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void createStyleSheet() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "var s = document.createStyleSheet('foo.css', 1);\n"
             + "alert(s);\n"
@@ -3088,7 +3082,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
+        loadPage(html, collectedAlerts);
 
         final String[] expectedAlerts = {"[object]"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -3099,7 +3093,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void createDocumentFragment() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var fragment = document.createDocumentFragment();\n"
             + "    var textarea = document.getElementById('myTextarea');\n"
@@ -3114,7 +3108,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final String expected = "#document-fragment_null_11_null_0_";
-        final HtmlPage page = loadPage(content);
+        final HtmlPage page = loadPage(html);
         final HtmlTextArea textArea = page.getHtmlElementById("myTextarea");
         assertEquals(expected, textArea.getText());
     }
@@ -3132,7 +3126,7 @@ public class DocumentTest extends WebTestCase {
 
     private void createEvent_FF(final String eventType, final boolean isSupportedType,
         final BrowserVersion version) throws Exception {
-        final String content =
+        final String html =
               "<html><head><title>foo</title><script>\n"
             + "var e = document.createEvent('" + eventType + "');\n"
             + "alert(e != null);\n"
@@ -3144,8 +3138,8 @@ public class DocumentTest extends WebTestCase {
         final List<String> actual = new ArrayList<String>();
         try {
             final String[] expected = {"true", "object", "[object Event]", "true"};
-            createTestPageForRealBrowserIfNeeded(content, expected);
-            loadPage(version, content, actual);
+            createTestPageForRealBrowserIfNeeded(html, expected);
+            loadPage(version, html, actual);
             assertTrue("Test was expected to fail, but did not: type=" + eventType, isSupportedType);
             assertEquals(expected, actual);
         }
@@ -3187,7 +3181,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void createEventObject_IE() throws Exception {
-        final String content =
+        final String html =
               "<html><head><title>foo</title><script>\n"
             + "var e = document.createEventObject();\n"
             + "alert(e != null);\n"
@@ -3196,7 +3190,7 @@ public class DocumentTest extends WebTestCase {
             + "</script></head><body>\n"
             + "</body></html>";
         final List<String> actual = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_6, content, actual);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6, html, actual);
         final String[] expected = {"true", "object", "[object]"};
         assertEquals(expected, actual);
     }
@@ -3217,7 +3211,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     private void elementFromPoint(final BrowserVersion browserVersion) throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var e = document.elementFromPoint(-1,-1);\n"
             + "    alert(e.nodeName);\n"
@@ -3225,7 +3219,7 @@ public class DocumentTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, content, collectedAlerts);
+        loadPage(browserVersion, html, collectedAlerts);
         assertEquals("BODY", collectedAlerts.get(0));
     }
 
@@ -3239,7 +3233,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     private void createElementWithAngleBrackets(final BrowserVersion browserVersion) throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var select = document.createElement('<select>');\n"
             + "    alert(select.add);\n"
@@ -3247,7 +3241,7 @@ public class DocumentTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
+        loadPage(html, collectedAlerts);
         assertFalse(collectedAlerts.get(0).equals("undefined"));
     }
 
@@ -3267,7 +3261,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     private void createElementWithHtml(final BrowserVersion browserVersion) throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var select = document.createElement(\"<select id='mySelect'><option>hello</option>\");\n"
             + "    alert(select.add);\n"
@@ -3277,7 +3271,7 @@ public class DocumentTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, content, collectedAlerts);
+        loadPage(browserVersion, html, collectedAlerts);
         assertFalse(collectedAlerts.get(0).equals("undefined"));
         assertEquals("mySelect", collectedAlerts.get(1));
         //make sure the element has no children
@@ -3289,7 +3283,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void styleSheets() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    alert(document.styleSheets);\n"
             + "    alert(document.styleSheets.length);\n"
@@ -3299,7 +3293,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
         final String[] expectedAlerts = {"[object]", "0", "true"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
+        loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -3317,7 +3311,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void execCommand() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    document.designMode = 'On';\n"
             + "    document.execCommand('Bold', false, null);\n"
@@ -3333,10 +3327,10 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expected = {"command foo not supported"};
-        createTestPageForRealBrowserIfNeeded(content, expected);
+        createTestPageForRealBrowserIfNeeded(html, expected);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
+        loadPage(html, collectedAlerts);
         assertEquals(expected, collectedAlerts);
     }
 
@@ -3345,7 +3339,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void evaluate_caseInsensitiveAttribute() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var expr = './/*[@CLASS]';\n"
             + "    var result = document.evaluate(expr, document.documentElement, null, XPathResult.ANY_TYPE, null);\n"
@@ -3357,7 +3351,31 @@ public class DocumentTest extends WebTestCase {
 
         final String[] expectedAlerts = {"[object HTMLHeadingElement]"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void evaluate_caseInsensitiveTagName() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var expr = '/hTmL';\n"
+            + "    var result = document.evaluate(expr, document.documentElement, null, XPathResult.ANY_TYPE, null);\n"
+            + "    alert(result.iterateNext());\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <h1 class='title'>Some text</h1>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"[object HTMLHtmlElement]"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -3374,7 +3392,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     private void writeStyle(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
-        final String content = "<html><head><title>foo</title></head>\n"
+        final String html = "<html><head><title>foo</title></head>\n"
             + "<body>\n"
             + "<script>\n"
             + "  document.write('<style type=\"text/css\" id=\"myStyle\">');\n"
@@ -3388,7 +3406,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, content, collectedAlerts);
+        loadPage(browserVersion, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -3402,7 +3420,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     private void importNode(final boolean deep, final String[] expectedAlerts) throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var node = document.importNode(document.getElementById('div1'), " + deep + ");\n"
             + "    alert(node.id);\n"
@@ -3416,7 +3434,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

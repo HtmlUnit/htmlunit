@@ -44,13 +44,13 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAsync() throws Exception {
-        testAsync(BrowserVersion.INTERNET_EXPLORER_7);
-        testAsync(BrowserVersion.FIREFOX_2);
+    public void async() throws Exception {
+        async(BrowserVersion.INTERNET_EXPLORER_7);
+        async(BrowserVersion.FIREFOX_2);
     }
 
-    private void testAsync(final BrowserVersion browserVersion) throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+    private void async(final BrowserVersion browserVersion) throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
             + "    alert(document.async);\n"
@@ -67,7 +67,7 @@ public class XMLDocumentTest extends WebTestCase {
 
         final String[] expectedAlerts = {"undefined", "true"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, content, collectedAlerts);
+        loadPage(browserVersion, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -75,12 +75,12 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testLoad() throws Exception {
-        testLoad(BrowserVersion.INTERNET_EXPLORER_7, new String[] {"true", "books", "books", "1", "book", "0"});
-        testLoad(BrowserVersion.FIREFOX_2, new String[] {"true", "books", "books", "3", "#text", "0"});
+    public void load() throws Exception {
+        load(BrowserVersion.INTERNET_EXPLORER_7, new String[] {"true", "books", "books", "1", "book", "0"});
+        load(BrowserVersion.FIREFOX_2, new String[] {"true", "books", "books", "3", "#text", "0"});
     }
 
-    private void testLoad(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
+    private void load(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
@@ -125,14 +125,14 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testLoad_relativeURL() throws Exception {
-        testLoad_relativeURL(BrowserVersion.INTERNET_EXPLORER_7,
+    public void load_relativeURL() throws Exception {
+        load_relativeURL(BrowserVersion.INTERNET_EXPLORER_7,
                 new String[] {"true", "books", "books", "1", "book"});
-        testLoad_relativeURL(BrowserVersion.FIREFOX_2,
+        load_relativeURL(BrowserVersion.FIREFOX_2,
                 new String[] {"true", "books", "books", "3", "#text"});
     }
 
-    private void testLoad_relativeURL(final BrowserVersion browserVersion, final String[] expectedAlerts)
+    private void load_relativeURL(final BrowserVersion browserVersion, final String[] expectedAlerts)
         throws Exception {
         final URL firstURL = new URL("http://htmlunit/first.html");
         final URL secondURL = new URL("http://htmlunit/second.xml");
@@ -180,8 +180,8 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testPreserveWhiteSpace() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+    public void preserveWhiteSpace() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = new ActiveXObject('MSXML2.DOMDocument');\n"
             + "    alert(doc.preserveWhiteSpace);\n"
@@ -190,7 +190,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "</body></html>";
         final String[] expectedAlerts = {"false"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_7, content, collectedAlerts);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -198,8 +198,8 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetProperty() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+    public void setProperty() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = new ActiveXObject('MSXML2.DOMDocument');\n"
             + "    doc.setProperty('SelectionNamespaces', \"xmlns:xsl='http://www.w3.org/1999/XSL/Transform'\");\n"
@@ -207,17 +207,17 @@ public class XMLDocumentTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPage(BrowserVersion.INTERNET_EXPLORER_7, content, null);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7, html, null);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testSelectNodes() throws Exception {
-        testSelectNodes(BrowserVersion.INTERNET_EXPLORER_7, new String[] {"true", "1", "books"});
+    public void selectNodes() throws Exception {
+        selectNodes(BrowserVersion.INTERNET_EXPLORER_7, new String[] {"true", "1", "books"});
         try {
-            testSelectNodes(BrowserVersion.FIREFOX_2, new String[] {"true", "1", "books"});
+            selectNodes(BrowserVersion.FIREFOX_2, new String[] {"true", "1", "books"});
             fail("selectNodes is not supported in Firefox.");
         }
         catch (final Exception e) {
@@ -225,7 +225,7 @@ public class XMLDocumentTest extends WebTestCase {
         }
     }
 
-    private void testSelectNodes(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
+    private void selectNodes(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
@@ -268,7 +268,50 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSelectNodes_Namespace() throws Exception {
+    public void selectNodes_caseSensitive() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    doc.async = false;\n"
+            + "    doc.load('" + URL_SECOND + "');\n"
+            + "    alert(doc.selectNodes('/bOoKs').length);\n"
+            + "    alert(doc.selectNodes('/books').length);\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String xml
+            = "<books>\n"
+            + "  <book>\n"
+            + "    <title>Immortality</title>\n"
+            + "    <author>John Smith</author>\n"
+            + "  </book>\n"
+            + "</books>";
+
+        final String[] expectedAlerts = {"0", "1"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7);
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(URL_SECOND, xml, "text/xml");
+        client.setWebConnection(conn);
+
+        client.getPage(URL_FIRST);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void selectNodes_Namespace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
@@ -318,8 +361,8 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSelectSingleNode() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+    public void selectSingleNode() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var text='<book/>';\n"
             + "    var doc=new ActiveXObject('Microsoft.XMLDOM');\n"
@@ -335,7 +378,7 @@ public class XMLDocumentTest extends WebTestCase {
 
         final String[] expectedAlerts = {"book", "#document", "book", "#document"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_7, content, collectedAlerts);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -343,13 +386,13 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testLoadXML_Namespace() throws Exception {
-        testLoadXML_Namespace(BrowserVersion.INTERNET_EXPLORER_7);
-        testLoadXML_Namespace(BrowserVersion.FIREFOX_2);
+    public void loadXML_Namespace() throws Exception {
+        loadXML_Namespace(BrowserVersion.INTERNET_EXPLORER_7);
+        loadXML_Namespace(BrowserVersion.FIREFOX_2);
     }
 
-    private void testLoadXML_Namespace(final BrowserVersion browserVersion) throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+    private void loadXML_Namespace(final BrowserVersion browserVersion) throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var text='<someprefix:test xmlns:someprefix=\"http://myNS\"/>';\n"
             + "    if (window.ActiveXObject) {\n"
@@ -367,13 +410,12 @@ public class XMLDocumentTest extends WebTestCase {
 
         final String[] expectedAlerts = {"someprefix:test"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, content, collectedAlerts);
+        loadPage(browserVersion, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
      * Tests "xml:space" attribute.
-     * Not yet implemented.
      *
      * Xalan team response:
      * <quote>See the DOM Level 3 recommendation for discussion of this. XPath returns the start of the XPath text node,
@@ -385,13 +427,13 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testLoadXML_XMLSpaceAttribute() throws Exception {
-        testLoadXML_XMLSpaceAttribute(BrowserVersion.INTERNET_EXPLORER_7);
-        testLoadXML_XMLSpaceAttribute(BrowserVersion.FIREFOX_2);
+    public void loadXML_XMLSpaceAttribute() throws Exception {
+        loadXML_XMLSpaceAttribute(BrowserVersion.INTERNET_EXPLORER_7);
+        loadXML_XMLSpaceAttribute(BrowserVersion.FIREFOX_2);
     }
 
-    private void testLoadXML_XMLSpaceAttribute(final BrowserVersion browserVersion) throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+    private void loadXML_XMLSpaceAttribute(final BrowserVersion browserVersion) throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var text='<root xml:space=\\'preserve\\'>This t"
             + "<elem>ext has</elem> <![CDATA[ CDATA ]]>in<elem /> it</root>';\n"
@@ -410,7 +452,7 @@ public class XMLDocumentTest extends WebTestCase {
 
         final String[] expectedAlerts = {"7"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, content, collectedAlerts);
+        loadPage(browserVersion, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -469,17 +511,17 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testCreateNSResolver() throws Exception {
-        testCreateNSResolver(BrowserVersion.FIREFOX_2, new String[] {"http://myNS"});
+    public void createNSResolver() throws Exception {
+        createNSResolver(BrowserVersion.FIREFOX_2, new String[] {"http://myNS"});
         try {
-            testCreateNSResolver(BrowserVersion.INTERNET_EXPLORER_7, new String[] {"http://myNS"});
+            createNSResolver(BrowserVersion.INTERNET_EXPLORER_7, new String[] {"http://myNS"});
             fail("'createNSResolver' is not supported in IE.");
         }
         catch (final Exception e) {
             //expected
         }
     }
-    private void testCreateNSResolver(final BrowserVersion browserVersion, final String[] expectedAlerts)
+    private void createNSResolver(final BrowserVersion browserVersion, final String[] expectedAlerts)
         throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -514,14 +556,14 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testLoad_Encoding() throws Exception {
+    public void load_Encoding() throws Exception {
         final String[] expectedAlerts =
         {"1610", "1575", "32", "1604", "1610", "1610", "1610", "1610", "1610", "1610", "1604"};
-        testLoad_Encoding(BrowserVersion.INTERNET_EXPLORER_7, expectedAlerts);
-        testLoad_Encoding(BrowserVersion.FIREFOX_2, expectedAlerts);
+        load_Encoding(BrowserVersion.INTERNET_EXPLORER_7, expectedAlerts);
+        load_Encoding(BrowserVersion.FIREFOX_2, expectedAlerts);
     }
 
-    private void testLoad_Encoding(final BrowserVersion browserVersion, final String[] expectedAlerts)
+    private void load_Encoding(final BrowserVersion browserVersion, final String[] expectedAlerts)
         throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -562,7 +604,7 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testXmlInsideHtml() throws Exception {
+    public void xmlInsideHtml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    alert(messageTableHeaders.documentElement.nodeName);\n"
@@ -588,7 +630,7 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testInstanceOf() throws Exception {
+    public void instanceOf() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var x = (new DOMParser()).parseFromString('<x/>','text/xml');\n"
@@ -615,8 +657,8 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testEvaluate() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+    public void evaluate() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var s = '<toolbar><button id=\"compose_button\"/></toolbar>';\n"
             + "    var xDoc = (new DOMParser()).parseFromString(s,'text/xml');\n"
@@ -627,7 +669,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "</body></html>";
         final String[] expectedAlerts = {"button"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -635,8 +677,8 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testMoveChildBetweenDocuments() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+    public void moveChildBetweenDocuments() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  var doc1 = loadXmlDocument();\n"
             + "  var doc2 = loadXmlDocument();\n"
@@ -686,7 +728,7 @@ public class XMLDocumentTest extends WebTestCase {
         final WebClient client = new WebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, content);
+        conn.setResponse(URL_FIRST, html);
         conn.setResponse(new URL(URL_FIRST + "foo.xml"), xml, "text/xml");
         client.setWebConnection(conn);
 
