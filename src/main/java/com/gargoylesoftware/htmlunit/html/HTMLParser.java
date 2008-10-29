@@ -571,6 +571,7 @@ public final class HTMLParser {
         }
 
         /**
+         * @param namespaceURI the namespace URI
          * @param qualifiedName the qualified name
          * @return the pre-registered element factory for the tag, or an UnknownElementFactory
          */
