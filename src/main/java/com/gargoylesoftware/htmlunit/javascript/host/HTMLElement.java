@@ -38,7 +38,6 @@ import org.mozilla.javascript.Scriptable;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -683,9 +682,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     public void jsxSet_innerHTML(final Object value) {
         final DomNode domNode = getDomNodeOrDie();
-        final BrowserVersion browserVersion = getBrowserVersion();
+        final boolean ie = getBrowserVersion().isIE();
 
-        if (browserVersion.isIE() && INNER_HTML_READONLY_IN_IE.contains(domNode.getNodeName())) {
+        if (ie && INNER_HTML_READONLY_IN_IE.contains(domNode.getNodeName())) {
             throw Context.reportRuntimeError("innerHTML is read-only for tag " + domNode.getNodeName());
         }
 
@@ -694,16 +693,14 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         // null && IE     -> add child
         // null && non-IE -> Don't add
         // ''             -> Don't add
-        if ((value == null && browserVersion.isIE())
-            || (value != null && !"".equals(value))) {
+        if ((value == null && ie) || (value != null && !"".equals(value))) {
 
             final String valueAsString = Context.toString(value);
             parseHtmlSnippet(domNode, true, valueAsString);
 
             //if the parentNode has null parentNode in IE,
             //create a DocumentFragment to be the parentNode's parentNode.
-            if (domNode.getParentNode() == null
-                    && getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+            if (domNode.getParentNode() == null && ie) {
                 final DomDocumentFragment fragment = ((HtmlPage) domNode.getPage()).createDomDocumentFragment();
                 fragment.appendChild(domNode);
             }
