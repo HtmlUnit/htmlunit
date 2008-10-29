@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<span id="testSpan" onmousedown="log('mousedown span')" onclick="log('click span')"  onmouseup="log('mouseup span')">test span</span>
+<span id="testSpan" onfocus="log('will not be triggered')" onmousedown="log('mousedown span')" onclick="log('click span')"  onmouseup="log('mouseup span')">test span</span>
 
 <form>
 <input type="text" id="testInput" onmousedown="log('mousedown text')" 
@@ -21,6 +21,10 @@ onclick="log('click text')" onmouseup="log('mouseup text')" onfocus="log('focus 
 
 <input type="image" id="testImage" onmousedown="log('mousedown image')" 
 onclick="log('click image'); return false;" onmouseup="log('mouseup image')" onfocus="log('focus image')">
+
+<textarea id="testTextarea" onfocus="log('focus textarea')" onmousedown="log('mousedown textarea')" 
+onclick="log('click textarea')" onmouseup="log('mouseup textarea')" onfocus="log('focus textarea')">
+</textarea>
 </form>
 
 <ol id="log">
@@ -40,6 +44,11 @@ onclick="log('click image'); return false;" onmouseup="log('mouseup image')" onf
 	<li>focus image</li>
 	<li>mouseup image</li>
 	<li>click image</li>
+
+	<li>mousedown textarea</li>
+	<li>focus textarea</li>
+	<li>mouseup textarea</li>
+	<li>click textarea</li>
 </ol>
 
 </body>
