@@ -1207,7 +1207,8 @@ public class HTMLDocument extends Document {
 
                 @Override
                 public short acceptNode(final Node n) {
-                    return (Short) ScriptableObject.callMethod(filter, "acceptNode", new Object[] {n});
+                    final Object response = ScriptableObject.callMethod(filter, "acceptNode", new Object[] {n});
+                    return (short) Context.toNumber(response);
                 }
             };
         }

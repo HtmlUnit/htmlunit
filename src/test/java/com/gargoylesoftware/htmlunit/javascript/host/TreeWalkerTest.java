@@ -271,14 +271,15 @@ public class TreeWalkerTest extends WebTestCase {
     public void testSimpleFilter() throws Exception {
         final String[] expectedAlerts = {"TITLE", "undefined", "HEAD", "HTML", "HEAD", "BODY", "undefined"};
         final String script = "var noScripts = {acceptNode: function(node) {"
-                                                    + "if (node.tagName == 'SCRIPT') return NodeFilter.FILTER_REJECT;"
-                                                    + "return NodeFilter.FILTER_ACCEPT}};"
-                            + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts,"
-                                            + "true); tw.currentNode = document.firstChild.firstChild;"
-                            + "alert(safeTagName(tw.firstChild())); alert(safeTagName(tw.nextSibling()));"
-                            + "alert(safeTagName(tw.parentNode())); alert(safeTagName(tw.previousNode()));"
-                            + "alert(safeTagName(tw.firstChild())); alert(safeTagName(tw.nextSibling()));"
-                            + "alert(safeTagName(tw.previousSibling()));";
+            + "if (node.tagName == 'SCRIPT') return NodeFilter.FILTER_REJECT;"
+            // using number rather that object field causes Rhino to pass a Double
+            + "return 1; // NodeFilter.FILTER_ACCEPT \n}};"
+            + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts,"
+            + "true); tw.currentNode = document.firstChild.firstChild;"
+            + "alert(safeTagName(tw.firstChild())); alert(safeTagName(tw.nextSibling()));"
+            + "alert(safeTagName(tw.parentNode())); alert(safeTagName(tw.previousNode()));"
+            + "alert(safeTagName(tw.firstChild())); alert(safeTagName(tw.nextSibling()));"
+            + "alert(safeTagName(tw.previousSibling()));";
 
         test2(script, expectedAlerts);
     }
