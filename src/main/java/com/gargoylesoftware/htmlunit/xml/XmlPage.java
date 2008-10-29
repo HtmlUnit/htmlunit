@@ -181,7 +181,7 @@ public class XmlPage extends SgmlPage implements Document {
      * @return the new XML element
      */
     public DomElement createXmlElementNS(final String namespaceURI, final String qualifiedName) {
-        return new XmlElement(namespaceURI, qualifiedName, this, new HashMap<String, DomAttr>());
+        return new DomElement(namespaceURI, qualifiedName, this, new HashMap<String, DomAttr>());
     }
 
     /**
