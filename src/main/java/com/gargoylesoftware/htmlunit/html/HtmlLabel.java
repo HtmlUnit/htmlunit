@@ -154,12 +154,12 @@ public class HtmlLabel extends ClickableElement {
      * {@inheritDoc}
      */
     @Override
-    public Page click() throws IOException {
+    public <P extends Page> P click() throws IOException {
         // first the click on the label
-        final Page page = super.click();
+        final P page = super.click();
 
         // not sure which page we should return
-        final Page response;
+        final P response;
 
         // then the click on the referenced element
         final ClickableElement element = getReferencedElement();
