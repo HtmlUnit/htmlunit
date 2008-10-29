@@ -86,12 +86,11 @@ public class HtmlImageInput extends HtmlInput {
      * support this method so it is made protected here. Those subclasses
      * that wish to expose it will override and make it public.
      *
-     * @param <P> the page type
      * @return the Page that is the result of submitting this page to the server
      * @exception IOException If an io error occurs
      */
     @Override
-    public <P extends Page> P click() throws IOException {
+    public Page click() throws IOException {
         return click(0, 0);
     }
 
@@ -120,7 +119,6 @@ public class HtmlImageInput extends HtmlInput {
      * Simulate clicking this input with a pointing device. The x and y coordinates
      * of the pointing device will be sent to the server.
      *
-     * @param <P> the page type
      * @param x the x coordinate of the pointing device at the time of clicking
      * @param y the y coordinate of the pointing device at the time of clicking
      * @return the page that is loaded after the click has taken place
@@ -128,7 +126,7 @@ public class HtmlImageInput extends HtmlInput {
      * @exception ElementNotFoundException If a particular XML element could not be found in the DOM model
      */
     @Override
-    public <P extends Page> P click(final int x, final int y) throws IOException, ElementNotFoundException {
+    public Page click(final int x, final int y) throws IOException, ElementNotFoundException {
         wasPositionSpecified_ = true;
         xPosition_ = x;
         yPosition_ = y;
