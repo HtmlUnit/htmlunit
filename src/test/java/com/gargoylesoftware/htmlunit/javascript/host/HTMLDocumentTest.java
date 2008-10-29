@@ -156,7 +156,7 @@ public class HTMLDocumentTest extends WebTestCase {
      */
     @Test
     @Alerts(IE = "true", FF = "false")
-    public void uniquID() throws Exception {
+    public void uniqueID() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "    <title>Test</title>\n"
