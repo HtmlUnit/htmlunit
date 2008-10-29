@@ -83,9 +83,10 @@ public class SimpleWebDriverTest extends WebDriverTestCase {
         webDriver.findElement(By.id("testSpan")).click();
         webDriver.findElement(By.id("testInput")).click();
         webDriver.findElement(By.id("testImage")).click();
+        webDriver.findElement(By.id("testTextarea")).click();
 
         // verifications
-        assertEquals(getExpectedEntries(), getEntries("log"));
+        assertEquals(getExpectedEntries().toString(), getEntries("log").toString());
     }
 
     /**

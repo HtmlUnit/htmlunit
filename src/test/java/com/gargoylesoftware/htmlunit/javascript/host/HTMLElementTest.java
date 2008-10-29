@@ -2167,7 +2167,7 @@ public class HTMLElementTest extends WebTestCase {
      */
     @Test
     @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
-    @Alerts({"null", "text1", "null", "onfocus text2", "text2", "onfocus text1", "onfocus text2" })
+    @Alerts({"[object]", "text1", "[object]", "onfocus text2", "text2", "onfocus text1", "onfocus text2" })
     public void setActiveAndFocus() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();

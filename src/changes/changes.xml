@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="fix" dev="mguillem" id="2136816">
+                JavaScript: fire focus event not only on &lt;input ...&gt;.
+            </action>
             <action type="add" dev="mguillem" id="2060645" due-to="Mike Dirolf">
                 Add support for HTMLDocument.createTreeWalker (FF only).
             </action>

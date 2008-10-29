@@ -97,7 +97,7 @@ public abstract class ClickableElement extends StyledElement {
         }
 
         mouseDown(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
-        if (this instanceof HtmlInput) {
+        if (this instanceof SubmittableElement) {
             ((HtmlPage) getPage()).setFocusedElement(this);
         }
         mouseUp(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
