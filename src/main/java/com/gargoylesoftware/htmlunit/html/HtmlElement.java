@@ -217,7 +217,6 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-    /**
      * Returns the HTML elements that are descendants of this element and that have one of the specified tag names.
      * @param tagNames the tag names to match (case-insensitive)
      * @return the HTML elements that are descendants of this element and that have one of the specified tag name

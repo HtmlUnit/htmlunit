@@ -36,8 +36,7 @@ public class HtmlFrame extends BaseFrame {
     public static final String TAG_NAME = "frame";
 
     /**
-    /**
-     * Create an instance of HtmlFrame
+     * Creates a new instance.
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
