@@ -1172,24 +1172,23 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Creates and returns a new TreeWalker.
+     * Creates and returns a new TreeWalker. The following JavaScript parameters are passed into this method:
+     * <ul>
+     *   <li>JavaScript param 1: The root node of the TreeWalker. Must not be <tt>null</tt>.</li>
+     *   <li>JavaScript param 2: Flag specifying which types of nodes appear in the logical view of the TreeWalker.
+     *       See {@link NodeFilter} for the set of possible Show_ values.</li>
+     *   <li>JavaScript param 3: The {@link NodeFilter} to be used with this TreeWalker, or <tt>null</tt>
+     *       to indicate no filter.</li>
+     *   <li>JavaScript param 4: If <tt>false</tt>, the contents of EntityReference nodes are not present
+     *       in the logical view.</li>
+     * </ul>
      *
      * @see <a href="http://www.w3.org/TR/DOM-Level-2-Traversal-Range/traversal.html">DOM-Level-2-Traversal-Range</a>
-     * JavaScript param 1 The root node of the TreeWalker. Must not be
-     *          <code>null</code>.
-     * JavaScript param 2 Flag specifying which types of nodes appear in the
-     *          logical view of the TreeWalker. See {@link NodeFilter} for the
-     *          set of possible Show_ values.
-     * JavaScript param 3 The {@link NodeFilter} to be used with this TreeWalker,
-     *          or <code>null</code> to indicate no filter.
-     * JavaScript param 4 If false, the contents of
-     *          EntityReference nodes are not present in the logical view.
-     * @throws DOMException on attempt to create a TreeWalker with a root that
-     *          is <code>null</code>.
      * @param context the JavaScript Context
      * @param scriptable the object that the function was called on
-     * @param args the arguments passed to the function
+     * @param args the arguments passed to the function (see description above)
      * @param function the function object that was invoked
+     * @throws DOMException on attempt to create a TreeWalker with a root that is <code>null</code>
      * @return a new TreeWalker
      */
     public static Object jsxFunction_createTreeWalker(final Context context, final Scriptable scriptable,
