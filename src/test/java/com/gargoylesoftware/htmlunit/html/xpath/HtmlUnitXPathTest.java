@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import junit.framework.Assert;
+
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -27,6 +29,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
+import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -262,5 +265,25 @@ public class HtmlUnitXPathTest extends WebTestCase {
         assertNull(page.getFirstByXPath("//div[@id='doesNotExist']"));
 
         assertNull(page.getFirstByXPath("id('doesNotExist')"));
+    }
+
+    /**
+     * @throws Exception if test fails
+     */
+    @Test
+    public void changingAttributes() throws Exception {
+        final String content = "<html><head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<div id='testDiv' title='foo'></div>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(content);
+        final HtmlDivision div = page.getHtmlElementById("testDiv");
+
+        Assert.assertSame(div, page.getFirstByXPath("//*[@title = 'foo']"));
+        assertNull(page.getFirstByXPath("//*[@class = 'design']"));
+
+        div.setAttribute("class", "design");
+        Assert.assertSame(div, page.getFirstByXPath("//*[@class = 'design']"));
     }
 }
