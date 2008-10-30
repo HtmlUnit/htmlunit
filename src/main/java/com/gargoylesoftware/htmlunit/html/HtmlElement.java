@@ -41,6 +41,7 @@ import org.w3c.dom.Comment;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.EntityReference;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
@@ -366,6 +367,14 @@ public abstract class HtmlElement extends DomElement {
     @Override
     public final boolean hasAttribute(final String attributeName) {
         return super.hasAttribute(attributeName.toLowerCase());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public NamedNodeMap getAttributes() {
+        return new com.gargoylesoftware.htmlunit.javascript.NamedNodeMap(this, true);
     }
 
     /**

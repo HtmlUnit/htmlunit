@@ -47,9 +47,6 @@ public class DomElement extends DomNamespaceNode implements Element {
     /** The map holding the attributes, keyed by name. */
     private Map<String, DomAttr> attributes_;
 
-    /** The "live" attribute map required for {@link #getAttributes()}. */
-    private NamedNodeMap attributeMap_;
-
     /** The map holding the namespaces, keyed by URI. */
     private Map<String, String> namespaces_ = new HashMap<String, String>();
 
@@ -303,10 +300,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     @Override
     public NamedNodeMap getAttributes() {
-        if (attributeMap_ == null) {
-            attributeMap_ = new com.gargoylesoftware.htmlunit.javascript.NamedNodeMap(this, false);
-        }
-        return attributeMap_;
+        return new com.gargoylesoftware.htmlunit.javascript.NamedNodeMap(this, false);
     }
 
     /**
