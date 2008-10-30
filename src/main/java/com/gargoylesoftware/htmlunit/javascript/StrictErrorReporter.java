@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import java.io.Serializable;
+
 import org.apache.commons.logging.Log;
 import org.mozilla.javascript.ErrorReporter;
 import org.mozilla.javascript.EvaluatorException;
@@ -25,8 +27,10 @@ import com.gargoylesoftware.htmlunit.WebAssert;
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Marc Guillemot
  */
-public class StrictErrorReporter implements ErrorReporter {
+public class StrictErrorReporter implements ErrorReporter, Serializable {
+    private static final long serialVersionUID = 2165290829783324770L;
     private final Log log_;
 
     /**

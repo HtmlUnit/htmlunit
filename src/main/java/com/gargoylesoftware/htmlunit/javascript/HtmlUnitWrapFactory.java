@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import java.io.Serializable;
+
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.WrapFactory;
@@ -26,9 +28,10 @@ import org.w3c.dom.NodeList;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class HtmlUnitWrapFactory extends WrapFactory {
+public class HtmlUnitWrapFactory extends WrapFactory implements Serializable {
+    private static final long serialVersionUID = 1779982280511278636L;
 
-    /**
+	/**
      * Constructor.
      */
     public HtmlUnitWrapFactory() {
