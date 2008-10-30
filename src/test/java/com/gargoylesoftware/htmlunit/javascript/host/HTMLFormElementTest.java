@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
+import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
@@ -1240,6 +1241,30 @@ public class HTMLFormElementTest extends WebTestCase {
         final String[] expectedAlerts = {"\nfunction handler() {\n}\n", "null"};
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void fileInput_fireOnChange() throws Exception {
+        final String html = "<html><head></head><body>\n"
+            + "<form>\n"
+            + "  <input type='file' name='myFile' id='myFile' onchange='alert(this.value)'/>\n"
+            + "</form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final String[] expectedAlerts = {"dummy.txt"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(html, collectedAlerts);
+        final HtmlFileInput fileInput = page.getHtmlElementById("myFile");
+        fileInput.focus();
+        fileInput.setAttributeValue("value", "dummy.txt");
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
+        // remove focus to trigger onchange
+        page.setFocusedElement(null);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }
