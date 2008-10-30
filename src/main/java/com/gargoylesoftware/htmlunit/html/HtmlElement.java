@@ -41,7 +41,6 @@ import org.w3c.dom.Comment;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.EntityReference;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
@@ -88,9 +87,6 @@ public abstract class HtmlElement extends DomElement {
     public static final Short TAB_INDEX_OUT_OF_BOUNDS = new Short(Short.MIN_VALUE);
 
     private final transient Log mainLog_ = LogFactory.getLog(getClass());
-
-    /** The "live" attribute map required for {@link #getAttributes()}. */
-    private NamedNodeMap attributeMap_;
 
     /** The listeners which are to be notified of attribute changes. */
     private List<HtmlAttributeChangeListener> attributeListeners_;
@@ -370,17 +366,6 @@ public abstract class HtmlElement extends DomElement {
     @Override
     public final boolean hasAttribute(final String attributeName) {
         return super.hasAttribute(attributeName.toLowerCase());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public NamedNodeMap getAttributes() {
-        if (attributeMap_ == null) {
-            attributeMap_ = new com.gargoylesoftware.htmlunit.javascript.NamedNodeMap(this, true);
-        }
-        return attributeMap_;
     }
 
     /**
