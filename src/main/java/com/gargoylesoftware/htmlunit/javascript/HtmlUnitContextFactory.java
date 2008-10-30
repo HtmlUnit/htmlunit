@@ -20,8 +20,10 @@ import org.apache.commons.logging.Log;
 import org.mozilla.javascript.Callable;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextFactory;
+import org.mozilla.javascript.ErrorReporter;
 import org.mozilla.javascript.ScriptRuntime;
 import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.WrapFactory;
 import org.mozilla.javascript.debug.Debugger;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -35,6 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.regexp.HtmlUnitRegExpProxy;
  * @version $Revision$
  * @author Andre Soereng
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class HtmlUnitContextFactory extends ContextFactory implements Serializable {
 
@@ -46,6 +49,8 @@ public class HtmlUnitContextFactory extends ContextFactory implements Serializab
     private final Log log_;
     private long timeout_;
     private Debugger debugger_;
+    private final ErrorReporter errorReporter_;
+    private final WrapFactory wrapFactory_ = new HtmlUnitWrapFactory();
 
     /**
      * Creates a new instance of HtmlUnitContextFactory.
@@ -58,6 +63,7 @@ public class HtmlUnitContextFactory extends ContextFactory implements Serializab
         WebAssert.notNull("log", log);
         browserVersion_ = browserVersion;
         log_ = log;
+        errorReporter_ = new StrictErrorReporter(log_);
     }
 
     /**
@@ -137,8 +143,8 @@ public class HtmlUnitContextFactory extends ContextFactory implements Serializab
         // Set threshold on how often we want to receive the callbacks
         cx.setInstructionObserverThreshold(INSTRUCTION_COUNT_THRESHOLD);
 
-        cx.setErrorReporter(new StrictErrorReporter(log_));
-        cx.setWrapFactory(new HtmlUnitWrapFactory());
+        configureErrorReporter(cx);
+        cx.setWrapFactory(wrapFactory_);
 
         if (debugger_ != null) {
             cx.setDebugger(debugger_, null);
@@ -148,6 +154,15 @@ public class HtmlUnitContextFactory extends ContextFactory implements Serializab
         ScriptRuntime.setRegExpProxy(cx, new HtmlUnitRegExpProxy(ScriptRuntime.getRegExpProxy(cx)));
 
         return cx;
+    }
+
+    /**
+     * Configures the {@link ErrorReporter} on the context.
+     * @param context the context to configure
+     * @see {@link Context#setErrorReporter(ErrorReporter)}
+     */
+    protected void configureErrorReporter(final Context context) {
+        context.setErrorReporter(errorReporter_);
     }
 
     /**
