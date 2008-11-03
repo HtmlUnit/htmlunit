@@ -247,4 +247,26 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "50px" })
+    public void styleAttributePreferredOverStylesheet() throws Exception {
+        final String html = "<html>\n"
+            + "<head><style>div { width: 30px; }</style></head>\n"
+            + "<body>\n"
+            + "<div id='d' style='width:50px'>foo</div>\n"
+            + "<script>\n"
+            + "var d = document.getElementById('d');\n"
+            + "var style = d.currentStyle;\n"
+            + "style = style ? style : window.getComputedStyle(d,'');\n"
+            + "alert(style.width);\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts(html);
+    }
+
 }

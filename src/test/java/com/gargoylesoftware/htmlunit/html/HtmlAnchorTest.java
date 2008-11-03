@@ -456,4 +456,19 @@ public class HtmlAnchorTest extends WebTestCase {
         final HtmlPage secondPage = a1.click();
         assertEquals(URL_GARGOYLE, secondPage.getWebResponse().getRequestUrl());
     }
+
+    /**
+     * Attributes aren't usually quoted in IE, but <tt>href</tt> attributes of anchor elements are.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testInnerHtmlHrefQuotedEvenInIE() throws Exception {
+        final String html = "<html><body onload='alert(document.getElementById(\"d\").innerHTML)'>"
+            + "<div id='d'><a id='a' href='#x'>foo</a></div></body></html>";
+        final List<String> actual = new ArrayList<String>();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7, html, actual);
+        final String[] expected = new String[] {"<A id=a href=\"#x\">foo</A>"};
+        assertEquals(expected, actual);
+    }
+
 }

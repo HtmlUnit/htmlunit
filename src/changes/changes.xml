@@ -8,6 +8,25 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="fix" dev="sdanig">
+                JavaScript: element.innerHTML should quote anchor href attributes when emulating IE.
+            </action>
+            <action type="fix" dev="sdanig">
+                JavaScript: In certain cases, node collections were returning elements when inexistent attributes were accessed.
+            </action>
+            <action type="fix" dev="sdanig">
+                JavaScript: document.documentElement.childNodes should only ever contain the head element and the body element,
+                if they exist (never any text nodes).
+            </action>
+            <action type="fix" dev="sdanig">
+                JavaScript: make sure element.offsetWidth is constrained by the element's parent's dimensions.
+            </action>
+            <action type="fix" dev="sdanig">
+                CSS rules specified in stylesheets should not override CSS rules specified directly in an element's "style" attribute.
+            </action>
+            <action type="add" dev="sdanig">
+                JavaScript: implement element.style.pixelLeft, pixelRight, pixelTop and pixelBottom (IE only).
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: fire onchange for &lt;input type='file' ...&gt; when field looses focus and value has been changed.
             </action>

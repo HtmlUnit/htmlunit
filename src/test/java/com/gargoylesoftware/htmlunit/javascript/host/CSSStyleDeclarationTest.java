@@ -434,6 +434,10 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             "paddingTop",
             "pageBreakAfter",
             "pageBreakBefore",
+            "pixelBottom",
+            "pixelLeft",
+            "pixelRight",
+            "pixelTop",
             "position",
             "posBottom",
             "posHeight",
@@ -1470,4 +1474,113 @@ public class CSSStyleDeclarationTest extends WebTestCase {
         final HtmlPage page = loadPageWithAlerts(html);
         assertEquals("color: pink;", page.<HtmlElement>getHtmlElementById("div1").getAttributeValue("style"));
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE = { "5px", "5", "1em", "16", "30px", "30" },
+            FF = { "5px", "undefined", "1em", "undefined" })
+    public void pixelLeft() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='a' style='left: 5px; border: 1px solid black;'>a</div>\n"
+            + "<div id='b' style='left: 1em; border: 1px solid black;'>b</div>\n"
+            + "<script>\n"
+            + "  var a = document.getElementById('a');\n"
+            + "  var b = document.getElementById('b');\n"
+            + "  alert(a.style.left);\n"
+            + "  alert(a.style.pixelLeft);\n"
+            + "  alert(b.style.left);\n"
+            + "  alert(b.style.pixelLeft);\n"
+            + "  if(a.style.pixelLeft) {\n"
+            + "    a.style.pixelLeft = 30;\n"
+            + "    alert(a.style.left);\n"
+            + "    alert(a.style.pixelLeft);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE = { "5px", "5", "1em", "16", "30px", "30" },
+            FF = { "5px", "undefined", "1em", "undefined" })
+    public void pixelRight() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='a' style='right: 5px; border: 1px solid black;'>a</div>\n"
+            + "<div id='b' style='right: 1em; border: 1px solid black;'>b</div>\n"
+            + "<script>\n"
+            + "  var a = document.getElementById('a');\n"
+            + "  var b = document.getElementById('b');\n"
+            + "  alert(a.style.right);\n"
+            + "  alert(a.style.pixelRight);\n"
+            + "  alert(b.style.right);\n"
+            + "  alert(b.style.pixelRight);\n"
+            + "  if(a.style.pixelRight) {\n"
+            + "    a.style.pixelRight = 30;\n"
+            + "    alert(a.style.right);\n"
+            + "    alert(a.style.pixelRight);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE = { "5px", "5", "1em", "16", "30px", "30" },
+            FF = { "5px", "undefined", "1em", "undefined" })
+    public void pixelTop() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='a' style='top: 5px; border: 1px solid black;'>a</div>\n"
+            + "<div id='b' style='top: 1em; border: 1px solid black;'>b</div>\n"
+            + "<script>\n"
+            + "  var a = document.getElementById('a');\n"
+            + "  var b = document.getElementById('b');\n"
+            + "  alert(a.style.top);\n"
+            + "  alert(a.style.pixelTop);\n"
+            + "  alert(b.style.top);\n"
+            + "  alert(b.style.pixelTop);\n"
+            + "  if(a.style.pixelTop) {\n"
+            + "    a.style.pixelTop = 30;\n"
+            + "    alert(a.style.top);\n"
+            + "    alert(a.style.pixelTop);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE = { "5px", "5", "1em", "16", "30px", "30" },
+            FF = { "5px", "undefined", "1em", "undefined" })
+    public void pixelBottom() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='a' style='bottom: 5px; border: 1px solid black;'>a</div>\n"
+            + "<div id='b' style='bottom: 1em; border: 1px solid black;'>b</div>\n"
+            + "<script>\n"
+            + "  var a = document.getElementById('a');\n"
+            + "  var b = document.getElementById('b');\n"
+            + "  alert(a.style.bottom);\n"
+            + "  alert(a.style.pixelBottom);\n"
+            + "  alert(b.style.bottom);\n"
+            + "  alert(b.style.pixelBottom);\n"
+            + "  if(a.style.pixelBottom) {\n"
+            + "    a.style.pixelBottom = 30;\n"
+            + "    alert(a.style.bottom);\n"
+            + "    alert(a.style.pixelBottom);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }

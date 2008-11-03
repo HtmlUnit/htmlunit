@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import org.apache.commons.lang.math.NumberUtils;
+import org.apache.commons.lang.StringUtils;
 import org.mozilla.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -127,7 +127,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 }
                 final StyleElement existent = styleMap.get(key);
                 final StyleElement element = new StyleElement(key, e.getValue(), e.getIndex());
-                if (existent == null || !element.isDefault()) {
+                if (existent == null) {
+                    // Local modifications represent either default style elements or style elements
+                    // defined in stylesheets; either way, they shouldn't overwrite any style
+                    // elements derived directly from the HTML element's "style" attribute.
                     styleMap.put(key, element);
                 }
             }
@@ -1077,16 +1080,29 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the element's width, possibly including its padding and border
      */
     int getCalculatedWidth(final boolean includeBorder, final boolean includePadding) {
-        int width = intValue(super.jsxGet_width());
-        if (includeBorder) {
-            final int borderLeft = intValue(jsxGet_borderLeftWidth());
-            final int borderRight = intValue(jsxGet_borderRightWidth());
-            width += borderLeft + borderRight;
+        int width;
+        final String styleWidth = super.jsxGet_width();
+        final DomNode parent = getHTMLElement().getDomNodeOrDie().getParentNode();
+        if (StringUtils.isEmpty(styleWidth) && parent instanceof HtmlElement) {
+            // Width not explicitly set; just assume we fill the width provided by the parent...
+            // AS LONG AS we can get the parent!
+            final HTMLElement parentJS = (HTMLElement) parent.getScriptObject();
+            final String parentWidth = getWindow().jsxFunction_getComputedStyle(parentJS, null).jsxGet_width();
+            width = pixelValue(parentWidth);
         }
-        if (includePadding) {
-            final int paddingLeft = intValue(jsxGet_paddingLeft());
-            final int paddingRight = intValue(jsxGet_paddingRight());
-            width += paddingLeft + paddingRight;
+        else {
+            // Width explicitly set in the style attribute, or there was no parent to provide guidance.
+            width = pixelValue(styleWidth);
+            if (includeBorder) {
+                final int borderLeft = pixelValue(jsxGet_borderLeftWidth());
+                final int borderRight = pixelValue(jsxGet_borderRightWidth());
+                width += borderLeft + borderRight;
+            }
+            if (includePadding) {
+                final int paddingLeft = pixelValue(jsxGet_paddingLeft());
+                final int paddingRight = pixelValue(jsxGet_paddingRight());
+                width += paddingLeft + paddingRight;
+            }
         }
         return width;
     }
@@ -1098,15 +1114,15 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the element's height, possibly including its padding and border
      */
     int getCalculatedHeight(final boolean includeBorder, final boolean includePadding) {
-        int height = intValue(super.jsxGet_height());
+        int height = pixelValue(super.jsxGet_height());
         if (includeBorder) {
-            final int borderTop = intValue(jsxGet_borderTopWidth());
-            final int borderBottom = intValue(jsxGet_borderBottomWidth());
+            final int borderTop = pixelValue(jsxGet_borderTopWidth());
+            final int borderBottom = pixelValue(jsxGet_borderBottomWidth());
             height += borderTop + borderBottom;
         }
         if (includePadding) {
-            final int paddingTop = intValue(jsxGet_paddingTop());
-            final int paddingBottom = intValue(jsxGet_paddingBottom());
+            final int paddingTop = pixelValue(jsxGet_paddingTop());
+            final int paddingBottom = pixelValue(jsxGet_paddingBottom());
             height += paddingTop + paddingBottom;
         }
         return height;
@@ -1127,7 +1143,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         int top;
         if ("absolute".equals(p) && !"auto".equals(t)) {
             // No need to calculate displacement caused by sibling nodes.
-            top = intValue(t);
+            top = pixelValue(t);
         }
         else if ("absolute".equals(p) && !"auto".equals(b)) {
             // Estimate the vertical displacement caused by *all* siblings.
@@ -1142,7 +1158,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 }
                 child = child.getPreviousSibling();
             }
-            top -= intValue(b);
+            top -= pixelValue(b);
         }
         else {
             // Estimate the vertical displacement caused by *previous* siblings.
@@ -1159,17 +1175,17 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         if (includeMargin) {
-            final int margin = intValue(jsxGet_marginTop());
+            final int margin = pixelValue(jsxGet_marginTop());
             top += margin;
         }
 
         if (includeBorder) {
-            final int border = intValue(jsxGet_borderTopWidth());
+            final int border = pixelValue(jsxGet_borderTopWidth());
             top += border;
         }
 
         if (includePadding) {
-            final int padding = intValue(jsxGet_paddingTop());
+            final int padding = pixelValue(jsxGet_paddingTop());
             top += padding;
         }
 
@@ -1191,14 +1207,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         int left;
         if ("absolute".equals(p) && !"auto".equals(l)) {
             // No need to calculate displacement caused by sibling nodes.
-            left = intValue(l);
+            left = pixelValue(l);
         }
         else if ("absolute".equals(p) && !"auto".equals(r)) {
             // We *should* calculate the horizontal displacement caused by *all* siblings.
             // However, that would require us to retrieve computed styles for all siblings,
             // and that sounds like a lot of work. We'll use a bogus parent width until a
             // scenario arises that requires a more exact calculation.
-            left = 200 - intValue(r);
+            left = 200 - pixelValue(r);
         }
         else {
             // We *should* calculate the horizontal displacement caused by *previous* siblings.
@@ -1209,30 +1225,21 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         if (includeMargin) {
-            final int margin = intValue(jsxGet_marginLeft());
+            final int margin = pixelValue(jsxGet_marginLeft());
             left += margin;
         }
 
         if (includeBorder) {
-            final int border = intValue(jsxGet_borderLeftWidth());
+            final int border = pixelValue(jsxGet_borderLeftWidth());
             left += border;
         }
 
         if (includePadding) {
-            final int padding = intValue(jsxGet_paddingLeft());
+            final int padding = pixelValue(jsxGet_paddingLeft());
             left += padding;
         }
 
         return left;
-    }
-
-    /**
-     * Converts the specified length string value into an integer number of pixels.
-     * @param value the length string value to convert to an integer number of pixels
-     * @return the integer number of pixels corresponding to the specified length string value
-     */
-    private int intValue(final String value) {
-        return NumberUtils.toInt(value.replaceAll("(\\d+).*", "$1"), 0);
     }
 
     /**

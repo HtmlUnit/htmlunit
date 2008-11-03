@@ -206,7 +206,7 @@ public class HTMLCollectionTest extends WebTestCase {
     /**
      * Depending on the method used, out of bound access give different responses.
      * In fact this is not fully correct as FF support the col(index) syntax only for special
-     *  collections where it simulates IE like document.all
+     * collections where it simulates IE like document.all
      * @throws Exception if the test fails
      */
     @Test
@@ -225,4 +225,23 @@ public class HTMLCollectionTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "undefined", "undefined", "undefined" })
+    public void testInexistentProperties() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    var x = document.documentElement.childNodes;\n"
+            + "    alert(x.split);\n"
+            + "    alert(x.setInterval);\n"
+            + "    alert(x.bogusNonExistentProperty);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }

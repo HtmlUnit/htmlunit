@@ -45,8 +45,11 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class Node extends SimpleScriptable {
 
-    private HTMLCollection childNodes_; //has to be a member to have equality (==) working
     private static final long serialVersionUID = -5695262053081637445L;
+
+    /** "Live" child nodes collection; has to be a member to have equality (==) working. */
+    protected HTMLCollection childNodes_;
+
     private EventListenersContainer eventListenersContainer_;
 
     /** @see org.w3c.dom.Node#ELEMENT_NODE */
@@ -292,7 +295,7 @@ public class Node extends SimpleScriptable {
      * Returns the child nodes of the current element.
      * @return the child nodes of the current element
      */
-    public final Object jsxGet_childNodes() {
+    public Object jsxGet_childNodes() {
         if (childNodes_ == null) {
             childNodes_ = new HTMLCollection(this);
             childNodes_.initFromChildren(getDomNodeOrDie());

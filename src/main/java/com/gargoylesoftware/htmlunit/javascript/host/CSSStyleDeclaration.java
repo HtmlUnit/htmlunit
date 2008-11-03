@@ -23,6 +23,7 @@ import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang.math.NumberUtils;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
@@ -3040,6 +3041,70 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
     }
 
     /**
+     * Gets the "pixelBottom" style attribute.
+     * @return the style attribute
+     */
+    public int jsxGet_pixelBottom() {
+        return pixelValue(jsxGet_bottom());
+    }
+
+    /**
+     * Sets the "pixelBottom" style attribute.
+     * @param pixelBottom the new attribute
+     */
+    public void jsxSet_pixelBottom(final int pixelBottom) {
+        jsxSet_bottom(pixelBottom + "px");
+    }
+
+    /**
+     * Gets the "pixelLeft" style attribute.
+     * @return the style attribute
+     */
+    public int jsxGet_pixelLeft() {
+        return pixelValue(jsxGet_left());
+    }
+
+    /**
+     * Sets the "pixelLeft" style attribute.
+     * @param pixelLeft the new attribute
+     */
+    public void jsxSet_pixelLeft(final int pixelLeft) {
+        jsxSet_left(pixelLeft + "px");
+    }
+
+    /**
+     * Gets the "pixelRight" style attribute.
+     * @return the style attribute
+     */
+    public int jsxGet_pixelRight() {
+        return pixelValue(jsxGet_right());
+    }
+
+    /**
+     * Sets the "pixelRight" style attribute.
+     * @param pixelRight the new attribute
+     */
+    public void jsxSet_pixelRight(final int pixelRight) {
+        jsxSet_right(pixelRight + "px");
+    }
+
+    /**
+     * Gets the "pixelTop" style attribute.
+     * @return the style attribute
+     */
+    public int jsxGet_pixelTop() {
+        return pixelValue(jsxGet_top());
+    }
+
+    /**
+     * Sets the "pixelTop" style attribute.
+     * @param pixelTop the new attribute
+     */
+    public void jsxSet_pixelTop(final int pixelTop) {
+        jsxSet_top(pixelTop + "px");
+    }
+
+    /**
      * Gets the "posBottom" style attribute.
      * @return the style attribute
      */
@@ -3946,7 +4011,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
                 width += "px";
             }
         }
-
         return width;
     }
 
@@ -4420,6 +4484,46 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
     }
 
     /**
+     * Converts the specified length string value into an integer number of pixels.
+     * @param value the length string value to convert to an integer number of pixels
+     * @return the integer number of pixels corresponding to the specified length string value
+     * @see <a href="http://htmlhelp.com/reference/css/units.html">CSS Units</a>
+     */
+    protected static int pixelValue(final String value) {
+        final int i = NumberUtils.toInt(value.replaceAll("(\\d+).*", "$1"), 0);
+        if (value.endsWith("px")) {
+            return i;
+        }
+        else if (value.endsWith("em")) {
+            return i * 16;
+        }
+        else if (value.endsWith("ex")) {
+            return i * 10;
+        }
+        else if (value.endsWith("in")) {
+            return i * 150;
+        }
+        else if (value.endsWith("cm")) {
+            return i * 50;
+        }
+        else if (value.endsWith("mm")) {
+            return i * 5;
+        }
+        else if (value.endsWith("pt")) {
+            return i * 2;
+        }
+        else if (value.endsWith("pc")) {
+            return i * 24;
+        }
+        else if (value.endsWith("%")) {
+            return i;
+        }
+        else {
+            return i;
+        }
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -4482,7 +4586,11 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
             return index_;
         }
         /**
-         * Returns <tt>true</tt> if this style element contains a default value.
+         * Returns <tt>true</tt> if this style element contains a default value. This method isn't
+         * currently used anywhere because default style elements are applied before non-default
+         * style elements, so the natural ordering results in correct precedence rules being applied
+         * (i.e. default style elements don't override non-default style elements) without the need
+         * for special checks.
          * @return <tt>true</tt> if this style element contains a default value
          */
         public boolean isDefault() {

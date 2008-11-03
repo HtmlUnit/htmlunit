@@ -349,13 +349,12 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         // See if there are any elements in the element array with the specified name.
         final HTMLCollection array = new HTMLCollection(this);
         final String newCondition = "@name = '" + name + "'";
-        final String currentXPathExpr = xpath_.toString();
         final String xpathExpr;
-        if (currentXPathExpr.endsWith("]")) {
-            xpathExpr = currentXPathExpr.substring(0, currentXPathExpr.length() - 1) + " and " + newCondition + "]";
+        if (xpath_.endsWith("]")) {
+            xpathExpr = xpath_.replaceAll("\\[([^\\]]*)\\]$", "[($1) and " + newCondition + "]");
         }
         else {
-            xpathExpr = currentXPathExpr + "[" + newCondition + "]";
+            xpathExpr = xpath_ + "[" + newCondition + "]";
         }
         array.init(node_, xpathExpr);
 
@@ -499,10 +498,6 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     }
 
     /**
-     * Returns the element or elements that match the specified key. If it is the name
-     * of a property, the property value is returned. If it is the id of an element in
-     * the array, that element is returned. Finally, if it is the name of an element or
-     * elements in the array, then all those elements are returned. Otherwise,
      * {@inheritDoc}.
      */
     @Override

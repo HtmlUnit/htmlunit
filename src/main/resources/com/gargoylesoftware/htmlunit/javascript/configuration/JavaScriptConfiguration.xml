@@ -454,6 +454,18 @@
         <property name="pitchRange" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>
+        <property name="pixelBottom" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="pixelLeft" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="pixelRight" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="pixelTop" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
         <property name="posBottom" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>

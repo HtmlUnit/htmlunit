@@ -1314,6 +1314,19 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({ "30" })
+    public void offsetWidth_parentWidthConstrainsChildWidth() throws Exception {
+        final String html = "<html><head><style>#a { width: 30px; }</style></head><body>\n"
+            + "<div id='a'><div id='b'>foo</div></div>\n"
+            + "<script>alert(document.getElementById('b').offsetWidth);</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts({ "15", "15" })
     public void offsetTopAndLeft_Padding() throws Exception {
         final String html =

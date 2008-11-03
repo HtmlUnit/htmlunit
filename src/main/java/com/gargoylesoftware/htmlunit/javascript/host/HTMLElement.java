@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -649,7 +650,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             for (final DomAttr attr : element.getAttributesMap().values()) {
                 final String name = attr.getName();
                 final String value = attr.getValue().replaceAll("\"", "&quot;");
-                final boolean quote = !ie || com.gargoylesoftware.htmlunit.util.StringUtils.containsWhitespace(value);
+                final boolean quote = !ie
+                    || com.gargoylesoftware.htmlunit.util.StringUtils.containsWhitespace(value)
+                    || (element instanceof HtmlAnchor && "href".equals(name));
                 buffer.append(' ').append(name).append("=");
                 if (quote) {
                     buffer.append("\"");
@@ -1815,7 +1818,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public String jsxGet_nodeName() {
         final DomNode domNode = getDomNodeOrDie();
         String nodeName = domNode.getNodeName();
-
         if (domNode.getPage() instanceof HtmlPage) {
             nodeName = nodeName.toUpperCase();
         }
