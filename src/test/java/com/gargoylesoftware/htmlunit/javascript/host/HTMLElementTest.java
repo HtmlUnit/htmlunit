@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
@@ -2175,15 +2176,15 @@ public class HTMLElementTest extends WebTestCase {
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final String firstContent = "<html><head><title>First</title>\n"
+        final String firstHtml = "<html><head><title>First</title>\n"
             + "<script>var win2;</script></head>\n"
             + "<body><form name='form1'>\n"
             + "<input id='text1' onfocus='alert(\"onfocus text1\");win2.focus();'>\n"
             + "<button id='button1' onClick='win2=window.open(\"" + URL_SECOND + "\");'>Click me</a>\n"
             + "</form></body></html>";
-        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_FIRST, firstHtml);
 
-        final String secondContent = "<html><head><title>Second</title></head>\n"
+        final String secondHtml = "<html><head><title>Second</title></head>\n"
             + "<body>\n"
             + "<input id='text2'  onfocus='alert(\"onfocus text2\")'>\n"
             + "<button id='button2' onClick='doTest();'>Click me</a>\n"
@@ -2198,7 +2199,7 @@ public class HTMLElementTest extends WebTestCase {
             + "         opener.focus();"
             + "    }\n"
             + "</script></body></html>";
-        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(URL_SECOND, secondHtml);
 
         webClient.setWebConnection(webConnection);
 
@@ -2224,14 +2225,14 @@ public class HTMLElementTest extends WebTestCase {
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final String firstContent = "<html><head><title>First</title></head>\n"
+        final String firstHtml = "<html><head><title>First</title></head>\n"
                 + "<body><form name='form1'>\n"
                 + "<input id='text1' onfocus='alert(\"onfocus text1\")'>\n"
                 + "<button type='button' id='clickme' onClick='window.open(\"" + URL_SECOND + "\");'>Click me</a>\n"
                 + "</form></body></html>";
-        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_FIRST, firstHtml);
 
-        final String secondContent = "<html><head><title>Second</title></head>\n"
+        final String secondHtml = "<html><head><title>Second</title></head>\n"
                 + "<body onLoad='doTest()'>\n"
                 + "<input id='text2'  onfocus='alert(\"onfocus text2\")'>\n"
                 + "<script>\n"
@@ -2241,7 +2242,7 @@ public class HTMLElementTest extends WebTestCase {
                 + "    }\n"
                 + "</script></body></html>";
 
-        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(URL_SECOND, secondHtml);
         webClient.setWebConnection(webConnection);
 
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
@@ -2267,14 +2268,14 @@ public class HTMLElementTest extends WebTestCase {
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final String firstContent = "<html><head><title>First</title></head>\n"
+        final String firstHtml = "<html><head><title>First</title></head>\n"
                 + "<body><form name='form1'>\n"
                 + "<input id='text1' onblur='alert(\"onblur text1\")'>\n"
                 + "<button type='button' id='clickme' onClick='window.open(\"" + URL_SECOND + "\");'>Click me</a>\n"
                 + "</form></body></html>";
-        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_FIRST, firstHtml);
 
-        final String secondContent = "<html><head><title>Second</title></head>\n"
+        final String secondHtml = "<html><head><title>Second</title></head>\n"
                 + "<body onLoad='doTest()'>\n"
                 + "<input id='text2' onblur='alert(\"onblur text2\")'>\n"
                 + "<script>\n"
@@ -2284,7 +2285,7 @@ public class HTMLElementTest extends WebTestCase {
                 + "    }\n"
                 + "</script></body></html>";
 
-        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(URL_SECOND, secondHtml);
         webClient.setWebConnection(webConnection);
 
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
@@ -2353,6 +2354,38 @@ public class HTMLElementTest extends WebTestCase {
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p id='pid' class='x'>text</p>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    @Alerts(IE = { "true", "true", "false", "false", "false" })
+    public void contains() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var div1 = document.getElementById('div1');\n"
+            + "  var div2 = document.getElementById('div2');\n"
+            + "  var div3 = document.getElementById('div3');\n"
+            + "  alert(div1.contains(div1));\n"
+            + "  alert(div1.contains(div2));\n"
+            + "  alert(div1.contains(div3));\n"
+            + "  alert(div2.contains(div1));\n"
+            + "  alert(div3.contains(div1));\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<div id='div1'>\n"
+            + "  <div id='div2'>\n"
+            + "  </div>\n"
+            + "</div>\n"
+            + "<div id='div3'>\n"
+            + "</div>\n"
             + "</body></html>";
 
         loadPageWithAlerts(html);

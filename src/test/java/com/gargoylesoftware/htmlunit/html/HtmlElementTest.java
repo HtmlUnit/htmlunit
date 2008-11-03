@@ -46,9 +46,9 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testElementHasAttributeWith() throws Exception {
-        final String content = "<html><head></head><body id='tag'>text</body></html>";
+        final String html = "<html><head></head><body id='tag'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
         Assert.assertEquals("Element should have attribute", true, node.hasAttribute("id"));
@@ -60,10 +60,9 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testElementHasAttributeNone() throws Exception {
-        final String content
-            = "<html><head></head><body id='tag'>text</body></html>";
+        final String html = "<html><head></head><body id='tag'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
         Assert.assertEquals("Element should not have attribute", false, node.hasAttribute("foo"));
@@ -75,10 +74,10 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testElementHasAttributeNSWith() throws Exception {
-        final String content
+        final String html
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
         Assert.assertEquals("Element should have attribute", true, node.hasAttributeNS("http://foobar", "foo"));
@@ -90,10 +89,9 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testElementHasAttributeNSNone() throws Exception {
-        final String content
-            = "<html><head></head><body id='tag'>text</body></html>";
+        final String html = "<html><head></head><body id='tag'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
         Assert.assertEquals("Element should not have attribute", false, node.hasAttributeNS("http://foobar", "foo"));
@@ -105,10 +103,10 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testElementGetAttributeWith() throws Exception {
-        final String content
+        final String html
             = "<html><head></head><body id='tag'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
         Assert.assertEquals("Element should have attribute", "tag", node.getAttribute("id"));
@@ -120,10 +118,10 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testElementGetAttributeNone() throws Exception {
-        final String content
+        final String html
             = "<html><head></head><body id='tag'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
         Assert.assertEquals("Element should not have attribute", "", node.getAttribute("foo"));
@@ -135,10 +133,10 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testElementGetAttributeNSWith() throws Exception {
-        final String content
+        final String html
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
         Assert.assertEquals("Element should have attribute", "bar", node.getAttributeNS("http://foobar", "foo"));
@@ -150,10 +148,10 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testElementGetAttributeNSNone() throws Exception {
-        final String content
+        final String html
             = "<html><head></head><body id='tag'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
         Assert.assertEquals("Element should not have attribute", "", node.getAttributeNS("http://foobar", "foo"));
@@ -165,10 +163,10 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testElementGetNamespaceURIWith() throws Exception {
-        final String content
+        final String html
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
@@ -186,10 +184,10 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testElementGetNamespaceURINone() throws Exception {
-        final String content
+        final String html
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
@@ -207,10 +205,10 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testElementGetLocalNameWith() throws Exception {
-        final String content
+        final String html
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
@@ -228,10 +226,10 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testElementGetLocalNameNone() throws Exception {
-        final String content
+        final String html
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
@@ -250,10 +248,10 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testElementGetPrefixWith() throws Exception {
-        final String content
+        final String html
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
@@ -271,10 +269,10 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testElementGetPrefixNone() throws Exception {
-        final String content
+        final String html
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
@@ -292,10 +290,10 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testElementSetPrefix() throws Exception {
-        final String content
+        final String html
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
@@ -315,10 +313,10 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testElementSetAttributeWith() throws Exception {
-        final String content
+        final String html
             = "<html><head></head><body id='tag'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
         node.setAttribute("id", "other");
@@ -331,10 +329,10 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testElementSetAttributeNone() throws Exception {
-        final String content
+        final String html
             = "<html><head></head><body id='tag'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
         node.setAttribute("foo", "other");
@@ -347,10 +345,10 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testElementSetAttributeNSWith() throws Exception {
-        final String content
+        final String html
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
         node.setAttributeNS("http://foobar", "ns:foo", "other");
@@ -363,10 +361,10 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testElementSetAttributeNSNone() throws Exception {
-        final String content
+        final String html
             = "<html><head></head><body id='tag'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
         node.setAttributeNS("http://foobar", "ns:foo", "other");
@@ -379,10 +377,10 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testElementRemoveAttributeWith() throws Exception {
-        final String content
+        final String html
             = "<html><head></head><body id='tag'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
         node.removeAttribute("id");
@@ -395,10 +393,10 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testElementRemoveAttributeNone() throws Exception {
-        final String content
+        final String html
             = "<html><head></head><body id='tag'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
         node.removeAttribute("foo");
@@ -411,10 +409,10 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testElementRemoveAttributeNSWith() throws Exception {
-        final String content
+        final String html
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
         node.removeAttributeNS("http://foobar", "foo");
@@ -428,10 +426,10 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testElementRemoveAttributeNSNone() throws Exception {
-        final String content
+        final String html
             = "<html><head></head><body id='tag'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
         node.removeAttributeNS("http://foobar", "foo");
@@ -706,7 +704,7 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testMouseOver() throws Exception {
-        final String content = "<html>\n"
+        final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function mouseOverMe() {\n"
@@ -717,7 +715,7 @@ public class HtmlElementTest extends WebTestCase {
             + "<body id='myBody' onmouseover='mouseOverMe()'>\n"
             + "<textarea id='myTextarea'></textarea>\n"
             + "</body></html>";
-        final HtmlPage page = loadPage(content);
+        final HtmlPage page = loadPage(html);
         final HtmlBody body = page.getHtmlElementById("myBody");
         body.mouseOver();
         final HtmlTextArea textArea = page.getHtmlElementById("myTextarea");
@@ -729,7 +727,7 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testMouseMove() throws Exception {
-        final String content = "<html>\n"
+        final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function mouseMoveMe() {\n"
@@ -740,7 +738,7 @@ public class HtmlElementTest extends WebTestCase {
             + "<body id='myBody' onmousemove='mouseMoveMe()'>\n"
             + "<textarea id='myTextarea'></textarea>\n"
             + "</body></html>";
-        final HtmlPage page = loadPage(content);
+        final HtmlPage page = loadPage(html);
         final HtmlBody body = page.getHtmlElementById("myBody");
         body.mouseMove();
         final HtmlTextArea textArea = page.getHtmlElementById("myTextarea");
@@ -752,7 +750,7 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testMouseOut() throws Exception {
-        final String content = "<html>\n"
+        final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function mouseOutMe() {\n"
@@ -763,7 +761,7 @@ public class HtmlElementTest extends WebTestCase {
             + "<body id='myBody' onmouseout='mouseOutMe()'>\n"
             + "<textarea id='myTextarea'></textarea>\n"
             + "</body></html>";
-        final HtmlPage page = loadPage(content);
+        final HtmlPage page = loadPage(html);
         final HtmlBody body = page.getHtmlElementById("myBody");
         body.mouseOut();
         final HtmlTextArea textArea = page.getHtmlElementById("myTextarea");
@@ -780,7 +778,7 @@ public class HtmlElementTest extends WebTestCase {
     }
 
     private void testMouseDown(final BrowserVersion browserVersion, final String expected) throws Exception {
-        final String content = "<html>\n"
+        final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function mouseDownMe(e) {\n"
@@ -792,7 +790,7 @@ public class HtmlElementTest extends WebTestCase {
             + "<textarea id='myTextarea'></textarea>\n"
             + "</body></html>";
         final List<String> emptyList = Collections.emptyList();
-        final HtmlPage page = loadPage(browserVersion, content, emptyList);
+        final HtmlPage page = loadPage(browserVersion, html, emptyList);
         final HtmlBody body = page.getHtmlElementById("myBody");
         body.mouseDown();
         final HtmlTextArea textArea = page.getHtmlElementById("myTextarea");
@@ -804,7 +802,7 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testMouseUp() throws Exception {
-        final String content = "<html>\n"
+        final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function mouseUpMe() {\n"
@@ -815,7 +813,7 @@ public class HtmlElementTest extends WebTestCase {
             + "<body id='myBody' onmouseup='mouseUpMe()'>\n"
             + "<textarea id='myTextarea'></textarea>\n"
             + "</body></html>";
-        final HtmlPage page = loadPage(content);
+        final HtmlPage page = loadPage(html);
         final HtmlBody body = page.getHtmlElementById("myBody");
         body.mouseUp();
         final HtmlTextArea textArea = page.getHtmlElementById("myTextarea");
@@ -833,7 +831,7 @@ public class HtmlElementTest extends WebTestCase {
 
     private void testRightClick(final BrowserVersion browserVersion, final String expected)
         throws Exception {
-        final String content = "<html>\n"
+        final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function divMouseEvent(e) {\n"
@@ -854,7 +852,7 @@ public class HtmlElementTest extends WebTestCase {
             + "  <div id='myDiv'>Hello</div><br>\n"
             + "  <textarea id='myTextarea'></textarea>\n"
             + "</body></html>";
-        final HtmlPage page = loadPage(browserVersion, content, null);
+        final HtmlPage page = loadPage(browserVersion, html, null);
         final HtmlDivision div = page.getHtmlElementById("myDiv");
         div.rightClick();
         final HtmlTextArea textArea = page.getHtmlElementById("myTextarea");
@@ -874,7 +872,7 @@ public class HtmlElementTest extends WebTestCase {
 
     private void testMouse_Down_Up(final BrowserVersion browserVersion, final String expected)
         throws Exception {
-        final String content = "<html>\n"
+        final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function divMouseEvent(e) {\n"
@@ -894,7 +892,7 @@ public class HtmlElementTest extends WebTestCase {
             + "  <div id='myDiv'>Hello</div><br>\n"
             + "  <textarea id='myTextarea'></textarea>\n"
             + "</body></html>";
-        final HtmlPage page = loadPage(browserVersion, content, null);
+        final HtmlPage page = loadPage(browserVersion, html, null);
         final HtmlDivision div = page.getHtmlElementById("myDiv");
         div.mouseDown();
         div.mouseUp();
@@ -907,11 +905,11 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testAsXml_separateLineforEmptyElements() throws Exception {
-        final String content = "<html><head><title>foo</title></head>\n"
+        final String html = "<html><head><title>foo</title></head>\n"
             + "<body><table><tr><td></tr></table>\n"
             + "</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         assertTrue(page.asXml().indexOf("/> ") == -1);
     }
 
@@ -1037,7 +1035,7 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void asText() throws Exception {
-        final String content = "<html>\n"
+        final String html = "<html>\n"
             + "<head>\n"
             + "    <title>test</title>\n"
             + "</head>\n"
@@ -1046,7 +1044,7 @@ public class HtmlElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final HtmlPage page = loadPage(content);
+        final HtmlPage page = loadPage(html);
         assertEquals("test Welcome", page.asText());
     }
 
@@ -1055,7 +1053,7 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void asTextOverridingVisibility() throws Exception {
-        final String content = "<html>\n"
+        final String html = "<html>\n"
             + "<head>\n"
             + "    <title>test</title>\n"
             + "</head>\n"
@@ -1066,7 +1064,7 @@ public class HtmlElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final HtmlPage page = loadPage(content);
+        final HtmlPage page = loadPage(html);
         assertEquals("test Welcome" + LS + "to the world", page.asText());
     }
 
@@ -1075,7 +1073,7 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void asTextVisibilityCollapse() throws Exception {
-        final String content = "<html>\n"
+        final String html = "<html>\n"
             + "<head>\n"
             + "    <title>test</title>\n"
             + "</head>\n"
@@ -1086,9 +1084,9 @@ public class HtmlElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final HtmlPage iePage = loadPage(BrowserVersion.INTERNET_EXPLORER_6, content, null);
+        final HtmlPage iePage = loadPage(BrowserVersion.INTERNET_EXPLORER_6, html, null);
         assertEquals("test Welcome" + LS + "hidden text to the world some more hidden text", iePage.asText());
-        final HtmlPage ffPage = loadPage(BrowserVersion.FIREFOX_2, content, null);
+        final HtmlPage ffPage = loadPage(BrowserVersion.FIREFOX_2, html, null);
         assertEquals("test Welcome" + LS + "to the world", ffPage.asText());
     }
 
