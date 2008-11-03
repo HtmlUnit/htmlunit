@@ -1790,6 +1790,20 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
+     * Checks whether the given element is contained within this object.
+     * @param element element object that specifies the element to check
+     * @return true if the element is contained within this object
+     */
+    public boolean jsxFunction_contains(final HTMLElement element) {
+        for (HTMLElement parent = element; parent != null; parent = (HTMLElement) parent.jsxGet_parentElement()) {
+            if (this == parent) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Sets the focus to this element.
      */
     public void jsxFunction_focus() {

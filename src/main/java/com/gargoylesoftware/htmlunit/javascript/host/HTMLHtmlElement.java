@@ -39,6 +39,7 @@ public class HTMLHtmlElement extends HTMLElement {
      *
      * {@inheritDoc}
      */
+    @Override
     public Object jsxGet_childNodes() {
         // XML behavior
         if (getDomNodeOrDie().getPage() instanceof XmlPage) {
