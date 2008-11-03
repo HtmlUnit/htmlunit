@@ -2364,7 +2364,8 @@ public class HTMLElementTest extends WebTestCase {
      */
     @Test
     @NotYetImplemented
-    @Alerts(IE = { "true", "true", "false", "false", "false" })
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts({ "true", "true", "true", "false", "false", "false", "false", "true" })
     public void contains() throws Exception {
         final String html
             = "<html><head>\n"
@@ -2376,15 +2377,20 @@ public class HTMLElementTest extends WebTestCase {
             + "  alert(div1.contains(div1));\n"
             + "  alert(div1.contains(div2));\n"
             + "  alert(div1.contains(div3));\n"
+            + "  alert(div1.contains(div4));\n"
             + "  alert(div2.contains(div1));\n"
             + "  alert(div3.contains(div1));\n"
+            + "  alert(div4.contains(div1));\n"
+            + "  alert(div2.contains(div3));\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "<div id='div1'>\n"
             + "  <div id='div2'>\n"
+            + "    <div id='div3'>\n"
+            + "    </div>\n"
             + "  </div>\n"
             + "</div>\n"
-            + "<div id='div3'>\n"
+            + "<div id='div4'>\n"
             + "</div>\n"
             + "</body></html>";
 
