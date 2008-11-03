@@ -76,6 +76,11 @@ public abstract class DomNamespaceNode extends DomNode {
      */
     @Override
     public String getLocalName() {
+        if (this instanceof HtmlElement
+            //and this methods was called from xalan
+            && new Exception().getStackTrace()[1].getClassName().startsWith("org.apache.xml.dtm.")) {
+            return localName_.toLowerCase();
+        }
         return localName_;
     }
 

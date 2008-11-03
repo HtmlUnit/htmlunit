@@ -148,8 +148,7 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testElementGetAttributeNSNone() throws Exception {
-        final String html
-            = "<html><head></head><body id='tag'>text</body></html>";
+        final String html = "<html><head></head><body id='tag'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="fix" dev="asashour">
+                XPath: proper handling of upper cased HTML elements.
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: add support for element.contains() (IE only).
             </action>
