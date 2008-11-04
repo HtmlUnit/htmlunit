@@ -119,6 +119,9 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     /**
      * Sets the new value of this text area.
      *
+     * Note that this acts like 'pasting' the text, but to simulate characters entry
+     * you should use {@link #type(String)}.
+     *
      * @param newValue the new value
      */
     public final void setText(final String newValue) {
