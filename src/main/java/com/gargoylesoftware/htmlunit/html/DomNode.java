@@ -439,9 +439,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         if (i == max) {
             if (myAncestors.size() == max) {
-                return DOCUMENT_POSITION_CONTAINED_BY + DOCUMENT_POSITION_FOLLOWING;
+                return DOCUMENT_POSITION_CONTAINED_BY | DOCUMENT_POSITION_FOLLOWING;
             }
-            return DOCUMENT_POSITION_CONTAINS + DOCUMENT_POSITION_PRECEDING;
+            return DOCUMENT_POSITION_CONTAINS | DOCUMENT_POSITION_PRECEDING;
         }
 
         // neither contains nor contained by
