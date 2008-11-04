@@ -431,10 +431,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         final List<Node> myAncestors = getAncestors(true);
         final List<Node> otherAncestors = ((DomNode) other).getAncestors(true);
 
-        if (myAncestors.get(0) != otherAncestors.get(0)) {
-            throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Different documents");
-        }
-
         final int max = Math.min(myAncestors.size(), otherAncestors.size());
         int i = 1;
         while (i < max && myAncestors.get(i) == otherAncestors.get(i)) {
