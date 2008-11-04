@@ -421,10 +421,66 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     public short compareDocumentPosition(final Node other) {
-        throw new UnsupportedOperationException("DomNode.compareDocumentPosition is not yet implemented.");
+        if (other == this) {
+            return 0; // strange, no constant available?
+        }
+
+        // get ancestors of both
+        final List<Node> myAncestors = getAncestors(true);
+        final List<Node> otherAncestors = ((DomNode) other).getAncestors(true);
+
+        if (myAncestors.get(0) != otherAncestors.get(0)) {
+            throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Different documents");
+        }
+
+        final int max = Math.min(myAncestors.size(), otherAncestors.size());
+        int i = 1;
+        while (i < max && myAncestors.get(i) == otherAncestors.get(i)) {
+            ++i;
+        }
+
+        if (i == max) {
+            if (myAncestors.size() == max) {
+                return DOCUMENT_POSITION_CONTAINED_BY + DOCUMENT_POSITION_FOLLOWING;
+            }
+            else {
+                return DOCUMENT_POSITION_CONTAINS + DOCUMENT_POSITION_PRECEDING;
+            }
+        }
+
+        // neither contains nor contained by
+        final Node myAncestor = myAncestors.get(i);
+        final Node otherAncestor = otherAncestors.get(i);
+        Node node = myAncestor;
+        while (node != otherAncestor && node != null) {
+            node = node.getPreviousSibling();
+        }
+        if (node == null) {
+            return DOCUMENT_POSITION_FOLLOWING;
+        }
+        else {
+            return DOCUMENT_POSITION_PRECEDING;
+        }
+    }
+
+    /**
+     * Gets the ancestors of the node.
+     * @param includeSelf should this node be returned too
+     * @return a list of the ancestors with the root at the first position
+     */
+    protected List<Node> getAncestors(final boolean includeSelf) {
+        final List<Node> list = new ArrayList<Node>();
+        if (includeSelf) {
+            list.add(this);
+        }
+        Node node = getParentNode();
+        while (node != null) {
+            list.add(0, node);
+            node = node.getParentNode();
+        }
+        return list;
     }
 
     /**

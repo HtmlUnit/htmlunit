@@ -1896,6 +1896,24 @@
         <constant name="NOTATION_NODE">
             <browser name="Firefox"/>
         </constant>
+        <constant name="DOCUMENT_POSITION_DISCONNECTED">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="DOCUMENT_POSITION_PRECEDING">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="DOCUMENT_POSITION_FOLLOWING">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="DOCUMENT_POSITION_CONTAINS">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="DOCUMENT_POSITION_CONTAINED_BY">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC">
+            <browser name="Firefox"/>
+        </constant>
         <property name="childNodes" readable="true" writable="false"/>
         <property name="firstChild" readable="true" writable="false"/>
         <property name="lastChild" readable="true" writable="false"/>
@@ -1932,6 +1950,9 @@
         </function>
         <function name="appendChild"/>
         <function name="cloneNode"/>
+        <function name="compareDocumentPosition">
+            <browser name="Firefox"/>
+        </function>
         <function name="hasChildNodes"/>
         <function name="insertBefore"/>
         <function name="isSameNode">

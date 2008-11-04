@@ -675,4 +675,67 @@ public class NodeTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "1", "1", "2", "4", "8", "16", "32" }, IE = { "undefined", "not supported" })
+    public void testDocumentPositionConstants() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      alert(document.body.DOCUMENT_POSITION_DISCONNECTED);\n"
+            + "      alert(Node.DOCUMENT_POSITION_DISCONNECTED);\n"
+            + "      alert(Node.DOCUMENT_POSITION_PRECEDING);\n"
+            + "      alert(Node.DOCUMENT_POSITION_FOLLOWING);\n"
+            + "      alert(Node.DOCUMENT_POSITION_CONTAINS);\n"
+            + "      alert(Node.DOCUMENT_POSITION_CONTAINED_BY);\n"
+            + "      alert(Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC);\n"
+            + "    } catch(e) {\n"
+            + "      alert('not supported');\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts({ "0", "20", "20", "4", "10", "10", "2", "20" })
+    public void compareDocumentPosition() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var div1 = document.getElementById('div1');\n"
+            + "  var div2 = document.getElementById('div2');\n"
+            + "  var div3 = document.getElementById('div3');\n"
+            + "  alert(div1.compareDocumentPosition(div1));\n"
+            + "  alert(div1.compareDocumentPosition(div2));\n"
+            + "  alert(div1.compareDocumentPosition(div3));\n"
+            + "  alert(div1.compareDocumentPosition(div4));\n"
+            + "  alert(div2.compareDocumentPosition(div1));\n"
+            + "  alert(div3.compareDocumentPosition(div1));\n"
+            + "  alert(div4.compareDocumentPosition(div1));\n"
+            + "  alert(div2.compareDocumentPosition(div3));\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<div id='div1'>\n"
+            + "  <div id='div2'>\n"
+            + "    <div id='div3'>\n"
+            + "    </div>\n"
+            + "  </div>\n"
+            + "</div>\n"
+            + "<div id='div4'>\n"
+            + "</div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }

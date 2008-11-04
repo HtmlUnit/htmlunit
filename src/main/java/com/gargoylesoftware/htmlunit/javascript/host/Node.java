@@ -88,6 +88,25 @@ public class Node extends SimpleScriptable {
     /** @see org.w3c.dom.Node#NOTATION_NODE */
     public static final short NOTATION_NODE = org.w3c.dom.Node.NOTATION_NODE;
 
+    /** @see org.w3c.dom.Node#DOCUMENT_POSITION_DISCONNECTED */
+    public static final short DOCUMENT_POSITION_DISCONNECTED = org.w3c.dom.Node.DOCUMENT_POSITION_DISCONNECTED;
+
+    /** @see org.w3c.dom.Node#DOCUMENT_POSITION_PRECEDING */
+    public static final short DOCUMENT_POSITION_PRECEDING = org.w3c.dom.Node.DOCUMENT_POSITION_PRECEDING;
+
+    /** @see org.w3c.dom.Node#DOCUMENT_POSITION_FOLLOWING */
+    public static final short DOCUMENT_POSITION_FOLLOWING = org.w3c.dom.Node.DOCUMENT_POSITION_FOLLOWING;
+
+    /** @see org.w3c.dom.Node#DOCUMENT_POSITION_CONTAINS */
+    public static final short DOCUMENT_POSITION_CONTAINS = org.w3c.dom.Node.DOCUMENT_POSITION_CONTAINS;
+
+    /** @see org.w3c.dom.Node#DOCUMENT_POSITION_CONTAINED_BY */
+    public static final short DOCUMENT_POSITION_CONTAINED_BY = org.w3c.dom.Node.DOCUMENT_POSITION_CONTAINED_BY;
+
+    /** @see org.w3c.dom.Node#DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC */
+    public static final short DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC
+        = org.w3c.dom.Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
+
     /**
      * Creates an instance.
      */
@@ -670,5 +689,16 @@ public class Node extends SimpleScriptable {
             return "";
         }
         return getDomNodeOrDie().getNamespaceURI();
+    }
+
+    /**
+     * Compares the positions of this node and the provided node within the document.
+     * @param element element object that specifies the element to check
+     * @return how the node is positioned relatively to the reference node.
+     * @see <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#Node3-compareDocumentPosition>DOM level 3</a>
+     * @see org.w3c.dom.Node#compareDocumentPosition(org.w3c.dom.Node)
+     */
+    public short jsxFunction_compareDocumentPosition(final HTMLElement element) {
+        return getDomNodeOrDie().compareDocumentPosition(element.getDomNodeOrDie());
     }
 }
