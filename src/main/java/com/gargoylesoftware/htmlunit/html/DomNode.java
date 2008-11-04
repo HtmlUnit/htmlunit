@@ -445,9 +445,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             if (myAncestors.size() == max) {
                 return DOCUMENT_POSITION_CONTAINED_BY + DOCUMENT_POSITION_FOLLOWING;
             }
-            else {
-                return DOCUMENT_POSITION_CONTAINS + DOCUMENT_POSITION_PRECEDING;
-            }
+            return DOCUMENT_POSITION_CONTAINS + DOCUMENT_POSITION_PRECEDING;
         }
 
         // neither contains nor contained by
@@ -460,9 +458,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         if (node == null) {
             return DOCUMENT_POSITION_FOLLOWING;
         }
-        else {
-            return DOCUMENT_POSITION_PRECEDING;
-        }
+        return DOCUMENT_POSITION_PRECEDING;
     }
 
     /**
