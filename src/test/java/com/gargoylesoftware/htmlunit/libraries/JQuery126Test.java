@@ -92,7 +92,13 @@ public class JQuery126Test extends WebTestCase {
         final String resource = "jquery/" + getVersion() + "/expected." + getBrowserVersion().getNickname() + ".txt";
         final URL url = getClass().getClassLoader().getResource(resource);
         assertNotNull(url);
-        final List<String> lines = FileUtils.readLines(new File(url.toURI()));
+        final List<String> lines = FileUtils.readLines(new File(url.toURI()), "UTF-8");
+        if (lines.get(0).charAt(0) == 0xFEFF) {
+            // The file has a UTF-8 BOM; remove it!
+            // http://unicode.org/faq/utf_bom.html#BOM
+            lines.add(0, lines.get(0).substring(1));
+            lines.remove(1);
+        }
         final Iterator<String> expectedIterator = lines.iterator();
         while (it.hasNext()) {
             ok(it, expectedIterator);
