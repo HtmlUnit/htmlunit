@@ -31,6 +31,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+
 /**
  * Collection of XPath utility methods.
  *
@@ -105,7 +108,8 @@ public final class XPathUtils {
             xpathExpressionContext = contextNode;
         }
         final PrefixResolver prefixResolver = new HtmlUnitPrefixResolver(xpathExpressionContext);
-        final XPathAdapter xpath = new XPathAdapter(str, null, prefixResolver, XPath.SELECT, null);
+        final XPathAdapter xpath = new XPathAdapter(str, null, prefixResolver, XPath.SELECT, null,
+            contextNode instanceof HtmlElement || contextNode instanceof HtmlPage);
         final int ctxtNode = xpathSupport.getDTMHandleFromNode(contextNode);
         return xpath.execute(xpathSupport, ctxtNode, prefixResolver);
     }

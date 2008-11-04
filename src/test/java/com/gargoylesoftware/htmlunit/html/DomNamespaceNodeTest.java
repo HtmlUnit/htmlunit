@@ -19,7 +19,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link DomNamespaceNode}.
@@ -34,7 +33,6 @@ public class DomNamespaceNodeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void getLocalName() throws Exception {
         final String content = "<HTML></HTML>";
         final HtmlPage page = loadPage(content);

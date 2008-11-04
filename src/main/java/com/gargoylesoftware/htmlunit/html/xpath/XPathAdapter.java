@@ -65,15 +65,18 @@ class XPathAdapter {
      * @param prefixResolver a prefix resolver to use to resolve prefixes to namespace URIs
      * @param type one of {@link #SELECT} or {@link #MATCH}
      * @param errorListener the error listener, or <tt>null</tt> if default should be used
+     * @param html is HTML or XML
      * @throws TransformerException if a syntax or other error occurs
      */
     XPathAdapter(String exprString, final SourceLocator locator, final PrefixResolver prefixResolver,
-            final int type, ErrorListener errorListener) throws TransformerException {
+            final int type, ErrorListener errorListener, final boolean html) throws TransformerException {
         initFunctionTable();
         if (errorListener == null) {
             errorListener = new DefaultErrorHandler();
         }
-        exprString = preProcessXPath(exprString);
+        if (html) {
+            exprString = preProcessXPath(exprString);
+        }
 
         final XPathParser parser = new XPathParser(errorListener, locator);
         final Compiler compiler = new Compiler(errorListener, locator, funcTable_);
@@ -106,6 +109,10 @@ class XPathAdapter {
      */
     private static String preProcessXPath(String string) {
         //Not a very clean way
+        final StringBuilder builder = new StringBuilder(string);
+        processOutsideBrackets(builder);
+        string = builder.toString();
+
         final Pattern pattern = Pattern.compile("(@[a-zA-Z]+)");
         final Matcher matcher = pattern.matcher(string);
         while (matcher.find()) {
@@ -113,6 +120,36 @@ class XPathAdapter {
             string = string.replace(attribute, attribute.toLowerCase());
         }
         return string;
+    }
+
+    /**
+     * Lower case any character outside the square brackets.
+     * @param builder the builder to change
+     */
+    private static void processOutsideBrackets(final StringBuilder builder) {
+        final int length = builder.length();
+        boolean insideBrackets = false;
+        for (int i = 0; i < length; i++) {
+            final char ch = builder.charAt(i);
+            switch (ch) {
+                case '[':
+                    if (!insideBrackets) {
+                        insideBrackets = true;
+                    }
+                    break;
+
+                case ']':
+                    if (insideBrackets && ch == ']') {
+                        insideBrackets = false;
+                    }
+                    break;
+
+                default:
+                    if (!insideBrackets) {
+                        builder.setCharAt(i, Character.toLowerCase(ch));
+                    }
+            }
+        }
     }
 
     /**

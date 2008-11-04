@@ -3360,9 +3360,6 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void evaluate_caseInsensitiveTagName() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var expr = '/hTmL';\n"
