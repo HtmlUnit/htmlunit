@@ -102,16 +102,16 @@ class XPathAdapter {
     }
 
     /**
-     * Pre-processes the specified XPath expression before passing it to the engine.
-     * The current implementation lower-cases the attribute name.
+     * Pre-processes the specified HTML XPath expression before passing it to the engine.
+     * The current implementation lower-cases the attribute name, and anything outside the square brackets.
+     *
      * @param string the XPath expression to pre-process
      * @return the processed XPath expression
      */
     private static String preProcessXPath(String string) {
-        //Not a very clean way
-        final StringBuilder builder = new StringBuilder(string);
-        processOutsideBrackets(builder);
-        string = builder.toString();
+        final char[] charArray = string.toCharArray();
+        processOutsideBrackets(charArray);
+        string = new String(charArray);
 
         final Pattern pattern = Pattern.compile("(@[a-zA-Z]+)");
         final Matcher matcher = pattern.matcher(string);
@@ -124,13 +124,13 @@ class XPathAdapter {
 
     /**
      * Lower case any character outside the square brackets.
-     * @param builder the builder to change
+     * @param array the array to change
      */
-    private static void processOutsideBrackets(final StringBuilder builder) {
-        final int length = builder.length();
+    private static void processOutsideBrackets(final char[] array) {
+        final int length = array.length;
         boolean insideBrackets = false;
         for (int i = 0; i < length; i++) {
-            final char ch = builder.charAt(i);
+            final char ch = array[i];
             switch (ch) {
                 case '[':
                     if (!insideBrackets) {
@@ -139,14 +139,14 @@ class XPathAdapter {
                     break;
 
                 case ']':
-                    if (insideBrackets && ch == ']') {
+                    if (insideBrackets) {
                         insideBrackets = false;
                     }
                     break;
 
                 default:
                     if (!insideBrackets) {
-                        builder.setCharAt(i, Character.toLowerCase(ch));
+                        array[i] = Character.toLowerCase(ch);
                     }
             }
         }
