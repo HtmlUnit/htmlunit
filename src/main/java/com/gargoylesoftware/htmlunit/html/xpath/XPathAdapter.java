@@ -134,16 +134,12 @@ class XPathAdapter {
             switch (ch) {
                 case '[':
                 case '(':
-                    if (insideBrackets == 0) {
-                        insideBrackets++;
-                    }
+                    insideBrackets++;
                     break;
 
                 case ']':
                 case ')':
-                    if (insideBrackets != 0) {
-                        insideBrackets--;
-                    }
+                    insideBrackets--;
                     break;
 
                 default:
