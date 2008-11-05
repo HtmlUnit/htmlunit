@@ -2198,7 +2198,7 @@ public class HTMLElementTest extends WebTestCase {
 
         final String secondHtml = "<html><head><title>Second</title></head>\n"
             + "<body>\n"
-            + "<input id='text2'  onfocus='alert(\"onfocus text2\")'>\n"
+            + "<input id='text2' onfocus='alert(\"onfocus text2\")'>\n"
             + "<button id='button2' onClick='doTest();'>Click me</a>\n"
             + "<script>\n"
             + "     function doTest() {\n"
@@ -2246,7 +2246,7 @@ public class HTMLElementTest extends WebTestCase {
 
         final String secondHtml = "<html><head><title>Second</title></head>\n"
                 + "<body onLoad='doTest()'>\n"
-                + "<input id='text2'  onfocus='alert(\"onfocus text2\")'>\n"
+                + "<input id='text2' onfocus='alert(\"onfocus text2\")'>\n"
                 + "<script>\n"
                 + "     function doTest() {\n"
                 + "         opener.document.getElementById('text1').focus();\n"

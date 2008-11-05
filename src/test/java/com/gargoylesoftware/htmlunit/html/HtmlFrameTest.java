@@ -48,7 +48,7 @@ public class HtmlFrameTest extends WebTestCase {
             = "<html><head><title>first</title></head>\n"
             + "<frameset cols='20%,80%'>\n"
             + "    <frame src='' id='frame1'>\n"
-            + "    <frame src='about:blank'  id='frame2'>\n"
+            + "    <frame src='about:blank' id='frame2'>\n"
             + "</frameset></html>";
         final HtmlPage page = loadPage(html);
 
