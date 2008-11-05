@@ -239,8 +239,8 @@ public class HtmlFrameTest extends WebTestCase {
             + "</html>";
 
         final String frame1 = "<html><head><title>1</title></head>\n"
-            + "<body onload=\"alert(parent.frames['f1'])\"></body>"
-            + "</body></html>";
+            + "<body onload=\"alert(parent.frames['f1'])\"></body>\n"
+            + "</html>";
 
         final WebClient webClient = new WebClient(browserVersion);
         final List<String> collectedAlerts = new ArrayList<String>();

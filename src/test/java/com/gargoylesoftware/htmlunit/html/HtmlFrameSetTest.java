@@ -356,4 +356,46 @@ public class HtmlFrameSetTest extends WebTestCase {
         leftPage.getAnchors().get(0).click();
         assertTrue(((HtmlPage) rightWindow.getEnclosedPage()).asXml().contains("version 2"));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void onunload() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String mainHtml =
+            "<frameset onunload=\"document.location.href='3.html'\">\n"
+            + "<frame name='f1' src='1.html'/>\n"
+            + "</frameset>";
+
+        final String frame1 = "<html><head><title>1</title></head>\n"
+            + "<body><button id='myButton' onclick=\"top.location.href='2.html'\"/></body>\n"
+            + "</html>";
+
+        final String html2 = "<html><head><title>2</title></head>\n"
+            + "<body>hello</body>\n"
+            + "</html>";
+
+        final String html3 = "<html><head><title>3</title></head>\n"
+            + "<body>hello</body>\n"
+            + "</html>";
+
+        final WebClient webClient = new WebClient();
+        final List<String> collectedAlerts = new ArrayList<String>();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection();
+        webClient.setWebConnection(conn);
+
+        conn.setResponse(URL_FIRST, mainHtml);
+        conn.setResponse(new URL(URL_FIRST, "1.html"), frame1);
+        conn.setResponse(new URL(URL_FIRST, "2.html"), html2);
+        conn.setResponse(new URL(URL_FIRST, "3.html"), html3);
+
+        final HtmlPage mainPage = webClient.getPage(URL_FIRST);
+        final HtmlPage framePage = (HtmlPage) mainPage.getFrameByName("f1").getEnclosedPage();
+        final HtmlPage page = framePage.<HtmlButton>getHtmlElementById("myButton").click();
+        assertEquals("3", page.getTitleText());
+    }
 }
