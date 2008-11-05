@@ -42,6 +42,13 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 public final class XPathUtils {
 
+    private static ThreadLocal<Boolean> PROCESS_XPATH_ = new ThreadLocal<Boolean>() {
+        @Override
+        protected synchronized Boolean initialValue() {
+            return false;
+        }
+    };
+
     /**
      * Private to avoid instantiation.
      */
@@ -61,6 +68,7 @@ public final class XPathUtils {
             throw new NullPointerException("Null is not a valid XPath expression");
         }
 
+        PROCESS_XPATH_.set(true);
         final List<Object> list = new ArrayList<Object>();
         try {
             final XObject result = evaluateXPath(node, xpathExpr);
@@ -87,7 +95,18 @@ public final class XPathUtils {
         catch (final Exception e) {
             throw new RuntimeException("Could not retrieve XPath >" + xpathExpr + "< on " + node, e);
         }
+        finally {
+            PROCESS_XPATH_.set(false);
+        }
         return list;
+    }
+
+    /**
+     * Returns whether the thread is currently evaluating XPath expression or no.
+     * @return whether the thread is currently evaluating XPath expression or no
+     */
+    public static boolean isProcessingXPath() {
+        return PROCESS_XPATH_.get();
     }
 
     /**

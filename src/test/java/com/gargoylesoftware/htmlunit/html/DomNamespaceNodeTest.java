@@ -35,7 +35,7 @@ public class DomNamespaceNodeTest extends WebTestCase {
     @Test
     public void getLocalName() throws Exception {
         final String content = "<HTML></HTML>";
-        final HtmlPage page = loadPage(content);
+        final HtmlPage page = loadPage(getBrowserVersion(), content, null);
         assertEquals(1, page.getByXPath("//html").size());
     }
 

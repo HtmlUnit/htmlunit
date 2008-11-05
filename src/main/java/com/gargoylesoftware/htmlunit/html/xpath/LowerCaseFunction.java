@@ -40,5 +40,4 @@ public class LowerCaseFunction extends FunctionDef1Arg {
     public XObject execute(final XPathContext xctxt) throws TransformerException {
         return new XString(((XString) getArg0AsString(xctxt)).str().toLowerCase());
     }
-
 }

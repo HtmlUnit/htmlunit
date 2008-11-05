@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebAssert;
+import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -76,9 +77,7 @@ public abstract class DomNamespaceNode extends DomNode {
      */
     @Override
     public String getLocalName() {
-        if (this instanceof HtmlElement
-            //and this methods was called from xalan
-            && new Exception().getStackTrace()[1].getClassName().startsWith("org.apache.xml.dtm.")) {
+        if (this instanceof HtmlElement && XPathUtils.isProcessingXPath()) { // and this methods was called from xalan
             return localName_.toLowerCase();
         }
         return localName_;
