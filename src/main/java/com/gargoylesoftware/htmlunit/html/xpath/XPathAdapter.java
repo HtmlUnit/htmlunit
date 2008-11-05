@@ -103,7 +103,7 @@ class XPathAdapter {
 
     /**
      * Pre-processes the specified HTML XPath expression before passing it to the engine.
-     * The current implementation lower-cases the attribute name, and anything outside the square brackets.
+     * The current implementation lower-cases the attribute name, and anything outside the brackets.
      *
      * @param string the XPath expression to pre-process
      * @return the processed XPath expression
@@ -123,29 +123,31 @@ class XPathAdapter {
     }
 
     /**
-     * Lower case any character outside the square brackets.
+     * Lower case any character outside the brackets.
      * @param array the array to change
      */
     private static void processOutsideBrackets(final char[] array) {
         final int length = array.length;
-        boolean insideBrackets = false;
+        int insideBrackets = 0;
         for (int i = 0; i < length; i++) {
             final char ch = array[i];
             switch (ch) {
                 case '[':
-                    if (!insideBrackets) {
-                        insideBrackets = true;
+                case '(':
+                    if (insideBrackets == 0) {
+                        insideBrackets++;
                     }
                     break;
 
                 case ']':
-                    if (insideBrackets) {
-                        insideBrackets = false;
+                case ')':
+                    if (insideBrackets != 0) {
+                        insideBrackets--;
                     }
                     break;
 
                 default:
-                    if (!insideBrackets) {
+                    if (insideBrackets == 0) {
                         array[i] = Character.toLowerCase(ch);
                     }
             }
