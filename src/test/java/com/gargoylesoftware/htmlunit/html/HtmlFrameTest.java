@@ -43,14 +43,14 @@ public class HtmlFrameTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSrcOfBlankAndEmpty() throws Exception {
-        final String firstContent
+    public void srcOfBlankAndEmpty() throws Exception {
+        final String html
             = "<html><head><title>first</title></head>\n"
             + "<frameset cols='20%,80%'>\n"
             + "    <frame src='' id='frame1'>\n"
             + "    <frame src='about:blank'  id='frame2'>\n"
             + "</frameset></html>";
-        final HtmlPage page = loadPage(firstContent);
+        final HtmlPage page = loadPage(html);
 
         final HtmlFrame frame1 = page.getHtmlElementById("frame1");
         Assert.assertEquals("frame1", "", ((HtmlPage) frame1.getEnclosedPage()).getTitleText());
@@ -63,13 +63,13 @@ public class HtmlFrameTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testOnLoadHandler() throws Exception {
+    public void onLoadHandler() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final String firstContent
+        final String html
             = "<html><head><title>first</title></head>\n"
             + "<frameset cols='20%,80%'>\n"
             + "    <frame id='frame1'>\n"
@@ -77,7 +77,7 @@ public class HtmlFrameTest extends WebTestCase {
             + "</frameset></html>";
         final String[] expectedAlerts = {"FRAME"};
 
-        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_FIRST, html);
         webClient.setWebConnection(webConnection);
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
@@ -96,8 +96,8 @@ public class HtmlFrameTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testDocumentWrite() throws Exception {
-        final String firstContent
+    public void documentWrite() throws Exception {
+        final String html
             = "<html><head><title>first</title></head>\n"
             + "<frameset cols='20%,80%'>\n"
             + "    <frame src='' name='frame1' id='frame1'>\n"
@@ -105,7 +105,7 @@ public class HtmlFrameTest extends WebTestCase {
             + "'<html><head><title>generated</title></head><body>generated</body></html>');"
             + "frame1.document.close()\"  id='frame2'>\n"
             + "</frameset></html>";
-        final HtmlPage page = loadPage(firstContent);
+        final HtmlPage page = loadPage(html);
 
         assertEquals("first", page.getTitleText());
 
@@ -121,18 +121,17 @@ public class HtmlFrameTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testDeregisterNonHtmlFrame() throws Exception {
+    public void deregisterNonHtmlFrame() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection =
-            new MockWebConnection();
+        final MockWebConnection webConnection = new MockWebConnection();
 
-        final String firstContent
+        final String html
             = "<html><head><title>first</title></head>\n"
             + "<frameset cols='100%'>\n"
             + "    <frame src='foo.txt'>\n"
             + "</frameset></html>";
         webConnection.setDefaultResponse("foo", 200, "OK", "text/plain");
-        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_FIRST, html);
         webClient.setWebConnection(webConnection);
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
@@ -146,11 +145,10 @@ public class HtmlFrameTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testFailingHttpStatusCodeException() throws Exception {
-        final String failingContent
-            = "<html><head><body>Not found</body></html>";
+    public void failingHttpStatusCodeException() throws Exception {
+        final String failingHtml = "<html><head><body>Not found</body></html>";
 
-        final String firstContent
+        final String firstHtml
             = "<html><head><title>First</title></head>\n"
             + "<frameset cols='130,*'>\n"
             + "  <frame scrolling='no' name='left' src='" + "failing_url" + "' frameborder='1' />\n"
@@ -161,17 +159,16 @@ public class HtmlFrameTest extends WebTestCase {
             + "</frameset>\n"
             + "</html>";
 
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
-        final String thirdContent  = "<html><head><title>Third</title></head><body></body></html>";
+        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
+        final String thirdHtml  = "<html><head><title>Third</title></head><body></body></html>";
 
         final WebClient webClient = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setDefaultResponse(
-                failingContent, 404, "No Found", "text/html");
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
-        webConnection.setResponse(URL_THIRD, thirdContent);
+        webConnection.setDefaultResponse(failingHtml, 404, "No Found", "text/html");
+        webConnection.setResponse(URL_FIRST, firstHtml);
+        webConnection.setResponse(URL_SECOND, secondHtml);
+        webConnection.setResponse(URL_THIRD, thirdHtml);
 
         webClient.setWebConnection(webConnection);
 
@@ -190,8 +187,8 @@ public class HtmlFrameTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testFrameScriptReplaceOtherFrame() throws Exception {
-        final String mainContent =
+    public void frameScriptReplaceOtherFrame() throws Exception {
+        final String html =
             "<html><head><title>frames</title></head>\n"
             + "<frameset cols='180,*'>\n"
             + "<frame name='f1' src='1.html'/>\n"
@@ -213,7 +210,7 @@ public class HtmlFrameTest extends WebTestCase {
         webClient.setWebConnection(conn);
 
         conn.setDefaultResponse("<html><head><title>default</title></head><body></body></html>");
-        conn.setResponse(URL_FIRST, mainContent);
+        conn.setResponse(URL_FIRST, html);
         conn.setResponse(new URL(URL_FIRST, "1.html"), frame1);
         conn.setResponse(new URL(URL_FIRST, "3.html"), frame3);
 
@@ -234,7 +231,7 @@ public class HtmlFrameTest extends WebTestCase {
     }
 
     private void frames(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
-        final String mainContent =
+        final String mainHtml =
             "<html><head><title>frames</title></head>\n"
             + "<frameset>\n"
             + "<frame id='f1' src='1.html'/>\n"
@@ -251,7 +248,7 @@ public class HtmlFrameTest extends WebTestCase {
         final MockWebConnection conn = new MockWebConnection();
         webClient.setWebConnection(conn);
 
-        conn.setResponse(URL_FIRST, mainContent);
+        conn.setResponse(URL_FIRST, mainHtml);
         conn.setResponse(new URL(URL_FIRST, "1.html"), frame1);
 
         webClient.getPage(URL_FIRST);
