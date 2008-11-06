@@ -99,7 +99,7 @@ public final class StringUtils {
             Float.parseFloat(s);
             ok = true;
         }
-        catch (NumberFormatException e) {
+        catch (final NumberFormatException e) {
             ok = false;
         }
 

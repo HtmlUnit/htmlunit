@@ -273,11 +273,13 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = { "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em" },
-            FF = { "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px" })
+    @Alerts(IE = { "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em",
+                   "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em" },
+            FF = { "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px",
+                   "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px" })
     public void lengthsConvertedToPixels() throws Exception {
         final String html = "<html><body>\n"
-            + "<div id='d' style='width: 1em; height: 1em; border: 1em solid black; padding: 1em; margin: 1em;'>d</div>\n"
+            + "<div id='d' style='width:1em; height:1em; border:1em solid black; padding:1em; margin:1em;'>d</div>\n"
             + "<script>\n"
             + "var d = document.getElementById('d');\n"
             + "var cs = d.currentStyle;\n"
@@ -314,8 +316,15 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
             + "    <tbody id='tbody'><tr><td id='td'>body</td></tr></tbody>\n"
             + "  </table>\n"
             + "  <ul id='ul'><li id='li'>blah</li></ul>\n"
-            + "  <script>function x(id) { var e = document.getElementById(id); return e.currentStyle ? e.currentStyle.display : window.getComputedStyle(e, '').display; }</script>\n"
-            + "  <script>alert(x('table') + ' ' + x('thead') + ' ' + x('tbody') + ' ' + x('th') + ' ' + x('tr') + ' ' + x('td') + ' ' + x('ul') + ' ' + x('li'));</script>\n"
+            + "  <script>\n"
+            + "    function x(id) {\n"
+            + "      var e = document.getElementById(id);\n"
+            + "      return e.currentStyle ? e.currentStyle.display : window.getComputedStyle(e, '').display;\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "  <script>\n"
+            + "    alert(x('table') + ' ' + x('thead') + ' ' + x('tbody') + ' ' + x('th') + ' ' + x('tr') +\n"
+            + "      ' ' + x('td') + ' ' + x('ul') + ' ' + x('li'));</script>\n"
             + "</body></html>";
         loadPageWithAlerts(html);
     }
