@@ -733,7 +733,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     }
 
     /**
-     * Asynchron callback should be called in "main" js thread and not parallel to other js execution.
+     * Asynchronous callback should be called in "main" js thread and not parallel to other js execution.
      * See https://sourceforge.net/tracker/index.php?func=detail&aid=1508377&group_id=47038&atid=448266.
      * @throws Exception if the test fails
      */

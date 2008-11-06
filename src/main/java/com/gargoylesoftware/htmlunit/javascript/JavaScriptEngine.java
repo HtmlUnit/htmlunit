@@ -469,7 +469,14 @@ public class JavaScriptEngine implements Serializable {
             final Scriptable scope, final Scriptable thisObject, final Object[] args) {
 
         synchronized (htmlPage) { // 2 scripts can't be executed in parallel for one page
-            return function.call(context, scope, thisObject, args);
+            final Object result = function.call(context, scope, thisObject, args);
+            try {
+                processPostponedActions();
+            }
+            catch (final Exception e) {
+                Context.throwAsScriptRuntimeEx(e);
+            }
+            return result;
         }
     }
 
@@ -503,7 +510,7 @@ public class JavaScriptEngine implements Serializable {
                 cx.putThreadLocal(KEY_STARTING_SCOPE, scope_);
                 synchronized (htmlPage_) { // 2 scripts can't be executed in parallel for one page
                     final Object response = doRun(cx);
-                    processPostponedActions(cx);
+                    processPostponedActions();
                     return response;
                 }
             }
@@ -529,19 +536,19 @@ public class JavaScriptEngine implements Serializable {
             }
         }
 
-        private void processPostponedActions(final Context cx) throws Exception {
-            final List<PostponedAction> actions = postponedActions_.get();
-            postponedActions_.set(null);
-            if (actions != null) {
-                for (final PostponedAction action : actions) {
-                    action.execute();
-                }
-            }
-        }
-
         protected abstract Object doRun(final Context cx);
 
         protected abstract String getSourceCode(final Context cx);
+    }
+
+    private void processPostponedActions() throws Exception {
+        final List<PostponedAction> actions = postponedActions_.get();
+        postponedActions_.set(null);
+        if (actions != null) {
+            for (final PostponedAction action : actions) {
+                action.execute();
+            }
+        }
     }
 
     /**
@@ -590,5 +597,4 @@ public class JavaScriptEngine implements Serializable {
         }
         actions.add(action);
     }
-
 }
