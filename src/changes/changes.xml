@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="fix" dev="asashour" id="2214332">
+                Silently ignore HTTP Status code "USE_PROXY" (305), and treat it as success.
+            </action>
             <action type="fix" dev="asashour">
                 XPath: proper handling of upper cased HTML elements.
             </action>

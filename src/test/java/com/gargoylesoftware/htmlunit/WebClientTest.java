@@ -23,6 +23,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -31,7 +32,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.Servlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
@@ -45,6 +53,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.mortbay.jetty.Server;
 import org.w3c.css.sac.CSSException;
 import org.w3c.css.sac.CSSParseException;
 import org.w3c.css.sac.ErrorHandler;
@@ -76,6 +85,19 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Sudhan Moghe
  */
 public class WebClientTest extends WebTestCase {
+
+    private Server server_;
+
+    /**
+     * Performs post-test deconstruction.
+     * @throws Exception if an error occurs
+     */
+    @After
+    public void tearDown() throws Exception {
+        WebClient.setIgnoreOutsideContent(false);
+        HttpWebConnectionTest.stopWebServer(server_);
+        server_ = null;
+    }
 
     /**
      * Tests if all JUnit 4 candidate test methods declare <tt>@Test</tt> annotation.
@@ -1508,15 +1530,6 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Unset the static items set in tests here.
-     * @throws Exception if an error occurs
-     */
-    @After
-    public void tearDown() throws Exception {
-        WebClient.setIgnoreOutsideContent(false);
-    }
-
-    /**
      * @throws Exception if an error occurs
      */
     @Test
@@ -1954,4 +1967,39 @@ public class WebClientTest extends WebTestCase {
         assertEquals(3, errors.intValue());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void use_proxy() throws Exception {
+        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        servlets.put("/test", UseProxyHeaderServlet.class);
+        server_ = HttpWebConnectionTest.startWebServer("./", null, servlets);
+
+        final WebClient client = new WebClient();
+        final HtmlPage page = client.getPage("http://localhost:" + HttpWebConnectionTest.PORT + "/test");
+        assertEquals("Going anywhere?", page.asText());
+    }
+
+    /**
+     * Servlet for {@link #missingLocationHeader()}.
+     */
+    public static class UseProxyHeaderServlet extends HttpServlet {
+
+        private static final long serialVersionUID = -1562905626726293900L;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            response.setStatus(HttpServletResponse.SC_USE_PROXY);
+            //Won't matter!
+            //response.setHeader("Location", "http://www.google.com");
+            response.setContentType("text/html");
+            final Writer writer = response.getWriter();
+            writer.write("<html><body>Going anywhere?</body></html>");
+            writer.close();
+        }
+    }
 }

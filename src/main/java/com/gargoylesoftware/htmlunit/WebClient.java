@@ -525,7 +525,8 @@ public class WebClient implements Serializable {
      */
     public void throwFailingHttpStatusCodeExceptionIfNecessary(final WebResponse webResponse) {
         final int statusCode = webResponse.getStatusCode();
-        final boolean successful = (statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES);
+        final boolean successful = (statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES)
+            || statusCode == HttpStatus.SC_USE_PROXY;
         if (isThrowExceptionOnFailingStatusCode() && !successful) {
             throw new FailingHttpStatusCodeException(webResponse);
         }
@@ -1449,7 +1450,8 @@ public class WebClient implements Serializable {
         final WebResponse webResponse = getWebConnection().getResponse(webRequestSettings);
         final int statusCode = webResponse.getStatusCode();
 
-        if (statusCode >= HttpStatus.SC_MOVED_PERMANENTLY && statusCode <= HttpStatus.SC_TEMPORARY_REDIRECT
+        if (statusCode != HttpStatus.SC_USE_PROXY
+                && statusCode >= HttpStatus.SC_MOVED_PERMANENTLY && statusCode <= HttpStatus.SC_TEMPORARY_REDIRECT
                 && isRedirectEnabled()) {
             final URL newUrl;
             String locationString = null;
