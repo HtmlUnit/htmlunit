@@ -84,13 +84,17 @@ public class HtmlForm extends ClickableElement {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * Submit this form to the appropriate server. If submitElement is null then
-     * treat this as if it was called by JavaScript. In this case, the onsubmit
-     * handler will not get executed.
+     * <p>Submits this form to the server. If <tt>submitElement</tt> is <tt>null</tt>, then
+     * the submission is treated as if it was triggered by JavaScript, and the <tt>onsubmit</tt>
+     * handler will not be executed.</p>
+     *
+     * <p><b>IMPORTANT:</b> Using this method directly is not the preferred way of submitting forms.
+     * Most consumers should emulate the user's actions instead, probably by using something like
+     * {@link ClickableElement#click()} or {@link ClickableElement#dblClick()}.</p>
      *
      * @param submitElement the element that caused the submit to occur
      * @return a new page that reflects the results of this submission
-     * @exception IOException If an IO error occurs
+     * @exception IOException if an IO error occurs
      */
     public Page submit(final SubmittableElement submitElement) throws IOException {
         final HtmlPage htmlPage = (HtmlPage) getPage();
