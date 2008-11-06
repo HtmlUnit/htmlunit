@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.util.StringUtils.isFloat;
+
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.LinkedHashMap;
@@ -2669,7 +2671,12 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @param opacity the new attribute
      */
     public void jsxSet_opacity(final String opacity) {
-        setStyleAttribute("opacity", opacity);
+        if (getBrowserVersion().isIE()) {
+            setStyleAttribute("opacity", opacity);
+        }
+        else if (isFloat(opacity, true) || opacity.length() == 0) {
+            setStyleAttribute("opacity", opacity.trim());
+        }
     }
 
     /**

@@ -8,6 +8,15 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="fix" dev="sdanig">
+                JavaScript: element.style.opacity only accepts numeric values when emulating FF.
+            </action>
+            <action type="fix" dev="sdanig">
+                JavaScript: fix element.style.display default values when emulating IE.
+            </action>
+            <action type="fix" dev="sdanig">
+                JavaScript: element.style length-related attributes should be converted to pixels (FF only).
+            </action>
             <action type="fix" dev="asashour" id="2229862">
                 JavaScript: postpone the execution of setting 'location.href'.
             </action>

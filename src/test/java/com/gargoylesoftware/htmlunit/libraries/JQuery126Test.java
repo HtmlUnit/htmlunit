@@ -33,7 +33,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlListItem;
 import com.gargoylesoftware.htmlunit.html.HtmlOrderedList;
@@ -85,7 +84,6 @@ public class JQuery126Test extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented
     @SuppressWarnings("unchecked")
     public void test() throws Exception {
         final Iterator<HtmlElement> it = loadPage();

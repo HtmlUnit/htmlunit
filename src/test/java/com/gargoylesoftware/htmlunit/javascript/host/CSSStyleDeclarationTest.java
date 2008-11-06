@@ -279,6 +279,47 @@ public class CSSStyleDeclarationTest extends WebTestCase {
     }
 
     /**
+     * Verifies that setting <tt>element.style.opacity</tt> to various values behaves correctly.
+     * The whitespace in the various expected alerts is VERY important.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE = { "undefined 0.5 0.33333 -3 3 8  7  10px foo auto " },
+            FF = { " 0.5 0.33333 -3 3 8 7 7 7 7 " })
+    public void opacity() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='d'>d</div>\n"
+            + "<script>\n"
+            + "var d = document.getElementById('d');\n"
+            + "var s = '';\n"
+            + "s += d.style.opacity + ' ';\n"
+            + "d.style.opacity = 0.5;\n"
+            + "s += d.style.opacity + ' ';\n"
+            + "d.style.opacity = 0.33333;\n"
+            + "s += d.style.opacity + ' ';\n"
+            + "d.style.opacity = -3;\n"
+            + "s += d.style.opacity + ' ';\n"
+            + "d.style.opacity = 3;\n"
+            + "s += d.style.opacity + ' ';\n"
+            + "d.style.opacity = '8';\n"
+            + "s += d.style.opacity + ' ';\n"
+            + "d.style.opacity = ' 7 ';\n"
+            + "s += d.style.opacity + ' ';\n"
+            + "d.style.opacity = '10px';\n"
+            + "s += d.style.opacity + ' ';\n"
+            + "d.style.opacity = 'foo';\n"
+            + "s += d.style.opacity + ' ';\n"
+            + "d.style.opacity = 'auto';\n"
+            + "s += d.style.opacity + ' ';\n"
+            + "d.style.opacity = '';\n"
+            + "s += d.style.opacity;\n"
+            + "alert(s);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test

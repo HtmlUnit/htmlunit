@@ -46,23 +46,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     private SortedMap<String, StyleElement> localModifications_ = new TreeMap<String, StyleElement>();
 
-    private static final Map<String, String> DEFAULT_DISPLAY;
-
-    static {
-        final Map<String, String> map = new HashMap<String, String>();
-        map.put("A", "inline");
-        map.put("CODE", "inline");
-        map.put("LI", "list-item");
-        map.put("SPAN", "inline");
-        map.put("TABLE", "table");
-        map.put("TBODY", "table-row-group");
-        map.put("TD", "table-cell");
-        map.put("TH", "table-cell");
-        map.put("THEAD", "table-header-group");
-        map.put("TR", "table-row");
-
-        DEFAULT_DISPLAY = Collections.unmodifiableMap(map);
-    }
+    /** Maps element types to custom display types (display types that are not "block". */
+    private Map<String, String> defaultDisplays_;
 
     /**
      * Create an instance. JavaScript objects must have a default constructor.
@@ -191,7 +176,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_borderBottomWidth() {
-        return defaultIfEmpty(super.jsxGet_borderBottomWidth(), "0px");
+        return pixelString(defaultIfEmpty(super.jsxGet_borderBottomWidth(), "0px"));
     }
 
     /**
@@ -223,7 +208,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_borderLeftWidth() {
-        return defaultIfEmpty(super.jsxGet_borderLeftWidth(), "0px");
+        return pixelString(defaultIfEmpty(super.jsxGet_borderLeftWidth(), "0px"));
     }
 
     /**
@@ -247,7 +232,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_borderRightWidth() {
-        return defaultIfEmpty(super.jsxGet_borderRightWidth(), "0px");
+        return pixelString(defaultIfEmpty(super.jsxGet_borderRightWidth(), "0px"));
     }
 
     /**
@@ -279,7 +264,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_borderTopWidth() {
-        return defaultIfEmpty(super.jsxGet_borderTopWidth(), "0px");
+        return pixelString(defaultIfEmpty(super.jsxGet_borderTopWidth(), "0px"));
     }
 
     /**
@@ -371,7 +356,23 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     private String getDefaultStyleDisplay() {
-        final String defaultValue = DEFAULT_DISPLAY.get(getHTMLElement().jsxGet_tagName());
+        if (defaultDisplays_ == null) {
+            final Map<String, String> map = new HashMap<String, String>();
+            map.put("A", "inline");
+            map.put("CODE", "inline");
+            map.put("SPAN", "inline");
+            if (!getBrowserVersion().isIE()) {
+                map.put("LI", "list-item");
+                map.put("TABLE", "table");
+                map.put("TBODY", "table-row-group");
+                map.put("TD", "table-cell");
+                map.put("TH", "table-cell");
+                map.put("THEAD", "table-header-group");
+                map.put("TR", "table-row");
+            }
+            defaultDisplays_ = Collections.unmodifiableMap(map);
+        }
+        final String defaultValue = defaultDisplays_.get(getHTMLElement().jsxGet_tagName());
         if (defaultValue == null) {
             return "block";
         }
@@ -439,7 +440,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_height() {
-        return defaultIfEmpty(super.jsxGet_height(), "363px");
+        return pixelString(defaultIfEmpty(super.jsxGet_height(), "363px"));
     }
 
     /**
@@ -495,7 +496,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_marginBottom() {
-        return defaultIfEmpty(super.jsxGet_marginBottom(), "0px");
+        return pixelString(defaultIfEmpty(super.jsxGet_marginBottom(), "0px"));
     }
 
     /**
@@ -503,7 +504,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_marginLeft() {
-        return defaultIfEmpty(super.jsxGet_marginLeft(), "0px");
+        return pixelString(defaultIfEmpty(super.jsxGet_marginLeft(), "0px"));
     }
 
     /**
@@ -511,7 +512,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_marginRight() {
-        return defaultIfEmpty(super.jsxGet_marginRight(), "0px");
+        return pixelString(defaultIfEmpty(super.jsxGet_marginRight(), "0px"));
     }
 
     /**
@@ -519,7 +520,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_marginTop() {
-        return defaultIfEmpty(super.jsxGet_marginTop(), "0px");
+        return pixelString(defaultIfEmpty(super.jsxGet_marginTop(), "0px"));
     }
 
     /**
@@ -935,7 +936,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_paddingBottom() {
-        return defaultIfEmpty(super.jsxGet_paddingBottom(), "0px");
+        return pixelString(defaultIfEmpty(super.jsxGet_paddingBottom(), "0px"));
     }
 
     /**
@@ -943,7 +944,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_paddingLeft() {
-        return defaultIfEmpty(super.jsxGet_paddingLeft(), "0px");
+        return pixelString(defaultIfEmpty(super.jsxGet_paddingLeft(), "0px"));
     }
 
     /**
@@ -951,7 +952,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_paddingRight() {
-        return defaultIfEmpty(super.jsxGet_paddingRight(), "0px");
+        return pixelString(defaultIfEmpty(super.jsxGet_paddingRight(), "0px"));
     }
 
     /**
@@ -959,7 +960,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_paddingTop() {
-        return defaultIfEmpty(super.jsxGet_paddingTop(), "0px");
+        return pixelString(defaultIfEmpty(super.jsxGet_paddingTop(), "0px"));
     }
 
     /**
@@ -1063,21 +1064,18 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_width() {
-        final String defaultWidth;
         if (jsxGet_display().equals("none")) {
-            defaultWidth = "auto";
+            return "auto";
         }
-        else {
-            defaultWidth = "1256px";
-        }
-        return defaultIfEmpty(super.jsxGet_width(), defaultWidth);
+        final String defaultWidth = "1256px";
+        return pixelString(defaultIfEmpty(super.jsxGet_width(), defaultWidth));
     }
 
     /**
-     * Returns the element's width, possibly including its padding and border.
+     * Returns the element's width in pixels, possibly including its padding and border.
      * @param includeBorder whether or not to include the border width in the returned value
      * @param includePadding whether or not to include the padding width in the returned value
-     * @return the element's width, possibly including its padding and border
+     * @return the element's width in pixels, possibly including its padding and border
      */
     int getCalculatedWidth(final boolean includeBorder, final boolean includePadding) {
         int width;
@@ -1085,7 +1083,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final DomNode parent = getHTMLElement().getDomNodeOrDie().getParentNode();
         if (StringUtils.isEmpty(styleWidth) && parent instanceof HtmlElement) {
             // Width not explicitly set; just assume we fill the width provided by the parent...
-            // AS LONG AS we can get the parent!
+            // AS LONG AS we can use the parent!
             final HTMLElement parentJS = (HTMLElement) parent.getScriptObject();
             final String parentWidth = getWindow().jsxFunction_getComputedStyle(parentJS, null).jsxGet_width();
             width = pixelValue(parentWidth);
@@ -1274,4 +1272,20 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
         return response;
     }
+
+    /**
+     * Returns the specified length value as a pixel length value, as long as we're not emulating IE.
+     * @param value the length value to convert to a pixel length value
+     * @return the specified length value as a pixel length value
+     */
+    protected String pixelString(final String value) {
+        if (getBrowserVersion().isIE()) {
+            return value;
+        }
+        if (value.endsWith("px")) {
+            return value;
+        }
+        return pixelValue(value) + "px";
+    }
+
 }

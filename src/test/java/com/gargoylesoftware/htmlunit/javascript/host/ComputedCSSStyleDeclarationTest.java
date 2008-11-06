@@ -269,4 +269,55 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE = { "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em" },
+            FF = { "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px" })
+    public void lengthsConvertedToPixels() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='d' style='width: 1em; height: 1em; border: 1em solid black; padding: 1em; margin: 1em;'>d</div>\n"
+            + "<script>\n"
+            + "var d = document.getElementById('d');\n"
+            + "var cs = d.currentStyle;\n"
+            + "if(!cs) cs = window.getComputedStyle(d, '');\n"
+            + "alert(d.style.width + ' ' + cs.width);\n"
+            + "alert(d.style.height + ' ' + cs.height);\n"
+            + "alert(d.style.borderBottomWidth + ' ' + cs.borderBottomWidth);\n"
+            + "alert(d.style.borderLeftWidth + ' ' + cs.borderLeftWidth);\n"
+            + "alert(d.style.borderTopWidth + ' ' + cs.borderTopWidth);\n"
+            + "alert(d.style.borderRightWidth + ' ' + cs.borderRightWidth);\n"
+            + "alert(d.style.paddingBottom + ' ' + cs.paddingBottom);\n"
+            + "alert(d.style.paddingLeft + ' ' + cs.paddingLeft);\n"
+            + "alert(d.style.paddingTop + ' ' + cs.paddingTop);\n"
+            + "alert(d.style.paddingRight + ' ' + cs.paddingRight);\n"
+            + "alert(d.style.marginBottom + ' ' + cs.marginBottom);\n"
+            + "alert(d.style.marginLeft + ' ' + cs.marginLeft);\n"
+            + "alert(d.style.marginTop + ' ' + cs.marginTop);\n"
+            + "alert(d.style.marginRight + ' ' + cs.marginRight);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE = { "block block block block block block block block" },
+            FF = { "table table-header-group table-row-group table-cell table-row table-cell block list-item" })
+    public void defaultDisplayValues() throws Exception {
+        final String html = "<html><body>\n"
+            + "  <table id='table'>\n"
+            + "    <thead id='thead'><tr id='tr'><th id='th'>header</th></tr></thead>\n"
+            + "    <tbody id='tbody'><tr><td id='td'>body</td></tr></tbody>\n"
+            + "  </table>\n"
+            + "  <ul id='ul'><li id='li'>blah</li></ul>\n"
+            + "  <script>function x(id) { var e = document.getElementById(id); return e.currentStyle ? e.currentStyle.display : window.getComputedStyle(e, '').display; }</script>\n"
+            + "  <script>alert(x('table') + ' ' + x('thead') + ' ' + x('tbody') + ' ' + x('th') + ' ' + x('tr') + ' ' + x('td') + ' ' + x('ul') + ' ' + x('li'));</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }
