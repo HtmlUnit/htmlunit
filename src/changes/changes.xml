@@ -51,8 +51,8 @@
             <action type="add" dev="asashour" id="2192292">
                 Add support for 'deflate' Content-Encoding.
             </action>
-            <action type="update">
-                HtmlPage.asXml(): expand empty style nodes to make generated xml readable as HTML on Firefox 3.
+            <action type="update" dev="mguillem">
+                HtmlPage.asXml(): expand empty style nodes to make generated XML readable as HTML on Firefox 3.
             </action>
             <action type="fix" dev="asashour" id="2187741">
                 HtmlTextInput: type() should remove selected text().
@@ -144,7 +144,7 @@
                 JavaScript: fireEvent calls handlers with received event object rather than with a copy (IE only).
             </action>
             <action type="fix" dev="mguillem">
-                JavaScript: trigger defer'red scripts' onreadystatechange handler before onload event (IE only).
+                JavaScript: trigger deferred scripts' onreadystatechange handler before onload event (IE only).
             </action>
             <action type="fix" dev="mguillem">
                 JavaScript: constant values like TEXT_NODE on elements are not available when simulating IE.
