@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="fix" dev="asashour">
+                JavaScript: select.appendChild(option), .add(), and insertBefore() should update .selectedIndex.
+            </action>
             <action type="fix" dev="asashour" id="2214332">
                 Silently ignore HTTP Status code "USE_PROXY" (305), and treat it as success.
             </action>

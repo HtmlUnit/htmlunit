@@ -1005,4 +1005,81 @@ public class HTMLSelectElementTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "-1", "0", "-1" })
+    public void selectedIndex_appendChild() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var s = document.getElementById('mySelect');\n"
+            + "    var o = document.createElement('option');\n"
+            + "    alert(s.selectedIndex);\n"
+            + "    s.appendChild(o);\n"
+            + "    alert(s.selectedIndex);\n"
+            + "    s.removeChild(o);\n"
+            + "    alert(s.selectedIndex);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<body onload='test()'>\n"
+            + "<select id='mySelect'></select>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "-1", "0", "-1" })
+    public void selectedIndex_insertBefore() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var s = document.getElementById('mySelect');\n"
+            + "    var o = document.createElement('option');\n"
+            + "    alert(s.selectedIndex);\n"
+            + "    s.insertBefore(o, null);\n"
+            + "    alert(s.selectedIndex);\n"
+            + "    s.removeChild(o);\n"
+            + "    alert(s.selectedIndex);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<body onload='test()'>\n"
+            + "<select id='mySelect'></select>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "-1", "0", "-1" })
+    public void selectedIndex_add() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var s = document.getElementById('mySelect');\n"
+            + "    var o = document.createElement('option');\n"
+            + "    alert(s.selectedIndex);\n"
+            + "    if (document.all)\n"
+            + "      s.add(o);\n"
+            + "    else\n"
+            + "      s.add(o, null);\n"
+            + "    alert(s.selectedIndex);\n"
+            + "    s.removeChild(o);\n"
+            + "    alert(s.selectedIndex);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<body onload='test()'>\n"
+            + "<select id='mySelect'></select>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
 }

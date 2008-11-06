@@ -217,8 +217,7 @@ public class Node extends SimpleScriptable {
      * @param refChildObject the node before which to add the new child
      * @return the newly added child node
      */
-    public Object jsxFunction_insertBefore(
-            final Object newChildObject, final Object refChildObject) {
+    public Object jsxFunction_insertBefore(final Object newChildObject, final Object refChildObject) {
         Object appendedChild = null;
 
         if (newChildObject instanceof Node) {

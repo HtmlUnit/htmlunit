@@ -85,6 +85,27 @@ public class HTMLSelectElement extends FormField {
         else {
             add(newOptionObject, arg2);
         }
+        ensureSelectedIndex();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object jsxFunction_appendChild(final Object childObject) {
+        final Object object = super.jsxFunction_appendChild(childObject);
+        ensureSelectedIndex();
+        return object;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object jsxFunction_insertBefore(final Object newChildObject, final Object refChildObject) {
+        final Object object = super.jsxFunction_insertBefore(newChildObject, refChildObject);
+        ensureSelectedIndex();
+        return object;
     }
 
     /**
@@ -343,4 +364,15 @@ public class HTMLSelectElement extends FormField {
             getHtmlElementOrDie().removeAttribute("multiple");
         }
     }
+
+    private void ensureSelectedIndex() {
+        final HtmlSelect select = getHtmlSelect();
+        if (select.getOptionSize() == 0) {
+            jsxSet_selectedIndex(-1);
+        }
+        else if (jsxGet_selectedIndex() == -1) {
+            jsxSet_selectedIndex(0);
+        }
+    }
+
 }

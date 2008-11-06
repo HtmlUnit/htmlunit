@@ -93,7 +93,6 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
 
     /**
      * {@inheritDoc}
-     * @see DomNode#insertBefore(DomNode)
      */
     @Override
     public void insertBefore(final DomNode newNode) throws IllegalStateException {
