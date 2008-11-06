@@ -2038,6 +2038,35 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
+     * Returns <tt>true</tt> if an HTML parser is operating on some HTML
+     * snippet for adding content to some element on this page.
+     *
+     * @return <tt>true</tt> if an HTML parser is operating on html snippet
+     *         for adding content to to some element on this page
+     */
+    boolean isParsingHtmlSnippet() {
+        return snippetParserCount_ > 0;
+    }
+
+    /**
+     * Called by the HTML parser to let the page know that it has started
+     * parsing HTML snippet for innerHTML or outerHTML of some element on
+     * this page.
+     */
+    void registerSnippetParsingStart() {
+        snippetParserCount_++;
+    }
+
+    /**
+     * Called by the HTML parser to let the page know that it has finished
+     * parsing HTML snippet for innerHTML or outerHTML of some element on
+     * this page.
+     */
+    void registerSnippetParsingEnd() {
+        snippetParserCount_--;
+    }
+
+    /**
      * Refreshes the page by sending the same parameters as previously sent to get this page.
      * @return the newly loaded page.
      * @throws IOException if an IO problem occurs
@@ -2072,35 +2101,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      */
     HtmlUnitDOMBuilder getBuilder() {
         return builder_;
-    }
-
-    /**
-     * Called by the HTML parser to let the page know that it has started
-     * parsing HTML snippet for innerHTML or outerHTML of some element on
-     * this page.
-     */
-    void registerSnippetParsingStart() {
-        snippetParserCount_++;
-    }
-
-    /**
-     * Called by the HTML parser to let the page know that it has finished
-     * parsing HTML snippet for innerHTML or outerHTML of some element on
-     * this page.
-     */
-    void registerSnippetParsingEnd() {
-        snippetParserCount_--;
-    }
-
-    /**
-     * Returns <tt>true</tt> if an HTML parser is operating on some HTML
-     * snippet for adding content to some element on this page.
-     *
-     * @return <tt>true</tt> if an HTML parser is operating on html snippet
-     *         for adding content to to some element on this page
-     */
-    boolean isParsingHtmlSnippet() {
-        return snippetParserCount_ > 0;
     }
 
     /**
