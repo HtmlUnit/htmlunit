@@ -172,12 +172,6 @@ public class JQuery126Test extends WebTestCase {
         if (!expectedLI.equals(actualLI)) {
             addFailure(new ComparisonFailure("", expectedLI, actualLI).getMessage());
         }
-        //for (HtmlListItem item : (List<HtmlListItem>) li.getByXPath("./ol/li")) {
-        //    final String expectedItem = getExpected(expected.next());
-        //    final String actualItem = item.asText();
-        //    if (!expectedItem.equals(actualItem)) {
-        //        addFailure(new ComparisonFailure("", expectedItem, actualItem).getMessage());
-        //    }
-        //}
     }
+
 }
