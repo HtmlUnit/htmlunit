@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * Tests for compatibility with version 1.2.6 of the <a href="http://jquery.com/">jQuery JavaScript library</a>.
  *
  * @version $Revision$
+ * @author Daniel Gredler
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
