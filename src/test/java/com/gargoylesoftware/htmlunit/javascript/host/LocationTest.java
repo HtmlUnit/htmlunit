@@ -642,4 +642,36 @@ public class LocationTest extends WebTestCase {
         final String[] expectedAlerts = {"http://myHostName/" };
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void href_postponed() throws Exception {
+        final String firstHtml =
+            "<html><head><script>\n"
+            + "function test() {\n"
+            + "  alert('1');\n"
+            + "  self.frames['frame1'].document.location.href='" + URL_SECOND + "';\n"
+            + "  alert('2');\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <iframe name='frame1' id='frame1'/>\n"
+            + "</body></html>";
+        final String secondHtml = "<html><body><script>alert('3');</script></body></html>";
+
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(URL_FIRST, firstHtml);
+        webConnection.setResponse(URL_SECOND, secondHtml);
+        client.setWebConnection(webConnection);
+        final ArrayList<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final String[] expectedAlerts = {"1", "2", "3"};
+        client.getPage(URL_FIRST);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

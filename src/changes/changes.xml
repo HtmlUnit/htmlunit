@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="fix" dev="asashour" id="2229862">
+                JavaScript: postpone the execution of setting 'location.href'.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: select.appendChild(option), .add(), and insertBefore() should update .selectedIndex.
             </action>
