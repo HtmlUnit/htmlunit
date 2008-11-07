@@ -564,9 +564,17 @@ public final class HTMLParser {
          */
         private void handleCharacters() {
             if (characters_ != null && characters_.length() > 0) {
-                final DomText text = new DomText(page_, characters_.toString());
-                characters_.setLength(0);
-                currentNode_.appendChild(text);
+                if (currentNode_ instanceof HtmlHtml && page_ instanceof HtmlPage) {
+                    // In HTML, the <html> node only has two possible children:
+                    // the <head> and the <body>; any text is ignored.
+                    characters_.setLength(0);
+                }
+                else {
+                    // Use the normal behavior: append a text node for the accumulated text.
+                    final DomText text = new DomText(page_, characters_.toString());
+                    characters_.setLength(0);
+                    currentNode_.appendChild(text);
+                }
             }
         }
 

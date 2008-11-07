@@ -48,7 +48,7 @@ public class Node extends SimpleScriptable {
     private static final long serialVersionUID = -5695262053081637445L;
 
     /** "Live" child nodes collection; has to be a member to have equality (==) working. */
-    protected HTMLCollection childNodes_;
+    private HTMLCollection childNodes_;
 
     private EventListenersContainer eventListenersContainer_;
 
@@ -694,7 +694,7 @@ public class Node extends SimpleScriptable {
      * Compares the positions of this node and the provided node within the document.
      * @param element element object that specifies the element to check
      * @return how the node is positioned relatively to the reference node.
-     * @see <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#Node3-compareDocumentPosition>DOM level 3</a>
+     * @see <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#Node3-compareDocumentPosition">DOM level 3</a>
      * @see org.w3c.dom.Node#compareDocumentPosition(org.w3c.dom.Node)
      */
     public short jsxFunction_compareDocumentPosition(final HTMLElement element) {

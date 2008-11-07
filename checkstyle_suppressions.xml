@@ -24,5 +24,4 @@
     <suppress checks="ParameterNumber" files="HtmlUnitRegExpProxy.java"/>
     <suppress checks="ParameterNumber" files="MouseEvent.java"/>
     <suppress checks="ParameterNumber" files="BrowserRoadie.java"/>
-    <suppress checks="VisibilityModifier" files="Node.java" lines="51"/>
 </suppressions>

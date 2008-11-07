@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import com.gargoylesoftware.htmlunit.xml.XmlPage;
-
 /**
  * The JavaScript object "HTMLHtmlElement".
  *
@@ -31,26 +29,6 @@ public class HTMLHtmlElement extends HTMLElement {
      */
     public HTMLHtmlElement() {
         // Empty.
-    }
-
-    /**
-     * <p>Overridden because this <tt>childNodes</tt> collection should only ever contain
-     * the <tt>head</tt> and <tt>body</tt> nodes (in HTML pages).</p>
-     *
-     * {@inheritDoc}
-     */
-    @Override
-    public Object jsxGet_childNodes() {
-        // XML behavior
-        if (getDomNodeOrDie().getPage() instanceof XmlPage) {
-            return super.jsxGet_childNodes();
-        }
-        // HTML behavior
-        if (childNodes_ == null) {
-            childNodes_ = new HTMLCollection(this);
-            childNodes_.init(getDomNodeOrDie(), "./*[name() = 'head' or name() = 'body']");
-        }
-        return childNodes_;
     }
 
 }

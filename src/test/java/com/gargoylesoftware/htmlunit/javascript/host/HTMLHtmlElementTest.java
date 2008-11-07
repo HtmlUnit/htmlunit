@@ -34,7 +34,7 @@ public class HTMLHtmlElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "2", "HEAD", "BODY" })
+    @Alerts({ "2", "HEAD", "BODY", "null", "null" })
     public void childNodes_1() throws Exception {
         // The whitespace in this HTML is very important, because we're verifying
         // that it doesn't get included in the childNodes collection.
@@ -43,6 +43,8 @@ public class HTMLHtmlElementTest extends WebTestCase {
             + "alert(nodes.length);\n"
             + "alert(nodes[0].nodeName);\n"
             + "alert(nodes[1].nodeName);\n"
+            + "alert(nodes[0].previousSibling);\n"
+            + "alert(nodes[1].nextSibling);\n"
             + "</script> \n </body> \n </html>";
         loadPageWithAlerts(html);
     }

@@ -42,8 +42,8 @@
                 JavaScript: In certain cases, node collections were returning elements when inexistent attributes were accessed.
             </action>
             <action type="fix" dev="sdanig">
-                JavaScript: document.documentElement.childNodes should only ever contain the head element and the body element,
-                if they exist (never any text nodes).
+                As per browser conventions, the node for the top-level html tag should only ever contain the head and body tags --
+                never any text nodes.
             </action>
             <action type="fix" dev="sdanig">
                 JavaScript: make sure element.offsetWidth is constrained by the element's parent's dimensions.
