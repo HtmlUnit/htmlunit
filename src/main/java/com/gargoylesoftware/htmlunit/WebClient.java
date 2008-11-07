@@ -1451,7 +1451,7 @@ public class WebClient implements Serializable {
         final int statusCode = webResponse.getStatusCode();
 
         if (statusCode == HttpStatus.SC_USE_PROXY) {
-            getIncorrectnessListener().notify("Ignoring HTTP status code [305] 'Use Proxyx'", this);
+            getIncorrectnessListener().notify("Ignoring HTTP status code [305] 'Use Proxy'", this);
         }
         else if (statusCode >= HttpStatus.SC_MOVED_PERMANENTLY && statusCode <= HttpStatus.SC_TEMPORARY_REDIRECT
                 && isRedirectEnabled()) {
