@@ -564,7 +564,7 @@ public final class HTMLParser {
          */
         private void handleCharacters() {
             if (characters_ != null && characters_.length() > 0) {
-                if (currentNode_ instanceof HtmlHtml && page_ instanceof HtmlPage) {
+                if (currentNode_ instanceof HtmlHtml) {
                     // In HTML, the <html> node only has two possible children:
                     // the <head> and the <body>; any text is ignored.
                     characters_.setLength(0);
