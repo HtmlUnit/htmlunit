@@ -44,12 +44,6 @@ class XPathAdapter {
     private Expression mainExp_;
     private FunctionTable funcTable_;
 
-    /** Represents a select type expression. */
-    public static final int SELECT = 0;
-
-    /** Represents a match type expression. */
-    public static final int MATCH = 1;
-
     /**
      * Initiates the function table.
      */
@@ -63,13 +57,12 @@ class XPathAdapter {
      * @param exprString the XPath expression
      * @param locator the location of the expression, may be <tt>null</tt>
      * @param prefixResolver a prefix resolver to use to resolve prefixes to namespace URIs
-     * @param type one of {@link #SELECT} or {@link #MATCH}
      * @param errorListener the error listener, or <tt>null</tt> if default should be used
      * @param html is HTML or XML
      * @throws TransformerException if a syntax or other error occurs
      */
     XPathAdapter(String exprString, final SourceLocator locator, final PrefixResolver prefixResolver,
-            final int type, ErrorListener errorListener, final boolean html) throws TransformerException {
+            ErrorListener errorListener, final boolean html) throws TransformerException {
         initFunctionTable();
         if (errorListener == null) {
             errorListener = new DefaultErrorHandler();
@@ -81,16 +74,7 @@ class XPathAdapter {
         final XPathParser parser = new XPathParser(errorListener, locator);
         final Compiler compiler = new Compiler(errorListener, locator, funcTable_);
 
-        if (SELECT == type) {
-            parser.initXPath(compiler, exprString, prefixResolver);
-        }
-        else if (MATCH == type) {
-            parser.initMatchPattern(compiler, exprString, prefixResolver);
-        }
-        else {
-            throw new RuntimeException(XSLMessages.createXPATHMessage(
-                XPATHErrorResources.ER_CANNOT_DEAL_XPATH_TYPE, new Object[]{Integer.toString(type)}));
-        }
+        parser.initXPath(compiler, exprString, prefixResolver);
 
         final Expression expr = compiler.compile(0);
 

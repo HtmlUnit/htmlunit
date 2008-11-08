@@ -20,7 +20,6 @@ import java.util.List;
 import javax.xml.transform.TransformerException;
 
 import org.apache.xml.utils.PrefixResolver;
-import org.apache.xpath.XPath;
 import org.apache.xpath.XPathContext;
 import org.apache.xpath.objects.XBoolean;
 import org.apache.xpath.objects.XNodeSet;
@@ -127,7 +126,7 @@ public final class XPathUtils {
             xpathExpressionContext = contextNode;
         }
         final PrefixResolver prefixResolver = new HtmlUnitPrefixResolver(xpathExpressionContext);
-        final XPathAdapter xpath = new XPathAdapter(str, null, prefixResolver, XPath.SELECT, null,
+        final XPathAdapter xpath = new XPathAdapter(str, null, prefixResolver, null,
             contextNode instanceof HtmlElement || contextNode instanceof HtmlPage);
         final int ctxtNode = xpathSupport.getDTMHandleFromNode(contextNode);
         return xpath.execute(xpathSupport, ctxtNode, prefixResolver);
