@@ -47,4 +47,21 @@ public final class SVN {
         }
     }
 
+    /**
+     * Ensures that all files inside the specified directory has consistent new lines.
+     * @param dir the directory to recursively ensure all contained files have consistent new lines
+     * @throws IOException if an exception happens
+     */
+    public static void consistentNewlines(final File dir) throws IOException {
+        for (final File f : dir.listFiles()) {
+            if (f.isDirectory()) {
+                if (!f.getName().equals(".svn")) {
+                    consistentNewlines(f);
+                }
+            }
+            else {
+                FileUtils.writeLines(f, FileUtils.readLines(f));
+            }
+        }
+    }
 }
