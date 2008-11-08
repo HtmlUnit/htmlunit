@@ -97,7 +97,7 @@ public class HTMLDocument extends Document {
      */
     private static final Map<String, Class< ? extends Event>> SUPPORTED_EVENT_TYPE_MAP;
 
-    private static final String[] EXECUTE_CMDS_IE_ARR = {
+    private static final List<String> EXECUTE_CMDS_IE = Arrays.asList(new String[] {
         "2D-Position", "AbsolutePosition", "BackColor", "BackgroundImageCache" /* Undocumented */,
         "BlockDirLTR", "BlockDirRTL", "Bold", "BrowseMode", "ClearAuthenticationCache", "Copy", "CreateBookmark",
         "CreateLink", "Cut", "Delete", "DirLTR", "DirRTL",
@@ -114,8 +114,17 @@ public class HTMLDocument extends Document {
         "SizeToControl", "SizeToControlHeight", "SizeToControlWidth", "Stop", "StopImage",
         "StrikeThrough", "Subscript", "Superscript", "UnBookmark", "Underline",
         "Undo", "Unlink", "Unselect"
-    };
-    private static final List<String> EXECUTE_CMDS_IE = Arrays.asList(EXECUTE_CMDS_IE_ARR);
+    });
+
+    /** https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla#Executing_Commands */
+    private static final List<String> EXECUTE_CMDS_FF = Arrays.asList(new String[] {
+        "backColor", "bold", "contentReadOnly", "copy", "createLink", "cut", "decreaseFontSize", "delete",
+        "fontName", "fontSize", "foreColor", "formatBlock", "heading", "hiliteColor", "increaseFontSize",
+        "indent", "insertHorizontalRule", "insertHTML", "insertImage", "insertOrderedList", "insertUnorderedList",
+        "insertParagraph", "italic", "justifyCenter", "justifyLeft", "justifyRight", "outdent", "paste", "redo",
+        "removeFormat", "selectAll", "strikeThrough", "subscript", "superscript", "underline", "undo", "unlink",
+        "useCSS", "styleWithCSS"
+    });
 
     /**
      * Static counter for {@link #uniqueID_}.
@@ -1252,8 +1261,10 @@ public class HTMLDocument extends Document {
      * @return <code>true</code> if the command is successful
      */
     public boolean jsxFunction_execCommand(final String cmd, final boolean userInterface, final Object value) {
-        if (!EXECUTE_CMDS_IE.contains(cmd)) {
-            throw Context.reportRuntimeError("execCommand: invalid command >" + cmd + "<");
+        final boolean ie = getBrowserVersion().isIE();
+        if ((ie && !EXECUTE_CMDS_IE.contains(cmd)) || (!ie && !EXECUTE_CMDS_FF.contains(cmd))) {
+            // TODO: the command check may need to be case-insensitive
+            throw Context.reportRuntimeError("execCommand: invalid command '" + cmd + "'");
         }
         getLog().warn("Nothing done for execCommand(" + cmd + ", ...) (feature not implemented)");
         return true;
