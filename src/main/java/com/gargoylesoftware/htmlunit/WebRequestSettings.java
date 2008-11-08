@@ -50,46 +50,50 @@ public class WebRequestSettings implements Serializable {
     private String requestBody_;
 
     /**
-     * @param target the URL for this request
+     * Instantiates a {@link WebRequestSettings} for the specified URL.
+     * @param url the target URL
      */
-    public WebRequestSettings(final URL target) {
-        setUrl(target);
+    public WebRequestSettings(final URL url) {
+        setUrl(url);
     }
 
     /**
-     * Instantiate a {@link WebRequestSettings} for the given URL using the proxy configuration from the original
-     * request.
+     * Instantiates a {@link WebRequestSettings} for the specified URL using the proxy configuration from the
+     * specified original request.
      * @param originalRequest the original request
-     * @param target the URL for this request
+     * @param url the target URL
      */
-    public WebRequestSettings(final WebRequestSettings originalRequest, final URL target) {
-        this(target);
+    public WebRequestSettings(final WebRequestSettings originalRequest, final URL url) {
+        this(url);
         setProxyHost(originalRequest.getProxyHost());
         setProxyPort(originalRequest.getProxyPort());
     }
 
     /**
-     * @param target the URL for this request
-     * @param submitMethod the submitMethod to set
+     * Instantiates a {@link WebRequestSettings} for the specified URL using the specified HTTP submit method.
+     * @param url the target URL
+     * @param submitMethod the HTTP submit method to use
      * @deprecated As of 2.2, please use {@link #WebRequestSettings(URL, HttpMethod)} instead.
      */
     @Deprecated
-    public WebRequestSettings(final URL target, final SubmitMethod submitMethod) {
-        this(target);
+    public WebRequestSettings(final URL url, final SubmitMethod submitMethod) {
+        this(url);
         setSubmitMethod(submitMethod);
     }
 
     /**
-     * @param target the URL for this request
-     * @param submitMethod the submitMethod to set
+     * Instantiates a {@link WebRequestSettings} for the specified URL using the specified HTTP submit method.
+     * @param url the target URL
+     * @param submitMethod the HTTP submit method to use
      */
-    public WebRequestSettings(final URL target, final HttpMethod submitMethod) {
-        this(target);
+    public WebRequestSettings(final URL url, final HttpMethod submitMethod) {
+        this(url);
         setHttpMethod(submitMethod);
     }
 
     /**
-     * @return the URL
+     * Returns the target URL.
+     * @return the target URL
      * @deprecated As of 2.2, use {@link #getUrl()} instead.
      */
     @Deprecated
@@ -98,14 +102,16 @@ public class WebRequestSettings implements Serializable {
     }
 
     /**
-     * @return the URL
+     * Returns the target URL.
+     * @return the target URL
      */
     public URL getUrl() {
         return url_;
     }
 
     /**
-     * @param url the new URL
+     * Sets the target URL.
+     * @param url the target URL
      * @deprecated As of 2.2, user {@link #setUrl(URL)} instead.
      */
     @Deprecated
@@ -114,7 +120,8 @@ public class WebRequestSettings implements Serializable {
     }
 
     /**
-     * @param url the new URL
+     * Sets the target URL.
+     * @param url the target URL
      */
     public void setUrl(URL url) {
         if (url != null && url.getPath().length() == 0) {
@@ -133,56 +140,68 @@ public class WebRequestSettings implements Serializable {
     }
 
     /**
-     * @return the proxy host
+     * Returns the proxy host to use.
+     * @return the proxy host to use
      */
     public String getProxyHost() {
         return proxyHost_;
     }
 
     /**
-     * @param proxyHost the new proxy host
+     * Sets the proxy host to use.
+     * @param proxyHost the proxy host to use
      */
     public void setProxyHost(final String proxyHost) {
         proxyHost_ = proxyHost;
     }
 
     /**
-     * @return the proxy port
+     * Returns the proxy port to use.
+     * @return the proxy port to use
      */
     public int getProxyPort() {
         return proxyPort_;
     }
 
     /**
-     * @param proxyPort the new proxy port
+     * Sets the proxy port to use.
+     * @param proxyPort the proxy port to use
      */
     public void setProxyPort(final int proxyPort) {
         proxyPort_ = proxyPort;
     }
 
     /**
-     * @return the encodingType
+     * Returns the form encoding type to use.
+     * @return the form encoding type to use
      */
     public FormEncodingType getEncodingType() {
         return encodingType_;
     }
 
     /**
-     * @param encodingType the encodingType to set
+     * Sets the form encoding type to use.
+     * @param encodingType the form encoding type to use
      */
     public void setEncodingType(final FormEncodingType encodingType) {
         encodingType_ = encodingType;
     }
 
     /**
-     * @return the requestParameters
+     * Retrieves the request parameters to use. If set, these request parameters will overwrite any
+     * request parameters which may be present in the {@link #getUrl() URL}. Should not be used in
+     * combination with the {@link #setRequestBody(String) request body}.
+     * @return the request parameters to use
      */
     public List<NameValuePair> getRequestParameters() {
         return requestParameters_;
     }
 
     /**
-     * @param requestParameters the requestParameters to set
+     * Sets the request parameters to use. If set, these request parameters will overwrite any request
+     * parameters which may be present in the {@link #getUrl() URL}. Should not be used in combination
+     * with the {@link #setRequestBody(String) request body}.
+     * @param requestParameters the request parameters to use
      * @throws RuntimeException if the request body has already been set
      */
     public void setRequestParameters(final List<NameValuePair> requestParameters) throws RuntimeException {
@@ -195,8 +214,8 @@ public class WebRequestSettings implements Serializable {
     }
 
     /**
-     * Returns the body content to be submitted if this is a <tt>POST</tt> request. Ignored for
-     * all other request types. Should not be used in combination with parameters.
+     * Returns the body content to be submitted if this is a <tt>POST</tt> request. Ignored for all other request
+     * types. Should not be used in combination with {@link #setRequestParameters(List) request parameters}.
      * @return the body content to be submitted if this is a <tt>POST</tt> request
      */
     public String getRequestBody() {
@@ -204,6 +223,8 @@ public class WebRequestSettings implements Serializable {
     }
 
     /**
+     * Sets the body content to be submitted if this is a <tt>POST</tt> request. Ignored for all other request
+     * types. Should not be used in combination with {@link #setRequestParameters(List) request parameters}.
      * @param requestBody the body content to be submitted if this is a <tt>POST</tt> request
      * @throws RuntimeException if the request parameters have already been set or this is not a <tt>POST</tt> request
      */
@@ -221,7 +242,8 @@ public class WebRequestSettings implements Serializable {
     }
 
     /**
-     * @return the submitMethod
+     * Returns the HTTP submit method used.
+     * @return the HTTP submit method used
      * @deprecated As of 2.2, please use {@link #getHttpMethod()} instead.
      */
     @Deprecated
@@ -230,14 +252,16 @@ public class WebRequestSettings implements Serializable {
     }
 
     /**
-     * @return the submitMethod
+     * Returns the HTTP submit method to use.
+     * @return the HTTP submit method to use
      */
     public HttpMethod getHttpMethod() {
         return httpMethod_;
     }
 
     /**
-     * @param submitMethod the submitMethod to set
+     * Sets the HTTP submit method to use.
+     * @param submitMethod the HTTP submit method to use
      * @deprecated As of 2.2, please use {@link #setHttpMethod(HttpMethod)} instead.
      */
     @Deprecated
@@ -246,47 +270,69 @@ public class WebRequestSettings implements Serializable {
     }
 
     /**
-     * @param submitMethod the submitMethod to set
+     * Sets the HTTP submit method to use.
+     * @param submitMethod the HTTP submit method to use
      */
     public void setHttpMethod(final HttpMethod submitMethod) {
         httpMethod_ = submitMethod;
     }
 
     /**
-     * @return the additionalHeaders
+     * Returns the additional HTTP headers to use.
+     * @return the additional HTTP headers to use
      */
     public Map<String, String> getAdditionalHeaders() {
         return additionalHeaders_;
     }
 
     /**
-     * @param additionalHeaders the additionalHeaders to set
+     * Sets the additional HTTP headers to use.
+     * @param additionalHeaders the additional HTTP headers to use
      */
     public void setAdditionalHeaders(final Map<String, String> additionalHeaders) {
         additionalHeaders_ = additionalHeaders;
     }
 
     /**
-     * Adds the specified name/value pair to the additional headers.
-     * @param name the name of the additional header
-     * @param value the value of the additional header
+     * Adds the specified name/value pair to the additional HTTP headers.
+     * @param name the name of the additional HTTP header
+     * @param value the value of the additional HTTP header
      */
     public void addAdditionalHeader(final String name, final String value) {
         additionalHeaders_.put(name, value);
     }
 
     /**
-     * @return the credentialsProvider
+     * Returns the credentials provider to use.
+     * @return the credentials provider to use
      */
     public CredentialsProvider getCredentialsProvider() {
         return credentialsProvider_;
     }
 
     /**
-     * @param credentialsProvider the credentialProvider to set
+     * Sets the credentials provider to use.
+     * @param credentialsProvider the credentials provider to use
      */
     public void setCredentialsProvider(final CredentialsProvider credentialsProvider) {
         credentialsProvider_ = credentialsProvider;
+    }
+
+    /**
+     * Returns the character set to use to perform the request.
+     * @return the character set to use to perform the request
+     */
+    public String getCharset() {
+        return charset_;
+    }
+
+    /**
+     * Sets the character set to use to perform the request. The default value
+     * is {@link TextUtil#DEFAULT_CHARSET}.
+     * @param charset the character set to use to perform the request
+     */
+    public void setCharset(final String charset) {
+        charset_ = charset;
     }
 
     /**
@@ -309,22 +355,6 @@ public class WebRequestSettings implements Serializable {
         buffer.append(">]");
 
         return buffer.toString();
-    }
-
-    /**
-     * Gets the charset to use to perform the request.
-     * @return the charset
-     */
-    public String getCharset() {
-        return charset_;
-    }
-
-    /**
-     * Sets the charset. Default value is {@link TextUtil#DEFAULT_CHARSET}.
-     * @param charset the new charset
-     */
-    public void setCharset(final String charset) {
-        charset_ = charset;
     }
 
 }
