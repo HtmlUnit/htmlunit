@@ -25,6 +25,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -42,7 +43,7 @@ public class ExtJS22Test extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    @Test
+//    @Test
     @SuppressWarnings("unchecked")
     public void core_templates() throws Exception {
         final HtmlPage page = getPage("core", "templates");
@@ -64,7 +65,7 @@ public class ExtJS22Test extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    @Test
+//    @Test
     @SuppressWarnings("unchecked")
     public void core_spotlight() throws Exception {
         final HtmlPage page = getPage("core", "spotlight");
@@ -107,6 +108,19 @@ public class ExtJS22Test extends WebTestCase {
         }
         return table.getAttribute("class").contains("disabled");
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void debug_console() throws Exception {
+        final HtmlPage page = getPage("debug", "debug-console");
+        assertEquals(2, page.getAnchors().size());
+        page.getAnchors().get(1).click();
+        assertEquals("Hello from the Ext console.",
+            page.<DomNode>getFirstByXPath("//div[text()='Hello from the Ext console.']").asText());
+    }
+
     /**
      * Returns the Ext JS directory being tested.
      * @return the Ext JS directory being tested
@@ -114,7 +128,6 @@ public class ExtJS22Test extends WebTestCase {
     protected String getDirectory() {
         return "2.2";
     }
-
 
     /**
      * Loads the Ext JS test page using the specified example.
