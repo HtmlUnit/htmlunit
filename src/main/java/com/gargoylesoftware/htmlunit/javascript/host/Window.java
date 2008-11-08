@@ -1082,6 +1082,17 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
+     * Returns the current selection.
+     * @return the current selection
+     */
+    public Selection jsxFunction_getSelection() {
+        final Selection selection = new Selection();
+        selection.setParentScope(this);
+        selection.setPrototype(getPrototype(selection.getClass()));
+        return selection;
+    }
+
+    /**
      * <p>Listens for changes anywhere in the document and evicts cached computed styles whenever something relevant
      * changes. Note that the very lazy way of doing this (completely clearing the cache every time something happens)
      * results in very meager performance gains. In order to get good (but still correct) performance, we need to be

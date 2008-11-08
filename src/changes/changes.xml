@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="add" dev="sdanig">
+                JavaScript: add partial support for window.getSelection() (FF only).
+            </action>
             <action type="fix" dev="sdanig">
                 JavaScript: element.style.opacity only accepts numeric values when emulating FF.
             </action>

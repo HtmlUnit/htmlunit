@@ -2146,7 +2146,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
  * TODO: promote it for a larger usage
  */
 class SimpleRange implements Range, Serializable {
+
     private static final long serialVersionUID = 5779974839466976193L;
+
     private org.w3c.dom.Node startContainer_, endContainer_;
     private int startOffset_, endOffset_;
 
@@ -2166,7 +2168,14 @@ class SimpleRange implements Range, Serializable {
     }
 
     public void collapse(final boolean toStart) throws DOMException {
-        throw new RuntimeException("Not implemented!");
+        if (toStart) {
+            endContainer_ = startContainer_;
+            endOffset_ = startOffset_;
+        }
+        else {
+            startContainer_ = endContainer_;
+            startOffset_ = endOffset_;
+        }
     }
 
     public short compareBoundaryPoints(final short how, final Range sourceRange) throws DOMException {
@@ -2186,7 +2195,7 @@ class SimpleRange implements Range, Serializable {
     }
 
     public boolean getCollapsed() throws DOMException {
-        throw new RuntimeException("Not implemented!");
+        return startContainer_ == endContainer_ && startOffset_ == endOffset_;
     }
 
     public org.w3c.dom.Node getCommonAncestorContainer() throws DOMException {
@@ -2214,16 +2223,20 @@ class SimpleRange implements Range, Serializable {
     }
 
     public void selectNode(final org.w3c.dom.Node refNode) throws RangeException, DOMException {
-        throw new RuntimeException("Not implemented!");
+        startContainer_ = refNode;
+        startOffset_ = 0;
+        endContainer_ = refNode;
+        endOffset_ = refNode.getTextContent().length();
     }
 
-    public void selectNodeContents(final org.w3c.dom.Node refNode) throws RangeException,
-            DOMException {
-        throw new RuntimeException("Not implemented!");
+    public void selectNodeContents(final org.w3c.dom.Node refNode) throws RangeException, DOMException {
+        startContainer_ = refNode.getFirstChild();
+        startOffset_ = 0;
+        endContainer_ = refNode.getLastChild();
+        endOffset_ = refNode.getLastChild().getTextContent().length();
     }
 
-    public void setEnd(final org.w3c.dom.Node refNode, final int offset) throws RangeException,
-            DOMException {
+    public void setEnd(final org.w3c.dom.Node refNode, final int offset) throws RangeException, DOMException {
         endContainer_ = refNode;
         endOffset_ = offset;
     }
@@ -2236,8 +2249,7 @@ class SimpleRange implements Range, Serializable {
         throw new RuntimeException("Not implemented!");
     }
 
-    public void setStart(final org.w3c.dom.Node refNode, final int offset) throws RangeException,
-            DOMException {
+    public void setStart(final org.w3c.dom.Node refNode, final int offset) throws RangeException, DOMException {
         startContainer_ = refNode;
         startOffset_ = offset;
     }
@@ -2246,13 +2258,11 @@ class SimpleRange implements Range, Serializable {
         throw new RuntimeException("Not implemented!");
     }
 
-    public void setStartBefore(final org.w3c.dom.Node refNode) throws RangeException,
-            DOMException {
+    public void setStartBefore(final org.w3c.dom.Node refNode) throws RangeException, DOMException {
         throw new RuntimeException("Not implemented!");
     }
 
-    public void surroundContents(final org.w3c.dom.Node newParent) throws DOMException,
-            RangeException {
+    public void surroundContents(final org.w3c.dom.Node newParent) throws DOMException, RangeException {
         throw new RuntimeException("Not implemented!");
     }
 }
