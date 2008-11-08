@@ -19,6 +19,7 @@ import static org.junit.Assert.assertNotNull;
 import java.net.URL;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -40,10 +41,20 @@ import com.gargoylesoftware.htmlunit.html.HtmlTable;
 @RunWith(BrowserRunner.class)
 public class ExtJS22Test extends WebTestCase {
 
+    private WebClient webClient_;
+
+    /**
+     * After.
+     */
+    @After
+    public void After() {
+        webClient_.closeAllWindows();
+    }
+
     /**
      * @throws Exception if an error occurs
      */
-//    @Test
+    @Test
     @SuppressWarnings("unchecked")
     public void core_templates() throws Exception {
         final HtmlPage page = getPage("core", "templates");
@@ -65,7 +76,7 @@ public class ExtJS22Test extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
-//    @Test
+    @Test
     @SuppressWarnings("unchecked")
     public void core_spotlight() throws Exception {
         final HtmlPage page = getPage("core", "spotlight");
@@ -141,8 +152,7 @@ public class ExtJS22Test extends WebTestCase {
         final String resource = "ExtJS/" + getDirectory() + "/examples/" + example + "/" + htmlName + ".html";
         final URL url = getClass().getClassLoader().getResource(resource);
         assertNotNull(url);
-
-        final WebClient client = getWebClient();
-        return client.getPage(url);
+        webClient_ = getWebClient();
+        return webClient_.getPage(url);
     }
 }
