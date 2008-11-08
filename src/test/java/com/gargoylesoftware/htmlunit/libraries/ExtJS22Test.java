@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlTable;
 
 /**
  * Tests for 2.2 version of <a href="http://www.extjs.com/">Ext JS</a>.
@@ -60,7 +61,52 @@ public class ExtJS22Test extends WebTestCase {
             + "Kids:\r\n1. Jack Slocum's kid - Sara Grace\r\n2. Jack Slocum's kid - Zachary", divs.get(1).asText());
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @SuppressWarnings("unchecked")
+    public void core_spotlight() throws Exception {
+        final HtmlPage page = getPage("core", "spotlight");
+        final List<HtmlButton> buttons = (List<HtmlButton>) page.getByXPath("//button");
+        assertEquals(4, buttons.size());
+        assertEquals("Start", buttons.get(0).asText());
+        assertEquals("Next Panel", buttons.get(1).asText());
+        assertEquals("Next Panel", buttons.get(2).asText());
+        assertEquals("Done", buttons.get(3).asText());
 
+        assertTrue(core_spotlight_isDisabled(buttons.get(1)));
+        assertTrue(core_spotlight_isDisabled(buttons.get(2)));
+        assertTrue(core_spotlight_isDisabled(buttons.get(3)));
+
+        buttons.get(0).click();
+        assertFalse(core_spotlight_isDisabled(buttons.get(1)));
+        assertTrue(core_spotlight_isDisabled(buttons.get(2)));
+        assertTrue(core_spotlight_isDisabled(buttons.get(3)));
+
+        buttons.get(1).click();
+        assertTrue(core_spotlight_isDisabled(buttons.get(1)));
+        assertFalse(core_spotlight_isDisabled(buttons.get(2)));
+        assertTrue(core_spotlight_isDisabled(buttons.get(3)));
+
+        buttons.get(2).click();
+        assertTrue(core_spotlight_isDisabled(buttons.get(1)));
+        assertTrue(core_spotlight_isDisabled(buttons.get(2)));
+        assertFalse(core_spotlight_isDisabled(buttons.get(3)));
+
+        buttons.get(3).click();
+        assertTrue(core_spotlight_isDisabled(buttons.get(1)));
+        assertTrue(core_spotlight_isDisabled(buttons.get(2)));
+        assertTrue(core_spotlight_isDisabled(buttons.get(3)));
+    }
+
+    private boolean core_spotlight_isDisabled(final HtmlButton button) {
+        final HtmlTable table = (HtmlTable) button.getParentNode().getParentNode().getParentNode().getParentNode();
+        if (getBrowserVersion().isIE()) {
+            return table.hasAttribute("disabled");
+        }
+        return table.getAttribute("class").contains("disabled");
+    }
     /**
      * Returns the Ext JS directory being tested.
      * @return the Ext JS directory being tested
