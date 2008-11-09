@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
+import java.util.List;
+
 /**
  * String utilities class for utility functions not covered by third party libraries.
  *
@@ -104,6 +106,22 @@ public final class StringUtils {
         }
 
         return ok;
+    }
+
+    /**
+     * Returns <tt>true</tt> if the specified list of strings contains the specified string, ignoring case.
+     * @param strings the strings to search
+     * @param string the string to search for
+     * @return <tt>true</tt> if the specified list of strings contains the specified string, ignoring case
+     */
+    public static boolean containsCaseInsensitive(final List<String> strings, String string) {
+        string = string.toLowerCase();
+        for (String s : strings) {
+            if (s.toLowerCase().equals(string)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

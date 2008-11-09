@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.util.StringUtils.containsCaseInsensitive;
 import static com.gargoylesoftware.htmlunit.util.UrlUtils.getUrlWithNewHost;
 import static com.gargoylesoftware.htmlunit.util.UrlUtils.getUrlWithNewPort;
 
@@ -1245,11 +1246,39 @@ public class HTMLDocument extends Document {
      * @return <code>true></code> if the command is supported
      */
     public boolean jsxFunction_queryCommandSupported(final String cmd) {
-        if (!getBrowserVersion().isIE()) {
-            // strangely the function exists in my FF 2.0.0.11 but always throws an exception
-            throw Context.reportRuntimeError("queryCommandSupported not really supported by FF");
+        final boolean ff = getBrowserVersion().isNetscape();
+        final String mode = jsxGet_designMode();
+        if (!ff) {
+            return containsCaseInsensitive(EXECUTE_CMDS_IE, cmd);
         }
-        return EXECUTE_CMDS_IE.contains(cmd);
+        else {
+            if (!"on".equals(mode)) {
+                final String msg = "queryCommandEnabled() called while document.designMode='" + mode + "'.";
+                throw Context.reportRuntimeError(msg);
+            }
+            return containsCaseInsensitive(EXECUTE_CMDS_FF, cmd);
+        }
+    }
+
+    /**
+     * Indicates if the command can be successfully executed using <tt>execCommand</tt>, given
+     * the current state of the document.
+     * @param cmd the command identifier
+     * @return <code>true></code> if the command can be successfully executed
+     */
+    public boolean jsxFunction_queryCommandEnabled(final String cmd) {
+        final boolean ff = getBrowserVersion().isNetscape();
+        final String mode = jsxGet_designMode();
+        if (!ff) {
+            return containsCaseInsensitive(EXECUTE_CMDS_IE, cmd);
+        }
+        else {
+            if (!"on".equals(mode)) {
+                final String msg = "queryCommandEnabled() called while document.designMode='" + mode + "'.";
+                throw Context.reportRuntimeError(msg);
+            }
+            return containsCaseInsensitive(EXECUTE_CMDS_FF, cmd);
+        }
     }
 
     /**
@@ -1262,9 +1291,9 @@ public class HTMLDocument extends Document {
      */
     public boolean jsxFunction_execCommand(final String cmd, final boolean userInterface, final Object value) {
         final boolean ie = getBrowserVersion().isIE();
-        if ((ie && !EXECUTE_CMDS_IE.contains(cmd)) || (!ie && !EXECUTE_CMDS_FF.contains(cmd))) {
-            // TODO: the command check may need to be case-insensitive
-            throw Context.reportRuntimeError("execCommand: invalid command '" + cmd + "'");
+        if ((ie && !containsCaseInsensitive(EXECUTE_CMDS_IE, cmd))
+            || (!ie && !containsCaseInsensitive(EXECUTE_CMDS_FF, cmd))) {
+            throw Context.reportRuntimeError("document.execCommand(): invalid command '" + cmd + "'");
         }
         getLog().warn("Nothing done for execCommand(" + cmd + ", ...) (feature not implemented)");
         return true;

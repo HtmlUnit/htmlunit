@@ -146,7 +146,7 @@ public class Document extends EventNode {
         final boolean ie = getBrowserVersion().isIE();
         if (ie) {
             if (!"on".equalsIgnoreCase(mode) && !"off".equalsIgnoreCase(mode) && !"inherit".equalsIgnoreCase(mode)) {
-                throw Context.reportRuntimeError("Invalid designMode value '" + mode + "'.");
+                throw Context.reportRuntimeError("Invalid document.designMode value '" + mode + "'.");
             }
             else if (!(getWindow().getWebWindow() instanceof FrameWindow)) {
                 // IE ignores designMode changes for documents that aren't in frames.

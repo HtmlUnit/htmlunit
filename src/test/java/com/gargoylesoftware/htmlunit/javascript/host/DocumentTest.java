@@ -3357,6 +3357,32 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void queryCommandEnabled() throws Exception {
+        queryCommandEnabled(BrowserVersion.INTERNET_EXPLORER_7, "true", "true", "true", "true", "true");
+        queryCommandEnabled(BrowserVersion.FIREFOX_3, "error", "error", "true", "true", "true");
+    }
+
+    private void queryCommandEnabled(final BrowserVersion version, final String... expected)
+        throws Exception {
+        final String html = "<html><body onload='x()'><iframe name='f' id='f'></iframe><script>\n"
+            + "function x() {\n"
+            + "var d = window.frames['f'].document;\n"
+            + "try { alert(d.queryCommandEnabled('SelectAll')); } catch(e) { alert('error'); }\n"
+            + "try { alert(d.queryCommandEnabled('sElectaLL')); } catch(e) { alert('error'); }\n"
+            + "d.designMode='on';\n"
+            + "alert(d.queryCommandEnabled('SelectAll'));\n"
+            + "alert(d.queryCommandEnabled('selectall'));\n"
+            + "alert(d.queryCommandEnabled('SeLeCtALL'));}\n"
+            + "</script></body></html>";
+        final List<String> actual = new ArrayList<String>();
+        loadPage(version, html, actual);
+        assertEquals(expected, actual);
+    }
+
+    /**
      * Minimal test for <tt>execCommand</tt>.
      * @throws Exception if the test fails
      */

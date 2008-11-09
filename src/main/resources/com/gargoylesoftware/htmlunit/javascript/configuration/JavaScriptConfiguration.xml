@@ -1031,7 +1031,6 @@
 
     <class name="HTMLDocument" extends="Document" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDocument"
         JSObject="true">
-        <!-- NOT FINISHED -->
 
         <doclink
             url="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919"
@@ -1148,6 +1147,11 @@
         <function name="queryCommandSupported">
             <doclink
                 url="http://msdn.microsoft.com/en-us/library/ms536681.aspx"
+                descr="MSDN documentation"/>
+        </function>
+        <function name="queryCommandEnabled">
+            <doclink
+                url="http://msdn.microsoft.com/en-us/library/ms536676.aspx"
                 descr="MSDN documentation"/>
         </function>
         <function name="write"/>
