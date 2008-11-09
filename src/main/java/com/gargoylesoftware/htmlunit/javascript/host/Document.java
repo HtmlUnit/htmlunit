@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -48,6 +49,7 @@ public class Document extends EventNode {
     private static final long serialVersionUID = 3700830050839613384L;
     private Window window_;
     private DOMImplementation implementation_;
+    private String designMode_;
 
     /**
      * Sets the Window JavaScript object that encloses this document.
@@ -113,6 +115,61 @@ public class Document extends EventNode {
             return null;
         }
         return getScriptableFor(documentType);
+    }
+
+    /**
+     * Returns a value which indicates whether or not the document can be edited.
+     * @return a value which indicates whether or not the document can be edited
+     */
+    public String jsxGet_designMode() {
+        if (designMode_ == null) {
+            if (getBrowserVersion().isIE()) {
+                if (getWindow().getWebWindow() instanceof FrameWindow) {
+                    designMode_ = "Inherit";
+                }
+                else {
+                    designMode_ = "Off";
+                }
+            }
+            else {
+                designMode_ = "off";
+            }
+        }
+        return designMode_;
+    }
+
+    /**
+     * Sets a value which indicates whether or not the document can be edited.
+     * @param mode a value which indicates whether or not the document can be edited
+     */
+    public void jsxSet_designMode(final String mode) {
+        final boolean ie = getBrowserVersion().isIE();
+        if (ie) {
+            if (!"on".equalsIgnoreCase(mode) && !"off".equalsIgnoreCase(mode) && !"inherit".equalsIgnoreCase(mode)) {
+                throw Context.reportRuntimeError("Invalid designMode value '" + mode + "'.");
+            }
+            else if (!(getWindow().getWebWindow() instanceof FrameWindow)) {
+                // IE ignores designMode changes for documents that aren't in frames.
+                return;
+            }
+            else if ("on".equalsIgnoreCase(mode)) {
+                designMode_ = "On";
+            }
+            else if ("off".equalsIgnoreCase(mode)) {
+                designMode_ = "Off";
+            }
+            else if ("inherit".equalsIgnoreCase(mode)) {
+                designMode_ = "Inherit";
+            }
+        }
+        else {
+            if ("on".equalsIgnoreCase(mode)) {
+                designMode_ = "on";
+            }
+            else if ("off".equalsIgnoreCase(mode)) {
+                designMode_ = "off";
+            }
+        }
     }
 
     /**

@@ -3306,6 +3306,57 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
+     * Various <tt>document.designMode</tt> tests when the document is in the root HTML page.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void designMode_root() throws Exception {
+        designMode(BrowserVersion.INTERNET_EXPLORER_7, "document", "Off", "!", "Off", "Off", "Off", "!",
+            "Off", "Off", "Off", "Off", "Off");
+        designMode(BrowserVersion.FIREFOX_3, "document", "off", "off", "on", "on", "on", "off", "off",
+            "off", "off");
+    }
+
+    /**
+     * Various <tt>document.designMode</tt> tests when the document is in an <tt>iframe</tt>.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void designMode_iframe() throws Exception {
+        designMode(BrowserVersion.INTERNET_EXPLORER_7, "window.frames['f'].document", "Inherit", "!", "Inherit", "On",
+            "On", "!", "On", "Off", "Off", "Inherit", "Inherit");
+        designMode(BrowserVersion.FIREFOX_3, "window.frames['f'].document", "off", "off", "on", "on", "on", "off",
+            "off", "off", "off");
+    }
+
+    private void designMode(final BrowserVersion version, final String doc, final String... expected)
+        throws Exception {
+        final String html = "<html><body><iframe name='f' id='f'></iframe><script>\n"
+            + "var d = " + doc + ";\n"
+            + "alert(d.designMode);\n"
+            + "try{d.designMode='abc';}catch(e){alert('!');}\n"
+            + "alert(d.designMode);\n"
+            + "try{d.designMode='on';}catch(e){alert('!');}\n"
+            + "alert(d.designMode);\n"
+            + "try{d.designMode='On';}catch(e){alert('!');}\n"
+            + "alert(d.designMode);\n"
+            + "try{d.designMode='abc';}catch(e){alert('!');}\n"
+            + "alert(d.designMode);\n"
+            + "try{d.designMode='Off';}catch(e){alert('!');}\n"
+            + "alert(d.designMode);\n"
+            + "try{d.designMode='off';}catch(e){alert('!');}\n"
+            + "alert(d.designMode);\n"
+            + "try{d.designMode='Inherit';}catch(e){alert('!');}\n"
+            + "alert(d.designMode);\n"
+            + "try{d.designMode='inherit';}catch(e){alert('!');}\n"
+            + "alert(d.designMode);\n"
+            + "</script></body></html>";
+        final List<String> actual = new ArrayList<String>();
+        loadPage(version, html, actual);
+        assertEquals(expected, actual);
+    }
+
+    /**
      * Minimal test for <tt>execCommand</tt>.
      * @throws Exception if the test fails
      */
