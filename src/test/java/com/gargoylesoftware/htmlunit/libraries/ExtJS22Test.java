@@ -132,7 +132,7 @@ public class ExtJS22Test extends WebTestCase {
         assertEquals(2, page.getAnchors().size());
         page.getAnchors().get(1).click();
         assertEquals("Hello from the Ext console.",
-            page.<DomNode>getFirstByXPath("//div[text()='Hello from the Ext console.']").asText());
+            page.<DomNode>getFirstByXPath("//div[starts-with(text(), 'Hello')]").asText());
     }
 
     /**
