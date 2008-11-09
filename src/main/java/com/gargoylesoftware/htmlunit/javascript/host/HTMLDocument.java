@@ -1251,13 +1251,11 @@ public class HTMLDocument extends Document {
         if (!ff) {
             return containsCaseInsensitive(EXECUTE_CMDS_IE, cmd);
         }
-        else {
-            if (!"on".equals(mode)) {
-                final String msg = "queryCommandEnabled() called while document.designMode='" + mode + "'.";
-                throw Context.reportRuntimeError(msg);
-            }
-            return containsCaseInsensitive(EXECUTE_CMDS_FF, cmd);
+        if (!"on".equals(mode)) {
+            final String msg = "queryCommandEnabled() called while document.designMode='" + mode + "'.";
+            throw Context.reportRuntimeError(msg);
         }
+        return containsCaseInsensitive(EXECUTE_CMDS_FF, cmd);
     }
 
     /**
@@ -1272,13 +1270,11 @@ public class HTMLDocument extends Document {
         if (!ff) {
             return containsCaseInsensitive(EXECUTE_CMDS_IE, cmd);
         }
-        else {
-            if (!"on".equals(mode)) {
-                final String msg = "queryCommandEnabled() called while document.designMode='" + mode + "'.";
-                throw Context.reportRuntimeError(msg);
-            }
-            return containsCaseInsensitive(EXECUTE_CMDS_FF, cmd);
+        if (!"on".equals(mode)) {
+            final String msg = "queryCommandEnabled() called while document.designMode='" + mode + "'.";
+            throw Context.reportRuntimeError(msg);
         }
+        return containsCaseInsensitive(EXECUTE_CMDS_FF, cmd);
     }
 
     /**

@@ -80,9 +80,7 @@ public class Selection extends SimpleScriptable {
         if (getPageSelection().getCollapsed()) {
             return 0;
         }
-        else {
-            return 1;
-        }
+        return 1;
     }
 
     /**
