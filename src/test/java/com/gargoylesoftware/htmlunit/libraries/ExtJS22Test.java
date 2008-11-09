@@ -68,12 +68,15 @@ public class ExtJS22Test extends WebTestCase {
         assertEquals("Apply the template to see results here", divs.get(0).asText());
         assertEquals("Apply the template to see results here", divs.get(1).asText());
         buttons.get(0).click();
-        assertEquals("Name: Jack Slocum" + LS + "Company: Ext JS, LLC" + LS + "Location: Cleveland, Ohio", divs.get(0).asText());
+        assertEquals("Name: Jack Slocum" + LS + "Company: Ext JS, LLC" + LS
+            + "Location: Cleveland, Ohio", divs.get(0).asText());
         assertEquals("Apply the template to see results here", divs.get(1).asText());
         buttons.get(1).click();
-        assertEquals("Name: Jack Slocum" + LS + "Company: Ext JS, LLC" + LS + "Location: Cleveland, Ohio", divs.get(0).asText());
+        assertEquals("Name: Jack Slocum" + LS + "Company: Ext JS, LLC" + LS
+            + "Location: Cleveland, Ohio", divs.get(0).asText());
         assertEquals("Name: Jack Slocum" + LS + "Company: Ext JS, LLC" + LS + "Location: Cleveland, Ohio" + LS
-            + "Kids:" + LS + "1. Jack Slocum's kid - Sara Grace" + LS + "2. Jack Slocum's kid - Zachary", divs.get(1).asText());
+            + "Kids:" + LS + "1. Jack Slocum's kid - Sara Grace" + LS
+            + "2. Jack Slocum's kid - Zachary", divs.get(1).asText());
     }
 
     /**
