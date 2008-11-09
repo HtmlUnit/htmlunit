@@ -2728,12 +2728,15 @@ public class WindowTest extends WebTestCase {
         page.getEnclosingWindow().getThreadManager().joinAll(5000);
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
     @Test
     public void setIntervalStillRuns() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function f() {\n"
             + "    alert('Oh no!');\n"
