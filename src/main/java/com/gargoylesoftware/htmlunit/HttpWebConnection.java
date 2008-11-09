@@ -374,15 +374,14 @@ public class HttpWebConnection implements WebConnection {
     }
 
     /**
-     * Creates the httpClient that will be used by this WebConnection.
-     * Extensions may override this method to create the HttpClient with for instance a custom
-     * {@link org.apache.commons.httpclient.HttpConnectionManager} to perform some tracking
-     * (see feature request 1438216).
-     * @return the client
+     * Creates the <tt>HttpClient</tt> that will be used by this WebConnection. Extensions may
+     * override this method in order to create a customized <tt>HttpClient</tt> instance (e.g. with
+     * a custom {@link org.apache.commons.httpclient.HttpConnectionManager} to perform some tracking;
+     * see feature request 1438216).
+     * @return the <tt>HttpClient</tt> that will be used by this WebConnection
      */
     protected HttpClient createHttpClient() {
-        final MultiThreadedHttpConnectionManager connectionManager =
-            new MultiThreadedHttpConnectionManager();
+        final MultiThreadedHttpConnectionManager connectionManager = new MultiThreadedHttpConnectionManager();
         return new HttpClient(connectionManager);
     }
 
