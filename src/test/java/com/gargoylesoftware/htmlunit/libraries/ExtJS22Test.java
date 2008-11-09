@@ -41,6 +41,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlTable;
 @RunWith(BrowserRunner.class)
 public class ExtJS22Test extends WebTestCase {
 
+    /** System-specific line separator. */
+    private static final String LS = System.getProperty("line.separator");
+
     private WebClient webClient_;
 
     /**
@@ -65,12 +68,12 @@ public class ExtJS22Test extends WebTestCase {
         assertEquals("Apply the template to see results here", divs.get(0).asText());
         assertEquals("Apply the template to see results here", divs.get(1).asText());
         buttons.get(0).click();
-        assertEquals("Name: Jack Slocum\r\nCompany: Ext JS, LLC\r\nLocation: Cleveland, Ohio", divs.get(0).asText());
+        assertEquals("Name: Jack Slocum" + LS + "Company: Ext JS, LLC" + LS + "Location: Cleveland, Ohio", divs.get(0).asText());
         assertEquals("Apply the template to see results here", divs.get(1).asText());
         buttons.get(1).click();
-        assertEquals("Name: Jack Slocum\r\nCompany: Ext JS, LLC\r\nLocation: Cleveland, Ohio", divs.get(0).asText());
-        assertEquals("Name: Jack Slocum\r\nCompany: Ext JS, LLC\r\nLocation: Cleveland, Ohio\r\n"
-            + "Kids:\r\n1. Jack Slocum's kid - Sara Grace\r\n2. Jack Slocum's kid - Zachary", divs.get(1).asText());
+        assertEquals("Name: Jack Slocum" + LS + "Company: Ext JS, LLC" + LS + "Location: Cleveland, Ohio", divs.get(0).asText());
+        assertEquals("Name: Jack Slocum" + LS + "Company: Ext JS, LLC" + LS + "Location: Cleveland, Ohio" + LS
+            + "Kids:" + LS + "1. Jack Slocum's kid - Sara Grace" + LS + "2. Jack Slocum's kid - Zachary", divs.get(1).asText());
     }
 
     /**
@@ -129,7 +132,7 @@ public class ExtJS22Test extends WebTestCase {
         assertEquals(2, page.getAnchors().size());
         page.getAnchors().get(1).click();
         assertEquals("Hello from the Ext console.",
-            page.<DomNode>getFirstByXPath("//div[text()='HelloÂ fromÂ theÂ ExtÂ console.']").asText());
+            page.<DomNode>getFirstByXPath("//div[text()='Hello from the Ext console.']").asText());
     }
 
     /**
