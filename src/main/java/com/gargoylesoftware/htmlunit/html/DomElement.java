@@ -482,7 +482,10 @@ public class DomElement extends DomNamespaceNode implements Element {
         return getProperDomNode(super.getNextSibling());
     }
 
-    private DomNode getProperDomNode(DomNode child) {
+    private DomNode getProperDomNode(final DomNode child) {
+        /*if (getPage() instanceof XmlPage) {
+            return child;
+        }
         final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
         while (child != null && ie && child.getNodeType() == TEXT_NODE && child.getNodeValue().trim().length() == 0) {
             final DomNode childPreviousSibling = child.getPreviousSibling();
@@ -491,7 +494,7 @@ public class DomElement extends DomNamespaceNode implements Element {
                 break;
             }
             child = child.getNextSibling();
-        }
+        }*/
         return child;
     }
 }

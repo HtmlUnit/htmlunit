@@ -312,7 +312,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /** @param previous set the previousSibling field value */
     protected void setPreviousSibling(final DomNode previous) {
-        System.out.println("Previous " + previous.getNodeName());
         previousSibling_ = previous;
     }
 
