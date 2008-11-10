@@ -59,7 +59,7 @@ public class ExtJS22Test extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
-//    @Test
+    @Test
     @SuppressWarnings("unchecked")
     public void core_templates() throws Exception {
         final HtmlPage page = getPage("core", "templates");
