@@ -413,7 +413,7 @@ public class Node extends SimpleScriptable {
     /**
      * Ignores any empty text node in IE.
      * @param child to start from
-     * @param next whether to seek in next subling or previous ones.
+     * @param next whether to seek in next sibling or previous ones.
      * @return the JavaScript object of the node found
      */
     private Object getChild(DomNode child, final boolean next) {
