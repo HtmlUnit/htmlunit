@@ -244,4 +244,23 @@ public class HTMLCollectionTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "2" }, FF = { "3", "5" })
+    @NotYetImplemented({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    public void childNodes() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.body.childNodes.length);\n"
+            + "    alert(document.getElementById('myDiv').childNodes.length);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'> <div id='myDiv'> <div> </div> <div> </div> </div> </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts(html);
+    }
 }
