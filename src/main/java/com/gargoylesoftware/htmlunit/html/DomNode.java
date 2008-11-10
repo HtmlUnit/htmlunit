@@ -312,6 +312,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /** @param previous set the previousSibling field value */
     protected void setPreviousSibling(final DomNode previous) {
+        System.out.println("Previous " + previous.getNodeName());
         previousSibling_ = previous;
     }
 
@@ -1165,7 +1166,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     protected class ChildIterator implements Iterator<DomNode> {
 
-        private DomNode nextNode_ = firstChild_;
+        private DomNode nextNode_ = getFirstChild();
         private DomNode currentNode_ = null;
 
         /** @return whether there is a next object */
@@ -1177,7 +1178,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         public DomNode next() {
             if (nextNode_ != null) {
                 currentNode_ = nextNode_;
-                nextNode_ = nextNode_.nextSibling_;
+                nextNode_ = nextNode_.getNextSibling();
                 return currentNode_;
             }
             throw new NoSuchElementException();

@@ -691,9 +691,6 @@ public class DomNodeTest extends WebTestCase {
      */
     @Test
     public void childNodes_p() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String[] ie = {"2", "1", "2", "1", "1", "1", "2", "2", "1", "1", "1", "1"};
         final String[] ff = {"2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2"};
         childNodes_p(BrowserVersion.INTERNET_EXPLORER_6, ie);
@@ -737,9 +734,6 @@ public class DomNodeTest extends WebTestCase {
      */
     @Test
     public void childNodes_f() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String[] ie = {"2", "1", "2", "1", "1", "1", "2", "2", "1", "1", "1", "1", "1"};
         final String[] ff = {"2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2", "3"};
         childNodes_f(BrowserVersion.INTERNET_EXPLORER_6, ie);
