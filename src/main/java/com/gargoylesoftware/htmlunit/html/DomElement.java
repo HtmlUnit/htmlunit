@@ -28,7 +28,6 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.TypeInfo;
 
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
  * @version $Revision$
@@ -350,7 +349,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         if (attributes() == Collections.EMPTY_MAP) {
             setAttributes(ListOrderedMap.decorate(new HashMap<String, DomAttr>(1)));
         }
-        final DomAttr newAttr = addAttributeToMap((XmlPage) getPage(), attributes(), namespaceURI,
+        final DomAttr newAttr = addAttributeToMap(getPage(), attributes(), namespaceURI,
             qualifiedName, value);
         if (namespaceURI != null) {
             namespaces().put(namespaceURI, newAttr.getPrefix());
@@ -367,7 +366,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param value the value of the attribute
      * @return the new attribute that was added to the specified attribute map
      */
-    private static DomAttr addAttributeToMap(final XmlPage page, final Map<String, DomAttr> attributeMap,
+    private static DomAttr addAttributeToMap(final Page page, final Map<String, DomAttr> attributeMap,
         final String namespaceURI, final String qualifiedName, final String value) {
         final DomAttr newAttr = new DomAttr(page, namespaceURI, qualifiedName, value);
         attributeMap.put(qualifiedName, newAttr);

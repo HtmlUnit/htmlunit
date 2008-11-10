@@ -91,6 +91,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         new HashMap<Class< ? extends SimpleScriptable>, Scriptable>();
     private final JavaScriptEngine scriptEngine_;
     private EventListenersContainer eventListenersContainer_;
+    private Object controllers_;
 
     /**
      * Cache computed styles when possible, because their calculation is very expensive, involving lots
@@ -431,6 +432,10 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         location_.setParentScope(this);
         location_.setPrototype(getPrototype(Location.class));
         location_.initialize(this);
+        
+        // like a JS new Object()
+        final Context ctx = Context.getCurrentContext();
+        controllers_ = ctx.newObject(this);
     }
 
     /**
@@ -1190,4 +1195,21 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         }
     }
 
+    /**
+     * Gets the controllers. The result doesn't currently matter but it is important to return an
+     * object as some JavaScript libraries check it.
+     * @see <a href="https://developer.mozilla.org/En/DOM/Window.controllers">Mozilla documentation</a>
+     * @return some object
+     */
+    public Object jsxGet_controllers() {
+        return controllers_;
+    }
+    
+    /**
+     * Sets the controllers.
+     * @param value the new value
+     */
+    public void jsxSet_controllers(final Object value) {
+        controllers_ = value;
+    }
 }

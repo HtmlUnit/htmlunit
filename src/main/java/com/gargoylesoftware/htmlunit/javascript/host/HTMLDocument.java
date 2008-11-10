@@ -810,7 +810,15 @@ public class HTMLDocument extends Document {
      * @return the new HTML element, or NOT_FOUND if the tag is not supported
      */
     public Object jsxFunction_createElementNS(final String namespaceURI, final String qualifiedName) {
-        final DomElement element = new DomElement(namespaceURI, qualifiedName, getPage(), null);
+        final DomElement element;
+        if (getBrowserVersion().isNetscape()
+                && "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul".equals(namespaceURI)) {
+            // simple hack, no need to implement the XUL objects (at least in a first time)
+            element = new HtmlDivision(namespaceURI, qualifiedName, getPage(), null);
+        }
+        else {
+            element = new DomElement(namespaceURI, qualifiedName, getPage(), null);
+        }
         return getScriptableFor(element);
     }
 

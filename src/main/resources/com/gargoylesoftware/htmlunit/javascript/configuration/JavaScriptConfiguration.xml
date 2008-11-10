@@ -2226,6 +2226,9 @@
         <doclink url="http://msdn.microsoft.com/en-us/library/ms535873.aspx" descr="MSDN documentation"/>
 
         <property name="closed" readable="true" writable="false"/>
+        <property name="controllers" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
         <property name="document" readable="true" writable="false"/>
         <property name="event" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer"/>

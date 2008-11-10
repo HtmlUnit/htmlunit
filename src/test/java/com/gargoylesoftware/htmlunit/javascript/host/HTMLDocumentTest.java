@@ -20,6 +20,8 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 
 /**
  * Tests for {@link HTMLDocument}.
@@ -167,6 +169,34 @@ public class HTMLDocumentTest extends WebTestCase {
             + "    </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts("Hello")
+    public void createDocumentNS_xul() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<title>Test</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var inner = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul',"
+            + "'label');\n"
+            + "  inner.setAttribute('value', 'Hello');\n"
+            + "  inner.style['fontFamily'] = 'inherit';\n"
+            + "  document.body.appendChild(inner);\n"
+            + "  alert(document.body.lastChild.value);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>"
             + "</body>\n"
             + "</html>";
 
