@@ -34,6 +34,7 @@ import org.w3c.dom.UserDataHandler;
 
 import com.gargoylesoftware.htmlunit.IncorrectnessListener;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
@@ -87,7 +88,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     public static final String READY_STATE_COMPLETE = "complete";
 
     /** The owning page of this node. */
-    private Page page_;
+    private SgmlPage page_;
 
     /** The parent node. */
     private DomNode parent_;
@@ -154,7 +155,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Creates a new instance.
      * @param page the page which contains this node
      */
-    protected DomNode(final Page page) {
+    protected DomNode(final SgmlPage page) {
         readyState_ = READY_STATE_LOADING;
         page_ = page;
     }
@@ -219,7 +220,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Returns the page that contains this node.
      * @return the page that contains this node
      */
-    public Page getPage() {
+    public SgmlPage getPage() {
         return page_;
     }
 
@@ -1028,7 +1029,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Recursively sets the new page on the node and its children
      * @param newPage the new owning page
      */
-    private void setPage(final Page newPage) {
+    private void setPage(final SgmlPage newPage) {
         if (page_ == newPage) {
             return; // nothing to do
         }

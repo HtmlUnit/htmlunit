@@ -19,6 +19,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.TypeInfo;
 
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomNamespaceNode;
 
 /**
@@ -45,7 +46,7 @@ public class XmlAttr extends DomNamespaceNode implements Attr {
      * @param value the value of the attribute
      */
     public XmlAttr(final Page page, final String namespaceURI, final String qualifiedName, final String value) {
-        super(namespaceURI, qualifiedName, page);
+        super(namespaceURI, qualifiedName, (SgmlPage) page);
         value_ = value;
     }
 

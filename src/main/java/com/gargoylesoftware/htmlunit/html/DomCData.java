@@ -18,7 +18,7 @@ import java.io.PrintWriter;
 
 import org.w3c.dom.CDATASection;
 
-import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
  * Representation of a CDATA node in the Html DOM.
@@ -40,7 +40,7 @@ public class DomCData extends DomText implements CDATASection {
      * @param page the Page that contains this element
      * @param data the string data held by this node
      */
-    public DomCData(final Page page, final String data) {
+    public DomCData(final SgmlPage page, final String data) {
         super(page, data);
     }
 

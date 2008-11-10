@@ -18,7 +18,7 @@ import java.io.PrintWriter;
 
 import org.w3c.dom.Comment;
 
-import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
  * Wrapper for the DOM node Comment.
@@ -40,7 +40,7 @@ public class DomComment extends DomCharacterData implements Comment {
      * @param page the Page that contains this element
      * @param data the string data held by this node
      */
-    public DomComment(final Page page, final String data) {
+    public DomComment(final SgmlPage page, final String data) {
         super(page, data);
     }
 

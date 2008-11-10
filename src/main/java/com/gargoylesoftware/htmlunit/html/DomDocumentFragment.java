@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.w3c.dom.DocumentFragment;
 
-import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
  * A DOM object for DocumentFragment.
@@ -35,7 +35,7 @@ public class DomDocumentFragment extends DomNode implements DocumentFragment {
      * Creates a new instance.
      * @param page the page which contains this node
      */
-    public DomDocumentFragment(final Page page) {
+    public DomDocumentFragment(final SgmlPage page) {
         super(page);
     }
 

@@ -685,4 +685,97 @@ public class DomNodeTest extends WebTestCase {
             assertSame(element, foundElements.get(0));
         }
     }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    public void childNodes_p() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String[] ie = {"2", "1", "2", "1", "1", "1", "2", "2", "1", "1", "1", "1"};
+        final String[] ff = {"2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2"};
+        childNodes_p(BrowserVersion.INTERNET_EXPLORER_6, ie);
+        childNodes_p(BrowserVersion.INTERNET_EXPLORER_7, ie);
+        childNodes_p(BrowserVersion.FIREFOX_2, ff);
+        childNodes_p(BrowserVersion.FIREFOX_3, ff);
+    }
+
+    private void childNodes_p(final BrowserVersion browserVersion, final String[] expectedAlerts)
+        throws Exception {
+        final String html = "<html><head><title>test_getChildNodes</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  for (var i = 1; i <= 12; i++) {\n"
+            + "    alert(document.getElementById('p' + i).childNodes.length);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<p id='p1'><input> </p>\n"
+            + "<p id='p2'> <input></p>\n"
+            + "<p id='p3'> <input> </p>\n"
+            + "<p id='p4'> <a></a> </p>\n"
+            + "<p id='p5'><a></a> </p>\n"
+            + "<p id='p6'> <a></a></p>\n"
+            + "<p id='p7'> <a href='hi'>there</a> </p>\n"
+            + "<p id='p8'><a href='hi'>there</a> </p>\n"
+            + "<p id='p9'> <a href='hi'>there</a></p>\n"
+            + "<p id='p10'> <a href='hi'></a> </p>\n"
+            + "<p id='p11'><a href='hi'></a> </p>\n"
+            + "<p id='p12'> <a href='hi'></a></p>\n"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(browserVersion, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    public void childNodes_f() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String[] ie = {"2", "1", "2", "1", "1", "1", "2", "2", "1", "1", "1", "1", "1"};
+        final String[] ff = {"2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2", "3"};
+        childNodes_f(BrowserVersion.INTERNET_EXPLORER_6, ie);
+        childNodes_f(BrowserVersion.INTERNET_EXPLORER_7, ie);
+        childNodes_f(BrowserVersion.FIREFOX_2, ff);
+        childNodes_f(BrowserVersion.FIREFOX_3, ff);
+    }
+
+    private void childNodes_f(final BrowserVersion browserVersion, final String[] expectedAlerts)
+        throws Exception {
+        final String html = "<html><head><title>test_getChildNodes</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  for (var i = 1; i <= 13; i++) {\n"
+            + "    alert(document.getElementById('f' + i).childNodes.length);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form id='f1'><input> </form>\n"
+            + "<form id='f2'> <input></form>\n"
+            + "<form id='f3'> <input> </form>\n"
+            + "<form id='f4'> <a></a> </form>\n"
+            + "<form id='f5'><a></a> </form>\n"
+            + "<form id='f6'> <a></a></form>\n"
+            + "<form id='f7'> <a href='hi'>there</a> </form>\n"
+            + "<form id='f8'><a href='hi'>there</a> </form>\n"
+            + "<form id='f9'> <a href='hi'>there</a></form>\n"
+            + "<form id='f10'> <a href='hi'></a> </form>\n"
+            + "<form id='f11'><a href='hi'></a> </form>\n"
+            + "<form id='f12'> <a href='hi'></a></form>\n"
+            + "<form id='f13'> <div> </div> </form>\n"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(browserVersion, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

@@ -193,7 +193,7 @@ public class Document extends EventNode {
      * @return a newly created document fragment
      */
     public Object jsxFunction_createDocumentFragment() {
-        final DomDocumentFragment fragment = ((SgmlPage) getDomNodeOrDie().getPage()).createDomDocumentFragment();
+        final DomDocumentFragment fragment = getDomNodeOrDie().getPage().createDomDocumentFragment();
         final DocumentFragment node = new DocumentFragment();
         node.setParentScope(getParentScope());
         node.setPrototype(getPrototype(node.getClass()));

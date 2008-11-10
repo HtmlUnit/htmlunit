@@ -56,7 +56,7 @@ public abstract class ClickableElement extends StyledElement {
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    protected ClickableElement(final String namespaceURI, final String qualifiedName, final Page page,
+    protected ClickableElement(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

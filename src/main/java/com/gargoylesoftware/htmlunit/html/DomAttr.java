@@ -18,7 +18,7 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 import org.w3c.dom.TypeInfo;
 
-import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
  * An attribute of an element. Attributes are stored in {@link HtmlElement},
@@ -43,7 +43,7 @@ public class DomAttr extends DomNamespaceNode implements Attr {
      * @param qualifiedName the name of the attribute
      * @param value the value of the attribute
      */
-    public DomAttr(final Page page, final String namespaceURI, final String qualifiedName, final String value) {
+    public DomAttr(final SgmlPage page, final String namespaceURI, final String qualifiedName, final String value) {
         super(namespaceURI, qualifiedName, page);
         value_ = value;
     }

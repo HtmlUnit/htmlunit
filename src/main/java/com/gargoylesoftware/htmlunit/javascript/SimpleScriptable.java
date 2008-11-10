@@ -25,7 +25,6 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -232,8 +231,7 @@ public class SimpleScriptable extends ScriptableObject {
             scriptable.setParentScope(getWindow());
         }
         else {
-            scriptable.setParentScope(ScriptableObject.getTopLevelScope(
-                    ((SgmlPage) domNode.getPage()).getScriptObject()));
+            scriptable.setParentScope(ScriptableObject.getTopLevelScope(domNode.getPage().getScriptObject()));
         }
     }
 

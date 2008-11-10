@@ -19,7 +19,7 @@ import java.io.PrintWriter;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Text;
 
-import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
@@ -45,7 +45,7 @@ public class DomText extends DomCharacterData implements Text {
      * @param page the Page that contains this element
      * @param data the string data held by this node
      */
-    public DomText(final Page page, final String data) {
+    public DomText(final SgmlPage page, final String data) {
         super(page, data);
     }
 

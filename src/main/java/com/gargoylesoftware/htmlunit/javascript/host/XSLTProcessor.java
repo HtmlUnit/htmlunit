@@ -159,7 +159,7 @@ public class XSLTProcessor extends SimpleScriptable {
     private void transform(final Node source, final DomNode parent) {
         final Object result = transform(source);
         if (result instanceof org.w3c.dom.Node) {
-            final SgmlPage parentPage = (SgmlPage) parent.getPage();
+            final SgmlPage parentPage = parent.getPage();
             final NodeList children = ((org.w3c.dom.Node) result).getChildNodes();
             for (int i = 0; i < children.getLength(); i++) {
                 XmlUtil.appendChild(parentPage, parent, children.item(i));
@@ -259,7 +259,7 @@ public class XSLTProcessor extends SimpleScriptable {
      */
     public void jsxFunction_transform() {
         final Node input = input_;
-        final SgmlPage page = (SgmlPage) input.getDomNodeOrDie().getPage();
+        final SgmlPage page = input.getDomNodeOrDie().getPage();
 
         if (output_ == null || !(output_ instanceof Node)) {
             final DomDocumentFragment fragment = page.createDomDocumentFragment();

@@ -18,7 +18,6 @@ import java.util.Map;
 
 import org.xml.sax.Attributes;
 
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
@@ -331,7 +330,7 @@ class DefaultElementFactory implements IElementFactory {
      * @param attributes the SAX attributes
      * @return the map of attribute values for {@link HtmlElement}s
      */
-    static Map<String, DomAttr> setAttributes(final Page page, final Attributes attributes) {
+    static Map<String, DomAttr> setAttributes(final SgmlPage page, final Attributes attributes) {
         Map<String, DomAttr> attributeMap = null;
         if (attributes != null) {
             attributeMap = HtmlElement.createAttributeMap(attributes.getLength());

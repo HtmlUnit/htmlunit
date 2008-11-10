@@ -19,6 +19,7 @@ import java.util.Map;
 import org.apache.commons.lang.ClassUtils;
 
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 
@@ -45,7 +46,7 @@ public class XmlElement extends DomElement {
      */
     protected XmlElement(final String namespaceURI, final String qualifiedName, final Page page,
             final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, page, attributes);
+        super(namespaceURI, qualifiedName, (SgmlPage) page, attributes);
     }
 
     /**

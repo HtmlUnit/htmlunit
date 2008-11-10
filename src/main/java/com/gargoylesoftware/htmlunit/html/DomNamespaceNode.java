@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
@@ -42,7 +42,7 @@ public abstract class DomNamespaceNode extends DomNode {
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the page that contains this element
      */
-    protected DomNamespaceNode(final String namespaceURI, final String qualifiedName, final Page page) {
+    protected DomNamespaceNode(final String namespaceURI, final String qualifiedName, final SgmlPage page) {
         super(page);
         WebAssert.notNull("qualifiedName", qualifiedName);
         qualifiedName_ = qualifiedName;

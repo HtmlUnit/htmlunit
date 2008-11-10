@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
-import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
  * Intermediate base class for "styled" HTML elements. As defined
@@ -43,7 +43,7 @@ public abstract class StyledElement extends HtmlElement {
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    protected StyledElement(final String namespaceURI, final String qualifiedName, final Page page,
+    protected StyledElement(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

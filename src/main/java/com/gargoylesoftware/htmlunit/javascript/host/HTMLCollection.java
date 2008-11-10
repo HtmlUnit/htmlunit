@@ -43,6 +43,7 @@ import com.gargoylesoftware.htmlunit.html.NonSerializable;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
+import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
  * An array of elements. Used for the element arrays returned by <tt>document.all</tt>,
@@ -251,15 +252,16 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             response = new ArrayList<Object>();
         }
 
+        final boolean isXmlPage = node_ != null && node_.getOwnerDocument() instanceof XmlPage;
+
         final boolean isIE = getBrowserVersion().isIE();
 
         for (int i = 0; i < response.size(); i++) {
             final DomNode element = (DomNode) response.get(i);
 
-            //IE: ignores all empty text nodes
-            if (isIE && element instanceof DomText && ((DomText) element).getNodeValue().trim().length() == 0) {
-
-                //and 'xml:space' is 'default'
+            //IE: XmlPage ignores all empty text nodes
+            if (isIE && isXmlPage && element instanceof DomText
+                && ((DomText) element).getNodeValue().trim().length() == 0) { //and 'xml:space' is 'default'
                 final Boolean xmlSpaceDefault = isXMLSpaceDefault(element.getParentNode());
                 if (xmlSpaceDefault != Boolean.FALSE) {
                     response.remove(i--);

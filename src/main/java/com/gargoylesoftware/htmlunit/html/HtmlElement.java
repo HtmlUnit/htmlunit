@@ -104,7 +104,7 @@ public abstract class HtmlElement extends DomElement {
      * @param attributes a map ready initialized with the attributes for this element, or
      * <code>null</code>. The map will be stored as is, not copied.
      */
-    protected HtmlElement(final String namespaceURI, final String qualifiedName, final Page page,
+    protected HtmlElement(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
@@ -179,7 +179,7 @@ public abstract class HtmlElement extends DomElement {
             ((HtmlPage) getPage()).removeMappedElement(this);
         }
 
-        final DomAttr newAttr = addAttributeToMap((Page) getOwnerDocument(), attributes(), namespaceURI,
+        final DomAttr newAttr = addAttributeToMap((SgmlPage) getOwnerDocument(), attributes(), namespaceURI,
             qualifiedName.toLowerCase(), value);
         newAttr.setParentNode(this);
         if (namespaceURI != null) {
@@ -828,7 +828,7 @@ public abstract class HtmlElement extends DomElement {
      * @param value the value of the attribute
      * @return the new attribute which was added to the specified attribute map
      */
-    static DomAttr addAttributeToMap(final Page page, final Map<String, DomAttr> attributeMap,
+    static DomAttr addAttributeToMap(final SgmlPage page, final Map<String, DomAttr> attributeMap,
             final String namespaceURI, final String qualifiedName, final String value) {
         final DomAttr newAttr = new DomAttr(page, namespaceURI, qualifiedName, value);
         attributeMap.put(qualifiedName, newAttr);
@@ -1188,14 +1188,6 @@ public abstract class HtmlElement extends DomElement {
             final HTMLElement jsElt = (HTMLElement) getScriptObject();
             jsElt.jsxFunction_setActive();
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public SgmlPage getPage() {
-        return (SgmlPage) super.getPage();
     }
 
     /**

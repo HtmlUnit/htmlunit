@@ -27,7 +27,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.TypeInfo;
 
-import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
  * @version $Revision$
@@ -58,7 +58,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param attributes a map ready initialized with the attributes for this element, or
      * <code>null</code>. The map will be stored as is, not copied.
      */
-    public DomElement(final String namespaceURI, final String qualifiedName, final Page page,
+    public DomElement(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page);
         if (attributes != null) {
@@ -366,7 +366,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param value the value of the attribute
      * @return the new attribute that was added to the specified attribute map
      */
-    private static DomAttr addAttributeToMap(final Page page, final Map<String, DomAttr> attributeMap,
+    private static DomAttr addAttributeToMap(final SgmlPage page, final Map<String, DomAttr> attributeMap,
         final String namespaceURI, final String qualifiedName, final String value) {
         final DomAttr newAttr = new DomAttr(page, namespaceURI, qualifiedName, value);
         attributeMap.put(qualifiedName, newAttr);
@@ -465,5 +465,4 @@ public class DomElement extends DomNamespaceNode implements Element {
     public final void setIdAttributeNode(final Attr idAttr, final boolean isId) {
         throw new UnsupportedOperationException("DomElement.setIdAttributeNode is not yet implemented.");
     }
-
 }

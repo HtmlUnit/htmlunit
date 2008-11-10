@@ -169,8 +169,7 @@ public class Node extends SimpleScriptable {
             if (!(parentNode instanceof SgmlPage)
                     && !(this instanceof DocumentFragment) && parentNode.getParentNode() == null
                     && getBrowserVersion().isIE()) {
-                final DomDocumentFragment fragment =
-                    ((SgmlPage) parentNode.getPage()).createDomDocumentFragment();
+                final DomDocumentFragment fragment = parentNode.getPage().createDomDocumentFragment();
                 fragment.appendChild(parentNode);
             }
         }
@@ -377,7 +376,7 @@ public class Node extends SimpleScriptable {
      * no next sibling.
      */
     public Object jsxGet_nextSibling() {
-        return getChild(getDomNodeOrDie().getNextSibling(), true);
+        return getJavaScriptNode(getDomNodeOrDie().getNextSibling());
     }
 
     /**
@@ -387,7 +386,7 @@ public class Node extends SimpleScriptable {
      * no previous sibling.
      */
     public Object jsxGet_previousSibling() {
-        return getChild(getDomNodeOrDie().getPreviousSibling(), false);
+        return getJavaScriptNode(getDomNodeOrDie().getPreviousSibling());
     }
 
     /**
@@ -397,7 +396,7 @@ public class Node extends SimpleScriptable {
      * no children.
      */
     public Object jsxGet_firstChild() {
-        return getChild(getDomNodeOrDie().getFirstChild(), true);
+        return getJavaScriptNode(getDomNodeOrDie().getFirstChild());
     }
 
     /**
@@ -407,29 +406,9 @@ public class Node extends SimpleScriptable {
      * no children.
      */
     public Object jsxGet_lastChild() {
-        return getChild(getDomNodeOrDie().getLastChild(), false);
+        return getJavaScriptNode(getDomNodeOrDie().getLastChild());
     }
 
-    /**
-     * Ignores any empty text node in IE.
-     * @param child to start from
-     * @param next whether to seek in next sibling or previous ones.
-     * @return the JavaScript object of the node found
-     */
-    private Object getChild(DomNode child, final boolean next) {
-        if (getBrowserVersion().isIE()) {
-            while (child != null && child.getNodeType() == Node.TEXT_NODE
-                    && child.getNodeValue().trim().length() == 0) {
-                if (next) {
-                    child = child.getNextSibling();
-                }
-                else {
-                    child = child.getPreviousSibling();
-                }
-            }
-        }
-        return getJavaScriptNode(child);
-    }
     /**
      * Gets the JavaScript node for a given DomNode.
      * @param domNode the DomNode

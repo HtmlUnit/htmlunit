@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.w3c.dom.CharacterData;
 
-import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
  * Wrapper for the DOM node CharacterData.
@@ -38,7 +38,7 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
      * @param page the Page that contains this element
      * @param data the data string wrapped by this node
      */
-    public DomCharacterData(final Page page, final String data) {
+    public DomCharacterData(final SgmlPage page, final String data) {
         super(page);
         data_ = data;
     }

@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.html;
 import org.w3c.dom.DocumentType;
 import org.w3c.dom.NamedNodeMap;
 
-import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
  * A DOM object for DocumentType.
@@ -40,7 +40,7 @@ public class DomDocumentType extends DomNode implements DocumentType {
      * @param publicId the public ID
      * @param systemId the system ID
      */
-    public DomDocumentType(final Page page, final String name, final String publicId, final String systemId) {
+    public DomDocumentType(final SgmlPage page, final String name, final String publicId, final String systemId) {
         super(page);
         name_ = name;
         publicId_ = publicId;
