@@ -249,7 +249,6 @@ public class HTMLCollectionTest extends WebTestCase {
      */
     @Test
     @Alerts(IE = { "1", "2" }, FF = { "3", "5" })
-    @NotYetImplemented({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     public void childNodes() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

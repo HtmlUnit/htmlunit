@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="fix" dev="asashour">
+                JavaScript: IE ignores empty text children.
+            </action>
             <action type="add" dev="sdanig">
                 JavaScript: add support for document.queryCommandEnabled().
             </action>
