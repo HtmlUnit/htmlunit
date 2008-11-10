@@ -432,7 +432,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         location_.setParentScope(this);
         location_.setPrototype(getPrototype(Location.class));
         location_.initialize(this);
-        
+
         // like a JS new Object()
         final Context ctx = Context.getCurrentContext();
         controllers_ = ctx.newObject(this);
@@ -1204,7 +1204,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     public Object jsxGet_controllers() {
         return controllers_;
     }
-    
+
     /**
      * Sets the controllers.
      * @param value the new value
