@@ -248,12 +248,13 @@ public class HTMLCollectionTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "2" }, FF = { "3", "5" })
+    @Alerts(IE = { "1", "DIV", "2" }, FF = { "3", "#text", "5" })
     public void childNodes() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    alert(document.body.childNodes.length);\n"
+            + "    alert(document.body.firstChild.nodeName);\n"
             + "    alert(document.getElementById('myDiv').childNodes.length);\n"
             + "  }\n"
             + "</script></head>\n"

@@ -377,7 +377,7 @@ public class Node extends SimpleScriptable {
      * no next sibling.
      */
     public Object jsxGet_nextSibling() {
-        return getJavaScriptNode(getDomNodeOrDie().getNextSibling());
+        return getChild(getDomNodeOrDie().getNextSibling(), true);
     }
 
     /**
@@ -387,7 +387,7 @@ public class Node extends SimpleScriptable {
      * no previous sibling.
      */
     public Object jsxGet_previousSibling() {
-        return getJavaScriptNode(getDomNodeOrDie().getPreviousSibling());
+        return getChild(getDomNodeOrDie().getPreviousSibling(), false);
     }
 
     /**
@@ -397,7 +397,7 @@ public class Node extends SimpleScriptable {
      * no children.
      */
     public Object jsxGet_firstChild() {
-        return getJavaScriptNode(getDomNodeOrDie().getFirstChild());
+        return getChild(getDomNodeOrDie().getFirstChild(), true);
     }
 
     /**
@@ -407,9 +407,29 @@ public class Node extends SimpleScriptable {
      * no children.
      */
     public Object jsxGet_lastChild() {
-        return getJavaScriptNode(getDomNodeOrDie().getLastChild());
+        return getChild(getDomNodeOrDie().getLastChild(), false);
     }
 
+    /**
+     * Ignores any empty text node in IE.
+     * @param child to start from
+     * @param next whether to seek in next subling or previous ones.
+     * @return the JavaScript object of the node found
+     */
+    private Object getChild(DomNode child, final boolean next) {
+        if (getBrowserVersion().isIE()) {
+            while (child != null && child.getNodeType() == Node.TEXT_NODE
+                    && child.getNodeValue().trim().length() == 0) {
+                if (next) {
+                    child = child.getNextSibling();
+                }
+                else {
+                    child = child.getPreviousSibling();
+                }
+            }
+        }
+        return getJavaScriptNode(child);
+    }
     /**
      * Gets the JavaScript node for a given DomNode.
      * @param domNode the DomNode
