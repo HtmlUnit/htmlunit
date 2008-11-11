@@ -261,6 +261,7 @@ public class XmlPage extends SgmlPage implements Document {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public Element createElementNS(final String namespaceURI, final String qualifiedName) {
         throw new UnsupportedOperationException("XmlPage.createElementNS is not yet implemented.");
     }

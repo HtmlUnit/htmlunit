@@ -424,6 +424,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Element createElementNS(final String namespaceURI, final String qualifiedName) {
         return createHtmlElementNS(namespaceURI, qualifiedName);
     }

@@ -465,36 +465,4 @@ public class DomElement extends DomNamespaceNode implements Element {
     public final void setIdAttributeNode(final Attr idAttr, final boolean isId) {
         throw new UnsupportedOperationException("DomElement.setIdAttributeNode is not yet implemented.");
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public DomNode getFirstChild() {
-        return getProperDomNode(super.getFirstChild());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public DomNode getNextSibling() {
-        return getProperDomNode(super.getNextSibling());
-    }
-
-    private DomNode getProperDomNode(final DomNode child) {
-        /*if (getPage() instanceof XmlPage) {
-            return child;
-        }
-        final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
-        while (child != null && ie && child.getNodeType() == TEXT_NODE && child.getNodeValue().trim().length() == 0) {
-            final DomNode childPreviousSibling = child.getPreviousSibling();
-            if (childPreviousSibling instanceof HtmlInput
-                || childPreviousSibling instanceof HtmlAnchor && childPreviousSibling.getFirstChild() != null) {
-                break;
-            }
-            child = child.getNextSibling();
-        }*/
-        return child;
-    }
 }

@@ -1165,7 +1165,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     protected class ChildIterator implements Iterator<DomNode> {
 
-        private DomNode nextNode_ = getFirstChild();
+        private DomNode nextNode_ = firstChild_;
         private DomNode currentNode_ = null;
 
         /** @return whether there is a next object */
@@ -1177,7 +1177,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         public DomNode next() {
             if (nextNode_ != null) {
                 currentNode_ = nextNode_;
-                nextNode_ = nextNode_.getNextSibling();
+                nextNode_ = nextNode_.nextSibling_;
                 return currentNode_;
             }
             throw new NoSuchElementException();
