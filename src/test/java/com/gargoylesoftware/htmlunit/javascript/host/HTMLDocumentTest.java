@@ -180,6 +180,34 @@ public class HTMLDocumentTest extends WebTestCase {
      */
     @Test
     @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts({ "[object HTMLDivElement]", "[object HTMLUnknownElement]", "[object Element]" })
+    public void createDocumentNS() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<title>Test</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var elt = document.createElementNS('http://www.w3.org/1999/xhtml', 'div');\n"
+            + "  alert(elt);\n"
+            + "  var elt = document.createElementNS('http://www.w3.org/1999/xhtml', 'foo');\n"
+            + "  alert(elt);\n"
+            + "  elt = document.createElementNS('blabla', 'div');\n"
+            + "  alert(elt);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @Alerts("Hello")
     public void createDocumentNS_xul() throws Exception {
         final String html = "<html>\n"

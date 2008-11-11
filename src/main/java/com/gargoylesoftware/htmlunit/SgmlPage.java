@@ -160,6 +160,14 @@ public abstract class SgmlPage extends DomNode implements Page {
     public abstract Element createElement(final String tagName);
 
     /**
+     * Create a new Element with the given namespace and qualified name.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @return the new element
+     */
+    public abstract Element createElementNS(final String namespaceURI, final String qualifiedName);
+
+    /**
      * Returns the page encoding.
      * @return the page encoding
      */
