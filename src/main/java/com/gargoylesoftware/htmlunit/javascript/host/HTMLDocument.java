@@ -745,7 +745,7 @@ public class HTMLDocument extends Document {
             throw new RuntimeException("Node cannot be inserted at the specified point in the hierarchy.");
         }
         // We're emulating IE; we can allow insertion.
-        return ((HTMLBodyElement) jsxGet_body()).jsxFunction_appendChild(childObject);
+        return super.jsxFunction_appendChild(childObject);
     }
 
     /**
