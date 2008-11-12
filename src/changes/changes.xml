@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="add" dev="mguillem">
+                JavaScript: dummy support for XUL element in HtmlDocument.createElementNS (FF only).
+            </action>
+            <action type="add" dev="mguillem">
+                JavaScript: window.controllers is not null (FF only).
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: IE ignores empty text children.
             </action>
