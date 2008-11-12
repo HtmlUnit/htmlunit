@@ -44,8 +44,8 @@
             <action type="add" dev="asashour">
                 JavaScript: add support for element.contains() (IE only).
             </action>
-            <action type="fix" dev="sdanig">
-                JavaScript: element.innerHTML should quote anchor href attributes when emulating IE.
+            <action type="fix" dev="sdanig" id="2262599">
+                JavaScript: element.innerHTML should quote anchor href attributes and empty attributes when emulating IE.
             </action>
             <action type="fix" dev="sdanig">
                 JavaScript: In certain cases, node collections were returning elements when inexistent attributes were accessed.

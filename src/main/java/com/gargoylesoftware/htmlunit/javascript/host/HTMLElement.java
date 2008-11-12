@@ -652,6 +652,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 final String value = attr.getValue().replaceAll("\"", "&quot;");
                 final boolean quote = !ie
                     || com.gargoylesoftware.htmlunit.util.StringUtils.containsWhitespace(value)
+                    || value.length() == 0
                     || (element instanceof HtmlAnchor && "href".equals(name));
                 buffer.append(' ').append(name).append("=");
                 if (quote) {

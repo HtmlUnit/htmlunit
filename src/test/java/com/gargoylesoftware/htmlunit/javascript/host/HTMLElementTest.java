@@ -467,6 +467,16 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE = "<DIV id=i foo=\"\" name=\"\"></DIV>", FF = "<div id=\"i\" foo=\"\" name=\"\"></div>")
+    public void getInnerHTML_EmptyAttributes() throws Exception {
+        final String html = "<body onload='alert(document.body.innerHTML)'><div id='i' foo='' name=''></div></body>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
