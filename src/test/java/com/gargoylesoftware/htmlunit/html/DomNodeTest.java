@@ -691,6 +691,9 @@ public class DomNodeTest extends WebTestCase {
      */
     @Test
     public void childNodes_p() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
         final String[] ie = {"2", "1", "2", "1", "1", "1", "2", "2", "1", "1", "1", "1"};
         final String[] ff = {"2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2"};
         childNodes_p(BrowserVersion.INTERNET_EXPLORER_6, ie);
@@ -734,6 +737,9 @@ public class DomNodeTest extends WebTestCase {
      */
     @Test
     public void childNodes_f() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
         final String[] ie = {"2", "1", "2", "1", "1", "1", "2", "2", "1", "1", "1", "1", "1"};
         final String[] ff = {"2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2", "3"};
         childNodes_f(BrowserVersion.INTERNET_EXPLORER_6, ie);
@@ -766,6 +772,46 @@ public class DomNodeTest extends WebTestCase {
             + "<form id='f11'><a href='hi'></a> </form>\n"
             + "<form id='f12'> <a href='hi'></a></form>\n"
             + "<form id='f13'> <div> </div> </form>\n"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(browserVersion, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    public void childNodes_span() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String[] ie = {"1", "1", "1", "2", "2", "1"};
+        final String[] ff = {"3", "2", "2", "3", "2", "2"};
+        childNodes_span(BrowserVersion.INTERNET_EXPLORER_6, ie);
+        childNodes_span(BrowserVersion.INTERNET_EXPLORER_7, ie);
+        childNodes_span(BrowserVersion.FIREFOX_2, ff);
+        childNodes_span(BrowserVersion.FIREFOX_3, ff);
+    }
+
+    private void childNodes_span(final BrowserVersion browserVersion, final String[] expectedAlerts)
+        throws Exception {
+        final String html = "<html><head><title>test_getChildNodes</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  for (var i = 1; i <= 6; i++) {\n"
+            + "    alert(document.getElementById('p' + i).childNodes.length);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<p id='p1'> <span></span> </p>\n"
+            + "<p id='p2'><span></span> </p>\n"
+            + "<p id='p3'> <span></span></p>\n"
+            + "<p id='p4'> <span>something</span> </p>\n"
+            + "<p id='p5'><span>something</span> </p>\n"
+            + "<p id='p6'> <span>something</span></p>\n"
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();

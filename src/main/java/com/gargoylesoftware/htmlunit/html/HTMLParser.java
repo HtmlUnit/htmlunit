@@ -545,33 +545,10 @@ public final class HTMLParser {
 
         /** @inheritDoc ContentHandler#characters(char,int,int) */
         public void characters(final char[] ch, final int start, final int length) throws SAXException {
-            if (new String(ch, start, length).trim().length() == 0
-                    && page_.getWebClient().getBrowserVersion().isIE()) {
-
-                final DomNode lastChild = currentNode_.getLastChild();
-                if (removeEmptyCharacters(lastChild)) {
-                    return;
-                }
-            }
             if (characters_ == null) {
                 characters_ = new StringBuilder();
             }
             characters_.append(ch, start, length);
-        }
-
-        private boolean removeEmptyCharacters(final DomNode lastChild) {
-            if (lastChild != null) {
-                if (lastChild instanceof HtmlInput) {
-                    return false;
-                }
-                if (lastChild instanceof HtmlAnchor) {
-                    final DomNode anchorChild = lastChild.getFirstChild();
-                    if (anchorChild != null) {
-                        return false;
-                    }
-                }
-            }
-            return true;
         }
 
         /** @inheritDoc ContentHandler#ignorableWhitespace(char,int,int) */
