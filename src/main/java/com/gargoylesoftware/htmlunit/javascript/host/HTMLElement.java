@@ -38,6 +38,7 @@ import org.mozilla.javascript.Scriptable;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -770,18 +771,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     static void parseHtmlSnippet(final DomNode target, final boolean append, final String source) {
         final HtmlPage page = (HtmlPage) target.getPage();
-        final DomNode proxyNode = new HtmlDivision(null, HtmlDivision.TAG_NAME, page, null) {
-            private static final long serialVersionUID = 2108037256628269797L;
-            @Override
-            public DomNode appendChild(final org.w3c.dom.Node node) {
-                final DomNode domNode = (DomNode) node;
-                if (append) {
-                    return target.appendChild(domNode);
-                }
-                target.insertBefore(domNode);
-                return domNode;
-            }
-        };
+        final DomNode proxyNode = new ProxyDomNode(page, target, append);
 
         try {
             HTMLParser.parseFragment(proxyNode, source);
@@ -795,6 +785,57 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             LogFactory.getLog(HtmlElement.class).error("Unexpected exception occurred while parsing HTML snippet", e);
             throw Context.reportRuntimeError("Unexpected exception occurred while parsing HTML snippet: "
                     + e.getMessage());
+        }
+    }
+
+    /**
+     * ProxyDomNode.
+     */
+    public static class ProxyDomNode extends HtmlDivision {
+
+        private static final long serialVersionUID = -7816775277187498538L;
+        private final DomNode target_;
+        private boolean append_;
+
+        /**
+         * Constructor.
+         * @param page the page
+         * @param target the target
+         * @param append append or no
+         */
+        public ProxyDomNode(final SgmlPage page, final DomNode target, final boolean append) {
+            super(null, HtmlDivision.TAG_NAME, page, null);
+            target_ = target;
+            append_ = append;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public DomNode appendChild(final org.w3c.dom.Node node) {
+            final DomNode domNode = (DomNode) node;
+            if (append_) {
+                return target_.appendChild(domNode);
+            }
+            target_.insertBefore(domNode);
+            return domNode;
+        }
+
+        /**
+         * Gets wrapped DomNode.
+         * @return the node
+         */
+        public DomNode getDomNode() {
+            return target_;
+        }
+
+        /**
+         * Returns append or not.
+         * @return append or not
+         */
+        public boolean isAppend() {
+            return append_;
         }
     }
 
