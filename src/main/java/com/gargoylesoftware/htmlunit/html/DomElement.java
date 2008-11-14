@@ -197,11 +197,12 @@ public class DomElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * Returns the qualified name (prefix:local) for the namespace and local name.
+     * Returns the qualified name (prefix:local) for the specified namespace and local name,
+     * or <tt>null</tt> if the specified namespace URI does not exist.
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param localName the name within the namespace
-     * @return the qualified name or just local name if the namespace is not fully defined
+     * @return the qualified name for the specified namespace and local name
      */
     private String getQualifiedName(final String namespaceURI, final String localName) {
         final String qualifiedName;
@@ -211,7 +212,7 @@ public class DomElement extends DomNamespaceNode implements Element {
                 qualifiedName = prefix + ':' + localName;
             }
             else {
-                qualifiedName = localName;
+                qualifiedName = null;
             }
         }
         else {
@@ -263,7 +264,10 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param localName the name within the namespace
      */
     public final void removeAttributeNS(final String namespaceURI, final String localName) {
-        removeAttribute(getQualifiedName(namespaceURI, localName));
+        final String qualifiedName = getQualifiedName(namespaceURI, localName);
+        if (qualifiedName != null) {
+            removeAttribute(qualifiedName);
+        }
     }
 
     /**
@@ -283,7 +287,13 @@ public class DomElement extends DomNamespaceNode implements Element {
      * default value, false otherwise.
      */
     public final boolean hasAttributeNS(final String namespaceURI, final String localName) {
-        return attributes().get(getQualifiedName(namespaceURI, localName)) != null;
+        final String qualifiedName = getQualifiedName(namespaceURI, localName);
+        if (qualifiedName != null) {
+            return attributes().get(qualifiedName) != null;
+        }
+        else {
+            return false;
+        }
     }
 
     /**
@@ -384,7 +394,13 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED} or {@link #ATTRIBUTE_VALUE_EMPTY}
      */
     public final String getAttributeNS(final String namespaceURI, final String localName) {
-        return getAttributeValue(getQualifiedName(namespaceURI, localName));
+        final String qualifiedName = getQualifiedName(namespaceURI, localName);
+        if (qualifiedName != null) {
+            return getAttributeValue(qualifiedName);
+        }
+        else {
+            return ATTRIBUTE_NOT_DEFINED;
+        }
     }
 
     /**

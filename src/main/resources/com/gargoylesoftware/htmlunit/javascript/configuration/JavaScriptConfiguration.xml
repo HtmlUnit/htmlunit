@@ -1317,6 +1317,9 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </function>
         <function name="removeAttribute"/>
+        <function name="removeAttributeNS">
+            <browser name="Firefox"/>
+        </function>
         <function name="removeExpression">
             <doclink
                 url="http://msdn2.microsoft.com/en-us/library/aa358798.aspx"

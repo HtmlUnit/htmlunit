@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="fix" dev="sdanig" id="2024619">
+                When querying elements for namespaced attributes, don't fall back to returning non-namespaced attributes.
+            </action>
+            <action type="add" dev="sdanig" id="2024619">
+                JavaScript: add support for element.removeAttributeNS() (FF only).
+            </action>
             <action type="add" dev="mguillem">
                 JavaScript: dummy support for XUL element in HtmlDocument.createElementNS (FF only).
             </action>

@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link Element}.
@@ -850,7 +849,6 @@ public class ElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     @Alerts(IE = { "button", "getAttributeNS() not supported" }, FF = { "button", "", "false", "true" })
     public void attributeNS() throws Exception {
         final String html

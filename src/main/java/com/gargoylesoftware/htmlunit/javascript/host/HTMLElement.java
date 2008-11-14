@@ -461,7 +461,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Sets the specified attribute.
      * @param namespaceURI the namespace URI
-     * @param qualifiedName the local name of the attribute to look for
+     * @param qualifiedName the qualified name of the attribute to look for
      * @param value the new attribute value
      */
     public void jsxFunction_setAttributeNS(final String namespaceURI, final String qualifiedName, final String value) {
@@ -469,12 +469,20 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Remove an attribute.
-     *
-     * @param name Name of the attribute to remove
+     * Removes the specified attribute.
+     * @param name the name of the attribute to remove
      */
     public void jsxFunction_removeAttribute(final String name) {
         getHtmlElementOrDie().removeAttribute(name);
+    }
+
+    /**
+     * Removes the specified attribute.
+     * @param namespaceURI the namespace URI of the attribute to remove
+     * @param localName the local name of the attribute to remove
+     */
+    public void jsxFunction_removeAttributeNS(final String namespaceURI, final String localName) {
+        getHtmlElementOrDie().removeAttributeNS(namespaceURI, localName);
     }
 
     /**
