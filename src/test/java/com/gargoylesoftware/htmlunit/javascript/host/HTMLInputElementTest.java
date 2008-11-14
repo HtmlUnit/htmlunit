@@ -534,6 +534,41 @@ public class HTMLInputElementTest extends WebTestCase {
     }
 
     /**
+     * Strange incident, this is an exact copy of {@link #testChangeType()}
+     * but without new line just after the &lt;form&gt; start tag.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testChangeType2() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String content
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    var input = document.myForm.myRadio;\n"
+            + "    alert(input.type);\n"
+            + "    input.type = 'hidden';\n"
+            + "    alert(input.type);\n"
+            + "    input.setAttribute('type', 'image');\n"
+            + "    alert(input.type);\n"
+            + "}\n</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<form name='myForm' action='foo'>"
+            + "<input type='radio' name='myRadio'/>\n"
+            + "</form></body></html>";
+
+        final String[] expectedAlerts = {"radio", "hidden", "image"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+
+        assertTrue(HtmlImageInput.class.isInstance(page.getFormByName("myForm").getInputByName("myRadio")));
+    }
+
+    /**
      * Inputs have properties not only from there own type.
      * Works with Mozilla, Firefox and IE... but not with HtmlUnit now.
      * @throws Exception if the test fails
