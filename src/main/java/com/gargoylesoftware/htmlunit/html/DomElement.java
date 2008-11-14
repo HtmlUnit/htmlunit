@@ -291,9 +291,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         if (qualifiedName != null) {
             return attributes().get(qualifiedName) != null;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
     /**
@@ -398,9 +396,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         if (qualifiedName != null) {
             return getAttributeValue(qualifiedName);
         }
-        else {
-            return ATTRIBUTE_NOT_DEFINED;
-        }
+        return ATTRIBUTE_NOT_DEFINED;
     }
 
     /**
