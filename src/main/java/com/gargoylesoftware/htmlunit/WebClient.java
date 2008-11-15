@@ -138,10 +138,9 @@ public class WebClient implements Serializable {
 
     private final Set<WebWindowListener> webWindowListeners_ = new HashSet<WebWindowListener>(5);
     private final List<WebWindow> webWindows_ = Collections.synchronizedList(new ArrayList<WebWindow>());
-
     private WebWindow currentWindow_;
-    private Stack<WebWindow> firstWindowStack_ = new Stack<WebWindow>();
     private final Stack<WebWindow> windows_ = new Stack<WebWindow>();
+
     private int timeout_;
     private HTMLParserListener htmlParserListener_;
     private ErrorHandler cssErrorHandler_ = new DefaultCssErrorHandler();
@@ -436,13 +435,6 @@ public class WebClient implements Serializable {
         }
 
         final Page newPage = pageCreator_.createPage(webResponse, webWindow);
-
-        synchronized (firstWindowStack_) {
-            if (!firstWindowStack_.empty() && firstWindowStack_.peek() == null) {
-                firstWindowStack_.pop();
-                firstWindowStack_.push(webWindow);
-            }
-        }
 
         fireWindowContentChanged(new WebWindowEvent(webWindow, WebWindowEvent.CHANGE, oldPage, newPage));
 
