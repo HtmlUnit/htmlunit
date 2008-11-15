@@ -56,7 +56,7 @@ public class HTMLInputElementTest extends WebTestCase {
      */
     @Test
     public void testStandardProperties_Text() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    alert(document.form1.textfield1.value)\n"
@@ -74,7 +74,7 @@ public class HTMLInputElementTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
         final String[] expectedAlerts = {"foo", "text", "textfield1", "form1", "cat"};
@@ -87,7 +87,7 @@ public class HTMLInputElementTest extends WebTestCase {
      */
     @Test
     public void testTextProperties() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    alert(document.form1.button1.type)\n"
@@ -131,7 +131,7 @@ public class HTMLInputElementTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
         final String[] expectedAlerts = {
@@ -139,7 +139,7 @@ public class HTMLInputElementTest extends WebTestCase {
             "select-multiple", "password", "reset", "reset", "submit",
             "submit", "text", "textarea"
         };
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -149,7 +149,7 @@ public class HTMLInputElementTest extends WebTestCase {
      */
     @Test
     public void testCheckedAttribute_Checkbox() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "    alert(document.form1.checkbox1.checked)\n"
@@ -165,7 +165,7 @@ public class HTMLInputElementTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         final HtmlCheckBoxInput checkBox = page.getHtmlElementById("checkbox1");
         assertFalse(checkBox.isChecked());
         page.<HtmlAnchor>getHtmlElementById("clickme").click();
@@ -180,7 +180,7 @@ public class HTMLInputElementTest extends WebTestCase {
      */
     @Test
     public void testCheckedAttribute_Radio() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "    alert(document.form1.radio1[0].checked)\n"
@@ -202,7 +202,7 @@ public class HTMLInputElementTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         final HtmlRadioButtonInput radioA = page.getHtmlElementById("radioA");
         final HtmlRadioButtonInput radioB = page.getHtmlElementById("radioB");
         final HtmlRadioButtonInput radioC = page.getHtmlElementById("radioC");
@@ -224,7 +224,7 @@ public class HTMLInputElementTest extends WebTestCase {
      */
     @Test
     public void testDisabledAttribute() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "    alert(document.form1.button1.disabled)\n"
@@ -248,7 +248,7 @@ public class HTMLInputElementTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         final HtmlForm form = page.getFormByName("form1");
 
         final HtmlSubmitInput button1 = form.getInputByName("button1");
@@ -482,7 +482,7 @@ public class HTMLInputElementTest extends WebTestCase {
      */
     @Test
     public void testDefautValue() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.myForm.myRadio.value);\n"
@@ -495,7 +495,7 @@ public class HTMLInputElementTest extends WebTestCase {
             + "</form></body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
+        loadPage(html, collectedAlerts);
 
         final String[] expectedAlerts = {"on", "on"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -508,7 +508,7 @@ public class HTMLInputElementTest extends WebTestCase {
      */
     @Test
     public void testChangeType() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var input = document.myForm.myRadio;\n"
@@ -524,26 +524,21 @@ public class HTMLInputElementTest extends WebTestCase {
             + "</form></body></html>";
 
         final String[] expectedAlerts = {"radio", "hidden", "image"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
 
         assertTrue(HtmlImageInput.class.isInstance(page.getFormByName("myForm").getInputByName("myRadio")));
     }
 
     /**
-     * Strange incident, this is an exact copy of {@link #testChangeType()}
-     * but without new line just after the &lt;form&gt; start tag.
      * @throws Exception if the test fails
      */
     @Test
     public void testChangeType2() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        final String content
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var input = document.myForm.myRadio;\n"
@@ -559,10 +554,10 @@ public class HTMLInputElementTest extends WebTestCase {
             + "</form></body></html>";
 
         final String[] expectedAlerts = {"radio", "hidden", "image"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
 
         assertTrue(HtmlImageInput.class.isInstance(page.getFormByName("myForm").getInputByName("myRadio")));

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="fix" dev="asashour">
+                JavaScript: fix setting input.type if it is the first child.
+            </action>
             <action type="fix" dev="sdanig" id="2024619">
                 When querying elements for namespaced attributes, don't fall back to returning non-namespaced attributes.
             </action>

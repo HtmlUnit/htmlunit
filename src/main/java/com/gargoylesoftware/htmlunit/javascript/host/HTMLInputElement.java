@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import org.apache.commons.lang.math.NumberUtils;
 import org.xml.sax.helpers.AttributesImpl;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.html.InputElementFactory;
@@ -72,10 +73,16 @@ public class HTMLInputElement extends FormField {
                 input.replace(newInput);
             }
             else {
-                // the input hasn't yet been inserted into the DOM tree (likely has been
-                // created via document.createElement()), so simply replace it with the
-                // new Input instance created in the code above
-                input = newInput;
+                final DomNode parent = input.getParentNode();
+                if (parent != null) {
+                    parent.replaceChild(newInput, input);
+                }
+                else {
+                    // the input hasn't yet been inserted into the DOM tree (likely has been
+                    // created via document.createElement()), so simply replace it with the
+                    // new Input instance created in the code above
+                    input = newInput;
+                }
             }
 
             input.setScriptObject(null);
