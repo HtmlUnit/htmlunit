@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 import static java.util.Arrays.asList;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
@@ -1875,6 +1877,57 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
+     * Basic window tracking testing.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testBasicWindowTracking() throws Exception {
+        // Create mock web connection.
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setDefaultResponse("<html></html");
+
+        // Make sure a new client start with a single window.
+        final WebClient client = new WebClient();
+        client.setWebConnection(conn);
+        assertEquals(1, client.getWebWindows().size());
+
+        // Make sure the initial window is the current window.
+        final WebWindow window1 = client.getCurrentWindow();
+        assertSame(window1, client.getCurrentWindow());
+        assertNotNull(window1);
+
+        // Make sure that we keep track of a new window when we open it.
+        final WebWindow window2 = client.openWindow(URL_FIRST, "blah");
+        assertSame(window2, client.getCurrentWindow());
+        assertEquals(2, client.getWebWindows().size());
+        assertNotNull(window2);
+
+        // Make sure that we keep track of another new window when we open it.
+        final WebWindow window3 = client.openWindow(URL_SECOND, "foo");
+        assertSame(window3, client.getCurrentWindow());
+        assertEquals(3, client.getWebWindows().size());
+        assertNotNull(window3);
+
+        // Close the last window, make sure that the second window becomes the current window.
+        ((TopLevelWindow) window3).close();
+        assertSame(window2, client.getCurrentWindow());
+        assertEquals(2, client.getWebWindows().size());
+
+        // Close the first window, make sure that the second window is still the current window.
+        ((TopLevelWindow) window1).close();
+        assertSame(window2, client.getCurrentWindow());
+        assertEquals(1, client.getWebWindows().size());
+
+        // Close the only remaining window, make sure the client still has a current window.
+        ((TopLevelWindow) window2).close();
+        assertNotNull(client.getCurrentWindow());
+        assertNotSame(window1, client.getCurrentWindow());
+        assertNotSame(window2, client.getCurrentWindow());
+        assertNotSame(window3, client.getCurrentWindow());
+        assertEquals(1, client.getWebWindows().size());
+    }
+
+    /**
      * Regression test for currentWindow_
      * Previous window should become current window after current window is closed in onLoad event.
      * @throws Exception if an error occurs
@@ -1971,7 +2024,7 @@ public class WebClientTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void use_proxy() throws Exception {
+    public void testUseProxy() throws Exception {
         final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
         servlets.put("/test", UseProxyHeaderServlet.class);
         server_ = HttpWebConnectionTest.startWebServer("./", null, servlets);
@@ -1982,7 +2035,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Servlet for {@link #missingLocationHeader()}.
+     * Servlet for {@link #testUseProxy()}.
      */
     public static class UseProxyHeaderServlet extends HttpServlet {
 

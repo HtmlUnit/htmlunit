@@ -2730,13 +2730,11 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
+     * Verifies that when all windows are closed, background JS jobs are stopped (see bug 2127419).
      * @throws Exception if the test fails
      */
     @Test
-    public void setIntervalStillRuns() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
+    public void verifyCloseAllWindowsStopsJavaScript() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function f() {\n"
             + "    alert('Oh no!');\n"

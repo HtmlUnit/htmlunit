@@ -137,9 +137,9 @@ public class WebClient implements Serializable {
     private PageCreator pageCreator_ = new DefaultPageCreator();
 
     private final Set<WebWindowListener> webWindowListeners_ = new HashSet<WebWindowListener>(5);
-    private final List<WebWindow> webWindows_ = Collections.synchronizedList(new ArrayList<WebWindow>());
+    private final Stack<TopLevelWindow> topLevelWindows_ = new Stack<TopLevelWindow>(); // top-level windows
+    private final List<WebWindow> windows_ = Collections.synchronizedList(new ArrayList<WebWindow>()); // all windows
     private WebWindow currentWindow_;
-    private final Stack<WebWindow> windows_ = new Stack<WebWindow>();
 
     private int timeout_;
     private HTMLParserListener htmlParserListener_;
@@ -226,6 +226,7 @@ public class WebClient implements Serializable {
         // The window must be constructed AFTER the script engine.
         addWebWindowListener(new CurrentWindowTracker());
         currentWindow_ = new TopLevelWindow("", this);
+        fireWindowOpened(new WebWindowEvent(currentWindow_, WebWindowEvent.OPEN, null, null));
     }
 
     /**
@@ -1090,7 +1091,7 @@ public class WebClient implements Serializable {
     public WebWindow getWebWindowByName(final String name) throws WebWindowNotFoundException {
         WebAssert.notNull("name", name);
 
-        for (final WebWindow webWindow : webWindows_) {
+        for (final WebWindow webWindow : windows_) {
             if (webWindow.getName().equals(name)) {
                 return webWindow;
             }
@@ -1149,7 +1150,7 @@ public class WebClient implements Serializable {
      */
     public void registerWebWindow(final WebWindow webWindow) {
         WebAssert.notNull("webWindow", webWindow);
-        webWindows_.add(webWindow);
+        windows_.add(webWindow);
     }
 
     /**
@@ -1161,16 +1162,7 @@ public class WebClient implements Serializable {
      */
     public void deregisterWebWindow(final WebWindow webWindow) {
         WebAssert.notNull("webWindow", webWindow);
-        webWindows_.remove(webWindow);
-        if (getCurrentWindow() == webWindow) {
-            if (webWindows_.size() == 0) {
-                // Create a new one - we always have to have at least one window.
-                setCurrentWindow(new TopLevelWindow("", this));
-            }
-            else {
-                setCurrentWindow(webWindows_.get(0));
-            }
-        }
+        windows_.remove(webWindow);
         fireWindowClosed(new WebWindowEvent(webWindow, WebWindowEvent.CLOSE, webWindow.getEnclosedPage(), null));
     }
 
@@ -1562,7 +1554,7 @@ public class WebClient implements Serializable {
      * @return the web windows
      */
     public List<WebWindow> getWebWindows() {
-        return Collections.unmodifiableList(webWindows_);
+        return Collections.unmodifiableList(windows_);
     }
 
     /**
@@ -1855,22 +1847,32 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Inspired by WebTest's logic to track the current response.
+     * Keeps track of the current window. Inspired by WebTest's logic to track the current response.
      */
     class CurrentWindowTracker implements WebWindowListener, Serializable {
         private static final long serialVersionUID = -987538223249485123L;
-
         /**
          * {@inheritDoc}
          */
         public void webWindowClosed(final WebWindowEvent event) {
             final WebWindow window = event.getWebWindow();
-            windows_.remove(window);
-            if (window.equals(getCurrentWindow())) {
-                setCurrentWindow(windows_.peek());
+            if (window instanceof TopLevelWindow) {
+                final TopLevelWindow tlw = (TopLevelWindow) event.getWebWindow();
+                topLevelWindows_.remove(tlw);
+                if (tlw.equals(getCurrentWindow())) {
+                    if (topLevelWindows_.isEmpty()) {
+                        // Must always have at least window, and there are no top-level windows left; must create one.
+                        final TopLevelWindow newWindow = new TopLevelWindow("", WebClient.this);
+                        topLevelWindows_.push(newWindow);
+                        setCurrentWindow(newWindow);
+                    }
+                    else {
+                        // The current window is now the previous top-level window.
+                        setCurrentWindow(topLevelWindows_.peek());
+                    }
+                }
             }
         }
-
         /**
          * {@inheritDoc}
          */
@@ -1905,14 +1907,15 @@ public class WebClient implements Serializable {
                 setCurrentWindow(window);
             }
         }
-
         /**
          * {@inheritDoc}
-         *
-         * @see com.gargoylesoftware.htmlunit.WebWindowListener#webWindowOpened
          */
         public void webWindowOpened(final WebWindowEvent event) {
-            windows_.push(event.getWebWindow());
+            final WebWindow window = event.getWebWindow();
+            if (window instanceof TopLevelWindow) {
+                final TopLevelWindow tlw = (TopLevelWindow) event.getWebWindow();
+                topLevelWindows_.push(tlw);
+            }
             // page is not loaded yet, don't set it now as current window
         }
     }
@@ -1924,14 +1927,13 @@ public class WebClient implements Serializable {
         // NB: this implementation is too simple as a new TopLevelWindow may be opened by
         // some JS script while we are closing the others
         final List<TopLevelWindow> topWindows = new ArrayList<TopLevelWindow>();
-        for (final WebWindow window : windows_) {
+        for (final WebWindow window : topLevelWindows_) {
             if (window instanceof TopLevelWindow) {
                 topWindows.add((TopLevelWindow) window);
             }
         }
-
         for (final TopLevelWindow topWindow : topWindows) {
-            if (windows_.contains(topWindow)) {
+            if (topLevelWindows_.contains(topWindow)) {
                 topWindow.close();
             }
         }
