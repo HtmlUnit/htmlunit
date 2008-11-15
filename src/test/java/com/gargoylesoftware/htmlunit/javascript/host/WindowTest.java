@@ -2760,4 +2760,40 @@ public class WindowTest extends WebTestCase {
         assertEquals(0, collectedAlerts.size());
     }
 
+    /**
+     * Verifies that when you go to a new page, background JS jobs are stopped (see bug 2127419).
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void verifyGoingToNewPageStopsJavaScript() throws Exception {
+        final String html1 = "<html><head><title>foo</title><script>\n"
+            + "  function f() {\n"
+            + "    alert('Oh no!');\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    window.timeoutId = setInterval(f, 1000);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        final String html2 = "<html></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+
+        final WebClient client = new WebClient();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html1);
+        conn.setResponse(URL_SECOND, html2);
+        client.setWebConnection(conn);
+
+        final HtmlPage page1 = client.getPage(URL_FIRST);
+        final HtmlPage page2 = client.getPage(URL_SECOND);
+
+        page1.getEnclosingWindow().getThreadManager().joinAll(5000);
+        page2.getEnclosingWindow().getThreadManager().joinAll(5000);
+
+        assertEquals(0, collectedAlerts.size());
+    }
+
 }
