@@ -1000,6 +1000,12 @@
         <property name="length" readable="true" writable="false"/>
         <function name="item"/>
         <function name="namedItem"/>
+        <function name="nextNode">
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
+        <function name="reset">
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
         <function name="tags">
             <browser name="Microsoft Internet Explorer"/>
         </function>

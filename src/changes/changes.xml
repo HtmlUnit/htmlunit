@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="add" dev="sdanig" id="1829981">
+                JavaScript: add support for elements.nextNode() and elements.reset() for the element collection returned
+                by XmlDocument.selectNodes(...) (IE only).
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: fix setting input.type if it is the first child.
             </action>

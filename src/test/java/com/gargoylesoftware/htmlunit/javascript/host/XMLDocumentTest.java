@@ -361,6 +361,48 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void selectNodes_nextNodeAndReset() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    var doc = new ActiveXObject('Microsoft.XMLDOM');;\n"
+            + "    doc.async = false;\n"
+            + "    doc.load('" + URL_SECOND + "');\n"
+            + "    var nodes = doc.selectNodes('//book');\n"
+            + "    alert(nodes.nextNode().nodeName);\n"
+            + "    alert(nodes.nextNode());\n"
+            + "    nodes.reset();\n"
+            + "    alert(nodes.nextNode().nodeName);\n"
+            + "    alert(nodes.nextNode());\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>foo</body></html>";
+
+        final String xml
+            = "<books>\n"
+            + "  <book>\n"
+            + "    <title>Immortality</title>\n"
+            + "    <author>John Smith</author>\n"
+            + "  </book>\n"
+            + "</books>";
+
+        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7);
+
+        final String[] expectedAlerts = {"book", "null", "book", "null"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(URL_SECOND, xml, "text/xml");
+        client.setWebConnection(conn);
+
+        client.getPage(URL_FIRST);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void selectSingleNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

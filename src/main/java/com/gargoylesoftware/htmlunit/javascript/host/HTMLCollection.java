@@ -79,6 +79,11 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     private List<Object> cachedElements_;
 
     /**
+     * IE provides a way of enumerating through some element collections; this counter supports that functionality.
+     */
+    private int currentIndex_ = 0;
+
+    /**
      * Creates an instance. JavaScript objects must have a default constructor.
      * Don't call.
      */
@@ -415,6 +420,30 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      */
     public final Object jsxFunction_namedItem(final String name) {
         return nullIfNotFound(get(name));
+    }
+
+    /**
+     * Returns the next node in the collection (supporting iteration in IE only).
+     * @return the next node in the collection
+     */
+    public Object jsxFunction_nextNode() {
+        Object nextNode;
+        final List<Object> elements = getElements();
+        if (currentIndex_ >= 0 && currentIndex_ < elements.size()) {
+            nextNode = elements.get(currentIndex_);
+        }
+        else {
+            nextNode = null;
+        }
+        currentIndex_++;
+        return nextNode;
+    }
+
+    /**
+     * Resets the node iterator accessed via {@link #jsxFunction_nextNode()}.
+     */
+    public void jsxFunction_reset() {
+        currentIndex_ = 0;
     }
 
     /**
