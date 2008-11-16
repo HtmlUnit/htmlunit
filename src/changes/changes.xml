@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="add" dev="sdanig" id="1693272">
+                JavaScript: add support for getting and setting the image.onload attribute.
+            </action>
+            <action type="add" dev="sdanig" id="1693272">
+                If an image has an onload handler, download the image and then invoke the onload handler.
+            </action>
             <action type="add" dev="sdanig" id="1829981">
                 JavaScript: add support for elements.nextNode() and elements.reset() for the element collection returned
                 by XmlDocument.selectNodes(...) (IE only).

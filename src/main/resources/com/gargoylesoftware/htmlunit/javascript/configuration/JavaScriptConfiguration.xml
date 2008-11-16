@@ -1439,6 +1439,7 @@
 
     <class name="HTMLImageElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLImageElement"
         jsConstructor="jsConstructor" JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlImage">
+        <property name="onload" readable="true" writable="true"/>
         <property name="src" readable="true" writable="true"/>
     </class>
 

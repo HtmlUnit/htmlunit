@@ -14,10 +14,17 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.httpclient.NameValuePair;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
@@ -34,15 +41,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public class HTMLImageElementTest extends WebTestCase {
 
     /**
-     * This test verifies that JavaScript can be used to get the src
-     * attribute of an <img> tag.
+     * This test verifies that JavaScript can be used to get the <tt>src</tt> attribute of an <tt>&lt;img&gt;</tt> tag.
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("http://www.gargoylesoftware.com/foo.gif")
-    public void test_getSrc() throws Exception {
+    public void getSrc() throws Exception {
         final String html
-            = "<html><head><title></title><script>\n"
+            = "<html><head><script>\n"
             + "function doTest(){\n"
             + "    alert(document.getElementById('anImage').src);\n"
             + "}\n"
@@ -54,15 +60,14 @@ public class HTMLImageElementTest extends WebTestCase {
     }
 
     /**
-     * This test verifies that when JavaScript is used to modify the src
-     * attribute, the value is persisted to the corresponding <img> node
-     * in the DOM tree.
+     * This test verifies that when JavaScript is used to modify the <tt>src</tt> attribute, the value is
+     * persisted to the corresponding <tt>&lt;img&gt;</tt> node in the DOM tree.
      * @throws Exception if the test fails
      */
     @Test
-    public void test_setSrc() throws Exception {
+    public void setSrc() throws Exception {
         final String html
-            = "<html><head><title></title><script>\n"
+            = "<html><head><script>\n"
             + "function doTest(){\n"
             + "    document.getElementById('anImage').src = 'bar.gif';\n"
             + "}\n"
@@ -88,9 +93,9 @@ public class HTMLImageElementTest extends WebTestCase {
      */
     @Test
     @Alerts("http://www.gargoylesoftware.com/bar.gif")
-    public void test_setSrc_newImage() throws Exception {
+    public void setSrc_newImage() throws Exception {
         final String html
-            = "<html><head><title></title><script>\n"
+            = "<html><head><script>\n"
             + "function doTest(){\n"
             + "    var preloadImage = new Image();\n"
             + "    preloadImage.src = 'bar.gif';\n"
@@ -107,9 +112,9 @@ public class HTMLImageElementTest extends WebTestCase {
      */
     @Test
     @Alerts("foo")
-    public void test_AttributeName() throws Exception {
+    public void attributeName() throws Exception {
         final String html
-            = "<html><head><title></title><script>\n"
+            = "<html><head><script>\n"
             + "function test()\n"
             + "{\n"
             + "  var oImg = document.getElementById('myImage');\n"
@@ -122,4 +127,89 @@ public class HTMLImageElementTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * Verifies that if an image has an <tt>onload</tt> attribute, it gets downloaded
+     * and the <tt>onload</tt> handler gets invoked.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void onLoad_calledWhenImageDownloaded_static() throws Exception {
+        final String html = "<html><body><img src='" + URL_SECOND + "' onload='alert(1)'></body></html>";
+
+        final WebClient client = getWebClient();
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(URL_SECOND, "foo", "image/png");
+        client.setWebConnection(conn);
+
+        final List<String> actual = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(actual));
+
+        client.getPage(URL_FIRST);
+        assertEquals(URL_SECOND, conn.getLastWebRequestSettings().getUrl());
+
+        final String[] expected = {"1"};
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Verifies that if an image has an <tt>onload</tt> attribute, it gets downloaded
+     * and the <tt>onload</tt> handler gets invoked.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void onLoad_calledWhenImageDownloaded_dynamic() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "var i = document.createElement('img');\n"
+            + "i.src = '" + URL_SECOND + "';\n"
+            + "i.src = '" + URL_THIRD + "';\n"
+            + "i.onload = function(){alert(1);};\n"
+            + "</script></body></html>";
+
+        final WebClient client = getWebClient();
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(URL_SECOND, "foo", "image/png");
+        conn.setResponse(URL_THIRD, "foo", "image/png");
+        client.setWebConnection(conn);
+
+        final List<String> actual = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(actual));
+
+        client.getPage(URL_FIRST);
+        assertEquals(URL_THIRD, conn.getLastWebRequestSettings().getUrl());
+
+        final String[] expected = {"1"};
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Verifies that if an image has an <tt>onload</tt> attribute, the <tt>onload</tt> handler
+     * does not get invoked if we can't download the image.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void onLoad_notCalledWhenImageNotDownloaded() throws Exception {
+        final String html = "<html><body><img src='" + URL_SECOND + "' onload='alert(1)'></body></html>";
+
+        final WebClient client = getWebClient();
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(URL_SECOND, "foo", 404, "not found", "text/html", new ArrayList<NameValuePair>());
+        client.setWebConnection(conn);
+
+        final List<String> actual = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(actual));
+
+        client.getPage(URL_FIRST);
+        assertEquals(URL_SECOND, conn.getLastWebRequestSettings().getUrl());
+
+        final String[] expected = {};
+        assertEquals(expected, actual);
+    }
+
 }

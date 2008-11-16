@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.apache.commons.httpclient.HttpStatus.SC_MULTIPLE_CHOICES;
+import static org.apache.commons.httpclient.HttpStatus.SC_OK;
+import static org.apache.commons.httpclient.HttpStatus.SC_USE_PROXY;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Iterator;
@@ -23,11 +27,17 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.mozilla.javascript.Function;
+
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.javascript.host.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.Node;
 
 /**
  * Wrapper for the HTML element "img".
@@ -42,14 +52,17 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 public class HtmlImage extends ClickableElement {
 
     private static final long serialVersionUID = -2304247017681577696L;
+    private static final Log LOG = LogFactory.getLog(HtmlImage.class);
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "img";
+
     private int lastClickX_;
     private int lastClickY_;
     private WebResponse imageWebResponse_;
     private ImageReader imageReader_;
     private boolean downloaded_;
+    private boolean onloadInvoked_;
 
     /**
      * Creates a new instance.
@@ -62,6 +75,59 @@ public class HtmlImage extends ClickableElement {
     HtmlImage(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void onAddedToPage() {
+        doOnLoad();
+        super.onAddedToPage();
+    }
+
+    /**
+     * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
+     *
+     * <p>Executes this element's <tt>onload</tt> handler if it has one. This method also downloads the image
+     * if this element has an <tt>onload</tt> handler (prior to invoking said handler), because applications
+     * sometimes use images to send information to the server and use the <tt>onload</tt> handler to get notified
+     * when the information has been received by the server.</p>
+     *
+     * <p>See <a href="http://www.nabble.com/How-should-we-handle-image.onload--tt9850876.html">here</a> and
+     * <a href="http://www.nabble.com/Image-Onload-Support-td18895781.html">here</a> for the discussion which
+     * lead up to this method.</p>
+     *
+     * <p>This method may be called multiple times, but will only attempt to execute the <tt>onload</tt>
+     * handler the first time it is invoked.</p>
+     */
+    public void doOnLoad() {
+        if (onloadInvoked_) {
+            return;
+        }
+        onloadInvoked_ = true;
+        final Function onload = getEventHandler("onload");
+        if (onload != null) {
+            // An onload handler is defined; we need to download the image and then call the onload
+            // handler.
+            boolean ok;
+            try {
+                downloadImageIfNeeded();
+                final int i = imageWebResponse_.getStatusCode();
+                ok = (i >= SC_OK && i < SC_MULTIPLE_CHOICES) || i == SC_USE_PROXY;
+            }
+            catch (final IOException e) {
+                ok = false;
+            }
+            // If the download was a success, trigger the onload handler.
+            if (ok) {
+                final Event event = new Event(this, Event.TYPE_LOAD);
+                ((Node) getScriptObject()).executeEvent(event);
+            }
+            else {
+                LOG.debug("Unable to download image for tag " + this + "; not firing onload event.");
+            }
+        }
     }
 
     /**

@@ -21,6 +21,7 @@ import org.mozilla.javascript.Context;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 
 /**
  * The JavaScript object that represents an "Image".
@@ -38,16 +39,18 @@ public class HTMLImageElement extends HTMLElement {
     private String src_;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLImageElement() {
+        // Empty.
     }
 
     /**
      * JavaScript constructor. This must be declared in every JavaScript file because
-     * the rhino engine won't walk up the hierarchy looking for constructors.
+     * the Rhino engine won't walk up the hierarchy looking for constructors.
      */
     public void jsConstructor() {
+        // Empty.
     }
 
     /**
@@ -58,10 +61,11 @@ public class HTMLImageElement extends HTMLElement {
      */
     public void jsxSet_src(final String src) {
         src_ = src;
-        final HtmlImage htmlImageElement = (HtmlImage) getHtmlElementOrNull();
-        if (htmlImageElement != null) {
-            htmlImageElement.setAttributeValue("src", src);
+        final HtmlImage img = (HtmlImage) getHtmlElementOrNull();
+        if (img != null) {
+            img.setAttributeValue("src", src);
         }
+        getWindow().getJavaScriptEngine().addPostponedAction(new ImageOnLoadAction());
     }
 
     /**
@@ -72,26 +76,58 @@ public class HTMLImageElement extends HTMLElement {
      * @return the src attribute
      */
     public String jsxGet_src() {
-        final HtmlImage htmlImageElement = (HtmlImage) getHtmlElementOrNull();
-        if (htmlImageElement != null) {
-            final String srcValue = htmlImageElement.getSrcAttribute();
+        final HtmlImage img = (HtmlImage) getHtmlElementOrNull();
+        if (img != null) {
+            // This image has been added to the DOM tree.
+            final String src = img.getSrcAttribute();
             try {
-                return ((HtmlPage) htmlImageElement.getPage()).getFullyQualifiedUrl(srcValue).toExternalForm();
+                final HtmlPage page = (HtmlPage) img.getPage();
+                return page.getFullyQualifiedUrl(src).toExternalForm();
             }
             catch (final MalformedURLException e) {
-                throw Context.reportRuntimeError("Unable to create fully qualified URL for src attribute of image: "
-                                                  + e.getMessage());
+                final String msg = "Unable to create fully qualified URL for src attribute of image " + e.getMessage();
+                throw Context.reportRuntimeError(msg);
             }
         }
-        // this is an image instantiated in js with "new Image()" and not yet added to the DOM tree.
+        // This is an image instantiated in JavaScript via "new Image()" and not yet added to the DOM tree.
         final WebClient webClient = getWindow().getWebWindow().getWebClient();
         final HtmlPage currentPage = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
         try {
             return currentPage.getFullyQualifiedUrl(src_).toExternalForm();
         }
         catch (final MalformedURLException e) {
-            throw Context.reportRuntimeError("Unable to create fully qualified URL for src attribute of image: "
-                    + e.getMessage());
+            final String msg = "Unable to create fully qualified URL for src attribute of image " + e.getMessage();
+            throw Context.reportRuntimeError(msg);
         }
     }
+
+    /**
+     * Sets the <tt>onload</tt> event handler for this element.
+     * @param onloadHandler the <tt>onload</tt> event handler for this element
+     */
+    public void jsxSet_onload(final Object onloadHandler) {
+        setEventHandlerProp("onload", onloadHandler);
+        getWindow().getJavaScriptEngine().addPostponedAction(new ImageOnLoadAction());
+    }
+
+    /**
+     * Returns the <tt>onload</tt> event handler for this element.
+     * @return the <tt>onload</tt> event handler for this element
+     */
+    public Object jsxGet_onload() {
+        return getEventHandlerProp("onload");
+    }
+
+    /**
+     * Custom JavaScript postponed action which downloads the image and invokes the onload handler, if necessary.
+     */
+    private class ImageOnLoadAction implements PostponedAction {
+        public void execute() throws Exception {
+            final HtmlImage img = (HtmlImage) getHtmlElementOrNull();
+            if (img != null) {
+                img.doOnLoad();
+            }
+        }
+    }
+
 }
