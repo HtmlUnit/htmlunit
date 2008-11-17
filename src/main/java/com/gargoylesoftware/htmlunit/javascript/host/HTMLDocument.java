@@ -975,7 +975,8 @@ public class HTMLDocument extends Document {
         if (elements.size() == 1) {
             final HtmlElement element = elements.get(0);
             final String tagName = element.getTagName();
-            if (HtmlImage.TAG_NAME.equals(tagName) || HtmlForm.TAG_NAME.equals(tagName) || HtmlApplet.TAG_NAME.equals(tagName)) {
+            if (HtmlImage.TAG_NAME.equals(tagName) || HtmlForm.TAG_NAME.equals(tagName)
+                || HtmlApplet.TAG_NAME.equals(tagName)) {
                 return getScriptableFor(element);
             }
             return NOT_FOUND;

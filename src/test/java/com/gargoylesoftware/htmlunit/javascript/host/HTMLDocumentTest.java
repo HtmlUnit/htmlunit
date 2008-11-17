@@ -235,7 +235,7 @@ public class HTMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "[object HTMLCollection]", "0"}, IE = { "[object]", "0" })
+    @Alerts(FF = { "[object HTMLCollection]", "0" }, IE = { "[object]", "0" })
     public void applets() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
