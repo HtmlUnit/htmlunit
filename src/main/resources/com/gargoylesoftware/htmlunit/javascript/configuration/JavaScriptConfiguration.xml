@@ -1062,7 +1062,7 @@
                 url="http://www.mozilla.org/docs/dom/domref/dom_doc_ref4.html#1024543"
                 descr="Gecko DOM reference"/>
         </property>
-        <property name="applets" notImplemented="true" readable="true" writable="false"/>
+        <property name="applets" readable="true" writable="false"/>
         <property name="body" readable="true" writable="false"/>
         <property name="bgColor" notImplemented="true" readable="true" writable="false"/>
         <!-- Note that compatMode is deprecated in Internet Explorer 8 in favor of the documentMode -->
