@@ -267,22 +267,8 @@ public class HTMLDocument extends Document {
      */
     public Object jsxGet_applets() {
         if (applets_ == null) {
-            applets_ = new HTMLCollection(this) {
-                private static final long serialVersionUID = 108590766366997583L;
-
-                @Override
-                protected SimpleScriptable getScriptableFor(final Object object) {
-                    return (SimpleScriptable) object;
-                }
-            };
-            final Transformer getApplet = new Transformer() {
-                public Object transform(final Object obj) {
-                    final HtmlApplet appletNode = (HtmlApplet) obj;
-                    final HTMLAppletElement jsAppletNode = (HTMLAppletElement) appletNode.getScriptObject();
-                    return jsAppletNode.getAppletObject();
-                }
-            };
-            applets_.init(getDomNodeOrDie(), ".//applet", getApplet);
+        	applets_ = new HTMLCollection(this);
+            applets_.init(getDomNodeOrDie(), ".//applet-not-yet-implemented"); // nothing should be found as of now
         }
         return applets_;
     }
