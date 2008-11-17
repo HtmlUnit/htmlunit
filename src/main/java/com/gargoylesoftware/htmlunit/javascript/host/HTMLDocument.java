@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import org.apache.commons.collections.Transformer;
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.cookie.CookieSpec;
@@ -56,6 +57,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
+import com.gargoylesoftware.htmlunit.html.HtmlApplet;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -138,6 +140,7 @@ public class HTMLDocument extends Document {
     private HTMLCollection images_; // has to be a member to have equality (==) working
     private HTMLCollection scripts_; // has to be a member to have equality (==) working
     private HTMLCollection anchors_; // has to be a member to have equality (==) working
+    private HTMLCollection applets_; // has to be a member to have equality (==) working
     private StyleSheetList styleSheets_; // has to be a member to have equality (==) working
     private HTMLElement activeElement_;
 
@@ -252,6 +255,36 @@ public class HTMLDocument extends Document {
             anchors_.init(getDomNodeOrDie(), xpath);
         }
         return anchors_;
+    }
+
+    /**
+     * Returns the value of the JavaScript attribute "applets".
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms537436.aspx">
+     * MSDN documentation</a>
+     * @see <a href="https://developer.mozilla.org/En/DOM:document.applets">
+     * Gecko DOM reference</a>
+     * @return the value of this attribute
+     */
+    public Object jsxGet_applets() {
+        if (applets_ == null) {
+            applets_ = new HTMLCollection(this) {
+                private static final long serialVersionUID = 108590766366997583L;
+
+                @Override
+                protected SimpleScriptable getScriptableFor(final Object object) {
+                    return (SimpleScriptable) object;
+                }
+            };
+            final Transformer getApplet = new Transformer() {
+                public Object transform(final Object obj) {
+                    final HtmlApplet appletNode = (HtmlApplet) obj;
+                    final HTMLAppletElement jsAppletNode = (HTMLAppletElement) appletNode.getScriptObject();
+                    return jsAppletNode.getAppletObject();
+                }
+            };
+            applets_.init(getDomNodeOrDie(), ".//applet", getApplet);
+        }
+        return applets_;
     }
 
     /**
@@ -942,7 +975,7 @@ public class HTMLDocument extends Document {
         if (elements.size() == 1) {
             final HtmlElement element = elements.get(0);
             final String tagName = element.getTagName();
-            if (HtmlImage.TAG_NAME.equals(tagName) || HtmlForm.TAG_NAME.equals(tagName)) {
+            if (HtmlImage.TAG_NAME.equals(tagName) || HtmlForm.TAG_NAME.equals(tagName) || HtmlApplet.TAG_NAME.equals(tagName)) {
                 return getScriptableFor(element);
             }
             return NOT_FOUND;

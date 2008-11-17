@@ -230,4 +230,27 @@ public class HTMLDocumentTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "[object HTMLCollection]", "0"}, IE = { "[object]", "0" })
+    public void applets() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<title>Test</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  alert(document.applets);\n"
+            + "  alert(document.applets.length);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts(html);
+    }
 }

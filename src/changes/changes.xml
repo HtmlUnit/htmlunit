@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="update" dev="mguillem">
+                JavaScript: added support for document.applets.
+            </action>
             <action type="add" dev="sdanig" id="1693272">
                 JavaScript: add support for getting and setting the image.onload attribute.
             </action>

@@ -637,4 +637,17 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         return (DomNode) transformer_.transform(getElements().get(index));
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getDefaultValue(final Class< ? > hint) {
+        if (String.class.equals(hint) || hint == null) {
+            if (getBrowserVersion().isIE()) {
+                return "[object]"; // the super helpful IE solution
+            }
+            return "[object HTMLCollection]";
+        }
+        return super.getDefaultValue(hint);
+    }
 }
