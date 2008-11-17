@@ -254,6 +254,7 @@ public class BrowserVersion implements Serializable {
      * @return whether or not this version is a version of a Netscape browser
      * @deprecated since HtmlUnit-2.4. Replaced by {@link #isFirefox()}.
      */
+    @Deprecated
     public final boolean isNetscape0() {
         return NETSCAPE.equals(getApplicationName());
     }
