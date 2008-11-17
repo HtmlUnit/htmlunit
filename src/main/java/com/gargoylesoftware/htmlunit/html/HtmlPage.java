@@ -628,7 +628,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         }
 
         // to handle http: and http:/ in FF (Bug 1714767)
-        if (getWebClient().getBrowserVersion().isNetscape()) {
+        if (getWebClient().getBrowserVersion().isFirefox()) {
             boolean incorrectnessNotified = false;
             while (relativeUrl.startsWith("http:") && !relativeUrl.startsWith("http://")) {
                 if (!incorrectnessNotified) {

@@ -811,7 +811,7 @@ public class HTMLDocument extends Document {
      */
     public Object jsxFunction_createElementNS(final String namespaceURI, final String qualifiedName) {
         final org.w3c.dom.Element element;
-        if (getBrowserVersion().isNetscape()
+        if (getBrowserVersion().isFirefox()
                 && "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul".equals(namespaceURI)) {
             // simple hack, no need to implement the XUL objects (at least in a first time)
             element = new HtmlDivision(namespaceURI, qualifiedName, getPage(), null);
@@ -1016,7 +1016,7 @@ public class HTMLDocument extends Document {
         if (domain_ == null) {
             domain_ = getHtmlPage().getWebResponse().getRequestUrl().getHost();
             final BrowserVersion browser = getBrowserVersion();
-            if (browser.isNetscape()) {
+            if (browser.isFirefox()) {
                 domain_ = domain_.toLowerCase();
             }
         }
@@ -1065,7 +1065,7 @@ public class HTMLDocument extends Document {
         }
 
         // Netscape down shifts the case of the domain
-        if (getBrowserVersion().isNetscape()) {
+        if (getBrowserVersion().isFirefox()) {
             domain_ = newDomain.toLowerCase();
         }
         else {
@@ -1257,7 +1257,7 @@ public class HTMLDocument extends Document {
      * @return <code>true></code> if the command is supported
      */
     public boolean jsxFunction_queryCommandSupported(final String cmd) {
-        final boolean ff = getBrowserVersion().isNetscape();
+        final boolean ff = getBrowserVersion().isFirefox();
         final String mode = jsxGet_designMode();
         if (!ff) {
             return containsCaseInsensitive(EXECUTE_CMDS_IE, cmd);
@@ -1276,7 +1276,7 @@ public class HTMLDocument extends Document {
      * @return <code>true></code> if the command can be successfully executed
      */
     public boolean jsxFunction_queryCommandEnabled(final String cmd) {
-        final boolean ff = getBrowserVersion().isNetscape();
+        final boolean ff = getBrowserVersion().isFirefox();
         final String mode = jsxGet_designMode();
         if (!ff) {
             return containsCaseInsensitive(EXECUTE_CMDS_IE, cmd);

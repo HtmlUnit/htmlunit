@@ -168,7 +168,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
     @Override
     public void setDefaultChecked(final boolean defaultChecked) {
         defaultCheckedState_ = defaultChecked;
-        if (getPage().getWebClient().getBrowserVersion().isNetscape()) {
+        if (getPage().getWebClient().getBrowserVersion().isFirefox()) {
             setChecked(defaultChecked);
         }
     }

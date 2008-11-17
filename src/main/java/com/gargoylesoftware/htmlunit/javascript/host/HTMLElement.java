@@ -439,7 +439,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         getHtmlElementOrDie().setAttributeValue(name, value);
 
         //FF: call corresponding event handler jsxSet_onxxx if found
-        if (getBrowserVersion().isNetscape()) {
+        if (getBrowserVersion().isFirefox()) {
             try {
                 final Method method = getClass().getMethod("jsxSet_" + name, new Class[] {Object.class});
                 final String source = "function(){" + value + "}";

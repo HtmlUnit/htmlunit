@@ -326,7 +326,7 @@ public class Document extends EventNode {
         try {
             final BrowserVersion browserVersion = getBrowserVersion();
 
-            if (tagName.startsWith("<") && tagName.endsWith(">") && browserVersion.isNetscape()) {
+            if (tagName.startsWith("<") && tagName.endsWith(">") && browserVersion.isFirefox()) {
                 tagName = tagName.substring(1, tagName.length() - 1);
                 if (!tagName.matches("\\w+")) {
                     getLog().error("Unexpected exception occurred while parsing HTML snippet");

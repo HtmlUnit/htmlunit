@@ -241,10 +241,20 @@ public class BrowserVersion implements Serializable {
 
     /**
      * Returns <tt>true</tt> if this <tt>BrowserVersion</tt> instance represents some
+     * version of Firefox like {@link #FIREFOX_2} or {@link #FIREFOX_3}.
+     * @return whether or not this version is a version of a Firefox browser
+     */
+    public final boolean isFirefox() {
+        return NETSCAPE.equals(getApplicationName());
+    }
+
+    /**
+     * Returns <tt>true</tt> if this <tt>BrowserVersion</tt> instance represents some
      * version of a Netscape browser, including Mozilla and Firefox.
      * @return whether or not this version is a version of a Netscape browser
+     * @deprecated since HtmlUnit-2.4. Replaced by {@link #isFirefox()}.
      */
-    public final boolean isNetscape() {
+    public final boolean isNetscape0() {
         return NETSCAPE.equals(getApplicationName());
     }
 

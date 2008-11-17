@@ -341,7 +341,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * @see HtmlFileInput#setDefaultValue(String)
      */
     public void setDefaultValue(final String defaultValue) {
-        final boolean modifyValue = getPage().getWebClient().getBrowserVersion().isNetscape();
+        final boolean modifyValue = getPage().getWebClient().getBrowserVersion().isFirefox();
         setDefaultValue(defaultValue, modifyValue);
     }
 
