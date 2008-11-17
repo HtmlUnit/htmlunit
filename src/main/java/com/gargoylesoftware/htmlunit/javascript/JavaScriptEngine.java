@@ -516,13 +516,7 @@ public class JavaScriptEngine implements Serializable {
                 }
             }
             catch (final Exception e) {
-                final ScriptException scriptException = new ScriptException(htmlPage_, e, getSourceCode(cx));
-                if (getWebClient().isThrowExceptionOnScriptError()) {
-                    throw scriptException;
-                }
-                // use a ScriptException to log it because it provides good information
-                // on the source code
-                getLog().info("Caught script exception", scriptException);
+                reportJavaScriptException(new ScriptException(htmlPage_, e, getSourceCode(cx)));
                 return null;
             }
             catch (final TimeoutError e) {
@@ -597,5 +591,18 @@ public class JavaScriptEngine implements Serializable {
             postponedActions_.set(actions);
         }
         actions.add(action);
+    }
+
+    /**
+     * Reports an exception that occurred during execution of JavaScript code.
+     * @param scriptException the exception
+     */
+    protected void reportJavaScriptException(final ScriptException scriptException) {
+        if (getWebClient().isThrowExceptionOnScriptError()) {
+            throw scriptException;
+        }
+        // use a ScriptException to log it because it provides good information
+        // on the source code
+        getLog().info("Caught script exception", scriptException);
     }
 }

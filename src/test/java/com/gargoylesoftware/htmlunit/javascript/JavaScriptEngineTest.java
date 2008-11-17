@@ -1524,4 +1524,49 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertFalse(cf2 == ContextFactory.getGlobal());
     }
 
+    /**
+     * Configure subclass of {@link JavaScriptEngine} that collects background JS expressions.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void catchBackgroundJSErrors() throws Exception {
+        final WebClient webClient = new WebClient();
+        final List<ScriptException> jsExceptions = new ArrayList<ScriptException>();
+        final JavaScriptEngine myEngine = new JavaScriptEngine(webClient) {
+            private static final long serialVersionUID = 3410982366939766502L;
+
+            @Override
+            protected void reportJavaScriptException(final ScriptException scriptException) {
+                jsExceptions.add(scriptException);
+                super.reportJavaScriptException(scriptException);
+            }
+        };
+        webClient.setJavaScriptEngine(myEngine);
+
+        final String html = "<html>\n"
+            + "<head><title>Test page</title><\n"
+            + "<script>\n"
+            + "function myFunction() {\n"
+            + "  document.title = 'New title';\n"
+            + "  notExisting(); // will throw\n"
+            + "}\n"
+            + "window.setTimeout(myFunction, 5)\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setDefaultResponse(html);
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage page = webClient.getPage(URL_FIRST);
+        page.getEnclosingWindow().getThreadManager().joinAll(10000);
+        assertEquals("New title", page.getTitleText());
+
+        assertEquals(1, jsExceptions.size());
+        final ScriptException exception = jsExceptions.get(0);
+        assertTrue("Message: " + exception.getMessage(),
+            exception.getMessage().contains("\"notExisting\" is not defined"));
+    }
 }
