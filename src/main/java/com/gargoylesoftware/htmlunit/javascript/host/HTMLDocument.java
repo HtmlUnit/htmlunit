@@ -266,7 +266,7 @@ public class HTMLDocument extends Document {
      */
     public Object jsxGet_applets() {
         if (applets_ == null) {
-        	applets_ = new HTMLCollection(this);
+            applets_ = new HTMLCollection(this);
             applets_.init(getDomNodeOrDie(), ".//applet-not-yet-implemented"); // nothing should be found as of now
         }
         return applets_;
