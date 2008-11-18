@@ -57,7 +57,7 @@ public class ExtJS22Test extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
-//    @Test
+    @Test
     @SuppressWarnings("unchecked")
     public void core_templates() throws Exception {
         final HtmlPage page = getPage("core", "templates");
@@ -82,7 +82,7 @@ public class ExtJS22Test extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
-//    @Test
+    @Test
     @SuppressWarnings("unchecked")
     public void core_spotlight() throws Exception {
         final HtmlPage page = getPage("core", "spotlight");
@@ -129,7 +129,7 @@ public class ExtJS22Test extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
-//    @Test
+    @Test
     public void debug_console() throws Exception {
         final HtmlPage page = getPage("debug", "debug-console");
         assertEquals(2, page.getAnchors().size());
@@ -165,7 +165,7 @@ public class ExtJS22Test extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
-//    @Test
+    @Test
     public void desktop_desktop() throws Exception {
         final HtmlPage page = getPage("desktop", "desktop");
         page.<HtmlButton>getFirstByXPath("//button").click();
