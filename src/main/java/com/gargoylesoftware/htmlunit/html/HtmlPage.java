@@ -2141,6 +2141,21 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     protected void setDocumentType(final DomDocumentType type) {
         super.setDocumentType(type);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected String asTextInternal() {
+        String text = super.asTextInternal();
+        if (getWebClient().getBrowserVersion().isIE()) {
+            final String title = getTitleText();
+            if (text.startsWith(title) && text.length() > title.length()) {
+                text = title + '\n' + text.substring(title.length());
+            }
+        }
+        return text;
+    }
 }
 
 /**

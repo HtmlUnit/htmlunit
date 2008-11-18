@@ -509,7 +509,7 @@ public class HTMLElementTest extends WebTestCase {
     @Test
     @Alerts(IE = {
             "Old = <B>Old innerHTML</B><!-- old comment -->",
-            "New =  <B><I id=newElt>New cell value</I></B>",
+            "New = <B><I id=newElt>New cell value</I></B>",
             "I" },
             FF = {
             "Old = <b>Old innerHTML</b><!-- old comment -->",
@@ -708,7 +708,7 @@ public class HTMLElementTest extends WebTestCase {
      */
     @Test
     @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
-    @Alerts(IE = { "Old = <B id=innerNode>Old outerHTML</B>", "New =  <B><I id=newElt>New cell value</I></B>", "I" })
+    @Alerts(IE = { "Old = <B id=innerNode>Old outerHTML</B>", "New = <B><I id=newElt>New cell value</I></B>", "I" })
     public void getSetOuterHTMLComplex() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -757,8 +757,7 @@ public class HTMLElementTest extends WebTestCase {
             final String afterEnd, final String beforeBegin, final String afterBegin) throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<script>\n"
-                + "function test()\n"
-                + "{\n"
+                + "function test() {\n"
                 + "  var oNode = document.getElementById('middle');\n"
                 + "  oNode.insertAdjacentHTML('" + beforeEnd + "', ' <span id=3>before end</span> ');\n"
                 + "  oNode.insertAdjacentHTML('" + afterEnd + "', ' <span id=4>after end</span> ');\n"
@@ -798,21 +797,20 @@ public class HTMLElementTest extends WebTestCase {
             final String afterEnd, final String beforeBegin, final String afterBegin) throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<script>\n"
-                + "function test()\n"
-                + "{\n"
+                + "function test() {\n"
                 + "  var oNode = document.getElementById('middle');\n"
-                + "  oNode.insertAdjacentElement('" + beforeEnd + "', makeElement(3, 'before end' ));\n"
-                + "  oNode.insertAdjacentElement('" + afterEnd + "', makeElement(4, ' after end' ));\n"
-                + "  oNode.insertAdjacentElement('" + beforeBegin + "', makeElement(1, 'before begin ' ));\n"
-                + "  oNode.insertAdjacentElement('" + afterBegin + "', makeElement(2, ' after begin' ));\n"
+                + "  oNode.insertAdjacentElement('" + beforeEnd + "', makeElement(3, 'before end'));\n"
+                + "  oNode.insertAdjacentElement('" + afterEnd + "', makeElement(4, ' after end'));\n"
+                + "  oNode.insertAdjacentElement('" + beforeBegin + "', makeElement(1, 'before begin '));\n"
+                + "  oNode.insertAdjacentElement('" + afterBegin + "', makeElement(2, ' after begin'));\n"
                 + "  var coll = document.getElementsByTagName('SPAN');\n"
                 + "  for (var i=0; i<coll.length; i++) {\n"
                 + "    alert(coll[i].id);\n"
                 + "  }\n"
                 + "}\n"
-                + "function makeElement(id, value ) {\n"
+                + "function makeElement(id, value) {\n"
                 + "  var span = document.createElement('span');\n"
-                + "  span.appendChild(document.createTextNode(value ));\n"
+                + "  span.appendChild(document.createTextNode(value));\n"
                 + "  span.id = id;\n"
                 + "  return span;\n"
                 + "}\n"

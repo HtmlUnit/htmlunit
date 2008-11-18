@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLBodyElement;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
 
 /**
  * SAX parser implementation that uses the NekoHTML {@link org.cyberneko.html.HTMLConfiguration}
@@ -545,10 +546,49 @@ public final class HTMLParser {
 
         /** @inheritDoc ContentHandler#characters(char,int,int) */
         public void characters(final char[] ch, final int start, final int length) throws SAXException {
+            if ((characters_ == null || characters_.length() == 0)
+                    && new String(ch, start, length).trim().length() == 0
+                    && page_.getWebClient().getBrowserVersion().isIE()) {
+
+                DomNode node = currentNode_.getLastChild();
+                if (currentNode_ instanceof HTMLElement.ProxyDomNode) {
+                    final HTMLElement.ProxyDomNode proxyNode = (HTMLElement.ProxyDomNode) currentNode_;
+                    node = proxyNode.getDomNode();
+                    if (!proxyNode.isAppend()) {
+                        node = node.getPreviousSibling();
+                        if (node == null) {
+                            node = proxyNode.getDomNode().getParentNode();
+                        }
+                    }
+                }
+                if (removeEmptyCharacters(node)) {
+                    return;
+                }
+            }
             if (characters_ == null) {
                 characters_ = new StringBuilder();
             }
             characters_.append(ch, start, length);
+        }
+
+        private boolean removeEmptyCharacters(final DomNode node) {
+            if (node != null) {
+                if (node instanceof HtmlInput) {
+                    return false;
+                }
+                if (node instanceof HtmlAnchor || node instanceof HtmlSpan || node instanceof HtmlFont) {
+                    final DomNode anchorChild = node.getFirstChild();
+                    if (anchorChild != null) {
+                        return false;
+                    }
+                }
+            }
+            else {
+                if (currentNode_ instanceof HtmlFont) {
+                    return false;
+                }
+            }
+            return true;
         }
 
         /** @inheritDoc ContentHandler#ignorableWhitespace(char,int,int) */
