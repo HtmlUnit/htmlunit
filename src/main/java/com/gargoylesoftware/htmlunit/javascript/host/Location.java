@@ -364,9 +364,7 @@ public class Location extends SimpleScriptable {
             if (getBrowserVersion().isFirefox()) {
                 return "";
             }
-            else {
-                return "/blank";
-            }
+            return "/blank";
         }
         return getUrl().getPath();
     }
