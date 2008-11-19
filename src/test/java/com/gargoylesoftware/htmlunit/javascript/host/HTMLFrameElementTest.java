@@ -31,6 +31,8 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -286,5 +288,60 @@ public class HTMLFrameElementTest extends WebTestCase {
 
         final ObjectOutputStream objectOS = new ObjectOutputStream(new ByteArrayOutputStream());
         objectOS.writeObject(page);
+    }
+
+    /**
+     * Illustrates problem of issue #2314485.
+     * See https://sourceforge.net/tracker/?func=detail&atid=448266&aid=2314485&group_id=47038
+     * @throws Exception if the test fails
+     */
+    @Alerts({ "", "oFrame.foo: undefined", "frame1.html", "oFrame.foo: foo of frame 1",
+        "frame2.html", "oFrame.foo: foo of frame 2" })
+    @NotYetImplemented
+    @Test
+    public void changingFrameDocumentLocation() throws Exception {
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final String firstContent = "<html><head><script>"
+            + "var oFrame;"
+            + "function init()"
+            + "{"
+            + "  oFrame = self.frames['theFrame'];"
+            + "}"
+            + "function test(fileName)"
+            + "{"
+            + "  alert(oFrame.document.location.pathname);"
+            + "  alert('oFrame.foo: ' + oFrame.foo);"
+            + "  oFrame.document.location.href = fileName;"
+            + "}"
+            + "</script>"
+            + "</head>"
+            + "<body onload='init()'>"
+            + "<iframe name='theFrame'></iframe>"
+            + "<button id='btn1' onclick='test(\"frame1.html\")'>load frame1</button>"
+            + "<button id='btn2' onclick='test(\"frame2.html\")'>load frame2</button>"
+            + "<button id='btn3' onclick='test(\"about:blank\")'>load about:blank</button>"
+            + "</body></html>";
+
+        final String frame1Html = "<html><head><title>frame 1</title>"
+            + "<script>var foo = 'foo of frame 1'</script></head>"
+            + "<body>frame 1</body></html>";
+        final String frame2Html = frame1Html.replaceAll("frame 1", "frame 2");
+
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(new URL(URL_FIRST.toExternalForm() + "frame1.html"), frame1Html);
+        webConnection.setResponse(new URL(URL_FIRST.toExternalForm() + "frame2.html"), frame2Html);
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage page = webClient.getPage(URL_FIRST);
+        ((ClickableElement) page.getHtmlElementById("btn1")).click();
+        ((ClickableElement) page.getHtmlElementById("btn2")).click();
+        ((ClickableElement) page.getHtmlElementById("btn3")).click();
+
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 }
