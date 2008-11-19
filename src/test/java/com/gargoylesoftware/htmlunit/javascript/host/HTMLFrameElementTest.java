@@ -306,35 +306,33 @@ public class HTMLFrameElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final String firstContent = "<html><head><script>"
-            + "var oFrame;"
-            + "function init()"
-            + "{"
-            + "  oFrame = self.frames['theFrame'];"
-            + "}"
-            + "function test(fileName)"
-            + "{"
-            + "  alert(oFrame.document.location.pathname);"
-            + "  alert('oFrame.foo: ' + oFrame.foo);"
-            + "  oFrame.document.location.href = fileName;"
-            + "}"
-            + "</script>"
-            + "</head>"
-            + "<body onload='init()'>"
-            + "<iframe name='theFrame'></iframe>"
-            + "<button id='btn1' onclick='test(\"frame1.html\")'>load frame1</button>"
-            + "<button id='btn2' onclick='test(\"frame2.html\")'>load frame2</button>"
-            + "<button id='btn3' onclick='test(\"about:blank\")'>load about:blank</button>"
+        final String firstHtml = "<html><head><script>\n"
+            + "var oFrame;\n"
+            + "function init() {\n"
+            + "  oFrame = self.frames['theFrame'];\n"
+            + "}\n"
+            + "function test(fileName) {\n"
+            + "  alert(oFrame.document.location.pathname);\n"
+            + "  alert('oFrame.foo: ' + oFrame.foo);\n"
+            + "  oFrame.document.location.href = fileName;\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='init()'>\n"
+            + "<iframe name='theFrame'></iframe>\n"
+            + "<button id='btn1' onclick='test(\"frame1.html\")'>load frame1</button>\n"
+            + "<button id='btn2' onclick='test(\"frame2.html\")'>load frame2</button>\n"
+            + "<button id='btn3' onclick='test(\"about:blank\")'>load about:blank</button>\n"
             + "</body></html>";
 
-        final String frame1Html = "<html><head><title>frame 1</title>"
-            + "<script>var foo = 'foo of frame 1'</script></head>"
+        final String frame1Html = "<html><head><title>frame 1</title>\n"
+            + "<script>var foo = 'foo of frame 1'</script></head>\n"
             + "<body>frame 1</body></html>";
         final String frame2Html = frame1Html.replaceAll("frame 1", "frame 2");
 
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(new URL(URL_FIRST.toExternalForm() + "frame1.html"), frame1Html);
-        webConnection.setResponse(new URL(URL_FIRST.toExternalForm() + "frame2.html"), frame2Html);
+        webConnection.setResponse(URL_FIRST, firstHtml);
+        webConnection.setResponse(new URL(URL_FIRST, "frame1.html"), frame1Html);
+        webConnection.setResponse(new URL(URL_FIRST, "frame2.html"), frame2Html);
         webClient.setWebConnection(webConnection);
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
