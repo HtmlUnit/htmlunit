@@ -423,7 +423,7 @@ public abstract class WebTestCase {
                 newContent = StringUtils.replaceOnce(newContent, "</body>",  endScript + "</body>");
             }
             else {
-                throw new RuntimeException("Currently only content with a <head> and a </body> is supported");
+                log.info("No test generated: currently only content with a <head> and a </body> is supported");
             }
 
             final File f = File.createTempFile("TEST" + '_', ".html");

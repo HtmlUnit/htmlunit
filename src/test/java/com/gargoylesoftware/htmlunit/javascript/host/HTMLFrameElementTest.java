@@ -21,12 +21,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -39,12 +43,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author David K. Taylor
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class HTMLFrameElementTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("Frame2")
     public void testFrameName() throws Exception {
         final String html
             = "<html><head><title>first</title></head>\n"
@@ -52,12 +58,8 @@ public class HTMLFrameElementTest extends WebTestCase {
             + "    <frame id='frame1'>\n"
             + "    <frame name='Frame2' onload='alert(this.name)' id='frame2'>\n"
             + "</frameset></html>";
-        final String[] expectedAlerts = {"Frame2"};
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(html, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -71,7 +73,7 @@ public class HTMLFrameElementTest extends WebTestCase {
     }
 
     private void testLocation(final String jsExpr) throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -101,9 +103,11 @@ public class HTMLFrameElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts("true")
     @Test
     public void testContentDocument() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>first</title>\n"
                 + "<script>\n"
                 + "function test()\n"
@@ -115,20 +119,17 @@ public class HTMLFrameElementTest extends WebTestCase {
                 + "<frame name='foo' id='myFrame' src='about:blank'/>\n"
                 + "</frameset>\n"
                 + "</html>";
-        final String[] expectedAlerts = {"true"};
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
+    @Alerts("true")
     @Test
     public void testContentWindow() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>first</title>\n"
                 + "<script>\n"
                 + "function test()\n"
@@ -140,12 +141,8 @@ public class HTMLFrameElementTest extends WebTestCase {
                 + "<frame name='foo' id='myFrame' src='about:blank'/>\n"
                 + "</frameset>\n"
                 + "</html>";
-        final String[] expectedAlerts = {"true"};
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -153,6 +150,7 @@ public class HTMLFrameElementTest extends WebTestCase {
      * See http://sourceforge.net/tracker/index.php?func=detail&aid=1236048&group_id=47038&atid=448266.
      * @throws Exception if the test fails
      */
+    @Alerts("2")
     @Test
     public void testWriteFrameset() throws Exception {
         final String content1 = "<html><head>\n"
@@ -164,7 +162,7 @@ public class HTMLFrameElementTest extends WebTestCase {
             + "</head></html>";
         final String content2 = "<html><head><script>alert(2)</script></head></html>";
 
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         webClient.setWebConnection(webConnection);
 
@@ -174,21 +172,20 @@ public class HTMLFrameElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final String[] expectedAlerts = {"2"};
-
         webClient.getPage(URL_FIRST);
 
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
-     * Regression test fo bug 1289060.
+     * Regression test for bug 1289060.
      * See http://sourceforge.net/tracker/index.php?func=detail&aid=1289060&group_id=47038&atid=448266.
      * @throws Exception if the test fails
      */
+    @Alerts("DIV")
     @Test
     public void testFrameLoadedAfterParent() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
         final String mainContent
@@ -210,19 +207,18 @@ public class HTMLFrameElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final String[] expectedAlerts = {"DIV"};
-
         webClient.getPage(URL_GARGOYLE);
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
      * Regression test for bug 1192854.
      * @throws Exception if the test fails
      */
+    @Alerts({ "frame=OK", "frames.length=2", "frame=OK", "frames.length=0", "frame=OK", "frames.length=0" })
     @Test
     public void testFrameTag1192854() throws Exception {
-        final String htmlContent
+        final String html
             = "<html>\n"
             + "<script>\n"
             + "var root=this;\n"
@@ -246,22 +242,13 @@ public class HTMLFrameElementTest extends WebTestCase {
             + "</script>\n"
             + "</html>";
 
-        final String[] expectedAlerts = {"frame=OK",
-            "frames.length=2",
-            "frame=OK",
-            "frames.length=0",
-            "frame=OK",
-            "frames.length=0"};
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(htmlContent, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
+    @Alerts({ "\nfunction handler() {\n}\n", "null" })
     @Test
     public void testOnloadNull() throws Exception {
         final String html =
@@ -279,10 +266,8 @@ public class HTMLFrameElementTest extends WebTestCase {
             + "<body onload=test()>\n"
             + "  <iframe id='myFrame'></iframe>\n"
             + "</body></html>";
-        final String[] expectedAlerts = {"\nfunction handler() {\n}\n", "null"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+
+        loadPageWithAlerts(html);
     }
 
     /**
