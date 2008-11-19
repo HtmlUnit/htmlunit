@@ -21,13 +21,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -42,6 +44,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class LocationTest extends WebTestCase {
 
     /**
@@ -50,7 +53,7 @@ public class LocationTest extends WebTestCase {
      */
     @Test
     public void testDocumentLocationGet() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    alert(top.document.location);\n"
@@ -60,7 +63,7 @@ public class LocationTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
 
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        final HtmlPage firstPage = loadPage(getBrowserVersion(), html, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {URL_GARGOYLE.toExternalForm()};
@@ -71,8 +74,9 @@ public class LocationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("ok")
     public void testDocumentLocationSet() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
         final String html1 =
@@ -110,8 +114,7 @@ public class LocationTest extends WebTestCase {
         final HtmlPage page = webClient.getPage(URL_FIRST);
         assertEquals("test2", page.getTitleText());
 
-        final String[] expectedAlerts = {"ok"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
@@ -128,7 +131,7 @@ public class LocationTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        final HtmlPage firstPage = loadPage(getBrowserVersion(), firstContent, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {URL_GARGOYLE.toExternalForm()};
@@ -140,7 +143,34 @@ public class LocationTest extends WebTestCase {
      */
     @Test
     public void testGetVariousAttributes() throws Exception {
-        final WebClient client = new WebClient();
+        String[] expectedAlerts = {
+            "",               // hash
+            "first",          // host
+            "first",          // hostname
+            "http://first/",  // href
+            "/",              // pathname
+            "",               // port
+            "http:",          // protocol
+            ""                // search
+        };
+        testGetVariousAttributes("http://first", expectedAlerts);
+
+        // Try page with all the appropriate parts
+        expectedAlerts = new String[] {
+            "#wahoo",                            // hash
+            "www.first:77",                      // host
+            "www.first",                         // hostname
+            "http://www.first:77/foo?bar#wahoo", // href
+            "/foo",                              // pathname
+            "77",                                // port
+            "http:",                             // protocol
+            "?bar"                               // search
+        };
+        testGetVariousAttributes("http://www.first:77/foo?bar#wahoo", expectedAlerts);
+    }
+
+    private void testGetVariousAttributes(final String url, final String[] expectedAlerts) throws Exception {
+        final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
         final String content
@@ -165,34 +195,31 @@ public class LocationTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         // Try page with only a server name
-        client.getPage("http://first");
-        String[] expectedAlerts = {
-            "",               // hash
-            "first",          // host
-            "first",          // hostname
-            "http://first/",  // href
-            "/",              // pathname
-            "",               // port
-            "http:",          // protocol
-            ""                // search
-        };
-        assertEquals("simple url", expectedAlerts, collectedAlerts);
+        client.getPage(url);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 
-        collectedAlerts.clear();
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "", "about:blank", "", "", "about:", "" },
+            IE = { "", "about:blank", "/blank", "", "about:", "" })
+    public void about_blank_attributes() throws Exception {
+        final String html = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    var location = frames[0].document.location;\n"
+            + "    alert(location.hash);\n"
+            + "    alert(location.href);\n"
+            + "    alert(location.pathname);\n"
+            + "    alert(location.port);\n"
+            + "    alert(location.protocol);\n"
+            + "    alert(location.search);\n"
+            + "}\n</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<iframe src='about:blank'></iframe></body></html>";
 
-        // Try page with all the appropriate parts
-        client.getPage("http://www.first:77/foo?bar#wahoo");
-        expectedAlerts = new String[] {
-            "#wahoo",                            // hash
-            "www.first:77",                      // host
-            "www.first",                         // hostname
-            "http://www.first:77/foo?bar#wahoo", // href
-            "/foo",                              // pathname
-            "77",                                // port
-            "http:",                             // protocol
-            "?bar"                               // search
-        };
-        assertEquals("complete url", expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -204,7 +231,7 @@ public class LocationTest extends WebTestCase {
      */
     @Test
     public void testSetHash() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
 
         final String html
@@ -235,35 +262,28 @@ public class LocationTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(FF = { "#a b", "http://www.gargoylesoftware.com/#a%20b",
+            "#a b", "http://www.gargoylesoftware.com/#a%20b" },
+            IE = { "#a b", "http://www.gargoylesoftware.com/#a b",
+            "#a%20b", "http://www.gargoylesoftware.com/#a%20b" })
     public void testSetHash_Encoding() throws Exception {
-        testSetHash_Encoding(BrowserVersion.FIREFOX_2,
-            "#a b", "http://www.gargoylesoftware.com/#a%20b",
-            "#a b", "http://www.gargoylesoftware.com/#a%20b");
-        testSetHash_Encoding(BrowserVersion.INTERNET_EXPLORER_6,
-            "#a b", "http://www.gargoylesoftware.com/#a b",
-            "#a%20b", "http://www.gargoylesoftware.com/#a%20b");
-        testSetHash_Encoding(BrowserVersion.INTERNET_EXPLORER_7,
-            "#a b", "http://www.gargoylesoftware.com/#a b",
-            "#a%20b", "http://www.gargoylesoftware.com/#a%20b");
-    }
-
-    private void testSetHash_Encoding(final BrowserVersion version, final String... expected) throws Exception {
         final String html =
               "<html><head><title>Test</title></head><body>\n"
             + "<a id='a' onclick='location.hash=\"a b\"; alert(location.hash); alert(location.href);'>go1</a>\n"
             + "<a id='b' onclick='location.hash=\"a%20b\"; alert(location.hash); alert(location.href);'>go2</a>\n"
             + "</body></html>";
         final List<String> actual = new ArrayList<String>();
-        final HtmlPage page = loadPage(version, html, actual);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, actual);
         page.<HtmlAnchor>getHtmlElementById("a").click();
         page.<HtmlAnchor>getHtmlElementById("b").click();
-        assertEquals(expected, actual);
+        assertEquals(getExpectedAlerts(), actual);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "#hello", "#hi" })
     public void testSetHash2() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -276,10 +296,7 @@ public class LocationTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"#hello", "#hi"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -310,7 +327,7 @@ public class LocationTest extends WebTestCase {
      */
     @Test
     public void testSetHostname() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         final URL url = new URL("http://abc.com/index.html#bottom");
         final URL url2 = new URL("http://xyz.com/index.html#bottom");
@@ -332,7 +349,7 @@ public class LocationTest extends WebTestCase {
      */
     @Test
     public void testSetHostWithoutPort() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         final URL url = new URL("http://abc.com/index.html#bottom");
         final URL url2 = new URL("http://xyz.com/index.html#bottom");
@@ -354,7 +371,7 @@ public class LocationTest extends WebTestCase {
      */
     @Test
     public void testSetHostWithPort() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         final URL url = new URL("http://abc.com/index.html#bottom");
         final URL url2 = new URL("http://xyz.com:8080/index.html#bottom");
@@ -376,7 +393,7 @@ public class LocationTest extends WebTestCase {
      */
     @Test
     public void testSetPathname() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         final URL url = new URL("http://abc.com/index.html?blah=bleh");
         final URL url2 = new URL("http://abc.com/en/index.html?blah=bleh");
@@ -398,7 +415,7 @@ public class LocationTest extends WebTestCase {
      */
     @Test
     public void testSetPort() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         final URL url = new URL("http://abc.com/index.html#bottom");
         final URL url2 = new URL("http://abc.com:88/index.html#bottom");
@@ -420,7 +437,7 @@ public class LocationTest extends WebTestCase {
      */
     @Test
     public void testSetProtocol() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         final URL url = new URL("http://abc.com/index.html?blah=bleh");
         final URL url2 = new URL("ftp://abc.com/index.html?blah=bleh");
@@ -443,7 +460,7 @@ public class LocationTest extends WebTestCase {
      */
     @Test
     public void testReplace() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
         final String firstContent
@@ -469,7 +486,7 @@ public class LocationTest extends WebTestCase {
      */
     @Test
     public void testAssign() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
         final String firstContent
@@ -504,7 +521,7 @@ public class LocationTest extends WebTestCase {
             + "  </body>\n"
             + "</html>";
 
-        final HtmlPage page1 = loadPage(content);
+        final HtmlPage page1 = loadPage(getBrowserVersion(), content, null);
         final HtmlAnchor link = page1.getHtmlElementById("link1");
         final HtmlPage page2 = link.click();
 
@@ -518,7 +535,7 @@ public class LocationTest extends WebTestCase {
      */
     @Test
     public void testReplaceWithFrame() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
         final String mainContent
@@ -558,7 +575,7 @@ public class LocationTest extends WebTestCase {
      */
     @Test
     public void testChangeLocationToNonHtml() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
         final String html =
@@ -581,6 +598,7 @@ public class LocationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("foo")
     public void jsLocation() throws Exception {
         final String html =
               "<html><head>\n"
@@ -590,11 +608,7 @@ public class LocationTest extends WebTestCase {
             + "</head>\n"
             + "<body></body></html>";
 
-        final String[] expectedAlerts = {"foo"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(html, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -612,7 +626,7 @@ public class LocationTest extends WebTestCase {
 
         final String[] expectedAlerts = {URL_GARGOYLE.toExternalForm()};
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
+        loadPage(getBrowserVersion(), content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -621,7 +635,7 @@ public class LocationTest extends WebTestCase {
      */
     @Test
     public void href() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
         final String content
@@ -661,7 +675,7 @@ public class LocationTest extends WebTestCase {
             + "</body></html>";
         final String secondHtml = "<html><body><script>alert('3');</script></body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstHtml);
         webConnection.setResponse(URL_SECOND, secondHtml);

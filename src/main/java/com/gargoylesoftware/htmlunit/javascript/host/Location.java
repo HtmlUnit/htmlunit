@@ -25,6 +25,7 @@ import org.apache.commons.httpclient.util.URIUtil;
 import org.apache.commons.lang.StringUtils;
 
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -359,6 +360,14 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534332.aspx">MSDN Documentation</a>
      */
     public String jsxGet_pathname() {
+        if (WebClient.URL_ABOUT_BLANK == getUrl()) {
+            if (getBrowserVersion().isFirefox()) {
+                return "";
+            }
+            else {
+                return "/blank";
+            }
+        }
         return getUrl().getPath();
     }
 
