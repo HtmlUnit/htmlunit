@@ -22,6 +22,7 @@ import java.util.List;
 
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -43,7 +44,8 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  * final WebConnection connection = new DebuggingWebConnection(client.getWebConnection(), "myTest");
  * client.setWebConnection(connection);
  * </pre>
- * In this example an overview page will be generated under the name myTest.html in the temp directory.<br>
+ * In this example an overview page will be generated under the name myTest/index.html in the temp directory
+ * and all received responses will be saved int the myTest folder.<br>
  * <br>
  * <em>This class is only intended as an help during the conception.</em>
  *
@@ -56,24 +58,29 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
 
     private int counter_;
     private final WebConnection wrappedWebConnection_;
-    private final String reportBaseName_;
     private final File javaScriptFile_;
+    private final File reportFolder_;
 
     /**
      * Wraps a web connection to have a report generated of the received responses.
      * @param webConnection the webConnection that do the real work
-     * @param reportBaseName the base name to use for the generated files
-     * The report will be reportBaseName + ".html" in the temp file.
+     * @param dirName the name of the directory to create in the tmp folder to save received responses.
+     * If this folder already exists, it will be deleted first.
      * @throws IOException in case of problems writing the files
      */
     public DebuggingWebConnection(final WebConnection webConnection,
-            final String reportBaseName) throws IOException {
+            final String dirName) throws IOException {
 
         super(webConnection);
 
         wrappedWebConnection_ = webConnection;
-        reportBaseName_ = reportBaseName;
-        javaScriptFile_ = File.createTempFile(reportBaseName_, ".js");
+        final File tmpDir = new File(System.getProperty("java.io.tmpdir"));
+        reportFolder_ = new File(tmpDir, dirName);
+        if (reportFolder_.exists()) {
+            FileUtils.forceDelete(reportFolder_);
+        }
+        FileUtils.forceMkdir(reportFolder_);
+        javaScriptFile_ = new File(reportFolder_, "hu.js");
         createOverview();
     }
 
@@ -107,7 +114,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         else {
             extension = ".txt";
         }
-        final File f = File.createTempFile(reportBaseName_ + counter_ + "-", extension);
+        final File f = createFile(settings.getUrl(), extension);
         final String content = response.getContentAsString();
         final URL url = response.getRequestUrl();
         FileUtils.writeStringToFile(f, content, response.getContentCharSet());
@@ -125,6 +132,36 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         jsFileWriter.write(buffer.toString());
 
         jsFileWriter.close();
+    }
+
+    /**
+     * Computes the best file to save the response to the given URL.
+     * @param url the requested URL
+     * @param extension the preferred extension
+     * @return the file to create
+     * @throws IOException if a problem occurs creating the file
+     */
+    private File createFile(final URL url, final String extension) throws IOException {
+        String name = url.getPath().replaceFirst("/$", "").replaceAll(".*/", "");
+        if (!name.endsWith(extension)) {
+            name += extension;
+        }
+        int counter = 0;
+        while (true) {
+            final String fileName;
+            if (counter != 0) {
+                fileName = StringUtils.substringBeforeLast(name, ".")
+                    + "_" + counter + "." + StringUtils.substringAfterLast(name, ".");
+            }
+            else {
+                fileName = name;
+            }
+            final File f = new File(reportFolder_, fileName);
+            if (f.createNewFile()) {
+                return f;
+            }
+            counter++;
+        }
     }
 
     /**
@@ -152,8 +189,8 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
     private void createOverview() throws IOException {
         FileUtils.writeStringToFile(javaScriptFile_, "var tab = [];\n", TextUtil.DEFAULT_CHARSET);
 
-        final File summary = new File(javaScriptFile_.getParentFile(), reportBaseName_ + ".html");
-        final String content = "<html><head><title>Summary for " + reportBaseName_ + "</title>\n"
+        final File summary = new File(reportFolder_, "index.html");
+        final String content = "<html><head><title>Summary for " + reportFolder_.getName() + "</title>\n"
             + "<h1>Received responses</h1>\n"
             + "<script src='" + javaScriptFile_.getName() + "' type='text/javascript'></script>\n"
             + "</head>\n"
