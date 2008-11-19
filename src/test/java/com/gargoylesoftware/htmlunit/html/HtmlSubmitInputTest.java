@@ -28,8 +28,6 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link HtmlSubmitInput}.
@@ -193,13 +191,14 @@ public class HtmlSubmitInputTest extends WebTestCase {
      */
     @Test
     @Alerts(FF = "1")
-    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     public void onclick() throws Exception {
         final String html =
             "<html><head></head>\n"
             + "<body>\n"
-            + "<input id='myInput'>\n"
-            + "<input type='submit' onclick='alert(1)'>\n"
+            + "<form>\n"
+            + "  <input id='myInput'>\n"
+            + "  <input type='submit' onclick='alert(1)'>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();

@@ -557,6 +557,12 @@ public abstract class HtmlElement extends DomElement {
 
         final HtmlForm form = getEnclosingForm();
         if (form != null && c == '\n' && isSubmittableByEnter()) {
+            if (!getPage().getWebClient().getBrowserVersion().isIE()) {
+                final HtmlSubmitInput submit = form.getFirstByXPath(".//input[@type='submit']");
+                if (submit != null) {
+                    return submit.click();
+                }
+            }
             return form.submit((SubmittableElement) this);
         }
         return getPage();
