@@ -2164,7 +2164,7 @@
         <function name="item"/>
     </class>
 
-    <class name="TextImpl" extends="CharacterDataImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.TextImpl"
+    <class name="Text" extends="CharacterDataImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.Text"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomText">
         <function name="splitText"/>
     </class>

@@ -34,7 +34,7 @@ public class HtmlBaseTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSimpleScriptable() throws Exception {
+    public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<base id='myId' target='MyNewWindow'>\n"
             + "<script>\n"

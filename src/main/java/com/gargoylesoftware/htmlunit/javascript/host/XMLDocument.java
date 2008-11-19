@@ -165,7 +165,7 @@ public class XMLDocument extends Document {
             scriptable = attribute;
         }
         else if (domNode instanceof DomText || domNode instanceof DomCData || domNode instanceof DomComment) {
-            scriptable = new TextImpl();
+            scriptable = new Text();
         }
         else {
             scriptable = super.makeScriptableFor(domNode);

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="fix" dev="asashour" id="2315783">
+                JavaScript: support Text object.
+            </action>
             <action type="fix" dev="asashour">
                 HtmlInput: typing enter should behave as clicking submit input.
             </action>
