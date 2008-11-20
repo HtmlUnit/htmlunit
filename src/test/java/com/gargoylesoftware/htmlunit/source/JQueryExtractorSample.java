@@ -113,7 +113,8 @@ public class JQueryExtractorSample extends WebTestCase {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the jQuery version being tested.
+     * @return the jQuery version being tested
      */
     protected String getVersion() {
         return "1.2.6";
