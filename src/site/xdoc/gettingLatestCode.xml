@@ -80,7 +80,7 @@ svn co https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit .
             </p>
             Tests currently assume that port 12345 is free on the machine, 
             if you have <tt>java.net.BindException: Address already in use: JVM_Bind</tt>,
-            then change the <code>PORT</code> of <code>HttpWebConnectionTest</code>.
+            then set the system property <code>htmlunit.test.port</code> e.g. <code>-Dhtmlunit.test.port=10101</code>.
         </section>
 
         <section name="Packaging">

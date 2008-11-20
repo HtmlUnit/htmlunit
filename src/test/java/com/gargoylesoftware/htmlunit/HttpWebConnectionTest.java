@@ -59,7 +59,7 @@ public class HttpWebConnectionTest {
     /**
      * The listener port for the web server.
      */
-    public static final int PORT = 12345;
+    public static final int PORT = Integer.valueOf(System.getProperty("htmlunit.test.port", "12345"));
 
     private Server server_;
 
