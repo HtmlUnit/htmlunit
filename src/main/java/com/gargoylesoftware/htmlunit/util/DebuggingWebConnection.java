@@ -126,6 +126,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         buffer.append("contentType: '" + response.getContentType() + "', ");
         buffer.append("method: '" + settings.getHttpMethod().name() + "', ");
         buffer.append("url: '" + url + "', ");
+        buffer.append("responseSize: " + response.getContentAsBytes().length + ", ");
         buffer.append("headers: " + nameValueListToJsMap(response.getResponseHeaders()));
         buffer.append("};\n");
         final FileWriter jsFileWriter = new FileWriter(javaScriptFile_, true);
@@ -193,19 +194,31 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         final String content = "<html><head><title>Summary for " + reportFolder_.getName() + "</title>\n"
             + "<h1>Received responses</h1>\n"
             + "<script src='" + javaScriptFile_.getName() + "' type='text/javascript'></script>\n"
-            + "</head>\n"
-            + "<body>"
-            + "<ol>\n"
             + "<script>\n"
-            + "for (var i=0; i<tab.length; i++) {\n"
-            + "  var curRes = tab[i];\n"
-            + "  document.writeln('<li>'"
-            + " + curRes.code + ' ' + curRes.method + ' ' "
-            + " + '<a href=\"' + curRes.fileName + '\" target=_blank>' + curRes.url + '</a> "
-            + " (' + curRes.contentType + ')</li>');\n"
+            + "function toKB(bytes)\n"
+            + "{\n"
+            + "  return Math.round(100 * bytes / 1024) / 100;\n"
+            + "}\n"
+            + "function doWork()\n"
+            + "{\n"
+            + "  var totalDownloaded = 0;\n"
+            + "  var list = document.getElementById('list');\n"
+            + "  for (var i=0; i<tab.length; i++) \n"
+            + "  {\n"
+            + "    var curRes = tab[i];\n"
+            + "    list.innerHTML += '<li>' + curRes.code + ' ' + curRes.method + ' ' "
+            + "     + '<a href=\"' + curRes.fileName + '\" target=_blank>' + curRes.url + '</a> "
+            + " (' + curRes.contentType + ') ' + toKB(curRes.responseSize) + ' KB </li>';\n"
+            + "    totalDownloaded += curRes.responseSize;\n"
+            + "  }\n"
+            + "  document.getElementById('totalDownload').innerHTML = toKB(totalDownloaded);\n"
             + "}\n"
             + "</script>\n"
+            + "</head>\n"
+            + "<body onload='doWork()'>"
+            + "<ol id='list'>\n"
             + "</ol>"
+            + "Total download: <span id='totalDownload'>0</span> KB"
             + "</body></html>";
 
         FileUtils.writeStringToFile(summary, content, TextUtil.DEFAULT_CHARSET);
