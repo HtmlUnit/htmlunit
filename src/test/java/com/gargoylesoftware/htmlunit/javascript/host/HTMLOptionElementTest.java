@@ -23,6 +23,8 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 
 /**
  * Tests for {@link HTMLOptionElement}.
@@ -289,5 +291,44 @@ public class HTMLOptionElementTest extends WebTestCase {
             + "</body></html>";
 
         loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "value1", "text1", "label1", "value2", "text2", "" })
+    @NotYetImplemented
+    public void label() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var s = document.getElementById('testSelect');\n"
+            + "  var lastIndex = s.length;\n"
+            + "  s.length += 1;\n"
+            + "  s[lastIndex].value = 'value2';\n"
+            + "  s[lastIndex].text  = 'text2';\n"
+            + "  alert(s[0].value);\n"
+            + "  alert(s[0].text);\n"
+            + "  alert(s[0].label);\n"
+            + "  alert(s[1].value);\n"
+            + "  alert(s[1].text);\n"
+            + "  alert(s[1].label);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <select id='testSelect'>\n"
+            + "    <option value='value1' label='label1'>text1</option>\n"
+            + "  </select>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPageWithAlerts(html);
+        final HtmlSelect select = page.getHtmlElementById("testSelect");
+        assertEquals("value1", select.getOption(0).getValueAttribute());
+        assertEquals("text1", select.getOption(0).getTextContent());
+        assertEquals("label1", select.getOption(0).getLabelAttribute());
+        assertEquals("value2", select.getOption(1).getValueAttribute());
+        assertEquals("text2", select.getOption(1).getTextContent());
+        assertEquals("", select.getOption(1).getLabelAttribute());
     }
 }
