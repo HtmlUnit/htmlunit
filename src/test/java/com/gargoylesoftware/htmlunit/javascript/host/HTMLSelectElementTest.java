@@ -181,7 +181,7 @@ public class HTMLSelectElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "value1", "OneLabel", "value2", "TwoLabel", "value3", "ThreeLabel" })
+    @Alerts({ "value1", "One", "value2", "Two", "value3", "Three" })
     public void testGetOptionLabel() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

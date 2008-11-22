@@ -300,13 +300,6 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * @return the text of this option.
      */
     public String getText() {
-        if (getPage().getWebClient().getBrowserVersion().isIE()) {
-            final DomNode child = getFirstChild();
-            if (child == null) {
-                return null;
-            }
-            return child.getNodeValue();
-        }
         final DomNode child = getFirstChild();
         if (child == null) {
             return "";
