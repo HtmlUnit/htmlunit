@@ -298,7 +298,6 @@ public class HTMLOptionElementTest extends WebTestCase {
      */
     @Test
     @Alerts({ "value1", "text1", "label1", "value2", "text2", "" })
-    @NotYetImplemented
     public void label() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -337,7 +336,6 @@ public class HTMLOptionElementTest extends WebTestCase {
      */
     @Test
     @Alerts(IE = { "null", "[object]", "null" }, FF = { "[object Text]", "[object Text]", "[object Text]" })
-    @NotYetImplemented
     public void text() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

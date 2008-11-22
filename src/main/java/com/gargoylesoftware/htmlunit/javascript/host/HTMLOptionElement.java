@@ -102,11 +102,7 @@ public class HTMLOptionElement extends HTMLElement {
      */
     @Override
     public String jsxGet_text() {
-        final HtmlOption htmlOption = getHtmlElementOrNull();
-        if (htmlOption.hasAttribute("label")) {
-            return htmlOption.getLabelAttribute();
-        }
-        return htmlOption.asText();
+        return getHtmlElementOrNull().getText();
     }
 
     /**
@@ -122,7 +118,7 @@ public class HTMLOptionElement extends HTMLElement {
      * @param newText the text property
      */
     public void jsxSet_text(final String newText) {
-        getHtmlElementOrNull().setLabelAttribute(newText);
+        getHtmlElementOrNull().setText(newText);
     }
 
     /**

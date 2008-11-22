@@ -19,6 +19,7 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.WebAssert;
+import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
@@ -201,6 +202,9 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
                 final HtmlOption option = (HtmlOption) HTMLParser.getFactory(HtmlOption.TAG_NAME).createElement(
                         htmlSelect_.getPage(), HtmlOption.TAG_NAME, null);
                 htmlSelect_.appendOption(option);
+                if (!getBrowserVersion().isIE()) {
+                    option.appendChild(new DomText(option.getPage(), ""));
+                }
             }
         }
     }

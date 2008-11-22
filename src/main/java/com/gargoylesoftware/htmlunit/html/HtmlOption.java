@@ -275,4 +275,42 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
         }
         return super.asTextInternal();
     }
+
+    /**
+     * Sets the text for this HtmlOption.
+     * @param text the text
+     */
+    public void setText(final String text) {
+        if (getPage().getWebClient().getBrowserVersion().isIE() && (text == null || text.length() == 0)) {
+            removeAllChildren();
+        }
+        else {
+            final DomNode child = getFirstChild();
+            if (child == null) {
+                appendChild(new DomText(getPage(), text));
+            }
+            else {
+                child.setNodeValue(text);
+            }
+        }
+    }
+
+    /**
+     * Gets the text.
+     * @return the text of this option.
+     */
+    public String getText() {
+        if (getPage().getWebClient().getBrowserVersion().isIE()) {
+            final DomNode child = getFirstChild();
+            if (child == null) {
+                return null;
+            }
+            return child.getNodeValue();
+        }
+        final DomNode child = getFirstChild();
+        if (child == null) {
+            return "";
+        }
+        return child.getNodeValue();
+    }
 }
