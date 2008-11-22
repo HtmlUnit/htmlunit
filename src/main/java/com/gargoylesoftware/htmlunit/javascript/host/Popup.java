@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
- * A JavaScript object for IE's Popu.
+ * A JavaScript object for IE's Popup.
  *
  * @version $Revision$
  * @author Marc Guillemot
