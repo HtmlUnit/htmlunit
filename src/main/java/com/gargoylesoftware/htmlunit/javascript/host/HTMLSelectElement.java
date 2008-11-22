@@ -160,7 +160,7 @@ public class HTMLSelectElement extends FormField {
     protected void addBefore(final HTMLOptionElement newOptionObject, final HtmlOption beforeOption) {
         final HtmlSelect select = getHtmlSelect();
 
-        HtmlOption htmlOption = (HtmlOption) newOptionObject.getHtmlElementOrNull();
+        HtmlOption htmlOption = newOptionObject.getHtmlElementOrNull();
         if (htmlOption == null) {
             htmlOption = (HtmlOption) HTMLParser.getFactory(HtmlOption.TAG_NAME).createElement(
                     select.getPage(), HtmlOption.TAG_NAME, null);

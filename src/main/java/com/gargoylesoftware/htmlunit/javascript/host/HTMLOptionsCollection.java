@@ -161,7 +161,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
         }
         else {
             final HTMLOptionElement option = (HTMLOptionElement) newValue;
-            final HtmlOption htmlOption = (HtmlOption) option.getHtmlElementOrNull();
+            final HtmlOption htmlOption = option.getHtmlElementOrNull();
             if (index >= jsxGet_length()) {
                 // Add a new option at the end.
                 htmlSelect_.appendOption(htmlOption);

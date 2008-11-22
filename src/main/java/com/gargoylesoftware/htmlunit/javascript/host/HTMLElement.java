@@ -1816,7 +1816,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * or null if an element hasn't been set.
      * @return the HTML element or null
      */
-    public final HtmlElement getHtmlElementOrNull() {
+    public HtmlElement getHtmlElementOrNull() {
         return (HtmlElement) getDomNodeOrNull();
     }
 

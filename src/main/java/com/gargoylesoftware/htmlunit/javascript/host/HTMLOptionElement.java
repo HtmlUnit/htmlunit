@@ -85,7 +85,7 @@ public class HTMLOptionElement extends HTMLElement {
      * @return the value property
      */
     public String jsxGet_value() {
-        return getHtmlOption().getValueAttribute();
+        return getHtmlElementOrNull().getValueAttribute();
     }
 
     /**
@@ -93,7 +93,7 @@ public class HTMLOptionElement extends HTMLElement {
      * @param newValue the value property
      */
     public void jsxSet_value(final String newValue) {
-        getHtmlOption().setValueAttribute(newValue);
+        getHtmlElementOrNull().setValueAttribute(newValue);
     }
 
     /**
@@ -102,15 +102,19 @@ public class HTMLOptionElement extends HTMLElement {
      */
     @Override
     public String jsxGet_text() {
-        final HtmlOption htmlOption = getHtmlOption();
+        final HtmlOption htmlOption = getHtmlElementOrNull();
         if (htmlOption.hasAttribute("label")) {
             return htmlOption.getLabelAttribute();
         }
         return htmlOption.asText();
     }
 
-    private HtmlOption getHtmlOption() {
-        return (HtmlOption) getHtmlElementOrNull();
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public HtmlOption getHtmlElementOrNull() {
+        return (HtmlOption) super.getHtmlElementOrNull();
     }
 
     /**
@@ -118,7 +122,7 @@ public class HTMLOptionElement extends HTMLElement {
      * @param newText the text property
      */
     public void jsxSet_text(final String newText) {
-        getHtmlOption().setLabelAttribute(newText);
+        getHtmlElementOrNull().setLabelAttribute(newText);
     }
 
     /**
@@ -126,7 +130,7 @@ public class HTMLOptionElement extends HTMLElement {
      * @return the text property
      */
     public boolean jsxGet_selected() {
-        return getHtmlOption().isSelected();
+        return getHtmlElementOrNull().isSelected();
     }
 
     /**
@@ -134,7 +138,7 @@ public class HTMLOptionElement extends HTMLElement {
      * @param selected the new selected property
      */
     public void jsxSet_selected(final boolean selected) {
-        getHtmlOption().setSelected(selected);
+        getHtmlElementOrNull().setSelected(selected);
     }
 
     /**
@@ -142,7 +146,7 @@ public class HTMLOptionElement extends HTMLElement {
      * @return the text property
      */
     public boolean jsxGet_defaultSelected() {
-        return getHtmlOption().isDefaultSelected();
+        return getHtmlElementOrNull().isDefaultSelected();
     }
 
     /**
@@ -150,7 +154,7 @@ public class HTMLOptionElement extends HTMLElement {
      * @return the label property
      */
     public String jsxGet_label() {
-        return getHtmlOption().getLabelAttribute();
+        return getHtmlElementOrNull().getLabelAttribute();
     }
 
     /**
@@ -158,7 +162,7 @@ public class HTMLOptionElement extends HTMLElement {
      * @param label the new label property
      */
     public void jsxSet_label(final String label) {
-        getHtmlOption().setLabelAttribute(label);
+        getHtmlElementOrNull().setLabelAttribute(label);
     }
 
     /**
