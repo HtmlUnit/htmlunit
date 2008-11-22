@@ -2349,6 +2349,22 @@
                 descr="MSDN documentation"/>
         </function>
         <function name="setTimeout"/>
+        <function name="showModalDialog">
+            <doclink
+                url="http://msdn.microsoft.com/en-us/library/ms536759.aspx"
+                descr="MSDN documentation"/>
+            <doclink
+                url="https://developer.mozilla.org/en/DOM/window.showModalDialog"
+                descr="Mozilla documentation"/>
+            <browser name="Microsoft Internet Explorer"/>
+            <browser name="Firefox" min-version="3"/>
+        </function>
+        <function name="showModelessDialog">
+            <doclink
+                url="http://msdn.microsoft.com/en-us/library/ms536761.aspx"
+                descr="MSDN documentation"/>
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
     </class>
 
     <class name="XMLAttr" extends="Attr" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLAttr"

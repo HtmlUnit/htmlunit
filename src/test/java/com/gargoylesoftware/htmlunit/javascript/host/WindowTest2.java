@@ -14,12 +14,25 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.DialogWindow;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.html.ClickableElement;
+import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
+import com.gargoylesoftware.htmlunit.html.HtmlInput;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for {@link Window}. The only difference with {@link WindowTest} is that these
@@ -50,7 +63,116 @@ public class WindowTest2 extends WebTestCase {
             + "alert(window.controllers);\n"
             + "</script>\n"
             + "</body></html>";
-
         loadPageWithAlerts(html);
     }
+
+    /**
+     * Basic test for the <tt>showModalDialog</tt> method. See bug 2124916.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7, Browser.FIREFOX_3 })
+    public void showModalDialog() throws Exception {
+        final String html1
+            = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    alert(window.returnValue);\n"
+            + "    var o = new Object();\n"
+            + "    o.firstName = f.elements.firstName.value;\n"
+            + "    o.lastName = f.elements.lastName.value;\n"
+            + "    var ret = showModalDialog('" + URL_SECOND + "', o, 'dialogHeight:300px; dialogLeft:200px;');\n"
+            + "    alert(ret);\n"
+            + "    alert('finished');\n"
+            + "  }\n"
+            + "</script></head><body>\n"
+            + "  <button onclick='test()' id='b'>Test</button>\n"
+            + "  <form id='f'>\n"
+            + "    First Name: <input type='text' name='firstName' value='Jane'><br>\n"
+            + "    Last Name: <input type='text' name='lastName' value='Smith'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final String html2
+            = "<html><head><script>\n"
+            + "  var o = window.dialogArguments;\n"
+            + "  alert(o.firstName);\n"
+            + "  alert(o.lastName);\n"
+            + "  window.returnValue = 'sdg';\n"
+            + "</script></head>\n"
+            + "<body>foo</body></html>";
+
+        final String[] expected = {"undefined", "Jane", "Smith", "sdg", "finished"};
+
+        final WebClient client = getWebClient();
+        final List<String> actual = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(actual));
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html1);
+        conn.setResponse(URL_SECOND, html2);
+        client.setWebConnection(conn);
+
+        final HtmlPage page = client.getPage(URL_FIRST);
+        final ClickableElement button = page.getHtmlElementById("b");
+        final HtmlPage dialogPage = button.click();
+        final DialogWindow dialog = (DialogWindow) dialogPage.getEnclosingWindow();
+
+        dialog.close();
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Basic test for the <tt>showModelessDialog</tt> method. See bug 2124916.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    public void showModelessDialog() throws Exception {
+        final String html1
+            = "<html><head><script>\n"
+            + "  var userName = '';\n"
+            + "  function test() {\n"
+            + "    var newWindow = showModelessDialog('" + URL_SECOND + "', window, 'status:false');\n"
+            + "    alert(newWindow);\n"
+            + "  }\n"
+            + "  function update() { alert(userName); }\n"
+            + "</script></head><body>\n"
+            + "  <input type='button' id='b' value='Test' onclick='test()'>\n"
+            + "</body></html>";
+
+        final String html2
+            = "<html><head><script>\n"
+            + "function update() {\n"
+            + "  var w = dialogArguments;\n"
+            + "  w.userName = document.getElementById('name').value;\n"
+            + "  w.update();\n"
+            + "}\n"
+            + "</script></head><body>\n"
+            + "  Name: <input id='name'><input value='OK' id='b' type='button' onclick='update()'>\n"
+            + "</body></html>";
+
+        final String[] expected = {"[object]", "a"};
+
+        final WebClient client = getWebClient();
+        final List<String> actual = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(actual));
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html1);
+        conn.setResponse(URL_SECOND, html2);
+        client.setWebConnection(conn);
+
+        final HtmlPage page = client.getPage(URL_FIRST);
+        final ClickableElement button = page.getHtmlElementById("b");
+        final HtmlPage dialogPage = button.click();
+
+        final HtmlInput input = dialogPage.getHtmlElementById("name");
+        input.setValueAttribute("a");
+
+        final HtmlButtonInput button2 = (HtmlButtonInput) dialogPage.getHtmlElementById("b");
+        button2.click();
+
+        assertEquals(expected, actual);
+    }
+
 }

@@ -950,7 +950,7 @@ public class WebClient implements Serializable {
                 getPage(window, settings);
             }
             catch (final IOException e) {
-                getLog().error("Error when loading content into window", e);
+                getLog().error("Error loading content into window", e);
             }
         }
         else {
@@ -1025,8 +1025,39 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Sets whether or not redirections will be followed automatically on receipt of
-     * a redirect status code from the server.
+     * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
+     *
+     * Opens a new dialog window.
+     * @param url the URL of the document to load and display
+     * @param opener the web window that is opening the dialog
+     * @param dialogArguments the object to make available inside the dialog via <tt>window.dialogArguments</tt>
+     * @return the new dialog window
+     * @throws IOException if there is an IO error
+     */
+    public DialogWindow openDialogWindow(final URL url, final WebWindow opener, final Object dialogArguments)
+        throws IOException {
+
+        WebAssert.notNull("url", url);
+        WebAssert.notNull("opener", opener);
+
+        final DialogWindow window = new DialogWindow(this, dialogArguments);
+        fireWindowOpened(new WebWindowEvent(window, WebWindowEvent.OPEN, null, null));
+
+        final HtmlPage openerPage = (HtmlPage) opener.getEnclosedPage();
+        final WebRequestSettings settings = new WebRequestSettings(url);
+        if (!getBrowserVersion().isIE()) {
+            final String referer = openerPage.getWebResponse().getRequestUrl().toExternalForm();
+            settings.addAdditionalHeader("Referer", referer);
+        }
+
+        getPage(window, settings);
+
+        return window;
+    }
+
+    /**
+     * Sets whether or not redirections will be followed automatically on receipt of a redirect
+     * status code from the server.
      * @param enabled true to enable automatic redirection
      */
     public void setRedirectEnabled(final boolean enabled) {

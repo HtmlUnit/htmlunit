@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="add" dev="sdanig" id="2124916">
+                JavaScript: add support for window.showModalDialog() and window.showModelessDialog().
+            </action>
             <action type="fix" dev="asashour" id="2315783">
                 JavaScript: support Text object.
             </action>

@@ -28,10 +28,12 @@ import org.apache.commons.lang.StringUtils;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.ScriptableObject;
 import org.mozilla.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.ConfirmHandler;
+import com.gargoylesoftware.htmlunit.DialogWindow;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.PromptHandler;
@@ -259,9 +261,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Creates a popup window Open a new window.
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createpopup.asp">
-     * MSDN documentation</a>
+     * Creates a popup window.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536392.aspx">MSDN documentation</a>
      * @param context the JavaScript Context
      * @param scriptable the object that the function was called on
      * @param args the arguments passed to the function
@@ -1095,6 +1096,53 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         selection.setParentScope(this);
         selection.setPrototype(getPrototype(selection.getClass()));
         return selection;
+    }
+
+    /**
+     * Creates a modal dialog box that displays the specified HTML document.
+     * @param url the URL of the document to load and display
+     * @param arguments object to be made available via <tt>window.dialogArguments</tt> in the dialog window
+     * @param features string that specifies the window ornaments for the dialog window
+     * @return the value of the <tt>returnValue</tt> property as set by the modal dialog's window
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536759.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en/DOM/window.showModalDialog">Mozilla Documentation</a>
+     */
+    public Object jsxFunction_showModalDialog(final String url, final Object arguments, final String features) {
+        final WebWindow ww = getWebWindow();
+        final WebClient client = ww.getWebClient();
+        try {
+            final DialogWindow dialog = client.openDialogWindow(new URL(url), ww, arguments);
+            // TODO: Theoretically, we shouldn't return until the dialog window has been close()'ed...
+            // But we have to return so that the window can be close()'ed...
+            // Maybe we can use Rhino's continuation support to save state and restart when
+            // the dialog window is close()'ed? Would only work in interpreted mode, though.
+            final ScriptableObject jsDialog = (ScriptableObject) dialog.getScriptObject();
+            return jsDialog.get("returnValue", jsDialog);
+        }
+        catch (final IOException e) {
+            throw Context.throwAsScriptRuntimeEx(e);
+        }
+    }
+
+    /**
+     * Creates a modeless dialog box that displays the specified HTML document.
+     * @param url the URL of the document to load and display
+     * @param arguments object to be made available via <tt>window.dialogArguments</tt> in the dialog window
+     * @param features string that specifies the window ornaments for the dialog window
+     * @return a reference to the new window object created for the modeless dialog
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536761.aspx">MSDN Documentation</a>
+     */
+    public Object jsxFunction_showModelessDialog(final String url, final Object arguments, final String features) {
+        final WebWindow ww = getWebWindow();
+        final WebClient client = ww.getWebClient();
+        try {
+            final DialogWindow dialog = client.openDialogWindow(new URL(url), ww, arguments);
+            final Window jsDialog = (Window) dialog.getScriptObject();
+            return jsDialog;
+        }
+        catch (final IOException e) {
+            throw Context.throwAsScriptRuntimeEx(e);
+        }
     }
 
     /**
