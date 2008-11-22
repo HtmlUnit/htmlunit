@@ -331,4 +331,33 @@ public class HTMLOptionElementTest extends WebTestCase {
         assertEquals("text2", select.getOption(1).getTextContent());
         assertEquals("", select.getOption(1).getLabelAttribute());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "null", "[object]", "null" }, FF = { "[object Text]", "[object Text]", "[object Text]" })
+    @NotYetImplemented
+    public void text() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var s = document.getElementById('testSelect');\n"
+            + "  var lastIndex = s.length;\n"
+            + "  s.length += 1;\n"
+            + "  alert(s[lastIndex].firstChild);\n"
+            + "  s[lastIndex].text  = 'text2';\n"
+            + "  alert(s[lastIndex].firstChild);\n"
+            + "  s[lastIndex].text  = '';\n"
+            + "  alert(s[lastIndex].firstChild);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <select id='testSelect'>\n"
+            + "    <option value='value1' label='label1'>text1</option>\n"
+            + "  </select>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }
