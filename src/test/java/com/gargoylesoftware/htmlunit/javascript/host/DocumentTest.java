@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
@@ -3649,4 +3650,28 @@ public class DocumentTest extends WebTestCase {
         text1.click();
         assertEquals(new String[]{"null", "text1", "onfocus text2", "text2"}, collectedAlerts);
     }
+
+    /**
+     * Test for bug 2024729 (we were missing the document.captureEvents(...) method).
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void captureEvents() throws Exception {
+        final String content = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "function t() { alert('captured'); }\n"
+            + "document.captureEvents(Event.CLICK);\n"
+            + "document.onclick = t;\n"
+            + "</script></head><body>\n"
+            + "<div id='theDiv' onclick='alert(123)'>foo</div>\n"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        ((ClickableElement) page.getHtmlElementById("theDiv")).click();
+
+        final String[] expectedAlerts = {"123", "captured"};
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
 }

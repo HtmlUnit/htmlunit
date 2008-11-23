@@ -683,6 +683,9 @@
                 descr="MSDN documentation"/>
         </property>
         <property name="referrer" readable="true" writable="false"/>
+        <function name="captureEvents">
+            <browser name="Firefox"/>
+        </function>
         <function name="createAttribute"/>
         <function name="createDocumentFragment"/>
         <function name="createElement"/>

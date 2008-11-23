@@ -2318,10 +2318,7 @@ public class WindowTest extends WebTestCase {
     public void captureEvents() throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "<script>\n"
-            + "function t()\n"
-            + "{\n"
-            + "    alert('captured');\n"
-            + "}\n"
+            + "function t() { alert('captured'); }\n"
             + "window.captureEvents(Event.CLICK);\n"
             + "window.onclick = t;\n"
             + "</script></head><body>\n"

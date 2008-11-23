@@ -252,6 +252,15 @@ public class Document extends EventNode {
     }
 
     /**
+     * Does nothing special anymore... just like FF.
+     * @param type the type of events to capture
+     * @see Window#jsxFunction_captureEvents(String)
+     */
+    public void jsxFunction_captureEvents(final String type) {
+        // Empty.
+    }
+
+    /**
      * Adapts any DOM node to resolve namespaces so that an XPath expression can be easily
      * evaluated relative to the context of the node where it appeared within the document.
      * @param nodeResolver the node to be used as a context for namespace resolution
