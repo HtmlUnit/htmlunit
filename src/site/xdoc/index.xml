@@ -10,7 +10,7 @@
     </properties>
 
     <body>
-        <section>
+        <section name="HtmlUnit">
             <p>
                 HtmlUnit is a "browser for Java programs".
                 It models HTML documents and provides an API that allows you to invoke pages, fill out forms, click links, etc...
@@ -31,7 +31,7 @@
                 for an introduction.
             </p>
             <p>
-                HtmlUnit is used as underlying "browser" by different Open Source tools like <a href="http://webtest.canoo.com/">Canoo WebTest</a>,
+                HtmlUnit is used as the underlying "browser" by different Open Source tools like <a href="http://webtest.canoo.com/">Canoo WebTest</a>,
                 <a href="http://jwebunit.sourceforge.net/">JWebUnit</a>, <a href="http://webdriver.googlecode.com/">WebDriver</a>, <a href="http://www.jboss.org/jsfunit/">JSFUnit</a>,
                 <a href="http://celerity.rubyforge.org/">Celerity</a>, ...
             </p>
@@ -127,7 +127,7 @@
         <section name="Features">
             <p>
                 <ul>
-                    <li>Support for the HTTP and HTTPS protocols.</li>
+                    <li>Support for the HTTP and HTTPS protocols</li>
                     <li>Support for cookies</li>
                     <li>Ability to specify whether failing responses from the server should throw
                     exceptions or should be returned as pages of the appropriate type (based on content
@@ -145,7 +145,7 @@
                     </li>
                     <li>Proxy server support</li>
                     <li>Support for basic and NTLM authentication</li>
-                    <li>Good support for JavaScript (see the JavaScript section below)</li>
+                    <li>Excellent JavaScript support (see <a href="#JavaScript_Support">the JavaScript section</a> below)</li>
                 </ul>
             </p>
         </section>
@@ -157,17 +157,24 @@
             </p>
         </section>
 
-        <section name="JavaScript support">
+        <section name="JavaScript Support">
             <p>
-                HtmlUnit provides good JavaScript support, simulating the behavior of the configured browser (Firefox or Internet Explorer).
+                HtmlUnit provides excellent JavaScript support, simulating the behavior of the configured browser (Firefox or Internet Explorer).
                 It uses the Rhino JavaScript engine for the core language (plus workarounds for some Rhino bugs) and provides the implementation
-                for the objects specific to the execution in a browser.
+                for the objects specific to execution in a browser.
             </p>
             <p>
-                The support is already really good and many complex JavaScript libraries are well supported 
-                (the unit tests of some well known AJAX libraries are included in HtmlUnit's own unit tests). JavaScript support is the area where
-                currently most of HtmlUnit's development activity occurs. If you encounter a problem it may be already have been fixed since the last
-                release. Otherwise, don't hesitate to open an issue with an example of the problem.
+                The unit tests of some well-known JavaScript libraries are included in HtmlUnit's own unit tests; based on these unit
+                tests, the following libraries are known to work well with HtmlUnit:
+                <ul>
+                    <li>jQuery 1.2.6: Excellent support (see unit test <a href="https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/JQuery126Test.java">here</a>)</li>
+                    <li>GWT 1.5.2: Excellent support (see unit test <a href="https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/GWT15Test.java">here</a>)</li>
+                    <li>Sarissa 0.9.9.3: Excellent support (see unit test <a href="https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/Sarissa0993Test.java">here</a>)</li>
+                    <li>Prototype 1.6.0: Good support (see unit test <a href="https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/Prototype160Test.java">here</a>)</li>
+                    <li>Ext JS 2.2: Good support (see unit test <a href="https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/ExtJS22Test.java">here</a>)</li>
+                    <li>Dojo 1.0.2: Decent support (see unit test <a href="https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/Dojo102Test.java">here</a>)</li>
+                    <li>YUI 2.3.0: Decent support (see unit test <a href="https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/YuiTest.java">here</a>)</li>
+                </ul>
             </p>
             <note title="Disabling JavaScript support">
                 <p>
@@ -176,11 +183,11 @@
             </note>
             <p>
                 JavaScript code is executed just like in normal browsers when the page loads or when an handler is triggered.
-                Additionally HtmlUnit provides the ability to inject code into an existing page through
+                Additionally HtmlUnit provides the ability to inject code into an existing page via
                 HtmlPage.executeJavascript(String yourJsCode).
             </p>
             <p>
-                Refer to the changes document for details on what is being added.
+                Refer to the <a href="changes-report.html">changes document</a> for details on what is being added.
             </p>
         </section>
     </body>
