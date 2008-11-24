@@ -167,7 +167,7 @@ public class XMLDocument extends Document {
         else if (domNode instanceof DomComment || domNode instanceof DomCData) {
             scriptable = new Comment();
         }
-        else if (domNode instanceof DomText ) {
+        else if (domNode instanceof DomText) {
             scriptable = new Text();
         }
         else {
