@@ -65,6 +65,10 @@
         <function name="substringData"/>
     </class>
 
+    <class name="Comment" extends="CharacterDataImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.Comment"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomComment">
+    </class>
+
     <class name="ComputedCSSStyleDeclaration" extends="CSSStyleDeclaration" classname="com.gargoylesoftware.htmlunit.javascript.host.ComputedCSSStyleDeclaration"
         JSObject="true">
     </class>

@@ -670,8 +670,11 @@ public final class HTMLParser {
         /** {@inheritDoc} */
         public void comment(final char[] ch, final int start, final int length) {
             handleCharacters();
-            final DomComment comment = new DomComment(page_, String.valueOf(ch, start, length));
-            currentNode_.appendChild(comment);
+            final String data = String.valueOf(ch, start, length);
+            if (!data.startsWith("[CDATA") || !page_.getWebClient().getBrowserVersion().isIE()) {
+                final DomComment comment = new DomComment(page_, data);
+                currentNode_.appendChild(comment);
+            }
         }
 
         /** {@inheritDoc} */

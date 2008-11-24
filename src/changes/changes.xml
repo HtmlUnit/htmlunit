@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="add" dev="asashour" id="2318054" due-to="Mirko Friedenhagen">
+                JavaScript: add support for Comment object.
+            </action>
             <action type="fix" dev="sdanig" id="2318508">
                 JavaScript: prototype for event handlers should be the function prototype.
             </action>

@@ -414,6 +414,9 @@
         <contributor>
             <name>Mike Dirolf</name>
         </contributor>
+        <contributor>
+            <name>Mirko Friedenhagen</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

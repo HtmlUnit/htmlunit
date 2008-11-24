@@ -164,7 +164,10 @@ public class XMLDocument extends Document {
             attribute.init(domNode.getNodeName(), (DomElement) domNode.getParentNode());
             scriptable = attribute;
         }
-        else if (domNode instanceof DomText || domNode instanceof DomCData || domNode instanceof DomComment) {
+        else if (domNode instanceof DomComment || domNode instanceof DomCData) {
+            scriptable = new Comment();
+        }
+        else if (domNode instanceof DomText ) {
             scriptable = new Text();
         }
         else {
