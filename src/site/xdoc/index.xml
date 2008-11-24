@@ -168,7 +168,7 @@
                 tests, the following libraries are known to work well with HtmlUnit:
                 <ul>
                     <li>jQuery 1.2.6: Excellent support (see unit test <a href="https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/JQuery126Test.java">here</a>)</li>
-                    <li>GWT 1.5.2: Excellent support (see unit test <a href="https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/GWT15Test.java">here</a>)</li>
+                    <li>GWT 1.5.3: Excellent support (see unit test <a href="https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/GWT15Test.java">here</a>)</li>
                     <li>Sarissa 0.9.9.3: Excellent support (see unit test <a href="https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/Sarissa0993Test.java">here</a>)</li>
                     <li>Prototype 1.6.0: Good support (see unit test <a href="https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/Prototype160Test.java">here</a>)</li>
                     <li>Ext JS 2.2: Good support (see unit test <a href="https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/ExtJS22Test.java">here</a>)</li>

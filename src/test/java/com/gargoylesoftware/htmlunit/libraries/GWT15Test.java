@@ -376,7 +376,7 @@ public class GWT15Test extends WebTestCase {
      * @return the GWT directory being tested
      */
     protected String getDirectory() {
-        return "1.5.2";
+        return "1.5.3";
     }
 
     /**
