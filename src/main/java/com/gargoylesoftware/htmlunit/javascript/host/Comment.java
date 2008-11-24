@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 /**
- * A JavaScript object for a Document.
+ * A JavaScript object for a Comment.
  *
  * @version $Revision$
  * @author Mirko Friedenhagen
