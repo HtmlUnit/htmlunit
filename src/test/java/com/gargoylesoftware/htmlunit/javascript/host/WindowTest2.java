@@ -175,4 +175,19 @@ public class WindowTest2 extends WebTestCase {
         assertEquals(expected, actual);
     }
 
+    /**
+     * Verifies that properties added to <tt>Function.prototype</tt> are visible on <tt>window.onload</tt>.
+     * See bug 2318508.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "a", "1" })
+    public void onload_prototype() throws Exception {
+        final String html
+            = "<html><body onload='alert(1)'>\n"
+            + "<script>Function.prototype.x='a'; alert(window.onload.x);</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }

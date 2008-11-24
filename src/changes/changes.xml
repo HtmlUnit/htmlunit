@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="fix" dev="sdanig" id="2318508">
+                JavaScript: prototype for event handlers should be the function prototype.
+            </action>
             <action type="update" dev="sdanig" id="2024729">
                 JavaScript: add support for document.captureEvents (FF).
             </action>

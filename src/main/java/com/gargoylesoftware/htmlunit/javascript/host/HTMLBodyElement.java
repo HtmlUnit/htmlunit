@@ -34,8 +34,8 @@ public class HTMLBodyElement extends HTMLElement {
     }
 
     /**
-     * Creates the event handler from the attribute value. This has to be done no matter
-     * which browser is simulated to handle ill formed html code with may body (may be generated) elements.
+     * Creates the event handler from the attribute value. This has to be done no matter which browser
+     * is simulated to handle ill-formed HTML code with many body (possibly generated) elements.
      * @param attributeName the attribute name
      * @param value the value
      */
