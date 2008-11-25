@@ -267,7 +267,7 @@ public class MouseEvent extends UIEvent {
     static MouseEvent getCurrentMouseEvent() {
         final LinkedList<Event> events = (LinkedList<Event>) Context.getCurrentContext()
             .getThreadLocal(KEY_CURRENT_EVENT);
-        if (events.getLast() instanceof MouseEvent) {
+        if (events != null && !events.isEmpty() && events.getLast() instanceof MouseEvent) {
             return (MouseEvent) events.getLast();
         }
         return null;
