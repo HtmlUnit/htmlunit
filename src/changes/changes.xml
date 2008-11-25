@@ -524,7 +524,7 @@
             <action type="fix" dev="mguillem" id="1678826">
                 JavaScript: fixed document.write(ln) handling of &amp;lt;br&amp;gt; and &amp;lt;hr&amp;gt;.
             </action>
-            <action type="fix" dev="mguillem" id="1990313" due-to="kkolman">
+            <action type="fix" dev="mguillem" id="1990313" due-to="Karel Kolman">
                 JavaScript: improved document.write(ln) support to add nodes to the right parent.
             </action>
             <action type="fix" dev="mguillem">
@@ -1832,7 +1832,7 @@
             <action type="update" dev="sdanig" id="1707726" due-to="Bruce Chapman">
                 When cloning nodes, clone the id attribute as well.
             </action>
-            <action type="update" dev="sdanig" id="1706505" due-to="mtamme">
+            <action type="update" dev="sdanig" id="1706505" due-to="Martin Tamme">
                 Avoid NPEs for responses with null bodies (ie 304 Not Modified responses).
             </action>
             <action type="update" dev="sdanig" id="1707788" due-to="Bruce Chapman">
@@ -1948,7 +1948,7 @@
             <action type="update" dev="mguillem">
                 Upgraded dependencies to Jaxen 1.1, commons-lang 2.2, rhino 1.6R5, commons-io 1.3.
             </action>
-            <action type="update" dev="mguillem" id="1658273" due-to="kkolman">
+            <action type="update" dev="mguillem" id="1658273" due-to="Karel Kolman">
                 Changing element id should not impact child nodes.
             </action>
             <action type="update" dev="mguillem">
@@ -1971,7 +1971,7 @@
                 JavaScript: ensure that script execution is synchronized on the owning html page
                 (for instance using XMLHttpRequest asynchronously).
             </action>
-            <action type="update" dev="mguillem" id="1584525" due-to="kkolman">
+            <action type="update" dev="mguillem" id="1584525" due-to="Karel Kolman">
                 JavaScript: made ThreadManager thread safe.
             </action>
             <action type="update" dev="mguillem" id="1619727" due-to="Deryk Sinotte">
@@ -2351,7 +2351,7 @@
             <action type="update" dev="mguillem" id="1224239" due-to="Daniel Gredler">
                 Added possibility to bypass configured proxy for some hosts.
             </action>
-            <action type="update" dev="mguillem" id="1224239" due-to="Vikram Shitole / Daniel Gredler">
+            <action type="update" dev="mguillem" id="1224239" due-to="Vikram Shitole and Daniel Gredler">
                 Fixed support for NTLM proxy.
             </action>
             <action type="update" dev="mguillem" id="1370484">
@@ -2386,7 +2386,7 @@
             <action type="add" dev="yourgod">
                 All code deprecated prior to 1.6 has been removed
             </action>
-            <action type="add" dev="mguillem" due-to="Stefan Anzinger" id="1343212">
+            <action type="add" dev="mguillem" id="1343212" due-to="Stefan Anzinger">
                 JavaScript: added implementation of IE behavior "#default#download".
             </action>
             <action type="update" dev="mguillem">
@@ -3207,7 +3207,7 @@
                 The common browsers always return uppercase values for the JavaScript nodeName property.
                 Now HtmlUnit does as well.
             </action>
-            <action type="update" dev="mbowler" due-to="cerskine">
+            <action type="update" dev="mbowler" due-to="Chris Erskine">
                 Added support for the IE attribute document.readyState.  Also added the js.log custom
                 logger to aid in debugging JavaScript errors.
             </action>
