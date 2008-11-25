@@ -68,6 +68,15 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      */
     public NamedNodeMap(final DomElement element, final boolean caseInsensitive) {
         caseInsensitive_ = caseInsensitive;
+        setParentScope(element.getScriptObject());
+        setPrototype(getPrototype(getClass()));
+
+        // for IE, there is no node without attribute. A fresh create span has 82 attributes!
+        // just create at least one here to ensure that JS code using this as test for IE will pass
+        if (element.getAttributesMap().isEmpty() && caseInsensitive && getBrowserVersion().isIE()) {
+            element.setAttribute("language", "");
+        }
+
         for (final DomAttr attr : element.getAttributesMap().values()) {
             String name = attr.getName();
             if (caseInsensitive) {
@@ -75,8 +84,6 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
             }
             nodes_.put(name, attr);
         }
-        setParentScope(element.getScriptObject());
-        setPrototype(getPrototype(getClass()));
     }
 
     /**

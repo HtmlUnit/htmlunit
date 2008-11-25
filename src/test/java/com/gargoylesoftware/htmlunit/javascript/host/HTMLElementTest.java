@@ -129,6 +129,34 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
+     * Some libraries like MochiKit looks after the number of attributes of a freshly created node.
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(FF = "0 attribute", IE = "at least 1 attribute")
+    public void attributes() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "    <title>test</title>\n"
+                + "    <script>\n"
+                + "    function doTest(){\n"
+                + "       var myNode = document.body.firstChild;\n"
+                + "       if (myNode.attributes.length == 0)\n"
+                + "         alert('0 attribute');\n"
+                + "       else\n"
+                + "         alert('at least 1 attribute');\n"
+                + "   }\n"
+                + "    </script>\n"
+                + "</head>\n"
+                + "<body onload='doTest()'>" // no \n here!
+                + "<span>test span</span>\n"
+                + "</body>\n"
+                + "</html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
      * @throws Exception on test failure
      */
     @Test

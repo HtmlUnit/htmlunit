@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="fix" dev="mguill">
+                JavaScript: node's attributes collection is never empty for IE.
+            </action>
             <action type="add" dev="asashour" id="2318054" due-to="Mirko Friedenhagen">
                 JavaScript: add support for Comment object.
             </action>
