@@ -3,7 +3,6 @@
     <properties>
         <title>Changes</title>
         <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
-        <author email="mguillem@users.sourceforge.net">Marc Guillemot</author>
     </properties>
 
     <body>
@@ -113,10 +112,10 @@
                 JavaScript: implement element.style.pixelLeft, pixelRight, pixelTop and pixelBottom (IE only).
             </action>
             <action type="fix" dev="mguillem">
-                JavaScript: fire onchange for &lt;input type='file' ...&gt; when field loses focus and value has been changed.
+                JavaScript: fire onchange for &amp;lt;input type='file' ...&amp;gt; when field loses focus and value has been changed.
             </action>
             <action type="fix" dev="mguillem" id="2136816">
-                JavaScript: fire focus event not only on &lt;input ...&gt;.
+                JavaScript: fire focus event not only on &amp;lt;input ...&amp;gt;.
             </action>
             <action type="add" dev="mguillem" id="2060645" due-to="Mike Dirolf">
                 Add support for HTMLDocument.createTreeWalker (FF only).
