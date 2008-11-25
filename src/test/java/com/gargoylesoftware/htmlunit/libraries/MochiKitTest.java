@@ -58,10 +58,10 @@ public class MochiKitTest extends LibraryTestCase {
      * Currently one failure.
      * not ok - methodcaller with a function: got "[org.mozilla.javascript.UniqueTag@5fcf29: DOUBLE_MARK,
      * [2, 3]]", expected "[1, [2, 3]]"
+     * This is due to <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=466661">Rhino bug 466661</a>.
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void base() throws Exception {
         doTest("Base");
     }
