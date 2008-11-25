@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.util.LinkedList;
+
 import org.mozilla.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -263,9 +265,10 @@ public class MouseEvent extends UIEvent {
      * @return the mouse event currently firing
      */
     static MouseEvent getCurrentMouseEvent() {
-        final Event event = (Event) Context.getCurrentContext().getThreadLocal(KEY_CURRENT_EVENT);
-        if (event instanceof MouseEvent) {
-            return (MouseEvent) event;
+        final LinkedList<Event> events = (LinkedList<Event>) Context.getCurrentContext()
+            .getThreadLocal(KEY_CURRENT_EVENT);
+        if (events.getLast() instanceof MouseEvent) {
+            return (MouseEvent) events.getLast();
         }
         return null;
     }

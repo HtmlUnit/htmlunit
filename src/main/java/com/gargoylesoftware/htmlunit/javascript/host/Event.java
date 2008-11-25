@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.util.LinkedList;
+
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 
@@ -213,14 +215,19 @@ public class Event extends SimpleScriptable {
      * Called when the event starts being fired
      */
     void startFire() {
-        Context.getCurrentContext().putThreadLocal(KEY_CURRENT_EVENT, this);
+        LinkedList<Event> events = (LinkedList<Event>) Context.getCurrentContext().getThreadLocal(KEY_CURRENT_EVENT);
+        if (events == null) {
+            events = new LinkedList<Event>();
+            Context.getCurrentContext().putThreadLocal(KEY_CURRENT_EVENT, events);
+        }
+        events.add(this);
     }
 
     /**
      * Called when the event starts being fired
      */
     void endFire() {
-        Context.getCurrentContext().removeThreadLocal(KEY_CURRENT_EVENT);
+        ((LinkedList<Event>) Context.getCurrentContext().getThreadLocal(KEY_CURRENT_EVENT)).removeLast();
     }
 
     /**
