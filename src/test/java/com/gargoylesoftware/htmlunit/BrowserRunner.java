@@ -183,16 +183,16 @@ public class BrowserRunner extends Suite {
 
     static String getDescription(final BrowserVersion browserVersion) {
         if (browserVersion == BrowserVersion.INTERNET_EXPLORER_6) {
-            return "Internet Explorer 6";
+            return "IE6";
         }
         else if (browserVersion == BrowserVersion.INTERNET_EXPLORER_7) {
-            return "Internet Explorer 7";
+            return "IE7";
         }
         else if (browserVersion == BrowserVersion.FIREFOX_2) {
-            return "Firefox 2";
+            return "FF2";
         }
         else if (browserVersion == BrowserVersion.FIREFOX_3) {
-            return "Firefox 3";
+            return "FF3";
         }
         else {
             return browserVersion.getApplicationName() + browserVersion.getApplicationVersion();

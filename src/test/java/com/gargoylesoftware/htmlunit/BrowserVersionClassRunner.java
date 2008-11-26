@@ -105,7 +105,11 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
     protected String testName(final FrameworkMethod method) {
         String className = method.getMethod().getDeclaringClass().getName();
         className = className.substring(className.lastIndexOf('.') + 1);
-        return String.format("%s[%s]", className + '.' + method.getName(),
+        String prefix = "";
+        if (isNotYetImplemented(method)) {
+            prefix = "(NYI) ";
+        }
+        return String.format("%s%s [%s]", prefix, className + '.' + method.getName(),
             BrowserRunner.getDescription(browserVersion_));
     }
 
@@ -200,12 +204,17 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         final Browsers browsers = method.getAnnotation(Browsers.class);
         final boolean shouldFail = browsers != null && !isDefinedIn(browsers.value());
 
-        final NotYetImplemented notYetImplementedBrowsers = method.getAnnotation(NotYetImplemented.class);
-        final boolean notYetImplemented = notYetImplementedBrowsers != null
-            && isDefinedIn(notYetImplementedBrowsers.value());
+        final boolean notYetImplemented = isNotYetImplemented(method);
         setAlerts(testCase, method.getMethod());
         statement = new BrowserStatement(statement, method.getMethod(), shouldFail,
                 notYetImplemented, BrowserRunner.getDescription(browserVersion_));
         return statement;
+    }
+
+    private boolean isNotYetImplemented(final FrameworkMethod method) {
+        final NotYetImplemented notYetImplementedBrowsers = method.getAnnotation(NotYetImplemented.class);
+        final boolean notYetImplemented = notYetImplementedBrowsers != null
+            && isDefinedIn(notYetImplementedBrowsers.value());
+        return notYetImplemented;
     }
 }
