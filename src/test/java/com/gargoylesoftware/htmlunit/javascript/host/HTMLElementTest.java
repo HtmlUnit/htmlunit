@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
@@ -130,9 +131,12 @@ public class HTMLElementTest extends WebTestCase {
 
     /**
      * Some libraries like MochiKit looks after the number of attributes of a freshly created node.
+     * When this is fixed for IE, all {@link com.gargoylesoftware.htmlunit.libraries.MochiKitTest}
+     * working for FF will work for IE too.
      * @throws Exception on test failure
      */
     @Test
+    @NotYetImplemented({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     @Alerts(FF = "0 attribute", IE = "at least 1 attribute")
     public void attributes() throws Exception {
         final String html = "<html>\n"
