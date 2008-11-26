@@ -2472,7 +2472,7 @@
             <action type="update" dev="mguillem">
                 JavaScript: default conversion of host objects to string is now "[object Xxxx]" like what Mozilla does
             </action>
-            <action type="update" dev="mguillem" id="1289462" due-to="loddel">
+            <action type="update" dev="mguillem" id="1289462" due-to="Lothar Märkle">
                 DomNode.asXml() now produces correct xml encoding special characters.
             </action>
             <action type="update" dev="mguillem" id="1267106" due-to="Bruce Faulkner">
