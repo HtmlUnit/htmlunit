@@ -20,7 +20,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -110,20 +109,6 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * Overrides {@link DomNode#cloneNode(boolean)} so clone gets its own Map of attributes.
-     * {@inheritDoc}
-     */
-    @Override
-    public DomNode cloneNode(final boolean deep) {
-        final HtmlElement newNode = (HtmlElement) super.cloneNode(deep);
-        newNode.setAttributes(createAttributeMap(attributes().size()));
-        for (final DomAttr attr : attributes().values()) {
-            newNode.setAttributeValue(attr.getNamespaceURI(), attr.getQualifiedName(), attr.getNodeValue(), true);
-        }
-        return newNode;
-    }
-
-    /**
      * Returns the value of the specified attribute or an empty string. If the
      * result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
      * if the attribute wasn't specified or {@link #ATTRIBUTE_VALUE_EMPTY} if the
@@ -167,9 +152,7 @@ public abstract class HtmlElement extends DomElement {
         final String oldAttributeValue = getAttributeValue(qualifiedName);
         String value = attributeValue;
 
-        if (attributes() == Collections.EMPTY_MAP) {
-            setAttributes(createAttributeMap(1));
-        }
+        setAttributeNS(namespaceURI, qualifiedName.toLowerCase(), attributeValue);
         if (value.length() == 0) {
             value = ATTRIBUTE_VALUE_EMPTY;
         }
@@ -177,13 +160,6 @@ public abstract class HtmlElement extends DomElement {
         // TODO: Clean up; this is a hack for HtmlElement living within an XmlPage.
         if ((getOwnerDocument() instanceof HtmlPage)) {
             ((HtmlPage) getPage()).removeMappedElement(this);
-        }
-
-        final DomAttr newAttr = addAttributeToMap((SgmlPage) getOwnerDocument(), attributes(), namespaceURI,
-            qualifiedName.toLowerCase(), value);
-        newAttr.setParentNode(this);
-        if (namespaceURI != null) {
-            namespaces().put(namespaceURI, newAttr.getPrefix());
         }
 
         // TODO: Clean up; this is a hack for HtmlElement living within an XmlPage.
