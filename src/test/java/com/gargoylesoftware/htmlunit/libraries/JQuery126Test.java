@@ -29,10 +29,13 @@ import org.junit.Before;
 import org.junit.ComparisonFailure;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mortbay.jetty.Server;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlListItem;
 import com.gargoylesoftware.htmlunit.html.HtmlOrderedList;
@@ -48,6 +51,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 @RunWith(BrowserRunner.class)
 public class JQuery126Test extends WebTestCase {
 
+    private Server server_;
     private List<String> failures_;
 
     /**
@@ -60,9 +64,12 @@ public class JQuery126Test extends WebTestCase {
 
     /**
      * After.
+     * @throws Exception if an error occurs
      */
     @After
-    public void after() {
+    public void after() throws Exception {
+        HttpWebConnectionTest.stopWebServer(server_);
+        server_ = null;
         final StringBuilder sb = new StringBuilder();
         for (final String error : failures_) {
             sb.append('\n').append(error);
@@ -86,9 +93,10 @@ public class JQuery126Test extends WebTestCase {
      */
     @Test
     @SuppressWarnings("unchecked")
+    @NotYetImplemented
     public void test() throws Exception {
         final Iterator<HtmlElement> it = loadPage();
-        final String resource = "jquery/" + getVersion() + "/expected." + getBrowserVersion().getNickname() + ".txt";
+        final String resource = "jquery/" + getVersion() + "/live." + getBrowserVersion().getNickname() + ".txt";
         final URL url = getClass().getClassLoader().getResource(resource);
         assertNotNull(url);
         final List<String> lines = FileUtils.readLines(new File(url.toURI()), "UTF-8");
@@ -121,10 +129,8 @@ public class JQuery126Test extends WebTestCase {
      * @throws Exception if an error occurs
      */
     protected Iterator<HtmlElement> loadPage() throws Exception {
-        final String resource = "jquery/" + getVersion() + "/test/index.html";
-        final URL url = getClass().getClassLoader().getResource(resource);
-        assertNotNull(url);
-
+        server_ = HttpWebConnectionTest.startWebServer("src/test/resources/jquery/" + getVersion());
+        final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/test/index.html";
         final WebClient client = getWebClient();
 
         final HtmlPage page = client.getPage(url);
