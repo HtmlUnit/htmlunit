@@ -35,7 +35,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core.html#ID-1780488922">DOM Level 2 Core Spec</a>
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms763824.aspx">IXMLDOMNamedNodeMap</a>
  */
-public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFallbackGetter, org.w3c.dom.NamedNodeMap {
+public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFallbackGetter {
 
     private static final long serialVersionUID = -1910087049570242560L;
 
@@ -47,11 +47,6 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * when dealing with HTML.
      */
     private final boolean caseInsensitive_;
-
-    /**
-     * Empty instance.
-     */
-    public static final org.w3c.dom.NamedNodeMap EMPTY_NODE_MAP = new NamedNodeMap();
 
     /**
      * Rhino requires default constructors.

@@ -292,7 +292,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     @Override
     public NamedNodeMap getAttributes() {
-        return new com.gargoylesoftware.htmlunit.javascript.NamedNodeMap(this, false);
+        return attributes_;
     }
 
     /**
@@ -302,7 +302,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param attributeValue the value of the attribute
      */
     public final void setAttribute(final String attributeName, final String attributeValue) {
-        setAttributeValue(null, attributeName, attributeValue);
+        setAttributeNS(null, attributeName, attributeValue);
     }
 
     /**
@@ -312,7 +312,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param qualifiedName the qualified name (prefix:local) of the attribute
      * @param attributeValue the value of the attribute
      */
-    public final void setAttributeNS(final String namespaceURI, final String qualifiedName,
+    public void setAttributeNS(final String namespaceURI, final String qualifiedName,
             final String attributeValue) {
         final String value = attributeValue;
 
@@ -333,9 +333,11 @@ public class DomElement extends DomNamespaceNode implements Element {
      *
      * @param attributeName the name of the attribute
      * @param attributeValue the value of the attribute
+     * @deprecated since version 2.4. Use {@link #setAttribute(String, String)}.
      */
-    public void setAttributeValue(final String attributeName, final String attributeValue) {
-        setAttributeValue(null, attributeName, attributeValue);
+    @Deprecated
+    public final void setAttributeValue(final String attributeName, final String attributeValue) {
+        setAttributeNS(null, attributeName, attributeValue);
     }
 
     /**
@@ -344,8 +346,9 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the attribute
      * @param attributeValue the value of the attribute
+     * @deprecated since version 2.4. Use {@link #setAttributeNS(String, String, String)}.
      */
-    public void setAttributeValue(final String namespaceURI, final String qualifiedName,
+    public final void setAttributeValue(final String namespaceURI, final String qualifiedName,
             final String attributeValue) {
         setAttributeNS(namespaceURI, qualifiedName, attributeValue);
     }
@@ -578,5 +581,16 @@ class NamedAttrNodeMapImpl extends MapWrapper<String, DomAttr> implements NamedN
     public void clear() {
         attrPositions_.clear();
         super.clear();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void putAll(final Map< ? extends String, ? extends DomAttr> t) {
+        // add one after the other to save the positions
+        for (final Map.Entry< ? extends String, ? extends DomAttr> entry : t.entrySet()) {
+            put(entry.getKey(), entry.getValue());
+        }
     }
 }

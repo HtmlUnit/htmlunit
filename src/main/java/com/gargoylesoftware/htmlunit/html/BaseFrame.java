@@ -286,16 +286,14 @@ public abstract class BaseFrame extends StyledElement {
      * {@inheritDoc}
      */
     @Override
-    protected final void setAttributeValue(final String namespaceURI, final String qualifiedName,
-        String attributeValue, final boolean cloning) {
-
+    public void setAttributeNS(final String namespaceURI, final String qualifiedName,  String attributeValue) {
         if (qualifiedName.equals("src")) {
             attributeValue = attributeValue.trim();
         }
 
-        super.setAttributeValue(namespaceURI, qualifiedName, attributeValue, cloning);
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
 
-        if (qualifiedName.equals("src") && !cloning) {
+        if (qualifiedName.equals("src")) {
             final JavaScriptEngine jsEngine = getPage().getWebClient().getJavaScriptEngine();
             // when src is set from a script, loading is postponed until script finishes
             // in fact this implementation is probably wrong: javascript url should be first evaluated

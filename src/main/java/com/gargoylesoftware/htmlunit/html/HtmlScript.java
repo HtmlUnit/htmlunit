@@ -165,25 +165,25 @@ public class HtmlScript extends HtmlElement {
         return getDeferAttribute() != ATTRIBUTE_NOT_DEFINED;
     }
 
-    /**
+       /**
      * If setting the <tt>src</tt> attribute, this method executes the new JavaScript if necessary
      * (behavior varies by browser version). {@inheritDoc}
+     * {@inheritDoc}
      */
     @Override
-    protected void setAttributeValue(final String namespaceURI, final String qualifiedName,
-        final String attributeValue, final boolean cloning) {
+    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
+        final String oldValue = getAttributeNS(namespaceURI, qualifiedName);
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
 
         boolean execute = false;
-        if (namespaceURI == null && "src".equals(qualifiedName) && !cloning) {
+        if (namespaceURI == null && "src".equals(qualifiedName)) {
             final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
-            if (ie || (getAttribute("src").length() == 0 && getFirstChild() == null)) {
+            if (ie || (oldValue.length() == 0 && getFirstChild() == null)) {
                 // Always execute if IE; if FF, only execute if the "src" attribute
                 // was undefined and there was no inline code.
                 execute = true;
             }
         }
-
-        super.setAttributeValue(namespaceURI, qualifiedName, attributeValue, cloning);
 
         if (execute) {
             executeScriptIfNeeded(true);

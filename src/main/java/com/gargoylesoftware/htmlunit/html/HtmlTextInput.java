@@ -79,19 +79,19 @@ public class HtmlTextInput extends HtmlInput {
         String value = getValueAttribute();
         if (c == '\b') {
             if (value.length() > 0) {
-                setAttributeValue("value", value.substring(0, value.length() - 1));
+                setAttribute("value", value.substring(0, value.length() - 1));
             }
         }
         else if ((c == ' ' || !Character.isWhitespace(c))) {
             if (getSelectionStart() != getSelectionEnd()) {
                 value = value.substring(0, getSelectionStart()) + c + value.substring(getSelectionEnd());
                 final int newSelectionPoint = getSelectionStart() + 1;
-                setAttributeValue("value", value);
+                setAttribute("value", value);
                 setSelectionStart(newSelectionPoint);
                 setSelectionEnd(newSelectionPoint);
             }
             else {
-                setAttributeValue("value", value + c);
+                setAttribute("value", value + c);
             }
         }
     }
@@ -200,12 +200,10 @@ public class HtmlTextInput extends HtmlInput {
      * {@inheritDoc}
      */
     @Override
-    public void setAttributeValue(final String namespaceURI, final String qualifiedName,
-        final String attributeValue, final boolean cloning) {
+    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
 
-        super.setAttributeValue(namespaceURI, qualifiedName, attributeValue, cloning);
-
-        if (qualifiedName.equals("value") && !cloning) {
+        if (qualifiedName.equals("value")) {
             setSelectionStart(attributeValue.length());
             setSelectionEnd(attributeValue.length());
         }

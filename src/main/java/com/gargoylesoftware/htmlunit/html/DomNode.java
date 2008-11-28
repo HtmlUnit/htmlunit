@@ -1044,7 +1044,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      */
     public NamedNodeMap getAttributes() {
-        return com.gargoylesoftware.htmlunit.javascript.NamedNodeMap.EMPTY_NODE_MAP;
+        return NamedAttrNodeMapImpl.EMPTY_MAP;
     }
 
     /**

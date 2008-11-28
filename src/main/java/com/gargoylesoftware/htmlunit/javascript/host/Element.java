@@ -15,13 +15,10 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
-import org.mozilla.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -40,6 +37,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 public class Element extends EventNode {
 
     private static final long serialVersionUID = 5616690634173934926L;
+    private NamedNodeMap attributes_;
 
     /**
      * Applies the specified XPath expression to this node's context and returns the generated list of matching nodes.
@@ -76,14 +74,21 @@ public class Element extends EventNode {
 
     /**
      * Returns the attributes of this XML element.
+     * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.attributes">Gecko DOM Reference</a>
      * @return the attributes of this XML element
      */
     public Object jsxGet_attributes() {
-        final Map<String, DomAttr> attributes = ((DomElement) getDomNodeOrDie()).getAttributesMap();
-        final List<ScriptableObject> list = new ArrayList<ScriptableObject>();
-        for (final DomAttr attr : attributes.values()) {
-            list.add(attr.getScriptObject());
+        if (attributes_ == null) {
+            attributes_ = createAttributesObject();
         }
+        return attributes_;
+    }
+
+    /**
+     * Creates the JS object for the property attributes. This object will the be cached.
+     * @return the JS object
+     */
+    protected NamedNodeMap createAttributesObject() {
         return new NamedNodeMap((DomElement) getDomNodeOrDie(), false);
     }
 
@@ -92,12 +97,22 @@ public class Element extends EventNode {
      * @param attributeName attribute name
      * @return the value of the specified attribute, <code>null</code> if the attribute is not defined
      */
-    public String jsxFunction_getAttribute(final String attributeName) {
+    public String jsxFunction_getAttribute(String attributeName) {
+        attributeName = fixAttributeName(attributeName);
         final String value = ((DomElement) getDomNodeOrDie()).getAttributeValue(attributeName);
         if (value == DomElement.ATTRIBUTE_NOT_DEFINED) {
             return null;
         }
         return value;
+    }
+
+    /**
+     * Allows subclasses to transform the attribute name before it gets used.
+     * @param attributeName the original attribute
+     * @return this implementation returns the original value
+     */
+    protected String fixAttributeName(final String attributeName) {
+        return attributeName;
     }
 
     /**
@@ -199,6 +214,8 @@ public class Element extends EventNode {
 
     /**
      * Returns true when an attribute with a given name is specified on this element or has a default value.
+     * See also <a href="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/core.html#ID-ElHasAttr">
+     * the DOM reference</a>
      * @param name the name of the attribute to look for
      * @return true if an attribute with the given name is specified on this element or has a default value
      */

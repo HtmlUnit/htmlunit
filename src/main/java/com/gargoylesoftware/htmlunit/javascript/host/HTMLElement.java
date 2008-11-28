@@ -47,6 +47,7 @@ import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
@@ -347,36 +348,19 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns a collection of the attributes of this element.
-     * @return a collection of the attributes of this element
-     * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.attributes">Gecko DOM Reference</a>
+     * Creates the JS object for the property attributes. This object will the be cached.
+     * @return the JS object
      */
-    @Override
-    public NamedNodeMap jsxGet_attributes() {
-        return new NamedNodeMap(getHtmlElementOrDie(), true);
+    protected NamedNodeMap createAttributesObject() {
+        return new NamedNodeMap((DomElement) getDomNodeOrDie(), true);
     }
 
     /**
-     * Gets the specified attribute.
-     * @param attributeName attribute name
-     * @return the value of the specified attribute, <code>null</code> if the attribute is not defined
-     */
-    @Override
-    public String jsxFunction_getAttribute(String attributeName) {
-        attributeName = fixAttributeName(attributeName);
-        final String value = getHtmlElementOrDie().getAttributeValue(attributeName);
-        if (value == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
-            return null;
-        }
-        return value;
-    }
-
-    /**
-     * For IE, foo.getAttribute(x) uses same names as foo.x
+     * For IE, foo.getAttribute(x) uses same names as foo.x.
      * @param attributeName the name
      * @return the real name
      */
-    private String fixAttributeName(final String attributeName) {
+    protected String fixAttributeName(final String attributeName) {
         if (getBrowserVersion().isIE()) {
             if ("className".equals(attributeName)) {
                 return "class";
@@ -401,19 +385,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Test for attribute.
-     * See also <a href="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/core.html#ID-ElHasAttr">
-     * the DOM reference</a>
-     *
-     * @param name Name of the attribute to test
-     * @return <code>true</code> if the node has this attribute
-     */
-    @Override
-    public boolean jsxFunction_hasAttribute(final String name) {
-        return getHtmlElementOrDie().getAttribute(name) != HtmlElement.ATTRIBUTE_NOT_DEFINED;
-    }
-
-    /**
-     * Test for attribute.
      * See also <a href="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/core.html#ID-ElHasAttrNS">
      * the DOM reference</a>
      *
@@ -422,7 +393,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return <code>true</code> if the node has this attribute
      */
     public boolean jsxFunction_hasAttributeNS(final String namespaceURI, final String localName) {
-        return getHtmlElementOrDie().getAttributeNS(namespaceURI, localName) != HtmlElement.ATTRIBUTE_NOT_DEFINED;
+        return getHtmlElementOrDie().hasAttributeNS(namespaceURI, localName);
     }
 
     /**

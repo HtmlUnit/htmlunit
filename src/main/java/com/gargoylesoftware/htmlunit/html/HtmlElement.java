@@ -40,7 +40,6 @@ import org.w3c.dom.Comment;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.EntityReference;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
@@ -123,19 +122,6 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * Sets the value of the specified attribute.
-     *
-     * @param namespaceURI the URI that identifies an XML namespace
-     * @param qualifiedName the qualified name of the attribute
-     * @param attributeValue the value of the attribute
-     */
-    @Override
-    public final void setAttributeValue(final String namespaceURI, final String qualifiedName,
-        final String attributeValue) {
-        setAttributeValue(namespaceURI, qualifiedName, attributeValue, false);
-    }
-
-    /**
      * Sets the value of the specified attribute. This method may be overridden by subclasses
      * which are interested in specific attribute value changes, but such methods <b>must</b>
      * invoke <tt>super.setAttributeValue()</tt>, and <b>should</b> consider the value of the
@@ -144,29 +130,30 @@ public abstract class HtmlElement extends DomElement {
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the attribute
      * @param attributeValue the value of the attribute
-     * @param cloning whether or not this attribute value change is the result of a node clone operation
      */
-    protected void setAttributeValue(final String namespaceURI, final String qualifiedName,
-        final String attributeValue, final boolean cloning) {
+    @Override
+    public void setAttributeNS(final String namespaceURI, final String qualifiedName,
+            final String attributeValue) {
 
         final String oldAttributeValue = getAttributeValue(qualifiedName);
         String value = attributeValue;
 
-        setAttributeNS(namespaceURI, qualifiedName.toLowerCase(), attributeValue);
-        if (value.length() == 0) {
-            value = ATTRIBUTE_VALUE_EMPTY;
+        if (getOwnerDocument() instanceof HtmlPage) {
+            ((HtmlPage) getPage()).removeMappedElement(this);
         }
 
-        // TODO: Clean up; this is a hack for HtmlElement living within an XmlPage.
-        if ((getOwnerDocument() instanceof HtmlPage)) {
-            ((HtmlPage) getPage()).removeMappedElement(this);
+        super.setAttributeNS(namespaceURI, qualifiedName.toLowerCase(), attributeValue);
+        if (value.length() == 0) {
+            value = ATTRIBUTE_VALUE_EMPTY;
         }
 
         // TODO: Clean up; this is a hack for HtmlElement living within an XmlPage.
         if (!(getOwnerDocument() instanceof HtmlPage)) {
             return;
         }
-        ((HtmlPage) getPage()).addMappedElement(this);
+
+        final HtmlPage htmlPage = (HtmlPage) getPage();
+        htmlPage.addMappedElement(this);
 
         final HtmlAttributeChangeEvent htmlEvent;
         if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
@@ -346,14 +333,6 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public NamedNodeMap getAttributes() {
-        return new com.gargoylesoftware.htmlunit.javascript.NamedNodeMap(this, true);
-    }
-
-    /**
      * @return a collection of {@link DomAttr} objects representing the
      * attributes of this element. The elements are ordered as found in the HTML source code.
      * @deprecated As of 2.4, please use {@link #getAttributes()} instead.
@@ -389,7 +368,7 @@ public abstract class HtmlElement extends DomElement {
      * @param newId the new identifier of this element
      */
     public final void setId(final String newId) {
-        setAttributeValue("id", newId);
+        setAttribute("id", newId);
     }
 
     /**
