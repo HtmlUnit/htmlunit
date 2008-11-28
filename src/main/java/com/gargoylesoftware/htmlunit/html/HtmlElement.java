@@ -1185,6 +1185,7 @@ public abstract class HtmlElement extends DomElement {
      * Indicates if the attribute names are case sensitive.
      * @return <code>false</code>
      */
+    @Override
     protected boolean isAttributeCaseSensitive() {
         return false;
     }

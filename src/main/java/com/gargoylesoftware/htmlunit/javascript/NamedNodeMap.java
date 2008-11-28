@@ -47,7 +47,6 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * Creates a new named node map for the specified element.
      *
      * @param element the owning element
-     * @param caseInsensitive whether to ignore case or no
      */
     public NamedNodeMap(final DomElement element) {
         setParentScope(element.getScriptObject());

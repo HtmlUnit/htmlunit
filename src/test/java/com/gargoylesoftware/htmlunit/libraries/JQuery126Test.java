@@ -74,7 +74,7 @@ public class JQuery126Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented({ Browser.INTERNET_EXPLORER_6, Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     public void test() throws Exception {
         server_ = HttpWebConnectionTest.startWebServer("src/test/resources/jquery/" + getVersion());
         runTest();
