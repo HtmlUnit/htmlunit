@@ -154,5 +154,18 @@ INFO: Redirect requested but followRedirects is disabled
 			</answer>
 		</faq>
 
+		<faq id="MemoryLeak">
+			<question>
+				HtmlUnit appears to be leaking memory; what's the deal?
+			</question>
+			<answer>
+				<p>
+					Make sure (a) that you are using the latest version of HtmlUnit, and
+					(b) that you are calling WebClient.closeAllWindows() when you are
+					finished with your WebClient instance.
+				</p>
+			</answer>
+		</faq>
+
 	</part>
 </faqs>
