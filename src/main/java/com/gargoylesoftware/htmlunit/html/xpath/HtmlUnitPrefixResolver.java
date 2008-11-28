@@ -48,7 +48,7 @@ final class HtmlUnitPrefixResolver extends PrefixResolverDefault {
         String namespace = super.getNamespaceForPrefix(prefix, namespaceContext);
         if (namespace == null) {
             if (namespaceContext instanceof XmlPage) {
-                final DomElement documentElement = ((XmlPage) namespaceContext).getDocumentXmlElement();
+                final DomElement documentElement = ((XmlPage) namespaceContext).getDocumentElement();
                 if (documentElement != null) {
                     namespace = getNamespace(documentElement, prefix);
                 }

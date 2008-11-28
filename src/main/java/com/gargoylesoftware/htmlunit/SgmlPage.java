@@ -21,6 +21,7 @@ import org.w3c.dom.Element;
 
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomDocumentType;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 
 /**
@@ -37,7 +38,7 @@ public abstract class SgmlPage extends DomNode implements Page {
     private final WebResponse webResponse_;
     private WebWindow enclosingWindow_;
     private final WebClient webClient_;
-    private Element documentElement_;
+    private DomElement documentElement_;
 
     /**
      * Creates an instance of SgmlPage.
@@ -172,13 +173,13 @@ public abstract class SgmlPage extends DomNode implements Page {
      * Returns the document element.
      * @return the document element
      */
-    public Element getDocumentElement() {
+    public DomElement getDocumentElement() {
         if (documentElement_ == null) {
             DomNode childNode = getFirstChild();
-            while (childNode != null && !(childNode instanceof Element)) {
+            while (childNode != null && !(childNode instanceof DomElement)) {
                 childNode = childNode.getNextSibling();
             }
-            documentElement_ = (Element) childNode;
+            documentElement_ = (DomElement) childNode;
         }
         return documentElement_;
     }

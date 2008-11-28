@@ -43,7 +43,6 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomDocumentType;
 import com.gargoylesoftware.htmlunit.html.DomElement;
-import com.gargoylesoftware.htmlunit.html.DomNode;
 
 /**
  * A page that will be returned for response with content type "text/xml".
@@ -152,14 +151,11 @@ public class XmlPage extends SgmlPage implements Document {
     /**
      * Gets the root XmlElement of this document.
      * @return the root element
+     * @deprecated As of 2.4, please use {@link #getDocumentElement()} instead.
      */
-    //TODO: should be removed later to SgmlPage
+    @Deprecated
     public DomElement getDocumentXmlElement() {
-        DomNode childNode = getFirstChild();
-        while (childNode != null && !(childNode instanceof DomElement)) {
-            childNode = childNode.getNextSibling();
-        }
-        return (DomElement) childNode;
+        return getDocumentElement();
     }
 
     /**
@@ -197,7 +193,7 @@ public class XmlPage extends SgmlPage implements Document {
      */
     @Override
     public String asXml() {
-        return getDocumentXmlElement().asXml();
+        return getDocumentElement().asXml();
     }
 
     /**
