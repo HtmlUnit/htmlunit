@@ -230,7 +230,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      *
      * @param attributeName the name of the attribute
      * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED}
-     * @deprecated since HtmlUnit-2.4. Use standard DOM method {@link #getAttribute(String)} instead. 
+     * @deprecated since HtmlUnit-2.4. Use standard DOM method {@link #getAttribute(String)} instead.
      */
     @Deprecated
     public final String getAttributeValue(final String attributeName) {
