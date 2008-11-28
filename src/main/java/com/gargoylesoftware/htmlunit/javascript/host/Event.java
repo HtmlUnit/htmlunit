@@ -214,6 +214,7 @@ public class Event extends SimpleScriptable {
     /**
      * Called when the event starts being fired
      */
+    @SuppressWarnings("unchecked")
     void startFire() {
         LinkedList<Event> events = (LinkedList<Event>) Context.getCurrentContext().getThreadLocal(KEY_CURRENT_EVENT);
         if (events == null) {
@@ -226,6 +227,7 @@ public class Event extends SimpleScriptable {
     /**
      * Called when the event starts being fired
      */
+    @SuppressWarnings("unchecked")
     void endFire() {
         ((LinkedList<Event>) Context.getCurrentContext().getThreadLocal(KEY_CURRENT_EVENT)).removeLast();
     }

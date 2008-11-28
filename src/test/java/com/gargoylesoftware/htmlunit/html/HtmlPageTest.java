@@ -1617,13 +1617,13 @@ public class HtmlPageTest extends WebTestCase {
         page.addHtmlAttributeChangeListener(listener1);
 
         final HtmlElement p = page.getHtmlElementById("p1");
-        p.setAttributeValue("title", "new title");
+        p.setAttribute("title", "new title");
 
         final String[] expectedValues = {"in listener 1"};
         assertEquals(expectedValues, collector);
         collector.clear();
 
-        p.setAttributeValue("title", "new new title");
+        p.setAttribute("title", "new new title");
         final String[] expectedValues2 = {"in listener 1", "in listener 2"};
         assertEquals(expectedValues2, collector);
     }

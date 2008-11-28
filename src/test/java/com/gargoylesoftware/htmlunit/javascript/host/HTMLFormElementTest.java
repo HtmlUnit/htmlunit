@@ -1261,7 +1261,7 @@ public class HTMLFormElementTest extends WebTestCase {
         final HtmlPage page = loadPage(html, collectedAlerts);
         final HtmlFileInput fileInput = page.getHtmlElementById("myFile");
         fileInput.focus();
-        fileInput.setAttributeValue("value", "dummy.txt");
+        fileInput.setAttribute("value", "dummy.txt");
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
         // remove focus to trigger onchange
         page.setFocusedElement(null);

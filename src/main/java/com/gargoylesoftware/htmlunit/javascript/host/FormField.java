@@ -58,7 +58,7 @@ public class FormField extends HTMLElement {
      * @return the value of this attribute
      */
     public String jsxGet_value() {
-        return getHtmlElementOrDie().getAttributeValue("value");
+        return getHtmlElementOrDie().getAttribute("value");
     }
 
     /**
@@ -67,7 +67,7 @@ public class FormField extends HTMLElement {
      * @param newValue  the new value
      */
     public void jsxSet_value(final String newValue) {
-        getHtmlElementOrDie().setAttributeValue("value", newValue);
+        getHtmlElementOrDie().setAttribute("value", newValue);
     }
 
     /**
@@ -76,7 +76,7 @@ public class FormField extends HTMLElement {
      * @return the value of this attribute
      */
     public String jsxGet_name() {
-        return getHtmlElementOrDie().getAttributeValue("name");
+        return getHtmlElementOrDie().getAttribute("name");
     }
 
     /**
@@ -85,7 +85,7 @@ public class FormField extends HTMLElement {
      * @param newName  the new name
      */
     public void jsxSet_name(final String newName) {
-        getHtmlElementOrDie().setAttributeValue("name", newName);
+        getHtmlElementOrDie().setAttribute("name", newName);
     }
 
     /**
@@ -107,7 +107,7 @@ public class FormField extends HTMLElement {
      * @return the value of this attribute
      */
     public String jsxGet_type() {
-        return getHtmlElementOrDie().getAttributeValue("type");
+        return getHtmlElementOrDie().getAttribute("type");
     }
 
     /**
@@ -141,7 +141,7 @@ public class FormField extends HTMLElement {
     public int jsxGet_tabIndex() {
         int index = 0;
         try {
-            index = Integer.parseInt(getHtmlElementOrDie().getAttributeValue("tabindex"));
+            index = Integer.parseInt(getHtmlElementOrDie().getAttribute("tabindex"));
         }
         catch (final Exception e) {
             //ignore

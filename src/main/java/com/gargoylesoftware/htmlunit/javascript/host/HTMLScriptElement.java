@@ -43,7 +43,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @return the <tt>src</tt> attribute
      */
     public String jsxGet_src() {
-        return getHtmlElementOrDie().getAttributeValue("src");
+        return getHtmlElementOrDie().getAttribute("src");
     }
 
     /**
@@ -51,7 +51,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @param src the <tt>src</tt> attribute
      */
     public void jsxSet_src(final String src) {
-        getHtmlElementOrDie().setAttributeValue("src", src);
+        getHtmlElementOrDie().setAttribute("src", src);
     }
 
     /**
@@ -88,7 +88,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @return the <tt>type</tt> attribute
      */
     public String jsxGet_type() {
-        return getHtmlElementOrDie().getAttributeValue("type");
+        return getHtmlElementOrDie().getAttribute("type");
     }
 
     /**
@@ -96,7 +96,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @param type the <tt>type</tt> attribute
      */
     public void jsxSet_type(final String type) {
-        getHtmlElementOrDie().setAttributeValue("type", type);
+        getHtmlElementOrDie().setAttribute("type", type);
     }
 
     /**

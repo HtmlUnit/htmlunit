@@ -1001,9 +1001,9 @@ public class WebClientTest extends WebTestCase {
 
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{"1", "2", "3"});
 
-        assertEquals("submit0", page.pressAccessKey('a').getAttributeValue("name"));
-        assertEquals("submit2", page.pressAccessKey('c').getAttributeValue("name"));
-        assertEquals("submit1", page.pressAccessKey('b').getAttributeValue("name"));
+        assertEquals("submit0", page.pressAccessKey('a').getAttribute("name"));
+        assertEquals("submit2", page.pressAccessKey('c').getAttribute("name"));
+        assertEquals("submit1", page.pressAccessKey('b').getAttribute("name"));
 
         final String[] expectedAlerts = {"focus-0", "blur-0", "focus-2", "blur-2", "focus-1"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1021,9 +1021,9 @@ public class WebClientTest extends WebTestCase {
 
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{"1", "2", "3"});
 
-        assertEquals("submit0", page.tabToNextElement().getAttributeValue("name"));
-        assertEquals("submit1", page.tabToNextElement().getAttributeValue("name"));
-        assertEquals("submit2", page.tabToNextElement().getAttributeValue("name"));
+        assertEquals("submit0", page.tabToNextElement().getAttribute("name"));
+        assertEquals("submit1", page.tabToNextElement().getAttribute("name"));
+        assertEquals("submit2", page.tabToNextElement().getAttribute("name"));
 
         final String[] expectedAlerts = {"focus-0", "blur-0", "focus-1", "blur-1", "focus-2"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1041,9 +1041,9 @@ public class WebClientTest extends WebTestCase {
 
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{"1", "2", "3"});
 
-        assertEquals("submit2", page.tabToPreviousElement().getAttributeValue("name"));
-        assertEquals("submit1", page.tabToPreviousElement().getAttributeValue("name"));
-        assertEquals("submit0", page.tabToPreviousElement().getAttributeValue("name"));
+        assertEquals("submit2", page.tabToPreviousElement().getAttribute("name"));
+        assertEquals("submit1", page.tabToPreviousElement().getAttribute("name"));
+        assertEquals("submit0", page.tabToPreviousElement().getAttribute("name"));
 
         final String[] expectedAlerts = {"focus-2", "blur-2", "focus-1", "blur-1", "focus-0"};
         assertEquals(expectedAlerts, collectedAlerts);

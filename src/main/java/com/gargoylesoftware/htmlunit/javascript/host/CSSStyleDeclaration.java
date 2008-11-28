@@ -315,7 +315,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      */
     protected Map<String, StyleElement> getStyleMap(final boolean camelCase) {
         final Map<String, StyleElement> styleMap = new LinkedHashMap<String, StyleElement>();
-        final String styleAttribute = jsElement_.getHtmlElementOrDie().getAttributeValue("style");
+        final String styleAttribute = jsElement_.getHtmlElementOrDie().getAttribute("style");
         for (final String token : styleAttribute.split(";")) {
             final int index = token.indexOf(":");
             if (index != -1) {
@@ -343,7 +343,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
             buffer.append(e.getValue());
             buffer.append(";");
         }
-        jsElement_.getHtmlElementOrDie().setAttributeValue("style", buffer.toString());
+        jsElement_.getHtmlElementOrDie().setAttribute("style", buffer.toString());
     }
 
     /**
@@ -4538,7 +4538,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
         if (jsElement_ == null) {
             return "CSSStyleDeclaration for 'null'"; // for instance on prototype
         }
-        final String style = jsElement_.getHtmlElementOrDie().getAttributeValue("style");
+        final String style = jsElement_.getHtmlElementOrDie().getAttribute("style");
         return "CSSStyleDeclaration for '" + style + "'";
     }
 

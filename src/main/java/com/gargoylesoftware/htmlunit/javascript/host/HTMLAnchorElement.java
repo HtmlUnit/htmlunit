@@ -63,7 +63,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @param href the <tt>href</tt> property value
      */
     public void jsxSet_href(final String href) {
-        getHtmlElementOrDie().setAttributeValue("href", href);
+        getHtmlElementOrDie().setAttribute("href", href);
     }
 
     /**
@@ -84,7 +84,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @param name name attribute value
      */
     public void jsxSet_name(final String name) {
-        getHtmlElementOrDie().setAttributeValue("name", name);
+        getHtmlElementOrDie().setAttribute("name", name);
     }
 
     /**
@@ -92,7 +92,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @return the name property
      */
     public String jsxGet_name() {
-        return getHtmlElementOrDie().getAttributeValue("name");
+        return getHtmlElementOrDie().getAttribute("name");
     }
 
     /**
@@ -100,7 +100,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @param target target attribute value
      */
     public void jsxSet_target(final String target) {
-        getHtmlElementOrDie().setAttributeValue("target", target);
+        getHtmlElementOrDie().setAttribute("target", target);
     }
 
     /**
@@ -108,7 +108,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @return the href property
      */
     public String jsxGet_target() {
-        return getHtmlElementOrDie().getAttributeValue("target");
+        return getHtmlElementOrDie().getAttribute("target");
     }
 
     /**
@@ -126,7 +126,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @param url the new value of the <tt>href</tt> attribute
      */
     private void setUrl(final URL url) {
-        getHtmlElementOrDie().setAttributeValue("href", url.toString());
+        getHtmlElementOrDie().setAttribute("href", url.toString());
     }
 
     /**

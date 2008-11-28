@@ -41,7 +41,7 @@ public class HTMLLinkElement extends HTMLElement {
      * @param href href attribute value
      */
     public void jsxSet_href(final String href) {
-        getHtmlElementOrDie().setAttributeValue("href", href);
+        getHtmlElementOrDie().setAttribute("href", href);
     }
 
     /**
@@ -68,7 +68,7 @@ public class HTMLLinkElement extends HTMLElement {
      * @param rel rel attribute value
      */
     public void jsxSet_rel(final String rel) {
-        getHtmlElementOrDie().setAttributeValue("rel", rel);
+        getHtmlElementOrDie().setAttribute("rel", rel);
     }
 
     /**
@@ -85,7 +85,7 @@ public class HTMLLinkElement extends HTMLElement {
      * @param type type attribute value
      */
     public void jsxSet_type(final String type) {
-        getHtmlElementOrDie().setAttributeValue("type", type);
+        getHtmlElementOrDie().setAttribute("type", type);
     }
 
     /**

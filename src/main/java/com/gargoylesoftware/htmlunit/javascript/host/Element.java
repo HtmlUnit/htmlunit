@@ -99,7 +99,7 @@ public class Element extends EventNode {
      */
     public String jsxFunction_getAttribute(String attributeName) {
         attributeName = fixAttributeName(attributeName);
-        final String value = ((DomElement) getDomNodeOrDie()).getAttributeValue(attributeName);
+        final String value = ((DomElement) getDomNodeOrDie()).getAttribute(attributeName);
         if (value == DomElement.ATTRIBUTE_NOT_DEFINED) {
             return null;
         }
@@ -122,7 +122,7 @@ public class Element extends EventNode {
      * @param value Value to set the attribute to
      */
     public void jsxFunction_setAttribute(final String name, final String value) {
-        ((DomElement) getDomNodeOrDie()).setAttributeValue(name, value);
+        ((DomElement) getDomNodeOrDie()).setAttribute(name, value);
     }
 
     /**

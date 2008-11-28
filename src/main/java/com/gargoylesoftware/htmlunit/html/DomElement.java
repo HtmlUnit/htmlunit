@@ -369,7 +369,7 @@ public class DomElement extends DomNamespaceNode implements Element {
     public final String getAttributeNS(final String namespaceURI, final String localName) {
         final String qualifiedName = getQualifiedName(namespaceURI, localName);
         if (qualifiedName != null) {
-            return getAttributeValue(qualifiedName);
+            return getAttribute(qualifiedName);
         }
         return ATTRIBUTE_NOT_DEFINED;
     }

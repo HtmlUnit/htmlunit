@@ -55,7 +55,7 @@ public class HtmlApplet extends StyledElement {
      * @return the value of the attribute "codebase" or an empty string if that attribute isn't defined
      */
     public final String getCodebaseAttribute() {
-        return getAttributeValue("codebase");
+        return getAttribute("codebase");
     }
 
     /**
@@ -66,7 +66,7 @@ public class HtmlApplet extends StyledElement {
      * @return the value of the attribute "archive" or an empty string if that attribute isn't defined
      */
     public final String getArchiveAttribute() {
-        return getAttributeValue("archive");
+        return getAttribute("archive");
     }
 
     /**
@@ -77,7 +77,7 @@ public class HtmlApplet extends StyledElement {
      * @return the value of the attribute "code" or an empty string if that attribute isn't defined
      */
     public final String getCodeAttribute() {
-        return getAttributeValue("code");
+        return getAttribute("code");
     }
 
     /**
@@ -88,7 +88,7 @@ public class HtmlApplet extends StyledElement {
      * @return the value of the attribute "object" or an empty string if that attribute isn't defined
      */
     public final String getObjectAttribute() {
-        return getAttributeValue("object");
+        return getAttribute("object");
     }
 
     /**
@@ -99,7 +99,7 @@ public class HtmlApplet extends StyledElement {
      * @return the value of the attribute "alt" or an empty string if that attribute isn't defined
      */
     public final String getAltAttribute() {
-        return getAttributeValue("alt");
+        return getAttribute("alt");
     }
 
     /**
@@ -110,7 +110,7 @@ public class HtmlApplet extends StyledElement {
      * @return the value of the attribute "name" or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
-        return getAttributeValue("name");
+        return getAttribute("name");
     }
 
     /**
@@ -121,7 +121,7 @@ public class HtmlApplet extends StyledElement {
      * @return the value of the attribute "width" or an empty string if that attribute isn't defined
      */
     public final String getWidthAttribute() {
-        return getAttributeValue("width");
+        return getAttribute("width");
     }
 
     /**
@@ -132,7 +132,7 @@ public class HtmlApplet extends StyledElement {
      * @return the value of the attribute "height" or an empty string if that attribute isn't defined
      */
     public final String getHeightAttribute() {
-        return getAttributeValue("height");
+        return getAttribute("height");
     }
 
     /**
@@ -143,7 +143,7 @@ public class HtmlApplet extends StyledElement {
      * @return the value of the attribute "align" or an empty string if that attribute isn't defined
      */
     public final String getAlignAttribute() {
-        return getAttributeValue("align");
+        return getAttribute("align");
     }
 
     /**
@@ -154,7 +154,7 @@ public class HtmlApplet extends StyledElement {
      * @return the value of the attribute "hspace" or an empty string if that attribute isn't defined
      */
     public final String getHspaceAttribute() {
-        return getAttributeValue("hspace");
+        return getAttribute("hspace");
     }
 
     /**
@@ -165,6 +165,6 @@ public class HtmlApplet extends StyledElement {
      * @return the value of the attribute "vspace" or an empty string if that attribute isn't defined
      */
     public final String getVspaceAttribute() {
-        return getAttributeValue("vspace");
+        return getAttribute("vspace");
     }
 }

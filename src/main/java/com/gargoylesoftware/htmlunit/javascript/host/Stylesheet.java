@@ -227,7 +227,7 @@ public class Stylesheet extends SimpleScriptable {
             case Condition.SAC_CLASS_CONDITION:
                 final AttributeCondition ac3 = (AttributeCondition) condition;
                 final String v3 = ac3.getValue();
-                final String a3 = element.getAttributeValue("class");
+                final String a3 = element.getAttribute("class");
                 return a3.equals(v3) || a3.startsWith(v3 + " ") || a3.endsWith(" " + v3) || a3.contains(" " + v3 + " ");
             case Condition.SAC_AND_CONDITION:
                 final CombinatorCondition cc1 = (CombinatorCondition) condition;
@@ -235,18 +235,18 @@ public class Stylesheet extends SimpleScriptable {
             case Condition.SAC_ATTRIBUTE_CONDITION:
                 final AttributeCondition ac1 = (AttributeCondition) condition;
                 if (ac1.getSpecified()) {
-                    return element.getAttributeValue(ac1.getLocalName()).equals(ac1.getValue());
+                    return element.getAttribute(ac1.getLocalName()).equals(ac1.getValue());
                 }
                 return element.hasAttribute(ac1.getLocalName());
             case Condition.SAC_BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
                 final AttributeCondition ac2 = (AttributeCondition) condition;
                 final String v = ac2.getValue();
-                final String a = element.getAttributeValue(ac2.getLocalName());
+                final String a = element.getAttribute(ac2.getLocalName());
                 return a.equals(v) || a.startsWith(v + "-") || a.endsWith("-" + v) || a.contains("-" + v + "-");
             case Condition.SAC_ONE_OF_ATTRIBUTE_CONDITION:
                 final AttributeCondition ac5 = (AttributeCondition) condition;
                 final String v2 = ac5.getValue();
-                final String a2 = element.getAttributeValue(ac5.getLocalName());
+                final String a2 = element.getAttribute(ac5.getLocalName());
                 return a2.equals(v2) || a2.startsWith(v2 + " ") || a2.endsWith(" " + v2) || a2.contains(" " + v2 + " ");
             case Condition.SAC_OR_CONDITION:
                 final CombinatorCondition cc2 = (CombinatorCondition) condition;
@@ -262,7 +262,7 @@ public class Stylesheet extends SimpleScriptable {
             case Condition.SAC_LANG_CONDITION:
                 final LangCondition lc = (LangCondition) condition;
                 for (HtmlElement e = element; e != null; e = (HtmlElement) e.getParentNode()) {
-                    if (e.getAttributeValue("lang").startsWith(lc.getLang())) {
+                    if (e.getAttribute("lang").startsWith(lc.getLang())) {
                         return true;
                     }
                 }

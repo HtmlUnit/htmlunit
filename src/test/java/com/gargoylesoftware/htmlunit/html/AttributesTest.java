@@ -190,7 +190,7 @@ public class AttributesTest extends TestCase {
         final String value = new String("value");
 
         final HtmlElement objectToTest = getNewInstanceForClassUnderTest();
-        objectToTest.setAttributeValue(attributeName_, value);
+        objectToTest.setAttribute(attributeName_, value);
 
         final Object noObjects[] = new Object[0];
         final Object result = method_.invoke(objectToTest, noObjects);

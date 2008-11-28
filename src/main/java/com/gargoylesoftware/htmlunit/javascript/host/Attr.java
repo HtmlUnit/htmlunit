@@ -90,7 +90,7 @@ public class Attr extends SimpleScriptable {
      */
     public void detachFromParent() {
         if (parent_ != null) {
-            value_ = parent_.getAttributeValue(name_);
+            value_ = parent_.getAttribute(name_);
         }
         parent_ = null;
     }
@@ -204,7 +204,7 @@ public class Attr extends SimpleScriptable {
      */
     public String jsxGet_value() {
         if (parent_ != null) {
-            return parent_.getAttributeValue(name_);
+            return parent_.getAttribute(name_);
         }
         return value_;
     }
@@ -215,7 +215,7 @@ public class Attr extends SimpleScriptable {
      */
     public void jsxSet_value(final String value) {
         if (parent_ != null) {
-            parent_.setAttributeValue(name_, value);
+            parent_.setAttribute(name_, value);
         }
         else {
             value_ = value;

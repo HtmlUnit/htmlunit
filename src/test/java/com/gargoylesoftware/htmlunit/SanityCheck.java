@@ -241,7 +241,7 @@ public final class SanityCheck {
         form.setMethodAttribute("post");
 
         final HtmlSubmitInput button = form.getInputByName("button1");
-        button.setAttributeValue("name", "textfield1");
+        button.setAttribute("name", "textfield1");
 
         final HtmlPage secondPage = button.click();
         assertEquals("POST", secondPage.<HtmlElement>getHtmlElementById("REQUEST_METHOD").asText());

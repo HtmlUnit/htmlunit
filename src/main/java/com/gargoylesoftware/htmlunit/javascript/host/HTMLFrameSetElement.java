@@ -41,7 +41,7 @@ public class HTMLFrameSetElement extends HTMLElement {
     public void jsxSet_rows(final String rows) {
         final HtmlFrameSet htmlFrameSet = (HtmlFrameSet) getHtmlElementOrNull();
         if (htmlFrameSet != null) {
-            htmlFrameSet.setAttributeValue("rows", rows);
+            htmlFrameSet.setAttribute("rows", rows);
         }
     }
 
@@ -64,7 +64,7 @@ public class HTMLFrameSetElement extends HTMLElement {
     public void jsxSet_cols(final String cols) {
         final HtmlFrameSet htmlFrameSet = (HtmlFrameSet) getHtmlElementOrNull();
         if (htmlFrameSet != null) {
-            htmlFrameSet.setAttributeValue("cols", cols);
+            htmlFrameSet.setAttribute("cols", cols);
         }
     }
 

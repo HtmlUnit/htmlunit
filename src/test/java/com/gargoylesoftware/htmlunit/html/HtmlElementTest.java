@@ -625,7 +625,7 @@ public class HtmlElementTest extends WebTestCase {
 
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
-        assertEquals("myTitle" + 'a', p1.getAttributeValue("title"));
+        assertEquals("myTitle" + 'a', p1.getAttribute("title"));
     }
 
     /**
@@ -662,7 +662,7 @@ public class HtmlElementTest extends WebTestCase {
 
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
-        assertSame(HtmlElement.ATTRIBUTE_NOT_DEFINED, p1.getAttributeValue("title"));
+        assertSame(HtmlElement.ATTRIBUTE_NOT_DEFINED, p1.getAttribute("title"));
     }
 
     /**
@@ -695,7 +695,7 @@ public class HtmlElementTest extends WebTestCase {
         p1.removeHtmlAttributeChangeListener(listenerImpl);
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
-        assertEquals("myTitle" + 'a' + 'a', p1.getAttributeValue("title"));
+        assertEquals("myTitle" + 'a' + 'a', p1.getAttribute("title"));
     }
 
     /**

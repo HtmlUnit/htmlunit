@@ -899,7 +899,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("First", firstPage.getTitleText());
 
         final HtmlElement div1 = firstPage.getHtmlElementById("childDiv");
-        assertEquals("parentDiv", ((HtmlElement) div1.getParentNode()).getAttributeValue("id"));
+        assertEquals("parentDiv", ((HtmlElement) div1.getParentNode()).getAttribute("id"));
 
         final String[] expectedAlerts = {"parentDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -973,7 +973,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("First", firstPage.getTitleText());
 
         final HtmlElement childDiv = firstPage.getHtmlElementById("childDiv");
-        assertEquals("parentDiv", ((HtmlElement) childDiv.getParentNode()).getAttributeValue("id"));
+        assertEquals("parentDiv", ((HtmlElement) childDiv.getParentNode()).getAttribute("id"));
 
         final String[] expectedAlerts = {"parentDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1024,7 +1024,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("First", firstPage.getTitleText());
 
         final HtmlElement div1 = firstPage.getHtmlElementById("parentDiv");
-        assertEquals("childDiv", ((HtmlElement) div1.getFirstChild()).getAttributeValue("id"));
+        assertEquals("childDiv", ((HtmlElement) div1.getFirstChild()).getAttribute("id"));
 
         final String[] expectedAlerts = {"childDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1055,7 +1055,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("First", firstPage.getTitleText());
 
         final HtmlElement parentDiv = firstPage.getHtmlElementById("parentDiv");
-        assertEquals("childDiv", ((HtmlElement) parentDiv.getFirstChild()).getAttributeValue("id"));
+        assertEquals("childDiv", ((HtmlElement) parentDiv.getFirstChild()).getAttribute("id"));
 
         final String[] expectedAlerts = {"childDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1087,7 +1087,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
 
         final HtmlElement parentDiv = lastPage.getHtmlElementById("parentDiv");
-        assertEquals("childDiv", ((HtmlElement) parentDiv.getLastChild()).getAttributeValue("id"));
+        assertEquals("childDiv", ((HtmlElement) parentDiv.getLastChild()).getAttribute("id"));
     }
 
     /**
@@ -1115,7 +1115,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("Last", lastPage.getTitleText());
 
         final HtmlElement parentDiv = lastPage.getHtmlElementById("parentDiv");
-        assertEquals("childDiv", ((HtmlElement) parentDiv.getLastChild()).getAttributeValue("id"));
+        assertEquals("childDiv", ((HtmlElement) parentDiv.getLastChild()).getAttribute("id"));
 
         final String[] expectedAlerts = {"childDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1145,7 +1145,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("Last", lastPage.getTitleText());
 
         final HtmlElement div1 = lastPage.getHtmlElementById("previousDiv");
-        assertEquals("nextDiv", ((HtmlElement) div1.getNextSibling()).getAttributeValue("id"));
+        assertEquals("nextDiv", ((HtmlElement) div1.getNextSibling()).getAttribute("id"));
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -1175,7 +1175,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("Last", lastPage.getTitleText());
 
         final HtmlElement previousDiv = lastPage.getHtmlElementById("previousDiv");
-        assertEquals("nextDiv", ((HtmlElement) previousDiv.getNextSibling()).getAttributeValue("id"));
+        assertEquals("nextDiv", ((HtmlElement) previousDiv.getNextSibling()).getAttribute("id"));
 
         final String[] expectedAlerts = {"nextDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1205,7 +1205,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("Last", lastPage.getTitleText());
 
         final HtmlElement div1 = lastPage.getHtmlElementById("nextDiv");
-        assertEquals("previousDiv", ((HtmlElement) div1.getPreviousSibling()).getAttributeValue("id"));
+        assertEquals("previousDiv", ((HtmlElement) div1.getPreviousSibling()).getAttribute("id"));
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -1235,7 +1235,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("Last", lastPage.getTitleText());
 
         final HtmlElement nextDiv = lastPage.getHtmlElementById("nextDiv");
-        assertEquals("previousDiv", ((HtmlElement) nextDiv.getPreviousSibling()).getAttributeValue("id"));
+        assertEquals("previousDiv", ((HtmlElement) nextDiv.getPreviousSibling()).getAttribute("id"));
 
         final String[] expectedAlerts = {"previousDiv"};
         assertEquals(expectedAlerts, collectedAlerts);

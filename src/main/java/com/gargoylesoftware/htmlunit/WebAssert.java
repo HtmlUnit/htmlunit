@@ -416,7 +416,7 @@ public final class WebAssert {
         for (final HtmlElement element : page.getDocumentElement().getHtmlElementsByTagNames(tags)) {
             final Short tabIndex = element.getTabIndex();
             if (tabIndex == null || tabIndex == HtmlElement.TAB_INDEX_OUT_OF_BOUNDS) {
-                final String s = element.getAttributeValue("tabindex");
+                final String s = element.getAttribute("tabindex");
                 throw new AssertionError("Illegal value for tab index: '" + s + "'.");
             }
         }
@@ -432,7 +432,7 @@ public final class WebAssert {
     public static void assertAllAccessKeyAttributesUnique(final HtmlPage page) {
         final List<String> list = new ArrayList<String>();
         for (final HtmlElement element : page.getAllHtmlChildElements()) {
-            final String key = element.getAttributeValue("accesskey");
+            final String key = element.getAttribute("accesskey");
             if (key != null && key.length() != 0) {
                 if (list.contains(key)) {
                     throw new AssertionError("The access key '" + key + "' is not unique.");
@@ -450,7 +450,7 @@ public final class WebAssert {
     public static void assertAllIdAttributesUnique(final HtmlPage page) {
         final List<String> list = new ArrayList<String>();
         for (final HtmlElement element : page.getAllHtmlChildElements()) {
-            final String id = element.getAttributeValue("id");
+            final String id = element.getAttribute("id");
             if (id != null && id.length() != 0) {
                 if (list.contains(id)) {
                     throw new AssertionError("The element ID '" + id + "' is not unique.");

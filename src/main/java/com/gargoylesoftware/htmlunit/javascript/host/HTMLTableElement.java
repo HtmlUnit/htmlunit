@@ -206,7 +206,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the <tt>width</tt> attribute
      */
     public String jsxGet_width() {
-        return getHtmlElementOrDie().getAttributeValue("width");
+        return getHtmlElementOrDie().getAttribute("width");
     }
 
     /**
@@ -214,7 +214,7 @@ public class HTMLTableElement extends RowContainer {
      * @param width the <tt>width</tt> attribute
      */
     public void jsxSet_width(final String width) {
-        getHtmlElementOrDie().setAttributeValue("width", width);
+        getHtmlElementOrDie().setAttribute("width", width);
     }
 
     /**
@@ -222,7 +222,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the <tt>cellSpacing</tt> attribute
      */
     public String jsxGet_cellSpacing() {
-        return getHtmlElementOrDie().getAttributeValue("cellspacing");
+        return getHtmlElementOrDie().getAttribute("cellspacing");
     }
 
     /**
@@ -230,7 +230,7 @@ public class HTMLTableElement extends RowContainer {
      * @param cellSpacing the <tt>cellSpacing</tt> attribute
      */
     public void jsxSet_cellSpacing(final String cellSpacing) {
-        getHtmlElementOrDie().setAttributeValue("cellspacing", cellSpacing);
+        getHtmlElementOrDie().setAttribute("cellspacing", cellSpacing);
     }
 
     /**
@@ -238,7 +238,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the <tt>cellPadding</tt> attribute
      */
     public String jsxGet_cellPadding() {
-        return getHtmlElementOrDie().getAttributeValue("cellpadding");
+        return getHtmlElementOrDie().getAttribute("cellpadding");
     }
 
     /**
@@ -246,6 +246,6 @@ public class HTMLTableElement extends RowContainer {
      * @param cellPadding the <tt>cellPadding</tt> attribute
      */
     public void jsxSet_cellPadding(final String cellPadding) {
-        getHtmlElementOrDie().setAttributeValue("cellpadding", cellPadding);
+        getHtmlElementOrDie().setAttribute("cellpadding", cellPadding);
     }
 }

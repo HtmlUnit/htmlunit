@@ -142,8 +142,8 @@ public class HtmlTableRowTest extends WebTestCase {
      */
     @Test
     public void testCloneAttributesCopiedFromOriginal() {
-        assertEquals("20", cell_.getAttributeValue("width"));
-        assertEquals("20", cellClone_.getAttributeValue("width"));
+        assertEquals("20", cell_.getAttribute("width"));
+        assertEquals("20", cellClone_.getAttribute("width"));
     }
 
     /**
@@ -152,8 +152,8 @@ public class HtmlTableRowTest extends WebTestCase {
      */
     @Test
     public void testCloneAttributeIsIndependentOfOriginal() {
-        cellClone_.setAttributeValue("a", "one");
-        assertFalse("one".equals(cell_.getAttributeValue("a")));
+        cellClone_.setAttribute("a", "one");
+        assertFalse("one".equals(cell_.getAttribute("a")));
     }
 
     /**
@@ -162,8 +162,8 @@ public class HtmlTableRowTest extends WebTestCase {
      */
     @Test
     public void testOriginalAttributeIsIndependentOfClone() {
-        cell_.setAttributeValue("a", "one");
-        assertFalse("one".equals(cellClone_.getAttributeValue("a")));
+        cell_.setAttribute("a", "one");
+        assertFalse("one".equals(cellClone_.getAttribute("a")));
     }
 
     /**
@@ -234,7 +234,7 @@ public class HtmlTableRowTest extends WebTestCase {
     public void testCloneScriptCanSetDisabledOnCell() {
         final String cmd = "document.getElementById('cell').disabled='true'";
         page_.executeJavaScript(cmd);
-        assertEquals("disabled", cell_.getAttributeValue("disabled"));
+        assertEquals("disabled", cell_.getAttribute("disabled"));
     }
 
     /**
@@ -244,7 +244,7 @@ public class HtmlTableRowTest extends WebTestCase {
     public void testCloneScriptCanSetAttributeOnCell() {
         final String cmd = "document.getElementById('cell').setAttribute('a','original')";
         page_.executeJavaScript(cmd);
-        assertEquals("original", cell_.getAttributeValue("a"));
+        assertEquals("original", cell_.getAttribute("a"));
     }
 
     // these next few check that scripts manipulate the clone independently
@@ -258,8 +258,8 @@ public class HtmlTableRowTest extends WebTestCase {
         final String cmd = "document.getElementById('cell').setAttribute('a','original')";
         page_.executeJavaScript(cmd);
 
-        assertEquals("original", cell_.getAttributeValue("a"));
-        assertFalse("original".equals(cellClone_.getAttributeValue("a")));
+        assertEquals("original", cell_.getAttribute("a"));
+        assertFalse("original".equals(cellClone_.getAttribute("a")));
     }
 
     /**
@@ -271,8 +271,8 @@ public class HtmlTableRowTest extends WebTestCase {
         final String cmd = "document.getElementById('cell').disabled = 'true'";
         page_.executeJavaScript(cmd);
 
-        assertEquals("disabled", cell_.getAttributeValue("disabled"));
-        assertFalse("disabled".equals(cellClone_.getAttributeValue("disabled")));
+        assertEquals("disabled", cell_.getAttribute("disabled"));
+        assertFalse("disabled".equals(cellClone_.getAttribute("disabled")));
     }
 
     /**
@@ -299,10 +299,10 @@ public class HtmlTableRowTest extends WebTestCase {
         page_.executeJavaScript(cmd);
 
         final HtmlElement input = (HtmlElement) cell_.getFirstChild();
-        assertEquals("Input!", input.getAttributeValue("value"));
+        assertEquals("Input!", input.getAttribute("value"));
 
         final HtmlElement inputClone = (HtmlElement) cellClone_.getFirstChild();
-        assertFalse("Input!".equals(inputClone.getAttributeValue("value")));
+        assertFalse("Input!".equals(inputClone.getAttribute("value")));
     }
 
     /**

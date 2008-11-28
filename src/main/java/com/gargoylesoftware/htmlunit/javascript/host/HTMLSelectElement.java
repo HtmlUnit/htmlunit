@@ -324,7 +324,7 @@ public class HTMLSelectElement extends FormField {
      */
     public int jsxGet_size() {
         int size = 0;
-        final String sizeAttribute = getHtmlElementOrDie().getAttributeValue("size");
+        final String sizeAttribute = getHtmlElementOrDie().getAttribute("size");
         if (sizeAttribute != HtmlSelect.ATTRIBUTE_NOT_DEFINED && sizeAttribute != HtmlSelect.ATTRIBUTE_VALUE_EMPTY) {
             try {
                 size = Integer.parseInt(sizeAttribute);
@@ -341,7 +341,7 @@ public class HTMLSelectElement extends FormField {
      * @param size the <tt>size</tt> attribute
      */
     public void jsxSet_size(final String size) {
-        getHtmlElementOrDie().setAttributeValue("size", size);
+        getHtmlElementOrDie().setAttribute("size", size);
     }
 
     /**

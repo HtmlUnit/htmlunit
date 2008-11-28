@@ -293,7 +293,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      */
     private static Boolean isXMLSpaceDefault(DomNode node) {
         for ( ; node instanceof DomElement; node = node.getParentNode()) {
-            final String value = ((DomElement) node).getAttributeValue("xml:space");
+            final String value = ((DomElement) node).getAttribute("xml:space");
             if (value.length() != 0) {
                 if (value.equals("default")) {
                     return Boolean.TRUE;
@@ -326,7 +326,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         // See if there is an element in the element array with the specified id.
         for (final Object next : elements) {
             if (next instanceof DomElement) {
-                final String id = ((DomElement) next).getAttributeValue("id");
+                final String id = ((DomElement) next).getAttribute("id");
                 if (id != null && id.equals(name)) {
                     getLog().debug("Property \"" + name + "\" evaluated (by id) to " + next);
                     return getScriptableFor(next);
@@ -340,7 +340,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
                     return getScriptableFor(window);
                 }
                 if (getBrowserVersion().isIE() && window instanceof FrameWindow
-                        && ((FrameWindow) window).getFrameElement().getAttributeValue("id").equals(name)) {
+                        && ((FrameWindow) window).getFrameElement().getAttribute("id").equals(name)) {
                     getLog().debug("Property \"" + name + "\" evaluated (by id) to " + window);
                     return getScriptableFor(window);
                 }

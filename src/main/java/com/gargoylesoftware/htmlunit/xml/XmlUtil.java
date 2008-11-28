@@ -242,7 +242,7 @@ public final class XmlUtil {
      * @return the namespace URI bound to the prefix; or null if there is no such namespace
      */
     public static String lookupNamespaceURI(final DomElement element, final String prefix) {
-        String uri = element.getAttributeValue("xmlns:" + prefix);
+        String uri = element.getAttribute("xmlns:" + prefix);
         if (uri == DomElement.ATTRIBUTE_NOT_DEFINED) {
             final DomNode parentNode = element.getParentNode();
             if (parentNode instanceof DomElement) {

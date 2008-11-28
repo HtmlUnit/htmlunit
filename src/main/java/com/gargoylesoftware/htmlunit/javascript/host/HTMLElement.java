@@ -246,7 +246,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the ID of this element
      */
     public String jsxGet_title() {
-        return getHtmlElementOrDie().getAttributeValue("title");
+        return getHtmlElementOrDie().getAttribute("title");
     }
 
     /**
@@ -254,7 +254,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param newTitle the new identifier of this element
      */
     public void jsxSet_title(final String newTitle) {
-        getHtmlElementOrDie().setAttributeValue("title", newTitle);
+        getHtmlElementOrDie().setAttribute("title", newTitle);
     }
 
     /**
@@ -272,7 +272,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public void jsxSet_disabled(final boolean disabled) {
         final HtmlElement element = getHtmlElementOrDie();
         if (disabled) {
-            element.setAttributeValue("disabled", "disabled");
+            element.setAttribute("disabled", "disabled");
         }
         else {
             element.removeAttribute("disabled");
@@ -323,7 +323,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public Object getWithFallback(final String name) {
         final HtmlElement htmlElement = getHtmlElementOrNull();
         if (htmlElement != null && isAttributeName(name)) {
-            final String value = htmlElement.getAttributeValue(name);
+            final String value = htmlElement.getAttribute(name);
             if (HtmlElement.ATTRIBUTE_NOT_DEFINED != value) {
                 getLog().debug("Found attribute for evaluation of property \"" + name
                         + "\" for of " + this);
@@ -351,6 +351,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Creates the JS object for the property attributes. This object will the be cached.
      * @return the JS object
      */
+    @Override
     protected NamedNodeMap createAttributesObject() {
         return new NamedNodeMap((DomElement) getDomNodeOrDie(), true);
     }
@@ -360,6 +361,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param attributeName the name
      * @return the real name
      */
+    @Override
     protected String fixAttributeName(final String attributeName) {
         if (getBrowserVersion().isIE()) {
             if ("className".equals(attributeName)) {
@@ -407,7 +409,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     @Override
     public void jsxFunction_setAttribute(String name, final String value) {
         name = fixAttributeName(name);
-        getHtmlElementOrDie().setAttributeValue(name, value);
+        getHtmlElementOrDie().setAttribute(name, value);
 
         //FF: call corresponding event handler jsxSet_onxxx if found
         if (getBrowserVersion().isFirefox()) {
@@ -463,7 +465,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @Override
     public Object jsxFunction_getAttributeNode(final String attributeName) {
-        if (getHtmlElementOrDie().getAttributeValue(attributeName) == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+        if (getHtmlElementOrDie().getAttribute(attributeName) == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
             return null;
         }
 
@@ -484,7 +486,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final String value = newAtt.jsxGet_value();
         final Attr replacedAtt = (Attr) jsxFunction_getAttributeNode(name);
         replacedAtt.detachFromParent();
-        getHtmlElementOrDie().setAttributeValue(name, value);
+        getHtmlElementOrDie().setAttribute(name, value);
         return replacedAtt;
     }
 
@@ -523,7 +525,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the class name
      */
     public Object jsxGet_className() {
-        return getHtmlElementOrDie().getAttributeValue("class");
+        return getHtmlElementOrDie().getAttribute("class");
     }
 
     /**
@@ -551,7 +553,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param className - the new class name
      */
     public void jsxSet_className(final String className) {
-        getHtmlElementOrDie().setAttributeValue("class", className);
+        getHtmlElementOrDie().setAttribute("class", className);
     }
 
     /**

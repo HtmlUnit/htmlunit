@@ -264,6 +264,7 @@ public class MouseEvent extends UIEvent {
      * Returns the mouse event currently firing, or <tt>null</tt> if no mouse event is being processed.
      * @return the mouse event currently firing
      */
+    @SuppressWarnings("unchecked")
     static MouseEvent getCurrentMouseEvent() {
         final LinkedList<Event> events = (LinkedList<Event>) Context.getCurrentContext()
             .getThreadLocal(KEY_CURRENT_EVENT);
