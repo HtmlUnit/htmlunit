@@ -121,7 +121,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     private String originalCharset_;
     private Map<String, List<HtmlElement>> idMap_ = new HashMap<String, List<HtmlElement>>();
     private Map<String, List<HtmlElement>> nameMap_ = new HashMap<String, List<HtmlElement>>();
-    private HtmlElement documentElement_;
     private HtmlElement elementWithFocus_;
     private int parserCount_;
     private int snippetParserCount_;
@@ -188,14 +187,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      */
     @Override
     public HtmlElement getDocumentElement() {
-        if (documentElement_ == null) {
-            DomNode childNode = getFirstChild();
-            while (childNode != null && !(childNode instanceof HtmlElement)) {
-                childNode = childNode.getNextSibling();
-            }
-            documentElement_ = (HtmlElement) childNode;
-        }
-        return documentElement_;
+        return (HtmlElement) super.getDocumentElement();
     }
 
     /**
@@ -1868,17 +1860,11 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      */
     @Override
     protected HtmlPage clone() {
-        try {
-            final HtmlPage result = (HtmlPage) super.clone();
-            result.documentElement_ = null;
-            result.elementWithFocus_ = null;
-            result.idMap_ = new HashMap<String, List<HtmlElement>>();
-            result.nameMap_ = new HashMap<String, List<HtmlElement>>();
-            return result;
-        }
-        catch (final CloneNotSupportedException e) {
-            throw new IllegalStateException("Clone not supported");
-        }
+        final HtmlPage result = (HtmlPage) super.clone();
+        result.elementWithFocus_ = null;
+        result.idMap_ = new HashMap<String, List<HtmlElement>>();
+        result.nameMap_ = new HashMap<String, List<HtmlElement>>();
+        return result;
     }
 
     /**

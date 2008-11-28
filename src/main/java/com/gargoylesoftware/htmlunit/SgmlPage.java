@@ -37,6 +37,7 @@ public abstract class SgmlPage extends DomNode implements Page {
     private final WebResponse webResponse_;
     private WebWindow enclosingWindow_;
     private final WebClient webClient_;
+    private Element documentElement_;
 
     /**
      * Creates an instance of SgmlPage.
@@ -147,12 +148,6 @@ public abstract class SgmlPage extends DomNode implements Page {
     }
 
     /**
-     * Returns the document element.
-     * @return the document element
-     */
-    public abstract Element getDocumentElement();
-
-    /**
      * Creates an element, the type of which depends on the specified tag name.
      * @param tagName the tag name which determines the type of element to be created
      * @return an element, the type of which depends on the specified tag name
@@ -172,4 +167,36 @@ public abstract class SgmlPage extends DomNode implements Page {
      * @return the page encoding
      */
     public abstract String getPageEncoding();
+
+    /**
+     * Returns the document element.
+     * @return the document element
+     */
+    public Element getDocumentElement() {
+        if (documentElement_ == null) {
+            DomNode childNode = getFirstChild();
+            while (childNode != null && !(childNode instanceof Element)) {
+                childNode = childNode.getNextSibling();
+            }
+            documentElement_ = (Element) childNode;
+        }
+        return documentElement_;
+    }
+
+    /**
+     * Creates a clone of this instance, and clears cached state to be not shared with the original.
+     *
+     * @return a clone of this instance
+     */
+    @Override
+    protected SgmlPage clone() {
+        try {
+            final SgmlPage result = (SgmlPage) super.clone();
+            result.documentElement_ = null;
+            return result;
+        }
+        catch (final CloneNotSupportedException e) {
+            throw new IllegalStateException("Clone not supported");
+        }
+    }
 }

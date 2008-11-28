@@ -58,7 +58,6 @@ public class XmlPage extends SgmlPage implements Document {
     private static final long serialVersionUID = -1430136241030261308L;
 
     private Node node_;
-    private Element documentElement_;
 
     private final transient Log mainLog_ = LogFactory.getLog(getClass());
 
@@ -288,21 +287,6 @@ public class XmlPage extends SgmlPage implements Document {
      */
     public Text createTextNode(final String data) {
         throw new UnsupportedOperationException("XmlPage.createTextNode is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Element getDocumentElement() {
-        if (documentElement_ == null) {
-            DomNode childNode = getFirstChild();
-            while (childNode != null && !(childNode instanceof Element)) {
-                childNode = childNode.getNextSibling();
-            }
-            documentElement_ = (Element) childNode;
-        }
-        return documentElement_;
     }
 
     /**
