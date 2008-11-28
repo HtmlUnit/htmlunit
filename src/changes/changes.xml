@@ -6,8 +6,8 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
-            <action type="fix" dev="asashour">
-                Deprecate XmlPage.getDocumentXmlElement().
+            <action type="update" dev="asashour">
+                Deprecate XmlPage.getDocumentXmlElement(), HtmlPage.createHtmlElement() and createHtmlElementNS().
             </action>
             <action type="fix" dev="asashour">
                 Document and Element.getElementsByTagName() should not be affected by namespaces.

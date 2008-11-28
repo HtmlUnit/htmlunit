@@ -394,19 +394,10 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
     /**
      * {@inheritDoc}
+     * @param tagName the tag name, preferably in lowercase
      */
     @Override
-    public Element createElement(final String tagName) {
-        return createHtmlElement(tagName);
-    }
-
-    /**
-     * Create a new HTML element with the given tag name.
-     *
-     * @param tagName the tag name, preferably in lowercase
-     * @return the new HTML element
-     */
-    public HtmlElement createHtmlElement(String tagName) {
+    public HtmlElement createElement(String tagName) {
         if (tagName.indexOf(':') == -1) {
             tagName = tagName.toLowerCase();
         }
@@ -414,11 +405,24 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
+     * Create a new HTML element with the given tag name.
+     *
+     * @param tagName the tag name, preferably in lowercase
+     * @return the new HTML element
+     * @deprecated As of 2.4, please use {@link #createElement(String)} instead.
+     */
+    @Deprecated
+    public HtmlElement createHtmlElement(final String tagName) {
+        return createElement(tagName);
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
-    public Element createElementNS(final String namespaceURI, final String qualifiedName) {
-        return createHtmlElementNS(namespaceURI, qualifiedName);
+    public HtmlElement createElementNS(final String namespaceURI, final String qualifiedName) {
+        return HtmlUnitDOMBuilder.getElementFactory(namespaceURI, qualifiedName)
+            .createElementNS(this, namespaceURI, qualifiedName, null);
     }
 
     /**
@@ -427,10 +431,11 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
      * @return the new HTML element
+     * @deprecated As of 2.4, please use {@link #createElementNS(String,String)} instead
      */
+    @Deprecated
     public HtmlElement createHtmlElementNS(final String namespaceURI, final String qualifiedName) {
-        return HtmlUnitDOMBuilder.getElementFactory(namespaceURI, qualifiedName)
-            .createElementNS(this, namespaceURI, qualifiedName, null);
+        return createElementNS(namespaceURI, qualifiedName);
     }
 
     /**

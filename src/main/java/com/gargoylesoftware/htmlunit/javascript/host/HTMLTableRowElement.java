@@ -93,7 +93,7 @@ public class HTMLTableRowElement extends HTMLElement {
 
         final boolean indexValid = (position >= -1 && position <= htmlRow.getCells().size());
         if (indexValid) {
-            final HtmlElement newCell = ((HtmlPage) htmlRow.getPage()).createHtmlElement("td");
+            final HtmlElement newCell = ((HtmlPage) htmlRow.getPage()).createElement("td");
             if (position == -1 || position == htmlRow.getCells().size()) {
                 htmlRow.appendChild(newCell);
             }
