@@ -538,7 +538,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             xpath = ".//*";
         }
         else {
-            xpath = ".//node()[name() = '" + tagName + "']";
+            xpath = ".//*[local-name() = '" + tagName + "']";
         }
         collection.init(node, xpath);
 

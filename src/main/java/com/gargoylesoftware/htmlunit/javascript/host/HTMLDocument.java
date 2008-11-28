@@ -909,7 +909,7 @@ public class HTMLDocument extends Document {
             exp = "//*";
         }
         else {
-            exp = "//*[lower-case(name()) = '" + tagName.toLowerCase() + "']";
+            exp = "//*[lower-case(local-name()) = '" + tagName.toLowerCase() + "']";
         }
         collection.init(getDomNodeOrDie(), exp);
         return collection;

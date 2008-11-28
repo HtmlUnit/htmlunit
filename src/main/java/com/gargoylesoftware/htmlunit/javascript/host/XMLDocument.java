@@ -272,7 +272,7 @@ public class XMLDocument extends Document {
      */
     public HTMLCollection jsxFunction_getElementsByTagName(final String tagName) {
         final HTMLCollection collection = new HTMLCollection(this);
-        collection.init(getDomNodeOrDie().getFirstChild(), "//" + tagName);
+        collection.init(getDomNodeOrDie().getFirstChild(), "//*[local-name()='" + tagName + "']");
         return collection;
     }
 

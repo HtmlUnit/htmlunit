@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="fix" dev="asashour">
+                Document and Element.getElementsByTagName() should not be affected by namespaces.
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: node's attributes collection is never empty for IE.
             </action>

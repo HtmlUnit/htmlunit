@@ -118,8 +118,7 @@ public class Element extends EventNode {
     public Object jsxFunction_getElementsByTagName(final String tagName) {
         final DomNode domNode = getDomNodeOrDie();
         final HTMLCollection collection = new HTMLCollection(this);
-        final String xpath = ".//" + tagName;
-        collection.init(domNode, xpath);
+        collection.init(domNode, ".//*[local-name()='" + tagName + "']");
         return collection;
     }
 

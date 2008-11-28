@@ -720,18 +720,64 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1" }, FF = "1")
-    @NotYetImplemented
-    public void xpathWithnamespaces() throws Exception {
+    @Alerts("1")
+    public void getElementsByTagName() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
             + "    doc.async = false;\n"
             + "    doc.load('" + URL_SECOND + "');\n"
             + "    alert(doc.getElementsByTagName('book').length);\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String xml
+            = "<soap:Envelope xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/'>\n"
+            + "  <books xmlns='http://www.example.com/ns1'>\n"
+            + "    <book>\n"
+            + "      <title>Immortality</title>\n"
+            + "      <author>John Smith</author>\n"
+            + "    </book>\n"
+            + "  </books>\n"
+            + "</soap:Envelope>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final WebClient client = getWebClient();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(URL_SECOND, xml, "text/xml");
+        client.setWebConnection(conn);
+
+        client.getPage(URL_FIRST);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "1", FF = "0")
+    @NotYetImplemented({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    public void xpathWithNamespaces() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    doc.async = false;\n"
+            + "    doc.load('" + URL_SECOND + "');\n"
             + "    try {\n"
             + "      alert(doc.selectNodes('//book').length);\n"
-            + "    } catch (e) {}\n"
+            + "    } catch (e) {\n"
+            + "      alert(doc.evaluate('count(//book)', doc.documentElement, "
+            + "null, XPathResult.NUMBER_TYPE, null).numberValue);\n"
+            + "    }\n"
             + "  }\n"
             + "  function createXmlDocument() {\n"
             + "    if (document.implementation && document.implementation.createDocument)\n"

@@ -388,7 +388,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * {@inheritDoc}
      */
     public NodeList getElementsByTagName(final String tagName) {
-        return new DomNodeList(this, "//" + tagName);
+        return new DomNodeList(this, "//*[local-name()='" + tagName + "']");
     }
 
     /**

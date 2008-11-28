@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlListItem;
@@ -93,7 +94,7 @@ public class JQuery126Test extends WebTestCase {
      */
     @Test
     @SuppressWarnings("unchecked")
-    @NotYetImplemented
+    @NotYetImplemented({ Browser.INTERNET_EXPLORER_6, Browser.FIREFOX_2, Browser.FIREFOX_3 })
     public void test() throws Exception {
         final Iterator<HtmlElement> it = loadPage();
         final String resource = "jquery/" + getVersion() + "/live." + getBrowserVersion().getNickname() + ".txt";
