@@ -720,15 +720,18 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(IE = { "1", "1" }, FF = "1")
     @NotYetImplemented
-    public void getElementsByTagName() throws Exception {
+    public void xpathWithnamespaces() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
             + "    doc.async = false;\n"
             + "    doc.load('" + URL_SECOND + "');\n"
             + "    alert(doc.getElementsByTagName('book').length);\n"
+            + "    try {\n"
+            + "      alert(doc.selectNodes('//book').length);\n"
+            + "    } catch (e) {}\n"
             + "  }\n"
             + "  function createXmlDocument() {\n"
             + "    if (document.implementation && document.implementation.createDocument)\n"
