@@ -219,17 +219,35 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
+     * Caution: with IE if you get a node with some lowercase letters, the node will be retrieved
+     * and will get as name the value passed as attribute to getAttributeNode.
+     * The consequence for IE: x.getAttributeNode("Foo").nodeName != x.getAttributeNode("foo").nodeName
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({
+    @Alerts(IE = {
             "null",
             "expando=true",
             "firstChild=null",
             "lastChild=null",
-            "name=customAttribute",
+            "name=custom_attribute",
             "nextSibling=null",
-            "nodeName=customAttribute",
+            "nodeName=custom_attribute",
+            "nodeType=2",
+            "nodeValue=bleh",
+            "(ownerDocument==document)=true",
+            "parentNode=null",
+            "previousSibling=null",
+            "specified=true",
+            "value=bleh" },
+            FF = {
+            "null",
+            "expando=undefined",
+            "firstChild=[object Text]",
+            "lastChild=[object Text]",
+            "name=custom_attribute",
+            "nextSibling=null",
+            "nodeName=custom_attribute",
             "nodeType=2",
             "nodeValue=bleh",
             "(ownerDocument==document)=true",
@@ -237,7 +255,8 @@ public class HTMLElementTest extends WebTestCase {
             "previousSibling=null",
             "specified=true",
             "value=bleh"
-        })
+            })
+    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
     public void getAttributeNode() throws Exception {
         final String html =
               "<html>\n"
@@ -247,7 +266,7 @@ public class HTMLElementTest extends WebTestCase {
             + "    function test() {\n"
             + "      var div = document.getElementById('div2');\n"
             + "      alert(div.getAttributeNode('notExisting'));\n"
-            + "      var customAtt = div.getAttributeNode('customAttribute');\n"
+            + "      var customAtt = div.getAttributeNode('custom_attribute');\n"
             + "      alertAttributeProperties(customAtt);\n"
             + "    }\n"
             + "    function alertAttributeProperties(att) {\n"
@@ -269,7 +288,7 @@ public class HTMLElementTest extends WebTestCase {
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='div1'></div>\n"
-            + "  <div id='div2' name='blah' customAttribute='bleh'></div>\n"
+            + "  <div id='div2' name='blah' custom_attribute='bleh'></div>\n"
             + "  <div id='div3'></div>\n"
             + "</body>\n"
             + "</html>";
