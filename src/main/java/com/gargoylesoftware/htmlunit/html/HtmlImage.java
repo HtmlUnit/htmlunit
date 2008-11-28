@@ -138,7 +138,7 @@ public class HtmlImage extends ClickableElement {
      * @return the value of the attribute "src" or an empty string if that attribute isn't defined
      */
     public final String getSrcAttribute() {
-        return getAttributeValue("src");
+        return getAttribute("src");
     }
 
     /**
@@ -149,7 +149,7 @@ public class HtmlImage extends ClickableElement {
      * @return the value of the attribute "alt" or an empty string if that attribute isn't defined
      */
     public final String getAltAttribute() {
-        return getAttributeValue("alt");
+        return getAttribute("alt");
     }
 
     /**
@@ -160,7 +160,7 @@ public class HtmlImage extends ClickableElement {
      * @return the value of the attribute "name" or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
-        return getAttributeValue("name");
+        return getAttribute("name");
     }
 
     /**
@@ -171,7 +171,7 @@ public class HtmlImage extends ClickableElement {
      * @return the value of the attribute "longdesc" or an empty string if that attribute isn't defined
      */
     public final String getLongDescAttribute() {
-        return getAttributeValue("longdesc");
+        return getAttribute("longdesc");
     }
 
     /**
@@ -182,7 +182,7 @@ public class HtmlImage extends ClickableElement {
      * @return the value of the attribute "height" or an empty string if that attribute isn't defined
      */
     public final String getHeightAttribute() {
-        return getAttributeValue("height");
+        return getAttribute("height");
     }
 
     /**
@@ -193,7 +193,7 @@ public class HtmlImage extends ClickableElement {
      * @return the value of the attribute "width" or an empty string if that attribute isn't defined
      */
     public final String getWidthAttribute() {
-        return getAttributeValue("width");
+        return getAttribute("width");
     }
 
     /**
@@ -204,7 +204,7 @@ public class HtmlImage extends ClickableElement {
      * @return the value of the attribute "usemap" or an empty string if that attribute isn't defined
      */
     public final String getUseMapAttribute() {
-        return getAttributeValue("usemap");
+        return getAttribute("usemap");
     }
 
     /**
@@ -215,7 +215,7 @@ public class HtmlImage extends ClickableElement {
      * @return the value of the attribute "ismap" or an empty string if that attribute isn't defined
      */
     public final String getIsmapAttribute() {
-        return getAttributeValue("ismap");
+        return getAttribute("ismap");
     }
 
     /**
@@ -226,7 +226,7 @@ public class HtmlImage extends ClickableElement {
      * @return the value of the attribute "align" or an empty string if that attribute isn't defined
      */
     public final String getAlignAttribute() {
-        return getAttributeValue("align");
+        return getAttribute("align");
     }
 
     /**
@@ -237,7 +237,7 @@ public class HtmlImage extends ClickableElement {
      * @return the value of the attribute "border" or an empty string if that attribute isn't defined
      */
     public final String getBorderAttribute() {
-        return getAttributeValue("border");
+        return getAttribute("border");
     }
 
     /**
@@ -248,7 +248,7 @@ public class HtmlImage extends ClickableElement {
      * @return the value of the attribute "hspace" or an empty string if that attribute isn't defined
      */
     public final String getHspaceAttribute() {
-        return getAttributeValue("hspace");
+        return getAttribute("hspace");
     }
 
     /**
@@ -259,7 +259,7 @@ public class HtmlImage extends ClickableElement {
      * @return the value of the attribute "vspace" or an empty string if that attribute isn't defined
      */
     public final String getVspaceAttribute() {
-        return getAttributeValue("vspace");
+        return getAttribute("vspace");
     }
 
     /**

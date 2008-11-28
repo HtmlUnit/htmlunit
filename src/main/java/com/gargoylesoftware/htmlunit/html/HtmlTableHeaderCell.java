@@ -56,7 +56,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * or an empty string if that attribute isn't defined.
      */
     public final String getAbbrAttribute() {
-        return getAttributeValue("abbr");
+        return getAttribute("abbr");
     }
 
     /**
@@ -68,7 +68,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * or an empty string if that attribute isn't defined.
      */
     public final String getAxisAttribute() {
-        return getAttributeValue("axis");
+        return getAttribute("axis");
     }
 
     /**
@@ -80,7 +80,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * or an empty string if that attribute isn't defined.
      */
     public final String getHeadersAttribute() {
-        return getAttributeValue("headers");
+        return getAttribute("headers");
     }
 
     /**
@@ -92,7 +92,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * or an empty string if that attribute isn't defined.
      */
     public final String getScopeAttribute() {
-        return getAttributeValue("scope");
+        return getAttribute("scope");
     }
 
     /**
@@ -104,7 +104,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * or an empty string if that attribute isn't defined.
      */
     public final String getRowSpanAttribute() {
-        return getAttributeValue("rowspan");
+        return getAttribute("rowspan");
     }
 
     /**
@@ -116,7 +116,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * or an empty string if that attribute isn't defined.
      */
     public final String getColumnSpanAttribute() {
-        return getAttributeValue("colspan");
+        return getAttribute("colspan");
     }
 
     /**
@@ -128,7 +128,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
-        return getAttributeValue("align");
+        return getAttribute("align");
     }
 
     /**
@@ -140,7 +140,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharAttribute() {
-        return getAttributeValue("char");
+        return getAttribute("char");
     }
 
     /**
@@ -152,7 +152,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharoffAttribute() {
-        return getAttributeValue("charoff");
+        return getAttribute("charoff");
     }
 
     /**
@@ -164,7 +164,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * or an empty string if that attribute isn't defined.
      */
     public final String getValignAttribute() {
-        return getAttributeValue("valign");
+        return getAttribute("valign");
     }
 
     /**
@@ -176,7 +176,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * or an empty string if that attribute isn't defined.
      */
     public final String getNoWrapAttribute() {
-        return getAttributeValue("nowrap");
+        return getAttribute("nowrap");
     }
 
     /**
@@ -188,7 +188,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * or an empty string if that attribute isn't defined.
      */
     public final String getBgcolorAttribute() {
-        return getAttributeValue("bgcolor");
+        return getAttribute("bgcolor");
     }
 
     /**
@@ -200,7 +200,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * or an empty string if that attribute isn't defined.
      */
     public final String getWidthAttribute() {
-        return getAttributeValue("width");
+        return getAttribute("width");
     }
 
     /**
@@ -212,6 +212,6 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * or an empty string if that attribute isn't defined.
      */
     public final String getHeightAttribute() {
-        return getAttributeValue("height");
+        return getAttribute("height");
     }
 }

@@ -68,7 +68,7 @@ public class HtmlOptionGroup extends ClickableElement implements DisabledElement
      * {@inheritDoc}
      */
     public final String getDisabledAttribute() {
-        return getAttributeValue("disabled");
+        return getAttribute("disabled");
     }
 
     /**
@@ -79,6 +79,6 @@ public class HtmlOptionGroup extends ClickableElement implements DisabledElement
      * @return the value of the attribute "label" or an empty string if that attribute isn't defined
      */
     public final String getLabelAttribute() {
-        return getAttributeValue("label");
+        return getAttribute("label");
     }
 }

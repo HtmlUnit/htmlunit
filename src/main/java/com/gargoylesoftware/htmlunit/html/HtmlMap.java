@@ -56,6 +56,6 @@ public class HtmlMap extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getNameAttribute() {
-        return getAttributeValue("name");
+        return getAttribute("name");
     }
 }

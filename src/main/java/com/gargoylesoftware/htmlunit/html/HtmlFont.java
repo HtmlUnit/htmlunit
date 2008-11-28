@@ -56,7 +56,7 @@ public class HtmlFont extends StyledElement {
      * @return the value of the attribute "lang" or an empty string if that attribute isn't defined
      */
     public final String getLangAttribute() {
-        return getAttributeValue("lang");
+        return getAttribute("lang");
     }
 
     /**
@@ -67,7 +67,7 @@ public class HtmlFont extends StyledElement {
      * @return the value of the attribute "xml:lang" or an empty string if that attribute isn't defined
      */
     public final String getXmlLangAttribute() {
-        return getAttributeValue("xml:lang");
+        return getAttribute("xml:lang");
     }
 
     /**
@@ -78,7 +78,7 @@ public class HtmlFont extends StyledElement {
      * @return the value of the attribute "dir" or an empty string if that attribute isn't defined
      */
     public final String getTextDirectionAttribute() {
-        return getAttributeValue("dir");
+        return getAttribute("dir");
     }
 
     /**
@@ -89,7 +89,7 @@ public class HtmlFont extends StyledElement {
      * @return the value of the attribute "size" or an empty string if that attribute isn't defined
      */
     public final String getSizeAttribute() {
-        return getAttributeValue("size");
+        return getAttribute("size");
     }
 
     /**
@@ -100,7 +100,7 @@ public class HtmlFont extends StyledElement {
      * @return the value of the attribute "color" or an empty string if that attribute isn't defined
      */
     public final String getColorAttribute() {
-        return getAttributeValue("color");
+        return getAttribute("color");
     }
 
     /**
@@ -111,7 +111,7 @@ public class HtmlFont extends StyledElement {
      * @return the value of the attribute "face" or an empty string if that attribute isn't defined
      */
     public final String getFaceAttribute() {
-        return getAttributeValue("face");
+        return getAttribute("face");
     }
 
     /**

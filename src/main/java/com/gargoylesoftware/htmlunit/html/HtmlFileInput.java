@@ -53,7 +53,7 @@ public class HtmlFileInput extends HtmlInput {
     HtmlFileInput(final String namespaceURI, final String qualifiedName, final SgmlPage page,
         final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
-        setAttributeValue("value", "");
+        setAttribute("value", "");
         if (page.getWebClient().getBrowserVersion().isIE()) {
             setDefaultValue("");
         }

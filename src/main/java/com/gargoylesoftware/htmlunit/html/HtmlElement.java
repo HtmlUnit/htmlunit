@@ -108,17 +108,11 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * Returns the value of the specified attribute or an empty string. If the
-     * result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
-     * if the attribute wasn't specified or {@link #ATTRIBUTE_VALUE_EMPTY} if the
-     * attribute was specified but it was empty.
-     *
-     * @param attributeName the name of the attribute
-     * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED} or {@link #ATTRIBUTE_VALUE_EMPTY}
+     * {@inheritDoc}
      */
     @Override
-    public final String getAttributeValue(final String attributeName) {
-        return super.getAttributeValue(attributeName.toLowerCase());
+    public String getAttribute(final String attributeName) {
+        return super.getAttribute(attributeName.toLowerCase());
     }
 
     /**
@@ -135,7 +129,7 @@ public abstract class HtmlElement extends DomElement {
     public void setAttributeNS(final String namespaceURI, final String qualifiedName,
             final String attributeValue) {
 
-        final String oldAttributeValue = getAttributeValue(qualifiedName);
+        final String oldAttributeValue = getAttribute(qualifiedName);
         String value = attributeValue;
 
         if (getOwnerDocument() instanceof HtmlPage) {
@@ -214,7 +208,7 @@ public abstract class HtmlElement extends DomElement {
      */
     @Override
     public final void removeAttribute(final String attributeName) {
-        final String value = getAttributeValue(attributeName);
+        final String value = getAttribute(attributeName);
 
         if (getPage() instanceof HtmlPage) {
             ((HtmlPage) getPage()).removeMappedElement(this);
@@ -359,7 +353,7 @@ public abstract class HtmlElement extends DomElement {
      * @return the identifier of this element
      */
     public final String getId() {
-        return getAttributeValue("id");
+        return getAttribute("id");
     }
 
     /**
@@ -380,7 +374,7 @@ public abstract class HtmlElement extends DomElement {
      * @return this element's tab index
      */
     public Short getTabIndex() {
-        final String index = getAttributeValue("tabindex");
+        final String index = getAttribute("tabindex");
         if (index == null || index.length() == 0) {
             return null;
         }
@@ -655,7 +649,7 @@ public abstract class HtmlElement extends DomElement {
 
         for (final HtmlElement next : getAllHtmlChildElements()) {
             if (next.getTagName().equals(lowerCaseTagName)) {
-                final String attValue = next.getAttributeValue(attributeName);
+                final String attValue = next.getAttribute(attributeName);
                 if (attValue != null && attValue.equals(attributeValue)) {
                     list.add((E) next);
                 }

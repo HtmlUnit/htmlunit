@@ -213,7 +213,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * @return the value of the attribute "name" or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
-        return getAttributeValue("name");
+        return getAttribute("name");
     }
 
     /**
@@ -224,7 +224,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * @return the value of the attribute "rows" or an empty string if that attribute isn't defined
      */
     public final String getRowsAttribute() {
-        return getAttributeValue("rows");
+        return getAttribute("rows");
     }
 
     /**
@@ -235,7 +235,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * @return the value of the attribute "cols" or an empty string if that attribute isn't defined
      */
     public final String getColumnsAttribute() {
-        return getAttributeValue("cols");
+        return getAttribute("cols");
     }
 
     /**
@@ -249,7 +249,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * {@inheritDoc}
      */
     public final String getDisabledAttribute() {
-        return getAttributeValue("disabled");
+        return getAttribute("disabled");
     }
 
     /**
@@ -260,7 +260,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * @return the value of the attribute "readonly" or an empty string if that attribute isn't defined
      */
     public final String getReadOnlyAttribute() {
-        return getAttributeValue("readonly");
+        return getAttribute("readonly");
     }
 
     /**
@@ -271,7 +271,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * @return the value of the attribute "tabindex" or an empty string if that attribute isn't defined
      */
     public final String getTabIndexAttribute() {
-        return getAttributeValue("tabindex");
+        return getAttribute("tabindex");
     }
 
     /**
@@ -282,7 +282,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * @return the value of the attribute "accesskey" or an empty string if that attribute isn't defined
      */
     public final String getAccessKeyAttribute() {
-        return getAttributeValue("accesskey");
+        return getAttribute("accesskey");
     }
 
     /**
@@ -293,7 +293,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * @return the value of the attribute "onfocus" or an empty string if that attribute isn't defined
      */
     public final String getOnFocusAttribute() {
-        return getAttributeValue("onfocus");
+        return getAttribute("onfocus");
     }
 
     /**
@@ -304,7 +304,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * @return the value of the attribute "onblur" or an empty string if that attribute isn't defined
      */
     public final String getOnBlurAttribute() {
-        return getAttributeValue("onblur");
+        return getAttribute("onblur");
     }
 
     /**
@@ -315,7 +315,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * @return the value of the attribute "onselect" or an empty string if that attribute isn't defined
      */
     public final String getOnSelectAttribute() {
-        return getAttributeValue("onselect");
+        return getAttribute("onselect");
     }
 
     /**
@@ -326,7 +326,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * @return the value of the attribute "onchange" or an empty string if that attribute isn't defined
      */
     public final String getOnChangeAttribute() {
-        return getAttributeValue("onchange");
+        return getAttribute("onchange");
     }
 
     /**

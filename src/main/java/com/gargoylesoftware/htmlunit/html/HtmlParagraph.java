@@ -57,7 +57,7 @@ public class HtmlParagraph extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
-        return getAttributeValue("align");
+        return getAttribute("align");
     }
 
     /**

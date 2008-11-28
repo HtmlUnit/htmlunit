@@ -65,7 +65,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
      * @param newValue the new content
      */
     public void setValueAttribute(final String newValue) {
-        setAttributeValue("value", newValue);
+        setAttribute("value", newValue);
     }
 
     /**
@@ -172,7 +172,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
      * @return the value of the attribute "name" or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
-        return getAttributeValue("name");
+        return getAttribute("name");
     }
 
     /**
@@ -183,7 +183,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
      * @return the value of the attribute "value" or an empty string if that attribute isn't defined
      */
     public final String getValueAttribute() {
-        return getAttributeValue("value");
+        return getAttribute("value");
     }
 
     /**
@@ -196,7 +196,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
      * @return the value of the attribute "type" or the default value if that attribute isn't defined
      */
     public final String getTypeAttribute() {
-        String type = getAttributeValue("type");
+        String type = getAttribute("type");
         if (type == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
             final BrowserVersion browser = getPage().getWebClient().getBrowserVersion();
             if (browser.isIE()) {
@@ -217,7 +217,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
      * @return the value of the attribute "disabled" or an empty string if that attribute isn't defined
      */
     public final String getDisabledAttribute() {
-        return getAttributeValue("disabled");
+        return getAttribute("disabled");
     }
 
     /**
@@ -228,7 +228,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
      * @return the value of the attribute "tabindex" or an empty string if that attribute isn't defined
      */
     public final String getTabIndexAttribute() {
-        return getAttributeValue("tabindex");
+        return getAttribute("tabindex");
     }
 
     /**
@@ -239,7 +239,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
      * @return the value of the attribute "accesskey" or an empty string if that attribute isn't defined
      */
     public final String getAccessKeyAttribute() {
-        return getAttributeValue("accesskey");
+        return getAttribute("accesskey");
     }
 
     /**
@@ -250,7 +250,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
      * @return the value of the attribute "onfocus" or an empty string if that attribute isn't defined
      */
     public final String getOnFocusAttribute() {
-        return getAttributeValue("onfocus");
+        return getAttribute("onfocus");
     }
 
     /**
@@ -261,6 +261,6 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
      * @return the value of the attribute "onblur" or an empty string if that attribute isn't defined
      */
     public final String getOnBlurAttribute() {
-        return getAttributeValue("onblur");
+        return getAttribute("onblur");
     }
 }

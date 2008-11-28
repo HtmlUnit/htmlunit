@@ -57,7 +57,7 @@ public abstract class StyledElement extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getIdAttribute() {
-        return getAttributeValue("id");
+        return getAttribute("id");
     }
 
     /**
@@ -69,7 +69,7 @@ public abstract class StyledElement extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getClassAttribute() {
-        return getAttributeValue("class");
+        return getAttribute("class");
     }
 
     /**
@@ -81,7 +81,7 @@ public abstract class StyledElement extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getStyleAttribute() {
-        return getAttributeValue("style");
+        return getAttribute("style");
     }
 
     /**
@@ -93,6 +93,6 @@ public abstract class StyledElement extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getTitleAttribute() {
-        return getAttributeValue("title");
+        return getAttribute("title");
     }
 }

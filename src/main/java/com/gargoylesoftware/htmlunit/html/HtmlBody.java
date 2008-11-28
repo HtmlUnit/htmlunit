@@ -69,7 +69,7 @@ public class HtmlBody extends ClickableElement {
      * @return the value of the attribute "onload" or an empty string if that attribute isn't defined
      */
     public final String getOnLoadAttribute() {
-        return getAttributeValue("onload");
+        return getAttribute("onload");
     }
 
     /**
@@ -80,7 +80,7 @@ public class HtmlBody extends ClickableElement {
      * @return the value of the attribute "onunload" or an empty string if that attribute isn't defined
      */
     public final String getOnUnloadAttribute() {
-        return getAttributeValue("onunload");
+        return getAttribute("onunload");
     }
 
     /**
@@ -91,7 +91,7 @@ public class HtmlBody extends ClickableElement {
      * @return the value of the attribute "background" or an empty string if that attribute isn't defined
      */
     public final String getBackgroundAttribute() {
-        return getAttributeValue("background");
+        return getAttribute("background");
     }
 
     /**
@@ -102,7 +102,7 @@ public class HtmlBody extends ClickableElement {
      * @return the value of the attribute "bgcolor" or an empty string if that attribute isn't defined
      */
     public final String getBgcolorAttribute() {
-        return getAttributeValue("bgcolor");
+        return getAttribute("bgcolor");
     }
 
     /**
@@ -113,7 +113,7 @@ public class HtmlBody extends ClickableElement {
      * @return the value of the attribute "text" or an empty string if that attribute isn't defined
      */
     public final String getTextAttribute() {
-        return getAttributeValue("text");
+        return getAttribute("text");
     }
 
     /**
@@ -124,7 +124,7 @@ public class HtmlBody extends ClickableElement {
      * @return the value of the attribute "link" or an empty string if that attribute isn't defined
      */
     public final String getLinkAttribute() {
-        return getAttributeValue("link");
+        return getAttribute("link");
     }
 
     /**
@@ -135,7 +135,7 @@ public class HtmlBody extends ClickableElement {
      * @return the value of the attribute "vlink" or an empty string if that attribute isn't defined
      */
     public final String getVlinkAttribute() {
-        return getAttributeValue("vlink");
+        return getAttribute("vlink");
     }
 
     /**
@@ -146,7 +146,7 @@ public class HtmlBody extends ClickableElement {
      * @return the value of the attribute "alink" or an empty string if that attribute isn't defined
      */
     public final String getAlinkAttribute() {
-        return getAttributeValue("alink");
+        return getAttribute("alink");
     }
 
     /**

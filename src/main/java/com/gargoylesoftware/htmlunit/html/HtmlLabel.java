@@ -60,7 +60,7 @@ public class HtmlLabel extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getForAttribute() {
-        return getAttributeValue("for");
+        return getAttribute("for");
     }
 
     /**
@@ -72,7 +72,7 @@ public class HtmlLabel extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getAccessKeyAttribute() {
-        return getAttributeValue("accesskey");
+        return getAttribute("accesskey");
     }
 
     /**
@@ -84,7 +84,7 @@ public class HtmlLabel extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getOnFocusAttribute() {
-        return getAttributeValue("onfocus");
+        return getAttribute("onfocus");
     }
 
     /**
@@ -96,7 +96,7 @@ public class HtmlLabel extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getOnBlurAttribute() {
-        return getAttributeValue("onblur");
+        return getAttribute("onblur");
     }
 
     /**

@@ -55,7 +55,7 @@ public class HtmlDeletedText extends ClickableElement {
      * @return the value of the attribute "cite" or an empty string if that attribute isn't defined
      */
     public final String getCiteAttribute() {
-        return getAttributeValue("cite");
+        return getAttribute("cite");
     }
 
     /**
@@ -66,6 +66,6 @@ public class HtmlDeletedText extends ClickableElement {
      * @return the value of the attribute "datetime" or an empty string if that attribute isn't defined
      */
     public final String getDateTimeAttribute() {
-        return getAttributeValue("datetime");
+        return getAttribute("datetime");
     }
 }

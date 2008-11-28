@@ -56,6 +56,6 @@ public class HtmlPreformattedText extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getWidthAttribute() {
-        return getAttributeValue("width");
+        return getAttribute("width");
     }
 }

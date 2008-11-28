@@ -54,7 +54,7 @@ public class HtmlBase extends HtmlElement {
      * @return the value of the attribute "href" or an empty string if that attribute isn't defined
      */
     public final String getHrefAttribute() {
-        return getAttributeValue("href");
+        return getAttribute("href");
     }
 
     /**
@@ -65,6 +65,6 @@ public class HtmlBase extends HtmlElement {
      * @return the value of the attribute "target" or an empty string if that attribute isn't defined
      */
     public final String getTargetAttribute() {
-        return getAttributeValue("target");
+        return getAttribute("target");
     }
 }

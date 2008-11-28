@@ -56,7 +56,7 @@ public class HtmlListItem extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getTypeAttribute() {
-        return getAttributeValue("type");
+        return getAttribute("type");
     }
 
     /**
@@ -68,6 +68,6 @@ public class HtmlListItem extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getValueAttribute() {
-        return getAttributeValue("value");
+        return getAttribute("value");
     }
 }

@@ -671,7 +671,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         final List<String> list = new ArrayList<String>();
 
         for (final HtmlElement element : getTabbableElements()) {
-            list.add(element.getAttributeValue("id"));
+            list.add(element.getAttribute("id"));
         }
 
         return Collections.unmodifiableList(list);
@@ -811,7 +811,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
         for (final HtmlElement element : getAllHtmlChildElements()) {
             if (acceptableTagNames.contains(element.getTagName())) {
-                final String accessKeyAttribute = element.getAttributeValue("accesskey");
+                final String accessKeyAttribute = element.getAttribute("accesskey");
                 if (searchString.equalsIgnoreCase(accessKeyAttribute)) {
                     elements.add(element);
                 }
@@ -1602,7 +1602,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
     private void addElement(final Map<String, List<HtmlElement>> map, final HtmlElement element,
             final String attribute, final boolean recurse) {
-        final String value = element.getAttributeValue(attribute);
+        final String value = element.getAttribute(attribute);
         if (!StringUtils.isEmpty(value)) {
             List<HtmlElement> elements = map.get(value);
             if (elements == null) {
@@ -1644,7 +1644,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
     private void removeElement(final Map<String, List<HtmlElement>> map, final HtmlElement element, final String att,
             final boolean recurse) {
-        final String value = element.getAttributeValue(att);
+        final String value = element.getAttribute(att);
         if (!StringUtils.isEmpty(value)) {
             final List<HtmlElement> elements = map.remove(value);
             if (elements != null && (elements.size() != 1 || !elements.contains(element))) {
@@ -1841,7 +1841,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
         for (final HtmlRadioButtonInput input : pageInputs) {
             if (input == radioButtonInput) {
-                input.setAttributeValue("checked", "checked");
+                input.setAttribute("checked", "checked");
             }
             else {
                 input.removeAttribute("checked");

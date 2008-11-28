@@ -96,7 +96,7 @@ public class HtmlTableRow extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
-        return getAttributeValue("align");
+        return getAttribute("align");
     }
 
     /**
@@ -108,7 +108,7 @@ public class HtmlTableRow extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharAttribute() {
-        return getAttributeValue("char");
+        return getAttribute("char");
     }
 
     /**
@@ -120,7 +120,7 @@ public class HtmlTableRow extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharoffAttribute() {
-        return getAttributeValue("charoff");
+        return getAttribute("charoff");
     }
 
     /**
@@ -132,7 +132,7 @@ public class HtmlTableRow extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getValignAttribute() {
-        return getAttributeValue("valign");
+        return getAttribute("valign");
     }
 
     /**
@@ -152,7 +152,7 @@ public class HtmlTableRow extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getBgcolorAttribute() {
-        return getAttributeValue("bgcolor");
+        return getAttribute("bgcolor");
     }
 
     /**

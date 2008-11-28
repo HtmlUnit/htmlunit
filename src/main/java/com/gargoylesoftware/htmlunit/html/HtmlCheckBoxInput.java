@@ -58,8 +58,8 @@ public class HtmlCheckBoxInput extends HtmlInput {
         defaultCheckedState_ = hasAttribute("checked");
 
         // default value for both IE6 and Mozilla 1.7 even if spec says it is unspecified
-        if (getAttributeValue("value") == ATTRIBUTE_NOT_DEFINED) {
-            setAttributeValue("value", "on");
+        if (getAttribute("value") == ATTRIBUTE_NOT_DEFINED) {
+            setAttribute("value", "on");
         }
     }
 
@@ -79,7 +79,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
     @Override
     public Page setChecked(final boolean isChecked) {
         if (isChecked) {
-            setAttributeValue("checked", "checked");
+            setAttribute("checked", "checked");
         }
         else {
             removeAttribute("checked");

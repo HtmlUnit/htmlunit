@@ -55,7 +55,7 @@ public class HtmlSubmitInput extends HtmlInput {
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
         if (getPage().getWebClient().getBrowserVersion().isIE() && !hasAttribute("value")) {
-            setAttributeValue("value", DEFAULT_VALUE);
+            setAttribute("value", DEFAULT_VALUE);
         }
     }
 

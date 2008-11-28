@@ -56,7 +56,7 @@ public class HtmlTableColumnGroup extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getSpanAttribute() {
-        return getAttributeValue("span");
+        return getAttribute("span");
     }
 
     /**
@@ -68,7 +68,7 @@ public class HtmlTableColumnGroup extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getWidthAttribute() {
-        return getAttributeValue("width");
+        return getAttribute("width");
     }
 
     /**
@@ -80,7 +80,7 @@ public class HtmlTableColumnGroup extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
-        return getAttributeValue("align");
+        return getAttribute("align");
     }
 
     /**
@@ -92,7 +92,7 @@ public class HtmlTableColumnGroup extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharAttribute() {
-        return getAttributeValue("char");
+        return getAttribute("char");
     }
 
     /**
@@ -104,7 +104,7 @@ public class HtmlTableColumnGroup extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharoffAttribute() {
-        return getAttributeValue("charoff");
+        return getAttribute("charoff");
     }
 
     /**
@@ -116,6 +116,6 @@ public class HtmlTableColumnGroup extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getValignAttribute() {
-        return getAttributeValue("valign");
+        return getAttribute("valign");
     }
 }

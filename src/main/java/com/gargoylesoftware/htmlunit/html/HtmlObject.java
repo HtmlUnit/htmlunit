@@ -56,7 +56,7 @@ public class HtmlObject extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getDeclareAttribute() {
-        return getAttributeValue("declare");
+        return getAttribute("declare");
     }
 
     /**
@@ -68,7 +68,7 @@ public class HtmlObject extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getClassIdAttribute() {
-        return getAttributeValue("classid");
+        return getAttribute("classid");
     }
 
     /**
@@ -80,7 +80,7 @@ public class HtmlObject extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getCodebaseAttribute() {
-        return getAttributeValue("codebase");
+        return getAttribute("codebase");
     }
 
     /**
@@ -92,7 +92,7 @@ public class HtmlObject extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getDataAttribute() {
-        return getAttributeValue("data");
+        return getAttribute("data");
     }
 
     /**
@@ -104,7 +104,7 @@ public class HtmlObject extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getTypeAttribute() {
-        return getAttributeValue("type");
+        return getAttribute("type");
     }
 
     /**
@@ -116,7 +116,7 @@ public class HtmlObject extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getCodeTypeAttribute() {
-        return getAttributeValue("codetype");
+        return getAttribute("codetype");
     }
 
     /**
@@ -128,7 +128,7 @@ public class HtmlObject extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getArchiveAttribute() {
-        return getAttributeValue("archive");
+        return getAttribute("archive");
     }
 
     /**
@@ -140,7 +140,7 @@ public class HtmlObject extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getStandbyAttribute() {
-        return getAttributeValue("standby");
+        return getAttribute("standby");
     }
 
     /**
@@ -152,7 +152,7 @@ public class HtmlObject extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getHeightAttribute() {
-        return getAttributeValue("height");
+        return getAttribute("height");
     }
 
     /**
@@ -164,7 +164,7 @@ public class HtmlObject extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getWidthAttribute() {
-        return getAttributeValue("width");
+        return getAttribute("width");
     }
 
     /**
@@ -176,7 +176,7 @@ public class HtmlObject extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getUseMapAttribute() {
-        return getAttributeValue("usemap");
+        return getAttribute("usemap");
     }
 
     /**
@@ -188,7 +188,7 @@ public class HtmlObject extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getNameAttribute() {
-        return getAttributeValue("name");
+        return getAttribute("name");
     }
 
     /**
@@ -200,7 +200,7 @@ public class HtmlObject extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getTabIndexAttribute() {
-        return getAttributeValue("tabindex");
+        return getAttribute("tabindex");
     }
 
     /**
@@ -212,7 +212,7 @@ public class HtmlObject extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
-        return getAttributeValue("align");
+        return getAttribute("align");
     }
 
     /**
@@ -224,7 +224,7 @@ public class HtmlObject extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getBorderAttribute() {
-        return getAttributeValue("border");
+        return getAttribute("border");
     }
 
     /**
@@ -236,7 +236,7 @@ public class HtmlObject extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getHspaceAttribute() {
-        return getAttributeValue("hspace");
+        return getAttribute("hspace");
     }
 
     /**
@@ -248,6 +248,6 @@ public class HtmlObject extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getVspaceAttribute() {
-        return getAttributeValue("vspace");
+        return getAttribute("vspace");
     }
 }

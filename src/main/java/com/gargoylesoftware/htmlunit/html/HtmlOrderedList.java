@@ -56,7 +56,7 @@ public class HtmlOrderedList extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getTypeAttribute() {
-        return getAttributeValue("type");
+        return getAttribute("type");
     }
 
     /**
@@ -68,7 +68,7 @@ public class HtmlOrderedList extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getCompactAttribute() {
-        return getAttributeValue("compact");
+        return getAttribute("compact");
     }
 
     /**
@@ -80,7 +80,7 @@ public class HtmlOrderedList extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getStartAttribute() {
-        return getAttributeValue("start");
+        return getAttribute("start");
     }
 
     /**

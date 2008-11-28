@@ -55,7 +55,7 @@ public class HtmlBidirectionalOverride extends StyledElement {
      * @return the value of the attribute "lang" or an empty string if that attribute isn't defined
      */
     public final String getLangAttribute() {
-        return getAttributeValue("lang");
+        return getAttribute("lang");
     }
 
     /**
@@ -66,7 +66,7 @@ public class HtmlBidirectionalOverride extends StyledElement {
      * @return the value of the attribute "xml:lang" or an empty string if that attribute isn't defined
      */
     public final String getXmlLangAttribute() {
-        return getAttributeValue("xml:lang");
+        return getAttribute("xml:lang");
     }
 
     /**
@@ -77,6 +77,6 @@ public class HtmlBidirectionalOverride extends StyledElement {
      * @return the value of the attribute "dir" or an empty string if that attribute isn't defined
      */
     public final String getTextDirectionAttribute() {
-        return getAttributeValue("dir");
+        return getAttribute("dir");
     }
 }

@@ -398,7 +398,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * @return <tt>true</tt> if this select is using "multiple select"
      */
     public boolean isMultipleSelectEnabled() {
-        return getAttributeValue("multiple") != ATTRIBUTE_NOT_DEFINED;
+        return getAttribute("multiple") != ATTRIBUTE_NOT_DEFINED;
     }
 
     /**
@@ -483,7 +483,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * @return the value of the attribute "name" or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
-        return getAttributeValue("name");
+        return getAttribute("name");
     }
 
     /**
@@ -494,7 +494,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * @return the value of the attribute "size" or an empty string if that attribute isn't defined
      */
     public final String getSizeAttribute() {
-        return getAttributeValue("size");
+        return getAttribute("size");
     }
 
     /**
@@ -504,14 +504,14 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * @return the value of the attribute "multiple" or an empty string if that attribute isn't defined
      */
     public final String getMultipleAttribute() {
-        return getAttributeValue("multiple");
+        return getAttribute("multiple");
     }
 
     /**
      * {@inheritDoc}
      */
     public final String getDisabledAttribute() {
-        return getAttributeValue("disabled");
+        return getAttribute("disabled");
     }
 
     /**
@@ -528,7 +528,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * @return the value of the attribute "tabindex" or an empty string if that attribute isn't defined
      */
     public final String getTabIndexAttribute() {
-        return getAttributeValue("tabindex");
+        return getAttribute("tabindex");
     }
 
     /**
@@ -538,7 +538,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * @return the value of the attribute "onfocus" or an empty string if that attribute isn't defined
      */
     public final String getOnFocusAttribute() {
-        return getAttributeValue("onfocus");
+        return getAttribute("onfocus");
     }
 
     /**
@@ -548,7 +548,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * @return the value of the attribute "onblur" or an empty string if that attribute isn't defined
      */
     public final String getOnBlurAttribute() {
-        return getAttributeValue("onblur");
+        return getAttribute("onblur");
     }
 
     /**
@@ -558,6 +558,6 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * @return the value of the attribute "onchange" or an empty string if that attribute isn't defined
      */
     public final String getOnChangeAttribute() {
-        return getAttributeValue("onchange");
+        return getAttribute("onchange");
     }
 }

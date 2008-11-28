@@ -56,6 +56,6 @@ public class HtmlMenu extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getCompactAttribute() {
-        return getAttributeValue("compact");
+        return getAttribute("compact");
     }
 }

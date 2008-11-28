@@ -95,7 +95,7 @@ public class HtmlMeta extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getLangAttribute() {
-        return getAttributeValue("lang");
+        return getAttribute("lang");
     }
 
     /**
@@ -107,7 +107,7 @@ public class HtmlMeta extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getXmlLangAttribute() {
-        return getAttributeValue("xml:lang");
+        return getAttribute("xml:lang");
     }
 
     /**
@@ -119,7 +119,7 @@ public class HtmlMeta extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getTextDirectionAttribute() {
-        return getAttributeValue("dir");
+        return getAttribute("dir");
     }
 
     /**
@@ -131,7 +131,7 @@ public class HtmlMeta extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getHttpEquivAttribute() {
-        return getAttributeValue("http-equiv");
+        return getAttribute("http-equiv");
     }
 
     /**
@@ -143,7 +143,7 @@ public class HtmlMeta extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getNameAttribute() {
-        return getAttributeValue("name");
+        return getAttribute("name");
     }
 
     /**
@@ -155,7 +155,7 @@ public class HtmlMeta extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getContentAttribute() {
-        return getAttributeValue("content");
+        return getAttribute("content");
     }
 
     /**
@@ -167,6 +167,6 @@ public class HtmlMeta extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getSchemeAttribute() {
-        return getAttributeValue("scheme");
+        return getAttribute("scheme");
     }
 }

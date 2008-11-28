@@ -53,7 +53,7 @@ public final class HtmlHtml extends HtmlElement {
      * @return the value of the attribute "lang" or an empty string if that attribute isn't defined
      */
     public String getLangAttribute() {
-        return getAttributeValue("lang");
+        return getAttribute("lang");
     }
 
     /**
@@ -64,7 +64,7 @@ public final class HtmlHtml extends HtmlElement {
      * @return the value of the attribute "xml:lang" or an empty string if that attribute isn't defined
      */
     public String getXmlLangAttribute() {
-        return getAttributeValue("xml:lang");
+        return getAttribute("xml:lang");
     }
 
     /**
@@ -75,6 +75,6 @@ public final class HtmlHtml extends HtmlElement {
      * @return the value of the attribute "dir" or an empty string if that attribute isn't defined
      */
     public String getTextDirectionAttribute() {
-        return getAttributeValue("dir");
+        return getAttribute("dir");
     }
 }

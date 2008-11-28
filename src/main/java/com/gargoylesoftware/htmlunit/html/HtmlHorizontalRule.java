@@ -55,7 +55,7 @@ public class HtmlHorizontalRule extends ClickableElement {
      * @return the value of the attribute "align" or an empty string if that attribute isn't defined
      */
     public final String getAlignAttribute() {
-        return getAttributeValue("align");
+        return getAttribute("align");
     }
 
     /**
@@ -66,7 +66,7 @@ public class HtmlHorizontalRule extends ClickableElement {
      * @return the value of the attribute "noshade" or an empty string if that attribute isn't defined
      */
     public final String getNoShadeAttribute() {
-        return getAttributeValue("noshade");
+        return getAttribute("noshade");
     }
 
     /**
@@ -77,7 +77,7 @@ public class HtmlHorizontalRule extends ClickableElement {
      * @return the value of the attribute "size" or an empty string if that attribute isn't defined
      */
     public final String getSizeAttribute() {
-        return getAttributeValue("size");
+        return getAttribute("size");
     }
 
     /**
@@ -88,6 +88,6 @@ public class HtmlHorizontalRule extends ClickableElement {
      * @return the value of the attribute "width" or an empty string if that attribute isn't defined
      */
     public final String getWidthAttribute() {
-        return getAttributeValue("width");
+        return getAttribute("width");
     }
 }

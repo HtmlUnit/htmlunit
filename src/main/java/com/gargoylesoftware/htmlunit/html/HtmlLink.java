@@ -63,7 +63,7 @@ public class HtmlLink extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharsetAttribute() {
-        return getAttributeValue("charset");
+        return getAttribute("charset");
     }
 
     /**
@@ -75,7 +75,7 @@ public class HtmlLink extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getHrefAttribute() {
-        return getAttributeValue("href");
+        return getAttribute("href");
     }
 
     /**
@@ -87,7 +87,7 @@ public class HtmlLink extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getHrefLangAttribute() {
-        return getAttributeValue("hreflang");
+        return getAttribute("hreflang");
     }
 
     /**
@@ -99,7 +99,7 @@ public class HtmlLink extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getTypeAttribute() {
-        return getAttributeValue("type");
+        return getAttribute("type");
     }
 
     /**
@@ -111,7 +111,7 @@ public class HtmlLink extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getRelAttribute() {
-        return getAttributeValue("rel");
+        return getAttribute("rel");
     }
 
     /**
@@ -123,7 +123,7 @@ public class HtmlLink extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getRevAttribute() {
-        return getAttributeValue("rev");
+        return getAttribute("rev");
     }
 
     /**
@@ -135,7 +135,7 @@ public class HtmlLink extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getMediaAttribute() {
-        return getAttributeValue("media");
+        return getAttribute("media");
     }
 
     /**
@@ -147,7 +147,7 @@ public class HtmlLink extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getTargetAttribute() {
-        return getAttributeValue("target");
+        return getAttribute("target");
     }
 
     /**

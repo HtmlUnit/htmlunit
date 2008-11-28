@@ -277,12 +277,12 @@ public class HtmlForm extends ClickableElement {
             return false;
         }
 
-        if (!tagName.equals("isindex") && element.getAttributeValue("name").equals("")) {
+        if (!tagName.equals("isindex") && element.getAttribute("name").equals("")) {
             return false;
         }
 
         if (element instanceof HtmlInput) {
-            final String type = element.getAttributeValue("type").toLowerCase();
+            final String type = element.getAttribute("type").toLowerCase();
             if (type.equals("radio") || type.equals("checkbox")) {
                 return element.hasAttribute("checked");
             }
@@ -498,7 +498,7 @@ public class HtmlForm extends ClickableElement {
 
         for (final HtmlRadioButtonInput input : radios) {
             if (input == radioButtonInput) {
-                input.setAttributeValue("checked", "checked");
+                input.setAttribute("checked", "checked");
             }
             else {
                 input.removeAttribute("checked");
@@ -532,7 +532,7 @@ public class HtmlForm extends ClickableElement {
      * @return the value of the attribute "action" or an empty string if that attribute isn't defined
      */
     public final String getActionAttribute() {
-        return getAttributeValue("action");
+        return getAttribute("action");
     }
 
     /**
@@ -543,7 +543,7 @@ public class HtmlForm extends ClickableElement {
      * @param action the value of the attribute "action"
      */
     public final void setActionAttribute(final String action) {
-        setAttributeValue("action", action);
+        setAttribute("action", action);
     }
 
     /**
@@ -554,7 +554,7 @@ public class HtmlForm extends ClickableElement {
      * @return the value of the attribute "method" or an empty string if that attribute isn't defined
      */
     public final String getMethodAttribute() {
-        return getAttributeValue("method");
+        return getAttribute("method");
     }
 
     /**
@@ -565,7 +565,7 @@ public class HtmlForm extends ClickableElement {
      * @param method the value of the attribute "method"
      */
     public final void setMethodAttribute(final String method) {
-        setAttributeValue("method", method);
+        setAttribute("method", method);
     }
 
     /**
@@ -576,7 +576,7 @@ public class HtmlForm extends ClickableElement {
      * @return the value of the attribute "name" or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
-        return getAttributeValue("name");
+        return getAttribute("name");
     }
 
     /**
@@ -587,7 +587,7 @@ public class HtmlForm extends ClickableElement {
      * @param name the value of the attribute "name"
      */
     public final void setNameAttribute(final String name) {
-        setAttributeValue("name", name);
+        setAttribute("name", name);
     }
 
     /**
@@ -599,7 +599,7 @@ public class HtmlForm extends ClickableElement {
      * @return the value of the attribute "enctype" or an empty string if that attribute isn't defined
      */
     public final String getEnctypeAttribute() {
-        return getAttributeValue("enctype");
+        return getAttribute("enctype");
     }
 
     /**
@@ -611,7 +611,7 @@ public class HtmlForm extends ClickableElement {
      * @param encoding the value of the attribute "enctype"
      */
     public final void setEnctypeAttribute(final String encoding) {
-        setAttributeValue("enctype", encoding);
+        setAttribute("enctype", encoding);
     }
 
     /**
@@ -622,7 +622,7 @@ public class HtmlForm extends ClickableElement {
      * @return the value of the attribute "onsubmit" or an empty string if that attribute isn't defined
      */
     public final String getOnSubmitAttribute() {
-        return getAttributeValue("onsubmit");
+        return getAttribute("onsubmit");
     }
 
     /**
@@ -633,7 +633,7 @@ public class HtmlForm extends ClickableElement {
      * @return the value of the attribute "onreset" or an empty string if that attribute isn't defined
      */
     public final String getOnResetAttribute() {
-        return getAttributeValue("onreset");
+        return getAttribute("onreset");
     }
 
     /**
@@ -644,7 +644,7 @@ public class HtmlForm extends ClickableElement {
      * @return the value of the attribute "accept" or an empty string if that attribute isn't defined
      */
     public final String getAcceptAttribute() {
-        return getAttributeValue("accept");
+        return getAttribute("accept");
     }
 
     /**
@@ -655,7 +655,7 @@ public class HtmlForm extends ClickableElement {
      * @return the value of the attribute "accept-charset" or an empty string if that attribute isn't defined
      */
     public final String getAcceptCharsetAttribute() {
-        return getAttributeValue("accept-charset");
+        return getAttribute("accept-charset");
     }
 
     /**
@@ -666,7 +666,7 @@ public class HtmlForm extends ClickableElement {
      * @return the value of the attribute "target" or an empty string if that attribute isn't defined
      */
     public final String getTargetAttribute() {
-        return getAttributeValue("target");
+        return getAttribute("target");
     }
 
     /**
@@ -677,7 +677,7 @@ public class HtmlForm extends ClickableElement {
      * @param target the value of the attribute "target"
      */
     public final void setTargetAttribute(final String target) {
-        setAttributeValue("target", target);
+        setAttribute("target", target);
     }
 
     /**

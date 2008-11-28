@@ -135,7 +135,7 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
      * @return the value of the attribute "lang" or an empty string if that attribute isn't defined
      */
     public final String getLangAttribute() {
-        return getAttributeValue("lang");
+        return getAttribute("lang");
     }
 
     /**
@@ -146,7 +146,7 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
      * @return the value of the attribute "xml:lang" or an empty string if that attribute isn't defined
      */
     public final String getXmlLangAttribute() {
-        return getAttributeValue("xml:lang");
+        return getAttribute("xml:lang");
     }
 
     /**
@@ -157,7 +157,7 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
      * @return the value of the attribute "dir" or an empty string if that attribute isn't defined
      */
     public final String getTextDirectionAttribute() {
-        return getAttributeValue("dir");
+        return getAttribute("dir");
     }
 
     /**
@@ -168,6 +168,6 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
      * @return the value of the attribute "prompt" or an empty string if that attribute isn't defined
      */
     public final String getPromptAttribute() {
-        return getAttributeValue("prompt");
+        return getAttribute("prompt");
     }
 }

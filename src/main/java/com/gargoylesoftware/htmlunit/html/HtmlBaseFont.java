@@ -54,7 +54,7 @@ public class HtmlBaseFont extends HtmlElement {
      * @return the value of the attribute "id" or an empty string if that attribute isn't defined
      */
     public final String getIdAttribute() {
-        return getAttributeValue("id");
+        return getAttribute("id");
     }
 
     /**
@@ -65,7 +65,7 @@ public class HtmlBaseFont extends HtmlElement {
      * @return the value of the attribute "size" or an empty string if that attribute isn't defined
      */
     public final String getSizeAttribute() {
-        return getAttributeValue("size");
+        return getAttribute("size");
     }
 
     /**
@@ -76,7 +76,7 @@ public class HtmlBaseFont extends HtmlElement {
      * @return the value of the attribute "color" or an empty string if that attribute isn't defined
      */
     public final String getColorAttribute() {
-        return getAttributeValue("color");
+        return getAttribute("color");
     }
 
     /**
@@ -87,6 +87,6 @@ public class HtmlBaseFont extends HtmlElement {
      * @return the value of the attribute "face" or an empty string if that attribute isn't defined
      */
     public final String getFaceAttribute() {
-        return getAttributeValue("face");
+        return getAttribute("face");
     }
 }

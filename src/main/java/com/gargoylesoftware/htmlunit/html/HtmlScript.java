@@ -90,7 +90,7 @@ public class HtmlScript extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharsetAttribute() {
-        return getAttributeValue("charset");
+        return getAttribute("charset");
     }
 
     /**
@@ -102,7 +102,7 @@ public class HtmlScript extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getTypeAttribute() {
-        return getAttributeValue("type");
+        return getAttribute("type");
     }
 
     /**
@@ -114,7 +114,7 @@ public class HtmlScript extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getLanguageAttribute() {
-        return getAttributeValue("language");
+        return getAttribute("language");
     }
 
     /**
@@ -126,7 +126,7 @@ public class HtmlScript extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getSrcAttribute() {
-        return getAttributeValue("src");
+        return getAttribute("src");
     }
 
     /**
@@ -134,7 +134,7 @@ public class HtmlScript extends HtmlElement {
      * @return the value of the attribute "event"
      */
     public final String getEventAttribute() {
-        return getAttributeValue("event");
+        return getAttribute("event");
     }
 
     /**
@@ -142,7 +142,7 @@ public class HtmlScript extends HtmlElement {
      * @return the value of the attribute "for"
      */
     public final String getHtmlForAttribute() {
-        return getAttributeValue("for");
+        return getAttribute("for");
     }
 
     /**
@@ -154,7 +154,7 @@ public class HtmlScript extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getDeferAttribute() {
-        return getAttributeValue("defer");
+        return getAttribute("defer");
     }
 
     /**

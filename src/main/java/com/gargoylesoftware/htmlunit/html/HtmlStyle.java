@@ -55,7 +55,7 @@ public class HtmlStyle extends HtmlElement {
      * @return the value of the attribute "lang" or an empty string if that attribute isn't defined
      */
     public final String getLangAttribute() {
-        return getAttributeValue("lang");
+        return getAttribute("lang");
     }
 
     /**
@@ -66,7 +66,7 @@ public class HtmlStyle extends HtmlElement {
      * @return the value of the attribute "xml:lang" or an empty string if that attribute isn't defined
      */
     public final String getXmlLangAttribute() {
-        return getAttributeValue("xml:lang");
+        return getAttribute("xml:lang");
     }
 
     /**
@@ -77,7 +77,7 @@ public class HtmlStyle extends HtmlElement {
      * @return the value of the attribute "dir" or an empty string if that attribute isn't defined
      */
     public final String getTextDirectionAttribute() {
-        return getAttributeValue("dir");
+        return getAttribute("dir");
     }
 
     /**
@@ -88,7 +88,7 @@ public class HtmlStyle extends HtmlElement {
      * @return the value of the attribute "type" or an empty string if that attribute isn't defined
      */
     public final String getTypeAttribute() {
-        return getAttributeValue("type");
+        return getAttribute("type");
     }
 
     /**
@@ -99,7 +99,7 @@ public class HtmlStyle extends HtmlElement {
      * @return the value of the attribute "media" or an empty string if that attribute isn't defined
      */
     public final String getMediaAttribute() {
-        return getAttributeValue("media");
+        return getAttribute("media");
     }
 
     /**
@@ -110,7 +110,7 @@ public class HtmlStyle extends HtmlElement {
      * @return the value of the attribute "title" or an empty string if that attribute isn't defined
      */
     public final String getTitleAttribute() {
-        return getAttributeValue("title");
+        return getAttribute("title");
     }
 
     /**

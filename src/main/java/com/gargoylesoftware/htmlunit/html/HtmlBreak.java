@@ -55,7 +55,7 @@ public class HtmlBreak extends StyledElement {
      * @return the value of the attribute "clear" or an empty string if that attribute isn't defined
      */
     public final String getClearAttribute() {
-        return getAttributeValue("clear");
+        return getAttribute("clear");
     }
 
     /**

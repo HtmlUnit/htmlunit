@@ -58,7 +58,7 @@ public class HtmlFrameSet extends StyledElement {
      * @return the value of the attribute "rows" or an empty string if that attribute isn't defined
      */
     public final String getRowsAttribute() {
-        return getAttributeValue("rows");
+        return getAttribute("rows");
     }
 
     /**
@@ -69,7 +69,7 @@ public class HtmlFrameSet extends StyledElement {
      * @return the value of the attribute "cols" or an empty string if that attribute isn't defined
      */
     public final String getColsAttribute() {
-        return getAttributeValue("cols");
+        return getAttribute("cols");
     }
 
     /**
@@ -80,7 +80,7 @@ public class HtmlFrameSet extends StyledElement {
      * @return the value of the attribute "onload" or an empty string if that attribute isn't defined
      */
     public final String getOnLoadAttribute() {
-        return getAttributeValue("onload");
+        return getAttribute("onload");
     }
 
     /**
@@ -91,6 +91,6 @@ public class HtmlFrameSet extends StyledElement {
      * @return the value of the attribute "onunload" or an empty string if that attribute isn't defined
      */
     public final String getOnUnloadAttribute() {
-        return getAttributeValue("onunload");
+        return getAttribute("onunload");
     }
 }

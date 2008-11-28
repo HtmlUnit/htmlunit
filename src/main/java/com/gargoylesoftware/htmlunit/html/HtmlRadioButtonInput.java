@@ -56,8 +56,8 @@ public class HtmlRadioButtonInput extends HtmlInput {
         super(namespaceURI, qualifiedName, page, attributes);
 
         // default value for both IE6 and Mozilla 1.7 even if spec says it is unspecified
-        if (getAttributeValue("value") == ATTRIBUTE_NOT_DEFINED) {
-            setAttributeValue("value", "on");
+        if (getAttribute("value") == ATTRIBUTE_NOT_DEFINED) {
+            setAttribute("value", "on");
         }
 
         defaultCheckedState_ = hasAttribute("checked");
@@ -70,7 +70,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
     @Override
     public void reset() {
         if (defaultCheckedState_) {
-            setAttributeValue("checked", "checked");
+            setAttribute("checked", "checked");
         }
         else {
             removeAttribute("checked");

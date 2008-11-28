@@ -129,7 +129,7 @@ public class HtmlAnchor extends ClickableElement {
      * @return the value of the attribute "charset" or an empty string if that attribute isn't defined
      */
     public final String getCharsetAttribute() {
-        return getAttributeValue("charset");
+        return getAttribute("charset");
     }
 
     /**
@@ -140,7 +140,7 @@ public class HtmlAnchor extends ClickableElement {
      * @return the value of the attribute "type" or an empty string if that attribute isn't defined
      */
     public final String getTypeAttribute() {
-        return getAttributeValue("type");
+        return getAttribute("type");
     }
 
     /**
@@ -151,7 +151,7 @@ public class HtmlAnchor extends ClickableElement {
      * @return the value of the attribute "name" or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
-        return getAttributeValue("name");
+        return getAttribute("name");
     }
 
     /**
@@ -162,7 +162,7 @@ public class HtmlAnchor extends ClickableElement {
      * @return the value of the attribute "href" or an empty string if that attribute isn't defined
      */
     public final String getHrefAttribute() {
-        return getAttributeValue("href").trim();
+        return getAttribute("href").trim();
     }
 
     /**
@@ -173,7 +173,7 @@ public class HtmlAnchor extends ClickableElement {
      * @return the value of the attribute "hreflang" or an empty string if that attribute isn't defined
      */
     public final String getHrefLangAttribute() {
-        return getAttributeValue("hreflang");
+        return getAttribute("hreflang");
     }
 
     /**
@@ -184,7 +184,7 @@ public class HtmlAnchor extends ClickableElement {
      * @return the value of the attribute "rel" or an empty string if that attribute isn't defined
      */
     public final String getRelAttribute() {
-        return getAttributeValue("rel");
+        return getAttribute("rel");
     }
 
     /**
@@ -195,7 +195,7 @@ public class HtmlAnchor extends ClickableElement {
      * @return the value of the attribute "rev" or an empty string if that attribute isn't defined
      */
     public final String getRevAttribute() {
-        return getAttributeValue("rev");
+        return getAttribute("rev");
     }
 
     /**
@@ -206,7 +206,7 @@ public class HtmlAnchor extends ClickableElement {
      * @return the value of the attribute "accesskey" or an empty string if that attribute isn't defined
      */
     public final String getAccessKeyAttribute() {
-        return getAttributeValue("accesskey");
+        return getAttribute("accesskey");
     }
 
     /**
@@ -217,7 +217,7 @@ public class HtmlAnchor extends ClickableElement {
      * @return the value of the attribute "shape" or an empty string if that attribute isn't defined
      */
     public final String getShapeAttribute() {
-        return getAttributeValue("shape");
+        return getAttribute("shape");
     }
 
     /**
@@ -228,7 +228,7 @@ public class HtmlAnchor extends ClickableElement {
      * @return the value of the attribute "coords" or an empty string if that attribute isn't defined
      */
     public final String getCoordsAttribute() {
-        return getAttributeValue("coords");
+        return getAttribute("coords");
     }
 
     /**
@@ -239,7 +239,7 @@ public class HtmlAnchor extends ClickableElement {
      * @return the value of the attribute "tabindex" or an empty string if that attribute isn't defined
      */
     public final String getTabIndexAttribute() {
-        return getAttributeValue("tabindex");
+        return getAttribute("tabindex");
     }
 
     /**
@@ -250,7 +250,7 @@ public class HtmlAnchor extends ClickableElement {
      * @return the value of the attribute "onfocus" or an empty string if that attribute isn't defined
      */
     public final String getOnFocusAttribute() {
-        return getAttributeValue("onfocus");
+        return getAttribute("onfocus");
     }
 
     /**
@@ -261,7 +261,7 @@ public class HtmlAnchor extends ClickableElement {
      * @return the value of the attribute "onblur" or an empty string if that attribute isn't defined
      */
     public final String getOnBlurAttribute() {
-        return getAttributeValue("onblur");
+        return getAttribute("onblur");
     }
 
     /**
@@ -272,7 +272,7 @@ public class HtmlAnchor extends ClickableElement {
      * @return the value of the attribute "target" or an empty string if that attribute isn't defined
      */
     public final String getTargetAttribute() {
-        return getAttributeValue("target");
+        return getAttribute("target");
     }
 
     /**

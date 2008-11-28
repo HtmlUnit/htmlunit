@@ -104,7 +104,7 @@ public class HtmlArea extends ClickableElement {
      * @return the value of the attribute "shape" or an empty string if that attribute isn't defined
      */
     public final String getShapeAttribute() {
-        return getAttributeValue("shape");
+        return getAttribute("shape");
     }
 
     /**
@@ -115,7 +115,7 @@ public class HtmlArea extends ClickableElement {
      * @return the value of the attribute "coords" or an empty string if that attribute isn't defined
      */
     public final String getCoordsAttribute() {
-        return getAttributeValue("coords");
+        return getAttribute("coords");
     }
 
     /**
@@ -126,7 +126,7 @@ public class HtmlArea extends ClickableElement {
      * @return the value of the attribute "href" or an empty string if that attribute isn't defined
      */
     public final String getHrefAttribute() {
-        return getAttributeValue("href");
+        return getAttribute("href");
     }
 
     /**
@@ -137,7 +137,7 @@ public class HtmlArea extends ClickableElement {
      * @return the value of the attribute "nohref" or an empty string if that attribute isn't defined
      */
     public final String getNoHrefAttribute() {
-        return getAttributeValue("nohref");
+        return getAttribute("nohref");
     }
 
     /**
@@ -148,7 +148,7 @@ public class HtmlArea extends ClickableElement {
      * @return the value of the attribute "alt" or an empty string if that attribute isn't defined
      */
     public final String getAltAttribute() {
-        return getAttributeValue("alt");
+        return getAttribute("alt");
     }
 
     /**
@@ -159,7 +159,7 @@ public class HtmlArea extends ClickableElement {
      * @return the value of the attribute "tabindex" or an empty string if that attribute isn't defined
      */
     public final String getTabIndexAttribute() {
-        return getAttributeValue("tabindex");
+        return getAttribute("tabindex");
     }
 
     /**
@@ -170,7 +170,7 @@ public class HtmlArea extends ClickableElement {
      * @return the value of the attribute "accesskey" or an empty string if that attribute isn't defined
      */
     public final String getAccessKeyAttribute() {
-        return getAttributeValue("accesskey");
+        return getAttribute("accesskey");
     }
 
     /**
@@ -181,7 +181,7 @@ public class HtmlArea extends ClickableElement {
      * @return the value of the attribute "onfocus" or an empty string if that attribute isn't defined
      */
     public final String getOnFocusAttribute() {
-        return getAttributeValue("onfocus");
+        return getAttribute("onfocus");
     }
 
     /**
@@ -192,7 +192,7 @@ public class HtmlArea extends ClickableElement {
      * @return the value of the attribute "onblur" or an empty string if that attribute isn't defined
      */
     public final String getOnBlurAttribute() {
-        return getAttributeValue("onblur");
+        return getAttribute("onblur");
     }
 
     /**
@@ -203,7 +203,7 @@ public class HtmlArea extends ClickableElement {
      * @return the value of the attribute "target" or an empty string if that attribute isn't defined
      */
     public final String getTargetAttribute() {
-        return getAttributeValue("target");
+        return getAttribute("target");
     }
 
     /**

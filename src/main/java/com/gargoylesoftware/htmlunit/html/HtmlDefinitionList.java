@@ -55,6 +55,6 @@ public class HtmlDefinitionList extends ClickableElement {
      * @return the value of the attribute "compact" or an empty string if that attribute isn't defined
      */
     public final String getCompactAttribute() {
-        return getAttributeValue("compact");
+        return getAttribute("compact");
     }
 }

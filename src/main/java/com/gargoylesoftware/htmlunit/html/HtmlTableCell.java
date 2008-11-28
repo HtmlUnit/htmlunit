@@ -51,7 +51,7 @@ public abstract class HtmlTableCell extends ClickableElement {
      * @return the value of the colspan attribute, or <tt>1</tt> if the attribute wasn't specified
      */
     public int getColumnSpan() {
-        final String spanString = getAttributeValue("colspan");
+        final String spanString = getAttribute("colspan");
         if (spanString == null || spanString.length() == 0) {
             return 1;
         }
@@ -63,7 +63,7 @@ public abstract class HtmlTableCell extends ClickableElement {
      * @return the value of the rowspan attribute, or <tt>1</tt> if the attribute wasn't specified
      */
     public int getRowSpan() {
-        final String spanString = getAttributeValue("rowspan");
+        final String spanString = getAttribute("rowspan");
         if (spanString == null || spanString.length() == 0) {
             return 1;
         }

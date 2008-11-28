@@ -212,7 +212,7 @@ public class HtmlTable extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getSummaryAttribute() {
-        return getAttributeValue("summary");
+        return getAttribute("summary");
     }
 
     /**
@@ -224,7 +224,7 @@ public class HtmlTable extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getWidthAttribute() {
-        return getAttributeValue("width");
+        return getAttribute("width");
     }
 
     /**
@@ -236,7 +236,7 @@ public class HtmlTable extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getBorderAttribute() {
-        return getAttributeValue("border");
+        return getAttribute("border");
     }
 
     /**
@@ -248,7 +248,7 @@ public class HtmlTable extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getFrameAttribute() {
-        return getAttributeValue("frame");
+        return getAttribute("frame");
     }
 
     /**
@@ -260,7 +260,7 @@ public class HtmlTable extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getRulesAttribute() {
-        return getAttributeValue("rules");
+        return getAttribute("rules");
     }
 
     /**
@@ -272,7 +272,7 @@ public class HtmlTable extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getCellSpacingAttribute() {
-        return getAttributeValue("cellspacing");
+        return getAttribute("cellspacing");
     }
 
     /**
@@ -284,7 +284,7 @@ public class HtmlTable extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getCellPaddingAttribute() {
-        return getAttributeValue("cellpadding");
+        return getAttribute("cellpadding");
     }
 
     /**
@@ -296,7 +296,7 @@ public class HtmlTable extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
-        return getAttributeValue("align");
+        return getAttribute("align");
     }
 
     /**
@@ -308,7 +308,7 @@ public class HtmlTable extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getBgcolorAttribute() {
-        return getAttributeValue("bgcolor");
+        return getAttribute("bgcolor");
     }
 
     /**

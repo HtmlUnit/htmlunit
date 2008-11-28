@@ -129,7 +129,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getSelectedAttribute() {
-        return getAttributeValue("selected");
+        return getAttribute("selected");
     }
 
     /**
@@ -163,7 +163,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * {@inheritDoc}
      */
     public final String getDisabledAttribute() {
-        return getAttributeValue("disabled");
+        return getAttribute("disabled");
     }
 
     /**
@@ -174,7 +174,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * @return the value of the attribute "label" or an empty string if that attribute isn't defined
      */
     public final String getLabelAttribute() {
-        return getAttributeValue("label");
+        return getAttribute("label");
     }
 
     /**
@@ -185,7 +185,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * @param newLabel the value of the attribute "label"
      */
     public final void setLabelAttribute(final String newLabel) {
-        setAttributeValue("label", newLabel);
+        setAttribute("label", newLabel);
     }
 
     /**
@@ -197,7 +197,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * @return the value of the attribute "value"
      */
     public final String getValueAttribute() {
-        return getAttributeValue("value");
+        return getAttribute("value");
     }
 
     /**
@@ -208,7 +208,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * @param newValue the value of the attribute "value"
      */
     public final void setValueAttribute(final String newValue) {
-        setAttributeValue("value", newValue);
+        setAttribute("value", newValue);
     }
 
     /**
@@ -232,8 +232,8 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
 
         // default value is the text of the option
         // see http://www.w3.org/TR/1999/REC-html401-19991224/interact/forms.html#adef-value-OPTION
-        if (getAttributeValue("value") == ATTRIBUTE_NOT_DEFINED) {
-            setAttributeValue("value", asText());
+        if (getAttribute("value") == ATTRIBUTE_NOT_DEFINED) {
+            setAttribute("value", asText());
         }
 
         return addedNode;
@@ -246,7 +246,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      */
     void setSelectedInternal(final boolean selected) {
         if (selected) {
-            setAttributeValue("selected", "selected");
+            setAttribute("selected", "selected");
         }
         else {
             removeAttribute("selected");

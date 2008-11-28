@@ -226,7 +226,7 @@ public abstract class ClickableElement extends StyledElement {
      * @return the value of the attribute "lang" or an empty string if that attribute isn't defined
      */
     public final String getLangAttribute() {
-        return getAttributeValue("lang");
+        return getAttribute("lang");
     }
 
     /**
@@ -237,7 +237,7 @@ public abstract class ClickableElement extends StyledElement {
      * @return the value of the attribute "xml:lang" or an empty string if that attribute isn't defined
      */
     public final String getXmlLangAttribute() {
-        return getAttributeValue("xml:lang");
+        return getAttribute("xml:lang");
     }
 
     /**
@@ -248,7 +248,7 @@ public abstract class ClickableElement extends StyledElement {
      * @return the value of the attribute "dir" or an empty string if that attribute isn't defined
      */
     public final String getTextDirectionAttribute() {
-        return getAttributeValue("dir");
+        return getAttribute("dir");
     }
 
     /**
@@ -259,7 +259,7 @@ public abstract class ClickableElement extends StyledElement {
      * @return the value of the attribute "onclick" or an empty string if that attribute isn't defined
      */
     public final String getOnClickAttribute() {
-        return getAttributeValue("onclick");
+        return getAttribute("onclick");
     }
 
     /**
@@ -270,7 +270,7 @@ public abstract class ClickableElement extends StyledElement {
      * @return the value of the attribute "ondblclick" or an empty string if that attribute isn't defined
      */
     public final String getOnDblClickAttribute() {
-        return getAttributeValue("ondblclick");
+        return getAttribute("ondblclick");
     }
 
     /**
@@ -281,7 +281,7 @@ public abstract class ClickableElement extends StyledElement {
      * @return the value of the attribute "onmousedown" or an empty string if that attribute isn't defined
      */
     public final String getOnMouseDownAttribute() {
-        return getAttributeValue("onmousedown");
+        return getAttribute("onmousedown");
     }
 
     /**
@@ -292,7 +292,7 @@ public abstract class ClickableElement extends StyledElement {
      * @return the value of the attribute "onmouseup" or an empty string if that attribute isn't defined
      */
     public final String getOnMouseUpAttribute() {
-        return getAttributeValue("onmouseup");
+        return getAttribute("onmouseup");
     }
 
     /**
@@ -303,7 +303,7 @@ public abstract class ClickableElement extends StyledElement {
      * @return the value of the attribute "onmouseover" or an empty string if that attribute isn't defined
      */
     public final String getOnMouseOverAttribute() {
-        return getAttributeValue("onmouseover");
+        return getAttribute("onmouseover");
     }
 
     /**
@@ -314,7 +314,7 @@ public abstract class ClickableElement extends StyledElement {
      * @return the value of the attribute "onmousemove" or an empty string if that attribute isn't defined
      */
     public final String getOnMouseMoveAttribute() {
-        return getAttributeValue("onmousemove");
+        return getAttribute("onmousemove");
     }
 
     /**
@@ -325,7 +325,7 @@ public abstract class ClickableElement extends StyledElement {
      * @return the value of the attribute "onmouseout" or an empty string if that attribute isn't defined
      */
     public final String getOnMouseOutAttribute() {
-        return getAttributeValue("onmouseout");
+        return getAttribute("onmouseout");
     }
 
     /**
@@ -336,7 +336,7 @@ public abstract class ClickableElement extends StyledElement {
      * @return the value of the attribute "onkeypress" or an empty string if that attribute isn't defined
      */
     public final String getOnKeyPressAttribute() {
-        return getAttributeValue("onkeypress");
+        return getAttribute("onkeypress");
     }
 
     /**
@@ -347,7 +347,7 @@ public abstract class ClickableElement extends StyledElement {
      * @return the value of the attribute "onkeydown" or an empty string if that attribute isn't defined
      */
     public final String getOnKeyDownAttribute() {
-        return getAttributeValue("onkeydown");
+        return getAttribute("onkeydown");
     }
 
     /**
@@ -358,7 +358,7 @@ public abstract class ClickableElement extends StyledElement {
      * @return the value of the attribute "onkeyup" or an empty string if that attribute isn't defined
      */
     public final String getOnKeyUpAttribute() {
-        return getAttributeValue("onkeyup");
+        return getAttribute("onkeyup");
     }
 
     /**

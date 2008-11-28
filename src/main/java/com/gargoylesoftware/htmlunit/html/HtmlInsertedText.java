@@ -56,7 +56,7 @@ public class HtmlInsertedText extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getCiteAttribute() {
-        return getAttributeValue("cite");
+        return getAttribute("cite");
     }
 
     /**
@@ -68,6 +68,6 @@ public class HtmlInsertedText extends ClickableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getDateTimeAttribute() {
-        return getAttributeValue("datetime");
+        return getAttribute("datetime");
     }
 }

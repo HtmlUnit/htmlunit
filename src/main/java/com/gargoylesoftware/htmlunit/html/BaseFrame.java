@@ -156,7 +156,7 @@ public abstract class BaseFrame extends StyledElement {
      * @return the value of the attribute "longdesc" or an empty string if that attribute isn't defined
      */
     public final String getLongDescAttribute() {
-        return getAttributeValue("longdesc");
+        return getAttribute("longdesc");
     }
 
     /**
@@ -167,7 +167,7 @@ public abstract class BaseFrame extends StyledElement {
      * @return the value of the attribute "name" or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
-        return getAttributeValue("name");
+        return getAttribute("name");
     }
 
     /**
@@ -176,7 +176,7 @@ public abstract class BaseFrame extends StyledElement {
      * @param name the new window name
      */
     public final void setNameAttribute(final String name) {
-        setAttributeValue("name", name);
+        setAttribute("name", name);
     }
 
     /**
@@ -187,7 +187,7 @@ public abstract class BaseFrame extends StyledElement {
      * @return the value of the attribute "src" or an empty string if that attribute isn't defined
      */
     public final String getSrcAttribute() {
-        return getAttributeValue("src");
+        return getAttribute("src");
     }
 
     /**
@@ -198,7 +198,7 @@ public abstract class BaseFrame extends StyledElement {
      * @return the value of the attribute "frameborder" or an empty string if that attribute isn't defined
      */
     public final String getFrameBorderAttribute() {
-        return getAttributeValue("frameborder");
+        return getAttribute("frameborder");
     }
 
     /**
@@ -209,7 +209,7 @@ public abstract class BaseFrame extends StyledElement {
      * @return the value of the attribute "marginwidth" or an empty string if that attribute isn't defined
      */
     public final String getMarginWidthAttribute() {
-        return getAttributeValue("marginwidth");
+        return getAttribute("marginwidth");
     }
 
     /**
@@ -220,7 +220,7 @@ public abstract class BaseFrame extends StyledElement {
      * @return the value of the attribute "marginheight" or an empty string if that attribute isn't defined
      */
     public final String getMarginHeightAttribute() {
-        return getAttributeValue("marginheight");
+        return getAttribute("marginheight");
     }
 
     /**
@@ -231,7 +231,7 @@ public abstract class BaseFrame extends StyledElement {
      * @return the value of the attribute "noresize" or an empty string if that attribute isn't defined
      */
     public final String getNoResizeAttribute() {
-        return getAttributeValue("noresize");
+        return getAttribute("noresize");
     }
 
     /**
@@ -242,7 +242,7 @@ public abstract class BaseFrame extends StyledElement {
      * @return the value of the attribute "scrolling" or an empty string if that attribute isn't defined
      */
     public final String getScrollingAttribute() {
-        return getAttributeValue("scrolling");
+        return getAttribute("scrolling");
     }
 
     /**
@@ -253,7 +253,7 @@ public abstract class BaseFrame extends StyledElement {
      * @return the value of the attribute "onload" or an empty string if that attribute isn't defined
      */
     public final String getOnLoadAttribute() {
-        return getAttributeValue("onload");
+        return getAttribute("onload");
     }
 
     /**
@@ -279,7 +279,7 @@ public abstract class BaseFrame extends StyledElement {
      * @param attribute the new value of the "src" attribute
      */
     public final void setSrcAttribute(final String attribute) {
-        setAttributeValue("src", attribute);
+        setAttribute("src", attribute);
     }
 
     /**
