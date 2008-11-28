@@ -350,6 +350,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param attributeValue the value of the attribute
      * @deprecated since version 2.4. Use {@link #setAttributeNS(String, String, String)}.
      */
+    @Deprecated
     public final void setAttributeValue(final String namespaceURI, final String qualifiedName,
             final String attributeValue) {
         setAttributeNS(namespaceURI, qualifiedName, attributeValue);
