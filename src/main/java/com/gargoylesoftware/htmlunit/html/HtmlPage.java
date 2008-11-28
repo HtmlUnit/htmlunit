@@ -1707,14 +1707,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String asXml() {
-        return getDocumentElement().asXml();
-    }
-
-    /**
      * Gives a basic representation for debugging purposes.
      * @return a basic representation
      */

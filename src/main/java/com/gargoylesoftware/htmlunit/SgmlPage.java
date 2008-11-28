@@ -200,4 +200,13 @@ public abstract class SgmlPage extends DomNode implements Page {
             throw new IllegalStateException("Clone not supported");
         }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String asXml() {
+        return getDocumentElement().asXml();
+    }
+
 }

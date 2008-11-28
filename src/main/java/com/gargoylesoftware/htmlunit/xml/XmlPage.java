@@ -190,14 +190,6 @@ public class XmlPage extends SgmlPage implements Document {
 
     /**
      * {@inheritDoc}
-     */
-    @Override
-    public String asXml() {
-        return getDocumentElement().asXml();
-    }
-
-    /**
-     * {@inheritDoc}
      * Not yet implemented.
      */
     public Node adoptNode(final Node source) {
