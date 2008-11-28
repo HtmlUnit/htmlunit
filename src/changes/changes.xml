@@ -6,6 +6,10 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+            <action type="update" dev="mguillem">
+                Deprecate DomElement methods getAttributeValue, setAttributeValue.
+                Usage of DOM 2 methods getAttribute, getAttributeNS, setAttribute and setAttributeNS is preferred.
+            </action>
             <action type="update" dev="asashour">
                 Deprecate XmlPage.getDocumentXmlElement(), HtmlPage.createHtmlElement() and createHtmlElementNS().
             </action>

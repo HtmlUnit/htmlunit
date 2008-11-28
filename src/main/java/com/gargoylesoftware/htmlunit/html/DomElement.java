@@ -215,8 +215,13 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param attributeName the name of the attribute
      * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED} or {@link #ATTRIBUTE_VALUE_EMPTY}
      */
-    public final String getAttribute(final String attributeName) {
-        return getAttributeValue(attributeName);
+    public String getAttribute(final String attributeName) {
+        final DomAttr attr = attributes_.get(attributeName);
+
+        if (attr != null) {
+            return attr.getNodeValue();
+        }
+        return ATTRIBUTE_NOT_DEFINED;
     }
 
     /**
@@ -225,14 +230,11 @@ public class DomElement extends DomNamespaceNode implements Element {
      *
      * @param attributeName the name of the attribute
      * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED}
+     * @deprecated since HtmlUnit-2.4. Use standard DOM method {@link #getAttribute(String)} instead. 
      */
-    public String getAttributeValue(final String attributeName) {
-        final DomAttr attr = attributes_.get(attributeName);
-
-        if (attr != null) {
-            return attr.getNodeValue();
-        }
-        return ATTRIBUTE_NOT_DEFINED;
+    @Deprecated
+    public final String getAttributeValue(final String attributeName) {
+        return getAttribute(attributeName);
     }
 
     /**
