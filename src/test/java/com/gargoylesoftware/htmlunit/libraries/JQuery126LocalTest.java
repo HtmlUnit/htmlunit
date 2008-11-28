@@ -16,48 +16,29 @@ package com.gargoylesoftware.htmlunit.libraries;
 
 import java.net.URL;
 
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mortbay.jetty.Server;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
- * Tests for compatibility with web server loading of
+ * Tests for compatibility with local loading of
  * version 1.2.6 of the <a href="http://jquery.com/">jQuery JavaScript library</a>.
  *
  * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
- * @see JQuery126LocalTest
+ * @see JQuery126Test
  */
 @RunWith(BrowserRunner.class)
-public class JQuery126Test extends JQueryTestBase {
-
-    private Server server_;
-
-    /**
-     * After.
-     * @throws Exception if an error occurs
-     */
-    @After
-    @Override
-    public void after() throws Exception {
-        HttpWebConnectionTest.stopWebServer(server_);
-        server_ = null;
-        super.after();
-    }
+public class JQuery126LocalTest extends JQueryTestBase {
 
     /**
      * {@inheritDoc}
      */
     @Override
     protected String getExpectedPath() throws Exception {
-        final String resource = "jquery/" + getVersion() + "/webServer." + getBrowserVersion().getNickname() + ".txt";
+        final String resource = "jquery/" + getVersion() + "/local." + getBrowserVersion().getNickname() + ".txt";
         final URL url = getClass().getClassLoader().getResource(resource);
         return url.toURI().getPath();
     }
@@ -67,16 +48,14 @@ public class JQuery126Test extends JQueryTestBase {
      */
     @Override
     protected String getUrl() {
-        return "http://localhost:" + HttpWebConnectionTest.PORT + "/test/index.html";
+        return getClass().getClassLoader().getResource("jquery/" + getVersion() + "/test/index.html").toExternalForm();
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented({ Browser.INTERNET_EXPLORER_6, Browser.FIREFOX_2, Browser.FIREFOX_3 })
     public void test() throws Exception {
-        server_ = HttpWebConnectionTest.startWebServer("src/test/resources/jquery/" + getVersion());
         runTest();
     }
 }
