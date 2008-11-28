@@ -108,14 +108,6 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getAttribute(final String attributeName) {
-        return super.getAttribute(attributeName.toLowerCase());
-    }
-
-    /**
      * Sets the value of the specified attribute. This method may be overridden by subclasses
      * which are interested in specific attribute value changes, but such methods <b>must</b>
      * invoke <tt>super.setAttributeValue()</tt>, and <b>should</b> consider the value of the
@@ -136,7 +128,7 @@ public abstract class HtmlElement extends DomElement {
             ((HtmlPage) getPage()).removeMappedElement(this);
         }
 
-        super.setAttributeNS(namespaceURI, qualifiedName.toLowerCase(), attributeValue);
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
         if (value.length() == 0) {
             value = ATTRIBUTE_VALUE_EMPTY;
         }
@@ -312,18 +304,6 @@ public abstract class HtmlElement extends DomElement {
     @Deprecated
     public boolean isAttributeDefined(final String attributeName) {
         return hasAttribute(attributeName);
-    }
-
-    /**
-     * Returns whether the attribute specified by name has a value.
-     *
-     * @param attributeName the name of the attribute
-     * @return true if an attribute with the given name is specified on this element or has a
-     * default value, false otherwise.
-     */
-    @Override
-    public final boolean hasAttribute(final String attributeName) {
-        return super.hasAttribute(attributeName.toLowerCase());
     }
 
     /**
@@ -1198,5 +1178,14 @@ public abstract class HtmlElement extends DomElement {
      */
     void removeFocus() {
         // nothing
+    }
+
+
+    /**
+     * Indicates if the attribute names are case sensitive.
+     * @return <code>false</code>
+     */
+    protected boolean isAttributeCaseSensitive() {
+        return false;
     }
 }

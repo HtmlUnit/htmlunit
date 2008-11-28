@@ -47,7 +47,6 @@ import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
-import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
@@ -348,15 +347,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Creates the JS object for the property attributes. This object will the be cached.
-     * @return the JS object
-     */
-    @Override
-    protected NamedNodeMap createAttributesObject() {
-        return new NamedNodeMap((DomElement) getDomNodeOrDie(), true);
-    }
-
-    /**
      * For IE, foo.getAttribute(x) uses same names as foo.x.
      * @param attributeName the name
      * @return the real name
@@ -465,15 +455,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @Override
     public Object jsxFunction_getAttributeNode(final String attributeName) {
-        if (getHtmlElementOrDie().getAttribute(attributeName) == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
-            return null;
-        }
-
-        final Attr att = new Attr();
-        att.setPrototype(getPrototype(Attr.class));
-        att.setParentScope(getWindow());
-        att.init(attributeName, getHtmlElementOrDie());
-        return att;
+        return ((NamedNodeMap) jsxGet_attributes()).jsxFunction_getNamedItem(attributeName);
     }
 
     /**

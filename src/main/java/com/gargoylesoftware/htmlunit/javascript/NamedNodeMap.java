@@ -14,13 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import org.apache.commons.collections.map.ListOrderedMap;
 import org.mozilla.javascript.Scriptable;
-import org.w3c.dom.Attr;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Node;
 
-import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 
@@ -39,20 +34,13 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
 
     private static final long serialVersionUID = -1910087049570242560L;
 
-    private final ListOrderedMap nodes_ = new ListOrderedMap();
+    private final org.w3c.dom.NamedNodeMap nodeMap_;
 
     /**
-     * As per the <a href="http://www.w3.org/TR/REC-DOM-Level-1/level-one-core.html#ID-5DFED1F0">W3C</a> (and
-     * some browser testing), this class should be case-sensitive when dealing with XML, and case-insensitive
-     * when dealing with HTML.
-     */
-    private final boolean caseInsensitive_;
-
-    /**
-     * Rhino requires default constructors.
+     * We need default constructors to build the prototype instance.
      */
     public NamedNodeMap() {
-        caseInsensitive_ = true;
+        nodeMap_ = null;
     }
 
     /**
@@ -61,24 +49,18 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * @param element the owning element
      * @param caseInsensitive whether to ignore case or no
      */
-    public NamedNodeMap(final DomElement element, final boolean caseInsensitive) {
-        caseInsensitive_ = caseInsensitive;
+    public NamedNodeMap(final DomElement element) {
         setParentScope(element.getScriptObject());
         setPrototype(getPrototype(getClass()));
+
+        nodeMap_ = element.getAttributes();
 /*
         // for IE, there is no node without attribute. A fresh create span has 82 attributes!
         // just create at least one here to ensure that JS code using this as test for IE will pass
         if (element.getAttributesMap().isEmpty() && caseInsensitive && getBrowserVersion().isIE()) {
             element.setAttribute("language", "");
         }
-*/
-        for (final DomAttr attr : element.getAttributesMap().values()) {
-            String name = attr.getName();
-            if (caseInsensitive) {
-                name = name.toLowerCase();
-            }
-            nodes_.put(name, attr);
-        }
+        */
     }
 
     /**
@@ -88,9 +70,9 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      */
     @Override
     public final Object get(final int index, final Scriptable start) {
-        final NamedNodeMap map = (NamedNodeMap) start;
-        if (index >= 0 && index < map.nodes_.size()) {
-            final DomNode attr = (DomNode) map.nodes_.getValue(index);
+        final NamedNodeMap startMap = (NamedNodeMap) start;
+        if (index >= 0 && index < startMap.nodeMap_.getLength()) {
+            final DomNode attr = (DomNode) startMap.nodeMap_.item(index);
             return attr.getScriptObject();
         }
         return NOT_FOUND;
@@ -101,11 +83,8 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      *
      * {@inheritDoc}
      */
-    public Object getWithFallback(String name) {
-        if (caseInsensitive_) {
-            name = name.toLowerCase();
-        }
-        final DomNode attr = (DomNode) nodes_.get(name);
+    public Object getWithFallback(final String name) {
+        final DomNode attr = (DomNode) nodeMap_.getNamedItem(name);
         if (attr != null) {
             return attr.getScriptObject();
         }
@@ -117,11 +96,8 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * @param name attribute name
      * @return the attribute node, <code>null</code> if the attribute is not defined
      */
-    public Object jsxFunction_getNamedItem(String name) {
-        if (caseInsensitive_) {
-            name = name.toLowerCase();
-        }
-        final DomNode attr = (DomNode) nodes_.get(name);
+    public Object jsxFunction_getNamedItem(final String name) {
+        final DomNode attr = (DomNode) nodeMap_.getNamedItem(name);
         if (attr != null) {
             return attr.getScriptObject();
         }
@@ -133,70 +109,6 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * @return the number of attributes in this named node map
      */
     public int jsxGet_length() {
-        return nodes_.size();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public int getLength() {
-        return jsxGet_length();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public Attr getNamedItem(String name) {
-        if (caseInsensitive_) {
-            name = name.toLowerCase();
-        }
-        return (Attr) nodes_.get(name);
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
-    public Attr getNamedItemNS(final String namespaceURI, final String localName) {
-        throw new UnsupportedOperationException("NamedNodeMap.getNamedItemNS is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public Attr item(final int index) {
-        return (Attr) nodes_.getValue(index);
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
-    public Node removeNamedItem(final String name) throws DOMException {
-        throw new UnsupportedOperationException("NamedNodeMap.removeNamedItem is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
-    public Node removeNamedItemNS(final String namespaceURI, final String localName) throws DOMException {
-        throw new UnsupportedOperationException("NamedNodeMap.removeNamedItemNS is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
-    public Node setNamedItem(final Node arg) throws DOMException {
-        throw new UnsupportedOperationException("NamedNodeMap.setNamedItem is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
-    public Node setNamedItemNS(final Node arg) throws DOMException {
-        throw new UnsupportedOperationException("NamedNodeMap.setNamedItemNS is not yet implemented.");
+        return nodeMap_.getLength();
     }
 }

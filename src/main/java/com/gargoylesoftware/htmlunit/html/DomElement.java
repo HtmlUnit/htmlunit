@@ -67,8 +67,8 @@ public class DomElement extends DomNamespaceNode implements Element {
     public DomElement(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page);
-        if (attributes != null) {
-            attributes_ = new NamedAttrNodeMapImpl(this, attributes);
+        if (attributes != null && !attributes.isEmpty()) {
+            attributes_ = new NamedAttrNodeMapImpl(this, isAttributeCaseSensitive(), attributes);
             for (final DomAttr entry : attributes_.values()) {
                 entry.setParentNode(this);
                 final String attrNamespaceURI = entry.getNamespaceURI();
@@ -319,7 +319,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         final String value = attributeValue;
 
         if (attributes_ == NamedAttrNodeMapImpl.EMPTY_MAP) {
-            attributes_ = new NamedAttrNodeMapImpl(this);
+            attributes_ = new NamedAttrNodeMapImpl(this, isAttributeCaseSensitive());
         }
         final DomAttr newAttr = new DomAttr(getPage(), namespaceURI, qualifiedName, value);
         newAttr.setParentNode(this);
@@ -328,6 +328,14 @@ public class DomElement extends DomNamespaceNode implements Element {
         if (namespaceURI != null) {
             namespaces().put(namespaceURI, newAttr.getPrefix());
         }
+    }
+
+    /**
+     * Indicates if the attribute names are case sensitive.
+     * @return <code>true</code>
+     */
+    protected boolean isAttributeCaseSensitive() {
+        return true;
     }
 
     /**
@@ -459,7 +467,7 @@ public class DomElement extends DomNamespaceNode implements Element {
     @Override
     public DomNode cloneNode(final boolean deep) {
         final DomElement clone = (DomElement) super.cloneNode(deep);
-        clone.attributes_ = new NamedAttrNodeMapImpl(clone);
+        clone.attributes_ = new NamedAttrNodeMapImpl(clone, isAttributeCaseSensitive());
         clone.attributes_.putAll(attributes_);
         return clone;
     }
@@ -473,26 +481,31 @@ class NamedAttrNodeMapImpl extends MapWrapper<String, DomAttr> implements NamedN
     private final List<String> attrPositions_ = new ArrayList<String>();
     private final DomElement domNode_;
     public static final NamedAttrNodeMapImpl EMPTY_MAP = new NamedAttrNodeMapImpl();
+    private final boolean caseSensitive_;
 
     private NamedAttrNodeMapImpl() {
         super(Collections.<String, DomAttr>emptyMap());
         domNode_ = null;
+        caseSensitive_ = true;
     }
 
-    NamedAttrNodeMapImpl(final DomElement domNode, final Map<String, DomAttr> attributes) {
+    NamedAttrNodeMapImpl(final DomElement domNode, final boolean caseSensitive,
+            final Map<String, DomAttr> attributes) {
         super(attributes);
         if (domNode == null) {
             throw new IllegalArgumentException();
         }
         domNode_ = domNode;
+        caseSensitive_ = caseSensitive;
+
         // register positions of attributes
         for (final String name : keySet()) {
             attrPositions_.add(name);
         }
     }
 
-    NamedAttrNodeMapImpl(final DomElement domElement) {
-        this(domElement, new HashMap<String, DomAttr>());
+    NamedAttrNodeMapImpl(final DomElement domElement, final boolean caseSensitive) {
+        this(domElement, caseSensitive, new HashMap<String, DomAttr>());
     }
 
     /**
@@ -506,7 +519,14 @@ class NamedAttrNodeMapImpl extends MapWrapper<String, DomAttr> implements NamedN
      * {@inheritDoc}
      */
     public DomAttr getNamedItem(final String name) {
-        return get(name);
+        return get(fixName(name));
+    }
+
+    private String fixName(final String name) {
+        if (caseSensitive_) {
+            return name;
+        }
+        return name.toLowerCase();
     }
 
     /**
@@ -516,7 +536,7 @@ class NamedAttrNodeMapImpl extends MapWrapper<String, DomAttr> implements NamedN
         if (domNode_ == null) {
             return null;
         }
-        return get(domNode_.getQualifiedName(namespaceURI, localName));
+        return get(domNode_.getQualifiedName(namespaceURI, fixName(localName)));
     }
 
     /**
@@ -530,7 +550,7 @@ class NamedAttrNodeMapImpl extends MapWrapper<String, DomAttr> implements NamedN
      * {@inheritDoc}
      */
     public Node removeNamedItem(final String name) throws DOMException {
-        return remove(name);
+        return remove(fixName(name));
     }
 
     /**
@@ -540,28 +560,29 @@ class NamedAttrNodeMapImpl extends MapWrapper<String, DomAttr> implements NamedN
         if (domNode_ == null) {
             return null;
         }
-        return remove(domNode_.getQualifiedName(namespaceURI, localName));
+        return remove(domNode_.getQualifiedName(namespaceURI, fixName(localName)));
     }
 
     /**
      * {@inheritDoc}
      */
     public DomAttr setNamedItem(final Node node) {
-        return put(node.getLocalName(), (DomAttr) node);
+        return put(fixName(node.getLocalName()), (DomAttr) node);
     }
 
     /**
      * {@inheritDoc}
      */
     public Node setNamedItemNS(final Node node) throws DOMException {
-        return put(node.getNodeName(), (DomAttr) node);
+        return put(fixName(node.getNodeName()), (DomAttr) node);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public DomAttr put(final String key, final DomAttr value) {
+    public DomAttr put(String key, final DomAttr value) {
+        key = fixName(key);
         if (!containsKey(key)) {
             attrPositions_.add(key);
         }
@@ -573,8 +594,12 @@ class NamedAttrNodeMapImpl extends MapWrapper<String, DomAttr> implements NamedN
      */
     @Override
     public DomAttr remove(final Object key) {
-        attrPositions_.remove(key);
-        return super.remove(key);
+        if (!(key instanceof String)) {
+            return null;
+        }
+        final String name = fixName((String) key);
+        attrPositions_.remove(name);
+        return super.remove(name);
     }
 
     /**
@@ -595,5 +620,29 @@ class NamedAttrNodeMapImpl extends MapWrapper<String, DomAttr> implements NamedN
         for (final Map.Entry< ? extends String, ? extends DomAttr> entry : t.entrySet()) {
             put(entry.getKey(), entry.getValue());
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean containsKey(final Object key) {
+        if (!(key instanceof String)) {
+            return false;
+        }
+        final String name = fixName((String) key);
+        return super.containsKey(name);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DomAttr get(final Object key) {
+        if (!(key instanceof String)) {
+            return null;
+        }
+        final String name = fixName((String) key);
+        return super.get(name);
     }
 }

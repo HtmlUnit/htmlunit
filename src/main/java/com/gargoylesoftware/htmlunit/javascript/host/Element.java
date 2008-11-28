@@ -89,7 +89,7 @@ public class Element extends EventNode {
      * @return the JS object
      */
     protected NamedNodeMap createAttributesObject() {
-        return new NamedNodeMap((DomElement) getDomNodeOrDie(), false);
+        return new NamedNodeMap((DomElement) getDomNodeOrDie());
     }
 
     /**
