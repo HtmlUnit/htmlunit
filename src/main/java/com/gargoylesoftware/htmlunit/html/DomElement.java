@@ -345,7 +345,6 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param qualifiedName the qualified name of the attribute
      * @param attributeValue the value of the attribute
      */
-    @SuppressWarnings("unchecked")
     public void setAttributeValue(final String namespaceURI, final String qualifiedName,
             final String attributeValue) {
         setAttributeNS(namespaceURI, qualifiedName, attributeValue);
@@ -555,6 +554,7 @@ class NamedAttrNodeMapImpl extends MapWrapper<String, DomAttr> implements NamedN
     /**
      * {@inheritDoc}
      */
+    @Override
     public DomAttr put(final String key, final DomAttr value) {
         if (!containsKey(key)) {
             attrPositions_.add(key);
@@ -565,6 +565,7 @@ class NamedAttrNodeMapImpl extends MapWrapper<String, DomAttr> implements NamedN
     /**
      * {@inheritDoc}
      */
+    @Override
     public DomAttr remove(final Object key) {
         attrPositions_.remove(key);
         return super.remove(key);
@@ -573,6 +574,7 @@ class NamedAttrNodeMapImpl extends MapWrapper<String, DomAttr> implements NamedN
     /**
      * {@inheritDoc}
      */
+    @Override
     public void clear() {
         attrPositions_.clear();
         super.clear();

@@ -14,22 +14,24 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static org.junit.Assert.fail;
-
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.httpclient.NameValuePair;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link XMLDocument}.
@@ -38,18 +40,15 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public class XMLDocumentTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "undefined", "true" })
     public void async() throws Exception {
-        async(BrowserVersion.INTERNET_EXPLORER_7);
-        async(BrowserVersion.FIREFOX_2);
-    }
-
-    private void async(final BrowserVersion browserVersion) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
@@ -64,23 +63,15 @@ public class XMLDocumentTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"undefined", "true"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(IE = { "true", "books", "books", "1", "book", "0" }, FF = { "true", "books", "books", "3", "#text", "0" })
     public void load() throws Exception {
-        load(BrowserVersion.INTERNET_EXPLORER_7, new String[] {"true", "books", "books", "1", "book", "0"});
-        load(BrowserVersion.FIREFOX_2, new String[] {"true", "books", "books", "3", "#text", "0"});
-    }
-
-    private void load(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
@@ -110,7 +101,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "</books>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = new WebClient(browserVersion);
+        final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
@@ -118,30 +109,20 @@ public class XMLDocumentTest extends WebTestCase {
         client.setWebConnection(conn);
 
         client.getPage(URL_FIRST);
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(IE = { "true", "books", "books", "1", "book" }, FF = { "true", "books", "books", "3", "#text" })
     public void load_relativeURL() throws Exception {
-        load_relativeURL(BrowserVersion.INTERNET_EXPLORER_7,
-                new String[] {"true", "books", "books", "1", "book"});
-        load_relativeURL(BrowserVersion.FIREFOX_2,
-                new String[] {"true", "books", "books", "3", "#text"});
-    }
-
-    private void load_relativeURL(final BrowserVersion browserVersion, final String[] expectedAlerts)
-        throws Exception {
-        final URL firstURL = new URL("http://htmlunit/first.html");
-        final URL secondURL = new URL("http://htmlunit/second.xml");
-
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
             + "    doc.async = false;\n"
-            + "    alert(doc.load('" + "second.xml" + "'));\n"
+            + "    alert(doc.load('" + URL_SECOND + "'));\n"
             + "    alert(doc.documentElement.nodeName);\n"
             + "    alert(doc.childNodes[0].nodeName);\n"
             + "    alert(doc.childNodes[0].childNodes.length);\n"
@@ -165,21 +146,23 @@ public class XMLDocumentTest extends WebTestCase {
             + "</books>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = new WebClient(browserVersion);
+        final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(firstURL, html);
-        conn.setResponse(secondURL, xml, "text/xml");
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(URL_SECOND, xml, "text/xml");
         client.setWebConnection(conn);
 
-        client.getPage(firstURL);
-        assertEquals(expectedAlerts, collectedAlerts);
+        client.getPage(URL_FIRST);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts("false")
     public void preserveWhiteSpace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -188,16 +171,15 @@ public class XMLDocumentTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        final String[] expectedAlerts = {"false"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_7, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts()
     public void setProperty() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -207,25 +189,16 @@ public class XMLDocumentTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPage(BrowserVersion.INTERNET_EXPLORER_7, html, null);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts({ "true", "1", "books" })
     public void selectNodes() throws Exception {
-        selectNodes(BrowserVersion.INTERNET_EXPLORER_7, new String[] {"true", "1", "books"});
-        try {
-            selectNodes(BrowserVersion.FIREFOX_2, new String[] {"true", "1", "books"});
-            fail("selectNodes is not supported in Firefox.");
-        }
-        catch (final Exception e) {
-            //expected
-        }
-    }
-
-    private void selectNodes(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
@@ -253,7 +226,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "</books>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = new WebClient(browserVersion);
+        final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
@@ -261,13 +234,15 @@ public class XMLDocumentTest extends WebTestCase {
         client.setWebConnection(conn);
 
         client.getPage(URL_FIRST);
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts({ "0", "1" })
     public void selectNodes_caseSensitive() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -294,9 +269,8 @@ public class XMLDocumentTest extends WebTestCase {
             + "  </book>\n"
             + "</books>";
 
-        final String[] expectedAlerts = {"0", "1"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7);
+        final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
@@ -304,13 +278,15 @@ public class XMLDocumentTest extends WebTestCase {
         client.setWebConnection(conn);
 
         client.getPage(URL_FIRST);
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts({ "true", "2", "1" })
     public void selectNodes_Namespace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -344,9 +320,8 @@ public class XMLDocumentTest extends WebTestCase {
             + "  </ns1:book>\n"
             + "</ns1:books>";
 
-        final String[] expectedAlerts = {"true", "2", "1"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7);
+        final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
@@ -354,13 +329,15 @@ public class XMLDocumentTest extends WebTestCase {
         client.setWebConnection(conn);
 
         client.getPage(URL_FIRST);
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts({ "book", "null", "book", "null" })
     public void selectNodes_nextNodeAndReset() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
@@ -384,9 +361,8 @@ public class XMLDocumentTest extends WebTestCase {
             + "  </book>\n"
             + "</books>";
 
-        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7);
+        final WebClient client = getWebClient();
 
-        final String[] expectedAlerts = {"book", "null", "book", "null"};
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -396,13 +372,15 @@ public class XMLDocumentTest extends WebTestCase {
         client.setWebConnection(conn);
 
         client.getPage(URL_FIRST);
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts({ "book", "#document", "book", "#document" })
     public void selectSingleNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -417,23 +395,15 @@ public class XMLDocumentTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"book", "#document", "book", "#document"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_7, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("someprefix:test")
     public void loadXML_Namespace() throws Exception {
-        loadXML_Namespace(BrowserVersion.INTERNET_EXPLORER_7);
-        loadXML_Namespace(BrowserVersion.FIREFOX_2);
-    }
-
-    private void loadXML_Namespace(final BrowserVersion browserVersion) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var text='<someprefix:test xmlns:someprefix=\"http://myNS\"/>';\n"
@@ -449,11 +419,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"someprefix:test"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -469,12 +435,8 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("7")
     public void loadXML_XMLSpaceAttribute() throws Exception {
-        loadXML_XMLSpaceAttribute(BrowserVersion.INTERNET_EXPLORER_7);
-        loadXML_XMLSpaceAttribute(BrowserVersion.FIREFOX_2);
-    }
-
-    private void loadXML_XMLSpaceAttribute(final BrowserVersion browserVersion) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var text='<root xml:space=\\'preserve\\'>This t"
@@ -491,17 +453,17 @@ public class XMLDocumentTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"7"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts({ "true", "true", "true", "true", "true", "true", "true", "true",
+            "false",
+            "true", "true", "true", "true", "true", "true", "true", "true" })
     public void testParseError() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -533,12 +495,8 @@ public class XMLDocumentTest extends WebTestCase {
             + "  <element>\n"
             + "</root>";
 
-        final String[] expectedAlerts = {"true", "true", "true", "true", "true", "true", "true", "true",
-            "false",
-            "true", "true", "true", "true", "true", "true", "true", "true"};
-
         final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7);
+        final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
@@ -546,25 +504,16 @@ public class XMLDocumentTest extends WebTestCase {
         client.setWebConnection(conn);
 
         client.getPage(URL_FIRST);
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts("http://myNS")
     public void createNSResolver() throws Exception {
-        createNSResolver(BrowserVersion.FIREFOX_2, new String[] {"http://myNS"});
-        try {
-            createNSResolver(BrowserVersion.INTERNET_EXPLORER_7, new String[] {"http://myNS"});
-            fail("'createNSResolver' is not supported in IE.");
-        }
-        catch (final Exception e) {
-            //expected
-        }
-    }
-    private void createNSResolver(final BrowserVersion browserVersion, final String[] expectedAlerts)
-        throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var text='<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\n';\n"
@@ -588,25 +537,15 @@ public class XMLDocumentTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "1610", "1575", "32", "1604", "1610", "1610", "1610", "1610", "1610", "1610", "1604" })
     public void load_Encoding() throws Exception {
-        final String[] expectedAlerts =
-        {"1610", "1575", "32", "1604", "1610", "1610", "1610", "1610", "1610", "1610", "1604"};
-        load_Encoding(BrowserVersion.INTERNET_EXPLORER_7, expectedAlerts);
-        load_Encoding(BrowserVersion.FIREFOX_2, expectedAlerts);
-    }
-
-    private void load_Encoding(final BrowserVersion browserVersion, final String[] expectedAlerts)
-        throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
@@ -630,7 +569,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "<something>\u064A\u0627 \u0644\u064A\u064A\u064A\u064A\u064A\u064A\u0644</something>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = new WebClient(browserVersion);
+        final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
@@ -639,13 +578,15 @@ public class XMLDocumentTest extends WebTestCase {
         client.setWebConnection(conn);
 
         client.getPage(URL_FIRST);
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts("columns")
     public void xmlInsideHtml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -661,17 +602,15 @@ public class XMLDocumentTest extends WebTestCase {
             + "    </columns>\n"
             + "  </xml>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"columns"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_7, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts("true")
     public void instanceOf() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -688,17 +627,15 @@ public class XMLDocumentTest extends WebTestCase {
             + "    </columns>\n"
             + "  </xml>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"true"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Alerts("button")
     public void evaluate() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -709,16 +646,17 @@ public class XMLDocumentTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        final String[] expectedAlerts = {"button"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "same doc: false", "in first: 3", "book", "ownerDocument: doc1",
+            "in 2nd: 3", "ownerDocument: doc2", "first child ownerDocument: doc2", "in first: 2", "in 2nd: 4",
+            "ownerDocument: doc1", "in first: 2", "in 2nd: 3",
+            "ownerDocument: doc2", "in first: 1", "in 2nd: 4" })
     public void moveChildBetweenDocuments() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -767,7 +705,7 @@ public class XMLDocumentTest extends WebTestCase {
         final String xml = "<order><book><title/></book><cd/><dvd/></order>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
@@ -775,21 +713,16 @@ public class XMLDocumentTest extends WebTestCase {
         client.setWebConnection(conn);
 
         client.getPage(URL_FIRST);
-        final String[] expectedAlerts = {"same doc: false", "in first: 3", "book", "ownerDocument: doc1",
-            "in 2nd: 3", "ownerDocument: doc2", "first child ownerDocument: doc2", "in first: 2", "in 2nd: 4",
-            "ownerDocument: doc1", "in first: 2", "in 2nd: 3",
-            "ownerDocument: doc2", "in first: 1", "in 2nd: 4"};
-        assertEquals(Arrays.asList(expectedAlerts).toString(), collectedAlerts.toString());
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("1")
+    @NotYetImplemented
     public void getElementsByTagName() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
@@ -816,9 +749,8 @@ public class XMLDocumentTest extends WebTestCase {
             + "  </books>\n"
             + "</soap:Envelope>";
 
-        final String[] expectedAlerts = {"1"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
@@ -826,6 +758,6 @@ public class XMLDocumentTest extends WebTestCase {
         client.setWebConnection(conn);
 
         client.getPage(URL_FIRST);
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 }

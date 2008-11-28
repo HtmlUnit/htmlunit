@@ -18,7 +18,6 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
-
 /**
  * Map implementation delegating all calls to the wrapped Map.
  * @version $Revision$
@@ -75,6 +74,7 @@ public class MapWrapper<K, V> implements Map<K, V> {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean equals(final Object o) {
         return wrappedMap_.equals(o);
     }
@@ -89,6 +89,7 @@ public class MapWrapper<K, V> implements Map<K, V> {
     /**
      * {@inheritDoc}
      */
+    @Override
     public int hashCode() {
         return wrappedMap_.hashCode();
     }
