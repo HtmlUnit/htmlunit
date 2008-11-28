@@ -24,7 +24,7 @@
     <class name="Attr" classname="com.gargoylesoftware.htmlunit.javascript.host.Attr"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomAttr">
         <property name="expando" readable="true" writable="false">
-	        <browser name="Microsoft Internet Explorer"/>
+            <browser name="Microsoft Internet Explorer"/>
         </property>
         <property name="firstChild" readable="true" writable="false"/>
         <property name="lastChild" readable="true" writable="false"/>
