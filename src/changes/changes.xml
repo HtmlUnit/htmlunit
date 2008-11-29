@@ -2409,7 +2409,7 @@
             <action type="update" dev="mguillem" id="1334150">
                 HtmlOption.click() now returns correctly the page loaded by an onchange event.
             </action>
-            <action type="update" dev="mguillem" id="1334541" due-to="ianzlovejoy">
+            <action type="update" dev="mguillem" id="1334541" due-to="Ian Lovejoy">
                 Fixed requested URL for post form with empty action and original page containing
                 a query string or action containing only a query string.
             </action>

@@ -1180,7 +1180,6 @@ public abstract class HtmlElement extends DomElement {
         // nothing
     }
 
-
     /**
      * Indicates if the attribute names are case sensitive.
      * @return <code>false</code>
