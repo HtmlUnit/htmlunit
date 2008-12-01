@@ -111,7 +111,12 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
 
         return null;
     }
-    
+
+    /**
+     * Returns the item at the specified index.
+     * @param index the index
+     * @return the item at the specified index
+     */
     public Object jsxFunction_item(final int index) {
         final DomNode attr = (DomNode) nodeMap_.item(index);
         if (attr != null) {
@@ -123,10 +128,9 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
 
         return null;
     }
-    
+
     private boolean shouldFakeAttributeForIE() {
-        return nodeMap_.getLength() == 0 
-                && getBrowserVersion().isIE() && getDomNodeOrDie() instanceof HtmlElement;
+        return nodeMap_.getLength() == 0 && getBrowserVersion().isIE() && getDomNodeOrDie() instanceof HtmlElement;
     }
 
     /**
