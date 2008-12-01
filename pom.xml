@@ -578,6 +578,7 @@
                 scp://shell.sourceforge.net/home/groups/h/ht/htmlunit/htdocs/m2-repo-snapshots
             </url>
             <name>HtmlUnit Maven 2 Snapshots Repository</name>
+            <uniqueVersion>false</uniqueVersion>
         </snapshotRepository>
     </distributionManagement>
     <repositories>
