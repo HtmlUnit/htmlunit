@@ -50,7 +50,7 @@ public class HtmlElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
-        final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
+        final HtmlElement node = page.getDocumentElement().getElementById("tag");
         Assert.assertEquals("Element should have attribute", true, node.hasAttribute("id"));
     }
 
@@ -64,7 +64,7 @@ public class HtmlElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
-        final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
+        final HtmlElement node = page.getDocumentElement().getElementById("tag");
         Assert.assertEquals("Element should not have attribute", false, node.hasAttribute("foo"));
     }
 
@@ -79,7 +79,7 @@ public class HtmlElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
-        final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
+        final HtmlElement node = page.getDocumentElement().getElementById("tag");
         Assert.assertEquals("Element should have attribute", true, node.hasAttributeNS("http://foobar", "foo"));
     }
 
@@ -93,7 +93,7 @@ public class HtmlElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
-        final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
+        final HtmlElement node = page.getDocumentElement().getElementById("tag");
         Assert.assertEquals("Element should not have attribute", false, node.hasAttributeNS("http://foobar", "foo"));
     }
 
@@ -108,7 +108,7 @@ public class HtmlElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
-        final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
+        final HtmlElement node = page.getDocumentElement().getElementById("tag");
         Assert.assertEquals("Element should have attribute", "tag", node.getAttribute("id"));
     }
 
@@ -123,7 +123,7 @@ public class HtmlElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
-        final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
+        final HtmlElement node = page.getDocumentElement().getElementById("tag");
         Assert.assertEquals("Element should not have attribute", "", node.getAttribute("foo"));
     }
 
@@ -138,7 +138,7 @@ public class HtmlElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
-        final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
+        final HtmlElement node = page.getDocumentElement().getElementById("tag");
         Assert.assertEquals("Element should have attribute", "bar", node.getAttributeNS("http://foobar", "foo"));
     }
 
@@ -152,7 +152,7 @@ public class HtmlElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
-        final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
+        final HtmlElement node = page.getDocumentElement().getElementById("tag");
         Assert.assertEquals("Element should not have attribute", "", node.getAttributeNS("http://foobar", "foo"));
     }
 
@@ -167,7 +167,7 @@ public class HtmlElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
-        final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
+        final HtmlElement node = page.getDocumentElement().getElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
             if (attr.getName().equals("ns:foo")) {
                 Assert.assertEquals("Element should have a namespace URI", "http://foobar", attr.getNamespaceURI());
@@ -188,7 +188,7 @@ public class HtmlElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
-        final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
+        final HtmlElement node = page.getDocumentElement().getElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
             if (attr.getName().equals("id")) {
                 Assert.assertEquals("Element should not have a namespace URI", null, attr.getNamespaceURI());
@@ -209,7 +209,7 @@ public class HtmlElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
-        final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
+        final HtmlElement node = page.getDocumentElement().getElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
             if (attr.getName().equals("ns:foo")) {
                 Assert.assertEquals("Element should have a local name", "foo", attr.getLocalName());
@@ -230,7 +230,7 @@ public class HtmlElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
-        final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
+        final HtmlElement node = page.getDocumentElement().getElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
             if (attr.getName().equals("id")) {
                 // This is not standard, but to change it now would break backwards compatibility.
@@ -252,7 +252,7 @@ public class HtmlElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
-        final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
+        final HtmlElement node = page.getDocumentElement().getElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
             if (attr.getName().equals("ns:foo")) {
                 Assert.assertEquals("Element should have a prefix", "ns", attr.getPrefix());
@@ -273,7 +273,7 @@ public class HtmlElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
-        final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
+        final HtmlElement node = page.getDocumentElement().getElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
             if (attr.getName().equals("id")) {
                 Assert.assertEquals("Element should not have a prefix", null, attr.getPrefix());
@@ -294,7 +294,7 @@ public class HtmlElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
-        final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
+        final HtmlElement node = page.getDocumentElement().getElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
             if (attr.getName().equals("ns:foo")) {
                 attr.setPrefix("other");
@@ -317,7 +317,7 @@ public class HtmlElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
-        final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
+        final HtmlElement node = page.getDocumentElement().getElementById("tag");
         node.setAttribute("id", "other");
         Assert.assertEquals("Element should have attribute", "other", node.getAttribute("id"));
     }
@@ -333,7 +333,7 @@ public class HtmlElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
-        final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
+        final HtmlElement node = page.getDocumentElement().getElementById("tag");
         node.setAttribute("foo", "other");
         Assert.assertEquals("Element should have attribute", "other", node.getAttribute("foo"));
     }
@@ -349,7 +349,7 @@ public class HtmlElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
-        final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
+        final HtmlElement node = page.getDocumentElement().getElementById("tag");
         node.setAttributeNS("http://foobar", "ns:foo", "other");
         Assert.assertEquals("Element should have attribute", "other", node.getAttributeNS("http://foobar", "foo"));
     }
@@ -365,7 +365,7 @@ public class HtmlElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
-        final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
+        final HtmlElement node = page.getDocumentElement().getElementById("tag");
         node.setAttributeNS("http://foobar", "ns:foo", "other");
         Assert.assertEquals("Element should not have attribute", "other", node.getAttributeNS("http://foobar", "foo"));
     }
@@ -381,7 +381,7 @@ public class HtmlElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
-        final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
+        final HtmlElement node = page.getDocumentElement().getElementById("tag");
         node.removeAttribute("id");
         Assert.assertEquals("Element should not have removed attribute", "", node.getAttribute("id"));
     }
@@ -397,7 +397,7 @@ public class HtmlElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
-        final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
+        final HtmlElement node = page.getDocumentElement().getElementById("tag");
         node.removeAttribute("foo");
         Assert.assertEquals("Element should not have attribute", "", node.getAttribute("foo"));
     }
@@ -413,7 +413,7 @@ public class HtmlElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
-        final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
+        final HtmlElement node = page.getDocumentElement().getElementById("tag");
         node.removeAttributeNS("http://foobar", "foo");
         Assert.assertEquals("Element should not have removed attribute", "",
             node.getAttributeNS("http://foobar", "foo"));
@@ -430,7 +430,7 @@ public class HtmlElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
-        final HtmlElement node = page.getDocumentElement().getHtmlElementById("tag");
+        final HtmlElement node = page.getDocumentElement().getElementById("tag");
         node.removeAttributeNS("http://foobar", "foo");
         Assert.assertEquals("Element should not have attribute", "", node.getAttributeNS("http://foobar", "foo"));
     }
@@ -474,7 +474,7 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final HtmlForm form = page.getHtmlElementById("form1");
 
-        final HtmlInput input = form.getHtmlElementById("foo");
+        final HtmlInput input = form.getElementById("foo");
         assertSame(form, input.getEnclosingForm());
     }
 

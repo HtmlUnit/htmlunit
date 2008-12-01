@@ -142,7 +142,7 @@ public abstract class JQueryTestBase extends WebTestCase {
         }
 
         final HtmlElement doc = page.getDocumentElement();
-        final HtmlOrderedList tests = (HtmlOrderedList) doc.getHtmlElementById("tests");
+        final HtmlOrderedList tests = (HtmlOrderedList) doc.getElementById("tests");
         final Iterable<HtmlElement> i = tests.getChildElements();
         return i.iterator();
     }

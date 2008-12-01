@@ -722,9 +722,9 @@ public class HtmlFormTest extends WebTestCase {
 
         final HtmlForm form = page.getHtmlElementById("form1");
 
-        Assert.assertEquals("First textarea with name 'ta1'", form.getHtmlElementById("ta1_1"),
+        Assert.assertEquals("First textarea with name 'ta1'", form.getElementById("ta1_1"),
             form.getTextAreaByName("ta1"));
-        Assert.assertEquals("First textarea with name 'ta2'", form.getHtmlElementById("ta2_1"),
+        Assert.assertEquals("First textarea with name 'ta2'", form.getElementById("ta2_1"),
             form.getTextAreaByName("ta2"));
 
         try {
@@ -755,9 +755,9 @@ public class HtmlFormTest extends WebTestCase {
 
         final HtmlForm form = page.getHtmlElementById("form1");
 
-        Assert.assertEquals("First button with name 'b1'", form.getHtmlElementById("b1_1"),
+        Assert.assertEquals("First button with name 'b1'", form.getElementById("b1_1"),
             form.getButtonByName("b1"));
-        Assert.assertEquals("First button with name 'b2'", form.getHtmlElementById("b2_1"),
+        Assert.assertEquals("First button with name 'b2'", form.getElementById("b2_1"),
             form.getButtonByName("b2"));
 
         try {

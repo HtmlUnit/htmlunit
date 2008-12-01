@@ -180,7 +180,7 @@ public class DomTextTest extends WebTestCase {
             + "<br><div id='tag'></div><br></body></html>";
         final HtmlPage page = loadPage(content);
 
-        final DomNode divNode = page.getDocumentElement().getHtmlElementById("tag");
+        final DomNode divNode = page.getDocumentElement().getElementById("tag");
 
         final DomText node = new DomText(page, "test split");
         divNode.insertBefore(node);
@@ -214,7 +214,7 @@ public class DomTextTest extends WebTestCase {
             + "<br><div id='tag'></div><br></body></html>";
         final HtmlPage page = loadPage(content);
 
-        final DomNode divNode = page.getDocumentElement().getHtmlElementById("tag");
+        final DomNode divNode = page.getDocumentElement().getElementById("tag");
 
         final DomText firstNode = new DomText(page, "test split");
         divNode.appendChild(firstNode);

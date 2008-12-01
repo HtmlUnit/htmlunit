@@ -130,7 +130,7 @@ public class HtmlLabel extends ClickableElement {
         final String elementId = getForAttribute();
         if (!ATTRIBUTE_NOT_DEFINED.equals(elementId)) {
             try {
-                final HtmlElement element = getHtmlElementById(elementId);
+                final HtmlElement element = getElementById(elementId);
                 if (element instanceof ClickableElement) {
                     return (ClickableElement) element;
                 }

@@ -867,7 +867,7 @@ public class HTMLDocument extends Document {
         Object result = null;
         try {
             final HtmlElement htmlElement =
-                ((HtmlPage) getDomNodeOrDie()).getDocumentElement().getHtmlElementById(id);
+                ((HtmlPage) getDomNodeOrDie()).getDocumentElement().getElementById(id);
             final Object jsElement = getScriptableFor(htmlElement);
 
             if (jsElement == NOT_FOUND) {

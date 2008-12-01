@@ -8,8 +8,8 @@
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
             <action type="update" dev="asashour">
                 Deprecate HtmlPage.getHtmlElementByAccessKey(), HtmlPage.getHtmlElementsByAccessKey(),
-                HtmlPage.getHtmlElementsByName(), HtmlPage.getHtmlElementsByIdAndOrName()
-                and HtmlElement.getHtmlElementsByAttribute()
+                HtmlPage.getHtmlElementsByName(), HtmlPage.getHtmlElementsByIdAndOrName(),
+                HtmlElement.getHtmlElementsByAttribute() and HtmlElement.getHtmlElementById().
             </action>
             <action type="update" dev="mguillem">
                 Deprecate DomElement methods getAttributeValue, setAttributeValue.

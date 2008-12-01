@@ -242,7 +242,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      */
     public Element getElementById(final String elementId) {
         try {
-            return getDocumentElement().getHtmlElementById(elementId);
+            return getDocumentElement().getElementById(elementId);
         }
         catch (final ElementNotFoundException e) {
             return null;

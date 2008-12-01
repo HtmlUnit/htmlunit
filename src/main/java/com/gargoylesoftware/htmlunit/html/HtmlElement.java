@@ -577,8 +577,23 @@ public abstract class HtmlElement extends DomElement {
      * @exception ElementNotFoundException if no element has the specified ID
      */
     @SuppressWarnings("unchecked")
-    public <E extends HtmlElement> E getHtmlElementById(final String id) throws ElementNotFoundException {
+    public <E extends HtmlElement> E getElementById(final String id) throws ElementNotFoundException {
         return (E) ((HtmlPage) getPage()).getHtmlElementById(id);
+    }
+
+    /**
+     * Returns the element in this element's page with the specified ID. If more than one element
+     * has the specified ID (not allowed by the HTML spec), this method returns the first one.
+     *
+     * @param id the ID value to search for
+     * @param <E> the sub-element type
+     * @return the element in this element's page with the specified ID
+     * @exception ElementNotFoundException if no element has the specified ID
+     * @deprecated As of 2.4, please use {@link #getElementById(String)} instead.
+     */
+    @Deprecated
+    public <E extends HtmlElement> E getHtmlElementById(final String id) throws ElementNotFoundException {
+        return getElementById(id);
     }
 
     /**
@@ -586,7 +601,7 @@ public abstract class HtmlElement extends DomElement {
      * This method is intended for situations where it is enough to know whether a specific
      * element is present in the document.</p>
      *
-     * <p>Implementation Note: This method calls {@link #getHtmlElementById(String)} internally,
+     * <p>Implementation Note: This method calls {@link #getElementById(String)} internally,
      * so writing code such as the following would be extremely inefficient:</p>
      *
      * <pre>
@@ -601,7 +616,7 @@ public abstract class HtmlElement extends DomElement {
      */
     public boolean hasHtmlElementWithId(final String id) {
         try {
-            getHtmlElementById(id);
+            getElementById(id);
             return true;
         }
         catch (final ElementNotFoundException e) {
