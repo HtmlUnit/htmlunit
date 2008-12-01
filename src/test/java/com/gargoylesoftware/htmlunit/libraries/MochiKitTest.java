@@ -23,7 +23,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -51,7 +50,6 @@ public class MochiKitTest extends LibraryTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     public void async() throws Exception {
         doTest("Async");
     }
@@ -73,7 +71,6 @@ public class MochiKitTest extends LibraryTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     public void color() throws Exception {
         doTest("Color");
     }
@@ -82,7 +79,6 @@ public class MochiKitTest extends LibraryTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     public void dateTime() throws Exception {
         doTest("DateTime");
     }
@@ -91,7 +87,6 @@ public class MochiKitTest extends LibraryTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     public void DOM() throws Exception {
         doTest("DOM");
     }
@@ -100,7 +95,6 @@ public class MochiKitTest extends LibraryTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     public void format() throws Exception {
         doTest("Format");
     }
@@ -109,7 +103,6 @@ public class MochiKitTest extends LibraryTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     public void iter() throws Exception {
         doTest("Iter");
     }
@@ -118,7 +111,6 @@ public class MochiKitTest extends LibraryTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     public void logging() throws Exception {
         doTest("Logging");
     }
@@ -127,7 +119,6 @@ public class MochiKitTest extends LibraryTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     public void mochiKit() throws Exception {
         doTest("MochiKit");
     }
@@ -136,7 +127,6 @@ public class MochiKitTest extends LibraryTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     public void selector() throws Exception {
         doTest("Selector");
     }
@@ -145,7 +135,6 @@ public class MochiKitTest extends LibraryTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     public void signal() throws Exception {
         doTest("Signal");
     }
@@ -163,7 +152,6 @@ public class MochiKitTest extends LibraryTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     public void visual() throws Exception {
         doTest("Visual");
     }
@@ -178,7 +166,7 @@ public class MochiKitTest extends LibraryTestCase {
         page.getEnclosingWindow().getThreadManager().joinAll(20000);
         final String expected = loadExpectation("test-" + testName);
         final HtmlDivision div = page.getFirstByXPath("//div[@class = 'tests_report']");
-        getLog().debug(page.asXml());
+
         assertNotNull(div);
         assertEquals(expected.trim(), div.asText().trim());
     }

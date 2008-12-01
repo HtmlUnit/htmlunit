@@ -136,7 +136,6 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @NotYetImplemented({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     @Alerts(FF = "0 attribute", IE = "at least 1 attribute")
     public void attributes() throws Exception {
         final String html = "<html>\n"

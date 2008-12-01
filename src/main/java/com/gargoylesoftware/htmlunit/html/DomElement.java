@@ -543,6 +543,9 @@ class NamedAttrNodeMapImpl extends MapWrapper<String, DomAttr> implements NamedN
      * {@inheritDoc}
      */
     public Node item(final int index) {
+        if (index < 0 || index >= attrPositions_.size()) {
+            return null;
+        }
         return get(attrPositions_.get(index));
     }
 

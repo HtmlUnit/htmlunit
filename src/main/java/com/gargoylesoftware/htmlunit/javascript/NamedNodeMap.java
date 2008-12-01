@@ -18,6 +18,8 @@ import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.javascript.host.Attr;
 
 /**
  * A collection of nodes that can be accessed by name. String comparisons in this class are case-insensitive when
@@ -27,6 +29,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core.html#ID-1780488922">DOM Level 2 Core Spec</a>
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms763824.aspx">IXMLDOMNamedNodeMap</a>
  */
@@ -35,6 +38,12 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     private static final long serialVersionUID = -1910087049570242560L;
 
     private final org.w3c.dom.NamedNodeMap nodeMap_;
+    /**
+     * In IE nodes always have attributes. In a first time we only need to have a least one to make
+     * the MockKit tests happy and take the first one according to IE order: "language".
+     */
+    private final String fakedAttributeName_ = "language";
+    private Attr fakedAttributeNode_;
 
     /**
      * We need default constructors to build the prototype instance.
@@ -53,13 +62,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
         setPrototype(getPrototype(getClass()));
 
         nodeMap_ = element.getAttributes();
-/*
-        // for IE, there is no node without attribute. A fresh create span has 82 attributes!
-        // just create at least one here to ensure that JS code using this as test for IE will pass
-        if (element.getAttributesMap().isEmpty() && caseInsensitive && getBrowserVersion().isIE()) {
-            element.setAttribute("language", "");
-        }
-        */
+        setDomNode(element, false);
     }
 
     /**
@@ -70,10 +73,11 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     @Override
     public final Object get(final int index, final Scriptable start) {
         final NamedNodeMap startMap = (NamedNodeMap) start;
-        if (index >= 0 && index < startMap.nodeMap_.getLength()) {
-            final DomNode attr = (DomNode) startMap.nodeMap_.item(index);
-            return attr.getScriptObject();
+        final Object response = startMap.jsxFunction_item(index);
+        if (response != null) {
+            return response;
         }
+
         return NOT_FOUND;
     }
 
@@ -83,10 +87,11 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * {@inheritDoc}
      */
     public Object getWithFallback(final String name) {
-        final DomNode attr = (DomNode) nodeMap_.getNamedItem(name);
-        if (attr != null) {
-            return attr.getScriptObject();
+        final Object response = jsxFunction_getNamedItem(name);
+        if (response != null) {
+            return response;
         }
+
         return NOT_FOUND;
     }
 
@@ -100,7 +105,42 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
         if (attr != null) {
             return attr.getScriptObject();
         }
+        else if (fakedAttributeName_.equalsIgnoreCase(name) && shouldFakeAttributeForIE()) {
+            return getFakedAttributeNode();
+        }
+
         return null;
+    }
+    
+    public Object jsxFunction_item(final int index) {
+        final DomNode attr = (DomNode) nodeMap_.item(index);
+        if (attr != null) {
+            return attr.getScriptObject();
+        }
+        else if (index == 0 && shouldFakeAttributeForIE()) {
+            return getFakedAttributeNode();
+        }
+
+        return null;
+    }
+    
+    private boolean shouldFakeAttributeForIE() {
+        return nodeMap_.getLength() == 0 
+                && getBrowserVersion().isIE() && getDomNodeOrDie() instanceof HtmlElement;
+    }
+
+    /**
+     * Gets the faked attribute node, with lazy creating
+     * @return the right {@link Attr}
+     */
+    private Object getFakedAttributeNode() {
+        if (fakedAttributeNode_ == null) {
+            fakedAttributeNode_ = new Attr();
+            fakedAttributeNode_.setParentScope(this);
+            fakedAttributeNode_.setPrototype(getPrototype(Attr.class));
+            fakedAttributeNode_.init(fakedAttributeName_, null);
+        }
+        return fakedAttributeNode_;
     }
 
     /**
@@ -108,6 +148,12 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * @return the number of attributes in this named node map
      */
     public int jsxGet_length() {
-        return nodeMap_.getLength();
+        final int length = nodeMap_.getLength();
+        // hack to avoid showing 0 elements as IE always has some
+        if (length == 0 && getBrowserVersion().isIE() && getDomNodeOrDie() instanceof HtmlElement) {
+            return 1;
+        }
+
+        return length;
     }
 }

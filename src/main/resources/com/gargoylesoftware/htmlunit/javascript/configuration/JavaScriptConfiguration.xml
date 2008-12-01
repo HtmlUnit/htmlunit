@@ -1835,6 +1835,7 @@
     <class name="NamedNodeMap" classname="com.gargoylesoftware.htmlunit.javascript.NamedNodeMap" JSObject="true">
         <property name="length" readable="true" writable="false"/>
         <function name="getNamedItem"/>
+        <function name="item"/>
     </class>
 
     <class name="Namespace" classname="com.gargoylesoftware.htmlunit.javascript.host.Namespace"
