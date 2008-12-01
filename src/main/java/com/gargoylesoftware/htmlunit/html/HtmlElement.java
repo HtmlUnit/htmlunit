@@ -592,8 +592,9 @@ public abstract class HtmlElement extends DomElement {
      * @deprecated As of 2.4, please use {@link #getElementById(String)} instead.
      */
     @Deprecated
+    @SuppressWarnings("unchecked")
     public <E extends HtmlElement> E getHtmlElementById(final String id) throws ElementNotFoundException {
-        return getElementById(id);
+        return (E) getElementById(id);
     }
 
     /**
