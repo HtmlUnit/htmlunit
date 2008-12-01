@@ -565,6 +565,7 @@
                 scp://shell.sourceforge.net/home/groups/h/ht/htmlunit/htdocs/
             </url>
         </site>
+        <!-- commented out by default so that CruiseControl doesn't accidentally deploy a real release...
         <repository>
             <id>htmlunit-m2-repo</id>
             <url>
@@ -572,6 +573,7 @@
             </url>
             <name>HtmlUnit Maven 2 Repository</name>
         </repository>
+        -->
         <snapshotRepository>
             <id>htmlunit-m2-repo-snapshots</id>
             <url>
