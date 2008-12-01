@@ -817,7 +817,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                 // overhead. We only use an XPath-based operation when we have to (where there is more than one
                 // matching element). This optimization appears to improve performance in certain situations by ~15%
                 // vs using XPath-based operations throughout.
-                final List<HtmlElement> elements = page.getHtmlElementsByName(name);
+                final List<HtmlElement> elements = page.getElementsByName(name);
                 if (elements.size() == 1) {
                     result = getScriptableFor(elements.get(0));
                 }

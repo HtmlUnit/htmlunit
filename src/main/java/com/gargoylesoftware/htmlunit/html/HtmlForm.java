@@ -333,7 +333,7 @@ public class HtmlForm extends ClickableElement {
      * @return all input elements which are members of this form and have the specified name
      */
     public List<HtmlInput> getInputsByName(final String name) {
-        final List<HtmlInput> list = getHtmlElementsByAttribute("input", "name", name);
+        final List<HtmlInput> list = getElementsByAttribute("input", "name", name);
 
         // collect inputs from lost children
         for (final HtmlElement elt : getLostChildren()) {
@@ -369,7 +369,7 @@ public class HtmlForm extends ClickableElement {
      * @return all the {@link HtmlSelect} elements in this form that have the specified name
      */
     public List<HtmlSelect> getSelectsByName(final String name) {
-        final List<HtmlSelect> list = getHtmlElementsByAttribute("select", "name", name);
+        final List<HtmlSelect> list = getElementsByAttribute("select", "name", name);
 
         // collect selects from lost children
         for (final HtmlElement elt : getLostChildren()) {
@@ -403,7 +403,7 @@ public class HtmlForm extends ClickableElement {
      * @return all the {@link HtmlButton} elements in this form that have the specified name
      */
     public List<HtmlButton> getButtonsByName(final String name) {
-        final List<HtmlButton> list = getHtmlElementsByAttribute("button", "name", name);
+        final List<HtmlButton> list = getElementsByAttribute("button", "name", name);
 
         // collect buttons from lost children
         for (final HtmlElement elt : getLostChildren()) {
@@ -437,7 +437,7 @@ public class HtmlForm extends ClickableElement {
      * @return all the {@link HtmlTextArea} elements in this form that have the specified name
      */
     public List<HtmlTextArea> getTextAreasByName(final String name) {
-        final List<HtmlTextArea> list = getHtmlElementsByAttribute("textarea", "name", name);
+        final List<HtmlTextArea> list = getElementsByAttribute("textarea", "name", name);
 
         // collect buttons from lost children
         for (final HtmlElement elt : getLostChildren()) {
@@ -702,7 +702,7 @@ public class HtmlForm extends ClickableElement {
      * @return all the inputs in this form with the specified value
      */
     public List<HtmlInput> getInputsByValue(final String value) {
-        final List<HtmlInput> results = getHtmlElementsByAttribute("input", "value", value);
+        final List<HtmlInput> results = getElementsByAttribute("input", "value", value);
 
         for (final HtmlElement element : getLostChildren()) {
             if (element instanceof HtmlInput && value.equals(element.getAttribute("value"))) {

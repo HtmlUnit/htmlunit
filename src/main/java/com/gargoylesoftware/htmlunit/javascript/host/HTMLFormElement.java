@@ -123,7 +123,7 @@ public class HTMLFormElement extends HTMLElement {
      */
     public int jsxGet_length() {
         final int all = jsxGet_elements().jsxGet_length();
-        final int images = getHtmlForm().getHtmlElementsByAttribute("input", "type", "image").size();
+        final int images = getHtmlForm().getElementsByAttribute("input", "type", "image").size();
         return all - images;
     }
 
@@ -248,7 +248,7 @@ public class HTMLFormElement extends HTMLElement {
             // buttons, selects and textareas that are in this form. We also include img elements
             // (the second XPath search below) in the search, because any results with more than one element
             // will end up using the XPath search anyway, so it doesn't hurt when looking for single elements.
-            final List<HtmlElement> elements = ((HtmlPage) page).getHtmlElementsByIdAndOrName(name);
+            final List<HtmlElement> elements = ((HtmlPage) page).getElementsByIdAndOrName(name);
             if (elements.isEmpty()) {
                 return NOT_FOUND;
             }

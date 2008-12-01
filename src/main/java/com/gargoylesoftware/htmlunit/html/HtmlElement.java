@@ -557,7 +557,7 @@ public abstract class HtmlElement extends DomElement {
         WebAssert.notNull("attributeName", attributeName);
         WebAssert.notNull("attributeValue", attributeValue);
 
-        final List<E> list = getHtmlElementsByAttribute(elementName, attributeName, attributeValue);
+        final List<E> list = getElementsByAttribute(elementName, attributeName, attributeValue);
 
         final int listSize = list.size();
         if (listSize == 0) {
@@ -619,7 +619,7 @@ public abstract class HtmlElement extends DomElement {
      * @return all elements which are descendants of this element and match the specified search criteria
      */
     @SuppressWarnings("unchecked")
-    public final <E extends HtmlElement> List<E> getHtmlElementsByAttribute(
+    public final <E extends HtmlElement> List<E> getElementsByAttribute(
             final String elementName,
             final String attributeName,
             final String attributeValue) {
@@ -636,6 +636,24 @@ public abstract class HtmlElement extends DomElement {
             }
         }
         return list;
+    }
+
+    /**
+     * Returns all elements which are descendants of this element and match the specified search criteria.
+     *
+     * @param elementName the name of the element to search for
+     * @param attributeName the name of the attribute to search for
+     * @param attributeValue the value of the attribute to search for
+     * @param <E> the sub-element type
+     * @return all elements which are descendants of this element and match the specified search criteria
+     * @deprecated As of 2.4, please use {@link #getElementsByAttribute(String,String,String)} instead.
+     */
+    @Deprecated
+    public final <E extends HtmlElement> List<E> getHtmlElementsByAttribute(
+            final String elementName,
+            final String attributeName,
+            final String attributeValue) {
+        return getElementsByAttribute(elementName, attributeName, attributeValue);
     }
 
     /**

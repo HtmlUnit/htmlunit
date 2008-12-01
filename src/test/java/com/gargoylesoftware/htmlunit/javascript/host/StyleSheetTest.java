@@ -71,10 +71,10 @@ public class StyleSheetTest extends WebTestCase {
         final HtmlPage page = loadPage(html);
         final HtmlElement body = page.getBody();
         final HtmlForm form = page.getFormByName("f1");
-        final HtmlInput input1 = (HtmlInput) page.getHtmlElementsByName("i1").get(0);
-        final HtmlInput input2 = (HtmlInput) page.getHtmlElementsByName("i2").get(0);
-        final HtmlElement button1 = page.getHtmlElementsByName("b1").get(0);
-        final HtmlElement button2 = page.getHtmlElementsByName("b2").get(0);
+        final HtmlInput input1 = (HtmlInput) page.getElementsByName("i1").get(0);
+        final HtmlInput input2 = (HtmlInput) page.getElementsByName("i2").get(0);
+        final HtmlElement button1 = page.getElementsByName("b1").get(0);
+        final HtmlElement button2 = page.getElementsByName("b2").get(0);
 
         final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
         final HTMLStyleElement host = (HTMLStyleElement) node.getScriptObject();

@@ -948,10 +948,10 @@ public class HTMLDocument extends Document {
         // This little shortcut shaves ~35% off the build time (3 min -> 2 min, as of 8/10/2007).
         final List<HtmlElement> elements;
         if (getBrowserVersion().isIE()) {
-            elements = page.getHtmlElementsByIdAndOrName(name);
+            elements = page.getElementsByIdAndOrName(name);
         }
         else {
-            elements = page.getHtmlElementsByName(name);
+            elements = page.getElementsByName(name);
         }
 
         if (elements.isEmpty()) {

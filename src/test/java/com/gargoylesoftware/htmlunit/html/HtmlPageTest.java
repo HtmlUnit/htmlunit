@@ -330,9 +330,9 @@ public class HtmlPageTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        assertEquals(page.getHtmlElementById("a"), page.getHtmlElementByAccessKey('A'));
-        assertEquals(page.getHtmlElementById("c"), page.getHtmlElementByAccessKey('c'));
-        assertNull(page.getHtmlElementByAccessKey('z'));
+        assertEquals(page.getHtmlElementById("a"), page.getElementByAccessKey('A'));
+        assertEquals(page.getHtmlElementById("c"), page.getElementByAccessKey('c'));
+        assertNull(page.getElementByAccessKey('z'));
     }
 
     /**
@@ -351,7 +351,7 @@ public class HtmlPageTest extends WebTestCase {
 
         final List<HtmlElement> expectedElements = Arrays.asList(new HtmlElement[] {page.getHtmlElementById("a"),
                 page.getHtmlElementById("b")});
-        final List<HtmlElement> collectedElements = page.getHtmlElementsByAccessKey('a');
+        final List<HtmlElement> collectedElements = page.getElementsByAccessKey('a');
         assertEquals(expectedElements, collectedElements);
     }
 
@@ -1158,17 +1158,17 @@ public class HtmlPageTest extends WebTestCase {
     public void testGetHtmlElementsByName() throws Exception {
         final String html = "<html><body><div name='a'>foo</div><div name='b'/><div name='b'/></body></html>";
         final HtmlPage page = loadPage(html);
-        assertEquals(1, page.getHtmlElementsByName("a").size());
-        assertEquals(2, page.getHtmlElementsByName("b").size());
-        assertEquals(0, page.getHtmlElementsByName("c").size());
+        assertEquals(1, page.getElementsByName("a").size());
+        assertEquals(2, page.getElementsByName("b").size());
+        assertEquals(0, page.getElementsByName("c").size());
 
-        final HtmlElement a = page.getHtmlElementsByName("a").get(0);
+        final HtmlElement a = page.getElementsByName("a").get(0);
         a.remove();
-        assertEquals(0, page.getHtmlElementsByName("a").size());
+        assertEquals(0, page.getElementsByName("a").size());
 
-        final HtmlElement b1 = page.getHtmlElementsByName("b").get(0);
+        final HtmlElement b1 = page.getElementsByName("b").get(0);
         b1.appendChild(a);
-        assertEquals(1, page.getHtmlElementsByName("a").size());
+        assertEquals(1, page.getElementsByName("a").size());
     }
 
     /**
@@ -1179,18 +1179,18 @@ public class HtmlPageTest extends WebTestCase {
         final String html = "<html><body><div name='a' id='a'>foo</div><div name='b' id='c'>bar</div>"
                             + "<div name='b' id='d'>bar</div></body></html>";
         final HtmlPage page = loadPage(html);
-        assertEquals(1, page.getHtmlElementsByIdAndOrName("a").size());
-        assertEquals(2, page.getHtmlElementsByIdAndOrName("b").size());
-        assertEquals(1, page.getHtmlElementsByIdAndOrName("c").size());
-        assertEquals(1, page.getHtmlElementsByIdAndOrName("d").size());
+        assertEquals(1, page.getElementsByIdAndOrName("a").size());
+        assertEquals(2, page.getElementsByIdAndOrName("b").size());
+        assertEquals(1, page.getElementsByIdAndOrName("c").size());
+        assertEquals(1, page.getElementsByIdAndOrName("d").size());
 
-        final HtmlElement a = page.getHtmlElementsByIdAndOrName("a").get(0);
+        final HtmlElement a = page.getElementsByIdAndOrName("a").get(0);
         a.remove();
-        assertEquals(0, page.getHtmlElementsByIdAndOrName("a").size());
+        assertEquals(0, page.getElementsByIdAndOrName("a").size());
 
-        final HtmlElement b1 = page.getHtmlElementsByIdAndOrName("b").get(0);
+        final HtmlElement b1 = page.getElementsByIdAndOrName("b").get(0);
         b1.appendChild(a);
-        assertEquals(1, page.getHtmlElementsByIdAndOrName("a").size());
+        assertEquals(1, page.getElementsByIdAndOrName("a").size());
     }
 
     /**
