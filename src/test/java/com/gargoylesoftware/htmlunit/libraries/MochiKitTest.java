@@ -62,7 +62,6 @@ public class MochiKitTest extends LibraryTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void base() throws Exception {
         doTest("Base");
     }
