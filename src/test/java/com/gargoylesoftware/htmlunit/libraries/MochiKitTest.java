@@ -18,6 +18,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.net.URL;
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -36,6 +37,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public class MochiKitTest extends LibraryTestCase {
 
     private static final String BASE_FILE_PATH = "MochiKit/1.4.1";
+    private WebClient webClient_;
 
     /**
      * {@inheritDoc}
@@ -154,14 +156,24 @@ public class MochiKitTest extends LibraryTestCase {
             + "/tests/test_MochiKit-" + testName + ".html");
         assertNotNull(url);
 
-        final WebClient client = getWebClient();
-        final HtmlPage page = client.getPage(url);
+        webClient_ = getWebClient();
+        final HtmlPage page = webClient_.getPage(url);
         page.getEnclosingWindow().getThreadManager().joinAll(20000);
         final String expected = loadExpectation("test-" + testName);
         final HtmlDivision div = page.getFirstByXPath("//div[@class = 'tests_report']");
 
         assertNotNull(div);
         assertEquals(expected.trim(), div.asText().trim());
+    }
+
+    /**
+     * Closes the open windows.
+     */
+    @After
+    public void tearDown() {
+        if (webClient_ != null) {
+            webClient_.closeAllWindows();
+        }
     }
 
 }
