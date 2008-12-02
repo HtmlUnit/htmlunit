@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static org.junit.Assert.assertTrue;
+
 import java.lang.reflect.Method;
 import java.util.List;
 
@@ -39,6 +41,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
     private final BrowserVersion browserVersion_;
+    static final boolean maven_ = System.getProperties().contains("env.M2_HOME");
 
     public BrowserVersionClassRunner(final Class<WebTestCase> klass,
         final BrowserVersion browserVersion) throws InitializationError {
@@ -91,7 +94,9 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
     @Override
     protected Object createTest() throws Exception {
-        final WebTestCase object = (WebTestCase) super.createTest();
+        final Object test = super.createTest();
+        assertTrue("Test class must inherit WebTestCase", WebTestCase.class.isInstance(test));
+        final WebTestCase object = (WebTestCase) test;
         object.setBrowserVersion(browserVersion_);
         return object;
     }
@@ -103,6 +108,9 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
     @Override
     protected String testName(final FrameworkMethod method) {
+        if (!maven_) {
+            return super.testName(method);
+        }
         String className = method.getMethod().getDeclaringClass().getName();
         className = className.substring(className.lastIndexOf('.') + 1);
         String prefix = "";
@@ -213,8 +221,6 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
     private boolean isNotYetImplemented(final FrameworkMethod method) {
         final NotYetImplemented notYetImplementedBrowsers = method.getAnnotation(NotYetImplemented.class);
-        final boolean notYetImplemented = notYetImplementedBrowsers != null
-            && isDefinedIn(notYetImplementedBrowsers.value());
-        return notYetImplemented;
+        return notYetImplementedBrowsers != null && isDefinedIn(notYetImplementedBrowsers.value());
     }
 }

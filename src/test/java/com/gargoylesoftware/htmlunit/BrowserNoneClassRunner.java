@@ -79,6 +79,9 @@ class BrowserNoneClassRunner extends BlockJUnit4ClassRunner {
 
     @Override
     protected String testName(final FrameworkMethod method) {
+        if (!BrowserVersionClassRunner.maven_) {
+            return super.testName(method);
+        }
         String className = method.getMethod().getDeclaringClass().getName();
         className = className.substring(className.lastIndexOf('.') + 1);
         return String.format("%s[No Browser]", className + '.' + method.getName());
