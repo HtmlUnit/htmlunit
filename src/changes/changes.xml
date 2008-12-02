@@ -5,7 +5,31 @@
     </properties>
 
     <body>
-        <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support">
+        <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support, MochiKit support">
+            <action type="update" dev="mguillem">
+                100% success with MochiKit unit tests.
+            </action>
+            <action type="add" dev="mguillem">
+                JavaScript: HTMLElement.filters is not undefined (IE only).
+            </action>
+            <action type="fix" dev="mguillem">
+                JavaScript: offsetParent is undefined for detached nodes.
+            </action>
+            <action type="fix" dev="mguillem">
+                JavaScript: HTMLHtmlElement's clientWidth and clientHeight gives the available screen size.
+            </action>
+            <action type="fix" dev="mguillem">
+                CSS: font-size is inherited.
+            </action>
+            <action type="fix" dev="mguillem">
+                CSS: parse shorthand background to find background color.
+            </action>
+            <action type="fix" dev="mguillem">
+                CSS: parse individual border width from borderWidth.
+            </action>
+            <action type="fix" dev="mguillem">
+                JavaScript: add dummy implementation for HTMLElement's clientLeft and clientTop.
+            </action>
             <action type="update" dev="asashour">
                 Deprecate HtmlPage.getHtmlElementByAccessKey(), HtmlPage.getHtmlElementsByAccessKey(),
                 HtmlPage.getHtmlElementsByName(), HtmlPage.getHtmlElementsByIdAndOrName(),

@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.util.StringUtils.isFloat;
 
 import java.text.MessageFormat;
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.SortedSet;
@@ -25,6 +26,7 @@ import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
@@ -48,13 +50,30 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     private static final long serialVersionUID = -1976370264911039311L;
+    private static Map<String, String> CSSColors_ = new HashMap<String, String>();
 
     /** The different types of shorthand values. */
     private enum Shorthand {
-        TOP,
-        RIGHT,
-        BOTTOM,
-        LEFT
+        TOP("Top", 0),
+        RIGHT("Right", 1),
+        BOTTOM("Bottom", 2),
+        LEFT("Left", 3);
+
+        private final String string_;
+        private final int position_;
+        Shorthand(final String stringRepresentation, final int position) {
+            string_ = stringRepresentation;
+            position_ = position;
+        }
+
+        @Override
+        public String toString() {
+            return string_;
+        }
+
+        int getPosition() {
+            return position_;
+        }
     }
 
     /** Used to parse URLs. */
@@ -68,6 +87,25 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /** The current style element index. */
     private long currentElementIndex_;
+
+    static {
+        CSSColors_.put("aqua", "rgb(0, 255, 255)");
+        CSSColors_.put("black", "rgb(0, 0, 0)");
+        CSSColors_.put("blue", "rgb(0, 0, 255)");
+        CSSColors_.put("fuchsia", "rgb(255, 0, 255)");
+        CSSColors_.put("gray", "rgb(128, 128, 128)");
+        CSSColors_.put("green", "rgb(0, 128, 0)");
+        CSSColors_.put("lime", "rgb(0, 255, 0)");
+        CSSColors_.put("maroon", "rgb(128, 0, 0)");
+        CSSColors_.put("navy", "rgb(0, 0, 128)");
+        CSSColors_.put("olive", "rgb(128, 128, 0)");
+        CSSColors_.put("purple", "rgb(128, 0, 128)");
+        CSSColors_.put("red", "rgb(255, 0, 0)");
+        CSSColors_.put("silver", "rgb(192, 192, 192)");
+        CSSColors_.put("teal", "rgb(0, 128, 128)");
+        CSSColors_.put("white", "rgb(255, 255, 255)");
+        CSSColors_.put("yellow", "rgb(255, 255, 0)");
+    }
 
     /**
      * Creates an instance. JavaScript objects must have a default constructor.
@@ -431,7 +469,15 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_backgroundColor() {
-        return getStyleAttribute("backgroundColor", true);
+        String value = getStyleAttribute("backgroundColor", true);
+        if (value.length() == 0) {
+            value = findColor(getStyleAttribute("background", true));
+            if (value == null) {
+                value = "";
+            }
+        }
+
+        return value;
     }
 
     /**
@@ -641,17 +687,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_borderBottomWidth() {
-        String value = getStyleAttribute("borderBottomWidth", true);
-        if (value.length() == 0) {
-            value = findBorderWidth(getStyleAttribute("borderBottom", true));
-            if (value == null) {
-                value = findBorderWidth(getStyleAttribute("border", true));
-            }
-            if (value == null) {
-                value = "";
-            }
-        }
-        return value;
+        return getBorderWidth(Shorthand.BOTTOM);
     }
 
     /**
@@ -767,9 +803,28 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_borderLeftWidth() {
-        String value = getStyleAttribute("borderLeftWidth", true);
+        return getBorderWidth(Shorthand.LEFT);
+    }
+
+    /**
+     * Gets the border width for the specified side
+     * @param side the side
+     * @param side the side's position
+     * @return the width, "" if not defined
+     */
+    private String getBorderWidth(final Shorthand side) {
+        String value = getStyleAttribute("border" + side + "Width", true);
         if (value.length() == 0) {
-            value = findBorderWidth(getStyleAttribute("borderLeft", true));
+            value = findBorderWidth(getStyleAttribute("border" + side, true));
+            if (value == null) {
+                final String borderWidth = getStyleAttribute("borderWidth", true);
+                if (!StringUtils.isEmpty(borderWidth)) {
+                    final String[] values = borderWidth.split("\\s");
+                    if (values.length > side.ordinal()) {
+                        value = values[side.ordinal()];
+                    }
+                }
+            }
             if (value == null) {
                 value = findBorderWidth(getStyleAttribute("border", true));
             }
@@ -861,17 +916,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_borderRightWidth() {
-        String value = getStyleAttribute("borderRightWidth", true);
-        if (value.length() == 0) {
-            value = findBorderWidth(getStyleAttribute("borderRight", true));
-            if (value == null) {
-                value = findBorderWidth(getStyleAttribute("border", true));
-            }
-            if (value == null) {
-                value = "";
-            }
-        }
-        return value;
+        return getBorderWidth(Shorthand.RIGHT);
     }
 
     /**
@@ -987,17 +1032,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_borderTopWidth() {
-        String value = getStyleAttribute("borderTopWidth", true);
-        if (value.length() == 0) {
-            value = findBorderWidth(getStyleAttribute("borderTop", true));
-            if (value == null) {
-                value = findBorderWidth(getStyleAttribute("border", true));
-            }
-            if (value == null) {
-                value = "";
-            }
-        }
-        return value;
+        return getBorderWidth(Shorthand.TOP);
     }
 
     /**
@@ -4430,14 +4465,21 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return whether the token is a reserved color keyword or not
      */
     private static boolean isColorKeyword(final String token) {
-        return token.equalsIgnoreCase("aqua") || token.equalsIgnoreCase("black")
-            || token.equalsIgnoreCase("blue") || token.equalsIgnoreCase("fuchsia")
-            || token.equalsIgnoreCase("gray") || token.equalsIgnoreCase("green")
-            || token.equalsIgnoreCase("lime") || token.equalsIgnoreCase("maroon")
-            || token.equalsIgnoreCase("navy") || token.equalsIgnoreCase("olive")
-            || token.equalsIgnoreCase("purple") || token.equalsIgnoreCase("red")
-            || token.equalsIgnoreCase("silver") || token.equalsIgnoreCase("teal")
-            || token.equalsIgnoreCase("white") || token.equalsIgnoreCase("yellow");
+        return CSSColors_.containsKey(token.toLowerCase());
+    }
+
+    /**
+     * Gets the RGB equivalent of a CSS color if the provided color is recognized.
+     * @param color the color
+     * @return the provided color if this is not a recognized color keyword, the RGB value
+     * in the form "rgb(x, y, z)" otherwise
+     */
+    public static String toRGBColor(final String color) {
+        final String rgbValue = CSSColors_.get(color.toLowerCase());
+        if (rgbValue != null) {
+            return rgbValue;
+        }
+        return color;
     }
 
     /**
@@ -4621,4 +4663,11 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
         }
     }
 
+    /**
+     * Gets the element to which this style belongs.
+     * @return the element
+     */
+    protected HTMLElement getElement() {
+        return jsElement_;
+    }
 }

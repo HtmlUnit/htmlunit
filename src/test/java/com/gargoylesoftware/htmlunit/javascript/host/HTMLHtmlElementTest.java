@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
 public class HTMLHtmlElementTest extends WebTestCase {
@@ -65,4 +66,27 @@ public class HTMLHtmlElementTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "true", "true", "true", "true" },
+            IE = { "true", "false", "true", "false" })
+    public void clientWidth() throws Exception {
+        final String html = "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN'"
+            + " 'http://www.w3.org/TR/html4/loose.dtd'>" // important for IE6!!!
+            + "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var elt = document.body.parentNode;\n"
+            + "  alert(elt.clientWidth > 0);\n"
+            + "  alert(elt.clientWidth == window.innerWidth);\n"
+            + "  alert(elt.clientHeight > 0);\n"
+            + "  alert(elt.clientHeight == window.innerHeight);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }

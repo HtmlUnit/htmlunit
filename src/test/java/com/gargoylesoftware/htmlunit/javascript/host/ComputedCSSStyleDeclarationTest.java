@@ -128,7 +128,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
         final List<String> expectedValues = stringProperties(expectedText);
         final List<String> collectedValues =
             stringProperties(page.<HtmlTextArea>getHtmlElementById("myTextarea").getText());
-        assertEquals(expectedValues, collectedValues);
+        assertEquals(expectedValues.toString(), collectedValues.toString());
     }
 
     private List<String> stringProperties(final String string) throws Exception {
@@ -329,4 +329,57 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE = { "transparent", "red", "white" },
+            FF = { "transparent", "rgb(255, 0, 0)", "rgb(255, 255, 255)" })
+    public void backgroundColor() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='d0'>div 0</div>\n"
+            + "<div id='d1' style='background: red'>d</div>\n"
+            + "<div id='d2' style='background: white url(http://htmlunit.sf.net/foo.png) repeat-x fixed top right'>"
+            + "second div</div>\n"
+            + "<script>\n"
+            + "function getStyle(x) {\n"
+            + "  var d = document.getElementById(x);\n"
+            + "  var cs = d.currentStyle;\n"
+            + "  if(!cs) cs = window.getComputedStyle(d, '');\n"
+            + "  return cs;\n"
+            + "}\n"
+            + "var cs0 = getStyle('d0');\n"
+            + "alert(cs0.backgroundColor);\n"
+            + "var cs1 = getStyle('d1');\n"
+            + "alert(cs1.backgroundColor);\n"
+            + "var cs2 = getStyle('d2');\n"
+            + "alert(cs2.backgroundColor);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("10px")
+    public void fontSize() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='d0' style='font-size: 10px;'>\n"
+            + "<div id='d1'>inside</div>\n"
+            + "</div>\n"
+            + "<script>\n"
+            + "function getStyle(x) {\n"
+            + "  var d = document.getElementById(x);\n"
+            + "  var cs = d.currentStyle;\n"
+            + "  if(!cs) cs = window.getComputedStyle(d, '');\n"
+            + "  return cs;\n"
+            + "}\n"
+            + "var cs1 = getStyle('d1');\n"
+            + "alert(cs1.fontSize);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
 }

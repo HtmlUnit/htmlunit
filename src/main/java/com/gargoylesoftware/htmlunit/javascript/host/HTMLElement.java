@@ -531,6 +531,22 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
+     * Returns "clientLeft" attribute.
+     * @return the clientTop attribute
+     */
+    public int jsxGet_clientLeft() {
+        return 2; // TODO!!!
+    }
+
+    /**
+     * Returns "clientTop" attribute.
+     * @return the clientTop attribute
+     */
+    public int jsxGet_clientTop() {
+        return 2; // TODO!!!
+    }
+
+    /**
      * Sets the class attribute for this element.
      * @param className - the new class name
      */
@@ -1414,9 +1430,24 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         HTMLElement element = this;
         while (element != null) {
             cumulativeOffset += element.jsxGet_offsetLeft();
-            element = element.jsxGet_offsetParent();
+            if (element != this) {
+                cumulativeOffset += element.jsxGet_currentStyle().getBorderLeft();
+            }
+            element = element.getOffsetParent();
         }
         return cumulativeOffset;
+    }
+
+    /**
+     * Gets the offset parent or <code>null</code> if this is not an {@link HTMLElement}.
+     * @return the offset parent or <code>null</code>
+     */
+    private HTMLElement getOffsetParent() {
+        final Object offsetParent = jsxGet_offsetParent();
+        if (offsetParent instanceof HTMLElement) {
+            return (HTMLElement) offsetParent;
+        }
+        return null;
     }
 
     /**
@@ -1428,7 +1459,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         HTMLElement element = this;
         while (element != null) {
             cumulativeOffset += element.jsxGet_offsetTop();
-            element = element.jsxGet_offsetParent();
+            if (element != this) {
+                cumulativeOffset += element.jsxGet_currentStyle().getBorderTop();
+            }
+            element = element.getOffsetParent();
         }
         return cumulativeOffset;
     }
@@ -1448,7 +1482,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
 
         int left = 0;
-        final HTMLElement offsetParent = jsxGet_offsetParent();
+        final HTMLElement offsetParent = getOffsetParent();
 
         // Add the offset for this node.
         DomNode node = getDomNodeOrDie();
@@ -1471,9 +1505,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             node = node.getParentNode();
         }
 
-        // Add the offset for the final ancestor node (the offset parent).
-        if (node != null && node.getScriptObject() instanceof HTMLElement) {
-            left += offsetParent.jsxGet_currentStyle().getLeft(true, false, true);
+        if (offsetParent != null) {
+            left += offsetParent.jsxGet_currentStyle().getMarginLeft();
+            left += offsetParent.jsxGet_currentStyle().getPaddingLeft();
         }
 
         return left;
@@ -1494,7 +1528,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
 
         int top = 0;
-        final HTMLElement offsetParent = jsxGet_offsetParent();
+        final HTMLElement offsetParent = getOffsetParent();
 
         // Add the offset for this node.
         DomNode node = getDomNodeOrDie();
@@ -1517,9 +1551,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             node = node.getParentNode();
         }
 
-        // Add the offset for the final ancestor node (the offset parent).
-        if (node != null && node.getScriptObject() instanceof HTMLElement) {
-            top += offsetParent.jsxGet_currentStyle().getTop(false, false, true);
+        if (offsetParent != null) {
+            top += offsetParent.jsxGet_currentStyle().getPaddingTop();
         }
 
         return top;
@@ -1529,15 +1562,16 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns this element's <tt>offsetParent</tt>. The <tt>offsetLeft</tt> and
      * <tt>offsetTop</tt> attributes are relative to the <tt>offsetParent</tt>.
      *
-     * @return this element's <tt>offsetParent</tt>
+     * @return this element's <tt>offsetParent</tt>. This may be <code>undefined</code> when this node is
+     * not attached or <code>null</code> for <code>body</code>.
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534302.aspx">MSDN Documentation</a>
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_el_ref20.html">Gecko DOM Reference</a>
      * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
      * @see <a href="http://www.w3.org/TR/REC-CSS2/box.html">Box Model</a>
      * @see <a href="http://dump.testsuite.org/2006/dom/style/offset/spec">Reverse Engineering by Anne van Kesteren</a>
      */
-    public HTMLElement jsxGet_offsetParent() {
-        HTMLElement offsetParent = null;
+    public Object jsxGet_offsetParent() {
+        Object offsetParent = Context.getUndefinedValue();
         DomNode currentElement = getHtmlElementOrDie();
 
         final HTMLElement htmlElement = (HTMLElement) currentElement.getScriptObject();
@@ -1655,6 +1689,21 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
+     * Gets the first ancestor instance of {@link HTMLElement}.
+     * <p>It is mostly identical to {@link #jsxGet_parentNode()}
+     * except that it skips xml nodes.
+     * @return the parent HTML element
+     * @see #jsxGet_parentNode()
+     */
+    public HTMLElement getParentHTMLElement() {
+        Node parent = (Node) jsxGet_parentNode();
+        while (parent != null && !(parent instanceof HTMLElement)) {
+            parent = (Node) parent.jsxGet_parentNode();
+        }
+        return (HTMLElement) parent;
+    }
+
+    /**
      * Implement the scrollIntoView() JavaScript function but don't actually do
      * anything. The requirement
      * is just to prevent scripts that call that method from failing
@@ -1663,10 +1712,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Retrieves an object that specifies the bounds of a collection of TextRectangle objects.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536433.aspx">MSDN doc</a>
      * @return an object that specifies the bounds of a collection of TextRectangle objects
      */
     public TextRectangle jsxFunction_getBoundingClientRect() {
-        final TextRectangle textRectangle = new TextRectangle();
+        final TextRectangle textRectangle = new TextRectangle(0, getPosX() + jsxGet_clientLeft(), 0,
+            getPosY() + jsxGet_clientTop());
         textRectangle.setParentScope(getWindow());
         textRectangle.setPrototype(getPrototype(textRectangle.getClass()));
         return textRectangle;
@@ -1852,5 +1903,14 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             return super.jsxGet_prefix();
         }
         return null;
+    }
+
+    /**
+     * Gets the filters.
+     * @return the filters
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms537452.aspx">MSDN doc</a>
+     */
+    public Object jsxGet_filters() {
+        return this; // return anything, what matters is that it is not null
     }
 }

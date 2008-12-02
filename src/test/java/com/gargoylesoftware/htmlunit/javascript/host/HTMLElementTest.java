@@ -1521,6 +1521,30 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "40", "10" })
+    public void offsetTopAndLeft_parentAbsolute() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var e = document.getElementById('innerDiv');\n"
+            + "    alert(e.offsetLeft);\n"
+            + "    alert(e.offsetTop);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<div id='styleTest' style='position: absolute; left: 400px; top: 50px; padding: 10px 20px 30px 40px;'>"
+            + "<div id='innerDiv'></div>TEST</div>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
      * Minimal flow/layouting test: verifies that the <tt>offsetTop</tt> property changes depending
      * on previous siblings. In the example below, the second div is below the first one, so its
      * offsetTop must be greater than zero. This sort of test is part of the Dojo unit tests, so
@@ -1603,7 +1627,7 @@ public class HTMLElementTest extends WebTestCase {
             "element: td1 offsetParent: table1", "element: tr1 offsetParent: table1",
             "element: table1 offsetParent: body1", "element: span2 offsetParent: body1",
             "element: span1 offsetParent: body1", "element: div1 offsetParent: body1",
-            "element: body1 offsetParent: null" })
+            "element: body1 offsetParent: null", "new element: undefined" })
     public void offsetParent_Basic() throws Exception {
         final String html = "<html><head>\n"
             + "<script type='text/javascript'>\n"
@@ -1632,6 +1656,8 @@ public class HTMLElementTest extends WebTestCase {
             + "alertOffsetParent('span1');\n"
             + "alertOffsetParent('div1');\n"
             + "alertOffsetParent('body1');\n"
+            + "var oNew = document.createElement('span');\n"
+            + "alert('new element: ' + oNew.offsetParent);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body id='body1' onload='test()'>\n"
@@ -1878,18 +1904,22 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Alerts({ "402", "102" })
     @Test
     @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     public void getBoundingClientRect() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var d1 = document.getElementById('div1');\n"
-            + "    d1.getBoundingClientRect().left;\n"
+            + "    var pos = d1.getBoundingClientRect();\n"
+            + "    alert(pos.left);\n"
+            + "    alert(pos.top);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
-            + "<div id='div1'/>\n"
+            + "<div id='outer' style='position: absolute; left: 400px; top: 100px; width: 50px; height: 80px;'>"
+            + "<div id='div1'></div></div>"
             + "</body></html>";
-        loadPage(getBrowserVersion(), html, null);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -2460,6 +2490,28 @@ public class HTMLElementTest extends WebTestCase {
             + "  </div>\n"
             + "</div>\n"
             + "<div id='div4'>\n"
+            + "</div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "undefined", IE = "defined")
+    public void filters() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var div1 = document.getElementById('div1');\n"
+            + "  var defined = typeof(div1.filters) != 'undefined';\n" // "unknown" for IE6!!!
+            + "  alert(defined ? 'defined' : 'undefined');\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<div id='div1'>\n"
             + "</div>\n"
             + "</body></html>";
 

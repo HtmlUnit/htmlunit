@@ -72,4 +72,11 @@ public class HTMLBodyElement extends HTMLElement {
         // Ignore because we aren't displaying anything!
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public HTMLElement jsxGet_offsetParent() {
+        return null;
+    }
 }

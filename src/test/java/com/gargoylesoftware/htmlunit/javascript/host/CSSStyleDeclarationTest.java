@@ -359,7 +359,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      */
     @Test
     @Alerts({ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" })
-    public void borderStyles() throws Exception {
+    public void borderStyles_noStyle() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -384,6 +384,27 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<div id='div1'>foo</div></body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "3px", "4px", "2px", "1px" })
+    public void borderXxxWidth() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    var oDiv = document.getElementById('div1');\n"
+            + "    alert(oDiv.style.borderBottomWidth);\n"
+            + "    alert(oDiv.style.borderLeftWidth);\n"
+            + "    alert(oDiv.style.borderRightWidth);\n"
+            + "    alert(oDiv.style.borderTopWidth);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<div id='div1' style='border-width: 1px 2px 3px 4px';'>foo</div></body></html>";
         loadPageWithAlerts(html);
     }
 

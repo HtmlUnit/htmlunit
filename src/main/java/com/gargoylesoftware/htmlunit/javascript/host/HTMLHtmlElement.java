@@ -19,6 +19,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class HTMLHtmlElement extends HTMLElement {
 
@@ -31,4 +32,21 @@ public class HTMLHtmlElement extends HTMLElement {
         // Empty.
     }
 
+    /**
+     * Returns "clientWidth" attribute.
+     * @return the clientWidth attribute
+     */
+    @Override
+    public int jsxGet_clientWidth() {
+        return getWindow().jsxGet_innerWidth();
+    }
+
+    /**
+     * Returns "clientWidth" attribute.
+     * @return the clientWidth attribute
+     */
+    @Override
+    public int jsxGet_clientHeight() {
+        return getWindow().jsxGet_innerHeight();
+    }
 }

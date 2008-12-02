@@ -1197,6 +1197,8 @@
         </property>
         <property name="clientHeight" readable="true" writable="false"/>
         <property name="clientWidth" readable="true" writable="false"/>
+        <property name="clientLeft" readable="true" writable="false"/>
+        <property name="clientTop" readable="true" writable="false"/>
         <property name="currentStyle" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="5"/>
         </property>
@@ -1205,6 +1207,9 @@
         </property>
         <property name="document" notImplemented="true" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
+        </property>
+        <property name="filters" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer"/>
         </property>
         <property name="id" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>

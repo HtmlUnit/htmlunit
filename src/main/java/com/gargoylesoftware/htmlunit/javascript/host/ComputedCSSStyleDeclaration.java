@@ -136,7 +136,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_backgroundColor() {
-        return defaultIfEmpty(super.jsxGet_backgroundColor(), "transparent");
+        String value = super.jsxGet_backgroundColor();
+        if (StringUtils.isEmpty(value)) {
+            value = "transparent";
+        }
+        else if (getBrowserVersion().isFirefox()) {
+            value = toRGBColor(value);
+        }
+        return value;
     }
 
     /**
@@ -400,7 +407,17 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_fontSize() {
-        return defaultIfEmpty(super.jsxGet_fontSize(), "16px");
+        String value = super.jsxGet_fontSize();
+        if (value.length() == 0) {
+            final HTMLElement parent = getElement().getParentHTMLElement();
+            if (parent != null) {
+                value = parent.jsxGet_currentStyle().jsxGet_fontSize();
+            }
+        }
+        if (value.length() == 0) {
+            value = "16px";
+        }
+        return value;
     }
 
     /**
@@ -1097,7 +1114,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 width += borderLeft + borderRight;
             }
             if (includePadding) {
-                final int paddingLeft = pixelValue(jsxGet_paddingLeft());
+                final int paddingLeft = getPaddingLeft();
                 final int paddingRight = pixelValue(jsxGet_paddingRight());
                 width += paddingLeft + paddingRight;
             }
@@ -1119,7 +1136,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             height += borderTop + borderBottom;
         }
         if (includePadding) {
-            final int paddingTop = pixelValue(jsxGet_paddingTop());
+            final int paddingTop = getPaddingTop();
             final int paddingBottom = pixelValue(jsxGet_paddingBottom());
             height += paddingTop + paddingBottom;
         }
@@ -1183,7 +1200,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         if (includePadding) {
-            final int padding = pixelValue(jsxGet_paddingTop());
+            final int padding = getPaddingTop();
             top += padding;
         }
 
@@ -1223,7 +1240,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         if (includeMargin) {
-            final int margin = pixelValue(jsxGet_marginLeft());
+            final int margin = getMarginLeft();
             left += margin;
         }
 
@@ -1233,11 +1250,51 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         if (includePadding) {
-            final int padding = pixelValue(jsxGet_paddingLeft());
+            final int padding = getPaddingLeft();
             left += padding;
         }
 
         return left;
+    }
+
+    /**
+     * Gets the top padding of the element.
+     * @return the value in pixels
+     */
+    public int getPaddingTop() {
+        return pixelValue(jsxGet_paddingTop());
+    }
+
+    /**
+     * Gets the left padding of the element.
+     * @return the value in pixels
+     */
+    public int getPaddingLeft() {
+        return pixelValue(jsxGet_paddingLeft());
+    }
+
+    /**
+     * Gets the left margin of the element.
+     * @return the value in pixels
+     */
+    public int getMarginLeft() {
+        return pixelValue(jsxGet_marginLeft());
+    }
+
+    /**
+     * Gets the size of the left border of the element.
+     * @return the value in pixels
+     */
+    public int getBorderLeft() {
+        return pixelValue(jsxGet_borderLeftWidth());
+    }
+
+    /**
+     * Gets the size of the top border of the element.
+     * @return the value in pixels
+     */
+    public int getBorderTop() {
+        return pixelValue(jsxGet_borderTopWidth());
     }
 
     /**
