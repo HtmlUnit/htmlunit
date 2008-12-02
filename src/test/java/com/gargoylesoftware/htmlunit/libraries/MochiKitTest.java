@@ -29,7 +29,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for compatibility with <a href="http://mochikit.com">MochiKit</a>.
- *
+ * <p>
+ * Note: the tests test_MochiKit-DOM-Safari.html, test_MochiKit-DragAndDrop.html and test_MochiKit-JSAN.html
+ * are not run as they don't even pass in a "real" Firefox 3.
+ * </p>
  * @version $Revision$
  * @author Marc Guillemot
  */
