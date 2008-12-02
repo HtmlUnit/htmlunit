@@ -1588,7 +1588,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             if (parentNode instanceof HtmlBody
                 || (useTables && parentNode instanceof HtmlTableDataCell)
                 || (useTables && parentNode instanceof HtmlTable)) {
-                offsetParent = (HTMLElement) parentNode.getScriptObject();
+                offsetParent = parentNode.getScriptObject();
                 break;
             }
 
@@ -1599,7 +1599,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 final boolean parentIsStatic = "static".equals(parentPosition);
                 final boolean parentIsFixed = "fixed".equals(parentPosition);
                 if ((ie && !parentIsStatic && !parentIsFixed) || (!ie && !parentIsStatic)) {
-                    offsetParent = (HTMLElement) parentNode.getScriptObject();
+                    offsetParent = parentNode.getScriptObject();
                     break;
                 }
             }
