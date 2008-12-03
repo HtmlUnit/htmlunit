@@ -20,14 +20,11 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 
 /**
  * Unit tests for {@link HTMLTitleElement}.
  * @version $Revision$
  * @author Sudhan Moghe
- *
  */
 @RunWith(BrowserRunner.class)
 public class HTMLTitleElementTest extends WebTestCase {
