@@ -108,9 +108,9 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
     @Override
     protected String testName(final FrameworkMethod method) {
-        if (!maven_) {
-            return super.testName(method);
-        }
+//        if (!maven_) {
+//            return super.testName(method);
+//        }
         String className = method.getMethod().getDeclaringClass().getName();
         className = className.substring(className.lastIndexOf('.') + 1);
         String prefix = "";
