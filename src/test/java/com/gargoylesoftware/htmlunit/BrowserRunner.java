@@ -103,11 +103,17 @@ public class BrowserRunner extends Suite {
      * @see Browsers
      */
     public enum Browser {
+        /** All versions of Internet Explorer. */
+        INTERNET_EXPLORER,
+
         /** Internet Explorer 6. */
         INTERNET_EXPLORER_6,
 
         /** Internet Explorer 7. */
         INTERNET_EXPLORER_7,
+
+        /** All versions of Firefox. */
+        FIREFOX,
 
         /** Firefox 2. */
         FIREFOX_2,
@@ -132,7 +138,7 @@ public class BrowserRunner extends Suite {
          * The browsers which the case succeeds (but fails with remaining ones).
          */
         Browser[] value() default {
-            Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7, Browser.FIREFOX_2, Browser.FIREFOX_3
+            Browser.INTERNET_EXPLORER, Browser.FIREFOX
         };
     }
 
@@ -177,7 +183,7 @@ public class BrowserRunner extends Suite {
          * The browsers with which the case is not yet implemented.
          */
         Browser[] value() default {
-            Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7, Browser.FIREFOX_2, Browser.FIREFOX_3
+            Browser.INTERNET_EXPLORER, Browser.FIREFOX
         };
     }
 

@@ -156,6 +156,13 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
     private boolean isDefinedIn(final Browser[] browsers) {
         for (final Browser browser : browsers) {
             switch(browser) {
+                case INTERNET_EXPLORER:
+                    if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_6
+                            || browserVersion_ == BrowserVersion.INTERNET_EXPLORER_7) {
+                        return true;
+                    }
+                    break;
+
                 case INTERNET_EXPLORER_6:
                     if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_6) {
                         return true;
@@ -164,6 +171,13 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
                 case INTERNET_EXPLORER_7:
                     if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_7) {
+                        return true;
+                    }
+                    break;
+
+                case FIREFOX:
+                    if (browserVersion_ == BrowserVersion.FIREFOX_2
+                            || browserVersion_ == BrowserVersion.FIREFOX_3) {
                         return true;
                     }
                     break;
