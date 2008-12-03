@@ -139,9 +139,14 @@ public class DebugFrameImpl implements DebugFrame {
      */
     public void onExceptionThrown(final Context cx, final Throwable t) {
         if (LOG.isTraceEnabled()) {
-            final JavaScriptException e = (JavaScriptException) t;
-            LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx)
-                + " Exception thrown: " + Context.toString(e.getValue()));
+            if (t instanceof JavaScriptException) {
+                final JavaScriptException e = (JavaScriptException) t;
+                LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx)
+                        + " Exception thrown: " + Context.toString(e.getValue()));
+            }
+            else {
+                LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx) + " Exception thrown: " + t.getCause());
+            }
         }
     }
 

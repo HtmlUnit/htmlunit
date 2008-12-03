@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link XmlPage}.
@@ -270,7 +271,7 @@ public class XmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-//    @NotYetImplemented
+    @NotYetImplemented
     @Browsers(Browser.FF)
     @Alerts("[object Element]")
     public void createElementNS() throws Exception {
