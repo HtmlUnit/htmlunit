@@ -64,7 +64,7 @@ public class ActiveXObjectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({Browser.IE6, Browser.IE7 })
+    @Browsers(Browser.IE)
     public void xmlDocument() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -84,7 +84,7 @@ public class ActiveXObjectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({Browser.IE6, Browser.IE7 })
+    @Browsers(Browser.IE)
     @Alerts("exception: Automation server can't create object")
     @NotYetImplemented
     public void activex() throws Exception {
@@ -105,7 +105,7 @@ public class ActiveXObjectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({Browser.IE6, Browser.IE7 })
+    @Browsers(Browser.IE)
     public void activex2() throws Exception {
         if (!getBrowserVersion().isIE()) {
             throw new Exception();
@@ -166,7 +166,7 @@ public class ActiveXObjectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({Browser.IE6, Browser.IE7 })
+    @Browsers(Browser.IE)
     public void method() throws Exception {
         if (!getBrowserVersion().isIE()) {
             throw new Exception();
@@ -205,7 +205,7 @@ public class ActiveXObjectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({Browser.IE6, Browser.IE7 })
+    @Browsers(Browser.IE)
     public void setProperty() throws Exception {
         if (!getBrowserVersion().isIE()) {
             throw new Exception();

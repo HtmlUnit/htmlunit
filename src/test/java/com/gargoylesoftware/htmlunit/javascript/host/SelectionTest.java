@@ -46,7 +46,7 @@ public class SelectionTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.FF2, Browser.FF3 })
+    @Browsers(Browser.FF)
     public void anchorNode() throws Exception {
         test("", "selection.anchorNode", "x ? x.parentNode.id : x", "null", "s1");
     }
@@ -55,7 +55,7 @@ public class SelectionTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.FF2, Browser.FF3 })
+    @Browsers(Browser.FF)
     public void anchorOffset() throws Exception {
         test("", "selection.anchorOffset", "x", "0", "2");
     }
@@ -64,7 +64,7 @@ public class SelectionTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.FF2, Browser.FF3 })
+    @Browsers(Browser.FF)
     public void focusNode() throws Exception {
         test("", "selection.focusNode", "x ? x.parentNode.id : x", "null", "s2");
     }
@@ -73,7 +73,7 @@ public class SelectionTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.FF2, Browser.FF3 })
+    @Browsers(Browser.FF)
     public void focusOffset() throws Exception {
         test("", "selection.focusOffset", "x", "0", "1");
     }
@@ -82,7 +82,7 @@ public class SelectionTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.FF2, Browser.FF3 })
+    @Browsers(Browser.FF)
     public void isCollapsed() throws Exception {
         test("", "selection.isCollapsed", "x", "true", "false");
     }
@@ -91,7 +91,7 @@ public class SelectionTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.FF2, Browser.FF3 })
+    @Browsers(Browser.FF)
     public void rangeCount() throws Exception {
         test("", "selection.rangeCount", "x", "0", "1");
     }
@@ -100,7 +100,7 @@ public class SelectionTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.FF2, Browser.FF3 })
+    @Browsers(Browser.FF)
     public void collapse() throws Exception {
         test("selection.collapse(s1, 1)", "selection.focusNode", "x ? x.id : x", "null", "s1");
     }
@@ -109,7 +109,7 @@ public class SelectionTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.FF2, Browser.FF3 })
+    @Browsers(Browser.FF)
     public void collapseToEnd() throws Exception {
         test("selection.collapseToEnd()", "selection.anchorNode", "x ? x.parentNode.id : x", "null", "s2");
     }
@@ -118,7 +118,7 @@ public class SelectionTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.FF2, Browser.FF3 })
+    @Browsers(Browser.FF)
     public void collapseToStart() throws Exception {
         test("selection.collapseToStart()", "selection.focusNode", "x ? x.parentNode.id : x", "null", "s1");
     }
@@ -127,7 +127,7 @@ public class SelectionTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.FF2, Browser.FF3 })
+    @Browsers(Browser.FF)
     public void extend() throws Exception {
         test("selection.extend(s2, 2)", "selection.focusOffset", "x", "0", "2");
     }
@@ -136,7 +136,7 @@ public class SelectionTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.FF2, Browser.FF3 })
+    @Browsers(Browser.FF)
     public void selectAllChildren() throws Exception {
         test("selection.selectAllChildren(document.body)", "selection.anchorOffset", "x", "0", "0");
     }

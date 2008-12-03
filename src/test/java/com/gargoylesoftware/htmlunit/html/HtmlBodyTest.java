@@ -36,7 +36,7 @@ public class HtmlBodyTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FF2, Browser.FF3 })
+    @Browsers(Browser.FF)
     @Alerts("[object HTMLBodyElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"

@@ -335,7 +335,7 @@ public class NodeTest extends WebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Browsers({ Browser.IE6, Browser.IE7 })
+    @Browsers(Browser.IE)
     public void testAttachEvent() throws Exception {
         final String content = "<html><head>\n"
             + "<title>First</title>\n"
@@ -556,7 +556,7 @@ public class NodeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.IE6, Browser.IE7 })
+    @Browsers(Browser.IE)
     public void event() throws Exception {
         final String firstContent = "<html>\n"
             + "<head><title>First Page</title>\n"
@@ -706,7 +706,7 @@ public class NodeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FF2, Browser.FF3 })
+    @Browsers(Browser.FF)
     @Alerts({ "0", "20", "20", "4", "10", "10", "2", "20" })
     public void compareDocumentPosition() throws Exception {
         final String html

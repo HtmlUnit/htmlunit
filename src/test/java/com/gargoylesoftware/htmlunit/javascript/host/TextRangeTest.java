@@ -38,7 +38,7 @@ public class TextRangeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.IE6, Browser.IE7 })
+    @Browsers(Browser.IE)
     @Alerts(IE = { "", "bla bla", "bla blabli bli" })
     public void text() throws Exception {
         final String html = "<html>\n"
@@ -69,7 +69,7 @@ public class TextRangeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.IE6, Browser.IE7 })
+    @Browsers(Browser.IE)
     @Alerts(IE = "BODY")
     @NotYetImplemented
     public void parentElement() throws Exception {

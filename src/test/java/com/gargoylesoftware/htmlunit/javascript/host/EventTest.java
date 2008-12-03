@@ -112,7 +112,7 @@ public class EventTest extends WebTestCase {
      */
     @Test
     @Alerts("defined")
-    @Browsers({ Browser.FF2, Browser.FF3 })
+    @Browsers(Browser.FF)
     public void testEventArgDefined() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -129,7 +129,7 @@ public class EventTest extends WebTestCase {
      */
     @Test
     @Alerts("pass")
-    @Browsers({ Browser.FF2, Browser.FF3 })
+    @Browsers(Browser.FF)
     public void testEventTargetSameAsThis() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -147,7 +147,7 @@ public class EventTest extends WebTestCase {
      */
     @Test
     @Alerts("pass")
-    @Browsers({ Browser.IE6, Browser.IE7 })
+    @Browsers(Browser.IE)
     public void testEventSrcElementSameAsThis() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -167,7 +167,7 @@ public class EventTest extends WebTestCase {
      */
     @Test
     @Alerts("pass")
-    @Browsers({ Browser.FF2, Browser.FF3 })
+    @Browsers(Browser.FF)
     public void testEventCurrentTargetSameAsThis() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -398,7 +398,7 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.IE6, Browser.IE7 })
+    @Browsers(Browser.IE)
     @Alerts({ "false", "false" })
     public void testIEWindowEvent() throws Exception {
         final String html =
@@ -440,7 +440,7 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FF2, Browser.FF3 })
+    @Browsers(Browser.FF)
     @Alerts({ "window capturing", "div capturing", "span capturing",
         "span bubbling", "div", "div bubbling", "window bubbling" })
     public void testFF_EventCapturingAndBubbling() throws Exception {
@@ -516,7 +516,7 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FF2, Browser.FF3 })
+    @Browsers(Browser.FF)
     public void testFF_StopPropagation() throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -557,9 +557,8 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ Browser.FF2, Browser.FF3 })
-    @Alerts(FF = { "undefined" },
-            IE = { "null" })
+    @NotYetImplemented(Browser.FF)
+    @Alerts(FF = { "undefined" }, IE = { "null" })
     public void testNullEventHandler() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -664,7 +663,7 @@ public class EventTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.FF2, Browser.FF3 })
+    @Browsers(Browser.FF)
     @Alerts({ "capturing", "at target", "bubbling" })
     public void testEventPhase() throws Exception {
         final String html =
@@ -714,7 +713,7 @@ public class EventTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.FF2, Browser.FF3 })
+    @Browsers(Browser.FF)
     @Alerts({ "click", "true", "true", "dblclick", "false", "false" })
     public void testInitEvent() throws Exception {
         final String html =

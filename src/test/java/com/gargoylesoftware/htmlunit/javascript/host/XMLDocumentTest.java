@@ -161,7 +161,7 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.IE6, Browser.IE7 })
+    @Browsers(Browser.IE)
     @Alerts("false")
     public void preserveWhiteSpace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -178,7 +178,7 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.IE6, Browser.IE7 })
+    @Browsers(Browser.IE)
     @Alerts()
     public void setProperty() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -196,7 +196,7 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.IE6, Browser.IE7 })
+    @Browsers(Browser.IE)
     @Alerts({ "true", "1", "books" })
     public void selectNodes() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -241,7 +241,7 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.IE6, Browser.IE7 })
+    @Browsers(Browser.IE)
     @Alerts({ "0", "1" })
     public void selectNodes_caseSensitive() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -285,7 +285,7 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.IE6, Browser.IE7 })
+    @Browsers(Browser.IE)
     @Alerts({ "true", "2", "1" })
     public void selectNodes_Namespace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -336,7 +336,7 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.IE6, Browser.IE7 })
+    @Browsers(Browser.IE)
     @Alerts({ "book", "null", "book", "null" })
     public void selectNodes_nextNodeAndReset() throws Exception {
         final String html = "<html><head><script>\n"
@@ -379,7 +379,7 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.IE6, Browser.IE7 })
+    @Browsers(Browser.IE)
     @Alerts({ "book", "#document", "book", "#document" })
     public void selectSingleNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -460,7 +460,7 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.IE6, Browser.IE7 })
+    @Browsers(Browser.IE)
     @Alerts({ "true", "true", "true", "true", "true", "true", "true", "true",
             "false",
             "true", "true", "true", "true", "true", "true", "true", "true" })
@@ -511,7 +511,7 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FF2, Browser.FF3 })
+    @Browsers(Browser.FF)
     @Alerts("http://myNS")
     public void createNSResolver() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -585,7 +585,7 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.IE6, Browser.IE7 })
+    @Browsers(Browser.IE)
     @Alerts("columns")
     public void xmlInsideHtml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -609,7 +609,7 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FF2, Browser.FF3 })
+    @Browsers(Browser.FF)
     @Alerts("true")
     public void instanceOf() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -634,7 +634,7 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FF2, Browser.FF3 })
+    @Browsers(Browser.FF)
     @Alerts("button")
     public void evaluate() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -765,7 +765,7 @@ public class XMLDocumentTest extends WebTestCase {
      */
     @Test
     @Alerts(IE = "1", FF = "0")
-    @NotYetImplemented({ Browser.IE6, Browser.IE7 })
+    @NotYetImplemented(Browser.IE)
     public void xpathWithNamespaces() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

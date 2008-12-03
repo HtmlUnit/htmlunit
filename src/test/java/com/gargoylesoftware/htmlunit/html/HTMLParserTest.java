@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
@@ -176,7 +174,6 @@ public class HTMLParserTest extends WebTestCase {
      * @throws Exception failure
      */
     @Test
-    @Browsers({Browser.IE6, Browser.IE7, Browser.FF2, Browser.FF3 })
     @Alerts(IE = {"1", "3", "[object]", "[object]", "[object]" },
             FF = {"1", "3", "[object HTMLScriptElement]",
                 "[object HTMLUnknownElement]", "[object HTMLUnknownElement]" })
@@ -206,7 +203,6 @@ public class HTMLParserTest extends WebTestCase {
      * @throws Exception failure
      */
     @Test
-    @Browsers({Browser.IE6, Browser.IE7, Browser.FF2, Browser.FF3 })
     @Alerts(IE = {"1", "createElementNS() is not defined",
                 "[object]", "SCRIPT,SCRIPT,undefined,undefined,undefined",
                 "[object]", "script,script,undefined,undefined,undefined" },
@@ -248,7 +244,6 @@ public class HTMLParserTest extends WebTestCase {
      * @throws Exception failure
      */
     @Test
-    @Browsers({Browser.IE6, Browser.IE7, Browser.FF2, Browser.FF3 })
     @NotYetImplemented
     @Alerts(IE = {"HEAD", "Outer Html", "outerDiv" },
             FF = {"HEAD", "Outer Html", "HEAD", "Inner Html", "outerDiv" })
@@ -298,7 +293,6 @@ public class HTMLParserTest extends WebTestCase {
      * @throws Exception failure
      */
     @Test
-    @Browsers({Browser.IE6, Browser.IE7, Browser.FF2, Browser.FF3 })
     @NotYetImplemented
     @Alerts(IE = {"HEAD", "Outer Html", "outerDiv" },
             FF = {"HEAD", "Outer Html", "HEAD", "Inner Html", "outerDiv" })
@@ -347,7 +341,6 @@ public class HTMLParserTest extends WebTestCase {
      * @throws Exception failure
      */
     @Test
-    @Browsers({Browser.IE6, Browser.IE7, Browser.FF2, Browser.FF3 })
     @Alerts(IE = {"HEAD", "Outer Html", "outerDiv" },
             FF = {"HEAD", "Outer Html", "DIV", "Inner Html", "DIV", "Inner Html", "outerDiv" })
     public void setCompleteHtmlToDIV_innerHTML() throws Exception {
@@ -395,7 +388,6 @@ public class HTMLParserTest extends WebTestCase {
      * @throws Exception failure
      */
     @Test
-    @Browsers({Browser.IE6, Browser.IE7, Browser.FF2, Browser.FF3 })
     @Alerts(IE = {"HEAD", "Outer Html", "true" },
             FF = {"HTML", "Inner Html", "false", "HTML" })
     public void setComplteHtmlToHTML_innerHTML() throws Exception {

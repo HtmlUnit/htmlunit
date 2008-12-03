@@ -71,7 +71,7 @@ public class WindowTest2 extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.IE6, Browser.IE7, Browser.FF3 })
+    @Browsers({ Browser.IE, Browser.FF3 })
     public void showModalDialog() throws Exception {
         final String html1
             = "<html><head><script>\n"
@@ -126,7 +126,7 @@ public class WindowTest2 extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.IE6, Browser.IE7 })
+    @Browsers(Browser.IE)
     public void showModelessDialog() throws Exception {
         final String html1
             = "<html><head><script>\n"

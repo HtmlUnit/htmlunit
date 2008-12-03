@@ -138,7 +138,7 @@ public class SimpleWebDriverTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.IE6, Browser.IE7 })
+    @Browsers(Browser.IE)
     public void fireEventCopyTemplateProperties() throws Exception {
         doTest("testFireEvent_initFromTemplate.html");
     }

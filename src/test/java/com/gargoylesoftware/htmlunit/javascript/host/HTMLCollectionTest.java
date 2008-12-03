@@ -81,7 +81,7 @@ public class HTMLCollectionTest extends WebTestCase {
      */
     @Test
     @Alerts({ "5", "6" })
-    @Browsers({ Browser.IE6, Browser.IE7 })
+    @Browsers(Browser.IE)
     public void getElements() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

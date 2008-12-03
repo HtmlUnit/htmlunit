@@ -351,7 +351,7 @@ public class HTMLSelectElementTest extends WebTestCase {
      */
     @Test
     @Alerts({ "4", "Four", "value4" })
-    @Browsers({ Browser.FF2, Browser.FF3 })
+    @Browsers(Browser.FF)
     public void testAddOptionWithAddMethod_FF() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -381,7 +381,7 @@ public class HTMLSelectElementTest extends WebTestCase {
      */
     @Test
     @Alerts({ "4", "Four", "value4", "Three b", "value3b" })
-    @Browsers({ Browser.IE6, Browser.IE7 })
+    @Browsers(Browser.IE)
     public void testAddOptionWithAddMethod_IE() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -414,7 +414,7 @@ public class HTMLSelectElementTest extends WebTestCase {
      */
     @Test
     @Alerts({ "0", "1" })
-    @Browsers({ Browser.IE6, Browser.IE7 })
+    @Browsers(Browser.IE)
     public void testAddWith1Arg() throws Exception {
         final String html
             = "<html><head>\n"
@@ -713,7 +713,7 @@ public class HTMLSelectElementTest extends WebTestCase {
      */
     @Test
     @Alerts({ "2-2", "1-1", "2-2", "0-0", "2-2", "1-1" })
-    @Browsers({ Browser.IE6, Browser.IE7 })
+    @Browsers(Browser.IE)
     public void testOptionsDelegateToSelect() throws Exception {
         final String html
             = "<html><head>\n"
