@@ -99,7 +99,7 @@ public class ElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     @Alerts({ "true", "1", "title" })
     public void selectNodes() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -248,7 +248,7 @@ public class ElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     @Alerts({ "book", "0", "1" })
     public void selectNode_root() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -288,7 +288,7 @@ public class ElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
     @Alerts("1")
     public void getElementsByTagNameNS() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -322,7 +322,7 @@ public class ElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
     @Alerts("false")
     public void hasAttribute() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

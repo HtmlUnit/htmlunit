@@ -187,7 +187,7 @@ public class HtmlTextInputTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     public void setSelectionText() throws Exception {
         final String html =
               "<html><head><script>\n"

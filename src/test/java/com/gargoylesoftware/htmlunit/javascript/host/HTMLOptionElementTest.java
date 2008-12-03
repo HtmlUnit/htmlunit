@@ -234,7 +234,7 @@ public class HTMLOptionElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @NotYetImplemented({ Browser.FF2, Browser.FF3 })
     @Alerts(IE = { "[object]", "[object]", "[object]", "[object]", "null",
             "[object]", "null", "[object]", "[object]", "null" },
             FF = { "null", "[object Attr]", "null", "null", "null",
@@ -273,7 +273,7 @@ public class HTMLOptionElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     @NotYetImplemented
     @Alerts("1")
     public void without_new() throws Exception {

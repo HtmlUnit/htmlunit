@@ -44,7 +44,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
     @Alerts("none")
     public void cssFloat() throws Exception {
         final String html = "<html>\n"
@@ -68,7 +68,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
     public void stringProperties() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -162,7 +162,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
     @Alerts({"", "", "auto", "pointer" })
     public void styleElement() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
@@ -197,8 +197,8 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
-    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
+    @NotYetImplemented({ Browser.FF2, Browser.FF3 })
     @Alerts({"", "", "pointer", "pointer" })
     public void styleElement2() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
@@ -228,7 +228,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     @Alerts({ "0", "number" })
     public void zIndex() throws Exception {
         final String html = "<html>\n"

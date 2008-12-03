@@ -35,7 +35,7 @@ public class HTMLTitleElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7, Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({Browser.IE6, Browser.IE7, Browser.FF2, Browser.FF3 })
     @Alerts({"Page Title", "New Title" })
     public void text() throws Exception {
         final String html =

@@ -163,7 +163,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     public void testJavaScriptAnchorClick() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"

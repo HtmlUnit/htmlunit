@@ -272,7 +272,7 @@ public class XmlPageTest extends WebTestCase {
      */
     @Test
     @NotYetImplemented
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
     @Alerts("[object Element]")
     public void createElementNS() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

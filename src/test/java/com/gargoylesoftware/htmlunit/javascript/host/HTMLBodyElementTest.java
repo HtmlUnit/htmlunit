@@ -71,7 +71,7 @@ public class HTMLBodyElementTest extends WebTestCase {
      */
     @Test
     @Alerts("[object]")
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     public void attachEvent() throws Exception {
         final String html =
             "<html>\n"

@@ -105,7 +105,7 @@ public class HTMLFrameElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
     @Alerts("true")
     @Test
     public void testContentDocument() throws Exception {

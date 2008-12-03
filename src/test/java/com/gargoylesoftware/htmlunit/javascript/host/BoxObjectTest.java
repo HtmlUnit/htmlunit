@@ -37,7 +37,7 @@ public class BoxObjectTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
     @Alerts({ "true", "true", "true", "true", "true" })
     public void testElementAttributes() throws Exception {
         final String html =
@@ -71,7 +71,7 @@ public class BoxObjectTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
     @Alerts({ "73-123", "73-244", "510-410" })
     public void testPositionAndSizeAttributes() throws Exception {
         final String html =

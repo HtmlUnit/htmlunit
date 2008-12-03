@@ -61,7 +61,7 @@ public class Prototype150rc1Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @NotYetImplemented({ Browser.IE6, Browser.IE7 })
     public void dom() throws Exception {
         test("dom.html");
     }
@@ -119,7 +119,7 @@ public class Prototype150rc1Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @NotYetImplemented({ Browser.IE6, Browser.IE7 })
     public void selector() throws Exception {
         test("selector.html");
     }

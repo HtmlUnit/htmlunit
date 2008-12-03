@@ -66,7 +66,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     @Alerts(IE = { "all node for body: DIV A IMG DIV ", "all node for testDiv: A IMG ",
             "all node for testA: IMG ", "all node for testImg: ", "all node for testDiv2: " })
     public void all_IndexByInt() throws Exception {
@@ -163,7 +163,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
     @Alerts({ "", "bla" })
     public void getSetAttributeNS() throws Exception {
         final String html = "<html>\n"
@@ -255,7 +255,7 @@ public class HTMLElementTest extends WebTestCase {
             "specified=true",
             "value=bleh"
             })
-    @NotYetImplemented({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @NotYetImplemented({ Browser.FF2, Browser.FF3 })
     public void getAttributeNode() throws Exception {
         final String html =
               "<html>\n"
@@ -757,7 +757,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     @Alerts(IE = { "Old = <B id=innerNode>Old outerHTML</B>", "New = <B><I id=newElt>New cell value</I></B>", "I" })
     public void getSetOuterHTMLComplex() throws Exception {
         final String html = "<html>\n"
@@ -789,7 +789,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     @Alerts({ "outside", "1", "middle", "2", "3", "4" })
     public void insertAdjacentHTML() throws Exception {
         insertAdjacentHTML("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");
@@ -836,7 +836,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     @Alerts({ "outside", "1", "middle", "2", "3", "4" })
     public void insertAdjacentElement() throws Exception {
         insertAdjacentElement("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");
@@ -884,7 +884,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     @Alerts(IE = {
             "body.cpuClass = undefined",
             "body.cpuClass = x86",
@@ -915,7 +915,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     @Alerts(IE = { "isHomePage = false", "isHomePage = true", "isHomePage = true", "isHomePage = false" })
     public void addBehaviorDefaultHomePage() throws Exception {
         final URL url1 = new URL("http://www.domain1.com/");
@@ -972,7 +972,7 @@ public class HTMLElementTest extends WebTestCase {
     * @throws Exception if the test fails
     */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     @Alerts(IE = { "Refused", "foo" })
     public void addBehaviorDefaultDownload() throws Exception {
         final URL url1 = new URL("http://htmlunit.sourceforge.net/");
@@ -1034,7 +1034,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     @Alerts({ "body.isHomePage = undefined", "body.isHomePage = false", "body.isHomePage = undefined" })
     public void removeBehavior() throws Exception {
         final String html = "<html>\n"
@@ -1060,7 +1060,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     @Alerts({ "BR", "DIV", "2", "3" })
     public void children() throws Exception {
         final String html = "<html>\n"
@@ -1771,7 +1771,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
     @Alerts({ "undefined", "undefined", "undefined", "undefined",
             "undefined", "123", "from myFunction", "123", "from myFunction" })
     public void prototype() throws Exception {
@@ -1806,7 +1806,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
     @Alerts("in selectNodes")
     public void prototype_Element() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -1826,7 +1826,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
     @Alerts({ "true", "true" })
     public void instanceOf() throws Exception {
         final String html = "<html><head><title>instanceof test</title>\n"
@@ -1871,7 +1871,7 @@ public class HTMLElementTest extends WebTestCase {
      */
     @Test
     @Alerts("rgb(0, 0, 0)")
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     public void currentStyle() throws Exception {
         style("currentStyle");
     }
@@ -1881,7 +1881,7 @@ public class HTMLElementTest extends WebTestCase {
      */
     @Test
     @Alerts("")
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     public void runtimeStyle() throws Exception {
         style("runtimeStyle");
     }
@@ -1906,7 +1906,7 @@ public class HTMLElementTest extends WebTestCase {
      */
     @Alerts({ "402", "102" })
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     public void getBoundingClientRect() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1926,7 +1926,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     public void getClientRects() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -2025,7 +2025,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     @Alerts({ "true", "true" })
     public void uniqueIDFormatIE() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -2110,7 +2110,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     public void fireEvent_WithTemplate() throws Exception {
         final String html =
               "<html><body>\n"
@@ -2133,7 +2133,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     public void setExpression() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -2150,7 +2150,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     public void removeExpression() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -2168,7 +2168,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
     @Alerts("clicked")
     public void dispatchEvent() throws Exception {
         final String html =
@@ -2190,7 +2190,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
     @Alerts({ "true", "true", "false" })
     public void hasAttribute() throws Exception {
         final String html =
@@ -2223,7 +2223,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     @Alerts({ "undefined", "x86", "0", "undefined" })
     public void getComponentVersion() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -2267,7 +2267,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     @Alerts({"[object]", "text1", "[object]", "onfocus text2", "text2", "onfocus text1", "onfocus text2" })
     public void setActiveAndFocus() throws Exception {
         final WebClient webClient = getWebClient();
@@ -2463,7 +2463,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     @Alerts({ "true", "true", "true", "false", "false", "false", "false", "true" })
     public void contains() throws Exception {
         final String html

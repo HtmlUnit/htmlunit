@@ -311,7 +311,7 @@ public class StyleSheetTest extends WebTestCase {
      */
     @Test
     @Alerts({ "2" })
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
     public void npe() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"

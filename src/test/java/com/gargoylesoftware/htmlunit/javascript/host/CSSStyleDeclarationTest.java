@@ -140,7 +140,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     @Alerts("")
     public void ieStyle() throws Exception {
         final String html
@@ -218,7 +218,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
     @Alerts("blue")
     public void getPropertyValue() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
@@ -236,7 +236,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
     @Alerts({ "30px", "", "30px", "arial", "", "arial" })
     public void getPropertyValue_WithDash() throws Exception {
         final String html =
@@ -323,7 +323,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     public void setExpression() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -340,7 +340,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({ Browser.IE6, Browser.IE7 })
     public void removeExpression() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1152,7 +1152,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
     @Alerts({ "1px", "solid", "red" })
     public void border() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -1172,7 +1172,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
     @Alerts({ "1256px", "auto" })
     public void computedWidthOfHiddenElements() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
@@ -1425,7 +1425,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({Browser.IE6, Browser.IE7 })
     public void getAttribute() throws Exception {
         getAttribute("\"font\"", "");
         getAttribute("\"color\"", "green");
@@ -1451,7 +1451,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({Browser.IE6, Browser.IE7 })
     public void setAttribute() throws Exception {
         setAttribute("'font', 'blah'", "green", "green");
         setAttribute("'color', 'red'", "green", "red");
@@ -1485,7 +1485,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Browsers({Browser.IE6, Browser.IE7 })
     public void removeAttribute() throws Exception {
         removeAttribute("'font'", "green", "false", "green");
         removeAttribute("'color'", "green", "true", "");

@@ -36,7 +36,7 @@ public class Prototype160Test extends PrototypeTestBase {
      * @throws Exception if test fails
      * For IE: 2 assertions pass whereas they shouldn't in testResponders
      */
-    @NotYetImplemented({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @NotYetImplemented({ Browser.IE6, Browser.IE7 })
     @Test
     public void ajax() throws Exception {
         test("ajax.html");
@@ -105,7 +105,7 @@ public class Prototype160Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @NotYetImplemented({ Browser.IE6, Browser.IE7 })
     public void form() throws Exception {
         test("form.html");
     }

@@ -63,7 +63,7 @@ public class RangeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
     @Alerts({ "true", "undefined", "undefined", "0", "undefined", "0" })
     public void testEmptyRange() throws Exception {
         loadPageWithAlerts(contentStart + "alertRange(r);" + contentEnd);
@@ -73,7 +73,7 @@ public class RangeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
     @Alerts({ "false", "BODY", "BODY", "1", "BODY", "2" })
     public void testSelectNode() throws Exception {
         final String script = "r.selectNode(document.getElementById('theDiv'));"
@@ -86,7 +86,7 @@ public class RangeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
     @Alerts({ "false", "DIV", "DIV", "0", "DIV", "2" })
     public void testSelectNodeContents() throws Exception {
         final String script = "r.selectNodeContents(document.getElementById('theDiv'));"
@@ -99,7 +99,7 @@ public class RangeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
     @Alerts("<div id=\"myDiv2\"></div><div>harhar</div><div id=\"myDiv3\"></div>")
     public void testCreateContextualFragment() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

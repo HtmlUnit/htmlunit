@@ -179,7 +179,7 @@ public class HTMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
     @Alerts({ "[object HTMLDivElement]", "[object HTMLUnknownElement]", "[object Element]" })
     public void createDocumentNS() throws Exception {
         final String html = "<html>\n"
@@ -207,7 +207,7 @@ public class HTMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FIREFOX_2, Browser.FIREFOX_3 })
+    @Browsers({ Browser.FF2, Browser.FF3 })
     @Alerts("Hello")
     public void createDocumentNS_xul() throws Exception {
         final String html = "<html>\n"
