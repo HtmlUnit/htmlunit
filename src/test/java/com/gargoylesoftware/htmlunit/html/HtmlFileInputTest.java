@@ -41,17 +41,14 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.multipart.FilePart;
 import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.Part;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mortbay.jetty.Server;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.KeyDataPair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
 
 /**
@@ -61,9 +58,7 @@ import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlFileInputTest extends WebTestCase {
-
-    private Server server_;
+public class HtmlFileInputTest extends WebServerTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -238,8 +233,8 @@ public class HtmlFileInputTest extends WebTestCase {
         final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
         servlets.put("/upload2", Upload2Servlet.class);
 
-        server_ = HttpWebConnectionTest.startWebServer("./", null, servlets);
-        final PostMethod filePost = new PostMethod("http://localhost:" + HttpWebConnectionTest.PORT + "/upload2");
+        startWebServer("./", null, servlets);
+        final PostMethod filePost = new PostMethod("http://localhost:" + PORT + "/upload2");
 
         final FilePart part = new FilePart("myInput", file);
         part.setCharSet("UTF-8");
@@ -265,7 +260,7 @@ public class HtmlFileInputTest extends WebTestCase {
         final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
         servlets.put("/upload1", Upload1Servlet.class);
         servlets.put("/upload2", Upload2Servlet.class);
-        server_ = HttpWebConnectionTest.startWebServer("./", null, servlets);
+        startWebServer("./", null, servlets);
 
         testUploadFileWithNonASCIIName(BrowserVersion.FIREFOX_2);
         testUploadFileWithNonASCIIName(BrowserVersion.INTERNET_EXPLORER_7);
@@ -278,8 +273,7 @@ public class HtmlFileInputTest extends WebTestCase {
         assertTrue(file.exists());
 
         final WebClient client = new WebClient(browserVersion);
-        final HtmlPage firstPage = client.getPage(
-                new URL("http://localhost:" + HttpWebConnectionTest.PORT + "/upload1"));
+        final HtmlPage firstPage = client.getPage("http://localhost:" + PORT + "/upload1");
 
         final HtmlForm form = firstPage.getForms().get(0);
         final HtmlFileInput fileInput = form.getInputByName("myInput");
@@ -363,15 +357,5 @@ public class HtmlFileInputTest extends WebTestCase {
             }
             writer.close();
         }
-    }
-
-    /**
-     * Performs post-test deconstruction.
-     * @throws Exception if an error occurs
-     */
-    @After
-    public void tearDown() throws Exception {
-        HttpWebConnectionTest.stopWebServer(server_);
-        server_ = null;
     }
 }

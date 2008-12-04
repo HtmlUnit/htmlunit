@@ -28,9 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpState;
-import org.junit.After;
 import org.junit.Test;
-import org.mortbay.jetty.Server;
 
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -42,19 +40,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public class CookieManagerTest extends WebTestCase {
-
-    private Server server_;
-
-    /**
-     * Performs post-test deconstruction.
-     * @throws Exception if an error occurs
-     */
-    @After
-    public void tearDown() throws Exception {
-        HttpWebConnectionTest.stopWebServer(server_);
-        server_ = null;
-    }
+public class CookieManagerTest extends WebServerTestCase {
 
     /**
      * Verifies the basic cookie manager behavior.
@@ -137,13 +123,13 @@ public class CookieManagerTest extends WebTestCase {
     public void comma() throws Exception {
         final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
         servlets.put("/test", CommaCookieServlet.class);
-        server_ = HttpWebConnectionTest.startWebServer("./", null, servlets);
+        startWebServer("./", null, servlets);
 
         final String[] expectedAlerts = {"my_key=\"Hello, big, big, world\"; another_key=Hi"};
         final WebClient client = new WebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        client.getPage("http://localhost:" + HttpWebConnectionTest.PORT + "/test");
+        client.getPage("http://localhost:" + PORT + "/test");
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -176,7 +162,7 @@ public class CookieManagerTest extends WebTestCase {
     public void serverModifiesCookieValue() throws Exception {
         final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
         servlets.put("/test", SimpleCookieServlet.class);
-        server_ = HttpWebConnectionTest.startWebServer("./", null, servlets);
+        startWebServer("./", null, servlets);
 
         final String[] expectedAlerts = {"nbCalls=1", "nbCalls=2"};
         final WebClient client = new WebClient();
@@ -184,10 +170,10 @@ public class CookieManagerTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         // get the page a first time
-        client.getPage("http://localhost:" + HttpWebConnectionTest.PORT + "/test");
+        client.getPage("http://localhost:" + PORT + "/test");
 
         // and a second one
-        client.getPage("http://localhost:" + HttpWebConnectionTest.PORT + "/test");
+        client.getPage("http://localhost:" + PORT + "/test");
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

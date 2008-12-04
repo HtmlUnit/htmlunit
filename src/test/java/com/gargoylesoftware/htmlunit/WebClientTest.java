@@ -55,7 +55,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.mortbay.jetty.Server;
 import org.w3c.css.sac.CSSException;
 import org.w3c.css.sac.CSSParseException;
 import org.w3c.css.sac.ErrorHandler;
@@ -86,19 +85,17 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Daniel Gredler
  * @author Sudhan Moghe
  */
-public class WebClientTest extends WebTestCase {
-
-    private Server server_;
+public class WebClientTest extends WebServerTestCase {
 
     /**
      * Performs post-test deconstruction.
      * @throws Exception if an error occurs
      */
     @After
+    @Override
     public void tearDown() throws Exception {
+        super.tearDown();
         WebClient.setIgnoreOutsideContent(false);
-        HttpWebConnectionTest.stopWebServer(server_);
-        server_ = null;
     }
 
     /**
@@ -2027,10 +2024,10 @@ public class WebClientTest extends WebTestCase {
     public void testUseProxy() throws Exception {
         final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
         servlets.put("/test", UseProxyHeaderServlet.class);
-        server_ = HttpWebConnectionTest.startWebServer("./", null, servlets);
+        startWebServer("./", null, servlets);
 
         final WebClient client = new WebClient();
-        final HtmlPage page = client.getPage("http://localhost:" + HttpWebConnectionTest.PORT + "/test");
+        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/test");
         assertEquals("Going anywhere?", page.asText());
     }
 

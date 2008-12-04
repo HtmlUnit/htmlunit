@@ -27,16 +27,13 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mortbay.jetty.Server;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
@@ -57,9 +54,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class GWT15Test extends WebTestCase {
-
-    private Server server_;
+public class GWT15Test extends WebServerTestCase {
 
     /**
      * @throws Exception if an error occurs
@@ -119,10 +114,10 @@ public class GWT15Test extends WebTestCase {
         final Locale locale = Locale.getDefault();
         Locale.setDefault(Locale.US);
 
-        server_ = HttpWebConnectionTest.startWebServer("src/test/resources/gwt/" + getDirectory() + "/I18N");
+        startWebServer("src/test/resources/gwt/" + getDirectory() + "/I18N");
         final WebClient client = getWebClient();
 
-        final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/I18N.html?locale=fr";
+        final String url = "http://localhost:" + PORT + "/I18N.html?locale=fr";
         final HtmlPage page = client.getPage(url);
         page.getEnclosingWindow().getThreadManager().joinAll(10000);
 
@@ -338,12 +333,12 @@ public class GWT15Test extends WebTestCase {
      */
     @Test
     public void dynaTable_1_5() throws Exception {
-        server_ = HttpWebConnectionTest.startWebServer("src/test/resources/gwt/" + getDirectory() + "/DynaTable",
+        startWebServer("src/test/resources/gwt/" + getDirectory() + "/DynaTable",
                 new String[] {"src/test/resources/gwt/" + getDirectory() + "/gwt-servlet.jar"});
 
         final WebClient client = getWebClient();
 
-        final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/DynaTable.html";
+        final String url = "http://localhost:" + PORT + "/DynaTable.html";
         final HtmlPage page = client.getPage(url);
 
         final String[] firstRow = {"Inman Mendez",
@@ -400,16 +395,6 @@ public class GWT15Test extends WebTestCase {
         final HtmlPage page = client.getPage(url);
         page.getEnclosingWindow().getThreadManager().joinAll(10000);
         return page;
-    }
-
-    /**
-     * Performs post-test deconstruction.
-     * @throws Exception if an error occurs
-     */
-    @After
-    public void after() throws Exception {
-        HttpWebConnectionTest.stopWebServer(server_);
-        server_ = null;
     }
 
     /**

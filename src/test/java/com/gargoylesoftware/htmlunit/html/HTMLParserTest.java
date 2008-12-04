@@ -27,20 +27,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mortbay.jetty.Server;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
@@ -54,19 +51,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  * @author Sudhan Moghe
  */
 @RunWith(BrowserRunner.class)
-public class HTMLParserTest extends WebTestCase {
-
-    private Server server_;
-
-    /**
-     * Performs post-test deconstruction.
-     * @throws Exception if an error occurs
-     */
-    @After
-    public void tearDown() throws Exception {
-        HttpWebConnectionTest.stopWebServer(server_);
-        server_ = null;
-    }
+public class HTMLParserTest extends WebServerTestCase {
 
     /**
      * Tests the new HTMLParser on a simple HTML string.
@@ -663,10 +648,10 @@ public class HTMLParserTest extends WebTestCase {
     private void headerVsMetaTagContentType(final boolean utf8Encoded) throws Exception {
         final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
         servlets.put("/test", HeaderVsMetaTagContentTypeServlet.class);
-        server_ = HttpWebConnectionTest.startWebServer("./", null, servlets);
+        startWebServer("./", null, servlets);
 
         final WebClient client = getWebClient();
-        final HtmlPage page = client.getPage("http://localhost:" + HttpWebConnectionTest.PORT + "/test");
+        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/test");
         assertEquals(utf8Encoded, HeaderVsMetaTagContentTypeServlet.utf8String.equals(page.asText()));
     }
 

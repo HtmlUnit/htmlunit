@@ -16,13 +16,10 @@ package com.gargoylesoftware.htmlunit.libraries;
 
 import java.net.URL;
 
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mortbay.jetty.Server;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
@@ -37,20 +34,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  */
 @RunWith(BrowserRunner.class)
 public class JQuery126Test extends JQueryTestBase {
-
-    private Server server_;
-
-    /**
-     * After.
-     * @throws Exception if an error occurs
-     */
-    @After
-    @Override
-    public void after() throws Exception {
-        HttpWebConnectionTest.stopWebServer(server_);
-        server_ = null;
-        super.after();
-    }
 
     /**
      * {@inheritDoc}
@@ -67,7 +50,7 @@ public class JQuery126Test extends JQueryTestBase {
      */
     @Override
     protected String getUrl() {
-        return "http://localhost:" + HttpWebConnectionTest.PORT + "/test/index.html";
+        return "http://localhost:" + PORT + "/test/index.html";
     }
 
     /**
@@ -76,7 +59,7 @@ public class JQuery126Test extends JQueryTestBase {
     @Test
     @NotYetImplemented(Browser.FF)
     public void test() throws Exception {
-        server_ = HttpWebConnectionTest.startWebServer("src/test/resources/jquery/" + getVersion());
+        startWebServer("src/test/resources/jquery/" + getVersion());
         runTest();
     }
 }

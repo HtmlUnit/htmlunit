@@ -23,9 +23,6 @@ import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URL;
-import java.util.Map;
-
-import javax.servlet.Servlet;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethodBase;
@@ -33,16 +30,8 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.StatusLine;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.multipart.FilePart;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mortbay.jetty.Handler;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.handler.HandlerList;
-import org.mortbay.jetty.handler.ResourceHandler;
-import org.mortbay.jetty.servlet.Context;
-import org.mortbay.jetty.webapp.WebAppClassLoader;
-import org.mortbay.jetty.webapp.WebAppContext;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -54,14 +43,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HttpWebConnectionTest {
-
-    /**
-     * The listener port for the web server.
-     */
-    public static final int PORT = Integer.valueOf(System.getProperty("htmlunit.test.port", "12345"));
-
-    private Server server_;
+public class HttpWebConnectionTest extends WebServerTestCase {
 
     /**
      * Assert that the two byte arrays are equal.
@@ -78,8 +60,7 @@ public class HttpWebConnectionTest {
      * @param expected the expected value
      * @param actual the actual value
      */
-    public static void assertEquals(
-            final String message, final byte[] expected, final byte[] actual) {
+    public static void assertEquals(final String message, final byte[] expected, final byte[] actual) {
         assertEquals(message, expected, actual, expected.length);
     }
 
@@ -123,10 +104,8 @@ public class HttpWebConnectionTest {
      * @param actual the actual value
      * @throws IOException if an IO problem occurs during comparison
      */
-    public static void assertEquals(
-            final String message, final InputStream expected,
-            final InputStream actual)
-        throws IOException {
+    public static void assertEquals(final String message, final InputStream expected,
+            final InputStream actual) throws IOException {
 
         if (expected == null && actual == null) {
             return;
@@ -233,7 +212,7 @@ public class HttpWebConnectionTest {
      */
     @Test
     public void testJettyProofOfConcept() throws Exception {
-        server_ = startWebServer("./");
+        startWebServer("./");
 
         final WebClient client = new WebClient();
         Page page = client.getPage("http://localhost:" + PORT + "/src/test/resources/event_coordinates.html");
@@ -250,126 +229,12 @@ public class HttpWebConnectionTest {
     }
 
     /**
-     * Starts the web server on the default {@link #PORT}.
-     * The given resourceBase is used to be the ROOT directory that serves the default context.
-     * <p><b>Don't forget to stop the returned HttpServer after the test</b>
-     *
-     * @param resourceBase the base of resources for the default context
-     * @return the started web server
-     * @throws Exception if the test fails
-     */
-    public static Server startWebServer(final String resourceBase) throws Exception {
-        final Server server = new Server(PORT);
-
-        final Context context = new Context();
-        context.setContextPath("/");
-        context.setResourceBase(resourceBase);
-
-        final ResourceHandler resourceHandler = new ResourceHandler();
-        resourceHandler.setResourceBase(resourceBase);
-
-        final HandlerList handlers = new HandlerList();
-        handlers.setHandlers(new Handler[]{resourceHandler, context});
-        server.setHandler(handlers);
-        server.setHandler(resourceHandler);
-
-        server.start();
-        return server;
-    }
-
-    /**
-     * Starts the web server on the default {@link #PORT}.
-     * The given resourceBase is used to be the ROOT directory that serves the default context.
-     * <p><b>Don't forget to stop the returned HttpServer after the test</b>
-     *
-     * @param resourceBase the base of resources for the default context
-     * @param classpath additional classpath entries to add (may be null)
-     * @return the started web server
-     * @throws Exception if the test fails
-     */
-    public static Server startWebServer(final String resourceBase, final String[] classpath) throws Exception {
-        final Server server = new Server(PORT);
-
-        final WebAppContext context = new WebAppContext();
-        context.setContextPath("/");
-        context.setResourceBase(resourceBase);
-        final WebAppClassLoader loader = new WebAppClassLoader(context);
-        if (classpath != null) {
-            for (final String path : classpath) {
-                loader.addClassPath(path);
-            }
-        }
-        context.setClassLoader(loader);
-        server.setHandler(context);
-        server.start();
-        return server;
-    }
-
-    /**
-     * Starts the web server on the default {@link #PORT}.
-     * The given resourceBase is used to be the ROOT directory that serves the default context.
-     * <p><b>Don't forget to stop the returned HttpServer after the test</b>
-     *
-     * @param resourceBase the base of resources for the default context
-     * @param classpath additional classpath entries to add (may be null)
-     * @param servlets map of {String, Class} pairs: String is the path spec, while class is the class
-     * @return the started web server
-     * @throws Exception if the test fails
-     */
-    public static Server startWebServer(final String resourceBase, final String[] classpath,
-            final Map<String, Class< ? extends Servlet>> servlets)
-        throws Exception {
-        final Server server = new Server(PORT);
-
-        final WebAppContext context = new WebAppContext();
-        context.setContextPath("/");
-        context.setResourceBase(resourceBase);
-
-        for (final String pathSpec : servlets.keySet()) {
-            final Class< ? extends Servlet> servlet = servlets.get(pathSpec);
-            context.addServlet(servlet, pathSpec);
-        }
-        final WebAppClassLoader loader = new WebAppClassLoader(context);
-        if (classpath != null) {
-            for (final String path : classpath) {
-                loader.addClassPath(path);
-            }
-        }
-        context.setClassLoader(loader);
-        server.setHandler(context);
-        server.start();
-        return server;
-    }
-
-    /**
-     * Stops the web server.
-     *
-     * @param httpServer the web server
-     * @throws Exception if the test fails
-     */
-    public static void stopWebServer(final Server httpServer) throws Exception {
-        if (httpServer != null) {
-            httpServer.stop();
-        }
-    }
-
-    /**
-     * Performs post-test deconstruction.
-     * @throws Exception if an error occurs
-     */
-    @After
-    public void tearDown() throws Exception {
-        stopWebServer(server_);
-        server_ = null;
-    }
-
-    /**
      * Test for feature request 1438216: HttpWebConnection should allow extension to create the HttpClient.
      * @throws Exception if the test fails
      */
     @Test
     public void testDesignedForExtension() throws Exception {
-        server_ = startWebServer("./");
+        startWebServer("./");
 
         final WebClient webClient = new WebClient();
         final boolean[] tabCalled = {false};

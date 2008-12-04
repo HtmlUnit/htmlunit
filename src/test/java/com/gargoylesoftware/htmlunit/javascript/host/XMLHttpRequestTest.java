@@ -31,18 +31,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.httpclient.NameValuePair;
 import org.junit.Test;
-import org.mortbay.jetty.Server;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.HttpMethod;
-import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
@@ -60,7 +58,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Stuart Begg
  * @author Sudhan Moghe
  */
-public class XMLHttpRequestTest extends WebTestCase {
+public class XMLHttpRequestTest extends WebServerTestCase {
 
     private static final String MSG_NO_CONTENT = "no Content";
     private static final String MSG_PROCESSING_ERROR = "error processing";
@@ -1258,17 +1256,12 @@ public class XMLHttpRequestTest extends WebTestCase {
         servlets.put("/test", StreamingServlet.class);
 
         final String resourceBase = "./src/test/resources/com/gargoylesoftware/htmlunit/javascript/host";
-        final Server server = HttpWebConnectionTest.startWebServer(resourceBase, null, servlets);
-        try {
-            final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
-            final HtmlPage page = client.getPage("http://localhost:12345/XMLHttpRequestTest_streaming.html");
-            final HtmlElement body = page.getBody();
-            Thread.sleep(5000);
-            assertEquals(10, body.asText().split("\n").length);
-        }
-        finally {
-            HttpWebConnectionTest.stopWebServer(server);
-        }
+        startWebServer(resourceBase, null, servlets);
+        final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
+        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/XMLHttpRequestTest_streaming.html");
+        final HtmlElement body = page.getBody();
+        Thread.sleep(5000);
+        assertEquals(10, body.asText().split("\n").length);
     }
 
     /**

@@ -45,17 +45,14 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.NameValuePair;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mortbay.jetty.Server;
 import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.HttpMethod;
-import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.ImmediateRefreshHandler;
 import com.gargoylesoftware.htmlunit.IncorrectnessListener;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -66,7 +63,7 @@ import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlElementTest.HtmlAttributeChangeListenerTestImpl;
 
 /**
@@ -81,9 +78,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElementTest.HtmlAttributeChangeLis
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlPageTest extends WebTestCase {
-
-    private Server server_;
+public class HtmlPageTest extends WebServerTestCase {
 
     /**
      * @exception Exception If the test fails
@@ -1895,9 +1890,9 @@ public class HtmlPageTest extends WebTestCase {
         final Map<String, Class< ? extends Servlet>> map = new HashMap<String, Class< ? extends Servlet>>();
         map.put("/one.html", RefreshServlet.class);
         map.put("/two.html", RefreshServlet.class);
-        server_ = HttpWebConnectionTest.startWebServer(".", null, map);
+        startWebServer(".", null, map);
         final WebClient client = new WebClient();
-        final HtmlPage page = client.getPage("http://localhost:" + HttpWebConnectionTest.PORT + "/one.html");
+        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/one.html");
         final HtmlSubmitInput submit = page.getHtmlElementById("myButton");
         final HtmlPage secondPage = submit.click();
         assertEquals("0\nPOST\nsome_name some_value\n", secondPage.getWebResponse().getContentAsString());
@@ -1951,15 +1946,5 @@ public class HtmlPageTest extends WebTestCase {
             }
             resp.getWriter().write(builder.toString());
         }
-    }
-
-    /**
-     * Performs post-test deconstruction.
-     * @throws Exception if an error occurs
-     */
-    @After
-    public void after() throws Exception {
-        HttpWebConnectionTest.stopWebServer(server_);
-        server_ = null;
     }
 }

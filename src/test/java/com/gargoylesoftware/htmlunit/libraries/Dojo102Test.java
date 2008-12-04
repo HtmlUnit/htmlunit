@@ -18,12 +18,10 @@ import java.util.Iterator;
 
 import org.junit.After;
 import org.junit.Test;
-import org.mortbay.jetty.Server;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -38,9 +36,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
-public class Dojo102Test extends WebTestCase {
+public class Dojo102Test extends WebServerTestCase {
 
-    private Server server_;
     private WebClient client_;
 
     private static final String GROUP_DELIMITER = "------------------------------------------------------------";
@@ -50,7 +47,7 @@ public class Dojo102Test extends WebTestCase {
      * @throws Exception if an error occurs
      */
     public Dojo102Test() throws Exception {
-        server_ = HttpWebConnectionTest.startWebServer("src/test/resources/dojo/1.0.2");
+        startWebServer("src/test/resources/dojo/1.0.2");
     }
 
     /**
@@ -59,7 +56,7 @@ public class Dojo102Test extends WebTestCase {
     @Test
     public void dojo() throws Exception {
         client_ = new WebClient(BrowserVersion.FIREFOX_2);
-        final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/util/doh/runner.html";
+        final String url = "http://localhost:" + PORT + "/util/doh/runner.html";
 
         final HtmlPage page = client_.getPage(url);
         page.getEnclosingWindow().getThreadManager().joinAll(10000);
@@ -808,9 +805,9 @@ public class Dojo102Test extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @After
+    @Override
     public void tearDown() throws Exception {
-        HttpWebConnectionTest.stopWebServer(server_);
-        server_ = null;
+        super.tearDown();
         client_.closeAllWindows();
     }
 }

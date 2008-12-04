@@ -30,15 +30,13 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mortbay.jetty.Server;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.DomText;
@@ -54,13 +52,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class Sarissa0993Test extends WebTestCase {
+public class Sarissa0993Test extends WebServerTestCase {
 
-    /** Number of browsers this case will use. */
-    private static final int BROWSERS_COUNTER = 4;
-    private static int Counter_;
-
-    private static Server Server_;
     private static HtmlPage Page_;
 
     /**
@@ -68,23 +61,25 @@ public class Sarissa0993Test extends WebTestCase {
      */
     @Before
     public void init() throws Exception {
-        if (Counter_ < BROWSERS_COUNTER) {
-            if (Server_ == null) {
-                Server_ = HttpWebConnectionTest.startWebServer("src/test/resources/sarissa/" + getVersion());
-            }
-            if (Page_ == null) {
-                final WebClient client = getWebClient();
-                final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/test/testsarissa.html";
-                Page_ = client.getPage(url);
-                Page_.<HtmlButton>getFirstByXPath("//button").click();
+        try {
+            getBrowserVersion();
+        }
+        catch (final Exception e) {
+            return;
+        }
+        startWebServer("src/test/resources/sarissa/" + getVersion());
+        if (Page_ == null) {
+            final WebClient client = getWebClient();
+            final String url = "http://localhost:" + PORT + "/test/testsarissa.html";
+            Page_ = client.getPage(url);
+            Page_.<HtmlButton>getFirstByXPath("//button").click();
 
-                // dump the result page
-                if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null) {
-                    final File tmpDir = new File(System.getProperty("java.io.tmpdir"));
-                    final File f = new File(tmpDir, "sarissa0993_result.html");
-                    FileUtils.writeStringToFile(f, Page_.asXml(), "UTF-8");
-                    getLog().info("Test result written to: " + f.getAbsolutePath());
-                }
+            // dump the result page
+            if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null) {
+                final File tmpDir = new File(System.getProperty("java.io.tmpdir"));
+                final File f = new File(tmpDir, "sarissa0993_result.html");
+                FileUtils.writeStringToFile(f, Page_.asXml(), "UTF-8");
+                getLog().info("Test result written to: " + f.getAbsolutePath());
             }
         }
     }
@@ -184,10 +179,6 @@ public class Sarissa0993Test extends WebTestCase {
      */
     @AfterClass
     public static void clean() throws Exception {
-        if (++Counter_ == BROWSERS_COUNTER) {
-            HttpWebConnectionTest.stopWebServer(Server_);
-            Server_ = null;
-        }
         Page_ = null;
     }
 

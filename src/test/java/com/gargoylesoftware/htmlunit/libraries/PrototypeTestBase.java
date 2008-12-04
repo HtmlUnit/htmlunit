@@ -22,12 +22,10 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.junit.After;
 import org.junit.Before;
-import org.mortbay.jetty.Server;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -39,9 +37,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
-public abstract class PrototypeTestBase extends WebTestCase {
+public abstract class PrototypeTestBase extends WebServerTestCase {
 
-    private Server server_;
     private WebClient webClient_;
 
     /**
@@ -58,7 +55,7 @@ public abstract class PrototypeTestBase extends WebTestCase {
     protected void test(final String filename) throws Exception {
         webClient_ = getWebClient();
         final HtmlPage page =
-            webClient_.getPage("http://localhost:" + HttpWebConnectionTest.PORT + "/test/unit/" + filename);
+            webClient_.getPage("http://localhost:" + PORT + "/test/unit/" + filename);
 
         page.getEnclosingWindow().getThreadManager().joinAll(25000);
 
@@ -116,7 +113,7 @@ public abstract class PrototypeTestBase extends WebTestCase {
      */
     @Before
     public void setUp() throws Exception {
-        server_ = HttpWebConnectionTest.startWebServer("src/test/resources/prototype/" + getVersion());
+        startWebServer("src/test/resources/prototype/" + getVersion());
     }
 
     /**
@@ -125,9 +122,9 @@ public abstract class PrototypeTestBase extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @After
+    @Override
     public void tearDown() throws Exception {
+        super.tearDown();
         webClient_.closeAllWindows();
-        HttpWebConnectionTest.stopWebServer(server_);
-        server_ = null;
     }
 }
