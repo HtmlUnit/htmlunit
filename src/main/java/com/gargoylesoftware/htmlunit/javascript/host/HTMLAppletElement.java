@@ -14,15 +14,24 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.applet.Applet;
+
+import org.mozilla.javascript.NativeJavaObject;
+import org.mozilla.javascript.Scriptable;
+
+import com.gargoylesoftware.htmlunit.html.HtmlApplet;
+
 /**
  * The JavaScript object "HTMLAppletElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class HTMLAppletElement extends HTMLElement {
 
     private static final long serialVersionUID = 1869359649341296910L;
+    private Scriptable appletJSObject_;
 
     /**
      * Create an instance.
@@ -31,4 +40,18 @@ public class HTMLAppletElement extends HTMLElement {
         // Empty.
     }
 
+    /**
+     * Gets the JavaScript object for the applet.
+     * @return the javascript object
+     * @throws Exception in case of problem creating the applet or its JS wrapper
+     */
+    public Object getAppletObject() throws Exception {
+        if (appletJSObject_ == null) {
+            final HtmlApplet appletNode = (HtmlApplet) getDomNodeOrDie();
+            final Applet applet = appletNode.getApplet();
+
+            appletJSObject_ = new NativeJavaObject(getWindow(), applet, applet.getClass());
+        }
+        return appletJSObject_;
+    }
 }

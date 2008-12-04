@@ -218,7 +218,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         final List<Object> elements = array.getElements();
 
         if (index >= 0 && index < elements.size()) {
-            return getScriptableFor(transformer_.transform(elements.get(index)));
+            return getScriptableForElement(transformer_.transform(elements.get(index)));
         }
         return NOT_FOUND;
     }
@@ -329,7 +329,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
                 final String id = ((DomElement) next).getAttribute("id");
                 if (id != null && id.equals(name)) {
                     getLog().debug("Property \"" + name + "\" evaluated (by id) to " + next);
-                    return getScriptableFor(next);
+                    return getScriptableForElement(next);
                 }
             }
             else if (next instanceof WebWindow) {
@@ -337,12 +337,12 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
                 final String windowName = window.getName();
                 if (windowName != null && windowName.equals(name)) {
                     getLog().debug("Property \"" + name + "\" evaluated (by name) to " + window);
-                    return getScriptableFor(window);
+                    return getScriptableForElement(window);
                 }
                 if (getBrowserVersion().isIE() && window instanceof FrameWindow
                         && ((FrameWindow) window).getFrameElement().getAttribute("id").equals(name)) {
                     getLog().debug("Property \"" + name + "\" evaluated (by id) to " + window);
-                    return getScriptableFor(window);
+                    return getScriptableForElement(window);
                 }
             }
             else {
@@ -369,7 +369,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             return array;
         }
         else if (subElements.size() == 1) {
-            final SimpleScriptable singleResult = getScriptableFor(subElements.get(0));
+            final Scriptable singleResult = getScriptableForElement(subElements.get(0));
             getLog().debug("Property \"" + name + "\" evaluated (by name) to " + singleResult);
             return singleResult;
         }
@@ -649,5 +649,20 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             return "[object HTMLCollection]";
         }
         return super.getDefaultValue(hint);
+    }
+
+    /**
+     * Gets the scriptable for the provided element that may already be the right scriptable.
+     * @param object the object for which to get the scriptable
+     * @return the scriptable
+     */
+    protected Scriptable getScriptableForElement(final Object object) {
+        if (object instanceof Scriptable) {
+            return (Scriptable) object;
+        }
+        else if (object instanceof Window) {
+            return new WindowProxy(((Window) object).getWebWindow());
+        }
+        return getScriptableFor(object);
     }
 }

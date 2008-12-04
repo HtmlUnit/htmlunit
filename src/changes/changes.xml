@@ -5,7 +5,10 @@
     </properties>
 
     <body>
-        <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support, MochiKit support">
+        <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support, MochiKit support, minimal applet support">
+            <action type="add" dev="mguillem">
+                First experiments to support applets.
+            </action>
             <action type="update" dev="mguillem">
                 100% success with MochiKit unit tests.
             </action>

@@ -215,6 +215,21 @@ public abstract class WebTestCase {
             final String html, final List<String> collectedAlerts, final URL url) throws Exception {
 
         final WebClient client = new WebClient(browserVersion);
+        return loadPage(client, html, collectedAlerts, url);
+    }
+
+    /**
+     * Load a page with the specified HTML and collect alerts into the list.
+     * @param client the WebClient to use (webConnection and alertHandler will be configured on it)
+     * @param html the HTML to use
+     * @param collectedAlerts the list to hold the alerts
+     * @param url the URL that will use as the document host for this page
+     * @return the new page
+     * @throws Exception if something goes wrong
+     */
+    protected static final HtmlPage loadPage(final WebClient client,
+            final String html, final List<String> collectedAlerts, final URL url) throws Exception {
+
         if (collectedAlerts != null) {
             client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         }
@@ -224,6 +239,20 @@ public abstract class WebTestCase {
         client.setWebConnection(webConnection);
 
         return client.getPage(url);
+    }
+
+    /**
+     * Load a page with the specified HTML and collect alerts into the list.
+     * @param client the WebClient to use (webConnection and alertHandler will be configured on it)
+     * @param html the HTML to use
+     * @param collectedAlerts the list to hold the alerts
+     * @return the new page
+     * @throws Exception if something goes wrong
+     */
+    protected static final HtmlPage loadPage(final WebClient client,
+            final String html, final List<String> collectedAlerts) throws Exception {
+
+        return loadPage(client, html, collectedAlerts, URL_GARGOYLE);
     }
 
     /**

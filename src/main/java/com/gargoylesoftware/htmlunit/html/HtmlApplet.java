@@ -14,9 +14,17 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.applet.Applet;
+import java.io.IOException;
+import java.net.URL;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.html.applets.AppletClassLoader;
+import com.gargoylesoftware.htmlunit.html.applets.AppletStubImpl;
 
 /**
  * Wrapper for the HTML element "applet".
@@ -26,6 +34,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class HtmlApplet extends StyledElement {
 
@@ -33,6 +42,11 @@ public class HtmlApplet extends StyledElement {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "applet";
+
+    private boolean downloaded_;
+    private WebResponse appletWebResponse_;
+    private Applet applet_;
+    private AppletClassLoader appletClassLoader_;
 
     /**
      * Creates a new instance.
@@ -166,5 +180,66 @@ public class HtmlApplet extends StyledElement {
      */
     public final String getVspaceAttribute() {
         return getAttribute("vspace");
+    }
+
+    /**
+     * Gets the applet referenced by this tag. Instantiates it if necessary.
+     * @return the applet
+     * @throws IOException in case of problem
+     */
+    public Applet getApplet() throws IOException {
+        downloadContentIfNeeded();
+        return applet_;
+    }
+
+    /**
+     * Downloads the associated content specified in the code attribute.
+     *
+     * @throws IOException if an error occurs while downloading the content
+     */
+    private void downloadContentIfNeeded() throws IOException {
+        if (!downloaded_) {
+            final HtmlPage page = (HtmlPage) getPage();
+            final WebClient webclient = page.getWebClient();
+
+            final String src = getArchiveAttribute();
+            final URL url = page.getFullyQualifiedUrl(src);
+            appletWebResponse_ = webclient.loadWebResponse(new WebRequestSettings(url));
+
+            downloaded_ = true;
+        }
+
+        appletClassLoader_ = new AppletClassLoader();
+        appletClassLoader_.addToClassPath(appletWebResponse_);
+
+        // simple case in a first time: only one class, the applet
+        final String appletClassName = getCodeAttribute();
+        try {
+            final Class appletClass = appletClassLoader_.loadClass(appletClassName);
+            applet_ = (Applet) appletClass.newInstance();
+            applet_.setStub(new AppletStubImpl(this));
+            applet_.init();
+            applet_.start();
+        }
+        catch (final ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        catch (final InstantiationException e) {
+            throw new RuntimeException(e);
+        }
+        catch (final IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected String asTextInternal() {
+        if (getPage().getWebClient().isAppletEnabled()) {
+            return ""; // is this the best answer?
+        }
+        return super.asTextInternal();
     }
 }

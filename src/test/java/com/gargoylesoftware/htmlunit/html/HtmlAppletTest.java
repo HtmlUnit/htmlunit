@@ -14,10 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.net.URL;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
@@ -28,6 +31,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
 public class HtmlAppletTest extends WebTestCase {
@@ -46,10 +50,55 @@ public class HtmlAppletTest extends WebTestCase {
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
-            + "  <applet id='myId'>\n"
+            + "  <applet id='myId'></object>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPageWithAlerts(html);
         assertTrue(HtmlApplet.class.isInstance(page.getHtmlElementById("myId")));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asText_appletDisabled() throws Exception {
+        final String html = "<html><head>\n"
+            + "</head><body>\n"
+            + "  <applet id='myId'>Your browser doesn't support applets</object>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlApplet appletNode = page.getHtmlElementById("myId");
+        assertEquals("Your browser doesn't support applets", appletNode.asText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asText_appletEnabled() throws Exception {
+        final String html = "<html><head>\n"
+            + "</head><body>\n"
+            + "  <applet id='myId'>Your browser doesn't support applets</object>\n"
+            + "</body></html>";
+
+        final WebClient webClient = loadPage(html).getWebClient();
+        webClient.setAppletEnabled(true);
+        final HtmlPage page = webClient.getPage(URL_FIRST);
+        final HtmlApplet appletNode = page.getHtmlElementById("myId");
+        assertEquals("", appletNode.asText()); // should we display something else?
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void simpleInstantiation() throws Exception {
+        final URL url = getClass().getResource("/applets/emptyApplet.html");
+
+        final HtmlPage page = getWebClient().getPage(url);
+        final HtmlApplet appletNode = page.getHtmlElementById("myApp");
+
+        assertEquals("net.sourceforge.htmlunit.testapplets.EmptyApplet", appletNode.getApplet().getClass().getName());
     }
 }

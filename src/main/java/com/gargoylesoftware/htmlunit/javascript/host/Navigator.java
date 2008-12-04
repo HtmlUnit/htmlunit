@@ -203,11 +203,11 @@ public final class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Returns <tt>false</tt> always as Java support is not enabled in HtmlUnit.
-     * @return false
+     * Indicates if Java is enabled.
+     * @return true/false (see {@link com.gargoylesoftware.htmlunit.WebClient#isAppletEnabled()}
      */
     public boolean jsxFunction_javaEnabled() {
-        return false;
+        return getWindow().getWebWindow().getWebClient().isAppletEnabled();
     }
 
     /**

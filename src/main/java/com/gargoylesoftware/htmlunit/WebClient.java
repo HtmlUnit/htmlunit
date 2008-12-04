@@ -120,6 +120,7 @@ public class WebClient implements Serializable {
     private JavaScriptEngine scriptEngine_;
     private boolean javaScriptEnabled_ = true;
     private boolean cssEnabled_ = true;
+    private boolean appletEnabled_ = false;
     private boolean popupBlockerEnabled_;
     private String homePage_;
     private final Map<String, String> requestHeaders_ = Collections.synchronizedMap(new HashMap<String, String>(89));
@@ -639,6 +640,27 @@ public class WebClient implements Serializable {
      */
     public boolean isCssEnabled() {
         return cssEnabled_;
+    }
+
+    /**
+     * Enables/disables Applet support. By default, this property is disabled.<br/>
+     * <p>
+     * Note: as of HtmlUnit-2.4, Applet support is experimental and minimal
+     * </p>
+     * @param enabled <tt>true</tt> to enable Applet support
+     * @since HtmlUnit-2.4
+     */
+    public void setAppletEnabled(final boolean enabled) {
+        appletEnabled_ = enabled;
+    }
+
+    /**
+     * Returns <tt>true</tt> if Applet are enabled.
+     *
+     * @return <tt>true</tt> if Applet is enabled
+     */
+    public boolean isAppletEnabled() {
+        return appletEnabled_;
     }
 
     /**
