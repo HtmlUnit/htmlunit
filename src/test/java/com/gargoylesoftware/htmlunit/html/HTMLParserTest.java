@@ -14,15 +14,28 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.Servlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mortbay.jetty.Server;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -42,6 +55,18 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  */
 @RunWith(BrowserRunner.class)
 public class HTMLParserTest extends WebTestCase {
+
+    private Server server_;
+
+    /**
+     * Performs post-test deconstruction.
+     * @throws Exception if an error occurs
+     */
+    @After
+    public void tearDown() throws Exception {
+        HttpWebConnectionTest.stopWebServer(server_);
+        server_ = null;
+    }
 
     /**
      * Tests the new HTMLParser on a simple HTML string.
@@ -595,5 +620,87 @@ public class HTMLParserTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(browserVersion, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    public void headerVsMetaTagContentType_both() throws Exception {
+        HeaderVsMetaTagContentTypeServlet.setEncoding("UTF-8", "ISO-8859-1");
+        headerVsMetaTagContentType(true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    public void headerVsMetaTagContentType_bothReversed() throws Exception {
+        HeaderVsMetaTagContentTypeServlet.setEncoding("ISO-8859-1", "UTF-8");
+        headerVsMetaTagContentType(false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void headerVsMetaTagContentType4_headerOnly() throws Exception {
+        HeaderVsMetaTagContentTypeServlet.setEncoding("UTF-8", null);
+        headerVsMetaTagContentType(true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void headerVsMetaTagContentType_metaOnly() throws Exception {
+        HeaderVsMetaTagContentTypeServlet.setEncoding(null, "UTF-8");
+        headerVsMetaTagContentType(true);
+    }
+
+    private void headerVsMetaTagContentType(final boolean utf8Encoded) throws Exception {
+        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        servlets.put("/test", HeaderVsMetaTagContentTypeServlet.class);
+        server_ = HttpWebConnectionTest.startWebServer("./", null, servlets);
+
+        final WebClient client = new WebClient();
+        final HtmlPage page = client.getPage("http://localhost:" + HttpWebConnectionTest.PORT + "/test");
+        assertEquals(utf8Encoded, HeaderVsMetaTagContentTypeServlet.utf8String.equals(page.asText()));
+    }
+
+    /**
+     * Servlet for {@link #headerVsMetaTagContentType()}.
+     */
+    public static class HeaderVsMetaTagContentTypeServlet extends HttpServlet {
+        private static final long serialVersionUID = -2575819782522464907L;
+        private static final String utf8String = "\u064A\u0627 \u0644\u064A\u064A\u064A\u064A\u0644";
+        private static String HEADER_ENCODING_;
+        private static String META_TAG_ENCODING_;
+
+        private static void setEncoding(final String headerEncoding, final String metaTagEncoding) {
+            HEADER_ENCODING_ = headerEncoding;
+            META_TAG_ENCODING_ = metaTagEncoding;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            response.setContentType("text/html");
+            if (HEADER_ENCODING_ != null) {
+                response.setCharacterEncoding(HEADER_ENCODING_);
+            }
+            final Writer writer = new OutputStreamWriter(response.getOutputStream(), "UTF-8");
+            String html = "<html><head>";
+            if (META_TAG_ENCODING_ != null) {
+                html += "<META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=" + META_TAG_ENCODING_ + "'>";
+            }
+            html += "</head><body>" + utf8String + "</body></html>";
+            writer.write(html);
+            writer.close();
+        }
     }
 }
