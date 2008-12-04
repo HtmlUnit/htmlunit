@@ -15,34 +15,28 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.IOException;
-import java.net.URL;
 
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mortbay.jetty.Server;
 
-import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebServerTestCase;
 
 /**
  * Tests for {@link HtmlImage}.
  *
  * @version $Revision$
  * @author Knut Johannes Dahle
+ * @author Ahmed Ashour
  */
-
-public class HtmlImageDownloadTest extends WebTestCase {
+public class HtmlImageDownloadTest extends WebServerTestCase {
     private static final String base_file_path_ = "src/test/resources/com/gargoylesoftware/htmlunit/html";
-    private Server server_ = HttpWebConnectionTest.startWebServer(base_file_path_);
-    private URL url_ = new URL("http", "localhost", HttpWebConnectionTest.PORT, "");
 
     /**
      * Constructor.
      * @throws Exception if an exception occurs
      */
     public HtmlImageDownloadTest() throws Exception {
-        //not very empty :)
+        startWebServer(base_file_path_);
     }
 
     /**
@@ -109,23 +103,13 @@ public class HtmlImageDownloadTest extends WebTestCase {
     }
 
     /**
-     * Performs post-test deconstruction.
-     * @throws Exception if an error occurs
-     */
-    @After
-    public void teardown() throws Exception {
-        HttpWebConnectionTest.stopWebServer(server_);
-        server_ = null;
-    }
-
-    /**
-     * Common code for the tests to load the testpage and fecth the HtmlImage object.
-     * @param id value of img id attribute
+     * Common code for the tests to load the testpage and fetch the HtmlImage object.
+     * @param id value of image id attribute
      * @return the found HtmlImage
      * @throws Exception if an error occurs
      */
     private HtmlImage getHtmlElementToTest(final String id) throws Exception {
-        final String url = url_.toString() + "/HtmlImageDownloadTest.html";
+        final String url = "http://localhost:" + PORT + "/HtmlImageDownloadTest.html";
         final HtmlPage page = loadUrl(url);
         return (HtmlImage) page.getElementById(id);
     }

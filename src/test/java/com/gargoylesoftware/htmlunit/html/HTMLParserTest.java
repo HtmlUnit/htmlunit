@@ -665,7 +665,7 @@ public class HTMLParserTest extends WebTestCase {
         servlets.put("/test", HeaderVsMetaTagContentTypeServlet.class);
         server_ = HttpWebConnectionTest.startWebServer("./", null, servlets);
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final HtmlPage page = client.getPage("http://localhost:" + HttpWebConnectionTest.PORT + "/test");
         assertEquals(utf8Encoded, HeaderVsMetaTagContentTypeServlet.utf8String.equals(page.asText()));
     }
