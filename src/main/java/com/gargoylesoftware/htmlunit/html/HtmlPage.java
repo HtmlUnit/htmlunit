@@ -71,6 +71,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParser.HtmlUnitDOMBuilder;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -131,6 +132,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     private List<HtmlAttributeChangeListener> attributeListeners_;
     private final transient Object lock_ = new Object(); // used for synchronization
     private final Range selection_ = new SimpleRange(getDocumentElement());
+    private final List<PostponedAction> afterLoadActions_ = new ArrayList<PostponedAction>();
 
     /**
      * Creates an instance of HtmlPage.
@@ -169,7 +171,28 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         executeDeferredScriptsIfNeeded();
         setReadyStateOnDeferredScriptsIfNeeded();
         executeEventHandlersIfNeeded(Event.TYPE_LOAD);
+        final List<PostponedAction> actions = new ArrayList<PostponedAction>(afterLoadActions_);
+        afterLoadActions_.clear();
+        try {
+            for (final PostponedAction action : actions) {
+                action.execute();
+            }
+        }
+        catch (final IOException e) {
+            throw e;
+        }
+        catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
         executeRefreshIfNeeded();
+    }
+
+    /**
+     * Adds an action that should be executed once the page has been loaded.
+     * @param action the action
+     */
+    void addAfterLoadAction(final PostponedAction action) {
+        afterLoadActions_.add(action);
     }
 
     /**

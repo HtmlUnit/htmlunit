@@ -135,7 +135,17 @@ public class HTMLImageElementTest extends WebTestCase {
      */
     @Test
     public void onLoad_calledWhenImageDownloaded_static() throws Exception {
-        final String html = "<html><body><img src='" + URL_SECOND + "' onload='alert(1)'></body></html>";
+        final String html = "<html><body><img src='" + URL_SECOND + "' onload='test()'>\n"
+            + "<script>\n"
+            + "  alert(0)\n" // first script to be sure that img onload doesn't get executed after first JS execution
+            + "</script>\n"
+            + "<script>\n"
+            + "function test()\n"
+            + "{\n"
+            + "  alert(1)\n"
+            + "}\n"
+            + "</script>\n"
+            + "</body></html>";
 
         final WebClient client = getWebClient();
 
@@ -150,7 +160,7 @@ public class HTMLImageElementTest extends WebTestCase {
         client.getPage(URL_FIRST);
         assertEquals(URL_SECOND, conn.getLastWebRequestSettings().getUrl());
 
-        final String[] expected = {"1"};
+        final String[] expected = {"0", "1"};
         assertEquals(expected, actual);
     }
 

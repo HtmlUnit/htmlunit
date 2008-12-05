@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
 
@@ -102,10 +103,14 @@ public class HtmlImage extends ClickableElement {
      * handler the first time it is invoked.</p>
      */
     public void doOnLoad() {
-        if (onloadInvoked_) {
+        if (!(getPage() instanceof HtmlPage)) {
+            return; // nothing to do if embedded in XML code
+        }
+        else if (onloadInvoked_) {
             return;
         }
         onloadInvoked_ = true;
+        final HtmlPage htmlPage = (HtmlPage) getPage();
         final Function onload = getEventHandler("onload");
         if (onload != null) {
             // An onload handler is defined; we need to download the image and then call the onload
@@ -122,7 +127,19 @@ public class HtmlImage extends ClickableElement {
             // If the download was a success, trigger the onload handler.
             if (ok) {
                 final Event event = new Event(this, Event.TYPE_LOAD);
-                ((Node) getScriptObject()).executeEvent(event);
+                final Node scriptObject = (Node) getScriptObject();
+                final PostponedAction action = new PostponedAction() {
+                    public void execute() throws Exception {
+                        scriptObject.executeEvent(event);
+                    }
+                };
+                final String readyState = htmlPage.getReadyState();
+                if (READY_STATE_LOADING.equals(readyState)) {
+                    htmlPage.addAfterLoadAction(action);
+                }
+                else {
+                    htmlPage.getWebClient().getJavaScriptEngine().addPostponedAction(action);
+                }
             }
             else {
                 LOG.debug("Unable to download image for tag " + this + "; not firing onload event.");

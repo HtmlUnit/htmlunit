@@ -470,12 +470,7 @@ public class JavaScriptEngine implements Serializable {
 
         synchronized (htmlPage) { // 2 scripts can't be executed in parallel for one page
             final Object result = function.call(context, scope, thisObject, args);
-            try {
-                processPostponedActions();
-            }
-            catch (final Exception e) {
-                Context.throwAsScriptRuntimeEx(e);
-            }
+            processPostponedActions();
             return result;
         }
     }
@@ -535,12 +530,17 @@ public class JavaScriptEngine implements Serializable {
         protected abstract String getSourceCode(final Context cx);
     }
 
-    private void processPostponedActions() throws Exception {
+    private void processPostponedActions() {
         final List<PostponedAction> actions = postponedActions_.get();
         postponedActions_.set(null);
         if (actions != null) {
-            for (final PostponedAction action : actions) {
-                action.execute();
+            try {
+                for (final PostponedAction action : actions) {
+                    action.execute();
+                }
+            }
+            catch (final Exception e) {
+                Context.throwAsScriptRuntimeEx(e);
             }
         }
     }
