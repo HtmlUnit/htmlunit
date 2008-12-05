@@ -20,6 +20,7 @@ import static org.junit.Assert.assertSame;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -32,6 +33,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class HtmlTableTest extends WebTestCase {
     static final String LS = System.getProperty("line.separator");
@@ -380,5 +382,28 @@ public class HtmlTableTest extends WebTestCase {
             + "cell 2,1\tcell 2,2";
 
         assertEquals(expectedText, table.asText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asXml_emptyTable() throws Exception {
+        final String html = "<html>\n"
+            + "<head/>\n"
+            + "<body>\n"
+            + "<div style=\"visibility: hidden\">\n"
+            + "<table>\n"
+            + "</table>\n"
+            + "</div>\n"
+            + "after the div\n"
+            + "</body>\n"
+            + "</html>";
+
+        final HtmlPage page = loadPage(html);
+
+        String asXmlCleaned = page.asXml().replaceAll("  +", "").replaceAll("\\n+\\n", "\n");
+        asXmlCleaned = StringUtils.substringAfter(asXmlCleaned, "?>").trim(); // remove doctype
+        assertEquals(html, asXmlCleaned);
     }
 }

@@ -420,4 +420,13 @@ public class HtmlTable extends ClickableElement {
     protected boolean isBlock() {
         return true;
     }
+
+    /**
+     * {@inheritDoc}
+     * @return <code>true</code> as browsers ignore self closing <code>table</code> tags.
+     */
+    @Override
+    protected boolean isEmptyXmlTagExpanded() {
+        return true;
+    }
 }
