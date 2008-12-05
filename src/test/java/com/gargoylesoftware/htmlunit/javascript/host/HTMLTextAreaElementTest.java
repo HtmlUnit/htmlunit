@@ -90,7 +90,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
     }
 
     /**
-     * type(...) should not trigger onchange!
+     * Method type(...) should not trigger onchange!
      * @throws Exception if the test fails
      */
     @Test
