@@ -46,8 +46,8 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     public static final String TAG_NAME = "textarea";
 
     private String defaultValue_;
-
     private boolean preventDefault_;
+    private String valueAtFocus_;
 
     /**
      * Creates an instance.
@@ -126,6 +126,13 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      */
     public final void setText(final String newValue) {
         initDefaultValue();
+        setTextInternal(newValue);
+
+        HtmlInput.executeOnChangeHandlerIfAppropriate(this);
+    }
+
+    private void setTextInternal(final String newValue) {
+        initDefaultValue();
         final DomText child = (DomText) getFirstChild();
         if (child == null) {
             final DomText newChild = new DomText(getPage(), newValue);
@@ -134,8 +141,6 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
         else {
             child.setData(newValue);
         }
-
-        HtmlInput.executeOnChangeHandlerIfAppropriate(this);
 
         setSelectionStart(newValue.length());
         setSelectionEnd(newValue.length());
@@ -457,11 +462,11 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
         final String text = getText();
         if (c == '\b') {
             if (text.length() > 0) {
-                setText(text.substring(0, text.length() - 1));
+                setTextInternal(text.substring(0, text.length() - 1));
             }
         }
         else if ((c == ' ' || c == '\n' || c == '\r' || !Character.isWhitespace(c))) {
-            setText(text + c);
+            setTextInternal(text + c);
         }
     }
 
@@ -488,10 +493,21 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     @Override
     public void focus() {
         super.focus();
+        valueAtFocus_ = getText();
         if (getPage() instanceof HtmlPage) {
             final Range selection = ((HtmlPage) getPage()).getSelection();
             selection.setStart(this, 0);
             selection.setEnd(this, getText().length());
         }
+    }
+
+    @Override
+    void removeFocus() {
+        super.removeFocus();
+
+        if (!valueAtFocus_.equals(getText())) {
+            HtmlInput.executeOnChangeHandlerIfAppropriate(this);
+        }
+        valueAtFocus_ = null;
     }
 }

@@ -90,6 +90,46 @@ public class HTMLTextAreaElementTest extends WebTestCase {
     }
 
     /**
+     * type(...) should not trigger onchange!
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void type_onchange() throws Exception {
+        final String content
+            = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function changed(e) {\n"
+            + "    log('changed: ' + e.value)\n"
+            + "  }\n"
+            + "  function keypressed(e) {\n"
+            + "    log('keypressed: ' + e.value)\n"
+            + "  }\n"
+            + "  function log(msg) {\n"
+            + "    document.getElementById('log').value += msg + '\\n';\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "<textarea id='textArea1' onchange='changed(this)' onkeypress='keypressed(this)'></textarea>\n"
+            + "<textarea id='log'></textarea>"
+            + "</form>"
+            + "</body></html>";
+        final HtmlPage page = loadPage(content);
+        final HtmlTextArea textArea = page.getHtmlElementById("textArea1");
+        textArea.type("hello");
+        page.setFocusedElement(null); // remove focus on textarea to trigger onchange
+
+        final HtmlTextArea log = page.getHtmlElementById("log");
+        final String expectation = "keypressed: \n"
+            + "keypressed: h\n"
+            + "keypressed: he\n"
+            + "keypressed: hel\n"
+            + "keypressed: hell\n"
+            + "changed: hello\n";
+        assertEquals(expectation, log.asText());
+    }
+
+    /**
      * Tests that setValue doesn't has side effect. Test for bug 1155063.
      * @throws Exception if the test fails
      */

@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support, MochiKit support, minimal applet support">
+            <action type="fix" dev="mguillem">
+                HtmlTextArea.type(...) should not trigger onchange handler.
+            </action>
             <action type="fix" dev="mguillem" id="2382872">
                 Delay execution of image onload handlers after the page finish to load.
             </action>
