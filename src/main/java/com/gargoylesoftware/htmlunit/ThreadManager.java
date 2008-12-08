@@ -20,6 +20,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -67,7 +68,7 @@ public class ThreadManager {
     /**
      * Threads are given numeric IDs in JavaScript and that number is stored here.
      */
-    private static int NEXT_THREAD_ID_ = 1;
+    private static AtomicInteger NEXT_THREAD_ID_ = new AtomicInteger(1);
 
     /**
      * HtmlUnit threads are started at a higher priority than the priority
@@ -79,14 +80,6 @@ public class ThreadManager {
     private static final int PRIORITY = Math.min(Thread.MAX_PRIORITY, Thread
             .currentThread()
             .getPriority() + 1);
-
-    /**
-     * Gets the next thread ID in a threadsafe way.
-     * @return the next ID
-     */
-    private static synchronized int getNextThreadId() {
-        return NEXT_THREAD_ID_++;
-    }
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
@@ -114,7 +107,7 @@ public class ThreadManager {
             return 0;
         }
 
-        final int threadId = getNextThreadId();
+        final int threadId = NEXT_THREAD_ID_.getAndIncrement();
         final Thread newThread = new Thread(job, "HtmlUnit Managed Thread #" + threadId
             + " for WebWindow " + ww.getName() + ": " + label) {
             @Override
