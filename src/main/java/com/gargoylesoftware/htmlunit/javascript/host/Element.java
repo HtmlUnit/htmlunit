@@ -97,10 +97,16 @@ public class Element extends EventNode {
      * @param attributeName attribute name
      * @return the value of the specified attribute, <code>null</code> if the attribute is not defined
      */
-    public String jsxFunction_getAttribute(String attributeName) {
+    public Object jsxFunction_getAttribute(String attributeName) {
         attributeName = fixAttributeName(attributeName);
         final String value = ((DomElement) getDomNodeOrDie()).getAttribute(attributeName);
         if (value == DomElement.ATTRIBUTE_NOT_DEFINED) {
+            if (getBrowserVersion().isIE()) {
+                final Object property = get(attributeName, this);
+                if (property != NOT_FOUND) {
+                    return property;
+                }
+            }
             return null;
         }
         return value;

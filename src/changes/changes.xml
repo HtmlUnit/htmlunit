@@ -6,6 +6,10 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support, MochiKit support, minimal applet support">
+            <action type="update" dev="mguillem">
+                JavaScript: removeAttribute should delete node property too (IE only),
+                getAttribute returns property if no attribute is found (IE only).
+            </action>
             <action type="fix" dev="mguillem" id="2214332">
                 JavaScript: fixed exception occurring while accessing src property of freshly created Image object.
             </action>

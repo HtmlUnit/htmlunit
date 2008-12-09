@@ -437,6 +437,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     public void jsxFunction_removeAttribute(final String name) {
         getHtmlElementOrDie().removeAttribute(name);
+        if (getBrowserVersion().isIE()) {
+            delete(name);
+        }
     }
 
     /**

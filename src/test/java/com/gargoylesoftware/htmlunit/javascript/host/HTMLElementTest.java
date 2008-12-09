@@ -1313,6 +1313,34 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
+     * IE doesn't really make a distinction between property and attribute...
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "hello", "null", "hello" }, IE = { "hello", "hello", "undefined" })
+    public void removeAttribute_property() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "    <title>Test</title>\n"
+            + "    <script>\n"
+            + "    function doTest() {\n"
+            + "       var myDiv = document.getElementById('aDiv');\n"
+            + "       myDiv.foo = 'hello';\n"
+            + "       alert(myDiv.foo);\n"
+            + "       alert(myDiv.getAttribute('foo'));\n"
+            + "       myDiv.removeAttribute('foo');\n"
+            + "       alert(myDiv.foo);\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'><div id='aDiv' name='removeMe'>\n"
+            + "</div></body>\n"
+            + "</html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
      * Test offsets (real values don't matter currently).
      *
      * @throws Exception if the test fails
@@ -2512,6 +2540,29 @@ public class HTMLElementTest extends WebTestCase {
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "<div id='div1'>\n"
+            + "</div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ ">myClass<", "> myId  <" })
+    public void attributes_trimmed() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var div1 = document.body.firstChild;\n"
+            + "  alert('>' + div1.className + '<');\n"
+            + "  alert('>' + div1.id + '<');\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>"
+            + "<div id=' myId  ' class=' myClass '>\n"
+            + "hello"
             + "</div>\n"
             + "</body></html>";
 
