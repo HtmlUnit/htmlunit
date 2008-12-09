@@ -2550,7 +2550,9 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ ">myClass<", "> myId  <" })
+    @NotYetImplemented(Browser.FF)
+    @Alerts(FF = { ">myClass<", "> myId  <" },
+            IE = { "> myClass <", "> myId  <" })
     public void attributes_trimmed() throws Exception {
         final String html
             = "<html><head>\n"
