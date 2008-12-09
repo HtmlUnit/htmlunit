@@ -144,6 +144,8 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
      */
     private File createFile(final URL url, final String extension) throws IOException {
         String name = url.getPath().replaceFirst("/$", "").replaceAll(".*/", "");
+        name = StringUtils.substringBefore(name, "?"); // remove query
+        name = StringUtils.substringBefore(name, ";"); // remove additional info
         if (!name.endsWith(extension)) {
             name += extension;
         }
