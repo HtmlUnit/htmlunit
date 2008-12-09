@@ -89,7 +89,11 @@ public class HTMLImageElement extends HTMLElement {
                 throw Context.reportRuntimeError(msg);
             }
         }
+
         // This is an image instantiated in JavaScript via "new Image()" and not yet added to the DOM tree.
+        if (src_ == null) {
+            return ""; // src property has not yet been set
+        }
         final WebClient webClient = getWindow().getWebWindow().getWebClient();
         final HtmlPage currentPage = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
         try {

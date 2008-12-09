@@ -60,6 +60,24 @@ public class HTMLImageElementTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void getSrc_newImage_srcNotSet() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function doTest(){\n"
+            + "    var oImg = new Image();\n"
+            + "    alert(oImg.src);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
      * This test verifies that when JavaScript is used to modify the <tt>src</tt> attribute, the value is
      * persisted to the corresponding <tt>&lt;img&gt;</tt> node in the DOM tree.
      * @throws Exception if the test fails

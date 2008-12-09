@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support, MochiKit support, minimal applet support">
+            <action type="fix" dev="mguillem" id="2214332">
+                JavaScript: fixed exception occurring while accessing src property of freshly created Image object.
+            </action>
             <action type="fix" dev="mguillem" id="2393355">
                 HtmlPage.asXml(): expand empty table nodes to make generated XML readable as HTML on browsers.
             </action>
