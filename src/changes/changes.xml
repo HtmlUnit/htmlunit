@@ -5,7 +5,10 @@
     </properties>
 
     <body>
-        <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support, MochiKit support, minimal applet support">
+        <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support, MochiKit support, minimal applet support, IE conditional comments">
+            <action type="add" dev="mguillem">
+                Support for IE conditional comments in HTML code.
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript: removeAttribute should delete node property too (IE only),
                 getAttribute returns property if no attribute is found (IE only).

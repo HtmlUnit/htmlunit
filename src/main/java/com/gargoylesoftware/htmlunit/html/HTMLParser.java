@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.xerces.parsers.AbstractSAXParser;
 import org.apache.xerces.util.DefaultErrorHandler;
 import org.apache.xerces.xni.Augmentations;
@@ -31,8 +32,10 @@ import org.apache.xerces.xni.XMLAttributes;
 import org.apache.xerces.xni.XNIException;
 import org.apache.xerces.xni.parser.XMLInputSource;
 import org.apache.xerces.xni.parser.XMLParseException;
+import org.apache.xerces.xni.parser.XMLParserConfiguration;
 import org.cyberneko.html.HTMLConfiguration;
 import org.cyberneko.html.HTMLEventInfo;
+import org.cyberneko.html.HTMLScanner;
 import org.cyberneko.html.HTMLTagBalancingListener;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -42,10 +45,12 @@ import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.LexicalHandler;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebAssert;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLBodyElement;
@@ -369,7 +374,7 @@ public final class HTMLParser {
          * @param webWindow the web window into which the page is to be loaded
          */
         private HtmlUnitDOMBuilder(final DomNode page, final URL url) {
-            super(new HTMLConfiguration());
+            super(createConfiguration(page.getPage().getWebClient()));
             this.page_ = (HtmlPage) page.getPage();
 
             currentNode_ = page;
@@ -395,11 +400,29 @@ public final class HTMLParser {
 
                 setContentHandler(this);
                 setLexicalHandler(this); //comments and CDATA
-
             }
             catch (final SAXException e) {
                 throw new ObjectInstantiationException("unable to create HTML parser", e);
             }
+        }
+
+        /**
+         * Create the configuration depending on the simulated browser
+         * @param webClient the current WebClient
+         * @return the configuration
+         */
+        private static XMLParserConfiguration createConfiguration(final WebClient webClient) {
+            final BrowserVersion browserVersion = webClient.getBrowserVersion();
+            // for IE we need a special scanner that will be able to understand conditional comments
+            if (browserVersion.isIE()) {
+                return new HTMLConfiguration() {
+                    @Override
+                    protected HTMLScanner createDocumentScanner() {
+                        return new HTMLScannerForIE(browserVersion);
+                    }
+                };
+            }
+            return new HTMLConfiguration();
         }
 
         /**
@@ -787,3 +810,32 @@ class HTMLErrorHandler extends DefaultErrorHandler {
                 key);
     }
 }
+
+class HTMLScannerForIE extends org.cyberneko.html.HTMLScanner {
+    HTMLScannerForIE(final BrowserVersion browserVersion) {
+        fContentScanner = new ContentScannerForIE(browserVersion);
+    }
+
+    class ContentScannerForIE extends HTMLScanner.ContentScanner {
+        private final BrowserVersion browserVersion_;
+
+        ContentScannerForIE(final BrowserVersion browserVersion) {
+            browserVersion_ = browserVersion;
+        }
+
+        @Override
+        protected void scanComment() throws IOException {
+            final String s = nextContent(30); // [if ...
+            if (s.startsWith("[if ") && s.contains("]>")) {
+                final String condition = StringUtils.substringBefore(s.substring(4), "]>");
+                if (IEConditionalCommentExpressionEvaluator.evaluate(condition, browserVersion_)) {
+                    // skip until ">"
+                    skip(">", false);
+                    return;
+                }
+            }
+            super.scanComment();
+        }
+    }
+}
+
