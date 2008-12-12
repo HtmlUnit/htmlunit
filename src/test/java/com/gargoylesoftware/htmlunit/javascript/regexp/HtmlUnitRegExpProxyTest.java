@@ -425,4 +425,27 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
         loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void $() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var value = ''.replace(/\\${/g, '');\n"
+            + "    alert(value)\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {""};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
+        loadPage(html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
