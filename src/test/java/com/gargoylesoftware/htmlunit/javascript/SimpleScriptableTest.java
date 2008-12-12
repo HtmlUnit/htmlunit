@@ -160,6 +160,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("TreeWalker");
         names.remove("UIEvent");
         names.remove("Window");
+        names.remove("WindowProxy");
         names.remove("XMLDocument");
         names.remove("XMLDOMParseError");
         names.remove("XMLHttpRequest");
@@ -174,7 +175,7 @@ public class SimpleScriptableTest extends WebTestCase {
         for (final Class< ? extends SimpleScriptable> clazz : map.values()) {
             hostClassNames.add(ClassUtils.getShortClassName(clazz));
         }
-        assertEquals(new TreeSet<String>(names), new TreeSet<String>(hostClassNames));
+        assertEquals(new TreeSet<String>(names).toString(), new TreeSet<String>(hostClassNames).toString());
     }
 
     private Set<String> getFileNames(final String directoryName) {

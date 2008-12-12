@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support, MochiKit support, minimal applet support, IE conditional comments">
+            <action type="fix" dev="mguillem" id="2314485">
+                JavaScript: frame window object retrieved through should be live and reflect page loads in the window.
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript: do not throw exception on invalid regular expressions.
             </action>

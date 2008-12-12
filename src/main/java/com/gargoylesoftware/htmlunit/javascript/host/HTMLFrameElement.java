@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import org.mozilla.javascript.Scriptable;
+
 import com.gargoylesoftware.htmlunit.html.BaseFrame;
 
 /**
@@ -59,8 +61,8 @@ public class HTMLFrameElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/contentwindow.asp">
      * MSDN documentation</a>
      */
-    public Window jsxGet_contentWindow() {
-        return (Window) getFrame().getEnclosedWindow().getScriptObject();
+    public Scriptable jsxGet_contentWindow() {
+        return new WindowProxy(getFrame().getEnclosedWindow());
     }
 
     /**

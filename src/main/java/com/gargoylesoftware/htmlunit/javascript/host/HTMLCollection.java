@@ -660,6 +660,9 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         if (object instanceof Scriptable) {
             return (Scriptable) object;
         }
+        else if (object instanceof WebWindow) {
+            return new WindowProxy((WebWindow) object);
+        }
         return getScriptableFor(object);
     }
 }

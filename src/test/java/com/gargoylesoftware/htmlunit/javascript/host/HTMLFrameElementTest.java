@@ -31,7 +31,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -295,9 +294,8 @@ public class HTMLFrameElementTest extends WebTestCase {
      * See https://sourceforge.net/tracker/?func=detail&atid=448266&aid=2314485&group_id=47038
      * @throws Exception if the test fails
      */
-    @Alerts({ "", "oFrame.foo: undefined", "frame1.html", "oFrame.foo: foo of frame 1",
-        "frame2.html", "oFrame.foo: foo of frame 2" })
-    @NotYetImplemented
+    @Alerts({ "about:blank", "oFrame.foo: undefined", "/frame1.html", "oFrame.foo: foo of frame 1",
+        "/frame2.html", "oFrame.foo: foo of frame 2" })
     @Test
     public void changingFrameDocumentLocation() throws Exception {
         final WebClient webClient = getWebClient();
@@ -312,7 +310,10 @@ public class HTMLFrameElementTest extends WebTestCase {
             + "  oFrame = self.frames['theFrame'];\n"
             + "}\n"
             + "function test(fileName) {\n"
-            + "  alert(oFrame.document.location.pathname);\n"
+            + "  if (oFrame.document.location == 'about:blank')\n" // to avoid different expectations for IE and FF
+            + "    alert('about:blank');\n"
+            + "  else\n"
+            + "    alert(oFrame.document.location.pathname);\n"
             + "  alert('oFrame.foo: ' + oFrame.foo);\n"
             + "  oFrame.document.location.href = fileName;\n"
             + "}\n"

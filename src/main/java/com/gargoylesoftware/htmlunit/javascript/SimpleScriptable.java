@@ -452,4 +452,15 @@ public class SimpleScriptable extends ScriptableObject {
 
         return super.hasInstance(instance);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected Object equivalentValues(Object value) {
+        if (value instanceof SimpleScriptableProxy) {
+            value = ((SimpleScriptableProxy) value).getWrappedScriptable();
+        }
+        return super.equivalentValues(value);
+    }
 }
