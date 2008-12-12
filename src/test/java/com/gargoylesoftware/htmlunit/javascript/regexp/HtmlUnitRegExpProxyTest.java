@@ -430,7 +430,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void $() throws Exception {
+    public void dollarSignAndCurlyBracket() throws Exception {
         if (notYetImplemented()) {
             return;
         }
