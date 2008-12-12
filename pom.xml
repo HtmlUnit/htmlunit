@@ -162,6 +162,11 @@
                         </reports>
                     </reportSet>
                 </reportSets>
+                <configuration>
+                    <issueLinkTemplate>
+                        http://sourceforge.net/support/tracker.php?aid=%ISSUE%
+                    </issueLinkTemplate>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
