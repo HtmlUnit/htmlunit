@@ -6,7 +6,7 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support, MochiKit support, minimal applet support, IE conditional comments">
-            <action type="fix" dev="mguillem" id="2314485">
+            <action type="fix" dev="mguillem" issue="2314485">
                 JavaScript: frame window object retrieved through should be live and reflect page loads in the window.
             </action>
             <action type="update" dev="mguillem">
@@ -19,16 +19,16 @@
                 JavaScript: removeAttribute should delete node property too (IE only),
                 getAttribute returns property if no attribute is found (IE only).
             </action>
-            <action type="fix" dev="mguillem" id="2214332">
+            <action type="fix" dev="mguillem" issue="2214332">
                 JavaScript: fixed exception occurring while accessing src property of freshly created Image object.
             </action>
-            <action type="fix" dev="mguillem" id="2393355">
+            <action type="fix" dev="mguillem" issue="2393355">
                 HtmlPage.asXml(): expand empty table nodes to make generated XML readable as HTML on browsers.
             </action>
             <action type="fix" dev="mguillem">
                 HtmlTextArea.type(...) should not trigger onchange handler.
             </action>
-            <action type="fix" dev="mguillem" id="2382872">
+            <action type="fix" dev="mguillem" issue="2382872">
                 Delay execution of image onload handlers after the page finish to load.
             </action>
             <action type="add" dev="mguillem">
@@ -76,22 +76,22 @@
             <action type="fix" dev="mguillem">
                 JavaScript: node's attributes collection is never empty for IE.
             </action>
-            <action type="add" dev="asashour" id="2318054" due-to="Mirko Friedenhagen">
+            <action type="add" dev="asashour" issue="2318054" due-to="Mirko Friedenhagen">
                 JavaScript: add support for Comment object.
             </action>
-            <action type="fix" dev="sdanig" id="2318508">
+            <action type="fix" dev="sdanig" issue="2318508">
                 JavaScript: prototype for event handlers should be the function prototype.
             </action>
-            <action type="update" dev="sdanig" id="2024729">
+            <action type="update" dev="sdanig" issue="2024729">
                 JavaScript: add support for document.captureEvents (FF).
             </action>
-            <action type="fix" dev="asashour" id="2316809">
+            <action type="fix" dev="asashour" issue="2316809">
                 JavaScript: fix option.text.
             </action>
-            <action type="add" dev="sdanig" id="2124916">
+            <action type="add" dev="sdanig" issue="2124916">
                 JavaScript: add support for window.showModalDialog() and window.showModelessDialog().
             </action>
-            <action type="fix" dev="asashour" id="2315783">
+            <action type="fix" dev="asashour" issue="2315783">
                 JavaScript: support Text object.
             </action>
             <action type="fix" dev="asashour">
@@ -100,23 +100,23 @@
             <action type="update" dev="mguillem">
                 JavaScript: added support for document.applets.
             </action>
-            <action type="add" dev="sdanig" id="1693272">
+            <action type="add" dev="sdanig" issue="1693272">
                 JavaScript: add support for getting and setting the image.onload attribute.
             </action>
-            <action type="add" dev="sdanig" id="1693272">
+            <action type="add" dev="sdanig" issue="1693272">
                 If an image has an onload handler, download the image and then invoke the onload handler.
             </action>
-            <action type="add" dev="sdanig" id="1829981">
+            <action type="add" dev="sdanig" issue="1829981">
                 JavaScript: add support for elements.nextNode() and elements.reset() for the element collection returned
                 by XmlDocument.selectNodes(...) (IE only).
             </action>
             <action type="fix" dev="asashour">
                 JavaScript: fix setting input.type if it is the first child.
             </action>
-            <action type="fix" dev="sdanig" id="2024619">
+            <action type="fix" dev="sdanig" issue="2024619">
                 When querying elements for namespaced attributes, don't fall back to returning non-namespaced attributes.
             </action>
-            <action type="add" dev="sdanig" id="2024619">
+            <action type="add" dev="sdanig" issue="2024619">
                 JavaScript: add support for element.removeAttributeNS() (FF only).
             </action>
             <action type="add" dev="mguillem">
@@ -143,13 +143,13 @@
             <action type="fix" dev="sdanig">
                 JavaScript: element.style length-related attributes should be converted to pixels (FF only).
             </action>
-            <action type="fix" dev="asashour" id="2229862">
+            <action type="fix" dev="asashour" issue="2229862">
                 JavaScript: postpone the execution of setting 'location.href'.
             </action>
             <action type="fix" dev="asashour">
                 JavaScript: select.appendChild(option), .add(), and insertBefore() should update .selectedIndex.
             </action>
-            <action type="fix" dev="asashour" id="2214332">
+            <action type="fix" dev="asashour" issue="2214332">
                 Silently ignore HTTP Status code "USE_PROXY" (305), and treat it as success.
             </action>
             <action type="fix" dev="asashour">
@@ -161,7 +161,7 @@
             <action type="add" dev="asashour">
                 JavaScript: add support for element.contains() (IE only).
             </action>
-            <action type="fix" dev="sdanig" id="2262599">
+            <action type="fix" dev="sdanig" issue="2262599">
                 JavaScript: element.innerHTML should quote anchor href attributes and empty attributes when emulating IE.
             </action>
             <action type="fix" dev="sdanig">
@@ -183,25 +183,25 @@
             <action type="fix" dev="mguillem">
                 JavaScript: fire onchange for &amp;lt;input type='file' ...&amp;gt; when field loses focus and value has been changed.
             </action>
-            <action type="fix" dev="mguillem" id="2136816">
+            <action type="fix" dev="mguillem" issue="2136816">
                 JavaScript: fire focus event not only on &amp;lt;input ...&amp;gt;.
             </action>
-            <action type="add" dev="mguillem" id="2060645" due-to="Mike Dirolf">
+            <action type="add" dev="mguillem" issue="2060645" due-to="Mike Dirolf">
                 Add support for HTMLDocument.createTreeWalker (FF only).
             </action>
-            <action type="add" dev="asashour" id="2192292">
+            <action type="add" dev="asashour" issue="2192292">
                 Add support for 'deflate' Content-Encoding.
             </action>
             <action type="update" dev="mguillem">
                 HtmlPage.asXml(): expand empty style nodes to make generated XML readable as HTML on Firefox 3.
             </action>
-            <action type="fix" dev="asashour" id="2187741">
+            <action type="fix" dev="asashour" issue="2187741">
                 HtmlTextInput: type() should remove selected text().
             </action>
-            <action type="add" dev="asashour" id="2187687">
+            <action type="add" dev="asashour" issue="2187687">
                 JavaScript: add support for document.uniqueID (IE only).
             </action>
-            <action type="update" dev="sdanig" id="2089599">
+            <action type="update" dev="sdanig" issue="2089599">
                 Made static WebClient methods getJavaScriptTimeout() and setJavaScriptTimeout() non-static, so
                 that they can be configured on a per-WebClient basis.
             </action>
@@ -214,19 +214,19 @@
             <action type="fix" dev="asashour">
                 JavaScript: node.appendBefore() should run added script element.
             </action>
-            <action type="fix" dev="asashour" id="2178172" due-to="Marco Cova">
+            <action type="fix" dev="asashour" issue="2178172" due-to="Marco Cova">
                 Set 'referer' header and other additional headers on loading external JavaScript files.
             </action>
-            <action type="fix" dev="asashour" id="2174320">
+            <action type="fix" dev="asashour" issue="2174320">
                 JavaScript: window.frames should return the ones with id attribute (IE only).
             </action>
             <action type="add" dev="asashour">
                 Add support for DocumentType.
             </action>
-            <action type="update" dev="mguillem" id="1509340">
+            <action type="update" dev="mguillem" issue="1509340">
                 Better formatting for asText() particularly with new lines for TR, BR or LI and tabs between cells.
             </action>
-            <action type="fix" dev="asashour" id="2043322">
+            <action type="fix" dev="asashour" issue="2043322">
                 HtmlElement: correctly handle getNodeName().
             </action>
             <action type="fix" dev="asashour">
@@ -244,13 +244,13 @@
             <action type="update" dev="asashour">
                 HtmlElement: deprecate getAttributesCollection() and isAttributeDefined().
             </action>
-            <action type="update" dev="asashour" id="2129180">
+            <action type="update" dev="asashour" issue="2129180">
                 BrowserVersion: deprecate INTERNET_EXPLORER_6_0 and INTERNET_EXPLORER_7_0.
             </action>
-            <action type="fix" dev="asashour" id="2136953" due-to="David Bylsma">
+            <action type="fix" dev="asashour" issue="2136953" due-to="David Bylsma">
                 JavaScript: document.cookie should overwrite existing cookie.
             </action>
-            <action type="update" dev="asashour" id="2129180">
+            <action type="update" dev="asashour" issue="2129180">
                 Upgrade Xalan to 2.7.1
             </action>
             <action type="fix" dev="asashour">
@@ -275,7 +275,7 @@
             <action type="fix" dev="mguillem">
                 JavaScript: HtmlOptionsCollection delegates to enclosing select for FF as well.
             </action>
-            <action type="fix" dev="asashour" id="2116569">
+            <action type="fix" dev="asashour" issue="2116569">
                 HtmlSelect: removeOption() and replaceOption() to inspect only HtmlOption children.
             </action>
             <action type="update" dev="asashour">
@@ -299,10 +299,10 @@
             <action type="fix" dev="mguillem">
                 JavaScript: Node.getAttributeNode returns null if no attribute exists with the specified name.
             </action>
-            <action type="fix" dev="asashour" id="2105645">
+            <action type="fix" dev="asashour" issue="2105645">
                 Form element can be included as HTML inside XML.
             </action>
-            <action type="fix" dev="mguillem" id="2124854">
+            <action type="fix" dev="mguillem" issue="2124854">
                 JavaScript: fix incorrect value of CSSStyleRule.selectorText when identified by id (like "#foo").
             </action>
             <action type="fix" dev="mguillem">
@@ -366,17 +366,17 @@
             <action type="fix" dev="sdanig">
                 Avoid NullPointerException when iframe.src is a "javascript:..." URL and JavaScript has been disabled.
             </action>
-            <action type="fix" dev="sdanig" id="2088921">
+            <action type="fix" dev="sdanig" issue="2088921">
                 JavaScript: add doScroll() method to bodies, divs, spans and textareas (IE only).
             </action>
             <action type="fix" dev="asashour">
                 HtmlTextArea: replace new lines with '%0D%0A' and remove first occurrence in form submission.
             </action>
-            <action type="fix" dev="sdanig" id="2101735">
+            <action type="fix" dev="sdanig" issue="2101735">
                 JavaScript: when setting location.href, if the only real change is in the hash then just change the hash
                 and don't hit the server.
             </action>
-            <action type="add" dev="sdanig" id="2065694">
+            <action type="add" dev="sdanig" issue="2065694">
                 Allow custom CSS error handlers (via WebClient.getCssErrorHandler() and WebClient.setCssErrorHandler())
                 and provide two error handler implementations out of the box (DefaultCssErrorHandler and
                 SilentCssErrorHandler).
@@ -384,10 +384,10 @@
             <action type="update" dev="asashour">
                 Upgrade NekoHtml to 1.9.9.
             </action>
-            <action type="fix" dev="asashour" id="2105645">
+            <action type="fix" dev="asashour" issue="2105645">
                 Select element can be included as HTML inside XML.
             </action>
-            <action type="fix" dev="asashour" id="2021810">
+            <action type="fix" dev="asashour" issue="2021810">
                 JavaScript: setting select.selectedIndex should not change page focus.
             </action>
             <action type="add" dev="mguillem">
@@ -418,60 +418,60 @@
                 WebConnection.getState() methods, delete unnecessary WebConnectionImpl abstract class, make
                 WebConnection classes part of the public API by removing their internal API warning.
             </action>
-            <action type="add" dev="sdanig" id="1965338">
+            <action type="add" dev="sdanig" issue="1965338">
                 Add CookieManager class which can be used to manage cookies on a per-WebClient basis.
             </action>
-            <action type="fix" dev="sdanig" id="2060931">
+            <action type="fix" dev="sdanig" issue="2060931">
                 Fix condition where CSS warnings and errors did not have a systemID to easily identify error origin.
             </action>
             <action type="fix" dev="mguillem">
                 JavaScript: add support for properties style (FF) and styleSheet (IE) on HTMLStyleElement
                 and dummy support for the methods insertRule (FF) and addRule (IE) on CSSStyleSheet.
             </action>
-            <action type="update" dev="asashour" id="2098021" due-to="Darrell DeBoer">
+            <action type="update" dev="asashour" issue="2098021" due-to="Darrell DeBoer">
                 XMLSerializer: includes attributes from HTMLElements.
             </action>
             <action type="remove" dev="asashour">
                 XmlAttr: remove deprecated constructor with Map.Entry.
             </action>
-            <action type="fix" dev="asashour" id="2093427">
+            <action type="fix" dev="asashour" issue="2093427">
                 ThreadManager: add WebWindow name to the background threads name.
             </action>
-            <action type="fix" dev="asashour" id="2091788">
+            <action type="fix" dev="asashour" issue="2091788">
                 XmlPage: ClassCastException should not be thrown by .getByXPath().
             </action>
-            <action type="fix" dev="mguillem" id="1985241">
+            <action type="fix" dev="mguillem" issue="1985241">
                 JavaScript: trigger focus event when clicking an element or typing in it.
             </action>
-            <action type="fix" dev="mguillem" id="2013891">
+            <action type="fix" dev="mguillem" issue="2013891">
                 JavaScript: trigger mousedown and mouseup event when an element is clicked.
             </action>
-            <action type="fix" dev="sdanig" id="2070940">
+            <action type="fix" dev="sdanig" issue="2070940">
                 JavaScript: make document.styleSheets[x] respect WebClient.printContentOnFailingStatusCode
                 and WebClient.throwExceptionOnFailingStatusCode settings when downloading external CSS files.
             </action>
-            <action type="fix" dev="sdanig" id="2089341">
+            <action type="fix" dev="sdanig" issue="2089341">
                 JavaScript: StackOverflowError when setting the location hash via the location.href attribute.
             </action>
-            <action type="add" dev="sdanig" id="2063012">
+            <action type="add" dev="sdanig" issue="2063012">
                 JavaScript: add stylesheet.href attribute.
             </action>
-            <action type="fix" dev="mguillem" id="1729195">
+            <action type="fix" dev="mguillem" issue="1729195">
                 Don't parse &amp;lt;noscript&amp;gt; content when JavaScript is enabled.
             </action>
             <action type="fix" dev="mguillem">
                 JavaScript: document.XXX allow to access forms by id (IE only).
             </action>
-            <action type="fix" dev="mguillem" id="2037685">
+            <action type="fix" dev="mguillem" issue="2037685">
                 JavaScript: silently ignore script nodes with event="..." for="..." when the target element can't be found (IE only).
             </action>
-            <action type="fix" dev="mguillem" id="2014596">
+            <action type="fix" dev="mguillem" issue="2014596">
                 JavaScript: copy dynamic properties from template in fireEvent (IE only).
             </action>
-            <action type="fix" dev="mguillem" id="2025912">
+            <action type="fix" dev="mguillem" issue="2025912">
                 JavaScript: fixed event order when setting the value of a text field.
             </action>
-            <action type="fix" dev="mguillem" id="2062406">
+            <action type="fix" dev="mguillem" issue="2062406">
                 JavaScript: escape quotes found in attribute values when accessing through innerHTML.
             </action>
             <action type="update" dev="sdanig">
@@ -480,28 +480,28 @@
             <action type="add" dev="sdanig">
                 Add BrowserVersion for Firefox 3 emulation.
             </action>
-            <action type="fix" dev="mguillem" id="2060550">
+            <action type="fix" dev="mguillem" issue="2060550">
                 Fixed NullPointerException occurring document.styleSheets[x] with out of bound index.
             </action>
-            <action type="fix" dev="sudhan_moghe" id="2052115" due-to="Ethan Glasser-Camp">
+            <action type="fix" dev="sudhan_moghe" issue="2052115" due-to="Ethan Glasser-Camp">
                 Fixed NullPointerException occurring in HtmlPage.writeInParsedStream() when document.write is called after setting innerHTML of some element in page.
             </action>
-            <action type="fix" dev="asashour" id="2043322">
+            <action type="fix" dev="asashour" issue="2043322">
                 HTMLParser: now considers namespaces.
             </action>
-            <action type="fix" dev="asashour" id="2042339">
+            <action type="fix" dev="asashour" issue="2042339">
                 HtmlElement: asText() respects hidden visibility style attribute.
             </action>
             <action type="fix" dev="sdanig">
                 Add missing equals() methods to the PluginConfiguration and PluginConfiguration.MimeType classes.
             </action>
-            <action type="fix" dev="sudhan_moghe" id="2027723" due-to="Martin Tamme">
+            <action type="fix" dev="sudhan_moghe" issue="2027723" due-to="Martin Tamme">
                 WebClient.expandUrl doesn't handle references correctly.
             </action>
-            <action type="fix" dev="sdanig" id="2024741">
+            <action type="fix" dev="sdanig" issue="2024741">
                 Attribute values for cloned nodes were not available via JavaScript.
             </action>
-            <action type="add" dev="asashour" id="2028071">
+            <action type="add" dev="asashour" issue="2028071">
                 JavaScript: add support for navigator.product (FF only).
             </action>
             <action type="update" dev="asashour">
@@ -512,40 +512,40 @@
             </action>
         </release>
         <release version="2.2" date="Jul 24, 2008" description="Numerous bugfixes (handling of ill formed HTML code, document.write, ...), speed improvements, and move to HtmlUnit-core-js (Rhino fork)">
-            <action type="fix" dev="sudhan_moghe" id="2022578">
+            <action type="fix" dev="sudhan_moghe" issue="2022578">
                 JavaScript: fix endless recursion when innerHTML has script that modifies the innerHTML.
             </action>
-            <action type="fix" dev="mguillem" id="2019665">
+            <action type="fix" dev="mguillem" issue="2019665">
                 Accept \r and \n for HtmlTextArea.type().
             </action>
             <action type="fix" dev="mguillem">
                 Avoid to perform multiple request for the same external stylesheet. Add facility to access referred content
                 from HtmlLink.
             </action>
-            <action type="fix" dev="sdanig" id="2014629">
+            <action type="fix" dev="sdanig" issue="2014629">
                 Fix memory leak of window objects when the windows contain long-running background JavaScript tasks
                 scheduled via setInterval() or setTimeout().
             </action>
-            <action type="fix" dev="sudhan_moghe" id="2019116">
+            <action type="fix" dev="sudhan_moghe" issue="2019116">
                 JavaScript: fix JavaScript error with form.element, when element is located before closing form tag
                 but the tag balancing forces form to be closed earlier.
             </action>
-            <action type="add" dev="mguillem" id="2001001" due-to="Andrew_WOT">
+            <action type="add" dev="mguillem" issue="2001001" due-to="Andrew_WOT">
                 HtmlFileInput: allow to load data from memory.
             </action>
             <action type="add" dev="sudhan_moghe">
                 JavaScript: add support for attribute.text and attribute.xml (IE only).
             </action>
-            <action type="add" dev="sudhan_moghe" id="1990842">
+            <action type="add" dev="sudhan_moghe" issue="1990842">
                 JavaScript: add support for document.activeElement and element.setActive() (IE only).
             </action>
-            <action type="update" dev="asashour" id="1985241">
+            <action type="update" dev="asashour" issue="1985241">
                 Ensure to focus element on calling HtmlElement.type().
             </action>
-            <action type="add" dev="asashour" id="2005930">
+            <action type="add" dev="asashour" issue="2005930">
                 JavaScript: add support for script.text.
             </action>
-            <action type="fix" dev="asashour" id="2006861">
+            <action type="fix" dev="asashour" issue="2006861">
                 Fix exception when opening about:blank with Firefox.
             </action>
             <action type="add" dev="sdanig">
@@ -558,16 +558,16 @@
             <action type="fix" dev="asashour">
                 JavaScript: window.execScript() now accepts undefined 'language' (IE only).
             </action>
-            <action type="fix" dev="mguillem" id="1995196" due-to="Sudhan Moghe">
+            <action type="fix" dev="mguillem" issue="1995196" due-to="Sudhan Moghe">
                 Fix current window's computation when a window is closed by JavaScript during onload processing.
             </action>
-            <action type="fix" dev="asashour" id="1997280" due-to="Rene Schwietzke">
+            <action type="fix" dev="asashour" issue="1997280" due-to="Rene Schwietzke">
                 ThreadManager: set BrowserVersion of HtmlUnitContextFactory of newly created threads.
             </action>
-            <action type="fix" dev="mguillem" id="1950004" due-to="Sudhan Moghe">
+            <action type="fix" dev="mguillem" issue="1950004" due-to="Sudhan Moghe">
                 JavaScript: fix variable scope after document.write.
             </action>
-            <action type="fix" dev="mguillem" id="1990198">
+            <action type="fix" dev="mguillem" issue="1990198">
                 Parsing: handle quotes in comments correctly within script nodes.
             </action>
             <action type="add" dev="sdanig">
@@ -588,13 +588,13 @@
             <action type="fix" dev="sdanig">
                 Maintain CSS style attribute order, according to document definition.
             </action>
-            <action type="fix" dev="mguillem" id="1990648" due-to="Sudhan Moghe">
+            <action type="fix" dev="mguillem" issue="1990648" due-to="Sudhan Moghe">
                 Style attributes in upper case are not recognized.
             </action>
-            <action type="fix" dev="mguillem" id="1678826">
+            <action type="fix" dev="mguillem" issue="1678826">
                 JavaScript: fixed document.write(ln) handling of &amp;lt;br&amp;gt; and &amp;lt;hr&amp;gt;.
             </action>
-            <action type="fix" dev="mguillem" id="1990313" due-to="Karel Kolman">
+            <action type="fix" dev="mguillem" issue="1990313" due-to="Karel Kolman">
                 JavaScript: improved document.write(ln) support to add nodes to the right parent.
             </action>
             <action type="fix" dev="mguillem">
@@ -604,38 +604,38 @@
                 Fix HtmlTextInput.type(), HtmlTextArea.type() and HtmlPasswordInput.type() to handle backspaces
                 correctly.
             </action>
-            <action type="fix" dev="sdanig" id="1822108">
+            <action type="fix" dev="sdanig" issue="1822108">
                 JavaScript: implemented a workaround for Rhino bug in number primitive resolution (Rhino bug 374918).
             </action>
-            <action type="add" dev="sdanig" id="1900452">
+            <action type="add" dev="sdanig" issue="1900452">
                 Move proxy-related methods from WebClient to new class ProxyConfig.
             </action>
             <action type="fix" dev="mguillem">
                 JavaScript: value of form elements is set before triggering keyUp event (was after).
             </action>
-            <action type="update" dev="mguillem" id="1964258">
+            <action type="update" dev="mguillem" issue="1964258">
                 Be more tolerant while extracting charset from incorrect Content-Type header.
             </action>
             <action type="fix" dev="sdanig">
                 JavaScript: add optionElement.disabled and optionGroupElement.disabled attributes.
             </action>
-            <action type="fix" dev="sdanig" id="1986764">
+            <action type="fix" dev="sdanig" issue="1986764">
                 HtmlOption.isDisabled() and HtmlOptionGroup.isDisabled() always return false when emulating IE.
             </action>
-            <action type="fix" dev="sdanig" id="1987911">
+            <action type="fix" dev="sdanig" issue="1987911">
                 Don't lose any custom request headers during redirection.
             </action>
             <action type="fix" dev="mguillem" due-to="Andreas Hartmann">
                 Allow PUT request with body content.
             </action>
-            <action type="fix" dev="sdanig" id="1954869">
+            <action type="fix" dev="sdanig" issue="1954869">
                 Fix extraneous load of frame contents cause by frame node cloning.
             </action>
-            <action type="add" dev="sdanig" id="1982331">
+            <action type="add" dev="sdanig" issue="1982331">
                 JavaScript: add support for methods getAttribute(), setAttribute() and removeAttribute() on
                 element.style and element.runtimeStyle (IE only).
             </action>
-            <action type="fix" dev="sdanig" id="1976960">
+            <action type="fix" dev="sdanig" issue="1976960">
                 Fix incorrect handling of conflicting return values in different event handlers during
                 event bubbling.
             </action>
@@ -643,7 +643,7 @@
                 Malformed HTML code: associate form elements located before closing form tag to the form
                 even if tag balancing forced form to be closed earlier.
             </action>
-            <action type="fix" dev="sdanig" id="1977736">
+            <action type="fix" dev="sdanig" issue="1977736">
                 Be more lenient about spurious whitespace in node attributes containing relative URLs (image.src,
                 script.src, link.href, etc).
             </action>
@@ -651,62 +651,62 @@
                 Fix document.cookie so that it works correctly when loading HTML pages from the local filesystem,
                 when there is no real domain available.
             </action>
-            <action type="fix" dev="sdanig" id="1975445">
+            <action type="fix" dev="sdanig" issue="1975445">
                 Allow calls to WebClient.openWindow() with null URLs.
             </action>
-            <action type="add" dev="asashour" id="1957900">
+            <action type="add" dev="asashour" issue="1957900">
                 JavaScript: add support for onpropertychange event type (IE only).
             </action>
-            <action type="fix" dev="mguillem" id="1969664">
+            <action type="fix" dev="mguillem" issue="1969664">
                 Fix HtmlPage.getHtmlElementsByIdAndOrName() returns same element twice.
             </action>
             <action type="add" dev="asashour">
                 JavaScript: implement textRange.text setter (IE only).
             </action>
-            <action type="add" dev="asashour" id="1955515" due-to="Rodney Gitzel">
+            <action type="add" dev="asashour" issue="1955515" due-to="Rodney Gitzel">
                 JavaScript: implement style.zIndex.
             </action>
             <action type="fix" dev="sdanig">
                 NamedNodeMap instances (element.attributes) are case-insensitive in HTML documents (but not XML documents).
             </action>
-            <action type="fix" dev="mguillem" id="1968708">
+            <action type="fix" dev="mguillem" issue="1968708">
                 Invalid HTML: when the same attribute appears more than one time, consider the first value rather than the last one.
             </action>
             <action type="fix" dev="mguillem">
                 JavaScript: HtmlInput.type value is always lower case.
             </action>
-            <action type="fix" dev="sdanig" id="1643275">
+            <action type="fix" dev="sdanig" issue="1643275">
                 Deprecated JavaScriptEngine.get/setTimeout(), added replacement methods WebClient.get/setJavaScriptTimeout().
             </action>
-            <action type="fix" dev="sdanig" id="1951047">
+            <action type="fix" dev="sdanig" issue="1951047">
                 Fix serialization of HtmlPages (was broken in some scenarios).
             </action>
             <action type="update" dev="mguillem">
                 Change license to Apache 2.
             </action>
-            <action type="fix" dev="mguillem" id="1950462">
+            <action type="fix" dev="mguillem" issue="1950462">
                 Fix IllegalStateException that occured using document.write assigned to a variable (IE only).
             </action>
             <action type="add" dev="asashour">
                 HtmlPasswordInput: type() appends text to the value.
             </action>
-            <action type="update" dev="mguillem" id="1964731">
+            <action type="update" dev="mguillem" issue="1964731">
                 JavaScript: XMLDocumet.getElementById retrieve elements with HTML namespace (FF only).
             </action>
             <action type="update" dev="mguillem">
                 Improved logic to detect the window with the focus.
             </action>
-            <action type="add" dev="mguillem" id="1962847" due-to="Stuart Begg">
+            <action type="add" dev="mguillem" issue="1962847" due-to="Stuart Begg">
                 JavaScript: improved behavior of XMLHttpRequest in network error handling.
                 Added support for the onError callback (FF only).
             </action>
-            <action type="fix" dev="mguillem" id="1960512">
+            <action type="fix" dev="mguillem" issue="1960512">
                 Fixed ClassCastException in CSS child selector processing.
             </action>
             <action type="add" dev="mguillem">
                 Allow to directly invoke URLs with javascript protocol.
             </action>
-            <action type="add" dev="mguillem" id="1954183">
+            <action type="add" dev="mguillem" issue="1954183">
                 Add facilities on HtmlImage to download the referenced image and read it.
             </action>
             <action type="remove" dev="asashour">
@@ -715,7 +715,7 @@
             <action type="update" dev="asashour">
                 INCOMPATIBLE CHANGE: Replace SubmitMethod with HttpMethod (some methods with incompatible return types).
             </action>
-            <action type="add" dev="asashour" id="1946000">
+            <action type="add" dev="asashour" issue="1946000">
                 HtmlPage: add refresh(), deprecate HttpWebConnection.newWebResponseInstance()
                 (replaced with another method with different parameters),
                 and deprecate one of WebResponseImpl constructors (with replacement).
@@ -723,7 +723,7 @@
             <action type="update" dev="asashour">
                 WebRequestSettings: deprecate getURL() and setURL(), use getUrl() and setUrl().
             </action>
-            <action type="fix" dev="sdanig" id="1951179">
+            <action type="fix" dev="sdanig" issue="1951179">
                 JavaScript: don't store cookies when document.cookie is set and cookies are disabled.
             </action>
             <action type="add" dev="sdanig">
@@ -738,16 +738,16 @@
             <action type="remove" dev="asashour">
                 INCOMPATIBLE CHANGE: HtmlAttr and XmlAttr are no more used, use DomAttr instead.
             </action>
-            <action type="fix" dev="asashour" id="1942640">
+            <action type="fix" dev="asashour" issue="1942640">
                 JavaScript: fix XMLElement.attributes.
             </action>
-            <action type="update" dev="asashour" id="1947877" due-to="Sudhan Moghe">
+            <action type="update" dev="asashour" issue="1947877" due-to="Sudhan Moghe">
                 &amp;lt;span&amp;gt;: empty tag is expanded as required by browsers.
             </action>
             <action type="add" dev="asashour">
                 JavaScript: add support for XMLElement.hasAttribute() (FF only).
             </action>
-            <action type="add" dev="asashour" id="1948777" due-to="Sudhan Moghe">
+            <action type="add" dev="asashour" issue="1948777" due-to="Sudhan Moghe">
                 JavaScript: add support for HTMLAnchorElement.click().
             </action>
             <action type="fix" dev="sdanig">
@@ -760,7 +760,7 @@
             <action type="fix" dev="sdanig">
                 Encode and decode location.hash when emulating Firefox.
             </action>
-            <action type="fix" dev="asashour" id="1946994">
+            <action type="fix" dev="asashour" issue="1946994">
                 HtmlPage: cloned page handles XPath.
             </action>
             <action type="add" dev="sdanig">
@@ -769,7 +769,7 @@
             <action type="add" dev="asashour">
                 JavaScript: Add initial support for CSSRule and CSSStyleRule.
             </action>
-            <action type="add" dev="sdanig" id="1942334">
+            <action type="add" dev="sdanig" issue="1942334">
                 Add WebClient.setCssEnabled(boolean) and WebClient.isCssEnabled().
             </action>
             <action type="fix" dev="mguillem">
@@ -792,7 +792,7 @@
             <action type="fix" dev="asashour">
                 HtmlTextInput and HtmlTextArea: fix type() space.
             </action>
-            <action type="update" dev="mguillem" id="1592733">
+            <action type="update" dev="mguillem" issue="1592733">
                 HtmlPage.getReadyState() now synchronized with the information from the documentElement.
             </action>
             <action type="update" dev="sdanig">
@@ -801,10 +801,10 @@
             <action type="update" dev="sdanig">
                 Initialize mouse event coordinates lazily, in order to avoid unnecessary CSS processing overhead.
             </action>
-            <action type="fix" dev="mguillem" id="1584437">
+            <action type="fix" dev="mguillem" issue="1584437">
                 JavaScript: window.open without URL provided returns blank window when simulating Firefox too.
             </action>
-            <action type="fix" dev="mguillem" id="1794764">
+            <action type="fix" dev="mguillem" issue="1794764">
                 JavaScript: clear existing events handlers when page's content is changed with document.write.
             </action>
             <action type="fix" dev="mguillem">
@@ -826,7 +826,7 @@
             <action type="update" dev="asashour">
                 Deprecate HtmlUnitXPath.
             </action>
-            <action type="update" dev="asashour" id="1931084">
+            <action type="update" dev="asashour" issue="1931084">
                 DomNode: asXml() uses charset from HtmlPage.getPageEncoding().
             </action>
             <action type="update" dev="asashour">
@@ -863,7 +863,7 @@
                 Deprecate HtmlPage.moveFocusToElement() and getElementWithFocus(),
                 use setFocusedElement() and getFocusedElement().
             </action>
-            <action type="update" dev="asashour" due-to="Dmitri Zoubkov" id="1924784">
+            <action type="update" dev="asashour" due-to="Dmitri Zoubkov" issue="1924784">
                 Meta Refresh: case-insensitive URL (#1924784).
             </action>
             <action type="update" dev="asashour">
@@ -942,7 +942,7 @@
             <action type="add" dev="asashour">
                 Add Xalan 2.7.0 as dependency.
             </action>
-            <action type="fix" dev="mguillem" id="1904189">
+            <action type="fix" dev="mguillem" issue="1904189">
                 JavaScript: fixed IndexOutOfBoundsException in processing of IE @elif pre processor instruction.
             </action>
             <action type="fix" dev="mguillem">
@@ -957,7 +957,7 @@
             <action type="fix" dev="sdanig">
                 JavaScript: calling document.write() after a page has finished parsing results in overwriting the entire page.
             </action>
-            <action type="fix" dev="sdanig" id="1782719">
+            <action type="fix" dev="sdanig" issue="1782719">
                 Handle script elements with src attributes containing "javascript:..." URLs.
             </action>
             <action type="fix" dev="sdanig">
@@ -996,7 +996,7 @@
             <action type="fix" dev="sdanig">
                 Add test-scoped dependency on slf4j, in order to trigger correct logging in Jetty during the unit tests.
             </action>
-            <action type="add" dev="asashour" id="1896964">
+            <action type="add" dev="asashour" issue="1896964">
                 JavaScript: add support for document.importNode() (FF only).
             </action>
             <action type="update" dev="sdanig">
@@ -1026,7 +1026,7 @@
             <action type="add" dev="mguillem">
                 JavaScript: add basic support for document.queryCommandSupported and document.execCommand.
             </action>
-            <action type="fix" dev="asashour" id="1883395">
+            <action type="fix" dev="asashour" issue="1883395">
                 XmlPage: correct XPath handling (#1883395).
             </action>
             <action type="update" dev="mguillem">
@@ -1050,13 +1050,13 @@
             <action type="update" dev="asashour">
                 JavaScript: <![CDATA[<code>]]>__proto__<![CDATA[</code>]]> is only defined for Firefox.
             </action>
-            <action type="fix" dev="mguillem" id="1464948">
+            <action type="fix" dev="mguillem" issue="1464948">
                 Handle line comments in multiline onXxxx events handlers declarations.
             </action>
             <action type="update" dev="mguillem">
                 Upgraded nekohtml to version 1.9.6.1
             </action>
-            <action type="update" dev="dktaylor" id="1747878">
+            <action type="update" dev="dktaylor" issue="1747878">
                 INCOMPATIBLE CHANGE: Change html package to implement W3C DOM API interfaces, though
                 most methods are not yet implemented.  Remove deprecated methods.  Fix DomCData
                 derivation to be from DomText.  Rename getAttributes methods that conflict with
@@ -1075,13 +1075,13 @@
             <action type="update" dev="asashour">
                 JavaScript: correct toString() for properties in 'window' scope (FF only).
             </action>
-            <action type="update" dev="asashour" id="1876545">
+            <action type="update" dev="asashour" issue="1876545">
                 JavaScript: detect encoding from XML declaration (#1876545).
             </action>
             <action type="fix" dev="mguillem">
                 JavaScript: HTMLAnchor href attribute should be reachable even if the URL is malformed.
             </action>
-            <action type="add" dev="asashour" id="1874624" due-to="Sudhan Moghe">
+            <action type="add" dev="asashour" issue="1874624" due-to="Sudhan Moghe">
                 JavaScript: add support for XMLElement.getAttributeNode() (#1874624).
             </action>
             <action type="fix" dev="mguillem">
@@ -1105,7 +1105,7 @@
             <action type="remove" dev="asashour">
                 Remove deprecated HtmlForm.fakeCheckedRadioButton() and HtmlSelect.fakeSelectedAttribute().
             </action>
-            <action type="add" dev="asashour" id="1873562">
+            <action type="add" dev="asashour" issue="1873562">
                 JavaScript: Add support for XPathResult.iterateNext() (FF only).
             </action>
             <action type="remove" dev="asashour">
@@ -1153,7 +1153,7 @@
             <action type="fix" dev="mguillem">
                 JavaScript: allow script node's onreadystatechange handler to be set to null.
             </action>
-            <action type="fix" dev="mguillem" due-to="David Bylsma" id="1866448">
+            <action type="fix" dev="mguillem" due-to="David Bylsma" issue="1866448">
                 Don't escape '+' in URL path.
             </action>
             <action type="add" dev="mguillem">
@@ -1172,10 +1172,10 @@
                 JavaScript: add configurable support for supported plugins and mime types (FF only).
                 Per default a Shockwave Flash plugin is "configured" for Firefox 2.
             </action>
-            <action type="fix" dev="asashour" id="1854975">
+            <action type="fix" dev="asashour" issue="1854975">
                 JavaScript: XMLHttpRequest.responseXML.getElementById should always return null (#1854975).
             </action>
-            <action type="add" dev="asashour" id="1862054">
+            <action type="add" dev="asashour" issue="1862054">
                 JavaScript: add support for "for (i in collection)" (#1862054).
             </action>
             <action type="add" dev="asashour">
@@ -1216,17 +1216,17 @@
             <action type="update" dev="asashour">
                 &amp;lt;frame&amp;gt; and &amp;lt;iframe&amp;gt; should trim values in 'src' attribute.
             </action>
-            <action type="update" dev="asashour" id="1813007">
+            <action type="update" dev="asashour" issue="1813007">
                 JavaScript: element.dispatchEvent() exactly behaves as calling ClickableElement.click() and .dblClick()
                 and returns correct value (based on event.preventDefault()) (#1813007).
             </action>
-            <action type="add" dev="asashour" id="1813007">
+            <action type="add" dev="asashour" issue="1813007">
                 JavaScript: add initial support for event.preventDefault() (anchor, checkbox, text input, textarea, others to follow) (#1813007).
             </action>
             <action type="add" dev="asashour">
                 HtmlTextInput: type() appends text to the value.
             </action>
-            <action type="add" dev="mguillem" id="1716540">
+            <action type="add" dev="mguillem" issue="1716540">
                 JavaScript: cache parsed JavaScript responses.
             </action>
             <action type="update" dev="mguillem">
@@ -1238,13 +1238,13 @@
             <action type="update" dev="asashour">
                 Deprecate FocusableElement.
             </action>
-            <action type="add" dev="asashour" id="1835550">
+            <action type="add" dev="asashour" issue="1835550">
                 JavaScript: add support for label.htmlFor (#1835550).
             </action>
-            <action type="fix" dev="asashour" id="1836922">
+            <action type="fix" dev="asashour" issue="1836922">
                 JavaScript: fix removeChild() for XML elements (#1836922).
             </action>
-            <action type="add" dev="asashour" id="1835836">
+            <action type="add" dev="asashour" issue="1835836">
                 JavaScript: Add style.borderBottom[Color,Style,Width], .borderLeft[Color,Style,Width], .borderRight[Color,Style,Width],
                 and .borderTop[Color,Style,Width] (#1835836).
             </action>
@@ -1253,11 +1253,11 @@
                 values for document.styleSheets.length. All CSS file downloading and parsing occurs lazily.
                 NOTE: Adds a dependency on cssparser 0.9.4.
             </action>
-            <action type="fix" dev="asashour" id="1835090">
+            <action type="fix" dev="asashour" issue="1835090">
                 JavaScript: Tolerate empty string for DOMParser.parseFromString() (FF only),
                 and ActiveXObject('Microsoft.XMLDOM').loadXML() (IE only) (#1835090).
             </action>
-            <action type="fix" dev="asashour" id="1828914">
+            <action type="fix" dev="asashour" issue="1828914">
                 JavaScript: &amp;lt;iframe&amp;gt; src is now correctly handled via setAttribute() (#1828914).
             </action>
             <action type="fix" dev="mguillem">
@@ -1286,7 +1286,7 @@
                 JavaScript: delegate select.options.xxx property modifications to the parent select element
                 (property accesses were already being delegated correctly; IE only).
             </action>
-            <action type="add" dev="asashour" id="1815602" due-to="Sam Hough">
+            <action type="add" dev="asashour" issue="1815602" due-to="Sam Hough">
                 Add basic support for document.getBoxObjectFor() (FF only) (#1815602).
             </action>
             <action type="update" dev="mguillem">
@@ -1317,13 +1317,13 @@
                 communication matches the cookie policy used by the document.cookie attribute,
                 use a single cookie header during HTTP communication.
             </action>
-            <action type="add" dev="asashour" id="1818569">
+            <action type="add" dev="asashour" issue="1818569">
                 HtmlFileInput: add support for non-ASCII name of uploaded files (#1818569).
             </action>
             <action type="add" dev="mguillem">
                 JavaScript: accept ECMA reserved keywords like 'float' as normal identifier.
             </action>
-            <action type="add" dev="mguillem" due-to="Sam Hough" id="1812960">
+            <action type="add" dev="mguillem" due-to="Sam Hough" issue="1812960">
                 JavaScript: added support for DOMContentLoaded event (Firefox).
             </action>
             <action type="add" dev="mguillem">
@@ -1337,10 +1337,10 @@
                 hosts, regardless of their certificates. Makes it easy to work
                 around servers with expired or misconfigured certificates.
             </action>
-            <action type="add" dev="mguillem" due-to="Sam Hough" id="1815275">
+            <action type="add" dev="mguillem" due-to="Sam Hough" issue="1815275">
                 JavaScript: make focus and blur available on HtmlElement.
             </action>
-            <action type="fix" dev="mguillem" id="1753734">
+            <action type="fix" dev="mguillem" issue="1753734">
                 Don't use custom RetryHandler anymore to allow standard retry when server drops the connection
                 which caused NoHttpResponseException.
                 (see http://jakarta.apache.org/httpcomponents/httpclient-3.x/exception-handling.html).
@@ -1365,25 +1365,25 @@
             <action type="add" dev="sdanig">
                 JavaScript: add support for element.dispatchEvent(event) (Firefox only).
             </action>
-            <action type="add" dev="mguillem" id="1716540">
+            <action type="add" dev="mguillem" issue="1716540">
                 Cache JS server responses to avoid useless requests (script caching will come later).
             </action>
-            <action type="fix" dev="mguillem" id="1518195">
+            <action type="fix" dev="mguillem" issue="1518195">
                 Don't load the originally specified source of a frame, when its location has already been changed by JavaScript.
             </action>
-            <action type="add" dev="asashour" id="1805817">
+            <action type="add" dev="asashour" issue="1805817">
                 Add primitive support for document.styleSheets (#1805817).
             </action>
-            <action type="add" dev="asashour" id="1809522">
+            <action type="add" dev="asashour" issue="1809522">
                 Add support of setExpression and removeExpression for element and style (#1809522).
             </action>
-            <action type="update" dev="asashour" id="1802836">
+            <action type="update" dev="asashour" issue="1802836">
                 Update window.frames so it does not throw ClassCastException (#1802836).
             </action>
-            <action type="update" dev="mguillem" id="1802969">
+            <action type="update" dev="mguillem" issue="1802969">
                 JavaScript: document.all('notExistingElement') now returns null as IE does.
             </action>
-            <action type="fix" dev="asashour" id="1797235">
+            <action type="fix" dev="asashour" issue="1797235">
                 Fix loading content containing 'Content-Type' header with quoted charset (#1797235).
             </action>
             <action type="update" dev="asashour">
@@ -1416,10 +1416,10 @@
                 JavaScript: add basic support of setProperty() function and .preserveWhiteSpace property for
                 ActiveXObjects: 'Microsoft.XmlDom' and 'MSXML.DOMDocument' (IE only).
             </action>
-            <action type="update" dev="asashour" id="1790308">
+            <action type="update" dev="asashour" issue="1790308">
                 DomNode.getByXPath() with 'id()' function should return empty list instead of throwing an exception (#1790308).
             </action>
-            <action type="add" dev="mguillem" id="1790312">
+            <action type="add" dev="mguillem" issue="1790312">
                 WebClient.loadWebResponse should not be final.
             </action>
             <action type="add" dev="sdanig">
@@ -1460,7 +1460,7 @@
             <action type="add" dev="sdanig" due-to="Rob Di Marco">
                 JavaScript: add support for function mouseEvent.initMouseEvent() (FF only).
             </action>
-            <action type="update" dev="asashour" id="1784330" due-to="Dan Fabulich">
+            <action type="update" dev="asashour" issue="1784330" due-to="Dan Fabulich">
                 ActiveXObject (XmlHttp): should not be created by case-sensitive string. (#1784330).
             </action>
             <action type="update" dev="sdanig">
@@ -1489,7 +1489,7 @@
             <action type="add" dev="sdanig" due-to="Rob Di Marco">
                 JavaScript: add support for read-only attributes uiEvent.detail and uiEvent.view (FF only).
             </action>
-            <action type="update" dev="mguillem" id="1780089">
+            <action type="update" dev="mguillem" issue="1780089">
                 JavaScript: fixed bug in String.replace (due to custom RegExp proxy) when first arg is a String
                 with special characters and not a RegExp.
             </action>
@@ -1524,7 +1524,7 @@
             <action type="add" dev="asashour">
                 JavaScript: add primitive support for document.elementFromPoint (IE only).
             </action>
-            <action type="add" dev="dktaylor" id="1747878">
+            <action type="add" dev="dktaylor" issue="1747878">
                 Add namespace support for attributes: DomNode.getnamespaceURI, getLocalName, getPrefix,
                 setPrefix, hasAttributes, HtmlElement.getAttribute, getAttributeNS, hasAttributes,
                 hasAttribute, hasAttributeNS, setAttribute, setAttributeNS, setAttributeValue(NS),
@@ -1533,18 +1533,18 @@
             <action type="add" dev="asashour">
                 JavaScript: add support for element.uniqueID (IE only).
             </action>
-            <action type="update" dev="dktaylor" id="1747878">
+            <action type="update" dev="dktaylor" issue="1747878">
                 Deprecate unused class MapEntryWrappingIterator.  (#1747878).
             </action>
-            <action type="update" dev="dktaylor" id="1747878">
+            <action type="update" dev="dktaylor" issue="1747878">
                 Deprecate String-to-String attribute map for HtmlElement.  Add initial support for
                 namespaces for attributes.  (#1747878).
             </action>
-            <action type="update" dev="dktaylor" id="1747878">
+            <action type="update" dev="dktaylor" issue="1747878">
                 Deprecate HtmlAttr implementing Map.Entry that conflicts with W3C DOM API.  Replace
                 uses of Map.Entry with HtmlAttr.  Add HtmlAttr.getName.  (#1747878).
             </action>
-            <action type="add" dev="asashour" id="1498419">
+            <action type="add" dev="asashour" issue="1498419">
                 New interface com.gargoylesoftware.htmlunit.OnbeforeunloadHandler with associated WebClient getter and setter, to support 'onbeforeunload' event (#1498419).
             </action>
             <action type="add" dev="asashour">
@@ -1570,7 +1570,7 @@
             <action type="update" dev="asashour">
                 JavaScript: for element.appendChild(), .insertBefore(), .innerHTML, and .innerText: if the element parentNode is null, create a DocumentFragment to be the parentNode (IE only).
             </action>
-            <action type="update" dev="dktaylor" id="1747878">
+            <action type="update" dev="dktaylor" issue="1747878">
                 Deprecated methods that conflict with W3C DOM API: DomTest.splitText, HtmlPage.getDocumentElement,
                 createElement, createElementNS, HtmlAttr.getValue, setValue, DomNode.getLastChild,
                 getParentNode, getPreviousSibling, getNextSibling, getFirstChild, cloneNode, appendChild,
@@ -1598,7 +1598,7 @@
             <action type="update" dev="asashour">
                 HtmlTitle.asXml(): empty tag is expanded as required by Internet Explorer.
             </action>
-            <action type="update" dev="asashour" id="1771549">
+            <action type="update" dev="asashour" issue="1771549">
                 JavaScript: if window object could not find a property or function, it returns 'undefined' instead of null (#1771549).
             </action>
         </release>
@@ -1668,10 +1668,10 @@
                 Fix getElementsByTagName('*') at the document level (it was returning an empty
                 collection).
             </action>
-            <action type="add" dev="asashour" id="1759750">
+            <action type="add" dev="asashour" issue="1759750">
                 JavaScript: add support for style.getPropertyValue() (#1759750).
             </action>
-            <action type="update" dev="mguillem" id="1727599">
+            <action type="update" dev="mguillem" issue="1727599">
                 JavaScript: fixed eval scope bug when used within function.
             </action>
             <action type="add" dev="sdanig">
@@ -1682,10 +1682,10 @@
                 Deprecate BrowserVersion constants for Mozilla 1.0, Netscape 4.7.9 and Netscape 6.2.3;
                 add MSIE 7 and Firefox 2.
             </action>
-            <action type="add" dev="asashour" id="1756277">
+            <action type="add" dev="asashour" issue="1756277">
                 JavaScript: add basic support for element.currentStyle and window.getComputedStyle.
             </action>
-            <action type="update" dev="asashour" id="1756617" due-to="Matt Ryall">
+            <action type="update" dev="asashour" issue="1756617" due-to="Matt Ryall">
                 BrowserVersion: add equals() and hashCode().
             </action>
             <action type="add" dev="asashour">
@@ -1694,19 +1694,19 @@
             <action type="update" dev="asashour">
                 JavaScript: implement navigator.cookieEnabled to match WebClient#isCookiesEnabled().
             </action>
-            <action type="add" dev="asashour" id="1742662">
+            <action type="add" dev="asashour" issue="1742662">
                 Add empty implementation for table.refresh() (#1742662).
             </action>
-            <action type="update" dev="asashour" id="1751756">
+            <action type="update" dev="asashour" issue="1751756">
                 HTMLCollection: cache getElements() for better performance (#1751756).
             </action>
             <action type="add" dev="mguillem">
                 Experimental: added AjaxController and NicelyResynchronizingAjaxController.
             </action>
-            <action type="update" dev="mguillem" id="1225021">
+            <action type="update" dev="mguillem" issue="1225021">
                 JavaScript: added support for window.captureEvents (FF).
             </action>
-            <action type="update" dev="mguillem" id="1716129">
+            <action type="update" dev="mguillem" issue="1716129">
                 JavaScript: fixed addEventListener cannot be called twice.
             </action>
             <action type="update" dev="mguillem">
@@ -1718,20 +1718,20 @@
             <action type="update" dev="mguillem">
                 JavaScript: added support for window.onclick and window.ondblclick.
             </action>
-            <action type="update" dev="asashour" id="1579707">
+            <action type="update" dev="asashour" issue="1579707">
                 Ignore &amp;lt;base&amp;gt; if inside &amp;lt;body&amp;gt; (#1579707).
             </action>
-            <action type="fix" dev="asashour" id="1065041">
+            <action type="fix" dev="asashour" issue="1065041">
                 FailingHttpStatusCodeException is thrown for failing frame (#1065041).
             </action>
             <action type="update" dev="mguillem">
                 JavaScript: use custom JDK based regular expression evaluation for String.replace
                 to avoid Rhino problems (speed and wrong evaluation).
             </action>
-            <action type="update" dev="asashour" id="1186639">
+            <action type="update" dev="asashour" issue="1186639">
                 Elements inside &amp;lt;noscript&amp;gt; are ignored if isJavaScriptEnabled() (#1186639).
             </action>
-            <action type="update" dev="asashour" id="1748672">
+            <action type="update" dev="asashour" issue="1748672">
                 Version: add getProductName(), getProductVersion() and getCopyright() (#1748672).
             </action>
             <action type="add" dev="asashour">
@@ -1740,16 +1740,16 @@
             <action type="remove" dev="asashour">
                 Remove deprecated WebClient.getThrowExceptionOnFailingStatusCode and BaseFrame.FrameWindow.
             </action>
-            <action type="update" dev="asashour" id="1747454">
+            <action type="update" dev="asashour" issue="1747454">
                 HtmlImageInput, HtmlResetInput and HtmlSubmitInput can be clicked if exist outside an enclosing form. (#1747454).
             </action>
-            <action type="add" dev="asashour" id="1745024">
+            <action type="add" dev="asashour" issue="1745024">
                 JavaScript: allow FormField.onchange, form.onsubmit and frame.onload to be set to null (#1745024).
             </action>
             <action type="add" dev="asashour">
                 JavaScript: Add table.cellSpacing and table.cellPadding.
             </action>
-            <action type="add" dev="asashour" id="1124781">
+            <action type="add" dev="asashour" issue="1124781">
                 HtmlElement and HtmlPage: add/remove HtmlAttributeChangeListener (#1124781).
             </action>
             <action type="add" dev="asashour">
@@ -1758,37 +1758,37 @@
             <action type="update" dev="asashour">
                 HtmlSubmitInput: setting value to "Submit Query" if not specified, associated with asText(), asXml(), and submitValue changes.
             </action>
-            <action type="add" dev="asashour" id="1740086" due-to="Bruce Chapman">
+            <action type="add" dev="asashour" issue="1740086" due-to="Bruce Chapman">
                 HTMLElement.scrollIntoView() is added as an empty implementation (#1740086).
             </action>
-            <action type="fix" dev="asashour" id="1731042" due-to="Rodney Gitzel">
+            <action type="fix" dev="asashour" issue="1731042" due-to="Rodney Gitzel">
                 DomNode.asText() now correctly handles style elements (e.g. &amp;lt;i&amp;gt;, &amp;lt;b&amp;gt;, and &amp;lt;font&amp;gt;) (#1731042).
             </action>
-            <action type="fix" dev="asashour" id="1708397" due-to="Bruce Chapman">
+            <action type="fix" dev="asashour" issue="1708397" due-to="Bruce Chapman">
                 HtmlPage.clone() doesn't share idMap_ with original (#1708397).
             </action>
-            <action type="add" dev="asashour" id="1385295">
+            <action type="add" dev="asashour" issue="1385295">
                 ClickableElement: Add dblClick() (#1385295).
             </action>
-            <action type="add" dev="asashour" id="1521790">
+            <action type="add" dev="asashour" issue="1521790">
                 JavaScript: Add document.createElementNS(), element.namespaceURI, element.prefix, and element.localName (#1521790).
             </action>
-            <action type="add" dev="asashour" id="1685311">
+            <action type="add" dev="asashour" issue="1685311">
                 HtmlPage supports Serialization (#1685311).
             </action>
-            <action type="add" dev="asashour" id="1680026">
+            <action type="add" dev="asashour" issue="1680026">
                 Add partial support for IE Conditional Compilation (#1680026).
             </action>
-            <action type="update" dev="asashour" id="1549916" due-to="Andre Soereng">
+            <action type="update" dev="asashour" issue="1549916" due-to="Andre Soereng">
                 Meta Refresh: tolerate spaces before the semicolon (#1549916).
             </action>
-            <action type="update" dev="asashour" id="1587962">
+            <action type="update" dev="asashour" issue="1587962">
                 Allow setChecked of &amp;lt;input type="radio"&amp;gt; which is outside any &amp;lt;form&amp;gt; (#1587962).
             </action>
             <action type="update" dev="asashour">
                 Deprecated HtmlForm#getRadioButtonInput(String,String) and HtmlForm#setCheckedRadioButton(String,String). Use #getByXPath instead.
             </action>
-            <action type="fix" dev="asashour" id="1513928">
+            <action type="fix" dev="asashour" issue="1513928">
                 Allow HtmlFileInput to handle values starting with "file:/" (#1513928).
             </action>
             <action type="update" dev="mguillem">
@@ -1800,52 +1800,52 @@
             <action type="update" dev="asashour">
                 HtmlSelectElement: ignores setting 'selectedIndex' to more than or equal to options size.
             </action>
-            <action type="add" dev="asashour" id="1713515" due-to="Philip Graf">
+            <action type="add" dev="asashour" issue="1713515" due-to="Philip Graf">
                 HtmlForm: #getTextAreaByName and #getButtonByName (#1713515).
             </action>
-            <action type="add" dev="asashour" id="1729467" due-to="Karel Kolman">
+            <action type="add" dev="asashour" issue="1729467" due-to="Karel Kolman">
                 Add UTF-16BE, and UTF-16LE charset detection (#1729467).
             </action>
-            <action type="update" dev="asashour" id="1483301">
+            <action type="update" dev="asashour" issue="1483301">
                 Use WebRequestSettings#getCharset() as the encoding of pages instead of "ISO-8859-1" (#1483301).
             </action>
-            <action type="fix" dev="asashour" id="1549745" due-to="Kristian Muntau">
+            <action type="fix" dev="asashour" issue="1549745" due-to="Kristian Muntau">
                 Proper handling of &amp;nbsp; in DomNode#asText() (#1549745).
             </action>
             <action type="update" dev="asashour">
                 JavaScript: Simulate browser behavior for comments that have last line of "statement--&amp;gt;", but not "statement//--&amp;gt;".
             </action>
-            <action type="add" dev="asashour" id="1725742">
+            <action type="add" dev="asashour" issue="1725742">
                 JavaScript: Add support for location.toString() (#1725742).
             </action>
             <action type="update" dev="mguillem">
                 asXml() now expands tags for div, iframe and script to make generated xml interpretable as html by browsers.
             </action>
-            <action type="add" dev="asashour" id="1691024">
+            <action type="add" dev="asashour" issue="1691024">
                 Add support for table.width (#1691024).
             </action>
-            <action type="update" dev="asashour" id="1724889">
+            <action type="update" dev="asashour" issue="1724889">
                 HtmlInput (HtmlCheckBoxInput and HtmlRadioButtonInput): #setChecked now returns Page (#1724889).
             </action>
-            <action type="fix" dev="asashour" id="1725162">
+            <action type="fix" dev="asashour" issue="1725162">
                 Javascript: Correct handling of comments (#1725162).
             </action>
             <action type="update" dev="mguillem">
                 JavaScript [internal]: use Context.call(ContextAction) for faster JavaScript execution.
             </action>
-            <action type="update" dev="asashour" id="1722665">
+            <action type="update" dev="asashour" issue="1722665">
                 Meta Refresh empty URL is handled (#1722665).
             </action>
-            <action type="add" dev="asashour" id="1714772">
+            <action type="add" dev="asashour" issue="1714772">
                 JavaScript: add support for textarea.selectionStart, textarea.selectionEnd, and textarea.textLength (#1714772).
             </action>
             <action type="update" dev="asashour">
                 DomNode#getAllHtmlChildElements() now returns Iterator.
             </action>
-            <action type="update" dev="mguillem" id="1714762">
+            <action type="update" dev="mguillem" issue="1714762">
                 Fixed exception occurring handling script tag with one line content starting with &amp;lt;!-- and without closing --!&amp;gt;.
             </action>
-            <action type="update" dev="mguillem" id="1609944">
+            <action type="update" dev="mguillem" issue="1609944">
                 JavaScript: allow function named onload.
             </action>
             <action type="update" dev="mguillem">
@@ -1857,10 +1857,10 @@
             <action type="update" dev="mguillem">
                 JavaScript [internal]: large refactoring for a better Rhino usage.
             </action>
-            <action type="add" dev="asashour" id="1168346">
+            <action type="add" dev="asashour" issue="1168346">
                 JavaScript: Add support for event.shiftKey, event.ctrlKey, and event.altKey.
             </action>
-            <action type="update" dev="asashour" id="1714767">
+            <action type="update" dev="asashour" issue="1714767">
                 Tolerate URL starting with http:/ and http: in Firefox.
             </action>
             <action type="update" dev="mguillem">
@@ -1875,10 +1875,10 @@
             <action type="add" dev="asashour">
                 WebClient can now enable/disable cookies support.
             </action>
-            <action type="update" dev="mguillem" id="1201561">
+            <action type="update" dev="mguillem" issue="1201561">
                 JavaScript: allow to set window.onload to something else than a function.
             </action>
-            <action type="update" dev="mguillem" id="1705521" due-to="Bruce Chapman">
+            <action type="update" dev="mguillem" issue="1705521" due-to="Bruce Chapman">
                 DomNode.DescendantElementsIterator.remove() now throws UnsupportedOperationException
                 (previous behavior was not correct).
             </action>
@@ -1888,7 +1888,7 @@
             <action type="update" dev="mguillem" due-to="Bruce Chapman">
                 JavaScript: added support for defaultSelected property on Option objects.
             </action>
-            <action type="update" dev="mguillem" id="1705517" due-to="Bruce Chapman">
+            <action type="update" dev="mguillem" issue="1705517" due-to="Bruce Chapman">
                 JavaScript: allow selected and defaultSelected attribute in Option constructor.
             </action>
             <action type="update" dev="sdanig">
@@ -1899,117 +1899,117 @@
             <action type="update" dev="sdanig">
                 JavaScript: Add support for script.src, script.type, script.readyState and script.onreadystatechange.
             </action>
-            <action type="update" dev="sdanig" id="1707726" due-to="Bruce Chapman">
+            <action type="update" dev="sdanig" issue="1707726" due-to="Bruce Chapman">
                 When cloning nodes, clone the id attribute as well.
             </action>
-            <action type="update" dev="sdanig" id="1706505" due-to="Martin Tamme">
+            <action type="update" dev="sdanig" issue="1706505" due-to="Martin Tamme">
                 Avoid NPEs for responses with null bodies (ie 304 Not Modified responses).
             </action>
-            <action type="update" dev="sdanig" id="1707788" due-to="Bruce Chapman">
+            <action type="update" dev="sdanig" issue="1707788" due-to="Bruce Chapman">
                 JavaScript: Cloning a script node should not execute the script.
             </action>
-            <action type="update" dev="sdanig" id="1706237">
+            <action type="update" dev="sdanig" issue="1706237">
                 JavaScript: Don't run scripts after the window location changes.
             </action>
-            <action type="update" dev="sdanig" id="1634051">
+            <action type="update" dev="sdanig" issue="1634051">
                 Verify correct behavior of HtmlSelect#asText() with multiple selections, fix JavaDoc.
             </action>
-            <action type="update" dev="sdanig" id="1705559" due-to="Bruce Chapman">
+            <action type="update" dev="sdanig" issue="1705559" due-to="Bruce Chapman">
                 JavaScript: add support for frameset.rows and frameset.cols properties.
             </action>
-            <action type="update" dev="sdanig" id="1695279">
+            <action type="update" dev="sdanig" issue="1695279">
                 JavaScript: ignore invalid script.src attribute used by jQuery ("//:").
             </action>
-            <action type="update" dev="sdanig" id="1658064">
+            <action type="update" dev="sdanig" issue="1658064">
                 Trim whitespace off of anchor href attributes.
             </action>
             <action type="update" dev="sdanig">
                 JavaScript: add support for event.type property.
             </action>
-            <action type="update" dev="sdanig" id="1699119">
+            <action type="update" dev="sdanig" issue="1699119">
                 Fixed NPE exception triggered by invalid iframe/frame src attribute.
             </action>
-            <action type="update" dev="sdanig" id="1699125">
+            <action type="update" dev="sdanig" issue="1699125">
                 Fixed infinite loop triggered by recursive iframe/frame src attribute.
             </action>
-            <action type="update" dev="mguillem" id="1541150" due-to="Sam Hough and Ahmed Ashour">
+            <action type="update" dev="mguillem" issue="1541150" due-to="Sam Hough and Ahmed Ashour">
                 JavaScript: fixed set innerHTML uses 8bits for all chars and ignores some HTML.
             </action>
             <action type="update" dev="mguillem">
                 JavaScript: handle out of bound indexes on options as browsers do (undefined when too high and exception when negative).
             </action>
-            <action type="update" dev="mguillem" id="799817" due-to="Ahmed Ashour">
+            <action type="update" dev="mguillem" issue="799817" due-to="Ahmed Ashour">
                 Added (limited) support for client side map.
             </action>
-            <action type="update" dev="mguillem" id="1689214" due-to="Ahmed Ashour">
+            <action type="update" dev="mguillem" issue="1689214" due-to="Ahmed Ashour">
                 Don't execute JavaScript in &amp;lt;noframes&amp;gt; and &amp;lt;iframe&amp;gt;.
             </action>
-            <action type="update" dev="mguillem" id="1693423" due-to="Ahmed Ashour">
+            <action type="update" dev="mguillem" issue="1693423" due-to="Ahmed Ashour">
                 Set Referer header on outgoing requests.
             </action>
-            <action type="update" dev="mguillem" id="1692811" due-to="Ahmed Ashour">
+            <action type="update" dev="mguillem" issue="1692811" due-to="Ahmed Ashour">
                 JavaScript: setting innerHTML to null shouldn't create any text node for Firefox.
             </action>
-            <action type="update" dev="mguillem" id="1684652">
+            <action type="update" dev="mguillem" issue="1684652">
                 JavaScript: fixed remaining problem of submitted select values when select.selectedIndex = -1 has been used before setting an other value.
             </action>
-            <action type="update" dev="mguillem" id="1692572" due-to="Ahmed Ashour">
+            <action type="update" dev="mguillem" issue="1692572" due-to="Ahmed Ashour">
                 JavaScript: setting innerHTML to empty string shouldn't create any text node.
             </action>
-            <action type="update" dev="mguillem" id="1690203" due-to="Ahmed Ashour">
+            <action type="update" dev="mguillem" issue="1690203" due-to="Ahmed Ashour">
                 JavaScript: added support for property parentElement on DOM nodes (IE specific).
             </action>
             <action type="update" dev="mguillem">
                 JavaScript: configure correctly the prototype hierarchy on created host objects.
             </action>
-            <action type="update" dev="mguillem" id="1613119" due-to="Karel Kolman">
+            <action type="update" dev="mguillem" issue="1613119" due-to="Karel Kolman">
                 JavaScript: fixed non executed scripts added wit document.write.
             </action>
-            <action type="update" dev="mguillem" id="1689798">
+            <action type="update" dev="mguillem" issue="1689798">
                 JavaScript: "this" should be the window and not the current node in JavaScript href of link and area as well as in JavaScript action of forms.
             </action>
-            <action type="update" dev="mguillem" id="1686412" due-to="Karel Kolman">
+            <action type="update" dev="mguillem" issue="1686412" due-to="Karel Kolman">
                 Fixed wrong parsing order of comment and text nodes.
             </action>
-            <action type="update" dev="mguillem" id="1686412" due-to="Bruce Chapman">
+            <action type="update" dev="mguillem" issue="1686412" due-to="Bruce Chapman">
                 JavaScript: added support for following properties on HtmlAnchor: hash, host, hostname, pathname, port, protocol, search and target.
             </action>
             <action type="update" dev="mguillem">
                 Handle correctly anchors (alias reference) in URLs after form submission.
             </action>
-            <action type="update" dev="mguillem" id="1681779">
+            <action type="update" dev="mguillem" issue="1681779">
                 JavaScript: XMLHttpRequest now encodes post body in UTF-8.
             </action>
         </release>
         <release version="1.11" date="Mar 15, 2007">
-            <action type="update" dev="mguillem" id="1669097">
+            <action type="update" dev="mguillem" issue="1669097">
                 Respect non proxy hosts in redirects from a host using proxy.
             </action>
             <action type="update" dev="mguillem">
                 JavaScript: resolve relative locations from the originating page for Location's href, replace and assign.
             </action>
-            <action type="update" dev="mguillem" id="1562872">
+            <action type="update" dev="mguillem" issue="1562872">
                 Renamed frame host class to avoid conflict when a frame has 'Frame' as name.
             </action>
-            <action type="update" dev="mguillem" id="1676667">
+            <action type="update" dev="mguillem" issue="1676667">
                 Form should not send push buttons on submit.
             </action>
             <action type="update" dev="mguillem">
                 Added facility method DomNode.getByXPath(xpathExpr).
             </action>
-            <action type="update" dev="mguillem" id="1672048">
+            <action type="update" dev="mguillem" issue="1672048">
                 JavaScript: Option.setAttribute now works even if option has not yet been added to a select.
             </action>
-            <action type="update" dev="mguillem" id="1672392">
+            <action type="update" dev="mguillem" issue="1672392">
                 Parse as html all responses with content type ending with "xhtml+xml" like XHTML mobile profile documents (application/vnd.wap.xhtml+xml).
             </action>
-            <action type="update" dev="mguillem" id="1665629">
+            <action type="update" dev="mguillem" issue="1665629">
                 Improved HtmlPage.getAnchors's javadoc.
             </action>
-            <action type="update" dev="mguillem" id="799815">
+            <action type="update" dev="mguillem" issue="799815">
                 Added support for server side map (HtmlImage.click(int, int)).
             </action>
-            <action type="update" dev="mguillem" id="1619765">
+            <action type="update" dev="mguillem" issue="1619765">
                 Allow redirections to the same URL with a maximal number of 20.
             </action>
             <action type="update" dev="mguillem">
@@ -2018,45 +2018,45 @@
             <action type="update" dev="mguillem">
                 Upgraded dependencies to Jaxen 1.1, commons-lang 2.2, rhino 1.6R5, commons-io 1.3.
             </action>
-            <action type="update" dev="mguillem" id="1658273" due-to="Karel Kolman">
+            <action type="update" dev="mguillem" issue="1658273" due-to="Karel Kolman">
                 Changing element id should not impact child nodes.
             </action>
             <action type="update" dev="mguillem">
                 JavaScript: provide event object as argument when calling onload listeners attached with attachEvent (Internet explorer).
             </action>
-            <action type="update" dev="mguillem" id="1648014">
+            <action type="update" dev="mguillem" issue="1648014">
                 JavaScript: provide the event object to onsubmit handlers.
             </action>
             <action type="update" dev="mguillem">
                 Set cookies defined in meta tags with http-equiv equals to set-cookie.
             </action>
-            <action type="update" dev="mguillem" id="1628521" due-to="Andre Soereng">
+            <action type="update" dev="mguillem" issue="1628521" due-to="Andre Soereng">
                 Fixed NullPointerException occurring while submitting a from which onsubmit handler returns null.
             </action>
-            <action type="update" dev="mguillem" id="1627983">
+            <action type="update" dev="mguillem" issue="1627983">
                 JavaScript: fixed bad initialisation of JavaScript context when window content changes
                 (was introduced since last release in fixed for bug 1040244).
             </action>
-            <action type="update" dev="mguillem" id="1508377">
+            <action type="update" dev="mguillem" issue="1508377">
                 JavaScript: ensure that script execution is synchronized on the owning html page
                 (for instance using XMLHttpRequest asynchronously).
             </action>
-            <action type="update" dev="mguillem" id="1584525" due-to="Karel Kolman">
+            <action type="update" dev="mguillem" issue="1584525" due-to="Karel Kolman">
                 JavaScript: made ThreadManager thread safe.
             </action>
-            <action type="update" dev="mguillem" id="1619727" due-to="Deryk Sinotte">
+            <action type="update" dev="mguillem" issue="1619727" due-to="Deryk Sinotte">
                 JavaScript: perform correct setup of context for asynchronous execution of XMLHttpRequest.
             </action>
-            <action type="update" dev="mguillem" id="1611097">
+            <action type="update" dev="mguillem" issue="1611097">
                 JavaScript: don't wrap JavaScript primitive types when returned from a Java method.
             </action>
-            <action type="update" dev="dktaylor" id="1040244">
+            <action type="update" dev="dktaylor" issue="1040244">
                 Fixed Non-html reply in window.open() doesn't create window
                 object by restricting initialization of windows and pages.
                 Added line/column numbering of HTML elements for embedded
                 script names that are easier to debug.
             </action>
-            <action type="update" dev="mguillem" id="1608555">
+            <action type="update" dev="mguillem" issue="1608555">
                 JavaScript: fixed regression introduced in 1.10 on window.eval for local scope.
             </action>
             <action type="update" dev="mguillem">
@@ -2065,95 +2065,95 @@
             <action type="update" dev="mguillem">
                 Moved focus related methods from WebClient to HtmlPage and deprecated them on WebClient.
             </action>
-            <action type="update" dev="dktaylor" id="1605997">
+            <action type="update" dev="dktaylor" issue="1605997">
                 Fixed AREA elements can't handle JavaScript hrefs by
                 copying code from anchor element.
             </action>
-            <action type="update" dev="dktaylor" id="1192854">
+            <action type="update" dev="dktaylor" issue="1192854">
                 Fixed frames[i] return null for frames generated by
                 document.write by allowing JavaScript Window object to
                 be properly initialized with JavaScriptEngine.
             </action>
-            <action type="update" dev="dktaylor" id="1124613">
+            <action type="update" dev="dktaylor" issue="1124613">
                 Fixed document.write problem when &amp;lt;a...&amp;gt; written in 2 times
                 by checking for complete HTML tags before parsing.
             </action>
-            <action type="update" dev="dktaylor" id="1493455">
+            <action type="update" dev="dktaylor" issue="1493455">
                 Fixed document.write() does not keep ending spaces by reducing
                 text of adjacent text nodes as a whole instead of separately.
             </action>
-            <action type="update" dev="mguillem" id="1601754" due-to="Andre Soereng">
+            <action type="update" dev="mguillem" issue="1601754" due-to="Andre Soereng">
                 JavaScript: handle comments in event handlers.
             </action>
-            <action type="update" dev="mguillem" id="1592723">
+            <action type="update" dev="mguillem" issue="1592723">
                 JavaScript: if window with name 'myOldWin' exists, window.open('', 'myOldWin') should retrieve it
                 rather than opening a new one.
             </action>
             <action type="update" dev="mguillem">
                 Fixed asText() for style node. Now returns an empty string.
             </action>
-            <action type="update" dev="mguillem" id="1592726">
+            <action type="update" dev="mguillem" issue="1592726">
                 JavaScript: fixed select.selectedIndex = -1 should not be irreversible.
             </action>
-            <action type="update" dev="mguillem" id="1592728">
+            <action type="update" dev="mguillem" issue="1592728">
                 JavaScript: setting option's selected status to false when it is already false
                 shouldn't reset the whole select.
             </action>
-            <action type="update" dev="mguillem" id="1596926">
+            <action type="update" dev="mguillem" issue="1596926">
                 JavaScript: fixed java.util.ConcurrentModificationException occurring when some onload event is
                 removed during execution of an onload event.
             </action>
-            <action type="update" dev="mguillem" id="1409087">
+            <action type="update" dev="mguillem" issue="1409087">
                 JavaScript: second argument DOM node's insertBefore is now optional
                 when simulating Internet Explorer.
             </action>
-            <action type="update" dev="mguillem" id="1591212" due-to="Karel Kolman">
+            <action type="update" dev="mguillem" issue="1591212" due-to="Karel Kolman">
                 Added support for comments: &amp;lt;!-- some comment --&amp;gt;. Patch from Karel Kolman.
             </action>
-            <action type="update" dev="mguillem" id="1204628">
+            <action type="update" dev="mguillem" issue="1204628">
                 JavaScript: added XMLHttpRequest.overrideMimeType.
             </action>
-            <action type="update" dev="mguillem" id="1592299">
+            <action type="update" dev="mguillem" issue="1592299">
                 JavaScript: fixed bug preventing to set non String style properties.
             </action>
-            <action type="update" dev="mguillem" id="1570478">
+            <action type="update" dev="mguillem" issue="1570478">
                 JavaScript: allow to add options to a select with an index as second argument
                 when simulating Internet Explorer.
             </action>
-            <action type="update" dev="mguillem" id="1579511">
+            <action type="update" dev="mguillem" issue="1579511">
                 Ignore invalid URLs specified in &amp;lt;base href="..."/&amp;gt;.
             </action>
         </release>
         <release version="1.10" date="Nov 03, 2006">
-            <action type="update" dev="mguillem" id="1587246">
+            <action type="update" dev="mguillem" issue="1587246">
                 Fixed asText() for script node. Now returns an empty string.
             </action>
-            <action type="update" dev="mguillem" id="1575783">
+            <action type="update" dev="mguillem" issue="1575783">
                 Removed ":" in project id to avoid problems on Windows with plugins like idea.
             </action>
             <action type="update" dev="mguillem">
                 Upgraded jaxen to 1.1-beta-11 (even if it's a "beta", this is the version
                 recommended by jaxen developers).
             </action>
-            <action type="update" dev="mguillem" id="1559903">
+            <action type="update" dev="mguillem" issue="1559903">
                 Added Maven compliant scopes in project.xml.
             </action>
             <action type="update" dev="mguillem">
                 JavaScript: added minimal support for navigator.mimeTypes (Firefox).
             </action>
-            <action type="update" dev="mguillem" id="1570484">
+            <action type="update" dev="mguillem" issue="1570484">
                 Fixed select's faked selections are ignored, if select is empty.
             </action>
-            <action type="update" dev="mguillem" id="1570567">
+            <action type="update" dev="mguillem" issue="1570567">
                 Fixed asText() for hidden input. Now returns an empty string.
             </action>
             <action type="update" dev="mguillem">
                 JavaScript: only style's built in properties are of type String (with empty string as default value)
             </action>
-            <action type="update" dev="mguillem" id="1472606">
+            <action type="update" dev="mguillem" issue="1472606">
                 Use MultiThreadedHttpConnectionManager (avoids problems with requests started asynchronously from JavaScript).
             </action>
-            <action type="update" dev="mguillem" id="1570597">
+            <action type="update" dev="mguillem" issue="1570597">
                 JavaScript: property "all" now available on all html element (Internet explorer).
             </action>
             <action type="update" dev="mguillem">
@@ -2168,17 +2168,17 @@
             <action type="update" dev="mguillem">
                 JavaScript: build XMLHttpRequest for all ActiveX names starting with "Msxml2.XMLHTTP".
             </action>
-            <action type="update" dev="mguillem" id="1562461">
+            <action type="update" dev="mguillem" issue="1562461">
                 JavaScript: fixed bug in table.insertRow with empty tbody.
             </action>
-            <action type="update" dev="mguillem" id="1531821">
+            <action type="update" dev="mguillem" issue="1531821">
                 Follow redirection to the same Url if original method was a POST. Handle redirections
                 like browsers do rather than according to the RFC.
             </action>
-            <action type="update" dev="mguillem" id="1345136">
+            <action type="update" dev="mguillem" issue="1345136">
                 JavaScript: allow script to set a "javascript:..." location.
             </action>
-            <action type="update" dev="mguillem" id="1495132">
+            <action type="update" dev="mguillem" issue="1495132">
                 JavaScript: use of HTMLElement.innerHTML should not cause registration of a WebWindow.
             </action>
             <action type="update" dev="mguillem">
@@ -2197,17 +2197,17 @@
                 Parser: automatically add an &amp;lt;head&amp;gt; element if none present in html source
                 (as done by Internet Explorer and Firefox).
             </action>
-            <action type="update" dev="mguillem" id="1491743">
+            <action type="update" dev="mguillem" issue="1491743">
                 JavaScript: Location.replace wrongly loaded new URL in top window.
             </action>
-            <action type="update" dev="mguillem" id="1527799">
+            <action type="update" dev="mguillem" issue="1527799">
                 XPath: fixed wrong behavior with following axis.
             </action>
-            <action type="update" dev="mguillem" id="1552746">
+            <action type="update" dev="mguillem" issue="1552746">
                 JavaScript: fixed double execution of external JavaScript files occurring when text contained
                 between &amp;lt;script src=...&amp;gt; and &amp;lt;/script&amp;gt;.
             </action>
-            <action type="update" dev="mguillem" id="1525269" due-to="Andre Soereng">
+            <action type="update" dev="mguillem" issue="1525269" due-to="Andre Soereng">
                 JavaScript: allow to specify a maximal script execution time.
             </action>
             <action type="update" dev="mguillem">
@@ -2217,25 +2217,25 @@
             <action type="update" dev="mguillem">
                 Removed Jelly support.
             </action>
-            <action type="update" dev="mguillem" id="1545598">
+            <action type="update" dev="mguillem" issue="1545598">
                 Updated doc to reflect migration from CVS to SVN.
             </action>
             <action type="update" dev="yourgod">
                 Do not submit reset buttons in forms.
             </action>
-            <action type="update" dev="mguillem" id="1244810" due-to="Daniel Gredler">
+            <action type="update" dev="mguillem" issue="1244810" due-to="Daniel Gredler">
                 Transparently decompress server response if gzipped for transfer.
             </action>
-            <action type="update" dev="mguillem" id="1538136">
+            <action type="update" dev="mguillem" issue="1538136">
                 JavaScript: fixed default String conversion of objects (like table, table row, table cell, collection).
             </action>
-            <action type="update" dev="mguillem" id="1415496">
+            <action type="update" dev="mguillem" issue="1415496">
                 JavaScript: XMLHttpRequest.responseXml NodeList elements now accessible by index.
             </action>
-            <action type="update" dev="mguillem" id="1525234" due-to="Andre Soereng">
+            <action type="update" dev="mguillem" issue="1525234" due-to="Andre Soereng">
                 JavaScript: take expiration date into account when creating cookies.
             </action>
-            <action type="update" dev="mguillem" id="1528024">
+            <action type="update" dev="mguillem" issue="1528024">
                 JavaScript: cells collection for rows now takes th into account.
             </action>
             <action type="update" dev="yourgod">
@@ -2252,10 +2252,10 @@
             <action type="update" dev="yourgod">
                 Upgraded commons-io to version 1.2
             </action>
-            <action type="update" dev="mguillem" id="1439904">
+            <action type="update" dev="mguillem" issue="1439904">
                 JavaScript: added support IE style of events (window.event).
             </action>
-            <action type="update" dev="mguillem" id="1472307">
+            <action type="update" dev="mguillem" issue="1472307">
                 Added possibility to configure NTLM credentials for the DefaultCredentialsProvider.
             </action>
             <action type="update" dev="mguillem">
@@ -2272,7 +2272,7 @@
             <action type="update" dev="mguillem">
                 XmlPage: parse xml pages namespace aware.
             </action>
-            <action type="update" dev="mguillem" id="1494421">
+            <action type="update" dev="mguillem" issue="1494421">
                 JavaScript: ensure that the page being loaded has not already been replaced in its window
                 by a new one through JavaScript before executing onload handlers.
             </action>
@@ -2298,10 +2298,10 @@
             <action type="update" dev="mguillem">
                 Added facility methods HtmlOption.getEnclosingSelect() and HtmlLabel.getReferencedElement().
             </action>
-            <action type="update" dev="mguillem" id="1455390" due-to="Julien Henry">
+            <action type="update" dev="mguillem" issue="1455390" due-to="Julien Henry">
                 Fixed HtmlTable.getCellAt when table contains a rowspan.
             </action>
-            <action type="update" dev="mguillem" id="1460444">
+            <action type="update" dev="mguillem" issue="1460444">
                 Proxy settings now respected to load external JavaScript files.
             </action>
             <action type="update" dev="yourgod">
@@ -2313,20 +2313,20 @@
             <action type="update" dev="yourgod">
                 HtmlOption.asText() now respects the label attribute as browsers do.
             </action>
-            <action type="update" dev="mguillem" id="1437068">
+            <action type="update" dev="mguillem" issue="1437068">
                 Encode path part of URLs containing illegal characters.
             </action>
-            <action type="update" dev="mguillem" id="1436102" due-to="Brad Murray">
+            <action type="update" dev="mguillem" issue="1436102" due-to="Brad Murray">
                 Added support for firing onkeydown events.
             </action>
-            <action type="update" dev="mguillem" id="1419050">
+            <action type="update" dev="mguillem" issue="1419050">
                 HtmlElement.getAttributeEntriesIterator now returns the attributes in the order in
                 which they appear in the html source code.
             </action>
-            <action type="update" dev="mguillem" id="1438216">
+            <action type="update" dev="mguillem" issue="1438216">
                 HttpWebConnection now allows extensions to simply override HttpClient creation.
             </action>
-            <action type="update" dev="mguillem" id="1439464">
+            <action type="update" dev="mguillem" issue="1439464">
                 Use configured proxy when performing a request after a redirection.
             </action>
             <action type="update" dev="mguillem">
@@ -2334,7 +2334,7 @@
             </action>
         </release>
         <release version="1.8" date="Feb 17, 2006">
-            <action type="update" dev="mguillem" id="1280422">
+            <action type="update" dev="mguillem" issue="1280422">
                 Cookies can now be shared between HTTP and HTTPS.
             </action>
             <action type="update" dev="mguillem">
@@ -2371,7 +2371,7 @@
                 a custom object with the same name as the one used by htmlunit for the host object (caused error like:
                 "Form" is not a constructor).
             </action>
-            <action type="update" dev="mguillem" id="1105226">
+            <action type="update" dev="mguillem" issue="1105226">
                 Fixed bad handling of comma in Location header of redirections (30x)
             </action>
             <action type="update" dev="yourgod">
@@ -2379,25 +2379,25 @@
                 and setInterval threads. Thanks to Steven Grimm and Daniel Gredler for patches that
                 were helpful in the implementation.
             </action>
-            <action type="update" dev="mguillem" id="1281651" due-to="Stefan Anzinger">
+            <action type="update" dev="mguillem" issue="1281651" due-to="Stefan Anzinger">
                 JavaScript: added support for properties target and srcElement on events.
             </action>
             <action type="update" dev="mguillem">
                 Upgraded commons-httpclient to version 3.0.
             </action>
-            <action type="update" dev="mguillem" id="1385864" due-to="Paul King">
+            <action type="update" dev="mguillem" issue="1385864" due-to="Paul King">
                 Fixed NPE thrown when JS error occurs on click when ThrowExceptionOnScriptError is false.
             </action>
             <action type="update" dev="yourgod">
                 Added HtmlAnchor.openLinkInNewWindow()
             </action>
-            <action type="update" dev="mguillem" id="1382013">
+            <action type="update" dev="mguillem" issue="1382013">
                 JavaScript: changes on form's action attribute in onSubmit were ignored.
             </action>
-            <action type="update" dev="mguillem" id="1381734">
+            <action type="update" dev="mguillem" issue="1381734">
                 Allow external scripts to be loaded using file protocol.
             </action>
-            <action type="update" dev="mguillem" id="1369052" due-to="Mark van Leeuwen">
+            <action type="update" dev="mguillem" issue="1369052" due-to="Mark van Leeuwen">
                 JavaScript: added support for property cellIndex on td and th eleements.
             </action>
             <action type="update" dev="yourgod">
@@ -2408,65 +2408,65 @@
                 JavaScript: fixed exception occurring when addBehavior is called twice for the same
                 behavior.
             </action>
-            <action type="update" dev="mguillem" id="1378925" due-to="Bruce Faulkner">
+            <action type="update" dev="mguillem" issue="1378925" due-to="Bruce Faulkner">
                 JavaScript: Implement add() method for OptionsArray to avoid TypeError.
             </action>
             <action type="update" dev="mguillem">
                 JavaScript: added the full URL of the file containing the script being executed
                 in the exception message when a script error occurs.
             </action>
-            <action type="update" dev="mguillem" id="1238429" due-to="Daniel Gredler">
+            <action type="update" dev="mguillem" issue="1238429" due-to="Daniel Gredler">
                 JavaScript: made Location properties writable.
             </action>
-            <action type="update" dev="mguillem" id="1224239" due-to="Daniel Gredler">
+            <action type="update" dev="mguillem" issue="1224239" due-to="Daniel Gredler">
                 Added possibility to bypass configured proxy for some hosts.
             </action>
-            <action type="update" dev="mguillem" id="1224239" due-to="Vikram Shitole and Daniel Gredler">
+            <action type="update" dev="mguillem" issue="1224239" due-to="Vikram Shitole and Daniel Gredler">
                 Fixed support for NTLM proxy.
             </action>
-            <action type="update" dev="mguillem" id="1370484">
+            <action type="update" dev="mguillem" issue="1370484">
                 JavaScript: setting options' length to a value greater than current.
                 size fills option array with empty options.
             </action>
-            <action type="update" dev="mguillem" id="1370049" due-to="Paul King">
+            <action type="update" dev="mguillem" issue="1370049" due-to="Paul King">
                 Fixed mangled binary files loaded with the file protocol for non ISO-8859-1
                 default system file encoding.
             </action>
             <action type="update" dev="mguillem">
                 Upgraded commons-io to 1.1.
             </action>
-            <action type="update" dev="mguillem" id="1370468">
+            <action type="update" dev="mguillem" issue="1370468">
                 Form's name now writable (both in DOM and in Javascript).
             </action>
-            <action type="update" dev="mguillem" id="1369514">
+            <action type="update" dev="mguillem" issue="1369514">
                 Javascript: getElementsByTagName now returns an ElementArray (instead of a
                 NativeArray) for html elements allowing expressions like
                 "myForm.getElementsByTagName('input')['one']".
             </action>
-            <action type="update" dev="mguillem" id="1111597" due-to="Daniel Gredler">
+            <action type="update" dev="mguillem" issue="1111597" due-to="Daniel Gredler">
                 JavaScript: when simulating IE, options collection delegates to select
                 when the requested property/method doesn't exist.
             </action>
             <action type="update" dev="mguillem">
                 Consider inputs with invalid type as text inputs.
             </action>
-            <action type="update" dev="mguillem" id="1357412">
+            <action type="update" dev="mguillem" issue="1357412">
                 JavaScript: responses to XMLHttpRequest don't disturb window contents anymore.
             </action>
             <action type="add" dev="yourgod">
                 All code deprecated prior to 1.6 has been removed
             </action>
-            <action type="add" dev="mguillem" id="1343212" due-to="Stefan Anzinger">
+            <action type="add" dev="mguillem" issue="1343212" due-to="Stefan Anzinger">
                 JavaScript: added implementation of IE behavior "#default#download".
             </action>
             <action type="update" dev="mguillem">
                 Fixed HtmlSelect.getSelectedOptions to return an empty list if select has no option.
                 JavaScript: fixed select.value to return an empty string when select has no option.
             </action>
-            <action type="update" dev="mguillem" id="1334150">
+            <action type="update" dev="mguillem" issue="1334150">
                 HtmlOption.click() now returns correctly the page loaded by an onchange event.
             </action>
-            <action type="update" dev="mguillem" id="1334541" due-to="Ian Lovejoy">
+            <action type="update" dev="mguillem" issue="1334541" due-to="Ian Lovejoy">
                 Fixed requested URL for post form with empty action and original page containing
                 a query string or action containing only a query string.
             </action>
@@ -2483,7 +2483,7 @@
                 stack trace (bug 274467 reported by Daniel Gredler,
                 see http://www.mozilla.org/rhino/rhino16R2.html for full change log).
             </action>
-            <action type="update" dev="mguillem" id="1239285">
+            <action type="update" dev="mguillem" issue="1239285">
                 Fill frame windows with about:blank when the declaring tag is found
                 to allow JavaScript to run on it before the real content is loaded.
             </action>
@@ -2499,24 +2499,24 @@
             <action type="update" dev="mguillem">
                 Upgraded commons-httpclient to version 3.0rc4.
             </action>
-            <action type="update" dev="mguillem" id="1260369">
+            <action type="update" dev="mguillem" issue="1260369">
                 Javascript: allow to set current node's property within onclick event handler.
             </action>
-            <action type="update" dev="mguillem" id="1209682">
+            <action type="update" dev="mguillem" issue="1209682">
                 Javascript: XMLHttpRequest now accepts non xml responses.
             </action>
-            <action type="update" dev="mguillem" id="1323425">
+            <action type="update" dev="mguillem" issue="1323425">
                 Javascript: allow to change selected attribute of options created with
                 document.createElement('option') and not yet added to a select.
             </action>
-            <action type="update" dev="mguillem" id="1289060">
+            <action type="update" dev="mguillem" issue="1289060">
                 Load frames content first after the page is loaded to allow access to the whole page
                 for scripts contained in the frames.
             </action>
             <action type="update" dev="mguillem">
                 JavaScript: added support for document.frames (specific to IE).
             </action>
-            <action type="update" dev="mguillem" id="1304741">
+            <action type="update" dev="mguillem" issue="1304741">
                 JavaScript: when simulating IE, second parameter in Select.add can be omitted.
             </action>
             <action type="update" dev="mguillem">
@@ -2526,10 +2526,10 @@
                 JavaScript: added dummy implementation of the properties scrollHeight, scrollLeft,
                 scrollTop and scrollWidth for html elements.
             </action>
-            <action type="update" dev="mguillem" id="1280127">
+            <action type="update" dev="mguillem" issue="1280127">
                 JavaScript: added document.anchors.
             </action>
-            <action type="update" dev="mguillem" id="1209692">
+            <action type="update" dev="mguillem" issue="1209692">
                 JavaScript: XMLHttpRequest now accepts relative urls.
             </action>
             <action type="update" dev="mguillem">
@@ -2539,18 +2539,18 @@
             <action type="update" dev="mguillem">
                 JavaScript: default conversion of host objects to string is now "[object Xxxx]" like what Mozilla does
             </action>
-            <action type="update" dev="mguillem" id="1289462" due-to="Lothar Märkle">
+            <action type="update" dev="mguillem" issue="1289462" due-to="Lothar Märkle">
                 DomNode.asXml() now produces correct xml encoding special characters.
             </action>
-            <action type="update" dev="mguillem" id="1267106" due-to="Bruce Faulkner">
+            <action type="update" dev="mguillem" issue="1267106" due-to="Bruce Faulkner">
                 JavaScript: implemented property offsetParent.
             </action>
         </release>
         <release version="1.7" date="Aug 23, 2005">
-            <action type="update" dev="mguillem" id="1153775">
+            <action type="update" dev="mguillem" issue="1153775">
                 JavaScript: img nodes can be accessed by id or name within a form.
             </action>
-            <action type="update" dev="mguillem" id="1265410" due-to="Stefan Anzinger">
+            <action type="update" dev="mguillem" issue="1265410" due-to="Stefan Anzinger">
                 Click on a JavaScript link loading a page containing frames now return
                 the main loaded page and not a frame anymore.
             </action>
@@ -2558,15 +2558,15 @@
                 Trim the text of HtmlOption when it is used as initial value attribute
                 (when no attribute is found as defined in HTML 4.01).
             </action>
-            <action type="update" dev="mguillem" id="1264271" due-to="Bruce Faulkner">
+            <action type="update" dev="mguillem" issue="1264271" due-to="Bruce Faulkner">
                 JavaScript: fixed problem occurring while reading properties of nodes retrieved with childNodes().
             </action>
-            <action type="update" dev="mguillem" id="1210726">
+            <action type="update" dev="mguillem" issue="1210726">
                 When posting a form as multipart/form-data don't send Content-Transfer-Encoding
                 headers for the parts and send Content-Type headers only for files like browsers
                 do.
             </action>
-            <action type="update" dev="mguillem" id="1119937">
+            <action type="update" dev="mguillem" issue="1119937">
                 When posting a form, use encoding from accept-charset attribute if any else
                 from page to encode the posted parameters.
             </action>
@@ -2574,14 +2574,14 @@
                 Fixed infinite loop when DefaultCredentialsProvider provides invalid credential.
                 Ensure that the web connection uses the CredentialProvider configured for the WebClient.
             </action>
-            <action type="update" dev="mguillem" id="1195099">
+            <action type="update" dev="mguillem" issue="1195099">
                 Handle port correctly when handling a redirection to an other port on the same host.
             </action>
-            <action type="update" dev="mguillem" id="1151593">
+            <action type="update" dev="mguillem" issue="1151593">
                 JavaScript: fixed properties text, value and selected for Option objects
                 created from JavaScript and not yet added to a select.
             </action>
-            <action type="update" dev="mguillem" id="1211980">
+            <action type="update" dev="mguillem" issue="1211980">
                 Added WebResponse.getRequestMethod().
                 ImmediateRefreshHandler now accepts a refresh to the same URL if the first request was a POST.
             </action>
@@ -2593,24 +2593,24 @@
                 no attribute is found as defined in HTML 4.01.
                 Deprecated HtmlOption.getValue().
             </action>
-            <action type="update" dev="mguillem" id="1159709">
+            <action type="update" dev="mguillem" issue="1159709">
                 JavaScript: fixed execution of onchange handlers to really return
                 "The page that occupies this window after this method completes" as defined by
                 the javadoc.
             </action>
-            <action type="update" dev="mguillem" id="1244839">
+            <action type="update" dev="mguillem" issue="1244839">
                 JavaScript: fixed behavior of table.insertRow and table.rows.length for tables containing nested tables.
             </action>
-            <action type="update" dev="mguillem" id="1244959">
+            <action type="update" dev="mguillem" issue="1244959">
                 Improved the way getHtmlElementById handle pages containing multiple elements with the same id.
             </action>
-            <action type="update" dev="mguillem" id="1244923">
+            <action type="update" dev="mguillem" issue="1244923">
                 JavaScript: made input.setAttribute("type", xxx) behave the same than input.type = xxxx.
             </action>
-            <action type="update" dev="mguillem" id="1210751">
+            <action type="update" dev="mguillem" issue="1210751">
                 JavaScript: fixed double execution of script inside &amp;lt;table&amp;gt;.
             </action>
-            <action type="update" dev="mguillem" id="1241739" due-to="Bruce Faulkner">
+            <action type="update" dev="mguillem" issue="1241739" due-to="Bruce Faulkner">
                 Set state of radio button before executing onclick handler.
             </action>
             <action type="update" dev="mguillem">
@@ -2620,7 +2620,7 @@
                 Load responses which content type matches regular expression
                 "application/.*\+xml" as XmlPage (rather than UnexpectedPage).
             </action>
-            <action type="update" dev="mguillem" id="1233519">
+            <action type="update" dev="mguillem" issue="1233519">
                 Children of removed nodes were erroneously still available by id using
                 HtmlPage.getElementById.
             </action>
@@ -2630,42 +2630,42 @@
             <action type="update" dev="yourgod">
                 Upgraded commons-httpclient to version 3.0rc3
             </action>
-            <action type="update" dev="yourgod" id="1195509" due-to="dlevine004">
+            <action type="update" dev="yourgod" issue="1195509" due-to="dlevine004">
                 Added method for setting HttpClient's virtual host
             </action>
-            <action type="update" dev="mguillem" id="1221161" due-to="Denis N. Antonioli">
+            <action type="update" dev="mguillem" issue="1221161" due-to="Denis N. Antonioli">
                 INCOMPATIBLE CHANGE: HtmlElement.getAttributeEntriesIterator now return an iterator
                 on HtmlAttr (and not Map.Entry) allowing XPath expressions that return a list of node attributes.
             </action>
-            <action type="update" dev="mguillem" id="1220522">
+            <action type="update" dev="mguillem" issue="1220522">
                 Don't perform server request when a link is clicked if href is just an anchor (like "#").
             </action>
-            <action type="update" dev="mguillem" id="1101525">
+            <action type="update" dev="mguillem" issue="1101525">
                 JavaScript: resolve relative locations from the originating page.
             </action>
-            <action type="update" dev="mguillem" id="1213455" due-to="Daniel Gredler">
+            <action type="update" dev="mguillem" issue="1213455" due-to="Daniel Gredler">
                 JavaScript: use the Window as the top scope in Rhino JavaScript engine.
             </action>
             <action type="update" dev="yourgod">
                 JavaScript: Fixed bug with onchange handler being fired for all input type="file"
                 on creation.
             </action>
-            <action type="update" dev="mguillem" id="1210742">
+            <action type="update" dev="mguillem" issue="1210742">
                 JavaScript: handle position in insertAjacentHTML as case insensitive as IE does.
             </action>
-            <action type="update" dev="mguillem" id="1216267">
+            <action type="update" dev="mguillem" issue="1216267">
                 HtmlOption.click() now selects the option.
             </action>
-            <action type="update" dev="mguillem" id="1215621">
+            <action type="update" dev="mguillem" issue="1215621">
                 Handle content types in a case insensitive way (as of RFC 2045).
             </action>
-            <action type="update" dev="mguillem" id="1209947" due-to="Daniel Gredler">
+            <action type="update" dev="mguillem" issue="1209947" due-to="Daniel Gredler">
                 Implemented form reset, defaultValue and defaultChecked.
             </action>
             <action type="update" dev="yourgod">
                 JavaScript: Added window.print() as unimplemented method.
             </action>
-            <action type="update" dev="mguillem" id="1204922">
+            <action type="update" dev="mguillem" issue="1204922">
                 Javascript: document.getElementsByTagName and document.getElementsByName
                 now return an ElementArray (instead of a NativeArray) allowing expressions
                 like "document.getElementsByTagName('a').item(0)".
@@ -2686,10 +2686,10 @@
             </action>
         </release>
         <release version="1.6" date="May 10, 2005">
-            <action type="update" dev="yourgod" id="1194006" due-to="Daniel Gredler">
+            <action type="update" dev="yourgod" issue="1194006" due-to="Daniel Gredler">
                 Added XMLHttpRequest support. Patch submitted by Daniel Gredler.
             </action>
-            <action type="update" dev="yourgod" id="1080774" due-to="Daniel Gredler">
+            <action type="update" dev="yourgod" issue="1080774" due-to="Daniel Gredler">
                 Deprecated and renamed getAll&amp;lt;Something&amp;gt;s methods to get&amp;lt;Something&amp;gt;s to
                 make them easier to find.
             </action>
@@ -2700,29 +2700,29 @@
                 implement getResponse(WebRequestSettings) in place of other getResponse methods,
                 which have been deprecated and given default implementations that call this method.
             </action>
-            <action type="update" dev="mguillem" id="1183971" due-to="Bruce Faulkner">
+            <action type="update" dev="mguillem" issue="1183971" due-to="Bruce Faulkner">
                 Javascript: fixed exception occurring while changing type of input created via document.createElement().
             </action>
             <action type="update" dev="yourgod">
                 Upgraded commons-httpclient to version 3.0rc2
             </action>
-            <action type="update" dev="mguillem" id="1188143" due-to="Bruce Faulkner">
+            <action type="update" dev="mguillem" issue="1188143" due-to="Bruce Faulkner">
                 Javascript: insertRow now accepts the number of rows as parameter value.
             </action>
-            <action type="update" dev="mguillem" id="1183019" due-to="Chris Eldredge">
+            <action type="update" dev="mguillem" issue="1183019" due-to="Chris Eldredge">
                 Javascript: the onchange event handler of a radio button is now invoked when its state is changed.
             </action>
             <action type="update" dev="mguillem">
                 Javascript: implemented property contentDocument for frames and iframes on Mozilla.
             </action>
-            <action type="update" dev="mguillem" id="1180352" due-to="George Murnock">
+            <action type="update" dev="mguillem" issue="1180352" due-to="George Murnock">
                 Javascript: fixed error occurring in NodeImpl insertBefore() with null reference child object.
             </action>
             <action type="update" dev="cerskine">
                 Now load the mapping of html classes to their respective JS classes from the configuration
                 file.
             </action>
-            <action type="update" dev="mguillem" id="1179134">
+            <action type="update" dev="mguillem" issue="1179134">
                 Javascript: when simulating IE, window.open("") handles empty string as "about:blank".
             </action>
             <action type="update" dev="cerskine">
@@ -2734,7 +2734,7 @@
                 INCOMPATIBLE CHANGE: replaced WebClient.setValidateHtml(boolean) with WebClient.setHTMLParserListener(HTMLParserListener)
                 allowing to programmatically catch parser messages.
             </action>
-            <action type="update" dev="mguillem" id="1161705">
+            <action type="update" dev="mguillem" issue="1161705">
                 Javascript: fixed infinite loop caused by onblur.
             </action>
             <action type="update" dev="mguillem">
@@ -2760,47 +2760,47 @@
             <action type="add" dev="mguillem">
                 Javascript: added dummy implementation for read only properties offsetHeight, offsetLeft, offsetTop and offsetWidth.
             </action>
-            <action type="add" dev="mguillem" id="1150208">
+            <action type="add" dev="mguillem" issue="1150208">
                 Javascript: added support for multiple arguments for document.write and document.writeln.
             </action>
-            <action type="add" dev="mguillem" id="1150208" due-to="Daniel Gredler">
+            <action type="add" dev="mguillem" issue="1150208" due-to="Daniel Gredler">
                 Added WebResponse.getResponseHeaders().
             </action>
-            <action type="update" dev="mguillem" id="1166652" due-to="Alfred Nathaniel">
+            <action type="update" dev="mguillem" issue="1166652" due-to="Alfred Nathaniel">
                 Fixed NPE in loadWebResponse for responses with status code 204 (No Content).
             </action>
-            <action type="update" dev="mguillem" id="1166781" due-to="Kent Tong">
+            <action type="update" dev="mguillem" issue="1166781" due-to="Kent Tong">
                 Javascript: form's onsubmit property is now a function and can be assigned.
             </action>
-            <action type="add" dev="mguillem" id="1153758" due-to="George Murnock">
+            <action type="add" dev="mguillem" issue="1153758" due-to="George Murnock">
                 Javascript: added support for new Image() and changing src attribute.
             </action>
         </release>
 
         <release version="1.5" date="March 13, 2005">
-            <action type="update" dev="mguillem" id="976077">
+            <action type="update" dev="mguillem" issue="976077">
                 Determine content-type of uploaded files.
             </action>
-            <action type="add" dev="mguillem" id="1153758" due-to="George Murnock">
+            <action type="add" dev="mguillem" issue="1153758" due-to="George Murnock">
                 Javascript: implemented method removeAttribute for DOM nodes.
             </action>
             <action type="update" dev="yourgod">
                 Javascript: Added support for document.scripts
             </action>
-            <action type="update" dev="mguillem" id="1157936">
+            <action type="update" dev="mguillem" issue="1157936">
                 Javascript: fixed getAttribute() to return null if the requested attribute is not defined.
             </action>
-            <action type="add" dev="mguillem" id="1153693" due-to="George Murnock">
+            <action type="add" dev="mguillem" issue="1153693" due-to="George Murnock">
                 Javascript: implemented property childNodes.
             </action>
             <action type="update" dev="yourgod">
                 Fixed bug where document.write-ing a frame was causing an attempt
                 to load an invalid URL starting with http://first
             </action>
-            <action type="update" dev="mguillem" id="1155063">
+            <action type="update" dev="mguillem" issue="1155063">
                 Fixed node reference problem occurring when the text of a textarea is changed.
             </action>
-            <action type="update" dev="mguillem" id="1153710" due-to="George Murnock">
+            <action type="update" dev="mguillem" issue="1153710" due-to="George Murnock">
                 Javascript: document.links doesn't return tags with empty href anymore.
             </action>
             <action type="update" dev="yourgod">
@@ -2812,50 +2812,50 @@
             <action type="update" dev="mguillem">
                 Javascript: the type property of input elements can now be changed.
             </action>
-            <action type="update" dev="mguillem" id="1145773" due-to="George Murnock">
+            <action type="update" dev="mguillem" issue="1145773" due-to="George Murnock">
                 Fixed bug occurring when submitting from JavaScript a form with a JavaScript action.
             </action>
-            <action type="update" dev="yourgod" id="1151184">
+            <action type="update" dev="yourgod" issue="1151184">
                 HtmlElement's getHtmlElementsByAttribute, getHtmlElementsByTagName, and
                 getHtmlElementsByTagNames were all updated to ignore the case of the passed
                 in tag name as they're always compared with a lowercase version.
             </action>
-            <action type="update" dev="yourgod" id="1145916" due-to="Daniel Gredler">
+            <action type="update" dev="yourgod" issue="1145916" due-to="Daniel Gredler">
                 JavaScript: Implemented location.reload().
             </action>
-            <action type="update" dev="yourgod" id="1143982" due-to="Daniel Gredler">
+            <action type="update" dev="yourgod" issue="1143982" due-to="Daniel Gredler">
                 Fixed bug with meta refresh that only contained a number.
             </action>
-            <action type="update" dev="yourgod" id="1145869" due-to="Daniel Gredler">
+            <action type="update" dev="yourgod" issue="1145869" due-to="Daniel Gredler">
                 INCOMPATIBLE CHANGE: RefeshHandler interface changed and they must now do the
                 refresh themselves. DefaultRefreshHandler was replaced with
                 ImmediateRefreshHandler (the new default) and ThreadedRefreshHandler.
             </action>
-            <action type="update" dev="yourgod" id="1144103" due-to="Daniel Gredler">
+            <action type="update" dev="yourgod" issue="1144103" due-to="Daniel Gredler">
                 INCOMPATIBLE CHANGE: com.gargoylesoftware.htmlunit.CredentialProvider has been removed.
                 You should now use org.apache.commons.httpclient.auth.CredentialsProvider instead.
                 This patch should allow support for NTLM and Digest authentication as well as
                 proxy authentication.
             </action>
-            <action type="update" dev="mguillem" id="1110768" due-to="Daniel Gredler">
+            <action type="update" dev="mguillem" issue="1110768" due-to="Daniel Gredler">
                 JavaScript: Pick up behaviors defined in style attribute when simulating IE.
             </action>
-            <action type="update" dev="mguillem" id="1118222">
+            <action type="update" dev="mguillem" issue="1118222">
                 JavaScript: expressions like myForm.myField now look for form fields with "myField" as id or name.
             </action>
-            <action type="update" dev="mguillem" id="1118877">
+            <action type="update" dev="mguillem" issue="1118877">
                 Clicked image button without name sends parameter x and y.
             </action>
-            <action type="update" dev="mguillem" id="1093017" due-to="David D. Kilzer">
+            <action type="update" dev="mguillem" issue="1093017" due-to="David D. Kilzer">
                 Submit form elements in the same order that they appear in the HTML form.
             </action>
             <action type="update" dev="yourgod">
                 Upgraded commons-httpclient to version 3.0rc1
             </action>
-            <action type="update" dev="mguillem" id="1115259" due-to="Michael Ottati">
+            <action type="update" dev="mguillem" issue="1115259" due-to="Michael Ottati">
                 JavaScript: fixed document.domain setter for domains like d1.d2.d3.d4.com.
             </action>
-            <action type="update" dev="mguillem" id="1115091">
+            <action type="update" dev="mguillem" issue="1115091">
                 JavaScript: fixed document.myForm.myField should not retrieve the field if it is an input of type image.
             </action>
             <action type="update" dev="mguillem">
@@ -2870,25 +2870,25 @@
             <action type="add" dev="mguillem">
                 JavaScript: fixed insertRow when asked to insert at the end of the rows collection (was inserted one position before).
             </action>
-            <action type="update" dev="mguillem" id="1113487">
+            <action type="update" dev="mguillem" issue="1113487">
                 Guess content type for file content and file name when loading a file URL.
             </action>
             <action type="update" dev="mguillem">
                 Parse responses of type "application/xml" as XmlPage.
             </action>
-            <action type="update" dev="mguillem" id="1101525" due-to="Hans Donner">
+            <action type="update" dev="mguillem" issue="1101525" due-to="Hans Donner">
                 Fixed wrong URLs expansion with "#".
             </action>
-            <action type="update" dev="mguillem" id="1106319" due-to="Daniel Gredler">
+            <action type="update" dev="mguillem" issue="1106319" due-to="Daniel Gredler">
                 JavaScript: improved window.execScript to execute JavaScript code.
             </action>
-            <action type="update" dev="mguillem" id="1109224" due-to="Hans Donner">
+            <action type="update" dev="mguillem" issue="1109224" due-to="Hans Donner">
                 Use commons-codec's Base64. Marked custom Base64 as deprecated.
             </action>
-            <action type="update" dev="mguillem" id="1002140" due-to="Daniel Gredler">
+            <action type="update" dev="mguillem" issue="1002140" due-to="Daniel Gredler">
                 Fixed NullPointerException thrown in JavaScript by createElement('input')
             </action>
-            <action type="update" dev="mguillem" id="1107432" due-to="Hans Donner">
+            <action type="update" dev="mguillem" issue="1107432" due-to="Hans Donner">
                 Javascript: implemented innerText for html elements (read/write).
             </action>
             <action type="update" dev="mguillem">
@@ -2904,19 +2904,19 @@
             <action type="update" dev="yourgod">
                 A failure when setting a location from JavaScript now throws an exception
             </action>
-            <action type="update" dev="yourgod" id="1104522" due-to="Daniel Gredler">
+            <action type="update" dev="yourgod" issue="1104522" due-to="Daniel Gredler">
                 Added support for misc table methods in JavaScript
             </action>
             <action type="update" dev="mguillem">
                 JavaScript: added dummy implementation of window.setInterval and window.clearInterval doing nothing.
             </action>
-            <action type="update" dev="yourgod" id="976471" due-to="David D. Kilzer">
+            <action type="update" dev="yourgod" issue="976471" due-to="David D. Kilzer">
                 synchronized JavaScript execution for multi-threaded testing
             </action>
-            <action type="update" dev="yourgod" id="1088709">
+            <action type="update" dev="yourgod" issue="1088709">
                 parse application/xhtml+xml content type into HtmlPage
             </action>
-            <action type="update" dev="mguillem" id="1104028">
+            <action type="update" dev="mguillem" issue="1104028">
                 JavaScript: use js object Input for &amp;lt;input type="image" .../&amp;gt; and &amp;lt;input type="button" .../&amp;gt;
             </action>
             <action type="update" dev="mguillem">
@@ -2925,13 +2925,13 @@
             <action type="update" dev="mguillem">
                 JavaScript: the DOM node of a &amp;lt;frame&amp;gt; or &amp;lt;frame&amp;gt; is now visible to the contained page while loading.
             </action>
-            <action type="update" dev="mguillem" id="1084226">
+            <action type="update" dev="mguillem" issue="1084226">
                 JavaScript: when simulating IE, a variable named after the id of a DOM node represents this DOM node.
             </action>
-            <action type="add" dev="mguillem" due-to="David D. Kilzer" id="1099235">
+            <action type="add" dev="mguillem" due-to="David D. Kilzer" issue="1099235">
                 Made window.name writable.
             </action>
-            <action type="update" dev="mguillem" id="1100975">
+            <action type="update" dev="mguillem" issue="1100975">
                 JavaScript: document.xxx now retrieves DOM node with name xxx only if it's an img or a form (input should not be retrieved).
             </action>
             <action type="update" dev="mguillem">
@@ -2940,13 +2940,13 @@
             <action type="update" dev="cerskine">
                 JavaScript: Fixed bug with frames.length not working.
             </action>
-            <action type="add" dev="mguillem" due-to="Daniel Gredler" id="1100321">
+            <action type="add" dev="mguillem" due-to="Daniel Gredler" issue="1100321">
                 JavaScript: Implement writeable document.location.
             </action>
-            <action type="update" dev="mguillem" id="1100089">
+            <action type="update" dev="mguillem" issue="1100089">
                 JavaScript: added window.status and removed erroneous document.status.
             </action>
-            <action type="update" dev="mguillem" due-to="Chris Eldredge" id="1099644">
+            <action type="update" dev="mguillem" due-to="Chris Eldredge" issue="1099644">
                 Fixed window.frames['frameName'] causes ClassCastException.
             </action>
             <action type="update" dev="mguillem">
@@ -2954,13 +2954,13 @@
             </action>
         </release>
         <release version="1.4" date="January 9, 2005">
-            <action type="add" dev="mbowler" due-to="David D. Kilzer" id="1098981">
+            <action type="add" dev="mbowler" due-to="David D. Kilzer" issue="1098981">
                 Fixed platform specific encoding problem in test WebClientTest.testLoadPage_EncodeQueryString()
             </action>
-            <action type="add" dev="mguillem" due-to="Daniel Gredler" id="1090094">
+            <action type="add" dev="mguillem" due-to="Daniel Gredler" issue="1090094">
                 JavaScript: added window.clearTimeout.
             </action>
-            <action type="update" dev="mguillem" id="949691">
+            <action type="update" dev="mguillem" issue="949691">
                 JavaScript: dynamically compiled function runs in the scope of their creation.
             </action>
             <action type="update" dev="mguillem">
@@ -2969,7 +2969,7 @@
             <action type="add" dev="mguillem">
                 JavaScript: added document.domain.
             </action>
-            <action type="add" dev="mguillem" due-to="Daniel Gredler" id="1096789">
+            <action type="add" dev="mguillem" due-to="Daniel Gredler" issue="1096789">
                 JavaScript: added implementation of IE behavior "#default#clientCaps".
             </action>
             <action type="update" dev="mguillem">
@@ -2982,13 +2982,13 @@
             <action type="add" dev="mguillem">
                 Added HtmlPage.getFrameByName
             </action>
-            <action type="update" dev="mguillem" due-to="Mike Bresnahan" id="1083336">
+            <action type="update" dev="mguillem" due-to="Mike Bresnahan" issue="1083336">
                 asText() now returns "checked" or "unchecked" for HtmlRadioButtonInput and HtmlCheckBoxInput
             </action>
             <action type="add" dev="mguillem">
                 JavaScript: added dummy implementation of window.execScript doing nothing.
             </action>
-            <action type="add" dev="mguillem" due-to="Daniel Gredler" id="1096133">
+            <action type="add" dev="mguillem" due-to="Daniel Gredler" issue="1096133">
                 JavaScript: added attribute support.
             </action>
             <action type="add" dev="mguillem">
@@ -3014,7 +3014,7 @@
                 Added DebuggingWebConnection, a web connection that saves the received responses and builds an overview.
                 Sometimes useful at conception time to understand what is "browsed".
             </action>
-            <action type="update" dev="mguillem" due-to="Chris Eldredge" id="1090438">
+            <action type="update" dev="mguillem" due-to="Chris Eldredge" issue="1090438">
                 Extended JavaScript event handler to most common events:  ondblclick, onmousedown, onmouseup,
                 onmousemove, onmouseover, onmouseout, onkeypress, onkeydown, onkeyup, onfocus, onblur.
             </action>
@@ -3027,7 +3027,7 @@
             <action type="update" dev="mguillem">
                 Added dependency to commons-codec 1.3
             </action>
-            <action type="update" dev="mguillem" id="1058846">
+            <action type="update" dev="mguillem" issue="1058846">
                 Possibly incompatible change: Removed fix trying to mimic browser kludge for non-RFC2019-compliant cookies as it causes new problems.
             </action>
             <action type="update" dev="mguillem">
@@ -3049,10 +3049,10 @@
             <action type="add" dev="mguillem">
                 Added support for JS document.links.
             </action>
-            <action type="update" dev="mguillem" id="1067396">
+            <action type="update" dev="mguillem" issue="1067396">
                 IFrames can now be seen in JS as an html element too. Expressions like window.myIFrame.style.display now work.
             </action>
-            <action type="update" dev="mguillem" id="1088353">
+            <action type="update" dev="mguillem" issue="1088353">
                 document.forms is now a "live" collection and forms can be accessed with document.forms["myFormId"] where "myFormId" is the id of a form.
             </action>
             <action type="update" dev="mguillem">
@@ -3064,7 +3064,7 @@
             <action type="update" dev="mguillem">
                 Added node.children.
             </action>
-            <action type="update" dev="mguillem" due-to="Daniel Gredler" id="1088655">
+            <action type="update" dev="mguillem" due-to="Daniel Gredler" issue="1088655">
                 Fixed bug for JS wrapped in HTML comments on one line.
             </action>
             <action type="update" dev="mguillem">
@@ -3073,68 +3073,68 @@
             <action type="update" dev="mguillem">
                 Added support for insertAdjacentHTML.
             </action>
-            <action type="update" dev="mguillem" id="930846">
+            <action type="update" dev="mguillem" issue="930846">
                 Fixed DomNode.replace() fails to set previousSibling on newNode and other problems when changing DomNode.
             </action>
-            <action type="update" dev="mguillem" due-to="Chris Eldredge" id="1080365">
+            <action type="update" dev="mguillem" due-to="Chris Eldredge" issue="1080365">
                 Allow onclick event handler to be set by JavaScript.
             </action>
             <action type="update" dev="cerskine">
                 Added logic to WebClient to allow messages from parsing the HTML to be displayed on the
                 on the console.
             </action>
-            <action type="update" dev="mguillem" due-to="Sergey Gorelkin" id="1085612">
+            <action type="update" dev="mguillem" due-to="Sergey Gorelkin" issue="1085612">
                 Fixed bug changing "//" to "/" in query parameters of URLs called from a page.
             </action>
             <action type="update" dev="mguillem">
                 When simulating IE, nodes can now be accessed directly by their name (ex: window.form1).
             </action>
-            <action type="update" dev="mguillem" due-to="Daniel Gredler" id="1085878">
+            <action type="update" dev="mguillem" due-to="Daniel Gredler" issue="1085878">
                 Improved ElementArray: fix for empty collection and addition of method namedItem().
             </action>
             <action type="update" dev="mguillem">
                 Fixed bug with setTimeout: a timeout is now only executed if the page that placed it is always "alive".
             </action>
-            <action type="update" dev="mguillem" id="1085378">
+            <action type="update" dev="mguillem" issue="1085378">
                 Fixed html element property access in JS: attributes are case sensitive.
             </action>
             <action type="update" dev="mguillem">
                 Improved JS innerHTML to allow complex html code to be set.
             </action>
-            <action type="update" dev="mguillem" due-to="Daniel Gredler" id="1085224">
+            <action type="update" dev="mguillem" due-to="Daniel Gredler" issue="1085224">
                 Refactored different arrays of html elements in a generic ElementArray. Expressions like "document.all.tags('s').item(y)" can now be evaluated.
             </action>
-            <action type="update" dev="mguillem" id="1082098">
+            <action type="update" dev="mguillem" issue="1082098">
                 Upgraded rhino js to 1.6R1.
             </action>
-            <action type="update" dev="mguillem" due-to="Mike Bresnahan" id="1083330">
+            <action type="update" dev="mguillem" due-to="Mike Bresnahan" issue="1083330">
                 Fixed NullPointerException tossed by HtmlSelect.asText() if no option is selected.
             </action>
             <action type="update" dev="mguillem">
                 Improved Refresh meta tag support: Take care of enclosing &amp;lt;noscript&amp;gt; tags and correctly interpret quoted urls.
             </action>
-            <action type="update" dev="mguillem" due-to="Daniel Gredler" id="1081544">
+            <action type="update" dev="mguillem" due-to="Daniel Gredler" issue="1081544">
                 Implemented IE specific behavior related methods as well as default behavior "#default#homePage".
             </action>
-            <action type="update" dev="mguillem" due-to="Daniel Gredler" id="1081544">
+            <action type="update" dev="mguillem" due-to="Daniel Gredler" issue="1081544">
                 Implemented screen methods.
             </action>
-            <action type="update" dev="mguillem" due-to="Daniel Gredler" id="1082509">
+            <action type="update" dev="mguillem" due-to="Daniel Gredler" issue="1082509">
                 Added missing (for IE) methods/properties of window.navigator.
             </action>
             <action type="update" dev="mguillem">
                 Added support for window.location.replace(...).
             </action>
-            <action type="update" dev="mguillem" due-to="Daniel Gredler" id="1082259">
+            <action type="update" dev="mguillem" due-to="Daniel Gredler" issue="1082259">
                 Fixed problem with pages where body's onload contains a return statement.
             </action>
             <action type="update" dev="mguillem">
                 Fixed bug in JS accessing form elements through syntax like myForm[i] and don't count inputs with type=image in form.length as browsers do.
             </action>
-            <action type="update" dev="mguillem" id="1081557">
+            <action type="update" dev="mguillem" issue="1081557">
                 Automatically add value="on" for radio buttons and checkboxes without value attribute (available for JS access and used when submitting a form as browsers do).
             </action>
-            <action type="update" dev="mguillem" due-to="Daniel Gredler" id="1075526">
+            <action type="update" dev="mguillem" due-to="Daniel Gredler" issue="1075526">
                 Added support for methods moveBy, scroll, scrollBy, scrollByLines, scrollByPages and scrollTo for JS window object.
             </action>
             <action type="update" dev="yourgod">
@@ -3144,7 +3144,7 @@
             <action type="update" dev="mguillem">
                 getTypeAttribute now returns "text" for input without specified type attribute as it is the default value.
             </action>
-            <action type="update" dev="mguillem" id="1081554">
+            <action type="update" dev="mguillem" issue="1081554">
                 Added support for item function in JavaScript like "document.all(...).item(...).
             </action>
             <action type="update" dev="mguillem">
@@ -3160,36 +3160,36 @@
                 Response of type "text/xml" are now represented as an XmlPage (rather that a TextPage)
                 which gives access to the Document object if the xml is well formed.
             </action>
-            <action type="update" dev="mguillem" due-to="Michael Ottati" id="1075690">
+            <action type="update" dev="mguillem" due-to="Michael Ottati" issue="1075690">
                 Fixed bug for JS location.protocol (was missing a ":", e.g. "http:" and not "http").
             </action>
-            <action type="add" dev="mguillem" id="1072996">
+            <action type="add" dev="mguillem" issue="1072996">
                 Added support for getting and setting option.selected in JavaScript.
             </action>
             <action type="update" dev="mguillem">
                 Fixed bug where a NullPointerException is thrown when leaving a page containing an iframe without src attribute.
             </action>
-            <action type="add" dev="mguillem" due-to="Dierk Koenig" id="1068672">
+            <action type="add" dev="mguillem" due-to="Dierk Koenig" issue="1068672">
                 Added support for window.resizeTo.
             </action>
-            <action type="update" dev="mguillem" id="1068667">
+            <action type="update" dev="mguillem" issue="1068667">
                 Fixed wrong values of window.opener: now null (instead of undefined) when no opener
                 and null when a link opens in "_top".
             </action>
             <action type="update" dev="mbowler">
                 Upgraded commons-httpclient to version 2.0.2
             </action>
-            <action type="update" dev="mbowler" due-to="Marc Guillemot" id="1067471">
+            <action type="update" dev="mbowler" due-to="Marc Guillemot" issue="1067471">
                 Added support for function syntax on document.all().
             </action>
-            <action type="update" dev="mbowler" due-to="Chris Erskine" id="1065797">
+            <action type="update" dev="mbowler" due-to="Chris Erskine" issue="1065797">
                 Added support for InnerHTML().
             </action>
-            <action type="update" dev="mbowler" due-to="Chris Erskine" id="1065797">
+            <action type="update" dev="mbowler" due-to="Chris Erskine" issue="1065797">
                 Added support for enabling the errors from
                 NekoHtml by setting a value on the WebClient.
             </action>
-            <action type="update" dev="mbowler" due-to="Mike Gallaher" id="1065797">
+            <action type="update" dev="mbowler" due-to="Mike Gallaher" issue="1065797">
                 Previously, if you clone an element, and set an attribute in either
                 the old or the new, the new setting appears in the other one as well.
                 This was because cloneNode just left the attributemap
@@ -3246,23 +3246,23 @@
             <action type="update" dev="mbowler">
                 Upgraded gsbase to version 2.0.1
             </action>
-            <action type="update" dev="mbowler" due-to="Chris Erskine" id="1033055">
+            <action type="update" dev="mbowler" due-to="Chris Erskine" issue="1033055">
                 Updated server names for cvs access.
             </action>
-            <action type="update" dev="mbowler" due-to="Chris Erskine" id="1032913">
+            <action type="update" dev="mbowler" due-to="Chris Erskine" issue="1032913">
                 Added support for the JavaScript document.images and also for getting and setting
                 the page title.
             </action>
-            <action type="update" dev="mbowler" due-to="Marc Guillemot" id="1006472">
+            <action type="update" dev="mbowler" due-to="Marc Guillemot" issue="1006472">
                 Patch for JS frames.length.
             </action>
-            <action type="update" dev="mbowler" due-to="David D. Kilzer, Mike Bresnahan" id="975675">
+            <action type="update" dev="mbowler" due-to="David D. Kilzer, Mike Bresnahan" issue="975675">
                 Fixed inconsistencies in the handling of isDisabled.
             </action>
-            <action type="update" dev="mbowler" due-to="Ben Curren" id="940981">
+            <action type="update" dev="mbowler" due-to="Ben Curren" issue="940981">
                 Initial support for Active X objects.
             </action>
-            <action type="update" dev="mbowler" id="930539">
+            <action type="update" dev="mbowler" issue="930539">
                 INCOMPATIBLE CHANGE: The common browsers will automatically insert a tbody tag inside
                 tables if there isn't one already there.  Now HtmlUnit does that as well.
             </action>
@@ -3270,10 +3270,10 @@
                 Fixed bug where calling document.body from JavaScript before the body tag had been
                 parsed was causing an exception.
             </action>
-            <action type="update" dev="mbowler" due-to="David D. Kilzer" id="930069">
+            <action type="update" dev="mbowler" due-to="David D. Kilzer" issue="930069">
                 Added support for JavaScript table.rows.
             </action>
-            <action type="update" dev="mbowler" id="930531">
+            <action type="update" dev="mbowler" issue="930531">
                 The common browsers always return uppercase values for the JavaScript nodeName property.
                 Now HtmlUnit does as well.
             </action>
@@ -3281,77 +3281,77 @@
                 Added support for the IE attribute document.readyState.  Also added the js.log custom
                 logger to aid in debugging JavaScript errors.
             </action>
-            <action type="update" dev="mbowler" due-to="Marc Guillemot" id="1045243">
+            <action type="update" dev="mbowler" due-to="Marc Guillemot" issue="1045243">
                 Added support for onchange handlers in textareas
             </action>
-            <action type="update" dev="mbowler" due-to="Marc Guillemot" id="1049797">
+            <action type="update" dev="mbowler" due-to="Marc Guillemot" issue="1049797">
                 Stubbed out window.moveTo(x,y)
             </action>
-            <action type="update" dev="mbowler" due-to="Marc Guillemot" id="1053811">
+            <action type="update" dev="mbowler" due-to="Marc Guillemot" issue="1053811">
                 Added dependency to commons-io
             </action>
-            <action type="update" dev="mbowler" due-to="Marc Guillemot" id="1053811">
+            <action type="update" dev="mbowler" due-to="Marc Guillemot" issue="1053811">
                 Initial support for file urls.
                 There is a bug in commons-io that will break this when trying to read
                 file URLs on another drive under windows:
                 http://issues.apache.org/bugzilla/show_bug.cgi?id=31884
             </action>
-            <action type="update" dev="mbowler" due-to="Mike Williams" id="1051885">
+            <action type="update" dev="mbowler" due-to="Mike Williams" issue="1051885">
                 Fixes for buggy link management in DomNode.basicRemove()
             </action>
-            <action type="update" dev="mbowler" due-to="David D. Kilzer" id="1028314">
+            <action type="update" dev="mbowler" due-to="David D. Kilzer" issue="1028314">
                 Fix for bug where HttpWebConnection.getStateForUrl() fails with localhost URL
             </action>
-            <action type="update" dev="mbowler" due-to="Chris Erskine" id="1056744">
+            <action type="update" dev="mbowler" due-to="Chris Erskine" issue="1056744">
                 Added IE specific behaviour for getElementById()
             </action>
-            <action type="update" dev="mbowler" due-to="David D. Kilzer" id="1056376">
+            <action type="update" dev="mbowler" due-to="David D. Kilzer" issue="1056376">
                 Made WebTestCase abstract
             </action>
-            <action type="update" dev="mbowler" id="1044768">
+            <action type="update" dev="mbowler" issue="1044768">
                 Changed HtmlElement.getOneHtmlElement() to match the documented behaviour
                 in the case where multiple matches were found.
             </action>
-            <action type="add" dev="mbowler" due-to="Chris Erskine" id="1058238">
+            <action type="add" dev="mbowler" due-to="Chris Erskine" issue="1058238">
                 Added getElementsByTagName(), getClassName() and setClassName() to HTMLElement
             </action>
-            <action type="update" dev="mbowler" due-to="David D. Kilzer" id="930546">
+            <action type="update" dev="mbowler" due-to="David D. Kilzer" issue="930546">
                 getAttribute() and setAttribute() missing on HTMLElement.
             </action>
-            <action type="update" dev="mbowler" due-to="David D. Kilzer" id="1058846">
+            <action type="update" dev="mbowler" due-to="David D. Kilzer" issue="1058846">
                 Mimic browser kludge for non-RFC2019-compliant cookies.
             </action>
-            <action type="update" dev="mbowler" due-to="David D. Kilzer" id="939639">
+            <action type="update" dev="mbowler" due-to="David D. Kilzer" issue="939639">
                 Fixed bug where the getAttribute() and setAttribute() methods were not
                 ignoring the case of the attribute name when getting and
                 setting.
             </action>
-            <action type="update" dev="mbowler" id="1009817">
+            <action type="update" dev="mbowler" issue="1009817">
                 Fixed bug where a colon in a relative URL causes MalformedURLException in WebClient.expandUrl()
             </action>
-            <action type="update" dev="mbowler" id="1050643">
+            <action type="update" dev="mbowler" issue="1050643">
                 If the type attribute isn't specified on a button attribute then the default value according
                 to the spec is "submit".  Internet Explorer doesn't obey the spec and returns "button".  HtmlUnit
                 now does what the browsers do, depending which BrowserVersion is specified..
             </action>
-            <action type="update" dev="mbowler" due-to="Mike Bresnahan" id="974447">
+            <action type="update" dev="mbowler" due-to="Mike Bresnahan" issue="974447">
                 Fixed bug in handling of onclick handlers for an HtmlCheckBoxInput.  When an onclick
                 handler is specified on a HTML checkbox that causes a new page to be displayed,
                 the function HtmlCheckBoxInput.click() was not returning the new page. Rather it was
                 returning the original page.
             </action>
-            <action type="update" dev="mbowler" due-to="Mike Bresnahan" id="977759">
+            <action type="update" dev="mbowler" due-to="Mike Bresnahan" issue="977759">
                 Fixed bug where  HtmlImageInput.click() was not including the name.x and
                 name.y attributes in the submitted request.
             </action>
-            <action type="update" dev="mbowler" id="1008707">
+            <action type="update" dev="mbowler" issue="1008707">
                 If form.submit() is called from JavaScript then the forms onsubmit handler should
                 not get executed.
             </action>
-            <action type="update" dev="mbowler" due-to="David D. Kilzer" id="1061234">
+            <action type="update" dev="mbowler" due-to="David D. Kilzer" issue="1061234">
                 Fixed OutOfMemoryError when submitting a form many times from the same HtmlPage
             </action>
-            <action type="update" dev="mbowler" due-to="David D. Kilzer" id="1062388">
+            <action type="update" dev="mbowler" due-to="David D. Kilzer" issue="1062388">
                 Clean up memory use in HttpWebConnection.makeWebResponse().
             </action>
         </release>
@@ -3363,18 +3363,18 @@
             <action type="update" dev="yourgod">
                 Added support for JavaScript document.body
             </action>
-            <action type="update" dev="yourgod" due-to="Mike Bresnahan" id="972822">
+            <action type="update" dev="yourgod" due-to="Mike Bresnahan" issue="972822">
                 Changed HtmlSelect.getSelectedOptions() to not auto-select the first
                 option if the list size > 1.
             </action>
-            <action type="update" dev="yourgod" due-to="David D. Kilzer" id="974966">
+            <action type="update" dev="yourgod" due-to="David D. Kilzer" issue="974966">
                 Refactored HtmlFileInput submission to include the filename even when
                 there is no file submitted.
             </action>
-            <action type="update" dev="yourgod" due-to="David D. Kilzer" id="956964">
+            <action type="update" dev="yourgod" due-to="David D. Kilzer" issue="956964">
                 Added support for JavaScript Window.close()
             </action>
-            <action type="update" dev="yourgod" due-to="David D. Kilzer" id="913740">
+            <action type="update" dev="yourgod" due-to="David D. Kilzer" issue="913740">
                 INCOMPATIBLE CHANGE: WebClient.moveFocusToElement() now takes a
                 FocusableElement as it's parameter instead of an HtmlElement.
                 FocusableElement is derived from HtmlElement.
@@ -3491,18 +3491,18 @@
                 the number of temporary objects during tests runs and will decrease the
                 chance of making a typo in the urls.
             </action>
-            <action type="update" dev="mbowler" id="831453">
+            <action type="update" dev="mbowler" issue="831453">
                 Fixed bug where forms without names were not being returned by
                 document.forms
             </action>
-            <action type="add" dev="mbowler" id="831456">
+            <action type="add" dev="mbowler" issue="831456">
                 Added support for the following attributes on Document.Location:
                 hash, host, hostname, href, pathname, port, protocol and search.
             </action>
-            <action type="add" dev="mbowler" due-to="Alexei Goussev" id="856885">
+            <action type="add" dev="mbowler" due-to="Alexei Goussev" issue="856885">
                 Added support for Anchor.href and Anchor.getAttribute().
             </action>
-            <action type="update" dev="mbowler" due-to="Alexei Goussev" id="871620">
+            <action type="update" dev="mbowler" due-to="Alexei Goussev" issue="871620">
                 Fixed bug where getting the style attribute should return an empty
                 string instead of NOT_FOUND.
             </action>
@@ -3519,10 +3519,10 @@
                 Added serialVersionUID to all classes that are Serializable but didn't already
                 have one of these.
             </action>
-            <action type="update" dev="mbowler" due-to="Darrell DeBoer" id="1034897">
+            <action type="update" dev="mbowler" due-to="Darrell DeBoer" issue="1034897">
                 Fix for performance problem in JavaScript handling.
             </action>
-            <action type="update" dev="mbowler" id="856797">
+            <action type="update" dev="mbowler" issue="856797">
                 If the server returns an unsupported encoding type then the browsers assume
                 ISO-8859-1.  Now HtmlUnit does the same.
             </action>
@@ -3542,49 +3542,49 @@
             <action type="update" dev="mbowler">
                 Continued migration of the build process from ant to maven.
             </action>
-            <action type="update" dev="mbowler" id="713646">
+            <action type="update" dev="mbowler" issue="713646">
                 Patch for bug in onload handler submitted by Andreas Hangler
             </action>
-            <action type="update" dev="mbowler" id="797144">
+            <action type="update" dev="mbowler" issue="797144">
                 Added support for the about: protocol - patch from Jun Chen
             </action>
-            <action type="update" dev="mbowler" id="797144">
+            <action type="update" dev="mbowler" issue="797144">
                 Added support for window frames - patch from Jun Chen
             </action>
-            <action type="update" dev="mbowler" id="803233" due-to="Brad Clarke">
+            <action type="update" dev="mbowler" issue="803233" due-to="Brad Clarke">
                 an update of the version number in build.xml and outputting of
                 a src jar for the current build. Patch submitted by Brad Clarke
             </action>
-            <action type="update" dev="mbowler" id="803229" due-to="Brad Clarke">
+            <action type="update" dev="mbowler" issue="803229" due-to="Brad Clarke">
                 Added HtmlFileInput support. Patch submitted by Brad Clarke
             </action>
-            <action type="update" dev="mbowler" id="803237" due-to="Brad Clarke">
+            <action type="update" dev="mbowler" issue="803237" due-to="Brad Clarke">
                 Upgraded junit.jar to 3.8.1
             </action>
-            <action type="update" dev="mbowler" id="802285">
+            <action type="update" dev="mbowler" issue="802285">
                 Fixed bug where HtmlPage.asText() would blow up if form tags were
                 found between tr and td tags.  Clearly this is illegal html but
                 the browsers support it so HtmlUnit needs to as well.
             </action>
-            <action type="update" dev="mbowler" id="805332" due-to="Brad Clarke">
+            <action type="update" dev="mbowler" issue="805332" due-to="Brad Clarke">
                 Fixed bug where form elements without names were being submitted anyway.  Patch
                 supplied by Brad Clarke
             </action>
-            <action type="update" dev="mbowler" id="808776" due-to="Brad Clarke">
+            <action type="update" dev="mbowler" issue="808776" due-to="Brad Clarke">
                 Fixed bug where disabled elements were being submitted anyway.
                 Patch supplied by Brad Clarke
             </action>
-            <action type="update" dev="mbowler" id="800993">
+            <action type="update" dev="mbowler" issue="800993">
                 Navigator.javaEnabled should be method not property
             </action>
-            <action type="add" dev="mbowler" id="799760">
+            <action type="add" dev="mbowler" issue="799760">
                 Added WebClient.getWebWindows()
             </action>
-            <action type="update" dev="mbowler" id="812749" due-to="Brad Clarke">
+            <action type="update" dev="mbowler" issue="812749" due-to="Brad Clarke">
                 Fixed bug where radio button and checkbox logic was case sensitive.
                 Patch supplied by Brad Clarke
             </action>
-            <action type="update" dev="mbowler" id="814741" due-to="Brad Clarke">
+            <action type="update" dev="mbowler" issue="814741" due-to="Brad Clarke">
                 Added support for Window.focus().  Patch supplied by Brad Clarke
             </action>
             <action type="update" dev="dktaylor">
@@ -3603,7 +3603,7 @@
                 document.  HTMLElement.insertBefore adds a new child element before
                 another child element.  It returns the newly added child element.
             </action>
-            <action type="update" dev="dktaylor" id="805051">
+            <action type="update" dev="dktaylor" issue="805051">
                 Add support for HTMLElement.cloneNode and replaceChild and
                 Document.createTextNode to close RFE 805051.  To support
                 createTextNode, added support for DOM text nodes and character
@@ -3617,7 +3617,7 @@
             <action type="add" dev="mbowler">
                 Added method HtmlArea.click()
             </action>
-            <action type="add" dev="dktaylor" id="799865">
+            <action type="add" dev="dktaylor" issue="799865">
                 Add support for click() for all element types that have an
                 onClick attribute.  This includes image.  Removed extra
                 non-standard attributes (onClick, etc.) from BDO element.
@@ -3633,38 +3633,38 @@
             <action type="add" dev="mbowler">
                 Stubbed out Window.onerror
             </action>
-            <action type="update" dev="mbowler" id="799839">
+            <action type="update" dev="mbowler" issue="799839">
                 Fixed bug where an option without a value could not be selected.
             </action>
-            <action type="update" dev="mbowler" id="799752">
+            <action type="update" dev="mbowler" issue="799752">
                 Fixed bug where Select[index] wasn't returning options.
             </action>
-            <action type="update" dev="mbowler" id="824145" due-to="Brad Clarke">
+            <action type="update" dev="mbowler" issue="824145" due-to="Brad Clarke">
                 Fixed bug where button names would get submitted twice.  Patch
                 submitted by Brad Clarke.
             </action>
-            <action type="add" dev="mbowler" id="772233">
+            <action type="add" dev="mbowler" issue="772233">
                 Added support for auto-refresh both from a Meta tag and from an
                 HTTP response header.
             </action>
-            <action type="update" dev="mbowler" id="824842" due-to="Jun Chen">
+            <action type="update" dev="mbowler" issue="824842" due-to="Jun Chen">
                 Added support for the format of &amp;lt;script&amp;gt; defined by DOM Level 2.
                 Patch submitted by Jun Chen
             </action>
-            <action type="update" dev="mbowler" id="825003" due-to="Brad Clarke">
+            <action type="update" dev="mbowler" issue="825003" due-to="Brad Clarke">
                 An HtmlTextArea should not contain anything but preformatted text,
                 so doing things such as converting &amp;lt;br&amp;gt; to line breaks and removing
                 extra white space should not happen. Patch supplied by Brad Clarke.
             </action>
-            <action type="update" dev="mbowler" id="824069">
+            <action type="update" dev="mbowler" issue="824069">
                 Fixed exception when trying to reference one frame by name from
                 another in JavaScript. For example "parent.nav.document", where
                 nav is the name of the frame.
             </action>
-            <action type="update" dev="mbowler" id="793340">
+            <action type="update" dev="mbowler" issue="793340">
                 Fixed exception when specifying an empty string for src on an a frame.
             </action>
-            <action type="update" dev="dktaylor" id="753776">
+            <action type="update" dev="dktaylor" issue="753776">
                 Fixed the bug where newly opened windows targeted at named
                 frames were not opening in the correct windows.
 
@@ -3709,7 +3709,7 @@
                 elements.  (The HTML 4 standard does not allow the action
                 attribute to be optional in form elements.)
             </action>
-            <action type="update" dev="mbowler" id="824730" due-to="Jun Chen">
+            <action type="update" dev="mbowler" issue="824730" due-to="Jun Chen">
                 Changed the behaviour of HtmlCheckBoxInput.click() to be consistent
                 with IE and Mozilla.  Patch submitted by Jun Chen.
             </action>
@@ -3738,11 +3738,11 @@
                 New method StringWebResponse which can be used to easily create a
                 WebResponse based on a string containing html.
             </action>
-            <action type="add" dev="mbowler" id="614045">
+            <action type="add" dev="mbowler" issue="614045">
                 Finished the second variation of document.write(), writing to frames
                 other than the one that is loading.
             </action>
-            <action type="add" dev="mbowler" id="799757">
+            <action type="add" dev="mbowler" issue="799757">
                 New method TopLevelWindow.close()
             </action>
             <action type="add" dev="mbowler">
@@ -3751,13 +3751,13 @@
             <action type="update" dev="mbowler">
                 Refactored test for window opening using the new type attribute.
             </action>
-            <action type="add" dev="mbowler" id="650924">
+            <action type="add" dev="mbowler" issue="650924">
                 Added support for window.status
             </action>
-            <action type="add" dev="mbowler" id="742519">
+            <action type="add" dev="mbowler" issue="742519">
                 New method HtmlForm.getInputByValue() to get a single input
             </action>
-            <action type="add" dev="mbowler" id="742519">
+            <action type="add" dev="mbowler" issue="742519">
                 New method HtmlForm.getInputsByValue() to get multiple inputs
             </action>
             <action type="update" dev="dktaylor">
@@ -3821,7 +3821,7 @@
                 Many classes had their own assertNotNull() method.  Created an assert class and
                 changed all classes to use Assert.notNull() rather than separate methods.
             </action>
-            <action type="update" dev="mbowler" due-to="Noboru Sinohara" id="716568">
+            <action type="update" dev="mbowler" due-to="Noboru Sinohara" issue="716568">
                 Fixed bug in character encoding.  Patch supplied by Noboru Sinohara.
             </action>
             <action type="update" dev="mbowler" due-to="Mike J. Bresnahan">
@@ -3831,55 +3831,55 @@
             <action type="update" dev="mbowler">
                 Updated NekoHTML to 0.7.7
             </action>
-            <action type="update" dev="mbowler" due-to="Noboru Sinohara" id="721008">
+            <action type="update" dev="mbowler" due-to="Noboru Sinohara" issue="721008">
                 Changed the JavaScriptEngine to use weak references for HtmlPage objects.  Previously
                 HtmlPage objects were never being garbage collected resulting in excessive memory
                 usage.
             </action>
-            <action type="update" dev="mbowler" id="729266">
+            <action type="update" dev="mbowler" issue="729266">
                 Fixed bug where the JavaScript textarea object was not properly getting and setting the 'value'.
             </action>
-            <action type="update" dev="mbowler" id="717021" due-to="XuefengHe">
+            <action type="update" dev="mbowler" issue="717021" due-to="XuefengHe">
                 Fixed bug where URL expansion wasn't obeying the base element as defined in the html.
             </action>
-            <action type="update" dev="mbowler" id="727718" due-to="jin kim">
+            <action type="update" dev="mbowler" issue="727718" due-to="jin kim">
                 Fixed bug where JavaScript form elements were not always being initialized correctly..
             </action>
-            <action type="update" dev="mbowler" id="732952" due-to="Matt Ho">
+            <action type="update" dev="mbowler" issue="732952" due-to="Matt Ho">
                 Fixed typo in two of the samples in the getting started document.
             </action>
             <action type="update" dev="mbowler">
                 Moved all tests under src/test/java
             </action>
-            <action type="update" dev="mbowler" id="713646" due-to="David K. Taylor">
+            <action type="update" dev="mbowler" issue="713646" due-to="David K. Taylor">
                 Fixed bug where onload handler would not execute a function if the brackets
                 weren't specified. Patch submitted by David K. Taylor.
             </action>
-            <action type="update" dev="mbowler" id="715379" due-to="David K. Taylor">
+            <action type="update" dev="mbowler" issue="715379" due-to="David K. Taylor">
                 Fixed bug "document.write of script element does not load script".  Patch submitted
                 by David K. Taylor.
             </action>
-            <action type="update" dev="mbowler" id="740636" due-to="David K. Taylor">
+            <action type="update" dev="mbowler" issue="740636" due-to="David K. Taylor">
                 Fix for bug 740636 "getElementsByTagName should be case insensitive".
                 Patch submitted by David K. Taylor
             </action>
-            <action type="update" dev="mbowler" id="740605 " due-to="David K. Taylor">
+            <action type="update" dev="mbowler" issue="740605 " due-to="David K. Taylor">
                 Fix for bug 740605 "External script is executed before script element added".
                 Patch submitted by David K. Taylor
             </action>
-            <action type="update" dev="mbowler" id="740665 " due-to="David K. Taylor">
+            <action type="update" dev="mbowler" issue="740665 " due-to="David K. Taylor">
                 Fix for bug 740665 "Script attributes undefined when script executes".
                 Patch submitted by David K. Taylor
             </action>
-            <action type="update" dev="mbowler" id="742902 " due-to="David K. Taylor">
+            <action type="update" dev="mbowler" issue="742902 " due-to="David K. Taylor">
                 Fix for bug 742902 "document.location prints as object reference instead of URL".
                 Patch submitted by David K. Taylor
             </action>
-            <action type="update" dev="mbowler" id="743241 " due-to="David K. Taylor">
+            <action type="update" dev="mbowler" issue="743241 " due-to="David K. Taylor">
                 Fix for bug 743241 "document.write from external script is not added to document".
                 Patch submitted by David K. Taylor
             </action>
-            <action type="update" dev="dktaylor" id="741930">
+            <action type="update" dev="dktaylor" issue="741930">
                 Partial fix for RFE 741930 "document.createElement(...) and form.appendChild(...)".
                 This fix adds document.createElement for most element types.  It does not support input tags.
             </action>
@@ -3887,7 +3887,7 @@
                 Add support for setting window.onload within a script.  Window.onload may be set to
                 the name of a function, e.g., window.onload=initFunc;
             </action>
-            <action type="update" dev="dktaylor" id="741930" due-to="Barnaby Court">
+            <action type="update" dev="dktaylor" issue="741930" due-to="Barnaby Court">
                 Partial fix for RFE 741930 "document.createElement(...) and form.appendChild(...)".
                 This fix adds HTMLElement.appendChild.
             </action>
@@ -3911,11 +3911,11 @@
                 Added instructions for the "how to compile from cvs" document.
                 Patch provided by Barnaby Court.
             </action>
-            <action type="update" dev="mbowler" due-to="Barnaby Court" id="759217">
+            <action type="update" dev="mbowler" due-to="Barnaby Court" issue="759217">
                 Changed HtmlTextArea.setText() to actually modify the DOM
                 Patch provided by Barnaby Court.
             </action>
-            <action type="update" dev="mbowler" id="738548">
+            <action type="update" dev="mbowler" issue="738548">
                 Fix for bug 738548 - "Form values are not Posted Properly to Server"
             </action>
             <action type="add" dev="mbowler">
@@ -3924,7 +3924,7 @@
             <action type="add" dev="mbowler">
                 Added read-only support for Document.cookie.
             </action>
-            <action type="add" dev="mbowler" id="675597">
+            <action type="add" dev="mbowler" issue="675597">
                 Added support for the JavaScript method Window.setTimeout()
             </action>
             <action type="update" dev="mbowler">
@@ -3933,14 +3933,14 @@
             <action type="update" dev="mbowler">
                 Upgraded the xerces to 2.4
             </action>
-            <action type="add" dev="mbowler" id="742515">
+            <action type="add" dev="mbowler" issue="742515">
                 New method HtmlPage.getAllForms()
             </action>
             <action type="update" dev="mbowler">
                 Fixed bug where inputs would not submit properly if the type attribute
                 wasn't lowercase.
             </action>
-            <action type="update" dev="mbowler" id="744381">
+            <action type="update" dev="mbowler" issue="744381">
                 Changed behaviour of HtmlImageInput submission to be consistent with
 
                 what the browsers do.  If the input's name was foo we would previously
@@ -3956,17 +3956,17 @@
             <action type="add" dev="mbowler">
                 Started tracking more information about changes
             </action>
-            <action type="update" due-to="Jean-Luc Vaillant" id="705703" dev="mbowler">
+            <action type="update" due-to="Jean-Luc Vaillant" issue="705703" dev="mbowler">
                 Fixed bug where the checked attribute wasn't always returning the correct value.
             </action>
-            <action type="update" due-to="Jean-Luc Vaillant" id="705693" dev="mbowler">
+            <action type="update" due-to="Jean-Luc Vaillant" issue="705693" dev="mbowler">
                 Fixed bug where checkboxes were returning the wrong value if they hadn't explicitly
                 been set by the server.
             </action>
-            <action type="add" id="705951" dev="mbowler">
+            <action type="add" issue="705951" dev="mbowler">
                 Added support for JavaScript Document.getElementsByTagName()
             </action>
-            <action type="update" id="707750" due-to="Mabel Chow" dev="mbowler">
+            <action type="update" issue="707750" due-to="Mabel Chow" dev="mbowler">
                 Fixed bug where document.all wasn't being initialized correctly until after the entire page had
                 loaded.  This meant that JavaScript that executed during page load would blow up when trying
                 to access document.all.
@@ -3989,11 +3989,11 @@
             <action type="update" due-to="Dominique Broeglin" patch-author="Dominique Broeglin" dev="mbowler">
                 Fixed bug in expansion of relative URLs
             </action>
-            <action type="add" id="709740" due-to="David K. Taylor" dev="mbowler">
+            <action type="add" issue="709740" due-to="David K. Taylor" dev="mbowler">
                 Added support for setting the src attribute on an iframe via JavaScript.  Setting this attribute
                 will cause the iframe to be reloaded with new content.
             </action>
-            <action type="update" id="707343" dev="mbowler">
+            <action type="update" issue="707343" dev="mbowler">
                 Improved the documentation for WebWindowEvent handling as the behaviour wasn't really
                 self explanatory.
             </action>
