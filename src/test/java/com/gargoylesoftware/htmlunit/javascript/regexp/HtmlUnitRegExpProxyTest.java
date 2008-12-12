@@ -318,7 +318,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void test() throws Exception {
+    public void test_prototype() throws Exception {
         if (notYetImplemented()) {
             return;
         }
@@ -330,11 +330,43 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "(?:1[0-2]))\\2(?:0?[1-9]|1\\d|2[0-8]))))$/;\n"
             + "    var str = '2001-06-16';\n"
             + "    alert(regexp.test(str))\n"
+            + "    alert(regexp.test('hello'))\n"
+            + "    alert(regexp.exec(str) != null)\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"true"};
+        final String[] expectedAlerts = {"true", "false", "true"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
+        loadPage(html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void test() throws Exception {
+        test("/foo/", "hello foo", true, true, false);
+        test("/foo/gi", "hello foo", true, false, false);
+        test("/foo/gi", "hello Foo", true, false, false);
+    }
+
+    private void test(final String regexp, final String testString, final boolean... expectedResults) throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var regexp = " + regexp + ";\n"
+            + "    var str = '" + testString + "';\n"
+            + "    alert(regexp.test(str))\n"
+            + "    alert(regexp.exec(str) != null)\n"
+            + "    alert(regexp.test('blabla'))\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {String.valueOf(expectedResults[0]), String.valueOf(expectedResults[1]),
+            String.valueOf(expectedResults[2])};
         final List<String> collectedAlerts = new ArrayList<String>();
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
         loadPage(html, collectedAlerts);
