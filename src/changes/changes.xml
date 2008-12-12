@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support, MochiKit support, minimal applet support, IE conditional comments">
+            <action type="update" dev="mguillem">
+                JavaScript: do not throw exception on invalid regular expressions.
+            </action>
             <action type="add" dev="mguillem">
                 Support for IE conditional comments in HTML code.
             </action>

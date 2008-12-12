@@ -431,9 +431,6 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      */
     @Test
     public void dollarSignAndCurlyBracket() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var value = ''.replace(/\\${/g, '');\n"

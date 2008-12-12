@@ -148,7 +148,14 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
      */
     @Override
     public Object compileRegExp(final Context cx, final String source, final String flags) {
-        return wrapped_.compileRegExp(cx, source, flags);
+        try {
+            return wrapped_.compileRegExp(cx, source, flags);
+        }
+        catch (final Exception e) {
+            getLog().warn("compileRegExp() threw for >" + source + "<, flags: >" + flags + "<. "
+                    + "Replacing with a '####shouldNotFindAnything###'");
+            return wrapped_.compileRegExp(cx, "####shouldNotFindAnything###", "");
+        }
     }
 
     /**
