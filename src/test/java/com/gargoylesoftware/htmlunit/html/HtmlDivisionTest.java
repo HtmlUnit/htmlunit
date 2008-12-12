@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  */
 public class HtmlDivisionTest extends WebTestCase {
-    static final String LS = System.getProperty("line.separator");
 
     /**
      * @throws Exception if the test fails
@@ -59,11 +58,11 @@ public class HtmlDivisionTest extends WebTestCase {
      */
     @Test
     public void asText() throws Exception {
-        String expected = "hello" + LS + "world";
+        String expected = "hello" + LINE_SEPARATOR + "world";
         testAsText(expected, "<div>hello</div>world");
         testAsText(expected, "<div>hello<br/></div>world");
 
-        expected = "hello" + LS + LS + "world";
+        expected = "hello" + LINE_SEPARATOR + LINE_SEPARATOR + "world";
         testAsText(expected, "<div>hello<br/><br/></div>world");
     }
 
@@ -72,7 +71,7 @@ public class HtmlDivisionTest extends WebTestCase {
      */
     @Test
     public void asText_contiguousBlocks() throws Exception {
-        final String expected = "hello" + LS + "world";
+        final String expected = "hello" + LINE_SEPARATOR + "world";
         testAsText(expected, "<div><table><tr><td>hello</td></tr><tr><td>world<br/></td></tr></table></div>");
         testAsText(expected, "<div>hello</div><div>world</div>");
         testAsText(expected, "<div>hello</div><div><div>world</div></div>");

@@ -34,7 +34,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Sudhan Moghe
  */
 public class DomTextTest extends WebTestCase {
-    private static final String LS = System.getProperty("line.separator");
 
     /**
      * Test the clean up of &amp;nbsp; in strings.
@@ -94,13 +93,13 @@ public class DomTextTest extends WebTestCase {
      */
     @Test
     public void testAsText_regression() throws Exception {
-        String expected = "a" + LS + "b" + LS + "c";
+        String expected = "a" + LINE_SEPARATOR + "b" + LINE_SEPARATOR + "c";
         testAsText("a<ul><li>b</ul>c", expected);
         testAsText("a<p>b<br>c", expected);
         testAsText("a<table><tr><td>b</td></tr></table>c", expected);
         testAsText("a<div>b</div>c", expected);
 
-        expected = "a" + LS + "b" + LS + "b" + LS + "c";
+        expected = "a" + LINE_SEPARATOR + "b" + LINE_SEPARATOR + "b" + LINE_SEPARATOR + "c";
         testAsText("a<table><tr><td> b </td></tr>\n<tr><td> b </td></tr></table>c", expected);
     }
 

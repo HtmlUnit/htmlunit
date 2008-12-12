@@ -36,7 +36,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Sudhan Moghe
  */
 public class HtmlTextAreaTest extends WebTestCase {
-    private static final String LS = System.getProperty("line.separator");
 
     /**
      * @throws Exception if the test fails
@@ -202,7 +201,7 @@ public class HtmlTextAreaTest extends WebTestCase {
         final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
         assertNotNull(textArea);
         Assert.assertEquals("White space must be preserved!",
-            " foo " + LS + " bar <p>html snippet</p>" + LS, textArea.asText());
+            " foo " + LINE_SEPARATOR + " bar <p>html snippet</p>" + LINE_SEPARATOR, textArea.asText());
     }
 
     /**
@@ -219,7 +218,7 @@ public class HtmlTextAreaTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(content);
         final HtmlForm form = page.getHtmlElementById("form1");
-        Assert.assertEquals(" foo " + LS + " bar <p>html snippet</p>" + LS, form.asText());
+        Assert.assertEquals(" foo " + LINE_SEPARATOR + " bar <p>html snippet</p>" + LINE_SEPARATOR, form.asText());
     }
 
     /**

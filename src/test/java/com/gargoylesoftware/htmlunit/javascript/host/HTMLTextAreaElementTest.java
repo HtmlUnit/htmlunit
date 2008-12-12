@@ -39,7 +39,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  */
 @RunWith(BrowserRunner.class)
 public class HTMLTextAreaElementTest extends WebTestCase {
-    private static final String LS = System.getProperty("line.separator");
 
     /**
      * @throws Exception if the test fails
@@ -121,12 +120,12 @@ public class HTMLTextAreaElementTest extends WebTestCase {
         page.setFocusedElement(null); // remove focus on textarea to trigger onchange
 
         final HtmlTextArea log = page.getHtmlElementById("log");
-        final String expectation = "keypressed: " + LS
-            + "keypressed: h" + LS
-            + "keypressed: he" + LS
-            + "keypressed: hel" + LS
-            + "keypressed: hell" + LS
-            + "changed: hello" + LS;
+        final String expectation = "keypressed: " + LINE_SEPARATOR
+            + "keypressed: h" + LINE_SEPARATOR
+            + "keypressed: he" + LINE_SEPARATOR
+            + "keypressed: hel" + LINE_SEPARATOR
+            + "keypressed: hell" + LINE_SEPARATOR
+            + "changed: hello" + LINE_SEPARATOR;
         assertEquals(expectation, log.asText());
     }
 

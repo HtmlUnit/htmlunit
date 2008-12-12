@@ -35,7 +35,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  */
 public class HtmlTableTest extends WebTestCase {
-    static final String LS = System.getProperty("line.separator");
 
     /**
      * Tests getTableCell(int,int).
@@ -377,7 +376,7 @@ public class HtmlTableTest extends WebTestCase {
 
         final HtmlPage page = loadPage(html);
         final HtmlElement table = page.getHtmlElementById("myId");
-        final String expectedText = "cell 1,1\tcell 1,2" + LS
+        final String expectedText = "cell 1,1\tcell 1,2" + LINE_SEPARATOR
             + "cell 2,1\tcell 2,2";
 
         assertEquals(expectedText, table.asText());

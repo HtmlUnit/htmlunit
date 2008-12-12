@@ -36,7 +36,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @author Marc Guillemot
  */
 public class MouseEventTest extends WebTestCase {
-    private static final String LS = System.getProperty("line.separator");
 
     /**
      * @throws Exception if the test fails
@@ -59,19 +58,19 @@ public class MouseEventTest extends WebTestCase {
         assertEquals("", textarea.asText());
 
         page.<ClickableElement>getHtmlElementById("div1").click();
-        assertEquals("Click on DIV(id=div1): true, true, false, false" + LS, textarea.asText());
+        assertEquals("Click on DIV(id=div1): true, true, false, false" + LINE_SEPARATOR, textarea.asText());
         textarea.reset();
 
         page.<ClickableElement>getHtmlElementById("span1").click();
-        assertEquals("Click on SPAN(id=span1): true, true, true, false" + LS, textarea.asText());
+        assertEquals("Click on SPAN(id=span1): true, true, true, false" + LINE_SEPARATOR, textarea.asText());
         textarea.reset();
 
         page.<ClickableElement>getHtmlElementById("span2").click();
-        assertEquals("Click on SPAN(id=span2): true, false, false, true" + LS, textarea.asText());
+        assertEquals("Click on SPAN(id=span2): true, false, false, true" + LINE_SEPARATOR, textarea.asText());
         textarea.reset();
 
         textarea.click();
-        assertEquals("Click on TEXTAREA(id=myTextarea): true, false, false, false" + LS, textarea.asText());
+        assertEquals("Click on TEXTAREA(id=myTextarea): true, false, false, false" + LINE_SEPARATOR, textarea.asText());
     }
 
     /**

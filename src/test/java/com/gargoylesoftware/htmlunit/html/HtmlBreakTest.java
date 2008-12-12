@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  */
 public class HtmlBreakTest extends WebTestCase {
-    private static final String LS = System.getProperty("line.separator");
 
     /**
      * @throws Exception if the test fails
@@ -64,6 +63,6 @@ public class HtmlBreakTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(html);
-        assertEquals("Hello" + LS + "world", page.getBody().asText());
+        assertEquals("Hello" + LINE_SEPARATOR + "world", page.getBody().asText());
     }
 }

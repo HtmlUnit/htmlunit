@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  */
 public class HtmlOrderedListTest extends WebTestCase {
-    private static final String LS = System.getProperty("line.separator");
 
     /**
      * @throws Exception if the test fails
@@ -70,7 +69,7 @@ public class HtmlOrderedListTest extends WebTestCase {
 
         final HtmlPage page = loadPage(html);
         final HtmlElement node = page.getHtmlElementById("foo");
-        final String expectedText = "1. first item" + LS + "2. second item";
+        final String expectedText = "1. first item" + LINE_SEPARATOR + "2. second item";
 
         assertEquals(expectedText, node.asText());
         assertEquals(expectedText, page.asText());

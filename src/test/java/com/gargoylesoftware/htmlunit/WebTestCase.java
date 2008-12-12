@@ -80,6 +80,9 @@ public abstract class WebTestCase {
     public static final String PROPERTY_GENERATE_TESTPAGES
         = "com.gargoylesoftware.htmlunit.WebTestCase.GenerateTestpages";
 
+    /** System-specific line separator. */
+    protected static final String LINE_SEPARATOR = System.getProperty("line.separator");
+
     private BrowserVersion browserVersion_;
 
     private String[] expectedAlerts_;
