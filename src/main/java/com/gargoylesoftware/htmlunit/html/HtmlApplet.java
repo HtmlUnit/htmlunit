@@ -197,6 +197,7 @@ public class HtmlApplet extends StyledElement {
      *
      * @throws IOException if an error occurs while downloading the content
      */
+    @SuppressWarnings("unchecked")
     private void downloadContentIfNeeded() throws IOException {
         if (!downloaded_) {
             final HtmlPage page = (HtmlPage) getPage();
@@ -215,8 +216,8 @@ public class HtmlApplet extends StyledElement {
         // simple case in a first time: only one class, the applet
         final String appletClassName = getCodeAttribute();
         try {
-            final Class appletClass = appletClassLoader_.loadClass(appletClassName);
-            applet_ = (Applet) appletClass.newInstance();
+            final Class<Applet> appletClass = (Class<Applet>) appletClassLoader_.loadClass(appletClassName);
+            applet_ = appletClass.newInstance();
             applet_.setStub(new AppletStubImpl(this));
             applet_.init();
             applet_.start();
