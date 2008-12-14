@@ -574,7 +574,7 @@
         <repository>
             <id>htmlunit-m2-repo</id>
             <url>
-                scp://shell.sourceforge.net/home/groups/h/ht/htmlunit/htdocs/m2-repo
+                sftp://web.sourceforge.net/home/groups/h/ht/htmlunit/htdocs/m2-repo
             </url>
             <name>HtmlUnit Maven 2 Repository</name>
         </repository>
@@ -582,7 +582,7 @@
         <snapshotRepository>
             <id>htmlunit-m2-repo-snapshots</id>
             <url>
-                scp://shell.sourceforge.net/home/groups/h/ht/htmlunit/htdocs/m2-repo-snapshots
+				sftp://web.sourceforge.net/home/groups/h/ht/htmlunit/htdocs/m2-repo-snapshots
             </url>
             <name>HtmlUnit Maven 2 Snapshots Repository</name>
             <uniqueVersion>false</uniqueVersion>
