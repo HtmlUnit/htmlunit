@@ -28,14 +28,14 @@
   <servers>
     <server>
       <id>htmlunit-website</id>
-      <username>mguillem</username>
+      <username>mguillem,htmluni</username>
       <!-- optional element:
         <password>my_login_password</password>
       -->
     </server>
     <server>
       <id>htmlunit-m2-repo</id>
-      <username>mguillem</username>
+      <username>mguillem,htmluni</username>
       <!-- optional element:
         <password>my_login_password</password>
       -->
