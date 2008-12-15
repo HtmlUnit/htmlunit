@@ -567,7 +567,7 @@
             <id>htmlunit-website</id>
             <name>HtmlUnit WebSite - Sourceforge</name>
             <url>
-                scp://shell.sourceforge.net/home/groups/h/ht/htmlunit/htdocs/
+                sftp://web.sourceforge.net/home/groups/h/ht/htmlunit/htdocs/
             </url>
         </site>
         <!-- commented out by default so that CruiseControl doesn't accidentally deploy a real release...

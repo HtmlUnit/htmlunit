@@ -40,6 +40,13 @@
         <password>my_login_password</password>
       -->
     </server>
+    <server>
+      <id>htmlunit-m2-repo-snapshots</id>
+      <username>mguillem,htmlunit</username>
+      <!-- optional element:
+        <password>my_login_password</password>
+      -->
+    </server>
   </servers>
   ...
 </settings>
