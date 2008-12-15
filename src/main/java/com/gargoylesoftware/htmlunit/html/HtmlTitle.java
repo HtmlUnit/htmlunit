@@ -77,4 +77,11 @@ public class HtmlTitle extends HtmlElement {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected String asTextInternal() {
+        return super.asTextInternal() + AS_TEXT_BLOCK_SEPARATOR;
+    }
 }

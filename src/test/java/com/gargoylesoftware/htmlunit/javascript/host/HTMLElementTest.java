@@ -2456,7 +2456,7 @@ public class HTMLElementTest extends WebTestCase {
             + "     document.write('hello');\n"
             + "</script></body></html>";
         final HtmlPage page = loadPage(html);
-        assertEquals("test hello", page.asText());
+        assertEquals("test" + LINE_SEPARATOR + "hello", page.asText());
     }
 
     /**

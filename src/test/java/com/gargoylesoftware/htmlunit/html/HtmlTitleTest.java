@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class HtmlTitleTest extends WebTestCase {
 
@@ -49,5 +50,28 @@ public class HtmlTitleTest extends WebTestCase {
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
         assertTrue(HtmlTitle.class.isInstance(page.getHtmlElementById("myId")));
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * It is questionable to have the title in HtmlPage.asText() but if we have it, then
+     * it should be followed by a new line.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asText() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<title>Dummy</title>\n"
+            + "</head>\n"
+            + "\n"
+            + "<body>\n"
+            + "Dummy page\n"
+            + "</body>\n"
+            + "</html>\n";
+
+        final HtmlPage page = loadPage(html);
+        final String expected = "Dummy" + LINE_SEPARATOR
+            + "Dummy page";
+        assertEquals(expected, page.asText());
     }
 }
