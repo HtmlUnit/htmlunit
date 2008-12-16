@@ -98,6 +98,7 @@
                                 <copy todir="${basedir}/artifacts">
                                     <fileset dir="${basedir}/target">
                                         <include name="*.jar"/>
+                                        <include name="*.zip"/>
                                     </fileset>
                                 </copy>
                             </tasks>
