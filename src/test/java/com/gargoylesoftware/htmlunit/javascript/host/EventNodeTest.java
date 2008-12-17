@@ -49,11 +49,8 @@ public class EventNodeTest extends WebTestCase {
             + "    alert(form.fireEvent('onsubmit'));\n"
             + "  }\n"
             + "</script>\n"
-            + "</head><body>\n"
+            + "</head><body onload='test()'>\n"
             + "  <form id='myForm'>\n"
-            + "    <div id='myDiv' onclick='test()'>\n"
-            + "      Hello There\n"
-            + "    </div>\n"
             + "  </form>\n"
             + "</body></html>";
         loadPageWithAlerts(html);
