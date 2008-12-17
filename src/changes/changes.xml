@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support, MochiKit support, minimal applet support, IE conditional comments">
+            <action type="fix" dev="mguillem" issue="2438622">
+                JavaScript: replace \n with \r\n for property defaultValue of HtmlTextAreaElement (IE) and ignore leading new line sign.
+            </action>
             <action type="fix" dev="mguillem" issue="2314485">
                 JavaScript: frame window object retrieved through should be live and reflect page loads in the window.
             </action>

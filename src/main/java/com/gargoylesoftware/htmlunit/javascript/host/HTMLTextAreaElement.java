@@ -82,7 +82,11 @@ public class HTMLTextAreaElement extends FormField {
      * MSDN Documentation</a>
      */
     public String jsxGet_defaultValue() {
-        return ((HtmlTextArea) getHtmlElementOrDie()).getDefaultValue();
+        String value = ((HtmlTextArea) getHtmlElementOrDie()).getDefaultValue();
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.TEXTAREA_CRNL)) {
+            value = value.replaceAll("([^\\r])\\n", "$1\r\n");
+        }
+        return value;
     }
 
     /**

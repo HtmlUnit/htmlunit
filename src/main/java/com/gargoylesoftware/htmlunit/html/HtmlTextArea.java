@@ -69,16 +69,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      */
     private void initDefaultValue() {
         if (defaultValue_ == null) {
-            final DomText child = (DomText) getFirstChild();
-            if (child != null) {
-                defaultValue_ = child.getData();
-                if (defaultValue_ == null) {
-                    defaultValue_ = "";
-                }
-            }
-            else {
-                defaultValue_ = "";
-            }
+            defaultValue_ = readValue();
         }
     }
 
@@ -88,6 +79,10 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * @return the text
      */
     public final String getText() {
+        return readValue();
+    }
+
+    private String readValue() {
         final StringBuilder buffer = new StringBuilder();
         for (final DomNode node : getChildren()) {
             if (node instanceof DomText) {
