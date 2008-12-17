@@ -71,13 +71,13 @@
 			<tr>
 				<th>Last changed</th>
 				<td>
-					<xsl:value-of select="//modifications/modification[last()]/date"/>
+					<xsl:value-of select="//modifications/modification[1]/date"/>
 				</td>
 			</tr>
 			<tr>
 				<th>Last log entry</th>
 				<td>
-					<xsl:value-of select="//modifications/modification[last()]/comment"/>
+					<xsl:value-of select="//modifications/modification[1]/comment"/>
 				</td>
 			</tr>
 		</table>
