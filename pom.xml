@@ -98,10 +98,9 @@
                                 <copy todir="${basedir}/artifacts">
                                     <fileset dir="${basedir}/target">
                                         <include name="*.jar"/>
+                                        <include name="*.zip"/>
                                     </fileset>
                                 </copy>
-                                <move file="${basedir}/target/htmlunit-${project.version}.zip"
-                                    tofile="${basedir}/artifacts/htmlunit-${project.version}-all.zip"/>
                             </tasks>
                         </configuration>
                         <goals>
