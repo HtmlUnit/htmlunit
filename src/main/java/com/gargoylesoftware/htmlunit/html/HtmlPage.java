@@ -1078,13 +1078,19 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             return null;
         }
 
+        //http://www.ietf.org/rfc/rfc4329.txt
         final String contentType = response.getContentType();
-        if (!contentType.equalsIgnoreCase("text/javascript")
-            && !contentType.equalsIgnoreCase("application/x-javascript")) {
-            if (mainLog_.isWarnEnabled()) {
-                mainLog_.warn("Expected content type of 'text/javascript' or 'application/x-javascript' for "
-                                + "remotely loaded JavaScript element at '" + url + "', "
-                                + "but got '" + contentType + "'.");
+        if (!contentType.equalsIgnoreCase("application/javascript")
+            && !contentType.equalsIgnoreCase("application/ecmascript")) {
+            if (contentType.equals("text/javascript") || contentType.equals("text/ecmascript")) {
+                getWebClient().getIncorrectnessListener().notify(
+                    "Obsolete content type encountered: '" + contentType + "'.", this);
+            }
+            else {
+                getWebClient().getIncorrectnessListener().notify(
+                        "Expected content type of 'application/javascript' or 'application/ecmascript' for "
+                        + "remotely loaded JavaScript element at '" + url + "', "
+                        + "but got '" + contentType + "'.", this);
             }
         }
 
