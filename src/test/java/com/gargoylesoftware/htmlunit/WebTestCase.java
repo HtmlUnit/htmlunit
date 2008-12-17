@@ -314,7 +314,7 @@ public abstract class WebTestCase {
      * @param actual the collection of strings to test
      */
     protected void assertEquals(final String[] expected, final List<String> actual) {
-        Assert.assertEquals(Arrays.asList(expected), actual);
+        assertEquals(null, expected, actual);
     }
 
     /**
@@ -327,7 +327,7 @@ public abstract class WebTestCase {
      * @param actual the collection of strings to test
      */
     protected void assertEquals(final String message, final String[] expected, final List<String> actual) {
-        Assert.assertEquals(message, Arrays.asList(expected), actual);
+        Assert.assertEquals(message, Arrays.asList(expected).toString(), actual.toString());
     }
 
     /**
