@@ -32,12 +32,17 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 public class TextRange extends SimpleScriptable {
 
     private static final long serialVersionUID = -3763822832184277966L;
+    private boolean collapsed_ = false; // minimal effort to support collapse()
 
     /**
      * Retrieves the text contained within the range.
      * @return the text contained within the range
      */
-    public String jsxGet_text() {
+    public Object jsxGet_text() {
+        if (collapsed_) {
+            return "";
+        }
+
         final HtmlPage page = (HtmlPage) getWindow().getDomNodeOrDie();
         final Range selection = page.getSelection();
         // currently only working for text input and textarea
@@ -59,6 +64,7 @@ public class TextRange extends SimpleScriptable {
      * @param text the text contained within the range
      */
     public void jsxSet_text(final String text) {
+        collapsed_ = false;
         final HtmlPage page = (HtmlPage) getWindow().getDomNodeOrDie();
         final Range selection = page.getSelection();
         // currently only working for text input and textarea
@@ -125,5 +131,24 @@ public class TextRange extends SimpleScriptable {
             child = child.getParentNode();
         }
         return false;
+    }
+
+    /**
+     * Collapses the range.
+     *
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536371.aspx">MSDN doc</a>
+     */
+    public void jsxFunction_collapse() {
+        collapsed_ = true;
+    }
+
+    /**
+     * Makes the current range the active selection.
+     * Warning: dummy implementation!
+     *
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536735.aspx">MSDN doc</a>
+     */
+    public void jsxFunction_select() {
+        // nothing yet
     }
 }

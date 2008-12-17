@@ -88,4 +88,60 @@ public class TextRangeTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.IE)
+    @Alerts(IE = { "hello", "" })
+    public void collapse() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <title>test</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var f = document.getElementById('foo');\n"
+            + "      f.focus();\n"
+            + "      f.select();\n"
+            + "      var r = document.selection.createRange();\n"
+            + "      alert(r.text);\n"
+            + "      r.collapse();\n"
+            + "      alert(r.text);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<textarea id='foo'>hello</textarea>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * Minimal test: just test that function is available.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.IE)
+    @Alerts("")
+    public void select() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <title>test</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var r = document.selection.createRange();\n"
+            + "      r.select();\n"
+             + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<textarea id='foo'>hello</textarea>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts(html);
+    }
 }
