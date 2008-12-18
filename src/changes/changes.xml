@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.4-SNAPSHOT" date="?" description="Bugfixes, ActiveX support, MochiKit support, minimal applet support, IE conditional comments">
+            <action type="fix" dev="asashour" issue="2421302">
+                JavaScript: correct the return value of EventNode.fireEvent().
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript: add dummy implementation for TextRange methods collapse and select (IE).
             </action>

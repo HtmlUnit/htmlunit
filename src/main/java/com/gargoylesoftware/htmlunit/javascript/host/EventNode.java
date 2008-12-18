@@ -15,11 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import org.apache.commons.lang.StringUtils;
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Function;
-import org.mozilla.javascript.Scriptable;
-
-import com.gargoylesoftware.htmlunit.ScriptResult;
 
 /**
  * A node which supports all of the <tt>onXXX</tt> event handlers and other event-related functions.
@@ -311,45 +306,33 @@ public class EventNode extends Node {
      * Fires a specified event on this element (IE only). See the
      * <a href="http://msdn.microsoft.com/en-us/library/ms536423.aspx">MSDN documentation</a>
      * for more information.
-     * @param cx the JavaScript context
-     * @param thisObj the element instance on which this method was invoked
-     * @param args contains the event type as a string, and an optional event template
-     * @param f the function being invoked
+     * @param type specifies the name of the event to fire.
+     * @param event specifies the event object from which to obtain event object properties.
      * @return <tt>true</tt> if the event fired successfully, <tt>false</tt> if it was canceled
      */
-    public static ScriptResult jsxFunction_fireEvent(final Context cx, final Scriptable thisObj,
-        final Object[] args, final Function f) {
-
-        final String type = (String) args[0];
-
-        final EventNode me = (EventNode) thisObj;
-
-        // Extract the function arguments.
-        final Event event;
-        if (args.length > 1) {
-            event = (Event) args[1];
-        }
-        else {
+    public boolean jsxFunction_fireEvent(final String type, Event event) {
+        if (event == null) {
             event = new MouseEvent();
         }
 
         // Create the event, whose class will depend on the type specified.
         final String cleanedType = StringUtils.removeStart(type.toLowerCase(), "on");
         if (MouseEvent.isMouseEvent(cleanedType)) {
-            event.setPrototype(me.getPrototype(MouseEvent.class));
+            event.setPrototype(getPrototype(MouseEvent.class));
         }
         else {
-            event.setPrototype(me.getPrototype(Event.class));
+            event.setPrototype(getPrototype(Event.class));
         }
-        event.setParentScope(me.getWindow());
+        event.setParentScope(getWindow());
 
         // These four properties have predefined values, independent of the template.
         event.jsxSet_cancelBubble(false);
         event.jsxSet_returnValue(Boolean.TRUE);
-        event.jsxSet_srcElement(me);
+        event.jsxSet_srcElement(this);
         event.setEventType(cleanedType);
 
-        return me.fireEvent(event);
+        fireEvent(event);
+        return ((Boolean) event.jsxGet_returnValue()).booleanValue();
     }
 
 }

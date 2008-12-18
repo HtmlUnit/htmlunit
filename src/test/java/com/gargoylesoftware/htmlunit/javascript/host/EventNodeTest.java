@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link EventNode}.
@@ -38,7 +37,6 @@ public class EventNodeTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.IE)
-    @NotYetImplemented
     @Alerts("true")
     public void fireEvent() throws Exception {
         final String html
