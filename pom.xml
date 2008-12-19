@@ -101,9 +101,7 @@
                                         <include name="*.zip"/>
                                     </fileset>
                                 </copy>
-                                <delete file="${basedir}/artifacts/htmlunit-${project.version}-src.zip"/>
-                                <move file="${basedir}/artifacts/htmlunit-${project.version}.zip"
-                                    tofile="${basedir}/artifacts/htmlunit-${project.version}-all.zip"/>
+                                <echo message="Source File: ${basedir}/artifacts/htmlunit-${project.version}-src.zip"/>
                             </tasks>
                         </configuration>
                         <goals>
