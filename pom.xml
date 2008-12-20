@@ -102,6 +102,9 @@
                                         <exclude name="*-src.zip"/>
                                     </fileset>
                                 </copy>
+                                <move file="${basedir}/artifacts/htmlunit-${project.version}.zip"
+                                    tofile="${basedir}/artifacts/htmlunit-${project.version}-all.zip"
+                                    failonerror="false"/>
                             </tasks>
                         </configuration>
                         <goals>
