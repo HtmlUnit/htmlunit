@@ -269,7 +269,9 @@ public class SimpleScriptable extends ScriptableObject {
      * @param args the argument list
      * @param defaultValue the default value to return if the arg wasn't specified
      * @return the specified object or null
+     * @deprecated As of 2.4, no more used
      */
+    @Deprecated
     public static Object getObjectArg(final int index, final Object[] args, final Object defaultValue) {
         if (index >= args.length) {
             return defaultValue;
@@ -285,7 +287,9 @@ public class SimpleScriptable extends ScriptableObject {
      * @param args the argument list
      * @param defaultValue the default value to return if the arg wasn't specified
      * @return the specified string or null
+     * @deprecated As of 2.4, no more used
      */
+    @Deprecated
     public static String getStringArg(final int index, final Object[] args, final String defaultValue) {
         return Context.toString(getObjectArg(index, args, defaultValue));
     }
@@ -298,7 +302,9 @@ public class SimpleScriptable extends ScriptableObject {
      * @param args the argument list
      * @param defaultValue the default value to be used
      * @return the specified boolean or the default value
+     * @deprecated As of 2.4, no more used
      */
+    @Deprecated
     public static boolean getBooleanArg(final int index, final Object[] args, final boolean defaultValue) {
         final Boolean defaultBoolean = Boolean.valueOf(defaultValue);
 
@@ -313,7 +319,9 @@ public class SimpleScriptable extends ScriptableObject {
      * @param args the argument list
      * @param defaultValue the default value to be used
      * @return the specified int or the default value
+     * @deprecated As of 2.4, no more used
      */
+    @Deprecated
     public static int getIntArg(final int index, final Object[] args, final int defaultValue) {
         return (int) Context.toNumber(getObjectArg(index, args, new Integer(defaultValue)));
     }
