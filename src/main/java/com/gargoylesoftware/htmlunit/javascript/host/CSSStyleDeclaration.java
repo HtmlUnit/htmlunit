@@ -29,8 +29,8 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -4262,37 +4262,18 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * This method exists only in IE.
      *
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536429.aspx">MSDN Documentation</a>
-     * @param cx the JavaScript context
-     * @param thisObj the scriptable
-     * @param args the arguments (the attribute name and an optional flag parameter)
-     * @param f the function
+     * @param name the name of the attribute
+     * @param flag 0 for case insensitive, 1 (default) for case sensitive
      * @return the value of the specified attribute
      */
-    public static Object jsxFunction_getAttribute(final Context cx, final Scriptable thisObj,
-        final Object[] args,  final Function f) {
-
-        if (args.length == 0) {
-            return null;
-        }
-
-        final CSSStyleDeclaration dec = (CSSStyleDeclaration) thisObj;
-        final String name = Context.toString(args[0]);
-
-        final int flag;
-        if (args.length > 1) {
-            flag = (int) Context.toNumber(args[1]);
-        }
-        else {
-            flag = 0;
-        }
-
+    public Object jsxFunction_getAttribute(final String name, final int flag) {
         if (flag == 1) {
             // Case-sensitive.
-            return dec.getStyleAttribute(name, true);
+            return getStyleAttribute(name, true);
         }
 
         // Case-insensitive.
-        final Map<String, StyleElement> map = dec.getStyleMap(true);
+        final Map<String, StyleElement> map = getStyleMap(true);
         for (final String key : map.keySet()) {
             if (key.equalsIgnoreCase(name)) {
                 return map.get(key).getValue();
@@ -4305,43 +4286,31 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * Sets the value of the specified attribute. This method exists only in IE.
      *
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536739.aspx">MSDN Documentation</a>
-     * @param cx the JavaScript context
-     * @param thisObj the scriptable
-     * @param args the arguments (the attribute name, the attribute value and an optional flag parameter)
-     * @param f the function
+     * @param name the name of the attribute
+     * @param value the value to assign to the attribute
+     * @param flag 0 for case insensitive, 1 (default) for case sensitive
      */
-    public static void jsxFunction_setAttribute(final Context cx, final Scriptable thisObj,
-        final Object[] args,  final Function f) {
-
-        if (args.length < 2) {
-            return;
-        }
-
-        final CSSStyleDeclaration dec = (CSSStyleDeclaration) thisObj;
-        final String name = Context.toString(args[0]);
-        final String value = Context.toString(args[1]);
-
-        final int flag;
-        if (args.length > 2) {
-            flag = (int) Context.toNumber(args[2]);
+    public void jsxFunction_setAttribute(final String name, final String value, final Object flag) {
+        int flagInt;
+        if (flag == Undefined.instance) {
+            flagInt = 1;
         }
         else {
-            flag = 1;
+            flagInt = (int) Context.toNumber(flag);
         }
-
-        if (flag == 0) {
+        if (flagInt == 0) {
             // Case-insensitive.
-            final Map<String, StyleElement> map = dec.getStyleMap(true);
+            final Map<String, StyleElement> map = getStyleMap(true);
             for (final String key : map.keySet()) {
                 if (key.equalsIgnoreCase(name)) {
-                    dec.setStyleAttribute(key, value);
+                    setStyleAttribute(key, value);
                 }
             }
         }
         else {
             // Case-sensitive.
-            if (dec.getStyleAttribute(name, true).length() > 0) {
-                dec.setStyleAttribute(name, value);
+            if (getStyleAttribute(name, true).length() > 0) {
+                setStyleAttribute(name, value);
             }
         }
     }
@@ -4350,50 +4319,38 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * Removes the specified attribute. This method exists only in IE.
      *
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536696.aspx">MSDN Documentation</a>
-     * @param cx the JavaScript context
-     * @param thisObj the scriptable
-     * @param args the arguments (the attribute name and an optional flag parameter)
-     * @param f the function
+     * @param name the name of the attribute
+     * @param flag 0 for case insensitive, 1 (default) for case sensitive
      * @return <tt>true</tt> if the attribute was successfully removed, <tt>false</tt> otherwise
      */
-    public static boolean jsxFunction_removeAttribute(final Context cx, final Scriptable thisObj,
-        final Object[] args,  final Function f) {
-
-        if (args.length == 0) {
-            return false;
-        }
-
-        final CSSStyleDeclaration dec = (CSSStyleDeclaration) thisObj;
-        final String name = Context.toString(args[0]);
-
-        final int flag;
-        if (args.length > 1) {
-            flag = (int) Context.toNumber(args[1]);
+    public boolean jsxFunction_removeAttribute(final String name, final Object flag) {
+        int flagInt;
+        if (flag == Undefined.instance) {
+            flagInt = 1;
         }
         else {
-            flag = 1;
+            flagInt = (int) Context.toNumber(flag);
         }
-
-        if (flag == 0) {
+        if (flagInt == 0) {
             // Case-insensitive.
             String lastName = null;
-            final Map<String, StyleElement> map = dec.getStyleMap(true);
+            final Map<String, StyleElement> map = getStyleMap(true);
             for (final String key : map.keySet()) {
                 if (key.equalsIgnoreCase(name)) {
                     lastName = key;
                 }
             }
             if (lastName != null) {
-                dec.removeStyleAttribute(lastName);
+                removeStyleAttribute(lastName);
                 return true;
             }
             return false;
         }
 
         // Case-sensitive.
-        final String s = dec.getStyleAttribute(name, true);
+        final String s = getStyleAttribute(name, true);
         if (s.length() > 0) {
-            dec.removeStyleAttribute(name);
+            removeStyleAttribute(name);
             return true;
         }
         return false;
