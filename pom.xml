@@ -99,9 +99,9 @@
                                     <fileset dir="${basedir}/target">
                                         <include name="*.jar"/>
                                         <include name="*.zip"/>
+                                        <exclude name="*-src.zip"/>
                                     </fileset>
                                 </copy>
-                                <echo message="Source File: ${basedir}/artifacts/htmlunit-${project.version}-src.zip"/>
                             </tasks>
                         </configuration>
                         <goals>
