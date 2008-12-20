@@ -40,6 +40,7 @@ import org.apache.commons.lang.StringUtils;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.NativeArray;
+import org.mozilla.javascript.NativeObject;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 import org.mozilla.javascript.UniqueTag;
@@ -1248,7 +1249,7 @@ public class HTMLDocument extends Document {
      * @throws DOMException on attempt to create a TreeWalker with a root that is <code>null</code>
      * @return a new TreeWalker
      */
-    public Object jsxFunction_createTreeWalker(final Node root, final int whatToShow, final NodeFilter filter,
+    public Object jsxFunction_createTreeWalker(final Node root, final int whatToShow, final NativeObject filter,
             final boolean expandEntityReferences) throws DOMException {
 
         NodeFilter filterWrapper = null;

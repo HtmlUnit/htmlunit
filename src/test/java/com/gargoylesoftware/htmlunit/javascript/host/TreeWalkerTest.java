@@ -94,7 +94,7 @@ public class TreeWalkerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetters1() throws Exception {
+    public void getters1() throws Exception {
         final String[] expectedAlerts = {"BODY", "BODY", Integer.toString(NodeFilter.SHOW_ELEMENT), "false"};
         final String script = "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, false);"
                             + "alertTreeWalker(tw);";
@@ -106,7 +106,7 @@ public class TreeWalkerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetters2() throws Exception {
+    public void getters2() throws Exception {
         final String[] expectedAlerts = {"A", "A", "" + 0xFFFFFFFF, "true"};
         final String script = "var tw = document.createTreeWalker(document.getElementById('theA'), NodeFilter.SHOW_ALL,"
                                             + "null, true); alertTreeWalker(tw);";
@@ -118,7 +118,7 @@ public class TreeWalkerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testFirstChild() throws Exception {
+    public void firstChild() throws Exception {
         final String[] expectedAlerts = {"BODY", "DIV", Integer.toString(NodeFilter.SHOW_ELEMENT), "true"};
         final String script = "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);"
                             + "tw.firstChild(); alertTreeWalker(tw);";
@@ -136,7 +136,7 @@ public class TreeWalkerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testLastChild() throws Exception {
+    public void lastChild() throws Exception {
         final String[] expectedAlerts = {"BODY", "P", Integer.toString(NodeFilter.SHOW_ELEMENT), "true"};
         final String script = "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);"
                             + "tw.lastChild(); alertTreeWalker(tw);";
@@ -154,7 +154,7 @@ public class TreeWalkerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testParentNode() throws Exception {
+    public void parentNode() throws Exception {
         final String[] expectedAlerts = {"BODY", "BODY", Integer.toString(NodeFilter.SHOW_ELEMENT), "true", "null"};
         final String script = "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);"
                             + "tw.currentNode = document.getElementById('theDiv'); tw.parentNode();"
@@ -173,7 +173,7 @@ public class TreeWalkerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSiblings() throws Exception {
+    public void siblings() throws Exception {
         final String[] expectedAlerts = {"BODY", "P", Integer.toString(NodeFilter.SHOW_ELEMENT), "true", "null"};
         final String script = "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);"
                             + "tw.currentNode = document.getElementById('theDiv'); tw.nextSibling();"
@@ -193,7 +193,7 @@ public class TreeWalkerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testNext() throws Exception {
+    public void next() throws Exception {
         final String[] expectedAlerts = {"BODY", "DIV", "SPAN", "A", "P", "undefined", "P"};
         final String script = "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);"
                             + "alert(safeTagName(tw.currentNode)); alert(safeTagName(tw.nextNode()));"
@@ -208,7 +208,7 @@ public class TreeWalkerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testPrevious() throws Exception {
+    public void previous() throws Exception {
         final String[] expectedAlerts = {"P", "A", "SPAN", "DIV", "BODY", "undefined", "BODY"};
         final String script = "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);"
                             + "tw.currentNode = document.getElementById('theP'); alert(safeTagName(tw.currentNode));"
@@ -223,7 +223,7 @@ public class TreeWalkerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testWalking() throws Exception {
+    public void walking() throws Exception {
         final String[] expectedAlerts = {"DIV", "SPAN", "A", "undefined", "P", "BODY", "undefined", "SPAN", "undefined",
                                          "P", "SPAN", "CODE", "PRE", "undefined"};
         final String script = "var tw = document.createTreeWalker(document.body, 1, null, true);"
@@ -242,7 +242,7 @@ public class TreeWalkerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testWalkingOutsideTheRoot() throws Exception {
+    public void walkingOutsideTheRoot() throws Exception {
         final String[] expectedAlerts = {"TITLE", "SCRIPT", "HEAD", "HTML", "HEAD", "BODY", "undefined"};
         final String script = "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);"
                             + "tw.currentNode = document.firstChild.firstChild; alert(safeTagName(tw.firstChild()));"
@@ -257,7 +257,7 @@ public class TreeWalkerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test(expected = ScriptException.class)
-    public void testNullRoot() throws Exception {
+    public void nullRoot() throws Exception {
         final String[] expectedAlerts = {};
         final String script = "var tw = document.createTreeWalker(null, NodeFilter.SHOW_ELEMENT, null, true);";
 
@@ -268,7 +268,7 @@ public class TreeWalkerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSimpleFilter() throws Exception {
+    public void simpleFilter() throws Exception {
         final String[] expectedAlerts = {"TITLE", "undefined", "HEAD", "HTML", "HEAD", "BODY", "undefined"};
         final String script = "var noScripts = {acceptNode: function(node) {"
             + "if (node.tagName == 'SCRIPT') return NodeFilter.FILTER_REJECT;"
@@ -288,7 +288,7 @@ public class TreeWalkerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test(expected = ScriptException.class)
-    public void testEmptyFilter() throws Exception {
+    public void emptyFilter() throws Exception {
         final String[] expectedAlerts = {"TITLE", "undefined", "HEAD", "HTML", "HEAD", "BODY", "undefined"};
         final String script = "var noScripts = {};"
                             + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts,"
@@ -305,7 +305,7 @@ public class TreeWalkerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSecondFilterReject() throws Exception {
+    public void secondFilterReject() throws Exception {
         final String[] expectedAlerts = {"P", "undefined"};
         final String script = "var noScripts = {acceptNode: function(node) {if (node.tagName == 'SPAN' ||"
                                     + "node.tagName == 'DIV') return NodeFilter.FILTER_REJECT;"
@@ -320,7 +320,7 @@ public class TreeWalkerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSecondFilterSkip() throws Exception {
+    public void secondFilterSkip() throws Exception {
         final String[] expectedAlerts = {"A", "P", "CODE", "PRE", "undefined"};
         final String script = "var noScripts = {acceptNode: function(node) {if (node.tagName == 'SPAN' ||"
                                     + "node.tagName == 'DIV') return NodeFilter.FILTER_SKIP;"
@@ -337,7 +337,7 @@ public class TreeWalkerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSecondFilterRejectReverse() throws Exception {
+    public void secondFilterRejectReverse() throws Exception {
         final String[] expectedAlerts = {"P", "undefined"};
         final String script = "var noScripts = {acceptNode: function(node) {if (node.tagName == 'SPAN' ||"
                                     + "node.tagName == 'DIV') return NodeFilter.FILTER_REJECT;"
@@ -352,7 +352,7 @@ public class TreeWalkerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSecondFilterSkipReverse() throws Exception {
+    public void secondFilterSkipReverse() throws Exception {
         final String[] expectedAlerts = {"PRE", "CODE", "P", "A", "undefined"};
         final String script = "var noScripts = {acceptNode: function(node) {if (node.tagName == 'SPAN' ||"
                             + "node.tagName == 'DIV') return NodeFilter.FILTER_SKIP; return NodeFilter.FILTER_ACCEPT}};"

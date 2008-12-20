@@ -212,40 +212,52 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     /**
      * Opens a new window.
      *
-     * @param context the JavaScript Context
-     * @param scriptable the object that the function was called on
-     * @param args the arguments passed to the function
-     * @param function the function object that was invoked
+     * @param url when a new document is opened, <i>url</i> is a String that specifies a MIME type for the document.
+     *        When a new window is opened, <i>url</i> is a String that specifies the URL to render in the new window
+     * @param name the name
+     * @param features the features
+     * @param replace whether to replace in the history list or no
      * @return the newly opened window, or <tt>null</tt> if popup windows have been disabled
      * @see WebClient#isPopupBlockerEnabled()
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536651.aspx">MSDN documentation</a>
      */
-    public static Object jsxFunction_open(
-        final Context context, final Scriptable scriptable, final Object[] args, final Function function) {
-
-        final String url = getStringArg(0, args, null);
-        final String windowName = getStringArg(1, args, "");
-        final String features = getStringArg(2, args, null);
-        final boolean replaceCurrentEntryInBrowsingHistory = getBooleanArg(3, args, false);
-        final Window thisWindow = (Window) scriptable;
-        final WebClient webClient = thisWindow.webWindow_.getWebClient();
+    public Object jsxFunction_open(final Object url, final Object name, final Object features,
+            final Object replace) {
+        String urlString = null;
+        if (url != Undefined.instance) {
+            urlString = (String) url;
+        }
+        String windowName = "";
+        if (name != Undefined.instance) {
+            windowName = (String) name;
+        }
+        String featuresString = null;
+        if (features != Undefined.instance) {
+            featuresString = (String) features;
+        }
+        boolean replaceCurrentEntryInBrowsingHistory = false;
+        if (replace != Undefined.instance) {
+            replaceCurrentEntryInBrowsingHistory = (Boolean) replace;
+        }
+        final WebClient webClient = webWindow_.getWebClient();
 
         if (webClient.isPopupBlockerEnabled()) {
-            thisWindow.getLog().debug("Ignoring window.open() invocation because popups are blocked.");
+            getLog().debug("Ignoring window.open() invocation because popups are blocked.");
             return null;
         }
 
-        if (features != null || replaceCurrentEntryInBrowsingHistory) {
-            thisWindow.getLog().debug(
+        if (featuresString != null || replaceCurrentEntryInBrowsingHistory) {
+            getLog().debug(
                 "window.open: features and replaceCurrentEntryInBrowsingHistory "
-                + "not implemented: url=[" + url
+                + "not implemented: url=[" + urlString
                 + "] windowName=[" + windowName
-                + "] features=[" + features
+                + "] features=[" + featuresString
                 + "] replaceCurrentEntry=[" + replaceCurrentEntryInBrowsingHistory
                 + "]");
         }
 
         // if specified name is the name of an existing window, then hold it
-        if (StringUtils.isEmpty(url) && !"".equals(windowName)) {
+        if (StringUtils.isEmpty(urlString) && !"".equals(windowName)) {
             final WebWindow webWindow;
             try {
                 webWindow = webClient.getWebWindowByName(windowName);
@@ -255,8 +267,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                 // nothing
             }
         }
-        final URL newUrl = thisWindow.makeUrlForOpenWindow(url);
-        final WebWindow newWebWindow = webClient.openWindow(newUrl, windowName, thisWindow.webWindow_);
+        final URL newUrl = makeUrlForOpenWindow(urlString);
+        final WebWindow newWebWindow = webClient.openWindow(newUrl, windowName, webWindow_);
         return newWebWindow.getScriptObject();
     }
 
