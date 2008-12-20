@@ -15,8 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Function;
-import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -51,8 +50,7 @@ public class HTMLTableRowElement extends HTMLElement {
     /**
      * Returns the index of the row within parent's table.
      * @return the index
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/rowindex.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534377.aspx">MSDN Documentation</a>
      */
     public int jsxGet_rowIndex() {
         final HtmlTableRow row = (HtmlTableRow) getHtmlElementOrDie();
@@ -76,20 +74,17 @@ public class HTMLTableRowElement extends HTMLElement {
      * Inserts a new cell at the specified index in the element's cells collection. If the index
      * is -1 or there is no index specified, then the cell is appended at the end of the
      * element's cells collection.
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/insertcell.asp">
-     * MSDN Documentation</a>
-     * @param cx the current JavaScript context
-     * @param s this scriptable object
-     * @param args the arguments for the function call
-     * @param f the function object that invoked this function
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536455.aspx">MSDN Documentation</a>
+     * @param index specifies where to insert the cell in the tr.
+     *        The default value is -1, which appends the new cell to the end of the cells collection
      * @return the newly-created cell
      */
-    public static Object jsxFunction_insertCell(final Context cx, final Scriptable s,
-            final Object[] args, final Function f) {
-        final HTMLTableRowElement row = (HTMLTableRowElement) s;
-        final HtmlTableRow htmlRow = (HtmlTableRow) row.getDomNodeOrDie();
-
-        final int position = getIntArg(0, args, -1);
+    public Object jsxFunction_insertCell(final Object index) {
+        int position = -1;
+        if (index != Undefined.instance) {
+            position = (int) Context.toNumber(index);
+        }
+        final HtmlTableRow htmlRow = (HtmlTableRow) getDomNodeOrDie();
 
         final boolean indexValid = (position >= -1 && position <= htmlRow.getCells().size());
         if (indexValid) {
@@ -100,7 +95,7 @@ public class HTMLTableRowElement extends HTMLElement {
             else {
                 htmlRow.getCell(position).insertBefore(newCell);
             }
-            return row.getScriptableFor(newCell);
+            return getScriptableFor(newCell);
         }
         throw Context.reportRuntimeError("Index or size is negative or greater than the allowed amount");
     }
