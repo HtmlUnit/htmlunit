@@ -74,8 +74,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author David D. Kilzer
  * @author Chris Erskine
  * @author Ahmed Ashour
- * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_window.asp">
- * MSDN documentation</a>
+ * @see <a href="http://msdn.microsoft.com/en-us/library/ms535873.aspx">MSDN documentation</a>
  */
 public class Window extends SimpleScriptable implements ScriptableWithFallbackGetter {
 
@@ -275,22 +274,13 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     /**
      * Creates a popup window.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536392.aspx">MSDN documentation</a>
-     * @param context the JavaScript Context
-     * @param scriptable the object that the function was called on
-     * @param args the arguments passed to the function
-     * @param function the function object that was invoked
      * @return the created popup
      */
-    public static Popup jsxFunction_createPopup(
-        final Context context, final Scriptable scriptable, final Object[] args, final Function function) {
-
-        final Window thisWindow = (Window) scriptable;
-
+    public Popup jsxFunction_createPopup() {
         final Popup popup = new Popup();
-        popup.setParentScope(thisWindow);
-        popup.setPrototype(thisWindow.getPrototype(Popup.class));
-        popup.init(thisWindow);
-
+        popup.setParentScope(this);
+        popup.setPrototype(getPrototype(Popup.class));
+        popup.init(this);
         return popup;
     }
 
@@ -317,24 +307,15 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * The invocation occurs only if the window is opened after the delay
      * and does not contain an other page than the one that originated the setTimeout.
      *
-     * JavaScript param 1: The code to execute, either a String or a Function.
-     * JavaScript param 2: the delay in milliseconds to wait before executing the code.
-     *
-     * @param context the JavaScript Context
-     * @param scriptable the object that the function was called on
-     * @param args the arguments passed to the function
-     * @param function the function object that was invoked
+     * @param codeToExec specifies the function pointer or string that indicates the code to be executed
+     *        when the specified interval has elapsed
+     * @param timeout specifies the number of milliseconds
+     * @param language specifies language
      * @return the id of the created timer
      */
-    public static int jsxFunction_setTimeout(final Context context, final Scriptable scriptable,
-            final Object[] args, final Function function) {
-        final Window thisWindow = (Window) scriptable;
-        final Object codeToExec = getObjectArg(0, args, null);
-        final int timeout = getIntArg(1, args, 0);
-
-        thisWindow.getLog().debug("setTimeout(" + codeToExec + ", " + timeout + ")");
-        final int id = thisWindow.getWebWindow().getThreadManager()
-            .registerJob(codeToExec, timeout, "window.setTimeout");
+    public int jsxFunction_setTimeout(final Object codeToExec, final int timeout, final Object language) {
+        getLog().debug("setTimeout(" + codeToExec + ", " + timeout + ")");
+        final int id = getWebWindow().getThreadManager().registerJob(codeToExec, timeout, "window.setTimeout");
         return id;
     }
 
@@ -972,26 +953,16 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Sets a chunk of JavaScript to be invoked each time a specified number of milliseconds has elapsed
      * Current implementation does nothing.
      *
-     * JavaScript param 1: The code to execute, either a String or a Function.
-     * JavaScript param 2: the delay in milliseconds to wait before executing the code.
-     *
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/setinterval.asp">
-     * MSDN documentation</a>
-     *
-     * @param context the JavaScript Context
-     * @param scriptable the object that the function was called on
-     * @param args the arguments passed to the function
-     * @param function the function object that was invoked
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536749.aspx">MSDN documentation</a>
+     * @param codeToExec specifies the function pointer or string that indicates the code to be executed
+     *        when the specified interval has elapsed
+     * @param timeout specifies the number of milliseconds
+     * @param language specifies language
      * @return the id of the created interval
      */
-    public static int jsxFunction_setInterval(final Context context, final Scriptable scriptable,
-            final Object[] args, final Function function) {
-        final Window thisWindow = (Window) scriptable;
-        final Object codeToExec = getObjectArg(0, args, null);
-        final int timeout = getIntArg(1, args, 0);
-
-        thisWindow.getLog().debug("setInterval(" + codeToExec + ", " + timeout + ")");
-        final int id = thisWindow.getWebWindow().getThreadManager()
+    public int jsxFunction_setInterval(final Object codeToExec, final int timeout, final Object language) {
+        getLog().debug("setInterval(" + codeToExec + ", " + timeout + ")");
+        final int id = getWebWindow().getThreadManager()
             .registerRecurringJob(codeToExec, timeout, "window.setInterval");
         return id;
     }
@@ -1000,8 +971,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Cancels the interval previously started using the setInterval method.
      * Current implementation does nothing.
      * @param intervalID specifies the interval to cancel as returned by the setInterval method
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/clearinterval.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536353.aspx">MSDN documentation</a>
      */
     public void jsxFunction_clearInterval(final int intervalID) {
         getWebWindow().getThreadManager().removeJob(intervalID);
