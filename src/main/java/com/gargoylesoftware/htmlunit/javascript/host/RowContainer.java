@@ -15,8 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Function;
-import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -93,27 +92,17 @@ public class RowContainer extends HTMLElement {
      * Inserts a new row at the specified index in the element's row collection. If the index
      * is -1 or there is no index specified, then the row is appended at the end of the
      * element's row collection.
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/insertrow.asp">
-     * MSDN Documentation</a>
-     * @param cx the current JavaScript context
-     * @param s this scriptable object
-     * @param args the arguments for the function call
-     * @param f the function object that invoked this function
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536457.aspx">MSDN Documentation</a>
+     * @param index specifies where to insert the row in the rows collection.
+     *        The default value is -1, which appends the new row to the end of the rows collection
      * @return the newly-created row
      */
-    public static Object jsxFunction_insertRow(
-            final Context cx, final Scriptable s, final Object[] args,
-            final Function f) {
-        final RowContainer rowContainer = (RowContainer) s;
-        final int rowIndex;
-        if (args.length > 0) {
-            rowIndex = ((Number) args[0]).intValue();
+    public Object jsxFunction_insertRow(final Object index) {
+        int rowIndex = -1;
+        if (index != Undefined.instance) {
+            rowIndex = (int) Context.toNumber(index);
         }
-        else {
-            rowIndex = -1;
-        }
-
-        final HTMLCollection rows = (HTMLCollection) rowContainer.jsxGet_rows();
+        final HTMLCollection rows = (HTMLCollection) jsxGet_rows();
         final int rowCount = rows.jsxGet_length();
         final int r;
         if (rowIndex == -1 || rowIndex == rowCount) {
@@ -128,7 +117,7 @@ public class RowContainer extends HTMLElement {
                     + "(index: " + rowIndex + ", " + rowCount + " rows)");
         }
 
-        return rowContainer.insertRow(r);
+        return insertRow(r);
     }
 
     /**

@@ -40,7 +40,6 @@ import org.apache.commons.lang.StringUtils;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.NativeArray;
-import org.mozilla.javascript.NativeObject;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 import org.mozilla.javascript.UniqueTag;
@@ -710,32 +709,29 @@ public class HTMLDocument extends Document {
      * See http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html for
      * a good description of the semantics of open(), write(), writeln() and close().
      *
-     * @param context the JavaScript context
-     * @param scriptable the scriptable
-     * @param args the arguments passed into the method
-     * @param function the function
-     * @return nothing
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/open_1.asp">
-     * MSDN documentation</a>
+     * @param url when a new document is opened, <i>url</i> is a String that specifies a MIME type for the document.
+     *        When a new window is opened, <i>url</i> is a String that specifies the URL to render in the new window
+     * @param name the name
+     * @param features the features
+     * @param replace whether to replace in the history list or no
+     * @return a reference to the new document object or the window object.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536652.aspx">MSDN documentation</a>
      */
-    public static Object jsxFunction_open(
-        final Context context, final Scriptable scriptable, final Object[] args, final Function function) {
-
+    public Object jsxFunction_open(final String url, final Object name, final Object features,
+            final Object replace) {
         // Any open() invocations are ignored during the parsing stage, because write() and
         // writeln() invocations will directly append content to the current insertion point.
-        final HTMLDocument document = (HTMLDocument) scriptable;
-        final HtmlPage page = document.getHtmlPage();
+        final HtmlPage page = getHtmlPage();
         if (page.isBeingParsed()) {
-            document.getLog().warn("Ignoring call to open() during the parsing stage.");
+            getLog().warn("Ignoring call to open() during the parsing stage.");
             return null;
         }
 
         // We're not in the parsing stage; OK to continue.
-        if (!document.writeInCurrentDocument_) {
-            document.getLog().warn("Function open() called when document is already open.");
+        if (!writeInCurrentDocument_) {
+            getLog().warn("Function open() called when document is already open.");
         }
-        document.writeInCurrentDocument_ = false;
-
+        writeInCurrentDocument_ = false;
         return null;
     }
 
@@ -1244,20 +1240,16 @@ public class HTMLDocument extends Document {
      * </ul>
      *
      * @see <a href="http://www.w3.org/TR/DOM-Level-2-Traversal-Range/traversal.html">DOM-Level-2-Traversal-Range</a>
-     * @param context the JavaScript Context
-     * @param scriptable the object that the function was called on
-     * @param args the arguments passed to the function (see description above)
-     * @param function the function object that was invoked
+     * @param root the node which will serve as the root for the TreeWalker
+     * @param whatToShow specifies which node types may appear in the logical view of the tree presented
+     * @param filter the NodeFilter to be used with this TreeWalker, or null to indicate no filter
+     * @param expandEntityReferences If false,
+     *        the contents of EntityReference nodes are not presented in the logical view
      * @throws DOMException on attempt to create a TreeWalker with a root that is <code>null</code>
      * @return a new TreeWalker
      */
-    public static Object jsxFunction_createTreeWalker(final Context context, final Scriptable scriptable,
-            final Object[] args, final Function function) throws DOMException {
-
-        final Node root = (Node) args[0];
-        final int whatToShow = ((Number) args[1]).intValue();
-        final NativeObject filter = (NativeObject) args[2];
-        final boolean expandEntityReferences = (Boolean) args[3];
+    public Object jsxFunction_createTreeWalker(final Node root, final int whatToShow, final NodeFilter filter,
+            final boolean expandEntityReferences) throws DOMException {
 
         NodeFilter filterWrapper = null;
         if (filter != null) {
@@ -1273,9 +1265,8 @@ public class HTMLDocument extends Document {
         }
 
         final TreeWalker t = new TreeWalker(root, whatToShow, filterWrapper, expandEntityReferences);
-
-        t.setParentScope(getWindow(scriptable));
-        t.setPrototype(staticGetPrototype(getWindow(scriptable), TreeWalker.class));
+        t.setParentScope(getWindow(this));
+        t.setPrototype(staticGetPrototype(getWindow(this), TreeWalker.class));
         return t;
     }
 
