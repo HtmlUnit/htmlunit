@@ -102,8 +102,8 @@
                                         <exclude name="*-src.zip"/>
                                     </fileset>
                                 </copy>
-                                <move file="${basedir}/artifacts/htmlunit-${project.version}.zip"
-                                    tofile="${basedir}/artifacts/htmlunit-${project.version}-all.zip"
+                                <move file="${basedir}/artifacts/${project.artifactId}-${project.version}.zip"
+                                    tofile="${basedir}/artifacts/${project.artifactId}-${project.version}-with-dependencies.zip"
                                     failonerror="false"/>
                             </tasks>
                         </configuration>
