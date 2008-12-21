@@ -75,7 +75,7 @@
 				</td>
 			</tr>
 			<tr>
-				<th>Last log entry</th>
+				<th>The Last log entry</th>
 				<td>
 					<xsl:value-of select="//modifications/modification[1]/comment"/>
 				</td>
