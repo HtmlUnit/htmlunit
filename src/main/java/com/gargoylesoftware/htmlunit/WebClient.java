@@ -1974,7 +1974,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Closes all opened windows (and therefore stops all background JS processing).
+     * Closes all opened windows, stopping all background JavaScript processing.
      */
     public void closeAllWindows() {
         // NB: this implementation is too simple as a new TopLevelWindow may be opened by
