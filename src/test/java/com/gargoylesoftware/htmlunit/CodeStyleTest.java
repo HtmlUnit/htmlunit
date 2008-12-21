@@ -92,6 +92,7 @@ public class CodeStyleTest {
                     twoEmptyLines(lines, relativePath);
                     vs85aspx(lines, relativePath);
                     deprecated(lines, relativePath);
+                    staticJSMethod(lines, relativePath);
                 }
             }
         }
@@ -406,4 +407,20 @@ public class CodeStyleTest {
         }
         return annotations;
     }
+
+    /**
+     * Verifies that no static JavaScript method exists.
+     */
+    private void staticJSMethod(final List<String> lines, final String relativePath) {
+        int i = 0;
+        for (final String line : lines) {
+            if (line.contains(" static ")
+                    && (line.contains(" jsxFunction_") || line.contains(" jsxGet_") || line.contains(" jsxSet_"))
+                    && !line.contains(" jsxFunction_write")) {
+                addFailure("Use of static JavaScript function in " + relativePath + ", line: " + (i + 1));
+            }
+            i++;
+        }
+    }
+
 }

@@ -299,8 +299,7 @@ public class HTMLDocument extends Document {
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
      * @param function the function
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/write.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536782.aspx">MSDN documentation</a>
      */
     public static void jsxFunction_write(
         final Context context, final Scriptable thisObj, final Object[] args,  final Function function) {
@@ -329,8 +328,7 @@ public class HTMLDocument extends Document {
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
      * @param function the function
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/writeln.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536783.aspx">MSDN documentation</a>
      */
     public static void jsxFunction_writeln(
         final Context context, final Scriptable thisObj, final Object[] args,  final Function function) {
