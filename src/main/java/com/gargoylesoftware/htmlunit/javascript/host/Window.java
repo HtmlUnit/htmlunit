@@ -716,8 +716,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Allows the registration of event listeners on the event target.
      * @param type the event type to listen for (like "load")
      * @param listener the event listener
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/attachevent.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536343.aspx">MSDN documentation</a>
      * @return <code>true</code> if the listener has been added
      */
     public boolean jsxFunction_attachEvent(final String type, final Function listener) {
@@ -739,8 +738,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Allows the removal of event listeners on the event target.
      * @param type the event type to listen for (like "onload")
      * @param listener the event listener
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/detachevent.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536411.aspx">MSDN documentation</a>
      */
     public void jsxFunction_detachEvent(final String type, final Function listener) {
         getEventListenersContainer().removeEventListener(StringUtils.substring(type, 2), listener, false);
@@ -1017,8 +1015,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Prints the current page. The current implementation does nothing.
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref85.html">
      * Mozilla documentation</a>
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/print.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536672(VS.85).aspx">MSDN documentation</a>
      */
     public void jsxFunction_print() {
         getLog().debug("window.print() not implemented");

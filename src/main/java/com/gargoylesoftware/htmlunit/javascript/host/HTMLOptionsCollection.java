@@ -230,7 +230,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * <p>This method will call the {@link #put(int, Scriptable, Object)} method for actually
      * adding the element to the collection.</p>
      *
-     * <p>According to <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/add.asp">the
+     * <p>According to <a href="http://msdn.microsoft.com/en-us/library/ms535921.aspx">the
      * Microsoft DHTML reference page for the JavaScript add() method of the options collection</a>,
      * the index parameter is specified as follows:
      * <dl>

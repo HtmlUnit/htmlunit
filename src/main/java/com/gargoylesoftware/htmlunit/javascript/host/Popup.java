@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Marc Guillemot
  * @author David K. Taylor
  * @author Ahmed Ashour
- * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/popup.asp">MSDN documentation</a>
+ * @see <a href="http://msdn.microsoft.com/en-us/library/ms535882.aspx">MSDN documentation</a>
  */
 public class Popup extends SimpleScriptable {
 

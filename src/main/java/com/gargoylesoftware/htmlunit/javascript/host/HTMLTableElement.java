@@ -103,8 +103,7 @@ public class HTMLTableElement extends RowContainer {
      * If this table does not have a caption, this method creates an empty table caption,
      * adds it to the table and then returns it. If one or more captions already exist,
      * this method returns the first existing caption.
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createcaption.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536381.aspx">MSDN Documentation</a>
      * @return a newly added caption if no caption exists, or the first existing caption
      */
     public Object jsxFunction_createCaption() {
@@ -115,8 +114,7 @@ public class HTMLTableElement extends RowContainer {
      * If this table does not have a tfoot element, this method creates an empty tfoot
      * element, adds it to the table and then returns it. If this table already has a
      * tfoot element, this method returns the existing tfoot element.
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createtfoot.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536402.aspx">MSDN Documentation</a>
      * @return a newly added caption if no caption exists, or the first existing caption
      */
     public Object jsxFunction_createTFoot() {
@@ -127,8 +125,7 @@ public class HTMLTableElement extends RowContainer {
      * If this table does not have a thead element, this method creates an empty
      * thead element, adds it to the table and then returns it. If this table
      * already has a thead element, this method returns the existing thead element.
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createthead.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536403.aspx">MSDN Documentation</a>
      * @return a newly added caption if no caption exists, or the first existing caption
      */
     public Object jsxFunction_createTHead() {
@@ -139,8 +136,7 @@ public class HTMLTableElement extends RowContainer {
      * Deletes this table's caption. If the table has multiple captions, this method
      * deletes only the first caption. If this table does not have any captions, this
      * method does nothing.
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletecaption.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536405.aspx">MSDN Documentation</a>
      */
     public void jsxFunction_deleteCaption() {
         getHtmlElementOrDie().removeChild("caption", 0);
@@ -150,8 +146,7 @@ public class HTMLTableElement extends RowContainer {
      * Deletes this table's tfoot element. If the table has multiple tfoot elements, this
      * method deletes only the first tfoot element. If this table does not have any tfoot
      * elements, this method does nothing.
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletecaption.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536409.aspx">MSDN Documentation</a>
      */
     public void jsxFunction_deleteTFoot() {
         getHtmlElementOrDie().removeChild("tfoot", 0);
@@ -161,8 +156,7 @@ public class HTMLTableElement extends RowContainer {
      * Deletes this table's thead element. If the table has multiple thead elements, this
      * method deletes only the first thead element. If this table does not have any thead
      * elements, this method does nothing.
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletethead.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536410.aspx">MSDN Documentation</a>
      */
     public void jsxFunction_deleteTHead() {
         getHtmlElementOrDie().removeChild("thead", 0);

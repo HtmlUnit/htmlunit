@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.html.SubmittableElement;
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  *
- * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/form.asp">MSDN documentation</a>
+ * @see <a href="http://msdn.microsoft.com/en-us/library/ms535249.aspx">MSDN documentation</a>
  */
 public class HTMLFormElement extends HTMLElement {
 

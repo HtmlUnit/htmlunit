@@ -1252,8 +1252,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Implementation of the IE behavior #default#download.
      * @param uri the URI of the download source
      * @param callback the method which should be called when the download is finished
-     * @see <a href="http://msdn.microsoft.com/workshop/author/behaviors/reference/methods/startdownload.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms531406.aspx">MSDN documentation</a>
      * @throws MalformedURLException if the URL cannot be created
      */
     public void startDownload(final String uri, final Function callback) throws MalformedURLException {
@@ -1367,8 +1366,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Gets the children of the current node.
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/children.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms537446.aspx">MSDN documentation</a>
      * @return the child at the given position
      */
     public Object jsxGet_children() {

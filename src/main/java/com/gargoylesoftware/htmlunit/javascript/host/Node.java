@@ -425,8 +425,7 @@ public class Node extends SimpleScriptable {
      * Allows the registration of event listeners on the event target.
      * @param type the event type to listen for (like "onclick")
      * @param listener the event listener
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/attachevent.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536343.aspx">MSDN documentation</a>
      * @return <code>true</code> if the listener has been added
      */
     public boolean jsxFunction_attachEvent(final String type, final Function listener) {
@@ -459,8 +458,7 @@ public class Node extends SimpleScriptable {
      * Allows the removal of event listeners on the event target.
      * @param type the event type to listen for (like "onclick")
      * @param listener the event listener
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/detachevent.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536411.aspx">MSDN documentation</a>
      */
     public void jsxFunction_detachEvent(final String type, final Function listener) {
         jsxFunction_removeEventListener(StringUtils.substring(type, 2), listener, false);

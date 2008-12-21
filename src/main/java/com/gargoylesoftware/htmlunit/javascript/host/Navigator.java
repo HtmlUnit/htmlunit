@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  *
- * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_navigator.asp">
+ * @see <a href="http://msdn.microsoft.com/en-us/library/ms535867.aspx">
  * MSDN documentation</a>
  */
 public final class Navigator extends SimpleScriptable {

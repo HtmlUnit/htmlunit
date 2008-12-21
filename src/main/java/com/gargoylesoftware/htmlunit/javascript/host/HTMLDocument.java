@@ -236,8 +236,7 @@ public class HTMLDocument extends Document {
 
     /**
      * Returns the value of the JavaScript attribute "anchors".
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/anchors.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms537435.aspx">MSDN documentation</a>
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_doc_ref4.html#1024543">
      * Gecko DOM reference</a>
      * @return the value of this attribute
@@ -1132,8 +1131,7 @@ public class HTMLDocument extends Document {
 
     /**
      * Returns the value of the <tt>frames</tt> property.
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/frames.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms537459.aspx">MSDN documentation</a>
      * @return the live collection of frames contained by this document
      */
     public Object jsxGet_frames() {

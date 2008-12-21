@@ -134,8 +134,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * '?' and up to but not including any '#').
      * @return the search portion of the link's URL
      * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/search.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534620.aspx">MSDN Documentation</a>
      */
     public String jsxGet_search() throws Exception {
         final String query = getUrl().getQuery();
@@ -150,8 +149,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * and up to but not including any '#')..
      * @param search the new search portion of the link's URL
      * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/search.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534620.aspx">MSDN Documentation</a>
      */
     public void jsxSet_search(final String search) throws Exception {
         final String query;
@@ -172,8 +170,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the hash portion of the link's URL (the portion following the '#').
      * @return the hash portion of the link's URL
      * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/hash.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533775.aspx">MSDN Documentation</a>
      */
     public String jsxGet_hash() throws Exception {
         final String hash = getUrl().getRef();
@@ -187,8 +184,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the hash portion of the link's URL (the portion following the '#').
      * @param hash the new hash portion of the link's URL
      * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/hash.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533775.aspx">MSDN Documentation</a>
      */
     public void jsxSet_hash(final String hash) throws Exception {
         setUrl(UrlUtils.getUrlWithNewRef(getUrl(), hash));
@@ -198,8 +194,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the host portion of the link's URL (the '[hostname]:[port]' portion).
      * @return the host portion of the link's URL
      * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/host.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533784.aspx">MSDN Documentation</a>
      */
     public String jsxGet_host() throws Exception {
         final URL url = getUrl();
@@ -216,8 +211,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the host portion of the link's URL (the '[hostname]:[port]' portion).
      * @param host the new host portion of the link's URL
      * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/host.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533784.aspx">MSDN Documentation</a>
      */
     public void jsxSet_host(final String host) throws Exception {
         final String hostname;
@@ -240,8 +234,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the hostname portion of the link's URL.
      * @return the hostname portion of the link's URL
      * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/host.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533785.aspx">MSDN Documentation</a>
      */
     public String jsxGet_hostname() throws Exception {
         return getUrl().getHost();
@@ -251,8 +244,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the hostname portion of the link's URL.
      * @param hostname the new hostname portion of the link's URL
      * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/host.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533785.aspx">MSDN Documentation</a>
      */
     public void jsxSet_hostname(final String hostname) throws Exception {
         setUrl(UrlUtils.getUrlWithNewHost(getUrl(), hostname));
@@ -262,8 +254,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the pathname portion of the link's URL.
      * @return the pathname portion of the link's URL
      * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/pathname.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534332.aspx">MSDN Documentation</a>
      */
     public String jsxGet_pathname() throws Exception {
         return getUrl().getPath();
@@ -273,8 +264,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the pathname portion of the link's URL.
      * @param pathname the new pathname portion of the link's URL
      * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/pathname.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534332.aspx">MSDN Documentation</a>
      */
     public void jsxSet_pathname(final String pathname) throws Exception {
         setUrl(UrlUtils.getUrlWithNewPath(getUrl(), pathname));
@@ -284,8 +274,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the port portion of the link's URL.
      * @return the port portion of the link's URL
      * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/port.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534342.aspx">MSDN Documentation</a>
      */
     public String jsxGet_port() throws Exception {
         final int port = getUrl().getPort();
@@ -299,8 +288,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the port portion of the link's URL.
      * @param port the new port portion of the link's URL
      * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/port.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534342.aspx">MSDN Documentation</a>
      */
     public void jsxSet_port(final String port) throws Exception {
         setUrl(UrlUtils.getUrlWithNewPort(getUrl(), Integer.parseInt(port)));
@@ -310,8 +298,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the protocol portion of the link's URL, including the trailing ':'.
      * @return the protocol portion of the link's URL, including the trailing ':'
      * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/protocol.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534353.aspx">MSDN Documentation</a>
      */
     public String jsxGet_protocol() throws Exception {
         return getUrl().getProtocol() + ":";
@@ -321,8 +308,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the protocol portion of the link's URL.
      * @param protocol the new protocol portion of the link's URL
      * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/protocol.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534353.aspx">MSDN Documentation</a>
      */
     public void jsxSet_protocol(final String protocol) throws Exception {
         final String bareProtocol = StringUtils.substringBefore(protocol, ":");

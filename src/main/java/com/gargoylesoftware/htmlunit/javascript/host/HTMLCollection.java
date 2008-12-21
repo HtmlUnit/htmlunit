@@ -391,7 +391,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      * Returns the item or items corresponding to the specified index or key.
      * @param index the index or key corresponding to the element or elements to return
      * @return the element or elements corresponding to the specified index or key
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/item.asp">MSDN doc</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536460.aspx">MSDN doc</a>
      */
     public final Object jsxFunction_item(final Object index) {
         return nullIfNotFound(get(index));
@@ -416,7 +416,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      * that does not work, then names).
      * @param name the name or id the element or elements to return
      * @return the element or elements corresponding to the specified name or id
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/nameditem.asp">MSDN doc</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536634.aspx">MSDN doc</a>
      */
     public final Object jsxFunction_namedItem(final String name) {
         return nullIfNotFound(get(name));
@@ -452,7 +452,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      * specified tag name.
      * @param tagName the name of the tag of the elements to return
      * @return all the elements in this element array that have the specified tag name
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/tags.asp">MSDN doc</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536776.aspx">MSDN doc</a>
      */
     public Object jsxFunction_tags(final String tagName) {
         final HTMLCollection array = new HTMLCollection(this);

@@ -71,8 +71,7 @@ public class RowContainer extends HTMLElement {
 
     /**
      * Deletes the row at the specified index.
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deleterow.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536408.aspx">MSDN Documentation</a>
      * @param rowIndex the zero-based index of the row to delete
      */
     public void jsxFunction_deleteRow(int rowIndex) {
