@@ -38,8 +38,7 @@ public class HTMLTableCellElement extends HTMLElement {
     /**
      * Returns the index of this cell within the parent row.
      * @return the index of this cell within the parent row
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/cellindex.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533549.aspx">MSDN Documentation</a>
      */
     public Integer jsxGet_cellIndex() {
         final HtmlTableCell cell = (HtmlTableCell) getHtmlElementOrDie();

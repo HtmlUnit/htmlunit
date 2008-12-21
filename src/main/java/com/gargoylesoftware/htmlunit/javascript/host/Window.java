@@ -1015,7 +1015,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Prints the current page. The current implementation does nothing.
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref85.html">
      * Mozilla documentation</a>
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536672(VS.85).aspx">MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536672.aspx">MSDN documentation</a>
      */
     public void jsxFunction_print() {
         getLog().debug("window.print() not implemented");

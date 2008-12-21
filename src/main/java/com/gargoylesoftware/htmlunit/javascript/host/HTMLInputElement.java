@@ -140,8 +140,7 @@ public class HTMLInputElement extends FormField {
     /**
      * Returns the input's default value, used if the containing form gets reset.
      * @return the input's default value, used if the containing form gets reset
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultvalue.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533718.aspx">MSDN Documentation</a>
      */
     public String jsxGet_defaultValue() {
         return ((HtmlInput) getDomNodeOrDie()).getDefaultValue();
@@ -150,8 +149,7 @@ public class HTMLInputElement extends FormField {
     /**
      * Sets the input's default value, used if the containing form gets reset.
      * @param defaultValue the input's default value, used if the containing form gets reset
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultvalue.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533718.aspx">MSDN Documentation</a>
      */
     public void jsxSet_defaultValue(final String defaultValue) {
         ((HtmlInput) getDomNodeOrDie()).setDefaultValue(defaultValue);
@@ -160,8 +158,7 @@ public class HTMLInputElement extends FormField {
     /**
      * Returns the input's default checked value, used if the containing form gets reset.
      * @return the input's default checked value, used if the containing form gets reset
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultchecked.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533715.aspx">MSDN Documentation</a>
      */
     public boolean jsxGet_defaultChecked() {
         return ((HtmlInput) getDomNodeOrDie()).isDefaultChecked();
@@ -170,8 +167,7 @@ public class HTMLInputElement extends FormField {
     /**
      * Sets the input's default checked value, used if the containing form gets reset.
      * @param defaultChecked the input's default checked value, used if the containing form gets reset
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultchecked.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533715.aspx">MSDN Documentation</a>
      */
     public void jsxSet_defaultChecked(final boolean defaultChecked) {
         ((HtmlInput) getDomNodeOrDie()).setDefaultChecked(defaultChecked);

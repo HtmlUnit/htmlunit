@@ -589,8 +589,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Gets the outerHTML of the node.
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/outerhtml.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534310.aspx">MSDN documentation</a>
      * @return the contents of this node as HTML
      */
     public String jsxGet_outerHTML() {
@@ -729,8 +728,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Replace all children elements of this element with the supplied value.
      * Sets the outerHTML of the node.
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/outerhtml.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534310.aspx">MSDN documentation</a>
      * @param value - the new value for replacing this node
      */
     public void jsxSet_outerHTML(final String value) {
@@ -1622,8 +1620,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Gets the scrollTop for this element.
      * @return a dummy value (default is 0)
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/scrollTop.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534618.aspx">MSDN documentation</a>
      */
     public int jsxGet_scrollTop() {
         return scrollTop_;
@@ -1640,8 +1637,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Gets the scrollLeft for this element.
      * @return a dummy value (default is 0)
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/scrollLeft.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534617.aspx">MSDN documentation</a>
      */
     public int jsxGet_scrollLeft() {
         return scrollLeft_;
@@ -1658,8 +1654,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Gets the scrollHeight for this element.
      * @return a dummy value of 10
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/scrollHeight.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534615.aspx">MSDN documentation</a>
      */
     public int jsxGet_scrollHeight() {
         return 10;
@@ -1668,8 +1663,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Gets the scrollWidth for this element.
      * @return a dummy value of 10
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/scrollWidth.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534619.aspx">MSDN documentation</a>
      */
     public int jsxGet_scrollWidth() {
         return 10;

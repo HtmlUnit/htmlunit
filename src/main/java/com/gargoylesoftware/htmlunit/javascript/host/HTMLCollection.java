@@ -381,7 +381,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     /**
      * Returns the length of this element array.
      * @return the length of this element array
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/length.asp">MSDN doc</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534101.aspx">MSDN doc</a>
      */
     public final int jsxGet_length() {
         return getElements().size();

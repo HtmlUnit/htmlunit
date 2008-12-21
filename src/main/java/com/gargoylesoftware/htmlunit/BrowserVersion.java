@@ -263,8 +263,7 @@ public class BrowserVersion implements Serializable {
      * Returns the application code name, for example "Mozilla".
      * Default value is {@link #APP_CODE_NAME} if not explicitly configured.
      * @return the application code name
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/appcodename.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533077.aspx">MSDN documentation</a>
      */
     public String getApplicationCodeName() {
         return applicationCodeName_;
@@ -274,8 +273,7 @@ public class BrowserVersion implements Serializable {
      * Returns the application minor version, for example "0".
      * Default value is "0" if not explicitly configured.
      * @return the application minor version
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/appminorversion.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533078.aspx">MSDN documentation</a>
      */
     public String getApplicationMinorVersion() {
         return applicationMinorVersion_;
@@ -284,8 +282,7 @@ public class BrowserVersion implements Serializable {
     /**
      * Returns the application name, for example "Microsoft Internet Explorer".
      * @return the application name
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/appname.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533079.aspx">MSDN documentation</a>
      */
     public String getApplicationName() {
         return applicationName_;
@@ -294,8 +291,7 @@ public class BrowserVersion implements Serializable {
     /**
      * Returns the application version, for example "4.0 (compatible; MSIE 6.0b; Windows 98)".
      * @return the application version
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/appversion.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533080.aspx">MSDN documentation</a>
      */
     public String getApplicationVersion() {
         return applicationVersion_;
@@ -305,8 +301,7 @@ public class BrowserVersion implements Serializable {
      * Returns the browser application language, for example "en-us".
      * Default value is {@link #LANGUAGE_ENGLISH_US} if not explicitly configured.
      * @return the browser application language
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/browserlanguage.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533542.aspx">MSDN documentation</a>
      */
     public String getBrowserLanguage() {
         return browserLanguage_;
@@ -316,8 +311,7 @@ public class BrowserVersion implements Serializable {
      * Returns the type of CPU in the machine, for example "x86".
      * Default value is {@link #CPU_CLASS_X86} if not explicitly configured.
      * @return the type of CPU in the machine
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/cpuclass.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533697.aspx">MSDN documentation</a>
      */
     public String getCpuClass() {
         return cpuClass_;
@@ -327,8 +321,7 @@ public class BrowserVersion implements Serializable {
      * Returns <tt>true</tt> if the browser is currently online.
      * Default value is <code>true</code> if not explicitly configured.
      * @return <tt>true</tt> if the browser is currently online
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/online.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534307.aspx">MSDN documentation</a>
      */
     public boolean isOnLine() {
         return onLine_;
@@ -338,8 +331,7 @@ public class BrowserVersion implements Serializable {
      * Returns the platform on which the application is running, for example "Win32".
      * Default value is {@link #PLATFORM_WIN32} if not explicitly configured.
      * @return the platform on which the application is running
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/platform.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534340.aspx">MSDN documentation</a>
      */
     public String getPlatform() {
         return platform_;
@@ -349,8 +341,7 @@ public class BrowserVersion implements Serializable {
      * Returns the system language, for example "en-us".
      * Default value is {@link #LANGUAGE_ENGLISH_US} if not explicitly configured.
      * @return the system language
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/systemlanguage.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534653.aspx">MSDN documentation</a>
      */
     public String getSystemLanguage() {
         return systemLanguage_;
@@ -368,8 +359,7 @@ public class BrowserVersion implements Serializable {
      * Returns the user language, for example "en-us".
      * Default value is {@link #LANGUAGE_ENGLISH_US} if not explicitly configured.
      * @return the user language
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/userlanguage.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534713.aspx">MSDN documentation</a>
      */
     public String getUserLanguage() {
         return userLanguage_;

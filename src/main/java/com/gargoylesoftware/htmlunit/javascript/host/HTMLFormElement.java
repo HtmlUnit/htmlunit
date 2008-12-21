@@ -118,7 +118,7 @@ public class HTMLFormElement extends HTMLElement {
     /**
      * Returns the value of the JavaScript attribute "length".
      * Does not count input type=image elements as browsers (IE6, Mozilla 1.7) do
-     * (cf <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/length.asp">MSDN doc</a>)
+     * (cf <a href="http://msdn.microsoft.com/en-us/library/ms534101.aspx">MSDN doc</a>)
      * @return the value of this attribute
      */
     public int jsxGet_length() {

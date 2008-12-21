@@ -58,8 +58,7 @@ public class HTMLFrameElement extends HTMLElement {
      * @return the window
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_frame_ref5.html">
      * Gecko DOM Reference</a>
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/contentwindow.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533692.aspx">MSDN documentation</a>
      */
     public Scriptable jsxGet_contentWindow() {
         return new WindowProxy(getFrame().getEnclosedWindow());

@@ -564,8 +564,7 @@ public class HTMLDocument extends Document {
 
     /**
      * Adds a cookie, as long as cookies are enabled.
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/cookie.asp">
-     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533693.aspx">MSDN documentation</a>
      * @param newCookie in the format "name=value[;expires=date][;domain=domainname][;path=path][;secure]
      */
     public void jsxSet_cookie(final String newCookie) {
