@@ -1035,6 +1035,19 @@
 
     <class name="HTMLDivElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDivElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlDivision">
+        <property name="align" notImplemented="true" readable="true" writable="true"/>
+        <property name="dataFld" notImplemented="true" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="dataFormatAs" notImplemented="true" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="dataSrc" notImplemented="true" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="noWrap" notImplemented="true" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
         <function name="doScroll">
             <browser name="Microsoft Internet Explorer"/>
         </function>

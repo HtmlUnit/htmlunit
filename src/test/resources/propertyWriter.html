@@ -1,10 +1,17 @@
 <html><head><script>
   function init() {
+    var xmlDocument = createXmlDocument();
+    var element = xmlDocument.createElement('wakwak');
+	var unknown = document.createElement('harhar');
     var div = document.createElement('div');
-    var a = document.createElement('a');
-	writeAll('HTMLAnchorElement', a, div);
-    writeAll('HTMLDocument', document, createXmlDocument());
-	writeAll('HTMLDivElement', div, a);
+	writeAll('HTMLAnchorElement', document.createElement('a'), unknown);
+	writeAll('HTMLAppletElement', document.createElement('applet'), unknown);
+	writeAll('HTMLAreaElement', document.createElement('area'), unknown);
+	writeAll('HTMLBaseElement', document.createElement('base'), unknown);
+    writeAll('HTMLDocument', document, xmlDocument);
+	writeAll('HTMLDivElement', div, unknown);
+	writeAll('HTMLUnknownElement', unknown, div);
+	writeAll('HTMLElement', unknown, element);
     writeAll('Window', window, null);
   }
 
