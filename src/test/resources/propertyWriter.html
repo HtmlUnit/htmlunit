@@ -5,11 +5,13 @@
 	var unknown = document.createElement('harhar');
     var div = document.createElement('div');
 	writeAll('HTMLAnchorElement', document.createElement('a'), unknown);
+	writeAll('ABBR', document.createElement('abbr'), unknown);//it has properties in IE, while FF evaluates it to HTMLSpanElement, no 'abbr' object
 	writeAll('HTMLAppletElement', document.createElement('applet'), unknown);
 	writeAll('HTMLAreaElement', document.createElement('area'), unknown);
 	writeAll('HTMLBaseElement', document.createElement('base'), unknown);
     writeAll('HTMLDocument', document, xmlDocument);
 	writeAll('HTMLDivElement', div, unknown);
+	writeAll('HTMLSpanElement', document.createElement('span'), unknown);
 	writeAll('HTMLUnknownElement', unknown, div);
 	writeAll('HTMLElement', unknown, element);
     writeAll('Window', window, null);

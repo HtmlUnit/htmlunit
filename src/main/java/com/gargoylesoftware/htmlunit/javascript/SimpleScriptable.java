@@ -262,73 +262,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Returns the value at the specified location in the argument list. If the index is larger
-     * than the argument array then return the default value.
-     *
-     * @param index the index into the argument list
-     * @param args the argument list
-     * @param defaultValue the default value to return if the arg wasn't specified
-     * @return the specified object or null
-     * @deprecated As of 2.4, no more used
-     */
-    @Deprecated
-    public static Object getObjectArg(final int index, final Object[] args, final Object defaultValue) {
-        if (index >= args.length) {
-            return defaultValue;
-        }
-        return args[index];
-    }
-
-    /**
-     * Returns the string value at the specified location in the argument list. If the index is larger
-     * than the argument array then return the default value.
-     *
-     * @param index the index into the argument list
-     * @param args the argument list
-     * @param defaultValue the default value to return if the arg wasn't specified
-     * @return the specified string or null
-     * @deprecated As of 2.4, no more used
-     */
-    @Deprecated
-    public static String getStringArg(final int index, final Object[] args, final String defaultValue) {
-        return Context.toString(getObjectArg(index, args, defaultValue));
-    }
-
-    /**
-     * Returns the boolean value at the specified location in the argument list. If the index is larger
-     * than the argument array then return the default value.
-     *
-     * @param index the index into the argument list
-     * @param args the argument list
-     * @param defaultValue the default value to be used
-     * @return the specified boolean or the default value
-     * @deprecated As of 2.4, no more used
-     */
-    @Deprecated
-    public static boolean getBooleanArg(final int index, final Object[] args, final boolean defaultValue) {
-        final Boolean defaultBoolean = Boolean.valueOf(defaultValue);
-
-        return Context.toBoolean(getObjectArg(index, args, defaultBoolean));
-    }
-
-    /**
-     * Returns the int value at the specified location in the argument list. If the index is larger
-     * than the argument array then return the default value.
-     *
-     * @param index the index into the argument list
-     * @param args the argument list
-     * @param defaultValue the default value to be used
-     * @return the specified int or the default value
-     * @deprecated As of 2.4, no more used
-     */
-    @Deprecated
-    public static int getIntArg(final int index, final Object[] args, final int defaultValue) {
-        return (int) Context.toNumber(getObjectArg(index, args, new Integer(defaultValue)));
-    }
-
-    /**
-     * Returns the JavaScript default value of this object. This is the JavaScript equivalent
-     * of a toString() in Java.
+     * Returns the JavaScript default value of this object. This is the JavaScript equivalent of a toString() in Java.
      *
      * @param hint a hint as to the format of the default value (ignored in this case)
      * @return the default value
@@ -343,7 +277,7 @@ public class SimpleScriptable extends ScriptableObject {
             if (ScriptableObject.getProperty(window, getClassName()) == this) {
                 return "[" + getClassName() + "]";
             }
-            return "[object " + getClassName() + "]"; // not fully correct as htmlunit names are not FF ones
+            return "[object " + getClassName() + "]";
         }
         return super.getDefaultValue(hint);
     }
