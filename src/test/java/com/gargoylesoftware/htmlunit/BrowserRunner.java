@@ -42,14 +42,6 @@ import org.junit.runners.Suite;
  *    }
  * }
  * </pre>
- *
- * -  If the test case is not an instance of {@link WebDriverTestCase},
- *        it will test HtmlUnit with all browser simulations.
- * -  If the test case is an instance of {@link WebDriverTestCase}, it will check system-defined properties:
- *      - If no 'htmlunit.webdriver' property is defined, it will test HtmlUnit with all browser simulations.
- *      - If 'htmlunit.webdriver' property contains any combination of ie6, ie7, ff2, ff33; it will test
- *        only those real browsers, without testing with HtmlUnit at all.
- *
  * @version $Revision$
  * @author Ahmed Ashour
  */
@@ -66,8 +58,12 @@ public class BrowserRunner extends Suite {
     public BrowserRunner(final Class<WebTestCase> klass) throws Throwable {
         super(klass, Collections.<Runner>emptyList());
 
+        /*
         final String property = System.getProperty(WebDriverTestCase.PROPERTY);
         final boolean runAll = !WebDriverTestCase.class.isAssignableFrom(klass) || property == null;
+        */
+        final String property = "";
+        final boolean runAll = true;
 
         if (BrowserVersionClassRunner.containsTestMethods(klass)) {
             if (runAll || property.contains("ie6")) {
