@@ -55,7 +55,7 @@ public class HtmlHeadTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSimpleScriptable() throws Exception {
+    public void simpleScriptable() throws Exception {
         final String html = "<html><head id='myId'><script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('myId'));\n"

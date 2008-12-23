@@ -468,7 +468,7 @@
         <dependency>
             <groupId>net.sourceforge.nekohtml</groupId>
             <artifactId>nekohtml</artifactId>
-            <version>1.9.10-SNAPSHOT</version>
+            <version>1.9.10</version>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.cssparser</groupId>
@@ -619,16 +619,6 @@
             <id>jboss-releases</id>
             <name>JBoss Releases</name>
             <url>http://repository.jboss.com/maven2</url>
-        </repository>
-        <repository>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-            <id>NekoHTMLSnapshots</id>
-            <name>NekoHTML Snapshots</name>
-            <url>http://build.canoo.com/NekoHTML/artifacts/m2-repo</url>
-            <layout>default</layout>
         </repository>
     </repositories>
 </project>

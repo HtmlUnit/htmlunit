@@ -125,6 +125,9 @@ class DefaultElementFactory implements IElementFactory {
         else if (tagName.equals(HtmlDivision.TAG_NAME)) {
             element = new HtmlDivision(namespaceURI, qualifiedName, page, attributeMap);
         }
+        else if (tagName.equals(HtmlEmbed.TAG_NAME)) {
+            element = new HtmlEmbed(namespaceURI, qualifiedName, page, attributeMap);
+        }
         else if (tagName.equals(HtmlFieldSet.TAG_NAME)) {
             element = new HtmlFieldSet(namespaceURI, qualifiedName, page, attributeMap);
         }

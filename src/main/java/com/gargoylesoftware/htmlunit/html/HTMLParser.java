@@ -105,6 +105,7 @@ public final class HTMLParser {
         ELEMENT_FACTORIES.put(HtmlDivision.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlDefinitionList.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlDefinitionTerm.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlEmbed.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlFieldSet.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlFont.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlForm.TAG_NAME, defaultElementFactory);

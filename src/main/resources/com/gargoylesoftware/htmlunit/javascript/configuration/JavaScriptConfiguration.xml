@@ -1382,6 +1382,10 @@
         </function>
     </class>
 
+    <class name="HTMLEmbedElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLEmbedElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlEmbed">
+    </class>
+
     <class name="HTMLFiedlSetElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFieldSetElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFieldSet">
     </class>

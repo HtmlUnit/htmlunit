@@ -34,7 +34,7 @@ public class HtmlBaseFontTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSimpleScriptable() throws Exception {
+    public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"

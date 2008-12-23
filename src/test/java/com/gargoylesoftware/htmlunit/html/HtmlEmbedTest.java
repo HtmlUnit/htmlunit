@@ -23,12 +23,12 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * Tests for {@link HtmlFont}.
+ * Tests for {@link HtmlEmbed}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlFontTest extends WebTestCase {
+public class HtmlEmbedTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -42,13 +42,13 @@ public class HtmlFontTest extends WebTestCase {
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
-            + "  <font id='myId'/>\n"
+            + "  <embed id='myId'/>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"[object HTMLFontElement]"};
+        final String[] expectedAlerts = {"[object HTMLEmbedElement]"};
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertTrue(HtmlFont.class.isInstance(page.getHtmlElementById("myId")));
+        assertTrue(HtmlEmbed.class.isInstance(page.getHtmlElementById("myId")));
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }
