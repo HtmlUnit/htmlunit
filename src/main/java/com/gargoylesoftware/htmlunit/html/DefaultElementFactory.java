@@ -101,6 +101,9 @@ class DefaultElementFactory implements IElementFactory {
         else if (tagName.equals(HtmlButtonInput.TAG_NAME)) {
             element = new HtmlButtonInput(namespaceURI, qualifiedName, page, attributeMap);
         }
+        else if (tagName.equals(HtmlCanvas.TAG_NAME)) {
+            element = new HtmlCanvas(namespaceURI, qualifiedName, page, attributeMap);
+        }
         else if (tagName.equals(HtmlCaption.TAG_NAME)) {
             element = new HtmlCaption(namespaceURI, qualifiedName, page, attributeMap);
         }

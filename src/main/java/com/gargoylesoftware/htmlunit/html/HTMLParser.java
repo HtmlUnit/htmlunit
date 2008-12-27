@@ -95,6 +95,7 @@ public final class HTMLParser {
         ELEMENT_FACTORIES.put(HtmlBody.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlBreak.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlButton.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlCanvas.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlCaption.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlCenter.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlTableColumn.TAG_NAME, defaultElementFactory);

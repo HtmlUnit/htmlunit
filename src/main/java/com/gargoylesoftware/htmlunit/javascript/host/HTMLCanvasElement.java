@@ -15,19 +15,19 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 /**
- * A JavaScript object for {@link com.gargoylesoftware.htmlunit.html.HtmlEmbed}.
+ * A JavaScript object for {@link com.gargoylesoftware.htmlunit.html.HtmlCanvas}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HTMLEmbedElement extends HTMLElement {
+public class HTMLCanvasElement extends HTMLElement {
 
-    private static final long serialVersionUID = 2885295550292333233L;
+    private static final long serialVersionUID = 2198667710163712419L;
 
     /**
      * Creates an instance.
      */
-    public HTMLEmbedElement() {
+    public HTMLCanvasElement() {
         // Empty.
     }
 }
