@@ -158,6 +158,7 @@ public final class HTMLParser {
         ELEMENT_FACTORIES.put(HtmlTableFooter.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlTableHeader.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlUnorderedList.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlWordBreak.TAG_NAME, defaultElementFactory);
     }
 
     /**

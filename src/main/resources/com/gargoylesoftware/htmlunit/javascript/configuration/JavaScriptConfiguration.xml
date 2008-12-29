@@ -1794,6 +1794,10 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlUnknownElement">
     </class>
 
+    <class name="HTMLWBRElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLWBRElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlWordBreak">
+    </class>
+
     <class name="Location" classname="com.gargoylesoftware.htmlunit.javascript.host.Location"
         JSObject="true">
         <property name="hash" readable="true" writable="true"/>

@@ -323,6 +323,9 @@ class DefaultElementFactory implements IElementFactory {
         else if (tagName.equals(HtmlUnorderedList.TAG_NAME)) {
             element = new HtmlUnorderedList(namespaceURI, qualifiedName, page, attributeMap);
         }
+        else if (tagName.equals(HtmlWordBreak.TAG_NAME)) {
+            element = new HtmlWordBreak(namespaceURI, qualifiedName, page, attributeMap);
+        }
         else {
             throw new IllegalStateException("Cannot find HtmlElement for " + qualifiedName);
         }
