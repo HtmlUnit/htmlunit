@@ -1,5 +1,5 @@
 <html><head><script>
-  function init() {
+  function init(event) {
     var xmlDocument = createXmlDocument();
     var element = xmlDocument.createElement('wakwak');
 	var unknown = document.createElement('harhar');
@@ -35,8 +35,8 @@
     writeAll('HTMLTableColElement', document.createElement('col'), unknown);
     writeAll('HTMLTableColElement', document.createElement('colgroup'), unknown);
     writeAll('CurrentStyle', document.getElementById('myTextarea').currentStyle, document.getElementById('myTextarea').style);
-//custom
-//dataTransfer
+//custom tag: http://msdn.microsoft.com/en-us/library/ms535233.aspx
+//event.dataTransfer
 //defaults
 	writeAll('DD', document.createElement('dd'), unknown);//same as 'abbr'
     writeAll('HTMLDelElement', document.createElement('del'), unknown);
@@ -49,7 +49,7 @@
 	writeAll('DT', document.createElement('dt'), unknown);//same as 'abbr'
 	writeAll('EM', document.createElement('em'), unknown);//same as 'abbr'
     writeAll('HTMLEmbedElement', document.createElement('embed'), unknown);
-//    writeAll('Event', event, null);
+    writeAll('Event', event ? event : window.event, null);
 //external
     writeAll('HTMLFieldSetElement', document.createElement('fieldset'), unknown);
     writeAll('HTMLFontElement', document.createElement('font'), unknown);
@@ -174,6 +174,6 @@
     else if (window.ActiveXObject)
       return new ActiveXObject('Microsoft.XMLDOM');
   }
-</script></head><body onload='init()'>
+</script></head><body onload='init(event)'>
 <textarea id='myTextarea' rows='35' cols='150'></textarea>
 </body></html>
