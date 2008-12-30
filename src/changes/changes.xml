@@ -10,7 +10,7 @@
                 Upgrade HtmlUnit-core-js to 2.4 (corresponds to head of Rhino branch 1.7R2 from Dec 12, 2008).
             </action>
             <action type="update" dev="asashour">
-                Upgrade NekoHtml to 1.9.10.
+                Upgrade NekoHtml to 1.9.11.
             </action>
             <action type="add" dev="asashour">
                 Add support for HtmlEmbed, HtmlCanvas and HtmlWordBreak.
