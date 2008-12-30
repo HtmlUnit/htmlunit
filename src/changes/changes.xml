@@ -6,6 +6,10 @@
 
     <body>
         <release version="2.4" date="Dec 23, 2008" description="Bugfixes, ActiveX support, JQuery &amp; MochiKit support, minimal applet support, IE conditional comments">
+            <action type="update" dev="asashour">
+                Deprecate HtmlAddress, HtmlCenter, HtmlBidirectionalOverride, HtmlDefinitionDescription, HtmlDefinitionTerm,
+                HtmlNoFrames and HtmlNoScript.
+            </action>
             <action type="update" dev="mguillem">
                 Upgrade HtmlUnit-core-js to 2.4 (corresponds to head of Rhino branch 1.7R2 from Dec 12, 2008).
             </action>
