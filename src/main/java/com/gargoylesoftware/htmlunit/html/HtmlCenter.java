@@ -26,9 +26,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
- * @deprecated As of 2.4, will be replaced by HtmlSpan in 2.5
  */
-@Deprecated
 public class HtmlCenter extends ClickableElement {
 
     private static final long serialVersionUID = 3248794004926373269L;
