@@ -57,41 +57,10 @@ public class WebResponseImpl implements WebResponse, Serializable {
      * @param url               Where this response came from
      * @param requestMethod     the method used to get this response
      * @param loadTime          How long the response took to be sent
-     * @deprecated As of 2.2, pleas use {@link #WebResponseImpl(WebResponseData, URL, HttpMethod, long)} instead.
-     */
-    @Deprecated
-    public WebResponseImpl(final WebResponseData responseData, final URL url,
-            final SubmitMethod requestMethod, final long loadTime) {
-        this(responseData, TextUtil.DEFAULT_CHARSET, new WebRequestSettings(url, requestMethod), loadTime);
-    }
-
-    /**
-     * Constructs with all data.
-     *
-     * @param responseData      Data that was send back
-     * @param url               Where this response came from
-     * @param requestMethod     the method used to get this response
-     * @param loadTime          How long the response took to be sent
      */
     public WebResponseImpl(final WebResponseData responseData, final URL url,
             final HttpMethod requestMethod, final long loadTime) {
         this(responseData, TextUtil.DEFAULT_CHARSET, new WebRequestSettings(url, requestMethod), loadTime);
-    }
-
-    /**
-     * Constructs with all data.
-     *
-     * @param responseData      Data that was send back
-     * @param charset           Charset used if not returned in the response
-     * @param url               Where this response came from
-     * @param requestMethod     the method used to get this response
-     * @param loadTime          How long the response took to be sent
-     * @deprecated As of 2.2, please use {@link #WebResponseImpl(WebResponseData, String, WebRequestSettings, long)}.
-     */
-    @Deprecated
-    public WebResponseImpl(final WebResponseData responseData, final String charset,
-            final URL url, final SubmitMethod requestMethod, final long loadTime) {
-        this(responseData, charset, new WebRequestSettings(url, requestMethod), loadTime);
     }
 
     /**

@@ -454,28 +454,6 @@ public class HttpWebConnection implements WebConnection {
      * May be overridden by subclasses to return a specialized WebResponse.
      * @param responseData Data that was send back
      * @param charset Charset used if not returned in the response
-     * @param originatingURL Where this response came from
-     * @param requestMethod the method used to get this response
-     * @param loadTime How long the response took to be sent
-     * @return the new WebResponse
-     * @deprecated As of 2.2, no more used,
-     *     please use {@link #newWebResponseInstance(String, WebResponseData, long, WebRequestSettings)} instead
-     */
-    @Deprecated
-    protected WebResponse newWebResponseInstance(
-            final String charset,
-            final WebResponseData responseData,
-            final long loadTime,
-            final SubmitMethod requestMethod,
-            final URL originatingURL) {
-        return new WebResponseImpl(responseData, charset, originatingURL, requestMethod, loadTime);
-    }
-
-    /**
-     * Constructs an appropriate WebResponse.
-     * May be overridden by subclasses to return a specialized WebResponse.
-     * @param responseData Data that was send back
-     * @param charset Charset used if not returned in the response
      * @param requestSettings the request settings used to get this response
      * @param loadTime How long the response took to be sent
      * @return the new WebResponse

@@ -5,6 +5,13 @@
     </properties>
 
     <body>
+        <release version="2.5" date="?" description="Bugfixes">
+            <action type="remove" dev="asashour">
+                Deprecation: remove XmlAttr, SubmitMethod, WebRequestSettings.setURL(), and
+                WebClient methods: setCookiesEnabled(), setProxyHost(), setProxyPort(), addHostsToProxyBypass(),
+                and removeHostsFromProxyBypass().
+            </action>
+        </release>
         <release version="2.4" date="Dec 30, 2008" description="Bugfixes, ActiveX support, JQuery &amp; MochiKit support, minimal applet support, IE conditional comments">
             <action type="update" dev="mguillem">
                 Upgrade HtmlUnit-core-js to 2.4 (corresponds to head of Rhino branch 1.7R2 from Dec 12, 2008).

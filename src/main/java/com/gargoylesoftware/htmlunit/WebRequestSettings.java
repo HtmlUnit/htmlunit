@@ -73,18 +73,6 @@ public class WebRequestSettings implements Serializable {
      * Instantiates a {@link WebRequestSettings} for the specified URL using the specified HTTP submit method.
      * @param url the target URL
      * @param submitMethod the HTTP submit method to use
-     * @deprecated As of 2.2, please use {@link #WebRequestSettings(URL, HttpMethod)} instead.
-     */
-    @Deprecated
-    public WebRequestSettings(final URL url, final SubmitMethod submitMethod) {
-        this(url);
-        setSubmitMethod(submitMethod);
-    }
-
-    /**
-     * Instantiates a {@link WebRequestSettings} for the specified URL using the specified HTTP submit method.
-     * @param url the target URL
-     * @param submitMethod the HTTP submit method to use
      */
     public WebRequestSettings(final URL url, final HttpMethod submitMethod) {
         this(url);
@@ -94,29 +82,9 @@ public class WebRequestSettings implements Serializable {
     /**
      * Returns the target URL.
      * @return the target URL
-     * @deprecated As of 2.2, use {@link #getUrl()} instead.
-     */
-    @Deprecated
-    public URL getURL() {
-        return url_;
-    }
-
-    /**
-     * Returns the target URL.
-     * @return the target URL
      */
     public URL getUrl() {
         return url_;
-    }
-
-    /**
-     * Sets the target URL.
-     * @param url the target URL
-     * @deprecated As of 2.2, user {@link #setUrl(URL)} instead.
-     */
-    @Deprecated
-    public void setURL(final URL url) {
-        setUrl(url);
     }
 
     /**
@@ -242,31 +210,11 @@ public class WebRequestSettings implements Serializable {
     }
 
     /**
-     * Returns the HTTP submit method used.
-     * @return the HTTP submit method used
-     * @deprecated As of 2.2, please use {@link #getHttpMethod()} instead.
-     */
-    @Deprecated
-    public SubmitMethod getSubmitMethod() {
-        return SubmitMethod.getInstance(httpMethod_.name());
-    }
-
-    /**
      * Returns the HTTP submit method to use.
      * @return the HTTP submit method to use
      */
     public HttpMethod getHttpMethod() {
         return httpMethod_;
-    }
-
-    /**
-     * Sets the HTTP submit method to use.
-     * @param submitMethod the HTTP submit method to use
-     * @deprecated As of 2.2, please use {@link #setHttpMethod(HttpMethod)} instead.
-     */
-    @Deprecated
-    public void setSubmitMethod(final SubmitMethod submitMethod) {
-        setHttpMethod(HttpMethod.valueOf(submitMethod.getName().toUpperCase()));
     }
 
     /**

@@ -44,23 +44,6 @@ public class MockWebConnection implements WebConnection {
     private int requestCount_ = 0;
 
     /**
-     * Creates an instance.
-     */
-    public MockWebConnection() {
-        // nothing
-    }
-
-    /**
-     * Creates an instance.
-     * @param webClient the web client
-     * @deprecated as of 2.3. Use {@link #MockWebConnection()} instead.
-     */
-    @Deprecated
-    public MockWebConnection(final WebClient webClient) {
-        // nothing
-    }
-
-    /**
      * {@inheritDoc}
      */
     public WebResponse getResponse(final WebRequestSettings settings) throws IOException {

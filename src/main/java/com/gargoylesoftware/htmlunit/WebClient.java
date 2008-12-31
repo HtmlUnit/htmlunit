@@ -605,26 +605,6 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Enables/disables cookie support. By default, this property is enabled.
-     * @param enabled <tt>true</tt> to enable cookie support
-     * @deprecated as of 2.3, use {@link CookieManager#setCookiesEnabled(boolean)} instead
-     */
-    @Deprecated
-    public void setCookiesEnabled(final boolean enabled) {
-        cookieManager_.setCookiesEnabled(enabled);
-    }
-
-    /**
-     * Returns <tt>true</tt> if cookies are enabled.
-     * @return <tt>true</tt> if cookies are enabled
-     * @deprecated as of 2.3 use {@link CookieManager#isCookiesEnabled()} instead
-     */
-    @Deprecated
-    public boolean isCookiesEnabled() {
-        return cookieManager_.isCookiesEnabled();
-    }
-
-    /**
      * Enables/disables CSS support. By default, this property is enabled.
      *
      * @param enabled <tt>true</tt> to enable CSS support
@@ -731,49 +711,6 @@ public class WebClient implements Serializable {
     public void setCookieManager(final CookieManager cookieManager) {
         WebAssert.notNull("cookieManager", cookieManager);
         cookieManager_ = cookieManager;
-    }
-
-    /**
-     * Sets the proxy host used to perform HTTP requests.
-     * @param proxyHost the proxy host used to perform HTTP requests
-     * @deprecated As of 2.2, use {@link ProxyConfig} instead (see {@link #getProxyConfig()})
-     */
-    @Deprecated
-    public void setProxyHost(final String proxyHost) {
-        getProxyConfig().setProxyHost(proxyHost);
-    }
-
-    /**
-     * Sets the proxy port used to perform HTTP requests.
-     * @param proxyPort the proxy port used to perform HTTP requests
-     * @deprecated As of 2.2, use {@link ProxyConfig} instead (see {@link #getProxyConfig()})
-     */
-    @Deprecated
-    public void setProxyPort(final int proxyPort) {
-        getProxyConfig().setProxyPort(proxyPort);
-    }
-
-    /**
-     * Any hosts matched by the specified regular expression pattern will bypass the configured proxy.
-     * @param pattern a regular expression pattern that matches the hostnames of the hosts which should
-     *                bypass the configured proxy.
-     * @see java.util.regex.Pattern
-     * @deprecated As of 2.2, use {@link ProxyConfig} instead (see {@link #getProxyConfig()})
-     */
-    @Deprecated
-    public void addHostsToProxyBypass(final String pattern) {
-        getProxyConfig().addHostsToProxyBypass(pattern);
-    }
-
-    /**
-     * Any hosts matched by the specified regular expression pattern will no longer bypass the configured proxy.
-     * @param pattern the previously added regular expression pattern
-     * @see java.util.regex.Pattern
-     * @deprecated As of 2.2, use {@link ProxyConfig} instead (see {@link #getProxyConfig()})
-     */
-    @Deprecated
-    public void removeHostsFromProxyBypass(final String pattern) {
-        getProxyConfig().removeHostsFromProxyBypass(pattern);
     }
 
     /**
