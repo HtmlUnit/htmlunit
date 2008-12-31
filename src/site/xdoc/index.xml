@@ -81,13 +81,6 @@
                         <a href="http://sourceforge.net/mail/?group_id=47038">HtmlUnit mailing list</a>
                     </li>
                     <li>
-                        <a href="http://htmlunit.sourceforge.net/phpwiki/index.php">HtmlUnit wiki</a>
-                        with an RSS feed for recent changes
-                        <a href="http://htmlunit.sourceforge.net/phpwiki/index.php/RecentChanges?format=rss">
-                               <img src="http://htmlunit.sourceforge.net/phpwiki/themes/default/buttons/RSS.png" border="0" alt="RSS logo" />
-                        </a>
-                    </li>
-                    <li>
                         <a href="codingConventions.html">HtmlUnit coding conventions</a>
                     </li>
                     <li>
