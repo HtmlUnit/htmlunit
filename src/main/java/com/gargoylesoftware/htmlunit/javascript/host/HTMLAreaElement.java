@@ -14,6 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.net.MalformedURLException;
+
+import com.gargoylesoftware.htmlunit.html.HtmlArea;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+
 /**
  * The JavaScript object "HTMLAreaElement".
  *
@@ -31,4 +37,43 @@ public class HTMLAreaElement extends HTMLElement {
         // Empty.
     }
 
+    /**
+     * Calls for instance for implicit conversion to string.
+     * @see com.gargoylesoftware.htmlunit.javascript.SimpleScriptable#getDefaultValue(java.lang.Class)
+     * @param hint the type hint
+     * @return the default value
+     */
+    @Override
+    public Object getDefaultValue(final Class< ? > hint) {
+        final HtmlArea link = (HtmlArea) getHtmlElementOrDie();
+        final String href = link.getHrefAttribute();
+
+        final String response;
+        if (href == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+            response = "";
+        }
+        else {
+            final int indexAnchor = href.indexOf('#');
+            final String beforeAnchor;
+            final String anchorPart;
+            if (indexAnchor == -1) {
+                beforeAnchor = href;
+                anchorPart = "";
+            }
+            else {
+                beforeAnchor = href.substring(0, indexAnchor);
+                anchorPart = href.substring(indexAnchor);
+            }
+
+            try {
+                response =
+                    ((HtmlPage) link.getPage()).getFullyQualifiedUrl(beforeAnchor).toExternalForm() + anchorPart;
+            }
+            catch (final MalformedURLException e) {
+                return href;
+            }
+        }
+
+        return response;
+    }
 }
