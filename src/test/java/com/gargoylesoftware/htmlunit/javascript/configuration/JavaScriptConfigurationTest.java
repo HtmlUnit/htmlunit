@@ -75,7 +75,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * Tests loading a configuration from the supplied stream.
      */
     @Test
-    public void testLoadLocalConfiguration() {
+    public void loadLocalConfiguration() {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
             + "<configuration\n"
@@ -97,7 +97,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * Tests loading a configuration from the supplied stream.
      */
     @Test
-    public void testLoadSystemConfigurationFile() {
+    public void loadSystemConfigurationFile() {
         Assert.assertFalse("Document should not be loaded", JavaScriptConfiguration.isDocumentLoaded());
         JavaScriptConfiguration.loadConfiguration();
         assertTrue("Documnet should now be loaded", JavaScriptConfiguration.isDocumentLoaded());
@@ -108,7 +108,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * @throws Exception - Exception on error
      */
     @Test
-    public void testGetInstance() throws Exception {
+    public void getInstance() throws Exception {
         final String configurationString
             = "<?xml version='1.0'?>\n"
             + "<configuration\n"
@@ -142,7 +142,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testGetConditionalPropertyBrowser() throws Exception {
+    public void getConditionalPropertyBrowser() throws Exception {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
             + "<configuration\n"
@@ -174,7 +174,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * @throws Exception on error
      */
     @Test
-    public void testForSettingJSObject() throws Exception {
+    public void forSettingJSObject() throws Exception {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
             + "<configuration\n"
@@ -198,7 +198,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testInstanceForTestVersion() throws Exception {
+    public void instanceForTestVersion() throws Exception {
         final String configurationString
             = "<?xml version='1.0'?>\n"
             + "<configuration\n"
@@ -231,7 +231,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testPropertyForNullBrowser() throws Exception {
+    public void propertyForNullBrowser() throws Exception {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
             + "<configuration\n"
@@ -267,7 +267,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * @throws Exception - Exception on error
      */
     @Test
-    public void testGetConditionalPropertyMinBrowserVersion() throws Exception {
+    public void getConditionalPropertyMinBrowserVersion() throws Exception {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
             + "<configuration\n"
@@ -302,7 +302,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * @throws Exception - Exception on error
      */
     @Test
-    public void testGetConditionalPropertyMaxBrowserVersion() throws Exception {
+    public void getConditionalPropertyMaxBrowserVersion() throws Exception {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
             + "<configuration\n"
@@ -337,7 +337,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * @throws Exception - Exception on error
      */
     @Test
-    public void testGetConditionalPropertyMaxJSVersion() throws Exception {
+    public void getConditionalPropertyMaxJSVersion() throws Exception {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
             + "<configuration\n"
@@ -371,7 +371,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * @throws Exception - Exception on error
      */
     @Test
-    public void testParseFunction() throws Exception {
+    public void parseFunction() throws Exception {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
             + "<configuration\n"
@@ -398,7 +398,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * @throws Exception - Exception on error
      */
     @Test
-    public void testParseFunctionForLimitedBrowser() throws Exception {
+    public void parseFunctionForLimitedBrowser() throws Exception {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
             + "<configuration\n"
@@ -425,7 +425,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testConfigurationFileAgainstSchema() throws Exception {
+    public void configurationFileAgainstSchema() throws Exception {
         final XMLReader parser = XMLReaderFactory.createXMLReader("org.apache.xerces.parsers.SAXParser");
         final String directory = "src/main/resources/com/gargoylesoftware/htmlunit/javascript/configuration/";
         parser.setFeature("http://xml.org/sax/features/validation", true);
@@ -469,7 +469,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testConfigurationFile() throws Exception {
+    public void configurationFile() throws Exception {
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getAllEntries();
 
         for (final String classname : configuration.keySet()) {
@@ -535,7 +535,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testForPropertyExist() throws Exception {
+    public void forPropertyExist() throws Exception {
         final String configurationString
             = "<?xml version='1.0'?>\n"
             + "<configuration\n"
@@ -566,7 +566,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testForPropertyNotExist() throws Exception {
+    public void forPropertyNotExist() throws Exception {
         final String configurationString
             = "<?xml version='1.0'?>\n"
             + "<configuration\n"
@@ -598,7 +598,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testConfigurationMapExpands() throws Exception {
+    public void configurationMapExpands() throws Exception {
         // get a reference to the leaky map
         final Field field = JavaScriptConfiguration.class.getDeclaredField("ConfigurationMap_");
         field.setAccessible(true);
@@ -617,7 +617,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testLexicographicOrder() throws Exception {
+    public void lexicographicOrder() throws Exception {
         final String directory = "src/main/resources/com/gargoylesoftware/htmlunit/javascript/configuration/";
 
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -642,9 +642,48 @@ public class JavaScriptConfigurationTest extends WebTestCase {
                                 + className + "\" should be before \"" + lastClassName + '"');
                     }
                     lastClassName = className;
+
+                    String lastChildName = null;
+                    int lastChildType = 0;
+                    Node child = element.getFirstChild();
+                    while (child != null) {
+                        if (child instanceof Element) {
+                            final Element childE = (Element) child;
+                            final String tagName = childE.getTagName();
+                            final int childType = getType(tagName);
+                            if (childType != -1 && childType != lastChildType) {
+                                lastChildType = childType;
+                                lastChildName = null;
+                            }
+                            else {
+                                if (childType > 0) {
+                                    final String name = childE.getAttribute("name");
+                                    if (lastChildName != null && name.compareToIgnoreCase(lastChildName) < 1) {
+                                        fail("JavaScriptConfiguration.xml: \""
+                                                + name + "\" should be before \"" + lastChildName + '"');
+                                    }
+                                    lastChildName = name;
+                                }
+                            }
+                        }
+                        child = child.getNextSibling();
+                    }
                 }
             }
             node = node.getNextSibling();
         }
+    }
+
+    private static int getType(final String tagName) {
+        if (tagName.equals("constant")) {
+            return 0;
+        }
+        if (tagName.equals("property")) {
+            return 1;
+        }
+        if (tagName.equals("function")) {
+            return 2;
+        }
+        return -1;
     }
 }

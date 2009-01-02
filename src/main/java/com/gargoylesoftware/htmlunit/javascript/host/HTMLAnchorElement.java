@@ -323,8 +323,11 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @Override
     public Object getDefaultValue(final Class< ? > hint) {
-        final HtmlAnchor link = (HtmlAnchor) getHtmlElementOrDie();
-        final String href = link.getHrefAttribute();
+        return getDefaultValue(getHtmlElementOrDie());
+    }
+
+    static String getDefaultValue(final HtmlElement element) {
+        final String href = element.getAttribute("href").trim();
 
         final String response;
         if (href == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
@@ -345,7 +348,7 @@ public class HTMLAnchorElement extends HTMLElement {
 
             try {
                 response =
-                    ((HtmlPage) link.getPage()).getFullyQualifiedUrl(beforeAnchor).toExternalForm() + anchorPart;
+                    ((HtmlPage) element.getPage()).getFullyQualifiedUrl(beforeAnchor).toExternalForm() + anchorPart;
             }
             catch (final MalformedURLException e) {
                 return href;
