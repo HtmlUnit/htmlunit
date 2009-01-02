@@ -18,7 +18,7 @@
 
     <class name="ActiveXObject" classname="com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject"
         jsConstructor="jsConstructor" JSObject="true">
-        <browser name="Microsoft Internet Explorer" min-version="4"/>
+        <browser name="Microsoft Internet Explorer"/>
     </class>
 
     <class name="Attr" classname="com.gargoylesoftware.htmlunit.javascript.host.Attr"
@@ -830,7 +830,7 @@
             <doclink
                 url="http://msdn.microsoft.com/en-us/library/ms534638.aspx"
                 descr="MSDN documentation"/>
-            <browser name="Microsoft Internet Explorer" min-version="5"/>
+            <browser name="Microsoft Internet Explorer"/>
         </property>
         <property name="target" readable="true" writable="false">
             <browser name="Firefox"/>
@@ -852,68 +852,29 @@
 
     <class name="EventNode" extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.EventNode"
         JSObject="true">
-        <property name="onblur" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </property>
-        <property name="onclick" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </property>
+        <property name="onblur" readable="true" writable="true"/>
+        <property name="onclick" readable="true" writable="true"/>
         <property name="oncontextmenu" readable="true" writable="true"/>
-        <property name="ondblclick" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </property>
-        <property name="onfocus" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </property>
+        <property name="ondblclick" readable="true" writable="true"/>
+        <property name="onfocus" readable="true" writable="true"/>
         <property name="onfocusin" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
         <property name="onfocusout" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
-        <property name="onkeydown" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </property>
-        <property name="onkeypress" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </property>
-        <property name="onkeyup" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </property>
-        <property name="onmousedown" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </property>
-        <property name="onmousemove" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </property>
-        <property name="onmouseout" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </property>
-        <property name="onmouseover" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </property>
-        <property name="onmouseup" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </property>
+        <property name="onkeydown" readable="true" writable="true"/>
+        <property name="onkeypress" readable="true" writable="true"/>
+        <property name="onkeyup" readable="true" writable="true"/>
+        <property name="onmousedown" readable="true" writable="true"/>
+        <property name="onmousemove" readable="true" writable="true"/>
+        <property name="onmouseout" readable="true" writable="true"/>
+        <property name="onmouseover" readable="true" writable="true"/>
+        <property name="onmouseup" readable="true" writable="true"/>
         <property name="onpropertychange" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
-        <property name="onresize" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </property>
+        <property name="onresize" readable="true" writable="true"/>
         <function name="fireEvent">
             <doclink
                 url="http://msdn2.microsoft.com/en-us/library/ms536423.aspx"
@@ -936,10 +897,7 @@
         <property name="disabled" readable="true" writable="true"/>
         <property name="form" readable="true" writable="false"/>
         <property name="name" readable="true" writable="true"/>
-        <property name="onchange" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </property>
+        <property name="onchange" readable="true" writable="true"/>
         <property name="tabIndex" readable="true" writable="false"/>
         <property name="type" readable="true" writable="false">
             <javascript min-version="1.1"/>
@@ -1103,10 +1061,7 @@
             <browser name="Microsoft Internet Explorer"/>
         </property>
         <property name="alinkColor" notImplemented="true" readable="true" writable="false"/>
-        <property name="all" readable="true" writable="false">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox" min-version="1.5"/>
-        </property>
+        <property name="all" readable="true" writable="false"/>
         <property name="anchors" readable="true" writable="false">
             <doclink
                 url="http://msdn.microsoft.com/en-us/library/ms537435.aspx"
@@ -1157,7 +1112,7 @@
             <javascript min-version="1.1"/>
         </property>
         <property name="readyState" readable="true" writable="false">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Microsoft Internet Explorer"/>
         </property>
         <property name="scripts" readable="true" writable="false"/>
         <property name="selection" readable="true" writable="false">
@@ -1180,7 +1135,7 @@
             <browser name="Firefox"/>
         </function>
         <function name="createEventObject">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Microsoft Internet Explorer"/>
         </function>
         <function name="createRange">
             <doclink
@@ -1226,50 +1181,38 @@
     <class name="HTMLElement" extends="Element" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlElement">
         <property name="all" readable="true" writable="false">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Microsoft Internet Explorer"/>
         </property>
         <property name="attributes" readable="true" writable="false"/>
         <property name="children" readable="true" writable="false">
             <doclink
                 url="http://msdn.microsoft.com/en-us/library/ms537446.aspx"
                 descr="MSDN documentation"/>
-            <browser name="Microsoft Internet Explorer" min-version="5.5"/>
+            <browser name="Microsoft Internet Explorer"/>
         </property>
-        <property name="className" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </property>
+        <property name="className" readable="true" writable="true"/>
         <property name="clientHeight" readable="true" writable="false"/>
         <property name="clientLeft" readable="true" writable="false"/>
         <property name="clientTop" readable="true" writable="false"/>
         <property name="clientWidth" readable="true" writable="false"/>
         <property name="currentStyle" readable="true" writable="false">
-            <browser name="Microsoft Internet Explorer" min-version="5"/>
+            <browser name="Microsoft Internet Explorer"/>
         </property>
         <property name="disabled" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Microsoft Internet Explorer"/>
         </property>
         <property name="document" notImplemented="true" readable="true" writable="false">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Microsoft Internet Explorer"/>
         </property>
         <property name="filters" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer"/>
         </property>
-        <property name="id" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </property>
-        <property name="innerHTML" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </property>
+        <property name="id" readable="true" writable="true"/>
+        <property name="innerHTML" readable="true" writable="true"/>
         <property name="innerText" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Microsoft Internet Explorer"/>
         </property>
-        <property name="lang" notImplemented="true" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </property>
+        <property name="lang" notImplemented="true" readable="true" writable="true"/>
         <property name="offsetHeight" readable="true" writable="false"/>
         <property name="offsetLeft" readable="true" writable="false"/>
         <property name="offsetParent" readable="true" writable="false">
@@ -1289,23 +1232,23 @@
             <doclink
                 url="http://msdn.microsoft.com/en-us/library/ms534310.aspx"
                 descr="MSDN documentation"/>
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Microsoft Internet Explorer"/>
         </property>
         <property name="outerText" notImplemented="true" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Microsoft Internet Explorer"/>
         </property>
         <property name="parentElement" readable="true" writable="false">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Microsoft Internet Explorer"/>
         </property>
         <property name="runtimeStyle" readable="true" writable="false">
-            <browser name="Microsoft Internet Explorer" min-version="5"/>
+            <browser name="Microsoft Internet Explorer"/>
         </property>
         <property name="scrollHeight" readable="true" writable="false"/>
         <property name="scrollLeft" readable="true" writable="true"/>
         <property name="scrollTop" readable="true" writable="true"/>
         <property name="scrollWidth" readable="true" writable="false"/>
         <property name="sourceIndex" notImplemented="true" readable="true" writable="false">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Microsoft Internet Explorer"/>
         </property>
         <property name="style" readable="true" writable="false"/>
         <property name="tagName" readable="true" writable="false"/>
@@ -1363,29 +1306,29 @@
             <doclink
                 url="http://msdn2.microsoft.com/en-us/library/ms536451.aspx"
                 descr="MSDN documentation"/>
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Microsoft Internet Explorer"/>
         </function>
         <function name="insertAdjacentHTML">
             <doclink
                 url="http://msdn2.microsoft.com/en-us/library/ms536452.aspx"
                 descr="MSDN documentation"/>
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Microsoft Internet Explorer"/>
         </function>
         <function name="insertAdjacentText" notImplemented="true">
             <doclink
                 url="http://msdn2.microsoft.com/en-us/library/ms536453.aspx"
                 descr="MSDN documentation"/>
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Microsoft Internet Explorer"/>
         </function>
         <function name="onhelp" notImplemented="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Microsoft Internet Explorer"/>
         </function>
         <function name="removeAttribute"/>
         <function name="removeAttributeNS">
             <browser name="Firefox"/>
         </function>
         <function name="removeBehavior">
-            <browser name="Microsoft Internet Explorer" min-version="5"/>
+            <browser name="Microsoft Internet Explorer"/>
         </function>
         <function name="removeExpression">
             <doclink
@@ -1398,7 +1341,7 @@
             <doclink
                 url="http://msdn.microsoft.com/en-us/library/ms536738.aspx"
                 descr="MSDN documentation"/>
-            <browser name="Microsoft Internet Explorer" min-version="5.5"/>
+            <browser name="Microsoft Internet Explorer"/>
         </function>
         <function name="setAttribute"/>
         <function name="setAttributeNode"/>
@@ -1462,10 +1405,7 @@
             <browser name="Microsoft Internet Explorer"/>
         </property>
         <property name="name" readable="true" writable="true"/>
-        <property name="onload" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </property>
+        <property name="onload" readable="true" writable="true"/>
         <property name="src" readable="true" writable="true"/>
     </class>
 
@@ -1510,10 +1450,7 @@
             <browser name="Microsoft Internet Explorer"/>
         </property>
         <property name="name" readable="true" writable="true"/>
-        <property name="onload" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </property>
+        <property name="onload" readable="true" writable="true"/>
         <property name="src" readable="true" writable="true"/>
     </class>
 
@@ -2402,11 +2339,7 @@
         <property name="innerWidth" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
-        <property name="location" readable="true" writable="true">
-            <browser name="Firefox"/>
-            <browser name="Microsoft Internet Explorer" min-version="3"/>
-            <javascript min-version="1"/>
-        </property>
+        <property name="location" readable="true" writable="true"/>
         <property name="name" readable="true" writable="true"/>
         <property name="navigator" readable="true" writable="false"/>
         <property name="onclick" readable="true" writable="true"/>
