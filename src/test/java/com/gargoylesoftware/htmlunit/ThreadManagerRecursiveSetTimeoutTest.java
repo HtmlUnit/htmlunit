@@ -122,6 +122,7 @@ public class ThreadManagerRecursiveSetTimeoutTest extends WebTestCase {
         private int alertCount_ = 0;
 
         /** {@inheritDoc} */
+        @Override
         public void run() {
             try {
                 // Load the HTML page with the recursive setTimeout(...) calls.
