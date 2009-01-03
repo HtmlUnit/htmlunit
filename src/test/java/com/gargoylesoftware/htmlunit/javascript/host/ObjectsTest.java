@@ -138,8 +138,8 @@ public class ObjectsTest extends WebTestCase {
         }
 
         //TODO: UNMARK BELOW TO CHECK THE ASSERTIONS.
-        //Assert.assertEquals("Test for [" + browserVersion_.getNickname() + ':' + name_ + ']',
-        //        getValueOf(realList, name_), getValueOf(simulatedList, name_));
+        Assert.assertEquals("Test for [" + browserVersion_.getNickname() + ':' + name_ + ']',
+                getValueOf(realList, name_), getValueOf(simulatedList, name_));
     }
 
     private String getValueOf(final List<String> list, final String name) {

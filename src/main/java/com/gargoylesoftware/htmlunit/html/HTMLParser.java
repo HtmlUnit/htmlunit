@@ -84,22 +84,28 @@ public final class HTMLParser {
         ELEMENT_FACTORIES.put("input", InputElementFactory.instance);
 
         final DefaultElementFactory defaultElementFactory = new DefaultElementFactory();
+        ELEMENT_FACTORIES.put(HtmlAbbreviated.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlAcronym.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlAnchor.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlApplet.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlAddress.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlArea.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlBackgroundSound.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlBase.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlBaseFont.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlBidirectionalOverride.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlBig.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlBlockQuote.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlBody.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlBold.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlBreak.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlButton.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlCanvas.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlCaption.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlCenter.TAG_NAME, defaultElementFactory);
-        ELEMENT_FACTORIES.put(HtmlTableColumn.TAG_NAME, defaultElementFactory);
-        ELEMENT_FACTORIES.put(HtmlTableColumnGroup.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlCitation.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlCode.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlDefinition.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlDefinitionDescription.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlDeletedText.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlDirectory.TAG_NAME, defaultElementFactory);
@@ -107,6 +113,7 @@ public final class HTMLParser {
         ELEMENT_FACTORIES.put(HtmlDefinitionList.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlDefinitionTerm.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlEmbed.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlEmphasis.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlFieldSet.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlFont.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlForm.TAG_NAME, defaultElementFactory);
@@ -125,13 +132,18 @@ public final class HTMLParser {
         ELEMENT_FACTORIES.put(HtmlImage.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlInsertedText.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlIsIndex.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlItalic.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlKeyboard.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlLabel.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlLegend.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlListing.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlListItem.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlLink.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlMap.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlMarquee.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlMenu.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlMeta.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlNoBreak.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlNoFrames.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlNoScript.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlObject.TAG_NAME, defaultElementFactory);
@@ -140,15 +152,25 @@ public final class HTMLParser {
         ELEMENT_FACTORIES.put(HtmlOption.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlParagraph.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlParameter.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlPlainText.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlPreformattedText.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlInlineQuotation.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlS.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlSample.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlScript.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlSelect.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlSmall.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlSpan.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlStrike.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlStrong.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlStyle.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlSubscript.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlSuperscript.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlTitle.TAG_NAME, defaultElementFactory);
 
         ELEMENT_FACTORIES.put(HtmlTable.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlTableColumn.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlTableColumnGroup.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlTableBody.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlTableDataCell.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlTableHeaderCell.TAG_NAME, defaultElementFactory);
@@ -157,8 +179,12 @@ public final class HTMLParser {
         ELEMENT_FACTORIES.put(HtmlTextArea.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlTableFooter.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlTableHeader.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlTeletype.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlUnderlined.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlUnorderedList.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlVariable.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlWordBreak.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlXMP.TAG_NAME, defaultElementFactory);
     }
 
     /**

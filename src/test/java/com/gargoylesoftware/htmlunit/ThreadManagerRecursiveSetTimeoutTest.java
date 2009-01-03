@@ -59,7 +59,6 @@ public class ThreadManagerRecursiveSetTimeoutTest extends WebTestCase {
      */
     @Test
     public void interruptAllWithRecursiveSetTimeout() throws Exception {
-
         if (notYetImplemented()) {
             return;
         }
@@ -107,7 +106,6 @@ public class ThreadManagerRecursiveSetTimeoutTest extends WebTestCase {
                 + " if thread manager had not been not interrupted.",
                 thread.getAlertCount() > approxExpectedAlerts * LOWER_TEST_FACTOR);
         }
-
     }
 
     /**

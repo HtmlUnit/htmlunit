@@ -917,6 +917,18 @@
         <function name="go"/>
     </class>
 
+    <class name="HtmlAbbreviated" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlAbbreviated">
+    </class>
+
+    <class name="HtmlAcronym" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlAcronym">
+    </class>
+
+    <class name="HtmlAddress" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlAddress">
+    </class>
+
     <class name="HTMLAnchorElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLAnchorElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlAnchor">
         <javascript min-version="1.2"/>
@@ -966,6 +978,10 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlArea">
     </class>
 
+    <class name="HtmlBackgroundSound" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBackgroundSound">
+    </class>
+
     <class name="HTMLBaseElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLBaseElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBase">
     </class>
@@ -974,11 +990,23 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBaseFont">
     </class>
 
+    <class name="HtmlBidirectionalOverride" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBidirectionalOverride">
+    </class>
+
+    <class name="HtmlBig" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBig">
+    </class>
+
     <class name="HTMLBodyElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLBodyElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBody">
         <function name="doScroll">
             <browser name="Microsoft Internet Explorer"/>
         </function>
+    </class>
+
+    <class name="HtmlBold" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBold">
     </class>
 
     <class name="HTMLBRElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLBRElement"
@@ -992,6 +1020,18 @@
     <class name="HTMLCanvasElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLCanvasElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlCanvas">
         <browser name="Firefox"/>
+    </class>
+
+    <class name="HtmlCenter" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlCenter">
+    </class>
+
+    <class name="HtmlCitation" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlCitation">
+    </class>
+
+    <class name="HtmlCode" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlCode">
     </class>
 
     <class name="HTMLCollection" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLCollection" JSObject="true">
@@ -1012,6 +1052,18 @@
     <class name="HTMLCollectionTags" extends="HTMLCollection" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLCollectionTags"
         JSObject="true">
         <function name="tags"/>
+    </class>
+
+    <class name="HtmlDefinition" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlDefinition">
+    </class>
+
+    <class name="HtmlDefinitionDescription" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlDefinitionDescription">
+    </class>
+
+    <class name="HtmlDefinitionTerm" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlDefinitionTerm">
     </class>
 
     <class name="HTMLDelElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDelElement"
@@ -1360,6 +1412,10 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlEmbed">
     </class>
 
+    <class name="HtmlEmphasis" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlEmphasis">
+    </class>
+
     <class name="HTMLFiedlSetElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFieldSetElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFieldSet">
     </class>
@@ -1510,6 +1566,14 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlIsIndex">
     </class>
 
+    <class name="HtmlItalic" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlItalic">
+    </class>
+
+    <class name="HtmlKeyboard" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlKeyboard">
+    </class>
+
     <class name="HTMLLabelElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLLabelElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLabel">
         <property name="dataFld" notImplemented="true" readable="true" writable="true">
@@ -1549,8 +1613,16 @@
         <property name="type" readable="true" writable="true"/>
     </class>
 
+    <class name="HtmlListing" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlListing">
+    </class>
+
     <class name="HTMLMapElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLMapElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlMap">
+    </class>
+
+    <class name="HtmlMarquee" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDivElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlMarquee">
     </class>
 
     <class name="HTMLMenuElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLMenuElement"
@@ -1559,6 +1631,18 @@
 
     <class name="HTMLMetaElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLMetaElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlMeta">
+    </class>
+
+    <class name="HtmlNoBreak" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlNoBreak">
+    </class>
+
+    <class name="HtmlNoFrames" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDivElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlNoFrames">
+    </class>
+
+    <class name="HtmlNoScript" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDivElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlNoScript">
     </class>
 
     <class name="HTMLObjectElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLObjectElement"
@@ -1616,6 +1700,10 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlParameter">
     </class>
 
+    <class name="HtmlPlainText" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlPlainText">
+    </class>
+
     <class name="HTMLPreElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLPreElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlPreformattedText">
     </class>
@@ -1625,6 +1713,14 @@
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class name="HTMLQuoteElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLQuoteElement"
         JSObject="true">
+    </class>
+
+    <class name="HtmlS" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlS">
+    </class>
+
+    <class name="HtmlSample" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlSample">
     </class>
 
     <class name="HTMLScriptElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLScriptElement" JSObject="true"
@@ -1657,6 +1753,10 @@
         <function name="remove"/>
     </class>
 
+    <class name="HtmlSmall" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlSmall">
+    </class>
+
     <class name="HTMLSpanElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlSpan">
         <property name="dataFld" notImplemented="true" readable="true" writable="true">
@@ -1673,6 +1773,14 @@
         </function>
     </class>
 
+    <class name="HtmlStrike" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlStrike">
+    </class>
+
+    <class name="HtmlStrong" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlStrong">
+    </class>
+
     <class name="HTMLStyleElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLStyleElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlStyle">
         <property name="sheet" readable="true" writable="false">
@@ -1681,6 +1789,14 @@
         <property name="styleSheet" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer"/>
         </property>
+    </class>
+
+    <class name="HtmlSubscript" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlSubscript">
+    </class>
+
+    <class name="HtmlSuperscript" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlSuperscript">
     </class>
 
     <class name="HTMLTableCaptionElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableCaptionElement"
@@ -1710,6 +1826,10 @@
 
     <class name="HTMLTableColElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableColElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableColumn">
+    </class>
+
+    <class name="HtmlTableColumnGroup" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableColElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableColumnGroup">
     </class>
 
     <class name="HTMLTableElement" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableElement"
@@ -1802,6 +1922,10 @@
         JSObject="true">
     </class>
 
+    <class name="HtmlTeletype" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTeletype">
+    </class>
+
     <class name="HTMLTextAreaElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTextAreaElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTextArea">
         <!-- NOT FINISHED -->
@@ -1834,12 +1958,24 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlUnorderedList">
     </class>
 
+    <class name="HtmlUnderlined" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlUnderlined">
+    </class>
+
     <class name="HTMLUnknownElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLUnknownElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlUnknownElement">
     </class>
 
+    <class name="HtmlVariable" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlVariable">
+    </class>
+
     <class name="HTMLWBRElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLWBRElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlWordBreak">
+    </class>
+
+    <class name="HtmlXMP" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlXMP">
     </class>
 
     <class name="Location" classname="com.gargoylesoftware.htmlunit.javascript.host.Location"

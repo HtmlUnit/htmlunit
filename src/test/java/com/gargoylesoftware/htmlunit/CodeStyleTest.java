@@ -310,7 +310,7 @@ public class CodeStyleTest {
     private void versionYear() throws IOException {
         final List<String> lines = getLines(new File("src/main/java/com/gargoylesoftware/htmlunit/Version.java"));
         for (final String line : lines) {
-            if (line.contains("return \"Copyright (C) 2002-" + Calendar.getInstance().get(Calendar.YEAR))) {
+            if (line.contains("return \"Copyright (c) 2002-" + Calendar.getInstance().get(Calendar.YEAR))) {
                 return;
             }
         }
