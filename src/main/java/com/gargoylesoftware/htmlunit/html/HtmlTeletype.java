@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlTeletype extends HtmlElement {
+public class HtmlTeletype extends ClickableElement {
 
     private static final long serialVersionUID = 2191631628558786918L;
 

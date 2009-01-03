@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlBig extends HtmlElement {
+public class HtmlBig extends ClickableElement {
 
     private static final long serialVersionUID = -3803513740503023495L;
 

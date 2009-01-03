@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlKeyboard extends HtmlElement {
+public class HtmlKeyboard extends ClickableElement {
 
     private static final long serialVersionUID = 7538908251932524689L;
 

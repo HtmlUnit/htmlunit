@@ -35,7 +35,7 @@ public class HtmlSpanTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSimpleScriptable() throws Exception {
+    public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -58,7 +58,7 @@ public class HtmlSpanTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSimpleScriptable_others() throws Exception {
+    public void simpleScriptable_others() throws Exception {
         if (notYetImplemented()) {
             return;
         }
@@ -83,7 +83,7 @@ public class HtmlSpanTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testEmptyTag() throws Exception {
+    public void emptyTag() throws Exception {
         final String html = "<html><head>\n"
             + "</head><body>\n"
             + "<span id='myId'></span>\n"

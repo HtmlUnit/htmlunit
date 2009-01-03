@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlAcronym extends HtmlElement {
+public class HtmlAcronym extends ClickableElement {
 
     private static final long serialVersionUID = 8859651553051178256L;
 
