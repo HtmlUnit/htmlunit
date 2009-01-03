@@ -7,10 +7,9 @@
     <body>
         <release version="2.5" date="?" description="Bugfixes">
             <action type="add" dev="asashour">
-                Add HtmlAbbreviated, HtmlAcronym, HtmlBig, HtmlBold, HtmlCitation, HtmlCode, HtmlDefinition,
-                HtmlEmphasis, HtmlItalic, HtmlKeyboard, HtmlListing, HtmlMarquee, HtmlNoBreak, HtmlPlainText,
-                HtmlS, HtmlSample, HtmlSmall, HtmlStrike, HtmlStrong, HtmlSubscript, HtmlSuperscript, HtmlTeletype,
-                HtmlUnderlined, HtmlVariable and HtmlXMP.
+                Add HtmlAbbreviated, HtmlAcronym, HtmlBackgroundSound, HtmlBig, HtmlBold, HtmlCitation, HtmlCode, HtmlDefinition,
+                HtmlEmphasis, HtmlItalic, HtmlKeyboard, HtmlListing, HtmlMarquee, HtmlNoBreak, HtmlPlainText, HtmlS, HtmlSample,
+                HtmlSmall, HtmlStrike, HtmlStrong, HtmlSubscript, HtmlSuperscript, HtmlTeletype, HtmlUnderlined, HtmlVariable and HtmlXMP.
             </action>
             <action type="remove" dev="asashour">
                 Deprecation: remove XmlAttr, SubmitMethod, WebRequestSettings.setURL(), and
