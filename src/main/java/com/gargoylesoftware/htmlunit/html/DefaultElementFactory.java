@@ -65,13 +65,7 @@ class DefaultElementFactory implements IElementFactory {
         else {
             tagName = qualifiedName.substring(colonIndex + 1).toLowerCase();
         }
-        if (tagName.equals(HtmlAbbreviated.TAG_NAME)) {
-            element = new HtmlAbbreviated(namespaceURI, qualifiedName, page, attributeMap);
-        }
-        else if (tagName.equals(HtmlAcronym.TAG_NAME)) {
-            element = new HtmlAcronym(namespaceURI, qualifiedName, page, attributeMap);
-        }
-        else if (tagName.equals(HtmlAddress.TAG_NAME)) {
+        if (tagName.equals(HtmlAddress.TAG_NAME)) {
             element = new HtmlAddress(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlAnchor.TAG_NAME)) {
@@ -83,9 +77,6 @@ class DefaultElementFactory implements IElementFactory {
         else if (tagName.equals(HtmlArea.TAG_NAME)) {
             element = new HtmlArea(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equals(HtmlBackgroundSound.TAG_NAME)) {
-            element = new HtmlBackgroundSound(namespaceURI, qualifiedName, page, attributeMap);
-        }
         else if (tagName.equals(HtmlBase.TAG_NAME)) {
             element = new HtmlBase(namespaceURI, qualifiedName, page, attributeMap);
         }
@@ -95,17 +86,11 @@ class DefaultElementFactory implements IElementFactory {
         else if (tagName.equals(HtmlBidirectionalOverride.TAG_NAME)) {
             element = new HtmlBidirectionalOverride(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equals(HtmlBig.TAG_NAME)) {
-            element = new HtmlBig(namespaceURI, qualifiedName, page, attributeMap);
-        }
         else if (tagName.equals(HtmlBlockQuote.TAG_NAME)) {
             element = new HtmlBlockQuote(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlBody.TAG_NAME)) {
             element = new HtmlBody(namespaceURI, qualifiedName, page, attributeMap, false);
-        }
-        else if (tagName.equals(HtmlBold.TAG_NAME)) {
-            element = new HtmlBold(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlBreak.TAG_NAME)) {
             element = new HtmlBreak(namespaceURI, qualifiedName, page, attributeMap);
@@ -128,15 +113,6 @@ class DefaultElementFactory implements IElementFactory {
         else if (tagName.equals(HtmlCheckBoxInput.TAG_NAME)) {
             element = new HtmlCheckBoxInput(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equals(HtmlCitation.TAG_NAME)) {
-            element = new HtmlCitation(namespaceURI, qualifiedName, page, attributeMap);
-        }
-        else if (tagName.equals(HtmlCode.TAG_NAME)) {
-            element = new HtmlCode(namespaceURI, qualifiedName, page, attributeMap);
-        }
-        else if (tagName.equals(HtmlDefinition.TAG_NAME)) {
-            element = new HtmlDefinition(namespaceURI, qualifiedName, page, attributeMap);
-        }
         else if (tagName.equals(HtmlDefinitionDescription.TAG_NAME)) {
             element = new HtmlDefinitionDescription(namespaceURI, qualifiedName, page, attributeMap);
         }
@@ -154,9 +130,6 @@ class DefaultElementFactory implements IElementFactory {
         }
         else if (tagName.equals(HtmlEmbed.TAG_NAME)) {
             element = new HtmlEmbed(namespaceURI, qualifiedName, page, attributeMap);
-        }
-        else if (tagName.equals(HtmlEmphasis.TAG_NAME)) {
-            element = new HtmlEmphasis(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlFieldSet.TAG_NAME)) {
             element = new HtmlFieldSet(namespaceURI, qualifiedName, page, attributeMap);
@@ -236,12 +209,6 @@ class DefaultElementFactory implements IElementFactory {
         else if (tagName.equals(HtmlIsIndex.TAG_NAME)) {
             element = new HtmlIsIndex(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equals(HtmlItalic.TAG_NAME)) {
-            element = new HtmlItalic(namespaceURI, qualifiedName, page, attributeMap);
-        }
-        else if (tagName.equals(HtmlKeyboard.TAG_NAME)) {
-            element = new HtmlKeyboard(namespaceURI, qualifiedName, page, attributeMap);
-        }
         else if (tagName.equals(HtmlLabel.TAG_NAME)) {
             element = new HtmlLabel(namespaceURI, qualifiedName, page, attributeMap);
         }
@@ -251,26 +218,17 @@ class DefaultElementFactory implements IElementFactory {
         else if (tagName.equals(HtmlLink.TAG_NAME)) {
             element = new HtmlLink(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equals(HtmlListing.TAG_NAME)) {
-            element = new HtmlListing(namespaceURI, qualifiedName, page, attributeMap);
-        }
         else if (tagName.equals(HtmlListItem.TAG_NAME)) {
             element = new HtmlListItem(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlMap.TAG_NAME)) {
             element = new HtmlMap(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equals(HtmlMarquee.TAG_NAME)) {
-            element = new HtmlMarquee(namespaceURI, qualifiedName, page, attributeMap);
-        }
         else if (tagName.equals(HtmlMenu.TAG_NAME)) {
             element = new HtmlMenu(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlMeta.TAG_NAME)) {
             element = new HtmlMeta(namespaceURI, qualifiedName, page, attributeMap);
-        }
-        else if (tagName.equals(HtmlNoBreak.TAG_NAME)) {
-            element = new HtmlNoBreak(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlNoFrames.TAG_NAME)) {
             element = new HtmlNoFrames(namespaceURI, qualifiedName, page, attributeMap);
@@ -299,9 +257,6 @@ class DefaultElementFactory implements IElementFactory {
         else if (tagName.equals(HtmlPasswordInput.TAG_NAME)) {
             element = new HtmlPasswordInput(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equals(HtmlPlainText.TAG_NAME)) {
-            element = new HtmlPlainText(namespaceURI, qualifiedName, page, attributeMap);
-        }
         else if (tagName.equals(HtmlPreformattedText.TAG_NAME)) {
             element = new HtmlPreformattedText(namespaceURI, qualifiedName, page, attributeMap);
         }
@@ -311,41 +266,20 @@ class DefaultElementFactory implements IElementFactory {
         else if (tagName.equals(HtmlResetInput.TAG_NAME)) {
             element = new HtmlResetInput(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equals(HtmlS.TAG_NAME)) {
-            element = new HtmlS(namespaceURI, qualifiedName, page, attributeMap);
-        }
-        else if (tagName.equals(HtmlSample.TAG_NAME)) {
-            element = new HtmlSample(namespaceURI, qualifiedName, page, attributeMap);
-        }
         else if (tagName.equals(HtmlScript.TAG_NAME)) {
             element = new HtmlScript(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlSelect.TAG_NAME)) {
             element = new HtmlSelect(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equals(HtmlSmall.TAG_NAME)) {
-            element = new HtmlSmall(namespaceURI, qualifiedName, page, attributeMap);
-        }
         else if (tagName.equals(HtmlSpan.TAG_NAME)) {
             element = new HtmlSpan(namespaceURI, qualifiedName, page, attributeMap);
-        }
-        else if (tagName.equals(HtmlStrike.TAG_NAME)) {
-            element = new HtmlStrike(namespaceURI, qualifiedName, page, attributeMap);
-        }
-        else if (tagName.equals(HtmlStrong.TAG_NAME)) {
-            element = new HtmlStrong(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlStyle.TAG_NAME)) {
             element = new HtmlStyle(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlSubmitInput.TAG_NAME)) {
             element = new HtmlSubmitInput(namespaceURI, qualifiedName, page, attributeMap);
-        }
-        else if (tagName.equals(HtmlSubscript.TAG_NAME)) {
-            element = new HtmlSubscript(namespaceURI, qualifiedName, page, attributeMap);
-        }
-        else if (tagName.equals(HtmlSuperscript.TAG_NAME)) {
-            element = new HtmlSuperscript(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlTable.TAG_NAME)) {
             element = new HtmlTable(namespaceURI, qualifiedName, page, attributeMap);
@@ -374,9 +308,6 @@ class DefaultElementFactory implements IElementFactory {
         else if (tagName.equals(HtmlTableRow.TAG_NAME)) {
             element = new HtmlTableRow(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equals(HtmlTeletype.TAG_NAME)) {
-            element = new HtmlTeletype(namespaceURI, qualifiedName, page, attributeMap);
-        }
         else if (tagName.equals(HtmlTextArea.TAG_NAME)) {
             element = new HtmlTextArea(namespaceURI, qualifiedName, page, attributeMap);
         }
@@ -389,20 +320,11 @@ class DefaultElementFactory implements IElementFactory {
         else if (tagName.equals(HtmlTitle.TAG_NAME)) {
             element = new HtmlTitle(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equals(HtmlUnderlined.TAG_NAME)) {
-            element = new HtmlUnderlined(namespaceURI, qualifiedName, page, attributeMap);
-        }
         else if (tagName.equals(HtmlUnorderedList.TAG_NAME)) {
             element = new HtmlUnorderedList(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equals(HtmlVariable.TAG_NAME)) {
-            element = new HtmlVariable(namespaceURI, qualifiedName, page, attributeMap);
-        }
         else if (tagName.equals(HtmlWordBreak.TAG_NAME)) {
             element = new HtmlWordBreak(namespaceURI, qualifiedName, page, attributeMap);
-        }
-        else if (tagName.equals(HtmlXMP.TAG_NAME)) {
-            element = new HtmlXMP(namespaceURI, qualifiedName, page, attributeMap);
         }
         else {
             throw new IllegalStateException("Cannot find HtmlElement for " + qualifiedName);
