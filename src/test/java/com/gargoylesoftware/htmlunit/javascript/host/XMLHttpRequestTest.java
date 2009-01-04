@@ -31,8 +31,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.httpclient.NameValuePair;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -42,6 +43,10 @@ import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
@@ -58,6 +63,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Stuart Begg
  * @author Sudhan Moghe
  */
+@RunWith(BrowserRunner.class)
 public class XMLHttpRequestTest extends WebServerTestCase {
 
     private static final String MSG_NO_CONTENT = "no Content";
@@ -75,55 +81,6 @@ public class XMLHttpRequestTest extends WebServerTestCase {
      */
     @Test
     public void testSyncUse() throws Exception {
-        testSyncUse(BrowserVersion.FIREFOX_2);
-        testSyncUse(BrowserVersion.INTERNET_EXPLORER_6);
-    }
-
-    /**
-     * Tests Mozilla and IE style object creation.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testCreation() throws Exception {
-        testCreation(BrowserVersion.FIREFOX_2, new String[] {"[object XMLHttpRequest]"});
-        testCreation(BrowserVersion.INTERNET_EXPLORER_6, new String[] {"activeX created"});
-    }
-
-    /**
-     * Tests Mozilla style object creation.
-     * @throws Exception if the test fails
-     */
-    void testCreation(final BrowserVersion browser, final String[] expected) throws Exception {
-        final String html =
-            "<html>\n"
-            + "  <head>\n"
-            + "    <title>XMLHttpRequest Test</title>\n"
-            + "    <script>\n"
-            + "        if (window.XMLHttpRequest)\n"
-            + "          alert(new XMLHttpRequest());\n"
-            + "        else if (window.ActiveXObject)\n"
-            + "        {\n"
-            + "          new ActiveXObject('Microsoft.XMLHTTP');\n"
-            + "          alert('activeX created');\n"
-            + "        }\n"
-            + "    </script>\n"
-            + "  </head>\n"
-            + "  <body></body>\n"
-            + "</html>";
-
-        createTestPageForRealBrowserIfNeeded(html, expected);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browser, html, collectedAlerts);
-
-        assertEquals(expected, collectedAlerts);
-    }
-
-    /**
-     * Tests synchronous use of XMLHttpRequest.
-     * @throws Exception if the test fails
-     */
-    void testSyncUse(final BrowserVersion browserVersion) throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -154,7 +111,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "<content>blah2</content>\n"
             + "</xml>";
 
-        final WebClient client = new WebClient(browserVersion);
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
@@ -168,16 +125,38 @@ public class XMLHttpRequestTest extends WebServerTestCase {
     }
 
     /**
+     * Tests Mozilla and IE style object creation.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "activeX created" }, FF = { "[object XMLHttpRequest]" })
+    public void testCreation() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <title>XMLHttpRequest Test</title>\n"
+            + "    <script>\n"
+            + "        if (window.XMLHttpRequest)\n"
+            + "          alert(new XMLHttpRequest());\n"
+            + "        else if (window.ActiveXObject)\n"
+            + "        {\n"
+            + "          new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "          alert('activeX created');\n"
+            + "        }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body></body>\n"
+            + "</html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
      * Tests asynchronous use of XMLHttpRequest, using Mozilla style object creation.
      * @throws Exception if the test fails
      */
     @Test
     public void testAsyncUse() throws Exception {
-        testAsyncUse(BrowserVersion.FIREFOX_2);
-        testAsyncUse(BrowserVersion.INTERNET_EXPLORER_6);
-    }
-
-    void testAsyncUse(final BrowserVersion browserVersion) throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -211,7 +190,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "<content2>sdgxsdgx2</content2>\n"
             + "</xml2>";
 
-        final WebClient client = new WebClient(browserVersion);
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
@@ -231,15 +210,9 @@ public class XMLHttpRequestTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(IE = { "0", "1", "1", "2", "4", MSG_NO_CONTENT },
+            FF = { "0", "1", "1", "2", "4", MSG_NO_CONTENT, MSG_PROCESSING_ERROR })
     public void testAsyncUseWithNetworkConnectionFailure() throws Exception {
-        testAsyncUseWithNetworkConnectionFailure(BrowserVersion.FIREFOX_2,
-            UNINITIALIZED, LOADING, LOADING, LOADED, COMPLETED, MSG_NO_CONTENT, MSG_PROCESSING_ERROR);
-        testAsyncUseWithNetworkConnectionFailure(BrowserVersion.INTERNET_EXPLORER_6,
-            UNINITIALIZED, LOADING, LOADING, LOADED, COMPLETED, MSG_NO_CONTENT);
-    }
-
-    void testAsyncUseWithNetworkConnectionFailure(final BrowserVersion browserVersion, final String... alerts)
-        throws Exception {
         final String html =
               "<html>\n"
             + "<head>\n"
@@ -275,7 +248,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "</body>\n"
             + "</html>";
 
-        final WebClient client = new WebClient(browserVersion);
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new DisconnectedMockWebConnection();
@@ -284,7 +257,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         final Page page = client.getPage(URL_FIRST);
 
         assertTrue("thread failed to stop in 1 second", page.getEnclosingWindow().getThreadManager().joinAll(1000));
-        assertEquals("Checking alerts for browser: " + browserVersion.getUserAgent() , alerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
@@ -321,7 +294,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "<content>blah2</content>\n"
             + "</xml>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
@@ -357,7 +330,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
@@ -403,7 +376,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
@@ -423,6 +396,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.IE)
     public void testResponseXML2() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -446,7 +420,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_6);
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
@@ -482,7 +456,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
         conn.setDefaultResponse("");
@@ -496,8 +470,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
      */
     @Test
     public void testSendGETWithContent() throws Exception {
-        testSend(BrowserVersion.FIREFOX_2, "'foo'");
-        testSend(BrowserVersion.INTERNET_EXPLORER_6, "'foo'");
+        testSend("'foo'");
     }
 
     /**
@@ -506,21 +479,13 @@ public class XMLHttpRequestTest extends WebServerTestCase {
      */
     @Test
     public void testSendNoArg() throws Exception {
-        testSendNoArg(BrowserVersion.INTERNET_EXPLORER_6);
-        testSendNoArg(BrowserVersion.FIREFOX_2);
+        testSend("");
     }
 
     /**
      * @throws Exception if the test fails
      */
-    private void testSendNoArg(final BrowserVersion browserVersion) throws Exception {
-        testSend(browserVersion, "");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    private void testSend(final BrowserVersion browserVersion, final String sendArg) throws Exception {
+    private void testSend(final String sendArg) throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test()\n"
@@ -537,7 +502,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        final WebClient client = new WebClient(browserVersion);
+        final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
         conn.setDefaultResponse("");
@@ -568,7 +533,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
         conn.setDefaultResponse("");
@@ -583,6 +548,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.FF)
     public void testOverrideMimeType() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -601,7 +567,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
@@ -624,19 +590,8 @@ public class XMLHttpRequestTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(IE = { "ibcdefg", "xxxxxfg" }, FF = { })
     public void testReplaceOnTextData() throws Exception {
-        final String[] expectedAlertsFF = {};
-        testReplaceOnTextData(BrowserVersion.FIREFOX_2, expectedAlertsFF);
-        final String[] expectedAlertsIE = {"ibcdefg", "xxxxxfg"};
-        testReplaceOnTextData(BrowserVersion.INTERNET_EXPLORER_6, expectedAlertsIE);
-    }
-
-    /**
-     * @param browserVersion the browser version to simulate
-     * @throws Exception if the test fails
-     */
-    private void testReplaceOnTextData(final BrowserVersion browserVersion, final String[] expectedAlerts)
-        throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -677,7 +632,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "<update>hijklmn</update>\n"
             + "</updates>";
 
-        final WebClient client = new WebClient(browserVersion);
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
@@ -686,7 +641,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
 
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
@@ -694,11 +649,6 @@ public class XMLHttpRequestTest extends WebServerTestCase {
      */
     @Test
     public void testSetLocation() throws Exception {
-        testSetLocation(BrowserVersion.FIREFOX_2);
-        testSetLocation(BrowserVersion.INTERNET_EXPLORER_6);
-    }
-
-    void testSetLocation(final BrowserVersion browserVersion) throws Exception {
         final String content =
               "<html>\n"
             + "  <head>\n"
@@ -725,7 +675,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "  </body>\n"
             + "</html>";
 
-        final WebWindow window = loadPage(content).getEnclosingWindow();
+        final WebWindow window = loadPage(getBrowserVersion(), content, null).getEnclosingWindow();
         assertTrue("thread failed to stop in 4 seconds", window.getThreadManager().joinAll(4000));
         assertEquals("about:blank", window.getEnclosedPage().getWebResponse().getRequestUrl());
     }
@@ -767,7 +717,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection() {
@@ -812,7 +762,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, content);
         final URL urlPage2 = new URL(URL_FIRST + "foo.xml");
@@ -830,8 +780,10 @@ public class XMLHttpRequestTest extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Browsers(Browser.IE)
+    @Alerts("0")
     public void testCaseSensitivity() throws Exception {
-        final String content = "<html><head><script>\n"
+        final String html = "<html><head><script>\n"
             + "function test() {\n"
             + "  var req = new ActiveXObject('MSXML2.XmlHttp');\n"
             + "  alert(req.readyState);\n"
@@ -839,10 +791,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
 
-        final String[] expectedAlerts = {"0"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_7, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -880,7 +829,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, content);
         final URL urlPage2 = new URL(URL_FIRST + "foo.xml");
@@ -897,6 +846,8 @@ public class XMLHttpRequestTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.IE)
+    @Alerts("2")
     public void testResponseXML_selectNodesIE() throws Exception {
         final String html =
               "<html>\n"
@@ -925,7 +876,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "<content>blah2</content>\n"
             + "</xml>";
 
-        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7);
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
@@ -934,8 +885,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
 
-        final String[] alerts = {"2"};
-        assertEquals(alerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
@@ -1009,7 +959,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         connection.setResponse(URL_FIRST, content);
         connection.setResponse(new URL(URL_FIRST, "page2.html"), content2);
 
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         webClient.setWebConnection(connection);
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
@@ -1029,6 +979,8 @@ public class XMLHttpRequestTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.FF)
+    @Alerts({ "null", "myID", "blah", "span", "[object XMLDocument]" })
     public void testResponseXML_getElementById_FF() throws Exception {
         final String html =
               "<html>\n"
@@ -1065,7 +1017,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "</html>\n"
             + "</xml>";
 
-        final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
@@ -1074,8 +1026,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
 
-        final String[] expectedAlerts = {"null", "myID", "blah", "span", "[object XMLDocument]"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
@@ -1083,15 +1034,8 @@ public class XMLHttpRequestTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { }, IE = { "1", "2", "3", "4" })
     public void testOnreadystatechange_sync() throws Exception {
-        final String[] expectedAlertsFF = {};
-        testOnreadystatechange_sync(BrowserVersion.FIREFOX_2, expectedAlertsFF);
-        final String[] expectedAlertsIE = {"1", "2", "3", "4"};
-        testOnreadystatechange_sync(BrowserVersion.INTERNET_EXPLORER_7, expectedAlertsIE);
-    }
-
-    private void testOnreadystatechange_sync(final BrowserVersion browserVersion, final String[] expectedAlerts)
-        throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -1122,7 +1066,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "<content>blah2</content>\n"
             + "</xml>";
 
-        final WebClient client = new WebClient(browserVersion);
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
@@ -1131,25 +1075,18 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
 
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "[object Element]", "[object Element]", "[object HTMLBodyElement]",
+            "[object HTMLSpanElement]", "[object XMLDocument]", "undefined" },
+            IE = { "[object]", "[object]", "[object]",
+            "<body xmlns=\"http://www.w3.org/1999/xhtml\"><span id=\"out\">Hello Bob Dole!</span></body>" })
     public void testResponseXML_getElementById() throws Exception {
-        final String[] expectedAlertsIE = {"[object]", "[object]", "[object]",
-            "<body xmlns=\"http://www.w3.org/1999/xhtml\"><span id=\"out\">Hello Bob Dole!</span></body>"};
-        testResponseXML_getElementById(BrowserVersion.INTERNET_EXPLORER_7, expectedAlertsIE);
-
-        final String[] expectedAlertsFF = {"[object Element]", "[object Element]", "[object HTMLBodyElement]",
-            "[object HTMLSpanElement]", "[object XMLDocument]", "undefined"};
-        testResponseXML_getElementById(BrowserVersion.FIREFOX_2, expectedAlertsFF);
-    }
-
-    private void testResponseXML_getElementById(final BrowserVersion browserVersion, final String[] expectedAlerts)
-        throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -1188,7 +1125,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "</body>"
             + "</html>";
 
-        final WebClient client = new WebClient(browserVersion);
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
@@ -1197,7 +1134,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
 
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
@@ -1229,7 +1166,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         final String response = "ol\u00E9";
         final byte[] responseBytes = response.getBytes("UTF-8");
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
@@ -1246,18 +1183,16 @@ public class XMLHttpRequestTest extends WebServerTestCase {
      * Regression test for bug 1209686 (onreadystatechange not called with partial data when emulating FF).
      * @throws Exception if an error occurs
      */
+    @Browsers(Browser.FF)
     @Test
+    @NotYetImplemented
     public void testStreaming() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-
         final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
         servlets.put("/test", StreamingServlet.class);
 
         final String resourceBase = "./src/test/resources/com/gargoylesoftware/htmlunit/javascript/host";
         startWebServer(resourceBase, null, servlets);
-        final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
+        final WebClient client = getWebClient();
         final HtmlPage page = client.getPage("http://localhost:" + PORT + "/XMLHttpRequestTest_streaming.html");
         final HtmlElement body = page.getBody();
         Thread.sleep(5000);
@@ -1305,6 +1240,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.FF)
     public void responseXML_html_select() throws Exception {
         final String html =
               "<html>\n"
@@ -1335,7 +1271,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "<select id='myID'><option>One</option></select>\n"
             + "</html>\n"
             + "</xml>";
-        final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
@@ -1352,6 +1288,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.FF)
     public void responseXML_html_form() throws Exception {
         final String html =
               "<html>\n"
@@ -1382,7 +1319,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "<form id='myID'><input name='myInput'/></form>\n"
             + "</html>\n"
             + "</xml>";
-        final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
