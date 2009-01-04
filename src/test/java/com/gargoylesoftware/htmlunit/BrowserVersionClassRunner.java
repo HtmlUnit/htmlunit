@@ -117,6 +117,10 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         if (isNotYetImplemented(method)) {
             prefix = "(NYI) ";
         }
+        else if (isExpectedToFail(method)) {
+            prefix = "(failure expected) ";
+        }
+
         return String.format("%s%s [%s]", prefix, className + '.' + method.getName(),
             BrowserRunner.getDescription(browserVersion_));
     }
@@ -223,14 +227,17 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         statement = withBefores(method, test, statement);
         statement = withAfters(method, test, statement);
 
-        final Browsers browsers = method.getAnnotation(Browsers.class);
-        final boolean shouldFail = browsers != null && !isDefinedIn(browsers.value());
-
+        final boolean shouldFail = isExpectedToFail(method);
         final boolean notYetImplemented = isNotYetImplemented(method);
         setAlerts(testCase, method.getMethod());
         statement = new BrowserStatement(statement, method.getMethod(), shouldFail,
                 notYetImplemented, BrowserRunner.getDescription(browserVersion_));
         return statement;
+    }
+
+    private boolean isExpectedToFail(final FrameworkMethod method) {
+        final Browsers browsers = method.getAnnotation(Browsers.class);
+        return browsers != null && !isDefinedIn(browsers.value());
     }
 
     private boolean isNotYetImplemented(final FrameworkMethod method) {
