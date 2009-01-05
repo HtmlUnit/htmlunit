@@ -84,6 +84,7 @@ public final class HTMLParser {
         ELEMENT_FACTORIES.put("input", InputElementFactory.instance);
 
         final DefaultElementFactory defaultElementFactory = new DefaultElementFactory();
+        ELEMENT_FACTORIES.put(HtmlAbbreviated.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlAnchor.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlApplet.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlAddress.TAG_NAME, defaultElementFactory);

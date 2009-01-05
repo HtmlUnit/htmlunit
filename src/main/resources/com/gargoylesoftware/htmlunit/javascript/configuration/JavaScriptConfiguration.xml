@@ -899,9 +899,7 @@
         <property name="name" readable="true" writable="true"/>
         <property name="onchange" readable="true" writable="true"/>
         <property name="tabIndex" readable="true" writable="false"/>
-        <property name="type" readable="true" writable="false">
-            <javascript min-version="1.1"/>
-        </property>
+        <property name="type" readable="true" writable="false"/>
         <property name="value" readable="true" writable="true"/>
         <!-- This property is only in DOM1 so it  -->
 
@@ -919,8 +917,6 @@
 
     <class name="HTMLAnchorElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLAnchorElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlAnchor">
-        <javascript min-version="1.2"/>
-
         <property name="dataFld" notImplemented="true" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
@@ -1085,9 +1081,7 @@
                 url="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-2250147"
                 descr="WC3 Documentation (Level 1)"/>
         </property>
-        <property name="embeds" notImplemented="true" readable="true" writable="false">
-            <javascript min-version="1.1"/>
-        </property>
+        <property name="embeds" notImplemented="true" readable="true" writable="false"/>
         <property name="fgColor" notImplemented="true" readable="true" writable="false"/>
         <property name="forms" readable="true" writable="false"/>
         <property name="frames" readable="true" writable="false">
@@ -1096,9 +1090,7 @@
                 descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer"/>
         </property>
-        <property name="images" readable="true" writable="false">
-            <javascript min-version="1.1"/>
-        </property>
+        <property name="images" readable="true" writable="false"/>
         <property name="lastModified" notImplemented="true" readable="true" writable="false"/>
         <property name="linkColor" notImplemented="true" readable="true" writable="false"/>
         <property name="links" readable="true" writable="false"/>
@@ -1108,9 +1100,7 @@
         <property name="parentWindow" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer"/>
         </property>
-        <property name="plugins" notImplemented="true" readable="true" writable="false">
-            <javascript min-version="1.1"/>
-        </property>
+        <property name="plugins" notImplemented="true" readable="true" writable="false"/>
         <property name="readyState" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer"/>
         </property>
@@ -1493,9 +1483,7 @@
         <property name="textLength" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
-        <property name="type" readable="true" writable="true">
-            <javascript min-version="1.1"/>
-        </property>
+        <property name="type" readable="true" writable="true"/>
         <function name="select"/>
         <function name="setSelectionRange">
             <browser name="Firefox"/>

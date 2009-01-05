@@ -311,9 +311,6 @@ public final class JavaScriptConfiguration {
                 else if (tagName.equals("constant")) {
                     parseConstantElement(classConfiguration, childElement);
                 }
-                else if (tagName.equals("javascript")) {
-                    getLog().debug("javascript tag not yet handled for class " + linkedClassname);
-                }
                 else if (tagName.equals("browser")) {
                     getLog().debug("browser tag not yet handled for class " + linkedClassname);
                 }
@@ -403,8 +400,6 @@ public final class JavaScriptConfiguration {
         Node node = element.getFirstChild();
         boolean browserConstraint = false;
         boolean allowBrowser = false;
-        boolean javascriptConstraint = false;
-        boolean allowJavascriptConstraint = false;
         while (node != null) {
             if (node instanceof Element) {
                 final Element childElement = (Element) node;
@@ -414,19 +409,10 @@ public final class JavaScriptConfiguration {
                         allowBrowser = true;
                     }
                 }
-                else if (childElement.getTagName().equals("javascript")) {
-                    javascriptConstraint = true;
-                    if (testToIncludeForJSConstraint(childElement, browser_)) {
-                        allowJavascriptConstraint = true;
-                    }
-                }
             }
             node = node.getNextSibling();
         }
         if (browserConstraint && !allowBrowser) {
-            return true;
-        }
-        if (javascriptConstraint && !allowJavascriptConstraint) {
             return true;
         }
         return false;
@@ -487,33 +473,6 @@ public final class JavaScriptConfiguration {
             minVersion = Float.parseFloat(min);
         }
         if ((minVersion > 0) && (browser.getBrowserVersionNumeric() < minVersion)) {
-            return false;
-        }
-        return true;
-    }
-
-    private boolean testToIncludeForJSConstraint(final Element element, final BrowserVersion browser) {
-        final String max = element.getAttribute("max-version");
-        float maxVersion;
-        if (max.length() == 0) {
-            maxVersion = 0;
-        }
-        else {
-            maxVersion = Float.parseFloat(max);
-        }
-        if ((maxVersion > 0) && (browser.getJavaScriptVersionNumeric() > maxVersion)) {
-            return false;
-        }
-
-        float minVersion;
-        final String min = element.getAttribute("min-version");
-        if (min.length() == 0) {
-            minVersion = 0;
-        }
-        else {
-            minVersion = Float.parseFloat(min);
-        }
-        if ((minVersion > 0) && (browser.getJavaScriptVersionNumeric() < minVersion)) {
             return false;
         }
         return true;

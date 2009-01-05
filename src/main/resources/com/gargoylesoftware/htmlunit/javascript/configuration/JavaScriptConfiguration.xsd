@@ -23,7 +23,6 @@
 	<xsd:complexType name="classType">
 		<xsd:sequence>
 			<xsd:element name="doclink" type="doclinkType" minOccurs="0" maxOccurs="unbounded"/>
-			<xsd:element name="javascript" type="requiredJavascriptType" minOccurs="0" maxOccurs="1"/>
 			<xsd:element name="browser" type="requiredBrowserType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="constant" type="constantType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="property" type="propertyType" minOccurs="0" maxOccurs="unbounded"/>
@@ -49,7 +48,6 @@
 		<xsd:sequence>
 			<xsd:element name="doclink" type="doclinkType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="browser" type="requiredBrowserType" minOccurs="0" maxOccurs="unbounded"/>
-			<xsd:element name="javascript" type="requiredJavascriptType" minOccurs="0" maxOccurs="1"/>
 		</xsd:sequence>
 		<xsd:attribute name="notImplemented" type="xsd:boolean" default="false"/>
 		<xsd:attribute name="name" type="xsd:string" use="required"/>
@@ -61,7 +59,6 @@
 		<xsd:sequence>
 			<xsd:element name="doclink" type="doclinkType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="browser" type="requiredBrowserType" minOccurs="0" maxOccurs="unbounded"/>
-			<xsd:element name="javascript" type="requiredJavascriptType" minOccurs="0" maxOccurs="1"/>
 		</xsd:sequence>
 		<xsd:attribute name="name" type="xsd:string" use="required"/>
 		<xsd:attribute name="notImplemented" type="xsd:boolean" default="false"/>
@@ -79,10 +76,4 @@
 		<xsd:attribute name="min-version" type="xsd:float"/>
 		<xsd:attribute name="max-version" type="xsd:float"/>
 	</xsd:complexType>
-
-	<xsd:complexType name="requiredJavascriptType">
-		<xsd:attribute name="min-version" type="xsd:float"/>
-		<xsd:attribute name="max-version" type="xsd:float"/>
-	</xsd:complexType>
-
 </xsd:schema>

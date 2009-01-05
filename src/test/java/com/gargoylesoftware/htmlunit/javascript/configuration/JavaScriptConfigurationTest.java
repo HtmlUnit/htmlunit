@@ -331,41 +331,6 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     }
 
     /**
-     * Test getting the configuration for the JavaScript max version. The readyState property should not be
-     * available in this case.
-     *
-     * @throws Exception - Exception on error
-     */
-    @Test
-    public void getConditionalPropertyMaxJSVersion() throws Exception {
-        final String configurationString
-            = "<?xml version=\"1.0\"?>\n"
-            + "<configuration\n"
-            + "    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
-            + "    xsi:noNamespaceSchemaLocation=\"JavaScriptConfiguration.xsd\">\n"
-            + "    <class name=\"Document\" extends=\"Node\" "
-            + "classname=\"com.gargoylesoftware.htmlunit.javascript.host.Document\">\n"
-            + "        <property name=\"readyState\" readable=\"true\" writable=\"false\">\n"
-            + "            <javascript max-version=\"1\"/>\n"
-            + "        </property>\n"
-            + "    </class>\n"
-            + "    <class name=\"Node\" "
-            + "classname=\"com.gargoylesoftware.htmlunit.javascript.host.Node\">\n"
-            + "        <property name=\"firstChild\" readable=\"true\" writable=\"false\">\n"
-            + "        </property>\n"
-            + "    </class>\n"
-            + "</configuration>\n";
-        final Reader reader = new StringReader(configurationString);
-        JavaScriptConfiguration.loadConfiguration(reader);
-        final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6;
-        final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
-        final ClassConfiguration expectedConfig = new ClassConfiguration("Document",
-            HTMLDocument.class.getName(), null, null, null, true);
-        assertTrue("Document should not property did not match",
-            configuration.classConfigEquals("Document", expectedConfig));
-    }
-
-    /**
      * Test parsing the configuration with a function in it.
      *
      * @throws Exception - Exception on error
