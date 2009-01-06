@@ -46,7 +46,7 @@
 					Mostly, because the main thread in HtmlUnit finishes execution before allowing background threads to run.
 					You can do one of:
 					<ol>
-					  <li><code>page.getEnclosingWindow().getThreadManager().joinAll(10000);</code> just after getting the page and before manipulating it</li>
+					  <li><code>page.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(10000);</code> just after getting the page and before manipulating it</li>
 					  <li>Explicitly wait for a condition that is expected be fulfilled when JavaScript runs, e.g.
             <source><![CDATA[
 

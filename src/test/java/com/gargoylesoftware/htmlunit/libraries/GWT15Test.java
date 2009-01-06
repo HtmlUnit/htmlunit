@@ -119,7 +119,7 @@ public class GWT15Test extends WebServerTestCase {
 
         final String url = "http://localhost:" + PORT + "/I18N.html?locale=fr";
         final HtmlPage page = client.getPage(url);
-        page.getEnclosingWindow().getThreadManager().joinAll(10000);
+        page.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(10000);
 
         //visible space in browser is not normal space but '\u00A0' instead, as noted by the following test in browser:
         /*
@@ -393,7 +393,7 @@ public class GWT15Test extends WebServerTestCase {
         }
 
         final HtmlPage page = client.getPage(url);
-        page.getEnclosingWindow().getThreadManager().joinAll(10000);
+        page.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(10000);
         return page;
     }
 

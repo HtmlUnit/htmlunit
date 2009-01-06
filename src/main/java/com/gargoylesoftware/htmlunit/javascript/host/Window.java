@@ -307,15 +307,30 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * The invocation occurs only if the window is opened after the delay
      * and does not contain an other page than the one that originated the setTimeout.
      *
-     * @param codeToExec specifies the function pointer or string that indicates the code to be executed
+     * @param code specifies the function pointer or string that indicates the code to be executed
      *        when the specified interval has elapsed
      * @param timeout specifies the number of milliseconds
      * @param language specifies language
      * @return the id of the created timer
      */
-    public int jsxFunction_setTimeout(final Object codeToExec, final int timeout, final Object language) {
-        getLog().debug("setTimeout(" + codeToExec + ", " + timeout + ")");
-        final int id = getWebWindow().getThreadManager().registerJob(codeToExec, timeout, "window.setTimeout");
+    public int jsxFunction_setTimeout(final Object code, final int timeout, final Object language) {
+        final int id;
+        final Page page = (Page) getDomNodeOrNull();
+        final String description = "window.setTimeout(" + timeout + ")";
+        if (code == null) {
+            throw Context.reportRuntimeError("Function not provided.");
+        }
+        else if (code instanceof String) {
+            final String scriptString = (String) code;
+            id = getWebWindow().getJobManager().addJob(scriptString, timeout, description, page);
+        }
+        else if (code instanceof Function) {
+            final Function scriptFunction = (Function) code;
+            id = getWebWindow().getJobManager().addJob(scriptFunction, timeout, description, page);
+        }
+        else {
+            throw Context.reportRuntimeError("Unknown type for function.");
+        }
         return id;
     }
 
@@ -325,7 +340,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param timeoutId identifier for the timeout to clear (returned by <tt>setTimeout</tt>)
      */
     public void jsxFunction_clearTimeout(final int timeoutId) {
-        getWebWindow().getThreadManager().removeJob(timeoutId);
+        getWebWindow().getJobManager().stopJobAsap(timeoutId);
     }
 
     /**
@@ -952,16 +967,30 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Current implementation does nothing.
      *
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536749.aspx">MSDN documentation</a>
-     * @param codeToExec specifies the function pointer or string that indicates the code to be executed
+     * @param code specifies the function pointer or string that indicates the code to be executed
      *        when the specified interval has elapsed
      * @param timeout specifies the number of milliseconds
      * @param language specifies language
      * @return the id of the created interval
      */
-    public int jsxFunction_setInterval(final Object codeToExec, final int timeout, final Object language) {
-        getLog().debug("setInterval(" + codeToExec + ", " + timeout + ")");
-        final int id = getWebWindow().getThreadManager()
-            .registerRecurringJob(codeToExec, timeout, "window.setInterval");
+    public int jsxFunction_setInterval(final Object code, final int timeout, final Object language) {
+        final int id;
+        final Page page = (Page) getDomNodeOrNull();
+        final String description = "window.setInterval(" + timeout + ")";
+        if (code == null) {
+            throw Context.reportRuntimeError("Function not provided.");
+        }
+        else if (code instanceof String) {
+            final String scriptString = (String) code;
+            id = getWebWindow().getJobManager().addRecurringJob(scriptString, timeout, description, page);
+        }
+        else if (code instanceof Function) {
+            final Function scriptFunction = (Function) code;
+            id = getWebWindow().getJobManager().addRecurringJob(scriptFunction, timeout, description, page);
+        }
+        else {
+            throw Context.reportRuntimeError("Unknown type for function.");
+        }
         return id;
     }
 
@@ -972,7 +1001,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536353.aspx">MSDN documentation</a>
      */
     public void jsxFunction_clearInterval(final int intervalID) {
-        getWebWindow().getThreadManager().removeJob(intervalID);
+        getWebWindow().getJobManager().stopJobAsap(intervalID);
     }
 
     /**

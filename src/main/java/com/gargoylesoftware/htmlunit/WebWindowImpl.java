@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.ListIterator;
 
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManagerImpl;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
@@ -33,10 +35,11 @@ import com.gargoylesoftware.htmlunit.html.FrameWindow;
  * @author Ahmed Ashour
  */
 public abstract class WebWindowImpl implements WebWindow {
+
     private WebClient webClient_;
     private Page enclosedPage_;
     private Object scriptObject_;
-    private ThreadManager threadManager_ = new ThreadManager(this);
+    private JavaScriptJobManager jobManager_ = new JavaScriptJobManagerImpl(this);
     private List<WebWindowImpl> childWindows_ = new ArrayList<WebWindowImpl>();
     private String name_ = "";
 
@@ -46,6 +49,7 @@ public abstract class WebWindowImpl implements WebWindow {
      */
     @Deprecated
     protected WebWindowImpl() {
+        // Empty.
     }
 
     /**
@@ -118,8 +122,8 @@ public abstract class WebWindowImpl implements WebWindow {
     /**
      * {@inheritDoc}
      */
-    public ThreadManager getThreadManager() {
-        return threadManager_;
+    public JavaScriptJobManager getJobManager() {
+        return jobManager_;
     }
 
     /**
@@ -134,7 +138,7 @@ public abstract class WebWindowImpl implements WebWindow {
     }
 
     void destroyChildren() {
-        getThreadManager().interruptAll();
+        getJobManager().stopAllJobsAsap();
         for (final ListIterator<WebWindowImpl> iter = childWindows_.listIterator(); iter.hasNext();) {
             iter.next().destroyChildren();
             iter.remove();

@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
+
 /**
  * An interface that represents one window in a browser. It could be a top level window or a frame.
  *
@@ -79,8 +81,9 @@ public interface WebWindow {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * Set the JavaScript object that corresponds to this element. This is not guaranteed
+     * Sets the JavaScript object that corresponds to this element. This is not guaranteed
      * to be set even if there is a JavaScript object for this HTML element.
+     *
      * @param scriptObject the JavaScript object
      */
     void setScriptObject(final Object scriptObject);
@@ -88,7 +91,8 @@ public interface WebWindow {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * Return the JavaScript object that corresponds to this element.
+     * Returns the JavaScript object that corresponds to this element.
+     *
      * @return the JavaScript object that corresponds to this element
      */
     Object getScriptObject();
@@ -96,11 +100,10 @@ public interface WebWindow {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * Currently exposed here for testing purposes, a better API will be added in the
-     * future and this will become a completely internal class.
+     * Returns the job manager for this window.
      *
-     * @return the ThreadManager for this WebWindow
+     * @return the job manager for this window
      */
-    ThreadManager getThreadManager();
-}
+    JavaScriptJobManager getJobManager();
 
+}

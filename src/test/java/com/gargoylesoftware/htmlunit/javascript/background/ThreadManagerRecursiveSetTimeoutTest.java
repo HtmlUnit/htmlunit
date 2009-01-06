@@ -12,13 +12,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit;
+package com.gargoylesoftware.htmlunit.javascript.background;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -45,10 +47,10 @@ public class ThreadManagerRecursiveSetTimeoutTest extends WebTestCase {
     private static final int SLEEP_SECS_2 = 7;
 
     /** Fuzz factor for the lower bound check (takes non-deterministic test results into account). */
-    private static final double LOWER_TEST_FACTOR = 0.8;
+    private static final double LOWER_TEST_FACTOR = 0.7;
 
     /** Fuzz factor for the upper bound check (takes non-deterministic test results into account). */
-    private static final double UPPER_TEST_FACTOR = 2.5;
+    private static final double UPPER_TEST_FACTOR = 3;
 
     /**
      * Verifies that recursive calls to <tt>setTimeout(...)</tt> in JavaScript are correctly
@@ -59,10 +61,6 @@ public class ThreadManagerRecursiveSetTimeoutTest extends WebTestCase {
      */
     @Test
     public void interruptAllWithRecursiveSetTimeout() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-
         // Start all of the test threads.
         final List<TestThread> threads = new ArrayList<TestThread>();
         for (int i = 0; i < TEST_THREAD_COUNT; i++) {
@@ -97,13 +95,13 @@ public class ThreadManagerRecursiveSetTimeoutTest extends WebTestCase {
             // Verify that the number of collected alerts is not too high.
             assertTrue("Expected approx. " + approxExpectedAlerts + " alerts, got " + thread.getAlertCount()
                 + ", would expect to catch approximately " + approxErrorExpectedAlerts
-                + " if thread manager had not been not interrupted.",
+                + " if job manager had not been not interrupted.",
                 !(thread.getAlertCount() > approxExpectedAlerts * UPPER_TEST_FACTOR));
 
             // Verify that the number of collected alerts is not too low.
             assertTrue("Expected approx. " + approxExpectedAlerts + " alerts, got " + thread.getAlertCount()
                 + ", would expect to catch approximately " + approxErrorExpectedAlerts
-                + " if thread manager had not been not interrupted.",
+                + " if job manager had not been not interrupted.",
                 thread.getAlertCount() > approxExpectedAlerts * LOWER_TEST_FACTOR);
         }
     }
@@ -139,7 +137,7 @@ public class ThreadManagerRecursiveSetTimeoutTest extends WebTestCase {
                     e.printStackTrace();
                 }
 
-                // Load a new HTML page, thus triggering ThreadManager's interruptAll().
+                // Load a new HTML page, thus triggering JavaScriptJobManager's stopAllJobsAsap().
                 page.getEnclosingWindow().setEnclosedPage(loadPage("<html></html>"));
 
                 // Let the new page idle for a (longer) bit.

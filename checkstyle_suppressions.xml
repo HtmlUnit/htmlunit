@@ -17,7 +17,6 @@
     <suppress checks="LineLength" files="Dojo102Test.java"/>
     <suppress checks="LineLength" files="BoxObjectTest.java"/>
     <suppress checks="LineLength" files="HTMLBodyElementTest.java"/>
-    <suppress checks="Indentation" files="ThreadManager.java" lines="143"/>
     <suppress checks="MethodLength" files="DefaultElementFactory.java"/>
     <suppress checks="MethodLength" files="Dojo102Test.java"/>
     <suppress checks="MethodLength" files="CSSStyleDeclarationTest.java"/>

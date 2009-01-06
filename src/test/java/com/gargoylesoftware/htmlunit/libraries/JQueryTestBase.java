@@ -129,7 +129,7 @@ public abstract class JQueryTestBase extends WebServerTestCase {
     protected Iterator<HtmlElement> loadPage() throws Exception {
         final WebClient client = getWebClient();
         final HtmlPage page = client.getPage(getUrl());
-        page.getEnclosingWindow().getThreadManager().joinAll(2 * 60 * 1000);
+        page.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(2 * 60 * 1000);
 
         // dump the result page if not OK
         if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null) {

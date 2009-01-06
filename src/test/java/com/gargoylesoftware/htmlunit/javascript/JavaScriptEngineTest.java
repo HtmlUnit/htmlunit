@@ -1522,7 +1522,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         webClient.setWebConnection(webConnection);
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
-        page.getEnclosingWindow().getThreadManager().joinAll(10000);
+        page.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(10000);
         assertEquals("New title", page.getTitleText());
 
         assertEquals(1, jsExceptions.size());

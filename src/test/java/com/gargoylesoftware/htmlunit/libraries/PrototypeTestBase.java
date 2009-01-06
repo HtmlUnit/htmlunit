@@ -57,7 +57,7 @@ public abstract class PrototypeTestBase extends WebServerTestCase {
         final HtmlPage page =
             webClient_.getPage("http://localhost:" + PORT + "/test/unit/" + filename);
 
-        page.getEnclosingWindow().getThreadManager().joinAll(25000);
+        page.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(25000);
 
         String expected = getExpectations(getBrowserVersion(), filename);
         final HtmlElement testlog = page.getHtmlElementById("testlog");

@@ -43,7 +43,6 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.PromptHandler;
 import com.gargoylesoftware.htmlunit.StatusHandler;
-import com.gargoylesoftware.htmlunit.ThreadManager;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -57,6 +56,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 
 /**
  * Tests for {@link Window}.
@@ -776,7 +776,8 @@ public class WindowTest extends WebTestCase {
 
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         final HtmlPage page = loadPage(content, collectedAlerts);
-        assertTrue("thread failed to stop in 1 second", page.getEnclosingWindow().getThreadManager().joinAll(1000));
+        final JavaScriptJobManager mgr = page.getEnclosingWindow().getJobManager();
+        assertTrue("thread failed to stop in 1 second", mgr.waitForAllJobsToFinish(1000));
         assertEquals(new String[] {"Yo!"}, collectedAlerts);
     }
 
@@ -792,7 +793,8 @@ public class WindowTest extends WebTestCase {
 
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         final HtmlPage page = loadPage(content, collectedAlerts);
-        assertTrue("thread failed to stop in 1 second", page.getEnclosingWindow().getThreadManager().joinAll(1000));
+        final JavaScriptJobManager mgr = page.getEnclosingWindow().getJobManager();
+        assertTrue("thread failed to stop in 1 second", mgr.waitForAllJobsToFinish(1000));
         assertEquals(new String[] {"Yo!"}, collectedAlerts);
     }
 
@@ -843,9 +845,9 @@ public class WindowTest extends WebTestCase {
 
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         final HtmlPage page = loadPage(content, collectedAlerts);
-        final ThreadManager threadManager = page.getEnclosingWindow().getThreadManager();
-        threadManager.joinAll(1000);
-        assertEquals(0, threadManager.activeCount());
+        final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
+        jobManager.waitForAllJobsToFinish(1000);
+        assertEquals(0, jobManager.getJobCount());
         assertEquals(Collections.nCopies(3, "blah"), collectedAlerts);
     }
 
@@ -872,9 +874,9 @@ public class WindowTest extends WebTestCase {
         final String[] expected = {"1"};
         final List<String> actual = Collections.synchronizedList(new ArrayList<String>());
         final HtmlPage page = loadPage(html, actual);
-        final ThreadManager threadManager = page.getEnclosingWindow().getThreadManager();
-        threadManager.joinAll(1000);
-        assertEquals(0, threadManager.activeCount());
+        final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
+        jobManager.waitForAllJobsToFinish(1000);
+        assertEquals(0, jobManager.getJobCount());
         assertEquals(expected, actual);
     }
 
@@ -902,10 +904,10 @@ public class WindowTest extends WebTestCase {
         webClient.setWebConnection(webConnection);
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
-        page.getEnclosingWindow().getThreadManager().joinAll(2000);
+        page.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(2000);
         assertEquals("Second", page.getTitleText());
         Assert.assertEquals("no thread should be running",
-                0, page.getEnclosingWindow().getThreadManager().activeCount());
+                0, page.getEnclosingWindow().getJobManager().getJobCount());
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
     }
 
@@ -933,7 +935,7 @@ public class WindowTest extends WebTestCase {
             + "</html>";
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         final HtmlPage page = loadPage(content, collectedAlerts);
-        page.getEnclosingWindow().getThreadManager().joinAll(2000);
+        page.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(2000);
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
     }
 
@@ -959,7 +961,7 @@ public class WindowTest extends WebTestCase {
         final String[] expected = {"true", "completed"};
         final List<String> actual = Collections.synchronizedList(new ArrayList<String>());
         final HtmlPage page = loadPage(html, actual);
-        page.getEnclosingWindow().getThreadManager().joinAll(5000);
+        page.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(5000);
         assertEquals(expected, actual);
     }
 
@@ -1603,7 +1605,7 @@ public class WindowTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void fF_ElementByIdOrNameFromWindow() throws Exception {
+    public void ff_ElementByIdOrNameFromWindow() throws Exception {
         final String content = "<html>\n"
             + "<head><title>test</title>\n"
             + "<script>\n"
@@ -2207,7 +2209,7 @@ public class WindowTest extends WebTestCase {
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertTrue("threads did not stop in time", page.getEnclosingWindow()
-                .getThreadManager().joinAll((max + 1) * 1000));
+                .getJobManager().waitForAllJobsToFinish((max + 1) * 1000));
         assertEquals(Collections.nCopies(max, "ping"), collectedAlerts);
     }
 
@@ -2668,9 +2670,6 @@ public class WindowTest extends WebTestCase {
      */
     @Test
     public void clearInterval_threadInterrupt() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         doTestClearX_threadInterrupt("Interval");
     }
 
@@ -2682,9 +2681,6 @@ public class WindowTest extends WebTestCase {
      */
     @Test
     public void clearTimeout_threadInterrupt() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         doTestClearX_threadInterrupt("Timeout");
     }
 
@@ -2722,7 +2718,7 @@ public class WindowTest extends WebTestCase {
         final Window window = (Window) page.getEnclosingWindow().getScriptObject();
         ScriptableObject.putProperty(window, "mySpecialFunction", mySpecialFunction);
         ((ClickableElement) page.getHtmlElementById("clickMe")).click();
-        page.getEnclosingWindow().getThreadManager().joinAll(5000);
+        page.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(5000);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -2753,7 +2749,7 @@ public class WindowTest extends WebTestCase {
 
         final HtmlPage page = client.getPage(URL_FIRST);
         client.closeAllWindows();
-        page.getEnclosingWindow().getThreadManager().joinAll(5000);
+        page.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(5000);
         assertEquals(0, collectedAlerts.size());
     }
 
@@ -2787,8 +2783,8 @@ public class WindowTest extends WebTestCase {
         final HtmlPage page1 = client.getPage(URL_FIRST);
         final HtmlPage page2 = client.getPage(URL_SECOND);
 
-        page1.getEnclosingWindow().getThreadManager().joinAll(5000);
-        page2.getEnclosingWindow().getThreadManager().joinAll(5000);
+        page1.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(5000);
+        page2.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(5000);
 
         assertEquals(0, collectedAlerts.size());
     }

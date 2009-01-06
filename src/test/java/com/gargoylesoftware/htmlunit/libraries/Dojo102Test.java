@@ -59,7 +59,7 @@ public class Dojo102Test extends WebServerTestCase {
         final String url = "http://localhost:" + PORT + "/util/doh/runner.html";
 
         final HtmlPage page = client_.getPage(url);
-        page.getEnclosingWindow().getThreadManager().joinAll(10000);
+        page.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(10000);
 
         final HtmlElement logBody = page.getHtmlElementById("logBody");
         DomNode lastChild = logBody.getLastChild();

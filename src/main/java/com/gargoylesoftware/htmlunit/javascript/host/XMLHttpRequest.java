@@ -38,6 +38,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -269,7 +270,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Cancels the current HTTP request.
      */
     public void jsxFunction_abort() {
-        getWindow().getWebWindow().getThreadManager().stopThread(threadID_);
+        getWindow().getWebWindow().getJobManager().stopJobNow(threadID_);
     }
 
     /**
@@ -362,13 +363,13 @@ public class XMLHttpRequest extends SimpleScriptable {
                     return null;
                 }
             };
-            final Runnable t = new Runnable() {
+            final JavaScriptJob job = new JavaScriptJob() {
                 public void run() {
                     cf.call(action);
                 }
             };
             getLog().debug("Starting XMLHttpRequest thread for asynchronous request");
-            threadID_ = getWindow().getWebWindow().getThreadManager().startThread(t, "XMLHttpRequest.send");
+            threadID_ = getWindow().getWebWindow().getJobManager().addJob(job, 0, page);
         }
     }
 

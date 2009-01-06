@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit;
+package com.gargoylesoftware.htmlunit.javascript.background;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -26,19 +26,26 @@ import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for {@link ThreadManager}.
+ * Tests for {@link JavaScriptJobManagerImpl}.
  *
  * @version $Revision$
  * @author Brad Clarke
  * @author Ahmed Ashour
  */
 public class ThreadManagerTest extends WebTestCase {
+
     private long startTime_;
+
     private void startTimedTest() {
         startTime_ = System.currentTimeMillis();
     }
@@ -57,7 +64,7 @@ public class ThreadManagerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetClearTimeoutUsesManager() throws Exception {
+    public void setClearTimeoutUsesManager() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
@@ -79,13 +86,13 @@ public class ThreadManagerTest extends WebTestCase {
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         startTimedTest();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        final ThreadManager threadManager = page.getEnclosingWindow().getThreadManager();
-        assertNotNull(threadManager);
-        assertEquals(1, threadManager.activeCount());
+        final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
+        assertNotNull(jobManager);
+        assertEquals(1, jobManager.getJobCount());
         final HtmlAnchor a = page.getHtmlElementById("clickme");
         a.click();
-        threadManager.joinAll(10000);
-        assertEquals(0, threadManager.activeCount());
+        jobManager.waitForAllJobsToFinish(7000);
+        assertEquals(0, jobManager.getJobCount());
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
         assertMaxTestRunTime(10000);
     }
@@ -94,7 +101,7 @@ public class ThreadManagerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetClearIntervalUsesManager() throws Exception {
+    public void setClearIntervalUsesManager() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
@@ -119,11 +126,11 @@ public class ThreadManagerTest extends WebTestCase {
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         startTimedTest();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        final ThreadManager threadManager = page.getEnclosingWindow().getThreadManager();
-        assertNotNull(threadManager);
-        assertEquals(1, threadManager.activeCount());
-        threadManager.joinAll(1000);
-        assertEquals(0, threadManager.activeCount());
+        final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
+        assertNotNull(jobManager);
+        assertEquals(1, jobManager.getJobCount());
+        jobManager.waitForAllJobsToFinish(1000);
+        assertEquals(0, jobManager.getJobCount());
         assertEquals(Collections.nCopies(3, "blah"), collectedAlerts);
         assertMaxTestRunTime(1000);
     }
@@ -132,7 +139,7 @@ public class ThreadManagerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testNavigationStopThreadsInChildWindows() throws Exception {
+    public void navigationStopThreadsInChildWindows() throws Exception {
         final String firstContent = "<html><head><title>First</title></head><body>\n"
             + "<iframe id='iframe1' src='"
             + URL_SECOND
@@ -158,17 +165,17 @@ public class ThreadManagerTest extends WebTestCase {
 
         final HtmlPage page = client.getPage(URL_FIRST);
         final HtmlInlineFrame iframe = page.getHtmlElementById("iframe1");
-        final ThreadManager innerThreadManager = iframe.getEnclosedWindow().getThreadManager();
-        Assert.assertEquals("inner frame should show child thread", 1, innerThreadManager.activeCount());
+        final JavaScriptJobManager mgr = iframe.getEnclosedWindow().getJobManager();
+        Assert.assertEquals("inner frame should show child thread", 1, mgr.getJobCount());
 
         final HtmlAnchor anchor = page.getHtmlElementById("clickme");
         final HtmlPage newPage = anchor.click();
 
         Assert.assertEquals("new page should load", "Third", newPage.getTitleText());
         Assert.assertEquals("frame should be gone", 0, newPage.getFrames().size());
-        // this thread manager really is not accessible anymore, but this is a unit test
-        innerThreadManager.joinAll(1000);
-        Assert.assertEquals("thread should stop", 0, innerThreadManager.activeCount());
+
+        mgr.waitForAllJobsToFinish(1000);
+        Assert.assertEquals("thread should stop", 0, mgr.getJobCount());
     }
 
     private String getContent(final String resourceName) throws IOException {
@@ -228,7 +235,8 @@ public class ThreadManagerTest extends WebTestCase {
         webConnection.setResponse(URL_THIRD, getContent("prototype/1.6.0/dist/prototype.js"), "text/javascript");
 
         final HtmlPage initialPage = webClient.getPage(URL_FIRST);
-        initialPage.getEnclosingWindow().getThreadManager().joinAll(5000);
+        initialPage.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(5000);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
 }

@@ -293,7 +293,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
         final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals("iframe", page.getElementById("f").getTagName());
 
-        page.getEnclosingWindow().getThreadManager().joinAll(3000);
+        page.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(3000);
         assertEquals(2, conn.getRequestCount());
     }
 

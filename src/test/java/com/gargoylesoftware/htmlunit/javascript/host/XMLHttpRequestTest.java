@@ -52,6 +52,7 @@ import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 
 /**
  * Tests for {@link XMLHttpRequest}.
@@ -200,8 +201,9 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         final Page page = client.getPage(URL_FIRST);
 
         final String[] alerts = {UNINITIALIZED, LOADING, LOADING, LOADED, INTERACTIVE, COMPLETED, xml};
+        final JavaScriptJobManager mgr = page.getEnclosingWindow().getJobManager();
 
-        assertTrue("thread failed to stop in 1 second", page.getEnclosingWindow().getThreadManager().joinAll(1000));
+        assertTrue("thread failed to stop in 1 second", mgr.waitForAllJobsToFinish(1000));
         assertEquals(alerts, collectedAlerts);
     }
 
@@ -255,8 +257,9 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         conn.setResponse(URL_FIRST, html);
         client.setWebConnection(conn);
         final Page page = client.getPage(URL_FIRST);
+        final JavaScriptJobManager mgr = page.getEnclosingWindow().getJobManager();
 
-        assertTrue("thread failed to stop in 1 second", page.getEnclosingWindow().getThreadManager().joinAll(1000));
+        assertTrue("thread failed to stop in 1 second", mgr.waitForAllJobsToFinish(1000));
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
@@ -676,7 +679,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "</html>";
 
         final WebWindow window = loadPage(getBrowserVersion(), content, null).getEnclosingWindow();
-        assertTrue("thread failed to stop in 4 seconds", window.getThreadManager().joinAll(4000));
+        assertTrue("thread failed to stop in 4 seconds", window.getJobManager().waitForAllJobsToFinish(4000));
         assertEquals("about:blank", window.getEnclosedPage().getWebResponse().getRequestUrl());
     }
 
@@ -733,10 +736,11 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         client.setWebConnection(conn);
         final Page page = client.getPage(URL_FIRST);
 
-        assertTrue("thread failed to stop in 4 seconds", page.getEnclosingWindow().getThreadManager().joinAll(4000));
+        final JavaScriptJobManager mgr = page.getEnclosingWindow().getJobManager();
+        assertTrue("thread failed to stop in 4 seconds", mgr.waitForAllJobsToFinish(4000));
 
         final String[] alerts = {URL_FIRST.toExternalForm(), "before long loop", "after long loop",
-                urlPage2.toExternalForm(), "ready state handler, content loaded: j=5000" };
+            urlPage2.toExternalForm(), "ready state handler, content loaded: j=5000" };
         assertEquals(alerts, collectedAlerts);
     }
 

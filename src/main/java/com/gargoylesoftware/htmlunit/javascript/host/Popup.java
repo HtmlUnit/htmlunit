@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.ThreadManager;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -24,6 +23,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlHtml;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 
 /**
  * A JavaScript object for IE's Popup.
@@ -147,9 +147,9 @@ class PopupPseudoWebWindow implements WebWindow {
     }
 
     /**
-     * @see com.gargoylesoftware.htmlunit.WebWindow#getThreadManager()
+     * @see com.gargoylesoftware.htmlunit.WebWindow#getJobManager()
      */
-    public ThreadManager getThreadManager() {
+    public JavaScriptJobManager getJobManager() {
         throw new RuntimeException("Not supported");
     }
 
