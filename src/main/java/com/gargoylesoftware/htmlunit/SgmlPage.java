@@ -126,7 +126,8 @@ public abstract class SgmlPage extends DomNode implements Page {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the document type.
+     * @return the document type
      */
     public final DocumentType getDoctype() {
         return documentType_;
