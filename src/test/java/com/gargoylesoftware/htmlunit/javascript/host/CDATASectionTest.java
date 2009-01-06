@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
- * Tests for {@link CDATASection}.
+ * Tests for CDATA sections.
  *
  * @version $Revision$
  * @author Mirko Friedenhagen
