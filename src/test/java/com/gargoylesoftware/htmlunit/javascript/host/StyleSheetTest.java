@@ -306,8 +306,8 @@ public class StyleSheetTest extends WebTestCase {
 
     /**
      * Test that we have a workaround for a bug in CSSParser.
-     * @see {@link #npe_root()}
      * @throws Exception if an error occurs
+     * @see #npe_root()
      */
     @Test
     @Alerts("2")
