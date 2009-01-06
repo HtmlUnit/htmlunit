@@ -167,7 +167,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         final int id = NEXT_JOB_ID.getAndIncrement();
         job.setId(id);
 
-        final Future future = executor_.scheduleWithFixedDelay(job, period, period, MILLISECONDS);
+        final Future future = executor_.scheduleAtFixedRate(job, period, period, MILLISECONDS);
         futures_.put(id, future);
         LOG.debug("Added recurring job: " + job);
         return id;
