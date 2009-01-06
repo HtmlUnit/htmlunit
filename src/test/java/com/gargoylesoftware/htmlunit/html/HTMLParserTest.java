@@ -656,7 +656,7 @@ public class HTMLParserTest extends WebServerTestCase {
     }
 
     /**
-     * Servlet for {@link #headerVsMetaTagContentType()}.
+     * Servlet for {@link #headerVsMetaTagContentType(boolean)}.
      */
     public static class HeaderVsMetaTagContentTypeServlet extends HttpServlet {
         private static final long serialVersionUID = -2575819782522464907L;
