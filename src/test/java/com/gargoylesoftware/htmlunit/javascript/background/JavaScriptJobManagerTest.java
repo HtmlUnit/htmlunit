@@ -42,7 +42,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Brad Clarke
  * @author Ahmed Ashour
  */
-public class ThreadManagerTest extends WebTestCase {
+public class JavaScriptJobManagerTest extends WebTestCase {
 
     private long startTime_;
 

@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Karel Kolman
  * @author Daniel Gredler
  */
-public class ThreadManagerRecursiveSetTimeoutTest extends WebTestCase {
+public class JavaScriptJobManagerRecursiveSetTimeoutTest extends WebTestCase {
 
     /** The number of test threads to use. */
     private static final int TEST_THREAD_COUNT = 100;
