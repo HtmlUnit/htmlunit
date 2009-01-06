@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes">
+            <action type="update" dev="asashour">
+                BrowserVersion: deprecate setJavaScriptVersion(), getJavaScriptVersion() and getJavaScriptVersionNumeric().
+            </action>
             <action type="update" dev="sdanig">
                 Replace ThreadManager with JavaScriptJobManager, which internally uses the executor services provided by JDK 5.
             </action>

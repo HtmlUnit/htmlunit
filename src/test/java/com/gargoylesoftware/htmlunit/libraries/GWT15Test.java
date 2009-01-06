@@ -36,16 +36,17 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.HtmlBold;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
+import com.gargoylesoftware.htmlunit.html.HtmlItalic;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
-import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 
 /**
  * Tests for 1.5 version of <a href="http://code.google.com/webtoolkit">Google Web Toolkit</a>.
@@ -223,8 +224,7 @@ public class GWT15Test extends WebServerTestCase {
         if (child instanceof HtmlDivision) {
             final HtmlDivision div = (HtmlDivision) child;
             DomNode firstChild = div.getFirstChild();
-            if (firstChild instanceof HtmlUnknownElement
-                    && (firstChild.getNodeName().equals("b") || firstChild.getNodeName().equals("i"))) {
+            if (firstChild instanceof HtmlBold || firstChild instanceof HtmlItalic) {
                 firstChild = firstChild.getFirstChild();
             }
             if (firstChild instanceof DomText) {

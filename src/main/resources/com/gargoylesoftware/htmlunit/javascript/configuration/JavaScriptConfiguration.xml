@@ -1018,8 +1018,11 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlDirectory">
     </class>
 
+    <!--
+        Because it is associated with many HtmlClasses, the one-to-many
+        configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class name="HTMLDivElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDivElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlDivision">
+        JSObject="true">
         <property name="align" notImplemented="true" readable="true" writable="true"/>
         <property name="dataFld" notImplemented="true" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
@@ -1645,8 +1648,11 @@
         <function name="remove"/>
     </class>
 
+    <!--
+        Because it is associated with many HtmlClasses, the one-to-many
+        configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class name="HTMLSpanElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlSpan">
+        JSObject="true">
         <property name="dataFld" notImplemented="true" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
@@ -1696,8 +1702,11 @@
         </property>
     </class>
 
+    <!--
+        Because it is associated with many HtmlClasses, the one-to-many
+        configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class name="HTMLTableColElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableColElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableColumn">
+        JSObject="true">
     </class>
 
     <class name="HTMLTableElement" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableElement"

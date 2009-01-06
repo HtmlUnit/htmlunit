@@ -59,9 +59,6 @@ public class HtmlSpanTest extends WebTestCase {
      */
     @Test
     public void simpleScriptable_others() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"

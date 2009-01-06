@@ -136,14 +136,16 @@ public class BrowserVersion implements Serializable {
     }
 
     /**
-     * Instantiate one.
+     * Instantiates one.
      *
      * @param applicationName the name of the application
      * @param applicationVersion the version string of the application
      * @param userAgent the user agent string that will be sent to the server
      * @param javaScriptVersion the version of JavaScript
      * @param browserVersionNumeric the floating number version of the browser
+     * @deprecated As of 2.5, please use {@link BrowserVersion(String, String, String, float)} instead
      */
+    @Deprecated
     public BrowserVersion(final String applicationName, final String applicationVersion,
         final String userAgent, final String javaScriptVersion, final float browserVersionNumeric) {
 
@@ -152,7 +154,22 @@ public class BrowserVersion implements Serializable {
     }
 
     /**
-     * Instantiate one.
+     * Instantiates one.
+     *
+     * @param applicationName the name of the application
+     * @param applicationVersion the version string of the application
+     * @param userAgent the user agent string that will be sent to the server
+     * @param browserVersionNumeric the floating number version of the browser
+     */
+    public BrowserVersion(final String applicationName, final String applicationVersion,
+        final String userAgent, final float browserVersionNumeric) {
+
+        this(applicationName, applicationVersion, userAgent, null,
+                browserVersionNumeric, applicationName + browserVersionNumeric, null);
+    }
+
+    /**
+     * Instantiates one.
      *
      * @param applicationName the name of the application
      * @param applicationVersion the version string of the application
@@ -160,12 +177,32 @@ public class BrowserVersion implements Serializable {
      * @param javaScriptVersion the version of JavaScript
      * @param browserVersionNumeric the floating number version of the browser
      * @param features the browser features
+     * @deprecated As of 2.5, please use {@link BrowserVersion(String, String, String, float,
+     *             BrowserVersionFeatures[])} instead
      */
+    @Deprecated
     public BrowserVersion(final String applicationName, final String applicationVersion,
         final String userAgent, final String javaScriptVersion, final float browserVersionNumeric,
         final BrowserVersionFeatures[] features) {
 
         this(applicationName, applicationVersion, userAgent, javaScriptVersion,
+                browserVersionNumeric, applicationName + browserVersionNumeric, features);
+    }
+
+    /**
+     * Instantiates one.
+     *
+     * @param applicationName the name of the application
+     * @param applicationVersion the version string of the application
+     * @param userAgent the user agent string that will be sent to the server
+     * @param browserVersionNumeric the floating number version of the browser
+     * @param features the browser features
+     */
+    public BrowserVersion(final String applicationName, final String applicationVersion,
+        final String userAgent, final float browserVersionNumeric,
+        final BrowserVersionFeatures[] features) {
+
+        this(applicationName, applicationVersion, userAgent, null,
                 browserVersionNumeric, applicationName + browserVersionNumeric, features);
     }
 
@@ -368,7 +405,9 @@ public class BrowserVersion implements Serializable {
     /**
      * Returns the version of JavaScript used by the browser, for example "1.2".
      * @return the version of JavaScript used by the browser
+     * @deprecated As of 2.5, with no replacement
      */
+    @Deprecated
     public String getJavaScriptVersion() {
         return javaScriptVersion_;
     }
@@ -417,7 +456,9 @@ public class BrowserVersion implements Serializable {
 
     /**
      * @param javaScriptVersion the javaScriptVersion to set
+     * @deprecated As of 2.5, with no replacement
      */
+    @Deprecated
     public void setJavaScriptVersion(final String javaScriptVersion) {
         javaScriptVersion_ = javaScriptVersion;
         javaScriptVersionNumeric_ = Float.parseFloat(javaScriptVersion);
@@ -474,7 +515,9 @@ public class BrowserVersion implements Serializable {
 
     /**
      * @return the javaScriptVersionNumeric
+     * @deprecated As of 2.5, with no replacement
      */
+    @Deprecated
     public float getJavaScriptVersionNumeric() {
         return javaScriptVersionNumeric_;
     }
