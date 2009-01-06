@@ -47,7 +47,7 @@ public class JavaScriptJobManagerRecursiveSetTimeoutTest extends WebTestCase {
     private static final int SLEEP_SECS_2 = 7;
 
     /** Fuzz factor for the lower bound check (takes non-deterministic test results into account). */
-    private static final double LOWER_TEST_FACTOR = 0.7;
+    private static final double LOWER_TEST_FACTOR = 0.5;
 
     /** Fuzz factor for the upper bound check (takes non-deterministic test results into account). */
     private static final double UPPER_TEST_FACTOR = 3;
@@ -96,13 +96,13 @@ public class JavaScriptJobManagerRecursiveSetTimeoutTest extends WebTestCase {
             assertTrue("Expected approx. " + approxExpectedAlerts + " alerts, got " + thread.getAlertCount()
                 + ", would expect to catch approximately " + approxErrorExpectedAlerts
                 + " if job manager had not been not interrupted.",
-                !(thread.getAlertCount() > approxExpectedAlerts * UPPER_TEST_FACTOR));
+                thread.getAlertCount() <= approxExpectedAlerts * UPPER_TEST_FACTOR);
 
             // Verify that the number of collected alerts is not too low.
             assertTrue("Expected approx. " + approxExpectedAlerts + " alerts, got " + thread.getAlertCount()
                 + ", would expect to catch approximately " + approxErrorExpectedAlerts
                 + " if job manager had not been not interrupted.",
-                thread.getAlertCount() > approxExpectedAlerts * LOWER_TEST_FACTOR);
+                thread.getAlertCount() >= approxExpectedAlerts * LOWER_TEST_FACTOR);
         }
     }
 
