@@ -143,7 +143,7 @@ public class BrowserVersion implements Serializable {
      * @param userAgent the user agent string that will be sent to the server
      * @param javaScriptVersion the version of JavaScript
      * @param browserVersionNumeric the floating number version of the browser
-     * @deprecated As of 2.5, please use {@link BrowserVersion(String, String, String, float)} instead
+     * @deprecated as of 2.5, use {@link #BrowserVersion(String, String, String, float)}
      */
     @Deprecated
     public BrowserVersion(final String applicationName, final String applicationVersion,
@@ -177,8 +177,7 @@ public class BrowserVersion implements Serializable {
      * @param javaScriptVersion the version of JavaScript
      * @param browserVersionNumeric the floating number version of the browser
      * @param features the browser features
-     * @deprecated As of 2.5, please use {@link BrowserVersion(String, String, String, float,
-     *             BrowserVersionFeatures[])} instead
+     * @deprecated as of 2.5, use {@link #BrowserVersion(String, String, String, float, BrowserVersionFeatures[])}
      */
     @Deprecated
     public BrowserVersion(final String applicationName, final String applicationVersion,
