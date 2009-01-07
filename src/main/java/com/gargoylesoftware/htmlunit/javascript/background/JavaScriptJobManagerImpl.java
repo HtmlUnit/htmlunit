@@ -31,7 +31,6 @@ import org.mozilla.javascript.Function;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
  * <p>Default implementation of {@link JavaScriptJobManager}.</p>
@@ -115,13 +114,13 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     /** {@inheritDoc} */
     public synchronized int addJob(final JavaScriptJob job, final int delay, final Page page) {
-        final Window w = getWindow();
+        final WebWindow w = getWindow();
         if (w == null) {
             // The window to which this job manager belongs has been garbage collected.
             // Don't spawn any more jobs for it.
             return 0;
         }
-        if (w.getWebWindow().getEnclosedPage() != page) {
+        if (w.getEnclosedPage() != page) {
             // The page requesting the addition of the job is no longer contained by our owner window.
             // Don't let it spawn any more jobs.
             return 0;
@@ -150,13 +149,13 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     /** {@inheritDoc} */
     public synchronized int addRecurringJob(final JavaScriptJob job, final int period, final Page page) {
-        final Window w = getWindow();
+        final WebWindow w = getWindow();
         if (w == null) {
             // The window to which this job manager belongs has been garbage collected.
             // Don't spawn any more jobs for it.
             return 0;
         }
-        if (w.getWebWindow().getEnclosedPage() != page) {
+        if (w.getEnclosedPage() != page) {
             // The page requesting the addition of the job is no longer contained by our owner window.
             // Don't let it spawn any more jobs.
             return 0;
@@ -215,14 +214,8 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
      * Returns the window to which this job manager belongs, or <tt>null</tt> if it has been garbage collected.
      * @return the window to which this job manager belongs, or <tt>null</tt> if it has been garbage collected
      */
-    private Window getWindow() {
-        final WebWindow ww = window_.get();
-        if (ww == null) {
-            // The window has been garbage collected!
-            return null;
-        }
-        final Window w = (Window) ww.getScriptObject();
-        return w;
+    private WebWindow getWindow() {
+        return window_.get();
     }
 
     /**

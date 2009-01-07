@@ -19,12 +19,11 @@ import java.lang.ref.WeakReference;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Function;
+import org.mozilla.javascript.Scriptable;
 
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
  * A JavaScript-triggered background job representing the execution of some JavaScript code.
@@ -42,7 +41,7 @@ public class JavaScriptExecutionJob extends JavaScriptJob {
     private final String label_;
 
     /** The window to which this job belongs (weakly referenced, so as not to leak memory). */
-    private final WeakReference<Window> window_;
+    private final WeakReference<WebWindow> window_;
 
     /** The JavaScript code to execute, if it is in string format. */
     private final String script_;
@@ -56,9 +55,9 @@ public class JavaScriptExecutionJob extends JavaScriptJob {
      * @param window the window to which the job belongs
      * @param script the JavaScript code to execute
      */
-    public JavaScriptExecutionJob(final String label, final Window window, final String script) {
+    public JavaScriptExecutionJob(final String label, final WebWindow window, final String script) {
         label_ = label;
-        window_ = new WeakReference<Window>(window);
+        window_ = new WeakReference<WebWindow>(window);
         script_ = script;
         function_ = null;
     }
@@ -69,41 +68,39 @@ public class JavaScriptExecutionJob extends JavaScriptJob {
      * @param window the window to which the job belongs
      * @param function the JavaScript code to execute
      */
-    public JavaScriptExecutionJob(final String label, final Window window, final Function function) {
+    public JavaScriptExecutionJob(final String label, final WebWindow window, final Function function) {
         label_ = label;
-        window_ = new WeakReference<Window>(window);
+        window_ = new WeakReference<WebWindow>(window);
         script_ = null;
         function_ = function;
     }
 
     /** {@inheritDoc} */
     public void run() {
-        final Window w = window_.get();
+        final WebWindow w = window_.get();
         if (w == null) {
             // The window has been garbage collected! No need to execute, obviously.
             return;
         }
-
-        final WebWindow ww = w.getWebWindow();
-        final Page page = ww.getEnclosedPage();
 
         if (LOG.isDebugEnabled()) {
             LOG.debug("Executing " + this + ".");
         }
 
         // Verify that the window is still open and the current page is the same.
-        if (!ww.getWebClient().getWebWindows().contains(ww) || ww.getEnclosedPage() != page) {
+        final HtmlPage page = (HtmlPage) w.getEnclosedPage();
+        if (w.getEnclosedPage() != page || !w.getWebClient().getWebWindows().contains(w)) {
             LOG.debug("The page that originated this job doesn't exist anymore. Execution cancelled.");
             return;
         }
 
-        final HtmlPage htmlPage = (HtmlPage) page;
         if (function_ == null) {
-            htmlPage.executeJavaScriptIfPossible(script_, "JavaScriptExecutionJob", 1);
+            page.executeJavaScriptIfPossible(script_, "JavaScriptExecutionJob", 1);
         }
         else {
-            final HtmlElement doc = htmlPage.getDocumentElement();
-            htmlPage.executeJavaScriptFunctionIfPossible(function_, w, new Object[0], doc);
+            final HtmlElement doc = page.getDocumentElement();
+            final Scriptable scriptable = (Scriptable) w.getScriptObject();
+            page.executeJavaScriptFunctionIfPossible(function_, scriptable, new Object[0], doc);
         }
 
         if (LOG.isDebugEnabled()) {
