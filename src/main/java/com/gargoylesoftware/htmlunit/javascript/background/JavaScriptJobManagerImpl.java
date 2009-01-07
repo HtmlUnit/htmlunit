@@ -51,7 +51,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     private final ScheduledThreadPoolExecutor executor_ = new ScheduledThreadPoolExecutor(1);
 
     /** The job IDs and their corresponding {@link Future}s, which can be used to cancel the associated jobs. */
-    private final Map<Integer, Future> futures_ = new TreeMap<Integer, Future>();
+    private final Map<Integer, Future< ? >> futures_ = new TreeMap<Integer, Future< ? >>();
 
     /** A counter used to generate the IDs assigned to {@link JavaScriptJob}s. */
     private static final AtomicInteger NEXT_JOB_ID = new AtomicInteger(1);
@@ -130,7 +130,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         final int id = NEXT_JOB_ID.getAndIncrement();
         job.setId(id);
 
-        final Future future = executor_.schedule(job, delay, MILLISECONDS);
+        final Future< ? > future = executor_.schedule(job, delay, MILLISECONDS);
         futures_.put(id, future);
         LOG.debug("Added job: " + job);
         return id;
@@ -165,7 +165,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         final int id = NEXT_JOB_ID.getAndIncrement();
         job.setId(id);
 
-        final Future future = executor_.scheduleAtFixedRate(job, period, period, MILLISECONDS);
+        final Future< ? > future = executor_.scheduleAtFixedRate(job, period, period, MILLISECONDS);
         futures_.put(id, future);
         LOG.debug("Added recurring job: " + job);
         return id;
@@ -173,7 +173,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     /** {@inheritDoc} */
     public synchronized void stopJobAsap(final int id) {
-        final Future future = futures_.remove(id);
+        final Future< ? > future = futures_.remove(id);
         if (future != null) {
             future.cancel(false);
             LOG.debug("Stopped job (ASAP): " + id);
@@ -182,7 +182,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     /** {@inheritDoc} */
     public synchronized void stopJobNow(final int id) {
-        final Future future = futures_.remove(id);
+        final Future< ? > future = futures_.remove(id);
         if (future != null) {
             future.cancel(true);
             LOG.debug("Stopped job (now): " + id);
@@ -191,7 +191,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     /** {@inheritDoc} */
     public synchronized void stopAllJobsAsap() {
-        for (final Future future : futures_.values()) {
+        for (final Future< ? > future : futures_.values()) {
             future.cancel(false);
         }
         futures_.clear();
