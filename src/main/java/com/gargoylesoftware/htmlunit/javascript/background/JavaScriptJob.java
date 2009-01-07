@@ -15,9 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.background;
 
 /**
- * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
- *
- * <p>A JavaScript-triggered background job managed by a {@link JavaScriptJobManager}.</p>
+ * A JavaScript-triggered background job managed by a {@link JavaScriptJobManager}.
  *
  * @version $Revision$
  * @author Daniel Gredler

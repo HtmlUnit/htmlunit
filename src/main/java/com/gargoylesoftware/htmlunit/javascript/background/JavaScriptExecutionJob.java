@@ -27,9 +27,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
- * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
- *
- * <p>A JavaScript-triggered background job representing the execution of some JavaScript code.</p>
+ * A JavaScript-triggered background job representing the execution of some JavaScript code.
  *
  * @version $Revision$
  * @author Daniel Gredler

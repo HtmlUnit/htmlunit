@@ -34,8 +34,6 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
- * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
- *
  * <p>Default implementation of {@link JavaScriptJobManager}.</p>
  *
  * <p>This job manager class is guaranteed not to keep old windows in memory (no window memory leaks).</p>

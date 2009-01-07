@@ -19,9 +19,7 @@ import org.mozilla.javascript.Function;
 import com.gargoylesoftware.htmlunit.Page;
 
 /**
- * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
- *
- * <p>A manager for {@link JavaScriptJob}s.</p>
+ * A manager for {@link JavaScriptJob}s.
  *
  * @version $Revision$
  * @author Daniel Gredler
