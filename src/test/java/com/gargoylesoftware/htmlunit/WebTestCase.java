@@ -87,7 +87,7 @@ public abstract class WebTestCase {
 
     private String[] expectedAlerts_;
 
-    private static final BrowserVersion FLAG_ALL_BROWSERS = new BrowserVersion("", "", "", "1", 0);
+    private static final BrowserVersion FLAG_ALL_BROWSERS = new BrowserVersion("", "", "", 0);
     private static final ThreadLocal<BrowserVersion> generateTest_browserVersion_ = new ThreadLocal<BrowserVersion>();
     private String generateTest_content_;
     private List<String> generateTest_expectedAlerts_;
