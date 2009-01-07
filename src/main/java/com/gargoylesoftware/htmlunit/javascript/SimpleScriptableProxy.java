@@ -306,7 +306,7 @@ public abstract class SimpleScriptableProxy extends ScriptableObject {
      * {@inheritDoc}
      */
     @Override
-    public void sealObject() {
+    public synchronized void sealObject() {
         getWrappedScriptable().sealObject();
     }
 
@@ -322,8 +322,8 @@ public abstract class SimpleScriptableProxy extends ScriptableObject {
      * {@inheritDoc}
      * @deprecated as of used Rhino version
      */
-    @Deprecated
     @Override
+    @Deprecated
     public void setAttributes(final int index, final Scriptable start, final int attributes) {
         getWrappedScriptable().setAttributes(index, start, attributes);
     }
