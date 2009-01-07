@@ -787,17 +787,17 @@ public class WebClient implements Serializable {
 
     /**
      * Returns the "current" window for this client. This is the window that will be used
-     * when getPage() is called without specifying a window.
-     * @return the current window
+     * when <tt>getPage(...)</tt> is called without specifying a window.
+     * @return the "current" window for this client
      */
     public WebWindow getCurrentWindow() {
         return currentWindow_;
     }
 
     /**
-     * Sets the current window for this client. This is the window that will be used when
-     * getPage() is called without specifying a window.
-     * @param window the new window
+     * Sets the "current" window for this client. This is the window that will be used when
+     * <tt>getPage(...)</tt> is called without specifying a window.
+     * @param window the new "current" window for this client
      */
     public void setCurrentWindow(final WebWindow window) {
         WebAssert.notNull("window", window);
