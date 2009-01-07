@@ -460,7 +460,12 @@ public class BrowserVersion implements Serializable {
     @Deprecated
     public void setJavaScriptVersion(final String javaScriptVersion) {
         javaScriptVersion_ = javaScriptVersion;
-        javaScriptVersionNumeric_ = Float.parseFloat(javaScriptVersion);
+        if (javaScriptVersion != null) {
+            javaScriptVersionNumeric_ = Float.parseFloat(javaScriptVersion);
+        }
+        else {
+            javaScriptVersionNumeric_ = 0;
+        }
     }
 
     /**
