@@ -74,7 +74,7 @@ public class ClickableElementTest extends WebTestCase {
         */
     private void onClickPageTest(final String htmlContent, final int numClicks,
             final String[] expectedAlerts, final boolean exceptionOnError) throws Exception {
-        final BrowserVersion bv = new BrowserVersion("Netscape", "7", "", "1.2", 7);
+        final BrowserVersion bv = new BrowserVersion("Netscape", "7", "", 7);
         final WebClient client = new WebClient(bv);
 
         final MockWebConnection webConnection = new MockWebConnection();
