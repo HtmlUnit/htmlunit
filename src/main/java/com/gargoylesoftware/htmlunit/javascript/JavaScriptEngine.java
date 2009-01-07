@@ -275,17 +275,21 @@ public class JavaScriptEngine implements Serializable {
         configureConstants(config, scriptable);
 
         // the properties
-        for (final String entryKey : config.propertyKeys()) {
-            final Method readMethod = config.getPropertyReadMethod(entryKey);
-            final Method writeMethod = config.getPropertyWriteMethod(entryKey);
-            scriptable.defineProperty(entryKey, null, readMethod, writeMethod, ScriptableObject.EMPTY);
+        for (final String propertyName : config.propertyKeys()) {
+            final Method readMethod = config.getPropertyReadMethod(propertyName);
+            final Method writeMethod = config.getPropertyWriteMethod(propertyName);
+            scriptable.defineProperty(propertyName, null, readMethod, writeMethod, ScriptableObject.EMPTY);
         }
 
+        int attributes = ScriptableObject.EMPTY;
+        if (webClient_.getBrowserVersion().isIE()) {
+            attributes = ScriptableObject.DONTENUM;
+        }
         // the functions
-        for (final String entryKey : config.functionKeys()) {
-            final Method method = config.getFunctionMethod(entryKey);
-            final FunctionObject functionObject = new FunctionObject(entryKey, method, scriptable);
-            scriptable.defineProperty(entryKey, functionObject, ScriptableObject.EMPTY);
+        for (final String functionName : config.functionKeys()) {
+            final Method method = config.getFunctionMethod(functionName);
+            final FunctionObject functionObject = new FunctionObject(functionName, method, scriptable);
+            scriptable.defineProperty(functionName, functionObject, attributes);
         }
     }
 

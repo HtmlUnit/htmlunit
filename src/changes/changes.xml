@@ -7,6 +7,9 @@
     <body>
         <release version="2.5" date="?" description="Bugfixes">
             <action type="update" dev="asashour">
+                JavaScript: IE does not enumerate objects methods.
+            </action>
+            <action type="update" dev="asashour">
                 BrowserVersion: deprecate setJavaScriptVersion(), getJavaScriptVersion() and getJavaScriptVersionNumeric().
             </action>
             <action type="update" dev="sdanig">
