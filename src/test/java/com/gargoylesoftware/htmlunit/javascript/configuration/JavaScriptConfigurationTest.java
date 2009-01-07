@@ -568,9 +568,8 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         final Field field = JavaScriptConfiguration.class.getDeclaredField("ConfigurationMap_");
         field.setAccessible(true);
         final HashMap< ? , ? > leakyMap = (HashMap< ? , ? >) field.get(null);
-
         for (int i = 0; i < 3; i++) {
-            final BrowserVersion browserVersion = new BrowserVersion("App", "Version", "User agent", "1.2", 1);
+            final BrowserVersion browserVersion = new BrowserVersion("App", "Version", "User agent", 1);
             JavaScriptConfiguration.getInstance(browserVersion);
         }
         assertEquals(1, leakyMap.size());
