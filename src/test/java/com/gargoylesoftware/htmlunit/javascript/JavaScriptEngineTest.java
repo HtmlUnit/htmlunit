@@ -43,6 +43,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
@@ -787,15 +788,12 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented
     public void functionCaller() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-
         final String content = "<html><head><script>\n"
             + "function myFunc() {\n"
-            + "  alert(myFunc.caller == null)\n"
-            + " alert(myFunc.caller == foo)\n"
+            + "  alert(myFunc.caller == null);\n"
+            + "  alert(myFunc.caller == foo);\n"
             + "}\n"
             + "myFunc()\n"
             + "function foo() { myFunc() }\n"
