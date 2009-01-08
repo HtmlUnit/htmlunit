@@ -15,6 +15,7 @@ HTMLBaseFontElement:color,face,size
 BDO:
 BGSOUND:
 BIG:
+BLINK:
 HTMLQuoteElement:cite
 HTMLBodyElement:aLink,background,bgColor,link,text,vLink
 HTMLBRElement:clear
@@ -46,7 +47,7 @@ HTMLFormElement:acceptCharset,action,elements,encoding,enctype,length,method,nam
 HTMLFrameElement:contentDocument,contentWindow,frameBorder,longDesc,marginHeight,marginWidth,name,noResize,scrolling,src
 HTMLFrameSetElement:cols,rows
 HTMLHeadElement:profile
-History:0,back(),current,forward(),go(),item(),length,next,previous
+History:0,back(),current,forward(),go(),item(),length,previous
 HTMLHeadingElement:align
 HTMLHRElement:align,color,noShade,size,width
 HTMLHtmlElement:version
@@ -67,8 +68,10 @@ HTMLMapElement:areas,name
 MARQUEE:align
 HTMLMenuElement:compact
 HTMLMetaElement:content,httpEquiv,name,scheme
+MULTICOL:
 Navigator:appCodeName,appName,appVersion,buildID,cookieEnabled,javaEnabled(),language,mimeTypes,mozIsLocallyAvailable(),onLine,oscpu,platform,plugins,preference(),product,productSub,registerContentHandler(),registerProtocolHandler(),securityPolicy,taintEnabled(),userAgent,vendor,vendorSub
 NOBR:
+NOEMBED:align
 NOFRAMES:align
 NOSCRIPT:align
 HTMLObjectElement:align,archive,border,code,codeBase,codeType,contentDocument,data,declare,form,height,hspace,name,standby,type,useMap,vspace,width
@@ -85,6 +88,7 @@ SAMP:
 HTMLScriptElement:charset,defer,event,htmlFor,src,text,type
 HTMLScelectElement:add(),boxObject,disabled,form,item(),length,multiple,name,namedItem(),options,remove(),selectedIndex,size,type,value
 SMALL:
+HTMLSpacerElement:
 HTMLSpanElement:
 STRIKE:
 STRONG:

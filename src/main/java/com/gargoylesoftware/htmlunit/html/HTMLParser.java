@@ -95,6 +95,7 @@ public final class HTMLParser {
         ELEMENT_FACTORIES.put(HtmlBaseFont.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlBidirectionalOverride.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlBig.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlBlink.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlBlockQuote.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlBody.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlBold.TAG_NAME, defaultElementFactory);
@@ -143,7 +144,9 @@ public final class HTMLParser {
         ELEMENT_FACTORIES.put(HtmlMarquee.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlMenu.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlMeta.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlMultiColumn.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlNoBreak.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlNoEmbed.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlNoFrames.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlNoScript.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlObject.TAG_NAME, defaultElementFactory);
@@ -160,6 +163,7 @@ public final class HTMLParser {
         ELEMENT_FACTORIES.put(HtmlScript.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlSelect.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlSmall.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlSpacer.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlSpan.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlStrike.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlStrong.TAG_NAME, defaultElementFactory);
@@ -184,7 +188,7 @@ public final class HTMLParser {
         ELEMENT_FACTORIES.put(HtmlUnorderedList.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlVariable.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlWordBreak.TAG_NAME, defaultElementFactory);
-        ELEMENT_FACTORIES.put(HtmlXMP.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlExample.TAG_NAME, defaultElementFactory);
     }
 
     /**

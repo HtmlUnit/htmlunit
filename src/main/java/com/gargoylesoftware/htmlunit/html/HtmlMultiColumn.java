@@ -19,17 +19,17 @@ import java.util.Map;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
- * Wrapper for the HTML element "xmp".
+ * Wrapper for the HTML element "multicol".
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlXMP extends HtmlElement {
+public class HtmlMultiColumn extends ClickableElement {
 
-    private static final long serialVersionUID = 7789806977925266910L;
+    private static final long serialVersionUID = 8652950102614375612L;
 
     /** The HTML tag represented by this element. */
-    public static final String TAG_NAME = "xmp";
+    public static final String TAG_NAME = "multicol";
 
     /**
      * Creates a new instance.
@@ -39,7 +39,7 @@ public class HtmlXMP extends HtmlElement {
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlXMP(final String namespaceURI, final String qualifiedName, final SgmlPage page,
+    HtmlMultiColumn(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

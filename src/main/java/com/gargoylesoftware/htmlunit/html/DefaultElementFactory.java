@@ -98,6 +98,9 @@ class DefaultElementFactory implements IElementFactory {
         else if (tagName.equals(HtmlBig.TAG_NAME)) {
             element = new HtmlBig(namespaceURI, qualifiedName, page, attributeMap);
         }
+        else if (tagName.equals(HtmlBlink.TAG_NAME)) {
+            element = new HtmlBlink(namespaceURI, qualifiedName, page, attributeMap);
+        }
         else if (tagName.equals(HtmlBlockQuote.TAG_NAME)) {
             element = new HtmlBlockQuote(namespaceURI, qualifiedName, page, attributeMap);
         }
@@ -269,8 +272,14 @@ class DefaultElementFactory implements IElementFactory {
         else if (tagName.equals(HtmlMeta.TAG_NAME)) {
             element = new HtmlMeta(namespaceURI, qualifiedName, page, attributeMap);
         }
+        else if (tagName.equals(HtmlMultiColumn.TAG_NAME)) {
+            element = new HtmlMultiColumn(namespaceURI, qualifiedName, page, attributeMap);
+        }
         else if (tagName.equals(HtmlNoBreak.TAG_NAME)) {
             element = new HtmlNoBreak(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equals(HtmlNoEmbed.TAG_NAME)) {
+            element = new HtmlNoEmbed(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlNoFrames.TAG_NAME)) {
             element = new HtmlNoFrames(namespaceURI, qualifiedName, page, attributeMap);
@@ -325,6 +334,9 @@ class DefaultElementFactory implements IElementFactory {
         }
         else if (tagName.equals(HtmlSmall.TAG_NAME)) {
             element = new HtmlSmall(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equals(HtmlSpacer.TAG_NAME)) {
+            element = new HtmlSpacer(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlSpan.TAG_NAME)) {
             element = new HtmlSpan(namespaceURI, qualifiedName, page, attributeMap);
@@ -401,8 +413,8 @@ class DefaultElementFactory implements IElementFactory {
         else if (tagName.equals(HtmlWordBreak.TAG_NAME)) {
             element = new HtmlWordBreak(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equals(HtmlXMP.TAG_NAME)) {
-            element = new HtmlXMP(namespaceURI, qualifiedName, page, attributeMap);
+        else if (tagName.equals(HtmlExample.TAG_NAME)) {
+            element = new HtmlExample(namespaceURI, qualifiedName, page, attributeMap);
         }
         else {
             throw new IllegalStateException("Cannot find HtmlElement for " + qualifiedName);

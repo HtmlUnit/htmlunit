@@ -1648,6 +1648,10 @@
         <function name="remove"/>
     </class>
 
+    <class name="HTMLSpacerElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpacerElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlSpacer">
+    </class>
+
     <!--
         Because it is associated with many HtmlClasses, the one-to-many
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->

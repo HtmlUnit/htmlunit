@@ -22,6 +22,7 @@
 	writeAll('BDO', document.createElement('bdo'), unknown);//same as 'abbr'
 	writeAll('BGSOUND', document.createElement('bgsound'), unknown);//same as 'abbr'
 	writeAll('BIG', document.createElement('big'), unknown);//same as 'abbr'
+	writeAll('BLINK', document.createElement('blink'), unknown);//same as 'abbr'
     writeAll('HTMLQuoteElement', document.createElement('blockquote'), unknown);
     writeAll('HTMLBodyElement', document.body, unknown);
     writeAll('HTMLBRElement', document.createElement('br'), unknown);
@@ -84,10 +85,12 @@
 	writeAll('MARQUEE', document.createElement('marquee'), unknown);//has properties in IE, FF evaluates it to HTMLDivElement, no 'marquee' object
     writeAll('HTMLMenuElement', document.createElement('menu'), unknown);
     writeAll('HTMLMetaElement', document.createElement('meta'), unknown);
+	writeAll('MULTICOL', document.createElement('multiCol'), unknown);//same as 'abbr'
 //namespace
     writeAll('Navigator', window.navigator, unknown);
 //nextID
 	writeAll('NOBR', document.createElement('noBR'), unknown);//same as 'abbr'
+	writeAll('NOEMBED', document.createElement('noEmbed'), unknown);//same as 'marquee'
 	writeAll('NOFRAMES', document.createElement('noFrames'), unknown);//same as 'marquee'
 	writeAll('NOSCRIPT', document.createElement('noScript'), unknown);//same as 'marquee'
     writeAll('HTMLObjectElement', document.createElement('object'), unknown);
@@ -112,6 +115,7 @@
     writeAll('HTMLScelectElement', document.createElement('select'), unknown);
 //    writeAll('xxx', document.selection, unknown);
 	writeAll('SMALL', document.createElement('small'), unknown);//same as 'abbr'
+    writeAll('HTMLSpacerElement', document.createElement('spacer'), unknown);
     writeAll('HTMLSpanElement', document.createElement('span'), unknown);
 	writeAll('STRIKE', document.createElement('strike'), unknown);//same as 'abbr'
 	writeAll('STRONG', document.createElement('strong'), unknown);//same as 'abbr'

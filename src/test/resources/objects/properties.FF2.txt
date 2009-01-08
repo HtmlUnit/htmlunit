@@ -15,6 +15,7 @@ HTMLBaseFontElement:color,face,size
 BDO:
 BGSOUND:
 BIG:
+BLINK:
 HTMLQuoteElement:cite
 HTMLBodyElement:aLink,background,bgColor,link,text,vLink
 HTMLBRElement:clear
@@ -67,8 +68,10 @@ HTMLMapElement:areas,name
 MARQUEE:align
 HTMLMenuElement:compact
 HTMLMetaElement:content,httpEquiv,name,scheme
+MULTICOL:
 Navigator:appCodeName,appName,appVersion,buildID,cookieEnabled,javaEnabled(),language,mimeTypes,onLine,oscpu,platform,plugins,preference(),product,productSub,registerContentHandler(),registerProtocolHandler(),securityPolicy,taintEnabled(),userAgent,vendor,vendorSub
 NOBR:
+NOEMBED:align
 NOFRAMES:align
 NOSCRIPT:align
 HTMLObjectElement:align,archive,border,code,codeBase,codeType,contentDocument,data,declare,form,height,hspace,name,standby,type,useMap,vspace,width
@@ -85,6 +88,7 @@ SAMP:
 HTMLScriptElement:charset,defer,event,htmlFor,src,text,type
 HTMLScelectElement:add(),boxObject,disabled,form,item(),length,multiple,name,namedItem(),options,remove(),selectedIndex,size,type,value
 SMALL:
+HTMLSpacerElement:
 HTMLSpanElement:
 STRIKE:
 STRONG:
@@ -105,5 +109,5 @@ U:
 HTMLUListElement:compact,type
 VAR:
 HTMLWBRElement:
-Window:__RP_Callback_Helper(),__RP_Connection_Callback(),__RP_Coord_Callback(),__RP_TotalBytes_Callback(),__RP_Url_Callback(),alert(),atob(),back(),blur(),btoa(),captureEvents(),clearInterval(),clearTimeout(),close(),closed,Components,confirm(),content,controllers,createXmlDocument(),crypto,defaultStatus,directories,disableExternalCapture(),dispatchEvent(),document,dump(),enableExternalCapture(),find(),focus(),forward(),frameElement,frames,fullScreen,GeckoActiveXObject(),getComputedStyle(),getInterface(),getSelection(),globalStorage,history,home(),ieMethods,init(),innerHeight,innerWidth,java,length,location,locationbar,menubar,moveBy(),moveTo(),name,navigator,netscape,onload(),open(),openDialog(),opener,outerHeight,outerWidth,Packages,pageXOffset,pageYOffset,parent,personalbar,pkcs11,print(),prompt(),releaseEvents(),removeEventListener(),resizeBy(),resizeTo(),routeEvent(),screen,screenX,screenY,scroll(),scrollbars,scrollBy(),scrollByLines(),scrollByPages(),scrollMaxX,scrollMaxY,scrollTo(),scrollX,scrollY,self,sessionStorage,setInterval(),setResizable(),setTimeout(),sizeToContent(),sortFunction(),status,statusbar,stop(),sun,toolbar,top,updateCommands(),window,writeAll(),XPCNativeWrapper()
+Window:__RP_Callback_Helper(),__RP_Connection_Callback(),__RP_Coord_Callback(),__RP_TotalBytes_Callback(),__RP_Url_Callback(),alert(),atob(),back(),blur(),btoa(),captureEvents(),clearInterval(),clearTimeout(),close(),closed,Components,confirm(),content,controllers,createXmlDocument(),crypto,defaultStatus,directories,disableExternalCapture(),dispatchEvent(),document,dump(),enableExternalCapture(),find(),focus(),forward(),frameElement,frames,fullScreen,GeckoActiveXObject(),getComputedStyle(),getSelection(),globalStorage,history,home(),ieMethods,init(),innerHeight,innerWidth,java,length,location,locationbar,menubar,moveBy(),moveTo(),name,navigator,netscape,onload(),open(),openDialog(),opener,outerHeight,outerWidth,Packages,pageXOffset,pageYOffset,parent,personalbar,pkcs11,print(),prompt(),releaseEvents(),removeEventListener(),resizeBy(),resizeTo(),routeEvent(),screen,screenX,screenY,scroll(),scrollbars,scrollBy(),scrollByLines(),scrollByPages(),scrollMaxX,scrollMaxY,scrollTo(),scrollX,scrollY,self,sessionStorage,setInterval(),setResizable(),setTimeout(),sizeToContent(),sortFunction(),status,statusbar,stop(),sun,toolbar,top,updateCommands(),window,writeAll(),XPCNativeWrapper()
 XMP:

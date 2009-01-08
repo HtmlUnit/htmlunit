@@ -15,6 +15,7 @@ HTMLBaseFontElement:color,face,size
 BDO:cite,dateTime
 BGSOUND:balance,loop,src,volume
 BIG:cite,dateTime
+BLINK:cite,dateTime
 HTMLQuoteElement:cite,clear,clear(),width
 HTMLBodyElement:aLink,background,bgColor,bgProperties,bottomMargin,createTextRange(),leftMargin,link,noWrap,onafterprint,onbeforeprint,onbeforeunload,onload(),onselect,onunload,rightMargin,scroll,scroll(),text,topMargin,vLink
 HTMLBRElement:clear,clear()
@@ -67,8 +68,10 @@ HTMLMapElement:areas,name
 MARQUEE:behavior,bgColor,dataFld,dataFormatAs,dataSrc,direction,height,hspace,loop,onbounce,onfinish,onstart,scrollAmount,scrollDelay,start(),stop(),trueSpeed,vspace,width
 HTMLMenuElement:compact,type
 HTMLMetaElement:charset,content,httpEquiv,name,scheme,url
+MULTICOL:
 Navigator:appCodeName,appMinorVersion,appName,appVersion,cookieEnabled,cpuClass,javaEnabled(),mimeTypes,onLine,opsProfile,platform,plugins,systemLanguage,taintEnabled(),userAgent,userLanguage,userProfile
 NOBR:cite,dateTime
+NOEMBED:
 NOFRAMES:
 NOSCRIPT:
 HTMLObjectElement:align,alt,altHtml,archive,BaseHref,border,code,codeBase,codeType,dataFld,dataFormatAs,dataSrc,declare,form,height,hspace,name,onerror,standby,type,useMap,vspace,width
@@ -85,6 +88,7 @@ SAMP:cite,dateTime
 HTMLScriptElement:charset,defer,event,htmlFor,onerror,src,text,type
 HTMLScelectElement:add(),dataFld,dataFormatAs,dataSrc,form,item(),length,multiple,name,namedItem(),onchange,options,remove(),selectedIndex,size,tags(),type,urns(),value
 SMALL:cite,dateTime
+HTMLSpacerElement:
 HTMLSpanElement:dataFld,dataFormatAs,dataSrc
 STRIKE:cite,dateTime
 STRONG:cite,dateTime

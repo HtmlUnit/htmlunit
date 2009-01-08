@@ -44,6 +44,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlAddress;
 import com.gargoylesoftware.htmlunit.html.HtmlBackgroundSound;
 import com.gargoylesoftware.htmlunit.html.HtmlBidirectionalOverride;
 import com.gargoylesoftware.htmlunit.html.HtmlBig;
+import com.gargoylesoftware.htmlunit.html.HtmlBlink;
 import com.gargoylesoftware.htmlunit.html.HtmlBlockQuote;
 import com.gargoylesoftware.htmlunit.html.HtmlBold;
 import com.gargoylesoftware.htmlunit.html.HtmlCenter;
@@ -66,7 +67,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlItalic;
 import com.gargoylesoftware.htmlunit.html.HtmlKeyboard;
 import com.gargoylesoftware.htmlunit.html.HtmlListing;
 import com.gargoylesoftware.htmlunit.html.HtmlMarquee;
+import com.gargoylesoftware.htmlunit.html.HtmlMultiColumn;
 import com.gargoylesoftware.htmlunit.html.HtmlNoBreak;
+import com.gargoylesoftware.htmlunit.html.HtmlNoEmbed;
 import com.gargoylesoftware.htmlunit.html.HtmlNoFrames;
 import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
 import com.gargoylesoftware.htmlunit.html.HtmlPlainText;
@@ -86,7 +89,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableHeader;
 import com.gargoylesoftware.htmlunit.html.HtmlTeletype;
 import com.gargoylesoftware.htmlunit.html.HtmlUnderlined;
 import com.gargoylesoftware.htmlunit.html.HtmlVariable;
-import com.gargoylesoftware.htmlunit.html.HtmlXMP;
+import com.gargoylesoftware.htmlunit.html.HtmlExample;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.StrictErrorHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLDivElement;
@@ -740,6 +743,7 @@ public final class JavaScriptConfiguration {
         map.put(HtmlBidirectionalOverride.class, HTMLSpanElement.class);
         map.put(HtmlBig.class, HTMLSpanElement.class);
         map.put(HtmlBold.class, HTMLSpanElement.class);
+        map.put(HtmlBlink.class, HTMLSpanElement.class);
         map.put(HtmlCenter.class, HTMLSpanElement.class);
         map.put(HtmlCitation.class, HTMLSpanElement.class);
         map.put(HtmlCode.class, HTMLSpanElement.class);
@@ -750,6 +754,7 @@ public final class JavaScriptConfiguration {
         map.put(HtmlItalic.class, HTMLSpanElement.class);
         map.put(HtmlKeyboard.class, HTMLSpanElement.class);
         map.put(HtmlListing.class, HTMLSpanElement.class);
+        map.put(HtmlMultiColumn.class, HTMLSpanElement.class);
         map.put(HtmlNoBreak.class, HTMLSpanElement.class);
         map.put(HtmlPlainText.class, HTMLSpanElement.class);
         map.put(HtmlS.class, HTMLSpanElement.class);
@@ -763,10 +768,11 @@ public final class JavaScriptConfiguration {
         map.put(HtmlTeletype.class, HTMLSpanElement.class);
         map.put(HtmlUnderlined.class, HTMLSpanElement.class);
         map.put(HtmlVariable.class, HTMLSpanElement.class);
-        map.put(HtmlXMP.class, HTMLSpanElement.class);
+        map.put(HtmlExample.class, HTMLSpanElement.class);
 
         map.put(HtmlDivision.class, HTMLDivElement.class);
         map.put(HtmlMarquee.class, HTMLDivElement.class);
+        map.put(HtmlNoEmbed.class, HTMLDivElement.class);
         map.put(HtmlNoFrames.class, HTMLDivElement.class);
         map.put(HtmlNoScript.class, HTMLDivElement.class);
 
