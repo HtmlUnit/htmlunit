@@ -2554,6 +2554,7 @@ public class WindowTest extends WebTestCase {
     public void windowProperties() throws Exception {
         testWindowProperties(BrowserVersion.INTERNET_EXPLORER_7, new String[] {"undefined", "undefined"});
         testWindowProperties(BrowserVersion.FIREFOX_2, new String[] {"[Node]", "[Element]"});
+        testWindowProperties(BrowserVersion.FIREFOX_3, new String[] {"[object Node]", "[object Element]"});
     }
 
     private void testWindowProperties(final BrowserVersion browserVersion, final String[] expectedAlerts)

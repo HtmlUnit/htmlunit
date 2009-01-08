@@ -344,27 +344,6 @@ public class SimpleScriptableTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Browsers(Browser.FF)
-    public void windowPropertyToString() throws Exception {
-        final String content = "<html id='myId'><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
-            + "    alert(HTMLHtmlElement);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        final String[] expectedAlerts = {"[object HTMLHtmlElement]", "[HTMLHtmlElement]"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(getBrowserVersion(), content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
      * This is related to HtmlUnitContextFactory.hasFeature(Context.FEATURE_PARENT_PROTO_PROPERTIES).
      * @throws Exception if the test fails
      */

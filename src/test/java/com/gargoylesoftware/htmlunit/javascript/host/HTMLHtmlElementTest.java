@@ -20,6 +20,8 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 
 /**
  * Unit tests for {@link HTMLHtmlElement}.
@@ -30,6 +32,24 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  */
 @RunWith(BrowserRunner.class)
 public class HTMLHtmlElementTest extends WebTestCase {
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.FF)
+    @Alerts(FF2 = { "[object HTMLHtmlElement]", "[HTMLHtmlElement]" },
+            FF3 = { "[object HTMLHtmlElement]", "[object HTMLHtmlElement]" })
+    public void HTMLHtmlElement_toString() throws Exception {
+        final String html = "<html id='myId'><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myId'));\n"
+            + "    alert(HTMLHtmlElement);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
 
     /**
      * @throws Exception if an error occurs

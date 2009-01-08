@@ -270,14 +270,21 @@ public class SimpleScriptable extends ScriptableObject {
     @Override
     public Object getDefaultValue(final Class< ? > hint) {
         if (String.class.equals(hint) || hint == null) {
+            // shouldn't we handle this wihth BrowserVersion.hasFeature?
             if (getBrowserVersion().isIE()) {
                 return "[object]"; // the super helpful IE solution
             }
-            final Window window = (Window) getTopLevelScope(this);
-            if (ScriptableObject.getProperty(window, getClassName()) == this) {
-                return "[" + getClassName() + "]";
+            else if (getBrowserVersion().getBrowserVersionNumeric() >= 3) { // Firefox 3
+                return "[object " + getClassName() + "]";
             }
-            return "[object " + getClassName() + "]";
+            else {
+                // Firefox2 is not fully coherent here (see WindowTest#windowProperties)
+                final Window window = (Window) getTopLevelScope(this);
+                if (ScriptableObject.getProperty(window, getClassName()) == this) {
+                    return "[" + getClassName() + "]";
+                }
+                return "[object " + getClassName() + "]";
+            }
         }
         return super.getDefaultValue(hint);
     }
