@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes">
+            <action type="update" dev="mguillem">
+                JavaScript: prototype should not be enumerated (FF).
+            </action>
             <action type="update" dev="asashour">
                 JavaScript: IE does not enumerate objects methods.
             </action>

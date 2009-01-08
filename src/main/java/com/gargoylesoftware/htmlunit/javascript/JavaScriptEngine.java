@@ -183,7 +183,7 @@ public class JavaScriptEngine implements Serializable {
                     // for FF, place object with prototype property in Window scope
                     if (!getWebClient().getBrowserVersion().isIE()) {
                         final SimpleScriptable obj = config.getLinkedClass().newInstance();
-                        obj.put("prototype", obj, prototype); // but not setPrototype!
+                        obj.defineProperty("prototype", prototype, ScriptableObject.DONTENUM); // but not setPrototype!
                         obj.setParentScope(window);
                         ScriptableObject.defineProperty(window, config.getClassName(), obj, ScriptableObject.DONTENUM);
                         // this obj won't have prototype, constants need to be configured on it again

@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link Element}.
@@ -863,6 +864,37 @@ public class ElementTest extends WebTestCase {
             + "      e.removeAttributeNS('bar', 'type');\n"
             + "      alert(e.hasAttribute('type'));\n"
             + "    } catch (e) {alert('getAttributeNS() not supported')}\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='foo' type='button' value='someValue'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented(Browser.FF2)
+    @Alerts(IE = "exception occured",
+            FF2 = { "prototype found", "QueryInterface" },
+            FF3 = { "prototype found", "" })
+    public void enumeratedProperties() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var str = '';\n"
+            + "    try {\n"
+            + "      alert(Element.prototype ? 'prototype found' : 'prototype not found');\n"
+            + "      var str = '';\n"
+            + "      for (var i in Element)\n"
+            + "        str += i;\n"
+            + "      alert(str);\n"
+            + "    } catch (e) { alert('exception occured')}\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
