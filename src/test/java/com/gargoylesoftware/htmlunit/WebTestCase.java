@@ -731,11 +731,8 @@ public abstract class WebTestCase {
             if (browser == FLAG_ALL_BROWSERS) {
                 suffix = ".expected";
             }
-            else if (browser.isIE()) {
-                suffix = ".IE" + browser.getBrowserVersionNumeric() + ".expected";
-            }
             else {
-                suffix = ".FF" + browser.getBrowserVersionNumeric() + ".expected";
+                suffix = "." + browser.getNickname() + ".expected";
             }
 
             final File expectedLog = new File(outFile.getParentFile(), outFile.getName() + suffix);
