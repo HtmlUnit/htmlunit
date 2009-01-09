@@ -64,6 +64,43 @@ public class HTMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF3 = { "function", "div1", "span2", "span3", "2", "1", "1", "0", "0", "0" },
+            FF2 = { "undefined", "exception" },
+            IE = { "undefined", "exception" })
+    public void getElementsByClassName() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    alert(typeof document.getElementsByClassName);\n"
+            + "    try {\n"
+            + "      var elements = document.getElementsByClassName('foo');\n"
+            + "      for (var i=0; i<elements.length; i++) {\n"
+            + "        alert(elements[i].id);\n"
+            + "      }\n"
+            + "      alert(document.getElementsByClassName('red').length);\n"
+            + "      alert(document.getElementsByClassName('foo red').length);\n"
+            + "      alert(document.getElementsByClassName('red foo').length);\n"
+            + "      alert(document.getElementsByClassName('blue foo').length);\n"
+            + "      alert(document.getElementsByClassName('*').length);\n"
+//            + "      alert(document.getElementsByClassName().length);\n" // exception in FF3
+            + "      alert(document.getElementsByClassName(null).length);\n"
+            + "    }\n"
+            + "    catch (e) { alert('exception') }\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<div class='foo' id='div1'><span class='c2'>hello</span>\n"
+            + "  <span class='foo' id='span2'>World!</span></div>\n"
+            + "<span class='foo red' id='span3'>again</span>\n"
+            + "<span class='red' id='span4'>bye</span>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("BackCompat")
     public void compatMode() throws Exception {
         compatMode("");

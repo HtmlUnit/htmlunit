@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes">
+            <action type="add" dev="mguillem">
+                JavaScript: add support for document.getElementsByClassName (FF3 only).
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript: document.execCommand doesn't throw an exception when called with unknown command (FF3 only).
             </action>

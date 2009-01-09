@@ -1154,6 +1154,9 @@
         </function>
         <function name="execCommand"/>
         <function name="getElementById"/>
+        <function name="getElementsByClassName">
+            <browser name="Firefox" min-version="3"/>
+        </function>
         <function name="getElementsByName"/>
         <function name="getElementsByTagName"/>
         <function name="open">
