@@ -1664,11 +1664,14 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "a", "b", "a", "b", "0" })
+    @Alerts(FF3 = { "exception" },
+            FF2 = { "a", "b", "a", "b", "0" },
+            IE = { "a", "b", "a", "b", "0" })
     public void all_tags() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
+            + "  try {\n"
             + "    var inputs = document.all.tags('input');\n"
             + "    var inputCount = inputs.length;\n"
             + "    for(i=0; i< inputCount; i++ ) {\n"
@@ -1679,6 +1682,7 @@ public class DocumentTest extends WebTestCase {
             + "    alert(document.all.tags('input').item(1).name);\n"
             + "    // Make sure tags() returns an empty element array if there are no matches.\n"
             + "    alert(document.all.tags('xxx').length);\n"
+            + "  } catch (e) { alert('exception') }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<input type='text' name='a' value='1'>\n"
@@ -1730,11 +1734,12 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "null" })
+    @Alerts(FF = { "undefined", "undefined" }, IE = { "null", "null" })
     public void all_NotExisting() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.all('notExisting'));\n"
+            + "    alert(document.all.item('notExisting'));\n"
             + "}\n"
             + "</script><body onload='doTest()'>\n"
             + "</body></html>";
@@ -2486,11 +2491,15 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(FF = { "undefined", "exception occured" }, IE = { "[object]", "2" })
     public void scriptsArray() throws Exception {
         final String html = "<html><head><script lang='JavaScript'>\n"
             + "    function doTest(){\n"
-            + "        alert(document.scripts.length);\n" // This line used to blow up
+            + "        alert(document.scripts);\n"
+            + "        try {\n"
+            + "          alert(document.scripts.length);\n" // This line used to blow up
+            + "        }\n"
+            + "        catch (e) { alert('exception occured') }\n"
             + "}\n"
             + "</script></head><body onload='doTest();'>\n"
             + "<script>var scriptTwo = 1;</script>\n"
@@ -2504,11 +2513,12 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("FORM")
+    @Alerts(FF = { "function", "undefined" }, IE = { "object", "FORM" })
     public void precedence() throws Exception {
         final String html = "<html><head></head>\n"
             + "<body>\n"
             + "<form name='writeln'>foo</form>\n"
+            + "<script>alert(typeof document.writeln);</script>\n"
             + "<script>alert(document.writeln.tagName);</script>\n"
             + "</body></html>";
 
@@ -2583,6 +2593,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     @Alerts({ "[object]", "true", "true", "true", "true", "true", "true" })
+    @Browsers(Browser.IE)
     @NotYetImplemented
     public void documentCloneNode() throws Exception {
         final String html = "<html><body id='hello' onload='doTest()'>\n"
@@ -2613,13 +2624,17 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object]" })
-    @Browsers(Browser.IE)
+    @Alerts(FF = "exception", IE = "[object]")
     public void createStyleSheet() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "var s = document.createStyleSheet('foo.css', 1);\n"
-            + "alert(s);\n"
+            + "try {\n"
+            + "  var s = document.createStyleSheet('foo.css', 1);\n"
+            + "  alert(s);\n"
+            + "}\n"
+            + "catch(ex) {\n"
+            + "  alert('exception');\n"
+            + "}\n"
             + "</script></head><body>\n"
             + "</body></html>";
 
@@ -2656,10 +2671,33 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.FF)
-    public void createEvent_FF() throws Exception {
+    public void createEvent_FF_Event() throws Exception {
         createEvent_FF("Event", true);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.FF)
+    public void createEvent_FF_Events() throws Exception {
         createEvent_FF("Events", true);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.FF)
+    public void createEvent_FF_HTMLEvents() throws Exception {
         createEvent_FF("HTMLEvents", true);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void createEvent_FF_Bogus() throws Exception {
         createEvent_FF("Bogus", false);
     }
 
@@ -2692,7 +2730,8 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.FF)
-    @Alerts({ "true", "true", "[object HTMLDivElement]" })
+    @Alerts(FF2 = { "[object HTMLDocument]", "[object HTMLDocument]", "[object HTMLDivElement]" },
+            FF3 = { "null", "null", "[object HTMLDivElement]" })
     public void createEvent_FF_Target() throws Exception {
         final String html =
               "<html>\n"
@@ -2701,10 +2740,10 @@ public class DocumentTest extends WebTestCase {
             + "        <script>\n"
             + "            function test() {\n"
             + "                var event = document.createEvent('MouseEvents');\n"
-            + "                alert(event.target == document);\n"
+            + "                alert(event.target);\n"
             + "                event.initMouseEvent('click', true, true, window,\n"
             + "                    1, 0, 0, 0, 0, false, false, false, false, 0, null);\n"
-            + "                alert(event.target == document);\n"
+            + "                alert(event.target);\n"
             + "                document.getElementById('d').dispatchEvent(event);\n"
             + "            }\n"
             + "        </script>\n"
@@ -2717,15 +2756,18 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.IE)
-    @Alerts({ "true", "object", "[object]" })
+    @Alerts(FF = "exception", IE = { "true", "object", "[object]" })
     public void createEventObject_IE() throws Exception {
         final String html =
               "<html><head><title>foo</title><script>\n"
-            + "var e = document.createEventObject();\n"
-            + "alert(e != null);\n"
-            + "alert(typeof e);\n"
-            + "alert(e);\n"
+            + "try {\n"
+            + "  var e = document.createEventObject();\n"
+            + "  alert(e != null);\n"
+            + "  alert(typeof e);\n"
+            + "  alert(e);\n"
+            + "} catch(ex) {\n"
+            + "  alert('exception');\n"
+            + "}\n"
             + "</script></head><body>\n"
             + "</body></html>";
 
@@ -2738,7 +2780,7 @@ public class DocumentTest extends WebTestCase {
     @Test
     @Browsers(Browser.IE)
     @Alerts("BODY")
-    public void lementFromPoint() throws Exception {
+    public void elementFromPoint() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var e = document.elementFromPoint(-1,-1);\n"
@@ -2885,14 +2927,16 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("command foo not supported")
+    @Alerts(FF3 = { "true", "false" },
+            FF2 = { "true", "command foo not supported" },
+            IE = { "true", "command foo not supported" })
     public void execCommand() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    document.designMode = 'On';\n"
-            + "    document.execCommand('Bold', false, null);\n"
+            + "    alert(document.execCommand('Bold', false, null));\n"
             + "    try {\n"
-            + "      document.execCommand('foo', false, null);\n"
+            + "      alert(document.execCommand('foo', false, null));\n"
             + "    }\n"
             + "    catch (e) {\n"
             + "      alert('command foo not supported');\n"
@@ -2949,12 +2993,12 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.FF)
-    @Alerts(FF = { "SCRIPT", "TITLE" },
+    @NotYetImplemented(Browser.FF2)
+    @Alerts(FF2 = { "SCRIPT", "TITLE" },
+            FF3 = { "STYLE", "SCRIPT" },
             IE = { "STYLE", "SCRIPT" })
     public void writeStyle() throws Exception {
-        final String html = "<html><head><title>foo</title></head>\n"
-            + "<body>\n"
+        final String html = "<html><head><title>foo</title></head><body>\n"
             + "<script>\n"
             + "  document.write('<style type=\"text/css\" id=\"myStyle\">');\n"
             + "  document.write('  .nwr {white-space: nowrap;}');\n"

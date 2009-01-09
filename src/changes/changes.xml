@@ -7,6 +7,25 @@
     <body>
         <release version="2.5" date="?" description="Bugfixes">
             <action type="update" dev="mguillem">
+                JavaScript: document.execCommand doesn't throw an exception when called with unknown command (FF3 only).
+            </action>
+            <action type="update" dev="mguillem">
+                JavaScript: document.scripts doesn't exist for FF.
+            </action>
+            <action type="update" dev="mguillem">
+                JavaScript: when simulating Firefox, document.write(ln) returns the function,
+                no matter if elements with this name are present or not.
+            </action>
+            <action type="update" dev="mguillem">
+                JavaScript: document.createEvent doesn't initialize the target property under FF3.
+            </action>
+            <action type="update" dev="mguillem">
+                JavaScript: document.all('notExisting') returns undefined for FF.
+            </action>
+            <action type="update" dev="mguillem">
+                JavaScript: tags property exists on collections for FF2 but not for FF3.
+            </action>
+            <action type="update" dev="mguillem">
                 JavaScript: prototype should not be enumerated (FF).
             </action>
             <action type="update" dev="asashour">

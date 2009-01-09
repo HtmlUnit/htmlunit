@@ -399,14 +399,19 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
 
     /**
      * Returns the specified object, unless it is the <tt>NOT_FOUND</tt> constant, in which case <tt>null</tt>
-     * is returned.
+     * is returned for IE.
      * @param object the object to return
      * @return the specified object, unless it is the <tt>NOT_FOUND</tt> constant, in which case <tt>null</tt>
-     *         is returned
+     *         is returned for IE.
      */
     private Object nullIfNotFound(final Object object) {
         if (object == NOT_FOUND) {
-            return null;
+            if (getBrowserVersion().isIE()) {
+                return null;
+            }
+            else {
+                return Context.getUndefinedValue();
+            }
         }
         return object;
     }

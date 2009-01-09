@@ -188,7 +188,8 @@ public class HTMLCollectionTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = {"true", "false" },
+    @Alerts(FF2 = {"true", "false" },
+            FF3 = {"false", "false" },
             IE = {"true", "true" })
     public void testTags() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -205,12 +206,12 @@ public class HTMLCollectionTest extends WebTestCase {
 
     /**
      * Depending on the method used, out of bound access give different responses.
-     * In fact this is not fully correct as FF support the col(index) syntax only for special
-     * collections where it simulates IE like document.all
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "null", "null", "undefined", "null" })
+    @NotYetImplemented(Browser.FF)
+    @Alerts(IE = { "null", "null", "undefined", "null" },
+            FF = { "null", "null", "undefined", "exception" })
     public void testOutOfBoundAccess() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -218,7 +219,9 @@ public class HTMLCollectionTest extends WebTestCase {
             + "    alert(col.item(1));\n"
             + "    alert(col.namedItem('foo'));\n"
             + "    alert(col[1]);\n"
-            + "    alert(col(1));\n"
+            + "    try {\n"
+            + "      alert(col(1));\n"
+            + "    } catch (e) { alert('exception') }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

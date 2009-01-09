@@ -1007,7 +1007,9 @@
 
     <class name="HTMLCollectionTags" extends="HTMLCollection" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLCollectionTags"
         JSObject="true">
-        <function name="tags"/>
+        <function name="tags">
+            <browser name="Firefox" max-version="2"/>
+        </function>
     </class>
 
     <class name="HTMLDelElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDelElement"
@@ -1107,7 +1109,9 @@
         <property name="readyState" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer"/>
         </property>
-        <property name="scripts" readable="true" writable="false"/>
+        <property name="scripts" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
         <property name="selection" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer"/>
         </property>

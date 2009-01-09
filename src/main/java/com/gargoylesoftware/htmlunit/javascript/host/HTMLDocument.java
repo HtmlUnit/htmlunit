@@ -48,6 +48,7 @@ import org.w3c.dom.DOMException;
 import org.xml.sax.SAXException;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.CookieManager;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
@@ -64,6 +65,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
+import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -87,7 +89,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919">
  * W3C Dom Level 1</a>
  */
-public class HTMLDocument extends Document {
+public class HTMLDocument extends Document implements ScriptableWithFallbackGetter {
 
     private static final long serialVersionUID = -7646789903352066465L;
 
@@ -953,9 +955,15 @@ public class HTMLDocument extends Document {
     @Override
     protected Object getWithPreemption(final String name) {
         final HtmlPage page = (HtmlPage) getDomNodeOrNull();
-        if (page == null) {
+        if (page == null || getBrowserVersion().isFirefox()) {
             return NOT_FOUND;
         }
+
+        return getIt(name);
+    }
+
+    private Object getIt(final String name) {
+        final HtmlPage page = (HtmlPage) getDomNodeOrNull();
         // Try to satisfy this request using a map-backed operation before punting and using XPath.
         // XPath operations are very expensive, and this method gets invoked quite a bit.
         // This little shortcut shaves ~35% off the build time (3 min -> 2 min, as of 8/10/2007).
@@ -991,6 +999,17 @@ public class HTMLDocument extends Document {
         }
         else if (size > 1) {
             return collection;
+        }
+        return NOT_FOUND;
+    }
+
+    /**
+     * Looks at attributes with the specified name.
+     * {@inheritDoc}
+     */
+    public Object getWithFallback(final String name) {
+        if (getBrowserVersion().isFirefox()) {
+            return getIt(name);
         }
         return NOT_FOUND;
     }
@@ -1168,7 +1187,9 @@ public class HTMLDocument extends Document {
         }
         try {
             final Event event = clazz.newInstance();
-            event.setTarget(this);
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CREATEEVENT_INITALIZES_TARGET)) {
+                event.setTarget(this);
+            }
             event.setEventType(eventType);
             event.setParentScope(getWindow());
             event.setPrototype(getPrototype(clazz));
@@ -1326,9 +1347,17 @@ public class HTMLDocument extends Document {
         final boolean ie = getBrowserVersion().isIE();
         if ((ie && !containsCaseInsensitive(EXECUTE_CMDS_IE, cmd))
             || (!ie && !containsCaseInsensitive(EXECUTE_CMDS_FF, cmd))) {
-            throw Context.reportRuntimeError("document.execCommand(): invalid command '" + cmd + "'");
+
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.EXECCOMMAND_THROWS_ON_WRONG_COMMAND)) {
+                throw Context.reportRuntimeError("document.execCommand(): invalid command '" + cmd + "'");
+            }
+            else {
+                return false;
+            }
         }
-        getLog().warn("Nothing done for execCommand(" + cmd + ", ...) (feature not implemented)");
+        else {
+            getLog().warn("Nothing done for execCommand(" + cmd + ", ...) (feature not implemented)");
+        }
         return true;
     }
 

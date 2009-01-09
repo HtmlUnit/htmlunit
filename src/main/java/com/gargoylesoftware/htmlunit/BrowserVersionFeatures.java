@@ -27,6 +27,17 @@ public enum BrowserVersionFeatures {
     /** */
     BLUR_BEFORE_ONCHANGE,
 
+    /**
+     * (Firefox only)
+     * Indicates that document.createEvent initializes the target property. This is what FF2 does but not FF3.
+     **/
+    CREATEEVENT_INITALIZES_TARGET,
+
+    /**
+     * Indicates if document.execCommand should throw when called with an illegal command.
+     **/
+    EXECCOMMAND_THROWS_ON_WRONG_COMMAND,
+
     /** */
     HTMLOPTION_PREVENT_DISABLED,
 
