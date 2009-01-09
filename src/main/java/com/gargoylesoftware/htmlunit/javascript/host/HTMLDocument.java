@@ -1351,13 +1351,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.EXECCOMMAND_THROWS_ON_WRONG_COMMAND)) {
                 throw Context.reportRuntimeError("document.execCommand(): invalid command '" + cmd + "'");
             }
-            else {
-                return false;
-            }
+            return false;
         }
-        else {
-            getLog().warn("Nothing done for execCommand(" + cmd + ", ...) (feature not implemented)");
-        }
+        getLog().warn("Nothing done for execCommand(" + cmd + ", ...) (feature not implemented)");
         return true;
     }
 

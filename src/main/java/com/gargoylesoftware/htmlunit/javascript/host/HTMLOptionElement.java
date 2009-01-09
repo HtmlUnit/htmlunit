@@ -85,7 +85,7 @@ public class HTMLOptionElement extends HTMLElement {
      * @return the value property
      */
     public String jsxGet_value() {
-        return getHtmlElementOrNull().getValueAttribute();
+        return getDomNodeOrNull().getValueAttribute();
     }
 
     /**
@@ -93,7 +93,7 @@ public class HTMLOptionElement extends HTMLElement {
      * @param newValue the value property
      */
     public void jsxSet_value(final String newValue) {
-        getHtmlElementOrNull().setValueAttribute(newValue);
+        getDomNodeOrNull().setValueAttribute(newValue);
     }
 
     /**
@@ -102,15 +102,15 @@ public class HTMLOptionElement extends HTMLElement {
      */
     @Override
     public String jsxGet_text() {
-        return getHtmlElementOrNull().getText();
+        return getDomNodeOrNull().getText();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public HtmlOption getHtmlElementOrNull() {
-        return (HtmlOption) super.getHtmlElementOrNull();
+    public HtmlOption getDomNodeOrNull() {
+        return (HtmlOption) super.getDomNodeOrNull();
     }
 
     /**
@@ -118,7 +118,7 @@ public class HTMLOptionElement extends HTMLElement {
      * @param newText the text property
      */
     public void jsxSet_text(final String newText) {
-        getHtmlElementOrNull().setText(newText);
+        getDomNodeOrNull().setText(newText);
     }
 
     /**
@@ -126,7 +126,7 @@ public class HTMLOptionElement extends HTMLElement {
      * @return the text property
      */
     public boolean jsxGet_selected() {
-        return getHtmlElementOrNull().isSelected();
+        return getDomNodeOrNull().isSelected();
     }
 
     /**
@@ -134,7 +134,7 @@ public class HTMLOptionElement extends HTMLElement {
      * @param selected the new selected property
      */
     public void jsxSet_selected(final boolean selected) {
-        getHtmlElementOrNull().setSelected(selected);
+        getDomNodeOrNull().setSelected(selected);
     }
 
     /**
@@ -142,7 +142,7 @@ public class HTMLOptionElement extends HTMLElement {
      * @return the text property
      */
     public boolean jsxGet_defaultSelected() {
-        return getHtmlElementOrNull().isDefaultSelected();
+        return getDomNodeOrNull().isDefaultSelected();
     }
 
     /**
@@ -150,7 +150,7 @@ public class HTMLOptionElement extends HTMLElement {
      * @return the label property
      */
     public String jsxGet_label() {
-        return getHtmlElementOrNull().getLabelAttribute();
+        return getDomNodeOrNull().getLabelAttribute();
     }
 
     /**
@@ -158,7 +158,7 @@ public class HTMLOptionElement extends HTMLElement {
      * @param label the new label property
      */
     public void jsxSet_label(final String label) {
-        getHtmlElementOrNull().setLabelAttribute(label);
+        getDomNodeOrNull().setLabelAttribute(label);
     }
 
     /**
@@ -172,7 +172,7 @@ public class HTMLOptionElement extends HTMLElement {
             final Attr att = new Attr();
             att.setPrototype(getPrototype(Attr.class));
             att.setParentScope(getWindow());
-            att.init(attributeName, getHtmlElementOrDie());
+            att.init(attributeName, getDomNodeOrDie());
             return att;
         }
 

@@ -41,7 +41,7 @@ public class HTMLLinkElement extends HTMLElement {
      * @param href href attribute value
      */
     public void jsxSet_href(final String href) {
-        getHtmlElementOrDie().setAttribute("href", href);
+        getDomNodeOrDie().setAttribute("href", href);
     }
 
     /**
@@ -50,7 +50,7 @@ public class HTMLLinkElement extends HTMLElement {
      * @throws Exception if an error occurs
      */
     public String jsxGet_href() throws Exception {
-        final HtmlLink link = (HtmlLink) getHtmlElementOrDie();
+        final HtmlLink link = (HtmlLink) getDomNodeOrDie();
         final String href = link.getHrefAttribute();
         if (href.length() == 0) {
             return href;
@@ -68,7 +68,7 @@ public class HTMLLinkElement extends HTMLElement {
      * @param rel rel attribute value
      */
     public void jsxSet_rel(final String rel) {
-        getHtmlElementOrDie().setAttribute("rel", rel);
+        getDomNodeOrDie().setAttribute("rel", rel);
     }
 
     /**
@@ -77,7 +77,7 @@ public class HTMLLinkElement extends HTMLElement {
      * @throws Exception if an error occurs
      */
     public String jsxGet_rel() throws Exception {
-        return ((HtmlLink) getHtmlElementOrDie()).getRelAttribute();
+        return ((HtmlLink) getDomNodeOrDie()).getRelAttribute();
     }
 
     /**
@@ -85,7 +85,7 @@ public class HTMLLinkElement extends HTMLElement {
      * @param type type attribute value
      */
     public void jsxSet_type(final String type) {
-        getHtmlElementOrDie().setAttribute("type", type);
+        getDomNodeOrDie().setAttribute("type", type);
     }
 
     /**
@@ -94,7 +94,7 @@ public class HTMLLinkElement extends HTMLElement {
      * @throws Exception if an error occurs
      */
     public String jsxGet_type() throws Exception {
-        return ((HtmlLink) getHtmlElementOrDie()).getTypeAttribute();
+        return ((HtmlLink) getDomNodeOrDie()).getTypeAttribute();
     }
 
 }

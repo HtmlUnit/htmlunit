@@ -409,9 +409,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             if (getBrowserVersion().isIE()) {
                 return null;
             }
-            else {
-                return Context.getUndefinedValue();
-            }
+            return Context.getUndefinedValue();
         }
         return object;
     }

@@ -824,7 +824,7 @@ public class WebClient implements Serializable {
                 if (getBrowserVersion().isIE()) {
                     final HTMLElement activeElement = (HTMLElement) jsWindow.jsxGet_document().jsxGet_activeElement();
                     if (activeElement != null) {
-                        ((HtmlPage) enclosedPage).setFocusedElement(activeElement.getHtmlElementOrDie(), true);
+                        ((HtmlPage) enclosedPage).setFocusedElement(activeElement.getDomNodeOrDie(), true);
                     }
                 }
                 else {

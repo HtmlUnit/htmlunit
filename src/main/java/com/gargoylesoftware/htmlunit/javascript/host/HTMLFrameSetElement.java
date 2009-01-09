@@ -39,7 +39,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * @param rows the rows attribute value
      */
     public void jsxSet_rows(final String rows) {
-        final HtmlFrameSet htmlFrameSet = (HtmlFrameSet) getHtmlElementOrNull();
+        final HtmlFrameSet htmlFrameSet = (HtmlFrameSet) getDomNodeOrNull();
         if (htmlFrameSet != null) {
             htmlFrameSet.setAttribute("rows", rows);
         }
@@ -52,7 +52,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
 
     public String jsxGet_rows() {
-        final HtmlFrameSet htmlFrameSet = (HtmlFrameSet) getHtmlElementOrNull();
+        final HtmlFrameSet htmlFrameSet = (HtmlFrameSet) getDomNodeOrNull();
         return htmlFrameSet.getRowsAttribute();
     }
 
@@ -62,7 +62,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * @param cols the cols attribute value
      */
     public void jsxSet_cols(final String cols) {
-        final HtmlFrameSet htmlFrameSet = (HtmlFrameSet) getHtmlElementOrNull();
+        final HtmlFrameSet htmlFrameSet = (HtmlFrameSet) getDomNodeOrNull();
         if (htmlFrameSet != null) {
             htmlFrameSet.setAttribute("cols", cols);
         }
@@ -74,7 +74,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * @return the cols attribute value
      */
     public String jsxGet_cols() {
-        final HtmlFrameSet htmlFrameSet = (HtmlFrameSet) getHtmlElementOrNull();
+        final HtmlFrameSet htmlFrameSet = (HtmlFrameSet) getDomNodeOrNull();
         return htmlFrameSet.getColsAttribute();
     }
 

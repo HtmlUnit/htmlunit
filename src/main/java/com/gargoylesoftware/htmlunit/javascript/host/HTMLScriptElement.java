@@ -43,7 +43,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @return the <tt>src</tt> attribute
      */
     public String jsxGet_src() {
-        return getHtmlElementOrDie().getAttribute("src");
+        return getDomNodeOrDie().getAttribute("src");
     }
 
     /**
@@ -51,7 +51,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @param src the <tt>src</tt> attribute
      */
     public void jsxSet_src(final String src) {
-        getHtmlElementOrDie().setAttribute("src", src);
+        getDomNodeOrDie().setAttribute("src", src);
     }
 
     /**
@@ -60,7 +60,7 @@ public class HTMLScriptElement extends HTMLElement {
      */
     @Override
     public String jsxGet_text() {
-        final DomNode firstChild = getHtmlElementOrDie().getFirstChild();
+        final DomNode firstChild = getDomNodeOrDie().getFirstChild();
         if (firstChild != null) {
             return firstChild.getNodeValue();
         }
@@ -72,7 +72,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @param text the <tt>text</tt> attribute
      */
     public void jsxSet_text(final String text) {
-        final DomNode htmlElement = getHtmlElementOrDie();
+        final DomNode htmlElement = getDomNodeOrDie();
         DomNode firstChild = htmlElement.getFirstChild();
         if (firstChild == null) {
             firstChild = new DomText(htmlElement.getPage(), text);
@@ -88,7 +88,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @return the <tt>type</tt> attribute
      */
     public String jsxGet_type() {
-        return getHtmlElementOrDie().getAttribute("type");
+        return getDomNodeOrDie().getAttribute("type");
     }
 
     /**
@@ -96,7 +96,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @param type the <tt>type</tt> attribute
      */
     public void jsxSet_type(final String type) {
-        getHtmlElementOrDie().setAttribute("type", type);
+        getDomNodeOrDie().setAttribute("type", type);
     }
 
     /**

@@ -123,7 +123,7 @@ public class Stylesheet extends SimpleScriptable {
      *        the specified style
      */
     void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final HTMLElement element) {
-        final HtmlElement e = element.getHtmlElementOrDie();
+        final HtmlElement e = element.getDomNodeOrDie();
         final CSSRuleList rules = getWrappedSheet().getCssRules();
         if (rules == null) {
             return;

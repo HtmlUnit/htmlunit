@@ -53,7 +53,7 @@ public class HTMLTableRowElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534377.aspx">MSDN Documentation</a>
      */
     public int jsxGet_rowIndex() {
-        final HtmlTableRow row = (HtmlTableRow) getHtmlElementOrDie();
+        final HtmlTableRow row = (HtmlTableRow) getDomNodeOrDie();
         final HtmlTable table = row.getEnclosingTable();
         return table.getRows().indexOf(row);
     }

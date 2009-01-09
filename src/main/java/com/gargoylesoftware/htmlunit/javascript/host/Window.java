@@ -870,7 +870,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         if (superValue == NOT_FOUND && getWebWindow() != null && getBrowserVersion().isIE()) {
             final Object element = jsxGet_document().jsxFunction_getElementById(name);
             if (element instanceof HTMLUnknownElement) {
-                final HtmlElement unknownElement = ((HTMLUnknownElement) element).getHtmlElementOrDie();
+                final HtmlElement unknownElement = ((HTMLUnknownElement) element).getDomNodeOrDie();
                 if (unknownElement.getNodeName().equals("xml")) {
                     final XMLDocument document = ActiveXObject.buildXMLDocument(getWebWindow());
                     document.setParentScope(this);

@@ -41,7 +41,7 @@ public class HTMLTableCellElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533549.aspx">MSDN Documentation</a>
      */
     public Integer jsxGet_cellIndex() {
-        final HtmlTableCell cell = (HtmlTableCell) getHtmlElementOrDie();
+        final HtmlTableCell cell = (HtmlTableCell) getDomNodeOrDie();
         final HtmlTableRow row = cell.getEnclosingRow();
         return new Integer(row.getCells().indexOf(cell));
     }

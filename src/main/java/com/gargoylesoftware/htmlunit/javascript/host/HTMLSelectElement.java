@@ -160,7 +160,7 @@ public class HTMLSelectElement extends FormField {
     protected void addBefore(final HTMLOptionElement newOptionObject, final HtmlOption beforeOption) {
         final HtmlSelect select = getHtmlSelect();
 
-        HtmlOption htmlOption = newOptionObject.getHtmlElementOrNull();
+        HtmlOption htmlOption = newOptionObject.getDomNodeOrNull();
         if (htmlOption == null) {
             htmlOption = (HtmlOption) HTMLParser.getFactory(HtmlOption.TAG_NAME).createElement(
                     select.getPage(), HtmlOption.TAG_NAME, null);
@@ -306,7 +306,7 @@ public class HTMLSelectElement extends FormField {
      * @return the HTML select object
      */
     private HtmlSelect getHtmlSelect() {
-        return (HtmlSelect) getHtmlElementOrDie();
+        return (HtmlSelect) getDomNodeOrDie();
     }
 
     /**
@@ -324,7 +324,7 @@ public class HTMLSelectElement extends FormField {
      */
     public int jsxGet_size() {
         int size = 0;
-        final String sizeAttribute = getHtmlElementOrDie().getAttribute("size");
+        final String sizeAttribute = getDomNodeOrDie().getAttribute("size");
         if (sizeAttribute != HtmlSelect.ATTRIBUTE_NOT_DEFINED && sizeAttribute != HtmlSelect.ATTRIBUTE_VALUE_EMPTY) {
             try {
                 size = Integer.parseInt(sizeAttribute);
@@ -341,7 +341,7 @@ public class HTMLSelectElement extends FormField {
      * @param size the <tt>size</tt> attribute
      */
     public void jsxSet_size(final String size) {
-        getHtmlElementOrDie().setAttribute("size", size);
+        getDomNodeOrDie().setAttribute("size", size);
     }
 
     /**
@@ -349,7 +349,7 @@ public class HTMLSelectElement extends FormField {
      * @return <tt>true</tt> if the <tt>multiple</tt> attribute is set
      */
     public boolean jsxGet_multiple() {
-        return getHtmlElementOrDie().hasAttribute("multiple");
+        return getDomNodeOrDie().hasAttribute("multiple");
     }
 
     /**
@@ -358,10 +358,10 @@ public class HTMLSelectElement extends FormField {
      */
     public void jsxSet_multiple(final boolean multiple) {
         if (multiple) {
-            getHtmlElementOrDie().setAttribute("multiple", "multiple");
+            getDomNodeOrDie().setAttribute("multiple", "multiple");
         }
         else {
-            getHtmlElementOrDie().removeAttribute("multiple");
+            getDomNodeOrDie().removeAttribute("multiple");
         }
     }
 

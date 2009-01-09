@@ -353,7 +353,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      */
     protected Map<String, StyleElement> getStyleMap(final boolean camelCase) {
         final Map<String, StyleElement> styleMap = new LinkedHashMap<String, StyleElement>();
-        final String styleAttribute = jsElement_.getHtmlElementOrDie().getAttribute("style");
+        final String styleAttribute = jsElement_.getDomNodeOrDie().getAttribute("style");
         for (final String token : styleAttribute.split(";")) {
             final int index = token.indexOf(":");
             if (index != -1) {
@@ -381,7 +381,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
             buffer.append(e.getValue());
             buffer.append(";");
         }
-        jsElement_.getHtmlElementOrDie().setAttribute("style", buffer.toString());
+        jsElement_.getDomNodeOrDie().setAttribute("style", buffer.toString());
     }
 
     /**
@@ -1208,7 +1208,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the actual text of the style
      */
     public String jsxGet_cssText() {
-        return jsElement_.getHtmlElementOrDie().getAttribute("style");
+        return jsElement_.getDomNodeOrDie().getAttribute("style");
     }
 
     /**
@@ -1216,7 +1216,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @param value the new text
      */
     public void jsxSet_cssText(final String value) {
-        jsElement_.getHtmlElementOrDie().setAttribute("style", value);
+        jsElement_.getDomNodeOrDie().setAttribute("style", value);
     }
 
     /**
@@ -4537,7 +4537,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
         if (jsElement_ == null) {
             return "CSSStyleDeclaration for 'null'"; // for instance on prototype
         }
-        final String style = jsElement_.getHtmlElementOrDie().getAttribute("style");
+        final String style = jsElement_.getDomNodeOrDie().getAttribute("style");
         return "CSSStyleDeclaration for '" + style + "'";
     }
 

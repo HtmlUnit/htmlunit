@@ -61,7 +61,7 @@ public class HTMLImageElement extends HTMLElement {
      */
     public void jsxSet_src(final String src) {
         src_ = src;
-        final HtmlImage img = (HtmlImage) getHtmlElementOrNull();
+        final HtmlImage img = (HtmlImage) getDomNodeOrNull();
         if (img != null) {
             img.setAttribute("src", src);
         }
@@ -76,7 +76,7 @@ public class HTMLImageElement extends HTMLElement {
      * @return the src attribute
      */
     public String jsxGet_src() {
-        final HtmlImage img = (HtmlImage) getHtmlElementOrNull();
+        final HtmlImage img = (HtmlImage) getDomNodeOrNull();
         if (img != null) {
             // This image has been added to the DOM tree.
             final String src = img.getSrcAttribute();
@@ -127,7 +127,7 @@ public class HTMLImageElement extends HTMLElement {
      */
     private class ImageOnLoadAction implements PostponedAction {
         public void execute() throws Exception {
-            final HtmlImage img = (HtmlImage) getHtmlElementOrNull();
+            final HtmlImage img = (HtmlImage) getDomNodeOrNull();
             if (img != null) {
                 img.doOnLoad();
             }

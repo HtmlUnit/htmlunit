@@ -50,7 +50,7 @@ public class HTMLLabelElement extends HTMLElement {
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms533872.aspx">MSDN Documentation</a>
      */
     public void jsxSet_htmlFor(final String id) {
-        ((HtmlLabel) getHtmlElementOrDie()).setAttribute("for", id);
+        ((HtmlLabel) getDomNodeOrDie()).setAttribute("for", id);
     }
 
     /**
@@ -58,7 +58,7 @@ public class HTMLLabelElement extends HTMLElement {
      * @throws IOException if this click triggers a page load that encounters problems
      */
     public void jsxFunction_click() throws IOException {
-        ((ClickableElement) getHtmlElementOrDie()).click();
+        ((ClickableElement) getDomNodeOrDie()).click();
     }
 
 }

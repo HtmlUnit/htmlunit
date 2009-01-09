@@ -92,11 +92,11 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * Commodity for <code>(HtmlInput) getHtmlElementOrDie()</code>.
+     * Commodity for <code>(HtmlInput) getDomNodeOrDie()</code>.
      * @return the bound HTML input
      */
     protected HtmlInput getHtmlInputOrDie() {
-        return (HtmlInput) getHtmlElementOrDie();
+        return (HtmlInput) getDomNodeOrDie();
     }
 
     /**
@@ -186,7 +186,7 @@ public class HTMLInputElement extends FormField {
      * @return the selection start
      */
     public int jsxGet_selectionStart() {
-        return ((HtmlTextInput) getHtmlElementOrDie()).getSelectionStart();
+        return ((HtmlTextInput) getDomNodeOrDie()).getSelectionStart();
     }
 
     /**
@@ -194,7 +194,7 @@ public class HTMLInputElement extends FormField {
      * @param start selection start
      */
     public void jsxSet_selectionStart(final int start) {
-        ((HtmlTextInput) getHtmlElementOrDie()).setSelectionStart(start);
+        ((HtmlTextInput) getDomNodeOrDie()).setSelectionStart(start);
     }
 
     /**
@@ -202,7 +202,7 @@ public class HTMLInputElement extends FormField {
      * @return the selection end
      */
     public int jsxGet_selectionEnd() {
-        return ((HtmlTextInput) getHtmlElementOrDie()).getSelectionEnd();
+        return ((HtmlTextInput) getDomNodeOrDie()).getSelectionEnd();
     }
 
     /**
@@ -210,7 +210,7 @@ public class HTMLInputElement extends FormField {
      * @param end selection end
      */
     public void jsxSet_selectionEnd(final int end) {
-        ((HtmlTextInput) getHtmlElementOrDie()).setSelectionEnd(end);
+        ((HtmlTextInput) getDomNodeOrDie()).setSelectionEnd(end);
     }
 
     /**
@@ -233,7 +233,7 @@ public class HTMLInputElement extends FormField {
      * @return the max length
      */
     public int jsxGet_maxLength() {
-        final String attrValue = getHtmlElementOrDie().getAttribute("maxLength");
+        final String attrValue = getDomNodeOrDie().getAttribute("maxLength");
         return NumberUtils.toInt(attrValue, -1);
     }
 
@@ -242,7 +242,7 @@ public class HTMLInputElement extends FormField {
      * @param length the new value
      */
     public void jsxSet_maxLength(final int length) {
-        getHtmlElementOrDie().setAttribute("maxLength", String.valueOf(length));
+        getDomNodeOrDie().setAttribute("maxLength", String.valueOf(length));
     }
 
     /**

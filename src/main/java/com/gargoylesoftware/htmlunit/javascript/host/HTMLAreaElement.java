@@ -39,6 +39,6 @@ public class HTMLAreaElement extends HTMLElement {
      */
     @Override
     public Object getDefaultValue(final Class< ? > hint) {
-        return HTMLAnchorElement.getDefaultValue(getHtmlElementOrDie());
+        return HTMLAnchorElement.getDefaultValue(getDomNodeOrDie());
     }
 }

@@ -213,7 +213,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param attrValue the attribute value
      */
     protected void createEventHandler(final String eventName, final String attrValue) {
-        final HtmlElement htmlElt = (HtmlElement) getDomNodeOrDie();
+        final HtmlElement htmlElt = getDomNodeOrDie();
         // TODO: check that it is an "allowed" event for the browser, and take care to the case
         final BaseFunction eventHandler = new EventHandler(htmlElt, eventName, attrValue);
         setEventHandler(eventName, eventHandler);
@@ -229,7 +229,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the ID of this element
      */
     public String jsxGet_id() {
-        return getHtmlElementOrDie().getId();
+        return getDomNodeOrDie().getId();
     }
 
     /**
@@ -237,7 +237,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param newId the new identifier of this element
      */
     public void jsxSet_id(final String newId) {
-        getHtmlElementOrDie().setId(newId);
+        getDomNodeOrDie().setId(newId);
     }
 
     /**
@@ -245,7 +245,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the ID of this element
      */
     public String jsxGet_title() {
-        return getHtmlElementOrDie().getAttribute("title");
+        return getDomNodeOrDie().getAttribute("title");
     }
 
     /**
@@ -253,7 +253,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param newTitle the new identifier of this element
      */
     public void jsxSet_title(final String newTitle) {
-        getHtmlElementOrDie().setAttribute("title", newTitle);
+        getDomNodeOrDie().setAttribute("title", newTitle);
     }
 
     /**
@@ -261,7 +261,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return true if this element is disabled
      */
     public boolean jsxGet_disabled() {
-        return getHtmlElementOrDie().hasAttribute("disabled");
+        return getDomNodeOrDie().hasAttribute("disabled");
     }
 
     /**
@@ -269,7 +269,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param disabled True if this is to be disabled
      */
     public void jsxSet_disabled(final boolean disabled) {
-        final HtmlElement element = getHtmlElementOrDie();
+        final HtmlElement element = getDomNodeOrDie();
         if (disabled) {
             element.setAttribute("disabled", "disabled");
         }
@@ -287,12 +287,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             if (getDomNodeOrDie().getPage() instanceof HtmlPage) {
                 return NOT_FOUND;
             }
-            return getHtmlElementOrDie().getNamespaceURI();
+            return getDomNodeOrDie().getNamespaceURI();
         }
         if (getDomNodeOrDie().getPage() instanceof HtmlPage) {
             return null;
         }
-        return getHtmlElementOrDie().getNamespaceURI();
+        return getDomNodeOrDie().getNamespaceURI();
     }
 
     /**
@@ -320,7 +320,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * {@inheritDoc}
      */
     public Object getWithFallback(final String name) {
-        final HtmlElement htmlElement = getHtmlElementOrNull();
+        final HtmlElement htmlElement = getDomNodeOrNull();
         if (htmlElement != null && isAttributeName(name)) {
             final String value = htmlElement.getAttribute(name);
             if (HtmlElement.ATTRIBUTE_NOT_DEFINED != value) {
@@ -372,7 +372,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the value of the specified attribute, <code>null</code> if the attribute is not defined
      */
     public String jsxFunction_getAttributeNS(final String namespaceURI, final String localName) {
-        return getHtmlElementOrDie().getAttributeNS(namespaceURI, localName);
+        return getDomNodeOrDie().getAttributeNS(namespaceURI, localName);
     }
 
     /**
@@ -385,7 +385,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return <code>true</code> if the node has this attribute
      */
     public boolean jsxFunction_hasAttributeNS(final String namespaceURI, final String localName) {
-        return getHtmlElementOrDie().hasAttributeNS(namespaceURI, localName);
+        return getDomNodeOrDie().hasAttributeNS(namespaceURI, localName);
     }
 
     /**
@@ -399,7 +399,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     @Override
     public void jsxFunction_setAttribute(String name, final String value) {
         name = fixAttributeName(name);
-        getHtmlElementOrDie().setAttribute(name, value);
+        getDomNodeOrDie().setAttribute(name, value);
 
         //FF: call corresponding event handler jsxSet_onxxx if found
         if (getBrowserVersion().isFirefox()) {
@@ -428,7 +428,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param value the new attribute value
      */
     public void jsxFunction_setAttributeNS(final String namespaceURI, final String qualifiedName, final String value) {
-        getHtmlElementOrDie().setAttributeNS(namespaceURI, qualifiedName, value);
+        getDomNodeOrDie().setAttributeNS(namespaceURI, qualifiedName, value);
     }
 
     /**
@@ -436,7 +436,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param name the name of the attribute to remove
      */
     public void jsxFunction_removeAttribute(final String name) {
-        getHtmlElementOrDie().removeAttribute(name);
+        getDomNodeOrDie().removeAttribute(name);
         if (getBrowserVersion().isIE()) {
             delete(name);
         }
@@ -448,7 +448,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param localName the local name of the attribute to remove
      */
     public void jsxFunction_removeAttributeNS(final String namespaceURI, final String localName) {
-        getHtmlElementOrDie().removeAttributeNS(namespaceURI, localName);
+        getDomNodeOrDie().removeAttributeNS(namespaceURI, localName);
     }
 
     /**
@@ -471,7 +471,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final String value = newAtt.jsxGet_value();
         final Attr replacedAtt = (Attr) jsxFunction_getAttributeNode(name);
         replacedAtt.detachFromParent();
-        getHtmlElementOrDie().setAttribute(name, value);
+        getDomNodeOrDie().setAttribute(name, value);
         return replacedAtt;
     }
 
@@ -510,7 +510,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the class name
      */
     public Object jsxGet_className() {
-        return getHtmlElementOrDie().getAttribute("class");
+        return getDomNodeOrDie().getAttribute("class");
     }
 
     /**
@@ -554,7 +554,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param className - the new class name
      */
     public void jsxSet_className(final String className) {
-        getHtmlElementOrDie().setAttribute("class", className);
+        getDomNodeOrDie().setAttribute("class", className);
     }
 
     /**
@@ -1417,7 +1417,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             return false;
         }
         final HTMLElement target = (HTMLElement) event.jsxGet_target();
-        return getHtmlElementOrDie().isAncestorOf(target.getHtmlElementOrDie());
+        return getDomNodeOrDie().isAncestorOf(target.getDomNodeOrDie());
     }
 
     /**
@@ -1571,7 +1571,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     public Object jsxGet_offsetParent() {
         Object offsetParent = Context.getUndefinedValue();
-        DomNode currentElement = getHtmlElementOrDie();
+        DomNode currentElement = getDomNodeOrDie();
 
         final HTMLElement htmlElement = (HTMLElement) currentElement.getScriptObject();
         final ComputedCSSStyleDeclaration style = htmlElement.jsxGet_currentStyle();
@@ -1614,7 +1614,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @Override
     public String toString() {
-        return "HTMLElement for " + getHtmlElementOrNull();
+        return "HTMLElement for " + getDomNodeOrNull();
     }
 
     /**
@@ -1773,7 +1773,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     public boolean jsxFunction_dispatchEvent(final Event event) {
         event.setTarget(this);
-        final HtmlElement element = getHtmlElementOrDie();
+        final HtmlElement element = getDomNodeOrDie();
         if (event instanceof MouseEvent && element instanceof ClickableElement) {
             if (event.jsxGet_type().equals(MouseEvent.TYPE_CLICK)) {
                 try {
@@ -1803,30 +1803,26 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns the HTML element that corresponds to this JavaScript object or throw an exception
-     * if one cannot be found.
-     * @return the HTML element
-     * @exception IllegalStateException If the HTML element could not be found.
+     * {@inheritDoc}
      */
-    public final HtmlElement getHtmlElementOrDie() throws IllegalStateException {
-        return (HtmlElement) getDomNodeOrDie();
+    @Override
+    public final HtmlElement getDomNodeOrDie() {
+        return (HtmlElement) super.getDomNodeOrDie();
     }
 
     /**
-     * Returns the HTML element that corresponds to this JavaScript object
-     * or null if an element hasn't been set.
-     * @return the HTML element or null
+     * {@inheritDoc}
      */
-    public HtmlElement getHtmlElementOrNull() {
-        return (HtmlElement) getDomNodeOrNull();
+    @Override
+    public HtmlElement getDomNodeOrNull() {
+        return (HtmlElement) super.getDomNodeOrNull();
     }
 
     /**
      * Remove focus from this element.
      */
     public void jsxFunction_blur() {
-        final HtmlElement element = (HtmlElement) getDomNodeOrDie();
-        element.blur();
+        getDomNodeOrDie().blur();
     }
 
     /**
@@ -1858,8 +1854,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Sets the focus to this element.
      */
     public void jsxFunction_focus() {
-        final HtmlElement element = (HtmlElement) getDomNodeOrDie();
-        element.focus();
+        getDomNodeOrDie().focus();
     }
 
     /**
@@ -1871,7 +1866,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final HTMLDocument document = window.jsxGet_document();
         document.setActiveElement(this);
         if (window.getWebWindow() == window.getWebWindow().getWebClient().getCurrentWindow()) {
-            final HtmlElement element = (HtmlElement) getDomNodeOrDie();
+            final HtmlElement element = getDomNodeOrDie();
             ((HtmlPage) element.getPage()).setFocusedElement(element);
         }
     }

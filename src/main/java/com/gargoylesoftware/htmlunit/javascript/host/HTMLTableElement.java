@@ -54,7 +54,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the table's caption element
      */
     public Object jsxGet_caption() {
-        final List<HtmlElement> captions = getHtmlElementOrDie().getHtmlElementsByTagName("caption");
+        final List<HtmlElement> captions = getDomNodeOrDie().getHtmlElementsByTagName("caption");
         if (captions.isEmpty()) {
             return null;
         }
@@ -67,7 +67,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the table's tfoot element
      */
     public Object jsxGet_tFoot() {
-        final List<HtmlElement> tfoots = getHtmlElementOrDie().getHtmlElementsByTagName("tfoot");
+        final List<HtmlElement> tfoots = getDomNodeOrDie().getHtmlElementsByTagName("tfoot");
         if (tfoots.isEmpty()) {
             return null;
         }
@@ -80,7 +80,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the table's thead element
      */
     public Object jsxGet_tHead() {
-        final List<HtmlElement> theads = getHtmlElementOrDie().getHtmlElementsByTagName("thead");
+        final List<HtmlElement> theads = getDomNodeOrDie().getHtmlElementsByTagName("thead");
         if (theads.isEmpty()) {
             return null;
         }
@@ -107,7 +107,7 @@ public class HTMLTableElement extends RowContainer {
      * @return a newly added caption if no caption exists, or the first existing caption
      */
     public Object jsxFunction_createCaption() {
-        return getScriptableFor(getHtmlElementOrDie().appendChildIfNoneExists("caption"));
+        return getScriptableFor(getDomNodeOrDie().appendChildIfNoneExists("caption"));
     }
 
     /**
@@ -118,7 +118,7 @@ public class HTMLTableElement extends RowContainer {
      * @return a newly added caption if no caption exists, or the first existing caption
      */
     public Object jsxFunction_createTFoot() {
-        return getScriptableFor(getHtmlElementOrDie().appendChildIfNoneExists("tfoot"));
+        return getScriptableFor(getDomNodeOrDie().appendChildIfNoneExists("tfoot"));
     }
 
     /**
@@ -129,7 +129,7 @@ public class HTMLTableElement extends RowContainer {
      * @return a newly added caption if no caption exists, or the first existing caption
      */
     public Object jsxFunction_createTHead() {
-        return getScriptableFor(getHtmlElementOrDie().appendChildIfNoneExists("thead"));
+        return getScriptableFor(getDomNodeOrDie().appendChildIfNoneExists("thead"));
     }
 
     /**
@@ -139,7 +139,7 @@ public class HTMLTableElement extends RowContainer {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536405.aspx">MSDN Documentation</a>
      */
     public void jsxFunction_deleteCaption() {
-        getHtmlElementOrDie().removeChild("caption", 0);
+        getDomNodeOrDie().removeChild("caption", 0);
     }
 
     /**
@@ -149,7 +149,7 @@ public class HTMLTableElement extends RowContainer {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536409.aspx">MSDN Documentation</a>
      */
     public void jsxFunction_deleteTFoot() {
-        getHtmlElementOrDie().removeChild("tfoot", 0);
+        getDomNodeOrDie().removeChild("tfoot", 0);
     }
 
     /**
@@ -159,7 +159,7 @@ public class HTMLTableElement extends RowContainer {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536410.aspx">MSDN Documentation</a>
      */
     public void jsxFunction_deleteTHead() {
-        getHtmlElementOrDie().removeChild("thead", 0);
+        getDomNodeOrDie().removeChild("thead", 0);
     }
 
     /**
@@ -187,9 +187,9 @@ public class HTMLTableElement extends RowContainer {
     protected Object insertRow(final int index) {
         // check if a tbody should be created
         final List< ? > rowContainers =
-            getHtmlElementOrDie().getByXPath("//tbody | //thead | //tfoot");
+            getDomNodeOrDie().getByXPath("//tbody | //thead | //tfoot");
         if (rowContainers.isEmpty() || index == 0) {
-            final HtmlElement tBody = getHtmlElementOrDie().appendChildIfNoneExists("tbody");
+            final HtmlElement tBody = getDomNodeOrDie().appendChildIfNoneExists("tbody");
             return ((RowContainer) getScriptableFor(tBody)).insertRow(0);
         }
         return super.insertRow(index);
@@ -200,7 +200,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the <tt>width</tt> attribute
      */
     public String jsxGet_width() {
-        return getHtmlElementOrDie().getAttribute("width");
+        return getDomNodeOrDie().getAttribute("width");
     }
 
     /**
@@ -208,7 +208,7 @@ public class HTMLTableElement extends RowContainer {
      * @param width the <tt>width</tt> attribute
      */
     public void jsxSet_width(final String width) {
-        getHtmlElementOrDie().setAttribute("width", width);
+        getDomNodeOrDie().setAttribute("width", width);
     }
 
     /**
@@ -216,7 +216,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the <tt>cellSpacing</tt> attribute
      */
     public String jsxGet_cellSpacing() {
-        return getHtmlElementOrDie().getAttribute("cellspacing");
+        return getDomNodeOrDie().getAttribute("cellspacing");
     }
 
     /**
@@ -224,7 +224,7 @@ public class HTMLTableElement extends RowContainer {
      * @param cellSpacing the <tt>cellSpacing</tt> attribute
      */
     public void jsxSet_cellSpacing(final String cellSpacing) {
-        getHtmlElementOrDie().setAttribute("cellspacing", cellSpacing);
+        getDomNodeOrDie().setAttribute("cellspacing", cellSpacing);
     }
 
     /**
@@ -232,7 +232,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the <tt>cellPadding</tt> attribute
      */
     public String jsxGet_cellPadding() {
-        return getHtmlElementOrDie().getAttribute("cellpadding");
+        return getDomNodeOrDie().getAttribute("cellpadding");
     }
 
     /**
@@ -240,6 +240,6 @@ public class HTMLTableElement extends RowContainer {
      * @param cellPadding the <tt>cellPadding</tt> attribute
      */
     public void jsxSet_cellPadding(final String cellPadding) {
-        getHtmlElementOrDie().setAttribute("cellpadding", cellPadding);
+        getDomNodeOrDie().setAttribute("cellpadding", cellPadding);
     }
 }

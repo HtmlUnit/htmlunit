@@ -41,9 +41,9 @@ public class HTMLUnknownElement extends HTMLElement {
      */
     @Override
     public String jsxGet_nodeName() {
-        final Page page = getHtmlElementOrDie().getPage();
+        final Page page = getDomNodeOrDie().getPage();
         if (page instanceof XmlPage || (getBrowserVersion().isIE()
-            && ((HtmlPage) page).getNamespaces().containsKey(getHtmlElementOrDie().getPrefix()))) {
+            && ((HtmlPage) page).getNamespaces().containsKey(getDomNodeOrDie().getPrefix()))) {
             return getDomNodeOrDie().getLocalName();
         }
         return super.jsxGet_nodeName();

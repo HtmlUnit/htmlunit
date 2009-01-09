@@ -89,7 +89,7 @@ public class HTMLFrameElement extends HTMLElement {
     }
 
     private BaseFrame getFrame() {
-        return (BaseFrame) getHtmlElementOrDie();
+        return (BaseFrame) getDomNodeOrDie();
     }
 
     /**

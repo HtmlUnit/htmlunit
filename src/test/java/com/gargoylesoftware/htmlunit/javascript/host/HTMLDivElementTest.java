@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class HTMLDivElementTest extends WebTestCase {
@@ -35,8 +36,7 @@ public class HTMLDivElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = "no",
-            IE = "yes")
+    @Alerts(FF = "no", IE = "yes")
     public void doScroll() throws Exception {
         final String html =
             "<html>\n"
@@ -56,8 +56,44 @@ public class HTMLDivElementTest extends WebTestCase {
             + "  </head>\n"
             + "  <body onload='test()'><div id='d'>abc</div></body>\n"
             + "</html>";
-
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = {"", "hello", "left", "hi", "right" },
+            IE = {"", "error", "",
+            "left", "error", "left", "right" })
+    public void align() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var div = document.getElementById('d');\n"
+            + "        alert(div.align);\n"
+            + "        set(div, 'hello');\n"
+            + "        alert(div.align);\n"
+            + "        set(div, 'left');\n"
+            + "        alert(div.align);\n"
+            + "        set(div, 'hi');\n"
+            + "        alert(div.align);\n"
+            + "        set(div, 'right');\n"
+            + "        alert(div.align);\n"
+            + "      }\n"
+            + "      function set(e, value) {\n"
+            + "        try {\n"
+            + "          e.align = value;\n"
+            + "        } catch (e) {\n"
+            + "          alert('error');\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'><div id='d'>abc</div></body>\n"
+            + "</html>";
+        loadPageWithAlerts(html);
+    }
 }

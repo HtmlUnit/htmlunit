@@ -196,7 +196,7 @@ public class HtmlTableRowTest extends WebTestCase {
         final String cmd = "document.getElementById('cell')";
         final Object object = page_.executeJavaScript(cmd).getJavaScriptResult();
 
-        final HtmlElement cellElement = ((HTMLElement) object).getHtmlElementOrDie();
+        final HtmlElement cellElement = ((HTMLElement) object).getDomNodeOrDie();
         assertSame(cell_, cellElement);
     }
 

@@ -63,7 +63,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @param href the <tt>href</tt> property value
      */
     public void jsxSet_href(final String href) {
-        getHtmlElementOrDie().setAttribute("href", href);
+        getDomNodeOrDie().setAttribute("href", href);
     }
 
     /**
@@ -75,7 +75,7 @@ public class HTMLAnchorElement extends HTMLElement {
             return getUrl().toString();
         }
         catch (final MalformedURLException e) {
-            return ((HtmlAnchor) getHtmlElementOrDie()).getHrefAttribute();
+            return ((HtmlAnchor) getDomNodeOrDie()).getHrefAttribute();
         }
     }
 
@@ -84,7 +84,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @param name name attribute value
      */
     public void jsxSet_name(final String name) {
-        getHtmlElementOrDie().setAttribute("name", name);
+        getDomNodeOrDie().setAttribute("name", name);
     }
 
     /**
@@ -92,7 +92,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @return the name property
      */
     public String jsxGet_name() {
-        return getHtmlElementOrDie().getAttribute("name");
+        return getDomNodeOrDie().getAttribute("name");
     }
 
     /**
@@ -100,7 +100,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @param target target attribute value
      */
     public void jsxSet_target(final String target) {
-        getHtmlElementOrDie().setAttribute("target", target);
+        getDomNodeOrDie().setAttribute("target", target);
     }
 
     /**
@@ -108,7 +108,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @return the href property
      */
     public String jsxGet_target() {
-        return getHtmlElementOrDie().getAttribute("target");
+        return getDomNodeOrDie().getAttribute("target");
     }
 
     /**
@@ -117,7 +117,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @throws MalformedURLException if an error occurs
      */
     private URL getUrl() throws MalformedURLException {
-        final HtmlAnchor anchor = (HtmlAnchor) getHtmlElementOrDie();
+        final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
         return ((HtmlPage) anchor.getPage()).getFullyQualifiedUrl(anchor.getHrefAttribute());
     }
 
@@ -126,7 +126,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @param url the new value of the <tt>href</tt> attribute
      */
     private void setUrl(final URL url) {
-        getHtmlElementOrDie().setAttribute("href", url.toString());
+        getDomNodeOrDie().setAttribute("href", url.toString());
     }
 
     /**
@@ -323,7 +323,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @Override
     public Object getDefaultValue(final Class< ? > hint) {
-        return getDefaultValue(getHtmlElementOrDie());
+        return getDefaultValue(getDomNodeOrDie());
     }
 
     static String getDefaultValue(final HtmlElement element) {
@@ -363,6 +363,6 @@ public class HTMLAnchorElement extends HTMLElement {
      * @throws IOException if this click triggers a page load that encounters problems
      */
     public void jsxFunction_click() throws IOException {
-        ((ClickableElement) getHtmlElementOrDie()).click();
+        ((ClickableElement) getDomNodeOrDie()).click();
     }
 }

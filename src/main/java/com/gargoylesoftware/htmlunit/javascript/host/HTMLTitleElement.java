@@ -41,7 +41,7 @@ public class HTMLTitleElement extends HTMLElement {
      */
     @Override
     public String jsxGet_text() {
-        final DomNode firstChild = getHtmlElementOrDie().getFirstChild();
+        final DomNode firstChild = getDomNodeOrDie().getFirstChild();
         if (firstChild != null) {
             return firstChild.getNodeValue();
         }
@@ -53,7 +53,7 @@ public class HTMLTitleElement extends HTMLElement {
      * @param text the <tt>text</tt> attribute
      */
     public void jsxSet_text(final String text) {
-        final DomNode htmlElement = getHtmlElementOrDie();
+        final DomNode htmlElement = getDomNodeOrDie();
         DomNode firstChild = htmlElement.getFirstChild();
         if (firstChild == null) {
             firstChild = new DomText(htmlElement.getPage(), text);

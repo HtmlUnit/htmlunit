@@ -106,7 +106,7 @@ public class SimpleScriptable extends ScriptableObject {
      * @return the DOM node
      * @exception IllegalStateException If the DOM node could not be found.
      */
-    public final DomNode getDomNodeOrDie() throws IllegalStateException {
+    public DomNode getDomNodeOrDie() throws IllegalStateException {
         if (domNode_ == null) {
             final String clazz = getClass().getName();
             throw new IllegalStateException("DomNode has not been set for this SimpleScriptable: " + clazz);
@@ -119,7 +119,7 @@ public class SimpleScriptable extends ScriptableObject {
      * or null if a node hasn't been set.
      * @return the DOM node or null
      */
-    public final DomNode getDomNodeOrNull() {
+    public DomNode getDomNodeOrNull() {
         return domNode_;
     }
 

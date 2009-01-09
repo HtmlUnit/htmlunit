@@ -58,7 +58,7 @@ public class FormField extends HTMLElement {
      * @return the value of this attribute
      */
     public String jsxGet_value() {
-        return getHtmlElementOrDie().getAttribute("value");
+        return getDomNodeOrDie().getAttribute("value");
     }
 
     /**
@@ -67,7 +67,7 @@ public class FormField extends HTMLElement {
      * @param newValue  the new value
      */
     public void jsxSet_value(final String newValue) {
-        getHtmlElementOrDie().setAttribute("value", newValue);
+        getDomNodeOrDie().setAttribute("value", newValue);
     }
 
     /**
@@ -76,7 +76,7 @@ public class FormField extends HTMLElement {
      * @return the value of this attribute
      */
     public String jsxGet_name() {
-        return getHtmlElementOrDie().getAttribute("name");
+        return getDomNodeOrDie().getAttribute("name");
     }
 
     /**
@@ -85,7 +85,7 @@ public class FormField extends HTMLElement {
      * @param newName  the new name
      */
     public void jsxSet_name(final String newName) {
-        getHtmlElementOrDie().setAttribute("name", newName);
+        getDomNodeOrDie().setAttribute("name", newName);
     }
 
     /**
@@ -94,7 +94,7 @@ public class FormField extends HTMLElement {
      * @return the value of this attribute
      */
     public HTMLFormElement jsxGet_form() {
-        final HtmlForm form = getHtmlElementOrDie().getEnclosingForm();
+        final HtmlForm form = getDomNodeOrDie().getEnclosingForm();
         if (form == null) {
             return null;
         }
@@ -107,7 +107,7 @@ public class FormField extends HTMLElement {
      * @return the value of this attribute
      */
     public String jsxGet_type() {
-        return getHtmlElementOrDie().getAttribute("type");
+        return getDomNodeOrDie().getAttribute("type");
     }
 
     /**
@@ -131,7 +131,7 @@ public class FormField extends HTMLElement {
      * @throws IOException if this click triggers a page load that encounters problems
      */
     public void jsxFunction_click() throws IOException {
-        ((ClickableElement) getHtmlElementOrDie()).click();
+        ((ClickableElement) getDomNodeOrDie()).click();
     }
 
     /**
@@ -141,7 +141,7 @@ public class FormField extends HTMLElement {
     public int jsxGet_tabIndex() {
         int index = 0;
         try {
-            index = Integer.parseInt(getHtmlElementOrDie().getAttribute("tabindex"));
+            index = Integer.parseInt(getDomNodeOrDie().getAttribute("tabindex"));
         }
         catch (final Exception e) {
             //ignore

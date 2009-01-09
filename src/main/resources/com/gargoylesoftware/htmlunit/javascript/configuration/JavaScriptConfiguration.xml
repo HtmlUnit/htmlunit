@@ -1025,7 +1025,7 @@
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class name="HTMLDivElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDivElement"
         JSObject="true">
-        <property name="align" notImplemented="true" readable="true" writable="true"/>
+        <property name="align" readable="true" writable="true"/>
         <property name="dataFld" notImplemented="true" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
