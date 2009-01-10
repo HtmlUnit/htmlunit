@@ -5,7 +5,10 @@
     </properties>
 
     <body>
-        <release version="2.5" date="?" description="Bugfixes">
+        <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
+            <action type="add" dev="asashour" issue="2495285">
+                JavaScript: add initial support for TextRange.moveStart() and .moveEnd().
+            </action>
             <action type="add" dev="mguillem">
                 JavaScript: add support for document.getElementsByClassName (FF3 only).
             </action>

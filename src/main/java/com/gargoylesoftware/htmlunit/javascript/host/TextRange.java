@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Undefined;
 import org.w3c.dom.ranges.Range;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -150,5 +152,65 @@ public class TextRange extends SimpleScriptable {
      */
     public void jsxFunction_select() {
         // nothing yet
+    }
+
+    /**
+     * Changes the start position of the range.
+     * @param unit specifies the units to move
+     * @param count the number of units to move
+     * @return the number of units moved
+     */
+    public int jsxFunction_moveStart(final String unit, final Object count) {
+        if ("characters".equals(unit)) {
+            getLog().info("moveStart('" + unit + "' is not yet supported.");
+        }
+        int c = 1;
+        if (count != Undefined.instance) {
+            c = (int) Context.toNumber(count);
+        }
+        final HtmlPage page = (HtmlPage) getWindow().getDomNodeOrDie();
+        final Range selection = page.getSelection();
+        // currently only working for text input and textarea
+        if (selection.getStartContainer() == selection.getEndContainer()) {
+            if (selection.getStartContainer() instanceof HtmlTextInput) {
+                final HtmlTextInput input = (HtmlTextInput) selection.getStartContainer();
+                selection.setStart(input, selection.getStartOffset() + c);
+            }
+            else if (selection.getStartContainer() instanceof HtmlTextArea) {
+                final HtmlTextArea input = (HtmlTextArea) selection.getStartContainer();
+                selection.setStart(input, selection.getStartOffset() + c);
+            }
+        }
+        return c;
+    }
+
+    /**
+     * Changes the end position of the range.
+     * @param unit specifies the units to move
+     * @param count the number of units to move
+     * @return the number of units moved
+     */
+    public int jsxFunction_moveEnd(final String unit, final Object count) {
+        if ("characters".equals(unit)) {
+            getLog().info("moveStart('" + unit + "' is not yet supported.");
+        }
+        int c = 1;
+        if (count != Undefined.instance) {
+            c = (int) Context.toNumber(count);
+        }
+        final HtmlPage page = (HtmlPage) getWindow().getDomNodeOrDie();
+        final Range selection = page.getSelection();
+        // currently only working for text input and textarea
+        if (selection.getStartContainer() == selection.getEndContainer()) {
+            if (selection.getStartContainer() instanceof HtmlTextInput) {
+                final HtmlTextInput input = (HtmlTextInput) selection.getStartContainer();
+                selection.setEnd(input, selection.getEndOffset() + c);
+            }
+            else if (selection.getStartContainer() instanceof HtmlTextArea) {
+                final HtmlTextArea input = (HtmlTextArea) selection.getStartContainer();
+                selection.setEnd(input, selection.getEndOffset() + c);
+            }
+        }
+        return c;
     }
 }

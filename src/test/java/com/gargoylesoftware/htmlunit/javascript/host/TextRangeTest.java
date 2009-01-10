@@ -151,7 +151,6 @@ public class TextRangeTest extends WebTestCase {
     @Test
     @Browsers(Browser.IE)
     @Alerts({ "hello", "hell", "ell" })
-    @NotYetImplemented
     public void moveEnd() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

@@ -2267,6 +2267,8 @@
         <property name="text" readable="true" writable="true"/>
         <function name="collapse"/>
         <function name="duplicate"/>
+        <function name="moveEnd"/>
+        <function name="moveStart"/>
         <function name="parentElement"/>
         <function name="select"/>
     </class>
