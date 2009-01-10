@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+
 /**
  * The JavaScript object that represents a button (&lt;button type=...&gt;).
  *
@@ -37,6 +38,4 @@ public class HTMLButtonElement extends FormField {
      */
     public void jsConstructor() {
     }
-
 }
-

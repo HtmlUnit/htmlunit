@@ -42,7 +42,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
@@ -1774,10 +1773,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public boolean jsxFunction_dispatchEvent(final Event event) {
         event.setTarget(this);
         final HtmlElement element = getDomNodeOrDie();
-        if (event instanceof MouseEvent && element instanceof ClickableElement) {
+        if (event instanceof MouseEvent) {
             if (event.jsxGet_type().equals(MouseEvent.TYPE_CLICK)) {
                 try {
-                    ((ClickableElement) element).click(event);
+                    element.click(event);
                 }
                 catch (final IOException e) {
                     throw Context.reportRuntimeError("Error calling click(): " + e.getMessage());
@@ -1785,8 +1784,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             }
             else if (event.jsxGet_type().equals(MouseEvent.TYPE_DBL_CLICK)) {
                 try {
-                    ((ClickableElement) element).dblClick(event.jsxGet_shiftKey(), event.jsxGet_ctrlKey(),
-                            event.jsxGet_altKey());
+                    element.dblClick(event.jsxGet_shiftKey(), event.jsxGet_ctrlKey(), event.jsxGet_altKey());
                 }
                 catch (final IOException e) {
                     throw Context.reportRuntimeError("Error calling dblClick(): " + e.getMessage());
@@ -1902,5 +1900,13 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     public Object jsxGet_filters() {
         return this; // return anything, what matters is that it is not null
+    }
+
+    /**
+     * Click this element. This simulates the action of the user clicking with the mouse.
+     * @throws IOException if this click triggers a page load that encounters problems
+     */
+    public void jsxFunction_click() throws IOException {
+        getDomNodeOrDie().click();
     }
 }

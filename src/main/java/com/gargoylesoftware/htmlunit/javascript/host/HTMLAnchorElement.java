@@ -14,13 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -356,13 +354,5 @@ public class HTMLAnchorElement extends HTMLElement {
         }
 
         return response;
-    }
-
-    /**
-     * Click this element. This simulates the action of the user clicking with the mouse.
-     * @throws IOException if this click triggers a page load that encounters problems
-     */
-    public void jsxFunction_click() throws IOException {
-        ((ClickableElement) getDomNodeOrDie()).click();
     }
 }

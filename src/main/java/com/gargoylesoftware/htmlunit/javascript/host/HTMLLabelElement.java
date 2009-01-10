@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.io.IOException;
-
-import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlLabel;
 
 /**
@@ -52,13 +49,4 @@ public class HTMLLabelElement extends HTMLElement {
     public void jsxSet_htmlFor(final String id) {
         ((HtmlLabel) getDomNodeOrDie()).setAttribute("for", id);
     }
-
-    /**
-     * Click this element. This simulates the action of the user clicking with the mouse.
-     * @throws IOException if this click triggers a page load that encounters problems
-     */
-    public void jsxFunction_click() throws IOException {
-        ((ClickableElement) getDomNodeOrDie()).click();
-    }
-
 }

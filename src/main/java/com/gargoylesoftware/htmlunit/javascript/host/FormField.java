@@ -14,11 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.io.IOException;
-
 import org.mozilla.javascript.Function;
 
-import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -124,14 +121,6 @@ public class FormField extends HTMLElement {
      */
     public Function jsxGet_onchange() {
         return getEventHandler("onchange");
-    }
-
-    /**
-     * Click this element. This simulates the action of the user clicking with the mouse.
-     * @throws IOException if this click triggers a page load that encounters problems
-     */
-    public void jsxFunction_click() throws IOException {
-        ((ClickableElement) getDomNodeOrDie()).click();
     }
 
     /**
