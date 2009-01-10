@@ -39,7 +39,7 @@ public class TextRangeTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.IE)
-    @Alerts(IE = { "", "bla bla", "bla blabli bli" })
+    @Alerts({ "", "bla bla", "bla blabli bli" })
     public void text() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -70,7 +70,7 @@ public class TextRangeTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.IE)
-    @Alerts(IE = "BODY")
+    @Alerts("BODY")
     @NotYetImplemented
     public void parentElement() throws Exception {
         final String html = "<html>\n"
@@ -94,7 +94,7 @@ public class TextRangeTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.IE)
-    @Alerts(IE = { "hello", "" })
+    @Alerts({ "hello", "" })
     public void collapse() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -144,4 +144,38 @@ public class TextRangeTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.IE)
+    @Alerts({ "hello", "hell", "ell" })
+    @NotYetImplemented
+    public void moveEnd() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <title>test</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var f = document.getElementById('foo');\n"
+            + "      f.focus();\n"
+            + "      f.select();\n"
+            + "      var r = document.selection.createRange();\n"
+            + "      alert(r.text);\n"
+            + "      r.moveEnd('character', -1);\n"
+            + "      alert(r.text);\n"
+            + "      r.moveStart('character');\n"
+            + "      alert(r.text);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<textarea id='foo'>hello</textarea>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts(html);
+    }
+
 }

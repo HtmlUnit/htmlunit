@@ -250,9 +250,9 @@ public class CookieManagerTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void serverModifiesCookie() throws Exception {
+    public void cookie2() throws Exception {
         final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
-        servlets.put("/test", ServerModifiesCookieServlet.class);
+        servlets.put("/test", Cookie2Servlet.class);
         startWebServer("./", null, servlets);
 
         final String[] expectedAlerts = {"first=1", "first=1; second=2"};
@@ -269,9 +269,9 @@ public class CookieManagerTest extends WebServerTestCase {
     }
 
     /**
-     * Servlet for {@link #serverModifiesCookie()}.
+     * Servlet for {@link #cookie2()}.
      */
-    public static class ServerModifiesCookieServlet extends HttpServlet {
+    public static class Cookie2Servlet extends HttpServlet {
         private static final long serialVersionUID = -5384006255925285388L;
         private int nbCalls_ = 0;
 
