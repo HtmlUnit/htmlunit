@@ -71,7 +71,7 @@ public class AttributesTest extends TestCase {
             "HtmlButtonInput", "HtmlCaption", "HtmlCenter",
             "HtmlCheckBoxInput", "HtmlDefinitionDescription",
             "HtmlDefinitionList", "HtmlDefinitionTerm",
-            "HtmlDeletedText", "HtmlDivision", "HtmlElement",
+            "HtmlDeletedText", "HtmlDivision", /*"HtmlElement", */
             "HtmlFieldSet", "HtmlFileInput", "HtmlFont", "HtmlForm",
             "HtmlFrame", "HtmlFrameSet", "HtmlHead", "HtmlHeading1",
             "HtmlHeading2", "HtmlHeading3", "HtmlHeading4", "HtmlHeading5",

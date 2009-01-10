@@ -53,6 +53,4 @@ public abstract class ClickableElement extends StyledElement {
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
-
-
 }
