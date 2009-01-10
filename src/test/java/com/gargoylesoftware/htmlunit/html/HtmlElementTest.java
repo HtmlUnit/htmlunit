@@ -1001,7 +1001,7 @@ public class HtmlElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
-        page.<ClickableElement>getHtmlElementById("textfield1").type('a');
+        page.getHtmlElementById("textfield1").type('a');
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

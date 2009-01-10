@@ -184,7 +184,6 @@ public class HtmlRadioButtonInput extends HtmlInput {
 
     /**
      * {@inheritDoc}
-     * @see com.gargoylesoftware.htmlunit.html.ClickableElement#isStateUpdateFirst()
      */
     @Override
     protected boolean isStateUpdateFirst() {

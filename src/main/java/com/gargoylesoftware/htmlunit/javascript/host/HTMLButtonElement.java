@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-
 /**
  * The JavaScript object that represents a button (&lt;button type=...&gt;).
  *
@@ -27,7 +26,7 @@ public class HTMLButtonElement extends FormField {
     private static final long serialVersionUID = 7075194404850135839L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLButtonElement() {
     }

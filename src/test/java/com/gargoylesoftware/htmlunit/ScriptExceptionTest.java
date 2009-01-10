@@ -27,7 +27,6 @@ import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -128,7 +127,7 @@ public final class ScriptExceptionTest extends WebTestCase {
         assertNotNull(url);
         try {
             final HtmlPage page = webClient.getPage(url);
-            ((ClickableElement) page.getHtmlElementById("clickMe")).click();
+            page.getHtmlElementById("clickMe").click();
             fail();
         }
         catch (final ScriptException e) {

@@ -87,7 +87,7 @@ public class ClickableElementTest extends WebTestCase {
         client.setAlertHandler(alertHandler);
 
         final HtmlPage page = client.getPage(URL_GARGOYLE);
-        final ClickableElement clickable = page.getHtmlElementById("clickId");
+        final HtmlElement clickable = page.getHtmlElementById("clickId");
 
         for (int i = 0; i < numClicks; i++) {
             clickable.click();
@@ -1013,7 +1013,7 @@ public class ClickableElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
-        page.<ClickableElement>getHtmlElementById("textfield1").click();
+        page.getHtmlElementById("textfield1").click();
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

@@ -90,7 +90,7 @@ public class HtmlForm extends ClickableElement {
      *
      * <p><b>IMPORTANT:</b> Using this method directly is not the preferred way of submitting forms.
      * Most consumers should emulate the user's actions instead, probably by using something like
-     * {@link ClickableElement#click()} or {@link ClickableElement#dblClick()}.</p>
+     * {@link HtmlElement#click()} or {@link HtmlElement#dblClick()}.</p>
      *
      * @param submitElement the element that caused the submit to occur
      * @return a new page that reflects the results of this submission

@@ -126,24 +126,19 @@ public class HtmlLabel extends ClickableElement {
      * equal to the value of the for attribute of this label.
      * @return the element, <code>null</code> if not found
      */
-    public ClickableElement getReferencedElement() {
+    public HtmlElement getReferencedElement() {
         final String elementId = getForAttribute();
         if (!ATTRIBUTE_NOT_DEFINED.equals(elementId)) {
             try {
-                final HtmlElement element = getElementById(elementId);
-                if (element instanceof ClickableElement) {
-                    return (ClickableElement) element;
-                }
+                return getElementById(elementId);
             }
             catch (final ElementNotFoundException e) {
                 return null;
             }
         }
-        else {
-            for (final DomNode element : getChildren()) {
-                if (element instanceof HtmlInput) {
-                    return (HtmlInput) element;
-                }
+        for (final DomNode element : getChildren()) {
+            if (element instanceof HtmlInput) {
+                return (HtmlInput) element;
             }
         }
         return null;
@@ -162,7 +157,7 @@ public class HtmlLabel extends ClickableElement {
         final Page response;
 
         // then the click on the referenced element
-        final ClickableElement element = getReferencedElement();
+        final HtmlElement element = getReferencedElement();
         if (element != null) {
             response = element.click();
         }

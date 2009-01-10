@@ -143,13 +143,8 @@ class FixedWebDriverHtmlUnitWebElement extends HtmlUnitWebElement {
 
     @Override
     public void click() {
-        if (!(getElement() instanceof ClickableElement)) {
-            return;
-        }
-
-        final ClickableElement clickableElement = ((ClickableElement) getElement());
         try {
-            clickableElement.click();
+            getElement().click();
         }
         catch (final IOException e) {
             throw new RuntimeException(e);
