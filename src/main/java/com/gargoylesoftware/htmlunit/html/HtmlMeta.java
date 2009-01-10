@@ -87,42 +87,6 @@ public class HtmlMeta extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "lang". Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return the value of the attribute "lang"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getLangAttribute() {
-        return getAttribute("lang");
-    }
-
-    /**
-     * Returns the value of the attribute "xml:lang". Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return the value of the attribute "xml:lang"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getXmlLangAttribute() {
-        return getAttribute("xml:lang");
-    }
-
-    /**
-     * Returns the value of the attribute "dir". Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return the value of the attribute "dir"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getTextDirectionAttribute() {
-        return getAttribute("dir");
-    }
-
-    /**
      * Returns the value of the attribute "http-equiv". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.

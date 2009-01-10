@@ -30,7 +30,9 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  * @author Rodney Gitzel
+ * @deprecated As of 2.5, use {@link HtmlElement} instead.
  */
+@Deprecated
 public abstract class StyledElement extends HtmlElement {
 
     private static final long serialVersionUID = -8844888802297454454L;

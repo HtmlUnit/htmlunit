@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
+            <action type="update" dev="asashour">
+                Deprecate ClickableElement and StyledElement, directly use HtmlElement instead.
+            </action>
             <action type="add" dev="asashour" issue="2495285">
                 JavaScript: add initial support for TextRange.moveStart() and .moveEnd().
             </action>
