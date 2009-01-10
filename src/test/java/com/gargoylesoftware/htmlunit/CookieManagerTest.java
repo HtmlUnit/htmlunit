@@ -245,4 +245,52 @@ public class CookieManagerTest extends WebServerTestCase {
         page.<HtmlButtonInput>getHtmlElementById("button2").click();
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void serverModifiesCookie() throws Exception {
+        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        servlets.put("/test", ServerModifiesCookieServlet.class);
+        startWebServer("./", null, servlets);
+
+        final String[] expectedAlerts = {"first=1", "first=1; second=2"};
+        final WebClient client = new WebClient();
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        // get the page a first time
+        client.getPage("http://localhost:" + PORT + "/test");
+
+        // and a second one
+        client.getPage("http://localhost:" + PORT + "/test");
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Servlet for {@link #serverModifiesCookie()}.
+     */
+    public static class ServerModifiesCookieServlet extends HttpServlet {
+        private static final long serialVersionUID = -5384006255925285388L;
+        private int nbCalls_ = 0;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            response.setContentType("text/html");
+            if (nbCalls_++ == 0) {
+                response.addCookie(new javax.servlet.http.Cookie("first", "1"));
+            }
+            else {
+                response.addCookie(new javax.servlet.http.Cookie("second", "2"));
+            }
+            final Writer writer = response.getWriter();
+            writer.write("<html><head><script>function test() {alert(document.cookie)}</script>"
+                + "<body onload='test()'></body></html>");
+            writer.close();
+        }
+    }
 }
