@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.html.ClickableElement;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -827,7 +827,7 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(getBrowserVersion(), html, null);
-        final Page page2 = page.<ClickableElement>getHtmlElementById("testButton").click();
+        final Page page2 = page.<HtmlElement>getHtmlElementById("testButton").click();
         final URL url2 = page2.getWebResponse().getRequestUrl();
         assertTrue("Select in URL " + url2, url2.toExternalForm().contains("testSelect=testValue"));
     }

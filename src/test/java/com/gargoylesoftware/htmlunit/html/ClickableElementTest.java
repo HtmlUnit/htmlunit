@@ -1013,7 +1013,7 @@ public class ClickableElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
-        page.getHtmlElementById("textfield1").click();
+        page.<HtmlElement>getHtmlElementById("textfield1").click();
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

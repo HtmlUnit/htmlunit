@@ -41,7 +41,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
@@ -3189,7 +3188,7 @@ public class DocumentTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        ((ClickableElement) page.getHtmlElementById("theDiv")).click();
+        page.<HtmlElement>getHtmlElementById("theDiv").click();
 
         final String[] expectedAlerts = {"123", "captured"};
         assertEquals(expectedAlerts, collectedAlerts);

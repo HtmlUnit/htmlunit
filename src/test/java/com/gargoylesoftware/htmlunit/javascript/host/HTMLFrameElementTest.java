@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.html.ClickableElement;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -337,9 +337,9 @@ public class HTMLFrameElementTest extends WebTestCase {
         webClient.setWebConnection(webConnection);
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
-        ((ClickableElement) page.getHtmlElementById("btn1")).click();
-        ((ClickableElement) page.getHtmlElementById("btn2")).click();
-        ((ClickableElement) page.getHtmlElementById("btn3")).click();
+        page.<HtmlElement>getHtmlElementById("btn1").click();
+        page.<HtmlElement>getHtmlElementById("btn2").click();
+        page.<HtmlElement>getHtmlElementById("btn3").click();
 
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }

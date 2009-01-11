@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -356,7 +355,7 @@ public class NodeTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        page.<ClickableElement>getHtmlElementById("div1").click();
+        page.<HtmlElement>getHtmlElementById("div1").click();
 
         assertEquals(expectedAlerts, collectedAlerts);
     }

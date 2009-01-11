@@ -44,10 +44,10 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -284,7 +284,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final HtmlPage page = client.getPage(URL_FIRST);
-        final ClickableElement div = page.getHtmlElementById("testdiv");
+        final HtmlElement div = page.getHtmlElementById("testdiv");
 
         page.getAnchors().get(0).click();
         // ignore response, and click in the page again

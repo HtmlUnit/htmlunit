@@ -29,9 +29,9 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -559,7 +559,7 @@ public class HTMLFormElementTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_FIRST);
-        final Page page2 = page.<ClickableElement>getHtmlElementById("button1").click();
+        final Page page2 = page.<HtmlElement>getHtmlElementById("button1").click();
 
         assertEquals(URL_THIRD.toExternalForm(), page2.getWebResponse().getRequestUrl());
     }
@@ -1189,7 +1189,7 @@ public class HTMLFormElementTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = client.getPage(URL_FIRST);
-        page.<ClickableElement>getHtmlElementById("theButton").click();
+        page.<HtmlElement>getHtmlElementById("theButton").click();
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -1211,7 +1211,7 @@ public class HTMLFormElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {"true"};
         final HtmlPage page1 = loadPage(content, collectedAlerts);
-        final Page page2 = page1.<ClickableElement>getHtmlElementById("theButton").click();
+        final Page page2 = page1.<HtmlElement>getHtmlElementById("theButton").click();
 
         assertEquals(expectedAlerts, collectedAlerts);
         assertSame(page1, page2);

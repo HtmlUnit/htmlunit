@@ -25,7 +25,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.html.ClickableElement;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -75,7 +75,7 @@ public class PopupTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        final ClickableElement button = page.getHtmlElementById("button");
+        final HtmlElement button = page.getHtmlElementById("button");
 
         final HtmlPage secondPage = button.click();
         final String[] expectedAlerts = {"Pop-up window is Open"};

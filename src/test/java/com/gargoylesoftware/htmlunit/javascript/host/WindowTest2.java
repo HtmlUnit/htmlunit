@@ -29,8 +29,8 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -113,7 +113,7 @@ public class WindowTest2 extends WebTestCase {
         client.setWebConnection(conn);
 
         final HtmlPage page = client.getPage(URL_FIRST);
-        final ClickableElement button = page.getHtmlElementById("b");
+        final HtmlElement button = page.getHtmlElementById("b");
         final HtmlPage dialogPage = button.click();
         final DialogWindow dialog = (DialogWindow) dialogPage.getEnclosingWindow();
 
@@ -163,7 +163,7 @@ public class WindowTest2 extends WebTestCase {
         client.setWebConnection(conn);
 
         final HtmlPage page = client.getPage(URL_FIRST);
-        final ClickableElement button = page.getHtmlElementById("b");
+        final HtmlElement button = page.getHtmlElementById("b");
         final HtmlPage dialogPage = button.click();
 
         final HtmlInput input = dialogPage.getHtmlElementById("name");

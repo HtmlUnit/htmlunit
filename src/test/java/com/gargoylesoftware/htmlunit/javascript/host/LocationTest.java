@@ -30,8 +30,8 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -565,7 +565,7 @@ public class LocationTest extends WebTestCase {
         assertEquals("Start content", ((HtmlPage) page.getFrameByName("content").getEnclosedPage()).getTitleText());
 
         final HtmlPage menuPage = (HtmlPage) page.getFrameByName("menu").getEnclosedPage();
-        menuPage.<ClickableElement>getHtmlElementById("myLink").click();
+        menuPage.<HtmlElement>getHtmlElementById("myLink").click();
         assertEquals(3, webClient.getWebWindows().size());
         assertEquals("Test", ((HtmlPage) page.getFrameByName("content").getEnclosedPage()).getTitleText());
     }

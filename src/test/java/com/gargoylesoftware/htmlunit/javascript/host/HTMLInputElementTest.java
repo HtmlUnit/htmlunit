@@ -28,10 +28,10 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlImageInput;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
@@ -661,7 +661,7 @@ public class HTMLInputElementTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-        final Page page2 = page.<ClickableElement>getHtmlElementById("clickMe").click();
+        final Page page2 = page.<HtmlElement>getHtmlElementById("clickMe").click();
 
         assertSame(page, page2);
 

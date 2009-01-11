@@ -170,9 +170,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
-
-        ((ClickableElement) page.getHtmlElementById("button")).click();
-
+        page.<HtmlElement>getHtmlElementById("button").click();
         assertSame(HttpMethod.GET, webConnection.getLastMethod());
     }
 

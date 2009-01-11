@@ -48,11 +48,11 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowEvent;
 import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
-import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
@@ -2329,7 +2329,7 @@ public class WindowTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-        ((ClickableElement) page.getHtmlElementById("theDiv")).click();
+        page.<HtmlElement>getHtmlElementById("theDiv").click();
 
         final String[] expectedAlerts = {"123", "captured"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -2428,7 +2428,7 @@ public class WindowTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        ((ClickableElement) page.getHtmlElementById("myButton")).click();
+        page.<HtmlElement>getHtmlElementById("myButton").click();
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -2718,7 +2718,7 @@ public class WindowTest extends WebTestCase {
         };
         final Window window = (Window) page.getEnclosingWindow().getScriptObject();
         ScriptableObject.putProperty(window, "mySpecialFunction", mySpecialFunction);
-        ((ClickableElement) page.getHtmlElementById("clickMe")).click();
+        page.<HtmlElement>getHtmlElementById("clickMe").click();
         page.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(5000);
         assertEquals(expectedAlerts, collectedAlerts);
     }

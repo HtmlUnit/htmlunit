@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
@@ -174,7 +173,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
              + "</body></html>";
 
         final HtmlPage page = loadPage(getBrowserVersion(), content, null);
-        ((ClickableElement) page.getHtmlElementById("red")).click();
+        page.<HtmlElement>getHtmlElementById("red").click();
     }
 
     /**

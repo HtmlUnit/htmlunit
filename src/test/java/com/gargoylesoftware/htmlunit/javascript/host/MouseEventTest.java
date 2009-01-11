@@ -25,7 +25,7 @@ import org.junit.Test;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.html.ClickableElement;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
@@ -57,15 +57,15 @@ public class MouseEventTest extends WebTestCase {
         final HtmlTextArea textarea = page.getHtmlElementById("myTextarea");
         assertEquals("", textarea.asText());
 
-        page.<ClickableElement>getHtmlElementById("div1").click();
+        page.<HtmlElement>getHtmlElementById("div1").click();
         assertEquals("Click on DIV(id=div1): true, true, false, false" + LINE_SEPARATOR, textarea.asText());
         textarea.reset();
 
-        page.<ClickableElement>getHtmlElementById("span1").click();
+        page.<HtmlElement>getHtmlElementById("span1").click();
         assertEquals("Click on SPAN(id=span1): true, true, true, false" + LINE_SEPARATOR, textarea.asText());
         textarea.reset();
 
-        page.<ClickableElement>getHtmlElementById("span2").click();
+        page.<HtmlElement>getHtmlElementById("span2").click();
         assertEquals("Click on SPAN(id=span2): true, false, false, true" + LINE_SEPARATOR, textarea.asText());
         textarea.reset();
 

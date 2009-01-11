@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
@@ -203,7 +202,7 @@ public class EventTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        final ClickableElement element = page.getHtmlElementById("clickId");
+        final HtmlElement element = page.getHtmlElementById("clickId");
         element.type('A');
         element.type('B');
         element.click();
@@ -239,8 +238,7 @@ public class EventTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        final ClickableElement element = page.getHtmlElementById("clickId");
-        element.type('A', shiftKey, ctrlKey, altKey);
+        page.<HtmlElement>getHtmlElementById("clickId").type('A', shiftKey, ctrlKey, altKey);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -340,8 +338,7 @@ public class EventTest extends WebTestCase {
     private void onClickPageTest(final String content) throws Exception {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        final ClickableElement clickable = page.getHtmlElementById("clickId");
-        clickable.click();
+        page.<HtmlElement>getHtmlElementById("clickId").click();
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
@@ -388,7 +385,7 @@ public class EventTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        page.<ClickableElement>getHtmlElementById("clickMe").click();
+        page.<HtmlElement>getHtmlElementById("clickMe").click();
 
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
@@ -470,7 +467,7 @@ public class EventTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        page.<ClickableElement>getHtmlElementById("theSpan").click();
+        page.<HtmlElement>getHtmlElementById("theSpan").click();
 
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
@@ -506,7 +503,7 @@ public class EventTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        page.<ClickableElement>getHtmlElementById("theSpan").click();
+        page.<HtmlElement>getHtmlElementById("theSpan").click();
 
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
@@ -542,12 +539,12 @@ public class EventTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        page.<ClickableElement>getHtmlElementById("theSpan").click();
+        page.<HtmlElement>getHtmlElementById("theSpan").click();
         final String[] expectedAlerts1 = {"window capturing", "div capturing", "span capturing", "div"};
         assertEquals(expectedAlerts1, collectedAlerts);
         collectedAlerts.clear();
 
-        page.<ClickableElement>getHtmlElementById("theSpan").click();
+        page.<HtmlElement>getHtmlElementById("theSpan").click();
         final String[] expectedAlerts2 = {"window capturing"};
         assertEquals(expectedAlerts2, collectedAlerts);
     }
