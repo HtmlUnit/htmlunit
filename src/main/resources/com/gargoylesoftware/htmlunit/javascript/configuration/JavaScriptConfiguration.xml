@@ -941,6 +941,7 @@
 
     <class name="HTMLAppletElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLAppletElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlApplet">
+        <property name="align" notImplemented="true" readable="true" writable="true"/>
         <property name="dataFld" notImplemented="true" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
@@ -1358,10 +1359,16 @@
 
     <class name="HTMLEmbedElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLEmbedElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlEmbed">
+        <property name="align" notImplemented="true" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
     </class>
 
     <class name="HTMLFiedlSetElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFieldSetElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFieldSet">
+        <property name="align" notImplemented="true" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
     </class>
 
     <class name="HTMLFontElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFontElement"
@@ -1424,10 +1431,12 @@
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class name="HTMLHeadingElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLHeadingElement"
         JSObject="true">
+        <property name="align" notImplemented="true" readable="true" writable="true"/>
     </class>
 
     <class name="HTMLHRElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLHRElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlHorizontalRule">
+        <property name="align" notImplemented="true" readable="true" writable="true"/>
     </class>
 
     <class name="HTMLHtmlElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLHtmlElement"
@@ -1436,6 +1445,7 @@
 
     <class name="HTMLIFrameElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLIFrameElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInlineFrame">
+        <property name="align" notImplemented="true" readable="true" writable="true"/>
         <property name="contentDocument" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
@@ -1456,6 +1466,7 @@
 
     <class name="HTMLImageElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLImageElement"
         jsConstructor="jsConstructor" JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlImage">
+        <property name="align" notImplemented="true" readable="true" writable="true"/>
         <property name="dataFld" notImplemented="true" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
@@ -1471,6 +1482,7 @@
 
     <class name="HTMLInputElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLInputElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInput">
+        <property name="align" notImplemented="true" readable="true" writable="true"/>
         <property name="checked" readable="true" writable="true"/>
         <property name="defaultChecked" readable="true" writable="true">
             <doclink
@@ -1527,6 +1539,7 @@
 
     <class name="HTMLLegendElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLLegendElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLegend">
+        <property name="align" notImplemented="true" readable="true" writable="true"/>
         <property name="dataFld" notImplemented="true" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
@@ -1563,6 +1576,7 @@
 
     <class name="HTMLObjectElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLObjectElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlObject">
+        <property name="align" notImplemented="true" readable="true" writable="true"/>
         <property name="dataFld" notImplemented="true" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
@@ -1610,6 +1624,7 @@
 
     <class name="HTMLParagraphElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLParagraphElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlParagraph">
+        <property name="align" notImplemented="true" readable="true" writable="true"/>
     </class>
 
     <class name="HTMLParamElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLParamElement"
@@ -1692,6 +1707,10 @@
 
     <class name="HTMLTableCaptionElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableCaptionElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlCaption">
+        <property name="align" notImplemented="true" readable="true" writable="true"/>
+        <property name="vAlign" notImplemented="true" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
     </class>
 
     <class name="HTMLTableCellElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableCellElement"
@@ -1705,6 +1724,7 @@
         <doclink
             url="http://msdn.microsoft.com/en-us/library/ms535903.aspx"
             descr="MSDN documentation (TD)"/>
+        <property name="align" notImplemented="true" readable="true" writable="true"/>
         <property name="cellIndex" readable="true" writable="false">
             <doclink
                 url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-80748363"
@@ -1713,6 +1733,7 @@
                 url="http://msdn.microsoft.com/en-us/library/ms533549.aspx"
                 descr="MSDN documentation"/>
         </property>
+        <property name="vAlign" notImplemented="true" readable="true" writable="true"/>
     </class>
 
     <!--
@@ -1720,10 +1741,13 @@
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class name="HTMLTableColElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableColElement"
         JSObject="true">
+        <property name="align" notImplemented="true" readable="true" writable="true"/>
+        <property name="vAlign" notImplemented="true" readable="true" writable="true"/>
     </class>
 
     <class name="HTMLTableElement" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTable">
+        <property name="align" notImplemented="true" readable="true" writable="true"/>
         <property name="caption" readable="true" writable="false"/>
         <property name="cellPadding" readable="true" writable="true"/>
         <property name="cellSpacing" readable="true" writable="true"/>
@@ -1786,6 +1810,7 @@
         <doclink
             url="http://msdn.microsoft.com/en-us/library/ms535911.aspx"
             descr="MSDN documentation"/>
+        <property name="align" notImplemented="true" readable="true" writable="true"/>
         <property name="cells" readable="true" writable="false"/>
         <property name="rowIndex" readable="true" writable="false">
             <doclink
@@ -1795,6 +1820,7 @@
                 url="http://msdn.microsoft.com/en-us/library/ms534377.aspx"
                 descr="MSDN documentation"/>
         </property>
+        <property name="vAlign" notImplemented="true" readable="true" writable="true"/>
         <function name="insertCell">
             <doclink
                 url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-68927016"
@@ -1810,6 +1836,8 @@
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class name="HTMLTableSectionElement" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableSectionElement"
         JSObject="true">
+        <property name="align" notImplemented="true" readable="true" writable="true"/>
+        <property name="vAlign" notImplemented="true" readable="true" writable="true"/>
     </class>
 
     <class name="HTMLTextAreaElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTextAreaElement"
