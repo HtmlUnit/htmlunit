@@ -64,11 +64,11 @@ public class HTMLSpanElement extends HTMLElement {
      * @return the value of the "cite" property
      */
     public String jsxGet_cite() {
-        String align = getDomNodeOrDie().getAttribute("cite");
-        if (align == NOT_FOUND) {
-            align = "";
+        String cite = getDomNodeOrDie().getAttribute("cite");
+        if (cite == NOT_FOUND) {
+            cite = "";
         }
-        return align;
+        return cite;
     }
 
     /**
