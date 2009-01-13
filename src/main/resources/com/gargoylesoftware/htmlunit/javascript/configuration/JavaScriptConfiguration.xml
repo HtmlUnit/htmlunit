@@ -1365,7 +1365,7 @@
         </property>
     </class>
 
-    <class name="HTMLFiedlSetElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFieldSetElement"
+    <class name="HTMLFieldSetElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFieldSetElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFieldSet">
         <property name="align" notImplemented="true" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
