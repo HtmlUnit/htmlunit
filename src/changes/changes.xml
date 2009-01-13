@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
+            <action type="add" dev="asashour">
+                JavaScript: add support for document.createComment().
+            </action>
             <action type="update" dev="asashour">
                 Deprecate ClickableElement and StyledElement, directly use HtmlElement instead.
             </action>

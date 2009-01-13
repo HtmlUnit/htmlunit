@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class HTMLSpanElementTest extends WebTestCase {
@@ -59,4 +60,29 @@ public class HTMLSpanElementTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE = {"[object] ", "[object] undefined" },
+            FF = {"[object HTMLSpanElement] undefined", "[object HTMLSpanElement] undefined" })
+    public void cite() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        debug(document.createElement('abbr'));\n"
+            + "        debug(document.createElement('span'));\n"
+            + "      }\n"
+            + "      function debug(e) {\n"
+            + "        alert(e + ' ' + e.cite);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageWithAlerts(html);
+    }
 }

@@ -21,6 +21,7 @@ import org.mozilla.javascript.Context;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
@@ -299,6 +300,16 @@ public class Document extends EventNode {
             // Just fall through - result is already set to NOT_FOUND
         }
         return result;
+    }
+
+    /**
+     * Creates a new Comment.
+     * @param comment the comment text
+     * @return the new Comment
+     */
+    public Object jsxFunction_createComment(final String comment) {
+        final DomNode domNode = new DomComment(getDomNodeOrDie().getPage(), comment);
+        return getScriptableFor(domNode);
     }
 
     /**

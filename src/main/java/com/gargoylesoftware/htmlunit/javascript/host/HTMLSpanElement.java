@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlAbbreviated;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+
 /**
  * The JavaScript object "HTMLSpanElement".
  *
@@ -33,6 +37,21 @@ public class HTMLSpanElement extends HTMLElement {
     }
 
     /**
+     * Sets the DOM node that corresponds to this JavaScript object.
+     * @param domNode the DOM node
+     */
+    @Override
+    public void setDomNode(final DomNode domNode) {
+        super.setDomNode(domNode);
+        final HtmlElement element = (HtmlElement) domNode;
+        if (getBrowserVersion().isIE()) {
+            if (element instanceof HtmlAbbreviated) {
+                ActiveXObject.addProperty(this, "cite", true, true);
+            }
+        }
+    }
+
+    /**
      * Simulates a click on a scrollbar component (IE only).
      * @param scrollAction the type of scroll action to simulate
      */
@@ -40,4 +59,23 @@ public class HTMLSpanElement extends HTMLElement {
         // Ignore because we aren't displaying anything!
     }
 
+    /**
+     * Returns the value of the "cite" property.
+     * @return the value of the "cite" property
+     */
+    public String jsxGet_cite() {
+        String align = getDomNodeOrDie().getAttribute("cite");
+        if (align == NOT_FOUND) {
+            align = "";
+        }
+        return align;
+    }
+
+    /**
+     * Returns the value of the "cite" property.
+     * @param cite the value
+     */
+    public void jsxSet_cite(final String cite) {
+        getDomNodeOrDie().setAttribute("cite", cite);
+    }
 }
