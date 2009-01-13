@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
+            <action type="update" dev="asashour" issue="2501193">
+                DomElement.getElementsByTagName() should search in only sub-elements.
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: add support for document.createComment().
             </action>

@@ -1113,4 +1113,34 @@ public class HtmlElementTest extends WebTestCase {
         assertEquals("another:div", page.<HtmlElement>getHtmlElementById("dIv3").getNodeName());
         assertTrue(page.asXml().contains("<app:div "));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getElementsByTagName() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var form = document.getElementById('myForm');\n"
+            + "    alert(form.getElementsByTagName('input').length);\n"
+            + "    alert(document.body.getElementsByTagName('input').length);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<form id='myForm'>\n"
+            + "  <input type='button' name='button1' value='pushme'>\n"
+            + "</form>\n"
+            + "<input type='button' name='button2'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"1", "2"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(BrowserVersion.getDefault(), html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(1, page.getElementById("myForm").getElementsByTagName("input").getLength());
+        assertEquals(2, page.getBody().getElementsByTagName("input").getLength());
+    }
 }
