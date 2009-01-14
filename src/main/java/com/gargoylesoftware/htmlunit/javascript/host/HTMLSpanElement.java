@@ -14,9 +14,37 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAbbreviated;
+import com.gargoylesoftware.htmlunit.html.HtmlAcronym;
+import com.gargoylesoftware.htmlunit.html.HtmlAddress;
+import com.gargoylesoftware.htmlunit.html.HtmlBidirectionalOverride;
+import com.gargoylesoftware.htmlunit.html.HtmlBig;
+import com.gargoylesoftware.htmlunit.html.HtmlBlink;
+import com.gargoylesoftware.htmlunit.html.HtmlBold;
+import com.gargoylesoftware.htmlunit.html.HtmlCenter;
+import com.gargoylesoftware.htmlunit.html.HtmlCitation;
+import com.gargoylesoftware.htmlunit.html.HtmlCode;
+import com.gargoylesoftware.htmlunit.html.HtmlDefinition;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlEmphasis;
+import com.gargoylesoftware.htmlunit.html.HtmlExample;
+import com.gargoylesoftware.htmlunit.html.HtmlItalic;
+import com.gargoylesoftware.htmlunit.html.HtmlKeyboard;
+import com.gargoylesoftware.htmlunit.html.HtmlListing;
+import com.gargoylesoftware.htmlunit.html.HtmlNoBreak;
+import com.gargoylesoftware.htmlunit.html.HtmlPlainText;
+import com.gargoylesoftware.htmlunit.html.HtmlS;
+import com.gargoylesoftware.htmlunit.html.HtmlSample;
+import com.gargoylesoftware.htmlunit.html.HtmlSmall;
+import com.gargoylesoftware.htmlunit.html.HtmlStrike;
+import com.gargoylesoftware.htmlunit.html.HtmlStrong;
+import com.gargoylesoftware.htmlunit.html.HtmlSubscript;
+import com.gargoylesoftware.htmlunit.html.HtmlSuperscript;
+import com.gargoylesoftware.htmlunit.html.HtmlTeletype;
+import com.gargoylesoftware.htmlunit.html.HtmlUnderlined;
+import com.gargoylesoftware.htmlunit.html.HtmlVariable;
 
 /**
  * The JavaScript object "HTMLSpanElement".
@@ -44,8 +72,36 @@ public class HTMLSpanElement extends HTMLElement {
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
         final HtmlElement element = (HtmlElement) domNode;
-        if (getBrowserVersion().isIE()) {
-            if (element instanceof HtmlAbbreviated) {
+        final BrowserVersion browserVersion = getBrowserVersion();
+        if (browserVersion.isIE()) {
+            if ((element instanceof HtmlAbbreviated && browserVersion.getBrowserVersionNumeric() > 6)
+                || element instanceof HtmlAcronym
+                || element instanceof HtmlAddress
+                || element instanceof HtmlBidirectionalOverride
+                || element instanceof HtmlBig
+                || element instanceof HtmlBold
+                || element instanceof HtmlBlink
+                || element instanceof HtmlCenter
+                || element instanceof HtmlCitation
+                || element instanceof HtmlCode
+                || element instanceof HtmlDefinition
+                || element instanceof HtmlExample
+                || element instanceof HtmlEmphasis
+                || element instanceof HtmlItalic
+                || element instanceof HtmlKeyboard
+                || element instanceof HtmlListing
+                || element instanceof HtmlNoBreak
+                || element instanceof HtmlPlainText
+                || element instanceof HtmlS
+                || element instanceof HtmlSample
+                || element instanceof HtmlSmall
+                || element instanceof HtmlStrike
+                || element instanceof HtmlStrong
+                || element instanceof HtmlSubscript
+                || element instanceof HtmlSuperscript
+                || element instanceof HtmlTeletype
+                || element instanceof HtmlUnderlined
+                || element instanceof HtmlVariable) {
                 ActiveXObject.addProperty(this, "cite", true, true);
             }
         }
