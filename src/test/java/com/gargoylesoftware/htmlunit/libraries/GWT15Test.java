@@ -332,7 +332,7 @@ public class GWT15Test extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void dynaTable_1_5() throws Exception {
+    public void dynaTable() throws Exception {
         startWebServer("src/test/resources/gwt/" + getDirectory() + "/DynaTable",
                 new String[] {"src/test/resources/gwt/" + getDirectory() + "/gwt-servlet.jar"});
 

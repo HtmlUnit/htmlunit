@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
+            <action type="update" dev="asashour" issue="2502817">
+                Ignore namespaces if the tag name does not have a prefix.
+            </action>
             <action type="update" dev="asashour" issue="2501193">
                 DomElement.getElementsByTagName() should search in only sub-elements.
             </action>
