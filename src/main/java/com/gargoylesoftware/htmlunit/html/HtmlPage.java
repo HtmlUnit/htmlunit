@@ -394,21 +394,26 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      */
     @Override
     public String getPageEncoding() {
+        // If we've already calculated it, return it.
         if (originalCharset_ != null) {
             return originalCharset_;
         }
-
+        // Try to get the encoding from any <meta> tags.
         for (final HtmlMeta meta : getMetaTags("content-type")) {
             final String contents = meta.getContentAttribute();
             final int pos = contents.toLowerCase().indexOf("charset=");
             if (pos >= 0) {
-                originalCharset_ = contents.substring(pos + 8);
-                if (mainLog_.isDebugEnabled()) {
-                    mainLog_.debug("Page Encoding detected: " + originalCharset_);
+                final String charset = contents.substring(pos + 8);
+                if (charset.length() > 0) {
+                    originalCharset_ = charset;
+                    if (mainLog_.isDebugEnabled()) {
+                        mainLog_.debug("Page Encoding detected: " + originalCharset_);
+                    }
+                    return originalCharset_;
                 }
-                return originalCharset_;
             }
         }
+        // Try to get the encoding from HTTP headers, or based on the content itself.
         if (originalCharset_ == null) {
             originalCharset_ = getWebResponse().getContentCharSet();
         }
@@ -1043,7 +1048,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      */
     private Script loadJavaScriptFromUrl(final URL url, final String charset) {
         String scriptEncoding = charset;
-        getPageEncoding();
+        final String pageEncoding = getPageEncoding();
 
         final WebClient client = getWebClient();
         final Cache cache = client.getCache();
@@ -1099,8 +1104,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             if (!contentCharset.equals(TextUtil.DEFAULT_CHARSET)) {
                 scriptEncoding = contentCharset;
             }
-            else if (!originalCharset_.equals(TextUtil.DEFAULT_CHARSET)) {
-                scriptEncoding = originalCharset_;
+            else if (!pageEncoding.equals(TextUtil.DEFAULT_CHARSET)) {
+                scriptEncoding = pageEncoding;
             }
             else {
                 scriptEncoding = TextUtil.DEFAULT_CHARSET;

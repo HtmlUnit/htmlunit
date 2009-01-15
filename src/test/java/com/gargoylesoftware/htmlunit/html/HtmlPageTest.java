@@ -666,6 +666,19 @@ public class HtmlPageTest extends WebServerTestCase {
     }
 
     /**
+     * Verifies that an empty charset in a content-type meta tag is ignored. See bug 2484753.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testGetPageEncoding_EmptyCharset() throws Exception {
+        final String html = "<html><head>\n"
+            + "<meta http-equiv='Content-Type' content='text/html; charset='>\n"
+            + "</head><body>abc</body></html>";
+        final HtmlPage page = loadPage(html);
+        assertEquals(TextUtil.DEFAULT_CHARSET, page.getPageEncoding());
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

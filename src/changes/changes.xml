@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
+            <action type="fix" dev="sdanig" issue="2484753">
+                If content-type meta tags contain empty encoding information, ignore it and use the default encoding.
+            </action>
             <action type="update" dev="asashour" issue="2502817">
                 Ignore namespaces if the tag name does not have a prefix.
             </action>
