@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  */
-public class Attr extends SimpleScriptable {
+public class Attr extends Node {
 
     private static final long serialVersionUID = 3256441425892750900L;
 
@@ -104,22 +104,6 @@ public class Attr extends SimpleScriptable {
     }
 
     /**
-     * Returns <code>null</code>.
-     * @return <code>null</code>
-     */
-    public Object jsxGet_firstChild() {
-        return null;
-    }
-
-    /**
-     * Returns <code>null</code>.
-     * @return <code>null</code>
-     */
-    public Object jsxGet_lastChild() {
-        return null;
-    }
-
-    /**
      * Returns the name of the attribute.
      * @return the name of the attribute
      */
@@ -128,26 +112,11 @@ public class Attr extends SimpleScriptable {
     }
 
     /**
-     * Returns <code>null</code>.
-     * @return <code>null</code>
-     */
-    public Object jsxGet_nextSibling() {
-        return null;
-    }
-
-    /**
-     * Returns the name of this attribute.
-     * @return the name of this attribute
-     */
-    public String jsxGet_nodeName() {
-        return jsxGet_name();
-    }
-
-    /**
      * Returns the type of DOM node this attribute represents.
      * @return the type of DOM node this attribute represents
      */
-    public int jsxGet_nodeType() {
+    @Override
+    public short jsxGet_nodeType() {
         return org.w3c.dom.Node.ATTRIBUTE_NODE;
     }
 
@@ -155,35 +124,28 @@ public class Attr extends SimpleScriptable {
      * Returns the value of this attribute.
      * @return the value of this attribute
      */
+    @Override
     public String jsxGet_nodeValue() {
         return jsxGet_value();
     }
 
     /**
-     * Returns the containing document.
-     * @return the containing document
+     * Returns the owner element.
+     * @return the owner element
      */
-    public Object jsxGet_ownerDocument() {
+    public SimpleScriptable jsxGet_ownerElement() {
         if (parent_ != null) {
-            final SimpleScriptable documentScriptable = getScriptableFor(parent_.getPage());
-            return documentScriptable;
+            return getScriptableFor(parent_);
         }
         return null;
     }
 
     /**
-     * Returns <code>null</code>.
+     * {@inheritDoc}
      * @return <code>null</code>
      */
+    @Override
     public Object jsxGet_parentNode() {
-        return null;
-    }
-
-    /**
-     * Returns <code>null</code>.
-     * @return <code>null</code>
-     */
-    public Object jsxGet_previousSibling() {
         return null;
     }
 

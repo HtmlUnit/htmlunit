@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class AttrTest extends WebTestCase {
@@ -43,14 +44,39 @@ public class AttrTest extends WebTestCase {
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "  try {\n"
+            + "    var s = document.getElementById('testSelect');\n"
+            + "    var o1 = s.options[0];\n"
+            + "    alert(o1.getAttributeNode('value').specified);\n"
+            + "    var o2 = s.options[1];\n"
+            + "    alert(o2.getAttributeNode('value').specified);\n"
+            + "  } catch(e) {\n"
+            + "    alert('exception thrown');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<form name='form1'>\n"
+            + "    <select name='select1' id='testSelect'>\n"
+            + "        <option name='option1' value='foo'>One</option>\n"
+            + "        <option>Two</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "undefined", FF = "[object HTMLOptionElement]")
+    public void ownerElement() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
             + "  var s = document.getElementById('testSelect');\n"
             + "  var o1 = s.options[0];\n"
-            + "  alert(o1.getAttributeNode('value').specified)\n"
-            + "  var o2 = s.options[1];\n"
-            + "  alert(o2.getAttributeNode('value').specified)\n"
-            + "  } catch(e) {\n"
-            + "   alert('exception thrown');\n"
-            + "  }\n"
+            + "  alert(o1.getAttributeNode('value').ownerElement);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<form name='form1'>\n"

@@ -64,7 +64,7 @@ public class HTMLSpanElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = {"[object] ", "[object] undefined" },
+    @Alerts(IE6 = {"[object] undefined", "[object] undefined" }, IE7 = {"[object] ", "[object] undefined" },
             FF = {"[object HTMLSpanElement] undefined", "[object HTMLSpanElement] undefined" })
     public void cite() throws Exception {
         final String html =

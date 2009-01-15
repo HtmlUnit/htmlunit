@@ -31,4 +31,23 @@ public class HTMLQuoteElement extends HTMLElement {
         // Empty.
     }
 
+    /**
+     * Returns the value of the "cite" property.
+     * @return the value of the "cite" property
+     */
+    public String jsxGet_cite() {
+        String cite = getDomNodeOrDie().getAttribute("cite");
+        if (cite == NOT_FOUND) {
+            cite = "";
+        }
+        return cite;
+    }
+
+    /**
+     * Returns the value of the "cite" property.
+     * @param cite the value
+     */
+    public void jsxSet_cite(final String cite) {
+        getDomNodeOrDie().setAttribute("cite", cite);
+    }
 }

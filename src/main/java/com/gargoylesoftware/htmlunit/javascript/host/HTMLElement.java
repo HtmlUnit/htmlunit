@@ -281,11 +281,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * {@inheritDoc}
      */
     @Override
-    public Object jsxGet_namespaceURI() {
+    public String jsxGet_namespaceURI() {
         if (getBrowserVersion().isIE()) {
-            if (getDomNodeOrDie().getPage() instanceof HtmlPage) {
-                return NOT_FOUND;
-            }
             return getDomNodeOrDie().getNamespaceURI();
         }
         if (getDomNodeOrDie().getPage() instanceof HtmlPage) {
@@ -299,10 +296,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the "prefix" attribute
      */
     @Override
-    public Object jsxGet_localName() {
-        if (getBrowserVersion().isIE()) {
-            return NOT_FOUND;
-        }
+    public String jsxGet_localName() {
         final DomNode domNode = getDomNodeOrDie();
         String localName = domNode.getLocalName();
         if (domNode.getPage() instanceof HtmlPage) {
@@ -1886,9 +1880,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * {@inheritDoc}
      */
     @Override
-    public Object jsxGet_prefix() {
+    public String jsxGet_prefix() {
         if (getBrowserVersion().isIE()) {
-            return super.jsxGet_prefix();
+            return "";
         }
         return null;
     }

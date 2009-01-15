@@ -21,21 +21,21 @@
         <browser name="Microsoft Internet Explorer"/>
     </class>
 
-    <class name="Attr" classname="com.gargoylesoftware.htmlunit.javascript.host.Attr"
+    <class name="Attr" extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.Attr"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomAttr">
         <property name="expando" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer"/>
         </property>
-        <property name="firstChild" readable="true" writable="false"/>
-        <property name="lastChild" readable="true" writable="false"/>
+        <property name="isId" notImplemented="true" readable="true" writable="false">
+            <browser name="Firefox" min-version="3"/>
+        </property>
         <property name="name" readable="true" writable="false"/>
-        <property name="nextSibling" readable="true" writable="false"/>
-        <property name="nodeName" readable="true" writable="false"/>
-        <property name="nodeType" readable="true" writable="false"/>
-        <property name="nodeValue" readable="true" writable="false"/>
-        <property name="ownerDocument" readable="true" writable="false"/>
-        <property name="parentNode" readable="true" writable="false"/>
-        <property name="previousSibling" readable="true" writable="false"/>
+        <property name="ownerElement" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="schemaTypeInfo" notImplemented="true" readable="true" writable="false">
+            <browser name="Firefox" min-version="3"/>
+        </property>
         <property name="specified" readable="true" writable="false"/>
         <property name="value" readable="true" writable="true"/>
     </class>
@@ -1013,6 +1013,7 @@
 
     <class name="HTMLDelElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDelElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlDeletedText">
+        <property name="cite" readable="true" writable="true"/>
     </class>
 
     <class name="HTMLDirectoryElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDirectoryElement"
@@ -1518,6 +1519,7 @@
 
     <class name="HTMLInsElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLInsElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInsertedText">
+        <property name="cite" readable="true" writable="true"/>
     </class>
 
     <class name="HTMLIsIndexElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLIsIndexElement"
@@ -1634,6 +1636,9 @@
 
     <class name="HTMLPreElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLPreElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlPreformattedText">
+        <property name="cite" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
     </class>
 
     <!--
@@ -1641,6 +1646,7 @@
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class name="HTMLQuoteElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLQuoteElement"
         JSObject="true">
+        <property name="cite" readable="true" writable="true"/>
     </class>
 
     <class name="HTMLScriptElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLScriptElement" JSObject="true"
@@ -2055,15 +2061,21 @@
         <property name="childNodes" readable="true" writable="false"/>
         <property name="firstChild" readable="true" writable="false"/>
         <property name="lastChild" readable="true" writable="false"/>
-        <property name="localName" readable="true" writable="false"/>
-        <property name="namespaceURI" readable="true" writable="false"/>
+        <property name="localName" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="namespaceURI" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
         <property name="nextSibling" readable="true" writable="false"/>
         <property name="nodeName" readable="true" writable="false"/>
         <property name="nodeType" readable="true" writable="false"/>
         <property name="nodeValue" readable="true" writable="true"/>
         <property name="ownerDocument" readable="true" writable="false"/>
         <property name="parentNode" readable="true" writable="false"/>
-        <property name="prefix" readable="true" writable="false"/>
+        <property name="prefix" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
         <property name="previousSibling" readable="true" writable="false"/>
 
         <function name="addEventListener">

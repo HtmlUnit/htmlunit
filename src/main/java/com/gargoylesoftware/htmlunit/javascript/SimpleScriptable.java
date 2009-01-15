@@ -384,6 +384,10 @@ public class SimpleScriptable extends ScriptableObject {
      * @return the browser version
      */
     protected BrowserVersion getBrowserVersion() {
+        final DomNode node = getDomNodeOrNull();
+        if (node != null) {
+            return node.getPage().getWebClient().getBrowserVersion();
+        }
         return getWindow().getWebWindow().getWebClient().getBrowserVersion();
     }
 
