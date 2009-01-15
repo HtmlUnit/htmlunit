@@ -499,6 +499,29 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
+     * Returns all the descendant elements with the specified class.
+     * @param className the name to search for
+     * @return all the descendant elements with the specified class name
+     */
+    public HTMLCollection jsxFunction_getElementsByClassName(final String className) {
+        final HTMLCollection collection = new HTMLCollection(this);
+        final String[] classNames = className.split("\\s");
+        final StringBuilder exp = new StringBuilder();
+        for (final String name : classNames) {
+            if (exp.length() != 0) {
+                exp.append(" and ");
+            }
+            exp.append("contains(concat(' ', @class, ' '), ' ");
+            exp.append(name);
+            exp.append(" ')");
+        }
+        exp.insert(0, ".//*[");
+        exp.append("]");
+        collection.init(getDomNodeOrDie(), exp.toString());
+        return collection;
+    }
+
+    /**
      * Returns the class defined for this element.
      * @return the class name
      */

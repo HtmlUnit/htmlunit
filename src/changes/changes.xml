@@ -22,7 +22,7 @@
                 JavaScript: add initial support for TextRange.moveStart() and .moveEnd().
             </action>
             <action type="add" dev="mguillem">
-                JavaScript: add support for document.getElementsByClassName (FF3 only).
+                JavaScript: add support for document.getElementsByClassName and HTMLElement.getElementsByClassName (FF3 only).
             </action>
             <action type="update" dev="mguillem">
                 JavaScript: document.execCommand doesn't throw an exception when called with unknown command (FF3 only).

@@ -2570,4 +2570,47 @@ public class HTMLElementTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF3 = { "function", "* => body: 0, div1: 0", "foo => body: 3, div1: 1", "foo red => body: 1, div1: 0",
+            "red foo => body: 1, div1: 0", "blue foo => body: 0, div1: 0", "null => body: 0, div1: 0" },
+            FF2 = { "undefined", "exception" },
+            IE = { "undefined", "exception" })
+    public void getElementsByClassName() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function test(x) {\n"
+            + "    var b = document.body;\n"
+            + "    var div1 = document.getElementById('div1');\n"
+            + "    var s = x + ' => body: ' + b.getElementsByClassName(x).length;\n"
+            + "    s += ', div1: ' + div1.getElementsByClassName(x).length;\n"
+            + "    alert(s);\n"
+            + "}\n"
+            + "function doTest() {\n"
+            + "    var b = document.body;\n"
+            + "    var div1 = document.getElementById('div1');\n"
+            + "    alert(typeof document.body.getElementsByClassName);\n"
+            + "    try {\n"
+            + "      test('*');\n"
+            + "      test('foo');\n"
+            + "      test('foo red');\n"
+            + "      test('red foo');\n"
+            + "      test('blue foo');\n"
+            + "      test(null);\n"
+            + "    }\n"
+            + "    catch (e) { alert('exception') }\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<div class='foo' id='div1'>\n"
+            + "  <span class='c2'>hello</span>\n"
+            + "  <span class='foo' id='span2'>World!</span>\n"
+            + "</div>\n"
+            + "<span class='foo red' id='span3'>again</span>\n"
+            + "<span class='red' id='span4'>bye</span>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }

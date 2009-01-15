@@ -934,23 +934,10 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns all the descendant elements with the specified class name.
      * @param className the name to search for
      * @return all the descendant elements with the specified class name
+     * @see <a href="https://developer.mozilla.org/en/DOM/document.getElementsByClassName">Mozilla doc</a>
      */
     public HTMLCollection jsxFunction_getElementsByClassName(final String className) {
-        final HTMLCollection collection = new HTMLCollection(this);
-        final String[] classNames = className.split("\\s");
-        final StringBuilder exp = new StringBuilder();
-        for (final String name : classNames) {
-            if (exp.length() != 0) {
-                exp.append(" and ");
-            }
-            exp.append("contains(concat(' ', @class, ' '), ' ");
-            exp.append(name);
-            exp.append(" ')");
-        }
-        exp.insert(0, "//*[");
-        exp.append("]");
-        collection.init(getDomNodeOrDie(), exp.toString());
-        return collection;
+        return ((HTMLElement) jsxGet_documentElement()).jsxFunction_getElementsByClassName(className);
     }
 
     /**
