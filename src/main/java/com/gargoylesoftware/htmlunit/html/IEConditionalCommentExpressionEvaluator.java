@@ -78,12 +78,18 @@ public final class IEConditionalCommentExpressionEvaluator {
         else if (condition.startsWith("gte IE")) {
             return browserVersion.getBrowserVersionNumeric() >= parseVersion(condition.substring(6));
         }
+        else if (condition.startsWith("lt")) {
+            return true;
+        }
+        else if (condition.startsWith("gt")) {
+            return false;
+        }
         else if (condition.startsWith("(")) {
             // in fact not fully correct if () can be nested
             return evaluate(StringUtils.substringBetween(condition, "(", ")"), browserVersion);
         }
         else {
-            throw new RuntimeException("Unexpected condition: " + condition);
+            return false;
         }
     }
 

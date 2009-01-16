@@ -69,4 +69,18 @@ public class IEConditionalCommentsTest extends WebTestCase {
             + "</head><body></body></html>";
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "hello", "lt mso 9" }, FF = "hello")
+    public void if_lte_mso_9() throws Exception {
+        final String html = "<html><head>"
+            + "<script>alert('hello')</script>\n"
+            + "<!--[if gte mso 9]><script>alert('gte mso 9')</script><![endif]-->\n"
+            + "<!--[if lt mso 9]><script>alert('lt mso 9')</script><![endif]-->\n"
+            + "</head><body></body></html>";
+        loadPageWithAlerts(html);
+    }
 }

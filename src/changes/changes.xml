@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
+            <action type="fix" dev="mguillem" issue="2503965">
+                IE Conditional comments: accept expressions that contain identifier other than IE (like mso).
+            </action>
             <action type="fix" dev="sdanig" issue="2484753">
                 If content-type meta tags contain empty encoding information, ignore it and use the default encoding.
             </action>
