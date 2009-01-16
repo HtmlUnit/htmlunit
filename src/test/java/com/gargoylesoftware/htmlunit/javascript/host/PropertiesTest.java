@@ -14,14 +14,27 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.awt.Color;
+import java.awt.GradientPaint;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
 import org.apache.commons.io.FileUtils;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.LayeredBarRenderer;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.util.SortOrder;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,7 +48,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 /**
- * Tests for all host properties.
+ * Tests for all host properties and methods.
  *
  * @version $Revision$
  * @author Ahmed Ashour
@@ -52,6 +65,11 @@ public class PropertiesTest extends WebTestCase {
     private static List<String> IE7_SIMULATED_;
     private static List<String> FF2_SIMULATED_;
     private static List<String> FF3_SIMULATED_;
+
+    private static DefaultCategoryDataset CATEGORY_DATASET_IE6_ = new DefaultCategoryDataset();
+    private static DefaultCategoryDataset CATEGORY_DATASET_IE7_ = new DefaultCategoryDataset();
+    private static DefaultCategoryDataset CATEGORY_DATASET_FF2_ = new DefaultCategoryDataset();
+    private static DefaultCategoryDataset CATEGORY_DATASET_FF3_ = new DefaultCategoryDataset();
 
     private final String name_;
     private final BrowserVersion browserVersion_;
@@ -115,31 +133,58 @@ public class PropertiesTest extends WebTestCase {
 
     /**
      * Test.
+     * @throws IOException If an error occurs
      */
     @Test
-    public void test() {
+    public void test() throws IOException {
         final List<String> realList;
         final List<String> simulatedList;
+        final DefaultCategoryDataset dataset;
         if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_6) {
             realList = IE6_;
             simulatedList = IE6_SIMULATED_;
+            dataset = CATEGORY_DATASET_IE6_;
         }
         else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_7) {
             realList = IE7_;
             simulatedList = IE7_SIMULATED_;
+            dataset = CATEGORY_DATASET_IE7_;
         }
         else if (browserVersion_ == BrowserVersion.FIREFOX_2) {
             realList = FF2_;
             simulatedList = FF2_SIMULATED_;
+            dataset = CATEGORY_DATASET_FF2_;
         }
         else {
             realList = FF3_;
             simulatedList = FF3_SIMULATED_;
+            dataset = CATEGORY_DATASET_FF3_;
         }
 
-        //TODO: compare results
-        //Assert.assertEquals("Test for [" + browserVersion_.getNickname() + ':' + name_ + ']',
-        //        getValueOf(realList, name_), getValueOf(simulatedList, name_));
+        List<String> realProperties = Arrays.asList(getValueOf(realList, name_).split(","));
+        List<String> simulatedProperties = Arrays.asList(getValueOf(simulatedList, name_).split(","));
+        if (realProperties.size() == 1 && realProperties.get(0).length() == 0) {
+            realProperties = new ArrayList<String>();
+        }
+        if (simulatedProperties.size() == 1 && simulatedProperties.get(0).length() == 0) {
+            simulatedProperties = new ArrayList<String>();
+        }
+        removeParentheses(realProperties);
+        removeParentheses(simulatedProperties);
+
+        final List<String> erroredProperties = new ArrayList<String>(simulatedProperties);
+        erroredProperties.removeAll(realProperties);
+
+        final List<String> implementedPropertie = new ArrayList<String>(simulatedProperties);
+        implementedPropertie.retainAll(realProperties);
+
+        dataset.addValue(implementedPropertie.size(), "Implemented", name_);
+        dataset.addValue(realProperties.size(),
+            browserVersion_.getNickname().replace("FF", "Firefox").replace("IE", "Internet Explorer"), name_);
+        dataset.addValue(erroredProperties.size(), "Should not be implemented", name_);
+        if (dataset.getColumnCount() == IE7_.size()) {
+            saveChart(dataset);
+        }
     }
 
     private String getValueOf(final List<String> list, final String name) {
@@ -150,4 +195,34 @@ public class PropertiesTest extends WebTestCase {
         }
         return null;
     }
+
+    /**
+     * To be removed. Currently a bug HtmlUnit returns 'function' for 'typeof document.all', needs investigations.
+     */
+    private void removeParentheses(final List<String> list) {
+        for (int i = 0; i < list.size(); i++) {
+            final String string = list.get(i);
+            if (string.endsWith("()")) {
+                list.set(i, string.substring((string.length() - 2)));
+            }
+        }
+    }
+
+    private void saveChart(final DefaultCategoryDataset dataset) throws IOException {
+        final JFreeChart chart = ChartFactory.createBarChart(
+            "HtmlUnit implemented properties and methods for " + browserVersion_.getNickname(), "Objects",
+            "Count", dataset, PlotOrientation.HORIZONTAL, true, true, false);
+        final CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        final NumberAxis axis = (NumberAxis) plot.getRangeAxis();
+        axis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+        final LayeredBarRenderer renderer = new LayeredBarRenderer();
+        plot.setRenderer(renderer);
+        plot.setRowRenderingOrder(SortOrder.DESCENDING);
+        renderer.setSeriesPaint(0, new GradientPaint(0, 0, Color.green, 0, 0, new Color(0, 64, 0)));
+        renderer.setSeriesPaint(1, new GradientPaint(0, 0, Color.blue, 0, 0, new Color(0, 0, 64)));
+        renderer.setSeriesPaint(2, new GradientPaint(0, 0, Color.red, 0, 0, new Color(64, 0, 0)));
+        ImageIO.write(chart.createBufferedImage(1200, 2400), "png",
+            new File("./artifacts/properties-" + browserVersion_.getNickname() + ".png"));
+    }
+
 }

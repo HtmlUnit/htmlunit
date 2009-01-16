@@ -16,7 +16,7 @@ BDO:
 BGSOUND:
 BIG:
 BLINK:
-HTMLQuoteElement:cite
+BlockQuote:cite
 HTMLBodyElement:aLink,background,bgColor,link,text,vLink
 HTMLBRElement:clear
 HTMLButtonElement:accessKey,click(),disabled,form,name,type,value
@@ -28,7 +28,7 @@ ClientInformation:
 ClipboardData:
 CODE:
 HTMLTableColElement:align,ch,chOff,span,vAlign,width
-HTMLTableColElement:align,ch,chOff,span,vAlign,width
+ColGroup:align,ch,chOff,span,vAlign,width
 CurrentStyle:
 DD:
 HTMLDelElement:cite,dateTime
@@ -99,9 +99,9 @@ HTMLTableElement:align,bgColor,border,caption,cellPadding,cellSpacing,createCapt
 HTMLTableSectionElement:align,ch,chOff,deleteRow(),insertRow(),rows,vAlign
 HTMLTableCellElement:abbr,align,axis,bgColor,cellIndex,ch,chOff,colSpan,headers,height,noWrap,rowSpan,scope,vAlign,width
 HTMLTextAreaElement:accessKey,cols,controllers,defaultValue,disabled,form,name,readOnly,rows,select(),selectionEnd,selectionStart,setSelectionRange(),textLength,type,value
-HTMLTableSectionElement:align,ch,chOff,deleteRow(),insertRow(),rows,vAlign
-HTMLTableCellElement:abbr,align,axis,bgColor,cellIndex,ch,chOff,colSpan,headers,height,noWrap,rowSpan,scope,vAlign,width
-HTMLTableSectionElement:align,ch,chOff,deleteRow(),insertRow(),rows,vAlign
+TFoot:align,ch,chOff,deleteRow(),insertRow(),rows,vAlign
+TH:abbr,align,axis,bgColor,cellIndex,ch,chOff,colSpan,headers,height,noWrap,rowSpan,scope,vAlign,width
+THead:align,ch,chOff,deleteRow(),insertRow(),rows,vAlign
 HTMLTitleElement:text
 HTMLTableRowElement:align,bgColor,cells,ch,chOff,deleteCell(),insertCell(),rowIndex,sectionRowIndex,vAlign
 TT:

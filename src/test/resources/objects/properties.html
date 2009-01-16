@@ -23,7 +23,7 @@
 	writeAll('BGSOUND', document.createElement('bgsound'), unknown);//same as 'abbr'
 	writeAll('BIG', document.createElement('big'), unknown);//same as 'abbr'
 	writeAll('BLINK', document.createElement('blink'), unknown);//same as 'abbr'
-    writeAll('HTMLQuoteElement', document.createElement('blockquote'), unknown);
+    writeAll('BlockQuote', document.createElement('blockquote'), unknown);
     writeAll('HTMLBodyElement', document.body, unknown);
     writeAll('HTMLBRElement', document.createElement('br'), unknown);
     writeAll('HTMLButtonElement', document.createElement('button'), unknown);
@@ -35,7 +35,7 @@
 	writeAll('ClipboardData', window.clipboardData, null);
 	writeAll('CODE', document.createElement('code'), unknown);//same as 'abbr'
     writeAll('HTMLTableColElement', document.createElement('col'), unknown);
-    writeAll('HTMLTableColElement', document.createElement('colgroup'), unknown);
+    writeAll('ColGroup', document.createElement('colgroup'), unknown);
     writeAll('CurrentStyle', document.getElementById('myTextarea').currentStyle, document.getElementById('myTextarea').style);
 //custom tag: http://msdn.microsoft.com/en-us/library/ms535233.aspx
 //event.dataTransfer
@@ -130,9 +130,9 @@
     writeAll('HTMLTextAreaElement', document.createElement('textarea'), unknown);
 //TextRange
 //TextRectangle
-    writeAll('HTMLTableSectionElement', document.createElement('tfoot'), unknown);
-    writeAll('HTMLTableCellElement', document.createElement('th'), unknown);
-    writeAll('HTMLTableSectionElement', document.createElement('thead'), unknown);
+    writeAll('TFoot', document.createElement('tfoot'), unknown);
+    writeAll('TH', document.createElement('th'), unknown);
+    writeAll('THead', document.createElement('thead'), unknown);
     writeAll('HTMLTitleElement', document.createElement('title'), unknown);
     writeAll('HTMLTableRowElement', document.createElement('tr'), unknown);
 	writeAll('TT', document.createElement('tt'), unknown);//same as 'abbr'

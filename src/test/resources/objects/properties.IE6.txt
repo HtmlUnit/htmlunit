@@ -16,7 +16,7 @@ BDO:cite,dateTime,filters
 BGSOUND:balance,filters,loop,src,volume
 BIG:cite,dateTime,filters
 BLINK:cite,dateTime,filters
-HTMLQuoteElement:cite,clear,clear(),filters,width
+BlockQuote:cite,clear,clear(),filters,width
 HTMLBodyElement:aLink,background,bgColor,bgProperties,bottomMargin,createTextRange(),filters,leftMargin,link,noWrap,onafterprint,onbeforeprint,onbeforeunload,onload(),onselect,onunload,rightMargin,scroll,scroll(),text,topMargin,vLink
 HTMLBRElement:clear,clear(),filters
 HTMLButtonElement:createTextRange(),dataFld,dataFormatAs,dataSrc,filters,form,name,status,type,value
@@ -28,7 +28,7 @@ ClientInformation:appCodeName,appMinorVersion,appName,appVersion,cookieEnabled,c
 ClipboardData:clearData(),dropEffect,effectAllowed,getData(),setData()
 CODE:cite,dateTime,filters
 HTMLTableColElement:align,ch,chOff,filters,span,vAlign,width
-HTMLTableColElement:align,ch,chOff,filters,span,vAlign,width
+ColGroup:align,ch,chOff,filters,span,vAlign,width
 CurrentStyle:blockDirection,clipBottom,clipLeft,clipRight,clipTop,hasLayout
 DD:filters,noWrap
 HTMLDelElement:cite,dateTime,filters
@@ -99,9 +99,9 @@ HTMLTableElement:align,background,bgColor,border,borderColor,borderColorDark,bor
 HTMLTableSectionElement:align,bgColor,ch,chOff,deleteRow(),filters,insertRow(),moveRow(),rows,vAlign
 HTMLTableCellElement:abbr,align,axis,background,bgColor,borderColor,borderColorDark,borderColorLight,cellIndex,ch,chOff,colSpan,filters,headers,height,noWrap,rowSpan,scope,vAlign,width
 HTMLTextAreaElement:cols,createTextRange(),dataFld,dataFormatAs,dataSrc,filters,form,name,onchange,onselect,readOnly,rows,select(),status,type,value,wrap
-HTMLTableSectionElement:align,bgColor,ch,chOff,deleteRow(),filters,insertRow(),moveRow(),rows,vAlign
-HTMLTableCellElement:abbr,align,axis,background,bgColor,borderColor,borderColorDark,borderColorLight,cellIndex,ch,chOff,colSpan,filters,headers,height,noWrap,rowSpan,scope,vAlign,width
-HTMLTableSectionElement:align,bgColor,ch,chOff,deleteRow(),filters,insertRow(),moveRow(),rows,vAlign
+TFoot:align,bgColor,ch,chOff,deleteRow(),filters,insertRow(),moveRow(),rows,vAlign
+TH:abbr,align,axis,background,bgColor,borderColor,borderColorDark,borderColorLight,cellIndex,ch,chOff,colSpan,filters,headers,height,noWrap,rowSpan,scope,vAlign,width
+THead:align,bgColor,ch,chOff,deleteRow(),filters,insertRow(),moveRow(),rows,vAlign
 HTMLTitleElement:filters
 HTMLTableRowElement:align,bgColor,borderColor,borderColorDark,borderColorLight,cells,ch,chOff,deleteCell(),filters,height,insertCell(),rowIndex,sectionRowIndex,vAlign
 TT:cite,dateTime,filters
