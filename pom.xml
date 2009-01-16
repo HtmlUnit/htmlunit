@@ -96,7 +96,8 @@
                             <tasks>
                                 <mkdir dir="${basedir}/artifacts"/>
                                 <delete includeemptydirs="true">
-                                    <fileset dir="${basedir}/artifacts" includes="**/*"/>
+                                    <fileset dir="${basedir}/artifacts" includes="**/*.jar"/>
+                                    <fileset dir="${basedir}/artifacts" includes="**/*.zip"/>
                                 </delete>
                                 <copy todir="${basedir}/artifacts">
                                     <fileset dir="${basedir}/target">
@@ -537,6 +538,13 @@
             <artifactId>jfreechart</artifactId>
             <version>1.0.11</version>
             <scope>test</scope>
+            <!-- Not needed for 1.0.12 -->
+            <exclusions>
+                <exclusion>
+                    <groupId>gnujaxp</groupId>
+                    <artifactId>gnujaxp</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- WebDriver -->
         <dependency>
@@ -544,10 +552,10 @@
             <artifactId>webdriver-htmlunit</artifactId>
             <version>0.5.524</version>
             <scope>test</scope>
-                <exclusions>
-                    <exclusion>
-                        <groupId>net.sourceforge.htmlunit</groupId>
-                        <artifactId>htmlunit</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>net.sourceforge.htmlunit</groupId>
+                    <artifactId>htmlunit</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
