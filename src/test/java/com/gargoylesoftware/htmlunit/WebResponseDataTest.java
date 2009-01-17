@@ -14,10 +14,19 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.Writer;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.Servlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
@@ -82,4 +91,44 @@ public class WebResponseDataTest extends WebServerTestCase {
         assertEquals("Hello Compressed World!", page.asText());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void redirection() throws Exception {
+        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        servlets.put("/folder1/page1", RedirectionServlet.class);
+        servlets.put("/folder2/page2", RedirectionServlet.class);
+        startWebServer("./", null, servlets);
+
+        final WebClient client = new WebClient();
+
+        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/folder1/page1");
+        assertEquals("Hello Redirected!", page.asText());
+    }
+
+    /**
+     * Servlet for {@link #redirection()}.
+     */
+    public static class RedirectionServlet extends HttpServlet {
+
+        private static final long serialVersionUID = 2865392611660286450L;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            if (request.getRequestURI().equals("/folder1/page1")) {
+                response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
+                final String location = request.getRequestURL().toString().replace("page1", "../folder2/page2");
+                response.setHeader("Location", location);
+                return;
+            }
+            response.setContentType("text/html");
+            final Writer writer = response.getWriter();
+            writer.write("Hello Redirected!");
+            writer.close();
+        }
+    }
 }
