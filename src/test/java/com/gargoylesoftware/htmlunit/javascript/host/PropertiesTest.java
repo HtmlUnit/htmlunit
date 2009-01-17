@@ -182,13 +182,13 @@ public class PropertiesTest extends WebTestCase {
         dataset.addValue(realProperties.size(),
             browserVersion_.getNickname().replace("FF", "Firefox ").replace("IE", "Internet Explorer "), name_);
         dataset.addValue(erroredProperties.size(), "Should not be implemented", name_);
-        
+
         final List<String> remainingProperties = new ArrayList<String>(realProperties);
         remainingProperties.removeAll(implementedProperties);
-        
+
         getLog().debug(name_ + ':' + browserVersion_.getNickname() + ':' + realProperties);
         getLog().debug("Remaining" + ':' + remainingProperties);
-        getLog().debug("Error" + erroredProperties);
+        getLog().debug("Error" + ':' + erroredProperties);
         if (dataset.getColumnCount() == IE7_.size()) {
             saveChart(dataset);
         }
