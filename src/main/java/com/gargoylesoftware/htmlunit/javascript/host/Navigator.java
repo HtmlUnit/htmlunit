@@ -27,8 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  *
- * @see <a href="http://msdn.microsoft.com/en-us/library/ms535867.aspx">
- * MSDN documentation</a>
+ * @see <a href="http://msdn.microsoft.com/en-us/library/ms535867.aspx">MSDN documentation</a>
  */
 public final class Navigator extends SimpleScriptable {
 
@@ -38,7 +37,7 @@ public final class Navigator extends SimpleScriptable {
     private MimeTypeArray mimeTypes_;
 
     /**
-     * Create an instance. JavaScript objects must have a default constructor.
+     * Creates an instance. JavaScript objects must have a default constructor.
      */
     public Navigator() { }
 

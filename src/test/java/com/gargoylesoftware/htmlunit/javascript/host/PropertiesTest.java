@@ -175,13 +175,20 @@ public class PropertiesTest extends WebTestCase {
         final List<String> erroredProperties = new ArrayList<String>(simulatedProperties);
         erroredProperties.removeAll(realProperties);
 
-        final List<String> implementedPropertie = new ArrayList<String>(simulatedProperties);
-        implementedPropertie.retainAll(realProperties);
+        final List<String> implementedProperties = new ArrayList<String>(simulatedProperties);
+        implementedProperties.retainAll(realProperties);
 
-        dataset.addValue(implementedPropertie.size(), "Implemented", name_);
+        dataset.addValue(implementedProperties.size(), "Implemented", name_);
         dataset.addValue(realProperties.size(),
-            browserVersion_.getNickname().replace("FF", "Firefox").replace("IE", "Internet Explorer"), name_);
+            browserVersion_.getNickname().replace("FF", "Firefox ").replace("IE", "Internet Explorer "), name_);
         dataset.addValue(erroredProperties.size(), "Should not be implemented", name_);
+        
+        final List<String> remainingProperties = new ArrayList<String>(realProperties);
+        remainingProperties.removeAll(implementedProperties);
+        
+        getLog().debug(name_ + ':' + browserVersion_.getNickname() + ':' + realProperties);
+        getLog().debug("Remaining" + ':' + remainingProperties);
+        getLog().debug("Error" + erroredProperties);
         if (dataset.getColumnCount() == IE7_.size()) {
             saveChart(dataset);
         }
@@ -197,13 +204,13 @@ public class PropertiesTest extends WebTestCase {
     }
 
     /**
-     * To be removed. Currently a bug HtmlUnit returns 'function' for 'typeof document.all', needs investigations.
+     * To be removed once {@link HTMLCollectionTest#typeof()} is fixed.
      */
     private void removeParentheses(final List<String> list) {
         for (int i = 0; i < list.size(); i++) {
             final String string = list.get(i);
             if (string.endsWith("()")) {
-                list.set(i, string.substring((string.length() - 2)));
+                list.set(i, string.substring(0, string.length() - 2));
             }
         }
     }

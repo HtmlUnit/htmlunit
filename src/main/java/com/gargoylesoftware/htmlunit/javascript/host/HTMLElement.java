@@ -1926,4 +1926,13 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public void jsxFunction_click() throws IOException {
         getDomNodeOrDie().click();
     }
+
+    /**
+     * Simulates a click on a scrollbar component (IE only).
+     * @param scrollAction the type of scroll action to simulate
+     */
+    public void jsxFunction_doScroll(final String scrollAction) {
+        // Ignore because we aren't displaying anything!
+    }
+
 }
