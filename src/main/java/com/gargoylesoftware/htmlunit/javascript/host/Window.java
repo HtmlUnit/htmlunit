@@ -88,7 +88,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     private Object event_;
     private String status_ = "";
     private HTMLCollection frames_; // has to be a member to have equality (==) working
-    private ClipboardData clipboardData_;
     private Map<Class< ? extends SimpleScriptable>, Scriptable> prototypes_ =
         new HashMap<Class< ? extends SimpleScriptable>, Scriptable>();
     private final JavaScriptEngine scriptEngine_;
@@ -350,27 +349,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     public Navigator jsxGet_navigator() {
         return navigator_;
-    }
-
-    /**
-     * Returns the JavaScript property "clientInformation".
-     * @return the client information
-     */
-    public Navigator jsxGet_clientInformation() {
-        return navigator_;
-    }
-
-    /**
-     * Returns the JavaScript property "clipboardData".
-     * @return the client information
-     */
-    public ClipboardData jsxGet_clipboardData() {
-        if (clipboardData_ == null) {
-            clipboardData_ = new ClipboardData();
-            clipboardData_.setParentScope(this);
-            clipboardData_.setPrototype(getPrototype(clipboardData_.getClass()));
-        }
-        return clipboardData_;
     }
 
     /**
