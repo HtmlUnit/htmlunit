@@ -228,7 +228,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      */
     public Document getOwnerDocument() {
-        return (Document) getPage();
+        return getPage();
     }
 
     /**

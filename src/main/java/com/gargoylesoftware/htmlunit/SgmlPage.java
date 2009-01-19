@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
 
+import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
 
@@ -31,7 +32,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public abstract class SgmlPage extends DomNode implements Page {
+public abstract class SgmlPage extends DomNode implements Page, Document {
 
     private static final long serialVersionUID = -8803248938782701094L;
     private DomDocumentType documentType_;

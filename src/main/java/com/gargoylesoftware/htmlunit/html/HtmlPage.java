@@ -114,7 +114,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Sudhan Moghe
  * @author Ethan Glasser-Camp
  */
-public final class HtmlPage extends SgmlPage implements Cloneable, Document {
+public final class HtmlPage extends SgmlPage implements Cloneable {
 
     private HtmlUnitDOMBuilder builder_;
     private static final long serialVersionUID = 1779746292119944291L;

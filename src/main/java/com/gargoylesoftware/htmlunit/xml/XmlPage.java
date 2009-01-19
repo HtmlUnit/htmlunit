@@ -52,7 +52,7 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
  * @author David K. Taylor
  * @author Ahmed Ashour
  */
-public class XmlPage extends SgmlPage implements Document {
+public class XmlPage extends SgmlPage {
 
     private static final long serialVersionUID = -1430136241030261308L;
 
