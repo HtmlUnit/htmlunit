@@ -67,6 +67,11 @@
         <function name="substringData"/>
     </class>
 
+    <class name="ClipboardData" classname="com.gargoylesoftware.htmlunit.javascript.host.ClipboardData"
+        JSObject="true">
+        <browser name="Microsoft Internet Explorer"/>
+    </class>
+
     <class name="Comment" extends="CharacterDataImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.Comment"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomComment">
     </class>
@@ -2378,6 +2383,12 @@
     <class name="Window" classname="com.gargoylesoftware.htmlunit.javascript.host.Window" JSObject="true">
         <doclink url="http://msdn.microsoft.com/en-us/library/ms535873.aspx" descr="MSDN documentation"/>
 
+        <property name="clipboardData" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="clientInformation" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
         <property name="closed" readable="true" writable="false"/>
         <property name="controllers" readable="true" writable="true">
             <browser name="Firefox"/>

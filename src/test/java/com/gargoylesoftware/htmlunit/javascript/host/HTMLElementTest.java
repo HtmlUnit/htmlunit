@@ -1775,22 +1775,22 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testOffsetParent_withSelectors() throws Exception {
-        final String html = "<html><head><style>"
-            + "div ul > li {"
-            + "  font-size: xx-small;"
-            + "}"
-            + "</style><script>"
-            + "function test() {"
-            + "  var divThing = document.getElementById('outer');"
-            + "  while (divThing) {"
-            + "    divThing = divThing.offsetParent;"
-            + "  }"
-            + "}"
-            + "</script></head>"
-            + "<body onload='test()'>"
-            + "<div id='outer'></div>"
-            + "</body>"
+    public void offsetParent_withSelectors() throws Exception {
+        final String html = "<html><head><style>\n"
+            + "div ul > li {\n"
+            + "  font-size: xx-small;\n"
+            + "}\n"
+            + "</style><script>\n"
+            + "function test() {\n"
+            + "  var divThing = document.getElementById('outer');\n"
+            + "  while (divThing) {\n"
+            + "    divThing = divThing.offsetParent;\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<div id='outer'></div>\n"
+            + "</body>\n"
             + "</html>";
         loadPage(getBrowserVersion(), html, null);
     }

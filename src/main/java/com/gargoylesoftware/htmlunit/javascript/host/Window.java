@@ -352,6 +352,25 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
+     * Returns the JavaScript property "clientInformation".
+     * @return the client information
+     */
+    public Navigator jsxGet_clientInformation() {
+        return navigator_;
+    }
+
+    /**
+     * Returns the JavaScript property "clipboardData".
+     * @return the ClipboardData
+     */
+    public ClipboardData jsxGet_clipboardData() {
+        final ClipboardData clipboardData = new ClipboardData();
+        clipboardData.setParentScope(this);
+        clipboardData.setPrototype(getPrototype(clipboardData.getClass()));
+        return clipboardData;
+    }
+
+    /**
      * Returns the window property. This is a synonym for "self".
      * @return the window property (a reference to <tt>this</tt>)
      */
@@ -1269,4 +1288,5 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     public void jsxSet_controllers(final Object value) {
         controllers_ = value;
     }
+
 }
