@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
+            <action type="fix" dev="mguillem" issue="2528830">
+                JavaScript: compute URL relatively to owning page for showModelessDialog and showModalDialog.
+            </action>
             <action type="fix" dev="mguillem" issue="2503965">
                 IE Conditional comments: accept expressions that contain identifier other than IE (like mso).
             </action>

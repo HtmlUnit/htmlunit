@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +81,7 @@ public class WindowTest2 extends WebTestCase {
             + "    var o = new Object();\n"
             + "    o.firstName = f.elements.firstName.value;\n"
             + "    o.lastName = f.elements.lastName.value;\n"
-            + "    var ret = showModalDialog('" + URL_SECOND + "', o, 'dialogHeight:300px; dialogLeft:200px;');\n"
+            + "    var ret = showModalDialog('myDialog.html', o, 'dialogHeight:300px; dialogLeft:200px;');\n"
             + "    alert(ret);\n"
             + "    alert('finished');\n"
             + "  }\n"
@@ -109,7 +110,7 @@ public class WindowTest2 extends WebTestCase {
 
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html1);
-        conn.setResponse(URL_SECOND, html2);
+        conn.setResponse(new URL(URL_FIRST.toExternalForm() + "myDialog.html"), html2);
         client.setWebConnection(conn);
 
         final HtmlPage page = client.getPage(URL_FIRST);
@@ -132,7 +133,7 @@ public class WindowTest2 extends WebTestCase {
             = "<html><head><script>\n"
             + "  var userName = '';\n"
             + "  function test() {\n"
-            + "    var newWindow = showModelessDialog('" + URL_SECOND + "', window, 'status:false');\n"
+            + "    var newWindow = showModelessDialog('myDialog.html', window, 'status:false');\n"
             + "    alert(newWindow);\n"
             + "  }\n"
             + "  function update() { alert(userName); }\n"
@@ -159,7 +160,7 @@ public class WindowTest2 extends WebTestCase {
 
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html1);
-        conn.setResponse(URL_SECOND, html2);
+        conn.setResponse(new URL(URL_FIRST.toExternalForm() + "myDialog.html"), html2);
         client.setWebConnection(conn);
 
         final HtmlPage page = client.getPage(URL_FIRST);

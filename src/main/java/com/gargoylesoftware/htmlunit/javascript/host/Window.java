@@ -1139,7 +1139,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         final WebWindow ww = getWebWindow();
         final WebClient client = ww.getWebClient();
         try {
-            final DialogWindow dialog = client.openDialogWindow(new URL(url), ww, arguments);
+            final URL completeUrl = ((HtmlPage) getDomNodeOrDie()).getFullyQualifiedUrl(url);
+            final DialogWindow dialog = client.openDialogWindow(completeUrl, ww, arguments);
             // TODO: Theoretically, we shouldn't return until the dialog window has been close()'ed...
             // But we have to return so that the window can be close()'ed...
             // Maybe we can use Rhino's continuation support to save state and restart when
@@ -1164,7 +1165,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         final WebWindow ww = getWebWindow();
         final WebClient client = ww.getWebClient();
         try {
-            final DialogWindow dialog = client.openDialogWindow(new URL(url), ww, arguments);
+            final URL completeUrl = ((HtmlPage) getDomNodeOrDie()).getFullyQualifiedUrl(url);
+            final DialogWindow dialog = client.openDialogWindow(completeUrl, ww, arguments);
             final Window jsDialog = (Window) dialog.getScriptObject();
             return jsDialog;
         }
