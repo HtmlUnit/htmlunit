@@ -71,6 +71,11 @@ public class PropertiesTest extends WebTestCase {
     private static DefaultCategoryDataset CATEGORY_DATASET_FF2_ = new DefaultCategoryDataset();
     private static DefaultCategoryDataset CATEGORY_DATASET_FF3_ = new DefaultCategoryDataset();
 
+    private static StringBuilder IE6_HTML_ = new StringBuilder();
+    private static StringBuilder IE7_HTML_ = new StringBuilder();
+    private static StringBuilder FF2_HTML_ = new StringBuilder();
+    private static StringBuilder FF3_HTML_ = new StringBuilder();
+
     private final String name_;
     private final BrowserVersion browserVersion_;
 
@@ -140,25 +145,30 @@ public class PropertiesTest extends WebTestCase {
         final List<String> realList;
         final List<String> simulatedList;
         final DefaultCategoryDataset dataset;
+        final StringBuilder html;
         if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_6) {
             realList = IE6_;
             simulatedList = IE6_SIMULATED_;
             dataset = CATEGORY_DATASET_IE6_;
+            html = IE6_HTML_;
         }
         else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_7) {
             realList = IE7_;
             simulatedList = IE7_SIMULATED_;
             dataset = CATEGORY_DATASET_IE7_;
+            html = IE7_HTML_;
         }
         else if (browserVersion_ == BrowserVersion.FIREFOX_2) {
             realList = FF2_;
             simulatedList = FF2_SIMULATED_;
             dataset = CATEGORY_DATASET_FF2_;
+            html = FF2_HTML_;
         }
         else {
             realList = FF3_;
             simulatedList = FF3_SIMULATED_;
             dataset = CATEGORY_DATASET_FF3_;
+            html = FF3_HTML_;
         }
 
         List<String> realProperties = Arrays.asList(getValueOf(realList, name_).split(","));
@@ -169,6 +179,7 @@ public class PropertiesTest extends WebTestCase {
         if (simulatedProperties.size() == 1 && simulatedProperties.get(0).length() == 0) {
             simulatedProperties = new ArrayList<String>();
         }
+        final List<String> originalRealProperties = new ArrayList<String>(realProperties);
         removeParentheses(realProperties);
         removeParentheses(simulatedProperties);
 
@@ -189,9 +200,65 @@ public class PropertiesTest extends WebTestCase {
         getLog().debug(name_ + ':' + browserVersion_.getNickname() + ':' + realProperties);
         getLog().debug("Remaining" + ':' + remainingProperties);
         getLog().debug("Error" + ':' + erroredProperties);
+
+        appendHtml(html, originalRealProperties, simulatedProperties, erroredProperties);
         if (dataset.getColumnCount() == IE7_.size()) {
             saveChart(dataset);
+            html.append("</table>").append('\n').append("<br>").append("Legend:").append("<br>")
+                .append("<span style='color: blue'>").append("To be implemented").append("</span>").append("<br>")
+                .append("<span style='color: green'>").append("Implemented").append("</span>").append("<br>")
+                .append("<span style='color: red'>").append("Should not be implemented").append("</span>")
+                .append("</html>");
+            FileUtils.writeStringToFile(new File("./artifacts/properties-" + browserVersion_.getNickname() + ".html"),
+                html.toString());
         }
+    }
+
+    private void appendHtml(final StringBuilder html, final List<String> originalRealProperties,
+            final List<String> simulatedProperties, final List<String> erroredProperties) {
+        if (html.length() == 0) {
+            html.append("<html>").append('\n').append("<div align='center'>").append("<h2>")
+            .append("HtmlUnit implemented properties and methods for " + browserVersion_.getNickname())
+            .append("</h2>").append("</div>").append("<table width='100%' border='1'>");
+        }
+        html.append("<tr>").append('\n').append("<td rowspan='2'>").append(name_)
+            .append("</td>").append('\n').append("<td>");
+        int implementedCount = 0;
+        for (int i = 0; i < originalRealProperties.size(); i++) {
+            String propertyTrimmed = originalRealProperties.get(i);
+            if (propertyTrimmed.endsWith("()")) {
+                propertyTrimmed = propertyTrimmed.substring(0, propertyTrimmed.length() - 2);
+            }
+            final String color;
+            if (simulatedProperties.contains(propertyTrimmed)) {
+                color = "green";
+                implementedCount++;
+            }
+            else {
+                color = "blue";
+            }
+            html.append("<span style='color: " + color + "'>").append(originalRealProperties.get(i)).append("</span>");
+            if (i < originalRealProperties.size() - 1) {
+                html.append(',').append(' ');
+            }
+        }
+        if (originalRealProperties.isEmpty()) {
+            html.append("&nbsp;");
+        }
+        html.append("</td>").append("<td>").append(implementedCount).append('/')
+            .append(originalRealProperties.size()).append("</td>").append("</tr>").append('\n');
+        html.append("<tr>").append("<td>");
+        for (int i = 0; i < erroredProperties.size(); i++) {
+            html.append("<span style='color: red'>").append(erroredProperties.get(i)).append("</span>");
+            if (i < erroredProperties.size() - 1) {
+                html.append(',').append(' ');
+            }
+        }
+        if (erroredProperties.isEmpty()) {
+            html.append("&nbsp;");
+        }
+        html.append("</td>")
+            .append("<td>").append(erroredProperties.size()).append("</td>").append("</tr>").append('\n');
     }
 
     private String getValueOf(final List<String> list, final String name) {

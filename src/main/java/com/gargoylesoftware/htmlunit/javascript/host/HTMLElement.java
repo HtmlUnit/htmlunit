@@ -292,8 +292,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Gets the "prefix" attribute.
-     * @return the "prefix" attribute
+     * {@inheritDoc}
      */
     @Override
     public String jsxGet_localName() {

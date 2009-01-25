@@ -1383,6 +1383,9 @@
 
     <class name="HTMLFontElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFontElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFont">
+        <property name="color" readable="true" writable="true"/>
+        <property name="face" readable="true" writable="true"/>
+        <property name="size" readable="true" writable="true"/>
     </class>
 
     <class name="HTMLFormElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFormElement"
