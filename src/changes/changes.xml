@@ -7,7 +7,7 @@
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
             <action type="add" dev="asashour">
-                JavaScript: add support for HTMLElement.dir, .lang, and .spellcheck.
+                JavaScript: add support for HTMLElement.dir, .lang, .tabIndex and .spellcheck.
             </action>
             <action type="add" dev="asashour">
                 JavaScript: add support for window.atob() and btoa().

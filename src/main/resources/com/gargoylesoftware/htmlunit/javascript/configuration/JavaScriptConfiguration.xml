@@ -58,8 +58,6 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomCharacterData">
         <property name="data" readable="true" writable="true"/>
         <property name="length" readable="true" writable="false"/>
-        <property name="tabIndex" notImplemented="true" readable="true" writable="true"/>
-
         <function name="appendData"/>
         <function name="deleteData"/>
         <function name="insertData"/>
@@ -1021,7 +1019,6 @@
         <property name="form" readable="true" writable="false"/>
         <property name="name" readable="true" writable="true"/>
         <property name="onchange" readable="true" writable="true"/>
-        <property name="tabIndex" readable="true" writable="false"/>
         <property name="type" readable="true" writable="false"/>
         <property name="value" readable="true" writable="true"/>
     </class>
@@ -1055,7 +1052,6 @@
         <property name="port" readable="true" writable="true"/>
         <property name="protocol" readable="true" writable="true"/>
         <property name="search" readable="true" writable="true"/>
-        <property name="tabIndex" notImplemented="true" readable="true" writable="true"/>
         <property name="target" readable="true" writable="true"/>
         <property name="text" notImplemented="true" readable="true" writable="true">
             <browser name="Firefox"/>
@@ -1377,6 +1373,7 @@
             <browser name="Firefox"/>
         </property>
         <property name="style" readable="true" writable="false"/>
+        <property name="tabIndex" readable="true" writable="true"/>
         <property name="tagName" readable="true" writable="false"/>
         <property name="textContent" readable="true" writable="true">
             <browser name="Firefox"/>

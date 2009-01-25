@@ -1973,4 +1973,21 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public void jsxSet_dir(final String dir) {
         getDomNodeOrDie().setAttribute("dir", dir);
     }
+
+    /**
+     * Returns the value of the tabIndex attribute.
+     * @return the value of the tabIndex attribute
+     */
+    public int jsxGet_tabIndex() {
+        return (int) Context.toNumber(getDomNodeOrDie().getAttribute("tabindex"));
+    }
+
+    /**
+     * Sets the "dir" property.
+     * @param tabIndex the "dir" property
+     */
+    public void jsxSet_tabIndex(final int tabIndex) {
+        getDomNodeOrDie().setAttribute("tabIndex", Integer.toString(tabIndex));
+    }
+
 }

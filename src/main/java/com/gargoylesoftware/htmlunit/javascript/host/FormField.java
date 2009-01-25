@@ -122,19 +122,4 @@ public class FormField extends HTMLElement {
     public Function jsxGet_onchange() {
         return getEventHandler("onchange");
     }
-
-    /**
-     * Returns the value of the tabIndex attribute.
-     * @return the value of the tabIndex attribute
-     */
-    public int jsxGet_tabIndex() {
-        int index = 0;
-        try {
-            index = Integer.parseInt(getDomNodeOrDie().getAttribute("tabindex"));
-        }
-        catch (final Exception e) {
-            //ignore
-        }
-        return index;
-    }
 }
