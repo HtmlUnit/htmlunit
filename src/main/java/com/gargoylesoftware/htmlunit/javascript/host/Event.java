@@ -199,6 +199,9 @@ public class Event extends SimpleScriptable {
     public static final int SUBMIT = 0x20000;
 
     /** Constant. */
+    public static final int TEXT = 0x40000000;
+
+    /** Constant. */
     public static final int UNLOAD = 0x100000;
 
     /** Constant. */

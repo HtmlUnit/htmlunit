@@ -911,6 +911,9 @@
         <constant name="SUBMIT">
             <browser name="Firefox"/>
         </constant>
+        <constant name="TEXT">
+            <browser name="Firefox"/>
+        </constant>
         <constant name="UNLOAD">
             <browser name="Firefox"/>
         </constant>

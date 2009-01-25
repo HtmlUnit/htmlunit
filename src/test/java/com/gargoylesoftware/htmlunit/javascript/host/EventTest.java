@@ -894,4 +894,21 @@ public class EventTest extends WebTestCase {
             + "8,1,20,10,8,4,2,2000000,10000,4000000,40000,4000,4,20000,100000,200000,", value);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.FF)
+    @Alerts("40000000")
+    public void text() throws Exception {
+        final String html =
+              "<html><body onload='test(event)'><script>\n"
+            + "  function test(e) {\n"
+            + "    alert(e.TEXT.toString(16));\n"// But Event.TEXT is undefined!!!
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }
