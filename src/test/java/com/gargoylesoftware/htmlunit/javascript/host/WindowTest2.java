@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class WindowTest2 extends WebTestCase {
@@ -191,4 +192,21 @@ public class WindowTest2 extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.FF)
+    @Alerts({ "SGVsbG8gV29ybGQh", "Hello World!" })
+    public void atob() throws Exception {
+        final String html
+            = "<html><head></head><body>\n"
+            + "<script>\n"
+            + "  var data = window.btoa('Hello World!');\n"
+            + "  alert(data);\n"
+            + "  alert(atob(data));\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
 }

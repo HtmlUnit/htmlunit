@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.lang.StringUtils;
 import org.mozilla.javascript.Context;
@@ -153,6 +154,24 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         else {
             handler.handleAlert(document_.getHtmlPage(), stringMessage);
         }
+    }
+
+    /**
+     * Creates a base-64 encoded ASCII string from a string of binary data.
+     * @param stringToEncode string to encode
+     * @return the encoded string
+     */
+    public String jsxFunction_btoa(final String stringToEncode) {
+        return new String(Base64.encodeBase64(stringToEncode.getBytes()));
+    }
+
+    /**
+     * Decodes a string of data which has been encoded using base-64 encoding..
+     * @param encodedData the encoded string
+     * @return the decoded value
+     */
+    public String jsxFunction_atob(final String encodedData) {
+        return new String(Base64.decodeBase64(encodedData.getBytes()));
     }
 
     /**
