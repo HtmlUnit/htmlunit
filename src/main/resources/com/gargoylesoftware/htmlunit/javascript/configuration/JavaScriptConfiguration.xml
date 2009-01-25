@@ -803,6 +803,111 @@
         <doclink
             url="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event"
             descr="W3C Document Object Model (DOM) Level 2"/>
+        <constant name="ABORT">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="ALT_MASK">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="BACK">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="BLUR">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="CHANGE">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="CLICK">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="CONTROL_MASK">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="DBLCLICK">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="DRAGDROP">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="ERROR">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="FOCUS">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="FORWARD">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="HELP">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="KEYDOWN">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="KEYPRESS">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="KEYUP">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="LOAD">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="LOAD">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="LOCATE">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="META_MASK">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="MOUSEDOWN">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="MOUSEDRAG">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="MOUSEMOVE">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="MOUSEOUT">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="MOUSEOVER">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="MOUSEUP">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="MOVE">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="RESET">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="RESIZE">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="SCROLL">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="SELECT">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="SHIFT_MASK">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="SUBMIT">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="UNLOAD">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="XFER_DONE">
+            <browser name="Firefox"/>
+        </constant>
         <property name="altKey" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer"/>
         </property>

@@ -102,6 +102,108 @@ public class Event extends SimpleScriptable {
     /** The third (and final) event phase: the bubbling phase. */
     public static final short BUBBLING_PHASE = 3;
 
+    /** Constant. */
+    public static final int ABORT = 0x400000;
+
+    /** Constant. */
+    public static final int ALT_MASK = 0x1;
+
+    /** Constant. */
+    public static final int BACK = 0x20000000;
+
+    /** Constant. */
+    public static final int BLUR = 0x2000;
+
+    /** Constant. */
+    public static final int CHANGE = 0x8000;
+
+    /** Constant. */
+    public static final int CLICK = 0x40;
+
+    /** Constant. */
+    public static final int CONTROL_MASK = 0x2;
+
+    /** Constant. */
+    public static final int DBLCLICK = 0x80;
+
+    /** Constant. */
+    public static final int DRAGDROP = 0x800;
+
+    /** Constant. */
+    public static final int ERROR = 0x800000;
+
+    /** Constant. */
+    public static final int FOCUS = 0x1000;
+
+    /** Constant. */
+    public static final int FORWARD = 0x8000000;
+
+    /** Constant. */
+    public static final int HELP = 0x10000000;
+
+    /** Constant. */
+    public static final int KEYDOWN = 0x100;
+
+    /** Constant. */
+    public static final int KEYPRESS = 0x400;
+
+    /** Constant. */
+    public static final int KEYUP = 0x200;
+
+    /** Constant. */
+    public static final int LOAD = 0x80000;
+
+    /** Constant. */
+    public static final int LOCATE = 0x1000000;
+
+    /** Constant. */
+    public static final int META_MASK = 0x8;
+
+    /** Constant. */
+    public static final int MOUSEDOWN = 0x1;
+
+    /** Constant. */
+    public static final int MOUSEDRAG = 0x20;
+
+    /** Constant. */
+    public static final int MOUSEMOVE = 0x10;
+
+    /** Constant. */
+    public static final int MOUSEOUT = 0x8;
+
+    /** Constant. */
+    public static final int MOUSEOVER = 0x4;
+
+    /** Constant. */
+    public static final int MOUSEUP = 0x2;
+
+    /** Constant. */
+    public static final int MOVE = 0x2000000;
+
+    /** Constant. */
+    public static final int RESET = 0x10000;
+
+    /** Constant. */
+    public static final int RESIZE = 0x4000000;
+
+    /** Constant. */
+    public static final int SCROLL = 0x40000;
+
+    /** Constant. */
+    public static final int SELECT = 0x4000;
+
+    /** Constant. */
+    public static final int SHIFT_MASK = 0x4;
+
+    /** Constant. */
+    public static final int SUBMIT = 0x20000;
+
+    /** Constant. */
+    public static final int UNLOAD = 0x100000;
+
+    /** Constant. */
+    public static final int XFER_DONE = 0x200000;
+
     private static final long serialVersionUID = 4050485607908455730L;
 
     private Object srcElement_;        // IE-only writeable equivalent of target.
