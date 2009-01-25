@@ -809,10 +809,19 @@
         <constant name="ALT_MASK">
             <browser name="Firefox"/>
         </constant>
+        <constant name="AT_TARGET">
+            <browser name="Firefox"/>
+        </constant>
         <constant name="BACK">
             <browser name="Firefox"/>
         </constant>
         <constant name="BLUR">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="BUBBLING_PHASE">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="CAPTURING_PHASE">
             <browser name="Firefox"/>
         </constant>
         <constant name="CHANGE">

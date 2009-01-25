@@ -221,8 +221,8 @@ public class PropertiesTest extends WebTestCase {
             .append("HtmlUnit implemented properties and methods for " + browserVersion_.getNickname())
             .append("</h2>").append("</div>").append("<table width='100%' border='1'>");
         }
-        html.append("<tr>").append('\n').append("<td rowspan='2'>").append(name_)
-            .append("</td>").append('\n').append("<td>");
+        html.append("<tr>").append('\n').append("<td rowspan='2'>").append("<a name='" + name_ + "'>").append(name_)
+            .append("</a>").append("</td>").append('\n').append("<td>");
         int implementedCount = 0;
         for (int i = 0; i < originalRealProperties.size(); i++) {
             String propertyTrimmed = originalRealProperties.get(i);
