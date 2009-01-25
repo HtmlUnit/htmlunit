@@ -1310,8 +1310,14 @@
         </property>
         <property name="className" readable="true" writable="true"/>
         <property name="clientHeight" readable="true" writable="false"/>
-        <property name="clientLeft" readable="true" writable="false"/>
-        <property name="clientTop" readable="true" writable="false"/>
+        <property name="clientLeft" readable="true" writable="false">
+            <browser name="Firefox" min-version="3"/>
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="clientTop" readable="true" writable="false">
+            <browser name="Firefox" min-version="3"/>
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
         <property name="clientWidth" readable="true" writable="false"/>
         <property name="currentStyle" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer"/>
