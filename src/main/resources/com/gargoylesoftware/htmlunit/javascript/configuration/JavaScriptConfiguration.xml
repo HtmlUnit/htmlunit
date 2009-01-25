@@ -1320,6 +1320,7 @@
         <property name="currentStyle" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer"/>
         </property>
+        <property name="dir" readable="true" writable="true"/>
         <property name="disabled" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
@@ -1334,7 +1335,7 @@
         <property name="innerText" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
-        <property name="lang" notImplemented="true" readable="true" writable="true"/>
+        <property name="lang" readable="true" writable="true"/>
         <property name="offsetHeight" readable="true" writable="false"/>
         <property name="offsetLeft" readable="true" writable="false"/>
         <property name="offsetParent" readable="true" writable="false">
@@ -1371,6 +1372,9 @@
         <property name="scrollWidth" readable="true" writable="false"/>
         <property name="sourceIndex" notImplemented="true" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="spellcheck" readable="true" writable="true">
+            <browser name="Firefox"/>
         </property>
         <property name="style" readable="true" writable="false"/>
         <property name="tagName" readable="true" writable="false"/>

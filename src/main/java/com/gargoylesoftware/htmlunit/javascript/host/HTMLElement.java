@@ -1925,4 +1925,52 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public void jsxFunction_click() throws IOException {
         getDomNodeOrDie().click();
     }
+
+    /**
+     * Returns the "spellcheck" property.
+     * @return the "spellcheck" property
+     */
+    public boolean jsxGet_spellcheck() {
+        return Context.toBoolean(getDomNodeOrDie().getAttribute("spellcheck"));
+    }
+
+    /**
+     * Sets the "spellcheck" property.
+     * @param spellcheck the "spellcheck" property
+     */
+    public void jsxSet_spellcheck(final boolean spellcheck) {
+        getDomNodeOrDie().setAttribute("spellcheck", Boolean.toString(spellcheck));
+    }
+
+    /**
+     * Returns the "lang" property.
+     * @return the "lang" property
+     */
+    public String jsxGet_lang() {
+        return getDomNodeOrDie().getAttribute("lang");
+    }
+
+    /**
+     * Sets the "lang" property.
+     * @param lang the "lang" property
+     */
+    public void jsxSet_lang(final String lang) {
+        getDomNodeOrDie().setAttribute("lang", lang);
+    }
+
+    /**
+     * Returns the "dir" property.
+     * @return the "dir" property
+     */
+    public String jsxGet_dir() {
+        return getDomNodeOrDie().getAttribute("dir");
+    }
+
+    /**
+     * Sets the "dir" property.
+     * @param dir the "dir" property
+     */
+    public void jsxSet_dir(final String dir) {
+        getDomNodeOrDie().setAttribute("dir", dir);
+    }
 }
