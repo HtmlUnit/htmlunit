@@ -27,7 +27,7 @@ public class HTMLFontElement extends HTMLElement {
     private static final long serialVersionUID = 2438742206022221826L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLFontElement() {
         // Empty.

@@ -45,7 +45,7 @@ public class HTMLOptionElement extends HTMLElement {
         }
     }
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLOptionElement() {
     }

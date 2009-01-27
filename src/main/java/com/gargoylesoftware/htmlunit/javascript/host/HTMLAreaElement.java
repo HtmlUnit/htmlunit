@@ -25,7 +25,7 @@ public class HTMLAreaElement extends HTMLElement {
     private static final long serialVersionUID = -6024985411914294862L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLAreaElement() {
         // Empty.
@@ -40,5 +40,25 @@ public class HTMLAreaElement extends HTMLElement {
     @Override
     public Object getDefaultValue(final Class< ? > hint) {
         return HTMLAnchorElement.getDefaultValue(getDomNodeOrDie());
+    }
+
+    /**
+     * Returns the value of the "alt" property.
+     * @return the value of the "alt" property
+     */
+    public String jsxGet_alt() {
+        String alt = getDomNodeOrDie().getAttribute("alt");
+        if (alt == NOT_FOUND) {
+            alt = "";
+        }
+        return alt;
+    }
+
+    /**
+     * Returns the value of the "alt" property.
+     * @param alt the value
+     */
+    public void jsxSet_alt(final String alt) {
+        getDomNodeOrDie().setAttribute("alt", alt);
     }
 }

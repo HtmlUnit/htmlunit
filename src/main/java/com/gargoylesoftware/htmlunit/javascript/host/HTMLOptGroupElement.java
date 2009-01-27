@@ -25,7 +25,7 @@ public class HTMLOptGroupElement extends HTMLElement {
     private static final long serialVersionUID = 6950601049517489309L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLOptGroupElement() {
         // Empty.

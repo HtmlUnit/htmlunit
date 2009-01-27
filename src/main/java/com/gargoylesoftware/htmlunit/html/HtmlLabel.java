@@ -39,7 +39,7 @@ public class HtmlLabel extends ClickableElement {
     public static final String TAG_NAME = "label";
 
     /**
-     * Create an instance of HtmlLabel
+     * Creates an instance of HtmlLabel
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate

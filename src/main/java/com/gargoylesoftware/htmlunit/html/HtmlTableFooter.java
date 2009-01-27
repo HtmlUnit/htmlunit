@@ -34,7 +34,7 @@ public class HtmlTableFooter extends TableRowGroup {
     public static final String TAG_NAME = "tfoot";
 
     /**
-     * Create an instance of HtmlTableFooter
+     * Creates an instance of HtmlTableFooter
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate

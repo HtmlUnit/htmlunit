@@ -35,7 +35,7 @@ public class HTMLTableElement extends RowContainer {
     private HTMLCollection tBodies_; // has to be a member to have equality (==) working
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLTableElement() {
     }
@@ -241,5 +241,25 @@ public class HTMLTableElement extends RowContainer {
      */
     public void jsxSet_cellPadding(final String cellPadding) {
         getDomNodeOrDie().setAttribute("cellpadding", cellPadding);
+    }
+
+    /**
+     * Gets the "border" attribute.
+     * @return the "border" attribute
+     */
+    public String jsxGet_border() {
+        String border = getDomNodeOrDie().getAttribute("border");
+        if (border == NOT_FOUND) {
+            border = "";
+        }
+        return border;
+    }
+
+    /**
+     * Sets the "border" attribute.
+     * @param border the "border" attribute
+     */
+    public void jsxSet_border(final String border) {
+        getDomNodeOrDie().setAttribute("border", border);
     }
 }

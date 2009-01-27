@@ -25,7 +25,7 @@ public class HTMLMetaElement extends HTMLElement {
     private static final long serialVersionUID = 2709850253223688489L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLMetaElement() {
         // Empty.

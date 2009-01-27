@@ -35,7 +35,7 @@ public class HtmlLegend extends ClickableElement {
     public static final String TAG_NAME = "legend";
 
     /**
-     * Create an instance of HtmlLegend
+     * Creates an instance of HtmlLegend
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate

@@ -30,7 +30,7 @@ public class HTMLFrameElement extends HTMLElement {
     private static final long serialVersionUID = 3761121622400448304L;
 
     /**
-     * Create an instance. A default constructor is required for all JavaScript objects.
+     * Creates an instance. A default constructor is required for all JavaScript objects.
      */
     public HTMLFrameElement() {
     }
@@ -106,5 +106,25 @@ public class HTMLFrameElement extends HTMLElement {
      */
     public Object jsxGet_onload() {
         return getEventHandlerProp("onload");
+    }
+
+    /**
+     * Gets the "border" attribute.
+     * @return the "border" attribute
+     */
+    public String jsxGet_border() {
+        String border = getDomNodeOrDie().getAttribute("border");
+        if (border == NOT_FOUND) {
+            border = "";
+        }
+        return border;
+    }
+
+    /**
+     * Sets the "border" attribute.
+     * @param border the "border" attribute
+     */
+    public void jsxSet_border(final String border) {
+        getDomNodeOrDie().setAttribute("border", border);
     }
 }

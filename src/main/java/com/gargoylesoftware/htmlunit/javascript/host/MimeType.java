@@ -32,7 +32,7 @@ public final class MimeType extends SimpleScriptable {
     private Plugin enabledPlugin_;
 
     /**
-     * Create an instance. JavaScript objects must have a default constructor.
+     * Creates an instance. JavaScript objects must have a default constructor.
      */
     public MimeType() {
         // nothing

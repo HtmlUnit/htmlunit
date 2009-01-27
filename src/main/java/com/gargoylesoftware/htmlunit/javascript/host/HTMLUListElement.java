@@ -25,7 +25,7 @@ public class HTMLUListElement extends HTMLElement {
     private static final long serialVersionUID = 5693185995604704981L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLUListElement() {
         // Empty.

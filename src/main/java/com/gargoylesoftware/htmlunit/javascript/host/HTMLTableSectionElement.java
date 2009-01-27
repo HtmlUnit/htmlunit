@@ -29,7 +29,7 @@ public class HTMLTableSectionElement extends RowContainer {
     private static final long serialVersionUID = -3564660687852337070L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLTableSectionElement() {
     }

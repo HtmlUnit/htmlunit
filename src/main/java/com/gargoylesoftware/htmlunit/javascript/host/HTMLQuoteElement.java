@@ -25,7 +25,7 @@ public class HTMLQuoteElement extends HTMLElement {
     private static final long serialVersionUID = -2939057085304041436L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLQuoteElement() {
         // Empty.
@@ -49,5 +49,25 @@ public class HTMLQuoteElement extends HTMLElement {
      */
     public void jsxSet_cite(final String cite) {
         getDomNodeOrDie().setAttribute("cite", cite);
+    }
+
+    /**
+     * Returns the value of the "dateTime" property.
+     * @return the value of the "dateTime" property
+     */
+    public String jsxGet_dateTime() {
+        String cite = getDomNodeOrDie().getAttribute("datetime");
+        if (cite == NOT_FOUND) {
+            cite = "";
+        }
+        return cite;
+    }
+
+    /**
+     * Returns the value of the "dateTime" property.
+     * @param dateTime the value
+     */
+    public void jsxSet_dateTime(final String dateTime) {
+        getDomNodeOrDie().setAttribute("datetime", dateTime);
     }
 }

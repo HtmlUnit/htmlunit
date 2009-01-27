@@ -487,6 +487,8 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             "Password|jsxGet_form",
             "HTMLSpanElement|jsxGet_cite",
             "HTMLSpanElement|jsxSet_cite",
+            "HTMLSpanElement|jsxGet_dateTime",
+            "HTMLSpanElement|jsxSet_dateTime",
             "CharacterDataImpl|jsxGet_tabindex"};
         final String key = classname + "|" + methodName;
         for (final String value : ignoreList) {

@@ -29,7 +29,7 @@ public final class Text extends CharacterDataImpl {
     private static final long serialVersionUID = 3548915177419561974L;
 
     /**
-     * Create an instance. JavaScript objects must have a default constructor.
+     * Creates an instance. JavaScript objects must have a default constructor.
      */
     public Text() {
     }

@@ -25,7 +25,7 @@ public class HTMLTableCaptionElement extends HTMLElement {
     private static final long serialVersionUID = 5646224918517395242L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLTableCaptionElement() {
         // Empty.

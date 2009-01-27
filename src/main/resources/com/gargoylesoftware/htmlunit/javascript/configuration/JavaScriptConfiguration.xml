@@ -1060,7 +1060,11 @@
 
     <class name="HTMLAppletElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLAppletElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlApplet">
+        <property name="alt" readable="true" writable="true"/>
         <property name="align" notImplemented="true" readable="true" writable="true"/>
+        <property name="border" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
         <property name="dataFld" notImplemented="true" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
@@ -1074,6 +1078,7 @@
 
     <class name="HTMLAreaElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLAreaElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlArea">
+        <property name="alt" readable="true" writable="true"/>
     </class>
 
     <class name="HTMLBaseElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLBaseElement"
@@ -1082,6 +1087,9 @@
 
     <class name="HTMLBaseFontElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLBaseFontElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBaseFont">
+        <property name="color" readable="true" writable="true"/>
+        <property name="face" readable="true" writable="true"/>
+        <property name="size" readable="true" writable="true"/>
     </class>
 
     <class name="HTMLBodyElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLBodyElement"
@@ -1132,6 +1140,7 @@
     <class name="HTMLDelElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDelElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlDeletedText">
         <property name="cite" readable="true" writable="true"/>
+        <property name="dateTime" readable="true" writable="true"/>
     </class>
 
     <class name="HTMLDirectoryElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDirectoryElement"
@@ -1535,6 +1544,9 @@
 
     <class name="HTMLFrameElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFrameElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFrame">
+        <property name="border" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
         <property name="contentDocument" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
@@ -1555,8 +1567,11 @@
 
     <class name="HTMLFrameSetElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFrameSetElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFrameSet">
-        <property name="rows" readable="true" writable="true"/>
+        <property name="border" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
         <property name="cols" readable="true" writable="true"/>
+        <property name="rows" readable="true" writable="true"/>
     </class>
 
     <class name="HTMLHeadElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLHeadElement"
@@ -1583,6 +1598,9 @@
     <class name="HTMLIFrameElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLIFrameElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInlineFrame">
         <property name="align" notImplemented="true" readable="true" writable="true"/>
+        <property name="border" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
         <property name="contentDocument" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
@@ -1604,6 +1622,8 @@
     <class name="HTMLImageElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLImageElement"
         jsConstructor="jsConstructor" JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlImage">
         <property name="align" notImplemented="true" readable="true" writable="true"/>
+        <property name="alt" readable="true" writable="true"/>
+        <property name="border" readable="true" writable="true"/>
         <property name="dataFld" notImplemented="true" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
@@ -1620,6 +1640,10 @@
     <class name="HTMLInputElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLInputElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInput">
         <property name="align" notImplemented="true" readable="true" writable="true"/>
+        <property name="alt" readable="true" writable="true"/>
+        <property name="border" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
         <property name="checked" readable="true" writable="true"/>
         <property name="defaultChecked" readable="true" writable="true">
             <doclink
@@ -1655,6 +1679,7 @@
     <class name="HTMLInsElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLInsElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInsertedText">
         <property name="cite" readable="true" writable="true"/>
+        <property name="dateTime" readable="true" writable="true"/>
     </class>
 
     <class name="HTMLIsIndexElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLIsIndexElement"
@@ -1715,6 +1740,10 @@
     <class name="HTMLObjectElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLObjectElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlObject">
         <property name="align" notImplemented="true" readable="true" writable="true"/>
+        <property name="alt" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="border" readable="true" writable="true"/>
         <property name="dataFld" notImplemented="true" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
@@ -1782,6 +1811,9 @@
     <class name="HTMLQuoteElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLQuoteElement"
         JSObject="true">
         <property name="cite" readable="true" writable="true"/>
+        <property name="dateTime" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
     </class>
 
     <class name="HTMLScriptElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLScriptElement" JSObject="true"
@@ -1890,6 +1922,7 @@
     <class name="HTMLTableElement" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTable">
         <property name="align" notImplemented="true" readable="true" writable="true"/>
+        <property name="border" readable="true" writable="true"/>
         <property name="caption" readable="true" writable="false"/>
         <property name="cellPadding" readable="true" writable="true"/>
         <property name="cellSpacing" readable="true" writable="true"/>

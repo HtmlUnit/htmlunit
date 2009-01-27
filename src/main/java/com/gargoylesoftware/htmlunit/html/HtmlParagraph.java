@@ -36,7 +36,7 @@ public class HtmlParagraph extends ClickableElement {
     public static final String TAG_NAME = "p";
 
     /**
-     * Create an instance of HtmlParagraph
+     * Creates an instance of HtmlParagraph
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate

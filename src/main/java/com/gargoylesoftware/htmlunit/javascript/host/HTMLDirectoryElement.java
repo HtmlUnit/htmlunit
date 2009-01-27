@@ -25,7 +25,7 @@ public class HTMLDirectoryElement extends HTMLElement {
     private static final long serialVersionUID = 4454249445181775636L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLDirectoryElement() {
         // Empty.

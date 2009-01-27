@@ -35,7 +35,7 @@ public class HtmlStyle extends HtmlElement {
     public static final String TAG_NAME = "style";
 
     /**
-     * Create an instance of HtmlStyle
+     * Creates an instance of HtmlStyle
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate

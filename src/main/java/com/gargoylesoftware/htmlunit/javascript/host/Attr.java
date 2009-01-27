@@ -53,7 +53,7 @@ public class Attr extends Node {
     private DomElement parent_;
 
     /**
-     * Create an instance. JavaScript objects must have a default constructor.
+     * Creates an instance. JavaScript objects must have a default constructor.
      */
     public Attr() { }
 

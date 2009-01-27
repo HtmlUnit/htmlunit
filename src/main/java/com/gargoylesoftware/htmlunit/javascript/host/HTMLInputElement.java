@@ -36,7 +36,7 @@ public class HTMLInputElement extends FormField {
     private static final long serialVersionUID = 3712016051364495710L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLInputElement() {
     }
@@ -269,5 +269,45 @@ public class HTMLInputElement extends FormField {
     public void jsxFunction_setSelectionRange(final int start, final int end) {
         jsxSet_selectionStart(start);
         jsxSet_selectionEnd(end);
+    }
+
+    /**
+     * Returns the value of the "alt" property.
+     * @return the value of the "alt" property
+     */
+    public String jsxGet_alt() {
+        String alt = getDomNodeOrDie().getAttribute("alt");
+        if (alt == NOT_FOUND) {
+            alt = "";
+        }
+        return alt;
+    }
+
+    /**
+     * Returns the value of the "alt" property.
+     * @param alt the value
+     */
+    public void jsxSet_alt(final String alt) {
+        getDomNodeOrDie().setAttribute("alt", alt);
+    }
+
+    /**
+     * Gets the "border" attribute.
+     * @return the "border" attribute
+     */
+    public String jsxGet_border() {
+        String border = getDomNodeOrDie().getAttribute("border");
+        if (border == NOT_FOUND) {
+            border = "";
+        }
+        return border;
+    }
+
+    /**
+     * Sets the "border" attribute.
+     * @param border the "border" attribute
+     */
+    public void jsxSet_border(final String border) {
+        getDomNodeOrDie().setAttribute("border", border);
     }
 }

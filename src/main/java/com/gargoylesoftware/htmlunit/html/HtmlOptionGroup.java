@@ -37,7 +37,7 @@ public class HtmlOptionGroup extends ClickableElement implements DisabledElement
     public static final String TAG_NAME = "optgroup";
 
     /**
-     * Create an instance of HtmlOptionGroup
+     * Creates an instance of HtmlOptionGroup
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate

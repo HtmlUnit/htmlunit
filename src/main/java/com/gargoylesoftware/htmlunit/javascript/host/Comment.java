@@ -25,7 +25,7 @@ public final class Comment extends CharacterDataImpl {
     private static final long serialVersionUID = 4557674333919900046L;
 
     /**
-     * Create an instance. JavaScript objects must have a default constructor.
+     * Creates an instance. JavaScript objects must have a default constructor.
      */
     public Comment() {
     }

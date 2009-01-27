@@ -25,7 +25,7 @@ public class HTMLParamElement extends HTMLElement {
     private static final long serialVersionUID = 5990005725170674820L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLParamElement() {
         // Empty.

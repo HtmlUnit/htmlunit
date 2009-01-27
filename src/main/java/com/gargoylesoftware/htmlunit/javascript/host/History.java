@@ -28,7 +28,7 @@ public class History extends SimpleScriptable {
     private static final long serialVersionUID = -285158453206844475L;
 
     /**
-     * Create an instance. JavaScript objects must have a default constructor.
+     * Creates an instance. JavaScript objects must have a default constructor.
      */
     public History() { }
 

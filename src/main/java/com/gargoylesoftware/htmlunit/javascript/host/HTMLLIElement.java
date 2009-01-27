@@ -25,7 +25,7 @@ public class HTMLLIElement extends HTMLElement {
     private static final long serialVersionUID = -5620858443259285743L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLLIElement() {
         // Empty.

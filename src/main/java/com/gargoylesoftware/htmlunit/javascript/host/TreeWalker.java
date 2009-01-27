@@ -35,13 +35,13 @@ public class TreeWalker extends SimpleScriptable {
     private Boolean expandEntityReferences_;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public TreeWalker() {
     }
 
     /**
-     * Create an instance.
+     * Creates an instance.
      *
      * @param root The root node of the TreeWalker. Must not be
      *          <code>null</code>.

@@ -61,7 +61,7 @@ public class XmlPage extends SgmlPage {
     private final transient Log mainLog_ = LogFactory.getLog(getClass());
 
     /**
-     * Create an instance.
+     * Creates an instance.
      * A warning is logged if an exception is thrown while parsing the XML content
      * (for instance when the content is not a valid XML and can't be parsed).
      *
@@ -74,7 +74,7 @@ public class XmlPage extends SgmlPage {
     }
 
     /**
-     * Create an instance.
+     * Creates an instance.
      * A warning is logged if an exception is thrown while parsing the XML content
      * (for instance when the content is not a valid XML and can't be parsed).
      *
@@ -90,7 +90,7 @@ public class XmlPage extends SgmlPage {
     }
 
     /**
-     * Create an instance.
+     * Creates an instance.
      * A warning is logged if an exception is thrown while parsing the XML content
      * (for instance when the content is not a valid XML and can't be parsed).
      *

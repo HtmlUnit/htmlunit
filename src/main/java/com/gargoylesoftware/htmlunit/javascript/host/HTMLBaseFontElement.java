@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import org.mozilla.javascript.Context;
+
 /**
  * The JavaScript object "HTMLBaseFontElement".
  *
@@ -25,10 +27,57 @@ public class HTMLBaseFontElement extends HTMLElement {
     private static final long serialVersionUID = 2694990716654235565L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLBaseFontElement() {
         // Empty.
     }
 
+    /**
+     * Gets the "color" attribute.
+     * @return the "color" attribute
+     */
+    public String jsxGet_color() {
+        return getDomNodeOrDie().getAttribute("color");
+    }
+
+    /**
+     * Sets the "color" attribute.
+     * @param color the "color" attribute
+     */
+    public void jsxSet_color(final String color) {
+        getDomNodeOrDie().setAttribute("color", color);
+    }
+
+    /**
+     * Gets the typeface family.
+     * @return the typeface family
+     */
+    public String jsxGet_face() {
+        return getDomNodeOrDie().getAttribute("face");
+    }
+
+    /**
+     * Sets the typeface family.
+     * @param face the typeface family
+     */
+    public void jsxSet_face(final String face) {
+        getDomNodeOrDie().setAttribute("face", face);
+    }
+
+    /**
+     * Gets the "size" attribute.
+     * @return the "size" attribute
+     */
+    public int jsxGet_size() {
+        return (int) Context.toNumber(getDomNodeOrDie().getAttribute("size"));
+    }
+
+    /**
+     * Sets the "size" attribute.
+     * @param size the "size" attribute
+     */
+    public void jsxSet_size(final int size) {
+        getDomNodeOrDie().setAttribute("size", Context.toString(size));
+    }
 }

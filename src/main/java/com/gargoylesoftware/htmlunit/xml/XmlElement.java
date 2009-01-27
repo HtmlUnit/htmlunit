@@ -37,7 +37,7 @@ public class XmlElement extends DomElement {
     private static final long serialVersionUID = -8119109851558707854L;
 
     /**
-     * Create an instance of a DOM node that can have a namespace.
+     * Creates an instance of a DOM node that can have a namespace.
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate

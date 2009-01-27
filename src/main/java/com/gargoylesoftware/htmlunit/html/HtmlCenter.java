@@ -35,7 +35,7 @@ public class HtmlCenter extends ClickableElement {
     public static final String TAG_NAME = "center";
 
     /**
-     * Create an instance of HtmlCenter
+     * Creates an instance of HtmlCenter
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate

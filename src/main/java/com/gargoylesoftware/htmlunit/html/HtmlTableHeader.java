@@ -34,7 +34,7 @@ public class HtmlTableHeader extends TableRowGroup {
     public static final String TAG_NAME = "thead";
 
     /**
-     * Create an instance of HtmlTableHeader
+     * Creates an instance of HtmlTableHeader
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate

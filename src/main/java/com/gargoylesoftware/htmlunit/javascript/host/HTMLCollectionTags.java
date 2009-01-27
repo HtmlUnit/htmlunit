@@ -37,7 +37,7 @@ public class HTMLCollectionTags extends HTMLCollection {
     }
 
     /**
-     * Create an instance.
+     * Creates an instance.
      * @param parentScope parent scope
      */
     public HTMLCollectionTags(final SimpleScriptable parentScope) {

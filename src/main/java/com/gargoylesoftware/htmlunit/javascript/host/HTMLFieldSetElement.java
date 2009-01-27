@@ -25,7 +25,7 @@ public class HTMLFieldSetElement extends HTMLElement {
     private static final long serialVersionUID = -5222303197991907832L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLFieldSetElement() {
         // Empty.

@@ -35,7 +35,7 @@ public class HtmlTableColumnGroup extends ClickableElement {
     public static final String TAG_NAME = "colgroup";
 
     /**
-     * Create an instance of HtmlTableColumnGroup
+     * Creates an instance of HtmlTableColumnGroup
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate

@@ -36,7 +36,7 @@ public class KeyDataPair extends NameValuePair {
     private byte[] data_;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      *
      * @param key the key
      * @param file the file

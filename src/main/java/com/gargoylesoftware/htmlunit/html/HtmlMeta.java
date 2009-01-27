@@ -39,7 +39,7 @@ public class HtmlMeta extends HtmlElement {
     public static final String TAG_NAME = "meta";
 
     /**
-     * Create an instance of HtmlMeta
+     * Creates an instance of HtmlMeta
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate

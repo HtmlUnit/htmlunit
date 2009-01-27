@@ -35,7 +35,7 @@ public class HTMLTableRowElement extends HTMLElement {
     private HTMLCollection cells_; // has to be a member to have equality (==) working
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLTableRowElement() {
     }

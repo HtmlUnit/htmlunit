@@ -35,7 +35,7 @@ public class HtmlDivision extends ClickableElement {
     public static final String TAG_NAME = "div";
 
     /**
-     * Create an instance of HtmlDivision.
+     * Creates an instance of HtmlDivision.
      *
      * <p><b>Don't directly construct, it is public as an implementation side-effect.</b>
      *

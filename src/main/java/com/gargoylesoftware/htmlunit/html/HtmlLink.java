@@ -42,7 +42,7 @@ public class HtmlLink extends ClickableElement {
     private WebResponse cachedWebResponse_;
 
     /**
-     * Create an instance of HtmlLink
+     * Creates an instance of HtmlLink
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate

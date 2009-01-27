@@ -35,7 +35,7 @@ public class HtmlDefinitionDescription extends ClickableElement {
     public static final String TAG_NAME = "dd";
 
     /**
-     * Create an instance of HtmlDefinitionDescription
+     * Creates an instance of HtmlDefinitionDescription
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate

@@ -35,7 +35,7 @@ public class HtmlFieldSet extends ClickableElement {
     public static final String TAG_NAME = "fieldset";
 
     /**
-     * Create an instance of HtmlFieldSet
+     * Creates an instance of HtmlFieldSet
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate

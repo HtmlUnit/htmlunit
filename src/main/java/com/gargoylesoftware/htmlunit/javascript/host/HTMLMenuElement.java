@@ -25,7 +25,7 @@ public class HTMLMenuElement extends HTMLElement {
     private static final long serialVersionUID = 9187243697518454234L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLMenuElement() {
         // Empty.

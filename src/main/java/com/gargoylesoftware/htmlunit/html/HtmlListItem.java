@@ -35,7 +35,7 @@ public class HtmlListItem extends ClickableElement {
     public static final String TAG_NAME = "li";
 
     /**
-     * Create an instance of HtmlListItem
+     * Creates an instance of HtmlListItem
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate

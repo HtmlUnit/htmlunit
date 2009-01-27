@@ -37,7 +37,7 @@ public class HtmlSpan extends ClickableElement {
     public static final String TAG_NAME = "span";
 
     /**
-     * Create an instance of HtmlSpan
+     * Creates an instance of HtmlSpan
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate

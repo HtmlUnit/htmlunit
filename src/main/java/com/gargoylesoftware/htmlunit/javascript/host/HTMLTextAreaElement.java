@@ -32,7 +32,7 @@ public class HTMLTextAreaElement extends FormField {
     private static final long serialVersionUID = 49352135575074390L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLTextAreaElement() {
     }

@@ -39,7 +39,7 @@ public class HTMLSelectElement extends FormField {
     private HTMLOptionsCollection optionsArray_;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLSelectElement() {
     }

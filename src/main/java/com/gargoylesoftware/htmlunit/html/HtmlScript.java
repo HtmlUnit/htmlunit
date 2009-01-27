@@ -69,7 +69,7 @@ public class HtmlScript extends HtmlElement {
     private final transient Log mainLog_ = LogFactory.getLog(getClass());
 
     /**
-     * Create an instance of HtmlScript
+     * Creates an instance of HtmlScript
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate

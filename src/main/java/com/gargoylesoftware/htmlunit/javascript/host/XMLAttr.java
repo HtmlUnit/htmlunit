@@ -29,7 +29,7 @@ public class XMLAttr extends Attr {
     private static final long serialVersionUID = -9062357417620766444L;
 
     /**
-     * Create an instance. JavaScript objects must have a default constructor.
+     * Creates an instance. JavaScript objects must have a default constructor.
      */
     public XMLAttr() { }
 

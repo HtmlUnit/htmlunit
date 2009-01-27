@@ -25,7 +25,7 @@ public class HTMLLegendElement extends HTMLElement {
     private static final long serialVersionUID = -6536306776315347201L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLLegendElement() {
         // Empty.

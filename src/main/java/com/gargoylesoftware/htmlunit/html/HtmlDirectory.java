@@ -35,7 +35,7 @@ public class HtmlDirectory extends ClickableElement {
     public static final String TAG_NAME = "dir";
 
     /**
-     * Create an instance of HtmlDirectory
+     * Creates an instance of HtmlDirectory
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate

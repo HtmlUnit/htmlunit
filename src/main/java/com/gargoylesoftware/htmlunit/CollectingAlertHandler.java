@@ -35,7 +35,7 @@ public class CollectingAlertHandler implements AlertHandler {
     }
 
     /**
-     * Create an instance with the specified list.
+     * Creates an instance with the specified list.
      *
      * @param list the list to store alerts in
      */
@@ -45,7 +45,7 @@ public class CollectingAlertHandler implements AlertHandler {
     }
 
     /**
-     * Handle the alert. This implementation will store the message in a list
+     * Handles the alert. This implementation will store the message in a list
      * for retrieval later.
      *
      * @param page the page that triggered the alert

@@ -25,7 +25,7 @@ public class HTMLMapElement extends HTMLElement {
     private static final long serialVersionUID = 1163437293365889923L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLMapElement() {
         // Empty.

@@ -37,7 +37,7 @@ public class RowContainer extends HTMLElement {
     private HTMLCollection rows_; // has to be a member to have equality (==) working
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public RowContainer() {
     }

@@ -29,7 +29,7 @@ public class HTMLUnknownElement extends HTMLElement {
     private static final long serialVersionUID = 2898724046094626048L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLUnknownElement() {
         // Empty.

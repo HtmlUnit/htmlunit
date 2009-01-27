@@ -35,7 +35,7 @@ public class HtmlOrderedList extends ClickableElement {
     public static final String TAG_NAME = "ol";
 
     /**
-     * Create an instance of HtmlOrderedList
+     * Creates an instance of HtmlOrderedList
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate

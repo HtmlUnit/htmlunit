@@ -25,7 +25,7 @@ public class HTMLTableColElement extends HTMLElement {
     private static final long serialVersionUID = -886020322532732229L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLTableColElement() {
         // Empty.

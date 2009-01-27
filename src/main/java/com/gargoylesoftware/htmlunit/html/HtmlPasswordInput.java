@@ -35,7 +35,7 @@ public class HtmlPasswordInput extends HtmlInput {
     private static final long serialVersionUID = -1074283471317076942L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the page that contains this element

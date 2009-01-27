@@ -21,6 +21,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlFrameSet;
  *
  * @version $Revision$
  * @author Bruce Chapman
+ * @author Ahmed Ashour
  */
 public class HTMLFrameSetElement extends HTMLElement {
 
@@ -78,4 +79,23 @@ public class HTMLFrameSetElement extends HTMLElement {
         return htmlFrameSet.getColsAttribute();
     }
 
+    /**
+     * Gets the "border" attribute.
+     * @return the "border" attribute
+     */
+    public String jsxGet_border() {
+        String border = getDomNodeOrDie().getAttribute("border");
+        if (border == NOT_FOUND) {
+            border = "";
+        }
+        return border;
+    }
+
+    /**
+     * Sets the "border" attribute.
+     * @param border the "border" attribute
+     */
+    public void jsxSet_border(final String border) {
+        getDomNodeOrDie().setAttribute("border", border);
+    }
 }

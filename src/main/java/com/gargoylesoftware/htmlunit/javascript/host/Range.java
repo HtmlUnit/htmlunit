@@ -40,7 +40,7 @@ public class Range extends SimpleScriptable {
     private int startOffset_, endOffset_;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public Range() {
     }

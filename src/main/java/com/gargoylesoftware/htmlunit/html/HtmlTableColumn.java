@@ -35,7 +35,7 @@ public class HtmlTableColumn extends ClickableElement {
     public static final String TAG_NAME = "col";
 
     /**
-     * Create an instance of HtmlTableColumn
+     * Creates an instance of HtmlTableColumn
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate

@@ -25,7 +25,7 @@ public class HTMLIsIndexElement extends HTMLElement {
     private static final long serialVersionUID = -3715563112706635231L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLIsIndexElement() {
         // Empty.

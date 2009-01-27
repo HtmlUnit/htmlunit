@@ -25,7 +25,7 @@ public class HTMLBRElement extends HTMLElement {
     private static final long serialVersionUID = -3785200238092986918L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLBRElement() {
         // Empty.

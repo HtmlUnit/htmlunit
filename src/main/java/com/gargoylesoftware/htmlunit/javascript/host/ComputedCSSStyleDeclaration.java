@@ -50,7 +50,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     private Map<String, String> defaultDisplays_;
 
     /**
-     * Create an instance. JavaScript objects must have a default constructor.
+     * Creates an instance. JavaScript objects must have a default constructor.
      */
     public ComputedCSSStyleDeclaration() {
         // Empty.

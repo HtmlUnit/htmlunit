@@ -104,6 +104,31 @@ public class HTMLSpanElement extends HTMLElement {
                 || element instanceof HtmlVariable) {
                 ActiveXObject.addProperty(this, "cite", true, true);
             }
+            if ((element instanceof HtmlAbbreviated && browserVersion.getBrowserVersionNumeric() > 6)
+                    || element instanceof HtmlAcronym
+                    || element instanceof HtmlBold
+                    || element instanceof HtmlBidirectionalOverride
+                    || element instanceof HtmlBig
+                    || element instanceof HtmlBlink
+                    || element instanceof HtmlCitation
+                    || element instanceof HtmlCode
+                    || element instanceof HtmlDefinition
+                    || element instanceof HtmlEmphasis
+                    || element instanceof HtmlItalic
+                    || element instanceof HtmlKeyboard
+                    || element instanceof HtmlNoBreak
+                    || element instanceof HtmlS
+                    || element instanceof HtmlSample
+                    || element instanceof HtmlSmall
+                    || element instanceof HtmlStrike
+                    || element instanceof HtmlStrong
+                    || element instanceof HtmlSubscript
+                    || element instanceof HtmlSuperscript
+                    || element instanceof HtmlTeletype
+                    || element instanceof HtmlUnderlined
+                    || element instanceof HtmlVariable) {
+                ActiveXObject.addProperty(this, "dateTime", true, true);
+            }
         }
     }
 
@@ -133,5 +158,25 @@ public class HTMLSpanElement extends HTMLElement {
      */
     public void jsxSet_cite(final String cite) {
         getDomNodeOrDie().setAttribute("cite", cite);
+    }
+
+    /**
+     * Returns the value of the "dateTime" property.
+     * @return the value of the "dateTime" property
+     */
+    public String jsxGet_dateTime() {
+        String dateTime = getDomNodeOrDie().getAttribute("datetime");
+        if (dateTime == NOT_FOUND) {
+            dateTime = "";
+        }
+        return dateTime;
+    }
+
+    /**
+     * Returns the value of the "dateTime" property.
+     * @param dateTime the value
+     */
+    public void jsxSet_dateTime(final String dateTime) {
+        getDomNodeOrDie().setAttribute("datetime", dateTime);
     }
 }

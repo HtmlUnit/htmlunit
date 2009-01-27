@@ -35,7 +35,7 @@ public class HtmlMenu extends ClickableElement {
     public static final String TAG_NAME = "menu";
 
     /**
-     * Create an instance of HtmlMenu
+     * Creates an instance of HtmlMenu
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate

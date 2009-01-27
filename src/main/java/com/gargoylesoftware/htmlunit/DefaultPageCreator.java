@@ -79,7 +79,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
     private static final long serialVersionUID = -4420355214574495577L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public DefaultPageCreator() {
     }

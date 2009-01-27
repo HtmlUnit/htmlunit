@@ -42,7 +42,7 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
     private String value_ = "";
 
     /**
-     * Create an instance of HtmlIsIndex
+     * Creates an instance of HtmlIsIndex
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate

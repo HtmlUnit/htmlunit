@@ -134,4 +134,43 @@ public class HTMLImageElement extends HTMLElement {
         }
     }
 
+    /**
+     * Returns the value of the "alt" property.
+     * @return the value of the "alt" property
+     */
+    public String jsxGet_alt() {
+        String alt = getDomNodeOrDie().getAttribute("alt");
+        if (alt == NOT_FOUND) {
+            alt = "";
+        }
+        return alt;
+    }
+
+    /**
+     * Returns the value of the "alt" property.
+     * @param alt the value
+     */
+    public void jsxSet_alt(final String alt) {
+        getDomNodeOrDie().setAttribute("alt", alt);
+    }
+
+    /**
+     * Gets the "border" attribute.
+     * @return the "border" attribute
+     */
+    public String jsxGet_border() {
+        String border = getDomNodeOrDie().getAttribute("border");
+        if (border == NOT_FOUND) {
+            border = "";
+        }
+        return border;
+    }
+
+    /**
+     * Sets the "border" attribute.
+     * @param border the "border" attribute
+     */
+    public void jsxSet_border(final String border) {
+        getDomNodeOrDie().setAttribute("border", border);
+    }
 }

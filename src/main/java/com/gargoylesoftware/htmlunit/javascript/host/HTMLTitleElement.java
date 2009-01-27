@@ -29,7 +29,7 @@ public class HTMLTitleElement extends HTMLElement {
     private static final long serialVersionUID = -6345342494766370848L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLTitleElement() {
         // Empty.

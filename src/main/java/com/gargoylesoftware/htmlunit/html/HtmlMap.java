@@ -35,7 +35,7 @@ public class HtmlMap extends ClickableElement {
     public static final String TAG_NAME = "map";
 
     /**
-     * Create an instance of HtmlMap
+     * Creates an instance of HtmlMap
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate

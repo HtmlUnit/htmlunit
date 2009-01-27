@@ -35,7 +35,7 @@ public class HtmlObject extends ClickableElement {
     public static final String TAG_NAME = "object";
 
     /**
-     * Create an instance of HtmlObject
+     * Creates an instance of HtmlObject
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate

@@ -25,7 +25,7 @@ public class HTMLParagraphElement extends HTMLElement {
     private static final long serialVersionUID = 5587606872788054898L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLParagraphElement() {
         // Empty.

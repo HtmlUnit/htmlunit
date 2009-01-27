@@ -36,7 +36,7 @@ public abstract class DomNamespaceNode extends DomNode {
     private String prefix_;
 
     /**
-     * Create an instance of a DOM node that can have a namespace.
+     * Creates an instance of a DOM node that can have a namespace.
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate

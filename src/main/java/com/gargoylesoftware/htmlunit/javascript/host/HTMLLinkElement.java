@@ -30,7 +30,7 @@ public class HTMLLinkElement extends HTMLElement {
     private static final long serialVersionUID = -6381573516360300401L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLLinkElement() {
         // Empty.

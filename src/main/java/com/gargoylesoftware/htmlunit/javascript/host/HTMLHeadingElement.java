@@ -25,7 +25,7 @@ public class HTMLHeadingElement extends HTMLElement {
     private static final long serialVersionUID = -24041435932881504L;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public HTMLHeadingElement() {
         // Empty.

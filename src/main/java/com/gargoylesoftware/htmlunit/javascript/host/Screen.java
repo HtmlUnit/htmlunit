@@ -44,7 +44,7 @@ public class Screen extends SimpleScriptable {
     private int updateInterval_;
 
     /**
-     * Create an instance. JavaScript objects must have a default constructor.
+     * Creates an instance. JavaScript objects must have a default constructor.
      */
     public Screen() {
         left_ = 0;
