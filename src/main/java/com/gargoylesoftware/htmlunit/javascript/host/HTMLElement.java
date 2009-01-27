@@ -1990,4 +1990,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         getDomNodeOrDie().setAttribute("tabindex", Integer.toString(tabIndex));
     }
 
+    /**
+     * Simulates a click on a scrollbar component (IE only).
+     * @param scrollAction the type of scroll action to simulate
+     */
+    public void jsxFunction_doScroll(final String scrollAction) {
+        // Ignore because we aren't displaying anything!
+    }
+
 }
