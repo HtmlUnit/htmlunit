@@ -209,8 +209,10 @@ public class PropertiesTest extends WebTestCase {
                 .append("<span style='color: green'>").append("Implemented").append("</span>").append("<br>")
                 .append("<span style='color: red'>").append("Should not be implemented").append("</span>")
                 .append("</html>");
-            FileUtils.writeStringToFile(new File(getArtifactsDirectory() + "/properties-" + browserVersion_.getNickname() + ".html"),
-                html.toString());
+            FileUtils.writeStringToFile(new File(getArtifactsDirectory()
+                + "/properties-"
+                + browserVersion_.getNickname()
+                + ".html"), html.toString());
         }
     }
 
@@ -299,7 +301,7 @@ public class PropertiesTest extends WebTestCase {
             new File(getArtifactsDirectory() + "/properties-" + browserVersion_.getNickname() + ".png"));
     }
     private String getArtifactsDirectory() {
-        final Class<?> clazz = PropertiesTest.class;
+        final Class< ? > clazz = PropertiesTest.class;
         final String name = clazz.getPackage().getName().replace('.', '/');
         final String dirName = clazz.getClassLoader().getResource(name).getPath() + "/artifacts/";
         final File dir = new File(dirName);
