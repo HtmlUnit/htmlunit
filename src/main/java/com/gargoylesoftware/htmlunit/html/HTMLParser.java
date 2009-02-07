@@ -675,9 +675,10 @@ public final class HTMLParser {
         }
 
         /**
+         * Returns the pre-registered element factory corresponding to the specified tag, or an UnknownElementFactory.
          * @param namespaceURI the namespace URI
          * @param qualifiedName the qualified name
-         * @return the pre-registered element factory for the tag, or an UnknownElementFactory
+         * @return the pre-registered element factory corresponding to the specified tag, or an UnknownElementFactory
          */
         public static IElementFactory getElementFactory(final String namespaceURI, final String qualifiedName) {
             if (namespaceURI.length() == 0 || !qualifiedName.contains(":") || namespaceURI.equals(XHTML_NAMESPACE)) {
