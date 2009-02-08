@@ -65,6 +65,14 @@ public class HTMLBodyElement extends HTMLElement {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public HTMLElement jsxGet_offsetParent() {
+        return null;
+    }
+
+    /**
      * Simulates a click on a scrollbar component (IE only).
      * @param scrollAction the type of scroll action to simulate
      */
@@ -72,11 +80,4 @@ public class HTMLBodyElement extends HTMLElement {
         // Ignore because we aren't displaying anything!
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public HTMLElement jsxGet_offsetParent() {
-        return null;
-    }
 }

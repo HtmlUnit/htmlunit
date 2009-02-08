@@ -209,8 +209,10 @@ public class PropertiesTest extends WebTestCase {
                 .append("<span style='color: green'>").append("Implemented").append("</span>").append("<br>")
                 .append("<span style='color: red'>").append("Should not be implemented").append("</span>")
                 .append("</html>");
-            FileUtils.writeStringToFile(new File("./artifacts/properties-" + browserVersion_.getNickname() + ".html"),
-                html.toString());
+            FileUtils.writeStringToFile(new File(getArtifactsDirectory()
+                + "/properties-"
+                + browserVersion_.getNickname()
+                + ".html"), html.toString());
         }
     }
 
@@ -296,7 +298,18 @@ public class PropertiesTest extends WebTestCase {
         renderer.setSeriesPaint(1, new GradientPaint(0, 0, Color.blue, 0, 0, new Color(0, 0, 64)));
         renderer.setSeriesPaint(2, new GradientPaint(0, 0, Color.red, 0, 0, new Color(64, 0, 0)));
         ImageIO.write(chart.createBufferedImage(1200, 2400), "png",
-            new File("./artifacts/properties-" + browserVersion_.getNickname() + ".png"));
+            new File(getArtifactsDirectory() + "/properties-" + browserVersion_.getNickname() + ".png"));
     }
-
+    private String getArtifactsDirectory() {
+        final Class< ? > clazz = PropertiesTest.class;
+        final String name = clazz.getPackage().getName().replace('.', '/');
+        final String dirName = clazz.getClassLoader().getResource(name).getPath() + "/artifacts/";
+        final File dir = new File(dirName);
+        if (!dir.exists()) {
+            if (!dir.mkdir()) {
+                throw new RuntimeException("could not create artifacts directory");
+            }
+        }
+        return dirName;
+    }
 }

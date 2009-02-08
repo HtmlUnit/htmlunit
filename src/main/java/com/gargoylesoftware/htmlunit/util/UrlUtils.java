@@ -131,7 +131,10 @@ public final class UrlUtils {
             s.append("?").append(query);
         }
         if (ref != null) {
-            s.append("#").append(ref);
+            if (!ref.startsWith("#")) {
+                s.append("#");
+            }
+            s.append(ref);
         }
         final URL url = new URL(s.toString());
         return url;

@@ -6,6 +6,15 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
+            <action type="fix" dev="sdanig">
+                Make the cookie manager thread-safe.
+            </action>
+            <action type="fix" dev="sdanig">
+                JavaScript: setting anchor.hash should accept values both with and without the '#' character.
+            </action>
+            <action type="fix" dev="sdanig">
+                JavaScript: values returned by anchor.hash should include the '#' character.
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: add support for HTMLElement.dir, .lang, .tabIndex and .spellcheck.
             </action>
