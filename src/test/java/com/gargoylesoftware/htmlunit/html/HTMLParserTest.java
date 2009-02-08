@@ -214,7 +214,7 @@ public class HTMLParserTest extends WebServerTestCase {
     /**
      * @throws Exception failure
      */
-    //@Test
+    @Test
     @Alerts(IE = {"1", "createElementNS() is not defined",
                 "[object]", "SCRIPT,SCRIPT,undefined,undefined,undefined",
                 "[object]", "script,script,undefined,undefined,undefined" },

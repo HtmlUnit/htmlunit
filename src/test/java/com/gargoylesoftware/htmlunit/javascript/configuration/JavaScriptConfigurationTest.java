@@ -617,15 +617,15 @@ public class JavaScriptConfigurationTest extends WebTestCase {
                     while (child != null) {
                         if (child instanceof Element) {
                             final Element childE = (Element) child;
-                            final String name = childE.getAttribute("name");
                             final String tagName = childE.getTagName();
                             final int childType = getType(tagName);
                             if (childType != -1 && childType != lastChildType) {
                                 lastChildType = childType;
-                                lastChildName = name;
+                                lastChildName = null;
                             }
                             else {
                                 if (childType > 0) {
+                                    final String name = childE.getAttribute("name");
                                     if (lastChildName != null && name.compareToIgnoreCase(lastChildName) < 1) {
                                         fail("JavaScriptConfiguration.xml: \""
                                                 + name + "\" should be before \"" + lastChildName + '"');

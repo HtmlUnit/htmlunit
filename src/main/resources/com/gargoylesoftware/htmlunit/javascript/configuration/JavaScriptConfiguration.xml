@@ -100,6 +100,9 @@
         <constant name="PAGE_RULE">
             <browser name="Firefox"/>
         </constant>
+        <property name="type" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
         <property name="cssText" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>
@@ -111,9 +114,6 @@
         </property>
         <property name="readOnly" notImplemented="true" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer"/>
-        </property>
-        <property name="type" readable="true" writable="false">
-            <browser name="Firefox"/>
         </property>
     </class>
 
@@ -1060,8 +1060,8 @@
 
     <class name="HTMLAppletElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLAppletElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlApplet">
-        <property name="align" notImplemented="true" readable="true" writable="true"/>
         <property name="alt" readable="true" writable="true"/>
+        <property name="align" notImplemented="true" readable="true" writable="true"/>
         <property name="border" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
@@ -2542,10 +2542,11 @@
 
     <class name="Window" classname="com.gargoylesoftware.htmlunit.javascript.host.Window" JSObject="true">
         <doclink url="http://msdn.microsoft.com/en-us/library/ms535873.aspx" descr="MSDN documentation"/>
-        <property name="clientInformation" readable="true" writable="false">
+
+        <property name="clipboardData" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer"/>
         </property>
-        <property name="clipboardData" readable="true" writable="false">
+        <property name="clientInformation" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer"/>
         </property>
         <property name="closed" readable="true" writable="false"/>
@@ -2766,8 +2767,8 @@
         jsConstructor="jsConstructor" JSObject="true">
         <doclink url="http://developer.apple.com/internet/webcontent/xmlhttpreq.html" descr="Safari documentation"/>
         <browser name="Firefox"/>
-        <property name="onerror" readable="true" writable="true"/>
         <property name="onreadystatechange" readable="true" writable="true"/>
+        <property name="onerror" readable="true" writable="true"/>
         <property name="readyState" readable="true" writable="false"/>
         <property name="responseText" readable="true" writable="false"/>
         <property name="responseXML" readable="true" writable="false"/>

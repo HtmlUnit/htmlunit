@@ -621,12 +621,6 @@
             <layout>default</layout>
         </repository>
         -->
-        <!-- Needed for JDT -->
-        <repository>
-            <id>jboss-releases</id>
-            <name>JBoss Releases</name>
-            <url>http://repository.jboss.com/maven2</url>
-        </repository>
         <repository>
             <id>openqa-releases</id>
             <name>OpenQA Releases</name>

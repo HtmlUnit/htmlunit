@@ -165,7 +165,7 @@ public class HTMLAnchorElement extends HTMLElement {
     }
 
     /**
-     * Returns the hash portion of the link's URL (the portion following the '#', including the '#').
+     * Returns the hash portion of the link's URL (the portion following the '#').
      * @return the hash portion of the link's URL
      * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533775.aspx">MSDN Documentation</a>
@@ -175,7 +175,7 @@ public class HTMLAnchorElement extends HTMLElement {
         if (hash == null) {
             return "";
         }
-        return "#" + hash;
+        return hash;
     }
 
     /**

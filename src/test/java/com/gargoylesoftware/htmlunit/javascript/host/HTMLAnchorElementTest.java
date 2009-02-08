@@ -244,19 +244,6 @@ public class HTMLAnchorElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void readAnchorHash() throws Exception {
-        final String html = "<html><body><a id='a' href='http://blah.com/abc.html#arg'>foo</a>"
-            + "<script>alert(document.getElementById('a').hash);</script></body></html>";
-        final List<String> actual = new ArrayList<String>();
-        loadPage(getBrowserVersion(), html, actual);
-        final String[] expected = {"#arg"};
-        assertEquals(expected, actual);
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test
