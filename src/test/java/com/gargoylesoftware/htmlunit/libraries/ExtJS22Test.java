@@ -26,6 +26,8 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
@@ -168,6 +170,7 @@ public class ExtJS22Test extends WebTestCase {
         final HtmlPage page = getPage("desktop", "desktop");
         page.<HtmlButton>getFirstByXPath("//button").click();
     }
+
     /**
      * @throws Exception if an error occurs
      */
@@ -180,4 +183,21 @@ public class ExtJS22Test extends WebTestCase {
         assertTrue(xml.contains("Subject:"));
         assertTrue(xml.contains("Cancel"));
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @NotYetImplemented(Browser.IE)
+    public void grid_binding() throws Exception {
+        final HtmlPage page = getPage("grid", "binding");
+        Thread.sleep(2000);
+        final HtmlDivision resultsDiv = page.getHtmlElementById("detailPanel").getFirstByXPath("div/div");
+        assertEquals("Please select a book to see additional details.", resultsDiv.asText());
+        final HtmlDivision gridBodyDiv = page.getFirstByXPath("//div[@class='x-grid3-body']");
+        final HtmlDivision firstRowDiv = gridBodyDiv.getFirstByXPath("div");
+        firstRowDiv.click();
+        //TODO: assert the values after clikcing
+    }
+
 }
