@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
+            <action type="update" dev="asashour" issue="2520971">
+                JavaScript: properties of XMLHttpRequest ActiveX object are case insensitive.
+            </action>
             <action type="fix" dev="sdanig">
                 Allow numbers with decimal points in refresh meta tags.
             </action>

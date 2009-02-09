@@ -1340,7 +1340,6 @@ public class XMLHttpRequestTest extends WebServerTestCase {
     @Test
     @Browsers(Browser.IE)
     @Alerts("0")
-    @NotYetImplemented
     public void caseSensitivity_activeX() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"

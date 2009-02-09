@@ -169,7 +169,9 @@ public class ActiveXObject extends SimpleScriptable {
     }
 
     private static Scriptable buildXMLHttpRequest() {
-        final SimpleScriptable scriptable = new XMLHttpRequest();
+        final SimpleScriptable scriptable = new XMLHttpRequest(false);
+
+        // Don't forget to update XMLHttpRequest.ALL_PROPERTIES_
 
         // the properties
         addProperty(scriptable, "onreadystatechange", true, true);

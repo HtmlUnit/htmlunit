@@ -67,6 +67,10 @@ public class XMLHttpRequest extends SimpleScriptable {
     /** All the data has been received; the complete data is available in responseBody and responseText. */
     public static final int STATE_COMPLETED = 4;
 
+    private static final String[] ALL_PROPERTIES_ = {"onreadystatechange", "readyState", "responseText", "responseXML",
+        "status", "statusText", "abort", "getAllResponseHeaders", "getResponseHeader", "open", "send",
+        "setRequestHeader"};
+
     private int state_;
     private Function stateChangeHandler_;
     private Function errorHandler_;
@@ -76,11 +80,21 @@ public class XMLHttpRequest extends SimpleScriptable {
     private WebResponse webResponse_;
     private String overriddenMimeType_;
     private HtmlPage containingPage_;
+    private boolean caseSensitiveProperties_;
 
     /**
      * Creates a new instance. JavaScript objects must have a default constructor.
      */
     public XMLHttpRequest() {
+        this(true);
+    }
+
+    /**
+     * Creates a new instance.
+     * @param caseSensitiveProperties if properties and methods are case sensitive
+     */
+    XMLHttpRequest(final boolean caseSensitiveProperties) {
+        caseSensitiveProperties_ = caseSensitiveProperties;
         state_ = STATE_UNINITIALIZED;
     }
 
@@ -445,6 +459,38 @@ public class XMLHttpRequest extends SimpleScriptable {
      */
     public void jsxFunction_overrideMimeType(final String mimeType) {
         overriddenMimeType_ = mimeType;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object get(String name, final Scriptable start) {
+        if (!caseSensitiveProperties_) {
+            for (final String property : ALL_PROPERTIES_) {
+                if (property.equalsIgnoreCase(name)) {
+                    name = property;
+                    break;
+                }
+            }
+        }
+        return super.get(name, start);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void put(String name, final Scriptable start, final Object value) {
+        if (!caseSensitiveProperties_) {
+            for (final String property : ALL_PROPERTIES_) {
+                if (property.equalsIgnoreCase(name)) {
+                    name = property;
+                    break;
+                }
+            }
+        }
+        super.put(name, start, value);
     }
 
     private static final class NetworkErrorWebResponse implements WebResponse {
