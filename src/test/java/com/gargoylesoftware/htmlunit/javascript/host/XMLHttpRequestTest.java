@@ -1333,4 +1333,40 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         final String[] expectedAlerts = {"myInput"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.IE)
+    @Alerts("0")
+    @NotYetImplemented
+    public void caseSensitivity_activeX() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var req = new ActiveXObject('MSXML2.XmlHttp');\n"
+            + "  alert(req.reAdYsTaTe);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers({ Browser.IE7, Browser.FF })
+    @Alerts("undefined")
+    public void caseSensitivity_XMLHttpRequest() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var req = new XMLHttpRequest();\n"
+            + "  alert(req.reAdYsTaTe);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }
