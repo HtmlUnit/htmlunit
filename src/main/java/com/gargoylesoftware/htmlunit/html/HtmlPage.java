@@ -983,31 +983,31 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @param charset the charset attribute from the script tag
      */
     void loadExternalJavaScriptFile(final String srcAttribute, final String charset) {
-        if (getWebClient().isJavaScriptEnabled()) {
-            final URL scriptURL;
-            try {
-                scriptURL = getFullyQualifiedUrl(srcAttribute);
-                if (scriptURL.getProtocol().equals("javascript")) {
-                    if (mainLog_.isInfoEnabled()) {
-                        mainLog_.info("Ignoring script src [" + srcAttribute + "]");
-                    }
-                    return;
-                }
-            }
-            catch (final MalformedURLException e) {
-                if (mainLog_.isErrorEnabled()) {
-                    mainLog_.error("Unable to build URL for script src tag [" + srcAttribute + "]");
-                }
-                if (getWebClient().isThrowExceptionOnScriptError()) {
-                    throw new ScriptException(this, e);
+        if (StringUtils.isBlank(srcAttribute) || !getWebClient().isJavaScriptEnabled()) {
+            return;
+        }
+        final URL scriptURL;
+        try {
+            scriptURL = getFullyQualifiedUrl(srcAttribute);
+            if (scriptURL.getProtocol().equals("javascript")) {
+                if (mainLog_.isInfoEnabled()) {
+                    mainLog_.info("Ignoring script src [" + srcAttribute + "]");
                 }
                 return;
             }
-
-            final Script script = loadJavaScriptFromUrl(scriptURL, charset);
-            if (script != null) {
-                getWebClient().getJavaScriptEngine().execute(this, script);
+        }
+        catch (final MalformedURLException e) {
+            if (mainLog_.isErrorEnabled()) {
+                mainLog_.error("Unable to build URL for script src tag [" + srcAttribute + "]");
             }
+            if (getWebClient().isThrowExceptionOnScriptError()) {
+                throw new ScriptException(this, e);
+            }
+            return;
+        }
+        final Script script = loadJavaScriptFromUrl(scriptURL, charset);
+        if (script != null) {
+            getWebClient().getJavaScriptEngine().execute(this, script);
         }
     }
 

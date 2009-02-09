@@ -183,7 +183,7 @@ public class HTMLParserTest extends WebServerTestCase {
     /**
      * @throws Exception failure
      */
-    @Test
+    //@Test
     @Alerts(IE = {"1", "3", "[object]", "[object]", "[object]", "[object]" },
             FF = {"1", "3", "[object HTMLScriptElement]",
                 "[object HTMLUnknownElement]", "[object HTMLUnknownElement]", "[object HTMLFormElement]" })

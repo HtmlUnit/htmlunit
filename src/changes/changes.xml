@@ -7,6 +7,9 @@
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
             <action type="fix" dev="sdanig">
+                Fail gracefully when script tags contain empty 'src' attributes.
+            </action>
+            <action type="fix" dev="sdanig">
                 Make the cookie manager thread-safe.
             </action>
             <action type="fix" dev="sdanig">

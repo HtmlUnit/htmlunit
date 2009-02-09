@@ -284,6 +284,28 @@ public class HtmlScriptTest extends WebTestCase {
     }
 
     /**
+     * Verifies that we're lenient about empty "src" attributes.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testEmptySrc() throws Exception {
+        final String html1 = "<html><head><script src=''></script></head><body>abc</body></html>";
+        final String html2 = "<html><head><script src='  '></script></head><body>abc</body></html>";
+
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(URL_FIRST, html1);
+        webConnection.setResponse(URL_SECOND, html2);
+        client.setWebConnection(webConnection);
+
+        client.getPage(URL_FIRST);
+        assertEquals(1, webConnection.getRequestCount());
+
+        client.getPage(URL_SECOND);
+        assertEquals(2, webConnection.getRequestCount());
+    }
+
+    /**
      * Verifies that we're lenient about whitespace before and after URLs in the "src" attribute.
      * @throws Exception if an error occurs
      */
