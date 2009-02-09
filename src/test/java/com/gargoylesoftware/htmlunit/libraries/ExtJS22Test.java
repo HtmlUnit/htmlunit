@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 
@@ -192,7 +193,8 @@ public class ExtJS22Test extends WebTestCase {
     public void grid_binding() throws Exception {
         final HtmlPage page = getPage("grid", "binding");
         Thread.sleep(2000);
-        final HtmlDivision resultsDiv = page.getHtmlElementById("detailPanel").getFirstByXPath("div/div");
+        final HtmlElement detailPanel = page.getHtmlElementById("detailPanel");
+        final HtmlDivision resultsDiv = detailPanel.getFirstByXPath("div/div");
         assertEquals("Please select a book to see additional details.", resultsDiv.asText());
         final HtmlDivision gridBodyDiv = page.getFirstByXPath("//div[@class='x-grid3-body']");
         final HtmlDivision firstRowDiv = gridBodyDiv.getFirstByXPath("div");
