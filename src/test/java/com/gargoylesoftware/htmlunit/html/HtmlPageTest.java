@@ -927,6 +927,28 @@ public class HtmlPageTest extends WebServerTestCase {
     }
 
     /**
+     * Test that the refresh time can be a double ("3.4", for example), not just an integer.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testRefresh_MetaTag_Double() throws Exception {
+        final String html1 = "<html><head><title>first</title>\n"
+            + "<META HTTP-EQUIV='Refresh' CONTENT='1.2  ;  URL=" + URL_SECOND + "'>\n"
+            + "</head><body></body></html>";
+        final String html2 = "<html><head><title>second</title></head><body>abc</body></html>";
+
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(URL_FIRST, html1);
+        webConnection.setResponse(URL_SECOND, html2);
+        client.setWebConnection(webConnection);
+
+        final HtmlPage page = client.getPage(URL_FIRST);
+        assertEquals("second", page.getTitleText());
+    }
+
+    /**
      * Test auto-refresh from a response header.
      * @throws Exception if the test fails
      */

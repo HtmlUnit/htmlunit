@@ -1270,7 +1270,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
             return;
         }
 
-        final int time;
+        final double time;
         final URL url;
 
         int index = refreshString.indexOf(";");
@@ -1279,7 +1279,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         if (timeOnly) {
             // Format: <meta http-equiv='refresh' content='10'>
             try {
-                time = Integer.parseInt(refreshString);
+                time = Double.parseDouble(refreshString);
             }
             catch (final NumberFormatException e) {
                 if (mainLog_.isErrorEnabled()) {
@@ -1292,7 +1292,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         else {
             // Format: <meta http-equiv='refresh' content='10;url=http://www.blah.com'>
             try {
-                time = Integer.parseInt(refreshString.substring(0, index).trim());
+                time = Double.parseDouble(refreshString.substring(0, index).trim());
             }
             catch (final NumberFormatException e) {
                 if (mainLog_.isErrorEnabled()) {
@@ -1332,7 +1332,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
             }
         }
 
-        getWebClient().getRefreshHandler().handleRefresh(this, url, time);
+        final int timeRounded = (int) time;
+        getWebClient().getRefreshHandler().handleRefresh(this, url, timeRounded);
     }
 
     /**
