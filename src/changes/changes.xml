@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
+            <action type="fix" dev="asashour">
+                JavaScript: XMLHttpRequest is supported in IE7.
+            </action>
             <action type="fix" dev="sdanig">
                 Fail gracefully when script tags contain empty 'src' attributes.
             </action>

@@ -129,8 +129,8 @@ public class XMLHttpRequestTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "activeX created" }, FF = { "[object XMLHttpRequest]" })
-    public void testCreation() throws Exception {
+    @Alerts(IE6 = { "activeX created" }, IE7 = { "[object]" },  FF = { "[object XMLHttpRequest]" })
+    public void creation() throws Exception {
         final String html =
             "<html>\n"
             + "  <head>\n"
@@ -147,7 +147,6 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "  </head>\n"
             + "  <body></body>\n"
             + "</html>";
-
         loadPageWithAlerts(html);
     }
 

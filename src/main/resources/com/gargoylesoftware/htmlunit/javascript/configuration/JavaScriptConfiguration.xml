@@ -2766,6 +2766,7 @@
         jsConstructor="jsConstructor" JSObject="true">
         <doclink url="http://developer.apple.com/internet/webcontent/xmlhttpreq.html" descr="Safari documentation"/>
         <browser name="Firefox"/>
+        <browser name="Microsoft Internet Explorer" min-version="7"/>
         <property name="onerror" readable="true" writable="true"/>
         <property name="onreadystatechange" readable="true" writable="true"/>
         <property name="readyState" readable="true" writable="false"/>
@@ -2777,7 +2778,9 @@
         <function name="getAllResponseHeaders"/>
         <function name="getResponseHeader"/>
         <function name="open"/>
-        <function name="overrideMimeType"/>
+        <function name="overrideMimeType">
+            <browser name="Firefox"/>
+        </function>
         <function name="send"/>
         <function name="setRequestHeader"/>
     </class>
