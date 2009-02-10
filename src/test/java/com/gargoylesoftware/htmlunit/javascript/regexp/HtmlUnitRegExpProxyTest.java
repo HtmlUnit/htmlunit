@@ -495,7 +495,6 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
-
     /**
      * @throws Exception if the test fails
      */
