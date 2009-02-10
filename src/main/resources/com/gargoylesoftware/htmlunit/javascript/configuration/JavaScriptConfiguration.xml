@@ -1276,6 +1276,12 @@
                 descr="DOM-Level-2-Traversal-Range"/>
             <browser name="Firefox"/>
         </function>
+        <function name="dispatchEvent">
+            <doclink
+                url="http://developer.mozilla.org/en/docs/DOM:element.dispatchEvent"
+                descr="Gecko DOM Reference"/>
+            <browser name="Firefox"/>
+        </function>
         <function name="elementFromPoint">
             <browser name="Microsoft Internet Explorer"/>
         </function>

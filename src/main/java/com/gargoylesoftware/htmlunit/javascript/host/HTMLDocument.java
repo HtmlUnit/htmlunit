@@ -1395,4 +1395,19 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
         return super.jsxGet_doctype();
     }
+
+    /**
+     * Dispatches an event into the event system (standards-conformant browsers only). See
+     * <a href="http://developer.mozilla.org/en/docs/DOM:element.dispatchEvent">the Gecko
+     * DOM reference</a> for more information.
+     *
+     * @param event the event to be dispatched
+     * @return <tt>false</tt> if at least one of the event handlers which handled the event
+     *         called <tt>preventDefault</tt>; <tt>true</tt> otherwise
+     */
+    public boolean jsxFunction_dispatchEvent(final Event event) {
+        event.setTarget(this);
+        fireEvent(event);
+        return !event.isPreventDefault();
+    }
 }

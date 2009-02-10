@@ -22,12 +22,14 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link HTMLDocument}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
 public class HTMLDocumentTest extends WebTestCase {
@@ -288,6 +290,59 @@ public class HTMLDocumentTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "imported: [object HTMLScriptElement]" }, IE = { "exception" })
+    @NotYetImplemented(Browser.FF)
+    public void importNode_script() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + " try {\n"
+            + "  var d = document.implementation.createDocument(null, null, null);\n"
+            + "  var xhtml = \"<html xmlns='http://www.w3.org/1999/xhtml'><sc\" "
+            + "   + \"ript>alert('o'); _scriptEvaluated=true;</scr\" + \"ipt></html>\";\n"
+            + "  var newDoc = (new DOMParser()).parseFromString(xhtml, 'text/xml');\n"
+            + "  var theScript = newDoc.getElementsByTagName('script')[0];\n"
+            + "  var importedScript = window.document.importNode(theScript, true);\n"
+            + "  alert('imported: ' + importedScript);\n"
+            + "  var theSpan = document.getElementById('s1');\n"
+            + "  document.body.replaceChild(importedScript, theSpan);\n"
+            + " } catch (e) { alert('exception') }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <span id='s1'></span>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.FF)
+    @Alerts("clicked")
+    public void dispatchEvent() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<script>\n"
+            + "  function doTest() {\n"
+            + "    var e = document.createEvent('MouseEvents');\n"
+            + "    e.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);\n"
+            + "    document.dispatchEvent(e);\n"
+            + "  }\n"
+            + "  function clickListener() {\n"
+            + "    alert('clicked');\n"
+            + "  }\n"
+            + "  document.addEventListener('click', clickListener, true);\n"
+            + "</script>\n"
+            + "<body onload='doTest()'>foo</body>\n"
+            + "</html>";
         loadPageWithAlerts(html);
     }
 }
