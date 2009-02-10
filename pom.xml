@@ -550,7 +550,7 @@
         <dependency>
             <groupId>org.openqa.selenium.webdriver</groupId>
             <artifactId>webdriver-htmlunit</artifactId>
-            <version>0.5.524</version>
+            <version>0.5.609</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -562,7 +562,7 @@
         <dependency>
             <groupId>org.openqa.selenium.webdriver</groupId>
             <artifactId>webdriver-firefox</artifactId>
-            <version>0.5.524</version>
+            <version>0.5.609</version>
             <scope>test</scope>
         </dependency>
         <dependency>
