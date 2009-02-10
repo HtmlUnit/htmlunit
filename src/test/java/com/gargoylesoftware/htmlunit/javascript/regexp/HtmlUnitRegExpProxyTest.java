@@ -415,6 +415,23 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
     }
 
     /**
+     * Verifies that curly braces can be used non escaped in JS regexp.
+     */
+    @Test
+    public void escapeOpeningSquareBracketInCharacterClass() {
+        assertEquals("[ab\\[]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("[ab[]"));
+        assertEquals("[\\[]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("[[]"));
+        assertEquals("[a\\[b]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("[a[b]"));
+        assertEquals("[ab][a\\[b][ab]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("[ab][a[b][ab]"));
+
+        // with already escaped [
+        assertEquals("[ab\\[]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("[ab\\[]"));
+        assertEquals("[\\[]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("[\\[]"));
+        assertEquals("[a\\[b]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("[a\\[b]"));
+        assertEquals("[ab][a\\[b][ab]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("[ab][a\\[b][ab]"));
+    }
+
+    /**
      * Tests usage of regex with non escaped curly braces, such as is used by dhtmlGrid.
      * @throws Exception if the test fails
      */
@@ -472,6 +489,51 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {""};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
+        loadPage(html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void openingSquareBracketInCharacterClass() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var re = /[[]/\n"
+            + "  alert('div'.match(re))\n"
+            + "  alert('['.match(re))\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"null", "["};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
+        loadPage(html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * RegExp used in JQuery 1.3.1 wasn't correctly transformed to Java RegExp in HtmlUnit-2.4.
+     * @see #escapeOpeningSquareBracketInCharacterClass()
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void jquerySizzleChunker() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + " var re = /((?:\\((?:\\([^()]+\\)|[^()]+)+\\)|\\[(?:\\[[^[\\]]*\\]|['\"][^'\"]+['\"]|[^[\\]'\"]+)+\\]"
+            + "|\\\\.|[^ >+~,(\\[]+)+|[>+~])(\\s*,\\s*)?/g\n"
+            + "  function test() {\n"
+            + "    alert('div'.match(re))\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"div"};
         final List<String> collectedAlerts = new ArrayList<String>();
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
         loadPage(html, collectedAlerts);

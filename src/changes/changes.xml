@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
+            <action type="fix" dev="mguillem">
+                JavaScript: custom RegExp proxy now accepts unescaped opening square brackets in character class.
+            </action>
             <action type="add" dev="mguillem">
                 JavaScript: add support for HTMLDocument.dispatchEvent (FF only).
             </action>

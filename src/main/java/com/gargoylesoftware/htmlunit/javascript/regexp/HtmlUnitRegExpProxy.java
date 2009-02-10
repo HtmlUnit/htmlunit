@@ -94,6 +94,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             else {
                 reData = new RegExpData(Context.toString(arg0));
             }
+
             final Pattern pattern = Pattern.compile(reData.getJavaPattern(), reData.getJavaFlags());
             final Matcher matcher = pattern.matcher(thisString);
             if (!matcher.find()) {
@@ -223,16 +224,22 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             return jsRegExpToJavaRegExp(jsSource_);
         }
 
-        private String jsRegExpToJavaRegExp(String re) {
-            re = re.replaceAll("\\[\\^\\\\\\d\\]", ".");
-            re = re.replaceAll("\\[([^\\]]*)\\\\b([^\\]]*)\\]", "[$1\\\\cH$2]"); // [...\b...] -> [...\cH...]
-            re = escapeJSCurly(re);
-            return re;
-        }
-
         boolean hasFlag(final char c) {
             return jsFlags_.indexOf(c) != -1;
         }
+    }
+
+    /**
+     * Transform a JavaScript regular expression to a Java regular expression
+     * @param re the JavaScript regular expression to transform
+     * @return the transformed expression
+     */
+    static String jsRegExpToJavaRegExp(String re) {
+        re = re.replaceAll("\\[\\^\\\\\\d\\]", ".");
+        re = re.replaceAll("\\[([^\\]]*)\\\\b([^\\]]*)\\]", "[$1\\\\cH$2]"); // [...\b...] -> [...\cH...]
+        re = re.replaceAll("(?<!\\\\)\\[([^((?<!\\\\)\\[)\\]]*)\\[", "[$1\\\\["); // [...[...] -> [...\[...]
+        re = escapeJSCurly(re);
+        return re;
     }
 
     /**
