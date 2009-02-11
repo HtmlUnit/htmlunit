@@ -362,7 +362,6 @@ public class HTMLAnchorElementTest extends WebTestCase {
         assertEquals("http://www.gargoylesoftware.commotion/foo.html#O", link.getHrefAttribute());
     }
 
-
     /**
      * Verifies that anchor href attributes are trimmed of whitespace (bug 1658064),
      * just like they are in IE and Firefox.
