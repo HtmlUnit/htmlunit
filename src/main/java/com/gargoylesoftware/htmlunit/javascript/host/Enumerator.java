@@ -19,7 +19,7 @@ import org.mozilla.javascript.Undefined;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
- * A JavaScript object for a Location.
+ * A JavaScript object for Enumerator.
  *
  * @version $Revision: 4002 $
  * @author Ahmed Ashour
