@@ -69,11 +69,18 @@ public class HTMLAnchorElement extends HTMLElement {
      * @return the value of this link's <tt>href</tt> property
      */
     public String jsxGet_href() {
+        final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
+        final String hrefAttr = anchor.getHrefAttribute();
+
+        if (hrefAttr == HtmlAnchor.ATTRIBUTE_NOT_DEFINED) {
+            return "";
+        }
+
         try {
             return getUrl().toString();
         }
         catch (final MalformedURLException e) {
-            return ((HtmlAnchor) getDomNodeOrDie()).getHrefAttribute();
+            return hrefAttr;
         }
     }
 

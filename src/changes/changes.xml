@@ -7,6 +7,9 @@
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
             <action type="fix" dev="mguillem">
+                JavaScript: anchor's href attribute is empty string when no href was specified.
+            </action>
+            <action type="fix" dev="mguillem">
                 JavaScript: custom RegExp proxy now ignores back references in character class as browsers do.
             </action>
             <action type="fix" dev="bradclarke">

@@ -47,27 +47,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class HtmlAnchorTest extends WebTestCase {
 
     /**
-     * Verifies that anchor href attributes are trimmed of whitespace (bug 1658064),
-     * just like they are in IE and Firefox.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void testHrefTrimmed() throws Exception {
-        final String html = "<html><body onload='"
-            + "alert(document.getElementById(\"a\").href.length);\n"
-            + "alert(document.getElementById(\"b\").href.length);'>\n"
-            + "<a href=' http://a/ ' id='a'>a</a> "
-            + "<a href='  http://b/    ' id='b'>b</a>\n"
-            + "</body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(html, collectedAlerts);
-
-        final String[] expectedAlerts = {"9", "9"};
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test
