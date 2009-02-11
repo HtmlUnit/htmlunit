@@ -797,6 +797,17 @@
         <function name="setAttribute"/>
     </class>
 
+    <class name="Enumerator" classname="com.gargoylesoftware.htmlunit.javascript.host.Enumerator"
+        jsConstructor="jsConstructor" JSObject="true">
+        <doclink url="http://msdn.microsoft.com/en-us/library/6ch9zb09.aspx"
+                descr="MSDN documentation"/>
+        <browser name="Microsoft Internet Explorer"/>
+        <function name="atEnd"/>
+        <function name="item"/>
+        <function name="moveFirst"/>
+        <function name="moveNext"/>
+    </class>
+
     <class name="Event" classname="com.gargoylesoftware.htmlunit.javascript.host.Event" JSObject="true">
         <doclink
             url="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event"

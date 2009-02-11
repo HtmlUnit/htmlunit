@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
+            <action type="add" dev="asashour" issue="2509952">
+                JavaScript: add support for Enumerator (IE only).
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: custom RegExp proxy now accepts unescaped opening square brackets in character class.
             </action>
