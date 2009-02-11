@@ -432,6 +432,18 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
     }
 
     /**
+     * Verifies that back references in character classes are removed.
+     * @see #jqueryPseudo()
+     * @see #ignoreBackReferenceInCharacterClass()
+     */
+    @Test
+    public void removeBackReferencesInCharacterClasses() {
+        assertEquals("(a)(b)[^c]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("(a)(b)[^\\2c]"));
+        assertEquals("(a)(b)[c]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("(a)(b)[\\2c]"));
+        assertEquals("(a)(b)[\\\\2c]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("(a)(b)[\\\\2c]"));
+    }
+
+    /**
      * Tests usage of regex with non escaped curly braces, such as is used by dhtmlGrid.
      * @throws Exception if the test fails
      */
@@ -517,7 +529,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
     }
 
     /**
-     * RegExp used in JQuery 1.3.1 wasn't correctly transformed to Java RegExp in HtmlUnit-2.4.
+     * RegExp used in JQuery 1.3.1 that wasn't correctly transformed to Java RegExp in HtmlUnit-2.4.
      * @see #escapeOpeningSquareBracketInCharacterClass()
      * @throws Exception if the test fails
      */
@@ -533,6 +545,54 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"div"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
+        loadPage(html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * RegExp used in JQuery 1.3.1 that wasn't correctly transformed to Java RegExp in HtmlUnit-2.4.
+     * @see #escapeOpeningSquareBracketInCharacterClass()
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void jqueryPseudo() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + " var re = /:((?:[\\w\\u00c0-\\uFFFF_-]|\\\\.)+)(?:\\((['\"]*)((?:\\([^\\)]+\\)"
+            + "|[^\\2\\(\\)]*)+)\\2\\))?/\n"
+            + "  function test() {\n"
+            + "    alert(':toto'.match(re))\n"
+            + "    alert('foo'.match(re))\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {":toto,toto,,", "null"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
+        loadPage(html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Browsers ignore back references in character classes.
+     * This is a simplified case of {@link #jqueryPseudo()}
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void ignoreBackReferenceInCharacterClass() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + " var re = /(a)(b)[^\\2c]/;\n"
+            + " alert('abc'.match(re));\n"
+            + " alert('abb'.match(re));\n"
+            + " alert('abd'.match(re));\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"null", "abb,a,b", "abd,a,b"};
         final List<String> collectedAlerts = new ArrayList<String>();
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
         loadPage(html, collectedAlerts);

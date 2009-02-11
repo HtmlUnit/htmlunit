@@ -6,8 +6,11 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
+            <action type="fix" dev="mguillem">
+                JavaScript: custom RegExp proxy now ignores back references in character class as browsers do.
+            </action>
             <action type="fix" dev="bradclarke">
-                Correct JavaScript parent scope after using WebClient.setCurrentWindow  
+                Correct JavaScript parent scope after using WebClient.setCurrentWindow.
             </action>
             <action type="add" dev="asashour" issue="2509952">
                 JavaScript: add support for Enumerator (IE only).

@@ -238,6 +238,10 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         re = re.replaceAll("\\[\\^\\\\\\d\\]", ".");
         re = re.replaceAll("\\[([^\\]]*)\\\\b([^\\]]*)\\]", "[$1\\\\cH$2]"); // [...\b...] -> [...\cH...]
         re = re.replaceAll("(?<!\\\\)\\[([^((?<!\\\\)\\[)\\]]*)\\[", "[$1\\\\["); // [...[...] -> [...\[...]
+
+        // back reference in character classes are simply ignored by browsers
+        re = re.replaceAll("(?<!\\\\)\\[([^\\]]*)(?<!\\\\)\\\\\\d", "[$1"); // [...ab\5cd...] -> [...abcd...]
+
         re = escapeJSCurly(re);
         return re;
     }
