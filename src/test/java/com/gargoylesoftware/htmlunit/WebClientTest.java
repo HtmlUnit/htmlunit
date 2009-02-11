@@ -62,6 +62,7 @@ import org.w3c.css.sac.ErrorHandler;
 import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
+import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -2051,5 +2052,51 @@ public class WebClientTest extends WebServerTestCase {
             writer.write("<html><body>Going anywhere?</body></html>");
             writer.close();
         }
+    }
+
+    /**
+     * Tests that the JavaScript parent scope is set correctly when shuffling windows around.
+     * @throws Exception if test fails
+     */
+    @Test
+    public void testMaintainJavaScriptParentScope() throws Exception {
+        final String basicContent = "<html><head>"
+            + "<title>basicContentTitle</title>\n"
+            + "</head><body>\n"
+            + "<p>Hello World</p>"
+            + "</body></html>";
+
+        final String jsContent = "<html><head>"
+            + "<title>jsContentTitle</title>\n"
+            + "<script>function foo() {alert('Ran Here')}</script>\n"
+            + "<script>function bar() {}</script>\n"
+            + "</head><body onload='bar()'>\n"
+            + "<input type='button' id='button' onclick='foo()'/>"
+            + "</body></html>";
+
+        final HtmlPage jsPage = loadPage(jsContent);
+        final WebClient webClient = jsPage.getWebClient();
+        final WebWindow firstWindow = webClient.getCurrentWindow();
+        getMockConnection(jsPage).setResponse(URL_SECOND, basicContent);
+
+        final CollectingAlertHandler alertHandler = new CollectingAlertHandler();
+        webClient.setAlertHandler(alertHandler);
+
+        final HtmlButtonInput buttonBefore = jsPage.getHtmlElementById("button");
+
+        final WebWindow secondWindow = webClient.openWindow(null, "second window");
+        webClient.setCurrentWindow(secondWindow);
+        final HtmlPage basicPage = webClient.getPage(URL_SECOND);
+
+        webClient.setCurrentWindow(firstWindow);
+
+        final HtmlPage currentPage = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
+        final HtmlButtonInput buttonAfter = currentPage.getHtmlElementById("button");
+        assertSame(buttonBefore, buttonAfter);
+
+        buttonAfter.click();
+
+        assertEquals(1, alertHandler.getCollectedAlerts().size());
+        assertEquals("Ran Here", alertHandler.getCollectedAlerts().get(0));
     }
 }

@@ -223,12 +223,9 @@ public class SimpleScriptable extends ScriptableObject {
      * @param scriptable the script object to initialize
      */
     protected void initParentScope(final DomNode domNode, final SimpleScriptable scriptable) {
-        // parent scope needs to be set to the enclosing "window" (no simple unit test found to illustrate the
-        // necessity) if navigation has continued, the window may contain an other page as the one to which
-        // the current node belongs to.
-        // See test JavaScriptEngineTest#testScopeInInactivePage
-        if (domNode.getPage().getEnclosingWindow().getEnclosedPage() == domNode.getPage()) {
-            scriptable.setParentScope(getWindow());
+        final WebWindow enclosingWindow = domNode.getPage().getEnclosingWindow();
+        if (enclosingWindow.getEnclosedPage() == domNode.getPage()) {
+            scriptable.setParentScope((Scriptable) enclosingWindow.getScriptObject());
         }
         else {
             scriptable.setParentScope(ScriptableObject.getTopLevelScope(domNode.getPage().getScriptObject()));
