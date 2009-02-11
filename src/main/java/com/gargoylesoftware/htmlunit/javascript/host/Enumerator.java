@@ -21,7 +21,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 /**
  * A JavaScript object for Enumerator.
  *
- * @version $Revision: 4002 $
+ * @version $Revision$
  * @author Ahmed Ashour
  * @see <a href="http://msdn.microsoft.com/en-us/library/6ch9zb09.aspx">MSDN Documentation</a>
  */

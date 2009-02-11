@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 /**
  * Tests for {@link Enumerator}.
  *
- * @version $Revision: 4093 $
+ * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
