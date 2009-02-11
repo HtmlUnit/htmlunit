@@ -2344,7 +2344,7 @@
             <action type="update" dev="mguillem" issue="1545598">
                 Updated doc to reflect migration from CVS to SVN.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Do not submit reset buttons in forms.
             </action>
             <action type="update" dev="mguillem" issue="1244810" due-to="Daniel Gredler">
@@ -2362,18 +2362,18 @@
             <action type="update" dev="mguillem" issue="1528024">
                 JavaScript: cells collection for rows now takes th into account.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 JavaScript: table/tbody.deleteRow(-1) will now delete the last row
             </action>
         </release>
         <release version="1.9" date="Jun 27, 2006">
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Upgraded commons-collections to version 3.2
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Upgraded commons-logging to version 1.1
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Upgraded commons-io to version 1.2
             </action>
             <action type="update" dev="mguillem" issue="1439904">
@@ -2428,13 +2428,13 @@
             <action type="update" dev="mguillem" issue="1460444">
                 Proxy settings now respected to load external JavaScript files.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 HtmlCheckBoxInput.setChecked() now fires the JavaScript onchange event.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Implemented window.setTimeout(function, int) and window.setInterval(function, int)
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 HtmlOption.asText() now respects the label attribute as browsers do.
             </action>
             <action type="update" dev="mguillem" issue="1437068">
@@ -2474,7 +2474,7 @@
             <action type="update" dev="mguillem">
                 Added URL of the failed request in message of FailingHttpStatusCodeException.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Fixed a bug that could cause a ConcurrentModificationException when navigating away
                 from a page with JavaScript running in the background.
             </action>
@@ -2487,7 +2487,7 @@
             <action type="update" dev="mguillem">
                 FailingHttpStatusCodeException now contains the failing WebResponse.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Modified XmlHttpRequest to use new thread management API for async requests.
             </action>
             <action type="update" dev="mguillem">
@@ -2498,7 +2498,7 @@
             <action type="update" dev="mguillem" issue="1105226">
                 Fixed bad handling of comma in Location header of redirections (30x)
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Implemented setInterval/clearInterval and thread management for setTimeout
                 and setInterval threads. Thanks to Steven Grimm and Daniel Gredler for patches that
                 were helpful in the implementation.
@@ -2512,7 +2512,7 @@
             <action type="update" dev="mguillem" issue="1385864" due-to="Paul King">
                 Fixed NPE thrown when JS error occurs on click when ThrowExceptionOnScriptError is false.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Added HtmlAnchor.openLinkInNewWindow()
             </action>
             <action type="update" dev="mguillem" issue="1382013">
@@ -2524,7 +2524,7 @@
             <action type="update" dev="mguillem" issue="1369052" due-to="Mark van Leeuwen">
                 JavaScript: added support for property cellIndex on td and th eleements.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 BaseFrame.FrameWindow has been deprecated and replaced with a top level
                 FrameWindow class.
             </action>
@@ -2577,7 +2577,7 @@
             <action type="update" dev="mguillem" issue="1357412">
                 JavaScript: responses to XMLHttpRequest don't disturb window contents anymore.
             </action>
-            <action type="add" dev="yourgod">
+            <action type="add" dev="bradclarke">
                 All code deprecated prior to 1.6 has been removed
             </action>
             <action type="add" dev="mguillem" issue="1343212" due-to="Stefan Anzinger">
@@ -2611,7 +2611,7 @@
                 Fill frame windows with about:blank when the declaring tag is found
                 to allow JavaScript to run on it before the real content is loaded.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Upgraded commons-httpclient to version 3.0rc4 in ant as well.
                 Made HtmlForm.submit(SubmittableElement) public to simulate
                 keyboard submits (more to come later).
@@ -2748,13 +2748,13 @@
                 Children of removed nodes were erroneously still available by id using
                 HtmlPage.getElementById.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Upgraded commons-jelly to version 1.0
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Upgraded commons-httpclient to version 3.0rc3
             </action>
-            <action type="update" dev="yourgod" issue="1195509" due-to="dlevine004">
+            <action type="update" dev="bradclarke" issue="1195509" due-to="dlevine004">
                 Added method for setting HttpClient's virtual host
             </action>
             <action type="update" dev="mguillem" issue="1221161" due-to="Denis N. Antonioli">
@@ -2770,7 +2770,7 @@
             <action type="update" dev="mguillem" issue="1213455" due-to="Daniel Gredler">
                 JavaScript: use the Window as the top scope in Rhino JavaScript engine.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 JavaScript: Fixed bug with onchange handler being fired for all input type="file"
                 on creation.
             </action>
@@ -2786,7 +2786,7 @@
             <action type="update" dev="mguillem" issue="1209947" due-to="Daniel Gredler">
                 Implemented form reset, defaultValue and defaultChecked.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 JavaScript: Added window.print() as unimplemented method.
             </action>
             <action type="update" dev="mguillem" issue="1204922">
@@ -2810,14 +2810,14 @@
             </action>
         </release>
         <release version="1.6" date="May 10, 2005">
-            <action type="update" dev="yourgod" issue="1194006" due-to="Daniel Gredler">
+            <action type="update" dev="bradclarke" issue="1194006" due-to="Daniel Gredler">
                 Added XMLHttpRequest support. Patch submitted by Daniel Gredler.
             </action>
-            <action type="update" dev="yourgod" issue="1080774" due-to="Daniel Gredler">
+            <action type="update" dev="bradclarke" issue="1080774" due-to="Daniel Gredler">
                 Deprecated and renamed getAll&amp;lt;Something&amp;gt;s methods to get&amp;lt;Something&amp;gt;s to
                 make them easier to find.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 More refactoring and deprecation to use WebRequestSettings.
                 WebRequestSettings now has get/setAdditionalHeaders, patch submitted by Daniel Gredler.
                 INCOMPATIBLE CHANGE: Third party extenders of WebConnection will need to
@@ -2827,7 +2827,7 @@
             <action type="update" dev="mguillem" issue="1183971" due-to="Bruce Faulkner">
                 Javascript: fixed exception occurring while changing type of input created via document.createElement().
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Upgraded commons-httpclient to version 3.0rc2
             </action>
             <action type="update" dev="mguillem" issue="1188143" due-to="Bruce Faulkner">
@@ -2908,7 +2908,7 @@
             <action type="add" dev="mguillem" issue="1153758" due-to="George Murnock">
                 Javascript: implemented method removeAttribute for DOM nodes.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Javascript: Added support for document.scripts
             </action>
             <action type="update" dev="mguillem" issue="1157936">
@@ -2917,7 +2917,7 @@
             <action type="add" dev="mguillem" issue="1153693" due-to="George Murnock">
                 Javascript: implemented property childNodes.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Fixed bug where document.write-ing a frame was causing an attempt
                 to load an invalid URL starting with http://first
             </action>
@@ -2927,7 +2927,7 @@
             <action type="update" dev="mguillem" issue="1153710" due-to="George Murnock">
                 Javascript: document.links doesn't return tags with empty href anymore.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 A RefeshHandler can now throw IOExceptions instead of handling them.
                 Updated ImmediateRefeshHandler and ThreadedRefeshHandler to make refresh failures
                 exceptions instead of just log messages.
@@ -2939,23 +2939,23 @@
             <action type="update" dev="mguillem" issue="1145773" due-to="George Murnock">
                 Fixed bug occurring when submitting from JavaScript a form with a JavaScript action.
             </action>
-            <action type="update" dev="yourgod" issue="1151184">
+            <action type="update" dev="bradclarke" issue="1151184">
                 HtmlElement's getHtmlElementsByAttribute, getHtmlElementsByTagName, and
                 getHtmlElementsByTagNames were all updated to ignore the case of the passed
                 in tag name as they're always compared with a lowercase version.
             </action>
-            <action type="update" dev="yourgod" issue="1145916" due-to="Daniel Gredler">
+            <action type="update" dev="bradclarke" issue="1145916" due-to="Daniel Gredler">
                 JavaScript: Implemented location.reload().
             </action>
-            <action type="update" dev="yourgod" issue="1143982" due-to="Daniel Gredler">
+            <action type="update" dev="bradclarke" issue="1143982" due-to="Daniel Gredler">
                 Fixed bug with meta refresh that only contained a number.
             </action>
-            <action type="update" dev="yourgod" issue="1145869" due-to="Daniel Gredler">
+            <action type="update" dev="bradclarke" issue="1145869" due-to="Daniel Gredler">
                 INCOMPATIBLE CHANGE: RefeshHandler interface changed and they must now do the
                 refresh themselves. DefaultRefreshHandler was replaced with
                 ImmediateRefreshHandler (the new default) and ThreadedRefreshHandler.
             </action>
-            <action type="update" dev="yourgod" issue="1144103" due-to="Daniel Gredler">
+            <action type="update" dev="bradclarke" issue="1144103" due-to="Daniel Gredler">
                 INCOMPATIBLE CHANGE: com.gargoylesoftware.htmlunit.CredentialProvider has been removed.
                 You should now use org.apache.commons.httpclient.auth.CredentialsProvider instead.
                 This patch should allow support for NTLM and Digest authentication as well as
@@ -2973,7 +2973,7 @@
             <action type="update" dev="mguillem" issue="1093017" due-to="David D. Kilzer">
                 Submit form elements in the same order that they appear in the HTML form.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Upgraded commons-httpclient to version 3.0rc1
             </action>
             <action type="update" dev="mguillem" issue="1115259" due-to="Michael Ottati">
@@ -3018,26 +3018,26 @@
             <action type="update" dev="mguillem">
                 Fixed ClassCastException occurring when unloading a frameset that contained a frame which content wasn't html.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Implemented WebRequestSettings parameter object.
                 Created new WebClient.getPage() methods and deprecated old ones.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Stopped httpclient from automatically retrying failed connections 5 times.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 A failure when setting a location from JavaScript now throws an exception
             </action>
-            <action type="update" dev="yourgod" issue="1104522" due-to="Daniel Gredler">
+            <action type="update" dev="bradclarke" issue="1104522" due-to="Daniel Gredler">
                 Added support for misc table methods in JavaScript
             </action>
             <action type="update" dev="mguillem">
                 JavaScript: added dummy implementation of window.setInterval and window.clearInterval doing nothing.
             </action>
-            <action type="update" dev="yourgod" issue="976471" due-to="David D. Kilzer">
+            <action type="update" dev="bradclarke" issue="976471" due-to="David D. Kilzer">
                 synchronized JavaScript execution for multi-threaded testing
             </action>
-            <action type="update" dev="yourgod" issue="1088709">
+            <action type="update" dev="bradclarke" issue="1088709">
                 parse application/xhtml+xml content type into HtmlPage
             </action>
             <action type="update" dev="mguillem" issue="1104028">
@@ -3122,7 +3122,7 @@
             <action type="update" dev="mguillem">
                 JavaScript: document.write(ln) writes directly in DOM which allows access to DOM nodes in the same script code.
             </action>
-            <action type="add" dev="yourgod">
+            <action type="add" dev="bradclarke">
                 Added WebClient.setTimeout(int) and WebClient.getTimeout()
             </action>
             <action type="update" dev="mguillem">
@@ -3261,7 +3261,7 @@
             <action type="update" dev="mguillem" due-to="Daniel Gredler" issue="1075526">
                 Added support for methods moveBy, scroll, scrollBy, scrollByLines, scrollByPages and scrollTo for JS window object.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Fixed bug where encoded "&amp;", "=", "+", ",", and "$" in URLs would be decoded before
                 sending to the server.
             </action>
@@ -3274,7 +3274,7 @@
             <action type="update" dev="mguillem">
                 Onchange script handlers not executed anymore if the field value is changed by JavaScript. This should for instance avoid infinite loops when field A changes field B and field B changes field A.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Upgraded nekohtml to version 0.9.4
             </action>
             <action type="add" dev="mguillem">
@@ -3481,95 +3481,95 @@
         </release>
 
         <release version="1.3-pre2" date="September 26, 2004">
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Added support for setting input.name in JavaScript
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Added support for JavaScript document.body
             </action>
-            <action type="update" dev="yourgod" due-to="Mike Bresnahan" issue="972822">
+            <action type="update" dev="bradclarke" due-to="Mike Bresnahan" issue="972822">
                 Changed HtmlSelect.getSelectedOptions() to not auto-select the first
                 option if the list size > 1.
             </action>
-            <action type="update" dev="yourgod" due-to="David D. Kilzer" issue="974966">
+            <action type="update" dev="bradclarke" due-to="David D. Kilzer" issue="974966">
                 Refactored HtmlFileInput submission to include the filename even when
                 there is no file submitted.
             </action>
-            <action type="update" dev="yourgod" due-to="David D. Kilzer" issue="956964">
+            <action type="update" dev="bradclarke" due-to="David D. Kilzer" issue="956964">
                 Added support for JavaScript Window.close()
             </action>
-            <action type="update" dev="yourgod" due-to="David D. Kilzer" issue="913740">
+            <action type="update" dev="bradclarke" due-to="David D. Kilzer" issue="913740">
                 INCOMPATIBLE CHANGE: WebClient.moveFocusToElement() now takes a
                 FocusableElement as it's parameter instead of an HtmlElement.
                 FocusableElement is derived from HtmlElement.
                 Added framework for focus() and blur() as well as JavaScript support
                 for them on anchors and inputs.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Added support for JavaScript Element.setAttribute()
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Added support for JavaScript Node.hasChildNodes()
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Fix for Bug 916316 - this.form inside onclick should work now
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Implemented JavaScript document.getElementsByName()
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Added support for setting select.selectedIndex from JavaScript
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Changed HtmlSelect.fakeSelectedAttribute() to use an empty string
                 as no value at all (nothing submitted)
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Fixed bug where a select option with no value attribute was not
                 submitted with it's contents
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 DefaultPageCreator can now be easily extended to add custom
                 content type handling without affecting the default handlers.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 INCOMPATIBLE CHANGE: PageCreator.createPage() no longer takes a
                 WebClient as a parameter. If you have an existing PageCreator
                 you can get the WebClient from the WebWindow parameter.
                 This change also occurred in DefaultPageCreator.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Deprecated HtmlPage(WebClient, URL, WebResponse, webWindow) in favor of
                 HtmlPage(URL, WebResponse, webWindow)
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Deprecated HTMLParser() as you should never need an instance
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Deprecated HTMLParser.parse(WebClient, WebRespose, WebWindow) in favor of
                 static HTMLParser.parse(WebRespose, WebWindow).
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Updated HtmlRadioButtonInput.click() to select the clicked radio button
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Fixed bug where the JavaScript value of a select list was always empty.
                 It should now correctly be the value of the selected option.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Fixed bug where the JavaScript value of an option element was empty
                 if the value attribute was not defined. The value should now correctly be
                 the contents of the element.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Added HtmlOption.getValue() that returns the value of the option as
                 it should be submitted
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Fixed bug where submitting a form with a submit control that had no name
                 would submit an invalid name/value pair instead of ignoring the control
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Fixed bug where submitting a form containing a select that had no options
                 caused a NullPointerException.
             </action>
@@ -3630,7 +3630,7 @@
                 Fixed bug where getting the style attribute should return an empty
                 string instead of NOT_FOUND.
             </action>
-            <action type="update" dev="yourgod">
+            <action type="update" dev="bradclarke">
                 Fixed bug where calling select() on an HtmlInput from JavaScript caused an
                 exception about select being a function and a property (it's only a function)
             </action>
