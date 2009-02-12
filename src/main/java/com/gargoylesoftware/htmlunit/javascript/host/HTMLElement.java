@@ -1691,7 +1691,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     public Node jsxGet_parentElement() {
         final Node parent = jsxGet_parentNode();
-        if (this instanceof HTMLHtmlElement || parent instanceof DocumentFragment) {
+        if (!(parent instanceof HTMLElement)) {
             return null;
         }
         return parent;
