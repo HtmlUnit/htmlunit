@@ -1686,16 +1686,15 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Gets the JavaScript property "parentElement".
-     * <p>It is identical to {@link #jsxGet_parentNode()}
-     * with the exception of <tt>HTML</tt>, which has a <tt>null</tt> parent element.
      * @return the parent element
      * @see #jsxGet_parentNode()
      */
-    public Object jsxGet_parentElement() {
-        if ("html".equalsIgnoreCase(getDomNodeOrDie().getNodeName())) {
+    public Node jsxGet_parentElement() {
+        final Node parent = jsxGet_parentNode();
+        if (this instanceof HTMLHtmlElement || parent instanceof DocumentFragment) {
             return null;
         }
-        return jsxGet_parentNode();
+        return parent;
     }
 
     /**
@@ -1706,9 +1705,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @see #jsxGet_parentNode()
      */
     public HTMLElement getParentHTMLElement() {
-        Node parent = (Node) jsxGet_parentNode();
+        Node parent = jsxGet_parentNode();
         while (parent != null && !(parent instanceof HTMLElement)) {
-            parent = (Node) parent.jsxGet_parentNode();
+            parent = parent.jsxGet_parentNode();
         }
         return (HTMLElement) parent;
     }

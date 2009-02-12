@@ -185,7 +185,7 @@ public class Node extends SimpleScriptable {
         final DomNode domNode = getDomNodeOrDie();
         final DomNode clonedNode = domNode.cloneNode(deep);
 
-        final Node jsClonedNode = (Node) getJavaScriptNode(clonedNode);
+        final Node jsClonedNode = getJavaScriptNode(clonedNode);
         if (getBrowserVersion().isIE()) { // need to copy the event listener when they exist
             copyEventListenersWhenNeeded(domNode, clonedNode);
         }
@@ -195,7 +195,7 @@ public class Node extends SimpleScriptable {
     private void copyEventListenersWhenNeeded(final DomNode domNode, final DomNode clonedNode) {
         final Node jsNode = (Node) domNode.getScriptObject();
         if (jsNode != null) {
-            final Node jsClonedNode = (Node) getJavaScriptNode(clonedNode);
+            final Node jsClonedNode = getJavaScriptNode(clonedNode);
             jsClonedNode.getEventListenersContainer().copyFrom(jsNode.getEventListenersContainer());
         }
 
@@ -365,7 +365,7 @@ public class Node extends SimpleScriptable {
      * contains the current node.
      * @return the parent node
      */
-    public Object jsxGet_parentNode() {
+    public Node jsxGet_parentNode() {
         return getJavaScriptNode(getDomNodeOrDie().getParentNode());
     }
 
@@ -414,11 +414,11 @@ public class Node extends SimpleScriptable {
      * @param domNode the DomNode
      * @return the JavaScript node or null if the DomNode was null
      */
-    protected Object getJavaScriptNode(final DomNode domNode) {
+    protected Node getJavaScriptNode(final DomNode domNode) {
         if (domNode == null) {
             return null;
         }
-        return getScriptableFor(domNode);
+        return (Node) getScriptableFor(domNode);
     }
 
     /**

@@ -145,7 +145,7 @@ public class Attr extends Node {
      * @return <code>null</code>
      */
     @Override
-    public Object jsxGet_parentNode() {
+    public Node jsxGet_parentNode() {
         return null;
     }
 

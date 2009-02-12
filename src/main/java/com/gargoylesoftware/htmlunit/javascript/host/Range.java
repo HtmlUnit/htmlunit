@@ -98,7 +98,7 @@ public class Range extends SimpleScriptable {
      * @param refNode the reference node
      */
     public void jsxFunction_setStartAfter(final Node refNode) {
-        startContainer_ = (Node) refNode.jsxGet_parentNode();
+        startContainer_ = refNode.jsxGet_parentNode();
         startOffset_ = getPositionInContainer(refNode) + 1;
     }
 
@@ -107,7 +107,7 @@ public class Range extends SimpleScriptable {
      * @param refNode the reference node
      */
     public void jsxFunction_setStartBefore(final Node refNode) {
-        startContainer_ = (Node) refNode.jsxGet_parentNode();
+        startContainer_ = refNode.jsxGet_parentNode();
         startOffset_ = getPositionInContainer(refNode);
     }
 
@@ -144,7 +144,7 @@ public class Range extends SimpleScriptable {
      * @param refNode the reference node
      */
     public void jsxFunction_setEndAfter(final Node refNode) {
-        endContainer_ = (Node) refNode.jsxGet_parentNode();
+        endContainer_ = refNode.jsxGet_parentNode();
         endOffset_ = getPositionInContainer(refNode) + 1;
     }
 
@@ -153,7 +153,7 @@ public class Range extends SimpleScriptable {
      * @param refNode the reference node
      */
     public void jsxFunction_setEndBefore(final Node refNode) {
-        startContainer_ = (Node) refNode.jsxGet_parentNode();
+        startContainer_ = refNode.jsxGet_parentNode();
         startOffset_ = getPositionInContainer(refNode);
     }
 
@@ -219,7 +219,7 @@ public class Range extends SimpleScriptable {
         Node ancestor = node;
         while (ancestor != null) {
             ancestors.add(0, ancestor);
-            ancestor = (Node) ancestor.jsxGet_parentNode();
+            ancestor = ancestor.jsxGet_parentNode();
         }
         return ancestors;
     }

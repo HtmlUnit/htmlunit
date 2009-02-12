@@ -2551,8 +2551,7 @@ public class HTMLElementTest extends WebTestCase {
      */
     @Test
     @NotYetImplemented(Browser.FF)
-    @Alerts(FF = { ">myClass<", "> myId  <" },
-            IE = { "> myClass <", "> myId  <" })
+    @Alerts(FF = { ">myClass<", "> myId  <" }, IE = { "> myClass <", "> myId  <" })
     public void attributes_trimmed() throws Exception {
         final String html
             = "<html><head>\n"
@@ -2570,6 +2569,7 @@ public class HTMLElementTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -2609,6 +2609,30 @@ public class HTMLElementTest extends WebTestCase {
             + "</div>\n"
             + "<span class='foo red' id='span3'>again</span>\n"
             + "<span class='red' id='span4'>bye</span>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "undefined", "undefined" }, IE = { "null", "[object]" })
+    public void parentElement2() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var fragment = document.createDocumentFragment();\n"
+            + "  var div = document.createElement('div');\n"
+            + "  var bold = document.createElement('b');\n"
+            + "  fragment.appendChild(div);\n"
+            + "  div.appendChild(bold);\n"
+            + "  alert(div.parentElement);\n"
+            + "  alert(bold.parentElement);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>"
             + "</body></html>";
 
         loadPageWithAlerts(html);
