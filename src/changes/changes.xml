@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
+            <action type="update" dev="asashour">
+                JavaScript: element.doScroll() should throw an exception if page is not yet loaded.
+            </action>
             <action type="fix" dev="asashour" issue="2526045">
                 JavaScript: fix the return value of node.insertBefore().
             </action>

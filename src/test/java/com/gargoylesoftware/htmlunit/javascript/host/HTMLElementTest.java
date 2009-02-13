@@ -2645,7 +2645,6 @@ public class HTMLElementTest extends WebTestCase {
      */
     @Test
     @Alerts(FF = { "exception", "exception" }, IE = { "exception", "success" })
-    @NotYetImplemented(Browser.IE)
     public void doScroll() throws Exception {
         final String html
             = "<html><head>\n"

@@ -1105,9 +1105,6 @@
 
     <class name="HTMLBodyElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLBodyElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBody">
-        <function name="doScroll">
-            <browser name="Microsoft Internet Explorer"/>
-        </function>
     </class>
 
     <class name="HTMLBRElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLBRElement"
@@ -1176,9 +1173,6 @@
         <property name="noWrap" notImplemented="true" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
-        <function name="doScroll">
-            <browser name="Microsoft Internet Explorer"/>
-        </function>
     </class>
 
     <class name="HTMLDListElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDListElement"
@@ -1433,6 +1427,9 @@
                 url="http://developer.mozilla.org/en/docs/DOM:element.dispatchEvent"
                 descr="Gecko DOM Reference"/>
             <browser name="Firefox"/>
+        </function>
+        <function name="doScroll">
+            <browser name="Microsoft Internet Explorer"/>
         </function>
         <function name="focus"/>
         <function name="getAttribute"/>
@@ -1881,9 +1878,6 @@
         <property name="dataSrc" notImplemented="true" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
-        <function name="doScroll">
-            <browser name="Microsoft Internet Explorer"/>
-        </function>
     </class>
 
     <class name="HTMLStyleElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLStyleElement"
@@ -2049,9 +2043,6 @@
         <property name="textLength" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
-        <function name="doScroll">
-            <browser name="Microsoft Internet Explorer"/>
-        </function>
         <function name="select"/>
     </class>
 
