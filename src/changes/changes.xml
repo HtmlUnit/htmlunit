@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
+            <action type="fix" dev="sdanig" issue="2511851">
+                JavaScript: fix behavior when document.cookie is set to an empty string or a string without an '=' character.
+            </action>
             <action type="fix" dev="asashour" issue="2501217">
                 JavaScript: fix element.parentElement if the parent is DocumentFragment.
             </action>

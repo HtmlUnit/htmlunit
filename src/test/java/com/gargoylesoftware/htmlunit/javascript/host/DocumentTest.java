@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.host.HTMLDocument.EMPTY_COOKIE_NAME;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
@@ -1835,6 +1836,44 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void cookie_write2() throws Exception {
+        final String html =
+              "<html>\n"
+            + "    <head>\n"
+            + "        <script>\n"
+            + "            alert(document.cookie);\n"
+            + "            document.cookie = 'a';\n"
+            + "            alert(document.cookie);\n"
+            + "            document.cookie = '';\n"
+            + "            alert(document.cookie);\n"
+            + "            document.cookie = 'b';\n"
+            + "            alert(document.cookie);\n"
+            + "            document.cookie = '';\n"
+            + "            alert(document.cookie);\n"
+            + "        </script>\n"
+            + "    </head>\n"
+            + "    <body>abc</body>\n"
+            + "</html>";
+
+        final WebClient client = getWebClient();
+
+        final List<String> actual = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(actual));
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setDefaultResponse(html);
+        client.setWebConnection(conn);
+
+        client.getPage("http://www.microsoft.com/");
+
+        final String[] expected = new String[] {"", "a", "", "b", ""};
+        assertEquals(expected, actual);
+    }
+
+    /**
      * Verifies that cookies work when working with local files (not remote sites with real domains).
      * Required for local testing of Dojo 1.1.1.
      * @throws Exception if an error occurs
@@ -2073,8 +2112,10 @@ public class DocumentTest extends WebTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void buildCookie() throws Exception {
-        checkCookie(HTMLDocument.buildCookie("toto=foo", URL_FIRST), "toto", "foo", "", "first", false, null);
+        checkCookie(HTMLDocument.buildCookie("", URL_FIRST), EMPTY_COOKIE_NAME, "", "", "first", false, null);
+        checkCookie(HTMLDocument.buildCookie("toto", URL_FIRST), EMPTY_COOKIE_NAME, "toto", "", "first", false, null);
         checkCookie(HTMLDocument.buildCookie("toto=", URL_FIRST), "toto", "", "", "first", false, null);
+        checkCookie(HTMLDocument.buildCookie("toto=foo", URL_FIRST), "toto", "foo", "", "first", false, null);
         checkCookie(HTMLDocument.buildCookie("toto=foo;secure", URL_FIRST), "toto", "foo", "", "first", true, null);
         checkCookie(HTMLDocument.buildCookie("toto=foo;path=/myPath;secure", URL_FIRST),
                 "toto", "foo", "/myPath", "first", true, null);

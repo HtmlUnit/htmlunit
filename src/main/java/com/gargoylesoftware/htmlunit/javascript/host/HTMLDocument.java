@@ -93,6 +93,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
     private static final long serialVersionUID = -7646789903352066465L;
 
+    /** The cookie name used for cookies with no name (HttpClient doesn't like empty names). */
+    static final String EMPTY_COOKIE_NAME = "HTMLUNIT_EMPTY_COOKIE";
+
     /**
      * Map<String, Class> which maps strings a caller may use when calling into
      * {@link #jsxFunction_createEvent(String)} to the associated event class. To support a new
@@ -516,8 +519,10 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             if (buffer.length() != 0) {
                 buffer.append("; ");
             }
-            buffer.append(cookie.getName());
-            buffer.append("=");
+            if (!EMPTY_COOKIE_NAME.equals(cookie.getName())) {
+                buffer.append(cookie.getName());
+                buffer.append("=");
+            }
             if (cookie.getValue().contains(" ")) {
                 buffer.append('"');
             }
@@ -579,7 +584,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             getLog().debug("Added cookie: " + cookie);
         }
         else {
-            getLog().debug("Skipped adding cookie:" + newCookie);
+            getLog().debug("Skipped adding cookie: " + newCookie);
         }
     }
 
@@ -612,46 +617,52 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the cookie
      */
     static Cookie buildCookie(final String newCookie, final URL currentURL) {
+        // Pull out the cookie name and value.
+        String name, value;
         final StringTokenizer st = new StringTokenizer(newCookie, ";");
-        final String nameValue = st.nextToken();
+        if (newCookie.contains("=")) {
+            final String nameAndValue = st.nextToken();
+            name = StringUtils.substringBefore(nameAndValue, "=").trim();
+            value = StringUtils.substringAfter(nameAndValue, "=").trim();
+        }
+        else {
+            name = EMPTY_COOKIE_NAME;
+            value = newCookie;
+        }
 
-        final String name = StringUtils.substringBefore(nameValue, "=").trim();
-        final String value = StringUtils.substringAfter(nameValue, "=").trim();
+        // Default attribute values (note: HttpClient doesn't like null paths).
+        final Map<String, Object> atts = new HashMap<String, Object>();
+        atts.put("domain", currentURL.getHost());
+        atts.put("path", "");
 
-        final Map<String, Object> attributes = new HashMap<String, Object>();
-        // default values
-        attributes.put("domain", currentURL.getHost());
-        // default value "" as it seems that org.apache.commons.httpclient.cookie.CookieSpec
-        // doesn't like null as path
-        attributes.put("path", "");
-
+        // Custom attribute values.
         while (st.hasMoreTokens()) {
             final String token = st.nextToken();
             final int indexEqual = token.indexOf("=");
             if (indexEqual > -1) {
-                attributes.put(token.substring(0, indexEqual).toLowerCase().trim(),
-                        token.substring(indexEqual + 1).trim());
+                atts.put(token.substring(0, indexEqual).toLowerCase().trim(), token.substring(indexEqual + 1).trim());
             }
             else {
-                attributes.put(token.toLowerCase().trim(), Boolean.TRUE);
+                atts.put(token.toLowerCase().trim(), Boolean.TRUE);
             }
         }
 
-        // Try to parse the <expires> value as a date if specified
+        // Try to parse the <expires> value as a date if specified.
         Date expires = null;
-        final String date = (String) attributes.get("expires");
+        final String date = (String) atts.get("expires");
         if (date != null) {
             try {
                 expires = DateUtil.parseDate(date);
             }
             catch (final DateParseException e) {
-                // nothing
+                // Ignore.
             }
         }
 
-        final String domain = (String) attributes.get("domain");
-        final String path = (String) attributes.get("path");
-        final boolean secure = (attributes.get("secure") != null);
+        // Build the cookie.
+        final String domain = (String) atts.get("domain");
+        final String path = (String) atts.get("path");
+        final boolean secure = (atts.get("secure") != null);
         final Cookie cookie = new Cookie(domain, name, value, path, expires, secure);
 
         return cookie;
