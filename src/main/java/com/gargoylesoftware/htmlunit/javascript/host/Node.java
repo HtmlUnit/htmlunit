@@ -253,6 +253,7 @@ public class Node extends SimpleScriptable {
             }
             else {
                 getDomNodeOrDie().appendChild(newChildNode);
+                appendedChild = newChildObject;
             }
 
             //if parentNode is null in IE, create a DocumentFragment to be the parentNode

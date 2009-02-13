@@ -737,4 +737,25 @@ public class NodeTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "[object]", FF = "[object HTMLTableColElement]")
+    public void insertBefore() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var table = document.getElementById('myTable');\n"
+            + "  var colGroup = table.insertBefore(document.createElement('colgroup'), null);\n"
+            + "  alert(colGroup);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <table id='myTable'></table>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }
