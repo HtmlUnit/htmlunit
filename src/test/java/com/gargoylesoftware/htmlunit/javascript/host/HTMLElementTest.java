@@ -2637,4 +2637,31 @@ public class HTMLElementTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * The method doScroll() should throw an exception if document is not yet loaded,
+     * have a look into <a href="http://javascript.nwbox.com/IEContentLoaded/">this</a>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "exception", "exception" }, IE = { "exception", "success" })
+    @NotYetImplemented(Browser.IE)
+    public void doScroll() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    document.documentElement.doScroll('left');\n"
+            + "    alert('success');\n"
+            + "  } catch (e) {\n"
+            + "    alert('exception');\n"
+            + "  }\n"
+            + "}\n"
+            + "test();\n"
+            + "</script></head><body onload='test()'>"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }
