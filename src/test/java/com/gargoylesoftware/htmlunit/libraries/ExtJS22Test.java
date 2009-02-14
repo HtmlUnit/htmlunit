@@ -189,14 +189,27 @@ public class ExtJS22Test extends WebTestCase {
     @Test
     public void grid_binding() throws Exception {
         final HtmlPage page = getPage("grid", "binding");
-        Thread.sleep(2000);
         final HtmlElement detailPanel = page.getHtmlElementById("detailPanel");
         final HtmlDivision resultsDiv = detailPanel.getFirstByXPath("div/div");
         assertEquals("Please select a book to see additional details.", resultsDiv.asText());
-        final HtmlDivision gridBodyDiv = page.getFirstByXPath("//div[@class='x-grid3-body']");
-        final HtmlDivision firstRowDiv = gridBodyDiv.getFirstByXPath("div");
+
+        HtmlDivision firstRowDiv = null;
+        //try 10 times to wait .5 second each for filling the page.
+        for (int i = 0; i < 20; i++) {
+            firstRowDiv = page.getFirstByXPath("//div[@class='x-grid3-body']/div");
+            if (firstRowDiv != null) {
+                break;
+            }
+            synchronized (page) {
+                page.wait(500);
+            }
+        }
+
         firstRowDiv.click();
-        //TODO: assert the values after clikcing
+        assertEquals("Title: Master of the Game" + LINE_SEPARATOR
+                + "Author: Sidney Sheldon" + LINE_SEPARATOR
+                + "Manufacturer: Warner Books" + LINE_SEPARATOR
+                + "Product Group: Book" + LINE_SEPARATOR, resultsDiv.asText());
     }
 
 }
