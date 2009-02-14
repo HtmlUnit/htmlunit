@@ -904,4 +904,52 @@ public class ElementTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("finished")
+    public void removeAttribute() throws Exception {
+        final String html = "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var request;\n"
+            + "        if (window.XMLHttpRequest)\n"
+            + "          request = new XMLHttpRequest();\n"
+            + "        else if (window.ActiveXObject)\n"
+            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        request.open('GET', '" + URL_SECOND + "', false);\n"
+            + "        request.send('');\n"
+            + "        var doc = request.responseXML;\n"
+            + "        var e = doc.getElementsByTagName('title');\n"
+            + "        e[0].removeAttribute('hello');\n"
+            + "        alert('finished');\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml
+            = "<books>\n"
+            + "  <book>\n"
+            + "    <title>Immortality</title>\n"
+            + "    <author>John Smith</author>\n"
+            + "  </book>\n"
+            + "</books>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final WebClient client = getWebClient();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(URL_SECOND, xml, "text/xml");
+        client.setWebConnection(conn);
+
+        client.getPage(URL_FIRST);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
 }

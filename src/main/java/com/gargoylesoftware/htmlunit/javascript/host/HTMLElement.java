@@ -425,17 +425,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Removes the specified attribute.
-     * @param name the name of the attribute to remove
-     */
-    public void jsxFunction_removeAttribute(final String name) {
-        getDomNodeOrDie().removeAttribute(name);
-        if (getBrowserVersion().isIE()) {
-            delete(name);
-        }
-    }
-
-    /**
-     * Removes the specified attribute.
      * @param namespaceURI the namespace URI of the attribute to remove
      * @param localName the local name of the attribute to remove
      */

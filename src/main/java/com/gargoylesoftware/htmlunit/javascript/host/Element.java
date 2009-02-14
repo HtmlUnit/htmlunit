@@ -89,7 +89,7 @@ public class Element extends EventNode {
      * @return the JS object
      */
     protected NamedNodeMap createAttributesObject() {
-        return new NamedNodeMap((DomElement) getDomNodeOrDie());
+        return new NamedNodeMap(getDomNodeOrDie());
     }
 
     /**
@@ -99,7 +99,7 @@ public class Element extends EventNode {
      */
     public Object jsxFunction_getAttribute(String attributeName) {
         attributeName = fixAttributeName(attributeName);
-        final String value = ((DomElement) getDomNodeOrDie()).getAttribute(attributeName);
+        final String value = getDomNodeOrDie().getAttribute(attributeName);
         if (value == DomElement.ATTRIBUTE_NOT_DEFINED) {
             if (getBrowserVersion().isIE()) {
                 final Object property = get(attributeName, this);
@@ -128,7 +128,7 @@ public class Element extends EventNode {
      * @param value Value to set the attribute to
      */
     public void jsxFunction_setAttribute(final String name, final String value) {
-        ((DomElement) getDomNodeOrDie()).setAttribute(name, value);
+        getDomNodeOrDie().setAttribute(name, value);
     }
 
     /**
@@ -149,7 +149,7 @@ public class Element extends EventNode {
      * @return the XMLAttr node with the specified name or <code>null</code> if there is no such attribute
      */
     public Object jsxFunction_getAttributeNode(final String name) {
-        final Map<String, DomAttr> attributes = ((DomElement) getDomNodeOrDie()).getAttributesMap();
+        final Map<String, DomAttr> attributes = getDomNodeOrDie().getAttributesMap();
         for (final DomAttr attr : attributes.values()) {
             if (attr.getName().equals(name)) {
                 return attr.getScriptObject();
@@ -226,7 +226,7 @@ public class Element extends EventNode {
      * @return true if an attribute with the given name is specified on this element or has a default value
      */
     public boolean jsxFunction_hasAttribute(final String name) {
-        return ((DomElement) getDomNodeOrDie()).hasAttribute(name);
+        return getDomNodeOrDie().hasAttribute(name);
     }
 
     /**
@@ -240,7 +240,7 @@ public class Element extends EventNode {
         final XMLSerializer serializer = new XMLSerializer(format);
         serializer.setOutputCharStream(writer);
         try {
-            serializer.serialize(((DomElement) getDomNodeOrDie()));
+            serializer.serialize(getDomNodeOrDie());
         }
         catch (final Exception e) {
             throw new RuntimeException("Internal error: failed to serialize", e);
@@ -248,4 +248,24 @@ public class Element extends EventNode {
 
         return writer.toString();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DomElement getDomNodeOrDie() {
+        return (DomElement) super.getDomNodeOrDie();
+    }
+
+    /**
+     * Removes the specified attribute.
+     * @param name the name of the attribute to remove
+     */
+    public void jsxFunction_removeAttribute(final String name) {
+        getDomNodeOrDie().removeAttribute(name);
+        if (getBrowserVersion().isIE()) {
+            delete(name);
+        }
+    }
+
 }
