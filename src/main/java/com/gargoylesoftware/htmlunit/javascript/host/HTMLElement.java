@@ -438,18 +438,18 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return a reference to the object that is removed
      */
     public HTMLElement jsxFunction_removeNode(final boolean removeChildren) {
-        final HtmlElement parent = jsxGet_parentElement().getDomNodeOrDie();
-        final HtmlElement thisElement = getDomNodeOrDie();
-        parent.removeChild(thisElement);
-        if (!removeChildren) {
-            final HTMLCollection collection = jsxGet_childNodes();
-            final int length = collection.jsxGet_length();
-            for (int i = 0; i < length; i++) {
-                final Node object = (Node) collection.jsxFunction_item(0);
-                parent.appendChild(object.getDomNodeOrDie());
+        final HTMLElement parent = jsxGet_parentElement();
+        if (parent != null) {
+            parent.jsxFunction_removeChild(this);
+            if (!removeChildren) {
+                final HTMLCollection collection = jsxGet_childNodes();
+                final int length = collection.jsxGet_length();
+                for (int i = 0; i < length; i++) {
+                    final Node object = (Node) collection.jsxFunction_item(0);
+                    parent.jsxFunction_appendChild(object);
+                }
             }
         }
-
         return this;
     }
 
