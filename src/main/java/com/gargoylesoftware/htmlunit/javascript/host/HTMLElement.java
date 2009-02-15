@@ -433,6 +433,27 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
+     * Removes this object from the document hierarchy.
+     * @param removeChildren whether to remove children or no
+     * @return a reference to the object that is removed
+     */
+    public HTMLElement jsxFunction_removeNode(final boolean removeChildren) {
+        final HtmlElement parent = jsxGet_parentElement().getDomNodeOrDie();
+        final HtmlElement thisElement = getDomNodeOrDie();
+        parent.removeChild(thisElement);
+        if (!removeChildren) {
+            final HTMLCollection collection = jsxGet_childNodes();
+            final int length = collection.jsxGet_length();
+            for (int i = 0; i < length; i++) {
+                final Node object = (Node) collection.jsxFunction_item(0);
+                parent.appendChild(object.getDomNodeOrDie());
+            }
+        }
+
+        return this;
+    }
+
+    /**
      * Gets the attribute node for the specified attribute.
      * @param attributeName the name of the attribute to retrieve
      * @return the attribute node for the specified attribute
@@ -1371,7 +1392,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms537446.aspx">MSDN documentation</a>
      * @return the child at the given position
      */
-    public Object jsxGet_children() {
+    public HTMLCollection jsxGet_children() {
         final HTMLCollection children = new HTMLCollection(this);
         children.init(getDomNodeOrDie(), "./*");
         return children;
@@ -1678,12 +1699,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the parent element
      * @see #jsxGet_parentNode()
      */
-    public Node jsxGet_parentElement() {
+    public HTMLElement jsxGet_parentElement() {
         final Node parent = jsxGet_parentNode();
         if (!(parent instanceof HTMLElement)) {
             return null;
         }
-        return parent;
+        return (HTMLElement) parent;
     }
 
     /**
@@ -1844,7 +1865,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return true if the element is contained within this object
      */
     public boolean jsxFunction_contains(final HTMLElement element) {
-        for (HTMLElement parent = element; parent != null; parent = (HTMLElement) parent.jsxGet_parentElement()) {
+        for (HTMLElement parent = element; parent != null; parent = parent.jsxGet_parentElement()) {
             if (this == parent) {
                 return true;
             }

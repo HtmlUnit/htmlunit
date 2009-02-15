@@ -1494,6 +1494,9 @@
                 descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer"/>
         </function>
+        <function name="removeNode">
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
         <function name="scrollIntoView"/>
         <function name="setActive">
             <doclink

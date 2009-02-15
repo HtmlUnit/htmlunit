@@ -165,7 +165,7 @@ public class Range extends SimpleScriptable {
         startContainer_ = refNode;
         startOffset_ = 0;
         endContainer_ = refNode;
-        endOffset_ = ((HTMLCollection) refNode.jsxGet_childNodes()).jsxGet_length();
+        endOffset_ = refNode.jsxGet_childNodes().jsxGet_length();
     }
 
     /**

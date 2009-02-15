@@ -2632,7 +2632,7 @@ public class HTMLElementTest extends WebTestCase {
             + "  alert(div.parentElement);\n"
             + "  alert(bold.parentElement);\n"
             + "}\n"
-            + "</script></head><body onload='test()'>"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageWithAlerts(html);
@@ -2658,7 +2658,39 @@ public class HTMLElementTest extends WebTestCase {
             + "  }\n"
             + "}\n"
             + "test();\n"
-            + "</script></head><body onload='test()'>"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.IE)
+    @Alerts({ "div2", "null", "div3", "div4", "div6", "div7", "null" })
+    public void removeNode() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var div1 = document.getElementById('div1');\n"
+            + "  var div2 = document.getElementById('div2');\n"
+            + "  alert(div1.firstChild.id);\n"
+            + "  alert(div2.removeNode().firstChild);\n"
+            + "  alert(div1.firstChild.id);\n"
+            + "  alert(div1.firstChild.nextSibling.id);\n"
+            + "\n"
+            + "  var div5 = document.getElementById('div5');\n"
+            + "  var div6 = document.getElementById('div6');\n"
+            + "  alert(div5.firstChild.id);\n"
+            + "  alert(div6.removeNode(true).firstChild.id);\n"
+            + "  alert(div5.firstChild);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='div1'><div id='div2'><div id='div3'></div><div id='div4'></div></div></div>\n"
+            + "  <div id='div5'><div id='div6'><div id='div7'></div><div id='div8'></div></div></div>\n"
             + "</body></html>";
 
         loadPageWithAlerts(html);

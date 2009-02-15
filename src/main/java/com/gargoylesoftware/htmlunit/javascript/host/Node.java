@@ -313,7 +313,7 @@ public class Node extends SimpleScriptable {
      * Returns the child nodes of the current element.
      * @return the child nodes of the current element
      */
-    public Object jsxGet_childNodes() {
+    public HTMLCollection jsxGet_childNodes() {
         if (childNodes_ == null) {
             childNodes_ = new HTMLCollection(this);
             childNodes_.initFromChildren(getDomNodeOrDie());

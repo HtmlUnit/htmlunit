@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
+            <action type="add" dev="asashour" issue="2602044">
+                JavaScript: add support for HTMLElement.removeNode().
+            </action>
             <action type="update" dev="asashour">
                 JavaScript: move removeAttribute() from HTMLElement to Element.
             </action>
