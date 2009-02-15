@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -165,7 +166,10 @@ public class HtmlLink extends ClickableElement {
             final HtmlPage page = (HtmlPage) getPage();
             final WebClient webclient = page.getWebClient();
             final URL url = page.getFullyQualifiedUrl(getHrefAttribute());
-            cachedWebResponse_ = webclient.loadWebResponse(new WebRequestSettings(url));
+            final WebRequestSettings request = new WebRequestSettings(url);
+            final WebRequestSettings referringRequest = page.getWebResponse().getRequestSettings();
+            request.setAdditionalHeaders(new HashMap<String, String>(referringRequest.getAdditionalHeaders()));
+            cachedWebResponse_ = webclient.loadWebResponse(request);
         }
         return cachedWebResponse_;
     }
