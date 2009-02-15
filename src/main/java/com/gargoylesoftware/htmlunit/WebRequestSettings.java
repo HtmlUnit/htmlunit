@@ -56,7 +56,6 @@ public class WebRequestSettings implements Serializable {
     public WebRequestSettings(final URL url) {
         setUrl(url);
         addAdditionalHeader("Accept", "*/*");
-        addAdditionalHeader("Accept-Encoding", "*");
         addAdditionalHeader("Accept-Language", "en");
     }
 
