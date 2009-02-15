@@ -14,9 +14,18 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.Servlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.httpclient.NameValuePair;
 import org.junit.Test;
@@ -26,8 +35,10 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
 
 /**
  * Tests for {@link HtmlSubmitInput}.
@@ -38,7 +49,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HtmlSubmitInputTest extends WebTestCase {
+public class HtmlSubmitInputTest extends WebServerTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -206,5 +217,73 @@ public class HtmlSubmitInputTest extends WebTestCase {
         page.<HtmlInput>getHtmlElementById("myInput").type('\n');
 
         assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    public void doubleSubmission() throws Exception {
+        DoubleSumissionCounterServlet.COUNT_ = 0;
+        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        servlets.put("/main", DoubleSumissionMainServlet.class);
+        servlets.put("/test", DoubleSumissionCounterServlet.class);
+        startWebServer("./", null, servlets);
+
+        final WebClient client = getWebClient();
+        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/main");
+        page.<HtmlSubmitInput>getFirstByXPath("//input").click();
+        assertEquals(1, DoubleSumissionCounterServlet.COUNT_);
+    }
+
+    /**
+     * Servlet for {@link #doubleSubmission()}.
+     */
+    public static class DoubleSumissionMainServlet extends ServletContentWrapper {
+        private static final long serialVersionUID = -4386757311850462720L;
+
+        /**
+         * Creates an instance.
+         */
+        public DoubleSumissionMainServlet() {
+            super("<html>\n"
+                    + "<head>\n"
+                    + "  <script type='text/javascript'>\n"
+                    + "    function submitForm() {\n"
+                    + "      document.deliveryChannelForm.submitBtn.disabled = true;\n"
+                    + "      document.deliveryChannelForm.submit();\n"
+                    + "    }\n"
+                    + "  </script>"
+                    + "</head>\n"
+                    + "<body>\n"
+                    + "  <form action='test' name='deliveryChannelForm'>\n"
+                    + "    <input name='submitBtn' type='submit' value='Save' title='Save' onclick='submitForm();'>\n"
+                    + "  </form>"
+                    + "</body>\n"
+                    + "</html>");
+        }
+    }
+
+    /**
+     * Servlet for {@link #doubleSubmission()}.
+     */
+    public static class DoubleSumissionCounterServlet extends HttpServlet {
+
+        private static final long serialVersionUID = 4094440276952531020L;
+
+        private static int COUNT_;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            COUNT_++;
+            response.setContentType("text/html");
+            final Writer writer = response.getWriter();
+            writer.write("<html><body>Hello</body></html>");
+            writer.close();
+        }
     }
 }
