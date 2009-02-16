@@ -191,6 +191,7 @@ public class HTMLParserTest extends WebServerTestCase {
         final String html
             = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n"
             + "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:app='http://www.appcelerator.org'>\n"
+            + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('script1'));\n"
@@ -224,6 +225,7 @@ public class HTMLParserTest extends WebServerTestCase {
     public void namespace2() throws Exception {
         final String html
             = "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:app='http://www.appcelerator.org'>\n"
+            + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    try {\n"
