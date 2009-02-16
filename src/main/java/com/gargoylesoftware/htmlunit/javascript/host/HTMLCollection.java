@@ -182,7 +182,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         if (args.length == 0) {
             throw Context.reportRuntimeError("Zero arguments; need an index or a key.");
         }
-        return nullIfNotFound(get(args[0]));
+        return nullIfNotFound(getIt(args[0]));
     }
 
     /**
@@ -198,7 +198,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      * @param o the index or key corresponding to the element or elements to return
      * @return the element or elements corresponding to the specified index or key
      */
-    private Object get(final Object o) {
+    private Object getIt(final Object o) {
         if (o instanceof Number) {
             final Number n = (Number) o;
             final int i = n.intValue();
@@ -394,7 +394,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536460.aspx">MSDN doc</a>
      */
     public final Object jsxFunction_item(final Object index) {
-        return nullIfNotFound(get(index));
+        return nullIfNotFound(getIt(index));
     }
 
     /**
@@ -422,7 +422,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536634.aspx">MSDN doc</a>
      */
     public final Object jsxFunction_namedItem(final String name) {
-        return nullIfNotFound(get(name));
+        return nullIfNotFound(getIt(name));
     }
 
     /**
