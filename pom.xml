@@ -641,6 +641,9 @@
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
             </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
             <id>NekoHTMLSnapshots</id>
             <name>NekoHTML Snapshots</name>
             <url>http://build.canoo.com/NekoHTML/artifacts/m2-repo</url>
