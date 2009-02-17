@@ -72,7 +72,7 @@ public class JavaScriptJobManagerTest extends WebTestCase {
             + "  <script>\n"
             + "    var threadID;\n"
             + "    function test() {\n"
-            + "      threadID = setTimeout('doAlert()', 10000);\n"
+            + "      threadID = setTimeout(doAlert, 10000);\n"
             + "    }\n"
             + "    function doAlert() {\n"
             + "      alert('blah');\n"
@@ -109,7 +109,7 @@ public class JavaScriptJobManagerTest extends WebTestCase {
             + "  <script>\n"
             + "    var threadID;\n"
             + "    function test() {\n"
-            + "      threadID = setInterval('doAlert()', 100);\n"
+            + "      threadID = setInterval(doAlert, 100);\n"
             + "    }\n"
             + "    var iterationNumber=0;\n"
             + "    function doAlert() {\n"
@@ -204,7 +204,7 @@ public class JavaScriptJobManagerTest extends WebTestCase {
             + "</head>\n"
             + "<body>\n"
             + "<script>\n"
-            + "   setTimeout('finishCreateAccount()', 2500);\n"
+            + "   setTimeout(finishCreateAccount, 2500);\n"
             + "   function finishCreateAccount() {\n"
             + "       completionUrl = '" + URL_SECOND + "';\n"
             + "       document.location.replace(completionUrl);\n"
@@ -255,7 +255,7 @@ public class JavaScriptJobManagerTest extends WebTestCase {
             + "    var threadID;\n"
             + "    function test() {\n"
             + "      alert('ping');\n"
-            + "      threadID = setTimeout('test()', 5);\n"
+            + "      threadID = setTimeout(test, 5);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -271,7 +271,7 @@ public class JavaScriptJobManagerTest extends WebTestCase {
         // Not perfect, but 100 chances to start should be enough for a loaded system
         Thread.sleep(500);
 
-        assertTrue("At least one alert should have fired by now", collectedAlerts.size() > 1);
+        Assert.assertFalse("At least one alert should have fired by now", collectedAlerts.isEmpty());
         ((TopLevelWindow) page.getEnclosingWindow()).close();
 
         // 100 chances to stop
