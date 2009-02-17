@@ -120,7 +120,6 @@ class BrowserNoneClassRunner extends BlockJUnit4ClassRunner {
             final Browsers browsers = method.getAnnotation(Browsers.class);
             if (browsers != null) {
                 for (final Browser browser : browsers.value()) {
-                    System.out.println(browsers.value().length);
                     if (browser == Browser.NONE && browsers.value().length > 1) {
                         collectederrors.add(new Exception("Method " + method.getName()
                                 + "() cannot have Browser.NONE along with other Browsers."));
