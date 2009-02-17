@@ -29,6 +29,7 @@ import org.junit.Test;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
@@ -237,6 +238,51 @@ public class JavaScriptJobManagerTest extends WebTestCase {
         final HtmlPage initialPage = webClient.getPage(URL_FIRST);
         initialPage.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(5000);
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Test for bug 1728883 that makes sure closing a window prevents a
+     * recursive setTimeout from continuing forever.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void interruptAllWithRecursiveSetTimeout() throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "  <title>test</title>\n"
+            + "  <script>\n"
+            + "    var threadID;\n"
+            + "    function test() {\n"
+            + "      alert('ping');\n"
+            + "      threadID = setTimeout('test()', 5);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
+        assertNotNull(jobManager);
+
+        // Not perfect, but 100 chances to start should be enough for a loaded system
+        Thread.sleep(500);
+
+        assertTrue("At least one alert should have fired by now", collectedAlerts.size() > 1);
+        ((TopLevelWindow) page.getEnclosingWindow()).close();
+
+        // 100 chances to stop
+        jobManager.waitForAllJobsToFinish(500);
+
+        final int finalValue = collectedAlerts.size();
+
+        // 100 chances to fail
+        jobManager.waitForAllJobsToFinish(500);
+
+        Assert.assertEquals("No new alerts should have happened", finalValue, collectedAlerts.size());
     }
 
 }
