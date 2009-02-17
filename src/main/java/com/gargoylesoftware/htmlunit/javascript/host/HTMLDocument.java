@@ -1041,14 +1041,14 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return this document's <tt>body</tt> element
      */
     public Object jsxGet_body() {
-    	final HtmlPage page = getHtmlPage();
-    	// for IE, the body of a not yet loaded page is null whereas it already exists for FF
-    	if (getBrowserVersion().isIE() && (page.getEnclosingWindow() instanceof FrameWindow)) {
-    		final HtmlPage enclosingPage = (HtmlPage) page.getEnclosingWindow().getParentWindow().getEnclosedPage();
-    		if (enclosingPage.getReadyState() != DomNode.READY_STATE_COMPLETE) {
-    			return null;
-    		}
-    	}
+        final HtmlPage page = getHtmlPage();
+        // for IE, the body of a not yet loaded page is null whereas it already exists for FF
+        if (getBrowserVersion().isIE() && (page.getEnclosingWindow() instanceof FrameWindow)) {
+            final HtmlPage enclosingPage = (HtmlPage) page.getEnclosingWindow().getParentWindow().getEnclosedPage();
+            if (enclosingPage.getReadyState() != DomNode.READY_STATE_COMPLETE) {
+                return null;
+            }
+        }
         final HtmlElement body = getHtmlPage().getBody();
         if (body != null) {
             return body.getScriptObject();
