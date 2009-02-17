@@ -9,6 +9,9 @@
             <action type="fix" dev="asashour" issue="2603370">
                 JavaScript: single submission of form if onclick handler of HTMLSubmitInput also submits the form.
             </action>
+            <action type="update" dev="asashour" issue="2602044">
+                Add default value for "Accept", "Accept-Encoding" and "Accept-Language" HTTP headers.
+            </action>
             <action type="add" dev="asashour" issue="2602044">
                 JavaScript: add support for HTMLElement.removeNode().
             </action>
