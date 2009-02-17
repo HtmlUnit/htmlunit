@@ -37,7 +37,6 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
 
 /**
@@ -223,30 +222,29 @@ public class HtmlSubmitInputTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void doubleSubmission() throws Exception {
-        DoubleSumissionCounterServlet.COUNT_ = 0;
+        DoubleSubmissionCounterServlet.COUNT_ = 0;
         final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
-        servlets.put("/main", DoubleSumissionMainServlet.class);
-        servlets.put("/test", DoubleSumissionCounterServlet.class);
+        servlets.put("/main", DoubleSubmissionMainServlet.class);
+        servlets.put("/test", DoubleSubmissionCounterServlet.class);
         startWebServer("./", null, servlets);
 
         final WebClient client = getWebClient();
         final HtmlPage page = client.getPage("http://localhost:" + PORT + "/main");
         page.<HtmlSubmitInput>getFirstByXPath("//input").click();
-        assertEquals(1, DoubleSumissionCounterServlet.COUNT_);
+        assertEquals(1, DoubleSubmissionCounterServlet.COUNT_);
     }
 
     /**
      * Servlet for {@link #doubleSubmission()}.
      */
-    public static class DoubleSumissionMainServlet extends ServletContentWrapper {
+    public static class DoubleSubmissionMainServlet extends ServletContentWrapper {
         private static final long serialVersionUID = -4386757311850462720L;
 
         /**
          * Creates an instance.
          */
-        public DoubleSumissionMainServlet() {
+        public DoubleSubmissionMainServlet() {
             super("<html>\n"
                     + "<head>\n"
                     + "  <script type='text/javascript'>\n"
@@ -268,7 +266,7 @@ public class HtmlSubmitInputTest extends WebServerTestCase {
     /**
      * Servlet for {@link #doubleSubmission()}.
      */
-    public static class DoubleSumissionCounterServlet extends HttpServlet {
+    public static class DoubleSubmissionCounterServlet extends HttpServlet {
 
         private static final long serialVersionUID = 4094440276952531020L;
 
