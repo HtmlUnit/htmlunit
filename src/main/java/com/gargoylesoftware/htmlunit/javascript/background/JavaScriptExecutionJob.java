@@ -87,24 +87,27 @@ public class JavaScriptExecutionJob extends JavaScriptJob {
             LOG.debug("Executing " + this + ".");
         }
 
-        // Verify that the window is still open and the current page is the same.
-        final HtmlPage page = (HtmlPage) w.getEnclosedPage();
-        if (w.getEnclosedPage() != page || !w.getWebClient().getWebWindows().contains(w)) {
-            LOG.debug("The page that originated this job doesn't exist anymore. Execution cancelled.");
-            return;
-        }
+        try {
+            // Verify that the window is still open and the current page is the same.
+            final HtmlPage page = (HtmlPage) w.getEnclosedPage();
+            if (w.getEnclosedPage() != page || !w.getWebClient().getWebWindows().contains(w)) {
+                LOG.debug("The page that originated this job doesn't exist anymore. Execution cancelled.");
+                return;
+            }
 
-        if (function_ == null) {
-            page.executeJavaScriptIfPossible(script_, "JavaScriptExecutionJob", 1);
+            if (function_ == null) {
+                page.executeJavaScriptIfPossible(script_, "JavaScriptExecutionJob", 1);
+            }
+            else {
+                final HtmlElement doc = page.getDocumentElement();
+                final Scriptable scriptable = (Scriptable) w.getScriptObject();
+                page.executeJavaScriptFunctionIfPossible(function_, scriptable, new Object[0], doc);
+            }
         }
-        else {
-            final HtmlElement doc = page.getDocumentElement();
-            final Scriptable scriptable = (Scriptable) w.getScriptObject();
-            page.executeJavaScriptFunctionIfPossible(function_, scriptable, new Object[0], doc);
-        }
-
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Finished executing " + this + ".");
+        finally {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Finished executing " + this + ".");
+            }
         }
     }
 
