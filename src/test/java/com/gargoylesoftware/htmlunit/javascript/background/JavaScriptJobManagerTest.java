@@ -285,4 +285,83 @@ public class JavaScriptJobManagerTest extends WebTestCase {
         Assert.assertEquals("No new alerts should have happened", finalValue, collectedAlerts.size());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void dontWaitWhenUnnecessary() throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "  <title>test</title>\n"
+            + "  <script>\n"
+            + "    var threadID;\n"
+            + "    function test() {\n"
+            + "      threadID = setTimeout(doAlert, 10000);\n"
+            + "    }\n"
+            + "    function doAlert() {\n"
+            + "      alert('blah');\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
+        assertNotNull(jobManager);
+        assertEquals(1, jobManager.getJobCount());
+
+        startTimedTest();
+        jobManager.waitForJobsWithinDelayToFinish(7000);
+        assertMaxTestRunTime(100);
+        assertEquals(1, jobManager.getJobCount());
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void dontWaitWhenUnnecessary_jobRemovesOtherJob() throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "  <title>test</title>\n"
+            + "  <script>\n"
+            + "    var longTimeoutID;\n"
+            + "    function test() {\n"
+            + "      longTimeoutID = setTimeout(doAlert('late'), 10000);\n"
+            + "      setTimeout(clearLongTimeout, 100);\n"
+            + "      setTimeout(doAlert('hello'), 300);\n"
+            + "    }\n"
+            + "    function clearLongTimeout() {\n"
+            + "      alert('clearLongTimeout');\n"
+            + "      clearTimeout(longTimeoutID);\n"
+            + "    }\n"
+            + "    function doAlert(_text) {\n"
+            + "      return function doAlert() {\n"
+            + "        alert(_text);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
+        assertNotNull(jobManager);
+        assertEquals(3, jobManager.getJobCount());
+
+        startTimedTest();
+        jobManager.waitForJobsWithinDelayToFinish(20000);
+        assertMaxTestRunTime(400);
+        assertEquals(0, jobManager.getJobCount());
+
+        final String[] expectedAlerts = {"clearLongTimeout", "hello"};
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
