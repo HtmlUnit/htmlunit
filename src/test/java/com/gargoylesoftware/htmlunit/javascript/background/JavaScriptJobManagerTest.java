@@ -31,6 +31,8 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
@@ -363,5 +365,109 @@ public class JavaScriptJobManagerTest extends WebTestCase {
 
         final String[] expectedAlerts = {"clearLongTimeout", "hello"};
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * When waitForJobsWithinDelayToFinish is called while a job is being executed, it has
+     * to wait for this job to finish, even if this clearXXX has been called for it.
+     * In other words this means that {@link JavaScriptJobManagerImpl#waitForJobsWithinDelayToFinish(long)} can not
+     * only rely on the futures_ map as clearXxx removes entries there.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void waitForJobsWithinDelayToFinish_calledDuringJobExecution() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <title>test</title>\n"
+            + "  <script>\n"
+            + "    var intervalId;\n"
+            + "    function test() {\n"
+            + "      intervalId = setTimeout(doWork, 100);\n"
+            + "    }\n"
+            + "    function doWork() {\n"
+            + "      clearTimeout(intervalId);\n"
+            + "      // waitForJobsWithinDelayToFinish should be called when JS execution is here\n"
+            + "      var request = new XMLHttpRequest();\n"
+            + "      request.open('GET', 'wait', false);\n"
+            + "      request.send('');\n"
+            + "      alert('end work');\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final ThreadSynchronizer threadSynchronizer = new ThreadSynchronizer();
+        final MockWebConnection webConnection = new MockWebConnection()
+        {
+            @Override
+            public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
+                if (settings.getUrl().toExternalForm().endsWith("/wait")) {
+                    threadSynchronizer.waitForState("just before waitForJobsWithinDelayToFinish");
+                    threadSynchronizer.sleep(400); // main thread need to be able to process next instruction
+                }
+                return super.getResponse(settings);
+            }
+        };
+        webConnection.setResponse(URL_FIRST, html);
+        webConnection.setDefaultResponse("");
+
+        final WebClient client = new WebClient(BrowserVersion.FIREFOX_3); // just to simplify test code using XHR
+        client.setWebConnection(webConnection);
+
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final HtmlPage page = client.getPage(URL_FIRST);
+        final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
+        assertNotNull(jobManager);
+        assertEquals(1, jobManager.getJobCount());
+
+        startTimedTest();
+        threadSynchronizer.setState("just before waitForJobsWithinDelayToFinish");
+        jobManager.waitForJobsWithinDelayToFinish(20000);
+        assertMaxTestRunTime(600);
+        assertEquals(0, jobManager.getJobCount());
+
+        final String[] expectedAlerts = {"end work"};
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+}
+
+/**
+ * Helper to ensure some synchronization state between threads to reproduce a particular situation in the tests.
+ * @author Marc Guillemot
+ */
+class ThreadSynchronizer {
+    private String state_ = "initial";
+
+    synchronized void setState(final String newState) {
+        state_ = newState;
+        notifyAll();
+    }
+
+    /**
+     * Just like {@link Thread#sleep(long)} but throws a {@link RuntimeException}.
+     * @param millis the time to sleep in milliseconds
+     */
+    public void sleep(final long millis) {
+        try {
+            Thread.sleep(millis);
+        }
+        catch (final InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    synchronized void waitForState(final String expectedState) {
+        try {
+            while (!state_.equals(expectedState)) {
+                wait();
+            }
+        }
+        catch (final InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

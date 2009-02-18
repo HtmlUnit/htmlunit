@@ -68,6 +68,32 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     /** Logging support. */
     private static final Log LOG = LogFactory.getLog(JavaScriptJobManagerImpl.class);
 
+    private volatile ScheduledFuture< ? > currentlyExecutingFuture_; // remember: only one thread can set it
+
+    /**
+     * Helper to track the job being executed.
+     */
+    class ExecutingJobTracker implements Runnable {
+        private final Runnable job_;
+        private ScheduledFuture< ? > associatedFuture_;
+
+        ExecutingJobTracker(final Runnable job) {
+            job_ = job;
+        }
+        void setAssociatedScheduledFuture(final ScheduledFuture< ? > future) {
+            associatedFuture_ = future;
+        }
+        public void run() {
+            currentlyExecutingFuture_ = associatedFuture_;
+            try {
+                job_.run();
+            }
+            finally {
+                currentlyExecutingFuture_ = null;
+            }
+        }
+    }
+
     /**
      * Creates a new instance.
      * @param window the window associated with the new job manager
@@ -116,8 +142,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         return addJob(job, delay, page);
     }
 
-    /** {@inheritDoc} */
-    public synchronized int addJob(final JavaScriptJob job, final int delay, final Page page) {
+    private synchronized int do_addJob(final JavaScriptJob job, final int delay, final int period, final Page page) {
         final WebWindow w = getWindow();
         if (w == null) {
             // The window to which this job manager belongs has been garbage collected.
@@ -133,10 +158,24 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         final int id = NEXT_JOB_ID.getAndIncrement();
         job.setId(id);
 
-        final ScheduledFuture< ? > future = executor_.schedule(job, delay, MILLISECONDS);
+        final ExecutingJobTracker jobWrapper = new ExecutingJobTracker(job);
+        final ScheduledFuture< ? > future;
+        if (delay != -1) {
+            future = executor_.schedule(jobWrapper, delay, MILLISECONDS);
+        }
+        else {
+            future = executor_.scheduleAtFixedRate(jobWrapper, period, period, MILLISECONDS);
+        }
+
+        jobWrapper.setAssociatedScheduledFuture(future);
         futures_.put(id, future);
         LOG.debug("Added job: " + job);
         return id;
+    }
+
+    /** {@inheritDoc} */
+    public int addJob(final JavaScriptJob job, final int delay, final Page page) {
+        return do_addJob(job, delay, -1, page);
     }
 
     /** {@inheritDoc} */
@@ -152,26 +191,8 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     }
 
     /** {@inheritDoc} */
-    public synchronized int addRecurringJob(final JavaScriptJob job, final int period, final Page page) {
-        final WebWindow w = getWindow();
-        if (w == null) {
-            // The window to which this job manager belongs has been garbage collected.
-            // Don't spawn any more jobs for it.
-            return 0;
-        }
-        if (w.getEnclosedPage() != page) {
-            // The page requesting the addition of the job is no longer contained by our owner window.
-            // Don't let it spawn any more jobs.
-            return 0;
-        }
-
-        final int id = NEXT_JOB_ID.getAndIncrement();
-        job.setId(id);
-
-        final ScheduledFuture< ? > future = executor_.scheduleAtFixedRate(job, period, period, MILLISECONDS);
-        futures_.put(id, future);
-        LOG.debug("Added recurring job: " + job);
-        return id;
+    public int addRecurringJob(final JavaScriptJob job, final int period, final Page page) {
+        return do_addJob(job, -1, period, page);
     }
 
     /** {@inheritDoc} */
@@ -235,6 +256,8 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         while (lastJobWithinDelay != null && !waitForCompletion(lastJobWithinDelay)) {
             lastJobWithinDelay = getLastJobStartingBefore(maxStartTime);
         }
+        LOG.debug("Finished waiting for all jobs to finish that start within " + maxWaitMillis
+            + " ms (current job count is " + getJobCountInner() + ").");
     }
 
     /**
@@ -268,6 +291,11 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                 currentDelay = delay;
                 job = future;
             }
+        }
+
+        if (job == null) {
+            LOG.debug("currentlyExecutingFuture_: " + currentlyExecutingFuture_);
+            job = currentlyExecutingFuture_;
         }
         return job;
     }
