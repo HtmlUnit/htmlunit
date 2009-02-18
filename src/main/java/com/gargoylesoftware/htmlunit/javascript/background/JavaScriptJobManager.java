@@ -100,10 +100,10 @@ public interface JavaScriptJobManager {
     int addRecurringJob(JavaScriptJob job, int period, final Page page);
 
     /**
-     * Stops the specified job <b>as soon as possible</b>, allowing the job to finish if it is currently executing.
-     * @param id the ID of the job to be stopped
+     * Removes the scheduled job from the execution queue. This doesn't interrupt the job if it is currently running.
+     * @param id the ID of the job to be removed from schedule
      */
-    void stopJobAsap(final int id);
+    void removeScheduledJob(final int id);
 
     /**
      * Stops the specified job <b>now</b>, not even allowing the job to finish if it is currently executing.

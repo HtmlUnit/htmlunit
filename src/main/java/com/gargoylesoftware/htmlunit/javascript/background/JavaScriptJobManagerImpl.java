@@ -175,11 +175,11 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     }
 
     /** {@inheritDoc} */
-    public synchronized void stopJobAsap(final int id) {
-        final Future< ? > future = futures_.remove(id);
+    public synchronized void removeScheduledJob(final int id) {
+        final ScheduledFuture< ? > future = futures_.remove(id);
         if (future != null) {
             future.cancel(false);
-            LOG.debug("Stopped job (ASAP): " + id);
+            LOG.debug("Removed job from schedule: " + id);
         }
     }
 
@@ -194,11 +194,15 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     /** {@inheritDoc} */
     public synchronized void stopAllJobsAsap() {
+        int nb = 0;
         for (final Future< ? > future : futures_.values()) {
             future.cancel(false);
+            ++nb;
         }
         futures_.clear();
-        LOG.debug("Stopped all jobs.");
+        if (nb > 0) {
+            LOG.debug("Stopped all jobs (" + nb + ")");
+        }
     }
 
     /** {@inheritDoc} */
@@ -228,7 +232,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         }
 
         // if lastJobWithinDelay is cancelled, we have to look for an other one
-        while (!waitForCompletion(lastJobWithinDelay)) {
+        while (lastJobWithinDelay != null && !waitForCompletion(lastJobWithinDelay)) {
             lastJobWithinDelay = getLastJobStartingBefore(maxStartTime);
         }
     }
