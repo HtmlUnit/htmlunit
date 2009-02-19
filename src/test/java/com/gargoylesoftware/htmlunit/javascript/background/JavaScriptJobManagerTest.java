@@ -399,8 +399,7 @@ public class JavaScriptJobManagerTest extends WebTestCase {
             + "</html>";
 
         final ThreadSynchronizer threadSynchronizer = new ThreadSynchronizer();
-        final MockWebConnection webConnection = new MockWebConnection()
-        {
+        final MockWebConnection webConnection = new MockWebConnection() {
             @Override
             public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
                 if (settings.getUrl().toExternalForm().endsWith("/wait")) {
