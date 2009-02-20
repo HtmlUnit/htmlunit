@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
+            <action type="fix" dev="mguillem" issue="2615817">
+                JavaScript: Date.getYear() returns four digits for years before 1900 and after 1999 when simulating IE.
+            </action>
             <action type="fix" dev="asashour" issue="2603370">
                 JavaScript: single submission of form if onclick handler of HTMLSubmitInput also submits the form.
             </action>

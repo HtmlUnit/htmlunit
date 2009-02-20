@@ -197,14 +197,15 @@ public class HtmlUnitContextFactory extends ContextFactory implements Serializab
      */
     @Override
     protected boolean hasFeature(final Context cx, final int featureIndex) {
-        if (Context.FEATURE_RESERVED_KEYWORD_AS_IDENTIFIER == featureIndex) {
-            return true;
-        }
-        else if (Context.FEATURE_PARENT_PROTO_PROPERTIES == featureIndex) {
-            return !browserVersion_.isIE();
-        }
-        else {
-            return super.hasFeature(cx, featureIndex);
+        switch (featureIndex) {
+            case Context.FEATURE_RESERVED_KEYWORD_AS_IDENTIFIER:
+                return true;
+            case Context.FEATURE_PARENT_PROTO_PROPERTIES:
+                return !browserVersion_.isIE();
+            case Context.FEATURE_NON_ECMA_GET_YEAR:
+                return browserVersion_.isIE();
+            default:
+                return super.hasFeature(cx, featureIndex);
         }
     }
 
