@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
+import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -1267,4 +1268,62 @@ public class HTMLFormElementTest extends WebTestCase {
         page.setFocusedElement(null);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void submit_input() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script type='text/javascript'>\n"
+            + "    function submitForm() {\n"
+            + "      document.myForm.submit();\n"
+            + "      document.myForm.action = 'page2.html';\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form action='page1.html' name='myForm'>\n"
+            + "    <input id='mySubmit' type='button' value='Test' onclick='submitForm();'>\n"
+            + "  </form>"
+            + "</body>\n"
+            + "</html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlButtonInput buttonInput = page.getHtmlElementById("mySubmit");
+        final HtmlPage secondPage = buttonInput.click();
+        assertEquals(URL_GARGOYLE + "page1.html", secondPage.getWebResponse().getRequestUrl().toExternalForm());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void submit_submitInput() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script type='text/javascript'>\n"
+            + "    function submitForm() {\n"
+            + "      document.myForm.submit();\n"
+            + "      document.myForm.action = 'page2.html';\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form action='page1.html' name='myForm'>\n"
+            + "    <input id='mySubmit' type='submit' value='Test' onclick='submitForm();'>\n"
+            + "  </form>"
+            + "</body>\n"
+            + "</html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlSubmitInput submitInput = page.getHtmlElementById("mySubmit");
+        final HtmlPage secondPage = submitInput.click();
+        assertEquals(URL_GARGOYLE + "page2.html", secondPage.getWebResponse().getRequestUrl().toExternalForm());
+    }
+
 }
