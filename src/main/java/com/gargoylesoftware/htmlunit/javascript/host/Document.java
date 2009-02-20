@@ -96,13 +96,13 @@ public class Document extends EventNode {
      * Gets the JavaScript property "documentElement" for the document.
      * @return the root node for the document
      */
-    public SimpleScriptable jsxGet_documentElement() {
+    public Element jsxGet_documentElement() {
         final Object documentElement = getPage().getDocumentElement();
         if (documentElement == null) {
             // for instance with an XML document with parsing error
             return null;
         }
-        return getScriptableFor(documentElement);
+        return (Element) getScriptableFor(documentElement);
     }
 
     /**

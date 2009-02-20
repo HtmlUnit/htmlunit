@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -192,5 +195,25 @@ public class XMLSerializerTest extends WebTestCase {
             + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
             + "</body></html>");
         return buffer.toString();
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void document() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = document.implementation.createDocument('', 'foo', null);\n"
+            + "    alert(new XMLSerializer().serializeToString(doc));\n"
+            + "    alert(new XMLSerializer().serializeToString(doc.documentElement));\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"<foo/>", "<foo/>"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }
