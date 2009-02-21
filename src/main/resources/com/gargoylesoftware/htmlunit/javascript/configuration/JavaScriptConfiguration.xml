@@ -2148,6 +2148,13 @@
         <property name="urn" readable="true" writable="true"/>
     </class>
 
+    <class name="NamespaceCollection" classname="com.gargoylesoftware.htmlunit.javascript.host.NamespaceCollection" JSObject="true">
+        <browser name="Microsoft Internet Explorer"/>
+        <property name="length" readable="true" writable="false"/>
+        <function name="add"/>
+        <function name="item"/>
+    </class>
+
     <class name="Navigator" classname="com.gargoylesoftware.htmlunit.javascript.host.Navigator"
         JSObject="true">
         <doclink

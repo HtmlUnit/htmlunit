@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
+            <action type="fix" dev="sdanig">
+                JavaScript: Expand support for document.namespaces collection.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: XMLSerializer should properly handle Document.
             </action>

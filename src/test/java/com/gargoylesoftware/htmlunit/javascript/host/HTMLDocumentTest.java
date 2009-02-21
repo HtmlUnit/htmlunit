@@ -345,4 +345,27 @@ public class HTMLDocumentTest extends WebTestCase {
             + "</html>";
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.IE)
+    @Alerts({ "0", "1", "f", "f", "urn:f", "urn:f", "true" })
+    public void namespaces() throws Exception {
+        final String html =
+              "<body><script>\n"
+            + "var ns = document.namespaces;\n"
+            + "alert(ns.length);\n"
+            + "ns.add('f', 'urn:f');\n"
+            + "alert(ns.length);\n"
+            + "alert(ns.item(0).name);\n"
+            + "alert(ns[0].name);\n"
+            + "alert(ns.item('f').urn);\n"
+            + "alert(ns['f'].urn);\n"
+            + "alert(ns == document.namespaces);\n"
+            + "</script></body>";
+        loadPageWithAlerts(html);
+    }
+
 }

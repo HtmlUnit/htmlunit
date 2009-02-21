@@ -21,7 +21,6 @@ import static com.gargoylesoftware.htmlunit.util.UrlUtils.getUrlWithNewPort;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
@@ -39,7 +38,6 @@ import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.lang.StringUtils;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
-import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.NativeObject;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
@@ -148,6 +146,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     private HTMLCollection anchors_; // has to be a member to have equality (==) working
     private HTMLCollection applets_; // has to be a member to have equality (==) working
     private StyleSheetList styleSheets_; // has to be a member to have equality (==) working
+    private NamespaceCollection namespaces_; // has to be a member to have equality (==) working
     private HTMLElement activeElement_;
 
     /** The buffer that will be used for calls to document.write(). */
@@ -227,17 +226,13 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
     /**
      * Returns the value of the JavaScript attribute "namespaces".
-     * @return the value of this attribute
+     * @return the value of the JavaScript attribute "namespaces"
      */
     public Object jsxGet_namespaces() {
-        final Map<String, String> namespacesMap = getHtmlPage().getNamespaces();
-        final List<Namespace> namespaces = new ArrayList<Namespace>();
-        for (final String key : namespacesMap.keySet()) {
-            if (key.length() != 0) {
-                namespaces.add(new Namespace(this, key, namespacesMap.get(key)));
-            }
+        if (namespaces_ == null) {
+            namespaces_ = new NamespaceCollection(this);
         }
-        return new NativeArray(namespaces.toArray());
+        return namespaces_;
     }
 
     /**
