@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.background;
 
+import java.io.Serializable;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -34,9 +36,11 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class JavaScriptJobsSupervisor {
+public class JavaScriptJobsSupervisor implements Serializable {
+    private static final long serialVersionUID = -5446829461640355490L;
     private static final Log LOG = LogFactory.getLog(JavaScriptJobsSupervisor.class);
-    private final Map<Runnable, ScheduledFuture< ? >> job2Future_ = new WeakHashMap<Runnable, ScheduledFuture< ? >>();
+    private final Map<Runnable, WeakReference<ScheduledFuture< ? >>> job2Future_
+        = new WeakHashMap<Runnable, WeakReference<ScheduledFuture< ? >>>();
     private final List<Runnable> currentlyRunningJobs_ = new ArrayList<Runnable>();
 
     /**
@@ -121,14 +125,17 @@ public class JavaScriptJobsSupervisor {
         long currentDelay = 0;
         ScheduledFuture< ? > job = null;
         final long maxAllowedDelay = maxStartTime - System.currentTimeMillis();
-        for (final ScheduledFuture< ? > future : job2Future_.values()) {
-            final long delay = future.getDelay(TimeUnit.MILLISECONDS);
-            if (future.isDone()) {
-                // TODO
-            }
-            else if (delay > currentDelay && delay < maxAllowedDelay) {
-                currentDelay = delay;
-                job = future;
+        for (final WeakReference<ScheduledFuture< ? >> futureRef : job2Future_.values()) {
+            final ScheduledFuture< ? > future = futureRef.get();
+            if (future != null) {
+                final long delay = future.getDelay(TimeUnit.MILLISECONDS);
+                if (future.isDone()) {
+                    // TODO
+                }
+                else if (delay > currentDelay && delay < maxAllowedDelay) {
+                    currentDelay = delay;
+                    job = future;
+                }
             }
         }
 
@@ -150,7 +157,7 @@ public class JavaScriptJobsSupervisor {
     }
 
     synchronized void jobAdded(final JavaScriptJob job, final ScheduledFuture< ? > future) {
-        job2Future_.put(job, future);
+        job2Future_.put(job, new WeakReference<ScheduledFuture< ? >>(future));
     }
 
     /**
