@@ -340,8 +340,8 @@ public class JavaScriptEngine implements Serializable {
         if (browserVersion.isIE()) {
             final ScriptPreProcessor ieCCPreProcessor = new IEConditionalCompilationScriptPreProcessor();
             sourceCode = ieCCPreProcessor.preProcess(htmlPage, sourceCode, sourceName, null);
-            sourceCode = IEWeirdSyntaxScriptPreProcessor.getInstance()
-                .preProcess(htmlPage, sourceCode, sourceName, null);
+//            sourceCode = IEWeirdSyntaxScriptPreProcessor.getInstance()
+//                .preProcess(htmlPage, sourceCode, sourceName, null);
         }
 
         // Remove HTML comments around the source if needed

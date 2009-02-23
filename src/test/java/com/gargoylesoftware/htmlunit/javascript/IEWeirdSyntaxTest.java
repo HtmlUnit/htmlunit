@@ -22,6 +22,8 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Test for IE weird JavaScript syntax.
@@ -36,6 +38,7 @@ public class IEWeirdSyntaxTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented(Browser.IE)
     @Alerts(IE = { "1", "2" })
     public void semicolon_before_finally() throws Exception {
         doTestTryCatchFinally("", ";");
@@ -47,6 +50,7 @@ public class IEWeirdSyntaxTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented(Browser.IE)
     @Alerts(IE = { "1", "2" })
     public void semicolon_before_catch() throws Exception {
         doTestTryCatchFinally(";", "");
@@ -57,6 +61,7 @@ public class IEWeirdSyntaxTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented(Browser.IE)
     @Alerts(IE = { "1", "2" })
     public void semicolonAndComment_before_catchAndFinally() throws Exception {
         doTestTryCatchFinally("// comment\n;\n", "");
