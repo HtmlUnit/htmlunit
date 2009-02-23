@@ -1,0 +1,81 @@
+<html>
+<head>
+    <title>Test Array properties</title>
+	<script>
+	function log(text)
+	{
+		var log = document.getElementById("log");
+		var item = document.createElement("li");
+		item.appendChild(document.createTextNode(text))
+		log.appendChild(item);
+	}
+	
+	function test()
+	{
+		var properties = ['concat', 'every', 'filter', 'forEach', 'indexOf', 
+			'join', 'lastIndexOf', 'map', 'pop', 'push', 
+			'reverse', 'shift', 'slice', 'some', 'sort', 
+			'splice', 'toLocaleString', 'toSource', 'toString', 'unshift']
+		for (var i =0; i<properties.length; ++i)
+		{
+			var p = properties[i]
+			var v = [][p]
+			log(p + ": " + typeof(v));
+		}
+	}
+	</script>
+</head>
+<body onload="test()">
+
+
+<ol id="log">
+</ol>
+
+<ol id="expected_FF">
+	<li>concat: function</li>
+	<li>every: function</li>
+	<li>filter: function</li>
+	<li>forEach: function</li>
+	<li>indexOf: function</li>
+	<li>join: function</li>
+	<li>lastIndexOf: function</li>
+	<li>map: function</li>
+	<li>pop: function</li>
+	<li>push: function</li>
+	<li>reverse: function</li>
+	<li>shift: function</li>
+	<li>slice: function</li>
+	<li>some: function</li>
+	<li>sort: function</li>
+	<li>splice: function</li>
+	<li>toLocaleString: function</li>
+	<li>toSource: function</li>
+	<li>toString: function</li>
+	<li>unshift: function</li>
+</ol>
+
+<ol id="expected_IE">
+	<li>concat: function</li>
+	<li>every: undefined</li>
+	<li>filter: undefined</li>
+	<li>forEach: undefined</li>
+	<li>indexOf: undefined</li>
+	<li>join: function</li>
+	<li>lastIndexOf: undefined</li>
+	<li>map: undefined</li>
+	<li>pop: function</li>
+	<li>push: function</li>
+	<li>reverse: function</li>
+	<li>shift: function</li>
+	<li>slice: function</li>
+	<li>some: undefined</li>
+	<li>sort: function</li>
+	<li>splice: function</li>
+	<li>toLocaleString: function</li>
+	<li>toSource: undefined</li>
+	<li>toString: function</li>
+	<li>unshift: function</li>
+</ol>
+
+</body>
+</html>

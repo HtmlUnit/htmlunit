@@ -120,6 +120,22 @@ public class SimpleWebDriverTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void objectProperties() throws Exception {
+        doTest("objectProperties.html");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void arrayProperties() throws Exception {
+        doTest("arrayProperties.html");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void document_xxx_formAccess() throws Exception {
         doTest("testDocument.xxx_accessToForm.html");
     }
@@ -131,7 +147,7 @@ public class SimpleWebDriverTest extends WebDriverTestCase {
         getWebDriver().get(testFile.toURI().toURL().toExternalForm());
 
         // verifications
-        assertEquals(getExpectedEntries(), getEntries("log"));
+        assertEquals(getExpectedEntries().toString(), getEntries("log").toString());
     }
 
     /**

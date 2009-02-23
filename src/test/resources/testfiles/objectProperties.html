@@ -1,0 +1,70 @@
+<html>
+<head>
+    <title>Test Array properties</title>
+	<script>
+	function log(text)
+	{
+		var log = document.getElementById("log");
+		var item = document.createElement("li");
+		item.appendChild(document.createTextNode(text))
+		log.appendChild(item);
+	}
+	
+	function test()
+	{
+		var properties = ['__defineGetter__',
+'__defineSetter__',
+'__lookupGetter__',
+'__lookupSetter__',
+'hasOwnProperty',
+'isPrototypeOf',
+'propertyIsEnumerable',
+'toLocaleString',
+'toSource',
+'toString',
+'valueOf']
+		for (var i =0; i<properties.length; ++i)
+		{
+			var p = properties[i]
+			var v = [][p]
+			log(p + ": " + typeof(v));
+		}
+	}
+	</script>
+</head>
+<body onload="test()">
+
+
+<ol id="log">
+</ol>
+
+<ol id="expected_FF">
+<li>__defineGetter__: function</li>
+<li>__defineSetter__: function</li>
+<li>__lookupGetter__: function</li>
+<li>__lookupSetter__: function</li>
+<li>hasOwnProperty: function</li>
+<li>isPrototypeOf: function</li>
+<li>propertyIsEnumerable: function</li>
+<li>toLocaleString: function</li>
+<li>toSource: function</li>
+<li>toString: function</li>
+<li>valueOf: function</li>
+</ol>
+
+<ol id="expected_IE">
+<li>__defineGetter__: undefined</li>
+<li>__defineSetter__: undefined</li>
+<li>__lookupGetter__: undefined</li>
+<li>__lookupSetter__: undefined</li>
+<li>hasOwnProperty: function</li>
+<li>isPrototypeOf: function</li>
+<li>propertyIsEnumerable: function</li>
+<li>toLocaleString: function</li>
+<li>toSource: undefined</li>
+<li>toString: function</li>
+<li>valueOf: function</li>
+</ol>
+
+</body>
+</html>

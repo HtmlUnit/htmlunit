@@ -239,8 +239,31 @@ public class JavaScriptEngine implements Serializable {
             }
         }
 
+        // in IE, not all standard methods exists
+        if (webClient.getBrowserVersion().isIE()) {
+            final String[] objectPropertiesToRemove = {"__defineGetter__", "__defineSetter__", "__lookupGetter__",
+                "__lookupSetter__", "toSource"};
+            removePrototypeProperties(window, "Object", objectPropertiesToRemove);
+            final String[] arrayPropertiesToRemove = {"every", "filter", "forEach", "indexOf", "lastIndexOf", "map",
+                "some", "toSource"};
+            removePrototypeProperties(window, "Array", arrayPropertiesToRemove);
+        }
+
         window.setPrototypes(prototypes);
         window.initialize(webWindow);
+    }
+
+    /**
+     * Removes prototype properties.
+     * @param window the scope
+     * @param className the class for which properties should be removed
+     * @param properties the properties to remove
+     */
+    private void removePrototypeProperties(final Window window, final String className, final String[] properties) {
+        final ScriptableObject prototype = (ScriptableObject) ScriptableObject.getClassPrototype(window, className);
+        for (final String property : properties) {
+            prototype.delete(property);
+        }
     }
 
     /**

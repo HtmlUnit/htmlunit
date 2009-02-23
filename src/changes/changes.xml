@@ -6,8 +6,8 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
-            <action type="update" dev="mguillem">
-                Ignore extraneous semicolons before catch when simulating IE.
+            <action type="fix" dev="mguillem">
+                JavaScript: hide standard Object and Array functions that don't exist on IE.
             </action>
             <action type="add" dev="mguillem">
                 (experimental) Add WebClient.waitForJobsWithinDelayToFinish allowing to wait for JavaScript background jobs to finish.
