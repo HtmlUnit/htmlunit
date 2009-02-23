@@ -20,13 +20,10 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import java.lang.ref.WeakReference;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.logging.Log;
@@ -68,37 +65,37 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     /** Logging support. */
     private static final Log LOG = LogFactory.getLog(JavaScriptJobManagerImpl.class);
 
-    private volatile ScheduledFuture< ? > currentlyExecutingFuture_; // remember: only one thread can set it
+    private final JavaScriptJobsSupervisor supervisor_;
 
     /**
      * Helper to track the job being executed.
      */
     class ExecutingJobTracker implements Runnable {
         private final Runnable job_;
-        private ScheduledFuture< ? > associatedFuture_;
 
         ExecutingJobTracker(final Runnable job) {
             job_ = job;
         }
-        void setAssociatedScheduledFuture(final ScheduledFuture< ? > future) {
-            associatedFuture_ = future;
-        }
         public void run() {
-            currentlyExecutingFuture_ = associatedFuture_;
+            LOG.debug("Running job " + job_);
+            supervisor_.executionStarted(job_);
             try {
                 job_.run();
             }
             finally {
-                currentlyExecutingFuture_ = null;
+                supervisor_.executionFinished(job_);
+                LOG.debug("Finished job " + job_);
             }
         }
     }
 
     /**
      * Creates a new instance.
+     * @param javaScriptJobsSupervisor the supervisor for the {@link WebClient}
      * @param window the window associated with the new job manager
      */
-    public JavaScriptJobManagerImpl(final WebWindow window) {
+    public JavaScriptJobManagerImpl(final JavaScriptJobsSupervisor javaScriptJobsSupervisor, final WebWindow window) {
+        supervisor_ = javaScriptJobsSupervisor;
         window_ = new WeakReference<WebWindow>(window);
         executor_.setThreadFactory(new ThreadFactory() {
             public Thread newThread(final Runnable r) {
@@ -167,7 +164,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             future = executor_.scheduleAtFixedRate(jobWrapper, period, period, MILLISECONDS);
         }
 
-        jobWrapper.setAssociatedScheduledFuture(future);
+        supervisor_.jobAdded(job, future);
         futures_.put(id, future);
         LOG.debug("Added job: " + job);
         return id;
@@ -199,6 +196,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     public synchronized void removeScheduledJob(final int id) {
         final ScheduledFuture< ? > future = futures_.remove(id);
         if (future != null) {
+            LOG.debug("Stopping " + future);
             future.cancel(false);
             LOG.debug("Removed job from schedule: " + id);
         }
@@ -208,6 +206,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     public synchronized void stopJobNow(final int id) {
         final Future< ? > future = futures_.remove(id);
         if (future != null) {
+            LOG.debug("Stopping now " + future);
             future.cancel(true);
             LOG.debug("Stopped job (now): " + id);
         }
@@ -215,8 +214,10 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     /** {@inheritDoc} */
     public synchronized void stopAllJobsAsap() {
+        LOG.debug("stopAllJobsAsap");
         int nb = 0;
         for (final Future< ? > future : futures_.values()) {
+            LOG.debug("Stopping " + future);
             future.cancel(false);
             ++nb;
         }
@@ -237,67 +238,6 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         final int jobs = getJobCount();
         LOG.debug("Finished waiting for all jobs to finish (final job count is " + jobs + ").");
         return jobs == 0;
-    }
-
-    /** {@inheritDoc} */
-    public void waitForJobsWithinDelayToFinish(final long maxWaitMillis) {
-        LOG.debug("Waiting for all jobs to finish that start within " + maxWaitMillis + "ms.");
-        final long maxStartTime = System.currentTimeMillis() + maxWaitMillis;
-
-        // look for jobs that will start within the given time
-        ScheduledFuture< ? > lastJobWithinDelay = getLastJobStartingBefore(maxStartTime);
-
-        if (lastJobWithinDelay == null) {
-            LOG.debug("No job scheduled within the next " + maxWaitMillis + "ms. No need to wait.");
-            return;
-        }
-
-        // if lastJobWithinDelay is cancelled, we have to look for an other one
-        while (lastJobWithinDelay != null && !waitForCompletion(lastJobWithinDelay)) {
-            lastJobWithinDelay = getLastJobStartingBefore(maxStartTime);
-        }
-        LOG.debug("Finished waiting for all jobs to finish that start within " + maxWaitMillis
-            + " ms (current job count is " + getJobCountInner() + ").");
-    }
-
-    /**
-     * Wait for completion of a job
-     * @param job the job that will be executed
-     * @return <code>true</code> if the job finished normally
-     */
-    private boolean waitForCompletion(final ScheduledFuture< ? > job) {
-        try {
-            job.get();
-        }
-        catch (final CancellationException e) {
-            return false;
-        }
-        catch (final InterruptedException e) {
-            return false;
-        }
-        catch (final ExecutionException e) {
-            return false;
-        }
-        return true;
-    }
-
-    private synchronized ScheduledFuture< ? > getLastJobStartingBefore(final long maxStartTime) {
-        long currentDelay = 0;
-        ScheduledFuture< ? > job = null;
-        final long maxAllowedDelay = maxStartTime - System.currentTimeMillis();
-        for (final ScheduledFuture< ? > future : futures_.values()) {
-            final long delay = future.getDelay(TimeUnit.MILLISECONDS);
-            if (delay > currentDelay && delay < maxAllowedDelay) {
-                currentDelay = delay;
-                job = future;
-            }
-        }
-
-        if (job == null) {
-            LOG.debug("currentlyExecutingFuture_: " + currentlyExecutingFuture_);
-            job = currentlyExecutingFuture_;
-        }
-        return job;
     }
 
     /**

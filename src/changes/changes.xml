@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
+            <action type="add" dev="mguillem">
+                (experimental) Add WebClient.waitForJobsWithinDelayToFinish allowing to wait for JavaScript background jobs to finish.
+            </action>
             <action type="fix" dev="sdanig">
                 JavaScript: Expand support for document.namespaces collection.
             </action>

@@ -20,7 +20,6 @@ import java.util.ListIterator;
 
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
-import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManagerImpl;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
@@ -39,7 +38,7 @@ public abstract class WebWindowImpl implements WebWindow {
     private WebClient webClient_;
     private Page enclosedPage_;
     private Object scriptObject_;
-    private JavaScriptJobManager jobManager_ = new JavaScriptJobManagerImpl(this);
+    private JavaScriptJobManager jobManager_;
     private List<WebWindowImpl> childWindows_ = new ArrayList<WebWindowImpl>();
     private String name_ = "";
 
@@ -60,6 +59,7 @@ public abstract class WebWindowImpl implements WebWindow {
     public WebWindowImpl(final WebClient webClient) {
         WebAssert.notNull("webClient", webClient);
         webClient_ = webClient;
+        jobManager_ = webClient_.getJavaScriptJobsSupervisor().createJobManager(this);
         performRegistration();
     }
 

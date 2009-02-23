@@ -123,12 +123,4 @@ public interface JavaScriptJobManager {
      * @return <tt>true</tt> if all threads expired within the specified time
      */
     boolean waitForAllJobsToFinish(final long maxWaitMillis);
-
-    /**
-     * Blocks until all jobs scheduled within the specified time have finished executing.
-     * If no job is scheduled within the specified delay, this method will return immediately even if
-     * jobs are scheduled for a later time.
-     * @param delayMillis the delay determining jobs that should be executed
-     */
-    void waitForJobsWithinDelayToFinish(final long delayMillis);
 }

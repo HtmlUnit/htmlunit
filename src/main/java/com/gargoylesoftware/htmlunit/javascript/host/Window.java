@@ -359,6 +359,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param timeoutId identifier for the timeout to clear (returned by <tt>setTimeout</tt>)
      */
     public void jsxFunction_clearTimeout(final int timeoutId) {
+        getLog().debug("clearTimeout(" + timeoutId + ")");
         getWebWindow().getJobManager().removeScheduledJob(timeoutId);
     }
 
@@ -1039,6 +1040,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536353.aspx">MSDN documentation</a>
      */
     public void jsxFunction_clearInterval(final int intervalID) {
+        getLog().debug("clearInterval(" + intervalID + ")");
         getWebWindow().getJobManager().removeScheduledJob(intervalID);
     }
 

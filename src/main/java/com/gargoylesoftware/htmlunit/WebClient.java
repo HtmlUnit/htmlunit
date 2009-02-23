@@ -61,6 +61,7 @@ import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobsSupervisor;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -178,6 +179,7 @@ public class WebClient implements Serializable {
     private boolean activeXNative_;
     private RefreshHandler refreshHandler_ = new ImmediateRefreshHandler();
     private boolean throwExceptionOnScriptError_ = true;
+    private final JavaScriptJobsSupervisor jsJobsSupervisor_ = new JavaScriptJobsSupervisor();
 
     /**
      * Creates a web client instance using the browser version returned by
@@ -1927,5 +1929,25 @@ public class WebClient implements Serializable {
                 topWindow.close();
             }
         }
+    }
+
+    /**
+     * <span style="color:red">Experimental API: subject to change at any time and not yet working for all cases
+     * (HtmlUnit's tests don't yet use it).</span><br/>
+     * Blocks until all jobs scheduled within the specified time have finished executing.
+     * If no job is scheduled within the specified delay, this method will return immediately even if
+     * jobs are scheduled for a later time.
+     * @param delayMillis the delay determining jobs that should be executed
+     */
+    public void waitForJobsWithinDelayToFinish(final long delayMillis) {
+        jsJobsSupervisor_.waitForJobsWithinDelayToFinish(delayMillis);
+    }
+
+    /**
+     * Gets the JavaScript supervisor for this client.
+     * @return the surpervisor
+     */
+    protected JavaScriptJobsSupervisor getJavaScriptJobsSupervisor() {
+        return jsJobsSupervisor_;
     }
 }
