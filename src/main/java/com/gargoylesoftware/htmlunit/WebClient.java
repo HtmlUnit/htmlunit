@@ -179,7 +179,7 @@ public class WebClient implements Serializable {
     private boolean activeXNative_;
     private RefreshHandler refreshHandler_ = new ImmediateRefreshHandler();
     private boolean throwExceptionOnScriptError_ = true;
-    private final JavaScriptJobsSupervisor jsJobsSupervisor_ = new JavaScriptJobsSupervisor();
+    private final transient JavaScriptJobsSupervisor jsJobsSupervisor_ = new JavaScriptJobsSupervisor();
 
     /**
      * Creates a web client instance using the browser version returned by
