@@ -29,6 +29,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
+/**
+ * @author Marc Guillemot
+ * @author Daniel Gredler
+ * @author Ahmed Ashour
+ */
 class EventListenersContainer {
     static class Handlers {
         private final List<Function> capturingHandlers_ = new ArrayList<Function>();
