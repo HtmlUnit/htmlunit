@@ -2695,4 +2695,29 @@ public class HTMLElementTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "undefined", "false", "hello", "true" }, IE = { "undefined", "true", "undefined", "false" })
+    public void firefox__proto__() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var div1 = document.createElement('div');\n"
+            + "  alert(div1.myProp);\n"
+            + "  var p1 = div1['__proto__'];\n"
+            + "  alert(p1 == undefined);\n"
+            + "  if (p1)\n"
+            + "    p1.myProp = 'hello';\n"
+            + "  alert(div1.myProp);\n"
+            + "  alert(p1 !== document.createElement('form')['__proto__']);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }

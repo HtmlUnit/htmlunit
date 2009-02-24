@@ -178,11 +178,12 @@ public class JavaScriptEngine implements Serializable {
                 configureConstantsPropertiesAndFunctions(config, window);
             }
             else {
-                final Scriptable prototype = configureClass(config, window);
+                final ScriptableObject prototype = configureClass(config, window);
                 if (config.isJsObject()) {
                     // for FF, place object with prototype property in Window scope
                     if (!getWebClient().getBrowserVersion().isIE()) {
                         final SimpleScriptable obj = config.getLinkedClass().newInstance();
+                        prototype.defineProperty("__proto__", prototype, ScriptableObject.DONTENUM);
                         obj.defineProperty("prototype", prototype, ScriptableObject.DONTENUM); // but not setPrototype!
                         obj.setParentScope(window);
                         ScriptableObject.defineProperty(window, config.getClassName(), obj, ScriptableObject.DONTENUM);
@@ -274,7 +275,7 @@ public class JavaScriptEngine implements Serializable {
      * @throws IllegalAccessException if we don't have access to create the new instance
      * @return the created prototype
      */
-    private Scriptable configureClass(final ClassConfiguration config, final Scriptable window)
+    private ScriptableObject configureClass(final ClassConfiguration config, final Scriptable window)
         throws InstantiationException, IllegalAccessException {
 
         final Class< ? > jsHostClass = config.getLinkedClass();

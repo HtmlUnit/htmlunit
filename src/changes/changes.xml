@@ -7,6 +7,9 @@
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
             <action type="fix" dev="mguillem">
+                JavaScript: make prototype available on DOM nodes as __proto__ (FF only).
+            </action>
+            <action type="fix" dev="mguillem">
                 JavaScript: hide standard Object and Array functions that don't exist on IE.
             </action>
             <action type="add" dev="mguillem">
