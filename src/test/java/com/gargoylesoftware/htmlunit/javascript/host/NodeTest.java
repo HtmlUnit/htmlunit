@@ -836,7 +836,7 @@ public class NodeTest extends WebTestCase {
         //IE doesn't have specific order
         Collections.sort(collectedAlerts);
         assertEquals(getExpectedAlerts(), collectedAlerts);
-        
+
         final URL expectedURL;
         if (getBrowserVersion().isIE()) {
             expectedURL = URL_GARGOYLE;
@@ -884,7 +884,7 @@ public class NodeTest extends WebTestCase {
         //IE doesn't have specific order
         Collections.sort(collectedAlerts);
         assertEquals(getExpectedAlerts(), collectedAlerts);
-        
+
         final URL expectedURL;
         if (getBrowserVersion().isIE()) {
             expectedURL = URL_GARGOYLE;
