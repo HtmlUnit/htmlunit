@@ -119,28 +119,38 @@ class EventListenersContainer {
         return handlers.handler_;
     }
 
-    private ScriptResult executeEventListeners(final boolean useCapture, final Event event,
-            final Object[] args) {
-
+    private ScriptResult executeEventListeners(final boolean useCapture, final Event event, final Object[] args) {
+        final boolean ie = jsNode_.getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE();
+        ScriptResult allResult = null;
         final List<Function> handlers = getHandlers(event.jsxGet_type(), useCapture);
         if (handlers != null && !handlers.isEmpty()) {
             event.setCurrentTarget(jsNode_);
 
-            ScriptResult result;
             final DomNode node = jsNode_.getDomNodeOrDie();
             final HtmlPage page = (HtmlPage) node.getPage();
             // make a copy of the list as execution of an handler may (de-)register handlers
             final List<Function> handlersToExecute = new ArrayList<Function>(handlers);
             for (final Function listener : handlersToExecute) {
-                result = page.executeJavaScriptFunctionIfPossible(
+                final ScriptResult result = page.executeJavaScriptFunctionIfPossible(
                         listener, jsNode_, args, node);
                 if (event.isPropagationStopped()) {
                     return result;
                 }
+                if (ie) {
+                    if (ScriptResult.isFalse(result)) {
+                        allResult = result;
+                    }
+                    else {
+                        final Object eventReturnValue = event.jsxGet_returnValue();
+                        if (eventReturnValue instanceof Boolean && !((Boolean) eventReturnValue).booleanValue()) {
+                            allResult = new ScriptResult(false, page);
+                        }
+                    }
+                }
             }
         }
 
-        return null;
+        return allResult;
     }
 
     private ScriptResult executeEventHandler(final Event event, final Object[] propHandlerArgs) {

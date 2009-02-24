@@ -16,7 +16,9 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.Assert;
@@ -32,6 +34,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -757,5 +760,138 @@ public class NodeTest extends WebTestCase {
             + "</body></html>";
 
         loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "1", "2" })
+    public void eventListener() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function clicking1() {\n"
+            + "    alert(1);\n"
+            + "  }\n"
+            + "  function clicking2() {\n"
+            + "    alert(2);\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    var e = document.getElementById('myAnchor');\n"
+            + "    if (e.addEventListener) {\n"
+            + "      e.addEventListener('click', clicking1, false);\n"
+            + "      e.addEventListener('click', clicking2, false);\n"
+            + "    } else if (e.attachEvent) {\n"
+            + "      e.attachEvent('onclick', clicking1);\n"
+            + "      e.attachEvent('onclick', clicking2);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <a href='" + URL_SECOND + "' id='myAnchor'>Click me</a>\n"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
+        final HtmlPage page2 = page.<HtmlAnchor>getHtmlElementById("myAnchor").click();
+        //IE doesn't have specific order
+        Collections.sort(collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+        assertEquals(URL_SECOND.toExternalForm(), page2.getWebResponse().getRequestUrl().toExternalForm());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "1", "2" })
+    public void eventListener_return_false() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function clicking1() {\n"
+            + "    alert(1);\n"
+            + "  }\n"
+            + "  function clicking2() {\n"
+            + "    alert(2);\n"
+            + "    return false;\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    var e = document.getElementById('myAnchor');\n"
+            + "    if (e.addEventListener) {\n"
+            + "      e.addEventListener('click', clicking1, false);\n"
+            + "      e.addEventListener('click', clicking2, false);\n"
+            + "    } else if (e.attachEvent) {\n"
+            + "      e.attachEvent('onclick', clicking1);\n"
+            + "      e.attachEvent('onclick', clicking2);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <a href='" + URL_SECOND + "' id='myAnchor'>Click me</a>\n"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
+        final HtmlPage page2 = page.<HtmlAnchor>getHtmlElementById("myAnchor").click();
+        //IE doesn't have specific order
+        Collections.sort(collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+        
+        final URL expectedURL;
+        if (getBrowserVersion().isIE()) {
+            expectedURL = URL_GARGOYLE;
+        }
+        else {
+            expectedURL = URL_SECOND;
+        }
+        assertEquals(expectedURL.toExternalForm(), page2.getWebResponse().getRequestUrl().toExternalForm());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "1", "2" })
+    public void eventListener_returnValue_false() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function clicking1() {\n"
+            + "    alert(1);\n"
+            + "  }\n"
+            + "  function clicking2() {\n"
+            + "    alert(2);\n"
+            + "    if (window.event)\n"
+            + "      window.event.returnValue = false;\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    var e = document.getElementById('myAnchor');\n"
+            + "    if (e.addEventListener) {\n"
+            + "      e.addEventListener('click', clicking1, false);\n"
+            + "      e.addEventListener('click', clicking2, false);\n"
+            + "    } else if (e.attachEvent) {\n"
+            + "      e.attachEvent('onclick', clicking1);\n"
+            + "      e.attachEvent('onclick', clicking2);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <a href='" + URL_SECOND + "' id='myAnchor'>Click me</a>\n"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
+        final HtmlPage page2 = page.<HtmlAnchor>getHtmlElementById("myAnchor").click();
+        //IE doesn't have specific order
+        Collections.sort(collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+        
+        final URL expectedURL;
+        if (getBrowserVersion().isIE()) {
+            expectedURL = URL_GARGOYLE;
+        }
+        else {
+            expectedURL = URL_SECOND;
+        }
+        assertEquals(expectedURL.toExternalForm(), page2.getWebResponse().getRequestUrl().toExternalForm());
     }
 }

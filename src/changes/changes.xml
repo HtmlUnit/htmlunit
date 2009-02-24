@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
+            <action type="update" dev="asashour" issue="2624738">
+                JavaScript: process false return value of handlers added by .attachEvent() or .addEventListener().
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: make prototype available on DOM nodes as __proto__ (FF only).
             </action>
@@ -28,7 +31,7 @@
                 JavaScript: single submission of form if onclick handler of HTMLSubmitInput also submits the form.
             </action>
             <action type="update" dev="asashour" issue="2602044">
-                Add default value for "Accept", "Accept-Encoding" and "Accept-Language" HTTP headers.
+                Add default value for "Accept" and "Accept-Language" HTTP headers.
             </action>
             <action type="add" dev="asashour" issue="2602044">
                 JavaScript: add support for HTMLElement.removeNode().

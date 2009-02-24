@@ -1319,6 +1319,9 @@
 
     <class name="HTMLElement" extends="Element" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlElement">
+        <property name="accessKey" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
         <property name="all" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer"/>
         </property>

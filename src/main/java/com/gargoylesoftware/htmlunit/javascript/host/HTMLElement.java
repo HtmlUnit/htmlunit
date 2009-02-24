@@ -2010,4 +2010,21 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
         // Ignore because we aren't displaying anything!
     }
+
+    /**
+     * Returns the "accessKey" property.
+     * @return the "accessKey" property
+     */
+    public String jsxGet_accessKey() {
+        return getDomNodeOrDie().getAttribute("accesskey");
+    }
+
+    /**
+     * Sets the "accessKey" property.
+     * @param accessKey the "accessKey" property
+     */
+    public void jsxSet_accessKey(final String accessKey) {
+        getDomNodeOrDie().setAttribute("accesskey", accessKey);
+    }
+
 }
