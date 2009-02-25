@@ -218,11 +218,11 @@ public class WindowTest2 extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "RegExp: function", "javax: undefined", "org: undefined", "com: undefined", "edu: undefined", "net: undefined",
-        "JavaAdapter: undefined", "JavaImporter: undefined", "Continuation: undefined" })
+    @Alerts({ "RegExp: function", "javax: undefined", "org: undefined", "com: undefined", "edu: undefined",
+        "net: undefined", "JavaAdapter: undefined", "JavaImporter: undefined", "Continuation: undefined" })
     public void rhino_lazilyNames() throws Exception {
-        final String[] properties = { "RegExp", "javax", "org", "com", "edu", "net",
-            "JavaAdapter", "JavaImporter", "Continuation" };
+        final String[] properties = {"RegExp", "javax", "org", "com", "edu", "net",
+            "JavaAdapter", "JavaImporter", "Continuation"};
         doTestRhinoLazilyNames(properties);
     }
 
@@ -234,7 +234,7 @@ public class WindowTest2 extends WebTestCase {
     @Alerts(FF = { "java: object", "getClass: function" },
             IE = { "java: undefined", "getClass: undefined" })
     public void rhino_lazilyNames2() throws Exception {
-        final String[] properties = { "java", "getClass" };
+        final String[] properties = {"java", "getClass"};
         doTestRhinoLazilyNames(properties);
     }
 
@@ -249,7 +249,7 @@ public class WindowTest2 extends WebTestCase {
             IE = { "Packages: undefined", "XML: undefined", "XMLList: undefined",
             "Namespace: undefined", "QName: undefined" })
     public void rhino_lazilyNames3() throws Exception {
-        final String[] properties = { "Packages", "XML", "XMLList", "Namespace", "QName" };
+        final String[] properties = {"Packages", "XML", "XMLList", "Namespace", "QName"};
         doTestRhinoLazilyNames(properties);
     }
 
