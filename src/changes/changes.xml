@@ -5,7 +5,7 @@
     </properties>
 
     <body>
-        <release version="2.5" date="?" description="Bugfixes, support all HTML elements">
+        <release version="2.5" date="?" description="Bugfixes, support all HTML elements and various JavaScript properties">
             <action type="update" dev="asashour" issue="2624738">
                 JavaScript: process false return value of handlers added by .attachEvent() or .addEventListener().
             </action>

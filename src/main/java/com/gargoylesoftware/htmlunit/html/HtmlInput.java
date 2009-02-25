@@ -403,7 +403,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
     /**
      * Sets the "readOnly" attribute.
      *
-     * @param isReadOnly <tt>true</tt> if this element is to be read only
+     * @param isReadOnly <tt>true</tt> if this element is read only
      */
     public void setReadOnly(final boolean isReadOnly) {
         if (isReadOnly) {

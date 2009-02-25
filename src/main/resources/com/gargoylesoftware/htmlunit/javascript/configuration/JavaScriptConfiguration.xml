@@ -1543,8 +1543,6 @@
 
     <class name="HTMLFormElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFormElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlForm">
-        <!-- NOT FINISHED -->
-
         <doclink
             url="http://msdn.microsoft.com/en-us/library/ms535249.aspx"
             descr="MSDN documentation"/>
@@ -1854,8 +1852,6 @@
 
     <class name="HTMLSelectElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSelectElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlSelect">
-        <!-- NOT FINISHED -->
-
         <property name="length" readable="true" writable="true"/>
         <property name="multiple" readable="true" writable="true"/>
         <property name="options" readable="true" writable="false"/>
@@ -2034,12 +2030,12 @@
 
     <class name="HTMLTextAreaElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTextAreaElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTextArea">
-        <!-- NOT FINISHED -->
         <property name="defaultValue" readable="true" writable="true">
             <doclink
                 url="http://msdn.microsoft.com/en-us/library/ms533718.aspx"
                 descr="MSDN documentation"/>
         </property>
+        <property name="readOnly" readable="true" writable="true"/>
         <property name="selectionEnd" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>
@@ -2343,7 +2339,6 @@
     </class>
 
     <class name="Range" classname="com.gargoylesoftware.htmlunit.javascript.host.Range" JSObject="true">
-        <!-- NOT FINISHED -->
         <property name="collapsed" readable="true" writable="false"/>
         <property name="commonAncestorContainer" readable="true" writable="false"/>
         <property name="endContainer" readable="true" writable="false"/>

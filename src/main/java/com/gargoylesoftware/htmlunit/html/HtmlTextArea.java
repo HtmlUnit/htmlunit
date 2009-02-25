@@ -505,4 +505,27 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
         }
         valueAtFocus_ = null;
     }
+
+    /**
+     * Sets the "readOnly" attribute.
+     *
+     * @param isReadOnly <tt>true</tt> if this element is read only
+     */
+    public void setReadOnly(final boolean isReadOnly) {
+        if (isReadOnly) {
+            setAttribute("readOnly", "readOnly");
+        }
+        else {
+            removeAttribute("readOnly");
+        }
+    }
+
+    /**
+     * Returns <tt>true</tt> if this element is read only.
+     * @return <tt>true</tt> if this element is read only
+     */
+    public boolean isReadOnly() {
+        return hasAttribute("readOnly");
+    }
+
 }
