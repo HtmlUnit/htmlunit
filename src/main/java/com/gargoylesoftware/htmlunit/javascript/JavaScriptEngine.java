@@ -152,6 +152,20 @@ public class JavaScriptEngine implements Serializable {
         final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(webClient.getBrowserVersion());
         context.initStandardObjects(window);
 
+        // remove some objects, that Rhino defines in top scope but that we don't want
+        final String[] undesirableWindowProps = {"javax", "org", "com", "edu", "net", "JavaAdapter",
+            "JavaImporter", "Continuation"};
+        for (final String property : undesirableWindowProps) {
+            window.delete(property);
+        }
+        if (webClient.getBrowserVersion().isIE()) {
+            final String[] undesirableWindowPropsIE = {"Packages", "java", "getClass", "XML", "XMLList",
+                "Namespace", "QName"};
+            for (final String property : undesirableWindowPropsIE) {
+                window.delete(property);
+            }
+        }
+
         // put custom object to be called as very last prototype to call the fallback getter (if any)
         final Scriptable fallbackCaller = new ScriptableObject() {
             private static final long serialVersionUID = -7124423159070941606L;

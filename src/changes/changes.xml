@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements and various JavaScript properties">
+            <action type="fix" dev="mguillem" issue="2636581">
+                JavaScript: remove objects created by Rhino in window scope like "com" that aren't available in browsers.
+            </action>
             <action type="update" dev="asashour" issue="2624738">
                 JavaScript: process false return value of handlers added by .attachEvent() or .addEventListener().
             </action>

@@ -18,6 +18,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -30,6 +31,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
@@ -205,6 +207,58 @@ public class WindowTest2 extends WebTestCase {
             + "  var data = window.btoa('Hello World!');\n"
             + "  alert(data);\n"
             + "  alert(atob(data));\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * In {@link ScriptRuntime}, Rhino defines a bunch of properties in the top scope (see lazilyNames).
+     * Not all make sense for HtmlUnit.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "RegExp: function", "javax: undefined", "org: undefined", "com: undefined", "edu: undefined", "net: undefined",
+        "JavaAdapter: undefined", "JavaImporter: undefined", "Continuation: undefined" })
+    public void rhino_lazilyNames() throws Exception {
+        final String[] properties = { "RegExp", "javax", "org", "com", "edu", "net",
+            "JavaAdapter", "JavaImporter", "Continuation" };
+        doTestRhinoLazilyNames(properties);
+    }
+
+    /**
+     * The same as in {@link #rhino_lazilyNames()} but for properties with different expectations for IE and FF.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "java: object", "getClass: function" },
+            IE = { "java: undefined", "getClass: undefined" })
+    public void rhino_lazilyNames2() throws Exception {
+        final String[] properties = { "java", "getClass" };
+        doTestRhinoLazilyNames(properties);
+    }
+
+    /**
+     * The same as in {@link #rhino_lazilyNames()} but for properties where it doesn't work yet.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented(Browser.FF)
+    @Alerts(FF = { "Packages: object", "XML: function", "XMLList: function",
+            "Namespace: function", "QName: function" },
+            IE = { "Packages: undefined", "XML: undefined", "XMLList: undefined",
+            "Namespace: undefined", "QName: undefined" })
+    public void rhino_lazilyNames3() throws Exception {
+        final String[] properties = { "Packages", "XML", "XMLList", "Namespace", "QName" };
+        doTestRhinoLazilyNames(properties);
+    }
+
+    private void doTestRhinoLazilyNames(final String[] properties) throws Exception {
+        final String html = "<html><head></head><body>\n"
+            + "<script>\n"
+            + "  var props = ['" + StringUtils.join(properties, "', '") + "'];\n"
+            + "  for (var i=0; i<props.length; ++i)\n"
+            + "    alert(props[i] + ': ' + typeof(window[props[i]]));\n"
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts(html);
