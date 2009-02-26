@@ -18,11 +18,8 @@ import java.lang.ref.WeakReference;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.mozilla.javascript.Function;
-import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -32,7 +29,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Daniel Gredler
  * @see MemoryLeakTest
  */
-public class JavaScriptExecutionJob extends JavaScriptJob {
+public abstract class JavaScriptExecutionJob extends JavaScriptJob {
 
     /** Logging support. */
     private static final Log LOG = LogFactory.getLog(JavaScriptExecutionJob.class);
@@ -43,36 +40,14 @@ public class JavaScriptExecutionJob extends JavaScriptJob {
     /** The window to which this job belongs (weakly referenced, so as not to leak memory). */
     private final WeakReference<WebWindow> window_;
 
-    /** The JavaScript code to execute, if it is in string format. */
-    private final String script_;
-
-    /** The JavaScript code to execute, if it is in function format. */
-    private final Function function_;
-
     /**
      * Creates a new JavaScript execution job, where the JavaScript code to execute is a string.
      * @param label the label for the job
      * @param window the window to which the job belongs
-     * @param script the JavaScript code to execute
      */
-    public JavaScriptExecutionJob(final String label, final WebWindow window, final String script) {
+    public JavaScriptExecutionJob(final String label, final WebWindow window) {
         label_ = label;
         window_ = new WeakReference<WebWindow>(window);
-        script_ = script;
-        function_ = null;
-    }
-
-    /**
-     * Creates a new JavaScript execution job, where the JavaScript code to execute is a function.
-     * @param label the label for the job
-     * @param window the window to which the job belongs
-     * @param function the JavaScript code to execute
-     */
-    public JavaScriptExecutionJob(final String label, final WebWindow window, final Function function) {
-        label_ = label;
-        window_ = new WeakReference<WebWindow>(window);
-        script_ = null;
-        function_ = function;
     }
 
     /** {@inheritDoc} */
@@ -94,15 +69,7 @@ public class JavaScriptExecutionJob extends JavaScriptJob {
                 LOG.debug("The page that originated this job doesn't exist anymore. Execution cancelled.");
                 return;
             }
-
-            if (function_ == null) {
-                page.executeJavaScriptIfPossible(script_, "JavaScriptExecutionJob", 1);
-            }
-            else {
-                final HtmlElement doc = page.getDocumentElement();
-                final Scriptable scriptable = (Scriptable) w.getScriptObject();
-                page.executeJavaScriptFunctionIfPossible(function_, scriptable, new Object[0], doc);
-            }
+            runJavaScript(page);
         }
         finally {
             if (LOG.isDebugEnabled()) {
@@ -116,5 +83,12 @@ public class JavaScriptExecutionJob extends JavaScriptJob {
     public String toString() {
         return "JavaScript Execution Job " + getId() + ": " + label_;
     }
+
+    /**
+     * Run the JavaScript from the concrete class.
+     *
+     * @param page The {@link HtmlPage} that owns the script.
+     */
+    protected abstract void runJavaScript(final HtmlPage page);
 
 }

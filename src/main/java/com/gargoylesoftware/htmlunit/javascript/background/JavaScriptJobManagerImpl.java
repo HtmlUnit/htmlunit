@@ -130,13 +130,13 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     /** {@inheritDoc} */
     public int addJob(final String code, final int delay, final String description, final Page page) {
-        final JavaScriptExecutionJob job = new JavaScriptExecutionJob(description, getWindow(), code);
+        final JavaScriptExecutionJob job = new JavaScriptStringJob(description, getWindow(), code);
         return addJob(job, delay, page);
     }
 
     /** {@inheritDoc} */
     public int addJob(final Function code, final int delay, final String description, final Page page) {
-        final JavaScriptExecutionJob job = new JavaScriptExecutionJob(description, getWindow(), code);
+        final JavaScriptExecutionJob job = new JavaScriptFunctionJob(description, getWindow(), code);
         return addJob(job, delay, page);
     }
 
@@ -178,13 +178,13 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     /** {@inheritDoc} */
     public int addRecurringJob(final String code, final int period, final String description, final Page page) {
-        final JavaScriptExecutionJob job = new JavaScriptExecutionJob(description, getWindow(), code);
+        final JavaScriptExecutionJob job = new JavaScriptStringJob(description, getWindow(), code);
         return addRecurringJob(job, period, page);
     }
 
     /** {@inheritDoc} */
     public int addRecurringJob(final Function code, final int period, final String description, final Page page) {
-        final JavaScriptExecutionJob job = new JavaScriptExecutionJob(description, getWindow(), code);
+        final JavaScriptExecutionJob job = new JavaScriptFunctionJob(description, getWindow(), code);
         return addRecurringJob(job, period, page);
     }
 
