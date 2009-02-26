@@ -233,7 +233,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
 
         startTimedTest();
         page.getWebClient().waitForJobsWithinDelayToFinish(20000);
-        assertMaxTestRunTime(400);
+        assertMaxTestRunTime(1000);
         assertEquals(0, jobManager.getJobCount());
 
         final String[] expectedAlerts = {"work1", "work2"};
