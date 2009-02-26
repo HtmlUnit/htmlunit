@@ -140,7 +140,9 @@ public abstract class WebWindowImpl implements WebWindow {
     void destroyChildren() {
         getJobManager().stopAllJobsAsap();
         for (final ListIterator<WebWindowImpl> iter = childWindows_.listIterator(); iter.hasNext();) {
-            iter.next().destroyChildren();
+            final WebWindowImpl window = iter.next();
+            window.destroyChildren();
+            window.getJobManager().shutdown();
             iter.remove();
         }
     }

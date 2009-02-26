@@ -123,4 +123,9 @@ public interface JavaScriptJobManager {
      * @return <tt>true</tt> if all threads expired within the specified time
      */
     boolean waitForAllJobsToFinish(final long maxWaitMillis);
+    
+    /**
+     * Kill this job manager.
+     */
+    void shutdown();
 }

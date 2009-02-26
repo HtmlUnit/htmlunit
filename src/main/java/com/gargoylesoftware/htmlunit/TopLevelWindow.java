@@ -98,6 +98,7 @@ public class TopLevelWindow extends WebWindowImpl implements Serializable  {
      */
     public void close() {
         destroyChildren();
+        getJobManager().shutdown();
         getWebClient().deregisterWebWindow(this);
     }
 }

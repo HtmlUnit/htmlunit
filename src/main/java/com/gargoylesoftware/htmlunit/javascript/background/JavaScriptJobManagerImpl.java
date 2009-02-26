@@ -18,6 +18,7 @@ import static java.lang.Thread.currentThread;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.Future;
@@ -273,4 +274,13 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         }
     }
 
+    /** {@inheritDoc} */
+    public synchronized void shutdown() {
+        executor_.purge();
+        final List<Runnable> jobsStillRunning = executor_.shutdownNow();
+        futures_.clear(); // This is dangerous
+        if (jobsStillRunning.size() > 0) {
+            LOG.debug("Jobs still running after shutdown: " + jobsStillRunning.size());
+        }
+    }
 }
