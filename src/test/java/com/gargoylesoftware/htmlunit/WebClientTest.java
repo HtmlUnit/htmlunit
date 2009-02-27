@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 package com.gargoylesoftware.htmlunit;
+
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
@@ -1429,6 +1430,37 @@ public class WebClientTest extends WebServerTestCase {
     }
 
     /**
+     * Verifies that script preprocessing is applied to eval()'ed scripts (bug 2630555).
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testScriptPreProcessor_Eval() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+
+        final String html = "<html><body><script>eval('aX'+'ert(\"abc\")');</script></body></html>";
+
+        final WebClient client = new WebClient();
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setDefaultResponse(html);
+        client.setWebConnection(conn);
+
+        client.setScriptPreProcessor(new ScriptPreProcessor() {
+            public String preProcess(final HtmlPage p, final String src, final String srcName, final HtmlElement e) {
+                return src.replaceAll("aXert", "alert");
+            }
+        });
+
+        final List<String> alerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(alerts));
+        client.getPage(URL_FIRST);
+
+        assertEquals(1, alerts.size());
+        assertEquals("abc", alerts.get(0));
+    }
+
+    /**
      * Apparently if the browsers receive a charset that they don't understand, they ignore
      * it and assume ISO-8895-1. Ensure we do the same.
      * @throws Exception if the test fails
@@ -2086,7 +2118,7 @@ public class WebClientTest extends WebServerTestCase {
 
         final WebWindow secondWindow = webClient.openWindow(null, "second window");
         webClient.setCurrentWindow(secondWindow);
-        final HtmlPage basicPage = webClient.getPage(URL_SECOND);
+        webClient.getPage(URL_SECOND);
 
         webClient.setCurrentWindow(firstWindow);
 
