@@ -45,6 +45,7 @@ public class JavaScriptStringJob extends JavaScriptExecutionJob {
     }
 
     /** {@inheritDoc} */
+    @Override
     protected void runJavaScript(final HtmlPage page) {
         if (script_ == null) {
             return;

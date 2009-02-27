@@ -381,6 +381,8 @@ public class XMLHttpRequest extends SimpleScriptable {
                 public void run() {
                     cf.call(action);
                 }
+
+                @Override
                 public String toString() {
                     return "XMLHttpRequest Job " + getId();
                 }

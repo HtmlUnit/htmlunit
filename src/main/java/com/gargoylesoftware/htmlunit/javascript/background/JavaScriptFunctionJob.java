@@ -48,6 +48,7 @@ public class JavaScriptFunctionJob extends JavaScriptExecutionJob {
     }
 
     /** {@inheritDoc} */
+    @Override
     protected void runJavaScript(final HtmlPage page) {
         final HtmlElement doc = page.getDocumentElement();
         final Scriptable scriptable = (Scriptable) page.getEnclosingWindow().getScriptObject();
