@@ -136,25 +136,25 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
      * Escapes all invalid back references (<tt>$n</tt>, where <tt>n</tt> is the index of the back reference),
      * because invalid back references in JavaScript regex are treated as if they were escaped.
      */
-    private String escapeInvalidBackReferences(String regex, String replacement) {
-        StringBuilder ret = new StringBuilder();
+    private String escapeInvalidBackReferences(final String regex, final String replacement) {
+        final StringBuilder ret = new StringBuilder();
 
-        Matcher m = Pattern.compile(regex).matcher(replacement);
-        int groups = m.groupCount();
+        final Matcher m = Pattern.compile(regex).matcher(replacement);
+        final int groups = m.groupCount();
 
         int prevIndex = 0;
-        char[] rep = replacement.toCharArray();
+        final char[] rep = replacement.toCharArray();
         for (int i = ArrayUtils.indexOf(rep, '$'); i != -1; i = ArrayUtils.indexOf(rep, '$', i + 1)) {
             ret.append(rep, prevIndex, i - prevIndex);
-            boolean escaped = (i != 0 && rep[i - 1] == '\\');
+            final boolean escaped = (i != 0 && rep[i - 1] == '\\');
             if (!escaped) {
-                StringBuilder sb = new StringBuilder(4);
+                final StringBuilder sb = new StringBuilder(2);
                 for (int j = i + 1; j < rep.length && Character.isDigit(rep[j]); j++) {
                     sb.append(rep[j]);
                 }
-                boolean valid;
+                final boolean valid;
                 if (sb.length() > 0) {
-                    int num = Integer.parseInt(sb.toString());
+                    final int num = Integer.parseInt(sb.toString());
                     valid = (num > 0 && num <= groups);
                 }
                 else {
