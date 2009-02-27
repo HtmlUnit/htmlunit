@@ -1246,4 +1246,73 @@ public class HtmlFormTest extends WebTestCase {
 
         assertEquals(2, form.getRadioButtonsByName("radio1").size());
     }
+
+    /**
+     * Regression test for bug 2644619 (form lost children breakage when there is more than one
+     * form element with the same name).
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void malformedHtml_formAndTables() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String html
+            = "<html><body>\n"
+            + "\n"
+            + "<table id='table1'>\n"
+            + "<tr>\n"
+            + "<td>this is table1</td>\n"
+            + "\n"
+            + "<form name='cb_form' method='post' onSubmit='return formsubmit(\"submit\");'>\n"
+            + "<input type='hidden' name='ls' value='0'>\n"
+            + "<input type='hidden' name='seller' value='OTTO'>\n"
+            + "<input type='hidden' name='getLA' value='true'>\n"
+            + "<input type='hidden' name='li_count' value='10'>\n"
+            + "<input type='hidden' name='EmailTo' value=''>\n"
+            + "\n"
+            + "</tr>\n"
+            + "</table>\n"
+            + "\n"
+            + "<table id='table2'>\n"
+            + "\n"
+            + "<tr>\n"
+            + "<td><input type='text' value='' name='OrderNr'></td>\n"
+            + "<td><input type='text' value='' name='Size'></td>\n"
+            + "<td><input type='text' value='' name='Quantity'></td>\n"
+            + "</tr>\n"
+            + "\n"
+            + "<tr>\n"
+            + "<td><input type='text' value='' name='OrderNr'></td>\n"
+            + "<td><input type='text' value='' name='Size'></td>\n"
+            + "<td><input type='text' value='' name='Quantity'></td>\n"
+            + "</tr>\n"
+            + "\n"
+            + "<tr>\n"
+            + "<td><input type='text' value='' name='OrderNr'></td>\n"
+            + "<td><input type='text' value='' name='Size'></td>\n"
+            + "<td><input type='text' value='' name='Quantity'></td>\n"
+            + "</tr>\n"
+            + "\n"
+            + "</form>\n"
+            + "</table>\n"
+            + "\n"
+            + "<script>\n"
+            + "var i = 0;\n"
+            + "while (document.cb_form.Quantity[i]) {\n"
+            + "document.cb_form.Quantity[i].value = document.cb_form.Quantity[i].value.replace(/[^0-9]/g,'');\n"
+            + "if ((document.cb_form.Quantity[i].value.length == 0)) {document.cb_form.Quantity[i].value='1';}\n"
+            + "i++;\n"
+            + "}\n"
+            + "</script>\n"
+            + "\n"
+            + "</body></html>";
+        final HtmlPage page = loadPage(html);
+        final List<HtmlElement> quantities = page.getElementsByName("Quantity");
+        assertEquals(3, quantities.size());
+        for (final HtmlElement quantity : quantities) {
+            assertEquals("1", quantity.getAttribute("value"));
+        }
+    }
+
 }
