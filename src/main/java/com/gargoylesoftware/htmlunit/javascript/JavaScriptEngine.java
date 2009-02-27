@@ -236,7 +236,7 @@ public class JavaScriptEngine implements Serializable {
             }
         }
 
-        // eval hack (cf unit tests testEvalScopeOtherWindow and testEvalScopeLocal
+        // eval hack (cf unit tests testEvalScopeOtherWindow and testEvalScopeLocal)
         final Class< ? >[] evalFnTypes = {String.class};
         final Member evalFn = Window.class.getMethod("custom_eval", evalFnTypes);
         final FunctionObject jsCustomEval = new FunctionObject("eval", evalFn, window);
