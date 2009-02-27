@@ -38,7 +38,7 @@ public class EnumeratorTest extends WebTestCase {
     @Test
     @Browsers(Browser.IE)
     @Alerts({ "false", "[object]", "undefined", "undefined", "true" })
-    public void test() throws Exception {
+    public void basicEnumeratorTest() throws Exception {
         final String html
             = "<html><head><script>\n"
             + "function test() {\n"
@@ -54,4 +54,25 @@ public class EnumeratorTest extends WebTestCase {
             + "</body></html>";
         loadPageWithAlerts(html);
     }
+
+    /**
+     * Verifies that the enumerator constructor can take a form argument and then enumerate over the
+     * form's input elements (bug 2645480).
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.IE)
+    @Alerts({ "f t1 t2", "t1", "t2" })
+    public void formEnumeratorTest() throws Exception {
+        final String html
+            = "<html><body><form id='f'><input type='text' name='t1' id='t1' />\n"
+            + "<input type='text' name='t2' id='t2' /><div id='d'>d</div></form><script>\n"
+            + "var f = document.forms.f, t1 = document.all.t1, t2 = document.all.t2;\n"
+            + "alert(f.id + ' ' + t1.id + ' ' + t2.id);\n"
+            + "var e = new Enumerator(f);\n"
+            + "for( ; !e.atEnd(); e.moveNext()) alert(e.item().id);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }

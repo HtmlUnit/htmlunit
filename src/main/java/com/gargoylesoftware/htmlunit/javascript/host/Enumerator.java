@@ -42,10 +42,18 @@ public class Enumerator extends SimpleScriptable {
 
     /**
      * JavaScript constructor.
-     * @param collection the collection object
+     * @param o the object to enumerate over
      */
-    public void jsConstructor(final HTMLCollection collection) {
-        collection_ = collection;
+    public void jsConstructor(final Object o) {
+        if (o instanceof HTMLCollection) {
+            collection_ = (HTMLCollection) o;
+        }
+        else if (o instanceof HTMLFormElement) {
+            collection_ = ((HTMLFormElement) o).jsxGet_elements();
+        }
+        else {
+            throw new IllegalArgumentException(String.valueOf(o));
+        }
     }
 
     /**
