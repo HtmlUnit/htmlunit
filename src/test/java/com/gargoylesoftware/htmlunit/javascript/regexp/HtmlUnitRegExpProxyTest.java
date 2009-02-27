@@ -598,4 +598,31 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
         loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Tests basic usage of back references in a <tt>string.replace(...)</tt> invocation.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void replace_backReferences() throws Exception {
+        final String html = "<script>alert('afoob'.replace(/(foo)/g, '$1d$0$7'));</script>";
+        final String[] expected = {"afood$0$7b"};
+        final List<String> actual = new ArrayList<String>();
+        loadPage(html, actual);
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Regression test for bug 2638813 (dollar signs with no index are not back references).
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void replace_backReferences_2() throws Exception {
+        final String html = "<script>alert('I.want.these.periods.to.be.$s'.replace(/\\./g, '$'));</script>";
+        final String[] expected = {"I$want$these$periods$to$be$$s"};
+        final List<String> actual = new ArrayList<String>();
+        loadPage(html, actual);
+        assertEquals(expected, actual);
+    }
+
 }

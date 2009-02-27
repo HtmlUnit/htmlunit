@@ -20,6 +20,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -59,18 +60,22 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         // in a first time just improve replacement with a String (not a function)
         if (RA_REPLACE == actionType && args.length == 2 && (args[1] instanceof String)) {
             final String thisString = Context.toString(thisObj);
-            final String replacement = ((String) args[1]).replaceAll("\\\\", "\\\\\\\\");
+            String replacement = (String) args[1];
+            replacement = replacement.replaceAll("\\\\", "\\\\\\\\");
             final Object arg0 = args[0];
             if (arg0 instanceof String) {
-                // arg0 should not be interpreted as a RegExp
+                // arg0 should *not* be interpreted as a RegExp
                 return StringUtils.replaceOnce(thisString, (String) arg0, replacement);
             }
             else if (arg0 instanceof NativeRegExp) {
                 try {
                     final NativeRegExp regexp = (NativeRegExp) arg0;
                     final RegExpData reData = new RegExpData(regexp);
-                    final Pattern pattern = Pattern.compile(reData.getJavaPattern(), reData.getJavaFlags());
+                    final String regex = reData.getJavaPattern();
+                    final int flags = reData.getJavaFlags();
+                    final Pattern pattern = Pattern.compile(regex, flags);
                     final Matcher matcher = pattern.matcher(thisString);
+                    replacement = escapeInvalidBackReferences(regex, replacement);
                     if (reData.hasFlag('g')) {
                         return matcher.replaceAll(replacement);
                     }
@@ -125,6 +130,45 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         }
 
         return wrappedAction(cx, scope, thisObj, args, actionType);
+    }
+
+    /**
+     * Escapes all invalid back references (<tt>$n</tt>, where <tt>n</tt> is the index of the back reference),
+     * because invalid back references in JavaScript regex are treated as if they were escaped.
+     */
+    private String escapeInvalidBackReferences(String regex, String replacement) {
+        StringBuilder ret = new StringBuilder();
+
+        Matcher m = Pattern.compile(regex).matcher(replacement);
+        int groups = m.groupCount();
+
+        int prevIndex = 0;
+        char[] rep = replacement.toCharArray();
+        for (int i = ArrayUtils.indexOf(rep, '$'); i != -1; i = ArrayUtils.indexOf(rep, '$', i + 1)) {
+            ret.append(rep, prevIndex, i - prevIndex);
+            boolean escaped = (i != 0 && rep[i - 1] == '\\');
+            if (!escaped) {
+                StringBuilder sb = new StringBuilder(4);
+                for (int j = i + 1; j < rep.length && Character.isDigit(rep[j]); j++) {
+                    sb.append(rep[j]);
+                }
+                boolean valid;
+                if (sb.length() > 0) {
+                    int num = Integer.parseInt(sb.toString());
+                    valid = (num > 0 && num <= groups);
+                }
+                else {
+                    valid = false;
+                }
+                if (!valid) {
+                    ret.append('\\');
+                }
+            }
+            prevIndex = i;
+        }
+        ret.append(rep, prevIndex, rep.length - prevIndex);
+
+        return ret.toString();
     }
 
     /**
