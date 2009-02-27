@@ -605,7 +605,13 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Closes this window.
      */
     public void jsxFunction_close() {
-        getWebWindow().getWebClient().deregisterWebWindow(getWebWindow());
+        final WebWindow webWindow = getWebWindow();
+        if (webWindow instanceof TopLevelWindow) {
+            ((TopLevelWindow) webWindow).close();
+        }
+        else {
+            webWindow.getWebClient().deregisterWebWindow(webWindow);
+        }
     }
 
     /**
