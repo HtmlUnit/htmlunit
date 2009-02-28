@@ -5,7 +5,7 @@
     </properties>
 
     <body>
-        <release version="2.5" date="?" description="Bugfixes, support all HTML elements and various JavaScript properties">
+        <release version="2.5" date="?" description="Bugfixes, MooTools support, support all HTML elements and various JavaScript properties">
             <action type="add" dev="sdanig">
                 JavaScript: add support for element.clearAttributes() and element.mergeAttributes() (IE only).
             </action>
