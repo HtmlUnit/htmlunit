@@ -1254,9 +1254,6 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void malformedHtml_formAndTables() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String html
             = "<html><body>\n"
             + "\n"

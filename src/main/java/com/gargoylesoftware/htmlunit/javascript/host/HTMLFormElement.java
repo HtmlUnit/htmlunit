@@ -275,8 +275,10 @@ public class HTMLFormElement extends HTMLElement {
         // Approach: Try to match the string to a name or ID, accepting only inputs (not type=image),
         // buttons, selects and textareas that are in this form. We *don't* include img elements, which will
         // only be searched if the first search fails.
+        // See IsDescendantOfContextualFormFunction for info on the "is-descendant-of-contextual-form()" function.
         HTMLCollection collection = new HTMLCollection(this);
-        final String xpath = ".//*[(@name = '" + name + "' or @id = '" + name + "')"
+        final String xpath = "//*[is-descendant-of-contextual-form()"
+            + " and (@name = '" + name + "' or @id = '" + name + "')"
             + " and ((name() = 'input' and translate(@type, 'IMAGE', 'image') != 'image') or name() = 'button'"
             + " or name() = 'select' or name() = 'textarea')]";
         collection.init(form, xpath);
@@ -284,7 +286,8 @@ public class HTMLFormElement extends HTMLElement {
         // If no form fields are found, IE and Firefox are able to find img elements by ID or name.
         if (length == 0) {
             collection = new HTMLCollection(this);
-            final String xpath2 = ".//*[(@name = '" + name + "' or @id = '" + name + "')"
+            final String xpath2 = "//*[is-descendant-of-contextual-form()"
+                + "(@name = '" + name + "' or @id = '" + name + "')"
                 + " and name() = 'img']";
             collection.init(form, xpath2);
         }
