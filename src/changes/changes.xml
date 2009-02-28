@@ -7,7 +7,7 @@
     <body>
         <release version="2.5" date="?" description="Bugfixes, support all HTML elements and various JavaScript properties">
             <action type="add" dev="sdanig">
-                JavaScript: add support for element.clearAttributes() (IE only).
+                JavaScript: add support for element.clearAttributes() and element.mergeAttributes() (IE only).
             </action>
             <action type="fix" dev="sdanig" issue="2638813">
                 JavaScript: handle invalid back references in string.replace(...) as if they were escaped.

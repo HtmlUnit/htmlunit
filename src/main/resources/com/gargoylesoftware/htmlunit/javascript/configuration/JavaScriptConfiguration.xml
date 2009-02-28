@@ -1485,6 +1485,9 @@
                 descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer"/>
         </function>
+        <function name="mergeAttributes">
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
         <function name="onhelp" notImplemented="true">
             <browser name="Microsoft Internet Explorer"/>
         </function>

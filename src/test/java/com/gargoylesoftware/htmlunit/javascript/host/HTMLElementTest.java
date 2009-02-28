@@ -2742,4 +2742,50 @@ public class HTMLElementTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.IE)
+    public void mergeAttributes() throws Exception {
+        mergeAttributes("i2", "false,false,false,false,false,true,true", "i", "",
+            "false,false,false,false,false,false,false", "i", "");
+        mergeAttributes("i2, true", "false,false,false,false,false,true,true", "i", "",
+            "false,false,false,false,false,false,false", "i", "");
+        mergeAttributes("i2, false", "false,false,false,false,false,true,true", "i", "",
+            "false,false,false,false,false,false,false", "i2", "i2");
+    }
+
+    private void mergeAttributes(final String params, final String... expectedAlerts) throws Exception {
+        final String html
+            = "<input type='text' id='i' />\n"
+            + "<input type='text' id='i2' name='i2' style='color:red' onclick='alert(1)' custom1='a' />\n"
+            + "<script>\n"
+            + "function u(o) { return typeof o == 'undefined'; }\n"
+            + "var i = document.getElementById('i');\n"
+            + "var i2 = document.getElementById('i2');\n"
+            + "i2.custom2 = 'b';\n"
+            + "alert([u(i.type), u(i.id), u(i.name), u(i.style), u(i.onclick),"
+            + "       u(i.custom1), u(i.custom2)].join(','));\n"
+            + "alert(i.id);\n"
+            + "alert(i.name);\n"
+            + "i.mergeAttributes(" + params + ");\n"
+            + "alert([u(i.type), u(i.id), u(i.name), u(i.style), u(i.onclick),"
+            + "       u(i.custom1), u(i.custom2)].join(','));\n"
+            + "alert(i.id);\n"
+            + "alert(i.name);\n"
+            + "</script>";
+
+        final WebClient client = getWebClient();
+        final List<String> actual = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(actual));
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_GARGOYLE, html);
+        client.setWebConnection(conn);
+
+        client.getPage(URL_GARGOYLE);
+        assertEquals(expectedAlerts, actual);
+    }
+
 }

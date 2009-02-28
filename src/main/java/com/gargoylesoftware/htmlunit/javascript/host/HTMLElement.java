@@ -390,6 +390,46 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
+     * An IE-only method which copies all custom attributes from the specified source element
+     * to this element.
+     * @param source the source element from which to copy the custom attributes
+     * @param preserveIdentity if <tt>false</tt>, the <tt>name</tt> and <tt>id</tt> attributes are not copied
+     */
+    public void jsxFunction_mergeAttributes(final HTMLElement source, final Object preserveIdentity) {
+        final HtmlElement src = source.getDomNodeOrDie();
+        final HtmlElement target = getDomNodeOrDie();
+
+        // Merge custom attributes defined directly in HTML.
+        for (final Map.Entry<String, DomAttr> attribute : src.getAttributesMap().entrySet()) {
+            // Quick hack to figure out what's a "custom" attribute, and what isn't.
+            // May not be 100% correct.
+            final String attributeName = attribute.getKey();
+            if (!ScriptableObject.hasProperty(getPrototype(), attributeName)) {
+                final String attributeValue = attribute.getValue().getNodeValue();
+                target.setAttribute(attributeName, attributeValue);
+            }
+        }
+
+        // Merge custom attributes defined at runtime via JavaScript.
+        for (final Object id : source.getAllIds()) {
+            if (id instanceof Integer) {
+                final Integer i = (Integer) id;
+                put(i, this, source.get(i, source));
+            }
+            else if (id instanceof String) {
+                final String s = (String) id;
+                put(s, this, source.get(s, source));
+            }
+        }
+
+        // Merge ID and name if we aren't preserving identity.
+        if (preserveIdentity instanceof Boolean && ((Boolean) preserveIdentity) == false) {
+            target.setId(src.getId());
+            target.setAttribute("name", src.getAttribute("name"));
+        }
+    }
+
+    /**
      * Gets the specified attribute.
      * @param namespaceURI the namespace URI
      * @param localName the local name of the attribute to look for
