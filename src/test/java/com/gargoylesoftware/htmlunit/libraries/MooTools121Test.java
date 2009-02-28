@@ -48,7 +48,6 @@ public class MooTools121Test extends WebTestCase {
     @Test
     @SuppressWarnings("unchecked")
     public void mooTools() throws Exception {
-
         final String resource = "mootools/1.2.1/Specs/index.html";
         final URL url = getClass().getClassLoader().getResource(resource);
         assertNotNull(url);
