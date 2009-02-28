@@ -352,7 +352,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
 
         // See if there are any elements in the element array with the specified name.
         final HTMLCollection array = new HTMLCollection(this);
-        final String newCondition = "@name = '" + name + "'";
+        final String newCondition = "@name = '" + name.replaceAll("\\$", "\\\\\\$") + "'";
         final String xpathExpr;
         if (xpath_.endsWith("]")) {
             xpathExpr = xpath_.replaceAll("\\[([^\\]]*)\\]$", "[($1) and " + newCondition + "]");

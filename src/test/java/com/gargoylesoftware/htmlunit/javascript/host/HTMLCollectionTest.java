@@ -285,4 +285,23 @@ public class HTMLCollectionTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * Verifies that dollar signs don't cause exceptions in {@link HTMLCollection} (which uses Java
+     * regex internally). Found via the MooTools unit tests.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "[object]", "undefined" }, FF = { "[object HTMLHeadingElement]", "undefined" })
+    public void getElementWithDollarSign() throws Exception {
+        final String html
+            = "<h3 id='$h'>h</h3><script>\n"
+            + "var hs = document.getElementsByTagName('h3');\n"
+            + "alert(hs['$h']);\n"
+            + "alert(hs['$n']);\n"
+            + "</script>";
+        loadPageWithAlerts(html);
+    }
+
 }
