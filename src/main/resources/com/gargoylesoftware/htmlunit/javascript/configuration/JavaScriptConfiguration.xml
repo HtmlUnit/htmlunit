@@ -1417,10 +1417,10 @@
             <browser name="Microsoft Internet Explorer"/>
         </function>
         <function name="blur"/>
-        <function name="click">
+        <function name="clearAttributes">
             <browser name="Microsoft Internet Explorer"/>
         </function>
-        <function name="clearAttributes">
+        <function name="click">
             <browser name="Microsoft Internet Explorer"/>
         </function>
         <function name="contains">
