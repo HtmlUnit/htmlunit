@@ -368,4 +368,19 @@ public class HTMLDocumentTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * Verifies that we can store document methods and use them from a variable (IE only).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.IE)
+    @Alerts(IE = { "d", "1" })
+    public void documentMethodsWithoutDocument() throws Exception {
+        final String html
+            = "<div id='d' name='d'>d</div>\n"
+            + "<script>var i = document.getElementById; alert(i('d').id);</script>\n"
+            + "<script>var n = document.getElementsByName; alert(n('d').length);</script>";
+        loadPageWithAlerts(html);
+    }
+
 }

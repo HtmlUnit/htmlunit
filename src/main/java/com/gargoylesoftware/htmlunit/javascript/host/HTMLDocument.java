@@ -184,6 +184,61 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DomNode getDomNodeOrDie() throws IllegalStateException {
+        try {
+            return super.getDomNodeOrDie();
+        }
+        catch (final IllegalStateException e) {
+            final DomNode node = getDomNodeOrNullFromRealDocument();
+            if (node != null) {
+                return node;
+            }
+            throw e;
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DomNode getDomNodeOrNull() {
+        DomNode node = super.getDomNodeOrNull();
+        if (node == null) {
+            node = getDomNodeOrNullFromRealDocument();
+        }
+        return node;
+    }
+
+    /**
+     * Document functions invoked on the window end up executing on the document prototype -- and
+     * this is supposed to work when we're emulating IE! So when {@link #getDomNodeOrDie()} or
+     * {@link #getDomNodeOrNull()} are invoked on the document prototype (which would usually fail),
+     * we need to actually return the real document's DOM node so that other functions which rely
+     * on these two functions work. See HTMLDocumentTest#documentMethodsWithoutDocument() for sample
+     * JavaScript code.
+     *
+     * @return the real document's DOM node, or <tt>null</tt> if we're not emulating IE
+     */
+    private DomNode getDomNodeOrNullFromRealDocument() {
+        DomNode node = null;
+        final boolean ie = getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE();
+        if (ie) {
+            final Scriptable scope = getParentScope();
+            if (scope instanceof Window) {
+                final Window w = (Window) scope;
+                final HTMLDocument realDocument = w.jsxGet_document();
+                if (realDocument != this) {
+                    node = realDocument.getDomNodeOrDie();
+                }
+            }
+        }
+        return node;
+    }
+
+    /**
      * Returns the HTML page that this document is modeling.
      * @return the HTML page that this document is modeling
      */
