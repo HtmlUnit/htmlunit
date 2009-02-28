@@ -19,6 +19,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -35,6 +36,7 @@ import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.ScriptableObject;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -355,6 +357,36 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
 
         return attributeName;
+    }
+
+    /**
+     * An IE-only method which clears all custom attributes.
+     */
+    public void jsxFunction_clearAttributes() {
+        final HtmlElement node = getDomNodeOrDie();
+
+        // Remove custom attributes defined directly in HTML.
+        final List<String> removals = new ArrayList<String>();
+        for (final String attributeName : node.getAttributesMap().keySet()) {
+            // Quick hack to figure out what's a "custom" attribute, and what isn't.
+            // May not be 100% correct.
+            if (!ScriptableObject.hasProperty(getPrototype(), attributeName)) {
+                removals.add(attributeName);
+            }
+        }
+        for (final String attributeName : removals) {
+            node.removeAttribute(attributeName);
+        }
+
+        // Remove custom attributes defined at runtime via JavaScript.
+        for (final Object id : this.getAllIds()) {
+            if (id instanceof Integer) {
+                delete((Integer) id);
+            }
+            else if (id instanceof String) {
+                delete((String) id);
+            }
+        }
     }
 
     /**

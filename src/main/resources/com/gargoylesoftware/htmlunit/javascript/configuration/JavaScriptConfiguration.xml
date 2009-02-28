@@ -1420,6 +1420,9 @@
         <function name="click">
             <browser name="Microsoft Internet Explorer"/>
         </function>
+        <function name="clearAttributes">
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
         <function name="contains">
             <browser name="Microsoft Internet Explorer"/>
         </function>

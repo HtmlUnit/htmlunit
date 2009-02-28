@@ -2720,4 +2720,26 @@ public class HTMLElementTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.IE)
+    @Alerts(IE = { "false,false,false,false,false,false,false", "false,false,false,false,false,true,true" })
+    public void clearAttributes() throws Exception {
+        final String html
+            = "<input type='text' id='i' name='i' style='color:red' onclick='alert(1)' custom1='a' /><script>\n"
+            + "function u(o) { return typeof o == 'undefined'; }\n"
+            + "var i = document.getElementById('i');\n"
+            + "i.custom2 = 'b';\n"
+            + "alert([u(i.type), u(i.id), u(i.name), u(i.style), u(i.onclick),"
+            + "       u(i.custom1), u(i.custom2)].join(','));\n"
+            + "i.clearAttributes();\n"
+            + "alert([u(i.type), u(i.id), u(i.name), u(i.style), u(i.onclick),"
+            + "       u(i.custom1), u(i.custom2)].join(','));\n"
+            + "</script>";
+        loadPageWithAlerts(html);
+    }
+
 }
