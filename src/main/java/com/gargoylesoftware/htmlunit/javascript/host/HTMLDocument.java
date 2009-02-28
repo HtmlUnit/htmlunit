@@ -217,8 +217,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * this is supposed to work when we're emulating IE! So when {@link #getDomNodeOrDie()} or
      * {@link #getDomNodeOrNull()} are invoked on the document prototype (which would usually fail),
      * we need to actually return the real document's DOM node so that other functions which rely
-     * on these two functions work. See HTMLDocumentTest#documentMethodsWithoutDocument() for sample
-     * JavaScript code.
+     * on these two functions work. See {@link HTMLDocumentTest#documentMethodsWithoutDocument()}
+     * for sample JavaScript code.
      *
      * @return the real document's DOM node, or <tt>null</tt> if we're not emulating IE
      */
