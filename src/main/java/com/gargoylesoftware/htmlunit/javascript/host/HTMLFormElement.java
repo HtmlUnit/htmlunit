@@ -287,7 +287,7 @@ public class HTMLFormElement extends HTMLElement {
         if (length == 0) {
             collection = new HTMLCollection(this);
             final String xpath2 = "//*[is-descendant-of-contextual-form()"
-                + "(@name = '" + name + "' or @id = '" + name + "')"
+                + " and (@name = '" + name + "' or @id = '" + name + "')"
                 + " and name() = 'img']";
             collection.init(form, xpath2);
         }
