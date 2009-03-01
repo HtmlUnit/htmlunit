@@ -213,8 +213,8 @@ public class WindowTest2 extends WebTestCase {
     }
 
     /**
-     * In {@link ScriptRuntime}, Rhino defines a bunch of properties in the top scope (see lazilyNames).
-     * Not all make sense for HtmlUnit.
+     * In {@link org.mozilla.javascript.ScriptRuntime}, Rhino defines a bunch of properties
+     * in the top scope (see lazilyNames). Not all make sense for HtmlUnit.
      * @throws Exception if the test fails
      */
     @Test
@@ -263,4 +263,35 @@ public class WindowTest2 extends WebTestCase {
             + "</body></html>";
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "undefined", "function", "3" },
+            IE = { "null", "function", "3" })
+    public void onError() throws Exception {
+        final String html
+            = "<script>\n"
+            + "alert(window.onerror);\n"
+            + "window.onerror=function(){alert(arguments.length);};\n"
+            + "alert(typeof window.onerror);\n"
+            + "try { alert(undef); } catch(e) { /* caught, so won't trigger onerror */ }\n"
+            + "alert(undef);\n"
+            + "</script>";
+
+        final WebClient client = getWebClient();
+        client.setThrowExceptionOnScriptError(false);
+
+        final List<String> actual = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(actual));
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_GARGOYLE, html);
+        client.setWebConnection(conn);
+
+        client.getPage(URL_GARGOYLE);
+        assertEquals(getExpectedAlerts(), actual);
+    }
+
 }

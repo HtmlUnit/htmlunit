@@ -554,7 +554,7 @@ public class JavaScriptEngine implements Serializable {
                 }
             }
             catch (final Exception e) {
-                reportJavaScriptException(new ScriptException(htmlPage_, e, getSourceCode(cx)));
+                handleJavaScriptException(new ScriptException(htmlPage_, e, getSourceCode(cx)));
                 return null;
             }
             catch (final TimeoutError e) {
@@ -637,15 +637,27 @@ public class JavaScriptEngine implements Serializable {
     }
 
     /**
-     * Reports an exception that occurred during execution of JavaScript code.
+     * Handles an exception that occurred during execution of JavaScript code.
      * @param scriptException the exception
      */
-    protected void reportJavaScriptException(final ScriptException scriptException) {
+    protected void handleJavaScriptException(final ScriptException scriptException) {
+        // Trigger window.onerror, if it has been set.
+        final HtmlPage page = scriptException.getPage();
+        if (page != null) {
+            final WebWindow window = page.getEnclosingWindow();
+            if (window != null) {
+                final Window w = (Window) window.getScriptObject();
+                if (w != null) {
+                    w.triggerOnError(scriptException);
+                }
+            }
+        }
+        // Throw a Java exception if the user wants us to.
         if (getWebClient().isThrowExceptionOnScriptError()) {
             throw scriptException;
         }
-        // use a ScriptException to log it because it provides good information
-        // on the source code
+        // Log the error; ScriptException instances provide good debug info.
         getLog().info("Caught script exception", scriptException);
     }
+
 }

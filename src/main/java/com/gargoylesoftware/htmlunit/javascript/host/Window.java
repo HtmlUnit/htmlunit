@@ -38,6 +38,7 @@ import com.gargoylesoftware.htmlunit.DialogWindow;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.PromptHandler;
+import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.StatusHandler;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebAssert;
@@ -816,36 +817,58 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Returns the value of the name property.
-     * @return the window name
+     * Returns the value of the window's <tt>name</tt> property.
+     * @return the value of the window's <tt>name</tt> property
      */
     public String jsxGet_name() {
         return webWindow_.getName();
     }
 
      /**
-     * Sets the value of the newName property.
-     * @param newName the new window name
+     * Sets the value of the window's <tt>name</tt> property.
+     * @param name the value of the window's <tt>name</tt> property
      */
-    public void jsxSet_name(final String newName) {
-        webWindow_.setName(newName);
+    public void jsxSet_name(final String name) {
+        webWindow_.setName(name);
     }
 
     /**
-     * Returns the value of the onerror property.
-     * @return the value
+     * Returns the value of the window's <tt>onerror</tt> property.
+     * @return the value of the window's <tt>onerror</tt> property
      */
-    public String jsxGet_onerror() {
-        getLog().debug("window.onerror not implemented");
-        return "";
+    public Object jsxGet_onerror() {
+        Object handler = getEventListenersContainer().getEventHandlerProp("error");
+        if (handler == null && !getBrowserVersion().isIE()) {
+            handler = Scriptable.NOT_FOUND;
+        }
+        return handler;
     }
 
     /**
-     * Sets the value of the onerror property.
-     * @param newValue the value
+     * Sets the value of the window's <tt>onerror</tt> property.
+     * @param onerror the value of the window's <tt>onerror</tt> property
      */
-    public void jsxSet_onerror(final String newValue) {
-        getLog().debug("window.onerror not implemented");
+    public void jsxSet_onerror(final Object onerror) {
+        if (onerror instanceof Function) {
+            getEventListenersContainer().setEventHandlerProp("error", onerror);
+        }
+        // Otherwise, fail silently.
+    }
+
+    /**
+     * Triggers the <tt>onerror</tt> handler, if one has been set.
+     * @param e the error that needs to be reported
+     */
+    public void triggerOnError(final ScriptException e) {
+        final Object o = jsxGet_onerror();
+        if (o instanceof Function) {
+            final Function f = (Function) o;
+            final String msg = e.getMessage();
+            final String url = e.getPage().getWebResponse().getRequestUrl().toExternalForm();
+            final int line = e.getFailingLineNumber();
+            final Object[] args = new Object[] {msg, url, line};
+            f.call(Context.getCurrentContext(), this, this, args);
+        }
     }
 
     /**

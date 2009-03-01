@@ -1500,11 +1500,10 @@ public class JavaScriptEngineTest extends WebTestCase {
         final List<ScriptException> jsExceptions = new ArrayList<ScriptException>();
         final JavaScriptEngine myEngine = new JavaScriptEngine(webClient) {
             private static final long serialVersionUID = 3410982366939766502L;
-
             @Override
-            protected void reportJavaScriptException(final ScriptException scriptException) {
+            protected void handleJavaScriptException(final ScriptException scriptException) {
                 jsExceptions.add(scriptException);
-                super.reportJavaScriptException(scriptException);
+                super.handleJavaScriptException(scriptException);
             }
         };
         webClient.setJavaScriptEngine(myEngine);

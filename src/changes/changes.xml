@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, MooTools support, support all HTML elements and various JavaScript properties">
+            <action type="fix" dev="sdanig">
+                JavaScript: add support for the window.onerror attribute.
+            </action>
             <action type="fix" dev="sdanig" issue="2602044">
                 JavaScript: document functions should be usable without a reference to the document (IE only).
             </action>

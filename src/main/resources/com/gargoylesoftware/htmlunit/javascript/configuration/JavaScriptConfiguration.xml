@@ -2592,9 +2592,7 @@
         <property name="navigator" readable="true" writable="false"/>
         <property name="onclick" readable="true" writable="true"/>
         <property name="ondblclick" readable="true" writable="true"/>
-        <property name="onerror" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="3" max-version="5"/>
-        </property>
+        <property name="onerror" readable="true" writable="true"/>
         <property name="onload" readable="true" writable="true"/>
         <property name="opener" readable="true" writable="false"/>
         <property name="outerHeight" readable="true" writable="false">
