@@ -1399,6 +1399,40 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Browsers(Browser.IE)
+    @Alerts({ "30", "30", "30" })
+    public void offsetWidth_withEvent() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var myDiv2 = document.getElementById('myDiv2');\n"
+            + "    myDiv2.attachEvent('ondataavailable', handler);\n"
+            + "    document.attachEvent('ondataavailable', handler);\n"
+            + "    var m = document.createEventObject();\n"
+            + "    m.eventType = 'ondataavailable';\n"
+            + "    myDiv2.fireEvent(m.eventType, m);\n"
+            + "    document.fireEvent(m.eventType, m);\n"
+            + "  }\n"
+            + "  function handler() {\n"
+            + "    var e = document.getElementById('myDiv');\n"
+            + "    e.style.width = 30;\n"
+            + "    alert(e.offsetWidth);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'></div>\n"
+            + "  <div id='myDiv2'></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts({ "30" })
     public void offsetWidth_parentWidthConstrainsChildWidth() throws Exception {
         final String html = "<html><head><style>#a { width: 30px; }</style></head><body>\n"

@@ -1513,8 +1513,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         if (event == null) {
             return false;
         }
-        final HTMLElement target = (HTMLElement) event.jsxGet_target();
-        return getDomNodeOrDie().isAncestorOf(target.getDomNodeOrDie());
+        else if (!(event.jsxGet_srcElement() instanceof HTMLElement)) {
+            return false;
+        }
+
+        final HTMLElement srcElement = (HTMLElement) event.jsxGet_srcElement();
+        return getDomNodeOrDie().isAncestorOf(srcElement.getDomNodeOrDie());
     }
 
     /**
