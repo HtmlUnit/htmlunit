@@ -14,9 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -692,4 +695,21 @@ public class HTMLParserTest extends WebServerTestCase {
             writer.close();
         }
     }
+
+    /**
+     * Regression test for bug 2523870: parse failure when parsing page with UTF-8 BOM (byte order mark).
+     * The HTML file used is from NekoHTML's bug number 2560899.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void bomUtf8() throws Exception {
+        final String resource = "bom-utf8.html";
+        final URL url = getClass().getClassLoader().getResource(resource);
+        assertNotNull(url);
+
+        final WebClient client = getWebClient();
+        final HtmlPage page = client.getPage(url);
+        assertEquals("Welcome to Suffolk Coastal District Council online", page.getTitleText());
+    }
+
 }
