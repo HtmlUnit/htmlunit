@@ -67,15 +67,14 @@ public class JavaScriptJobsSupervisor implements Serializable {
         ScheduledFuture< ? > lastJobWithinDelay = getLastJobStartingBefore(maxStartTime);
 
         if (lastJobWithinDelay == null) {
-            LOG.debug("No job scheduled within provided delay. No need to wait.");
-            return;
+            waitForCurrentlyRunningJobs();
+            lastJobWithinDelay = getLastJobStartingBefore(maxStartTime);
         }
-
         // if lastJobWithinDelay is cancelled, we have to look for an other one
         while (lastJobWithinDelay != null) {
             waitForCompletion(lastJobWithinDelay);
-            lastJobWithinDelay = getLastJobStartingBefore(maxStartTime);
             waitForCurrentlyRunningJobs();
+            lastJobWithinDelay = getLastJobStartingBefore(maxStartTime);
         }
 
         LOG.debug("Finished waiting for all jobs to finish that start within provided delay");
@@ -93,6 +92,7 @@ public class JavaScriptJobsSupervisor implements Serializable {
                     currentlyRunningJobs_.wait();
                 }
             }
+            LOG.debug("No job running currently");
         }
     }
 
@@ -103,6 +103,7 @@ public class JavaScriptJobsSupervisor implements Serializable {
      */
     private boolean waitForCompletion(final ScheduledFuture< ? > job) {
         try {
+            LOG.debug("waiting for completion of: " + job);
             job.get();
             LOG.debug("job done: " + job.isDone());
         }
@@ -139,12 +140,14 @@ public class JavaScriptJobsSupervisor implements Serializable {
             }
         }
 
+        LOG.debug("Last job starting before " + maxStartTime + ": " + job);
         return job;
     }
 
     void executionStarted(final Runnable job) {
         synchronized (currentlyRunningJobs_) {
             currentlyRunningJobs_.add(job);
+            LOG.debug("Currently running jobs: " + currentlyRunningJobs_.size());
             currentlyRunningJobs_.notifyAll();
         }
     }
@@ -152,6 +155,7 @@ public class JavaScriptJobsSupervisor implements Serializable {
     void executionFinished(final Runnable job) {
         synchronized (currentlyRunningJobs_) {
             currentlyRunningJobs_.remove(job);
+            LOG.debug("Currently running jobs: " + currentlyRunningJobs_.size());
             currentlyRunningJobs_.notifyAll();
         }
     }

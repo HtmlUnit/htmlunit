@@ -296,6 +296,76 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
         final String[] expectedAlerts = {"work1"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Test the case where a job is being executed at the time where waitForJobsWithinDelayToFinish
+     * and where this jobs schedules a new job after call to waitForJobsWithinDelayToFinish,
+     * .
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void newJobStartedAfterWaitForJobsWithinDelay() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <title>test</title>\n"
+            + "  <script>\n"
+            + "    var request;\n"
+            + "    function onReadyStateChange() {\n"
+            + "      if (request.readyState == 4) {\n"
+            + "        alert('xhr onchange');\n"
+            + "        setTimeout(doWork1, 200);\n"
+            + "      }\n"
+            + "    }\n"
+            + "    function test() {\n"
+            + "      request = new XMLHttpRequest();\n"
+            + "      request.open('GET', 'wait', true);\n"
+            + "      request.onreadystatechange = onReadyStateChange;\n"
+            + "      // waitForJobsWithinDelayToFinish should be called when JS execution is in send()\n"
+            + "      request.send('');\n"
+            + "    }\n"
+            + "    function doWork1() {\n"
+            + "      alert('work1');\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final ThreadSynchronizer threadSynchronizer = new ThreadSynchronizer();
+        final MockWebConnection webConnection = new MockWebConnection() {
+            @Override
+            public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
+                if (settings.getUrl().toExternalForm().endsWith("/wait")) {
+                    threadSynchronizer.waitForState("just before waitForJobsWithinDelayToFinish");
+                    threadSynchronizer.sleep(400); // main thread need to be able to process next instruction
+                }
+                return super.getResponse(settings);
+            }
+        };
+        webConnection.setResponse(URL_FIRST, html);
+        webConnection.setDefaultResponse("");
+
+        final WebClient client = new WebClient(BrowserVersion.FIREFOX_3); // just to simplify test code using XHR
+        client.setWebConnection(webConnection);
+
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final HtmlPage page = client.getPage(URL_FIRST);
+        final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
+        assertNotNull(jobManager);
+        assertEquals(1, jobManager.getJobCount());
+
+        startTimedTest();
+        threadSynchronizer.setState("just before waitForJobsWithinDelayToFinish");
+        client.waitForJobsWithinDelayToFinish(20000);
+        assertMaxTestRunTime(1000);
+        assertEquals(0, jobManager.getJobCount());
+
+        final String[] expectedAlerts = {"xhr onchange", "work1"};
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
 
 /**
