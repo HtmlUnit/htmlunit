@@ -20,6 +20,7 @@ import java.util.List;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -30,6 +31,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.SubmittableElement;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 
 /**
  * A JavaScript object for a Form.
@@ -216,12 +219,19 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Submits the form.
+     * Submits the form (at the end of the current script execution).
      *
-     * @throws IOException if an io error occurs
+     * @throws IOException if an IO error occurs
      */
     public void jsxFunction_submit() throws IOException {
-        getHtmlForm().submit((SubmittableElement) null);
+        final SgmlPage page = getDomNodeOrDie().getPage();
+        final JavaScriptEngine jsEngine = page.getWebClient().getJavaScriptEngine();
+        final PostponedAction action = new PostponedAction() {
+            public void execute() throws Exception {
+                getHtmlForm().submit((SubmittableElement) null);
+            }
+        };
+        jsEngine.addPostponedAction(action);
     }
 
     /**

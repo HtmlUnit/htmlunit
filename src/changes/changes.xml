@@ -6,6 +6,10 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, MooTools support, support all HTML elements and various JavaScript properties">
+            <action type="fix" dev="sdanig" issue="2603370">
+                When a form is submitted via JavaScript (form.submit()), form submittal should not actually occur until
+                after the current script finishes executing.
+            </action>
             <action type="fix" dev="sdanig" issue="2515756">
                 Fix content type sniffing for local XHTML files.
             </action>

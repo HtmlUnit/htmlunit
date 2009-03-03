@@ -1293,7 +1293,7 @@ public class HTMLFormElementTest extends WebTestCase {
         final HtmlPage page = loadPage(html);
         final HtmlButtonInput buttonInput = page.getHtmlElementById("mySubmit");
         final HtmlPage secondPage = buttonInput.click();
-        assertEquals(URL_GARGOYLE + "page1.html", secondPage.getWebResponse().getRequestUrl().toExternalForm());
+        assertEquals(URL_GARGOYLE + "page2.html", secondPage.getWebResponse().getRequestUrl().toExternalForm());
     }
 
     /**
@@ -1301,9 +1301,6 @@ public class HTMLFormElementTest extends WebTestCase {
      */
     @Test
     public void submit_submitInput() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script type='text/javascript'>\n"
