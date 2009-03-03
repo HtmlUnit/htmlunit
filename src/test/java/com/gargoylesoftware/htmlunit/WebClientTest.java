@@ -1439,18 +1439,25 @@ public class WebClientTest extends WebServerTestCase {
      */
     @Test
     public void testGuessContentType() throws Exception {
-        final WebClient webClient = new WebClient();
-
-        // test real files with bad file suffix
-        Assert.assertEquals("tiny-png.img", "image/png", webClient.guessContentType(getTestFile("tiny-png.img")));
-        Assert.assertEquals("tiny-jpg.img", "image/jpeg", webClient.guessContentType(getTestFile("tiny-jpg.img")));
-        Assert.assertEquals("tiny-gif.img", "image/gif", webClient.guessContentType(getTestFile("tiny-gif.img")));
+        final WebClient c = new WebClient();
 
         // tests empty files, type should be determined from file suffix
-        Assert.assertEquals("empty.png", "image/png", webClient.guessContentType(getTestFile("empty.png")));
-        Assert.assertEquals("empty.jpg", "image/jpeg", webClient.guessContentType(getTestFile("empty.jpg")));
-        Assert.assertEquals("empty.gif", "image/gif", webClient.guessContentType(getTestFile("empty.gif")));
-        Assert.assertEquals("empty.js", "text/javascript", webClient.guessContentType(getTestFile("empty.js")));
+        Assert.assertEquals("empty.png", "image/png", c.guessContentType(getTestFile("empty.png")));
+        Assert.assertEquals("empty.jpg", "image/jpeg", c.guessContentType(getTestFile("empty.jpg")));
+        Assert.assertEquals("empty.gif", "image/gif", c.guessContentType(getTestFile("empty.gif")));
+        Assert.assertEquals("empty.js", "text/javascript", c.guessContentType(getTestFile("empty.js")));
+
+        // test real files with bad file suffix
+        Assert.assertEquals("tiny-png.img", "image/png", c.guessContentType(getTestFile("tiny-png.img")));
+        Assert.assertEquals("tiny-jpg.img", "image/jpeg", c.guessContentType(getTestFile("tiny-jpg.img")));
+        Assert.assertEquals("tiny-gif.img", "image/gif", c.guessContentType(getTestFile("tiny-gif.img")));
+
+        // tests XHTML files, types will be determined based on a mixture of file suffixes and contents
+        // note that "xhtml.php" returns content type "text/xml" in Firefox, but "application/xml" is good enough...
+        Assert.assertEquals("xhtml.php", "application/xml", c.guessContentType(getTestFile("xhtml.php")));
+        Assert.assertEquals("xhtml.htm", "text/html", c.guessContentType(getTestFile("xhtml.htm")));
+        Assert.assertEquals("xhtml.html", "text/html", c.guessContentType(getTestFile("xhtml.html")));
+        Assert.assertEquals("xhtml.xhtml", "application/xhtml+xml", c.guessContentType(getTestFile("xhtml.xhtml")));
     }
 
     /**
@@ -2004,4 +2011,5 @@ public class WebClientTest extends WebServerTestCase {
         assertEquals(1, alertHandler.getCollectedAlerts().size());
         assertEquals("Ran Here", alertHandler.getCollectedAlerts().get(0));
     }
+
 }

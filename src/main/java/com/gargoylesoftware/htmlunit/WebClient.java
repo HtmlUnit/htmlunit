@@ -1300,21 +1300,23 @@ public class WebClient implements Serializable {
      * @return "application/octet-stream" if nothing could be guessed
      */
     public String guessContentType(final File file) {
-        String contentType = null;
-        InputStream inputStream = null;
-        try {
-            inputStream = new BufferedInputStream(new FileInputStream(file));
-            contentType = URLConnection.guessContentTypeFromStream(inputStream);
+        String contentType = URLConnection.guessContentTypeFromName(file.getName());
+        if (file.getName().endsWith(".xhtml")) {
+            // Java's mime type map doesn't know about XHTML files (at least in Sun JDK5).
+            contentType = "application/xhtml+xml";
         }
-        catch (final IOException e) {
-            // nothing, silently ignore
-        }
-        finally {
-            IOUtils.closeQuietly(inputStream);
-        }
-
         if (contentType == null) {
-            contentType = URLConnection.guessContentTypeFromName(file.getName());
+            InputStream inputStream = null;
+            try {
+                inputStream = new BufferedInputStream(new FileInputStream(file));
+                contentType = URLConnection.guessContentTypeFromStream(inputStream);
+            }
+            catch (final IOException e) {
+                // Ignore silently.
+            }
+            finally {
+                IOUtils.closeQuietly(inputStream);
+            }
         }
         if (contentType == null) {
             if (file.getName().endsWith(".js")) {
@@ -1324,7 +1326,6 @@ public class WebClient implements Serializable {
                 contentType = "application/octet-stream";
             }
         }
-
         return contentType;
     }
 

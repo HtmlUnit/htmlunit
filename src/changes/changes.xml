@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, MooTools support, support all HTML elements and various JavaScript properties">
+            <action type="fix" dev="sdanig" issue="2515756">
+                Fix content type sniffing for local XHTML files.
+            </action>
             <action type="fix" dev="sdanig" issue="2515873">
                 Fix case-sensitivity of XPath expressions for XHTML documents that are served as 'text/xml'.
             </action>
