@@ -211,4 +211,11 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
         return getDocumentElement().asXml();
     }
 
+    /**
+     * Returns <tt>true</tt> if this page has case-sensitive tag names, <tt>false</tt> otherwise. In general,
+     * XML has case-sensitive tag names, and HTML doesn't. This is especially important during XPath matching.
+     * @return <tt>true</tt> if this page has case-sensitive tag names, <tt>false</tt> otherwise
+     */
+    public abstract boolean hasCaseSensitiveTagNames();
+
 }

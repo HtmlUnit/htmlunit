@@ -30,8 +30,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 
 /**
  * Collection of XPath utility methods.
@@ -62,7 +61,7 @@ public final class XPathUtils {
      * @param xpathExpr the XPath expression
      * @return the list of objects found
      */
-    public static List<Object> getByXPath(final Node node, final String xpathExpr) {
+    public static List<Object> getByXPath(final DomNode node, final String xpathExpr) {
         if (xpathExpr == null) {
             throw new NullPointerException("Null is not a valid XPath expression");
         }
@@ -115,9 +114,8 @@ public final class XPathUtils {
      * @return an XObject, which can be used to obtain a string, number, nodelist, etc (should never be <tt>null</tt>)
      * @throws TransformerException if a syntax or other error occurs
      */
-    private static XObject evaluateXPath(final Node contextNode, final String str) throws TransformerException {
+    private static XObject evaluateXPath(final DomNode contextNode, final String str) throws TransformerException {
         final XPathContext xpathSupport = new XPathContext();
-
         final Node xpathExpressionContext;
         if (contextNode.getNodeType() == Node.DOCUMENT_NODE) {
             xpathExpressionContext = ((Document) contextNode).getDocumentElement();
@@ -126,9 +124,10 @@ public final class XPathUtils {
             xpathExpressionContext = contextNode;
         }
         final PrefixResolver prefixResolver = new HtmlUnitPrefixResolver(xpathExpressionContext);
-        final XPathAdapter xpath = new XPathAdapter(str, null, prefixResolver, null,
-            contextNode instanceof HtmlElement || contextNode instanceof HtmlPage);
+        final boolean caseSensitive = contextNode.getPage().hasCaseSensitiveTagNames();
+        final XPathAdapter xpath = new XPathAdapter(str, null, prefixResolver, null, caseSensitive);
         final int ctxtNode = xpathSupport.getDTMHandleFromNode(contextNode);
         return xpath.execute(xpathSupport, ctxtNode, prefixResolver);
     }
+
 }

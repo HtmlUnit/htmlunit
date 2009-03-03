@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.xml;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,8 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlBody;
 
 /**
  * Tests for {@link XmlPage}.
@@ -50,7 +54,7 @@ public class XmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testNamespace() throws Exception {
+    public void namespace() throws Exception {
         final String content
             = "<?xml version='1.0'?>\n"
             + "<RDF xmlns='http://www.w3.org/1999/02/22-rdf-syntax-ns#' "
@@ -72,7 +76,7 @@ public class XmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testValidDocument() throws Exception {
+    public void validDocument() throws Exception {
         final String content
             = "<?xml version=\"1.0\"?>\n"
              + "<foo>\n"
@@ -113,7 +117,7 @@ public class XmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testInvalidDocument() throws Exception {
+    public void invalidDocument() throws Exception {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
@@ -144,7 +148,7 @@ public class XmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testVoiceXML() throws Exception {
+    public void voiceXML() throws Exception {
         final String content =
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
             + "<vxml xmlns=\"http://www.w3.org/2001/vxml\""
@@ -165,7 +169,7 @@ public class XmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testLoad_XMLComment() throws Exception {
+    public void load_XMLComment() throws Exception {
         final URL firstURL = new URL("http://htmlunit/first.html");
         final URL secondURL = new URL("http://htmlunit/second.xml");
 
@@ -204,7 +208,7 @@ public class XmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testCreateElement() throws Exception {
+    public void createElement() throws Exception {
         final String[] expectedAlerts;
         if (getBrowserVersion().isIE()) {
             expectedAlerts = new String[] {"true", "16"};
@@ -244,7 +248,7 @@ public class XmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testA4jResponse() throws Exception {
+    public void a4jResponse() throws Exception {
         final String content = "<html xmlns='http://www.w3.org/1999/xhtml'><head>"
             + "<script src='/a4j_3_2_0-SNAPSHOTorg.ajax4jsf.javascript.PrototypeScript.jsf'></script>"
             + "</head><body><span id='j_id216:outtext'>Echo Hello World</span></body></html>";
@@ -256,15 +260,51 @@ public class XmlPageTest extends WebTestCase {
      */
     @Test
     public void xpath() throws Exception {
-        final String content
+        final String html
             = "<?xml version=\"1.0\"?>\n"
              + "<foo>\n"
              + "    <foofoo name='first'>something</foofoo>\n"
              + "    <foofoo name='second'>something else</foofoo>\n"
              + "</foo>";
-
-        final XmlPage xmlPage = testXmlDocument(content, "text/xml");
+        final XmlPage xmlPage = testXmlDocument(html, "text/xml");
         assertEquals(1, xmlPage.getByXPath("//foofoo[@name='first']").size());
+    }
+
+    /**
+     * Verifies that case sensitivity in XPath expressions is governed by the type of page, not by
+     * the type of elements contained by the page (ie, HTML elements in an XML page behave in a
+     * case-sensitive way, because that's how XML behaves). See bug 2515873.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void xpathForXmlPageContainingHtmlElements() throws Exception {
+        final String html
+            = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+            + "<!DOCTYPE html PUBLIC \n"
+            + "    \"-//W3C//DTD XHTML 1.0 Strict//EN\" \n"
+            + "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
+            + "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:xhtml='http://www.w3.org/1999/xhtml'>\n"
+            + "<body><DIV>foo</DIV></body>\n"
+            + "</html>";
+
+        final WebClient client = getWebClient();
+        final List<String> actual = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(actual));
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_GARGOYLE, html, "text/xml");
+        client.setWebConnection(conn);
+
+        final XmlPage page = client.getPage(URL_GARGOYLE);
+        final DomNode body = page.getDocumentElement().getFirstChild().getNextSibling();
+        final DomNode div = body.getFirstChild();
+
+        assertEquals(HtmlBody.class, body.getClass());
+        assertEquals("body", body.getLocalName());
+        assertEquals("DIV", div.getLocalName());
+        assertNotNull(page.getFirstByXPath(".//xhtml:body"));
+        assertNotNull(page.getFirstByXPath(".//xhtml:DIV"));
+        assertNull(page.getFirstByXPath(".//xhtml:div"));
     }
 
     /**
@@ -291,4 +331,5 @@ public class XmlPageTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
 }

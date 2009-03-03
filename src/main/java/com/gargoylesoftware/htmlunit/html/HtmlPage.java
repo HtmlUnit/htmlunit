@@ -147,11 +147,19 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     }
 
     /**
-     * @return this page
+     * {@inheritDoc}
      */
     @Override
     public HtmlPage getPage() {
         return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasCaseSensitiveTagNames() {
+        return false;
     }
 
     /**

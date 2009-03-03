@@ -1185,7 +1185,7 @@ public class HtmlPageTest extends WebServerTestCase {
      * @exception Exception if the test fails
      */
     @Test
-    public void testGetHtmlElementsByName() throws Exception {
+    public void testGetElementsByName() throws Exception {
         final String html = "<html><body><div name='a'>foo</div><div name='b'/><div name='b'/></body></html>";
         final HtmlPage page = loadPage(html);
         assertEquals(1, page.getElementsByName("a").size());

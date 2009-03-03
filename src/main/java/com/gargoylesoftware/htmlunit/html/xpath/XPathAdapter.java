@@ -59,16 +59,19 @@ class XPathAdapter {
      * @param locator the location of the expression, may be <tt>null</tt>
      * @param prefixResolver a prefix resolver to use to resolve prefixes to namespace URIs
      * @param errorListener the error listener, or <tt>null</tt> if default should be used
-     * @param html is HTML or XML
+     * @param caseSensitive whether or not the XPath expression should be case-sensitive
      * @throws TransformerException if a syntax or other error occurs
      */
     XPathAdapter(String exprString, final SourceLocator locator, final PrefixResolver prefixResolver,
-            ErrorListener errorListener, final boolean html) throws TransformerException {
+        ErrorListener errorListener, final boolean caseSensitive) throws TransformerException {
+
         initFunctionTable();
+
         if (errorListener == null) {
             errorListener = new DefaultErrorHandler();
         }
-        if (html) {
+
+        if (!caseSensitive) {
             exprString = preProcessXPath(exprString);
         }
 
@@ -87,24 +90,24 @@ class XPathAdapter {
     }
 
     /**
-     * Pre-processes the specified HTML XPath expression before passing it to the engine.
+     * Pre-processes the specified case-insensitive XPath expression before passing it to the engine.
      * The current implementation lower-cases the attribute name, and anything outside the brackets.
      *
-     * @param string the XPath expression to pre-process
+     * @param xpath the XPath expression to pre-process
      * @return the processed XPath expression
      */
-    private static String preProcessXPath(String string) {
-        final char[] charArray = string.toCharArray();
+    private static String preProcessXPath(String xpath) {
+        final char[] charArray = xpath.toCharArray();
         processOutsideBrackets(charArray);
-        string = new String(charArray);
+        xpath = new String(charArray);
 
         final Pattern pattern = Pattern.compile("(@[a-zA-Z]+)");
-        final Matcher matcher = pattern.matcher(string);
+        final Matcher matcher = pattern.matcher(xpath);
         while (matcher.find()) {
             final String attribute = matcher.group(1);
-            string = string.replace(attribute, attribute.toLowerCase());
+            xpath = xpath.replace(attribute, attribute.toLowerCase());
         }
-        return string;
+        return xpath;
     }
 
     /**

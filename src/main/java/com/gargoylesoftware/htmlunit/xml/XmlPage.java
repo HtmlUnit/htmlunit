@@ -130,6 +130,14 @@ public class XmlPage extends SgmlPage {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasCaseSensitiveTagNames() {
+        return true;
+    }
+
+    /**
      * Returns the content of the page.
      * @return the content of the page
      */
