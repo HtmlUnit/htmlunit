@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, MooTools support, support all HTML elements and various JavaScript properties">
+            <action type="add" dev="asashour">
+                JavaScript: add support form.item() (IE only).
+            </action>
             <action type="fix" dev="sdanig" issue="2603370">
                 When a form is submitted via JavaScript (form.submit()), form submittal should not actually occur until
                 after the current script finishes executing.

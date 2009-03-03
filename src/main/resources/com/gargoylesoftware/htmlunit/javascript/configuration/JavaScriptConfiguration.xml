@@ -1562,6 +1562,9 @@
         <property name="onsubmit" readable="true" writable="true"/>
         <property name="target" readable="true" writable="true"/>
 
+        <function name="item">
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
         <function name="reset"/>
         <function name="submit"/>
     </class>

@@ -1110,7 +1110,6 @@ public class HTMLFormElementTest extends WebTestCase {
             + "{\n"
             + "  alert('page 1: ' + document.forms[0].name);\n"
             + "  document.location = 'page2.html';\n"
-            + ""
             + "}\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -1286,7 +1285,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "<body>\n"
             + "  <form action='page1.html' name='myForm'>\n"
             + "    <input id='mySubmit' type='button' value='Test' onclick='submitForm();'>\n"
-            + "  </form>"
+            + "  </form>\n"
             + "</body>\n"
             + "</html>";
 
@@ -1313,7 +1312,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "<body>\n"
             + "  <form action='page1.html' name='myForm'>\n"
             + "    <input id='mySubmit' type='submit' value='Test' onclick='submitForm();'>\n"
-            + "  </form>"
+            + "  </form>\n"
             + "</body>\n"
             + "</html>";
 
@@ -1323,4 +1322,110 @@ public class HTMLFormElementTest extends WebTestCase {
         assertEquals(URL_GARGOYLE + "page2.html", secondPage.getWebResponse().getRequestUrl().toExternalForm());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void item() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.forms['myForm'].item('myRadio').type);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form action='page1.html' name='myForm'>\n"
+            + "    <input type='radio' name='myRadio'>\n"
+            + "  </form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final String[] expectedAlerts = {"radio"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void item_many() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.forms['myForm'].item('myRadio').length);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form action='page1.html' name='myForm'>\n"
+            + "    <input type='radio' name='myRadio'>\n"
+            + "    <input type='radio' name='myRadio'>\n"
+            + "  </form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final String[] expectedAlerts = {"2"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void item_many_subindex() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.forms['myForm'].item('myRadio', 1).id);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form action='page1.html' name='myForm'>\n"
+            + "    <input type='radio' name='myRadio' id='radio1'>\n"
+            + "    <input type='radio' name='myRadio' id='radio2'>\n"
+            + "  </form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final String[] expectedAlerts = {"radio2"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void item_integer() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.forms['myForm'].item(1).id);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form action='page1.html' name='myForm'>\n"
+            + "    <input type='radio' name='myRadio' id='radio1'>\n"
+            + "    <input type='radio' name='myRadio' id='radio2'>\n"
+            + "  </form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final String[] expectedAlerts = {"radio2"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

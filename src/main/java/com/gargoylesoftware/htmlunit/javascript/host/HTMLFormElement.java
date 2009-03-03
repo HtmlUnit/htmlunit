@@ -235,6 +235,47 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
+     * Retrieves a form object or an object from an elements collection.
+     * @param index Integer or String that specifies the object or collection to retrieve.
+     *              If this parameter is an integer, it is the zero-based index of the object.
+     *              If this parameter is a string, all objects with matching name or id properties are retrieved,
+     *              and a collection is returned if more than one match is made
+     * @param subIndex Optional. Integer that specifies the zero-based index of the object to retrieve
+     *              when a collection is returned
+     * @return an object or a collection of objects if successful, or null otherwise
+     */
+    public Object jsxFunction_item(final Object index, final Object subIndex) {
+        if (index instanceof Number) {
+            return jsxGet_elements().jsxFunction_item(index);
+        }
+        final HtmlForm htmlForm = getHtmlForm();
+
+        final HTMLCollection elements = new HTMLCollection(this) {
+            private static final long serialVersionUID = -2554743215194459203L;
+
+            @Override
+            protected List<Object> computeElements() {
+                final List<Object> response = super.computeElements();
+                response.addAll(htmlForm.getLostChildren());
+                return response;
+            }
+        };
+        final String xpath = ".//*[((name() = 'input' or name() = 'button'"
+                + " or name() = 'select' or name() = 'textarea')) and @name='" + index + "']";
+        elements.init(htmlForm, xpath);
+        if (elements.getLength() == 0) {
+            return null;
+        }
+        else if (elements.getLength() == 1) {
+            return elements.jsxFunction_item(0);
+        }
+        if (subIndex instanceof Number) {
+            return elements.jsxFunction_item(subIndex);
+        }
+        return elements;
+    }
+
+    /**
      * Resets this form.
      */
     public void jsxFunction_reset() {
