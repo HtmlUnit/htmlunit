@@ -294,4 +294,101 @@ public class WindowTest2 extends WebTestCase {
         assertEquals(getExpectedAlerts(), actual);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.IE)
+    @Alerts("1")
+    public void execScript2() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    window.execScript('alert(1);');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void open_FF() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function performAction() {\n"
+            + "    actionwindow = window.open('', '1205399746518', "
+            + "'location=no,scrollbars=no,resizable=no,width=200,height=275');\n"
+            + "    actionwindow.document.writeln('Please wait while connecting to server...');\n"
+            + "    actionwindow.focus();\n"
+            + "    actionwindow.close();\n"
+            + "  }\n"
+            + "</script></head><body>\n"
+            + "    <input value='Click Me' type=button onclick='performAction()'>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlButtonInput input = page.getFirstByXPath("//input");
+        input.click();
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "function", FF = "undefined")
+    public void collectGarbage() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    alert(typeof CollectGarbage);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "original", "changed" })
+    public void eval_localVariable() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var f = document.getElementById('testForm1');\n"
+            + "    alert(f.text1.value);\n"
+            + "    eval('f.text_' + 1).value = 'changed';\n"
+            + "    alert(f.text1.value);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <form id='testForm1'>\n"
+            + "    <input id='text1' type='text' name='text_1' value='original'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * Test window properties that match Prototypes.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "undefined", "undefined" }, FF2 = { "[Node]", "[Element]" },
+            FF3 = { "[object Node]", "[object Element]" })
+    public void windowProperties() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    alert(window.Node);\n"
+            + "    alert(window.Element);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<form name='myForm'></form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }
