@@ -415,4 +415,39 @@ public class WindowConcurrencyTest extends WebTestCase {
         assertEquals(0, collectedAlerts.size());
     }
 
+    /**
+     * Our Window proxy causes troubles.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setTimeoutOnFrameWindow() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    frames[0].setTimeout(f, 0);\n"
+            + "  }\n"
+            + "  function f() {\n"
+            + "    alert('in f');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<iframe src='about:blank'></iframe>\n"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+
+        final WebClient client = new WebClient();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setDefaultResponse(html);
+        client.setWebConnection(conn);
+
+        client.getPage(URL_FIRST);
+        client.waitForJobsWithinDelayToFinish(1000);
+
+        final String[] expectedAlerts = {"in f"};
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
