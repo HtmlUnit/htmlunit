@@ -483,13 +483,11 @@ public class Node extends SimpleScriptable {
      */
     public ScriptResult executeEvent(final Event event) {
         if (eventListenersContainer_ != null) {
+
             final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
             final boolean isIE = getBrowserVersion().isIE();
             final Window window = (Window) page.getEnclosingWindow().getScriptObject();
             final Object[] args = new Object[] {event};
-            if (isIE) {
-                window.setEvent(event);
-            }
 
             // handlers declared as property on a node don't receive the event as argument for IE
             final Object[] propHandlerArgs;
@@ -500,11 +498,12 @@ public class Node extends SimpleScriptable {
                 propHandlerArgs = args;
             }
 
+            window.setCurrentEvent(event);
             try {
                 return eventListenersContainer_.executeListeners(event, args, propHandlerArgs);
             }
             finally {
-                window.setEvent(null); // reset event
+                window.setCurrentEvent(null); // reset event
             }
         }
 
@@ -524,10 +523,8 @@ public class Node extends SimpleScriptable {
 
         event.startFire();
         ScriptResult result = null;
-        final Object previousEvent = window.jsxGet_event();
-        if (ie) {
-            window.setEvent(event);
-        }
+        final Event previousEvent = window.getCurrentEvent();
+        window.setCurrentEvent(event);
 
         try {
             // window's listeners
@@ -589,7 +586,7 @@ public class Node extends SimpleScriptable {
         }
         finally {
             event.endFire();
-            window.setEvent(previousEvent); // reset event
+            window.setCurrentEvent(previousEvent); // reset event
         }
 
         return result;

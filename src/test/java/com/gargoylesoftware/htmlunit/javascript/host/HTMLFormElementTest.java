@@ -31,7 +31,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
-import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -1272,34 +1271,14 @@ public class HTMLFormElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void submit_input() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "  <script type='text/javascript'>\n"
-            + "    function submitForm() {\n"
-            + "      document.myForm.submit();\n"
-            + "      document.myForm.action = 'page2.html';\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</head>\n"
-            + "<body>\n"
-            + "  <form action='page1.html' name='myForm'>\n"
-            + "    <input id='mySubmit' type='button' value='Test' onclick='submitForm();'>\n"
-            + "  </form>\n"
-            + "</body>\n"
-            + "</html>";
-
-        final HtmlPage page = loadPage(html);
-        final HtmlButtonInput buttonInput = page.getHtmlElementById("mySubmit");
-        final HtmlPage secondPage = buttonInput.click();
-        assertEquals(URL_GARGOYLE + "page2.html", secondPage.getWebResponse().getRequestUrl().toExternalForm());
+    public void changeFormActionAfterSubmit() throws Exception {
+        changeFormActionAfterSubmit("input type='button' value='Test'", "page1.html");
+        changeFormActionAfterSubmit("input type='submit' value='Test'", "page2.html");
+        changeFormActionAfterSubmit("input type='text' value='Test'", "page1.html");
+        changeFormActionAfterSubmit("div", "page1.html");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void submit_submitInput() throws Exception {
+    private void changeFormActionAfterSubmit(final String clickable, final String expectedFile) throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script type='text/javascript'>\n"
@@ -1311,15 +1290,15 @@ public class HTMLFormElementTest extends WebTestCase {
             + "</head>\n"
             + "<body>\n"
             + "  <form action='page1.html' name='myForm'>\n"
-            + "    <input id='mySubmit' type='submit' value='Test' onclick='submitForm();'>\n"
+            + "    <" + clickable + " id='x' onclick='submitForm();'>\n"
             + "  </form>\n"
             + "</body>\n"
             + "</html>";
 
         final HtmlPage page = loadPage(html);
-        final HtmlSubmitInput submitInput = page.getHtmlElementById("mySubmit");
-        final HtmlPage secondPage = submitInput.click();
-        assertEquals(URL_GARGOYLE + "page2.html", secondPage.getWebResponse().getRequestUrl().toExternalForm());
+        final HtmlElement element = page.getHtmlElementById("x");
+        final HtmlPage secondPage = element.click();
+        assertEquals(URL_GARGOYLE + expectedFile, secondPage.getWebResponse().getRequestUrl().toExternalForm());
     }
 
     /**

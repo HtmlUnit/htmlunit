@@ -87,7 +87,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     private Screen screen_;
     private History history_;
     private Location location_;
-    private Object event_;
+    private Event currentEvent_;
     private String status_ = "";
     private HTMLCollection frames_; // has to be a member to have equality (==) working
     private Map<Class< ? extends SimpleScriptable>, Scriptable> prototypes_ =
@@ -213,19 +213,27 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Returns the current event.
-     * @return <code>null</code> if no event is currently available
+     * Returns the current event (used by JavaScript only when emulating IE).
+     * @return the current event, or <tt>null</tt> if no event is currently available
      */
     public Object jsxGet_event() {
-        return event_;
+        return currentEvent_;
+    }
+
+    /**
+     * Returns the current event (used internally regardless of the emulation mode).
+     * @return the current event, or <tt>null</tt> if no event is currently available
+     */
+    Event getCurrentEvent() {
+        return currentEvent_;
     }
 
     /**
      * Sets the current event.
-     * @param event the event
+     * @param event the current event
      */
-    public void setEvent(final Object event) {
-        event_ = event;
+    void setCurrentEvent(final Event event) {
+        currentEvent_ = event;
     }
 
     /**
