@@ -31,8 +31,10 @@ import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Collections;
+import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -61,7 +63,6 @@ import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
-import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobsSupervisor;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -179,7 +180,6 @@ public class WebClient implements Serializable {
     private boolean activeXNative_;
     private RefreshHandler refreshHandler_ = new ImmediateRefreshHandler();
     private boolean throwExceptionOnScriptError_ = true;
-    private final transient JavaScriptJobsSupervisor jsJobsSupervisor_ = new JavaScriptJobsSupervisor();
 
     /**
      * Creates a web client instance using the browser version returned by
@@ -1941,14 +1941,25 @@ public class WebClient implements Serializable {
      * @param delayMillis the delay determining jobs that should be executed
      */
     public void waitForJobsWithinDelayToFinish(final long delayMillis) {
-        jsJobsSupervisor_.waitForJobsWithinDelayToFinish(delayMillis);
-    }
+        final long startedAt = System.currentTimeMillis();
+        final long endBefore = startedAt + delayMillis;
+        long remainingTime = delayMillis;
 
-    /**
-     * Gets the JavaScript supervisor for this client.
-     * @return the surpervisor
-     */
-    protected JavaScriptJobsSupervisor getJavaScriptJobsSupervisor() {
-        return jsJobsSupervisor_;
+        Iterator<WebWindow> iter = windows_.iterator();
+        while (iter.hasNext()) {
+            final WebWindow window;
+            try {
+                window = iter.next();
+            }
+            catch (final ConcurrentModificationException e) {
+                iter = windows_.iterator();
+                continue;
+            }
+            window.getJobManager().waitForJobsWithinDelayToFinish(remainingTime);
+            remainingTime = endBefore - System.currentTimeMillis();
+            if (remainingTime < 1) {
+                break;
+            }
+        }
     }
 }

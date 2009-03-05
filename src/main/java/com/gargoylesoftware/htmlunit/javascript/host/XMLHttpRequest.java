@@ -388,7 +388,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                 }
             };
             getLog().debug("Starting XMLHttpRequest thread for asynchronous request");
-            threadID_ = getWindow().getWebWindow().getJobManager().addJob(job, 0, page);
+            threadID_ = getWindow().getWebWindow().getJobManager().addJob(job, 0);
         }
     }
 

@@ -60,6 +60,9 @@ import com.gargoylesoftware.htmlunit.html.NonSerializable;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptFunctionJob;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptExecutionJob;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptStringJob;
 
 /**
  * A JavaScript object for a Window.
@@ -342,23 +345,11 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the id of the created timer
      */
     public int jsxFunction_setTimeout(final Object code, final int timeout, final Object language) {
-        final int id;
         final Page page = (Page) getDomNodeOrNull();
         final String description = "window.setTimeout(" + timeout + ")";
-        if (code == null) {
-            throw Context.reportRuntimeError("Function not provided.");
-        }
-        else if (code instanceof String) {
-            final String scriptString = (String) code;
-            id = getWebWindow().getJobManager().addJob(scriptString, timeout, description, page);
-        }
-        else if (code instanceof Function) {
-            final Function scriptFunction = (Function) code;
-            id = getWebWindow().getJobManager().addJob(scriptFunction, timeout, description, page);
-        }
-        else {
-            throw Context.reportRuntimeError("Unknown type for function.");
-        }
+        final JavaScriptExecutionJob job = makeExecutionJob(code, page.getEnclosingWindow(), description);
+        final int id = page.getEnclosingWindow().getJobManager().addJob(job, timeout);
+        getLog().debug("setTimeout(" + id + ")");
         return id;
     }
 
@@ -1050,29 +1041,37 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the id of the created interval
      */
     public int jsxFunction_setInterval(final Object code, final int timeout, final Object language) {
-        final int id;
         final Page page = (Page) getDomNodeOrNull();
         final String description = "window.setInterval(" + timeout + ")";
+        final JavaScriptExecutionJob job = makeExecutionJob(code, page.getEnclosingWindow(), description);
+        job.setRecurring(true);
+        final int id = page.getEnclosingWindow().getJobManager().addJob(job, timeout);
+        getLog().debug("setInterval(" + id + ")");
+        return id;
+    }
+
+    private JavaScriptExecutionJob makeExecutionJob(final Object code, final WebWindow window,
+            final String description) {
         if (code == null) {
             throw Context.reportRuntimeError("Function not provided.");
         }
-        else if (code instanceof String) {
+        final JavaScriptExecutionJob job;
+        if (code instanceof String) {
             final String scriptString = (String) code;
-            id = getWebWindow().getJobManager().addRecurringJob(scriptString, timeout, description, page);
+            job = new JavaScriptStringJob(description, window, scriptString);
         }
         else if (code instanceof Function) {
             final Function scriptFunction = (Function) code;
-            id = getWebWindow().getJobManager().addRecurringJob(scriptFunction, timeout, description, page);
+            job = new JavaScriptFunctionJob(description, window, scriptFunction);
         }
         else {
             throw Context.reportRuntimeError("Unknown type for function.");
         }
-        return id;
+        return job;
     }
 
     /**
      * Cancels the interval previously started using the setInterval method.
-     * Current implementation does nothing.
      * @param intervalID specifies the interval to cancel as returned by the setInterval method
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536353.aspx">MSDN documentation</a>
      */
