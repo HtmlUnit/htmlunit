@@ -40,6 +40,7 @@ import org.mozilla.javascript.ScriptableObject;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
+import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
@@ -1874,6 +1875,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public boolean jsxFunction_dispatchEvent(final Event event) {
         event.setTarget(this);
         final HtmlElement element = getDomNodeOrDie();
+        ScriptResult result = null;
         if (event instanceof MouseEvent) {
             if (event.jsxGet_type().equals(MouseEvent.TYPE_CLICK)) {
                 try {
@@ -1892,13 +1894,13 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 }
             }
             else {
-                fireEvent(event);
+                result = fireEvent(event);
             }
         }
         else {
-            fireEvent(event);
+            result = fireEvent(event);
         }
-        return !event.isPreventDefault();
+        return !event.isAborted(result);
     }
 
     /**

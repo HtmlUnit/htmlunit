@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, MooTools support, support all HTML elements and various JavaScript properties">
+            <action type="fix" dev="sdanig" issue="2643655">
+                JavaScript: setting event.returnValue=false should abort the event (IE only).
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: add support form.item() (IE only).
             </action>

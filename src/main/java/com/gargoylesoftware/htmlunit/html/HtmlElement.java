@@ -919,8 +919,7 @@ public abstract class HtmlElement extends DomElement {
 
         final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
         final ScriptResult result = (ScriptResult) cf.call(action);
-        final boolean isIE = client.getBrowserVersion().isIE();
-        if ((!isIE && event.isPreventDefault()) || (isIE && ScriptResult.isFalse(result))) {
+        if (event.isAborted(result)) {
             preventDefault();
         }
         return result;
@@ -1304,7 +1303,7 @@ public abstract class HtmlElement extends DomElement {
             currentPage = scriptResult.getNewPage();
         }
 
-        if (stateUpdated || ScriptResult.isFalse(scriptResult) || event.isPreventDefault()) {
+        if (stateUpdated || event.isAborted(scriptResult)) {
             return (P) currentPage;
         }
         return (P) doClickAction(currentPage);

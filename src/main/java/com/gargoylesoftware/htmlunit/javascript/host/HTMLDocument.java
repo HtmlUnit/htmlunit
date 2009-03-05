@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.CookieManager;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -1477,7 +1478,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     public boolean jsxFunction_dispatchEvent(final Event event) {
         event.setTarget(this);
-        fireEvent(event);
-        return !event.isPreventDefault();
+        final ScriptResult result = fireEvent(event);
+        return !event.isAborted(result);
     }
+
 }

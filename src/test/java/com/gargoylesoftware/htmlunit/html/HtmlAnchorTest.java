@@ -409,11 +409,15 @@ public class HtmlAnchorTest extends WebTestCase {
      */
     @Test
     public void testPreventDefault() throws Exception {
-        testPreventDefault(BrowserVersion.FIREFOX_2);
-        testPreventDefault(BrowserVersion.INTERNET_EXPLORER_7);
+        testPreventDefault1(BrowserVersion.FIREFOX_2);
+        testPreventDefault1(BrowserVersion.INTERNET_EXPLORER_7);
+        testPreventDefault2(BrowserVersion.FIREFOX_2);
+        testPreventDefault2(BrowserVersion.INTERNET_EXPLORER_7);
+        testPreventDefault3(BrowserVersion.FIREFOX_2);
+        testPreventDefault3(BrowserVersion.INTERNET_EXPLORER_7);
     }
 
-    private void testPreventDefault(final BrowserVersion browserVersion) throws Exception {
+    private void testPreventDefault1(final BrowserVersion browserVersion) throws Exception {
         final String html =
               "<html><head><script>\n"
             + "  function handler(e) {\n"
@@ -428,6 +432,38 @@ public class HtmlAnchorTest extends WebTestCase {
             + "</script></head>\n"
             + "<body onload='init()'>\n"
             + "<a href='" + URL_SECOND + "' id='a1'>Test</a>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(browserVersion, html, null);
+        final HtmlAnchor a1 = page.getHtmlElementById("a1");
+        final HtmlPage secondPage = a1.click();
+        assertEquals(URL_GARGOYLE, secondPage.getWebResponse().getRequestUrl());
+    }
+
+    private void testPreventDefault2(final BrowserVersion browserVersion) throws Exception {
+        final String html =
+              "<html><head><script>\n"
+            + "  function handler(e) {\n"
+            + "    if (e.preventDefault)\n"
+            + "      e.preventDefault();\n"
+            + "    else\n"
+            + "      e.returnValue = false;\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body>\n"
+            + "<a href='" + URL_SECOND + "' id='a1' onclick='handler(event)'>Test</a>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(browserVersion, html, null);
+        final HtmlAnchor a1 = page.getHtmlElementById("a1");
+        final HtmlPage secondPage = a1.click();
+        assertEquals(URL_GARGOYLE, secondPage.getWebResponse().getRequestUrl());
+    }
+
+    private void testPreventDefault3(final BrowserVersion browserVersion) throws Exception {
+        final String html =
+              "<html><body>\n"
+            + "<a href='" + URL_SECOND + "' id='a1' onclick='return false'>Test</a>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(browserVersion, html, null);

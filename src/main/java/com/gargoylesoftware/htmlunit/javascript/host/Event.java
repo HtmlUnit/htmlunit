@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static java.lang.Boolean.FALSE;
+
 import java.util.LinkedList;
 
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
@@ -569,11 +572,16 @@ public class Event extends SimpleScriptable {
     }
 
     /**
-     * Returns if the preventDefault() method has been called for this event.
-     * @return if the preventDefault() method has been called for this event
+     * Returns <tt>true</tt> if this event has been aborted via <tt>preventDefault()</tt> in
+     * standards-compliant browsers, or via the event's <tt>returnValue</tt> property in IE, or
+     * by the event handler returning <tt>false</tt>.
+     *
+     * @param result the event handler result (if <tt>false</tt>, the event is considered aborted)
+     * @return <tt>true</tt> if this event has been aborted
      */
-    public boolean isPreventDefault() {
-        return preventDefault_;
+    public boolean isAborted(final ScriptResult result) {
+        final boolean ie = getBrowserVersion().isIE();
+        return ScriptResult.isFalse(result) || (!ie && preventDefault_) || (ie && FALSE.equals(returnValue_));
     }
 
     /**
