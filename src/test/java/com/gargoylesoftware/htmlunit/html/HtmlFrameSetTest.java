@@ -398,4 +398,86 @@ public class HtmlFrameSetTest extends WebTestCase {
         final HtmlPage page = framePage.<HtmlButton>getHtmlElementById("myButton").click();
         assertEquals("3", page.getTitleText());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void closeShouldRemoveFramesetWindows() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String firstContent
+            = "<html><head><title>First</title></head>\n"
+            + "<frameset cols='130,*'>\n"
+            + "  <frame scrolling='no' name='left' src='" + URL_SECOND + "' frameborder='1' />\n"
+            + "  <frame scrolling='auto' name='right' src='" + URL_THIRD + "' frameborder='1' />\n"
+            + "  <noframes>\n"
+            + "    <body>Frames not supported</body>\n"
+            + "  </noframes>\n"
+            + "</frameset>\n"
+            + "</html>";
+        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+        final String thirdContent  = "<html><head><title>Third</title></head><body></body></html>";
+
+        final WebClient webClient = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(URL_THIRD, thirdContent);
+
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage firstPage = webClient.getPage(URL_FIRST);
+        assertEquals("First", firstPage.getTitleText());
+
+        assertEquals(3, webClient.getWebWindows().size());
+
+        webClient.closeAllWindows();
+
+        // 1 top level window always exists
+        assertEquals(1, webClient.getWebWindows().size());
+
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void navigateShouldRemoveFramesetWindows() throws Exception {
+        final String firstContent
+            = "<html><head><title>First</title></head>\n"
+            + "<frameset cols='130,*'>\n"
+            + "  <frame scrolling='no' name='left' src='" + URL_SECOND + "' frameborder='1' />\n"
+            + "  <frame scrolling='auto' name='right' src='" + URL_THIRD + "' frameborder='1' />\n"
+            + "  <noframes>\n"
+            + "    <body>Frames not supported</body>\n"
+            + "  </noframes>\n"
+            + "</frameset>\n"
+            + "</html>";
+        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+        final String thirdContent  = "<html><head><title>Third</title></head><body></body></html>";
+
+        final WebClient webClient = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(URL_THIRD, thirdContent);
+
+        webClient.setWebConnection(webConnection);
+
+        HtmlPage page = webClient.getPage(URL_FIRST);
+        assertEquals("First", page.getTitleText());
+
+        assertEquals(3, webClient.getWebWindows().size());
+
+        page = webClient.getPage(URL_SECOND);
+        assertEquals("Second", page.getTitleText());
+
+        assertEquals(1, webClient.getWebWindows().size());
+
+    }
+
 }
