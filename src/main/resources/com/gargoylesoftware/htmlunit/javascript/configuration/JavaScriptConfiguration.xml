@@ -939,9 +939,7 @@
         <property name="cancelable" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
-        <property name="cancelBubble" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer"/>
-        </property>
+        <property name="cancelBubble" readable="true" writable="true"/>
         <property name="ctrlKey" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer"/>
         </property>

@@ -516,12 +516,17 @@ public class EventTest extends WebTestCase {
     @Test
     @Browsers(Browser.FF)
     public void testFF_StopPropagation() throws Exception {
+        testFF_StopPropagation("stopPropagation()");
+        testFF_StopPropagation("cancelBubble=true");
+    }
+
+    private void testFF_StopPropagation(final String cancelMethod) throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "var counter = 0;\n"
             + "function t(_s)\n"
             + "{\n"
-            + "     return function(e) { alert(_s); counter++; if (counter >= 4) e.stopPropagation(); };\n"
+            + "     return function(e) { alert(_s); counter++; if (counter >= 4) e." + cancelMethod + "; };\n"
             + "}\n"
             + "function init()\n"
             + "{\n"
