@@ -556,6 +556,49 @@ public class EventTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.FF)
+    public void testFF_StopPropagation_WithMultipleEventHandlers() throws Exception {
+        final String content = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "var counter = 0;\n"
+            + "function t(_s)\n"
+            + "{\n"
+            + "     return function(e) { alert(_s); counter++; if (counter >= 5) e.stopPropagation(); };\n"
+            + "}\n"
+            + "function init()\n"
+            + "{\n"
+            + "  window.addEventListener('click', t('w'), true);\n"
+            + "  window.addEventListener('click', t('w 2'), true);\n"
+            + "  var oDiv = document.getElementById('theDiv');\n"
+            + "  oDiv.addEventListener('click', t('d'), true);\n"
+            + "  oDiv.addEventListener('click', t('d 2'), true);\n"
+            + "  var oSpan = document.getElementById('theSpan');\n"
+            + "  oSpan.addEventListener('click', t('s'), true);\n"
+            + "  oSpan.addEventListener('click', t('s 2'), true);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='init()'>\n"
+            + "<div id='theDiv'>\n"
+            + "<span id='theSpan'>blabla</span>\n"
+            + "</div>\n"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
+        page.<HtmlElement>getHtmlElementById("theSpan").click();
+        final String[] expectedAlerts1 = {"w", "w 2", "d", "d 2", "s", "s 2"};
+        assertEquals(expectedAlerts1, collectedAlerts);
+        collectedAlerts.clear();
+
+        page.<HtmlElement>getHtmlElementById("theSpan").click();
+        final String[] expectedAlerts2 = {"w", "w 2"};
+        assertEquals(expectedAlerts2, collectedAlerts);
+    }
+
+    /**
      * Test value for null event handler: null for IE, while 'undefined' for Firefox.
      * @throws Exception if the test fails
      */

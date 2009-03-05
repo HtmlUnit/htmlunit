@@ -130,16 +130,14 @@ class EventListenersContainer {
         final List<Function> handlers = getHandlers(event.jsxGet_type(), useCapture);
         if (handlers != null && !handlers.isEmpty()) {
             event.setCurrentTarget(jsNode_);
-
             final DomNode node = jsNode_.getDomNodeOrDie();
             final HtmlPage page = (HtmlPage) node.getPage();
             // make a copy of the list as execution of an handler may (de-)register handlers
             final List<Function> handlersToExecute = new ArrayList<Function>(handlers);
             for (final Function listener : handlersToExecute) {
-                final ScriptResult result = page.executeJavaScriptFunctionIfPossible(
-                        listener, jsNode_, args, node);
+                final ScriptResult result = page.executeJavaScriptFunctionIfPossible(listener, jsNode_, args, node);
                 if (event.isPropagationStopped()) {
-                    return result;
+                    allResult = result;
                 }
                 if (ie) {
                     if (ScriptResult.isFalse(result)) {
@@ -154,7 +152,6 @@ class EventListenersContainer {
                 }
             }
         }
-
         return allResult;
     }
 
@@ -254,4 +251,13 @@ class EventListenersContainer {
             eventHandlers_.put(entry.getKey(), handlers);
         }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "[node=" + jsNode_ + " handlers=" + eventHandlers_.keySet() + "]";
+    }
+
 }
