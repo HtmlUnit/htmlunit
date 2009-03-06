@@ -438,7 +438,6 @@ public class HtmlFrameSetTest extends WebTestCase {
 
         // 1 top level window always exists
         assertEquals(1, webClient.getWebWindows().size());
-
     }
 
     /**
@@ -477,7 +476,6 @@ public class HtmlFrameSetTest extends WebTestCase {
         assertEquals("Second", page.getTitleText());
 
         assertEquals(1, webClient.getWebWindows().size());
-
     }
 
 }
