@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, MooTools support, support all HTML elements and various JavaScript properties">
+            <action type="fix" dev="sdanig" issue="1813007">
+                Make password inputs listen to event.preventDefault().
+            </action>
             <action type="fix" dev="sdanig" issue="2643655">
                 JavaScript: calling event.stopPropagation() shouldn't preclude using multiple event listeners of the same
                 type on a single node.

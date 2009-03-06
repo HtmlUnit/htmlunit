@@ -49,4 +49,70 @@ public class HtmlPasswordInputTest extends WebTestCase {
         assertEquals("", p.getValueAttribute());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typeWhileDisabled() throws Exception {
+        final String html = "<html><body><input type='password' id='p' disabled='disabled'/></body></html>";
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPasswordInput p = page.getHtmlElementById("p");
+        p.type("abc");
+        assertEquals("", p.getValueAttribute());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void preventDefault_OnKeyDown() throws Exception {
+        final String html =
+              "<html><head><script>\n"
+            + "  function handler(e) {\n"
+            + "    if (e && e.target.value.length > 2)\n"
+            + "      e.preventDefault();\n"
+            + "    else if (!e && window.event.srcElement.value.length > 2)\n"
+            + "      return false;\n"
+            + "  }\n"
+            + "  function init() {\n"
+            + "    document.getElementById('x').onkeydown = handler;\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='init()'>\n"
+            + "<input type='password' id='x'></input>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlPasswordInput input = page.getHtmlElementById("x");
+        input.type("abcd");
+        assertEquals("abc", input.getValueAttribute());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void preventDefault_OnKeyPress() throws Exception {
+        final String html =
+              "<html><head><script>\n"
+            + "  function handler(e) {\n"
+            + "    if (e && e.target.value.length > 2)\n"
+            + "      e.preventDefault();\n"
+            + "    else if (!e && window.event.srcElement.value.length > 2)\n"
+            + "      return false;\n"
+            + "  }\n"
+            + "  function init() {\n"
+            + "    document.getElementById('x').onkeypress = handler;\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='init()'>\n"
+            + "<input type='password' id='x'></input>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlPasswordInput input = page.getHtmlElementById("x");
+        input.type("abcd");
+        assertEquals("abc", input.getValueAttribute());
+    }
+
 }

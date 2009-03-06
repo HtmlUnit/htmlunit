@@ -14,10 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.io.IOException;
 import java.util.Map;
 
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
@@ -58,18 +56,6 @@ public class HtmlPasswordInput extends HtmlInput {
      * {@inheritDoc}
      */
     @Override
-    public Page type(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
-        throws IOException {
-        if (isDisabled()) {
-            return getPage();
-        }
-        return super.type(c, shiftKey, ctrlKey, altKey);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         //TODO: HtmlTextInput, HtmlPasswordArea, and HtmlTextArea should have synchronized logic (helper class?)
         //TODO: Also, what about adding set/getCursor(int index)
@@ -83,4 +69,5 @@ public class HtmlPasswordInput extends HtmlInput {
             setValueAttribute(value + c);
         }
     }
+
 }

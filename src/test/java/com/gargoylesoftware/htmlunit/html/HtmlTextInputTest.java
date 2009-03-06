@@ -55,6 +55,18 @@ public class HtmlTextInputTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typeWhileDisabled() throws Exception {
+        final String html = "<html><body><input id='t' disabled='disabled'/></body></html>";
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlTextInput t = page.getHtmlElementById("t");
+        t.type("abc");
+        assertEquals("", t.getValueAttribute());
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test

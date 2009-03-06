@@ -189,6 +189,18 @@ public class HtmlTextAreaTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void typeWhileDisabled() throws Exception {
+        final String html = "<html><body><textarea id='t' disabled='disabled'></textarea></body></html>";
+        final HtmlPage page = loadPage(html);
+        final HtmlTextArea t = page.getHtmlElementById("t");
+        t.type("abc");
+        assertEquals("", t.getText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void asText() throws Exception {
         final String content
             = "<html><head><title>foo</title></head><body>\n"

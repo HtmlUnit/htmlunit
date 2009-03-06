@@ -479,10 +479,19 @@ public abstract class HtmlElement extends DomElement {
         }
 
         focus();
-        fireEvent(new UIEvent(this, Event.TYPE_KEY_DOWN, c, shiftKey, ctrlKey, altKey));
-        fireEvent(new UIEvent(this, Event.TYPE_KEY_PRESS, c, shiftKey, ctrlKey, altKey));
-        doType(c, shiftKey, ctrlKey, altKey);
-        fireEvent(new UIEvent(this, Event.TYPE_KEY_UP, c, shiftKey, ctrlKey, altKey));
+
+        final Event keyDown = new UIEvent(this, Event.TYPE_KEY_DOWN, c, shiftKey, ctrlKey, altKey);
+        final ScriptResult keyDownResult = fireEvent(keyDown);
+
+        final Event keyPress = new UIEvent(this, Event.TYPE_KEY_PRESS, c, shiftKey, ctrlKey, altKey);
+        final ScriptResult keyPressResult = fireEvent(keyPress);
+
+        if (!keyDown.isAborted(keyDownResult) && !keyPress.isAborted(keyPressResult)) {
+            doType(c, shiftKey, ctrlKey, altKey);
+        }
+
+        final Event keyUp = new UIEvent(this, Event.TYPE_KEY_UP, c, shiftKey, ctrlKey, altKey);
+        fireEvent(keyUp);
 
         final HtmlForm form = getEnclosingForm();
         if (form != null && c == '\n' && isSubmittableByEnter()) {

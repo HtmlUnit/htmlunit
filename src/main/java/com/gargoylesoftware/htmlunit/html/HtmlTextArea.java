@@ -14,14 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 
 import org.apache.commons.httpclient.NameValuePair;
 import org.w3c.dom.ranges.Range;
 
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
@@ -46,7 +44,6 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     public static final String TAG_NAME = "textarea";
 
     private String defaultValue_;
-    private boolean preventDefault_;
     private String valueAtFocus_;
 
     /**
@@ -435,25 +432,9 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * {@inheritDoc}
      */
     @Override
-    public Page type(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
-        throws IOException {
-        if (isDisabled()) {
-            return getPage();
-        }
-        preventDefault_ = false;
-        return super.type(c, shiftKey, ctrlKey, altKey);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         //TODO: HtmlTextInput, HtmlPasswordArea, and HtmlTextArea should have synchronized logic (helper class?)
         //TODO: Also, what about adding set/getCursor(int index)
-        if (preventDefault_) {
-            return;
-        }
         final String text = getText();
         if (c == '\b') {
             if (text.length() > 0) {
@@ -463,14 +444,6 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
         else if ((c == ' ' || c == '\n' || c == '\r' || !Character.isWhitespace(c))) {
             setTextInternal(text + c);
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void preventDefault() {
-        preventDefault_ = true;
     }
 
     /**

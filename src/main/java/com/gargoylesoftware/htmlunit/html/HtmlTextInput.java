@@ -14,12 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.io.IOException;
 import java.util.Map;
 
 import org.w3c.dom.ranges.Range;
 
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
@@ -38,7 +36,6 @@ public class HtmlTextInput extends HtmlInput {
     private static final long serialVersionUID = -2473799124286935674L;
 
     private String valueAtFocus_;
-    private boolean preventDefault_;
 
     /**
      * Creates an instance.
@@ -57,25 +54,9 @@ public class HtmlTextInput extends HtmlInput {
      * {@inheritDoc}
      */
     @Override
-    public Page type(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
-        throws IOException {
-        if (isDisabled()) {
-            return getPage();
-        }
-        preventDefault_ = false;
-        return super.type(c, shiftKey, ctrlKey, altKey);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         //TODO: HtmlTextInput, HtmlPasswordArea, and HtmlTextArea should have synchronized logic (helper class?)
         //TODO: Also, what about adding set/getCursor(int index)
-        if (preventDefault_) {
-            return;
-        }
         String value = getValueAttribute();
         if (c == '\b') {
             if (value.length() > 0) {
@@ -94,14 +75,6 @@ public class HtmlTextInput extends HtmlInput {
                 setAttribute("value", value + c);
             }
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void preventDefault() {
-        preventDefault_ = true;
     }
 
     /**
@@ -228,10 +201,12 @@ public class HtmlTextInput extends HtmlInput {
         valueAtFocus_ = getValueAttribute();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     void removeFocus() {
         super.removeFocus();
-
         if (!valueAtFocus_.equals(getValueAttribute())) {
             executeOnChangeHandlerIfAppropriate(this);
         }
