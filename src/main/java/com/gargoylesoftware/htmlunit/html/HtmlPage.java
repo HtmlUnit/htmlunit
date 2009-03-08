@@ -2392,17 +2392,15 @@ class SimpleRange implements Range, Serializable {
                     sb.append(endContainer_.getTextContent().substring(0, endOffset_));
                     return true;
                 }
+                // We're in the middle of getting text.
+                if (child.hasChildNodes()) {
+                    final boolean stop = getText(child, sb, started);
+                    if (stop) {
+                        return true;
+                    }
+                }
                 else {
-                    // We're in the middle of getting text.
-                    if (child.hasChildNodes()) {
-                        final boolean stop = getText(child, sb, started);
-                        if (stop) {
-                            return true;
-                        }
-                    }
-                    else {
-                        sb.append(child.getTextContent());
-                    }
+                    sb.append(child.getTextContent());
                 }
             }
             else {
