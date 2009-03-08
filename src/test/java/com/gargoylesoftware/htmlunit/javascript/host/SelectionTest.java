@@ -119,6 +119,15 @@ public class SelectionTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.FF)
+    public void rangeCount2() throws Exception {
+        test("selection.collapseToEnd()", "selection.rangeCount", "x", "0", "1");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.FF)
     public void collapse() throws Exception {
         test("selection.collapse(s1, 1)", "selection.focusNode", "x ? x.id : x", "null", "s1");
     }

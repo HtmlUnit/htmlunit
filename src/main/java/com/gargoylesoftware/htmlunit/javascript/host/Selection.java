@@ -89,10 +89,12 @@ public class Selection extends SimpleScriptable {
      * @return the number of ranges in the selection
      */
     public int jsxGet_rangeCount() {
-        if (getPageSelection().getCollapsed()) {
-            return 0;
+        final Range r = getPageSelection();
+        final boolean valid = (r.getStartContainer() != null && r.getEndContainer() != null);
+        if (valid) {
+            return 1;
         }
-        return 1;
+        return 0;
     }
 
     /**
