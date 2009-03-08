@@ -119,6 +119,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("BoxObject");
         names.remove("ClipboardData");
         names.remove("ComputedCSSStyleDeclaration");
+        names.remove("CSSImportRule");
         names.remove("CSSRule");
         names.remove("CSSRuleList");
         names.remove("CSSStyleDeclaration");
@@ -139,6 +140,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("HTMLOptionsCollection");
         names.remove("JavaScriptBackgroundJob");
         names.remove("Location");
+        names.remove("MediaList");
         names.remove("MimeType");
         names.remove("MimeTypeArray");
         names.remove("MouseEvent");
