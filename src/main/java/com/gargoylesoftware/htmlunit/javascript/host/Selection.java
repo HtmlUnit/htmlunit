@@ -33,6 +33,18 @@ public class Selection extends SimpleScriptable {
     private static final long serialVersionUID = 3712755502782559551L;
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getDefaultValue(final Class< ? > hint) {
+        final boolean ff = getBrowserVersion().isFirefox();
+        if (ff && (String.class.equals(hint) || hint == null)) {
+            return getPageSelection().toString();
+        }
+        return super.getDefaultValue(hint);
+    }
+
+    /**
      * Returns the node in which the selection begins.
      * @return the node in which the selection begins
      */

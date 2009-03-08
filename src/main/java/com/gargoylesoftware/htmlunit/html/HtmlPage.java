@@ -31,6 +31,7 @@ import java.util.Map;
 
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.mutable.MutableBoolean;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Context;
@@ -2295,7 +2296,16 @@ class SimpleRange implements Range, Serializable {
     }
 
     public org.w3c.dom.Node getCommonAncestorContainer() throws DOMException {
-        throw new RuntimeException("Not implemented!");
+        if (startContainer_ != null && endContainer_ != null) {
+            for (org.w3c.dom.Node p1 = startContainer_.getParentNode(); p1 != null; p1 = p1.getParentNode()) {
+                for (org.w3c.dom.Node p2 = endContainer_.getParentNode(); p2 != null; p2 = p2.getParentNode()) {
+                    if (p1 == p2) {
+                        return p1;
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     public org.w3c.dom.Node getEndContainer() throws DOMException {
@@ -2361,4 +2371,56 @@ class SimpleRange implements Range, Serializable {
     public void surroundContents(final org.w3c.dom.Node newParent) throws DOMException, RangeException {
         throw new RuntimeException("Not implemented!");
     }
+
+    @Override
+    public String toString() {
+        final org.w3c.dom.Node ancestor = getCommonAncestorContainer();
+        final StringBuilder sb = new StringBuilder();
+        if (ancestor != null) {
+            getText(ancestor, sb, new MutableBoolean(false));
+        }
+        return sb.toString();
+    }
+
+    private boolean getText(final org.w3c.dom.Node node, final StringBuilder sb, final MutableBoolean started) {
+        final NodeList children = node.getChildNodes();
+        for (int i = 0; i < children.getLength(); i++) {
+            final org.w3c.dom.Node child = children.item(i);
+            if (started.booleanValue()) {
+                if (child == endContainer_) {
+                    // We're finished getting text.
+                    sb.append(endContainer_.getTextContent().substring(0, endOffset_));
+                    return true;
+                }
+                else {
+                    // We're in the middle of getting text.
+                    if (child.hasChildNodes()) {
+                        final boolean stop = getText(child, sb, started);
+                        if (stop) {
+                            return true;
+                        }
+                    }
+                    else {
+                        sb.append(child.getTextContent());
+                    }
+                }
+            }
+            else {
+                started.setValue(child == startContainer_);
+                if (started.booleanValue()) {
+                    // We're starting to get text.
+                    sb.append(startContainer_.getTextContent().substring(startOffset_));
+                }
+                else {
+                    // We're still haven't started getting text.
+                    final boolean stop = getText(child, sb, started);
+                    if (stop) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 }

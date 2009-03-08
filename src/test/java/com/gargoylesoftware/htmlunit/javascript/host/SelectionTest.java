@@ -47,6 +47,24 @@ public class SelectionTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.FF)
+    public void stringValue_FF() throws Exception {
+        test("", "selection", "x", "", "cx");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.IE)
+    public void stringValue_IE() throws Exception {
+        test("", "selection", "x", "[object]", "[object]");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.FF)
     public void anchorNode() throws Exception {
         test("", "selection.anchorNode", "x ? x.parentNode.id : x", "null", "s1");
     }
@@ -145,10 +163,11 @@ public class SelectionTest extends WebTestCase {
         throws Exception {
 
         final String html = "<html><body onload='test()'>\n"
-            + "<span id='s1'>abc</span><span id='s2'>xyz</span>\n"
+            + "<span id='s1'>abc</span><span id='s2'>xyz</span><span id='s3'>foo</span>\n"
             + "<input type='button' id='b' onclick='" + action + ";test();' value='click'></input>\n"
             + "<script>\n"
-            + "  var selection = window.getSelection();\n"
+            + "  var selection = document.selection; // IE\n"
+            + "  if(!selection) selection = window.getSelection(); // FF\n"
             + "  var s1 = document.getElementById('s1');\n"
             + "  var s2 = document.getElementById('s2');\n"
             + "  function test() {\n"
