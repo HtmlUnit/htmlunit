@@ -21,7 +21,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
@@ -284,50 +283,5 @@ public class JavaScriptJobManagerTest extends WebTestCase {
         jobManager.waitForAllJobsToFinish(500);
 
         Assert.assertEquals("No new alerts should have happened", finalValue, collectedAlerts.size());
-        page.getWebClient().closeAllWindows();
-    }
-
-    /**
-     * Unit testing an internal method.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void getNextSchduledJob() throws Exception {
-        final String content = "<html>\n"
-            + "<head>\n"
-            + "  <title>test</title>\n"
-            + "  <script>\n"
-            + "    var threadID1;\n"
-            + "    var threadID2;\n"
-            + "    var threadID3;\n"
-            + "    function test() {\n"
-            + "      threadID1 = setTimeout(doAlert, 10000);\n"
-            + "      threadID2 = setTimeout(doAlert, 20000);\n"
-            + "      threadID3 = setTimeout(doAlert, 30000);\n"
-            + "    }\n"
-            + "    function doAlert() {\n"
-            + "      alert('blah');\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "<a onclick='clearTimeout(threadID1);' id='clickme1'/>\n"
-            + "</body>\n"
-            + "</html>";
-
-        final HtmlPage page = loadPage(content);
-        final JavaScriptJobManagerImpl jobManager = (JavaScriptJobManagerImpl) page
-                .getEnclosingWindow()
-                .getJobManager();
-        assertNotNull(jobManager);
-        assertEquals(3, jobManager.getJobCount());
-        long nextDelay = jobManager.getNextStartingJob().getDelay(TimeUnit.MILLISECONDS);
-        assertTrue(nextDelay < 10001);
-        final HtmlAnchor anchor = page.getHtmlElementById("clickme1");
-        anchor.click();
-        nextDelay = jobManager.getNextStartingJob().getDelay(TimeUnit.MILLISECONDS);
-        assertEquals(2, jobManager.getJobCount());
-        assertTrue(nextDelay > 10000 && nextDelay < 20001);
     }
 }

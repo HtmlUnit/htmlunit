@@ -24,7 +24,6 @@ public abstract class JavaScriptJob implements Runnable {
 
     /** The job ID. */
     private Integer id_;
-    private boolean isRecurring_ = false;
 
     /**
      * Sets the job ID.
@@ -48,18 +47,4 @@ public abstract class JavaScriptJob implements Runnable {
         return "JavaScript Job " + id_;
     }
 
-    /**
-     * @return True if this is a job that keeps happening.
-     */
-    public boolean isRecurring() {
-        return isRecurring_;
-    }
-
-    /**
-     * Sets this job to be a recurring one. Default is false.
-     * @param recurring true or false
-     */
-    public void setRecurring(final boolean recurring) {
-        isRecurring_ = recurring;
-    }
 }

@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.background;
 
+import org.mozilla.javascript.Function;
+
+import com.gargoylesoftware.htmlunit.Page;
+
 /**
  * A manager for {@link JavaScriptJob}s.
  *
@@ -30,13 +34,70 @@ public interface JavaScriptJobManager {
     int getJobCount();
 
     /**
+     * Adds a job which executes the specified JavaScript code after the specified amount of time. If the specified
+     * page is not currently loaded in the window which owns this job manager, the operation fails and this method
+     * returns <tt>0</tt>.
+     * @param code the JavaScript code to be executed
+     * @param delay the amount of time to wait before executing the specified JavaScript code (in milliseconds)
+     * @param description a text description of the job being added
+     * @param page the page which is trying to add the job
+     * @return the ID assigned to the job
+     */
+    int addJob(final String code, final int delay, final String description, final Page page);
+
+    /**
+     * Adds a job which executes the specified JavaScript code after the specified amount of time. If the specified
+     * page is not currently loaded in the window which owns this job manager, the operation fails and this method
+     * returns <tt>0</tt>.
+     * @param code the JavaScript code to be executed
+     * @param delay the amount of time to wait before executing the specified JavaScript code (in milliseconds)
+     * @param description a text description of the job being added
+     * @param page the page which is trying to add the job
+     * @return the ID assigned to the job
+     */
+    int addJob(final Function code, final int delay, final String description, final Page page);
+
+    /**
      * Adds the specified job to this job manager, assigning it an ID. If the specified page is not currently
      * loaded in the window which owns this job manager, the operation fails and this method returns <tt>0</tt>.
      * @param job the job to add to the job manager
      * @param delay the amount of time to wait before executing the specified job (in milliseconds)
+     * @param page the page which is trying to add the job
      * @return the ID assigned to the job
      */
-    int addJob(final JavaScriptJob job, final int delay);
+    int addJob(final JavaScriptJob job, final int delay, final Page page);
+
+    /**
+     * Adds a job which executes the specified JavaScript code periodically. If the specified page is not currently
+     * loaded in the window which owns this job manager, the operation fails and this method returns <tt>0</tt>.
+     * @param code the JavaScript code to be executed
+     * @param period the amount of time to wait between JavaScript code executions (in milliseconds)
+     * @param description a text description of the job being added
+     * @param page the page which is trying to add the job
+     * @return the ID assigned to the job
+     */
+    int addRecurringJob(final String code, final int period, final String description, final Page page);
+
+    /**
+     * Adds a job which executes the specified JavaScript code periodically. If the specified page is not currently
+     * loaded in the window which owns this job manager, the operation fails and this method returns <tt>0</tt>.
+     * @param code the JavaScript code to be executed
+     * @param period the amount of time to wait between JavaScript code executions (in milliseconds)
+     * @param description a text description of the job being added
+     * @param page the page which is trying to add the job
+     * @return the ID assigned to the job
+     */
+    int addRecurringJob(final Function code, final int period, final String description, final Page page);
+
+    /**
+     * Adds the specified recurring job to this job manager, assigning it an ID. If the specified page is not currently
+     * loaded in the window which owns this job manager, the operation fails and this method returns <tt>0</tt>.
+     * @param job the recurring job to add to the job manager
+     * @param period the amount of time to wait between job executions (in milliseconds)
+     * @param page the page which is trying to add the job
+     * @return the ID assigned to the recurring job
+     */
+    int addRecurringJob(JavaScriptJob job, int period, final Page page);
 
     /**
      * Removes the scheduled job from the execution queue. This doesn't interrupt the job if it is currently running.
@@ -67,16 +128,4 @@ public interface JavaScriptJobManager {
      * Kill this job manager.
      */
     void shutdown();
-
-    /**
-     * Waits for jobs within the delay period to complete. Any jobs that would
-     * start after the delay period are ignored.
-     *
-     * This method will return immediately if no jobs are scheduled within the
-     * given delay period.
-     *
-     * @param delayMillis How long this method should wait.
-     */
-    void waitForJobsWithinDelayToFinish(long delayMillis);
-
 }
