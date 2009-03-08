@@ -351,7 +351,7 @@ public class Stylesheet extends SimpleScriptable {
      * For Firefox.
      * @return the owner
      */
-    public Object jsxGet_ownerNode() {
+    public HTMLElement jsxGet_ownerNode() {
         return ownerNode_;
     }
 
@@ -359,7 +359,7 @@ public class Stylesheet extends SimpleScriptable {
      * For Internet Explorer.
      * @return the owner
      */
-    public Object jsxGet_owningElement() {
+    public HTMLElement jsxGet_owningElement() {
         return ownerNode_;
     }
 
@@ -462,7 +462,7 @@ public class Stylesheet extends SimpleScriptable {
     public int jsxFunction_addRule(final String selector, final String rule) {
         final String completeRule = selector.trim() + " {" + rule + "}";
         wrapped_.insertRule(completeRule, wrapped_.getCssRules().getLength());
-
         return -1;
     }
+
 }

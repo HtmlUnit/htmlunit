@@ -69,7 +69,7 @@ public class CSSRule extends SimpleScriptable {
     }
 
     /**
-     * Creates a CSSRule according to the given rule.type.
+     * Creates a CSSRule according to the specified rule type.
      * @param stylesheet the Stylesheet of this rule
      * @param rule the wrapped rule
      * @return a CSSRule subclass according to the rule type
@@ -78,6 +78,8 @@ public class CSSRule extends SimpleScriptable {
         switch (rule.getType()) {
             case STYLE_RULE:
                 return new CSSStyleRule(stylesheet, rule);
+            case IMPORT_RULE:
+                return new CSSImportRule(stylesheet, rule);
             default:
                 throw new UnsupportedOperationException("CSSRule "
                     + rule.getClass().getName() + " is not yet supported.");
@@ -141,8 +143,8 @@ public class CSSRule extends SimpleScriptable {
         return null;
     }
     /**
-     * Returns the wrapper rule.
-     * @return the wrapper rule.
+     * Returns the wrapped rule.
+     * @return the wrapped rule.
      */
     protected org.w3c.dom.css.CSSRule getRule() {
         return rule_;

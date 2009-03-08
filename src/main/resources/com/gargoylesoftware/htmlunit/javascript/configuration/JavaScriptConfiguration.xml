@@ -78,6 +78,12 @@
         JSObject="true">
     </class>
 
+    <class name="CSSImportRule" extends="CSSRule" classname="com.gargoylesoftware.htmlunit.javascript.host.CSSImportRule" JSObject="true">
+        <property name="href" readable="true" writable="false"/>
+        <property name="media" readable="true" writable="false"/>
+        <property name="styleSheet" readable="true" writable="false"/>
+    </class>
+
     <class name="CSSRule" classname="com.gargoylesoftware.htmlunit.javascript.host.CSSRule" JSObject="false">
         <constant name="UNKNOWN_RULE">
             <browser name="Firefox"/>
@@ -2087,6 +2093,11 @@
         <function name="reload"/>
         <function name="replace"/>
         <function name="toString"/>
+    </class>
+
+    <class name="MediaList" classname="com.gargoylesoftware.htmlunit.javascript.host.MediaList"
+        JSObject="true">
+        <property name="length" readable="true" writable="false"/>
     </class>
 
     <class name="MimeType" classname="com.gargoylesoftware.htmlunit.javascript.host.MimeType"
