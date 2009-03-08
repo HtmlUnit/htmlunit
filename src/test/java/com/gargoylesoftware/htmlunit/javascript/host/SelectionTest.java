@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -41,6 +42,30 @@ import com.gargoylesoftware.htmlunit.html.HtmlSpan;
  */
 @RunWith(BrowserRunner.class)
 public class SelectionTest extends WebTestCase {
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.IE)
+    @Alerts(IE = "true")
+    public void equality_IE() throws Exception {
+        final String html = "<html><body><script>alert(document.selection==document.selection);</script></body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.FF)
+    @Alerts(FF = "true")
+    public void equality_FF() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "alert(window.getSelection()==window.getSelection());\n"
+            + "</script></body></html>";
+        loadPageWithAlerts(html);
+    }
 
     /**
      * @throws Exception if an error occurs
@@ -166,6 +191,15 @@ public class SelectionTest extends WebTestCase {
     @Browsers(Browser.FF)
     public void selectAllChildren() throws Exception {
         test("selection.selectAllChildren(document.body)", "selection.anchorOffset", "x", "0", "0");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.FF)
+    public void getRangeAt() throws Exception {
+        test("", "selection.rangeCount > 0 ? selection.getRangeAt(0) : 'none'", "x", "none", "cx");
     }
 
     private void test(final String action, final String x, final String alert, final String... expected)

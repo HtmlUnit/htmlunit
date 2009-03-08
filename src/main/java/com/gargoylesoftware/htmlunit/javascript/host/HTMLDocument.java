@@ -1222,10 +1222,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the value of the JavaScript attribute <tt>selection</tt>
      */
     public Selection jsxGet_selection() {
-        final Selection selection = new Selection();
-        selection.setParentScope(getParentScope());
-        selection.setPrototype(getPrototype(selection.getClass()));
-        return selection;
+        return getWindow().getSelection();
     }
 
     /**

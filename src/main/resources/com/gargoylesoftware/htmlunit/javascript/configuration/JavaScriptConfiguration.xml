@@ -2460,6 +2460,9 @@
         <function name="extend">
             <browser name="Firefox"/>
         </function>
+        <function name="getRangeAt">
+            <browser name="Firefox"/>
+        </function>
         <function name="selectAllChildren">
             <browser name="Firefox"/>
         </function>

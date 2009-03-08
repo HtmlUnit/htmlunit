@@ -87,6 +87,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     private Screen screen_;
     private History history_;
     private Location location_;
+    private Selection selection_;
     private Event currentEvent_;
     private String status_ = "";
     private HTMLCollection frames_; // has to be a member to have equality (==) working
@@ -1178,10 +1179,20 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the current selection
      */
     public Selection jsxFunction_getSelection() {
-        final Selection selection = new Selection();
-        selection.setParentScope(this);
-        selection.setPrototype(getPrototype(selection.getClass()));
-        return selection;
+        return getSelection();
+    }
+
+    /**
+     * Returns the current selection.
+     * @return the current selection
+     */
+    Selection getSelection() {
+        if (selection_ == null) {
+            selection_ = new Selection();
+            selection_.setParentScope(this);
+            selection_.setPrototype(getPrototype(selection_.getClass()));
+        }
+        return selection_;
     }
 
     /**

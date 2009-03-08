@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import org.mozilla.javascript.Context;
 import org.w3c.dom.ranges.Range;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -150,6 +151,25 @@ public class Selection extends SimpleScriptable {
     public void jsxFunction_selectAllChildren(final Node parentNode) {
         final Range selection = getPageSelection();
         selection.selectNodeContents(parentNode.getDomNodeOrDie());
+    }
+
+    /**
+     * Returns the range at the specified index. Note that the HtmlUnit DOM only supports a single range,
+     * but multiple ranges can be created via JavaScript.
+     *
+     * TODO: This method does not currently support indices > 0, but such indices should probably return
+     * ranges created programmatically via createRange().
+     *
+     * @param index the index of the range to return
+     * @return the range at the specified index
+     */
+    public Range jsxFunction_getRangeAt(final int index) {
+        final Range r = getPageSelection();
+        final boolean valid = (r.getStartContainer() != null && r.getEndContainer() != null);
+        if (!valid || index < 0 || index > 0) {
+            throw Context.reportRuntimeError("Invalid range index: " + index);
+        }
+        return r;
     }
 
     /**
