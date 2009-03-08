@@ -2942,6 +2942,43 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
+     * Verifies that enabling design mode on a document in Firefox implicitly creates a selection range.
+     * Required for YUI rich text editor unit tests.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.FF)
+    @Alerts(FF = { "0", "1", "1" })
+    public void designMode_createsSelectionRange() throws Exception {
+        final String html1 = "<html><body><iframe id='i' src='" + URL_SECOND + "'></iframe></body></html>";
+        final String html2 = "<html><body onload='test()'>\n"
+            + "<script>\n"
+            + "  var selection = document.selection; // IE\n"
+            + "  if(!selection) selection = window.getSelection(); // FF\n"
+            + "  function test() {\n"
+            + "    alert(selection.rangeCount);\n"
+            + "    document.designMode='on';\n"
+            + "    alert(selection.rangeCount);\n"
+            + "    document.designMode='off';\n"
+            + "    alert(selection.rangeCount);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebClient client = getWebClient();
+        final List<String> actual = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(actual));
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html1);
+        conn.setResponse(URL_SECOND, html2);
+        client.setWebConnection(conn);
+
+        client.getPage(URL_FIRST);
+        assertEquals(getExpectedAlerts(), actual);
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test

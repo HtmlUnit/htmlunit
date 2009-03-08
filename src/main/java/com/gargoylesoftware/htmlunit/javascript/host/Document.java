@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -165,6 +166,13 @@ public class Document extends EventNode {
         else {
             if ("on".equalsIgnoreCase(mode)) {
                 designMode_ = "on";
+                final SgmlPage page = getPage();
+                if (page instanceof HtmlPage) {
+                    final HtmlPage htmlPage = (HtmlPage) page;
+                    final DomNode child = htmlPage.getBody().getFirstChild();
+                    htmlPage.getSelection().setStart(child, 0);
+                    htmlPage.getSelection().collapse(true);
+                }
             }
             else if ("off".equalsIgnoreCase(mode)) {
                 designMode_ = "off";
