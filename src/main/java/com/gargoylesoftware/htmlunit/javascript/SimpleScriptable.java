@@ -267,7 +267,7 @@ public class SimpleScriptable extends ScriptableObject {
     @Override
     public Object getDefaultValue(final Class< ? > hint) {
         if (String.class.equals(hint) || hint == null) {
-            // shouldn't we handle this wihth BrowserVersion.hasFeature?
+            // TODO: shouldn't we handle this with BrowserVersion.hasFeature?
             if (getBrowserVersion().isIE()) {
                 return "[object]"; // the super helpful IE solution
             }
