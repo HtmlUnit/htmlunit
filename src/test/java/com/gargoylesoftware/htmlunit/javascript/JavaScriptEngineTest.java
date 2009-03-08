@@ -1553,4 +1553,28 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * Unit tests for bug 2531218 reported by Rhino as
+     * <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=477604">Bug 477604 -
+     * Array.concat causes ArrayIndexOutOfBoundException with non dense array</a>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("3")
+    public void array_concat() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var a = [1, 2, 3];\n"
+            + "    for (var i=10; i<20; ++i)\n"
+            + "      a[i] = 't' + i;\n"
+            + "    var b = [1, 2, 3];\n"
+            + "    b.concat(a);\n"
+            + "    alert(b.length);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }

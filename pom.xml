@@ -465,7 +465,7 @@
         <dependency>
             <groupId>net.sourceforge.htmlunit</groupId>
             <artifactId>htmlunit-core-js</artifactId>
-            <version>2.4</version>
+            <version>2.5-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.nekohtml</groupId>
@@ -607,17 +607,20 @@
         </snapshotRepository>
     </distributionManagement>
     <repositories>
-    <!--
         <repository>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
             </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
             <id>htmlUnitSnapshots</id>
             <name>HtmlUnit Snapshots</name>
             <url>http://htmlunit.sourceforge.net/m2-repo-snapshots</url>
             <layout>default</layout>
         </repository>
+    <!--
         -->
         <!-- Needed for JDT -->
         <repository>
