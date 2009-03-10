@@ -38,7 +38,7 @@ public class EnumeratorTest extends WebTestCase {
     @Test
     @Browsers(Browser.IE)
     @Alerts({ "false", "[object]", "undefined", "undefined", "true" })
-    public void basicEnumeratorTest() throws Exception {
+    public void basicEnumerator() throws Exception {
         final String html
             = "<html><head><script>\n"
             + "function test() {\n"
@@ -63,7 +63,7 @@ public class EnumeratorTest extends WebTestCase {
     @Test
     @Browsers(Browser.IE)
     @Alerts({ "f t1 t2", "t1", "t2" })
-    public void formEnumeratorTest() throws Exception {
+    public void formEnumerator() throws Exception {
         final String html
             = "<html><body><form id='f'><input type='text' name='t1' id='t1' />\n"
             + "<input type='text' name='t2' id='t2' /><div id='d'>d</div></form><script>\n"
@@ -75,4 +75,25 @@ public class EnumeratorTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.IE)
+    @Alerts({ "undefined", "text" })
+    public void item() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var form = document.forms.myForm;\n"
+            + "  alert(form.elements.item(0).TyPe);\n"
+            + "  alert(new Enumerator(form).item().TyPe);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <form name='myForm'>\n"
+            + "    <input name='myInput'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
 }

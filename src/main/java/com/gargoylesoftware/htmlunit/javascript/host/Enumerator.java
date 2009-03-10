@@ -70,7 +70,10 @@ public class Enumerator extends SimpleScriptable {
      */
     public Object jsxFunction_item() {
         if (!jsxFunction_atEnd()) {
-            return collection_.get(index_, collection_);
+            SimpleScriptable scriptable = (SimpleScriptable) collection_.get(index_, collection_);
+            scriptable = scriptable.clone();
+            scriptable.setCaseSensitive(false);
+            return scriptable;
         }
         return Undefined.instance;
     }

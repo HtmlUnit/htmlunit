@@ -44,10 +44,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public class SimpleScriptable extends ScriptableObject {
+public class SimpleScriptable extends ScriptableObject implements Cloneable {
     private static final long serialVersionUID = 3120000176890886780L;
 
     private DomNode domNode_;
+
+    private boolean caseSensitive_ = true;
 
     /**
      * Gets a named property from the object.
@@ -58,7 +60,15 @@ public class SimpleScriptable extends ScriptableObject {
      * {@inheritDoc}
      */
     @Override
-    public Object get(final String name, final Scriptable start) {
+    public Object get(String name, final Scriptable start) {
+        if (!caseSensitive_) {
+            for (final Object o : getAllIds()) {
+                if (name.equalsIgnoreCase(Context.toString(o))) {
+                    name = Context.toString(o);
+                    break;
+                }
+            }
+        }
         // try to get property configured on object itself
         final Object response = super.get(name, start);
         if (response != NOT_FOUND) {
@@ -412,5 +422,30 @@ public class SimpleScriptable extends ScriptableObject {
             value = ((SimpleScriptableProxy) value).getWrappedScriptable();
         }
         return super.equivalentValues(value);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SimpleScriptable clone() {
+        try {
+            return (SimpleScriptable) super.clone();
+        }
+        catch (final Exception e) {
+            return null;
+        }
+    }
+
+    /**
+     * Sets case sensitivity of all properties of this scriptable.
+     * @param caseSensitive case sensitive or no
+     */
+    public void setCaseSensitive(final boolean caseSensitive) {
+        caseSensitive_ = caseSensitive;
+        final Scriptable prototype = getPrototype();
+        if (prototype instanceof SimpleScriptable) {
+            ((SimpleScriptable) prototype).setCaseSensitive(caseSensitive);
+        }
     }
 }

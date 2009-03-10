@@ -168,21 +168,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
     }
 
     /**
-     * Creates a clone of this style.
-     * @return a clone of this style
-     */
-    CSSStyleDeclaration createClone() {
-        try {
-            return (CSSStyleDeclaration) clone();
-        }
-        catch (final CloneNotSupportedException e) {
-            // Should never happen.
-            getLog().error(e.getMessage(), e);
-            return null;
-        }
-    }
-
-    /**
      * Returns the value of the named style attribute, or an empty string if it is not found.
      *
      * @param name the name of the style attribute whose value is to be retrieved
