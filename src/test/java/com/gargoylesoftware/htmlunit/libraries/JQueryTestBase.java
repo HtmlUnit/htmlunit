@@ -181,11 +181,10 @@ public abstract class JQueryTestBase extends WebServerTestCase {
      * @param expected the expected values
      * @throws Exception if an error occurs
      */
-    @SuppressWarnings("unchecked")
     protected void ok(final Iterator<HtmlElement> iterator, final Iterator<String> expected) throws Exception {
         final HtmlListItem li = (HtmlListItem) iterator.next();
         final String expectedLI = getNextExpectedModuleResult(expected);
-        final String actualLI = ((HtmlElement) ((List) li.getByXPath("./strong")).get(0)).asText();
+        final String actualLI = li.<HtmlElement>getFirstByXPath("./strong").asText();
         if (!actualLI.equals(expectedLI)) {
             addFailure(new ComparisonFailure("", expectedLI, actualLI).getMessage());
         }
