@@ -155,7 +155,12 @@ public class HtmlForm extends ClickableElement {
         }
         final URL url;
         try {
-            url = htmlPage.getFullyQualifiedUrl(actionUrl);
+            if (actionUrl.length() == 0) {
+                url = htmlPage.getWebResponse().getRequestUrl();
+            }
+            else {
+                url = htmlPage.getFullyQualifiedUrl(actionUrl);
+            }
         }
         catch (final MalformedURLException e) {
             throw new IllegalArgumentException("Not a valid url: " + actionUrl);

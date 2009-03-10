@@ -60,7 +60,7 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSetSelectedRadioButton_ValueExists() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<input type='radio' name='foo' value='1' selected='selected' id='input1'/>\n"
@@ -68,7 +68,7 @@ public class HtmlFormTest extends WebTestCase {
             + "<input type='radio' name='foo' value='3'/>\n"
             + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
 
         final HtmlForm form = page.getHtmlElementById("form1");
@@ -94,7 +94,7 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSetSelectedRadioButton_ValueDoesNotExist_DoNotForceSelection() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<input type='radio' name='foo' value='1' selected='selected'/>\n"
@@ -102,7 +102,7 @@ public class HtmlFormTest extends WebTestCase {
             + "<input type='radio' name='foo' value='3'/>\n"
             + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(html);
 
         final HtmlForm form = page.getHtmlElementById("form1");
 
@@ -117,12 +117,12 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSubmit_String() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<input id='submitButton' type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(html);
 
         final HtmlForm form = page.getHtmlElementById("form1");
 
@@ -135,13 +135,13 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSubmit_ExtraParameters() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
             + "    <input type='text' name='textfield' value='*'/>\n"
             + "    <input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
 
         final HtmlForm form = page.getHtmlElementById("form1");
@@ -162,13 +162,13 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSubmit_BadSubmitMethod() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='put'>\n"
             + "    <input type='text' name='textfield' value='*'/>\n"
             + "    <input type='submit' name='button' id='button' value='foo'/>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
         page.<HtmlElement>getHtmlElementById("button").click();
         assertSame(HttpMethod.GET, webConnection.getLastMethod());
@@ -1312,4 +1312,37 @@ public class HtmlFormTest extends WebTestCase {
         }
     }
 
+    /*
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void base() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "  <base href='" + URL_SECOND + "'>\n"
+            + "</head><body>\n"
+            + "<form action='two.html'>\n"
+            + "  <input type='submit'>\n"
+            + "</form></body></html>";
+        HtmlPage page = loadPage(html);
+        page = page.<HtmlSubmitInput>getFirstByXPath("//input").click();
+        assertEquals(URL_SECOND.toExternalForm() + "two.html", page.getWebResponse().getRequestUrl());
+    }
+
+    /*
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void emptyActionWithBase() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "  <base href='" + URL_SECOND + "'>\n"
+            + "</head><body>\n"
+            + "<form>\n"
+            + "  <input type='submit'>\n"
+            + "</form></body></html>";
+        HtmlPage page = loadPage(html);
+        page = page.<HtmlSubmitInput>getFirstByXPath("//input").click();
+        assertEquals(URL_GARGOYLE.toExternalForm(), page.getWebResponse().getRequestUrl());
+    }
 }
