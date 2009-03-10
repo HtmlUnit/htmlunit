@@ -1312,7 +1312,7 @@ public class HtmlFormTest extends WebTestCase {
         }
     }
 
-    /*
+    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -1329,7 +1329,7 @@ public class HtmlFormTest extends WebTestCase {
         assertEquals(URL_SECOND.toExternalForm() + "two.html", page.getWebResponse().getRequestUrl());
     }
 
-    /*
+    /**
      * @throws Exception if the test fails
      */
     @Test
