@@ -14,21 +14,42 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static org.junit.Assert.assertNotNull;
+
+import java.io.IOException;
+import java.io.Writer;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.Servlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for {@link DefaultPageCreator}.
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
-public class DefaultPageCreatorTest extends WebTestCase {
+@RunWith(BrowserRunner.class)
+public class DefaultPageCreatorTest extends WebServerTestCase {
 
     /**
      * Test for {@link DefaultPageCreator#determinePageType(String)}.
      */
     @Test
-    public void testDeterminePageType() {
+    @Browsers(Browser.NONE)
+    public void determinePageType() {
         final DefaultPageCreator creator = new DefaultPageCreator();
 
         assertEquals("html", creator.determinePageType("application/vnd.wap.xhtml+xml"));
@@ -52,5 +73,39 @@ public class DefaultPageCreatorTest extends WebTestCase {
 
         assertEquals("unknown", creator.determinePageType("application/pdf"));
         assertEquals("unknown", creator.determinePageType("application/x-shockwave-flash"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    public void noContentType() throws Exception {
+        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        servlets.put("/test", NoContentTypeServlet.class);
+        startWebServer("./", null, servlets);
+
+        final WebClient client = getWebClient();
+        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/test");
+        assertNotNull(page);
+    }
+
+    /**
+     * Servlet for {@link #noContentType()}.
+     */
+    public static class NoContentTypeServlet extends HttpServlet {
+
+        private static final long serialVersionUID = 249364661058883744L;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            final Writer writer = response.getWriter();
+            writer.write("<html><head><meta http-equiv='Content-Type' content='text/html'></head>"
+                + "<body>Hello World</body></html>");
+            writer.close();
+        }
     }
 }
