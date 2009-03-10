@@ -21,13 +21,19 @@ import org.mozilla.javascript.Callable;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.ErrorReporter;
+import org.mozilla.javascript.Evaluator;
+import org.mozilla.javascript.Script;
 import org.mozilla.javascript.ScriptRuntime;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.WrapFactory;
 import org.mozilla.javascript.debug.Debugger;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.ScriptPreProcessor;
 import com.gargoylesoftware.htmlunit.WebAssert;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.regexp.HtmlUnitRegExpProxy;
 
 /**
@@ -46,6 +52,7 @@ public class HtmlUnitContextFactory extends ContextFactory implements Serializab
     private static final int INSTRUCTION_COUNT_THRESHOLD = 10000;
 
     private final BrowserVersion browserVersion_;
+    private final WebClient webClient_;
     private final Log log_;
     private long timeout_;
     private Debugger debugger_;
@@ -55,13 +62,14 @@ public class HtmlUnitContextFactory extends ContextFactory implements Serializab
     /**
      * Creates a new instance of HtmlUnitContextFactory.
      *
-     * @param browserVersion the browser version being used
+     * @param webClient the web client using this factory
      * @param log the log that the error reporter should use
      */
-    public HtmlUnitContextFactory(final BrowserVersion browserVersion, final Log log) {
-        WebAssert.notNull("browserVersion", browserVersion);
+    public HtmlUnitContextFactory(final WebClient webClient, final Log log) {
+        WebAssert.notNull("webClient", webClient);
         WebAssert.notNull("log", log);
-        browserVersion_ = browserVersion;
+        webClient_ = webClient;
+        browserVersion_ = webClient.getBrowserVersion();
         log_ = log;
         errorReporter_ = new StrictErrorReporter(log_);
     }
@@ -128,6 +136,73 @@ public class HtmlUnitContextFactory extends ContextFactory implements Serializab
                 }
             }
         }
+        @Override
+        protected Script compileString(String source, final Evaluator compiler,
+                final ErrorReporter compilationErrorReporter, final String sourceName,
+                final int lineno, final Object securityDomain) {
+
+            // this method gets called by Context.compileString and by ScriptRuntime.evalSpecial
+            // which is used for window.eval. We have to take care in which case we are.
+            final boolean isWindowEval = (compiler != null);
+
+            // Pre process the source code
+            final HtmlPage page = (HtmlPage) Context.getCurrentContext()
+                .getThreadLocal(JavaScriptEngine.KEY_STARTING_PAGE);
+            source = preProcess(page, source, sourceName, null);
+
+            // PreProcess IE Conditional Compilation if needed
+            if (browserVersion_.isIE()) {
+                final ScriptPreProcessor ieCCPreProcessor = new IEConditionalCompilationScriptPreProcessor();
+                source = ieCCPreProcessor.preProcess(page, source, sourceName, null);
+//                sourceCode = IEWeirdSyntaxScriptPreProcessor.getInstance()
+//                    .preProcess(htmlPage, sourceCode, sourceName, null);
+            }
+
+            // Remove HTML comments around the source if needed
+            if (!isWindowEval) {
+                final String sourceCodeTrimmed = source.trim();
+                if (sourceCodeTrimmed.startsWith("<!--")) {
+                    source = source.replaceFirst("<!--", "// <!--");
+                }
+                // IE ignores the last line containing uncommented -->
+                if (browserVersion_.isIE() && sourceCodeTrimmed.endsWith("-->")) {
+                    final int lastDoubleSlash = source.lastIndexOf("//");
+                    final int lastNewLine = Math.max(source.lastIndexOf('\n'), source.lastIndexOf('\r'));
+                    if (lastNewLine > lastDoubleSlash) {
+                        source = source.substring(0, lastNewLine);
+                    }
+                }
+            }
+
+            return super.compileString(source, compiler, compilationErrorReporter,
+                    sourceName, lineno, securityDomain);
+        }
+    }
+
+    /**
+     * Pre process the specified source code in the context of the given page using the processor specified
+     * in the webclient. This method delegates to the pre processor handler specified in the
+     * <code>WebClient</code>. If no pre processor handler is defined, the original source code is returned
+     * unchanged.
+     * @param htmlPage the page
+     * @param sourceCode the code to process
+     * @param sourceName a name for the chunk of code (used in error messages)
+     * @param htmlElement the HTML element that will act as the context
+     * @return the source code after being pre processed
+     * @see com.gargoylesoftware.htmlunit.ScriptPreProcessor
+     */
+    protected String preProcess(
+        final HtmlPage htmlPage, final String sourceCode, final String sourceName, final HtmlElement htmlElement) {
+
+        String newSourceCode = sourceCode;
+        final ScriptPreProcessor preProcessor = webClient_.getScriptPreProcessor();
+        if (preProcessor != null) {
+            newSourceCode = preProcessor.preProcess(htmlPage, sourceCode, sourceName, htmlElement);
+            if (newSourceCode == null) {
+                newSourceCode = "";
+            }
+        }
+        return newSourceCode;
     }
 
     /**

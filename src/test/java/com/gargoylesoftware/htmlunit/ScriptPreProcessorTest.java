@@ -80,7 +80,7 @@ public class ScriptPreProcessorTest extends WebServerTestCase {
             }
 
         });
-        client.getPage("http://www.yahoo.com");
+        client.getPage(URL_FIRST);
 
         // Test modify script in pre processor
         client.setScriptPreProcessor(new ScriptPreProcessor() {
@@ -100,7 +100,7 @@ public class ScriptPreProcessorTest extends WebServerTestCase {
             }
 
         });
-        client.getPage("http://www.yahoo.com");
+        client.getPage(URL_FIRST);
     }
 
     /**
@@ -145,10 +145,6 @@ public class ScriptPreProcessorTest extends WebServerTestCase {
      */
     @Test
     public void testScriptPreProcessor_Eval() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-
         final String html = "<html><body><script>eval('aX'+'ert(\"abc\")');</script></body></html>";
 
         final WebClient client = new WebClient();

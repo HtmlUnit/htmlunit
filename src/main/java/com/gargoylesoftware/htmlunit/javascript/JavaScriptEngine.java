@@ -33,9 +33,7 @@ import org.mozilla.javascript.Script;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ScriptException;
-import com.gargoylesoftware.htmlunit.ScriptPreProcessor;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -88,13 +86,19 @@ public class JavaScriptEngine implements Serializable {
     public static final String KEY_STARTING_SCOPE = "startingScope";
 
     /**
+     * Key used to place the {@link HtmlPage} for which the JavaScript code is executed
+     * as thread local attribute in current context.
+     */
+    public static final String KEY_STARTING_PAGE = "startingPage";
+
+    /**
      * Creates an instance for the specified webclient.
      *
      * @param webClient the client that will own this engine
      */
     public JavaScriptEngine(final WebClient webClient) {
         webClient_ = webClient;
-        contextFactory_ = new HtmlUnitContextFactory(webClient.getBrowserVersion(), getScriptEngineLog());
+        contextFactory_ = new HtmlUnitContextFactory(webClient, getScriptEngineLog());
     }
 
     /**
@@ -363,38 +367,10 @@ public class JavaScriptEngine implements Serializable {
      * @param startLine the line at which the script source starts
      * @return the result of executing the specified code
      */
-    public Script compile(final HtmlPage htmlPage,
-                           String sourceCode,
-                           final String sourceName,
-                           final int startLine) {
+    public Script compile(final HtmlPage htmlPage, final String sourceCode,
+                           final String sourceName, final int startLine) {
 
         WebAssert.notNull("sourceCode", sourceCode);
-
-        // Pre process the source code
-        sourceCode = preProcess(htmlPage, sourceCode, sourceName, null);
-
-        // PreProcess IE Conditional Compilation if needed
-        final BrowserVersion browserVersion = htmlPage.getWebClient().getBrowserVersion();
-        if (browserVersion.isIE()) {
-            final ScriptPreProcessor ieCCPreProcessor = new IEConditionalCompilationScriptPreProcessor();
-            sourceCode = ieCCPreProcessor.preProcess(htmlPage, sourceCode, sourceName, null);
-//            sourceCode = IEWeirdSyntaxScriptPreProcessor.getInstance()
-//                .preProcess(htmlPage, sourceCode, sourceName, null);
-        }
-
-        // Remove HTML comments around the source if needed
-        final String sourceCodeTrimmed = sourceCode.trim();
-        if (sourceCodeTrimmed.startsWith("<!--")) {
-            sourceCode = sourceCode.replaceFirst("<!--", "// <!--");
-        }
-        // IE ignores the last line containing uncommented -->
-        if (getWebClient().getBrowserVersion().isIE() && sourceCodeTrimmed.endsWith("-->")) {
-            final int lastDoubleSlash = sourceCode.lastIndexOf("//");
-            final int lastNewLine = Math.max(sourceCode.lastIndexOf('\n'), sourceCode.lastIndexOf('\r'));
-            if (lastNewLine > lastDoubleSlash) {
-                sourceCode = sourceCode.substring(0, lastNewLine);
-            }
-        }
 
         final Scriptable scope = getScope(htmlPage, null);
         final String source = sourceCode;
@@ -547,6 +523,7 @@ public class JavaScriptEngine implements Serializable {
 
             try {
                 cx.putThreadLocal(KEY_STARTING_SCOPE, scope_);
+                cx.putThreadLocal(KEY_STARTING_PAGE, htmlPage_);
                 synchronized (htmlPage_) { // 2 scripts can't be executed in parallel for one page
                     final Object response = doRun(cx);
                     processPostponedActions();
@@ -595,32 +572,6 @@ public class JavaScriptEngine implements Serializable {
      */
     public static Log getScriptEngineLog() {
         return ScriptEngineLog_;
-    }
-
-    /**
-     * Pre process the specified source code in the context of the given page using the processor specified
-     * in the webclient. This method delegates to the pre processor handler specified in the
-     * <code>WebClient</code>. If no pre processor handler is defined, the original source code is returned
-     * unchanged.
-     * @param htmlPage the page
-     * @param sourceCode the code to process
-     * @param sourceName a name for the chunk of code (used in error messages)
-     * @param htmlElement the HTML element that will act as the context
-     * @return the source code after being pre processed
-     * @see com.gargoylesoftware.htmlunit.ScriptPreProcessor
-     */
-    public String preProcess(
-        final HtmlPage htmlPage, final String sourceCode, final String sourceName, final HtmlElement htmlElement) {
-
-        String newSourceCode = sourceCode;
-        final ScriptPreProcessor preProcessor = getWebClient().getScriptPreProcessor();
-        if (preProcessor != null) {
-            newSourceCode = preProcessor.preProcess(htmlPage, sourceCode, sourceName, htmlElement);
-            if (newSourceCode == null) {
-                newSourceCode = "";
-            }
-        }
-        return newSourceCode;
     }
 
     /**
