@@ -800,37 +800,6 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void windowFramesLive() throws Exception {
-        final String content =
-            "<html>\n"
-            + "<script>\n"
-            + "var oFrames = window.frames;\n"
-            + "alert(oFrames.length);\n"
-            + "function test()\n"
-            + "{\n"
-            + "    alert(oFrames.length);\n"
-            + "    alert(window.frames.length);\n"
-            + "    alert(oFrames == window.frames);\n"
-            + "}\n"
-            + "</script>\n"
-            + "<frameset rows='50,*' onload='test()'>\n"
-            + "<frame src='about:blank'/>\n"
-            + "<frame src='about:blank'/>\n"
-            + "</frameset>\n"
-            + "</html>";
-
-        final String[] expectedAlerts = {"0", "2", "2", "true"};
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
      * Variables that are defined inside JavaScript should be accessible through the
      * window object (ie window.myVariable). Test that this works.
      * @throws Exception if the test fails
@@ -1146,53 +1115,6 @@ public class WindowTest extends WebTestCase {
         assertEquals(firstWindow, webClient.getCurrentWindow());
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
-    }
-
-    /**
-     * Test that length of frames collection is retrieved.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void framesLengthZero() throws Exception {
-        final String content
-            = "<html><head><title>foo</title><script>\n"
-            + "alert(window.frames.length)\n"
-            + "</script></head><body>\n"
-            + "</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-
-        final String[] expectedAlerts = {"0"};
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * Test that length of frames collection is retrieved when there are frames.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void framesLengthAndFrameAccess() throws Exception {
-        final String content =
-            "<html>\n"
-            + "<script>\n"
-            + "function test()\n"
-            + "{\n"
-            + "    alert(window.frames.length);\n"
-            + "    alert(window.frames[0].name);\n"
-            + "    alert(window.frames.frame2.name);\n"
-            + "}\n"
-            + "</script>\n"
-            + "<frameset rows='50,*' onload='test()'>\n"
-            + "<frame name='frame1' src='about:blank'/>\n"
-            + "<frame name='frame2' src='about:blank'/>\n"
-            + "</frameset>\n"
-            + "</html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-
-        final String[] expectedAlerts = {"2", "frame1", "frame2"};
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**

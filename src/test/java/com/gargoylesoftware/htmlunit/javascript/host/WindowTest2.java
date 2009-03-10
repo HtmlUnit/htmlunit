@@ -391,4 +391,76 @@ public class WindowTest2 extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * Test that length of frames collection is retrieved.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "0", "0" })
+    public void framesLengthZero() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "alert(window.length)\n"
+            + "alert(window.frames.length)\n"
+            + "</script></head><body>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * Test that length of frames collection is retrieved when there are frames.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "2", "2", "frame1", "frame2" })
+    public void framesLengthAndFrameAccess() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<script>\n"
+            + "function test()\n"
+            + "{\n"
+            + "    alert(window.length);\n"
+            + "    alert(window.frames.length);\n"
+            + "    alert(window.frames[0].name);\n"
+            + "    alert(window.frames.frame2.name);\n"
+            + "}\n"
+            + "</script>\n"
+            + "<frameset rows='50,*' onload='test()'>\n"
+            + "<frame name='frame1' src='about:blank'/>\n"
+            + "<frame name='frame2' src='about:blank'/>\n"
+            + "</frameset>\n"
+            + "</html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "0", "0", "2", "2", "2", "true" })
+    public void windowFramesLive() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<script>\n"
+            + "alert(window.length);\n"
+            + "var oFrames = window.frames;\n"
+            + "alert(oFrames.length);\n"
+            + "function test()\n"
+            + "{\n"
+            + "    alert(oFrames.length);\n"
+            + "    alert(window.length);\n"
+            + "    alert(window.frames.length);\n"
+            + "    alert(oFrames == window.frames);\n"
+            + "}\n"
+            + "</script>\n"
+            + "<frameset rows='50,*' onload='test()'>\n"
+            + "<frame src='about:blank'/>\n"
+            + "<frame src='about:blank'/>\n"
+            + "</frameset>\n"
+            + "</html>";
+
+        loadPageWithAlerts(html);
+    }
 }

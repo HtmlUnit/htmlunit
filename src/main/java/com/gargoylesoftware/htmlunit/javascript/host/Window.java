@@ -590,6 +590,14 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
+     * Returns the number of frames.
+     * @return the number of frames
+     */
+    public int jsxGet_length() {
+        return jsxGet_frames().jsxGet_length();
+    }
+
+    /**
      * Returns the WebWindow associated with this Window.
      * @return the WebWindow
      */
