@@ -1562,6 +1562,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void array_concat() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
