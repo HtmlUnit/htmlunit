@@ -161,6 +161,9 @@ public abstract class JQueryTestBase extends WebServerTestCase {
         }
         String s;
         do {
+            if (!expected.hasNext()) {
+                return null;
+            }
             s = expected.next();
         } while(!s.contains("module: "));
 
@@ -183,7 +186,7 @@ public abstract class JQueryTestBase extends WebServerTestCase {
         final HtmlListItem li = (HtmlListItem) iterator.next();
         final String expectedLI = getNextExpectedModuleResult(expected);
         final String actualLI = ((HtmlElement) ((List) li.getByXPath("./strong")).get(0)).asText();
-        if (!expectedLI.equals(actualLI)) {
+        if (!actualLI.equals(expectedLI)) {
             addFailure(new ComparisonFailure("", expectedLI, actualLI).getMessage());
         }
     }
