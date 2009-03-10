@@ -74,4 +74,22 @@ public class HtmlOrderedListTest extends WebTestCase {
         assertEquals(expectedText, node.asText());
         assertEquals(expectedText, page.asText());
     }
+
+    /**
+     * Browsers ignore closing information in a self closing OL tag.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asXml() throws Exception {
+        final String content
+            = "<html><head></head><body>\n"
+            + "<ol id='myNode'></ol>\n"
+            + "foo\n"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(content);
+        final HtmlElement element = page.getHtmlElementById("myNode");
+
+        assertEquals("<ol id=\"myNode\">\n</ol>\n", element.asXml());
+        assertTrue(page.asXml().contains("</ol>"));
+    }
 }

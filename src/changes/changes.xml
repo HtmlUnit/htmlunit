@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, MooTools support, support all HTML elements and various JavaScript properties">
+            <action type="fix" dev="mguillem">
+                HtmlPage.asXml(): expand empty UL and OL nodes to make generated XML readable as HTML on browsers.
+            </action>
             <action type="update" dev="mguillem" issue="2531218">
                 Upgrade HtmlUnit-core-js to 2.5 (corresponds to head of Rhino branch 1.7R2 from Dec 12, 2008 + fix for Rhino issue 477604).
             </action>

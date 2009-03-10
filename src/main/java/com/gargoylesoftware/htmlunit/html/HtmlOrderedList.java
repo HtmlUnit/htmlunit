@@ -113,4 +113,12 @@ public class HtmlOrderedList extends ClickableElement {
     protected boolean isBlock() {
         return true;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isEmptyXmlTagExpanded() {
+        return true;
+    }
 }

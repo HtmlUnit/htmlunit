@@ -98,4 +98,12 @@ public class HtmlUnorderedList extends ClickableElement {
     protected boolean isBlock() {
         return true;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isEmptyXmlTagExpanded() {
+        return true;
+    }
 }

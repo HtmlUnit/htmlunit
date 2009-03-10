@@ -73,4 +73,22 @@ public class HtmlUnorderedListTest extends WebTestCase {
         assertEquals(expectedText, node.asText());
         assertEquals(expectedText, page.asText());
     }
+
+    /**
+     * Browsers ignore closing information in a self closing UL tag.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asXml() throws Exception {
+        final String content
+            = "<html><head></head><body>\n"
+            + "<ul id='myNode'></ul>\n"
+            + "foo\n"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(content);
+        final HtmlElement element = page.getHtmlElementById("myNode");
+
+        assertEquals("<ul id=\"myNode\">\n</ul>\n", element.asXml());
+        assertTrue(page.asXml().contains("</ul>"));
+    }
 }
