@@ -108,6 +108,10 @@ public abstract class JQueryTestBase extends WebServerTestCase {
         while (it.hasNext()) {
             ok(it, expectedIterator);
         }
+        final String s = getNextExpectedModuleResult(expectedIterator);
+        if (s != null) {
+            fail("No result found for " + s + " (and following if any)");
+        }
     }
 
     /**
@@ -143,15 +147,27 @@ public abstract class JQueryTestBase extends WebServerTestCase {
 
         final HtmlElement doc = page.getDocumentElement();
         final HtmlOrderedList tests = (HtmlOrderedList) doc.getElementById("tests");
-        final Iterable<HtmlElement> i = tests.getChildElements();
-        return i.iterator();
+        final Iterator<HtmlElement> iter = tests.getChildElements().iterator();
+        if (!iter.hasNext()) {
+            fail("No result found");
+        }
+
+        return iter;
     }
 
-    private String getExpected(String expected) {
-        if (!getBrowserVersion().isIE()) {
-            expected = expected.substring(expected.indexOf('.') + 2);
+    private String getNextExpectedModuleResult(final Iterator<String> expected) {
+        if (!expected.hasNext()) {
+            return null;
         }
-        return expected;
+        String s;
+        do {
+            s = expected.next();
+        } while(!s.contains("module: "));
+
+        if (!getBrowserVersion().isIE()) {
+            s = s.substring(s.indexOf('.') + 2);
+        }
+        return s;
     }
 
     /**
@@ -165,11 +181,7 @@ public abstract class JQueryTestBase extends WebServerTestCase {
     @SuppressWarnings("unchecked")
     protected void ok(final Iterator<HtmlElement> iterator, final Iterator<String> expected) throws Exception {
         final HtmlListItem li = (HtmlListItem) iterator.next();
-        String s;
-        do {
-            s = expected.next();
-        } while(!s.contains("module: "));
-        final String expectedLI = getExpected(s);
+        final String expectedLI = getNextExpectedModuleResult(expected);
         final String actualLI = ((HtmlElement) ((List) li.getByXPath("./strong")).get(0)).asText();
         if (!expectedLI.equals(actualLI)) {
             addFailure(new ComparisonFailure("", expectedLI, actualLI).getMessage());
