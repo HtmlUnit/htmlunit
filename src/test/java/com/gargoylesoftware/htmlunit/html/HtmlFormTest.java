@@ -179,20 +179,20 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSubmit_onSubmitHandler() throws Exception {
-        final String firstContent
+        final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='" + URL_SECOND + "' onSubmit='alert(\"clicked\")'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = new WebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setDefaultResponse(secondContent);
+        webConnection.setResponse(URL_FIRST, firstHtml);
+        webConnection.setDefaultResponse(secondHtml);
 
         client.setWebConnection(webConnection);
 
@@ -211,21 +211,21 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSubmit_onSubmitHandler_returnFalse() throws Exception {
-        final String firstContent
+        final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='" + URL_SECOND + "' "
             + "onSubmit='alert(\"clicked\");return false;'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = new WebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(URL_FIRST, firstHtml);
+        webConnection.setResponse(URL_SECOND, secondHtml);
 
         client.setWebConnection(webConnection);
 
@@ -245,17 +245,17 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSubmit_onSubmitHandler_fails() throws Exception {
-        final String firstContent
+        final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='" + URL_SECOND + "' onSubmit='return null'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setDefaultResponse(secondContent);
+        webConnection.setResponse(URL_FIRST, firstHtml);
+        webConnection.setDefaultResponse(secondHtml);
 
         client.setWebConnection(webConnection);
 
@@ -270,12 +270,12 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSubmit_onSubmitHandler_javascriptDisabled() throws Exception {
-        final String firstContent
+        final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='" + URL_SECOND + "' onSubmit='alert(\"clicked\")'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = new WebClient();
         client.setJavaScriptEnabled(false);
@@ -284,8 +284,8 @@ public class HtmlFormTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setDefaultResponse(secondContent);
+        webConnection.setResponse(URL_FIRST, firstHtml);
+        webConnection.setDefaultResponse(secondHtml);
 
         client.setWebConnection(webConnection);
 
@@ -305,20 +305,20 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSubmit_javascriptAction() throws Exception {
-        final String firstContent
+        final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='javascript:alert(\"clicked\")'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = new WebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(URL_FIRST, firstHtml);
+        webConnection.setResponse(URL_SECOND, secondHtml);
 
         client.setWebConnection(webConnection);
 
@@ -337,7 +337,7 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSubmit_javascriptAction_javascriptDisabled() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='javascript:alert(\"clicked\")'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
@@ -350,7 +350,7 @@ public class HtmlFormTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_FIRST, html);
 
         client.setWebConnection(webConnection);
 
@@ -368,7 +368,7 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSubmitRadioButton() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><body><form method='POST' action='http://first'>\n"
             + "<table><tr> <td ><input type='radio' name='name1' value='foo'> "
             + "Option 1</td> </tr>\n"
@@ -378,8 +378,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</table><input type='submit' value='Login' name='loginButton1'></form>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(htmlContent);
-
+        final HtmlPage page = loadPage(html);
         final HtmlSubmitInput loginButton
             = page.getDocumentElement().getOneHtmlElementByAttribute("input", "value", "Login");
         loginButton.click();
@@ -421,7 +420,7 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSubmit_AnchorCausesSubmit_onSubmitHandler_returnFalse() throws Exception {
-        final String firstContent
+        final String firstHtml
             = "<html><head><title>First</title></head>\n"
             + "<script>function doalert(message){alert(message);}</script>\n"
             + "<body><form name='form1' method='get' action='" + URL_SECOND + "' "
@@ -429,15 +428,15 @@ public class HtmlFormTest extends WebTestCase {
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "<a id='link1' href='javascript:document.form1.submit()'>Click me</a>\n"
             + "</body></html>";
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = new WebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setDefaultResponse(secondContent);
+        webConnection.setResponse(URL_FIRST, firstHtml);
+        webConnection.setDefaultResponse(secondHtml);
 
         client.setWebConnection(webConnection);
 
@@ -456,13 +455,13 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSubmit_NoDefaultValue() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
             + "    <input type='text' name='textfield'/>\n"
             + "    <input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
 
         final HtmlForm form = page.getHtmlElementById("form1");
@@ -483,13 +482,13 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSubmit_NoNameOnControl() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
             + "    <input type='text' id='textfield' value='blah'/>\n"
             + "    <input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
 
         final HtmlForm form = page.getHtmlElementById("form1");
@@ -509,13 +508,13 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSubmit_NoNameOnButton() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
             + "    <input type='text' id='textfield' value='blah' name='textfield' />\n"
             + "    <button type='submit' id='button' value='Go'>Go</button>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
 
         final HtmlButton button = page.getHtmlElementById("button");
@@ -533,7 +532,7 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSubmit_NestedInput() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
             + "    <table><tr><td>\n"
@@ -543,7 +542,7 @@ public class HtmlFormTest extends WebTestCase {
             + "        </td></tr>\n"
             + "     </table>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
 
         final HtmlForm form = page.getHtmlElementById("form1");
@@ -565,13 +564,13 @@ public class HtmlFormTest extends WebTestCase {
     */
     @Test
     public void testSubmit_IgnoresDisabledControls() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
             + "    <input type='text' name='textfield' value='blah' disabled />\n"
             + "    <input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
 
         final HtmlForm form = page.getHtmlElementById("form1");
@@ -593,13 +592,13 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSubmit_IgnoresResetControls() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+        final String html = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
             + "    <button type='reset' name='buttonreset' value='buttonreset'/>\n"
             + "    <input type='reset' name='reset' value='reset'/>\n"
             + "    <input type='submit' name='submit' value='submit'/>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
 
         final HtmlForm form = page.getHtmlElementById("form1");
@@ -619,7 +618,7 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSubmit_CheckboxClicked() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title>\n"
             + "<script language='javascript'>\n"
             + "function setFormat()\n"
@@ -637,7 +636,7 @@ public class HtmlFormTest extends WebTestCase {
             + "    <input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
 
-        final HtmlPage page1 = loadPage(htmlContent);
+        final HtmlPage page1 = loadPage(html);
         final MockWebConnection webConnection1 = getMockConnection(page1);
         final HtmlForm form1 = page1.getHtmlElementById("form1");
         final HtmlSubmitInput button1 = form1.getInputByName("button");
@@ -669,7 +668,7 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testGetInputByValue() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "    <input type='submit' name='button' value='xxx'/>\n"
@@ -678,7 +677,7 @@ public class HtmlFormTest extends WebTestCase {
             + "    <input type='reset' name='button2' value='foo'/>\n"
             + "    <input type='submit' name='button' value='bar'/>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(html);
 
         final HtmlForm form = page.getHtmlElementById("form1");
 
@@ -709,14 +708,14 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testGetTextAreaByName() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "    <textarea id='ta1_1' name='ta1'>hello</textarea>\n"
             + "    <textarea id='ta1_2' name='ta1'>world</textarea>\n"
             + "    <textarea id='ta2_1' name='ta2'>!</textarea>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(html);
 
         final HtmlForm form = page.getHtmlElementById("form1");
 
@@ -742,14 +741,14 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testGetButtonByName() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "    <button id='b1_1' name='b1' value='hello' type='button'/>\n"
             + "    <button id='b1_2' name='b1' value='world' type='button'/>\n"
             + "    <button id='b2_1' name='b2' value='!' type='button'/>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(html);
 
         final HtmlForm form = page.getHtmlElementById("form1");
 
@@ -773,7 +772,7 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSubmitToTargetWindow() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>first</title></head><body>\n"
             + "<form id='form1' target='window2' action='" + URL_SECOND + "' method='post'>\n"
             + "    <input type='submit' name='button' value='push me'/>\n"
@@ -781,7 +780,7 @@ public class HtmlFormTest extends WebTestCase {
         final WebClient client = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_FIRST, html);
         webConnection.setResponseAsGenericHtml(URL_SECOND, "second");
         client.setWebConnection(webConnection);
 
@@ -803,12 +802,12 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSubmit_SelectHasNoOptions() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><body><form name='form' method='GET' action='action.html'>\n"
             + "<select name='select'>\n"
             + "</select>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
 
         final HtmlPage secondPage = (HtmlPage) page.getFormByName("form").submit((SubmittableElement) null);
@@ -822,14 +821,14 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSubmit_SelectOptionWithoutValueAttribute() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><body><form name='form' action='action.html'>\n"
             + "<select name='select'>\n"
             + "     <option>first value</option>\n"
             + "     <option selected>second value</option>\n"
             + "</select>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(html);
         final HtmlPage secondPage = (HtmlPage) page.getFormByName("form").submit((SubmittableElement) null);
 
         assertNotNull(secondPage);
@@ -843,14 +842,14 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSubmit_DeepInputs() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><form method='post' action=''>\n"
             + "<table><tr><td>\n"
             + "<input value='NOT_SUBMITTED' name='data' type='text'/>\n"
             + "</td></tr></table>\n"
             + "<input id='submitButton' name='submit' type='submit'/>\n"
             + "</form></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
 
         final HtmlInput submitButton = page.getHtmlElementById("submitButton");
@@ -870,7 +869,7 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSubmit_FormElementOrder() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head></head><body><form method='post' action=''>\n"
             + "<input type='submit' name='dispatch' value='Save' id='submitButton'>\n"
             + "<input type='hidden' name='dispatch' value='TAB'>\n"
@@ -878,7 +877,7 @@ public class HtmlFormTest extends WebTestCase {
         final WebClient client = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setDefaultResponse(htmlContent);
+        webConnection.setDefaultResponse(html);
         client.setWebConnection(webConnection);
 
         final WebRequestSettings settings = new WebRequestSettings(URL_GARGOYLE, HttpMethod.POST);
@@ -901,18 +900,18 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSubmit_refererHeader() throws Exception {
-        final String firstContent
+        final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
             + "<form method='post' action='" + URL_SECOND + "'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(URL_FIRST, firstHtml);
+        webConnection.setResponse(URL_SECOND, secondHtml);
 
         client.setWebConnection(webConnection);
 
@@ -934,7 +933,7 @@ public class HtmlFormTest extends WebTestCase {
       */
     @Test
     public void testJSSubmit_JavaScriptAction() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>First</title></head>\n"
             + "<body onload='document.getElementById(\"aForm\").submit()'>\n"
             + "<form id='aForm' action='javascript:alert(\"clicked\")'"
@@ -942,10 +941,10 @@ public class HtmlFormTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"clicked"};
-        createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(htmlContent, collectedAlerts);
+        loadPage(html, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -986,7 +985,7 @@ public class HtmlFormTest extends WebTestCase {
      */
     private void testUrlAfterSubmit(final URL url, final String method, final String action,
             final String expectedUrlEnd) throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='" + method + "' action='" + action + "'>\n"
             + "<input type='text' name='textField' value='foo'/>\n"
@@ -995,7 +994,7 @@ public class HtmlFormTest extends WebTestCase {
             + "<input type='button' name='inputButton' value='foo'/>\n"
             + "<button type='button' name='buttonButton' value='foo'/>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent, null, url);
+        final HtmlPage page = loadPage(html, null, url);
         final HtmlForm form = page.getHtmlElementById("form1");
         final Page page2 = form.submit((HtmlSubmitInput) page.getHtmlElementById("submitButton"));
 
@@ -1058,7 +1057,7 @@ public class HtmlFormTest extends WebTestCase {
                 + metaCharset + "'>\n";
         }
 
-        final String content = "<html><head><title>foo</title>\n"
+        final String html = "<html><head><title>foo</title>\n"
             + metaContentType
             + "</head><body>\n"
             + "<form name='form1' method='post' action='foo'"
@@ -1076,7 +1075,7 @@ public class HtmlFormTest extends WebTestCase {
         if (headerCharset != null) {
             contentType += ";charset=" + headerCharset;
         }
-        webConnection.setDefaultResponse(content, 200, "ok", contentType);
+        webConnection.setDefaultResponse(html, 200, "ok", contentType);
         final HtmlPage page = client.getPage(URL_GARGOYLE);
 
         final String firstPageEncoding = StringUtils.defaultString(metaCharset, headerCharset);
@@ -1120,12 +1119,12 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSubmitWithOnClickThatReturnsFalse() throws Exception {
-        final String firstContent = "<html><head><title>foo</title></head><body>\n"
+        final String firstHtml = "<html><head><title>foo</title></head><body>\n"
             + "<form action='" + URL_SECOND + "' method='post'>\n"
             + "  <input type='submit' name='mySubmit' onClick='document.forms[0].submit(); return false;'>\n"
             + "</form></body></html>";
 
-        final String secondContent = "<html><head><title>foo</title><script>\n"
+        final String secondHtml = "<html><head><title>foo</title><script>\n"
             + "  Number.prototype.gn = false;\n"
             + "  function test() {\n"
             + "    var v = 0;\n"
@@ -1140,8 +1139,8 @@ public class HtmlFormTest extends WebTestCase {
         final WebClient client = new WebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, firstContent);
-        conn.setResponse(URL_SECOND, secondContent);
+        conn.setResponse(URL_FIRST, firstHtml);
+        conn.setResponse(URL_SECOND, secondHtml);
         client.setWebConnection(conn);
 
         final HtmlPage page = client.getPage(URL_FIRST);
@@ -1165,19 +1164,19 @@ public class HtmlFormTest extends WebTestCase {
 
     private void testSubmitURLWithoutParameters(final BrowserVersion browserVersion, final String expectedURL)
         throws Exception {
-        final String firstContent = "<html><head><title>foo</title></head><body>\n"
+        final String firstHtml = "<html><head><title>foo</title></head><body>\n"
             + "<form action='" + URL_SECOND + "'>\n"
             + "  <input type='submit' name='mySubmit' onClick='document.forms[0].submit(); return false;'>\n"
             + "</form></body></html>";
 
-        final String secondContent = "<html><head><title>second</title></head></html>";
+        final String secondHtml = "<html><head><title>second</title></head></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient(browserVersion);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, firstContent);
-        conn.setDefaultResponse(secondContent);
+        conn.setResponse(URL_FIRST, firstHtml);
+        conn.setDefaultResponse(secondHtml);
         client.setWebConnection(conn);
 
         final HtmlPage page = client.getPage(URL_FIRST);
@@ -1192,7 +1191,7 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void malformedHtml_nestedForms() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    alert(document.forms.length);\n"
@@ -1208,10 +1207,10 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
 
         final String[] expectedAlerts = {"1", "val2"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
+        loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1220,7 +1219,7 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void malformedHtml_fieldGetters() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<div>\n"
             + "<form id='form1' method='get' action='foo'>\n"
@@ -1235,7 +1234,7 @@ public class HtmlFormTest extends WebTestCase {
             + "    <input type='submit' id='submitButton'/>\n"
             + "</form></body></html>";
 
-        final HtmlPage page = loadPage(content);
+        final HtmlPage page = loadPage(html);
         final HtmlForm form = page.getForms().get(0);
 
         assertEquals("val1", form.<HtmlInput>getInputByName("field3").getValueAttribute());
