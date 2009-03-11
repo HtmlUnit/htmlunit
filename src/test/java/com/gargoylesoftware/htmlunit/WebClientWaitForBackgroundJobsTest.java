@@ -400,7 +400,6 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, html);
         webConnection.setDefaultResponse("");
@@ -428,7 +427,6 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
 class ThreadSynchronizer {
     private String state_ = "initial";
     private static final Log log_ = LogFactory.getLog(ThreadSynchronizer.class);
-
 
     synchronized void setState(final String newState) {
         state_ = newState;
