@@ -1933,14 +1933,17 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * <span style="color:red">Experimental API: subject to change at any time and not yet working for all cases
-     * (HtmlUnit's tests don't yet use it).</span><br/>
-     * Blocks until all jobs scheduled within the specified time have finished executing.
+     * <span style="color:red">Experimental API: it is not yet working for all cases
+     * (not all HtmlUnit's tests already use it).</span><br/>
+     * Blocks until all JavaScript jobs (started with window.setTimeout, window.setInterval or asynchronous
+     * XMLHttpRequest) scheduled within the specified delay have finished executing.<br/>
      * If no job is scheduled within the specified delay, this method will return immediately even if
-     * jobs are scheduled for a later time.
-     * @param delayMillis the delay determining jobs that should be executed
+     * jobs are scheduled for a later time.<br/>
+     * The time needed by a job starting within the provided delay to complete is unknown therefore the
+     * time needed by this method to complete doesn't depend on the value of the provided parameter.
+     * @param delayMillis the delay in milliseconds determining jobs that should be waited for
      */
-    public void waitForJobsWithinDelayToFinish(final long delayMillis) {
+    public void waitForBackgroundJavaScript(final long delayMillis) {
         jsJobsSupervisor_.waitForJobsWithinDelayToFinish(delayMillis);
     }
 

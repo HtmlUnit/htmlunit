@@ -445,7 +445,7 @@ public class WindowConcurrencyTest extends WebTestCase {
         client.setWebConnection(conn);
 
         client.getPage(URL_FIRST);
-        client.waitForJobsWithinDelayToFinish(1000);
+        client.waitForBackgroundJavaScript(1000);
 
         final String[] expectedAlerts = {"in f"};
         assertEquals(expectedAlerts, collectedAlerts);

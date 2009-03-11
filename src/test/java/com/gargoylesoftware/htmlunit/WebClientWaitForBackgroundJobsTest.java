@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 
 /**
- * Tests for {@link WebClient#waitForJobsWithinDelayToFinish(long)}.
+ * Tests for {@link WebClient#waitForBackgroundJavaScript(long)}.
  *
  * @version $Revision$
  * @author Marc Guillemot
@@ -80,7 +80,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
         assertEquals(1, jobManager.getJobCount());
 
         startTimedTest();
-        page.getWebClient().waitForJobsWithinDelayToFinish(7000);
+        page.getWebClient().waitForBackgroundJavaScript(7000);
         assertMaxTestRunTime(100);
         assertEquals(1, jobManager.getJobCount());
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
@@ -123,7 +123,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
         assertEquals(3, jobManager.getJobCount());
 
         startTimedTest();
-        page.getWebClient().waitForJobsWithinDelayToFinish(20000);
+        page.getWebClient().waitForBackgroundJavaScript(20000);
         assertMaxTestRunTime(400);
         assertEquals(0, jobManager.getJobCount());
 
@@ -191,7 +191,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
 
         startTimedTest();
         threadSynchronizer.setState("just before waitForJobsWithinDelayToFinish");
-        client.waitForJobsWithinDelayToFinish(20000);
+        client.waitForBackgroundJavaScript(20000);
         assertMaxTestRunTime(600);
         assertEquals(0, jobManager.getJobCount());
 
@@ -234,7 +234,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
         assertEquals(1, jobManager.getJobCount());
 
         startTimedTest();
-        page.getWebClient().waitForJobsWithinDelayToFinish(20000);
+        page.getWebClient().waitForBackgroundJavaScript(20000);
         assertMaxTestRunTime(1000);
         assertEquals(0, jobManager.getJobCount());
 
@@ -291,7 +291,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
         assertEquals(0, jobManager.getJobCount());
 
         startTimedTest();
-        client.waitForJobsWithinDelayToFinish(20000);
+        client.waitForBackgroundJavaScript(20000);
         assertMaxTestRunTime(300);
         assertEquals(0, jobManager.getJobCount());
 
@@ -361,7 +361,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
 
         startTimedTest();
         threadSynchronizer.setState("just before waitForJobsWithinDelayToFinish");
-        client.waitForJobsWithinDelayToFinish(20000);
+        client.waitForBackgroundJavaScript(20000);
         assertMaxTestRunTime(1000);
         assertEquals(0, jobManager.getJobCount());
 
@@ -410,7 +410,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
         client.getPage(URL_FIRST);
 
         startTimedTest();
-        client.waitForJobsWithinDelayToFinish(1000);
+        client.waitForBackgroundJavaScript(1000);
         assertMaxTestRunTime(1000);
 
         assertEquals(51, collectedAlerts.size());
