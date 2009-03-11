@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -366,6 +368,57 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
         final String[] expectedAlerts = {"xhr onchange", "work1"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Tests that waitForJobsWithinDelayToFinish waits for jobs that should have been started earlier
+     * but that are "late" due to processing of previous job.
+     * This test needs to start many setTimeout to expect to reach the state, where a check for future
+     * jobs occurs when one of this job is not active.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void waitForJobThatIsAlreadyLate() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    var counter = 0;\n"
+            + "    function test() {\n"
+            + "      setTimeout(doWork1, 0);\n"
+            + "    }\n"
+            + "    function doWork1() {\n"
+            + "      if (counter++ < 5) {\n"
+            + "        setTimeout(doWork1, 0);\n"
+            + "      }\n"
+            + "      alert('work1');\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(URL_FIRST, html);
+        webConnection.setDefaultResponse("");
+
+        final WebClient client = new WebClient(BrowserVersion.FIREFOX_3); // just to simplify test code using XHR
+        client.setWebConnection(webConnection);
+
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        client.getPage(URL_FIRST);
+
+        startTimedTest();
+        client.waitForJobsWithinDelayToFinish(1000);
+        assertMaxTestRunTime(1000);
+
+        assertEquals(10, collectedAlerts.size());
+    }
 }
 
 /**
@@ -374,6 +427,8 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
  */
 class ThreadSynchronizer {
     private String state_ = "initial";
+    private static final Log log_ = LogFactory.getLog(ThreadSynchronizer.class);
+
 
     synchronized void setState(final String newState) {
         state_ = newState;
@@ -386,6 +441,7 @@ class ThreadSynchronizer {
      */
     public void sleep(final long millis) {
         try {
+            log_.debug("Sleeping for " + millis + "ms");
             Thread.sleep(millis);
         }
         catch (final InterruptedException e) {

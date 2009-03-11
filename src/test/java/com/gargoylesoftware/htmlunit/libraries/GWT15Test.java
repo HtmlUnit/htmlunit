@@ -120,7 +120,7 @@ public class GWT15Test extends WebServerTestCase {
 
         final String url = "http://localhost:" + PORT + "/I18N.html?locale=fr";
         final HtmlPage page = client.getPage(url);
-        page.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(10000);
+        client.waitForJobsWithinDelayToFinish(2000);
 
         //visible space in browser is not normal space but '\u00A0' instead, as noted by the following test in browser:
         /*
@@ -258,16 +258,6 @@ public class GWT15Test extends WebServerTestCase {
         final String[] pendingOrders =
         {"123-2", "3 45122 34566", "2/2/2004", "43 Butcher lane", "Atlanta", "Georgia", "30366"};
 
-        //try 20 times to wait .5 second each for filling the page.
-        for (int i = 0; i < 20; i++) {
-            if (page.getByXPath("//table[@class='userTable'][1]//tr[2]/td").size() == pendingOrders.length) {
-                break;
-            }
-            synchronized (page) {
-                page.wait(500);
-            }
-        }
-
         final List< ? > cells = page.getByXPath("//table[@class='userTable'][1]//tr[2]/td");
         assertEquals(pendingOrders.length, cells.size());
         for (int i = 0; i < pendingOrders.length; i++) {
@@ -313,15 +303,7 @@ public class GWT15Test extends WebServerTestCase {
         final HtmlButton button = page.getFirstByXPath("//button");
         button.click();
 
-        //try 20 times to wait .5 second each for filling the page.
-        for (int i = 0; i < 20; i++) {
-            if (page.getFirstByXPath("//div[@class='JSON-JSONResponseObject']") != null) {
-                break;
-            }
-            synchronized (page) {
-                page.wait(500);
-            }
-        }
+        page.getWebClient().waitForJobsWithinDelayToFinish(2000);
 
         final HtmlSpan span =
             page.getFirstByXPath("//div[@class='JSON-JSONResponseObject']/div/div/table//td[2]/span/span");
@@ -340,25 +322,13 @@ public class GWT15Test extends WebServerTestCase {
 
         final String url = "http://localhost:" + PORT + "/DynaTable.html";
         final HtmlPage page = client.getPage(url);
+        client.waitForJobsWithinDelayToFinish(2000);
 
         final String[] firstRow = {"Inman Mendez",
             "Majoring in Phrenology", "Mon 9:45-10:35, Tues 2:15-3:05, Fri 8:45-9:35, Fri 9:45-10:35"};
 
-        //try 40 times to wait .5 second each for filling the page.
-        for (int i = 0; i < 40; i++) {
-            final List< ? > detailsCells = page.getByXPath("//table[@class='table']//tr[2]/td");
-            if (detailsCells.size() == firstRow.length) {
-                final HtmlTableDataCell firstCell = (HtmlTableDataCell) detailsCells.get(0);
-                if (firstCell.getFirstChild().getNodeValue().equals(firstRow[0])) {
-                    break;
-                }
-            }
-            synchronized (page) {
-                page.wait(500);
-            }
-        }
-
         final List< ? > detailsCells = page.getByXPath("//table[@class='table']//tr[2]/td");
+        System.err.println("verifying");
         assertEquals(firstRow.length, detailsCells.size());
         for (int i = 0; i < firstRow.length; i++) {
             final HtmlTableDataCell cell = (HtmlTableDataCell) detailsCells.get(i);
@@ -393,7 +363,7 @@ public class GWT15Test extends WebServerTestCase {
         }
 
         final HtmlPage page = client.getPage(url);
-        page.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(10000);
+        client.waitForJobsWithinDelayToFinish(2000);
         return page;
     }
 

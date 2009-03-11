@@ -123,7 +123,7 @@ public class JavaScriptJobsSupervisor implements Serializable {
     }
 
     private synchronized ScheduledFuture< ? > getLastJobStartingBefore(final long maxStartTime) {
-        long currentDelay = 0;
+        long currentDelay = Long.MIN_VALUE;
         ScheduledFuture< ? > job = null;
         final long maxAllowedDelay = maxStartTime - System.currentTimeMillis();
         for (final WeakReference<ScheduledFuture< ? >> futureRef : job2Future_.values()) {
