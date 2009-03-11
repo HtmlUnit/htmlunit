@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 
 /**
@@ -141,6 +142,10 @@ public abstract class WebWindowImpl implements WebWindow {
         getJobManager().stopAllJobsAsap();
         for (final ListIterator<WebWindowImpl> iter = childWindows_.listIterator(); iter.hasNext();) {
             final WebWindowImpl window = iter.next();
+            final Page page = window.getEnclosedPage();
+            if (page instanceof HtmlPage) {
+                ((HtmlPage) page).cleanUp();
+            }
             window.destroyChildren();
             window.getJobManager().shutdown();
             iter.remove();

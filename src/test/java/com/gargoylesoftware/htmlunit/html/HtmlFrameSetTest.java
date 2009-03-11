@@ -404,9 +404,6 @@ public class HtmlFrameSetTest extends WebTestCase {
      */
     @Test
     public void closeShouldRemoveFramesetWindows() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String firstContent
             = "<html><head><title>First</title></head>\n"
             + "<frameset cols='130,*'>\n"

@@ -206,10 +206,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
 
     /**
      * Clean up this page.
-     * @throws IOException if an IO problem occurs
      */
     @Override
-    public void cleanUp() throws IOException {
+    public void cleanUp() {
         executeEventHandlersIfNeeded(Event.TYPE_UNLOAD);
         deregisterFramesIfNeeded();
     }

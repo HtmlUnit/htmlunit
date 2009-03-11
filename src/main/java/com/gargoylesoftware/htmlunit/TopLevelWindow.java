@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
 
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+
 /**
  * A window representing a top level browser window.
  *
@@ -97,6 +99,10 @@ public class TopLevelWindow extends WebWindowImpl implements Serializable  {
      * Closes this window.
      */
     public void close() {
+        final Page page = getEnclosedPage();
+        if (page instanceof HtmlPage) {
+            ((HtmlPage) page).cleanUp();
+        }
         destroyChildren();
         getJobManager().shutdown();
         getWebClient().deregisterWebWindow(this);
