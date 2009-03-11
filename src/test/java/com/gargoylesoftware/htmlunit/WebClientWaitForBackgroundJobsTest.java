@@ -378,9 +378,6 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
      */
     @Test
     public void waitForJobThatIsAlreadyLate() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
@@ -389,7 +386,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
             + "      setTimeout(doWork1, 0);\n"
             + "    }\n"
             + "    function doWork1() {\n"
-            + "      if (counter++ < 5) {\n"
+            + "      if (counter++ < 50) {\n"
             + "        setTimeout(doWork1, 0);\n"
             + "      }\n"
             + "      alert('work1');\n"
@@ -416,7 +413,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
         client.waitForJobsWithinDelayToFinish(1000);
         assertMaxTestRunTime(1000);
 
-        assertEquals(10, collectedAlerts.size());
+        assertEquals(51, collectedAlerts.size());
     }
 }
 
