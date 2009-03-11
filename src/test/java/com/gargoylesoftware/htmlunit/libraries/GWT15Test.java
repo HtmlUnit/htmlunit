@@ -328,7 +328,6 @@ public class GWT15Test extends WebServerTestCase {
             "Majoring in Phrenology", "Mon 9:45-10:35, Tues 2:15-3:05, Fri 8:45-9:35, Fri 9:45-10:35"};
 
         final List< ? > detailsCells = page.getByXPath("//table[@class='table']//tr[2]/td");
-        System.err.println("verifying");
         assertEquals(firstRow.length, detailsCells.size());
         for (int i = 0; i < firstRow.length; i++) {
             final HtmlTableDataCell cell = (HtmlTableDataCell) detailsCells.get(i);
