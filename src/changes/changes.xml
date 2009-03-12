@@ -7,6 +7,9 @@
     <body>
         <release version="2.5" date="?" description="Bugfixes, MooTools support, support all HTML elements and various JavaScript properties">
             <action type="fix" dev="mguillem">
+                JavaScript: in an XMLHttpRequest handler, 'this' is the handler when simulating FF2 and the XHR otherwise.
+            </action>
+            <action type="fix" dev="mguillem">
                 ToplevelWindow.close() deregisters sub-frames.
             </action>
             <action type="fix" dev="mguillem">

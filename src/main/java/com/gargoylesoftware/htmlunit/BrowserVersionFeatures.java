@@ -57,5 +57,10 @@ public enum BrowserVersionFeatures {
     STYLESHEET_HREF_STYLE_NULL,
 
     /** Indicates that \n are replaced by \r\n in textarea values. */
-    TEXTAREA_CRNL;
+    TEXTAREA_CRNL,
+
+    /**
+     * Indicates if 'this' corresponds to the handler function when a XMLHttpRequest handler is executed (as in FF2).
+     **/
+    XMLHTTPREQUEST_HANDLER_THIS_IS_FUNCTION;
 }

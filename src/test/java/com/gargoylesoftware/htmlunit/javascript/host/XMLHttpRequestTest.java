@@ -37,7 +37,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -51,7 +50,6 @@ import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 
 /**
  * Tests for {@link XMLHttpRequest}.
@@ -196,12 +194,10 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         conn.setResponse(URL_FIRST, html);
         conn.setResponse(URL_SECOND, xml, "text/xml");
         client.setWebConnection(conn);
-        final Page page = client.getPage(URL_FIRST);
+        client.getPage(URL_FIRST);
 
+        client.waitForBackgroundJavaScript(1000);
         final String[] alerts = {UNINITIALIZED, LOADING, LOADING, LOADED, INTERACTIVE, COMPLETED, xml};
-        final JavaScriptJobManager mgr = page.getEnclosingWindow().getJobManager();
-
-        assertTrue("thread failed to stop in 1 second", mgr.waitForAllJobsToFinish(1000));
         assertEquals(alerts, collectedAlerts);
     }
 
@@ -254,10 +250,9 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         final MockWebConnection conn = new DisconnectedMockWebConnection();
         conn.setResponse(URL_FIRST, html);
         client.setWebConnection(conn);
-        final Page page = client.getPage(URL_FIRST);
-        final JavaScriptJobManager mgr = page.getEnclosingWindow().getJobManager();
+        client.getPage(URL_FIRST);
 
-        assertTrue("thread failed to stop in 1 second", mgr.waitForAllJobsToFinish(1000));
+        client.waitForBackgroundJavaScript(1000);
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
@@ -677,7 +672,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "</html>";
 
         final WebWindow window = loadPage(getBrowserVersion(), content, null).getEnclosingWindow();
-        assertTrue("thread failed to stop in 4 seconds", window.getJobManager().waitForAllJobsToFinish(4000));
+        window.getWebClient().waitForBackgroundJavaScript(1000);
         assertEquals("about:blank", window.getEnclosedPage().getWebResponse().getRequestUrl());
     }
 
@@ -732,10 +727,9 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         final URL urlPage2 = new URL(URL_FIRST + "foo.xml");
         conn.setResponse(urlPage2, "<foo/>\n", "text/xml");
         client.setWebConnection(conn);
-        final Page page = client.getPage(URL_FIRST);
+        client.getPage(URL_FIRST);
 
-        final JavaScriptJobManager mgr = page.getEnclosingWindow().getJobManager();
-        assertTrue("thread failed to stop in 4 seconds", mgr.waitForAllJobsToFinish(4000));
+        client.waitForBackgroundJavaScript(1000);
 
         final String[] alerts = {URL_FIRST.toExternalForm(), "before long loop", "after long loop",
             urlPage2.toExternalForm(), "ready state handler, content loaded: j=5000" };
@@ -1196,8 +1190,8 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         startWebServer(resourceBase, null, servlets);
         final WebClient client = getWebClient();
         final HtmlPage page = client.getPage("http://localhost:" + PORT + "/XMLHttpRequestTest_streaming.html");
+        client.waitForBackgroundJavaScript(1000);
         final HtmlElement body = page.getBody();
-        Thread.sleep(5000);
         assertEquals(10, body.asText().split("\n").length);
     }
 
@@ -1368,4 +1362,54 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * Tests the value of "this" in handler.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF2 = "this == handler", FF3 = "this == request", IE = "this == request")
+    public void thisValueInHandler() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>XMLHttpRequest Test</title>\n"
+            + "    <script>\n"
+            + "      var request;\n"
+            + "      function testAsync() {\n"
+            + "        if (window.XMLHttpRequest)\n"
+            + "          request = new XMLHttpRequest();\n"
+            + "        else if (window.ActiveXObject)\n"
+            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        request.onreadystatechange = onReadyStateChange;\n"
+            + "        request.open('GET', 'foo.xml', true);\n"
+            + "        request.send('');\n"
+            + "      }\n"
+            + "      function onReadyStateChange() {\n"
+            + "        if (request.readyState == 4) {\n"
+            + "          if (this == request)\n"
+            + "            alert('this == request');\n"
+            + "          else if (this == onReadyStateChange)\n"
+            + "            alert('this == handler');\n"
+            + "          else alert('not expected: ' + this)\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='testAsync()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final WebClient client = getWebClient();
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html);
+        conn.setDefaultResponse("");
+        client.setWebConnection(conn);
+        client.getPage(URL_FIRST);
+
+        client.waitForBackgroundJavaScript(1000);
+
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
 }

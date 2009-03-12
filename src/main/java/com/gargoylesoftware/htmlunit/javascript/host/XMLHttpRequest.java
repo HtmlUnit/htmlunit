@@ -30,6 +30,7 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.AjaxController;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.DefaultCredentialsProvider;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -152,10 +153,17 @@ public class XMLHttpRequest extends SimpleScriptable {
                 nbExecutions = 1;
             }
 
+            final Scriptable thisValue;
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.XMLHTTPREQUEST_HANDLER_THIS_IS_FUNCTION)) {
+                thisValue = stateChangeHandler_;
+            }
+            else {
+                thisValue = this;
+            }
             for (int i = 0; i < nbExecutions; i++) {
                 getLog().debug("Calling onreadystatechange handler for state " + state);
                 jsEngine.callFunction(containingPage_, stateChangeHandler_, context,
-                        this, scope, ArrayUtils.EMPTY_OBJECT_ARRAY);
+                        scope, thisValue, ArrayUtils.EMPTY_OBJECT_ARRAY);
                 getLog().debug("onreadystatechange handler: " + context.decompileFunction(stateChangeHandler_, 4));
                 getLog().debug("Calling onreadystatechange handler for state " + state + ". Done.");
             }
