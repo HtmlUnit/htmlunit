@@ -1388,7 +1388,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             return containsCaseInsensitive(EXECUTE_CMDS_IE, cmd);
         }
         if (!"on".equals(mode)) {
-            final String msg = "queryCommandEnabled() called while document.designMode='" + mode + "'.";
+            final String msg = "queryCommandSupported() called while document.designMode='" + mode + "'.";
             throw Context.reportRuntimeError(msg);
         }
         return containsCaseInsensitive(EXECUTE_CMDS_FF, cmd);
