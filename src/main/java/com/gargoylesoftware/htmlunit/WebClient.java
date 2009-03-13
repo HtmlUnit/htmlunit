@@ -1933,15 +1933,21 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * <span style="color:red">Experimental API: it is not yet working for all cases
-     * (not all HtmlUnit's tests already use it).</span><br/>
-     * Blocks until all JavaScript jobs (started with window.setTimeout, window.setInterval or asynchronous
-     * XMLHttpRequest) scheduled within the specified delay have finished executing.<br/>
-     * If no job is scheduled within the specified delay, this method will return immediately even if
-     * jobs are scheduled for a later time.<br/>
-     * The time needed by a job starting within the provided delay to complete is unknown therefore the
-     * time needed by this method to complete doesn't depend on the value of the provided parameter.
-     * @param delayMillis the delay in milliseconds determining jobs that should be waited for
+     * <p><span style="color:red">Experimental API: May not yet work perfectly!</span></p>
+     *
+     * <p>This method blocks until all background JavaScript tasks scheduled to start executing before
+     * <tt>(now + delayMillis)</tt> have finished executing. Background JavaScript tasks are JavaScript
+     * tasks scheduled for execution via <tt>window.setTimeout</tt>, <tt>window.setInterval</tt> or
+     * asynchronous <tt>XMLHttpRequest</tt>.</p>
+     *
+     * <p>If there is no background JavaScript task currently executing, and there is no background JavaScript
+     * task scheduled to start executing within the specified time, this method returns immediately -- even
+     * if there are tasks scheduled to be executed after <tt>(now + delayMillis)</tt>.</p>
+     *
+     * <p>Note that the total time spent executing a background JavaScript task is never known ahead of
+     * time, so this method makes no guarantees as to how long it will block.</p>
+     *
+     * @param delayMillis the delay (in milliseconds) determining the background tasks to wait for
      */
     public void waitForBackgroundJavaScript(final long delayMillis) {
         jsJobsSupervisor_.waitForJobsWithinDelayToFinish(delayMillis);
@@ -1949,7 +1955,7 @@ public class WebClient implements Serializable {
 
     /**
      * Gets the JavaScript supervisor for this client.
-     * @return the surpervisor
+     * @return the JavaScript supervisor for this client
      */
     protected JavaScriptJobsSupervisor getJavaScriptJobsSupervisor() {
         return jsJobsSupervisor_;
