@@ -415,6 +415,8 @@ test("$.getScript(String, Function) - no callback", function() {
 	$.getScript(url("data/test.js"), start);
 });
 
+/* HTMLUNIT: START DISABLED PHP-RELATED TESTS
+
 test("$.ajax() - JSONP, Local", function() {
 	expect(7);
 
@@ -822,6 +824,8 @@ test("data option: evaluate function values (#2806)", function() {
 		}
 	})
 });
+
+HTMLUNIT: END DISABLED PHP-RELATED TESTS */
 
 }
 
