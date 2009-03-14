@@ -88,7 +88,7 @@ public class HtmlUnorderedListTest extends WebTestCase {
         final HtmlPage page = loadPage(content);
         final HtmlElement element = page.getHtmlElementById("myNode");
 
-        assertEquals("<ul id=\"myNode\">\n</ul>\n", element.asXml());
+        assertEquals("<ul id=\"myNode\">" + LINE_SEPARATOR + "</ul>" + LINE_SEPARATOR, element.asXml());
         assertTrue(page.asXml().contains("</ul>"));
     }
 }
