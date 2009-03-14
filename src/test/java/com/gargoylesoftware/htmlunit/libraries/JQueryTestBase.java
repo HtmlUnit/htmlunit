@@ -44,6 +44,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 @RunWith(BrowserRunner.class)
 public abstract class JQueryTestBase extends WebServerTestCase {
 
+    private WebClient client_;
     private List<String> failures_;
 
     /**
@@ -51,6 +52,7 @@ public abstract class JQueryTestBase extends WebServerTestCase {
      */
     @Before
     public void before() {
+        client_ = getWebClient();
         failures_ = new ArrayList<String>();
     }
 
@@ -60,6 +62,7 @@ public abstract class JQueryTestBase extends WebServerTestCase {
      */
     @After
     public void after() throws Exception {
+        client_.closeAllWindows();
         final StringBuilder sb = new StringBuilder();
         for (final String error : failures_) {
             sb.append('\n').append(error);
@@ -131,9 +134,8 @@ public abstract class JQueryTestBase extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     protected Iterator<HtmlElement> loadPage() throws Exception {
-        final WebClient client = getWebClient();
-        final HtmlPage page = client.getPage(getUrl());
-        page.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(2 * 60 * 1000);
+        final HtmlPage page = client_.getPage(getUrl());
+        client_.waitForBackgroundJavaScript(2 * 60 * 1000);
 
         // dump the result page if not OK
         if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null) {
