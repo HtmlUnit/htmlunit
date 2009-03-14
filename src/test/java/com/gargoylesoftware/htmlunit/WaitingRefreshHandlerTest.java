@@ -61,8 +61,8 @@ public final class WaitingRefreshHandlerTest extends WebTestCase {
         client.setWebConnection(conn);
         client.setRefreshHandler(new WaitingRefreshHandler(0));
 
-        final HtmlPage page = client.getPage(URL_FIRST);
-        page.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(9999);
+        client.getPage(URL_FIRST);
+        client.waitForBackgroundJavaScript(1000);
         final HtmlPage pageAfterWait = (HtmlPage) client.getCurrentWindow().getEnclosedPage();
         assertEquals("Expected Last Page", pageAfterWait.getTitleText());
     }
