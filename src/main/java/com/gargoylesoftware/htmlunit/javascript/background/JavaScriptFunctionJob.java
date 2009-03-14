@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.background;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 
@@ -30,10 +28,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 public class JavaScriptFunctionJob extends JavaScriptExecutionJob {
 
-    /** Logging support. */
-    private static final Log LOG = LogFactory.getLog(JavaScriptFunctionJob.class);
-
-    /** The JavaScript code to execute, if it is in function format. */
+    /** The JavaScript code to execute. */
     private final Function function_;
 
     /**
