@@ -997,15 +997,15 @@
  114. ajax module: synchronous request with callbacks (0, 2, 2)
          1. sucess callback executed
          2. check returned text
- 115. ajax module: pass-through request object (0, 8, 8)
+ 115. ajax module: pass-through request object (2, 6, 8)
          1. get
          2. post
          3. script
          4. json
          5. generic
          6. test.js executed
-         7. Check all ajax calls successful: 5
-         8. Check no ajax errors (status): 0
+         7. Check all ajax calls successful expected: 5 actual: 4
+         8. Check no ajax errors (status: 404) expected: 0 actual: 1
  116. ajax module: ajax cache (0, 18, 18)
          1. test with no parameters
          2. test with 1 parameter
