@@ -20,7 +20,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for compatibility with web server loading of
@@ -56,9 +55,9 @@ public class JQuery126Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented
     public void test() throws Exception {
         startWebServer("src/test/resources/jquery/" + getVersion());
         runTest();
     }
+
 }
