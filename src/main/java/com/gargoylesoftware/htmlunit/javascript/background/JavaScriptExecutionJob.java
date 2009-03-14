@@ -86,8 +86,7 @@ public abstract class JavaScriptExecutionJob extends JavaScriptJob {
 
     /**
      * Run the JavaScript from the concrete class.
-     *
-     * @param page The {@link HtmlPage} that owns the script.
+     * @param page the {@link HtmlPage} that owns the script
      */
     protected abstract void runJavaScript(final HtmlPage page);
 
