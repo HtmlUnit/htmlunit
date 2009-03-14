@@ -77,10 +77,6 @@ public abstract class JQueryTestBase extends WebServerTestCase {
         }
     }
 
-    private void addFailure(final String error) {
-        failures_.add(error);
-    }
-
     /**
      * Returns the path of the file which contains the test expectations.
      * @return the path of the file which contains the test expectations.
@@ -188,7 +184,7 @@ public abstract class JQueryTestBase extends WebServerTestCase {
         final String expectedLI = getNextExpectedModuleResult(expected);
         final String actualLI = li.<HtmlElement>getFirstByXPath("./strong").asText();
         if (!actualLI.equals(expectedLI)) {
-            addFailure(new ComparisonFailure("", expectedLI, actualLI).getMessage());
+            failures_.add(new ComparisonFailure("", expectedLI, actualLI).getMessage());
         }
     }
 
