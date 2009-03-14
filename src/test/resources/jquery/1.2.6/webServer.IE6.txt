@@ -1057,3 +1057,354 @@ test.js executed
 Check if script was evaluated: bar
 ajax module: $.getScript(String, Function) - no callback (0, 1, 1)
 test.js executed
+fx module: animate(Hash, Object, Function) (0, 1, 1)
+Check if animate changed the hash parameter: show
+fx module: animate option (queue === false) (0, 1, 1)
+Animations finished in the correct order
+fx module: queue() defaults to 'fx' type (0, 2, 2)
+queue() got an array set with type 'fx'
+queue('fx') got an array set with no type
+fx module: stop() (0, 3, 3)
+An animation occurred 5px 0px
+Stop didn't reset the animation 5px 0px
+The animation didn't continue: 5
+fx module: stop() - several in queue (0, 4, 4)
+All 3 still in the queue: 3
+An animation occurred 4px 0px
+Stop didn't reset the animation 4px 0px
+The next animation continued: 2
+fx module: stop(clearQueue) (0, 4, 4)
+An animation occurred 4px 0px
+Stop didn't reset the animation 4px 0px
+The animation queue was cleared: 0
+The animation didn't continue: 4
+fx module: stop(clearQueue, gotoEnd) (0, 3, 3)
+An animation occurred 4px 0px
+Stop() reset the animation: 200
+The next animation continued: 3
+fx module: toggle() (0, 3, 3)
+is visible
+is hidden
+is visible again
+fx module: JS Overflow and Display (0, 2, 2)
+Overflow should be visible: visible: visible
+Display shouldn't be tampered with.: inline
+fx module: CSS Overflow and Display (0, 2, 2)
+Overflow should be visible: visible: visible
+Display shouldn't be tampered with.: inline
+fx module: CSS Auto to show (0, 5, 5)
+Showing, display should block: block: block
+Width must be reset to : : 0
+Height must be reset to : : 0
+Opacity must be reset to : : 
+Make sure height is auto.
+fx module: CSS Auto to hide (0, 4, 4)
+Width must be reset to : : 0
+Height must be reset to : : 0
+Opacity must be reset to : : 
+Hiding, display should be none: none: none
+fx module: CSS Auto to 100 (0, 6, 6)
+Final opacity should be 1: 1: 1
+Opacity should be explicitly set to 1, is instead: 1
+Final width should be 100: 100px: 100px
+Width should be explicitly set to 100, is instead: 0
+Final height should be 100: 100px: 100px
+Height should be explicitly set to 100, is instead: 0
+fx module: CSS Auto to 50 (0, 6, 6)
+Final opacity should be 0.5: 0.5: 0.5
+Opacity should be explicitly set to 0.5, is instead: 0.5
+Final width should be 50: 50px: 50px
+Width should be explicitly set to 50, is instead: 0
+Final height should be 50: 50px: 50px
+Height should be explicitly set to 50, is instead: 0
+fx module: CSS Auto to 0 (0, 6, 6)
+Final opacity should be 0: 0: 0
+Opacity should be explicitly set to 0, is instead: 0
+Final width should be 0: 0px: 0px
+Width should be explicitly set to 0, is instead: 0
+Final height should be 0: 0px: 0px
+Height should be explicitly set to 0, is instead: 0
+fx module: JS Auto to show (0, 5, 5)
+Showing, display should block: block: block
+Width must be reset to : auto: 0
+Height must be reset to : auto: 0
+Opacity must be reset to : : 
+Make sure height is auto.
+fx module: JS Auto to hide (0, 4, 4)
+Width must be reset to : auto: 0
+Height must be reset to : auto: 0
+Opacity must be reset to : : 
+Hiding, display should be none: none: none
+fx module: JS Auto to 100 (0, 6, 6)
+Final opacity should be 1: 1: 1
+Opacity should be explicitly set to 1, is instead: 1
+Final width should be 100: 100px: 100px
+Width should be explicitly set to 100, is instead: 0
+Final height should be 100: 100px: 100px
+Height should be explicitly set to 100, is instead: 0
+fx module: JS Auto to 50 (0, 6, 6)
+Final opacity should be 0.5: 0.5: 0.5
+Opacity should be explicitly set to 0.5, is instead: 0.5
+Final width should be 50: 50px: 50px
+Width should be explicitly set to 50, is instead: 0
+Final height should be 50: 50px: 50px
+Height should be explicitly set to 50, is instead: 0
+fx module: JS Auto to 0 (0, 6, 6)
+Final opacity should be 0: 0: 0
+Opacity should be explicitly set to 0, is instead: 0
+Final width should be 0: 0px: 0px
+Width should be explicitly set to 0, is instead: 0
+Final height should be 0: 0px: 0px
+Height should be explicitly set to 0, is instead: 0
+fx module: CSS 100 to show (0, 5, 5)
+Showing, display should block: block: block
+Width must be reset to : : 0
+Height must be reset to : : 0
+Opacity must be reset to : : 
+Make sure height is auto.
+fx module: CSS 100 to hide (0, 4, 4)
+Width must be reset to : : 0
+Height must be reset to : : 0
+Opacity must be reset to : : 
+Hiding, display should be none: none: none
+fx module: CSS 100 to 100 (0, 6, 6)
+Final opacity should be 1: 1: 1
+Opacity should be explicitly set to 1, is instead: 1
+Final width should be 100: 100px: 100px
+Width should be explicitly set to 100, is instead: 0
+Final height should be 100: 100px: 100px
+Height should be explicitly set to 100, is instead: 0
+fx module: CSS 100 to 50 (0, 6, 6)
+Final opacity should be 0.5: 0.5: 0.5
+Opacity should be explicitly set to 0.5, is instead: 0.5
+Final width should be 50: 50px: 50px
+Width should be explicitly set to 50, is instead: 0
+Final height should be 50: 50px: 50px
+Height should be explicitly set to 50, is instead: 0
+fx module: CSS 100 to 0 (0, 6, 6)
+Final opacity should be 0: 0: 0
+Opacity should be explicitly set to 0, is instead: 0
+Final width should be 0: 0px: 0px
+Width should be explicitly set to 0, is instead: 0
+Final height should be 0: 0px: 0px
+Height should be explicitly set to 0, is instead: 0
+fx module: JS 100 to show (0, 5, 5)
+Showing, display should block: block: block
+Width must be reset to 100: 100px: 0
+Height must be reset to 100: 100px: 0
+Opacity must be reset to 1: 1: 1
+Make sure height is auto.
+fx module: JS 100 to hide (0, 4, 4)
+Width must be reset to 100: 100px: 0
+Height must be reset to 100: 100px: 0
+Opacity must be reset to 1: 1: 1
+Hiding, display should be none: none: none
+fx module: JS 100 to 100 (0, 6, 6)
+Final opacity should be 1: 1: 1
+Opacity should be explicitly set to 1, is instead: 1
+Final width should be 100: 100px: 100px
+Width should be explicitly set to 100, is instead: 0
+Final height should be 100: 100px: 100px
+Height should be explicitly set to 100, is instead: 0
+fx module: JS 100 to 50 (0, 6, 6)
+Final opacity should be 0.5: 0.5: 0.5
+Opacity should be explicitly set to 0.5, is instead: 0.5
+Final width should be 50: 50px: 50px
+Width should be explicitly set to 50, is instead: 0
+Final height should be 50: 50px: 50px
+Height should be explicitly set to 50, is instead: 0
+fx module: JS 100 to 0 (0, 6, 6)
+Final opacity should be 0: 0: 0
+Opacity should be explicitly set to 0, is instead: 0
+Final width should be 0: 0px: 0px
+Width should be explicitly set to 0, is instead: 0
+Final height should be 0: 0px: 0px
+Height should be explicitly set to 0, is instead: 0
+fx module: CSS 50 to show (0, 5, 5)
+Showing, display should block: block: block
+Width must be reset to : : 0
+Height must be reset to : : 0
+Opacity must be reset to : : 
+Make sure height is auto.
+fx module: CSS 50 to hide (0, 4, 4)
+Width must be reset to : : 0
+Height must be reset to : : 0
+Opacity must be reset to : : 
+Hiding, display should be none: none: none
+fx module: CSS 50 to 100 (0, 6, 6)
+Final opacity should be 1: 1: 1
+Opacity should be explicitly set to 1, is instead: 1
+Final width should be 100: 100px: 100px
+Width should be explicitly set to 100, is instead: 0
+Final height should be 100: 100px: 100px
+Height should be explicitly set to 100, is instead: 0
+fx module: CSS 50 to 50 (0, 6, 6)
+Final opacity should be 0.5: 0.5: 0.5
+Opacity should be explicitly set to 0.5, is instead: 0.5
+Final width should be 50: 50px: 50px
+Width should be explicitly set to 50, is instead: 0
+Final height should be 50: 50px: 50px
+Height should be explicitly set to 50, is instead: 0
+fx module: CSS 50 to 0 (0, 6, 6)
+Final opacity should be 0: 0: 0
+Opacity should be explicitly set to 0, is instead: 0
+Final width should be 0: 0px: 0px
+Width should be explicitly set to 0, is instead: 0
+Final height should be 0: 0px: 0px
+Height should be explicitly set to 0, is instead: 0
+fx module: JS 50 to show (0, 5, 5)
+Showing, display should block: block: block
+Width must be reset to 50: 50px: 0
+Height must be reset to 50: 50px: 0
+Opacity must be reset to 0.5: 0.5: 0.5
+Make sure height is auto.
+fx module: JS 50 to hide (0, 4, 4)
+Width must be reset to 50: 50px: 0
+Height must be reset to 50: 50px: 0
+Opacity must be reset to 0.5: 0.5: 0.5
+Hiding, display should be none: none: none
+fx module: JS 50 to 100 (0, 6, 6)
+Final opacity should be 1: 1: 1
+Opacity should be explicitly set to 1, is instead: 1
+Final width should be 100: 100px: 100px
+Width should be explicitly set to 100, is instead: 0
+Final height should be 100: 100px: 100px
+Height should be explicitly set to 100, is instead: 0
+fx module: JS 50 to 50 (0, 6, 6)
+Final opacity should be 0.5: 0.5: 0.5
+Opacity should be explicitly set to 0.5, is instead: 0.5
+Final width should be 50: 50px: 50px
+Width should be explicitly set to 50, is instead: 0
+Final height should be 50: 50px: 50px
+Height should be explicitly set to 50, is instead: 0
+fx module: JS 50 to 0 (0, 6, 6)
+Final opacity should be 0: 0: 0
+Opacity should be explicitly set to 0, is instead: 0
+Final width should be 0: 0px: 0px
+Width should be explicitly set to 0, is instead: 0
+Final height should be 0: 0px: 0px
+Height should be explicitly set to 0, is instead: 0
+fx module: CSS 0 to show (0, 5, 5)
+Showing, display should block: block: block
+Width must be reset to : : 0
+Height must be reset to : : 0
+Opacity must be reset to : : 
+Make sure height is auto.
+fx module: CSS 0 to hide (0, 4, 4)
+Width must be reset to : : 0
+Height must be reset to : : 0
+Opacity must be reset to : : 
+Hiding, display should be none: none: none
+fx module: CSS 0 to 100 (0, 6, 6)
+Final opacity should be 1: 1: 1
+Opacity should be explicitly set to 1, is instead: 1
+Final width should be 100: 100px: 100px
+Width should be explicitly set to 100, is instead: 0
+Final height should be 100: 100px: 100px
+Height should be explicitly set to 100, is instead: 0
+fx module: CSS 0 to 50 (0, 6, 6)
+Final opacity should be 0.5: 0.5: 0.5
+Opacity should be explicitly set to 0.5, is instead: 0.5
+Final width should be 50: 50px: 50px
+Width should be explicitly set to 50, is instead: 0
+Final height should be 50: 50px: 50px
+Height should be explicitly set to 50, is instead: 0
+fx module: CSS 0 to 0 (0, 6, 6)
+Final opacity should be 0: 0: 0
+Opacity should be explicitly set to 0, is instead: 0
+Final width should be 0: 0px: 0px
+Width should be explicitly set to 0, is instead: 0
+Final height should be 0: 0px: 0px
+Height should be explicitly set to 0, is instead: 0
+fx module: JS 0 to show (0, 5, 5)
+Showing, display should block: block: block
+Width must be reset to 0: 0px: 0
+Height must be reset to 0: 0px: 0
+Opacity must be reset to 0: 0: 0
+Make sure height is auto.
+fx module: JS 0 to hide (0, 4, 4)
+Width must be reset to 0: 0px: 0
+Height must be reset to 0: 0px: 0
+Opacity must be reset to 0: 0: 0
+Hiding, display should be none: none: none
+fx module: JS 0 to 100 (0, 6, 6)
+Final opacity should be 1: 1: 1
+Opacity should be explicitly set to 1, is instead: 1
+Final width should be 100: 100px: 100px
+Width should be explicitly set to 100, is instead: 0
+Final height should be 100: 100px: 100px
+Height should be explicitly set to 100, is instead: 0
+fx module: JS 0 to 50 (0, 6, 6)
+Final opacity should be 0.5: 0.5: 0.5
+Opacity should be explicitly set to 0.5, is instead: 0.5
+Final width should be 50: 50px: 50px
+Width should be explicitly set to 50, is instead: 0
+Final height should be 50: 50px: 50px
+Height should be explicitly set to 50, is instead: 0
+fx module: JS 0 to 0 (0, 6, 6)
+Final opacity should be 0: 0: 0
+Opacity should be explicitly set to 0, is instead: 0
+Final width should be 0: 0px: 0px
+Width should be explicitly set to 0, is instead: 0
+Final height should be 0: 0px: 0px
+Height should be explicitly set to 0, is instead: 0
+fx module: Chain fadeOut fadeIn (0, 5, 5)
+Make sure that opacity is reset (Old: 1 Cur: 1): 1
+Make sure that height is reset (Old: 0 Cur: 0): 0
+Make sure that width is reset (Old: 0 Cur: 0): 0
+Make sure that display is reset (Old: block Cur: block): block
+Make sure that overflow is reset (Old: visible Cur: visible): visible
+fx module: Chain fadeIn fadeOut (0, 5, 5)
+Make sure that opacity is reset (Old: 1 Cur: 1): 1
+Make sure that height is reset (Old: 0 Cur: 0): 0
+Make sure that width is reset (Old: 0 Cur: 0): 0
+Make sure that display is reset (Old: none Cur: none): none
+Make sure that overflow is reset (Old: visible Cur: visible): visible
+fx module: Chain hide show (0, 5, 5)
+Make sure that opacity is reset (Old: 1 Cur: 1): 1
+Make sure that height is reset (Old: 0 Cur: 0): 0
+Make sure that width is reset (Old: 0 Cur: 0): 0
+Make sure that display is reset (Old: block Cur: block): block
+Make sure that overflow is reset (Old: visible Cur: visible): visible
+fx module: Chain show hide (0, 5, 5)
+Make sure that opacity is reset (Old: 1 Cur: 1): 1
+Make sure that height is reset (Old: 0 Cur: 0): 0
+Make sure that width is reset (Old: 0 Cur: 0): 0
+Make sure that display is reset (Old: none Cur: none): none
+Make sure that overflow is reset (Old: visible Cur: visible): visible
+fx module: Chain toggle in (0, 5, 5)
+Make sure that opacity is reset (Old: 1 Cur: 1): 1
+Make sure that height is reset (Old: 0 Cur: 0): 0
+Make sure that width is reset (Old: 0 Cur: 0): 0
+Make sure that display is reset (Old: block Cur: block): block
+Make sure that overflow is reset (Old: visible Cur: visible): visible
+fx module: Chain toggle out (0, 5, 5)
+Make sure that opacity is reset (Old: 1 Cur: 1): 1
+Make sure that height is reset (Old: 0 Cur: 0): 0
+Make sure that width is reset (Old: 0 Cur: 0): 0
+Make sure that display is reset (Old: none Cur: none): none
+Make sure that overflow is reset (Old: visible Cur: visible): visible
+fx module: Chain slideDown slideUp (0, 5, 5)
+Make sure that opacity is reset (Old: 1 Cur: 1): 1
+Make sure that height is reset (Old: 0 Cur: 0): 0
+Make sure that width is reset (Old: 0 Cur: 0): 0
+Make sure that display is reset (Old: none Cur: none): none
+Make sure that overflow is reset (Old: visible Cur: visible): visible
+fx module: Chain slideUp slideDown (0, 5, 5)
+Make sure that opacity is reset (Old: 1 Cur: 1): 1
+Make sure that height is reset (Old: 0 Cur: 0): 0
+Make sure that width is reset (Old: 0 Cur: 0): 0
+Make sure that display is reset (Old: block Cur: block): block
+Make sure that overflow is reset (Old: visible Cur: visible): visible
+fx module: Chain slideToggle in (0, 5, 5)
+Make sure that opacity is reset (Old: 1 Cur: 1): 1
+Make sure that height is reset (Old: 0 Cur: 0): 0
+Make sure that width is reset (Old: 0 Cur: 0): 0
+Make sure that display is reset (Old: block Cur: block): block
+Make sure that overflow is reset (Old: visible Cur: visible): visible
+fx module: Chain slideToggle out (0, 5, 5)
+Make sure that opacity is reset (Old: 1 Cur: 1): 1
+Make sure that height is reset (Old: 0 Cur: 0): 0
+Make sure that width is reset (Old: 0 Cur: 0): 0
+Make sure that display is reset (Old: none Cur: none): none
+Make sure that overflow is reset (Old: visible Cur: visible): visible
