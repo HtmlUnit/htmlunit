@@ -31,7 +31,7 @@ public final class WaitingRefreshHandlerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testRefreshOnJavscriptThread() throws Exception {
+    public void testRefreshOnJavascriptThread() throws Exception {
         final String firstContent = " <html>\n"
             + "<head><title>First Page</title>\n"
             + "<script>\n"
