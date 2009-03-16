@@ -1344,4 +1344,22 @@ public class HtmlFormTest extends WebTestCase {
         page = page.<HtmlSubmitInput>getFirstByXPath("//input").click();
         assertEquals(URL_GARGOYLE.toExternalForm(), page.getWebResponse().getRequestUrl());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void emptyActionWithBase2() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "  <base href='" + URL_SECOND + "'>\n"
+            + "</head><body>\n"
+            + "<form>\n"
+            + "  <input name='myName' value='myValue'>\n"
+            + "  <input type='submit'>\n"
+            + "</form></body></html>";
+        HtmlPage page = loadPage(html);
+        page = page.<HtmlSubmitInput>getFirstByXPath("//input[2]").click();
+        assertEquals(URL_GARGOYLE.toExternalForm() + "?myName=myValue", page.getWebResponse().getRequestUrl());
+    }
 }

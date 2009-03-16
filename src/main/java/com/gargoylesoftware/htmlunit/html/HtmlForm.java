@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * Wrapper for the HTML element "form".
@@ -157,6 +158,9 @@ public class HtmlForm extends ClickableElement {
         try {
             if (actionUrl.length() == 0) {
                 url = htmlPage.getWebResponse().getRequestUrl();
+            }
+            else if (actionUrl.startsWith("?")){
+                url = new URL(UrlUtils.resolveUrl(htmlPage.getWebResponse().getRequestUrl(), actionUrl));
             }
             else {
                 url = htmlPage.getFullyQualifiedUrl(actionUrl);
