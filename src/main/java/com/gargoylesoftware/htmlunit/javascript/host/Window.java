@@ -257,7 +257,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         }
         String windowName = "";
         if (name != Undefined.instance) {
-            windowName = (String) name;
+            windowName = Context.toString(name);
         }
         String featuresString = null;
         if (features != Undefined.instance) {

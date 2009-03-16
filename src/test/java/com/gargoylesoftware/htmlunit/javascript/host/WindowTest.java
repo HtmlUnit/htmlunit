@@ -2231,4 +2231,25 @@ public class WindowTest extends WebTestCase {
         assertEquals(expected, actual);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void openWindow_numericName() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var w1 = window.open('about:blank', 1);\n"
+            + "  alert(w1 != null);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<iframe name='myFrame' id='myFrame'></iframe>\n"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final String[] expectedAlerts = {"true"};
+        loadPage(html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
 }
