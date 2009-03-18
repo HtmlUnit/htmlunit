@@ -24,30 +24,27 @@
             <td>Bicycle</td>
         </tr>
     </table>
-</body></html>
-            ]]></source>
+</body></html>]]></source>
             <p>
             This example shows how to iterate over all the rows and cells
-            <source>
+            <source><![CDATA[
 final HtmlTable table = page.getHtmlElementById("table1");
 for (final HtmlTableRow row : table.getRows()) {
     System.out.println("Found row");
     for (final HtmlTableCell cell : row.getCells()) {
         System.out.println("   Found cell: " + cell.asText());
     }
-}
-            </source>
+}]]></source>
             </p>
 
             <p>
             The following sample shows how to access specific cells by row and column
-            <source>
+            <source><![CDATA[
 final WebClient webClient = new WebClient();
 final HtmlPage page = webClient.getPage("http://foo.com");
 
 final HtmlTable table = page.getHtmlElementById("table1");
-System.out.println("Cell (1,2)=" + table.getCellAt(1,2));
-            </source>
+System.out.println("Cell (1,2)=" + table.getCellAt(1,2));]]></source>
             </p>
         </section>
 
@@ -106,7 +103,7 @@ for (final HtmlTableBody body : table.getBodies()) {
 
             <p>
                 Every table may optionally have a caption element which describes it.
-                <source>final String caption = table.getCaptionText()</source>
+                <source><![CDATA[final String caption = table.getCaptionText()]]></source>
             </p>
         </section>
     </body>

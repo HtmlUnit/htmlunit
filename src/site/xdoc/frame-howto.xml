@@ -19,15 +19,13 @@
   <body>
     <iframe src="two.html">
   </body>
-</html>
-            ]]></source>
+</html>]]></source>
             <p>
                 You can use the following code to get the content of <tt>two.html</tt>:
             </p>
             <source><![CDATA[
 final List<FrameWindow> window = page.getFrames();
-final HtmlPage pageTwo = (HtmlPage) window.get(0).getEnclosedPage();
-            ]]></source>
+final HtmlPage pageTwo = (HtmlPage) window.get(0).getEnclosedPage();]]></source>
         </section>
 
         <section>
@@ -36,31 +34,27 @@ final HtmlPage pageTwo = (HtmlPage) window.get(0).getEnclosedPage();
             </p>
             <source><![CDATA[
 final WebClient client = new WebClient();
-final HtmlPage mainPage = client.getPage("http://htmlunit.sourceforge.net/apidocs/index.html");
-            ]]></source>
+final HtmlPage mainPage = client.getPage("http://htmlunit.sourceforge.net/apidocs/index.html");]]></source>
 
             <p>
                 To get the page of the first frame (at upper left) and click the sixth link:
             </p>
             <source><![CDATA[
 final HtmlPage packageListPage = (HtmlPage) mainPage.getFrames().get(0).getEnclosedPage();
-packageListPage.getAnchors().get(5).click();
-            ]]></source>
+packageListPage.getAnchors().get(5).click();]]></source>
 
             <p>
                 To get the page of the frame named 'packageFrame' (at lower left) and click the second link:
             </p>
             <source><![CDATA[
 final HtmlPage pakcagePage = (HtmlPage) mainPage.getFrameByName("packageFrame").getEnclosedPage();
-pakcagePage.getAnchors().get(1).click();
-            ]]></source>
+pakcagePage.getAnchors().get(1).click();]]></source>
         
             <p>
                 To get the page of the frame named 'classFrame' (at right):
             </p>
             <source><![CDATA[
-final HtmlPage classPage = (HtmlPage) mainPage.getFrameByName("classFrame").getEnclosedPage();
-            ]]></source>
+final HtmlPage classPage = (HtmlPage) mainPage.getFrameByName("classFrame").getEnclosedPage();]]></source>
         </section>
     </body>
 </document>

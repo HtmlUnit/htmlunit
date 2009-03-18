@@ -31,9 +31,8 @@
             Create a directory for HtmlUnit (for instance c:\htmlunit or ~/htmlunit).  Change to that directory and execute the
             following commands.
             </p>
-            <source>
-svn co https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit .
-            </source>
+            <source><![CDATA[
+svn co https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit .]]></source>
         </section>
 
         <section name="Compiling the code">

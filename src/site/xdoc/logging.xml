@@ -25,7 +25,7 @@
                 then it will use the simple logger.  When using the simple logger, you can change the default
                 logging level by setting the following system property.
             </p>
-            <source>System.getProperties().put("org.apache.commons.logging.simplelog.defaultlog", "trace");</source>
+            <source><![CDATA[System.getProperties().put("org.apache.commons.logging.simplelog.defaultlog", "trace");]]></source>
             <p>
                 Valid values for this property are "trace", "debug", "info", "warn", "error", or "fatal" (in
                 order from least serious to most serious).
@@ -50,9 +50,9 @@
         		The package used to parse the HTML has the ability to report the problems it encounters while parsing source.  
         		These messages may be programmatically catched or easily logged to the 
         		"com.gargoylesoftware.htmlunit.html.HTMLParserListener" log for instance by calling:
-        		<source>
-        		WebClient webClient = new WebClient();
-        		webClient.setHTMLParserListener(HTMLParserListenerare.LOG_REPORTER)</source>
+        		<source><![CDATA[
+final WebClient webClient = new WebClient();
+webClient.setHTMLParserListener(HTMLParserListenerare.LOG_REPORTER);]]></source>
         		The parser (NekoHTML) by default processes the
         		content that is outside of the BODY and HTML tags. This is seen by the logging reporting that the 
         		BODY and HTML tags are not closed properly.  This can be changed by calling

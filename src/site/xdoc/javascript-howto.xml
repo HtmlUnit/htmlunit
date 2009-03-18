@@ -45,15 +45,15 @@
             }
         </script>
     </table></form>
-</body></html>
-            ]]></source>
+</body></html>]]></source>
             
             <p>
                 We would likely want to test that the five text fields were created so
                 we could start with this.
             </p>
             <source><![CDATA[
-public void testDocumentWrite() throws Exception {
+@Test
+public void documentWrite() throws Exception {
     final WebClient webClient = new WebClient();
 
     final HtmlPage page = webClient.getPage("http://myserver/test.html");
@@ -64,8 +64,7 @@ public void testDocumentWrite() throws Exception {
             "text", 
             form.<HtmlInput>getInputByName(expectedName).getTypeAttribute());
     }
-}
-            ]]></source>
+}]]></source>
             <p>
                 We might also want to check off-by-one errors by ensuring that 
                 it didn't create "textfield0" or "textfield6".  Trying to get an 
@@ -97,8 +96,7 @@ catch (final ElementNotFoundException e) {
             <source><![CDATA[
 <html><head><title>Alert sample</title></head>
 <body onload='alert("foo");'>
-</body></html>
-            ]]></source>
+</body></html>]]></source>
             <p>
                Alerts are tracked by an AlertHandler which will be called whenever
                the JavaScript alert() function is called.  In the following test, 
@@ -109,7 +107,8 @@ catch (final ElementNotFoundException e) {
             </p>
 
             <source><![CDATA[
-public void testAlerts() throws Exception {
+@Test
+public void alerts() throws Exception {
     final WebClient webClient = new WebClient();
 
     final List collectedAlerts = new ArrayList();
@@ -121,8 +120,7 @@ public void testAlerts() throws Exception {
 
     final List expectedAlerts = Collections.singletonList("foo");
     assertEquals(expectedAlerts, collectedAlerts);
-}
-            ]]></source>
+}]]></source>
         </section>
         
         <section name="Prompts, Confirms and Status line messages">

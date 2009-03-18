@@ -100,7 +100,7 @@
 
             <p>
                 Declare method parameters method final to indicate that they will not be changed.
-                <source>public void setFooList( final List fooList ) {</source>
+                <source>public void setFooList(final List fooList) {</source>
             </p>
 
             <p>

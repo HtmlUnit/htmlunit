@@ -22,8 +22,7 @@
            				Configure your SourceForge username in ~/.m2/settings.xml (see <a href="http://maven.apache.org/guides/mini/guide-deployment-security-settings.html">Security and Deployment Settings</a>). 
 						As an example, my settings.xml looks like:
 <source>
-<![CDATA[
-<settings>
+<![CDATA[<settings>
   ...
   <servers>
     <server>
@@ -49,9 +48,7 @@
     </server>
   </servers>
   ...
-</settings>
-]]>
-</source>
+</settings>]]></source>
            			</li>
            		</ol>
        		</p>

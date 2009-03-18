@@ -29,6 +29,7 @@
                 type of text/html so we cast the result to an <javadoc>com.gargoylesoftware.htmlunit.html.HtmlPage</javadoc>.
             </p>
             <source><![CDATA[
+@Test
 public void homePage() throws Exception {
     final WebClient webClient = new WebClient();
     final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
@@ -44,6 +45,7 @@ public void homePage() throws Exception {
                 version by instantiating a BrowserVersion.
             </p>
             <source><![CDATA[
+@Test
 public void homePage_Firefox() throws Exception {
     final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_2);
     final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
@@ -64,18 +66,19 @@ public void homePage_Firefox() throws Exception {
                 Below is an example of finding a 'div' by an ID, and getting an anchor by name:
             </p>
             <source><![CDATA[
+@Test
 public void getElements() throws Exception {
     final WebClient webClient = new WebClient();
     final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
     final HtmlDivision div = page.getHtmlElementById("some_div_id");
     final HtmlAnchor anchor = page.getAnchorByName("anchor_name");
-}
-]]></source>
+}]]></source>
             <p>
                 XPath is a suggested way for more complex searches, a brief tutorial can be found in
                 <a href="http://www.w3schools.com/XPath/default.asp">W3Schools</a>
             </p>
             <source><![CDATA[
+@Test
 public void xpath() throws Exception {
     final WebClient webClient = new WebClient();
     final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
@@ -85,8 +88,7 @@ public void xpath() throws Exception {
 
     //get div which has a 'name' attribute of 'John'
     final HtmlDivision div = (HtmlDivision) page.getByXPath("//div[@name='John']").get(0);
-}
-]]></source>
+}]]></source>
         </section>
 
         <section name="Using a proxy server">
@@ -95,6 +97,7 @@ public void xpath() throws Exception {
                 where you need to connect through one.
             </p>
             <source><![CDATA[
+@Test
 public void homePage_proxy() throws Exception {
     final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_2, "http://myproxyserver", myProxyPort);
 
@@ -117,6 +120,7 @@ public void homePage_proxy() throws Exception {
                 following example shows how you might do this.
             </p>
             <source><![CDATA[
+@Test
 public void submittingForm() throws Exception {
     final WebClient webClient = new WebClient();
 
