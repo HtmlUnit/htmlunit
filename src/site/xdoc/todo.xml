@@ -21,8 +21,6 @@
             <ol>
                 <li>Fix focused window of focused page for <code>click()</code></li>
                 <li>Allow access to the WebResponse for all components that may request an additional request</li>
-                <li>Fix JavaScript execution order/timing</li>
-                <li>Fix <code>document.write()</code></li>
                 <li>More control on background JavaScript jobs</li>
                 <li>Better handling of incorrect HTML</li>
             </ol>
