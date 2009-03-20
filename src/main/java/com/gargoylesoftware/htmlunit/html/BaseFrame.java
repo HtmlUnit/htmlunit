@@ -295,9 +295,9 @@ public abstract class BaseFrame extends StyledElement {
 
         if (qualifiedName.equals("src")) {
             final JavaScriptEngine jsEngine = getPage().getWebClient().getJavaScriptEngine();
-            // when src is set from a script, loading is postponed until script finishes
-            // in fact this implementation is probably wrong: javascript url should be first evaluated
-            // and only loading, when any, should be postponed
+            // When src is set from a script, loading is postponed until script finishes
+            // in fact this implementation is probably wrong: JavaScript URL should be
+            // first evaluated and only loading, when any, should be postponed.
             if (!jsEngine.isScriptRunning() || attributeValue.startsWith("javascript:")) {
                 loadInnerPageIfPossible(attributeValue);
             }
