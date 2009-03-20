@@ -122,20 +122,24 @@ public class JavaScriptJobsSupervisor implements Serializable {
         return true;
     }
 
-    private synchronized ScheduledFuture< ? > getLastJobStartingBefore(final long maxStartTime) {
+    private ScheduledFuture< ? > getLastJobStartingBefore(final long maxStartTime) {
         long currentDelay = Long.MIN_VALUE;
         ScheduledFuture< ? > job = null;
         final long maxAllowedDelay = maxStartTime - System.currentTimeMillis();
-        for (final WeakReference<ScheduledFuture< ? >> futureRef : job2Future_.values()) {
-            final ScheduledFuture< ? > future = futureRef.get();
-            if (future != null) {
-                final long delay = future.getDelay(TimeUnit.MILLISECONDS);
-                if (future.isDone()) {
-                    // TODO
-                }
-                else if (delay > currentDelay && delay < maxAllowedDelay) {
-                    currentDelay = delay;
-                    job = future;
+
+        synchronized (currentlyRunningJobs_) {
+
+            for (final WeakReference<ScheduledFuture< ? >> futureRef : job2Future_.values()) {
+                final ScheduledFuture< ? > future = futureRef.get();
+                if (future != null) {
+                    final long delay = future.getDelay(TimeUnit.MILLISECONDS);
+                    if (future.isDone()) {
+                        // nothing. In fact shouldn't it already have been removed?
+                    }
+                    else if (delay > currentDelay && (delay < maxAllowedDelay || delay <= 0)) {
+                        currentDelay = delay;
+                        job = future;
+                    }
                 }
             }
         }
@@ -152,16 +156,21 @@ public class JavaScriptJobsSupervisor implements Serializable {
         }
     }
 
-    void executionFinished(final Runnable job) {
+    void executionFinished(final JavaScriptJob job) {
         synchronized (currentlyRunningJobs_) {
             currentlyRunningJobs_.remove(job);
+            if (!job.isPeriodic()) {
+                job2Future_.remove(job);
+            }
             LOG.debug("Currently running jobs: " + currentlyRunningJobs_.size());
             currentlyRunningJobs_.notifyAll();
         }
     }
 
-    synchronized void jobAdded(final JavaScriptJob job, final ScheduledFuture< ? > future) {
-        job2Future_.put(job, new WeakReference<ScheduledFuture< ? >>(future));
+    void jobAdded(final JavaScriptJob job, final ScheduledFuture< ? > future) {
+        synchronized (currentlyRunningJobs_) {
+            job2Future_.put(job, new WeakReference<ScheduledFuture< ? >>(future));
+        }
     }
 
     /**

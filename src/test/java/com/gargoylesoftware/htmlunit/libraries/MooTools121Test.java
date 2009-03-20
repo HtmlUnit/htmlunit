@@ -16,11 +16,13 @@ package com.gargoylesoftware.htmlunit.libraries;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.io.File;
 import java.net.URL;
 import java.util.List;
 
 import junit.framework.AssertionFailedError;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -56,12 +58,11 @@ public class MooTools121Test extends WebTestCase {
         final HtmlPage page = client_.getPage(url);
 
         final HtmlElement progress = page.getElementById("progress");
-        String prevProgress;
-        do {
-            prevProgress = progress.asText();
-            Thread.sleep(2000);
-        } while (!prevProgress.equals(progress.asText()));
+        client_.waitForBackgroundJavaScript(2000);
 
+        final String prevProgress = progress.asText();
+
+        FileUtils.writeStringToFile(new File("/tmp/mootols.html"), page.asXml());
         final String xpath = "//ul[@class='specs']/li[@class!='success']";
         final List<HtmlElement> failures = (List<HtmlElement>) page.getByXPath(xpath);
         if (!failures.isEmpty()) {

@@ -72,9 +72,9 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
      * Helper to track the job being executed.
      */
     class ExecutingJobTracker implements Runnable {
-        private final Runnable job_;
+        private final JavaScriptJob job_;
 
-        ExecutingJobTracker(final Runnable job) {
+        ExecutingJobTracker(final JavaScriptJob job) {
             job_ = job;
         }
         public void run() {
@@ -190,6 +190,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     /** {@inheritDoc} */
     public int addRecurringJob(final JavaScriptJob job, final int period, final Page page) {
+        job.setPeriodic(true);
         return do_addJob(job, -1, period, page);
     }
 

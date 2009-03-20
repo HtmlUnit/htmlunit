@@ -189,21 +189,12 @@ public class ExtJS22Test extends WebTestCase {
     @Test
     public void grid_binding() throws Exception {
         final HtmlPage page = getPage("grid", "binding");
+        page.getWebClient().waitForBackgroundJavaScript(2000);
         final HtmlElement detailPanel = page.getHtmlElementById("detailPanel");
         final HtmlDivision resultsDiv = detailPanel.getFirstByXPath("div/div");
         assertEquals("Please select a book to see additional details.", resultsDiv.asText());
 
-        HtmlDivision firstRowDiv = null;
-        //try 10 times to wait .5 second each for filling the page.
-        for (int i = 0; i < 20; i++) {
-            firstRowDiv = page.getFirstByXPath("//div[@class='x-grid3-body']/div");
-            if (firstRowDiv != null) {
-                break;
-            }
-            synchronized (page) {
-                page.wait(500);
-            }
-        }
+        final HtmlDivision firstRowDiv = page.getFirstByXPath("//div[@class='x-grid3-body']/div");
 
         firstRowDiv.click();
         assertEquals("Title: Master of the Game" + LINE_SEPARATOR

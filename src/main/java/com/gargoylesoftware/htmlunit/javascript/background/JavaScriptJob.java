@@ -24,6 +24,7 @@ public abstract class JavaScriptJob implements Runnable {
 
     /** The job ID. */
     private Integer id_;
+    private boolean periodic_ = false;
 
     /**
      * Sets the job ID.
@@ -47,4 +48,19 @@ public abstract class JavaScriptJob implements Runnable {
         return "JavaScript Job " + id_;
     }
 
+    /**
+     * Set if periodic or not.
+     * @param b the new value
+     */
+    void setPeriodic(final boolean b) {
+        periodic_ = b;
+    }
+
+    /**
+     * Indicates if this job is periodic (i.e. a setInterval).
+     * @return <code>true</code> if periodic
+     */
+    public boolean isPeriodic() {
+        return periodic_;
+    }
 }
