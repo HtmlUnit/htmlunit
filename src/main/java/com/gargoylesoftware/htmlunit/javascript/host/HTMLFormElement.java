@@ -231,8 +231,8 @@ public class HTMLFormElement extends HTMLElement {
         boolean postpone = false;
         final Event currentEvent = getWindow().getCurrentEvent();
         if (currentEvent != null) {
-            // use target instead of srcElement because target is read-only,
-            // but srcElement is writeable from JavaScript
+            // Use target instead of srcElement because target is read-only,
+            // but srcElement is writable from JavaScript.
             final SimpleScriptable src = (SimpleScriptable) currentEvent.jsxGet_target();
             postpone = src.getDomNodeOrNull() instanceof HtmlSubmitInput;
         }
