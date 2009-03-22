@@ -293,6 +293,7 @@ public class TreeWalker extends SimpleScriptable {
         // to its sibling.
         return getSibling(n, lookLeft);
     }
+
     // Helper method for getEquivalentLogical
     private Node getSibling(final Node n, final boolean lookLeft) {
         if (n == null) {

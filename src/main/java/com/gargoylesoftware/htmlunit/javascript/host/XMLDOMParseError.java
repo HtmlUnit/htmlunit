@@ -57,6 +57,7 @@ public class XMLDOMParseError extends SimpleScriptable {
     public int jsxGet_filepos() {
         return filepos_;
     }
+
     /**
      * Returns the line number that contains the error.
      * @return the line number that contains the error
@@ -64,6 +65,7 @@ public class XMLDOMParseError extends SimpleScriptable {
     public int jsxGet_line() {
         return line_;
     }
+
     /**
      * Returns the character position within the line where the error occurred.
      * @return the character position within the line where the error occurred

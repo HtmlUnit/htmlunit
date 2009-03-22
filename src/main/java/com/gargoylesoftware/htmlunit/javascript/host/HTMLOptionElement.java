@@ -44,6 +44,7 @@ public class HTMLOptionElement extends HTMLElement {
             namesIEAttributeAlwaysAvailable_.add(name);
         }
     }
+
     /**
      * Creates an instance.
      */

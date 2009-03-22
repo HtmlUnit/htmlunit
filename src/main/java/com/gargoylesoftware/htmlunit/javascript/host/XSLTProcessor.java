@@ -135,6 +135,7 @@ public class XSLTProcessor extends SimpleScriptable {
             throw Context.reportRuntimeError("Exception: " + e);
         }
     }
+
     /**
      * Transforms the node source applying the stylesheet given by the importStylesheet() function.
      * The owner document of the output node owns the returned document fragment.

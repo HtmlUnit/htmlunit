@@ -311,6 +311,7 @@ public class NavigatorTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
     /**
      * Test some Mozilla properties (minimal tests are support is not completed).
      * @throws Exception if the test fails

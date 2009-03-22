@@ -654,6 +654,7 @@ public abstract class WebTestCase {
         }
         return browserVersion_;
     }
+
     void setExpectedAlerts(final String[] expectedAlerts) {
         expectedAlerts_ = expectedAlerts;
     }

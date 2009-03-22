@@ -300,6 +300,7 @@ public class PropertiesTest extends WebTestCase {
         ImageIO.write(chart.createBufferedImage(1200, 2400), "png",
             new File(getArtifactsDirectory() + "/properties-" + browserVersion_.getNickname() + ".png"));
     }
+
     private String getArtifactsDirectory() {
         final Class< ? > clazz = PropertiesTest.class;
         final String name = clazz.getPackage().getName().replace('.', '/');

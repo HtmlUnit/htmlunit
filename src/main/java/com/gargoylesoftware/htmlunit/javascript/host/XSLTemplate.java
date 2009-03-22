@@ -43,6 +43,7 @@ public class XSLTemplate extends SimpleScriptable {
     public void jsxSet_stylesheet(final Node node) {
         stylesheet_ = node;
     }
+
     /**
      * Returns the Extensible Stylesheet Language (XSL) style sheet to compile into an XSL template.
      * @return the Extensible Stylesheet Language (XSL) style sheet to compile into an XSL template

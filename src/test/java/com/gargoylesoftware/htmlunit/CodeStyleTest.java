@@ -87,6 +87,7 @@ public class CodeStyleTest {
                     javaDocFirstLine(lines, relativePath);
                     methodFirstLine(lines, relativePath);
                     methodLastLine(lines, relativePath);
+                    lineBetweenMethods(lines, relativePath);
                     svnProperties(file, relativePath);
                     runWith(lines, relativePath);
                     twoEmptyLines(lines, relativePath);
@@ -167,6 +168,19 @@ public class CodeStyleTest {
             final String nextLine = lines.get(index + 1);
             if (line.trim().length() == 0 && nextLine.equals("    }")) {
                 addFailure("Empty line in " + relativePath + ", line: " + (index + 1));
+            }
+        }
+    }
+
+    /**
+     * Checks that empty line must exist between consecutive methods.
+     */
+    private void lineBetweenMethods(final List<String> lines, final String relativePath) {
+        for (int index = 0; index < lines.size() - 1; index++) {
+            final String line = lines.get(index);
+            final String nextLine = lines.get(index + 1);
+            if (line.equals("    }") && nextLine.length() != 0 && !nextLine.equals("}")) {
+                addFailure("Non-empty line in " + relativePath + ", line: " + (index + 1));
             }
         }
     }

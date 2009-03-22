@@ -130,6 +130,7 @@ public class CSSRule extends SimpleScriptable {
     public Stylesheet jsxGet_parentStyleSheet() {
         return stylesheet_;
     }
+
     /**
      * If this rule is contained inside another rule (e.g. a style rule inside an @media block),
      * this is the containing rule. If this rule is not nested inside any other rules, this returns <code>null</code>.
@@ -142,6 +143,7 @@ public class CSSRule extends SimpleScriptable {
         }
         return null;
     }
+
     /**
      * Returns the wrapped rule.
      * @return the wrapped rule.
