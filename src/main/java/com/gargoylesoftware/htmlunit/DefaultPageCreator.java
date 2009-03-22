@@ -89,7 +89,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
      *
      * @param webResponse the response from the server
      * @param webWindow the window that this page will be loaded into
-     * @exception IOException If an io problem occurs
+     * @exception IOException if an IO problem occurs
      * @return the new page object
      */
     public Page createPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
