@@ -112,15 +112,16 @@ public class JavaScriptJobManagerMinimalTest {
      */
     @Test
     public void getJobCount() throws Exception {
+        final MutableInt count = new MutableInt();
         final JavaScriptJob job = new JavaScriptJob(50, null) {
             public void run() {
-                // Empty.
+                count.setValue(manager_.getJobCount());
             }
         };
         Assert.assertEquals(0, manager_.getJobCount());
         manager_.addJob(job, page_);
-        Assert.assertEquals(1, manager_.getJobCount());
         manager_.waitForAllJobsToFinish(1000);
+        Assert.assertEquals(1, count.intValue());
         Assert.assertEquals(0, manager_.getJobCount());
     }
 
