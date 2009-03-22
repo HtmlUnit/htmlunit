@@ -490,12 +490,21 @@ public abstract class HtmlElement extends DomElement {
             doType(c, shiftKey, ctrlKey, altKey);
         }
 
+        final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
+        if (!ie
+            && (this instanceof HtmlTextInput
+            || this instanceof HtmlTextArea
+            || this instanceof HtmlPasswordInput)) {
+            final Event input = new UIEvent(this, Event.TYPE_INPUT, c, shiftKey, ctrlKey, altKey);
+            fireEvent(input);
+        }
+
         final Event keyUp = new UIEvent(this, Event.TYPE_KEY_UP, c, shiftKey, ctrlKey, altKey);
         fireEvent(keyUp);
 
         final HtmlForm form = getEnclosingForm();
         if (form != null && c == '\n' && isSubmittableByEnter()) {
-            if (!getPage().getWebClient().getBrowserVersion().isIE()) {
+            if (!ie) {
                 final HtmlSubmitInput submit = form.getFirstByXPath(".//input[@type='submit']");
                 if (submit != null) {
                     return submit.click();

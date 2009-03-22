@@ -247,6 +247,7 @@ public class EventTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(IE = { "124A", "1A2A4AB1AB2AB4ABC" }, FF = { "123A4A", "1A2A3AB4AB1AB2AB3ABC4ABC" })
     public void testTyping() throws Exception {
         testTyping("<input type='text'", "");
         testTyping("<input type='password'", "");
@@ -260,12 +261,13 @@ public class EventTest extends WebTestCase {
             + "function log(s) { x += s; }</script>\n"
             + "<form>\n"
             + opening + " id='t' onkeydown='log(1 + this.value)' "
-            + "onkeypress='log(2 + this.value)' onkeyup='log(3 + this.value)'>" + closing
+            + "onkeypress='log(2 + this.value)' "
+            + "oninput='log(3 + this.value)'"
+            + "onkeyup='log(4 + this.value)'>" + closing
             + "</form>\n"
             + "<div id='d' onclick='alert(x); x=\"\"'>abc</div>\n"
             + "</body></html>";
 
-        final String[] expected = {"123A", "1A2A3AB1AB2AB3ABC"};
         final List<String> actual = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), html, actual);
         page.<HtmlElement>getHtmlElementById("t").type('A');
@@ -274,7 +276,7 @@ public class EventTest extends WebTestCase {
         page.<HtmlElement>getHtmlElementById("t").type("BC");
         page.<HtmlDivision>getHtmlElementById("d").click();
 
-        assertEquals(expected, actual);
+        assertEquals(getExpectedAlerts(), actual);
     }
 
     /**

@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <document>
     <properties>
         <title>Changes</title>
@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, MooTools support, support all HTML elements and various JavaScript properties">
+            <action type="fix" dev="sdanig" issue="2672376">
+                JavaScript: add support for 'oninput' events on text inputs (Firefox only).
+            </action>
             <action type="fix" dev="asashour" issue="2688241">
                 JavaScript: window.open() can accept numeric name.
             </action>
