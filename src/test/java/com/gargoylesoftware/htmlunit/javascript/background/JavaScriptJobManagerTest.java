@@ -37,7 +37,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for {@link JavaScriptJobManagerImpl}.
+ * Tests for {@link JavaScriptJobManagerImpl} using the full HtmlUnit stack. Minimal unit tests
+ * which do not use the full HtmlUnit stack go in {@link JavaScriptJobManagerMinimalTest}.
  *
  * @version $Revision$
  * @author Brad Clarke
