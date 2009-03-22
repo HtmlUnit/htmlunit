@@ -389,14 +389,13 @@ public class XMLHttpRequest extends SimpleScriptable {
                 public void run() {
                     cf.call(action);
                 }
-
                 @Override
                 public String toString() {
                     return "XMLHttpRequest Job " + getId();
                 }
             };
             getLog().debug("Starting XMLHttpRequest thread for asynchronous request");
-            threadID_ = getWindow().getWebWindow().getJobManager().addJob(job, 0, page);
+            threadID_ = getWindow().getWebWindow().getJobManager().addJob(job, page);
         }
     }
 

@@ -29,7 +29,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.mozilla.javascript.Function;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -140,40 +139,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     }
 
     /** {@inheritDoc} */
-    public int addJob(final String code, final int delay, final String description, final Page page) {
-        final JavaScriptExecutionJob job = new JavaScriptStringJob(description, getWindow(), code);
-        return addJob(job, delay, page);
-    }
-
-    /** {@inheritDoc} */
-    public int addJob(final Function code, final int delay, final String description, final Page page) {
-        final JavaScriptExecutionJob job = new JavaScriptFunctionJob(description, getWindow(), code);
-        return addJob(job, delay, page);
-    }
-
-    /** {@inheritDoc} */
-    public int addJob(final JavaScriptJob job, final int delay, final Page page) {
-        return addJob(job, delay, -1, page);
-    }
-
-    /** {@inheritDoc} */
-    public int addRecurringJob(final String code, final int period, final String description, final Page page) {
-        final JavaScriptExecutionJob job = new JavaScriptStringJob(description, getWindow(), code);
-        return addRecurringJob(job, period, page);
-    }
-
-    /** {@inheritDoc} */
-    public int addRecurringJob(final Function code, final int period, final String description, final Page page) {
-        final JavaScriptExecutionJob job = new JavaScriptFunctionJob(description, getWindow(), code);
-        return addRecurringJob(job, period, page);
-    }
-
-    /** {@inheritDoc} */
-    public int addRecurringJob(final JavaScriptJob job, final int period, final Page page) {
-        return addJob(job, -1, period, page);
-    }
-
-    private synchronized int addJob(final JavaScriptJob job, final int delay, final int period, final Page page) {
+    public synchronized int addJob(final JavaScriptJob job, final Page page) {
         final WebWindow w = getWindow();
         if (w == null) {
             // The window to which this job manager belongs has been garbage collected.
@@ -191,11 +157,11 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
         final ExecutingJobTracker jobWrapper = new ExecutingJobTracker(job);
         final ScheduledFuture< ? > future;
-        if (delay != -1) {
-            future = executor_.schedule(jobWrapper, delay, MILLISECONDS);
+        if (job.isPeriodic()) {
+            future = executor_.scheduleAtFixedRate(jobWrapper, job.getInitialDelay(), job.getPeriod(), MILLISECONDS);
         }
         else {
-            future = executor_.scheduleAtFixedRate(jobWrapper, period, period, MILLISECONDS);
+            future = executor_.schedule(jobWrapper, job.getInitialDelay(), MILLISECONDS);
         }
 
         supervisor_.jobAdded(job, future);

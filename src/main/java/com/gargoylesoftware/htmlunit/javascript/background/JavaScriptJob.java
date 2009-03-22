@@ -24,7 +24,27 @@ public abstract class JavaScriptJob implements Runnable {
 
     /** The job ID. */
     private Integer id_;
-    private boolean periodic_ = false;
+
+    /** The initial amount of time to wait before executing this job. */
+    private final int initialDelay_;
+
+    /** The amount of time to wait between executions of this job (may be <tt>null</tt>). */
+    private final Integer period_;
+
+    /** Creates a new job instance that executes once, immediately. */
+    public JavaScriptJob() {
+        this(0, null);
+    }
+
+    /**
+     * Creates a new job instance.
+     * @param initialDelay the initial amount of time to wait before executing this job
+     * @param period the amount of time to wait between executions of this job (may be <tt>null</tt>)
+     */
+    public JavaScriptJob(final int initialDelay, final Integer period) {
+        initialDelay_ = initialDelay;
+        period_ = period;
+    }
 
     /**
      * Sets the job ID.
@@ -42,25 +62,34 @@ public abstract class JavaScriptJob implements Runnable {
         return id_;
     }
 
+    /**
+     * Returns the initial amount of time to wait before executing this job.
+     * @return the initial amount of time to wait before executing this job
+     */
+    public int getInitialDelay() {
+        return initialDelay_;
+    }
+
+    /**
+     * Returns the amount of time to wait between executions of this job (may be <tt>null</tt>).
+     * @return the amount of time to wait between executions of this job (may be <tt>null</tt>)
+     */
+    public Integer getPeriod() {
+        return period_;
+    }
+
+    /**
+     * Returns <tt>true</tt> if this job executes periodically.
+     * @return <tt>true</tt> if this job executes periodically
+     */
+    public boolean isPeriodic() {
+        return period_  != null;
+    }
+
     /** {@inheritDoc} */
     @Override
     public String toString() {
         return "JavaScript Job " + id_;
     }
 
-    /**
-     * Set if periodic or not.
-     * @param b the new value
-     */
-    void setPeriodic(final boolean b) {
-        periodic_ = b;
-    }
-
-    /**
-     * Indicates if this job is periodic (i.e. a setInterval).
-     * @return <code>true</code> if periodic
-     */
-    public boolean isPeriodic() {
-        return periodic_;
-    }
 }

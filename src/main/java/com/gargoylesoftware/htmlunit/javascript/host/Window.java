@@ -60,6 +60,8 @@ import com.gargoylesoftware.htmlunit.html.NonSerializable;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptFunctionJob;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptStringJob;
 
 /**
  * A JavaScript object for a Window.
@@ -344,18 +346,21 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     public int jsxFunction_setTimeout(final Object code, final int timeout, final Object language) {
         final int id;
+        final WebWindow w = getWebWindow();
         final Page page = (Page) getDomNodeOrNull();
         final String description = "window.setTimeout(" + timeout + ")";
         if (code == null) {
             throw Context.reportRuntimeError("Function not provided.");
         }
         else if (code instanceof String) {
-            final String scriptString = (String) code;
-            id = getWebWindow().getJobManager().addJob(scriptString, timeout, description, page);
+            final String s = (String) code;
+            final JavaScriptStringJob job = new JavaScriptStringJob(timeout, null, description, w, s);
+            id = getWebWindow().getJobManager().addJob(job, page);
         }
         else if (code instanceof Function) {
-            final Function scriptFunction = (Function) code;
-            id = getWebWindow().getJobManager().addJob(scriptFunction, timeout, description, page);
+            final Function f = (Function) code;
+            final JavaScriptFunctionJob job = new JavaScriptFunctionJob(timeout, null, description, w, f);
+            id = getWebWindow().getJobManager().addJob(job, page);
         }
         else {
             throw Context.reportRuntimeError("Unknown type for function.");
@@ -1060,18 +1065,21 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     public int jsxFunction_setInterval(final Object code, final int timeout, final Object language) {
         final int id;
+        final WebWindow w = getWebWindow();
         final Page page = (Page) getDomNodeOrNull();
         final String description = "window.setInterval(" + timeout + ")";
         if (code == null) {
             throw Context.reportRuntimeError("Function not provided.");
         }
         else if (code instanceof String) {
-            final String scriptString = (String) code;
-            id = getWebWindow().getJobManager().addRecurringJob(scriptString, timeout, description, page);
+            final String s = (String) code;
+            final JavaScriptStringJob job = new JavaScriptStringJob(timeout, timeout, description, w, s);
+            id = getWebWindow().getJobManager().addJob(job, page);
         }
         else if (code instanceof Function) {
-            final Function scriptFunction = (Function) code;
-            id = getWebWindow().getJobManager().addRecurringJob(scriptFunction, timeout, description, page);
+            final Function f = (Function) code;
+            final JavaScriptFunctionJob job = new JavaScriptFunctionJob(timeout, timeout, description, w, f);
+            id = getWebWindow().getJobManager().addJob(job, page);
         }
         else {
             throw Context.reportRuntimeError("Unknown type for function.");

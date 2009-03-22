@@ -42,10 +42,14 @@ public abstract class JavaScriptExecutionJob extends JavaScriptJob {
 
     /**
      * Creates a new JavaScript execution job, where the JavaScript code to execute is a string.
+     * @param initialDelay the initial amount of time to wait before executing this job
+     * @param period the amount of time to wait between executions of this job (may be <tt>null</tt>)
      * @param label the label for the job
      * @param window the window to which the job belongs
      */
-    public JavaScriptExecutionJob(final String label, final WebWindow window) {
+    public JavaScriptExecutionJob(final int initialDelay, final Integer period, final String label,
+        final WebWindow window) {
+        super(initialDelay, period);
         label_ = label;
         window_ = new WeakReference<WebWindow>(window);
     }

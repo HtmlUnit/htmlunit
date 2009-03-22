@@ -33,12 +33,15 @@ public class JavaScriptFunctionJob extends JavaScriptExecutionJob {
 
     /**
      * Creates a new JavaScript execution job, where the JavaScript code to execute is a function.
+     * @param initialDelay the initial amount of time to wait before executing this job
+     * @param period the amount of time to wait between executions of this job (may be <tt>null</tt>)
      * @param label the label for the job
      * @param window the window to which the job belongs
      * @param function the JavaScript code to execute
      */
-    public JavaScriptFunctionJob(final String label, final WebWindow window, final Function function) {
-        super(label, window);
+    public JavaScriptFunctionJob(final int initialDelay, final Integer period, final String label,
+        final WebWindow window, final Function function) {
+        super(initialDelay, period, label, window);
         function_ = function;
     }
 
@@ -49,4 +52,5 @@ public class JavaScriptFunctionJob extends JavaScriptExecutionJob {
         final Scriptable scriptable = (Scriptable) page.getEnclosingWindow().getScriptObject();
         page.executeJavaScriptFunctionIfPossible(function_, scriptable, new Object[0], doc);
     }
+
 }

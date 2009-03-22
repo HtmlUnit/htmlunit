@@ -29,12 +29,15 @@ public class JavaScriptStringJob extends JavaScriptExecutionJob {
 
     /**
      * Creates a new JavaScript execution job, where the JavaScript code to execute is a string.
+     * @param initialDelay the initial amount of time to wait before executing this job
+     * @param period the amount of time to wait between executions of this job (may be <tt>null</tt>)
      * @param label the label for the job
      * @param window the window to which the job belongs
      * @param script the JavaScript code to execute
      */
-    public JavaScriptStringJob(final String label, final WebWindow window, final String script) {
-        super(label, window);
+    public JavaScriptStringJob(final int initialDelay, final Integer period, final String label,
+        final WebWindow window, final String script) {
+        super(initialDelay, period, label, window);
         script_ = script;
     }
 
@@ -46,4 +49,5 @@ public class JavaScriptStringJob extends JavaScriptExecutionJob {
         }
         page.executeJavaScriptIfPossible(script_, "JavaScriptStringJob", 1);
     }
+
 }
