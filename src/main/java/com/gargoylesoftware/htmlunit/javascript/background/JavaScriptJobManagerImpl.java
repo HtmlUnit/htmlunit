@@ -66,6 +66,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     /** Logging support. */
     private static final Log LOG = LogFactory.getLog(JavaScriptJobManagerImpl.class);
 
+    /** The job supervisor in charge of this job manager. */
     private final JavaScriptJobsSupervisor supervisor_;
 
     /**
@@ -73,7 +74,6 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
      */
     class ExecutingJobTracker implements Runnable {
         private final JavaScriptJob job_;
-
         ExecutingJobTracker(final JavaScriptJob job) {
             job_ = job;
         }
@@ -92,11 +92,11 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     /**
      * Creates a new instance.
-     * @param javaScriptJobsSupervisor the supervisor for the {@link WebClient}
+     * @param supervisor the job supervisor in charge of this job manager
      * @param window the window associated with the new job manager
      */
-    public JavaScriptJobManagerImpl(final JavaScriptJobsSupervisor javaScriptJobsSupervisor, final WebWindow window) {
-        supervisor_ = javaScriptJobsSupervisor;
+    public JavaScriptJobManagerImpl(final JavaScriptJobsSupervisor supervisor, final WebWindow window) {
+        supervisor_ = supervisor;
         window_ = new WeakReference<WebWindow>(window);
         executor_.setThreadFactory(new ThreadFactory() {
             public Thread newThread(final Runnable r) {
@@ -128,6 +128,17 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         return count1;
     }
 
+    /**
+     * Returns the approximate number of jobs currently executing and waiting to be executed. This
+     * method can only guarantee approximate results, because these are the only guarantees provided
+     * by the {@link ScheduledThreadPoolExecutor} API which this method is built on.
+     * @return the approximate number of jobs currently executing and waiting to be executed
+     */
+    private synchronized int getJobCountInner() {
+        executor_.purge();
+        return (int) (executor_.getTaskCount() - executor_.getCompletedTaskCount());
+    }
+
     /** {@inheritDoc} */
     public int addJob(final String code, final int delay, final String description, final Page page) {
         final JavaScriptExecutionJob job = new JavaScriptStringJob(description, getWindow(), code);
@@ -140,7 +151,29 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         return addJob(job, delay, page);
     }
 
-    private synchronized int do_addJob(final JavaScriptJob job, final int delay, final int period, final Page page) {
+    /** {@inheritDoc} */
+    public int addJob(final JavaScriptJob job, final int delay, final Page page) {
+        return addJob(job, delay, -1, page);
+    }
+
+    /** {@inheritDoc} */
+    public int addRecurringJob(final String code, final int period, final String description, final Page page) {
+        final JavaScriptExecutionJob job = new JavaScriptStringJob(description, getWindow(), code);
+        return addRecurringJob(job, period, page);
+    }
+
+    /** {@inheritDoc} */
+    public int addRecurringJob(final Function code, final int period, final String description, final Page page) {
+        final JavaScriptExecutionJob job = new JavaScriptFunctionJob(description, getWindow(), code);
+        return addRecurringJob(job, period, page);
+    }
+
+    /** {@inheritDoc} */
+    public int addRecurringJob(final JavaScriptJob job, final int period, final Page page) {
+        return addJob(job, -1, period, page);
+    }
+
+    private synchronized int addJob(final JavaScriptJob job, final int delay, final int period, final Page page) {
         final WebWindow w = getWindow();
         if (w == null) {
             // The window to which this job manager belongs has been garbage collected.
@@ -172,30 +205,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     }
 
     /** {@inheritDoc} */
-    public int addJob(final JavaScriptJob job, final int delay, final Page page) {
-        return do_addJob(job, delay, -1, page);
-    }
-
-    /** {@inheritDoc} */
-    public int addRecurringJob(final String code, final int period, final String description, final Page page) {
-        final JavaScriptExecutionJob job = new JavaScriptStringJob(description, getWindow(), code);
-        return addRecurringJob(job, period, page);
-    }
-
-    /** {@inheritDoc} */
-    public int addRecurringJob(final Function code, final int period, final String description, final Page page) {
-        final JavaScriptExecutionJob job = new JavaScriptFunctionJob(description, getWindow(), code);
-        return addRecurringJob(job, period, page);
-    }
-
-    /** {@inheritDoc} */
-    public int addRecurringJob(final JavaScriptJob job, final int period, final Page page) {
-        job.setPeriodic(true);
-        return do_addJob(job, -1, period, page);
-    }
-
-    /** {@inheritDoc} */
-    public synchronized void removeScheduledJob(final int id) {
+    public synchronized void removeJob(final int id) {
         final ScheduledFuture< ? > future = futures_.remove(id);
         if (future != null) {
             LOG.debug("Stopping " + future);
@@ -205,7 +215,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     }
 
     /** {@inheritDoc} */
-    public synchronized void stopJobNow(final int id) {
+    public synchronized void stopJob(final int id) {
         final Future< ? > future = futures_.remove(id);
         if (future != null) {
             LOG.debug("Stopping now " + future);
@@ -215,7 +225,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     }
 
     /** {@inheritDoc} */
-    public synchronized void stopAllJobsAsap() {
+    public synchronized void removeAllJobs() {
         LOG.debug("stopAllJobsAsap");
         int nb = 0;
         for (final Future< ? > future : futures_.values()) {
@@ -230,16 +240,26 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     }
 
     /** {@inheritDoc} */
-    public boolean waitForAllJobsToFinish(final long maxWaitMillis) {
-        LOG.debug("Waiting for all jobs to finish (will wait max " + maxWaitMillis + " millis).");
+    public boolean waitForAllJobsToFinish(final long timeoutMillis) {
+        LOG.debug("Waiting for all jobs to finish (will wait max " + timeoutMillis + " millis).");
         final long start = System.currentTimeMillis();
-        final long interval = Math.min(maxWaitMillis, 100);
-        while (getJobCount() > 0 && System.currentTimeMillis() - start < maxWaitMillis) {
+        final long interval = Math.min(timeoutMillis, 100);
+        while (getJobCount() > 0 && System.currentTimeMillis() - start < timeoutMillis) {
             sleep(interval);
         }
         final int jobs = getJobCount();
         LOG.debug("Finished waiting for all jobs to finish (final job count is " + jobs + ").");
         return jobs == 0;
+    }
+
+    /** {@inheritDoc} */
+    public synchronized void shutdown() {
+        executor_.purge();
+        final List<Runnable> jobsStillRunning = executor_.shutdownNow();
+        futures_.clear();
+        if (jobsStillRunning.size() > 0) {
+            LOG.debug("Jobs still running after shutdown: " + jobsStillRunning.size());
+        }
     }
 
     /**
@@ -248,17 +268,6 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
      */
     private WebWindow getWindow() {
         return window_.get();
-    }
-
-    /**
-     * Returns the approximate number of jobs currently executing and waiting to be executed. This
-     * method can only guarantee approximate results, because these are the only guarantees provided
-     * by the {@link ScheduledThreadPoolExecutor} API which this method is built on.
-     * @return the approximate number of jobs currently executing and waiting to be executed
-     */
-    private synchronized int getJobCountInner() {
-        executor_.purge();
-        return (int) (executor_.getTaskCount() - executor_.getCompletedTaskCount());
     }
 
     /**
@@ -275,13 +284,4 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         }
     }
 
-    /** {@inheritDoc} */
-    public synchronized void shutdown() {
-        executor_.purge();
-        final List<Runnable> jobsStillRunning = executor_.shutdownNow();
-        futures_.clear(); // This is dangerous
-        if (jobsStillRunning.size() > 0) {
-            LOG.debug("Jobs still running after shutdown: " + jobsStillRunning.size());
-        }
-    }
 }

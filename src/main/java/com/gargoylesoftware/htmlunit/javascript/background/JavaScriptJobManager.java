@@ -100,32 +100,34 @@ public interface JavaScriptJobManager {
     int addRecurringJob(JavaScriptJob job, int period, final Page page);
 
     /**
-     * Removes the scheduled job from the execution queue. This doesn't interrupt the job if it is currently running.
-     * @param id the ID of the job to be removed from schedule
+     * Removes the specified job from the execution queue. This doesn't interrupt the job if it is currently running.
+     * @param id the ID of the job to be removed from the execution queue
      */
-    void removeScheduledJob(final int id);
+    void removeJob(final int id);
 
     /**
-     * Stops the specified job <b>now</b>, not even allowing the job to finish if it is currently executing.
+     * Removes all jobs from the execution queue. This doesn't interrupt any jobs that may be currently running.
+     */
+    void removeAllJobs();
+
+    /**
+     * Stops the specified job and removes it from the execution queue, not even allowing the job to finish if it is
+     * currently executing.
      * @param id the ID of the job to be stopped
      */
-    void stopJobNow(final int id);
+    void stopJob(final int id);
 
     /**
-     * Stops all jobs <b>as soon as possible</b>, allowing the jobs to finish if they are currently executing.
+     * Blocks until all active jobs have finished executing. If a job is scheduled to begin executing after
+     * <tt>(now + timeoutMillis)</tt>, this method will wait for <tt>timeoutMillis</tt> milliseconds and then
+     * return <tt>false</tt>.
+     * @param timeoutMillis the maximum amount of time to wait (in milliseconds)
+     * @return <tt>true</tt> if all threads expired within the specified amount of time
      */
-    void stopAllJobsAsap();
+    boolean waitForAllJobsToFinish(final long timeoutMillis);
 
     /**
-     * Blocks until all active jobs have finished executing. If a job is scheduled later than
-     * maxWaitMillis this method will wait for maxWaitMillis and return false.
-     * @param maxWaitMillis the maximum amount of time to wait (in milliseconds)
-     * @return <tt>true</tt> if all threads expired within the specified time
-     */
-    boolean waitForAllJobsToFinish(final long maxWaitMillis);
-
-    /**
-     * Kill this job manager.
+     * Shuts down this job manager and stops all of its jobs.
      */
     void shutdown();
 }

@@ -292,7 +292,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Cancels the current HTTP request.
      */
     public void jsxFunction_abort() {
-        getWindow().getWebWindow().getJobManager().stopJobNow(threadID_);
+        getWindow().getWebWindow().getJobManager().stopJob(threadID_);
     }
 
     /**
