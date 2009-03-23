@@ -14,11 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.html.HtmlImage.TAG_NAME;
+
 import java.net.MalformedURLException;
 
+import org.apache.xalan.xsltc.runtime.AttributeList;
 import org.mozilla.javascript.Context;
 
-import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.html.HTMLParser;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
@@ -36,7 +41,8 @@ import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 public class HTMLImageElement extends HTMLElement {
 
     private static final long serialVersionUID = 5630843390548382869L;
-    private String src_;
+
+    private boolean instantiatedViaJavaScript_ = false;
 
     /**
      * Creates an instance.
@@ -50,54 +56,34 @@ public class HTMLImageElement extends HTMLElement {
      * the Rhino engine won't walk up the hierarchy looking for constructors.
      */
     public void jsConstructor() {
-        // Empty.
+        instantiatedViaJavaScript_ = true;
+        SgmlPage page = (SgmlPage) getWindow().getWebWindow().getEnclosedPage();
+        HtmlElement fakeImage = HTMLParser.getFactory(TAG_NAME).createElement(page, TAG_NAME, new AttributeList());
+        setDomNode(fakeImage);
     }
 
     /**
-     * Sets the src property, either on the DOM node which corresponds to this
-     * JavaScript object, or if none exists (as when using JavaScript to preload
-     * images), on the JavaScript object itself.
-     * @param src the src attribute value
+     * Sets the <tt>src</tt> attribute.
+     * @param src the <tt>src</tt> attribute value
      */
     public void jsxSet_src(final String src) {
-        src_ = src;
-        final HtmlImage img = (HtmlImage) getDomNodeOrNull();
-        if (img != null) {
-            img.setAttribute("src", src);
-        }
+        getDomNodeOrDie().setAttribute("src", src);
         getWindow().getJavaScriptEngine().addPostponedAction(new ImageOnLoadAction());
     }
 
     /**
-     * Returns the value of the src property, either from the DOM node which
-     * corresponds to this JavaScript object, or if that doesn't exist (as
-     * when using JavaScript to preload images), from the JavaScript object
-     * itself.
-     * @return the src attribute
+     * Returns the value of the <tt>src</tt> attribute.
+     * @return the value of the <tt>src</tt> attribute
      */
     public String jsxGet_src() {
-        final HtmlImage img = (HtmlImage) getDomNodeOrNull();
-        if (img != null) {
-            // This image has been added to the DOM tree.
-            final String src = img.getSrcAttribute();
-            try {
-                final HtmlPage page = (HtmlPage) img.getPage();
-                return page.getFullyQualifiedUrl(src).toExternalForm();
-            }
-            catch (final MalformedURLException e) {
-                final String msg = "Unable to create fully qualified URL for src attribute of image " + e.getMessage();
-                throw Context.reportRuntimeError(msg);
-            }
+        final HtmlImage img = (HtmlImage) getDomNodeOrDie();
+        final String src = img.getSrcAttribute();
+        if (instantiatedViaJavaScript_ && "".equals(src)) {
+            return src;
         }
-
-        // This is an image instantiated in JavaScript via "new Image()" and not yet added to the DOM tree.
-        if (src_ == null) {
-            return ""; // src property has not yet been set
-        }
-        final WebClient webClient = getWindow().getWebWindow().getWebClient();
-        final HtmlPage currentPage = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
         try {
-            return currentPage.getFullyQualifiedUrl(src_).toExternalForm();
+            final HtmlPage page = (HtmlPage) img.getPage();
+            return page.getFullyQualifiedUrl(src).toExternalForm();
         }
         catch (final MalformedURLException e) {
             final String msg = "Unable to create fully qualified URL for src attribute of image " + e.getMessage();

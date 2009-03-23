@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, MooTools support, support all HTML elements and various JavaScript properties">
+            <action type="fix" dev="sdanig" issue="2697650">
+                Correctly initialize style attribute of images created via JavaScript.
+            </action>
             <action type="fix" dev="sdanig" issue="2672376">
                 JavaScript: add support for 'oninput' events on text inputs (Firefox only).
             </action>

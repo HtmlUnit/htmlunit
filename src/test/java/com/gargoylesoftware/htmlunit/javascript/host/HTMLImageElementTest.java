@@ -240,4 +240,25 @@ public class HTMLImageElementTest extends WebTestCase {
         assertEquals(expected, actual);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "true", "relative", "", "" })
+    public void newImage() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function doTest(){\n"
+            + "    var i = new Image();\n"
+            + "    alert(i.style != null);\n"
+            + "    i.style.position = 'relative';\n"
+            + "    alert(i.style.position);\n"
+            + "    alert(i.border);\n"
+            + "    alert(i.alt);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }
