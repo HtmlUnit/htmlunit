@@ -57,9 +57,9 @@ public class HTMLImageElement extends HTMLElement {
      */
     public void jsConstructor() {
         instantiatedViaJavaScript_ = true;
-        SgmlPage page = (SgmlPage) getWindow().getWebWindow().getEnclosedPage();
-        HtmlElement fakeImage = HTMLParser.getFactory(TAG_NAME).createElement(page, TAG_NAME, new AttributeList());
-        setDomNode(fakeImage);
+        final SgmlPage page = (SgmlPage) getWindow().getWebWindow().getEnclosedPage();
+        final HtmlElement fake = HTMLParser.getFactory(TAG_NAME).createElement(page, TAG_NAME, new AttributeList());
+        setDomNode(fake);
     }
 
     /**
