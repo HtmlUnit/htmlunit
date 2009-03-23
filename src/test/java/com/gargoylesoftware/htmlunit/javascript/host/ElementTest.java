@@ -290,7 +290,7 @@ public class ElementTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.FF)
-    @Alerts("1")
+    @Alerts({ "1", "1" })
     public void getElementsByTagNameNS() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -312,6 +312,7 @@ public class ElementTest extends WebTestCase {
             + "      var doc=parser.parseFromString(text,'text/xml');\n"
             + "    }\n"
             + "    alert(doc.documentElement.getElementsByTagNameNS('http://myNS', 'template').length);\n"
+            + "    alert(doc.documentElement.getElementsByTagNameNS(null, 'html').length);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

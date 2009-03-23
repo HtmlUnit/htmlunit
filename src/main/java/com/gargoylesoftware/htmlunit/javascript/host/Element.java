@@ -19,6 +19,7 @@ import java.util.Map;
 
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
+import org.mozilla.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -203,15 +204,15 @@ public class Element extends EventNode {
      *                  which matches all elements.
      * @return a live NodeList of found elements in the order they appear in the tree
      */
-    public Object jsxFunction_getElementsByTagNameNS(final String namespaceURI, final String localName) {
+    public Object jsxFunction_getElementsByTagNameNS(final Object namespaceURI, final String localName) {
         final DomNode domNode = getDomNodeOrDie();
         final HTMLCollection collection = new HTMLCollection(this);
         final String xpath;
-        if (namespaceURI.equals("*")) {
+        if (namespaceURI == null || namespaceURI.equals("*")) {
             xpath = ".//" + localName;
         }
         else {
-            final String prefix = XmlUtil.lookupPrefix((DomElement) domNode, namespaceURI);
+            final String prefix = XmlUtil.lookupPrefix((DomElement) domNode, Context.toString(namespaceURI));
             xpath = ".//" + prefix + ':' + localName;
         }
         collection.init(domNode, xpath);
