@@ -150,7 +150,7 @@
                             <include>**/objects/**/*.*</include>
                             <include>**/pjl-comp-filter/**/*.*</include>
                             <include>**/testfiles/**/*.*</include>
-                            <include>/*.*</include>
+                            <include>*.*</include>
                         </includes>
                     </testResource>
                 </testResources>
