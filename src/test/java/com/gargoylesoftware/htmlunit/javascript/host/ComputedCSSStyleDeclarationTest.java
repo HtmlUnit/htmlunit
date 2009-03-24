@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
 public class ComputedCSSStyleDeclarationTest extends WebTestCase {
@@ -44,15 +45,15 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
-    @Alerts("none")
+    @Alerts(FF = "none", IE = "undefined")
     public void cssFloat() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var e = document.getElementById('myDiv');\n"
-            + "    alert(window.getComputedStyle(e,null).cssFloat);\n"
+            + "    var s = window.getComputedStyle ? window.getComputedStyle(e,null) : e.currentStyle;\n"
+            + "    alert(s.cssFloat);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -307,8 +308,8 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = { "block block block block block block block block" },
-            FF = { "table table-header-group table-row-group table-cell table-row table-cell block list-item" })
+    @Alerts(IE = { "block block block block block block block block block" },
+            FF = { "table table-header-group table-row-group table-cell table-row table-cell block list-item block" })
     public void defaultDisplayValues() throws Exception {
         final String html = "<html><body>\n"
             + "  <table id='table'>\n"
@@ -316,6 +317,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
             + "    <tbody id='tbody'><tr><td id='td'>body</td></tr></tbody>\n"
             + "  </table>\n"
             + "  <ul id='ul'><li id='li'>blah</li></ul>\n"
+            + "  <div id='div'></div>\n"
             + "  <script>\n"
             + "    function x(id) {\n"
             + "      var e = document.getElementById(id);\n"
@@ -324,7 +326,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
             + "  </script>\n"
             + "  <script>\n"
             + "    alert(x('table') + ' ' + x('thead') + ' ' + x('tbody') + ' ' + x('th') + ' ' + x('tr') +\n"
-            + "      ' ' + x('td') + ' ' + x('ul') + ' ' + x('li'));</script>\n"
+            + "      ' ' + x('td') + ' ' + x('ul') + ' ' + x('li') + ' ' + x('div'));</script>\n"
             + "</body></html>";
         loadPageWithAlerts(html);
     }
@@ -381,5 +383,27 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "1256px", "auto" }, IE = { "auto", "auto" })
+    public void computedWidthOfHiddenElements() throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "     var div1 = document.getElementById('myDiv1');\n"
+            + "     var cs1 = window.getComputedStyle ? window.getComputedStyle(div1, null) : div1.currentStyle;\n"
+            + "     alert(cs1.width);\n"
+            + "     var div2 = document.getElementById('myDiv2');\n"
+            + "     var cs2 = window.getComputedStyle ? window.getComputedStyle(div2, null) : div2.currentStyle;\n"
+            + "     alert(cs2.width);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myDiv1'></div>\n"
+            + "  <div id='myDiv2' style='display:none'/>\n"
+            + "</body></html>";
+        loadPageWithAlerts(content);
     }
 }

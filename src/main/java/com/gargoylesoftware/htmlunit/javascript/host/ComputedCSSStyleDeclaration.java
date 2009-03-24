@@ -1084,7 +1084,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         if (jsxGet_display().equals("none")) {
             return "auto";
         }
-        final String defaultWidth = "1256px";
+        final String defaultWidth;
+        if (getBrowserVersion().isIE()) {
+            defaultWidth = "auto";
+        }
+        else {
+            defaultWidth = "1256px";
+        }
         return pixelString(defaultIfEmpty(super.jsxGet_width(), defaultWidth));
     }
 

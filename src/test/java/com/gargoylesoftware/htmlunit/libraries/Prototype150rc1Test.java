@@ -61,7 +61,6 @@ public class Prototype150rc1Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented(Browser.IE)
     public void dom() throws Exception {
         test("dom.html");
     }

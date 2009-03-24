@@ -139,9 +139,8 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
-    @Alerts("")
-    public void ieStyle() throws Exception {
+    @Alerts(FF = "undefined", IE = "")
+    public void behavior() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -1165,27 +1164,6 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "  <div id='myDiv' style='border: red 1px solid'/>\n"
             + "</body></html>";
         loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Browsers(Browser.FF)
-    @Alerts({ "1256px", "auto" })
-    public void computedWidthOfHiddenElements() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "     var div1 = document.getElementById('myDiv1');\n"
-            + "     var div2 = document.getElementById('myDiv2');\n"
-            + "     alert(window.getComputedStyle(div1, null).width);\n"
-            + "     alert(window.getComputedStyle(div2, null).width);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "  <div id='myDiv1'/>\n"
-            + "  <div id='myDiv2' style='display:none'/>\n"
-            + "</body></html>";
-        loadPageWithAlerts(content);
     }
 
     /**

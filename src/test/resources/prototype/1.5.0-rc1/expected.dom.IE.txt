@@ -1,5 +1,5 @@
 25 tests, 253 assertions, 1 failures, 0 errors
-Status	Test Message
+Status	Test	Message
 passed	testDollarFunction	7 assertions, 0 failures, 0 errors
 passed	testGetElementsByClassName	4 assertions, 0 failures, 0 errors
 passed	testInsertWithTR	1 assertions, 0 failures, 0 errors
@@ -24,4 +24,5 @@ passed	testElementMakeClipping	15 assertions, 0 failures, 0 errors
 passed	testElementExtend	151 assertions, 0 failures, 0 errors
 passed	testElementCleanWhitespace	9 assertions, 0 failures, 0 errors
 passed	testElementSetStyle	4 assertions, 0 failures, 0 errors
-failed	testElementGetStyle	7 assertions, 1 failures, 0 errorsFailure: assertNotNull
+failed	testElementGetStyle	7 assertions, 1 failures, 0 errors
+Failure: assertNotNull
