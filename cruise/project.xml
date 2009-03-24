@@ -66,3 +66,31 @@ mvn2home
             />
     </publishers>
 </project>
+
+<project name="htmlunit-with-libraries" buildafterfailed="false" requireModification="false">
+    <schedule>
+        <maven2 mvnhome="&mvn2home;" pomfile="&basedir;/htmlunit/cruisecontrol/checkout/pom.xml"
+            goal="-DwithLibs test"/>
+    </schedule>
+    <listeners>
+        <currentbuildstatuslistener file="&basedir;/htmlunit/cruisecontrol/logs/status-with-libraries.txt"/>
+    </listeners>
+    <log dir="&basedir;/htmlunit/cruisecontrol/logs">
+        <merge dir="&basedir;/htmlunit/cruisecontrol/checkout/target/surefire-reports/"/>
+    </log>
+    <publishers>
+        <htmlemail
+            buildresultsurl="http://&hostname;/htmlunit/"
+            mailhost="&defaultmailhost;"
+            returnaddress="build-support@canoo.com"
+            defaultsuffix="@users.sourceforge.net"
+            reportsuccess="always"
+            logdir="&basedir;/htmlunit/cruisecontrol/logs"
+            xslfile="&basedir;/htmlunit/cruisecontrol/checkout/cruise/htmlmail.xsl"
+            >
+            <always address="mguillemot@yahoo.fr"/>
+            <always address="build-support@canoo.com"/>
+            <failure address="htmlunit-develop@lists.sourceforge.net" reportWhenFixed="true"/>
+        </htmlemail>
+    </publishers>
+</project>
