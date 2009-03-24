@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
+import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLScriptElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -419,19 +420,16 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Sets the <tt>readyState</tt> to {@link DomNode#READY_STATE_COMPLETE} and executes the
-     * <tt>onreadystatechange</tt> handler when simulating IE. Note that script nodes go
-     * straight to the {@link DomNode#READY_STATE_COMPLETE} state, skipping all previous states.
+     * Sets the <tt>readyState</tt> to the specified state and executes the
+     * <tt>onreadystatechange</tt> handler when simulating IE.
      * @param state this script ready state
      */
     protected void setAndExecuteReadyState(final String state) {
         if (getPage().getWebClient().getBrowserVersion().isIE()) {
             setReadyState(state);
             final HTMLScriptElement script = (HTMLScriptElement) getScriptObject();
-            final Function handler = script.getOnReadyStateChangeHandler();
-            if (handler != null) {
-                ((HtmlPage) getPage()).executeJavaScriptFunctionIfPossible(handler, script, new Object[0], this);
-            }
+            final Event event = new Event(this, Event.TYPE_READY_STATE_CHANGE);
+            script.executeEvent(event);
         }
     }
 

@@ -202,6 +202,24 @@ public class HTMLScriptElementTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void onReadyStateChange_EventAvailable() throws Exception {
+        final String html =
+              "<html><body><script>\n"
+            + "var s = document.createElement('script');\n"
+            + "s.src = '//:';\n"
+            + "s.onreadystatechange = function() {alert(window.event);};\n"
+            + "document.body.appendChild(s);\n"
+            + "</script></body></html>";
+        final List<String> actual = new ArrayList<String>();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7, html, actual);
+        final String[] expected = new String[] {"[object]"};
+        assertEquals(expected, actual);
+    }
+
+    /**
      * Verifies the correct the ordering of script element execution, deferred script element
      * execution, script ready state changes, deferred script ready state changes, and onload
      * handlers when the document doesn't have an explicit <tt>body</tt> element.

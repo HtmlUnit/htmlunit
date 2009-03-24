@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, MooTools support, support all HTML elements and various JavaScript properties">
+            <action type="fix" dev="sdanig" issue="2706760">
+                JavaScript: window.event should be available during execution of script.onreadystatechange handler (IE only).
+            </action>
             <action type="fix" dev="asashour" issue="2704664">
                 JavaScript: element.getElementsByTagNameNS() can accept null 'namespaceURI'.
             </action>

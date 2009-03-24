@@ -96,8 +96,11 @@ public class Event extends SimpleScriptable {
     /** Triggered after the DOM has loaded but before images etc. */
     public static final String TYPE_DOM_DOCUMENT_LOADED = "DOMContentLoaded";
 
-    /** The property change event type, triggered by "onpropertychange" event handlers. */
+    /** The event type triggered by "onpropertychange" event handlers. */
     public static final String TYPE_PROPERTY_CHANGE = "propertychange";
+
+    /** The event type triggered by "onreadystatechange" event handlers. */
+    public static final String TYPE_READY_STATE_CHANGE = "readystatechange";
 
     /** The first event phase: the capturing phase. */
     public static final short CAPTURING_PHASE = 1;

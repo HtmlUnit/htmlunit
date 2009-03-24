@@ -108,14 +108,6 @@ public class HTMLScriptElement extends HTMLElement {
     }
 
     /**
-     * Returns the event handler that fires on every state change.
-     * @return the event handler that fires on every state change
-     */
-    public Function getOnReadyStateChangeHandler() {
-        return getEventHandler("onreadystatechange");
-    }
-
-    /**
      * Sets the event handler that fires on every state change.
      * @param handler the event handler that fires on every state change
      */
