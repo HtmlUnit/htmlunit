@@ -1577,4 +1577,43 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * String value of native functions starts with \n on IE.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented(Browser.IE)
+    @Alerts(FF = { "0", "false", "0" },
+            IE = { "1", "true", "1" })
+    public void nativeFunction_toStringValue() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    alert(String(window.alert).indexOf('function'));\n"
+            + "    alert(String(window.alert).charAt(0) == '\\n');\n"
+            + "    alert(String(document.getElementById).indexOf('function'));\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    @Alerts("0")
+    public void function_toStringValue() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function f() {}\n"
+            + "  function test() {\n"
+            + "    alert(String(f).indexOf('function'));\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }

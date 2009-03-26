@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
@@ -537,7 +536,6 @@ public class HTMLInputElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void testDefaultValues() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -556,8 +554,8 @@ public class HTMLInputElementTest extends WebTestCase {
                 + "  alert(_oInput.type + ': '\n"
                 + "  + _oInput.checked + ', ' \n"
                 + "  + _oInput.defaultChecked + ', '\n"
-                + "  + ((String(_oInput.click).indexOf('function') > 0) ? 'function' : 'unknown') + ', '\n"
-                + "  + ((String(_oInput.select).indexOf('function') > 0) ? 'function' : 'unknown') + ', '\n"
+                + "  + ((String(_oInput.click).indexOf('function') != -1) ? 'function' : 'unknown') + ', '\n"
+                + "  + ((String(_oInput.select).indexOf('function') != -1) ? 'function' : 'unknown') + ', '\n"
                 + "  + _oInput.defaultValue + ', '\n"
                 + "  + _oInput.value\n"
                 + " );\n"
