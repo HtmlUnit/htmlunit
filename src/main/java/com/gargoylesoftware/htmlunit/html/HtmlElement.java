@@ -565,7 +565,7 @@ public abstract class HtmlElement extends DomElement {
      * @param attributeValue the value of the attribute to search for
      * @param <E> the sub-element type
      * @return the first element which matches the specified search criteria
-     * @exception ElementNotFoundException if no element matches the specified search criteria
+     * @throws ElementNotFoundException if no element matches the specified search criteria
      */
     public final <E extends HtmlElement> E getOneHtmlElementByAttribute(final String elementName,
             final String attributeName,
