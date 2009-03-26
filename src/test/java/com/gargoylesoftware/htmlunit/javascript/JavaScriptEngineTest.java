@@ -32,7 +32,6 @@ import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.Script;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -105,20 +104,15 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("foo")
     public void onloadJavascriptFunction() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function onload() {alert('foo');}"
             + "</script></head><body>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"foo"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -140,7 +134,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
         final List<String> collectedAlerts = null;
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
 
         final HtmlTextInput textInput = page.getHtmlElementById("textfield1");
         assertEquals("blue", textInput.getValueAttribute());
@@ -150,8 +144,9 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("foo")
     public void alert() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "alert('foo')\n"
             + "</script></head><body>\n"
@@ -161,12 +156,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "    <input type='text' name='textfield2' id='textfield2'/>\n"
             + "</form>\n"
             + "</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals("foo", page.getTitleText());
-
-        final String[] expectedAlerts = {"foo"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -174,30 +164,24 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("foo")
     public void scopeOfNewFunction() throws Exception {
-        final String content
+        final String html
             = "<html><head><script>\n"
             + "var f = new Function('alert(\"foo\")');\n"
             + "f();\n"
             + "</script></head><body>\n"
             + "</body></html>";
-        final String[] expectedAlerts = {"foo"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("foo")
     public void scopeOfNestedNewFunction() throws Exception {
-        final String[] expectedAlerts = {"foo"};
-        final String content
-            = "<html><head>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
             + "var foo = 'foo';\n"
             + "var f1 = new Function('f = new Function(\"alert(foo)\"); f()');\n"
@@ -206,11 +190,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -506,11 +486,12 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("1")
     public void setValuesThatAreNotStrings() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
-            + "    document.form1.textfield1.value=1;\n"
+            + "    document.form1.textfield1.value = 1;\n"
             + "    alert(document.form1.textfield1.value)\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
@@ -520,12 +501,8 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "    <input type='text' name='textfield2' id='textfield2'/>\n"
             + "</form>\n"
             + "</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals("foo", page.getTitleText());
 
-        final String[] expectedAlerts = {"1"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -575,7 +552,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         final List<String> emptyList = Collections.emptyList();
         createTestPageForRealBrowserIfNeeded(htmlContent, emptyList);
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(getBrowserVersion(), htmlContent, null);
 
         final HtmlPage page1 = (HtmlPage) ((HtmlFrame) page.getHtmlElementById("frame1")).getEnclosedPage();
         final HtmlPage page2 = (HtmlPage) ((HtmlFrame) page.getHtmlElementById("frame2")).getEnclosedPage();
@@ -591,23 +568,26 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("foo")
     public void javaScriptWrappedInHtmlComments() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title><script language='javascript'><!--\n"
             + "function doTest() {\n"
+            + "  alert('foo');\n"
             + "}\n"
             + "-->\n</script></head>\n"
             + "<body onload='doTest()'></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
-        assertEquals("foo", page.getTitleText());
+
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("1")
     public void javaScriptWrappedInHtmlComments2() throws Exception {
-        final String content =
+        final String html =
             "<html><head>\n"
             + "<script><!-- \n"
             + " alert('1')\n"
@@ -616,26 +596,24 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"1"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("1")
     public void javaScriptWrappedInHtmlComments_commentOnOpeningLine() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title><script language='javascript'><!-- Some comment here\n"
             + "function doTest() {\n"
+            + " alert('1')\n"
             + "}\n"
             + "-->\n</script></head>\n"
             + "<body onload='doTest()'></body></html>";
 
-        final HtmlPage page = loadPage(htmlContent);
-        assertEquals("foo", page.getTitleText());
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -643,6 +621,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ })
     public void javaScriptWrappedInHtmlComments_commentNotClosed() throws Exception {
         final String html
             = "<html><head><title>foo</title>\n"
@@ -651,21 +630,16 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "</head>\n"
             + "<body></body></html>";
 
-        final String[] expectedAlerts = {};
-        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(html, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("undefined")
     public void javaScriptWrappedInHtmlComments_allOnOneLine() throws Exception {
-        final String content
+        final String html
             = "<html>\n"
             + "  <head>\n"
             + "    <title>test</title>\n"
@@ -677,22 +651,18 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "  <body onload='alert(test)'>\n"
             + "  </body>\n"
             + "</html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        final String[] expectedAlerts = {"undefined"};
-        assertEquals(expectedAlerts, collectedAlerts);
+
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("test")
     public void eventHandlerWithComment() throws Exception {
-        final String content = "<html><body onLoad='alert(\"test\"); // xxx'></body></html>";
-        final String[] expectedAlerts = {"test"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        final String html = "<html><body onLoad='alert(\"test\"); // xxx'></body></html>";
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -708,7 +678,7 @@ public class JavaScriptEngineTest extends WebTestCase {
              + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+        final HtmlPage page = loadPage(getBrowserVersion(), htmlContent, collectedAlerts);
         assertEquals("First", page.getTitleText());
 
         ((HtmlSubmitInput) page.getFormByName("form1").getInputByName("button1")).click();
@@ -789,8 +759,9 @@ public class JavaScriptEngineTest extends WebTestCase {
      */
     @Test
     @NotYetImplemented
+    @Alerts({ "true", "false", "false", "true" })
     public void functionCaller() throws Exception {
-        final String content = "<html><head><script>\n"
+        final String html = "<html><head><script>\n"
             + "function myFunc() {\n"
             + "  alert(myFunc.caller == null);\n"
             + "  alert(myFunc.caller == foo);\n"
@@ -801,12 +772,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "</script>\n"
             + "</head><body></body></html>";
 
-        final String[] expectedAlerts = {"true", "false", "false", "true"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -828,7 +794,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
 
-        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+        final HtmlPage page = loadPage(getBrowserVersion(), htmlContent, collectedAlerts);
         assertEquals("First", page.getTitleText());
 
         final HtmlForm form = page.getFormByName("form1");
@@ -899,7 +865,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     @Test
     public void activeXObjectNoMap() throws Exception {
         try {
-            loadPage(getJavaScriptContent("new ActiveXObject()"));
+            loadPage(getBrowserVersion(), getJavaScriptContent("new ActiveXObject()"), null);
             fail("An exception should be thrown for zero argument constructor.");
         }
         catch (final ScriptException e) {
@@ -907,7 +873,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         }
 
         try {
-            loadPage(getJavaScriptContent("new ActiveXObject(1, '2', '3')"));
+            loadPage(getBrowserVersion(), getJavaScriptContent("new ActiveXObject(1, '2', '3')"), null);
             fail("An exception should be thrown for a three argument constructor.");
         }
         catch (final ScriptException e) {
@@ -915,7 +881,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         }
 
         try {
-            loadPage(getJavaScriptContent("new ActiveXObject(a)"));
+            loadPage(getBrowserVersion(), getJavaScriptContent("new ActiveXObject(a)"), null);
             fail("An exception should be thrown for an undefined parameter in the constructor.");
         }
         catch (final ScriptException e) {
@@ -923,7 +889,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         }
 
         try {
-            loadPage(getJavaScriptContent("new ActiveXObject(10)"));
+            loadPage(getBrowserVersion(), getJavaScriptContent("new ActiveXObject(10)"), null);
             fail("An exception should be thrown for an integer parameter in the constructor.");
         }
         catch (final ScriptException e) {
@@ -931,7 +897,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         }
 
         try {
-            loadPage(getJavaScriptContent("new ActiveXObject('UnknownObject')"));
+            loadPage(getBrowserVersion(), getJavaScriptContent("new ActiveXObject('UnknownObject')"), null);
             fail("An exception should be thrown for a null map.");
         }
         catch (final ScriptException e) {
@@ -1235,8 +1201,9 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void commentNoDoubleSlashIE() throws Exception {
-        final String content =
+    @Alerts(IE = "2")
+    public void commentNoDoubleSlash() throws Exception {
+        final String html =
             "<html><head>\n"
             + "<script><!-- alert(1);\n"
             + " alert(2);\n"
@@ -1245,50 +1212,25 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        final String[] expectedAlert = {"2"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlert, collectedAlerts);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void commentNoDoubleSlashFF() throws Exception {
-        final String content =
-            "<html><head>\n"
-            + "<script><!-- alert(1);\n"
-            + " alert(2);\n"
-            + "alert(3) -->\n</script>\n"
-            + "</head>\n"
-            + "<body>\n"
-            + "</body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
+        boolean exceptionThrown = false;
         try {
-            loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-            fail();
+            loadPageWithAlerts(html);
         }
         catch (final ScriptException e) {
+            exceptionThrown = true;
             assertEquals(4, e.getFailingLineNumber());
         }
+
+        assertEquals(getBrowserVersion().isFirefox(), exceptionThrown);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "2", "3" })
     public void comment() throws Exception {
-        comment(BrowserVersion.INTERNET_EXPLORER_6);
-        comment(BrowserVersion.FIREFOX_2);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    private void comment(final BrowserVersion browserVersion) throws Exception {
-        final String content =
+        final String html =
             "<html><head>\n"
             + "<script><!-- alert(1);\n"
             + " alert(2);\n"
@@ -1297,16 +1239,16 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        final String[] expectedAlert = {"2", "3"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlert, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "rstlne-rstlne-rstlne", "rstlno-rstlne-rstlne",
+            "rstlna-rstlne-rstlne", "rstlne-rstlne-rstlne",
+            "rstlni-rstlni-rstlni", "rstlna-rstlna-rstlna" })
     public void regExpSupport() throws Exception {
         final String html = "<html>\n"
             + "  <head>\n"
@@ -1329,18 +1271,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "  <body>abc</body>\n"
             + "</html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(html, collectedAlerts);
-
-        final String[] expectedAlerts = {
-            "rstlne-rstlne-rstlne",
-            "rstlno-rstlne-rstlne",
-            "rstlna-rstlne-rstlne",
-            "rstlne-rstlne-rstlne",
-            "rstlni-rstlni-rstlni",
-            "rstlna-rstlna-rstlna" };
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -1348,20 +1279,16 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("123")
     public void ecmaReservedKeywords() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "var o = {float: 123};"
             + "alert(o.float);"
             + "</script></head><body>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"123"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
