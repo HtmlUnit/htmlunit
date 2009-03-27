@@ -46,6 +46,20 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     private String defaultValue_;
     private String valueAtFocus_;
 
+    private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor() {
+        @Override
+        void typeDone(final String newValue, final int newCursorPosition) {
+            setTextInternal(newValue);
+            setSelectionStart(newCursorPosition);
+            setSelectionEnd(newCursorPosition);
+        }
+
+        @Override
+        protected boolean acceptChar(final char c) {
+            return super.acceptChar(c) || c == '\n' || c == '\r';
+        }
+    };
+
     /**
      * Creates an instance.
      *
@@ -358,7 +372,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
         if (selection != null) {
             return selection.getStartOffset();
         }
-        return 0;
+        return getText().length();
     }
 
     /**
@@ -389,7 +403,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
         if (selection != null) {
             return selection.getEndOffset();
         }
-        return 0;
+        return getText().length();
     }
 
     /**
@@ -433,17 +447,8 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      */
     @Override
     protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        //TODO: HtmlTextInput, HtmlPasswordArea, and HtmlTextArea should have synchronized logic (helper class?)
-        //TODO: Also, what about adding set/getCursor(int index)
-        final String text = getText();
-        if (c == '\b') {
-            if (text.length() > 0) {
-                setTextInternal(text.substring(0, text.length() - 1));
-            }
-        }
-        else if ((c == ' ' || c == '\n' || c == '\r' || !Character.isWhitespace(c))) {
-            setTextInternal(text + c);
-        }
+        doTypeProcessor_.doType(getText(), getSelectionStart(), getSelectionEnd(),
+            c, shiftKey, ctrlKey, altKey);
     }
 
     /**

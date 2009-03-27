@@ -32,6 +32,14 @@ public class HtmlPasswordInput extends HtmlInput {
 
     private static final long serialVersionUID = -1074283471317076942L;
 
+    private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor() {
+        @Override
+        void typeDone(final String newValue, final int newCursorPosition) {
+            setAttribute("value", newValue);
+            // we don't yet handle selection here!
+        }
+    };
+
     /**
      * Creates an instance.
      * @param namespaceURI the URI that identifies an XML namespace
@@ -57,17 +65,10 @@ public class HtmlPasswordInput extends HtmlInput {
      */
     @Override
     protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        //TODO: HtmlTextInput, HtmlPasswordArea, and HtmlTextArea should have synchronized logic (helper class?)
-        //TODO: Also, what about adding set/getCursor(int index)
+        // TODO: handle selection here!
         final String value = getValueAttribute();
-        if (c == '\b') {
-            if (value.length() > 0) {
-                setValueAttribute(value.substring(0, value.length() - 1));
-            }
-        }
-        else if ((c == ' ' || !Character.isWhitespace(c))) {
-            setValueAttribute(value + c);
-        }
+        doTypeProcessor_.doType(getValueAttribute(), value.length(), value.length(),
+            c, shiftKey, ctrlKey, altKey);
     }
 
 }

@@ -18,6 +18,7 @@ import java.util.Map;
 
 import org.w3c.dom.ranges.Range;
 
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
@@ -37,6 +38,15 @@ public class HtmlTextInput extends HtmlInput {
 
     private String valueAtFocus_;
 
+    private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor() {
+        @Override
+        void typeDone(final String newValue, final int newCursorPosition) {
+            setAttribute("value", newValue);
+            setSelectionStart(newCursorPosition);
+            setSelectionEnd(newCursorPosition);
+        }
+    };
+
     /**
      * Creates an instance.
      *
@@ -55,26 +65,8 @@ public class HtmlTextInput extends HtmlInput {
      */
     @Override
     protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        //TODO: HtmlTextInput, HtmlPasswordArea, and HtmlTextArea should have synchronized logic (helper class?)
-        //TODO: Also, what about adding set/getCursor(int index)
-        String value = getValueAttribute();
-        if (c == '\b') {
-            if (value.length() > 0) {
-                setAttribute("value", value.substring(0, value.length() - 1));
-            }
-        }
-        else if ((c == ' ' || !Character.isWhitespace(c))) {
-            if (getSelectionStart() != getSelectionEnd()) {
-                value = value.substring(0, getSelectionStart()) + c + value.substring(getSelectionEnd());
-                final int newSelectionPoint = getSelectionStart() + 1;
-                setAttribute("value", value);
-                setSelectionStart(newSelectionPoint);
-                setSelectionEnd(newSelectionPoint);
-            }
-            else {
-                setAttribute("value", value + c);
-            }
-        }
+        doTypeProcessor_.doType(getValueAttribute(), getSelectionStart(), getSelectionEnd(),
+            c, shiftKey, ctrlKey, altKey);
     }
 
     /**
@@ -116,7 +108,7 @@ public class HtmlTextInput extends HtmlInput {
         if (selection != null) {
             return selection.getStartOffset();
         }
-        return 0;
+        return getValueAttribute().length();
     }
 
     /**
@@ -147,7 +139,7 @@ public class HtmlTextInput extends HtmlInput {
         if (selection != null) {
             return selection.getEndOffset();
         }
-        return 0;
+        return getValueAttribute().length();
     }
 
     /**
@@ -176,7 +168,10 @@ public class HtmlTextInput extends HtmlInput {
     public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
 
-        if (qualifiedName.equals("value")) {
+        // if value is changed and this element has the focus, then select the new value
+        final Page page = getPage();
+        if (qualifiedName.equals("value") && page instanceof HtmlPage
+                && ((HtmlPage) page).getFocusedElement() == this) {
             setSelectionStart(attributeValue.length());
             setSelectionEnd(attributeValue.length());
         }

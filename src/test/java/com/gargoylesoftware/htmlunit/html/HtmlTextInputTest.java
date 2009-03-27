@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
 public class HtmlTextInputTest extends WebTestCase {
@@ -151,8 +152,8 @@ public class HtmlTextInputTest extends WebTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(IE = { "undefined,undefined", "3,undefined", "3,10" },
-            FF = { "11,11", "3,11", "3,10" })
+    @Alerts(IE = { "undefined,undefined", "undefined,undefined", "3,undefined", "3,10" },
+            FF = { "7,7", "11,11", "3,11", "3,10" })
     public void selection2_1() throws Exception {
         selection2(3, 10);
     }
@@ -161,8 +162,8 @@ public class HtmlTextInputTest extends WebTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(IE = { "undefined,undefined", "-3,undefined", "-3,15" },
-            FF = { "11,11", "0,11", "0,11" })
+    @Alerts(IE = { "undefined,undefined", "undefined,undefined", "-3,undefined", "-3,15" },
+            FF = { "7,7", "11,11", "0,11", "0,11" })
     public void selection2_2() throws Exception {
         selection2(-3, 15);
     }
@@ -171,8 +172,8 @@ public class HtmlTextInputTest extends WebTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(IE = { "undefined,undefined", "10,undefined", "10,5" },
-            FF = { "11,11", "10,11", "5,5" })
+    @Alerts(IE = { "undefined,undefined", "undefined,undefined", "10,undefined", "10,5" },
+            FF = { "7,7", "11,11", "10,11", "5,5" })
     public void selection2_3() throws Exception {
         selection2(10, 5);
     }
@@ -180,9 +181,10 @@ public class HtmlTextInputTest extends WebTestCase {
     private void selection2(final int selectionStart, final int selectionEnd) throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
-            + "<input id='myTextInput'>\n"
+            + "<input id='myTextInput' value='Bonjour'>\n"
             + "<script>\n"
             + "    var input = document.getElementById('myTextInput');\n"
+            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
             + "    input.value = 'Hello there';\n"
             + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
             + "    input.selectionStart = " + selectionStart + ";\n"
@@ -238,5 +240,59 @@ public class HtmlTextInputTest extends WebTestCase {
         input.select();
         input.type("Bye World");
         assertEquals("Bye World", input.getValueAttribute());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void typeWhen_selectPositionChanged() throws Exception {
+        final String html =
+              "<html><head></head>\n"
+            + "<body>\n"
+            + "<input id='myInput' value='Hello world'><br>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlTextInput input = page.getHtmlElementById("myInput");
+        input.select();
+        input.type("Bye World!");
+        assertEquals("Bye World!", input.getValueAttribute());
+
+        input.type("\b");
+        assertEquals("Bye World", input.getValueAttribute());
+
+        input.setSelectionStart(4);
+        input.setSelectionEnd(4);
+        input.type("Bye ");
+        assertEquals("Bye Bye World", input.getValueAttribute());
+
+        input.type("\b\b\b\b");
+        assertEquals("Bye World", input.getValueAttribute());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void type_specialCharacters() throws Exception {
+        final String html = "<html><head></head><body>"
+            + "<form>"
+            + "<input id='t' onkeyup='document.forms[0].lastKey.value = event.keyCode'>"
+            + "<input id='lastKey'>"
+            + "</form>"
+            + "</body></html>";
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlTextInput t = page.getHtmlElementById("t");
+        final HtmlTextInput lastKey = page.getHtmlElementById("lastKey");
+        t.type("abc");
+        assertEquals("abc", t.getValueAttribute());
+        assertEquals("99", lastKey.getValueAttribute());
+
+        // character in private use area E000–F8FF
+        t.type("\uE014");
+        assertEquals("abc", t.getValueAttribute());
+
+        // TODO: find a way to handle left & right keys, ...
     }
 }

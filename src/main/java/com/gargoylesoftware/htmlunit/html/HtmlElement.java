@@ -478,7 +478,9 @@ public abstract class HtmlElement extends DomElement {
             return getPage();
         }
 
-        focus();
+        if (((HtmlPage) getPage()).getFocusedElement() != this) {
+            focus();
+        }
 
         final Event keyDown = new UIEvent(this, Event.TYPE_KEY_DOWN, c, shiftKey, ctrlKey, altKey);
         final ScriptResult keyDownResult = fireEvent(keyDown);
