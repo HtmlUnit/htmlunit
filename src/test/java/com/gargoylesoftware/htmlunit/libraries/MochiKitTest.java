@@ -161,7 +161,7 @@ public class MochiKitTest extends LibraryTestCase {
 
         webClient_ = getWebClient();
         final HtmlPage page = webClient_.getPage(url);
-        webClient_.waitForBackgroundJavaScript(2000);
+        webClient_.waitForBackgroundJavaScriptStartingBefore(2000);
         final String expected = loadExpectation("test-" + testName);
         final HtmlDivision div = page.getFirstByXPath("//div[@class = 'tests_report']");
 

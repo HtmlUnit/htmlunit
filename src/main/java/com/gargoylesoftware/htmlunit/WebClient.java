@@ -31,8 +31,10 @@ import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Collections;
+import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -61,7 +63,6 @@ import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
-import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobsSupervisor;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -179,7 +180,6 @@ public class WebClient implements Serializable {
     private boolean activeXNative_;
     private RefreshHandler refreshHandler_ = new ImmediateRefreshHandler();
     private boolean throwExceptionOnScriptError_ = true;
-    private final transient JavaScriptJobsSupervisor jsJobsSupervisor_ = new JavaScriptJobsSupervisor();
 
     /**
      * Creates a web client instance using the browser version returned by
@@ -1935,6 +1935,48 @@ public class WebClient implements Serializable {
     /**
      * <p><span style="color:red">Experimental API: May not yet work perfectly!</span></p>
      *
+     * <p>This method blocks until all background JavaScript tasks have finished executing. Background
+     * JavaScript tasks are JavaScript tasks scheduled for execution via <tt>window.setTimeout</tt>,
+     * <tt>window.setInterval</tt> or asynchronous <tt>XMLHttpRequest</tt>.</p>
+     *
+     * <p>If a job is scheduled to begin executing after <tt>(now + timeoutMillis)</tt>, this method will
+     * wait for <tt>timeoutMillis</tt> milliseconds and then return a value greater than <tt>0</tt>. This
+     * method will never block longer than <tt>timeoutMillis</tt> milliseconds.</p>
+     *
+     * <p>Use this method instead of {@link #waitForBackgroundJavaScriptStartingBefore(long)} if you
+     * don't know when your background JavaScript is supposed to start executing, but you're fairly sure
+     * that you know how long it should take to finish executing.</p>
+     *
+     * @param timeoutMillis the maximum amount of time to wait (in milliseconds)
+     * @return the number of background JavaScript jobs still executing or waiting to be executed when this
+     *         method returns; will be <tt>0</tt> if there are no jobs left to execute
+     */
+    public int waitForBackgroundJavaScript(final long timeoutMillis) {
+        final Map<WebWindow, Integer> jobCounts = new HashMap<WebWindow, Integer>(windows_.size());
+        final long endTime = System.currentTimeMillis() + timeoutMillis;
+        for (Iterator<WebWindow> i = windows_.iterator(); i.hasNext();) {
+            final WebWindow window;
+            try {
+                window = i.next();
+            }
+            catch (final ConcurrentModificationException e) {
+                i = windows_.iterator();
+                continue;
+            }
+            final long newTimeout = endTime - System.currentTimeMillis();
+            final int jobCount = window.getJobManager().waitForJobs(newTimeout);
+            jobCounts.put(window, jobCount);
+        }
+        int totalJobCount = 0;
+        for (Integer jobCount : jobCounts.values()) {
+            totalJobCount += jobCount;
+        }
+        return totalJobCount;
+    }
+
+    /**
+     * <p><span style="color:red">Experimental API: May not yet work perfectly!</span></p>
+     *
      * <p>This method blocks until all background JavaScript tasks scheduled to start executing before
      * <tt>(now + delayMillis)</tt> have finished executing. Background JavaScript tasks are JavaScript
      * tasks scheduled for execution via <tt>window.setTimeout</tt>, <tt>window.setInterval</tt> or
@@ -1947,17 +1989,35 @@ public class WebClient implements Serializable {
      * <p>Note that the total time spent executing a background JavaScript task is never known ahead of
      * time, so this method makes no guarantees as to how long it will block.</p>
      *
-     * @param delayMillis the delay (in milliseconds) determining the background tasks to wait for
+     * <p>Use this method instead of {@link #waitForBackgroundJavaScript(long)} if you know roughly when
+     * your background JavaScript is supposed to start executing, but you're not necessarily sure how long
+     * it will take to execute.</p>
+     *
+     * @param delayMillis the delay which determines the background tasks to wait for (in milliseconds)
+     * @return the number of background JavaScript jobs still executing or waiting to be executed when this
+     *         method returns; will be <tt>0</tt> if there are no jobs left to execute
      */
-    public void waitForBackgroundJavaScript(final long delayMillis) {
-        jsJobsSupervisor_.waitForJobsWithinDelayToFinish(delayMillis);
+    public int waitForBackgroundJavaScriptStartingBefore(final long delayMillis) {
+        final Map<WebWindow, Integer> jobCounts = new HashMap<WebWindow, Integer>(windows_.size());
+        final long endTime = System.currentTimeMillis() + delayMillis;
+        for (Iterator<WebWindow> i = windows_.iterator(); i.hasNext();) {
+            final WebWindow window;
+            try {
+                window = i.next();
+            }
+            catch (final ConcurrentModificationException e) {
+                i = windows_.iterator();
+                continue;
+            }
+            final long newDelay = endTime - System.currentTimeMillis();
+            final int jobCount = window.getJobManager().waitForJobsStartingBefore(newDelay);
+            jobCounts.put(window, jobCount);
+        }
+        int totalJobCount = 0;
+        for (Integer jobCount : jobCounts.values()) {
+            totalJobCount += jobCount;
+        }
+        return totalJobCount;
     }
 
-    /**
-     * Gets the JavaScript supervisor for this client.
-     * @return the JavaScript supervisor for this client
-     */
-    protected JavaScriptJobsSupervisor getJavaScriptJobsSupervisor() {
-        return jsJobsSupervisor_;
-    }
 }

@@ -21,6 +21,7 @@ import java.util.ListIterator;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManagerImpl;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
@@ -60,7 +61,7 @@ public abstract class WebWindowImpl implements WebWindow {
     public WebWindowImpl(final WebClient webClient) {
         WebAssert.notNull("webClient", webClient);
         webClient_ = webClient;
-        jobManager_ = webClient_.getJavaScriptJobsSupervisor().createJobManager(this);
+        jobManager_ = new JavaScriptJobManagerImpl(this);
         performRegistration();
     }
 

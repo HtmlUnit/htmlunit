@@ -120,7 +120,7 @@ public class GWT15Test extends WebServerTestCase {
 
         final String url = "http://localhost:" + PORT + "/I18N.html?locale=fr";
         final HtmlPage page = client.getPage(url);
-        client.waitForBackgroundJavaScript(2000);
+        client.waitForBackgroundJavaScriptStartingBefore(2000);
 
         //visible space in browser is not normal space but '\u00A0' instead, as noted by the following test in browser:
         /*
@@ -303,7 +303,7 @@ public class GWT15Test extends WebServerTestCase {
         final HtmlButton button = page.getFirstByXPath("//button");
         button.click();
 
-        page.getWebClient().waitForBackgroundJavaScript(2000);
+        page.getWebClient().waitForBackgroundJavaScriptStartingBefore(2000);
 
         final HtmlSpan span =
             page.getFirstByXPath("//div[@class='JSON-JSONResponseObject']/div/div/table//td[2]/span/span");
@@ -322,7 +322,7 @@ public class GWT15Test extends WebServerTestCase {
 
         final String url = "http://localhost:" + PORT + "/DynaTable.html";
         final HtmlPage page = client.getPage(url);
-        client.waitForBackgroundJavaScript(2000);
+        client.waitForBackgroundJavaScriptStartingBefore(2000);
 
         final String[] firstRow = {"Inman Mendez",
             "Majoring in Phrenology", "Mon 9:45-10:35, Tues 2:15-3:05, Fri 8:45-9:35, Fri 9:45-10:35"};
@@ -362,7 +362,7 @@ public class GWT15Test extends WebServerTestCase {
         }
 
         final HtmlPage page = client.getPage(url);
-        client.waitForBackgroundJavaScript(2000);
+        client.waitForBackgroundJavaScriptStartingBefore(2000);
         return page;
     }
 

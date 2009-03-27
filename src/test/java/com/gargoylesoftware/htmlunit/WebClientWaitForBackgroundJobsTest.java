@@ -29,12 +29,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 
 /**
- * Tests for {@link WebClient#waitForBackgroundJavaScript(long)}.
+ * Tests for {@link WebClient#waitForBackgroundJavaScriptStartingBefore(long)} and
+ * {@link WebClient#waitForBackgroundJavaScript(long)}.
  *
  * @version $Revision$
  * @author Marc Guillemot
  */
 public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
+
     private long startTime_;
 
     private void startTimedTest() {
@@ -80,7 +82,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
         assertEquals(1, jobManager.getJobCount());
 
         startTimedTest();
-        page.getWebClient().waitForBackgroundJavaScript(7000);
+        assertEquals(1, page.getWebClient().waitForBackgroundJavaScriptStartingBefore(7000));
         assertMaxTestRunTime(100);
         assertEquals(1, jobManager.getJobCount());
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
@@ -123,7 +125,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
         assertEquals(3, jobManager.getJobCount());
 
         startTimedTest();
-        page.getWebClient().waitForBackgroundJavaScript(20000);
+        assertEquals(0, page.getWebClient().waitForBackgroundJavaScriptStartingBefore(20000));
         assertMaxTestRunTime(400);
         assertEquals(0, jobManager.getJobCount());
 
@@ -132,16 +134,12 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
     }
 
     /**
-     * When waitForJobsWithinDelayToFinish is called while a job is being executed, it has
+     * When waitForBackgroundJavaScriptStartingBefore is called while a job is being executed, it has
      * to wait for this job to finish, even if this clearXXX has been called for it.
-     * In other words this means that
-     * {@link com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobsSupervisor
-     * #waitForJobsWithinDelayToFinish(long)} can not
-     * only rely on the futures_ map as clearXxx removes entries there.
      * @throws Exception if the test fails
      */
     @Test
-    public void waitForJobsWithinDelayToFinish_calledDuringJobExecution() throws Exception {
+    public void waitCalledDuringJobExecution() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
@@ -152,7 +150,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
             + "    }\n"
             + "    function doWork() {\n"
             + "      clearTimeout(intervalId);\n"
-            + "      // waitForJobsWithinDelayToFinish should be called when JS execution is here\n"
+            + "      // waitForBackgroundJavaScriptStartingBefore should be called when JS execution is here\n"
             + "      var request = new XMLHttpRequest();\n"
             + "      request.open('GET', 'wait', false);\n"
             + "      request.send('');\n"
@@ -169,7 +167,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
             @Override
             public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
                 if (settings.getUrl().toExternalForm().endsWith("/wait")) {
-                    threadSynchronizer.waitForState("just before waitForJobsWithinDelayToFinish");
+                    threadSynchronizer.waitForState("just before waitForBackgroundJavaScriptStartingBefore");
                     threadSynchronizer.sleep(400); // main thread need to be able to process next instruction
                 }
                 return super.getResponse(settings);
@@ -190,8 +188,8 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
         assertEquals(1, jobManager.getJobCount());
 
         startTimedTest();
-        threadSynchronizer.setState("just before waitForJobsWithinDelayToFinish");
-        client.waitForBackgroundJavaScript(20000);
+        threadSynchronizer.setState("just before waitForBackgroundJavaScriptStartingBefore");
+        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(20000));
         assertMaxTestRunTime(600);
         assertEquals(0, jobManager.getJobCount());
 
@@ -200,13 +198,13 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
     }
 
     /**
-     * When waitForJobsWithinDelayToFinish is called and a new job is scheduled after the one that
+     * When waitForBackgroundJavaScriptStartingBefore is called and a new job is scheduled after the one that
      * is first found as the last one within the delay (a job starts a new one or simply a setInterval),
      * a few retries should be done to see if new jobs exists.
      * @throws Exception if the test fails
      */
     @Test
-    public void waitForJobsWithinDelayToFinish_lastJobStartsNewOne() throws Exception {
+    public void waitWhenLastJobStartsNewOne() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
@@ -234,7 +232,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
         assertEquals(1, jobManager.getJobCount());
 
         startTimedTest();
-        page.getWebClient().waitForBackgroundJavaScript(20000);
+        assertEquals(0, page.getWebClient().waitForBackgroundJavaScriptStartingBefore(20000));
         assertMaxTestRunTime(1000);
         assertEquals(0, jobManager.getJobCount());
 
@@ -243,13 +241,13 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
     }
 
     /**
-     * When waitForJobsWithinDelayToFinish is called and a new job is scheduled after the one that
+     * When waitForBackgroundJavaScriptStartingBefore is called and a new job is scheduled after the one that
      * is first found as the last one within the delay (a job starts a new one or simply a setInterval),
      * a few retries should be done to see if new jobs exists.
      * @throws Exception if the test fails
      */
     @Test
-    public void waitForJobsWithinDelayToFinish_subWindows() throws Exception {
+    public void waitWithsubWindows() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
@@ -291,7 +289,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
         assertEquals(0, jobManager.getJobCount());
 
         startTimedTest();
-        client.waitForBackgroundJavaScript(20000);
+        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(20000));
         assertMaxTestRunTime(300);
         assertEquals(0, jobManager.getJobCount());
 
@@ -300,13 +298,13 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
     }
 
     /**
-     * Test the case where a job is being executed at the time where waitForJobsWithinDelayToFinish
-     * and where this jobs schedules a new job after call to waitForJobsWithinDelayToFinish,
+     * Test the case where a job is being executed at the time where waitForBackgroundJavaScriptStartingBefore
+     * and where this jobs schedules a new job after call to waitForBackgroundJavaScriptStartingBefore,
      * .
      * @throws Exception if the test fails
      */
     @Test
-    public void newJobStartedAfterWaitForJobsWithinDelay() throws Exception {
+    public void newJobStartedAfterWait() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
@@ -322,7 +320,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
             + "      request = new XMLHttpRequest();\n"
             + "      request.open('GET', 'wait', true);\n"
             + "      request.onreadystatechange = onReadyStateChange;\n"
-            + "      // waitForJobsWithinDelayToFinish should be called when JS execution is in send()\n"
+            + "      // waitForBackgroundJavaScriptStartingBefore should be called when JS execution is in send()\n"
             + "      request.send('');\n"
             + "    }\n"
             + "    function doWork1() {\n"
@@ -339,7 +337,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
             @Override
             public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
                 if (settings.getUrl().toExternalForm().endsWith("/wait")) {
-                    threadSynchronizer.waitForState("just before waitForJobsWithinDelayToFinish");
+                    threadSynchronizer.waitForState("just before waitForBackgroundJavaScriptStartingBefore");
                     threadSynchronizer.sleep(400); // main thread need to be able to process next instruction
                 }
                 return super.getResponse(settings);
@@ -360,8 +358,8 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
         assertEquals(1, jobManager.getJobCount());
 
         startTimedTest();
-        threadSynchronizer.setState("just before waitForJobsWithinDelayToFinish");
-        client.waitForBackgroundJavaScript(20000);
+        threadSynchronizer.setState("just before waitForBackgroundJavaScriptStartingBefore");
+        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(20000));
         assertMaxTestRunTime(1000);
         assertEquals(0, jobManager.getJobCount());
 
@@ -370,7 +368,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
     }
 
     /**
-     * Tests that waitForJobsWithinDelayToFinish waits for jobs that should have been started earlier
+     * Tests that waitForBackgroundJavaScriptStartingBefore waits for jobs that should have been started earlier
      * but that are "late" due to processing of previous job.
      * This test needs to start many setTimeout to expect to reach the state, where a check for future
      * jobs occurs when one of this job is not active.
@@ -410,9 +408,8 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
         client.getPage(URL_FIRST);
 
         startTimedTest();
-        client.waitForBackgroundJavaScript(1000);
+        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
         assertMaxTestRunTime(1000);
-
         assertEquals(51, collectedAlerts.size());
     }
 }

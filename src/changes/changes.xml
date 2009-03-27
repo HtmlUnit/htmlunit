@@ -6,6 +6,11 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, MooTools support, support all HTML elements and various JavaScript properties">
+            <action type="add" dev="mguillem">
+                (EXPERIMENTAL) Add WebClient.waitForBackgroundJavaScript() and WebClient.waitForBackgroundJavaScriptStartingBefore(),
+                which allow waiting for JavaScript background jobs to finish (should be used instead of JavaScriptJobManager methods,
+                which are internal APIs).
+            </action>
             <action type="fix" dev="sdanig" issue="2706760">
                 JavaScript: window.event should be available during execution of script.onreadystatechange handler (IE only).
             </action>
@@ -97,9 +102,6 @@
             </action>
             <action type="fix" dev="mguillem">
                 JavaScript: hide standard Object and Array functions that don't exist on IE.
-            </action>
-            <action type="add" dev="mguillem">
-                (experimental) Add WebClient.waitForJobsWithinDelayToFinish allowing to wait for JavaScript background jobs to finish.
             </action>
             <action type="fix" dev="sdanig">
                 JavaScript: Expand support for document.namespaces collection.

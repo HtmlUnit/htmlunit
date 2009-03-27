@@ -35,7 +35,6 @@ public class JavaScriptJobManagerMinimalTest {
 
     private WebWindow window_;
     private Page page_;
-    private JavaScriptJobsSupervisor supervisor_;
     private JavaScriptJobManagerImpl manager_;
 
     /**
@@ -47,9 +46,7 @@ public class JavaScriptJobManagerMinimalTest {
         page_ = EasyMock.createNiceMock(Page.class);
         EasyMock.expect(window_.getEnclosedPage()).andReturn(page_).anyTimes();
         EasyMock.replay(window_, page_);
-
-        supervisor_ = new JavaScriptJobsSupervisor();
-        manager_ = new JavaScriptJobManagerImpl(supervisor_, window_);
+        manager_ = new JavaScriptJobManagerImpl(window_);
     }
 
     /**
@@ -64,7 +61,7 @@ public class JavaScriptJobManagerMinimalTest {
             }
         };
         manager_.addJob(job, page_);
-        manager_.waitForAllJobsToFinish(1000);
+        manager_.waitForJobs(1000);
         Assert.assertEquals(1, count.intValue());
     }
 
@@ -84,7 +81,7 @@ public class JavaScriptJobManagerMinimalTest {
             }
         };
         id.setValue(manager_.addJob(job, page_));
-        manager_.waitForAllJobsToFinish(1000);
+        manager_.waitForJobs(1000);
         Assert.assertEquals(5, count.intValue());
     }
 
@@ -103,7 +100,7 @@ public class JavaScriptJobManagerMinimalTest {
             }
         };
         manager_.addJob(job, page_);
-        manager_.waitForAllJobsToFinish(1000);
+        manager_.waitForJobs(1000);
         Assert.assertEquals(5, count.intValue());
     }
 
@@ -120,9 +117,31 @@ public class JavaScriptJobManagerMinimalTest {
         };
         Assert.assertEquals(0, manager_.getJobCount());
         manager_.addJob(job, page_);
-        manager_.waitForAllJobsToFinish(1000);
+        manager_.waitForJobs(1000);
         Assert.assertEquals(1, count.intValue());
         Assert.assertEquals(0, manager_.getJobCount());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void waitForJobsStartingBefore() throws Exception {
+        final JavaScriptJob job1 = new JavaScriptJob(50, null) {
+            public void run() {
+                // Empty.
+            }
+        };
+        final JavaScriptJob job2 = new JavaScriptJob(1000, null) {
+            public void run() {
+                // Empty.
+            }
+        };
+        Assert.assertEquals(0, manager_.getJobCount());
+        manager_.addJob(job1, page_);
+        manager_.addJob(job2, page_);
+        manager_.waitForJobsStartingBefore(250);
+        Assert.assertEquals(1, manager_.getJobCount());
     }
 
 }

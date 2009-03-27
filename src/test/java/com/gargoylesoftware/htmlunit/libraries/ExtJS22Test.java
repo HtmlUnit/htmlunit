@@ -189,7 +189,7 @@ public class ExtJS22Test extends WebTestCase {
     @Test
     public void grid_binding() throws Exception {
         final HtmlPage page = getPage("grid", "binding");
-        page.getWebClient().waitForBackgroundJavaScript(2000);
+        page.getWebClient().waitForBackgroundJavaScriptStartingBefore(2000);
         final HtmlElement detailPanel = page.getHtmlElementById("detailPanel");
         final HtmlDivision resultsDiv = detailPanel.getFirstByXPath("div/div");
         assertEquals("Please select a book to see additional details.", resultsDiv.asText());

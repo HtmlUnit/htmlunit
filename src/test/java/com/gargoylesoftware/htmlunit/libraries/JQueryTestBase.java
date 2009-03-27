@@ -131,7 +131,7 @@ public abstract class JQueryTestBase extends WebServerTestCase {
      */
     protected Iterator<HtmlElement> loadPage() throws Exception {
         final HtmlPage page = client_.getPage(getUrl());
-        client_.waitForBackgroundJavaScript(4 * 60 * 1000);
+        client_.waitForBackgroundJavaScriptStartingBefore(4 * 60 * 1000);
 
         // dump the result page if not OK
         if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null) {

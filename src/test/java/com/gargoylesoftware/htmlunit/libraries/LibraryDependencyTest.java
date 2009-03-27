@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests that depend on one of JavaScript libraries.
@@ -82,8 +81,8 @@ public class LibraryDependencyTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondHtml);
         webConnection.setResponse(URL_THIRD, getContent("prototype/1.6.0/dist/prototype.js"), "text/javascript");
 
-        final HtmlPage initialPage = webClient.getPage(URL_FIRST);
-        initialPage.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(10000);
+        webClient.getPage(URL_FIRST);
+        webClient.waitForBackgroundJavaScript(10000);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

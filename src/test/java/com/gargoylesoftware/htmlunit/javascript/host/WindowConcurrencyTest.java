@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.mozilla.javascript.BaseFunction;
 import org.mozilla.javascript.Context;
@@ -32,7 +31,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 
 /**
  * Tests for {@link Window} that use background jobs.
@@ -69,8 +67,7 @@ public class WindowConcurrencyTest extends WebTestCase {
 
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         final HtmlPage page = loadPage(content, collectedAlerts);
-        final JavaScriptJobManager mgr = page.getEnclosingWindow().getJobManager();
-        assertTrue("thread failed to stop in 1 second", mgr.waitForAllJobsToFinish(1000));
+        assertEquals(0, page.getWebClient().waitForBackgroundJavaScript(1000));
         assertEquals(new String[] {"Yo!"}, collectedAlerts);
     }
 
@@ -86,8 +83,7 @@ public class WindowConcurrencyTest extends WebTestCase {
 
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         final HtmlPage page = loadPage(content, collectedAlerts);
-        final JavaScriptJobManager mgr = page.getEnclosingWindow().getJobManager();
-        assertTrue("thread failed to stop in 1 second", mgr.waitForAllJobsToFinish(1000));
+        assertEquals(0, page.getWebClient().waitForBackgroundJavaScript(1000));
         assertEquals(new String[] {"Yo!"}, collectedAlerts);
     }
 
@@ -138,9 +134,7 @@ public class WindowConcurrencyTest extends WebTestCase {
 
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         final HtmlPage page = loadPage(content, collectedAlerts);
-        final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
-        jobManager.waitForAllJobsToFinish(1000);
-        assertEquals(0, jobManager.getJobCount());
+        assertEquals(0, page.getWebClient().waitForBackgroundJavaScript(1000));
         assertEquals(Collections.nCopies(3, "blah"), collectedAlerts);
     }
 
@@ -168,9 +162,7 @@ public class WindowConcurrencyTest extends WebTestCase {
         final List<String> actual = Collections.synchronizedList(new ArrayList<String>());
         startTimedTest();
         final HtmlPage page = loadPage(html, actual);
-        final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
-        jobManager.waitForAllJobsToFinish(10000);
-        assertEquals(0, jobManager.getJobCount());
+        assertEquals(0, page.getWebClient().waitForBackgroundJavaScript(10000));
         assertEquals(expected, actual);
         assertMaxTestRunTime(5000);
     }
@@ -199,10 +191,8 @@ public class WindowConcurrencyTest extends WebTestCase {
         webClient.setWebConnection(webConnection);
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
-        page.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(2000);
+        assertEquals(0, page.getWebClient().waitForBackgroundJavaScript(2000));
         assertEquals("Second", page.getTitleText());
-        Assert.assertEquals("no thread should be running",
-                0, page.getEnclosingWindow().getJobManager().getJobCount());
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
     }
 
@@ -230,7 +220,7 @@ public class WindowConcurrencyTest extends WebTestCase {
             + "</html>";
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         final HtmlPage page = loadPage(content, collectedAlerts);
-        page.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(2000);
+        page.getWebClient().waitForBackgroundJavaScript(2000);
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
     }
 
@@ -256,7 +246,7 @@ public class WindowConcurrencyTest extends WebTestCase {
         final String[] expected = {"true", "completed"};
         final List<String> actual = Collections.synchronizedList(new ArrayList<String>());
         final HtmlPage page = loadPage(html, actual);
-        page.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(5000);
+        page.getWebClient().waitForBackgroundJavaScript(5000);
         assertEquals(expected, actual);
     }
 
@@ -283,8 +273,7 @@ public class WindowConcurrencyTest extends WebTestCase {
 
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         final HtmlPage page = loadPage(content, collectedAlerts);
-        assertTrue("threads did not stop in time", page.getEnclosingWindow()
-                .getJobManager().waitForAllJobsToFinish((max + 1) * 1000));
+        assertEquals(0, page.getWebClient().waitForBackgroundJavaScript((max + 1) * 1000));
         assertEquals(Collections.nCopies(max, "ping"), collectedAlerts);
     }
 
@@ -344,7 +333,7 @@ public class WindowConcurrencyTest extends WebTestCase {
         final Window window = (Window) page.getEnclosingWindow().getScriptObject();
         ScriptableObject.putProperty(window, "mySpecialFunction", mySpecialFunction);
         page.<HtmlElement>getHtmlElementById("clickMe").click();
-        page.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(5000);
+        page.getWebClient().waitForBackgroundJavaScript(5000);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -375,7 +364,7 @@ public class WindowConcurrencyTest extends WebTestCase {
 
         final HtmlPage page = client.getPage(URL_FIRST);
         client.closeAllWindows();
-        page.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(5000);
+        page.getWebClient().waitForBackgroundJavaScript(5000);
         assertEquals(0, collectedAlerts.size());
     }
 
@@ -409,8 +398,8 @@ public class WindowConcurrencyTest extends WebTestCase {
         final HtmlPage page1 = client.getPage(URL_FIRST);
         final HtmlPage page2 = client.getPage(URL_SECOND);
 
-        page1.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(5000);
-        page2.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(5000);
+        page1.getWebClient().waitForBackgroundJavaScript(5000);
+        page2.getWebClient().waitForBackgroundJavaScript(5000);
 
         assertEquals(0, collectedAlerts.size());
     }
@@ -445,7 +434,7 @@ public class WindowConcurrencyTest extends WebTestCase {
         client.setWebConnection(conn);
 
         client.getPage(URL_FIRST);
-        client.waitForBackgroundJavaScript(1000);
+        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
 
         final String[] expectedAlerts = {"in f"};
         assertEquals(expectedAlerts, collectedAlerts);

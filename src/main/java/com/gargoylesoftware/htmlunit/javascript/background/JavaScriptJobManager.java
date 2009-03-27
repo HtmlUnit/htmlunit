@@ -62,10 +62,24 @@ public interface JavaScriptJobManager {
      * Blocks until all active jobs have finished executing. If a job is scheduled to begin executing after
      * <tt>(now + timeoutMillis)</tt>, this method will wait for <tt>timeoutMillis</tt> milliseconds and then
      * return <tt>false</tt>.
-     * @param timeoutMillis the maximum amount of time to wait (in milliseconds)
-     * @return <tt>true</tt> if all threads expired within the specified amount of time
+     * @param timeoutMillis the maximum amount of time to wait (in milliseconds); may be negative, in which
+     *        case this method returns immediately
+     * @return the number of background JavaScript jobs still executing or waiting to be executed when this
+     *         method returns; will be <tt>0</tt> if there are no jobs left to execute
      */
-    boolean waitForAllJobsToFinish(final long timeoutMillis);
+    int waitForJobs(final long timeoutMillis);
+
+    /**
+     * Blocks until all jobs scheduled to start executing before <tt>(now + delayMillis)</tt> have finished executing.
+     * If there is no background JavaScript task currently executing, and there is no background JavaScript task
+     * scheduled to start executing within the specified time, this method returns immediately -- even if there are
+     * tasks scheduled to be executed after <tt>(now + delayMillis)</tt>.
+     * @param delayMillis the delay which determines the background tasks to wait for (in milliseconds);
+     *        may be negative, as it is relative to the current time
+     * @return the number of background JavaScript jobs still executing or waiting to be executed when this
+     *         method returns; will be <tt>0</tt> if there are no jobs left to execute
+     */
+    int waitForJobsStartingBefore(final long delayMillis);
 
     /**
      * Shuts down this job manager and stops all of its jobs.

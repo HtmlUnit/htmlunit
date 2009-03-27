@@ -249,7 +249,7 @@ public class YuiTest extends WebTestCase {
             button.click();
         }
 
-        page.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(timeToWait);
+        client_.waitForBackgroundJavaScript(timeToWait);
 
         final List< ? > tests = doc.getByXPath("//span[@class='pass' or @class='fail']");
         if (tests.size() == 0) {

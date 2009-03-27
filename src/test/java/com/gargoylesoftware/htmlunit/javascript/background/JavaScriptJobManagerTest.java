@@ -88,7 +88,7 @@ public class JavaScriptJobManagerTest extends WebTestCase {
         assertEquals(1, jobManager.getJobCount());
         final HtmlAnchor a = page.getHtmlElementById("clickme");
         a.click();
-        jobManager.waitForAllJobsToFinish(7000);
+        jobManager.waitForJobs(7000);
         assertEquals(0, jobManager.getJobCount());
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
         assertMaxTestRunTime(10000);
@@ -126,7 +126,7 @@ public class JavaScriptJobManagerTest extends WebTestCase {
         final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
         assertNotNull(jobManager);
         assertEquals(1, jobManager.getJobCount());
-        jobManager.waitForAllJobsToFinish(1000);
+        jobManager.waitForJobs(1000);
         assertEquals(0, jobManager.getJobCount());
         assertEquals(Collections.nCopies(3, "blah"), collectedAlerts);
         assertMaxTestRunTime(1000);
@@ -171,7 +171,7 @@ public class JavaScriptJobManagerTest extends WebTestCase {
         Assert.assertEquals("new page should load", "Third", newPage.getTitleText());
         Assert.assertEquals("frame should be gone", 0, newPage.getFrames().size());
 
-        mgr.waitForAllJobsToFinish(1000);
+        mgr.waitForJobs(1000);
         Assert.assertEquals("thread should stop", 0, mgr.getJobCount());
     }
 
@@ -210,12 +210,12 @@ public class JavaScriptJobManagerTest extends WebTestCase {
         ((TopLevelWindow) page.getEnclosingWindow()).close();
 
         // 100 chances to stop
-        jobManager.waitForAllJobsToFinish(500);
+        jobManager.waitForJobs(500);
 
         final int finalValue = collectedAlerts.size();
 
         // 100 chances to fail
-        jobManager.waitForAllJobsToFinish(500);
+        jobManager.waitForJobs(500);
 
         Assert.assertEquals("No new alerts should have happened", finalValue, collectedAlerts.size());
     }

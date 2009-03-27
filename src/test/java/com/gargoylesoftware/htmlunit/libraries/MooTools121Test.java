@@ -58,7 +58,7 @@ public class MooTools121Test extends WebTestCase {
         final HtmlPage page = client_.getPage(url);
 
         final HtmlElement progress = page.getElementById("progress");
-        client_.waitForBackgroundJavaScript(2000);
+        client_.waitForBackgroundJavaScriptStartingBefore(2000);
 
         final String prevProgress = progress.asText();
 
