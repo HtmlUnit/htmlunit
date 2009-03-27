@@ -25,6 +25,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 
@@ -411,6 +412,47 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
         assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
         assertMaxTestRunTime(1000);
         assertEquals(51, collectedAlerts.size());
+    }
+
+    /**
+     * {@link WebClient#waitForBackgroundJavaScriptStartingBefore(long)} should have the overview
+     * on all windows. Following test is failing with rev. 4346 due to the way it iterates over windows
+     * but is working with rev. 4345.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    public void jobSchedulesJobInOtherWindow() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    var counter = 0;\n"
+            + "    function test() {\n"
+            + "      var w = window.open('about:blank');\n"
+            + "      w.setTimeout(doWork1, 200);\n"
+            + "    }\n"
+            + "    function doWork1() {\n"
+            + "      alert('work1');\n"
+            + "      setTimeout(doWork2, 400);\n"
+            + "    }\n"
+            + "    function doWork2() {\n"
+            + "      alert('work2');\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        final HtmlPage page = loadPage(html, collectedAlerts);
+
+        startTimedTest();
+        assertEquals(0, page.getWebClient().waitForBackgroundJavaScriptStartingBefore(1000));
+        assertMaxTestRunTime(1000);
+
+        final String[] expectedAlerts = {"work1", "work2"};
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }
 
