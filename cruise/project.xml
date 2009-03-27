@@ -67,7 +67,8 @@ mvn2home
     </publishers>
 </project>
 
-<project name="htmlunit-with-libraries" buildafterfailed="false" requireModification="false">
+<project name="htmlunit-with-libraries" buildafterfailed="false">
+<!--   requireModification="false" is not supported by this old version of CruiseControl! -->
     <schedule>
         <maven2 mvnhome="&mvn2home;" pomfile="&basedir;/htmlunit/cruisecontrol/checkout/pom.xml"
             goal="-DwithLibs test"/>
