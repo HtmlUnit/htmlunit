@@ -25,7 +25,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 
@@ -421,8 +420,10 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void jobSchedulesJobInOtherWindow() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
