@@ -39,15 +39,16 @@
 
 		<faq id="AJAXDoesNotWork">
 			<question>
-				Nothing happens when using HtmlUnit with AJAX, although page works correctly in browsers. 
+				Nothing happens when using HtmlUnit with AJAX, although page works correctly in browsers. What's wrong?
 			</question>
 			<answer>
 				<p>
-					Mostly, because the main thread in HtmlUnit finishes execution before allowing background threads to run.
-					You can do one of:
+					The main thread using HtmlUnit may be finishing execution before allowing background threads to run.
+					You have a couple of options:
 					<ol>
-					  <li><code>page.getEnclosingWindow().getJobManager().waitForAllJobsToFinish(10000);</code> just after getting the page and before manipulating it</li>
-					  <li>Explicitly wait for a condition that is expected be fulfilled when JavaScript runs, e.g.
+						<li><code>webClient.setAjaxController(new NicelyResynchronizingAjaxController());</code> will tell your WebClient instance to re-synchronize asynchronous XHR.</li>
+						<li><code>webClient.waitForBackgroundJavaScript(10000);</code> or <code>webClient.waitForBackgroundJavaScriptStartingBefore(10000);</code> just after getting the page and before manipulating it.</li>
+						<li>Explicitly wait for a condition that is expected be fulfilled when your JavaScript runs, e.g.
             <source><![CDATA[
 
         //try 20 times to wait .5 second each for filling the page.
@@ -60,7 +61,7 @@
             }
         }
             ]]></source>
-					  </li>
+						</li>
 					</ol>
 				</p>
 			</answer>
