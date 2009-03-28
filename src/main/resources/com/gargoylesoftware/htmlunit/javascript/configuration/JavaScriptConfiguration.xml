@@ -1652,7 +1652,7 @@
 
     <class name="HTMLImageElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLImageElement"
         jsConstructor="jsConstructor" JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlImage">
-        <property name="align" notImplemented="true" readable="true" writable="true"/>
+        <property name="align" readable="true" writable="true"/>
         <property name="alt" readable="true" writable="true"/>
         <property name="border" readable="true" writable="true"/>
         <property name="dataFld" notImplemented="true" readable="true" writable="true">

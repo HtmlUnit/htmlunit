@@ -261,4 +261,41 @@ public class HTMLImageElementTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = {"", "hello", "left", "hi", "right" },
+            IE = {"", "error", "", "left", "error", "left", "right" })
+    public void align() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var img = document.getElementById('i');\n"
+            + "        alert(img.align);\n"
+            + "        set(img, 'hello');\n"
+            + "        alert(img.align);\n"
+            + "        set(img, 'left');\n"
+            + "        alert(img.align);\n"
+            + "        set(img, 'hi');\n"
+            + "        alert(img.align);\n"
+            + "        set(img, 'right');\n"
+            + "        alert(img.align);\n"
+            + "      }\n"
+            + "      function set(e, value) {\n"
+            + "        try {\n"
+            + "          e.align = value;\n"
+            + "        } catch (e) {\n"
+            + "          alert('error');\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'><img id='i' /></body>\n"
+            + "</html>";
+        loadPageWithAlerts(html);
+    }
+
 }
