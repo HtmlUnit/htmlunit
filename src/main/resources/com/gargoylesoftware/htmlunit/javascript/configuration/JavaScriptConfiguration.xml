@@ -1076,7 +1076,7 @@
 
     <class name="HTMLAppletElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLAppletElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlApplet">
-        <property name="align" notImplemented="true" readable="true" writable="true"/>
+        <property name="align" readable="true" writable="true"/>
         <property name="alt" readable="true" writable="true"/>
         <property name="border" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
