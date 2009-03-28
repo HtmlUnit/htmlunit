@@ -2105,4 +2105,32 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         getDomNodeOrDie().setAttribute("accesskey", accessKey);
     }
 
+    /**
+     * Returns the value of the "align" property.
+     * @return the value of the "align" property
+     */
+    protected String getAlign() {
+        String align = getDomNodeOrDie().getAttribute("align");
+        if (align == NOT_FOUND) {
+            align = "";
+        }
+        return align;
+    }
+
+    /**
+     * Returns the value of the "align" property.
+     * @param align the value of the "align" property
+     */
+    protected void setAlign(String align) {
+        align = align.toLowerCase();
+        if (getBrowserVersion().isFirefox()
+                || align.equals("center") || align.equals("justify")
+                || align.equals("left") || align.equals("right")) {
+            getDomNodeOrDie().setAttribute("align", align);
+        }
+        else {
+            Context.throwAsScriptRuntimeEx(new Exception("Cannot set the align property to invalid value: " + align));
+        }
+    }
+
 }

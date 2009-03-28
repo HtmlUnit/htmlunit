@@ -19,12 +19,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -37,34 +41,32 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
+@RunWith(BrowserRunner.class)
 public class HTMLIFrameElementTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testStyle() throws Exception {
-        final String content
+    @Alerts("false")
+    public void style() throws Exception {
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.getElementById('myIFrame').style == undefined);\n"
             + "}\n</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<iframe id='myIFrame' src='about:blank'></iframe></body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        final String[] expectedAlerts = {"false"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testReferenceFromJavaScript() throws Exception {
-        final String content
+    @Alerts({ "1", "myIFrame" })
+    public void referenceFromJavaScript() throws Exception {
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    alert(window.frames.length);\n"
@@ -72,12 +74,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
             + "}\n</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<iframe name='myIFrame' src='about:blank'></iframe></body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        final String[] expectedAlerts = {"1", "myIFrame"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -85,8 +82,9 @@ public class HTMLIFrameElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testDirectAccessPerName() throws Exception {
-        final String content
+    @Alerts({ "about:blank", "about:blank" })
+    public void directAccessPerName() throws Exception {
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    alert(myIFrame.location);\n"
@@ -96,12 +94,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
             + "<iframe name='myIFrame' src='about:blank'></iframe>\n"
             + "<iframe name='Frame' src='about:blank'></iframe>\n"
             + "</body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final String[] expectedAlerts = {"about:blank", "about:blank"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -109,7 +102,8 @@ public class HTMLIFrameElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testOnLoadGetsIFrameElementByIdInParent() throws Exception {
+    @Alerts("IFRAME")
+    public void onLoadGetsIFrameElementByIdInParent() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head>\n"
             + "<body>\n"
@@ -123,7 +117,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
         webConnection.setDefaultResponse(frameContent);
@@ -133,16 +127,16 @@ public class HTMLIFrameElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final String[] expectedAlerts = {"IFRAME"};
         webClient.getPage(URL_FIRST);
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    public void testOnLoadCalledEachTimeFrameContentChanges() throws Exception {
+    @Alerts({ "loaded", "loaded", "loaded" })
+    public void onLoadCalledEachTimeFrameContentChanges() throws Exception {
         final String html =
               "<html>\n"
             + "  <body>\n"
@@ -155,7 +149,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
 
         final String frameHtml = "<html><body>foo</body></html>";
 
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
         webConnection.setDefaultResponse(frameHtml);
@@ -169,16 +163,17 @@ public class HTMLIFrameElementTest extends WebTestCase {
         page.<HtmlDivision>getHtmlElementById("d1").click();
         page.<HtmlDivision>getHtmlElementById("d2").click();
 
-        final String[] expectedAlerts = {"loaded", "loaded", "loaded"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testContentDocument() throws Exception {
-        final String content
+    @Browsers(Browser.FF)
+    @Alerts(FF = "true")
+    public void contentDocument() throws Exception {
+        final String html
             = "<html><head><title>first</title>\n"
                 + "<script>\n"
                 + "function test()\n"
@@ -189,21 +184,16 @@ public class HTMLIFrameElementTest extends WebTestCase {
                 + "<body onload='test()'>\n"
                 + "<iframe name='foo' id='myFrame' src='about:blank'></iframe>\n"
                 + "</body></html>";
-        final String[] expectedAlerts = {"true"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testFrameElement() throws Exception {
-        final String content
+    @Alerts("true")
+    public void frameElement() throws Exception {
+        final String html
             = "<html><head><title>first</title>\n"
                 + "<script>\n"
                 + "function test()\n"
@@ -214,13 +204,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
                 + "<body onload='test()'>\n"
                 + "<iframe name='foo' id='myFrame' src='about:blank'></iframe>\n"
                 + "</body></html>";
-        final String[] expectedAlerts = {"true"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -230,7 +214,8 @@ public class HTMLIFrameElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testWriteToIFrame() throws Exception {
+    @Alerts({ "false", "false", "true", "true", "true", "object", "object" })
+    public void writeToIFrame() throws Exception {
         final String html =
               "<html><body onload='test()'><script>\n"
             + "    function test() {\n"
@@ -257,11 +242,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
             + "        alert(typeof input2);\n"
             + "    }\n"
             + "</script></body></html>";
-        final String[] expected = {"false", "false", "true", "true", "true", "object", "object"};
-        createTestPageForRealBrowserIfNeeded(html, expected);
-        final List<String> actual = new ArrayList<String>();
-        loadPage(html, actual);
-        assertEquals(expected, actual);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -271,7 +252,8 @@ public class HTMLIFrameElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testIFrameReinitialized() throws Exception {
+    @Alerts({ "123", "undefined" })
+    public void iFrameReinitialized() throws Exception {
         final String html =
               "<html><body><a href='2.html' target='theFrame'>page 2 in frame</a>\n"
             + "<iframe name='theFrame' src='1.html'></iframe>\n"
@@ -279,9 +261,8 @@ public class HTMLIFrameElementTest extends WebTestCase {
 
         final String frame1 = "<html><head><script>window.foo = 123; alert(window.foo);</script></head></html>";
         final String frame2 = "<html><head><script>alert(window.foo);</script></head></html>";
-        final String[] expected = {"123", "undefined"};
 
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
         webConnection.setResponse(URL_FIRST, html);
@@ -294,14 +275,14 @@ public class HTMLIFrameElementTest extends WebTestCase {
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
         page.getAnchors().get(0).click();
-        assertEquals(expected, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetSrcAttribute() throws Exception {
+    public void setSrcAttribute() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><script>\n"
             + "  function test() {\n"
@@ -314,7 +295,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
 
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -339,8 +320,9 @@ public class HTMLIFrameElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetSrc_JavascriptUrl() throws Exception {
-        final String content
+    @Alerts("about:blank")
+    public void setSrc_JavascriptUrl() throws Exception {
+        final String html
             = "<html><head><title>First</title></head><script>\n"
             + "  function test() {\n"
             + "   document.getElementById('iframe1').src = 'javascript:void(0)';\n"
@@ -350,13 +332,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
             + "<body onload='test()'>\n"
             + "<iframe id='iframe1'></iframe>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"about:blank"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -365,12 +341,10 @@ public class HTMLIFrameElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testSrcJavaScriptUrl_JavaScriptDisabled()
-        throws Exception {
-
+    public void srcJavaScriptUrl_JavaScriptDisabled() throws Exception {
         final String html = "<html><body><iframe src='javascript:false;'></iframe></body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         client.setJavaScriptEnabled(false);
 
         final MockWebConnection conn = new MockWebConnection();
@@ -378,6 +352,43 @@ public class HTMLIFrameElementTest extends WebTestCase {
         client.setWebConnection(conn);
 
         client.getPage(URL_FIRST);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = {"", "hello", "left", "hi", "right" },
+            IE = {"", "error", "", "left", "error", "left", "right" })
+    public void align() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var iframe = document.getElementById('f');\n"
+            + "        alert(iframe.align);\n"
+            + "        set(iframe, 'hello');\n"
+            + "        alert(iframe.align);\n"
+            + "        set(iframe, 'left');\n"
+            + "        alert(iframe.align);\n"
+            + "        set(iframe, 'hi');\n"
+            + "        alert(iframe.align);\n"
+            + "        set(iframe, 'right');\n"
+            + "        alert(iframe.align);\n"
+            + "      }\n"
+            + "      function set(e, value) {\n"
+            + "        try {\n"
+            + "          e.align = value;\n"
+            + "        } catch (e) {\n"
+            + "          alert('error');\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'><iframe id='f'></iframe></body>\n"
+            + "</html>";
+        loadPageWithAlerts(html);
     }
 
 }

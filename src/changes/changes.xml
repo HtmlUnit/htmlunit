@@ -11,6 +11,9 @@
                 which allow waiting for JavaScript background jobs to finish (should be used instead of JavaScriptJobManager methods,
                 which are internal APIs).
             </action>
+            <action type="add" dev="sdanig">
+                JavaScript: add support for reading and writing iframe.align property.
+            </action>
             <action type="fix" dev="sdanig" issue="2706760">
                 JavaScript: window.event should be available during execution of script.onreadystatechange handler (IE only).
             </action>

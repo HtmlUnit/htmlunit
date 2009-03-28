@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import org.mozilla.javascript.Context;
-
 /**
  * The JavaScript object "HTMLDivElement".
  *
@@ -39,26 +37,15 @@ public class HTMLDivElement extends HTMLElement {
      * @return the value of the "align" property
      */
     public String jsxGet_align() {
-        String align = getDomNodeOrDie().getAttribute("align");
-        if (align == NOT_FOUND) {
-            align = "";
-        }
-        return align;
+        return getAlign();
     }
 
     /**
      * Returns the value of the "align" property.
-     * @param align the value
+     * @param align the value of the "align" property
      */
     public void jsxSet_align(String align) {
-        align = align.toLowerCase();
-        if (getBrowserVersion().isFirefox()
-                || align.equals("center") || align.equals("justify")
-                || align.equals("left") || align.equals("right")) {
-            getDomNodeOrDie().setAttribute("align", align);
-        }
-        else {
-            Context.throwAsScriptRuntimeEx(new Exception("Could not get the align property. Invalid argument."));
-        }
+        setAlign(align);
     }
+
 }

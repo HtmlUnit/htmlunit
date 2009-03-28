@@ -124,4 +124,21 @@ public class HTMLIFrameElement extends HTMLElement {
     public void jsxSet_border(final String border) {
         getDomNodeOrDie().setAttribute("border", border);
     }
+
+    /**
+     * Returns the value of the "align" property.
+     * @return the value of the "align" property
+     */
+    public String jsxGet_align() {
+        return getAlign();
+    }
+
+    /**
+     * Returns the value of the "align" property.
+     * @param align the value of the "align" property
+     */
+    public void jsxSet_align(String align) {
+        setAlign(align);
+    }
+
 }

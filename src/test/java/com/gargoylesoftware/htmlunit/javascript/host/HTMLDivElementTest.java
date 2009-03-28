@@ -64,8 +64,7 @@ public class HTMLDivElementTest extends WebTestCase {
      */
     @Test
     @Alerts(FF = {"", "hello", "left", "hi", "right" },
-            IE = {"", "error", "",
-            "left", "error", "left", "right" })
+            IE = {"", "error", "", "left", "error", "left", "right" })
     public void align() throws Exception {
         final String html =
             "<html>\n"
