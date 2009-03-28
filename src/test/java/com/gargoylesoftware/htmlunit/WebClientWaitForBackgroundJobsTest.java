@@ -414,16 +414,49 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
     }
 
     /**
-     * {@link WebClient#waitForBackgroundJavaScriptStartingBefore(long)} should have the overview
-     * on all windows. Following test is failing with rev. 4346 due to the way it iterates over windows
-     * but is working with rev. 4345.
+     * {@link WebClient#waitForBackgroundJavaScript(long)} should have an overview of all windows.
      * @throws Exception if the test fails
      */
     @Test
-    public void jobSchedulesJobInOtherWindow() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
+    public void jobSchedulesJobInOtherWindow1() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    var counter = 0;\n"
+            + "    function test() {\n"
+            + "      var w = window.open('about:blank');\n"
+            + "      w.setTimeout(doWork1, 200);\n"
+            + "    }\n"
+            + "    function doWork1() {\n"
+            + "      alert('work1');\n"
+            + "      setTimeout(doWork2, 400);\n"
+            + "    }\n"
+            + "    function doWork2() {\n"
+            + "      alert('work2');\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        final HtmlPage page = loadPage(html, collectedAlerts);
+
+        startTimedTest();
+        assertEquals(0, page.getWebClient().waitForBackgroundJavaScript(1000));
+        assertMaxTestRunTime(1000);
+
+        final String[] expectedAlerts = {"work1", "work2"};
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * {@link WebClient#waitForBackgroundJavaScriptStartingBefore(long)} should have an overview of all windows.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void jobSchedulesJobInOtherWindow2() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
@@ -455,6 +488,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
         final String[] expectedAlerts = {"work1", "work2"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
 }
 
 /**

@@ -1952,7 +1952,7 @@ public class WebClient implements Serializable {
      *         method returns; will be <tt>0</tt> if there are no jobs left to execute
      */
     public int waitForBackgroundJavaScript(final long timeoutMillis) {
-        final Map<WebWindow, Integer> jobCounts = new HashMap<WebWindow, Integer>(windows_.size());
+        int count = 0;
         final long endTime = System.currentTimeMillis() + timeoutMillis;
         for (Iterator<WebWindow> i = windows_.iterator(); i.hasNext();) {
             final WebWindow window;
@@ -1961,17 +1961,17 @@ public class WebClient implements Serializable {
             }
             catch (final ConcurrentModificationException e) {
                 i = windows_.iterator();
+                count = 0;
                 continue;
             }
             final long newTimeout = endTime - System.currentTimeMillis();
-            final int jobCount = window.getJobManager().waitForJobs(newTimeout);
-            jobCounts.put(window, jobCount);
+            count += window.getJobManager().waitForJobs(newTimeout);
         }
-        int totalJobCount = 0;
-        for (Integer jobCount : jobCounts.values()) {
-            totalJobCount += jobCount;
+        if (count != getAggregateJobCount()) {
+            final long newTimeout = endTime - System.currentTimeMillis();
+            return waitForBackgroundJavaScript(newTimeout);
         }
-        return totalJobCount;
+        return count;
     }
 
     /**
@@ -1998,7 +1998,7 @@ public class WebClient implements Serializable {
      *         method returns; will be <tt>0</tt> if there are no jobs left to execute
      */
     public int waitForBackgroundJavaScriptStartingBefore(final long delayMillis) {
-        final Map<WebWindow, Integer> jobCounts = new HashMap<WebWindow, Integer>(windows_.size());
+        int count = 0;
         final long endTime = System.currentTimeMillis() + delayMillis;
         for (Iterator<WebWindow> i = windows_.iterator(); i.hasNext();) {
             final WebWindow window;
@@ -2007,17 +2007,38 @@ public class WebClient implements Serializable {
             }
             catch (final ConcurrentModificationException e) {
                 i = windows_.iterator();
+                count = 0;
                 continue;
             }
             final long newDelay = endTime - System.currentTimeMillis();
-            final int jobCount = window.getJobManager().waitForJobsStartingBefore(newDelay);
-            jobCounts.put(window, jobCount);
+            count += window.getJobManager().waitForJobsStartingBefore(newDelay);
         }
-        int totalJobCount = 0;
-        for (Integer jobCount : jobCounts.values()) {
-            totalJobCount += jobCount;
+        if (count != getAggregateJobCount()) {
+            final long newDelay = endTime - System.currentTimeMillis();
+            return waitForBackgroundJavaScriptStartingBefore(newDelay);
         }
-        return totalJobCount;
+        return count;
+    }
+
+    /**
+     * Returns the aggregate background JavaScript job count across all windows.
+     * @return the aggregate background JavaScript job count across all windows
+     */
+    private int getAggregateJobCount() {
+        int count = 0;
+        for (Iterator<WebWindow> i = windows_.iterator(); i.hasNext();) {
+            final WebWindow window;
+            try {
+                window = i.next();
+            }
+            catch (final ConcurrentModificationException e) {
+                i = windows_.iterator();
+                count = 0;
+                continue;
+            }
+            count += window.getJobManager().getJobCount();
+        }
+        return count;
     }
 
 }

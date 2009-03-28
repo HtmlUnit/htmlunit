@@ -128,7 +128,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         int count2 = Integer.MAX_VALUE;
         while (count1 != count2) {
             count1 = getJobCountInner();
-            sleep(50);
+            sleep(10);
             count2 = getJobCountInner();
         }
         return count1;
