@@ -12,7 +12,7 @@
                 which are internal APIs).
             </action>
             <action type="add" dev="sdanig">
-                JavaScript: add support for reading and writing img.align, iframe.align and applet.align properties.
+                JavaScript: add support for reading and writing img.align, p.align, iframe.align and applet.align properties.
             </action>
             <action type="fix" dev="sdanig" issue="2706760">
                 JavaScript: window.event should be available during execution of script.onreadystatechange handler (IE only).

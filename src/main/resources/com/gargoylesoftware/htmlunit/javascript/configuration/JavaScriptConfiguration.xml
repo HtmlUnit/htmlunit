@@ -1822,7 +1822,7 @@
 
     <class name="HTMLParagraphElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLParagraphElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlParagraph">
-        <property name="align" notImplemented="true" readable="true" writable="true"/>
+        <property name="align" readable="true" writable="true"/>
     </class>
 
     <class name="HTMLParamElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLParamElement"

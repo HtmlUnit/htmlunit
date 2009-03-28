@@ -19,6 +19,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Daniel Gredler
  */
 public class HTMLParagraphElement extends HTMLElement {
 
@@ -29,6 +30,22 @@ public class HTMLParagraphElement extends HTMLElement {
      */
     public HTMLParagraphElement() {
         // Empty.
+    }
+
+    /**
+     * Returns the value of the "align" property.
+     * @return the value of the "align" property
+     */
+    public String jsxGet_align() {
+        return getAlign();
+    }
+
+    /**
+     * Returns the value of the "align" property.
+     * @param align the value of the "align" property
+     */
+    public void jsxSet_align(final String align) {
+        setAlign(align);
     }
 
 }
