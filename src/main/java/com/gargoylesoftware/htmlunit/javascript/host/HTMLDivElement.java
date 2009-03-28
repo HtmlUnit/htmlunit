@@ -44,7 +44,7 @@ public class HTMLDivElement extends HTMLElement {
      * Returns the value of the "align" property.
      * @param align the value of the "align" property
      */
-    public void jsxSet_align(String align) {
+    public void jsxSet_align(final String align) {
         setAlign(align);
     }
 
