@@ -32,6 +32,7 @@ public class HTMLTableSectionElement extends RowContainer {
      * Creates an instance.
      */
     public HTMLTableSectionElement() {
+        // Empty.
     }
 
 }

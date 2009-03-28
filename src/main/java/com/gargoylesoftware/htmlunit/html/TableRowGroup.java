@@ -21,13 +21,14 @@ import java.util.Map;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
- * Wrapper for the HTML element "tfoot".
+ * Superclass for the wrappers for the HTML elements "thead", "tbody" and "tfoot".
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
+ * @author Daniel Gredler
  */
 public abstract class TableRowGroup extends ClickableElement {
 
@@ -44,6 +45,10 @@ public abstract class TableRowGroup extends ClickableElement {
     protected TableRowGroup(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
+        final boolean ff = getPage().getWebClient().getBrowserVersion().isFirefox();
+        if (ff && !hasAttribute("align")) {
+            setAttribute("align", "left");
+        }
     }
 
     /**

@@ -1947,7 +1947,6 @@
 
     <class name="HTMLTableElement" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTable">
-        <property name="align" notImplemented="true" readable="true" writable="true"/>
         <property name="border" readable="true" writable="true"/>
         <property name="caption" readable="true" writable="false"/>
         <property name="cellPadding" readable="true" writable="true"/>
@@ -2037,7 +2036,6 @@
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class name="HTMLTableSectionElement" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableSectionElement"
         JSObject="true">
-        <property name="align" notImplemented="true" readable="true" writable="true"/>
         <property name="vAlign" notImplemented="true" readable="true" writable="true"/>
     </class>
 
@@ -2378,8 +2376,8 @@
 
     <class name="RowContainer" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.RowContainer"
         JSObject="true">
+        <property name="align" readable="true" writable="true"/>
         <property name="rows" readable="true" writable="false"/>
-
         <function name="deleteRow">
             <doclink
                 url="http://msdn.microsoft.com/en-us/library/ms536408.aspx"

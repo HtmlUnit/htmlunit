@@ -40,7 +40,7 @@ public class HTMLTableElementTest extends WebTestCase {
      */
     @Test
     @Alerts({ "caption1", "caption2", "null", "caption3" })
-    public void testTableCaptions() throws Exception {
+    public void tableCaptions() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "  <table id='table_1'><caption>caption1</caption><caption>caption2</caption>\n"
@@ -70,7 +70,7 @@ public class HTMLTableElementTest extends WebTestCase {
      */
     @Test
     @Alerts({ "thead1", "thead2", "null", "thead3" })
-    public void testTableHeaders() throws Exception {
+    public void tableHeaders() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "  <table id='table_1'>\n"
@@ -102,7 +102,7 @@ public class HTMLTableElementTest extends WebTestCase {
      */
     @Test
     @Alerts({ "2", "true", "4 2 2", "6 3 3" })
-    public void testTableBodies() throws Exception {
+    public void tableBodies() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "  <table id='table_1'>\n"
@@ -137,7 +137,7 @@ public class HTMLTableElementTest extends WebTestCase {
      */
     @Test
     @Alerts({ "2", "true", "3", "2", "3", "2" })
-    public void testTableRows() throws Exception {
+    public void tableRows() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "  <table id='table_1'>\n"
@@ -170,7 +170,7 @@ public class HTMLTableElementTest extends WebTestCase {
      */
     @Test
     @Alerts({ "1", "1" })
-    public void testTableHeadRows() throws Exception {
+    public void tableHeadRows() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test()\n"
@@ -198,7 +198,7 @@ public class HTMLTableElementTest extends WebTestCase {
     @Test
     @Alerts({ "2", "true", "8 2 2 2 2",
         "9 2 2 2 3", "8 2 2 1 3", "9 2 3 1 3", "8 1 3 1 3" })
-    public void testTableRowsWithManySections() throws Exception {
+    public void tableRowsWithManySections() throws Exception {
         final String html = "<html><head><title>foo</title></head><body>\n"
             + "  <table id='table_1'>\n"
             + "    <thead>\n"
@@ -254,7 +254,7 @@ public class HTMLTableElementTest extends WebTestCase {
      */
     @Test
     @Alerts({ "tfoot1", "tfoot2", "null", "tfoot3" })
-    public void testTableFooters() throws Exception {
+    public void tableFooters() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "  <table id='table_1'>\n"
@@ -286,7 +286,7 @@ public class HTMLTableElementTest extends WebTestCase {
      */
     @Test
     @Alerts({ "0", "1", "0", "1" })
-    public void testCellIndex() throws Exception {
+    public void cellIndex() throws Exception {
         final String html
             = "<html><head><title>Test</title>\n"
             + "<script>\n"
@@ -310,7 +310,7 @@ public class HTMLTableElementTest extends WebTestCase {
      */
     @Test
     @Alerts({ "1", "2", "1", "0", "TD", "1", "2" })
-    public void testInsertRow() throws Exception {
+    public void insertRow() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "  <table id='table_1'>\n"
@@ -340,7 +340,7 @@ public class HTMLTableElementTest extends WebTestCase {
      */
     @Test
     @Alerts({ "mytable", "mytable" })
-    public void testInsertRowNested() throws Exception {
+    public void insertRowNested() throws Exception {
         final String html =
             "<html><head>\n"
             + "<script>\n"
@@ -372,7 +372,7 @@ public class HTMLTableElementTest extends WebTestCase {
      */
     @Test
     @Alerts({ "TBODY", "TABLE" })
-    public void testInsertRowInEmptyTable() throws Exception {
+    public void insertRowInEmptyTable() throws Exception {
         final String html =
             "<html><head>\n"
             + "<script>\n"
@@ -400,7 +400,7 @@ public class HTMLTableElementTest extends WebTestCase {
      */
     @Test
     @Alerts({ "TBODY", "TBODY", "TBODY" })
-    public void testInsertRowInTableWithEmptyTbody() throws Exception {
+    public void insertRowInTableWithEmptyTbody() throws Exception {
         final String html =
             "<html><head>\n"
             + "<script>\n"
@@ -428,7 +428,7 @@ public class HTMLTableElementTest extends WebTestCase {
      */
     @Test
     @Alerts({ "1", "1" })
-    public void testNestedTables() throws Exception {
+    public void nestedTables() throws Exception {
         final String html =
             "<html><head>\n"
             + "<script>\n"
@@ -463,7 +463,7 @@ public class HTMLTableElementTest extends WebTestCase {
     @Alerts(IE = { "table: [object]", "row: [object]", "cell: [object]" },
             FF = { "table: [object HTMLTableElement]",
                     "row: [object HTMLTableRowElement]", "cell: [object HTMLTableCellElement]" })
-    public void testStringValues() throws Exception {
+    public void stringValues() throws Exception {
         final String html =
             "<html><head>\n"
             + "  <script>\n"
@@ -491,7 +491,7 @@ public class HTMLTableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testWidth() throws Exception {
+    public void width() throws Exception {
         final String content
             = "<html><head></head><body>\n"
                 + "<table id='tableID' style='background:blue'><tr><td></td></tr></table>\n"
@@ -510,7 +510,7 @@ public class HTMLTableElementTest extends WebTestCase {
      */
     @Test
     @Alerts("21")
-    public void testCellSpacing() throws Exception {
+    public void cellSpacing() throws Exception {
         final String html
             = "<html><head></head><body>\n"
                 + "<table id='tableID' cellspacing='2'><tr><td></td></tr></table>\n"
@@ -528,7 +528,7 @@ public class HTMLTableElementTest extends WebTestCase {
      */
     @Test
     @Alerts("21")
-    public void testCellPadding() throws Exception {
+    public void cellPadding() throws Exception {
         final String html
             = "<html><head></head><body>\n"
                 + "<table id='tableID' cellpadding='2'><tr><td></td></tr></table>\n"
@@ -545,7 +545,7 @@ public class HTMLTableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testRefresh() throws Exception {
+    public void refresh() throws Exception {
         final String html
             = "<html><head><script>\n"
             + "  function test() {\n"
@@ -556,4 +556,48 @@ public class HTMLTableElementTest extends WebTestCase {
             + "</body></html>";
         loadPage(getBrowserVersion(), html, null);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = {"", "hello", "left", "hi", "right" },
+            IE = {"", "error", "", "left", "error", "left", "right" })
+    public void align() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var t = document.getElementById('t');\n"
+            + "        alert(t.align);\n"
+            + "        set(t, 'hello');\n"
+            + "        alert(t.align);\n"
+            + "        set(t, 'left');\n"
+            + "        alert(t.align);\n"
+            + "        set(t, 'hi');\n"
+            + "        alert(t.align);\n"
+            + "        set(t, 'right');\n"
+            + "        alert(t.align);\n"
+            + "      }\n"
+            + "      function set(e, value) {\n"
+            + "        try {\n"
+            + "          e.align = value;\n"
+            + "        } catch (e) {\n"
+            + "          alert('error');\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <table id='t'>\n"
+            + "      <thead id='th'/>\n"
+            + "      <tbody id='tb'/>\n"
+            + "      <tfoot id='tf'/>\n"
+            + "    </table>\n"
+            + "  </body>\n"
+            + "</html>";
+        loadPageWithAlerts(html);
+    }
+
 }

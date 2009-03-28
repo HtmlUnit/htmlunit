@@ -40,6 +40,7 @@ public class RowContainer extends HTMLElement {
      * Creates an instance.
      */
     public RowContainer() {
+        // Empty.
     }
 
     /**
@@ -47,6 +48,7 @@ public class RowContainer extends HTMLElement {
      * the Rhino engine won't walk up the hierarchy looking for constructors.
      */
     public void jsConstructor() {
+        // Empty.
     }
 
     /**
@@ -164,4 +166,21 @@ public class RowContainer extends HTMLElement {
         }
         return null;
     }
+
+    /**
+     * Returns the value of the "align" property.
+     * @return the value of the "align" property
+     */
+    public String jsxGet_align() {
+        return getAlign();
+    }
+
+    /**
+     * Returns the value of the "align" property.
+     * @param align the value of the "align" property
+     */
+    public void jsxSet_align(final String align) {
+        setAlign(align);
+    }
+
 }
