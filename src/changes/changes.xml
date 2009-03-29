@@ -15,6 +15,9 @@
                 JavaScript: add support for reading and writing img.align, p.align, table.align, thead.align, tbody.align, tfoot.align,
                 iframe.align, input.align and applet.align properties.
             </action>
+            <action type="add" dev="sdanig">
+                JavaScript: add support for reading and writing the base.href and base.target properties.
+            </action>
             <action type="fix" dev="sdanig" issue="2706760">
                 JavaScript: window.event should be available during execution of script.onreadystatechange handler (IE only).
             </action>

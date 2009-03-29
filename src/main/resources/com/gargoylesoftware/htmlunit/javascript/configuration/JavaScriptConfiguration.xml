@@ -1099,6 +1099,8 @@
 
     <class name="HTMLBaseElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLBaseElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBase">
+        <property name="href" readable="true" writable="true"/>
+        <property name="target" readable="true" writable="true"/>
     </class>
 
     <class name="HTMLBaseFontElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLBaseFontElement"

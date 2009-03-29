@@ -31,4 +31,36 @@ public class HTMLBaseElement extends HTMLElement {
         // Empty.
     }
 
+    /**
+     * Returns the value of the "href" property.
+     * @return the value of the "href" property
+     */
+    public String jsxGet_href() {
+        return getDomNodeOrDie().getAttribute("href");
+    }
+
+    /**
+     * Sets the value of the "href" property.
+     * @param href the value of the "href" property
+     */
+    public void jsxSet_href(final String href) {
+        getDomNodeOrDie().setAttribute("href", href);
+    }
+
+    /**
+     * Returns the value of the "target" property.
+     * @return the value of the "target" property
+     */
+    public String jsxGet_target() {
+        return getDomNodeOrDie().getAttribute("target");
+    }
+
+    /**
+     * Sets the value of the "target" property.
+     * @param target the value of the "target" property
+     */
+    public void jsxSet_target(final String target) {
+        getDomNodeOrDie().setAttribute("target", target);
+    }
+
 }
