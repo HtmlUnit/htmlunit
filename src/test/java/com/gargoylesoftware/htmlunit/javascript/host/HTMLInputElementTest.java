@@ -768,4 +768,42 @@ public class HTMLInputElementTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = {"", "hello", "left", "hi", "right" },
+            IE = {"", "error", "", "", "error", "", "" })
+    public void align() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var i = document.getElementById('i');\n"
+            + "        alert(i.align);\n"
+            + "        set(i, 'hello');\n"
+            + "        alert(i.align);\n"
+            + "        set(i, 'left');\n"
+            + "        alert(i.align);\n"
+            + "        set(i, 'hi');\n"
+            + "        alert(i.align);\n"
+            + "        set(i, 'right');\n"
+            + "        alert(i.align);\n"
+            + "      }\n"
+            + "      function set(e, value) {\n"
+            + "        try {\n"
+            + "          e.align = value;\n"
+            + "        } catch (e) {\n"
+            + "          alert('error');\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'><input type='text' id='i' /></body>\n"
+            + "</html>";
+        loadPageWithAlerts(html);
+    }
+
 }

@@ -138,7 +138,7 @@ public class HTMLIFrameElement extends HTMLElement {
      * @param align the value of the "align" property
      */
     public void jsxSet_align(final String align) {
-        setAlign(align);
+        setAlign(align, false);
     }
 
 }

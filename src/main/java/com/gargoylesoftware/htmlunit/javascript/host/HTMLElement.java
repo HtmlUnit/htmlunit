@@ -2118,15 +2118,18 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns the value of the "align" property.
+     * Sets the value of the "align" property.
      * @param align the value of the "align" property
+     * @param ignoreIfNoError if <tt>true</tt>, the invocation will be a no-op if it does not trigger an error
+     *        (i.e., it will not actually set the align attribute)
      */
-    protected void setAlign(String align) {
+    protected void setAlign(String align, final boolean ignoreIfNoError) {
         align = align.toLowerCase();
-        if (getBrowserVersion().isFirefox()
-                || align.equals("center") || align.equals("justify")
-                || align.equals("left") || align.equals("right")) {
-            getDomNodeOrDie().setAttribute("align", align);
+        final boolean ff = getBrowserVersion().isFirefox();
+        if (ff || align.equals("center") || align.equals("justify") || align.equals("left") || align.equals("right")) {
+            if (!ignoreIfNoError) {
+                getDomNodeOrDie().setAttribute("align", align);
+            }
         }
         else {
             Context.throwAsScriptRuntimeEx(new Exception("Cannot set the align property to invalid value: " + align));

@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.html.InputElementFactory;
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author Ahmed Ashour
+ * @author Daniel Gredler
  */
 public class HTMLInputElement extends FormField {
 
@@ -39,6 +40,7 @@ public class HTMLInputElement extends FormField {
      * Creates an instance.
      */
     public HTMLInputElement() {
+        // Empty.
     }
 
     /**
@@ -46,6 +48,7 @@ public class HTMLInputElement extends FormField {
      * because the rhino engine won't walk up the hierarchy looking for constructors.
      */
     public void jsConstructor() {
+        // Empty.
     }
 
     /**
@@ -310,4 +313,22 @@ public class HTMLInputElement extends FormField {
     public void jsxSet_border(final String border) {
         getDomNodeOrDie().setAttribute("border", border);
     }
+
+    /**
+     * Returns the value of the "align" property.
+     * @return the value of the "align" property
+     */
+    public String jsxGet_align() {
+        return getAlign();
+    }
+
+    /**
+     * Returns the value of the "align" property.
+     * @param align the value of the "align" property
+     */
+    public void jsxSet_align(final String align) {
+        final boolean ignoreIfNoError = getBrowserVersion().isIE();
+        setAlign(align, ignoreIfNoError);
+    }
+
 }
