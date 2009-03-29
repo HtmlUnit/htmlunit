@@ -169,7 +169,7 @@ public class HTMLImageElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "align" property.
+     * Sets the value of the "align" property.
      * @param align the value of the "align" property
      */
     public void jsxSet_align(final String align) {
