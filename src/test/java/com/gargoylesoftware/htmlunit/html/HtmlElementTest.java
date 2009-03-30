@@ -1039,7 +1039,9 @@ public class HtmlElementTest extends WebTestCase {
             + "</head>\n"
             + "<body>Welcome\n"
             + "<div style='visibility:hidden'>to the big</div>\n"
-            + "<div style='display:none'><div style='display:block'><span style='visibility:visible'>world</span></div></div>\n"
+            + "<div style='display:none'>\n"
+            + "  <div style='display:block'><span style='visibility:visible'>world</span></div>\n"
+            + "</div>\n"
             + "</body>\n"
             + "</html>";
 
