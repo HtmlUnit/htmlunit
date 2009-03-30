@@ -626,10 +626,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 final ScriptableObject scriptableObject = node.getScriptObject();
                 if (scriptableObject instanceof HTMLElement) {
                     final CSSStyleDeclaration style = ((HTMLElement) scriptableObject).jsxGet_style();
-                    final String display = style.jsxGet_display();
-                    if ("none".equals(display)) {
-                        return false;
-                    }
                     final String visibility = style.jsxGet_visibility();
                     if (visibility.length() > 0) {
                         if (visibility.equals("visible")) {
