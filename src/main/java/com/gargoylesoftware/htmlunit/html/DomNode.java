@@ -597,39 +597,53 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Returns true if the node has or inherits style attribute with visibility:visible.
-     * Node is visible if visibility is not specified or inherited. Child element can override
-     * the parent visibility.
-     * @see <a href="http://www.w3.org/TR/REC-CSS2/visufx.html#visibility">CSS2</a>
+     * Returns <tt>true</tt> if this node is visible to the user (ignoring screen size and scrolling limitations).
+     * @see <a href="http://www.w3.org/TR/CSS2/visufx.html#visibility">CSS2 Visibility</a>
+     * @see <a href="http://www.w3.org/TR/CSS2/visuren.html#propdef-display">CSS2 Display</a>
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms531180.aspx">MSDN Documentation</a>
-     * @return true if the node is visible.
+     * @return true if the node is visible to the user
      */
-    protected boolean isStyleVisible() {
-        boolean isVisible = true;
+    public boolean isVisible() {
         final Page page = getPage();
         if (page instanceof HtmlPage) {
+            // display: iterate top to bottom, because if a parent is display:none,
+            // there's nothing that a child can do to override it
+            for (final Node node : getAncestors(true)) {
+                final ScriptableObject scriptableObject = ((DomNode) node).getScriptObject();
+                if (scriptableObject instanceof HTMLElement) {
+                    final CSSStyleDeclaration style = ((HTMLElement) scriptableObject).jsxGet_style();
+                    final String display = style.jsxGet_display();
+                    if ("none".equals(display)) {
+                        return false;
+                    }
+                }
+            }
+            // visibility: iterate bottom to top, because children can override
+            // the visibility used by parent nodes
             final boolean isNotIE = !((HtmlPage) page).getWebClient().getBrowserVersion().isIE();
             DomNode node = this;
             do {
                 final ScriptableObject scriptableObject = node.getScriptObject();
                 if (scriptableObject instanceof HTMLElement) {
                     final CSSStyleDeclaration style = ((HTMLElement) scriptableObject).jsxGet_style();
+                    final String display = style.jsxGet_display();
+                    if ("none".equals(display)) {
+                        return false;
+                    }
                     final String visibility = style.jsxGet_visibility();
                     if (visibility.length() > 0) {
                         if (visibility.equals("visible")) {
-                            isVisible = true;
-                            break;
+                            return true;
                         }
                         else if (visibility.equals("hidden") || (isNotIE && visibility.equals("collapse"))) {
-                            isVisible = false;
-                            break;
+                            return false;
                         }
                     }
                 }
                 node = node.getParentNode();
-            } while(node != null);
+            } while (node != null);
         }
-        return isVisible;
+        return true;
     }
 
     /**
@@ -684,7 +698,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         for (final DomNode node : getChildren()) {
             if (node instanceof DomText) {
-                if (node.isStyleVisible()) {
+                if (node.isVisible()) {
                     buffer.append(node.asTextInternal());
                 }
             }
