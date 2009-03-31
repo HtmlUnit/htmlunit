@@ -626,6 +626,10 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         URL baseUrl;
         if (baseElements.isEmpty()) {
             baseUrl = getWebResponse().getRequestUrl();
+            final WebWindow window = getEnclosingWindow();
+            if (baseUrl == WebClient.URL_ABOUT_BLANK && window != window.getTopWindow()) {
+                baseUrl = ((HtmlPage) window.getTopWindow().getEnclosedPage()).getWebResponse().getRequestUrl();
+            }
         }
         else {
             if (baseElements.size() > 1) {

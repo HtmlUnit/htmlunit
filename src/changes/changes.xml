@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, MooTools support, support all HTML elements and various JavaScript properties">
+            <action type="fix" dev="asashour" issue="2723086">
+                HtmlPage: getFullyQualifiedUrl() should be relative to page of the top window.
+            </action>
             <action type="add" dev="mguillem">
                 (EXPERIMENTAL) Add WebClient.waitForBackgroundJavaScript() and WebClient.waitForBackgroundJavaScriptStartingBefore(),
                 which allow waiting for JavaScript background jobs to finish (should be used instead of JavaScriptJobManager methods,

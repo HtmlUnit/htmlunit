@@ -438,6 +438,43 @@ public class HtmlPageTest extends WebServerTestCase {
     }
 
     /**
+     * Test auto-refresh from a meta tag.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testGetFullQualifiedUrl_parentWindow() throws Exception {
+        final String firstContent = "<html><head><title>first</title>\n"
+            + "<script>\n"
+            + "  function init() {\n"
+            + "    var iframe = window.frames['f'];\n"
+            + "    iframe.document.write(\"<form name='form' action='" + URL_SECOND + "'>"
+            + "<input name='submit' type='submit'></form>\");\n"
+            + "    iframe.document.close();\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='init()'>\n"
+            + "  <iframe name='f'></iframe>\n"
+            + "</body></html>";
+        final String secondContent = "<html><head><title>second</title></head>"
+            + "<body><p>Form submitted successfully.</p></body></html>";
+
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setDefaultResponse(secondContent);
+        client.setWebConnection(webConnection);
+
+        final HtmlPage page = client.getPage(URL_FIRST);
+
+        HtmlPage framePage = (HtmlPage) page.getFrameByName("f").getEnclosedPage();
+        final HtmlForm form = framePage.getFormByName("form");
+        final HtmlInput submit = form.getInputByName("submit");
+        framePage = submit.click();
+        assertEquals("Form submitted successfully.", framePage.getBody().asText());
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
