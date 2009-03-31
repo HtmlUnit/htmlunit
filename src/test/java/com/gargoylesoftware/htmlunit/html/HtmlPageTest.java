@@ -438,11 +438,10 @@ public class HtmlPageTest extends WebServerTestCase {
     }
 
     /**
-     * Test auto-refresh from a meta tag.
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetFullQualifiedUrl_parentWindow() throws Exception {
+    public void testGetFullQualifiedUrl_topWindow() throws Exception {
         final String firstContent = "<html><head><title>first</title>\n"
             + "<script>\n"
             + "  function init() {\n"
