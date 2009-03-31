@@ -122,9 +122,6 @@
     <profiles>
         <profile>
             <id>without-library-tests</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <build>
                 <!-- Explicitly exclude the library tests. -->
                 <plugins>
@@ -159,6 +156,7 @@
         <profile>
             <id>with-library-tests</id>
             <activation>
+                <activeByDefault>true</activeByDefault>
                 <property>
                     <name>withLibs</name>
                 </property>
