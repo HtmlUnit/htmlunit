@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, MooTools support, support all HTML elements and various JavaScript properties">
+            <action type="fix" dev="asashour" issue="2722972">
+                JavaScript: dynamically created iframe should load external scripts.
+            </action>
             <action type="fix" dev="asashour" issue="2723086">
                 HtmlPage: getFullyQualifiedUrl() should be relative to page of the top window.
             </action>
