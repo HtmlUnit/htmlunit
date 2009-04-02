@@ -80,7 +80,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlElementTest.HtmlAttributeChangeLis
  */
 public class HtmlPageTest extends WebServerTestCase {
 
-
     /**
      * @throws Exception if the test fails
      */
