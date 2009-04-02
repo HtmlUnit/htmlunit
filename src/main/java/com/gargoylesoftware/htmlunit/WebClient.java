@@ -1933,7 +1933,8 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * <p><span style="color:red">Experimental API: May not yet work perfectly!</span></p>
+     * <p><span style="color:red">Experimental API: May be changed in next release
+     * and may not yet work perfectly!</span></p>
      *
      * <p>This method blocks until all background JavaScript tasks have finished executing. Background
      * JavaScript tasks are JavaScript tasks scheduled for execution via <tt>window.setTimeout</tt>,
@@ -1975,7 +1976,8 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * <p><span style="color:red">Experimental API: May not yet work perfectly!</span></p>
+     * <p><span style="color:red">Experimental API: May be changed in next release
+     * and may not yet work perfectly!</span></p>
      *
      * <p>This method blocks until all background JavaScript tasks scheduled to start executing before
      * <tt>(now + delayMillis)</tt> have finished executing. Background JavaScript tasks are JavaScript
