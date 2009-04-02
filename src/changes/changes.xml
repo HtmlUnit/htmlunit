@@ -7,6 +7,9 @@
     <body>
         <release version="2.5" date="?" description="Bugfixes, MooTools support, support all HTML elements and various JavaScript properties">
             <action type="fix" dev="mguillem">
+                JavaScript: don't try to instantiate applets accessed by JavaScript when applet support is disabled.
+            </action>
+            <action type="fix" dev="mguillem">
                 HtmlOption: handle markup in nested content when it has to be used as default value.
             </action>
             <action type="fix" dev="mguillem">

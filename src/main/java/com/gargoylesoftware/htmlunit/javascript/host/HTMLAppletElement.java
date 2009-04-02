@@ -15,10 +15,15 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.applet.Applet;
+import java.lang.reflect.Method;
 
-import org.mozilla.javascript.NativeJavaObject;
+import org.mozilla.javascript.BaseFunction;
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.ScriptableObject;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlApplet;
 
 /**
@@ -32,7 +37,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlApplet;
 public class HTMLAppletElement extends HTMLElement {
 
     private static final long serialVersionUID = 1869359649341296910L;
-    private Scriptable appletJSObject_;
 
     /**
      * Creates an instance.
@@ -42,18 +46,59 @@ public class HTMLAppletElement extends HTMLElement {
     }
 
     /**
-     * Gets the JavaScript object for the applet.
-     * @return the javascript object
-     * @throws Exception in case of problem creating the applet or its JS wrapper
+     * {@inheritDoc}
      */
-    public Object getAppletObject() throws Exception {
-        if (appletJSObject_ == null) {
-            final HtmlApplet appletNode = (HtmlApplet) getDomNodeOrDie();
-            final Applet applet = appletNode.getApplet();
+    @Override
+    public void setDomNode(final DomNode domNode) {
+        super.setDomNode(domNode);
 
-            appletJSObject_ = new NativeJavaObject(getWindow(), applet, applet.getClass());
+        if (domNode.getPage().getWebClient().isAppletEnabled()) {
+            try {
+                createAppletMethodAndProperties();
+            }
+            catch (final Exception e) {
+                throw new RuntimeException(e);
+            }
         }
-        return appletJSObject_;
+    }
+
+    private void createAppletMethodAndProperties() throws Exception {
+        final HtmlApplet appletNode = (HtmlApplet) getDomNodeOrDie();
+        final Applet applet = appletNode.getApplet();
+        if (applet == null) {
+            return;
+        }
+
+        // Rhino should provide the possibility to declare delegate for Functions as it does for properties!!!
+        for (final Method method : applet.getClass().getMethods()) {
+            final Function f = new BaseFunction() {
+                private static final long serialVersionUID = 1748611972272176674L;
+
+                @Override
+                public Object call(final Context cx, final Scriptable scope,
+                        final Scriptable thisObj, final Object[] args) {
+
+                    final Object[] realArgs = new Object[method.getParameterTypes().length];
+                    for (int i = 0; i < realArgs.length; ++i) {
+                        final Object arg;
+                        if (i > args.length) {
+                            arg = null;
+                        }
+                        else {
+                            arg = Context.jsToJava(args[i], method.getParameterTypes()[i]);
+                        }
+                        realArgs[i] = arg;
+                    }
+                    try {
+                        return method.invoke(applet, realArgs);
+                    }
+                    catch (final Exception e) {
+                        throw Context.throwAsScriptRuntimeEx(e);
+                    }
+                }
+            };
+            ScriptableObject.defineProperty(this, method.getName(), f, ScriptableObject.READONLY);
+        }
     }
 
     /**
@@ -111,5 +156,4 @@ public class HTMLAppletElement extends HTMLElement {
     public void jsxSet_align(final String align) {
         setAlign(align, false);
     }
-
 }
