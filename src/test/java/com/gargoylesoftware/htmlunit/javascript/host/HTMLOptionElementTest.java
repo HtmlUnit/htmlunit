@@ -358,4 +358,45 @@ public class HTMLOptionElementTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * Visibility of elements should not impact the determination of the value of option
+     * without value attribute or the text of options. This tests for one part a regression
+     * introduced in rev. 4367 as well probably as a problem that exists since a long time.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    @Alerts(FF = { "text1", "text1", "text1b", "text1b", "text2", "text2" },
+            IE = { "", "text1", "", "text1b", "", "text2" })
+    public void text_and_value_when_not_displayed() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var s = document.getElementById('testSelect1');\n"
+            + "  alert(s.options[0].value);\n"
+            + "  alert(s.options[0].text);\n"
+            + "  alert(s.options[1].value);\n"
+            + "  alert(s.options[1].text);\n"
+            + "  var s2 = document.getElementById('testSelect2');\n"
+            + "  alert(s2.options[0].value);\n"
+            + "  alert(s2.options[0].text);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div style='display: none'>\n"
+            + "  <select id='testSelect1'>\n"
+            + "    <option>text1</option>\n"
+            + "    <option><strong>text1b</strong></option>\n"
+            + "  </select>\n"
+            + "  </div>\n"
+            + "  <div style='visibility: hidden'>\n"
+            + "  <select id='testSelect2'>\n"
+            + "    <option>text2</option>\n"
+            + "  </select>\n"
+            + "  </div>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }
