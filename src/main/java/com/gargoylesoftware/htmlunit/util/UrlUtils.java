@@ -484,6 +484,12 @@ public final class UrlUtils {
                 path = path.substring(0, slashIndex + 1);
             }
         }
+
+        // "/.." at the beginning should be removed
+        while (path.startsWith("/..")) {
+            path = path.substring(3);
+        }
+
         url.path_ = path;
         // Step 7: The resulting URL components, including any inherited from
         //         the base URL, are recombined to give the absolute form of

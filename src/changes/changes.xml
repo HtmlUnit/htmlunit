@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, MooTools support, support all HTML elements and various JavaScript properties">
+            <action type="fix" dev="mguillem" issue="2192395">
+                Remove leading "../" (if any) when resolving URLs.
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: don't try to instantiate applets accessed by JavaScript when applet support is disabled.
             </action>
