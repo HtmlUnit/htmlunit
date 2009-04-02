@@ -676,8 +676,7 @@ public abstract class WebTestCase {
      */
     protected final HtmlPage loadPageWithAlerts(final String html) throws Exception {
         if (expectedAlerts_ == null) {
-            throw new IllegalStateException("You must annotate the test method with '@Alerts(...)' "
-                    + "and annotate the test class with '@RunWith(BrowserRunner.class)'");
+            throw new IllegalStateException("You must annotate the test class with '@RunWith(BrowserRunner.class)'");
         }
 
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts_);

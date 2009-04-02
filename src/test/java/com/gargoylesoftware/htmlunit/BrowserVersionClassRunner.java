@@ -51,8 +51,8 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
     private void setAlerts(final WebTestCase testCase, final Method method) {
         final Alerts alerts = method.getAnnotation(Alerts.class);
+        String[] expectedAlerts = {};
         if (alerts != null) {
-            String[] expectedAlerts = {};
             if (isDefined(alerts.value())) {
                 expectedAlerts = alerts.value();
             }
@@ -88,8 +88,8 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                     expectedAlerts = alerts.FF();
                 }
             }
-            testCase.setExpectedAlerts(expectedAlerts);
         }
+        testCase.setExpectedAlerts(expectedAlerts);
     }
 
     @Override

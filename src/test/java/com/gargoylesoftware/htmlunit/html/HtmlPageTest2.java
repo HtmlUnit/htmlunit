@@ -18,6 +18,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -36,6 +37,53 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  */
 @RunWith(BrowserRunner.class)
 public class HtmlPageTest2 extends WebServerTestCase {
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    public void constructor() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<p>hello world</p>\n"
+            + "<form id='form1' action='/formSubmit' method='post'>\n"
+            + "<input type='text' NAME='textInput1' value='textInput1'/>\n"
+            + "<input type='text' name='textInput2' value='textInput2'/>\n"
+            + "<input type='hidden' name='hidden1' value='hidden1'/>\n"
+            + "<input type='submit' name='submitInput1' value='push me'/>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPageWithAlerts(html);
+        assertEquals("foo", page.getTitleText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testGetInputByName() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<p>hello world</p>\n"
+            + "<form id='form1' action='/formSubmit' method='post'>\n"
+            + "<input type='text' NAME='textInput1' value='textInput1'/>\n"
+            + "<input type='text' name='textInput2' value='textInput2'/>\n"
+            + "<input type='hidden' name='hidden1' value='hidden1'/>\n"
+            + "<input type='submit' name='submitInput1' value='push me'/>\n"
+            + "</form>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPageWithAlerts(html);
+
+        final HtmlForm form = page.getHtmlElementById("form1");
+        final HtmlInput input = form.getInputByName("textInput1");
+        Assert.assertEquals("name", "textInput1", input.getNameAttribute());
+
+        Assert.assertEquals("value", "textInput1", input.getValueAttribute());
+        Assert.assertEquals("type", "text", input.getTypeAttribute());
+    }
 
     /**
      * @throws Exception if the test fails

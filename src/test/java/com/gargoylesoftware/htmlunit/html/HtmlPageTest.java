@@ -80,52 +80,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlElementTest.HtmlAttributeChangeLis
  */
 public class HtmlPageTest extends WebServerTestCase {
 
-    /**
-     * @exception Exception If the test fails
-     */
-    @Test
-    public void testConstructor() throws Exception {
-        final String htmlContent = "<html>\n"
-            + "<head><title>foo</title></head>\n"
-            + "<body>\n"
-            + "<p>hello world</p>\n"
-            + "<form id='form1' action='/formSubmit' method='post'>\n"
-            + "<input type='text' NAME='textInput1' value='textInput1'/>\n"
-            + "<input type='text' name='textInput2' value='textInput2'/>\n"
-            + "<input type='hidden' name='hidden1' value='hidden1'/>\n"
-            + "<input type='submit' name='submitInput1' value='push me'/>\n"
-            + "</form>\n"
-            + "</body></html>";
-
-        final HtmlPage page = loadPage(htmlContent);
-        assertEquals("foo", page.getTitleText());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testGetInputByName() throws Exception {
-        final String htmlContent = "<html>\n"
-            + "<head><title>foo</title></head>\n"
-            + "<body>\n"
-            + "<p>hello world</p>\n"
-            + "<form id='form1' action='/formSubmit' method='post'>\n"
-            + "<input type='text' NAME='textInput1' value='textInput1'/>\n"
-            + "<input type='text' name='textInput2' value='textInput2'/>\n"
-            + "<input type='hidden' name='hidden1' value='hidden1'/>\n"
-            + "<input type='submit' name='submitInput1' value='push me'/>\n"
-            + "</form>\n"
-            + "</body></html>";
-        final HtmlPage page = loadPage(htmlContent);
-
-        final HtmlForm form = page.getHtmlElementById("form1");
-        final HtmlInput input = form.getInputByName("textInput1");
-        Assert.assertEquals("name", "textInput1", input.getNameAttribute());
-
-        Assert.assertEquals("value", "textInput1", input.getValueAttribute());
-        Assert.assertEquals("type", "text", input.getTypeAttribute());
-    }
 
     /**
      * @throws Exception if the test fails
@@ -436,7 +390,6 @@ public class HtmlPageTest extends WebServerTestCase {
         assertEquals("http://somewhere.com/", page.getFullyQualifiedUrl("http://somewhere.com/"));
         assertEquals(page.getWebResponse().getRequestUrl() + "foo.html", page.getFullyQualifiedUrl("foo.html"));
     }
-
 
     /**
      * @throws Exception if an error occurs
