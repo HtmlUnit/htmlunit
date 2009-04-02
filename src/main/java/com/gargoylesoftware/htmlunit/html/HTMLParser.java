@@ -57,11 +57,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
 
 /**
- * SAX parser implementation that uses the NekoHTML {@link org.cyberneko.html.HTMLConfiguration}
- * to parse HTML into a HtmlUnit-specific DOM (HU-DOM) tree.
- * <p>
- * <em>Note that the parser currently does not handle CDATA or comment sections, i.e. these
- * do not appear in the resulting DOM tree</em>
+ * <p>SAX parser implementation that uses the NekoHTML {@link org.cyberneko.html.HTMLConfiguration}
+ * to parse HTML into a HtmlUnit-specific DOM (HU-DOM) tree.</p>
  *
  * @version $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
@@ -262,8 +259,7 @@ public final class HTMLParser {
      *
      * @param webResponse the response data
      * @param webWindow the web window into which the page is to be loaded
-     * @return the page object which forms the root of the DOM tree, or <code>null</code> if the &lt;HTML&gt;
-     * tag is missing
+     * @return the page object which is the root of the DOM tree, or <tt>null</tt> if the &lt;HTML&gt; tag is missing
      * @throws IOException if there is an IO error
      */
     public static HtmlPage parse(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
