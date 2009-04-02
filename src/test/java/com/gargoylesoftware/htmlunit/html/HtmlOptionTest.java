@@ -167,8 +167,8 @@ public class HtmlOptionTest extends WebTestCase {
         final HtmlOption option4 = page.getHtmlElementById("option4");
 
         assertEquals("option1", option1.asText());
-        assertEquals("Number Two", option2.asText());
-        assertEquals("overridden", option3.asText());
+        assertEquals("", option2.asText());
+        assertEquals("Number Three", option3.asText());
         assertEquals("Number 4", option4.asText());
     }
 

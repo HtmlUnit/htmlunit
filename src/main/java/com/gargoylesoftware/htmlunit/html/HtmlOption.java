@@ -17,8 +17,6 @@ package com.gargoylesoftware.htmlunit.html;
 import java.io.IOException;
 import java.util.Map;
 
-import org.w3c.dom.Node;
-
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -227,16 +225,14 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * {@inheritDoc}
      */
     @Override
-    public DomNode appendChild(final Node node) {
-        final DomNode addedNode = super.appendChild(node);
+    protected void onAllChildrenAddedToPage(final boolean postponed) {
+        super.onAllChildrenAddedToPage(postponed);
 
-        // default value is the text of the option
+        // default value for the value attribute is the text of the option... but not for IE
         // see http://www.w3.org/TR/1999/REC-html401-19991224/interact/forms.html#adef-value-OPTION
         if (getAttribute("value") == ATTRIBUTE_NOT_DEFINED) {
-            setAttribute("value", asText());
+            setAttribute("value", getText());
         }
-
-        return addedNode;
     }
 
     /**
@@ -266,17 +262,6 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected String asTextInternal() {
-        if (getLabelAttribute() != ATTRIBUTE_NOT_DEFINED) {
-            return getLabelAttribute();
-        }
-        return super.asTextInternal();
-    }
-
-    /**
      * Sets the text for this HtmlOption.
      * @param text the text
      */
@@ -300,10 +285,8 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * @return the text of this option.
      */
     public String getText() {
-        final DomNode child = getFirstChild();
-        if (child == null) {
-            return "";
-        }
-        return child.getNodeValue();
+        final HtmlSerializer ser = new HtmlSerializer();
+        ser.setIgnoreMaskedElements(false);
+        return ser.asText(this);
     }
 }
