@@ -21,7 +21,7 @@ import org.w3c.dom.CDATASection;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
- * Representation of a CDATA node in the Html DOM.
+ * Representation of a CDATA node in the HTML DOM.
  *
  * @version $Revision$
  * @author Marc Guillemot
