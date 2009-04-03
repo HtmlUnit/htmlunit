@@ -403,6 +403,7 @@ public final class UrlUtils {
         // Step 4: If the embedded URL path is preceded by a slash "/", the
         //         path is not relative and we skip to Step 7.
         if ((url.path_ != null) && url.path_.startsWith("/")) {
+            url.path_ = removeLeadingSlashPoints(url.path_);
             return url;
         }
         // Step 5: If the embedded URL path is empty (and not preceded by a
@@ -485,16 +486,24 @@ public final class UrlUtils {
             }
         }
 
-        // "/.." at the beginning should be removed
-        while (path.startsWith("/..")) {
-            path = path.substring(3);
-        }
+        path = removeLeadingSlashPoints(path);
 
         url.path_ = path;
         // Step 7: The resulting URL components, including any inherited from
         //         the base URL, are recombined to give the absolute form of
         //         the embedded URL.
         return url;
+    }
+
+    /**
+     * "/.." at the beginning should be removed as browsers do (not in RFC)
+     */
+    private static String removeLeadingSlashPoints(String path) {
+        while (path.startsWith("/..")) {
+            path = path.substring(3);
+        }
+
+        return path;
     }
 
     /**

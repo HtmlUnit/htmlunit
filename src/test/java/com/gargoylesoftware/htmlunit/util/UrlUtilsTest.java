@@ -146,10 +146,17 @@ public class UrlUtilsTest extends WebTestCase {
         final String baseUrl = "http://a/b/c/d;p?q#f";
 
         assertEquals("http://a/b/c/d;p?q#f", UrlUtils.resolveUrl(baseUrl, ""));
-        assertEquals("http://a/../g",        UrlUtils.resolveUrl(baseUrl, "../../../g"));
-        assertEquals("http://a/../../g",     UrlUtils.resolveUrl(baseUrl, "../../../../g"));
+
+// These examples are fine... but it's not what browsers do (see below)
+//        assertEquals("http://a/../g",        UrlUtils.resolveUrl(baseUrl, "../../../g"));
+//        assertEquals("http://a/../../g",     UrlUtils.resolveUrl(baseUrl, "../../../../g"));
+//        assertEquals("http://a/./g",         UrlUtils.resolveUrl(baseUrl, "/./g"));
+//        assertEquals("http://a/../g",        UrlUtils.resolveUrl(baseUrl, "/../g"));
+        assertEquals("http://a/g",        UrlUtils.resolveUrl(baseUrl, "../../../g"));
+        assertEquals("http://a/g",     UrlUtils.resolveUrl(baseUrl, "../../../../g"));
         assertEquals("http://a/./g",         UrlUtils.resolveUrl(baseUrl, "/./g"));
-        assertEquals("http://a/../g",        UrlUtils.resolveUrl(baseUrl, "/../g"));
+        assertEquals("http://a/g",        UrlUtils.resolveUrl(baseUrl, "/../g"));
+
         assertEquals("http://a/b/c/g.",      UrlUtils.resolveUrl(baseUrl, "g."));
         assertEquals("http://a/b/c/.g",      UrlUtils.resolveUrl(baseUrl, ".g"));
         assertEquals("http://a/b/c/g..",     UrlUtils.resolveUrl(baseUrl, "g.."));
