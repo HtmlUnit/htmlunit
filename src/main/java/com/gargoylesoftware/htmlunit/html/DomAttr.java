@@ -148,4 +148,13 @@ public class DomAttr extends DomNamespaceNode implements Attr {
     public boolean isId() {
         return "id".equals(getNodeName());
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "[name=" + getNodeName() + " value=" + getNodeValue() + "]";
+    }
+
 }
