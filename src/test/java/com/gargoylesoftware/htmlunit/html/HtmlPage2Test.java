@@ -36,7 +36,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HtmlPageTest2 extends WebServerTestCase {
+public class HtmlPage2Test extends WebServerTestCase {
 
     /**
      * @exception Exception If the test fails

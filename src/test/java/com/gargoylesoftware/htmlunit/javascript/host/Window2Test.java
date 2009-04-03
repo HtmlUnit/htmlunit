@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class WindowTest2 extends WebTestCase {
+public class Window2Test extends WebTestCase {
 
     /**
      * "window.controllers" is used by some JavaScript libraries to determine if the
