@@ -275,6 +275,7 @@ public class HTMLFrameElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("Frame2")
     public void serialization() throws Exception {
         final String html
             = "<html><head><title>first</title></head>\n"
@@ -283,7 +284,7 @@ public class HTMLFrameElementTest extends WebTestCase {
             + "    <frame name='Frame2' onload='alert(this.name)' id='frame2'>\n"
             + "</frameset></html>";
 
-        final HtmlPage page = loadPageWithAlerts(html);
+        final HtmlPage page = loadPage(html);
 
         final ObjectOutputStream objectOS = new ObjectOutputStream(new ByteArrayOutputStream());
         objectOS.writeObject(page);

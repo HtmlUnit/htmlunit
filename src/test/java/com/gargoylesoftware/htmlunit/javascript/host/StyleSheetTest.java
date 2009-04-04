@@ -68,7 +68,7 @@ public class StyleSheetTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPageWithAlerts(html);
+        final HtmlPage page = loadPage(html);
         final HtmlElement body = page.getBody();
         final HtmlForm form = page.getFormByName("f1");
         final HtmlInput input1 = (HtmlInput) page.getElementsByName("i1").get(0);
