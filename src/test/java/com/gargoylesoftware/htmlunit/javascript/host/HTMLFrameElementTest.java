@@ -284,7 +284,7 @@ public class HTMLFrameElementTest extends WebTestCase {
             + "    <frame name='Frame2' onload='alert(this.name)' id='frame2'>\n"
             + "</frameset></html>";
 
-        final HtmlPage page = loadPage(html);
+        final HtmlPage page = loadPageWithAlerts(html);
 
         final ObjectOutputStream objectOS = new ObjectOutputStream(new ByteArrayOutputStream());
         objectOS.writeObject(page);

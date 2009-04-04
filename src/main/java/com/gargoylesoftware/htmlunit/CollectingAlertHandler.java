@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,9 @@ import java.util.List;
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
-public class CollectingAlertHandler implements AlertHandler {
+public class CollectingAlertHandler implements AlertHandler, Serializable {
+
+    private static final long serialVersionUID = 6617913244195961483L;
 
     private final List<String> collectedAlerts_;
 
