@@ -23,8 +23,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -43,8 +44,9 @@ public class PopupTest extends WebTestCase {
      * TODO: it should fail when simulating FF as createPopup() is only for IE
      */
     @Test
+    @Browsers(Browser.IE)
     public void testPopup() throws Exception {
-        final String content = "<html><head><title>First</title><body>\n"
+        final String html = "<html><head><title>First</title><body>\n"
             + "<script>\n"
             + "var oPopup = window.createPopup();\n"
             + "var oPopupBody = oPopup.document.body;\n"
@@ -53,8 +55,7 @@ public class PopupTest extends WebTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_6, content, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -74,7 +75,7 @@ public class PopupTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
         final HtmlElement button = page.getHtmlElementById("button");
 
         final HtmlPage secondPage = button.click();

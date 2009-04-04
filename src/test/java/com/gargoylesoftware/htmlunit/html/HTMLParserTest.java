@@ -34,7 +34,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
@@ -156,7 +155,7 @@ public class HTMLParserTest extends WebServerTestCase {
         final String htmlContent = "<html>\n" + "<head><foo/>\n<title>foo\n</head>\n"
                 + "<body>\nfoo\n</body>\n</html>";
 
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPageWithAlerts(htmlContent);
         assertEquals("foo", page.getTitleText());
     }
 
@@ -457,17 +456,9 @@ public class HTMLParserTest extends WebServerTestCase {
      * @throws Exception on test failure
      */
     @Test
+    @Alerts(IE = { "2", "1", "2", "1", "1", "1", "2", "2", "1", "1", "1", "1" },
+            FF = { "2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2" })
     public void childNodes_p() throws Exception {
-        final String[] ie = {"2", "1", "2", "1", "1", "1", "2", "2", "1", "1", "1", "1"};
-        final String[] ff = {"2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2"};
-        childNodes_p(BrowserVersion.INTERNET_EXPLORER_6, ie);
-        childNodes_p(BrowserVersion.INTERNET_EXPLORER_7, ie);
-        childNodes_p(BrowserVersion.FIREFOX_2, ff);
-        childNodes_p(BrowserVersion.FIREFOX_3, ff);
-    }
-
-    private void childNodes_p(final BrowserVersion browserVersion, final String[] expectedAlerts)
-        throws Exception {
         final String html = "<html><head><title>test_getChildNodes</title>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -491,26 +482,16 @@ public class HTMLParserTest extends WebServerTestCase {
             + "<p id='p12'> <a href='hi'></a></p>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception on test failure
      */
     @Test
+    @Alerts(IE = { "2", "1", "2", "1", "1", "1", "2", "2", "1", "1", "1", "1", "1" },
+            FF = { "2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2", "3" })
     public void childNodes_f() throws Exception {
-        final String[] ie = {"2", "1", "2", "1", "1", "1", "2", "2", "1", "1", "1", "1", "1"};
-        final String[] ff = {"2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2", "3"};
-        childNodes_f(BrowserVersion.INTERNET_EXPLORER_6, ie);
-        childNodes_f(BrowserVersion.INTERNET_EXPLORER_7, ie);
-        childNodes_f(BrowserVersion.FIREFOX_2, ff);
-        childNodes_f(BrowserVersion.FIREFOX_3, ff);
-    }
-
-    private void childNodes_f(final BrowserVersion browserVersion, final String[] expectedAlerts)
-        throws Exception {
         final String html = "<html><head><title>test_getChildNodes</title>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -534,27 +515,15 @@ public class HTMLParserTest extends WebServerTestCase {
             + "<form id='f12'> <a href='hi'></a></form>\n"
             + "<form id='f13'> <div> </div> </form>\n"
             + "</body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception on test failure
      */
     @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
     public void childNodes_span() throws Exception {
-        final String[] ie = {"1", "1", "1", "2", "2", "1"};
-        final String[] ff = {"3", "2", "2", "3", "2", "2"};
-        childNodes_span(BrowserVersion.INTERNET_EXPLORER_6, ie);
-        childNodes_span(BrowserVersion.INTERNET_EXPLORER_7, ie);
-        childNodes_span(BrowserVersion.FIREFOX_2, ff);
-        childNodes_span(BrowserVersion.FIREFOX_3, ff);
-    }
-
-    private void childNodes_span(final BrowserVersion browserVersion, final String[] expectedAlerts)
-        throws Exception {
         final String html = "<html><head><title>test_getChildNodes</title>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -572,26 +541,15 @@ public class HTMLParserTest extends WebServerTestCase {
             + "<p id='p6'> <span>something</span></p>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception on test failure
      */
     @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
     public void childNodes_font() throws Exception {
-        final String[] ie = {"1", "1", "1", "2", "2", "1"};
-        final String[] ff = {"3", "2", "2", "3", "2", "2"};
-        childNodes_font(BrowserVersion.INTERNET_EXPLORER_6, ie);
-        childNodes_font(BrowserVersion.INTERNET_EXPLORER_7, ie);
-        childNodes_font(BrowserVersion.FIREFOX_2, ff);
-        childNodes_font(BrowserVersion.FIREFOX_3, ff);
-    }
-
-    private void childNodes_font(final BrowserVersion browserVersion, final String[] expectedAlerts)
-        throws Exception {
         final String html = "<html><head><title>test_getChildNodes</title>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -608,10 +566,7 @@ public class HTMLParserTest extends WebServerTestCase {
             + "<p id='p5'><font>something</font> </p>\n"
             + "<p id='p6'> <font>something</font></p>\n"
             + "</body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**

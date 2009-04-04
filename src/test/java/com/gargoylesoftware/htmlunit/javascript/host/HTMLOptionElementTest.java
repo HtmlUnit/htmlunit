@@ -81,7 +81,7 @@ public class HTMLOptionElementTest extends WebTestCase {
             + "document.myform.appendChild(select);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPage(html);
+        loadPageWithAlerts(html);
     }
 
     /**

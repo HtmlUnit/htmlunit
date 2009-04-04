@@ -69,7 +69,7 @@ public class HtmlAppletTest extends WebTestCase {
             + "  <applet id='myId'>Your browser doesn't support applets</object>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(html);
+        final HtmlPage page = loadPageWithAlerts(html);
         final HtmlApplet appletNode = page.getHtmlElementById("myId");
         assertEquals("Your browser doesn't support applets", appletNode.asText());
     }
@@ -84,7 +84,7 @@ public class HtmlAppletTest extends WebTestCase {
             + "  <applet id='myId'>Your browser doesn't support applets</object>\n"
             + "</body></html>";
 
-        final WebClient webClient = loadPage(html).getWebClient();
+        final WebClient webClient = loadPageWithAlerts(html).getWebClient();
         webClient.setAppletEnabled(true);
         final HtmlPage page = webClient.getPage(URL_FIRST);
         final HtmlApplet appletNode = page.getHtmlElementById("myId");

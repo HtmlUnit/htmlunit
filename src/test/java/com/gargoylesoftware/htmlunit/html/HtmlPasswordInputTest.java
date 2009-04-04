@@ -35,7 +35,7 @@ public class HtmlPasswordInputTest extends WebTestCase {
     @Test
     public void type() throws Exception {
         final String html = "<html><head></head><body><input type='password' id='p'/></body></html>";
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPageWithAlerts(html);
         final HtmlPasswordInput p = page.getHtmlElementById("p");
         p.type("abc");
         assertEquals("abc", p.getValueAttribute());
@@ -55,7 +55,7 @@ public class HtmlPasswordInputTest extends WebTestCase {
     @Test
     public void typeWhileDisabled() throws Exception {
         final String html = "<html><body><input type='password' id='p' disabled='disabled'/></body></html>";
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPageWithAlerts(html);
         final HtmlPasswordInput p = page.getHtmlElementById("p");
         p.type("abc");
         assertEquals("", p.getValueAttribute());
@@ -82,7 +82,7 @@ public class HtmlPasswordInputTest extends WebTestCase {
             + "<input type='password' id='x'></input>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(html);
+        final HtmlPage page = loadPageWithAlerts(html);
         final HtmlPasswordInput input = page.getHtmlElementById("x");
         input.type("abcd");
         assertEquals("abc", input.getValueAttribute());
@@ -109,7 +109,7 @@ public class HtmlPasswordInputTest extends WebTestCase {
             + "<input type='password' id='x'></input>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(html);
+        final HtmlPage page = loadPageWithAlerts(html);
         final HtmlPasswordInput input = page.getHtmlElementById("x");
         input.type("abcd");
         assertEquals("abc", input.getValueAttribute());

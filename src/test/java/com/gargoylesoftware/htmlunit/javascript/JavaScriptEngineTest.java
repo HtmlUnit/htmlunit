@@ -359,7 +359,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "</body></html>";
 
         try {
-            loadPage(content1);
+            loadPageWithAlerts(content1);
         }
         catch (final Exception e) {
             assertTrue(e.getMessage().indexOf(URL_GARGOYLE.toString()) > -1);

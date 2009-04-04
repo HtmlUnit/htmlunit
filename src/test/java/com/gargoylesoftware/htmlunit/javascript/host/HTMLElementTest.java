@@ -25,7 +25,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -2154,6 +2153,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Browsers(Browser.IE)
     public void fireEvent_WithoutTemplate() throws Exception {
         final String html =
               "<html><body>\n"
@@ -2161,7 +2161,7 @@ public class HTMLElementTest extends WebTestCase {
             + "<div id='b' onmouseover='document.getElementById(\"a\").fireEvent(\"onclick\")'>bar</div>\n"
             + "</body></html>";
         final List<String> actual = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_7, html, actual);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, actual);
         page.<HtmlDivision>getHtmlElementById("a").click();
         page.<HtmlDivision>getHtmlElementById("b").mouseOver();
         final String[] expected = {"clicked", "clicked"};
@@ -2472,7 +2472,7 @@ public class HTMLElementTest extends WebTestCase {
             + "<script>\n"
             + "     document.body.innerHTML = unescape(document.body.innerHTML);\n"
             + "</script></body></html>";
-        final HtmlPage page = loadPage(html);
+        final HtmlPage page = loadPageWithAlerts(html);
         assertEquals("Recursion", page.getTitleText());
     }
 
@@ -2489,7 +2489,7 @@ public class HTMLElementTest extends WebTestCase {
             + "     a.innerHTML = 'break';\n"
             + "     document.write('hello');\n"
             + "</script></body></html>";
-        final HtmlPage page = loadPage(html);
+        final HtmlPage page = loadPageWithAlerts(html);
         assertEquals("test" + LINE_SEPARATOR + "hello", page.asText());
     }
 

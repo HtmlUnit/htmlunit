@@ -307,7 +307,7 @@ public class LocationTest extends WebTestCase {
     @Test
     public void testSetHrefWithOnlyHash() throws Exception {
         final String html = "<html><body><script>document.location.href = '#x';</script></body></html>";
-        loadPage(html);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -319,7 +319,7 @@ public class LocationTest extends WebTestCase {
     @Test
     public void testSetHrefWithOnlyHash2() throws Exception {
         final String html = "<script>document.location.href = '" + URL_GARGOYLE + "#x';</script>";
-        loadPage(html);
+        loadPageWithAlerts(html);
     }
 
     /**

@@ -1115,7 +1115,7 @@ public class DocumentTest extends WebTestCase {
             + "</script>\n"
             + "</form></body></html>";
 
-        final HtmlPage page = loadPage(html);
+        final HtmlPage page = loadPageWithAlerts(html);
         assertEquals("First", page.getTitleText());
 
         page.getHtmlElementById("div1");
@@ -2701,7 +2701,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final String expected = "#document-fragment_null_11_null_0_";
-        final HtmlPage page = loadPage(html);
+        final HtmlPage page = loadPageWithAlerts(html);
         final HtmlTextArea textArea = page.getHtmlElementById("myTextarea");
         assertEquals(expected, textArea.getText());
     }

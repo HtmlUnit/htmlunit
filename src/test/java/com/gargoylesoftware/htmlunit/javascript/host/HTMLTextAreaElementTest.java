@@ -77,7 +77,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+        final HtmlPage page = loadPage(getBrowserVersion(), htmlContent, collectedAlerts);
 
         final HtmlForm form = page.getFormByName("form1");
         final HtmlTextArea textarea = form.getTextAreaByName("textarea1");
@@ -114,7 +114,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
             + "<textarea id='log'></textarea>"
             + "</form>"
             + "</body></html>";
-        final HtmlPage page = loadPage(content);
+        final HtmlPage page = loadPageWithAlerts(content);
         final HtmlTextArea textArea = page.getHtmlElementById("textArea1");
         textArea.type("hello");
         page.setFocusedElement(null); // remove focus on textarea to trigger onchange

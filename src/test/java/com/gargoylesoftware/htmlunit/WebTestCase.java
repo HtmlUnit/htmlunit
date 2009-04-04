@@ -686,7 +686,7 @@ public abstract class WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_GARGOYLE, html);
+        webConnection.setDefaultResponse(html);
         client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_GARGOYLE);

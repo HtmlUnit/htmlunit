@@ -153,7 +153,7 @@ public class NodeTest extends WebTestCase {
             + "    a.replaceChild(b, b);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'><div id='a'><div id='b'/></div></html>";
-        final HtmlPage page = loadPage(html);
+        final HtmlPage page = loadPageWithAlerts(html);
         assertNotNull(page.<HtmlElement>getHtmlElementById("b").getParentNode());
     }
 
