@@ -1935,8 +1935,6 @@
                 url="http://msdn.microsoft.com/en-us/library/ms533549.aspx"
                 descr="MSDN documentation"/>
         </property>
-        <property name="colSpan" readable="true" writable="true"/>
-        <property name="rowSpan" readable="true" writable="true"/>
         <property name="vAlign" notImplemented="true" readable="true" writable="true"/>
     </class>
 
