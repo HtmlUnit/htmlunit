@@ -134,6 +134,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     private final transient Object lock_ = new Object(); // used for synchronization
     private final Range selection_ = new SimpleRange(getDocumentElement());
     private final List<PostponedAction> afterLoadActions_ = new ArrayList<PostponedAction>();
+    private boolean cleaning_;
 
     /**
      * Creates an instance of HtmlPage.
@@ -209,8 +210,14 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      */
     @Override
     public void cleanUp() {
+        //To avoid endless recursion caused by window.close() in onUnload
+        if (cleaning_) {
+            return;
+        }
+        cleaning_ = true;
         executeEventHandlersIfNeeded(Event.TYPE_UNLOAD);
         deregisterFramesIfNeeded();
+        cleaning_ = false;
     }
 
     /**

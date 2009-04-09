@@ -23,6 +23,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
  * @version $Revision$
  * @author <a href="https://sourceforge.net/users/marlee/">Mark van Leeuwen</a>
  * @author Ahmed Ashour
+ * @author Sudhan Moghe
  */
 public class HTMLTableCellElement extends HTMLElement {
 
@@ -44,5 +45,39 @@ public class HTMLTableCellElement extends HTMLElement {
         final HtmlTableCell cell = (HtmlTableCell) getDomNodeOrDie();
         final HtmlTableRow row = cell.getEnclosingRow();
         return new Integer(row.getCells().indexOf(cell));
+    }
+
+    /**
+     * Returns the value of the colspan attribute.
+     * @return the colSpan of this Cell
+     */
+    public Integer jsxGet_colSpan() {
+        final HtmlTableCell cell = (HtmlTableCell) getDomNodeOrDie();
+        return cell.getColumnSpan();
+    }
+
+    /**
+     * Sets the value of the colspan attribute.
+     * @param span the new colSpan of this Cell
+     */
+    public void jsxSet_colSpan(final Integer span) {
+        getDomNodeOrDie().setAttribute("colspan", Integer.toString(span));
+    }
+
+    /**
+     * Returns the value of the rowspan attribute.
+     * @return the rowSpan of this Cell
+     */
+    public Integer jsxGet_rowSpan() {
+        final HtmlTableCell cell = (HtmlTableCell) getDomNodeOrDie();
+        return cell.getRowSpan();
+    }
+
+    /**
+     * Sets the value of the rowspan attribute.
+     * @param span the new rowSpan of this Cell
+     */
+    public void jsxSet_rowSpan(final Integer span) {
+        getDomNodeOrDie().setAttribute("rowspan", Integer.toString(span));
     }
 }

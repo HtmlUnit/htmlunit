@@ -18,7 +18,9 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -52,6 +54,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Sudhan Moghe
  */
 @RunWith(Parameterized.class)
 public class PropertiesTest extends WebTestCase {
@@ -301,10 +304,11 @@ public class PropertiesTest extends WebTestCase {
             new File(getArtifactsDirectory() + "/properties-" + browserVersion_.getNickname() + ".png"));
     }
 
-    private String getArtifactsDirectory() {
+    private String getArtifactsDirectory() throws UnsupportedEncodingException {
         final Class< ? > clazz = PropertiesTest.class;
         final String name = clazz.getPackage().getName().replace('.', '/');
-        final String dirName = clazz.getClassLoader().getResource(name).getPath() + "/artifacts/";
+        final String dirName =
+            URLDecoder.decode(clazz.getClassLoader().getResource(name).getPath(), "UTF-8") + "/artifacts/";
         final File dir = new File(dirName);
         if (!dir.exists()) {
             if (!dir.mkdir()) {

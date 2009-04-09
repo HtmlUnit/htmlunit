@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Sudhan Moghe
  */
 @RunWith(BrowserRunner.class)
 public class HtmlTextInputTest extends WebTestCase {
@@ -269,6 +270,11 @@ public class HtmlTextInputTest extends WebTestCase {
 
         input.type("\b\b\b\b");
         assertEquals("Bye World", input.getValueAttribute());
+
+        input.setSelectionStart(0);
+        input.setSelectionEnd(3);
+        input.type("Hello");
+        assertEquals("Hello World", input.getValueAttribute());
     }
 
     /**

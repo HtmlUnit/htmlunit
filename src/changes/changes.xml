@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, MooTools support, support all HTML elements and various JavaScript properties">
+            <action type="add" dev="sudhan_moghe">
+                JavaScript: add support for reading and writing td.colSpan, td.rowSpan, th.colSpan and th.rowSpan properties.
+            </action>
             <action type="fix" dev="mguillem" issue="2192395">
                 Remove leading "../" (if any) when resolving URLs.
             </action>

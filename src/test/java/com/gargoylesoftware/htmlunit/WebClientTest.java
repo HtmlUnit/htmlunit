@@ -1838,18 +1838,17 @@ public class WebClientTest extends WebServerTestCase {
     }
 
     /**
-     * Regression test for currentWindow_
      * Previous window should become current window after current window is closed in onLoad event.
      * @throws Exception if an error occurs
      */
     @Test
-    public void testCurrentWindowAfterWindowCloseInOnload() throws Exception {
+    public void testWindowTracking_SpecialCase1() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
         final String firstContent = "<html><head><title>First</title></head>\n"
             + "<body><form name='form1'>\n"
-            + "<button id='clickme' onClick='window.open(\"" + URL_SECOND + "\");'>Click me</a>\n"
+            + "<button id='clickme' onClick='window.open(\"" + URL_SECOND + "\");'>Click me</button>\n"
             + "</form></body></html>";
         webConnection.setResponse(URL_FIRST, firstContent);
 
@@ -1861,15 +1860,100 @@ public class WebClientTest extends WebServerTestCase {
             + "    }\n"
             + "</script></body></html>";
         webConnection.setResponse(URL_SECOND, secondContent);
-
         webClient.setWebConnection(webConnection);
+        final HtmlPage firstPage = webClient.getPage(URL_FIRST);
+        final HtmlButton buttonA = firstPage.getHtmlElementById("clickme");
+        buttonA.click();
+        assertEquals("First", ((HtmlPage) webClient.getCurrentWindow().getEnclosedPage()).getTitleText());
+    }
 
+    /**
+     * Previous window should become current window after current window is closed while loading the page.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testWindowTracking_SpecialCase2() throws Exception {
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+
+        final String firstContent = "<html><head><title>First</title></head>\n"
+            + "<body><form name='form1'>\n"
+            + "<button id='clickme' onClick='window.open(\"" + URL_SECOND + "\");'>Click me</button>\n"
+            + "</form></body></html>";
+        webConnection.setResponse(URL_FIRST, firstContent);
+
+        final String secondContent = "<html><head><title>Third</title>"
+            + "<script type=\"text/javascript\">\n"
+            + "     window.close();\n"
+            + "</script></head></html>";
+
+        webConnection.setResponse(URL_SECOND, secondContent);
+        webClient.setWebConnection(webConnection);
+        final HtmlPage firstPage = webClient.getPage(URL_FIRST);
+        final HtmlButton buttonA = firstPage.getHtmlElementById("clickme");
+        buttonA.click();
+        assertEquals("First", ((HtmlPage) webClient.getCurrentWindow().getEnclosedPage()).getTitleText());
+    }
+
+    /**
+     * Previous window should become current window after current window is closed.
+     * @param expectedAlerts
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testWindowTracking_SpecialCase3() throws Exception {
+        testWindowTracking_SpecialCase3(BrowserVersion.INTERNET_EXPLORER_6, new String[]{"Third page loaded"});
+        testWindowTracking_SpecialCase3(BrowserVersion.FIREFOX_2, new String[]{});
+    }
+
+    private void testWindowTracking_SpecialCase3(final BrowserVersion browserVersion,
+            final String[] expectedAlerts) throws Exception {
+        final WebClient webClient = new WebClient(browserVersion);
+        final MockWebConnection webConnection = new MockWebConnection();
+        final List<String> collectedAlerts = new ArrayList<String>();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final String firstContent = "<html><head><title>First</title></head>\n"
+            + "<body>\n"
+            + "<button id='clickme' onClick='window.open(\"" + URL_SECOND + "\");'>Click me</button>\n"
+            + "</body></html>";
+        webConnection.setResponse(URL_FIRST, firstContent);
+
+        final String secondContent = "<html><head><title>Second</title></head>\n"
+            + "<body onUnload='doTest()'>"
+            + "<form name='form1' action='" + URL_THIRD + "'>\n"
+            + "<button id='clickme' type='button' onclick='postBack();'>Submit</button></form>\n"
+            + "<script>\n"
+            + "    function doTest() {\n"
+            + "         window.close();\n"
+            + "    }\n"
+            + "    function postBack() {\n"
+            + "         var frm  = document.forms[0];\n"
+            + "         frm.submit();\n"
+            + "    }\n"
+            + "</script></body></html>";
+
+        webConnection.setResponse(URL_SECOND, secondContent);
+
+        final String thirdContent = "<html><head><title>Third</title>"
+            + "<script type=\"text/javascript\">\n"
+            + "     alert('Third page loaded');\n"
+            + "     window.close();\n"
+            + "</script></head></html>";
+
+        webConnection.setResponse(URL_THIRD, thirdContent);
+        webConnection.setDefaultResponse(thirdContent);
+        webClient.setWebConnection(webConnection);
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
 
         final HtmlButton buttonA = firstPage.getHtmlElementById("clickme");
         buttonA.click();
+        final HtmlPage secondPage = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
+        assertEquals("Second", secondPage.getTitleText());
 
+        final HtmlButton buttonB = secondPage.getHtmlElementById("clickme");
+        buttonB.click();
         assertEquals("First", ((HtmlPage) webClient.getCurrentWindow().getEnclosedPage()).getTitleText());
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**

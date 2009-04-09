@@ -437,16 +437,19 @@ public class WebClient implements Serializable {
             // Remove the old windows before create new ones.
             oldPage.cleanUp();
         }
+        Page newPage = null;
+        if (windows_.contains(webWindow) || getBrowserVersion().isIE()) {
+            newPage = pageCreator_.createPage(webResponse, webWindow);
 
-        final Page newPage = pageCreator_.createPage(webResponse, webWindow);
+            if (windows_.contains(webWindow)) {
+                fireWindowContentChanged(new WebWindowEvent(webWindow, WebWindowEvent.CHANGE, oldPage, newPage));
 
-        fireWindowContentChanged(new WebWindowEvent(webWindow, WebWindowEvent.CHANGE, oldPage, newPage));
-
-        // The page being loaded may already have been replaced by another page via JavaScript code.
-        if (webWindow.getEnclosedPage() == newPage) {
-            newPage.initialize();
+                // The page being loaded may already have been replaced by another page via JavaScript code.
+                if (webWindow.getEnclosedPage() == newPage) {
+                    newPage.initialize();
+                }
+            }
         }
-
         return newPage;
     }
 
