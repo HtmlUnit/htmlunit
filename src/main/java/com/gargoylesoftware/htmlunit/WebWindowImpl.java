@@ -129,9 +129,20 @@ public abstract class WebWindowImpl implements WebWindow {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
      *
-     * Adds a child to this window, for shutdown purposes.
+     * <p>Sets the JavaScript job manager for this window.</p>
+     *
+     * @param jobManager the JavaScript job manager to use
+     */
+    public void setJobManager(final JavaScriptJobManager jobManager) {
+        jobManager_ = jobManager;
+    }
+
+    /**
+     * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
+     *
+     * <p>Adds a child to this window, for shutdown purposes.</p>
      *
      * @param child the child window to associate with this window
      */
