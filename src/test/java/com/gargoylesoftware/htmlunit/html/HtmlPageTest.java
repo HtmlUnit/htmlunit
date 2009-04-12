@@ -1158,6 +1158,32 @@ public class HtmlPageTest extends WebServerTestCase {
      * @exception Exception if the test fails
      */
     @Test
+    public void testGetElementByName() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='a' name='a'>foo</div>\n"
+            + "<div id='b1' name='b'>bar</div>\n"
+            + "<div id='b2' name='b'>baz</div></body></html>";
+        final HtmlPage page = loadPage(html);
+        assertEquals(page.getElementById("a"), page.getElementByName("a"));
+        assertEquals(page.getElementById("b1"), page.getElementByName("b"));
+
+        page.getElementByName("b").remove();
+        assertEquals(page.getElementById("b2"), page.getElementByName("b"));
+
+        boolean thrown = false;
+        try {
+            page.getElementByName("c");
+        }
+        catch (final ElementNotFoundException e) {
+            thrown = true;
+        }
+        assertTrue(thrown);
+    }
+
+    /**
+     * @exception Exception if the test fails
+     */
+    @Test
     public void testGetHtmlElementsByIdAndOrName() throws Exception {
         final String html = "<html><body><div name='a' id='a'>foo</div><div name='b' id='c'>bar</div>"
                             + "<div name='b' id='d'>bar</div></body></html>";

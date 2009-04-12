@@ -1609,10 +1609,10 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * has this ID (not allowed by the HTML spec), then this method returns the
      * first one.
      *
-     * @param id the ID value to search by
-     * @param <E> the sub-element type
+     * @param id the ID value to search for
+     * @param <E> the element type
      * @return the HTML element with the specified ID
-     * @throws ElementNotFoundException if no element was found that matches the id
+     * @throws ElementNotFoundException if no element was found matching the specified ID
      */
     @SuppressWarnings("unchecked")
     public <E extends HtmlElement> E getHtmlElementById(final String id) throws ElementNotFoundException {
@@ -1624,11 +1624,29 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     }
 
     /**
+     * Returns the HTML element with the specified name. If more than one element
+     * has this name, then this method returns the first one.
+     *
+     * @param name the name value to search for
+     * @param <E> the element type
+     * @return the HTML element with the specified name
+     * @throws ElementNotFoundException if no element was found matching the specified name
+     */
+    @SuppressWarnings("unchecked")
+    public <E extends HtmlElement> E getElementByName(final String name) throws ElementNotFoundException {
+        final List<HtmlElement> elements = nameMap_.get(name);
+        if (elements != null) {
+            return (E) elements.get(0);
+        }
+        throw new ElementNotFoundException("*", "name", name);
+    }
+
+    /**
      * Returns the HTML elements with the specified name attribute. If there are no elements
      * with the specified name, this method returns an empty list. Please note that
      * the lists returned by this method are immutable.
      *
-     * @param name the name value to search by
+     * @param name the name value to search for
      * @return the HTML elements with the specified name attribute
      */
     public List<HtmlElement> getElementsByName(final String name) {
