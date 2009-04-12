@@ -1167,8 +1167,7 @@ public class HtmlPageTest extends WebServerTestCase {
         assertEquals(page.getElementById("a"), page.getElementByName("a"));
         assertEquals(page.getElementById("b1"), page.getElementByName("b"));
 
-        final HtmlElement b1 = page.getElementByName("b");
-        b1.remove();
+        page.<HtmlElement>getElementByName("b").remove();
         assertEquals(page.getElementById("b2"), page.getElementByName("b"));
 
         boolean thrown = false;
