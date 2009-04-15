@@ -107,7 +107,7 @@ public class ScriptableWrapper extends ScriptableObject {
 
     /**
      * {@inheritDoc}
-     * @see net.sourceforge.htmlunit.corejs.javascript.ScriptableObject#get(java.lang.String, net.sourceforge.htmlunit.corejs.javascript.Scriptable)
+     * @see ScriptableObject#get(java.lang.String,net.sourceforge.htmlunit.corejs.javascript.Scriptable)
      */
     @Override
     public Object get(final String name, final Scriptable start) {
@@ -139,7 +139,7 @@ public class ScriptableWrapper extends ScriptableObject {
 
     /**
      * {@inheritDoc}
-     * @see net.sourceforge.htmlunit.corejs.javascript.ScriptableObject#has(java.lang.String, net.sourceforge.htmlunit.corejs.javascript.Scriptable)
+     * @see ScriptableObject#has(java.lang.String, net.sourceforge.htmlunit.corejs.javascript.Scriptable)
      */
     @Override
     public boolean has(final String name, final Scriptable start) {
@@ -173,7 +173,7 @@ public class ScriptableWrapper extends ScriptableObject {
 
     /**
      * {@inheritDoc}
-     * @see net.sourceforge.htmlunit.corejs.javascript.ScriptableObject#get(int, net.sourceforge.htmlunit.corejs.javascript.Scriptable)
+     * @see ScriptableObject#get(int, net.sourceforge.htmlunit.corejs.javascript.Scriptable)
      */
     @Override
     public Object get(final int index, final Scriptable start) {
@@ -188,7 +188,7 @@ public class ScriptableWrapper extends ScriptableObject {
 
     /**
      * {@inheritDoc}
-     * @see net.sourceforge.htmlunit.corejs.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
+     * @see ScriptableObject#getDefaultValue(java.lang.Class)
      */
     @Override
     public Object getDefaultValue(final Class< ? > hint) {
@@ -208,7 +208,7 @@ public class ScriptableWrapper extends ScriptableObject {
 
     /**
      * {@inheritDoc}
-     * @see net.sourceforge.htmlunit.corejs.javascript.ScriptableObject#getClassName()
+     * @see ScriptableObject#getClassName()
      */
     @Override
     public String getClassName() {

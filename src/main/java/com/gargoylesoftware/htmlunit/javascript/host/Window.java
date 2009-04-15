@@ -28,6 +28,7 @@ import org.apache.commons.collections.Transformer;
 import org.apache.commons.lang.StringUtils;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
@@ -1027,7 +1028,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     public Object custom_eval(final String scriptCode) {
         final Context context = Context.getCurrentContext();
-        final net.sourceforge.htmlunit.corejs.javascript.Script script = context.compileString(scriptCode, "eval body", 0, null);
+        final Script script = context.compileString(scriptCode, "eval body", 0, null);
         return script.exec(context, this);
     }
 
