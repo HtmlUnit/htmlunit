@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import org.mozilla.javascript.Undefined;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * This object contains the result of executing a chunk of script code.

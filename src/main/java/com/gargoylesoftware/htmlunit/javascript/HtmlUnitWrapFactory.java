@@ -16,9 +16,9 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import java.io.Serializable;
 
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.WrapFactory;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.WrapFactory;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 

@@ -16,11 +16,11 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.mozilla.javascript.BaseFunction;
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Function;
-import org.mozilla.javascript.JavaScriptException;
-import org.mozilla.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -85,7 +85,7 @@ public class EventHandler extends BaseFunction {
     }
 
     /**
-     * @see org.mozilla.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
+     * @see net.sourceforge.htmlunit.corejs.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
      * @param typeHint the type hint
      * @return the js code of the function declaration
      */

@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import org.mozilla.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 

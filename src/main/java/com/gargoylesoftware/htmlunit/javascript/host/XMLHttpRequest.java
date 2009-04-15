@@ -23,11 +23,11 @@ import java.util.List;
 
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.lang.ArrayUtils;
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.ContextAction;
-import org.mozilla.javascript.ContextFactory;
-import org.mozilla.javascript.Function;
-import org.mozilla.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
+import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.AjaxController;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;

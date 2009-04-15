@@ -19,7 +19,7 @@ import static com.gargoylesoftware.htmlunit.html.HtmlImage.TAG_NAME;
 import java.net.MalformedURLException;
 
 import org.apache.xalan.xsltc.runtime.AttributeList;
-import org.mozilla.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;

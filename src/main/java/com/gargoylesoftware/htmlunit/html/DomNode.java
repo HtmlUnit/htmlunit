@@ -24,7 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import org.mozilla.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;

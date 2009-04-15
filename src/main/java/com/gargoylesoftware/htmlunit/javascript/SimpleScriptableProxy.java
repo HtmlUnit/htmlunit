@@ -16,10 +16,10 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import java.lang.reflect.Method;
 
-import org.mozilla.javascript.Callable;
-import org.mozilla.javascript.ScriptRuntime;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Callable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * Proxy for an other {@link SimpleScriptable}.

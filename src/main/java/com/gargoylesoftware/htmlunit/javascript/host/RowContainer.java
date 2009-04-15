@@ -14,8 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Undefined;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;

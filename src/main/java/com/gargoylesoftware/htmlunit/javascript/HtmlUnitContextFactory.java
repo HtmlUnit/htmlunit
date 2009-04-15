@@ -17,16 +17,16 @@ package com.gargoylesoftware.htmlunit.javascript;
 import java.io.Serializable;
 
 import org.apache.commons.logging.Log;
-import org.mozilla.javascript.Callable;
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.ContextFactory;
-import org.mozilla.javascript.ErrorReporter;
-import org.mozilla.javascript.Evaluator;
-import org.mozilla.javascript.Script;
-import org.mozilla.javascript.ScriptRuntime;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.WrapFactory;
-import org.mozilla.javascript.debug.Debugger;
+import net.sourceforge.htmlunit.corejs.javascript.Callable;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
+import net.sourceforge.htmlunit.corejs.javascript.ErrorReporter;
+import net.sourceforge.htmlunit.corejs.javascript.Evaluator;
+import net.sourceforge.htmlunit.corejs.javascript.Script;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.WrapFactory;
+import net.sourceforge.htmlunit.corejs.javascript.debug.Debugger;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ScriptPreProcessor;

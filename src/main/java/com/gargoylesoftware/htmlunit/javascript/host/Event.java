@@ -18,8 +18,8 @@ import static java.lang.Boolean.FALSE;
 
 import java.util.LinkedList;
 
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomNode;

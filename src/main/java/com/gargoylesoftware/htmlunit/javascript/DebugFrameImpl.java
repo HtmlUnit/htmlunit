@@ -17,16 +17,16 @@ package com.gargoylesoftware.htmlunit.javascript;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.mozilla.javascript.Callable;
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Function;
-import org.mozilla.javascript.IdFunctionObject;
-import org.mozilla.javascript.JavaScriptException;
-import org.mozilla.javascript.NativeFunction;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.ScriptableObject;
-import org.mozilla.javascript.debug.DebugFrame;
-import org.mozilla.javascript.debug.DebuggableScript;
+import net.sourceforge.htmlunit.corejs.javascript.Callable;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.IdFunctionObject;
+import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
+import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.debug.DebugFrame;
+import net.sourceforge.htmlunit.corejs.javascript.debug.DebuggableScript;
 
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 

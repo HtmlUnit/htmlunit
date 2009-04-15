@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import org.mozilla.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 import org.w3c.dom.ranges.Range;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;

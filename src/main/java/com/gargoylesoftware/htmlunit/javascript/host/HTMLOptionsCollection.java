@@ -14,9 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.DomText;
@@ -223,7 +223,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * a distinction between a caller of the form add(someObject) and add (someObject, 0).
      * Since the behavior of these two call forms is different, the newIndex parameter is
      * specified as an Object. If the newIndex parameter is not specified by the actual
-     * JavaScript code being run, then newIndex is of type org.mozilla.javascript.Undefined.
+     * JavaScript code being run, then newIndex is of type net.sourceforge.htmlunit.corejs.javascript.Undefined.
      * If the newIndex parameter is specified, then it should be of type java.lang.Number and
      * can be converted into an integer value.</p>
      *

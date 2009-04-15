@@ -14,8 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.background;
 
-import org.mozilla.javascript.Function;
-import org.mozilla.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;

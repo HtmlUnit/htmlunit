@@ -17,8 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.io.IOException;
 import java.io.StringReader;
 
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import org.w3c.css.sac.InputSource;
 import org.w3c.dom.css.CSSStyleSheet;
 

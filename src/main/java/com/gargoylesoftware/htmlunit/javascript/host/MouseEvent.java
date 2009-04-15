@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.LinkedList;
 
-import org.mozilla.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 

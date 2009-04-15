@@ -17,8 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript;
 import java.io.Serializable;
 
 import org.apache.commons.logging.Log;
-import org.mozilla.javascript.ErrorReporter;
-import org.mozilla.javascript.EvaluatorException;
+import net.sourceforge.htmlunit.corejs.javascript.ErrorReporter;
+import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
 
 import com.gargoylesoftware.htmlunit.WebAssert;
 

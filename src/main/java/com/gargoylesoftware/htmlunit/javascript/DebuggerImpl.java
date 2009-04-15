@@ -14,10 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.debug.DebugFrame;
-import org.mozilla.javascript.debug.DebuggableScript;
-import org.mozilla.javascript.debug.Debugger;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.debug.DebugFrame;
+import net.sourceforge.htmlunit.corejs.javascript.debug.DebuggableScript;
+import net.sourceforge.htmlunit.corejs.javascript.debug.Debugger;
 
 /**
  * <p>

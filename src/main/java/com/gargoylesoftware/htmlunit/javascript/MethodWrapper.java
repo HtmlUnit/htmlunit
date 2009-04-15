@@ -17,11 +17,11 @@ package com.gargoylesoftware.htmlunit.javascript;
 import java.lang.reflect.Method;
 
 import org.apache.commons.lang.ArrayUtils;
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Function;
-import org.mozilla.javascript.FunctionObject;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * Wraps a java method to make it available as a JavaScript function
@@ -67,7 +67,7 @@ public class MethodWrapper extends ScriptableObject implements Function {
     }
 
     /**
-     * @see org.mozilla.javascript.ScriptableObject#getClassName()
+     * @see net.sourceforge.htmlunit.corejs.javascript.ScriptableObject#getClassName()
      * @return a name based on the method name
      */
     @Override
@@ -76,7 +76,7 @@ public class MethodWrapper extends ScriptableObject implements Function {
     }
 
     /**
-     * @see org.mozilla.javascript.Function#call(Context, Scriptable, Scriptable, Object[])
+     * @see net.sourceforge.htmlunit.corejs.javascript.Function#call(Context, Scriptable, Scriptable, Object[])
      * {@inheritDoc}
      */
     public Object call(final Context context, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
@@ -134,7 +134,7 @@ public class MethodWrapper extends ScriptableObject implements Function {
     }
 
     /**
-     * @see org.mozilla.javascript.Function#construct(Context, Scriptable, Object[])
+     * @see net.sourceforge.htmlunit.corejs.javascript.Function#construct(Context, Scriptable, Object[])
      * {@inheritDoc}
      */
     public Scriptable construct(final Context context, final Scriptable scope, final Object[] args) {

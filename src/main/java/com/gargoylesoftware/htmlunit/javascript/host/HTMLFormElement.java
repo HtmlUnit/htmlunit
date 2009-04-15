@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.io.IOException;
 import java.util.List;
 
-import org.mozilla.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;

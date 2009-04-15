@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections.ListUtils;
-import org.mozilla.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;

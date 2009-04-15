@@ -26,11 +26,11 @@ import java.util.WeakHashMap;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.lang.StringUtils;
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Function;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.ScriptableObject;
-import org.mozilla.javascript.Undefined;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.ConfirmHandler;
@@ -1027,7 +1027,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     public Object custom_eval(final String scriptCode) {
         final Context context = Context.getCurrentContext();
-        final org.mozilla.javascript.Script script = context.compileString(scriptCode, "eval body", 0, null);
+        final net.sourceforge.htmlunit.corejs.javascript.Script script = context.compileString(scriptCode, "eval body", 0, null);
         return script.exec(context, this);
     }
 

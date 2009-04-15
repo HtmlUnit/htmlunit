@@ -6,6 +6,10 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, MooTools support, support all HTML elements and various JavaScript properties">
+            <action type="update" dev="mguillem">
+                HtmlUnit-core-js now changes package names from org.mozilla.* to net.sourceforge.htmlunit.corejs.* to allow project
+                to use "original" Rhino together with HtmlUnit.
+            </action>
             <action type="add" dev="sdanig">
                 Add HtmlPage.getElementByName(String) method.
             </action>

@@ -27,7 +27,7 @@ import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.mozilla.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;

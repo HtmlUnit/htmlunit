@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
-import org.mozilla.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;

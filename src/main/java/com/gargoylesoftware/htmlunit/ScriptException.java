@@ -22,10 +22,10 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.StringTokenizer;
 
-import org.mozilla.javascript.EcmaError;
-import org.mozilla.javascript.JavaScriptException;
-import org.mozilla.javascript.RhinoException;
-import org.mozilla.javascript.WrappedException;
+import net.sourceforge.htmlunit.corejs.javascript.EcmaError;
+import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
+import net.sourceforge.htmlunit.corejs.javascript.RhinoException;
+import net.sourceforge.htmlunit.corejs.javascript.WrappedException;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 

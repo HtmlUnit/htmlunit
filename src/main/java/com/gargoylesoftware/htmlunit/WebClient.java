@@ -240,7 +240,7 @@ public class WebClient implements Serializable {
      */
     private static JavaScriptEngine createJavaScriptEngineIfPossible(final WebClient webClient) {
         try {
-            Class.forName("org.mozilla.javascript.Context");
+            Class.forName("net.sourceforge.htmlunit.corejs.javascript.Context");
             return new JavaScriptEngine(webClient);
         }
         catch (final ClassNotFoundException e) {

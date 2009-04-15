@@ -213,7 +213,7 @@ public class Window2Test extends WebTestCase {
     }
 
     /**
-     * In {@link org.mozilla.javascript.ScriptRuntime}, Rhino defines a bunch of properties
+     * In {@link net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime}, Rhino defines a bunch of properties
      * in the top scope (see lazilyNames). Not all make sense for HtmlUnit.
      * @throws Exception if the test fails
      */

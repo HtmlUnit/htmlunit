@@ -24,12 +24,12 @@ import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.RegExpProxy;
-import org.mozilla.javascript.ScriptRuntime;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.regexp.NativeRegExp;
-import org.mozilla.javascript.regexp.RegExpImpl;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.RegExpProxy;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.regexp.NativeRegExp;
+import net.sourceforge.htmlunit.corejs.javascript.regexp.RegExpImpl;
 
 /**
  * Begins customization of JavaScript RegExp base on JDK regular expression support.
@@ -178,7 +178,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             final Object[] args, final int actionType) {
 
         // take care to set the context's RegExp proxy to the original one as this is checked
-        // (cf org.mozilla.javascript.regexp.RegExpImp:334)
+        // (cf net.sourceforge.htmlunit.corejs.javascript.regexp.RegExpImp:334)
         try {
             ScriptRuntime.setRegExpProxy(cx, wrapped_);
             return wrapped_.action(cx, scope, thisObj, args, actionType);

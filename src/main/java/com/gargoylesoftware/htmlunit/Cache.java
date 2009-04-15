@@ -24,7 +24,7 @@ import org.apache.commons.httpclient.util.DateParseException;
 import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.lang.time.DateUtils;
-import org.mozilla.javascript.Script;
+import net.sourceforge.htmlunit.corejs.javascript.Script;
 import org.w3c.dom.css.CSSStyleSheet;
 
 /**

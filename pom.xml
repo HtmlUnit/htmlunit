@@ -27,9 +27,7 @@
                     <target>1.5</target>
                     <testExcludes>
                         <exclude>**/CodeChecker.java</exclude>
-                        <!--
                         <exclude>**/*WebDriver*.java</exclude>
-                        -->
                     </testExcludes>
                 </configuration>
             </plugin>
@@ -130,6 +128,7 @@
                         <configuration>
                             <excludes>
                                 <exclude>**/WebDriverOldTestsTest.java</exclude>
+                                <exclude>**/*WebDriver*.java</exclude>
                                 <exclude>**/libraries/*.java</exclude>
                             </excludes>
                             <argLine>-Xmx512m -Xms128m</argLine>
@@ -168,6 +167,7 @@
                         <configuration>
                             <excludes>
                                 <exclude>**/WebDriverOldTestsTest.java</exclude>
+                                <exclude>**/*WebDriver*.java</exclude>
                             </excludes>
                             <argLine>-Xmx512m -Xms128m</argLine>
                         </configuration>

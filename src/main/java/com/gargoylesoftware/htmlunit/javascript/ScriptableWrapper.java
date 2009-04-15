@@ -20,10 +20,10 @@ import java.util.Map;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.ClassUtils;
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.FunctionObject;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 
@@ -107,7 +107,7 @@ public class ScriptableWrapper extends ScriptableObject {
 
     /**
      * {@inheritDoc}
-     * @see org.mozilla.javascript.ScriptableObject#get(java.lang.String, org.mozilla.javascript.Scriptable)
+     * @see net.sourceforge.htmlunit.corejs.javascript.ScriptableObject#get(java.lang.String, net.sourceforge.htmlunit.corejs.javascript.Scriptable)
      */
     @Override
     public Object get(final String name, final Scriptable start) {
@@ -139,7 +139,7 @@ public class ScriptableWrapper extends ScriptableObject {
 
     /**
      * {@inheritDoc}
-     * @see org.mozilla.javascript.ScriptableObject#has(java.lang.String, org.mozilla.javascript.Scriptable)
+     * @see net.sourceforge.htmlunit.corejs.javascript.ScriptableObject#has(java.lang.String, net.sourceforge.htmlunit.corejs.javascript.Scriptable)
      */
     @Override
     public boolean has(final String name, final Scriptable start) {
@@ -173,7 +173,7 @@ public class ScriptableWrapper extends ScriptableObject {
 
     /**
      * {@inheritDoc}
-     * @see org.mozilla.javascript.ScriptableObject#get(int, org.mozilla.javascript.Scriptable)
+     * @see net.sourceforge.htmlunit.corejs.javascript.ScriptableObject#get(int, net.sourceforge.htmlunit.corejs.javascript.Scriptable)
      */
     @Override
     public Object get(final int index, final Scriptable start) {
@@ -188,7 +188,7 @@ public class ScriptableWrapper extends ScriptableObject {
 
     /**
      * {@inheritDoc}
-     * @see org.mozilla.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
+     * @see net.sourceforge.htmlunit.corejs.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
      */
     @Override
     public Object getDefaultValue(final Class< ? > hint) {
@@ -208,7 +208,7 @@ public class ScriptableWrapper extends ScriptableObject {
 
     /**
      * {@inheritDoc}
-     * @see org.mozilla.javascript.ScriptableObject#getClassName()
+     * @see net.sourceforge.htmlunit.corejs.javascript.ScriptableObject#getClassName()
      */
     @Override
     public String getClassName() {
