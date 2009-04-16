@@ -321,7 +321,7 @@ class HtmlSerializer {
     }
 
     private boolean isVisible(final DomNode node) {
-        return !ignoreMaskedElements_ || node.isVisible();
+        return !ignoreMaskedElements_ || node.isDisplayed();
     }
 
     /**

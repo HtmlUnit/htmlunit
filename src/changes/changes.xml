@@ -40,7 +40,7 @@
                 which are internal APIs).
             </action>
             <action type="add" dev="sdanig">
-                Add DomNode.isVisible() to the public API.
+                Add DomNode.isDisplayed() to the public API.
             </action>
             <action type="add" dev="sdanig">
                 JavaScript: add support for reading and writing img.align, p.align, table.align, thead.align, tbody.align, tfoot.align,

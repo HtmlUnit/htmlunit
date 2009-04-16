@@ -597,13 +597,14 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Returns <tt>true</tt> if this node is visible to the user (ignoring screen size and scrolling limitations).
+     * Returns <tt>true</tt> if this node is displayed and can be visible to the user
+     * (ignoring screen size, scrolling limitations, color, font-size, or overlapping nodes).
      * @see <a href="http://www.w3.org/TR/CSS2/visufx.html#visibility">CSS2 Visibility</a>
      * @see <a href="http://www.w3.org/TR/CSS2/visuren.html#propdef-display">CSS2 Display</a>
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms531180.aspx">MSDN Documentation</a>
      * @return true if the node is visible to the user
      */
-    public boolean isVisible() {
+    public boolean isDisplayed() {
         final Page page = getPage();
         if (page instanceof HtmlPage) {
             // display: iterate top to bottom, because if a parent is display:none,
@@ -694,7 +695,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         for (final DomNode node : getChildren()) {
             if (node instanceof DomText) {
-                if (node.isVisible()) {
+                if (node.isDisplayed()) {
                     buffer.append(node.asTextInternal());
                 }
             }
