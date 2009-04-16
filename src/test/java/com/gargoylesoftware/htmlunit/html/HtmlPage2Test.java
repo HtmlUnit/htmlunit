@@ -89,7 +89,7 @@ public class HtmlPage2Test extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "25", FF = "error")
+    @Alerts(IE = "error", FF = "25")
     public void loadExternalJavaScript() throws Exception {
         final String html =
             "<html><head>\n"

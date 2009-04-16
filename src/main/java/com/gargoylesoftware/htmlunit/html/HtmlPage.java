@@ -634,9 +634,14 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         if (baseElements.isEmpty()) {
             baseUrl = getWebResponse().getRequestUrl();
             final WebWindow window = getEnclosingWindow();
-            if (window != window.getTopWindow() && (!getWebClient().getBrowserVersion().isFirefox()
-                    || !baseUrl.getProtocol().equals("javascript"))) {
-                baseUrl = ((HtmlPage) window.getTopWindow().getEnclosedPage()).getWebResponse().getRequestUrl();
+            final boolean frame = (window != window.getTopWindow());
+            if (frame) {
+                final boolean frameSrcIsNotSet = (baseUrl == WebClient.URL_ABOUT_BLANK);
+                final boolean frameSrcIsJs = "javascript".equals(baseUrl.getProtocol());
+                final boolean ff = getWebClient().getBrowserVersion().isFirefox();
+                if (frameSrcIsNotSet || (frameSrcIsJs && ff)) {
+                    baseUrl = ((HtmlPage) window.getTopWindow().getEnclosedPage()).getWebResponse().getRequestUrl();
+                }
             }
         }
         else {
