@@ -313,4 +313,28 @@ public class HTMLTextAreaElementTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "true", "false" })
+    public void readOnly() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var t = document.getElementById('textArea');\n"
+            + "    alert(t.readOnly);\n"
+            + "    t.readOnly = false;\n"
+            + "    alert(t.readOnly);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<form id='form1'>\n"
+            + "<textarea id='textArea' readonly>\n foo \n bar </textarea>\n"
+            + "</form></body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }

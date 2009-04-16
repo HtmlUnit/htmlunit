@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
-import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 /**
@@ -150,7 +149,7 @@ public class HTMLTextAreaElement extends FormField {
      * @return the readOnly attribute
      */
     public boolean jsxGet_readOnly() {
-        return ((HtmlInput) getDomNodeOrDie()).isReadOnly();
+        return ((HtmlTextArea) getDomNodeOrDie()).isReadOnly();
     }
 
     /**
@@ -158,7 +157,7 @@ public class HTMLTextAreaElement extends FormField {
      * @param readOnly the new value
      */
     public void jsxSet_readOnly(final boolean readOnly) {
-        ((HtmlInput) getDomNodeOrDie()).setReadOnly(readOnly);
+        ((HtmlTextArea) getDomNodeOrDie()).setReadOnly(readOnly);
     }
 
 }
