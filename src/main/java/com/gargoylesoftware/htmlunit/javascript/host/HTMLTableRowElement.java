@@ -99,4 +99,33 @@ public class HTMLTableRowElement extends HTMLElement {
         }
         throw Context.reportRuntimeError("Index or size is negative or greater than the allowed amount");
     }
+
+    /**
+     * Deletes the cell at the specified index in the element's cells collection. If the index
+     * is -1 (or while simulating IE, when there is no index specified), then the last cell is deleted.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536406.aspx">MSDN Documentation</a>
+     * @see <a href="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-11738598">W3C DOM Level2</a>
+     * @param index specifies the cell to delete.
+     */
+    public void jsxFunction_deleteCell(final Object index) {
+        int position = -1;
+        if (index != Undefined.instance) {
+            position = (int) Context.toNumber(index);
+        }
+        else if (getBrowserVersion().isFirefox()) {
+            throw Context.reportRuntimeError("No enough arguments");
+        }
+
+        final HtmlTableRow htmlRow = (HtmlTableRow) getDomNodeOrDie();
+
+        if (position == -1) {
+            position = htmlRow.getCells().size() - 1;
+        }
+        final boolean indexValid = (position >= -1 && position <= htmlRow.getCells().size());
+        if (!indexValid) {
+            throw Context.reportRuntimeError("Index or size is negative or greater than the allowed amount");
+        }
+
+        htmlRow.getCell(position).remove();
+    }
 }

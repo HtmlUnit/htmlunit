@@ -2023,6 +2023,14 @@
                 descr="MSDN documentation"/>
         </property>
         <property name="vAlign" notImplemented="true" readable="true" writable="true"/>
+        <function name="deleteCell">
+            <doclink
+                url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-11738598"
+                descr="W3c DOM Level 2"/>
+            <doclink
+                url="http://msdn.microsoft.com/en-us/library/ms536406.aspx"
+                descr="MSDN documentation"/>
+        </function>
         <function name="insertCell">
             <doclink
                 url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-68927016"
