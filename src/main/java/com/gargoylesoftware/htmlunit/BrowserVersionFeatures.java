@@ -45,6 +45,11 @@ public enum BrowserVersionFeatures {
     IGNORE_CONTENTS_OF_INNER_HEAD,
 
     /**
+     * Indicates that the URL of parent window is used to resolve URLs in frames with javascript src.
+     **/
+    JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW,
+
+    /**
      * Indicates if href property for a &lt;link rel="stylesheet" type="text/css" href="..." /&gt;
      * is the fully qualified url.
      */

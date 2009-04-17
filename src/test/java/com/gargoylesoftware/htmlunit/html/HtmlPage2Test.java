@@ -86,10 +86,13 @@ public class HtmlPage2Test extends WebServerTestCase {
     }
 
     /**
+     * Different versions of IE behave differently here.
+     * Distinction is made with
+     * {@link com.gargoylesoftware.htmlunit.BrowserVersionFeatures#JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW}.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "error", FF = "25")
+    @Alerts(FF = "25", IE6 = "25", IE7 = "error")
     public void loadExternalJavaScript() throws Exception {
         final String html =
             "<html><head>\n"
