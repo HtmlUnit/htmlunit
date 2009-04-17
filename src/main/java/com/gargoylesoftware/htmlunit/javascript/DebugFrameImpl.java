@@ -25,20 +25,19 @@ import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
 import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-import net.sourceforge.htmlunit.corejs.javascript.debug.DebugFrame;
 import net.sourceforge.htmlunit.corejs.javascript.debug.DebuggableScript;
 
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
 /**
  * <p>
- * HtmlUnit's implementation of the {@link DebugFrame} interface, which logs stack entries as well
- * as exceptions. All logging is done at the <tt>TRACE</tt> level. This class does a fairly good
- * job of guessing names for anonymous functions when they are referenced by name from an existing
- * object. See <a href="http://www.mozilla.org/rhino/rhino15R4-debugger.html">the Rhino
- * documentation</a> or <a
- * href="http://lxr.mozilla.org/mozilla/source/js/rhino/src/org/mozilla/javascript/debug/DebugFrame.java">the
- * interface source code</a> for more information on the {@link DebugFrame} interface and its uses.
+ * HtmlUnit's implementation of the {@link net.sourceforge.htmlunit.corejs.javascript.debug.DebugFrame} interface,
+ * which logs stack entries as well as exceptions. All logging is done at the <tt>TRACE</tt> level. This class does
+ * a fairly good job of guessing names for anonymous functions when they are referenced by name from an existing
+ * object. See <a href="http://www.mozilla.org/rhino/rhino15R4-debugger.html">the Rhino documentation</a> or
+ * <a href="http://lxr.mozilla.org/mozilla/source/js/rhino/src/org/mozilla/javascript/debug/DebugFrame.java">the
+ * interface source code</a> for more information on the
+ * {@link net.sourceforge.htmlunit.corejs.javascript.debug.DebugFrame} interface and its uses.
  * </p>
  *
  * <p>
@@ -51,13 +50,14 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
  * @author Marc Guillemot
  * @see DebuggerImpl
  */
-public class DebugFrameImpl implements DebugFrame {
+public class DebugFrameImpl extends DebugFrameAdapter {
 
     private static final Log LOG = LogFactory.getLog(DebugFrameImpl.class);
 
-    private final DebuggableScript functionOrScript_;
     private static final String KEY_LAST_LINE = "DebugFrameImpl#line";
     private static final String KEY_LAST_SOURCE = "DebugFrameImpl#source";
+
+    private final DebuggableScript functionOrScript_;
 
     /**
      * Creates a new debug frame.
@@ -153,23 +153,9 @@ public class DebugFrameImpl implements DebugFrame {
     /**
      * {@inheritDoc}
      */
-    public void onExit(final Context cx, final boolean byThrow, final Object resultOrException) {
-        // Ignore.
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public void onLineChange(final Context cx, final int lineNumber) {
         cx.putThreadLocal(KEY_LAST_LINE, lineNumber);
         cx.putThreadLocal(KEY_LAST_SOURCE, functionOrScript_.getSourceName());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void onDebuggerStatement(final Context cx) {
-        // Ignore.
     }
 
     /**
