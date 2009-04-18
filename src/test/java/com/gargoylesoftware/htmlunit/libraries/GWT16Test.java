@@ -103,9 +103,9 @@ public class GWT16Test extends WebServerTestCase {
     }
 
     private String getTimeZone() throws Exception {
-        String timeZone = new SimpleDateFormat("Z").format(
+        final String timeZone = new SimpleDateFormat("Z").format(
                 new SimpleDateFormat("d MMMMMMMM yyyy").parse("13 September 1999"));
-        StringBuilder timeZoneSB = new StringBuilder();
+        final StringBuilder timeZoneSB = new StringBuilder();
         if (timeZone.charAt(0) == '-') {
             timeZoneSB.append('+');
         }
