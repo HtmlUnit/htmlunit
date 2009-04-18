@@ -49,13 +49,13 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 
 /**
- * Tests for 1.5 version of <a href="http://code.google.com/webtoolkit">Google Web Toolkit</a>.
+ * Tests for 1.6 version of <a href="http://code.google.com/webtoolkit">Google Web Toolkit</a>.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class GWT15Test extends WebServerTestCase {
+public class GWT16Test extends WebServerTestCase {
 
     /**
      * @throws Exception if an error occurs
@@ -84,11 +84,7 @@ public class GWT15Test extends WebServerTestCase {
         final HtmlPage page = loadGWTPage("I18N", null);
         i18n(page, "numberFormatOutputText", "31,415,926,535.898");
 
-        String timeZone = new SimpleDateFormat("Z").format(
-                new SimpleDateFormat("d MMMMMMMM yyyy").parse("13 September 1999"));
-        timeZone = timeZone.substring(0, 3) + ':' + timeZone.substring(3);
-
-        i18n(page, "dateTimeFormatOutputText", "Monday, September 13, 1999 12:00:00 AM GMT" + timeZone);
+        i18n(page, "dateTimeFormatOutputText", "Monday, September 13, 1999 12:00:00 AM Etc/GMT" + getTimeZone());
         i18n(page, "messagesFormattedOutputText",
             "User 'amelie' has security clearance 'guest' and cannot access '/secure/blueprints.xml'");
         i18n(page, "constantsFirstNameText", "Amelie");
@@ -104,6 +100,23 @@ public class GWT15Test extends WebServerTestCase {
         i18nDictionary(page, map);
 
         Locale.setDefault(locale);
+    }
+
+    private String getTimeZone() throws Exception {
+        String timeZone = new SimpleDateFormat("Z").format(
+                new SimpleDateFormat("d MMMMMMMM yyyy").parse("13 September 1999"));
+        StringBuilder timeZoneSB = new StringBuilder();
+        if (timeZone.charAt(0) == '-') {
+            timeZoneSB.append('+');
+        }
+        else {
+            timeZoneSB.append('-');
+        }
+        if (timeZone.charAt(1) != '0') {
+            timeZoneSB.append(timeZone.charAt(1));
+        }
+        timeZoneSB.append(timeZone.charAt(2));
+        return timeZoneSB.toString();
     }
 
     /**
@@ -134,11 +147,7 @@ public class GWT15Test extends WebServerTestCase {
          */
         i18n(page, "numberFormatOutputText", "31\u00A0415\u00A0926\u00A0535,898");
 
-        String timeZone = new SimpleDateFormat("Z").format(
-                new SimpleDateFormat("d MMMMMMMM yyyy").parse("13 September 1999"));
-        timeZone = timeZone.substring(0, 3) + ':' + timeZone.substring(3);
-
-        i18n(page, "dateTimeFormatOutputText", "lundi 13 septembre 1999 00:00:00 GMT" + timeZone);
+        i18n(page, "dateTimeFormatOutputText", "lundi 13 septembre 1999 00:00:00 Etc/GMT" + getTimeZone());
         i18n(page, "messagesFormattedOutputText",
             "L'utilisateur 'amelie' a un niveau de securit\u00E9 'guest', "
             + "et ne peut acc\u00E9der \u00E0 '/secure/blueprints.xml'");
@@ -252,24 +261,6 @@ public class GWT15Test extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void simpleXML() throws Exception {
-        final HtmlPage page = loadGWTPage("SimpleXML", null);
-
-        final String[] pendingOrders =
-        {"123-2", "3 45122 34566", "2/2/2004", "43 Butcher lane", "Atlanta", "Georgia", "30366"};
-
-        final List< ? > cells = page.getByXPath("//table[@class='userTable'][1]//tr[2]/td");
-        assertEquals(pendingOrders.length, cells.size());
-        for (int i = 0; i < pendingOrders.length; i++) {
-            final HtmlTableDataCell cell = (HtmlTableDataCell) cells.get(i);
-            tableDataCell(cell, pendingOrders[i]);
-        }
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
     public void mail() throws Exception {
         final HtmlPage page = loadGWTPage("Mail", null);
         final HtmlTableDataCell cell =
@@ -306,7 +297,7 @@ public class GWT15Test extends WebServerTestCase {
         page.getWebClient().waitForBackgroundJavaScriptStartingBefore(2000);
 
         final HtmlSpan span =
-            page.getFirstByXPath("//div[@class='JSON-JSONResponseObject']/div/div/table//td[2]/span/span");
+            page.getFirstByXPath("//div[@class='JSON-JSONResponseObject']/div/div/table//td[2]/div/span");
         assertEquals("ResultSet", span.getFirstChild().getNodeValue());
     }
 
@@ -340,7 +331,7 @@ public class GWT15Test extends WebServerTestCase {
      * @return the GWT directory being tested
      */
     protected String getDirectory() {
-        return "1.5.3";
+        return "1.6.4";
     }
 
     /**
