@@ -49,6 +49,7 @@ public class DebuggerImpl extends DebuggerAdapter {
     /**
      * {@inheritDoc}
      */
+    @Override
     public DebugFrame getFrame(final Context cx, final DebuggableScript functionOrScript) {
         return new DebugFrameImpl(functionOrScript);
     }

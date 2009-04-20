@@ -71,6 +71,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void onEnter(final Context cx, final Scriptable activation, final Scriptable thisObj, final Object[] args) {
         if (LOG.isTraceEnabled()) {
             final StringBuilder sb = new StringBuilder();
@@ -137,6 +138,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void onExceptionThrown(final Context cx, final Throwable t) {
         if (LOG.isTraceEnabled()) {
             if (t instanceof JavaScriptException) {
@@ -153,6 +155,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void onLineChange(final Context cx, final int lineNumber) {
         cx.putThreadLocal(KEY_LAST_LINE, lineNumber);
         cx.putThreadLocal(KEY_LAST_SOURCE, functionOrScript_.getSourceName());
