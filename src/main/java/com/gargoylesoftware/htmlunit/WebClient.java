@@ -372,7 +372,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Convenient method to load a URL into the current WebWindow as it would be done
+     * Convenient method to load a URL into the current top WebWindow as it would be done
      * by {@link #getPage(WebWindow, WebRequestSettings)}.
      * @param url the URL of the new content
      * @param <P> the page type
@@ -383,11 +383,11 @@ public class WebClient implements Serializable {
      */
     @SuppressWarnings("unchecked")
     public <P extends Page> P getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
-        return (P) getPage(getCurrentWindow(), new WebRequestSettings(url));
+        return (P) getPage(getCurrentWindow().getTopWindow(), new WebRequestSettings(url));
     }
 
     /**
-     * Convenient method to load a web request into the current WebWindow.
+     * Convenient method to load a web request into the current top WebWindow.
      * @param request the request parameters
      * @param <P> the page type
      * @return the new page
@@ -399,7 +399,7 @@ public class WebClient implements Serializable {
     @SuppressWarnings("unchecked")
     public <P extends Page> P getPage(final WebRequestSettings request) throws IOException,
         FailingHttpStatusCodeException {
-        return (P) getPage(getCurrentWindow(), request);
+        return (P) getPage(getCurrentWindow().getTopWindow(), request);
     }
 
     /**
@@ -791,7 +791,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Returns the "current" window for this client. This is the window that will be used
+     * Returns the "current" window for this client. This window (or its top window) will be used
      * when <tt>getPage(...)</tt> is called without specifying a window.
      * @return the "current" window for this client
      */
@@ -1867,6 +1867,10 @@ public class WebClient implements Serializable {
                         setCurrentWindow(topLevelWindows_.peek());
                     }
                 }
+            }
+            else if (event.getWebWindow() == getCurrentWindow()) {
+                // The current window is now the last top-level window.
+                setCurrentWindow(topLevelWindows_.peek());
             }
         }
         /**

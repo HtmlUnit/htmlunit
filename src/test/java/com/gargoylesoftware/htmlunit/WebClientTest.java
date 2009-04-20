@@ -2096,4 +2096,29 @@ public class WebClientTest extends WebServerTestCase {
         assertEquals("Ran Here", alertHandler.getCollectedAlerts().get(0));
     }
 
+    /**
+     * @throws Exception if test fails
+     */
+    @Test
+    public void testCurrentWindow() throws Exception {
+        final WebClient client = new WebClient();
+
+        final MockWebConnection conn = new MockWebConnection();
+        final String html = "<html><body onload='document.getElementById(\"f\").src=\"frame.html\";'>"
+            + "<iframe id='f'></iframe></body></html>";
+        conn.setResponse(URL_FIRST, html);
+        final URL frameUrl = new URL(URL_FIRST.toExternalForm() + "frame.html");
+        conn.setResponse(frameUrl, "<html><body></body></html>");
+        conn.setResponse(URL_SECOND, "<html><body></body></html>");
+        client.setWebConnection(conn);
+
+        client.getPage(URL_FIRST);
+        assertEquals(2, client.getWebWindows().size());
+        assertEquals(frameUrl, client.getCurrentWindow().getEnclosedPage().getWebResponse().getRequestUrl());
+
+        // loading a new page should be done in the top window
+        client.getPage(URL_SECOND);
+        assertTrue(client.getCurrentWindow() instanceof TopLevelWindow);
+        assertEquals(1, client.getWebWindows().size());
+    }
 }
