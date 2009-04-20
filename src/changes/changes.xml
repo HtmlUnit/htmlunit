@@ -6,6 +6,12 @@
 
     <body>
         <release version="2.5" date="?" description="Bugfixes, MooTools support, support all HTML elements and various JavaScript properties">
+            <action type="update" dev="asashour">
+                Upgrade HtmlUnit-core-js to 2.5.
+            </action>
+            <action type="update" dev="asashour">
+                Upgrade NekoHtml to 1.9.12.
+            </action>
             <action type="fix" dev="mguillem" issue="2768942">
                 JavaScript: fix ClasCastException setting or reading property readOnly of HtmlTextAreaElement.
             </action>

@@ -513,12 +513,12 @@
         <dependency>
             <groupId>net.sourceforge.htmlunit</groupId>
             <artifactId>htmlunit-core-js</artifactId>
-            <version>2.5-SNAPSHOT</version>
+            <version>2.5</version>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.nekohtml</groupId>
             <artifactId>nekohtml</artifactId>
-            <version>1.9.12-SNAPSHOT</version>
+            <version>1.9.12</version>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.cssparser</groupId>
