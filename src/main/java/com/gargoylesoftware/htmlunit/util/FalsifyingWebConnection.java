@@ -16,6 +16,10 @@ package com.gargoylesoftware.htmlunit.util;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.httpclient.NameValuePair;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebConnection;
@@ -85,4 +89,36 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
         return new WebResponseImpl(wrd, wr.getRequestUrl(), wr.getRequestMethod(), wr.getLoadTime());
     }
 
+    /**
+     * Creates a faked WebResponse for the request with the provided content.
+     * @param wr the web request for which a response should be created
+     * @param content the content to place in the response
+     * @param contentType the content type of the response
+     * @return a web response with the provided content
+     * @throws IOException if an encoding problem occurred
+     */
+    protected WebResponse createWebResponse(final WebRequestSettings wr, final String content,
+            final String contentType) throws IOException {
+        return createWebResponse(wr, content, contentType, 200, "OK");
+    }
+
+    /**
+     * Creates a faked WebResponse for the request with the provided content.
+     * @param wr the web request for which a response should be created
+     * @param content the content to place in the response
+     * @param contentType the content type of the response
+     * @param responseCode the HTTP code for the response
+     * @param responseMessage the HTTP message for the response
+     * @return a web response with the provided content
+     * @throws IOException if an encoding problem occurred
+     */
+    protected WebResponse createWebResponse(final WebRequestSettings wr, final String content,
+            final String contentType, final int responseCode, final String responseMessage) throws IOException {
+        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        final String encoding = "UTF-8";
+        headers.add(new NameValuePair("content-type", contentType + "; charset=" + encoding));
+        final byte[] body = content.getBytes(encoding);
+        final WebResponseData wrd = new WebResponseData(body, responseCode, responseMessage, headers);
+        return new WebResponseImpl(wrd, wr.getUrl(), wr.getHttpMethod(), 0);
+    }
 }
