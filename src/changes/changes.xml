@@ -5,7 +5,7 @@
     </properties>
 
     <body>
-        <release version="2.5" date="Apr 21, 2009" description="Bugfixes, MooTools support, support all HTML elements and various JavaScript properties">
+        <release version="2.6" date="?" description="Bugfixes">
             <action type="remove" dev="asashour">
                 Deprecation: remove HtmlAttr, XmlElement, BrowserVersion.INTERNET_EXPLORER_6_0, .isNetscape(), getNickName(),
                 DomAttr.getHtmlValue(), .getAttributeValue(),
