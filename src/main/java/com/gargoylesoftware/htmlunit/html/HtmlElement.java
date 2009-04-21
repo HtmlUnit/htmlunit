@@ -19,22 +19,22 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-import org.apache.commons.collections.map.ListOrderedMap;
-import org.apache.commons.lang.ClassUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
+
+import org.apache.commons.collections.map.ListOrderedMap;
+import org.apache.commons.lang.ClassUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;
 import org.w3c.dom.DOMException;
@@ -290,30 +290,6 @@ public abstract class HtmlElement extends DomElement {
         if (parentNode instanceof HtmlElement) {
             ((HtmlElement) parentNode).fireHtmlAttributeRemoved(event);
         }
-    }
-
-    /**
-     * Returns true if the specified attribute has been defined. This is necessary
-     * in order to distinguish between an attribute that is set to an empty string
-     * and one that was not defined at all.
-     *
-     * @param attributeName the attribute to check
-     * @return true if the attribute is defined
-     * @deprecated As of 2.4, please use {@link #hasAttribute(String)} instead.
-     */
-    @Deprecated
-    public boolean isAttributeDefined(final String attributeName) {
-        return hasAttribute(attributeName);
-    }
-
-    /**
-     * @return a collection of {@link DomAttr} objects representing the
-     * attributes of this element. The elements are ordered as found in the HTML source code.
-     * @deprecated As of 2.4, please use {@link #getAttributes()} instead.
-     */
-    @Deprecated
-    public Collection<DomAttr> getAttributesCollection() {
-        return getAttributesMap().values();
     }
 
     /**
@@ -602,22 +578,6 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * Returns the element in this element's page with the specified ID. If more than one element
-     * has the specified ID (not allowed by the HTML spec), this method returns the first one.
-     *
-     * @param id the ID value to search for
-     * @param <E> the sub-element type
-     * @return the element in this element's page with the specified ID
-     * @exception ElementNotFoundException if no element has the specified ID
-     * @deprecated As of 2.4, please use {@link #getElementById(String)} instead.
-     */
-    @Deprecated
-    @SuppressWarnings("unchecked")
-    public <E extends HtmlElement> E getHtmlElementById(final String id) throws ElementNotFoundException {
-        return (E) getElementById(id);
-    }
-
-    /**
      * <p>Returns <tt>true</tt> if there is an element in this element's page with the specified ID.
      * This method is intended for situations where it is enough to know whether a specific
      * element is present in the document.</p>
@@ -672,24 +632,6 @@ public abstract class HtmlElement extends DomElement {
             }
         }
         return list;
-    }
-
-    /**
-     * Returns all elements which are descendants of this element and match the specified search criteria.
-     *
-     * @param elementName the name of the element to search for
-     * @param attributeName the name of the attribute to search for
-     * @param attributeValue the value of the attribute to search for
-     * @param <E> the sub-element type
-     * @return all elements which are descendants of this element and match the specified search criteria
-     * @deprecated As of 2.4, please use {@link #getElementsByAttribute(String,String,String)} instead.
-     */
-    @Deprecated
-    public final <E extends HtmlElement> List<E> getHtmlElementsByAttribute(
-            final String elementName,
-            final String attributeName,
-            final String attributeValue) {
-        return getElementsByAttribute(elementName, attributeName, attributeValue);
     }
 
     /**

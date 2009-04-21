@@ -6,6 +6,14 @@
 
     <body>
         <release version="2.5" date="Apr 21, 2009" description="Bugfixes, MooTools support, support all HTML elements and various JavaScript properties">
+            <action type="remove" dev="asashour">
+                Deprecation: remove HtmlAttr, XmlElement, BrowserVersion.INTERNET_EXPLORER_6_0, .isNetscape(), getNickName(),
+                DomAttr.getHtmlValue(), .getAttributeValue(),
+                HtmlElement.isAttributeDefined(), .getAttributesCollection(), .getHtmlElementById(), .getHtmlElementsByAttribute(),
+                HtmlPage.createHtmlElement(), WebResponse.getLoadTimeInMilliSeconds(), .getResponseBody(), and .getUrl().
+            </action>
+        </release>
+        <release version="2.5" date="Apr 21, 2009" description="Bugfixes, MooTools support, support all HTML elements and various JavaScript properties">
             <action type="update" dev="asashour">
                 Upgrade HtmlUnit-core-js to 2.5.
             </action>

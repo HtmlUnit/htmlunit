@@ -181,7 +181,7 @@ public final class XmlUtil {
         else {
             qualifiedName = source.getPrefix() + ':' + localName;
         }
-        return new XmlElement(source.getNamespaceURI(), qualifiedName, page, attributes);
+        return new DomElement(source.getNamespaceURI(), qualifiedName, page, attributes);
     }
 
     private static Attributes namedNodeMapToSaxAttributes(final NamedNodeMap attributesMap) {

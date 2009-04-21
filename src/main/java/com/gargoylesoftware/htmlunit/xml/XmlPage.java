@@ -157,16 +157,6 @@ public class XmlPage extends SgmlPage {
     }
 
     /**
-     * Gets the root XmlElement of this document.
-     * @return the root element
-     * @deprecated As of 2.4, please use {@link #getDocumentElement()} instead.
-     */
-    @Deprecated
-    public DomElement getDocumentXmlElement() {
-        return getDocumentElement();
-    }
-
-    /**
      * Creates a new XML element with the given tag name.
      *
      * @param tagName the tag name
@@ -184,7 +174,7 @@ public class XmlPage extends SgmlPage {
      * @return the new XML element
      */
     public DomElement createXmlElementNS(final String namespaceURI, final String qualifiedName) {
-        return new XmlElement(namespaceURI, qualifiedName, this, new HashMap<String, DomAttr>());
+        return new DomElement(namespaceURI, qualifiedName, this, new HashMap<String, DomAttr>());
     }
 
     /**

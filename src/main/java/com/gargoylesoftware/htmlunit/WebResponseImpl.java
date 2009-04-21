@@ -262,33 +262,6 @@ public class WebResponseImpl implements WebResponse, Serializable {
     }
 
     /**
-     * {@inheritDoc}
-     * @deprecated since 2.4, please use {@link #getRequestUrl()} instead
-     */
-    @Deprecated
-    public URL getUrl() {
-        return getRequestSettings().getUrl();
-    }
-
-    /**
-     * {@inheritDoc}
-     * @deprecated since 2.4, please use {@link #getLoadTime()} instead
-     */
-    @Deprecated
-    public long getLoadTimeInMilliSeconds() {
-        return loadTime_;
-    }
-
-    /**
-     * {@inheritDoc}
-     * @deprecated since 2.4, please use {@link #getContentAsBytes()} instead
-     */
-    @Deprecated
-    public byte[] getResponseBody() {
-        return responseData_.getBody();
-    }
-
-    /**
      * Searches for XML declaration and returns the <tt>encoding</tt> if found, otherwise returns <code>null</code>.
      */
     private String getXMLEncoding(final byte[] body) {

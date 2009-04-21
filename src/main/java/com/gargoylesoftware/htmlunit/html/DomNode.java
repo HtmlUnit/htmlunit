@@ -144,7 +144,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * Never call this, used for Serialization.
-     * @deprecated As of 1.12
      */
     @Deprecated
     protected DomNode() {

@@ -69,7 +69,7 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
         final WebResponse resp = super.getResponse(webRequestSettings);
         return new WebResponseWrapper(resp) {
             @Override
-            public URL getUrl() {
+            public URL getRequestUrl() {
                 return originalUrl;
             }
         };

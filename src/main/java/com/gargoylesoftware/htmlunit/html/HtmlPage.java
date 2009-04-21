@@ -448,37 +448,12 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     }
 
     /**
-     * Create a new HTML element with the given tag name.
-     *
-     * @param tagName the tag name, preferably in lowercase
-     * @return the new HTML element
-     * @deprecated As of 2.4, please use {@link #createElement(String)} instead.
-     */
-    @Deprecated
-    public HtmlElement createHtmlElement(final String tagName) {
-        return createElement(tagName);
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
     public HtmlElement createElementNS(final String namespaceURI, final String qualifiedName) {
         return HtmlUnitDOMBuilder.getElementFactory(namespaceURI, qualifiedName)
             .createElementNS(this, namespaceURI, qualifiedName, null);
-    }
-
-    /**
-     * Create a new HtmlElement with the given namespace and qualified name.
-     *
-     * @param namespaceURI the URI that identifies an XML namespace
-     * @param qualifiedName the qualified name of the element type to instantiate
-     * @return the new HTML element
-     * @deprecated As of 2.4, please use {@link #createElementNS(String,String)} instead
-     */
-    @Deprecated
-    public HtmlElement createHtmlElementNS(final String namespaceURI, final String qualifiedName) {
-        return createElementNS(namespaceURI, qualifiedName);
     }
 
     /**
@@ -839,24 +814,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         return elements.get(0);
     }
 
-    /**
-     * Returns the HTML element that is assigned to the specified access key. An
-     * access key (aka mnemonic key) is used for keyboard navigation of the
-     * page.<p>
-     *
-     * Only the following HTML elements may have <tt>accesskey</tt>s defined: A, AREA,
-     * BUTTON, INPUT, LABEL, LEGEND, and TEXTAREA.
-     *
-     * @param accessKey the key to look for
-     * @return the HTML element that is assigned to the specified key or null
-     *      if no elements can be found that match the specified key.
-     * @deprecated As of 2.4, please use {@link #getElementByAccessKey(char)} instead.
-     */
-    @Deprecated
-    public HtmlElement getHtmlElementByAccessKey(final char accessKey) {
-        return getElementByAccessKey(accessKey);
-    }
-
    /**
     * Returns all the HTML elements that are assigned to the specified access key. An
     * access key (aka mnemonic key) is used for keyboard navigation of the
@@ -891,29 +848,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         }
 
         return elements;
-    }
-
-    /**
-     * Returns all the HTML elements that are assigned to the specified access key. An
-     * access key (aka mnemonic key) is used for keyboard navigation of the
-     * page.<p>
-     *
-     * The HTML specification seems to indicate that one accesskey cannot be used
-     * for multiple elements however Internet Explorer does seem to support this.
-     * It's worth noting that Mozilla does not support multiple elements with one
-     * access key so you are making your HTML browser specific if you rely on this
-     * feature.<p>
-     *
-     * Only the following HTML elements may have <tt>accesskey</tt>s defined: A, AREA,
-     * BUTTON, INPUT, LABEL, LEGEND, and TEXTAREA.
-     *
-     * @param accessKey the key to look for
-     * @return the elements that are assigned to the specified accesskey
-     * @deprecated As of 2.4, please use {@link #getElementsByAccessKey(char)} instead.
-     */
-    @Deprecated
-    public List<HtmlElement> getHtmlElementsByAccessKey(final char accessKey) {
-        return getElementsByAccessKey(accessKey);
     }
 
     /**
@@ -1664,20 +1598,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     }
 
     /**
-     * Returns the HTML elements with the specified name attribute. If there are no elements
-     * with the specified name, this method returns an empty list. Please note that
-     * the lists returned by this method are immutable.
-     *
-     * @param name the name value to search by
-     * @return the HTML elements with the specified name attribute
-     * @deprecated As of 2.4, please use {@link #getElementsByName(String)} instead
-     */
-    @Deprecated
-    public List<HtmlElement> getHtmlElementsByName(final String name) {
-        return getElementsByName(name);
-    }
-
-    /**
      * Returns the HTML elements with the specified string for their name or ID. If there are
      * no elements with the specified name or ID, this method returns an empty list. Please note
      * that lists returned by this method are immutable.
@@ -1700,20 +1620,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
             }
         }
         return Collections.unmodifiableList(list);
-    }
-
-    /**
-     * Returns the HTML elements with the specified string for their name or ID. If there are
-     * no elements with the specified name or ID, this method returns an empty list. Please note
-     * that lists returned by this method are immutable.
-     *
-     * @param idAndOrName the value to search for
-     * @return the HTML elements with the specified string for their name or ID
-     * @deprecated As of 2.4, please use {@link #getElementsByIdAndOrName(String)} instead
-     */
-    @Deprecated
-    public List<HtmlElement> getHtmlElementsByIdAndOrName(final String idAndOrName) {
-        return getElementsByIdAndOrName(idAndOrName);
     }
 
     /**

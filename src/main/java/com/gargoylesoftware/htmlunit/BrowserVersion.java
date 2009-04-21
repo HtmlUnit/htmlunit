@@ -99,24 +99,10 @@ public class BrowserVersion implements Serializable {
         INTERNET_EXPLORER, "4.0 (compatible; MSIE 6.0b; Windows 98)",
         "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98)", "1.2", 6, "IE6", null);
 
-    /**
-     * Internet Explorer 6.
-     * @deprecated As of 2.4, please use {@link #INTERNET_EXPLORER_6} instead.
-     */
-    @Deprecated
-    public static final BrowserVersion INTERNET_EXPLORER_6_0 = INTERNET_EXPLORER_6;
-
     /** Internet Explorer 7. */
     public static final BrowserVersion INTERNET_EXPLORER_7 = new BrowserVersion(
         INTERNET_EXPLORER, "4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322)",
         "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322)", "1.2", 7, "IE7", null);
-
-    /**
-     * Internet Explorer 7.
-     * @deprecated As of 2.4, please use {@link #INTERNET_EXPLORER_7} instead.
-     */
-    @Deprecated
-    public static final BrowserVersion INTERNET_EXPLORER_7_0 = INTERNET_EXPLORER_7;
 
     /** The default browser version. */
     private static BrowserVersion DefaultBrowserVersion_ = INTERNET_EXPLORER_7;
@@ -281,17 +267,6 @@ public class BrowserVersion implements Serializable {
      * @return whether or not this version is a version of a Firefox browser
      */
     public final boolean isFirefox() {
-        return NETSCAPE.equals(getApplicationName());
-    }
-
-    /**
-     * Returns <tt>true</tt> if this <tt>BrowserVersion</tt> instance represents some
-     * version of a Netscape browser, including Mozilla and Firefox.
-     * @return whether or not this version is a version of a Netscape browser
-     * @deprecated since HtmlUnit-2.4. Replaced by {@link #isFirefox()}.
-     */
-    @Deprecated
-    public final boolean isNetscape() {
         return NETSCAPE.equals(getApplicationName());
     }
 
@@ -558,17 +533,6 @@ public class BrowserVersion implements Serializable {
      */
     public boolean hasFeature(final BrowserVersionFeatures property) {
         return features_.contains(property);
-    }
-
-    /**
-     * Get the short name of the browser like "FF3", "IE7", ...
-     * This is used in different tests to reference the browser to which it applies.
-     * @return the short name (if any)
-     * @deprecated since 2.4, use {@link #getNickname()} instead
-     */
-    @Deprecated
-    public String getNickName() {
-        return nickname_;
     }
 
     /**

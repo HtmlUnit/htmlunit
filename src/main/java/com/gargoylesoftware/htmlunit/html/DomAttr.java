@@ -89,34 +89,11 @@ public class DomAttr extends DomNamespaceNode implements Attr {
     }
 
     /**
-     * Returns the value of the wrapped map entry.
-     * @return the value of wrapped map entry
-     * @deprecated As of 2.2, please use {@link #getValue()} instead.
-     */
-    @Deprecated
-    public String getHtmlValue() {
-        return getValue();
-    }
-
-    /**
      * Sets this attribute's value.
      * @param value the attribute's new value
      */
     public void setValue(final String value) {
         value_ = value;
-    }
-
-    /**
-     * Sets this attribute's value.
-     * @param value the attribute's new value
-     * @return the attribute's old value
-     * @deprecated As of 2.2, please use {@link #setValue(String)} instead.
-     */
-    @Deprecated
-    public String setHtmlValue(final String value) {
-        final String oldValue = value_;
-        value_ = value;
-        return oldValue;
     }
 
     /**

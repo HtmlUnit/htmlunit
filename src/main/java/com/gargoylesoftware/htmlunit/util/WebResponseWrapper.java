@@ -100,16 +100,6 @@ public class WebResponseWrapper implements WebResponse {
 
     /**
      * {@inheritDoc}
-     * The default behavior of this method is to return getLoadTimeInMilliSeconds() on the wrapped connection object.
-     * @deprecated since 2.4, please use {@link #getLoadTime()} instead
-     */
-    @Deprecated
-    public long getLoadTimeInMilliSeconds() {
-        return wrappedWebResponse_.getLoadTime();
-    }
-
-    /**
-     * {@inheritDoc}
      * The default behavior of this method is to return getLoadTime() on the wrapped connection object.
      */
     public long getLoadTime() {
@@ -122,16 +112,6 @@ public class WebResponseWrapper implements WebResponse {
      */
     public HttpMethod getRequestMethod() {
         return wrappedWebResponse_.getRequestMethod();
-    }
-
-    /**
-     * {@inheritDoc}
-     * The default behavior of this method is to return getResponseBody() on the wrapped connection object.
-     * @deprecated since 2.4, please use {@link #getContentAsBytes()} instead
-     */
-    @Deprecated
-    public byte[] getResponseBody() {
-        return wrappedWebResponse_.getContentAsBytes();
     }
 
     /**
@@ -164,16 +144,6 @@ public class WebResponseWrapper implements WebResponse {
      */
     public String getStatusMessage() {
         return wrappedWebResponse_.getStatusMessage();
-    }
-
-    /**
-     * {@inheritDoc}
-     * The default behavior of this method is to return getUrl() on the wrapped connection object.
-     * @deprecated since 2.4, please use {@link #getRequestUrl()} instead
-     */
-    @Deprecated
-    public URL getUrl() {
-        return wrappedWebResponse_.getRequestUrl();
     }
 
     /**

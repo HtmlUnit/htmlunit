@@ -123,28 +123,4 @@ public interface WebResponse {
      */
     long getLoadTime();
 
-    /**
-     * Returns the time it took to load this web response, in milliseconds.
-     * @return the time it took to load this web response, in milliseconds
-     * @deprecated since 2.4, please use {@link #getLoadTime()} instead
-     */
-    @Deprecated
-    long getLoadTimeInMilliSeconds();
-
-    /**
-     * Returns the response body, as a byte array.
-     * @return the response body, as a byte array
-     * @deprecated since 2.4, please use {@link #getContentAsBytes()} instead
-     */
-    @Deprecated
-    byte[] getResponseBody();
-
-    /**
-     * Returns the URL that was used to load this page.
-     * @return the URL that was used to load this page
-     * @deprecated since 2.4, please use {@link #getRequestUrl()} instead
-     */
-    @Deprecated
-    URL getUrl();
-
 }

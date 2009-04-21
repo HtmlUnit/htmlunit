@@ -225,19 +225,6 @@ public class DomElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * Returns the value of the specified attribute or an empty string. If the
-     * result is an empty string then it will be {@link #ATTRIBUTE_NOT_DEFINED}
-     *
-     * @param attributeName the name of the attribute
-     * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED}
-     * @deprecated since HtmlUnit-2.4. Use standard DOM method {@link #getAttribute(String)} instead.
-     */
-    @Deprecated
-    public final String getAttributeValue(final String attributeName) {
-        return getAttribute(attributeName);
-    }
-
-    /**
      * Removes an attribute specified by name from this element.
      * @param attributeName the attribute attributeName
      */
@@ -336,32 +323,6 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     protected boolean isAttributeCaseSensitive() {
         return true;
-    }
-
-    /**
-     * Sets the value of the specified attribute.
-     *
-     * @param attributeName the name of the attribute
-     * @param attributeValue the value of the attribute
-     * @deprecated since version 2.4. Use {@link #setAttribute(String, String)}.
-     */
-    @Deprecated
-    public final void setAttributeValue(final String attributeName, final String attributeValue) {
-        setAttributeNS(null, attributeName, attributeValue);
-    }
-
-    /**
-     * Sets the value of the specified attribute.
-     *
-     * @param namespaceURI the URI that identifies an XML namespace
-     * @param qualifiedName the qualified name of the attribute
-     * @param attributeValue the value of the attribute
-     * @deprecated since version 2.4. Use {@link #setAttributeNS(String, String, String)}.
-     */
-    @Deprecated
-    public final void setAttributeValue(final String namespaceURI, final String qualifiedName,
-            final String attributeValue) {
-        setAttributeNS(namespaceURI, qualifiedName, attributeValue);
     }
 
     /**
