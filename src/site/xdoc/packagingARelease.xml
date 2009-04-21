@@ -86,8 +86,9 @@
                         in and tag the repository (to https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/tags/) 
                         with a name like this "HtmlUnit-2.0" that reflects the current build version.
                     </li>
-                    <li>Deploy the release to HtmlUnit Maven repository (which is synchronized with the main repository)
-                        <source>mvn deploy</source>
+                    <li>Deploy the release to HtmlUnit Maven repository (which is synchronized with the main repository), skipping the tests
+                    to save time as they have already been run previously
+                        <source>mvn -Dmaven.test.skip=true deploy</source>
                     </li>
                     <li>
                         Delete online website javadoc.
@@ -98,8 +99,8 @@
                         <source>ssh -t mguillem,htmlunit@shell.sf.net create</source>
                     </li>
                     <li>
-                        Deploy the site documentation.
-                        <source>mvn site:deploy</source>
+                        Deploy the site documentation (skipping the tests again).
+                        <source>mvn -Dmaven.test.skip=true site:deploy</source>
                     </li>
                     <li>
                         Add pom.xml reference to previously removed snapshot repository.
