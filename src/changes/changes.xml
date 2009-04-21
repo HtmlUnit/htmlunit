@@ -5,7 +5,7 @@
     </properties>
 
     <body>
-        <release version="2.5" date="?" description="Bugfixes, MooTools support, support all HTML elements and various JavaScript properties">
+        <release version="2.5" date="Apr 21, 2009" description="Bugfixes, MooTools support, support all HTML elements and various JavaScript properties">
             <action type="update" dev="asashour">
                 Upgrade HtmlUnit-core-js to 2.5.
             </action>
