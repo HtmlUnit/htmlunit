@@ -2107,14 +2107,23 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns the value of the "align" property.
+     * @param returnInvalidValues if <tt>true</tt>, this method will return any value, including technically
+     *        invalid values; if <tt>false</tt>, this method will return an empty string instead of invalid values
      * @return the value of the "align" property
      */
-    protected String getAlign() {
+    protected String getAlign(boolean returnInvalidValues) {
         String align = getDomNodeOrDie().getAttribute("align");
         if (align == NOT_FOUND) {
             align = "";
         }
-        return align;
+        if (align.equals("center")
+            || align.equals("justify")
+            || align.equals("left")
+            || align.equals("right")
+            || returnInvalidValues) {
+            return align;
+        }
+        return "";
     }
 
     /**

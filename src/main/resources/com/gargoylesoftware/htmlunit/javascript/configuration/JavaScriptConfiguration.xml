@@ -1961,7 +1961,7 @@
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class name="HTMLTableColElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableColElement"
         JSObject="true">
-        <property name="align" notImplemented="true" readable="true" writable="true"/>
+        <property name="align" readable="true" writable="true"/>
         <property name="vAlign" notImplemented="true" readable="true" writable="true"/>
     </class>
 
