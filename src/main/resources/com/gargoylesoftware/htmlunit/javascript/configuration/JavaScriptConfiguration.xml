@@ -1964,6 +1964,7 @@
         <property name="align" readable="true" writable="true"/>
         <property name="ch" readable="true" writable="true"/>
         <property name="chOff" readable="true" writable="true"/>
+        <property name="span" readable="true" writable="true"/>
         <property name="vAlign" notImplemented="true" readable="true" writable="true"/>
     </class>
 

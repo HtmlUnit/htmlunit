@@ -143,4 +143,46 @@ public class HTMLTableColElementTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "1", "2", "1", "5", "1", "1" }, IE = { "1", "2", "1", "error", "error", "5", "2", "1" })
+    public void span() throws Exception {
+        final String html
+            = "<html><body><table>\n"
+            + "  <col id='c1' span='0'></col>\n"
+            + "  <col id='c2' span='2'></col>\n"
+            + "  <col id='c3'></col>\n"
+            + "  <tr>\n"
+            + "    <td>a</td>\n"
+            + "    <td>b</td>\n"
+            + "    <td>c</td>\n"
+            + "  </tr>\n"
+            + "</table>\n"
+            + "<script>\n"
+            + "  function set(e, value) {\n"
+            + "    try {\n"
+            + "      e.span = value;\n"
+            + "    } catch (e) {\n"
+            + "      alert('error');\n"
+            + "    }\n"
+            + "  }\n"
+            + "  var c1 = document.getElementById('c1');\n"
+            + "  var c2 = document.getElementById('c2');\n"
+            + "  var c3 = document.getElementById('c3');\n"
+            + "  alert(c1.span);\n"
+            + "  alert(c2.span);\n"
+            + "  alert(c3.span);\n"
+            + "  set(c1, '5.2');\n"
+            + "  set(c2, '-3');\n"
+            + "  set(c3, 'abc');\n"
+            + "  alert(c1.span);\n"
+            + "  alert(c2.span);\n"
+            + "  alert(c3.span);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }

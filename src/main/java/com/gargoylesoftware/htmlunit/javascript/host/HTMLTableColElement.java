@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 import com.gargoylesoftware.htmlunit.html.DomElement;
 
 /**
@@ -130,6 +132,44 @@ public class HTMLTableColElement extends HTMLElement {
             }
             getDomNodeOrDie().setAttribute("charOff", chOff);
         }
+    }
+
+    /**
+     * Returns the value of the "span" property.
+     * @return the value of the "span" property
+     */
+    public int jsxGet_span() {
+        final String span = getDomNodeOrDie().getAttribute("span");
+        int i;
+        try {
+            i = Integer.parseInt(span);
+            if (i < 1) {
+                i = 1;
+            }
+        }
+        catch (final NumberFormatException e) {
+            i = 1;
+        }
+        return i;
+    }
+
+    /**
+     * Sets the value of the "span" property.
+     * @param span the value of the "span" property
+     */
+    public void jsxSet_span(final Object span) {
+        final Double d = Context.toNumber(span);
+        Integer i = d.intValue();
+        if (i < 1) {
+            if (getBrowserVersion().isIE()) {
+                final Exception e = new Exception("Cannot set the span property to invalid value: " + span);
+                Context.throwAsScriptRuntimeEx(e);
+            }
+            else {
+                i = 1;
+            }
+        }
+        getDomNodeOrDie().setAttribute("span", i.toString());
     }
 
 }

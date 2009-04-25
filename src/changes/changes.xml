@@ -7,7 +7,7 @@
     <body>
         <release version="2.6" date="?" description="Bugfixes">
             <action type="add" dev="sdanig">
-                JavaScript: add support for the col.align, col.chOff and col.ch attributes.
+                JavaScript: add support for the col.align, col.span, col.chOff and col.ch attributes.
             </action>
             <action type="add" dev="sdanig">
                 JavaScript: add support for input.accessKey, label.accessKey, anchor.accessKey, button.accessKey,
