@@ -1097,6 +1097,9 @@
 
     <class name="HTMLAreaElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLAreaElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlArea">
+        <property name="accessKey" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
         <property name="alt" readable="true" writable="true"/>
     </class>
 
