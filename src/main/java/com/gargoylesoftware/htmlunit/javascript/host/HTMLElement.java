@@ -2112,7 +2112,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the value of the "align" property
      */
     protected String getAlign(final boolean returnInvalidValues) {
-        String align = getDomNodeOrDie().getAttribute("align");
+        final String align = getDomNodeOrDie().getAttribute("align");
         if (align.equals("center")
             || align.equals("justify")
             || align.equals("left")
