@@ -51,6 +51,8 @@ public class HTMLAnchorElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "http://x/testsite1.html", "testsite1.html", "http://x/testsite2.html", "testsite2.html",
+        "13", "testanchor", "mailto:" })
     public void getAttribute_and_href() throws Exception {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
@@ -83,9 +85,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
         final HtmlAnchor anchor = page.getAnchorByName("testanchor");
         anchor.click();
 
-        final String[] expectedAlerts = {"http://x/testsite1.html", "testsite1.html",
-            "http://x/testsite2.html", "testsite2.html", "13", "testanchor", "mailto:"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
@@ -360,6 +360,33 @@ public class HTMLAnchorElementTest extends WebTestCase {
         final HtmlPage page = loadPage(getBrowserVersion(), html, null);
         final HtmlAnchor link = page.getAnchors().get(0);
         assertEquals("http://www.gargoylesoftware.commotion/foo.html#O", link.getHrefAttribute());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "", "A", "a", "A", "a8", "8Afoo", "8", "@" })
+    public void readWriteAccessKey() throws Exception {
+        final String html
+            = "<html><body><a id='a1' href='#'></a><a id='a2' href='#' accesskey='A'></a><script>\n"
+            + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
+            + "alert(a1.accessKey);\n"
+            + "alert(a2.accessKey);\n"
+            + "a1.accessKey = 'a';\n"
+            + "a2.accessKey = 'A';\n"
+            + "alert(a1.accessKey);\n"
+            + "alert(a2.accessKey);\n"
+            + "a1.accessKey = 'a8';\n"
+            + "a2.accessKey = '8Afoo';\n"
+            + "alert(a1.accessKey);\n"
+            + "alert(a2.accessKey);\n"
+            + "a1.accessKey = '8';\n"
+            + "a2.accessKey = '@';\n"
+            + "alert(a1.accessKey);\n"
+            + "alert(a2.accessKey);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts(html);
     }
 
     /**

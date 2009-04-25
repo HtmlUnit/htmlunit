@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes">
+            <action type="add" dev="sdanig">
+                JavaScript: add support for anchor.accessKey (Firefox only).
+            </action>
             <action type="remove" dev="asashour">
                 Deprecation: remove HtmlAttr, XmlElement, BrowserVersion.INTERNET_EXPLORER_6_0, .isNetscape(), getNickName(),
                 DomAttr.getHtmlValue(), .getAttributeValue(),
