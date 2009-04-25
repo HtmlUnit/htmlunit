@@ -1750,6 +1750,9 @@
 
     <class name="HTMLLegendElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLLegendElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLegend">
+        <property name="accessKey" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
         <property name="align" notImplemented="true" readable="true" writable="true"/>
         <property name="dataFld" notImplemented="true" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
