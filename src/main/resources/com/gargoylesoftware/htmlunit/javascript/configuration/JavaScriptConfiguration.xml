@@ -1733,6 +1733,9 @@
 
     <class name="HTMLLabelElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLLabelElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLabel">
+        <property name="accessKey" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
         <property name="dataFld" notImplemented="true" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>

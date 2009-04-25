@@ -15,9 +15,13 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlLabel;
@@ -28,19 +32,16 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Daniel Gredler
  */
+@RunWith(BrowserRunner.class)
 public class HTMLLabelElementTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testHtmlFor() throws Exception {
-        testHtmlFor(BrowserVersion.INTERNET_EXPLORER_7);
-        testHtmlFor(BrowserVersion.FIREFOX_2);
-    }
-
-    private void testHtmlFor(final BrowserVersion browserVersion) throws Exception {
+    public void htmlFor() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -65,18 +66,8 @@ public class HTMLLabelElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testHtmlFor_click() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        testHtmlFor_click(BrowserVersion.INTERNET_EXPLORER_7, true);
-        testHtmlFor_click(BrowserVersion.FIREFOX_2, false);
-    }
-
-    /**
-     * @param changedByClick if 'label.click()' JavaScript causes the associated 'htmlFor' element to be changed
-     */
-    private void testHtmlFor_click(final BrowserVersion browserVersion, final boolean changedByClick) throws Exception {
+    @NotYetImplemented(Browser.FF)
+    public void htmlFor_click() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -93,6 +84,36 @@ public class HTMLLabelElementTest extends WebTestCase {
         final HtmlButtonInput button = page.getHtmlElementById("button1");
         assertFalse(checkbox.isChecked());
         button.click();
+
+        final boolean changedByClick = getWebClient().getBrowserVersion().isIE();
         assertTrue(checkbox.isChecked() == changedByClick);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "", "A", "a", "A", "a8", "8Afoo", "8", "@" })
+    public void accessKey() throws Exception {
+        final String html
+            = "<html><body><label id='a1'>a1</label><label id='a2' accesskey='A'>a2</label><script>\n"
+            + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
+            + "alert(a1.accessKey);\n"
+            + "alert(a2.accessKey);\n"
+            + "a1.accessKey = 'a';\n"
+            + "a2.accessKey = 'A';\n"
+            + "alert(a1.accessKey);\n"
+            + "alert(a2.accessKey);\n"
+            + "a1.accessKey = 'a8';\n"
+            + "a2.accessKey = '8Afoo';\n"
+            + "alert(a1.accessKey);\n"
+            + "alert(a2.accessKey);\n"
+            + "a1.accessKey = '8';\n"
+            + "a2.accessKey = '@';\n"
+            + "alert(a1.accessKey);\n"
+            + "alert(a2.accessKey);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }

@@ -7,7 +7,7 @@
     <body>
         <release version="2.6" date="?" description="Bugfixes">
             <action type="add" dev="sdanig">
-                JavaScript: add support for input.accessKey, anchor.accessKey, button.accessKey and area.accessKey (Firefox only).
+                JavaScript: add support for input.accessKey, label.accessKey, anchor.accessKey, button.accessKey and area.accessKey (Firefox only).
             </action>
             <action type="remove" dev="asashour">
                 Deprecation: remove HtmlAttr, XmlElement, BrowserVersion.INTERNET_EXPLORER_6_0, .isNetscape(), getNickName(),
