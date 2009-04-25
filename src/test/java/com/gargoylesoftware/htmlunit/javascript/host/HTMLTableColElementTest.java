@@ -228,4 +228,53 @@ public class HTMLTableColElementTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "50", "75%", "foo", "", "80", "40", "abc", "0" },
+        IE = { "50", "75%", "", "", "error", "error", "80", "40", "", "" })
+    public void width() throws Exception {
+        final String html
+            = "<html><body><table>\n"
+            + "  <col id='c1' width='50'></col>\n"
+            + "  <col id='c2' width='75%'></col>\n"
+            + "  <col id='c3' width='foo'></col>\n"
+            + "  <col id='c4'></col>\n"
+            + "  <tr>\n"
+            + "    <td>a</td>\n"
+            + "    <td>b</td>\n"
+            + "    <td>c</td>\n"
+            + "    <td>d</td>\n"
+            + "  </tr>\n"
+            + "</table>\n"
+            + "<script>\n"
+            + "  function set(e, value) {\n"
+            + "    try {\n"
+            + "      e.width = value;\n"
+            + "    } catch (e) {\n"
+            + "      alert('error');\n"
+            + "    }\n"
+            + "  }\n"
+            + "  var c1 = document.getElementById('c1');\n"
+            + "  var c2 = document.getElementById('c2');\n"
+            + "  var c3 = document.getElementById('c3');\n"
+            + "  var c4 = document.getElementById('c4');\n"
+            + "  alert(c1.width);\n"
+            + "  alert(c2.width);\n"
+            + "  alert(c3.width);\n"
+            + "  alert(c4.width);\n"
+            + "  set(c1, '80');\n"
+            + "  set(c2, 40);\n"
+            + "  set(c3, 'abc');\n"
+            + "  set(c4, -10);\n"
+            + "  alert(c1.width);\n"
+            + "  alert(c2.width);\n"
+            + "  alert(c3.width);\n"
+            + "  alert(c4.width);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }
