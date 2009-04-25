@@ -1126,6 +1126,9 @@
 
     <class name="HTMLButtonElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLButtonElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlButton">
+        <property name="accessKey" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
         <function name="click">
             <browser name="Firefox"/>
         </function>
