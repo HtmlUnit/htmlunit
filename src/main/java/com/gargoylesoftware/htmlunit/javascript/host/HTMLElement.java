@@ -2111,7 +2111,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      *        invalid values; if <tt>false</tt>, this method will return an empty string instead of invalid values
      * @return the value of the "align" property
      */
-    protected String getAlign(boolean returnInvalidValues) {
+    protected String getAlign(final boolean returnInvalidValues) {
         String align = getDomNodeOrDie().getAttribute("align");
         if (align == NOT_FOUND) {
             align = "";
