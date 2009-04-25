@@ -86,7 +86,7 @@ HTMLQuoteElement:cite,dateTime
 S:cite,dateTime
 SAMP:cite,dateTime
 HTMLScriptElement:charset,defer,event,htmlFor,onerror,src,text,type
-HTMLScelectElement:add(),dataFld,dataFormatAs,dataSrc,form,item(),length,multiple,name,namedItem(),onchange,options,remove(),selectedIndex,size,tags(),type,urns(),value
+HTMLSelectElement:add(),dataFld,dataFormatAs,dataSrc,form,item(),length,multiple,name,namedItem(),onchange,options,remove(),selectedIndex,size,tags(),type,urns(),value
 SMALL:cite,dateTime
 HTMLSpacerElement:
 HTMLSpanElement:dataFld,dataFormatAs,dataSrc

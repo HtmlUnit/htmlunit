@@ -86,7 +86,7 @@ HTMLQuoteElement:cite
 S:
 SAMP:
 HTMLScriptElement:charset,defer,event,htmlFor,src,text,type
-HTMLScelectElement:add(),boxObject,disabled,form,item(),length,multiple,name,namedItem(),options,remove(),selectedIndex,size,type,value
+HTMLSelectElement:add(),boxObject,disabled,form,item(),length,multiple,name,namedItem(),options,remove(),selectedIndex,size,type,value
 SMALL:
 HTMLSpacerElement:
 HTMLSpanElement:

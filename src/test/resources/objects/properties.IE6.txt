@@ -86,7 +86,7 @@ HTMLQuoteElement:cite,dateTime,filters
 S:cite,dateTime,filters
 SAMP:cite,dateTime,filters
 HTMLScriptElement:charset,defer,event,filters,htmlFor,onerror,src,text,type
-HTMLScelectElement:add(),dataFld,dataFormatAs,dataSrc,filters,form,item(),length,multiple,name,namedItem(),onchange,options,remove(),selectedIndex,size,tags(),type,urns(),value
+HTMLSelectElement:add(),dataFld,dataFormatAs,dataSrc,filters,form,item(),length,multiple,name,namedItem(),onchange,options,remove(),selectedIndex,size,tags(),type,urns(),value
 SMALL:cite,dateTime,filters
 HTMLSpacerElement:filters
 HTMLSpanElement:dataFld,dataFormatAs,dataSrc,filters
