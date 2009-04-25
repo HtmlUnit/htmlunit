@@ -73,4 +73,39 @@ public class HTMLTableColElementTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "p", "po", ".", "u", "8", "U8" }, IE = { "", "", "", "u", "8", "U8" })
+    public void ch() throws Exception {
+        final String html
+            = "<html><body><table>\n"
+            + "  <col id='c1' char='p'></col>\n"
+            + "  <col id='c2' char='po'></col>\n"
+            + "  <col id='c3'></col>\n"
+            + "  <tr>\n"
+            + "    <td>a</td>\n"
+            + "    <td>b</td>\n"
+            + "    <td>c</td>\n"
+            + "  </tr>\n"
+            + "</table>\n"
+            + "<script>\n"
+            + "  var c1 = document.getElementById('c1');\n"
+            + "  var c2 = document.getElementById('c2');\n"
+            + "  var c3 = document.getElementById('c3');\n"
+            + "  alert(c1.ch);\n"
+            + "  alert(c2.ch);\n"
+            + "  alert(c3.ch);\n"
+            + "  c1.ch = 'u';\n"
+            + "  c2.ch = '8';\n"
+            + "  c3.ch = 'U8';\n"
+            + "  alert(c1.ch);\n"
+            + "  alert(c2.ch);\n"
+            + "  alert(c3.ch);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }

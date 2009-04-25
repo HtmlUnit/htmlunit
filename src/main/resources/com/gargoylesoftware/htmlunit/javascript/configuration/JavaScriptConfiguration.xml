@@ -1962,6 +1962,7 @@
     <class name="HTMLTableColElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableColElement"
         JSObject="true">
         <property name="align" readable="true" writable="true"/>
+        <property name="ch" readable="true" writable="true"/>
         <property name="vAlign" notImplemented="true" readable="true" writable="true"/>
     </class>
 

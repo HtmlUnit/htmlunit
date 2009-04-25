@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.html.DomElement;
+
 /**
  * The JavaScript object "HTMLTableColElement".
  *
@@ -23,6 +25,12 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 public class HTMLTableColElement extends HTMLElement {
 
     private static final long serialVersionUID = -886020322532732229L;
+
+    /**
+     * The value of the "ch" JavaScript attribute for browsers that do not really provide
+     * access to the value of the "char" attribute in the DOM.
+     */
+    private String ch_ = "";
 
     /**
      * Creates an instance.
@@ -46,6 +54,38 @@ public class HTMLTableColElement extends HTMLElement {
      */
     public void jsxSet_align(final String align) {
         setAlign(align, false);
+    }
+
+    /**
+     * Returns the value of the "ch" property.
+     * @return the value of the "ch" property
+     */
+    public String jsxGet_ch() {
+        final boolean ie = getBrowserVersion().isIE();
+        if (ie) {
+            return ch_;
+        }
+        else {
+            String ch = getDomNodeOrDie().getAttribute("char");
+            if (ch == DomElement.ATTRIBUTE_NOT_DEFINED) {
+                ch = ".";
+            }
+            return ch;
+        }
+    }
+
+    /**
+     * Sets the value of the "ch" property.
+     * @param ch the value of the "ch" property
+     */
+    public void jsxSet_ch(final String ch) {
+        final boolean ie = getBrowserVersion().isIE();
+        if (ie) {
+            ch_ = ch;
+        }
+        else {
+            getDomNodeOrDie().setAttribute("char", ch);
+        }
     }
 
 }
