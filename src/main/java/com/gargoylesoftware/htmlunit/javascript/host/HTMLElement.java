@@ -2113,9 +2113,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     protected String getAlign(final boolean returnInvalidValues) {
         String align = getDomNodeOrDie().getAttribute("align");
-        if (align == NOT_FOUND) {
-            align = "";
-        }
         if (align.equals("center")
             || align.equals("justify")
             || align.equals("left")
@@ -2142,6 +2139,38 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
         else {
             Context.throwAsScriptRuntimeEx(new Exception("Cannot set the align property to invalid value: " + align));
+        }
+    }
+
+    /**
+     * Returns the value of the "vAlign" property.
+     * @return the value of the "vAlign" property
+     */
+    protected String getVAlign() {
+        final String valign = getDomNodeOrDie().getAttribute("valign");
+        final boolean ff = getBrowserVersion().isFirefox();
+        if (valign.equals("top")
+            || valign.equals("middle")
+            || valign.equals("bottom")
+            || valign.equals("baseline")
+            || ff) {
+            return valign;
+        }
+        return "top";
+    }
+
+    /**
+     * Sets the value of the "vAlign" property.
+     * @param vAlign the value of the "vAlign" property
+     */
+    protected void setVAlign(final Object vAlign) {
+        final String s = Context.toString(vAlign).toLowerCase();
+        final boolean ff = getBrowserVersion().isFirefox();
+        if (ff || s.equals("top") || s.equals("middle") || s.equals("bottom") || s.equals("baseline")) {
+            getDomNodeOrDie().setAttribute("valign", s);
+        }
+        else {
+            Context.throwAsScriptRuntimeEx(new Exception("Cannot set the vAlign property to invalid value: " + vAlign));
         }
     }
 

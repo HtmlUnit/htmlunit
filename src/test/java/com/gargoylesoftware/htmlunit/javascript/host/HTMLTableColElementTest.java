@@ -185,4 +185,47 @@ public class HTMLTableColElementTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "top", "baseline", "3", "middle", "8", "bottom" },
+        IE = { "top", "baseline", "top", "error", "middle", "baseline", "bottom" })
+    public void vAlign() throws Exception {
+        final String html
+            = "<html><body><table>\n"
+            + "  <col id='c1' valign='top'></col>\n"
+            + "  <col id='c2' valign='baseline'></col>\n"
+            + "  <col id='c3' valign='3'></col>\n"
+            + "  <tr>\n"
+            + "    <td>a</td>\n"
+            + "    <td>b</td>\n"
+            + "    <td>c</td>\n"
+            + "  </tr>\n"
+            + "</table>\n"
+            + "<script>\n"
+            + "  function set(e, value) {\n"
+            + "    try {\n"
+            + "      e.vAlign = value;\n"
+            + "    } catch (e) {\n"
+            + "      alert('error');\n"
+            + "    }\n"
+            + "  }\n"
+            + "  var c1 = document.getElementById('c1');\n"
+            + "  var c2 = document.getElementById('c2');\n"
+            + "  var c3 = document.getElementById('c3');\n"
+            + "  alert(c1.vAlign);\n"
+            + "  alert(c2.vAlign);\n"
+            + "  alert(c3.vAlign);\n"
+            + "  set(c1, 'middle');\n"
+            + "  set(c2, 8);\n"
+            + "  set(c3, 'BOTtom');\n"
+            + "  alert(c1.vAlign);\n"
+            + "  alert(c2.vAlign);\n"
+            + "  alert(c3.vAlign);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }

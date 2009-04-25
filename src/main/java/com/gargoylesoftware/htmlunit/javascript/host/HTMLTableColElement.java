@@ -172,4 +172,20 @@ public class HTMLTableColElement extends HTMLElement {
         getDomNodeOrDie().setAttribute("span", i.toString());
     }
 
+    /**
+     * Returns the value of the "vAlign" property.
+     * @return the value of the "vAlign" property
+     */
+    public String jsxGet_vAlign() {
+        return getVAlign();
+    }
+
+    /**
+     * Sets the value of the "vAlign" property.
+     * @param vAlign the value of the "vAlign" property
+     */
+    public void jsxSet_vAlign(final Object vAlign) {
+        setVAlign(vAlign);
+    }
+
 }
