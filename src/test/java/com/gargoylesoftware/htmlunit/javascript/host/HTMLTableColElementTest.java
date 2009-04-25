@@ -108,4 +108,39 @@ public class HTMLTableColElementTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "0", "4", "", "5", "0", "abc" }, IE = { "", "", "", "5.2", "-3", "abc" })
+    public void chOff() throws Exception {
+        final String html
+            = "<html><body><table>\n"
+            + "  <col id='c1' charoff='0'></col>\n"
+            + "  <col id='c2' charoff='4'></col>\n"
+            + "  <col id='c3'></col>\n"
+            + "  <tr>\n"
+            + "    <td>a</td>\n"
+            + "    <td>b</td>\n"
+            + "    <td>c</td>\n"
+            + "  </tr>\n"
+            + "</table>\n"
+            + "<script>\n"
+            + "  var c1 = document.getElementById('c1');\n"
+            + "  var c2 = document.getElementById('c2');\n"
+            + "  var c3 = document.getElementById('c3');\n"
+            + "  alert(c1.chOff);\n"
+            + "  alert(c2.chOff);\n"
+            + "  alert(c3.chOff);\n"
+            + "  c1.chOff = '5.2';\n"
+            + "  c2.chOff = '-3';\n"
+            + "  c3.chOff = 'abc';\n"
+            + "  alert(c1.chOff);\n"
+            + "  alert(c2.chOff);\n"
+            + "  alert(c3.chOff);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }

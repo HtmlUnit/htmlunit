@@ -28,9 +28,15 @@ public class HTMLTableColElement extends HTMLElement {
 
     /**
      * The value of the "ch" JavaScript attribute for browsers that do not really provide
-     * access to the value of the "char" attribute in the DOM.
+     * access to the value of the "char" DOM attribute.
      */
     private String ch_ = "";
+
+    /**
+     * The value of the "chOff" JavaScript attribute for browsers that do not really provide
+     * access to the value of the "charOff" DOM attribute.
+     */
+    private String chOff_ = "";
 
     /**
      * Creates an instance.
@@ -85,6 +91,44 @@ public class HTMLTableColElement extends HTMLElement {
         }
         else {
             getDomNodeOrDie().setAttribute("char", ch);
+        }
+    }
+
+    /**
+     * Returns the value of the "chOff" property.
+     * @return the value of the "chOff" property
+     */
+    public String jsxGet_chOff() {
+        final boolean ie = getBrowserVersion().isIE();
+        if (ie) {
+            return chOff_;
+        }
+        else {
+            return getDomNodeOrDie().getAttribute("charOff");
+        }
+    }
+
+    /**
+     * Sets the value of the "chOff" property.
+     * @param chOff the value of the "chOff" property
+     */
+    public void jsxSet_chOff(String chOff) {
+        final boolean ie = getBrowserVersion().isIE();
+        if (ie) {
+            chOff_ = chOff;
+        }
+        else {
+            try {
+                Float f = new Float(chOff);
+                if (f < 0) {
+                    f = 0f;
+                }
+                chOff = String.valueOf(f.intValue());
+            }
+            catch (NumberFormatException e) {
+                // Ignore.
+            }
+            getDomNodeOrDie().setAttribute("charOff", chOff);
         }
     }
 
