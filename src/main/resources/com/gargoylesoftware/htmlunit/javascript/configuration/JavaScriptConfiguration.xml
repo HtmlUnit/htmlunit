@@ -2069,6 +2069,9 @@
 
     <class name="HTMLTextAreaElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTextAreaElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTextArea">
+        <property name="accessKey" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
         <property name="defaultValue" readable="true" writable="true">
             <doclink
                 url="http://msdn.microsoft.com/en-us/library/ms533718.aspx"

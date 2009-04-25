@@ -45,7 +45,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
      */
     @Test
     @Alerts({ "1234", "PoohBear" })
-    public void testGetValue() throws Exception {
+    public void getValue() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -66,7 +66,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testOnChange() throws Exception {
+    public void onChange() throws Exception {
         final String htmlContent = "<html><head><title>foo</title>\n"
             + "</head><body>\n"
             + "<p>hello world</p>\n"
@@ -135,7 +135,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
      */
     @Test
     @Alerts({ "TEXTAREA", "INPUT" })
-    public void testSetValue() throws Exception {
+    public void setValue() throws Exception {
         final String content = "<html><head></head>\n"
             + "<body>\n"
             + "<form name='form1'>\n"
@@ -159,7 +159,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
     @Test
     @Alerts(IE = {"undefined", "undefined" },
             FF = {"11", "0" })
-    public void testTextLength() throws Exception {
+    public void textLength() throws Exception {
         final String content = "<html>\n"
             + "<body>\n"
             + "<textarea id='myTextArea'></textarea>\n"
@@ -182,8 +182,8 @@ public class HTMLTextAreaElementTest extends WebTestCase {
     @Test
     @Alerts(IE = {"undefined,undefined", "3,undefined", "3,10" },
             FF = {"11,11", "3,11", "3,10" })
-    public void testSelection() throws Exception {
-        testSelection(3, 10);
+    public void selection() throws Exception {
+        selection(3, 10);
     }
 
     /**
@@ -192,8 +192,8 @@ public class HTMLTextAreaElementTest extends WebTestCase {
     @Test
     @Alerts(IE = {"undefined,undefined", "-3,undefined", "-3,15" },
             FF = {"11,11", "0,11", "0,11" })
-    public void testSelection_outOfBounds() throws Exception {
-        testSelection(-3, 15);
+    public void selection_outOfBounds() throws Exception {
+        selection(-3, 15);
     }
 
     /**
@@ -202,11 +202,11 @@ public class HTMLTextAreaElementTest extends WebTestCase {
     @Test
     @Alerts(IE = {"undefined,undefined", "10,undefined", "10,5" },
             FF = {"11,11", "10,11", "5,5" })
-    public void testSelection_reverseOrder() throws Exception {
-        testSelection(10, 5);
+    public void selection_reverseOrder() throws Exception {
+        selection(10, 5);
     }
 
-    private void testSelection(final int selectionStart, final int selectionEnd) throws Exception {
+    private void selection(final int selectionStart, final int selectionEnd) throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "<textarea id='myTextArea'></textarea>\n"
@@ -231,7 +231,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
     @Test
     @Alerts(IE = { "yes" },
             FF = { "no" })
-    public void testDoScroll() throws Exception {
+    public void doScroll() throws Exception {
         final String html =
             "<html>\n"
             + "  <head>\n"
@@ -262,7 +262,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
     @Alerts(IE = { "Hello\r\nworld\r\n" },
             FF = { "Hello\nworld\n" })
     public void value_ignoreFirstNewLine() throws Exception {
-        testValue("\nHello\nworld\n");
+        value("\nHello\nworld\n");
     }
 
     /**
@@ -272,10 +272,10 @@ public class HTMLTextAreaElementTest extends WebTestCase {
     @Alerts(IE = { " \r\nHello\r\nworld\r\n" },
             FF = { " \nHello\nworld\n" })
     public void value_spaceBeforeFirstNewLine() throws Exception {
-        testValue(" \nHello\nworld\n");
+        value(" \nHello\nworld\n");
     }
 
-    private void testValue(final String textAreaBody) throws Exception {
+    private void value(final String textAreaBody) throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -337,4 +337,32 @@ public class HTMLTextAreaElementTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "", "A", "a", "A", "a8", "8Afoo", "8", "@" })
+    public void accessKey() throws Exception {
+        final String html
+            = "<html><body><textarea id='a1'>a1</textarea><textarea id='a2' accesskey='A'>a2</textarea><script>\n"
+            + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
+            + "alert(a1.accessKey);\n"
+            + "alert(a2.accessKey);\n"
+            + "a1.accessKey = 'a';\n"
+            + "a2.accessKey = 'A';\n"
+            + "alert(a1.accessKey);\n"
+            + "alert(a2.accessKey);\n"
+            + "a1.accessKey = 'a8';\n"
+            + "a2.accessKey = '8Afoo';\n"
+            + "alert(a1.accessKey);\n"
+            + "alert(a2.accessKey);\n"
+            + "a1.accessKey = '8';\n"
+            + "a2.accessKey = '@';\n"
+            + "alert(a1.accessKey);\n"
+            + "alert(a2.accessKey);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }
