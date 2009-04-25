@@ -125,7 +125,7 @@ public class HTMLTableColElement extends HTMLElement {
                 }
                 chOff = String.valueOf(f.intValue());
             }
-            catch (NumberFormatException e) {
+            catch (final NumberFormatException e) {
                 // Ignore.
             }
             getDomNodeOrDie().setAttribute("charOff", chOff);
