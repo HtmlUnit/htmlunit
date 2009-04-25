@@ -61,7 +61,7 @@ public class HTMLInputElementTest extends WebTestCase {
      */
     @Test
     @Alerts({"foo", "text", "textfield1", "form1", "cat" })
-    public void testStandardProperties_Text() throws Exception {
+    public void standardProperties_Text() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -90,7 +90,7 @@ public class HTMLInputElementTest extends WebTestCase {
             "button", "button", "checkbox", "file", "hidden", "select-one",
             "select-multiple", "password", "reset", "reset", "submit",
             "submit", "text", "textarea" })
-    public void testTextProperties() throws Exception {
+    public void textProperties() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -142,7 +142,7 @@ public class HTMLInputElementTest extends WebTestCase {
      */
     @Test
     @Alerts({"false", "true" })
-    public void testCheckedAttribute_Checkbox() throws Exception {
+    public void checkedAttribute_Checkbox() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -172,7 +172,7 @@ public class HTMLInputElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testCheckedAttribute_Radio() throws Exception {
+    public void checkedAttribute_Radio() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -216,7 +216,7 @@ public class HTMLInputElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testDisabledAttribute() throws Exception {
+    public void disabledAttribute() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -264,7 +264,7 @@ public class HTMLInputElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testInputValue() throws Exception {
+    public void inputValue() throws Exception {
         final String html =
             "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -287,7 +287,7 @@ public class HTMLInputElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testInputSelect_NotDefinedAsPropertyAndFunction() throws Exception {
+    public void inputSelect_NotDefinedAsPropertyAndFunction() throws Exception {
         final String html =
             "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -310,7 +310,7 @@ public class HTMLInputElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testThisDotFormInOnClick() throws Exception {
+    public void thisDotFormInOnClick() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>First</title></head>\n"
             + "<body>\n"
@@ -334,7 +334,7 @@ public class HTMLInputElementTest extends WebTestCase {
      */
     @Test
     @Alerts({"true", "true", "true", "true", "true" })
-    public void testFieldDotForm() throws Exception {
+    public void fieldDotForm() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title><script>\n"
             + "function test(){\n"
@@ -363,7 +363,7 @@ public class HTMLInputElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testInputNameChange() throws Exception {
+    public void inputNameChange() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + " document.form1.textfield1.name = 'changed';\n"
@@ -398,7 +398,7 @@ public class HTMLInputElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testOnChange() throws Exception {
+    public void onChange() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "</head><body>\n"
             + "<p>hello world</p>\n"
@@ -426,7 +426,7 @@ public class HTMLInputElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testOnChangeSetByJavaScript() throws Exception {
+    public void onChangeSetByJavaScript() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "</head><body>\n"
             + "<p>hello world</p>\n"
@@ -460,7 +460,7 @@ public class HTMLInputElementTest extends WebTestCase {
      */
     @Test
     @Alerts({"on", "on" })
-    public void testDefautValue() throws Exception {
+    public void defautValue() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -483,7 +483,7 @@ public class HTMLInputElementTest extends WebTestCase {
      */
     @Test
     @Alerts({"radio", "hidden", "image" })
-    public void testChangeType() throws Exception {
+    public void changeType() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -509,7 +509,7 @@ public class HTMLInputElementTest extends WebTestCase {
      */
     @Test
     @Alerts({"radio", "hidden", "image" })
-    public void testChangeType2() throws Exception {
+    public void changeType2() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -536,7 +536,7 @@ public class HTMLInputElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testDefaultValues() throws Exception {
+    public void defaultValues() throws Exception {
         final String html
             = "<html><head></head><body>\n"
                 + "<form name='myForm'>\n"
@@ -591,7 +591,7 @@ public class HTMLInputElementTest extends WebTestCase {
      */
     @Test
     @Alerts({"text", "hidden" })
-    public void testCreateInputAndChangeType() throws Exception {
+    public void createInputAndChangeType() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -612,7 +612,7 @@ public class HTMLInputElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testButtonOutsideForm() throws Exception {
+    public void buttonOutsideForm() throws Exception {
         final String content
             = "<html><head><title>foo</title></head><body>\n"
             + "<button id='clickMe' onclick='alert(123)'>click me</button>\n"
@@ -634,7 +634,7 @@ public class HTMLInputElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testOnChangeCallsFormSubmit() throws Exception {
+    public void onChangeCallsFormSubmit() throws Exception {
         final String content
             = "<html><head>\n"
             + "</head>\n"
@@ -662,7 +662,7 @@ public class HTMLInputElementTest extends WebTestCase {
      */
     @Test
     @Alerts({"undefined", "30", "undefined", "30", "30", "30", "40", "50", "string", "number" })
-    public void testMaxLength() throws Exception {
+    public void maxLength() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -694,7 +694,7 @@ public class HTMLInputElementTest extends WebTestCase {
     @Test
     @Browsers(Browser.FF)
     @Alerts("hello")
-    public void setSelectionRange() throws Exception {
+    public void selectionRange() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -803,6 +803,33 @@ public class HTMLInputElementTest extends WebTestCase {
             + "  </head>\n"
             + "  <body onload='test()'><input type='text' id='i' /></body>\n"
             + "</html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "", "A", "a", "A", "a8", "8Afoo", "8", "@" })
+    public void accessKey() throws Exception {
+        final String html
+            = "<html><body><input id='a1'></input><input id='a2' accesskey='A'></input><script>\n"
+            + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
+            + "alert(a1.accessKey);\n"
+            + "alert(a2.accessKey);\n"
+            + "a1.accessKey = 'a';\n"
+            + "a2.accessKey = 'A';\n"
+            + "alert(a1.accessKey);\n"
+            + "alert(a2.accessKey);\n"
+            + "a1.accessKey = 'a8';\n"
+            + "a2.accessKey = '8Afoo';\n"
+            + "alert(a1.accessKey);\n"
+            + "alert(a2.accessKey);\n"
+            + "a1.accessKey = '8';\n"
+            + "a2.accessKey = '@';\n"
+            + "alert(a1.accessKey);\n"
+            + "alert(a2.accessKey);\n"
+            + "</script></body></html>";
         loadPageWithAlerts(html);
     }
 
