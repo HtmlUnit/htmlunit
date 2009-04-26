@@ -86,10 +86,11 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     private static final long serialVersionUID = -7730298149962810325L;
 
     /**
-     * The minimum delay that can be used with setInterval() or setTimeout().
+     * The minimum delay that can be used with setInterval() or setTimeout(). Browser minimums are
+     * usually in the 10ms to 15ms range, but there's really no reason for us to waste that much time.
      * http://jsninja.com/Timers#Minimum_Timer_Delay_and_Reliability
      */
-    private static final int MIN_TIMER_DELAY = 15;
+    private static final int MIN_TIMER_DELAY = 1;
 
     private HTMLDocument document_;
     private Navigator navigator_;
