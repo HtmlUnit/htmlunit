@@ -18,9 +18,7 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URL;
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -212,6 +210,10 @@ public class PropertiesTest extends WebTestCase {
                 .append("<span style='color: green'>").append("Implemented").append("</span>").append("<br>")
                 .append("<span style='color: red'>").append("Should not be implemented").append("</span>")
                 .append("</html>");
+            System.out.println(new File(getArtifactsDirectory()
+                + "/properties-"
+                + browserVersion_.getNickname()
+                + ".html"));
             FileUtils.writeStringToFile(new File(getArtifactsDirectory()
                 + "/properties-"
                 + browserVersion_.getNickname()
@@ -304,11 +306,8 @@ public class PropertiesTest extends WebTestCase {
             new File(getArtifactsDirectory() + "/properties-" + browserVersion_.getNickname() + ".png"));
     }
 
-    private String getArtifactsDirectory() throws UnsupportedEncodingException {
-        final Class< ? > clazz = PropertiesTest.class;
-        final String name = clazz.getPackage().getName().replace('.', '/');
-        final String dirName =
-            URLDecoder.decode(clazz.getClassLoader().getResource(name).getPath(), "UTF-8") + "/artifacts/";
+    private String getArtifactsDirectory() {
+        final String dirName = "./artifacts";
         final File dir = new File(dirName);
         if (!dir.exists()) {
             if (!dir.mkdir()) {
