@@ -210,10 +210,7 @@ public class PropertiesTest extends WebTestCase {
                 .append("<span style='color: green'>").append("Implemented").append("</span>").append("<br>")
                 .append("<span style='color: red'>").append("Should not be implemented").append("</span>")
                 .append("</html>");
-            System.out.println(new File(getArtifactsDirectory()
-                + "/properties-"
-                + browserVersion_.getNickname()
-                + ".html"));
+
             FileUtils.writeStringToFile(new File(getArtifactsDirectory()
                 + "/properties-"
                 + browserVersion_.getNickname()

@@ -187,6 +187,19 @@ public class ExtJS22Test extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    public void form_anchoring() throws Exception {
+        final HtmlPage page = getPage("form", "anchoring");
+        final String xml = page.asXml();
+        assertTrue(xml.contains("Send To:"));
+        assertTrue(xml.contains("Subject:"));
+        assertTrue(xml.contains("Send"));
+        assertTrue(xml.contains("Cancel"));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     public void grid_binding() throws Exception {
         final HtmlPage page = getPage("grid", "binding");
         page.getWebClient().waitForBackgroundJavaScriptStartingBefore(2000);
