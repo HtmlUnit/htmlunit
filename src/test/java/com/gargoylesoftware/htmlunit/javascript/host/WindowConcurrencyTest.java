@@ -25,6 +25,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -136,6 +137,38 @@ public class WindowConcurrencyTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals(0, page.getWebClient().waitForBackgroundJavaScript(1000));
         assertEquals(Collections.nCopies(3, "blah"), collectedAlerts);
+    }
+
+    /**
+     * When <tt>setInterval()</tt> is called with a 0 millisecond delay, Internet Explorer turns it
+     * into a <tt>setTimeout()</tt> call, and Firefox imposes a minimum timer restriction.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void setIntervalZeroDelay() throws Exception {
+        final String html
+            = "<html><body><div id='d'></div>\n"
+            + "<script>setInterval('document.getElementById(\"d\").innerHTML += \"x\"', 0);</script>\n"
+            + "</body></html>";
+
+        final HtmlPage page1 = loadPage(BrowserVersion.FIREFOX_3, html, new ArrayList<String>());
+        try {
+            page1.getWebClient().waitForBackgroundJavaScript(1000);
+            assertTrue(page1.getElementById("d").asText().length() > 1);
+        }
+        finally {
+            page1.getWebClient().closeAllWindows();
+        }
+
+        final HtmlPage page2 = loadPage(BrowserVersion.INTERNET_EXPLORER_7, html, new ArrayList<String>());
+        try {
+            page2.getWebClient().waitForBackgroundJavaScript(1000);
+            assertEquals(1, page2.getElementById("d").asText().length());
+        }
+        finally {
+            page2.getWebClient().closeAllWindows();
+        }
     }
 
     /**

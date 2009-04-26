@@ -6,6 +6,12 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes">
+            <action type="fix" dev="sdanig">
+                JavaScript: setInterval() invocations with a 0 millisecond delay behave like setTimeout() invocations in IE.
+            </action>
+            <action type="fix" dev="sdanig">
+                JavaScript: impose minimum delay of 15 milliseconds on calls to setInterval() and setTimeout().
+            </action>
             <action type="add" dev="sdanig">
                 JavaScript: add support for the col.align, col.vAlign, col.span, col.width, col.chOff and col.ch attributes.
             </action>

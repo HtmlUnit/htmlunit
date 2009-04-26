@@ -84,6 +84,13 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptStringJob;
 public class Window extends SimpleScriptable implements ScriptableWithFallbackGetter {
 
     private static final long serialVersionUID = -7730298149962810325L;
+
+    /**
+     * The minimum delay that can be used with setInterval() or setTimeout().
+     * http://jsninja.com/Timers#Minimum_Timer_Delay_and_Reliability
+     */
+    private static final int MIN_TIMER_DELAY = 15;
+
     private HTMLDocument document_;
     private Navigator navigator_;
     private WebWindow webWindow_;
@@ -345,7 +352,10 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param language specifies language
      * @return the id of the created timer
      */
-    public int jsxFunction_setTimeout(final Object code, final int timeout, final Object language) {
+    public int jsxFunction_setTimeout(final Object code, int timeout, final Object language) {
+        if (timeout < MIN_TIMER_DELAY) {
+            timeout = MIN_TIMER_DELAY;
+        }
         final int id;
         final WebWindow w = getWebWindow();
         final Page page = (Page) getDomNodeOrNull();
@@ -1064,7 +1074,13 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param language specifies language
      * @return the id of the created interval
      */
-    public int jsxFunction_setInterval(final Object code, final int timeout, final Object language) {
+    public int jsxFunction_setInterval(final Object code, int timeout, final Object language) {
+        if (timeout == 0 && getBrowserVersion().isIE()) {
+            return jsxFunction_setTimeout(code, timeout, language);
+        }
+        if (timeout < MIN_TIMER_DELAY) {
+            timeout = MIN_TIMER_DELAY;
+        }
         final int id;
         final WebWindow w = getWebWindow();
         final Page page = (Page) getDomNodeOrNull();
