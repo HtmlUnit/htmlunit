@@ -2478,6 +2478,9 @@
         <property name="rangeCount" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
+        <property name="type" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
         <function name="collapse">
             <browser name="Firefox"/>
         </function>
@@ -2488,6 +2491,9 @@
             <browser name="Firefox"/>
         </function>
         <function name="createRange">
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
+        <function name="empty">
             <browser name="Microsoft Internet Explorer"/>
         </function>
         <function name="extend">

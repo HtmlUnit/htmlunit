@@ -202,6 +202,15 @@ public class SelectionTest extends WebTestCase {
         test("", "selection.rangeCount > 0 ? selection.getRangeAt(0) : 'none'", "x", "none", "cx");
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.IE)
+    public void empty() throws Exception {
+        test("selection.empty()", "selection.type", "x", "None", "None");
+    }
+
     private void test(final String action, final String x, final String alert, final String... expected)
         throws Exception {
 

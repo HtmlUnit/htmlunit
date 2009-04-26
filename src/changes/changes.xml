@@ -7,6 +7,9 @@
     <body>
         <release version="2.6" date="?" description="Bugfixes">
             <action type="fix" dev="sdanig">
+                JavaScript: add support for selection.empty() and selection.type (IE only).
+            </action>
+            <action type="fix" dev="sdanig">
                 JavaScript: setInterval() invocations with a 0 millisecond delay behave like setTimeout() invocations in IE.
             </action>
             <action type="fix" dev="sdanig">

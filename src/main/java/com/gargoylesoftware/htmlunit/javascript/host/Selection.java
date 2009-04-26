@@ -33,6 +33,8 @@ public class Selection extends SimpleScriptable {
 
     private static final long serialVersionUID = 3712755502782559551L;
 
+    private String type_ = "None";
+
     /**
      * {@inheritDoc}
      */
@@ -99,6 +101,14 @@ public class Selection extends SimpleScriptable {
     }
 
     /**
+     * Returns the type of selection (IE only).
+     * @return the type of selection
+     */
+    public String jsxGet_type() {
+        return type_;
+    }
+
+    /**
      * Collapses the current selection to a single point. The document is not modified.
      * @param parentNode the caret location will be within this node
      * @param offset the caret will be placed this number of characters from the beginning of the parentNode's text
@@ -132,6 +142,13 @@ public class Selection extends SimpleScriptable {
         range.setParentScope(getParentScope());
         range.setPrototype(getPrototype(range.getClass()));
         return range;
+    }
+
+    /**
+     * Cancels the current selection, sets the selection type to none, and sets the item property to null.
+     */
+    public void jsxFunction_empty() {
+        type_ = "None";
     }
 
     /**
