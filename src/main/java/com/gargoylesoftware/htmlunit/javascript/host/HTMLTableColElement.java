@@ -73,13 +73,11 @@ public class HTMLTableColElement extends HTMLElement {
         if (ie) {
             return ch_;
         }
-        else {
-            String ch = getDomNodeOrDie().getAttribute("char");
-            if (ch == DomElement.ATTRIBUTE_NOT_DEFINED) {
-                ch = ".";
-            }
-            return ch;
+        String ch = getDomNodeOrDie().getAttribute("char");
+        if (ch == DomElement.ATTRIBUTE_NOT_DEFINED) {
+            ch = ".";
         }
+        return ch;
     }
 
     /**
@@ -105,9 +103,7 @@ public class HTMLTableColElement extends HTMLElement {
         if (ie) {
             return chOff_;
         }
-        else {
-            return getDomNodeOrDie().getAttribute("charOff");
-        }
+        return getDomNodeOrDie().getAttribute("charOff");
     }
 
     /**
@@ -208,9 +204,7 @@ public class HTMLTableColElement extends HTMLElement {
             if (getBrowserVersion().isIE()) {
                 return "";
             }
-            else {
-                return width;
-            }
+            return width;
         }
     }
 
