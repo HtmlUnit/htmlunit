@@ -18,12 +18,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Test;
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -38,9 +41,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version $Revision$
  * @author Brad Clarke
+ * @author Daniel Gredler
  */
 public class WindowConcurrencyTest extends WebTestCase {
 
+    private WebClient client_;
     private long startTime_;
 
     private void startTimedTest() {
@@ -58,6 +63,22 @@ public class WindowConcurrencyTest extends WebTestCase {
     }
 
     /**
+     * Sets up the tests.
+     */
+    @Before
+    public void before() {
+        client_ = new WebClient();
+    }
+
+    /**
+     * Tears down the tests.
+     */
+    @After
+    public void after() {
+        client_.closeAllWindows();
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -67,8 +88,8 @@ public class WindowConcurrencyTest extends WebTestCase {
             + "</script></body></html>";
 
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals(0, page.getWebClient().waitForBackgroundJavaScript(1000));
+        loadPage(client_, content, collectedAlerts);
+        assertEquals(0, client_.waitForBackgroundJavaScript(1000));
         assertEquals(new String[] {"Yo!"}, collectedAlerts);
     }
 
@@ -83,8 +104,8 @@ public class WindowConcurrencyTest extends WebTestCase {
             + "</script></body></html>";
 
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals(0, page.getWebClient().waitForBackgroundJavaScript(1000));
+        loadPage(client_, content, collectedAlerts);
+        assertEquals(0, client_.waitForBackgroundJavaScript(1000));
         assertEquals(new String[] {"Yo!"}, collectedAlerts);
     }
 
@@ -104,7 +125,7 @@ public class WindowConcurrencyTest extends WebTestCase {
             + "</script></body></html>";
 
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
-        loadPage(content, collectedAlerts);
+        loadPage(client_, content, collectedAlerts);
     }
 
     /**
@@ -134,8 +155,8 @@ public class WindowConcurrencyTest extends WebTestCase {
             + "</html>";
 
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals(0, page.getWebClient().waitForBackgroundJavaScript(1000));
+        loadPage(client_, content, collectedAlerts);
+        assertEquals(0, client_.waitForBackgroundJavaScript(1000));
         assertEquals(Collections.nCopies(3, "blah"), collectedAlerts);
     }
 
@@ -149,25 +170,29 @@ public class WindowConcurrencyTest extends WebTestCase {
     public void setIntervalZeroDelay() throws Exception {
         final String html
             = "<html><body><div id='d'></div>\n"
-            + "<script>setInterval('document.getElementById(\"d\").innerHTML += \"x\"', 0);</script>\n"
+            + "<script>var id = setInterval('document.getElementById(\"d\").innerHTML += \"x\"', 0);</script>\n"
             + "</body></html>";
 
-        final HtmlPage page1 = loadPage(BrowserVersion.FIREFOX_3, html, new ArrayList<String>());
+        WebClient client = new WebClient(BrowserVersion.FIREFOX_3);
         try {
-            page1.getWebClient().waitForBackgroundJavaScript(1000);
+            final HtmlPage page1 = loadPage(client, html, new ArrayList<String>());
+            Thread.sleep(1000);
+            page1.executeJavaScript("clearInterval(id)");
+            client.waitForBackgroundJavaScript(1000);
             assertTrue(page1.getElementById("d").asText().length() > 1);
         }
         finally {
-            page1.getWebClient().closeAllWindows();
+            client.closeAllWindows();
         }
 
-        final HtmlPage page2 = loadPage(BrowserVersion.INTERNET_EXPLORER_7, html, new ArrayList<String>());
+        client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7);
         try {
-            page2.getWebClient().waitForBackgroundJavaScript(1000);
+            final HtmlPage page2 = loadPage(client, html, new ArrayList<String>());
+            client.waitForBackgroundJavaScript(1000);
             assertEquals(1, page2.getElementById("d").asText().length());
         }
         finally {
-            page2.getWebClient().closeAllWindows();
+            client.closeAllWindows();
         }
     }
 
@@ -194,8 +219,8 @@ public class WindowConcurrencyTest extends WebTestCase {
         final String[] expected = {"1"};
         final List<String> actual = Collections.synchronizedList(new ArrayList<String>());
         startTimedTest();
-        final HtmlPage page = loadPage(html, actual);
-        assertEquals(0, page.getWebClient().waitForBackgroundJavaScript(10000));
+        loadPage(client_, html, actual);
+        assertEquals(0, client_.waitForBackgroundJavaScript(10000));
         assertEquals(expected, actual);
         assertMaxTestRunTime(5000);
     }
@@ -213,17 +238,15 @@ public class WindowConcurrencyTest extends WebTestCase {
             + "</head><body onload='document.location.replace(\"" + URL_SECOND + "\")'></body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        client_.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
+        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
-        webClient.setWebConnection(webConnection);
+        client_.setWebConnection(webConnection);
 
-        final HtmlPage page = webClient.getPage(URL_FIRST);
+        final HtmlPage page = client_.getPage(URL_FIRST);
         assertEquals(0, page.getWebClient().waitForBackgroundJavaScript(2000));
         assertEquals("Second", page.getTitleText());
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
@@ -252,8 +275,8 @@ public class WindowConcurrencyTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        page.getWebClient().waitForBackgroundJavaScript(2000);
+        loadPage(client_, content, collectedAlerts);
+        client_.waitForBackgroundJavaScript(2000);
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
     }
 
@@ -278,8 +301,8 @@ public class WindowConcurrencyTest extends WebTestCase {
             + "</script><div id='a'></div></body></html>";
         final String[] expected = {"true", "completed"};
         final List<String> actual = Collections.synchronizedList(new ArrayList<String>());
-        final HtmlPage page = loadPage(html, actual);
-        page.getWebClient().waitForBackgroundJavaScript(5000);
+        loadPage(client_, html, actual);
+        client_.waitForBackgroundJavaScript(5000);
         assertEquals(expected, actual);
     }
 
@@ -305,8 +328,8 @@ public class WindowConcurrencyTest extends WebTestCase {
             + "</script></body></html>";
 
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals(0, page.getWebClient().waitForBackgroundJavaScript((max + 1) * 1000));
+        loadPage(client_, content, collectedAlerts);
+        assertEquals(0, client_.waitForBackgroundJavaScript((max + 1) * 1000));
         assertEquals(Collections.nCopies(max, "ping"), collectedAlerts);
     }
 
@@ -350,10 +373,9 @@ public class WindowConcurrencyTest extends WebTestCase {
         final String[] expectedAlerts = {"started", "finished"};
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(html, collectedAlerts);
+        final HtmlPage page = loadPage(client_, html, collectedAlerts);
         final Function mySpecialFunction = new BaseFunction() {
             private static final long serialVersionUID = -2445994102698852899L;
-
             @Override
             public Object call(final Context cx, final Scriptable scope,
                     final Scriptable thisObj, final Object[] args) {
@@ -366,7 +388,7 @@ public class WindowConcurrencyTest extends WebTestCase {
         final Window window = (Window) page.getEnclosingWindow().getScriptObject();
         ScriptableObject.putProperty(window, "mySpecialFunction", mySpecialFunction);
         page.<HtmlElement>getHtmlElementById("clickMe").click();
-        page.getWebClient().waitForBackgroundJavaScript(5000);
+        client_.waitForBackgroundJavaScript(5000);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -387,17 +409,15 @@ public class WindowConcurrencyTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-
-        final WebClient client = new WebClient();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        client_.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(html);
-        client.setWebConnection(webConnection);
+        client_.setWebConnection(webConnection);
 
-        final HtmlPage page = client.getPage(URL_FIRST);
-        client.closeAllWindows();
-        page.getWebClient().waitForBackgroundJavaScript(5000);
+        client_.getPage(URL_FIRST);
+        client_.closeAllWindows();
+        client_.waitForBackgroundJavaScript(5000);
         assertEquals(0, collectedAlerts.size());
     }
 
@@ -419,20 +439,18 @@ public class WindowConcurrencyTest extends WebTestCase {
         final String html2 = "<html></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-
-        final WebClient client = new WebClient();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        client_.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html1);
         conn.setResponse(URL_SECOND, html2);
-        client.setWebConnection(conn);
+        client_.setWebConnection(conn);
 
-        final HtmlPage page1 = client.getPage(URL_FIRST);
-        final HtmlPage page2 = client.getPage(URL_SECOND);
+        client_.getPage(URL_FIRST);
+        client_.getPage(URL_SECOND);
 
-        page1.getWebClient().waitForBackgroundJavaScript(5000);
-        page2.getWebClient().waitForBackgroundJavaScript(5000);
+        client_.waitForBackgroundJavaScript(5000);
+        client_.waitForBackgroundJavaScript(5000);
 
         assertEquals(0, collectedAlerts.size());
     }
@@ -458,16 +476,14 @@ public class WindowConcurrencyTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-
-        final WebClient client = new WebClient();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        client_.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection conn = new MockWebConnection();
         conn.setDefaultResponse(html);
-        client.setWebConnection(conn);
+        client_.setWebConnection(conn);
 
-        client.getPage(URL_FIRST);
-        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
+        client_.getPage(URL_FIRST);
+        assertEquals(0, client_.waitForBackgroundJavaScriptStartingBefore(1000));
 
         final String[] expectedAlerts = {"in f"};
         assertEquals(expectedAlerts, collectedAlerts);
