@@ -268,7 +268,7 @@ public final class HTMLParser {
         webWindow.setEnclosedPage(page);
 
         final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(page, url);
-        final String charset = webResponse.getContentCharSet();
+        final String charset = webResponse.getContentCharset();
 
         final InputStream content = webResponse.getContentAsStream();
         final XMLInputSource in = new XMLInputSource(null, url.toString(), null, content, charset);
@@ -391,7 +391,7 @@ public final class HTMLParser {
          */
         public void pushInputString(final String sourceString) {
             final WebResponse webResponse = page_.getWebResponse();
-            final String charset = webResponse.getContentCharSet();
+            final String charset = webResponse.getContentCharset();
             final XMLInputSource in = new XMLInputSource(null, webResponse.getRequestUrl().toString(),
                 null, new StringReader(sourceString), charset);
             ((HTMLConfiguration) fConfiguration).evaluateInputSource(in);

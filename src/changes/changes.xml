@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes">
+            <action type="update" dev="asashour">
+                Add WebResponse.getContentCharset().
+            </action>
             <action type="fix" dev="sdanig">
                 JavaScript: add support for selection.empty() and selection.type (IE only).
             </action>

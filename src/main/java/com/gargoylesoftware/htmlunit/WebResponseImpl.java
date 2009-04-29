@@ -47,7 +47,6 @@ public class WebResponseImpl implements WebResponse, Serializable {
     private final transient Log log_ = LogFactory.getLog(WebResponseImpl.class);
     private long loadTime_;
     private WebResponseData responseData_;
-    private String charset_;
     private WebRequestSettings requestSettings_;
 
     /**
@@ -60,7 +59,7 @@ public class WebResponseImpl implements WebResponse, Serializable {
      */
     public WebResponseImpl(final WebResponseData responseData, final URL url,
             final HttpMethod requestMethod, final long loadTime) {
-        this(responseData, TextUtil.DEFAULT_CHARSET, new WebRequestSettings(url, requestMethod), loadTime);
+        this(responseData, new WebRequestSettings(url, requestMethod), loadTime);
     }
 
     /**
@@ -70,11 +69,24 @@ public class WebResponseImpl implements WebResponse, Serializable {
      * @param charset           Charset used if not returned in the response
      * @param requestSettings   the request settings used to get this response
      * @param loadTime          How long the response took to be sent
+     * @deprecated As of 2.6, please use @link {@link #WebResponseImpl(WebResponseData, WebRequestSettings, long)}
      */
+    @Deprecated
     public WebResponseImpl(final WebResponseData responseData, final String charset,
             final WebRequestSettings requestSettings, final long loadTime) {
+        this(responseData, requestSettings, loadTime);
+    }
+
+    /**
+     * Constructs with all data.
+     *
+     * @param responseData      Data that was send back
+     * @param requestSettings   the request settings used to get this response
+     * @param loadTime          How long the response took to be sent
+     */
+    public WebResponseImpl(final WebResponseData responseData,
+            final WebRequestSettings requestSettings, final long loadTime) {
         responseData_ = responseData;
-        charset_ = charset;
         requestSettings_ = requestSettings;
         loadTime_ = loadTime;
     }
@@ -183,8 +195,8 @@ public class WebResponseImpl implements WebResponse, Serializable {
                     charset = xmlEncoding;
                 }
                 else {
-                    log_.debug("No charset guessed, using " + charset_);
-                    charset = charset_;
+                    log_.debug("No charset guessed");
+                    charset = null;
                 }
             }
         }
@@ -215,8 +227,22 @@ public class WebResponseImpl implements WebResponse, Serializable {
     /**
      * {@inheritDoc}
      */
+    public String getContentCharset() {
+        String charset = getContentCharSet();
+        if (charset == null) {
+            charset = getRequestSettings().getCharset();
+        }
+        if (charset == null) {
+            charset = TextUtil.DEFAULT_CHARSET;
+        }
+        return charset;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public String getContentAsString() {
-        return getContentAsString(getContentCharSet());
+        return getContentAsString(getContentCharset());
     }
 
     /**

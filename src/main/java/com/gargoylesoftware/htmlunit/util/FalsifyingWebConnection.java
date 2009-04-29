@@ -83,7 +83,7 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
      * @throws IOException if an encoding problem occurred
      */
     protected WebResponse replaceContent(final WebResponse wr, final String newContent) throws IOException {
-        final byte[] body = newContent.getBytes(wr.getContentCharSet());
+        final byte[] body = newContent.getBytes(wr.getContentCharset());
         final WebResponseData wrd = new WebResponseData(body, wr.getStatusCode(), wr.getStatusMessage(),
             wr.getResponseHeaders());
         return new WebResponseImpl(wrd, wr.getRequestUrl(), wr.getRequestMethod(), wr.getLoadTime());

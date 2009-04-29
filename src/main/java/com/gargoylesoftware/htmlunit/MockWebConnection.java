@@ -64,7 +64,7 @@ public class MockWebConnection implements WebConnection {
             }
         }
 
-        return new WebResponseImpl(response, settings.getCharset(), settings, 0);
+        return new WebResponseImpl(response, settings, 0);
     }
 
     /**

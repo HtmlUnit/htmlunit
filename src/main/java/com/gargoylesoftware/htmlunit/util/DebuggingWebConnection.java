@@ -117,7 +117,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         final File f = createFile(settings.getUrl(), extension);
         final String content = response.getContentAsString();
         final URL url = response.getRequestUrl();
-        FileUtils.writeStringToFile(f, content, response.getContentCharSet());
+        FileUtils.writeStringToFile(f, content, response.getContentCharset());
         LOG.info("Created file " + f.getAbsolutePath() + " for response " + counter_ + ": " + url);
 
         final StringBuilder buffer = new StringBuilder();

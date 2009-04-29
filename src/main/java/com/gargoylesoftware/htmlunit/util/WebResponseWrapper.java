@@ -92,6 +92,14 @@ public class WebResponseWrapper implements WebResponse {
 
     /**
      * {@inheritDoc}
+     * The default behavior of this method is to return getContentCharset() on the wrapped connection object.
+     */
+    public String getContentCharset() {
+        return wrappedWebResponse_.getContentCharset();
+    }
+
+    /**
+     * {@inheritDoc}
      * The default behavior of this method is to return getContentType() on the wrapped connection object.
      */
     public String getContentType() {

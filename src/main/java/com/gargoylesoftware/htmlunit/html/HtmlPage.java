@@ -430,7 +430,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         }
         // Try to get the encoding from HTTP headers, or based on the content itself.
         if (originalCharset_ == null) {
-            originalCharset_ = getWebResponse().getContentCharSet();
+            originalCharset_ = getWebResponse().getContentCharset();
         }
         return originalCharset_;
     }
@@ -1060,7 +1060,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         }
 
         if (StringUtils.isEmpty(scriptEncoding)) {
-            final String contentCharset = response.getContentCharSet();
+            final String contentCharset = response.getContentCharset();
             if (!contentCharset.equals(TextUtil.DEFAULT_CHARSET)) {
                 scriptEncoding = contentCharset;
             }

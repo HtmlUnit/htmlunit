@@ -147,7 +147,7 @@ public class WebResponseImplTest extends WebServerTestCase {
         webClient.setWebConnection(conn);
 
         final Page page = webClient.getPage(URL_FIRST);
-        assertEquals(expectedCharset, page.getWebResponse().getContentCharSet());
+        assertEquals(expectedCharset, page.getWebResponse().getContentCharset());
         assertEquals(cntTypeHeader, page.getWebResponse().getResponseHeaderValue("Content-Type"));
     }
 

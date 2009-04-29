@@ -82,11 +82,17 @@ public interface WebResponse {
     String getContentType();
 
     /**
+     * Returns the content charset. can be null
+     * @return the content charset
+     */
+    String getContentCharSet();
+
+    /**
      * Returns the content charset. The charset returned by this method is a valid, supported
      * charset determined from the "Content-Type" header and from the response content.
      * @return the content charset
      */
-    String getContentCharSet();
+    String getContentCharset();
 
     /**
      * Returns the content from the server as a string, using the charset/encoding
