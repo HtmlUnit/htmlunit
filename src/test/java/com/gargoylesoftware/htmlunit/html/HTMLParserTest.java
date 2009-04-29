@@ -667,4 +667,19 @@ public class HTMLParserTest extends WebServerTestCase {
         assertEquals("Welcome to Suffolk Coastal District Council online", page.getTitleText());
     }
 
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @NotYetImplemented
+    public void escapingUrl() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "<a href='index.html?id=1&prod=1'>hi</a>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPageWithAlerts(html);
+        final HtmlPage page2 = page.getAnchors().get(0).click();
+        assertEquals(URL_GARGOYLE + "index.html?id=1&prod=1", page2.getWebResponse().getRequestUrl());
+    }
+
 }
