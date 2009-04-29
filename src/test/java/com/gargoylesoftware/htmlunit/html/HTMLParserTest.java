@@ -573,7 +573,6 @@ public class HTMLParserTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void headerVsMetaTagContentType_both() throws Exception {
         HeaderVsMetaTagContentTypeServlet.setEncoding("UTF-8", "ISO-8859-1");
         headerVsMetaTagContentType(true);
@@ -583,7 +582,6 @@ public class HTMLParserTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void headerVsMetaTagContentType_bothReversed() throws Exception {
         HeaderVsMetaTagContentTypeServlet.setEncoding("ISO-8859-1", "UTF-8");
         headerVsMetaTagContentType(false);

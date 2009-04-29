@@ -576,6 +576,10 @@ public class XMLHttpRequest extends SimpleScriptable {
             return "";
         }
 
+        public String getContentCharsetOrNull() {
+            return "";
+        }
+
         public byte[] getResponseBody() {
             return new byte[0];
         }

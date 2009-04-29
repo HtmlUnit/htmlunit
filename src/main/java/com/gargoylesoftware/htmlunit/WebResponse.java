@@ -84,12 +84,21 @@ public interface WebResponse {
     /**
      * Returns the content charset. can be null
      * @return the content charset
+     * @deprecated As of 2.6, please use @link {@link #getContentCharset()}
      */
+    @Deprecated
     String getContentCharSet();
 
     /**
-     * Returns the content charset. The charset returned by this method is a valid, supported
-     * charset determined from the "Content-Type" header and from the response content.
+     * Returns the content charset if specified in the header or from the content.
+     * @return the content charset, null if can not be detected
+     */
+    String getContentCharsetOrNull();
+
+    /**
+     * Returns the content charset. The charset returned by this method is a valid.
+     * Supported charset is determined from the "Content-Type" header, if not from the response content,
+     * if not from request charset, if not uses {@link TextUtil#DEFAULT_CHARSET}
      * @return the content charset
      */
     String getContentCharset();

@@ -6,8 +6,11 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                Ignore content-type meta tag if HTTP header is specified.
+            </action>
             <action type="update" dev="asashour">
-                Add WebResponse.getContentCharset().
+                WebResponse: Deprecate getContentCharSet, add .getContentCharset() and .getContentCharsetOrNull().
             </action>
             <action type="fix" dev="sdanig">
                 JavaScript: add support for selection.empty() and selection.type (IE only).

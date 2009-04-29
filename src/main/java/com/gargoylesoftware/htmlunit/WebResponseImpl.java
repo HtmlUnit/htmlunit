@@ -166,8 +166,18 @@ public class WebResponseImpl implements WebResponse, Serializable {
      * If no charset is specified in headers, then try to guess it from the content.
      * @see <a href="http://en.wikipedia.org/wiki/Byte_Order_Mark">Wikipedia - Byte Order Mark</a>
      * @return the charset, {@link TextUtil#DEFAULT_CHARSET} if it can't be determined
+     * @deprecated As of 2.6, please use @link {@link #getContentCharset()}
      */
+    @Deprecated
     public String getContentCharSet() {
+        return getContentCharset();
+    }
+
+    /**
+     * {@inheritDoc}
+     * @see <a href="http://en.wikipedia.org/wiki/Byte_Order_Mark">Wikipedia - Byte Order Mark</a>
+     */
+    public String getContentCharsetOrNull() {
         final String contentTypeHeader = getResponseHeaderValue("content-type");
         String charset = StringUtils.substringAfter(contentTypeHeader, "charset=");
         if (StringUtils.isEmpty(charset)) {
@@ -228,7 +238,7 @@ public class WebResponseImpl implements WebResponse, Serializable {
      * {@inheritDoc}
      */
     public String getContentCharset() {
-        String charset = getContentCharSet();
+        String charset = getContentCharsetOrNull();
         if (charset == null) {
             charset = getRequestSettings().getCharset();
         }

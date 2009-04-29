@@ -268,7 +268,21 @@ public final class HTMLParser {
         webWindow.setEnclosedPage(page);
 
         final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(page, url);
-        final String charset = webResponse.getContentCharset();
+        String charset = webResponse.getContentCharsetOrNull();
+        if (charset != null) {
+            try {
+                domBuilder.setFeature(HTMLScanner.IGNORE_SPECIFIED_CHARSET, true);
+            }
+            catch (final Exception e) {
+                throw new ObjectInstantiationException("Error setting HTML parser feature", e);
+            }
+        }
+        else {
+            final String specifiedCharset = webResponse.getRequestSettings().getCharset();
+            if (specifiedCharset != null) {
+                charset = specifiedCharset;
+            }
+        }
 
         final InputStream content = webResponse.getContentAsStream();
         final XMLInputSource in = new XMLInputSource(null, url.toString(), null, content, charset);

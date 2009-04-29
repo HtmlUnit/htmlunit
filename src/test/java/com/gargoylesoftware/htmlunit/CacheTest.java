@@ -255,6 +255,10 @@ class DummyWebResponse implements WebResponse {
         throw new RuntimeException("not implemented");
     }
 
+    public String getContentCharsetOrNull() {
+        throw new RuntimeException("not implemented");
+    }
+
     public String getContentType() {
         throw new RuntimeException("not implemented");
     }
