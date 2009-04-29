@@ -190,13 +190,13 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         final HttpWebConnection connection = new HttpWebConnection(new WebClient());
         final Method method =
                 connection.getClass().getDeclaredMethod("makeWebResponse", new Class[]{
-                    int.class, HttpMethodBase.class, WebRequestSettings.class, long.class, String.class});
+                    int.class, HttpMethodBase.class, WebRequestSettings.class, long.class});
         method.setAccessible(true);
 
         final WebResponse response =
                 (WebResponse) method.invoke(connection, new Object[]{
                     new Integer(httpStatus), httpMethod, new WebRequestSettings(url),
-                    new Long(loadTime), TextUtil.DEFAULT_CHARSET});
+                    new Long(loadTime)});
 
         Assert.assertEquals(httpStatus, response.getStatusCode());
         Assert.assertEquals(url, response.getRequestUrl());
