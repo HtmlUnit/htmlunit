@@ -103,7 +103,7 @@ public class WebResponseImpl implements WebResponse, Serializable {
      * @deprecated As of 2.6, please use {@link #getRequestSettings()}.getHttpMethod()
      */
     @Deprecated
-    public final HttpMethod getRequestMethod() {
+    public HttpMethod getRequestMethod() {
         return getRequestSettings().getHttpMethod();
     }
 
