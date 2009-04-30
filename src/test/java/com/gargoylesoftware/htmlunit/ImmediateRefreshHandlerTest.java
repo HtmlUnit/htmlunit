@@ -51,14 +51,9 @@ public final class ImmediateRefreshHandlerTest extends WebTestCase {
                 }
                 content += "</head><body></body></html>";
                 nbCalls_++;
-                return new StringWebResponse(content, settings.getUrl()) {
-                    private static final long serialVersionUID = -4739710581533574855L;
-
-                    @Override
-                    public HttpMethod getRequestMethod() {
-                        return settings.getHttpMethod();
-                    }
-                };
+                final StringWebResponse response = new StringWebResponse(content, settings.getUrl());
+                response.getRequestSettings().setHttpMethod(settings.getHttpMethod());
+                return response;
             }
         };
         client.setWebConnection(webConnection);

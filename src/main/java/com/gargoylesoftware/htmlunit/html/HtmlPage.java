@@ -607,7 +607,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         final List<HtmlBase> baseElements = getDocumentElement().getHtmlElementsByTagName("base");
         URL baseUrl;
         if (baseElements.isEmpty()) {
-            baseUrl = getWebResponse().getRequestUrl();
+            baseUrl = getWebResponse().getRequestSettings().getUrl();
             final WebWindow window = getEnclosingWindow();
             final boolean frame = (window != window.getTopWindow());
             if (frame) {
@@ -616,7 +616,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
                 final boolean jsFrameUseParentUrl = getWebClient().getBrowserVersion()
                     .hasFeature(BrowserVersionFeatures.JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW);
                 if (frameSrcIsNotSet || (frameSrcIsJs && jsFrameUseParentUrl)) {
-                    baseUrl = ((HtmlPage) window.getTopWindow().getEnclosedPage()).getWebResponse().getRequestUrl();
+                    baseUrl = ((HtmlPage) window.getTopWindow().getEnclosedPage()).getWebResponse()
+                        .getRequestSettings().getUrl();
                 }
             }
         }
@@ -640,7 +641,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
 
             final String href = htmlBase.getHrefAttribute();
             if (!insideHead || StringUtils.isEmpty(href)) {
-                baseUrl = getWebResponse().getRequestUrl();
+                baseUrl = getWebResponse().getRequestSettings().getUrl();
             }
             else {
                 try {
@@ -648,7 +649,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
                 }
                 catch (final MalformedURLException e) {
                     notifyIncorrectness("Invalid base url: \"" + href + "\", ignoring it");
-                    baseUrl = getWebResponse().getRequestUrl();
+                    baseUrl = getWebResponse().getRequestSettings().getUrl();
                 }
             }
         }
@@ -1247,7 +1248,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
                 }
                 return;
             }
-            url = getWebResponse().getRequestUrl();
+            url = getWebResponse().getRequestSettings().getUrl();
         }
         else {
             // Format: <meta http-equiv='refresh' content='10;url=http://www.blah.com'>
@@ -1270,7 +1271,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
             final StringBuilder buffer = new StringBuilder(refreshString.substring(index + 4));
             if (buffer.toString().trim().length() == 0) {
                 //content='10; URL=' is treated as content='10'
-                url = getWebResponse().getRequestUrl();
+                url = getWebResponse().getRequestSettings().getUrl();
             }
             else {
                 if (buffer.charAt(0) == '"' || buffer.charAt(0) == 0x27) {
@@ -1759,7 +1760,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
             // test if the frame should really be loaded:
             // if a script has already changed its content, it should be skipped
             // use == and not equals(...) to identify initial content (versus URL set to "about:blank")
-            if (frame.getEnclosedPage().getWebResponse().getRequestUrl() == WebClient.URL_ABOUT_BLANK) {
+            if (frame.getEnclosedPage().getWebResponse().getRequestSettings().getUrl() == WebClient.URL_ABOUT_BLANK) {
                 frame.loadInnerPage();
             }
         }
@@ -1773,7 +1774,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     public String toString() {
         final StringBuilder buffer = new StringBuilder();
         buffer.append("HtmlPage(");
-        buffer.append(getWebResponse().getRequestUrl());
+        buffer.append(getWebResponse().getRequestSettings().getUrl());
         buffer.append(")@");
         buffer.append(hashCode());
         return buffer.toString();

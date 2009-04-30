@@ -41,13 +41,17 @@ public interface WebResponse {
     /**
      * Returns the method used for the request resulting in this response.
      * @return the method used for the request resulting in this response
+     * @deprecated As of 2.6, please use {@link #getRequestSettings()}.getHttpMethod()
      */
+    @Deprecated
     HttpMethod getRequestMethod();
 
     /**
      * Returns the URL that was used to load this page.
      * @return the URL that was used to load this page
+     * @deprecated As of 2.6, please use {@link #getRequestSettings()}.getHttpMethod()
      */
+    @Deprecated
     URL getRequestUrl();
 
     /**

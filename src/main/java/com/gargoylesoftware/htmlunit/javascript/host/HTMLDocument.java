@@ -526,7 +526,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public String jsxGet_cookie() {
         final HtmlPage page = getHtmlPage();
 
-        URL url = page.getWebResponse().getRequestUrl();
+        URL url = page.getWebResponse().getRequestSettings().getUrl();
         url = replaceForCookieIfNecessary(url);
 
         final boolean secure = "https".equals(url.getProtocol());
@@ -609,7 +609,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public void jsxSet_cookie(final String newCookie) {
         final CookieManager cookieManager = getHtmlPage().getWebClient().getCookieManager();
         if (cookieManager.isCookiesEnabled()) {
-            URL url = getHtmlPage().getWebResponse().getRequestUrl();
+            URL url = getHtmlPage().getWebResponse().getRequestSettings().getUrl();
             url = replaceForCookieIfNecessary(url);
             final Cookie cookie = buildCookie(newCookie, url);
             cookieManager.addCookie(cookie);
@@ -717,7 +717,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the value of the "URL" property
      */
     public String jsxGet_URL() {
-        return getHtmlPage().getWebResponse().getRequestUrl().toExternalForm();
+        return getHtmlPage().getWebResponse().getRequestSettings().getUrl().toExternalForm();
     }
 
     /**
@@ -791,7 +791,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
         else {
             final HtmlPage page = getHtmlPage();
-            final URL url = page.getWebResponse().getRequestUrl();
+            final URL url = page.getWebResponse().getRequestSettings().getUrl();
             final WebResponse webResponse = new StringWebResponse(writeBuffer_.toString(), url);
             final WebClient webClient = page.getWebClient();
             final WebWindow window = page.getEnclosingWindow();
@@ -1126,7 +1126,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     public String jsxGet_domain() {
         if (domain_ == null) {
-            domain_ = getHtmlPage().getWebResponse().getRequestUrl().getHost();
+            domain_ = getHtmlPage().getWebResponse().getRequestSettings().getUrl().getHost();
             final BrowserVersion browser = getBrowserVersion();
             if (browser.isFirefox()) {
                 domain_ = domain_.toLowerCase();

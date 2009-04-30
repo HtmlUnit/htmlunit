@@ -199,7 +199,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
                     new Long(loadTime)});
 
         Assert.assertEquals(httpStatus, response.getStatusCode());
-        Assert.assertEquals(url, response.getRequestUrl());
+        Assert.assertEquals(url, response.getRequestSettings().getUrl());
         Assert.assertEquals(loadTime, response.getLoadTime());
         Assert.assertEquals(content, response.getContentAsString());
         assertEquals(content.getBytes(), response.getContentAsBytes());
@@ -225,7 +225,8 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         // test that // is escaped
         final URL url = new URL("http://localhost:" + PORT + "//src/test/resources/event_coordinates.html");
         page = client.getPage(url);
-        Assert.assertEquals(url.toExternalForm(), page.getWebResponse().getRequestUrl().toExternalForm());
+        Assert.assertEquals(url.toExternalForm(),
+                page.getWebResponse().getRequestSettings().getUrl().toExternalForm());
     }
 
     /**

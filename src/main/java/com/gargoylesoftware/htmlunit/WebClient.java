@@ -908,7 +908,7 @@ public class WebClient implements Serializable {
             try {
                 final WebRequestSettings settings = new WebRequestSettings(url);
                 if (!getBrowserVersion().isIE() && openerPage != null) {
-                    final String referer = openerPage.getWebResponse().getRequestUrl().toExternalForm();
+                    final String referer = openerPage.getWebResponse().getRequestSettings().getUrl().toExternalForm();
                     settings.addAdditionalHeader("Referer", referer);
                 }
                 getPage(window, settings);
@@ -1010,7 +1010,7 @@ public class WebClient implements Serializable {
         final HtmlPage openerPage = (HtmlPage) opener.getEnclosedPage();
         final WebRequestSettings settings = new WebRequestSettings(url);
         if (!getBrowserVersion().isIE()) {
-            final String referer = openerPage.getWebResponse().getRequestUrl().toExternalForm();
+            final String referer = openerPage.getWebResponse().getRequestSettings().getUrl().toExternalForm();
             settings.addAdditionalHeader("Referer", referer);
         }
 
@@ -1452,7 +1452,7 @@ public class WebClient implements Serializable {
             getLog().debug("Got a redirect status code [" + statusCode + "] new location=[" + locationString + "]");
 
             if (webRequestSettings.getHttpMethod() == HttpMethod.GET
-                    && webResponse.getRequestUrl().toExternalForm().equals(locationString)) {
+                    && webResponse.getRequestSettings().getUrl().toExternalForm().equals(locationString)) {
 
                 if (nbAllowedRedirections == 0) {
                     getLog().warn("Max redirections allowed to the same location reached for ["

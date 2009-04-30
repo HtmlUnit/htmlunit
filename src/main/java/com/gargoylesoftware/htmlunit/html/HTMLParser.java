@@ -236,7 +236,7 @@ public final class HTMLParser {
      */
     public static void parseFragment(final DomNode parent, final String source) throws SAXException, IOException {
         final HtmlPage page = (HtmlPage) parent.getPage();
-        final URL url = page.getWebResponse().getRequestUrl();
+        final URL url = page.getWebResponse().getRequestSettings().getUrl();
 
         final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(parent, url);
         domBuilder.setFeature("http://cyberneko.org/html/features/balance-tags/document-fragment", true);
@@ -263,7 +263,7 @@ public final class HTMLParser {
      * @throws IOException if there is an IO error
      */
     public static HtmlPage parse(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
-        final URL url = webResponse.getRequestUrl();
+        final URL url = webResponse.getRequestSettings().getUrl();
         final HtmlPage page = new HtmlPage(url, webResponse, webWindow);
         webWindow.setEnclosedPage(page);
 
@@ -406,7 +406,7 @@ public final class HTMLParser {
         public void pushInputString(final String sourceString) {
             final WebResponse webResponse = page_.getWebResponse();
             final String charset = webResponse.getContentCharset();
-            final XMLInputSource in = new XMLInputSource(null, webResponse.getRequestUrl().toString(),
+            final XMLInputSource in = new XMLInputSource(null, webResponse.getRequestSettings().getUrl().toString(),
                 null, new StringReader(sourceString), charset);
             ((HTMLConfiguration) fConfiguration).evaluateInputSource(in);
         }

@@ -561,7 +561,7 @@ public class HTMLFormElementTest extends WebTestCase {
         final HtmlPage page = client.getPage(URL_FIRST);
         final Page page2 = page.<HtmlElement>getHtmlElementById("button1").click();
 
-        assertEquals(URL_THIRD.toExternalForm(), page2.getWebResponse().getRequestUrl());
+        assertEquals(URL_THIRD.toExternalForm(), page2.getWebResponse().getRequestSettings().getUrl());
     }
 
     /**
@@ -768,7 +768,7 @@ public class HTMLFormElementTest extends WebTestCase {
         final HtmlButton button = page.getHtmlElementById("button1");
         final HtmlPage secondPage = button.click();
         assertEquals("second", secondPage.getTitleText());
-        assertEquals(URL_SECOND + "?button1=", secondPage.getWebResponse().getRequestUrl());
+        assertEquals(URL_SECOND + "?button1=", secondPage.getWebResponse().getRequestSettings().getUrl());
     }
 
     /**
@@ -1298,7 +1298,8 @@ public class HTMLFormElementTest extends WebTestCase {
         final HtmlPage page = loadPage(html);
         final HtmlElement element = page.getHtmlElementById("x");
         final HtmlPage secondPage = element.click();
-        assertEquals(URL_GARGOYLE + expectedFile, secondPage.getWebResponse().getRequestUrl().toExternalForm());
+        assertEquals(URL_GARGOYLE + expectedFile,
+                secondPage.getWebResponse().getRequestSettings().getUrl().toExternalForm());
     }
 
     /**

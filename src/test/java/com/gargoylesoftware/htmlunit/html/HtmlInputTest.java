@@ -67,7 +67,8 @@ public final class HtmlInputTest extends WebTestCase {
         // Test that only one value for the radio button is being passed back to the server
         final HtmlPage secondPage = (HtmlPage) pushButton.click();
 
-        assertEquals("url", URL_GARGOYLE + "?foo=2&button=foo", secondPage.getWebResponse().getRequestUrl());
+        assertEquals("url", URL_GARGOYLE + "?foo=2&button=foo",
+                secondPage.getWebResponse().getRequestSettings().getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
     }

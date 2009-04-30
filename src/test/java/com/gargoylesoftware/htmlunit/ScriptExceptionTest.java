@@ -65,7 +65,7 @@ public final class ScriptExceptionTest extends WebTestCase {
             loadPage(getBrowserVersion(), html, null);
         }
         catch (final ScriptException e) {
-            assertEquals(URL_GARGOYLE, e.getPage().getWebResponse().getRequestUrl());
+            assertEquals(URL_GARGOYLE, e.getPage().getWebResponse().getRequestSettings().getUrl());
         }
     }
 

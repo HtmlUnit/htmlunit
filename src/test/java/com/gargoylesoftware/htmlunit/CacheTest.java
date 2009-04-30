@@ -94,8 +94,8 @@ public class CacheTest extends WebTestCase {
                 return contentType[0];
             }
             @Override
-            public URL getRequestUrl() {
-                return url[0];
+            public WebRequestSettings getRequestSettings() {
+                return new WebRequestSettings(url[0]);
             }
         };
 
@@ -271,6 +271,11 @@ class DummyWebResponse implements WebResponse {
         throw new RuntimeException("not implemented");
     }
 
+    /**
+     * {@inheritDoc}
+     * @deprecated As of 2.6, please use {@link #getRequestSettings()}.getHttpMethod()
+     */
+    @Deprecated
     public HttpMethod getRequestMethod() {
         throw new RuntimeException("not implemented");
     }
@@ -295,10 +300,11 @@ class DummyWebResponse implements WebResponse {
         throw new RuntimeException("not implemented");
     }
 
-    public URL getUrl() {
-        throw new RuntimeException("not implemented");
-    }
-
+    /**
+     * {@inheritDoc}
+     * @deprecated As of 2.6, please use {@link #getRequestSettings()}.getUrl()
+     */
+    @Deprecated
     public URL getRequestUrl() {
         throw new RuntimeException("not implemented");
     }

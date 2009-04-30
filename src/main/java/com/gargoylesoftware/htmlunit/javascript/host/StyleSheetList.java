@@ -127,7 +127,7 @@ public class StyleSheetList extends SimpleScriptable {
                     sheet = new Stylesheet(element, cached);
                 }
                 else {
-                    final String uri = response.getRequestUrl().toExternalForm();
+                    final String uri = response.getRequestSettings().getUrl().toExternalForm();
                     final InputSource source = new InputSource(new StringReader(css));
                     source.setURI(uri);
                     sheet = new Stylesheet(element, source);

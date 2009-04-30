@@ -677,7 +677,7 @@ public class HTMLParserTest extends WebServerTestCase {
             + "</body></html>";
         final HtmlPage page = loadPageWithAlerts(html);
         final HtmlPage page2 = page.getAnchors().get(0).click();
-        assertEquals(URL_GARGOYLE + "index.html?id=1&prod=1", page2.getWebResponse().getRequestUrl());
+        assertEquals(URL_GARGOYLE + "index.html?id=1&prod=1", page2.getWebResponse().getRequestSettings().getUrl());
     }
 
 }

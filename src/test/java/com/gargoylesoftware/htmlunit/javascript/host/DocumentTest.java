@@ -2473,7 +2473,8 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage framePage = (HtmlPage) frame.getEnclosedPage();
 
         assertNotNull(frame);
-        assertEquals(frameURL.toExternalForm(), framePage.getWebResponse().getRequestUrl().toExternalForm());
+        assertEquals(frameURL.toExternalForm(),
+                framePage.getWebResponse().getRequestSettings().getUrl().toExternalForm());
         assertEquals("frame", framePage.getTitleText());
     }
 

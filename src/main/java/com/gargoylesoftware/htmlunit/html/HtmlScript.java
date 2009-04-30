@@ -300,7 +300,7 @@ public class HtmlScript extends HtmlElement {
             }
         }
         else {
-            final String url = getPage().getWebResponse().getRequestUrl().toExternalForm();
+            final String url = getPage().getWebResponse().getRequestSettings().getUrl().toExternalForm();
             final int line1 = getStartLineNumber();
             final int line2 = getEndLineNumber();
             final int col1 = getStartColumnNumber();

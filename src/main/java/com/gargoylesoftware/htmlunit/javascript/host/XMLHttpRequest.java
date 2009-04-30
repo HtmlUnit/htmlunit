@@ -254,7 +254,8 @@ public class XMLHttpRequest extends SimpleScriptable {
                 return doc;
             }
             catch (final IOException e) {
-                getLog().warn("Failed parsing XML document " + webResponse_.getRequestUrl() + ": " + e.getMessage());
+                getLog().warn("Failed parsing XML document " + webResponse_.getRequestSettings().getUrl() + ": "
+                        + e.getMessage());
                 return null;
             }
         }
@@ -340,7 +341,8 @@ public class XMLHttpRequest extends SimpleScriptable {
             final URL fullUrl = containingPage_.getFullyQualifiedUrl(url);
             final WebRequestSettings settings = new WebRequestSettings(fullUrl);
             settings.setCharset("UTF-8");
-            settings.addAdditionalHeader("Referer", containingPage_.getWebResponse().getRequestUrl().toExternalForm());
+            settings.addAdditionalHeader("Referer", containingPage_.getWebResponse().getRequestSettings().getUrl()
+                    .toExternalForm());
             final HttpMethod submitMethod = HttpMethod.valueOf(method.toUpperCase());
             settings.setHttpMethod(submitMethod);
             if (user != null) {
@@ -544,10 +546,20 @@ public class XMLHttpRequest extends SimpleScriptable {
             return webRequestSettings_.getUrl();
         }
 
+        /**
+         * {@inheritDoc}
+         * @deprecated As of 2.6, please use {@link #getRequestSettings()}.getUrl()
+         */
+        @Deprecated
         public URL getRequestUrl() {
             return webRequestSettings_.getUrl();
         }
 
+        /**
+         * {@inheritDoc}
+         * @deprecated As of 2.6, please use {@link #getRequestSettings()}.getHttpMethod()
+         */
+        @Deprecated
         public HttpMethod getRequestMethod() {
             return webRequestSettings_.getHttpMethod();
         }

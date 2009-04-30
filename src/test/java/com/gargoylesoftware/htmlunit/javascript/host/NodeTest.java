@@ -797,7 +797,8 @@ public class NodeTest extends WebTestCase {
         //IE doesn't have specific order
         Collections.sort(collectedAlerts);
         assertEquals(getExpectedAlerts(), collectedAlerts);
-        assertEquals(URL_SECOND.toExternalForm(), page2.getWebResponse().getRequestUrl().toExternalForm());
+        assertEquals(URL_SECOND.toExternalForm(),
+                page2.getWebResponse().getRequestSettings().getUrl().toExternalForm());
     }
 
     /**
@@ -844,7 +845,8 @@ public class NodeTest extends WebTestCase {
         else {
             expectedURL = URL_SECOND;
         }
-        assertEquals(expectedURL.toExternalForm(), page2.getWebResponse().getRequestUrl().toExternalForm());
+        assertEquals(expectedURL.toExternalForm(),
+                page2.getWebResponse().getRequestSettings().getUrl().toExternalForm());
     }
 
     /**
@@ -892,6 +894,7 @@ public class NodeTest extends WebTestCase {
         else {
             expectedURL = URL_SECOND;
         }
-        assertEquals(expectedURL.toExternalForm(), page2.getWebResponse().getRequestUrl().toExternalForm());
+        assertEquals(expectedURL.toExternalForm(),
+                page2.getWebResponse().getRequestSettings().getUrl().toExternalForm());
     }
 }

@@ -64,13 +64,13 @@ public class HtmlImageTest extends WebTestCase {
         final Page page2 = img.click();
         Assert.assertEquals("same page after click", samePage, (page == page2));
         if (!samePage) {
-            assertEquals("http://server/foo" + urlSuffixClick, page2.getWebResponse().getRequestUrl());
+            assertEquals("http://server/foo" + urlSuffixClick, page2.getWebResponse().getRequestSettings().getUrl());
         }
 
         final Page page3 = img.click(25, 30);
         Assert.assertEquals("same page after click(25, 30)", samePage, (page == page3));
         if (!samePage) {
-            assertEquals("http://server/foo" + urlSuffixClickXY, page3.getWebResponse().getRequestUrl());
+            assertEquals("http://server/foo" + urlSuffixClickXY, page3.getWebResponse().getRequestSettings().getUrl());
         }
     }
 
@@ -103,7 +103,7 @@ public class HtmlImageTest extends WebTestCase {
         final HtmlImage img = page.getHtmlElementById("myImg");
 
         final Page page2 = img.click(x, y);
-        final URL url = page2.getWebResponse().getRequestUrl();
+        final URL url = page2.getWebResponse().getRequestSettings().getUrl();
         assertTrue(url.toExternalForm(), url.toExternalForm().endsWith(urlSuffix));
     }
 

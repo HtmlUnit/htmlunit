@@ -89,13 +89,14 @@ public class HtmlAnchor extends ClickableElement {
             }
             final URL url = page.getFullyQualifiedUrl(href);
             final WebRequestSettings settings = new WebRequestSettings(url);
-            settings.addAdditionalHeader("Referer", page.getWebResponse().getRequestUrl().toExternalForm());
+            settings.addAdditionalHeader("Referer", page.getWebResponse().getRequestSettings().getUrl()
+                    .toExternalForm());
             if (mainLog_.isDebugEnabled()) {
                 mainLog_.debug(
                         "Getting page for " + url.toExternalForm()
                         + ", derived from href '" + href
                         + "', using the originating URL "
-                        + page.getWebResponse().getRequestUrl());
+                        + page.getWebResponse().getRequestSettings().getUrl());
             }
             return page.getWebClient().getPage(
                     page.getEnclosingWindow(),

@@ -84,7 +84,8 @@ public class HtmlFormTest extends WebTestCase {
         // Test that only one value for the radio button is being passed back to the server
         final HtmlPage secondPage = (HtmlPage) pushButton.click();
 
-        assertEquals("url", URL_GARGOYLE + "?foo=2&button=foo", secondPage.getWebResponse().getRequestUrl());
+        assertEquals("url", URL_GARGOYLE + "?foo=2&button=foo",
+                secondPage.getWebResponse().getRequestSettings().getUrl());
         Assert.assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
     }
 
@@ -832,8 +833,8 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) page.getFormByName("form").submit((SubmittableElement) null);
 
         assertNotNull(secondPage);
-        assertEquals(page.getWebResponse().getRequestUrl() + "action.html?select=second+value",
-                secondPage.getWebResponse().getRequestUrl());
+        assertEquals(page.getWebResponse().getRequestSettings().getUrl() + "action.html?select=second+value",
+                secondPage.getWebResponse().getRequestSettings().getUrl());
     }
 
     /**
@@ -998,7 +999,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlForm form = page.getHtmlElementById("form1");
         final Page page2 = form.submit((HtmlSubmitInput) page.getHtmlElementById("submitButton"));
 
-        assertEquals(url.toExternalForm() + expectedUrlEnd, page2.getWebResponse().getRequestUrl());
+        assertEquals(url.toExternalForm() + expectedUrlEnd, page2.getWebResponse().getRequestSettings().getUrl());
     }
 
     /**
@@ -1110,7 +1111,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage firstPage = loadPage(browserVersion, html, null);
         final HtmlSubmitInput submitInput = firstPage.getHtmlElementById("myButton");
         final HtmlPage secondPage = submitInput.click();
-        assertEquals(URL_SECOND + "?Save=Submit+Query", secondPage.getWebResponse().getRequestUrl());
+        assertEquals(URL_SECOND + "?Save=Submit+Query", secondPage.getWebResponse().getRequestSettings().getUrl());
     }
 
     /**
@@ -1183,7 +1184,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlForm form = page.getForms().get(0);
         final HtmlSubmitInput submit = form.getInputByName("mySubmit");
         final HtmlPage secondPage = submit.click();
-        assertEquals(expectedURL, secondPage.getWebResponse().getRequestUrl());
+        assertEquals(expectedURL, secondPage.getWebResponse().getRequestSettings().getUrl());
     }
 
     /**
@@ -1325,7 +1326,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         HtmlPage page = loadPage(html);
         page = page.<HtmlSubmitInput>getFirstByXPath("//input").click();
-        assertEquals(URL_SECOND.toExternalForm() + "two.html", page.getWebResponse().getRequestUrl());
+        assertEquals(URL_SECOND.toExternalForm() + "two.html", page.getWebResponse().getRequestSettings().getUrl());
     }
 
     /**
@@ -1342,7 +1343,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         HtmlPage page = loadPage(html);
         page = page.<HtmlSubmitInput>getFirstByXPath("//input").click();
-        assertEquals(URL_GARGOYLE.toExternalForm(), page.getWebResponse().getRequestUrl());
+        assertEquals(URL_GARGOYLE.toExternalForm(), page.getWebResponse().getRequestSettings().getUrl());
     }
 
     /**
@@ -1360,6 +1361,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         HtmlPage page = loadPage(html);
         page = page.<HtmlSubmitInput>getFirstByXPath("//input[2]").click();
-        assertEquals(URL_GARGOYLE.toExternalForm() + "?myName=myValue", page.getWebResponse().getRequestUrl());
+        assertEquals(URL_GARGOYLE.toExternalForm() + "?myName=myValue",
+                page.getWebResponse().getRequestSettings().getUrl());
     }
 }

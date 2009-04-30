@@ -114,7 +114,8 @@ public abstract class BaseFrame extends StyledElement {
             }
             try {
                 final WebRequestSettings settings = new WebRequestSettings(url);
-                settings.addAdditionalHeader("Referer", getPage().getWebResponse().getRequestUrl().toExternalForm());
+                settings.addAdditionalHeader("Referer", getPage().getWebResponse().getRequestSettings().getUrl()
+                        .toExternalForm());
                 getPage().getEnclosingWindow().getWebClient().getPage(enclosedWindow_, settings);
             }
             catch (final IOException e) {
@@ -134,7 +135,7 @@ public abstract class BaseFrame extends StyledElement {
     private boolean isAlreadyLoadedByAncestor(final URL url) {
         WebWindow window = getPage().getEnclosingWindow();
         while (window != null) {
-            if (url.sameFile(window.getEnclosedPage().getWebResponse().getRequestUrl())) {
+            if (url.sameFile(window.getEnclosedPage().getWebResponse().getRequestSettings().getUrl())) {
                 return true;
             }
             if (window == window.getParentWindow()) {

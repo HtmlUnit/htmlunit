@@ -64,7 +64,8 @@ public class HTMLStyleElement extends HTMLElement {
             sheet_ = new Stylesheet(this, cached);
         }
         else {
-            final String uri = getDomNodeOrDie().getPage().getWebResponse().getRequestUrl().toExternalForm();
+            final String uri = getDomNodeOrDie().getPage().getWebResponse().getRequestSettings()
+                .getUrl().toExternalForm();
             final InputSource source = new InputSource(new StringReader(css));
             source.setURI(uri);
             sheet_ = new Stylesheet(this, source);

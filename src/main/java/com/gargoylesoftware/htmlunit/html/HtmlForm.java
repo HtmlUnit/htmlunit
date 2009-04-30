@@ -156,10 +156,10 @@ public class HtmlForm extends ClickableElement {
         final URL url;
         try {
             if (actionUrl.length() == 0) {
-                url = htmlPage.getWebResponse().getRequestUrl();
+                url = htmlPage.getWebResponse().getRequestSettings().getUrl();
             }
             else if (actionUrl.startsWith("?")) {
-                url = new URL(htmlPage.getWebResponse().getRequestUrl(), actionUrl);
+                url = new URL(htmlPage.getWebResponse().getRequestSettings().getUrl(), actionUrl);
             }
             else {
                 url = htmlPage.getFullyQualifiedUrl(actionUrl);
@@ -173,7 +173,8 @@ public class HtmlForm extends ClickableElement {
         settings.setRequestParameters(parameters);
         settings.setEncodingType(FormEncodingType.getInstance(getEnctypeAttribute()));
         settings.setCharset(getSubmitCharset());
-        settings.addAdditionalHeader("Referer", htmlPage.getWebResponse().getRequestUrl().toExternalForm());
+        settings.addAdditionalHeader("Referer", htmlPage.getWebResponse().getRequestSettings().getUrl()
+                .toExternalForm());
 
         final WebWindow webWindow = htmlPage.getEnclosingWindow();
         return htmlPage.getWebClient().getPage(
