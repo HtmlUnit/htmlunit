@@ -1082,6 +1082,8 @@ public class WebClient implements Serializable {
      * @param name the name to search for
      * @return the {@link WebWindow} with the specified name
      * @throws WebWindowNotFoundException if the {@link WebWindow} can't be found
+     * @see #getWebWindows()
+     * @see #getTopLevelWindows()
      */
     public WebWindow getWebWindowByName(final String name) throws WebWindowNotFoundException {
         WebAssert.notNull("name", name);
@@ -1546,11 +1548,23 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Returns an immutable list of open web windows (top windows or not).
-     * @return the web windows
+     * Returns an immutable list of open web windows (whether they are top level windows or not).
+     * @return an immutable list of open web windows (whether they are top level windows or not)
+     * @see #getWebWindowByName(String)
+     * @see #getTopLevelWindows()
      */
     public List<WebWindow> getWebWindows() {
         return Collections.unmodifiableList(windows_);
+    }
+
+    /**
+     * Returns an immutable list of open top level windows.
+     * @return an immutable list of open top level windows
+     * @see #getWebWindowByName(String)
+     * @see #getWebWindows()
+     */
+    public List<TopLevelWindow> getTopLevelWindows() {
+        return Collections.unmodifiableList(topLevelWindows_);
     }
 
     /**

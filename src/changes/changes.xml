@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes">
+            <action type="add" dev="sdanig">
+                Add WebClient.getTopLevelWindows().
+            </action>
             <action type="fix" dev="asashour">
                 Ignore content-type meta tag if HTTP header is specified.
             </action>

@@ -2123,4 +2123,45 @@ public class WebClientTest extends WebServerTestCase {
         assertTrue(client.getCurrentWindow() instanceof TopLevelWindow);
         assertEquals(1, client.getWebWindows().size());
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testGetTopLevelWindows() throws Exception {
+        final WebClient client = new WebClient();
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, "<html><body><iframe></iframe></body></html>");
+        conn.setResponse(URL_SECOND, "<html><body></body></html>");
+        client.setWebConnection(conn);
+
+        assertEquals(1, client.getWebWindows().size());
+        assertEquals(1, client.getTopLevelWindows().size());
+
+        client.getPage(URL_FIRST);
+
+        assertEquals(2, client.getWebWindows().size());
+        assertEquals(1, client.getTopLevelWindows().size());
+
+        client.getPage(URL_SECOND);
+
+        assertEquals(1, client.getWebWindows().size());
+        assertEquals(1, client.getTopLevelWindows().size());
+
+        client.openWindow(URL_SECOND, "a");
+
+        assertEquals(2, client.getWebWindows().size());
+        assertEquals(2, client.getTopLevelWindows().size());
+
+        client.openWindow(URL_SECOND, "b");
+
+        assertEquals(3, client.getWebWindows().size());
+        assertEquals(3, client.getTopLevelWindows().size());
+
+        client.closeAllWindows();
+
+        assertEquals(1, client.getWebWindows().size());
+        assertEquals(1, client.getTopLevelWindows().size());
+    }
+
 }
