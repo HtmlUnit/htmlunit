@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  * @author Ahmed Ashour
  */
 public class WebResponseWrapper implements WebResponse {
+
     private final WebResponse wrappedWebResponse_;
 
     /**
@@ -85,6 +86,7 @@ public class WebResponseWrapper implements WebResponse {
     /**
      * {@inheritDoc}
      * The default behavior of this method is to return getContentCharSet() on the wrapped connection object.
+     * @deprecated As of 2.6, please use @link {@link #getContentCharset()}
      */
     @Deprecated
     public String getContentCharSet() {
@@ -128,6 +130,7 @@ public class WebResponseWrapper implements WebResponse {
      * The default behavior of this method is to return getRequestMethod() on the wrapped connection object.
      * @deprecated As of 2.6, please use {@link #getRequestSettings()}.getHttpMethod()
      */
+    @Deprecated
     public HttpMethod getRequestMethod() {
         return wrappedWebResponse_.getRequestMethod();
     }
