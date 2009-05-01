@@ -1927,8 +1927,8 @@
 
     <class name="HTMLTableCaptionElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableCaptionElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlCaption">
-        <property name="align" notImplemented="true" readable="true" writable="true"/>
-        <property name="vAlign" notImplemented="true" readable="true" writable="true">
+        <property name="align" readable="true" writable="true"/>
+        <property name="vAlign" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
     </class>

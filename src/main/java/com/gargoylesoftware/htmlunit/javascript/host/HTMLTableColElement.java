@@ -28,6 +28,12 @@ public class HTMLTableColElement extends HTMLElement {
 
     private static final long serialVersionUID = -886020322532732229L;
 
+    /** The valid "vAlign" values for this element, when emulating IE. */
+    private static final String[] VALIGN_VALID_VALUES_IE = {"top", "bottom", "middle", "baseline"};
+
+    /** The default value of the "vAlign" property. */
+    private static final String VALIGN_DEFAULT_VALUE = "top";
+
     /**
      * The value of the "ch" JavaScript attribute for browsers that do not really provide
      * access to the value of the "char" DOM attribute.
@@ -173,7 +179,7 @@ public class HTMLTableColElement extends HTMLElement {
      * @return the value of the "vAlign" property
      */
     public String jsxGet_vAlign() {
-        return getVAlign();
+        return getVAlign(getValidVAlignValues(), VALIGN_DEFAULT_VALUE);
     }
 
     /**
@@ -181,7 +187,22 @@ public class HTMLTableColElement extends HTMLElement {
      * @param vAlign the value of the "vAlign" property
      */
     public void jsxSet_vAlign(final Object vAlign) {
-        setVAlign(vAlign);
+        setVAlign(vAlign, getValidVAlignValues());
+    }
+
+    /**
+     * Returns the valid "vAlign" values for this element, depending on the browser being emulated.
+     * @return the valid "vAlign" values for this element, depending on the browser being emulated
+     */
+    private String[] getValidVAlignValues() {
+        String[] valid;
+        if (getBrowserVersion().isIE()) {
+            valid = VALIGN_VALID_VALUES_IE;
+        }
+        else {
+            valid = null;
+        }
+        return valid;
     }
 
     /**

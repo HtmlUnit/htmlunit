@@ -7,6 +7,9 @@
     <body>
         <release version="2.6" date="?" description="Bugfixes">
             <action type="add" dev="sdanig">
+                JavaScript: add support for caption.align (IE and FF) and caption.vAlign (IE only).
+            </action>
+            <action type="add" dev="sdanig">
                 Add WebClient.getTopLevelWindows().
             </action>
             <action type="fix" dev="asashour">

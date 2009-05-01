@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.LogFactory;
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
@@ -2144,29 +2145,26 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns the value of the "vAlign" property.
+     * @param valid the valid values; if <tt>null</tt>, any value is valid
+     * @param defaultValue the default value to use, if necessary
      * @return the value of the "vAlign" property
      */
-    protected String getVAlign() {
+    protected String getVAlign(final String[] valid, final String defaultValue) {
         final String valign = getDomNodeOrDie().getAttribute("valign");
-        final boolean ff = getBrowserVersion().isFirefox();
-        if (valign.equals("top")
-            || valign.equals("middle")
-            || valign.equals("bottom")
-            || valign.equals("baseline")
-            || ff) {
+        if (valid == null || ArrayUtils.contains(valid, valign)) {
             return valign;
         }
-        return "top";
+        return defaultValue;
     }
 
     /**
      * Sets the value of the "vAlign" property.
      * @param vAlign the value of the "vAlign" property
+     * @param valid the valid values; if <tt>null</tt>, any value is valid
      */
-    protected void setVAlign(final Object vAlign) {
+    protected void setVAlign(final Object vAlign, final String[] valid) {
         final String s = Context.toString(vAlign).toLowerCase();
-        final boolean ff = getBrowserVersion().isFirefox();
-        if (ff || s.equals("top") || s.equals("middle") || s.equals("bottom") || s.equals("baseline")) {
+        if (valid == null || ArrayUtils.contains(valid, s)) {
             getDomNodeOrDie().setAttribute("valign", s);
         }
         else {
