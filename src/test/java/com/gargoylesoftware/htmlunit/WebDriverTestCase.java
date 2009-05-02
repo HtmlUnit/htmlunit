@@ -116,7 +116,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         final WebClient webClient = getWebClient();
         final HtmlUnitDriver driver = new HtmlUnitDriver(true) {
             @Override
-            protected WebClient newWebClient() {
+            protected WebClient newWebClient(final BrowserVersion browserVersion) {
                 return webClient;
             }
 
