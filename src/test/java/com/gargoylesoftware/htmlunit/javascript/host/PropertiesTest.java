@@ -303,12 +303,16 @@ public class PropertiesTest extends WebTestCase {
             new File(getArtifactsDirectory() + "/properties-" + browserVersion_.getNickname() + ".png"));
     }
 
-    private String getArtifactsDirectory() {
+    /**
+     * Returns the 'artifacts' directory.
+     * @return the 'artifacts' directory
+     */
+    public static String getArtifactsDirectory() {
         final String dirName = "./artifacts";
         final File dir = new File(dirName);
         if (!dir.exists()) {
             if (!dir.mkdir()) {
-                throw new RuntimeException("could not create artifacts directory");
+                throw new RuntimeException("Could not create artifacts directory");
             }
         }
         return dirName;
