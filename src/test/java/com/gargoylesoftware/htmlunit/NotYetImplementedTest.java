@@ -108,11 +108,11 @@ public class NotYetImplementedTest {
     }
 
     private void save() throws Exception {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("<html><head></head><body>\n");
-        sb.append("NotYetImplemented is a condition in which a test is known to fail with HtmlUnit.");
-        sb.append("<table border='1'>\n");
-        sb.append("  <tr><th>File</th><th>Method</th><th>Line</th></tr>\n");
+        final StringBuilder builder = new StringBuilder();
+        builder.append("<html><head></head><body>\n");
+        builder.append("NotYetImplemented is a condition in which a test is known to fail with HtmlUnit.");
+        builder.append("<table border='1'>\n");
+        builder.append("  <tr><th>File</th><th>Method</th><th>Line</th></tr>\n");
         String lastFile = null;
         for (final String entry : entries_) {
             final String[] values = entry.split(",");
@@ -120,7 +120,7 @@ public class NotYetImplementedTest {
             final String fileName = file.substring(file.lastIndexOf('/') + 1, file.length() - 5);
             final String method = values[1];
             final String line = values[2];
-            sb.append("  <tr>\n");
+            builder.append("  <tr>\n");
             if (!file.equals(lastFile)) {
                 int totalCount = 0;
                 for (final String e : entries_) {
@@ -129,22 +129,23 @@ public class NotYetImplementedTest {
                     }
                 }
                 if (totalCount != 1) {
-                    sb.append("    <td rowspan='" + totalCount + "'>");
+                    builder.append("    <td rowspan='" + totalCount + "'>");
                 }
                 else {
-                    sb.append("    <td>");
+                    builder.append("    <td>");
                 }
-                sb.append(fileName);
-                sb.append("</td>\n");
+                builder.append(fileName);
+                builder.append("</td>\n");
                 lastFile = file;
             }
-            sb.append("    <td><a href='http://htmlunit.svn.sourceforge.net/viewvc/htmlunit/trunk/htmlunit/" + file + "?view=markup#l_" + line + "'>").append(method).append("</a></td>\n");
-            sb.append("    <td>").append(line).append("</td>\n");
-            sb.append("  </tr>\n");
+            builder.append("    <td><a href='http://htmlunit.svn.sourceforge.net/viewvc/htmlunit/trunk/htmlunit/"
+                    + file + "?view=markup#l_" + line + "'>").append(method).append("</a></td>\n");
+            builder.append("    <td>").append(line).append("</td>\n");
+            builder.append("  </tr>\n");
         }
-        sb.append("</table>\n").append("</body></html>");
+        builder.append("</table>\n").append("</body></html>");
         FileUtils.writeStringToFile(new File(PropertiesTest.getArtifactsDirectory(), "notYetImplemented.html"),
-                sb.toString());
+                builder.toString());
     }
 
 }
