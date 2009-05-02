@@ -613,7 +613,7 @@
         <dependency>
             <groupId>org.openqa.selenium.webdriver</groupId>
             <artifactId>webdriver-htmlunit</artifactId>
-            <version>0.6.685</version>
+            <version>0.6.964</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -625,13 +625,13 @@
         <dependency>
             <groupId>org.openqa.selenium.webdriver</groupId>
             <artifactId>webdriver-firefox</artifactId>
-            <version>0.6.685</version>
+            <version>0.6.964</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.openqa.selenium.webdriver</groupId>
             <artifactId>webdriver-ie</artifactId>
-            <version>0.6.685</version>
+            <version>0.6.964</version>
             <scope>test</scope>
         </dependency>
         <dependency>
