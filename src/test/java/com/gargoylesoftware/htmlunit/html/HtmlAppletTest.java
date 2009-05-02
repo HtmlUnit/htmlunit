@@ -23,8 +23,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link HtmlApplet}.
@@ -40,9 +38,8 @@ public class HtmlAppletTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.IE)
     @Alerts(FF = { "[object HTMLAppletElement]", "[object HTMLAppletElement]" },
-            IE = { "null", "undefined" })
+            IE = { "[object]", "[object]" })
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -52,7 +49,7 @@ public class HtmlAppletTest extends WebTestCase {
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
-            + "  <applet id='myId'></object>\n"
+            + "  <applet id='myId'></applet>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPageWithAlerts(html);
