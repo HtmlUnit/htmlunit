@@ -27,6 +27,8 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link com.gargoylesoftware.htmlunit.javascript.NamedNodeMap}.
@@ -34,6 +36,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class NamedNodeMapTest extends WebTestCase {
@@ -141,4 +144,28 @@ public class NamedNodeMapTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @NotYetImplemented(Browser.IE)
+    @Alerts(IE = { "[object]", "[object]", "[object]" }, FF = { "undefined", "undefined", "undefined" })
+    public void unspecifiedAttributes() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.body.attributes.language);\n"
+            + "    alert(document.body.attributes.id);\n"
+            + "    alert(document.body.attributes.dir);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts(html);
+    }
 }
