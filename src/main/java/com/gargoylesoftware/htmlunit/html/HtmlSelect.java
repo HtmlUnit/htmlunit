@@ -408,11 +408,14 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * @return the {@link HtmlOption} object that corresponds to the specified value
      * @exception ElementNotFoundException If a particular XML element could not be found in the DOM model
      */
-    public HtmlOption getOptionByValue(final String value)
-        throws ElementNotFoundException {
+    public HtmlOption getOptionByValue(final String value) throws ElementNotFoundException {
         WebAssert.notNull("value", value);
-
-        return getOneHtmlElementByAttribute("option", "value", value);
+        for (final HtmlOption option : getOptions()) {
+            if (option.getValueAttribute().equals(value)) {
+                return option;
+            }
+        }
+        throw new ElementNotFoundException("option", "value", value);
     }
 
     /**

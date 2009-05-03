@@ -345,13 +345,7 @@ public class CodeStyleTest {
                 if (runWith) {
                     if (line.contains("new WebClient(")) {
                         addFailure("Test " + relativePath + " line " + index
-                            + " should never directly instantiate WebClient, use getWebClient() instead.");
-                    }
-                    if (line.contains(" loadPage(")
-                            && !line.contains("getWebClient()") && !line.contains("webClient")
-                            && !line.contains("getBrowserVersion()") && !line.contains("browserVersion")) {
-                        addFailure("Test " + relativePath + " line " + index
-                            + " use loadPageWithAlerts() or use browser-specific 'getBrowserVersion()'.");
+                            + " should never directly instantiate WebClient, please use getWebClient() instead.");
                     }
                     if (line.contains("notYetImplemented()")) {
                         addFailure("Use @NotYetImplemented instead of notYetImplemented() in "

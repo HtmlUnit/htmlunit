@@ -400,7 +400,6 @@ public class HTMLOptionElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.IE)
     @Alerts(FF = { "text0", "text1", "text1b", "text2" },
             IE = { "", "", "", "" })
     public void defaultValueFromNestedNodes() throws Exception {

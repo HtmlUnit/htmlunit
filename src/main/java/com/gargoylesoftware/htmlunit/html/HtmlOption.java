@@ -195,7 +195,11 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * @return the value of the attribute "value"
      */
     public final String getValueAttribute() {
-        return getAttribute("value");
+        String value = getAttribute("value");
+        if (value == ATTRIBUTE_NOT_DEFINED) {
+            value = getText();
+        }
+        return value;
     }
 
     /**
@@ -219,20 +223,6 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
             return setSelected(true);
         }
         return defaultPage;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void onAllChildrenAddedToPage(final boolean postponed) {
-        super.onAllChildrenAddedToPage(postponed);
-
-        // default value for the value attribute is the text of the option... but not for IE
-        // see http://www.w3.org/TR/1999/REC-html401-19991224/interact/forms.html#adef-value-OPTION
-        if (getAttribute("value") == ATTRIBUTE_NOT_DEFINED) {
-            setAttribute("value", getText());
-        }
     }
 
     /**

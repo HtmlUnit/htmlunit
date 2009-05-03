@@ -19,6 +19,7 @@ import java.util.Set;
 
 import org.xml.sax.helpers.AttributesImpl;
 
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
@@ -86,7 +87,11 @@ public class HTMLOptionElement extends HTMLElement {
      * @return the value property
      */
     public String jsxGet_value() {
-        return getDomNodeOrNull().getValueAttribute();
+        String value = getDomNodeOrNull().getAttribute("value");
+        if (value == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().isFirefox()) {
+            value = getDomNodeOrNull().getText();
+        }
+        return value;
     }
 
     /**

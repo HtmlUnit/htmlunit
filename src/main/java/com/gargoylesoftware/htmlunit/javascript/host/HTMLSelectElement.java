@@ -248,7 +248,7 @@ public class HTMLSelectElement extends FormField {
         if (selectedOptions.isEmpty()) {
             return "";
         }
-        return selectedOptions.get(0).getValueAttribute();
+        return ((HTMLOptionElement) selectedOptions.get(0).getScriptObject()).jsxGet_value();
     }
 
     /**

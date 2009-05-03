@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                JavaScript: option.value should not be affected by the text content (IE only).
+            </action>
             <action type="add" dev="sdanig">
                 JavaScript: add support for caption.align (IE and FF) and caption.vAlign (IE only).
             </action>
