@@ -2047,6 +2047,22 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
+     * Returns the "language" property.
+     * @return the "language" property
+     */
+    public String jsxGet_language() {
+        return getDomNodeOrDie().getAttribute("language");
+    }
+
+    /**
+     * Sets the "language" property.
+     * @param language the "language" property
+     */
+    public void jsxSet_language(final String language) {
+        getDomNodeOrDie().setAttribute("language", language);
+    }
+
+    /**
      * Returns the "dir" property.
      * @return the "dir" property
      */

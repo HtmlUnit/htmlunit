@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -37,19 +38,13 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
 
     private static final long serialVersionUID = -1910087049570242560L;
 
-    private final org.w3c.dom.NamedNodeMap nodeMap_;
-    /**
-     * In IE nodes always have attributes. In a first time we only need to have a least one to make
-     * the MockKit tests happy and take the first one according to IE order: "language".
-     */
-    private final String fakedAttributeName_ = "language";
-    private Attr fakedAttributeNode_;
+    private final org.w3c.dom.NamedNodeMap attributes_;
 
     /**
      * We need default constructors to build the prototype instance.
      */
     public NamedNodeMap() {
-        nodeMap_ = null;
+        attributes_ = null;
     }
 
     /**
@@ -61,7 +56,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
         setParentScope(element.getScriptObject());
         setPrototype(getPrototype(getClass()));
 
-        nodeMap_ = element.getAttributes();
+        attributes_ = element.getAttributes();
         setDomNode(element, false);
     }
 
@@ -77,7 +72,6 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
         if (response != null) {
             return response;
         }
-
         return NOT_FOUND;
     }
 
@@ -91,6 +85,9 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
         if (response != null) {
             return response;
         }
+        if (shouldRecursiveAttributeForIE() && isRecursiveAttribute(name)) {
+            return getUnspecifiedAttributeNode(name);
+        }
 
         return NOT_FOUND;
     }
@@ -101,14 +98,10 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * @return the attribute node, <code>null</code> if the attribute is not defined
      */
     public Object jsxFunction_getNamedItem(final String name) {
-        final DomNode attr = (DomNode) nodeMap_.getNamedItem(name);
+        final DomNode attr = (DomNode) attributes_.getNamedItem(name);
         if (attr != null) {
             return attr.getScriptObject();
         }
-        else if (fakedAttributeName_.equalsIgnoreCase(name) && shouldFakeAttributeForIE()) {
-            return getFakedAttributeNode();
-        }
-
         return null;
     }
 
@@ -117,34 +110,35 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * @param index the index
      * @return the item at the specified index
      */
-    public Object jsxFunction_item(final int index) {
-        final DomNode attr = (DomNode) nodeMap_.item(index);
+    public Object jsxFunction_item(int index) {
+        final DomNode attr = (DomNode) attributes_.item(index);
         if (attr != null) {
             return attr.getScriptObject();
         }
-        else if (index == 0 && shouldFakeAttributeForIE()) {
-            return getFakedAttributeNode();
+        if (shouldRecursiveAttributeForIE()) {
+            index -= attributes_.getLength();
+            final String name = getRecusiveAttributeNameAt(index);
+            if (name != null) {
+                return getUnspecifiedAttributeNode(name);
+            }
         }
-
         return null;
     }
 
-    private boolean shouldFakeAttributeForIE() {
-        return nodeMap_.getLength() == 0 && getBrowserVersion().isIE() && getDomNodeOrDie() instanceof HtmlElement;
+    private boolean shouldRecursiveAttributeForIE() {
+        return getBrowserVersion().isIE() && getDomNodeOrDie() instanceof HtmlElement;
     }
 
     /**
-     * Gets the faked attribute node, with lazy creating
+     * Creates a new unspecified attribute node
      * @return the right {@link Attr}
      */
-    private Object getFakedAttributeNode() {
-        if (fakedAttributeNode_ == null) {
-            fakedAttributeNode_ = new Attr();
-            fakedAttributeNode_.setParentScope(this);
-            fakedAttributeNode_.setPrototype(getPrototype(Attr.class));
-            fakedAttributeNode_.init(fakedAttributeName_, null);
-        }
-        return fakedAttributeNode_;
+    private Attr getUnspecifiedAttributeNode(final String attrName) {
+        final Attr attribute = new Attr();
+        attribute.setParentScope(this);
+        attribute.setPrototype(getPrototype(attribute.getClass()));
+        attribute.init(attrName, (DomElement) getDomNodeOrDie());
+        return attribute;
     }
 
     /**
@@ -152,12 +146,42 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * @return the number of attributes in this named node map
      */
     public int jsxGet_length() {
-        final int length = nodeMap_.getLength();
-        // hack to avoid showing 0 elements as IE always has some
-        if (length == 0 && getBrowserVersion().isIE() && getDomNodeOrDie() instanceof HtmlElement) {
-            return 1;
+        int length = attributes_.getLength();
+        if (shouldRecursiveAttributeForIE()) {
+            length += getRecursiveAttributesLength();
         }
-
         return length;
+    }
+
+    private boolean isRecursiveAttribute(final String name) {
+        for (Scriptable object = getDomNodeOrDie().getScriptObject(); object != null; object = object.getPrototype()) {
+            for (final Object id : object.getIds()) {
+                if (name.equals(Context.toString(id))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private int getRecursiveAttributesLength() {
+        int length = 0;
+        for (Scriptable object = getDomNodeOrDie().getScriptObject(); object != null; object = object.getPrototype()) {
+            length += object.getIds().length;
+        }
+        return length;
+    }
+
+    private String getRecusiveAttributeNameAt(final int index) {
+        int i = 0;
+        for (Scriptable object = getDomNodeOrDie().getScriptObject(); object != null; object = object.getPrototype()) {
+            for (final Object id : object.getIds()) {
+                if (i == index) {
+                    return Context.toString(id);
+                }
+                i++;
+            }
+        }
+        return null;
     }
 }

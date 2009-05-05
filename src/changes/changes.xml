@@ -7,6 +7,9 @@
     <body>
         <release version="2.6" date="?" description="Bugfixes">
             <action type="fix" dev="asashour">
+                JavaScript: better implementation for "node's attributes collection is never empty for IE".
+            </action>
+            <action type="fix" dev="asashour">
                 JavaScript: option.value should not be affected by the text content (IE only).
             </action>
             <action type="add" dev="sdanig">

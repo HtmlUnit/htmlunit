@@ -45,7 +45,8 @@ public class NamedNodeMapTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "name=f", "id=f", "foo=bar", "baz=blah" })
+    @NotYetImplemented(Browser.IE)
+    @Alerts(FF = { "name=f", "id=f", "foo=bar", "baz=blah" }, IE = { "CORRECT THE EXPECTATION PLEASE!!!!" })
     public void testAttributes() throws Exception {
         final String html =
               "<html>\n"
@@ -148,7 +149,6 @@ public class NamedNodeMapTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(Browser.IE)
     @Alerts(IE = { "[object]", "[object]", "[object]" }, FF = { "undefined", "undefined", "undefined" })
     public void unspecifiedAttributes() throws Exception {
         final String html =

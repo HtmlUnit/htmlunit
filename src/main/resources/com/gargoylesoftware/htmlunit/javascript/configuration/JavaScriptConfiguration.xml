@@ -1377,6 +1377,9 @@
             <browser name="Microsoft Internet Explorer"/>
         </property>
         <property name="lang" readable="true" writable="true"/>
+        <property name="language" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
         <property name="offsetHeight" readable="true" writable="false"/>
         <property name="offsetLeft" readable="true" writable="false"/>
         <property name="offsetParent" readable="true" writable="false">
