@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
@@ -1619,6 +1620,33 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * Test for a __lookupSetter__ bug affecting Hotmail when emulating Firefox.
+     * @see <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=491433">Rhino bug 491433</a>
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.FF)
+    @Alerts(FF = { "function", "before", "none", "after", "none" })
+    @NotYetImplemented
+    public void interceptSetter() throws Exception {
+        final String html = "<html><body><div id='d'>foo</div><script>\n"
+            + "\n"
+            + "var css = window.CSSStyleDeclaration;\n"
+            + "var oldDisplay = css.prototype.__lookupSetter__('display');\n"
+            + "alert(typeof oldDisplay);\n"
+            + "\n"
+            + "var newDisplay = function(x){ alert('before'); alert(x); oldDisplay.call(this, x); alert('after'); };\n"
+            + "css.prototype.__defineSetter__('display', newDisplay);\n"
+            + "\n"
+            + "var div = document.getElementById('d');\n"
+            + "div.style.display = 'none';\n"
+            + "alert(div.style.display);\n"
+            + "\n"
+            + "</script></body></html>";
         loadPageWithAlerts(html);
     }
 
