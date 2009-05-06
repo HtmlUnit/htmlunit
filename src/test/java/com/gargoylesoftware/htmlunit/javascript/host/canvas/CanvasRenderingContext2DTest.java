@@ -12,29 +12,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
- * Unit tests for {@link HTMLCanvasElement}.
+ * Unit tests for {@link CanvasRenderingContext2D}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HTMLCanvasElementTest extends WebTestCase {
+public class CanvasRenderingContext2DTest extends WebTestCase {
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "300", "150", "[object CanvasRenderingContext2D]" }, IE = { "undefined", "undefined" })
     public void test() throws Exception {
         final String html =
             "<html>\n"
@@ -42,11 +40,12 @@ public class HTMLCanvasElementTest extends WebTestCase {
             + "    <script>\n"
             + "      function test() {\n"
             + "        var canvas = document.getElementById('myCanvas');\n"
-            + "        alert(canvas.width);\n"
-            + "        alert(canvas.height);\n"
             + "        if (canvas.getContext){\n"
             + "          var ctx = canvas.getContext('2d');\n"
-            + "          alert(ctx);\n"
+            + "          ctx.fillStyle = 'rgb(200,0,0)';\n"
+            + "          ctx.fillRect(10, 10, 55, 50);\n"
+            + "          ctx.fillStyle = 'rgba(0, 0, 200, 0.5)';\n"
+            + "          ctx.fillRect(30, 30, 55, 50);\n"
             + "        }\n"
             + "      }\n"
             + "    </script>\n"

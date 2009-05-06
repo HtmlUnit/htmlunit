@@ -54,6 +54,12 @@
         <property name="y" readable="true" writable="false"/>
     </class>
 
+    <class name="CanvasRenderingContext2D" classname="com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D"
+            JSObject="true">
+        <property name="fillStyle" readable="true" writable="true"/>
+        <function name="fillRect"/>
+    </class>
+
     <class name="CharacterDataImpl" extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.CharacterDataImpl"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomCharacterData">
         <property name="data" readable="true" writable="true"/>
@@ -1137,6 +1143,10 @@
     <class name="HTMLCanvasElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLCanvasElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlCanvas">
         <browser name="Firefox"/>
+        <property name="height" readable="true" writable="true"/>
+        <property name="width" readable="true" writable="true"/>
+        <function name="toDataURL" notImplemented="true"/>
+        <function name="getContext"/>
     </class>
 
     <class name="HTMLCollection" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLCollection" JSObject="true">

@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes">
+            <action type="add" dev="asashour" issue="2786813">
+                JavaScript: primitive implementation of canvas (FF only).
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: better implementation for "node's attributes collection is never empty for IE".
             </action>
