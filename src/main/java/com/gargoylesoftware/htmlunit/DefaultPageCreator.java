@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * already knows about for your custom content types.
  *
  * <p />
- * Following table shows the type of {@Page} created depending on the content type:<br>
+ * Following table shows the type of {@link Page} created depending on the content type:<br>
  * <br>
  *  <table border="1" width="50%">
  *    <tr>

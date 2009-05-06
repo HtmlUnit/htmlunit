@@ -57,7 +57,25 @@
     <class name="CanvasRenderingContext2D" classname="com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D"
             JSObject="true">
         <property name="fillStyle" readable="true" writable="true"/>
+        <property name="globalAlpha" readable="true" writable="true"/>
+        <property name="lineWidth" readable="true" writable="true"/>
+        <property name="strokeStyle" readable="true" writable="true"/>
+        <function name="arc"/>
+        <function name="arcTo"/>
+        <function name="beginPath"/>
+        <function name="bezierCurveTo"/>
+        <function name="clearRect"/>
+        <function name="clip"/>
+        <function name="closePath"/>
+        <function name="createLinearGradient"/>
+        <function name="fill"/>
         <function name="fillRect"/>
+        <function name="lineTo"/>
+        <function name="moveTo"/>
+        <function name="restore"/>
+        <function name="save"/>
+        <function name="stroke"/>
+        <function name="strokeRect"/>
     </class>
 
     <class name="CharacterDataImpl" extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.CharacterDataImpl"
