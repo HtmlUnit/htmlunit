@@ -1145,8 +1145,8 @@
         <browser name="Firefox"/>
         <property name="height" readable="true" writable="true"/>
         <property name="width" readable="true" writable="true"/>
-        <function name="toDataURL" notImplemented="true"/>
         <function name="getContext"/>
+        <function name="toDataURL" notImplemented="true"/>
     </class>
 
     <class name="HTMLCollection" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLCollection" JSObject="true">
