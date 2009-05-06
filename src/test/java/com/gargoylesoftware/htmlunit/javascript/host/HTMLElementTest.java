@@ -2525,6 +2525,41 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented
+    @Alerts(FF = { "-undefined-x", "null-x-null", "null-[object Attr]-null", "null-[object Attr]-null",
+            "x-byClassname", "[object Attr]-[object Attr]", "byClassname-byClassname", "[object Attr]-[object Attr]" },
+            IE = { "-undefined-x", "-null-x", "[object]-[object]-null", "[object]-[object]-null", "null-byClassname",
+            "[object]-null", "byClassname-byClassname", "[object]-null" })
+    public void class_className_attribute2() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  var e = document.getElementById('pid');\n"
+            + "  alert(e['lang'] + '-' + e['class'] + '-' + e['className']);\n"
+            + "  alert(e.getAttribute('lang') + '-' + e.getAttribute('class') + '-' + e.getAttribute('className'));\n"
+            + "  alert(e.getAttributeNode('lang') + '-' + e.getAttributeNode('class') + '-' + "
+            + "e.getAttributeNode('className'));\n"
+            + "  alert(e.attributes.getNamedItem('lang') + '-' + e.attributes.getNamedItem('class') + '-' + "
+            + "e.attributes.getNamedItem('className'));\n"
+            + "  e.setAttribute('className', 'byClassname');\n"
+            + "  alert(e.getAttribute('class') + '-' + e.getAttribute('className'));\n"
+            + "  alert(e.getAttributeNode('class') + '-' + e.getAttributeNode('className'));\n"
+            + "  e.setAttribute('class', 'byClassname');\n"
+            + "  alert(e.getAttribute('class') + '-' + e.getAttribute('className'));\n"
+            + "  alert(e.getAttributeNode('class') + '-' + e.getAttributeNode('className'));\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<p id='pid' class='x'>text</p>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Browsers(Browser.IE)
     @Alerts({ "true", "true", "true", "false", "false", "false", "false", "true" })
     public void contains() throws Exception {
