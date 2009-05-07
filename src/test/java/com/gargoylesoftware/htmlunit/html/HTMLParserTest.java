@@ -669,7 +669,6 @@ public class HTMLParserTest extends WebServerTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @NotYetImplemented
     public void escapingUrl() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
