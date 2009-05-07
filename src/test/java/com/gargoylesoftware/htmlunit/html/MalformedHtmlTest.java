@@ -95,4 +95,21 @@ public class MalformedHtmlTest extends WebTestCase {
 
         loadPageWithAlerts(content);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void incompleteEntities() throws Exception {
+        final String html = "<html><head>"
+            + "<title>Test document</title>"
+            + "</head><body>\n"
+            + "<a href='foo?a=1&copy=2&prod=3' id='myLink'>my link</a>"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlPage page2 = page.getAnchors().get(0).click();
+
+        assertEquals("a=1%C2%A9=2&prod=3", page2.getWebResponse().getRequestSettings().getUrl().getQuery());
+    }
 }
