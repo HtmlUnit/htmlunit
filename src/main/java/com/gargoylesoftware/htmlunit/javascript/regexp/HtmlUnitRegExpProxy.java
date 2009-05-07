@@ -61,13 +61,13 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         if (RA_REPLACE == actionType && args.length == 2 && (args[1] instanceof String)) {
             final String thisString = Context.toString(thisObj);
             String replacement = (String) args[1];
-            replacement = replacement.replaceAll("\\\\", "\\\\\\\\");
             final Object arg0 = args[0];
             if (arg0 instanceof String) {
                 // arg0 should *not* be interpreted as a RegExp
                 return StringUtils.replaceOnce(thisString, (String) arg0, replacement);
             }
             else if (arg0 instanceof NativeRegExp) {
+                replacement = replacement.replaceAll("\\\\", "\\\\\\\\");
                 try {
                     final NativeRegExp regexp = (NativeRegExp) arg0;
                     final RegExpData reData = new RegExpData(regexp);

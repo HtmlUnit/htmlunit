@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="2783950">
+                JavaScript: fix incorrect escaping of backslash in replacement for String.replace(String, String).
+            </action>
             <action type="add" dev="asashour" issue="2786813">
                 JavaScript: primitive implementation of canvas (FF only).
             </action>

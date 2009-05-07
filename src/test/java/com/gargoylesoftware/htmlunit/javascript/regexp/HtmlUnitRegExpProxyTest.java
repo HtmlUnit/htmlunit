@@ -618,11 +618,31 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      */
     @Test
     public void replace_backReferences_2() throws Exception {
-        final String html = "<script>alert('I.want.these.periods.to.be.$s'.replace(/\\./g, '$'));</script>";
+        final String html = buildHtml("alert('I.want.these.periods.to.be.$s'.replace(/\\./g, '$'));");
         final String[] expected = {"I$want$these$periods$to$be$$s"};
         final List<String> actual = new ArrayList<String>();
         loadPage(html, actual);
         assertEquals(expected, actual);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void escapeQuote() throws Exception {
+        final String script = "alert(\"kid's toys\".replace(/'/g, \"\\\\'\"))";
+        final String[] expected = {"kid\\'s toys"};
+        final List<String> actual = new ArrayList<String>();
+        final String html = buildHtml(script);
+        createTestPageForRealBrowserIfNeeded(html, expected);
+        loadPage(html, actual);
+        assertEquals(expected, actual);
+    }
+
+    private String buildHtml(final String script) {
+        return "<html><head><script>function test() {"
+            + script
+            + "\n}</script>"
+            + "</head><body onload='test()'></body></html>";
+    }
 }
