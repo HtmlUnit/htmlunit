@@ -1377,6 +1377,40 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
+     * Verifies that scripts added to the document via document.write(...) don't execute until the current script
+     * finishes executing; bug found at <a href="http://code.google.com/apis/maps/">the Google Maps API site</a>.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @NotYetImplemented
+    public void write_scriptExecutionPostponed() throws Exception {
+        final String html
+            = "<html><body><div id='d'></div>\n"
+            + "<script>function log(s) { document.getElementById('d').innerHTML += s + ' '; }</script>\n"
+            + "<script src='a.js'></script>\n"
+            + "<script>log(2);document.write('<scr'+'ipt src=\"b.js\"></scr'+'ipt>');log(3);</script>\n"
+            + "<script src='c.js'></script>\n"
+            + "<script>\n"
+            + "  log(6);document.write('<scr'+'ipt src=\"d.js\"></scr'+'ipt>');log(7);\n"
+            + "  log(8);document.write('<scr'+'ipt src=\"e.js\"></scr'+'ipt>');log(9);\n"
+            + "</script>\n"
+            + "<script src='f.js'></script>\n"
+            + "</body></html>";
+        final WebClient client = getWebClient();
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(new URL(URL_FIRST, "a.js"), "log(1)", "text/javascript");
+        conn.setResponse(new URL(URL_FIRST, "b.js"), "log(4)", "text/javascript");
+        conn.setResponse(new URL(URL_FIRST, "c.js"), "log(5)", "text/javascript");
+        conn.setResponse(new URL(URL_FIRST, "d.js"), "log(10)", "text/javascript");
+        conn.setResponse(new URL(URL_FIRST, "e.js"), "log(11)", "text/javascript");
+        conn.setResponse(new URL(URL_FIRST, "f.js"), "log(12)", "text/javascript");
+        client.setWebConnection(conn);
+        final HtmlPage page = client.getPage(URL_FIRST);
+        assertEquals("1 2 3 4 5 6 7 8 9 10 11 12", page.getBody().asText().trim());
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
