@@ -259,7 +259,7 @@ public final class HTMLParser {
      *
      * @param webResponse the response data
      * @param webWindow the web window into which the page is to be loaded
-     * @return the page object which is the root of the DOM tree, or <tt>null</tt> if the &lt;HTML&gt; tag is missing
+     * @return the page object which is the root of the DOM tree
      * @throws IOException if there is an IO error
      */
     public static HtmlPage parse(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
@@ -400,15 +400,23 @@ public final class HTMLParser {
             = "http://cyberneko.org/html/features/parse-noscript-content";
 
         /**
-         * Calls {@link HTMLConfiguration#pushInputSource(XMLInputSource)} on the configuration.
-         * @param sourceString the string to push
+         * Inserts the specified HTML content into the current parse stream.
+         * @param html the HTML content to insert
          */
-        public void pushInputString(final String sourceString) {
-            final WebResponse webResponse = page_.getWebResponse();
-            final String charset = webResponse.getContentCharset();
-            final XMLInputSource in = new XMLInputSource(null, webResponse.getRequestSettings().getUrl().toString(),
-                null, new StringReader(sourceString), charset);
-            ((HTMLConfiguration) fConfiguration).evaluateInputSource(in);
+        public void pushInputString(final String html) {
+            page_.registerParsingStart();
+            page_.registerInlineSnippetParsingStart();
+            try {
+                final WebResponse webResponse = page_.getWebResponse();
+                final String charset = webResponse.getContentCharset();
+                final String url = webResponse.getRequestSettings().getUrl().toString();
+                final XMLInputSource in = new XMLInputSource(null, url, null, new StringReader(html), charset);
+                ((HTMLConfiguration) fConfiguration).evaluateInputSource(in);
+            }
+            finally {
+                page_.registerParsingEnd();
+                page_.registerInlineSnippetParsingEnd();
+            }
         }
 
         /**
@@ -606,8 +614,8 @@ public final class HTMLParser {
                 currentNode_ = stack_.peek();
             }
 
-            previousNode.onAllChildrenAddedToPage(false);
-
+            final boolean postponed = page_.isParsingInlineHtmlSnippet();
+            previousNode.onAllChildrenAddedToPage(postponed);
         }
 
         /** @inheritDoc ContentHandler#characters(char,int,int) */

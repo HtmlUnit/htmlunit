@@ -1382,7 +1382,6 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented
     public void write_scriptExecutionPostponed() throws Exception {
         final String html
             = "<html><body><div id='d'></div>\n"

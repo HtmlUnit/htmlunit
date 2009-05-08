@@ -126,6 +126,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     private HtmlElement elementWithFocus_;
     private int parserCount_;
     private int snippetParserCount_;
+    private int inlineSnippetParserCount_;
 
     private final transient Log javascriptLog_ = LogFactory.getLog("com.gargoylesoftware.htmlunit.javascript");
     private final transient Log mainLog_ = LogFactory.getLog(getClass());
@@ -2077,32 +2078,57 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     }
 
     /**
-     * Returns <tt>true</tt> if an HTML parser is operating on some HTML
-     * snippet for adding content to some element on this page.
+     * Returns <tt>true</tt> if an HTML parser is parsing a non-inline HTML snippet to add content
+     * to this page. Non-inline content is content that is parsed for the page, but not in the
+     * same stream as the page itself -- basically anything other than <tt>document.write()</tt>
+     * or <tt>document.writeln()</tt>: <tt>innerHTML</tt>, <tt>otherHTML</tt>,
+     * <tt>document.createElement()</tt>, etc.
      *
-     * @return <tt>true</tt> if an HTML parser is operating on html snippet
-     *         for adding content to to some element on this page
+     * @return <tt>true</tt> if an HTML parser is parsing a non-inline HTML snippet to add content
+     *         to this page
      */
     boolean isParsingHtmlSnippet() {
         return snippetParserCount_ > 0;
     }
 
     /**
-     * Called by the HTML parser to let the page know that it has started
-     * parsing HTML snippet for innerHTML or outerHTML of some element on
-     * this page.
+     * Called by the HTML parser to let the page know that it has started parsing a non-inline HTML snippet.
      */
     void registerSnippetParsingStart() {
         snippetParserCount_++;
     }
 
     /**
-     * Called by the HTML parser to let the page know that it has finished
-     * parsing HTML snippet for innerHTML or outerHTML of some element on
-     * this page.
+     * Called by the HTML parser to let the page know that it has finished parsing a non-inline HTML snippet.
      */
     void registerSnippetParsingEnd() {
         snippetParserCount_--;
+    }
+
+    /**
+     * Returns <tt>true</tt> if an HTML parser is parsing an inline HTML snippet to add content
+     * to this page. Inline content is content inserted into the parser stream dynamically
+     * while the page is being parsed (i.e. <tt>document.write()</tt> or <tt>document.writeln()</tt>).
+     *
+     * @return <tt>true</tt> if an HTML parser is parsing an inline HTML snippet to add content
+     *         to this page
+     */
+    boolean isParsingInlineHtmlSnippet() {
+        return inlineSnippetParserCount_ > 0;
+    }
+
+    /**
+     * Called by the HTML parser to let the page know that it has started parsing an inline HTML snippet.
+     */
+    void registerInlineSnippetParsingStart() {
+        inlineSnippetParserCount_++;
+    }
+
+    /**
+     * Called by the HTML parser to let the page know that it has finished parsing an inline HTML snippet.
+     */
+    void registerInlineSnippetParsingEnd() {
+        inlineSnippetParserCount_--;
     }
 
     /**
