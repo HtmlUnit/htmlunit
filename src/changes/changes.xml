@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes">
+            <action type="add" dev="sdanig">
+                JavaScript: add support for iframe.width and iframe.height properties.
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: add element.document (IE only).
             </action>

@@ -391,4 +391,108 @@ public class HTMLIFrameElementTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = {"", "100", "foo", "20%", "0", "30", "400", "abc", "0", "100", "10%", "300" },
+            IE = {"", "100", "", "20%", "-5", "30", "error", "400", "100", "-5", "100", "10%", "300" })
+    public void width() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<iframe id='i1'></iframe>\n"
+            + "<iframe id='i2' width='100'></iframe>\n"
+            + "<iframe id='i3' width='foo'></iframe>\n"
+            + "<iframe id='i4' width='20%'></iframe>\n"
+            + "<iframe id='i5' width='-5'></iframe>\n"
+            + "<iframe id='i6' width='30.2'></iframe>\n"
+            + "<script>\n"
+            + "function set(e, value) {\n"
+            + "  try {\n"
+            + "    e.width = value;\n"
+            + "  } catch (e) {\n"
+            + "    alert('error');\n"
+            + "  }\n"
+            + "}\n"
+            + "var i1 = document.getElementById('i1');\n"
+            + "var i2 = document.getElementById('i2');\n"
+            + "var i3 = document.getElementById('i3');\n"
+            + "var i4 = document.getElementById('i4');\n"
+            + "var i5 = document.getElementById('i5');\n"
+            + "var i6 = document.getElementById('i6');\n"
+            + "alert(i1.width);\n"
+            + "alert(i2.width);\n"
+            + "alert(i3.width);\n"
+            + "alert(i4.width);\n"
+            + "alert(i5.width);\n"
+            + "alert(i6.width);\n"
+            + "set(i1, '400');\n"
+            + "set(i2, 'abc');\n"
+            + "set(i3, -5);\n"
+            + "set(i4, 100.2);\n"
+            + "set(i5, '10%');\n"
+            + "set(i6, 300);\n"
+            + "alert(i1.width);\n"
+            + "alert(i2.width);\n"
+            + "alert(i3.width);\n"
+            + "alert(i4.width);\n"
+            + "alert(i5.width);\n"
+            + "alert(i6.width);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = {"", "100", "foo", "20%", "0", "30", "400", "abc", "0", "100", "10%", "300" },
+            IE = {"", "100", "", "20%", "-5", "30", "error", "400", "100", "-5", "100", "10%", "300" })
+    public void height() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<iframe id='i1'></iframe>\n"
+            + "<iframe id='i2' height='100'></iframe>\n"
+            + "<iframe id='i3' height='foo'></iframe>\n"
+            + "<iframe id='i4' height='20%'></iframe>\n"
+            + "<iframe id='i5' height='-5'></iframe>\n"
+            + "<iframe id='i6' height='30.2'></iframe>\n"
+            + "<script>\n"
+            + "function set(e, value) {\n"
+            + "  try {\n"
+            + "    e.height = value;\n"
+            + "  } catch (e) {\n"
+            + "    alert('error');\n"
+            + "  }\n"
+            + "}\n"
+            + "var i1 = document.getElementById('i1');\n"
+            + "var i2 = document.getElementById('i2');\n"
+            + "var i3 = document.getElementById('i3');\n"
+            + "var i4 = document.getElementById('i4');\n"
+            + "var i5 = document.getElementById('i5');\n"
+            + "var i6 = document.getElementById('i6');\n"
+            + "alert(i1.height);\n"
+            + "alert(i2.height);\n"
+            + "alert(i3.height);\n"
+            + "alert(i4.height);\n"
+            + "alert(i5.height);\n"
+            + "alert(i6.height);\n"
+            + "set(i1, '400');\n"
+            + "set(i2, 'abc');\n"
+            + "set(i3, -5);\n"
+            + "set(i4, 100.2);\n"
+            + "set(i5, '10%');\n"
+            + "set(i6, 300);\n"
+            + "alert(i1.height);\n"
+            + "alert(i2.height);\n"
+            + "alert(i3.height);\n"
+            + "alert(i4.height);\n"
+            + "alert(i5.height);\n"
+            + "alert(i6.height);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }

@@ -232,15 +232,17 @@ public class HTMLTableColElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "50", "75%", "foo", "", "80", "40", "abc", "0" },
-        IE = { "50", "75%", "", "", "error", "error", "80", "40", "", "" })
+    @Alerts(FF = { "50", "75%", "foo", "0", "20", "", "80", "40", "abc", "0", "30%", "33" },
+        IE = { "50", "75%", "", "", "20", "", "error", "error", "80", "40", "", "", "30%", "33" })
     public void width() throws Exception {
         final String html
             = "<html><body><table>\n"
             + "  <col id='c1' width='50'></col>\n"
             + "  <col id='c2' width='75%'></col>\n"
             + "  <col id='c3' width='foo'></col>\n"
-            + "  <col id='c4'></col>\n"
+            + "  <col id='c4' width='-7'></col>\n"
+            + "  <col id='c5' width='20.2'></col>\n"
+            + "  <col id='c6'></col>\n"
             + "  <tr>\n"
             + "    <td>a</td>\n"
             + "    <td>b</td>\n"
@@ -260,18 +262,26 @@ public class HTMLTableColElementTest extends WebTestCase {
             + "  var c2 = document.getElementById('c2');\n"
             + "  var c3 = document.getElementById('c3');\n"
             + "  var c4 = document.getElementById('c4');\n"
+            + "  var c5 = document.getElementById('c5');\n"
+            + "  var c6 = document.getElementById('c6');\n"
             + "  alert(c1.width);\n"
             + "  alert(c2.width);\n"
             + "  alert(c3.width);\n"
             + "  alert(c4.width);\n"
+            + "  alert(c5.width);\n"
+            + "  alert(c6.width);\n"
             + "  set(c1, '80');\n"
             + "  set(c2, 40);\n"
             + "  set(c3, 'abc');\n"
             + "  set(c4, -10);\n"
+            + "  set(c5, '30%');\n"
+            + "  set(c6, 33.3);\n"
             + "  alert(c1.width);\n"
             + "  alert(c2.width);\n"
             + "  alert(c3.width);\n"
             + "  alert(c4.width);\n"
+            + "  alert(c5.width);\n"
+            + "  alert(c6.width);\n"
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts(html);

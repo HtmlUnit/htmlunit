@@ -141,4 +141,40 @@ public class HTMLIFrameElement extends HTMLElement {
         setAlign(align, false);
     }
 
+    /**
+     * Returns the value of the "width" property.
+     * @return the value of the "width" property
+     */
+    public String jsxGet_width() {
+        final boolean ie = getBrowserVersion().isIE();
+        final Boolean returnNegativeValues = ie ? true : null;
+        return getWidthOrHeight("width", returnNegativeValues);
+    }
+
+    /**
+     * Sets the value of the "width" property.
+     * @param width the value of the "width" property
+     */
+    public void jsxSet_width(final String width) {
+        setWidthOrHeight("width", width, true);
+    }
+
+    /**
+     * Returns the value of the "width" property.
+     * @return the value of the "width" property
+     */
+    public String jsxGet_height() {
+        final boolean ie = getBrowserVersion().isIE();
+        final Boolean returnNegativeValues = ie ? true : null;
+        return getWidthOrHeight("height", returnNegativeValues);
+    }
+
+    /**
+     * Sets the value of the "width" property.
+     * @param width the value of the "width" property
+     */
+    public void jsxSet_height(final String width) {
+        setWidthOrHeight("height", width, true);
+    }
+
 }

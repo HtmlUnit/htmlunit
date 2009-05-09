@@ -1687,9 +1687,11 @@
         <property name="dataSrc" notImplemented="true" readable="true" writable="true">
             <browser name="Internet Explorer"/>
         </property>
+        <property name="height" readable="true" writable="true"/>
         <property name="name" readable="true" writable="true"/>
         <property name="onload" readable="true" writable="true"/>
         <property name="src" readable="true" writable="true"/>
+        <property name="width" readable="true" writable="true"/>
     </class>
 
     <class name="HTMLImageElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLImageElement"

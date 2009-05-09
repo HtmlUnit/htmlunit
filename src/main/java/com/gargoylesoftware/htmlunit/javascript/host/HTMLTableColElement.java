@@ -210,23 +210,9 @@ public class HTMLTableColElement extends HTMLElement {
      * @return the value of the "width" property
      */
     public String jsxGet_width() {
-        final String width = getDomNodeOrDie().getAttribute("width");
-        if (width.matches("\\d+%")) {
-            return width;
-        }
-        try {
-            int i = Integer.parseInt(width);
-            if (i < 0) {
-                i = 0;
-            }
-            return String.valueOf(i);
-        }
-        catch (final NumberFormatException e) {
-            if (getBrowserVersion().isIE()) {
-                return "";
-            }
-            return width;
-        }
+        final boolean ie = getBrowserVersion().isIE();
+        final Boolean returnNegativeValues = ie ? false : null;
+        return getWidthOrHeight("width", returnNegativeValues);
     }
 
     /**
@@ -234,22 +220,7 @@ public class HTMLTableColElement extends HTMLElement {
      * @param width the value of the "width" property
      */
     public void jsxSet_width(final String width) {
-        if (getBrowserVersion().isIE()) {
-            boolean error = false;
-            try {
-                final Float f = Float.parseFloat(width);
-                final Integer i = f.intValue();
-                error = (i < 0);
-            }
-            catch (final NumberFormatException e) {
-                error = true;
-            }
-            if (error) {
-                final Exception e = new Exception("Cannot set the width property to invalid value: " + width);
-                Context.throwAsScriptRuntimeEx(e);
-            }
-        }
-        getDomNodeOrDie().setAttribute("width", width);
+        setWidthOrHeight("width", width, false);
     }
 
 }

@@ -2133,6 +2133,80 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
+     * Returns the value of the specified attribute (width or height).
+     * @return the value of the specified attribute (width or height)
+     * @param attributeName the name of the attribute to return (<tt>"width"</tt> or <tt>"height"</tt>)
+     * @param returnNegativeValues if <tt>true</tt>, negative values are returned;
+     *        if <tt>false</tt>, this method returns an empty string in lieu of negative values;
+     *        if <tt>null</tt>, this method returns <tt>0</tt> in lieu of negative values
+     */
+    protected String getWidthOrHeight(String attributeName, Boolean returnNegativeValues) {
+        String s = getDomNodeOrDie().getAttribute(attributeName);
+        if (!s.matches("\\d+%")) {
+            try {
+                final Float f = Float.parseFloat(s);
+                Integer i = f.intValue();
+                if (i < 0) {
+                    if (returnNegativeValues == null) {
+                        s = "0";
+                    }
+                    else if (!returnNegativeValues) {
+                        s = "";
+                    }
+                    else {
+                        s = String.valueOf(i);
+                    }
+                }
+                else {
+                    s = String.valueOf(i);
+                }
+            }
+            catch (final NumberFormatException e) {
+                if (getBrowserVersion().isIE()) {
+                    s = "";
+                }
+            }
+        }
+        return s;
+    }
+
+    /**
+     * Sets the value of the specified attribute (width or height).
+     * @param attributeName the name of the attribute to set (<tt>"width"</tt> or <tt>"height"</tt>)
+     * @param s the value of the specified attribute (width or height)
+     * @param allowNegativeValues if <tt>true</tt>, negative values will be stored;
+     *        if <tt>false</tt>, negative values cause an exception to be thrown;
+     *        if <tt>null</tt>, negative values set the value to <tt>0</tt>
+     */
+    protected void setWidthOrHeight(String attributeName, String s, Boolean allowNegativeValues) {
+        if (getBrowserVersion().isIE()) {
+            boolean error = false;
+            if (!s.matches("\\d+%")) {
+                try {
+                    final Float f = Float.parseFloat(s);
+                    final Integer i = f.intValue();
+                    if (i < 0) {
+                        if (allowNegativeValues == null) {
+                            s = "0";
+                        }
+                        else if (!allowNegativeValues) {
+                            error = true;
+                        }
+                    }
+                }
+                catch (final NumberFormatException e) {
+                    error = true;
+                }
+            }
+            if (error) {
+                final Exception e = new Exception("Cannot set the width property to invalid value: " + s);
+                Context.throwAsScriptRuntimeEx(e);
+            }
+        }
+        getDomNodeOrDie().setAttribute(attributeName, s);
+    }
+
+    /**
      * Returns the value of the "align" property.
      * @param returnInvalidValues if <tt>true</tt>, this method will return any value, including technically
      *        invalid values; if <tt>false</tt>, this method will return an empty string instead of invalid values
