@@ -1393,7 +1393,7 @@
         <property name="disabled" readable="true" writable="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="document" notImplemented="true" readable="true" writable="false">
+        <property name="document" readable="true" writable="false">
             <browser name="Internet Explorer"/>
         </property>
         <property name="filters" readable="true" writable="false">

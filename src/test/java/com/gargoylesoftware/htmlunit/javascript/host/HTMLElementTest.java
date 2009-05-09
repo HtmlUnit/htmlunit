@@ -2855,4 +2855,21 @@ public class HTMLElementTest extends WebTestCase {
         assertEquals(expectedAlerts, actual);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "false", IE = "true")
+    public void document() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  alert(document.body.document === document);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }

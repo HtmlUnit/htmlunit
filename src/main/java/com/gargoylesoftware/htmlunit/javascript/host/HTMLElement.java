@@ -268,6 +268,14 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
+     * Returns the document.
+     * @return the document
+     */
+    public HTMLDocument jsxGet_document() {
+        return getWindow().jsxGet_document();
+    }
+
+    /**
      * Sets whether or not to disable this element.
      * @param disabled True if this is to be disabled
      */

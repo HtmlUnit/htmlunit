@@ -7,6 +7,9 @@
     <body>
         <release version="2.6" date="?" description="Bugfixes">
             <action type="add" dev="asashour">
+                JavaScript: add element.document.
+            </action>
+            <action type="add" dev="asashour">
                 WebRequestSettings: add .removeAdditionalHeader() and make headers case-insensitive.
             </action>
             <action type="add" dev="asashour">
