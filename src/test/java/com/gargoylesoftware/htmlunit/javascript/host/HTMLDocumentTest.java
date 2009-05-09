@@ -383,4 +383,26 @@ public class HTMLDocumentTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    @Alerts("Hello There")
+    public void write() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<title>Test</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  document.write('<html><body><scr'+'ipt>alert(\"Hello There\")</scr'+'ipt></body></html>');\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts(html);
+    }
 }
