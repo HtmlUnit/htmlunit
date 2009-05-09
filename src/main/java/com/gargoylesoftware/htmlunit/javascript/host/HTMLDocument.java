@@ -29,18 +29,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import org.apache.commons.httpclient.Cookie;
-import org.apache.commons.httpclient.cookie.CookiePolicy;
-import org.apache.commons.httpclient.cookie.CookieSpec;
-import org.apache.commons.httpclient.util.DateParseException;
-import org.apache.commons.httpclient.util.DateUtil;
-import org.apache.commons.lang.StringUtils;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.UniqueTag;
+
+import org.apache.commons.httpclient.Cookie;
+import org.apache.commons.httpclient.cookie.CookiePolicy;
+import org.apache.commons.httpclient.cookie.CookieSpec;
+import org.apache.commons.httpclient.util.DateParseException;
+import org.apache.commons.httpclient.util.DateUtil;
+import org.apache.commons.lang.StringUtils;
 import org.w3c.dom.DOMException;
 import org.xml.sax.SAXException;
 
@@ -53,7 +54,6 @@ import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
@@ -876,29 +876,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             // Just fall through - result is already set to NOT_FOUND
         }
         return result;
-    }
-
-    /**
-     * Creates a new HTML element with the given tag name, and name.
-     *
-     * @param namespaceURI the URI that identifies an XML namespace
-     * @param qualifiedName the qualified name of the element type to instantiate
-     * @return the new HTML element, or NOT_FOUND if the tag is not supported
-     */
-    public Object jsxFunction_createElementNS(final String namespaceURI, final String qualifiedName) {
-        final org.w3c.dom.Element element;
-        if (getBrowserVersion().isFirefox()
-                && "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul".equals(namespaceURI)) {
-            // simple hack, no need to implement the XUL objects (at least in a first time)
-            element = new HtmlDivision(namespaceURI, qualifiedName, getPage(), null);
-        }
-        else if (HTMLParser.XHTML_NAMESPACE.equals(namespaceURI)) {
-            element = getPage().createElementNS(namespaceURI, qualifiedName);
-        }
-        else {
-            element = new DomElement(namespaceURI, qualifiedName, getPage(), null);
-        }
-        return getScriptableFor(element);
     }
 
     /**

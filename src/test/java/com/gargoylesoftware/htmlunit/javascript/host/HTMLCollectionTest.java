@@ -62,12 +62,12 @@ public class HTMLCollectionTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
-    @Alerts("function")
+    @NotYetImplemented(Browser.FF)
+    @Alerts(IE = "object", FF = "function")
     public void testToStringFunction() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "    alert(typeof document.links.toString)\n"
+            + "    alert(typeof document.links.toString);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "<a href='bla.html'>link</a>\n"

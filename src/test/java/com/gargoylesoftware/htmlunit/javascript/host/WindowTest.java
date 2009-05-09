@@ -1244,7 +1244,7 @@ public class WindowTest extends WebTestCase {
      /**
      * All elements should be accessible via the window object by their name, both in qualified
      * format (<tt>window.elementName</tt>) and unqualified format (<tt>elementName</tt>), if we
-     * are emulating Microsoft Internet Explorer. Both of these expressions are therefore equivalent
+     * are emulating Internet Explorer. Both of these expressions are therefore equivalent
      * to <tt>document.getElementsByName(elementName)</tt> in IE, and should return a collection of
      * elements if there is more than one with the specified name.
      * @throws Exception if the test fails

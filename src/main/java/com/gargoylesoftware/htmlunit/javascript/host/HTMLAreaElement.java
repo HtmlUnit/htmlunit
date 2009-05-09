@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+
 /**
  * The JavaScript object "HTMLAreaElement".
  *
@@ -39,7 +41,11 @@ public class HTMLAreaElement extends HTMLElement {
      */
     @Override
     public Object getDefaultValue(final Class< ? > hint) {
-        return HTMLAnchorElement.getDefaultValue(getDomNodeOrDie());
+        final HtmlElement element = getDomNodeOrNull();
+        if (element == null) {
+            return super.getDefaultValue(null);
+        }
+        return HTMLAnchorElement.getDefaultValue(element);
     }
 
     /**

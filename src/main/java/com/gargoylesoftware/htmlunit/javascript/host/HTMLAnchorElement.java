@@ -328,7 +328,11 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @Override
     public Object getDefaultValue(final Class< ? > hint) {
-        return getDefaultValue(getDomNodeOrDie());
+        final HtmlElement element = getDomNodeOrNull();
+        if (element == null) {
+            return super.getDefaultValue(null);
+        }
+        return getDefaultValue(element);
     }
 
     static String getDefaultValue(final HtmlElement element) {

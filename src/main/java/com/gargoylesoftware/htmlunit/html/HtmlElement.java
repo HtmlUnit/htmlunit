@@ -105,6 +105,12 @@ public abstract class HtmlElement extends DomElement {
     protected HtmlElement(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
+        if (page != null && page.getWebClient().getBrowserVersion().isFirefox()) {
+            final String value = getAttribute("class");
+            if (value != ATTRIBUTE_NOT_DEFINED) {
+                setAttribute("class", value.trim());
+            }
+        }
     }
 
     /**

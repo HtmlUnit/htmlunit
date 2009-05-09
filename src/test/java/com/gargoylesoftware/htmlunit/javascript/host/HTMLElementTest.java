@@ -2525,7 +2525,6 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     @Alerts(FF = { "-undefined-x", "null-x-null", "null-[object Attr]-null", "null-[object Attr]-null",
             "x-byClassname", "[object Attr]-[object Attr]", "byClassname-byClassname", "[object Attr]-[object Attr]" },
             IE = { "-undefined-x", "-null-x", "[object]-[object]-null", "[object]-[object]-null", "null-byClassname",
@@ -2619,7 +2618,6 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.FF)
     @Alerts(FF = { ">myClass<", "> myId  <" }, IE = { "> myClass <", "> myId  <" })
     public void attributes_trimmed() throws Exception {
         final String html

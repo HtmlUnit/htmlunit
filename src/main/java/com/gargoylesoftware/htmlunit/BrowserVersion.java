@@ -64,10 +64,10 @@ public class BrowserVersion implements Serializable {
     private final List<BrowserVersionFeatures> features_ = new ArrayList<BrowserVersionFeatures>();
     private final String nickname_;
 
-    /** Application code name for both Microsoft Internet Explorer and Netscape series. */
+    /** Application code name for both Internet Explorer and Netscape series. */
     public static final String APP_CODE_NAME = "Mozilla";
 
-    /** Application name for the Microsoft Internet Explorer series of browsers. */
+    /** Application name for the Internet Explorer series of browsers. */
     public static final String INTERNET_EXPLORER = "Microsoft Internet Explorer";
 
     /** Application name the Netscape navigator series of browsers. */
@@ -254,7 +254,7 @@ public class BrowserVersion implements Serializable {
 
     /**
      * Returns <tt>true</tt> if this <tt>BrowserVersion</tt> instance represents some
-     * version of Microsoft Internet Explorer.
+     * version of Internet Explorer.
      * @return whether or not this version is a version of IE
      */
     public final boolean isIE() {

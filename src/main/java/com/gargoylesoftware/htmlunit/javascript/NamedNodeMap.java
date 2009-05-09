@@ -102,6 +102,9 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
         if (attr != null) {
             return attr.getScriptObject();
         }
+        if (!name.equals("className") && shouldRecursiveAttributeForIE() && isRecursiveAttribute(name)) {
+            return getUnspecifiedAttributeNode(name);
+        }
         return null;
     }
 

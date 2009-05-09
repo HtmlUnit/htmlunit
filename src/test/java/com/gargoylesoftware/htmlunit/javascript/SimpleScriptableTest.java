@@ -211,8 +211,7 @@ public class SimpleScriptableTest extends WebTestCase {
     @NotYetImplemented
     public void setNonWritableProperty() throws Exception {
         final String content
-            = "<html><head><title>foo</title></head><body onload='document.body=123456'>"
-            + "</body></html>";
+            = "<html><body onload='document.body=123456'></body></html>";
 
         try {
             loadPage(getBrowserVersion(), content, null);
@@ -265,7 +264,6 @@ public class SimpleScriptableTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.FF)
-    @NotYetImplemented
     public void hostClassNames() throws Exception {
         testHostClassNames("HTMLAnchorElement");
     }
@@ -278,7 +276,13 @@ public class SimpleScriptableTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {'[' + className + ']'};
+        final String[] expectedAlerts;
+        if (getBrowserVersion().isFirefox() && getBrowserVersion().getBrowserVersionNumeric() < 3) {
+            expectedAlerts = new String[] {'[' + className + ']'};
+        }
+        else {
+            expectedAlerts = new String[] {"[object " + className + ']'};
+        }
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(getBrowserVersion(), content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);

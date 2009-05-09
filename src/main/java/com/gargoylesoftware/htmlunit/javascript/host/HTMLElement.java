@@ -316,13 +316,15 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * {@inheritDoc}
      */
     public Object getWithFallback(final String name) {
-        final HtmlElement htmlElement = getDomNodeOrNull();
-        if (htmlElement != null && isAttributeName(name)) {
-            final String value = htmlElement.getAttribute(name);
-            if (HtmlElement.ATTRIBUTE_NOT_DEFINED != value) {
-                getLog().debug("Found attribute for evaluation of property \"" + name
-                        + "\" for of " + this);
-                return value;
+        if (!name.equals("class")) {
+            final HtmlElement htmlElement = getDomNodeOrNull();
+            if (htmlElement != null && isAttributeName(name)) {
+                final String value = htmlElement.getAttribute(name);
+                if (HtmlElement.ATTRIBUTE_NOT_DEFINED != value) {
+                    getLog().debug("Found attribute for evaluation of property \"" + name
+                            + "\" for of " + this);
+                    return value;
+                }
             }
         }
 

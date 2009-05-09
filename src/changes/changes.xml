@@ -6,6 +6,16 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                JavaScript: implement xmlDocument.createElementNS() (FF only).
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: 'class' attribute should be trimmed (FF only).
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: fix properties defined in super objects (IE only),
+                            and fix .getAttribute() and .getAttributeNode().
+            </action>
             <action type="fix" dev="mguillem" issue="2783489">
                 Parser: don't recognize &amp;prod as incomplete entity.
             </action>

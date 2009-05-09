@@ -2682,14 +2682,9 @@ public class DocumentTest extends WebTestCase {
                 + "      alert(document.getElementById(\"id1\").ownerDocument === document);\n"
                 + "      alert(clone.getElementById(\"id1\").ownerDocument === document);\n"
                 + "    }\n"
-                + "    function assert(clone, expr, info) {\n"
-                + "      if (!eval(expr)) {\n"
-                + "        alert('failed assertion: ' + expr + ', info: ' + info);\n"
-                + "      }\n"
-                + "    }\n"
                 + "  </script>\n"
                 + "  <div id='id1'>hello</div>\n"
-                + "</body>\n" + "</html>";
+                + "</body></html>";
 
         loadPageWithAlerts(html);
     }

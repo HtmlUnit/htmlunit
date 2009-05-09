@@ -69,7 +69,7 @@
 			<xsd:simpleType>
 				<xsd:restriction base="xsd:string">
 					<xsd:enumeration value="Firefox"/>
-					<xsd:enumeration value="Microsoft Internet Explorer"/>
+					<xsd:enumeration value="Internet Explorer"/>
 				</xsd:restriction>
 			</xsd:simpleType>
 		</xsd:attribute>

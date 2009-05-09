@@ -20,6 +20,7 @@ import java.util.Map;
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -103,9 +104,11 @@ public class Element extends EventNode {
         final String value = getDomNodeOrDie().getAttribute(attributeName);
         if (value == DomElement.ATTRIBUTE_NOT_DEFINED) {
             if (getBrowserVersion().isIE()) {
-                final Object property = get(attributeName, this);
-                if (property != NOT_FOUND) {
-                    return property;
+                for (Scriptable object = this; object != null; object = object.getPrototype()) {
+                    final Object property = object.get(attributeName, this);
+                    if (property != NOT_FOUND) {
+                        return property;
+                    }
                 }
             }
             return null;
