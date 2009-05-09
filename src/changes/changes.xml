@@ -6,7 +6,10 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes">
-            <action type="fix" dev="asashour">
+            <action type="add" dev="asashour">
+                WebRequestSettings: add .removeAdditionalHeader() and make headers case-insensitive.
+            </action>
+            <action type="add" dev="asashour">
                 JavaScript: implement xmlDocument.createElementNS() (FF only).
             </action>
             <action type="fix" dev="asashour">

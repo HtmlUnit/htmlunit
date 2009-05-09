@@ -248,8 +248,28 @@ public class WebRequestSettings implements Serializable {
      * @param name the name of the additional HTTP header
      * @param value the value of the additional HTTP header
      */
-    public void addAdditionalHeader(final String name, final String value) {
+    public void addAdditionalHeader(String name, final String value) {
+        for (final String key : additionalHeaders_.keySet()) {
+            if (name.equalsIgnoreCase(key)) {
+                name = key;
+                break;
+            }
+        }
         additionalHeaders_.put(name, value);
+    }
+
+    /**
+     * Removed the specified name/value pair from the additional HTTP headers.
+     * @param name the name of the additional HTTP header
+     */
+    public void removeAdditionalHeader(String name) {
+        for (final String key : additionalHeaders_.keySet()) {
+            if (name.equalsIgnoreCase(key)) {
+                name = key;
+                break;
+            }
+        }
+        additionalHeaders_.remove(name);
     }
 
     /**
