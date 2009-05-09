@@ -2140,12 +2140,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      *        if <tt>false</tt>, this method returns an empty string in lieu of negative values;
      *        if <tt>null</tt>, this method returns <tt>0</tt> in lieu of negative values
      */
-    protected String getWidthOrHeight(String attributeName, Boolean returnNegativeValues) {
+    protected String getWidthOrHeight(final String attributeName, final Boolean returnNegativeValues) {
         String s = getDomNodeOrDie().getAttribute(attributeName);
         if (!s.matches("\\d+%")) {
             try {
                 final Float f = Float.parseFloat(s);
-                Integer i = f.intValue();
+                final Integer i = f.intValue();
                 if (i < 0) {
                     if (returnNegativeValues == null) {
                         s = "0";
@@ -2178,7 +2178,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      *        if <tt>false</tt>, negative values cause an exception to be thrown;
      *        if <tt>null</tt>, negative values set the value to <tt>0</tt>
      */
-    protected void setWidthOrHeight(String attributeName, String s, Boolean allowNegativeValues) {
+    protected void setWidthOrHeight(final String attributeName, String s, final Boolean allowNegativeValues) {
         if (getBrowserVersion().isIE()) {
             boolean error = false;
             if (!s.matches("\\d+%")) {
