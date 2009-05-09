@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -104,15 +105,14 @@ public class HTMLFrameElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     @Browsers(Browser.FF)
     @Alerts("true")
-    @Test
     public void testContentDocument() throws Exception {
         final String html
             = "<html><head><title>first</title>\n"
                 + "<script>\n"
-                + "function test()\n"
-                + "{\n"
+                + "function test() {\n"
                 + "  alert(document.getElementById('myFrame').contentDocument == frames.foo.document);\n"
                 + "}\n"
                 + "</script></head>\n"
@@ -344,4 +344,27 @@ public class HTMLFrameElementTest extends WebTestCase {
 
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented(Browser.IE)
+    @Alerts(IE = "[object]", FF = "undefined")
+    public void document() throws Exception {
+        final String html
+            = "<html><head><title>first</title>\n"
+                + "<script>\n"
+                + "function test() {\n"
+                + "  alert(document.getElementById('myFrame').document);\n"
+                + "}\n"
+                + "</script></head>\n"
+                + "<frameset rows='*' onload='test()'>\n"
+                + "<frame name='foo' id='myFrame' src='about:blank'/>\n"
+                + "</frameset>\n"
+                + "</html>";
+
+        loadPageWithAlerts(html);
+    }
+
 }
