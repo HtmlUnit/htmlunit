@@ -7,7 +7,7 @@
     <body>
         <release version="2.6" date="?" description="Bugfixes">
             <action type="add" dev="asashour">
-                JavaScript: add element.document.
+                JavaScript: add element.document (IE only).
             </action>
             <action type="add" dev="asashour">
                 WebRequestSettings: add .removeAdditionalHeader() and make headers case-insensitive.
