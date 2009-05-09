@@ -37,7 +37,7 @@ public class HTMLMetaElementTest extends WebTestCase {
     @Test
     @NotYetImplemented
     @Alerts(IE = { "", "text/html; charset=utf-8", "Content-Type", "", "", "" },
-            FF = { "undefined", "text/html; charset=utf-8", "Content-Type", "", "", "undefined"})
+            FF = { "undefined", "text/html; charset=utf-8", "Content-Type", "", "", "undefined" })
     public void name() throws Exception {
         final String html =
             "<html>\n"
