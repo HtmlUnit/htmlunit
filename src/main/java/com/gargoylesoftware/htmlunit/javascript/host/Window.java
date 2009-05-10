@@ -63,6 +63,8 @@ import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptFunctionJob;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptStringJob;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
+import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 
 /**
  * A JavaScript object for a Window.

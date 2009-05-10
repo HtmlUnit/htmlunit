@@ -1193,7 +1193,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
     /**
      * Retrieves a collection of stylesheet objects representing the style sheets that correspond
-     * to each instance of a Link or {@link CSSStyleDeclaration} object in the document.
+     * to each instance of a Link or
+     * {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration} object in the document.
      *
      * @return styleSheet collection
      */

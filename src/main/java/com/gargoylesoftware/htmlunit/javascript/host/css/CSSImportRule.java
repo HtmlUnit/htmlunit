@@ -12,9 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import org.w3c.dom.css.CSSStyleSheet;
+
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
+import com.gargoylesoftware.htmlunit.javascript.host.MediaList;
+import com.gargoylesoftware.htmlunit.javascript.host.Stylesheet;
 
 /**
  * A JavaScript object for a CSSImportRule.

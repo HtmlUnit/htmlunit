@@ -46,6 +46,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlHtml;
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.steadystate.css.dom.CSSStyleRuleImpl;
 import com.steadystate.css.dom.CSSStyleSheetImpl;
 import com.steadystate.css.parser.CSSOMParser;
@@ -72,7 +73,7 @@ public class Stylesheet extends SimpleScriptable {
     private final HTMLElement ownerNode_;
 
     /** The collection of rules defined in this style sheet. */
-    private com.gargoylesoftware.htmlunit.javascript.host.CSSRuleList cssRules_;
+    private com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList cssRules_;
 
     /**
      * Creates a new empty stylesheet.
@@ -110,7 +111,7 @@ public class Stylesheet extends SimpleScriptable {
      * Returns the wrapped stylesheet.
      * @return the wrapped stylesheet
      */
-    CSSStyleSheet getWrappedSheet() {
+    public CSSStyleSheet getWrappedSheet() {
         return wrapped_;
     }
 
@@ -381,7 +382,7 @@ public class Stylesheet extends SimpleScriptable {
      * Retrieves the collection of rules defined in this style sheet.
      * @return the collection of rules defined in this style sheet
      */
-    public com.gargoylesoftware.htmlunit.javascript.host.CSSRuleList jsxGet_rules() {
+    public com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList jsxGet_rules() {
         return jsxGet_cssRules();
     }
 
@@ -389,9 +390,9 @@ public class Stylesheet extends SimpleScriptable {
      * Returns the collection of rules defined in this style sheet.
      * @return the collection of rules defined in this style sheet
      */
-    public com.gargoylesoftware.htmlunit.javascript.host.CSSRuleList jsxGet_cssRules() {
+    public com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList jsxGet_cssRules() {
         if (cssRules_ == null) {
-            cssRules_ = new com.gargoylesoftware.htmlunit.javascript.host.CSSRuleList(this);
+            cssRules_ = new com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList(this);
         }
         return cssRules_;
     }

@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +20,7 @@ import java.util.List;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.host.Stylesheet;
 
 /**
  * A JavaScript object for a CSSRuleList.
@@ -43,7 +44,11 @@ public class CSSRuleList extends SimpleScriptable {
         rules_ = null;
     }
 
-    CSSRuleList(final Stylesheet stylesheet) {
+    /**
+     * Creates a new instance.
+     * @param stylesheet the stylesheet
+     */
+    public CSSRuleList(final Stylesheet stylesheet) {
         stylesheet_ = stylesheet;
         rules_ = stylesheet.getWrappedSheet().getCssRules();
         setParentScope(stylesheet.getParentScope());

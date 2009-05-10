@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.util.StringUtils.isFloat;
 
@@ -34,6 +34,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
 
 /**
  * A JavaScript object for a CSSStyleDeclaration.
@@ -118,7 +119,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * Creates an instance and sets its parent scope to the one of the provided element.
      * @param element the element to which this style is bound
      */
-    CSSStyleDeclaration(final HTMLElement element) {
+    public CSSStyleDeclaration(final HTMLElement element) {
         setParentScope(element.getParentScope());
         setPrototype(getPrototype(getClass()));
         initialize(element);

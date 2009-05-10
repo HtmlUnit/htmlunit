@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
+
 /**
  * The JavaScript object "HTMLBodyElement".
  *
@@ -51,7 +53,7 @@ public class HTMLBodyElement extends HTMLElement {
      * {@inheritDoc}
      */
     @Override
-    protected void setDefaults(final ComputedCSSStyleDeclaration style) {
+    public void setDefaults(final ComputedCSSStyleDeclaration style) {
         if (getBrowserVersion().isIE()) {
             style.setDefaultLocalStyleAttribute("margin", "15px 10px");
             style.setDefaultLocalStyleAttribute("padding", "0px");

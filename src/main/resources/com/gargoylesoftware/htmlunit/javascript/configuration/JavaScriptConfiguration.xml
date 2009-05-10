@@ -98,17 +98,17 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomComment">
     </class>
 
-    <class name="ComputedCSSStyleDeclaration" extends="CSSStyleDeclaration" classname="com.gargoylesoftware.htmlunit.javascript.host.ComputedCSSStyleDeclaration"
+    <class name="ComputedCSSStyleDeclaration" extends="CSSStyleDeclaration" classname="com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration"
         JSObject="true">
     </class>
 
-    <class name="CSSImportRule" extends="CSSRule" classname="com.gargoylesoftware.htmlunit.javascript.host.CSSImportRule" JSObject="true">
+    <class name="CSSImportRule" extends="CSSRule" classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSImportRule" JSObject="true">
         <property name="href" readable="true" writable="false"/>
         <property name="media" readable="true" writable="false"/>
         <property name="styleSheet" readable="true" writable="false"/>
     </class>
 
-    <class name="CSSRule" classname="com.gargoylesoftware.htmlunit.javascript.host.CSSRule" JSObject="false">
+    <class name="CSSRule" classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSRule" JSObject="false">
         <constant name="UNKNOWN_RULE">
             <browser name="Firefox"/>
         </constant>
@@ -147,14 +147,14 @@
         </property>
     </class>
 
-    <class name="CSSRuleList" classname="com.gargoylesoftware.htmlunit.javascript.host.CSSRuleList" JSObject="true">
+    <class name="CSSRuleList" classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList" JSObject="true">
         <property name="length" readable="true" writable="false"/>
         <function name="item">
             <browser name="Firefox"/>
         </function>
     </class>
 
-    <class name="CSSStyleDeclaration" classname="com.gargoylesoftware.htmlunit.javascript.host.CSSStyleDeclaration" JSObject="true">
+    <class name="CSSStyleDeclaration" classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration" JSObject="true">
         <property name="azimuth" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>
@@ -699,7 +699,7 @@
         </function>
     </class>
 
-    <class name="CSSStyleRule" extends="CSSRule" classname="com.gargoylesoftware.htmlunit.javascript.host.CSSStyleRule" JSObject="true">
+    <class name="CSSStyleRule" extends="CSSRule" classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleRule" JSObject="true">
         <property name="selectorText" readable="true" writable="true"/>
         <property name="style" readable="true" writable="false"/>
     </class>

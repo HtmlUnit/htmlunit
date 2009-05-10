@@ -27,9 +27,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.LogFactory;
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
@@ -38,6 +35,10 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
+import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.LogFactory;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -63,6 +64,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
+import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 
 /**
  * The JavaScript object "HTMLElement" which is the base class for all HTML
@@ -86,9 +89,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     private static final long serialVersionUID = -6864034414262085851L;
     private static final int BEHAVIOR_ID_UNKNOWN = -1;
-    static final int BEHAVIOR_ID_CLIENT_CAPS = 0;
-    static final int BEHAVIOR_ID_HOMEPAGE = 1;
-    static final int BEHAVIOR_ID_DOWNLOAD = 2;
+    /** BEHAVIOR_ID_CLIENT_CAPS. */
+    public static final int BEHAVIOR_ID_CLIENT_CAPS = 0;
+    /** BEHAVIOR_ID_HOMEPAGE. */
+    public static final int BEHAVIOR_ID_HOMEPAGE = 1;
+    /** BEHAVIOR_ID_DOWNLOAD. */
+    public static final int BEHAVIOR_ID_DOWNLOAD = 2;
     private static final String BEHAVIOR_CLIENT_CAPS = "#default#clientCaps";
     private static final String BEHAVIOR_HOMEPAGE = "#default#homePage";
     private static final String BEHAVIOR_DOWNLOAD = "#default#download";
@@ -175,7 +181,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      *
      * @param style the style to initialize
      */
-    protected void setDefaults(final ComputedCSSStyleDeclaration style) {
+    public void setDefaults(final ComputedCSSStyleDeclaration style) {
         // Empty by default; override as necessary.
     }
 

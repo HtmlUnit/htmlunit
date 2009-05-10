@@ -12,10 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.gargoylesoftware.htmlunit.javascript.host.Stylesheet;
 
 /**
  * A JavaScript object for a CSSStyleRule.

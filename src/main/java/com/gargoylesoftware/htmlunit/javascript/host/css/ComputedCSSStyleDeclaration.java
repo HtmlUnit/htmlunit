@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static org.apache.commons.lang.StringUtils.defaultIfEmpty;
 
@@ -28,6 +28,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlHead;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
 
 /**
  * A JavaScript object for a ComputedCSSStyleDeclaration.
@@ -59,7 +60,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     /**
      * @param style the original Style
      */
-    ComputedCSSStyleDeclaration(final CSSStyleDeclaration style) {
+    public ComputedCSSStyleDeclaration(final CSSStyleDeclaration style) {
         super(style.getHTMLElement());
         getHTMLElement().setDefaults(this);
     }
@@ -80,7 +81,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @param name the name of the style attribute to set
      * @param newValue the value of the style attribute to set
      */
-    void setLocalStyleAttribute(final String name, final String newValue) {
+    public void setLocalStyleAttribute(final String name, final String newValue) {
         final StyleElement element = new StyleElement(name, newValue, getCurrentElementIndex());
         localModifications_.put(name, element);
     }
@@ -93,7 +94,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @param name the name of the style attribute to set
      * @param newValue the value of the style attribute to set
      */
-    void setDefaultLocalStyleAttribute(final String name, final String newValue) {
+    public void setDefaultLocalStyleAttribute(final String name, final String newValue) {
         final StyleElement element = new StyleElement(name, newValue);
         localModifications_.put(name, element);
     }
@@ -1100,7 +1101,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @param includePadding whether or not to include the padding width in the returned value
      * @return the element's width in pixels, possibly including its padding and border
      */
-    int getCalculatedWidth(final boolean includeBorder, final boolean includePadding) {
+    public int getCalculatedWidth(final boolean includeBorder, final boolean includePadding) {
         int width;
         final String styleWidth = super.jsxGet_width();
         final DomNode parent = getHTMLElement().getDomNodeOrDie().getParentNode();
@@ -1134,7 +1135,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @param includePadding whether or not to include the padding height in the returned value
      * @return the element's height, possibly including its padding and border
      */
-    int getCalculatedHeight(final boolean includeBorder, final boolean includePadding) {
+    public int getCalculatedHeight(final boolean includeBorder, final boolean includePadding) {
         int height = pixelValue(super.jsxGet_height());
         if (includeBorder) {
             final int borderTop = pixelValue(jsxGet_borderTopWidth());
@@ -1156,7 +1157,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @param includePadding whether or not to take the padding into account in the calculation
      * @return the computed top (Y coordinate), relative to the node's parent's top edge
      */
-    int getTop(final boolean includeMargin, final boolean includeBorder, final boolean includePadding) {
+    public int getTop(final boolean includeMargin, final boolean includeBorder, final boolean includePadding) {
         final String p = jsxGet_position();
         final String t = jsxGet_top();
         final String b = jsxGet_bottom();
@@ -1220,7 +1221,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @param includePadding whether or not to take the padding into account in the calculation
      * @return the computed left (X coordinate), relative to the node's parent's left edge
      */
-    int getLeft(final boolean includeMargin, final boolean includeBorder, final boolean includePadding) {
+    public int getLeft(final boolean includeMargin, final boolean includeBorder, final boolean includePadding) {
         final String p = jsxGet_position();
         final String l = jsxGet_left();
         final String r = jsxGet_right();
