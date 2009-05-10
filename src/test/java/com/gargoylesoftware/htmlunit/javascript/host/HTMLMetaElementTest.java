@@ -20,7 +20,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Unit tests for {@link HTMLMetaElement}.
@@ -35,7 +34,6 @@ public class HTMLMetaElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented
     @Alerts(IE = { "", "text/html; charset=utf-8", "Content-Type", "", "", "" },
             FF = { "undefined", "text/html; charset=utf-8", "Content-Type", "", "", "undefined" })
     public void name() throws Exception {

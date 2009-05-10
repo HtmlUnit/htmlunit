@@ -1819,6 +1819,16 @@
 
     <class name="HTMLMetaElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLMetaElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlMeta">
+        <property name="charset" readable="true" writable="true">
+            <browser name="Internet Explorer"/>
+        </property>
+        <property name="content" readable="true" writable="true"/>
+        <property name="httpEquiv" readable="true" writable="true"/>
+        <property name="name" readable="true" writable="true"/>
+        <property name="scheme" readable="true" writable="true"/>
+        <property name="url" readable="true" writable="true">
+            <browser name="Internet Explorer"/>
+        </property>
     </class>
 
     <class name="HTMLObjectElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLObjectElement"

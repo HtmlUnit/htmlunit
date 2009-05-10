@@ -1490,7 +1490,7 @@ public class WebClient implements Serializable {
 
     /**
      * Encodes illegal parameter in path or query string (if any) as done by browsers.
-     * Example: changes "http://first?a=b c" to "http://first?a=b%20c"
+     * Example: changes "http://first/?a=b c" to "http://first/?a=b%20c"
      * @param url the URL to encode
      * @return the provided URL if no change needed, the fixed URL else
      * @throws MalformedURLException if the new URL could note be instantiated

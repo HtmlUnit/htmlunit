@@ -294,7 +294,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final String jsContent = "alert('got here');\n";
 
         webConnection.setResponse(URL_GARGOYLE, htmlContent);
-        webConnection.setResponse(new URL("http://www.gargoylesoftware.com/foo.js"), jsContent,
+        webConnection.setResponse(new URL(URL_GARGOYLE, "foo.js"), jsContent,
                 "text/javascript");
         client.setWebConnection(webConnection);
 
@@ -377,7 +377,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final String jsContent = "a.foo = 213;\n";
 
         webConnection.setResponse(URL_GARGOYLE, content2);
-        final URL urlScript = new URL("http://www.gargoylesoftware.com/foo.js");
+        final URL urlScript = new URL(URL_GARGOYLE, "foo.js");
         webConnection.setResponse(urlScript, jsContent, "text/javascript");
         client.setWebConnection(webConnection);
 
@@ -437,11 +437,11 @@ public class JavaScriptEngineTest extends WebTestCase {
         webConnection.setResponse(URL_GARGOYLE, htmlContent);
 
         webConnection.setResponse(
-            new URL("http://www.gargoylesoftware.com/hidden"),
+            new URL(URL_GARGOYLE, "hidden"),
             htmlContent2);
 
         webConnection.setResponse(
-            new URL("http://www.gargoylesoftware.com/foo.js"),
+            new URL(URL_GARGOYLE, "foo.js"),
         // make SJIS bytes as responsebody
             new String(jsContent.getBytes("SJIS"), "8859_1"), "text/javascript");
 
@@ -449,7 +449,7 @@ public class JavaScriptEngineTest extends WebTestCase {
          * foo2.js is same with foo.js
          */
         webConnection.setResponse(
-            new URL("http://www.gargoylesoftware.com/foo2.js"),
+            new URL(URL_GARGOYLE, "foo2.js"),
             // make SJIS bytes as responsebody
             new String(jsContent.getBytes("SJIS"), "8859_1"),
             "text/javascript");
@@ -473,7 +473,7 @@ public class JavaScriptEngineTest extends WebTestCase {
          * detect encoding from charset attribute of script tag
          */
         collectedAlerts.clear();
-        final HtmlPage page2 = client.getPage("http://www.gargoylesoftware.com/hidden");
+        final HtmlPage page2 = client.getPage(new URL(URL_GARGOYLE, "hidden"));
         final HtmlScript htmlScript2 = page2.getHtmlElementById("script2");
 
         assertNotNull(htmlScript2);

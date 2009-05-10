@@ -46,7 +46,7 @@ public class ElementTest extends WebTestCase {
      */
     @Test
     public void attributes() throws Exception {
-        final String firstContent = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
             + "    doc.async = false;\n"
@@ -73,7 +73,7 @@ public class ElementTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String secondContent
+        final String xml
             = "<books attrName=\"attrValue\">\n"
             + "  <book>\n"
             + "    <title>Immortality</title>\n"
@@ -88,8 +88,8 @@ public class ElementTest extends WebTestCase {
         final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, firstContent);
-        conn.setResponse(new URL(URL_FIRST, "foo.xml"), secondContent, "text/xml");
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(new URL(URL_FIRST, "foo.xml"), xml, "text/xml");
         client.setWebConnection(conn);
 
         client.getPage(URL_FIRST);

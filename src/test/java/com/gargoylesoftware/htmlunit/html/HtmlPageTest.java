@@ -112,7 +112,7 @@ public class HtmlPageTest extends WebServerTestCase {
         expectedParameters.add(new NameValuePair("hidden1", "hidden1"));
         expectedParameters.add(new NameValuePair("submitInput1", "push me"));
 
-        final URL expectedUrl = new URL("http://www.gargoylesoftware.com/formSubmit");
+        final URL expectedUrl = new URL(URL_GARGOYLE + "formSubmit");
         final URL actualUrl = secondPage.getWebResponse().getRequestSettings().getUrl();
         assertEquals("url", expectedUrl, actualUrl);
         Assert.assertSame("method", HttpMethod.POST, webConnection.getLastMethod());

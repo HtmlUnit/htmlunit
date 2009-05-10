@@ -370,7 +370,7 @@ public class HtmlFormTest extends WebTestCase {
     @Test
     public void testSubmitRadioButton() throws Exception {
         final String html
-            = "<html><body><form method='POST' action='http://first'>\n"
+            = "<html><body><form method='POST' action='" + URL_FIRST + "'>\n"
             + "<table><tr> <td ><input type='radio' name='name1' value='foo'> "
             + "Option 1</td> </tr>\n"
             + "<tr> <td ><input type='radio' name='name1' value='bar' checked >\n"
@@ -963,7 +963,7 @@ public class HtmlFormTest extends WebTestCase {
         testUrlAfterSubmit("post", "foo?foo=12", "foo?foo=12");
         testUrlAfterSubmit("post", "", "");
         testUrlAfterSubmit("post", "?a=1&b=2", "?a=1&b=2");
-        testUrlAfterSubmit(new URL("http://first/?a=1&b=2"), "post", "", "");
+        testUrlAfterSubmit(new URL(URL_FIRST.toExternalForm() + "?a=1&b=2"), "post", "", "");
     }
 
     /**
