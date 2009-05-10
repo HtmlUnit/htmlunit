@@ -105,7 +105,7 @@ public class HTMLMetaElement extends HTMLElement {
 
     /**
      * Sets the "scheme" attribute.
-     * @param name the scheme attribute
+     * @param scheme the scheme attribute
      */
     public void jsxSet_scheme(final String scheme) {
         getDomNodeOrDie().setAttribute("scheme", scheme);
@@ -121,7 +121,7 @@ public class HTMLMetaElement extends HTMLElement {
 
     /**
      * Sets the "url" attribute.
-     * @param name the url attribute
+     * @param url the url attribute
      */
     public void jsxSet_url(final String url) {
         //empty

@@ -73,7 +73,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
      */
     @Override
     public void onEnter(final Context cx, final Scriptable activation, final Scriptable thisObj, final Object[] args) {
-//        if (LOG.isTraceEnabled()) {
+        if (LOG.isTraceEnabled()) {
             final StringBuilder sb = new StringBuilder();
 
             final String line = getFirstLine(cx);
@@ -103,9 +103,8 @@ public class DebugFrameImpl extends DebugFrameAdapter {
             }
             sb.append(")");
 
-//            LOG.trace(sb);
-            System.out.println(sb);
-//        }
+            LOG.trace(sb);
+        }
     }
 
     private String stringValue(final Object arg) {
@@ -141,15 +140,15 @@ public class DebugFrameImpl extends DebugFrameAdapter {
      */
     @Override
     public void onExceptionThrown(final Context cx, final Throwable t) {
-//        if (LOG.isTraceEnabled()) {
+        if (LOG.isTraceEnabled()) {
             if (t instanceof JavaScriptException) {
                 final JavaScriptException e = (JavaScriptException) t;
-                System.out.println(getSourceName(cx) + ":" + getFirstLine(cx)
+                LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx)
                         + " Exception thrown: " + Context.toString(e.getValue()));
             }
             else {
-                System.out.println(getSourceName(cx) + ":" + getFirstLine(cx) + " Exception thrown: " + t.getCause());
-//            }
+                LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx) + " Exception thrown: " + t.getCause());
+            }
         }
     }
 
