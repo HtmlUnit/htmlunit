@@ -249,7 +249,14 @@ public class ActiveXObject extends SimpleScriptable {
         scriptable.defineProperty(jsMethodName, fo, READONLY);
     }
 
-    static void addProperty(final SimpleScriptable scriptable, final String propertyName,
+    /**
+     * Adds a specific property to this object.
+     * @param scriptable the scriptable
+     * @param propertyName the property name
+     * @param isGetter is getter
+     * @param isSetter is setter
+     */
+    public static void addProperty(final SimpleScriptable scriptable, final String propertyName,
             final boolean isGetter, final boolean isSetter) {
         String getterName = null;
         if (isGetter) {

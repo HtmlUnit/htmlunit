@@ -68,7 +68,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.SubmittableElement;
-import com.gargoylesoftware.htmlunit.javascript.host.HTMLStyleElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**

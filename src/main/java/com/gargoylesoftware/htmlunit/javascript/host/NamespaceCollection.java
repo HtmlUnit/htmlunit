@@ -22,6 +22,7 @@ import org.apache.commons.lang.StringUtils;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 
 /**
  * A collection of {@link Namespace}s.

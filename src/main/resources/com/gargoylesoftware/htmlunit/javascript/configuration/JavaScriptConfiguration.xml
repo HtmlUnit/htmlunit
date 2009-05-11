@@ -1075,7 +1075,7 @@
         <function name="go"/>
     </class>
 
-    <class name="HTMLAnchorElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLAnchorElement"
+    <class name="HTMLAnchorElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAnchorElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlAnchor">
         <property name="accessKey" readable="true" writable="true">
             <browser name="Firefox"/>
@@ -1104,7 +1104,7 @@
         </property>
     </class>
 
-    <class name="HTMLAppletElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLAppletElement"
+    <class name="HTMLAppletElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAppletElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlApplet">
         <property name="align" readable="true" writable="true"/>
         <property name="alt" readable="true" writable="true"/>
@@ -1122,7 +1122,7 @@
         </property>
     </class>
 
-    <class name="HTMLAreaElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLAreaElement"
+    <class name="HTMLAreaElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAreaElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlArea">
         <property name="accessKey" readable="true" writable="true">
             <browser name="Firefox"/>
@@ -1130,28 +1130,28 @@
         <property name="alt" readable="true" writable="true"/>
     </class>
 
-    <class name="HTMLBaseElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLBaseElement"
+    <class name="HTMLBaseElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBase">
         <property name="href" readable="true" writable="true"/>
         <property name="target" readable="true" writable="true"/>
     </class>
 
-    <class name="HTMLBaseFontElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLBaseFontElement"
+    <class name="HTMLBaseFontElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseFontElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBaseFont">
         <property name="color" readable="true" writable="true"/>
         <property name="face" readable="true" writable="true"/>
         <property name="size" readable="true" writable="true"/>
     </class>
 
-    <class name="HTMLBodyElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLBodyElement"
+    <class name="HTMLBodyElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBody">
     </class>
 
-    <class name="HTMLBRElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLBRElement"
+    <class name="HTMLBRElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBRElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBreak">
     </class>
 
-    <class name="HTMLButtonElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLButtonElement"
+    <class name="HTMLButtonElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLButtonElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlButton">
         <property name="accessKey" readable="true" writable="true">
             <browser name="Firefox"/>
@@ -1161,7 +1161,7 @@
         </function>
     </class>
 
-    <class name="HTMLCanvasElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLCanvasElement"
+    <class name="HTMLCanvasElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlCanvas">
         <browser name="Firefox"/>
         <property name="height" readable="true" writable="true"/>
@@ -1170,7 +1170,7 @@
         <function name="toDataURL" notImplemented="true"/>
     </class>
 
-    <class name="HTMLCollection" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLCollection" JSObject="true">
+    <class name="HTMLCollection" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection" JSObject="true">
         <property name="length" readable="true" writable="false"/>
         <function name="item"/>
         <function name="namedItem"/>
@@ -1185,27 +1185,27 @@
         </function>
     </class>
 
-    <class name="HTMLCollectionTags" extends="HTMLCollection" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLCollectionTags"
+    <class name="HTMLCollectionTags" extends="HTMLCollection" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollectionTags"
         JSObject="true">
         <function name="tags">
             <browser name="Firefox" max-version="2"/>
         </function>
     </class>
 
-    <class name="HTMLDelElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDelElement"
+    <class name="HTMLDelElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDelElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlDeletedText">
         <property name="cite" readable="true" writable="true"/>
         <property name="dateTime" readable="true" writable="true"/>
     </class>
 
-    <class name="HTMLDirectoryElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDirectoryElement"
+    <class name="HTMLDirectoryElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDirectoryElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlDirectory">
     </class>
 
     <!--
         Because it is associated with many HtmlClasses, the one-to-many
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
-    <class name="HTMLDivElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDivElement"
+    <class name="HTMLDivElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDivElement"
         JSObject="true">
         <property name="align" readable="true" writable="true"/>
         <property name="dataFld" notImplemented="true" readable="true" writable="true">
@@ -1222,11 +1222,11 @@
         </property>
     </class>
 
-    <class name="HTMLDListElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDListElement"
+    <class name="HTMLDListElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDListElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlDefinitionList">
     </class>
 
-    <class name="HTMLDocument" extends="Document" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDocument"
+    <class name="HTMLDocument" extends="Document" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument"
         JSObject="true">
 
         <doclink
@@ -1360,7 +1360,7 @@
         <function name="writeln"/>
     </class>
 
-    <class name="HTMLElement" extends="Element" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLElement"
+    <class name="HTMLElement" extends="Element" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlElement">
         <property name="accessKey" readable="true" writable="true">
             <browser name="Internet Explorer"/>
@@ -1572,28 +1572,28 @@
         </function>
     </class>
 
-    <class name="HTMLEmbedElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLEmbedElement"
+    <class name="HTMLEmbedElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLEmbedElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlEmbed">
         <property name="align" notImplemented="true" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>
     </class>
 
-    <class name="HTMLFieldSetElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFieldSetElement"
+    <class name="HTMLFieldSetElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFieldSetElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFieldSet">
         <property name="align" notImplemented="true" readable="true" writable="true">
             <browser name="Internet Explorer"/>
         </property>
     </class>
 
-    <class name="HTMLFontElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFontElement"
+    <class name="HTMLFontElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFontElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFont">
         <property name="color" readable="true" writable="true"/>
         <property name="face" readable="true" writable="true"/>
         <property name="size" readable="true" writable="true"/>
     </class>
 
-    <class name="HTMLFormElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFormElement"
+    <class name="HTMLFormElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlForm">
         <doclink
             url="http://msdn.microsoft.com/en-us/library/ms535249.aspx"
@@ -1615,7 +1615,7 @@
         <function name="submit"/>
     </class>
 
-    <class name="HTMLFrameElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFrameElement"
+    <class name="HTMLFrameElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFrameElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFrame">
         <property name="border" readable="true" writable="true">
             <browser name="Internet Explorer"/>
@@ -1638,7 +1638,7 @@
         <property name="src" readable="true" writable="true"/>
     </class>
 
-    <class name="HTMLFrameSetElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFrameSetElement"
+    <class name="HTMLFrameSetElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFrameSetElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFrameSet">
         <property name="border" readable="true" writable="true">
             <browser name="Internet Explorer"/>
@@ -1647,28 +1647,28 @@
         <property name="rows" readable="true" writable="true"/>
     </class>
 
-    <class name="HTMLHeadElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLHeadElement"
+    <class name="HTMLHeadElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHeadElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlHead">
     </class>
 
     <!--
         Because it is associated with two HtmlClasses, the one-to-many
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
-    <class name="HTMLHeadingElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLHeadingElement"
+    <class name="HTMLHeadingElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHeadingElement"
         JSObject="true">
         <property name="align" notImplemented="true" readable="true" writable="true"/>
     </class>
 
-    <class name="HTMLHRElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLHRElement"
+    <class name="HTMLHRElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHRElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlHorizontalRule">
         <property name="align" notImplemented="true" readable="true" writable="true"/>
     </class>
 
-    <class name="HTMLHtmlElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLHtmlElement"
+    <class name="HTMLHtmlElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlHtml">
     </class>
 
-    <class name="HTMLIFrameElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLIFrameElement"
+    <class name="HTMLIFrameElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInlineFrame">
         <property name="align" readable="true" writable="true"/>
         <property name="border" readable="true" writable="true">
@@ -1694,7 +1694,7 @@
         <property name="width" readable="true" writable="true"/>
     </class>
 
-    <class name="HTMLImageElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLImageElement"
+    <class name="HTMLImageElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement"
         jsConstructor="jsConstructor" JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlImage">
         <property name="align" readable="true" writable="true"/>
         <property name="alt" readable="true" writable="true"/>
@@ -1712,7 +1712,7 @@
         <property name="src" readable="true" writable="true"/>
     </class>
 
-    <class name="HTMLInputElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLInputElement"
+    <class name="HTMLInputElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInput">
         <property name="accessKey" readable="true" writable="true">
             <browser name="Firefox"/>
@@ -1754,17 +1754,17 @@
         </function>
     </class>
 
-    <class name="HTMLInsElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLInsElement"
+    <class name="HTMLInsElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInsElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInsertedText">
         <property name="cite" readable="true" writable="true"/>
         <property name="dateTime" readable="true" writable="true"/>
     </class>
 
-    <class name="HTMLIsIndexElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLIsIndexElement"
+    <class name="HTMLIsIndexElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIsIndexElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlIsIndex">
     </class>
 
-    <class name="HTMLLabelElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLLabelElement"
+    <class name="HTMLLabelElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLabelElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLabel">
         <property name="accessKey" readable="true" writable="true">
             <browser name="Firefox"/>
@@ -1781,7 +1781,7 @@
         <property name="htmlFor" readable="true" writable="true"/>
     </class>
 
-    <class name="HTMLLegendElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLLegendElement"
+    <class name="HTMLLegendElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLegendElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLegend">
         <property name="accessKey" readable="true" writable="true">
             <browser name="Firefox"/>
@@ -1798,26 +1798,26 @@
         </property>
     </class>
 
-    <class name="HTMLLIElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLLIElement"
+    <class name="HTMLLIElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLIElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlListItem">
     </class>
 
-    <class name="HTMLLinkElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLLinkElement"
+    <class name="HTMLLinkElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLink">
         <property name="href" readable="true" writable="true"/>
         <property name="rel" readable="true" writable="true"/>
         <property name="type" readable="true" writable="true"/>
     </class>
 
-    <class name="HTMLMapElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLMapElement"
+    <class name="HTMLMapElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMapElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlMap">
     </class>
 
-    <class name="HTMLMenuElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLMenuElement"
+    <class name="HTMLMenuElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMenuElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlMenu">
     </class>
 
-    <class name="HTMLMetaElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLMetaElement"
+    <class name="HTMLMetaElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMetaElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlMeta">
         <property name="charset" readable="true" writable="true">
             <browser name="Internet Explorer"/>
@@ -1831,7 +1831,7 @@
         </property>
     </class>
 
-    <class name="HTMLObjectElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLObjectElement"
+    <class name="HTMLObjectElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLObjectElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlObject">
         <property name="align" notImplemented="true" readable="true" writable="true"/>
         <property name="alt" readable="true" writable="true">
@@ -1849,11 +1849,11 @@
         </property>
     </class>
 
-    <class name="HTMLOListElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLOListElement"
+    <class name="HTMLOListElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOListElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOrderedList">
     </class>
 
-    <class name="HTMLOptGroupElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLOptGroupElement"
+    <class name="HTMLOptGroupElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptGroupElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOptionGroup">
         <property name="dataFld" notImplemented="true" readable="true" writable="true">
             <browser name="Internet Explorer"/>
@@ -1867,7 +1867,7 @@
         <property name="disabled" readable="true" writable="true"/>
     </class>
 
-    <class name="HTMLOptionElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLOptionElement"
+    <class name="HTMLOptionElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionElement"
         jsConstructor="jsConstructor" JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOption">
         <property name="defaultSelected" readable="true" writable="false"/>
         <property name="disabled" readable="true" writable="true"/>
@@ -1877,22 +1877,22 @@
         <property name="value" readable="true" writable="true"/>
     </class>
 
-    <class name="HTMLOptionsCollection" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLOptionsCollection" JSObject="true">
+    <class name="HTMLOptionsCollection" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionsCollection" JSObject="true">
         <property name="length" readable="true" writable="true"/>
         <function name="add"/>
         <function name="item"/>
     </class>
 
-    <class name="HTMLParagraphElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLParagraphElement"
+    <class name="HTMLParagraphElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLParagraphElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlParagraph">
         <property name="align" readable="true" writable="true"/>
     </class>
 
-    <class name="HTMLParamElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLParamElement"
+    <class name="HTMLParamElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLParamElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlParameter">
     </class>
 
-    <class name="HTMLPreElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLPreElement"
+    <class name="HTMLPreElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLPreElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlPreformattedText">
         <property name="cite" readable="true" writable="true">
             <browser name="Internet Explorer"/>
@@ -1902,7 +1902,7 @@
     <!--
         Because it is associated with two HtmlClasses, the one-to-many
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
-    <class name="HTMLQuoteElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLQuoteElement"
+    <class name="HTMLQuoteElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLQuoteElement"
         JSObject="true">
         <property name="cite" readable="true" writable="true"/>
         <property name="dateTime" readable="true" writable="true">
@@ -1910,7 +1910,7 @@
         </property>
     </class>
 
-    <class name="HTMLScriptElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLScriptElement" JSObject="true"
+    <class name="HTMLScriptElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement" JSObject="true"
         htmlClass="com.gargoylesoftware.htmlunit.html.HtmlScript" extends="HTMLElement">
         <property name="onload" readable="true" writable="true">
             <browser name="Firefox"/>
@@ -1926,7 +1926,7 @@
         <property name="type" readable="true" writable="true"/>
     </class>
 
-    <class name="HTMLSelectElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSelectElement"
+    <class name="HTMLSelectElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSelectElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlSelect">
         <property name="length" readable="true" writable="true"/>
         <property name="multiple" readable="true" writable="true"/>
@@ -1938,14 +1938,14 @@
         <function name="remove"/>
     </class>
 
-    <class name="HTMLSpacerElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpacerElement"
+    <class name="HTMLSpacerElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSpacerElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlSpacer">
     </class>
 
     <!--
         Because it is associated with many HtmlClasses, the one-to-many
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
-    <class name="HTMLSpanElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+    <class name="HTMLSpanElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSpanElement"
         JSObject="true">
         <property name="dataFld" notImplemented="true" readable="true" writable="true">
             <browser name="Internet Explorer"/>
@@ -1958,7 +1958,7 @@
         </property>
     </class>
 
-    <class name="HTMLStyleElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLStyleElement"
+    <class name="HTMLStyleElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlStyle">
         <property name="sheet" readable="true" writable="false">
             <browser name="Firefox"/>
@@ -1968,7 +1968,7 @@
         </property>
     </class>
 
-    <class name="HTMLTableCaptionElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableCaptionElement"
+    <class name="HTMLTableCaptionElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableCaptionElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlCaption">
         <property name="align" readable="true" writable="true"/>
         <property name="vAlign" readable="true" writable="true">
@@ -1976,7 +1976,7 @@
         </property>
     </class>
 
-    <class name="HTMLTableCellElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableCellElement"
+    <class name="HTMLTableCellElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableCellElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableCell">
         <doclink
             url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-82915075"
@@ -2002,7 +2002,7 @@
     <!--
         Because it is associated with many HtmlClasses, the one-to-many
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
-    <class name="HTMLTableColElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableColElement"
+    <class name="HTMLTableColElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableColElement"
         JSObject="true">
         <property name="align" readable="true" writable="true"/>
         <property name="ch" readable="true" writable="true"/>
@@ -2012,7 +2012,7 @@
         <property name="width" readable="true" writable="true"/>
     </class>
 
-    <class name="HTMLTableElement" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableElement"
+    <class name="HTMLTableElement" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTable">
         <property name="border" readable="true" writable="true"/>
         <property name="caption" readable="true" writable="false"/>
@@ -2069,7 +2069,7 @@
         </function>
     </class>
 
-    <class name="HTMLTableRowElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableRowElement"
+    <class name="HTMLTableRowElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableRowElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableRow">
         <doclink
             url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-6986576"
@@ -2109,12 +2109,12 @@
     <!--
         Because it is associated with two HtmlClasses, the one-to-many
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
-    <class name="HTMLTableSectionElement" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableSectionElement"
+    <class name="HTMLTableSectionElement" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableSectionElement"
         JSObject="true">
         <property name="vAlign" notImplemented="true" readable="true" writable="true"/>
     </class>
 
-    <class name="HTMLTextAreaElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTextAreaElement"
+    <class name="HTMLTextAreaElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTextArea">
         <property name="accessKey" readable="true" writable="true">
             <browser name="Firefox"/>
@@ -2137,20 +2137,20 @@
         <function name="select"/>
     </class>
 
-    <class name="HTMLTitleElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTitleElement"
+    <class name="HTMLTitleElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTitleElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTitle">
         <property name="text" readable="true" writable="true"/>
     </class>
 
-    <class name="HTMLUListElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLUListElement"
+    <class name="HTMLUListElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUListElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlUnorderedList">
     </class>
 
-    <class name="HTMLUnknownElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLUnknownElement"
+    <class name="HTMLUnknownElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlUnknownElement">
     </class>
 
-    <class name="HTMLWBRElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLWBRElement"
+    <class name="HTMLWBRElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLWBRElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlWordBreak">
     </class>
 

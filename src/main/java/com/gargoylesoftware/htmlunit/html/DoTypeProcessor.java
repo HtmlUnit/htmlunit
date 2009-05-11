@@ -44,7 +44,7 @@ abstract class DoTypeProcessor {
     }
 
     /**
-     * Iindicates if the provided character can by "typed" in the text.
+     * Indicates if the provided character can by "typed" in the text.
      * @param c the character
      * @return <code>true</code> if it is accepted
      */

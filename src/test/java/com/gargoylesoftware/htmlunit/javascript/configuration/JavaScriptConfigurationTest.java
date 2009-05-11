@@ -44,7 +44,7 @@ import org.xml.sax.helpers.XMLReaderFactory;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.javascript.StrictErrorHandler;
-import com.gargoylesoftware.htmlunit.javascript.host.HTMLDocument;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 
 /**
  * Tests for {@link JavaScriptConfiguration}.

@@ -28,7 +28,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlHead;
-import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 /**
  * A JavaScript object for a ComputedCSSStyleDeclaration.

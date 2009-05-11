@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 /**
  * A JavaScript object for a Document.
@@ -60,7 +61,7 @@ public class Document extends EventNode {
      * Sets the Window JavaScript object that encloses this document.
      * @param window the Window JavaScript object that encloses this document
      */
-    void setWindow(final Window window) {
+    public void setWindow(final Window window) {
         window_ = window;
     }
 

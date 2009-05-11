@@ -22,7 +22,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 /**
  * Tests for {@link HtmlTableRow}.

@@ -92,12 +92,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlVariable;
 import com.gargoylesoftware.htmlunit.html.HtmlExample;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.StrictErrorHandler;
-import com.gargoylesoftware.htmlunit.javascript.host.HTMLDivElement;
-import com.gargoylesoftware.htmlunit.javascript.host.HTMLHeadingElement;
-import com.gargoylesoftware.htmlunit.javascript.host.HTMLQuoteElement;
-import com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement;
-import com.gargoylesoftware.htmlunit.javascript.host.HTMLTableColElement;
-import com.gargoylesoftware.htmlunit.javascript.host.HTMLTableSectionElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDivElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHeadingElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLQuoteElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSpanElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableColElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableSectionElement;
 
 /**
  * A container for all the JavaScript configuration information.

@@ -19,6 +19,7 @@ import java.util.LinkedList;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 /**
  * JavaScript object representing a Mouse Event.
@@ -265,7 +266,7 @@ public class MouseEvent extends UIEvent {
      * @return the mouse event currently firing
      */
     @SuppressWarnings("unchecked")
-    static MouseEvent getCurrentMouseEvent() {
+    public static MouseEvent getCurrentMouseEvent() {
         final LinkedList<Event> events = (LinkedList<Event>) Context.getCurrentContext()
             .getThreadLocal(KEY_CURRENT_EVENT);
         if (events != null && !events.isEmpty() && events.getLast() instanceof MouseEvent) {

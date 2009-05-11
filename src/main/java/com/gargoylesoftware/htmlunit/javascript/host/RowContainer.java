@@ -20,6 +20,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 /**
  * Superclass for all row-containing JavaScript host classes, including tables,
@@ -126,7 +128,7 @@ public class RowContainer extends HTMLElement {
      * @param index the index where the row should be inserted (0 <= index < nbRows)
      * @return the inserted row
      */
-    protected Object insertRow(final int index) {
+    public Object insertRow(final int index) {
         final HTMLCollection rows = (HTMLCollection) jsxGet_rows();
         final int rowCount = rows.jsxGet_length();
         final HtmlElement newRow = ((HtmlPage) getDomNodeOrDie().getPage()).createElement("tr");

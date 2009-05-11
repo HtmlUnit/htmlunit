@@ -65,6 +65,10 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptFunctionJob
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptStringJob;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
 
 /**
  * A JavaScript object for a Window.
@@ -238,7 +242,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the current event (used internally regardless of the emulation mode).
      * @return the current event, or <tt>null</tt> if no event is currently available
      */
-    Event getCurrentEvent() {
+    public Event getCurrentEvent() {
         return currentEvent_;
     }
 
@@ -802,7 +806,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Gets the container for event listeners.
      * @return the container (newly created if needed)
      */
-    EventListenersContainer getEventListenersContainer() {
+    public EventListenersContainer getEventListenersContainer() {
         if (eventListenersContainer_ == null) {
             eventListenersContainer_ = new EventListenersContainer(this);
         }
@@ -1222,7 +1226,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the current selection.
      * @return the current selection
      */
-    Selection getSelection() {
+    public Selection getSelection() {
         if (selection_ == null) {
             selection_ = new Selection();
             selection_.setParentScope(this);

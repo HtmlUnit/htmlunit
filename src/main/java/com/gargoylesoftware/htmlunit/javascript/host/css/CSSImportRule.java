@@ -16,9 +16,9 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import org.w3c.dom.css.CSSStyleSheet;
 
-import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.MediaList;
 import com.gargoylesoftware.htmlunit.javascript.host.Stylesheet;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 /**
  * A JavaScript object for a CSSImportRule.

@@ -55,7 +55,7 @@ public class TreeWalker extends SimpleScriptable {
      * @throws DOMException on attempt to create a TreeWalker with a root that
      *          is <code>null</code>.
      */
-    protected TreeWalker(final Node root,
+    public TreeWalker(final Node root,
                       final int whatToShow,
                       final NodeFilter filter,
                       final Boolean expandEntityReferences) throws DOMException {

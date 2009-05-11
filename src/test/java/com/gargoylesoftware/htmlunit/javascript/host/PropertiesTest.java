@@ -275,7 +275,8 @@ public class PropertiesTest extends WebTestCase {
     }
 
     /**
-     * To be removed once {@link HTMLCollectionTest#typeof()} is fixed.
+     * To be removed once {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollectionTest#typeof()}
+     * is fixed.
      */
     private void removeParentheses(final List<String> list) {
         for (int i = 0; i < list.size(); i++) {

@@ -30,11 +30,13 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
+ * Container for event listener.
+ * @version $Revision$
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-class EventListenersContainer {
+public class EventListenersContainer {
     static class Handlers {
         private final List<Function> capturingHandlers_ = new ArrayList<Function>();
         private final List<Function> bubblingHandlers_ = new ArrayList<Function>();
@@ -65,7 +67,7 @@ class EventListenersContainer {
     }
 
     /**
-     * Adds an event listener
+     * Adds an event listener.
      * @param type the event type to listen for (like "load")
      * @param listener the event listener
      * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
@@ -98,6 +100,12 @@ class EventListenersContainer {
         return null;
     }
 
+    /**
+     * Removes event listener.
+     * @param type the type
+     * @param listener the listener
+     * @param useCapture to use capture or not
+     */
     public void removeEventListener(final String type, final Function listener, final boolean useCapture) {
         final List<Function> handlers = getHandlers(type, useCapture);
         if (handlers != null) {
@@ -106,7 +114,7 @@ class EventListenersContainer {
     }
 
     /**
-     * Sets the handler property (with an handler or something else)
+     * Sets the handler property (with an handler or something else).
      * @param eventName the event name (like "click")
      * @param value the new property
      */
@@ -115,6 +123,11 @@ class EventListenersContainer {
         handlers.handler_ = value;
     }
 
+    /**
+     * Returns event handler property.
+     * @param eventName event name
+     * @return the handler, or null if not found
+     */
     public Object getEventHandlerProp(final String eventName) {
         final Handlers handlers = eventHandlers_.get(eventName);
         if (handlers == null) {
@@ -168,6 +181,13 @@ class EventListenersContainer {
         return null;
     }
 
+    /**
+     * Executes bubbling listeners.
+     * @param event the event
+     * @param args arguments
+     * @param propHandlerArgs handler arguments
+     * @return the result
+     */
     public ScriptResult executeBubblingListeners(final Event event, final Object[] args,
             final Object[] propHandlerArgs) {
         ScriptResult result = null;
@@ -188,12 +208,18 @@ class EventListenersContainer {
         return result;
     }
 
+    /**
+     * Executes capturing listeners.
+     * @param event the event
+     * @param args the arguments
+     * @return the result
+     */
     public ScriptResult executeCapturingListeners(final Event event, final Object[] args) {
         return executeEventListeners(true, event, args);
     }
 
     /**
-     * Gets an event handler
+     * Gets an event handler.
      * @param eventName the event name (ex: "click")
      * @return the handler function, <code>null</code> if the property is null or not a function
      */
@@ -213,6 +239,13 @@ class EventListenersContainer {
         return LogFactory.getLog(getClass());
     }
 
+    /**
+     * Executes listeners.
+     * @param event the event
+     * @param args the arguments
+     * @param propHandlerArgs handler arguments
+     * @return the result
+     */
     public ScriptResult executeListeners(final Event event, final Object[] args, final Object[] propHandlerArgs) {
         // the registered capturing listeners (if any)
         event.setEventPhase(Event.CAPTURING_PHASE);
@@ -242,7 +275,7 @@ class EventListenersContainer {
     }
 
     /**
-     * Copies all the events from the provided container
+     * Copies all the events from the provided container.
      * @param eventListenersContainer where to copy from
      */
     void copyFrom(final EventListenersContainer eventListenersContainer) {
