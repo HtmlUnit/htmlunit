@@ -110,8 +110,10 @@ public class SimpleScriptableTest extends WebTestCase {
     public void htmlJavaScriptMapping_AllJavaScriptClassesArePresent() {
         final Map<Class < ? extends HtmlElement>, Class < ? extends SimpleScriptable>> map =
             JavaScriptConfiguration.getHtmlJavaScriptMapping();
-        final String directoryName = "../../../src/main/java/com/gargoylesoftware/htmlunit/javascript/host";
+        String directoryName = "../../../src/main/java/com/gargoylesoftware/htmlunit/javascript/host";
         final Set<String> names = getFileNames(directoryName.replace('/', File.separatorChar));
+        directoryName = "../../../src/main/java/com/gargoylesoftware/htmlunit/javascript/host/html";
+        names.addAll(getFileNames(directoryName.replace('/', File.separatorChar)));
 
         // Now pull out those names that we know don't have HTML equivalents
         names.remove("ActiveXObject");
