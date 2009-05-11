@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,6 +40,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
+import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -94,7 +95,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Creates a new instance.
      * @param caseSensitiveProperties if properties and methods are case sensitive
      */
-    XMLHttpRequest(final boolean caseSensitiveProperties) {
+    public XMLHttpRequest(final boolean caseSensitiveProperties) {
         caseSensitiveProperties_ = caseSensitiveProperties;
         state_ = STATE_UNINITIALIZED;
     }

@@ -30,6 +30,8 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
+import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
+import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest;
 
 /**
  * This is the host object that allows JavaScript to instantiate java objects via the ActiveXObject
@@ -201,7 +203,12 @@ public class ActiveXObject extends SimpleScriptable {
         return scriptable;
     }
 
-    static XMLDocument buildXMLDocument(final WebWindow enclosingWindow) {
+    /**
+     * Builds XMLDocument.
+     * @param enclosingWindow the window
+     * @return the document
+     */
+    public static XMLDocument buildXMLDocument(final WebWindow enclosingWindow) {
         final XMLDocument document = new XMLDocument(enclosingWindow);
 
         // the properties

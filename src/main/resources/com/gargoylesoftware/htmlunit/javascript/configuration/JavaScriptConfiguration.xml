@@ -2800,7 +2800,7 @@
         </function>
     </class>
 
-    <class name="XMLAttr" extends="Attr" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLAttr"
+    <class name="XMLAttr" extends="Attr" classname="com.gargoylesoftware.htmlunit.javascript.host.xml.XMLAttr"
         JSObject="true">
         <property name="text" readable="true" writable="true">
             <doclink
@@ -2816,7 +2816,7 @@
         </property>
     </class>
 
-    <class name="XMLDocument" extends="Document" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLDocument"
+    <class name="XMLDocument" extends="Document" classname="com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument"
         JSObject="true">
         <browser name="Firefox"/>
         <property name="async" readable="true" writable="true">
@@ -2868,7 +2868,7 @@
         </function>
     </class>
 
-    <class name="XMLDOMParseError" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLDOMParseError"
+    <class name="XMLDOMParseError" classname="com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDOMParseError"
         jsConstructor="jsConstructor" JSObject="true">
         <browser name="Internet Explorer"/>
         <property name="errorCode" readable="true" writable="false"/>
@@ -2880,7 +2880,7 @@
         <property name="url" readable="true" writable="false"/>
     </class>
 
-    <class name="XMLHttpRequest" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLHttpRequest"
+    <class name="XMLHttpRequest" classname="com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest"
         jsConstructor="jsConstructor" JSObject="true">
         <doclink url="http://developer.apple.com/internet/webcontent/xmlhttpreq.html" descr="Safari documentation"/>
         <browser name="Firefox"/>
@@ -2903,7 +2903,7 @@
         <function name="setRequestHeader"/>
     </class>
 
-    <class name="XMLSerializer" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLSerializer"
+    <class name="XMLSerializer" classname="com.gargoylesoftware.htmlunit.javascript.host.xml.XMLSerializer"
         jsConstructor="jsConstructor" JSObject="true">
         <browser name="Firefox"/>
         <function name="serializeToString"/>

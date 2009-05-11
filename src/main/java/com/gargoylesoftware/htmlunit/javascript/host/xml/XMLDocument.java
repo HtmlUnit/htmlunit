@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import java.io.IOException;
 import java.net.URL;
@@ -38,6 +38,10 @@ import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.host.Comment;
+import com.gargoylesoftware.htmlunit.javascript.host.Document;
+import com.gargoylesoftware.htmlunit.javascript.host.Element;
+import com.gargoylesoftware.htmlunit.javascript.host.Text;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -65,9 +69,9 @@ public class XMLDocument extends Document {
 
     /**
      * Creates a new instance, with associated XmlPage.
-     * @param enclosingWindow
+     * @param enclosingWindow the window
      */
-    XMLDocument(final WebWindow enclosingWindow) {
+    public XMLDocument(final WebWindow enclosingWindow) {
         if (enclosingWindow != null) {
             try {
                 final XmlPage page = new XmlPage((WebResponse) null, enclosingWindow);

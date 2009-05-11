@@ -69,6 +69,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
+import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
 
 /**
  * A JavaScript object for a Window.

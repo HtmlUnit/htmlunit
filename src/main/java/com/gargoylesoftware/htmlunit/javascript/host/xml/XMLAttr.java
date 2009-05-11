@@ -12,9 +12,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import org.apache.commons.lang.StringEscapeUtils;
+
+import com.gargoylesoftware.htmlunit.javascript.host.Attr;
 
 /**
  * A JavaScript object for an Attribute of XMLElement.

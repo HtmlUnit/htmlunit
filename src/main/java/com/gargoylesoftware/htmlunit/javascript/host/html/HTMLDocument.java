@@ -845,7 +845,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      *         it when emulating IE
      *
      * @see HTMLDocument#limitAppendChildToIE()
-     * @see com.gargoylesoftware.htmlunit.javascript.host.XMLDocument#limitAppendChildToIE()
+     * @see com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument#limitAppendChildToIE()
      */
     protected boolean limitAppendChildToIE() {
         return true;
