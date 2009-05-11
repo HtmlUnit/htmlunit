@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes">
+            <action type="fix" dev="mguillem">
+                JavaScript: body element of a frame has to be null while loading only as long as nothing has been loaded (IE only).
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: initially implement properties of HTMLMetaElement.
             </action>

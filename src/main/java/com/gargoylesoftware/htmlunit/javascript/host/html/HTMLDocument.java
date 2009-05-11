@@ -1066,7 +1066,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         // for IE, the body of a not yet loaded page is null whereas it already exists for FF
         if (getBrowserVersion().isIE() && (page.getEnclosingWindow() instanceof FrameWindow)) {
             final HtmlPage enclosingPage = (HtmlPage) page.getEnclosingWindow().getParentWindow().getEnclosedPage();
-            if (enclosingPage.getReadyState() != DomNode.READY_STATE_COMPLETE) {
+            if (WebClient.URL_ABOUT_BLANK.equals(page.getWebResponse().getRequestSettings().getUrl())
+                    && enclosingPage.getReadyState() != DomNode.READY_STATE_COMPLETE) {
                 return null;
             }
         }

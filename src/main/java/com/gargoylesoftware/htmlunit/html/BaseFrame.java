@@ -67,7 +67,9 @@ public abstract class BaseFrame extends StyledElement {
             // put about:blank in the window to allow JS to run on this frame before the
             // real content is loaded
             final WebClient webClient = getPage().getEnclosingWindow().getWebClient();
-            webClient.getPage(enclosedWindow_, new WebRequestSettings(WebClient.URL_ABOUT_BLANK));
+            final HtmlPage temporaryPage = webClient.getPage(enclosedWindow_,
+                new WebRequestSettings(WebClient.URL_ABOUT_BLANK));
+            temporaryPage.setReadyState(READY_STATE_LOADING);
         }
         catch (final FailingHttpStatusCodeException e) {
             // should never occur
@@ -91,6 +93,10 @@ public abstract class BaseFrame extends StyledElement {
         }
         else {
             loadInnerPageIfPossible(source);
+        }
+        final Page enclosedPage = getEnclosedPage();
+        if (enclosedPage instanceof HtmlPage) {
+            ((HtmlPage) enclosedPage).setReadyState(READY_STATE_COMPLETE);
         }
     }
 

@@ -495,4 +495,55 @@ public class HTMLIFrameElementTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * Test the ReadyState which is an IE feature.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "undefined", "undefined" },
+            IE = { "loading", "complete" })
+    public void readyState_IFrame() throws Exception {
+        final String html = "<html><head></head>\n"
+            + "  <body>\n"
+            + "    <iframe id='i'></iframe>\n"
+            + "    <script>\n"
+            + "      alert(document.getElementById('i').contentWindow.document.readyState);\n"
+            + "      window.onload = function() {\n"
+            + "        alert(document.getElementById('i').contentWindow.document.readyState);\n"
+            + "      };\n"
+            + "    </script>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "null", "[object HTMLBodyElement]" },
+            IE = { "null", "[object]" })
+    public void body() throws Exception {
+        final String html =
+              "<html><body>\n"
+            + "<iframe name='theFrame' src='1.html'></iframe>\n"
+            + "</body></html>";
+
+        final String frame = "<html><head><script>alert(document.body);</script></head>\n"
+        	+ "<body><script>alert(document.body);</script></html>";
+
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+
+        webConnection.setResponse(URL_FIRST, html);
+        webConnection.setDefaultResponse(frame);
+        webClient.setWebConnection(webConnection);
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        webClient.getPage(URL_FIRST);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
 }
