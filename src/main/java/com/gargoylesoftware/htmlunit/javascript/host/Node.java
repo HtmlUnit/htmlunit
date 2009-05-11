@@ -335,7 +335,7 @@ public class Node extends SimpleScriptable {
         if (newChildObject instanceof DocumentFragment) {
             final DocumentFragment fragment = (DocumentFragment) newChildObject;
             Node firstNode = null;
-            final Node refChildObject = (Node) ((Node) oldChildObject).jsxGet_nextSibling();
+            final Node refChildObject = ((Node) oldChildObject).jsxGet_nextSibling();
             for (final DomNode node : fragment.getDomNodeOrDie().getChildren()) {
                 if (firstNode == null) {
                     jsxFunction_replaceChild(node.getScriptObject(), oldChildObject);
@@ -378,7 +378,7 @@ public class Node extends SimpleScriptable {
      * @return the next sibling node or null if the current node has
      * no next sibling.
      */
-    public Object jsxGet_nextSibling() {
+    public Node jsxGet_nextSibling() {
         return getJavaScriptNode(getDomNodeOrDie().getNextSibling());
     }
 
@@ -388,7 +388,7 @@ public class Node extends SimpleScriptable {
      * @return the previous sibling node or null if the current node has
      * no previous sibling.
      */
-    public Object jsxGet_previousSibling() {
+    public Node jsxGet_previousSibling() {
         return getJavaScriptNode(getDomNodeOrDie().getPreviousSibling());
     }
 
@@ -398,7 +398,7 @@ public class Node extends SimpleScriptable {
      * @return the first child node or null if the current node has
      * no children.
      */
-    public Object jsxGet_firstChild() {
+    public Node jsxGet_firstChild() {
         return getJavaScriptNode(getDomNodeOrDie().getFirstChild());
     }
 
@@ -408,7 +408,7 @@ public class Node extends SimpleScriptable {
      * @return the last child node or null if the current node has
      * no children.
      */
-    public Object jsxGet_lastChild() {
+    public Node jsxGet_lastChild() {
         return getJavaScriptNode(getDomNodeOrDie().getLastChild());
     }
 

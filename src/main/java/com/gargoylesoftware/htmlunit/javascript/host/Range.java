@@ -116,7 +116,7 @@ public class Range extends SimpleScriptable {
         int i = 0;
         Node node = refNode;
         while (node.jsxGet_previousSibling() != null) {
-            node = (Node) node.jsxGet_previousSibling();
+            node = node.jsxGet_previousSibling();
             ++i;
         }
         return i;
