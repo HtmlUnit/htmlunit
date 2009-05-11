@@ -531,7 +531,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
             + "</body></html>";
 
         final String frame = "<html><head><script>alert(document.body);</script></head>\n"
-        	+ "<body><script>alert(document.body);</script></html>";
+            + "<body><script>alert(document.body);</script></html>";
 
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
