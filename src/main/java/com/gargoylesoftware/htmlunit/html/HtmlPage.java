@@ -1558,7 +1558,33 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      */
     @SuppressWarnings("unchecked")
     public <E extends HtmlElement> E getHtmlElementById(final String id) throws ElementNotFoundException {
-        final List<HtmlElement> elements = idMap_.get(id);
+        return (E) getHtmlElementById(id, true);
+    }
+
+    /**
+     * Returns the HTML element with the specified ID. If more than one element
+     * has this ID (not allowed by the HTML spec), then this method returns the
+     * first one.
+     *
+     * @param id the ID value to search for
+     * @param caseSensitive whether to consider case sensitivity or not
+     * @param <E> the element type
+     * @return the HTML element with the specified ID
+     * @throws ElementNotFoundException if no element was found matching the specified ID
+     */
+    @SuppressWarnings("unchecked")
+    public <E extends HtmlElement> E getHtmlElementById(final String id, final boolean caseSensitive)
+        throws ElementNotFoundException {
+        String usedID = id;
+        if (!caseSensitive) {
+            for (final String key : idMap_.keySet()) {
+                if (key.equalsIgnoreCase(usedID)) {
+                    usedID = key;
+                    break;
+                }
+            }
+        }
+        final List<HtmlElement> elements = idMap_.get(usedID);
         if (elements != null) {
             return (E) elements.get(0);
         }

@@ -914,8 +914,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public Object jsxFunction_getElementById(final String id) {
         Object result = null;
         try {
-            final HtmlElement htmlElement =
-                ((HtmlPage) getDomNodeOrDie()).getDocumentElement().getElementById(id);
+            final boolean caseSensitiveSeach = getBrowserVersion().isFirefox();
+            final HtmlElement htmlElement = ((HtmlPage) getDomNodeOrDie()).getHtmlElementById(id, caseSensitiveSeach);
             final Object jsElement = getScriptableFor(htmlElement);
 
             if (jsElement == NOT_FOUND) {

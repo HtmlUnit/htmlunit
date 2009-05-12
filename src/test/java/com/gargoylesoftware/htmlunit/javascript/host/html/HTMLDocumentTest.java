@@ -411,7 +411,6 @@ public class HTMLDocumentTest extends WebTestCase {
      */
     @Test
     @Alerts(IE = "[object]", FF = "null")
-    @NotYetImplemented(Browser.IE)
     public void getElementById_caseSensitivity() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
