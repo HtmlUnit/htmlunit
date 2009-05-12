@@ -26,6 +26,7 @@ import java.util.Stack;
 import org.apache.commons.lang.StringUtils;
 import org.apache.xerces.parsers.AbstractSAXParser;
 import org.apache.xerces.util.DefaultErrorHandler;
+import org.apache.xerces.util.XMLStringBuffer;
 import org.apache.xerces.xni.Augmentations;
 import org.apache.xerces.xni.QName;
 import org.apache.xerces.xni.XMLAttributes;
@@ -880,12 +881,25 @@ class HTMLScannerForIE extends org.cyberneko.html.HTMLScanner {
             final String s = nextContent(30); // [if ...
             if (s.startsWith("[if ") && s.contains("]>")) {
                 final String condition = StringUtils.substringBefore(s.substring(4), "]>");
-                if (IEConditionalCommentExpressionEvaluator.evaluate(condition, browserVersion_)) {
-                    // skip until ">"
-                    skip(">", false);
+                try {
+                    if (IEConditionalCommentExpressionEvaluator.evaluate(condition, browserVersion_)) {
+                        // skip until ">"
+                        for (int i = 0; i < condition.length() + 6; ++i) {
+                            read();
+                        }
+                        return;
+                    }
+                }
+                catch (final Exception e) { // incorrect expression => handle it as plain text
+                    // TODO: report it!
+                    final XMLStringBuffer buffer = new XMLStringBuffer("<!--");
+                    scanMarkupContent(buffer, '-');
+                    buffer.append("-->");
+                    fDocumentHandler.characters(buffer, locationAugs());
                     return;
                 }
             }
+            // this is a normal comment, not a conditional comment for IE
             super.scanComment();
         }
     }

@@ -83,4 +83,21 @@ public class IEConditionalCommentsTest extends WebTestCase {
             + "</head><body></body></html>";
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "<!--[if gte IE]>hello<![endif]-->", "world" }, FF = { "undefined", "undefined" })
+    public void incorrectExpression() throws Exception {
+        final String html = "<html><head></head><body>"
+            + "<div id='div1'><!--[if gte IE]>hello<![endif]--></div>\n"
+            + "<div id='div2'><!--[if gte IE 5]>world<![endif]--></div>\n"
+            + "<script>\n"
+            + "alert(document.getElementById('div1').innerText);\n"
+            + "alert(document.getElementById('div2').innerText);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
 }
