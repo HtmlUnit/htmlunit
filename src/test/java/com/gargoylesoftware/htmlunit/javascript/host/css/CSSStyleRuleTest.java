@@ -133,4 +133,29 @@ public class CSSStyleRuleTest extends WebTestCase {
                 + "</body></html>";
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(IE = { "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='rightCorner.gif',sizingMethod='crop')" },
+            FF = { "undefined" })
+    @NotYetImplemented(Browser.IE)
+    public void colon() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+                + "<style>\n"
+                + "  BODY { filter: progid:DXImageTransform.Microsoft.AlphaImageLoader"
+                + "(src='rightCorner.gif',sizingMethod='crop'); }\n"
+                + "</style>\n"
+                + "<script>\n"
+                + "  function test(){\n"
+                + "    var sheet = document.styleSheets[0];\n"
+                + "    var rules = sheet.cssRules || sheet.rules;\n"
+                + "    alert(rules[0].style.filter);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "</body></html>";
+        loadPageWithAlerts(html);
+    }
 }
