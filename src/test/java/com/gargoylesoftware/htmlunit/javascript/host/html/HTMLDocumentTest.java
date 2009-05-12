@@ -405,4 +405,29 @@ public class HTMLDocumentTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "[object]", FF = "null")
+    @NotYetImplemented(Browser.IE)
+    public void getElementById_caseSensitivity() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "    <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.getElementById('MYDIV'));\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>"
+            + "<div id='myDiv'>\n"
+            + "  <div></div>\n"
+            + "</div>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts(html);
+    }
 }
