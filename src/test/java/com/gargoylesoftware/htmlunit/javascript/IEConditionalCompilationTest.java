@@ -57,6 +57,32 @@ public class IEConditionalCompilationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(IE = "testing @cc_on")
+    public void simple3() throws Exception {
+        final String script = "/*@cc_on @*/\n"
+            + "/*@if (@_win32)\n"
+            + "alert('testing @cc_on');\n"
+            + "/*@end @*/";
+        testScript(script);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "testing @cc_on" })
+    public void simple4() throws Exception {
+        final String script = "/*@cc_on alert(1) @*/\n"
+            + "/*@if (@_win32)\n"
+            + "alert('testing @cc_on');\n"
+            + "/*@end @*/";
+        testScript(script);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(IE6 = "5.6", IE7 = "5.7")
     public void ifTest() throws Exception {
         final String script = "/*@cc_on@if(@_jscript_version>=5){alert(@_jscript_version)}@end@*/";

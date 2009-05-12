@@ -69,15 +69,31 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
         final String body = sourceCode.substring(startPos + 8, endPos);
         sb.append(processConditionalCompilation(body, browserVersion));
         if (endPos < sourceCode.length() - 3) {
-            final String remaining = sourceCode.substring(endPos + 3);
-            sb.append(preProcess(htmlPage, remaining, sourceName, htmlElement));
+            String remaining = sourceCode.substring(endPos + 3);
+            int nextStart = remaining.indexOf("/*@");
+            int nextEnd = remaining.indexOf("@*/", nextStart + 3);
+            // handle other /*@ @*/ blocks
+            while (nextStart >= 0 && nextEnd > 0) {
+                sb.append(remaining.substring(0, nextStart));
+                final String nextBody = remaining.substring(nextStart + 3, nextEnd);
+                sb.append(processConditionalCompilation(nextBody, browserVersion));
+                remaining = remaining.substring(nextEnd + 3);
+                nextStart = remaining.indexOf("/*@");
+                nextEnd = remaining.indexOf("@*/", nextStart + 3);
+            }
+            sb.append(remaining);
         }
         return sb.toString();
     }
 
     private String processConditionalCompilation(final String precompilationBody,
             final BrowserVersion browserVersion) {
-        String body = processIfs(precompilationBody);
+        String body = precompilationBody;
+        if (body.startsWith("cc_on")) {
+            body = body.substring(5);
+        }
+        body = body.replaceAll("/\\*@end", "");
+        body = processIfs(body);
         body = replaceCompilationVariables(body, browserVersion);
         body = processSet(body);
         body = replaceCustomCompilationVariables(body);

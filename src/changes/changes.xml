@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="2784679">
+                JavaScript: handle multiple conditional compilation comments (IE only).
+            </action>
             <action type="update" dev="asashour">
                 JavaScript: document.getElementById() should be case insensitive (IE only).
             </action>
