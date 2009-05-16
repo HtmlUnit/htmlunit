@@ -6,6 +6,12 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                JavaScript: option.selected does not necessarily mean there is 'selected' attribute.
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: correct attribute .firstChild and .lastChild (FF only).
+            </action>
             <action type="fix" dev="mguillem" issue="2789325">
                 IE Conditional comments: handle comments with invalid expressions as plain text.
             </action>

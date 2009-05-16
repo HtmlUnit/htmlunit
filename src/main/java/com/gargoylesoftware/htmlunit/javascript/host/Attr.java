@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -182,5 +183,25 @@ public class Attr extends Node {
         else {
             value_ = value;
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Node jsxGet_firstChild() {
+        return jsxGet_lastChild();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Node jsxGet_lastChild() {
+        if (getBrowserVersion().isFirefox()) {
+            final DomText text = new DomText(getDomNodeOrDie().getPage(), jsxGet_nodeValue());
+            return (Node) text.getScriptObject();
+        }
+        return null;
     }
 }

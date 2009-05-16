@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
@@ -254,7 +253,6 @@ public class HTMLElementTest extends WebTestCase {
             "specified=true",
             "value=bleh"
             })
-    @NotYetImplemented(Browser.FF)
     public void getAttributeNode() throws Exception {
         final String html =
               "<html>\n"

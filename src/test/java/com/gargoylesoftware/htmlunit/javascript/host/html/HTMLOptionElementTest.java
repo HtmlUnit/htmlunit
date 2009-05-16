@@ -234,7 +234,6 @@ public class HTMLOptionElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.FF)
     @Alerts(IE = { "[object]", "[object]", "[object]", "[object]", "null",
             "[object]", "null", "[object]", "[object]", "null" },
             FF = { "null", "[object Attr]", "null", "null", "null",

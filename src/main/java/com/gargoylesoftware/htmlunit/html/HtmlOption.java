@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
@@ -42,6 +43,8 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
 
     private final boolean initialSelectedState_;
 
+    private boolean selected_;
+
     /**
      * Creates an instance.
      *
@@ -61,7 +64,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * @return <tt>true</tt> if this option is currently selected
      */
     public boolean isSelected() {
-        return hasAttribute("selected");
+        return hasAttribute("selected") || selected_;
     }
 
     /**
@@ -226,15 +229,24 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void printOpeningTagContentAsXml(final PrintWriter printWriter) {
+        super.printOpeningTagContentAsXml(printWriter);
+        if (selected_ && getAttribute("selected") == ATTRIBUTE_NOT_DEFINED) {
+            printWriter.print(" selected=\"selected\"");
+        }
+    }
+
+    /**
      * For internal use only.
      * Sets/remove the selected attribute to reflect the select state
      * @param selected the selected status
      */
     void setSelectedInternal(final boolean selected) {
-        if (selected) {
-            setAttribute("selected", "selected");
-        }
-        else {
+        selected_ = selected;
+        if (!selected) {
             removeAttribute("selected");
         }
     }
