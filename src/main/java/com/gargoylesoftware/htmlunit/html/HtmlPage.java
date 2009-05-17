@@ -136,6 +136,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     private final Range selection_ = new SimpleRange(getDocumentElement());
     private final List<PostponedAction> afterLoadActions_ = new ArrayList<PostponedAction>();
     private boolean cleaning_;
+    private HtmlBase base_;
 
     /**
      * Creates an instance of HtmlPage.
@@ -602,12 +603,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @return the fully-qualified URL for the specified relative URL
      * @exception MalformedURLException If an error occurred when creating a URL object
      */
-    public URL getFullyQualifiedUrl(String relativeUrl)
-        throws MalformedURLException {
-
-        final List<HtmlBase> baseElements = getDocumentElement().getHtmlElementsByTagName("base");
+    public URL getFullyQualifiedUrl(String relativeUrl) throws MalformedURLException {
         URL baseUrl;
-        if (baseElements.isEmpty()) {
+        if (base_ == null) {
             baseUrl = getWebResponse().getRequestSettings().getUrl();
             final WebWindow window = getEnclosingWindow();
             final boolean frame = (window != window.getTopWindow());
@@ -623,12 +621,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
             }
         }
         else {
-            if (baseElements.size() > 1) {
-                notifyIncorrectness("Multiple 'base' detected, only the first is used.");
-            }
-            final HtmlBase htmlBase = baseElements.get(0);
             boolean insideHead = false;
-            for (DomNode parent = htmlBase.getParentNode(); parent != null; parent = parent.getParentNode()) {
+            for (DomNode parent = base_.getParentNode(); parent != null; parent = parent.getParentNode()) {
                 if (parent instanceof HtmlHead) {
                     insideHead = true;
                     break;
@@ -640,7 +634,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
                 notifyIncorrectness("Element 'base' must appear in <head>, it is ignored.");
             }
 
-            final String href = htmlBase.getHrefAttribute();
+            final String href = base_.getHrefAttribute();
             if (!insideHead || StringUtils.isEmpty(href)) {
                 baseUrl = getWebResponse().getRequestSettings().getUrl();
             }
@@ -677,17 +671,15 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @return the resolved target to use for the element
      */
     public String getResolvedTarget(final String elementTarget) {
-        final List<HtmlBase> baseElements = getDocumentElement().getHtmlElementsByTagName("base");
         final String resolvedTarget;
-        if (baseElements.isEmpty()) {
+        if (base_ == null) {
             resolvedTarget = elementTarget;
         }
         else if (elementTarget != null && elementTarget.length() > 0) {
             resolvedTarget = elementTarget;
         }
         else {
-            final HtmlBase htmlBase = baseElements.get(0);
-            resolvedTarget = htmlBase.getTargetAttribute();
+            resolvedTarget = base_.getTargetAttribute();
         }
         return resolvedTarget;
     }
@@ -1760,8 +1752,28 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
             if (!insideNoScript) {
                 addMappedElement((HtmlElement) node, true);
             }
+            if (node.getNodeName().equals("base")) {
+                calculateBase();
+            }
         }
         node.onAddedToPage();
+    }
+
+    private void calculateBase() {
+        final List<HtmlBase> baseElements = getDocumentElement().getHtmlElementsByTagName("base");
+        switch (baseElements.size()) {
+            case 0:
+                base_ = null;
+                break;
+
+            case 1:
+                base_ = baseElements.get(0);
+                break;
+
+            default:
+                base_ = baseElements.get(0);
+                notifyIncorrectness("Multiple 'base' detected, only the first is used.");
+        }
     }
 
     /**
@@ -1772,6 +1784,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     void notifyNodeRemoved(final DomNode node) {
         if (node instanceof HtmlElement) {
             removeMappedElement((HtmlElement) node, true, true);
+            if (node.getNodeName().equals("base")) {
+                calculateBase();
+            }
         }
     }
 
