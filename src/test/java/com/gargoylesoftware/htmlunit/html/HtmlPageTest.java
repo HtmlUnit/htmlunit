@@ -421,7 +421,8 @@ public class HtmlPageTest extends WebServerTestCase {
         final HtmlPage page = webClient.getPage(URL_FIRST);
         page.getAnchors().get(0).click();
 
-        final String[] expectedIncorrectness = {"Multiple 'base' detected, only the first is used."};
+        final String[] expectedIncorrectness = {"Multiple 'base' detected, only the first is used.",
+            "Multiple 'base' detected, only the first is used."};
         assertEquals(expectedIncorrectness, collectedIncorrectness);
     }
 
