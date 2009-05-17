@@ -1072,8 +1072,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Sets a chunk of JavaScript to be invoked each time a specified number of milliseconds has elapsed
-     * Current implementation does nothing.
+     * Sets a chunk of JavaScript to be invoked each time a specified number of milliseconds has elapsed.
      *
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536749.aspx">MSDN documentation</a>
      * @param code specifies the function pointer or string that indicates the code to be executed

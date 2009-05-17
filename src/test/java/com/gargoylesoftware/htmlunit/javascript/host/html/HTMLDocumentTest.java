@@ -23,6 +23,8 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 /**
  * Tests for {@link HTMLDocument}.
@@ -428,5 +430,43 @@ public class HTMLDocumentTest extends WebTestCase {
             + "</html>";
 
         loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented(Browser.IE)
+    public void readyState() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "    <script>\n"
+            + "    var doc;"
+            + "    function test() {\n"
+            + "      var iframe = document.createElement('iframe');\n"
+            + "      var textarea = document.getElementById('myTextarea');\n"
+            + "      textarea.parentNode.appendChild(iframe);\n"
+            + "      doc = iframe.contentWindow.document;\n"
+            + "      check();\n"
+            + "      setTimeout(check, 100);\n"
+            + "    }\n"
+            + "    function check() {\n"
+            + "      var textarea = document.getElementById('myTextarea');\n"
+            + "      textarea.value += doc.readyState + ',' + doc.body + '-';\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>"
+            + "<div>\n"
+            + "  <textarea id='myTextarea' cols='80'></textarea>\n"
+            + "</div>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final HtmlPage page = loadPageWithAlerts(html);
+        final String expected = getBrowserVersion().isIE() ? "loading,null-complete,[object]-"
+                : "undefined,[object HTMLBodyElement]-undefined,[object HTMLBodyElement]-";
+        page.getWebClient().waitForBackgroundJavaScript(500);
+        assertEquals(expected, page.<HtmlTextArea>getHtmlElementById("myTextarea").getText());
     }
 }
