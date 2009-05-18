@@ -347,12 +347,12 @@ public class XmlPageTest extends WebServerTestCase {
         servlets.put("/test", NoResponseServlet.class);
         startWebServer("./", null, servlets);
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         client.getPage("http://localhost:" + PORT + "/test");
     }
 
     /**
-     * Servlet for {@link #comma()}.
+     * Servlet for {@link #noResponse()}.
      */
     public static class NoResponseServlet extends HttpServlet {
 
