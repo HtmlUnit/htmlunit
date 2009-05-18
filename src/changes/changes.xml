@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes">
+            <action type="fix" dev="asashour" issue="2792033">
+                Handle XmlPage with NO_CONTENT HTTP status.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: option.selected does not necessarily mean there is 'selected' attribute.
             </action>

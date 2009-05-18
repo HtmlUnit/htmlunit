@@ -16,9 +16,17 @@ package com.gargoylesoftware.htmlunit.xml;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.Servlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.httpclient.HttpStatus;
 import org.junit.Assert;
@@ -31,7 +39,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
@@ -46,7 +54,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlBody;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class XmlPageTest extends WebTestCase {
+public class XmlPageTest extends WebServerTestCase {
 
     /**
      * Tests namespace.
@@ -330,4 +338,33 @@ public class XmlPageTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void noResponse() throws Exception {
+        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        servlets.put("/test", NoResponseServlet.class);
+        startWebServer("./", null, servlets);
+
+        final WebClient client = new WebClient();
+        client.getPage("http://localhost:" + PORT + "/test");
+    }
+
+    /**
+     * Servlet for {@link #comma()}.
+     */
+    public static class NoResponseServlet extends HttpServlet {
+
+        private static final long serialVersionUID = 714328190645334742L;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            response.setContentType("text/xml");
+            response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+        }
+    }
 }

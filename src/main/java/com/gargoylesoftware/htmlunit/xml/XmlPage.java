@@ -104,7 +104,8 @@ public class XmlPage extends SgmlPage {
         super(webResponse, enclosingWindow);
 
         try {
-            if (webResponse == null || webResponse.getContentAsString().trim().length() == 0) {
+            if (webResponse == null || webResponse.getContentAsString() == null
+                    || webResponse.getContentAsString().trim().length() == 0) {
                 node_ = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument().getDocumentElement();
             }
             else {
