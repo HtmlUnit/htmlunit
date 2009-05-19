@@ -909,7 +909,7 @@ public class WebClient implements Serializable {
                 final WebRequestSettings settings = new WebRequestSettings(url);
                 if (!getBrowserVersion().isIE() && openerPage != null) {
                     final String referer = openerPage.getWebResponse().getRequestSettings().getUrl().toExternalForm();
-                    settings.addAdditionalHeader("Referer", referer);
+                    settings.setAdditionalHeader("Referer", referer);
                 }
                 getPage(window, settings);
             }
@@ -1011,7 +1011,7 @@ public class WebClient implements Serializable {
         final WebRequestSettings settings = new WebRequestSettings(url);
         if (!getBrowserVersion().isIE()) {
             final String referer = openerPage.getWebResponse().getRequestSettings().getUrl().toExternalForm();
-            settings.addAdditionalHeader("Referer", referer);
+            settings.setAdditionalHeader("Referer", referer);
         }
 
         getPage(window, settings);
@@ -1471,7 +1471,7 @@ public class WebClient implements Serializable {
                 final WebRequestSettings wrs = new WebRequestSettings(newUrl);
                 wrs.setRequestParameters(parameters);
                 for (Map.Entry<String, String> entry : webRequestSettings.getAdditionalHeaders().entrySet()) {
-                    wrs.addAdditionalHeader(entry.getKey(), entry.getValue());
+                    wrs.setAdditionalHeader(entry.getKey(), entry.getValue());
                 }
                 return loadWebResponse(wrs);
             }
@@ -1479,7 +1479,7 @@ public class WebClient implements Serializable {
                 final WebRequestSettings wrs = new WebRequestSettings(newUrl);
                 wrs.setHttpMethod(HttpMethod.GET);
                 for (Map.Entry<String, String> entry : webRequestSettings.getAdditionalHeaders().entrySet()) {
-                    wrs.addAdditionalHeader(entry.getKey(), entry.getValue());
+                    wrs.setAdditionalHeader(entry.getKey(), entry.getValue());
                 }
                 return loadWebResponse(wrs);
             }

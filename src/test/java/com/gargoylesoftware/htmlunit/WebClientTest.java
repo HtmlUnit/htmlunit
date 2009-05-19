@@ -581,7 +581,7 @@ public class WebClientTest extends WebServerTestCase {
         conn.setResponse(URL_SECOND, "<html><body>abc</body></html>");
 
         final WebRequestSettings request = new WebRequestSettings(URL_FIRST);
-        request.addAdditionalHeader("foo", "bar");
+        request.setAdditionalHeader("foo", "bar");
         client.getPage(request);
 
         assertEquals(URL_SECOND, conn.getLastWebRequestSettings().getUrl());

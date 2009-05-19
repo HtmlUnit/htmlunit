@@ -120,7 +120,7 @@ public abstract class BaseFrame extends StyledElement {
             }
             try {
                 final WebRequestSettings settings = new WebRequestSettings(url);
-                settings.addAdditionalHeader("Referer", getPage().getWebResponse().getRequestSettings().getUrl()
+                settings.setAdditionalHeader("Referer", getPage().getWebResponse().getRequestSettings().getUrl()
                         .toExternalForm());
                 getPage().getEnclosingWindow().getWebClient().getPage(enclosedWindow_, settings);
             }

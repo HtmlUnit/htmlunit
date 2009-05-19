@@ -31,9 +31,9 @@ public class WebRequestSettingsTest extends WebServerTestCase {
     public void headers() throws Exception {
         final WebRequestSettings settings = new WebRequestSettings(URL_GARGOYLE);
         final int initialSize = settings.getAdditionalHeaders().size();
-        settings.addAdditionalHeader("Accept", "nothing");
+        settings.setAdditionalHeader("Accept", "nothing");
         assertEquals(initialSize, settings.getAdditionalHeaders().size());
-        settings.addAdditionalHeader("ACCEPT", "compares");
+        settings.setAdditionalHeader("ACCEPT", "compares");
         assertEquals(initialSize, settings.getAdditionalHeaders().size());
         settings.removeAdditionalHeader("ACcEpT");
         assertEquals(initialSize - 1, settings.getAdditionalHeaders().size());

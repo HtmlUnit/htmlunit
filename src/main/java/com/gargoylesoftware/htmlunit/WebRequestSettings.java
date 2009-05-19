@@ -55,8 +55,8 @@ public class WebRequestSettings implements Serializable {
      */
     public WebRequestSettings(final URL url) {
         setUrl(url);
-        addAdditionalHeader("Accept", "*/*");
-        addAdditionalHeader("Accept-Language", "en");
+        setAdditionalHeader("Accept", "*/*");
+        setAdditionalHeader("Accept-Language", "en");
     }
 
     /**
@@ -244,11 +244,11 @@ public class WebRequestSettings implements Serializable {
     }
 
     /**
-     * Adds the specified name/value pair to the additional HTTP headers.
+     * Sets the specified name/value pair in the additional HTTP headers.
      * @param name the name of the additional HTTP header
      * @param value the value of the additional HTTP header
      */
-    public void addAdditionalHeader(String name, final String value) {
+    public void setAdditionalHeader(String name, final String value) {
         for (final String key : additionalHeaders_.keySet()) {
             if (name.equalsIgnoreCase(key)) {
                 name = key;
@@ -256,6 +256,17 @@ public class WebRequestSettings implements Serializable {
             }
         }
         additionalHeaders_.put(name, value);
+    }
+
+    /**
+     * Adds the specified name/value pair to the additional HTTP headers.
+     * @param name the name of the additional HTTP header
+     * @param value the value of the additional HTTP header
+     * @deprecated As of 2.6, please use {@link #setAdditionalHeader(String, String)} instead
+     */
+    @Deprecated
+    public void addAdditionalHeader(String name, final String value) {
+        setAdditionalHeader(name, value);
     }
 
     /**

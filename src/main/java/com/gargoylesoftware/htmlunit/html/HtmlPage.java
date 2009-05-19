@@ -1011,7 +1011,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
 
         final WebRequestSettings referringRequest = getWebResponse().getRequestSettings();
         request.setAdditionalHeaders(new HashMap<String, String>(referringRequest.getAdditionalHeaders()));
-        request.addAdditionalHeader("Referer", referringRequest.getUrl().toString());
+        request.setAdditionalHeader("Referer", referringRequest.getUrl().toString());
         final Script cachedScript = cache.getCachedScript(request);
         if (cachedScript != null) {
             return cachedScript;

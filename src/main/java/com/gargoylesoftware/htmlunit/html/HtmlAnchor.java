@@ -89,7 +89,7 @@ public class HtmlAnchor extends ClickableElement {
             }
             final URL url = page.getFullyQualifiedUrl(href);
             final WebRequestSettings settings = new WebRequestSettings(url);
-            settings.addAdditionalHeader("Referer", page.getWebResponse().getRequestSettings().getUrl()
+            settings.setAdditionalHeader("Referer", page.getWebResponse().getRequestSettings().getUrl()
                     .toExternalForm());
             if (mainLog_.isDebugEnabled()) {
                 mainLog_.debug(

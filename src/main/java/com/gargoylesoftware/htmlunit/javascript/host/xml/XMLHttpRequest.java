@@ -342,7 +342,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             final URL fullUrl = containingPage_.getFullyQualifiedUrl(url);
             final WebRequestSettings settings = new WebRequestSettings(fullUrl);
             settings.setCharset("UTF-8");
-            settings.addAdditionalHeader("Referer", containingPage_.getWebResponse().getRequestSettings().getUrl()
+            settings.setAdditionalHeader("Referer", containingPage_.getWebResponse().getRequestSettings().getUrl()
                     .toExternalForm());
             final HttpMethod submitMethod = HttpMethod.valueOf(method.toUpperCase());
             settings.setHttpMethod(submitMethod);
@@ -458,7 +458,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      */
     public void jsxFunction_setRequestHeader(final String name, final String value) {
         if (requestSettings_ != null) {
-            requestSettings_.addAdditionalHeader(name, value);
+            requestSettings_.setAdditionalHeader(name, value);
         }
         else {
             throw Context.reportRuntimeError("The open() method must be called before setRequestHeader().");

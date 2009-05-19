@@ -173,7 +173,7 @@ public class HtmlForm extends ClickableElement {
         settings.setRequestParameters(parameters);
         settings.setEncodingType(FormEncodingType.getInstance(getEnctypeAttribute()));
         settings.setCharset(getSubmitCharset());
-        settings.addAdditionalHeader("Referer", htmlPage.getWebResponse().getRequestSettings().getUrl()
+        settings.setAdditionalHeader("Referer", htmlPage.getWebResponse().getRequestSettings().getUrl()
                 .toExternalForm());
 
         final WebWindow webWindow = htmlPage.getEnclosingWindow();
