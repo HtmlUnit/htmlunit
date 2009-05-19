@@ -7,7 +7,7 @@
     <body>
         <release version="2.6" date="?" description="Bugfixes">
             <action type="update" dev="asashour">
-                Deprecate WebRequestSettings.addAdditionalHeader().
+                Deprecate WebRequestSettings.addAdditionalHeader() and HtmlPage.getFirstAnchorByText().
             </action>
             <action type="fix" dev="asashour" issue="2792033">
                 Handle XmlPage with NO_CONTENT HTTP status.

@@ -169,7 +169,7 @@ public class HtmlPageTest extends WebServerTestCase {
         final HtmlAnchor anchor = page.getAnchorByName("anchor1");
         assertSame("anchor1", anchor, page.getAnchorByName("anchor1"));
         assertSame("anchor3", anchor, page.getAnchorByHref("http://www.foo.com"));
-        assertSame("anchor4", anchor, page.getFirstAnchorByText("foo.com"));
+        assertSame("anchor4", anchor, page.getAnchorByText("foo.com"));
 
         final HtmlTableRow tableRow = table.getRow(0);
         assertSame("tableRow1", tableRow, table.getRow(0));

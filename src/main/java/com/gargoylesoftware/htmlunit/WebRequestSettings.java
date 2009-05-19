@@ -265,7 +265,7 @@ public class WebRequestSettings implements Serializable {
      * @deprecated As of 2.6, please use {@link #setAdditionalHeader(String, String)} instead
      */
     @Deprecated
-    public void addAdditionalHeader(String name, final String value) {
+    public void addAdditionalHeader(final String name, final String value) {
         setAdditionalHeader(name, value);
     }
 

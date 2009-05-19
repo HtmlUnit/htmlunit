@@ -91,7 +91,7 @@ public class DefaultElementFactoryTest extends WebTestCase {
             + "<a href='http://www.google.com' tabindex='2' accesskey='F'>foo</a>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(html);
-        final HtmlAnchor anchor = page.getFirstAnchorByText("foo");
+        final HtmlAnchor anchor = page.getAnchorByText("foo");
 
         verifyAttributes(anchor);
     }
