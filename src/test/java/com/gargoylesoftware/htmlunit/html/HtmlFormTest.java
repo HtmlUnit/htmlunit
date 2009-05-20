@@ -963,7 +963,8 @@ public class HtmlFormTest extends WebTestCase {
         testUrlAfterSubmit("post", "foo?foo=12", "foo?foo=12");
         testUrlAfterSubmit("post", "", "");
         testUrlAfterSubmit("post", "?a=1&b=2", "?a=1&b=2");
-        testUrlAfterSubmit(new URL(URL_FIRST.toExternalForm() + "?a=1&b=2"), "post", "", "");
+        final URL url = new URL(URL_FIRST.toExternalForm() + "?a=1&b=2");
+        testUrlAfterSubmit(url, "post", "", url.toExternalForm());
     }
 
     /**
@@ -981,11 +982,11 @@ public class HtmlFormTest extends WebTestCase {
      * Utility for {@link #testUrlAfterSubmit()}
      * @param method the form method to use
      * @param action the form action to use
-     * @param expectedUrlEnd the expected URL
+     * @param expectedUrl the expected URL
      * @throws Exception if the test fails
      */
     private void testUrlAfterSubmit(final URL url, final String method, final String action,
-            final String expectedUrlEnd) throws Exception {
+            final String expectedUrl) throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='" + method + "' action='" + action + "'>\n"
@@ -999,7 +1000,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlForm form = page.getHtmlElementById("form1");
         final Page page2 = form.submit((HtmlSubmitInput) page.getHtmlElementById("submitButton"));
 
-        assertEquals(url.toExternalForm() + expectedUrlEnd, page2.getWebResponse().getRequestSettings().getUrl());
+        assertEquals(expectedUrl, page2.getWebResponse().getRequestSettings().getUrl());
     }
 
     /**
@@ -1012,7 +1013,7 @@ public class HtmlFormTest extends WebTestCase {
      */
     private void testUrlAfterSubmit(final String method, final String action, final String expectedUrlEnd)
         throws Exception {
-        testUrlAfterSubmit(URL_GARGOYLE, method, action, expectedUrlEnd);
+        testUrlAfterSubmit(URL_GARGOYLE, method, action, URL_GARGOYLE + expectedUrlEnd);
     }
 
     /**
@@ -1370,7 +1371,9 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testUrlAfterSubmit2() throws Exception {
-        testUrlAfterSubmit(new URL(URL_GARGOYLE, "test.html"), "post", "?hi", "?hi");
+        URL url = new URL(URL_GARGOYLE, "test.html");
+        testUrlAfterSubmit(url, "post", "?hi", url + "?hi");
+        testUrlAfterSubmit(new URL(URL_GARGOYLE, "test.html?there"), "post", "?hi", URL_GARGOYLE + "test.html?hi");
     }
 
 }
