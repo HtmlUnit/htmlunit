@@ -1364,4 +1364,16 @@ public class HtmlFormTest extends WebTestCase {
         assertEquals(URL_GARGOYLE.toExternalForm() + "?myName=myValue",
                 page.getWebResponse().getRequestSettings().getUrl());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testUrlAfterSubmit2() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        testUrlAfterSubmit(new URL(URL_GARGOYLE, "test.html"), "post", "?hi", "?hi");
+    }
+
 }
