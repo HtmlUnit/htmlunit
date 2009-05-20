@@ -1370,9 +1370,6 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testUrlAfterSubmit2() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         testUrlAfterSubmit(new URL(URL_GARGOYLE, "test.html"), "post", "?hi", "?hi");
     }
 

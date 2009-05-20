@@ -159,7 +159,7 @@ public class HtmlForm extends ClickableElement {
                 url = htmlPage.getWebResponse().getRequestSettings().getUrl();
             }
             else if (actionUrl.startsWith("?")) {
-                url = new URL(htmlPage.getWebResponse().getRequestSettings().getUrl(), actionUrl);
+                url = new URL(htmlPage.getWebResponse().getRequestSettings().getUrl() + actionUrl);
             }
             else {
                 url = htmlPage.getFullyQualifiedUrl(actionUrl);

@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes">
+            <action type="fix" dev="asashour" issue="2794061">
+                HtmlForm: properly handle 'action' which starts with a question mark.
+            </action>
             <action type="update" dev="asashour">
                 Deprecate WebRequestSettings.addAdditionalHeader() and HtmlPage.getFirstAnchorByText().
             </action>
