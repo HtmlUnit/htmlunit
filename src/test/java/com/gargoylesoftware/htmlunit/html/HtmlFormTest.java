@@ -1371,7 +1371,7 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testUrlAfterSubmit2() throws Exception {
-        URL url = new URL(URL_GARGOYLE, "test.html");
+        final URL url = new URL(URL_GARGOYLE, "test.html");
         testUrlAfterSubmit(url, "post", "?hi", url + "?hi");
         testUrlAfterSubmit(new URL(URL_GARGOYLE, "test.html?there"), "post", "?hi", URL_GARGOYLE + "test.html?hi");
     }
