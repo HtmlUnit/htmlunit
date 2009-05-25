@@ -85,7 +85,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
         if (response != null) {
             return response;
         }
-        if (shouldRecursiveAttributeForIE() && isRecursiveAttribute(name)) {
+        if (useRecursiveAttributeForIE() && isRecursiveAttribute(name)) {
             return getUnspecifiedAttributeNode(name);
         }
 
@@ -102,7 +102,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
         if (attr != null) {
             return attr.getScriptObject();
         }
-        if (!name.equals("className") && shouldRecursiveAttributeForIE() && isRecursiveAttribute(name)) {
+        if (!name.equals("className") && useRecursiveAttributeForIE() && isRecursiveAttribute(name)) {
             return getUnspecifiedAttributeNode(name);
         }
         return null;
@@ -118,7 +118,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
         if (attr != null) {
             return attr.getScriptObject();
         }
-        if (shouldRecursiveAttributeForIE()) {
+        if (useRecursiveAttributeForIE()) {
             index -= attributes_.getLength();
             final String name = getRecusiveAttributeNameAt(index);
             if (name != null) {
@@ -128,13 +128,13 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
         return null;
     }
 
-    private boolean shouldRecursiveAttributeForIE() {
+    private boolean useRecursiveAttributeForIE() {
         return getBrowserVersion().isIE() && getDomNodeOrDie() instanceof HtmlElement;
     }
 
     /**
-     * Creates a new unspecified attribute node
-     * @return the right {@link Attr}
+     * Creates a new unspecified attribute node.
+     * @return a new unspecified attribute node
      */
     private Attr getUnspecifiedAttributeNode(final String attrName) {
         final Attr attribute = new Attr();
@@ -150,7 +150,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      */
     public int jsxGet_length() {
         int length = attributes_.getLength();
-        if (shouldRecursiveAttributeForIE()) {
+        if (useRecursiveAttributeForIE()) {
             length += getRecursiveAttributesLength();
         }
         return length;
