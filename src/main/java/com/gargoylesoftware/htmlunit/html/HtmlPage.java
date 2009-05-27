@@ -29,15 +29,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Script;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.mutable.MutableBoolean;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Script;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;
@@ -557,7 +558,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     }
 
     /**
-     * Returns the first anchor that contains the specified text.
+     * Returns the first anchor with the specified text.
      * @param text the text to search for
      * @return the first anchor that was found
      * @throws ElementNotFoundException if no anchors are found with the specified text
@@ -569,7 +570,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     }
 
     /**
-     * Returns the first anchor that contains the specified text.
+     * Returns the first anchor with the specified text.
      * @param text the text to search for
      * @return the first anchor that was found
      * @throws ElementNotFoundException if no anchors are found with the specified text
