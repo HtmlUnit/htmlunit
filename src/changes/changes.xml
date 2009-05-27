@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes">
+            <action type="update" dev="asashour">
+                Change default value for "Accept-Language" HTTP header to "en-us".
+            </action>
             <action type="fix" dev="asashour" issue="2794061">
                 HtmlForm: properly handle 'action' which starts with a question mark.
             </action>
