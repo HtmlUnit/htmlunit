@@ -337,4 +337,12 @@ public class WebResponseImpl implements WebResponse, Serializable {
         return encoding;
     }
 
+    /**
+     * {@inheritDoc}
+     * @deprecated since 2.4, please use {@link #getContentAsBytes()} instead
+     */
+    @Deprecated
+    public byte[] getResponseBody() {
+        return responseData_.getBody();
+    }
 }

@@ -142,4 +142,11 @@ public interface WebResponse {
      */
     long getLoadTime();
 
+    /**
+     * Returns the response body, as a byte array.
+     * @return the response body, as a byte array
+     * @deprecated since 2.4, please use {@link #getContentAsBytes()} instead
+     */
+    @Deprecated
+    byte[] getResponseBody();
 }

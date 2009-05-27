@@ -179,6 +179,16 @@ public class WebResponseWrapper implements WebResponse {
 
     /**
      * {@inheritDoc}
+     * The default behavior of this method is to return getResponseBody() on the wrapped connection object.
+     * @deprecated since 2.4, please use {@link #getContentAsBytes()} instead
+     */
+    @Deprecated
+    public byte[] getResponseBody() {
+        return wrappedWebResponse_.getContentAsBytes();
+    }
+
+    /**
+     * {@inheritDoc}
      * The default behavior of this method is to return getRequestSettings() on the wrapped connection object.
      */
     public WebRequestSettings getRequestSettings() {
