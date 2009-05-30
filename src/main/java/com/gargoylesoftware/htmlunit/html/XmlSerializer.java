@@ -26,6 +26,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
@@ -140,7 +141,7 @@ class XmlSerializer {
         final String src = map.get("src").getValue();
         try {
             final File file = createFile(src, ".js");
-            final String content = webClient_.getPage(src).getWebResponse().getContentAsString();
+            final String content = webClient_.<Page>getPage(src).getWebResponse().getContentAsString();
             FileUtils.writeStringToFile(file, content);
         }
         catch (final Exception e) {
