@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection.JAVASCRIPT_PREFIX;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.MalformedURLException;
@@ -2258,6 +2259,17 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     @Override
     protected void setDocumentType(final DomDocumentType type) {
         super.setDocumentType(type);
+    }
+
+    /**
+     * Saves the current page with all images at the specified location.
+     * The default behavior removes all script elements.
+     *
+     * @param file file to write this page into
+     * @throws IOException If an error occurs
+     */
+    public void saveAs(final File file) throws IOException {
+        new XmlSerializer().saveAs(this, file);
     }
 }
 

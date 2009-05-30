@@ -14,10 +14,17 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -227,5 +234,77 @@ public class HtmlPage2Test extends WebServerTestCase {
         final HtmlInput submit = form.getInputByName("submit");
         framePage = submit.click();
         assertEquals("Form submitted successfully.", framePage.getBody().asText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Hello there")
+    public void saveAs() throws Exception {
+        final String html = "<html><head><script src='" + URL_SECOND + "'>\n</script></head></html>";
+
+        final String js = "alert('Hello there')";
+
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+
+        webConnection.setResponse(URL_FIRST, html);
+        webConnection.setResponse(URL_SECOND, js);
+        webClient.setWebConnection(webConnection);
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final HtmlPage page = webClient.getPage(URL_FIRST);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+        final File file = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_saveAs.html");
+        page.saveAs(file);
+        assertTrue(file.exists());
+        assertTrue(file.isFile());
+        final String content = FileUtils.readFileToString(file);
+        assertFalse(content.contains("<script"));
+        file.delete();
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void saveAs_image() throws Exception {
+        final String html = "<html><body><img src='" + URL_SECOND + "'></body></html>";
+
+        final URL url = getClass().getClassLoader().getResource("testfiles/tiny-jpg.img");
+        final FileInputStream fis = new FileInputStream(new File(new URI(url.toString())));
+        final byte[] directBytes = IOUtils.toByteArray(fis);
+        fis.close();
+
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+
+        webConnection.setResponse(URL_FIRST, html);
+        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
+        webConnection.setResponse(URL_SECOND, directBytes, 200, "ok", "image/jpg", emptyList);
+        webClient.setWebConnection(webConnection);
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final HtmlPage page = webClient.getPage(URL_FIRST);
+        final File file = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_saveAs2.html");
+        final File imgFile = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_saveAs2/second.JPEG");
+        try {
+            page.saveAs(file);
+            assertTrue(file.exists());
+            assertTrue(file.isFile());
+            final FileInputStream fos = new FileInputStream(imgFile);
+            final byte[] loadedBytes = IOUtils.toByteArray(fos);
+            fos.close();
+            assertTrue(loadedBytes.length > 0);
+        }
+        finally {
+            file.delete();
+            FileUtils.deleteDirectory(imgFile.getParentFile());
+        }
     }
 }

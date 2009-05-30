@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes">
+            <action type="add" dev="asashour">
+                HtmlPage: add saveAs() method.
+            </action>
             <action type="update" dev="asashour">
                 Change default value for "Accept-Language" HTTP header to "en-us".
             </action>
