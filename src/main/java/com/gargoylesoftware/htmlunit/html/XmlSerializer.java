@@ -122,6 +122,9 @@ class XmlSerializer {
         else if (node instanceof HtmlImage) {
             attributes = getAttributesFor((HtmlImage) node);
         }
+        else if (node instanceof HtmlLink) {
+            attributes = getAttributesFor((HtmlLink) node);
+        }
         else {
             attributes = node.getAttributesMap();
         }
@@ -142,6 +145,21 @@ class XmlSerializer {
             final File file = createFile(src, ".js");
             final String content = webClient_.<Page>getPage(src).getWebResponse().getContentAsString();
             FileUtils.writeStringToFile(file, content);
+            map.get("src").setValue(outputDir_.getName() + File.separatorChar + file.getName());
+        }
+        catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
+        return map;
+    }
+
+    protected Map<String, DomAttr> getAttributesFor(final HtmlLink link) {
+        final Map<String, DomAttr> map = new HashMap<String, DomAttr>(link.getAttributesMap());
+        final String src = map.get("href").getValue();
+        try {
+            final File file = createFile(src, ".css");
+            FileUtils.writeStringToFile(file, link.getWebResponse(true).getContentAsString());
+            map.get("href").setValue(outputDir_.getName() + File.separatorChar + file.getName());
         }
         catch (final Exception e) {
             throw new RuntimeException(e);

@@ -307,4 +307,39 @@ public class HtmlPage2Test extends WebServerTestCase {
             FileUtils.deleteDirectory(imgFile.getParentFile());
         }
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void saveAs_css() throws Exception {
+        final String html = "<html><head>"
+            + "<link rel='stylesheet' type='text/css' href='" + URL_SECOND + "'/></head></html>";
+
+        final String css = "body {color: blue}";
+
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+
+        webConnection.setResponse(URL_FIRST, html);
+        webConnection.setResponse(URL_SECOND, css);
+        webClient.setWebConnection(webConnection);
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final HtmlPage page = webClient.getPage(URL_FIRST);
+        final File file = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_saveAs2.html");
+        final File cssFile = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_saveAs2/second.css");
+        try {
+            page.saveAs(file);
+            assertTrue(file.exists());
+            assertTrue(file.isFile());
+            assertEquals(css, FileUtils.readFileToString(cssFile));
+        }
+        finally {
+            file.delete();
+            FileUtils.deleteDirectory(cssFile.getParentFile());
+        }
+    }
 }

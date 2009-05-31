@@ -432,7 +432,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
                 return option;
             }
         }
-        throw new ElementNotFoundException("option", "value", text);
+        throw new ElementNotFoundException("option", "text", text);
     }
 
     /**
