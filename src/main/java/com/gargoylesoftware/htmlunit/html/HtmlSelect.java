@@ -406,7 +406,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      *
      * @param value the value to search by
      * @return the {@link HtmlOption} object that corresponds to the specified value
-     * @exception ElementNotFoundException If a particular XML element could not be found in the DOM model
+     * @exception ElementNotFoundException If a particular element could not be found in the DOM model
      */
     public HtmlOption getOptionByValue(final String value) throws ElementNotFoundException {
         WebAssert.notNull("value", value);
@@ -416,6 +416,23 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
             }
         }
         throw new ElementNotFoundException("option", "value", value);
+    }
+
+    /**
+     * Returns the {@link HtmlOption} object that has the specified text.
+     *
+     * @param text the text to search by
+     * @return the {@link HtmlOption} object that has the specified text
+     * @exception ElementNotFoundException If a particular element could not be found in the DOM model
+     */
+    public HtmlOption getOptionByText(final String text) throws ElementNotFoundException {
+        WebAssert.notNull("text", text);
+        for (final HtmlOption option : getOptions()) {
+            if (option.getText().equals(text)) {
+                return option;
+            }
+        }
+        throw new ElementNotFoundException("option", "value", text);
     }
 
     /**

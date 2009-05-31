@@ -687,4 +687,31 @@ public class HtmlSelectTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testGetOptionByText() throws Exception {
+        final String html = "<html><head><title>foo</title></head><body><form id='form1'>\n"
+            + "<select name='select1'>\n"
+            + "    <option value='option1'>s1o1</option>\n"
+            + "    <option value='option2'>s1o2</option>\n"
+            + "</select>\n"
+            + "<select name='select2'>\n"
+            + "    <option value='option1'>s2o1</option>\n"
+            + "    <option value='option2'>s2o2</option>\n"
+            + "    <option>s2o3</option>\n"
+            + "</select>\n"
+            + "<input type='submit' name='button' value='foo'/>\n"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(html);
+
+        final HtmlForm form = page.getHtmlElementById("form1");
+
+        final HtmlSelect select = form.getSelectsByName("select2").get(0);
+        assertEquals("s2o2", select.getOptionByText("s2o2").asText());
+
+        assertEquals(select.getOption(2), select.getOptionByText("s2o3"));
+    }
+
 }

@@ -5,9 +5,12 @@
     </properties>
 
     <body>
-        <release version="2.6" date="?" description="Bugfixes">
+        <release version="2.6" date="?" description="Bugfixes, add HtmlPage.saveAs()">
+            <action type="add" dev="asashour" issues="2674431">
+                HtmlSelect: add .getOptionByText().
+            </action>
             <action type="add" dev="asashour" issues="2486331">
-                HtmlPage and HtmlImage: add saveAs() method.
+                HtmlPage and HtmlImage: add .saveAs().
             </action>
             <action type="update" dev="asashour">
                 Change default value for "Accept-Language" HTTP header to "en-us".
