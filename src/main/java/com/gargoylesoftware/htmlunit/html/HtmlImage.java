@@ -18,6 +18,7 @@ import static org.apache.commons.httpclient.HttpStatus.SC_MULTIPLE_CHOICES;
 import static org.apache.commons.httpclient.HttpStatus.SC_OK;
 import static org.apache.commons.httpclient.HttpStatus.SC_USE_PROXY;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Iterator;
@@ -27,9 +28,10 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -433,4 +435,13 @@ public class HtmlImage extends ClickableElement {
         return anchor.doClickAction(defaultPage);
     }
 
+    /**
+     * Saves this image as the specified file.
+     * @param file the file to save to
+     * @throws IOException if an IO error occurs
+     */
+    public void saveAs(final File file) throws IOException {
+        final ImageReader reader = getImageReader();
+        ImageIO.write(reader.read(0), reader.getFormatName(), file);
+    }
 }

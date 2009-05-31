@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 
 import org.apache.commons.io.FileUtils;
@@ -156,7 +155,7 @@ class XmlSerializer {
         try {
             final ImageReader reader = image.getImageReader();
             final File file = createFile(src, "." + reader.getFormatName());
-            ImageIO.write(reader.read(0), reader.getFormatName(), file);
+            image.saveAs(file);
             outputDir_.mkdirs();
             map.get("src").setValue(outputDir_.getName() + File.separatorChar + file.getName());
         }
