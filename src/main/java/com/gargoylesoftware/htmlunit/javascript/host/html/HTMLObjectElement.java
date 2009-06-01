@@ -14,6 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObjectImpl;
+
 /**
  * The JavaScript object "HTMLObjectElement".
  *
@@ -23,6 +29,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 public class HTMLObjectElement extends HTMLElement {
 
     private static final long serialVersionUID = -916091257587937486L;
+
+    private SimpleScriptable wrappedActiveX_;
 
     /**
      * Creates an instance.
@@ -69,5 +77,58 @@ public class HTMLObjectElement extends HTMLElement {
      */
     public void jsxSet_border(final String border) {
         getDomNodeOrDie().setAttribute("border", border);
+    }
+
+    /**
+     * Gets the "classid" attribute.
+     * @return the "classid" attribute
+     */
+    public String jsxGet_classid() {
+        String classid = getDomNodeOrDie().getAttribute("classid");
+        if (classid == NOT_FOUND) {
+            classid = "";
+        }
+        return classid;
+    }
+
+    /**
+     * Sets the "classid" attribute.
+     * @param classid the "classid" attribute
+     */
+    public void jsxSet_classid(final String classid) {
+        getDomNodeOrDie().setAttribute("classid", classid);
+        if (classid.indexOf(':') != -1 && getBrowserVersion().isIE()) {
+            try {
+                wrappedActiveX_ = new ActiveXObjectImpl(classid);
+                wrappedActiveX_.setParentScope(getParentScope());
+            }
+            catch (final Exception e) {
+                Context.throwAsScriptRuntimeEx(e);
+            }
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object get(final String name, final Scriptable start) {
+        if (wrappedActiveX_ != null) {
+            return wrappedActiveX_.get(name, start);
+        }
+        return super.get(name, start);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void put(final String name, final Scriptable start, final Object value) {
+        if (wrappedActiveX_ != null) {
+            wrappedActiveX_.put(name, start, value);
+        }
+        else {
+            super.put(name, start, value);
+        }
     }
 }

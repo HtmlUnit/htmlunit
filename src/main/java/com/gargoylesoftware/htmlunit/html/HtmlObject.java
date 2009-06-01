@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLObjectElement;
 
 /**
  * Wrapper for the HTML element "object".
@@ -45,6 +46,10 @@ public class HtmlObject extends ClickableElement {
     HtmlObject(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
+        final DomAttr classid = attributes.get("classid");
+        if (classid != null) {
+            ((HTMLObjectElement) getScriptObject()).jsxSet_classid(classid.getValue());
+        }
     }
 
     /**

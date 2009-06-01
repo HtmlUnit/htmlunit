@@ -1841,6 +1841,9 @@
         <property name="dataFld" notImplemented="true" readable="true" writable="true">
             <browser name="Internet Explorer"/>
         </property>
+        <property name="classid" readable="true" writable="true">
+            <browser name="Internet Explorer"/>
+        </property>
         <property name="dataFormatAs" notImplemented="true" readable="true" writable="true">
             <browser name="Internet Explorer"/>
         </property>

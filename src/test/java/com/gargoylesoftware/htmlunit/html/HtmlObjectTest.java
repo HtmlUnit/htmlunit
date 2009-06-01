@@ -26,8 +26,7 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObjectTest;
 
 /**
  * Tests for {@link HtmlObject}.
@@ -62,15 +61,17 @@ public class HtmlObjectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "[object]", FF = "undefined")
-    @NotYetImplemented(Browser.IE)
+    @Alerts(IE = "false", FF = "undefined")
     public void classid() throws Exception {
+        if (getBrowserVersion().isIE() && !ActiveXObjectTest.isJacobInstalled()) {
+            return;
+        }
         final String html = "<html><head>\n"
             // Window Media Player CLASSID
             + "<object id='wm' classid='clsid:6BF52A52-394A-11D3-B153-00C04F79FAA6'></object>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    alert(document.all.wm.Controls);\n"
+            + "    alert(document.all.wm.fullScreen);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
