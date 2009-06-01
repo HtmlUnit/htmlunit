@@ -18,9 +18,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link HtmlObject}.
@@ -28,13 +35,15 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class HtmlObjectTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testSimpleScriptable() throws Exception {
+    @Alerts(IE = "[object]", FF = "[object HTMLObjectElement]")
+    public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -45,10 +54,38 @@ public class HtmlObjectTest extends WebTestCase {
             + "  <object id='myId'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"[object HTMLObjectElement]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        final HtmlPage page = loadPageWithAlerts(html);
         assertTrue(HtmlObject.class.isInstance(page.getHtmlElementById("myId")));
-        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "[object]", FF = "undefined")
+    @NotYetImplemented(Browser.IE)
+    public void classid() throws Exception {
+        final String html = "<html><head>\n"
+            // Window Media Player CLASSID
+            + "<object id='wm' classid='clsid:6BF52A52-394A-11D3-B153-00C04F79FAA6'></object>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.all.wm.Controls);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final WebClient client = getWebClient();
+        client.setActiveXNative(true);
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(URL_GARGOYLE, html);
+        client.setWebConnection(webConnection);
+
+        client.getPage(URL_GARGOYLE);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 }
