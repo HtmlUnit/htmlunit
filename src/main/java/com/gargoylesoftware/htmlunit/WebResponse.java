@@ -49,7 +49,7 @@ public interface WebResponse {
     /**
      * Returns the URL that was used to load this page.
      * @return the URL that was used to load this page
-     * @deprecated As of 2.6, please use {@link #getRequestSettings()}.getHttpMethod()
+     * @deprecated As of 2.6, please use {@link #getRequestSettings()}.getUrl()
      */
     @Deprecated
     URL getRequestUrl();
