@@ -21,6 +21,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -220,11 +221,8 @@ public class Document extends EventNode {
      * @return an attribute with the specified name
      */
     public Attr jsxFunction_createAttribute(final String attributeName) {
-        final Attr att = new Attr();
-        att.setPrototype(getPrototype(Attr.class));
-        att.setParentScope(getWindow());
-        att.init(attributeName, null);
-        return att;
+        final DomAttr attr = new DomAttr(getPage(), null, attributeName, null);
+        return (Attr) attr.getScriptObject();
     }
 
     /**
