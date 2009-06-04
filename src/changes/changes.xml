@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.saveAs()">
+            <action type="fix" dev="asashour" issues="2800211">
+                JavaScript: fix document.referrer.
+            </action>
             <action type="update" dev="asashour">
                 JavaScript: fix document.createAttribute().
             </action>

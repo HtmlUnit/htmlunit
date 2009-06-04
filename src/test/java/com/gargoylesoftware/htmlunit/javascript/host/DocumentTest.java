@@ -20,12 +20,10 @@ import static org.junit.Assert.fail;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.httpclient.Cookie;
-import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.util.DateUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -1479,13 +1477,13 @@ public class DocumentTest extends WebTestCase {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        final String html
-            = "<html><head><title>First</title></head><body onload='alert(document.referrer);'>\n"
-            + "</form></body></html>";
+        final String firstHtml = "<html><head><title>First</title></head><body>\n"
+            + "<a href='" + URL_SECOND + "'>click me</a></body></html>";
 
-        final List<NameValuePair> responseHeaders =
-            Collections.singletonList(new NameValuePair("referrer", "http://ref"));
-        webConnection.setResponse(URL_FIRST, html, 200, "OK", "text/html", responseHeaders);
+        final String secondHtml = "<html><head><title>Second</title></head><body onload='alert(document.referrer);'>\n"
+            + "</form></body></html>";
+        webConnection.setResponse(URL_FIRST, firstHtml);
+        webConnection.setResponse(URL_SECOND, secondHtml);
         webClient.setWebConnection(webConnection);
 
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -1493,8 +1491,9 @@ public class DocumentTest extends WebTestCase {
 
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
+        firstPage.getAnchors().get(0).click();
 
-        assertEquals(new String[] {"http://ref"}, collectedAlerts);
+        assertEquals(new String[] {URL_FIRST.toExternalForm()}, collectedAlerts);
     }
 
     /**

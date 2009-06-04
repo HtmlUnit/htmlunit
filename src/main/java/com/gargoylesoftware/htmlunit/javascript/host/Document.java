@@ -91,7 +91,7 @@ public class Document extends EventNode {
      * @return the value of the "referrer" property
      */
     public String jsxGet_referrer() {
-        final String referrer = getPage().getWebResponse().getResponseHeaderValue("referrer");
+        final String referrer = getPage().getWebResponse().getRequestSettings().getAdditionalHeaders().get("Referer");
         if (referrer == null) {
             return "";
         }
