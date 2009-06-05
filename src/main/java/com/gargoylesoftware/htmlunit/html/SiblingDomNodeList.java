@@ -21,7 +21,7 @@ import java.util.NoSuchElementException;
 import org.w3c.dom.Node;
 
 /**
- * An implementation of DomNodeList that is much less expensive for iteration. 
+ * An implementation of DomNodeList that is much less expensive for iteration.
  *
  * @version $Revision$
  * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
