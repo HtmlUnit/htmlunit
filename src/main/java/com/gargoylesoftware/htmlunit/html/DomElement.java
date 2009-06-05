@@ -28,7 +28,6 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.w3c.dom.TypeInfo;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -38,6 +37,7 @@ import com.gargoylesoftware.htmlunit.util.MapWrapper;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
  */
 public class DomElement extends DomNamespaceNode implements Element {
 
@@ -362,15 +362,15 @@ public class DomElement extends DomNamespaceNode implements Element {
     /**
      * {@inheritDoc}
      */
-    public NodeList getElementsByTagName(final String tagName) {
-        return new DomNodeList(this, ".//*[local-name()='" + tagName + "']");
+    public DomNodeList<HtmlElement> getElementsByTagName(final String tagName) {
+        return new XPathDomNodeList<HtmlElement>(this, ".//*[local-name()='" + tagName + "']");
     }
 
     /**
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public NodeList getElementsByTagNameNS(final String namespace, final String localName) {
+    public DomNodeList<HtmlElement> getElementsByTagNameNS(final String namespace, final String localName) {
         throw new UnsupportedOperationException("DomElement.getElementsByTagNameNS is not yet implemented.");
     }
 

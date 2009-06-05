@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.saveAs()">
+            <action type="update" dev="asashour" issues="2129288">
+                Extending NodeList to implement List&lt;E extends DomNode&gt;.
+            </action>
             <action type="fix" dev="asashour" issues="2800211">
                 JavaScript: fix document.referrer.
             </action>

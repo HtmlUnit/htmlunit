@@ -116,6 +116,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Dmitri Zoubkov
  * @author Sudhan Moghe
  * @author Ethan Glasser-Camp
+ * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
  */
 public final class HtmlPage extends SgmlPage implements Cloneable {
 
@@ -267,15 +268,15 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     /**
      * {@inheritDoc}
      */
-    public NodeList getElementsByTagName(final String tagName) {
-        return new DomNodeList(this, "//*[local-name()='" + tagName + "']");
+    public DomNodeList<HtmlElement> getElementsByTagName(final String tagName) {
+        return new XPathDomNodeList<HtmlElement>(this, "//*[local-name()='" + tagName + "']");
     }
 
     /**
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public NodeList getElementsByTagNameNS(final String namespaceURI, final String localName) {
+    public DomNodeList<HtmlElement> getElementsByTagNameNS(final String namespaceURI, final String localName) {
         throw new UnsupportedOperationException("HtmlPage.getElementsByTagNameNS is not yet implemented.");
     }
 

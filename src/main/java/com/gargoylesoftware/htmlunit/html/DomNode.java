@@ -25,11 +25,11 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.w3c.dom.UserDataHandler;
 
 import com.gargoylesoftware.htmlunit.IncorrectnessListener;
@@ -59,6 +59,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  * @author Ahmed Ashour
  * @author Rodney Gitzel
  * @author Sudhan Moghe
+ * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
  */
 public abstract class DomNode implements Cloneable, Serializable, Node {
     /** Indicates a block. Will be rendered as line separator (multiple block marks are ignored) */
@@ -369,30 +370,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
-    public NodeList getChildNodes() {
-        return new DomNodeList();
-    }
-
-    private class DomNodeList implements NodeList {
-
-        public int getLength() {
-            int length = 0;
-            for (Node node = firstChild_; node != null; node = node.getNextSibling()) {
-                length++;
-            }
-            return length;
-        }
-
-        public Node item(final int index) {
-            int i = 0;
-            for (Node node = firstChild_; node != null; node = node.getNextSibling()) {
-                if (i == index) {
-                    return node;
-                }
-                i++;
-            }
-            return null;
-        }
+    public DomNodeList<DomNode> getChildNodes() {
+        return new SiblingDomNodeList(firstChild_);
     }
 
     /**
