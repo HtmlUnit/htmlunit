@@ -54,4 +54,29 @@ public class HtmlSelect2Test extends WebTestCase {
             + "</body></html>";
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "two", "" }, FF = { "two", "One" })
+    public void value2() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var select = document.getElementById('mySelect');\n"
+            + "    alert(select.value);\n"
+            + "    select.value = 'One';\n"
+            + "    alert(select.value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<body onload='test()'>\n"
+            + "  <select id='mySelect'>\n"
+            + "    <option>One</option>\n"
+            + "    <option selected value='two'>Two</option>\n"
+            + "  </select>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
 }
