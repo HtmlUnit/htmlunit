@@ -252,7 +252,12 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
             return setSelectedAttribute(getOptionByValue(optionValue), isSelected);
         }
         catch (final ElementNotFoundException e) {
-            throw new IllegalArgumentException("No option found with value: " + optionValue);
+            if (getPage().getWebClient().getBrowserVersion().isIE()) {
+                for (final HtmlOption o : getSelectedOptions()) {
+                    o.setSelected(false);
+                }
+            }
+            return getPage();
         }
     }
 
