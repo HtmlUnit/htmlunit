@@ -97,7 +97,9 @@ public class HTMLObjectElement extends HTMLElement {
      */
     public void jsxSet_classid(final String classid) {
         getDomNodeOrDie().setAttribute("classid", classid);
-        if (classid.indexOf(':') != -1 && getBrowserVersion().isIE()) {
+        if (classid.indexOf(':') != -1 && getBrowserVersion().isIE()
+                && getWindow().getWebWindow().getWebClient().isActiveXNative()
+                && System.getProperty("os.name").contains("Windows")) {
             try {
                 wrappedActiveX_ = new ActiveXObjectImpl(classid);
                 wrappedActiveX_.setParentScope(getParentScope());
