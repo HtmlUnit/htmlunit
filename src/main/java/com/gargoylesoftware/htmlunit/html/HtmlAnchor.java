@@ -73,45 +73,38 @@ public class HtmlAnchor extends ClickableElement {
      */
     protected Page doClickAction(final Page defaultPage, final String hrefSuffix) throws IOException {
         final String href = getHrefAttribute() + hrefSuffix;
-
+        if (mainLog_.isDebugEnabled()) {
+            final String w = defaultPage.getEnclosingWindow().getName();
+            mainLog_.debug("do click action in window '" + w + "', using href '" + href + "'");
+        }
+        if (href.length() == 0) {
+            return defaultPage;
+        }
+        final HtmlPage page = (HtmlPage) getPage();
+        if (TextUtil.startsWithIgnoreCase(href, JAVASCRIPT_PREFIX)) {
+            return page.executeJavaScriptIfPossible(href, "javascript url", getStartLineNumber()).getNewPage();
+        }
+        final URL url = page.getFullyQualifiedUrl(href);
+        final WebRequestSettings wrs = new WebRequestSettings(url);
+        wrs.setAdditionalHeader("Referer", page.getWebResponse().getRequestSettings().getUrl().toExternalForm());
         if (mainLog_.isDebugEnabled()) {
             mainLog_.debug(
-                "do click action in window '"
-                        + defaultPage.getEnclosingWindow().getName()
-                        + "', using href '" + href + "'");
+                    "Getting page for " + url.toExternalForm()
+                    + ", derived from href '" + href
+                    + "', using the originating URL "
+                    + page.getWebResponse().getRequestSettings().getUrl());
         }
-
-        if (href.length() > 0 && !href.startsWith("#")) {
-            final HtmlPage page = (HtmlPage) getPage();
-            if (TextUtil.startsWithIgnoreCase(href, JAVASCRIPT_PREFIX)) {
-                return page.executeJavaScriptIfPossible(
-                    href, "javascript url", getStartLineNumber()).getNewPage();
-            }
-            final URL url = page.getFullyQualifiedUrl(href);
-            final WebRequestSettings settings = new WebRequestSettings(url);
-            settings.setAdditionalHeader("Referer", page.getWebResponse().getRequestSettings().getUrl()
-                    .toExternalForm());
-            if (mainLog_.isDebugEnabled()) {
-                mainLog_.debug(
-                        "Getting page for " + url.toExternalForm()
-                        + ", derived from href '" + href
-                        + "', using the originating URL "
-                        + page.getWebResponse().getRequestSettings().getUrl());
-            }
-            return page.getWebClient().getPage(
-                    page.getEnclosingWindow(),
-                    page.getResolvedTarget(getTargetAttribute()),
-                    settings);
-        }
-        return defaultPage;
+        return page.getWebClient().getPage(
+                page.getEnclosingWindow(),
+                page.getResolvedTarget(getTargetAttribute()),
+                wrs);
     }
 
     /**
-     * This method will be called if there either wasn't an onclick handler or
-     * there was but the result of that handler was true. This is the default
-     * behavior of clicking the element. For this anchor element, the default
-     * behavior is to open the HREF page, or execute the HREF if it is a
-     * javascript: URL.
+     * This method will be called if there either wasn't an <tt>onclick</tt> handler, or
+     * there was but the result of that handler was <tt>true</tt>. This is the default
+     * behavior of clicking the element. For this anchor element, the default behavior is
+     * to open the HREF page, or execute the HREF if it is a <tt>javascript:</tt> URL.
      *
      * @param defaultPage the default page to return if the action does not load a new page
      * @return the page that is currently loaded after execution of this method
@@ -119,6 +112,13 @@ public class HtmlAnchor extends ClickableElement {
      */
     @Override
     protected Page doClickAction(final Page defaultPage) throws IOException {
+        final SgmlPage page = getPage();
+        final boolean onClickLoadedNewPageInCurrentWindow =
+            defaultPage != page
+            && defaultPage.getEnclosingWindow() == page.getEnclosingWindow();
+        if (onClickLoadedNewPageInCurrentWindow) {
+            return defaultPage;
+        }
         return doClickAction(defaultPage, "");
     }
 

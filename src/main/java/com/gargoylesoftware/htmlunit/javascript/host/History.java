@@ -14,6 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.io.IOException;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -22,6 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Chris Erskine
+ * @author Daniel Gredler
  */
 public class History extends SimpleScriptable {
 
@@ -30,37 +36,57 @@ public class History extends SimpleScriptable {
     /**
      * Creates an instance. JavaScript objects must have a default constructor.
      */
-    public History() { }
+    public History() {
+        // Empty.
+    }
 
     /**
-     * Returns the "length" property. Currently hardcoded to return 0.
+     * Returns the "length" property.
      * @return the "length" property
      */
     public int jsxGet_length() {
-        getLog().debug("javascript: history.length not implemented yet - returning 0");
-        return 0;
+        final WebWindow w = getWindow().getWebWindow();
+        return w.getHistory().getLength();
     }
 
     /**
-     * JavaScript function "back". Currently not implemented
+     * JavaScript function "back".
      */
     public void jsxFunction_back() {
-        getLog().debug("javascript: history.back() not implemented yet");
+        final WebWindow w = getWindow().getWebWindow();
+        try {
+            w.getHistory().back();
+        }
+        catch (final IOException e) {
+            Context.throwAsScriptRuntimeEx(e);
+        }
     }
 
     /**
-     * JavaScript function "forward". Currently not implemented
+     * JavaScript function "forward".
      */
     public void jsxFunction_forward() {
-        getLog().debug("javascript: history.forward() not implemented yet");
+        final WebWindow w = getWindow().getWebWindow();
+        try {
+            w.getHistory().forward();
+        }
+        catch (final IOException e) {
+            Context.throwAsScriptRuntimeEx(e);
+        }
     }
 
     /**
-     * JavaScript function "go". Currently not implemented
-     * @param relativeUrl the relative URL
+     * JavaScript function "go".
+     * @param relativeIndex the relative index
      */
-    public void jsxFunction_go(final String relativeUrl) {
-        getLog().debug("javascript: history.go(String) not implemented yet");
+    public void jsxFunction_go(final int relativeIndex) {
+        final WebWindow w = getWindow().getWebWindow();
+        try {
+            w.getHistory().go(relativeIndex);
+        }
+        catch (final IOException e) {
+            Context.throwAsScriptRuntimeEx(e);
+        }
     }
-}
 
+}

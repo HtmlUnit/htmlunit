@@ -141,10 +141,9 @@ public class HTMLAnchorElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void onClickAnchorHRef() throws Exception {
+    public void onClickAnchorHref() throws Exception {
         final String html
-            = "<html>\n"
-            + "<body>\n"
+            = "<html><body>\n"
             + "<a href='#' onclick='document.form1.submit()'>link 1</a>\n"
             + "<form name='form1' action='foo.html' method='post'>\n"
             + "<input name='testText'>\n"
@@ -197,7 +196,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void thisInJavascriptHRef() throws Exception {
+    public void thisInJavascriptHref() throws Exception {
         final String html
             = "<html>\n"
             + "<body>\n"

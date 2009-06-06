@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.History;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -106,16 +107,16 @@ public class Popup extends SimpleScriptable {
 
 /**
  * Simple implementation of {@link WebWindow} to allow the construction of the {@link HtmlPage} associated
- * with a {@link Popup}
+ * with a {@link Popup}.
  */
 class PopupPseudoWebWindow implements WebWindow {
+
     private final WebClient webClient_;
     private Object scriptObject_;
     private Page enclosedPage_;
 
     PopupPseudoWebWindow(final WebClient webClient) {
         webClient_ = webClient;
-
         webClient_.initialize(this);
     }
 
@@ -166,6 +167,13 @@ class PopupPseudoWebWindow implements WebWindow {
      */
     public WebClient getWebClient() {
         return webClient_;
+    }
+
+    /**
+     * @see com.gargoylesoftware.htmlunit.WebWindow#getHistory()
+     */
+    public History getHistory() {
+        throw new RuntimeException("Not supported");
     }
 
     /**

@@ -79,6 +79,13 @@ public interface WebWindow {
     WebClient getWebClient();
 
     /**
+     * Returns this window's navigation history.
+     *
+     * @return this window's navigation history
+     */
+    History getHistory();
+
+    /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * Sets the JavaScript object that corresponds to this element. This is not guaranteed

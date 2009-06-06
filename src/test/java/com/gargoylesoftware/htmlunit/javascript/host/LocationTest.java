@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static junit.framework.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 
 import java.net.URL;
@@ -30,6 +31,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -530,10 +532,32 @@ public class LocationTest extends WebTestCase {
     }
 
     /**
-     * Regression test for http://sourceforge.net/tracker/index.php?func=detail&aid=1289060&group_id=47038&atid=448266.
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "c" })
+    public void testLocationWithTarget() throws Exception {
+
+        final WebClient client = getWebClient();
+        final List<String> alerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(alerts));
+
+        final URL url = getClass().getResource("LocationTest_locationWithTarget_a.html");
+        assertNotNull(url);
+
+        final HtmlPage a = client.getPage(url);
+        final HtmlPage c = (HtmlPage) a.getFrameByName("c").getEnclosedPage();
+        c.getElementById("anchor").click();
+        assertEquals(getExpectedAlerts(), alerts);
+    }
+
+    /**
+     * Regression test for http://sourceforge.net/tracker/index.php?func=detail&aid=1289060&group_id=47038&atid=448266.
+     * TODO: Daniel Gredler: Fix incorrect URL being passed into getPage() for anchors with target!
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
     public void testReplaceWithFrame() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();

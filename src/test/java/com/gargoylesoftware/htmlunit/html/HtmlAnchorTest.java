@@ -18,6 +18,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -78,20 +79,18 @@ public class HtmlAnchorTest extends WebTestCase {
      */
     @Test
     public void testClickAnchorName() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<a href='#clickedAnchor' id='a1'>link to foo1</a>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(html);
 
-        final HtmlAnchor anchor = page.getHtmlElementById("a1");
+        final MockWebConnection conn = (MockWebConnection) page.getWebClient().getWebConnection();
+        assertEquals(1, conn.getRequestCount());
 
-        // Test that the correct value is being passed back up to the server
-        final HtmlPage secondPage = anchor.click();
-
-        // The URL shouldn't contain the anchor since isn't sent to the server
-        assertEquals("url", URL_GARGOYLE, secondPage.getWebResponse().getRequestSettings().getUrl());
+        final HtmlPage secondPage = page.getElementById("a1").click();
+        assertEquals(1, conn.getRequestCount()); // no second server hit
         assertSame(page, secondPage);
     }
 
@@ -484,6 +483,18 @@ public class HtmlAnchorTest extends WebTestCase {
         loadPage(BrowserVersion.INTERNET_EXPLORER_7, html, actual);
         final String[] expected = new String[] {"<A id=a href=\"#x\">foo</A>"};
         assertEquals(expected, actual);
+    }
+
+    /**
+     * Test for bug 2794667.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testHashAnchor() throws Exception {
+        final String html = "<html><body><a id='a' href='#a'>a</a></body></html>";
+        HtmlPage page = loadPage(html);
+        page = page.getElementById("a").click();
+        assertEquals(new URL(URL_GARGOYLE, "#a"), page.getWebResponse().getRequestSettings().getUrl());
     }
 
 }

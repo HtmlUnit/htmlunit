@@ -43,6 +43,7 @@ public abstract class WebWindowImpl implements WebWindow {
     private JavaScriptJobManager jobManager_;
     private List<WebWindowImpl> childWindows_ = new ArrayList<WebWindowImpl>();
     private String name_ = "";
+    private History history_ = new History(this);
 
     /**
      * Never call this, used for Serialization.
@@ -95,6 +96,7 @@ public abstract class WebWindowImpl implements WebWindow {
         }
         destroyChildren();
         enclosedPage_ = page;
+        history_.addPage(page);
         if (isJavaScriptInitializationNeeded()) {
             webClient_.initialize(this);
         }
@@ -177,4 +179,13 @@ public abstract class WebWindowImpl implements WebWindow {
     public void setName(final String name) {
         name_ = name;
     }
+
+    /**
+     * Returns this window's navigation history.
+     * @return this window's navigation history
+     */
+    public History getHistory() {
+        return history_;
+    }
+
 }

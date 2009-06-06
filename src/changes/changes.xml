@@ -6,8 +6,14 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.saveAs()">
+            <action type="fix" dev="sdanig" issues="2794667">
+                Update page URL when navigating to a local anchor.
+            </action>
+            <action type="fix" dev="sdanig" issues="1337174">
+                JavaScript: implement placeholder functions history.back(), history.forward() and history.go().
+            </action>
             <action type="fix" dev="asashour">
-                JavaScript: fix setting script.value.
+                JavaScript: fix setting select.value.
             </action>
             <action type="update" dev="asashour" issues="2129288">
                 Extending NodeList to implement List&lt;E extends DomNode&gt;.

@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,15 +25,17 @@ import org.apache.commons.lang.mutable.MutableInt;
 import org.junit.Test;
 
 import com.gargoylesoftware.base.testing.EventCatcher;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 
 /**
- * Tests for {@link WebClient}.
+ * Tests for {@link TopLevelWindow}.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
+ * @author Daniel Gredler
  */
 public class TopLevelWindowTest extends WebTestCase {
 
@@ -135,6 +138,107 @@ public class TopLevelWindowTest extends WebTestCase {
 
         client.getPage(URL_FIRST);
         assertEquals(2, jobCount.intValue());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void history() throws Exception {
+
+        final WebClient client = new WebClient();
+        final TopLevelWindow window = (TopLevelWindow) client.getCurrentWindow();
+        final History history = window.getHistory();
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, "<html><body><a name='a' href='" + URL_SECOND + "'>foo</a>"
+            + "<a name='b' href='#b'>bar</a></body></html>");
+        conn.setResponse(URL_SECOND, "<html><body><a name='a' href='" + URL_THIRD + "'>foo</a></body></html>");
+        conn.setResponse(URL_THIRD, "<html><body><a name='a' href='" + URL_FIRST + "'>foo</a></body></html>");
+        client.setWebConnection(conn);
+
+        assertEquals(0, history.getLength());
+        assertEquals(-1, history.getIndex());
+
+        // Load the first page.
+        HtmlPage page = client.getPage(URL_FIRST);
+        assertEquals(1, history.getLength());
+        assertEquals(0, history.getIndex());
+        assertNull(history.getUrl(-1));
+        assertEquals(URL_FIRST, history.getUrl(0));
+        assertEquals(URL_FIRST, window.getEnclosedPage().getWebResponse().getRequestSettings().getUrl());
+        assertNull(history.getUrl(1));
+
+        // Go to the second page.
+        page = page.getAnchorByName("a").click();
+        assertEquals(2, history.getLength());
+        assertEquals(1, history.getIndex());
+        assertNull(history.getUrl(-1));
+        assertEquals(URL_FIRST, history.getUrl(0));
+        assertEquals(URL_SECOND, history.getUrl(1));
+        assertEquals(URL_SECOND, window.getEnclosedPage().getWebResponse().getRequestSettings().getUrl());
+        assertNull(history.getUrl(2));
+
+        // Go to the third page.
+        page = page.getAnchorByName("a").click();
+        assertEquals(3, history.getLength());
+        assertEquals(2, history.getIndex());
+        assertNull(history.getUrl(-1));
+        assertEquals(URL_FIRST, history.getUrl(0));
+        assertEquals(URL_SECOND, history.getUrl(1));
+        assertEquals(URL_THIRD, history.getUrl(2));
+        assertEquals(URL_THIRD, window.getEnclosedPage().getWebResponse().getRequestSettings().getUrl());
+        assertNull(history.getUrl(3));
+
+        // Cycle around back to the first page.
+        page = page.getAnchorByName("a").click();
+        assertEquals(4, history.getLength());
+        assertEquals(3, history.getIndex());
+        assertNull(history.getUrl(-1));
+        assertEquals(URL_FIRST, history.getUrl(0));
+        assertEquals(URL_SECOND, history.getUrl(1));
+        assertEquals(URL_THIRD, history.getUrl(2));
+        assertEquals(URL_FIRST, history.getUrl(3));
+        assertEquals(URL_FIRST, window.getEnclosedPage().getWebResponse().getRequestSettings().getUrl());
+        assertNull(history.getUrl(4));
+
+        // Go to a hash on the current page.
+        final URL firstUrlWithHash = new URL(URL_FIRST, "#b");
+        page = page.getAnchorByName("b").click();
+        assertEquals(5, history.getLength());
+        assertEquals(4, history.getIndex());
+        assertNull(history.getUrl(-1));
+        assertEquals(URL_FIRST, history.getUrl(0));
+        assertEquals(URL_SECOND, history.getUrl(1));
+        assertEquals(URL_THIRD, history.getUrl(2));
+        assertEquals(URL_FIRST, history.getUrl(3));
+        assertEquals(firstUrlWithHash, history.getUrl(4));
+        assertEquals(firstUrlWithHash, window.getEnclosedPage().getWebResponse().getRequestSettings().getUrl());
+        assertNull(history.getUrl(5));
+
+        history.back().back();
+        assertEquals(5, history.getLength());
+        assertEquals(2, history.getIndex());
+        assertNull(history.getUrl(-1));
+        assertEquals(URL_FIRST, history.getUrl(0));
+        assertEquals(URL_SECOND, history.getUrl(1));
+        assertEquals(URL_THIRD, history.getUrl(2));
+        assertEquals(URL_FIRST, history.getUrl(3));
+        assertEquals(firstUrlWithHash, history.getUrl(4));
+        assertEquals(URL_THIRD, window.getEnclosedPage().getWebResponse().getRequestSettings().getUrl());
+        assertNull(history.getUrl(5));
+
+        history.forward();
+        assertEquals(5, history.getLength());
+        assertEquals(3, history.getIndex());
+        assertNull(history.getUrl(-1));
+        assertEquals(URL_FIRST, history.getUrl(0));
+        assertEquals(URL_SECOND, history.getUrl(1));
+        assertEquals(URL_THIRD, history.getUrl(2));
+        assertEquals(URL_FIRST, history.getUrl(3));
+        assertEquals(firstUrlWithHash, history.getUrl(4));
+        assertEquals(URL_FIRST, window.getEnclosedPage().getWebResponse().getRequestSettings().getUrl());
+        assertNull(history.getUrl(5));
     }
 
 }
