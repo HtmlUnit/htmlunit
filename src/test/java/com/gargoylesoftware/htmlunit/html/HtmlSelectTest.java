@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
-import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -294,20 +293,12 @@ public class HtmlSelectTest extends WebTestCase {
             + "</select>\n"
             + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
+
         final HtmlPage page = loadPage(htmlContent);
-
         final HtmlForm form = page.getHtmlElementById("form1");
-
         final HtmlSelect select = form.getSelectByName("select1");
 
-        // Change the value
-        try {
-            select.setSelectedAttribute("missingOption", true);
-            fail("Expected IllegalArgumentException");
-        }
-        catch (final IllegalArgumentException e) {
-            // Expected path
-        }
+        select.setSelectedAttribute("missingOption", true);
     }
 
     /**
