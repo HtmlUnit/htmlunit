@@ -14,13 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link HtmlTableCell}.
@@ -29,13 +28,15 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class HtmlTableCellTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testSimpleScriptable() throws Exception {
+    @Alerts(FF = { "[object HTMLTableCellElement]", "[object HTMLTableCellElement]" }, IE = { "[object]", "[object]" })
+    public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -52,11 +53,8 @@ public class HtmlTableCellTest extends WebTestCase {
             + "  </table>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"[object HTMLTableCellElement]", "[object HTMLTableCellElement]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        final HtmlPage page = loadPageWithAlerts(html);
         assertTrue(HtmlTableCell.class.isInstance(page.getHtmlElementById("myId1")));
         assertTrue(HtmlTableCell.class.isInstance(page.getHtmlElementById("myId2")));
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 }
