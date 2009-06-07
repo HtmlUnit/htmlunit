@@ -145,7 +145,6 @@ public class TopLevelWindowTest extends WebTestCase {
      */
     @Test
     public void history() throws Exception {
-
         final WebClient client = new WebClient();
         final TopLevelWindow window = (TopLevelWindow) client.getCurrentWindow();
         final History history = window.getHistory();

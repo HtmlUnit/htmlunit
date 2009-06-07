@@ -537,7 +537,6 @@ public class LocationTest extends WebTestCase {
     @Test
     @Alerts({ "c" })
     public void testLocationWithTarget() throws Exception {
-
         final WebClient client = getWebClient();
         final List<String> alerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(alerts));

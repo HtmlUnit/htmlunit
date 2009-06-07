@@ -53,7 +53,6 @@ public class HistoryTest extends WebServerTestCase {
      */
     @Test
     public void backAndForward() throws Exception {
-
         final WebClient client = getWebClient();
         final TopLevelWindow window = (TopLevelWindow) client.getCurrentWindow();
         final History history = window.getHistory();
@@ -114,7 +113,6 @@ public class HistoryTest extends WebServerTestCase {
      */
     @Test
     public void go() throws Exception {
-
         final WebClient client = getWebClient();
         final TopLevelWindow window = (TopLevelWindow) client.getCurrentWindow();
         final History history = window.getHistory();
@@ -171,7 +169,6 @@ public class HistoryTest extends WebServerTestCase {
     @Test
     @Alerts({ "1", "2", "3" })
     public void length() throws Exception {
-
         final WebClient client = getWebClient();
         final List<String> alerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(alerts));
