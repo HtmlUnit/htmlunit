@@ -616,7 +616,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      *
      * @param relativeUrl the relative URL
      * @return the fully-qualified URL for the specified relative URL
-     * @exception MalformedURLException If an error occurred when creating a URL object
+     * @exception MalformedURLException if an error occurred when creating a URL object
      */
     public URL getFullyQualifiedUrl(String relativeUrl) throws MalformedURLException {
         URL baseUrl;
