@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.apache.commons.lang.StringUtils.right;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
@@ -35,6 +36,7 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebWindow;
 
 /**
  * Unit tests for {@link HtmlAnchor}.
@@ -495,6 +497,41 @@ public class HtmlAnchorTest extends WebTestCase {
         HtmlPage page = loadPage(html);
         page = page.getElementById("a").click();
         assertEquals(new URL(URL_GARGOYLE, "#a"), page.getWebResponse().getRequestSettings().getUrl());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testTargetWithRelativeUrl() throws Exception {
+        final WebClient client = new WebClient();
+
+        final URL url = getClass().getResource("HtmlAnchorTest_targetWithRelativeUrl_a.html");
+        assertNotNull(url);
+
+        final HtmlPage page = client.getPage(url);
+        final WebWindow a = page.getEnclosingWindow();
+        final WebWindow b = page.getFrameByName("b");
+        final WebWindow c = page.getFrameByName("c");
+
+        assertEquals("a.html", right(getUrl(a), 6));
+        assertEquals("b.html", right(getUrl(b), 6));
+        assertEquals("c.html", right(getUrl(c), 6));
+
+        ((HtmlPage) c.getEnclosedPage()).getAnchorByHref("#foo").click();
+
+        assertEquals("a.html", right(getUrl(a), 6));
+        assertEquals("c.html#foo", right(getUrl(b), 10));
+        assertEquals("c.html", right(getUrl(c), 6));
+    }
+
+    /**
+     * Returns the URL of the page loaded in the specified window.
+     * @param w the window
+     * @return the URL of the page loaded in the specified window
+     */
+    private String getUrl(final WebWindow w) {
+        return w.getEnclosedPage().getWebResponse().getRequestSettings().getUrl().toString();
     }
 
 }

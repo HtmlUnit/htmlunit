@@ -31,7 +31,6 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -552,11 +551,9 @@ public class LocationTest extends WebTestCase {
 
     /**
      * Regression test for http://sourceforge.net/tracker/index.php?func=detail&aid=1289060&group_id=47038&atid=448266.
-     * TODO: Daniel Gredler: Fix incorrect URL being passed into getPage() for anchors with target!
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void testReplaceWithFrame() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
@@ -571,7 +568,7 @@ public class LocationTest extends WebTestCase {
         final String frameMenu =
             "<html><body>\n"
             + "<a href='#' id='myLink' target='content' "
-            + "onclick='parent.frames.content.location.replace(\"test.html\");'>Test2</a>\n"
+            + "onclick='parent.frames.content.location.replace(\"test.html\");return false;'>Test2</a>\n"
             + "</body></html>";
         final String frameContent = "<html><head><title>Start content</title></head><body></body></html>";
         final String frameTest = "<html><head><title>Test</title></head><body></body></html>";

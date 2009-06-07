@@ -166,7 +166,7 @@ public class HtmlAreaTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testThisInJavascriptHRef() throws Exception {
+    public void testThisInJavascriptHref() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body><map>\n"
             + "<area href='javascript:alert(this == window)' id='a2' coords='0,0,10,10'/>\n"
