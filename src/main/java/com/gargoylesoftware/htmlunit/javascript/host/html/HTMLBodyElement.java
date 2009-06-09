@@ -181,6 +181,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @return the value of the <tt>text</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534677.aspx">MSDN Documentation</a>
      */
+    @Override
     public String jsxGet_text() {
         String text = getDomNodeOrDie().getAttribute("text");
         if (text == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().isFirefox()) {
