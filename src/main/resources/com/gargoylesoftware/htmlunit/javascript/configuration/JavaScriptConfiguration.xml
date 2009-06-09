@@ -26,7 +26,7 @@
         <property name="expando" readable="true" writable="false">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="isId" notImplemented="true" readable="true" writable="false">
+        <property name="isId" readable="true" writable="false">
             <browser name="Firefox" min-version="3"/>
         </property>
         <property name="name" readable="true" writable="false"/>

@@ -97,6 +97,14 @@ public class Attr extends Node {
     }
 
     /**
+     * Returns <tt>true</tt> if this attribute is an ID.
+     * @return <tt>true</tt> if this attribute is an ID
+     */
+    public boolean jsxGet_isId() {
+        return "id".equals(name_);
+    }
+
+    /**
      * Returns <tt>true</tt> if arbitrary properties can be added to this attribute.
      * @return <tt>true</tt> if arbitrary properties can be added to this attribute
      */

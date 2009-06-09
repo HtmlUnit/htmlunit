@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Daniel Gredler
  */
 @RunWith(BrowserRunner.class)
 public class AttrTest extends WebTestCase {
@@ -87,4 +88,28 @@ public class AttrTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "undefined", "undefined", "undefined" },
+            FF2 = { "undefined", "undefined", "undefined" },
+            FF3 = { "true", "false", "false" })
+    public void isId() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var d = document.getElementById('d');\n"
+            + "  alert(d.getAttributeNode('id').isId);\n"
+            + "  alert(d.getAttributeNode('name').isId);\n"
+            + "  alert(d.getAttributeNode('width').isId);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<div iD='d' name='d' width='40'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
 }
