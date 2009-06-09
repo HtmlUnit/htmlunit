@@ -100,14 +100,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533070.aspx">MSDN Documentation</a>
      */
     public void jsxSet_aLink(final String aLink) {
-        final String s;
-        if (isColorHexadecimal(aLink)) {
-            s = aLink;
-        }
-        else {
-            s = "#000000";
-        }
-        this.getDomNodeOrDie().setAttribute("aLink", s);
+        setColorAttribute("aLink", aLink);
     }
 
     /**
@@ -158,14 +151,89 @@ public class HTMLBodyElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     public void jsxSet_bgColor(final String bgColor) {
+        setColorAttribute("bgColor", bgColor);
+    }
+
+    /**
+     * Returns the value of the <tt>link</tt> attribute.
+     * @return the value of the <tt>link</tt> attribute
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534119.aspx">MSDN Documentation</a>
+     */
+    public String jsxGet_link() {
+        String link = getDomNodeOrDie().getAttribute("link");
+        if (link == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().isFirefox()) {
+            link = "#0000ee";
+        }
+        return link;
+    }
+
+    /**
+     * Sets the value of the <tt>link</tt> attribute.
+     * @param link the value of the <tt>link</tt> attribute
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534119.aspx">MSDN Documentation</a>
+     */
+    public void jsxSet_link(final String link) {
+        setColorAttribute("link", link);
+    }
+
+    /**
+     * Returns the value of the <tt>text</tt> attribute.
+     * @return the value of the <tt>text</tt> attribute
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534677.aspx">MSDN Documentation</a>
+     */
+    public String jsxGet_text() {
+        String text = getDomNodeOrDie().getAttribute("text");
+        if (text == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().isFirefox()) {
+            text = "#000000";
+        }
+        return text;
+    }
+
+    /**
+     * Sets the value of the <tt>text</tt> attribute.
+     * @param text the value of the <tt>text</tt> attribute
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534677.aspx">MSDN Documentation</a>
+     */
+    public void jsxSet_text(final String text) {
+        setColorAttribute("text", text);
+    }
+
+    /**
+     * Returns the value of the <tt>vLink</tt> attribute.
+     * @return the value of the <tt>vLink</tt> attribute
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534677.aspx">MSDN Documentation</a>
+     */
+    public String jsxGet_vLink() {
+        String vLink = getDomNodeOrDie().getAttribute("vLink");
+        if (vLink == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().isFirefox()) {
+            vLink = "#000000";
+        }
+        return vLink;
+    }
+
+    /**
+     * Sets the value of the <tt>vLink</tt> attribute.
+     * @param vLink the value of the <tt>vLink</tt> attribute
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534677.aspx">MSDN Documentation</a>
+     */
+    public void jsxSet_vLink(final String vLink) {
+        setColorAttribute("vLink", vLink);
+    }
+
+    /**
+     * Sets the specified color attribute to the specified value.
+     * @param name the color attribute's name
+     * @param value the color attribute's value
+     */
+    private void setColorAttribute(final String name, final String value) {
         final String s;
-        if (isColorHexadecimal(bgColor)) {
-            s = bgColor;
+        if (isColorHexadecimal(value)) {
+            s = value;
         }
         else {
             s = "#000000";
         }
-        this.getDomNodeOrDie().setAttribute("bgColor", s);
+        this.getDomNodeOrDie().setAttribute(name, s);
     }
 
     /**
@@ -173,7 +241,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @param s the string to check
      * @return <tt>true</tt> if the specified string is an RGB in hexadecimal notation
      */
-    public static boolean isColorHexadecimal(final String s) {
+    private static boolean isColorHexadecimal(final String s) {
         return s.toLowerCase().matches("#([0-9a-f]{6})");
     }
 

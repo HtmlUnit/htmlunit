@@ -202,4 +202,82 @@ public class HTMLBodyElementTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = {"#0000ee", "#0000aa", "#000000" },
+            IE = {"", "#0000aa", "#000000" })
+    public void link() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var b = document.getElementById('body');\n"
+            + "        alert(b.link);\n"
+            + "        b.link = '#0000aa';\n"
+            + "        alert(b.link);\n"
+            + "        b.link = 'x';\n"
+            + "        alert(b.link);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body' onload='test()'>blah</body>\n"
+            + "</html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = {"#000000", "#0000aa", "#000000" },
+            IE = {"", "#0000aa", "#000000" })
+    public void text() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var b = document.getElementById('body');\n"
+            + "        alert(b.text);\n"
+            + "        b.text = '#0000aa';\n"
+            + "        alert(b.text);\n"
+            + "        b.text = 'x';\n"
+            + "        alert(b.text);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body' onload='test()'>blah</body>\n"
+            + "</html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = {"#000000", "#0000aa", "#000000" },
+            IE = {"", "#0000aa", "#000000" })
+    public void vLink() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var b = document.getElementById('body');\n"
+            + "        alert(b.vLink);\n"
+            + "        b.vLink = '#0000aa';\n"
+            + "        alert(b.vLink);\n"
+            + "        b.vLink = 'x';\n"
+            + "        alert(b.vLink);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body' onload='test()'>blah</body>\n"
+            + "</html>";
+        loadPageWithAlerts(html);
+    }
+
 }
