@@ -7,7 +7,10 @@
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.saveAs()">
             <action type="fix" dev="sdanig">
-                JavaScript: add attr.isId (Firefox 3 only).
+                JavaScript: add support for body.aLink, body.background and body.bgColor attributes.
+            </action>
+            <action type="fix" dev="sdanig">
+                JavaScript: add support for attr.isId attribute (Firefox 3 only).
             </action>
             <action type="fix" dev="sdanig" issues="2794667">
                 Update page URL when navigating to a local anchor.

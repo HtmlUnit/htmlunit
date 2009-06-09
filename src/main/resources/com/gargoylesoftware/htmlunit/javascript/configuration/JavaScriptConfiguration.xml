@@ -1145,6 +1145,9 @@
 
     <class name="HTMLBodyElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBody">
+        <property name="aLink" readable="true" writable="true"/>
+        <property name="background" readable="true" writable="true"/>
+        <property name="bgColor" readable="true" writable="true"/>
     </class>
 
     <class name="HTMLBRElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBRElement"

@@ -123,4 +123,83 @@ public class HTMLBodyElementTest extends WebTestCase {
             + "</html>";
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = {"#ee0000", "#0000aa", "#000000" },
+            IE = {"", "#0000aa", "#000000" })
+    public void aLink() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var b = document.getElementById('body');\n"
+            + "        alert(b.aLink);\n"
+            + "        b.aLink = '#0000aa';\n"
+            + "        alert(b.aLink);\n"
+            + "        b.aLink = 'x';\n"
+            + "        alert(b.aLink);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body' onload='test()'>blah</body>\n"
+            + "</html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = {"", "http://www.foo.com/blah.gif", "http://www.gargoylesoftware.com/blah.gif" },
+            IE = {"", "http://www.foo.com/blah.gif", "blah.gif" })
+    public void background() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var b = document.getElementById('body');\n"
+            + "        alert(b.background);\n"
+            + "        b.background = 'http://www.foo.com/blah.gif';\n"
+            + "        alert(b.background);\n"
+            + "        b.background = 'blah.gif';\n"
+            + "        alert(b.background);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body' onload='test()'>blah</body>\n"
+            + "</html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = {"#ffffff", "#0000aa", "#000000" },
+            IE = {"", "#0000aa", "#000000" })
+    public void bgColor() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var b = document.getElementById('body');\n"
+            + "        alert(b.bgColor);\n"
+            + "        b.bgColor = '#0000aa';\n"
+            + "        alert(b.bgColor);\n"
+            + "        b.bgColor = 'x';\n"
+            + "        alert(b.bgColor);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body' onload='test()'>blah</body>\n"
+            + "</html>";
+        loadPageWithAlerts(html);
+    }
+
 }
