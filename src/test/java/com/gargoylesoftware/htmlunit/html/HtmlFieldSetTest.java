@@ -14,43 +14,93 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link HtmlFieldSet}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Daniel Gredler
  */
+@RunWith(BrowserRunner.class)
 public class HtmlFieldSetTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(IE = { "[object]", "[object]" },
+        FF = { "[object HTMLFieldSetElement]", "[object HTMLFormElement]" })
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html
+            = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
+            + "    var fs = document.getElementById('fs');\n"
+            + "    alert(fs);\n"
+            + "    alert(fs.form);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
-            + "  <fieldset id='myId'>\n"
+            + "  <form>\n"
+            + "    <fieldset id='fs'>\n"
+            + "      <legend>Legend</legend>\n"
+            + "    </fieldset>\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPageWithAlerts(html);
+        assertTrue(HtmlFieldSet.class.isInstance(page.getHtmlElementById("fs")));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "undefined", "undefined", "undefined", "center", "8", "foo" },
+        IE = { "left", "right", "", "error", "error", "center", "right", "" })
+    public void align() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<form>\n"
+            + "  <fieldset id='fs1' align='left'>\n"
             + "    <legend>Legend</legend>\n"
             + "  </fieldset>\n"
+            + "  <fieldset id='fs2' align='right'>\n"
+            + "    <legend>Legend</legend>\n"
+            + "  </fieldset>\n"
+            + "  <fieldset id='fs3' align='3'>\n"
+            + "    <legend>Legend</legend>\n"
+            + "  </fieldset>\n"
+            + "</form>\n"
+            + "<script>\n"
+            + "  function set(fs, value) {\n"
+            + "    try {\n"
+            + "      fs.align = value;\n"
+            + "    } catch (e) {\n"
+            + "      alert('error');\n"
+            + "    }\n"
+            + "  }\n"
+            + "  var fs1 = document.getElementById('fs1');\n"
+            + "  var fs2 = document.getElementById('fs2');\n"
+            + "  var fs3 = document.getElementById('fs3');\n"
+            + "  alert(fs1.align);\n"
+            + "  alert(fs2.align);\n"
+            + "  alert(fs3.align);\n"
+            + "  set(fs1, 'center');\n"
+            + "  set(fs2, '8');\n"
+            + "  set(fs3, 'foo');\n"
+            + "  alert(fs1.align);\n"
+            + "  alert(fs2.align);\n"
+            + "  alert(fs3.align);\n"
+            + "</script>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"[object HTMLFieldSetElement]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertTrue(HtmlFieldSet.class.isInstance(page.getHtmlElementById("myId")));
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
+
 }

@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
+
 /**
  * The JavaScript object "HTMLFieldSetElement".
  *
@@ -29,6 +31,45 @@ public class HTMLFieldSetElement extends HTMLElement {
      */
     public HTMLFieldSetElement() {
         // Empty.
+    }
+
+    /**
+     * Returns the value of the <tt>align</tt> property.
+     * @return the value of the <tt>align</tt> property
+     */
+    public String jsxGet_align() {
+        return getAlign(false);
+    }
+
+    /**
+     * Sets the value of the <tt>align</tt> property.
+     * @param align the value of the <tt>align</tt> property
+     */
+    public void jsxSet_align(final String align) {
+        setAlign(align, false);
+    }
+
+    /**
+     * Returns the value of the <tt>form</tt> property.
+     * @return the value of the <tt>form</tt> property
+     */
+    public HTMLFormElement jsxGet_form() {
+        final HtmlForm form = getDomNodeOrDie().getEnclosingForm();
+        if (form == null) {
+            return null;
+        }
+        return (HTMLFormElement) getScriptableFor(form);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getWithFallback(final String name) {
+        if ("align".equals(name)) {
+            return NOT_FOUND;
+        }
+        return super.getWithFallback(name);
     }
 
 }

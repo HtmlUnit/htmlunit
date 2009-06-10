@@ -7,7 +7,11 @@
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.saveAs()">
             <action type="fix" dev="sdanig">
-                JavaScript: add support for body.aLink, body.background and body.bgColor attributes.
+                JavaScript: add support for fieldSet.form and fieldSet.align attributes.
+            </action>
+            <action type="fix" dev="sdanig">
+                JavaScript: add support for body.aLink, body.background, body.bgColor, body.link, body.text and
+                body.vLink attributes.
             </action>
             <action type="fix" dev="sdanig">
                 JavaScript: add support for attr.isId attribute (Firefox 3 only).

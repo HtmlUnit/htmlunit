@@ -1001,7 +1001,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         if (page == null || getBrowserVersion().isFirefox()) {
             return NOT_FOUND;
         }
-
         return getIt(name);
     }
 
@@ -1017,7 +1016,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         else {
             elements = page.getElementsByName(name);
         }
-
         if (elements.isEmpty()) {
             return NOT_FOUND;
         }
