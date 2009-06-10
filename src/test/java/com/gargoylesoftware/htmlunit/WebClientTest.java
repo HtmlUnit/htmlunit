@@ -1898,7 +1898,6 @@ public class WebClientTest extends WebServerTestCase {
 
     /**
      * Previous window should become current window after current window is closed.
-     * @param expectedAlerts
      * @throws Exception if an error occurs
      */
     @Test
