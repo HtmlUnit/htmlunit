@@ -244,9 +244,9 @@ public final class HTMLParser {
 
         final XMLInputSource in = new XMLInputSource(null, url.toString(), null, new StringReader(source), null);
 
+        page.registerParsingStart();
+        page.registerSnippetParsingStart();
         try {
-            page.registerParsingStart();
-            page.registerSnippetParsingStart();
             domBuilder.parse(in);
         }
         finally {
@@ -262,12 +262,47 @@ public final class HTMLParser {
      * @param webWindow the web window into which the page is to be loaded
      * @return the page object which is the root of the DOM tree
      * @throws IOException if there is an IO error
+     * @deprecated as of version 2.6, please use {@link #parseHtml(WebResponse, WebWindow)} instead
      */
+    @Deprecated
     public static HtmlPage parse(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
-        final URL url = webResponse.getRequestSettings().getUrl();
-        final HtmlPage page = new HtmlPage(url, webResponse, webWindow);
+        return parseHtml(webResponse, webWindow);
+    }
+
+    /**
+     * Parses the HTML content from the specified <tt>WebResponse</tt> into an object tree representation.
+     *
+     * @param webResponse the response data
+     * @param webWindow the web window into which the page is to be loaded
+     * @return the page object which is the root of the DOM tree
+     * @throws IOException if there is an IO error
+     */
+    public static HtmlPage parseHtml(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
+        final HtmlPage page = new HtmlPage(webResponse.getRequestSettings().getUrl(), webResponse, webWindow);
+        parse(webResponse, webWindow, page);
+        return page;
+    }
+
+    /**
+     * Parses the XHTML content from the specified <tt>WebResponse</tt> into an object tree representation.
+     *
+     * @param webResponse the response data
+     * @param webWindow the web window into which the page is to be loaded
+     * @return the page object which is the root of the DOM tree
+     * @throws IOException if there is an IO error
+     */
+    public static XHtmlPage parseXHtml(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
+        final XHtmlPage page = new XHtmlPage(webResponse.getRequestSettings().getUrl(), webResponse, webWindow);
+        parse(webResponse, webWindow, page);
+        return page;
+    }
+
+    private static void parse(final WebResponse webResponse, final WebWindow webWindow, final HtmlPage page)
+        throws IOException {
+
         webWindow.setEnclosedPage(page);
 
+        final URL url = webResponse.getRequestSettings().getUrl();
         final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(page, url);
         String charset = webResponse.getContentCharsetOrNull();
         if (charset != null) {
@@ -288,8 +323,8 @@ public final class HTMLParser {
         final InputStream content = webResponse.getContentAsStream();
         final XMLInputSource in = new XMLInputSource(null, url.toString(), null, content, charset);
 
+        page.registerParsingStart();
         try {
-            page.registerParsingStart();
             domBuilder.parse(in);
         }
         catch (final XNIException e) {
@@ -302,8 +337,6 @@ public final class HTMLParser {
         }
 
         addBodyToPageIfNecessary(page, true, domBuilder.body_ != null);
-
-        return page;
     }
 
     /**
@@ -401,8 +434,8 @@ public final class HTMLParser {
             = "http://cyberneko.org/html/features/parse-noscript-content";
 
         /**
-         * Inserts the specified HTML content into the current parse stream.
-         * @param html the HTML content to insert
+         * Parses and then inserts the specified HTML content into the HTML content currently being parsed.
+         * @param html the HTML content to push
          */
         public void pushInputString(final String html) {
             page_.registerParsingStart();

@@ -65,7 +65,7 @@ public class HTMLParserTest extends WebServerTestCase {
         final WebResponse webResponse = new StringWebResponse(
             "<html><head><title>TITLE</title><noscript>TEST</noscript></head><body></body></html>", URL_GARGOYLE);
 
-        final HtmlPage page = HTMLParser.parse(webResponse, webClient.getCurrentWindow());
+        final HtmlPage page = HTMLParser.parseHtml(webResponse, webClient.getCurrentWindow());
 
         final String stringVal = page.<HtmlNoScript>getFirstByXPath("//noscript").getFirstChild().getNodeValue();
         assertEquals("TEST", stringVal);

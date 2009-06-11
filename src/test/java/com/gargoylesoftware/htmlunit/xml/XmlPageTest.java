@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.xml;
 
-import static org.junit.Assert.assertNotNull;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -43,8 +41,6 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlBody;
 
 /**
  * Tests for {@link XmlPage}.
@@ -251,18 +247,6 @@ public class XmlPageTest extends WebServerTestCase {
     }
 
     /**
-     * Tests a simplified real-life response from Ajax4jsf.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void a4jResponse() throws Exception {
-        final String content = "<html xmlns='http://www.w3.org/1999/xhtml'><head>"
-            + "<script src='/a4j_3_2_0-SNAPSHOTorg.ajax4jsf.javascript.PrototypeScript.jsf'></script>"
-            + "</head><body><span id='j_id216:outtext'>Echo Hello World</span></body></html>";
-        testXmlDocument(content, "text/xml");
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -275,43 +259,6 @@ public class XmlPageTest extends WebServerTestCase {
              + "</foo>";
         final XmlPage xmlPage = testXmlDocument(html, "text/xml");
         assertEquals(1, xmlPage.getByXPath("//foofoo[@name='first']").size());
-    }
-
-    /**
-     * Verifies that case sensitivity in XPath expressions is governed by the type of page, not by
-     * the type of elements contained by the page (ie, HTML elements in an XML page behave in a
-     * case-sensitive way, because that's how XML behaves). See bug 2515873.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void xpathForXmlPageContainingHtmlElements() throws Exception {
-        final String html
-            = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-            + "<!DOCTYPE html PUBLIC \n"
-            + "    \"-//W3C//DTD XHTML 1.0 Strict//EN\" \n"
-            + "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
-            + "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:xhtml='http://www.w3.org/1999/xhtml'>\n"
-            + "<body><DIV>foo</DIV></body>\n"
-            + "</html>";
-
-        final WebClient client = getWebClient();
-        final List<String> actual = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(actual));
-
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_GARGOYLE, html, "text/xml");
-        client.setWebConnection(conn);
-
-        final XmlPage page = client.getPage(URL_GARGOYLE);
-        final DomNode body = page.getDocumentElement().getFirstChild().getNextSibling();
-        final DomNode div = body.getFirstChild();
-
-        assertEquals(HtmlBody.class, body.getClass());
-        assertEquals("body", body.getLocalName());
-        assertEquals("DIV", div.getLocalName());
-        assertNotNull(page.getFirstByXPath(".//xhtml:body"));
-        assertNotNull(page.getFirstByXPath(".//xhtml:DIV"));
-        assertNull(page.getFirstByXPath(".//xhtml:div"));
     }
 
     /**

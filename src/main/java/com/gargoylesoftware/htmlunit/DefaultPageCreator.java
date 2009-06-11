@@ -17,19 +17,20 @@ package com.gargoylesoftware.htmlunit;
 import java.io.IOException;
 import java.io.Serializable;
 
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.XHtmlPage;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
- * The default implementation of PageCreator. Designed to be extended for easier
- * handling of new content types. Just check the content type in createPage()
- * and call super(createPage()) if your custom type isn't found. There are
- * also protected createXXXXPage() methods for creating the Page types HtmlUnit
- * already knows about for your custom content types.
+ * The default implementation of {@link PageCreator}. Designed to be extended for easier handling of new content
+ * types. Just check the content type in <tt>createPage()</tt> and call <tt>super(createPage())</tt> if your custom
+ * type isn't found. There are also protected <tt>createXXXXPage()</tt> methods for creating the {@link Page} types
+ * which HtmlUnit already knows about for your custom content types.
  *
  * <p />
- * Following table shows the type of {@link Page} created depending on the content type:<br>
+ * The following table shows the type of {@link Page} created depending on the content type:<br>
  * <br>
  *  <table border="1" width="50%">
  *    <tr>
@@ -37,10 +38,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  *      <th>Type of page</th>
  *    </tr>
  *    <tr>
- *      <td>text/html<br/>
- *      text/xhtml<br/>
- *      *xhtml+xml
- *      </td>
+ *      <td>text/html</td>
  *      <td>{@link HtmlPage}</td>
  *    </tr>
  *    <tr>
@@ -49,7 +47,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  *      text/vnd.wap.wml<br/>
  *      *+xml
  *      </td>
- *      <td>{@link XmlPage}</td>
+ *      <td>{@link XmlPage}, or an {@link XHtmlPage} if an XHTML namespace is used</td>
  *    </tr>
  *    <tr>
  *      <td>text/javascript<br/>
@@ -73,6 +71,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author <a href="mailto:yourgod@users.sourceforge.net">Brad Clarke</a>
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Daniel Gredler
  */
 public class DefaultPageCreator implements PageCreator, Serializable  {
 
@@ -82,6 +81,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
      * Creates an instance.
      */
     public DefaultPageCreator() {
+        // Empty.
     }
 
     /**
@@ -104,7 +104,14 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
             newPage = createJavaScriptPage(webResponse, webWindow);
         }
         else if (pageType.equals("xml")) {
-            newPage = createXmlPage(webResponse, webWindow);
+            final XmlPage xml = createXmlPage(webResponse, webWindow);
+            final DomElement doc = xml.getDocumentElement();
+            if (doc != null && HTMLParser.XHTML_NAMESPACE.equals(doc.getNamespaceURI())) {
+                newPage = createXHtmlPage(webResponse, webWindow);
+            }
+            else {
+                newPage = xml;
+            }
         }
         else if (pageType.equals("text")) {
             newPage = createTextPage(webResponse, webWindow);
@@ -124,7 +131,19 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
      * @throws IOException if the page could not be created
      */
     protected HtmlPage createHtmlPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
-        return HTMLParser.parse(webResponse, webWindow);
+        return HTMLParser.parseHtml(webResponse, webWindow);
+    }
+
+    /**
+     * Creates an XHtmlPage for this WebResponse.
+     *
+     * @param webResponse the page's source
+     * @param webWindow the WebWindow to place the HtmlPage in
+     * @return the newly created XHtmlPage
+     * @throws IOException if the page could not be created
+     */
+    protected XHtmlPage createXHtmlPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
+        return HTMLParser.parseXHtml(webResponse, webWindow);
     }
 
     /**
@@ -186,19 +205,16 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
      * @return "xml", "html", "javascript", "text" or "unknown"
      */
     protected String determinePageType(final String contentType) {
-        if (contentType.equals("text/html") || contentType.equals("text/xhtml")) {
-            return "html";
-        }
-        else if (contentType.endsWith("xhtml+xml")) {
-            //Should create a validated XML document but for now just make what we can
+        if (contentType.equals("text/html")) {
             return "html";
         }
         else if (contentType.equals("text/javascript") || contentType.equals("application/x-javascript")) {
             return "javascript";
         }
-        else if (contentType.equals("text/xml") || contentType.equals("application/xml")
-                || contentType.matches(".*\\+xml")
-                || contentType.equals("text/vnd.wap.wml")) {
+        else if (contentType.equals("text/xml")
+                || contentType.equals("application/xml")
+                || contentType.equals("text/vnd.wap.wml")
+                || contentType.matches(".*\\+xml")) {
             return "xml";
         }
         else if (contentType.startsWith("text/")) {

@@ -1566,11 +1566,6 @@ public class WebClientTest extends WebServerTestCase {
         assertTrue(HtmlPage.class.isInstance(client.getPage(URL_FIRST)));
         assertEquals(expectedAlerts, collectedAlerts);
 
-        webConnection.setResponse(URL_FIRST, content, "Text/XHtml");
-        collectedAlerts.clear();
-        assertTrue(HtmlPage.class.isInstance(client.getPage(URL_FIRST)));
-        assertEquals(expectedAlerts, collectedAlerts);
-
         webConnection.setResponse(URL_FIRST, content, "Text/Xml");
         assertTrue(XmlPage.class.isInstance(client.getPage(URL_FIRST)));
         webConnection.setResponse(URL_FIRST, content, "ApplicaTion/Xml");

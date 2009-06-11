@@ -53,7 +53,7 @@ public abstract class DomNamespaceNode extends DomNode {
             prefix_ = qualifiedName_.substring(0, colonPosition);
         }
         else {
-            if (page instanceof XmlPage) {
+            if (page instanceof XmlPage || page instanceof XHtmlPage) {
                 namespaceURI_ = namespaceURI;
             }
             else {
