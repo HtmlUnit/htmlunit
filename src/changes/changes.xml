@@ -7,7 +7,7 @@
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.saveAs()">
             <action type="fix" dev="sdanig" issues="2515806">
-                Add better support for XHTML pages.
+                Add better support for XHTML pages (new XHtmlPage class extends HtmlPage class).
             </action>
             <action type="add" dev="sdanig">
                 JavaScript: add support for fieldSet.form and fieldSet.align attributes.
