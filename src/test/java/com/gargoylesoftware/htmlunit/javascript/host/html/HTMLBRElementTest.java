@@ -35,7 +35,8 @@ public class HTMLBRElementTest extends WebTestCase {
      */
     @Test
     @Alerts(
-        IE = { "", "left", "all", "right", "none", "", "", "!", "!", "!", "left", "none", "right", "all", "none", "", "" },
+        IE = { "", "left", "all", "right", "none", "", "", "!", "!", "!", "left", "none", "right", "all", "none",
+               "", "" },
         FF = { "", "left", "all", "right", "none", "2", "foo", "left", "none", "right", "all", "2", "abc", "8" })
     public void clear() throws Exception {
         final String html

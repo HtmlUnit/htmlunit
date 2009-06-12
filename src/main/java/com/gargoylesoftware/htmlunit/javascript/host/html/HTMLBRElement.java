@@ -28,7 +28,7 @@ public class HTMLBRElement extends HTMLElement {
     private static final long serialVersionUID = -3785200238092986918L;
 
     /** Valid values for the {@link #jsxGet_clear() clear} property. */
-    private static final String[] VALID_CLEAR_VALUES = new String[] { "left", "right", "all", "none" };
+    private static final String[] VALID_CLEAR_VALUES = new String[] {"left", "right", "all", "none"};
 
     /**
      * Creates an instance.
@@ -42,7 +42,7 @@ public class HTMLBRElement extends HTMLElement {
      * @return the value of the <tt>clear</tt> property
      */
     public String jsxGet_clear() {
-        String clear = getDomNodeOrDie().getAttribute("clear");
+        final String clear = getDomNodeOrDie().getAttribute("clear");
         if (!contains(VALID_CLEAR_VALUES, clear) && getBrowserVersion().isIE()) {
             return "";
         }
@@ -53,7 +53,7 @@ public class HTMLBRElement extends HTMLElement {
      * Sets the value of the <tt>clear</tt> property.
      * @param clear the value of the <tt>clear</tt> property
      */
-    public void jsxSet_clear(String clear) {
+    public void jsxSet_clear(final String clear) {
         if (!contains(VALID_CLEAR_VALUES, clear) && getBrowserVersion().isIE()) {
             Context.throwAsScriptRuntimeEx(new Exception("Invalid clear property value: '" + clear + "'."));
         }
