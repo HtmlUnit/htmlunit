@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static org.apache.commons.lang.ArrayUtils.contains;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 /**
  * The JavaScript object "HTMLBRElement".
  *
@@ -24,11 +27,37 @@ public class HTMLBRElement extends HTMLElement {
 
     private static final long serialVersionUID = -3785200238092986918L;
 
+    /** Valid values for the {@link #jsxGet_clear() clear} property. */
+    private static final String[] VALID_CLEAR_VALUES = new String[] { "left", "right", "all", "none" };
+
     /**
      * Creates an instance.
      */
     public HTMLBRElement() {
         // Empty.
+    }
+
+    /**
+     * Returns the value of the <tt>clear</tt> property.
+     * @return the value of the <tt>clear</tt> property
+     */
+    public String jsxGet_clear() {
+        String clear = getDomNodeOrDie().getAttribute("clear");
+        if (!contains(VALID_CLEAR_VALUES, clear) && getBrowserVersion().isIE()) {
+            return "";
+        }
+        return clear;
+    }
+
+    /**
+     * Sets the value of the <tt>clear</tt> property.
+     * @param clear the value of the <tt>clear</tt> property
+     */
+    public void jsxSet_clear(String clear) {
+        if (!contains(VALID_CLEAR_VALUES, clear) && getBrowserVersion().isIE()) {
+            Context.throwAsScriptRuntimeEx(new Exception("Invalid clear property value: '" + clear + "'."));
+        }
+        getDomNodeOrDie().setAttribute("clear", clear);
     }
 
 }
