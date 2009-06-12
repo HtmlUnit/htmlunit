@@ -57,4 +57,17 @@ public class HTMLLegendElementTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "[object]" }, FF = { "[object HTMLFormElement]" })
+    public void form() throws Exception {
+        final String html
+        = "<html><body><form><fieldset><legend id='a'>a</legend></fieldset></form><script>\n"
+        + "alert(document.getElementById('a').form);\n"
+        + "</script></body></html>";
+    loadPageWithAlerts(html);
+    }
+
 }

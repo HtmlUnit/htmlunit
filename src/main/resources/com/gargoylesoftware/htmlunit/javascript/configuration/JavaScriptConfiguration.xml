@@ -1803,6 +1803,7 @@
         <property name="dataSrc" notImplemented="true" readable="true" writable="true">
             <browser name="Internet Explorer"/>
         </property>
+        <property name="form" readable="true" writable="false"/>
     </class>
 
     <class name="HTMLLIElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLIElement"

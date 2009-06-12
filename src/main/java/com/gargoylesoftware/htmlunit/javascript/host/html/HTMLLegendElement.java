@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
+
 /**
  * The JavaScript object "HTMLLegendElement".
  *
@@ -29,6 +31,18 @@ public class HTMLLegendElement extends HTMLElement {
      */
     public HTMLLegendElement() {
         // Empty.
+    }
+
+    /**
+     * Returns the value of the <tt>form</tt> property.
+     * @return the value of the <tt>form</tt> property
+     */
+    public HTMLFormElement jsxGet_form() {
+        final HtmlForm form = getDomNodeOrDie().getEnclosingForm();
+        if (form == null) {
+            return null;
+        }
+        return (HTMLFormElement) getScriptableFor(form);
     }
 
 }
