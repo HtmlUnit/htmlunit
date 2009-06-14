@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.saveAs(), better XHTML support.">
+            <action type="fix" dev="sdanig" issues="2804850">
+                Check meta tags inside HTML pages for encoding information.
+            </action>
             <action type="add" dev="sdanig">
                 JavaScript: add support for br.clear attribute.
             </action>

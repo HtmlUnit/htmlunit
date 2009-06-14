@@ -20,17 +20,13 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
-import java.nio.charset.Charset;
-import java.nio.charset.IllegalCharsetNameException;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.commons.httpclient.NameValuePair;
-import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 
 /**
  * Simple base class for {@link WebResponse}.
@@ -42,7 +38,6 @@ import org.apache.commons.logging.LogFactory;
 public class WebResponseImpl implements WebResponse, Serializable {
 
     private static final long serialVersionUID = 2842434739251092348L;
-    private static final Pattern patternEncoding_ = Pattern.compile("[a-zA-Z0-9][\\w:\\.-]*");
 
     private final transient Log log_ = LogFactory.getLog(WebResponseImpl.class);
     private long loadTime_;
@@ -179,63 +174,15 @@ public class WebResponseImpl implements WebResponse, Serializable {
 
     /**
      * {@inheritDoc}
-     * @see <a href="http://en.wikipedia.org/wiki/Byte_Order_Mark">Wikipedia - Byte Order Mark</a>
      */
     public String getContentCharsetOrNull() {
-        final String contentTypeHeader = getResponseHeaderValue("content-type");
-        String charset = StringUtils.substringAfter(contentTypeHeader, "charset=");
-        if (StringUtils.isEmpty(charset)) {
-            log_.debug("No charset specified in header, trying to guess it from content");
-            final byte[] body = responseData_.getBody();
-            final byte[] markerUTF8 = {(byte) 0xef, (byte) 0xbb, (byte) 0xbf};
-            final byte[] markerUTF16BE = {(byte) 0xfe, (byte) 0xff};
-            final byte[] markerUTF16LE = {(byte) 0xff, (byte) 0xfe};
-            if (body != null && ArrayUtils.isEquals(markerUTF8, ArrayUtils.subarray(body, 0, 3))) {
-                log_.debug("UTF-8 marker found");
-                charset = "UTF-8";
-            }
-            else if (body != null && ArrayUtils.isEquals(markerUTF16BE, ArrayUtils.subarray(body, 0, 2))) {
-                log_.debug("UTF-16BE marker found");
-                charset = "UTF-16BE";
-            }
-            else if (body != null && ArrayUtils.isEquals(markerUTF16LE, ArrayUtils.subarray(body, 0, 2))) {
-                log_.debug("UTF-16LE marker found");
-                charset = "UTF-16LE";
-            }
-            else {
-                final String xmlEncoding = getXMLEncoding(body);
-                if (xmlEncoding != null) {
-                    log_.debug("XML encoding found: " + xmlEncoding);
-                    charset = xmlEncoding;
-                }
-                else {
-                    log_.debug("No charset guessed");
-                    charset = null;
-                }
-            }
+        try {
+            return EncodingSniffer.sniffEncoding(getResponseHeaders(), getContentAsStream());
         }
-        else {
-            final Matcher matcher = patternEncoding_.matcher(charset);
-            if (!matcher.find()) {
-                charset = TextUtil.DEFAULT_CHARSET;
-            }
-            else {
-                // TODO: notify incorrectness if !charset.equals(matcher.group())
-                charset = matcher.group();
-                try {
-                    if (!Charset.isSupported(charset)) {
-                        log_.info("Unsupported charset: " + charset
-                            + ". Using default one: " + TextUtil.DEFAULT_CHARSET);
-                        charset = TextUtil.DEFAULT_CHARSET;
-                    }
-                }
-                catch (final IllegalCharsetNameException e) {
-                    log_.info("Illegal charset: " + charset + ". Using default one: " + TextUtil.DEFAULT_CHARSET);
-                    charset = TextUtil.DEFAULT_CHARSET;
-                }
-            }
+        catch (final IOException e) {
+            log_.warn("Error trying to sniff encoding.", e);
+            return null;
         }
-        return charset;
     }
 
     /**
@@ -302,42 +249,6 @@ public class WebResponseImpl implements WebResponse, Serializable {
     }
 
     /**
-     * Searches for XML declaration and returns the <tt>encoding</tt> if found, otherwise returns <code>null</code>.
-     */
-    private String getXMLEncoding(final byte[] body) {
-        String encoding = null;
-        final byte[] declarationPrefix = "<?xml ".getBytes();
-        if (ArrayUtils.isEquals(declarationPrefix, ArrayUtils.subarray(body, 0, declarationPrefix.length))) {
-            final int index = ArrayUtils.indexOf(body, (byte) '?', 2);
-            if (index + 1 < body.length && body[index + 1] == '>') {
-                final String declaration = new String(body, 0, index + 2);
-                int start = declaration.indexOf("encoding");
-                if (start != -1) {
-                    start += 8;
-                    char delimiter;
-
-                outer:
-                    while (true) {
-                        switch (declaration.charAt(start)) {
-                            case '"':
-                            case '\'':
-                                delimiter = declaration.charAt(start);
-                                start = start + 1;
-                                break outer;
-
-                            default:
-                                start++;
-                        }
-                    }
-                    final int end = declaration.indexOf(delimiter, start);
-                    encoding = declaration.substring(start, end);
-                }
-            }
-        }
-        return encoding;
-    }
-
-    /**
      * {@inheritDoc}
      * @deprecated since 2.4, please use {@link #getContentAsBytes()} instead
      */
@@ -345,4 +256,5 @@ public class WebResponseImpl implements WebResponse, Serializable {
     public byte[] getResponseBody() {
         return responseData_.getBody();
     }
+
 }

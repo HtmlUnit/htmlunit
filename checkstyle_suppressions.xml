@@ -16,6 +16,7 @@
     <suppress checks="FileLength" files="JQuery126Test.java"/>
     <suppress checks="FileLength" files="WebClientTest.java"/>
     <suppress checks="LineLength" files="JavaScriptEngine.java" lines="65"/>
+    <suppress checks="LineLength" files="EncodingSniffer.java"/>
     <suppress checks="LineLength" files="HTMLScriptElementTest.java"/>
     <suppress checks="LineLength" files="Dojo102Test.java"/>
     <suppress checks="LineLength" files="BoxObjectTest.java"/>
