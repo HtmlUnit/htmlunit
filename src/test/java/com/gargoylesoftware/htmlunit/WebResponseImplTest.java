@@ -140,7 +140,7 @@ public class WebResponseImplTest extends WebServerTestCase {
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
         client.setWebConnection(conn);
-        HtmlPage page = client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals("utf-8", page.getWebResponse().getContentCharsetOrNull());
     }
 
