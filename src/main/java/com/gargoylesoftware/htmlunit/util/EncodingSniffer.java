@@ -31,7 +31,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Sniffs encoding settings from HTML and/or XML content. The HTML encoding sniffing algorithm is based on the
+ * Sniffs encoding settings from HTML, XML or other content. The HTML encoding sniffing algorithm is based on the
  * <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#determining-the-character-encoding">HTML5
  * encoding sniffing algorithm</a>.
  *
@@ -108,14 +108,14 @@ public final class EncodingSniffer {
 
     /**
      * <p>If the specified content is HTML content, this method sniffs encoding settings
-     * from specified HTML content and/or the corresponding HTTP headers based on the
+     * from the specified HTML content and/or the corresponding HTTP headers based on the
      * <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#determining-the-character-encoding">HTML5
      * encoding sniffing algorithm</a>.</p>
      *
      * <p>If the specified content is XML content, this method sniffs encoding settings
-     * from specified XML content and/or the corresponding HTTP headers using a custom algorithm.</p>
+     * from the specified XML content and/or the corresponding HTTP headers using a custom algorithm.</p>
      *
-     * <p>Otherwise, this method sniffs encoding settings from specified content of unknown type by looking for
+     * <p>Otherwise, this method sniffs encoding settings from the specified content of unknown type by looking for
      * <tt>Content-Type</tt> information in the HTTP headers and
      * <a href="http://en.wikipedia.org/wiki/Byte_Order_Mark">Byte Order Mark</a> information in the content.</p>
      *
@@ -194,7 +194,7 @@ public final class EncodingSniffer {
     }
 
     /**
-     * <p>Sniffs encoding settings from specified HTML content and/or the corresponding HTTP headers based on the
+     * <p>Sniffs encoding settings from the specified HTML content and/or the corresponding HTTP headers based on the
      * <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#determining-the-character-encoding">HTML5
      * encoding sniffing algorithm</a>.</p>
      *
@@ -227,8 +227,8 @@ public final class EncodingSniffer {
     }
 
     /**
-     * <p>Sniffs encoding settings from specified XML content and/or the corresponding HTTP headers using a custom
-     * algorithm.</p>
+     * <p>Sniffs encoding settings from the specified XML content and/or the corresponding HTTP headers using
+     * a custom algorithm.</p>
      *
      * <p>Note that if an encoding is found but it is not supported on the current platform, this method returns
      * <tt>null</tt>, as if no encoding had been found.</p>
@@ -259,7 +259,7 @@ public final class EncodingSniffer {
     }
 
     /**
-     * <p>Sniffs encoding settings from specified content of unknown type by looking for <tt>Content-Type</tt>
+     * <p>Sniffs encoding settings from the specified content of unknown type by looking for <tt>Content-Type</tt>
      * information in the HTTP headers and <a href="http://en.wikipedia.org/wiki/Byte_Order_Mark">Byte Order Mark</a>
      * information in the content.</p>
      *
