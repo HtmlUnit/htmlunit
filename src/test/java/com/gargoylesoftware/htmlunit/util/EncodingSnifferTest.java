@@ -59,6 +59,8 @@ public class EncodingSnifferTest {
         testMeta(null, "foo");
         testMeta(null, " <!-- blah");
         testMeta(null, " <!-- blah --> ");
+        testMeta(null, "<");
+        testMeta(null, "</");
         testMeta(null, "<meta/>");
         testMeta(null, "<meta />");
         testMeta(null, "<meta blah />");
@@ -66,6 +68,7 @@ public class EncodingSnifferTest {
         testMeta(null, "<meta ");
         testMeta(null, "<meta blah");
         testMeta(null, "<meta blah  ");
+        testMeta(null, "<meta a='b'");
         testMeta(null, "<meta a='b' c=d e=\"f\"/>");
         testMeta(null, "<meta a='b' c=d e=\"f\" content='text/html; charset=blah' />");
         testMeta("utf-8", "<meta a='b' c=d e=\"f\" content='text/html; charset=utf-8' />");

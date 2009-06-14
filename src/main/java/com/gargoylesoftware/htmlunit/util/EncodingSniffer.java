@@ -383,7 +383,7 @@ public final class EncodingSniffer {
                     }
                 }
             }
-            else if (bytes[i] == '<' && Character.isLetter(bytes[i + 1])) {
+            else if (i + 1 < bytes.length && bytes[i] == '<' && Character.isLetter(bytes[i + 1])) {
                 i = skipToAnyOf(bytes, i, new byte[] {0x09, 0x0A, 0x0C, 0x0D, 0x20, 0x3E});
                 if (i == -1) {
                     break;
@@ -393,7 +393,7 @@ public final class EncodingSniffer {
                     i = att.getUpdatedIndex();
                 }
             }
-            else if (bytes[i] == '<' && bytes[i + 1] == '/' && Character.isLetter(bytes[i + 2])) {
+            else if (i + 2 < bytes.length && bytes[i] == '<' && bytes[i + 1] == '/' && Character.isLetter(bytes[i + 2])) {
                 i = skipToAnyOf(bytes, i, new byte[] {0x09, 0x0A, 0x0C, 0x0D, 0x20, 0x3E});
                 if (i == -1) {
                     break;
