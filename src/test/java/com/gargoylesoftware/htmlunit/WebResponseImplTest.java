@@ -48,13 +48,13 @@ public class WebResponseImplTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testRecognizeBOM() throws Exception {
-        testRecognizeBOM("UTF-8",    new byte[] {(byte) 0xef, (byte) 0xbb, (byte) 0xbf});
-        testRecognizeBOM("UTF-16BE", new byte[] {(byte) 0xfe, (byte) 0xff});
-        testRecognizeBOM("UTF-16LE", new byte[] {(byte) 0xff, (byte) 0xfe});
+    public void recognizeBOM() throws Exception {
+        recognizeBOM("UTF-8",    new byte[] {(byte) 0xef, (byte) 0xbb, (byte) 0xbf});
+        recognizeBOM("UTF-16BE", new byte[] {(byte) 0xfe, (byte) 0xff});
+        recognizeBOM("UTF-16LE", new byte[] {(byte) 0xff, (byte) 0xfe});
     }
 
-    private void testRecognizeBOM(final String encoding, final byte[] markerBytes) throws Exception {
+    private void recognizeBOM(final String encoding, final byte[] markerBytes) throws Exception {
         final WebClient webClient = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -82,7 +82,7 @@ public class WebResponseImplTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testEncoding() throws Exception {
+    public void encoding() throws Exception {
         final String title = "\u6211\u662F\u6211\u7684FOCUS";
         final String content =
             "<html><head>\n"
@@ -107,7 +107,7 @@ public class WebResponseImplTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testQuotedCharset() throws Exception {
+    public void quotedCharset() throws Exception {
         final String xml
             = "<books id='myId'>\n"
             + "  <book>\n"
@@ -127,18 +127,36 @@ public class WebResponseImplTest extends WebServerTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void charsetInMetaTag() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head><meta content='text/html; charset=utf-8' http-equiv='Content-Type'/></head>\n"
+            + "<body>foo</body>\n"
+            + "</html>";
+        final WebClient client = new WebClient();
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html);
+        client.setWebConnection(conn);
+        HtmlPage page = client.getPage(URL_FIRST);
+        assertEquals("utf-8", page.getWebResponse().getContentCharsetOrNull());
+    }
+
+    /**
      * Test that extracting charset from Content-Type header is forgiving.
      * @throws Exception if the test fails
      */
     @Test
     public void illegalCharset() throws Exception {
-        testIllegalCharset("text/html; text/html; charset=ISO-8859-1;", "ISO-8859-1");
-        testIllegalCharset("text/html; charset=UTF-8; charset=UTF-8", "UTF-8");
-        testIllegalCharset("text/html; charset=#sda+s", TextUtil.DEFAULT_CHARSET);
-        testIllegalCharset("text/html; charset=UnknownCharset", TextUtil.DEFAULT_CHARSET);
+        illegalCharset("text/html; text/html; charset=ISO-8859-1;", "ISO-8859-1");
+        illegalCharset("text/html; charset=UTF-8; charset=UTF-8", "UTF-8");
+        illegalCharset("text/html; charset=#sda+s", TextUtil.DEFAULT_CHARSET);
+        illegalCharset("text/html; charset=UnknownCharset", TextUtil.DEFAULT_CHARSET);
     }
 
-    private void testIllegalCharset(final String cntTypeHeader, final String expectedCharset) throws Exception {
+    private void illegalCharset(final String cntTypeHeader, final String expectedCharset) throws Exception {
         final MockWebConnection conn = new MockWebConnection();
         final List<NameValuePair> headers = new ArrayList<NameValuePair>();
         headers.add(new NameValuePair("Content-Type", cntTypeHeader));
