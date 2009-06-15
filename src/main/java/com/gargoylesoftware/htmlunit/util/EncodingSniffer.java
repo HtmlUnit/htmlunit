@@ -480,7 +480,7 @@ public final class EncodingSniffer {
                     return new Attribute(name, value, i);
                 }
                 else if (bytes[i] >= 'A' && bytes[i] <= 'Z') {
-                    final byte b2 = (byte) (((int) bytes[i]) + 0x20);
+                    final byte b2 = (byte) (bytes[i] + 0x20);
                     value += (char) b2;
                 }
                 else {
@@ -493,7 +493,7 @@ public final class EncodingSniffer {
             return new Attribute(name, value, i);
         }
         else if (bytes[i] >= 'A' && bytes[i] <= 'Z') {
-            final byte b = (byte) (((int) bytes[i]) + 0x20);
+            final byte b = (byte) (bytes[i] + 0x20);
             value += (char) b;
             i++;
         }
@@ -506,7 +506,7 @@ public final class EncodingSniffer {
                 return new Attribute(name, value, i);
             }
             else if (bytes[i] >= 'A' && bytes[i] <= 'Z') {
-                final byte b = (byte) (((int) bytes[i]) + 0x20);
+                final byte b = (byte) (bytes[i] + 0x20);
                 value += (char) b;
             }
             else {
@@ -568,9 +568,7 @@ public final class EncodingSniffer {
                 final String charset = new String(subarray(bytes, i + 1, index));
                 return isSupportedCharset(charset) ? charset : null;
             }
-            else {
-                return null;
-            }
+            return null;
         }
         if (bytes[i] == '\'') {
             if (bytes.length <= i + 1) {
@@ -581,9 +579,7 @@ public final class EncodingSniffer {
                 final String charset = new String(subarray(bytes, i + 1, index));
                 return isSupportedCharset(charset) ? charset : null;
             }
-            else {
-                return null;
-            }
+            return null;
         }
         int end = skipToAnyOf(bytes, i, new byte[] {0x09, 0x0A, 0x0C, 0x0D, 0x20, 0x3B});
         if (end == -1) {
