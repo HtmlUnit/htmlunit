@@ -73,6 +73,8 @@ public class EncodingSnifferTest {
         testMeta(null, "<meta a='b' c=d e=\"f\" content='text/html; charset=blah' />");
         testMeta("utf-8", "<meta a='b' c=d e=\"f\" content='text/html; charset=utf-8' />");
         testMeta("utf-8", "abc <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>");
+        testMeta("utf-8", "abc <meta http-equiv='Content-Type' content='text/html; CHARSET=UTF-8'/>");
+        testMeta("utf-8", "abc <meta http-equiv='Content-Type' content='text/html; chArsEt=UtF-8'/>");
     }
 
     private void testMeta(final String expectedEncoding, final String content) {
