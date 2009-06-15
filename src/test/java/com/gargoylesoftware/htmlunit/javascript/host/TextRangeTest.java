@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link TextRange}.
@@ -71,7 +70,6 @@ public class TextRangeTest extends WebTestCase {
     @Test
     @Browsers(Browser.IE)
     @Alerts("BODY")
-    @NotYetImplemented
     public void parentElement() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -177,4 +175,33 @@ public class TextRangeTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.IE)
+    @Alerts({ "true", "true", "false", "true" })
+    public void inRange() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <title>test</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var r1 = document.body.createTextRange();\n"
+            + "      var r2 = r1.duplicate();\n"
+            + "      alert(r1.inRange(r2));\n"
+            + "      alert(r2.inRange(r1));\n"
+            + "      r1.collapse();\n"
+            + "      alert(r1.inRange(r2));\n"
+            + "      alert(r2.inRange(r1));\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<textarea id='foo'>hello</textarea>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts(html);
+    }
 }

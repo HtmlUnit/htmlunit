@@ -21,11 +21,13 @@ import org.w3c.dom.ranges.Range;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
+import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 /**
  * A JavaScript object for a TextRange.
- *
+ * Note: implementation is not complete at all (not even coherent), it just allows test to pass!
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms535872.aspx">MSDN doc</a>
  * @version $Revision$
  * @author Ahmed Ashour
@@ -35,6 +37,30 @@ public class TextRange extends SimpleScriptable {
 
     private static final long serialVersionUID = -3763822832184277966L;
     private boolean collapsed_ = false; // minimal effort to support collapse()
+    private Range range_;
+
+    /**
+     * Default constructor used to build the prototype.
+     */
+    public TextRange() {
+        // nothing, used to instantiate the prototype
+    }
+
+    /**
+     * Constructs a text range around the provided element.
+     * @param elt the element to wrap
+     */
+    public TextRange(final HTMLElement elt) {
+        range_ = new SimpleRange(elt.getDomNodeOrDie());
+    }
+
+    /**
+     * Constructs a text range around the provided range.
+     * @param range the initial range
+     */
+    public TextRange(final Range range) {
+        range_ = range.cloneRange();
+    }
 
     /**
      * Retrieves the text contained within the range.
@@ -95,6 +121,7 @@ public class TextRange extends SimpleScriptable {
         final TextRange range = new TextRange();
         range.setParentScope(getParentScope());
         range.setPrototype(getPrototype());
+        range.range_ = range_.cloneRange();
         return range;
     }
 
@@ -109,39 +136,18 @@ public class TextRange extends SimpleScriptable {
      * @return the parent element object if successful, or null otherwise.
      */
     public Object jsxFunction_parentElement() {
-        final HtmlPage page = (HtmlPage) getWindow().getDomNodeOrDie();
-        final Range selection = page.getSelection();
-        org.w3c.dom.Node parent = selection.getStartContainer();
-        final org.w3c.dom.Node child = selection.getEndContainer();
-        while (parent != null) {
-            if (isChildOf(child, parent)) {
-                return parent;
-            }
-            parent = parent.getParentNode();
-        }
-        return null;
-    }
-
-    /**
-     * Returns if child is a (grand)child of the specified parent.
-     */
-    private boolean isChildOf(org.w3c.dom.Node child, final org.w3c.dom.Node parent) {
-        while (child != null) {
-            if (child == parent) {
-                return true;
-            }
-            child = child.getParentNode();
-        }
-        return false;
+        final org.w3c.dom.Node parent = range_.getCommonAncestorContainer();
+        return getScriptableFor(parent);
     }
 
     /**
      * Collapses the range.
-     *
+     * @param toStart indicates if collapse should be done to the start
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536371.aspx">MSDN doc</a>
      */
-    public void jsxFunction_collapse() {
+    public void jsxFunction_collapse(final boolean toStart) {
         collapsed_ = true;
+        range_.collapse(toStart);
     }
 
     /**
@@ -192,7 +198,7 @@ public class TextRange extends SimpleScriptable {
      */
     public int jsxFunction_moveEnd(final String unit, final Object count) {
         if ("characters".equals(unit)) {
-            getLog().info("moveStart('" + unit + "' is not yet supported.");
+            getLog().info("moveEnd('" + unit + "' is not yet supported.");
         }
         int c = 1;
         if (count != Undefined.instance) {
@@ -212,5 +218,35 @@ public class TextRange extends SimpleScriptable {
             }
         }
         return c;
+    }
+
+    /**
+     * Indicates if a range is contained in current one.
+     * @param other the other range
+     * @return <code>true</code> if <code>other</code> is contained within current range
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536371.aspx">MSDN doc</a>
+     */
+    public boolean jsxFunction_inRange(final TextRange other) {
+        final Range otherRange = other.range_;
+
+        final org.w3c.dom.Node start = range_.getStartContainer();
+        final org.w3c.dom.Node otherStart = otherRange.getStartContainer();
+        final short startComparison = start.compareDocumentPosition(otherStart);
+        final boolean startNodeBefore = startComparison == 0
+            || (startComparison & Node.DOCUMENT_POSITION_CONTAINS) != 0
+            || (startComparison & Node.DOCUMENT_POSITION_PRECEDING) != 0;
+        if (startNodeBefore && (start != otherStart || range_.getStartOffset() <= otherRange.getStartOffset())) {
+            final org.w3c.dom.Node end = range_.getEndContainer();
+            final org.w3c.dom.Node otherEnd = otherRange.getEndContainer();
+            final short endComparison = end.compareDocumentPosition(otherEnd);
+            final boolean endNodeAfter = endComparison == 0
+                || (endComparison & Node.DOCUMENT_POSITION_CONTAINS) != 0
+                || (endComparison & Node.DOCUMENT_POSITION_FOLLOWING) != 0;
+            if (endNodeAfter && (end != otherEnd || range_.getEndOffset() >= otherRange.getEndOffset())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

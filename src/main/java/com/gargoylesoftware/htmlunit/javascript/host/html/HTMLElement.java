@@ -1958,7 +1958,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return TextRange object if successful, or null otherwise.
      */
     public Object jsxFunction_createTextRange() {
-        final TextRange range = new TextRange();
+        final TextRange range = new TextRange(this);
         range.setParentScope(getParentScope());
         range.setPrototype(getPrototype(range.getClass()));
         return range;

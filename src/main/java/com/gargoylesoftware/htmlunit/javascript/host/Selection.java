@@ -138,7 +138,7 @@ public class Selection extends SimpleScriptable {
      * @return the created TextRange object
      */
     public TextRange jsxFunction_createRange() {
-        final TextRange range = new TextRange();
+        final TextRange range = new TextRange(getPageSelection());
         range.setParentScope(getParentScope());
         range.setPrototype(getPrototype(range.getClass()));
         return range;

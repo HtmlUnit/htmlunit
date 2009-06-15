@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLCon
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -37,7 +36,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.mutable.MutableBoolean;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Attr;
@@ -51,11 +49,9 @@ import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
 import org.w3c.dom.EntityReference;
-import org.w3c.dom.NodeList;
 import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
 import org.w3c.dom.ranges.Range;
-import org.w3c.dom.ranges.RangeException;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Cache;
@@ -73,6 +69,7 @@ import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParser.HtmlUnitDOMBuilder;
+import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
@@ -136,7 +133,7 @@ public class HtmlPage extends SgmlPage implements Cloneable {
 
     private List<HtmlAttributeChangeListener> attributeListeners_;
     private final transient Object lock_ = new Object(); // used for synchronization
-    private final Range selection_ = new SimpleRange(getDocumentElement());
+    private Range selection_;
     private final List<PostponedAction> afterLoadActions_ = new ArrayList<PostponedAction>();
     private boolean cleaning_;
     private HtmlBase base_;
@@ -2229,6 +2226,9 @@ public class HtmlPage extends SgmlPage implements Cloneable {
      * @return the current selection
      */
     public Range getSelection() {
+        if (selection_ == null) {
+            selection_ = new SimpleRange();
+        }
         return selection_;
     }
 
@@ -2274,186 +2274,3 @@ public class HtmlPage extends SgmlPage implements Cloneable {
     }
 }
 
-/**
- * TODO: promote it for a larger usage
- */
-class SimpleRange implements Range, Serializable {
-
-    private static final long serialVersionUID = 5779974839466976193L;
-
-    private org.w3c.dom.Node startContainer_, endContainer_;
-    private int startOffset_, endOffset_;
-
-    SimpleRange(final DomElement documentElement) {
-        startContainer_ = documentElement;
-        endContainer_ = documentElement;
-        startOffset_ = 0;
-        endOffset_ = 0;
-    }
-
-    public DocumentFragment cloneContents() throws DOMException {
-        throw new RuntimeException("Not implemented!");
-    }
-
-    public Range cloneRange() throws DOMException {
-        throw new RuntimeException("Not implemented!");
-    }
-
-    public void collapse(final boolean toStart) throws DOMException {
-        if (toStart) {
-            endContainer_ = startContainer_;
-            endOffset_ = startOffset_;
-        }
-        else {
-            startContainer_ = endContainer_;
-            startOffset_ = endOffset_;
-        }
-    }
-
-    public short compareBoundaryPoints(final short how, final Range sourceRange) throws DOMException {
-        throw new RuntimeException("Not implemented!");
-    }
-
-    public void deleteContents() throws DOMException {
-        throw new RuntimeException("Not implemented!");
-    }
-
-    public void detach() throws DOMException {
-        throw new RuntimeException("Not implemented!");
-    }
-
-    public DocumentFragment extractContents() throws DOMException {
-        throw new RuntimeException("Not implemented!");
-    }
-
-    public boolean getCollapsed() throws DOMException {
-        return startContainer_ == endContainer_ && startOffset_ == endOffset_;
-    }
-
-    public org.w3c.dom.Node getCommonAncestorContainer() throws DOMException {
-        if (startContainer_ != null && endContainer_ != null) {
-            for (org.w3c.dom.Node p1 = startContainer_.getParentNode(); p1 != null; p1 = p1.getParentNode()) {
-                for (org.w3c.dom.Node p2 = endContainer_.getParentNode(); p2 != null; p2 = p2.getParentNode()) {
-                    if (p1 == p2) {
-                        return p1;
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
-    public org.w3c.dom.Node getEndContainer() throws DOMException {
-        return endContainer_;
-    }
-
-    public int getEndOffset() throws DOMException {
-        return endOffset_;
-    }
-
-    public org.w3c.dom.Node getStartContainer() throws DOMException {
-        return startContainer_;
-    }
-
-    public int getStartOffset() throws DOMException {
-        return startOffset_;
-    }
-
-    public void insertNode(final org.w3c.dom.Node newNode) throws DOMException, RangeException {
-        throw new RuntimeException("Not implemented!");
-    }
-
-    public void selectNode(final org.w3c.dom.Node refNode) throws RangeException, DOMException {
-        startContainer_ = refNode;
-        startOffset_ = 0;
-        endContainer_ = refNode;
-        endOffset_ = refNode.getTextContent().length();
-    }
-
-    public void selectNodeContents(final org.w3c.dom.Node refNode) throws RangeException, DOMException {
-        startContainer_ = refNode.getFirstChild();
-        startOffset_ = 0;
-        endContainer_ = refNode.getLastChild();
-        endOffset_ = refNode.getLastChild().getTextContent().length();
-    }
-
-    public void setEnd(final org.w3c.dom.Node refNode, final int offset) throws RangeException, DOMException {
-        endContainer_ = refNode;
-        endOffset_ = offset;
-    }
-
-    public void setEndAfter(final org.w3c.dom.Node refNode) throws RangeException, DOMException {
-        throw new RuntimeException("Not implemented!");
-    }
-
-    public void setEndBefore(final org.w3c.dom.Node refNode) throws RangeException, DOMException {
-        throw new RuntimeException("Not implemented!");
-    }
-
-    public void setStart(final org.w3c.dom.Node refNode, final int offset) throws RangeException, DOMException {
-        startContainer_ = refNode;
-        startOffset_ = offset;
-    }
-
-    public void setStartAfter(final org.w3c.dom.Node refNode) throws RangeException, DOMException {
-        throw new RuntimeException("Not implemented!");
-    }
-
-    public void setStartBefore(final org.w3c.dom.Node refNode) throws RangeException, DOMException {
-        throw new RuntimeException("Not implemented!");
-    }
-
-    public void surroundContents(final org.w3c.dom.Node newParent) throws DOMException, RangeException {
-        throw new RuntimeException("Not implemented!");
-    }
-
-    @Override
-    public String toString() {
-        final org.w3c.dom.Node ancestor = getCommonAncestorContainer();
-        final StringBuilder sb = new StringBuilder();
-        if (ancestor != null) {
-            getText(ancestor, sb, new MutableBoolean(false));
-        }
-        return sb.toString();
-    }
-
-    private boolean getText(final org.w3c.dom.Node node, final StringBuilder sb, final MutableBoolean started) {
-        final NodeList children = node.getChildNodes();
-        for (int i = 0; i < children.getLength(); i++) {
-            final org.w3c.dom.Node child = children.item(i);
-            if (started.booleanValue()) {
-                if (child == endContainer_) {
-                    // We're finished getting text.
-                    sb.append(endContainer_.getTextContent().substring(0, endOffset_));
-                    return true;
-                }
-                // We're in the middle of getting text.
-                if (child.hasChildNodes()) {
-                    final boolean stop = getText(child, sb, started);
-                    if (stop) {
-                        return true;
-                    }
-                }
-                else {
-                    sb.append(child.getTextContent());
-                }
-            }
-            else {
-                started.setValue(child == startContainer_);
-                if (started.booleanValue()) {
-                    // We're starting to get text.
-                    sb.append(startContainer_.getTextContent().substring(startOffset_));
-                }
-                else {
-                    // We're still haven't started getting text.
-                    final boolean stop = getText(child, sb, started);
-                    if (stop) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-}
