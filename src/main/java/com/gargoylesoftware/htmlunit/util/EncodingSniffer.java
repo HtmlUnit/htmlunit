@@ -564,22 +564,22 @@ public final class EncodingSniffer {
                 return null;
             }
             final int index = indexOf(bytes, (byte) '"', i + 1);
-            if (index != -1) {
-                final String charset = new String(subarray(bytes, i + 1, index));
-                return isSupportedCharset(charset) ? charset : null;
+            if (index == -1) {
+                return null;
             }
-            return null;
+            final String charset = new String(subarray(bytes, i + 1, index));
+            return isSupportedCharset(charset) ? charset : null;
         }
         if (bytes[i] == '\'') {
             if (bytes.length <= i + 1) {
                 return null;
             }
             final int index = indexOf(bytes, (byte) '\'', i + 1);
-            if (index != -1) {
-                final String charset = new String(subarray(bytes, i + 1, index));
-                return isSupportedCharset(charset) ? charset : null;
+            if (index == -1) {
+                return null;
             }
-            return null;
+            final String charset = new String(subarray(bytes, i + 1, index));
+            return isSupportedCharset(charset) ? charset : null;
         }
         int end = skipToAnyOf(bytes, i, new byte[] {0x09, 0x0A, 0x0C, 0x0D, 0x20, 0x3B});
         if (end == -1) {
