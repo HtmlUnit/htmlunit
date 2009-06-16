@@ -205,7 +205,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
      * @return "xml", "html", "javascript", "text" or "unknown"
      */
     protected String determinePageType(final String contentType) {
-        if (contentType.equals("text/html")) {
+        if (contentType.equals("text/html") || contentType.equals("")) {
             return "html";
         }
         else if (contentType.equals("text/javascript") || contentType.equals("application/x-javascript")) {

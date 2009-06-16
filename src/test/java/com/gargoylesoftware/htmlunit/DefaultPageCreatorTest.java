@@ -31,7 +31,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.XHtmlPage;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
@@ -113,21 +112,6 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @NotYetImplemented
-    public void noContentType() throws Exception {
-        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
-        servlets.put("/test", NoContentTypeServlet.class);
-        startWebServer("./", null, servlets);
-
-        final WebClient client = getWebClient();
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/test");
-        assertNotNull(page);
-    }
-
-    /**
      * Servlet for {@link #contentTypes()}.
      */
     public static class ContentTypeServlet extends HttpServlet {
@@ -153,6 +137,20 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
             writer.write("><body>foo</body></html>");
             writer.close();
         }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void noContentType() throws Exception {
+        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        servlets.put("/test", NoContentTypeServlet.class);
+        startWebServer("./", null, servlets);
+
+        final WebClient client = getWebClient();
+        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/test");
+        assertNotNull(page);
     }
 
     /**
