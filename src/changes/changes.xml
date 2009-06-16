@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.saveAs(), better XHTML support.">
+            <action type="fix" dev="sdanig" issues="2803378">
+                Handle 204 (No Content) HTTP responses correctly.
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: implement TextRange.inText (IE only).
             </action>

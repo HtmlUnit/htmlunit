@@ -74,7 +74,7 @@ public class HtmlSubmitInput extends HtmlInput {
     @Override
     protected Page doClickAction(final Page defaultPage) throws IOException {
         final HtmlPage page = (HtmlPage) getPage();
-        if (!(page == defaultPage)) {
+        if (page != defaultPage) {
             return defaultPage;
         }
         final HtmlForm form = getEnclosingForm();

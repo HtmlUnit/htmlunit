@@ -2158,4 +2158,53 @@ public class WebClientTest extends WebServerTestCase {
         assertEquals(1, client.getTopLevelWindows().size());
     }
 
+    /**
+     * Regression test for bug 2803378: GET or POST to a URL that returns HTTP 204 (No Content).
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testNoContent() throws Exception {
+        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        servlets.put("/test1", NoContentServlet1.class);
+        servlets.put("/test2", NoContentServlet2.class);
+        startWebServer("./", null, servlets);
+        final WebClient client = new WebClient();
+        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/test1");
+        final HtmlPage page2 = page.getElementById("submit").click();
+        assertEquals(page, page2);
+    }
+
+    /**
+     * First servlet for {@link #testNoContent()}.
+     */
+    public static class NoContentServlet1 extends HttpServlet {
+        private static final long serialVersionUID = -3998557854927897924L;
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest req, final HttpServletResponse res) throws IOException {
+            res.setContentType("text/html");
+            final Writer writer = res.getWriter();
+            writer.write("<html><body><form action='test2'>"
+                + "<input id='submit' type='submit' value='submit'></input>"
+                + "</form></body></html>");
+            writer.close();
+        }
+    }
+
+    /**
+     * Second servlet for {@link #testNoContent()}.
+     */
+    public static class NoContentServlet2 extends HttpServlet {
+        private static final long serialVersionUID = -6586001348289174362L;
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest req, final HttpServletResponse res) {
+            res.setStatus(HttpServletResponse.SC_NO_CONTENT);
+        }
+    }
+
 }

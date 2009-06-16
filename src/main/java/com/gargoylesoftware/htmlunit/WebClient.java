@@ -437,6 +437,10 @@ public class WebClient implements Serializable {
         WebAssert.notNull("webResponse", webResponse);
         WebAssert.notNull("webWindow", webWindow);
 
+        if (webResponse.getStatusCode() == HttpStatus.SC_NO_CONTENT) {
+            return webWindow.getEnclosedPage();
+        }
+
         if (attachmentHandler_ != null && isAttachment(webResponse)) {
             final WebWindow w = openWindow(null, null, webWindow);
             final Page page = pageCreator_.createPage(webResponse, w);
