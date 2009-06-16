@@ -263,8 +263,8 @@ public class Stylesheet extends SimpleScriptable {
                 return element.asText().contains(cc.getData());
             case Condition.SAC_LANG_CONDITION:
                 final LangCondition lc = (LangCondition) condition;
-                for (HtmlElement e = element; e != null; e = (HtmlElement) e.getParentNode()) {
-                    if (e.getAttribute("lang").startsWith(lc.getLang())) {
+                for (DomNode node = element; node instanceof HtmlElement; node = node.getParentNode()) {
+                    if (((HtmlElement) node).getAttribute("lang").startsWith(lc.getLang())) {
                         return true;
                     }
                 }

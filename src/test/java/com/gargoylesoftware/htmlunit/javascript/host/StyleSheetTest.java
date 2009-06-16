@@ -347,4 +347,25 @@ public class StyleSheetTest extends WebTestCase {
         ss.insertRule(".testStyle { width: 24px;}", 0);
         ss.insertRule(" .testStyleDef { height: 42px; }", 0);
     }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    public void langCondition() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+                + "<style>\n"
+                + "  :lang(en) { color: black }\n"
+                + "</style>\n"
+                + "<script>\n"
+                + "  function test(){\n"
+                + "    var x = document.getElementById('myDiv').offsetWidth;\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "  <div id='myDiv'></div>\n"
+                + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }
