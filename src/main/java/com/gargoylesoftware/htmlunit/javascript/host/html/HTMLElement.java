@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
@@ -105,9 +106,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public static final int BEHAVIOR_ID_HOMEPAGE = 1;
     /** BEHAVIOR_ID_DOWNLOAD. */
     public static final int BEHAVIOR_ID_DOWNLOAD = 2;
+
     private static final String BEHAVIOR_CLIENT_CAPS = "#default#clientCaps";
     private static final String BEHAVIOR_HOMEPAGE = "#default#homePage";
     private static final String BEHAVIOR_DOWNLOAD = "#default#download";
+
     static final String POSITION_BEFORE_BEGIN = "beforeBegin";
     static final String POSITION_AFTER_BEGIN = "afterBegin";
     static final String POSITION_BEFORE_END = "beforeEnd";
@@ -126,6 +129,18 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     private String uniqueID_;
     private Map<String, HTMLCollection> elementsByTagName_; // for performance and for equality (==)
     private CSSStyleDeclaration style_;
+
+    /**
+     * The value of the "ch" JavaScript attribute for browsers that say that they support it, but do not really
+     * provide access to the value of the "char" DOM attribute. Not applicable to all types of HTML elements.
+     */
+    private String ch_ = "";
+
+    /**
+     * The value of the "chOff" JavaScript attribute for browsers that say that they support it, but do not really
+     * provide access to the value of the "charOff" DOM attribute. Not applicable to all types of HTML elements.
+     */
+    private String chOff_ = "";
 
     /**
      * The tag names of the objects for which innerHTML is read only in IE
@@ -2285,6 +2300,72 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
         else {
             Context.throwAsScriptRuntimeEx(new Exception("Cannot set the vAlign property to invalid value: " + vAlign));
+        }
+    }
+
+    /**
+     * Returns the value of the "ch" property.
+     * @return the value of the "ch" property
+     */
+    protected String getCh() {
+        final boolean ie = getBrowserVersion().isIE();
+        if (ie) {
+            return ch_;
+        }
+        String ch = getDomNodeOrDie().getAttribute("char");
+        if (ch == DomElement.ATTRIBUTE_NOT_DEFINED) {
+            ch = ".";
+        }
+        return ch;
+    }
+
+    /**
+     * Sets the value of the "ch" property.
+     * @param ch the value of the "ch" property
+     */
+    protected void setCh(final String ch) {
+        final boolean ie = getBrowserVersion().isIE();
+        if (ie) {
+            ch_ = ch;
+        }
+        else {
+            getDomNodeOrDie().setAttribute("char", ch);
+        }
+    }
+
+    /**
+     * Returns the value of the "chOff" property.
+     * @return the value of the "chOff" property
+     */
+    protected String getChOff() {
+        final boolean ie = getBrowserVersion().isIE();
+        if (ie) {
+            return chOff_;
+        }
+        return getDomNodeOrDie().getAttribute("charOff");
+    }
+
+    /**
+     * Sets the value of the "chOff" property.
+     * @param chOff the value of the "chOff" property
+     */
+    protected void setChOff(String chOff) {
+        final boolean ie = getBrowserVersion().isIE();
+        if (ie) {
+            chOff_ = chOff;
+        }
+        else {
+            try {
+                Float f = new Float(chOff);
+                if (f < 0) {
+                    f = 0f;
+                }
+                chOff = String.valueOf(f.intValue());
+            }
+            catch (final NumberFormatException e) {
+                // Ignore.
+            }
+            getDomNodeOrDie().setAttribute("charOff", chOff);
         }
     }
 

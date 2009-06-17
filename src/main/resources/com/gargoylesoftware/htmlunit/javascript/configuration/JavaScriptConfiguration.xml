@@ -1988,7 +1988,7 @@
         </property>
     </class>
 
-    <class name="HTMLTableCellElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableCellElement"
+    <class name="HTMLTableCellElement" extends="HTMLTableComponent" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableCellElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableCell">
         <doclink
             url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-82915075"
@@ -1999,7 +1999,6 @@
         <doclink
             url="http://msdn.microsoft.com/en-us/library/ms535903.aspx"
             descr="MSDN documentation (TD)"/>
-        <property name="align" notImplemented="true" readable="true" writable="true"/>
         <property name="cellIndex" readable="true" writable="false">
             <doclink
                 url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-80748363"
@@ -2008,20 +2007,23 @@
                 url="http://msdn.microsoft.com/en-us/library/ms533549.aspx"
                 descr="MSDN documentation"/>
         </property>
-        <property name="vAlign" notImplemented="true" readable="true" writable="true"/>
     </class>
 
     <!--
         Because it is associated with many HtmlClasses, the one-to-many
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
-    <class name="HTMLTableColElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableColElement"
+    <class name="HTMLTableColElement" extends="HTMLTableComponent" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableColElement"
         JSObject="true">
+        <property name="span" readable="true" writable="true"/>
+        <property name="width" readable="true" writable="true"/>
+    </class>
+
+    <class name="HTMLTableComponent" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableComponent"
+        JSObject="false">
         <property name="align" readable="true" writable="true"/>
         <property name="ch" readable="true" writable="true"/>
         <property name="chOff" readable="true" writable="true"/>
-        <property name="span" readable="true" writable="true"/>
         <property name="vAlign" readable="true" writable="true"/>
-        <property name="width" readable="true" writable="true"/>
     </class>
 
     <class name="HTMLTableElement" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableElement"
@@ -2123,7 +2125,9 @@
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class name="HTMLTableSectionElement" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableSectionElement"
         JSObject="true">
-        <property name="vAlign" notImplemented="true" readable="true" writable="true"/>
+        <property name="ch" readable="true" writable="true"/>
+        <property name="chOff" readable="true" writable="true"/>
+        <property name="vAlign" readable="true" writable="true"/>
     </class>
 
     <class name="HTMLTextAreaElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement"

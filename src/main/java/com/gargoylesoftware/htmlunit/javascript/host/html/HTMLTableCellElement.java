@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  */
-public class HTMLTableCellElement extends HTMLElement {
+public class HTMLTableCellElement extends HTMLTableComponent {
 
     private static final long serialVersionUID = -4321684413510290017L;
 
@@ -34,6 +34,7 @@ public class HTMLTableCellElement extends HTMLElement {
      * the Rhino engine won't walk up the hierarchy looking for constructors.
      */
     public void jsConstructor() {
+        // Empty.
     }
 
     /**

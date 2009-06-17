@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.saveAs(), better XHTML support.">
+            <action type="add" dev="sdanig">
+                JavaScript: add support for attributes align, vAlign, ch and chOff for thead, tbody, tfoot, td, and th elements.
+            </action>
             <action type="fix" dev="asashour" issue="2807135">
                 CSS: properly handle 'lang' condition.
             </action>

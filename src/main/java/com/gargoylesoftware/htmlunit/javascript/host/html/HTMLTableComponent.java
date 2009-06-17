@@ -14,21 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import com.gargoylesoftware.htmlunit.javascript.host.RowContainer;
-
 /**
- * A JavaScript object representing "HTMLTableSectionElement", it is used by
- * {@link com.gargoylesoftware.htmlunit.html.HtmlTableBody},
- * {@link com.gargoylesoftware.htmlunit.html.HtmlTableHeader}, and
- * {@link com.gargoylesoftware.htmlunit.html.HtmlTableFooter}.
+ * Contains attributes common to various table components.
  *
  * @version $Revision$
  * @author Daniel Gredler
- * @author Ahmed Ashour
  */
-public class HTMLTableSectionElement extends RowContainer {
+public class HTMLTableComponent extends HTMLElement {
 
-    private static final long serialVersionUID = -3564660687852337070L;
+    /** Serial version UID. */
+    private static final long serialVersionUID = 8789769971205129198L;
 
     /** The valid "vAlign" values for this element, when emulating IE. */
     private static final String[] VALIGN_VALID_VALUES_IE = {"top", "bottom", "middle", "baseline"};
@@ -39,8 +34,33 @@ public class HTMLTableSectionElement extends RowContainer {
     /**
      * Creates an instance.
      */
-    public HTMLTableSectionElement() {
+    public HTMLTableComponent() {
         // Empty.
+    }
+
+    /**
+     * JavaScript constructor. This must be declared in every JavaScript file because
+     * the Rhino engine won't walk up the hierarchy looking for constructors.
+     */
+    public void jsConstructor() {
+        // Empty.
+    }
+
+    /**
+     * Returns the value of the "align" property.
+     * @return the value of the "align" property
+     */
+    public String jsxGet_align() {
+        final boolean returnInvalidValues = getBrowserVersion().isFirefox();
+        return getAlign(returnInvalidValues);
+    }
+
+    /**
+     * Sets the value of the "align" property.
+     * @param align the value of the "align" property
+     */
+    public void jsxSet_align(final String align) {
+        setAlign(align, false);
     }
 
     /**
