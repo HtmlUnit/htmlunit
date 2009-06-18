@@ -30,14 +30,17 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public class HTMLTableRowElement extends HTMLElement {
+public class HTMLTableRowElement extends HTMLTableComponent {
+
     private static final long serialVersionUID = 3256441404401397812L;
+
     private HTMLCollection cells_; // has to be a member to have equality (==) working
 
     /**
      * Creates an instance.
      */
     public HTMLTableRowElement() {
+        // Empty.
     }
 
     /**
@@ -45,11 +48,12 @@ public class HTMLTableRowElement extends HTMLElement {
      * the Rhino engine won't walk up the hierarchy looking for constructors.
      */
     public void jsConstructor() {
+        // Empty.
     }
 
     /**
-     * Returns the index of the row within parent's table.
-     * @return the index
+     * Returns the index of the row within the parent table.
+     * @return the index of the row within the parent table
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534377.aspx">MSDN Documentation</a>
      */
     public int jsxGet_rowIndex() {
