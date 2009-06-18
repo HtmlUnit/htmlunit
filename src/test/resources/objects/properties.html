@@ -160,7 +160,7 @@
     var all = [];
     for (var property in object) {
       try {
-	    if (parent == null || parent[property] === undefined) {
+	    if (parent == null || !(property in parent)) {
 	      if (typeof object[property] == 'function')
             all.push(property + '()');
           else
