@@ -130,7 +130,9 @@ public abstract class HtmlElement extends DomElement {
         final String oldAttributeValue = getAttribute(qualifiedName);
         String value = attributeValue;
 
-        if (getOwnerDocument() instanceof HtmlPage) {
+        final boolean mappedElement = (qualifiedName.equals("name") || qualifiedName.equals("id"))
+            && getOwnerDocument() instanceof HtmlPage;
+        if (mappedElement) {
             ((HtmlPage) getPage()).removeMappedElement(this);
         }
 
@@ -145,7 +147,9 @@ public abstract class HtmlElement extends DomElement {
         }
 
         final HtmlPage htmlPage = (HtmlPage) getPage();
-        htmlPage.addMappedElement(this);
+        if (mappedElement) {
+            htmlPage.addMappedElement(this);
+        }
 
         final HtmlAttributeChangeEvent htmlEvent;
         if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {

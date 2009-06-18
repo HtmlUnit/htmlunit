@@ -102,8 +102,7 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testElementGetAttributeWith() throws Exception {
-        final String html
-            = "<html><head></head><body id='tag'>text</body></html>";
+        final String html = "<html><head></head><body id='tag'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
@@ -117,8 +116,7 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testElementGetAttributeNone() throws Exception {
-        final String html
-            = "<html><head></head><body id='tag'>text</body></html>";
+        final String html = "<html><head></head><body id='tag'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
@@ -1145,5 +1143,31 @@ public class HtmlElementTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
         assertEquals(1, page.getElementById("myForm").getElementsByTagName("input").getLength());
         assertEquals(2, page.getBody().getElementsByTagName("input").getLength());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void duplicateId() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var value = document.getElementById('duplicateID').innerHTML;\n"
+            + "    alert(value.length > 10);\n"
+            + "    document.getElementById('duplicateID').style.display = 'block';\n"
+            + "    alert(value === document.getElementById('duplicateID').innerHTML);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <fieldset id='duplicateID'><span id='duplicateID'></span></fieldset>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"true", "true"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.getDefault(), html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }
