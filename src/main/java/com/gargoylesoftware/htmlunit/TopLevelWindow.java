@@ -16,6 +16,9 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -31,6 +34,10 @@ public class TopLevelWindow extends WebWindowImpl implements Serializable  {
 
     private static final long serialVersionUID = 2448888802967514906L;
 
+    /** Logging support. */
+    private static final Log LOG = LogFactory.getLog(TopLevelWindow.class);
+
+    /** The window which caused this window to be opened, if any. */
     private WebWindow opener_;
 
     /**
@@ -101,10 +108,16 @@ public class TopLevelWindow extends WebWindowImpl implements Serializable  {
     public void close() {
         final Page page = getEnclosedPage();
         if (page instanceof HtmlPage) {
-            ((HtmlPage) page).cleanUp();
+            final HtmlPage htmlPage = (HtmlPage) page;
+            if (!htmlPage.isOnbeforeunloadAccepted()) {
+                LOG.debug("The registered OnbeforeunloadHandler rejected the window close event.");
+                return;
+            }
+            htmlPage.cleanUp();
         }
         destroyChildren();
         getJobManager().shutdown();
         getWebClient().deregisterWebWindow(this);
     }
+
 }

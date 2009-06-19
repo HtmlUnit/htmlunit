@@ -18,6 +18,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -238,6 +239,21 @@ public class TopLevelWindowTest extends WebTestCase {
         assertEquals(firstUrlWithHash, history.getUrl(4));
         assertEquals(URL_FIRST, window.getEnclosedPage().getWebResponse().getRequestSettings().getUrl());
         assertNull(history.getUrl(5));
+    }
+
+    /**
+     * Regression test for bug 2808520: onbeforeunload not called when window.close() is called.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void onBeforeUnloadCalledOnClose() throws Exception {
+        final String html = "<html><body onbeforeunload='alert(7)'>abc</body></html>";
+        final List<String> alerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(html, alerts);
+        assertTrue(alerts.isEmpty());
+        final TopLevelWindow w = (TopLevelWindow) page.getEnclosingWindow();
+        w.close();
+        assertEquals(Arrays.asList("7"), alerts);
     }
 
 }
