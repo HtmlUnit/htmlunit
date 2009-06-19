@@ -42,14 +42,6 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * JavaScript constructor. This must be declared in every JavaScript file because
-     * the Rhino engine won't walk up the hierarchy looking for constructors.
-     */
-    @Override
-    public void jsConstructor() {
-    }
-
-    /**
      * Returns the table's caption element, or <tt>null</tt> if none exists. If more than one
      * caption is declared in the table, this method returns the first one.
      * @return the table's caption element

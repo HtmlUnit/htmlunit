@@ -35,13 +35,6 @@ public final class Text extends CharacterDataImpl {
     }
 
     /**
-     * JavaScript constructor. This must be declared in every JavaScript file because
-     * the rhino engine won't walk up the hierarchy looking for constructors.
-     */
-    public void jsConstructor() {
-    }
-
-    /**
      * Initialize this object.
      */
     public void initialize() {

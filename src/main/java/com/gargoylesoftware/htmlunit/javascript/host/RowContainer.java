@@ -46,14 +46,6 @@ public class RowContainer extends HTMLElement {
     }
 
     /**
-     * JavaScript constructor. This must be declared in every JavaScript file because
-     * the Rhino engine won't walk up the hierarchy looking for constructors.
-     */
-    public void jsConstructor() {
-        // Empty.
-    }
-
-    /**
      * Returns the rows in the element.
      * @return the rows in the element
      */
