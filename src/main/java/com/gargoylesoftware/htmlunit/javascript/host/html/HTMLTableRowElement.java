@@ -44,15 +44,6 @@ public class HTMLTableRowElement extends HTMLTableComponent {
     }
 
     /**
-     * JavaScript constructor. This must be declared in every JavaScript file because
-     * the Rhino engine won't walk up the hierarchy looking for constructors.
-     */
-    @Override
-    public void jsConstructor() {
-        // Empty.
-    }
-
-    /**
      * Returns the index of the row within the parent table.
      * @return the index of the row within the parent table
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534377.aspx">MSDN Documentation</a>

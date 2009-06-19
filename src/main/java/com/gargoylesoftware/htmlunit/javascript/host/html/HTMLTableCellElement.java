@@ -30,15 +30,6 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     private static final long serialVersionUID = -4321684413510290017L;
 
     /**
-     * JavaScript constructor. This must be declared in every JavaScript file because
-     * the Rhino engine won't walk up the hierarchy looking for constructors.
-     */
-    @Override
-    public void jsConstructor() {
-        // Empty.
-    }
-
-    /**
      * Returns the index of this cell within the parent row.
      * @return the index of this cell within the parent row
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533549.aspx">MSDN Documentation</a>
