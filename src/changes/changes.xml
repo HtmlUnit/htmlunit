@@ -5,7 +5,7 @@
     </properties>
 
     <body>
-        <release version="2.6" date="?" description="Bugfixes, add HtmlPage.saveAs(), better XHTML support.">
+        <release version="2.6" date="?" description="Bugfixes, add HtmlPage.saveAs(), better XHTML support, Proxy Auto-Config">
             <action type="add" dev="asashour" issue="2799316">
                 Add support for Proxy Auto-Config.
             </action>
