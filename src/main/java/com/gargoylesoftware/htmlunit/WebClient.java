@@ -1439,7 +1439,7 @@ public class WebClient implements Serializable {
                             .getWebResponse().getContentAsString();
                         proxyConfig_.setProxyAutoConfigContent(content);
                     }
-                    final String allValue = ProxyAutoConfig.evaluate(content);
+                    final String allValue = ProxyAutoConfig.evaluate(content, url);
                     getLog().debug("Proxy Auto-Config: value '" + allValue + "' for URL " + url);
                     String value = allValue.split(";")[0].trim();
                     if (value.startsWith("PROXY")) {

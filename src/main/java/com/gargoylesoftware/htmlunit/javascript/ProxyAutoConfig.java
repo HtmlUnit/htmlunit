@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript;
 import java.lang.reflect.Method;
 import java.net.InetAddress;
+import java.net.URL;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
@@ -39,9 +40,10 @@ public final class ProxyAutoConfig {
     /**
      * Evaluates the <tt>FindProxyForURL</tt> method of the specified content.
      * @param content the JavaScript content
+     * @param url the URL to be retrieved
      * @return semicolon-separated result
      */
-    public static String evaluate(final String content) {
+    public static String evaluate(final String content, final URL url) {
         final Context cx = ContextFactory.getGlobal().enterContext();
         try {
             final ProxyAutoConfig config = new ProxyAutoConfig();
@@ -57,7 +59,7 @@ public final class ProxyAutoConfig {
             config.defineMethod("dnsDomainLevels", scope);
 
             cx.evaluateString(scope, content, "<cmd>", 1, null);
-            final Object functionArgs[] = {"hello", "there"};
+            final Object functionArgs[] = {url.toExternalForm(), url.getHost()};
             final Object fObj = scope.get("FindProxyForURL", scope);
 
             final NativeFunction f = (NativeFunction) fObj;
