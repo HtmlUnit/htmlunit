@@ -63,6 +63,7 @@ import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.ProxyAutoConfig;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
@@ -1430,8 +1431,26 @@ public class WebClient implements Serializable {
 
         // If the request settings don't specify a custom proxy, use the default client proxy...
         if (webRequestSettings.getProxyHost() == null) {
+            if (proxyConfig_.getProxyAutoConfigUrl() != null) {
+                if (!proxyConfig_.getProxyAutoConfigUrl().equals(url.toExternalForm())) {
+                    String content = proxyConfig_.getProxyAutoConfigContent();
+                    if (content == null) {
+                        content = getPage(proxyConfig_.getProxyAutoConfigUrl()).getWebResponse().getContentAsString();
+                        proxyConfig_.setProxyAutoConfigContent(content);
+                    }
+                    final String allValue = ProxyAutoConfig.evaluate(content);
+                    getLog().debug("Proxy Auto-Config: value '" + allValue + "' for URL " + url);
+                    String value = allValue.split(";")[0].trim();
+                    if (value.startsWith("PROXY")) {
+                        value = value.substring(6);
+                        final int colonIndex = value.indexOf(':');
+                        webRequestSettings.setProxyHost(value.substring(0, colonIndex));
+                        webRequestSettings.setProxyPort(Integer.parseInt(value.substring(colonIndex + 1)));
+                    }
+                }
+            }
             // ...unless the host needs to bypass the configured client proxy!
-            if (!proxyConfig_.shouldBypassProxy(webRequestSettings.getUrl().getHost())) {
+            else if (!proxyConfig_.shouldBypassProxy(webRequestSettings.getUrl().getHost())) {
                 webRequestSettings.setProxyHost(proxyConfig_.getProxyHost());
                 webRequestSettings.setProxyPort(proxyConfig_.getProxyPort());
             }

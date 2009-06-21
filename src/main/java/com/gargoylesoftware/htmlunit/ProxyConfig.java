@@ -34,6 +34,8 @@ public class ProxyConfig implements Serializable {
     private String proxyHost_;
     private int proxyPort_;
     private final Map<String, Pattern> proxyBypassHosts_;
+    private String proxyAutoConfigUrl_;
+    private String proxyAutoConfigContent_;
 
     /**
      * Creates a new instance.
@@ -122,4 +124,36 @@ public class ProxyConfig implements Serializable {
         return bypass;
     }
 
+    /**
+     * Returns the proxy auto-config URL.
+     * @return the proxy auto-config URL
+     */
+    public String getProxyAutoConfigUrl() {
+        return proxyAutoConfigUrl_;
+    }
+
+    /**
+     * Sets the proxy auto-config URL.
+     * @param proxyAutoConfigUrl the proxy auto-config URL
+     */
+    public void setProxyAutoConfigUrl(final String proxyAutoConfigUrl) {
+        proxyAutoConfigUrl_ = proxyAutoConfigUrl;
+        setProxyAutoConfigContent(null);
+    }
+
+    /**
+     * Returns the proxy auto-config content.
+     * @return the proxy auto-config content
+     */
+    protected String getProxyAutoConfigContent() {
+        return proxyAutoConfigContent_;
+    }
+
+    /**
+     * Sets the proxy auto-config content.
+     * @param proxyAutoConfigContent the proxy auto-config content
+     */
+    protected void setProxyAutoConfigContent(final String proxyAutoConfigContent) {
+        proxyAutoConfigContent_ = proxyAutoConfigContent;
+    }
 }
