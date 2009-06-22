@@ -90,6 +90,7 @@ public class HtmlImageInput extends HtmlInput {
      * @exception IOException If an io error occurs
      */
     @Override
+    @SuppressWarnings("unchecked")
     public Page click() throws IOException {
         return click(0, 0);
     }

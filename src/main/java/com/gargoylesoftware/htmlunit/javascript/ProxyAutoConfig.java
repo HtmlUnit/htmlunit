@@ -57,6 +57,7 @@ public final class ProxyAutoConfig {
             config.defineMethod("dnsResolve", scope);
             config.defineMethod("myIpAddress", scope);
             config.defineMethod("dnsDomainLevels", scope);
+            config.defineMethod("shExpMatch", scope);
 
             cx.evaluateString(scope, content, "<cmd>", 1, null);
             final Object functionArgs[] = {url.toExternalForm(), url.getHost()};
@@ -181,5 +182,16 @@ public final class ProxyAutoConfig {
             }
         }
         return levels;
+    }
+
+    /**
+     * Matches the specified string against a shell expression, not regular expression.
+     * @param str a string to match
+     * @param shexp the shell expression
+     * @return if the string matches
+     */
+    public static boolean shExpMatch(final String str, final String shexp) {
+        final String regexp = shexp.replace(".", "\\.").replace("*", ".*").replace("?", ".");
+        return str.matches(regexp);
     }
 }

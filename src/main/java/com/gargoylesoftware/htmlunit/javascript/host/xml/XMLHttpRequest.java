@@ -543,10 +543,6 @@ public class XMLHttpRequest extends SimpleScriptable {
             return new byte[0];
         }
 
-        public URL getUrl() {
-            return webRequestSettings_.getUrl();
-        }
-
         /**
          * {@inheritDoc}
          * @deprecated As of 2.6, please use {@link #getRequestSettings()}.getUrl()
@@ -571,10 +567,6 @@ public class XMLHttpRequest extends SimpleScriptable {
 
         public String getResponseHeaderValue(final String headerName) {
             return "";
-        }
-
-        public long getLoadTimeInMilliSeconds() {
-            return 0;
         }
 
         public long getLoadTime() {

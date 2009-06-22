@@ -55,25 +55,19 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /** The different types of shorthand values. */
     private enum Shorthand {
-        TOP("Top", 0),
-        RIGHT("Right", 1),
-        BOTTOM("Bottom", 2),
-        LEFT("Left", 3);
+        TOP("Top"),
+        RIGHT("Right"),
+        BOTTOM("Bottom"),
+        LEFT("Left");
 
         private final String string_;
-        private final int position_;
-        Shorthand(final String stringRepresentation, final int position) {
+        Shorthand(final String stringRepresentation) {
             string_ = stringRepresentation;
-            position_ = position;
         }
 
         @Override
         public String toString() {
             return string_;
-        }
-
-        int getPosition() {
-            return position_;
         }
     }
 

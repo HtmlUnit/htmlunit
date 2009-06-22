@@ -149,6 +149,7 @@ public class HtmlLabel extends ClickableElement {
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("unchecked")
     public Page click() throws IOException {
         // first the click on the label
         final Page page = super.click();

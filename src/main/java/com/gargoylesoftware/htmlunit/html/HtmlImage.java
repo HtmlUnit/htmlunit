@@ -397,6 +397,7 @@ public class HtmlImage extends ClickableElement {
      * @exception IOException if an IO error occurs
      */
     @Override
+    @SuppressWarnings("unchecked")
     public Page click() throws IOException {
         return click(0, 0);
     }

@@ -138,7 +138,7 @@ public class HtmlTable extends ClickableElement {
         final RowIterator iterator = new RowIterator();
         while (iterator.hasNext()) {
             final HtmlTableRow row = iterator.next();
-            if (row.getIdAttribute().equals(id)) {
+            if (row.getAttribute("id").equals(id)) {
                 return row;
             }
         }
