@@ -2269,8 +2269,8 @@ public class HtmlPage extends SgmlPage implements Cloneable {
      * @param file file to write this page into
      * @throws IOException If an error occurs
      */
-    public void saveAs(final File file) throws IOException {
-        new XmlSerializer().saveAs(this, file);
+    public void save(final File file) throws IOException {
+        new XmlSerializer().save(this, file);
     }
 }
 

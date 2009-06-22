@@ -40,7 +40,7 @@ class XmlSerializer {
     private File outputDir_;
     private WebClient webClient_;
 
-    public void saveAs(final HtmlPage page, final File file) throws IOException {
+    public void save(final HtmlPage page, final File file) throws IOException {
         webClient_ = page.getWebClient();
         String fileName = file.getName();
         if (!fileName.endsWith(".htm") && !fileName.endsWith(".html")) {

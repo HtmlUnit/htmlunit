@@ -5,7 +5,7 @@
     </properties>
 
     <body>
-        <release version="2.6" date="?" description="Bugfixes, add HtmlPage.saveAs(), better XHTML support, Proxy Auto-Config">
+        <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config">
             <action type="add" dev="asashour" issue="2799316">
                 Add support for Proxy Auto-Config.
             </action>
@@ -77,7 +77,7 @@
                 HtmlSelect: add .getOptionByText().
             </action>
             <action type="add" dev="asashour" issues="2486331">
-                HtmlPage and HtmlImage: add .saveAs().
+                HtmlPage and HtmlImage: add .save().
             </action>
             <action type="update" dev="asashour">
                 Change default value for "Accept-Language" HTTP header to "en-us".

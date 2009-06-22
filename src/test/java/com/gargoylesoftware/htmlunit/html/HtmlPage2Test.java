@@ -241,7 +241,7 @@ public class HtmlPage2Test extends WebServerTestCase {
      */
     @Test
     @Alerts("Hello there")
-    public void saveAs() throws Exception {
+    public void save() throws Exception {
         final String html = "<html><head><script src='" + URL_SECOND + "'>\n</script></head></html>";
 
         final String js = "alert('Hello there')";
@@ -258,8 +258,8 @@ public class HtmlPage2Test extends WebServerTestCase {
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
         assertEquals(getExpectedAlerts(), collectedAlerts);
-        final File file = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_saveAs.html");
-        page.saveAs(file);
+        final File file = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_save.html");
+        page.save(file);
         assertTrue(file.exists());
         assertTrue(file.isFile());
         final String content = FileUtils.readFileToString(file);
@@ -271,7 +271,7 @@ public class HtmlPage2Test extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void saveAs_image() throws Exception {
+    public void save_image() throws Exception {
         final String html = "<html><body><img src='" + URL_SECOND + "'></body></html>";
 
         final URL url = getClass().getClassLoader().getResource("testfiles/tiny-jpg.img");
@@ -291,10 +291,10 @@ public class HtmlPage2Test extends WebServerTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
-        final File file = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_saveAs2.html");
-        final File imgFile = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_saveAs2/second.JPEG");
+        final File file = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_save2.html");
+        final File imgFile = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_save2/second.JPEG");
         try {
-            page.saveAs(file);
+            page.save(file);
             assertTrue(file.exists());
             assertTrue(file.isFile());
             final FileInputStream fos = new FileInputStream(imgFile);
@@ -312,7 +312,7 @@ public class HtmlPage2Test extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void saveAs_css() throws Exception {
+    public void save_css() throws Exception {
         final String html = "<html><head>"
             + "<link rel='stylesheet' type='text/css' href='" + URL_SECOND + "'/></head></html>";
 
@@ -329,10 +329,10 @@ public class HtmlPage2Test extends WebServerTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
-        final File file = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_saveAs2.html");
-        final File cssFile = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_saveAs2/second.css");
+        final File file = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_save3.html");
+        final File cssFile = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_save3/second.css");
         try {
-            page.saveAs(file);
+            page.save(file);
             assertTrue(file.exists());
             assertTrue(file.isFile());
             assertEquals(css, FileUtils.readFileToString(cssFile));
