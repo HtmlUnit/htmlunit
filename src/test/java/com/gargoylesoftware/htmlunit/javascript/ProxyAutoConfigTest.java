@@ -31,7 +31,7 @@ public class ProxyAutoConfigTest extends WebTestCase {
      */
     @Test
     public void shExpMatch() throws Exception {
-        assertTrue(ProxyAutoConfig.shExpMatch("http://home.netscape.com/people/ari/index.html", "*/arx/*"));
+        assertTrue(ProxyAutoConfig.shExpMatch("http://home.netscape.com/people/ari/index.html", "*/ari/*"));
         assertFalse(ProxyAutoConfig.shExpMatch("http://home.netscape.com/people/montulli/index.html", "*/ari/*"));
     }
 }
