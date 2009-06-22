@@ -32,19 +32,17 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class ProxyAutoConfigTest extends WebTestCase {
 
     /**
-     * @throws Exception if the test fails
      */
     @Test
-    public void shExpMatch() throws Exception {
+    public void shExpMatch() {
         assertTrue(ProxyAutoConfig.shExpMatch("http://home.netscape.com/people/ari/index.html", "*/ari/*"));
         assertFalse(ProxyAutoConfig.shExpMatch("http://home.netscape.com/people/montulli/index.html", "*/ari/*"));
     }
 
     /**
-     * @throws Exception if the test fails
      */
     @Test
-    public void weekdayRange() throws Exception {
+    public void weekdayRange() {
         final Calendar calendar = Calendar.getInstance();
         final String today = new SimpleDateFormat("EEE").format(calendar.getTime()).toUpperCase();
         calendar.add(Calendar.DAY_OF_MONTH, 1);
@@ -56,5 +54,43 @@ public class ProxyAutoConfigTest extends WebTestCase {
         assertTrue(ProxyAutoConfig.weekdayRange(yesterday, today, Undefined.instance));
         assertTrue(ProxyAutoConfig.weekdayRange(yesterday, tomorrow, Undefined.instance));
         assertFalse(ProxyAutoConfig.weekdayRange(tomorrow, yesterday, Undefined.instance));
+    }
+
+    /**
+     */
+    @Test
+    public void dateRange() {
+        final Object undefined = Undefined.instance;
+        final Calendar calendar = Calendar.getInstance();
+        final int today = calendar.get(Calendar.DAY_OF_MONTH);
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        final int tomorrow = calendar.get(Calendar.DAY_OF_MONTH);
+        calendar.add(Calendar.DAY_OF_MONTH, -2);
+        final int yesterday = calendar.get(Calendar.DAY_OF_MONTH);
+        assertTrue(ProxyAutoConfig.dateRange(String.valueOf(today),
+                undefined, undefined, undefined, undefined, undefined, undefined));
+        assertFalse(ProxyAutoConfig.dateRange(String.valueOf(yesterday),
+                undefined, undefined, undefined, undefined, undefined, undefined));
+        assertFalse(ProxyAutoConfig.dateRange(String.valueOf(tomorrow),
+                undefined, undefined, undefined, undefined, undefined, undefined));
+    }
+
+    /**
+     */
+    @Test
+    public void timeRange() {
+        final Object undefined = Undefined.instance;
+        final Calendar calendar = Calendar.getInstance();
+        final int now = calendar.get(Calendar.HOUR_OF_DAY);
+        calendar.add(Calendar.HOUR_OF_DAY, 2);
+        final int after = calendar.get(Calendar.HOUR_OF_DAY);
+        calendar.add(Calendar.HOUR_OF_DAY, -4);
+        final int before = calendar.get(Calendar.HOUR_OF_DAY);
+        assertTrue(ProxyAutoConfig.timeRange(String.valueOf(now),
+                undefined, undefined, undefined, undefined, undefined, undefined));
+        assertFalse(ProxyAutoConfig.timeRange(String.valueOf(before),
+                undefined, undefined, undefined, undefined, undefined, undefined));
+        assertFalse(ProxyAutoConfig.timeRange(String.valueOf(after),
+                undefined, undefined, undefined, undefined, undefined, undefined));
     }
 }

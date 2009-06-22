@@ -205,7 +205,7 @@ public final class ProxyAutoConfig {
      * @param wd1 week day 1
      * @param wd2 week day 2, optional
      * @param gmt string of "GMT", or not specified
-     * @return if the string matches
+     * @return if the today is included
      */
     public static boolean weekdayRange(final String wd1, Object wd2, final Object gmt) {
         TimeZone timezone = TimeZone.getDefault();
@@ -227,5 +227,229 @@ public final class ProxyAutoConfig {
             calendar.add(Calendar.DAY_OF_WEEK, 1);
         }
         return false;
+    }
+
+    /**
+     * Checks if today is included in the specified range.
+     * @param value1 the value 1
+     * @param value2 the value 2
+     * @param value3 the value 3
+     * @param value4 the value 4
+     * @param value5 the value 5
+     * @param value6 the value 6
+     * @param value7 the value 7
+     * @return if the date is in range
+     */
+    public static boolean dateRange(final String value1, final Object value2, final Object value3,
+            final Object value4, final Object value5, final Object value6, final Object value7) {
+        final Object[] values = {value1, value2, value3, value4, value5, value6, value7};
+        TimeZone timezone = TimeZone.getDefault();
+
+        //actual values length
+        int length;
+        for (length = values.length - 1; length >= 0; length--) {
+            if (Context.toString(values[length]).equals("GMT")) {
+                timezone = TimeZone.getTimeZone("GMT");
+                break;
+            }
+            else if (values[length] != Undefined.instance) {
+                length++;
+                break;
+            }
+        }
+
+        int day1, day2, month1, month2, year1, year2;
+        Calendar cal1;
+        Calendar cal2;
+        switch (length) {
+            case 1:
+                final int day = getSmallInt(value1);
+                final int month = dateRange_getMonth(value1);
+                final int year = dateRange_getYear(value1);
+                cal1 = dateRange_createCalendar(timezone, day, month, year);
+                cal2 = (Calendar) cal1.clone();
+                break;
+
+            case 2:
+                day1 = getSmallInt(value1);
+                month1 = dateRange_getMonth(value1);
+                year1 = dateRange_getYear(value1);
+                cal1 = dateRange_createCalendar(timezone, day1, month1, year1);
+                day2 = getSmallInt(value2);
+                month2 = dateRange_getMonth(value2);
+                year2 = dateRange_getYear(value2);
+                cal2 = dateRange_createCalendar(timezone, day2, month2, year2);
+                break;
+
+            case 4:
+                day1 = getSmallInt(value1);
+                if (day1 != -1) {
+                    month1 = dateRange_getMonth(value2);
+                    day2 = getSmallInt(value3);
+                    month2 = dateRange_getMonth(value4);
+                    cal1 = dateRange_createCalendar(timezone, day1, month1, -1);
+                    cal2 = dateRange_createCalendar(timezone, day2, month2, -1);
+                }
+                else {
+                    month1 = dateRange_getMonth(value1);
+                    year1 = dateRange_getMonth(value2);
+                    month2 = getSmallInt(value3);
+                    year2 = dateRange_getMonth(value4);
+                    cal1 = dateRange_createCalendar(timezone, -1, month1, year1);
+                    cal2 = dateRange_createCalendar(timezone, -1, month2, year2);
+                }
+                break;
+
+            default:
+                day1 = getSmallInt(value1);
+                month1 = dateRange_getMonth(value2);
+                year1 = dateRange_getYear(value3);
+                day2 = getSmallInt(value4);
+                month2 = dateRange_getMonth(value5);
+                year2 = dateRange_getYear(value6);
+                cal1 = dateRange_createCalendar(timezone, day1, month1, year1);
+                cal2 = dateRange_createCalendar(timezone, day2, month2, year2);
+        }
+
+        final Calendar today = Calendar.getInstance(timezone);
+        return today.equals(cal1) || today.after(cal1) && today.before(cal2) || today.equals(cal2);
+    }
+
+    private static Calendar dateRange_createCalendar(final TimeZone timezone,
+            final int day, final int month, final int year) {
+        final Calendar calendar = Calendar.getInstance(timezone);
+        if (day != -1) {
+            calendar.set(Calendar.DAY_OF_MONTH, day);
+        }
+        if (month != -1) {
+            calendar.set(Calendar.MONTH, month);
+        }
+        if (year != -1) {
+            calendar.set(Calendar.YEAR, year);
+        }
+        return calendar;
+    }
+
+    private static int getSmallInt(final Object object) {
+        final String s = Context.toString(object);
+        if (Character.isDigit(s.charAt(0))) {
+            final int i = Integer.parseInt(s);
+            if (i < 70) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private static int dateRange_getMonth(final Object object) {
+        final String s = Context.toString(object);
+        if (Character.isLetter(s.charAt(0))) {
+            try {
+                final Calendar cal = Calendar.getInstance();
+                cal.clear();
+                cal.setTime(new SimpleDateFormat("MMM").parse(s));
+                return cal.get(Calendar.MONTH);
+            }
+            catch (final Exception e) {
+                //empty
+            }
+        }
+        return -1;
+    }
+
+    private static int dateRange_getYear(final Object object) {
+        final String s = Context.toString(object);
+        if (Character.isDigit(s.charAt(0))) {
+            final int i = Integer.parseInt(s);
+            if (i > 1000) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    /**
+     * Checks if time is included in the specified range.
+     * @param value1 the value 1
+     * @param value2 the value 2
+     * @param value3 the value 3
+     * @param value4 the value 4
+     * @param value5 the value 5
+     * @param value6 the value 6
+     * @param value7 the value 7
+     * @return if the string matches
+     */
+    public static boolean timeRange(final String value1, final Object value2, final Object value3,
+            final Object value4, final Object value5, final Object value6, final Object value7) {
+        final Object[] values = {value1, value2, value3, value4, value5, value6, value7};
+        TimeZone timezone = TimeZone.getDefault();
+
+        //actual values length
+        int length;
+        for (length = values.length - 1; length >= 0; length--) {
+            if (Context.toString(values[length]).equals("GMT")) {
+                timezone = TimeZone.getTimeZone("GMT");
+                break;
+            }
+            else if (values[length] != Undefined.instance) {
+                length++;
+                break;
+            }
+        }
+
+        int hour1, hour2, min1, min2, second1, second2;
+        Calendar cal1;
+        Calendar cal2;
+        switch (length) {
+            case 1:
+                hour1 = getSmallInt(value1);
+                cal1 = timeRange_createCalendar(timezone, hour1, -1, -1);
+                cal2 = (Calendar) cal1.clone();
+                cal2.add(Calendar.HOUR_OF_DAY, 1);
+                break;
+
+            case 2:
+                hour1 = getSmallInt(value1);
+                cal1 = timeRange_createCalendar(timezone, hour1, -1, -1);
+                hour2 = getSmallInt(value2);
+                cal2 = timeRange_createCalendar(timezone, hour2, -1, -1);
+                break;
+
+            case 4:
+                hour1 = getSmallInt(value1);
+                min1 = getSmallInt(value2);
+                hour2 = getSmallInt(value3);
+                min2 = getSmallInt(value4);
+                cal1 = dateRange_createCalendar(timezone, hour1, min1, -1);
+                cal2 = dateRange_createCalendar(timezone, hour2, min2, -1);
+                break;
+
+            default:
+                hour1 = getSmallInt(value1);
+                min1 = getSmallInt(value2);
+                second1 = getSmallInt(value3);
+                hour2 = getSmallInt(value4);
+                min2 = getSmallInt(value5);
+                second2 = getSmallInt(value6);
+                cal1 = dateRange_createCalendar(timezone, hour1, min1, second1);
+                cal2 = dateRange_createCalendar(timezone, hour2, min2, second2);
+        }
+
+        final Calendar now = Calendar.getInstance(timezone);
+        return now.equals(cal1) || now.after(cal1) && now.before(cal2) || now.equals(cal2);
+    }
+
+    private static Calendar timeRange_createCalendar(final TimeZone timezone,
+            final int hour, final int minute, final int second) {
+        final Calendar calendar = Calendar.getInstance(timezone);
+        if (hour != -1) {
+            calendar.set(Calendar.HOUR_OF_DAY, hour);
+        }
+        if (minute != -1) {
+            calendar.set(Calendar.MINUTE, minute);
+        }
+        if (second != -1) {
+            calendar.set(Calendar.SECOND, second);
+        }
+        return calendar;
     }
 }
