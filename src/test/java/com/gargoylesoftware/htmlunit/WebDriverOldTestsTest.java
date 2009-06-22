@@ -25,10 +25,13 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.json.JSONArray;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 
 /**
  * Runs the HtmlUnit "traditional" tests that have been captured using WebDriver.
@@ -93,9 +96,22 @@ public class WebDriverOldTestsTest extends WebDriverTestCase {
      */
     @Test
     public void test() throws Throwable {
+        log_.info("Running " + testFile_);
+
+        final WebDriver webDriver = getWebDriver();
+        final JavascriptExecutor jsExecutor = (JavascriptExecutor) webDriver;
         getWebDriver().get(testFile_.toExternalForm());
 
+        // retrieve captured "alerts"
+        final JSONArray resp = (JSONArray) jsExecutor.executeScript("return window.__huCatchedAlerts");
+        final List<String> actualResults = new ArrayList<String>();
+        if (resp != null) {
+            for (int i = 0; i < resp.length(); ++i) {
+                actualResults.add(resp.getString(i));
+            }
+        }
+
         // verifications
-        Assert.assertEquals(testFile_.toExternalForm(), expectedLog_, getEntries("log"));
+        Assert.assertEquals(testFile_.toExternalForm(), expectedLog_, actualResults);
     }
 }

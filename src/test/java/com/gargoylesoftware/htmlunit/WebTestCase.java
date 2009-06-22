@@ -707,19 +707,11 @@ public abstract class WebTestCase {
 
             final File outFile = new File(targetDir, generateTest_testName_);
 
-            String newContent = StringUtils.replace(generateTest_content_, "alert(", "log(");
-
-            final InputStream is = getClass().getResourceAsStream("/logWriter.js");
-            final String logWriter = "\n<script>\n" + IOUtils.toString(is) + "\n</script>\n";
-            IOUtils.closeQuietly(is);
-
-            if (newContent.indexOf("<head>") > -1) {
-                newContent = StringUtils.replaceOnce(newContent, "<head>", "<head>" + logWriter);
-            }
-            else {
-                newContent = StringUtils.replaceOnce(newContent, "<html>",
-                        "<html>\n<head>" + logWriter + "</head>\n");
-            }
+            // replace alert(x) by a storage in window's scope
+            // Convert to string here due to: http://code.google.com/p/webdriver/issues/detail?id=209
+            final String newContent = StringUtils.replace(generateTest_content_, "alert(",
+                "(function(t){var x = window.__huCatchedAlerts; x = x ? x : []; "
+                + "window.__huCatchedAlerts = x; x.push(String(t))})(");
 
             FileUtils.writeStringToFile(outFile, newContent);
 
