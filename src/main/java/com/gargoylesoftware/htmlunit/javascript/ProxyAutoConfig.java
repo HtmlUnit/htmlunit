@@ -16,6 +16,9 @@ package com.gargoylesoftware.htmlunit.javascript;
 import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
@@ -23,6 +26,7 @@ import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * Provides an implementation of Proxy Auto-Config (PAC).
@@ -58,6 +62,7 @@ public final class ProxyAutoConfig {
             config.defineMethod("myIpAddress", scope);
             config.defineMethod("dnsDomainLevels", scope);
             config.defineMethod("shExpMatch", scope);
+            config.defineMethod("weekdayRange", scope);
 
             cx.evaluateString(scope, content, "<cmd>", 1, null);
             final Object functionArgs[] = {url.toExternalForm(), url.getHost()};
@@ -193,5 +198,34 @@ public final class ProxyAutoConfig {
     public static boolean shExpMatch(final String str, final String shexp) {
         final String regexp = shexp.replace(".", "\\.").replace("*", ".*").replace("?", ".");
         return str.matches(regexp);
+    }
+
+    /**
+     * Checks if today is inclusive in the specified parameters.
+     * @param wd1 week day 1
+     * @param wd2 week day 2, optional
+     * @param gmt string of "GMT", or not specified
+     * @return if the string matches
+     */
+    public static boolean weekdayRange(final String wd1, Object wd2, final Object gmt) {
+        TimeZone timezone = TimeZone.getDefault();
+        if ("GMT".equals(Context.toString(gmt)) || "GMT".equals(Context.toString(wd2))) {
+            timezone = TimeZone.getTimeZone("GMT");
+        }
+        if (wd2 == Undefined.instance || "GMT".equals(Context.toString(wd2))) {
+            wd2 = wd1;
+        }
+        final Calendar calendar = Calendar.getInstance(timezone);
+        for (int i = 0; i < 7; i++) {
+            final String day = new SimpleDateFormat("EEE").format(calendar.getTime()).toUpperCase();
+            if (day.equals(wd2)) {
+                return true;
+            }
+            if (day.equals(wd1)) {
+                return i == 0;
+            }
+            calendar.add(Calendar.DAY_OF_WEEK, 1);
+        }
+        return false;
     }
 }

@@ -14,6 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -33,5 +38,23 @@ public class ProxyAutoConfigTest extends WebTestCase {
     public void shExpMatch() throws Exception {
         assertTrue(ProxyAutoConfig.shExpMatch("http://home.netscape.com/people/ari/index.html", "*/ari/*"));
         assertFalse(ProxyAutoConfig.shExpMatch("http://home.netscape.com/people/montulli/index.html", "*/ari/*"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void weekdayRange() throws Exception {
+        final Calendar calendar = Calendar.getInstance();
+        final String today = new SimpleDateFormat("EEE").format(calendar.getTime()).toUpperCase();
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        final String tomorrow = new SimpleDateFormat("EEE").format(calendar.getTime()).toUpperCase();
+        calendar.add(Calendar.DAY_OF_MONTH, -2);
+        final String yesterday = new SimpleDateFormat("EEE").format(calendar.getTime()).toUpperCase();
+        assertTrue(ProxyAutoConfig.weekdayRange(today, Undefined.instance, Undefined.instance));
+        assertTrue(ProxyAutoConfig.weekdayRange(today, tomorrow, Undefined.instance));
+        assertTrue(ProxyAutoConfig.weekdayRange(yesterday, today, Undefined.instance));
+        assertTrue(ProxyAutoConfig.weekdayRange(yesterday, tomorrow, Undefined.instance));
+        assertFalse(ProxyAutoConfig.weekdayRange(tomorrow, yesterday, Undefined.instance));
     }
 }
