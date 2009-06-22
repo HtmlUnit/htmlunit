@@ -63,6 +63,8 @@ public final class ProxyAutoConfig {
             config.defineMethod("dnsDomainLevels", scope);
             config.defineMethod("shExpMatch", scope);
             config.defineMethod("weekdayRange", scope);
+            config.defineMethod("dateRange", scope);
+            config.defineMethod("timeRange", scope);
 
             cx.evaluateString(scope, content, "<cmd>", 1, null);
             final Object functionArgs[] = {url.toExternalForm(), url.getHost()};
