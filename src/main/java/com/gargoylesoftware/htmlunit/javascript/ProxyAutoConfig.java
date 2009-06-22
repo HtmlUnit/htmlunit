@@ -203,11 +203,11 @@ public final class ProxyAutoConfig {
     }
 
     /**
-     * Checks if today is inclusive in the specified parameters.
+     * Checks if today is included in the specified range.
      * @param wd1 week day 1
      * @param wd2 week day 2, optional
      * @param gmt string of "GMT", or not specified
-     * @return if the today is included
+     * @return if today is in range
      */
     public static boolean weekdayRange(final String wd1, Object wd2, final Object gmt) {
         TimeZone timezone = TimeZone.getDefault();
@@ -240,7 +240,7 @@ public final class ProxyAutoConfig {
      * @param value5 the value 5
      * @param value6 the value 6
      * @param value7 the value 7
-     * @return if the date is in range
+     * @return if today is in range
      */
     public static boolean dateRange(final String value1, final Object value2, final Object value3,
             final Object value4, final Object value5, final Object value6, final Object value7) {
@@ -369,8 +369,9 @@ public final class ProxyAutoConfig {
         }
         return -1;
     }
+
     /**
-     * Checks if time is included in the specified range.
+     * Checks if the time now is included in the specified range.
      * @param value1 the value 1
      * @param value2 the value 2
      * @param value3 the value 3
@@ -378,7 +379,7 @@ public final class ProxyAutoConfig {
      * @param value5 the value 5
      * @param value6 the value 6
      * @param value7 the value 7
-     * @return if the string matches
+     * @return if the time now is in the range
      */
     public static boolean timeRange(final String value1, final Object value2, final Object value3,
             final Object value4, final Object value5, final Object value6, final Object value7) {

@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class ProxyAutoConfigTest extends WebTestCase {
 
     /**
+     * Test case.
      */
     @Test
     public void shExpMatch() {
@@ -40,6 +41,7 @@ public class ProxyAutoConfigTest extends WebTestCase {
     }
 
     /**
+     * Test case.
      */
     @Test
     public void weekdayRange() {
@@ -57,6 +59,7 @@ public class ProxyAutoConfigTest extends WebTestCase {
     }
 
     /**
+     * Test case.
      */
     @Test
     public void dateRange() {
@@ -76,6 +79,7 @@ public class ProxyAutoConfigTest extends WebTestCase {
     }
 
     /**
+     * Test case.
      */
     @Test
     public void timeRange() {
