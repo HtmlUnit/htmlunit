@@ -66,7 +66,8 @@ public final class ProxyAutoConfig {
             config.defineMethod("dateRange", scope);
             config.defineMethod("timeRange", scope);
 
-            cx.evaluateString(scope, content, "<cmd>", 1, null);
+            cx.evaluateString(scope, "var ProxyConfig = function() {}; ProxyConfig.bindings = {}", "<init>", 1, null);
+            cx.evaluateString(scope, content, "<Proxy Auto-Config>", 1, null);
             final Object functionArgs[] = {url.toExternalForm(), url.getHost()};
             final Object fObj = scope.get("FindProxyForURL", scope);
 

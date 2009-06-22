@@ -97,4 +97,26 @@ public class ProxyAutoConfigTest extends WebTestCase {
         assertFalse(ProxyAutoConfig.timeRange(String.valueOf(after),
                 undefined, undefined, undefined, undefined, undefined, undefined));
     }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void bindings() {
+        final String content = "ProxyConfig.bindings.com = 'my_com';\n"
+            + "ProxyConfig.bindings.org = 'my_org';\n"
+            + "ProxyConfig.bindings.net = 'my_net';\n"
+            + "ProxyConfig.bindings.edu = 'my_edu';\n"
+            + "ProxyConfig.bindings.gov = 'my_gov';\n"
+            + "function FindProxyForURL(url, host) {\n"
+            + "  var returnValue = '';\n"
+            + "  for (var x in ProxyConfig.bindings) {\n"
+            + "    returnValue += x + ' ';\n"
+            + "  }\n"
+            + "  return returnValue;\n"
+            + "}\n";
+            
+        final String value = ProxyAutoConfig.evaluate(content, URL_FIRST);
+        assertEquals("com org net edu gov ", value);
+    }
 }
