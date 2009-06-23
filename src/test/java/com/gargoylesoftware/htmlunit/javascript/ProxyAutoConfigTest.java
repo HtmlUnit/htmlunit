@@ -115,8 +115,8 @@ public class ProxyAutoConfigTest extends WebTestCase {
             + "  }\n"
             + "  return returnValue;\n"
             + "}\n";
-            
         final String value = ProxyAutoConfig.evaluate(content, URL_FIRST);
         assertEquals("com org net edu gov ", value);
     }
+
 }
