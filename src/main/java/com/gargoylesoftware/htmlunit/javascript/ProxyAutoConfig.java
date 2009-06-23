@@ -321,12 +321,17 @@ public final class ProxyAutoConfig {
         System.err.println("dateRange: today calendar " + today);
         System.err.println("dateRange: cal1 calendar " + cal1);
         System.err.println("dateRange: cal2 calendar " + cal2);
-        return today.equals(cal1) || today.after(cal1) && today.before(cal2) || today.equals(cal2);
+        System.err.println("dateRange: result1: " + today.equals(cal1));
+        System.err.println("dateRange: result2: " + (today.after(cal1) && today.before(cal2)));
+        System.err.println("dateRange: result3: " + today.equals(cal2));
+        System.err.println("dateRange: result4: " + cal1.equals(cal2));
+        return today.equals(cal1) || (today.after(cal1) && today.before(cal2)) || today.equals(cal2);
     }
 
     private static Calendar dateRange_createCalendar(final TimeZone timezone,
             final int day, final int month, final int year) {
         final Calendar calendar = Calendar.getInstance(timezone);
+        System.err.println("dateRange_createCalendar.calendar (1): " + calendar);
         if (day != -1) {
             calendar.set(Calendar.DAY_OF_MONTH, day);
         }
@@ -336,6 +341,7 @@ public final class ProxyAutoConfig {
         if (year != -1) {
             calendar.set(Calendar.YEAR, year);
         }
+        System.err.println("dateRange_createCalendar.calendar (2): " + calendar);
         return calendar;
     }
 
