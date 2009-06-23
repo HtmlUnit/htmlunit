@@ -14,33 +14,32 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 
 /**
  * Tests for {@link XPathResult}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public class XPathResultTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.FF)
+    @Alerts({ "4", "1", "3" })
     public void resultType() throws Exception {
-        resultType("//div", "4");
-        resultType("count(//div)", "1");
-        resultType("count(//div)=2", "3");
-    }
-
-    private void resultType(final String expression, final String expectedAlert) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var text='<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\n';\n"
@@ -54,24 +53,27 @@ public class XPathResultTest extends WebTestCase {
             + "    text += '  </html>\\n';\n"
             + "    text += '  </xsl:template>\\n';\n"
             + "    text += '</xsl:stylesheet>';\n"
-            + "    var parser=new DOMParser();\n"
-            + "    var doc=parser.parseFromString(text,'text/xml');\n"
-            + "    var result = doc.evaluate('" + expression + "', doc.documentElement, "
-            + "null, XPathResult.ANY_TYPE, null);\n"
-            + "    alert(result.resultType);\n"
+            + "    var parser = new DOMParser();\n"
+            + "    var doc = parser.parseFromString(text, 'text/xml');\n"
+            + "    var expressions = ['//div', 'count(//div)', 'count(//div) = 2'];\n"
+            + "    for (var i=0; i<expressions.length; ++i) {\n"
+            + "      var expression = expressions[i];\n"
+            + "      var result = doc.evaluate(expression, doc.documentElement, null, XPathResult.ANY_TYPE, null);\n"
+            + "      alert(result.resultType);\n"
+            + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertEquals(new String[] {expectedAlert}, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.FF)
+    @Alerts({ "7", "id1", "id2" })
     public void snapshotType() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -98,16 +100,15 @@ public class XPathResultTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"7", "id1", "id2"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.FF)
+    @Alerts({ "9", "id1" })
     public void singleNodeValue() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -132,16 +133,15 @@ public class XPathResultTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"9", "id1"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.FF)
+    @Alerts({ "id1", "id2" })
     public void iterateNext() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -170,16 +170,15 @@ public class XPathResultTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"id1", "id2"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.FF)
+    @Alerts("7")
     public void notOr() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -191,9 +190,6 @@ public class XPathResultTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"7"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 }
