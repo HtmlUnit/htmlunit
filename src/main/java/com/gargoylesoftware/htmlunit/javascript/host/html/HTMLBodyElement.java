@@ -221,29 +221,4 @@ public class HTMLBodyElement extends HTMLElement {
         setColorAttribute("vLink", vLink);
     }
 
-    /**
-     * Sets the specified color attribute to the specified value.
-     * @param name the color attribute's name
-     * @param value the color attribute's value
-     */
-    private void setColorAttribute(final String name, final String value) {
-        final String s;
-        if (isColorHexadecimal(value)) {
-            s = value;
-        }
-        else {
-            s = "#000000";
-        }
-        this.getDomNodeOrDie().setAttribute(name, s);
-    }
-
-    /**
-     * Returns <tt>true</tt> if the specified string is an RGB in hexadecimal notation.
-     * @param s the string to check
-     * @return <tt>true</tt> if the specified string is an RGB in hexadecimal notation
-     */
-    private static boolean isColorHexadecimal(final String s) {
-        return s.toLowerCase().matches("#([0-9a-f]{6})");
-    }
-
 }

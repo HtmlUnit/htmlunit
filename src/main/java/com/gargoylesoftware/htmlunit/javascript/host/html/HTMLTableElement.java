@@ -237,8 +237,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Gets the "border" attribute.
-     * @return the "border" attribute
+     * Gets the <tt>border</tt> attribute.
+     * @return the <tt>border</tt> attribute
      */
     public String jsxGet_border() {
         String border = getDomNodeOrDie().getAttribute("border");
@@ -249,10 +249,29 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Sets the "border" attribute.
-     * @param border the "border" attribute
+     * Sets the <tt>border</tt> attribute.
+     * @param border the <tt>border</tt> attribute
      */
     public void jsxSet_border(final String border) {
         getDomNodeOrDie().setAttribute("border", border);
     }
+
+    /**
+     * Returns the value of the <tt>bgColor</tt> attribute.
+     * @return the value of the <tt>bgColor</tt> attribute
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
+     */
+    public String jsxGet_bgColor() {
+        return getDomNodeOrDie().getAttribute("bgColor");
+    }
+
+    /**
+     * Sets the value of the <tt>bgColor</tt> attribute.
+     * @param bgColor the value of the <tt>bgColor</tt> attribute
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
+     */
+    public void jsxSet_bgColor(final String bgColor) {
+        setColorAttribute("bgColor", bgColor);
+    }
+
 }

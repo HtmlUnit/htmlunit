@@ -39,4 +39,23 @@ public class HTMLTableCellElement extends HTMLTableComponent {
         final HtmlTableRow row = cell.getEnclosingRow();
         return new Integer(row.getCells().indexOf(cell));
     }
+
+    /**
+     * Returns the value of the <tt>bgColor</tt> attribute.
+     * @return the value of the <tt>bgColor</tt> attribute
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
+     */
+    public String jsxGet_bgColor() {
+        return getDomNodeOrDie().getAttribute("bgColor");
+    }
+
+    /**
+     * Sets the value of the <tt>bgColor</tt> attribute.
+     * @param bgColor the value of the <tt>bgColor</tt> attribute
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
+     */
+    public void jsxSet_bgColor(final String bgColor) {
+        setColorAttribute("bgColor", bgColor);
+    }
+
 }

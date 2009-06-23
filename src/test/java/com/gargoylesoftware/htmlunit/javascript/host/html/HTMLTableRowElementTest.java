@@ -250,4 +250,31 @@ public class HTMLTableRowElementTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"", "#0000aa", "#000000" })
+    public void bgColor() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var tr = document.getElementById('tr');\n"
+            + "        alert(tr.bgColor);\n"
+            + "        tr.bgColor = '#0000aa';\n"
+            + "        alert(tr.bgColor);\n"
+            + "        tr.bgColor = 'x';\n"
+            + "        alert(tr.bgColor);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  <table><tr id='tr'><td>a</td></tr></table>\n"
+            + "  </body>\n"
+            + "</html>";
+        loadPageWithAlerts(html);
+    }
+
 }

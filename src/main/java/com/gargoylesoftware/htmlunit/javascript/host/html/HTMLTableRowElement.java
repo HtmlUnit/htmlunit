@@ -67,6 +67,24 @@ public class HTMLTableRowElement extends HTMLTableComponent {
     }
 
     /**
+     * Returns the value of the <tt>bgColor</tt> attribute.
+     * @return the value of the <tt>bgColor</tt> attribute
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
+     */
+    public String jsxGet_bgColor() {
+        return getDomNodeOrDie().getAttribute("bgColor");
+    }
+
+    /**
+     * Sets the value of the <tt>bgColor</tt> attribute.
+     * @param bgColor the value of the <tt>bgColor</tt> attribute
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
+     */
+    public void jsxSet_bgColor(final String bgColor) {
+        setColorAttribute("bgColor", bgColor);
+    }
+
+    /**
      * Inserts a new cell at the specified index in the element's cells collection. If the index
      * is -1 or there is no index specified, then the cell is appended at the end of the
      * element's cells collection.
