@@ -78,7 +78,7 @@ public class WebDriverOldTestsTest extends WebDriverTestCase {
         final File[] testFiles = testsDir.listFiles(new FileFilter() {
             public boolean accept(final File pathname) {
                 final String name = pathname.getName();
-                return (name.endsWith(".html.expected") || name.endsWith(".html.FF2.expected"));
+                return (name.endsWith(".html.expected") || name.endsWith(".html.FF3.expected"));
             }
         });
 
@@ -103,7 +103,7 @@ public class WebDriverOldTestsTest extends WebDriverTestCase {
         getWebDriver().get(testFile_.toExternalForm());
 
         // retrieve captured "alerts"
-        final JSONArray resp = (JSONArray) jsExecutor.executeScript("return window.__huCatchedAlerts");
+        final JSONArray resp = (JSONArray) jsExecutor.executeScript("return top.__huCatchedAlerts");
         final List<String> actualResults = new ArrayList<String>();
         if (resp != null) {
             for (int i = 0; i < resp.length(); ++i) {
