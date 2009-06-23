@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit;
 import static org.junit.Assert.assertTrue;
 
 import java.lang.reflect.Method;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.junit.Test;
@@ -135,6 +137,12 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                 methods.remove(i--);
             }
         }
+        final Comparator<FrameworkMethod> comparator = new Comparator<FrameworkMethod>() {
+            public int compare(final FrameworkMethod fm1, final FrameworkMethod fm2) {
+                return fm1.getName().compareTo(fm2.getName());
+            }
+        };
+        Collections.sort(methods, comparator);
         return methods;
     }
 
