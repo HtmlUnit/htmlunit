@@ -201,4 +201,41 @@ public class HTMLTableCellElementTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = {"false", "null", "true", "", "true", "", "true", "blah", "false", "null" },
+            IE = {"false", "false", "true", "true", "true", "true", "true", "true", "false", "false" })
+    public void noWrap() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var td = document.getElementById('td');\n"
+            + "        alert(td.noWrap);\n"
+            + "        alert(td.getAttribute('noWrap'));\n"
+            + "        td.noWrap = 'nowrap';\n"
+            + "        alert(td.noWrap);\n"
+            + "        alert(td.getAttribute('noWrap'));\n"
+            + "        td.noWrap = 'x';\n"
+            + "        alert(td.noWrap);\n"
+            + "        alert(td.getAttribute('noWrap'));\n"
+            + "        td.setAttribute('noWrap', 'blah');\n"
+            + "        alert(td.noWrap);\n"
+            + "        alert(td.getAttribute('noWrap'));\n"
+            + "        td.noWrap = '';\n"
+            + "        alert(td.noWrap);\n"
+            + "        alert(td.getAttribute('noWrap'));\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  <table><tr><td id='td'>a</td></tr></table>\n"
+            + "  </body>\n"
+            + "</html>";
+        loadPageWithAlerts(html);
+    }
+
 }

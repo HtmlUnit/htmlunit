@@ -24,10 +24,22 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
  * @author <a href="https://sourceforge.net/users/marlee/">Mark van Leeuwen</a>
  * @author Ahmed Ashour
  * @author Sudhan Moghe
+ * @author Daniel Gredler
  */
 public class HTMLTableCellElement extends HTMLTableComponent {
 
     private static final long serialVersionUID = -4321684413510290017L;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void jsxFunction_setAttribute(final String name, String value) {
+        if ("noWrap".equals(name) && value != null && getBrowserVersion().isIE()) {
+            value = "true";
+        }
+        super.jsxFunction_setAttribute(name, value);
+    }
 
     /**
      * Returns the index of this cell within the parent row.
@@ -56,6 +68,30 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     public void jsxSet_bgColor(final String bgColor) {
         setColorAttribute("bgColor", bgColor);
+    }
+
+    /**
+     * Returns the value of the <tt>noWrap</tt> attribute.
+     * @return the value of the <tt>noWrap</tt> attribute
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534196.aspx">MSDN Documentation</a>
+     */
+    public boolean jsxGet_noWrap() {
+        return getDomNodeOrDie().hasAttribute("noWrap");
+    }
+
+    /**
+     * Sets the value of the <tt>noWrap</tt> attribute.
+     * @param noWrap the value of the <tt>noWrap</tt> attribute
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534196.aspx">MSDN Documentation</a>
+     */
+    public void jsxSet_noWrap(final boolean noWrap) {
+        if (noWrap) {
+            final String value = (getBrowserVersion().isIE() ? "true" : "");
+            getDomNodeOrDie().setAttribute("noWrap", value);
+        }
+        else {
+            getDomNodeOrDie().removeAttribute("noWrap");
+        }
     }
 
 }
