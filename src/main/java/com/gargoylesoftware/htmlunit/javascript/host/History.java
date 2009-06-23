@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.io.IOException;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -38,6 +39,52 @@ public class History extends SimpleScriptable {
      */
     public History() {
         // Empty.
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object[] getIds() {
+        Object[] ids = super.getIds();
+        if (getBrowserVersion().isFirefox()) {
+            final int len = getWindow().getWebWindow().getHistory().getLength();
+            if (len > 0) {
+                final Object[] allIds = new Object[ids.length + len];
+                System.arraycopy(ids, 0, allIds, 0, ids.length);
+                for (int i = 0; i < len; i++) {
+                    allIds[ids.length + i] = new Integer(i);
+                }
+                ids = allIds;
+            }
+        }
+        return ids;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean has(final int index, final Scriptable start) {
+        if (getBrowserVersion().isFirefox()) {
+            final History h = (History) start;
+            if (index >= 0 && index < h.jsxGet_length()) {
+                return true;
+            }
+        }
+        return super.has(index, start);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object get(final int index, final Scriptable start) {
+        final History h = (History) start;
+        if (index < 0 || index >= h.jsxGet_length()) {
+            return NOT_FOUND;
+        }
+        return jsxFunction_item(index);
     }
 
     /**
@@ -87,6 +134,39 @@ public class History extends SimpleScriptable {
         catch (final IOException e) {
             Context.throwAsScriptRuntimeEx(e);
         }
+    }
+
+    /**
+     * Returns the "current" property.
+     * @return the "current" property
+     */
+    public String jsxGet_current() {
+        throw Context.reportRuntimeError("Permission denied to get property History.current");
+    }
+
+    /**
+     * Returns the "previous" property.
+     * @return the "previous" property
+     */
+    public String jsxGet_previous() {
+        throw Context.reportRuntimeError("Permission denied to get property History.previous");
+    }
+
+    /**
+     * Returns the "next" property.
+     * @return the "next" property
+     */
+    public String jsxGet_next() {
+        throw Context.reportRuntimeError("Permission denied to get property History.next");
+    }
+
+    /**
+     * JavaScript function "item".
+     * @param index the index
+     * @return the URL of the history item at the specified index
+     */
+    public String jsxFunction_item(final int index) {
+        throw Context.reportRuntimeError("Permission denied to call method History.item");
     }
 
 }

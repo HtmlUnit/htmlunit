@@ -185,4 +185,81 @@ public class HistoryTest extends WebServerTestCase {
         assertEquals(getExpectedAlerts(), alerts);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "error" },
+            IE = { "undefined" })
+    public void previous() throws Exception {
+        final WebClient client = getWebClient();
+        final List<String> alerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(alerts));
+        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/HistoryTest_a.html");
+        page.getAnchorByName("previous").click();
+        assertEquals(getExpectedAlerts(), alerts);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "error" },
+            IE = { "undefined" })
+    public void current() throws Exception {
+        final WebClient client = getWebClient();
+        final List<String> alerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(alerts));
+        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/HistoryTest_a.html");
+        page.getAnchorByName("current").click();
+        assertEquals(getExpectedAlerts(), alerts);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "error" },
+            IE = { "undefined" })
+    public void next() throws Exception {
+        final WebClient client = getWebClient();
+        final List<String> alerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(alerts));
+        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/HistoryTest_a.html");
+        page.getAnchorByName("next").click();
+        assertEquals(getExpectedAlerts(), alerts);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "error" },
+            IE = { })
+    public void item() throws Exception {
+        final WebClient client = getWebClient();
+        final List<String> alerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(alerts));
+        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/HistoryTest_a.html");
+        page.getAnchorByName("itemZero").click();
+        assertEquals(getExpectedAlerts(), alerts);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "false", "false", "true", "true", "false", "false" },
+            IE = { "false", "false", "false", "false", "false", "false" })
+    public void byIndex() throws Exception {
+        final WebClient client = getWebClient();
+        final List<String> alerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(alerts));
+        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/HistoryTest_a.html");
+        page.getAnchorByName("hasNegativeOne").click();
+        page.getAnchorByName("hasZero").click();
+        page.getAnchorByName("hasPositiveOne").click();
+        assertEquals(getExpectedAlerts(), alerts);
+    }
+
 }

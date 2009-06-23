@@ -1068,11 +1068,22 @@
 
     <class name="History" classname="com.gargoylesoftware.htmlunit.javascript.host.History"
         JSObject="true">
+        <property name="current" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
         <property name="length" readable="true" writable="false"/>
-
+        <property name="next" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="previous" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
         <function name="back"/>
         <function name="forward"/>
         <function name="go"/>
+        <function name="item">
+            <browser name="Firefox"/>
+        </function>
     </class>
 
     <class name="HTMLAnchorElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAnchorElement"
