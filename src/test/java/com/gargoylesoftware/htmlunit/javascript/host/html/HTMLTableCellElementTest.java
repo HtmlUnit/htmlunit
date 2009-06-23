@@ -238,4 +238,33 @@ public class HTMLTableCellElementTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"", "blah", "3", "" })
+    public void abbr() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var td = document.getElementById('td');\n"
+            + "        alert(td.abbr);\n"
+            + "        td.abbr = 'blah';\n"
+            + "        alert(td.abbr);\n"
+            + "        td.abbr = 3;\n"
+            + "        alert(td.abbr);\n"
+            + "        td.abbr = '';\n"
+            + "        alert(td.abbr);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  <table><tr><td id='td'>a</td></tr></table>\n"
+            + "  </body>\n"
+            + "</html>";
+        loadPageWithAlerts(html);
+    }
+
 }

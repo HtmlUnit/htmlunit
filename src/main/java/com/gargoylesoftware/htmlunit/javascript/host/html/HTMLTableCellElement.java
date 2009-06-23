@@ -53,6 +53,22 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
+     * Returns the value of the <tt>abbr</tt> attribute.
+     * @return the value of the <tt>abbr</tt> attribute
+     */
+    public String jsxGet_abbr() {
+        return getDomNodeOrDie().getAttribute("abbr");
+    }
+
+    /**
+     * Sets the value of the <tt>abbr</tt> attribute.
+     * @param abbr the value of the <tt>abbr</tt> attribute
+     */
+    public void jsxSet_abbr(final String abbr) {
+        getDomNodeOrDie().setAttribute("abbr", abbr);
+    }
+
+    /**
      * Returns the value of the <tt>bgColor</tt> attribute.
      * @return the value of the <tt>bgColor</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
