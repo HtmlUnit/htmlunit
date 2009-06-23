@@ -473,4 +473,34 @@ public class HTMLDocumentTest extends WebTestCase {
         page.getWebClient().waitForBackgroundJavaScript(500);
         assertEquals(expected, page.<HtmlTextArea>getHtmlElementById("myTextarea").getText());
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = {"#ffffff", "#ffffff", "#0000aa", "#0000aa", "#000000", "#000000" },
+            IE = {"#ffffff", "", "#0000aa", "#0000aa", "#000000", "#000000" })
+    public void bgColor() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var b = document.getElementById('body');\n"
+            + "        alert(document.bgColor);\n"
+            + "        alert(b.bgColor);\n"
+            + "        document.bgColor = '#0000aa';\n"
+            + "        alert(document.bgColor);\n"
+            + "        alert(b.bgColor);\n"
+            + "        document.bgColor = 'x';\n"
+            + "        alert(document.bgColor);\n"
+            + "        alert(b.bgColor);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body' onload='test()'>blah</body>\n"
+            + "</html>";
+        loadPageWithAlerts(html);
+    }
+
 }

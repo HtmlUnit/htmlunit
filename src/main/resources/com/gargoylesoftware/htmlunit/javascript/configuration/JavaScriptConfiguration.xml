@@ -1269,7 +1269,7 @@
                 descr="Gecko DOM reference"/>
         </property>
         <property name="applets" readable="true" writable="false"/>
-        <property name="bgColor" notImplemented="true" readable="true" writable="false"/>
+        <property name="bgColor" readable="true" writable="true"/>
         <property name="body" readable="true" writable="false"/>
         <!-- Note that compatMode is deprecated in Internet Explorer 8 in favor of the documentMode -->
         <property name="compatMode" readable="true" writable="false"/>

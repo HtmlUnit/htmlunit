@@ -54,6 +54,7 @@ import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
@@ -1090,6 +1091,29 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     public void jsxSet_title(final String title) {
         getHtmlPage().setTitleText(title);
+    }
+
+    /**
+     * Returns the value of the <tt>bgColor</tt> attribute.
+     * @return the value of the <tt>bgColor</tt> attribute
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
+     */
+    public String jsxGet_bgColor() {
+        String bgColor = getHtmlPage().getBody().getAttribute("bgColor");
+        if (bgColor == DomElement.ATTRIBUTE_NOT_DEFINED) {
+            bgColor = "#ffffff";
+        }
+        return bgColor;
+    }
+
+    /**
+     * Sets the value of the <tt>bgColor</tt> attribute.
+     * @param bgColor the value of the <tt>bgColor</tt> attribute
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
+     */
+    public void jsxSet_bgColor(final String bgColor) {
+        final HTMLBodyElement body = (HTMLBodyElement) getHtmlPage().getBody().getScriptObject();
+        body.jsxSet_bgColor(bgColor);
     }
 
     /**
