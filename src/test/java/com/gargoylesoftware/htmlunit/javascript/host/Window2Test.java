@@ -54,7 +54,10 @@ public class Window2Test extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "not found", "hello" }, FF = { "found", "hello" })
+    @Alerts(IE = { "not found", "true" },
+            FF2 = { "found", "true" },
+            FF3 = { "found", "exception", "false" })
+    @NotYetImplemented(Browser.FF3)
     public void FF_controllers() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -63,8 +66,32 @@ public class Window2Test extends WebTestCase {
             + "  alert('found')\n"
             + "else\n"
             + "  alert('not found')\n"
-            + "window.controllers = 'hello';\n"
-            + "alert(window.controllers);\n"
+            + "try {\n"
+            + "  window.controllers = 'hello';\n"
+            + "}\n"
+            + "catch(e) { alert('exception') }\n"
+            + "alert(window.controllers == 'hello');\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * Very strange: in FF3 it seems that you can set window.controllers if you haven't
+     * accessed it before.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void FF_controllers_set() throws Exception {
+        final String html
+            = "<html><head></head><body>\n"
+            + "<script>\n"
+            + "try {\n"
+            + "  window.controllers = 'hello';\n"
+            + "}\n"
+            + "catch(e) { alert('exception') }\n"
+            + "alert(window.controllers == 'hello');\n"
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts(html);
@@ -298,12 +325,14 @@ public class Window2Test extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
-    @Alerts("1")
+    @Alerts(FF = "exception", IE = "1")
     public void execScript2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    window.execScript('alert(1);');\n"
+            + "    try {\n"
+            + "      window.execScript('alert(1);');\n"
+            + "    }\n"
+            + "    catch(e) { alert('exception') }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -401,8 +430,8 @@ public class Window2Test extends WebTestCase {
     public void framesLengthZero() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "alert(window.length)\n"
-            + "alert(window.frames.length)\n"
+            + "alert(window.length);\n"
+            + "alert(window.frames.length);\n"
             + "</script></head><body>\n"
             + "</body></html>";
         loadPageWithAlerts(html);
