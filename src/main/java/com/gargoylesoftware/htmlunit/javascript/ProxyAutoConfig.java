@@ -248,6 +248,7 @@ public final class ProxyAutoConfig {
         final Object[] values = {value1, value2, value3, value4, value5, value6, value7};
         TimeZone timezone = TimeZone.getDefault();
 
+        System.err.println("dateRange: today " + value1);
         //actual values length
         int length;
         for (length = values.length - 1; length >= 0; length--) {
@@ -261,6 +262,8 @@ public final class ProxyAutoConfig {
             }
         }
 
+        System.err.println("dateRange: timezone " + timezone);
+        System.err.println("dateRange: length " + length);
         int day1, day2, month1, month2, year1, year2;
         Calendar cal1;
         Calendar cal2;
@@ -315,6 +318,9 @@ public final class ProxyAutoConfig {
         }
 
         final Calendar today = Calendar.getInstance(timezone);
+        System.err.println("dateRange: today calendar " + today);
+        System.err.println("dateRange: cal1 calendar " + cal1);
+        System.err.println("dateRange: cal2 calendar " + cal2);
         return today.equals(cal1) || today.after(cal1) && today.before(cal2) || today.equals(cal2);
     }
 
