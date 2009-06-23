@@ -546,11 +546,11 @@ public class DocumentTest extends WebTestCase {
             + "function doTest(){\n"
             + "    var form = document.forms['form1'];\n"
             + "    var cloneShallow = form.cloneNode(false);\n"
-            + "    alert(cloneShallow!=null )\n"
-            + "    alert(cloneShallow.firstChild==null )\n"
+            + "    alert(cloneShallow!=null);\n"
+            + "    alert(cloneShallow.firstChild==null);\n"
             + "    var cloneDeep = form.cloneNode(true);\n"
-            + "    alert(cloneDeep!=null )\n"
-            + "    alert(cloneDeep.firstChild!=null )\n"
+            + "    alert(cloneDeep!=null);\n"
+            + "    alert(cloneDeep.firstChild!=null);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<form name='form1'>\n"
@@ -2131,9 +2131,9 @@ public class DocumentTest extends WebTestCase {
             + "<input type='text' name='findMe'>\n"
             + "<input type='text' id='findMe2' name='byId'>\n"
             + "<script>\n"
-            + "var o = document.getElementById('findMe')\n"
-            + "alert(o ? o.name : 'null')\n"
-            + "alert(document.getElementById('findMe2').name)\n"
+            + "var o = document.getElementById('findMe');\n"
+            + "alert(o ? o.name : 'null');\n"
+            + "alert(document.getElementById('findMe2').name);\n"
             + "</script></body></html>";
 
         loadPageWithAlerts(html);
@@ -2666,21 +2666,24 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object]", "true", "true", "true", "true", "true", "true" })
-    @Browsers(Browser.IE)
+    @Alerts(FF = "null",
+            IE = { "[object]", "[object]", "true", "true", "true", "true", "true", "true" })
     @NotYetImplemented
     public void documentCloneNode() throws Exception {
         final String html = "<html><body id='hello' onload='doTest()'>\n"
                 + "  <script id='jscript'>\n"
                 + "    function doTest() {\n"
                 + "      var clone = document.cloneNode(true);\n"
-                + "      alert(clone.body);\n"
-                + "      alert(clone.body !== document.body);\n"
-                + "      alert(clone.getElementById(\"id1\") !== document.getElementById(\"id1\"));\n"
-                + "      alert(document.ownerDocument == null);\n"
-                + "      alert(clone.ownerDocument == document);\n"
-                + "      alert(document.getElementById(\"id1\").ownerDocument === document);\n"
-                + "      alert(clone.getElementById(\"id1\").ownerDocument === document);\n"
+                + "      alert(clone);\n"
+                + "      if (clone != null) {\n"
+                + "        alert(clone.body);\n"
+                + "        alert(clone.body !== document.body);\n"
+                + "        alert(clone.getElementById(\"id1\") !== document.getElementById(\"id1\"));\n"
+                + "        alert(document.ownerDocument == null);\n"
+                + "        alert(clone.ownerDocument == document);\n"
+                + "        alert(document.getElementById(\"id1\").ownerDocument === document);\n"
+                + "        alert(clone.getElementById(\"id1\").ownerDocument === document);\n"
+                + "      }\n"
                 + "    }\n"
                 + "  </script>\n"
                 + "  <div id='id1'>hello</div>\n"
@@ -2740,8 +2743,9 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.FF)
+    @Alerts({ "true", "object", "[object Event]", "true" })
     public void createEvent_FF_Event() throws Exception {
-        createEvent_FF("Event", true);
+        createEvent_FF("Event");
     }
 
     /**
@@ -2749,8 +2753,9 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.FF)
+    @Alerts({ "true", "object", "[object Event]", "true" })
     public void createEvent_FF_Events() throws Exception {
-        createEvent_FF("Events", true);
+        createEvent_FF("Events");
     }
 
     /**
@@ -2758,40 +2763,35 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.FF)
+    @Alerts({ "true", "object", "[object Event]", "true" })
     public void createEvent_FF_HTMLEvents() throws Exception {
-        createEvent_FF("HTMLEvents", true);
+        createEvent_FF("HTMLEvents");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("exception")
     public void createEvent_FF_Bogus() throws Exception {
-        createEvent_FF("Bogus", false);
+        createEvent_FF("Bogus");
     }
 
-    private void createEvent_FF(final String eventType, final boolean isSupportedType) throws Exception {
+    private void createEvent_FF(final String eventType) throws Exception {
         final String html =
               "<html><head><title>foo</title><script>\n"
-            + "var e = document.createEvent('" + eventType + "');\n"
-            + "alert(e != null);\n"
-            + "alert(typeof e);\n"
-            + "alert(e);\n"
-            + "alert(e.cancelable);\n"
+            + "try {\n"
+            + "  var e = document.createEvent('" + eventType + "');\n"
+            + "  alert(e != null);\n"
+            + "  alert(typeof e);\n"
+            + "  alert(e);\n"
+            + "  alert(e.cancelable);\n"
+            + "}\n"
+            + "catch (e) { alert('exception') }\n"
             + "</script></head><body>\n"
             + "</body></html>";
-        final List<String> actual = new ArrayList<String>();
-        try {
-            final String[] expected = {"true", "object", "[object Event]", "true"};
-            createTestPageForRealBrowserIfNeeded(html, expected);
-            loadPage(getBrowserVersion(), html, actual);
-            assertTrue("Test was expected to fail, but did not: type=" + eventType, isSupportedType);
-            assertEquals(expected, actual);
-        }
-        catch (final Exception e) {
-            assertTrue("Test was not expected to fail, but did with message " + e.getMessage() + " for type="
-                + eventType, !isSupportedType);
-        }
+
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -2847,13 +2847,12 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
-    @Alerts("BODY")
+    @Alerts(FF = "null", IE = "BODY")
     public void elementFromPoint() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var e = document.elementFromPoint(-1,-1);\n"
-            + "    alert(e.nodeName);\n"
+            + "    alert(e != null ? e.nodeName : null);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -2880,15 +2879,17 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
-    @Alerts({ "false", "mySelect", "0" })
+    @Alerts(FF = "exception", IE = { "false", "mySelect", "0" })
     public void createElementWithHtml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var select = document.createElement(\"<select id='mySelect'><option>hello</option>\");\n"
-            + "    alert(select.add == undefined);\n"
-            + "    alert(select.id);\n"
-            + "    alert(select.childNodes.length);\n"
+            + "    try {\n"
+            + "      var select = document.createElement(\"<select id='mySelect'><option>hello</option>\");\n"
+            + "      alert(select.add == undefined);\n"
+            + "      alert(select.id);\n"
+            + "      alert(select.childNodes.length);\n"
+            + "    }\n"
+            + "    catch (e) { alert('exception') }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

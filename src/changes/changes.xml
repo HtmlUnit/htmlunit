@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="update" dev="mguillem">
+                JavaScript: make dummy implementation of HtmlDocument.elementFromPoint available for FF as well.
+            </action>
             <action type="add" dev="sdanig">
                 JavaScript: add support for the bgColor attribute on table, tr, td and th elements.
             </action>

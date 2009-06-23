@@ -1349,9 +1349,7 @@
                 descr="Gecko DOM Reference"/>
             <browser name="Firefox"/>
         </function>
-        <function name="elementFromPoint">
-            <browser name="Internet Explorer"/>
-        </function>
+        <function name="elementFromPoint"/>
         <function name="execCommand"/>
         <function name="getElementById"/>
         <function name="getElementsByClassName">
