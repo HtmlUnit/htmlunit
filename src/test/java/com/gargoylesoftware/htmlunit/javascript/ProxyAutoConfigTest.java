@@ -72,10 +72,10 @@ public class ProxyAutoConfigTest extends WebTestCase {
         final int yesterday = calendar.get(Calendar.DAY_OF_MONTH);
         assertTrue(ProxyAutoConfig.dateRange(String.valueOf(today),
                 undefined, undefined, undefined, undefined, undefined, undefined));
-//        assertFalse(ProxyAutoConfig.dateRange(String.valueOf(yesterday),
-//                undefined, undefined, undefined, undefined, undefined, undefined));
-//        assertFalse(ProxyAutoConfig.dateRange(String.valueOf(tomorrow),
-//                undefined, undefined, undefined, undefined, undefined, undefined));
+        assertFalse(ProxyAutoConfig.dateRange(String.valueOf(yesterday),
+                undefined, undefined, undefined, undefined, undefined, undefined));
+        assertFalse(ProxyAutoConfig.dateRange(String.valueOf(tomorrow),
+                undefined, undefined, undefined, undefined, undefined, undefined));
     }
 
     /**

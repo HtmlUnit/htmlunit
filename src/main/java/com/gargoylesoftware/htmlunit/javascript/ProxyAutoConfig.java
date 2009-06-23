@@ -248,7 +248,6 @@ public final class ProxyAutoConfig {
         final Object[] values = {value1, value2, value3, value4, value5, value6, value7};
         TimeZone timezone = TimeZone.getDefault();
 
-        System.err.println("dateRange: today " + value1);
         //actual values length
         int length;
         for (length = values.length - 1; length >= 0; length--) {
@@ -262,8 +261,6 @@ public final class ProxyAutoConfig {
             }
         }
 
-        System.err.println("dateRange: timezone " + timezone);
-        System.err.println("dateRange: length " + length);
         int day1, day2, month1, month2, year1, year2;
         Calendar cal1;
         Calendar cal2;
@@ -318,20 +315,18 @@ public final class ProxyAutoConfig {
         }
 
         final Calendar today = Calendar.getInstance(timezone);
-        System.err.println("dateRange: today calendar " + today);
-        System.err.println("dateRange: cal1 calendar " + cal1);
-        System.err.println("dateRange: cal2 calendar " + cal2);
-        System.err.println("dateRange: result1: " + today.equals(cal1));
-        System.err.println("dateRange: result2: " + (today.after(cal1) && today.before(cal2)));
-        System.err.println("dateRange: result3: " + today.equals(cal2));
-        System.err.println("dateRange: result4: " + cal1.equals(cal2));
+        today.set(Calendar.MILLISECOND, 0);
+        today.set(Calendar.SECOND, 0);
+        cal1.set(Calendar.MILLISECOND, 0);
+        cal1.set(Calendar.SECOND, 0);
+        cal2.set(Calendar.MILLISECOND, 0);
+        cal2.set(Calendar.SECOND, 0);
         return today.equals(cal1) || (today.after(cal1) && today.before(cal2)) || today.equals(cal2);
     }
 
     private static Calendar dateRange_createCalendar(final TimeZone timezone,
             final int day, final int month, final int year) {
         final Calendar calendar = Calendar.getInstance(timezone);
-        System.err.println("dateRange_createCalendar.calendar (1): " + calendar);
         if (day != -1) {
             calendar.set(Calendar.DAY_OF_MONTH, day);
         }
@@ -341,7 +336,6 @@ public final class ProxyAutoConfig {
         if (year != -1) {
             calendar.set(Calendar.YEAR, year);
         }
-        System.err.println("dateRange_createCalendar.calendar (2): " + calendar);
         return calendar;
     }
 
