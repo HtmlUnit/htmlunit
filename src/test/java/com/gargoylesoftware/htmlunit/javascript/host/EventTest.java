@@ -38,6 +38,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
@@ -960,5 +961,37 @@ public class EventTest extends WebTestCase {
             + "</body></html>";
 
         loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @NotYetImplemented(Browser.FF)
+    public void preventDefault() throws Exception {
+        final String html =
+            "<html><head><title>First</title></head>\n"
+            + "<script>\n"
+            + "function block(e) {\n"
+            + "  if (e && e.preventDefault)\n"
+            + "    e.preventDefault();\n"
+            + "  else\n"
+            + "    return false;\n"
+            + "}\n"
+            + "\n"
+            + "function test() {\n"
+            + "  document.getElementById('myForm').onsubmit = block;\n"
+            + "}\n"
+            + "</script>\n"
+            + "<body onload='test()'>\n"
+            + "<form id='myForm' action='doesnt_exist.html'>\n"
+            + "  <input type='submit' id='mySubmit' value='Continue'></p>\n"
+            + "</form>"
+            + "</body></html>";
+
+        final HtmlPage page = loadPageWithAlerts(html);
+        final HtmlPage page2 = page.<HtmlInput>getHtmlElementById("mySubmit").click();
+        assertEquals(URL_GARGOYLE.toExternalForm(),
+                page2.getWebResponse().getRequestSettings().getUrl().toExternalForm());
     }
 }
