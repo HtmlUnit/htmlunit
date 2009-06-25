@@ -68,6 +68,8 @@ public class HtmlForm extends ClickableElement {
 
     private final List<HtmlElement> lostChildren_ = new ArrayList<HtmlElement>();
 
+    private boolean isPreventDefault_;
+
     /**
      * Creates an instance.
      *
@@ -100,8 +102,9 @@ public class HtmlForm extends ClickableElement {
         final HtmlPage htmlPage = (HtmlPage) getPage();
         if (htmlPage.getWebClient().isJavaScriptEnabled()) {
             if (submitElement != null) {
+                isPreventDefault_ = false;
                 final ScriptResult scriptResult = fireEvent(Event.TYPE_SUBMIT);
-                if (ScriptResult.isFalse(scriptResult)) {
+                if (isPreventDefault_) {
                     return scriptResult.getNewPage();
                 }
             }
@@ -738,10 +741,19 @@ public class HtmlForm extends ClickableElement {
 
     /**
      * Gets the form elements that may be submitted but that don't belong to the form's children
-     * in the DOM due to incorrect html code.
+     * in the DOM due to incorrect HTmL code.
      * @return the elements
      */
     public List<HtmlElement> getLostChildren() {
         return lostChildren_;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void preventDefault() {
+        isPreventDefault_ = true;
+    }
+
 }

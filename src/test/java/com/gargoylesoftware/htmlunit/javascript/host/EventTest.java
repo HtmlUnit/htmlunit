@@ -967,7 +967,6 @@ public class EventTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(Browser.FF)
     public void preventDefault() throws Exception {
         final String html =
             "<html><head><title>First</title></head>\n"
