@@ -48,7 +48,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  * @author Rodney Gitzel
  * @author Sudhan Moghe
  */
-public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
+public class CSSStyleDeclaration extends SimpleScriptable {
 
     private static final long serialVersionUID = -1976370264911039311L;
     private static Map<String, String> CSSColors_ = new HashMap<String, String>();

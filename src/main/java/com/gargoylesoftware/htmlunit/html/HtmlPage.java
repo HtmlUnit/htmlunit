@@ -115,7 +115,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Ethan Glasser-Camp
  * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
  */
-public class HtmlPage extends SgmlPage implements Cloneable {
+public class HtmlPage extends SgmlPage {
 
     private HtmlUnitDOMBuilder builder_;
     private static final long serialVersionUID = 1779746292119944291L;
