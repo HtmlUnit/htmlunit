@@ -741,7 +741,7 @@ public class HtmlForm extends ClickableElement {
 
     /**
      * Gets the form elements that may be submitted but that don't belong to the form's children
-     * in the DOM due to incorrect HTmL code.
+     * in the DOM due to incorrect HTML code.
      * @return the elements
      */
     public List<HtmlElement> getLostChildren() {
