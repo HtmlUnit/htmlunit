@@ -27,6 +27,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.JSONArray;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -95,6 +96,7 @@ public class WebDriverOldTestsTest extends WebDriverTestCase {
      * @throws Throwable if the test fails
      */
     @Test
+    @Ignore
     public void test() throws Throwable {
         log_.info("Running " + testFile_);
 
