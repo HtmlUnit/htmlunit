@@ -2,8 +2,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>htmlunit</artifactId>
     <groupId>net.sourceforge.htmlunit</groupId>
+    <artifactId>htmlunit</artifactId>
     <version>2.6-SNAPSHOT</version>
     <name>HtmlUnit</name>
     <organization>
@@ -28,7 +28,6 @@
                     <target>1.5</target>
                     <testExcludes>
                         <exclude>**/CodeChecker.java</exclude>
-                        <exclude>**/*WebDriver*.java</exclude>
                     </testExcludes>
                 </configuration>
             </plugin>
@@ -140,8 +139,6 @@
                         <version>2.4.3</version>
                         <configuration>
                             <excludes>
-                                <exclude>**/WebDriverOldTestsTest.java</exclude>
-                                <exclude>**/*WebDriver*.java</exclude>
                                 <exclude>**/libraries/*.java</exclude>
                             </excludes>
                             <argLine>-Xmx512m -Xms128m</argLine>
@@ -176,10 +173,6 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>2.4.3</version>
                         <configuration>
-                            <excludes>
-                                <exclude>**/WebDriverOldTestsTest.java</exclude>
-                                <exclude>**/*WebDriver*.java</exclude>
-                            </excludes>
                             <argLine>-Xmx512m -Xms128m</argLine>
                         </configuration>
                     </plugin>
@@ -613,9 +606,9 @@
         </dependency>
         <!-- WebDriver -->
         <dependency>
-            <groupId>org.openqa.selenium.webdriver</groupId>
-            <artifactId>webdriver-htmlunit</artifactId>
-            <version>0.6.964</version>
+            <groupId>net.sourceforge.htmlunit</groupId>
+            <artifactId>webdriver</artifactId>
+            <version>2.6-SNAPSHOT</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -627,13 +620,13 @@
         <dependency>
             <groupId>org.openqa.selenium.webdriver</groupId>
             <artifactId>webdriver-firefox</artifactId>
-            <version>0.6.964</version>
+            <version>0.6.1039</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.openqa.selenium.webdriver</groupId>
             <artifactId>webdriver-ie</artifactId>
-            <version>0.6.964</version>
+            <version>0.6.1039</version>
             <scope>test</scope>
         </dependency>
         <dependency>
