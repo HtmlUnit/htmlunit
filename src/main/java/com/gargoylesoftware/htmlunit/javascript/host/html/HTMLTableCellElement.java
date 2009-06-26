@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 import com.gargoylesoftware.htmlunit.html.HtmlTableCell;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 
@@ -84,6 +86,86 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     public void jsxSet_bgColor(final String bgColor) {
         setColorAttribute("bgColor", bgColor);
+    }
+
+    /**
+     * Returns the value of the <tt>colSpan</tt> attribute.
+     * @return the value of the <tt>colSpan</tt> attribute
+     */
+    public int jsxGet_colSpan() {
+        final String s = getDomNodeOrDie().getAttribute("colSpan");
+        try {
+            return Integer.parseInt(s);
+        }
+        catch (final NumberFormatException e) {
+            return 1;
+        }
+    }
+
+    /**
+     * Sets the value of the <tt>colSpan</tt> attribute.
+     * @param colSpan the value of the <tt>colSpan</tt> attribute
+     */
+    public void jsxSet_colSpan(final String colSpan) {
+        String s;
+        try {
+            final int i = new Double(Double.parseDouble(colSpan)).intValue();
+            if (i > 0) {
+                s = String.valueOf(i);
+            }
+            else {
+                throw new NumberFormatException(colSpan);
+            }
+        }
+        catch (final NumberFormatException e) {
+            if (getBrowserVersion().isIE()) {
+                throw Context.throwAsScriptRuntimeEx(e);
+            }
+            else {
+                s = "1";
+            }
+        }
+        getDomNodeOrDie().setAttribute("colSpan", s);
+    }
+
+    /**
+     * Returns the value of the <tt>rowSpan</tt> attribute.
+     * @return the value of the <tt>rowSpan</tt> attribute
+     */
+    public int jsxGet_rowSpan() {
+        final String s = getDomNodeOrDie().getAttribute("rowSpan");
+        try {
+            return Integer.parseInt(s);
+        }
+        catch (final NumberFormatException e) {
+            return 1;
+        }
+    }
+
+    /**
+     * Sets the value of the <tt>rowSpan</tt> attribute.
+     * @param rowSpan the value of the <tt>rowSpan</tt> attribute
+     */
+    public void jsxSet_rowSpan(final String rowSpan) {
+        String s;
+        try {
+            final int i = new Double(Double.parseDouble(rowSpan)).intValue();
+            if (i > 0) {
+                s = String.valueOf(i);
+            }
+            else {
+                throw new NumberFormatException(rowSpan);
+            }
+        }
+        catch (final NumberFormatException e) {
+            if (getBrowserVersion().isIE()) {
+                throw Context.throwAsScriptRuntimeEx(e);
+            }
+            else {
+                s = "1";
+            }
+        }
+        getDomNodeOrDie().setAttribute("rowSpan", s);
     }
 
     /**

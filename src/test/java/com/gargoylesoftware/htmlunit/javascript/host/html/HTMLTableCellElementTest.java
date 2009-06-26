@@ -267,4 +267,101 @@ public class HTMLTableCellElementTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "1", "3", "1", "2", "1", "5", "1", "2", "1" },
+            IE = { "1", "3", "1", "error", "2", "3", "5", "error", "error", "2", "2", "5" })
+    public void colSpan() throws Exception {
+        final String html
+            = "<html><body><table>\n"
+            + "  <tr>\n"
+            + "    <td id='td1'>a</td>\n"
+            + "    <td id='td2' colspan='3'>b</td>\n"
+            + "    <td id='td3' colspan='foo'>c</td>\n"
+            + "  </tr>\n"
+            + "</table>\n"
+            + "<script>\n"
+            + "  function set(e, value) {\n"
+            + "    try {\n"
+            + "      e.colSpan = value;\n"
+            + "    } catch (e) {\n"
+            + "      alert('error');\n"
+            + "    }\n"
+            + "  }\n"
+            + "  var td1 = document.getElementById('td1');\n"
+            + "  var td2 = document.getElementById('td2');\n"
+            + "  var td3 = document.getElementById('td3');\n"
+            + "  alert(td1.colSpan);\n"
+            + "  alert(td2.colSpan);\n"
+            + "  alert(td3.colSpan);\n"
+            + "  set(td1, '2');\n"
+            + "  set(td2, 'blah');\n"
+            + "  set(td3, 5);\n"
+            + "  alert(td1.colSpan);\n"
+            + "  alert(td2.colSpan);\n"
+            + "  alert(td3.colSpan);\n"
+            + "  set(td1, -1);\n"
+            + "  set(td2, 2.2);\n"
+            + "  set(td3, 0);\n"
+            + "  alert(td1.colSpan);\n"
+            + "  alert(td2.colSpan);\n"
+            + "  alert(td3.colSpan);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "1", "3", "1", "2", "1", "5", "1", "2", "1" },
+            IE = { "1", "3", "1", "error", "2", "3", "5", "error", "error", "2", "2", "5" })
+    public void rowSpan() throws Exception {
+        final String html
+            = "<html><body><table>\n"
+            + "  <tr>\n"
+            + "    <td id='td1'>a</td>\n"
+            + "    <td id='td2' rowspan='3'>b</td>\n"
+            + "    <td id='td3' rowspan='foo'>c</td>\n"
+            + "  </tr>\n"
+            + "  <tr><td>a</td><td>b</td><td>c</td></tr>\n"
+            + "  <tr><td>a</td><td>b</td><td>c</td></tr>\n"
+            + "  <tr><td>a</td><td>b</td><td>c</td></tr>\n"
+            + "  <tr><td>a</td><td>b</td><td>c</td></tr>\n"
+            + "  <tr><td>a</td><td>b</td><td>c</td></tr>\n"
+            + "</table>\n"
+            + "<script>\n"
+            + "  function set(e, value) {\n"
+            + "    try {\n"
+            + "      e.rowSpan = value;\n"
+            + "    } catch (e) {\n"
+            + "      alert('error');\n"
+            + "    }\n"
+            + "  }\n"
+            + "  var td1 = document.getElementById('td1');\n"
+            + "  var td2 = document.getElementById('td2');\n"
+            + "  var td3 = document.getElementById('td3');\n"
+            + "  alert(td1.rowSpan);\n"
+            + "  alert(td2.rowSpan);\n"
+            + "  alert(td3.rowSpan);\n"
+            + "  set(td1, '2');\n"
+            + "  set(td2, 'blah');\n"
+            + "  set(td3, 5);\n"
+            + "  alert(td1.rowSpan);\n"
+            + "  alert(td2.rowSpan);\n"
+            + "  alert(td3.rowSpan);\n"
+            + "  set(td1, -1);\n"
+            + "  set(td2, 2.2);\n"
+            + "  set(td3, 0);\n"
+            + "  alert(td1.rowSpan);\n"
+            + "  alert(td2.rowSpan);\n"
+            + "  alert(td3.rowSpan);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }
