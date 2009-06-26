@@ -75,7 +75,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         final List<WebElement> nodes = webDriver.findElements(By.xpath("//*[starts-with(@id, 'expected')]"));
         if (nodes.isEmpty()) {
-            throw new RuntimeException("No expectations found in html code");
+            throw new RuntimeException("No expectations found in HTML code");
         }
         final String specificName = "expected_" + browserVersion.getNickname();
         String expectationNodeId = "expected";

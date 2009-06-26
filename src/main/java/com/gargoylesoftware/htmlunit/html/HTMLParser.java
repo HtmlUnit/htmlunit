@@ -630,7 +630,7 @@ public final class HTMLParser {
             final DomNode previousNode = stack_.pop(); //remove currentElement from stack
             previousNode.setEndLocation(locator_.getLineNumber(), locator_.getColumnNumber());
 
-            // special handling for form lost children (malformed html code where </form> is synthesized)
+            // special handling for form lost children (malformed HTML code where </form> is synthesized)
             if (previousNode instanceof HtmlForm
                 && ((HTMLEventInfo) augmentations_.getItem(FEATURE_AUGMENTATIONS)).isSynthesized()) {
                 formWaitingForLostChildren_ = (HtmlForm) previousNode;
