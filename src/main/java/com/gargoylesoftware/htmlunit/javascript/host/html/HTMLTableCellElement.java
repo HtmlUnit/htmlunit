@@ -71,6 +71,22 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
+     * Returns the value of the <tt>axis</tt> attribute.
+     * @return the value of the <tt>axis</tt> attribute
+     */
+    public String jsxGet_axis() {
+        return getDomNodeOrDie().getAttribute("axis");
+    }
+
+    /**
+     * Sets the value of the <tt>axis</tt> attribute.
+     * @param axis the value of the <tt>axis</tt> attribute
+     */
+    public void jsxSet_axis(final String axis) {
+        getDomNodeOrDie().setAttribute("axis", axis);
+    }
+
+    /**
      * Returns the value of the <tt>bgColor</tt> attribute.
      * @return the value of the <tt>bgColor</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>

@@ -364,4 +364,35 @@ public class HTMLTableCellElementTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"", "blah", "abc , xyz", "3", "" })
+    public void axis() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var td = document.getElementById('td');\n"
+            + "        alert(td.axis);\n"
+            + "        td.axis = 'blah';\n"
+            + "        alert(td.axis);\n"
+            + "        td.axis = 'abc , xyz';\n"
+            + "        alert(td.axis);\n"
+            + "        td.axis = 3;\n"
+            + "        alert(td.axis);\n"
+            + "        td.axis = '';\n"
+            + "        alert(td.axis);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  <table><tr><td id='td'>a</td></tr></table>\n"
+            + "  </body>\n"
+            + "</html>";
+        loadPageWithAlerts(html);
+    }
+
 }
