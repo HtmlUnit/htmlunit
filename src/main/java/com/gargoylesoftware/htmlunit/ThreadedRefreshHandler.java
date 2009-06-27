@@ -51,6 +51,7 @@ public class ThreadedRefreshHandler implements RefreshHandler {
                 }
             }
         };
+        thread.setDaemon(true);
         thread.start();
     }
 
