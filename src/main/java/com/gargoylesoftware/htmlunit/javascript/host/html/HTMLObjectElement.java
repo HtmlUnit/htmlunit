@@ -19,6 +19,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObjectImpl;
+import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
 
 /**
  * The JavaScript object "HTMLObjectElement".
@@ -26,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObjectImpl;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HTMLObjectElement extends HTMLElement {
+public class HTMLObjectElement extends FormChild {
 
     private static final long serialVersionUID = -916091257587937486L;
 

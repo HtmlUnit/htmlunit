@@ -49,7 +49,7 @@
                 JavaScript: add support for br.clear attribute.
             </action>
             <action type="add" dev="sdanig">
-                JavaScript: add support for legend.form attribute.
+                JavaScript: add support for option.form, legend.form, object.form and label.form attributes.
             </action>
             <action type="fix" dev="sdanig" issues="2515806">
                 Add better support for XHTML pages (new XHtmlPage class extends HtmlPage class).

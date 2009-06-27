@@ -1047,7 +1047,12 @@
         </function>
     </class>
 
-    <class name="FormField" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FormField"
+    <class name="FormChild" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FormChild"
+        JSObject="false">
+        <property name="form" readable="true" writable="false"/>
+    </class>
+
+    <class name="FormField" extends="FormChild" classname="com.gargoylesoftware.htmlunit.javascript.host.FormField"
         JSObject="false">
         <property name="dataFld" notImplemented="true" readable="true" writable="true">
             <browser name="Internet Explorer"/>
@@ -1059,7 +1064,6 @@
             <browser name="Internet Explorer"/>
         </property>
         <property name="disabled" readable="true" writable="true"/>
-        <property name="form" readable="true" writable="false"/>
         <property name="name" readable="true" writable="true"/>
         <property name="onchange" readable="true" writable="true"/>
         <property name="type" readable="true" writable="false"/>
@@ -1595,12 +1599,11 @@
         </property>
     </class>
 
-    <class name="HTMLFieldSetElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFieldSetElement"
+    <class name="HTMLFieldSetElement" extends="FormChild" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFieldSetElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFieldSet">
         <property name="align" readable="true" writable="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="form" readable="true" writable="false"/>
     </class>
 
     <class name="HTMLFontElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFontElement"
@@ -1781,7 +1784,7 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlIsIndex">
     </class>
 
-    <class name="HTMLLabelElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLabelElement"
+    <class name="HTMLLabelElement" extends="FormChild" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLabelElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLabel">
         <property name="accessKey" readable="true" writable="true">
             <browser name="Firefox"/>
@@ -1798,7 +1801,7 @@
         <property name="htmlFor" readable="true" writable="true"/>
     </class>
 
-    <class name="HTMLLegendElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLegendElement"
+    <class name="HTMLLegendElement" extends="FormChild" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLegendElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLegend">
         <property name="accessKey" readable="true" writable="true">
             <browser name="Firefox"/>
@@ -1813,7 +1816,6 @@
         <property name="dataSrc" notImplemented="true" readable="true" writable="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="form" readable="true" writable="false"/>
     </class>
 
     <class name="HTMLLIElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLIElement"
@@ -1849,7 +1851,7 @@
         </property>
     </class>
 
-    <class name="HTMLObjectElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLObjectElement"
+    <class name="HTMLObjectElement" extends="FormChild" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLObjectElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlObject">
         <property name="align" notImplemented="true" readable="true" writable="true"/>
         <property name="alt" readable="true" writable="true">
@@ -1888,7 +1890,7 @@
         <property name="disabled" readable="true" writable="true"/>
     </class>
 
-    <class name="HTMLOptionElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionElement"
+    <class name="HTMLOptionElement" extends="FormChild" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionElement"
         jsConstructor="jsConstructor" JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOption">
         <property name="defaultSelected" readable="true" writable="false"/>
         <property name="disabled" readable="true" writable="true"/>

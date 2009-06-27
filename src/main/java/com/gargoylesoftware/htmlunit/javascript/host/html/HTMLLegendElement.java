@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
 
 /**
  * The JavaScript object "HTMLLegendElement".
@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlForm;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HTMLLegendElement extends HTMLElement {
+public class HTMLLegendElement extends FormChild {
 
     private static final long serialVersionUID = -6536306776315347201L;
 
@@ -31,18 +31,6 @@ public class HTMLLegendElement extends HTMLElement {
      */
     public HTMLLegendElement() {
         // Empty.
-    }
-
-    /**
-     * Returns the value of the <tt>form</tt> property.
-     * @return the value of the <tt>form</tt> property
-     */
-    public HTMLFormElement jsxGet_form() {
-        final HtmlForm form = getDomNodeOrDie().getEnclosingForm();
-        if (form == null) {
-            return null;
-        }
-        return (HTMLFormElement) getScriptableFor(form);
     }
 
 }

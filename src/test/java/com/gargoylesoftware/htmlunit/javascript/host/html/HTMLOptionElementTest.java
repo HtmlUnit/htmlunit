@@ -430,7 +430,20 @@ public class HTMLOptionElementTest extends WebTestCase {
             + "  </div>\n"
             + "</form>\n"
             + "</body></html>";
-
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "[object]" }, FF = { "[object HTMLFormElement]" })
+    public void form() throws Exception {
+        final String html
+            = "<html><body><form><select id='s'><option>a</option></select></form><script>\n"
+            + "alert(document.getElementById('s').options[0].form);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }

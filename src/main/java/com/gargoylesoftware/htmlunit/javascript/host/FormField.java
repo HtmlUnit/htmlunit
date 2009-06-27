@@ -19,8 +19,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement;
 
 /**
  * Base class for all JavaScript object corresponding to form fields.
@@ -32,7 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public class FormField extends HTMLElement {
+public class FormField extends FormChild {
 
     private static final long serialVersionUID = 3712016051364495710L;
 
@@ -85,19 +83,6 @@ public class FormField extends HTMLElement {
      */
     public void jsxSet_name(final String newName) {
         getDomNodeOrDie().setAttribute("name", newName);
-    }
-
-    /**
-     * Returns the value of the JavaScript attribute "form".
-     *
-     * @return the value of this attribute
-     */
-    public HTMLFormElement jsxGet_form() {
-        final HtmlForm form = getDomNodeOrDie().getEnclosingForm();
-        if (form == null) {
-            return null;
-        }
-        return (HTMLFormElement) getScriptableFor(form);
     }
 
     /**

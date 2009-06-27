@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
 
 /**
  * The JavaScript object "HTMLFieldSetElement".
@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlForm;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HTMLFieldSetElement extends HTMLElement {
+public class HTMLFieldSetElement extends FormChild {
 
     private static final long serialVersionUID = -5222303197991907832L;
 
@@ -47,18 +47,6 @@ public class HTMLFieldSetElement extends HTMLElement {
      */
     public void jsxSet_align(final String align) {
         setAlign(align, false);
-    }
-
-    /**
-     * Returns the value of the <tt>form</tt> property.
-     * @return the value of the <tt>form</tt> property
-     */
-    public HTMLFormElement jsxGet_form() {
-        final HtmlForm form = getDomNodeOrDie().getEnclosingForm();
-        if (form == null) {
-            return null;
-        }
-        return (HTMLFormElement) getScriptableFor(form);
     }
 
     /**

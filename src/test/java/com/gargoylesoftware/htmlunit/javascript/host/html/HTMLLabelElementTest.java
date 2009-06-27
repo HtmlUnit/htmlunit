@@ -116,4 +116,17 @@ public class HTMLLabelElementTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "[object]" }, FF = { "[object HTMLFormElement]" })
+    public void form() throws Exception {
+        final String html
+            = "<html><body><form><label id='a'>a</label></form><script>\n"
+            + "alert(document.getElementById('a').form);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }

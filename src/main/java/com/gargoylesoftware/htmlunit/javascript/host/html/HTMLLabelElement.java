@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import com.gargoylesoftware.htmlunit.html.HtmlLabel;
+import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
 
 /**
  * A JavaScript object for a Label.
@@ -22,7 +23,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlLabel;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HTMLLabelElement extends HTMLElement {
+public class HTMLLabelElement extends FormChild {
 
     private static final long serialVersionUID = -7412506443200373632L;
 

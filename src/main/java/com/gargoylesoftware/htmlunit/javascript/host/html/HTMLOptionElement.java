@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.Attr;
+import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
 
 /**
  * The JavaScript object that represents an option.
@@ -36,8 +37,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.Attr;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HTMLOptionElement extends HTMLElement {
+public class HTMLOptionElement extends FormChild {
+
     private static final long serialVersionUID = 947015932373556314L;
+
     private static final Set<String> namesIEAttributeAlwaysAvailable_ = new HashSet<String>();
 
     static {
@@ -51,6 +54,7 @@ public class HTMLOptionElement extends HTMLElement {
      * Creates an instance.
      */
     public HTMLOptionElement() {
+        // Empty.
     }
 
     /**
