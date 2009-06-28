@@ -68,7 +68,7 @@ public class WebDriverOldTestsTest extends WebDriverTestCase {
     }
 
     /**
-     * Provides the data, ie the files on which the tests should run.
+     * Provides the data, i.e. the files on which the tests should run.
      * TODO: use a dedicated test runner instead of this parameterized runner.
      * @return the tests files on which to run the tests
      */
@@ -76,6 +76,8 @@ public class WebDriverOldTestsTest extends WebDriverTestCase {
     public static Collection<File[]> data() {
         final File testsDir = new File("target/generated_tests");
 
+        System.err.println("TestsDir " + testsDir.getAbsolutePath());
+        System.err.println("Exists " + testsDir.exists());
         final File[] testFiles = testsDir.listFiles(new FileFilter() {
             public boolean accept(final File pathname) {
                 final String name = pathname.getName();
@@ -84,6 +86,7 @@ public class WebDriverOldTestsTest extends WebDriverTestCase {
         });
 
         final List<File[]> response = new ArrayList<File[]>();
+        System.err.println("TestFiles " + testFiles);
         for (final File f : testFiles) {
             response.add(new File[] {f});
         }
