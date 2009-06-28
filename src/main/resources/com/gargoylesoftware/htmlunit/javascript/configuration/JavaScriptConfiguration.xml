@@ -2443,6 +2443,26 @@
         <constant name="SHOW_TEXT"/>
     </class>
 
+    <class name="OfflineResourceList" classname="com.gargoylesoftware.htmlunit.javascript.host.OfflineResourceList"
+        JSObject="true">
+        <browser name="Firefox" min-version="3"/>
+        <property name="length" readable="true" writable="false"/>
+        <property name="oncached" readable="true" writable="true"/>
+        <property name="onchecking" readable="true" writable="true"/>
+        <property name="ondownloading" readable="true" writable="true"/>
+        <property name="onerror" readable="true" writable="true"/>
+        <property name="onnoupdate" readable="true" writable="true"/>
+        <property name="onprogress" readable="true" writable="true"/>
+        <property name="onupdateready" readable="true" writable="true"/>
+        <property name="status" readable="true" writable="false"/>
+        <function name="add"/>
+        <function name="hasItem"/>
+        <function name="item"/>
+        <function name="remove"/>
+        <function name="swapCache"/>
+        <function name="update"/>
+    </class>
+
     <class name="Plugin" extends="SimpleArray" classname="com.gargoylesoftware.htmlunit.javascript.host.Plugin"
         JSObject="true">
         <browser name="Firefox"/>
@@ -2695,6 +2715,9 @@
 
     <class name="Window" classname="com.gargoylesoftware.htmlunit.javascript.host.Window" JSObject="true">
         <doclink url="http://msdn.microsoft.com/en-us/library/ms535873.aspx" descr="MSDN documentation"/>
+        <property name="applicationCache" readable="true" writable="false">
+            <browser name="Firefox" min-version="3"/>
+        </property>
         <property name="clientInformation" readable="true" writable="false">
             <browser name="Internet Explorer"/>
         </property>

@@ -105,6 +105,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     private Screen screen_;
     private History history_;
     private Location location_;
+    private OfflineResourceList applicationCache_;
     private Selection selection_;
     private Event currentEvent_;
     private String status_ = "";
@@ -229,6 +230,14 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     public HTMLDocument jsxGet_document() {
         return document_;
+    }
+
+    /**
+     * Returns the application cache.
+     * @return the application cache
+     */
+    public OfflineResourceList jsxGet_applicationCache() {
+        return applicationCache_;
     }
 
     /**
@@ -514,6 +523,10 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         location_.setParentScope(this);
         location_.setPrototype(getPrototype(Location.class));
         location_.initialize(this);
+
+        applicationCache_ = new OfflineResourceList();
+        applicationCache_.setParentScope(this);
+        applicationCache_.setPrototype(getPrototype(OfflineResourceList.class));
 
         // like a JS new Object()
         final Context ctx = Context.getCurrentContext();

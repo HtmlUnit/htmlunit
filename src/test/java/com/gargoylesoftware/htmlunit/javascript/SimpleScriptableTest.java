@@ -134,6 +134,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("EventNode");
         names.remove("EventHandler");
         names.remove("EventListenersContainer");
+        names.remove("FormChild");
         names.remove("FormField");
         names.remove("History");
         names.remove("HTMLCollection");
@@ -152,6 +153,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("Navigator");
         names.remove("Node");
         names.remove("NodeFilter");
+        names.remove("OfflineResourceList");
         names.remove("Plugin");
         names.remove("PluginArray");
         names.remove("Popup");
