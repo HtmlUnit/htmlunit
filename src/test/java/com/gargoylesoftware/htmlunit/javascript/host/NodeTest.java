@@ -21,14 +21,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -272,18 +270,9 @@ public class NodeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "H2" })
+    @Alerts(FF = "exception", IE = { "3", "H2" })
     public void test_insertBefore_noSecondArg() throws Exception {
-        try {
-            test_insertBefore("aNode.insertBefore(nodeToInsert);");
-            if (!getBrowserVersion().isIE()) {
-                Assert.fail();
-            }
-        }
-        catch (final ScriptException e) {
-            final String message = e.getMessage();
-            assertTrue(message, message.indexOf("not enough arguments") > -1);
-        }
+        test_insertBefore("aNode.insertBefore(nodeToInsert);");
     }
 
     /**
@@ -293,11 +282,14 @@ public class NodeTest extends WebTestCase {
         final String content = "<html><head><title>test_insertBefore</title>\n"
             + "<script>\n"
             + "function doTest() {\n"
-            + "var nodeToInsert = document.getElementById('nodeToInsert');\n"
-            + "var aNode = document.getElementById('myNode');\n"
+            + "  var nodeToInsert = document.getElementById('nodeToInsert');\n"
+            + "  var aNode = document.getElementById('myNode');\n"
+            + "  try {\n"
             + insertJSLine
-            + "alert(aNode.childNodes.length);\n"
-            + "alert(aNode.childNodes[2].nodeName);\n"
+            + "    alert(aNode.childNodes.length);\n"
+            + "    alert(aNode.childNodes[2].nodeName);\n"
+            + "  }\n"
+            + "  catch (e) { alert('exception'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='doTest()'>\n"
