@@ -327,17 +327,17 @@ public final class HTMLParser {
         try {
             domBuilder.parse(in);
         }
-        catch (final Exception e) {
+        catch (final RuntimeException e) {
             Throwable origin;
             try {
+                // extract enclosed exception
                 Class.forName("org.apache.xerces.xni.XNIException");
                 origin = extractNestedException(e);
+                throw new RuntimeException("Failed parsing content from " + url, origin);
             }
             catch (final Throwable t) {
-                origin = e;
+                throw e;
             }
-            // extract enclosed exception
-            throw new RuntimeException("Failed parsing content from " + url, origin);
         }
         finally {
             page.registerParsingEnd();
