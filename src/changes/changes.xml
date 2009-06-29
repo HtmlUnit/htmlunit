@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="fix" dev="sdanig">
+                Some CSS properties are inherited from parent elements (computed styles only).
+            </action>
             <action type="fix" dev="asashour" issue="2811607">
                 JavaScript: form submission should consider event.preventDefault() (FF only).
             </action>
