@@ -327,9 +327,16 @@ public final class HTMLParser {
         try {
             domBuilder.parse(in);
         }
-        catch (final XNIException e) {
+        catch (final Exception e) {
+            Throwable origin;
+            try {
+                Class.forName("org.apache.xerces.xni.XNIException");
+                origin = extractNestedException(e);
+            }
+            catch (final Throwable t) {
+                origin = e;
+            }
             // extract enclosed exception
-            final Throwable origin = extractNestedException(e);
             throw new RuntimeException("Failed parsing content from " + url, origin);
         }
         finally {
@@ -598,8 +605,7 @@ public final class HTMLParser {
 
         /** {@inheritDoc} */
         @Override
-        public void endElement(final QName element, final Augmentations augs)
-            throws XNIException {
+        public void endElement(final QName element, final Augmentations augs) {
             // just to have local access to the augmentations. A better way?
             augmentations_ = augs;
             super.endElement(element, augs);
@@ -847,7 +853,7 @@ public final class HTMLParser {
          * {@inheritDoc}
          */
         @Override
-        public void parse(final XMLInputSource inputSource) throws XNIException, IOException {
+        public void parse(final XMLInputSource inputSource) throws IOException {
             final HtmlUnitDOMBuilder oldBuilder = page_.getBuilder();
             page_.setBuilder(this);
             try {
@@ -876,8 +882,7 @@ class HTMLErrorHandler extends DefaultErrorHandler {
 
     /** @see DefaultErrorHandler#error(String,String,XMLParseException) */
     @Override
-    public void error(final String domain, final String key,
-            final XMLParseException exception) throws XNIException {
+    public void error(final String domain, final String key, final XMLParseException exception) {
         listener_.error(exception.getMessage(),
                 url_,
                 exception.getLineNumber(),
@@ -887,8 +892,7 @@ class HTMLErrorHandler extends DefaultErrorHandler {
 
     /** @see DefaultErrorHandler#warning(String,String,XMLParseException) */
     @Override
-    public void warning(final String domain, final String key,
-            final XMLParseException exception) throws XNIException {
+    public void warning(final String domain, final String key, final XMLParseException exception) {
         listener_.warning(exception.getMessage(),
                 url_,
                 exception.getLineNumber(),

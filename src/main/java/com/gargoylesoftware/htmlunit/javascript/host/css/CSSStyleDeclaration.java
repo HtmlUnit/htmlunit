@@ -55,7 +55,6 @@ public class CSSStyleDeclaration extends SimpleScriptable {
 
     /** The different types of shorthand values. */
     private enum Shorthand {
-
         TOP("Top"),
         RIGHT("Right"),
         BOTTOM("Bottom"),
