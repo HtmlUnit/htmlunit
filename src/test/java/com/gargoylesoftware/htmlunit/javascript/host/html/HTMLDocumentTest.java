@@ -503,4 +503,34 @@ public class HTMLDocumentTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @NotYetImplemented(Browser.IE)
+    @Alerts(FF = {"[object HTMLSpanElement]", "undefined" },
+            IE = {"[object]", "4", "red" })
+    public void identicalIDs() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        alert(document.all['Item']);\n"
+            + "        alert(document.all.Item.length);\n"
+            + "        if (document.all.Item.length) {\n"
+            + "          alert(document.all.Item[1].style.color);\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body' onload='test()'>\n"
+            + "    <span id='Item' style='color:black'></span>\n"
+            + "    <span id='Item' style='color:red'></span>\n"
+            + "    <span id='Item' style='color:green'></span>\n"
+            + "    <span id='Item' style='color:blue'></span>\n"
+            + "  </body>\n"
+            + "</html>";
+        loadPageWithAlerts(html);
+    }
 }
