@@ -1524,7 +1524,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public int jsxGet_offsetHeight() {
         final MouseEvent event = MouseEvent.getCurrentMouseEvent();
         if (isAncestorOfEventTarget(event)) {
-            // compute appropriate offsetHeight to make as if mouse event produced within this element
+            // compute appropriate offset height to pretend mouse event was produced within this element
             return event.jsxGet_clientY() - getPosY() + 50;
         }
         return jsxGet_currentStyle().getCalculatedHeight(true, true);
@@ -1541,7 +1541,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public int jsxGet_offsetWidth() {
         final MouseEvent event = MouseEvent.getCurrentMouseEvent();
         if (isAncestorOfEventTarget(event)) {
-            // compute appropriate offsetwidth to make as if mouse event produced within this element
+            // compute appropriate offset width to pretend mouse event was produced within this element
             return event.jsxGet_clientX() - getPosX() + 50;
         }
         return jsxGet_currentStyle().getCalculatedWidth(true, true);
@@ -1827,9 +1827,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Gets the first ancestor instance of {@link HTMLElement}.
-     * <p>It is mostly identical to {@link #jsxGet_parentNode()}
-     * except that it skips xml nodes.
+     * Gets the first ancestor instance of {@link HTMLElement}. It is mostly identical
+     * to {@link #jsxGet_parentNode()} except that it skips XML nodes.
      * @return the parent HTML element
      * @see #jsxGet_parentNode()
      */

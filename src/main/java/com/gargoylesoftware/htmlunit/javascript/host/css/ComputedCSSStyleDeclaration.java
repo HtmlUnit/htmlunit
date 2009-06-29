@@ -61,8 +61,79 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @param style the original Style
      */
     public ComputedCSSStyleDeclaration(final CSSStyleDeclaration style) {
-        super(style.getHTMLElement());
-        getHTMLElement().setDefaults(this);
+        super(style.getElement());
+        getElement().setDefaults(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * Overridden because some CSS properties are inherited from parent elements.
+     */
+    @Override
+    protected String getStyleAttribute(final String name, final boolean camelCase) {
+        String s = super.getStyleAttribute(name, camelCase);
+        if (s.length() == 0 && isInheritable(name, camelCase)) {
+            final HTMLElement parent = getElement().getParentHTMLElement();
+            if (parent != null) {
+                s = getWindow().jsxFunction_getComputedStyle(parent, null).getStyleAttribute(name, camelCase);
+            }
+        }
+        return s;
+    }
+
+    /**
+     * Returns <tt>true</tt> if the specified CSS property is inheritable from parent elements.
+     * @param name the name of the style attribute to check for inheritability
+     * @param camelCase whether or not the name is expected to be in camel case
+     * @return <tt>true</tt> if the specified CSS property is inheritable from parent elements
+     * @see <a href="http://www.w3.org/TR/CSS21/propidx.html">CSS Property Table</a>
+     */
+    private boolean isInheritable(String name, final boolean camelCase) {
+        if (!camelCase) {
+            name = camelize(name);
+        }
+        return    "azimuth".equals(name)
+               || "borderCollapse".equals(name)
+               || "borderSpacing".equals(name)
+               || "captionSide".equals(name)
+               || "color".equals(name)
+               || "cursor".equals(name)
+               || "direction".equals(name)
+               || "elevation".equals(name)
+               || "emptyCells".equals(name)
+               || "fontFamily".equals(name)
+               || "fontSize".equals(name)
+               || "fontStyle".equals(name)
+               || "fontVariant".equals(name)
+               || "fontWeight".equals(name)
+               || "font".equals(name)
+               || "letterSpacing".equals(name)
+               || "lineHeight".equals(name)
+               || "listStyleImage".equals(name)
+               || "listStylePosition".equals(name)
+               || "listStyleType".equals(name)
+               || "listStyle".equals(name)
+               || "orphans".equals(name)
+               || "pitchRange".equals(name)
+               || "pitch".equals(name)
+               || "quotes".equals(name)
+               || "richness".equals(name)
+               || "speakHeader".equals(name)
+               || "speakNumeral".equals(name)
+               || "speakPunctuation".equals(name)
+               || "speak".equals(name)
+               || "speechRate".equals(name)
+               || "stress".equals(name)
+               || "textAlign".equals(name)
+               || "textIndent".equals(name)
+               || "textTransform".equals(name)
+               || "visibility".equals(name)
+               || "voiceFamily".equals(name)
+               || "volume".equals(name)
+               || "whiteSpace".equals(name)
+               || "widows".equals(name)
+               || "wordSpacing".equals(name);
     }
 
     /**
@@ -380,7 +451,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
             defaultDisplays_ = Collections.unmodifiableMap(map);
         }
-        final String defaultValue = defaultDisplays_.get(getHTMLElement().jsxGet_tagName());
+        final String defaultValue = defaultDisplays_.get(getElement().jsxGet_tagName());
         if (defaultValue == null) {
             return "block";
         }
@@ -1104,7 +1175,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public int getCalculatedWidth(final boolean includeBorder, final boolean includePadding) {
         int width;
         final String styleWidth = super.jsxGet_width();
-        final DomNode parent = getHTMLElement().getDomNodeOrDie().getParentNode();
+        final DomNode parent = getElement().getDomNodeOrDie().getParentNode();
         if (StringUtils.isEmpty(styleWidth) && parent instanceof HtmlElement) {
             // Width not explicitly set; just assume we fill the width provided by the parent...
             // AS LONG AS we can use the parent!
@@ -1173,7 +1244,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             // need for the explicit check for HtmlHead elements, which are display:none in regular UAs).
             // It also doesn't take into account the fact that the parent's height may be hardcoded in CSS.
             top = 0;
-            DomNode child = this.getHTMLElement().getDomNodeOrDie().getParentNode().getFirstChild();
+            DomNode child = this.getElement().getDomNodeOrDie().getParentNode().getFirstChild();
             while (child != null) {
                 if (child instanceof HtmlElement && !(child instanceof HtmlHead)) {
                     top += 20;
@@ -1187,7 +1258,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             // This is very rough, and doesn't even take position or display types into account (hence the
             // need for the explicit check for HtmlHead elements, which are display:none in regular UAs).
             top = 0;
-            DomNode prev = this.getHTMLElement().getDomNodeOrDie().getPreviousSibling();
+            DomNode prev = this.getElement().getDomNodeOrDie().getPreviousSibling();
             while (prev != null) {
                 if (prev instanceof HtmlElement && !(prev instanceof HtmlHead)) {
                     top += 20;

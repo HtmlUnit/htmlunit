@@ -55,12 +55,14 @@ public class CSSStyleDeclaration extends SimpleScriptable {
 
     /** The different types of shorthand values. */
     private enum Shorthand {
+
         TOP("Top"),
         RIGHT("Right"),
         BOTTOM("Bottom"),
         LEFT("Left");
 
         private final String string_;
+
         Shorthand(final String stringRepresentation) {
             string_ = stringRepresentation;
         }
@@ -130,10 +132,6 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         styleDeclaration_ = styleDeclaration;
     }
 
-    HTMLElement getHTMLElement() {
-        return jsElement_;
-    }
-
     /**
      * Initializes the object.
      * @param htmlElement the element that this style describes
@@ -163,16 +161,24 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     }
 
     /**
+     * Returns the element to which this style belongs.
+     * @return the element to which this style belongs
+     */
+    protected HTMLElement getElement() {
+        return jsElement_;
+    }
+
+    /**
      * Returns the value of the named style attribute, or an empty string if it is not found.
      *
      * @param name the name of the style attribute whose value is to be retrieved
      * @param camelCase whether or not the name is expected to be in camel case
      * @return the named style attribute value, or an empty string if it is not found
      */
-    private String getStyleAttribute(String name, final boolean camelCase) {
+    protected String getStyleAttribute(String name, final boolean camelCase) {
         if (styleDeclaration_ != null) {
             if (camelCase) {
-                name = name.replaceAll("([A-Z])", "-$1").toLowerCase();
+                name = uncamelize(name);
             }
             return styleDeclaration_.getPropertyValue(name);
         }
@@ -272,7 +278,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param newValue the attribute value
      */
     protected void setStyleAttribute(String name, final String newValue) {
-        name = name.replaceAll("([A-Z])", "-$1").toLowerCase();
+        name = uncamelize(name);
         if (styleDeclaration_ != null) {
             styleDeclaration_.setProperty(name, newValue, null);
         }
@@ -394,6 +400,19 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             }
         }
         return buffer.toString();
+    }
+
+    /**
+     * Transforms the specified string from camel-cased (e.g. <tt>fontSize</tt>) to
+     * delimiter-separated (e.g. <tt>font-size</tt>)
+     * @param string the string to uncamelize
+     * @return the transformed string
+     */
+    protected static String uncamelize(final String string) {
+        if (string == null) {
+            return null;
+        }
+        return string.replaceAll("([A-Z])", "-$1").toLowerCase();
     }
 
     /**
@@ -4600,11 +4619,4 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         }
     }
 
-    /**
-     * Gets the element to which this style belongs.
-     * @return the element
-     */
-    protected HTMLElement getElement() {
-        return jsElement_;
-    }
 }

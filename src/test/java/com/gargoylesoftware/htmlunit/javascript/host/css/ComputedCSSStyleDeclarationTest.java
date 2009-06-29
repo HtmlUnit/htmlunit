@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
@@ -193,13 +192,12 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
      * Some style tests. There are two points in this case:
      * <ol>
      *  <li>https://sourceforge.net/tracker/index.php?func=detail&aid=1566274&group_id=82996&atid=567969</li>
-     *  <li>No idea why Firefox alert "pointer" for the "myDiv2", the rule should only apply to "myDiv1"</li>
+     *  <li>the "pointer" value gets inherited by "myDiv2", which is parsed as a child of "style_test_1"</li>
      * </ol>
      * @throws Exception if the test fails
      */
     @Test
     @Browsers(Browser.FF)
-    @NotYetImplemented
     @Alerts({"", "", "pointer", "pointer" })
     public void styleElement2() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
@@ -406,4 +404,30 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
             + "</body></html>";
         loadPageWithAlerts(content);
     }
+
+    /**
+     * Verifies that at least one CSS attribute is correctly inherited by default.
+     * Required by the MochiKit tests.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ ",", "separate,separate", "collapse,", "collapse,collapse" })
+    public void inheritedImplicitly() throws Exception {
+        final String html
+            = "<html><body><table id='a'><tr id='b'><td>a</td></tr></table><script>\n"
+            + "var a = document.getElementById('a');\n"
+            + "var b = document.getElementById('b');\n"
+            + "var as = a.style;\n"
+            + "var bs = b.style;\n"
+            + "var acs = window.getComputedStyle ? window.getComputedStyle(a,null) : a.currentStyle;\n"
+            + "var bcs = window.getComputedStyle ? window.getComputedStyle(b,null) : b.currentStyle;\n"
+            + "alert(as.borderCollapse + ',' + bs.borderCollapse);\n"
+            + "alert(acs.borderCollapse + ',' + bcs.borderCollapse);\n"
+            + "as.borderCollapse = 'collapse';\n"
+            + "alert(as.borderCollapse + ',' + bs.borderCollapse);\n"
+            + "alert(acs.borderCollapse + ',' + bcs.borderCollapse);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }
