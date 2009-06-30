@@ -492,4 +492,45 @@ public class Window2Test extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * Regression test for https://sf.net/tracker/index.php?func=detail&aid=1153708&group_id=47038&atid=448266
+     * and https://bugzilla.mozilla.org/show_bug.cgi?id=443491.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void overwriteFunctions_alert() throws Exception {
+        final String html = "<html><head><script language='JavaScript'>\n"
+            + "function alert(x)\n"
+            + "{\n"
+            + "  document.title = x;\n"
+            + "}\n"
+            + "alert('hello');\n"
+            + "</script></head><body></body></html>";
+
+        final HtmlPage page = loadPageWithAlerts(html);
+        assertEquals("hello", page.getTitleText());
+    }
+
+    /**
+     * Regression test for https://sf.net/tracker/index.php?func=detail&aid=1153708&group_id=47038&atid=448266
+     * and https://bugzilla.mozilla.org/show_bug.cgi?id=443491.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented(Browser.FF3)
+    @Alerts(FF2 = "hello", FF3 = "exception", IE = "hello")
+    public void overwriteFunctions_navigator() throws Exception {
+        final String html = "<html><head><script language='JavaScript'>\n"
+            + "try {\n"
+            + "  function navigator()\n"
+            + "  {\n"
+            + "    alert('hello');\n"
+            + "  }\n"
+            + "  navigator();\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "</script></head><body></body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }

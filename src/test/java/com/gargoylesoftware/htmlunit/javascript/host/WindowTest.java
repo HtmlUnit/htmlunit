@@ -2138,29 +2138,6 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Regression test for https://sf.net/tracker/index.php?func=detail&aid=1153708&group_id=47038&atid=448266
-     * and https://bugzilla.mozilla.org/show_bug.cgi?id=443491.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void overwriteFunctions() throws Exception {
-        final String content = "<html><head><script language='JavaScript'>\n"
-            + "function alert()\n"
-            + "{\n"
-            + "  scroll = 'xxx';\n"
-            + "  document.write(scroll);\n"
-            + "}\n"
-            + "function navigator()\n"
-            + "{\n"
-            + "  alert('xxx');\n"
-            + "}\n"
-            + "navigator();\n"
-            + "</script></head><body></body></html>";
-        final HtmlPage page = loadPage(content);
-        assertEquals("xxx", page.getBody().asText());
-    }
-
-    /**
      * @throws Exception if an error occurs
      */
     @Test
