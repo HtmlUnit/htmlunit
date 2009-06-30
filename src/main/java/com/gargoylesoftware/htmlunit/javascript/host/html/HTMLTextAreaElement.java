@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.javascript.host.FormField;
@@ -36,18 +38,12 @@ public class HTMLTextAreaElement extends FormField {
      * Creates an instance.
      */
     public HTMLTextAreaElement() {
-    }
-
-    /**
-     * JavaScript constructor. This must be declared in every JavaScript file because
-     * the rhino engine won't walk up the hierarchy looking for constructors.
-     */
-    public void jsConstructor() {
+        // Empty.
     }
 
     /**
      * Returns the type of this input.
-     * @return the type
+     * @return the type of this input
      */
     @Override
     public String jsxGet_type() {
@@ -74,6 +70,94 @@ public class HTMLTextAreaElement extends FormField {
     @Override
     public void jsxSet_value(final String value) {
         ((HtmlTextArea) getDomNodeOrDie()).setText(value);
+    }
+
+    /**
+     * Returns the number of columns in this text area.
+     * @return the number of columns in this text area
+     */
+    public int jsxGet_cols() {
+        int cols;
+        try {
+            final String s = getDomNodeOrDie().getAttribute("cols");
+            cols = Integer.parseInt(s);
+        }
+        catch (final NumberFormatException e) {
+            if (getBrowserVersion().isFirefox()) {
+                cols = -1;
+            }
+            else {
+                cols = 20;
+            }
+        }
+        return cols;
+    }
+
+    /**
+     * Sets the number of columns in this text area.
+     * @param cols the number of columns in this text area
+     */
+    public void jsxSet_cols(final String cols) {
+        int i;
+        try {
+            i = new Float(cols).intValue();
+            if (i < 0) {
+                throw new NumberFormatException();
+            }
+        }
+        catch (final NumberFormatException e) {
+            if (getBrowserVersion().isIE()) {
+                throw Context.throwAsScriptRuntimeEx(e);
+            }
+            else {
+                i = 0;
+            }
+        }
+        getDomNodeOrDie().setAttribute("cols", String.valueOf(i));
+    }
+
+    /**
+     * Returns the number of rows in this text area.
+     * @return the number of rows in this text area
+     */
+    public int jsxGet_rows() {
+        int rows;
+        try {
+            final String s = getDomNodeOrDie().getAttribute("rows");
+            rows = Integer.parseInt(s);
+        }
+        catch (final NumberFormatException e) {
+            if (getBrowserVersion().isFirefox()) {
+                rows = -1;
+            }
+            else {
+                rows = 2;
+            }
+        }
+        return rows;
+    }
+
+    /**
+     * Sets the number of rows in this text area.
+     * @param rows the number of rows in this text area
+     */
+    public void jsxSet_rows(final String rows) {
+        int i;
+        try {
+            i = new Float(rows).intValue();
+            if (i < 0) {
+                throw new NumberFormatException();
+            }
+        }
+        catch (final NumberFormatException e) {
+            if (getBrowserVersion().isIE()) {
+                throw Context.throwAsScriptRuntimeEx(e);
+            }
+            else {
+                i = 0;
+            }
+        }
+        getDomNodeOrDie().setAttribute("rows", String.valueOf(i));
     }
 
     /**

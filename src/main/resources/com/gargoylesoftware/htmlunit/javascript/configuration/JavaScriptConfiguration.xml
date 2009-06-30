@@ -2152,12 +2152,14 @@
         <property name="accessKey" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>
+        <property name="cols" readable="true" writable="true"/>
         <property name="defaultValue" readable="true" writable="true">
             <doclink
                 url="http://msdn.microsoft.com/en-us/library/ms533718.aspx"
                 descr="MSDN documentation"/>
         </property>
         <property name="readOnly" readable="true" writable="true"/>
+        <property name="rows" readable="true" writable="true"/>
         <property name="selectionEnd" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>

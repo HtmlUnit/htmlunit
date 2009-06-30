@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="add" dev="sdanig">
+                JavaScript: add support for textarea.rows and textarea.cols attributes.
+            </action>
             <action type="fix" dev="sdanig">
                 Some CSS properties are inherited from parent elements (computed styles only).
             </action>

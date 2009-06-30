@@ -365,4 +365,74 @@ public class HTMLTextAreaElementTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "-1", "5", "8", "2", "0", "0", "0", "3" },
+            IE = { "20", "5", "8", "2", "error", "error", "8", "2", "error", "8", "3" })
+    public void cols() throws Exception {
+        final String html
+            = "<html><body><textarea id='a1'>a1</textarea><textarea id='a2' cols='5'>a2</textarea><script>\n"
+            + "  function set(e, value) {\n"
+            + "    try {\n"
+            + "      e.cols = value;\n"
+            + "    } catch (e) {\n"
+            + "      alert('error');\n"
+            + "    }\n"
+            + "  }\n"
+            + "  var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
+            + "  alert(a1.cols);\n"
+            + "  alert(a2.cols);\n"
+            + "  set(a1, '8');\n"
+            + "  set(a2, 2);\n"
+            + "  alert(a1.cols);\n"
+            + "  alert(a2.cols);\n"
+            + "  set(a1, 'a');\n"
+            + "  set(a2, '');\n"
+            + "  alert(a1.cols);\n"
+            + "  alert(a2.cols);\n"
+            + "  set(a1, -1);\n"
+            + "  set(a2, 3.4);\n"
+            + "  alert(a1.cols);\n"
+            + "  alert(a2.cols);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "-1", "5", "8", "2", "0", "0", "0", "3" },
+            IE = { "2", "5", "8", "2", "error", "error", "8", "2", "error", "8", "3" })
+    public void rows() throws Exception {
+        final String html
+            = "<html><body><textarea id='a1'>a1</textarea><textarea id='a2' rows='5'>a2</textarea><script>\n"
+            + "  function set(e, value) {\n"
+            + "    try {\n"
+            + "      e.rows = value;\n"
+            + "    } catch (e) {\n"
+            + "      alert('error');\n"
+            + "    }\n"
+            + "  }\n"
+            + "  var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
+            + "  alert(a1.rows);\n"
+            + "  alert(a2.rows);\n"
+            + "  set(a1, '8');\n"
+            + "  set(a2, 2);\n"
+            + "  alert(a1.rows);\n"
+            + "  alert(a2.rows);\n"
+            + "  set(a1, 'a');\n"
+            + "  set(a2, '');\n"
+            + "  alert(a1.rows);\n"
+            + "  alert(a2.rows);\n"
+            + "  set(a1, -1);\n"
+            + "  set(a2, 3.4);\n"
+            + "  alert(a1.rows);\n"
+            + "  alert(a2.rows);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }
