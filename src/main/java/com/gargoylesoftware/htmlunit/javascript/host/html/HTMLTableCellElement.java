@@ -54,7 +54,6 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @Override
     public int jsxGet_offsetHeight() {
-
         final MouseEvent event = MouseEvent.getCurrentMouseEvent();
         if (isAncestorOfEventTarget(event)) {
             return super.jsxGet_offsetHeight();
@@ -70,7 +69,6 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @Override
     public int jsxGet_offsetWidth() {
-
         float w = super.jsxGet_offsetWidth();
         final MouseEvent event = MouseEvent.getCurrentMouseEvent();
         if (isAncestorOfEventTarget(event)) {
