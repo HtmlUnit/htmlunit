@@ -14,10 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import java.util.List;
+
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlTableCell;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
+import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 
 /**
  * The JavaScript object representing a TD or TH.
@@ -41,6 +47,51 @@ public class HTMLTableCellElement extends HTMLTableComponent {
             value = "true";
         }
         super.jsxFunction_setAttribute(name, value);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int jsxGet_offsetHeight() {
+
+        final MouseEvent event = MouseEvent.getCurrentMouseEvent();
+        if (isAncestorOfEventTarget(event)) {
+            return super.jsxGet_offsetHeight();
+        }
+
+        final ComputedCSSStyleDeclaration style = jsxGet_currentStyle();
+        final boolean includeBorder = getBrowserVersion().isIE();
+        return style.getCalculatedHeight(includeBorder, true);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int jsxGet_offsetWidth() {
+
+        float w = super.jsxGet_offsetWidth();
+        final MouseEvent event = MouseEvent.getCurrentMouseEvent();
+        if (isAncestorOfEventTarget(event)) {
+            return (int) w;
+        }
+
+        final ComputedCSSStyleDeclaration style = jsxGet_currentStyle();
+        if ("collapse".equals(style.jsxGet_borderCollapse())) {
+            final HtmlTableRow row = getRow();
+            if (row != null) {
+                final HtmlElement thiz = getDomNodeOrDie();
+                final List<HtmlTableCell> cells = row.getCells();
+                final boolean ie = getBrowserVersion().isIE();
+                final boolean leftmost = (cells.indexOf(thiz) == 0);
+                final boolean rightmost = (cells.indexOf(thiz) == cells.size() - 1);
+                w -= ((ie && leftmost ? 0 : 0.5) * style.getBorderLeft());
+                w -= ((ie && rightmost ? 0 : 0.5) * style.getBorderRight());
+            }
+        }
+
+        return (int) w;
     }
 
     /**
@@ -206,6 +257,18 @@ public class HTMLTableCellElement extends HTMLTableComponent {
         else {
             getDomNodeOrDie().removeAttribute("noWrap");
         }
+    }
+
+    /**
+     * Returns the row element which contains this cell's HTML element; may return <tt>null</tt>.
+     * @return the row element which contains this cell's HTML element
+     */
+    private HtmlTableRow getRow() {
+        DomNode node = getDomNodeOrDie();
+        while (node != null && !(node instanceof HtmlTableRow)) {
+            node = node.getParentNode();
+        }
+        return (HtmlTableRow) node;
     }
 
 }

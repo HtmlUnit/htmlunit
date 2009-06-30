@@ -1368,6 +1368,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     /**
+     * Gets the size of the right border of the element.
+     * @return the value in pixels
+     */
+    public int getBorderRight() {
+        return pixelValue(jsxGet_borderRightWidth());
+    }
+
+    /**
      * Gets the size of the top border of the element.
      * @return the value in pixels
      */

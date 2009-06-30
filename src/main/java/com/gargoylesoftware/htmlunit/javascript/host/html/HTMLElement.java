@@ -1552,14 +1552,13 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param event the event whose target node is to be checked
      * @return <tt>true</tt> if this element's node is an ancestor of the specified event's target node
      */
-    private boolean isAncestorOfEventTarget(final MouseEvent event) {
+    protected boolean isAncestorOfEventTarget(final MouseEvent event) {
         if (event == null) {
             return false;
         }
         else if (!(event.jsxGet_srcElement() instanceof HTMLElement)) {
             return false;
         }
-
         final HTMLElement srcElement = (HTMLElement) event.jsxGet_srcElement();
         return getDomNodeOrDie().isAncestorOf(srcElement.getDomNodeOrDie());
     }
