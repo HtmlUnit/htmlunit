@@ -27,7 +27,7 @@ public interface HtmlAttributeChangeListener {
     /**
      * Notification that a new attribute was added to the HtmlElement. Called after the attribute is added.
      *
-     * @param event the attibute change event
+     * @param event the attribute change event
      */
     void attributeAdded(final HtmlAttributeChangeEvent event);
 
