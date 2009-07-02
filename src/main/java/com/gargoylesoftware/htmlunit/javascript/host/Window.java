@@ -887,15 +887,27 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
+     * Returns the value of the window's <tt>onbeforeunload</tt> property.
+     * @return the value of the window's <tt>onbeforeunload</tt> property
+     */
+    public Object jsxGet_onbeforeunload() {
+        return getHandlerForJavaScript("beforeunload");
+    }
+
+    /**
+     * Sets the value of the window's <tt>onbeforeunload</tt> property.
+     * @param onbeforeunload the value of the window's <tt>onbeforeunload</tt> property
+     */
+    public void jsxSet_onbeforeunload(final Object onbeforeunload) {
+        setHandlerForJavaScript("beforeunload", onbeforeunload);
+    }
+
+    /**
      * Returns the value of the window's <tt>onerror</tt> property.
      * @return the value of the window's <tt>onerror</tt> property
      */
     public Object jsxGet_onerror() {
-        Object handler = getEventListenersContainer().getEventHandlerProp("error");
-        if (handler == null && !getBrowserVersion().isIE()) {
-            handler = Scriptable.NOT_FOUND;
-        }
-        return handler;
+        return getHandlerForJavaScript("error");
     }
 
     /**
@@ -903,10 +915,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param onerror the value of the window's <tt>onerror</tt> property
      */
     public void jsxSet_onerror(final Object onerror) {
-        if (onerror instanceof Function) {
-            getEventListenersContainer().setEventHandlerProp("error", onerror);
-        }
-        // Otherwise, fail silently.
+        setHandlerForJavaScript("error", onerror);
     }
 
     /**
@@ -923,6 +932,21 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             final Object[] args = new Object[] {msg, url, line};
             f.call(Context.getCurrentContext(), this, this, args);
         }
+    }
+
+    private Object getHandlerForJavaScript(final String eventName) {
+        Object handler = getEventListenersContainer().getEventHandlerProp(eventName);
+        if (handler == null && !getBrowserVersion().isIE()) {
+            handler = Scriptable.NOT_FOUND;
+        }
+        return handler;
+    }
+
+    private void setHandlerForJavaScript(final String eventName, final Object handler) {
+        if (handler instanceof Function) {
+            getEventListenersContainer().setEventHandlerProp(eventName, handler);
+        }
+        // Otherwise, fail silently.
     }
 
     /**

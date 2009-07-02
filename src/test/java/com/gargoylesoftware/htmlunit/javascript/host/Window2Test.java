@@ -533,4 +533,68 @@ public class Window2Test extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * Regression test for bug 2808901.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "x" })
+    public void onbeforeunload_setToFunction() throws Exception {
+        final String html
+            = "<html><body><script>\n"
+            + "  window.onbeforeunload = function() { alert('x'); return 'x'; };\n"
+            + "  window.location = 'about:blank';\n"
+            + "</script></body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * Regression test for bug 2808901.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts
+    public void onbeforeunload_setToString() throws Exception {
+        final String html
+            = "<html><body><script>\n"
+            + "  window.onbeforeunload = \"alert('x')\";\n"
+            + "  window.location = 'about:blank';\n"
+            + "</script></body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * Regression test for bug 2808901.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "true", "true", "function" })
+    public void onbeforeunload_defined() throws Exception {
+        onbeforeunload("onbeforeunload", "var x;");
+    }
+
+    /**
+     * Regression test for bug 2808901.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @NotYetImplemented(Browser.FF)
+    @Alerts(IE = { "true", "true", "object" }, FF = { "false", "false", "undefined" })
+    public void onbeforeunload_notDefined() throws Exception {
+        onbeforeunload("onbeforeunload", null);
+    }
+
+    private void onbeforeunload(final String name, final String js) throws Exception {
+        final String html
+            = "<html><body" + (js != null ? " " + name + "='" + js + "'" : "") + "><script>\n"
+            + "  alert('" + name + "' in window);\n"
+            + "  var x = false;\n"
+            + "  for(var p in window) { if(p == '" + name + "') { x = true; break; } }\n"
+            + "  alert(x);\n"
+            + "  alert(typeof window." + name + ");\n"
+            + "</script></body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }

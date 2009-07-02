@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="fix" dev="sdanig" issue="2808901">
+                JavaScript: add support for the window.onbeforeunload attribute.
+            </action>
             <action type="add" dev="sdanig">
                 JavaScript: add support for textarea.rows and textarea.cols attributes.
             </action>

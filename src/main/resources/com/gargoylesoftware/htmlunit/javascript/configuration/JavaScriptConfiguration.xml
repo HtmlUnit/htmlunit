@@ -2747,6 +2747,7 @@
         <property name="location" readable="true" writable="true"/>
         <property name="name" readable="true" writable="true"/>
         <property name="navigator" readable="true" writable="false"/>
+        <property name="onbeforeunload" readable="true" writable="true"/>
         <property name="onclick" readable="true" writable="true"/>
         <property name="ondblclick" readable="true" writable="true"/>
         <property name="onerror" readable="true" writable="true"/>
