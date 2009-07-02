@@ -115,7 +115,7 @@ public final class TextUtil {
      * @return the String as a byte[]; if the default encoding is not supported an empty byte[] will be returned
      */
     public static byte[] stringToByteArray(final String content) {
-        return stringToByteArray(content, DEFAULT_CHARSET);
+        return content != null ? stringToByteArray(content, DEFAULT_CHARSET) : null;
     }
 
     /**

@@ -1045,7 +1045,8 @@ public class HtmlPage extends SgmlPage {
 
         final int statusCode = response.getStatusCode();
         final boolean successful = (statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES);
-        if (!successful) {
+        final boolean noContent = (statusCode == HttpStatus.SC_NO_CONTENT);
+        if (!successful || noContent) {
             return null;
         }
 

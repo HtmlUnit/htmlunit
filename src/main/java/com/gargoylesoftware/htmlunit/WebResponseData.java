@@ -58,11 +58,13 @@ public class WebResponseData implements Serializable {
         statusMessage_ = statusMessage;
         responseHeaders_ = Collections.unmodifiableList(responseHeaders);
 
-        try {
-            body_ = getBody(new ByteArrayInputStream(body), responseHeaders);
-        }
-        catch (final IOException e) {
-            body_ = body;
+        if (body != null) {
+            try {
+                body_ = getBody(new ByteArrayInputStream(body), responseHeaders);
+            }
+            catch (final IOException e) {
+                body_ = body;
+            }
         }
     }
 

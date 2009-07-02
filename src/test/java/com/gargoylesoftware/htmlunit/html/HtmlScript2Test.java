@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.apache.commons.httpclient.HttpStatus.SC_NO_CONTENT;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.httpclient.NameValuePair;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -246,4 +249,22 @@ public class HtmlScript2Test extends WebTestCase {
         final HtmlPage page = loadPageWithAlerts(html);
         assertTrue(HtmlScript.class.isInstance(page.getHtmlElementById("myId")));
     }
+
+    /**
+     * Verifies that 204 (No Content) responses for script resources are handled gracefully.
+     * @throws Exception on test failure
+     * @see <a href="https://sourceforge.net/tracker/?func=detail&atid=448266&aid=2815903&group_id=47038">2815903</a>
+     */
+    @Test
+    public void noContent() throws Exception {
+        final String html = "<html><body><script src='" + URL_SECOND + "'/></body></html>";
+        final WebClient client = getWebClient();
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html);
+        final ArrayList<NameValuePair> headers = new ArrayList<NameValuePair>();
+        conn.setResponse(URL_SECOND, (String) null, SC_NO_CONTENT, "No Content", "text/javascript", headers);
+        client.setWebConnection(conn);
+        client.getPage(URL_FIRST);
+    }
+
 }
