@@ -327,17 +327,10 @@ public final class HTMLParser {
         try {
             domBuilder.parse(in);
         }
-        catch (final RuntimeException e) {
-            Throwable origin;
-            try {
-                // extract enclosed exception
-                Class.forName("org.apache.xerces.xni.XNIException");
-                origin = extractNestedException(e);
-                throw new RuntimeException("Failed parsing content from " + url, origin);
-            }
-            catch (final Throwable t) {
-                throw e;
-            }
+        catch (final XNIException e) {
+            // extract enclosed exception
+            final Throwable origin = extractNestedException(e);
+            throw new RuntimeException("Failed parsing content from " + url, origin);
         }
         finally {
             page.registerParsingEnd();
@@ -605,7 +598,8 @@ public final class HTMLParser {
 
         /** {@inheritDoc} */
         @Override
-        public void endElement(final QName element, final Augmentations augs) {
+        public void endElement(final QName element, final Augmentations augs)
+            throws XNIException {
             // just to have local access to the augmentations. A better way?
             augmentations_ = augs;
             super.endElement(element, augs);
@@ -853,7 +847,7 @@ public final class HTMLParser {
          * {@inheritDoc}
          */
         @Override
-        public void parse(final XMLInputSource inputSource) throws IOException {
+        public void parse(final XMLInputSource inputSource) throws XNIException, IOException {
             final HtmlUnitDOMBuilder oldBuilder = page_.getBuilder();
             page_.setBuilder(this);
             try {
@@ -882,7 +876,8 @@ class HTMLErrorHandler extends DefaultErrorHandler {
 
     /** @see DefaultErrorHandler#error(String,String,XMLParseException) */
     @Override
-    public void error(final String domain, final String key, final XMLParseException exception) {
+    public void error(final String domain, final String key,
+            final XMLParseException exception) throws XNIException {
         listener_.error(exception.getMessage(),
                 url_,
                 exception.getLineNumber(),
@@ -892,7 +887,8 @@ class HTMLErrorHandler extends DefaultErrorHandler {
 
     /** @see DefaultErrorHandler#warning(String,String,XMLParseException) */
     @Override
-    public void warning(final String domain, final String key, final XMLParseException exception) {
+    public void warning(final String domain, final String key,
+            final XMLParseException exception) throws XNIException {
         listener_.warning(exception.getMessage(),
                 url_,
                 exception.getLineNumber(),
