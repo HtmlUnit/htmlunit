@@ -19,6 +19,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -30,7 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
  * @version $Revision$
  * @author Daniel Gredler
  */
-public class NamespaceCollection extends SimpleScriptable {
+public class NamespaceCollection extends SimpleScriptable implements Function {
 
     /** Serial version UID. */
     private static final long serialVersionUID = 3414897723813218653L;
@@ -121,6 +124,19 @@ public class NamespaceCollection extends SimpleScriptable {
             }
         }
         return super.get(name, start);
+    }
+
+    /** {@inheritDoc} */
+    public Object call(Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {
+        if (args.length != 1) {
+            return NOT_FOUND;
+        }
+        return jsxFunction_item(args[0]);
+    }
+
+    /** {@inheritDoc} */
+    public Scriptable construct(Context cx, Scriptable scope, Object[] args) {
+        return null;
     }
 
 }

@@ -353,7 +353,7 @@ public class HTMLDocumentTest extends WebTestCase {
      */
     @Test
     @Alerts(FF = { "undefined", "exception" },
-            IE = { "[object]", "0", "1", "f", "f", "urn:f", "urn:f", "true" })
+            IE = { "[object]", "0", "1", "f", "f", "f", "f", "urn:f", "urn:f", "true" })
     public void namespaces() throws Exception {
         final String html =
               "<body><script>\n"
@@ -365,6 +365,8 @@ public class HTMLDocumentTest extends WebTestCase {
             + "  alert(ns.length);\n"
             + "  alert(ns.item(0).name);\n"
             + "  alert(ns[0].name);\n"
+            + "  alert(ns(0).name);\n"
+            + "  alert(ns('f').name);\n"
             + "  alert(ns.item('f').urn);\n"
             + "  alert(ns['f'].urn);\n"
             + "  alert(ns == document.namespaces);\n"

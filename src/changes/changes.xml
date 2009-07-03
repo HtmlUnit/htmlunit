@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="fix" dev="sdanig" issue="2815905">
+                JavaScript: document.namespaces can be used as a function (IE only).
+            </action>
             <action type="fix" dev="sdanig" issue="2815903">
                 Fix NullPointerException thrown for script tags referencing a resource that returns a 204 (No Content) response.
             </action>
