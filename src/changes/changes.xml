@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="fix" dev="mguillem" issue="2802096">
+                HtmlPage.asXml(): don't escape XML special characters when style node contains an XML comment.
+            </action>
             <action type="fix" dev="sdanig" issue="2815823">
                 Correctly fire load events attached to script nodes via addEventListener (FF only).
             </action>

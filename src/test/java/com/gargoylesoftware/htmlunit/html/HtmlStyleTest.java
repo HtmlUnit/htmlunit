@@ -77,7 +77,7 @@ public class HtmlStyleTest extends WebTestCase {
     }
 
     /**
-     * Verifies that a asText() returns "checked" or "unchecked" according to the state of the checkbox.
+     * See <a href="http://sourceforge.net/support/tracker.php?aid=2802096">Bug 2802096</a>.
      * @throws Exception if the test fails
      */
     @Test
@@ -85,6 +85,9 @@ public class HtmlStyleTest extends WebTestCase {
         final String html
             = "<html><head><title>foo</title>\n"
             + "<style type='text/css'></style>\n"
+            + "<style type='text/css'><!-- \n"
+            + "body > p { color: red }\n"
+            + "--></style>\n"
             + "</head><body>\n"
             + "</body></html>";
 
@@ -92,5 +95,8 @@ public class HtmlStyleTest extends WebTestCase {
 
         final String xml = page.asXml();
         assertTrue("Style node not expanded in: " + xml, xml.contains("</style>"));
+
+        final String xmlWithoutSpace = xml.replaceAll("\\s", "");
+        assertTrue(xml, xmlWithoutSpace.contains("<styletype=\"text/css\"><!--body>p{color:red}--></style>"));
     }
 }

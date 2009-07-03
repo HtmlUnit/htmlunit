@@ -158,7 +158,11 @@ public class DomText extends DomCharacterData implements Text {
     protected void printXml(final String indent, final PrintWriter printWriter) {
         if (getData().trim().length() != 0) {
             printWriter.print(indent);
-            printWriter.println(StringUtils.escapeXmlChars(getData()));
+            String data = getData();
+            if (!(getParentNode() instanceof HtmlStyle) || !data.startsWith("<!--") || !data.endsWith("-->")) {
+                data = StringUtils.escapeXmlChars(data);
+            }
+            printWriter.println(data);
         }
         printChildrenAsXml(indent, printWriter);
     }
