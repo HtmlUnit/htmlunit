@@ -267,4 +267,44 @@ public class HtmlScript2Test extends WebTestCase {
         client.getPage(URL_FIRST);
     }
 
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(IE = { }, FF = { "z" })
+    public void addEventListener_load() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var s1 = document.createElement('script');\n"
+            + "    s1.text = 'var foo';\n"
+            + "    if(s1.addEventListener) s1.addEventListener('load', function(){alert('x')}, false);\n"
+            + "    document.body.insertBefore(s1, document.body.firstChild);\n"
+            + "    \n"
+            + "    var s2 = document.createElement('script');\n"
+            + "    s2.src = '//:';\n"
+            + "    if(s2.addEventListener) s2.addEventListener('load', function(){alert('y')}, false);\n"
+            + "    document.body.insertBefore(s2, document.body.firstChild);\n"
+            + "    \n"
+            + "    var s3 = document.createElement('script');\n"
+            + "    s3.src = '" + URL_SECOND + "';\n"
+            + "    if(s3.addEventListener) s3.addEventListener('load', function(){alert('z')}, false);\n"
+            + "    document.body.insertBefore(s3, document.body.firstChild);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+        final WebClient client = getWebClient();
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(URL_SECOND, "", "text/javascript");
+        client.setWebConnection(conn);
+        final List<String> actual = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(actual));
+        client.getPage(URL_FIRST);
+        assertEquals(getExpectedAlerts(), actual);
+    }
+
 }

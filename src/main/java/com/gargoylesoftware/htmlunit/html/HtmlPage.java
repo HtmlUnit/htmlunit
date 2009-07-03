@@ -947,10 +947,11 @@ public class HtmlPage extends SgmlPage {
      *
      * @param srcAttribute the source attribute from the script tag
      * @param charset the charset attribute from the script tag
+     * @return <tt>true</tt> if an external JavaScript file was loaded
      */
-    void loadExternalJavaScriptFile(final String srcAttribute, final String charset) {
+    boolean loadExternalJavaScriptFile(final String srcAttribute, final String charset) {
         if (StringUtils.isBlank(srcAttribute) || !getWebClient().isJavaScriptEnabled()) {
-            return;
+            return false;
         }
         final URL scriptURL;
         try {
@@ -959,7 +960,7 @@ public class HtmlPage extends SgmlPage {
                 if (mainLog_.isInfoEnabled()) {
                     mainLog_.info("Ignoring script src [" + srcAttribute + "]");
                 }
-                return;
+                return false;
             }
         }
         catch (final MalformedURLException e) {
@@ -969,12 +970,14 @@ public class HtmlPage extends SgmlPage {
             if (getWebClient().isThrowExceptionOnScriptError()) {
                 throw new ScriptException(this, e);
             }
-            return;
+            return false;
         }
         final Script script = loadJavaScriptFromUrl(scriptURL, charset);
-        if (script != null) {
+        final boolean loaded = (script != null);
+        if (loaded) {
             getWebClient().getJavaScriptEngine().execute(this, script);
         }
+        return loaded;
     }
 
     /**

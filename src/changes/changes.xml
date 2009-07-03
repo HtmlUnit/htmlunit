@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="fix" dev="sdanig" issue="2815823">
+                Correctly fire load events attached to script nodes via addEventListener (FF only). 
+            </action>
             <action type="fix" dev="sdanig" issue="2815905">
                 JavaScript: document.namespaces can be used as a function (IE only).
             </action>

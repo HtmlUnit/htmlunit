@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 
@@ -121,14 +119,6 @@ public class HTMLScriptElement extends HTMLElement {
      */
     public Object jsxGet_onload() {
         return getEventHandlerProp("onload");
-    }
-
-    /**
-     * Returns the event handler that fires on load.
-     * @return the event handler that fires on load
-     */
-    public Function getOnLoadHandler() {
-        return getEventHandler("onload");
     }
 
     /**
