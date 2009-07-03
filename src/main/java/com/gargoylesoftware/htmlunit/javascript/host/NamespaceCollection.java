@@ -127,7 +127,7 @@ public class NamespaceCollection extends SimpleScriptable implements Function {
     }
 
     /** {@inheritDoc} */
-    public Object call(Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {
+    public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
         if (args.length != 1) {
             return NOT_FOUND;
         }
@@ -135,7 +135,7 @@ public class NamespaceCollection extends SimpleScriptable implements Function {
     }
 
     /** {@inheritDoc} */
-    public Scriptable construct(Context cx, Scriptable scope, Object[] args) {
+    public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
         return null;
     }
 
