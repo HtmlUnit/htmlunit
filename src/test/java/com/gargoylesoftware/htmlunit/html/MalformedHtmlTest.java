@@ -112,4 +112,28 @@ public class MalformedHtmlTest extends WebTestCase {
 
         assertEquals("a=1%C2%A9=2&prod=3", page2.getWebResponse().getRequestSettings().getUrl().getQuery());
     }
+
+    /**
+     * Test for <a href="http://sourceforge.net/support/tracker.php?aid=2767865">Bug 2767865</a>.
+     * In fact this is not fully correct because IE (6 at least) does something very strange
+     * and keeps the DIV in TABLE but wraps it in a node without name.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "DIV", "TABLE" })
+    public void div_between_table_and_tr() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function test(){\n"
+            + "  var c1 = document.body.firstChild;\n"
+            + "  alert(c1.tagName);\n"
+            + "  alert(c1.nextSibling.tagName);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>"
+            + "<table><div>hello</div>\n"
+            + "<tr><td>world</td></tr></table>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }

@@ -579,7 +579,9 @@ public final class HTMLParser {
             final IElementFactory factory = getElementFactory(namespaceURI, qName);
             final HtmlElement newElement = factory.createElementNS(page_, namespaceURI, qName, atts);
             newElement.setStartLocation(locator_.getLineNumber(), locator_.getColumnNumber());
-            currentNode_.appendChild(newElement);
+
+            // parse can't replace everything as it does not buffer elements while parsing
+            addNodeToRightParent(currentNode_, newElement);
 
             // If we had an old synthetic body and we just added a real body element, quietly
             // remove the old body and move its children to the real body element we just added.
@@ -594,6 +596,24 @@ public final class HTMLParser {
             currentNode_ = newElement;
             stack_.push(currentNode_);
 
+        }
+
+        /**
+         * Adds the new node to the right parent that is not necessary the currentNode in case
+         * of malformed HTML code.
+         */
+        private void addNodeToRightParent(final DomNode currentNode, final HtmlElement newElement) {
+            final String currentNodeName = currentNode.getNodeName();
+            final String newNodeName = newElement.getNodeName();
+
+            // this only fixes bug http://sourceforge.net/support/tracker.php?aid=2767865
+            // TODO: understand in which cases it should be done to generalize it!!!
+            if ("table".equals(currentNodeName) && "div".equals(newNodeName)) {
+                currentNode.insertBefore(newElement);
+            }
+            else {
+                currentNode.appendChild(newElement);
+            }
         }
 
         /** {@inheritDoc} */
