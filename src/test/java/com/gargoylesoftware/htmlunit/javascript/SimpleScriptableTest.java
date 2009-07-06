@@ -213,18 +213,19 @@ public class SimpleScriptableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
+    @NotYetImplemented({ Browser.IE, Browser.FF2 })
+    @Alerts("exception")
     public void setNonWritableProperty() throws Exception {
-        final String content
-            = "<html><body onload='document.body=123456'></body></html>";
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "     document.body = 123456;\n"
+            + "    } catch (e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
 
-        try {
-            loadPage(getBrowserVersion(), content, null);
-            fail("Exception should have been thrown");
-        }
-        catch (final ScriptException e) {
-            // it's ok
-        }
+        loadPageWithAlerts(html);
     }
 
     /**

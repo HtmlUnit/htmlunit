@@ -6,6 +6,12 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="fix" dev="mguillem">
+                JavaScript: read only properties can't be written (FF3 only).
+            </action>
+            <action type="fix" dev="mguillem" issue="2815674">
+                JavaScript: parseFloat trim leading new line signs.
+            </action>
             <action type="fix" dev="mguillem" issue="2766583">
                 Incorrect HTML: move DIV within TABLE before the TABLE.
             </action>

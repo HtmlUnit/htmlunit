@@ -50,6 +50,11 @@ public enum BrowserVersionFeatures {
     JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW,
 
     /**
+     * Indicates that a read only JS property can be... set as done by IE and FF2 but not FF3.
+     **/
+    SET_READONLY_PROPERTIES,
+
+    /**
      * Indicates if href property for a &lt;link rel="stylesheet" type="text/css" href="..." /&gt;
      * is the fully qualified url.
      */

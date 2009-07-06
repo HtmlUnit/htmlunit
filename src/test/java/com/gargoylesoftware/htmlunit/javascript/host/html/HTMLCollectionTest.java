@@ -272,7 +272,6 @@ public class HTMLCollectionTest extends WebTestCase {
      */
     @Test
     @Alerts("object")
-    @NotYetImplemented
     public void typeof() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

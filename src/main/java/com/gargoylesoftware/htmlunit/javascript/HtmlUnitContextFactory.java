@@ -29,6 +29,7 @@ import net.sourceforge.htmlunit.corejs.javascript.WrapFactory;
 import net.sourceforge.htmlunit.corejs.javascript.debug.Debugger;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ScriptPreProcessor;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -279,6 +280,8 @@ public class HtmlUnitContextFactory extends ContextFactory implements Serializab
                 return !browserVersion_.isIE();
             case Context.FEATURE_NON_ECMA_GET_YEAR:
                 return browserVersion_.isIE();
+            case Context.FEATURE_HTMLUNIT_WRITE_READONLY_PROPERTIES:
+                return browserVersion_.hasFeature(BrowserVersionFeatures.SET_READONLY_PROPERTIES);
             default:
                 return super.hasFeature(cx, featureIndex);
         }

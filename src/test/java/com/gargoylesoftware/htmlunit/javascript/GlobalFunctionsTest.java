@@ -38,7 +38,6 @@ public class GlobalFunctionsTest extends WebTestCase {
      */
     @Test
     @Alerts("7.89")
-    @NotYetImplemented
     public void parseFloat() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

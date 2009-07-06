@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
@@ -37,7 +38,7 @@ public class ArrayTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
+    @NotYetImplemented(Browser.IE)
     @Alerts(FF = { "1<>5", "5<>2", "1<>2", "5<>1", "2<>1", "1<>1", "5<>9" },
             IE = { "1<>9", "9<>5", "9<>2", "9<>1", "1<>5", "5<>1", "5<>2", "5<>1", "1<>1", "1<>2", "2<>1", "1<>1" })
     public void sort() throws Exception {

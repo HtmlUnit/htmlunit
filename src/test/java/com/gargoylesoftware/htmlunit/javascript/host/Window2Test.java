@@ -518,7 +518,6 @@ public class Window2Test extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.FF3)
     @Alerts(FF2 = "hello", FF3 = "exception", IE = "hello")
     public void overwriteFunctions_navigator() throws Exception {
         final String html = "<html><head><script language='JavaScript'>\n"
