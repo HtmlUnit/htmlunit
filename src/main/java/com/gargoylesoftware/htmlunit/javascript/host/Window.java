@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
@@ -23,15 +24,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.collections.Transformer;
-import org.apache.commons.lang.StringUtils;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.collections.Transformer;
+import org.apache.commons.lang.StringUtils;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.ConfirmHandler;
@@ -40,6 +42,7 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.PromptHandler;
 import com.gargoylesoftware.htmlunit.ScriptException;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.StatusHandler;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebAssert;
@@ -57,7 +60,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
-import com.gargoylesoftware.htmlunit.html.NonSerializable;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -122,7 +124,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * then evaluated). We use a weak hash map because we don't want this cache to be the only reason
      * nodes are kept around in the JVM, if all other references to them are gone.
      */
-    private Map<Node, ComputedCSSStyleDeclaration> computedStyles_ =
+    private transient Map<Node, ComputedCSSStyleDeclaration> computedStyles_ =
         new WeakHashMap<Node, ComputedCSSStyleDeclaration>();
 
     /**
@@ -494,16 +496,15 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         document_.setParentScope(this);
         document_.setPrototype(getPrototype(HTMLDocument.class));
         document_.setWindow(this);
-        if (webWindow.getEnclosedPage() instanceof DomNode) {
-            document_.setDomNode((DomNode) webWindow.getEnclosedPage());
-        }
+        if (webWindow.getEnclosedPage() instanceof SgmlPage) {
+            final SgmlPage page = (SgmlPage) webWindow.getEnclosedPage();
+            document_.setDomNode(page);
 
-        final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
-        final DomNode docNode = document_.getDomNodeOrNull();
-        if (docNode != null) {
-            docNode.addDomChangeListener(listener);
-            if (docNode instanceof HtmlElement) {
-                ((HtmlElement) docNode).addHtmlAttributeChangeListener(listener);
+            final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
+            page.addDomChangeListener(listener);
+
+            if (page instanceof HtmlPage) {
+                ((HtmlPage) page).addHtmlAttributeChangeListener(listener);
             }
         }
 
@@ -1355,7 +1356,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * removed, all elements should be removed from the computed style cache.</p>
      */
     private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener,
-        NonSerializable {
+        Serializable {
+
+        private static final long serialVersionUID = -4651000523078926322L;
 
         /**
          * {@inheritDoc}

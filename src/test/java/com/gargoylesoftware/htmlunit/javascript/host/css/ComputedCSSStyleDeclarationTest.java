@@ -430,4 +430,38 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * Verifies that when the class of an ancestor node matters for the effective style,
+     * it is recomputed if the class of the ancestor node changes.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "underline", "none", "underline" },
+            IE = { "underline", "underline", "underline" })
+    public void changeInParentClassNodeReferencedByRule() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "function readDecoration(id) {\n"
+            + "  var e = document.getElementById(id);\n"
+            + "  var s = window.getComputedStyle ? window.getComputedStyle(e,null) : e.currentStyle;\n"
+            + "  alert(s.textDecoration)\n"
+            + "}\n"
+            + "function test() {\n"
+            + "  var fooA = document.getElementById('fooA');\n"
+            + "  readDecoration('fooB')\n"
+            + "  fooA.setAttribute('class', '');\n"
+            + "  readDecoration('fooB')\n"
+            + "  fooA.setAttribute('class', 'A');\n"
+            + "  readDecoration('fooB')\n"
+            + "}\n"
+            + "</script>\n"
+            + "<style>\n"
+            + ".A .B { text-decoration: underline }\n"
+            + "</style>\n"
+            + "</head><body onload='test()'>\n"
+            + "<div class='A' id='fooA'>A\n"
+            + "<div class='B' id='fooB'>B</div></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
 }

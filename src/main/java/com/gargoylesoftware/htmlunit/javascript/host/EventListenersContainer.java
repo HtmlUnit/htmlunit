@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +37,9 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public class EventListenersContainer {
+public class EventListenersContainer implements Serializable {
+    private static final long serialVersionUID = -4612648636521726975L;
+
     static class Handlers {
         private final List<Function> capturingHandlers_ = new ArrayList<Function>();
         private final List<Function> bubblingHandlers_ = new ArrayList<Function>();

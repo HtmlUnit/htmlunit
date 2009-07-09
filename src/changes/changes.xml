@@ -7,6 +7,9 @@
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
             <action type="fix" dev="mguillem">
+                CSS: invalidate style of child elements when node attribute is changed.
+            </action>
+            <action type="fix" dev="mguillem">
                 JavaScript: read only properties can't be written (FF3 only).
             </action>
             <action type="fix" dev="mguillem" issue="2815674">
