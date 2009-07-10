@@ -82,9 +82,17 @@ public class NotYetImplementedTest {
                         break;
                     }
                 }
-                entries_.add(path + ',' + methodName + ',' + lineNumber);
+                entries_.add(path + ';' + methodName + ';' + lineNumber);
             }
             else if (line.contains("@NotYetImplemented")) {
+                final String browser;
+                if (line.contains("(")) {
+                    browser = line.replaceAll(".*\\((.*)\\).*", "$1").replaceAll("Browser\\.", "")
+                        .replaceAll("[{}]", "").trim();
+                }
+                else {
+                    browser = "";
+                }
                 String methodName = null;
                 int lineNumber = -1;
                 for (int i = index; i < lines.size(); i++) {
@@ -101,7 +109,7 @@ public class NotYetImplementedTest {
                         break;
                     }
                 }
-                entries_.add(path + ',' + methodName + ',' + lineNumber);
+                entries_.add(path + ';' + methodName + ';' + lineNumber + ";" + browser);
             }
             index++;
         }
@@ -115,11 +123,12 @@ public class NotYetImplementedTest {
         builder.append("  <tr><th>File</th><th>Method</th><th>Line</th></tr>\n");
         String lastFile = null;
         for (final String entry : entries_) {
-            final String[] values = entry.split(",");
+            final String[] values = entry.split(";");
             final String file = values[0];
             final String fileName = file.substring(file.lastIndexOf('/') + 1, file.length() - 5);
             final String method = values[1];
             final String line = values[2];
+            final String browser = values.length > 3 ? values[3] : "";
             builder.append("  <tr>\n");
             if (!file.equals(lastFile)) {
                 int totalCount = 0;
@@ -139,7 +148,8 @@ public class NotYetImplementedTest {
                 lastFile = file;
             }
             builder.append("    <td><a href='http://htmlunit.svn.sourceforge.net/viewvc/htmlunit/trunk/htmlunit/"
-                    + file + "?view=markup#l_" + line + "'>").append(method).append("</a></td>\n");
+                    + file + "?view=markup#l_" + line + "'>").append(method).append("</a> ")
+                    .append(browser).append("</td>\n");
             builder.append("    <td>").append(line).append("</td>\n");
             builder.append("  </tr>\n");
         }
