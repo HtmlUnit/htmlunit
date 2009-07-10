@@ -75,6 +75,26 @@ public class HTMLParserTest extends WebServerTestCase {
     }
 
     /**
+     * Tests that inserted TBODY and TFOOT don't conflict.
+     * @throws Exception failure
+     */
+    @Test
+    @Alerts("TABLE")
+    @NotYetImplemented
+    public void table_tfoot() throws Exception {
+        final String html = "<html><body>"
+            + "<table><tr><td>hello</td></tr>\n"
+            + "<tfoot id='tf'><tr><td>foot</td></tr></tfoot>"
+            + "</table>\n"
+            + "<script>\n"
+            + "alert(document.getElementById('tf').parentNode.nodeName)\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
      * Test for the condition when there is a <tt>&lt;form&gt;</tt> inside of a <tt>&lt;table&gt;</tt> and before
      * a <tt>&lt;tr&gt;</tt>.
      * @throws Exception failure
