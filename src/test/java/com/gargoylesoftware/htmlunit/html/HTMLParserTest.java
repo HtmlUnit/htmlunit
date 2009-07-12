@@ -80,7 +80,6 @@ public class HTMLParserTest extends WebServerTestCase {
      */
     @Test
     @Alerts("TABLE")
-    @NotYetImplemented
     public void table_tfoot() throws Exception {
         final String html = "<html><body>"
             + "<table><tr><td>hello</td></tr>\n"

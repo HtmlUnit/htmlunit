@@ -559,14 +559,6 @@ public final class HTMLParser {
                 currentNode_.appendChild(newElement);
                 headParsed_ = true;
             }
-            // add a <tbody> if a <tr> is directly in <table>
-            else if (tagLower.equals("tr") && currentNode_.getNodeName().equals("table")) {
-                final IElementFactory factory = getElementFactory(namespaceURI, "tbody");
-                final HtmlElement newElement = factory.createElement(page_, "tbody", null);
-                currentNode_.appendChild(newElement);
-                currentNode_ = newElement;
-                stack_.push(currentNode_);
-            }
 
             // If we're adding a body element, keep track of any temporary synthetic ones
             // that we may have had to create earlier (for document.write(), for example).
@@ -657,11 +649,6 @@ public final class HTMLParser {
             }
             else if (formWaitingForLostChildren_ != null && previousNode instanceof SubmittableElement) {
                 formWaitingForLostChildren_.addLostChild((HtmlElement) previousNode);
-            }
-
-            // if we have added a extra node (tbody), we should remove it
-            if (!currentNode_.getLocalName().equalsIgnoreCase(localName)) {
-                stack_.pop(); //remove extra node from stack
             }
 
             if (!stack_.isEmpty()) {
