@@ -284,11 +284,11 @@ public class HTMLIFrameElementTest extends WebTestCase {
     @Test
     public void setSrcAttribute() throws Exception {
         final String firstContent
-            = "<html><head><title>First</title></head><script>\n"
+            = "<html><head><title>First</title><script>\n"
             + "  function test() {\n"
             + "   document.getElementById('iframe1').setAttribute('src', '" + URL_SECOND + "');\n"
             + "  }\n"
-            + "</script>\n"
+            + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "<iframe id='iframe1'>\n"
             + "</body></html>";
@@ -323,12 +323,12 @@ public class HTMLIFrameElementTest extends WebTestCase {
     @Alerts("about:blank")
     public void setSrc_JavascriptUrl() throws Exception {
         final String html
-            = "<html><head><title>First</title></head><script>\n"
+            = "<html><head><title>First</title><script>\n"
             + "  function test() {\n"
             + "   document.getElementById('iframe1').src = 'javascript:void(0)';\n"
             + "   alert(window.frames[0].location);\n"
             + "  }\n"
-            + "</script>\n"
+            + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "<iframe id='iframe1'></iframe>\n"
             + "</body></html>";

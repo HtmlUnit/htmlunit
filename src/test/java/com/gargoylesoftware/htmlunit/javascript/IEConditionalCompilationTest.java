@@ -142,11 +142,11 @@ public class IEConditionalCompilationTest extends WebTestCase {
     private void testScript(final String script)
         throws Exception {
         final String html
-            = "<html><head><title>foo</title></head>\n"
+            = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + script
             + "</script>\n"
-            + "<body>\n"
+            + "</head><body>\n"
             + "</body></html>";
 
         loadPageWithAlerts(html);
