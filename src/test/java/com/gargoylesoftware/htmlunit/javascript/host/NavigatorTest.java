@@ -110,14 +110,14 @@ public class NavigatorTest extends WebTestCase {
 
     private void testCookieEnabled(final boolean cookieEnabled) throws Exception {
         final String content
-            = "<html><head><title>First</title></head>\n"
+            = "<html><head><title>First</title>\n"
             + "<script>\n"
             + "function test()\n"
             + "{\n"
             + "  alert(navigator.cookieEnabled);\n"
             + "}\n"
             + "</script>\n"
-            + "<body onload='test()'></body>\n"
+            + "</head><body onload='test()'></body>\n"
             + "</html>";
 
         final String[] expectedAlerts = {Boolean.toString(cookieEnabled)};
@@ -298,7 +298,7 @@ public class NavigatorTest extends WebTestCase {
     @Alerts({ "number", "number" })
     public void testMozilla() throws Exception {
         final String html
-            = "<html><head><title>First</title></head>\n"
+            = "<html><head><title>First</title>\n"
             + "<script>\n"
             + "function test()\n"
             + "{\n"
@@ -306,7 +306,7 @@ public class NavigatorTest extends WebTestCase {
             + "  alert(typeof window.navigator.plugins.length);\n"
             + "}\n"
             + "</script>\n"
-            + "<body onload='test()'></body>\n"
+            + "</head><body onload='test()'></body>\n"
             + "</html>";
 
         loadPageWithAlerts(html);
@@ -321,13 +321,13 @@ public class NavigatorTest extends WebTestCase {
             IE = { "undefined" })
     public void product() throws Exception {
         final String html
-            = "<html><head><title>First</title></head>\n"
+            = "<html><head><title>First</title>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  alert(navigator.product);\n"
             + "}\n"
             + "</script>\n"
-            + "<body onload='test()'></body>\n"
+            + "</head><body onload='test()'></body>\n"
             + "</html>";
 
         loadPageWithAlerts(html);

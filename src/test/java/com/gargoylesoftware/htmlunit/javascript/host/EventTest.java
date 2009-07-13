@@ -882,7 +882,7 @@ public class EventTest extends WebTestCase {
     @Alerts({ "true", "I was here" })
     public void firedEvent_equals_original_event() throws Exception {
         final String html =
-            "<html><head><title>First</title></head>\n"
+            "<html><head><title>First</title>\n"
             + "<script>\n"
             + "function test()\n"
             + "{\n"
@@ -909,7 +909,7 @@ public class EventTest extends WebTestCase {
             + "  alert(myEvent.foo);\n"
             + "}\n"
             + "</script>\n"
-            + "<body onload='test()'>\n"
+            + "</head><body onload='test()'>\n"
             + "<div id='myDiv'>toti</div>\n"
             + "</body></html>";
 
@@ -969,7 +969,7 @@ public class EventTest extends WebTestCase {
     @Test
     public void preventDefault() throws Exception {
         final String html =
-            "<html><head><title>First</title></head>\n"
+            "<html><head><title>First</title>\n"
             + "<script>\n"
             + "function block(e) {\n"
             + "  if (e && e.preventDefault)\n"
@@ -982,7 +982,7 @@ public class EventTest extends WebTestCase {
             + "  document.getElementById('myForm').onsubmit = block;\n"
             + "}\n"
             + "</script>\n"
-            + "<body onload='test()'>\n"
+            + "</head><body onload='test()'>\n"
             + "<form id='myForm' action='doesnt_exist.html'>\n"
             + "  <input type='submit' id='mySubmit' value='Continue'></p>\n"
             + "</form>"
