@@ -87,7 +87,7 @@ public class HTMLFrameSetElementTest extends WebTestCase {
             + "<body onload='doTest()'></body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
