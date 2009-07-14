@@ -18,11 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Unit tests for {@link HTMLFrameSetElement}.
@@ -31,37 +34,38 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Bruce Chapman
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class HTMLFrameSetElementTest extends WebTestCase {
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({ "20%,*", "*,*" })
     public void testCols() throws Exception {
-        final String framesetContent =
-            "<html><head><title>First</title></head>\n"
-            + "<frameset id='fs' cols='20%,*'>\n"
-            + "    <frame name='left' src='about:blank' />\n"
-            + "    <frame name='right' src='about:blank' />\n"
-            + "</frameset>\n"
+        final String html =
+            "<html><head><title>First</title>\n"
             + "<script>\n"
+            + "function test() {\n"
             + "    alert(document.getElementById('fs').cols);\n"
             + "    document.getElementById('fs').cols = '*,*';\n"
             + "    alert(document.getElementById('fs').cols);\n"
-            + "</script>\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<frameset id='fs' cols='20%,*' onload='test()'>\n"
+            + "    <frame name='left' src='about:blank' />\n"
+            + "    <frame name='right' src='about:blank' />\n"
+            + "</frameset>\n"
             + "</html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(framesetContent, collectedAlerts);
-
-        final String[] expectedAlerts = {"20%,*", "*,*"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({ "20%,*", "*,*" })
     public void testRows() throws Exception {
         final String framesetContent =
             "<html><head><title>First</title></head>\n"
@@ -91,9 +95,8 @@ public class HTMLFrameSetElementTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, frameContent);
         webClient.setWebConnection(webConnection);
 
-        final String[] expectedAlerts = {"20%,*", "*,*"};
         webClient.getPage(URL_FIRST);
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
 }
