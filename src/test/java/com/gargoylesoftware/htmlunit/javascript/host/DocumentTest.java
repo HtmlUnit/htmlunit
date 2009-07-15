@@ -2741,7 +2741,8 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "exception", IE = { "DIV", "false", "mySelect", "0", "OPTION", "myOption", "0" })
+    @Alerts(FF = { "DIV", "exception" },
+            IE = { "DIV", "false", "mySelect", "0", "OPTION", "myOption", "0" })
     public void createElementWithHtml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
