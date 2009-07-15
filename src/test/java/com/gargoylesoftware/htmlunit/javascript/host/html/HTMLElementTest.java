@@ -915,8 +915,8 @@ public class HTMLElementTest extends WebTestCase {
     @Browsers(Browser.IE)
     @Alerts(IE = { "isHomePage = false", "isHomePage = true", "isHomePage = true", "isHomePage = false" })
     public void addBehaviorDefaultHomePage() throws Exception {
-        final URL url1 = new URL("http://www.domain1.com/");
-        final URL url2 = new URL("http://www.domain2.com/");
+        final URL url1 = URL_FIRST;
+        final URL url2 = URL_SECOND;
         final String html1 =
               "<html>\n"
             + "  <head>\n"
