@@ -878,7 +878,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             throw Context.reportRuntimeError("outerHTML is read-only for tag " + domNode.getNodeName());
         }
 
-        parseHtmlSnippet(domNode, false, value);
+        final DomNode proxyNode = new ProxyDomNode(domNode.getPage(), domNode, false);
+        parseHtmlSnippet(proxyNode, false, value);
         domNode.remove();
     }
 
@@ -890,11 +891,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param source the HTML code extract to parse
      */
     public static void parseHtmlSnippet(final DomNode target, final boolean append, final String source) {
-        final HtmlPage page = (HtmlPage) target.getPage();
-        final DomNode proxyNode = new ProxyDomNode(page, target, append);
-
         try {
-            HTMLParser.parseFragment(proxyNode, source);
+            HTMLParser.parseFragment(target, source);
         }
         catch (final IOException e) {
             LogFactory.getLog(HtmlElement.class).error("Unexpected exception occurred while parsing HTML snippet", e);
@@ -989,7 +987,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final boolean append = ((Boolean) values[1]).booleanValue();
 
         // add the new nodes
-        parseHtmlSnippet(node, append, text);
+        final DomNode proxyNode = new ProxyDomNode(node.getPage(), node, append);
+        parseHtmlSnippet(proxyNode, append, text);
     }
 
     /**

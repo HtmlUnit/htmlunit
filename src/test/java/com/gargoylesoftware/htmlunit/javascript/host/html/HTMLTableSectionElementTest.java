@@ -328,4 +328,27 @@ public class HTMLTableSectionElementTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "<tr><td>world</td></tr>", IE = { "exception", "<tr><td>hello</td></tr>" })
+    public void TBODY_innerHTML() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var t = document.getElementById('myId');\n"
+            + "    try {\n"
+            + "      t.innerHTML = '<tr><td>world</td></tr>';\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "    alert(t.innerHTML.toLowerCase());\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <table>\n"
+            + "    <tbody id='myId'><tr><td>hello</td></tr></tbody>\n"
+            + "  </table>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
 }

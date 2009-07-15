@@ -136,4 +136,20 @@ public class MalformedHtmlTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("hello")
+    public void script_between_head_and_body() throws Exception {
+        final String content = "<html><head><title>foo</title></head><script>\n"
+            + "alert('hello');\n"
+            + "</script>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(content);
+    }
+
 }

@@ -2879,15 +2879,20 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "exception", IE = { "false", "mySelect", "0" })
+    @Alerts(FF = "exception", IE = { "DIV", "false", "mySelect", "0", "OPTION", "myOption", "0" })
     public void createElementWithHtml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
+            + "      alert(document.createElement('<div>').tagName);\n"
             + "      var select = document.createElement(\"<select id='mySelect'><option>hello</option>\");\n"
             + "      alert(select.add == undefined);\n"
             + "      alert(select.id);\n"
             + "      alert(select.childNodes.length);\n"
+            + "      var option = document.createElement(\"<option id='myOption'>\");\n"
+            + "      alert(option.tagName);\n"
+            + "      alert(option.id);\n"
+            + "      alert(option.childNodes.length);\n"
             + "    }\n"
             + "    catch (e) { alert('exception') }\n"
             + "  }\n"

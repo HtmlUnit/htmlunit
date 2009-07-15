@@ -28,6 +28,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -43,7 +45,6 @@ import org.apache.commons.httpclient.util.DateParseException;
 import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.lang.StringUtils;
 import org.w3c.dom.DOMException;
-import org.xml.sax.SAXException;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
@@ -57,9 +58,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
-import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlApplet;
-import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
@@ -859,36 +858,36 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the new HTML element, or NOT_FOUND if the tag is not supported
      */
     @Override
-    public Object jsxFunction_createElement(final String tagName) {
+    public Object jsxFunction_createElement(String tagName) {
         Object result = NOT_FOUND;
-        try {
-            //IE can handle HTML
-            if (tagName.startsWith("<") && getBrowserVersion().isIE()) {
-                try {
-                    final HtmlElement proxyNode = new HtmlDivision(null, HtmlDivision.TAG_NAME, getHtmlPage(), null);
-                    HTMLParser.parseFragment(proxyNode, tagName);
-                    final DomNode resultNode = proxyNode.getFirstChild();
-                    resultNode.removeAllChildren();
-                    result = resultNode.getScriptObject();
+
+        // IE can handle HTML, but it takes only the first tag found
+        if (tagName.startsWith("<") && getBrowserVersion().isIE()) {
+            final Pattern p = Pattern.compile("<(\\w+)(\\s+[^>]*)?>");
+            final Matcher m = p.matcher(tagName);
+            if (m.find()) {
+                tagName = m.group(1);
+                result = super.jsxFunction_createElement(tagName);
+                if (result == NOT_FOUND || m.group(2) == null) {
+                    return result;
                 }
-                catch (final SAXException e) {
-                    final String msg = "Unexpected exception occurred while parsing HTML snippet";
-                    getLog().error(msg, e);
-                    throw Context.reportRuntimeError(msg + ": " + e.getMessage());
-                }
-                catch (final IOException e) {
-                    final String msg = "Unexpected exception occurred while parsing HTML snippet";
-                    getLog().error(msg, e);
-                    throw Context.reportRuntimeError(msg + ": " + e.getMessage());
+                final HTMLElement elt = (HTMLElement) result;
+
+                // handle attributes
+                final String attributes = m.group(2);
+                final Pattern pAttributes = Pattern.compile("(\\w+)\\s*=\\s*['\"]([^'\"]*)['\"]");
+                final Matcher mAttribute = pAttributes.matcher(attributes);
+                while (mAttribute.find()) {
+                    final String attrName = mAttribute.group(1);
+                    final String attrValue = mAttribute.group(2);
+                    elt.jsxFunction_setAttribute(attrName, attrValue);
                 }
             }
-            else {
-                return super.jsxFunction_createElement(tagName);
-            }
         }
-        catch (final ElementNotFoundException e) {
-            // Just fall through - result is already set to NOT_FOUND
+        else {
+            return super.jsxFunction_createElement(tagName);
         }
+
         return result;
     }
 

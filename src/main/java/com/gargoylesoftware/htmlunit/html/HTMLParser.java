@@ -19,7 +19,9 @@ import java.io.InputStream;
 import java.io.StringReader;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
@@ -37,6 +39,7 @@ import org.apache.xerces.xni.parser.XMLParserConfiguration;
 import org.cyberneko.html.HTMLConfiguration;
 import org.cyberneko.html.HTMLEventInfo;
 import org.cyberneko.html.HTMLScanner;
+import org.cyberneko.html.HTMLTagBalancer;
 import org.cyberneko.html.HTMLTagBalancingListener;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -241,6 +244,23 @@ public final class HTMLParser {
 
         final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(parent, url);
         domBuilder.setFeature("http://cyberneko.org/html/features/balance-tags/document-fragment", true);
+        // build fragment context stack
+        if (parent != null) {
+            DomNode node = parent;
+            final List<QName> ancestors = new ArrayList<QName>();
+            while (node != null && node.getNodeType() != Node.DOCUMENT_NODE) {
+                ancestors.add(0, new QName(null, node.getNodeName(), null, null));
+                node = node.getParentNode();
+            }
+            if (ancestors.isEmpty() || !"html".equals(ancestors.get(0).localpart)) {
+                ancestors.add(0, new QName(null, "html", null, null));
+            }
+            if (ancestors.size() == 1 || !"body".equals(ancestors.get(1).localpart)) {
+                ancestors.add(1, new QName(null, "body", null, null));
+            }
+
+            domBuilder.setProperty(HTMLTagBalancer.FRAGMENT_CONTEXT_STACK, ancestors.toArray(new QName[] {}));
+        }
 
         final XMLInputSource in = new XMLInputSource(null, url.toString(), null, new StringReader(source), null);
 
