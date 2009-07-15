@@ -6,6 +6,10 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="fix" dev="mguillem" issue="2820051">
+                Fixed ConcurrentModificationException occurring in invalidation of computed styles when
+                an other page tried to access some style information at the same time.
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: about:blank (i)frame domain is the one of the container page (FF and IE)
                 and same rules apply to set domain (FF only).

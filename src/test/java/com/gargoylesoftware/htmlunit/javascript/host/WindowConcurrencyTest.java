@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
@@ -33,6 +34,9 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.DomAttr;
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -487,5 +491,56 @@ public class WindowConcurrencyTest extends WebTestCase {
 
         final String[] expectedAlerts = {"in f"};
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Regression test for
+     * <a href="http://sourceforge.net/support/tracker.php?aid=2820051>bug 2820051</a>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void concurrentModificationException_computedStyles() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  getComputedStyle(document.body, null);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<iframe src='foo.html' name='myFrame' id='myFrame'></iframe>\n"
+            + "</body></html>";
+
+        final String html2 = "<html><head><script>\n"
+            + "function forceStyleComputationInParent() {\n"
+            + "  var newNode = parent.document.createElement('span');\n"
+            + "  parent.document.body.appendChild(newNode);\n"
+            + "  parent.getComputedStyle(newNode, null);\n"
+            + "}\n"
+            + "setInterval(forceStyleComputationInParent, 10);\n"
+            + "</script></head></body></html>";
+
+        client_ = new WebClient(BrowserVersion.FIREFOX_3);
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(URL_FIRST, html);
+        webConnection.setDefaultResponse(html2);
+        client_.setWebConnection(webConnection);
+
+        final HtmlPage page1 = client_.getPage(URL_FIRST);
+
+        // Recreating what can occur with two threads requires
+        // to know a bit about the style invalidation used in Window.DomHtmlAttributeChangeListenerImpl
+        final HtmlElement elt = new HtmlDivision("", "div", page1, new HashMap<String, DomAttr>()) {
+            @Override
+            public DomNode getParentNode() {
+                // this gets called by CSS invalidation logic
+                try {
+                    Thread.sleep(1000); // enough to let setInterval run
+                }
+                catch (final InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                return super.getParentNode();
+            }
+        };
+        page1.getBody().appendChild(elt);
     }
 }

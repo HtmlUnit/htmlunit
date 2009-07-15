@@ -1232,7 +1232,11 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the computed style
      */
     public ComputedCSSStyleDeclaration jsxFunction_getComputedStyle(final HTMLElement element, final String pseudo) {
-        ComputedCSSStyleDeclaration style = computedStyles_.get(element);
+        ComputedCSSStyleDeclaration style;
+
+        synchronized (computedStyles_) {
+            style = computedStyles_.get(element);
+        }
         if (style != null) {
             return style;
         }
@@ -1247,7 +1251,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             sheet.modifyIfNecessary(style, element);
         }
 
-        computedStyles_.put(element, style);
+        synchronized (computedStyles_) {
+            computedStyles_.put(element, style);
+        }
 
         return style;
     }
@@ -1398,25 +1404,31 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         private void nodeChanged(final DomNode changed) {
             // If a stylesheet was changed, all of our calculations could be off; clear the cache.
             if (changed instanceof HtmlStyle) {
-                computedStyles_.clear();
+                synchronized (computedStyles_) {
+                    computedStyles_.clear();
+                }
                 return;
             }
             if (changed instanceof HtmlLink) {
                 final String rel = ((HtmlLink) changed).getRelAttribute().toLowerCase();
                 if ("stylesheet".equals(rel)) {
-                    computedStyles_.clear();
+                    synchronized (computedStyles_) {
+                        computedStyles_.clear();
+                    }
                     return;
                 }
             }
             // Apparently it wasn't a stylesheet that changed; be semi-smart about what we evict and when.
-            final Iterator<Map.Entry<Node, ComputedCSSStyleDeclaration>> i = computedStyles_.entrySet().iterator();
-            while (i.hasNext()) {
-                final Map.Entry<Node, ComputedCSSStyleDeclaration> entry = i.next();
-                final DomNode node = entry.getKey().getDomNodeOrDie();
-                if (changed == node
-                    || changed.getParentNode() == node.getParentNode()
-                    || changed.isAncestorOf(node)) {
-                    i.remove();
+            synchronized (computedStyles_) {
+                final Iterator<Map.Entry<Node, ComputedCSSStyleDeclaration>> i = computedStyles_.entrySet().iterator();
+                while (i.hasNext()) {
+                    final Map.Entry<Node, ComputedCSSStyleDeclaration> entry = i.next();
+                    final DomNode node = entry.getKey().getDomNodeOrDie();
+                    if (changed == node
+                        || changed.getParentNode() == node.getParentNode()
+                        || changed.isAncestorOf(node)) {
+                        i.remove();
+                    }
                 }
             }
         }
