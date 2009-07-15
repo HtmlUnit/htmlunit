@@ -1138,7 +1138,17 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     public String jsxGet_domain() {
         if (domain_ == null) {
-            domain_ = getHtmlPage().getWebResponse().getRequestSettings().getUrl().getHost();
+            URL url = getHtmlPage().getWebResponse().getRequestSettings().getUrl();
+            if (url == WebClient.URL_ABOUT_BLANK) {
+                final WebWindow w = getWindow().getWebWindow();
+                if (w instanceof FrameWindow) {
+                    url = ((FrameWindow) w).getEnclosingPage().getWebResponse().getRequestSettings().getUrl();
+                }
+                else {
+                    return null;
+                }
+            }
+            domain_ = url.getHost();
             final BrowserVersion browser = getBrowserVersion();
             if (browser.isFirefox()) {
                 domain_ = domain_.toLowerCase();
@@ -1177,6 +1187,15 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param newDomain the new domain to set
      */
     public void jsxSet_domain(final String newDomain) {
+        final BrowserVersion browserVersion = getBrowserVersion();
+
+        // IE (at least 6) doesn't allow to set domain of about:blank
+        if (WebClient.URL_ABOUT_BLANK == getPage().getWebResponse().getRequestSettings().getUrl()
+            && browserVersion.isIE()) {
+            throw Context.reportRuntimeError("Illegal domain value, cannot set domain from about:blank to: \""
+                    + newDomain + "\"");
+        }
+
         final String currentDomain = jsxGet_domain();
         if (currentDomain.equalsIgnoreCase(newDomain)) {
             return;

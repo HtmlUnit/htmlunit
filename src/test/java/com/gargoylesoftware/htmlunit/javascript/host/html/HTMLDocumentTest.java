@@ -14,10 +14,17 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static org.junit.Assert.fail;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
@@ -533,6 +540,168 @@ public class HTMLDocumentTest extends WebTestCase {
             + "    <span id='Item' style='color:blue'></span>\n"
             + "  </body>\n"
             + "</html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "www.gargoylesoftware.com", "gargoylesoftware.com" })
+    public void domain() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    alert(document.domain);\n"
+            + "    document.domain = 'gargoylesoftware.com';\n"
+            + "    alert(document.domain);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+  /**
+    * @throws Exception if the test fails
+    */
+    @Test
+    @Browsers(Browser.FF)
+    public void domainMixedCaseNetscape() throws Exception {
+        final URL urlGargoyleUpperCase = new URL("http://WWW.GARGOYLESOFTWARE.COM/");
+
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    alert(document.domain);\n"
+            + "    document.domain = 'GaRgOyLeSoFtWaRe.CoM';\n"
+            + "    alert(document.domain);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+
+        loadPage(getBrowserVersion(), html, collectedAlerts, urlGargoyleUpperCase);
+
+        final String[] expectedAlerts = {"www.gargoylesoftware.com", "gargoylesoftware.com"};
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+  /**
+    * @throws Exception if the test fails
+    */
+    @Test
+    @Alerts(FF = { "www.gargoylesoftware.com", "gargoylesoftware.com" },
+            IE = { "www.gargoylesoftware.com", "GaRgOyLeSoFtWaRe.CoM" })
+    public void domainMixedCase() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    alert(document.domain);\n"
+            + "    document.domain = 'GaRgOyLeSoFtWaRe.CoM';\n"
+            + "    alert(document.domain);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void domainLong() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    alert(document.domain);\n"
+            + "    document.domain = 'd4.d3.d2.d1.gargoylesoftware.com';\n"
+            + "    alert(document.domain);\n"
+            + "    document.domain = 'd1.gargoylesoftware.com';\n"
+            + "    alert(document.domain);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts =
+        {"d4.d3.d2.d1.gargoylesoftware.com", "d4.d3.d2.d1.gargoylesoftware.com", "d1.gargoylesoftware.com"};
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(getWebClient(), html, collectedAlerts, new URL("http://d4.d3.d2.d1.gargoylesoftware.com"));
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void domainSetSelf() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    alert(document.domain);\n"
+            + "    document.domain = 'localhost';\n"
+            + "    alert(document.domain);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"localhost", "localhost"};
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(getWebClient(), html, collectedAlerts, new URL("http://localhost"));
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void domainTooShort() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    alert(document.domain);\n"
+            + "    document.domain = 'com';\n"
+            + "    alert(document.domain);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        try {
+            loadPage(getWebClient(), html, collectedAlerts);
+        }
+        catch (final ScriptException ex) {
+            return;
+        }
+        fail();
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "www.gargoylesoftware.com", "www.gargoylesoftware.com" },
+            IE = { "www.gargoylesoftware.com", "www.gargoylesoftware.com", "exception" })
+    public void domain_set_for_about_blank() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "  var domain = document.domain;\n"
+            + "  alert(domain);\n"
+            + "  var frameDoc = frames[0].document;\n"
+            + "  alert(frameDoc.domain);\n"
+            + "  try {\n"
+            + "    frameDoc.domain = domain;\n"
+            + "  } catch (e) { alert('exception'); }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<iframe src='about:blank'></iframe>\n"
+            + "</body></html>";
+
         loadPageWithAlerts(html);
     }
 }

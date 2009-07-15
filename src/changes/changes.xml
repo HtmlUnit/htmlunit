@@ -7,6 +7,10 @@
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
             <action type="fix" dev="mguillem">
+                JavaScript: about:blank (i)frame domain is the one of the container page (FF and IE)
+                and same rules apply to set domain (FF only).
+            </action>
+            <action type="fix" dev="mguillem">
                 CSS: invalidate style of child elements when node attribute is changed.
             </action>
             <action type="fix" dev="mguillem">
