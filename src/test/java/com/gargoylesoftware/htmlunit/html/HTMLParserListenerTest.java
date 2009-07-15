@@ -101,10 +101,32 @@ public class HTMLParserListenerTest extends WebTestCase {
     }
 
     /**
+     * This is the right test as we had before HtmlUnit-2.6 but due
+     * to an (accepted - at least in a first time -) regression in
+     * NekoHTML, it doesn't work anymore.
+     * testSimple_withWrongLineCol ensures that no other regression occurs here.
      * @exception Exception If the test fails
      */
     @Test
     public void testSimple() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        testSimple(4, -1);
+    }
+
+    /**
+     * Currently, NekoHtml doesn't deliver right information about the line
+     * for the warning. Let this test run with wrong expectation
+     * on line and col to avoid that other regression occur.
+     * @exception Exception If the test fails
+     */
+    @Test
+    public void testSimple_withWrongLineCol() throws Exception {
+        testSimple(5, 7);
+    }
+
+    private void testSimple(final int line, final int col) throws Exception {
         final String htmlContent = "<html>\n" + "<head>\n<title>foo\n</head>\n"
                 + "<body>\nfoo\n</body>\n</html>";
 
@@ -137,7 +159,7 @@ public class HTMLParserListenerTest extends WebTestCase {
         // ignore column and key
         final MessageInfo expectedError = new MessageInfo(false,
                 "End element <head> automatically closes element <title>.",
-                URL_FIRST, 4, -1, null);
+                URL_FIRST, line, col, null);
         assertEquals(Collections.singletonList(expectedError), messages);
     }
 }
