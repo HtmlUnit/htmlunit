@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.net.URL;
+
 import org.junit.Test;
 
 /**
@@ -21,6 +23,7 @@ import org.junit.Test;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class WebRequestSettingsTest extends WebServerTestCase {
 
@@ -37,5 +40,38 @@ public class WebRequestSettingsTest extends WebServerTestCase {
         assertEquals(initialSize, settings.getAdditionalHeaders().size());
         settings.removeAdditionalHeader("ACcEpT");
         assertEquals(initialSize - 1, settings.getAdditionalHeaders().size());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setUrl_eliminateDirUp() throws Exception {
+        final URL url1 = new URL("http://htmlunit.sf.net/foo.html");
+        final URL url2 = new URL("http://htmlunit.sf.net/dir/foo.html");
+
+        // with directory/..
+        WebRequestSettings settings = new WebRequestSettings(new URL("http://htmlunit.sf.net/bla/../foo.html"));
+        assertEquals(url1, settings.getUrl());
+
+        // with /..
+        settings = new WebRequestSettings(new URL("http://htmlunit.sf.net/../foo.html"));
+        assertEquals(url1, settings.getUrl());
+
+        // with /../..
+        settings = new WebRequestSettings(new URL("http://htmlunit.sf.net/../../foo.html"));
+        assertEquals(url1, settings.getUrl());
+
+        // with /.
+        settings = new WebRequestSettings(new URL("http://htmlunit.sf.net/./foo.html"));
+        assertEquals(url1, settings.getUrl());
+
+        // with /.
+        settings = new WebRequestSettings(new URL("http://htmlunit.sf.net/dir/./foo.html"));
+        assertEquals(url2, settings.getUrl());
+
+        // with /. and query
+        settings = new WebRequestSettings(new URL("http://htmlunit.sf.net/dir/./foo.html?a=1&b=2"));
+        assertEquals("http://htmlunit.sf.net/dir/foo.htmla=1&b=2", settings.getUrl());
     }
 }

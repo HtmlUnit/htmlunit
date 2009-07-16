@@ -32,6 +32,7 @@ import org.apache.commons.lang.ClassUtils;
  * @author Brad Clarke
  * @author Hans Donner
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class WebRequestSettings implements Serializable {
 
@@ -90,23 +91,38 @@ public class WebRequestSettings implements Serializable {
     }
 
     /**
-     * Sets the target URL.
+     * Sets the target URL. The URL may be simplified if needed (for instance eliminating
+     * irrelevant path portions like "/./").
      * @param url the target URL
      */
     public void setUrl(URL url) {
-        if (url != null && url.getPath().length() == 0) {
-            try {
-                String file = "/" + url.getFile();
-                if (url.getRef() != null) {
-                    file += '#' + url.getRef();
-                }
-                url = new URL(url.getProtocol(), url.getHost(), url.getPort(), file);
+        if (url != null) {
+            String path = url.getPath();
+            if (path.length() == 0) {
+                url = buildUrlWithNewFile(url, "/" + url.getFile());
             }
-            catch (final Exception e) {
-                throw new RuntimeException("WebRequestSettings: Can not set URL: " + url.toExternalForm());
+            else if (path.contains("./")) {
+                final String query = (url.getQuery() != null) ? url.getQuery() : "";
+                path = path.replaceAll("^/(\\.\\.?/)*", "/");
+                path = path.replaceAll("/[^/]*/../", "/");
+                path = path.replaceAll("/./", "/");
+                url = buildUrlWithNewFile(url, path + query);
             }
         }
         url_ = url;
+    }
+
+    private URL buildUrlWithNewFile(URL url, String newFile) {
+        try {
+            if (url.getRef() != null) {
+                newFile += '#' + url.getRef();
+            }
+            url = new URL(url.getProtocol(), url.getHost(), url.getPort(), newFile);
+        }
+        catch (final Exception e) {
+            throw new RuntimeException("WebRequestSettings: Can not set URL: " + url.toExternalForm());
+        }
+        return url;
     }
 
     /**

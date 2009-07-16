@@ -2159,6 +2159,26 @@ public class WebClientTest extends WebServerTestCase {
     }
 
     /**
+     * Regression test for
+     * <a href="http://sourceforge.net/support/tracker.php?aid=2819046>bug 2819046</a>.
+     *
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void testUrlWithDirectoryUp() throws Exception {
+        final URL url = new URL("http://htmlunit.sf.net/foo.html");
+        final URL urlWithDirectoryUp = new URL("http://htmlunit.sf.net/bla/../foo.html");
+
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(url, "");
+        client.setWebConnection(webConnection);
+
+        final Page page = client.getPage(urlWithDirectoryUp);
+        assertEquals(url, page.getWebResponse().getRequestSettings().getUrl());
+    }
+
+    /**
      * Regression test for bug 2803378: GET or POST to a URL that returns HTTP 204 (No Content).
      * @throws Exception if an error occurs
      */
