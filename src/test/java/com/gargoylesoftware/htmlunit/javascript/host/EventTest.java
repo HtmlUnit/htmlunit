@@ -182,7 +182,7 @@ public class EventTest extends WebTestCase {
     }
 
     /**
-     * currentTarget needs to be set again depending on the listener invoked
+     * currentTarget needs to be set again depending on the listener invoked.
      * @throws Exception if the test fails
      */
     @Test
