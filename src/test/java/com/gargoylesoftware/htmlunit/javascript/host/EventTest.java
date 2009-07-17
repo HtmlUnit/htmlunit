@@ -196,7 +196,7 @@ public class EventTest extends WebTestCase {
             + "function handler(event) {\n"
             + "alert(event.currentTarget); }\n"
             + "document.getElementById('clickId').onmousedown = handler;\n"
-            + "//window.addEventListener('mousedown', handler, true);</script>\n"
+            + "window.addEventListener('mousedown', handler, true);</script>\n"
             + "</body></html>";
         onClickPageTest(content);
     }
