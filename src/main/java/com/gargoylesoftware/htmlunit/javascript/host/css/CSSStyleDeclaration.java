@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.util.StringUtils.isFloat;
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.HashMap;
@@ -28,6 +30,9 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
+import org.w3c.css.sac.ErrorHandler;
+import org.w3c.css.sac.InputSource;
+
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
@@ -35,6 +40,9 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.steadystate.css.dom.CSSValueImpl;
+import com.steadystate.css.parser.CSSOMParser;
+import com.steadystate.css.parser.SACParserCSS21;
 
 /**
  * A JavaScript object for a CSSStyleDeclaration.
@@ -4230,6 +4238,45 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             }
         }
         return getStyleAttribute(name, false);
+    }
+
+    /**
+     * Gets the CSS property value.
+     * @param name the name of the property to retrieve
+     * @return the value
+     */
+    public CSSValue jsxFunction_getPropertyCSSValue(final String name) {
+        getLog().info("getPropertyCSSValue(" + name + "): getPropertyCSSValue support is experimental");
+        // following is a hack, just to have basic support for getPropertyCSSValue
+        // TODO: rework the whole CSS processing here! we should *always* parse the style!
+        if (styleDeclaration_ == null) {
+            final String uri = getDomNodeOrDie().getPage().getWebResponse().getRequestSettings()
+            .getUrl().toExternalForm();
+            final String styleAttribute = jsElement_.getDomNodeOrDie().getAttribute("style");
+            final InputSource source = new InputSource(new StringReader(styleAttribute));
+            source.setURI(uri);
+            final ErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
+            final CSSOMParser parser = new CSSOMParser(new SACParserCSS21());
+            parser.setErrorHandler(errorHandler);
+            try {
+                styleDeclaration_ = parser.parseStyleDeclaration(source);
+            }
+            catch (final IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        org.w3c.dom.css.CSSValue cssValue = styleDeclaration_.getPropertyCSSValue(name);
+        if (cssValue == null) {
+            final CSSValueImpl newValue = new CSSValueImpl();
+            newValue.setFloatValue(CSSPrimitiveValue.CSS_PX, 0);
+            cssValue = newValue;
+        }
+        // FF has spaces next to ","
+        if (cssValue.getCssText().startsWith("rgb(")) {
+            cssValue.setCssText(cssValue.getCssText().replaceAll(",", ", "));
+        }
+
+        return new CSSPrimitiveValue(jsElement_, (org.w3c.dom.css.CSSPrimitiveValue) cssValue);
     }
 
     /**

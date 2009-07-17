@@ -108,6 +108,37 @@
         <property name="styleSheet" readable="true" writable="false"/>
     </class>
 
+    <class name="CSSPrimitiveValue" extends="CSSValue" classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSPrimitiveValue" JSObject="true">
+        <browser name="Firefox"/>
+        <constant name="CSS_UNKNOWN"/>
+        <constant name="CSS_NUMBER"/>
+        <constant name="CSS_PERCENTAGE"/>
+        <constant name="CSS_EMS"/>
+        <constant name="CSS_EXS"/>
+        <constant name="CSS_PX"/>
+        <constant name="CSS_CM"/>
+        <constant name="CSS_MM"/>
+        <constant name="CSS_IN"/>
+        <constant name="CSS_PT"/>
+        <constant name="CSS_PC"/>
+        <constant name="CSS_DEG"/>
+        <constant name="CSS_RAD"/>
+        <constant name="CSS_GRAD"/>
+        <constant name="CSS_MS"/>
+        <constant name="CSS_S"/>
+        <constant name="CSS_HZ"/>
+        <constant name="CSS_KHZ"/>
+        <constant name="CSS_DIMENSION"/>
+        <constant name="CSS_STRING"/>
+        <constant name="CSS_URI"/>
+        <constant name="CSS_IDENT"/>
+        <constant name="CSS_ATTR"/>
+        <constant name="CSS_COUNTER"/>
+        <constant name="CSS_RECT"/>
+        <constant name="CSS_RGBCOLOR"/>
+        <function name="getFloatValue"/>
+    </class>
+
     <class name="CSSRule" classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSRule" JSObject="false">
         <constant name="UNKNOWN_RULE">
             <browser name="Firefox"/>
@@ -670,6 +701,9 @@
                 descr="MSDN Documentation"/>
             <browser name="Internet Explorer"/>
         </function>
+        <function name="getPropertyCSSValue">
+            <browser name="Firefox"/>
+        </function>
         <function name="getPropertyValue">
             <browser name="Firefox"/>
         </function>
@@ -702,6 +736,15 @@
     <class name="CSSStyleRule" extends="CSSRule" classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleRule" JSObject="true">
         <property name="selectorText" readable="true" writable="true"/>
         <property name="style" readable="true" writable="false"/>
+    </class>
+
+    <class name="CSSValue" classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSValue" JSObject="true">
+        <browser name="Firefox"/>
+        <constant name="CSS_INHERIT"/>
+        <constant name="CSS_PRIMITIVE_VALUE"/>
+        <constant name="CSS_VALUE_LIST"/>
+        <constant name="CSS_CUSTOM"/>
+        <property name="cssText" readable="true" writable="false"/>
     </class>
 
     <class name="Document" extends="EventNode" classname="com.gargoylesoftware.htmlunit.javascript.host.Document" JSObject="true">

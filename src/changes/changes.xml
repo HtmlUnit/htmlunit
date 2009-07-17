@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="add" dev="mguillem" issue="2820873">
+                JavaScript: add basic support for CSSValue, CSSPrimitiveValue, and CSSStyleDeclaration.getPropertyCSSValue (FF only).
+            </action>
             <action type="fix" dev="mguillem" issue="2820873">
                 JavaScript: set currentTarget on event when event handler is called after global event listener.
             </action>
