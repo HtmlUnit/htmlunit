@@ -175,6 +175,7 @@ public class EventListenersContainer implements Serializable {
         final Function handler = getEventHandler(event.jsxGet_type());
         if (handler != null) {
             final DomNode node = jsNode_.getDomNodeOrDie();
+            event.setCurrentTarget(jsNode_);
             final HtmlPage page = (HtmlPage) node.getPage();
             getLog().debug("Executing " + event.jsxGet_type() + " handler for " + node);
             return page.executeJavaScriptFunctionIfPossible(

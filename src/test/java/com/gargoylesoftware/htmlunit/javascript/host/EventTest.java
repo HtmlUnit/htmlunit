@@ -182,6 +182,26 @@ public class EventTest extends WebTestCase {
     }
 
     /**
+     * currentTarget needs to be set again depending on the listener invoked
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "[object Window]", "[object HTMLDivElement]" })
+    @Browsers(Browser.FF)
+    public void testCurrentTarget_sameListenerForEltAndWindow() throws Exception {
+        final String content
+            = "<html><head></head><body>\n"
+            + "<div id='clickId'>click me</div>\n"
+            + "<script>\n"
+            + "function handler(event) {\n"
+            + "alert(event.currentTarget); }\n"
+            + "document.getElementById('clickId').onmousedown = handler;\n"
+            + "//window.addEventListener('mousedown', handler, true);</script>\n"
+            + "</body></html>";
+        onClickPageTest(content);
+    }
+
+    /**
      * Tests that event fires on key press.
      * @throws Exception if the test fails
      */
