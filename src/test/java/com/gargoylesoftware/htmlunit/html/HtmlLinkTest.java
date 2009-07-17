@@ -20,6 +20,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -27,6 +28,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class HtmlLinkTest extends WebTestCase {
 
@@ -50,5 +52,23 @@ public class HtmlLinkTest extends WebTestCase {
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
         assertTrue(HtmlLink.class.isInstance(page.getHtmlElementById("myId")));
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getResponse_referer() throws Exception {
+        final String html = "<html><head>\n"
+            + "<link id='myId' href='file1.css'></link>\n"
+            + "</head><body>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+
+        final HtmlLink link = page.getFirstByXPath("//link");
+        final WebResponse respCss = link.getWebResponse(true);
+        assertEquals(page.getWebResponse().getRequestSettings().getUrl().toExternalForm(),
+            respCss.getRequestSettings().getAdditionalHeaders().get("Referer"));
     }
 }

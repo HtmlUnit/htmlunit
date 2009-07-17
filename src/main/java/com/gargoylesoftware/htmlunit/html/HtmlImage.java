@@ -353,7 +353,10 @@ public class HtmlImage extends ClickableElement {
             final WebClient webclient = page.getWebClient();
 
             final URL url = page.getFullyQualifiedUrl(getSrcAttribute());
-            imageWebResponse_ = webclient.loadWebResponse(new WebRequestSettings(url));
+            final WebRequestSettings request = new WebRequestSettings(url);
+            request.setAdditionalHeader("Referer",
+                page.getWebResponse().getRequestSettings().getUrl().toExternalForm());
+            imageWebResponse_ = webclient.loadWebResponse(request);
             downloaded_ = true;
         }
     }

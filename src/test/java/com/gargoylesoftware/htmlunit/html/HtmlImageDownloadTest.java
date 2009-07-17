@@ -15,10 +15,12 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.IOException;
+import java.net.URL;
 
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 
 /**
@@ -27,6 +29,7 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
  * @version $Revision$
  * @author Knut Johannes Dahle
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class HtmlImageDownloadTest extends WebServerTestCase {
     private static final String base_file_path_ = "src/test/resources/com/gargoylesoftware/htmlunit/html";
@@ -98,8 +101,11 @@ public class HtmlImageDownloadTest extends WebServerTestCase {
     @Test
     public void testGetWebResponse() throws Exception {
         final HtmlImage htmlimage = getHtmlElementToTest("image1");
+        final URL url = htmlimage.getPage().getWebResponse().getRequestSettings().getUrl();
         Assert.assertNull(htmlimage.getWebResponse(false));
-        Assert.assertNotNull(htmlimage.getWebResponse(true));
+        final WebResponse resp = htmlimage.getWebResponse(true);
+        Assert.assertNotNull(resp);
+        assertEquals(url.toExternalForm(), resp.getRequestSettings().getAdditionalHeaders().get("Referer"));
     }
 
     /**
