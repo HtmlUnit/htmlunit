@@ -32,20 +32,24 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 @RunWith(BrowserRunner.class)
 public class WebClient2Test extends WebServerTestCase {
 
+    /**
+     * 
+     * @throws Exception
+     */
     @Test
     @NotYetImplemented
-    @Alerts(IE = "http://first/?param=£", FF = "http://first/?param=%A3")
+    @Alerts(IE = "http://first/?param=\u00A3", FF = "http://first/?param=%A3")
     public void encodeURL() throws Exception {
         final String html = "<body onload='alert(window.location.href)'></body>";
         final WebClient webClient = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        
+
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(html);
 
         webClient.setWebConnection(webConnection);
-        webClient.getPage("http://first/?param=£");
+        webClient.getPage("http://first/?param=\u00A3");
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 }
