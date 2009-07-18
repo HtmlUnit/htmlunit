@@ -38,14 +38,14 @@ public class MockWebConnectionTest extends WebTestCase {
             + "  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>"
             + "  <title>Pound Test</title>\n"
             + "</head>\n"
-            + "<body>£</body>\n"
+            + "<body>\u00A3</body>\n"
             + "</html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, html, "text/html", "UTF-8");
         client.setWebConnection(webConnection);
         final HtmlPage page = client.getPage(URL_FIRST);
-        assertEquals("£", page.getBody().asText());
+        assertEquals("\u00A3", page.getBody().asText());
     }
 }
