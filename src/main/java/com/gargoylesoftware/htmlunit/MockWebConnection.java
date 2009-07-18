@@ -114,6 +114,29 @@ public class MockWebConnection implements WebConnection {
      * @param statusCode the status code to return
      * @param statusMessage the status message to return
      * @param contentType the content type to return
+     * @param charset the name of a supported charset
+     * @param responseHeaders the response headers to return
+     */
+    public void setResponse(final URL url, final String content, final int statusCode,
+            final String statusMessage, final String contentType, final String charset,
+            final List< ? extends NameValuePair> responseHeaders) {
+
+        setResponse(
+                url,
+                TextUtil.stringToByteArray(content, charset),
+                statusCode,
+                statusMessage,
+                contentType,
+                responseHeaders);
+    }
+
+    /**
+     * Sets the response that will be returned when the specified URL is requested.
+     * @param url the URL that will return the given response
+     * @param content the content to return
+     * @param statusCode the status code to return
+     * @param statusMessage the status message to return
+     * @param contentType the content type to return
      * @param responseHeaders the response headers to return
      */
     public void setResponse(final URL url, final byte[] content, final int statusCode,
@@ -151,6 +174,21 @@ public class MockWebConnection implements WebConnection {
     public void setResponse(final URL url, final String content, final String contentType) {
         final List< ? extends NameValuePair> emptyList = Collections.emptyList();
         setResponse(url, content, 200, "OK", contentType, emptyList);
+    }
+
+    /**
+     * Convenient method that is the same as calling
+     * {@link #setResponse(URL,String,int,String,String,String,List)} with a status
+     * of "200 OK" and no additional headers.
+     *
+     * @param url the URL that will return the given response
+     * @param content the content to return
+     * @param contentType the content type to return
+     * @param charset the name of a supported charset
+     */
+    public void setResponse(final URL url, final String content, final String contentType, final String charset) {
+        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
+        setResponse(url, content, 200, "OK", contentType, charset, emptyList);
     }
 
     /**
