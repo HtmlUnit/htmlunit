@@ -33,8 +33,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 public class WebClient2Test extends WebServerTestCase {
 
     /**
-     * 
-     * @throws Exception
+     * @throws Exception If an error occurs
      */
     @Test
     @NotYetImplemented
