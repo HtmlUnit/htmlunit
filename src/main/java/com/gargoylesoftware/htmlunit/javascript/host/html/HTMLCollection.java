@@ -330,6 +330,21 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             if (next instanceof DomElement) {
                 final String id = ((DomElement) next).getAttribute("id");
                 if (id != null && id.equals(name)) {
+                    if (getBrowserVersion().isIE()) {
+                        int totalIDs = 0;
+                        for (final Object o : elements) {
+                            if (o instanceof DomElement && name.equals(((DomElement) o).getAttribute("id"))) {
+                                totalIDs++;
+                            }
+                        }
+                        if (totalIDs > 1) {
+                            final HTMLCollectionTags collection =
+                                new HTMLCollectionTags((SimpleScriptable) getParentScope());
+                            collection.setAvoidObjectDetection(!getBrowserVersion().isIE());
+                            collection.init(node_, ".//*[@id='" + id + "']");
+                            return collection;
+                        }
+                    }
                     getLog().debug("Property \"" + name + "\" evaluated (by id) to " + next);
                     return getScriptableForElement(next);
                 }

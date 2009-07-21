@@ -1594,6 +1594,9 @@ public class WebClient implements Serializable {
      * @return the encoded value
      */
     protected String encodeQuery(final String query, final boolean forceEncoding) {
+        if (query == null) {
+            return null;
+        }
         if (forceEncoding || getBrowserVersion().isFirefox()) {
             final BitSet allowed = URI.allowed_query;
             allowed.set('%');

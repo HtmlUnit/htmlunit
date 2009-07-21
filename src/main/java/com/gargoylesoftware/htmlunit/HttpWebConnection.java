@@ -184,9 +184,7 @@ public class HttpWebConnection implements WebConnection {
 
             if (webRequestSettings.getRequestParameters().isEmpty()) {
                 String queryString = webRequestSettings.getUrl().getQuery();
-                if (queryString != null) {
-                    queryString = webClient_.encodeQuery(queryString, true);
-                }
+                queryString = webClient_.encodeQuery(queryString, true);
                 httpMethod.setQueryString(queryString);
             }
             else {
@@ -200,10 +198,8 @@ public class HttpWebConnection implements WebConnection {
             method.getParams().setContentCharset(webRequestSettings.getCharset());
 
             String queryString = webRequestSettings.getUrl().getQuery();
-            if (queryString != null) {
-                queryString = webClient_.encodeQuery(queryString, true);
-                method.setQueryString(queryString);
-            }
+            queryString = webClient_.encodeQuery(queryString, true);
+            method.setQueryString(queryString);
             if (webRequestSettings.getRequestBody() != null) {
                 final String body = webRequestSettings.getRequestBody();
                 final String charset = webRequestSettings.getCharset();

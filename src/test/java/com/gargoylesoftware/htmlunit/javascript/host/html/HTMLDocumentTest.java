@@ -516,7 +516,6 @@ public class HTMLDocumentTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(Browser.IE)
     @Alerts(FF = {"[object HTMLSpanElement]", "undefined" },
             IE = {"[object]", "4", "red" })
     public void identicalIDs() throws Exception {
