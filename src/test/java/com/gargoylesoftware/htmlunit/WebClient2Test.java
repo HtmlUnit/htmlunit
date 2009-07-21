@@ -21,7 +21,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link WebClient} that run with BrowserRunner.
@@ -36,7 +35,6 @@ public class WebClient2Test extends WebServerTestCase {
      * @throws Exception If an error occurs
      */
     @Test
-    @NotYetImplemented
     @Alerts(IE = "http://first/?param=\u00A3", FF = "http://first/?param=%A3")
     public void encodeURL() throws Exception {
         final String html = "<body onload='alert(window.location.href)'></body>";

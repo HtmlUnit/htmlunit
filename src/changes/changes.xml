@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="fix" dev="asashour" issue="2818493">
+                Properly handle unicode characters in requested URLs.
+            </action>
             <action type="update" dev="mguillem">
                 Deprecate WebClient.setIgnoreOutsideContent and HTMLParser.setIgnoreOutsideContent.
             </action>

@@ -183,7 +183,10 @@ public class HttpWebConnection implements WebConnection {
             // this is the case for GET as well as TRACE, DELETE, OPTIONS and HEAD
 
             if (webRequestSettings.getRequestParameters().isEmpty()) {
-                final String queryString = webRequestSettings.getUrl().getQuery();
+                String queryString = webRequestSettings.getUrl().getQuery();
+                if (queryString != null) {
+                    queryString = webClient_.encodeQuery(queryString, true);
+                }
                 httpMethod.setQueryString(queryString);
             }
             else {
@@ -196,8 +199,9 @@ public class HttpWebConnection implements WebConnection {
             final EntityEnclosingMethod method = (EntityEnclosingMethod) httpMethod;
             method.getParams().setContentCharset(webRequestSettings.getCharset());
 
-            final String queryString = webRequestSettings.getUrl().getQuery();
+            String queryString = webRequestSettings.getUrl().getQuery();
             if (queryString != null) {
+                queryString = webClient_.encodeQuery(queryString, true);
                 method.setQueryString(queryString);
             }
             if (webRequestSettings.getRequestBody() != null) {

@@ -272,4 +272,16 @@ public class HttpWebConnectionTest extends WebServerTestCase {
             + "\r\n";
         Assert.assertEquals(expected, baos.toString(encoding));
     }
+
+    /**
+     * @throws Exception on failure
+     */
+    @Test
+    public void unicode() throws Exception {
+        startWebServer("./");
+
+        final WebClient client = new WebClient();
+        client.getPage("http://localhost:" + PORT + "/src/test/resources/event_coordinates.html?param=\u00F6");
+    }
+
 }

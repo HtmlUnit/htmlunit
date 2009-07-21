@@ -40,6 +40,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
@@ -1536,7 +1540,7 @@ public class WebClient implements Serializable {
         final String path = url.getPath();
         final String fixedPath = encode(path, URI.allowed_abs_path);
         final String query = url.getQuery();
-        final String fixedQuery = encode(query, URI.allowed_query);
+        final String fixedQuery = encodeQuery(query, false);
 
         if (!StringUtils.equals(path, fixedPath) || !StringUtils.equals(query, fixedQuery)) {
             final StringBuilder newUrl = new StringBuilder();
@@ -1581,6 +1585,41 @@ public class WebClient implements Serializable {
         bits.set('+');
         bits.or(allowed);
         return URIUtil.encode(str, bits);
+    }
+
+    /**
+     * Encodes the URL query.
+     * @param query the URL query
+     * @param forceEncoding force encoding or no
+     * @return the encoded value
+     */
+    protected String encodeQuery(final String query, final boolean forceEncoding) {
+        if (forceEncoding || getBrowserVersion().isFirefox()) {
+            final BitSet allowed = URI.allowed_query;
+            allowed.set('%');
+            final Context cx = ContextFactory.getGlobal().enterContext();
+            try {
+                final Scriptable scope = cx.initStandardObjects();
+                final StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < query.length(); i++) {
+                    final char ch = query.charAt(i);
+                    if (allowed.get(ch)) {
+                        builder.append(ch);
+                    }
+                    else {
+                        final Object escaped = cx.evaluateString(scope, "escape('" + ch + "')", "<escaped>", 1, null);
+                        builder.append(Context.toString(escaped));
+                    }
+                }
+                return builder.toString();
+            }
+            finally {
+                Context.exit();
+            }
+        }
+        else {
+            return query;
+        }
     }
 
     /**
