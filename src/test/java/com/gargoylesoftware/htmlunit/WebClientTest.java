@@ -781,8 +781,8 @@ public class WebClientTest extends WebServerTestCase {
 
         final HtmlPage page = client.getPage(URL_FIRST);
         final Page page2 = page.getAnchors().get(0).click();
-        assertEquals("http://first/foo.html?id=UYIUYTY//YTYUY..F",
-                page2.getWebResponse().getRequestSettings().getUrl());
+        final URL url2 = new URL(URL_FIRST, "foo.html?id=UYIUYTY//YTYUY..F");
+        assertEquals(url2.toExternalForm(), page2.getWebResponse().getRequestSettings().getUrl());
     }
 
     /**
@@ -1304,9 +1304,10 @@ public class WebClientTest extends WebServerTestCase {
      */
     @Test
     public void testExpandUrl() throws Exception {
-        assertEquals("http://first/#second", WebClient.expandUrl(URL_FIRST, "#second"));
-        assertEquals("http://first?a=1&b=2", WebClient.expandUrl(new URL("http://first?a=1&b=2"), ""));
-        assertEquals("http://first?b=2&c=3", WebClient.expandUrl(new URL("http://first?a=1&b=2"), "?b=2&c=3"));
+        final String prefix = URL_FIRST.toExternalForm();
+        assertEquals(prefix + "#second", WebClient.expandUrl(URL_FIRST, "#second"));
+        assertEquals(prefix + "?a=1&b=2", WebClient.expandUrl(new URL(prefix + "?a=1&b=2"), ""));
+        assertEquals(prefix + "?b=2&c=3", WebClient.expandUrl(new URL(prefix + "?a=1&b=2"), "?b=2&c=3"));
         assertEquals("file:/home/myself/test.js",
                 WebClient.expandUrl(new URL("file:/home/myself/myTest.html"), "test.js"));
     }

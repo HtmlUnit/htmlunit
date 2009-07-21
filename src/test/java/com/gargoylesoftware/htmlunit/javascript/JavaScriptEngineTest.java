@@ -528,7 +528,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "} ";
 
         webConnection.setResponse(URL_FIRST, htmlContent);
-        webConnection.setResponse(new URL("http://first/test.js"), jsContent, "text/javascript");
+        webConnection.setResponse(new URL(URL_FIRST, "test.js"), jsContent, "text/javascript");
         client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_FIRST);

@@ -1808,8 +1808,8 @@ public class DocumentTest extends WebTestCase {
         webClient.setWebConnection(webConnection);
 
         final CookieManager mgr = webClient.getCookieManager();
-        mgr.addCookie(new Cookie("first", "one", "two", "/", -1, false));
-        mgr.addCookie(new Cookie("first", "three", "four", "/", -1, false));
+        mgr.addCookie(new Cookie(URL_FIRST.getHost(), "one", "two", "/", -1, false));
+        mgr.addCookie(new Cookie(URL_FIRST.getHost(), "three", "four", "/", -1, false));
 
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -2144,27 +2144,28 @@ public class DocumentTest extends WebTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void buildCookie() throws Exception {
-        checkCookie(HTMLDocument.buildCookie("", URL_FIRST), EMPTY_COOKIE_NAME, "", "", "first", false, null);
-        checkCookie(HTMLDocument.buildCookie("toto", URL_FIRST), EMPTY_COOKIE_NAME, "toto", "", "first", false, null);
-        checkCookie(HTMLDocument.buildCookie("toto=", URL_FIRST), "toto", "", "", "first", false, null);
-        checkCookie(HTMLDocument.buildCookie("toto=foo", URL_FIRST), "toto", "foo", "", "first", false, null);
-        checkCookie(HTMLDocument.buildCookie("toto=foo;secure", URL_FIRST), "toto", "foo", "", "first", true, null);
+        final String domain = URL_FIRST.getHost();
+        checkCookie(HTMLDocument.buildCookie("", URL_FIRST), EMPTY_COOKIE_NAME, "", "", domain, false, null);
+        checkCookie(HTMLDocument.buildCookie("toto", URL_FIRST), EMPTY_COOKIE_NAME, "toto", "", domain, false, null);
+        checkCookie(HTMLDocument.buildCookie("toto=", URL_FIRST), "toto", "", "", domain, false, null);
+        checkCookie(HTMLDocument.buildCookie("toto=foo", URL_FIRST), "toto", "foo", "", domain, false, null);
+        checkCookie(HTMLDocument.buildCookie("toto=foo;secure", URL_FIRST), "toto", "foo", "", domain, true, null);
         checkCookie(HTMLDocument.buildCookie("toto=foo;path=/myPath;secure", URL_FIRST),
-                "toto", "foo", "/myPath", "first", true, null);
+                "toto", "foo", "/myPath", domain, true, null);
 
         // Check that leading and trailing whitespaces are ignored
         checkCookie(HTMLDocument.buildCookie("   toto=foo;  path=/myPath  ; secure  ", URL_FIRST),
-                "toto", "foo", "/myPath", "first", true, null);
+                "toto", "foo", "/myPath", domain, true, null);
 
         // Check that we accept reserved attribute names (e.g expires, domain) in any case
         checkCookie(HTMLDocument.buildCookie("toto=foo; PATH=/myPath; SeCURE", URL_FIRST),
-                "toto", "foo", "/myPath", "first", true, null);
+                "toto", "foo", "/myPath", domain, true, null);
 
         // Check that we are able to parse and set the expiration date correctly
         final String dateString = "Fri, 21 Jul 2006 20:47:11 UTC";
         final Date date = DateUtil.parseDate(dateString);
         checkCookie(HTMLDocument.buildCookie("toto=foo; expires=" + dateString, URL_FIRST),
-                "toto", "foo", "", "first", false, date);
+                "toto", "foo", "", domain, false, date);
     }
 
     private void checkCookie(final Cookie cookie, final String name, final String value,
