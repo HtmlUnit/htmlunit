@@ -208,7 +208,10 @@ public final class HTMLParser {
     /**
      * Gets the state of the flag to ignore content outside the BODY and HTML tags.
      * @return the current state
+     * @deprecated As of 2.6 without replacement (HtmlUnit tries to mimic browser's
+     * behavior and browsers don't ignore outside content)
      */
+    @Deprecated
     public static boolean getIgnoreOutsideContent() {
         return IgnoreOutsideContent_;
     }

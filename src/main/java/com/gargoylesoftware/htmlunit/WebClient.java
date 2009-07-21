@@ -1739,7 +1739,10 @@ public class WebClient implements Serializable {
      * BODY and HTML tags.
      * @return the state of the flag indicating whether or not to ignore content outside
      *         the BODY and HTML tags
+     * @deprecated As of 2.6 without replacement (HtmlUnit tries to mimic browser's
+     * behavior and browsers don't ignore outside content)
      */
+    @Deprecated
     public static boolean getIgnoreOutsideContent() {
         return HTMLParser.getIgnoreOutsideContent();
     }
