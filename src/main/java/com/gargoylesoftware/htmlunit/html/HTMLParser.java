@@ -198,7 +198,7 @@ public final class HTMLParser {
      * current NekoHTML defaults.
      * @param ignoreOutsideContent - boolean flag to set
      * @deprecated after HtmlUnit-2.5 without replacement (HtmlUnit tries to mimic browser's
-     * behavor and browsers don't ignore outside content)
+     * behavior and browsers don't ignore outside content)
      */
     public static void setIgnoreOutsideContent(final boolean ignoreOutsideContent) {
         IgnoreOutsideContent_ = ignoreOutsideContent;
