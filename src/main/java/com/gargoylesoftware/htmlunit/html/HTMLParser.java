@@ -197,9 +197,10 @@ public final class HTMLParser {
      * BODY and HTML tags. This flag is false by default to maintain compatibility with
      * current NekoHTML defaults.
      * @param ignoreOutsideContent - boolean flag to set
-     * @deprecated after HtmlUnit-2.5 without replacement (HtmlUnit tries to mimic browser's
+     * @deprecated As of 2.5 without replacement (HtmlUnit tries to mimic browser's
      * behavior and browsers don't ignore outside content)
      */
+    @Deprecated
     public static void setIgnoreOutsideContent(final boolean ignoreOutsideContent) {
         IgnoreOutsideContent_ = ignoreOutsideContent;
     }
