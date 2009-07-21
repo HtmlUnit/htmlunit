@@ -35,11 +35,6 @@ import org.mortbay.jetty.webapp.WebAppContext;
  */
 public abstract class WebServerTestCase extends WebTestCase {
 
-    /**
-     * The listener port for the web server.
-     */
-    public static final int PORT = Integer.valueOf(System.getProperty("htmlunit.test.port", "12345"));
-
     private Server server_;
 
     /**

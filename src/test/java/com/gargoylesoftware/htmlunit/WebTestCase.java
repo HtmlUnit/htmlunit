@@ -61,6 +61,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  */
 public abstract class WebTestCase {
+    /**
+     * The listener port for the web server.
+     */
+    public static final int PORT = Integer.valueOf(System.getProperty("htmlunit.test.port", "12345"));
+
     /** Constant for the URL http://first which is used in the tests. */
     public static final URL URL_FIRST;
 
@@ -96,7 +101,7 @@ public abstract class WebTestCase {
 
     static {
         try {
-            URL_FIRST = new URL("http://first/");
+            URL_FIRST = new URL("http://localhost:" + PORT + "/");
             URL_SECOND = new URL("http://second/");
             URL_THIRD = new URL("http://third/");
             URL_GARGOYLE = new URL("http://www.gargoylesoftware.com/");
