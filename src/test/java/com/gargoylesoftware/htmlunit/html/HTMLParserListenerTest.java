@@ -132,7 +132,6 @@ public class HTMLParserListenerTest extends WebTestCase {
 
         final WebClient webClient = new WebClient();
         assertNull(webClient.getHTMLParserListener());
-        WebClient.setIgnoreOutsideContent(true);
 
         final List<MessageInfo> messages = new ArrayList<MessageInfo>();
         final HTMLParserListener collecter = new HTMLParserListener() {
