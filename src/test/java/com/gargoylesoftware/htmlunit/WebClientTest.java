@@ -97,7 +97,6 @@ public class WebClientTest extends WebServerTestCase {
     @Override
     public void tearDown() throws Exception {
         super.tearDown();
-        WebClient.setIgnoreOutsideContent(false);
     }
 
     /**
@@ -1430,10 +1429,16 @@ public class WebClientTest extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Deprecated
     public void testNekoFlagSetters() throws Exception {
-        Assert.assertEquals("Default ignore content is wrong", false, WebClient.getIgnoreOutsideContent());
-        WebClient.setIgnoreOutsideContent(true);
-        assertTrue("Ignore content did not get set", WebClient.getIgnoreOutsideContent());
+        try {
+            Assert.assertEquals("Default ignore content is wrong", false, WebClient.getIgnoreOutsideContent());
+            WebClient.setIgnoreOutsideContent(true);
+            assertTrue("Ignore content did not get set", WebClient.getIgnoreOutsideContent());
+        }
+        finally {
+            WebClient.setIgnoreOutsideContent(false);
+        }
     }
 
     /**
