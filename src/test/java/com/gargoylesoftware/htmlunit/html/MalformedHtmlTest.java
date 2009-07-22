@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Sudhan Moghe
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class MalformedHtmlTest extends WebTestCase {
@@ -86,9 +87,9 @@ public class MalformedHtmlTest extends WebTestCase {
     @NotYetImplemented
     @Alerts("Test document")
     public void testTitleAfterInsertedBody() throws Exception {
-        final String content = "<html><head>"
-            + "<noscript><link href='other.css' rel='stylesheet' type='text/css'></noscript>"
-            + "<title>Test document</title>"
+        final String content = "<html><head>\n"
+            + "<noscript><link href='other.css' rel='stylesheet' type='text/css'></noscript>\n"
+            + "<title>Test document</title>\n"
             + "</head><body onload='alert(document.title)'>\n"
             + "foo"
             + "</body></html>";
@@ -101,16 +102,23 @@ public class MalformedHtmlTest extends WebTestCase {
      */
     @Test
     public void incompleteEntities() throws Exception {
-        final String html = "<html><head>"
-            + "<title>Test document</title>"
+        final String html = "<html><head>\n"
+            + "<title>Test document</title>\n"
             + "</head><body>\n"
-            + "<a href='foo?a=1&copy=2&prod=3' id='myLink'>my link</a>"
+            + "<a href='foo?a=1&copy=2&prod=3' id='myLink'>my link</a>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(html);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
         final HtmlPage page2 = page.getAnchors().get(0).click();
 
-        assertEquals("a=1%C2%A9=2&prod=3", page2.getWebResponse().getRequestSettings().getUrl().getQuery());
+        final String query;
+        if (getBrowserVersion().isIE()) {
+            query = "a=1\u00A9=2&prod=3";
+        }
+        else {
+            query = "a=1%A9=2&prod=3";
+        }
+        assertEquals(query, page2.getWebResponse().getRequestSettings().getUrl().getQuery());
     }
 
     /**

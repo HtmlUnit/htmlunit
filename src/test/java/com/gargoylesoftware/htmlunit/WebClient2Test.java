@@ -21,6 +21,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for {@link WebClient} that run with BrowserRunner.
@@ -48,5 +49,58 @@ public class WebClient2Test extends WebServerTestCase {
         webClient.setWebConnection(webConnection);
         webClient.getPage("http://first/?param=\u00A3");
         assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
+
+    /**
+     * Test that the path and query string are encoded to be valid.
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void testLoadPage_EncodeRequest() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>\n"
+            + "</body></html>";
+
+        final WebClient client = getWebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setDefaultResponse(htmlContent);
+        client.setWebConnection(webConnection);
+
+        // with query string not encoded
+        HtmlPage page = client.getPage("http://first?a=b c&d=\u00E9\u00E8");
+        String expected;
+        final boolean ie = getBrowserVersion().isIE();
+        if (ie) {
+            expected = "?a=b%20c&d=\u00E9\u00E8";
+        }
+        else {
+            expected = "?a=b%20c&d=%E9%E8";
+        }
+        assertEquals("http://first/" + expected, page.getWebResponse().getRequestSettings().getUrl());
+
+        // with query string already encoded
+        page = client.getPage("http://first?a=b%20c&d=%C3%A9%C3%A8");
+        assertEquals("http://first/?a=b%20c&d=%C3%A9%C3%A8", page.getWebResponse().getRequestSettings().getUrl());
+
+        // with query string partially encoded
+        page = client.getPage("http://first?a=b%20c&d=e f");
+        assertEquals("http://first/?a=b%20c&d=e%20f", page.getWebResponse().getRequestSettings().getUrl());
+
+        // with anchor
+        page = client.getPage("http://first?a=b c#myAnchor");
+        assertEquals("http://first/?a=b%20c#myAnchor", page.getWebResponse().getRequestSettings().getUrl());
+
+        // with query string containing encoded "&", "=", "+", ",", and "$"
+        page = client.getPage("http://first?a=%26%3D%20%2C%24");
+        assertEquals("http://first/?a=%26%3D%20%2C%24", page.getWebResponse().getRequestSettings().getUrl());
+
+        // with character to encode in path
+        page = client.getPage("http://first/page 1.html");
+        assertEquals("http://first/page%201.html", page.getWebResponse().getRequestSettings().getUrl());
+
+        // with character to encode in path
+        page = client.getPage("http://first/page 1.html");
+        assertEquals("http://first/page%201.html", page.getWebResponse().getRequestSettings().getUrl());
     }
 }

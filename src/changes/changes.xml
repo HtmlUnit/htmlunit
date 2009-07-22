@@ -7,7 +7,7 @@
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
             <action type="fix" dev="asashour">
-                JavaScript: return collection if elements with duplicate IDs are found (IE only). 
+                JavaScript: return collection if elements with duplicate IDs are found (IE only).
             </action>
             <action type="fix" dev="asashour" issue="2818493">
                 Properly handle unicode characters in requested URLs.
