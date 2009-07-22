@@ -718,7 +718,7 @@ public abstract class WebTestCase {
      * @param expectedAlert the expected alert
      */
     protected void setExpectedAlerts(final String expectedAlert) {
-    	setExpectedAlerts(new String[] { expectedAlert });
+        setExpectedAlerts(new String[] {expectedAlert});
     }
 
     /**
