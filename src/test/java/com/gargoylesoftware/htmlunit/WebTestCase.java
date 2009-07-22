@@ -746,7 +746,7 @@ public abstract class WebTestCase {
      * and loads the page with this URL using the current browser version.
      * Finally asserts the alerts equal the expected alerts.
      * @param html the HTML to use
-     * @param waitForJS the time to wait for background JS tasks to complete. Ignored if -1.
+     * @param waitForJS the milliseconds to wait for background JS tasks to complete. Ignored if -1.
      * @return the new page
      * @throws Exception if something goes wrong
      */
@@ -767,7 +767,7 @@ public abstract class WebTestCase {
 
         final HtmlPage page = client.getPage(url);
         if (waitForJS > 0) {
-            assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
+            assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(waitForJS));
         }
         assertEquals(expectedAlerts_, collectedAlerts);
         return page;
