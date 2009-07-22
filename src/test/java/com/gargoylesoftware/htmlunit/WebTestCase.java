@@ -89,6 +89,8 @@ public abstract class WebTestCase {
     protected static final String LINE_SEPARATOR = System.getProperty("line.separator");
 
     private BrowserVersion browserVersion_;
+    private WebClient webClient_;
+    private MockWebConnection mockWebConnection_;
 
     private String[] expectedAlerts_;
 
@@ -643,11 +645,53 @@ public abstract class WebTestCase {
     }
 
     /**
-     * Returns a newly created WebClient with the current {@link BrowserVersion}.
-     * @return a newly created WebClient with the current {@link BrowserVersion}
+     * Returns the WebClient instance for the current test with the current {@link BrowserVersion}.
+     * @return a WebClient with the current {@link BrowserVersion}
+     */
+    protected final WebClient createNewWebClient() {
+        return new WebClient(getBrowserVersion());
+    }
+
+    /**
+     * Returns the WebClient instance for the current test with the current {@link BrowserVersion}.
+     * @return a WebClient with the current {@link BrowserVersion}
      */
     protected final WebClient getWebClient() {
-        return new WebClient(getBrowserVersion());
+        if (webClient_ == null) {
+            webClient_ = createNewWebClient();
+        }
+        return webClient_;
+    }
+
+    /**
+     * Returns the WebClient instance for the current test with the current {@link BrowserVersion}.
+     * @return a WebClient with the current {@link BrowserVersion}
+     */
+    protected final WebClient getWebClientWithMockWebConnection() {
+        if (webClient_ == null) {
+            webClient_ = createNewWebClient();
+            webClient_.setWebConnection(getMockWebConnection());
+        }
+        return webClient_;
+    }
+
+    /**
+     * Returns the mock WebConnection instance for the current test.
+     * @return the mock WebConnection instance for the current test
+     */
+    protected MockWebConnection getMockWebConnection() {
+        if (mockWebConnection_ == null) {
+            mockWebConnection_ = new MockWebConnection();
+        }
+        return mockWebConnection_;
+    }
+
+    /**
+     * Sets the mock WebConnection instance for the current test.
+     * @param connection the connection to use
+     */
+    protected void setMockWebConnection(final MockWebConnection connection) {
+        mockWebConnection_ = connection;
     }
 
     /**
@@ -661,8 +705,20 @@ public abstract class WebTestCase {
         return browserVersion_;
     }
 
-    void setExpectedAlerts(final String[] expectedAlerts) {
+    /**
+     * Sets the expected alerts.
+     * @param expectedAlerts the expected alerts
+     */
+    protected void setExpectedAlerts(final String[] expectedAlerts) {
         expectedAlerts_ = expectedAlerts;
+    }
+
+    /**
+     * Facility when only one alert is expected.
+     * @param expectedAlert the expected alert
+     */
+    protected void setExpectedAlerts(final String expectedAlert) {
+    	setExpectedAlerts(new String[] { expectedAlert });
     }
 
     /**
@@ -674,30 +730,55 @@ public abstract class WebTestCase {
     }
 
     /**
-     * Load a page with the specified HTML using the current browser version, and asserts the alerts
-     * equal the expected alerts.
+     * Defines the provided HTML as the response of the MockWebConnection for {@link #getDefaultUrl()}
+     * and loads the page with this URL using the current browser version.
+     * Finally asserts the alerts equal the expected alerts.
      * @param html the HTML to use
      * @return the new page
      * @throws Exception if something goes wrong
      */
     protected final HtmlPage loadPageWithAlerts(final String html) throws Exception {
+        return loadPageWithAlerts(html, -1);
+    }
+
+    /**
+     * Defines the provided HTML as the response of the MockWebConnection for {@link #getDefaultUrl()}
+     * and loads the page with this URL using the current browser version.
+     * Finally asserts the alerts equal the expected alerts.
+     * @param html the HTML to use
+     * @param waitForJS the time to wait for background JS tasks to complete. Ignored if -1.
+     * @return the new page
+     * @throws Exception if something goes wrong
+     */
+    protected final HtmlPage loadPageWithAlerts(final String html, final int waitForJS) throws Exception {
         if (expectedAlerts_ == null) {
             throw new IllegalStateException("You must annotate the test class with '@RunWith(BrowserRunner.class)'");
         }
 
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts_);
 
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setDefaultResponse(html);
-        client.setWebConnection(webConnection);
+        final URL url = getDefaultUrl();
+        final MockWebConnection webConnection = getMockWebConnection();
+        webConnection.setResponse(url, html);
 
-        final HtmlPage page = client.getPage(URL_GARGOYLE);
+        final HtmlPage page = client.getPage(url);
+        if (waitForJS > 0) {
+            assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
+        }
         assertEquals(expectedAlerts_, collectedAlerts);
         return page;
+    }
+
+    /**
+     * Gets the default URL used for the tests.
+     * @return the url
+     */
+    protected URL getDefaultUrl() {
+        return URL_GARGOYLE;
     }
 
     /**
@@ -740,5 +821,17 @@ public abstract class WebTestCase {
             oos.writeObject(generateTest_expectedAlerts_);
             oos.close();
         }
+    }
+
+    /**
+     * Cleanup after a test.
+     */
+    @After
+    public void releaseResources() {
+        if (webClient_ != null) {
+            webClient_.closeAllWindows();
+        }
+        webClient_ = null;
+        mockWebConnection_ = null;
     }
 }

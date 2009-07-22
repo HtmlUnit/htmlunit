@@ -62,13 +62,8 @@ public class LocationTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-
-        final HtmlPage firstPage = loadPage(getBrowserVersion(), html, collectedAlerts);
-        assertEquals("First", firstPage.getTitleText());
-
-        final String[] expectedAlerts = {URL_GARGOYLE.toExternalForm()};
-        assertEquals(expectedAlerts, collectedAlerts);
+        setExpectedAlerts(URL_GARGOYLE.toExternalForm());
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -77,16 +72,13 @@ public class LocationTest extends WebTestCase {
     @Test
     @Alerts("ok")
     public void testDocumentLocationSet() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
-
         final String html1 =
               "<html>\n"
             + "<head>\n"
             + "  <title>test1</title>\n"
             + "  <script>\n"
             + "    function test() {\n"
-            + "      document.location = '" + URL_SECOND + "';\n"
+            + "      document.location = 'foo.html';\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -105,17 +97,8 @@ public class LocationTest extends WebTestCase {
             + "<body onload='test()'></body>\n"
             + "</html>";
 
-        webConnection.setResponse(URL_FIRST, html1);
-        webConnection.setResponse(URL_SECOND, html2);
-        webClient.setWebConnection(webConnection);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final HtmlPage page = webClient.getPage(URL_FIRST);
-        assertEquals("test2", page.getTitleText());
-
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "foo.html"), html2);
+        loadPageWithAlerts(html1);
     }
 
     /**
@@ -123,7 +106,7 @@ public class LocationTest extends WebTestCase {
      */
     @Test
     public void testDocumentLocationHref() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    alert(top.document.location.href);\n"
@@ -131,12 +114,8 @@ public class LocationTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(getBrowserVersion(), firstContent, collectedAlerts);
-        assertEquals("First", firstPage.getTitleText());
-
-        final String[] expectedAlerts = {URL_GARGOYLE.toExternalForm()};
-        assertEquals(expectedAlerts, collectedAlerts);
+        setExpectedAlerts(getDefaultUrl().toExternalForm());
+        loadPageWithAlerts(html);
     }
 
     /**

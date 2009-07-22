@@ -46,7 +46,7 @@ public final class ImmediateRefreshHandlerTest extends WebTestCase {
                 String content = "<html><head>\n";
                 if (nbCalls_ == 0) {
                     content += "<meta http-equiv='refresh' content='0;url="
-                        + URL_GARGOYLE.toExternalForm()
+                        + getDefaultUrl().toExternalForm()
                         + "'>\n";
                 }
                 content += "</head><body></body></html>";
@@ -58,7 +58,7 @@ public final class ImmediateRefreshHandlerTest extends WebTestCase {
         };
         client.setWebConnection(webConnection);
 
-        final WebRequestSettings settings = new WebRequestSettings(URL_GARGOYLE);
+        final WebRequestSettings settings = new WebRequestSettings(getDefaultUrl());
         settings.setHttpMethod(HttpMethod.POST);
         client.getPage(settings);
     }

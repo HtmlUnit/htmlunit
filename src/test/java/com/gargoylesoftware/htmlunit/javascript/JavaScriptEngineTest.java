@@ -1407,7 +1407,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     @Test
     public void noGlobalContextFactoryUsed() {
         final WebClient client1 = getWebClient();
-        final WebClient client2 = getWebClient();
+        final WebClient client2 = createNewWebClient();
 
         final ContextFactory cf1 = client1.getJavaScriptEngine().getContextFactory();
         final ContextFactory cf2 = client2.getJavaScriptEngine().getContextFactory();

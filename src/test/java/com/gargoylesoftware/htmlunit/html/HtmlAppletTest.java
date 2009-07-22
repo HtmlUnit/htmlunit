@@ -20,6 +20,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -81,7 +82,10 @@ public class HtmlAppletTest extends WebTestCase {
             + "  <applet id='myId'>Your browser doesn't support applets</object>\n"
             + "</body></html>";
 
-        final WebClient webClient = loadPageWithAlerts(html).getWebClient();
+        final WebClient webClient = getWebClient();
+        final MockWebConnection connection = getMockWebConnection();
+        webClient.setWebConnection(connection);
+        connection.setDefaultResponse(html);
         webClient.setAppletEnabled(true);
         final HtmlPage page = webClient.getPage(URL_FIRST);
         final HtmlApplet appletNode = page.getHtmlElementById("myId");

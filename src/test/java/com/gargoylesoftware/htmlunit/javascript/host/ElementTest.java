@@ -14,17 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
@@ -45,6 +38,8 @@ public class ElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "true", "1", "attrName attrValue", "attrValue", "null", "anotherValue",
+            "1", "4", "<span id='label'>changed</span>" })
     public void attributes() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -82,18 +77,8 @@ public class ElementTest extends WebTestCase {
             + "  </book>\n"
             + "</books>";
 
-        final String[] expectedAlerts = {"true", "1", "attrName attrValue", "attrValue", "null", "anotherValue",
-            "1", "4", "<span id='label'>changed</span>"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = getWebClient();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
-        conn.setResponse(new URL(URL_FIRST, "foo.xml"), xml, "text/xml");
-        client.setWebConnection(conn);
-
-        client.getPage(URL_FIRST);
-        assertEquals(expectedAlerts, collectedAlerts);
+        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -129,16 +114,8 @@ public class ElementTest extends WebTestCase {
             + "  </book>\n"
             + "</books>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = getWebClient();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
-        conn.setResponse(URL_SECOND, xml, "text/xml");
-        client.setWebConnection(conn);
-
-        client.getPage(URL_FIRST);
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -168,16 +145,8 @@ public class ElementTest extends WebTestCase {
 
         final String xml = "<books><book><title>Immortality</title><author>John Smith</author></book></books>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = getWebClient();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
-        conn.setResponse(URL_SECOND, xml, "text/xml");
-        client.setWebConnection(conn);
-
-        client.getPage(URL_FIRST);
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -233,16 +202,8 @@ public class ElementTest extends WebTestCase {
             + "  </control>\n"
             + "</responsexml>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = getWebClient();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
-        conn.setResponse(URL_SECOND, xml, "text/xml");
-        client.setWebConnection(conn);
-
-        client.getPage(URL_FIRST);
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -273,16 +234,8 @@ public class ElementTest extends WebTestCase {
 
         final String xml = "<books><book><title>Immortality</title><author>John Smith</author></book></books>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = getWebClient();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
-        conn.setResponse(URL_SECOND, xml, "text/xml");
-        client.setWebConnection(conn);
-
-        client.getPage(URL_FIRST);
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -331,7 +284,7 @@ public class ElementTest extends WebTestCase {
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
             + "    doc.async = false;\n"
-            + "    doc.load('" + URL_SECOND + "');\n"
+            + "    doc.load('foo.xml');\n"
             + "    alert(doc.documentElement.hasAttribute('something'));\n"
             + "  }\n"
             + "  function createXmlDocument() {\n"
@@ -351,16 +304,8 @@ public class ElementTest extends WebTestCase {
             + "  </book>\n"
             + "</books>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = getWebClient();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
-        conn.setResponse(URL_SECOND, xml, "text/xml");
-        client.setWebConnection(conn);
-
-        client.getPage(URL_FIRST);
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -373,7 +318,7 @@ public class ElementTest extends WebTestCase {
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
             + "    doc.async = false;\n"
-            + "    doc.load('" + URL_SECOND + "');\n"
+            + "    doc.load('foo.xml');\n"
             + "    alert(doc.documentElement.attributes.getNamedItem('library') != undefined);\n"
             + "  }\n"
             + "  function createXmlDocument() {\n"
@@ -393,16 +338,8 @@ public class ElementTest extends WebTestCase {
             + "  </book>\n"
             + "</books>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = getWebClient();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
-        conn.setResponse(URL_SECOND, xml, "text/xml");
-        client.setWebConnection(conn);
-
-        client.getPage(URL_FIRST);
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -808,7 +745,7 @@ public class ElementTest extends WebTestCase {
             + "          request = new XMLHttpRequest();\n"
             + "        else if (window.ActiveXObject)\n"
             + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
-            + "        request.open('GET', '" + URL_SECOND + "', false);\n"
+            + "        request.open('GET', 'foo.xml', false);\n"
             + "        request.send('');\n"
             + "        var doc = request.responseXML;\n"
             + "        debug(doc.documentElement.childNodes[0]);\n"
@@ -835,16 +772,8 @@ public class ElementTest extends WebTestCase {
             + "</html>"
             + "</xml>";
 
-        final WebClient client = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
-        conn.setResponse(URL_SECOND, xml, "text/xml");
-        client.setWebConnection(conn);
-        client.getPage(URL_FIRST);
-
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -921,7 +850,7 @@ public class ElementTest extends WebTestCase {
             + "          request = new XMLHttpRequest();\n"
             + "        else if (window.ActiveXObject)\n"
             + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
-            + "        request.open('GET', '" + URL_SECOND + "', false);\n"
+            + "        request.open('GET', 'foo.xml', false);\n"
             + "        request.send('');\n"
             + "        var doc = request.responseXML;\n"
             + "        var e = doc.getElementsByTagName('title');\n"
@@ -942,15 +871,7 @@ public class ElementTest extends WebTestCase {
             + "  </book>\n"
             + "</books>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = getWebClient();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
-        conn.setResponse(URL_SECOND, xml, "text/xml");
-        client.setWebConnection(conn);
-
-        client.getPage(URL_FIRST);
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        loadPageWithAlerts(html);
     }
 }

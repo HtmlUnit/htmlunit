@@ -248,6 +248,18 @@ public class MockWebConnection implements WebConnection {
     }
 
     /**
+     * Sets the response that will be returned when a URL is requested that does
+     * not have a specific content set for it.
+     *
+     * @param content the content to return
+     * @param contentType the content type to return
+     */
+    public void setDefaultResponse(final String content, final String contentType) {
+        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
+        setDefaultResponse(content, 200, "OK", contentType, emptyList);
+    }
+
+    /**
      * Sets the response that will be returned when the specified URL is requested.
      * @param content the content to return
      * @param statusCode the status code to return

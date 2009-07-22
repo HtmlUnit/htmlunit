@@ -168,7 +168,7 @@ public class WebClientTest extends WebServerTestCase {
         client.setWebConnection(webConnection);
 
         try {
-            client.getPage(new WebRequestSettings(URL_GARGOYLE, HttpMethod.POST));
+            client.getPage(new WebRequestSettings(getDefaultUrl(), HttpMethod.POST));
             fail("Expected FailingHttpStatusCodeException");
         }
         catch (final FailingHttpStatusCodeException e) {
@@ -195,7 +195,7 @@ public class WebClientTest extends WebServerTestCase {
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = client.getPage(URL_GARGOYLE);
+        final HtmlPage firstPage = client.getPage(getDefaultUrl());
         final HtmlAnchor anchor = firstPage.getHtmlElementById("a2");
 
         final List<WebWindowEvent> firstExpectedEvents = Arrays.asList(new WebWindowEvent[] {
@@ -1079,7 +1079,7 @@ public class WebClientTest extends WebServerTestCase {
     public void testLoadWebResponseInto() throws Exception {
         final WebClient webClient = new WebClient();
         final WebResponse webResponse = new StringWebResponse(
-            "<html><head><title>first</title></head><body></body></html>", URL_GARGOYLE);
+            "<html><head><title>first</title></head><body></body></html>", getDefaultUrl());
 
         final Page page = webClient.loadWebResponseInto(webResponse, webClient.getCurrentWindow());
         assertTrue(HtmlPage.class.isInstance(page));
@@ -1592,8 +1592,8 @@ public class WebClientTest extends WebServerTestCase {
             }
         };
 
-        wc.getPage(URL_GARGOYLE.toExternalForm());
-        assertEquals(URL_GARGOYLE, calledUrls[0]);
+        wc.getPage(getDefaultUrl().toExternalForm());
+        assertEquals(getDefaultUrl(), calledUrls[0]);
     }
 
     /**

@@ -14,16 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
@@ -86,7 +80,7 @@ public class DocumentTypeTest extends WebTestCase {
             + "          request = new XMLHttpRequest();\n"
             + "        else if (window.ActiveXObject)\n"
             + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
-            + "        request.open('GET', '" + URL_SECOND + "', false);\n"
+            + "        request.open('GET', 'foo.xml', false);\n"
             + "        request.send('');\n"
             + "        var doc = request.responseXML;\n"
             + "        var t = doc.doctype;\n"
@@ -108,15 +102,7 @@ public class DocumentTypeTest extends WebTestCase {
               "<!DOCTYPE greeting PUBLIC 'MyIdentifier' 'hello.dtd'>\n"
               + "<greeting/>";
 
-        final WebClient client = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
-        conn.setResponse(URL_SECOND, xml, "text/xml");
-        client.setWebConnection(conn);
-        client.getPage(URL_FIRST);
-
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        loadPageWithAlerts(html);
     }
 }

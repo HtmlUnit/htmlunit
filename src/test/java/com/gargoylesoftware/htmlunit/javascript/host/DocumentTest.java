@@ -1825,8 +1825,15 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void cookie_write() throws Exception {
+    public void cookie_write_cookiesEnabled() throws Exception {
         cookie_write(true);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void cookie_write_cookiesDisabled() throws Exception {
         cookie_write(false);
     }
 
