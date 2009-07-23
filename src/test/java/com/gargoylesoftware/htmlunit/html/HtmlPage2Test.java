@@ -70,7 +70,7 @@ public class HtmlPage2Test extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetInputByName() throws Exception {
+    public void getInputByName() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
@@ -342,4 +342,21 @@ public class HtmlPage2Test extends WebServerTestCase {
             FileUtils.deleteDirectory(cssFile.getParentFile());
         }
     }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    @Alerts(FF = "Hello")
+    public void application_javascript_type() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <script type='application/javascript'>\n"
+            + "    alert('Hello');\n"
+            + "  </script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
 }

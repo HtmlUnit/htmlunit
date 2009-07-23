@@ -307,4 +307,19 @@ public class HtmlScript2Test extends WebTestCase {
         assertEquals(getExpectedAlerts(), actual);
     }
 
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    @Alerts("Hello")
+    public void type_case_sensitivity() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <script type='text/JavaScript'>\n"
+            + "    alert('Hello');\n"
+            + "  </script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }

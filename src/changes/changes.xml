@@ -7,6 +7,9 @@
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
             <action type="fix" dev="asashour">
+                JavaScript: process scripts with 'application/javascript' type (FF only).
+            </action>
+            <action type="fix" dev="asashour">
                 JavaScript: return collection if elements with duplicate IDs are found (IE only).
             </action>
             <action type="fix" dev="asashour" issue="2818493">

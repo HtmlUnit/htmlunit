@@ -1127,16 +1127,6 @@ public class HtmlPageTest extends WebServerTestCase {
     }
 
     /**
-     * Regression test for bug 1204637.
-     * @exception Exception If the test fails
-     */
-    @Test
-    public void testIsJavascript() throws Exception {
-        assertTrue(HtmlPage.isJavaScript("text/javascript", null));
-        assertTrue(HtmlPage.isJavaScript("text/JavaScript", null));
-    }
-
-    /**
      * @exception Exception if the test fails
      */
     @Test

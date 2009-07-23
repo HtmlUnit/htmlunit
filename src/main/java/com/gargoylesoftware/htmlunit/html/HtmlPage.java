@@ -981,33 +981,6 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     *
-     * Return true if a script with the specified type and language attributes
-     * is actually JavaScript.
-     * According to <a href="http://www.w3.org/TR/REC-html40/types.html#h-6.7">W3C recommendation</a>
-     * are content types case insensitive.
-     * @param typeAttribute the type attribute specified in the script tag
-     * @param languageAttribute the language attribute specified in the script tag
-     * @return true if the script is JavaScript
-     */
-    public static boolean isJavaScript(final String typeAttribute, final String languageAttribute) {
-        // Unless otherwise specified, we have to assume that any script is JavaScript
-        final boolean isJavaScript;
-        if (languageAttribute != null && languageAttribute.length() != 0) {
-            isJavaScript = TextUtil.startsWithIgnoreCase(languageAttribute, "javascript");
-        }
-        else if (typeAttribute != null && typeAttribute.length() != 0) {
-            isJavaScript = typeAttribute.equalsIgnoreCase("text/javascript");
-        }
-        else {
-            isJavaScript = true;
-        }
-
-        return isJavaScript;
-    }
-
-    /**
      * Loads JavaScript from the specified URL. This method may return <tt>null</tt> if
      * there is a problem loading the code from the specified URL.
      *

@@ -28,6 +28,7 @@ import org.apache.commons.logging.LogFactory;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
@@ -399,7 +400,7 @@ public class HtmlScript extends HtmlElement {
         }
 
         // If the script language is not JavaScript, we can't execute.
-        if (!HtmlPage.isJavaScript(getTypeAttribute(), getLanguageAttribute())) {
+        if (!isJavaScript(getTypeAttribute(), getLanguageAttribute())) {
             final String t = getTypeAttribute();
             final String l = getLanguageAttribute();
             if (mainLog_.isWarnEnabled()) {
@@ -419,6 +420,31 @@ public class HtmlScript extends HtmlElement {
         }
 
         return true;
+    }
+
+    /**
+     * Returns true if a script with the specified type and language attributes is actually JavaScript.
+     * According to <a href="http://www.w3.org/TR/REC-html40/types.html#h-6.7">W3C recommendation</a>
+     * are content types case insensitive.
+     * @param typeAttribute the type attribute specified in the script tag
+     * @param languageAttribute the language attribute specified in the script tag
+     * @return true if the script is JavaScript
+     */
+    boolean isJavaScript(final String typeAttribute, final String languageAttribute) {
+        final boolean isJavaScript;
+        if (languageAttribute != null && languageAttribute.length() != 0) {
+            isJavaScript = TextUtil.startsWithIgnoreCase(languageAttribute, "javascript");
+        }
+        else if (typeAttribute != null && typeAttribute.length() != 0) {
+            isJavaScript = typeAttribute.equalsIgnoreCase("text/javascript")
+                || (typeAttribute.equalsIgnoreCase("application/javascript")
+                        && getPage().getWebClient().getBrowserVersion().isFirefox());
+        }
+        else {
+            isJavaScript = true;
+        }
+
+        return isJavaScript;
     }
 
     /**
