@@ -260,6 +260,19 @@ public class MockWebConnection implements WebConnection {
     }
 
     /**
+     * Sets the response that will be returned when a URL is requested that does
+     * not have a specific content set for it.
+     *
+     * @param content the content to return
+     * @param contentType the content type to return
+     * @param charset the name of a supported charset
+     */
+    public void setDefaultResponse(final String content, final String contentType, final String charset) {
+        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
+        setDefaultResponse(content, 200, "OK", contentType, charset, emptyList);
+    }
+
+    /**
      * Sets the response that will be returned when the specified URL is requested.
      * @param content the content to return
      * @param statusCode the status code to return
@@ -274,6 +287,25 @@ public class MockWebConnection implements WebConnection {
         final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>(responseHeaders);
         compiledHeaders.add(new NameValuePair("Content-Type", contentType));
         defaultResponse_ = new WebResponseData(TextUtil.stringToByteArray(content),
+            statusCode, statusMessage, compiledHeaders);
+    }
+
+    /**
+     * Sets the response that will be returned when the specified URL is requested.
+     * @param content the content to return
+     * @param statusCode the status code to return
+     * @param statusMessage the status message to return
+     * @param contentType the content type to return
+     * @param charset the name of a supported charset
+     * @param responseHeaders the response headers to return
+     */
+    public void setDefaultResponse(final String content, final int statusCode,
+            final String statusMessage, final String contentType, final String charset,
+            final List< ? extends NameValuePair> responseHeaders) {
+
+        final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>(responseHeaders);
+        compiledHeaders.add(new NameValuePair("Content-Type", contentType));
+        defaultResponse_ = new WebResponseData(TextUtil.stringToByteArray(content, charset),
             statusCode, statusMessage, compiledHeaders);
     }
 
