@@ -14,14 +14,31 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
+
+import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
+import org.json.JSONArray;
 import org.junit.AfterClass;
+import org.mortbay.jetty.Server;
+import org.mortbay.jetty.webapp.WebAppContext;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -41,6 +58,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     static final String PROPERTY = "htmlunit.webdriver";
     private static Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<BrowserVersion, WebDriver>();
+
+    private static Server STATIC_SERVER_;
+
+    private static String JSON_;
 
     /**
      * Configure the driver only once.
@@ -126,6 +147,146 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
         };
         return driver;
+    }
+
+    /**
+     * Starts the web server delivering response from the provided connection.
+     * @param mockConnection the sources for responses
+     * @throws Exception if a problem occurs
+     */
+    protected void startWebServer(final MockWebConnection mockConnection) throws Exception {
+        if (STATIC_SERVER_ == null) {
+            STATIC_SERVER_ = new Server(PORT);
+
+            final WebAppContext context = new WebAppContext();
+            context.setContextPath("/");
+            context.setResourceBase("./");
+
+            context.addServlet(MockWebConnectionServlet.class, "/*");
+            STATIC_SERVER_.setHandler(context);
+            STATIC_SERVER_.start();
+        }
+        MockWebConnectionServlet.MockConnection_ = mockConnection;
+    }
+
+    /**
+     * Servlet delivering content from a MockWebConnection.
+     * @author Marc Guillemot
+     */
+    public static class MockWebConnectionServlet extends HttpServlet {
+        private static final long serialVersionUID = -3417522859381706421L;
+        private static MockWebConnection MockConnection_;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void service(final HttpServletRequest request, final HttpServletResponse response)
+            throws ServletException, IOException {
+
+            try {
+                doService(request, response);
+            }
+            catch (final ServletException e) {
+                throw e;
+            }
+            catch (final IOException e) {
+                throw e;
+            }
+            catch (final Exception e) {
+                throw new ServletException(e);
+            }
+        }
+
+        @SuppressWarnings("unchecked")
+        private void doService(final HttpServletRequest request, final HttpServletResponse response)
+            throws Exception {
+            final URL requestedUrl = new URL(request.getRequestURL().toString());
+            final WebRequestSettings settings = new WebRequestSettings(requestedUrl);
+            settings.setHttpMethod(HttpMethod.valueOf(request.getMethod()));
+            for (final Enumeration<String> en = request.getHeaderNames(); en.hasMoreElements();) {
+                final String headerName = (String) en.nextElement();
+                final String headerValue = request.getHeader(headerName);
+                settings.setAdditionalHeader(headerName, headerValue);
+            }
+            final WebResponse resp = MockConnection_.getResponse(settings);
+
+            // write WebResponse to HttpServletResponse
+            for (final NameValuePair responseHeader : resp.getResponseHeaders()) {
+                response.addHeader(responseHeader.getName(), responseHeader.getValue());
+            }
+
+            final String newContent = StringUtils.replace(resp.getContentAsString(), "alert(",
+                "(function(t){var x = window.__huCatchedAlerts; x = x ? x : []; "
+                + "window.__huCatchedAlerts = x; x.push(String(t))})(");
+
+            response.getWriter().print(newContent);
+            response.flushBuffer();
+        }
+    }
+
+    /**
+     * Same as {@link #loadPageWithAlerts(String)}, but using WebDriver instead.
+     * @param html the HTML to use
+     * @return the new page
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPageWithAlerts2(final String html) throws Exception {
+        final String[] expectedAlerts = getExpectedAlerts();
+        final MockWebConnection mockWebConnection = new MockWebConnection();
+        mockWebConnection.setDefaultResponse(html);
+        startWebServer(mockWebConnection);
+
+        final WebDriver driver = getWebDriver();
+        driver.get(URL_FIRST.toExternalForm());
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        if (driver instanceof HtmlUnitDriver) {
+            final NativeArray resp = (NativeArray) ((JavascriptExecutor) driver)
+               .executeScript("return window.__huCatchedAlerts");
+            for (int i = 0; i < resp.getLength(); ++i) {
+                collectedAlerts.add(net.sourceforge.htmlunit.corejs.javascript.Context.toString(resp.get(i, resp)));
+            }
+        }
+        else if (driver instanceof InternetExplorerDriver) {
+            final String jsonResult = (String) ((JavascriptExecutor) driver)
+                .executeScript(getJSON() + ";return JSON.stringify(window.__huCatchedAlerts)");
+            if (jsonResult  != null) {
+                final JSONArray array = new JSONArray(jsonResult);
+                for (int i = 0; i < array.length(); i++) {
+                    collectedAlerts.add(net.sourceforge.htmlunit.corejs.javascript.Context.toString(array.get(i)));
+                }
+            }
+        }
+        else {
+            final JSONArray array = (JSONArray) ((JavascriptExecutor) driver)
+                .executeScript("return window.__huCatchedAlerts");
+            if (array != null) {
+                for (int i = 0; i < array.length(); i++) {
+                    collectedAlerts.add(net.sourceforge.htmlunit.corejs.javascript.Context.toString(array.get(i)));
+                }
+            }
+        }
+
+        assertEquals(expectedAlerts, collectedAlerts);
+        return driver;
+    }
+
+    private String getJSON() {
+        if (JSON_ == null) {
+            try {
+                final StringBuilder builder = new StringBuilder();
+                final File file = new File(getClass().getClassLoader().getResource("json2.js").toURI());
+                for (final Object line : FileUtils.readLines(file)) {
+                    builder.append(line).append('\n');
+                }
+                JSON_ = builder.toString();
+            }
+            catch (final Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return JSON_;
     }
 }
 

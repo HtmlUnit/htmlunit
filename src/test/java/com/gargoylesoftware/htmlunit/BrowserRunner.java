@@ -58,12 +58,8 @@ public class BrowserRunner extends Suite {
     public BrowserRunner(final Class<WebTestCase> klass) throws Throwable {
         super(klass, Collections.<Runner>emptyList());
 
-        /*
         final String property = System.getProperty(WebDriverTestCase.PROPERTY);
         final boolean runAll = !WebDriverTestCase.class.isAssignableFrom(klass) || property == null;
-        */
-        final String property = "";
-        final boolean runAll = true;
 
         if (BrowserVersionClassRunner.containsTestMethods(klass)) {
             if (runAll || property.contains("ie6")) {
