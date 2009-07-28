@@ -28,19 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 /**
  * Proof of concept for using WebDriver to run (some) HtmlUnit tests and have the possibility
  * to check in "real" browsers if our expectations are correct.
- * <p>
- * This test runs with HtmlUnit unless the system property "htmlunit.webdriver" is set to "firefox"
- * in which case the test will run in the "real" firefox browser.
- * </p>
- * <p>
- * Examples:
- * mvn test -Dtest=SimpleWebDriverTest (runs the test with HtmlUnit)<br/>
- * mvn test -Dtest=SimpleWebDriverTest -Dhtmlunit.webdriver=ff2 (runs the test with Firefox 2 from the path)<br/>
- * mvn test -Dtest=SimpleWebDriverTest -Dhtmlunit.webdriver=ie6,ff3
- *          (runs the test with Internet Explorer 6 and Firefox 2 from the path)<br/>
- * mvn test -Dtest=SimpleWebDriverTest -Dhtmlunit.webdriver=ff3 -Dwebdriver.firefox.bin=/home/user/firefox-3.0.1
- *     (runs the test with Firefox 3 from the specified location)<br/>
- * </p>
+ *
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
@@ -122,14 +110,6 @@ public class SimpleWebDriverTest extends WebDriverTestCase {
     @Test
     public void objectProperties() throws Exception {
         doTest("objectProperties.html");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void arrayProperties() throws Exception {
-        doTest("arrayProperties.html");
     }
 
     /**

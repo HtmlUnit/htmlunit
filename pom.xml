@@ -142,6 +142,13 @@
                                 <exclude>**/libraries/*.java</exclude>
                             </excludes>
                             <argLine>-Xmx512m -Xms128m</argLine>
+                            <systemProperties>
+                                <property>
+                                    <name>htmlunit.webdriver</name>
+                                    <!-- Value can be one of 'ie6', 'ie7', 'ff2' or 'ff3' -->
+                                    <value></value>
+                                </property>
+                            </systemProperties>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -174,6 +181,13 @@
                         <version>2.4.3</version>
                         <configuration>
                             <argLine>-Xmx512m -Xms128m</argLine>
+                            <systemProperties>
+                                <property>
+                                    <name>htmlunit.webdriver</name>
+                                    <!-- Value can be one of 'ie6', 'ie7', 'ff2' or 'ff3' -->
+                                    <value></value>
+                                </property>
+                            </systemProperties>
                         </configuration>
                     </plugin>
                 </plugins>

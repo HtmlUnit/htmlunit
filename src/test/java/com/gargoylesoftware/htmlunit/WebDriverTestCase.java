@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.io.FileUtils;
@@ -50,6 +51,15 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 
 /**
  * Base class for tests using WebDriver.
+ * <p>
+ * This test runs with HtmlUnit unless the system property "htmlunit.webdriver" is set to "ff2"
+ * in which case the test will run in the "real" firefox browser.
+ * </p>
+ * <p>
+ * You can set the property in maven by modifying the POM value of the system properties in maven-surefire-plugin.
+ * In eclipse you can change the "Run configurations" -> "Arguments" tab -> "VM arguments"
+ * -> "-Dhtmlunit.webdriver=ff2"
+ * </p>
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
@@ -228,7 +238,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * Same as {@link #loadPageWithAlerts(String)}, but using WebDriver instead.
      * @param html the HTML to use
-     * @return the new page
+     * @return the web driver
      * @throws Exception if something goes wrong
      */
     protected final WebDriver loadPageWithAlerts2(final String html) throws Exception {
@@ -242,10 +252,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         if (driver instanceof HtmlUnitDriver) {
-            final NativeArray resp = (NativeArray) ((JavascriptExecutor) driver)
-               .executeScript("return window.__huCatchedAlerts");
-            for (int i = 0; i < resp.getLength(); ++i) {
-                collectedAlerts.add(net.sourceforge.htmlunit.corejs.javascript.Context.toString(resp.get(i, resp)));
+            final Object result = ((JavascriptExecutor) driver) .executeScript("return window.__huCatchedAlerts");
+            if (result != Undefined.instance) {
+                final NativeArray resp = (NativeArray) result;
+                for (int i = 0; i < resp.getLength(); ++i) {
+                    collectedAlerts.add(
+                            net.sourceforge.htmlunit.corejs.javascript.Context.toString(resp.get(i, resp)));
+                }
             }
         }
         else if (driver instanceof InternetExplorerDriver) {
