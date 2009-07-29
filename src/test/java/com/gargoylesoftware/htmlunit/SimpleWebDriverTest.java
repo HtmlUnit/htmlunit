@@ -108,14 +108,6 @@ public class SimpleWebDriverTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void objectProperties() throws Exception {
-        doTest("objectProperties.html");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     public void document_xxx_formAccess() throws Exception {
         doTest("testDocument.xxx_accessToForm.html");
     }

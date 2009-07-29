@@ -73,4 +73,49 @@ public class SimpleWebDriver2Test extends WebDriverTestCase {
 
         assertEquals(expected, driver.findElement(By.id("myTextarea")).getValue());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void objectProperties() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function log(text) {\n"
+            + "      var textarea = document.getElementById('myTextarea');\n"
+            + "      textarea.value += text + ',';\n"
+            + "    }\n"
+            + "    function test() {\n"
+            + "      var properties = ['__defineGetter__', '__defineSetter__', '__lookupGetter__',\n"
+            + "        '__lookupSetter__', 'hasOwnProperty', 'isPrototypeOf', 'propertyIsEnumerable',\n"
+            + "        'toLocaleString', 'toSource', 'toString', 'valueOf'];\n"
+            + "      for (var i = 0; i < properties.length; i++) {\n"
+            + "        var p = properties[i];\n"
+            + "        var v = [][p];\n"
+            + "        log(p + ': ' + typeof(v));\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <textarea id='myTextarea' cols='80' rows='10'></textarea>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        final String expected;
+        if (getBrowserVersion().isFirefox()) {
+            expected = "__defineGetter__: function,__defineSetter__: function,__lookupGetter__: function,"
+                + "__lookupSetter__: function,hasOwnProperty: function,isPrototypeOf: function,"
+                + "propertyIsEnumerable: function,toLocaleString: function,toSource: function,toString: function,"
+                + "valueOf: function,";
+        }
+        else {
+            expected = "__defineGetter__: undefined,__defineSetter__: undefined,__lookupGetter__: undefined,"
+                + "__lookupSetter__: undefined,hasOwnProperty: function,isPrototypeOf: function,"
+                + "propertyIsEnumerable: function,toLocaleString: function,toSource: undefined,toString: function,"
+                + "valueOf: function,";
+        }
+
+        assertEquals(expected, driver.findElement(By.id("myTextarea")).getValue());
+    }
 }
