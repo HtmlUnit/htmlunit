@@ -87,6 +87,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     /**
      * Closes the drivers.
+     * @throws Exception If an error occurs
      */
     @AfterClass
     public static void shutDownAll() throws Exception {
