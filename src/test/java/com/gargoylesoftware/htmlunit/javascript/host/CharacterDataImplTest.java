@@ -16,11 +16,11 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for {@link CharacterDataImpl}.
@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author David K. Taylor
  */
 @RunWith(BrowserRunner.class)
-public class CharacterDataImplTest extends WebTestCase {
+public class CharacterDataImplTest extends WebDriverTestCase {
 
     /**
      * Regression test for inline text nodes.
@@ -52,8 +52,8 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertEquals("First", page.getTitleText());
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertEquals("First", driver.getTitle());
     }
 
     /**
@@ -75,8 +75,8 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        final HtmlPage firstPage = loadPageWithAlerts(html);
-        assertEquals("First", firstPage.getTitleText());
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertEquals("First", driver.getTitle());
     }
 
     /**
@@ -98,8 +98,8 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        final HtmlPage firstPage = loadPageWithAlerts(html);
-        assertEquals("First", firstPage.getTitleText());
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertEquals("First", driver.getTitle());
     }
 
     /**
@@ -120,8 +120,8 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        final HtmlPage firstPage = loadPageWithAlerts(html);
-        assertEquals("First", firstPage.getTitleText());
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertEquals("First", driver.getTitle());
     }
 
     /**
@@ -142,8 +142,8 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Not So New Text</div></body></html>";
 
-        final HtmlPage firstPage = loadPageWithAlerts(html);
-        assertEquals("First", firstPage.getTitleText());
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertEquals("First", driver.getTitle());
     }
 
     /**
@@ -164,8 +164,8 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        final HtmlPage firstPage = loadPageWithAlerts(html);
-        assertEquals("First", firstPage.getTitleText());
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertEquals("First", driver.getTitle());
     }
 
     /**
@@ -186,8 +186,8 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Old Text</div></body></html>";
 
-        final HtmlPage firstPage = loadPageWithAlerts(html);
-        assertEquals("First", firstPage.getTitleText());
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertEquals("First", driver.getTitle());
     }
 
     /**
@@ -208,8 +208,8 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some New Text</div></body></html>";
 
-        final HtmlPage firstPage = loadPageWithAlerts(html);
-        assertEquals("First", firstPage.getTitleText());
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertEquals("First", driver.getTitle());
     }
 
     /**
@@ -232,7 +232,7 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        final HtmlPage firstPage = loadPageWithAlerts(html);
-        assertEquals("First", firstPage.getTitleText());
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertEquals("First", driver.getTitle());
     }
 }

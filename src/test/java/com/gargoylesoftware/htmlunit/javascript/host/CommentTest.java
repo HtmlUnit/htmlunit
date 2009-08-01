@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class CommentTest extends WebTestCase {
+public class CommentTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -43,7 +43,7 @@ public class CommentTest extends WebTestCase {
             + "  alert(document.body.firstChild);\n"
             + "}\n"
             + "</script></head><body onload='test()'><!-- comment --></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
 }

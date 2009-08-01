@@ -38,7 +38,6 @@ import org.json.JSONArray;
 import org.junit.AfterClass;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.webapp.WebAppContext;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -94,44 +93,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
         for (final WebDriver webDriver : WEB_DRIVERS_.values()) {
             webDriver.close();
         }
-    }
-
-    /**
-     * Reads the expected entries from the node "expected_FF" or "expected_FF3" or ... according to the browser used.
-     * @return the expected entries
-     */
-    protected List<String> getExpectedEntries() {
-        final WebDriver webDriver = getWebDriver();
-        final BrowserVersion browserVersion = getBrowserVersion();
-
-        final List<WebElement> nodes = webDriver.findElements(By.xpath("//*[starts-with(@id, 'expected')]"));
-        if (nodes.isEmpty()) {
-            throw new RuntimeException("No expectations found in HTML code");
-        }
-        final String specificName = "expected_" + browserVersion.getNickname();
-        String expectationNodeId = "expected";
-        for (final WebElement node : nodes) {
-            final String nodeId = node.getAttribute("id");
-            if (specificName.contains(nodeId) && nodeId.length() > expectationNodeId.length()) {
-                expectationNodeId = nodeId;
-            }
-        }
-        return getEntries(expectationNodeId);
-    }
-
-    /**
-     * Get the log entries for the node with the given id.
-     * @param id the node id
-     * @return the log entries
-     */
-    protected List<String> getEntries(final String id) {
-        final List<WebElement> log = getWebDriver().findElements(By.xpath("id('" + id + "')/li"));
-        final List<String> entries = new ArrayList<String>();
-        for (final WebElement elt : log) {
-            entries.add(elt.getText());
-        }
-
-        return entries;
     }
 
     private WebDriver buildWebDriver() {

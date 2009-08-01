@@ -98,8 +98,7 @@ public class DocumentTypeTest extends WebTestCase {
             + "  </body>\n"
             + "</html>";
 
-        final String xml =
-              "<!DOCTYPE greeting PUBLIC 'MyIdentifier' 'hello.dtd'>\n"
+        final String xml = "<!DOCTYPE greeting PUBLIC 'MyIdentifier' 'hello.dtd'>\n"
               + "<greeting/>";
 
         getMockWebConnection().setDefaultResponse(xml, "text/xml");

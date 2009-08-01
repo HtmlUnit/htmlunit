@@ -18,10 +18,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 
 /**
  * Unit tests for {@link HTMLHtmlElement}.
@@ -31,24 +29,28 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class HTMLHtmlElementTest extends WebTestCase {
+public class HTMLHtmlElementTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
-    @Alerts(FF2 = { "[object HTMLHtmlElement]", "[HTMLHtmlElement]" },
+    @Alerts(IE = { "[object]", "exception" },
+            FF2 = { "[object HTMLHtmlElement]", "[HTMLHtmlElement]" },
             FF3 = { "[object HTMLHtmlElement]", "[object HTMLHtmlElement]" })
     public void HTMLHtmlElement_toString() throws Exception {
         final String html = "<html id='myId'><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
-            + "    alert(HTMLHtmlElement);\n"
+            + "    try {\n"
+            + "      alert(document.getElementById('myId'));\n"
+            + "      alert(HTMLHtmlElement);\n"
+            + "    } catch (e) {\n"
+            + "      alert('exception');\n"
+            + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -67,7 +69,7 @@ public class HTMLHtmlElementTest extends WebTestCase {
             + "alert(nodes[0].previousSibling);\n"
             + "alert(nodes[1].nextSibling);\n"
             + "</script> \n </body> \n </html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -83,7 +85,7 @@ public class HTMLHtmlElementTest extends WebTestCase {
             + "alert(nodes.length);\n"
             + "alert(nodes[0].nodeName);\n"
             + "</script> \n </head> \n </html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -107,6 +109,6 @@ public class HTMLHtmlElementTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }
