@@ -89,10 +89,14 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * Closes the drivers.
      */
     @AfterClass
-    public static void shutDownAll() {
+    public static void shutDownAll() throws Exception {
         for (final WebDriver webDriver : WEB_DRIVERS_.values()) {
             webDriver.close();
         }
+        if (STATIC_SERVER_ != null) {
+            STATIC_SERVER_.stop();
+        }
+        STATIC_SERVER_ = null;
     }
 
     private WebDriver buildWebDriver() {
