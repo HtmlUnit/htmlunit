@@ -23,12 +23,12 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
- * Tests of source repository of <a href="http://code.google.com/webtoolkit">Google Web Toolkit</a>,
+ * Tests of the source repository of <a href="http://code.google.com/webtoolkit">Google Web Toolkit</a>,
  * which are marked to fail with HtmlUnit.
  *
- * To generate the JavaScript, copy the test case to "Hell" GWT sample, compile it with "-style PRETTY"
+ * To generate the JavaScript, copy the test case to "Hello" GWT sample, compile it with "-style PRETTY"
  * by modifying "gwtc" target, and run "ant".  In generated ".nocache.js", search for "ie6" or "gecko1_8"
- * to know which JavaScript file corresponds to IE or FF respectively. 
+ * to know which JavaScript file corresponds to IE or FF respectively.
  *
  * @version $Revision$
  * @author Ahmed Ashour
@@ -103,6 +103,7 @@ public class GWTSourceTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented
     @Alerts({ "foobar", "$0bar", "$1bar", "\\$1bar", "\\1", "cb", "cb", "a$$b", "a$1b", "a$`b", "a$'b" })
     public void testReplaceString() throws Exception {
         final String html = "<html>\n"
