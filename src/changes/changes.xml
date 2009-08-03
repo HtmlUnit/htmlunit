@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="add" dev="asashour">
+                JavaScript: add support for map.areas attribute.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: process scripts with 'application/javascript' type (FF only).
             </action>

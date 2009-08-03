@@ -1874,6 +1874,7 @@
 
     <class name="HTMLMapElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMapElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlMap">
+        <property name="areas" readable="true" writable="false"/>
     </class>
 
     <class name="HTMLMenuElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMenuElement"

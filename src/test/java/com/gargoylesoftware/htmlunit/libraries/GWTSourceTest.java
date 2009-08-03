@@ -155,4 +155,75 @@ public class GWTSourceTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Original test resides in
+     * <a href="http://code.google.com/p/google-web-toolkit/source/browse/trunk/user/test/com/google/gwt/dom/client/MapTests.java">MapTests</a>.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "3", "true", "true", "true" })
+    public void testGetArea() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var map = document.createElement('map');\n"
+            + "      var area0 = document.createElement('area');\n"
+            + "      var area1 = document.createElement('area');\n"
+            + "      var area2 = document.createElement('area');\n"
+            + "      map.appendChild(area0);\n"
+            + "      map.appendChild(area1);\n"
+            + "      map.appendChild(area2);\n"
+            + "      var areaElems = map.areas;\n"
+            + "      alert(areaElems.length);\n"
+            + "      alert(area0 === areaElems[0]);\n"
+            + "      alert(area1 === areaElems[1]);\n"
+            + "      alert(area2 === areaElems[2]);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Original test resides in
+     * <a href="http://code.google.com/p/google-web-toolkit/source/browse/trunk/user/test/com/google/gwt/user/client/ui/SimpleRadioButtonTest.java">SimpleRadioButtonTest</a>.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    @Alerts(IE = { "true", "false", "false", "false", "true", "true" },
+            FF = { "true", "true", "true", "true", "true", "true" })
+    public void testProperties() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var input = document.createElement('input');\n"
+            + "      input.type = 'radio';\n"
+            + "      input.checked = true;\n"
+            + "      alert(input.checked);\n"
+            + "      document.body.appendChild(input);\n"
+            + "      alert(input.checked);\n"
+            + "      document.body.removeChild(input);\n"
+            + "      alert(input.checked);\n"
+            + "\n"
+            + "      input.defaultChecked = true;\n"
+            + "      alert(input.checked);\n"
+            + "      document.body.appendChild(input);\n"
+            + "      alert(input.checked);\n"
+            + "      document.body.removeChild(input);\n"
+            + "      alert(input.checked);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

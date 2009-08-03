@@ -31,4 +31,13 @@ public class HTMLMapElement extends HTMLElement {
         // Empty.
     }
 
+    /**
+     * Returns the value of the JavaScript attribute "areas".
+     * @return the value of this attribute
+     */
+    public HTMLCollection jsxGet_areas() {
+        final HTMLCollection areas = new HTMLCollection(this);
+        areas.init(getDomNodeOrDie(), "./area");
+        return areas;
+    }
 }
