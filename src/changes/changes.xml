@@ -6,6 +6,12 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="fix" dev="asashour">
+                JavaScript: node.appendChild() can be called inside xmlDocument.
+            </action>
+            <action type="add" dev="asashour">
+                JavaScript: implement xmlDocument.createProcessingInstruction().
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: add support for map.areas attribute.
             </action>

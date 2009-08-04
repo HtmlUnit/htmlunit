@@ -262,7 +262,7 @@ public class Node extends SimpleScriptable {
             if (getDomNodeOrDie().getParentNode() == null
                     && getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
                 final DomDocumentFragment fragment =
-                    ((HtmlPage) getDomNodeOrDie().getPage()).createDomDocumentFragment();
+                    ((SgmlPage) getDomNodeOrDie().getPage()).createDomDocumentFragment();
                 fragment.appendChild(getDomNodeOrDie());
             }
         }

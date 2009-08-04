@@ -2522,6 +2522,12 @@
         <function name="refresh"/>
     </class>
 
+    <class name="ProcessingInstruction" extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.ProcessingInstruction"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomProcessingInstruction">
+        <property name="data" readable="true" writable="true"/>
+        <property name="target" readable="true" writable="false"/>
+    </class>
+
     <class name="Popup" classname="com.gargoylesoftware.htmlunit.javascript.host.Popup" JSObject="true">
         <doclink url="http://msdn.microsoft.com/en-us/library/ms535882.aspx" descr="MSDN documentation"/>
         <browser name="Internet Explorer"/>
@@ -2942,6 +2948,7 @@
                     descr="MSDN documentation"/>
             <browser name="Internet Explorer"/>
         </property>
+        <function name="createProcessingInstruction"/>
         <function name="getElementById">
             <browser name="Firefox"/>
         </function>

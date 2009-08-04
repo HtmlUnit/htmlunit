@@ -21,6 +21,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest;
 
 /**
  * Tests of the source repository of <a href="http://code.google.com/webtoolkit">Google Web Toolkit</a>,
@@ -39,6 +40,8 @@ public class GWTSourceTest extends WebDriverTestCase {
     /**
      * Original test resides in
      * <a href="http://code.google.com/p/google-web-toolkit/source/browse/trunk/user/test/com/google/gwt/emultest/java/lang/StringTest.java">StringTest</a>.
+     *
+     * Test case to be moved to {@link com.gargoylesoftware.htmlunit.javascript.regexp.HtmlUnitRegExpProxyTest}
      *
      * @throws Exception if the test fails
      */
@@ -100,6 +103,8 @@ public class GWTSourceTest extends WebDriverTestCase {
      * Original test resides in
      * <a href="http://code.google.com/p/google-web-toolkit/source/browse/trunk/user/test/com/google/gwt/emultest/java/lang/StringTest.java">StringTest</a>.
      *
+     * Test case to be moved to {@link com.gargoylesoftware.htmlunit.javascript.regexp.HtmlUnitRegExpProxyTest}
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -160,6 +165,8 @@ public class GWTSourceTest extends WebDriverTestCase {
      * Original test resides in
      * <a href="http://code.google.com/p/google-web-toolkit/source/browse/trunk/user/test/com/google/gwt/dom/client/MapTests.java">MapTests</a>.
      *
+     * Test case to be moved to HTMLMapElementTest
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -193,6 +200,8 @@ public class GWTSourceTest extends WebDriverTestCase {
      * Original test resides in
      * <a href="http://code.google.com/p/google-web-toolkit/source/browse/trunk/user/test/com/google/gwt/user/client/ui/SimpleRadioButtonTest.java">SimpleRadioButtonTest</a>.
      *
+     * Test case to be moved to {@link com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInputTest}
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -224,6 +233,40 @@ public class GWTSourceTest extends WebDriverTestCase {
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Partial test case of <tt>createTestDocument()</tt> in
+     * <a href="http://code.google.com/p/google-web-toolkit/source/browse/trunk/user/test/com/google/gwt/xml/client/XMLTest.java">XMLTest</a>.
+     *
+     * Test case to be moved to {@link XMLDocumentTest}
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "myTarget,myData,7", "myTarget,myData" })
+    public void createProcessingInstruction() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    var top = doc.createElement('doc');\n"
+            + "    top.setAttribute('fluffy', 'true');\n"
+            + "    top.setAttribute('numAttributes', '2');\n"
+            + "    doc.appendChild(top);\n"
+            + "    var pi = doc.createProcessingInstruction('myTarget', 'myData');\n"
+            + "    doc.insertBefore(pi, top);\n"
+            + "    alert(pi.nodeName + ',' + pi.nodeValue + ',' + pi.nodeType);\n"
+            + "    alert(pi.target + ',' + pi.data);\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
         loadPageWithAlerts2(html);
     }
 }

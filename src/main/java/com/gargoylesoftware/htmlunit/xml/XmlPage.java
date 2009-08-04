@@ -33,7 +33,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.EntityReference;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 
@@ -43,6 +42,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomDocumentType;
 import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.gargoylesoftware.htmlunit.html.DomProcessingInstruction;
 
 /**
  * A page that will be returned for response with content type "text/xml".
@@ -264,10 +264,9 @@ public class XmlPage extends SgmlPage {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
-    public ProcessingInstruction createProcessingInstruction(final String target, final String data) {
-        throw new UnsupportedOperationException("XmlPage.createProcessingInstruction is not yet implemented.");
+    public DomProcessingInstruction createProcessingInstruction(final String target, final String data) {
+        return new DomProcessingInstruction(this, target, data);
     }
 
     /**

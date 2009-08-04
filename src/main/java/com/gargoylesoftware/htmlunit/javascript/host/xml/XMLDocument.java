@@ -19,9 +19,10 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
@@ -298,6 +299,17 @@ public class XMLDocument extends Document {
         }
         getLog().debug("getElementById(" + id + "): no HTML DOM node found with this ID");
         return null;
+    }
+
+    /**
+     * Creates a new ProcessingInstruction.
+     * @param target the target
+     * @param data the data
+     * @return the new ProcessingInstruction
+     */
+    public Object jsxFunction_createProcessingInstruction(final String target, final String data) {
+        final DomNode node = ((XmlPage) getPage()).createProcessingInstruction(target, data);
+        return getScriptableFor(node);
     }
 
 }
