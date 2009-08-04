@@ -79,7 +79,7 @@
     </class>
 
     <class name="CDATASection" extends="CharacterDataImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.CDATASection"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomCData">
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomCDataSection">
     </class>
 
     <class name="CharacterDataImpl" extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.CharacterDataImpl"

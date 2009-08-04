@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="update" dev="asashour">
+                INCOMPATIBLE CHANGE: rename DomCData to DomCDataSection.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: node.appendChild() can be called inside xmlDocument.
             </action>

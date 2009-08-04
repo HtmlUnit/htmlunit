@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
-import com.gargoylesoftware.htmlunit.html.DomCData;
+import com.gargoylesoftware.htmlunit.html.DomCDataSection;
 import com.gargoylesoftware.htmlunit.html.DomDocumentType;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomProcessingInstruction;
@@ -216,8 +216,8 @@ public class XmlPage extends SgmlPage {
     /**
      * {@inheritDoc}
      */
-    public DomCData createCDATASection(final String data) {
-        return new DomCData(this, data);
+    public DomCDataSection createCDATASection(final String data) {
+        return new DomCDataSection(this, data);
     }
 
     /**

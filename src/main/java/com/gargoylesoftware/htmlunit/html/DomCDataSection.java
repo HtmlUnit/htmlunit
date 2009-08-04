@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Marc Guillemot
  * @author David K. Taylor
  */
-public class DomCData extends DomText implements CDATASection {
+public class DomCDataSection extends DomText implements CDATASection {
 
     private static final long serialVersionUID = 4941214369614888520L;
 
@@ -40,7 +40,7 @@ public class DomCData extends DomText implements CDATASection {
      * @param page the Page that contains this element
      * @param data the string data held by this node
      */
-    public DomCData(final SgmlPage page, final String data) {
+    public DomCDataSection(final SgmlPage page, final String data) {
         super(page, data);
     }
 
@@ -78,6 +78,6 @@ public class DomCData extends DomText implements CDATASection {
      */
     @Override
     protected DomText createSplitTextNode(final int offset) {
-        return new DomCData(getPage(), getData().substring(offset));
+        return new DomCDataSection(getPage(), getData().substring(offset));
     }
 }

@@ -41,7 +41,7 @@ import org.xml.sax.helpers.AttributesImpl;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
-import com.gargoylesoftware.htmlunit.html.DomCData;
+import com.gargoylesoftware.htmlunit.html.DomCDataSection;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomDocumentType;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -219,7 +219,7 @@ public final class XmlUtil {
                     break;
 
                 case Node.CDATA_SECTION_NODE:
-                    final DomCData cdata = new DomCData(page, child.getNodeValue());
+                    final DomCDataSection cdata = new DomCDataSection(page, child.getNodeValue());
                     dest.appendChild(cdata);
                     break;
 

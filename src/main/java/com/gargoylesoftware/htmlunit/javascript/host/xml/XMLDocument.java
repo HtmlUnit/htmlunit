@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.WebResponseData;
 import com.gargoylesoftware.htmlunit.WebResponseImpl;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
-import com.gargoylesoftware.htmlunit.html.DomCData;
+import com.gargoylesoftware.htmlunit.html.DomCDataSection;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
@@ -313,7 +313,7 @@ public class XMLDocument extends Document {
      * @return the new CDATASection
      */
     public Object jsxFunction_createCDATASection(final String data) {
-        final DomCData node = ((XmlPage) getPage()).createCDATASection(data);
+        final DomCDataSection node = ((XmlPage) getPage()).createCDATASection(data);
         return getScriptableFor(node);
     }
 }

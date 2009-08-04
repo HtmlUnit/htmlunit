@@ -492,7 +492,7 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      */
     public CDATASection createCDATASection(final String data) {
-        return new DomCData(this, data);
+        return new DomCDataSection(this, data);
     }
 
     /**
