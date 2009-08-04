@@ -32,14 +32,12 @@ import com.gargoylesoftware.htmlunit.WebResponseImpl;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCData;
-import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.host.Comment;
 import com.gargoylesoftware.htmlunit.javascript.host.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Text;
@@ -169,9 +167,6 @@ public class XMLDocument extends Document {
             final XMLAttr attribute = new XMLAttr();
             attribute.init(domNode.getNodeName(), (DomElement) domNode.getParentNode());
             scriptable = attribute;
-        }
-        else if (domNode instanceof DomComment || domNode instanceof DomCData) {
-            scriptable = new Comment();
         }
         else if (domNode instanceof DomText) {
             scriptable = new Text();
@@ -312,4 +307,13 @@ public class XMLDocument extends Document {
         return getScriptableFor(node);
     }
 
+    /**
+     * Creates a new createCDATASection.
+     * @param data the data
+     * @return the new CDATASection
+     */
+    public Object jsxFunction_createCDATASection(final String data) {
+        final DomCData node = ((XmlPage) getPage()).createCDATASection(data);
+        return getScriptableFor(node);
+    }
 }

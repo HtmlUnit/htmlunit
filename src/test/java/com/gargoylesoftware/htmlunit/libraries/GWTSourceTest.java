@@ -236,7 +236,7 @@ public class GWTSourceTest extends WebDriverTestCase {
     }
 
     /**
-     * Partial test case of <tt>createTestDocument()</tt> in
+     * Test case for <tt>createTestDocument()</tt> in
      * <a href="http://code.google.com/p/google-web-toolkit/source/browse/trunk/user/test/com/google/gwt/xml/client/XMLTest.java">XMLTest</a>.
      *
      * Test case to be moved to {@link com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest}
@@ -244,8 +244,8 @@ public class GWTSourceTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "myTarget,myData,7", "myTarget,myData" })
-    public void createProcessingInstruction() throws Exception {
+    @Alerts({ "myTarget,myData,7", "myTarget,myData", "abcdefghij" })
+    public void createTestDocument() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
@@ -257,6 +257,9 @@ public class GWTSourceTest extends WebDriverTestCase {
             + "    doc.insertBefore(pi, top);\n"
             + "    alert(pi.nodeName + ',' + pi.nodeValue + ',' + pi.nodeType);\n"
             + "    alert(pi.target + ',' + pi.data);\n"
+            + "    var cdata = doc.createCDATASection('abcdefghij');\n"
+            + "    top.appendChild(cdata);\n"
+            + "    alert(cdata.data);\n"
             + "  }\n"
             + "  function createXmlDocument() {\n"
             + "    if (document.implementation && document.implementation.createDocument)\n"
@@ -268,4 +271,5 @@ public class GWTSourceTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
 }

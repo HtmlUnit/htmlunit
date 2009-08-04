@@ -10,7 +10,7 @@
                 JavaScript: node.appendChild() can be called inside xmlDocument.
             </action>
             <action type="add" dev="asashour">
-                JavaScript: implement xmlDocument.createProcessingInstruction().
+                XmlDocument: implement .createProcessingInstruction() and .createCDATASection().
             </action>
             <action type="add" dev="asashour">
                 JavaScript: add support for map.areas attribute.

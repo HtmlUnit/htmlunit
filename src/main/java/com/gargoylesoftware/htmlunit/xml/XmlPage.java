@@ -23,7 +23,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Attr;
-import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;
 import org.w3c.dom.DOMConfiguration;
 import org.w3c.dom.DOMImplementation;
@@ -40,6 +39,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
+import com.gargoylesoftware.htmlunit.html.DomCData;
 import com.gargoylesoftware.htmlunit.html.DomDocumentType;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomProcessingInstruction;
@@ -215,10 +215,9 @@ public class XmlPage extends SgmlPage {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
-    public CDATASection createCDATASection(final String data) {
-        throw new UnsupportedOperationException("XmlPage.createCDATASection is not yet implemented.");
+    public DomCData createCDATASection(final String data) {
+        return new DomCData(this, data);
     }
 
     /**

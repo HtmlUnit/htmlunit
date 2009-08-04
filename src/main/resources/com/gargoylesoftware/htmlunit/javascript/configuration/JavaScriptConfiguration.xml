@@ -78,6 +78,10 @@
         <function name="strokeRect"/>
     </class>
 
+    <class name="CDATASection" extends="CharacterDataImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.CDATASection"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomCData">
+    </class>
+
     <class name="CharacterDataImpl" extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.CharacterDataImpl"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomCharacterData">
         <property name="data" readable="true" writable="true"/>
@@ -2522,12 +2526,6 @@
         <function name="refresh"/>
     </class>
 
-    <class name="ProcessingInstruction" extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.ProcessingInstruction"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomProcessingInstruction">
-        <property name="data" readable="true" writable="true"/>
-        <property name="target" readable="true" writable="false"/>
-    </class>
-
     <class name="Popup" classname="com.gargoylesoftware.htmlunit.javascript.host.Popup" JSObject="true">
         <doclink url="http://msdn.microsoft.com/en-us/library/ms535882.aspx" descr="MSDN documentation"/>
         <browser name="Internet Explorer"/>
@@ -2535,6 +2533,12 @@
         <property name="isOpen" readable="true" writable="false"/>
         <function name="hide"/>
         <function name="show"/>
+    </class>
+
+    <class name="ProcessingInstruction" extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.ProcessingInstruction"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomProcessingInstruction">
+        <property name="data" readable="true" writable="true"/>
+        <property name="target" readable="true" writable="false"/>
     </class>
 
     <class name="Range" classname="com.gargoylesoftware.htmlunit.javascript.host.Range" JSObject="true">
@@ -2948,6 +2952,7 @@
                     descr="MSDN documentation"/>
             <browser name="Internet Explorer"/>
         </property>
+        <function name="createCDATASection"/>
         <function name="createProcessingInstruction"/>
         <function name="getElementById">
             <browser name="Firefox"/>
