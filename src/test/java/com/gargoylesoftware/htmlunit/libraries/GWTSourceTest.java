@@ -21,7 +21,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest;
 
 /**
  * Tests of the source repository of <a href="http://code.google.com/webtoolkit">Google Web Toolkit</a>,
@@ -240,7 +239,7 @@ public class GWTSourceTest extends WebDriverTestCase {
      * Partial test case of <tt>createTestDocument()</tt> in
      * <a href="http://code.google.com/p/google-web-toolkit/source/browse/trunk/user/test/com/google/gwt/xml/client/XMLTest.java">XMLTest</a>.
      *
-     * Test case to be moved to {@link XMLDocumentTest}
+     * Test case to be moved to {@link com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest}
      *
      * @throws Exception if the test fails
      */
