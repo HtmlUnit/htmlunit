@@ -18,8 +18,11 @@ import org.w3c.dom.NamedNodeMap;
 
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.Document;
+import com.gargoylesoftware.htmlunit.javascript.host.DocumentFragment;
+import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
 
 /**
@@ -49,17 +52,32 @@ public class XMLSerializer extends SimpleScriptable {
         if (root instanceof Document) {
             root = ((Document) root).jsxGet_documentElement();
         }
-        final StringBuilder buffer = new StringBuilder();
-        final boolean isIE = getBrowserVersion().isIE();
-        toXml(1, root.getDomNodeOrDie(), buffer, isIE);
-        if (isIE) {
-            buffer.append('\r').append('\n');
+        else if (root instanceof DocumentFragment) {
+            root = root.jsxGet_firstChild();
         }
-        return buffer.toString();
+        if (root instanceof Element) {
+            final StringBuilder buffer = new StringBuilder();
+            final boolean isIE = getBrowserVersion().isIE();
+            toXml(1, root.getDomNodeOrDie(), buffer, isIE);
+            if (isIE) {
+                buffer.append('\r').append('\n');
+            }
+            return buffer.toString();
+        }
+        else {
+            if (root == null) {
+                return "";
+            }
+            return root.getDomNodeOrDie().asXml();
+        }
     }
 
     private void toXml(final int indent, final DomNode node, final StringBuilder buffer, final boolean isIE) {
-        buffer.append('<').append(node.getNodeName());
+        String nodeName = node.getNodeName();
+        if (!isIE && (node.getPage() instanceof HtmlPage)) {
+            nodeName = nodeName.toUpperCase();
+        }
+        buffer.append('<').append(nodeName);
         final NamedNodeMap attributesMap = node.getAttributes();
         for (int i = 0; i < attributesMap.getLength(); i++) {
             final DomAttr attrib = (DomAttr) attributesMap.item(i);

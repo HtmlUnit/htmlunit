@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="fix" dev="asashour">
+                JavaScript: fix XMLSerializer for non-element nodes (FF only).
+            </action>
             <action type="update" dev="asashour">
                 JavaScript: move .xml attribute from xmlElement to xmlNode (IE only).
             </action>
