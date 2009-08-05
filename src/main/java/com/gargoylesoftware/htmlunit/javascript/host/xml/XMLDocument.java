@@ -34,13 +34,11 @@ import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCDataSection;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
-import com.gargoylesoftware.htmlunit.javascript.host.Text;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -167,9 +165,6 @@ public class XMLDocument extends Document {
             final XMLAttr attribute = new XMLAttr();
             attribute.init(domNode.getNodeName(), (DomElement) domNode.getParentNode());
             scriptable = attribute;
-        }
-        else if (domNode instanceof DomText) {
-            scriptable = new Text();
         }
         else {
             scriptable = super.makeScriptableFor(domNode);

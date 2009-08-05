@@ -80,6 +80,9 @@
 
     <class name="CDATASection" extends="CharacterDataImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.CDATASection"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomCDataSection">
+        <property name="xml" readable="true" writable="false">
+            <browser name="Internet Explorer"/>
+        </property>
     </class>
 
     <class name="CharacterDataImpl" extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.CharacterDataImpl"
@@ -2539,6 +2542,9 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomProcessingInstruction">
         <property name="data" readable="true" writable="true"/>
         <property name="target" readable="true" writable="false"/>
+        <property name="xml" readable="true" writable="false">
+            <browser name="Internet Explorer"/>
+        </property>
     </class>
 
     <class name="Range" classname="com.gargoylesoftware.htmlunit.javascript.host.Range" JSObject="true">

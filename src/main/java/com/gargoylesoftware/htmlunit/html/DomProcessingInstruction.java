@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.PrintWriter;
+
 import org.w3c.dom.DOMException;
 import org.w3c.dom.ProcessingInstruction;
 
@@ -95,6 +97,18 @@ public class DomProcessingInstruction extends DomNode implements ProcessingInstr
      */
     public String getNodeValue() {
         return data_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void printXml(final String indent, final PrintWriter printWriter) {
+        printWriter.print("<?");
+        printWriter.print(getTarget());
+        printWriter.print(" ");
+        printWriter.print(getData());
+        printWriter.print("?>");
     }
 
 }

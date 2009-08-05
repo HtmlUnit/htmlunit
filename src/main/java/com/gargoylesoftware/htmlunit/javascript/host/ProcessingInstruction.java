@@ -55,4 +55,12 @@ public final class ProcessingInstruction extends Node {
     public void jsxSet_data(final String data) {
         ((DomProcessingInstruction) getDomNodeOrDie()).setData(data);
     }
+
+    /**
+     * Gets the JavaScript property "xml".
+     * @return the xml
+     */
+    public String jsxGet_xml() {
+        return ((DomProcessingInstruction) getDomNodeOrDie()).asXml();
+    }
 }

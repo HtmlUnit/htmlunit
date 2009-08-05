@@ -61,10 +61,7 @@ public class DomCDataSection extends DomText implements CDATASection {
     }
 
     /**
-     * Recursively writes the XML data for the node tree starting at <code>node</code>.
-     *
-     * @param indent white space to indent child nodes
-     * @param printWriter writer where child nodes are written
+     * {@inheritDoc}
      */
     @Override
     protected void printXml(final String indent, final PrintWriter printWriter) {

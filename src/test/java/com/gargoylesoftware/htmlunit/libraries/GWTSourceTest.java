@@ -244,7 +244,10 @@ public class GWTSourceTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "myTarget,myData,7", "myTarget,myData", "abcdefghij" })
+    @Alerts(IE = { "myTarget,myData,7", "myTarget,myData", "abcdefghij",
+            "<?myTarget myData?>", "<![CDATA[abcdefghij]]>" },
+            FF = { "myTarget,myData,7", "myTarget,myData", "abcdefghij",
+            "undefined", "undefined" })
     public void createTestDocument() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -260,6 +263,8 @@ public class GWTSourceTest extends WebDriverTestCase {
             + "    var cdata = doc.createCDATASection('abcdefghij');\n"
             + "    top.appendChild(cdata);\n"
             + "    alert(cdata.data);\n"
+            + "    alert(pi.xml);\n"
+            + "    alert(cdata.xml);\n"
             + "  }\n"
             + "  function createXmlDocument() {\n"
             + "    if (document.implementation && document.implementation.createDocument)\n"
