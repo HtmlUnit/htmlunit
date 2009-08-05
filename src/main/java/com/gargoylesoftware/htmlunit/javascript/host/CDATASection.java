@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import com.gargoylesoftware.htmlunit.html.DomCDataSection;
-
 /**
  * A JavaScript object for CDATASection.
  *
@@ -30,14 +28,6 @@ public final class CDATASection extends CharacterDataImpl {
      * Creates an instance. JavaScript objects must have a default constructor.
      */
     public CDATASection() {
-    }
-
-    /**
-     * Gets the JavaScript property "xml".
-     * @return the xml
-     */
-    public String jsxGet_xml() {
-        return ((DomCDataSection) getDomNodeOrDie()).asXml();
     }
 
 }

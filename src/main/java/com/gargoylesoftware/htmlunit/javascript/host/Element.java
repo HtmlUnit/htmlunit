@@ -14,11 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.io.StringWriter;
 import java.util.Map;
 
-import org.apache.xml.serialize.OutputFormat;
-import org.apache.xml.serialize.XMLSerializer;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
@@ -232,26 +229,6 @@ public class Element extends EventNode {
      */
     public boolean jsxFunction_hasAttribute(final String name) {
         return getDomNodeOrDie().hasAttribute(name);
-    }
-
-    /**
-     * Represents the xml content of the node and its descendants.
-     * @return the xml content of the node and its descendants
-     */
-    public String jsxGet_xml() {
-        final OutputFormat format = new OutputFormat();
-        format.setOmitXMLDeclaration(true);
-        final StringWriter writer = new StringWriter();
-        final XMLSerializer serializer = new XMLSerializer(format);
-        serializer.setOutputCharStream(writer);
-        try {
-            serializer.serialize(getDomNodeOrDie());
-        }
-        catch (final Exception e) {
-            throw new RuntimeException("Internal error: failed to serialize", e);
-        }
-
-        return writer.toString();
     }
 
     /**

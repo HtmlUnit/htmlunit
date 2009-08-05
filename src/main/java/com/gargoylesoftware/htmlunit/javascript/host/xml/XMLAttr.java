@@ -52,8 +52,7 @@ public class XMLAttr extends Attr {
     }
 
     /**
-     * Returns the XML of this attribute.
-     * @return the XML of this attribute
+     * {@inheritDoc}
      */
     public String jsxGet_xml() {
         final StringBuilder sb = new StringBuilder();

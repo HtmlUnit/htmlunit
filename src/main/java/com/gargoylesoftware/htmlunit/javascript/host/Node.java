@@ -14,13 +14,18 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang.StringUtils;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+
+import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.xml.serialize.OutputFormat;
+import org.apache.xml.serialize.XMLSerializer;
 
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -30,6 +35,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
  * The JavaScript object "Node" which is the base class for all DOM
@@ -700,4 +706,33 @@ public class Node extends SimpleScriptable {
     public short jsxFunction_compareDocumentPosition(final HTMLElement element) {
         return getDomNodeOrDie().compareDocumentPosition(element.getDomNodeOrDie());
     }
+
+    /**
+     * Represents the xml content of the node and its descendants.
+     * @return the xml content of the node and its descendants
+     */
+    public Object jsxGet_xml() {
+        final DomNode node = getDomNodeOrDie();
+        if (node.getPage() instanceof XmlPage) {
+            if (node instanceof org.w3c.dom.Element) {
+                final OutputFormat format = new OutputFormat();
+                format.setOmitXMLDeclaration(true);
+                final StringWriter writer = new StringWriter();
+                final XMLSerializer serializer = new XMLSerializer(format);
+                serializer.setOutputCharStream(writer);
+                try {
+                    serializer.serialize((org.w3c.dom.Element) node);
+                }
+                catch (final Exception e) {
+                    throw new RuntimeException("Internal error: failed to serialize", e);
+                }
+                return writer.toString();
+            }
+            else {
+                return node.asXml();
+            }
+        }
+        return Undefined.instance;
+    }
+
 }

@@ -40,7 +40,7 @@ public final class Patch {
      * @throws Exception if an exception occurs
      */
     @SuppressWarnings("unchecked")
-    public static void checkAutor(final String baseDir, final String patchPath, final String authorName)
+    public static void checkAuthor(final String baseDir, final String patchPath, final String authorName)
         throws Exception {
         final List<String> errors = new ArrayList<String>();
         final List<String> lines = FileUtils.readLines(new File(patchPath));

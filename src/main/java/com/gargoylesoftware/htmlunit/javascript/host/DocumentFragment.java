@@ -27,4 +27,15 @@ public class DocumentFragment extends Node {
 
     private static final long serialVersionUID = -9081976556072827541L;
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object jsxGet_xml() {
+        final Node node = jsxGet_firstChild();
+        if (node != null) {
+            return node.jsxGet_xml();
+        }
+        return "";
+    }
 }

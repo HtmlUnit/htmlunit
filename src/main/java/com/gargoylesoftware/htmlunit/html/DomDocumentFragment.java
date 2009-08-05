@@ -56,4 +56,12 @@ public class DomDocumentFragment extends DomNode implements DocumentFragment {
     public short getNodeType() {
         return org.w3c.dom.Node.DOCUMENT_FRAGMENT_NODE;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String asXml() {
+        return getFirstChild().asXml();
+    }
 }
