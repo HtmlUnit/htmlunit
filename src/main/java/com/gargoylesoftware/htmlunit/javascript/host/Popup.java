@@ -111,6 +111,9 @@ public class Popup extends SimpleScriptable {
  */
 class PopupPseudoWebWindow implements WebWindow {
 
+    /** Serial version UID. */
+    private static final long serialVersionUID = 8592029101424531167L;
+
     private final WebClient webClient_;
     private Object scriptObject_;
     private Page enclosedPage_;

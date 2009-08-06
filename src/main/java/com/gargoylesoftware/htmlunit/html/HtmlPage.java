@@ -117,9 +117,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  */
 public class HtmlPage extends SgmlPage {
 
-    private HtmlUnitDOMBuilder builder_;
     private static final long serialVersionUID = 1779746292119944291L;
 
+    private HtmlUnitDOMBuilder builder_;
     private String originalCharset_;
     private Map<String, List<HtmlElement>> idMap_ = new HashMap<String, List<HtmlElement>>();
     private Map<String, List<HtmlElement>> nameMap_ = new HashMap<String, List<HtmlElement>>();

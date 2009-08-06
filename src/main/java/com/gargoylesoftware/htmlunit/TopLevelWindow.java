@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.io.Serializable;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -30,7 +28,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author David D. Kilzer
  * @author Ahmed Ashour
  */
-public class TopLevelWindow extends WebWindowImpl implements Serializable  {
+public class TopLevelWindow extends WebWindowImpl {
 
     private static final long serialVersionUID = 2448888802967514906L;
 

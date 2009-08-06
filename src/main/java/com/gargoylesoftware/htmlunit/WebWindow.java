@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.Serializable;
+
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 
 /**
@@ -24,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
  * @author David K. Taylor
  * @author David D. Kilzer
  */
-public interface WebWindow {
+public interface WebWindow extends Serializable {
 
     /**
      * Returns the name of this window.

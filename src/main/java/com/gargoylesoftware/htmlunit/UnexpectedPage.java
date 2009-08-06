@@ -26,8 +26,11 @@ import java.io.InputStream;
  * @author David K. Taylor
  */
 public class UnexpectedPage implements Page {
-    private final WebResponse webResponse_;
 
+    /** Serial version UID. */
+    private static final long serialVersionUID = -4072615208727355040L;
+
+    private final WebResponse webResponse_;
     private WebWindow enclosingWindow_;
 
     /**

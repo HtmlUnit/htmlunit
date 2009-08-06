@@ -23,9 +23,12 @@ package com.gargoylesoftware.htmlunit;
  * @author David K. Taylor
  */
 public class TextPage implements Page {
+
+    /** Serial version UID. */
+    private static final long serialVersionUID = -3338485355330723848L;
+
     private final WebResponse webResponse_;
     private final String content_;
-
     private WebWindow enclosingWindow_;
 
     /**

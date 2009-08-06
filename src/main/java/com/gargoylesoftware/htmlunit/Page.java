@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * An abstract page that represents some content returned from a server.
@@ -24,7 +25,7 @@ import java.io.IOException;
  * @author David K. Taylor
  * @author Marc Guillemot
  */
-public interface Page {
+public interface Page extends Serializable {
 
     /**
      * Initialize this page.

@@ -37,6 +37,9 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManagerI
  */
 public abstract class WebWindowImpl implements WebWindow {
 
+    /** Serial version UID. */
+    private static final long serialVersionUID = -8407026088913790772L;
+
     private WebClient webClient_;
     private Page enclosedPage_;
     private Object scriptObject_;

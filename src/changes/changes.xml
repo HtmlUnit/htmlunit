@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="fix" dev="sdanig" issue="2830600">
+                Fix NPE triggered by deserializing WebClient instances under certain conditions.
+            </action>
             <action type="fix" dev="sdanig">
                 Load stylesheets referenced via @import.
             </action>

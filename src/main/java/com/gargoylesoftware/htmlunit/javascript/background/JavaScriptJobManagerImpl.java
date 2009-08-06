@@ -17,6 +17,9 @@ package com.gargoylesoftware.htmlunit.javascript.background;
 import static java.lang.Thread.currentThread;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,23 +45,28 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  *
  * <p>This job manager class is guaranteed not to keep old windows in memory (no window memory leaks).</p>
  *
+ * <p>This job manager is serializable, but any running jobs are transient and are not serialized.</p>
+ *
  * @version $Revision$
  * @author Daniel Gredler
  * @see MemoryLeakTest
  */
 public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
+    /** Serial version UID. */
+    private static final long serialVersionUID = 9212855747249248967L;
+
     /** The window to which this job manager belongs (weakly referenced, so as not to leak memory). */
-    private final WeakReference<WebWindow> window_;
+    private transient WeakReference<WebWindow> window_;
 
     /** Single-threaded scheduled executor which executes the {@link JavaScriptJob}s behind the scenes. */
-    private final ScheduledThreadPoolExecutor executor_ = new ScheduledThreadPoolExecutor(1);
+    private transient ScheduledThreadPoolExecutor executor_;
 
     /** The job IDs and their corresponding {@link Future}s, which can be used to cancel the associated jobs. */
-    private final Map<Integer, ScheduledFuture< ? >> futures_ = new TreeMap<Integer, ScheduledFuture< ? >>();
+    private transient Map<Integer, ScheduledFuture< ? >> futures_;
 
     /** The job(s) which are currently running. */
-    private final List<JavaScriptJob> currentlyRunningJobs_ = new ArrayList<JavaScriptJob>();
+    private transient List<JavaScriptJob> currentlyRunningJobs_;
 
     /** A counter used to generate the IDs assigned to {@link JavaScriptJob}s. */
     private static final AtomicInteger NEXT_JOB_ID = new AtomicInteger(1);
@@ -103,7 +111,18 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
      * @param window the window associated with the new job manager
      */
     public JavaScriptJobManagerImpl(final WebWindow window) {
+        init(window);
+    }
+
+    /**
+     * Initializes this job manager, using the specified window.
+     * @param window the window associated with this job manager
+     */
+    private void init(final WebWindow window) {
         window_ = new WeakReference<WebWindow>(window);
+        executor_ = new ScheduledThreadPoolExecutor(1);
+        futures_ = new TreeMap<Integer, ScheduledFuture< ? >>();
+        currentlyRunningJobs_ = new ArrayList<JavaScriptJob>();
         executor_.setThreadFactory(new ThreadFactory() {
             public Thread newThread(final Runnable r) {
                 // Make sure the thread is a daemon thread so that it doesn't keep the JVM
@@ -339,6 +358,21 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         catch (final InterruptedException e) {
             // Ignore; we did our best.
         }
+    }
+
+    /**
+     * The only thing we want to keep when we serialize is the reference to the window.
+     */
+    private void writeObject(final ObjectOutputStream out) throws IOException {
+        out.writeObject(window_.get());
+    }
+
+    /**
+     * When we deserialize, start over based on the window reference.
+     */
+    private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
+        final WebWindow window = (WebWindow) in.readObject();
+        init(window);
     }
 
 }

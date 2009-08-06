@@ -14,9 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static org.junit.Assert.assertNotNull;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -56,7 +63,7 @@ public class WebClient2Test extends WebServerTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testLoadPage_EncodeRequest() throws Exception {
+    public void loadPage_EncodeRequest() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "</body></html>";
@@ -103,4 +110,76 @@ public class WebClient2Test extends WebServerTestCase {
         page = client.getPage("http://first/page 1.html");
         assertEquals("http://first/page%201.html", page.getWebResponse().getRequestSettings().getUrl());
     }
+
+    /**
+     * Verifies that a WebClient can be serialized and deserialized before it has been used.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void serialization_beforeUse() throws Exception {
+        final WebClient client = new WebClient();
+        final WebClient copy = deserialize(serialize(client));
+        assertNotNull(copy);
+    }
+
+    /**
+     * Verifies that a WebClient can be serialized and deserialized after it has been used.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void serialization_afterUse() throws Exception {
+        startWebServer("./");
+
+        final WebClient client = new WebClient();
+        TextPage textPage = client.getPage("http://localhost:" + PORT + "/LICENSE.txt");
+        assertTrue(textPage.getContent().contains("Gargoyle Software"));
+
+        final WebClient copy = deserialize(serialize(client));
+        assertNotNull(copy);
+
+        final WebWindow window = copy.getCurrentWindow();
+        assertNotNull(window);
+
+        final WebWindow topWindow = window.getTopWindow();
+        assertNotNull(topWindow);
+
+        final Page page = topWindow.getEnclosedPage();
+        assertNotNull(page);
+
+        final WebResponse response = page.getWebResponse();
+        assertNotNull(response);
+
+        final String content = response.getContentAsString();
+        assertNotNull(content);
+        assertTrue(content.contains("Gargoyle Software"));
+
+        textPage = copy.getPage("http://localhost:" + PORT + "/LICENSE.txt");
+        assertTrue(textPage.getContent().contains("Gargoyle Software"));
+    }
+
+    private static byte[] serialize(final WebClient client) throws Exception {
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
+        ObjectOutputStream oos = null;
+        try {
+            oos = new ObjectOutputStream(out);
+            oos.writeObject(client);
+        }
+        finally {
+            IOUtils.closeQuietly(oos);
+        }
+        return out.toByteArray();
+    }
+
+    private static WebClient deserialize(final byte[] serializedClient) throws Exception {
+        final ByteArrayInputStream in = new ByteArrayInputStream(serializedClient);
+        ObjectInputStream oin = null;
+        try {
+            oin = new ObjectInputStream(in);
+            return (WebClient) oin.readObject();
+        }
+        finally {
+            IOUtils.closeQuietly(oin);
+        }
+    }
+
 }

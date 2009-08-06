@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +27,10 @@ import java.util.List;
  * @version $Revision$
  * @author Daniel Gredler
  */
-public class History {
+public class History implements Serializable {
+
+    /** Serial version UID. */
+    private static final long serialVersionUID = 2913698177338034112L;
 
     /** The window to which this navigation history belongs. */
     private final WebWindow window_;
@@ -38,7 +43,7 @@ public class History {
      * explicit boolean parameters in the various methods that load new pages), but it does the job for now -- without
      * any new API cruft.
      */
-    private final ThreadLocal<Boolean> ignoreNewPages_ = new ThreadLocal<Boolean>();
+    private transient ThreadLocal<Boolean> ignoreNewPages_;
 
     /** The current index within the list of pages which make up this navigation history. */
     private int index_ = -1;
@@ -49,6 +54,14 @@ public class History {
      */
     public History(final WebWindow window) {
         window_ = window;
+        initTransientFields();
+    }
+
+    /**
+     * Initializes the transient fields.
+     */
+    private void initTransientFields() {
+        ignoreNewPages_ = new ThreadLocal<Boolean>();
     }
 
     /**
@@ -160,6 +173,14 @@ public class History {
         finally {
             ignoreNewPages_.set(old);
         }
+    }
+
+    /**
+     * Re-initializes transient fields when an object of this type is deserialized.
+     */
+    private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        initTransientFields();
     }
 
 }

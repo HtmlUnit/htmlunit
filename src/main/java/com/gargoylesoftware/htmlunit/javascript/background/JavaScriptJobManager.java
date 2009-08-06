@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.background;
 
+import java.io.Serializable;
+
 import com.gargoylesoftware.htmlunit.Page;
 
 /**
@@ -22,7 +24,7 @@ import com.gargoylesoftware.htmlunit.Page;
  * @version $Revision$
  * @author Daniel Gredler
  */
-public interface JavaScriptJobManager {
+public interface JavaScriptJobManager extends Serializable {
 
     /**
      * Returns the number of active jobs, including jobs that are currently executing and jobs that are
@@ -85,4 +87,5 @@ public interface JavaScriptJobManager {
      * Shuts down this job manager and stops all of its jobs.
      */
     void shutdown();
+
 }
