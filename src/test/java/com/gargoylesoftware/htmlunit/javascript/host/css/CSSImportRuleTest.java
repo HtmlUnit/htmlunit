@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 
@@ -71,6 +72,37 @@ public class CSSImportRuleTest extends WebTestCase {
         final String[] expected = new String[] {"[object CSSImportRule]", URL_SECOND.toString(),
             "[object MediaList]", "0", "[object CSSStyleSheet]"};
         assertEquals(expected, actual);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void testImportedStylesheetsLoaded() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<style>@import url('" + URL_SECOND + "');</style>\n"
+            + "<div id='d'>foo</div>\n"
+            + "<script>\n"
+            + "var d = document.getElementById('d');\n"
+            + "var s = window.getComputedStyle ? window.getComputedStyle(d,null) : d.currentStyle;\n"
+            + "alert(s.color.indexOf('128') > 0);\n"
+            + "</script>\n"
+            + "</body></html>";
+        final String css = "#d { color: rgb(0, 128, 0); }";
+
+        final WebClient client = getWebClient();
+        final List<String> actual = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(actual));
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(URL_SECOND, css, "text/css");
+        client.setWebConnection(conn);
+
+        client.getPage(URL_FIRST);
+        assertEquals(getExpectedAlerts(), actual);
     }
 
 }

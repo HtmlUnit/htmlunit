@@ -15,10 +15,16 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.logging.Log;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.CombinatorCondition;
 import org.w3c.css.sac.Condition;
@@ -34,12 +40,18 @@ import org.w3c.css.sac.NegativeSelector;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SelectorList;
 import org.w3c.css.sac.SiblingSelector;
+import org.w3c.dom.css.CSSImportRule;
 import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSRuleList;
 import org.w3c.dom.css.CSSStyleSheet;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import com.gargoylesoftware.htmlunit.Cache;
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlHtml;
@@ -48,6 +60,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.steadystate.css.dom.CSSImportRuleImpl;
 import com.steadystate.css.dom.CSSStyleRuleImpl;
 import com.steadystate.css.dom.CSSStyleSheetImpl;
 import com.steadystate.css.parser.CSSOMParser;
@@ -75,6 +88,9 @@ public class Stylesheet extends SimpleScriptable {
 
     /** The collection of rules defined in this style sheet. */
     private com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList cssRules_;
+
+    /** The CSS import rules and their corresponding stylesheets. */
+    private Map<CSSImportRule, Stylesheet> imports_ = new HashMap<CSSImportRule, Stylesheet>();
 
     /**
      * Creates a new empty stylesheet.
@@ -148,7 +164,82 @@ public class Stylesheet extends SimpleScriptable {
                     }
                 }
             }
+            else if (rule.getType() == CSSRule.IMPORT_RULE) {
+                final CSSImportRuleImpl importRule = (CSSImportRuleImpl) rule;
+                Stylesheet sheet = imports_.get(importRule);
+                if (sheet == null) {
+                    final String href = importRule.getHref();
+                    sheet = loadStylesheet(getWindow(), ownerNode_, getLog(), null, href);
+                    imports_.put(importRule, sheet);
+                }
+                sheet.modifyIfNecessary(style, element);
+            }
         }
+    }
+
+    /**
+     * Loads the stylesheet at the specified link or href.
+     * @param window the current window
+     * @param element the parent DOM element
+     * @param log the log to use to warn the user about any errors
+     * @param link the stylesheet's link (may be <tt>null</tt> if an <tt>href</tt> is specified)
+     * @param href the stylesheet's href (may be <tt>null</tt> if a <tt>link</tt> is specified)
+     * @return the loaded stylesheet
+     */
+    static Stylesheet loadStylesheet(final Window window, final HTMLElement element, final Log log,
+        final HtmlLink link, final String href) {
+        Stylesheet sheet;
+        try {
+            // Retrieve the associated content and respect client settings regarding failing HTTP status codes.
+            final WebResponse response;
+            final HtmlPage page = (HtmlPage) element.getDomNodeOrDie().getPage();
+            final WebClient client = page.getWebClient();
+            if (link != null) {
+                // Use link.
+                response = link.getWebResponse(true);
+            }
+            else {
+                // Use href.
+                final URL url = page.getFullyQualifiedUrl(href);
+                final WebRequestSettings request = new WebRequestSettings(url);
+                final String referer = page.getWebResponse().getRequestSettings().getUrl().toExternalForm();
+                request.setAdditionalHeader("Referer", referer);
+                response = client.loadWebResponse(request);
+            }
+            client.printContentIfNecessary(response);
+            client.throwFailingHttpStatusCodeExceptionIfNecessary(response);
+            // CSS content must have downloaded OK; go ahead and build the corresponding stylesheet.
+            final Cache cache = client.getCache();
+            final String css = response.getContentAsString();
+            final CSSStyleSheet cached = cache.getCachedStyleSheet(css);
+            if (cached != null) {
+                sheet = new Stylesheet(element, cached);
+            }
+            else {
+                final String uri = response.getRequestSettings().getUrl().toExternalForm();
+                final InputSource source = new InputSource(new StringReader(css));
+                source.setURI(uri);
+                sheet = new Stylesheet(element, source);
+                cache.cache(css, sheet.getWrappedSheet());
+            }
+        }
+        catch (final FailingHttpStatusCodeException e) {
+            // Got a 404 response or something like that; behave nicely.
+            log.error(e.getMessage());
+            final InputSource source = new InputSource(new StringReader(""));
+            sheet = new Stylesheet(element, source);
+        }
+        catch (final IOException e) {
+            // Got a basic IO error; behave nicely.
+            log.error(e.getMessage());
+            final InputSource source = new InputSource(new StringReader(""));
+            sheet = new Stylesheet(element, source);
+        }
+        catch (final Exception e) {
+            // Got something unexpected; we can throw an exception in this case.
+            throw Context.reportRuntimeError("Exception: " + e);
+        }
+        return sheet;
     }
 
     /**
