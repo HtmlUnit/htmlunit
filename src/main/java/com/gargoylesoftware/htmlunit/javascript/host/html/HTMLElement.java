@@ -65,6 +65,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.host.Attr;
 import com.gargoylesoftware.htmlunit.javascript.host.BoxObject;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
@@ -1398,9 +1399,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         if (!page.getWebResponse().getRequestSettings().getUrl().getHost().equals(url.getHost())) {
             throw Context.reportRuntimeError("Not authorized url: " + url);
         }
-        final Thread t = new DownloadBehaviorDownloader(url, callback);
-        getLog().debug("Starting download thread for " + url);
-        t.start();
+        final JavaScriptJob job = new DownloadBehaviorJob(url, callback);
+        page.getEnclosingWindow().getJobManager().addJob(job, page);
     }
 
     /**
@@ -1411,16 +1411,16 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @see #startDownload(String, Function)
      * @author <a href="mailto:stefan@anzinger.net">Stefan Anzinger</a>
      */
-    private final class DownloadBehaviorDownloader extends Thread {
+    private final class DownloadBehaviorJob extends JavaScriptJob {
         private final  URL url_;
         private final Function callback_;
 
         /**
+         * Creates a new instance.
          * @param url the URL to download
-         * @param callback the function to callback
+         * @param callback the callback function to call
          */
-        private DownloadBehaviorDownloader(final URL url, final Function callback) {
-            super("Downloader for behavior #default#download '" + url + "'");
+        private DownloadBehaviorJob(final URL url, final Function callback) {
             url_ = url;
             callback_ = callback;
         }
@@ -1428,12 +1428,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         /**
          * Performs the download and calls the callback method.
          */
-        @Override
         public void run() {
             final WebClient client = getWindow().getWebWindow().getWebClient();
             final Scriptable scope = callback_.getParentScope();
             final WebRequestSettings settings = new WebRequestSettings(url_);
-
             try {
                 final WebResponse webResponse = client.loadWebResponse(settings);
                 final String content = webResponse.getContentAsString();
