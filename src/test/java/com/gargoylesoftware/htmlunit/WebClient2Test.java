@@ -117,7 +117,7 @@ public class WebClient2Test extends WebServerTestCase {
      */
     @Test
     public void serialization_beforeUse() throws Exception {
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final WebClient copy = deserialize(serialize(client));
         assertNotNull(copy);
     }
@@ -130,7 +130,7 @@ public class WebClient2Test extends WebServerTestCase {
     public void serialization_afterUse() throws Exception {
         startWebServer("./");
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         TextPage textPage = client.getPage("http://localhost:" + PORT + "/LICENSE.txt");
         assertTrue(textPage.getContent().contains("Gargoyle Software"));
 
