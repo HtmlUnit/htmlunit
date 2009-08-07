@@ -16,14 +16,10 @@ package com.gargoylesoftware.htmlunit;
 
 import static org.junit.Assert.assertNotNull;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.SerializationUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -118,7 +114,7 @@ public class WebClient2Test extends WebServerTestCase {
     @Test
     public void serialization_beforeUse() throws Exception {
         final WebClient client = getWebClient();
-        final WebClient copy = deserialize(serialize(client));
+        final WebClient copy = (WebClient) SerializationUtils.clone(client);
         assertNotNull(copy);
     }
 
@@ -134,7 +130,7 @@ public class WebClient2Test extends WebServerTestCase {
         TextPage textPage = client.getPage("http://localhost:" + PORT + "/LICENSE.txt");
         assertTrue(textPage.getContent().contains("Gargoyle Software"));
 
-        final WebClient copy = deserialize(serialize(client));
+        final WebClient copy = (WebClient) SerializationUtils.clone(client);
         assertNotNull(copy);
 
         final WebWindow window = copy.getCurrentWindow();
@@ -155,31 +151,6 @@ public class WebClient2Test extends WebServerTestCase {
 
         textPage = copy.getPage("http://localhost:" + PORT + "/LICENSE.txt");
         assertTrue(textPage.getContent().contains("Gargoyle Software"));
-    }
-
-    private static byte[] serialize(final WebClient client) throws Exception {
-        final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        ObjectOutputStream oos = null;
-        try {
-            oos = new ObjectOutputStream(out);
-            oos.writeObject(client);
-        }
-        finally {
-            IOUtils.closeQuietly(oos);
-        }
-        return out.toByteArray();
-    }
-
-    private static WebClient deserialize(final byte[] serializedClient) throws Exception {
-        final ByteArrayInputStream in = new ByteArrayInputStream(serializedClient);
-        ObjectInputStream oin = null;
-        try {
-            oin = new ObjectInputStream(in);
-            return (WebClient) oin.readObject();
-        }
-        finally {
-            IOUtils.closeQuietly(oin);
-        }
     }
 
 }
