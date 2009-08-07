@@ -310,7 +310,7 @@ public class HtmlTextInputTest extends WebTestCase {
      */
     @Test
     public void serialization() throws Exception {
-        final String html = "<html><head></head><body><input type='text' /></body></html>";
+        final String html = "<html><head></head><body onload=''><input type='text' onkeydown='' /></body></html>";
         HtmlPage page = loadPage(html);
         HtmlPage page2 = (HtmlPage) SerializationUtils.clone(page);
         assertNotNull(page2);

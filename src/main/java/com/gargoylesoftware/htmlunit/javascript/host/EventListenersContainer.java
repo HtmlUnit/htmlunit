@@ -38,20 +38,20 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Ahmed Ashour
  */
 public class EventListenersContainer implements Serializable {
+
     private static final long serialVersionUID = -4612648636521726975L;
 
-    static class Handlers {
+    static class Handlers implements Serializable {
+        private static final long serialVersionUID = -5322935816539773122L;
         private final List<Function> capturingHandlers_ = new ArrayList<Function>();
         private final List<Function> bubblingHandlers_ = new ArrayList<Function>();
         private Object handler_;
-
         List<Function> getHandlers(final boolean useCapture) {
             if (useCapture) {
                 return capturingHandlers_;
             }
             return bubblingHandlers_;
         }
-
         @Override
         protected Handlers clone() {
             final Handlers clone = new Handlers();
