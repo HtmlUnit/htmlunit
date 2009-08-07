@@ -41,7 +41,7 @@ public interface WebResponse {
     /**
      * Returns the method used for the request resulting in this response.
      * @return the method used for the request resulting in this response
-     * @deprecated As of 2.6, please use {@link #getRequestSettings()}.getHttpMethod()
+     * @deprecated as of 2.6, please use {@link #getRequestSettings()}.getHttpMethod()
      */
     @Deprecated
     HttpMethod getRequestMethod();
@@ -49,7 +49,7 @@ public interface WebResponse {
     /**
      * Returns the URL that was used to load this page.
      * @return the URL that was used to load this page
-     * @deprecated As of 2.6, please use {@link #getRequestSettings()}.getUrl()
+     * @deprecated as of 2.6, please use {@link #getRequestSettings()}.getUrl()
      */
     @Deprecated
     URL getRequestUrl();
@@ -80,59 +80,61 @@ public interface WebResponse {
     String getStatusMessage();
 
     /**
-     * Returns the content type returned from the server, i.e. "text/html".
-     * @return the content type returned from the server, i.e. "text/html"
+     * Returns the content type returned from the server, e.g. "text/html".
+     * @return the content type returned from the server, e.g. "text/html"
      */
     String getContentType();
 
     /**
-     * Returns the content charset. can be null
+     * Returns the content charset; may be <tt>null</tt>.
      * @return the content charset
-     * @deprecated As of 2.6, please use @link {@link #getContentCharset()}
+     * @deprecated as of 2.6, please use {@link #getContentCharset()}
      */
     @Deprecated
     String getContentCharSet();
 
     /**
-     * Returns the content charset if specified in the header or from the content.
-     * @return the content charset, null if can not be detected
+     * Returns the content charset specified explicitly in the header or in the content,
+     * or <tt>null</tt> if none was specified.
+     * @return the content charset specified explicitly in the header or in the content,
+     *         or <tt>null</tt> if none was specified
      */
     String getContentCharsetOrNull();
 
     /**
-     * Returns the content charset. The charset returned by this method is a valid.
-     * Supported charset is determined from the "Content-Type" header, if not from the response content,
-     * if not from request charset, if not uses {@link TextUtil#DEFAULT_CHARSET}
-     * @return the content charset
+     * Returns the content charset for this response, even if no charset was specified explicitly.
+     * This method always returns a valid charset. This method first checks the "Content-Type"
+     * header; if not found, it checks the response content; as a last resort, this method
+     * returns {@link TextUtil#DEFAULT_CHARSET}.
+     * @return the content charset for this response
      */
     String getContentCharset();
 
     /**
-     * Returns the content from the server as a string, using the charset/encoding
-     * specified in the server response.
-     * @return the content from the server as a string
+     * Returns the response content as a string, using the charset/encoding specified in the server response.
+     * @return the response content as a string, using the charset/encoding specified in the server response
      */
     String getContentAsString();
 
     /**
-     * Returns the content from the server as a string, using the specified charset/encoding,
+     * Returns the response content as a string, using the specified charset/encoding,
      * rather than the charset/encoding specified in the server response. If the specified
-     * charset/encoding is not supported, the default system encoding is used.
-     * @param encoding the charset/encoding to use the convert the content into a string
-     * @return the content from the server as a string
+     * charset/encoding is not supported then the default system encoding is used.
+     * @param encoding the charset/encoding to use to convert the response content into a string
+     * @return the response content as a string
      */
     String getContentAsString(String encoding);
 
     /**
-     * Returns the content from the server as an input stream.
-     * @return the content from the server as an input stream
+     * Returns the response content as an input stream.
+     * @return the response content as an input stream
      * @exception IOException if an IO problem occurs
      */
     InputStream getContentAsStream() throws IOException;
 
     /**
-     * Returns the content from the server as a byte array.
-     * @return the content from the server as a byte array
+     * Returns the response content as a byte array.
+     * @return the response content as a byte array
      */
     byte[] getContentAsBytes();
 
@@ -145,7 +147,7 @@ public interface WebResponse {
     /**
      * Returns the response body, as a byte array.
      * @return the response body, as a byte array
-     * @deprecated since 2.4, please use {@link #getContentAsBytes()} instead
+     * @deprecated as of 2.4, please use {@link #getContentAsBytes()} instead
      */
     @Deprecated
     byte[] getResponseBody();
