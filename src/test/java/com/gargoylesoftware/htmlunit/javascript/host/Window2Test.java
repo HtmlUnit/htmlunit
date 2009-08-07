@@ -18,6 +18,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.SerializationUtils;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -594,6 +595,20 @@ public class Window2Test extends WebTestCase {
             + "  alert(typeof window." + name + ");\n"
             + "</script></body></html>";
         loadPageWithAlerts(html);
+    }
+
+    /**
+     * This appears to fail because the frame's "about:blank" URL requires
+     * a custom handler which doesn't get serialized. Time to migrate to URI?
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @NotYetImplemented
+    public void serialization() throws Exception {
+        final String html = "<html><head></head><body><iframe></iframe></body></html>";
+        final HtmlPage page = loadPageWithAlerts(html);
+        SerializationUtils.clone(page.getEnclosingWindow());
     }
 
 }
