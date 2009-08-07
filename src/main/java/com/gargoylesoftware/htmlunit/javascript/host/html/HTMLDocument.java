@@ -1414,7 +1414,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Indicates if the command can be successfully executed using <tt>execCommand</tt>, given
      * the current state of the document.
      * @param cmd the command identifier
-     * @return <code>true></code> if the command can be successfully executed
+     * @return <code>true</code> if the command can be successfully executed
      */
     public boolean jsxFunction_queryCommandEnabled(final String cmd) {
         final boolean ff = getBrowserVersion().isFirefox();
