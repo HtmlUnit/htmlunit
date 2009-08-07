@@ -27,6 +27,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.mutable.MutableInt;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
@@ -76,6 +77,16 @@ public class PropertiesTest extends WebTestCase {
     private static StringBuilder IE7_HTML_ = new StringBuilder();
     private static StringBuilder FF2_HTML_ = new StringBuilder();
     private static StringBuilder FF3_HTML_ = new StringBuilder();
+
+    private static MutableInt IE6_ACTUAL_PROPERTY_COUNT_ = new MutableInt();
+    private static MutableInt IE7_ACTUAL_PROPERTY_COUNT_ = new MutableInt();
+    private static MutableInt FF2_ACTUAL_PROPERTY_COUNT_ = new MutableInt();
+    private static MutableInt FF3_ACTUAL_PROPERTY_COUNT_ = new MutableInt();
+
+    private static MutableInt IE6_REMAINING_PROPERTY_COUNT_ = new MutableInt();
+    private static MutableInt IE7_REMAINING_PROPERTY_COUNT_ = new MutableInt();
+    private static MutableInt FF2_REMAINING_PROPERTY_COUNT_ = new MutableInt();
+    private static MutableInt FF3_REMAINING_PROPERTY_COUNT_ = new MutableInt();
 
     private final String name_;
     private final BrowserVersion browserVersion_;
@@ -147,29 +158,39 @@ public class PropertiesTest extends WebTestCase {
         final List<String> simulatedList;
         final DefaultCategoryDataset dataset;
         final StringBuilder html;
+        final MutableInt actualPropertyCount;
+        final MutableInt remainingPropertyCount;
         if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_6) {
             realList = IE6_;
             simulatedList = IE6_SIMULATED_;
             dataset = CATEGORY_DATASET_IE6_;
             html = IE6_HTML_;
+            actualPropertyCount = IE6_ACTUAL_PROPERTY_COUNT_;
+            remainingPropertyCount = IE6_REMAINING_PROPERTY_COUNT_;
         }
         else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_7) {
             realList = IE7_;
             simulatedList = IE7_SIMULATED_;
             dataset = CATEGORY_DATASET_IE7_;
             html = IE7_HTML_;
+            actualPropertyCount = IE7_ACTUAL_PROPERTY_COUNT_;
+            remainingPropertyCount = IE7_REMAINING_PROPERTY_COUNT_;
         }
         else if (browserVersion_ == BrowserVersion.FIREFOX_2) {
             realList = FF2_;
             simulatedList = FF2_SIMULATED_;
             dataset = CATEGORY_DATASET_FF2_;
             html = FF2_HTML_;
+            actualPropertyCount = FF2_ACTUAL_PROPERTY_COUNT_;
+            remainingPropertyCount = FF2_REMAINING_PROPERTY_COUNT_;
         }
         else {
             realList = FF3_;
             simulatedList = FF3_SIMULATED_;
             dataset = CATEGORY_DATASET_FF3_;
             html = FF3_HTML_;
+            actualPropertyCount = FF3_ACTUAL_PROPERTY_COUNT_;
+            remainingPropertyCount = FF3_REMAINING_PROPERTY_COUNT_;
         }
 
         List<String> realProperties = Arrays.asList(getValueOf(realList, name_).split(","));
@@ -198,6 +219,9 @@ public class PropertiesTest extends WebTestCase {
         final List<String> remainingProperties = new ArrayList<String>(realProperties);
         remainingProperties.removeAll(implementedProperties);
 
+        actualPropertyCount.add(realProperties.size());
+        remainingPropertyCount.add(remainingProperties.size());
+
         getLog().debug(name_ + ':' + browserVersion_.getNickname() + ':' + realProperties);
         getLog().debug("Remaining" + ':' + remainingProperties);
         getLog().debug("Error" + ':' + erroredProperties);
@@ -205,6 +229,9 @@ public class PropertiesTest extends WebTestCase {
         appendHtml(html, originalRealProperties, simulatedProperties, erroredProperties);
         if (dataset.getColumnCount() == IE7_.size()) {
             saveChart(dataset);
+            html.append("<tr><td colspan='3' align='right'><b>Total Implemented: ")
+                .append(actualPropertyCount.intValue() - remainingPropertyCount.intValue()).append(" / ")
+                .append(actualPropertyCount.intValue()).append("</b></td></tr>");
             html.append("</table>").append('\n').append("<br>").append("Legend:").append("<br>")
                 .append("<span style='color: blue'>").append("To be implemented").append("</span>").append("<br>")
                 .append("<span style='color: green'>").append("Implemented").append("</span>").append("<br>")
