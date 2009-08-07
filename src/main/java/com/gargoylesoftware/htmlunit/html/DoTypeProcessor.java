@@ -14,7 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-abstract class DoTypeProcessor {
+import java.io.Serializable;
+
+abstract class DoTypeProcessor implements Serializable {
+
+    private static final long serialVersionUID = -1857188321096014188L;
+
     void doType(final String currentValue, final int selectionStart, final int selectionEnd,
             final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
 
@@ -53,4 +58,5 @@ abstract class DoTypeProcessor {
     }
 
     abstract void typeDone(final String newValue, final int newCursorPosition);
+
 }

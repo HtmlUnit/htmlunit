@@ -33,6 +33,7 @@ public class HtmlPasswordInput extends HtmlInput {
     private static final long serialVersionUID = -1074283471317076942L;
 
     private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor() {
+        private static final long serialVersionUID = -1938284467263013958L;
         @Override
         void typeDone(final String newValue, final int newCursorPosition) {
             setAttribute("value", newValue);

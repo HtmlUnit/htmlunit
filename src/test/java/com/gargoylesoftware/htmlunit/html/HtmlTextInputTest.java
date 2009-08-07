@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.assertNotNull;
+
+import org.apache.commons.lang.SerializationUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -301,4 +304,16 @@ public class HtmlTextInputTest extends WebTestCase {
 
         // TODO: find a way to handle left & right keys, ...
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void serialization() throws Exception {
+        final String html = "<html><head></head><body><input type='text' /></body></html>";
+        HtmlPage page = loadPage(html);
+        HtmlPage page2 = (HtmlPage) SerializationUtils.clone(page);
+        assertNotNull(page2);
+    }
+
 }

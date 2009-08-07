@@ -47,13 +47,13 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     private String valueAtFocus_;
 
     private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor() {
+        private static final long serialVersionUID = 2906652041039202266L;
         @Override
         void typeDone(final String newValue, final int newCursorPosition) {
             setTextInternal(newValue);
             setSelectionStart(newCursorPosition);
             setSelectionEnd(newCursorPosition);
         }
-
         @Override
         protected boolean acceptChar(final char c) {
             return super.acceptChar(c) || c == '\n' || c == '\r';

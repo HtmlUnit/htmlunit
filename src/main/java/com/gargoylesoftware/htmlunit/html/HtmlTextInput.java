@@ -39,6 +39,7 @@ public class HtmlTextInput extends HtmlInput {
     private String valueAtFocus_;
 
     private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor() {
+        private static final long serialVersionUID = 965791565688183397L;
         @Override
         void typeDone(final String newValue, final int newCursorPosition) {
             setAttribute("value", newValue);
