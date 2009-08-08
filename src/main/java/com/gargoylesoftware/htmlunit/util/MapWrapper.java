@@ -14,25 +14,32 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
 /**
- * Map implementation delegating all calls to the wrapped Map.
+ * Map implementation delegating all calls to the wrapped <tt>Map</tt> instance. This
+ * class is <tt>Serializable</tt>, but serialization will fail if the wrapped map is not
+ * itself <tt>Serializable</tt>.
+ *
  * @version $Revision$
  * @author Marc Guillemot
  * @param <K> the type of the map key
  * @param <V> the type of the value
  */
-public class MapWrapper<K, V> implements Map<K, V> {
+public class MapWrapper<K, V> implements Map<K, V>, Serializable {
+
+    private static final long serialVersionUID = 2761869317828831102L;
+
     private Map<K, V> wrappedMap_;
 
     /**
      * Simple constructor. Needed to allow subclasses to be serializable.
      */
     protected MapWrapper() {
-        // nothing
+        // Empty.
     }
 
     /**
