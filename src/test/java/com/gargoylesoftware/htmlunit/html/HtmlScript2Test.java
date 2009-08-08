@@ -322,4 +322,38 @@ public class HtmlScript2Test extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    @Alerts({ "1", "5", "7"})
+    public void type_language() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <script>\n"
+            + "    alert('1');\n"
+            + "  </script>\n"
+            + "  <script language='anything'>\n"
+            + "    alert('2');\n"
+            + "  </script>\n"
+            + "  <script type='anything'>\n"
+            + "    alert('3');\n"
+            + "  </script>\n"
+            + "  <script language='anything' type='anything'>\n"
+            + "    alert('4');\n"
+            + "  </script>\n"
+            + "  <script language='anything' type='text/javascript'>\n"
+            + "    alert('5');\n"
+            + "  </script>\n"
+            + "  <script language='javascript' type='anything'>\n"
+            + "    alert('6');\n"
+            + "  </script>\n"
+            + "  <script language='javascript'>\n"
+            + "    alert('7');\n"
+            + "  </script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }

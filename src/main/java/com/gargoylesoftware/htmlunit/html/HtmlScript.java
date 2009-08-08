@@ -432,13 +432,13 @@ public class HtmlScript extends HtmlElement {
      */
     boolean isJavaScript(final String typeAttribute, final String languageAttribute) {
         final boolean isJavaScript;
-        if (languageAttribute != null && languageAttribute.length() != 0) {
-            isJavaScript = TextUtil.startsWithIgnoreCase(languageAttribute, "javascript");
-        }
-        else if (typeAttribute != null && typeAttribute.length() != 0) {
+        if (typeAttribute != null && typeAttribute.length() != 0) {
             isJavaScript = typeAttribute.equalsIgnoreCase("text/javascript")
                 || (typeAttribute.equalsIgnoreCase("application/javascript")
                         && getPage().getWebClient().getBrowserVersion().isFirefox());
+        }
+        else if (languageAttribute != null && languageAttribute.length() != 0) {
+            isJavaScript = TextUtil.startsWithIgnoreCase(languageAttribute, "javascript");
         }
         else {
             isJavaScript = true;
