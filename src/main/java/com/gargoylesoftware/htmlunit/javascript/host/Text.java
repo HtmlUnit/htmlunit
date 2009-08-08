@@ -47,6 +47,6 @@ public class Text extends CharacterDataImpl {
      */
     public Object jsxFunction_splitText(final int offset) {
         final DomText domText = (DomText) getDomNodeOrDie();
-        return getScriptableFor(domText.splitDomText(offset));
+        return getScriptableFor(domText.splitText(offset));
     }
 }

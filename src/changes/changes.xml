@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="update" dev="asashour">
+                DomText: deprecate splitDomText(), use splitText() instead.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: fix .prefix attribute of xml nodes.
             </action>

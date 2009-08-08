@@ -52,8 +52,20 @@ public class DomText extends DomCharacterData implements Text {
     /**
      * {@inheritDoc}
      */
-    public Text splitText(final int offset) {
-        return splitDomText(offset);
+    public DomText splitText(final int offset) {
+        if (offset < 0 || offset > getLength()) {
+            throw new IllegalArgumentException("offset: " + offset + " data.length: " + getLength());
+        }
+
+        // split text into two separate nodes
+        final DomText newText = createSplitTextNode(offset);
+        setData(getData().substring(0, offset));
+
+        // insert new text node
+        if (getParentNode() != null) {
+            getParentNode().insertBefore(newText, getNextSibling());
+        }
+        return newText;
     }
 
     /**
@@ -71,21 +83,11 @@ public class DomText extends DomCharacterData implements Text {
      * Splits a DomText node in two.
      * @param offset the character position at which to split the DomText node
      * @return the DomText node that was split from this node
+     * @deprecated as of 2.6, please use {@link #splitText(int)} instead
      */
+    @Deprecated
     public DomText splitDomText(final int offset) {
-        if (offset < 0 || offset > getLength()) {
-            throw new IllegalArgumentException("offset: " + offset + " data.length: " + getLength());
-        }
-
-        // split text into two separate nodes
-        final DomText newText = createSplitTextNode(offset);
-        setData(getData().substring(0, offset));
-
-        // insert new text node
-        if (getParentNode() != null) {
-            getParentNode().insertBefore(newText, getNextSibling());
-        }
-        return newText;
+        return splitText(offset);
     }
 
     /**

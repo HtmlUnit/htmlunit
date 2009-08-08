@@ -176,7 +176,7 @@ public class DomTextTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void splitDomText() throws Exception {
+    public void splitText() throws Exception {
         final String html
             = "<html><head></head><body>\n"
             + "<br><div id='tag'></div><br></body></html>";
@@ -194,7 +194,7 @@ public class DomTextTest extends WebTestCase {
         // position among parent's children
         final int position = readPositionAmongParentChildren(node);
 
-        final DomText newNode = node.splitDomText(5);
+        final DomText newNode = node.splitText(5);
 
         assertSame("new node previous sibling", node, newNode.getPreviousSibling());
         assertSame("previous sibling", previousSibling, node.getPreviousSibling());
@@ -223,7 +223,7 @@ public class DomTextTest extends WebTestCase {
 
         assertNull(firstNode.getPreviousSibling());
 
-        final DomText secondNode = firstNode.splitDomText(5);
+        final DomText secondNode = firstNode.splitText(5);
 
         final DomText thirdNode = new DomText(page, "test split");
         divNode.appendChild(thirdNode);
@@ -261,7 +261,7 @@ public class DomTextTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void splitText() throws Exception {
+    public void splitText2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var div = document.getElementById('myDiv');\n"
