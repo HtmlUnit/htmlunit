@@ -6,6 +6,15 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="fix" dev="asashour">
+                JavaScript: fix .prefix attribute of xml nodes.
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: fix text.splitText().
+            </action>
+            <action type="add" dev="asashour">
+                JavaScript: implement xmlDocument.getElementsByTagName(), .getElementsByTagNameNS() and .nodeFromID().
+            </action>
             <action type="fix" dev="sdanig" issue="2830600">
                 Fix NPE triggered by deserializing WebClient instances under certain conditions.
             </action>

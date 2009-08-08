@@ -56,7 +56,7 @@ public class NodeTest extends WebTestCase {
     @Test
     @Alerts({ "true" })
     public void test_hasChildNodes_true() throws Exception {
-        final String content = "<html><head><title>test_hasChildNodes</title>\n"
+        final String html = "<html><head><title>test_hasChildNodes</title>\n"
                 + "<script>\n"
                 + "function doTest(){\n"
                 + "    alert(document.getElementById('myNode').hasChildNodes());\n"
@@ -66,7 +66,7 @@ public class NodeTest extends WebTestCase {
                 + "<p id='myNode'>hello world<span>Child Node</span></p>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts(content);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -75,7 +75,7 @@ public class NodeTest extends WebTestCase {
     @Test
     @Alerts({ "false" })
     public void test_hasChildNodes_false() throws Exception {
-        final String content = "<html><head><title>test_hasChildNodes</title>\n"
+        final String html = "<html><head><title>test_hasChildNodes</title>\n"
                 + "<script>\n"
                 + "function doTest(){\n"
                 + "    alert(document.getElementById('myNode').hasChildNodes());\n"
@@ -85,7 +85,7 @@ public class NodeTest extends WebTestCase {
                 + "<p id='myNode'></p>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts(content);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -95,7 +95,7 @@ public class NodeTest extends WebTestCase {
     @Test
     @Alerts({ "true", "true" })
     public void testRemoveChild() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    var form = document.forms['form1'];\n"
@@ -108,7 +108,7 @@ public class NodeTest extends WebTestCase {
             + "<form name='form1'><div id='formChild'/></form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(content);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -118,7 +118,7 @@ public class NodeTest extends WebTestCase {
     @Test
     @Alerts({ "true", "true", "true" })
     public void testReplaceChild_Normal() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    var form = document.forms['form1'];\n"
@@ -135,7 +135,7 @@ public class NodeTest extends WebTestCase {
             + "<form name='form1'><div id='formChild'/></form>\n"
             + "</body><div id='newChild'/></html>";
 
-        loadPageWithAlerts(content);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -162,7 +162,7 @@ public class NodeTest extends WebTestCase {
     @Test
     @Alerts({ "DIV" })
     public void testNodeNameIsUppercase() throws Exception {
-        final String content = "<html><head>\n"
+        final String html = "<html><head>\n"
                 + "<script>\n"
                 + "function doTest(){\n"
                 + "    alert(document.getElementById('myNode').nodeName);\n"
@@ -172,7 +172,7 @@ public class NodeTest extends WebTestCase {
                 + "<div id='myNode'>hello world<span>Child Node</span></div>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts(content);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -181,7 +181,7 @@ public class NodeTest extends WebTestCase {
     @Test
     @Alerts({ "2", "SPAN", "2", "#text", "H1", "H2" })
     public void test_getChildNodes() throws Exception {
-        final String content = "<html><head>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
             + "function doTest() {\n"
             + "var aNode = document.getElementById('myNode');\n"
@@ -199,7 +199,7 @@ public class NodeTest extends WebTestCase {
             + "<h2>Child Node 2-A</h2></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(content);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -208,7 +208,7 @@ public class NodeTest extends WebTestCase {
     @Test
     @Alerts({ "nb nodes: 2", "8", "1" })
     public void testChildNodes_Comments() throws Exception {
-        final String content = "<html><head><title>test</title>\n"
+        final String html = "<html><head><title>test</title>\n"
             + "<html><head></head>\n"
             + "<body><!-- comment --><script>\n"
             + "var nodes = document.body.childNodes;\n"
@@ -219,7 +219,7 @@ public class NodeTest extends WebTestCase {
             + "}\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts(content);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -230,7 +230,7 @@ public class NodeTest extends WebTestCase {
         "tempNode.name: undefined", "tempNode.name: input1", "tempNode.name: undefined",
         "tempNode.name: input2", "tempNode.name: undefined" })
     public void test_getChildNodesProperties() throws Exception {
-        final String content = "<html><head><title>test_getChildNodes</title>\n"
+        final String html = "<html><head><title>test_getChildNodes</title>\n"
             + "<script>\n"
             + "function doTest() {\n"
             + "    var testForm = document.getElementById('testForm');\n"
@@ -250,7 +250,7 @@ public class NodeTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(content);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -279,7 +279,7 @@ public class NodeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     void test_insertBefore(final String insertJSLine) throws Exception {
-        final String content = "<html><head><title>test_insertBefore</title>\n"
+        final String html = "<html><head><title>test_insertBefore</title>\n"
             + "<script>\n"
             + "function doTest() {\n"
             + "  var nodeToInsert = document.getElementById('nodeToInsert');\n"
@@ -298,7 +298,7 @@ public class NodeTest extends WebTestCase {
             + "<h1>Child Node 2-A</h1></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(content);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -308,7 +308,7 @@ public class NodeTest extends WebTestCase {
     @Test
     @Alerts({ "document: 9", "document.body: 1", "body child 1: 3", "body child 2: 8" })
     public void testNodeType() throws Exception {
-        final String content = "<html><head><title>test</title>\n"
+        final String html = "<html><head><title>test</title>\n"
                 + "<script>\n"
                 + "function doTest(){\n"
                 + "    alert('document: ' + document.nodeType);\n"
@@ -321,7 +321,7 @@ public class NodeTest extends WebTestCase {
                 + "some text<!-- some comment -->\n"
                 + "</body></html>";
 
-        loadPageWithAlerts(content);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -331,7 +331,7 @@ public class NodeTest extends WebTestCase {
     @Test
     @Browsers(Browser.IE)
     public void testAttachEvent() throws Exception {
-        final String content = "<html><head>\n"
+        final String html = "<html><head>\n"
             + "<title>First</title>\n"
             + "<script>\n"
             + "function test()\n"
@@ -349,7 +349,7 @@ public class NodeTest extends WebTestCase {
         final String[] expectedAlerts = {"in foo1", "in foo2"};
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
         page.<HtmlElement>getHtmlElementById("div1").click();
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -361,7 +361,7 @@ public class NodeTest extends WebTestCase {
     @Test
     @Alerts(FF = { "true", "false" }, IE = { "isSameNode not supported" })
     public void testIsSameNode() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var d1 = document.getElementById('div1');\n"
             + "    var d2 = document.getElementById('div2');\n"
@@ -376,7 +376,7 @@ public class NodeTest extends WebTestCase {
             + "<div id='div1'/>\n"
             + "<div id='div2'/>\n"
             + "</body></html>";
-        loadPageWithAlerts(content);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -388,7 +388,7 @@ public class NodeTest extends WebTestCase {
     @Test
     @Alerts(FF = { "null", "null" }, IE = { "null", "#document-fragment" })
     public void testAppendChild_parentNode() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var div1 = document.createElement('div');\n"
             + "    var div2 = document.createElement('div');\n"
@@ -402,7 +402,7 @@ public class NodeTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(content);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -414,7 +414,7 @@ public class NodeTest extends WebTestCase {
     @Test
     @Alerts(FF = { "null", "null" }, IE = { "null", "#document-fragment" })
     public void testInsertBefore_parentNode() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var div1 = document.createElement('div');\n"
             + "    var div2 = document.createElement('div');\n"
@@ -428,7 +428,7 @@ public class NodeTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(content);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -437,7 +437,7 @@ public class NodeTest extends WebTestCase {
     @Test
     @Alerts({ "2" })
     public void testAppendChild_of_DocumentFragment() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var fragment = document.createDocumentFragment();\n"
             + "    var div1 = document.createElement('div');\n"
@@ -454,7 +454,7 @@ public class NodeTest extends WebTestCase {
             + "<div id='myDiv'></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(content);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -552,7 +552,7 @@ public class NodeTest extends WebTestCase {
     @Test
     @Browsers(Browser.IE)
     public void event() throws Exception {
-        final String firstContent = "<html>\n"
+        final String firstHtml = "<html>\n"
             + "<head><title>First Page</title>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -567,7 +567,7 @@ public class NodeTest extends WebTestCase {
             + "    <div id='myDiv'></div>\n"
             + "</body>\n"
             + "</html>";
-        final String secondContent =
+        final String secondHtml =
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
@@ -590,8 +590,8 @@ public class NodeTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, firstContent);
-        conn.setResponse(URL_SECOND, secondContent);
+        conn.setResponse(URL_FIRST, firstHtml);
+        conn.setResponse(URL_SECOND, secondHtml);
         client.setWebConnection(conn);
 
         final HtmlPage page = client.getPage(URL_FIRST);
@@ -889,4 +889,30 @@ public class NodeTest extends WebTestCase {
         assertEquals(expectedURL.toExternalForm(),
                 page2.getWebResponse().getRequestSettings().getUrl().toExternalForm());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("bk")
+    public void prefix() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var text = \"<bk:book xmlns:bk='urn:loc.gov:books'></bk:book>\";\n"
+            + "  if (window.ActiveXObject) {\n"
+            + "    var doc = new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "    doc.async = false;\n"
+            + "    doc.loadXML(text);\n"
+            + "  } else {\n"
+            + "    var parser = new DOMParser();\n"
+            + "    var doc = parser.parseFromString(text, 'text/xml');\n"
+            + "  }\n"
+            + "  alert(doc.documentElement.prefix);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
 }

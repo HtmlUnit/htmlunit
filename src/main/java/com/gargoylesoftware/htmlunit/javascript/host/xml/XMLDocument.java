@@ -262,10 +262,9 @@ public class XMLDocument extends Document {
     }
 
     /**
-     * Returns all the descendant elements with the specified tag name.
-     * @param tagName the name to search for
-     * @return all the descendant elements with the specified tag name
+     * {@inheritDoc}
      */
+    @Override
     public HTMLCollection jsxFunction_getElementsByTagName(final String tagName) {
         final HTMLCollection collection = new HTMLCollection(this);
         collection.init(getDomNodeOrDie().getFirstChild(), "//*[local-name()='" + tagName + "']");
@@ -288,6 +287,15 @@ public class XMLDocument extends Document {
             return ((HtmlElement) domElement).getScriptObject();
         }
         getLog().debug("getElementById(" + id + "): no HTML DOM node found with this ID");
+        return null;
+    }
+
+    /**
+     * Since we are not processing DTD, this method always returns null.
+     * @param id the ID to search for
+     * @return null
+     */
+    public Object jsxFunction_nodeFromID(final String id) {
         return null;
     }
 

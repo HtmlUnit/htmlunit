@@ -20,7 +20,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public final class CDATASection extends CharacterDataImpl {
+public final class CDATASection extends Text {
 
     private static final long serialVersionUID = -4867436967489711775L;
 

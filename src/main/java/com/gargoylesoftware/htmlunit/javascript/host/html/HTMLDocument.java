@@ -946,24 +946,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns all the descendant elements with the specified tag name.
-     * @param tagName the name to search for
-     * @return all the descendant elements with the specified tag name
-     */
-    public HTMLCollection jsxFunction_getElementsByTagName(final String tagName) {
-        final HTMLCollection collection = new HTMLCollection(this);
-        final String exp;
-        if (tagName.equals("*")) {
-            exp = "//*";
-        }
-        else {
-            exp = "//*[lower-case(local-name()) = '" + tagName.toLowerCase() + "']";
-        }
-        collection.init(getDomNodeOrDie(), exp);
-        return collection;
-    }
-
-    /**
      * Returns all the descendant elements with the specified class name.
      * @param className the name to search for
      * @return all the descendant elements with the specified class name

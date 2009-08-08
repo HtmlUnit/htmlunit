@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.html.DomText;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public final class Text extends CharacterDataImpl {
+public class Text extends CharacterDataImpl {
 
     private static final long serialVersionUID = 3548915177419561974L;
 

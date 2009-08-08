@@ -32,7 +32,9 @@ import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 
 /**
  * A JavaScript object for a Document.
@@ -406,4 +408,43 @@ public class Document extends EventNode {
         return getScriptableFor(element);
     }
 
+    /**
+     * Returns all the descendant elements with the specified tag name.
+     * @param tagName the name to search for
+     * @return all the descendant elements with the specified tag name
+     */
+    public HTMLCollection jsxFunction_getElementsByTagName(final String tagName) {
+        final HTMLCollection collection = new HTMLCollection(this);
+        final String exp;
+        if (tagName.equals("*")) {
+            exp = "//*";
+        }
+        else {
+            exp = "//*[lower-case(local-name()) = '" + tagName.toLowerCase() + "']";
+        }
+        collection.init(getDomNodeOrDie(), exp);
+        return collection;
+    }
+
+    /**
+     * Returns a list of elements with the given tag name belonging to the given namespace.
+     * @param namespaceURI the namespace URI of elements to look for
+     * @param localName is either the local name of elements to look for or the special value "*",
+     *                  which matches all elements.
+     * @return a live NodeList of found elements in the order they appear in the tree
+     */
+    public Object jsxFunction_getElementsByTagNameNS(final Object namespaceURI, final String localName) {
+        final DomNode domNode = getDomNodeOrDie();
+        final HTMLCollection collection = new HTMLCollection(this);
+        final String xpath;
+        if (namespaceURI == null || namespaceURI.equals("*")) {
+            xpath = ".//*[local-name()='" + localName + "']";
+        }
+        else {
+            final String prefix = XmlUtil.lookupPrefix((DomElement) domNode, Context.toString(namespaceURI));
+            xpath = ".//" + prefix + ':' + localName;
+        }
+        collection.init(domNode, xpath);
+        return collection;
+    }
 }

@@ -83,19 +83,7 @@ public class DomText extends DomCharacterData implements Text {
 
         // insert new text node
         if (getParentNode() != null) {
-            newText.setParentNode(getParentNode());
-            newText.setPreviousSibling(this);
-            final DomNode nextSibling = getNextSibling();
-            newText.setNextSibling(nextSibling);
-            if (nextSibling != null) {
-                nextSibling.setPreviousSibling(newText);
-            }
-            else {
-                // newText is the last child
-                // last child is stored as the previous sibling of first child
-                getParentNode().getFirstChild().setPreviousSibling(newText);
-            }
-            setNextSibling(newText);
+            getParentNode().insertBefore(newText, getNextSibling());
         }
         return newText;
     }

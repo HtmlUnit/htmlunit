@@ -16,6 +16,9 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static org.junit.Assert.assertSame;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -174,10 +177,10 @@ public class DomTextTest extends WebTestCase {
      */
     @Test
     public void splitDomText() throws Exception {
-        final String content
+        final String html
             = "<html><head></head><body>\n"
             + "<br><div id='tag'></div><br></body></html>";
-        final HtmlPage page = loadPage(content);
+        final HtmlPage page = loadPage(html);
 
         final DomNode divNode = page.getDocumentElement().getElementById("tag");
 
@@ -252,5 +255,31 @@ public class DomTextTest extends WebTestCase {
             i++;
         }
         return -1;
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void splitText() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var div = document.getElementById('myDiv');\n"
+            + "    div.appendChild(document.createElement('a'));\n"
+            + "    var text = document.createTextNode('123456');\n"
+            + "    div.appendChild(text);\n"
+            + "    div.appendChild(document.createElement('hr'));\n"
+            + "    alert(div.childNodes.length);\n"
+            + "    text.splitText(3);\n"
+            + "    alert(div.childNodes.length);\n"
+            + "    alert(div.childNodes.item(2).nodeValue);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myDiv'></div>\n"
+            + "</body></html>";
+        final String[] expectedAlerts = {"3", "4", "456"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

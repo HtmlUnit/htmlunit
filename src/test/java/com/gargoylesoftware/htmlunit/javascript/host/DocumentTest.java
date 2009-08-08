@@ -3249,4 +3249,51 @@ public class DocumentTest extends WebTestCase {
         client.getPage(URL_FIRST);
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "0", "1" })
+    public void getElementsByTagNameNS() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    doc.async = false;\n"
+            + "    doc.load('" + URL_SECOND + "');\n"
+            + "    if (!document.all) {\n"
+            + "      alert(document.getElementsByTagNameNS('*', 'books').length);\n"
+            + "      alert(doc.getElementsByTagNameNS('*', 'books').length);\n"
+            + "    }\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String xml
+            = "<soap:Envelope xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/'>\n"
+            + "  <books xmlns='http://www.example.com/ns1'>\n"
+            + "    <book>\n"
+            + "      <title>Immortality</title>\n"
+            + "      <author>John Smith</author>\n"
+            + "    </book>\n"
+            + "  </books>\n"
+            + "</soap:Envelope>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final WebClient client = getWebClient();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(URL_SECOND, xml, "text/xml");
+        client.setWebConnection(conn);
+
+        client.getPage(URL_FIRST);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
 }

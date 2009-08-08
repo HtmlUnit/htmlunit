@@ -223,6 +223,7 @@ public class ActiveXObject extends SimpleScriptable {
         addFunction(document, "getElementsByTagName");
         addFunction(document, "load");
         addFunction(document, "loadXML");
+        addFunction(document, "nodeFromID");
         addFunction(document, "selectNodes");
         addFunction(document, "selectSingleNode");
         addFunction(document, "setProperty");

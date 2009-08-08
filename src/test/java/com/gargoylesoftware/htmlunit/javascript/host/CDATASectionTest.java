@@ -18,18 +18,18 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
- * Tests for CDATA sections.
+ * Tests for {@link CDATASection}.
  *
  * @version $Revision$
  * @author Mirko Friedenhagen
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class CDATASectionTest extends WebTestCase {
+public class CDATASectionTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -43,7 +43,32 @@ public class CDATASectionTest extends WebTestCase {
             + "  alert(document.body.firstChild);\n"
             + "}\n"
             + "</script></head><body onload='test()'><![CDATA[Jeep]]></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void splitText() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    var root = doc.appendChild(doc.createElement('root'));\n"
+            + "    var cdata = root.appendChild(doc.createCDATASection('abcdef'));\n"
+            + "    cdata.splitText(2);\n"
+            + "    alert(root.childNodes.length);\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
     }
 
 }

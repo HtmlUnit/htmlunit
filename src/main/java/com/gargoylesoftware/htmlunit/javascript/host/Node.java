@@ -659,10 +659,11 @@ public class Node extends SimpleScriptable {
      * @return the Namespace prefix
      */
     public String jsxGet_prefix() {
-        if (getBrowserVersion().isIE()) {
+        final String prefix = getDomNodeOrDie().getPrefix();
+        if (getBrowserVersion().isIE() && (prefix == null || getDomNodeOrDie().getPage() instanceof HtmlPage)) {
             return "";
         }
-        return getDomNodeOrDie().getPrefix();
+        return prefix;
     }
 
     /**
