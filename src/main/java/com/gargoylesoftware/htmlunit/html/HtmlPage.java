@@ -389,14 +389,6 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public void normalizeDocument() {
-        throw new UnsupportedOperationException("HtmlPage.normalizeDocument is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
     public org.w3c.dom.Node renameNode(final org.w3c.dom.Node newNode, final String namespaceURI,
         final String qualifiedName) throws DOMException {
         throw new UnsupportedOperationException("HtmlPage.renameNode is not yet implemented.");

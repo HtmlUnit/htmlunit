@@ -707,6 +707,13 @@ public class Node extends SimpleScriptable {
     }
 
     /**
+     * Merges adjacent TextNode objects to produce a normalized document object model.
+     */
+    public void jsxFunction_normalize() {
+        getDomNodeOrDie().normalize();
+    }
+
+    /**
      * Represents the xml content of the node and its descendants.
      * @return the xml content of the node and its descendants
      */

@@ -384,10 +384,37 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     public void normalize() {
-        throw new UnsupportedOperationException("DomNode.normalize is not yet implemented.");
+        for (DomNode child = getFirstChild(); child != null; child = child.getNextSibling()) {
+            if (child instanceof DomText) {
+                final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
+                final StringBuilder dataBuilder = new StringBuilder();
+                DomNode toRemove = child;
+                DomText firstText = null;
+                //IE removes all child text nodes, but FF preserves the first
+                while (toRemove instanceof DomText && !(toRemove instanceof DomCDataSection)) {
+                    final DomNode nextChild = toRemove.getNextSibling();
+                    dataBuilder.append(toRemove.getTextContent());
+                    if (ie || firstText != null) {
+                        toRemove.remove();
+                    }
+                    if (firstText == null) {
+                        firstText = (DomText) toRemove;
+                    }
+                    toRemove = nextChild;
+                }
+                if (firstText != null) {
+                    if (ie) {
+                        final DomText newText = new DomText(getPage(), dataBuilder.toString());
+                        insertBefore(newText, toRemove);
+                    }
+                    else {
+                        firstText.setData(dataBuilder.toString());
+                    }
+                }
+            }
+        }
     }
 
     /**

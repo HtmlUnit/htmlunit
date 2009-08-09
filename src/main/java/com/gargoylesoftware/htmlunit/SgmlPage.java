@@ -218,4 +218,12 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
      */
     public abstract boolean hasCaseSensitiveTagNames();
 
+    /**
+     * {@inheritDoc}
+     * The current implementation just {@link DomNode#normalize()}s the document element.
+     */
+    public void normalizeDocument() {
+        getDocumentElement().normalize();
+    }
+
 }

@@ -376,14 +376,6 @@ public class XmlPage extends SgmlPage {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public void normalizeDocument() {
-        throw new UnsupportedOperationException("XmlPage.normalizeDocument is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
     public Node renameNode(final Node n, final String namespaceURI, final String qualifiedName) {
         throw new UnsupportedOperationException("XmlPage.renameNode is not yet implemented.");
     }

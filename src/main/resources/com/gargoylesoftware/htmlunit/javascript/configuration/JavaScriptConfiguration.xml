@@ -2469,6 +2469,7 @@
         <function name="isSameNode">
             <browser name="Firefox"/>
         </function>
+        <function name="normalize"/>
         <function name="removeChild"/>
         <function name="removeEventListener">
             <doclink url="http://developer.mozilla.org/en/docs/DOM:element.removeEventListener"
