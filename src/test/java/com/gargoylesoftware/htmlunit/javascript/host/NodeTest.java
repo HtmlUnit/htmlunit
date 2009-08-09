@@ -915,4 +915,31 @@ public class NodeTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<root><![CDATA[abc]]><![CDATA[def]]></root>")
+    public void xml() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    var root = doc.appendChild(doc.createElement('root'));\n"
+            + "    var cdata = root.appendChild(doc.createCDATASection('abcdef'));\n"
+            + "    cdata.splitText(3);\n"
+            + "    if (document.all)"
+            + "      alert(root.xml);\n"
+            + "    else\n"
+            + "      alert(new XMLSerializer().serializeToString(root));\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
 }

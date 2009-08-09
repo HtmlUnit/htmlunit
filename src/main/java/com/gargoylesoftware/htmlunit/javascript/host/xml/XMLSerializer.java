@@ -111,6 +111,10 @@ public class XMLSerializer extends SimpleScriptable {
                     }
                     break;
 
+                case org.w3c.dom.Node.CDATA_SECTION_NODE:
+                    buffer.append(child.asXml());
+                    break;
+
                 default:
 
             }

@@ -7,6 +7,9 @@
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
             <action type="fix" dev="asashour">
+                JavaScript: support the serialization of CDATASection in .xml property (IE) and XMLSerializer (FF).
+            </action>
+            <action type="fix" dev="asashour">
                 HtmlScript: fix the order of "type" and "language" attributes evaluation.
             </action>
             <action type="update" dev="asashour">

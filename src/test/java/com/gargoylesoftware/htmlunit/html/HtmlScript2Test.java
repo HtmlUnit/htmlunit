@@ -327,7 +327,7 @@ public class HtmlScript2Test extends WebTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts({ "1", "5", "7"})
+    @Alerts({ "1", "5", "7" })
     public void type_language() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"

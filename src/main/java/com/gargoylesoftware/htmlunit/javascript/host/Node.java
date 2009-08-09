@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,8 +23,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.xml.serialize.OutputFormat;
-import org.apache.xml.serialize.XMLSerializer;
 
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -35,6 +32,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLSerializer;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -715,19 +713,14 @@ public class Node extends SimpleScriptable {
     public Object jsxGet_xml() {
         final DomNode node = getDomNodeOrDie();
         if (node.getPage() instanceof XmlPage) {
-            if (node instanceof org.w3c.dom.Element) {
-                final OutputFormat format = new OutputFormat();
-                format.setOmitXMLDeclaration(true);
-                final StringWriter writer = new StringWriter();
-                final XMLSerializer serializer = new XMLSerializer(format);
-                serializer.setOutputCharStream(writer);
-                try {
-                    serializer.serialize((org.w3c.dom.Element) node);
+            if (this instanceof Element) {
+                final XMLSerializer serializer = new XMLSerializer();
+                serializer.setParentScope(getParentScope());
+                String xml = serializer.jsxFunction_serializeToString(this);
+                if (getBrowserVersion().isIE() && xml.endsWith("\r\n")) {
+                    xml = xml.substring(0, xml.length() - 2);
                 }
-                catch (final Exception e) {
-                    throw new RuntimeException("Internal error: failed to serialize", e);
-                }
-                return writer.toString();
+                return xml;
             }
             else {
                 return node.asXml();
