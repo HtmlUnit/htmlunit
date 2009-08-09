@@ -621,7 +621,6 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ })
     public void javaScriptWrappedInHtmlComments_commentNotClosed() throws Exception {
         final String html
             = "<html><head><title>foo</title>\n"
@@ -1466,7 +1465,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { }, FF = "found")
+    @Alerts(FF = "found")
     public void enumerateMethods() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

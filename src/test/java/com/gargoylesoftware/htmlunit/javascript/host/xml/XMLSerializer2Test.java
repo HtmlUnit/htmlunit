@@ -34,7 +34,7 @@ public class XMLSerializer2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { }, FF = { "<div/>", "<DIV/>", "<?myTarget myData?>" })
+    @Alerts(FF = { "<div/>", "<DIV/>", "<?myTarget myData?>" })
     public void xml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

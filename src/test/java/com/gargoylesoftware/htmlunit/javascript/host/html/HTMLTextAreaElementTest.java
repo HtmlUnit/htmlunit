@@ -229,8 +229,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = { "yes" },
-            FF = { "no" })
+    @Alerts(IE = "yes", FF = "no")
     public void doScroll() throws Exception {
         final String html =
             "<html>\n"
@@ -259,8 +258,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "Hello\r\nworld\r\n" },
-            FF = { "Hello\nworld\n" })
+    @Alerts(IE = "Hello\r\nworld\r\n", FF = "Hello\nworld\n")
     public void value_ignoreFirstNewLine() throws Exception {
         value("\nHello\nworld\n");
     }
@@ -269,8 +267,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { " \r\nHello\r\nworld\r\n" },
-            FF = { " \nHello\nworld\n" })
+    @Alerts(IE = " \r\nHello\r\nworld\r\n", FF = " \nHello\nworld\n")
     public void value_spaceBeforeFirstNewLine() throws Exception {
         value(" \nHello\nworld\n");
     }

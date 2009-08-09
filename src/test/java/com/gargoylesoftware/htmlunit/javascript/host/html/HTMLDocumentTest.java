@@ -148,7 +148,7 @@ public class HTMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "CSS1Compat" }, FF = { "BackCompat" })
+    @Alerts(IE = "CSS1Compat", FF = "BackCompat")
     public void compatMode_loose_40() throws Exception {
         compatMode("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" "
             + "\"http://www.w3.org/TR/html4/loose.dtd\">");
@@ -306,7 +306,7 @@ public class HTMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "imported: [object HTMLScriptElement]" }, IE = { "exception" })
+    @Alerts(FF = "imported: [object HTMLScriptElement]", IE = "exception")
     @NotYetImplemented(Browser.FF)
     public void importNode_script() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

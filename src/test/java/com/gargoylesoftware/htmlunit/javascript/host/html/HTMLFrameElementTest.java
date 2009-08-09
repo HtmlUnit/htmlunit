@@ -248,8 +248,8 @@ public class HTMLFrameElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts({ "\nfunction handler() {\n}\n", "null" })
     @Test
+    @Alerts({ "\nfunction handler() {\n}\n", "null" })
     public void testOnloadNull() throws Exception {
         final String html =
             "<html><head>\n"

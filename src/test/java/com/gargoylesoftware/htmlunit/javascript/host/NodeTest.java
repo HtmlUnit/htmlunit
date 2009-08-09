@@ -54,7 +54,7 @@ public class NodeTest extends WebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "true" })
+    @Alerts("true")
     public void test_hasChildNodes_true() throws Exception {
         final String html = "<html><head><title>test_hasChildNodes</title>\n"
                 + "<script>\n"
@@ -73,7 +73,7 @@ public class NodeTest extends WebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "false" })
+    @Alerts("false")
     public void test_hasChildNodes_false() throws Exception {
         final String html = "<html><head><title>test_hasChildNodes</title>\n"
                 + "<script>\n"
@@ -160,7 +160,7 @@ public class NodeTest extends WebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "DIV" })
+    @Alerts("DIV")
     public void testNodeNameIsUppercase() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -435,7 +435,7 @@ public class NodeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2" })
+    @Alerts("2")
     public void testAppendChild_of_DocumentFragment() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -605,7 +605,7 @@ public class NodeTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "id=bar" })
+    @Alerts("id=bar")
     public void testCloneAttributesAvailable() throws Exception {
         final String html =
               "<html>\n"
@@ -636,7 +636,7 @@ public class NodeTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "in click" }, IE = { "in click", "in click", "in click" })
+    @Alerts(FF = "in click", IE = { "in click", "in click", "in click" })
     public void testCloneNode_copiesListenerOnlyForIE() throws Exception {
         final String html =
               "<html>\n"

@@ -100,7 +100,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1" })
+    @Alerts("1")
     public void formsAccessor_FormWithNoName() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -121,7 +121,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0" })
+    @Alerts("0")
     public void formsAccessor_NoForms() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -640,7 +640,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "bar" })
+    @Alerts("bar")
     public void getElementById_setNewId() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -663,7 +663,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "id1" })
+    @Alerts("id1")
     public void getElementById_divId() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -682,7 +682,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "script1" })
+    @Alerts("script1")
     public void getElementById_scriptId() throws Exception {
         final String html
             = "<html><head><title>First</title><script id='script1'>\n"
@@ -700,7 +700,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "text/javascript" })
+    @Alerts("text/javascript")
     public void getElementById_scriptType() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
@@ -752,7 +752,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "parentDiv" })
+    @Alerts("parentDiv")
     public void parentNode_Nested() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -775,7 +775,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true" })
+    @Alerts("true")
     public void parentNode_Document() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -793,7 +793,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true" })
+    @Alerts("true")
     public void parentNode_CreateElement() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -812,7 +812,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "parentDiv" })
+    @Alerts("parentDiv")
     public void parentNode_AppendChild() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -857,7 +857,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "childDiv" })
+    @Alerts("childDiv")
     public void firstChild_Nested() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -881,7 +881,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "childDiv" })
+    @Alerts("childDiv")
     public void firstChild_AppendChild() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -909,7 +909,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "childDiv" })
+    @Alerts("childDiv")
     public void lastChild_Nested() throws Exception {
         final String html
             = "<html><head><title>Last</title><script>\n"
@@ -933,7 +933,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "childDiv" })
+    @Alerts("childDiv")
     public void lastChild_AppendChild() throws Exception {
         final String html
             = "<html><head><title>Last</title><script>\n"
@@ -961,7 +961,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "nextDiv" })
+    @Alerts("nextDiv")
     public void nextSibling_Nested() throws Exception {
         final String html
             = "<html><head><title>Last</title><script>\n"
@@ -985,7 +985,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "nextDiv" })
+    @Alerts("nextDiv")
     public void nextSibling_AppendChild() throws Exception {
         final String html
             = "<html><head><title>Last</title><script>\n"
@@ -1013,7 +1013,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "previousDiv" })
+    @Alerts("previousDiv")
     public void previousSibling_Nested() throws Exception {
         final String html
             = "<html><head><title>Last</title><script>\n"
@@ -1037,7 +1037,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "previousDiv" })
+    @Alerts("previousDiv")
     public void previousSibling_AppendChild() throws Exception {
         final String html
             = "<html><head><title>Last</title><script>\n"
@@ -1086,7 +1086,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "DIV" })
+    @Alerts("DIV")
     public void allProperty_CalledDuringPageLoad() throws Exception {
         final String html
             = "<html><body>\n"
@@ -1201,7 +1201,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "A" })
+    @Alerts("A")
     public void write_InDOM() throws Exception {
         final String html
             = "<html><head><title>First</title></head><body>\n"
@@ -1311,7 +1311,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "" }, FF = { "exception occurred" })
+    @Alerts(IE = "", FF = "exception occurred")
     public void write_AssignedToVar() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -1337,7 +1337,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = { "" }, FF = { "exception occurred" })
+    @Alerts(IE = "", FF = "exception occurred")
     public void write_AssignedToVar2() throws Exception {
         final String html =
             "<html><head><title>Test</title></head><body>\n"
@@ -1555,7 +1555,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "button" })
+    @Alerts("button")
     public void getElementsByTagName_CaseInsensitive() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -1577,7 +1577,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1" })
+    @Alerts("1")
     public void getElementsByTagName_Inline() throws Exception {
         final String html
             = "<html><body><script type=\"text/javascript\">\n"
@@ -1592,7 +1592,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1" })
+    @Alerts("1")
     public void getElementsByTagName_LoadScript() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
@@ -1656,7 +1656,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "HTML" })
+    @Alerts("HTML")
     public void all_Item() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -1696,7 +1696,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = { "exception" },
+    @Alerts(FF3 = "exception",
             FF2 = { "a", "b", "a", "b", "0" },
             IE = { "a", "b", "a", "b", "0" })
     public void all_tags() throws Exception {
@@ -1961,7 +1961,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "IAmTheBody" })
+    @Alerts("IAmTheBody")
     public void body_read() throws Exception {
         final String html = "<html><head><title>First</title></head>\n"
             + "<body id='IAmTheBody' onload='alert(document.body.id)'>\n"
@@ -1974,7 +1974,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "FRAMESET" })
+    @Alerts("FRAMESET")
     public void body_readFrameset() throws Exception {
         final String html = "<html>\n"
             + "<frameset onload='alert(document.body.tagName)'>\n"
@@ -2017,7 +2017,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "correct title" })
+    @Alerts("correct title")
     public void settingTitle() throws Exception {
         final String html
             = "<html><head><title>Bad Title</title></head>\n"
@@ -2037,7 +2037,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "correct title" })
+    @Alerts("correct title")
     public void settingMissingTitle() throws Exception {
         final String html = "<html><head></head>\n"
             + "<body>\n"
@@ -2055,7 +2055,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "correct title" })
+    @Alerts("correct title")
     public void settingBlankTitle() throws Exception {
         final String html = "<html><head><title></title></head>\n"
             + "<body>\n"
@@ -2073,7 +2073,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "foo" })
+    @Alerts("foo")
     public void title() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -2473,7 +2473,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "not defined" },
+    @Alerts(FF = "not defined",
             IE = { "true", "1", "about:blank", "about:blank" })
     public void frames() throws Exception {
         final String html = "<html><head><script>\n"
@@ -3091,7 +3091,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { }, IE = "x")
+    @Alerts(IE = "x")
     public void fireEvent() throws Exception {
         final String html =
               "<html><body>\n"

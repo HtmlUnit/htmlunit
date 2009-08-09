@@ -77,7 +77,7 @@ public class CSSStyleRuleTest extends WebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(IE = { "false" })
+    @Alerts(IE = "false")
     @NotYetImplemented(Browser.IE)
     public void testReadOnly() throws Exception {
         final String html = "<html><head><title>First</title>\n"

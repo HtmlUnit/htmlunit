@@ -1430,7 +1430,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "30" })
+    @Alerts("30")
     public void offsetWidth_parentWidthConstrainsChildWidth() throws Exception {
         final String html = "<html><head><style>#a { width: 30px; }</style></head><body>\n"
             + "<div id='a'><div id='b'>foo</div></div>\n"

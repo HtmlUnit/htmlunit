@@ -251,7 +251,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "50px" })
+    @Alerts("50px")
     public void styleAttributePreferredOverStylesheet() throws Exception {
         final String html = "<html>\n"
             + "<head><style>div { width: 30px; }</style></head>\n"
@@ -306,8 +306,8 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = { "block block block block block block block block block" },
-            FF = { "table table-header-group table-row-group table-cell table-row table-cell block list-item block" })
+    @Alerts(IE = "block block block block block block block block block",
+            FF = "table table-header-group table-row-group table-cell table-row table-cell block list-item block")
     public void defaultDisplayValues() throws Exception {
         final String html = "<html><body>\n"
             + "  <table id='table'>\n"

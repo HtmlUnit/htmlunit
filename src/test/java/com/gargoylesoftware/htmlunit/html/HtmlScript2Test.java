@@ -271,7 +271,7 @@ public class HtmlScript2Test extends WebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(IE = { }, FF = { "z" })
+    @Alerts(FF = "z")
     public void addEventListener_load() throws Exception {
         final String html
             = "<html><head>\n"

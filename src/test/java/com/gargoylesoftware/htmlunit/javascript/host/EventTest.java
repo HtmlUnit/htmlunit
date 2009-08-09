@@ -627,7 +627,7 @@ public class EventTest extends WebTestCase {
      */
     @Test
     @NotYetImplemented(Browser.FF)
-    @Alerts(FF = { "undefined" }, IE = { "null" })
+    @Alerts(FF = "undefined", IE = "null")
     public void testNullEventHandler() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

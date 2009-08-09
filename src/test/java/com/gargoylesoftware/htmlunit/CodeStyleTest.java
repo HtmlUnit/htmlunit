@@ -94,6 +94,7 @@ public class CodeStyleTest {
                     vs85aspx(lines, relativePath);
                     deprecated(lines, relativePath);
                     staticJSMethod(lines, relativePath);
+                    singleAlert(lines, relativePath);
                 }
             }
         }
@@ -437,4 +438,20 @@ public class CodeStyleTest {
         }
     }
 
+    /**
+     * Single @Alert does not need curly brackets.
+     */
+    private void singleAlert(final List<String> lines, final String relativePath) {
+        int i = 0;
+        for (final String line : lines) {
+            if (line.trim().startsWith("@Alerts") && line.contains("{") && line.contains("}")) {
+                final String alert = line.substring(line.indexOf('{'), line.indexOf('}'));
+                if (!alert.contains(",") && alert.contains("\"")
+                        && alert.indexOf('"', alert.indexOf('"') + 1) != -1) {
+                    addFailure("No need for curly brackets in " + relativePath + ", line: " + (i + 1));
+                }
+            }
+            i++;
+        }
+    }
 }

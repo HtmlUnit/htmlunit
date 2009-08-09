@@ -116,7 +116,6 @@ public class HTMLOptionElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ })
     public void setAttribute() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -209,7 +208,7 @@ public class HTMLOptionElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0" })
+    @Alerts("0")
     public void insideBold() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -437,7 +436,7 @@ public class HTMLOptionElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "[object]" }, FF = { "[object HTMLFormElement]" })
+    @Alerts(IE = "[object]", FF = "[object HTMLFormElement]")
     public void form() throws Exception {
         final String html
             = "<html><body><form><select id='s'><option>a</option></select></form><script>\n"

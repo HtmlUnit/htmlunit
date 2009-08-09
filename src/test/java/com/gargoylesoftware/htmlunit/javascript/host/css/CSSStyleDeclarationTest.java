@@ -283,8 +283,8 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = { "undefined 0.5 0.33333 -3 3 8  7  10px foo auto " },
-            FF = { " 0.5 0.33333 -3 3 8 7 7 7 7 " })
+    @Alerts(IE = "undefined 0.5 0.33333 -3 3 8  7  10px foo auto ",
+            FF = " 0.5 0.33333 -3 3 8 7 7 7 7 ")
     public void opacity() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='d'>d</div>\n"

@@ -35,7 +35,7 @@ public class StringTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "key\\:b_M" })
+    @Alerts("key\\:b_M")
     public void replace() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

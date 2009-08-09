@@ -34,7 +34,7 @@ public class DocumentTypeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "null" }, FF = { "[object DocumentType]", "html,10,null,null,null,null",
+    @Alerts(IE = "null", FF = { "[object DocumentType]", "html,10,null,null,null,null",
             "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,,null,null" })
     public void doctype() throws Exception {
         final String html = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n"

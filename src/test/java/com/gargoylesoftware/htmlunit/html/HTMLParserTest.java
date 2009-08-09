@@ -127,7 +127,7 @@ public class HTMLParserTest extends WebServerTestCase {
      * @throws Exception failure
      */
     @Test
-    @Alerts({"first" })
+    @Alerts("first")
     public void unknownTagInHead() throws Exception {
         // Note: the <meta> tag in this test is quite important because
         // I could adapt the TagBalancer to make it work except with this <meta http-equiv...

@@ -127,7 +127,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE6 = { "activeX created" }, IE7 = { "[object]" },  FF = { "[object XMLHttpRequest]" })
+    @Alerts(IE6 = "activeX created", IE7 = "[object]",  FF = "[object XMLHttpRequest]")
     public void creation() throws Exception {
         final String html =
             "<html>\n"
@@ -1030,7 +1030,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { }, IE = { "1", "2", "3", "4" })
+    @Alerts(IE = { "1", "2", "3", "4" })
     public void testOnreadystatechange_sync() throws Exception {
         final String html =
               "<html>\n"

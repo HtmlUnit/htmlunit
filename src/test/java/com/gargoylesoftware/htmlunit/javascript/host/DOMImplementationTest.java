@@ -67,8 +67,8 @@ public class DOMImplementationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "XPath 3.0: true" },
-            IE = { "XPath 3.0: false" })
+    @Alerts(FF = "XPath 3.0: true",
+            IE = "XPath 3.0: false")
     public void hasFeature_XPath() throws Exception {
         hasFeature("XPath", "['3.0']");
     }
@@ -96,7 +96,7 @@ public class DOMImplementationTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.FF)
-    @Alerts({ "[object XMLDocument]" })
+    @Alerts("[object XMLDocument]")
     public void createDocument() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -114,7 +114,7 @@ public class DOMImplementationTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.FF)
-    @Alerts({ "mydoc" })
+    @Alerts("mydoc")
     public void createDocument_qualifiedName() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

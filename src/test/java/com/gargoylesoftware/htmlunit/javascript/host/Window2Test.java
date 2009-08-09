@@ -539,7 +539,7 @@ public class Window2Test extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "x" })
+    @Alerts("x")
     public void onbeforeunload_setToFunction() throws Exception {
         final String html
             = "<html><body><script>\n"

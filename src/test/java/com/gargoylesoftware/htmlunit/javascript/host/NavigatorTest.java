@@ -263,8 +263,7 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "Netscape" },
-            IE = { "Microsoft Internet Explorer" })
+    @Alerts(FF = "Netscape", IE = "Microsoft Internet Explorer")
     public void testUseConfiguredBrowser() throws Exception {
         final String html
             = "<html><head><title>First</title></head>\n"
@@ -279,8 +278,7 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { BrowserVersion.LANGUAGE_ENGLISH_US },
-            IE = { "undefined" })
+    @Alerts(FF = BrowserVersion.LANGUAGE_ENGLISH_US, IE = "undefined")
     public void testLanguage() throws Exception {
         final String html
             = "<html><head><title>First</title></head>\n"
@@ -317,8 +315,7 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "Gecko" },
-            IE = { "undefined" })
+    @Alerts(FF = "Gecko", IE = "undefined")
     public void product() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"

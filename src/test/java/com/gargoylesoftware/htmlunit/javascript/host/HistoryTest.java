@@ -189,8 +189,7 @@ public class HistoryTest extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "error" },
-            IE = { "undefined" })
+    @Alerts(FF = "error", IE = "undefined")
     public void previous() throws Exception {
         final WebClient client = getWebClient();
         final List<String> alerts = new ArrayList<String>();
@@ -204,8 +203,7 @@ public class HistoryTest extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "error" },
-            IE = { "undefined" })
+    @Alerts(FF = "error", IE = "undefined")
     public void current() throws Exception {
         final WebClient client = getWebClient();
         final List<String> alerts = new ArrayList<String>();
@@ -219,8 +217,7 @@ public class HistoryTest extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "error" },
-            IE = { "undefined" })
+    @Alerts(FF = "error", IE = "undefined")
     public void next() throws Exception {
         final WebClient client = getWebClient();
         final List<String> alerts = new ArrayList<String>();
@@ -234,8 +231,7 @@ public class HistoryTest extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "error" },
-            IE = { })
+    @Alerts(FF = "error")
     public void item() throws Exception {
         final WebClient client = getWebClient();
         final List<String> alerts = new ArrayList<String>();
