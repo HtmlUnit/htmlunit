@@ -21,6 +21,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
+
 /**
  * Representation of the navigation history of a single window.
  *
@@ -35,8 +37,11 @@ public class History implements Serializable {
     /** The window to which this navigation history belongs. */
     private final WebWindow window_;
 
-    /** The URLs of the pages in this navigation history. */
-    private final List<URL> urls_ = new ArrayList<URL>();
+    /**
+     * The URLs of the pages in this navigation history; stored as Strings instead java.net.URLs
+     * because "about:blank" URLs don't serialize correctly.
+     */
+    private final List<String> urls_ = new ArrayList<String>();
 
     /**
      * Whether or not to ignore calls to {@link #addPage(Page)}; this is a bit hackish (we should probably be using
@@ -87,7 +92,7 @@ public class History implements Serializable {
      */
     public URL getUrl(final int index) {
         if (index >= 0 && index < urls_.size()) {
-            return urls_.get(index);
+            return UrlUtils.reconstructUrl(urls_.get(index));
         }
         return null;
     }
@@ -155,7 +160,7 @@ public class History implements Serializable {
         while (urls_.size() > index_) {
             urls_.remove(index_);
         }
-        urls_.add(page.getWebResponse().getRequestSettings().getUrl());
+        urls_.add(page.getWebResponse().getRequestSettings().getUrl().toExternalForm());
     }
 
     /**
@@ -163,7 +168,7 @@ public class History implements Serializable {
      * @throws IOException if an IO error occurs
      */
     private void goToUrlAtCurrentIndex() throws IOException {
-        final URL url = urls_.get(index_);
+        final URL url = UrlUtils.reconstructUrl(urls_.get(index_));
         final WebRequestSettings wrs = new WebRequestSettings(url);
         final Boolean old = ignoreNewPages_.get();
         try {

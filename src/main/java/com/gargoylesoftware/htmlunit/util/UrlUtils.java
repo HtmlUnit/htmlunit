@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
+import static com.gargoylesoftware.htmlunit.WebClient.URL_ABOUT_BLANK;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -33,6 +35,29 @@ public final class UrlUtils {
      */
     private UrlUtils() {
         // Empty.
+    }
+
+    /**
+     * Reconstructs a URL instance based on the specified URL string, taking into account the fact
+     * that the specified URL string may represent the <tt>"about:blank"</tt> URL. The caller should
+     * be sure that URL strings passed to this method will parse correctly as URLs, as this method
+     * never expects to have to handle {@link MalformedURLException}s.
+     * @param url the URL string to reconstruct into a URL instance
+     * @return the reconstructed URL instance
+     */
+    public static URL reconstructUrl(final String url) {
+        if (URL_ABOUT_BLANK.toExternalForm().equals(url)) {
+            return URL_ABOUT_BLANK;
+        }
+        else {
+            try {
+                return new URL(url);
+            }
+            catch (final MalformedURLException e) {
+                // Should never happen.
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     /**

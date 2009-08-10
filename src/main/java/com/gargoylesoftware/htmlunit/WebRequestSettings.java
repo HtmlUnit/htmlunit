@@ -25,6 +25,8 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.auth.CredentialsProvider;
 import org.apache.commons.lang.ClassUtils;
 
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
+
 /**
  * Parameter object for making web requests.
  *
@@ -37,7 +39,7 @@ import org.apache.commons.lang.ClassUtils;
 public class WebRequestSettings implements Serializable {
 
     private static final long serialVersionUID = -7405507885099274031L;
-    private URL url_;
+    private String url_; // String instead java.net.URL because "about:blank" URLs don't serialize correctly
     private String proxyHost_;
     private int proxyPort_;
     private HttpMethod httpMethod_ = HttpMethod.GET;
@@ -87,7 +89,7 @@ public class WebRequestSettings implements Serializable {
      * @return the target URL
      */
     public URL getUrl() {
-        return url_;
+        return UrlUtils.reconstructUrl(url_);
     }
 
     /**
@@ -109,7 +111,7 @@ public class WebRequestSettings implements Serializable {
                 url = buildUrlWithNewFile(url, path + query);
             }
         }
-        url_ = url;
+        url_ = url.toExternalForm();
     }
 
     private URL buildUrlWithNewFile(URL url, String newFile) {
@@ -339,9 +341,7 @@ public class WebRequestSettings implements Serializable {
     @Override
     public String toString() {
         final StringBuilder buffer = new StringBuilder();
-
         buffer.append(ClassUtils.getShortClassName(getClass()));
-
         buffer.append("[<");
         buffer.append("url=\"" + url_ + '"');
         buffer.append(", " + httpMethod_);
@@ -350,7 +350,6 @@ public class WebRequestSettings implements Serializable {
         buffer.append(", " + additionalHeaders_);
         buffer.append(", " + credentialsProvider_);
         buffer.append(">]");
-
         return buffer.toString();
     }
 

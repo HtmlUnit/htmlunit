@@ -604,7 +604,6 @@ public class Window2Test extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented
     public void serialization() throws Exception {
         final String html = "<html><head></head><body><iframe></iframe></body></html>";
         final HtmlPage page = loadPageWithAlerts(html);
