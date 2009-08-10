@@ -20,7 +20,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HTMLOListElement extends HTMLElement {
+public class HTMLOListElement extends HTMLListElement {
 
     private static final long serialVersionUID = 5919593872580325038L;
 
