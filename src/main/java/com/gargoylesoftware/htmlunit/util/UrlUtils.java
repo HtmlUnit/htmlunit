@@ -14,10 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
-import static com.gargoylesoftware.htmlunit.WebClient.URL_ABOUT_BLANK;
-
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLStreamHandler;
+
+import com.gargoylesoftware.htmlunit.TextUtil;
+import com.gargoylesoftware.htmlunit.WebAssert;
 
 /**
  * URL utilities class that makes it easy to create new URLs based off of old URLs
@@ -30,6 +32,10 @@ import java.net.URL;
  */
 public final class UrlUtils {
 
+    private static final URLStreamHandler JS_HANDLER = new com.gargoylesoftware.htmlunit.protocol.javascript.Handler();
+    private static final URLStreamHandler ABOUT_HANDLER = new com.gargoylesoftware.htmlunit.protocol.about.Handler();
+    private static final URLStreamHandler DATA_HANDLER = new com.gargoylesoftware.htmlunit.protocol.data.Handler();
+
     /**
      * Disallow instantiation of this class.
      */
@@ -38,25 +44,51 @@ public final class UrlUtils {
     }
 
     /**
-     * Reconstructs a URL instance based on the specified URL string, taking into account the fact
-     * that the specified URL string may represent the <tt>"about:blank"</tt> URL. The caller should
-     * be sure that URL strings passed to this method will parse correctly as URLs, as this method
-     * never expects to have to handle {@link MalformedURLException}s.
-     * @param url the URL string to reconstruct into a URL instance
-     * @return the reconstructed URL instance
+     * <p>Constructs a URL instance based on the specified URL string, taking into account the fact that the
+     * specified URL string may represent an <tt>"about:..."</tt> URL, a <tt>"javascript:..."</tt> URL, or
+     * a <tt>data:...</tt> URL.</p>
+     *
+     * <p>The caller should be sure that URL strings passed to this method will parse correctly as URLs, as
+     * this method never expects to have to handle {@link MalformedURLException}s.</p>
+     *
+     * @param url the URL string to convert into a URL instance
+     * @return the constructed URL instance
      */
-    public static URL reconstructUrl(final String url) {
-        if (URL_ABOUT_BLANK.toExternalForm().equals(url)) {
-            return URL_ABOUT_BLANK;
+    public static URL toUrlSafe(final String url) {
+        try {
+            return toUrlUnsafe(url);
+        }
+        catch (final MalformedURLException e) {
+            // Should never happen.
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * <p>Constructs a URL instance based on the specified URL string, taking into account the fact that the
+     * specified URL string may represent an <tt>"about:..."</tt> URL, a <tt>"javascript:..."</tt> URL, or
+     * a <tt>data:...</tt> URL.</p>
+     *
+     * <p>Unlike {@link #toUrlSafe(String)}, the caller need not be sure that URL strings passed to this
+     * method will parse correctly as URLs.</p>
+     *
+     * @param url the URL string to convert into a URL instance
+     * @return the constructed URL instance
+     * @throws MalformedURLException if the URL string cannot be converted to a URL instance
+     */
+    public static URL toUrlUnsafe(final String url) throws MalformedURLException {
+        WebAssert.notNull("url", url);
+        if (TextUtil.startsWithIgnoreCase(url, "javascript:")) {
+            return new URL(null, url, JS_HANDLER);
+        }
+        else if (TextUtil.startsWithIgnoreCase(url, "about:")) {
+            return new URL(null, url, ABOUT_HANDLER);
+        }
+        else if (TextUtil.startsWithIgnoreCase(url, "data:")) {
+            return new URL(null, url, DATA_HANDLER);
         }
         else {
-            try {
-                return new URL(url);
-            }
-            catch (final MalformedURLException e) {
-                // Should never happen.
-                throw new RuntimeException(e);
-            }
+            return new URL(url);
         }
     }
 

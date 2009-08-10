@@ -26,7 +26,6 @@ import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.URLStreamHandler;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -155,26 +154,8 @@ public class WebClient implements Serializable {
     private OnbeforeunloadHandler onbeforeunloadHandler_;
     private Cache cache_ = new Cache();
 
-    private static URLStreamHandler JavaScriptUrlStreamHandler_
-        = new com.gargoylesoftware.htmlunit.protocol.javascript.Handler();
-    private static URLStreamHandler AboutUrlStreamHandler_
-        = new com.gargoylesoftware.htmlunit.protocol.about.Handler();
-    private static URLStreamHandler DataUrlStreamHandler_
-        = new com.gargoylesoftware.htmlunit.protocol.data.Handler();
-
     /** URL for "about:blank". */
-    public static final URL URL_ABOUT_BLANK;
-    static {
-        URL tmpUrl = null;
-        try {
-            tmpUrl = new URL(null, "about:blank", AboutUrlStreamHandler_);
-        }
-        catch (final MalformedURLException e) {
-            // impossible
-            e.printStackTrace();
-        }
-        URL_ABOUT_BLANK = tmpUrl;
-    }
+    public static final URL URL_ABOUT_BLANK = UrlUtils.toUrlSafe("about:blank");
 
     /** Singleton {@link WebResponse} for "about:blank". */
     private static final WebResponse WEB_RESPONSE_FOR_ABOUT_BLANK = new StringWebResponse("", URL_ABOUT_BLANK);
@@ -385,7 +366,7 @@ public class WebClient implements Serializable {
     @SuppressWarnings("unchecked")
     public <P extends Page> P getPage(final String url) throws IOException, FailingHttpStatusCodeException,
         MalformedURLException {
-        return (P) getPage(makeUrl(url));
+        return (P) getPage(UrlUtils.toUrlUnsafe(url));
     }
 
     /**
@@ -1192,23 +1173,6 @@ public class WebClient implements Serializable {
         return LogFactory.getLog(getClass());
     }
 
-    private static URL makeUrl(final String urlString) throws MalformedURLException {
-        WebAssert.notNull("urlString", urlString);
-
-        if (TextUtil.startsWithIgnoreCase(urlString, "javascript:")) {
-            return new URL(null, urlString, JavaScriptUrlStreamHandler_);
-        }
-        else if (TextUtil.startsWithIgnoreCase(urlString, "about:")) {
-            return new URL(null, urlString, AboutUrlStreamHandler_);
-        }
-        else if (TextUtil.startsWithIgnoreCase(urlString, "data:")) {
-            return new URL(null, urlString, DataUrlStreamHandler_);
-        }
-        else {
-            return new URL(urlString);
-        }
-    }
-
     /**
      * Expands a relative URL relative to the specified base. In most situations
      * this is the same as <code>new URL(baseUrl, relativeUrl)</code> but
@@ -1223,8 +1187,7 @@ public class WebClient implements Serializable {
      */
     public static URL expandUrl(final URL baseUrl, final String relativeUrl) throws MalformedURLException {
         final String newUrl = UrlUtils.resolveUrl(baseUrl, relativeUrl);
-
-        return makeUrl(newUrl);
+        return UrlUtils.toUrlUnsafe(newUrl);
     }
 
     private WebResponse makeWebResponseForDataUrl(final WebRequestSettings webRequestSettings) throws IOException {

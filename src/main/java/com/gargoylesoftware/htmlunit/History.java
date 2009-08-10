@@ -92,7 +92,7 @@ public class History implements Serializable {
      */
     public URL getUrl(final int index) {
         if (index >= 0 && index < urls_.size()) {
-            return UrlUtils.reconstructUrl(urls_.get(index));
+            return UrlUtils.toUrlSafe(urls_.get(index));
         }
         return null;
     }
@@ -168,7 +168,7 @@ public class History implements Serializable {
      * @throws IOException if an IO error occurs
      */
     private void goToUrlAtCurrentIndex() throws IOException {
-        final URL url = UrlUtils.reconstructUrl(urls_.get(index_));
+        final URL url = UrlUtils.toUrlSafe(urls_.get(index_));
         final WebRequestSettings wrs = new WebRequestSettings(url);
         final Boolean old = ignoreNewPages_.get();
         try {

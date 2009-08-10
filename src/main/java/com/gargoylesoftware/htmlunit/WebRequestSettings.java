@@ -89,7 +89,7 @@ public class WebRequestSettings implements Serializable {
      * @return the target URL
      */
     public URL getUrl() {
-        return UrlUtils.reconstructUrl(url_);
+        return UrlUtils.toUrlSafe(url_);
     }
 
     /**
@@ -110,8 +110,11 @@ public class WebRequestSettings implements Serializable {
                 path = path.replaceAll("/./", "/");
                 url = buildUrlWithNewFile(url, path + query);
             }
+            url_ = url.toExternalForm();
         }
-        url_ = url.toExternalForm();
+        else {
+            url_ = null;
+        }
     }
 
     private URL buildUrlWithNewFile(URL url, String newFile) {
