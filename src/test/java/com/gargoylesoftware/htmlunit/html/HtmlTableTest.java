@@ -364,6 +364,7 @@ public class HtmlTableTest extends WebTestCase {
         final String html = "<html><head>\n"
             + "</head><body>\n"
             + "  <table id='myId'>\n"
+            + "  <caption>This is the caption</caption>\n"
             + "  <tr>\n"
             + "  <td>cell 1,1</td>\n"
             + "  <td>cell 1,2</td>\n"
@@ -377,7 +378,8 @@ public class HtmlTableTest extends WebTestCase {
 
         final HtmlPage page = loadPage(html);
         final HtmlElement table = page.getHtmlElementById("myId");
-        final String expectedText = "cell 1,1\tcell 1,2" + LINE_SEPARATOR
+        final String expectedText = "This is the caption" + LINE_SEPARATOR
+            + "cell 1,1\tcell 1,2" + LINE_SEPARATOR
             + "cell 2,1\tcell 2,2";
 
         assertEquals(expectedText, table.asText());
