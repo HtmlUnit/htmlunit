@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
+import static com.gargoylesoftware.htmlunit.WebClient.URL_ABOUT_BLANK;
+import static org.apache.commons.lang.StringUtils.equalsIgnoreCase;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLStreamHandler;
@@ -82,7 +85,12 @@ public final class UrlUtils {
             return new URL(null, url, JS_HANDLER);
         }
         else if (TextUtil.startsWithIgnoreCase(url, "about:")) {
-            return new URL(null, url, ABOUT_HANDLER);
+            if (URL_ABOUT_BLANK != null && equalsIgnoreCase(URL_ABOUT_BLANK.toExternalForm(), url)) {
+                return URL_ABOUT_BLANK;
+            }
+            else {
+                return new URL(null, url, ABOUT_HANDLER);
+            }
         }
         else if (TextUtil.startsWithIgnoreCase(url, "data:")) {
             return new URL(null, url, DATA_HANDLER);
