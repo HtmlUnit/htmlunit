@@ -73,10 +73,15 @@ public class HtmlImageInput extends HtmlInput {
         }
 
         if (wasPositionSpecified_) {
-            return new NameValuePair[]{
-                new NameValuePair(prefix + 'x', String.valueOf(xPosition_)),
-                new NameValuePair(prefix + 'y', String.valueOf(yPosition_))
-            };
+            final NameValuePair valueX = new NameValuePair(prefix + 'x', String.valueOf(xPosition_));
+            final NameValuePair valueY = new NameValuePair(prefix + 'y', String.valueOf(yPosition_));
+            if (prefix.length() > 0 && getPage().getWebClient().getBrowserVersion().isFirefox()) {
+                return new NameValuePair[] {valueX, valueY,
+                    new NameValuePair(getNameAttribute(), getValueAttribute()) };
+            }
+            else {
+                return new NameValuePair[] {valueX, valueY};
+            }
         }
         return new NameValuePair[]{new NameValuePair(getNameAttribute(), getValueAttribute())};
     }
@@ -120,6 +125,7 @@ public class HtmlImageInput extends HtmlInput {
      * Simulate clicking this input with a pointing device. The x and y coordinates
      * of the pointing device will be sent to the server.
      *
+     * @param <P> the page type
      * @param x the x coordinate of the pointing device at the time of clicking
      * @param y the y coordinate of the pointing device at the time of clicking
      * @return the page that is loaded after the click has taken place
@@ -127,7 +133,7 @@ public class HtmlImageInput extends HtmlInput {
      * @exception ElementNotFoundException If a particular XML element could not be found in the DOM model
      */
     @Override
-    public Page click(final int x, final int y) throws IOException, ElementNotFoundException {
+    public <P extends Page> P click(final int x, final int y) throws IOException, ElementNotFoundException {
         wasPositionSpecified_ = true;
         xPosition_ = x;
         yPosition_ = y;

@@ -6,7 +6,10 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
-            <action type="add" dev="mguillem" issue="2833588">
+            <action type="fix" dev="mguillem">
+                Submit image button name too (FF only).
+            </action>
+            <action type="fix" dev="mguillem" issue="2833588">
                 Include caption in HtmlTable's asText() representation.
             </action>
             <action type="fix" dev="asashour">

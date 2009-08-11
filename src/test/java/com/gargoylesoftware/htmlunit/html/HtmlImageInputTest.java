@@ -60,10 +60,12 @@ public class HtmlImageInputTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) imageInput.click();
         assertNotNull(secondPage);
 
-        final List<NameValuePair> expectedPairs = Arrays.asList(new NameValuePair[]{
-            new NameValuePair("button.x", "0"),
-            new NameValuePair("button.y", "0")
-        });
+        final List<NameValuePair> expectedPairs = new ArrayList<NameValuePair>();
+        expectedPairs.add(new NameValuePair("button.x", "0"));
+        expectedPairs.add(new NameValuePair("button.y", "0"));
+        if (getBrowserVersion().isFirefox()) {
+            expectedPairs.add(new NameValuePair("button", "foo"));
+        }
 
         assertEquals(
             expectedPairs,
@@ -91,10 +93,12 @@ public class HtmlImageInputTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) imageInput.click(100, 200);
         assertNotNull(secondPage);
 
-        final List<NameValuePair> expectedPairs = Arrays.asList(new NameValuePair[]{
-            new NameValuePair("button.x", "100"),
-            new NameValuePair("button.y", "200")
-        });
+        final List<NameValuePair> expectedPairs = new ArrayList<NameValuePair>();
+        expectedPairs.add(new NameValuePair("button.x", "100"));
+        expectedPairs.add(new NameValuePair("button.y", "200"));
+        if (getBrowserVersion().isFirefox()) {
+            expectedPairs.add(new NameValuePair("button", "foo"));
+        }
 
         assertEquals(
             expectedPairs,
