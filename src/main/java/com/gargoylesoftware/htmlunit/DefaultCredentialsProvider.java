@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
@@ -46,8 +49,8 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
 
     private static final long serialVersionUID = 1036331144926557053L;
 
-    private final Map<AuthScope, Credentials> credentials_ = new HashMap<AuthScope, Credentials>();
-    private final Map<AuthScope, Credentials> proxyCredentials_ = new HashMap<AuthScope, Credentials>();
+    private final Map<AuthScopeProxy, Credentials> credentials_ = new HashMap<AuthScopeProxy, Credentials>();
+    private final Map<AuthScopeProxy, Credentials> proxyCredentials_ = new HashMap<AuthScopeProxy, Credentials>();
     private final Set<Object> answerMarks_ = Collections.synchronizedSortedSet(new TreeSet<Object>());
 
     /**
@@ -82,8 +85,8 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      */
     public void addCredentials(final String username, final String password, final String host,
             final int port, final String realm) {
-        final AuthScope scope = new AuthScope(host, port, realm, AuthScope.ANY_SCHEME);
-        final Credentials c = new UsernamePasswordCredentials(username, password);
+        final AuthScopeProxy scope = new AuthScopeProxy(host, port, realm, AuthScope.ANY_SCHEME);
+        final Credentials c = new UsernamePasswordCredentialsExt(username, password);
         credentials_.put(scope, c);
         clearAnswered(); // don't need to be precise, will cause in worst case one extra request
     }
@@ -105,8 +108,8 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * @param port the port to which to the new credentials apply (negative if applicable to any port)
      */
     public void addProxyCredentials(final String username, final String password, final String host, final int port) {
-        final AuthScope scope = new AuthScope(host, port, AuthScope.ANY_REALM, AuthScope.ANY_SCHEME);
-        final Credentials c = new UsernamePasswordCredentials(username, password);
+        final AuthScopeProxy scope = new AuthScopeProxy(host, port, AuthScope.ANY_REALM, AuthScope.ANY_SCHEME);
+        final Credentials c = new UsernamePasswordCredentialsExt(username, password);
         proxyCredentials_.put(scope, c);
         clearAnswered(); // don't need to be precise, will cause in worst case one extra request
     }
@@ -124,8 +127,8 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      */
     public void addNTLMCredentials(final String username, final String password, final String host,
             final int port, final String clientHost, final String clientDomain) {
-        final AuthScope scope = new AuthScope(host, port, AuthScope.ANY_REALM, AuthScope.ANY_SCHEME);
-        final Credentials c = new NTCredentials(username, password, clientHost, clientDomain);
+        final AuthScopeProxy scope = new AuthScopeProxy(host, port, AuthScope.ANY_REALM, AuthScope.ANY_SCHEME);
+        final Credentials c = new NTCredentialsExt(username, password, clientHost, clientDomain);
         credentials_.put(scope, c);
         clearAnswered(); // don't need to be precise, will cause in worst case one extra request
     }
@@ -143,8 +146,8 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      */
     public void addNTLMProxyCredentials(final String username, final String password, final String host,
             final int port, final String clientHost, final String clientDomain) {
-        final AuthScope scope = new AuthScope(host, port, AuthScope.ANY_REALM, AuthScope.ANY_SCHEME);
-        final Credentials c = new NTCredentials(username, password, clientHost, clientDomain);
+        final AuthScopeProxy scope = new AuthScopeProxy(host, port, AuthScope.ANY_REALM, AuthScope.ANY_SCHEME);
+        final Credentials c = new NTCredentialsExt(username, password, clientHost, clientDomain);
         proxyCredentials_.put(scope, c);
         clearAnswered(); // don't need to be precise, will cause in worst case one extra request
     }
@@ -163,16 +166,15 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     public Credentials getCredentials(final AuthScheme scheme, final String host, final int port, final boolean proxy)
         throws CredentialsNotAvailableException {
 
-        // it's the responsibility of the CredentialProvider to answer only once with a given Credentials
-        // to avoid infinite loop if it is incorrect
+        // It's the responsibility of the CredentialProvider to answer only once with a
+        // given Credentials to avoid infinite loop if it is incorrect:
         // see http://issues.apache.org/bugzilla/show_bug.cgi?id=8140
         if (alreadyAnswered(scheme, host, port, proxy)) {
-            getLog().debug("Already answered for " + buildKey(scheme, host, port, proxy)
-                    + " returning null");
+            getLog().debug("Already answered for " + buildKey(scheme, host, port, proxy) + ", returning null");
             return null;
         }
 
-        final Map<AuthScope, Credentials> credentials;
+        final Map<AuthScopeProxy, Credentials> credentials;
         if (proxy) {
             credentials = proxyCredentials_;
         }
@@ -180,12 +182,11 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
             credentials = credentials_;
         }
 
-        for (final Map.Entry<AuthScope, Credentials> entry : credentials.entrySet()) {
-            final AuthScope scope = entry.getKey();
+        for (final Map.Entry<AuthScopeProxy, Credentials> entry : credentials.entrySet()) {
+            final AuthScope scope = entry.getKey().getAuthScope();
             final Credentials c = entry.getValue();
             if (matchScheme(scope, scheme) && matchHost(scope, host)
-                    && matchPort(scope, port) && matchRealm(scope, scheme)) {
-
+                && matchPort(scope, port) && matchRealm(scope, scheme)) {
                 markAsAnswered(scheme, host, port, proxy);
                 getLog().debug("Returning " + c + " for " + buildKey(scheme, host, port, proxy));
                 return c;
@@ -233,7 +234,8 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     }
 
     /**
-     * Indicates if this provider has already provided an answer for this (scheme, host, port, proxy).
+     * Returns <tt>true</tt> if this provider has already provided an answer for the
+     * specified (scheme, host, port, proxy) combination.
      * @param scheme the scheme
      * @param host the server name
      * @param port the server port
@@ -245,6 +247,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     }
 
     /**
+     * Marks the specified (scheme, host, port, proxy) combination as having already been processed.
      * @param scheme the scheme
      * @param host the server name
      * @param port the server port
@@ -276,10 +279,100 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
 
     /**
      * Returns the log object for this class.
-     * @return the log object
+     * @return the log object for this class
      */
     protected final Log getLog() {
         return LogFactory.getLog(getClass());
+    }
+
+    /**
+     * Clears the cache of answered credentials requests upon deserialization.
+     * @param stream the object stream containing the instance being deserialized
+     * @throws IOException if an IO error occurs
+     * @throws ClassNotFoundException if the class of a serialized object cannot be found
+     */
+    private void readObject(final ObjectInputStream stream) throws IOException, ClassNotFoundException {
+        stream.defaultReadObject();
+        answerMarks_.clear();
+    }
+
+    /**
+     * We have to wrap {@link AuthScope} instances in a serializable proxy so that the
+     * {@link DefaultCredentialsProvider} class can be serialized correctly.
+     */
+    private static class AuthScopeProxy implements Serializable {
+        private static final long serialVersionUID = 1464373861677912537L;
+        private AuthScope authScope_;
+        public AuthScopeProxy(final String host, final int port, final String realm, final String scheme) {
+            authScope_ = new AuthScope(host, port, realm, scheme);
+        }
+        public AuthScope getAuthScope() {
+            return authScope_;
+        }
+        private void writeObject(final ObjectOutputStream stream) throws IOException {
+            stream.writeObject(authScope_.getHost());
+            stream.writeInt(authScope_.getPort());
+            stream.writeObject(authScope_.getRealm());
+            stream.writeObject(authScope_.getScheme());
+        }
+        private void readObject(final ObjectInputStream stream) throws IOException, ClassNotFoundException {
+            final String host = (String) stream.readObject();
+            final int port = stream.readInt();
+            final String realm = (String) stream.readObject();
+            final String scheme = (String) stream.readObject();
+            authScope_ = new AuthScope(host, port, realm, scheme);
+        }
+    }
+
+    /**
+     * We have to extend {@link UsernamePasswordCredentials} so that the
+     * {@link DefaultCredentialsProvider} class can be serialized correctly.
+     */
+    private static class UsernamePasswordCredentialsExt
+        extends UsernamePasswordCredentials implements Serializable {
+        private static final long serialVersionUID = 6578356387067132849L;
+        public UsernamePasswordCredentialsExt(final String username, final String password) {
+            super(username, password);
+        }
+        private void writeObject(final ObjectOutputStream stream) throws IOException {
+            stream.writeObject(this.getUserName());
+            stream.writeObject(this.getPassword());
+        }
+        @SuppressWarnings("deprecation")
+        private void readObject(final ObjectInputStream stream) throws IOException, ClassNotFoundException {
+            final String username = (String) stream.readObject();
+            final String password = (String) stream.readObject();
+            this.setUserName(username);
+            this.setPassword(password);
+        }
+    }
+
+    /**
+     * We have to extend {@link NTCredentials} so that the
+     * {@link DefaultCredentialsProvider} class can be serialized correctly.
+     */
+    private static class NTCredentialsExt extends NTCredentials implements Serializable {
+        private static final long serialVersionUID = 1390068355010421017L;
+        public NTCredentialsExt(final String username, final String password, final String host, final String domain) {
+            super(username, password, host, domain);
+        }
+        private void writeObject(final ObjectOutputStream stream) throws IOException {
+            stream.writeObject(this.getUserName());
+            stream.writeObject(this.getPassword());
+            stream.writeObject(this.getHost());
+            stream.writeObject(this.getDomain());
+        }
+        @SuppressWarnings("deprecation")
+        private void readObject(final ObjectInputStream stream) throws IOException, ClassNotFoundException {
+            final String username = (String) stream.readObject();
+            final String password = (String) stream.readObject();
+            final String host = (String) stream.readObject();
+            final String domain = (String) stream.readObject();
+            this.setUserName(username);
+            this.setPassword(password);
+            this.setHost(host);
+            this.setDomain(domain);
+        }
     }
 
 }

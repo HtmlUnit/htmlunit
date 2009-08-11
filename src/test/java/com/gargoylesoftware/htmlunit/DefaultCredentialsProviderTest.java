@@ -19,6 +19,7 @@ import static org.junit.Assert.assertNotNull;
 import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.NTCredentials;
 import org.apache.commons.httpclient.auth.NTLMScheme;
+import org.apache.commons.lang.SerializationUtils;
 import org.junit.Test;
 
 /**
@@ -34,8 +35,8 @@ public class DefaultCredentialsProviderTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAddNTLMCredentials() throws Exception {
-        final String userName = "foo";
+    public void addNTLMCredentials() throws Exception {
+        final String username = "foo";
         final String domain = "myDomain";
         final String password = "password";
         final String host = "my.host";
@@ -43,16 +44,51 @@ public class DefaultCredentialsProviderTest extends WebTestCase {
         final int port = 1234;
 
         final DefaultCredentialsProvider provider = new DefaultCredentialsProvider();
-        provider.addNTLMCredentials(userName, password, host, port, clientHost, domain);
+        provider.addNTLMCredentials(username, password, host, port, clientHost, domain);
 
         final NTLMScheme scheme = new NTLMScheme("NTLM");
         final Credentials credentials = provider.getCredentials(scheme, host, port, false);
         assertNotNull(credentials);
         assertTrue(NTCredentials.class.isInstance(credentials));
+
         final NTCredentials ntCredentials = (NTCredentials) credentials;
-        assertEquals(userName, ntCredentials.getUserName());
+        assertEquals(username, ntCredentials.getUserName());
         assertEquals(password, ntCredentials.getPassword());
         assertEquals(clientHost, ntCredentials.getHost());
         assertEquals(domain, ntCredentials.getDomain());
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void serialization() throws Exception {
+        final String username = "foo";
+        final String password = "password";
+        final String host = "my.host";
+        final int port = 1234;
+        final String realm = "blah";
+        final String clientDomain = "myDomain";
+        final String clientHost = "client.host";
+        final NTLMScheme scheme = new NTLMScheme("NTLM");
+
+        DefaultCredentialsProvider provider = new DefaultCredentialsProvider();
+        provider.addCredentials(username, password, host, port, realm);
+        provider.addProxyCredentials(username, password, clientHost, port);
+        provider.addNTLMCredentials(username, password, host, port, clientHost, clientDomain);
+        provider.addNTLMProxyCredentials(username, password, host, port, clientHost, clientDomain);
+
+        assertNotNull(provider.getCredentials(scheme, host, port, false));
+        assertNull(provider.getCredentials(scheme, "invalidHost", port, false));
+        assertNotNull(provider.getCredentials(scheme, host, port, true));
+        assertNull(provider.getCredentials(scheme, "invalidHost", port, true));
+
+        provider = (DefaultCredentialsProvider) SerializationUtils.clone(provider);
+
+        assertNotNull(provider.getCredentials(scheme, host, port, false));
+        assertNull(provider.getCredentials(scheme, "invalidHost", port, false));
+        assertNotNull(provider.getCredentials(scheme, host, port, true));
+        assertNull(provider.getCredentials(scheme, "invalidHost", port, true));
+    }
+
 }
