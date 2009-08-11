@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="fix" dev="asashour">
+                Fix DomNode.compareDocumentPosition() (FF only).
+            </action>
             <action type="add" dev="sdanig">
                 JavaScript: add support for the compact attribute on ul, ol, menu, dl and dir elements.
             </action>

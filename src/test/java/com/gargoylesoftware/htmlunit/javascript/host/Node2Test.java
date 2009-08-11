@@ -73,4 +73,25 @@ public class Node2Test extends WebDriverTestCase {
             + "</script></head><body onload='test()'></body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "0", "16" }, IE = "exception")
+    public void compareDocumentPosition() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var div = document.createElement('div');\n"
+            + "    var childDiv = document.createElement('div');\n"
+            + "    try {\n"
+            + "      alert(div.compareDocumentPosition(childDiv) & Node.DOCUMENT_POSITION_CONTAINED_BY);\n"
+            + "      div.appendChild(childDiv);\n"
+            + "      alert(div.compareDocumentPosition(childDiv) & Node.DOCUMENT_POSITION_CONTAINED_BY);\n"
+            + "    } catch(e) {alert('exception');}\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

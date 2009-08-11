@@ -31,7 +31,6 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLSerializer;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -697,13 +696,13 @@ public class Node extends SimpleScriptable {
 
     /**
      * Compares the positions of this node and the provided node within the document.
-     * @param element element object that specifies the element to check
+     * @param node node object that specifies the node to check
      * @return how the node is positioned relatively to the reference node.
      * @see <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#Node3-compareDocumentPosition">DOM level 3</a>
      * @see org.w3c.dom.Node#compareDocumentPosition(org.w3c.dom.Node)
      */
-    public short jsxFunction_compareDocumentPosition(final HTMLElement element) {
-        return getDomNodeOrDie().compareDocumentPosition(element.getDomNodeOrDie());
+    public short jsxFunction_compareDocumentPosition(final Node node) {
+        return getDomNodeOrDie().compareDocumentPosition(node.getDomNodeOrDie());
     }
 
     /**
