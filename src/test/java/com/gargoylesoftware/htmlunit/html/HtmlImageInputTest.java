@@ -22,7 +22,9 @@ import java.util.List;
 
 import org.apache.commons.httpclient.NameValuePair;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
@@ -34,6 +36,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class HtmlImageInputTest extends WebTestCase {
 
     /**
@@ -48,7 +51,7 @@ public class HtmlImageInputTest extends WebTestCase {
             + "<input type='image' name='button' value='foo'/>\n"
             + "<input type='image' name='anotherButton' value='foo'/>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPageWithAlerts(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
         final HtmlForm form = page.getHtmlElementById("form1");
@@ -72,14 +75,14 @@ public class HtmlImageInputTest extends WebTestCase {
      */
     @Test
     public void testClick_WithPosition() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
             + "<input type='image' name='aButton' value='foo'/>\n"
             + "<input type='image' name='button' value='foo'/>\n"
             + "<input type='image' name='anotherButton' value='foo'/>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPageWithAlerts(html);
         final MockWebConnection webConnection = getMockConnection(page);
 
         final HtmlForm form = page.getHtmlElementById("form1");
@@ -105,12 +108,12 @@ public class HtmlImageInputTest extends WebTestCase {
      */
     @Test
     public void testNoNameClick_WithPosition() throws Exception {
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
             + "<input type='image' value='foo'/>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPageWithAlerts(html);
         final MockWebConnection webConnection = getMockConnection(page);
 
         final HtmlForm form = page.getHtmlElementById("form1");
@@ -142,7 +145,7 @@ public class HtmlImageInputTest extends WebTestCase {
 
         final String[] expectedAlerts = {"1"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(html, collectedAlerts);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
         final HtmlImageInput input = page.getHtmlElementById("myInput");
         input.click();
 
@@ -158,7 +161,7 @@ public class HtmlImageInputTest extends WebTestCase {
         final String s = "<html><body><input type='image' src='x.png' id='i' onmousedown='alert(1)'></body></html>";
         final String[] expectedAlerts = {"1"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(s, collectedAlerts);
+        final HtmlPage page = loadPage(getBrowserVersion(), s, collectedAlerts);
         page.<HtmlElement>getHtmlElementById("i").click();
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -172,7 +175,7 @@ public class HtmlImageInputTest extends WebTestCase {
         final String s = "<html><body><input type='image' src='x.png' id='i' onmouseup='alert(1)'></body></html>";
         final String[] expectedAlerts = {"1"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(s, collectedAlerts);
+        final HtmlPage page = loadPage(getBrowserVersion(), s, collectedAlerts);
         page.<HtmlElement>getHtmlElementById("i").click();
         assertEquals(expectedAlerts, collectedAlerts);
     }
