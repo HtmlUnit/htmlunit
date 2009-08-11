@@ -613,14 +613,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             final String xpath = ".//*[(name() = 'frame' or name() = 'iframe')]";
             final HtmlPage page = (HtmlPage) getWebWindow().getEnclosedPage();
             frames_ = new HTMLCollection(this);
-            final Transformer toEnclosedWindow = new Transformer() {
-                public Object transform(final Object obj) {
-                    if (obj instanceof BaseFrame) {
-                        return ((BaseFrame) obj).getEnclosedWindow();
-                    }
-                    return ((FrameWindow) obj).getFrameElement().getEnclosedWindow();
-                }
-            };
+            final Transformer toEnclosedWindow = new FrameToWindowTransformer();
             frames_.init(page, xpath, toEnclosedWindow);
         }
 
@@ -1329,6 +1322,24 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
+     * Gets the controllers. The result doesn't currently matter but it is important to return an
+     * object as some JavaScript libraries check it.
+     * @see <a href="https://developer.mozilla.org/En/DOM/Window.controllers">Mozilla documentation</a>
+     * @return some object
+     */
+    public Object jsxGet_controllers() {
+        return controllers_;
+    }
+
+    /**
+     * Sets the controllers.
+     * @param value the new value
+     */
+    public void jsxSet_controllers(final Object value) {
+        controllers_ = value;
+    }
+
+    /**
      * <p>Listens for changes anywhere in the document and evicts cached computed styles whenever something relevant
      * changes. Note that the very lazy way of doing this (completely clearing the cache every time something happens)
      * results in very meager performance gains. In order to get good (but still correct) performance, we need to be
@@ -1435,21 +1446,16 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Gets the controllers. The result doesn't currently matter but it is important to return an
-     * object as some JavaScript libraries check it.
-     * @see <a href="https://developer.mozilla.org/En/DOM/Window.controllers">Mozilla documentation</a>
-     * @return some object
+     * Transforms frames to windows.
      */
-    public Object jsxGet_controllers() {
-        return controllers_;
-    }
-
-    /**
-     * Sets the controllers.
-     * @param value the new value
-     */
-    public void jsxSet_controllers(final Object value) {
-        controllers_ = value;
+    private static class FrameToWindowTransformer implements Transformer, Serializable {
+        private static final long serialVersionUID = -8504605115217901029L;
+        public Object transform(final Object obj) {
+            if (obj instanceof BaseFrame) {
+                return ((BaseFrame) obj).getEnclosedWindow();
+            }
+            return ((FrameWindow) obj).getFrameElement().getEnclosedWindow();
+        }
     }
 
 }
