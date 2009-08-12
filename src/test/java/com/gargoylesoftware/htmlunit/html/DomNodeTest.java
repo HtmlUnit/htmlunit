@@ -20,6 +20,7 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.SerializationUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.xml.sax.helpers.AttributesImpl;
@@ -455,13 +456,12 @@ public class DomNodeTest extends WebTestCase {
     }
 
     static class DomChangeListenerTestImpl implements DomChangeListener {
+        private static final long serialVersionUID = 2228905954098558835L;
         private final List<String> collectedValues_ = new ArrayList<String>();
-        @Test
         public void nodeAdded(final DomChangeEvent event) {
             collectedValues_.add("nodeAdded: " + event.getParentNode().getNodeName() + ','
                     + event.getChangedNode().getNodeName());
         }
-        @Test
         public void nodeDeleted(final DomChangeEvent event) {
             collectedValues_.add("nodeDeleted: " + event.getParentNode().getNodeName() + ','
                     + event.getChangedNode().getNodeName());
@@ -591,14 +591,14 @@ public class DomNodeTest extends WebTestCase {
 
         final List<String> l = new ArrayList<String>();
         final DomChangeListener listener2 = new DomChangeListenerTestImpl() {
-            @Test
+            private static final long serialVersionUID = 5171149877443701905L;
             @Override
             public void nodeAdded(final DomChangeEvent event) {
                 l.add("in listener 2");
             }
         };
         final DomChangeListener listener1 = new DomChangeListenerTestImpl() {
-            @Test
+            private static final long serialVersionUID = -4088677323425875498L;
             @Override
             public void nodeAdded(final DomChangeEvent event) {
                 l.add("in listener 1");
@@ -684,6 +684,19 @@ public class DomNodeTest extends WebTestCase {
             assertEquals(1, foundElements.size());
             assertSame(element, foundElements.get(0));
         }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void serialization() throws Exception {
+        final String html = "<html><head></head><body></body></html>";
+        final DomChangeListenerTestImpl listener = new DomChangeListenerTestImpl();
+        HtmlPage page = loadPage(html);
+        page.addDomChangeListener(listener);
+        page = (HtmlPage) SerializationUtils.clone(page);
+        page.removeDomChangeListener(listener);
     }
 
 }

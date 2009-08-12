@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.Serializable;
+
 /**
  * Implementations of this interface receive notifications of changes to the DOM structure.
  *
@@ -21,7 +23,7 @@ package com.gargoylesoftware.htmlunit.html;
  * @author Ahmed Ashour
  * @see DomChangeEvent
  */
-public interface DomChangeListener {
+public interface DomChangeListener extends Serializable {
 
     /**
      * Notification that a new node was added. Called after the node is added.
