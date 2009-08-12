@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.BufferedReader;
@@ -77,25 +76,23 @@ public class CodeStyleTest {
             if (file.isDirectory() && !file.getName().equals(".svn")) {
                 process(file);
             }
-            else {
-                if (file.getName().endsWith(".java")) {
-                    final List<String> lines = getLines(file);
-                    final String relativePath = file.getAbsolutePath().substring(
-                        new File(".").getAbsolutePath().length() - 1);
-                    openingCurlyBracket(lines, relativePath);
-                    year(lines, relativePath);
-                    javaDocFirstLine(lines, relativePath);
-                    methodFirstLine(lines, relativePath);
-                    methodLastLine(lines, relativePath);
-                    lineBetweenMethods(lines, relativePath);
-                    svnProperties(file, relativePath);
-                    runWith(lines, relativePath);
-                    twoEmptyLines(lines, relativePath);
-                    vs85aspx(lines, relativePath);
-                    deprecated(lines, relativePath);
-                    staticJSMethod(lines, relativePath);
-                    singleAlert(lines, relativePath);
-                }
+            else if (file.getName().endsWith(".java")) {
+                final List<String> lines = getLines(file);
+                final String relativePath = file.getAbsolutePath().substring(
+                                new File(".").getAbsolutePath().length() - 1);
+                openingCurlyBracket(lines, relativePath);
+                year(lines, relativePath);
+                javaDocFirstLine(lines, relativePath);
+                methodFirstLine(lines, relativePath);
+                methodLastLine(lines, relativePath);
+                lineBetweenMethods(lines, relativePath);
+                svnProperties(file, relativePath);
+                runWith(lines, relativePath);
+                twoEmptyLines(lines, relativePath);
+                vs85aspx(lines, relativePath);
+                deprecated(lines, relativePath);
+                staticJSMethod(lines, relativePath);
+                singleAlert(lines, relativePath);
             }
         }
     }
@@ -117,8 +114,9 @@ public class CodeStyleTest {
      * Checks the year in the source.
      */
     private void year(final List<String> lines, final String path) {
-        assertTrue("Incorrect year in " + path, lines.get(1).contains("Copyright (c) 2002-"
-            + Calendar.getInstance().get(Calendar.YEAR)));
+        if (!lines.get(1).contains("Copyright (c) 2002-" + Calendar.getInstance().get(Calendar.YEAR))) {
+            addFailure("Incorrect year in " + path);
+        }
     }
 
     /**
@@ -315,8 +313,9 @@ public class CodeStyleTest {
      */
     private void licenseYear() throws IOException {
         final List<String> lines = getLines(new File("LICENSE.txt"));
-        assertTrue("Incorrect year in LICENSE.txt", lines.get(1).contains("Copyright (c) 2002-"
-                + Calendar.getInstance().get(Calendar.YEAR)));
+        if (!lines.get(1).contains("Copyright (c) 2002-" + Calendar.getInstance().get(Calendar.YEAR))) {
+            addFailure("Incorrect year in LICENSE.txt");
+        }
     }
 
     /**
@@ -454,4 +453,5 @@ public class CodeStyleTest {
             i++;
         }
     }
+
 }
