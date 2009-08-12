@@ -405,15 +405,12 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             }
         });
         parser.setErrorHandler(new ErrorHandler() {
-            @Test
             public void warning(final SAXParseException exception) throws SAXException {
                 throw exception;
             }
-            @Test
             public void error(final SAXParseException exception) throws SAXException {
                 throw exception;
             }
-            @Test
             public void fatalError(final SAXParseException exception) throws SAXException {
                 throw exception;
             }

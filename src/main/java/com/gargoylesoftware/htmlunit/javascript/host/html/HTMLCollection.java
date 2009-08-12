@@ -42,7 +42,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
-import com.gargoylesoftware.htmlunit.html.NonSerializable;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
@@ -608,8 +607,9 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         return idList.toArray();
     }
 
-    private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener,
-        NonSerializable {
+    private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener {
+
+        private static final long serialVersionUID = -6690451155079053212L;
 
         /**
          * {@inheritDoc}

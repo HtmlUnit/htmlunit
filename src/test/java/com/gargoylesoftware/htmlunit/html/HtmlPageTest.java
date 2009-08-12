@@ -408,7 +408,6 @@ public class HtmlPageTest extends WebServerTestCase {
         final WebClient webClient = new WebClient();
         final List<String> collectedIncorrectness = new ArrayList<String>();
         final IncorrectnessListener listener = new IncorrectnessListener() {
-            @Test
             public void notify(final String message, final Object origin) {
                 collectedIncorrectness.add(message);
             }
@@ -442,7 +441,6 @@ public class HtmlPageTest extends WebServerTestCase {
         final WebClient webClient = new WebClient();
         final List<String> collectedIncorrectness = new ArrayList<String>();
         final IncorrectnessListener listener = new IncorrectnessListener() {
-            @Test
             public void notify(final String message, final Object origin) {
                 collectedIncorrectness.add(message);
             }
@@ -1596,15 +1594,15 @@ public class HtmlPageTest extends WebServerTestCase {
 
         final List<String> collector = new ArrayList<String>();
         final HtmlAttributeChangeListener listener2 = new HtmlAttributeChangeListenerTestImpl() {
+            private static final long serialVersionUID = 3234623604670201391L;
             @Override
-            @Test
             public void attributeReplaced(final HtmlAttributeChangeEvent event) {
                 collector.add("in listener 2");
             }
         };
         final HtmlAttributeChangeListener listener1 = new HtmlAttributeChangeListenerTestImpl() {
+            private static final long serialVersionUID = 1955007276078013337L;
             @Override
-            @Test
             public void attributeReplaced(final HtmlAttributeChangeEvent event) {
                 collector.add("in listener 1");
                 page.addHtmlAttributeChangeListener(listener2);

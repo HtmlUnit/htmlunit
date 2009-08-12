@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.StringWriter;
@@ -1510,36 +1508,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 return new ArrayList<DomChangeListener>(domListeners_);
             }
             return null;
-        }
-    }
-
-    /**
-     * Custom serialization logic which ensures that {@link NonSerializable} {@link DomChangeListener}s
-     * are not serialized.
-     * @param stream the stream to write the object to
-     * @throws IOException if an error occurs during writing
-     */
-    private void writeObject(final ObjectOutputStream stream) throws IOException {
-        synchronized (domListeners_lock_) {
-            // Store the original list of listeners in a temporary variable, and then
-            // modify the listener list by removing any NonSerializable listeners.
-            final List<DomChangeListener> temp;
-            if (domListeners_ != null) {
-                temp = new ArrayList<DomChangeListener>(domListeners_);
-                for (final Iterator<DomChangeListener> i = domListeners_.iterator(); i.hasNext();) {
-                    final DomChangeListener listener = i.next();
-                    if (listener instanceof NonSerializable) {
-                        i.remove();
-                    }
-                }
-            }
-            else {
-                temp = null;
-            }
-            // Perform object serialization, now that NonSerializable listeners have been removed.
-            stream.defaultWriteObject();
-            // Restore the old listeners, now that serialization has been performed.
-            domListeners_ = temp;
         }
     }
 

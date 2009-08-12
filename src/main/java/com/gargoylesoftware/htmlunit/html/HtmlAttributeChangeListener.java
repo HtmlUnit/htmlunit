@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.Serializable;
+
 /**
  * Implementations of this interface receive notifications of changes to the attribute
  * list on the HtmlElement.
@@ -22,7 +24,7 @@ package com.gargoylesoftware.htmlunit.html;
  * @author Ahmed Ashour
  * @see HtmlAttributeChangeEvent
  */
-public interface HtmlAttributeChangeListener {
+public interface HtmlAttributeChangeListener extends Serializable {
 
     /**
      * Notification that a new attribute was added to the HtmlElement. Called after the attribute is added.
