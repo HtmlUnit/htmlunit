@@ -88,9 +88,7 @@ public final class UrlUtils {
             if (URL_ABOUT_BLANK != null && equalsIgnoreCase(URL_ABOUT_BLANK.toExternalForm(), url)) {
                 return URL_ABOUT_BLANK;
             }
-            else {
-                return new URL(null, url, ABOUT_HANDLER);
-            }
+            return new URL(null, url, ABOUT_HANDLER);
         }
         else if (TextUtil.startsWithIgnoreCase(url, "data:")) {
             return new URL(null, url, DATA_HANDLER);

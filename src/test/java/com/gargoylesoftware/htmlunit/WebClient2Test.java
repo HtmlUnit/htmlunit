@@ -159,7 +159,6 @@ public class WebClient2Test extends WebServerTestCase {
      */
     @Test
     public void serialization_pageLoad() throws Exception {
-
         final String page1Content = "<html><body>hello 1</body></html>";
         final WebClient client = getWebClient();
         final HtmlPage page1 = loadPage(client, page1Content, null, URL_FIRST);

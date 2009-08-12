@@ -186,9 +186,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
             if (getBrowserVersion().isIE()) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
-            else {
-                s = "1";
-            }
+            s = "1";
         }
         getDomNodeOrDie().setAttribute("colSpan", s);
     }
@@ -226,9 +224,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
             if (getBrowserVersion().isIE()) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
-            else {
-                s = "1";
-            }
+            s = "1";
         }
         getDomNodeOrDie().setAttribute("rowSpan", s);
     }

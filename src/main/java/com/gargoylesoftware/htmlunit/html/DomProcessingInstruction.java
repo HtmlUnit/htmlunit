@@ -88,6 +88,7 @@ public class DomProcessingInstruction extends DomNode implements ProcessingInstr
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setNodeValue(final String value) {
         data_ = value;
     }
@@ -95,6 +96,7 @@ public class DomProcessingInstruction extends DomNode implements ProcessingInstr
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getNodeValue() {
         return data_;
     }

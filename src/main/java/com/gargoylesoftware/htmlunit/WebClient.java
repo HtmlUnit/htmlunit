@@ -1578,9 +1578,7 @@ public class WebClient implements Serializable {
                 Context.exit();
             }
         }
-        else {
-            return query.replace(" ", "%20");
-        }
+        return query.replace(" ", "%20");
     }
 
     /**

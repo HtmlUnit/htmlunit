@@ -109,9 +109,7 @@ public class HTMLTextAreaElement extends FormField {
             if (getBrowserVersion().isIE()) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
-            else {
-                i = 0;
-            }
+            i = 0;
         }
         getDomNodeOrDie().setAttribute("cols", String.valueOf(i));
     }
@@ -153,9 +151,7 @@ public class HTMLTextAreaElement extends FormField {
             if (getBrowserVersion().isIE()) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
-            else {
-                i = 0;
-            }
+            i = 0;
         }
         getDomNodeOrDie().setAttribute("rows", String.valueOf(i));
     }

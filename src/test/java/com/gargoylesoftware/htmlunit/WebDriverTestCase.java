@@ -181,7 +181,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             final WebRequestSettings settings = new WebRequestSettings(requestedUrl);
             settings.setHttpMethod(HttpMethod.valueOf(request.getMethod()));
             for (final Enumeration<String> en = request.getHeaderNames(); en.hasMoreElements();) {
-                final String headerName = (String) en.nextElement();
+                final String headerName = en.nextElement();
                 final String headerValue = request.getHeader(headerName);
                 settings.setAdditionalHeader(headerName, headerValue);
             }

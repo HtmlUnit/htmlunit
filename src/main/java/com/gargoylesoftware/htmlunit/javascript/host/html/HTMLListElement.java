@@ -55,9 +55,7 @@ public class HTMLListElement extends HTMLElement {
         if ("compact".equals(attributeName) && getBrowserVersion().isIE()) {
             return jsxGet_compact();
         }
-        else {
-            return super.jsxFunction_getAttribute(attributeName);
-        }
+        return super.jsxFunction_getAttribute(attributeName);
     }
 
 }

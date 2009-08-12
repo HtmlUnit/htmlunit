@@ -264,8 +264,7 @@ public class Node extends SimpleScriptable {
             //if parentNode is null in IE, create a DocumentFragment to be the parentNode
             if (getDomNodeOrDie().getParentNode() == null
                     && getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
-                final DomDocumentFragment fragment =
-                    ((SgmlPage) getDomNodeOrDie().getPage()).createDomDocumentFragment();
+                final DomDocumentFragment fragment = getDomNodeOrDie().getPage().createDomDocumentFragment();
                 fragment.appendChild(getDomNodeOrDie());
             }
         }
@@ -728,9 +727,7 @@ public class Node extends SimpleScriptable {
                 }
                 return xml;
             }
-            else {
-                return node.asXml();
-            }
+            return node.asXml();
         }
         return Undefined.instance;
     }

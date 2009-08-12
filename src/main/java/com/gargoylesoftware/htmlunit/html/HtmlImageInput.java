@@ -79,9 +79,7 @@ public class HtmlImageInput extends HtmlInput {
                 return new NameValuePair[] {valueX, valueY,
                     new NameValuePair(getNameAttribute(), getValueAttribute()) };
             }
-            else {
-                return new NameValuePair[] {valueX, valueY};
-            }
+            return new NameValuePair[] {valueX, valueY};
         }
         return new NameValuePair[]{new NameValuePair(getNameAttribute(), getValueAttribute())};
     }

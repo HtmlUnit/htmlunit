@@ -64,12 +64,10 @@ public class XMLSerializer extends SimpleScriptable {
             }
             return buffer.toString();
         }
-        else {
-            if (root == null) {
-                return "";
-            }
-            return root.getDomNodeOrDie().asXml();
+        if (root == null) {
+            return "";
         }
+        return root.getDomNodeOrDie().asXml();
     }
 
     private void toXml(final int indent, final DomNode node, final StringBuilder buffer, final boolean isIE) {

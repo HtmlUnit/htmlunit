@@ -205,6 +205,7 @@ public class XMLDocument extends Document {
      * Contains the XML representation of the node and all its descendants.
      * @return an XML representation of this node and all its descendants
      */
+    @Override
     public String jsxGet_xml() {
         final XMLSerializer seralizer = new XMLSerializer();
         seralizer.setParentScope(getWindow());

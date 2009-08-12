@@ -54,6 +54,7 @@ public class XMLAttr extends Attr {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String jsxGet_xml() {
         final StringBuilder sb = new StringBuilder();
         sb.append(jsxGet_name());
