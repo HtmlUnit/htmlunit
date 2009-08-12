@@ -26,6 +26,8 @@ import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -54,6 +56,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 @RunWith(BrowserRunner.class)
 public class Sarissa0993Test extends WebServerTestCase {
 
+    private static final Log LOG = LogFactory.getLog(Sarissa0993Test.class);
+
     private static HtmlPage Page_;
 
     /**
@@ -79,7 +83,7 @@ public class Sarissa0993Test extends WebServerTestCase {
                 final File tmpDir = new File(System.getProperty("java.io.tmpdir"));
                 final File f = new File(tmpDir, "sarissa0993_result.html");
                 FileUtils.writeStringToFile(f, Page_.asXml(), "UTF-8");
-                getLog().info("Test result written to: " + f.getAbsolutePath());
+                LOG.info("Test result written to: " + f.getAbsolutePath());
             }
         }
     }

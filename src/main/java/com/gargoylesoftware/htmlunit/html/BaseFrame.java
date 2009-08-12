@@ -48,7 +48,7 @@ import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 public abstract class BaseFrame extends StyledElement {
 
     private static final long serialVersionUID = -7658106924909626296L;
-    private final transient Log mainLog_ = LogFactory.getLog(getClass());
+    private static final Log LOG = LogFactory.getLog(BaseFrame.class);
     private final WebWindow enclosedWindow_ = new FrameWindow(this);
 
     /**
@@ -125,8 +125,8 @@ public abstract class BaseFrame extends StyledElement {
                 getPage().getEnclosingWindow().getWebClient().getPage(enclosedWindow_, settings);
             }
             catch (final IOException e) {
-                if (mainLog_.isErrorEnabled()) {
-                    mainLog_.error("IOException when getting content for " + getTagName()
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("IOException when getting content for " + getTagName()
                             + ": url=[" + url + "]", e);
                 }
             }

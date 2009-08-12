@@ -17,6 +17,9 @@ package com.gargoylesoftware.htmlunit;
 import java.io.IOException;
 import java.net.URL;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * This refresh handler spawns a new thread that waits the specified
  * number of seconds before refreshing the specified page, using the
@@ -30,6 +33,9 @@ import java.net.URL;
  * @author Daniel Gredler
  */
 public class ThreadedRefreshHandler implements RefreshHandler {
+
+    /** Logging support. */
+    private static final Log LOG = LogFactory.getLog(ThreadedRefreshHandler.class);
 
     /**
      * Refreshes the specified page using the specified URL after the specified number
@@ -46,7 +52,7 @@ public class ThreadedRefreshHandler implements RefreshHandler {
                     new WaitingRefreshHandler().handleRefresh(page, url, seconds);
                 }
                 catch (final IOException e) {
-                    page.getEnclosingWindow().getWebClient().getLog().error("Unable to refresh page!", e);
+                    LOG.error("Unable to refresh page!", e);
                     throw new RuntimeException("Unable to refresh page!", e);
                 }
             }

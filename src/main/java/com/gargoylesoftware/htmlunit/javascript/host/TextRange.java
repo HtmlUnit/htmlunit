@@ -16,6 +16,9 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.ranges.Range;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -36,6 +39,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 public class TextRange extends SimpleScriptable {
 
     private static final long serialVersionUID = -3763822832184277966L;
+    private static final Log LOG = LogFactory.getLog(TextRange.class);
+
     private boolean collapsed_ = false; // minimal effort to support collapse()
     private Range range_;
 
@@ -168,7 +173,7 @@ public class TextRange extends SimpleScriptable {
      */
     public int jsxFunction_moveStart(final String unit, final Object count) {
         if ("characters".equals(unit)) {
-            getLog().info("moveStart('" + unit + "' is not yet supported.");
+            LOG.info("moveStart('" + unit + "' is not yet supported.");
         }
         int c = 1;
         if (count != Undefined.instance) {
@@ -198,7 +203,7 @@ public class TextRange extends SimpleScriptable {
      */
     public int jsxFunction_moveEnd(final String unit, final Object count) {
         if ("characters".equals(unit)) {
-            getLog().info("moveEnd('" + unit + "' is not yet supported.");
+            LOG.info("moveEnd('" + unit + "' is not yet supported.");
         }
         int c = 1;
         if (count != Undefined.instance) {

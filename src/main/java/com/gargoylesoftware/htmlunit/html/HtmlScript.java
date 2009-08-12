@@ -61,14 +61,13 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 public class HtmlScript extends HtmlElement {
 
     private static final long serialVersionUID = 5736570536821513938L;
+    private static final Log LOG = LogFactory.getLog(HtmlScript.class);
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "script";
 
     /** Invalid source attribute which should be ignored (used by JS libraries like jQuery). */
     private static final String SLASH_SLASH_COLON = "//:";
-
-    private final transient Log mainLog_ = LogFactory.getLog(getClass());
 
     /**
      * Creates an instance of HtmlScript
@@ -201,8 +200,8 @@ public class HtmlScript extends HtmlElement {
         if (getOwnerDocument() instanceof XmlPage) {
             return;
         }
-        if (mainLog_.isDebugEnabled()) {
-            mainLog_.debug("Script node added: " + asXml());
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Script node added: " + asXml());
         }
         final PostponedAction action = new PostponedAction() {
             public void execute() {
@@ -291,7 +290,7 @@ public class HtmlScript extends HtmlElement {
                     elt.setEventHandler(event, scriptCode);
                 }
                 catch (final ElementNotFoundException e) {
-                    mainLog_.warn("<script for='" + forr + "' ...>: no element found with id \""
+                    LOG.warn("<script for='" + forr + "' ...>: no element found with id \""
                         + forr + "\". Ignoring.");
                 }
             }
@@ -344,8 +343,8 @@ public class HtmlScript extends HtmlElement {
                         if ((code.charAt(0) == '\'' && code.charAt(len - 1) == '\'')
                             || (code.charAt(0) == '"' && code.charAt(len - 1) == '"')) {
                             code = code.substring(1, len - 1);
-                            if (mainLog_.isDebugEnabled()) {
-                                mainLog_.debug("Executing JavaScript: " + code);
+                            if (LOG.isDebugEnabled()) {
+                                LOG.debug("Executing JavaScript: " + code);
                             }
                             ((HtmlPage) getPage()).executeJavaScriptIfPossible(code, code, getStartLineNumber());
                         }
@@ -354,8 +353,8 @@ public class HtmlScript extends HtmlElement {
             }
             else {
                 // <script src="[url]"></script>
-                if (mainLog_.isDebugEnabled()) {
-                    mainLog_.debug("Loading external JavaScript: " + src);
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Loading external JavaScript: " + src);
                 }
                 return ((HtmlPage) getPage()).loadExternalJavaScriptFile(src, getCharsetAttribute());
             }
@@ -403,8 +402,8 @@ public class HtmlScript extends HtmlElement {
         if (!isJavaScript(getTypeAttribute(), getLanguageAttribute())) {
             final String t = getTypeAttribute();
             final String l = getLanguageAttribute();
-            if (mainLog_.isWarnEnabled()) {
-                mainLog_.warn("Script is not JavaScript (type: " + t + ", language: " + l + "). Skipping execution.");
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("Script is not JavaScript (type: " + t + ", language: " + l + "). Skipping execution.");
             }
             return false;
         }

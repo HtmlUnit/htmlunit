@@ -48,6 +48,7 @@ import org.apache.commons.logging.LogFactory;
 public class DefaultCredentialsProvider implements CredentialsProvider, Serializable  {
 
     private static final long serialVersionUID = 1036331144926557053L;
+    private static final Log LOG = LogFactory.getLog(DefaultCredentialsProvider.class);
 
     private final Map<AuthScopeProxy, Credentials> credentials_ = new HashMap<AuthScopeProxy, Credentials>();
     private final Map<AuthScopeProxy, Credentials> proxyCredentials_ = new HashMap<AuthScopeProxy, Credentials>();
@@ -170,7 +171,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
         // given Credentials to avoid infinite loop if it is incorrect:
         // see http://issues.apache.org/bugzilla/show_bug.cgi?id=8140
         if (alreadyAnswered(scheme, host, port, proxy)) {
-            getLog().debug("Already answered for " + buildKey(scheme, host, port, proxy) + ", returning null");
+            LOG.debug("Already answered for " + buildKey(scheme, host, port, proxy) + ", returning null");
             return null;
         }
 
@@ -188,12 +189,12 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
             if (matchScheme(scope, scheme) && matchHost(scope, host)
                 && matchPort(scope, port) && matchRealm(scope, scheme)) {
                 markAsAnswered(scheme, host, port, proxy);
-                getLog().debug("Returning " + c + " for " + buildKey(scheme, host, port, proxy));
+                LOG.debug("Returning " + c + " for " + buildKey(scheme, host, port, proxy));
                 return c;
             }
         }
 
-        getLog().debug("No credential found for " + buildKey(scheme, host, port, proxy));
+        LOG.debug("No credential found for " + buildKey(scheme, host, port, proxy));
         return null;
     }
 
@@ -262,7 +263,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      */
     protected void clearAnswered() {
         answerMarks_.clear();
-        getLog().debug("Flushed marked answers");
+        LOG.debug("Flushed marked answers");
     }
 
     /**
@@ -275,14 +276,6 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      */
     protected Object buildKey(final AuthScheme scheme, final String host, final int port, final boolean proxy) {
         return scheme.getSchemeName() + " " + scheme.getRealm() + " " + host + ":" + port + " " + proxy;
-    }
-
-    /**
-     * Returns the log object for this class.
-     * @return the log object for this class
-     */
-    protected final Log getLog() {
-        return LogFactory.getLog(getClass());
     }
 
     /**

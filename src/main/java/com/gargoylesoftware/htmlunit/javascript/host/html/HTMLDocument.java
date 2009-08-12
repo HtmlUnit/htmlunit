@@ -44,6 +44,8 @@ import org.apache.commons.httpclient.cookie.CookieSpec;
 import org.apache.commons.httpclient.util.DateParseException;
 import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.DOMException;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -104,6 +106,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 public class HTMLDocument extends Document implements ScriptableWithFallbackGetter {
 
     private static final long serialVersionUID = -7646789903352066465L;
+    private static final Log LOG = LogFactory.getLog(HTMLDocument.class);
 
     /** The cookie name used for cookies with no name (HttpClient doesn't like empty names). */
     public static final String EMPTY_COOKIE_NAME = "HTMLUNIT_EMPTY_COOKIE";
@@ -416,7 +419,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param content the content to write
      */
     protected void write(final String content) {
-        getLog().debug("write: " + content);
+        LOG.debug("write: " + content);
 
         final HtmlPage page = (HtmlPage) getDomNodeOrDie();
         if (!page.isBeingParsed()) {
@@ -428,12 +431,12 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
         // If open() was called; don't write to doc yet -- wait for call to close().
         if (!writeInCurrentDocument_) {
-            getLog().debug("wrote content to buffer");
+            LOG.debug("wrote content to buffer");
             return;
         }
         final String bufferedContent = writeBuffer_.toString();
         if (!canAlreadyBeParsed(bufferedContent)) {
-            getLog().debug("write: not enough content to parsed it now");
+            LOG.debug("write: not enough content to parsed it now");
             return;
         }
 
@@ -626,10 +629,10 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             url = replaceForCookieIfNecessary(url);
             final Cookie cookie = buildCookie(newCookie, url);
             cookieManager.addCookie(cookie);
-            getLog().debug("Added cookie: " + cookie);
+            LOG.debug("Added cookie: " + cookie);
         }
         else {
-            getLog().debug("Skipped adding cookie: " + newCookie);
+            LOG.debug("Skipped adding cookie: " + newCookie);
         }
     }
 
@@ -778,13 +781,13 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         // writeln() invocations will directly append content to the current insertion point.
         final HtmlPage page = getHtmlPage();
         if (page.isBeingParsed()) {
-            getLog().warn("Ignoring call to open() during the parsing stage.");
+            LOG.warn("Ignoring call to open() during the parsing stage.");
             return null;
         }
 
         // We're not in the parsing stage; OK to continue.
         if (!writeInCurrentDocument_) {
-            getLog().warn("Function open() called when document is already open.");
+            LOG.warn("Function open() called when document is already open.");
         }
         writeInCurrentDocument_ = false;
         return null;
@@ -800,7 +803,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     public void jsxFunction_close() throws IOException {
         if (writeInCurrentDocument_) {
-            getLog().warn("close() called when document is not open.");
+            LOG.warn("close() called when document is not open.");
         }
         else {
             final HtmlPage page = getHtmlPage();
@@ -919,7 +922,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             final Object jsElement = getScriptableFor(htmlElement);
 
             if (jsElement == NOT_FOUND) {
-                getLog().debug("getElementById(" + id
+                LOG.debug("getElementById(" + id
                     + ") cannot return a result as there isn't a JavaScript object for the HTML element "
                     + htmlElement.getClass().getName());
             }
@@ -937,10 +940,10 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                 if (result instanceof UniqueTag) {
                     return null;
                 }
-                getLog().warn("getElementById(" + id + ") did a getElementByName for Internet Explorer");
+                LOG.warn("getElementById(" + id + ") did a getElementByName for Internet Explorer");
                 return result;
             }
-            getLog().debug("getElementById(" + id + "): no DOM node found with this id");
+            LOG.debug("getElementById(" + id + "): no DOM node found with this id");
         }
         return result;
     }
@@ -1429,7 +1432,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             }
             return false;
         }
-        getLog().warn("Nothing done for execCommand(" + cmd + ", ...) (feature not implemented)");
+        LOG.warn("Nothing done for execCommand(" + cmd + ", ...) (feature not implemented)");
         return true;
     }
 

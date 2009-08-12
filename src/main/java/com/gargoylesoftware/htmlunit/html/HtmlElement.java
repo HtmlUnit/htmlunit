@@ -76,6 +76,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 public abstract class HtmlElement extends DomElement {
 
     private static final long serialVersionUID = -2841932584831342634L;
+    private static final Log LOG = LogFactory.getLog(HtmlElement.class);
 
     /**
      * Constant indicating that a tab index value is out of bounds (less than <tt>0</tt> or greater
@@ -84,8 +85,6 @@ public abstract class HtmlElement extends DomElement {
      * @see #getTabIndex()
      */
     public static final Short TAB_INDEX_OUT_OF_BOUNDS = new Short(Short.MIN_VALUE);
-
-    private final transient Log mainLog_ = LogFactory.getLog(getClass());
 
     /** The listeners which are to be notified of attribute changes. */
     private List<HtmlAttributeChangeListener> attributeListeners_;
@@ -809,8 +808,8 @@ public abstract class HtmlElement extends DomElement {
     public final void setEventHandler(final String eventName, final String jsSnippet) {
         final BaseFunction function = new EventHandler(this, eventName, jsSnippet);
         setEventHandler(eventName, function);
-        if (mainLog_.isDebugEnabled()) {
-            mainLog_.debug("Created event handler " + function.getFunctionName()
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Created event handler " + function.getFunctionName()
                     + " for " + eventName + " on " + this);
         }
     }
@@ -879,8 +878,8 @@ public abstract class HtmlElement extends DomElement {
             return null;
         }
 
-        if (mainLog_.isDebugEnabled()) {
-            mainLog_.debug("Firing " + event);
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Firing " + event);
         }
         final HTMLElement jsElt = (HTMLElement) getScriptObject();
         final ContextAction action = new ContextAction() {
@@ -1066,15 +1065,15 @@ public abstract class HtmlElement extends DomElement {
     public Page rightClick(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         final Page mouseDownPage = mouseDown(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_RIGHT);
         if (mouseDownPage != getPage()) {
-            if (mainLog_.isDebugEnabled()) {
-                mainLog_.debug("rightClick() is incomplete, as mouseDown() loaded a different page.");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("rightClick() is incomplete, as mouseDown() loaded a different page.");
             }
             return mouseDownPage;
         }
         final Page mouseUpPage = mouseUp(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_RIGHT);
         if (mouseUpPage != getPage()) {
-            if (mainLog_.isDebugEnabled()) {
-                mainLog_.debug("rightClick() is incomplete, as mouseUp() loaded a different page.");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("rightClick() is incomplete, as mouseUp() loaded a different page.");
             }
             return mouseUpPage;
         }
@@ -1320,8 +1319,8 @@ public abstract class HtmlElement extends DomElement {
         //call click event first
         final Page clickPage = click(shiftKey, ctrlKey, altKey);
         if (clickPage != getPage()) {
-            if (mainLog_.isDebugEnabled()) {
-                mainLog_.debug("dblClick() is ignored, as click() loaded a different page.");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("dblClick() is ignored, as click() loaded a different page.");
             }
             return (P) clickPage;
         }

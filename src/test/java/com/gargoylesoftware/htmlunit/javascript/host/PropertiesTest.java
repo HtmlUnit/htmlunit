@@ -28,6 +28,8 @@ import javax.imageio.ImageIO;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.mutable.MutableInt;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
@@ -57,6 +59,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  */
 @RunWith(Parameterized.class)
 public class PropertiesTest extends WebTestCase {
+
+    private static final Log LOG = LogFactory.getLog(PropertiesTest.class);
 
     private static List<String> IE6_;
     private static List<String> IE7_;
@@ -222,9 +226,9 @@ public class PropertiesTest extends WebTestCase {
         actualPropertyCount.add(realProperties.size());
         remainingPropertyCount.add(remainingProperties.size());
 
-        getLog().debug(name_ + ':' + browserVersion_.getNickname() + ':' + realProperties);
-        getLog().debug("Remaining" + ':' + remainingProperties);
-        getLog().debug("Error" + ':' + erroredProperties);
+        LOG.debug(name_ + ':' + browserVersion_.getNickname() + ':' + realProperties);
+        LOG.debug("Remaining" + ':' + remainingProperties);
+        LOG.debug("Error" + ':' + erroredProperties);
 
         appendHtml(html, originalRealProperties, simulatedProperties, erroredProperties);
         if (dataset.getColumnCount() == IE7_.size()) {

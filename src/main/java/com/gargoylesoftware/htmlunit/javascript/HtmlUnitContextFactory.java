@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import java.io.Serializable;
 
-import org.apache.commons.logging.Log;
 import net.sourceforge.htmlunit.corejs.javascript.Callable;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
@@ -54,7 +53,6 @@ public class HtmlUnitContextFactory extends ContextFactory implements Serializab
 
     private final BrowserVersion browserVersion_;
     private final WebClient webClient_;
-    private final Log log_;
     private long timeout_;
     private Debugger debugger_;
     private final ErrorReporter errorReporter_;
@@ -64,15 +62,12 @@ public class HtmlUnitContextFactory extends ContextFactory implements Serializab
      * Creates a new instance of HtmlUnitContextFactory.
      *
      * @param webClient the web client using this factory
-     * @param log the log that the error reporter should use
      */
-    public HtmlUnitContextFactory(final WebClient webClient, final Log log) {
+    public HtmlUnitContextFactory(final WebClient webClient) {
         WebAssert.notNull("webClient", webClient);
-        WebAssert.notNull("log", log);
         webClient_ = webClient;
         browserVersion_ = webClient.getBrowserVersion();
-        log_ = log;
-        errorReporter_ = new StrictErrorReporter(log_);
+        errorReporter_ = new StrictErrorReporter();
     }
 
     /**

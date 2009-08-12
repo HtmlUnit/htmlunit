@@ -68,11 +68,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 public class JavaScriptEngine implements Serializable {
 
     private static final long serialVersionUID = -5414040051465432088L;
+    private static final Log LOG = LogFactory.getLog(JavaScriptEngine.class);
 
     private final WebClient webClient_;
     private final HtmlUnitContextFactory contextFactory_;
 
-    private static final Log ScriptEngineLog_ = LogFactory.getLog(JavaScriptEngine.class);
     private static final ThreadLocal<Boolean> javaScriptRunning_ = new ThreadLocal<Boolean>();
     private static final ThreadLocal<List<PostponedAction>> postponedActions_
         = new ThreadLocal<List<PostponedAction>>();
@@ -98,7 +98,7 @@ public class JavaScriptEngine implements Serializable {
      */
     public JavaScriptEngine(final WebClient webClient) {
         webClient_ = webClient;
-        contextFactory_ = new HtmlUnitContextFactory(webClient, getScriptEngineLog());
+        contextFactory_ = new HtmlUnitContextFactory(webClient);
     }
 
     /**
@@ -130,7 +130,7 @@ public class JavaScriptEngine implements Serializable {
                     init(webWindow, cx);
                 }
                 catch (final Exception e) {
-                    getLog().error("Exception while initializing JavaScript for the page", e);
+                    LOG.error("Exception while initializing JavaScript for the page", e);
                     throw new ScriptException(null, e); // BUG: null is not useful.
                 }
 
@@ -351,14 +351,6 @@ public class JavaScriptEngine implements Serializable {
     }
 
     /**
-     * Returns the log object for this class.
-     * @return the log object
-     */
-    protected Log getLog() {
-        return LogFactory.getLog(getClass());
-    }
-
-    /**
      * Compiles the specified JavaScript code in the context of a given HTML page.
      *
      * @param htmlPage the page that the code will execute within
@@ -538,7 +530,7 @@ public class JavaScriptEngine implements Serializable {
                 if (getWebClient().isThrowExceptionOnScriptError()) {
                     throw new RuntimeException(e);
                 }
-                getLog().info("Caught script timeout error", e);
+                LOG.info("Caught script timeout error", e);
                 return null;
             }
             finally {
@@ -564,14 +556,6 @@ public class JavaScriptEngine implements Serializable {
                 Context.throwAsScriptRuntimeEx(e);
             }
         }
-    }
-
-    /**
-     * Returns the log object that is being used to log information about the script engine.
-     * @return the log
-     */
-    public static Log getScriptEngineLog() {
-        return ScriptEngineLog_;
     }
 
     /**
@@ -608,7 +592,7 @@ public class JavaScriptEngine implements Serializable {
             throw scriptException;
         }
         // Log the error; ScriptException instances provide good debug info.
-        getLog().info("Caught script exception", scriptException);
+        LOG.info("Caught script exception", scriptException);
     }
 
 }

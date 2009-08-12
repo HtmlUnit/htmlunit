@@ -34,27 +34,27 @@ public class DefaultCssErrorHandler implements ErrorHandler, Serializable {
     private static final long serialVersionUID = 4655126263007765782L;
 
     /** Logging support. */
-    private final Log log_ = LogFactory.getLog(DefaultCssErrorHandler.class);
+    private static final Log LOG = LogFactory.getLog(DefaultCssErrorHandler.class);
 
     /**
      * {@inheritDoc}
      */
     public void error(final CSSParseException exception) {
-        log_.warn("CSS error: " + buildMessage(exception));
+        LOG.warn("CSS error: " + buildMessage(exception));
     }
 
     /**
      * {@inheritDoc}
      */
     public void fatalError(final CSSParseException exception) {
-        log_.warn("CSS fatal error: " + buildMessage(exception));
+        LOG.warn("CSS fatal error: " + buildMessage(exception));
     }
 
     /**
      * {@inheritDoc}
      */
     public void warning(final CSSParseException exception) {
-        log_.warn("CSS warning: " + buildMessage(exception));
+        LOG.warn("CSS warning: " + buildMessage(exception));
     }
 
     /**

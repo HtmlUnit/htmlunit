@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public class NicelyResynchronizingAjaxController extends AjaxController {
 
     private static final long serialVersionUID = -5406000795046341395L;
+    private static final Log LOG = LogFactory.getLog(NicelyResynchronizingAjaxController.class);
 
     private final WeakReference<Thread> originatedThread_;
 
@@ -45,24 +46,14 @@ public class NicelyResynchronizingAjaxController extends AjaxController {
     }
 
     /**
-     * Returns the log.
-     * @return the log
-     */
-    protected final Log getLog() {
-        return LogFactory.getLog(getClass());
-    }
-
-    /**
      * Resynchronizes calls performed from the thread where this instance has
      * been created.
      * {@inheritDoc}
      */
     @Override
-    public boolean processSynchron(final HtmlPage page, final WebRequestSettings requestSettings,
-            final boolean async) {
-
+    public boolean processSynchron(final HtmlPage page, final WebRequestSettings settings, final boolean async) {
         if (async && isInOriginalThread()) {
-            getLog().info("Re-synchronized call to " + requestSettings.getUrl());
+            LOG.info("Re-synchronized call to " + settings.getUrl());
             return true;
         }
         return !async;

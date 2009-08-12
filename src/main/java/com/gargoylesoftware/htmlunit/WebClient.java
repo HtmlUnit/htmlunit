@@ -114,6 +114,9 @@ public class WebClient implements Serializable {
     /** Serial version UID. */
     private static final long serialVersionUID = -7214321203864969635L;
 
+    /** Logging support. */
+    private static final Log LOG = LogFactory.getLog(WebClient.class);
+
     /** Like the Firefox default value for network.http.redirection-limit. */
     private static final int ALLOWED_REDIRECTIONS_SAME_URL = 20;
 
@@ -303,12 +306,12 @@ public class WebClient implements Serializable {
         if (page instanceof HtmlPage) {
             final HtmlPage htmlPage = (HtmlPage) page;
             if (!htmlPage.isOnbeforeunloadAccepted()) {
-                getLog().debug("The registered OnbeforeunloadHandler rejected to load a new page.");
+                LOG.debug("The registered OnbeforeunloadHandler rejected to load a new page.");
                 return (P) page;
             }
         }
 
-        getLog().debug("Get page for window named '" + webWindow.getName() + "', using " + parameters);
+        LOG.debug("Get page for window named '" + webWindow.getName() + "', using " + parameters);
 
         final WebResponse webResponse;
         final String protocol = parameters.getUrl().getProtocol();
@@ -491,8 +494,8 @@ public class WebClient implements Serializable {
         final int statusCode = webResponse.getStatusCode();
         final boolean successful = (statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES);
         if (getPrintContentOnFailingStatusCode() && !successful) {
-            getLog().info("statusCode=[" + statusCode + "] contentType=[" + contentType + "]");
-            getLog().info(webResponse.getContentAsString());
+            LOG.info("statusCode=[" + statusCode + "] contentType=[" + contentType + "]");
+            LOG.info(webResponse.getContentAsString());
         }
     }
 
@@ -916,7 +919,7 @@ public class WebClient implements Serializable {
                 getPage(window, settings);
             }
             catch (final IOException e) {
-                getLog().error("Error loading content into window", e);
+                LOG.error("Error loading content into window", e);
             }
         }
         else {
@@ -1166,14 +1169,6 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Returns this client's log object.
-     * @return this client's log object
-     */
-    protected final Log getLog() {
-        return LogFactory.getLog(getClass());
-    }
-
-    /**
      * Expands a relative URL relative to the specified base. In most situations
      * this is the same as <code>new URL(baseUrl, relativeUrl)</code> but
      * there are some cases that URL doesn't handle correctly. See
@@ -1394,7 +1389,7 @@ public class WebClient implements Serializable {
         WebAssert.notNull("method", method);
         WebAssert.notNull("parameters", parameters);
 
-        getLog().debug("Load response for " + url.toExternalForm());
+        LOG.debug("Load response for " + url.toExternalForm());
 
         // If the request settings don't specify a custom proxy, use the default client proxy...
         if (webRequestSettings.getProxyHost() == null) {
@@ -1407,7 +1402,7 @@ public class WebClient implements Serializable {
                         proxyConfig_.setProxyAutoConfigContent(content);
                     }
                     final String allValue = ProxyAutoConfig.evaluate(content, url);
-                    getLog().debug("Proxy Auto-Config: value '" + allValue + "' for URL " + url);
+                    LOG.debug("Proxy Auto-Config: value '" + allValue + "' for URL " + url);
                     String value = allValue.split(";")[0].trim();
                     if (value.startsWith("PROXY")) {
                         value = value.substring(6);
@@ -1454,17 +1449,17 @@ public class WebClient implements Serializable {
                 return webResponse;
             }
 
-            getLog().debug("Got a redirect status code [" + statusCode + "] new location=[" + locationString + "]");
+            LOG.debug("Got a redirect status code [" + statusCode + "] new location=[" + locationString + "]");
 
             if (webRequestSettings.getHttpMethod() == HttpMethod.GET
                     && webResponse.getRequestSettings().getUrl().toExternalForm().equals(locationString)) {
 
                 if (nbAllowedRedirections == 0) {
-                    getLog().warn("Max redirections allowed to the same location reached for ["
+                    LOG.warn("Max redirections allowed to the same location reached for ["
                             + locationString + "]. Skipping redirection.");
                 }
                 else {
-                    getLog().debug("Got a redirect with location same as the page we just loaded. "
+                    LOG.debug("Got a redirect with location same as the page we just loaded. "
                             + "Nb self redirection allowed: " + nbAllowedRedirections);
                     return loadWebResponseFromWebConnection(webRequestSettings, nbAllowedRedirections - 1);
                 }

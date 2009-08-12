@@ -45,10 +45,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  * @author Ahmed Ashour
  */
 public class SimpleScriptable extends ScriptableObject implements Cloneable {
+
     private static final long serialVersionUID = 3120000176890886780L;
+    private static final Log LOG = LogFactory.getLog(SimpleScriptable.class);
 
     private DomNode domNode_;
-
     private boolean caseSensitive_ = true;
 
     /**
@@ -163,14 +164,6 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
     }
 
     /**
-     * Returns the log that is being used for all scripting objects.
-     * @return the log
-     */
-    protected final Log getLog() {
-        return LogFactory.getLog(getClass());
-    }
-
-    /**
      * Returns the JavaScript object that corresponds to the specified object.
      * New JavaScript objects will be created as needed. If a JavaScript object
      * cannot be created for a domNode then NOT_FOUND will be returned.
@@ -209,7 +202,7 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
         if (javaScriptClass == null) {
             // We don't have a specific subclass for this element so create something generic.
             scriptable = new HTMLElement();
-            getLog().debug("No JavaScript class found for element <" + domNode.getNodeName() + ">. Using HTMLElement");
+            LOG.debug("No JavaScript class found for element <" + domNode.getNodeName() + ">. Using HTMLElement");
         }
         else {
             try {

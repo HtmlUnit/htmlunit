@@ -25,6 +25,8 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.collections.functors.NOPTransformer;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -63,7 +65,9 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Ahmed Ashour
  */
 public class HTMLCollection extends SimpleScriptable implements Function, NodeList {
+
     private static final long serialVersionUID = 4049916048017011764L;
+    private static final Log LOG = LogFactory.getLog(HTMLCollection.class);
 
     private String xpath_;
     private DomNode node_;
@@ -345,7 +349,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
                             return collection;
                         }
                     }
-                    getLog().debug("Property \"" + name + "\" evaluated (by id) to " + next);
+                    LOG.debug("Property \"" + name + "\" evaluated (by id) to " + next);
                     return getScriptableForElement(next);
                 }
             }
@@ -353,17 +357,17 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
                 final WebWindow window = (WebWindow) next;
                 final String windowName = window.getName();
                 if (windowName != null && windowName.equals(name)) {
-                    getLog().debug("Property \"" + name + "\" evaluated (by name) to " + window);
+                    LOG.debug("Property \"" + name + "\" evaluated (by name) to " + window);
                     return getScriptableForElement(window);
                 }
                 if (getBrowserVersion().isIE() && window instanceof FrameWindow
                         && ((FrameWindow) window).getFrameElement().getAttribute("id").equals(name)) {
-                    getLog().debug("Property \"" + name + "\" evaluated (by id) to " + window);
+                    LOG.debug("Property \"" + name + "\" evaluated (by id) to " + window);
                     return getScriptableForElement(window);
                 }
             }
             else {
-                getLog().warn("Unrecognized type in collection: " + next + " (" + next.getClass().getName() + ")");
+                LOG.warn("Unrecognized type in collection: " + next + " (" + next.getClass().getName() + ")");
             }
         }
 
@@ -381,13 +385,13 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
 
         final List<Object> subElements = array.getElements();
         if (subElements.size() > 1) {
-            getLog().debug("Property \"" + name + "\" evaluated (by name) to " + array + " with "
+            LOG.debug("Property \"" + name + "\" evaluated (by name) to " + array + " with "
                     + subElements.size() + " elements");
             return array;
         }
         else if (subElements.size() == 1) {
             final Scriptable singleResult = getScriptableForElement(subElements.get(0));
-            getLog().debug("Property \"" + name + "\" evaluated (by name) to " + singleResult);
+            LOG.debug("Property \"" + name + "\" evaluated (by name) to " + singleResult);
             return singleResult;
         }
 
@@ -597,7 +601,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
                     }
                 }
                 else {
-                    getLog().debug("Unrecognized type in array: \"" + next.getClass().getName() + "\"");
+                    LOG.debug("Unrecognized type in array: \"" + next.getClass().getName() + "\"");
                 }
             }
         }

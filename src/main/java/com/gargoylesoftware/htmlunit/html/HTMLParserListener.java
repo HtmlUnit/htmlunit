@@ -36,30 +36,7 @@ public interface HTMLParserListener {
      * and errors in the "com.gargoylesoftware.htmlunit.html.HTMLParserListener" log.<br/>
      * Errors are logged at the error level and warnings at the warning level.
      */
-    HTMLParserListener LOG_REPORTER = new HTMLParserListener() {
-        private final transient Log listenerLog_ = LogFactory.getLog(HTMLParserListener.class);
-        public void error(final String message, final URL url, final int line, final int column, final String key) {
-            if (listenerLog_.isErrorEnabled()) {
-                listenerLog_.error(format(message, url, line, column, key));
-            }
-        }
-        public void warning(final String message, final URL url, final int line, final int column, final String key) {
-            if (listenerLog_.isWarnEnabled()) {
-                listenerLog_.warn(format(message, url, line, column, key));
-            }
-        }
-        private String format(final String message, final URL url, final int line, final int column, final String key) {
-            final StringBuilder buffer = new StringBuilder(message);
-            buffer.append(" (");
-            buffer.append(url.toExternalForm());
-            buffer.append(" ");
-            buffer.append(line);
-            buffer.append(":");
-            buffer.append(column);
-            buffer.append(")");
-            return buffer.toString();
-        }
-    };
+    HTMLParserListener LOG_REPORTER = new SimpleHTMLParserListener();
 
     /**
      * Called when the HTML parser reports an error.
@@ -80,4 +57,39 @@ public interface HTMLParserListener {
      * @param key the key identifying the "type" of problem
      */
     void warning(final String message, final URL url, final int line, final int column, final String key);
+}
+
+/**
+ * Simple implementation of {@link HTMLParserListener} logging the received warnings
+ * and errors in the "com.gargoylesoftware.htmlunit.html.HTMLParserListener" log.<br/>
+ * Errors are logged at the error level and warnings at the warning level.
+ */
+class SimpleHTMLParserListener implements HTMLParserListener {
+
+    private static final Log LOG = LogFactory.getLog(HTMLParserListener.class);
+
+    public void error(final String message, final URL url, final int line, final int column, final String key) {
+        if (LOG.isErrorEnabled()) {
+            LOG.error(format(message, url, line, column, key));
+        }
+    }
+
+    public void warning(final String message, final URL url, final int line, final int column, final String key) {
+        if (LOG.isWarnEnabled()) {
+            LOG.warn(format(message, url, line, column, key));
+        }
+    }
+
+    private String format(final String message, final URL url, final int line, final int column, final String key) {
+        final StringBuilder buffer = new StringBuilder(message);
+        buffer.append(" (");
+        buffer.append(url.toExternalForm());
+        buffer.append(" ");
+        buffer.append(line);
+        buffer.append(":");
+        buffer.append(column);
+        buffer.append(")");
+        return buffer.toString();
+    }
+
 }

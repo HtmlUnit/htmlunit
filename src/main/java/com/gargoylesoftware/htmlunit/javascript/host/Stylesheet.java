@@ -25,6 +25,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.CombinatorCondition;
 import org.w3c.css.sac.Condition;
@@ -79,6 +80,7 @@ import com.steadystate.css.parser.SelectorListImpl;
 public class Stylesheet extends SimpleScriptable {
 
     private static final long serialVersionUID = -8341675386925348206L;
+    private static final Log LOG = LogFactory.getLog(Stylesheet.class);
 
     /** The parsed stylesheet which this host object wraps. */
     private final CSSStyleSheet wrapped_;
@@ -169,7 +171,7 @@ public class Stylesheet extends SimpleScriptable {
                 Stylesheet sheet = imports_.get(importRule);
                 if (sheet == null) {
                     final String href = importRule.getHref();
-                    sheet = loadStylesheet(getWindow(), ownerNode_, getLog(), null, href);
+                    sheet = loadStylesheet(getWindow(), ownerNode_, null, href);
                     imports_.put(importRule, sheet);
                 }
                 sheet.modifyIfNecessary(style, element);
@@ -181,12 +183,11 @@ public class Stylesheet extends SimpleScriptable {
      * Loads the stylesheet at the specified link or href.
      * @param window the current window
      * @param element the parent DOM element
-     * @param log the log to use to warn the user about any errors
      * @param link the stylesheet's link (may be <tt>null</tt> if an <tt>href</tt> is specified)
      * @param href the stylesheet's href (may be <tt>null</tt> if a <tt>link</tt> is specified)
      * @return the loaded stylesheet
      */
-    static Stylesheet loadStylesheet(final Window window, final HTMLElement element, final Log log,
+    static Stylesheet loadStylesheet(final Window window, final HTMLElement element,
         final HtmlLink link, final String href) {
         Stylesheet sheet;
         try {
@@ -225,13 +226,13 @@ public class Stylesheet extends SimpleScriptable {
         }
         catch (final FailingHttpStatusCodeException e) {
             // Got a 404 response or something like that; behave nicely.
-            log.error(e.getMessage());
+            LOG.error(e.getMessage());
             final InputSource source = new InputSource(new StringReader(""));
             sheet = new Stylesheet(element, source);
         }
         catch (final IOException e) {
             // Got a basic IO error; behave nicely.
-            log.error(e.getMessage());
+            LOG.error(e.getMessage());
             final InputSource source = new InputSource(new StringReader(""));
             sheet = new Stylesheet(element, source);
         }
@@ -300,7 +301,7 @@ public class Stylesheet extends SimpleScriptable {
             case Selector.SAC_TEXT_NODE_SELECTOR:
                 return false;
             default:
-                getLog().error("Unknown CSS selector type '" + selector.getSelectorType() + "'.");
+                LOG.error("Unknown CSS selector type '" + selector.getSelectorType() + "'.");
                 return false;
         }
     }
@@ -367,7 +368,7 @@ public class Stylesheet extends SimpleScriptable {
             case Condition.SAC_PSEUDO_CLASS_CONDITION:
                 return false;
             default:
-                getLog().error("Unknown CSS condition type '" + condition.getConditionType() + "'.");
+                LOG.error("Unknown CSS condition type '" + condition.getConditionType() + "'.");
                 return false;
         }
     }
@@ -388,12 +389,12 @@ public class Stylesheet extends SimpleScriptable {
             ss = parser.parseStyleSheet(source, null, null);
         }
         catch (final Exception e) {
-            getLog().error("Error parsing CSS from '" + toString(source) + "': " + e.getMessage(), e);
+            LOG.error("Error parsing CSS from '" + toString(source) + "': " + e.getMessage(), e);
             ss = new CSSStyleSheetImpl();
         }
         catch (final Error e) {
             // SACParser sometimes throws Error: "Missing return statement in function"
-            getLog().error("Error parsing CSS from '" + toString(source) + "': " + e.getMessage(), e);
+            LOG.error("Error parsing CSS from '" + toString(source) + "': " + e.getMessage(), e);
             ss = new CSSStyleSheetImpl();
         }
         return ss;
@@ -415,12 +416,12 @@ public class Stylesheet extends SimpleScriptable {
             selectors = parser.parseSelectors(source);
         }
         catch (final Exception e) {
-            getLog().error("Error parsing CSS selectors from '" + toString(source) + "': " + e.getMessage(), e);
+            LOG.error("Error parsing CSS selectors from '" + toString(source) + "': " + e.getMessage(), e);
             selectors = new SelectorListImpl();
         }
         catch (final Error e) {
             // SACParser sometimes throws Error: "Missing return statement in function"
-            getLog().error("Error parsing CSS selectors from '" + toString(source) + "': " + e.getMessage(), e);
+            LOG.error("Error parsing CSS selectors from '" + toString(source) + "': " + e.getMessage(), e);
             selectors = new SelectorListImpl();
         }
         return selectors;
@@ -514,7 +515,7 @@ public class Stylesheet extends SimpleScriptable {
                 }
                 catch (final MalformedURLException e) {
                     // Log the error and fall through to the return values below.
-                    getLog().warn(e.getMessage(), e);
+                    LOG.warn(e.getMessage(), e);
                 }
             }
         }

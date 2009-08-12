@@ -20,16 +20,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.RegExpProxy;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.regexp.NativeRegExp;
 import net.sourceforge.htmlunit.corejs.javascript.regexp.RegExpImpl;
+
+import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Begins customization of JavaScript RegExp base on JDK regular expression support.
@@ -39,6 +40,9 @@ import net.sourceforge.htmlunit.corejs.javascript.regexp.RegExpImpl;
  * @author Ahmed Ashour
  */
 public class HtmlUnitRegExpProxy extends RegExpImpl {
+
+    private static final Log LOG = LogFactory.getLog(HtmlUnitRegExpProxy.class);
+
     private final RegExpProxy wrapped_;
 
     /**
@@ -82,7 +86,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
                     return matcher.replaceFirst(replacement);
                 }
                 catch (final PatternSyntaxException e) {
-                    getLog().warn(e);
+                    LOG.warn(e.getMessage(), e);
                 }
             }
         }
@@ -197,7 +201,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             return wrapped_.compileRegExp(cx, source, flags);
         }
         catch (final Exception e) {
-            getLog().warn("compileRegExp() threw for >" + source + "<, flags: >" + flags + "<. "
+            LOG.warn("compileRegExp() threw for >" + source + "<, flags: >" + flags + "<. "
                     + "Replacing with a '####shouldNotFindAnything###'");
             return wrapped_.compileRegExp(cx, "####shouldNotFindAnything###", "");
         }
@@ -227,14 +231,6 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
     @Override
     public Scriptable wrapRegExp(final Context cx, final Scriptable scope, final Object compiled) {
         return wrapped_.wrapRegExp(cx, scope, compiled);
-    }
-
-    /**
-     * Returns the log object for this object.
-     * @return the log object for this object
-     */
-    protected final Log getLog() {
-        return LogFactory.getLog(getClass());
     }
 
     private static class RegExpData {

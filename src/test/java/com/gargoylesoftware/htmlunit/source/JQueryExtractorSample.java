@@ -22,6 +22,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 
@@ -42,6 +44,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 @RunWith(BrowserRunner.class)
 public class JQueryExtractorSample extends WebTestCase {
+
+    private static final Log LOG = LogFactory.getLog(JQueryExtractorSample.class);
 
     private static Iterator<HtmlElement> ITERATOR_;
     private static BrowserVersion BROWSER_VERSION_;
@@ -102,7 +106,7 @@ public class JQueryExtractorSample extends WebTestCase {
             final File f = new File(tmpDir,
                 "jquery" + getVersion() + '_' + getBrowserVersion().getNickname() + "_result.html");
             FileUtils.writeStringToFile(f, page.asXml(), "UTF-8");
-            getLog().info("Test result for "
+            LOG.info("Test result for "
                 + getVersion() + '_' + getBrowserVersion().getNickname() + " written to: " + f.getAbsolutePath());
         }
 

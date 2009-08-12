@@ -28,6 +28,8 @@ import java.util.HashMap;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -54,6 +56,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
  * @author Ahmed Ashour
  */
 public class JavaScriptConfigurationTest extends WebTestCase {
+
+    private static final Log LOG = LogFactory.getLog(JavaScriptConfigurationTest.class);
 
     /**
      * Constructor.
@@ -438,7 +442,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getAllEntries();
 
         for (final String classname : configuration.keySet()) {
-            getLog().debug("Now testing for class " + classname);
+            LOG.debug("Now testing for class " + classname);
             final Class< ? > clazz = configuration.getClassObject(classname);
             final Method[] methods = clazz.getMethods();
             String elementName;

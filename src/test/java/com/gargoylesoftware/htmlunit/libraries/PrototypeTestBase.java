@@ -20,6 +20,8 @@ import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.junit.After;
 import org.junit.Before;
 
@@ -38,6 +40,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  */
 public abstract class PrototypeTestBase extends WebServerTestCase {
+
+    private static final Log LOG = LogFactory.getLog(PrototypeTestBase.class);
 
     private WebClient webClient_;
 
@@ -72,7 +76,7 @@ public abstract class PrototypeTestBase extends WebServerTestCase {
             final File tmpDir = new File(System.getProperty("java.io.tmpdir"));
             final File f = new File(tmpDir, "prototype" + getVersion() + "_result_" + filename);
             FileUtils.writeStringToFile(f, page.asXml(), "UTF-8");
-            getLog().info("Test result for " + filename + " written to: " + f.getAbsolutePath());
+            LOG.info("Test result for " + filename + " written to: " + f.getAbsolutePath());
         }
 
         assertEquals(expected, actual);

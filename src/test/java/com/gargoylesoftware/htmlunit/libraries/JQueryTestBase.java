@@ -22,6 +22,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.ComparisonFailure;
@@ -43,6 +45,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 @RunWith(BrowserRunner.class)
 public abstract class JQueryTestBase extends WebServerTestCase {
+
+    private static final Log LOG = LogFactory.getLog(JQueryTestBase.class);
 
     private WebClient client_;
     private List<String> failures_;
@@ -139,7 +143,7 @@ public abstract class JQueryTestBase extends WebServerTestCase {
             final File f = new File(tmpDir,
                 "jquery" + getVersion() + '_' + getBrowserVersion().getNickname() + "_result.html");
             FileUtils.writeStringToFile(f, page.asXml(), "UTF-8");
-            getLog().info("Test result for "
+            LOG.info("Test result for "
                 + getVersion() + '_' + getBrowserVersion().getNickname() + " written to: " + f.getAbsolutePath());
         }
 

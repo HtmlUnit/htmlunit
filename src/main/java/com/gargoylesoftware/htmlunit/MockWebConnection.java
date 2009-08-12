@@ -38,6 +38,8 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MockWebConnection implements WebConnection {
 
+    private static final Log LOG = LogFactory.getLog(MockWebConnection.class);
+
     private final Map<String, WebResponseData> responseMap_ = new HashMap<String, WebResponseData>(10);
     private WebResponseData defaultResponse_;
     private WebRequestSettings lastRequest_;
@@ -49,7 +51,7 @@ public class MockWebConnection implements WebConnection {
     public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
         final URL url = settings.getUrl();
 
-        getLog().debug("Getting response for " + url.toExternalForm());
+        LOG.debug("Getting response for " + url.toExternalForm());
 
         lastRequest_ = settings;
         requestCount_++;
@@ -335,14 +337,6 @@ public class MockWebConnection implements WebConnection {
      */
     public int getRequestCount() {
         return requestCount_;
-    }
-
-    /**
-     * Returns the class logger.
-     * @return the class logger
-     */
-    protected final Log getLog() {
-        return LogFactory.getLog(getClass());
     }
 
 }

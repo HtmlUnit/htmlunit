@@ -386,14 +386,6 @@ public class HttpWebConnection implements WebConnection {
     }
 
     /**
-     * Returns the log object for this class.
-     * @return the log object
-     */
-    protected final Log getLog() {
-        return LogFactory.getLog(getClass());
-    }
-
-    /**
      * Sets the virtual host.
      * @param virtualHost the virtualHost to set
      */

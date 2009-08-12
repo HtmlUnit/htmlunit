@@ -32,13 +32,14 @@ import org.apache.commons.logging.LogFactory;
  */
 public class DataURLConnection extends URLConnection {
 
+    /** Logging support. */
+    private static final Log LOG = LogFactory.getLog(DataURLConnection.class);
+
     /** The JavaScript "URL" prefix. */
     public static final String DATA_PREFIX = "data:";
 
     /** The JavaScript code. */
     private final byte[] content_;
-
-    private transient Log log_ = LogFactory.getLog(DataURLConnection.class);
 
     /**
      * Creates an instance.
@@ -52,10 +53,10 @@ public class DataURLConnection extends URLConnection {
             data = DataUrlDecoder.decode(url).getBytes();
         }
         catch (final UnsupportedEncodingException e) {
-            log_.error("Exception decoding " + url, e);
+            LOG.error("Exception decoding " + url, e);
         }
         catch (final DecoderException e) {
-            log_.error("Exception decoding " + url, e);
+            LOG.error("Exception decoding " + url, e);
         }
         content_ = data;
     }

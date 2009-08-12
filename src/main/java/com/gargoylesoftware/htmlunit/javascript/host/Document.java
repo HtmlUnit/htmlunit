@@ -18,6 +18,9 @@ import java.io.IOException;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -55,7 +58,10 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919">W3C Dom Level 1</a>
  */
 public class Document extends EventNode {
+
     private static final long serialVersionUID = 3700830050839613384L;
+    private static final Log LOG = LogFactory.getLog(Document.class);
+
     private Window window_;
     private DOMImplementation implementation_;
     private String designMode_;
@@ -300,7 +306,7 @@ public class Document extends EventNode {
             final Object jsElement = getScriptableFor(domNode);
 
             if (jsElement == NOT_FOUND) {
-                getLog().debug("createTextNode(" + newData
+                LOG.debug("createTextNode(" + newData
                     + ") cannot return a result as there isn't a JavaScript object for the DOM node "
                     + domNode.getClass().getName());
             }
@@ -360,7 +366,7 @@ public class Document extends EventNode {
             if (tagName.startsWith("<") && tagName.endsWith(">") && browserVersion.isFirefox()) {
                 tagName = tagName.substring(1, tagName.length() - 1);
                 if (!tagName.matches("\\w+")) {
-                    getLog().error("Unexpected exception occurred while parsing HTML snippet");
+                    LOG.error("Unexpected exception occurred while parsing HTML snippet");
                     throw Context.reportRuntimeError("Unexpected exception occurred while parsing HTML snippet: "
                             + tagName);
                 }
@@ -371,7 +377,7 @@ public class Document extends EventNode {
             final Object jsElement = getScriptableFor(element);
 
             if (jsElement == NOT_FOUND) {
-                getLog().debug("createElement(" + tagName
+                LOG.debug("createElement(" + tagName
                         + ") cannot return a result as there isn't a JavaScript object for the element "
                         + element.getClass().getName());
             }

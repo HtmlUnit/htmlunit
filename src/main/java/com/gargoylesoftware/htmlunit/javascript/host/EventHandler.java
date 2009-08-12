@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -115,11 +113,4 @@ public class EventHandler extends BaseFunction {
         return super.get(name, start);
     }
 
-    /**
-     * Returns the log.
-     * @return the log
-     */
-    protected final Log getLog() {
-        return LogFactory.getLog(getClass());
-    }
 }

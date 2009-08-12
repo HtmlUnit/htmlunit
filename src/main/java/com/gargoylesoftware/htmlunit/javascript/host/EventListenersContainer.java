@@ -40,6 +40,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 public class EventListenersContainer implements Serializable {
 
     private static final long serialVersionUID = -4612648636521726975L;
+    private static final Log LOG = LogFactory.getLog(EventListenersContainer.class);
 
     static class Handlers implements Serializable {
         private static final long serialVersionUID = -5322935816539773122L;
@@ -79,7 +80,7 @@ public class EventListenersContainer implements Serializable {
     public boolean addEventListener(final String type, final Function listener, final boolean useCapture) {
         final List<Function> listeners = getHandlersOrCreateIt(type).getHandlers(useCapture);
         if (listeners.contains(listener)) {
-            getLog().debug(type + " listener already registered, skipping it (" + listener + ")");
+            LOG.debug(type + " listener already registered, skipping it (" + listener + ")");
             return false;
         }
         listeners.add(listener);
@@ -177,11 +178,9 @@ public class EventListenersContainer implements Serializable {
             final DomNode node = jsNode_.getDomNodeOrDie();
             event.setCurrentTarget(jsNode_);
             final HtmlPage page = (HtmlPage) node.getPage();
-            getLog().debug("Executing " + event.jsxGet_type() + " handler for " + node);
-            return page.executeJavaScriptFunctionIfPossible(
-                    handler, jsNode_, propHandlerArgs, node);
+            LOG.debug("Executing " + event.jsxGet_type() + " handler for " + node);
+            return page.executeJavaScriptFunctionIfPossible(handler, jsNode_, propHandlerArgs, node);
         }
-
         return null;
     }
 
@@ -233,14 +232,6 @@ public class EventListenersContainer implements Serializable {
             return (Function) handler;
         }
         return null;
-    }
-
-    /**
-     * Returns the log that is being used for all scripting objects.
-     * @return the log
-     */
-    protected final Log getLog() {
-        return LogFactory.getLog(getClass());
     }
 
     /**

@@ -38,8 +38,8 @@ import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 public class WebResponseImpl implements WebResponse, Serializable {
 
     private static final long serialVersionUID = 2842434739251092348L;
+    private static final Log LOG = LogFactory.getLog(WebResponseImpl.class);
 
-    private final transient Log log_ = LogFactory.getLog(WebResponseImpl.class);
     private long loadTime_;
     private WebResponseData responseData_;
     private WebRequestSettings requestSettings_;
@@ -180,7 +180,7 @@ public class WebResponseImpl implements WebResponse, Serializable {
             return EncodingSniffer.sniffEncoding(getResponseHeaders(), getContentAsStream());
         }
         catch (final IOException e) {
-            log_.warn("Error trying to sniff encoding.", e);
+            LOG.warn("Error trying to sniff encoding.", e);
             return null;
         }
     }
@@ -216,7 +216,7 @@ public class WebResponseImpl implements WebResponse, Serializable {
                 return new String(body, encoding);
             }
             catch (final UnsupportedEncodingException e) {
-                log_.warn("Attempted to use unsupported encoding '" + encoding + "'; using default system encoding.");
+                LOG.warn("Attempted to use unsupported encoding '" + encoding + "'; using default system encoding.");
                 return new String(body);
             }
         }

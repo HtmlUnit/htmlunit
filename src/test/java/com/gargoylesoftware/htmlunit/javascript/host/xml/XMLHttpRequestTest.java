@@ -960,11 +960,12 @@ public class XMLHttpRequestTest extends WebServerTestCase {
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
         final DomChangeListener listener = new DomChangeListener() {
+            private static final long serialVersionUID = 1978591653173770574L;
             public void nodeAdded(final DomChangeEvent event) {
-                // nothing
+                // Empty.
             }
             public void nodeDeleted(final DomChangeEvent event) {
-                // nothing
+                // Empty.
             }
         };
         page.addDomChangeListener(listener);

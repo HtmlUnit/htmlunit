@@ -40,11 +40,10 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 public class HtmlButton extends ClickableElement implements DisabledElement, SubmittableElement {
 
     private static final long serialVersionUID = 4828725767615187345L;
+    private static final Log LOG = LogFactory.getLog(HtmlButton.class);
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "button";
-
-    private final transient Log mainLog_ = LogFactory.getLog(getClass());
 
     /**
      * Creates a new instance.
@@ -108,8 +107,8 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
      * @see SubmittableElement#reset()
      */
     public void reset() {
-        if (mainLog_.isDebugEnabled()) {
-            mainLog_.debug("reset() not implemented for this element");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("reset() not implemented for this element");
         }
     }
 
@@ -119,8 +118,8 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
      * @see SubmittableElement#setDefaultValue(String)
      */
     public void setDefaultValue(final String defaultValue) {
-        if (mainLog_.isDebugEnabled()) {
-            mainLog_.debug("setDefaultValue() not implemented for this element");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("setDefaultValue() not implemented for this element");
         }
     }
 
@@ -130,8 +129,8 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
      * @see SubmittableElement#getDefaultValue()
      */
     public String getDefaultValue() {
-        if (mainLog_.isDebugEnabled()) {
-            mainLog_.debug("getDefaultValue() not implemented for this element");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("getDefaultValue() not implemented for this element");
         }
         return "";
     }

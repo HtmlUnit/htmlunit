@@ -35,13 +35,15 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public final class InputElementFactory implements IElementFactory {
 
+    /** Logging support. */
+    private static final Log LOG = LogFactory.getLog(InputElementFactory.class);
+
     /** The singleton instance. */
     public static final InputElementFactory instance = new InputElementFactory();
 
-    private final transient Log mainLog_ = LogFactory.getLog(getClass());
-
     /** Private singleton constructor. */
     private InputElementFactory() {
+        // Empty.
     }
 
     /**
@@ -121,8 +123,8 @@ public final class InputElementFactory implements IElementFactory {
             result = new HtmlFileInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         else {
-            if (mainLog_.isInfoEnabled()) {
-                mainLog_.info("Bad input type: \"" + type + "\", creating a text input");
+            if (LOG.isInfoEnabled()) {
+                LOG.info("Bad input type: \"" + type + "\", creating a text input");
             }
             result = new HtmlTextInput(namespaceURI, qualifiedName, page, attributeMap);
         }

@@ -61,9 +61,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  */
 public abstract class WebTestCase {
-    /**
-     * The listener port for the web server.
-     */
+
+    /** Logging support. */
+    private static final Log LOG = LogFactory.getLog(WebTestCase.class);
+
+    /** The listener port for the web server. */
     public static final int PORT = Integer.valueOf(System.getProperty("htmlunit.test.port", "12345"));
 
     /** Constant for the URL http://first which is used in the tests. */
@@ -188,14 +190,6 @@ public abstract class WebTestCase {
             System.out.println("Connection could not be made to " + url);
             return null;
         }
-    }
-
-    /**
-     * Returns the log that is being used for all testing objects.
-     * @return the log
-     */
-    protected final Log getLog() {
-        return LogFactory.getLog(getClass());
     }
 
     /**
@@ -440,7 +434,6 @@ public abstract class WebTestCase {
         final Method testMethod = findRunningJUnitTestMethod();
         generateTest_testName_ = testMethod.getDeclaringClass().getSimpleName() + "_" + testMethod.getName() + ".html";
 
-        final Log log = LogFactory.getLog(WebTestCase.class);
         if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null) {
             // should be optimized....
 
@@ -462,15 +455,15 @@ public abstract class WebTestCase {
                 newContent = StringUtils.replaceOnce(newContent, "</body>",  endScript + "</body>");
             }
             else {
-                log.info("No test generated: currently only content with a <head> and a </body> is supported");
+                LOG.info("No test generated: currently only content with a <head> and a </body> is supported");
             }
 
             final File f = File.createTempFile("TEST" + '_', ".html");
             FileUtils.writeStringToFile(f, newContent, "ISO-8859-1");
-            log.info("Test file written: " + f.getAbsolutePath());
+            LOG.info("Test file written: " + f.getAbsolutePath());
         }
         else {
-            log.debug("System property \"" + PROPERTY_GENERATE_TESTPAGES
+            LOG.debug("System property \"" + PROPERTY_GENERATE_TESTPAGES
                     + "\" not set, don't generate test HTML page for real browser");
         }
     }
@@ -539,12 +532,12 @@ public abstract class WebTestCase {
 
         final Method testMethod = findRunningJUnitTestMethod();
         try {
-            getLog().info("Running " + testMethod.getName() + " as not yet implemented");
+            LOG.info("Running " + testMethod.getName() + " as not yet implemented");
             testMethod.invoke(this, (Object[]) new Class[] {});
             Assert.fail(testMethod.getName() + " is marked as not implemented but already works");
         }
         catch (final Exception e) {
-            getLog().info(testMethod.getName() + " fails which is normal as it is not yet implemented");
+            LOG.info(testMethod.getName() + " fails which is normal as it is not yet implemented");
             // method execution failed, it is really "not yet implemented"
         }
         finally {

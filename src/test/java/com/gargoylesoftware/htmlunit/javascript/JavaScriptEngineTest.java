@@ -24,12 +24,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
+import net.sourceforge.htmlunit.corejs.javascript.Script;
+
 import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
-import net.sourceforge.htmlunit.corejs.javascript.Script;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -69,6 +72,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
  */
 @RunWith(BrowserRunner.class)
 public class JavaScriptEngineTest extends WebTestCase {
+
+    private static final Log LOG = LogFactory.getLog(JavaScriptEngineTest.class);
 
     /**
      * @throws Exception if the test fails
@@ -339,7 +344,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = client.getPage(URL_FIRST);
-        getLog().debug(page.asXml());
+        LOG.debug(page.asXml());
         assertEquals(expectedAlerts, collectedAlerts);
 
         assertNotNull(page.getHtmlElementById("script1"));

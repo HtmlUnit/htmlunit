@@ -26,10 +26,13 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  */
 public class CSSValue extends SimpleScriptable {
 
+    private static final long serialVersionUID = 5433037821970827600L;
+
     /**
      * The value is inherited and the <code>cssText</code> contains "inherit".
      */
     public static final short CSS_INHERIT = org.w3c.dom.css.CSSValue.CSS_INHERIT;
+
     /**
      * The value is a primitive value and an instance of the
      * <code>CSSPrimitiveValue</code> interface can be obtained by using
@@ -37,6 +40,7 @@ public class CSSValue extends SimpleScriptable {
      * <code>CSSValue</code> interface.
      */
     public static final short CSS_PRIMITIVE_VALUE = org.w3c.dom.css.CSSValue.CSS_PRIMITIVE_VALUE;
+
     /**
      * The value is a <code>CSSValue</code> list and an instance of the
      * <code>CSSValueList</code> interface can be obtained by using
@@ -50,6 +54,9 @@ public class CSSValue extends SimpleScriptable {
      */
     public static final short CSS_CUSTOM = org.w3c.dom.css.CSSValue.CSS_CUSTOM;
 
+    /**
+     * The wrapped CSS value.
+     */
     private org.w3c.dom.css.CSSValue wrappedCssValue_;
 
     /**

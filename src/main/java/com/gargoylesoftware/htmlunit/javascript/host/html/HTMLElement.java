@@ -38,6 +38,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
@@ -100,6 +101,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclara
 public class HTMLElement extends Element implements ScriptableWithFallbackGetter {
 
     private static final long serialVersionUID = -6864034414262085851L;
+    private static final Log LOG = LogFactory.getLog(HTMLElement.class);
+
     private static final int BEHAVIOR_ID_UNKNOWN = -1;
     /** BEHAVIOR_ID_CLIENT_CAPS. */
     public static final int BEHAVIOR_ID_CLIENT_CAPS = 0;
@@ -361,7 +364,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             if (htmlElement != null && isAttributeName(name)) {
                 final String value = htmlElement.getAttribute(name);
                 if (HtmlElement.ATTRIBUTE_NOT_DEFINED != value) {
-                    getLog().debug("Found attribute for evaluation of property \"" + name
+                    LOG.debug("Found attribute for evaluation of property \"" + name
                             + "\" for of " + this);
                     return value;
                 }
@@ -1133,7 +1136,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             return BEHAVIOR_ID_DOWNLOAD;
         }
         else {
-            getLog().warn("Unimplemented behavior: " + behavior);
+            LOG.warn("Unimplemented behavior: " + behavior);
             return BEHAVIOR_ID_UNKNOWN;
         }
     }
@@ -1177,7 +1180,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 behaviors_.remove(BEHAVIOR_DOWNLOAD);
                 break;
             default:
-                getLog().warn("Unexpected behavior id: " + id + ". Ignoring.");
+                LOG.warn("Unexpected behavior id: " + id + ". Ignoring.");
         }
     }
 
@@ -1323,7 +1326,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param minVersion the minimum version of the component to install
      */
     public void addComponentRequest(final String id, final String idType, final String minVersion) {
-        getLog().debug("Call to addComponentRequest(" + id + ", " + idType + ", " + minVersion + ") ignored.");
+        LOG.debug("Call to addComponentRequest(" + id + ", " + idType + ", " + minVersion + ") ignored.");
     }
 
     /**
@@ -1332,7 +1335,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * default IE behavior implementation.
      */
     public void clearComponentRequest() {
-        getLog().debug("Call to clearComponentRequest() ignored.");
+        LOG.debug("Call to clearComponentRequest() ignored.");
     }
 
     /**
@@ -1435,7 +1438,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             try {
                 final WebResponse webResponse = client.loadWebResponse(settings);
                 final String content = webResponse.getContentAsString();
-                getLog().debug("Downloaded content: " + StringUtils.abbreviate(content, 512));
+                LOG.debug("Downloaded content: " + StringUtils.abbreviate(content, 512));
                 final Object[] args = new Object[] {content};
                 final ContextAction action = new ContextAction() {
                     public Object run(final Context cx) {
@@ -1447,7 +1450,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 cf.call(action);
             }
             catch (final IOException e) {
-                getLog().error("Behavior #default#download: Cannot download " + url_, e);
+                LOG.error("Behavior #default#download: Cannot download " + url_, e);
             }
         }
     }

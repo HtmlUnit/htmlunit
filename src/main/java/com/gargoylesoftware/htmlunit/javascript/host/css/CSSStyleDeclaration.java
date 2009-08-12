@@ -28,14 +28,16 @@ import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.NumberUtils;
-import org.w3c.css.sac.ErrorHandler;
-import org.w3c.css.sac.InputSource;
-
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.w3c.css.sac.ErrorHandler;
+import org.w3c.css.sac.InputSource;
 
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -59,6 +61,7 @@ import com.steadystate.css.parser.SACParserCSS21;
 public class CSSStyleDeclaration extends SimpleScriptable {
 
     private static final long serialVersionUID = -1976370264911039311L;
+    private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
     private static Map<String, String> CSSColors_ = new HashMap<String, String>();
 
     /** The different types of shorthand values. */
@@ -160,7 +163,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
                         }
                     }
                     catch (final ParseException e) {
-                        getLog().warn("Invalid behavior: '" + element.getValue() + "'.");
+                        LOG.warn("Invalid behavior: '" + element.getValue() + "'.");
                     }
                 }
             }
@@ -599,7 +602,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
                 }
             }
             catch (final ParseException e) {
-                getLog().warn("Invalid behavior: '" + behavior + "'.");
+                LOG.warn("Invalid behavior: '" + behavior + "'.");
             }
         }
     }
@@ -4246,7 +4249,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @return the value
      */
     public CSSValue jsxFunction_getPropertyCSSValue(final String name) {
-        getLog().info("getPropertyCSSValue(" + name + "): getPropertyCSSValue support is experimental");
+        LOG.info("getPropertyCSSValue(" + name + "): getPropertyCSSValue support is experimental");
         // following is a hack, just to have basic support for getPropertyCSSValue
         // TODO: rework the whole CSS processing here! we should *always* parse the style!
         if (styleDeclaration_ == null) {

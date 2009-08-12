@@ -139,6 +139,8 @@ class XPathDomNodeList<E extends DomNode> extends AbstractList<E> implements Dom
      */
     private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener {
 
+        private static final long serialVersionUID = 3586393389945802774L;
+
         /**
          * {@inheritDoc}
          */

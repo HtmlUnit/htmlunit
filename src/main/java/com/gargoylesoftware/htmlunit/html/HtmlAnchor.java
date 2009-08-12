@@ -43,11 +43,10 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 public class HtmlAnchor extends ClickableElement {
 
     private static final long serialVersionUID = 7968778206454737178L;
+    private static final Log LOG = LogFactory.getLog(HtmlAnchor.class);
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "a";
-
-    private final transient Log mainLog_ = LogFactory.getLog(getClass());
 
     /**
      * Creates a new instance.
@@ -73,9 +72,9 @@ public class HtmlAnchor extends ClickableElement {
      */
     protected Page doClickAction(final Page defaultPage, final String hrefSuffix) throws IOException {
         final String href = getHrefAttribute() + hrefSuffix;
-        if (mainLog_.isDebugEnabled()) {
+        if (LOG.isDebugEnabled()) {
             final String w = defaultPage.getEnclosingWindow().getName();
-            mainLog_.debug("do click action in window '" + w + "', using href '" + href + "'");
+            LOG.debug("do click action in window '" + w + "', using href '" + href + "'");
         }
         if (href.length() == 0) {
             return defaultPage;
@@ -87,8 +86,8 @@ public class HtmlAnchor extends ClickableElement {
         final URL url = page.getFullyQualifiedUrl(href);
         final WebRequestSettings wrs = new WebRequestSettings(url);
         wrs.setAdditionalHeader("Referer", page.getWebResponse().getRequestSettings().getUrl().toExternalForm());
-        if (mainLog_.isDebugEnabled()) {
-            mainLog_.debug(
+        if (LOG.isDebugEnabled()) {
+            LOG.debug(
                     "Getting page for " + url.toExternalForm()
                     + ", derived from href '" + href
                     + "', using the originating URL "

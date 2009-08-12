@@ -23,6 +23,8 @@ import java.net.URL;
 import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.util.URIUtil;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -49,6 +51,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
 public class Location extends SimpleScriptable {
 
     private static final long serialVersionUID = -2907220432378132233L;
+    private static final Log LOG = LogFactory.getLog(Location.class);
     private static final String UNKNOWN = "null";
 
     /**
@@ -124,7 +127,7 @@ public class Location extends SimpleScriptable {
     public void jsxFunction_reload(final boolean force) throws IOException {
         final String url = jsxGet_href();
         if (UNKNOWN.equals(url)) {
-            getLog().error("Unable to reload location: current URL is unknown.");
+            LOG.error("Unable to reload location: current URL is unknown.");
         }
         else {
             jsxSet_href(url);
@@ -169,7 +172,7 @@ public class Location extends SimpleScriptable {
             return url.toExternalForm();
         }
         catch (final MalformedURLException e) {
-            getLog().error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
             return page.getWebResponse().getRequestSettings().getUrl().toExternalForm();
         }
     }
@@ -203,11 +206,11 @@ public class Location extends SimpleScriptable {
                     webWindow.getWebClient().getPage(webWindow, new WebRequestSettings(url));
                 }
                 catch (final MalformedURLException e) {
-                    getLog().error("jsxSet_location('" + newLocation + "') Got MalformedURLException", e);
+                    LOG.error("jsxSet_location('" + newLocation + "') Got MalformedURLException", e);
                     throw e;
                 }
                 catch (final IOException e) {
-                    getLog().error("jsxSet_location('" + newLocation + "') Got IOException", e);
+                    LOG.error("jsxSet_location('" + newLocation + "') Got IOException", e);
                     throw e;
                 }
             }
@@ -261,7 +264,7 @@ public class Location extends SimpleScriptable {
                 return URIUtil.encodeQuery(hash_);
             }
             catch (final URIException e) {
-                getLog().error(e.getMessage(), e);
+                LOG.error(e.getMessage(), e);
             }
         }
         return hash_;
@@ -292,7 +295,7 @@ public class Location extends SimpleScriptable {
             }
         }
         catch (final URIException e) {
-            getLog().error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
     }
 

@@ -23,6 +23,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
@@ -53,6 +55,8 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 public class XMLDocument extends Document {
 
     private static final long serialVersionUID = 1225601711396578064L;
+    private static final Log LOG = LogFactory.getLog(XMLDocument.class);
+
     private boolean async_ = true;
     private boolean preserveWhiteSpace_;
     private XMLDOMParseError parseError_;
@@ -104,7 +108,7 @@ public class XMLDocument extends Document {
      */
     public boolean jsxFunction_load(final String xmlSrouce) {
         if (async_) {
-            getLog().debug("XMLDocument.load(): 'async' is true, currently treated as false.");
+            LOG.debug("XMLDocument.load(): 'async' is true, currently treated as false.");
         }
         try {
             final HtmlPage htmlPage = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
@@ -123,7 +127,7 @@ public class XMLDocument extends Document {
             parseError.setReason(e.getMessage());
             parseError.setSrcText("xml");
             parseError.setUrl(xmlSrouce);
-            getLog().debug("Error parsing XML from '" + xmlSrouce + "'", e);
+            LOG.debug("Error parsing XML from '" + xmlSrouce + "'", e);
             return false;
         }
     }
@@ -145,7 +149,7 @@ public class XMLDocument extends Document {
             return true;
         }
         catch (final IOException e) {
-            getLog().debug("Error parsing XML\n" + strXML, e);
+            LOG.debug("Error parsing XML\n" + strXML, e);
             return false;
         }
     }
@@ -286,7 +290,7 @@ public class XMLDocument extends Document {
         if (domElement instanceof HtmlElement) {
             return ((HtmlElement) domElement).getScriptObject();
         }
-        getLog().debug("getElementById(" + id + "): no HTML DOM node found with this ID");
+        LOG.debug("getElementById(" + id + "): no HTML DOM node found with this ID");
         return null;
     }
 

@@ -30,13 +30,13 @@ import org.apache.commons.logging.LogFactory;
 public class IncorrectnessListenerImpl implements IncorrectnessListener, Serializable  {
 
     private static final long serialVersionUID = -9060293156707472175L;
+    private static final Log LOG = LogFactory.getLog(IncorrectnessListenerImpl.class);
 
     /**
      * {@inheritDoc}
      */
     public void notify(final String message, final Object origin) {
-        final Log log = LogFactory.getLog(origin.getClass());
-        log.warn(message);
+        LOG.warn(message);
     }
 
 }

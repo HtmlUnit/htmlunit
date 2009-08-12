@@ -107,7 +107,7 @@ public class StyleSheetList extends SimpleScriptable {
         else {
             // <link rel="stylesheet" type="text/css" href="..." />
             final HtmlLink link = (HtmlLink) node;
-            sheet = Stylesheet.loadStylesheet(getWindow(), element, getLog(), link, null);
+            sheet = Stylesheet.loadStylesheet(getWindow(), element, link, null);
         }
 
         return sheet;

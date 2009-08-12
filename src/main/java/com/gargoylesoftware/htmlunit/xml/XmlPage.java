@@ -55,10 +55,9 @@ import com.gargoylesoftware.htmlunit.html.DomProcessingInstruction;
 public class XmlPage extends SgmlPage {
 
     private static final long serialVersionUID = -1430136241030261308L;
+    private static final Log LOG = LogFactory.getLog(XmlPage.class);
 
     private Node node_;
-
-    private final transient Log mainLog_ = LogFactory.getLog(getClass());
 
     /**
      * Creates an instance.
@@ -116,8 +115,8 @@ public class XmlPage extends SgmlPage {
             }
         }
         catch (final SAXException e) {
-            if (mainLog_.isWarnEnabled()) {
-                mainLog_.warn("Failed parsing XML document " + webResponse.getRequestSettings().getUrl()
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("Failed parsing XML document " + webResponse.getRequestSettings().getUrl()
                         + ": " + e.getMessage());
             }
             if (!ignoreSAXException) {
@@ -125,8 +124,8 @@ public class XmlPage extends SgmlPage {
             }
         }
         catch (final ParserConfigurationException e) {
-            if (mainLog_.isWarnEnabled()) {
-                mainLog_.warn("Failed parsing XML document " + webResponse.getRequestSettings().getUrl()
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("Failed parsing XML document " + webResponse.getRequestSettings().getUrl()
                         + ": " + e.getMessage());
             }
         }

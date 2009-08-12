@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
 import org.junit.After;
 import org.junit.Test;
 
@@ -93,6 +94,7 @@ public class CodeStyleTest {
                 deprecated(lines, relativePath);
                 staticJSMethod(lines, relativePath);
                 singleAlert(lines, relativePath);
+                staticLoggers(lines, relativePath);
             }
         }
     }
@@ -449,6 +451,22 @@ public class CodeStyleTest {
                         && alert.indexOf('"', alert.indexOf('"') + 1) != -1) {
                     addFailure("No need for curly brackets in " + relativePath + ", line: " + (i + 1));
                 }
+            }
+            i++;
+        }
+    }
+
+    /**
+     * Verifies that only static loggers exist.
+     */
+    private void staticLoggers(final List<String> lines, final String relativePath) {
+        int i = 0;
+        final String logClassName = Log.class.getSimpleName();
+        for (String line : lines) {
+            line = line.trim();
+            if (line.contains(" " + logClassName + " ") && !line.contains(" LOG ") && !line.contains(" static ")
+                && !line.startsWith("//") && !line.contains("httpclient.wire")) {
+                addFailure("Non-static logger in " + relativePath + ", line: " + (i + 1));
             }
             i++;
         }

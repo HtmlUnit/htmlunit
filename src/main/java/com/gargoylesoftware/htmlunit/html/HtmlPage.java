@@ -118,6 +118,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 public class HtmlPage extends SgmlPage {
 
     private static final long serialVersionUID = 1779746292119944291L;
+    private static final Log LOG = LogFactory.getLog(HtmlPage.class);
 
     private HtmlUnitDOMBuilder builder_;
     private String originalCharset_;
@@ -127,10 +128,6 @@ public class HtmlPage extends SgmlPage {
     private int parserCount_;
     private int snippetParserCount_;
     private int inlineSnippetParserCount_;
-
-    private final transient Log javascriptLog_ = LogFactory.getLog("com.gargoylesoftware.htmlunit.javascript");
-    private final transient Log mainLog_ = LogFactory.getLog(getClass());
-
     private List<HtmlAttributeChangeListener> attributeListeners_;
     private final transient Object lock_ = new Object(); // used for synchronization
     private Range selection_;
@@ -415,8 +412,8 @@ public class HtmlPage extends SgmlPage {
                 final String charset = contents.substring(pos + 8);
                 if (charset.length() > 0) {
                     originalCharset_ = charset;
-                    if (mainLog_.isDebugEnabled()) {
-                        mainLog_.debug("Page Encoding detected: " + originalCharset_);
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("Page Encoding detected: " + originalCharset_);
                     }
                     return originalCharset_;
                 }
@@ -927,14 +924,6 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * Returns the log object for this element.
-     * @return the log object for this element
-     */
-    protected Log getJsLog() {
-        return javascriptLog_;
-    }
-
-    /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * @param srcAttribute the source attribute from the script tag
@@ -949,15 +938,15 @@ public class HtmlPage extends SgmlPage {
         try {
             scriptURL = getFullyQualifiedUrl(srcAttribute);
             if (scriptURL.getProtocol().equals("javascript")) {
-                if (mainLog_.isInfoEnabled()) {
-                    mainLog_.info("Ignoring script src [" + srcAttribute + "]");
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("Ignoring script src [" + srcAttribute + "]");
                 }
                 return false;
             }
         }
         catch (final MalformedURLException e) {
-            if (mainLog_.isErrorEnabled()) {
-                mainLog_.error("Unable to build URL for script src tag [" + srcAttribute + "]");
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Unable to build URL for script src tag [" + srcAttribute + "]");
             }
             if (getWebClient().isThrowExceptionOnScriptError()) {
                 throw new ScriptException(this, e);
@@ -1002,8 +991,8 @@ public class HtmlPage extends SgmlPage {
             response = client.loadWebResponse(request);
         }
         catch (final IOException e) {
-            if (mainLog_.isErrorEnabled()) {
-                mainLog_.error("Error loading JavaScript from [" + url + "].", e);
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Error loading JavaScript from [" + url + "].", e);
             }
             return null;
         }
@@ -1075,8 +1064,8 @@ public class HtmlPage extends SgmlPage {
     public void setTitleText(final String message) {
         HtmlTitle titleElement = getTitleElement();
         if (titleElement == null) {
-            if (mainLog_.isDebugEnabled()) {
-                mainLog_.debug("No title element, creating one");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("No title element, creating one");
             }
             final HtmlHead head = (HtmlHead) getFirstChildElement(getDocumentElement(), HtmlHead.class);
             if (head == null) {
@@ -1155,8 +1144,8 @@ public class HtmlPage extends SgmlPage {
             final BaseFrame frame = fw.getFrameElement();
             final Function frameTagEventHandler = frame.getEventHandler("on" + eventType);
             if (frameTagEventHandler != null) {
-                if (mainLog_.isDebugEnabled()) {
-                    mainLog_.debug("Executing on" + eventType + " handler for " + frame);
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Executing on" + eventType + " handler for " + frame);
                 }
                 final Event event = new Event(frame, eventType);
                 ((Node) frame.getScriptObject()).executeEvent(event);
@@ -1173,8 +1162,8 @@ public class HtmlPage extends SgmlPage {
         if (event.jsxGet_type().equals(Event.TYPE_BEFORE_UNLOAD) && event.jsxGet_returnValue() != null) {
             final OnbeforeunloadHandler handler = getWebClient().getOnbeforeunloadHandler();
             if (handler == null) {
-                if (mainLog_.isWarnEnabled()) {
-                    mainLog_.warn("document.onbeforeunload() returned a string in event.returnValue,"
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn("document.onbeforeunload() returned a string in event.returnValue,"
                             + " but no onbeforeunload handler installed.");
                 }
             }
@@ -1217,8 +1206,8 @@ public class HtmlPage extends SgmlPage {
                 time = Double.parseDouble(refreshString);
             }
             catch (final NumberFormatException e) {
-                if (mainLog_.isErrorEnabled()) {
-                    mainLog_.error("Malformed refresh string (no ';' but not a number): " + refreshString, e);
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("Malformed refresh string (no ';' but not a number): " + refreshString, e);
                 }
                 return;
             }
@@ -1230,15 +1219,15 @@ public class HtmlPage extends SgmlPage {
                 time = Double.parseDouble(refreshString.substring(0, index).trim());
             }
             catch (final NumberFormatException e) {
-                if (mainLog_.isErrorEnabled()) {
-                    mainLog_.error("Malformed refresh string (no valid number before ';') " + refreshString, e);
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("Malformed refresh string (no valid number before ';') " + refreshString, e);
                 }
                 return;
             }
             index = refreshString.toLowerCase().indexOf("url=", index);
             if (index == -1) {
-                if (mainLog_.isErrorEnabled()) {
-                    mainLog_.error("Malformed refresh string (found ';' but no 'url='): " + refreshString);
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("Malformed refresh string (found ';' but no 'url='): " + refreshString);
                 }
                 return;
             }
@@ -1259,8 +1248,8 @@ public class HtmlPage extends SgmlPage {
                     url = getFullyQualifiedUrl(urlString);
                 }
                 catch (final MalformedURLException e) {
-                    if (mainLog_.isErrorEnabled()) {
-                        mainLog_.error("Malformed URL in refresh string: " + refreshString, e);
+                    if (LOG.isErrorEnabled()) {
+                        LOG.error("Malformed URL in refresh string: " + refreshString, e);
                     }
                     throw e;
                 }
