@@ -153,4 +153,22 @@ public class WebClient2Test extends WebServerTestCase {
         assertTrue(textPage.getContent().contains("Gargoyle Software"));
     }
 
+    /**
+     * Regression test for bug 2833433.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void serialization_pageLoad() throws Exception {
+
+        final String page1Content = "<html><body>hello 1</body></html>";
+        final WebClient client = getWebClient();
+        final HtmlPage page1 = loadPage(client, page1Content, null, URL_FIRST);
+        assertEquals("hello 1", page1.asText());
+
+        final String page2Content = "<html><body>hello 2</body></html>";
+        final WebClient copy = (WebClient) SerializationUtils.clone(client);
+        final HtmlPage page2 = loadPage(copy, page2Content, null, URL_SECOND);
+        assertEquals("hello 2", page2.asText());
+    }
+
 }
