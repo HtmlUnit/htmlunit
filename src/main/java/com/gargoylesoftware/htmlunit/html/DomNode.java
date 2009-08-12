@@ -88,6 +88,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /** A ready state constant for IE (state 5). */
     public static final String READY_STATE_COMPLETE = "complete";
 
+    /** The name of the "element" property. Used when watching property change events. */
+    public static final String PROPERTY_ELEMENT = "element";
+
     /** The owning page of this node. */
     private SgmlPage page_;
 
@@ -112,13 +115,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * This is the JavaScript object corresponding to this DOM node. It may
      * be null if there isn't a corresponding JavaScript object.
      */
-    private transient ScriptableObject scriptObject_;
+    private ScriptableObject scriptObject_;
 
     /** The ready state is is an IE-only value that is available to a large number of elements. */
     private String readyState_;
-
-    /** The name of the "element" property. Used when watching property change events. */
-    public static final String PROPERTY_ELEMENT = "element";
 
     /**
      * The line number in the source page where the DOM node starts.
