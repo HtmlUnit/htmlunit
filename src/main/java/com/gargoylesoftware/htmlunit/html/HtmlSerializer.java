@@ -246,13 +246,18 @@ class HtmlSerializer {
 
     private void appendHtmlTable(final HtmlTable htmlTable) {
         doAppendBlockSeparator();
+        final String caption = htmlTable.getCaptionText();
+        if (caption != null) {
+            doAppend(caption);
+            doAppendBlockSeparator();
+        }
         boolean first = true;
         for (final HtmlTableRow row : htmlTable.getRows()) {
             if (!first) {
                 doAppendBlockSeparator();
             }
             first = false;
-            appendChildren(row);
+            appendHtmlTableRow(row);
         }
         doAppendBlockSeparator();
     }

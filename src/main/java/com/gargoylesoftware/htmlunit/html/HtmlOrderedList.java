@@ -87,29 +87,6 @@ public class HtmlOrderedList extends ClickableElement {
      * {@inheritDoc}
      */
     @Override
-    protected String asTextInternal() {
-        final StringBuilder sb = new StringBuilder();
-        boolean first = true;
-        int i = 1;
-        for (final DomNode item : getChildren()) {
-            if (!(item instanceof HtmlListItem)) {
-                continue;
-            }
-            if (!first) {
-                sb.append(AS_TEXT_BLOCK_SEPARATOR);
-            }
-            first = false;
-            sb.append(i++);
-            sb.append(". ");
-            sb.append(item.asTextInternal());
-        }
-        return sb.toString();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     protected boolean isBlock() {
         return true;
     }

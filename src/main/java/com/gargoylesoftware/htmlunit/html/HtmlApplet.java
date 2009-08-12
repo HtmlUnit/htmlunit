@@ -232,15 +232,4 @@ public class HtmlApplet extends StyledElement {
             throw new RuntimeException(e);
         }
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected String asTextInternal() {
-        if (getPage().getWebClient().isAppletEnabled()) {
-            return ""; // is this the best answer?
-        }
-        return super.asTextInternal();
-    }
 }

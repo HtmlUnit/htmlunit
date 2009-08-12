@@ -103,14 +103,6 @@ public class HtmlCheckBoxInput extends HtmlInput {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected String asTextInternal() {
-        return asText();
-    }
-
-    /**
      * Override so that checkbox can change its state correctly when its
      * click() method is called.
      *

@@ -667,27 +667,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *         be visible to the user if this page was shown in a web browser
      */
     public String asText() {
-        String text = asTextInternal();
-
-        // ignore <br/> at the end of a block
-        text = text.replaceAll(AS_TEXT_NEW_LINE + AS_TEXT_BLOCK_SEPARATOR, AS_TEXT_BLOCK_SEPARATOR);
-        text = reduceWhitespace(text);
-        text = text.replaceAll(AS_TEXT_BLANK, " ");
-        final String ls = System.getProperty("line.separator");
-        text = text.replaceAll(AS_TEXT_NEW_LINE, ls);
-        text = text.replaceAll("(?:" + AS_TEXT_BLOCK_SEPARATOR + ")+", ls); // many block sep => 1 new line
-        text = text.replaceAll(AS_TEXT_TAB, "\t");
-
-        return text;
-    }
-
-    /**
-     * Gets internal text representation. This will be formatted at the very end of {@link #asText()} to handle multiple
-     * spaces, new lines, ...
-     * @return the "internal" text representation
-     */
-    protected String asTextInternal() {
-        return getChildrenAsText();
+        final HtmlSerializer ser = new HtmlSerializer();
+        return ser.asText(this);
     }
 
     /**
@@ -697,87 +678,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     protected boolean isBlock() {
         return false;
-    }
-
-    /**
-     * Returns a text string that represents all the child elements as they would be visible in a web browser.
-     * @return a text string that represents all the child elements as they would be visible in a web browser
-     * @see #asText()
-     */
-    protected final String getChildrenAsText() {
-        final StringBuilder buffer = new StringBuilder();
-
-        for (final DomNode node : getChildren()) {
-            if (node instanceof DomText) {
-                if (node.isDisplayed()) {
-                    buffer.append(node.asTextInternal());
-                }
-            }
-            else {
-                final boolean block = node.isBlock();
-                if (block) {
-                    buffer.append(AS_TEXT_BLOCK_SEPARATOR);
-                }
-                buffer.append(node.asTextInternal());
-                if (block) {
-                    buffer.append(AS_TEXT_BLOCK_SEPARATOR);
-                }
-            }
-        }
-        return buffer.toString();
-    }
-
-    /**
-     * Removes extra whitespace from a string, similar to what a browser does when it displays text.
-     * @param text the text to clean up
-     * @return the clean text
-     */
-    protected String reduceWhitespace(String text) {
-        text = text.trim();
-
-        // remove white spaces before or after block separators
-        text = text.replaceAll("\\s*" + AS_TEXT_BLOCK_SEPARATOR + "\\s*", AS_TEXT_BLOCK_SEPARATOR);
-
-        // remove leading block separators
-        while (text.startsWith(AS_TEXT_BLOCK_SEPARATOR)) {
-            text = text.substring(AS_TEXT_BLOCK_SEPARATOR.length());
-        }
-
-        // remove trailing block separators
-        while (text.endsWith(AS_TEXT_BLOCK_SEPARATOR)) {
-            text = text.substring(0, text.length() - AS_TEXT_BLOCK_SEPARATOR.length());
-        }
-        text = text.trim();
-
-        final StringBuilder buffer = new StringBuilder(text.length());
-
-        boolean whitespace = false;
-        for (final char ch : text.toCharArray()) {
-
-            // Translate non-breaking space to regular space.
-            if (ch == (char) 160) {
-                buffer.append(' ');
-                whitespace = false;
-            }
-            else {
-                if (whitespace) {
-                    if (!Character.isWhitespace(ch)) {
-                        buffer.append(ch);
-                        whitespace = false;
-                    }
-                }
-                else {
-                    if (Character.isWhitespace(ch)) {
-                        whitespace = true;
-                        buffer.append(' ');
-                    }
-                    else {
-                        buffer.append(ch);
-                    }
-                }
-            }
-        }
-        return buffer.toString();
     }
 
     /**

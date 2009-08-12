@@ -108,21 +108,6 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected String asTextInternal() {
-        if (isDisplayed()) {
-            String text = getText();
-            text = text.replaceAll(" ", AS_TEXT_BLANK);
-            text = text.replaceAll("\r?\n", AS_TEXT_NEW_LINE);
-            text = text.replaceAll("\r", AS_TEXT_NEW_LINE);
-            return text;
-        }
-        return "";
-    }
-
-    /**
      * Sets the new value of this text area.
      *
      * Note that this acts like 'pasting' the text, but to simulate characters entry

@@ -115,14 +115,6 @@ public class DomText extends DomCharacterData implements Text {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected String asTextInternal() {
-        return getData();
-    }
-
-    /**
      * @return the node type constant, in this case {@link org.w3c.dom.Node#TEXT_NODE}
      */
     @Override

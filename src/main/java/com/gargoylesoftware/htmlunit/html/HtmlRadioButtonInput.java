@@ -128,14 +128,6 @@ public class HtmlRadioButtonInput extends HtmlInput {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected String asTextInternal() {
-        return asText();
-    }
-
-    /**
      * Override of default clickAction that makes this radio button the selected
      * one when it is clicked.
      *

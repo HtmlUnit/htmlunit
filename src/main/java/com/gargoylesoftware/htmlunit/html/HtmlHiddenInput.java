@@ -56,12 +56,4 @@ public class HtmlHiddenInput extends HtmlInput {
     public String asText() {
         return "";
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected String asTextInternal() {
-        return "";
-    }
 }

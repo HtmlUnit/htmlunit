@@ -472,14 +472,6 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected String asTextInternal() {
-        return "";
-    }
-
-    /**
      * Indicates if a node without children should be written in expanded form as XML
      * (i.e. with closing tag rather than with "/&gt;")
      * @return <code>true</code> to make generated XML readable as HTML

@@ -62,14 +62,6 @@ public class DomComment extends DomCharacterData implements Comment {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected String asTextInternal() {
-        return "";
-    }
-
-    /**
      * Recursively write the XML data for the node tree starting at <code>node</code>.
      *
      * @param indent white space to indent child nodes

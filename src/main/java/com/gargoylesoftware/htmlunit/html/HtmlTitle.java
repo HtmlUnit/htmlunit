@@ -76,12 +76,4 @@ public class HtmlTitle extends HtmlElement {
     protected boolean isEmptyXmlTagExpanded() {
         return true;
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected String asTextInternal() {
-        return super.asTextInternal() + AS_TEXT_BLOCK_SEPARATOR;
-    }
 }

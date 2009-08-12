@@ -213,7 +213,7 @@ public class ExtJS22Test extends WebTestCase {
         assertEquals("Title: Master of the Game" + LINE_SEPARATOR
                 + "Author: Sidney Sheldon" + LINE_SEPARATOR
                 + "Manufacturer: Warner Books" + LINE_SEPARATOR
-                + "Product Group: Book" + LINE_SEPARATOR, resultsDiv.asText());
+                + "Product Group: Book", resultsDiv.asText());
     }
 
 }

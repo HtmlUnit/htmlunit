@@ -180,15 +180,6 @@ public class XmlPage extends SgmlPage {
     }
 
     /**
-     * {@inheritDoc}.
-     * Exactly behaves as {@link #asXml()}.
-     */
-    @Override
-    protected String asTextInternal() {
-        return asXml();
-    }
-
-    /**
      * {@inheritDoc}
      * Not yet implemented.
      */

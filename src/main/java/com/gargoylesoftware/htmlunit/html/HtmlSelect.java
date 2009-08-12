@@ -475,33 +475,6 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected String asTextInternal() {
-        final List<HtmlOption> options;
-        if (isMultipleSelectEnabled()) {
-            options = getOptions();
-        }
-        else {
-            options = getSelectedOptions();
-        }
-
-        final StringBuilder buffer = new StringBuilder();
-        for (final Iterator<HtmlOption> i = options.iterator(); i.hasNext();) {
-            final HtmlOption currentOption = i.next();
-            if (currentOption != null) {
-                buffer.append(currentOption.asText());
-            }
-            if (i.hasNext()) {
-                buffer.append(AS_TEXT_BLOCK_SEPARATOR);
-            }
-        }
-
-        return buffer.toString();
-    }
-
-    /**
      * Returns the value of the attribute "name". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *

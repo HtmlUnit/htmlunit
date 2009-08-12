@@ -234,21 +234,4 @@ public class HtmlTableRow extends ClickableElement {
             }
         }
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected String asTextInternal() {
-        final StringBuilder sb = new StringBuilder();
-        for (final HtmlTableCell cell : getCells()) {
-            sb.append(AS_TEXT_TAB);
-            sb.append(cell.asTextInternal().trim());
-        }
-        // delete first extra added tab
-        if (sb.length() > 0) {
-            sb.delete(0, AS_TEXT_TAB.length());
-        }
-        return sb.toString();
-    }
 }

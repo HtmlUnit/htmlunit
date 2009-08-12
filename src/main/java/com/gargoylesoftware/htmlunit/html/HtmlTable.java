@@ -400,27 +400,6 @@ public class HtmlTable extends ClickableElement {
      * {@inheritDoc}
      */
     @Override
-    protected String asTextInternal() {
-        final StringBuilder sb = new StringBuilder();
-        final String caption = getCaptionText();
-        if (caption != null) {
-            sb.append(caption).append(AS_TEXT_BLOCK_SEPARATOR);
-        }
-        boolean first = true;
-        for (final HtmlTableRow row : getRowIterator()) {
-            if (!first) {
-                sb.append(AS_TEXT_BLOCK_SEPARATOR);
-            }
-            first = false;
-            sb.append(row.asTextInternal());
-        }
-        return sb.toString();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     protected boolean isBlock() {
         return true;
     }

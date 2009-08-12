@@ -97,22 +97,13 @@ public class HtmlSubmitInput extends HtmlInput {
      * {@inheritDoc} Returns "Submit Query" if <tt>value</tt> attribute is not defined.
      */
     // we need to preserve this method as it is there since many versions with the above documentation.
-    // This doesn't mean that asTextInternal() has to return the same.
     @Override
     public String asText() {
-        String text = super.asTextInternal();
+        String text = getValueAttribute();
         if (text == ATTRIBUTE_NOT_DEFINED) {
             text = DEFAULT_VALUE;
         }
         return text;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected String asTextInternal() {
-        return asText();
     }
 
     /**
