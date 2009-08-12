@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
@@ -1427,6 +1428,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      */
     @Test
     public void catchBackgroundJSErrors() throws Exception {
+        Locale.setDefault(Locale.US); // Rhino has localized error message... for instance for French
         final WebClient webClient = getWebClient();
         final List<ScriptException> jsExceptions = new ArrayList<ScriptException>();
         final JavaScriptEngine myEngine = new JavaScriptEngine(webClient) {
