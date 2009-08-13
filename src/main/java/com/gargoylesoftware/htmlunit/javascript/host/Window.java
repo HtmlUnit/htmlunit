@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -127,8 +128,19 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * then evaluated). We use a weak hash map because we don't want this cache to be the only reason
      * nodes are kept around in the JVM, if all other references to them are gone.
      */
-    private transient Map<Node, ComputedCSSStyleDeclaration> computedStyles_ =
+    private transient WeakHashMap<Node, ComputedCSSStyleDeclaration> computedStyles_ =
         new WeakHashMap<Node, ComputedCSSStyleDeclaration>();
+
+    /**
+     * Restores the transient {@link #computedStyles_} map during deserialization.
+     * @param stream the stream to read the object from
+     * @throws IOException if an IO error occurs
+     * @throws ClassNotFoundException if a class is not found
+     */
+    private void readObject(final ObjectInputStream stream) throws IOException, ClassNotFoundException {
+        stream.defaultReadObject();
+        computedStyles_ = new WeakHashMap<Node, ComputedCSSStyleDeclaration>();
+    }
 
     /**
      * Creates an instance.

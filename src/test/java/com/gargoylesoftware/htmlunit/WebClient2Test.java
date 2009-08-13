@@ -170,4 +170,30 @@ public class WebClient2Test extends WebServerTestCase {
         assertEquals("hello 2", page2.asText());
     }
 
+    /**
+     * Regression test for bug 2836355.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void serialization_withClickAfterwards() throws Exception {
+        final String html =
+              "<html><head>\n"
+            + "<script>\n"
+            + "  function foo() {\n"
+            + "    document.getElementById('mybox').innerHTML='hello world';\n"
+            + "    return false;\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body><div id='mybox'></div>\n"
+            + "<a href='#' onclick='foo()' id='clicklink'>say hello world</a>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPageWithAlerts(html);
+        assertEquals("", page.getElementById("mybox").getTextContent());
+
+        final WebClient clientCopy = (WebClient) SerializationUtils.clone(page.getWebClient());
+        final HtmlPage pageCopy = (HtmlPage) clientCopy.getCurrentWindow().getTopWindow().getEnclosedPage();
+        pageCopy.getElementById("clicklink").click();
+        assertEquals("hello world", pageCopy.getElementById("mybox").getTextContent());
+    }
+
 }
