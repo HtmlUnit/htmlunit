@@ -205,7 +205,6 @@ public class TextRangeTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
-
     /**
      * Regression test for
      * <a href="http://sourceforge.net/support/tracker.php?aid=2836591">Bug 2836591</a>.
