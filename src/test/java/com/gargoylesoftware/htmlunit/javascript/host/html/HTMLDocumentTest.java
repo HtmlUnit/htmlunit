@@ -703,4 +703,21 @@ public class HTMLDocumentTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * Caused infinite loop at some point of 2.6 snapshot.
+     * See <a href="http://sourceforge.net/support/tracker.php?aid=2824922">Bug 2824922</a>
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void write2_html_endhtml_in_head() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "document.write('<HTML></HTML>');\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "</body></html>\n";
+
+        loadPageWithAlerts(html);
+    }
 }
