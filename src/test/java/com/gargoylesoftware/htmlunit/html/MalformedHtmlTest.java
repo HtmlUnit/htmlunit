@@ -174,4 +174,27 @@ public class MalformedHtmlTest extends WebTestCase {
         loadPageWithAlerts(content);
     }
 
+
+    /**
+     * Tests that wrong formed HTML code is parsed like browsers do.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("12345")
+    public void testWrongHtml_TagBeforeHtml() throws Exception {
+        final String html = "<div>\n"
+            + "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "var toto = 12345;\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='alert(toto)'>\n"
+            + "blabla"
+            + "</body>\n"
+            + "</html>";
+
+        final HtmlPage page = loadPageWithAlerts(html);
+        assertEquals("foo", page.getTitleText());
+    }
 }

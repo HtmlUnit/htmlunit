@@ -1007,33 +1007,6 @@ public class HtmlPageTest extends WebServerTestCase {
     }
 
     /**
-     * Tests that wrong formed HTML code is parsed like browsers do.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testWrongHtml_TagBeforeHtml() throws Exception {
-        final String htmlContent = "<div>\n"
-            + "<html>\n"
-            + "<head><title>foo</title>\n"
-            + "<script>\n"
-            + "var toto = 12345;\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='alert(toto)'>\n"
-            + "blabla"
-            + "</body>\n"
-            + "</html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-        final String[] expectedAlerts = {"12345"};
-        createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
-
-        assertEquals("foo", page.getTitleText());
-
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
      * @exception Exception If the test fails
      */
     @Test
