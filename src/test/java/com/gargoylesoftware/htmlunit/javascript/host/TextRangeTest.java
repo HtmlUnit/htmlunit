@@ -204,4 +204,25 @@ public class TextRangeTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+
+    /**
+     * Regression test for
+     * <a href="http://sourceforge.net/support/tracker.php?aid=2836591">Bug 2836591</a>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.IE)
+    @Alerts("false")
+    public void inRange2() throws Exception {
+        final String html = "<html><body>"
+            + "<form name='f'><input name='q' value=''></form>"
+            + "<script>"
+            + "  var range = document.f.q.createTextRange();\n"
+            + "  var selectionRange = document.selection.createRange();\n"
+            + "  alert(range.inRange(selectionRange));\n"
+            + "</script>"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
 }

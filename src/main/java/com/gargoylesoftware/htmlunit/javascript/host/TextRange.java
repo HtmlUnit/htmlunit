@@ -236,6 +236,9 @@ public class TextRange extends SimpleScriptable {
 
         final org.w3c.dom.Node start = range_.getStartContainer();
         final org.w3c.dom.Node otherStart = otherRange.getStartContainer();
+        if (otherStart == null) {
+            return false;
+        }
         final short startComparison = start.compareDocumentPosition(otherStart);
         final boolean startNodeBefore = startComparison == 0
             || (startComparison & Node.DOCUMENT_POSITION_CONTAINS) != 0
