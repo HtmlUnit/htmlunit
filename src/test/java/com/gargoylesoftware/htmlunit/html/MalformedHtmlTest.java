@@ -174,7 +174,6 @@ public class MalformedHtmlTest extends WebTestCase {
         loadPageWithAlerts(content);
     }
 
-
     /**
      * Tests that wrong formed HTML code is parsed like browsers do.
      * @throws Exception if the test fails
