@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="fix" dev="mguillem" issue="2824134">
+                Add TITLE to HEAD even if it is found in BODY.
+            </action>
             <action type="fix" dev="mguillem">
                 Submit image button name too (FF only).
             </action>

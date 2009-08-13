@@ -20,7 +20,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Set of tests for ill formed HTML code.
@@ -84,12 +83,27 @@ public class MalformedHtmlTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     @Alerts("Test document")
     public void testTitleAfterInsertedBody() throws Exception {
         final String content = "<html><head>\n"
             + "<noscript><link href='other.css' rel='stylesheet' type='text/css'></noscript>\n"
             + "<title>Test document</title>\n"
+            + "</head><body onload='alert(document.title)'>\n"
+            + "foo"
+            + "</body></html>";
+
+        loadPageWithAlerts(content);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Test document")
+    public void testTitleTwice() throws Exception {
+        final String content = "<html><head>\n"
+            + "<title>Test document</title>\n"
+            + "<title>2nd title</title>\n"
             + "</head><body onload='alert(document.title)'>\n"
             + "foo"
             + "</body></html>";

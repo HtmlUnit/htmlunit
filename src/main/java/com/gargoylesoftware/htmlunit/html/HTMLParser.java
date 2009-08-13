@@ -450,6 +450,7 @@ public final class HTMLParser {
         private StringBuilder characters_;
         private boolean headParsed_ = false;
         private boolean parsingInnerHead_ = false;
+        private HtmlElement head_;
         private HtmlElement body_;
         private Augmentations augmentations_;
         private HtmlForm formWaitingForLostChildren_;
@@ -608,6 +609,9 @@ public final class HTMLParser {
             if (tagLower.equals("body")) {
                 body_ = newElement;
             }
+            else if (tagLower.equals("head")) {
+                head_ = newElement;
+            }
 
             currentNode_ = newElement;
             stack_.push(currentNode_);
@@ -626,6 +630,9 @@ public final class HTMLParser {
             // TODO: understand in which cases it should be done to generalize it!!!
             if ("table".equals(currentNodeName) && "div".equals(newNodeName)) {
                 currentNode.insertBefore(newElement);
+            }
+            else if ("title".equals(newNodeName) && head_ != null) {
+                head_.appendChild(newElement);
             }
             else {
                 currentNode.appendChild(newElement);

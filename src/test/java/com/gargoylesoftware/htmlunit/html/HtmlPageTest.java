@@ -1012,10 +1012,6 @@ public class HtmlPageTest extends WebServerTestCase {
      */
     @Test
     public void testWrongHtml_TagBeforeHtml() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-
         final String htmlContent = "<div>\n"
             + "<html>\n"
             + "<head><title>foo</title>\n"

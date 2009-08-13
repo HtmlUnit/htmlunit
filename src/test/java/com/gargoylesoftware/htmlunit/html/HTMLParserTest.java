@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
@@ -279,7 +280,7 @@ public class HTMLParserTest extends WebServerTestCase {
      * @throws Exception failure
      */
     @Test
-    @NotYetImplemented
+    @NotYetImplemented(Browser.IE)
     @Alerts(IE = {"HEAD", "Outer Html", "outerDiv" },
             FF = {"HEAD", "Outer Html", "HEAD", "Inner Html", "outerDiv" })
     public void completeHtmlInsideDiv() throws Exception {
@@ -328,7 +329,7 @@ public class HTMLParserTest extends WebServerTestCase {
      * @throws Exception failure
      */
     @Test
-    @NotYetImplemented
+    @NotYetImplemented(Browser.IE)
     @Alerts(IE = {"HEAD", "Outer Html", "outerDiv" },
             FF = {"HEAD", "Outer Html", "HEAD", "Inner Html", "outerDiv" })
     public void writeCompleteHtmlInsideDIV() throws Exception {
