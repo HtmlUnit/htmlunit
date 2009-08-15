@@ -129,7 +129,7 @@ public class HtmlPage extends SgmlPage {
     private int snippetParserCount_;
     private int inlineSnippetParserCount_;
     private List<HtmlAttributeChangeListener> attributeListeners_;
-    private final transient Object lock_ = new Object(); // used for synchronization
+    private final Object lock_ = new String(); // used for synchronization
     private Range selection_;
     private final List<PostponedAction> afterLoadActions_ = new ArrayList<PostponedAction>();
     private boolean cleaning_;

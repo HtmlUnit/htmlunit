@@ -344,7 +344,7 @@ public class HtmlPage2Test extends WebServerTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(FF = "Hello")
@@ -357,6 +357,25 @@ public class HtmlPage2Test extends WebServerTestCase {
             + "</body></html>";
 
         loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void serialization_attributeListenerLock() throws Exception {
+        final String html = "<html><head><script>"
+            + "function foo() {"
+            + "  document.getElementById('aframe').src = '" + URL_FIRST + "';"
+            + "  return false;"
+            + "}</script>"
+            + "<body><iframe src='about:blank' id='aframe'></iframe>"
+            + "<a href='#' onclick='foo()' id='link'>load iframe</a></body></html>";
+        final HtmlPage page = loadPageWithAlerts(html);
+        final WebClient copy = clone(page.getWebClient());
+        final HtmlPage copyPage = (HtmlPage) copy.getCurrentWindow().getTopWindow().getEnclosedPage();
+        copyPage.getElementById("link").click();
+        assertEquals(URL_FIRST.toExternalForm(), copyPage.getElementById("aframe").getAttribute("src"));
     }
 
 }
