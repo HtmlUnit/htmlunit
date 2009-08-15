@@ -70,13 +70,13 @@ public abstract class WebTestCase {
     /** The listener port for the web server. */
     public static final int PORT = Integer.valueOf(System.getProperty("htmlunit.test.port", "12345"));
 
-    /** Constant for the URL http://first which is used in the tests. */
+    /** Constant for the URL which is used in the tests. */
     public static final URL URL_FIRST;
 
-    /** Constant for the URL http://second which is used in the tests. */
+    /** Constant for the URL which is used in the tests. */
     public static final URL URL_SECOND;
 
-    /** Constant for the URL http://third which is used in the tests. */
+    /** Constant for the URL which is used in the tests. */
     public static final URL URL_THIRD;
 
     /** Constant for the URL http://www.gargoylesoftware.com which is used in the tests. */
@@ -108,8 +108,8 @@ public abstract class WebTestCase {
     static {
         try {
             URL_FIRST = new URL("http://localhost:" + PORT + "/");
-            URL_SECOND = new URL("http://second/");
-            URL_THIRD = new URL("http://third/");
+            URL_SECOND = new URL("http://localhost:" + PORT + "/second/");
+            URL_THIRD = new URL("http://localhost:" + PORT + "/third/");
             URL_GARGOYLE = new URL("http://www.gargoylesoftware.com/");
         }
         catch (final MalformedURLException e) {

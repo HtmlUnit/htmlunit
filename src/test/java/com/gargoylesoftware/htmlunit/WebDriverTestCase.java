@@ -19,9 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -66,8 +64,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 public abstract class WebDriverTestCase extends WebTestCase {
 
     static final String PROPERTY = "htmlunit.webdriver";
-    private static Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<BrowserVersion, WebDriver>();
 
+    private static WebDriver WEB_DRIVER_;
     private static Server STATIC_SERVER_;
 
     private static String JSON_;
@@ -77,12 +75,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @return the driver
      */
     protected WebDriver getWebDriver() {
-        WebDriver webDriver = WEB_DRIVERS_.get(getBrowserVersion());
-        if (webDriver == null) {
-            webDriver = buildWebDriver();
-            WEB_DRIVERS_.put(getBrowserVersion(), webDriver);
+        if (WEB_DRIVER_ == null) {
+            WEB_DRIVER_ = buildWebDriver();
         }
-        return webDriver;
+        return WEB_DRIVER_;
     }
 
     /**
@@ -91,9 +87,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     @AfterClass
     public static void shutDownAll() throws Exception {
-        for (final WebDriver webDriver : WEB_DRIVERS_.values()) {
-            webDriver.close();
+        if (WEB_DRIVER_ != null) {
+            WEB_DRIVER_.close();
         }
+        WEB_DRIVER_ = null;
         if (STATIC_SERVER_ != null) {
             STATIC_SERVER_.stop();
         }
@@ -101,14 +98,12 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     private WebDriver buildWebDriver() {
-        final String property = System.getProperty(PROPERTY);
-        if (property != null) {
-            if (property.contains("ff2") || property.contains("ff3")) {
-                return new FirefoxDriver();
-            }
-            if (property.contains("ie6") || property.contains("ie7")) {
-                return new InternetExplorerDriver();
-            }
+        final String property = System.getProperty(PROPERTY, "").toLowerCase();
+        if (property.contains("ff2") || property.contains("ff3")) {
+            return new FirefoxDriver();
+        }
+        if (property.contains("ie6") || property.contains("ie7")) {
+            return new InternetExplorerDriver();
         }
         final WebClient webClient = getWebClient();
         final HtmlUnitDriver driver = new HtmlUnitDriver(true) {
@@ -130,7 +125,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @param mockConnection the sources for responses
      * @throws Exception if a problem occurs
      */
-    protected void startWebServer(final MockWebConnection mockConnection) throws Exception {
+    private void startWebServer(final MockWebConnection mockConnection) throws Exception {
         if (STATIC_SERVER_ == null) {
             STATIC_SERVER_ = new Server(PORT);
 
@@ -216,6 +211,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
         final WebDriver driver = getWebDriver();
         driver.get(URL_FIRST.toExternalForm());
 
+        assertEquals(expectedAlerts, getCollectedAlerts(driver));
+        return driver;
+    }
+
+    private List<String> getCollectedAlerts(final WebDriver driver) throws Exception {
         final List<String> collectedAlerts = new ArrayList<String>();
         if (driver instanceof HtmlUnitDriver) {
             final Object result = ((JavascriptExecutor) driver) .executeScript("return window.__huCatchedAlerts");
@@ -246,8 +246,23 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 }
             }
         }
+        return collectedAlerts;
+    }
 
-        assertEquals(expectedAlerts, collectedAlerts);
+    /**
+     * Same as {@link #loadPageWithAlerts2(String)}, but using Weba MockConnection instead.
+     * @param conn the connection to use
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPageWithAlerts2(final MockWebConnection conn) throws Exception {
+        final String[] expectedAlerts = getExpectedAlerts();
+        startWebServer(conn);
+
+        final WebDriver driver = getWebDriver();
+        driver.get(URL_FIRST.toExternalForm());
+
+        assertEquals(expectedAlerts, getCollectedAlerts(driver));
         return driver;
     }
 

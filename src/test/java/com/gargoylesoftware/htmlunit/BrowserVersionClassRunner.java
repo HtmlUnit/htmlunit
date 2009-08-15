@@ -236,7 +236,17 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         statement = withAfters(method, test, statement);
 
         final boolean shouldFail = isExpectedToFail(method);
-        final boolean notYetImplemented = isNotYetImplemented(method);
+        final String property = System.getProperty(WebDriverTestCase.PROPERTY, "").toLowerCase();
+        final boolean notYetImplemented;
+
+        if (testCase instanceof WebDriverTestCase
+                && (property.contains("ff2") || property.contains("ff3")
+                    || property.contains("ie6") || property.contains("ie7"))) {
+            notYetImplemented = false;
+        }
+        else {
+            notYetImplemented = isNotYetImplemented(method);
+        }
         setAlerts(testCase, method.getMethod());
         statement = new BrowserStatement(statement, method.getMethod(), shouldFail,
                 notYetImplemented, BrowserRunner.getDescription(browserVersion_));

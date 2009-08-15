@@ -1288,20 +1288,20 @@ public class HtmlPageTest extends WebServerTestCase {
             + "<iframe id='myIFrame' src='" + url + "'></iframe>\n"
             + "</body></html>";
 
-        final String secondContent
-            = "<html><body></body></html>";
+        final String secondContent = "<html><body></body></html>";
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
 
+        final URL secondURL = new URL("http://second/");
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(secondURL, secondContent);
 
         client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = client.getPage(URL_FIRST);
         final HtmlInlineFrame iframe = firstPage.getHtmlElementById("myIFrame");
 
-        assertEquals(URL_SECOND, iframe.getEnclosedPage().getWebResponse().getRequestSettings().getUrl());
+        assertEquals(secondURL, iframe.getEnclosedPage().getWebResponse().getRequestSettings().getUrl());
     }
 
     /**
