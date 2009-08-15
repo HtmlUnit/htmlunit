@@ -27,7 +27,7 @@ mvn2home
         </ant>
         -->
         <maven2 mvnhome="&mvn2home;" pomfile="&basedir;/htmlunit/cruisecontrol/checkout/pom.xml"
-            goal="scm:update clean checkstyle:checkstyle assembly:assembly source:jar"/>
+            goal="scm:update clean checkstyle:checkstyle assembly:assembly package source:jar"/>
     </schedule>
     <listeners>
         <currentbuildstatuslistener file="&basedir;/htmlunit/cruisecontrol/logs/status.txt"/>
