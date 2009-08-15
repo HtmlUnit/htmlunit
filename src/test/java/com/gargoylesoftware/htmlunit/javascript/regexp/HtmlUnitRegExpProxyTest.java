@@ -17,11 +17,12 @@ package com.gargoylesoftware.htmlunit.javascript.regexp;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -645,4 +646,23 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "\n}</script>"
             + "</head><body onload='test()'></body></html>";
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void test2() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String html = buildHtml("var description = 'INPUT#BasisRenameInput';\n"
+                + "if(description.match(/^\\s*([a-z0-9\\_\\-]+)/i)) {\n"
+                + "  alert(RegExp.$1);\n"
+                + "}");
+        final String[] expected = {"INPUT"};
+        final List<String> actual = new ArrayList<String>();
+        loadPage(html, actual);
+        assertEquals(expected, actual);
+    }
+
 }
