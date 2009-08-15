@@ -45,7 +45,7 @@ import org.openqa.selenium.WebDriver;
  */
 @RunWith(Parameterized.class)
 public class WebDriverOldTestsTest extends WebDriverTestCase {
-    private static final Log log_ = LogFactory.getLog(WebDriverOldTestsTest.class);
+    private static final Log LOG = LogFactory.getLog(WebDriverOldTestsTest.class);
     private final URL testFile_;
     private final List<String> expectedLog_ = new ArrayList<String>();
 
@@ -89,7 +89,7 @@ public class WebDriverOldTestsTest extends WebDriverTestCase {
                 response.add(new File[] {f});
             }
         }
-        log_.info(response.size() + " tests found in folder " + testsDir);
+        LOG.info(response.size() + " tests found in folder " + testsDir);
         return response;
     }
 
@@ -100,7 +100,7 @@ public class WebDriverOldTestsTest extends WebDriverTestCase {
     @Test
     @Ignore
     public void test() throws Throwable {
-        log_.info("Running " + testFile_);
+        LOG.info("Running " + testFile_);
 
         final WebDriver webDriver = getWebDriver();
         final JavascriptExecutor jsExecutor = (JavascriptExecutor) webDriver;

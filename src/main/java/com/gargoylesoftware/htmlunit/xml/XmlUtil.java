@@ -63,6 +63,8 @@ import com.gargoylesoftware.htmlunit.html.IElementFactory;
  */
 public final class XmlUtil {
 
+    private static final Log LOG = LogFactory.getLog(XmlUtil.class);
+
     private static final ErrorHandler DISCARD_MESSAGES_HANDLER = new ErrorHandler() {
         /**
          * Does nothing as we're not interested in this.
@@ -117,14 +119,6 @@ public final class XmlUtil {
             }
         });
         return builder.parse(source);
-    }
-
-    /**
-     * Returns the log object for this utility class.
-     * @return the log object for this utility class
-     */
-    private static Log getLog() {
-        return LogFactory.getLog(XmlUtil.class);
     }
 
     /**
@@ -229,7 +223,7 @@ public final class XmlUtil {
                     break;
 
                 default:
-                    getLog().warn("NodeType " + child.getNodeType()
+                    LOG.warn("NodeType " + child.getNodeType()
                             + " (" + child.getNodeName() + ") is not yet supported.");
             }
         }

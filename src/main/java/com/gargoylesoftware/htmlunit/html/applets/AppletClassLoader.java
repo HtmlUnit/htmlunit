@@ -34,13 +34,15 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
- * Class loader for loading Applets.
+ * Class loader for loading applets.
  *
  * @version $Revision$
  * @author Marc Guillemot
  */
 public class AppletClassLoader extends ClassLoader {
-    private static final Log logger_ = LogFactory.getLog(AppletClassLoader.class);
+
+    private static final Log LOG = LogFactory.getLog(AppletClassLoader.class);
+
     private final Set<String> definedClasses_ = new HashSet<String>();
     private final Map<String, JarFile> jarFiles_ = new HashMap<String, JarFile>();
 
@@ -63,7 +65,7 @@ public class AppletClassLoader extends ClassLoader {
     }
 
     private void defineClass(final String name) {
-        logger_.debug("Defining class " + name);
+        LOG.debug("Defining class " + name);
         final String classFileName = name.replace('.', '/') + ".class";
         final JarFile jarFile = jarFiles_.get(name);
         try {
@@ -101,7 +103,7 @@ public class AppletClassLoader extends ClassLoader {
             if (name.endsWith(".class")) {
                 final String className = name.replace('/', '.').substring(0, name.length() - 6);
                 jarFiles_.put(className, jarFile);
-                logger_.trace("Jar entry: " + className);
+                LOG.trace("Jar entry: " + className);
             }
         }
     }

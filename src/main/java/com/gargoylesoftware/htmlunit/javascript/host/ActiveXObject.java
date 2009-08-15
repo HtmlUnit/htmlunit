@@ -17,12 +17,13 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -45,9 +46,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest;
  * @author Ahmed Ashour
  */
 public class ActiveXObject extends SimpleScriptable {
+
     private static final long serialVersionUID = 7327032075131452226L;
 
-    private static final transient Log mainLog_ = LogFactory.getLog(SimpleScriptable.class);
+    private static final Log LOG = LogFactory.getLog(ActiveXObject.class);
 
     /**
      * The default constructor.
@@ -120,8 +122,8 @@ public class ActiveXObject extends SimpleScriptable {
                 return new ActiveXObjectImpl(activeXName);
             }
             catch (final Exception e) {
-                if (mainLog_.isWarnEnabled()) {
-                    mainLog_.warn("Error initiating Jacob", e);
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn("Error initiating Jacob", e);
                 }
             }
         }

@@ -109,6 +109,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableSectionElemen
  * @author Ahmed Ashour
  */
 public final class JavaScriptConfiguration {
+
+    private static final Log LOG = LogFactory.getLog(JavaScriptConfiguration.class);
+
     private static Document XmlDocument_;
 
     /** Constant indicating that this function/property is used by the specified browser version. */
@@ -178,7 +181,7 @@ public final class JavaScriptConfiguration {
         try {
             final Reader reader = getConfigurationFileAsReader();
             if (reader == null) {
-                getLog().error("Unable to load JavaScriptConfiguration.xml");
+                LOG.error("Unable to load JavaScriptConfiguration.xml");
             }
             else {
                 loadConfiguration(reader);
@@ -186,7 +189,7 @@ public final class JavaScriptConfiguration {
             }
         }
         catch (final Exception e) {
-            getLog().error("Error when loading JavascriptConfiguration.xml", e);
+            LOG.error("Error when loading JavascriptConfiguration.xml", e);
             e.printStackTrace();
         }
     }
@@ -210,13 +213,13 @@ public final class JavaScriptConfiguration {
             XmlDocument_ = documentBuilder.parse(inputSource);
         }
         catch (final SAXParseException parseException) {
-            getLog().error("line=[" + parseException.getLineNumber()
+            LOG.error("line=[" + parseException.getLineNumber()
                     + "] columnNumber=[" + parseException.getColumnNumber()
                     + "] systemId=[" + parseException.getSystemId()
                     + "] publicId=[" + parseException.getPublicId() + "]", parseException);
         }
         catch (final Exception e) {
-            getLog().error("Error when loading JavascriptConfiguration.xml", e);
+            LOG.error("Error when loading JavascriptConfiguration.xml", e);
         }
     }
 
@@ -247,10 +250,6 @@ public final class JavaScriptConfiguration {
     static JavaScriptConfiguration getAllEntries() {
         final JavaScriptConfiguration configuration = new JavaScriptConfiguration(null);
         return configuration;
-    }
-
-    private static Log getLog() {
-        return LogFactory.getLog(JavaScriptConfiguration.class);
     }
 
     private static Reader getConfigurationFileAsReader() {
@@ -355,7 +354,7 @@ public final class JavaScriptConfiguration {
                     parseConstantElement(classConfiguration, childElement);
                 }
                 else if (tagName.equals("browser")) {
-                    getLog().debug("browser tag not yet handled for class " + linkedClassname);
+                    LOG.debug("browser tag not yet handled for class " + linkedClassname);
                 }
                 else if (tagName.equals("doclink")) {
                     // ignore this link
@@ -714,7 +713,7 @@ public final class JavaScriptConfiguration {
                     final Class< ? extends HtmlElement> htmlClass =
                         (Class< ? extends HtmlElement>) Class.forName(htmlClassname);
                     // preload and validate that the class exists
-                    getLog().debug("Mapping " + htmlClass.getName() + " to " + jsClassname);
+                    LOG.debug("Mapping " + htmlClass.getName() + " to " + jsClassname);
                     while (!classConfig.isJsObject()) {
                         jsClassname = classConfig.getExtendedClass();
                         classConfig = configuration.getClassConfiguration(jsClassname);

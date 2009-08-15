@@ -497,7 +497,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
  */
 class ThreadSynchronizer {
     private String state_ = "initial";
-    private static final Log log_ = LogFactory.getLog(ThreadSynchronizer.class);
+    private static final Log LOG = LogFactory.getLog(ThreadSynchronizer.class);
 
     synchronized void setState(final String newState) {
         state_ = newState;
@@ -510,7 +510,7 @@ class ThreadSynchronizer {
      */
     public void sleep(final long millis) {
         try {
-            log_.debug("Sleeping for " + millis + "ms");
+            LOG.debug("Sleeping for " + millis + "ms");
             Thread.sleep(millis);
         }
         catch (final InterruptedException e) {
