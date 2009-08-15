@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="update" dev="asashour" issue="2837819">
+                Force NekoHtml and Xalan to use xercesImpl 2.9.1 dependency.
+            </action>
             <action type="add" dev="sdanig" issue="2832735">
                 Add selection-related methods to HtmlPasswordInput.
             </action>
