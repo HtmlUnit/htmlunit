@@ -65,6 +65,22 @@ public class HtmlPasswordInputTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    public void typeWhileSelected() throws Exception {
+        final String html =
+              "<html><head></head><body>\n"
+            + "<input type='password' id='myInput' value='Hello world'><br>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPasswordInput input = page.getHtmlElementById("myInput");
+        input.select();
+        input.type("Bye World");
+        assertEquals("Bye World", input.getValueAttribute());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     public void preventDefault_OnKeyDown() throws Exception {
         final String html =
               "<html><head><script>\n"

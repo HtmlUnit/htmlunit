@@ -28,16 +28,19 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public class HtmlPasswordInput extends HtmlInput {
+public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput {
 
     private static final long serialVersionUID = -1074283471317076942L;
+
+    private final SelectionDelegate selectionDelegate_ = new SelectionDelegate(this);
 
     private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor() {
         private static final long serialVersionUID = -1938284467263013958L;
         @Override
         void typeDone(final String newValue, final int newCursorPosition) {
             setAttribute("value", newValue);
-            // we don't yet handle selection here!
+            setSelectionStart(newCursorPosition);
+            setSelectionEnd(newCursorPosition);
         }
     };
 
@@ -64,11 +67,58 @@ public class HtmlPasswordInput extends HtmlInput {
     /**
      * {@inheritDoc}
      */
+    public void select() {
+        selectionDelegate_.select();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getSelectedText() {
+        return selectionDelegate_.getSelectedText();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getText() {
+        return getValueAttribute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public int getSelectionStart() {
+        return selectionDelegate_.getSelectionStart();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setSelectionStart(final int selectionStart) {
+        selectionDelegate_.setSelectionStart(selectionStart);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public int getSelectionEnd() {
+        return selectionDelegate_.getSelectionEnd();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setSelectionEnd(final int selectionEnd) {
+        selectionDelegate_.setSelectionEnd(selectionEnd);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        // TODO: handle selection here!
-        final String value = getValueAttribute();
-        doTypeProcessor_.doType(getValueAttribute(), value.length(), value.length(),
+        doTypeProcessor_.doType(getValueAttribute(), getSelectionStart(), getSelectionEnd(),
             c, shiftKey, ctrlKey, altKey);
     }
 

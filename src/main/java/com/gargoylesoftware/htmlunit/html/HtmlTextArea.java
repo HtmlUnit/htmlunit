@@ -36,7 +36,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  */
-public class HtmlTextArea extends ClickableElement implements DisabledElement, SubmittableElement {
+public class HtmlTextArea extends ClickableElement implements DisabledElement, SubmittableElement, SelectableTextInput {
 
     private static final long serialVersionUID = 4572856255042499634L;
 
@@ -45,6 +45,8 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
 
     private String defaultValue_;
     private String valueAtFocus_;
+
+    private final SelectionDelegate selectionDelegate_ = new SelectionDelegate(this);
 
     private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor() {
         private static final long serialVersionUID = 2906652041039202266L;
@@ -326,89 +328,45 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     }
 
     /**
-     * Returns the selected text contained in this text area, or <tt>null</tt> if no selection (Firefox only).
-     * @return the selected text contained in this text area
+     * {@inheritDoc}
+     */
+    public void select() {
+        selectionDelegate_.select();
+    }
+
+    /**
+     * {@inheritDoc}
      */
     public String getSelectedText() {
-        final Range selection = getThisSelection();
-        if (selection != null) {
-            return getText().substring(selection.getStartOffset(), selection.getEndOffset());
-        }
-        return null;
-    }
-
-    private Range getThisSelection() {
-        if (getPage() instanceof HtmlPage) {
-            final Range selection = ((HtmlPage) getPage()).getSelection();
-            if (selection.getStartContainer() == this && selection.getEndContainer() == this) {
-                return selection;
-            }
-        }
-
-        return null;
+        return selectionDelegate_.getSelectedText();
     }
 
     /**
-     * Returns the selected text's start position (Firefox only).
-     * @return the start position >= 0
+     * {@inheritDoc}
      */
     public int getSelectionStart() {
-        final Range selection = getThisSelection();
-        if (selection != null) {
-            return selection.getStartOffset();
-        }
-        return getText().length();
+        return selectionDelegate_.getSelectionStart();
     }
 
     /**
-     * Sets the selection start to the specified position (Firefox only).
-     * @param selectionStart the start position of the text >= 0
+     * {@inheritDoc}
      */
-    public void setSelectionStart(int selectionStart) {
-        if (getPage() instanceof HtmlPage) {
-            final HtmlPage page = (HtmlPage) getPage();
-            final int length = getText().length();
-            selectionStart = Math.max(0, Math.min(selectionStart, length));
-            page.getSelection().setStart(this, selectionStart);
-            if (page.getSelection().getEndContainer() != this) {
-                page.getSelection().setEnd(this, length);
-            }
-            else if (page.getSelection().getEndOffset() < selectionStart) {
-                page.getSelection().setEnd(this, selectionStart);
-            }
-        }
+    public void setSelectionStart(final int selectionStart) {
+        selectionDelegate_.setSelectionStart(selectionStart);
     }
 
     /**
-     * Returns the selected text's end position (Firefox only).
-     * @return the end position >= 0
+     * {@inheritDoc}
      */
     public int getSelectionEnd() {
-        final Range selection = getThisSelection();
-        if (selection != null) {
-            return selection.getEndOffset();
-        }
-        return getText().length();
+        return selectionDelegate_.getSelectionEnd();
     }
 
     /**
-     * Sets the selection end to the specified position (Firefox only).
-     * @param selectionEnd the end position of the text >= 0
-
+     * {@inheritDoc}
      */
-    public void setSelectionEnd(int selectionEnd) {
-        if (getPage() instanceof HtmlPage) {
-            final HtmlPage page = (HtmlPage) getPage();
-            final int length = getText().length();
-            selectionEnd = Math.min(length, Math.max(selectionEnd, 0));
-            page.getSelection().setEnd(this, selectionEnd);
-            if (page.getSelection().getStartContainer() != this) {
-                page.getSelection().setStart(this, 0);
-            }
-            else if (page.getSelection().getStartOffset() > selectionEnd) {
-                page.getSelection().setStart(this, selectionEnd);
-            }
-        }
+    public void setSelectionEnd(final int selectionEnd) {
+        selectionDelegate_.setSelectionEnd(selectionEnd);
     }
 
     /**
@@ -434,15 +392,6 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         doTypeProcessor_.doType(getText(), getSelectionStart(), getSelectionEnd(),
             c, shiftKey, ctrlKey, altKey);
-    }
-
-    /**
-     * Select all the text in this input.
-     */
-    public void select() {
-        focus();
-        setSelectionStart(0);
-        setSelectionEnd(getText().length());
     }
 
     /**

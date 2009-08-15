@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="add" dev="sdanig" issue="2832735">
+                Add selection-related methods to HtmlPasswordInput.
+            </action>
             <action type="fix" dev="mguillem" issue="2836591">
                 JavaScript: fixed NPE calling inRange with selection range when nothing is selected (IE only).
             </action>
