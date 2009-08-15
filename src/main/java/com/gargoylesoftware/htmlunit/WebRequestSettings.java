@@ -125,7 +125,7 @@ public class WebRequestSettings implements Serializable {
             url = new URL(url.getProtocol(), url.getHost(), url.getPort(), newFile);
         }
         catch (final Exception e) {
-            throw new RuntimeException("WebRequestSettings: Can not set URL: " + url.toExternalForm());
+            throw new RuntimeException("Cannot set URL: " + url.toExternalForm(), e);
         }
         return url;
     }
