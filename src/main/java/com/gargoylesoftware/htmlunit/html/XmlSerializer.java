@@ -111,7 +111,7 @@ class XmlSerializer {
     /**
      * Prints the content between "&lt;" and "&gt;" (or "/&gt;") in the output of the tag name
      * and its attributes in XML format.
-     * @param printWriter the writer to print in
+     * @param node the node whose opening tag is to be printed
      */
     protected void printOpeningTag(final DomElement node) {
         buffer_.append(node.getTagName());
