@@ -45,8 +45,8 @@
             <action type="add" dev="asashour">
                 JavaScript: implement xmlDocument.getElementsByTagName(), .getElementsByTagNameNS() and .nodeFromID().
             </action>
-            <action type="fix" dev="sdanig" issue="2830600">
-                Fix NPE triggered by deserializing WebClient instances under certain conditions.
+            <action type="fix" dev="sdanig" due-to="Nick Kralevich">
+                Fix many issues with WebClient serialization and deserialization.
             </action>
             <action type="fix" dev="sdanig">
                 Load stylesheets referenced via @import.
