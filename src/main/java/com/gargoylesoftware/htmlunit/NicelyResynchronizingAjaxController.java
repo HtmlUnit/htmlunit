@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.lang.ref.WeakReference;
+import java.io.ObjectInputStream;
+import java.io.IOException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -23,10 +25,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * This {@link AjaxController} resynchronizes calls calling from the main thread.
- * The idea is that asynchron AJAX calls performed directly in response to a user
+ * The idea is that asynchronous AJAX calls performed directly in response to a user
  * action (therefore in the "main" thread and not in the thread of a background task)
  * are directly useful for the user. To easily have a testable state, these calls
- * are performed synchron.
+ * are performed synchronously.
  *
  * @version $Revision$
  * @author Marc Guillemot
@@ -36,18 +38,25 @@ public class NicelyResynchronizingAjaxController extends AjaxController {
     private static final long serialVersionUID = -5406000795046341395L;
     private static final Log LOG = LogFactory.getLog(NicelyResynchronizingAjaxController.class);
 
-    private final WeakReference<Thread> originatedThread_;
+    private transient WeakReference<Thread> originatedThread_;
 
     /**
      * Creates an instance.
      */
     public NicelyResynchronizingAjaxController() {
+        init();
+    }
+
+    /**
+     * Initializes this instance.
+     */
+    private void init() {
         originatedThread_ = new WeakReference<Thread>(Thread.currentThread());
     }
 
     /**
-     * Resynchronizes calls performed from the thread where this instance has
-     * been created.
+     * Resynchronizes calls performed from the thread where this instance has been created.
+     *
      * {@inheritDoc}
      */
     @Override
@@ -60,11 +69,22 @@ public class NicelyResynchronizingAjaxController extends AjaxController {
     }
 
     /**
-     * Indicates if currently executing thread is the one in which this instance has been
-     * created
+     * Indicates if the currently executing thread is the one in which this instance has been created.
      * @return <code>true</code> if it's the same thread
      */
     boolean isInOriginalThread() {
         return Thread.currentThread() == originatedThread_.get();
     }
+
+    /**
+     * Custom deserialization logic.
+     * @param stream the stream from which to read the object
+     * @throws IOException if an IO error occurs
+     * @throws ClassNotFoundException if a class cannot be found
+     */
+    private void readObject(final ObjectInputStream stream) throws IOException, ClassNotFoundException {
+        stream.defaultReadObject();
+        init();
+    }
+
 }

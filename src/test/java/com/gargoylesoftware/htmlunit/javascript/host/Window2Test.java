@@ -18,7 +18,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.SerializationUtils;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -604,7 +603,7 @@ public class Window2Test extends WebTestCase {
     public void serialization() throws Exception {
         final String html = "<html><head></head><body><iframe></iframe><script>window.frames</script></body></html>";
         final HtmlPage page = loadPageWithAlerts(html);
-        SerializationUtils.clone(page.getEnclosingWindow());
+        clone(page.getEnclosingWindow());
     }
 
 }

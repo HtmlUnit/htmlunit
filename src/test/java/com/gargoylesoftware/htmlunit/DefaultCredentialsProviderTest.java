@@ -19,7 +19,6 @@ import static org.junit.Assert.assertNotNull;
 import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.NTCredentials;
 import org.apache.commons.httpclient.auth.NTLMScheme;
-import org.apache.commons.lang.SerializationUtils;
 import org.junit.Test;
 
 /**
@@ -83,7 +82,7 @@ public class DefaultCredentialsProviderTest extends WebTestCase {
         assertNotNull(provider.getCredentials(scheme, host, port, true));
         assertNull(provider.getCredentials(scheme, "invalidHost", port, true));
 
-        provider = (DefaultCredentialsProvider) SerializationUtils.clone(provider);
+        provider = clone(provider);
 
         assertNotNull(provider.getCredentials(scheme, host, port, false));
         assertNull(provider.getCredentials(scheme, "invalidHost", port, false));

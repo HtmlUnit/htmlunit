@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static org.junit.Assert.assertNotNull;
 
-import org.apache.commons.lang.SerializationUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -312,7 +311,7 @@ public class HtmlTextInputTest extends WebTestCase {
     public void serialization() throws Exception {
         final String html = "<html><head></head><body onload=''><input type='text' onkeydown='' /></body></html>";
         final HtmlPage page = loadPage(html);
-        final HtmlPage page2 = (HtmlPage) SerializationUtils.clone(page);
+        final HtmlPage page2 = clone(page);
         assertNotNull(page2);
     }
 

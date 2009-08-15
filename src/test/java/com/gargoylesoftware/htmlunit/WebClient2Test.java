@@ -19,7 +19,6 @@ import static org.junit.Assert.assertNotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.SerializationUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -114,7 +113,7 @@ public class WebClient2Test extends WebServerTestCase {
     @Test
     public void serialization_beforeUse() throws Exception {
         final WebClient client = getWebClient();
-        final WebClient copy = (WebClient) SerializationUtils.clone(client);
+        final WebClient copy = clone(client);
         assertNotNull(copy);
     }
 
@@ -130,7 +129,7 @@ public class WebClient2Test extends WebServerTestCase {
         TextPage textPage = client.getPage("http://localhost:" + PORT + "/LICENSE.txt");
         assertTrue(textPage.getContent().contains("Gargoyle Software"));
 
-        final WebClient copy = (WebClient) SerializationUtils.clone(client);
+        final WebClient copy = clone(client);
         assertNotNull(copy);
 
         final WebWindow window = copy.getCurrentWindow();
@@ -165,7 +164,7 @@ public class WebClient2Test extends WebServerTestCase {
         assertEquals("hello 1", page1.asText());
 
         final String page2Content = "<html><body>hello 2</body></html>";
-        final WebClient copy = (WebClient) SerializationUtils.clone(client);
+        final WebClient copy = clone(client);
         final HtmlPage page2 = loadPage(copy, page2Content, null, URL_SECOND);
         assertEquals("hello 2", page2.asText());
     }
@@ -190,7 +189,7 @@ public class WebClient2Test extends WebServerTestCase {
         final HtmlPage page = loadPageWithAlerts(html);
         assertEquals("", page.getElementById("mybox").getTextContent());
 
-        final WebClient clientCopy = (WebClient) SerializationUtils.clone(page.getWebClient());
+        final WebClient clientCopy = clone(page.getWebClient());
         final HtmlPage pageCopy = (HtmlPage) clientCopy.getCurrentWindow().getTopWindow().getEnclosedPage();
         pageCopy.getElementById("clicklink").click();
         assertEquals("hello world", pageCopy.getElementById("mybox").getTextContent());

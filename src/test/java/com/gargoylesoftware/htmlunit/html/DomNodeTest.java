@@ -20,7 +20,6 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.SerializationUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.xml.sax.helpers.AttributesImpl;
@@ -695,7 +694,7 @@ public class DomNodeTest extends WebTestCase {
         final DomChangeListenerTestImpl listener = new DomChangeListenerTestImpl();
         HtmlPage page = loadPage(html);
         page.addDomChangeListener(listener);
-        page = (HtmlPage) SerializationUtils.clone(page);
+        page = clone(page);
         page.removeDomChangeListener(listener);
     }
 

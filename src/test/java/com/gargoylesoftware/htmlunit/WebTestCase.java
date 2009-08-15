@@ -22,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.net.ConnectException;
@@ -38,6 +39,7 @@ import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.SerializationUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -764,6 +766,17 @@ public abstract class WebTestCase {
         }
         assertEquals(expectedAlerts_, collectedAlerts);
         return page;
+    }
+
+    /**
+     * A generics-friendly version of {@link SerializationUtils#clone(Serializable)}.
+     * @param <T> the type of the object being cloned
+     * @param object the object being cloned
+     * @return a clone of the specified object
+     */
+    @SuppressWarnings("unchecked")
+    protected <T extends Serializable> T clone(final T object) {
+        return (T) SerializationUtils.clone(object);
     }
 
     /**

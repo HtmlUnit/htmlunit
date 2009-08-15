@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.lang.SerializationUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.w3c.dom.NodeList;
@@ -1181,7 +1180,7 @@ public class HtmlElementTest extends WebTestCase {
         final String html = "<html><body><div id='d' a='b'></div></body></html>";
         HtmlPage page = loadPage(html);
         assertEquals("b", page.getElementById("d").getAttribute("a"));
-        page = (HtmlPage) SerializationUtils.clone(page);
+        page = clone(page);
         assertEquals("b", page.getElementById("d").getAttribute("a"));
     }
 
