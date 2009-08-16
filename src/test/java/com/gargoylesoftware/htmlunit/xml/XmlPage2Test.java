@@ -61,4 +61,59 @@ public class XmlPage2Test extends WebDriverTestCase {
         loadPageWithAlerts2(conn);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "true", "16" }, FF =  { "true", "14" })
+    public void createElement() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    doc.appendChild(doc.createElement('elementName'));\n"
+            + "    var xml;\n"
+            + "    if (window.ActiveXObject)\n"
+            + "      xml = doc.xml;\n"
+            + "    else\n"
+            + "      xml = new XMLSerializer().serializeToString(doc.documentElement);\n"
+            + "    alert(xml.indexOf('<elementName/>') != -1);\n"
+            + "    alert(xml.length);\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "[object Element]", IE = "exception")
+    public void createElementNS() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var doc = createXmlDocument();\n"
+            + "      alert(doc.createElementNS('myNS', 'ppp:eee'));\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }

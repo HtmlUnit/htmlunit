@@ -15,9 +15,7 @@
 package com.gargoylesoftware.htmlunit.xml;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.Servlet;
@@ -36,9 +34,6 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 
 /**
  * Tests for {@link XmlPage}.
@@ -170,45 +165,6 @@ public class XmlPageTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void createElement() throws Exception {
-        final String[] expectedAlerts;
-        if (getBrowserVersion().isIE()) {
-            expectedAlerts = new String[] {"true", "16"};
-        }
-        else {
-            expectedAlerts = new String[] {"true", "14"};
-        }
-
-        final String content = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
-            + "    doc.appendChild(doc.createElement('elementName'));\n"
-            + "    var xml;\n"
-            + "    if (window.ActiveXObject)\n"
-            + "      xml = doc.xml;\n"
-            + "    else\n"
-            + "      xml = new XMLSerializer().serializeToString(doc.documentElement);\n"
-            + "    alert(xml.indexOf('<elementName/>') != -1);\n"
-            + "    alert(xml.length);\n"
-            + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(getBrowserVersion(), content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     public void xpath() throws Exception {
         final String html
             = "<?xml version=\"1.0\"?>\n"
@@ -218,30 +174,6 @@ public class XmlPageTest extends WebServerTestCase {
              + "</foo>";
         final XmlPage xmlPage = testXmlDocument(html, "text/xml");
         assertEquals(1, xmlPage.getByXPath("//foofoo[@name='first']").size());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Browsers(Browser.FF)
-    @Alerts("[object Element]")
-    public void createElementNS() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
-            + "    alert(doc.createElementNS('myNS', 'ppp:eee'));\n"
-            + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
     }
 
     /**

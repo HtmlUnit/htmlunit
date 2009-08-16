@@ -14,15 +14,17 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link XMLSerializer}.
@@ -31,25 +33,25 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @author Ahmed Ashour
  * @author Darrell DeBoer
  */
-public class XMLSerializerTest extends WebTestCase {
+@RunWith(BrowserRunner.class)
+public class XMLSerializerTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
     public void test() throws Exception {
-        final String expectedStringIE =
-            "<note>13109<to>Tove</to>13109<from>Jani</from>13109<body>Do32not32forget32me32this32weekend!</body>"
-            + "13109<outer>131099<inner>Some32Value</inner></outer>1310</note>1310";
-        test(BrowserVersion.INTERNET_EXPLORER_7, expectedStringIE);
-        final String expectedStringFF =
-            "<note>32<to>Tove</to>3210<from>Jani</from>321032<body>Do32not32forget32me32this32weekend!</body>"
-            + "32<outer>10323232<inner>Some32Value</inner></outer>32</note>";
-        test(BrowserVersion.FIREFOX_2, expectedStringFF);
-    }
-
-    private void test(final BrowserVersion browserVersion, final String expectedString)
-        throws Exception {
+        final String expectedString;
+        if (getBrowserVersion().isIE()) {
+            expectedString =
+                "<note>13109<to>Tove</to>13109<from>Jani</from>13109<body>Do32not32forget32me32this32weekend!</body>"
+                + "13109<outer>131099<inner>Some32Value</inner></outer>1310</note>1310";
+        }
+        else {
+            expectedString =
+                "<note>32<to>Tove</to>3210<from>Jani</from>321032<body>Do32not32forget32me32this32weekend!</body>"
+                + "32<outer>10323232<inner>Some32Value</inner></outer>32</note>";
+        }
         final String serializationText =
                 "<note> "
                 + "<to>Tove</to> \\n"
@@ -60,32 +62,29 @@ public class XMLSerializerTest extends WebTestCase {
                 + "</outer> "
                 + "</note>";
 
-        final HtmlPage page = loadPage(browserVersion, constructPageContent(serializationText), null);
-        final HtmlTextArea textArea = page.getHtmlElementById("myTextArea");
-        assertEquals(expectedString, textArea.getText());
+        final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        assertEquals(expectedString, textArea.getValue());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented
     public void nameSpaces() throws Exception {
-        if (notYetImplemented()) {
-            return;
+        final String expectedString;
+        if (getBrowserVersion().isIE()) {
+            expectedString = "<?xml32version=\"1.0\"?>1310<xsl:stylesheet32version=\"1.0\"32"
+                + "xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">13109<xsl:template32match=\"/\">131099<html>"
+                + "1310999<body>1310999</body>131099</html>13109</xsl:template>1310</xsl:stylesheet>1310";
         }
-        final String expectedStringIE =
-            "<?xml32version=\"1.0\"?>1310<xsl:stylesheet32version=\"1.0\"32"
-            + "xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">13109<xsl:template32match=\"/\">131099<html>1310999"
-            + "<body>1310999</body>131099</html>13109</xsl:template>1310</xsl:stylesheet>1310";
-        nameSpaces(BrowserVersion.INTERNET_EXPLORER_7, expectedStringIE);
-        final String expectedStringFF =
-            "<xsl:stylesheet32version=\"1.0\"32xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">103232"
-            + "<xsl:template32match=\"/\">103232<html>1032323232<body>1032323232</body>103232</html>103232"
-            + "</xsl:template>10</xsl:stylesheet>";
-        nameSpaces(BrowserVersion.FIREFOX_2, expectedStringFF);
-    }
-
-    private void nameSpaces(final BrowserVersion browserVersion, final String expectedString) throws Exception {
+        else {
+            expectedString =
+                "<xsl:stylesheet32version=\"1.0\"32xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">103232"
+                + "<xsl:template32match=\"/\">103232<html>1032323232<body>1032323232</body>103232</html>103232"
+                + "</xsl:template>10</xsl:stylesheet>";
+        }
         final String serializationText =
                 "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\n"
                 + "<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\\n"
@@ -97,9 +96,9 @@ public class XMLSerializerTest extends WebTestCase {
                 + "  </xsl:template>\\n"
                 + "</xsl:stylesheet>";
 
-        final HtmlPage page = loadPage(browserVersion, constructPageContent(serializationText), null);
-        final HtmlTextArea textArea = page.getHtmlElementById("myTextArea");
-        assertEquals(expectedString, textArea.getText());
+        final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        assertEquals(expectedString, textArea.getValue());
     }
 
     /**
@@ -107,45 +106,48 @@ public class XMLSerializerTest extends WebTestCase {
      */
     @Test
     public void attributes() throws Exception {
-        final String expected = "<document32attrib=\"attribValue\">"
+        String expectedString = "<document32attrib=\"attribValue\">"
                           + "<outer32attrib=\"attribValue\">"
                           + "<inner32attrib=\"attribValue\"/>"
                           + "</outer>"
                           + "</document>";
-        attributes(BrowserVersion.FIREFOX_2, expected);
-        attributes(BrowserVersion.INTERNET_EXPLORER_7, expected + "1310");
-    }
-
-    private void attributes(final BrowserVersion browserVersion, final String expectedString)
-        throws Exception {
-        final String serializationContent = "<document attrib=\"attribValue\">"
+        if (getBrowserVersion().isIE()) {
+            expectedString += "1310";
+        }
+        final String serializationText = "<document attrib=\"attribValue\">"
                                             + "<outer attrib=\"attribValue\">"
                                             + "<inner attrib=\"attribValue\"/>"
                                             + "</outer></document>";
 
-        final HtmlPage page = loadPage(browserVersion, constructPageContent(serializationContent), null);
-        final HtmlTextArea textArea = page.getHtmlElementById("myTextArea");
-        assertEquals(expectedString, textArea.getText());
+        final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        assertEquals(expectedString, textArea.getValue());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented(Browser.IE)
     public void htmlAttributes() throws Exception {
-        final String expected = "<html32xmlns=\"http://www.w3.org/1999/xhtml\">"
-                          + "<head><title>html</title></head>"
-                          + "<body32id=\"bodyId\">"
-                          + "<span32class=\"spanClass\">foo</span>"
-                          + "</body>"
-                          + "</html>";
-        htmlAttributes(BrowserVersion.FIREFOX_2, expected);
-        htmlAttributes(BrowserVersion.INTERNET_EXPLORER_7, expected + "1310");
-    }
-
-    private void htmlAttributes(final BrowserVersion browserVersion, final String expectedString)
-        throws Exception {
-        final String serializationValue = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>"
+        final String expectedString;
+        if (getBrowserVersion().isIE()) {
+            expectedString = "<?xml32version=\"1.0\"?>1310<html32xmlns=\"http://www.w3.org/1999/xhtml\">"
+                + "<head><title>html</title></head>"
+                + "<body32id=\"bodyId\">"
+                + "<span32class=\"spanClass\">foo</span>"
+                + "</body>"
+                + "</html>1310";
+        }
+        else {
+            expectedString = "<html32xmlns=\"http://www.w3.org/1999/xhtml\">"
+                + "<head><title>html</title></head>"
+                + "<body32id=\"bodyId\">"
+                + "<span32class=\"spanClass\">foo</span>"
+                + "</body>"
+                + "</html>";
+        }
+        final String serializationText = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>"
                                           + "<html xmlns=\"http://www.w3.org/1999/xhtml\">"
                                           + "<head><title>html</title></head>"
                                           + "<body id=\"bodyId\">"
@@ -153,9 +155,9 @@ public class XMLSerializerTest extends WebTestCase {
                                           + "</body>"
                                           + "</html>";
 
-        final HtmlPage page = loadPage(browserVersion, constructPageContent(serializationValue), null);
-        final HtmlTextArea textArea = page.getHtmlElementById("myTextArea");
-        assertEquals(expectedString, textArea.getText());
+        final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        assertEquals(expectedString, textArea.getValue());
     }
 
     /**
@@ -201,19 +203,51 @@ public class XMLSerializerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "<foo/>", "<foo/>" })
     public void document() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = document.implementation.createDocument('', 'foo', null);\n"
-            + "    alert(new XMLSerializer().serializeToString(doc));\n"
-            + "    alert(new XMLSerializer().serializeToString(doc.documentElement));\n"
+            + "    if (!document.all) {\n"
+            + "      var doc = document.implementation.createDocument('', 'foo', null);\n"
+            + "      alert(new XMLSerializer().serializeToString(doc));\n"
+            + "      alert(new XMLSerializer().serializeToString(doc.documentElement));\n"
+            + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 
-        final String[] expectedAlerts = {"<foo/>", "<foo/>"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "<div/>", "<DIV/>", "<?myTarget myData?>" })
+    public void xml() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    if (!document.all) {"
+            + "      testFragment(doc);\n"
+            + "      testFragment(document);\n"
+            + "      var pi = doc.createProcessingInstruction('myTarget', 'myData');\n"
+            + "      alert(new XMLSerializer().serializeToString(pi));\n"
+            + "    }\n"
+            + "  }\n"
+            + "  function testFragment(doc) {\n"
+            + "    var fragment = doc.createDocumentFragment();\n"
+            + "    var div = doc.createElement('div');\n"
+            + "    fragment.appendChild(div);\n"
+            + "    alert(new XMLSerializer().serializeToString(fragment));\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
     }
 }
