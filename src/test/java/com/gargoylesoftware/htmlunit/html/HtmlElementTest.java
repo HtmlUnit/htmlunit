@@ -1184,4 +1184,31 @@ public class HtmlElementTest extends WebTestCase {
         assertEquals("b", page.getElementById("d").getAttribute("a"));
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void onpropertychange2() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    document.getElementById('input1').value = 'New Value';\n"
+            + "  }\n"
+            + "  function handler() {\n"
+            + "    alert(1);\n"
+            + "    document.getElementById('input1').dir='rtl';"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='input1' onpropertychange='handler()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"1", "1"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
 }
