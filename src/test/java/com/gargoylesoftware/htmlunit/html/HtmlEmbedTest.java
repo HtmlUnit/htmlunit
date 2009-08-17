@@ -14,13 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link HtmlEmbed}.
@@ -28,12 +30,14 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlEmbedTest extends WebTestCase {
+@RunWith(BrowserRunner.class)
+public class HtmlEmbedTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = "[object HTMLEmbedElement]", IE = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -45,10 +49,10 @@ public class HtmlEmbedTest extends WebTestCase {
             + "  <embed id='myId'/>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"[object HTMLEmbedElement]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertTrue(HtmlEmbed.class.isInstance(page.getHtmlElementById("myId")));
-        assertEquals(expectedAlerts, collectedAlerts);
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlElement element = toHtmlElement(driver.findElement(By.id("myId")));
+            assertTrue(HtmlEmbed.class.isInstance(element));
+        }
     }
 }

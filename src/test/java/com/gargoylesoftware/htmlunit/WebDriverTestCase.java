@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -281,6 +282,22 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
         }
         return JSON_;
+    }
+
+    /**
+     * Returns the HtmlElement of the specified WebElement.
+     * @param webElement the webElement
+     * @return the HtmlElement
+     */
+    protected HtmlElement toHtmlElement(final WebElement webElement) {
+        try {
+            final Field field = HtmlUnitWebElement.class.getDeclaredField("element");
+            field.setAccessible(true);
+            return (HtmlElement) field.get(webElement);
+        }
+        catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 

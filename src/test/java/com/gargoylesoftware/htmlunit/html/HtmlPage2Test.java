@@ -35,6 +35,8 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link HtmlPage}.
@@ -378,4 +380,22 @@ public class HtmlPage2Test extends WebServerTestCase {
         assertEquals(URL_FIRST.toExternalForm(), copyPage.getElementById("aframe").getAttribute("src"));
     }
 
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    @Alerts(IE = "[object]", FF = "null")
+    @NotYetImplemented(Browser.IE)
+    public void write_getElementById() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    document.write(\"<input id='sendemail' />\");\n"
+            + "    alert(document.getElementById('sendemail'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }
