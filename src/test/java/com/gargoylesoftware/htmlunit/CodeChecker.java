@@ -14,31 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
-
-import java.io.CharArrayWriter;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.eclipse.jdt.core.dom.AST;
-import org.eclipse.jdt.core.dom.ASTNode;
-import org.eclipse.jdt.core.dom.ASTParser;
-import org.eclipse.jdt.core.dom.ArrayType;
-import org.eclipse.jdt.core.dom.CompilationUnit;
-import org.eclipse.jdt.core.dom.ImportDeclaration;
-import org.eclipse.jdt.core.dom.MarkerAnnotation;
-import org.eclipse.jdt.core.dom.MethodDeclaration;
-import org.eclipse.jdt.core.dom.Modifier;
-import org.eclipse.jdt.core.dom.ParameterizedType;
-import org.eclipse.jdt.core.dom.PrimitiveType;
-import org.eclipse.jdt.core.dom.SimpleType;
-import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
-import org.eclipse.jdt.core.dom.Type;
-import org.eclipse.jdt.core.dom.TypeDeclaration;
-import org.junit.After;
-import org.junit.Test;
 
 /**
  * Test of coding style using Eclipse JDT.
@@ -59,12 +34,10 @@ import org.junit.Test;
  */
 public class CodeChecker {
 
+    /*
     private List<String> errors_ = new ArrayList<String>();
     private ASTParser parser_ = ASTParser.newParser(AST.JLS3);
 
-    /**
-     * After.
-     */
     @After
     public void after() {
         final StringBuilder sb = new StringBuilder();
@@ -85,9 +58,6 @@ public class CodeChecker {
         errors_.add(error);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
     @Test
     public void codeChecker() throws Exception {
         process(new File("src/main/java"));
@@ -108,12 +78,12 @@ public class CodeChecker {
         }
     }
 
-    /**
+    / **
      * Checks if the given file has any missing @Override annotation.
      *
      * @param lines lines
      * @throws Exception If an error occurs
-     */
+     * /
     private void checkOverride(final List<String> lines) throws Exception {
         final CharArrayWriter writer = new CharArrayWriter();
         for (final String line : lines) {
@@ -392,4 +362,5 @@ public class CodeChecker {
         }
         return null;
     }
+    */
 }

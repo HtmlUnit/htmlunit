@@ -657,9 +657,9 @@
         </dependency>
         <!-- WebDriver -->
         <dependency>
-            <groupId>net.sourceforge.htmlunit</groupId>
-            <artifactId>webdriver</artifactId>
-            <version>2.6-SNAPSHOT</version>
+            <groupId>org.seleniumhq.webdriver</groupId>
+            <artifactId>webdriver-htmlunit</artifactId>
+            <version>0.9.7089</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -669,27 +669,15 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.openqa.selenium.webdriver</groupId>
+            <groupId>org.seleniumhq.webdriver</groupId>
             <artifactId>webdriver-firefox</artifactId>
-            <version>0.6.1039</version>
+            <version>0.9.7089</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.openqa.selenium.webdriver</groupId>
+            <groupId>org.seleniumhq.webdriver</groupId>
             <artifactId>webdriver-ie</artifactId>
-            <version>0.6.1039</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.jdt</groupId>
-            <artifactId>core</artifactId>
-            <version>3.4.2.v_883_R34x</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.equinox</groupId>
-            <artifactId>common</artifactId>
-            <version>3.3.0-v20070426</version>
+            <version>0.9.7089</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -730,23 +718,6 @@
             <name>HtmlUnit Snapshots</name>
             <url>http://htmlunit.sourceforge.net/m2-repo-snapshots</url>
             <layout>default</layout>
-        </repository>
-        <!-- Needed for JDT -->
-        <repository>
-            <id>jboss-releases</id>
-            <name>JBoss Releases</name>
-            <url>http://repository.jboss.com/maven2</url>
-        </repository>
-        <repository>
-            <id>openqa-releases</id>
-            <name>OpenQA Releases</name>
-            <url>http://archiva.openqa.org/repository/releases</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
         </repository>
         <repository>
             <snapshots>
