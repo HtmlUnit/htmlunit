@@ -36,7 +36,7 @@ import org.junit.Test;
  */
 public class CodeStyleTest {
 
-    private List<String> failures_ = new ArrayList < String>( );
+    private List<String> failures_ = new ArrayList<String>();
 
     /**
      * After.
