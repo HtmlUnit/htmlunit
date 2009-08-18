@@ -248,21 +248,20 @@ public class GWTSourceTest extends WebDriverTestCase {
             "<?myTarget myData?>", "<![CDATA[abcdefghij]]>" },
             FF = { "myTarget,myData,7", "myTarget,myData", "abcdefghij",
             "undefined", "undefined" })
-    @NotYetImplemented
     public void createTestDocument() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
-            + "    var top = doc.createElement('doc');\n"
-            + "    top.setAttribute('fluffy', 'true');\n"
-            + "    top.setAttribute('numAttributes', '2');\n"
-            + "    doc.appendChild(top);\n"
+            + "    var d = doc.createElement('doc');\n"
+            + "    d.setAttribute('fluffy', 'true');\n"
+            + "    d.setAttribute('numAttributes', '2');\n"
+            + "    doc.appendChild(d);\n"
             + "    var pi = doc.createProcessingInstruction('myTarget', 'myData');\n"
-            + "    doc.insertBefore(pi, top);\n"
+            + "    doc.insertBefore(pi, d);\n"
             + "    alert(pi.nodeName + ',' + pi.nodeValue + ',' + pi.nodeType);\n"
             + "    alert(pi.target + ',' + pi.data);\n"
             + "    var cdata = doc.createCDATASection('abcdefghij');\n"
-            + "    top.appendChild(cdata);\n"
+            + "    d.appendChild(cdata);\n"
             + "    alert(cdata.data);\n"
             + "    alert(pi.xml);\n"
             + "    alert(cdata.xml);\n"
