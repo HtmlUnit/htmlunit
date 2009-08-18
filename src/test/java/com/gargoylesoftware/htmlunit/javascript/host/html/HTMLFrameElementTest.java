@@ -350,7 +350,7 @@ public class HTMLFrameElementTest extends WebTestCase {
      */
     @Test
     @NotYetImplemented(Browser.FF)
-    @Alerts(IE = { "[object]" }, FF = { "undefined" })
+    @Alerts(IE = "[object]", FF = "undefined")
     public void frames() throws Exception {
         final String mainHtml =
             "<html><head><title>frames</title></head>\n"
