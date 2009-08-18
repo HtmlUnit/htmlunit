@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-
 /**
  * Test of coding style using Eclipse JDT.
  * Currently checks for missing @Override annotations.
