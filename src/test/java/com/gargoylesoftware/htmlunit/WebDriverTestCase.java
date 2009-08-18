@@ -189,8 +189,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
 
             final String newContent = StringUtils.replace(resp.getContentAsString(), "alert(",
-                "(function(t){var x = window.__huCatchedAlerts; x = x ? x : []; "
-                + "window.__huCatchedAlerts = x; x.push(String(t))})(");
+                "(function(t){var x = top.__huCatchedAlerts; x = x ? x : []; "
+                + "top.__huCatchedAlerts = x; x.push(String(t))})(");
 
             response.getWriter().print(newContent);
             response.flushBuffer();
