@@ -22,6 +22,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -660,6 +661,22 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
                 + "  alert(RegExp.$1);\n"
                 + "}");
         final String[] expected = {"INPUT"};
+        final List<String> actual = new ArrayList<String>();
+        loadPage(html, actual);
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void stackOverflow() throws Exception {
+        String s = IOUtils.toString(getClass().getResourceAsStream("stackOverflow.txt"));
+        final String html = buildHtml(
+                  "var s = '" + s + "';\n"    
+                + "s = s.replace(/(\\s*\\S+)*/, 'a');\n"
+                + "alert(s);\n");
+        final String[] expected = {"a"};
         final List<String> actual = new ArrayList<String>();
         loadPage(html, actual);
         assertEquals(expected, actual);

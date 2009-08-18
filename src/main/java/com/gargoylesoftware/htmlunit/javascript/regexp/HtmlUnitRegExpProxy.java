@@ -59,8 +59,20 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
      */
     @Override
     public Object action(final Context cx, final Scriptable scope, final Scriptable thisObj,
-            final Object[] args, final int actionType) {
+        final Object[] args, final int actionType) {
+        try {
+            return doAction(cx, scope, thisObj, args, actionType);
+        }
+        catch (StackOverflowError e) {
+            // TODO: We shouldn't have to catch this exception and fall back to Rhino's regex support!
+            // See HtmlUnitRegExpProxyTest.stackOverflow()
+            LOG.warn(e.getMessage(), e);
+            return wrapped_.action(cx, scope, thisObj, args, actionType);
+        }
+    }
 
+    private Object doAction(final Context cx, final Scriptable scope, final Scriptable thisObj,
+        final Object[] args, final int actionType) {
         // in a first time just improve replacement with a String (not a function)
         if (RA_REPLACE == actionType && args.length == 2 && (args[1] instanceof String)) {
             final String thisString = Context.toString(thisObj);
