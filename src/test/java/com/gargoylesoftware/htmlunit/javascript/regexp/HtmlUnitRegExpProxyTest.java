@@ -671,9 +671,9 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      */
     @Test
     public void stackOverflow() throws Exception {
-        String s = IOUtils.toString(getClass().getResourceAsStream("stackOverflow.txt"));
+        final String s = IOUtils.toString(getClass().getResourceAsStream("stackOverflow.txt"));
         final String html = buildHtml(
-                  "var s = '" + s + "';\n"    
+                  "var s = '" + s + "';\n"
                 + "s = s.replace(/(\\s*\\S+)*/, 'a');\n"
                 + "alert(s);\n");
         final String[] expected = {"a"};

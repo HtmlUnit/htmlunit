@@ -63,7 +63,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         try {
             return doAction(cx, scope, thisObj, args, actionType);
         }
-        catch (StackOverflowError e) {
+        catch (final StackOverflowError e) {
             // TODO: We shouldn't have to catch this exception and fall back to Rhino's regex support!
             // See HtmlUnitRegExpProxyTest.stackOverflow()
             LOG.warn(e.getMessage(), e);
