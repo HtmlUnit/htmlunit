@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript;
 import java.lang.reflect.Method;
 
 import net.sourceforge.htmlunit.corejs.javascript.Callable;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
@@ -27,7 +29,9 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public abstract class SimpleScriptableProxy extends ScriptableObject {
+public abstract class SimpleScriptableProxy extends ScriptableObject
+    implements ScriptableWithFallbackGetter, Function {
+
     private static final long serialVersionUID = -3836061858668746684L;
 
     /**
@@ -72,6 +76,17 @@ public abstract class SimpleScriptableProxy extends ScriptableObject {
             start = ((SimpleScriptableProxy) start).getWrappedScriptable();
         }
         return getWrappedScriptable().get(name, start);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Object getWithFallback(final String name) {
+        final SimpleScriptable wrapped = getWrappedScriptable();
+        if (wrapped instanceof ScriptableWithFallbackGetter) {
+            return ((ScriptableWithFallbackGetter) wrapped).getWithFallback(name);
+        }
+        return NOT_FOUND;
     }
 
     /**
@@ -360,4 +375,27 @@ public abstract class SimpleScriptableProxy extends ScriptableObject {
     protected Object equivalentValues(final Object value) {
         return ScriptRuntime.eq(getWrappedScriptable(), value);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
+        final SimpleScriptable wrapped = getWrappedScriptable();
+        if (wrapped instanceof Function) {
+            return ((Function) wrapped).call(cx, scope, thisObj, args);
+        }
+        throw Context.reportRuntimeError(wrapped + " is not a function.");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public final Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
+        final SimpleScriptable wrapped = getWrappedScriptable();
+        if (wrapped instanceof Function) {
+            return ((Function) wrapped).construct(cx, scope, args);
+        }
+        throw Context.reportRuntimeError(wrapped + " is not a function.");
+    }
+
 }
