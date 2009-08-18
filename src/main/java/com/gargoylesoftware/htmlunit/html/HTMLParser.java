@@ -479,16 +479,18 @@ public final class HTMLParser {
         }
 
         /**
-         * Creates a new builder for parsing the given response contents
-         * @param webResponse the response data
-         * @param webWindow the web window into which the page is to be loaded
+         * Creates a new builder for parsing the specified response contents.
+         * @param node the location at which to insert the new content
+         * @param url the page's URL
          */
-        private HtmlUnitDOMBuilder(final DomNode page, final URL url) {
-            super(createConfiguration(page.getPage().getWebClient()));
-            this.page_ = (HtmlPage) page.getPage();
+        private HtmlUnitDOMBuilder(final DomNode node, final URL url) {
+            super(createConfiguration(node.getPage().getWebClient()));
+            this.page_ = (HtmlPage) node.getPage();
 
-            currentNode_ = page;
-            stack_.push(currentNode_);
+            currentNode_ = node;
+            for (final Node ancestor : currentNode_.getAncestors(true)) {
+                stack_.push((DomNode) ancestor);
+            }
 
             final HTMLParserListener listener = page_.getWebClient().getHTMLParserListener();
             final boolean reportErrors;

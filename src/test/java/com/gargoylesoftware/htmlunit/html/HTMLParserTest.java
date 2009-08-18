@@ -684,4 +684,48 @@ public class HTMLParserTest extends WebServerTestCase {
         final HtmlPage page = client.getPage(url);
         assertEquals("Welcome to Suffolk Coastal District Council online", page.getTitleText());
     }
+
+    /**
+     * This HTML was causing an EmptyStackException to be thrown.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void emptyStack() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <body onload='document.getElementById(\"s\").innerHTML="
+            + "    \"<h1><span><span></span></span><span><span></span></span></h1>\";'>\n"
+            + "    <div>\n"
+            + "      <div>\n"
+            + "        <table>\n"
+            + "          <tbody>\n"
+            + "            <tr>\n"
+            + "              <td>\n"
+            + "                <table>\n"
+            + "                  <tbody>\n"
+            + "                    <tr>\n"
+            + "                      <td>\n"
+            + "                        <div>\n"
+            + "                          <div>\n"
+            + "                            <h1>\n"
+            + "                              <span id='s'>blah</span>\n"
+            + "                            </h1>\n"
+            + "                          </div>\n"
+            + "                        </div>\n"
+            + "                      </td>\n"
+            + "                    </tr>\n"
+            + "                  </tbody>\n"
+            + "                </table>\n"
+            + "              </td>\n"
+            + "            </tr>\n"
+            + "          </tbody>\n"
+            + "        </table>\n"
+            + "      </div>\n"
+            + "    </div>\n"
+            + "  </body>\n"
+            + "</html>";
+        final HtmlPage page = loadPageWithAlerts(html);
+        assertNotNull(page);
+    }
+
 }
