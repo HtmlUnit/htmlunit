@@ -589,10 +589,6 @@ public class XMLHttpRequest extends SimpleScriptable {
             return "";
         }
 
-        public byte[] getResponseBody() {
-            return new byte[0];
-        }
-
         public WebRequestSettings getRequestSettings() {
             return webRequestSettings_;
         }

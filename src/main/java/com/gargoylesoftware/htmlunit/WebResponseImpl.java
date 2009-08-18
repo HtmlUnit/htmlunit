@@ -247,14 +247,4 @@ public class WebResponseImpl implements WebResponse, Serializable {
     public long getLoadTime() {
         return loadTime_;
     }
-
-    /**
-     * {@inheritDoc}
-     * @deprecated since 2.4, please use {@link #getContentAsBytes()} instead
-     */
-    @Deprecated
-    public byte[] getResponseBody() {
-        return responseData_.getBody();
-    }
-
 }

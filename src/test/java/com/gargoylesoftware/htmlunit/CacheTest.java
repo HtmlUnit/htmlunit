@@ -280,10 +280,6 @@ class DummyWebResponse implements WebResponse {
         throw new RuntimeException("not implemented");
     }
 
-    public byte[] getResponseBody() {
-        throw new RuntimeException("not implemented");
-    }
-
     public List<NameValuePair> getResponseHeaders() {
         throw new RuntimeException("not implemented");
     }
