@@ -2490,7 +2490,7 @@ public class DocumentTest extends WebTestCase {
             + "}\n"
             + "</script></head><body onload='test();'>\n"
             + "<iframe src='about:blank' name='foo'></iframe>\n"
-            + "</body></html> ";
+            + "</body></html>";
 
         loadPageWithAlerts(html);
     }

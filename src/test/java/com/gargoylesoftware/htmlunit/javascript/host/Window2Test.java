@@ -606,4 +606,47 @@ public class Window2Test extends WebTestCase {
         clone(page.getEnclosingWindow());
     }
 
+    /**
+     * Verifies that <tt>window.frames</tt> basically returns a reference to the window.
+     * Regression test for bug 2824436.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "[object Window]", "[object Window]", "[object Window]", "1", "true", "true",
+                   "[object Window]", "true", "true", "no function", "undefined", "true", "true",
+                   "[object History]", "true", "true", "[object Window]", "true", "true" },
+            IE = { "[object]", "[object]", "[object]", "1", "true", "true",
+                   "[object]", "true", "true", "[object]", "true", "true", "undefined", "true", "true",
+                   "[object]", "true", "true", "[object]", "true", "true" })
+    public void framesAreWindows() throws Exception {
+        final String html = "<html><body><iframe name='f'></iframe><script>\n"
+            + "alert(window.frames);\n"
+            + "alert(window.f);\n"
+            + "alert(window.frames.f);\n"
+            + "alert(window.length);\n"
+            + "alert(window.length == window.frames.length);\n"
+            + "alert(window.length == window.frames.frames.length);\n"
+            + "alert(window[0]);\n"
+            + "alert(window[0] == window.frames[0]);\n"
+            + "alert(window[0] == window.frames.frames[0]);\n"
+            + "try {\n"
+            + "  alert(window(0));\n"
+            + "  alert(window(0) == window.frames(0));\n"
+            + "  alert(window(0) == window.frames.frames(0));\n"
+            + "} catch(e) {\n"
+            + "  alert('no function');\n"
+            + "}\n"
+            + "alert(window[1]);\n"
+            + "alert(window[1] == window.frames[1]);\n"
+            + "alert(window[1] == window.frames.frames[1]);\n"
+            + "alert(window.history);\n"
+            + "alert(window.history == window.frames.history);\n"
+            + "alert(window.history == window.frames.frames.history);\n"
+            + "alert(window.self);\n"
+            + "alert(window.self == window.frames.self);\n"
+            + "alert(window.self == window.frames.frames.self);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }

@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -343,4 +344,36 @@ public class HTMLFrameElementTest extends WebTestCase {
 
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented(Browser.FF)
+    @Alerts(IE = { "[object]" }, FF = { "undefined" })
+    public void frames() throws Exception {
+        final String mainHtml =
+            "<html><head><title>frames</title></head>\n"
+            + "<frameset>\n"
+            + "<frame id='f1' src='1.html'/>\n"
+            + "</frameset>\n"
+            + "</html>";
+
+        final String frame1 = "<html><head><title>1</title></head>\n"
+            + "<body onload=\"alert(parent.frames['f1'])\"></body>\n"
+            + "</html>";
+
+        final WebClient webClient = getWebClient();
+        final List<String> collectedAlerts = new ArrayList<String>();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection();
+        webClient.setWebConnection(conn);
+
+        conn.setResponse(URL_FIRST, mainHtml);
+        conn.setResponse(new URL(URL_FIRST, "1.html"), frame1);
+
+        webClient.getPage(URL_FIRST);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
+
 }

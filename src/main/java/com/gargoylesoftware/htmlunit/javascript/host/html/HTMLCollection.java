@@ -221,7 +221,6 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     public final Object get(final int index, final Scriptable start) {
         final HTMLCollection array = (HTMLCollection) start;
         final List<Object> elements = array.getElements();
-
         if (index >= 0 && index < elements.size()) {
             return getScriptableForElement(transformer_.transform(elements.get(index)));
         }

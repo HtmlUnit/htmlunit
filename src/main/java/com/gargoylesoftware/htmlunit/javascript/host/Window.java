@@ -93,7 +93,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
  * @author Ahmed Ashour
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535873.aspx">MSDN documentation</a>
  */
-public class Window extends SimpleScriptable implements ScriptableWithFallbackGetter {
+public class Window extends SimpleScriptable implements ScriptableWithFallbackGetter, Function {
 
     private static final long serialVersionUID = -7730298149962810325L;
     private static final Log LOG = LogFactory.getLog(Window.class);
@@ -569,9 +569,10 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Initialize the object. Only call for Windows with no contents.
+     * Initializes the object. Only called for Windows with no contents.
      */
     public void initialize() {
+        // Empty.
     }
 
     /**
@@ -621,9 +622,25 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Returns the value of the frames property.
-     * @return the live collection of frames
+     * @return the value of the frames property
      */
-    public HTMLCollection jsxGet_frames() {
+    public Object jsxGet_frames() {
+        return new WindowProxy(getWebWindow());
+    }
+
+    /**
+     * Returns the number of frames contained by this window.
+     * @return the number of frames contained by this window
+     */
+    public int jsxGet_length() {
+        return getFrames().jsxGet_length();
+    }
+
+    /**
+     * Returns the live collection of frames contained by this window.
+     * @return the live collection of frames contained by this window
+     */
+    private HTMLCollection getFrames() {
         if (frames_ == null) {
             final String xpath = ".//*[(name() = 'frame' or name() = 'iframe')]";
             final HtmlPage page = (HtmlPage) getWebWindow().getEnclosedPage();
@@ -631,16 +648,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             final Transformer toEnclosedWindow = new FrameToWindowTransformer();
             frames_.init(page, xpath, toEnclosedWindow);
         }
-
         return frames_;
-    }
-
-    /**
-     * Returns the number of frames.
-     * @return the number of frames
-     */
-    public int jsxGet_length() {
-        return jsxGet_frames().jsxGet_length();
     }
 
     /**
@@ -959,7 +967,35 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Looks at attributes with the specified name.
+     * {@inheritDoc}
+     */
+    public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
+        if (!getBrowserVersion().isIE()) {
+            throw Context.reportRuntimeError("Window is not a function.");
+        }
+        if (args.length > 0) {
+            final Object arg = args[0];
+            if (arg instanceof String) {
+                return ScriptableObject.getProperty(this, (String) arg);
+            }
+            else if (arg instanceof Number) {
+                return ScriptableObject.getProperty(this, ((Number) arg).intValue());
+            }
+        }
+        return Context.getUndefinedValue();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
+        if (!getBrowserVersion().isIE()) {
+            throw Context.reportRuntimeError("Window is not a function.");
+        }
+        return null;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public Object getWithFallback(final String name) {
@@ -970,7 +1006,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
             // May be attempting to retrieve a frame by name.
             final HtmlPage page = (HtmlPage) domNode.getPage();
-            result = getFrameByName(page, name);
+            result = getFrameWindowByName(page, name);
 
             if (result == NOT_FOUND) {
                 // May be attempting to retrieve element(s) by name. IMPORTANT: We're using map-backed operations
@@ -986,7 +1022,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                     result = document_.jsxFunction_getElementsByName(name);
                 }
                 else {
-                    // May be attempting to retrieve element by ID (again, try a map-back operation instead of XPath).
+                    // May be attempting to retrieve element by ID (try map-backed operation again instead of XPath).
                     try {
                         final HtmlElement htmlElement = page.getHtmlElementById(name);
                         result = getScriptableFor(htmlElement);
@@ -996,9 +1032,39 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                     }
                 }
             }
+
+            if (result instanceof Window) {
+                final WebWindow webWindow = ((Window) result).getWebWindow();
+                result = new WindowProxy(webWindow);
+            }
+            else if (result instanceof HTMLUnknownElement && getBrowserVersion().isIE()) {
+                final HtmlElement unknownElement = ((HTMLUnknownElement) result).getDomNodeOrDie();
+                if (unknownElement.getNodeName().equals("xml")) {
+                    final XMLDocument document = ActiveXObject.buildXMLDocument(getWebWindow());
+                    document.setParentScope(this);
+                    final Iterator<HtmlElement> children = unknownElement.getAllHtmlChildElements().iterator();
+                    if (children.hasNext()) {
+                        final HtmlElement root = children.next();
+                        document.jsxFunction_loadXML(root.asXml().trim());
+                    }
+                    result = document;
+                }
+            }
         }
 
         return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object get(final int index, final Scriptable start) {
+        final HTMLCollection frames = getFrames();
+        if (index >= frames.jsxGet_length()) {
+            return Context.getUndefinedValue();
+        }
+        return frames.jsxFunction_item(index);
     }
 
     /**
@@ -1021,25 +1087,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         else if ("Image".equals(name)) {
             name = "HTMLImageElement";
         }
-        final Object superValue = super.get(name, start);
-        if (superValue == NOT_FOUND && getWebWindow() != null && getBrowserVersion().isIE()) {
-            final Object element = jsxGet_document().jsxFunction_getElementById(name);
-            if (element instanceof HTMLUnknownElement) {
-                final HtmlElement unknownElement = ((HTMLUnknownElement) element).getDomNodeOrDie();
-                if (unknownElement.getNodeName().equals("xml")) {
-                    final XMLDocument document = ActiveXObject.buildXMLDocument(getWebWindow());
-                    document.setParentScope(this);
-                    final Iterator<HtmlElement> children = unknownElement.getAllHtmlChildElements().iterator();
-                    if (children.hasNext()) {
-                        final HtmlElement root = children.next();
-                        document.jsxFunction_loadXML(root.asXml().trim());
-                    }
-                    return document;
-                }
-            }
-
-        }
-        return superValue;
+        return super.get(name, start);
     }
 
     private static Scriptable getTopScope(final Scriptable s) {
@@ -1050,7 +1098,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         return top;
     }
 
-    private static Object getFrameByName(final HtmlPage page, final String name) {
+    private static Object getFrameWindowByName(final HtmlPage page, final String name) {
         try {
             return page.getFrameByName(name).getScriptObject();
         }

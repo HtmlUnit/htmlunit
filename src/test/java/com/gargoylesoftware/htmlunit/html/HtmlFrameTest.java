@@ -23,7 +23,6 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -219,39 +218,4 @@ public class HtmlFrameTest extends WebTestCase {
         assertEquals("page 3", ((HtmlPage) page.getFrameByName("f2").getEnclosedPage()).getTitleText());
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void frames() throws Exception {
-        frames(BrowserVersion.INTERNET_EXPLORER_6, new String[] {"[object]"});
-        frames(BrowserVersion.INTERNET_EXPLORER_7, new String[] {"[object]"});
-        frames(BrowserVersion.FIREFOX_2, new String[] {"undefined"});
-        frames(BrowserVersion.FIREFOX_3, new String[] {"undefined"});
-    }
-
-    private void frames(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
-        final String mainHtml =
-            "<html><head><title>frames</title></head>\n"
-            + "<frameset>\n"
-            + "<frame id='f1' src='1.html'/>\n"
-            + "</frameset>\n"
-            + "</html>";
-
-        final String frame1 = "<html><head><title>1</title></head>\n"
-            + "<body onload=\"alert(parent.frames['f1'])\"></body>\n"
-            + "</html>";
-
-        final WebClient webClient = new WebClient(browserVersion);
-        final List<String> collectedAlerts = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
-        webClient.setWebConnection(conn);
-
-        conn.setResponse(URL_FIRST, mainHtml);
-        conn.setResponse(new URL(URL_FIRST, "1.html"), frame1);
-
-        webClient.getPage(URL_FIRST);
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
 }
