@@ -6,6 +6,12 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="fix" dev="sdanig">
+                JavaScript: document.getElementById() and document.getElementsByNames() trigger implicit document.close() calls (IE only).
+            </action>
+            <action type="fix" dev="sdanig" issue="2824436">
+                JavaScript: window.frames returns a reference to the window itself.
+            </action>
             <action type="update" dev="asashour" issue="2837819">
                 Force NekoHtml and Xalan to use xercesImpl 2.9.1 dependency.
             </action>

@@ -820,6 +820,21 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
+     * Closes the document implicitly, i.e. flushes the <tt>document.write</tt> buffer (IE only).
+     */
+    private void implicitCloseIfNecessary() {
+        final boolean ie = getBrowserVersion().isIE();
+        if (!writeInCurrentDocument_ && ie) {
+            try {
+                jsxFunction_close();
+            }
+            catch (final IOException e) {
+                throw Context.throwAsScriptRuntimeEx(e);
+            }
+        }
+    }
+
+    /**
      * Gets the window in which this document is contained.
      * @return the window
      */
@@ -915,12 +930,12 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the element, or <tt>null</tt> if it could not be found
      */
     public Object jsxFunction_getElementById(final String id) {
+        implicitCloseIfNecessary();
         Object result = null;
         try {
             final boolean caseSensitive = getBrowserVersion().isFirefox();
             final HtmlElement htmlElement = ((HtmlPage) getDomNodeOrDie()).getHtmlElementById(id, caseSensitive);
             final Object jsElement = getScriptableFor(htmlElement);
-
             if (jsElement == NOT_FOUND) {
                 LOG.debug("getElementById(" + id
                     + ") cannot return a result as there isn't a JavaScript object for the HTML element "
@@ -932,7 +947,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
         catch (final ElementNotFoundException e) {
             // Just fall through - result is already set to null
-
             final BrowserVersion browser = getBrowserVersion();
             if (browser.isIE()) {
                 final HTMLCollection elements = jsxFunction_getElementsByName(id);
@@ -968,6 +982,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return all HTML elements that have a "name" attribute with the specified value
      */
     public HTMLCollection jsxFunction_getElementsByName(final String elementName) {
+        implicitCloseIfNecessary();
         final HTMLCollection collection = new HTMLCollection(this);
         final String exp = ".//*[@name='" + elementName + "']";
         collection.init(getDomNodeOrDie(), exp);
