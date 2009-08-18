@@ -248,6 +248,7 @@ public class GWTSourceTest extends WebDriverTestCase {
             "<?myTarget myData?>", "<![CDATA[abcdefghij]]>" },
             FF = { "myTarget,myData,7", "myTarget,myData", "abcdefghij",
             "undefined", "undefined" })
+    @NotYetImplemented
     public void createTestDocument() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
