@@ -116,7 +116,8 @@ public class CodeStyleTest {
      * Checks the year in the source.
      */
     private void year(final List<String> lines, final String path) {
-        if (!lines.get(1).contains("Copyright (c) 2002-" + Calendar.getInstance().get(Calendar.YEAR))) {
+        final int year = Calendar.getInstance().get(Calendar.YEAR);
+        if (lines.size() < 2 || !lines.get(1).contains("Copyright (c) 2002-" + year)) {
             addFailure("Incorrect year in " + path);
         }
     }
