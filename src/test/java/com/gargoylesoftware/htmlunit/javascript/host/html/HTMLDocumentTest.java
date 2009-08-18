@@ -720,4 +720,19 @@ public class HTMLDocumentTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * We couldn't document.write() script elements that contained the '<' character...
+     * @exception Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void writeScript() throws Exception {
+        final String html =
+              "<html><body><script>\n"
+            + "  document.write('<scr'+'ipt>alert(1<2)</sc'+'ript>');\n"
+            + "</script></body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }

@@ -455,7 +455,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         // all <script> must have their </script> because the parser doesn't close automatically this tag
         // All tags must be complete, that is from '<' to '>'.
         final int tagOutside = 0;
-        final int tagSart = 1;
+        final int tagStart = 1;
         final int tagInName = 2;
         final int tagInside = 3;
         int tagState = tagOutside;
@@ -467,11 +467,11 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             switch (tagState) {
                 case tagOutside:
                     if (currentChar == '<') {
-                        tagState = tagSart;
+                        tagState = tagStart;
                         tagIsOpen = true;
                     }
                     break;
-                case tagSart:
+                case tagStart:
                     if (currentChar == '/') {
                         tagIsOpen = false;
                         tagNameBeginIndex = index + 1;
@@ -482,15 +482,14 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                     tagState = tagInName;
                     break;
                 case tagInName:
-                    if (!Character.isLetter(currentChar)) {
+                    if (Character.isWhitespace(currentChar) || currentChar == '>') {
                         final String tagName = content.substring(tagNameBeginIndex, index);
                         if (tagName.equalsIgnoreCase("script")) {
                             if (tagIsOpen) {
                                 scriptTagCount++;
                             }
                             else if (scriptTagCount > 0) {
-                                // Ignore extra close tags for now. Let the
-                                // parser deal with them.
+                                // Ignore extra close tags for now. Let the parser deal with them.
                                 scriptTagCount--;
                             }
                         }
@@ -500,6 +499,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                         else {
                             tagState = tagInside;
                         }
+                    }
+                    else if (!Character.isLetter(currentChar)) {
+                        tagState = tagOutside;
                     }
                     break;
                 case tagInside:

@@ -379,21 +379,38 @@ public class HtmlPage2Test extends WebServerTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @exception Exception if the test fails
      */
     @Test
     @Alerts(IE = { "[object]", "1" }, FF = { "null", "0" })
-    public void write_getElementById() throws Exception {
+    public void write_getElementById_afterParsing() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    document.write(\"<input id='sendemail' />\");\n"
+            + "    document.write(\"<input id='sendemail'>\");\n"
             + "    alert(document.getElementById('sendemail'));\n"
-            + "    document.write(\"<input name='sendemail2' />\");\n"
+            + "    document.write(\"<input name='sendemail2'>\");\n"
             + "    alert(document.getElementsByName('sendemail2').length);\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @exception Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "[object]", "1" }, FF = { "[object HTMLInputElement]", "1" })
+    public void write_getElementById_duringParsing() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body><script>\n"
+            + "    document.write(\"<input id='sendemail'>\");\n"
+            + "    alert(document.getElementById('sendemail'));\n"
+            + "    document.write(\"<input name='sendemail2'>\");\n"
+            + "    alert(document.getElementsByName('sendemail2').length);\n"
+            + "</script></body></html>";
         loadPageWithAlerts(html);
     }
 
