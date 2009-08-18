@@ -31,7 +31,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  */
 public abstract class SimpleScriptableProxy extends ScriptableObject
     implements ScriptableWithFallbackGetter, Function {
-
     private static final long serialVersionUID = -3836061858668746684L;
 
     /**
