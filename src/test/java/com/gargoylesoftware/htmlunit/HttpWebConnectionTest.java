@@ -215,7 +215,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         startWebServer("./");
 
         final WebClient client = new WebClient();
-        Page page = client.getPage("http://localhost:" + PORT + "/src/test/resources/event_coordinates.html");
+        final Page page = client.getPage("http://localhost:" + PORT + "/src/test/resources/event_coordinates.html");
         final WebConnection defaultConnection = client.getWebConnection();
         Assert.assertTrue(
                 "HttpWebConnection should be the default",
