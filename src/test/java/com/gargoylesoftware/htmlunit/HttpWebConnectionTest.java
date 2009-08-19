@@ -221,12 +221,6 @@ public class HttpWebConnectionTest extends WebServerTestCase {
                 "HttpWebConnection should be the default",
                 HttpWebConnection.class.isInstance(defaultConnection));
         Assert.assertTrue("Response should be valid HTML", HtmlPage.class.isInstance(page));
-
-        // test that // is escaped
-        final URL url = new URL("http://localhost:" + PORT + "//src/test/resources/event_coordinates.html");
-        page = client.getPage(url);
-        Assert.assertEquals(url.toExternalForm(),
-                page.getWebResponse().getRequestSettings().getUrl().toExternalForm());
     }
 
     /**
