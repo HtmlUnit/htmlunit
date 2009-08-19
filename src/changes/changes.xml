@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="update" dev="asashour">
+                Upgrade commons-codec to 1.4
+            </action>
             <action type="fix" dev="sdanig">
                 JavaScript: document.getElementById() and document.getElementsByNames() trigger implicit document.close() calls (IE only).
             </action>
