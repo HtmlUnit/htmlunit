@@ -103,16 +103,16 @@ public class XMLDocument extends Document {
     /**
      * Loads an XML document from the specified location.
      *
-     * @param xmlSrouce a string containing a URL that specifies the location of the XML file
+     * @param xmlSource a string containing a URL that specifies the location of the XML file
      * @return true if the load succeeded; false if the load failed
      */
-    public boolean jsxFunction_load(final String xmlSrouce) {
+    public boolean jsxFunction_load(final String xmlSource) {
         if (async_) {
             LOG.debug("XMLDocument.load(): 'async' is true, currently treated as false.");
         }
         try {
             final HtmlPage htmlPage = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
-            final WebRequestSettings settings = new WebRequestSettings(htmlPage.getFullyQualifiedUrl(xmlSrouce));
+            final WebRequestSettings settings = new WebRequestSettings(htmlPage.getFullyQualifiedUrl(xmlSource));
             final WebResponse webResponse = getWindow().getWebWindow().getWebClient().loadWebResponse(settings);
             final XmlPage page = new XmlPage(webResponse, getWindow().getWebWindow(), false);
             setDomNode(page);
@@ -126,8 +126,8 @@ public class XMLDocument extends Document {
             parseError.setLinepos(1);
             parseError.setReason(e.getMessage());
             parseError.setSrcText("xml");
-            parseError.setUrl(xmlSrouce);
-            LOG.debug("Error parsing XML from '" + xmlSrouce + "'", e);
+            parseError.setUrl(xmlSource);
+            LOG.debug("Error parsing XML from '" + xmlSource + "'", e);
             return false;
         }
     }
