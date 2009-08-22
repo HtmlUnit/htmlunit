@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 
 /**
- * Unit tests for {@link HtmlAnchor}.
+ * Tests for {@link HtmlAnchor}.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

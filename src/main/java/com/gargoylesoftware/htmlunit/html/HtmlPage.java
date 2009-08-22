@@ -884,11 +884,8 @@ public class HtmlPage extends SgmlPage {
             return new ScriptResult(null, this);
         }
 
-        final int prefixLength = JAVASCRIPT_PREFIX.length();
-
-        if (sourceCode.length() > prefixLength
-                && sourceCode.substring(0, prefixLength).equalsIgnoreCase(JAVASCRIPT_PREFIX)) {
-            sourceCode = sourceCode.substring(prefixLength);
+        if (sourceCode.toLowerCase().startsWith(JAVASCRIPT_PREFIX)) {
+            sourceCode = sourceCode.substring(JAVASCRIPT_PREFIX.length());
         }
 
         final Object result = getWebClient().getJavaScriptEngine().execute(this, sourceCode, sourceName, startLine);

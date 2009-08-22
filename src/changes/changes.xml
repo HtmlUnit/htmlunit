@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="fix" dev="asashour">
+                JavaScript: handle empty code.
+            </action>
             <action type="update" dev="asashour">
                 Upgrade commons-codec to 1.4
             </action>
