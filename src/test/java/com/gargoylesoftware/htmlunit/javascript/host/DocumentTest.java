@@ -1861,7 +1861,7 @@ public class DocumentTest extends WebTestCase {
         conn.setDefaultResponse(html);
         client.setWebConnection(conn);
 
-        client.getPage("http://www.microsoft.com/");
+        client.getPage(URL_FIRST);
 
         final String[] expected;
         if (cookiesEnabled) {
@@ -1906,7 +1906,7 @@ public class DocumentTest extends WebTestCase {
         conn.setDefaultResponse(html);
         client.setWebConnection(conn);
 
-        client.getPage("http://www.microsoft.com/");
+        client.getPage(URL_FIRST);
 
         final String[] expected = new String[] {"", "a", "", "b", ""};
         assertEquals(expected, actual);
