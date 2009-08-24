@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -148,6 +149,45 @@ public class CookieManagerTest extends WebServerTestCase {
             response.setContentType("text/html");
             response.addCookie(new javax.servlet.http.Cookie("my_key", "Hello, big, big, world"));
             response.addCookie(new javax.servlet.http.Cookie("another_key", "Hi"));
+            final Writer writer = response.getWriter();
+            writer.write("<html><head><script>function test() {alert(document.cookie)}</script>"
+                + "<body onload='test()'></body></html>");
+            writer.close();
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void emptyCookie() throws Exception {
+        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        servlets.put("/test", EmptyCookieServlet.class);
+        startWebServer("./", null, servlets);
+
+        final String[] expectedAlerts = {"key1=; key2="};
+        final WebClient client = new WebClient();
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        client.getPage("http://localhost:" + PORT + "/test");
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Servlet for {@link #emptyCookie()}.
+     */
+    public static class EmptyCookieServlet extends HttpServlet {
+
+        private static final long serialVersionUID = 8871931124128513797L;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            response.setContentType("text/html");
+            response.addCookie(new javax.servlet.http.Cookie("key1", ""));
+            response.addCookie(new javax.servlet.http.Cookie("key2", null));
             final Writer writer = response.getWriter();
             writer.write("<html><head><script>function test() {alert(document.cookie)}</script>"
                 + "<body onload='test()'></body></html>");
@@ -292,5 +332,37 @@ public class CookieManagerTest extends WebServerTestCase {
                 + "<body onload='test()'></body></html>");
             writer.close();
         }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void cookie_nullValue() throws Exception {
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    alert(document.cookie);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        final URL url = URL_FIRST;
+        webConnection.setResponse(url, html);
+        webClient.setWebConnection(webConnection);
+
+        final CookieManager mgr = webClient.getCookieManager();
+        mgr.addCookie(new Cookie(URL_FIRST.getHost(), "my_key", null, "/", -1, false));
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        webClient.getPage(URL_FIRST);
+
+        final String[] expectedAlerts = {"my_key="};
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }
