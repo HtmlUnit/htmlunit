@@ -587,9 +587,9 @@ public class HTMLDocumentTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
-  /**
-    * @throws Exception if the test fails
-    */
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts(FF = { "www.gargoylesoftware.com", "gargoylesoftware.com" },
             IE = { "www.gargoylesoftware.com", "GaRgOyLeSoFtWaRe.CoM" })
@@ -732,6 +732,29 @@ public class HTMLDocumentTest extends WebTestCase {
               "<html><body><script>\n"
             + "  document.write('<scr'+'ipt>alert(1<2)</sc'+'ript>');\n"
             + "</script></body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * Test that <tt>document.forms.form_name</tt> should be evaluated to <tt>undefined</tt> if the form has a prefix. 
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    @Alerts("undefined")
+    public void prefix() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    alert(document.forms.fmLogin);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <s:form name='fmLogin' action='doLogin' method='POST'>\n"
+            + "    <s:hidden name='hdUserID'/>\n"
+            + "    <s:hidden name='hdPassword'/>\n"
+            + "  </s:form>\n"
+            + "</body></html>";
+
         loadPageWithAlerts(html);
     }
 
