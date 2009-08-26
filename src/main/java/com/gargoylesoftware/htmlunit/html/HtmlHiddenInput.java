@@ -51,7 +51,6 @@ public class HtmlHiddenInput extends HtmlInput {
      * @return an empty string as an hidden field is not visible
      */
     // we need to preserve this method as it is there since many versions with the above documentation.
-    // This doesn't mean that asTextInternal() has to return the same.
     @Override
     public String asText() {
         return "";

@@ -93,7 +93,6 @@ public class HtmlCheckBoxInput extends HtmlInput {
      * @return "checked" or "unchecked" according to the radio state
      */
     // we need to preserve this method as it is there since many versions with the above documentation.
-    // This doesn't mean that asTextInternal() has to return the same.
     @Override
     public String asText() {
         if (isChecked()) {

@@ -465,7 +465,6 @@ public class HtmlScript extends HtmlElement {
      * @return an empty string as the content of script is not visible by itself
      */
     // we need to preserve this method as it is there since many versions with the above documentation.
-    // This doesn't mean that asTextInternal() has to return the same.
     @Override
     public String asText() {
         return "";

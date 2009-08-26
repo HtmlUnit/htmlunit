@@ -449,7 +449,6 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * @return the element as text
      */
     // we need to preserve this method as it is there since many versions with the above documentation.
-    // This doesn't mean that asTextInternal() has to return the same.
     @Override
     public String asText() {
         final List<HtmlOption> options;

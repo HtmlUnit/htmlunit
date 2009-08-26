@@ -257,7 +257,6 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * content of the tag if the attribute exists.
      */
     // we need to preserve this method as it is there since many versions with the above documentation.
-    // This doesn't mean that asTextInternal() has to return the same.
     @Override
     public String asText() {
         return super.asText();
