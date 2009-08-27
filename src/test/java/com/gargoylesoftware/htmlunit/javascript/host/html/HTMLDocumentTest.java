@@ -736,7 +736,7 @@ public class HTMLDocumentTest extends WebTestCase {
     }
 
     /**
-     * Test that <tt>document.forms.form_name</tt> should be evaluated to <tt>undefined</tt> if the form has a prefix. 
+     * Test that <tt>document.forms.form_name</tt> should be evaluated to <tt>undefined</tt> if the form has a prefix.
      * @throws Exception if the test fails
      */
     @Test
