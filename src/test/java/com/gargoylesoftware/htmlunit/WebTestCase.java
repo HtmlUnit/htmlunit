@@ -704,16 +704,8 @@ public abstract class WebTestCase {
      * Sets the expected alerts.
      * @param expectedAlerts the expected alerts
      */
-    protected void setExpectedAlerts(final String[] expectedAlerts) {
+    protected void setExpectedAlerts(final String... expectedAlerts) {
         expectedAlerts_ = expectedAlerts;
-    }
-
-    /**
-     * Facility when only one alert is expected.
-     * @param expectedAlert the expected alert
-     */
-    protected void setExpectedAlerts(final String expectedAlert) {
-        setExpectedAlerts(new String[] {expectedAlert});
     }
 
     /**

@@ -14,16 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
@@ -34,6 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
 public class CSSImportRuleTest extends WebTestCase {
@@ -59,19 +54,11 @@ public class CSSImportRuleTest extends WebTestCase {
             + "</body></html>";
         final String css = "#d { color: green }";
 
-        final WebClient client = getWebClient();
-        final List<String> actual = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(actual));
+        getMockWebConnection().setResponse(URL_SECOND, css, "text/css");
 
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
-        conn.setResponse(URL_SECOND, css, "text/css");
-        client.setWebConnection(conn);
-
-        client.getPage(URL_FIRST);
-        final String[] expected = new String[] {"[object CSSImportRule]", URL_SECOND.toString(),
-            "[object MediaList]", "0", "[object CSSStyleSheet]"};
-        assertEquals(expected, actual);
+        setExpectedAlerts("[object CSSImportRule]", URL_SECOND.toString(),
+            "[object MediaList]", "0", "[object CSSStyleSheet]");
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -92,17 +79,9 @@ public class CSSImportRuleTest extends WebTestCase {
             + "</body></html>";
         final String css = "#d { color: rgb(0, 128, 0); }";
 
-        final WebClient client = getWebClient();
-        final List<String> actual = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(actual));
+        getMockWebConnection().setResponse(URL_SECOND, css, "text/css");
 
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
-        conn.setResponse(URL_SECOND, css, "text/css");
-        client.setWebConnection(conn);
-
-        client.getPage(URL_FIRST);
-        assertEquals(getExpectedAlerts(), actual);
+        loadPageWithAlerts(html);
     }
 
 }
