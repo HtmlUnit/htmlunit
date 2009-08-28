@@ -978,9 +978,9 @@ public class HtmlPage extends SgmlPage {
         final WebRequestSettings referringRequest = getWebResponse().getRequestSettings();
         request.setAdditionalHeaders(new HashMap<String, String>(referringRequest.getAdditionalHeaders()));
         request.setAdditionalHeader("Referer", referringRequest.getUrl().toString());
-        final Script cachedScript = cache.getCachedScript(request);
-        if (cachedScript != null) {
-            return cachedScript;
+        final Object cachedScript = cache.getCachedObject(request);
+        if (cachedScript != null && cachedScript instanceof Script) {
+            return (Script) cachedScript;
         }
 
         WebResponse response;

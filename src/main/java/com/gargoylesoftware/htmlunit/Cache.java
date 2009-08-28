@@ -24,7 +24,6 @@ import org.apache.commons.httpclient.util.DateParseException;
 import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.lang.time.DateUtils;
-import net.sourceforge.htmlunit.corejs.javascript.Script;
 import org.w3c.dom.css.CSSStyleSheet;
 
 /**
@@ -81,17 +80,18 @@ public class Cache implements Serializable {
     }
 
     /**
-     * Caches the specified compiled script, if the corresponding request and response objects indicate
+     * Caches the specified object, if the corresponding request and response objects indicate
      * that it is cacheable.
      *
      * @param request the request corresponding to the specified compiled script
      * @param response the response corresponding to the specified compiled script
-     * @param script the compiled script that is to be cached, if possible
+     * @param toCache the object that is to be cached, if possible (may be for instance a compiled script or
+     * simply a WebResponse)
      */
-    public void cacheIfPossible(final WebRequestSettings request, final WebResponse response, final Script script) {
+    public void cacheIfPossible(final WebRequestSettings request, final WebResponse response, final Object toCache) {
         if (isCacheable(request, response)) {
             final String url = response.getRequestSettings().getUrl().toString();
-            final Entry entry = new Entry(url, script);
+            final Entry entry = new Entry(url, toCache);
             entries_.put(entry.key_, entry);
             deleteOverflow();
         }
@@ -134,7 +134,7 @@ public class Cache implements Serializable {
      * @return <code>true</code> if the response can be cached
      */
     protected boolean isCacheable(final WebRequestSettings request, final  WebResponse response) {
-        return HttpMethod.GET == response.getRequestSettings().getHttpMethod() && isJavaScript(response)
+        return HttpMethod.GET == response.getRequestSettings().getHttpMethod()
             && !isDynamicContent(response);
     }
 
@@ -205,13 +205,13 @@ public class Cache implements Serializable {
     }
 
     /**
-     * Returns the cached compiled script corresponding to the specified request. If there is
-     * no corresponding cached compiled script, this method returns <tt>null</tt>.
+     * Returns the cached object corresponding to the specified request. If there is
+     * no corresponding cached object, this method returns <tt>null</tt>.
      *
      * @param request the request whose corresponding cached compiled script is sought
-     * @return the cached compiled script corresponding to the specified request
+     * @return the cached object corresponding to the specified request if any
      */
-    public Script getCachedScript(final WebRequestSettings request) {
+    public Object getCachedObject(final WebRequestSettings request) {
         if (HttpMethod.GET != request.getHttpMethod()) {
             return null;
         }
@@ -222,7 +222,7 @@ public class Cache implements Serializable {
         synchronized (entries_) {
             cachedEntry.touch();
         }
-        return (Script) cachedEntry.value_;
+        return cachedEntry.value_;
     }
 
     /**

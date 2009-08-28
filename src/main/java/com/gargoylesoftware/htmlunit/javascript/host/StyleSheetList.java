@@ -17,12 +17,11 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
-import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
 
 /**
@@ -97,17 +96,15 @@ public class StyleSheetList extends SimpleScriptable {
         }
 
         final HTMLElement element = (HTMLElement) nodes_.jsxFunction_item(new Integer(index));
-        final DomNode node = element.getDomNodeOrDie();
 
-        Stylesheet sheet;
+        final Stylesheet sheet;
         // <style type="text/css"> ... </style>
         if (element instanceof HTMLStyleElement) {
             sheet = ((HTMLStyleElement) element).jsxGet_sheet();
         }
         else {
             // <link rel="stylesheet" type="text/css" href="..." />
-            final HtmlLink link = (HtmlLink) node;
-            sheet = Stylesheet.loadStylesheet(getWindow(), element, link, null);
+            sheet = ((HTMLLinkElement) element).getSheet();
         }
 
         return sheet;

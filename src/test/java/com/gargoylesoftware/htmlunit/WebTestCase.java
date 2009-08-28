@@ -725,7 +725,7 @@ public abstract class WebTestCase {
      * @throws Exception if something goes wrong
      */
     protected final HtmlPage loadPageWithAlerts(final String html) throws Exception {
-        return loadPageWithAlerts(html, -1);
+        return loadPageWithAlerts(html, getDefaultUrl(), -1);
     }
 
     /**
@@ -733,11 +733,13 @@ public abstract class WebTestCase {
      * and loads the page with this URL using the current browser version.
      * Finally asserts the alerts equal the expected alerts.
      * @param html the HTML to use
+     * @param url the URL from which the provided HTML code should be delivered
      * @param waitForJS the milliseconds to wait for background JS tasks to complete. Ignored if -1.
      * @return the new page
      * @throws Exception if something goes wrong
      */
-    protected final HtmlPage loadPageWithAlerts(final String html, final int waitForJS) throws Exception {
+    protected final HtmlPage loadPageWithAlerts(final String html, final URL url, final int waitForJS)
+        throws Exception {
         if (expectedAlerts_ == null) {
             throw new IllegalStateException("You must annotate the test class with '@RunWith(BrowserRunner.class)'");
         }
@@ -748,7 +750,6 @@ public abstract class WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final URL url = getDefaultUrl();
         final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(url, html);
 

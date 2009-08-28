@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import java.net.URL;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -40,9 +42,20 @@ public class CSSImportRuleTest extends WebTestCase {
     @Test
     @Browsers(Browser.FF)
     public void testGetImportFromCssRulesCollection() throws Exception {
+        // with absolute URL
+        testGetImportFromCssRulesCollection(getDefaultUrl(), URL_SECOND.toExternalForm(), URL_SECOND);
+
+        // with relative URL
+        final URL urlPage = new URL(URL_FIRST, "/dir1/dir2/foo.html");
+        final URL urlCss = new URL(URL_FIRST, "/dir1/dir2/foo.css");
+        testGetImportFromCssRulesCollection(urlPage, "foo.css", urlCss);
+    }
+
+    private void testGetImportFromCssRulesCollection(final URL pageUrl, final String cssRef, final URL cssUrl)
+        throws Exception {
         final String html
             = "<html><body>\n"
-            + "<style>@import url('" + URL_SECOND + "');</style><div id='d'>foo</div>\n"
+            + "<style>@import url('" + cssRef + "');</style><div id='d'>foo</div>\n"
             + "<script>\n"
             + "var r = document.styleSheets.item(0).cssRules[0];\n"
             + "alert(r);\n"
@@ -54,11 +67,11 @@ public class CSSImportRuleTest extends WebTestCase {
             + "</body></html>";
         final String css = "#d { color: green }";
 
-        getMockWebConnection().setResponse(URL_SECOND, css, "text/css");
+        getMockWebConnection().setResponse(cssUrl, css, "text/css");
 
-        setExpectedAlerts("[object CSSImportRule]", URL_SECOND.toString(),
+        setExpectedAlerts("[object CSSImportRule]", cssRef,
             "[object MediaList]", "0", "[object CSSStyleSheet]");
-        loadPageWithAlerts(html);
+        loadPageWithAlerts(html, pageUrl, -1);
     }
 
     /**
@@ -84,4 +97,32 @@ public class CSSImportRuleTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void testImportedStylesheetsURLResolution() throws Exception {
+        final String html = "<html><head>\n"
+            + "<link rel='stylesheet' type='text/css' href='dir1/dir2/file1.css'></link>\n"
+            + "<body>\n"
+            + "<div id='d'>foo</div>\n"
+            + "<script>\n"
+            + "var d = document.getElementById('d');\n"
+            + "var s = window.getComputedStyle ? window.getComputedStyle(d, null) : d.currentStyle;\n"
+            + "alert(s.color.indexOf('128') > 0);\n"
+            + "</script>\n"
+            + "</body></html>";
+        final String css1 = "@import url('file2.css');";
+        final String css2 = "#d { color: rgb(0, 128, 0); }";
+
+        final URL urlPage = URL_FIRST;
+        final URL urlCss1 = new URL(urlPage, "dir1/dir2/file1.css");
+        final URL urlCss2 = new URL(urlPage, "dir1/dir2/file2.css");
+        getMockWebConnection().setResponse(urlCss1, css1, "text/css");
+        getMockWebConnection().setResponse(urlCss2, css2, "text/css");
+
+        loadPageWithAlerts(html, urlPage, -1);
+    }
 }

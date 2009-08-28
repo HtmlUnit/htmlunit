@@ -5,7 +5,13 @@
     </properties>
 
     <body>
-        <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+        <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config, improved cache">
+            <action type="update" dev="mguillem">
+                Cache: use cache for all kinds of (cacheable) content. 
+            </action>
+            <action type="fix" dev="mguillem">
+                CSS: resolve relative URLs in @import rule from URL of current style sheet.
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: HTMLSelectElement throw exception when invalid value is set to selectedIndex (FF only).
             </action>

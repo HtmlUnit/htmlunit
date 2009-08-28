@@ -18,6 +18,7 @@ import java.net.MalformedURLException;
 
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.host.Stylesheet;
 
 /**
  * The JavaScript object "HTMLLinkElement".
@@ -28,6 +29,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public class HTMLLinkElement extends HTMLElement {
 
     private static final long serialVersionUID = -6381573516360300401L;
+    private Stylesheet sheet_;
 
     /**
      * Creates an instance.
@@ -95,6 +97,18 @@ public class HTMLLinkElement extends HTMLElement {
      */
     public String jsxGet_type() throws Exception {
         return ((HtmlLink) getDomNodeOrDie()).getTypeAttribute();
+    }
+
+    /**
+     * Gets the associated style sheet.
+     * Of course for a <link rel="stylesheet" type="text/css" href="..." />.
+     * @return the sheet
+     */
+    public Stylesheet getSheet() {
+        if (sheet_ == null) {
+            sheet_ = Stylesheet.loadStylesheet(getWindow(), this, (HtmlLink) getDomNodeOrDie(), null);
+        }
+        return sheet_;
     }
 
 }

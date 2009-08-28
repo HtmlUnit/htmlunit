@@ -77,9 +77,10 @@ public class CSSImportRule extends CSSRule {
      */
     public Stylesheet jsxGet_styleSheet() {
         if (importedStylesheet_ == null) {
-            final HTMLElement ownerNode = this.jsxGet_parentStyleSheet().jsxGet_ownerNode();
+            final Stylesheet owningSheet = this.jsxGet_parentStyleSheet();
+            final HTMLElement ownerNode = owningSheet.jsxGet_ownerNode();
             final CSSStyleSheet importedStylesheet = getImportRule().getStyleSheet();
-            importedStylesheet_ = new Stylesheet(ownerNode, importedStylesheet);
+            importedStylesheet_ = new Stylesheet(ownerNode, importedStylesheet, owningSheet.getUri());
         }
         return importedStylesheet_;
     }

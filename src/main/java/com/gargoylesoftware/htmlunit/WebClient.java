@@ -1427,7 +1427,15 @@ public class WebClient implements Serializable {
         // adds the headers that are sent on every request
         webRequestSettings.getAdditionalHeaders().putAll(requestHeaders_);
 
-        final WebResponse webResponse = getWebConnection().getResponse(webRequestSettings);
+        final Object fromCache = getCache().getCachedObject(webRequestSettings);
+        final WebResponse webResponse;
+        if (fromCache != null && fromCache instanceof WebResponse) {
+            webResponse = new WebResponseFromCache((WebResponse) fromCache, webRequestSettings);
+        }
+        else {
+            webResponse = getWebConnection().getResponse(webRequestSettings);
+            getCache().cacheIfPossible(webRequestSettings, webResponse, webResponse);
+        }
         final int statusCode = webResponse.getStatusCode();
 
         if (statusCode == HttpStatus.SC_USE_PROXY) {

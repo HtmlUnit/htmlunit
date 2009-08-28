@@ -31,6 +31,7 @@ import org.apache.commons.lang.time.DateUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -227,6 +228,40 @@ public class CacheTest extends WebTestCase {
         assertEquals(2, client.getCache().getSize());
     }
 
+
+    /**
+     * Test that content retrieved with XHR is cached when right headers are here.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "hello", "hello" })
+    public void xhrContentCached() throws Exception {
+        final String html = "<html><head><title>page 1</title>\n"
+            + "<script>\n"
+            + "  function doTest() {\n"
+            + "    var xhr = window.XMLHttpRequest ? new XMLHttpRequest()"
+            + "      : new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "    xhr.open('GET', 'foo.txt', false);\n"
+            + "    xhr.send('');\n"
+            + "    alert(xhr.responseText);\n"
+            + "    xhr.send('');\n"
+            + "    alert(xhr.responseText);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>x</body>\n"
+            + "</html>";
+
+        final MockWebConnection connection = getMockWebConnection();
+
+        final List<Header> headers =
+            Collections.singletonList(new Header("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
+        connection.setResponse(new URL(getDefaultUrl(), "foo.txt"), "hello", 200, "OK", "text/plain", headers);
+
+        loadPageWithAlerts(html);
+
+        assertEquals(2, connection.getRequestCount());
+    }
 }
 
 class DummyWebResponse implements WebResponse {

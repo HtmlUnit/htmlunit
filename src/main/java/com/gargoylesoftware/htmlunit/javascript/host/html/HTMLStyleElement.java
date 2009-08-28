@@ -61,15 +61,14 @@ public class HTMLStyleElement extends HTMLElement {
 
         final Cache cache = getWindow().getWebWindow().getWebClient().getCache();
         final CSSStyleSheet cached = cache.getCachedStyleSheet(css);
+        final String uri = getDomNodeOrDie().getPage().getWebResponse().getRequestSettings()
+        .getUrl().toExternalForm();
         if (cached != null) {
-            sheet_ = new Stylesheet(this, cached);
+            sheet_ = new Stylesheet(this, cached, uri);
         }
         else {
-            final String uri = getDomNodeOrDie().getPage().getWebResponse().getRequestSettings()
-                .getUrl().toExternalForm();
             final InputSource source = new InputSource(new StringReader(css));
-            source.setURI(uri);
-            sheet_ = new Stylesheet(this, source);
+            sheet_ = new Stylesheet(this, source, uri);
             cache.cache(css, sheet_.getWrappedSheet());
         }
 

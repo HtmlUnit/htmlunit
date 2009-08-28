@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
@@ -163,14 +164,23 @@ public class HtmlLink extends ClickableElement {
      */
     public WebResponse getWebResponse(final boolean downloadIfNeeded) throws IOException {
         if (downloadIfNeeded && cachedWebResponse_ == null) {
-            final HtmlPage page = (HtmlPage) getPage();
-            final WebClient webclient = page.getWebClient();
-            final URL url = page.getFullyQualifiedUrl(getHrefAttribute());
-            final WebRequestSettings request = new WebRequestSettings(url);
-            request.setAdditionalHeader("Referer",
-                    page.getWebResponse().getRequestSettings().getUrl().toExternalForm());
-            cachedWebResponse_ = webclient.loadWebResponse(request);
+            final WebClient webclient = getPage().getWebClient();
+            cachedWebResponse_ = webclient.loadWebResponse(getWebRequestSettings());
         }
         return cachedWebResponse_;
+    }
+
+    /**
+     * Get the request settings allowing to retrieve the content reference by the href attribute.
+     * @return the settings
+     * @throws MalformedURLException in case of problem resolving the url
+     */
+    public WebRequestSettings getWebRequestSettings() throws MalformedURLException {
+        final HtmlPage page = (HtmlPage) getPage();
+        final URL url = page.getFullyQualifiedUrl(getHrefAttribute());
+        final WebRequestSettings request = new WebRequestSettings(url);
+        request.setAdditionalHeader("Referer",
+                page.getWebResponse().getRequestSettings().getUrl().toExternalForm());
+        return request;
     }
 }
