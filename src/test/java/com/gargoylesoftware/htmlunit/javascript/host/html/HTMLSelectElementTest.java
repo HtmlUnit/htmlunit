@@ -83,8 +83,9 @@ public class HTMLSelectElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "3", "1", "3", "2" })
     public void testSetSelectedIndex() throws Exception {
-        final String hrml
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.form1.select1.length);\n"
@@ -105,20 +106,14 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), hrml, collectedAlerts);
-        assertEquals("foo", page.getTitleText());
-
-        final String[] expectedAlerts = {"3", "1", "3", "2"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        final HtmlPage page = loadPageWithAlerts(html);
+        getMockWebConnection().setDefaultResponse("");
 
         final HtmlSubmitInput button = page.getHtmlElementById("clickMe");
         final HtmlPage newPage = button.click();
 
-        final MockWebConnection webConnection = (MockWebConnection) newPage.getWebClient().getWebConnection();
-
         assertEquals("http://test/?submit=button", newPage.getWebResponse().getRequestSettings().getUrl());
-        assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
+        assertSame("method", HttpMethod.GET, getMockWebConnection().getLastMethod());
     }
 
     /**
@@ -385,13 +380,13 @@ public class HTMLSelectElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "4", "Four", "value4", "Three b", "value3b" })
-    @Browsers(Browser.IE)
+    @Alerts(FF = "exception", IE = { "4", "Four", "value4", "Three b", "value3b" })
     public void testAddOptionWithAddMethod_IE() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
-            + "    var oSelect = document.form1.select1;\n"
+            + "  var oSelect = document.form1.select1;\n"
+            + "  try {\n"
             + "    oSelect.add(new Option('Four', 'value4'));\n"
             + "    alert(oSelect.length);\n"
             + "    alert(oSelect[oSelect.length-1].text);\n"
@@ -399,6 +394,7 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    oSelect.add(new Option('Three b', 'value3b'), 3);\n"
             + "    alert(oSelect[3].text);\n"
             + "    alert(oSelect[3].value);\n"
+            + "  } catch(e) { alert('exception'); }\n"
             + "}</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1'>\n"
@@ -418,23 +414,22 @@ public class HTMLSelectElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1" })
-    @Browsers(Browser.IE)
+    @Alerts(FF = { "0", "exception" }, IE = { "0", "1" })
     public void testAddWith1Arg() throws Exception {
         final String html
             = "<html><head>\n"
             + "<script>\n"
-            + "function test()\n"
-            + "{\n"
-            + " var oSelect = document.forms.testForm.testSelect;\n"
-            + " alert(oSelect.length);\n"
-            + " var opt = new Option('foo', '123');\n"
-            + " oSelect.add(opt);\n"
-            + " alert(oSelect.length);\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var oSelect = document.forms.testForm.testSelect;\n"
+            + "    alert(oSelect.length);\n"
+            + "    var opt = new Option('foo', '123');\n"
+            + "    oSelect.add(opt);\n"
+            + "    alert(oSelect.length);\n"
+            + "  } catch (e) { alert('exception'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
-            + ""
             + "<body onload='test()'>\n"
             + "<form name='testForm'>\n"
             + "<select name='testSelect'></select>\n"
