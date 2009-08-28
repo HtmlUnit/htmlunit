@@ -228,7 +228,6 @@ public class CacheTest extends WebTestCase {
         assertEquals(2, client.getCache().getSize());
     }
 
-
     /**
      * Test that content retrieved with XHR is cached when right headers are here.
      * @throws Exception if the test fails

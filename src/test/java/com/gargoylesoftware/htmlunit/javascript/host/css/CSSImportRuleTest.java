@@ -97,7 +97,6 @@ public class CSSImportRuleTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
-
     /**
      * @throws Exception if an error occurs
      */

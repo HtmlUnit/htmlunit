@@ -7,7 +7,7 @@
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config, improved cache">
             <action type="update" dev="mguillem">
-                Cache: use cache for all kinds of (cacheable) content. 
+                Cache: use cache for all kinds of (cacheable) content.
             </action>
             <action type="fix" dev="mguillem">
                 CSS: resolve relative URLs in @import rule from URL of current style sheet.
