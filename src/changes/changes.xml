@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="update" dev="mguillem">
+                DebuggingWebConnection: display received headers in generated report, added addMark method.
+            </action>
             <action type="fix" dev="asashour">
                 CookieManager: handle cookies with null value.
             </action>
