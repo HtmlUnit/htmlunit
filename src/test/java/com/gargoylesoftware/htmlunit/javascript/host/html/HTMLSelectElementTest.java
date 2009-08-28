@@ -125,12 +125,21 @@ public class HTMLSelectElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "-1", "2", "exception", "2", "exception", "2" },
+            IE = { "-1", "2", "-1", "-1" })
     public void testSetSelectedIndexInvalidValue() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
-            + "    document.form1.select1.selectedIndex = -1;\n"
-            + "    document.form1.select1.selectedIndex = 2;\n"
+            + "  var s = document.form1.select1;\n"
+            + "  s.selectedIndex = -1;\n"
+            + "  alert(s.selectedIndex);\n"
+            + "  s.selectedIndex = 2;\n"
+            + "  alert(s.selectedIndex);\n"
+            + "  try { s.selectedIndex = 25; } catch (e) { alert('exception') }\n"
+            + "  alert(s.selectedIndex);\n"
+            + "  try { s.selectedIndex = -14; } catch (e) { alert('exception') }\n"
+            + "  alert(s.selectedIndex);\n"
             + "}</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1' action='http://test' method='get'>\n"
@@ -143,12 +152,7 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
-        final HtmlSubmitInput button = page.getHtmlElementById("clickMe");
-        final HtmlPage newPage = button.click();
-
-        assertEquals("http://test/?select1=option3&submit=button",
-                newPage.getWebResponse().getRequestSettings().getUrl());
+        loadPageWithAlerts(html);
     }
 
     /**

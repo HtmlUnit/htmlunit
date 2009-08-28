@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config.">
+            <action type="fix" dev="mguillem">
+                JavaScript: HTMLSelectElement throw exception when invalid value is set to selectedIndex (FF only).
+            </action>
             <action type="update" dev="mguillem">
                 DebuggingWebConnection: display received headers in generated report, added addMark method.
             </action>
