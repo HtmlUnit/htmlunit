@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -940,6 +941,51 @@ public class NodeTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(IE = "exception")
+    @NotYetImplemented
+    public void insertBefore2() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+                + "<script>\n"
+                + "function doTest(){\n"
+                + "  try {\n"
+                + "    var e = document.createElement('div');\n"
+                + "    e.innerHTML='new element';\n"
+                + "    document.body.insertBefore(e, undefined);\n"
+                + "  } catch(e) {alert('exception');}\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head><body onload='doTest()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(FF = "exception")
+    public void insertBefore3() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+                + "<script>\n"
+                + "function doTest(){\n"
+                + "  try {\n"
+                + "    var e = document.createElement('div');\n"
+                + "    e.innerHTML='new element';\n"
+                + "    document.body.insertBefore(e);\n"
+                + "  } catch(e) {alert('exception');}\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head><body onload='doTest()'>\n"
+                + "</body></html>";
+
         loadPageWithAlerts(html);
     }
 }
