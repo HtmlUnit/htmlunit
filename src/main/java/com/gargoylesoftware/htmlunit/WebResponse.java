@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.List;
 
@@ -30,7 +31,7 @@ import org.apache.commons.httpclient.NameValuePair;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public interface WebResponse {
+public interface WebResponse extends Serializable {
 
     /**
      * Returns the request settings used to load this response.

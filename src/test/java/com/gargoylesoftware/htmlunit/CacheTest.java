@@ -265,6 +265,8 @@ public class CacheTest extends WebTestCase {
 
 class DummyWebResponse implements WebResponse {
 
+    private static final long serialVersionUID = 631259170130126480L;
+
     public InputStream getContentAsStream() throws IOException {
         throw new RuntimeException("not implemented");
     }

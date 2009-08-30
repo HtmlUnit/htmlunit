@@ -24,6 +24,9 @@ import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
  * @author Marc Guillemot
  */
 class WebResponseFromCache extends WebResponseWrapper {
+
+    private static final long serialVersionUID = 450330231180187171L;
+
     private final WebRequestSettings settings_;
 
     /**

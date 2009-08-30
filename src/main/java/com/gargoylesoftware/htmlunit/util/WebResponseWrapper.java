@@ -37,6 +37,8 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  */
 public class WebResponseWrapper implements WebResponse {
 
+    private static final long serialVersionUID = -5167730179562144482L;
+
     private final WebResponse wrappedWebResponse_;
 
     /**

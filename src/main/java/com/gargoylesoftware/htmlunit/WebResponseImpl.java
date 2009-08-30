@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.List;
@@ -35,7 +34,7 @@ import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
  * @author Brad Clarke
  * @author Ahmed Ashour
  */
-public class WebResponseImpl implements WebResponse, Serializable {
+public class WebResponseImpl implements WebResponse {
 
     private static final long serialVersionUID = 2842434739251092348L;
     private static final Log LOG = LogFactory.getLog(WebResponseImpl.class);

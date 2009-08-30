@@ -437,6 +437,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             }
             else {
                 webResponse_ = new WebResponseWrapper(webResponse) {
+                    private static final long serialVersionUID = -3359539772772336918L;
                     @Override
                     public String getContentType() {
                         return overriddenMimeType_;
@@ -513,6 +514,9 @@ public class XMLHttpRequest extends SimpleScriptable {
     }
 
     private static final class NetworkErrorWebResponse implements WebResponse {
+
+        private static final long serialVersionUID = 6354426394575804571L;
+
         private final WebRequestSettings webRequestSettings_;
 
         private NetworkErrorWebResponse(final WebRequestSettings webRequestSettings) {
