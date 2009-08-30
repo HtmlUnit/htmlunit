@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config, improved cache">
+            <action type="fix" dev="sdanig" issue="2821888">
+                Don't treat 304 responses as if they were redirections.
+            </action>
             <action type="fix" dev="asashour" issue="2846557">
                 JavaScript: node.insertBefore() handles undefined variable.
             </action>
