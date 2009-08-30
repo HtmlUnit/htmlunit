@@ -29,6 +29,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.Stylesheet;
 public class HTMLLinkElement extends HTMLElement {
 
     private static final long serialVersionUID = -6381573516360300401L;
+
+    /**
+     * The associated style sheet (only valid for links of type
+     * <tt>&lt;link rel="stylesheet" type="text/css" href="..." /&gt;</tt>).
+     */
     private Stylesheet sheet_;
 
     /**
@@ -100,9 +105,9 @@ public class HTMLLinkElement extends HTMLElement {
     }
 
     /**
-     * Gets the associated style sheet.
-     * Of course for a <link rel="stylesheet" type="text/css" href="..." />.
-     * @return the sheet
+     * Returns the associated style sheet (only valid for links of type
+     * <tt>&lt;link rel="stylesheet" type="text/css" href="..." /&gt;</tt>).
+     * @return the associated style sheet
      */
     public Stylesheet getSheet() {
         if (sheet_ == null) {

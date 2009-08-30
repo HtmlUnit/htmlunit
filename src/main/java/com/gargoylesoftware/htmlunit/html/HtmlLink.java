@@ -171,16 +171,15 @@ public class HtmlLink extends ClickableElement {
     }
 
     /**
-     * Get the request settings allowing to retrieve the content reference by the href attribute.
-     * @return the settings
-     * @throws MalformedURLException in case of problem resolving the url
+     * Returns the request settings which will allow us to retrieve the content referenced by the "href" attribute.
+     * @return the request settings which will allow us to retrieve the content referenced by the "href" attribute
+     * @throws MalformedURLException in case of problem resolving the URL
      */
     public WebRequestSettings getWebRequestSettings() throws MalformedURLException {
         final HtmlPage page = (HtmlPage) getPage();
         final URL url = page.getFullyQualifiedUrl(getHrefAttribute());
         final WebRequestSettings request = new WebRequestSettings(url);
-        request.setAdditionalHeader("Referer",
-                page.getWebResponse().getRequestSettings().getUrl().toExternalForm());
+        request.setAdditionalHeader("Referer", page.getWebResponse().getRequestSettings().getUrl().toExternalForm());
         return request;
     }
 }

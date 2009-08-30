@@ -95,6 +95,7 @@ public class Stylesheet extends SimpleScriptable {
     /** The CSS import rules and their corresponding stylesheets. */
     private Map<CSSImportRule, Stylesheet> imports_ = new HashMap<CSSImportRule, Stylesheet>();
 
+    /** This stylesheet's URI (used to resolved contained @import rules). */
     private String uri_;
 
     /**
@@ -109,7 +110,7 @@ public class Stylesheet extends SimpleScriptable {
      * Creates a new stylesheet representing the CSS stylesheet for the specified input source.
      * @param element the owning node
      * @param source the input source which contains the CSS stylesheet which this stylesheet host object represents
-     * @param uri the uri of this sheet (has to be used to resolved contained @import rules)
+     * @param uri this stylesheet's URI (used to resolved contained @import rules)
      */
     public Stylesheet(final HTMLElement element, final InputSource source, final String uri) {
         setParentScope(element.getWindow());
@@ -123,7 +124,7 @@ public class Stylesheet extends SimpleScriptable {
      * Creates a new stylesheet representing the specified CSS stylesheet.
      * @param element the owning node
      * @param wrapped the CSS stylesheet which this stylesheet host object represents
-     * @param uri the uri of this sheet (has to be used to resolved contained @import rules)
+     * @param uri this stylesheet's URI (used to resolved contained @import rules)
      */
     public Stylesheet(final HTMLElement element, final CSSStyleSheet wrapped, final String uri) {
         setParentScope(element.getWindow());
@@ -177,7 +178,7 @@ public class Stylesheet extends SimpleScriptable {
                 final CSSImportRuleImpl importRule = (CSSImportRuleImpl) rule;
                 Stylesheet sheet = imports_.get(importRule);
                 if (sheet == null) {
-                    // surely wrong: in which case is it null and why?
+                    // TODO: surely wrong: in which case is it null and why?
                     final String uri = (uri_ != null) ? uri_
                         : e.getPage().getWebResponse().getRequestSettings().getUrl().toExternalForm();
                     final String href = importRule.getHref();
@@ -548,7 +549,7 @@ public class Stylesheet extends SimpleScriptable {
     }
 
     /**
-     * Insert a new rule.
+     * Inserts a new rule.
      * @param rule the CSS rule
      * @param position the position at which to insert the rule
      * @see <a href="http://www.w3.org/TR/DOM-Level-2-Style/css.html#CSS-CSSStyleSheet">DOM level 2</a>
@@ -572,8 +573,8 @@ public class Stylesheet extends SimpleScriptable {
     }
 
     /**
-     * Get the URI from which this style sheet comes and from which contained import rules should be resolved.
-     * @return the URI
+     * Returns this stylesheet's URI (used to resolved contained @import rules).
+     * @return this stylesheet's URI (used to resolved contained @import rules)
      */
     public String getUri() {
         return uri_;
