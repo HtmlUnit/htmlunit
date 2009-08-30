@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
 public class WebRequestSettings implements Serializable {
 
     private static final long serialVersionUID = -7405507885099274031L;
-    private String url_; // String instead java.net.URL because "about:blank" URLs don't serialize correctly
+    private String url_; // String instead of java.net.URL because "about:blank" URLs don't serialize correctly
     private String proxyHost_;
     private int proxyPort_;
     private HttpMethod httpMethod_ = HttpMethod.GET;

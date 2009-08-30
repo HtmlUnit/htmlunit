@@ -38,7 +38,7 @@ public class History implements Serializable {
     private final WebWindow window_;
 
     /**
-     * The URLs of the pages in this navigation history; stored as Strings instead java.net.URLs
+     * The URLs of the pages in this navigation history; stored as Strings instead of java.net.URLs
      * because "about:blank" URLs don't serialize correctly.
      */
     private final List<String> urls_ = new ArrayList<String>();
