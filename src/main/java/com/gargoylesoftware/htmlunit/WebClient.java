@@ -530,7 +530,8 @@ public class WebClient implements Serializable {
     public void throwFailingHttpStatusCodeExceptionIfNecessary(final WebResponse webResponse) {
         final int statusCode = webResponse.getStatusCode();
         final boolean successful = (statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES)
-            || statusCode == HttpStatus.SC_USE_PROXY;
+            || statusCode == HttpStatus.SC_USE_PROXY
+            || statusCode == HttpStatus.SC_NOT_MODIFIED;
         if (isThrowExceptionOnFailingStatusCode() && !successful) {
             throw new FailingHttpStatusCodeException(webResponse);
         }
@@ -1441,8 +1442,10 @@ public class WebClient implements Serializable {
         if (statusCode == HttpStatus.SC_USE_PROXY) {
             getIncorrectnessListener().notify("Ignoring HTTP status code [305] 'Use Proxy'", this);
         }
-        else if (statusCode >= HttpStatus.SC_MOVED_PERMANENTLY && statusCode <= HttpStatus.SC_TEMPORARY_REDIRECT
-                && isRedirectEnabled()) {
+        else if (statusCode >= HttpStatus.SC_MOVED_PERMANENTLY
+            && statusCode <= HttpStatus.SC_TEMPORARY_REDIRECT
+            && statusCode != HttpStatus.SC_NOT_MODIFIED
+            && isRedirectEnabled()) {
             final URL newUrl;
             String locationString = null;
             try {

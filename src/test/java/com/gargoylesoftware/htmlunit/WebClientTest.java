@@ -2188,4 +2188,46 @@ public class WebClientTest extends WebServerTestCase {
         }
     }
 
+    /**
+     * Regression test for bug 2821888: HTTP 304 (Not Modified) was being treated as a redirect. Note that a 304
+     * response doesn't really make sense because we're not sending any If-Modified-Since headers, but we want to
+     * at least make sure that we're not throwing exceptions when we receive one of these responses.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testNotModified() throws Exception {
+        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        servlets.put("/test", NotModifiedServlet.class);
+        startWebServer("./", null, servlets);
+        final WebClient client = new WebClient();
+        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/test");
+        final HtmlPage page2 = client.getPage("http://localhost:" + PORT + "/test");
+        assertNotNull(page);
+        assertNotNull(page2);
+    }
+
+    /**
+     * Servlet for {@link #testNotModified()}.
+     */
+    public static class NotModifiedServlet extends HttpServlet {
+        private static final long serialVersionUID = 8257177452886409761L;
+        private boolean first_ = true;
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest req, final HttpServletResponse res) throws IOException {
+            if (first_) {
+                first_ = false;
+                res.setContentType("text/html");
+                final Writer writer = res.getWriter();
+                writer.write("<html><body>foo</body></html>");
+                writer.close();
+            }
+            else {
+                res.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+            }
+        }
+    }
+
 }
