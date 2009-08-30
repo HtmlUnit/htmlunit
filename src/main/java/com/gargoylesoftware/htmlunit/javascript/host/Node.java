@@ -19,6 +19,7 @@ import java.util.List;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import org.apache.commons.lang.ArrayUtils;
@@ -215,13 +216,34 @@ public class Node extends SimpleScriptable {
     }
 
     /**
-     * Add a DOM node as a child to this node before the referenced
-     * node. If the referenced node is null, append to the end.
-     * @param newChildObject the node to add to this node
-     * @param refChildObject the node before which to add the new child
+     * Add a DOM node as a child to this node before the referenced node.
+     * If the referenced node is null, append to the end.
+     * @param context the JavaScript context
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method
+     * @param function the function
      * @return the newly added child node
      */
-    public Object jsxFunction_insertBefore(final Object newChildObject, final Object refChildObject) {
+    public static Object jsxFunction_insertBefore(
+            final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
+        return ((Node) thisObj).jsxFunction_insertBefore(args);
+    }
+
+    /**
+     * Add a DOM node as a child to this node before the referenced node.
+     * If the referenced node is null, append to the end.
+     * @param args the arguments
+     * @return the newly added child node
+     */
+    protected Object jsxFunction_insertBefore(final Object[] args) {
+        final Object newChildObject = args[0];
+        final Object refChildObject;
+        if (args.length > 1) {
+            refChildObject = args[1];
+        }
+        else {
+            refChildObject = Undefined.instance;
+        }
         Object appendedChild = null;
 
         if (newChildObject instanceof Node) {
@@ -230,18 +252,26 @@ public class Node extends SimpleScriptable {
             if (newChildNode instanceof DomDocumentFragment) {
                 final DomDocumentFragment fragment = (DomDocumentFragment) newChildNode;
                 for (final DomNode child : fragment.getChildren()) {
-                    jsxFunction_insertBefore(child.getScriptObject(), refChildObject);
+                    jsxFunction_insertBefore(new Object[] {child.getScriptObject(), refChildObject});
                 }
                 return newChildObject;
             }
             final DomNode refChildNode;
             // IE accepts non standard calls with only one arg
-            if (Context.getUndefinedValue().equals(refChildObject)) {
+            if (refChildObject == Undefined.instance) {
                 if (getBrowserVersion().isIE()) {
+                    if (args.length > 1) {
+                        throw Context.reportRuntimeError("Invalid argument.");
+                    }
                     refChildNode = null;
                 }
                 else {
-                    throw Context.reportRuntimeError("insertBefore: not enough arguments");
+                    if (args.length == 2) {
+                        refChildNode = null;
+                    }
+                    else {
+                        throw Context.reportRuntimeError("insertBefore: not enough arguments");
+                    }
                 }
             }
             else if (refChildObject != null) {
@@ -251,21 +281,22 @@ public class Node extends SimpleScriptable {
                 refChildNode = null;
             }
 
+            final DomNode domNode = getDomNodeOrDie();
             // Append the child to the parent node
             if (refChildNode != null) {
                 refChildNode.insertBefore(newChildNode);
                 appendedChild = newChildObject;
             }
             else {
-                getDomNodeOrDie().appendChild(newChildNode);
+                domNode.appendChild(newChildNode);
                 appendedChild = newChildObject;
             }
 
             //if parentNode is null in IE, create a DocumentFragment to be the parentNode
-            if (getDomNodeOrDie().getParentNode() == null
+            if (domNode.getParentNode() == null
                     && getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
-                final DomDocumentFragment fragment = getDomNodeOrDie().getPage().createDomDocumentFragment();
-                fragment.appendChild(getDomNodeOrDie());
+                final DomDocumentFragment fragment = domNode.getPage().createDomDocumentFragment();
+                fragment.appendChild(domNode);
             }
         }
         return appendedChild;
@@ -344,7 +375,7 @@ public class Node extends SimpleScriptable {
                     firstNode = (Node) node.getScriptObject();
                 }
                 else {
-                    jsxFunction_insertBefore(node.getScriptObject(), refChildObject);
+                    jsxFunction_insertBefore(new Object[] {node.getScriptObject(), refChildObject});
                 }
             }
             if (firstNode == null) {

@@ -433,7 +433,7 @@ public class CodeStyleTest {
         for (final String line : lines) {
             if (line.contains(" static ")
                     && (line.contains(" jsxFunction_") || line.contains(" jsxGet_") || line.contains(" jsxSet_"))
-                    && !line.contains(" jsxFunction_write")) {
+                    && !line.contains(" jsxFunction_write") && !line.contains(" jsxFunction_insertBefore")) {
                 addFailure("Use of static JavaScript function in " + relativePath + ", line: " + (i + 1));
             }
             i++;

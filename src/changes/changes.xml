@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config, improved cache">
+            <action type="fix" dev="asashour" issue="2846557">
+                JavaScript: node.insertBefore() handles undefined variable.
+            </action>
             <action type="update" dev="mguillem">
                 Cache: use cache for all kinds of (cacheable) content.
             </action>

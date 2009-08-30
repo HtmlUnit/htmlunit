@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -949,7 +948,6 @@ public class NodeTest extends WebTestCase {
      */
     @Test
     @Alerts(IE = "exception")
-    @NotYetImplemented
     public void insertBefore2() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
                 + "<script>\n"
