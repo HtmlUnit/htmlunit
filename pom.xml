@@ -70,11 +70,11 @@
                 <version>2.2-beta-4</version>
                 <executions>
                     <execution>
-                    	<id>make-assembly</id>
-                    	<phase>package</phase>
-                    	<goals>
-                    		<goal>single</goal>
-                    	</goals>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
                     </execution>
                 </executions>
                 <configuration>
@@ -103,7 +103,7 @@
                 <executions>
                     <execution>
                         <id>moveFiles</id>
-                        <phase>verify</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>run</goal>
                         </goals>
@@ -122,8 +122,7 @@
                                     </fileset>
                                 </copy>
                                 <move file="${basedir}/artifacts/${project.artifactId}-${project.version}.zip"
-                                    tofile="${basedir}/artifacts/${project.artifactId}-${project.version}-with-dependencies.zip"
-                                    failonerror="false"/>
+                                    tofile="${basedir}/artifacts/${project.artifactId}-${project.version}-with-dependencies.zip"/>
                             </tasks>
                         </configuration>
                     </execution>
