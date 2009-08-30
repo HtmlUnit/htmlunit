@@ -195,4 +195,20 @@ public class WebClient2Test extends WebServerTestCase {
         assertEquals("hello world", pageCopy.getElementById("mybox").getTextContent());
     }
 
+    /**
+     * Regression test for bug 2812769.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void acceptLanguage() throws Exception {
+        final String html = "<html><body></body></html>";
+        final HtmlPage p = loadPageWithAlerts(html);
+        assertEquals("en-us", p.getWebResponse().getRequestSettings().getAdditionalHeaders().get("Accept-Language"));
+
+        final WebClient client  = p.getWebClient();
+        client.getBrowserVersion().setBrowserLanguage("fr");
+        final HtmlPage p2 = client.getPage(getDefaultUrl());
+        assertEquals("fr", p2.getWebResponse().getRequestSettings().getAdditionalHeaders().get("Accept-Language"));
+    }
+
 }

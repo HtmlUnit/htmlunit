@@ -1420,14 +1420,16 @@ public class WebClient implements Serializable {
             }
         }
 
-        //TODO: this should probably be handled inside of WebRequestSettings and
-        // could cause a bug if anything above here reads the URL again
+        // Encode the URL.
+        // TODO: This should probably be handled inside of WebRequestSettings and
+        // could cause a bug if anything above here reads the URL again.
         final URL fixedUrl = encodeUrl(url);
         webRequestSettings.setUrl(fixedUrl);
 
-        // adds the headers that are sent on every request
-        webRequestSettings.getAdditionalHeaders().putAll(requestHeaders_);
+        // Add the headers that are sent with every request.
+        addDefaultHeaders(webRequestSettings);
 
+        // Retrieve the response, either from the cache or from the server.
         final Object fromCache = getCache().getCachedObject(webRequestSettings);
         final WebResponse webResponse;
         if (fromCache != null && fromCache instanceof WebResponse) {
@@ -1437,8 +1439,9 @@ public class WebClient implements Serializable {
             webResponse = getWebConnection().getResponse(webRequestSettings);
             getCache().cacheIfPossible(webRequestSettings, webResponse, webResponse);
         }
-        final int statusCode = webResponse.getStatusCode();
 
+        // Continue according to the HTTP status code.
+        final int statusCode = webResponse.getStatusCode();
         if (statusCode == HttpStatus.SC_USE_PROXY) {
             getIncorrectnessListener().notify("Ignoring HTTP status code [305] 'Use Proxy'", this);
         }
@@ -1590,6 +1593,18 @@ public class WebClient implements Serializable {
             }
         }
         return query.replace(" ", "%20");
+    }
+
+    /**
+     * Adds the headers that are sent with every request to the specified {@link WebRequestSettings} instance.
+     * @param wrs the <tt>WebRequestSettings</tt> instance to modify
+     */
+    private void addDefaultHeaders(final WebRequestSettings wrs) {
+        // Add standard HtmlUnit headers.
+        wrs.setAdditionalHeader("Accept", "*/*");
+        wrs.setAdditionalHeader("Accept-Language", getBrowserVersion().getBrowserLanguage());
+        // Add user-specified headers last so that they can override HtmlUnit defaults.
+        wrs.getAdditionalHeaders().putAll(requestHeaders_);
     }
 
     /**
