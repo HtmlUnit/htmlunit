@@ -150,23 +150,6 @@ public class HTMLParserTest extends WebServerTestCase {
     }
 
     /**
-     * Test the HTMLParser by accessing the HtmlUnit home page and detecting the copyright
-     * string.
-     *
-     * @throws Exception failure
-     */
-    @Test
-    public void htmlUnitHomePage() throws Exception {
-        final HtmlPage page = loadUrl("http://htmlunit.sourceforge.net");
-        if (page != null) {
-            // No connectivity issues.
-            final String stringVal =
-                page.<HtmlDivision>getFirstByXPath("//div[@id='footer']/div[@class='xright']").asText().trim();
-            assertTrue(stringVal.matches("\u00A9 2002-\\d\\d\\d\\d Gargoyle Software Inc."));
-        }
-    }
-
-    /**
      * Works since NekoHtml 0.9.5.
      * @exception Exception If the test fails
      */
