@@ -82,7 +82,7 @@ public final class HTMLParser {
     private static boolean IgnoreOutsideContent_;
 
     static {
-        ELEMENT_FACTORIES.put("input", InputElementFactory.instance);
+        ELEMENT_FACTORIES.put(HtmlInput.TAG_NAME, InputElementFactory.instance);
 
         final DefaultElementFactory defaultElementFactory = new DefaultElementFactory();
         ELEMENT_FACTORIES.put(HtmlAbbreviated.TAG_NAME, defaultElementFactory);
@@ -172,7 +172,6 @@ public final class HTMLParser {
         ELEMENT_FACTORIES.put(HtmlSubscript.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlSuperscript.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlTitle.TAG_NAME, defaultElementFactory);
-
         ELEMENT_FACTORIES.put(HtmlTable.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlTableColumn.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlTableColumnGroup.TAG_NAME, defaultElementFactory);
@@ -180,7 +179,6 @@ public final class HTMLParser {
         ELEMENT_FACTORIES.put(HtmlTableDataCell.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlTableHeaderCell.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlTableRow.TAG_NAME, defaultElementFactory);
-
         ELEMENT_FACTORIES.put(HtmlTextArea.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlTableFooter.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlTableHeader.TAG_NAME, defaultElementFactory);
