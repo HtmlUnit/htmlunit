@@ -58,6 +58,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  * In eclipse you can change the "Run configurations" -> "Arguments" tab -> "VM arguments"
  * -> "-Dhtmlunit.webdriver=ff2"
  * </p>
+ * <p>To change the firefox binary, you can also setup the system property "webdriver.firefox.bin".</p>
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
