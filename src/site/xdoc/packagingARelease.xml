@@ -71,7 +71,7 @@
                         Increase Java heap space by setting the environment variable
                         <source>MAVEN_OPTS="-Xms256m -Xmx512m"</source>
                         Then build the zip files
-                        <source>mvn -up clean site assembly:assembly</source>
+                        <source>mvn -up clean site package</source>
                     </li>
                     <li>
                         Upload the two zip files to
@@ -81,12 +81,15 @@
                         Add a new Group in SourceForge tracker system.
                     </li>
                     <li>
-                        Assuming that everything has gone smoothly so far, make sure everything is checked
+                        Make sure everything is checked
                         in and tag the repository (to https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/tags/) 
                         with a name like this "HtmlUnit-2.0" that reflects the current build version.
                     </li>
-                    <li>Deploy the release to HtmlUnit Maven repository (which is synchronized with the main repository), skipping the tests
-                    to save time as they have already been run previously
+                    <li>
+                        Ensure HtmlUnit-related dependencies are 'tagged' in the repository.
+                    </li>
+                    <li>Deploy the release to HtmlUnit Maven repository (which is synchronized with the main repository),
+                        skipping the tests to save time as they have already been run previously
                         <source>mvn -Dmaven.test.skip=true deploy</source>
                     </li>
                     <li>

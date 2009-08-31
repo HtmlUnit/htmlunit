@@ -252,7 +252,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
-     * Same as {@link #loadPageWithAlerts2(String)}, but using Weba MockConnection instead.
+     * Same as {@link #loadPageWithAlerts2(String)}, but using a MockConnection instead.
      * @param conn the connection to use
      * @return the web driver
      * @throws Exception if something goes wrong
