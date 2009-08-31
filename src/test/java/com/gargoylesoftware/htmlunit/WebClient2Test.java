@@ -205,10 +205,17 @@ public class WebClient2Test extends WebServerTestCase {
         final HtmlPage p = loadPageWithAlerts(html);
         assertEquals("en-us", p.getWebResponse().getRequestSettings().getAdditionalHeaders().get("Accept-Language"));
 
-        final WebClient client  = p.getWebClient();
-        client.getBrowserVersion().setBrowserLanguage("fr");
-        final HtmlPage p2 = client.getPage(getDefaultUrl());
-        assertEquals("fr", p2.getWebResponse().getRequestSettings().getAdditionalHeaders().get("Accept-Language"));
+        final WebClient client = p.getWebClient();
+        final String lang = client.getBrowserVersion().getBrowserLanguage();
+        try {
+            client.getBrowserVersion().setBrowserLanguage("fr");
+            final HtmlPage p2 = client.getPage(getDefaultUrl());
+            assertEquals("fr", p2.getWebResponse().getRequestSettings().getAdditionalHeaders().get("Accept-Language"));
+        }
+        finally {
+            // Restore original language.
+            client.getBrowserVersion().setBrowserLanguage(lang);
+        }
     }
 
 }
