@@ -332,9 +332,9 @@ public class HtmlAnchorTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
 
-        page.getHtmlElementById("a1").click();
-        page.getHtmlElementById("a2").click();
-        page.getHtmlElementById("a3").click();
+        page.getElementById("a1").click();
+        page.getElementById("a2").click();
+        page.getElementById("a3").click();
         assertEquals(new String[] {"hello", "hello", "hello"}, collectedAlerts);
     }
 
