@@ -373,4 +373,37 @@ public class KeyboardEvent extends UIEvent {
     /** Constant for DOM_VK_NUMPAD9. */
     public static final int DOM_VK_NUMPAD9 = 105;
 
+    /**
+     * Implementation of the DOM Level 3 Event method for initializing the key event.
+     *
+     * @param type the event type
+     * @param bubbles can the event bubble
+     * @param cancelable can the event be canceled
+     * @param view the view to use for this event
+     * @param ctrlKey is the control key pressed
+     * @param altKey is the alt key pressed
+     * @param shiftKey is the shift key pressed
+     * @param metaKey is the meta key pressed
+     * @param keyCode the virtual key code value of the key which was depressed, otherwise zero
+     * @param charCode the Unicode character associated with the depressed key otherwise zero
+     */
+    public void jsxFunction_initKeyEvent(
+            final String type,
+            final boolean bubbles,
+            final boolean cancelable,
+            final Object view,
+            final boolean ctrlKey,
+            final boolean altKey,
+            final boolean shiftKey,
+            final boolean metaKey,
+            final int keyCode,
+            final int charCode) {
+
+        jsxFunction_initUIEvent(type, bubbles, cancelable, view, 0);
+        setCtrlKey(ctrlKey);
+        setAltKey(altKey);
+        setShiftKey(shiftKey);
+        setKeyCode(keyCode);
+        //TODO: what about charCode
+    }
 }

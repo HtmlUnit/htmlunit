@@ -2264,6 +2264,9 @@
         <constant name="DOM_VK_NUMPAD7"><browser name="Firefox"/></constant>
         <constant name="DOM_VK_NUMPAD8"><browser name="Firefox"/></constant>
         <constant name="DOM_VK_NUMPAD9"><browser name="Firefox"/></constant>
+        <function name="initKeyEvent">
+            <browser name="Firefox"/>
+        </function>
     </class>
 
     <class name="Location" classname="com.gargoylesoftware.htmlunit.javascript.host.Location"

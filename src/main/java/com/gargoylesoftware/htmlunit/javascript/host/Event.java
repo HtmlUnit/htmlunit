@@ -285,7 +285,7 @@ public class Event extends SimpleScriptable {
         shiftKey_ = shiftKey;
         ctrlKey_ = ctrlKey;
         altKey_ = altKey;
-        keyCode_ = Context.getUndefinedValue();
+        setKeyCode(Context.getUndefinedValue());
         setParentScope((SimpleScriptable) target);
         setPrototype(getPrototype(getClass()));
         setDomNode(domNode, false);
@@ -303,7 +303,7 @@ public class Event extends SimpleScriptable {
     public Event(final DomNode domNode, final String type, final int keyCode,
             final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         this(domNode, type, shiftKey, ctrlKey, altKey);
-        keyCode_ = new Integer(keyCode);
+        setKeyCode(keyCode);
     }
 
     /**
@@ -417,6 +417,14 @@ public class Event extends SimpleScriptable {
      */
     public long jsxGet_timeStamp() {
         return timeStamp_;
+    }
+
+    /**
+     * Sets the key code.
+     * @param keyCode the virtual key code value of the key which was depressed, otherwise zero
+     */
+    protected void setKeyCode(final Object keyCode) {
+        keyCode_ = keyCode;
     }
 
     /**
