@@ -206,8 +206,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected final WebDriver loadPageWithAlerts2(final String html) throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
-        final MockWebConnection mockWebConnection = new MockWebConnection();
-        mockWebConnection.setDefaultResponse(html);
+        final MockWebConnection mockWebConnection = getMockWebConnection();
+        mockWebConnection.setResponse(URL_FIRST, html);
         startWebServer(mockWebConnection);
 
         final WebDriver driver = getWebDriver();

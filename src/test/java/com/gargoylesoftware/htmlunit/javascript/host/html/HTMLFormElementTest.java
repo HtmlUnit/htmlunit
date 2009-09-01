@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HTMLFormElementTest extends WebTestCase {
+public class HTMLFormElementTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -98,7 +98,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -110,8 +110,8 @@ public class HTMLFormElementTest extends WebTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
-            + "    alert(document.form1[-1])\n"
-            + "    alert(document.form1[2])\n"
+            + "    alert(document.form1[-1]);\n"
+            + "    alert(document.form1[2]);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<form name='form1'>\n"
@@ -120,7 +120,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -148,7 +148,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -172,7 +172,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -448,7 +448,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -583,7 +583,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -611,7 +611,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "}\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -634,7 +634,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "</form></td></tr></table>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -687,7 +687,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -708,7 +708,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -781,7 +781,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -799,7 +799,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -818,7 +818,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -868,7 +868,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "</html>";
 
         setExpectedAlerts(expected);
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -897,7 +897,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -929,7 +929,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -954,7 +954,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "     <input type='submit'>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -970,7 +970,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "<script>\n"
             + "function test()\n"
             + "{\n"
-            + "  alert('page 1: ' + document.forms[0].name);\n"
+            + "  window.name = 'page 1: ' + document.forms[0].name;\n"
             + "  document.location = 'page2.html';\n"
             + "}\n"
             + "</script>\n"
@@ -982,6 +982,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "<script>\n"
             + "function test()\n"
             + "{\n"
+            + "  alert(window.name);\n"
             + "  alert('page 2: ' + document.forms[0].name);\n"
             + "}\n"
             + "</script>\n"
@@ -991,7 +992,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse(secondContent);
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1079,7 +1080,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "  <form id='myForm'></form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1165,7 +1166,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1192,7 +1193,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1219,7 +1220,7 @@ public class HTMLFormElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1246,6 +1247,6 @@ public class HTMLFormElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }
