@@ -26,6 +26,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.htmlunit.FormEncodingType;
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebConnection;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
@@ -135,6 +137,9 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         buffer.append("fileName: '" + f.getName() + "', ");
         buffer.append("contentType: '" + response.getContentType() + "', ");
         buffer.append("method: '" + settings.getHttpMethod().name() + "', ");
+        if (settings.getHttpMethod() == HttpMethod.POST && settings.getEncodingType() == FormEncodingType.URL_ENCODED) {
+            buffer.append("postParameters: " + nameValueListToJsMap(settings.getRequestParameters()) + ", ");
+        }
         buffer.append("url: '" + url + "', ");
         buffer.append("loadTime: " + response.getLoadTime() + ", ");
         buffer.append("responseSize: " + response.getContentAsBytes().length + ", ");

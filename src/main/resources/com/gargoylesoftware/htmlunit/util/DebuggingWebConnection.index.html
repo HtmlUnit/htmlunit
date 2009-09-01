@@ -13,6 +13,7 @@
 .tab {
 	border: 1px solid;
 	font-weight: bold;
+	background-color: #CCCCCC;
 }
 .headers {
 	border: 1px solid;
@@ -47,6 +48,15 @@ function showHide(node)
 		node.setAttribute("class", "")
 	}
 }
+
+function listDetails(map, className)
+{
+	var s = "";
+	for (var h in map) {
+		s += "<span class='header-name'>" + h + "</span>: " + map[h] + '<br/>';
+	}
+	return s;
+}
 function doWork()
 {
   var totalDownloaded = 0;
@@ -66,18 +76,14 @@ function doWork()
 		+ '</a>  ' + curRes.code +  ' (' + curRes.contentType + ') ' + toKB(curRes.responseSize) + ' Kib, '
 		+ curRes.loadTime + 'ms';
 	s += "<div class='details-wrapper'>"
-	s += "<div class='tab-wrapper'>"
-	s += "<span class='tab'>Response headers</span>"
-	s += "</div>"
-	s += "<div class='headers'>"
-	for (var h in curRes.requestHeaders) {
-		s += "<span class='header-name'>" + h + "</span>: " + curRes.requestHeaders[h] + '<br/>';
+	if (curRes.postParameters) {
+	s += "<div class='tab-wrapper'><span class='tab'>Post body</span></div>"
+		s += "<div class='headers'>" + listDetails(curRes.postParameters, "header-name") + "</div>"
 	}
-	s += '</div><div>';
-	for (var h in curRes.responseHeaders) {
-		s += "<span class='header-name'>" + h + "</span>: " + curRes.responseHeaders[h] + '<br/>';
-	}
-	s += '</div></div></li>';
+	s += "<div class='tab-wrapper'><span class='tab'>Response headers</span></div>"
+	s += "<div class='headers'>" + listDetails(curRes.responseHeaders, "header-name") + "</div>"
+
+	s += '</div></li>';
 	
     list.innerHTML += s;
     totalDownloaded += curRes.responseSize;
