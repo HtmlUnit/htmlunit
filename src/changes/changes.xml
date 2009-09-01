@@ -6,6 +6,12 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config, improved cache">
+            <action type="fix" dev="mguillem">
+                JavaScript: HtmlFormElement.action returns the fully qualified URL (FF only).
+            </action>
+            <action type="fix" dev="mguillem">
+                JavaScript: setting HtmlTextAreaElement's defaultValue changes the current value if it is still the initial one (FF only).
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: add primitive support for KeyboardEvent.
             </action>

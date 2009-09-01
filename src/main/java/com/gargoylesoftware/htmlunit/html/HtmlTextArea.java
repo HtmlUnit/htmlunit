@@ -162,14 +162,17 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * {@inheritDoc}
      * @see SubmittableElement#setDefaultValue(String)
      */
-    public void setDefaultValue(final String defaultValue) {
+    public void setDefaultValue(String defaultValue) {
         initDefaultValue();
         if (defaultValue == null) {
-            defaultValue_ = "";
+            defaultValue = "";
         }
-        else {
-            defaultValue_ = defaultValue;
+
+        // for FF, if value is still default value, change value too
+        if (getPage().getWebClient().getBrowserVersion().isFirefox() && getText().equals(getDefaultValue())) {
+        	setTextInternal(defaultValue);
         }
+        defaultValue_ = defaultValue;
     }
 
     /**

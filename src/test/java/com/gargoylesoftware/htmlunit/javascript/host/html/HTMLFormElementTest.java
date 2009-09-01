@@ -76,7 +76,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "<p>hello world</p>\n"
             + "<form name='form1'>\n"
             + "    <input type='button' name='button1' />\n"
-            + "    <button type='button' name='button2' />\n"
+            + "    <button type='button' name='button2'>button2</button>\n"
             + "    <input type='checkbox' name='checkbox1' />\n"
             + "    <input type='file' name='fileupload1' />\n"
             + "    <input type='hidden' name='hidden1' />\n"
@@ -90,9 +90,9 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "    </select>\n"
             + "    <input type='password' name='password1' />\n"
             + "    <input type='reset' name='reset1' />\n"
-            + "    <button type='reset' name='reset2' />\n"
+            + "    <button type='reset' name='reset2'>reset2</button>\n"
             + "    <input type='submit' name='submit1' />\n"
-            + "    <button type='submit' name='submit2' />\n"
+            + "    <button type='submit' name='submit2'>submit2</button>\n"
             + "    <input type='text' name='textInput1' />\n"
             + "    <textarea name='textarea1'>foo</textarea>\n"
             + "</form>\n"
@@ -319,7 +319,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             "checkbox: default10 default10 false false",
             "textarea: default11 default11 undefined undefined" };
 
-        // As tested with Firefox 1.0.3 on Win2k.
+        // As tested with Firefox 2.0.20 and 3.0.13 on Linux.
         final String[] expectedFF = {
             "before setting default values",               /* Before setting default values. */
             "text: initial1 initial1 false false",
@@ -344,7 +344,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             "submit: default8 default8 false false",     // DIFFERS FROM IE; see HtmlInput.setDefaultValue()
             "password: default9 default9 false false",   // DIFFERS FROM IE; see HtmlInput.setDefaultValue()
             "checkbox: default10 default10 false false", // DIFFERS FROM IE; see HtmlCheckBoxInput.setDefaultChecked()
-            "textarea: initial11 default11 undefined undefined",
+            "textarea: default11 default11 undefined undefined",
             "after resetting the form",                    /* After resetting the form. */
             "text: default1 default1 false false",
             "file:  default2 false false",
@@ -788,7 +788,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("foo.html")
     public void testGetFormFromFormsById() throws Exception {
         final String html =
             "<html>\n"
@@ -798,6 +797,13 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body>\n"
             + "</html>";
+
+        if (getBrowserVersion().isFirefox()) {
+            setExpectedAlerts(URL_FIRST + "foo.html");
+        }
+        else {
+            setExpectedAlerts("foo.html");
+        }
 
         loadPageWithAlerts2(html);
     }
@@ -1062,7 +1068,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "\nfunction handler() {\n}\n", "null" })
+    @Alerts({ "function handler() {}", "null" })
     public void testOnsubmitNull() throws Exception {
         final String html =
             "<html><head>\n"
@@ -1071,7 +1077,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    var form = document.getElementById('myForm');\n"
             + "    form.onsubmit = handler;\n"
-            + "    alert(form.onsubmit);\n"
+            + "    alert(String(form.onsubmit).replace(/\\n/g, ''));\n"
             + "    form.onsubmit = null;\n"
             + "    alert(form.onsubmit);\n"
             + "  }\n"

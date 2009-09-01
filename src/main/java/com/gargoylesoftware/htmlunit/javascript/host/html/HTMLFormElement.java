@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -138,7 +139,17 @@ public class HTMLFormElement extends HTMLElement {
      * @return the value of this attribute
      */
     public String jsxGet_action() {
-        return getHtmlForm().getActionAttribute();
+        String action = getHtmlForm().getActionAttribute();
+        if (getBrowserVersion().isFirefox()) {
+            try {
+                action = ((HtmlPage) getHtmlForm().getPage()).getFullyQualifiedUrl(action).toExternalForm();
+            }
+            catch (final MalformedURLException e) {
+                // nothing, return action attribute
+            }
+        }
+
+        return action;
     }
 
     /**
