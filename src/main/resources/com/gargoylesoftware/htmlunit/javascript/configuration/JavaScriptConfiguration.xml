@@ -144,27 +144,13 @@
     </class>
 
     <class name="CSSRule" classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSRule" JSObject="false">
-        <constant name="UNKNOWN_RULE">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="STYLE_RULE">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="CHARSET_RULE">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="IMPORT_RULE">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="MEDIA_RULE">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="FONT_FACE_RULE">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="PAGE_RULE">
-            <browser name="Firefox"/>
-        </constant>
+        <constant name="UNKNOWN_RULE"><browser name="Firefox"/></constant>
+        <constant name="STYLE_RULE"><browser name="Firefox"/></constant>
+        <constant name="CHARSET_RULE"><browser name="Firefox"/></constant>
+        <constant name="IMPORT_RULE"><browser name="Firefox"/></constant>
+        <constant name="MEDIA_RULE"><browser name="Firefox"/></constant>
+        <constant name="FONT_FACE_RULE"><browser name="Firefox"/></constant>
+        <constant name="PAGE_RULE"><browser name="Firefox"/></constant>
         <property name="cssText" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>
@@ -893,123 +879,45 @@
         <doclink
             url="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event"
             descr="W3C Document Object Model (DOM) Level 2"/>
-        <constant name="ABORT">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="ALT_MASK">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="AT_TARGET">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="BACK">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="BLUR">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="BUBBLING_PHASE">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="CAPTURING_PHASE">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="CHANGE">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="CLICK">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="CONTROL_MASK">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="DBLCLICK">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="DRAGDROP">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="ERROR">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="FOCUS">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="FORWARD">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="HELP">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="KEYDOWN">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="KEYPRESS">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="KEYUP">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="LOAD">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="LOAD">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="LOCATE">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="META_MASK">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="MOUSEDOWN">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="MOUSEDRAG">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="MOUSEMOVE">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="MOUSEOUT">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="MOUSEOVER">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="MOUSEUP">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="MOVE">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="RESET">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="RESIZE">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="SCROLL">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="SELECT">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="SHIFT_MASK">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="SUBMIT">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="TEXT">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="UNLOAD">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="XFER_DONE">
-            <browser name="Firefox"/>
-        </constant>
+        <constant name="ABORT"><browser name="Firefox"/>        </constant>
+        <constant name="ALT_MASK"><browser name="Firefox"/></constant>
+        <constant name="AT_TARGET"><browser name="Firefox"/></constant>
+        <constant name="BACK"><browser name="Firefox"/></constant>
+        <constant name="BLUR"><browser name="Firefox"/></constant>
+        <constant name="BUBBLING_PHASE"><browser name="Firefox"/></constant>
+        <constant name="CAPTURING_PHASE"><browser name="Firefox"/></constant>
+        <constant name="CHANGE"><browser name="Firefox"/></constant>
+        <constant name="CLICK"><browser name="Firefox"/></constant>
+        <constant name="CONTROL_MASK"><browser name="Firefox"/></constant>
+        <constant name="DBLCLICK"><browser name="Firefox"/></constant>
+        <constant name="DRAGDROP"><browser name="Firefox"/></constant>
+        <constant name="ERROR"><browser name="Firefox"/></constant>
+        <constant name="FOCUS"><browser name="Firefox"/></constant>
+        <constant name="FORWARD"><browser name="Firefox"/></constant>
+        <constant name="HELP"><browser name="Firefox"/></constant>
+        <constant name="KEYDOWN"><browser name="Firefox"/></constant>
+        <constant name="KEYPRESS"><browser name="Firefox"/></constant>
+        <constant name="KEYUP"><browser name="Firefox"/></constant>
+        <constant name="LOAD"><browser name="Firefox"/></constant>
+        <constant name="LOAD"><browser name="Firefox"/></constant>
+        <constant name="LOCATE"><browser name="Firefox"/></constant>
+        <constant name="META_MASK"><browser name="Firefox"/></constant>
+        <constant name="MOUSEDOWN"><browser name="Firefox"/></constant>
+        <constant name="MOUSEDRAG"><browser name="Firefox"/></constant>
+        <constant name="MOUSEMOVE"><browser name="Firefox"/></constant>
+        <constant name="MOUSEOUT"><browser name="Firefox"/></constant>
+        <constant name="MOUSEOVER"><browser name="Firefox"/></constant>
+        <constant name="MOUSEUP"><browser name="Firefox"/></constant>
+        <constant name="MOVE"><browser name="Firefox"/></constant>
+        <constant name="RESET"><browser name="Firefox"/></constant>
+        <constant name="RESIZE"><browser name="Firefox"/></constant>
+        <constant name="SCROLL"><browser name="Firefox"/></constant>
+        <constant name="SELECT"><browser name="Firefox"/></constant>
+        <constant name="SHIFT_MASK"><browser name="Firefox"/></constant>
+        <constant name="SUBMIT"><browser name="Firefox"/></constant>
+        <constant name="TEXT"><browser name="Firefox"/></constant>
+        <constant name="UNLOAD"><browser name="Firefox"/></constant>
+        <constant name="XFER_DONE"><browser name="Firefox"/></constant>
         <property name="altKey" readable="true" writable="false">
             <browser name="Internet Explorer"/>
         </property>
@@ -2372,60 +2280,24 @@
 
     <class name="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.Node"
         JSObject="true">
-        <constant name="ELEMENT_NODE">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="ATTRIBUTE_NODE">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="TEXT_NODE">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="CDATA_SECTION_NODE">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="ENTITY_REFERENCE_NODE">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="ENTITY_NODE">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="PROCESSING_INSTRUCTION_NODE">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="COMMENT_NODE">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="DOCUMENT_NODE">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="DOCUMENT_TYPE_NODE">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="DOCUMENT_FRAGMENT_NODE">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="NOTATION_NODE">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="DOCUMENT_POSITION_DISCONNECTED">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="DOCUMENT_POSITION_PRECEDING">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="DOCUMENT_POSITION_FOLLOWING">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="DOCUMENT_POSITION_CONTAINS">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="DOCUMENT_POSITION_CONTAINED_BY">
-            <browser name="Firefox"/>
-        </constant>
-        <constant name="DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC">
-            <browser name="Firefox"/>
-        </constant>
+        <constant name="ELEMENT_NODE"><browser name="Firefox"/></constant>
+        <constant name="ATTRIBUTE_NODE"><browser name="Firefox"/></constant>
+        <constant name="TEXT_NODE"><browser name="Firefox"/></constant>
+        <constant name="CDATA_SECTION_NODE"><browser name="Firefox"/></constant>
+        <constant name="ENTITY_REFERENCE_NODE"><browser name="Firefox"/></constant>
+        <constant name="ENTITY_NODE"><browser name="Firefox"/></constant>
+        <constant name="PROCESSING_INSTRUCTION_NODE"><browser name="Firefox"/></constant>
+        <constant name="COMMENT_NODE"><browser name="Firefox"/></constant>
+        <constant name="DOCUMENT_NODE"><browser name="Firefox"/></constant>
+        <constant name="DOCUMENT_TYPE_NODE"><browser name="Firefox"/></constant>
+        <constant name="DOCUMENT_FRAGMENT_NODE"><browser name="Firefox"/></constant>
+        <constant name="NOTATION_NODE"><browser name="Firefox"/></constant>
+        <constant name="DOCUMENT_POSITION_DISCONNECTED"><browser name="Firefox"/></constant>
+        <constant name="DOCUMENT_POSITION_PRECEDING"><browser name="Firefox"/></constant>
+        <constant name="DOCUMENT_POSITION_FOLLOWING"><browser name="Firefox"/></constant>
+        <constant name="DOCUMENT_POSITION_CONTAINS"><browser name="Firefox"/></constant>
+        <constant name="DOCUMENT_POSITION_CONTAINED_BY"><browser name="Firefox"/></constant>
+        <constant name="DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC"><browser name="Firefox"/></constant>
         <property name="childNodes" readable="true" writable="false"/>
         <property name="firstChild" readable="true" writable="false"/>
         <property name="lastChild" readable="true" writable="false"/>
