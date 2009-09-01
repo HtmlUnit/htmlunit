@@ -2240,6 +2240,9 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlWordBreak">
     </class>
 
+    <class name="KeyboardEvent" extends="UIEvent" classname="com.gargoylesoftware.htmlunit.javascript.host.KeyboardEvent" JSObject="true">
+    </class>
+
     <class name="Location" classname="com.gargoylesoftware.htmlunit.javascript.host.Location"
         JSObject="true">
         <property name="hash" readable="true" writable="true"/>

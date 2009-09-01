@@ -70,6 +70,7 @@ import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.KeyboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.NamespaceCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
@@ -176,6 +177,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         final Map<String, Class< ? extends Event>> eventMap = new HashMap<String, Class< ? extends Event>>();
         eventMap.put("Event", Event.class);
         eventMap.put("Events", Event.class);
+        eventMap.put("KeyboardEvent", KeyboardEvent.class);
+        eventMap.put("KeyEvents", KeyboardEvent.class);
         eventMap.put("HTMLEvents", Event.class);
         eventMap.put("UIEvent", UIEvent.class);
         eventMap.put("UIEvents", UIEvent.class);

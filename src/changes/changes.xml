@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config, improved cache">
+            <action type="add" dev="asashour">
+                JavaScript: add primitive support for KeyboardEvent.
+            </action>
             <action type="fix" dev="sdanig" issue="2847838">
                 Allow "javascript:..." URLs with encoded script code.
             </action>

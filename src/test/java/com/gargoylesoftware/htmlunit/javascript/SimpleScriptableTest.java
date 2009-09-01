@@ -140,6 +140,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("HTMLListElement");
         names.remove("HTMLOptionsCollection");
         names.remove("HTMLTableComponent");
+        names.remove("KeyboardEvent");
         names.remove("JavaScriptBackgroundJob");
         names.remove("Location");
         names.remove("MediaList");
