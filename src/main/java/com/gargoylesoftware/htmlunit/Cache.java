@@ -40,7 +40,7 @@ public class Cache implements Serializable {
     private static final long serialVersionUID = -3864114727885057419L;
 
     /** The maximum size of the cache. */
-    private int maxSize_ = 25;
+    private int maxSize_ = 40;
 
     /**
      * The map which holds the cached responses. Note that when keying on URLs, we key on the string version
@@ -67,6 +67,9 @@ public class Cache implements Serializable {
             lastAccess_ = System.currentTimeMillis();
         }
 
+        /**
+         * {@inheritDoc}
+         */
         public int compareTo(final Entry other) {
             return NumberUtils.compare(lastAccess_, other.lastAccess_);
         }
