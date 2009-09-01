@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config, improved cache">
+            <action type="fix" dev="sdanig" issue="2847838">
+                Allow "javascript:..." URLs with encoded script code.
+            </action>
             <action type="fix" dev="sdanig" issue="2812769">
                 Use the browser language (from the BrowserVersion being used) to set the value of the "Accept-Language" HTTP header.
             </action>

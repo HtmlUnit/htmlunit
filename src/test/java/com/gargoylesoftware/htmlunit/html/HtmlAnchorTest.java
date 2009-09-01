@@ -316,6 +316,29 @@ public class HtmlAnchorTest extends WebTestCase {
     }
 
     /**
+     * Regression test for bug 2847838.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testClick_javascriptUrl_encoded() throws Exception {
+        final String htmlContent
+            = "<html><body><script>function hello() { alert('hello') }</script>\n"
+            + "<a href='javascript:%20hello%28%29' id='a1'>a1</a>\n"
+            + "<a href='javascript: hello%28%29' id='a2'>a2</a>\n"
+            + "<a href='javascript:hello%28%29' id='a3'>a3</a>\n"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
+
+        page.getHtmlElementById("a1").click();
+        page.getHtmlElementById("a2").click();
+        page.getHtmlElementById("a3").click();
+        assertEquals(new String[] {"hello", "hello", "hello"}, collectedAlerts);
+    }
+
+    /**
      * Test for new openLinkInNewWindow() method.
      * @throws Exception on test failure
      */
