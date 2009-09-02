@@ -5,7 +5,7 @@
     </properties>
 
     <body>
-        <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config, improved cache">
+        <release version="2.6" date="Sep 2, 2009" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config, improved cache">
             <action type="add" dev="asashour" issue="2848802">
                 JavaScript: add basic support for element.scopeName and .tagUrn (IE only).
             </action>

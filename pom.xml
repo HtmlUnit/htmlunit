@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.sourceforge.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>2.6-SNAPSHOT</version>
+    <version>2.6</version>
     <name>HtmlUnit</name>
     <organization>
         <name>Gargoyle Software Inc.</name>
@@ -566,7 +566,7 @@
         <dependency>
             <groupId>net.sourceforge.htmlunit</groupId>
             <artifactId>htmlunit-core-js</artifactId>
-            <version>2.6-SNAPSHOT</version>
+            <version>2.6</version>
         </dependency>
         <!-- This is an indirect dependency, used by Xalan and NekoHtml -->
         <dependency>
@@ -577,7 +577,7 @@
         <dependency>
             <groupId>net.sourceforge.nekohtml</groupId>
             <artifactId>nekohtml</artifactId>
-            <version>1.9.13-SNAPSHOT</version>
+            <version>1.9.13</version>
             <exclusions>
                 <exclusion>
                     <groupId>xerces</groupId>
@@ -660,7 +660,7 @@
         <dependency>
             <groupId>net.sourceforge.htmlunit</groupId>
             <artifactId>webdriver</artifactId>
-            <version>2.6-SNAPSHOT</version>
+            <version>2.6</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -712,32 +712,4 @@
             <uniqueVersion>false</uniqueVersion>
         </snapshotRepository>
     </distributionManagement>
-    <repositories>
-        <repository>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <id>htmlUnitSnapshots</id>
-            <name>HtmlUnit Snapshots</name>
-            <url>http://htmlunit.sourceforge.net/m2-repo-snapshots</url>
-            <layout>default</layout>
-        </repository>
-        <repository>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <id>NekoHTMLSnapshots</id>
-            <name>NekoHTML Snapshots</name>
-            <url>http://build.canoo.com/NekoHTML/artifacts/m2-repo</url>
-            <layout>default</layout>
-        </repository>
-    </repositories>
 </project>
