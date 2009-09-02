@@ -22,6 +22,8 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -30,6 +32,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -1254,5 +1257,58 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "</html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Call to form.submit() should capture the request to be done but the request itself should
+     * be first done after the script execution... and only if it is still valid.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    public void changes_after_call_to_submit() throws Exception {
+        changes_after_call_to_submit("inputSubmitReturnTrue", "page4.html?f1=v1&f2=v2");
+        changes_after_call_to_submit("inputSubmitVoid", "page4.html?f1=v1&f2=v2");
+
+        changes_after_call_to_submit("inputSubmitReturnFalse", "page3.html?f1=v1");
+        changes_after_call_to_submit("link", "page3.html?f1=v1");
+    }
+
+    private void changes_after_call_to_submit(final String id, final String expectedUrlSuffix) throws Exception {
+        final String html = "<html><head><script>"
+            + "function submitForm() {"
+            + "  var f = document.forms[0];"
+            + "  f.action = 'page3.html';"
+            + "  "
+            + "  var h = document.createElement('input');"
+            + "  h.name = 'f1';"
+            + "  h.value = 'v1';"
+            + "  f.appendChild(h);"
+            + "  "
+            + "  f.submit();"
+            + "  "
+            + "  f.action = 'page4.html';"
+            + "  var h = document.createElement('input');"
+            + "  h.name = 'f2';"
+            + "  h.value = 'v2';"
+            + "  f.appendChild(h);"
+            + "  return false;"
+            + "}"
+            + "</script></head><body>"
+            + "<form action='page1.html' name='myForm'>"
+            + "  <input type='submit' id='inputSubmitReturnTrue' value='With on click on the button, return true' "
+            + "onclick='submitForm(); return true'>"
+            + "  <input type='submit' id='inputSubmitReturnFalse' value='With on click on the button, return false' "
+            + "onclick='submitForm(); return false'>"
+            + "  <input type='submit' id='inputSubmitVoid' value='With on click on the button, no return' "
+            + "onclick='submitForm();'>"
+            + "  <a id='link' href='#'  onclick='return submitForm()'><input type='submit' "
+            + "value='With on click on the link'></a>"
+            + "</form></body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        final WebDriver wd = loadPageWithAlerts2(html);
+        wd.findElement(By.id(id)).click();
+        assertEquals(URL_FIRST + expectedUrlSuffix, wd.getCurrentUrl());
     }
 }
