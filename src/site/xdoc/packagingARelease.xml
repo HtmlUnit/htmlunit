@@ -68,9 +68,7 @@
                         Remove pom.xml reference to any snapshot repository (needed for Maven upload request).
                     </li>
                     <li>
-                        Increase Java heap space by setting the environment variable
-                        <source>MAVEN_OPTS="-Xms256m -Xmx512m"</source>
-                        Then build the zip files
+                        Build the zip files
                         <source>mvn -up clean site package</source>
                     </li>
                     <li>
