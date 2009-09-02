@@ -2037,13 +2037,13 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "true", "false" }, FF = { "true", "true" })
+    @Alerts(IE = { "false", "true", "false" }, FF = { "true", "true", "true" })
     public void uniqueID() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "     var div1 = document.getElementById('div1');\n"
             + "     var div2 = document.getElementById('div2');\n"
-            + "     alert(div1.uniqueID);\n"
+            + "     alert(div1.uniqueID == undefined);\n"
             + "     alert(div1.uniqueID == div1.uniqueID);\n"
             + "     alert(div1.uniqueID == div2.uniqueID);\n"
             + "  }\n"
@@ -2052,23 +2052,7 @@ public class HTMLElementTest extends WebTestCase {
             + "  <div id='div2'/>\n"
             + "</body></html>";
 
-        final WebClient client = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_GARGOYLE, html);
-        client.setWebConnection(webConnection);
-
-        client.getPage(URL_GARGOYLE);
-
-        if (!getBrowserVersion().isIE()) {
-            assertEquals("undefined", collectedAlerts.get(0));
-        }
-        else {
-            assertFalse("undefined".equals(collectedAlerts.get(0)));
-        }
-        assertEquals(getExpectedAlerts(), collectedAlerts.subList(1, collectedAlerts.size()));
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -2834,16 +2818,8 @@ public class HTMLElementTest extends WebTestCase {
             + "alert(i.name);\n"
             + "</script>";
 
-        final WebClient client = getWebClient();
-        final List<String> actual = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(actual));
-
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_GARGOYLE, html);
-        client.setWebConnection(conn);
-
-        client.getPage(URL_GARGOYLE);
-        assertEquals(expectedAlerts, actual);
+        setExpectedAlerts(expectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
