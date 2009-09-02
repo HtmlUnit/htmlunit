@@ -176,8 +176,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
         final String html
             = "<html><head><title>first</title>\n"
                 + "<script>\n"
-                + "function test()\n"
-                + "{\n"
+                + "function test() {\n"
                 + "  alert(document.getElementById('myFrame').contentDocument == frames.foo.document);\n"
                 + "}\n"
                 + "</script></head>\n"
@@ -196,8 +195,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
         final String html
             = "<html><head><title>first</title>\n"
                 + "<script>\n"
-                + "function test()\n"
-                + "{\n"
+                + "function test() {\n"
                 + "  alert(document.getElementById('myFrame') == frames.foo.frameElement);\n"
                 + "}\n"
                 + "</script></head>\n"

@@ -622,8 +622,7 @@ public class HtmlFormTest extends WebTestCase {
         final String html
             = "<html><head><title>foo</title>\n"
             + "<script language='javascript'>\n"
-            + "function setFormat()\n"
-            + "{\n"
+            + "function setFormat() {\n"
             + "    if (document.form1.Format.checked) {\n"
             + "        document.form1.Format.value='html';\n"
             + "    } else {\n"

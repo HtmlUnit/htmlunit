@@ -214,9 +214,7 @@ public class NodeTest extends WebTestCase {
             + "var nodes = document.body.childNodes;\n"
             + "alert('nb nodes: ' + nodes.length);\n"
             + "for (var i=0; i<nodes.length; i++)\n"
-            + "{\n"
-            + " alert(nodes[i].nodeType);\n"
-            + "}\n"
+            + "  alert(nodes[i].nodeType);\n"
             + "</script></body></html>";
 
         loadPageWithAlerts(html);
@@ -334,8 +332,7 @@ public class NodeTest extends WebTestCase {
         final String html = "<html><head>\n"
             + "<title>First</title>\n"
             + "<script>\n"
-            + "function test()\n"
-            + "{\n"
+            + "function test() {\n"
             + "    var oField = document.getElementById('div1');\n"
             + "    oField.attachEvent('onclick', foo1);\n"
             + "    oField.attachEvent('onclick', foo2);\n"

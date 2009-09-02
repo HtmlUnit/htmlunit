@@ -142,8 +142,7 @@ public class HTMLOptionElementTest extends WebTestCase {
     public void optionIndexOutOfBound() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "function doTest()\n"
-            + "{\n"
+            + "function doTest() {\n"
             + "  var options = document.getElementById('testSelect').options;\n"
             + "  alert(options[55]);\n"
             + "  try\n"

@@ -455,8 +455,7 @@ public class WindowTest extends WebTestCase {
     public void openWindow_existingWindow() throws Exception {
         final String content
             = "<html><head><script>\n"
-            + "function test()\n"
-            + "{\n"
+            + "function test() {\n"
             + "  var w1 = window.open('about:blank', 'foo');\n"
             + "  alert(w1 != null);\n"
             + "  var w2 = window.open('', 'foo');\n"
@@ -1045,8 +1044,7 @@ public class WindowTest extends WebTestCase {
     public void closed() throws Exception {
         final String content = "<html><head>\n"
             + "<script>\n"
-            + "function test()\n"
-            + "{\n"
+            + "function test() {\n"
             + "  alert(window.closed);\n"
             + "  var newWindow = window.open('about:blank', 'foo');\n"
             + "  alert(newWindow.closed);\n"
@@ -1508,8 +1506,7 @@ public class WindowTest extends WebTestCase {
         final String content = "<html>\n"
             + "<head><title>test</title>\n"
             + "<script>\n"
-            + "function test()\n"
-            + "{\n"
+            + "function test() {\n"
             + "  window.detachEvent('onload', test);\n"
             + "  alert('detached');\n"
             + "}\n"

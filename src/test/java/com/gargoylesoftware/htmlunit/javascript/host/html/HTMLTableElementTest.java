@@ -173,8 +173,7 @@ public class HTMLTableElementTest extends WebTestCase {
     public void tableHeadRows() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
-            + "function test()\n"
-            + "{\n"
+            + "function test() {\n"
             + "  var t = document.getElementById('myTable');\n"
             + "  alert(t.rows[0].cells.length);\n"
             + "  alert(t.rows[1].cells.length);\n"
@@ -344,8 +343,7 @@ public class HTMLTableElementTest extends WebTestCase {
         final String html =
             "<html><head>\n"
             + "<script>\n"
-            + "function test()\n"
-            + "{\n"
+            + "function test() {\n"
             + "  var container = document.getElementById('mytable');\n"
             + "  alert(container.id);\n"
             + "  var tableRow = container.insertRow(1);\n"
@@ -376,8 +374,7 @@ public class HTMLTableElementTest extends WebTestCase {
         final String html =
             "<html><head>\n"
             + "<script>\n"
-            + "function test()\n"
-            + "{\n"
+            + "function test() {\n"
             + "  var oTable = document.getElementById('mytable');\n"
             + "  var tableRow = oTable.insertRow(0);\n"
             + "  alert(tableRow.parentNode.tagName);\n"
@@ -404,8 +401,7 @@ public class HTMLTableElementTest extends WebTestCase {
         final String html =
             "<html><head>\n"
             + "<script>\n"
-            + "function test()\n"
-            + "{\n"
+            + "function test() {\n"
             + "  var oTable = document.getElementById('mytable');\n"
             + "  alert(oTable.lastChild.tagName);\n"
             + "  var tableRow = oTable.insertRow(0);\n"
@@ -432,8 +428,7 @@ public class HTMLTableElementTest extends WebTestCase {
         final String html =
             "<html><head>\n"
             + "<script>\n"
-            + "function test()\n"
-            + "{\n"
+            + "function test() {\n"
             + "  var myTable = document.getElementById('mytable');\n"
             + "  alert(myTable.rows.length);\n"
             + "  alert(myTable.tBodies.length);\n"

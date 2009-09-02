@@ -447,8 +447,7 @@ public class Window2Test extends WebTestCase {
         final String html =
             "<html>\n"
             + "<script>\n"
-            + "function test()\n"
-            + "{\n"
+            + "function test() {\n"
             + "    alert(window.length);\n"
             + "    alert(window.frames.length);\n"
             + "    alert(window.frames[0].name);\n"
@@ -476,8 +475,7 @@ public class Window2Test extends WebTestCase {
             + "alert(window.length);\n"
             + "var oFrames = window.frames;\n"
             + "alert(oFrames.length);\n"
-            + "function test()\n"
-            + "{\n"
+            + "function test() {\n"
             + "    alert(oFrames.length);\n"
             + "    alert(window.length);\n"
             + "    alert(window.frames.length);\n"
@@ -501,8 +499,7 @@ public class Window2Test extends WebTestCase {
     @Test
     public void overwriteFunctions_alert() throws Exception {
         final String html = "<html><head><script language='JavaScript'>\n"
-            + "function alert(x)\n"
-            + "{\n"
+            + "function alert(x) {\n"
             + "  document.title = x;\n"
             + "}\n"
             + "alert('hello');\n"

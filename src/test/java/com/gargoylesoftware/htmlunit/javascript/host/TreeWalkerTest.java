@@ -32,12 +32,10 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class TreeWalkerTest extends WebTestCase {
     private static final String contentStart = "<html><head><title>TreeWalker Test</title>\n"
         + "<script>\n"
-        + "function safeTagName(o)\n"
-        + "{\n"
+        + "function safeTagName(o) {\n"
         + "  return o ? o.tagName : undefined\n"
         + "}\n"
-        + "function alertTreeWalker(tw)\n"
-        + "{\n"
+        + "function alertTreeWalker(tw) {\n"
         + "  alert(safeTagName(tw.root));\n"
         + "  alert(safeTagName(tw.currentNode));\n"
         + "  alert(tw.whatToShow);\n"
@@ -65,8 +63,7 @@ public class TreeWalkerTest extends WebTestCase {
 
     private static final String contentStart2 = "<html><head><title>TreeWalker Test</title>\n"
         + "<script>\n"
-        + "function safeTagName(o)\n"
-        + "{\n"
+        + "function safeTagName(o) {\n"
         + "  return o ? o.tagName : undefined\n"
         + "}\n"
         + "function test() {\n";

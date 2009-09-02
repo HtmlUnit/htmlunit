@@ -49,8 +49,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
         + "if (s != expected)\n"
         + " throw 'Expected >' + expected + '< but got >' + s + '<';";
 
-    private final String scriptTestMatch_ = "function arrayToString(_arr)\n"
-        + "{\n"
+    private final String scriptTestMatch_ = "function arrayToString(_arr) {\n"
         + "  if (_arr == null) return null;\n"
         + "  var s = '[';\n"
         + "  for (var i=0; i<_arr.length; ++i)\n"
@@ -61,10 +60,8 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
         + "  s += ']';\n"
         + "  return s;\n"
         + "}\n"
-        + "function assertArrEquals(actual, expected)\n"
-        + "{\n"
-        + "  if (expected == null)\n"
-        + "  {\n"
+        + "function assertArrEquals(actual, expected) {\n"
+        + "  if (expected == null) {\n"
         + "    if (actual != null)\n"
         + "      throw 'Expected >null< got >' + actual + '<';\n"
         + "    else return;\n"

@@ -133,8 +133,7 @@ public class HTMLImageElementTest extends WebTestCase {
     public void attributeName() throws Exception {
         final String html
             = "<html><head><script>\n"
-            + "function test()\n"
-            + "{\n"
+            + "function test() {\n"
             + "  var oImg = document.getElementById('myImage');\n"
             + "  oImg.name = 'foo';\n"
             + "  alert(oImg.name);\n"
@@ -158,8 +157,7 @@ public class HTMLImageElementTest extends WebTestCase {
             + "  alert(0)\n" // first script to be sure that img onload doesn't get executed after first JS execution
             + "</script>\n"
             + "<script>\n"
-            + "function test()\n"
-            + "{\n"
+            + "function test() {\n"
             + "  alert(1)\n"
             + "}\n"
             + "</script>\n"

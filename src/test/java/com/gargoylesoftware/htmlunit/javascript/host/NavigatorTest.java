@@ -112,8 +112,7 @@ public class NavigatorTest extends WebTestCase {
         final String content
             = "<html><head><title>First</title>\n"
             + "<script>\n"
-            + "function test()\n"
-            + "{\n"
+            + "function test() {\n"
             + "  alert(navigator.cookieEnabled);\n"
             + "}\n"
             + "</script>\n"
@@ -298,8 +297,7 @@ public class NavigatorTest extends WebTestCase {
         final String html
             = "<html><head><title>First</title>\n"
             + "<script>\n"
-            + "function test()\n"
-            + "{\n"
+            + "function test() {\n"
             + "  alert(typeof window.navigator.mimeTypes.length);\n"
             + "  alert(typeof window.navigator.plugins.length);\n"
             + "}\n"

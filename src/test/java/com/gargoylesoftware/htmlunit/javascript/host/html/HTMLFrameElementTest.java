@@ -133,8 +133,7 @@ public class HTMLFrameElementTest extends WebTestCase {
         final String html
             = "<html><head><title>first</title>\n"
                 + "<script>\n"
-                + "function test()\n"
-                + "{\n"
+                + "function test() {\n"
                 + "  alert(document.getElementById('myFrame').contentWindow == frames.foo);\n"
                 + "}\n"
                 + "</script></head>\n"
