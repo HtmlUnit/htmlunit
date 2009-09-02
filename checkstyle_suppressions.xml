@@ -23,10 +23,9 @@
     <suppress checks="LineLength" files="HTMLBodyElementTest.java"/>
     <suppress checks="LineLength" files="GWTSourceTest.java" lines="41, 103, 165, 200, 240"/>
     <suppress checks="MethodLength" files="DefaultElementFactory.java"/>
-    <suppress checks="MethodLength" files="KeyboardEvent.java"/>
     <suppress checks="MethodLength" files="Dojo102Test.java"/>
     <suppress checks="MethodLength" files="CSSStyleDeclarationTest.java"/>
     <suppress checks="ParameterNumber" files="HtmlUnitRegExpProxy.java"/>
+    <suppress checks="ParameterNumber" files="KeyboardEvent.java"/>
     <suppress checks="ParameterNumber" files="MouseEvent.java"/>
-    <suppress checks="ParameterNumber" files="BrowserRoadie.java"/>
 </suppressions>
