@@ -1813,6 +1813,35 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
+     * Gets the namespace defined for the element.
+     * @return the namespace defined for the element
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534388.aspx">MSDN documentation</a>
+     */
+    public String jsxGet_scopeName() {
+        //TODO: implement other behavior
+        return "HTML";
+    }
+
+    /**
+     * Gets the Uniform Resource Name (URN) specified in the namespace declaration.
+     * @return the Uniform Resource Name (URN) specified in the namespace declaration
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534658.aspx">MSDN documentation</a>
+     */
+    public String jsxGet_tagUrn() {
+        //TODO: implement other behavior
+        return "";
+    }
+
+    /**
+     * Sets the Uniform Resource Name (URN) specified in the namespace declaration.
+     * @param tagUrn the Uniform Resource Name (URN) specified in the namespace declaration
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534658.aspx">MSDN documentation</a>
+     */
+    public void jsxSet_tagUrn(final String tagUrn) {
+        //TODO: implement other behavior
+    }
+
+    /**
      * Gets the JavaScript property "parentElement".
      * @return the parent element
      * @see #jsxGet_parentNode()

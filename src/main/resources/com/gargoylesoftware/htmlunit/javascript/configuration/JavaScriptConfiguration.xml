@@ -1412,6 +1412,9 @@
         <property name="runtimeStyle" readable="true" writable="false">
             <browser name="Internet Explorer"/>
         </property>
+        <property name="scopeName" readable="true" writable="false">
+            <browser name="Internet Explorer"/>
+        </property>
         <property name="scrollHeight" readable="true" writable="false"/>
         <property name="scrollLeft" readable="true" writable="true"/>
         <property name="scrollTop" readable="true" writable="true"/>
@@ -1425,6 +1428,9 @@
         <property name="style" readable="true" writable="false"/>
         <property name="tabIndex" readable="true" writable="true"/>
         <property name="tagName" readable="true" writable="false"/>
+        <property name="tagUrn" readable="true" writable="true">
+            <browser name="Internet Explorer"/>
+        </property>
         <property name="textContent" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>

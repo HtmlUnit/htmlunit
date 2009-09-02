@@ -170,7 +170,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
 
         // for FF, if value is still default value, change value too
         if (getPage().getWebClient().getBrowserVersion().isFirefox() && getText().equals(getDefaultValue())) {
-        	setTextInternal(defaultValue);
+            setTextInternal(defaultValue);
         }
         defaultValue_ = defaultValue;
     }

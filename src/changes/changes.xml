@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.6" date="?" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config, improved cache">
+            <action type="add" dev="asashour" issue="2848802">
+                JavaScript: add basic support for element.scopeName and .tagUrn (IE only).
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: HtmlFormElement.action returns the fully qualified URL (FF only).
             </action>
