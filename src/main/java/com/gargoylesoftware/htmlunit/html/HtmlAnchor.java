@@ -40,7 +40,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author Ahmed Ashour
  * @author Dmitri Zoubkov
  */
-public class HtmlAnchor extends ClickableElement {
+public class HtmlAnchor extends HtmlElement {
 
     private static final long serialVersionUID = 7968778206454737178L;
     private static final Log LOG = LogFactory.getLog(HtmlAnchor.class);

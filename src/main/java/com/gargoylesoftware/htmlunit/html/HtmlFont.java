@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Ahmed Ashour
  * @author Rodney Gitzel
  */
-public class HtmlFont extends StyledElement {
+public class HtmlFont extends HtmlElement {
 
     private static final long serialVersionUID = -3134589337466409730L;
 

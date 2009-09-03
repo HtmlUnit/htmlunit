@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlMultiColumn extends ClickableElement {
+public class HtmlMultiColumn extends HtmlElement {
 
     private static final long serialVersionUID = 8652950102614375612L;
 

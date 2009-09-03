@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  */
-public class HtmlHeading1 extends ClickableElement {
+public class HtmlHeading1 extends HtmlElement {
 
     private static final long serialVersionUID = 5846396728739967656L;
 

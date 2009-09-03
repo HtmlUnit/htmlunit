@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  */
-public class HtmlBidirectionalOverride extends StyledElement {
+public class HtmlBidirectionalOverride extends HtmlElement {
 
     private static final long serialVersionUID = 5258353980344461550L;
 

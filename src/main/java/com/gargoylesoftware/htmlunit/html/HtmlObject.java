@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLObjectElement;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  */
-public class HtmlObject extends ClickableElement {
+public class HtmlObject extends HtmlElement {
 
     private static final long serialVersionUID = 1203763133530358990L;
 

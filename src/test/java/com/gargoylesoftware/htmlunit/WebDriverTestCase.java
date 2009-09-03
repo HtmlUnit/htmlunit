@@ -174,6 +174,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
         @SuppressWarnings("unchecked")
         private void doService(final HttpServletRequest request, final HttpServletResponse response)
             throws Exception {
+            if (request.getRequestURL().toString().endsWith("/favicon.ico")) {
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                return;
+            }
             final URL requestedUrl = new URL(request.getRequestURL().toString());
             final WebRequestSettings settings = new WebRequestSettings(requestedUrl);
             settings.setHttpMethod(HttpMethod.valueOf(request.getMethod()));

@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
-public abstract class TableRowGroup extends ClickableElement {
+public abstract class TableRowGroup extends HtmlElement {
 
     private static final long serialVersionUID = 7770034627964024386L;
 

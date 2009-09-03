@@ -37,7 +37,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Ahmed Ashour
  * @author Dmitri Zoubkov
  */
-public class HtmlButton extends ClickableElement implements DisabledElement, SubmittableElement {
+public class HtmlButton extends HtmlElement implements DisabledElement, SubmittableElement {
 
     private static final long serialVersionUID = 4828725767615187345L;
     private static final Log LOG = LogFactory.getLog(HtmlButton.class);

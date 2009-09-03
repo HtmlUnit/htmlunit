@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  */
-public class HtmlBreak extends StyledElement {
+public class HtmlBreak extends HtmlElement {
 
     private static final long serialVersionUID = 5691487253016411482L;
 

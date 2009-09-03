@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlArea extends ClickableElement {
+public class HtmlArea extends HtmlElement {
 
     private static final long serialVersionUID = 8933911141016200386L;
 

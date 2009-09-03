@@ -36,7 +36,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  */
-public class HtmlTextArea extends ClickableElement implements DisabledElement, SubmittableElement, SelectableTextInput {
+public class HtmlTextArea extends HtmlElement implements DisabledElement, SubmittableElement, SelectableTextInput {
 
     private static final long serialVersionUID = 4572856255042499634L;
 

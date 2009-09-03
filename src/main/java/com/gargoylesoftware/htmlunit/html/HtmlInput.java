@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public abstract class HtmlInput extends ClickableElement implements DisabledElement, SubmittableElement {
+public abstract class HtmlInput extends HtmlElement implements DisabledElement, SubmittableElement {
 
     private static final long serialVersionUID = 3602129443357463947L;
 

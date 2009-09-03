@@ -52,7 +52,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Node;
  * @author Ahmed Ashour
  * @author <a href="mailto:knut.johannes.dahle@gmail.com">Knut Johannes Dahle</a>
  */
-public class HtmlImage extends ClickableElement {
+public class HtmlImage extends HtmlElement {
 
     private static final long serialVersionUID = -2304247017681577696L;
     private static final Log LOG = LogFactory.getLog(HtmlImage.class);

@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlBlink extends ClickableElement {
+public class HtmlBlink extends HtmlElement {
 
     private static final long serialVersionUID = 5968651790284866362L;
 

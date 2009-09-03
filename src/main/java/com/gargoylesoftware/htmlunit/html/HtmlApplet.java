@@ -36,7 +36,7 @@ import com.gargoylesoftware.htmlunit.html.applets.AppletStubImpl;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
-public class HtmlApplet extends StyledElement {
+public class HtmlApplet extends HtmlElement {
 
     private static final long serialVersionUID = -2868018454095564791L;
 

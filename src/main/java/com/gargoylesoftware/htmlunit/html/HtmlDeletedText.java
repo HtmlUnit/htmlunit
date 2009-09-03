@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  */
-public class HtmlDeletedText extends ClickableElement {
+public class HtmlDeletedText extends HtmlElement {
 
     private static final long serialVersionUID = 6790105329776696420L;
 

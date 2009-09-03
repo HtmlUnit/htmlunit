@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
-public class HtmlOption extends ClickableElement implements DisabledElement {
+public class HtmlOption extends HtmlElement implements DisabledElement {
 
     private static final long serialVersionUID = 8995198439134305753L;
 

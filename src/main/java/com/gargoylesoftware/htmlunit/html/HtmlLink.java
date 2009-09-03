@@ -35,7 +35,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
-public class HtmlLink extends ClickableElement {
+public class HtmlLink extends HtmlElement {
 
     private static final long serialVersionUID = 323745155296983364L;
 

@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
@@ -31,15 +31,16 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class ArrayTest extends WebTestCase {
+public class ArrayTest extends WebDriverTestCase {
 
     /**
      * Test for sort algorithm used (when sort is called with callback).
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.IE)
-    @Alerts(FF = { "1<>5", "5<>2", "1<>2", "5<>1", "2<>1", "1<>1", "5<>9" },
+    @NotYetImplemented({ Browser.IE, Browser.FF2 })
+    @Alerts(FF2 = { "2<>1", "1<>2", "2<>5", "9<>5", "2<>5", "2<>1", "1<>1" },
+            FF3 = { "1<>5", "5<>2", "1<>2", "5<>1", "2<>1", "1<>1", "5<>9" },
             IE = { "1<>9", "9<>5", "9<>2", "9<>1", "1<>5", "5<>1", "5<>2", "5<>1", "1<>1", "1<>2", "2<>1", "1<>1" })
     public void sort() throws Exception {
         final String html
@@ -55,6 +56,6 @@ public class ArrayTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }

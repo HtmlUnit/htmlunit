@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  */
-public class HtmlFrameSet extends StyledElement {
+public class HtmlFrameSet extends HtmlElement {
 
     private static final long serialVersionUID = 4559070965860885794L;
 

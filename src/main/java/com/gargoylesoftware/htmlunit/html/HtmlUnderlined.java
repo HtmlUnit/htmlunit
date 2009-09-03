@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlUnderlined extends ClickableElement {
+public class HtmlUnderlined extends HtmlElement {
 
     private static final long serialVersionUID = 4959353391566177951L;
 

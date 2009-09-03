@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  */
-public class HtmlTable extends ClickableElement {
+public class HtmlTable extends HtmlElement {
 
     private static final long serialVersionUID = 2484055580262042798L;
 

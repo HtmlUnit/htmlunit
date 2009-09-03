@@ -5,6 +5,11 @@
     </properties>
 
     <body>
+        <release version="2.7" date="?" description="Bugfixes">
+            <action type="remove" dev="asashour">
+                Remove deprecated ClickableElement and StyledElement.
+            </action>
+        </release>
         <release version="2.6" date="Sep 2, 2009" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config, improved cache">
             <action type="add" dev="asashour" issue="2848802">
                 JavaScript: add basic support for element.scopeName and .tagUrn (IE only).

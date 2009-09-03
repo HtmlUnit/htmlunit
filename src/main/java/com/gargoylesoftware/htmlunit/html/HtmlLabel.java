@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlLabel extends ClickableElement {
+public class HtmlLabel extends HtmlElement {
 
     private static final long serialVersionUID = -3007176633287091652L;
 

@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Ahmed Ashour
  * @author Rodney Gitzel
  */
-public class HtmlParagraph extends ClickableElement {
+public class HtmlParagraph extends HtmlElement {
 
     private static final long serialVersionUID = 6276828219596081566L;
 

@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Rodney Gitzel
  * @author Sudhan Moghe
  */
-public class HtmlSpan extends ClickableElement {
+public class HtmlSpan extends HtmlElement {
 
     private static final long serialVersionUID = -625511251623194397L;
 

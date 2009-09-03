@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.WebAssert;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public class HtmlIsIndex extends StyledElement implements SubmittableElement {
+public class HtmlIsIndex extends HtmlElement implements SubmittableElement {
 
     private static final long serialVersionUID = -7566440323983487259L;
 
