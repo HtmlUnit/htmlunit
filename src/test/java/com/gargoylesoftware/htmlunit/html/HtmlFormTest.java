@@ -84,7 +84,7 @@ public class HtmlFormTest extends WebTestCase {
         // Test that only one value for the radio button is being passed back to the server
         final HtmlPage secondPage = (HtmlPage) pushButton.click();
 
-        assertEquals("url", URL_GARGOYLE + "?foo=2&button=foo",
+        assertEquals("url", getDefaultUrl() + "?foo=2&button=foo",
                 secondPage.getWebResponse().getRequestSettings().getUrl());
         Assert.assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
     }
@@ -880,7 +880,7 @@ public class HtmlFormTest extends WebTestCase {
         webConnection.setDefaultResponse(html);
         client.setWebConnection(webConnection);
 
-        final WebRequestSettings settings = new WebRequestSettings(URL_GARGOYLE, HttpMethod.POST);
+        final WebRequestSettings settings = new WebRequestSettings(getDefaultUrl(), HttpMethod.POST);
 
         final HtmlPage page = client.getPage(settings);
         final HtmlInput submitButton = page.getHtmlElementById("submitButton");
@@ -1004,7 +1004,7 @@ public class HtmlFormTest extends WebTestCase {
 
     /**
      * Utility for {@link #testUrlAfterSubmit()}. Calls {@link #testUrlAfterSubmit(URL, String, String, String)} with
-     * URL_GARGOYLE.
+     * the default url.
      * @param method the form method to use
      * @param action the form action to use
      * @param expectedUrlEnd the expected URL
@@ -1012,7 +1012,7 @@ public class HtmlFormTest extends WebTestCase {
      */
     private void testUrlAfterSubmit(final String method, final String action, final String expectedUrlEnd)
         throws Exception {
-        testUrlAfterSubmit(URL_GARGOYLE, method, action, URL_GARGOYLE + expectedUrlEnd);
+        testUrlAfterSubmit(getDefaultUrl(), method, action, getDefaultUrl() + expectedUrlEnd);
     }
 
     /**
@@ -1077,7 +1077,7 @@ public class HtmlFormTest extends WebTestCase {
             contentType += ";charset=" + headerCharset;
         }
         webConnection.setDefaultResponse(html, 200, "ok", contentType);
-        final HtmlPage page = client.getPage(URL_GARGOYLE);
+        final HtmlPage page = client.getPage(getDefaultUrl());
 
         final String firstPageEncoding = StringUtils.defaultString(metaCharset, headerCharset);
         assertEquals(firstPageEncoding, page.getPageEncoding());
@@ -1343,7 +1343,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         HtmlPage page = loadPage(html);
         page = page.<HtmlSubmitInput>getFirstByXPath("//input").click();
-        assertEquals(URL_GARGOYLE.toExternalForm(), page.getWebResponse().getRequestSettings().getUrl());
+        assertEquals(getDefaultUrl(), page.getWebResponse().getRequestSettings().getUrl());
     }
 
     /**
@@ -1361,7 +1361,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         HtmlPage page = loadPage(html);
         page = page.<HtmlSubmitInput>getFirstByXPath("//input[2]").click();
-        assertEquals(URL_GARGOYLE.toExternalForm() + "?myName=myValue",
+        assertEquals(getDefaultUrl() + "?myName=myValue",
                 page.getWebResponse().getRequestSettings().getUrl());
     }
 
@@ -1370,9 +1370,10 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testUrlAfterSubmit2() throws Exception {
-        final URL url = new URL(URL_GARGOYLE, "test.html");
+        final URL url = new URL(getDefaultUrl(), "test.html");
         testUrlAfterSubmit(url, "post", "?hi", url + "?hi");
-        testUrlAfterSubmit(new URL(URL_GARGOYLE, "test.html?there"), "post", "?hi", URL_GARGOYLE + "test.html?hi");
+        testUrlAfterSubmit(new URL(getDefaultUrl(), "test.html?there"), "post", "?hi",
+            getDefaultUrl() + "test.html?hi");
     }
 
 }

@@ -86,7 +86,7 @@ public class ClickableElementTest extends WebTestCase {
         final CollectingAlertHandler alertHandler = new CollectingAlertHandler(collectedAlerts);
         client.setAlertHandler(alertHandler);
 
-        final HtmlPage page = client.getPage(URL_GARGOYLE);
+        final HtmlPage page = client.getPage(getDefaultUrl());
         final HtmlElement clickable = page.getHtmlElementById("clickId");
 
         for (int i = 0; i < numClicks; i++) {

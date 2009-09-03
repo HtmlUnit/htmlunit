@@ -45,7 +45,7 @@ public class HTMLImageElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("http://www.gargoylesoftware.com/foo.gif")
+    @Alerts("§§URL§§foo.gif")
     public void getSrc() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -110,7 +110,7 @@ public class HTMLImageElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("http://www.gargoylesoftware.com/bar.gif")
+    @Alerts("§§URL§§bar.gif")
     public void setSrc_newImage() throws Exception {
         final String html
             = "<html><head><script>\n"

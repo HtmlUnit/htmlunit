@@ -1001,7 +1001,6 @@ public class EventTest extends WebTestCase {
 
         final HtmlPage page = loadPageWithAlerts(html);
         final HtmlPage page2 = page.<HtmlInput>getHtmlElementById("mySubmit").click();
-        assertEquals(URL_GARGOYLE.toExternalForm(),
-                page2.getWebResponse().getRequestSettings().getUrl().toExternalForm());
+        assertEquals(getDefaultUrl(), page2.getWebResponse().getRequestSettings().getUrl());
     }
 }

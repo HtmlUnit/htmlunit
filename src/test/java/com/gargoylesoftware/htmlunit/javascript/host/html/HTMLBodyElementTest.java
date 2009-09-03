@@ -154,7 +154,7 @@ public class HTMLBodyElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"", "http://www.foo.com/blah.gif", "http://www.gargoylesoftware.com/blah.gif" },
+    @Alerts(FF = {"", "http://www.foo.com/blah.gif", "§§URL§§blah.gif" },
             IE = {"", "http://www.foo.com/blah.gif", "blah.gif" })
     public void background() throws Exception {
         final String html =

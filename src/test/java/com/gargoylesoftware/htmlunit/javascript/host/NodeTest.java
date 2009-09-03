@@ -829,7 +829,7 @@ public class NodeTest extends WebTestCase {
 
         final URL expectedURL;
         if (getBrowserVersion().isIE()) {
-            expectedURL = URL_GARGOYLE;
+            expectedURL = getDefaultUrl();
         }
         else {
             expectedURL = URL_SECOND;
@@ -878,7 +878,7 @@ public class NodeTest extends WebTestCase {
 
         final URL expectedURL;
         if (getBrowserVersion().isIE()) {
-            expectedURL = URL_GARGOYLE;
+            expectedURL = getDefaultUrl();
         }
         else {
             expectedURL = URL_SECOND;

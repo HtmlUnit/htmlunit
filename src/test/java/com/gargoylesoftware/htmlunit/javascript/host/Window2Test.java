@@ -307,18 +307,8 @@ public class Window2Test extends WebTestCase {
             + "alert(undef);\n"
             + "</script>";
 
-        final WebClient client = getWebClient();
-        client.setThrowExceptionOnScriptError(false);
-
-        final List<String> actual = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(actual));
-
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_GARGOYLE, html);
-        client.setWebConnection(conn);
-
-        client.getPage(URL_GARGOYLE);
-        assertEquals(getExpectedAlerts(), actual);
+        getWebClientWithMockWebConnection().setThrowExceptionOnScriptError(false);
+        loadPageWithAlerts(html);
     }
 
     /**

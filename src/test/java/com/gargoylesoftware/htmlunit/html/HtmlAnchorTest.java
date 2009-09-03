@@ -187,7 +187,7 @@ public class HtmlAnchorTest extends WebTestCase {
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = client.getPage(URL_GARGOYLE);
+        final HtmlPage page = client.getPage(getDefaultUrl());
         final HtmlAnchor anchor = page.getHtmlElementById("a2");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
@@ -461,7 +461,7 @@ public class HtmlAnchorTest extends WebTestCase {
         final HtmlPage page = loadPage(browserVersion, html, null);
         final HtmlAnchor a1 = page.getHtmlElementById("a1");
         final HtmlPage secondPage = a1.click();
-        assertEquals(URL_GARGOYLE, secondPage.getWebResponse().getRequestSettings().getUrl());
+        assertEquals(getDefaultUrl(), secondPage.getWebResponse().getRequestSettings().getUrl());
     }
 
     private void testPreventDefault2(final BrowserVersion browserVersion) throws Exception {
@@ -481,7 +481,7 @@ public class HtmlAnchorTest extends WebTestCase {
         final HtmlPage page = loadPage(browserVersion, html, null);
         final HtmlAnchor a1 = page.getHtmlElementById("a1");
         final HtmlPage secondPage = a1.click();
-        assertEquals(URL_GARGOYLE, secondPage.getWebResponse().getRequestSettings().getUrl());
+        assertEquals(getDefaultUrl(), secondPage.getWebResponse().getRequestSettings().getUrl());
     }
 
     private void testPreventDefault3(final BrowserVersion browserVersion) throws Exception {
@@ -493,7 +493,7 @@ public class HtmlAnchorTest extends WebTestCase {
         final HtmlPage page = loadPage(browserVersion, html, null);
         final HtmlAnchor a1 = page.getHtmlElementById("a1");
         final HtmlPage secondPage = a1.click();
-        assertEquals(URL_GARGOYLE, secondPage.getWebResponse().getRequestSettings().getUrl());
+        assertEquals(getDefaultUrl(), secondPage.getWebResponse().getRequestSettings().getUrl());
     }
 
     /**
@@ -519,7 +519,7 @@ public class HtmlAnchorTest extends WebTestCase {
         final String html = "<html><body><a id='a' href='#a'>a</a></body></html>";
         HtmlPage page = loadPage(html);
         page = page.getElementById("a").click();
-        assertEquals(new URL(URL_GARGOYLE, "#a"), page.getWebResponse().getRequestSettings().getUrl());
+        assertEquals(new URL(getDefaultUrl(), "#a"), page.getWebResponse().getRequestSettings().getUrl());
     }
 
     /**

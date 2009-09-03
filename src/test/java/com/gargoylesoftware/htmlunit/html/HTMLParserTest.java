@@ -20,9 +20,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.Servlet;
@@ -34,8 +32,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -64,7 +60,7 @@ public class HTMLParserTest extends WebServerTestCase {
     public void simpleHTMLString() throws Exception {
         final WebClient webClient = getWebClient();
         final WebResponse webResponse = new StringWebResponse(
-            "<html><head><title>TITLE</title><noscript>TEST</noscript></head><body></body></html>", URL_GARGOYLE);
+            "<html><head><title>TITLE</title><noscript>TEST</noscript></head><body></body></html>", getDefaultUrl());
 
         final HtmlPage page = HTMLParser.parseHtml(webResponse, webClient.getCurrentWindow());
 
@@ -407,8 +403,8 @@ public class HTMLParserTest extends WebServerTestCase {
      * @throws Exception failure
      */
     @Test
-    @Alerts(IE = {"HEAD", "Outer Html", "true" },
-            FF = {"HTML", "Inner Html", "false", "HTML" })
+    @Alerts(IE = { "exception", "HEAD", "Outer Html", "true" },
+            FF = { "HTML", "Inner Html", "false", "HTML" })
     public void setComplteHtmlToHTML_innerHTML() throws Exception {
         final String html
             = "<html><head>\n"
@@ -432,27 +428,17 @@ public class HTMLParserTest extends WebServerTestCase {
             + "    <DIV id=outerDiv>\n"
             + "         Outer DIV\n"
             + "    </DIV>\n"
-            + "         <script>\n"
-            + "         document.getElementsByTagName('html')[0].innerHTML ="
-            + "             '<html><head><title>Inner Html</title></head>"
-            + "             <body><DIV id=innerDiv>Inner DIV</DIV></body></html>';\n"
-            + "         </script>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    document.getElementsByTagName('html')[0].innerHTML ="
+            + "      '<html><head><title>Inner Html</title></head>"
+            + "      <body><DIV id=innerDiv>Inner DIV</DIV></body></html>';\n"
+            + "  } catch(e) { alert('exception') }\n"
+            + "</script>\n"
             + "</body>\n"
             + "</html>\n";
 
-        createTestPageForRealBrowserIfNeeded(html, getExpectedAlerts());
-
-        final WebClient client = getWebClient();
-        client.setThrowExceptionOnScriptError(false);
-        final List<String> collectedAlerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_GARGOYLE, html);
-        client.setWebConnection(webConnection);
-
-        client.getPage(URL_GARGOYLE);
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**

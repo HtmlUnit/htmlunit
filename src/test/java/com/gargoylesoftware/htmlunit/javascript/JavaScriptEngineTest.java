@@ -81,11 +81,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      */
     @Test
     public void setJavascriptEnabled_false() throws Exception {
-        final WebClient client = getWebClient();
-        client.setJavaScriptEnabled(false);
-        final MockWebConnection webConnection = new MockWebConnection();
-
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "document.form1.textfield1='blue'"
             + "</script></head><body>\n"
@@ -96,10 +92,9 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        webConnection.setDefaultResponse(content);
-        client.setWebConnection(webConnection);
+        getWebClientWithMockWebConnection().setJavaScriptEnabled(false);
 
-        final HtmlPage page = client.getPage(URL_GARGOYLE);
+        final HtmlPage page = loadPageWithAlerts(html);
 
         final HtmlTextInput textInput = page.getHtmlElementById("textfield1");
         assertEquals("foo", textInput.getValueAttribute());
@@ -283,11 +278,9 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("got here")
     public void externalScript() throws Exception {
-        final WebClient client = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
-
-        final String htmlContent
+        final String html
             = "<html><head><title>foo</title><script src='/foo.js' id='script1'/>\n"
             + "</head><body>\n"
             + "<p>hello world</p>\n"
@@ -299,19 +292,12 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         final String jsContent = "alert('got here');\n";
 
-        webConnection.setResponse(URL_GARGOYLE, htmlContent);
-        webConnection.setResponse(new URL(URL_GARGOYLE, "foo.js"), jsContent,
+        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "foo.js"), jsContent,
                 "text/javascript");
-        client.setWebConnection(webConnection);
 
-        final String[] expectedAlerts = {"got here"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final HtmlPage page = client.getPage(URL_GARGOYLE);
+        final HtmlPage page = loadPageWithAlerts(html);
         final HtmlScript htmlScript = page.getHtmlElementById("script1");
         assertNotNull(htmlScript);
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -368,7 +354,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             loadPageWithAlerts(content1);
         }
         catch (final Exception e) {
-            assertTrue(e.getMessage().indexOf(URL_GARGOYLE.toString()) > -1);
+            assertTrue(e.getMessage().indexOf(getDefaultUrl().toString()) > -1);
         }
 
         // external script
@@ -382,13 +368,13 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         final String jsContent = "a.foo = 213;\n";
 
-        webConnection.setResponse(URL_GARGOYLE, content2);
-        final URL urlScript = new URL(URL_GARGOYLE, "foo.js");
+        webConnection.setResponse(getDefaultUrl(), content2);
+        final URL urlScript = new URL(getDefaultUrl(), "foo.js");
         webConnection.setResponse(urlScript, jsContent, "text/javascript");
         client.setWebConnection(webConnection);
 
         try {
-            client.getPage(URL_GARGOYLE);
+            client.getPage(getDefaultUrl());
         }
         catch (final Exception e) {
             assertTrue(e.getMessage(), e.getMessage().indexOf(urlScript.toString()) > -1);
@@ -440,14 +426,14 @@ public class JavaScriptEngineTest extends WebTestCase {
          */
         final String jsContent = "alert('\u8868');\n";
 
-        webConnection.setResponse(URL_GARGOYLE, htmlContent);
+        webConnection.setResponse(getDefaultUrl(), htmlContent);
 
         webConnection.setResponse(
-            new URL(URL_GARGOYLE, "hidden"),
+            new URL(getDefaultUrl(), "hidden"),
             htmlContent2);
 
         webConnection.setResponse(
-            new URL(URL_GARGOYLE, "foo.js"),
+            new URL(getDefaultUrl(), "foo.js"),
         // make SJIS bytes as responsebody
             new String(jsContent.getBytes("SJIS"), "8859_1"), "text/javascript");
 
@@ -455,7 +441,7 @@ public class JavaScriptEngineTest extends WebTestCase {
          * foo2.js is same with foo.js
          */
         webConnection.setResponse(
-            new URL(URL_GARGOYLE, "foo2.js"),
+            new URL(getDefaultUrl(), "foo2.js"),
             // make SJIS bytes as responsebody
             new String(jsContent.getBytes("SJIS"), "8859_1"),
             "text/javascript");
@@ -469,7 +455,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         /*
          * detect encoding from meta tag
          */
-        final HtmlPage page = client.getPage(URL_GARGOYLE);
+        final HtmlPage page = client.getPage(getDefaultUrl());
         final HtmlScript htmlScript = page.getHtmlElementById("script1");
 
         assertNotNull(htmlScript);
@@ -479,7 +465,7 @@ public class JavaScriptEngineTest extends WebTestCase {
          * detect encoding from charset attribute of script tag
          */
         collectedAlerts.clear();
-        final HtmlPage page2 = client.getPage(new URL(URL_GARGOYLE, "hidden"));
+        final HtmlPage page2 = client.getPage(new URL(getDefaultUrl(), "hidden"));
         final HtmlScript htmlScript2 = page2.getHtmlElementById("script2");
 
         assertNotNull(htmlScript2);
@@ -846,7 +832,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final CountingJavaScriptEngine countingJavaScriptEngine = new CountingJavaScriptEngine(client);
         client.setJavaScriptEngine(countingJavaScriptEngine);
 
-        final HtmlPage page = client.getPage(URL_GARGOYLE);
+        final HtmlPage page = client.getPage(getDefaultUrl());
 
         assertEquals(1, countingJavaScriptEngine.getExecutionCount());
         assertEquals(0, countingJavaScriptEngine.getCallCount());
@@ -1400,7 +1386,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         webConnection.setDefaultResponse(html);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = client.getPage(new WebRequestSettings(URL_GARGOYLE, HttpMethod.POST));
+        final HtmlPage page = client.getPage(new WebRequestSettings(getDefaultUrl(), HttpMethod.POST));
         return page;
     }
 

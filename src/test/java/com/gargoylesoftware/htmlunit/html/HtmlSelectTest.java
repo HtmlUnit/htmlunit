@@ -68,7 +68,7 @@ public class HtmlSelectTest extends WebTestCase {
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = button.click();
 
-        assertEquals("url", URL_GARGOYLE + "?select1=option2&button=foo",
+        assertEquals("url", getDefaultUrl() + "?select1=option2&button=foo",
                 secondPage.getWebResponse().getRequestSettings().getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
@@ -101,7 +101,7 @@ public class HtmlSelectTest extends WebTestCase {
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = button.click();
 
-        assertEquals("url", URL_GARGOYLE + "?button=foo", secondPage.getWebResponse().getRequestSettings().getUrl());
+        assertEquals("url", getDefaultUrl() + "?button=foo", secondPage.getWebResponse().getRequestSettings().getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
     }
@@ -134,7 +134,7 @@ public class HtmlSelectTest extends WebTestCase {
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = (HtmlPage) button.click();
 
-        assertEquals("url", URL_GARGOYLE + "?select1=option3&button=foo",
+        assertEquals("url", getDefaultUrl() + "?select1=option3&button=foo",
                 secondPage.getWebResponse().getRequestSettings().getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
@@ -169,7 +169,7 @@ public class HtmlSelectTest extends WebTestCase {
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = button.click();
 
-        assertEquals("url", URL_GARGOYLE + "?select1=option1&select1=option2&select1=option3&button=foo",
+        assertEquals("url", getDefaultUrl() + "?select1=option1&select1=option2&select1=option3&button=foo",
                 secondPage.getWebResponse().getRequestSettings().getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);

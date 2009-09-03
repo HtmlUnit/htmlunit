@@ -1408,6 +1408,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({ "§§URL§§", "§§URL§§" })
     public void locationAfterWrite() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -1420,11 +1421,7 @@ public class DocumentTest extends WebTestCase {
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
 
-        final String[] expectedAlerts = {URL_GARGOYLE.toExternalForm(), URL_GARGOYLE.toExternalForm()};
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(getBrowserVersion(), html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -1496,32 +1493,26 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("")
     public void referrer_NoneSpecified() throws Exception {
         final String html
             = "<html><head><title>First</title></head><body onload='alert(document.referrer);'>\n"
             + "</form></body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(getBrowserVersion(), html, collectedAlerts);
-        assertEquals("First", firstPage.getTitleText());
-
-        assertEquals(new String[] {""}, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("§§URL§§")
     public void url() throws Exception {
         final String html
             = "<html><head><title>First</title></head><body onload='alert(document.URL);'>\n"
             + "</form></body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(getBrowserVersion(), html, collectedAlerts);
-        assertEquals("First", firstPage.getTitleText());
-
-        assertEquals(new String[] {URL_GARGOYLE.toExternalForm()}, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**

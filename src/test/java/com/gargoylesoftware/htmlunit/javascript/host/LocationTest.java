@@ -53,6 +53,7 @@ public class LocationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("§§URL§§")
     public void testDocumentLocationGet() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -62,7 +63,6 @@ public class LocationTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        setExpectedAlerts(URL_GARGOYLE.toExternalForm());
         loadPageWithAlerts(html);
     }
 
@@ -105,6 +105,7 @@ public class LocationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("§§URL§§")
     public void testDocumentLocationHref() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -114,7 +115,6 @@ public class LocationTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        setExpectedAlerts(getDefaultUrl().toExternalForm());
         loadPageWithAlerts(html);
     }
 
@@ -242,21 +242,21 @@ public class LocationTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "#a b", "http://www.gargoylesoftware.com/#a%20b",
-            "#a b", "http://www.gargoylesoftware.com/#a%20b" },
-            IE = { "#a b", "http://www.gargoylesoftware.com/#a b",
-            "#a%20b", "http://www.gargoylesoftware.com/#a%20b" })
+    @Alerts(FF = { "#a b", "§§URL§§#a%20b", "#a b", "§§URL§§#a%20b" },
+            IE = { "#a b", "§§URL§§#a b", "#a%20b", "§§URL§§#a%20b" })
     public void testSetHash_Encoding() throws Exception {
-        final String html =
-              "<html><head><title>Test</title></head><body>\n"
-            + "<a id='a' onclick='location.hash=\"a b\"; alert(location.hash); alert(location.href);'>go1</a>\n"
-            + "<a id='b' onclick='location.hash=\"a%20b\"; alert(location.hash); alert(location.href);'>go2</a>\n"
+        final String html = "<html><head><title>First</title><script>\n"
+            + "  function test() {\n"
+            + "    window.location.hash = 'a b';\n"
+            + "    alert(window.location.hash);\n"
+            + "    alert(window.location.href);\n"
+            + "    window.location.hash = 'a%20b';\n"
+            + "    alert(window.location.hash);\n"
+            + "    alert(window.location.href);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        final List<String> actual = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), html, actual);
-        page.<HtmlAnchor>getHtmlElementById("a").click();
-        page.<HtmlAnchor>getHtmlElementById("b").click();
-        assertEquals(getExpectedAlerts(), actual);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -298,7 +298,7 @@ public class LocationTest extends WebTestCase {
      */
     @Test
     public void testSetHrefWithOnlyHash2() throws Exception {
-        final String html = "<script>document.location.href = '" + URL_GARGOYLE + "#x';</script>";
+        final String html = "<script>document.location.href = '" + getDefaultUrl() + "#x';</script>";
         loadPageWithAlerts(html);
     }
 
@@ -614,8 +614,9 @@ public class LocationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("§§URL§§")
     public void testToString() throws Exception {
-        final String content =
+        final String html =
             "<html><head>\n"
             + "<script>\n"
             + " alert(window.location.toString());\n"
@@ -623,10 +624,7 @@ public class LocationTest extends WebTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {URL_GARGOYLE.toExternalForm()};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(getBrowserVersion(), content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**

@@ -558,7 +558,7 @@ public class HTMLDocumentTest extends WebTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts(html, new URL("http://www.gargoylesoftware.com/"), -1);
     }
 
   /**
@@ -566,6 +566,7 @@ public class HTMLDocumentTest extends WebTestCase {
     */
     @Test
     @Browsers(Browser.FF)
+    @Alerts({ "www.gargoylesoftware.com", "gargoylesoftware.com" })
     public void domainMixedCaseNetscape() throws Exception {
         final URL urlGargoyleUpperCase = new URL("http://WWW.GARGOYLESOFTWARE.COM/");
 
@@ -579,12 +580,8 @@ public class HTMLDocumentTest extends WebTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-
-        loadPage(getBrowserVersion(), html, collectedAlerts, urlGargoyleUpperCase);
-
-        final String[] expectedAlerts = {"www.gargoylesoftware.com", "gargoylesoftware.com"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        getMockWebConnection().setResponse(new URL("http://www.gargoylesoftware.com/"), html);
+        loadPageWithAlerts(html, urlGargoyleUpperCase, -1);
     }
 
     /**
@@ -604,7 +601,7 @@ public class HTMLDocumentTest extends WebTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts(html, new URL("http://www.gargoylesoftware.com/"), -1);
     }
 
     /**
@@ -701,7 +698,7 @@ public class HTMLDocumentTest extends WebTestCase {
             + "<iframe src='about:blank'></iframe>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts(html, new URL("http://www.gargoylesoftware.com/"), -1);
     }
 
     /**

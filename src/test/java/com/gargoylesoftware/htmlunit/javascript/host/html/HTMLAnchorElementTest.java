@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static org.junit.Assert.assertSame;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +48,16 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 @RunWith(BrowserRunner.class)
 public class HTMLAnchorElementTest extends WebTestCase {
+    private static final URL URL_GARGOYLE;
+
+    static {
+        try {
+            URL_GARGOYLE = new URL("http://www.gargoylesoftware.com/");
+        }
+        catch (final MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     /**
      * @throws Exception if the test fails
@@ -115,8 +127,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "", "http://www.gargoylesoftware.com/foo.html",
-        "javascript:void(0)", "http://www.gargoylesoftware.com/#", "mailto:" })
+    @Alerts({ "", "§§URL§§foo.html", "javascript:void(0)", "§§URL§§#", "mailto:" })
     public void defaultConversionToString() throws Exception {
         final String html
             = "<html><head><title>AnchorTest</title><script>\n"
@@ -150,10 +161,11 @@ public class HTMLAnchorElementTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final HtmlPage page1 = loadPage(getBrowserVersion(), html, null);
+        getMockWebConnection().setDefaultResponse("");
+        final HtmlPage page1 = loadPageWithAlerts(html);
         final Page page2 = page1.getAnchorByHref("#").click();
 
-        assertEquals(URL_GARGOYLE + "foo.html",  page2.getWebResponse().getRequestSettings().getUrl());
+        assertEquals(getDefaultUrl() + "foo.html",  page2.getWebResponse().getRequestSettings().getUrl());
     }
 
     /**
@@ -237,7 +249,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
             + "<body onload=\"document.links[0].search += '&p2=2';\">\n"
             + "<a href='foo.html?p1=1' target='O'>link 1</a>\n"
             + "</body></html>";
-        final HtmlPage page1 = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page1 = loadPage(getBrowserVersion(), html, null, URL_GARGOYLE);
         final HtmlAnchor link = page1.getAnchors().get(0);
         assertEquals("http://www.gargoylesoftware.com/foo.html?p1=1&p2=2", link.getHrefAttribute());
     }
@@ -267,7 +279,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(getBrowserVersion(), html, null);
         final HtmlAnchor link = page.getAnchors().get(0);
-        assertEquals("http://www.gargoylesoftware.com/foo.html#OK", link.getHrefAttribute());
+        assertEquals(getDefaultUrl() + "foo.html#OK", link.getHrefAttribute());
     }
 
     /**
@@ -282,7 +294,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
             + "<a href='foo.html#O'>link 1</a>\n"
             + "<a href='http://www.gargoylesoftware.com:80/foo.html#O'>link 1</a>\n"
             + "</body></html>";
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null, URL_GARGOYLE);
         HtmlAnchor link = page.getAnchors().get(0);
         assertEquals("http://www.gargoylesoftware.com:80/foo.html#O", link.getHrefAttribute());
         link = page.getAnchors().get(1);
@@ -299,7 +311,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
             + "<body onload=\"document.links[0].pathname = '/bar' + document.links[0].pathname;\">\n"
             + "<a href='foo.html#B'>link 1</a>\n"
             + "</body></html>";
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null, URL_GARGOYLE);
         final HtmlAnchor link = page.getAnchors().get(0);
         assertEquals("http://www.gargoylesoftware.com/bar/foo.html#B", link.getHrefAttribute());
     }
@@ -314,7 +326,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
             + "<body onload=\"document.links[0].protocol = document.links[0].protocol.substring(0,4) + 's:';\">\n"
             + "<a href='foo.html#B'>link 1</a>\n"
             + "</body></html>";
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null, URL_GARGOYLE);
         final HtmlAnchor link = page.getAnchors().get(0);
         assertEquals("https://www.gargoylesoftware.com/foo.html#B", link.getHrefAttribute());
     }
@@ -335,7 +347,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
             + "<a href='http://www.gargoylesoftware.com:80/foo.html#O'>link 2</a>\n"
             + "<a href='http://www.gargoylesoftware.com:80/foo.html#O'>link 3</a>\n"
             + "</body></html>";
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null, URL_GARGOYLE);
         HtmlAnchor link = page.getAnchors().get(0);
         assertEquals("http://www.gargoylesoftware.commotion:8080/foo.html#O", link.getHrefAttribute());
         link = page.getAnchors().get(1);
@@ -356,7 +368,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
             + "<body onload=\"document.links[0].hostname += 'motion';\">\n"
             + "<a href='foo.html#O'>link 1</a>\n"
             + "</body></html>";
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null, URL_GARGOYLE);
         final HtmlAnchor link = page.getAnchors().get(0);
         assertEquals("http://www.gargoylesoftware.commotion/foo.html#O", link.getHrefAttribute());
     }

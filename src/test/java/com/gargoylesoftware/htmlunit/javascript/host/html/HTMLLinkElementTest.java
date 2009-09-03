@@ -14,26 +14,28 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Unit tests for {@link HTMLLinkElement}.
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public class HTMLLinkElementTest extends WebTestCase {
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({ "", "", "", "§§URL§§test.css", "text/css", "stylesheet" })
     public void basicLinkAttributes() throws Exception {
         final String html =
               "<html>\n"
@@ -54,12 +56,8 @@ public class HTMLLinkElementTest extends WebTestCase {
             + "        </script>\n"
             + "    </body>\n"
             + "</html>";
-        final List<String> actual = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, html, actual);
-        final String[] expected = new String[] {
-            "", "", "",
-            "http://www.gargoylesoftware.com/test.css", "text/css", "stylesheet"};
-        assertEquals(expected, actual);
+
+        loadPageWithAlerts(html);
     }
 
 }

@@ -79,9 +79,6 @@ public abstract class WebTestCase {
     /** Constant for the URL which is used in the tests. */
     public static final URL URL_THIRD;
 
-    /** Constant for the URL http://www.gargoylesoftware.com which is used in the tests. */
-    public static final URL URL_GARGOYLE;
-
     /**
      * The name of the system property used to determine if files should be generated
      * or not in {@link #createTestPageForRealBrowserIfNeeded(String,List)}.
@@ -110,7 +107,6 @@ public abstract class WebTestCase {
             URL_FIRST = new URL("http://localhost:" + PORT + "/");
             URL_SECOND = new URL("http://localhost:" + PORT + "/second/");
             URL_THIRD = new URL("http://localhost:" + PORT + "/third/");
-            URL_GARGOYLE = new URL("http://www.gargoylesoftware.com/");
         }
         catch (final MalformedURLException e) {
             // This is theoretically impossible.
@@ -143,12 +139,12 @@ public abstract class WebTestCase {
      * @return the new page
      * @throws Exception if something goes wrong
      */
-    public static final HtmlPage loadPage(final BrowserVersion browserVersion,
+    public final HtmlPage loadPage(final BrowserVersion browserVersion,
             final String html, final List<String> collectedAlerts) throws Exception {
         if (generateTest_browserVersion_.get() == null) {
             generateTest_browserVersion_.set(browserVersion);
         }
-        return loadPage(browserVersion, html, collectedAlerts, URL_GARGOYLE);
+        return loadPage(browserVersion, html, collectedAlerts, getDefaultUrl());
     }
 
     /**
@@ -161,7 +157,7 @@ public abstract class WebTestCase {
      */
     public static final HtmlPage loadPage(final String html, final List<String> collectedAlerts) throws Exception {
         generateTest_browserVersion_.set(FLAG_ALL_BROWSERS);
-        return loadPage(BrowserVersion.getDefault(), html, collectedAlerts, URL_GARGOYLE);
+        return loadPage(BrowserVersion.getDefault(), html, collectedAlerts, getDefaultUrl());
     }
 
     /**
@@ -255,10 +251,10 @@ public abstract class WebTestCase {
      * @return the new page
      * @throws Exception if something goes wrong
      */
-    protected static final HtmlPage loadPage(final WebClient client,
+    protected final HtmlPage loadPage(final WebClient client,
             final String html, final List<String> collectedAlerts) throws Exception {
 
-        return loadPage(client, html, collectedAlerts, URL_GARGOYLE);
+        return loadPage(client, html, collectedAlerts, getDefaultUrl());
     }
 
     /**
@@ -719,7 +715,7 @@ public abstract class WebTestCase {
     /**
      * Defines the provided HTML as the response of the MockWebConnection for {@link #getDefaultUrl()}
      * and loads the page with this URL using the current browser version.
-     * Finally asserts the alerts equal the expected alerts.
+     * Finally asserts the alerts equal the expected alerts (in which "§§URL§§" has been expanded to the default URL).
      * @param html the HTML to use
      * @return the new page
      * @throws Exception if something goes wrong
@@ -742,6 +738,11 @@ public abstract class WebTestCase {
         throws Exception {
         if (expectedAlerts_ == null) {
             throw new IllegalStateException("You must annotate the test class with '@RunWith(BrowserRunner.class)'");
+        }
+
+        // expand variables in expected alerts
+        for (int i = 0; i < expectedAlerts_.length; ++i) {
+            expectedAlerts_[i] = expectedAlerts_[i].replaceAll("§§URL§§", url.toExternalForm());
         }
 
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts_);
@@ -776,8 +777,8 @@ public abstract class WebTestCase {
      * Gets the default URL used for the tests.
      * @return the url
      */
-    protected URL getDefaultUrl() {
-        return URL_GARGOYLE;
+    protected static URL getDefaultUrl() {
+        return URL_FIRST;
     }
 
     /**

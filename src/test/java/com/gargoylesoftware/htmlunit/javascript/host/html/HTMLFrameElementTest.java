@@ -185,10 +185,7 @@ public class HTMLFrameElementTest extends WebTestCase {
     @Alerts("DIV")
     @Test
     public void testFrameLoadedAfterParent() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
-
-        final String mainContent
+        final String html
             = "<html><head><title>first</title></head><body>\n"
             + "<iframe name='testFrame' src='testFrame.html'></iframe>\n"
             + "<div id='aButton'>test text</div>\n"
@@ -200,15 +197,8 @@ public class HTMLFrameElementTest extends WebTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        webConnection.setResponse(URL_GARGOYLE, mainContent);
-        webConnection.setResponse(new URL(URL_GARGOYLE + "testFrame.html"), frameContent);
-
-        webClient.setWebConnection(webConnection);
-        final List<String> collectedAlerts = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        webClient.getPage(URL_GARGOYLE);
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        getMockWebConnection().setResponse(new URL(getDefaultUrl() + "testFrame.html"), frameContent);
+        loadPageWithAlerts(html);
     }
 
     /**

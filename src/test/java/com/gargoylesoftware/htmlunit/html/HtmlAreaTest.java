@@ -150,7 +150,7 @@ public class HtmlAreaTest extends WebTestCase {
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = client.getPage(URL_GARGOYLE);
+        final HtmlPage page = client.getPage(getDefaultUrl());
         final HtmlArea area = page.getHtmlElementById("a2");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);

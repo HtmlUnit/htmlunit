@@ -132,10 +132,10 @@ public class ActiveXObjectTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_GARGOYLE, html);
+        webConnection.setResponse(getDefaultUrl(), html);
         client.setWebConnection(webConnection);
 
-        client.getPage(URL_GARGOYLE);
+        client.getPage(getDefaultUrl());
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -198,10 +198,10 @@ public class ActiveXObjectTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_GARGOYLE, html);
+        webConnection.setResponse(getDefaultUrl(), html);
         client.setWebConnection(webConnection);
 
-        client.getPage(URL_GARGOYLE);
+        client.getPage(getDefaultUrl());
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -239,10 +239,10 @@ public class ActiveXObjectTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_GARGOYLE, html);
+        webConnection.setResponse(getDefaultUrl(), html);
         client.setWebConnection(webConnection);
 
-        client.getPage(URL_GARGOYLE);
+        client.getPage(getDefaultUrl());
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

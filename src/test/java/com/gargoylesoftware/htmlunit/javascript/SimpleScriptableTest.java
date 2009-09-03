@@ -19,7 +19,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -32,9 +31,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
@@ -65,11 +61,9 @@ public class SimpleScriptableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("past focus")
     public void callInheritedFunction() throws Exception {
-        final WebClient client = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
-
-        final String content
+        final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    document.form1.textfield1.focus();\n"
@@ -82,21 +76,11 @@ public class SimpleScriptableTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        webConnection.setDefaultResponse(content);
-        client.setWebConnection(webConnection);
-
-        final List<String> expectedAlerts = Collections.singletonList("past focus");
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final HtmlPage page = client.getPage(URL_GARGOYLE);
+        final HtmlPage page = loadPageWithAlerts(html);
         assertEquals("foo", page.getTitleText());
-        Assert.assertEquals("focus not changed to textfield1",
+        Assert.assertSame("focus not changed to textfield1",
                      page.getFormByName("form1").getInputByName("textfield1"),
                      page.getFocusedElement());
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**

@@ -89,7 +89,8 @@ public final class ScriptExceptionTest extends WebTestCase {
             // Set the default locale to US because Rhino messages are localized
             Locale.setDefault(Locale.US);
 
-            loadPage(getBrowserVersion(), getFileContent(baseFileName + ".html"), null);
+            loadPage(getBrowserVersion(), getFileContent(baseFileName + ".html"), null,
+                new URL("http://www.gargoylesoftware.com/"));
 
             Locale.setDefault(locale);
         }
