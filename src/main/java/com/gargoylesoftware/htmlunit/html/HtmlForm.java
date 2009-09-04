@@ -122,6 +122,25 @@ public class HtmlForm extends HtmlElement {
             }
         }
 
+        final WebRequestSettings settings = getWebRequestSettings(submitElement);
+
+        final WebWindow webWindow = htmlPage.getEnclosingWindow();
+        return htmlPage.getWebClient().getPage(
+                webWindow,
+                htmlPage.getResolvedTarget(getTargetAttribute()),
+                settings);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Gets the settings for a submission of this form request settings necessary to submit this form.
+     * @param submitElement
+     * @param submitElement the element that caused the submit to occur
+     * @return the request settings
+     */
+    public WebRequestSettings getWebRequestSettings(final SubmittableElement submitElement) {
+        final HtmlPage htmlPage = (HtmlPage) getPage();
         final List<NameValuePair> parameters = getParameterListForSubmit(submitElement);
         final HttpMethod method;
         final String methodAttribute = getMethodAttribute();
@@ -182,12 +201,7 @@ public class HtmlForm extends HtmlElement {
         settings.setCharset(getSubmitCharset());
         settings.setAdditionalHeader("Referer", htmlPage.getWebResponse().getRequestSettings().getUrl()
                 .toExternalForm());
-
-        final WebWindow webWindow = htmlPage.getEnclosingWindow();
-        return htmlPage.getWebClient().getPage(
-                webWindow,
-                htmlPage.getResolvedTarget(getTargetAttribute()),
-                settings);
+        return settings;
     }
 
     /**

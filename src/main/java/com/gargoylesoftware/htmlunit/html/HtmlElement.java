@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
@@ -1223,11 +1224,12 @@ public abstract class HtmlElement extends DomElement {
      */
     @SuppressWarnings("unchecked")
     public <P extends Page> P click(final Event event) throws IOException {
+        final SgmlPage page = getPage();
+
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
-            return (P) getPage();
+            return (P) page;
         }
 
-        final SgmlPage page = getPage();
         // may be different from page when working with "orphaned pages"
         // (ex: clicking a link in a page that is not active anymore)
         final Page contentPage = page.getEnclosingWindow().getEnclosedPage();
@@ -1237,12 +1239,17 @@ public abstract class HtmlElement extends DomElement {
             doClickAction();
             stateUpdated = true;
         }
+
+        final JavaScriptEngine jsEngine = page.getWebClient().getJavaScriptEngine();
+        jsEngine.holdPosponedActions();
         final ScriptResult scriptResult = fireEvent(event);
 
         final boolean pageAlreadyChanged = contentPage != page.getEnclosingWindow().getEnclosedPage();
         if (!pageAlreadyChanged && !stateUpdated && !event.isAborted(scriptResult)) {
             doClickAction();
         }
+        jsEngine.processPostponedActions();
+
         return (P) getPage().getWebClient().getCurrentWindow().getEnclosedPage();
     }
 

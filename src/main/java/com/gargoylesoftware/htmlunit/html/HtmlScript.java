@@ -203,7 +203,7 @@ public class HtmlScript extends HtmlElement {
         if (LOG.isDebugEnabled()) {
             LOG.debug("Script node added: " + asXml());
         }
-        final PostponedAction action = new PostponedAction() {
+        final PostponedAction action = new PostponedAction(getPage()) {
             public void execute() {
                 final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
                 if (ie) {

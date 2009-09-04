@@ -6,6 +6,15 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes">
+            <action type="fix" dev="mguillem">
+                JavaScript: normal submit button action has priority over HtmlFormElement.submit() called in onclick handler.
+            </action>
+            <action type="fix" dev="mguillem">
+                JavaScript: when link's onclick changes location the next page is still the one mentionned in href.
+            </action>
+            <action type="fix" dev="mguillem">
+                JavaScript: avoid multiple form submissions when HtmlFormElement.submit() is called multiple times.
+            </action>
             <action type="remove" dev="asashour">
                 BrowserVersion: remove deprecated constructors.
             </action>

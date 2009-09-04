@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import java.lang.ref.WeakReference;
+
+import com.gargoylesoftware.htmlunit.Page;
+
 /**
  * An action triggered by a script execution but that should be executed first when the script is finished.
  * Example: when a script sets the source of an (i)frame, the request to the specified page will be first
@@ -21,10 +25,29 @@ package com.gargoylesoftware.htmlunit.javascript;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public interface PostponedAction {
+public abstract class PostponedAction {
+
+    private final WeakReference<Page> owningPageRef_; // as weak ref in case it may allow page to be GCed
+
+    /**
+     * C'tor.
+     * @param owningPage the page that initiates this action
+     */
+    public PostponedAction(final Page owningPage) {
+        owningPageRef_ = new WeakReference<Page>(owningPage);
+    }
+
+    /**
+     * Gets the owning page.
+     * @return the page that initiated this action or <code>null</code> if it has already been GCed
+     */
+    Page getOwningPage() {
+        return owningPageRef_.get();
+    }
+
     /**
      * Execute the action.
      * @throws Exception if it fails
      */
-    void execute() throws Exception;
+    public abstract void execute() throws Exception;
 }

@@ -1026,14 +1026,14 @@ public class WindowTest extends WebTestCase {
         assertEquals("A", firstPage.getTitleText());
 
         final HtmlButton buttonA = firstPage.getHtmlElementById("clickme");
-        final HtmlPage secondPage = buttonA.click();
-        assertNotNull("B", secondPage);
-        assertEquals("B", secondPage.getTitleText());
+        final HtmlPage pageB = buttonA.click();
+        assertNotNull("B", pageB);
+        assertEquals("B", pageB.getTitleText());
 
-        final HtmlButton buttonB = secondPage.getHtmlElementById("clickme");
+        final HtmlButton buttonB = pageB.getHtmlElementById("clickme");
         final HtmlPage thirdPage = buttonB.click();
-        assertNotNull("C", thirdPage);
-        assertEquals("C", thirdPage.getTitleText());
+        assertSame("Page B has lost focus", pageB, thirdPage);
+        assertEquals("C", ((HtmlPage) firstPage.getEnclosingWindow().getEnclosedPage()).getTitleText());
     }
 
     /**

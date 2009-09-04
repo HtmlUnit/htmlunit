@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -1132,17 +1131,16 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body>\n"
             + "  <form action='page1.html' name='myForm'>\n"
-            + "    <" + clickable + " id='x' onclick='submitForm();'>\n"
+            + "    <" + clickable + " id='x' onclick='submitForm();'>foo\n"
             + "  </form>\n"
             + "</body>\n"
             + "</html>";
 
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
-        final HtmlElement element = page.getHtmlElementById("x");
-        final HtmlPage secondPage = element.click();
+        getMockWebConnection().setDefaultResponse("");
+        final WebDriver driver = loadPageWithAlerts2(html);
+        driver.findElement(By.id("x")).click();
         // caution: IE7 doesn't put a trailing "?"
-        assertEquals(getDefaultUrl() + expectedFile,
-                secondPage.getWebResponse().getRequestSettings().getUrl().toExternalForm().replaceAll("\\?", ""));
+        assertEquals(getDefaultUrl() + expectedFile, driver.getCurrentUrl().replaceAll("\\?", ""));
     }
 
     /**
@@ -1258,7 +1256,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void changes_after_call_to_submit() throws Exception {
         changes_after_call_to_submit("inputSubmitReturnTrue", "page4.html?f1=v1&f2=v2");
         changes_after_call_to_submit("inputSubmitVoid", "page4.html?f1=v1&f2=v2");
@@ -1303,5 +1300,26 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         final WebDriver wd = loadPageWithAlerts2(html);
         wd.findElement(By.id(id)).click();
         assertEquals(URL_FIRST + expectedUrlSuffix, wd.getCurrentUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void submit_twice() throws Exception {
+        final String html = "<html><head><script>"
+            + "function test() {"
+            + "  var f = document.forms[0];"
+            + "  f.submit();"
+            + "  f.submit();"
+            + "}"
+            + "</script></head><body onload='test()'>"
+            + "<form action='page1.html' name='myForm'>"
+            + "  <input name='myField' value='some value'>"
+            + "</form></body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        loadPageWithAlerts2(html);
+        assertEquals(2, getMockWebConnection().getRequestCount());
     }
 }

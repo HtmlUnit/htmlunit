@@ -33,6 +33,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.json.JSONArray;
 import org.junit.AfterClass;
 import org.mortbay.jetty.Server;
@@ -65,6 +67,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  */
 public abstract class WebDriverTestCase extends WebTestCase {
 
+    private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
     static final String PROPERTY = "htmlunit.webdriver";
 
     private static WebDriver WEB_DRIVER_;
@@ -174,11 +177,20 @@ public abstract class WebDriverTestCase extends WebTestCase {
         @SuppressWarnings("unchecked")
         private void doService(final HttpServletRequest request, final HttpServletResponse response)
             throws Exception {
-            if (request.getRequestURL().toString().endsWith("/favicon.ico")) {
+            final String url = request.getRequestURL().toString();
+            if (url.endsWith("/favicon.ico")) {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 return;
             }
-            final URL requestedUrl = new URL(request.getRequestURL().toString());
+
+            if (url.contains("/delay")) {
+                final String delay = StringUtils.substringBetween(url, "/delay", "/");
+                final int ms = Integer.parseInt(delay);
+                LOG.debug("Sleeping for " + ms + " before to deliver " + url);
+                Thread.sleep(ms);
+            }
+
+            final URL requestedUrl = new URL(url);
             final WebRequestSettings settings = new WebRequestSettings(requestedUrl);
             settings.setHttpMethod(HttpMethod.valueOf(request.getMethod()));
 

@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
@@ -33,6 +35,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
@@ -73,9 +76,9 @@ public class JavaScriptEngine implements Serializable {
     private final WebClient webClient_;
     private final HtmlUnitContextFactory contextFactory_;
 
-    private static final ThreadLocal<Boolean> javaScriptRunning_ = new ThreadLocal<Boolean>();
-    private static final ThreadLocal<List<PostponedAction>> postponedActions_
-        = new ThreadLocal<List<PostponedAction>>();
+    private transient ThreadLocal<Boolean> javaScriptRunning_;
+    private transient ThreadLocal<List<PostponedAction>> postponedActions_;
+    private transient ThreadLocal<Boolean> holdPostponedActions_;
 
     /**
      * Key used to place the scope in which the execution of some JavaScript code
@@ -99,6 +102,7 @@ public class JavaScriptEngine implements Serializable {
     public JavaScriptEngine(final WebClient webClient) {
         webClient_ = webClient;
         contextFactory_ = new HtmlUnitContextFactory(webClient);
+        initTransientFields();
     }
 
     /**
@@ -482,7 +486,7 @@ public class JavaScriptEngine implements Serializable {
 
         synchronized (htmlPage) { // 2 scripts can't be executed in parallel for one page
             final Object result = function.call(context, scope, thisObject, args);
-            processPostponedActions();
+            doProcessPostponedActions();
             return result;
         }
     }
@@ -518,7 +522,7 @@ public class JavaScriptEngine implements Serializable {
                 cx.putThreadLocal(KEY_STARTING_PAGE, htmlPage_);
                 synchronized (htmlPage_) { // 2 scripts can't be executed in parallel for one page
                     final Object response = doRun(cx);
-                    processPostponedActions();
+                    doProcessPostponedActions();
                     return response;
                 }
             }
@@ -543,13 +547,21 @@ public class JavaScriptEngine implements Serializable {
         protected abstract String getSourceCode(final Context cx);
     }
 
-    private void processPostponedActions() {
+    private void doProcessPostponedActions() {
+        if (Boolean.TRUE.equals(holdPostponedActions_.get())) {
+            return;
+        }
+
         final List<PostponedAction> actions = postponedActions_.get();
         postponedActions_.set(null);
         if (actions != null) {
             try {
                 for (final PostponedAction action : actions) {
-                    action.execute();
+                    // verify that the page that registered this PostponedAction is still alive
+                    final Page owningPage = action.getOwningPage();
+                    if (owningPage != null && owningPage == owningPage.getEnclosingWindow().getEnclosedPage()) {
+                        action.execute();
+                    }
                 }
             }
             catch (final Exception e) {
@@ -595,4 +607,34 @@ public class JavaScriptEngine implements Serializable {
         LOG.info("Caught script exception", scriptException);
     }
 
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * Indicates that no postponed action should be executed.
+     */
+    public void holdPosponedActions() {
+        holdPostponedActions_.set(Boolean.TRUE);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * Process postponed actions, if any.
+     */
+    public void processPostponedActions() {
+        holdPostponedActions_.set(Boolean.FALSE);
+        doProcessPostponedActions();
+    }
+
+    /**
+     * Re-initializes transient fields when an object of this type is deserialized.
+     */
+    private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        initTransientFields();
+    }
+
+    private void initTransientFields() {
+        javaScriptRunning_ = new ThreadLocal<Boolean>();
+        postponedActions_ = new ThreadLocal<List<PostponedAction>>();
+        holdPostponedActions_ = new ThreadLocal<Boolean>();
+    }
 }

@@ -23,13 +23,15 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -46,7 +48,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class LocationTest extends WebTestCase {
+public class LocationTest extends WebDriverTestCase {
 
     /**
      * Regression test for bug 742902.
@@ -684,5 +686,23 @@ public class LocationTest extends WebTestCase {
         client.getPage(URL_FIRST);
 
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void onlick_set_location() throws Exception {
+        final String html =
+            "<html><head></head>\n"
+            + "<body>\n"
+            + "<a href='foo2.html' onclick='document.location = \"foo3.html\"'>click me</a>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        final WebDriver driver = loadPageWithAlerts2(html);
+        driver.findElement(By.tagName("a")).click();
+
+        assertEquals(new URL(getDefaultUrl(), "foo2.html").toString(), driver.getCurrentUrl());
     }
 }

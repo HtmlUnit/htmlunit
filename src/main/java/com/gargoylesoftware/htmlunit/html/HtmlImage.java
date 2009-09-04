@@ -130,7 +130,7 @@ public class HtmlImage extends HtmlElement {
             if (ok) {
                 final Event event = new Event(this, Event.TYPE_LOAD);
                 final Node scriptObject = (Node) getScriptObject();
-                final PostponedAction action = new PostponedAction() {
+                final PostponedAction action = new PostponedAction(getPage()) {
                     public void execute() throws Exception {
                         scriptObject.executeEvent(event);
                     }

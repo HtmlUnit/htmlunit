@@ -21,8 +21,8 @@ import java.util.List;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -30,13 +30,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
-import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
-import com.gargoylesoftware.htmlunit.html.SubmittableElement;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
 /**
  * A JavaScript object for a Form.
@@ -240,28 +236,18 @@ public class HTMLFormElement extends HTMLElement {
     public void jsxFunction_submit()
         throws IOException {
 
-        boolean postpone = false;
-        final Event currentEvent = getWindow().getCurrentEvent();
-        if (currentEvent != null) {
-            // Use target instead of srcElement because target is read-only,
-            // but srcElement is writable from JavaScript.
-            final SimpleScriptable src = (SimpleScriptable) currentEvent.jsxGet_target();
-            postpone = src.getDomNodeOrNull() instanceof HtmlSubmitInput;
-        }
-
-        if (postpone) {
-            final SgmlPage page = getDomNodeOrDie().getPage();
-            final JavaScriptEngine jsEngine = page.getWebClient().getJavaScriptEngine();
-            final PostponedAction action = new PostponedAction() {
-                public void execute() throws IOException {
-                    getHtmlForm().submit((SubmittableElement) null);
-                }
-            };
-            jsEngine.addPostponedAction(action);
-        }
-        else {
-            getHtmlForm().submit((SubmittableElement) null);
-        }
+        final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
+        final JavaScriptEngine jsEngine = page.getWebClient().getJavaScriptEngine();
+        final WebRequestSettings requestSettings = getHtmlForm().getWebRequestSettings(null);
+        final PostponedAction action = new PostponedAction(page) {
+            public void execute() throws IOException {
+                page.getWebClient().getPage(
+                        page.getEnclosingWindow(),
+                        page.getResolvedTarget(jsxGet_target()),
+                        requestSettings);
+            }
+        };
+        jsEngine.addPostponedAction(action);
     }
 
     /**

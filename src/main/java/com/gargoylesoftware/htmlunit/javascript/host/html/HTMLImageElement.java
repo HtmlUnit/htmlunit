@@ -22,6 +22,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import org.apache.xalan.xsltc.runtime.AttributeList;
 
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -68,8 +69,9 @@ public class HTMLImageElement extends HTMLElement {
      * @param src the <tt>src</tt> attribute value
      */
     public void jsxSet_src(final String src) {
-        getDomNodeOrDie().setAttribute("src", src);
-        getWindow().getJavaScriptEngine().addPostponedAction(new ImageOnLoadAction());
+        final HtmlElement img = getDomNodeOrDie();
+        img.setAttribute("src", src);
+        getWindow().getJavaScriptEngine().addPostponedAction(new ImageOnLoadAction(img.getPage()));
     }
 
     /**
@@ -98,7 +100,7 @@ public class HTMLImageElement extends HTMLElement {
      */
     public void jsxSet_onload(final Object onloadHandler) {
         setEventHandlerProp("onload", onloadHandler);
-        getWindow().getJavaScriptEngine().addPostponedAction(new ImageOnLoadAction());
+        getWindow().getJavaScriptEngine().addPostponedAction(new ImageOnLoadAction(getDomNodeOrDie().getPage()));
     }
 
     /**
@@ -112,7 +114,10 @@ public class HTMLImageElement extends HTMLElement {
     /**
      * Custom JavaScript postponed action which downloads the image and invokes the onload handler, if necessary.
      */
-    private class ImageOnLoadAction implements PostponedAction {
+    private class ImageOnLoadAction extends PostponedAction {
+        public ImageOnLoadAction(final Page page) {
+            super(page);
+        }
         public void execute() throws Exception {
             final HtmlImage img = (HtmlImage) getDomNodeOrNull();
             if (img != null) {

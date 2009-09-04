@@ -185,7 +185,7 @@ public class Location extends SimpleScriptable {
      */
     public void jsxSet_href(final String newLocation) throws IOException {
         final HtmlPage page = (HtmlPage) getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
-        final PostponedAction action = new PostponedAction() {
+        final PostponedAction action = new PostponedAction(page) {
 
             public void execute() throws Exception {
                 if (newLocation.startsWith(JAVASCRIPT_PREFIX)) {
