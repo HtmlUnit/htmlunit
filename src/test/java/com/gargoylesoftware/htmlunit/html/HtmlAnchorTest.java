@@ -402,11 +402,10 @@ public class HtmlAnchorTest extends WebTestCase {
     @Test
     public void testCorrectLinkTargetWhenOnclickOpensWindow() throws Exception {
         final String firstContent = "<html><head><title>First</title></head><body>\n"
-            + "<a href='"
-            + URL_SECOND
-            + "' id='clickme' onclick=\"window.open('', 'newWindow');\">X</a>\n"
+            + "<a href='page2.html' id='clickme' onclick=\"window.open('popup.html', 'newWindow');\">X</a>\n"
             + "</body></html>";
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+        final String html2 = "<html><head><title>Second</title></head><body></body></html>";
+        final String htmlPopup = "<html><head><title>Popup</title></head><body></body></html>";
 
         final WebClient client = new WebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -414,18 +413,19 @@ public class HtmlAnchorTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(new URL(URL_FIRST, "page2.html"), html2);
+        webConnection.setResponse(new URL(URL_FIRST, "popup.html"), htmlPopup);
         client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = client.getPage(URL_FIRST);
         final HtmlAnchor anchor = firstPage.getHtmlElementById("clickme");
-        final HtmlPage secondPage = anchor.click();
+        final HtmlPage pageAfterClick = anchor.click();
 
         Assert.assertEquals("Second window did not open", 2, client.getWebWindows().size());
-        assertNotSame("New Page was not returned", firstPage, secondPage);
-        Assert.assertEquals("Wrong new Page returned", "Second", secondPage.getTitleText());
-        assertSame("New Page not in correct WebWindow", firstPage.getEnclosingWindow(), secondPage
-                .getEnclosingWindow());
+        assertNotSame("New Page was not returned", firstPage, pageAfterClick);
+        Assert.assertEquals("Wrong new Page returned", "Popup", pageAfterClick.getTitleText());
+        Assert.assertEquals("Original window not updated", "Second",
+            ((HtmlPage) firstPage.getEnclosingWindow().getEnclosedPage()).getTitleText());
     }
 
     /**

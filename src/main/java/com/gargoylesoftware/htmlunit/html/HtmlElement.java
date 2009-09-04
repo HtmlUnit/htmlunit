@@ -1169,7 +1169,7 @@ public abstract class HtmlElement extends DomElement {
      * action listeners, etc.
      *
      * @param <P> the page type
-     * @return the page that occupies this element's window after the element has been clicked
+     * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
      * @exception IOException if an IO error occurs
      */
     @SuppressWarnings("unchecked")
@@ -1187,7 +1187,7 @@ public abstract class HtmlElement extends DomElement {
      * @param ctrlKey <tt>true</tt> if CTRL is pressed during the click
      * @param altKey <tt>true</tt> if ALT is pressed during the click
      * @param <P> the page type
-     * @return the page that occupies this element's window after the element has been clicked
+     * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
      * @exception IOException if an IO error occurs
      */
     @SuppressWarnings("unchecked")
@@ -1218,7 +1218,7 @@ public abstract class HtmlElement extends DomElement {
      *
      * @param event the click event used
      * @param <P> the page type
-     * @return the page that occupies this element's window after the element has been clicked
+     * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
      * @exception IOException if an IO error occurs
      */
     @SuppressWarnings("unchecked")
@@ -1243,10 +1243,10 @@ public abstract class HtmlElement extends DomElement {
             currentPage = scriptResult.getNewPage();
         }
 
-        if (stateUpdated || event.isAborted(scriptResult)) {
-            return (P) currentPage;
+        if (!stateUpdated && !event.isAborted(scriptResult)) {
+            doClickAction(currentPage);
         }
-        return (P) doClickAction(currentPage);
+        return (P) getPage().getWebClient().getCurrentWindow().getEnclosedPage();
     }
 
     /**
