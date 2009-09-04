@@ -181,11 +181,25 @@ public abstract class WebDriverTestCase extends WebTestCase {
             final URL requestedUrl = new URL(request.getRequestURL().toString());
             final WebRequestSettings settings = new WebRequestSettings(requestedUrl);
             settings.setHttpMethod(HttpMethod.valueOf(request.getMethod()));
+
+            // copy headers
             for (final Enumeration<String> en = request.getHeaderNames(); en.hasMoreElements();) {
                 final String headerName = en.nextElement();
                 final String headerValue = request.getHeader(headerName);
                 settings.setAdditionalHeader(headerName, headerValue);
             }
+
+            // copy parameters
+            final List<NameValuePair> requestParameters = new ArrayList<NameValuePair>();
+            for (final Enumeration<String> paramNames = request.getParameterNames(); paramNames.hasMoreElements();) {
+                final String name = paramNames.nextElement();
+                final String[] values = request.getParameterValues(name);
+                for (final String value : values) {
+                    requestParameters.add(new NameValuePair(name, value));
+                }
+            }
+            settings.setRequestParameters(requestParameters);
+
             final WebResponse resp = MockConnection_.getResponse(settings);
 
             // write WebResponse to HttpServletResponse
@@ -221,7 +235,14 @@ public abstract class WebDriverTestCase extends WebTestCase {
         return driver;
     }
 
-    private List<String> getCollectedAlerts(final WebDriver driver) throws Exception {
+    /**
+     * Gets the alerts collected by the driver.
+     * Note: it currently works only if no new page has been loaded in the window
+     * @param driver the driver
+     * @return the collected alerts
+     * @throws Exception in case of problem
+     */
+    protected List<String> getCollectedAlerts(final WebDriver driver) throws Exception {
         final List<String> collectedAlerts = new ArrayList<String>();
         if (driver instanceof HtmlUnitDriver) {
             final Object result = ((JavascriptExecutor) driver) .executeScript("return window.__huCatchedAlerts");

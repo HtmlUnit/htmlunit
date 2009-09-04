@@ -14,30 +14,21 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.io.IOException;
-import java.io.Writer;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.Servlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.httpclient.NameValuePair;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebServerTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
 
 /**
  * Tests for {@link HtmlSubmitInput}.
@@ -48,7 +39,7 @@ import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HtmlSubmitInputTest extends WebServerTestCase {
+public class HtmlSubmitInputTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -62,17 +53,16 @@ public class HtmlSubmitInputTest extends WebServerTestCase {
             + "<input type='suBMit' name='button' value='foo'/>\n"
             + "<input type='submit' name='anotherButton' value='foo'/>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
-        final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlForm form = page.getHtmlElementById("form1");
+        final WebDriver wd = loadPageWithAlerts2(html);
 
-        final HtmlSubmitInput submitInput = form.getInputByName("button");
-        final HtmlPage secondPage = submitInput.click();
-        assertEquals("foo", secondPage.getTitleText());
+        final WebElement button = wd.findElement(By.name("button"));
+        button.click();
+
+        assertEquals("foo", wd.getTitle());
 
         assertEquals(Collections.singletonList(new NameValuePair("button", "foo")),
-            webConnection.getLastParameters());
+            getMockWebConnection().getLastParameters());
     }
 
     /**
@@ -82,19 +72,17 @@ public class HtmlSubmitInputTest extends WebServerTestCase {
     public void testClick_onClick() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
-            + "<form id='form1' onSubmit='alert(\"bar\")'>\n"
+            + "<form id='form1' onSubmit='alert(\"bar\"); return false;'>\n"
             + "    <input type='submit' name='button' value='foo' onClick='alert(\"foo\")'/>\n"
             + "</form></body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
 
-        final HtmlForm form = page.getHtmlElementById("form1");
-        final HtmlSubmitInput submitInput = form.getInputByName("button");
+        final WebDriver wd = loadPageWithAlerts2(html);
 
-        submitInput.click();
+        final WebElement button = wd.findElement(By.name("button"));
+        button.click();
 
         final String[] expectedAlerts = {"foo", "bar"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(expectedAlerts, getCollectedAlerts(wd));
     }
 
     /**
@@ -102,28 +90,22 @@ public class HtmlSubmitInputTest extends WebServerTestCase {
      */
     @Test
     public void testClick_onClick_JavascriptReturnsTrue() throws Exception {
-        final String firstHtml
+        final String html
             = "<html><head><title>First</title></head><body>\n"
-            + "<form name='form1' method='get' action='" + URL_SECOND + "'>\n"
+            + "<form name='form1' method='get' action='foo.html'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button1'"
             + "onclick='return true'/></form>\n"
             + "</body></html>";
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient client = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "foo.html"), secondHtml);
 
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstHtml);
-        webConnection.setDefaultResponse(secondHtml);
+        final WebDriver wd = loadPageWithAlerts2(html);
 
-        client.setWebConnection(webConnection);
+        final WebElement button = wd.findElement(By.id("button1"));
+        button.click();
 
-        final HtmlPage firstPage = client.getPage(URL_FIRST);
-        final HtmlSubmitInput input = firstPage.getHtmlElementById("button1");
-        final HtmlPage secondPage = input.click();
-        assertEquals("Second", secondPage.getTitleText());
+        assertEquals("Second", wd.getTitle());
     }
 
     /**
@@ -141,7 +123,7 @@ public class HtmlSubmitInputTest extends WebServerTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "<form action='" + URL_SECOND + "'>\n"
+            + "<form action='foo.html'>\n"
             + "  <input type='submit' id='myId'>\n"
             + "</form>\n"
             + "</body></html>";
@@ -187,13 +169,12 @@ public class HtmlSubmitInputTest extends WebServerTestCase {
             + "<input id='myInput' type='submit' onclick='alert(1)'>\n"
             + "</body></html>";
 
+        final WebDriver wd = loadPageWithAlerts2(html);
         final String[] expectedAlerts = {"1"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
-        final HtmlSubmitInput input = page.getHtmlElementById("myInput");
+        final WebElement input = wd.findElement(By.id("myInput"));
         input.click();
 
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(expectedAlerts, getCollectedAlerts(wd));
     }
 
     /**
@@ -223,65 +204,27 @@ public class HtmlSubmitInputTest extends WebServerTestCase {
      */
     @Test
     public void doubleSubmission() throws Exception {
-        DoubleSubmissionCounterServlet.COUNT_ = 0;
-        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
-        servlets.put("/main", DoubleSubmissionMainServlet.class);
-        servlets.put("/test", DoubleSubmissionCounterServlet.class);
-        startWebServer("./", null, servlets);
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script type='text/javascript'>\n"
+            + "    function submitForm() {\n"
+            + "      document.deliveryChannelForm.submitBtn.disabled = true;\n"
+            + "      document.deliveryChannelForm.submit();\n"
+            + "    }\n"
+            + "  </script>"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form action='test' name='deliveryChannelForm'>\n"
+            + "    <input name='submitBtn' type='submit' value='Save' title='Save' onclick='submitForm();'>\n"
+            + "  </form>"
+            + "</body>\n"
+            + "</html>";
 
-        final WebClient client = getWebClient();
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/main");
-        page.<HtmlSubmitInput>getFirstByXPath("//input").click();
-        assertEquals(1, DoubleSubmissionCounterServlet.COUNT_);
-    }
+        getMockWebConnection().setDefaultResponse("");
+        final WebDriver wd = loadPageWithAlerts2(html);
+        final WebElement input = wd.findElement(By.name("submitBtn"));
+        input.click();
 
-    /**
-     * Servlet for {@link #doubleSubmission()}.
-     */
-    public static class DoubleSubmissionMainServlet extends ServletContentWrapper {
-        private static final long serialVersionUID = -4386757311850462720L;
-
-        /**
-         * Creates an instance.
-         */
-        public DoubleSubmissionMainServlet() {
-            super("<html>\n"
-                    + "<head>\n"
-                    + "  <script type='text/javascript'>\n"
-                    + "    function submitForm() {\n"
-                    + "      document.deliveryChannelForm.submitBtn.disabled = true;\n"
-                    + "      document.deliveryChannelForm.submit();\n"
-                    + "    }\n"
-                    + "  </script>"
-                    + "</head>\n"
-                    + "<body>\n"
-                    + "  <form action='test' name='deliveryChannelForm'>\n"
-                    + "    <input name='submitBtn' type='submit' value='Save' title='Save' onclick='submitForm();'>\n"
-                    + "  </form>"
-                    + "</body>\n"
-                    + "</html>");
-        }
-    }
-
-    /**
-     * Servlet for {@link #doubleSubmission()}.
-     */
-    public static class DoubleSubmissionCounterServlet extends HttpServlet {
-
-        private static final long serialVersionUID = 4094440276952531020L;
-
-        private static int COUNT_;
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-            COUNT_++;
-            response.setContentType("text/html");
-            final Writer writer = response.getWriter();
-            writer.write("<html><body>Hello</body></html>");
-            writer.close();
-        }
+        assertEquals(2, getMockWebConnection().getRequestCount());
     }
 }
