@@ -221,11 +221,10 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * {@inheritDoc}
      */
     @Override
-    protected Page doClickAction(final Page defaultPage) throws IOException {
+    protected void doClickAction() throws IOException {
         if (!isSelected()) {
-            return setSelected(true);
+            setSelected(true);
         }
-        return defaultPage;
     }
 
     /**

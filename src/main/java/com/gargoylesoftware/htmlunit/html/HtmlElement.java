@@ -1228,23 +1228,20 @@ public abstract class HtmlElement extends DomElement {
         }
 
         final SgmlPage page = getPage();
+        // may be different from page when working with "orphaned pages"
+        // (ex: clicking a link in a page that is not active anymore)
+        final Page contentPage = page.getEnclosingWindow().getEnclosedPage();
 
         boolean stateUpdated = false;
         if (isStateUpdateFirst()) {
-            doClickAction(page);
+            doClickAction();
             stateUpdated = true;
         }
         final ScriptResult scriptResult = fireEvent(event);
-        final Page currentPage;
-        if (scriptResult == null) {
-            currentPage = page;
-        }
-        else {
-            currentPage = scriptResult.getNewPage();
-        }
 
-        if (!stateUpdated && !event.isAborted(scriptResult)) {
-            doClickAction(currentPage);
+        final boolean pageAlreadyChanged = contentPage != page.getEnclosingWindow().getEnclosedPage();
+        if (!pageAlreadyChanged && !stateUpdated && !event.isAborted(scriptResult)) {
+            doClickAction();
         }
         return (P) getPage().getWebClient().getCurrentWindow().getEnclosedPage();
     }
@@ -1311,12 +1308,10 @@ public abstract class HtmlElement extends DomElement {
      * <p>The default implementation returns the current page. Subclasses requiring different
      * behavior (like {@link HtmlSubmitInput}) will override this method.</p>
      *
-     * @param defaultPage the default page to return if the action does not load a new page
-     * @return the page that is currently loaded after execution of this method
      * @throws IOException if an IO error occurs
      */
-    protected Page doClickAction(final Page defaultPage) throws IOException {
-        return defaultPage;
+    protected void doClickAction() throws IOException {
+        // nothing
     }
 
     /**

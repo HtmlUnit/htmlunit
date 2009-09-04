@@ -21,7 +21,6 @@ import java.util.Map;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.lang.StringEscapeUtils;
 
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
@@ -33,6 +32,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class HtmlSubmitInput extends HtmlInput {
 
@@ -66,22 +66,14 @@ public class HtmlSubmitInput extends HtmlInput {
      * requiring different behavior (like {@link HtmlSubmitInput}) will override this
      * method.
      *
-     * @param defaultPage the default page to return if the action does not
-     * load a new page.
-     * @return the page that is currently loaded after execution of this method
      * @throws IOException if an IO error occurred
      */
     @Override
-    protected Page doClickAction(final Page defaultPage) throws IOException {
-        final HtmlPage page = (HtmlPage) getPage();
-        if (page != defaultPage) {
-            return defaultPage;
-        }
+    protected void doClickAction() throws IOException {
         final HtmlForm form = getEnclosingForm();
         if (form != null) {
-            return form.submit(this);
+            form.submit(this);
         }
-        return super.doClickAction(defaultPage);
     }
 
     /**

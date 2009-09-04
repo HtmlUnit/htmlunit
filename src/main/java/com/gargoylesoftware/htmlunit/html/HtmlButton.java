@@ -22,7 +22,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
@@ -71,20 +70,18 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * {@inheritDoc}
      */
     @Override
-    protected Page doClickAction(final Page defaultPage) throws IOException {
+    protected void doClickAction() throws IOException {
         final String type = getTypeAttribute().toLowerCase();
 
         final HtmlForm form = getEnclosingForm();
         if (form != null) {
             if (type.equals("submit")) {
-                return form.submit(this);
+                form.submit(this);
             }
             else if (type.equals("reset")) {
-                return form.reset();
+                form.reset();
             }
         }
-
-        return defaultPage;
     }
 
     /**

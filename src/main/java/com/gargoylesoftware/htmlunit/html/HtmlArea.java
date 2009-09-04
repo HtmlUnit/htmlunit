@@ -26,7 +26,6 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -67,7 +66,7 @@ public class HtmlArea extends HtmlElement {
      * {@inheritDoc}
      */
     @Override
-    protected Page doClickAction(final Page defaultPage) throws IOException {
+    protected void doClickAction() throws IOException {
         final HtmlPage enclosingPage = (HtmlPage) getPage();
         final WebClient webClient = enclosingPage.getWebClient();
 
@@ -75,8 +74,9 @@ public class HtmlArea extends HtmlElement {
         if (href != null && href.length() > 0) {
             final HtmlPage page = (HtmlPage) getPage();
             if (TextUtil.startsWithIgnoreCase(href, JAVASCRIPT_PREFIX)) {
-                return page.executeJavaScriptIfPossible(
-                    href, "javascript url", getStartLineNumber()).getNewPage();
+                page.executeJavaScriptIfPossible(
+                    href, "javascript url", getStartLineNumber());
+                return;
             }
             final URL url;
             try {
@@ -88,12 +88,11 @@ public class HtmlArea extends HtmlElement {
             }
             final WebRequestSettings settings = new WebRequestSettings(url);
             final WebWindow webWindow = enclosingPage.getEnclosingWindow();
-            return webClient.getPage(
+            webClient.getPage(
                     webWindow,
                     enclosingPage.getResolvedTarget(getTargetAttribute()),
                     settings);
         }
-        return defaultPage;
     }
 
     /**

@@ -407,12 +407,10 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Performs the click action on the enclosing A tag (if any).
-     * @param defaultPage the default page to return if the action does not load a new page
-     * @return the page that is currently loaded after execution of this method
      * @throws IOException if an IO error occurred
      */
     @Override
-    protected Page doClickAction(final Page defaultPage) throws IOException {
+    protected void doClickAction() throws IOException {
         if (getUseMapAttribute() != ATTRIBUTE_NOT_DEFINED) {
             // remove initial '#'
             final String mapName = getUseMapAttribute().substring(1);
@@ -422,21 +420,22 @@ public class HtmlImage extends HtmlElement {
                 if (element instanceof HtmlArea) {
                     final HtmlArea area = (HtmlArea) element;
                     if (area.containsPoint(lastClickX_, lastClickY_)) {
-                        return area.doClickAction(defaultPage);
+                        area.doClickAction();
+                        return;
                     }
                 }
             }
-            return super.doClickAction(defaultPage);
         }
         final HtmlAnchor anchor = (HtmlAnchor) getEnclosingElement("a");
         if (anchor == null) {
-            return super.doClickAction(defaultPage);
+            return;
         }
         if (getIsmapAttribute() != ATTRIBUTE_NOT_DEFINED) {
             final String suffix = "?" + lastClickX_ + "," + lastClickY_;
-            return anchor.doClickAction(defaultPage, suffix);
+            anchor.doClickAction(suffix);
+            return;
         }
-        return anchor.doClickAction(defaultPage);
+        anchor.doClickAction();
     }
 
     /**

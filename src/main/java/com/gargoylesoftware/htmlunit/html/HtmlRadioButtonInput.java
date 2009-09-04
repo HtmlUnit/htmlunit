@@ -130,15 +130,11 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * Override of default clickAction that makes this radio button the selected
      * one when it is clicked.
      *
-     * @param defaultPage the default page to return if the action does not
-     * load a new page.
-     * @return the page that is currently loaded after execution of this method
      * @throws IOException if an IO error occurred
      */
     @Override
-    protected Page doClickAction(final Page defaultPage) throws IOException {
+    protected void doClickAction() throws IOException {
         setChecked(true);
-        return defaultPage;
     }
 
     /**

@@ -62,26 +62,25 @@ public class HtmlAnchor extends HtmlElement {
     }
 
     /**
-     * Same as {@link #doClickAction(Page)}, except that it accepts an href suffix, needed when a click is
+     * Same as {@link #doClickAction()}, except that it accepts an href suffix, needed when a click is
      * performed on an image map to pass information on the click position.
      *
-     * @param defaultPage the default page to return if the action does not load a new page
      * @param hrefSuffix the suffix to add to the anchor's href attribute (for instance coordinates from an image map)
-     * @return the page that is currently loaded after execution of this method
      * @throws IOException if an IO error occurs
      */
-    protected Page doClickAction(final Page defaultPage, final String hrefSuffix) throws IOException {
+    protected void doClickAction(final String hrefSuffix) throws IOException {
         final String href = getHrefAttribute() + hrefSuffix;
         if (LOG.isDebugEnabled()) {
-            final String w = defaultPage.getEnclosingWindow().getName();
+            final String w = getPage().getEnclosingWindow().getName();
             LOG.debug("do click action in window '" + w + "', using href '" + href + "'");
         }
         if (href.length() == 0) {
-            return defaultPage;
+            return;
         }
         final HtmlPage page = (HtmlPage) getPage();
         if (TextUtil.startsWithIgnoreCase(href, JAVASCRIPT_PREFIX)) {
-            return page.executeJavaScriptIfPossible(href, "javascript url", getStartLineNumber()).getNewPage();
+            page.executeJavaScriptIfPossible(href, "javascript url", getStartLineNumber());
+            return;
         }
         final URL url = page.getFullyQualifiedUrl(href);
         final WebRequestSettings wrs = new WebRequestSettings(url);
@@ -93,7 +92,7 @@ public class HtmlAnchor extends HtmlElement {
                     + "', using the originating URL "
                     + page.getWebResponse().getRequestSettings().getUrl());
         }
-        return page.getWebClient().getPage(
+        page.getWebClient().getPage(
                 page.getEnclosingWindow(),
                 page.getResolvedTarget(getTargetAttribute()),
                 wrs);
@@ -105,20 +104,11 @@ public class HtmlAnchor extends HtmlElement {
      * behavior of clicking the element. For this anchor element, the default behavior is
      * to open the HREF page, or execute the HREF if it is a <tt>javascript:</tt> URL.
      *
-     * @param defaultPage the default page to return if the action does not load a new page
-     * @return the page that is currently loaded after execution of this method
      * @throws IOException if an IO error occurs
      */
     @Override
-    protected Page doClickAction(final Page defaultPage) throws IOException {
-        final SgmlPage page = getPage();
-        final boolean onClickLoadedNewPageInCurrentWindow =
-            defaultPage != page
-            && defaultPage.getEnclosingWindow() == page.getEnclosingWindow();
-        if (onClickLoadedNewPageInCurrentWindow) {
-            return defaultPage;
-        }
-        return doClickAction(defaultPage, "");
+    protected void doClickAction() throws IOException {
+        doClickAction("");
     }
 
     /**
