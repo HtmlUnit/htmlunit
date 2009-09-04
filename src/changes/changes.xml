@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes">
+            <action type="remove" dev="asashour">
+                BrowserVersion: remove deprecated constructors.
+            </action>
             <action type="update" dev="mguillem">
                 Update JavaDoc of HtmlElement.click methods to reflect what already happens: click returns
                 the page in the WebClient's current window.

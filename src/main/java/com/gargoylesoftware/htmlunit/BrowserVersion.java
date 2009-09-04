@@ -57,8 +57,6 @@ public class BrowserVersion implements Serializable {
     private String systemLanguage_ = LANGUAGE_ENGLISH_US;
     private String userAgent_;
     private String userLanguage_ = LANGUAGE_ENGLISH_US;
-    private String javaScriptVersion_;
-    private float javaScriptVersionNumeric_;
     private float browserVersionNumeric_;
     private Set<PluginConfiguration> plugins_ = new HashSet<PluginConfiguration>();
     private final List<BrowserVersionFeatures> features_ = new ArrayList<BrowserVersionFeatures>();
@@ -86,23 +84,23 @@ public class BrowserVersion implements Serializable {
     public static final BrowserVersion FIREFOX_2 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows; en-US)",
         "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.4) Gecko/20070515 Firefox/2.0.0.4",
-        "1.2", 2, "FF2", null);
+        2, "FF2", null);
 
     /** Firefox 3. */
     public static final BrowserVersion FIREFOX_3 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows; en-US)",
         "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.1) Gecko/2008070208 Firefox/3.0.1",
-        "1.2", 3, "FF3", null);
+        3, "FF3", null);
 
     /** Internet Explorer 6. */
     public static final BrowserVersion INTERNET_EXPLORER_6 = new BrowserVersion(
         INTERNET_EXPLORER, "4.0 (compatible; MSIE 6.0b; Windows 98)",
-        "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98)", "1.2", 6, "IE6", null);
+        "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98)", 6, "IE6", null);
 
     /** Internet Explorer 7. */
     public static final BrowserVersion INTERNET_EXPLORER_7 = new BrowserVersion(
         INTERNET_EXPLORER, "4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322)",
-        "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322)", "1.2", 7, "IE7", null);
+        "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322)", 7, "IE7", null);
 
     /** The default browser version. */
     private static BrowserVersion DefaultBrowserVersion_ = INTERNET_EXPLORER_7;
@@ -127,51 +125,13 @@ public class BrowserVersion implements Serializable {
      * @param applicationName the name of the application
      * @param applicationVersion the version string of the application
      * @param userAgent the user agent string that will be sent to the server
-     * @param javaScriptVersion the version of JavaScript
-     * @param browserVersionNumeric the floating number version of the browser
-     * @deprecated as of 2.5, use {@link #BrowserVersion(String, String, String, float)}
-     */
-    @Deprecated
-    public BrowserVersion(final String applicationName, final String applicationVersion,
-        final String userAgent, final String javaScriptVersion, final float browserVersionNumeric) {
-
-        this(applicationName, applicationVersion, userAgent, javaScriptVersion,
-                browserVersionNumeric, applicationName + browserVersionNumeric, null);
-    }
-
-    /**
-     * Instantiates one.
-     *
-     * @param applicationName the name of the application
-     * @param applicationVersion the version string of the application
-     * @param userAgent the user agent string that will be sent to the server
      * @param browserVersionNumeric the floating number version of the browser
      */
     public BrowserVersion(final String applicationName, final String applicationVersion,
         final String userAgent, final float browserVersionNumeric) {
 
-        this(applicationName, applicationVersion, userAgent, null,
+        this(applicationName, applicationVersion, userAgent,
                 browserVersionNumeric, applicationName + browserVersionNumeric, null);
-    }
-
-    /**
-     * Instantiates one.
-     *
-     * @param applicationName the name of the application
-     * @param applicationVersion the version string of the application
-     * @param userAgent the user agent string that will be sent to the server
-     * @param javaScriptVersion the version of JavaScript
-     * @param browserVersionNumeric the floating number version of the browser
-     * @param features the browser features
-     * @deprecated as of 2.5, use {@link #BrowserVersion(String, String, String, float, BrowserVersionFeatures[])}
-     */
-    @Deprecated
-    public BrowserVersion(final String applicationName, final String applicationVersion,
-        final String userAgent, final String javaScriptVersion, final float browserVersionNumeric,
-        final BrowserVersionFeatures[] features) {
-
-        this(applicationName, applicationVersion, userAgent, javaScriptVersion,
-                browserVersionNumeric, applicationName + browserVersionNumeric, features);
     }
 
     /**
@@ -187,7 +147,7 @@ public class BrowserVersion implements Serializable {
         final String userAgent, final float browserVersionNumeric,
         final BrowserVersionFeatures[] features) {
 
-        this(applicationName, applicationVersion, userAgent, null,
+        this(applicationName, applicationVersion, userAgent,
                 browserVersionNumeric, applicationName + browserVersionNumeric, features);
     }
 
@@ -203,13 +163,12 @@ public class BrowserVersion implements Serializable {
      * @param features the browser features
      */
     private BrowserVersion(final String applicationName, final String applicationVersion,
-        final String userAgent, final String javaScriptVersion, final float browserVersionNumeric,
+        final String userAgent, final float browserVersionNumeric,
         final String nickname, final BrowserVersionFeatures[] features) {
 
         applicationName_ = applicationName;
         setApplicationVersion(applicationVersion);
         userAgent_ = userAgent;
-        setJavaScriptVersion(javaScriptVersion);
         browserVersionNumeric_ = browserVersionNumeric;
         nickname_ = nickname;
         if (features != null) {
@@ -377,16 +336,6 @@ public class BrowserVersion implements Serializable {
     }
 
     /**
-     * Returns the version of JavaScript used by the browser, for example "1.2".
-     * @return the version of JavaScript used by the browser
-     * @deprecated As of 2.5, with no replacement
-     */
-    @Deprecated
-    public String getJavaScriptVersion() {
-        return javaScriptVersion_;
-    }
-
-    /**
      * @param applicationCodeName the applicationCodeName to set
      */
     public void setApplicationCodeName(final String applicationCodeName) {
@@ -426,21 +375,6 @@ public class BrowserVersion implements Serializable {
      */
     public void setCpuClass(final String cpuClass) {
         cpuClass_ = cpuClass;
-    }
-
-    /**
-     * @param javaScriptVersion the javaScriptVersion to set
-     * @deprecated As of 2.5, with no replacement
-     */
-    @Deprecated
-    public void setJavaScriptVersion(final String javaScriptVersion) {
-        javaScriptVersion_ = javaScriptVersion;
-        if (javaScriptVersion != null) {
-            javaScriptVersionNumeric_ = Float.parseFloat(javaScriptVersion);
-        }
-        else {
-            javaScriptVersionNumeric_ = 0;
-        }
     }
 
     /**
@@ -490,15 +424,6 @@ public class BrowserVersion implements Serializable {
      */
     public float getBrowserVersionNumeric() {
         return browserVersionNumeric_;
-    }
-
-    /**
-     * @return the javaScriptVersionNumeric
-     * @deprecated As of 2.5, with no replacement
-     */
-    @Deprecated
-    public float getJavaScriptVersionNumeric() {
-        return javaScriptVersionNumeric_;
     }
 
     /**
