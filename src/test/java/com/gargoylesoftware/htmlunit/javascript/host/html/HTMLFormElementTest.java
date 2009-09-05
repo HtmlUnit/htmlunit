@@ -24,6 +24,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -36,7 +37,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 
@@ -182,13 +182,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     public void testActionProperty() throws Exception {
-        final String jsProperty = "action";
-        final String htmlProperty = "action";
-        final String oldValue = "http://foo.com";
-        final String newValue = "mailto:me@bar.com";
-
-        final HtmlForm form = doTestProperty(jsProperty, htmlProperty, oldValue, newValue);
-        assertEquals(newValue, form.getActionAttribute());
+        doTestProperty("action", "action", "http://foo.com/", "mailto:me@bar.com");
     }
 
     /**
@@ -196,13 +190,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     public void testNameProperty() throws Exception {
-        final String jsProperty = "name";
-        final String htmlProperty = "name";
-        final String oldValue = "myForm";
-        final String newValue = "testForm";
-
-        final HtmlForm form = doTestProperty(jsProperty, htmlProperty, oldValue, newValue);
-        assertEquals(newValue, form.getNameAttribute());
+        doTestProperty("name", "name", "myForm", "testForm");
     }
 
     /**
@@ -210,13 +198,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     public void testEncodingProperty() throws Exception {
-        final String jsProperty = "encoding";
-        final String htmlProperty = "enctype";
-        final String oldValue = "myEncoding";
-        final String newValue = "newEncoding";
-
-        final HtmlForm form = doTestProperty(jsProperty, htmlProperty, oldValue, newValue);
-        assertEquals(newValue, form.getEnctypeAttribute());
+        doTestProperty("encoding", "enctype", "myEncoding", "newEncoding");
     }
 
     /**
@@ -224,13 +206,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     public void testMethodProperty() throws Exception {
-        final String jsProperty = "method";
-        final String htmlProperty = "method";
-        final String oldValue = "get";
-        final String newValue = "post";
-
-        final HtmlForm form = doTestProperty(jsProperty, htmlProperty, oldValue, newValue);
-        assertEquals(newValue, form.getMethodAttribute());
+        doTestProperty("method", "method", "get", "post");
     }
 
     /**
@@ -238,28 +214,17 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     public void testTargetProperty() throws Exception {
-        final String jsProperty = "target";
-        final String htmlProperty = "target";
-        final String oldValue = "_top";
-        final String newValue = "_parent";
-
-        final HtmlForm form = doTestProperty(jsProperty, htmlProperty, oldValue, newValue);
-        assertEquals(newValue, form.getTargetAttribute());
+        doTestProperty("target", "target", "_top", "_parent");
     }
 
-    private HtmlForm doTestProperty(
-            final String jsProperty,
-            final String htmlProperty,
-            final String oldValue,
-            final String newValue)
-        throws
-            Exception {
+    private void doTestProperty(final String jsProperty, final String htmlProperty,
+            final String oldValue, final String newValue) throws Exception {
 
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    alert(document.forms[0]." + jsProperty + ");\n"
-            + "    document.forms[0]." + jsProperty + "='" + newValue + "'\n"
+            + "    document.forms[0]." + jsProperty + "='" + newValue + "';\n"
             + "    alert(document.forms[0]." + jsProperty + ");\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
@@ -270,9 +235,10 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "</body></html>";
 
         setExpectedAlerts(oldValue, newValue);
-        final HtmlPage page = loadPageWithAlerts(html);
+        final WebDriver wd = loadPageWithAlerts2(html);
 
-        return page.getForms().get(0);
+        final WebElement form = wd.findElement(By.xpath("//form"));
+        assertEquals(newValue, form.getAttribute(htmlProperty));
     }
 
     /**
