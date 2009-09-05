@@ -101,7 +101,10 @@ public class MouseEvent extends UIEvent {
     public MouseEvent(final DomNode domNode, final String type, final boolean shiftKey,
         final boolean ctrlKey, final boolean altKey, final int button) {
 
-        super(domNode, type, shiftKey, ctrlKey, altKey);
+        super(domNode, type);
+        setShiftKey(shiftKey);
+        setCtrlKey(ctrlKey);
+        setAltKey(altKey);
 
         if (button != BUTTON_LEFT && button != BUTTON_MIDDLE && button != BUTTON_RIGHT) {
             throw new IllegalArgumentException("Invalid button code: " + button);

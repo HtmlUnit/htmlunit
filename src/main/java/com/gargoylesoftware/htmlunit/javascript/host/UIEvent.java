@@ -22,6 +22,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public class UIEvent extends Event {
 
@@ -42,27 +43,9 @@ public class UIEvent extends Event {
      *
      * @param domNode the DOM node that triggered the event
      * @param type the event type
-     * @param shiftKey true if SHIFT is pressed
-     * @param ctrlKey true if CTRL is pressed
-     * @param altKey true if ALT is pressed
      */
-    public UIEvent(final DomNode domNode, final String type, final boolean shiftKey, final boolean ctrlKey,
-        final boolean altKey) {
-        super(domNode, type, shiftKey, ctrlKey, altKey);
-    }
-
-    /**
-     * Creates a new event instance for a keypress event.
-     * @param domNode the DOM node that triggered the event
-     * @param type the event type
-     * @param keyCode the key code associated with the event
-     * @param shiftKey true if SHIFT is pressed
-     * @param ctrlKey true if CTRL is pressed
-     * @param altKey true if ALT is pressed
-     */
-    public UIEvent(final DomNode domNode, final String type, final int keyCode,
-            final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        super(domNode, type, keyCode, shiftKey, ctrlKey, altKey);
+    public UIEvent(final DomNode domNode, final String type) {
+        super(domNode, type);
     }
 
     /**

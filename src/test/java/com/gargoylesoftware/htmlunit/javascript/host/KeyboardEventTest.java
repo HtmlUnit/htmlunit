@@ -48,4 +48,23 @@ public class KeyboardEventTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "exception", FF = { "0-0", "undefined-undefined" })
+    public void keyCode() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var keyEvent = document.createEvent('KeyEvents');\n"
+            + "      var mouseEvent = document.createEvent('MouseEvents');\n"
+            + "      alert(keyEvent.keyCode + '-' + keyEvent.charCode);\n"
+            + "      alert(mouseEvent.keyCode + '-' + mouseEvent.charCode);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

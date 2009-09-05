@@ -207,15 +207,15 @@ public class EventTest extends WebTestCase {
      */
     @Test
     public void testEventOnKeyDown() throws Exception {
-        final String content
+        final String html
             = "<html><head></head><body>\n"
-            + "<button type='button' id='clickId'/>\n"
+            + "<button type='button' id='clickId'>Click Me</button>\n"
             + "<script>\n"
             + "function handler(_e) {\n"
             + "  var e = _e ? _e : window.event;\n"
-            + "if (e.keyCode == 65)\n"
+            + "  if (e.keyCode == 65)\n"
             + "    alert('pass');\n"
-            + "else\n"
+            + "  else\n"
             + "    alert('fail:' + e.keyCode);\n"
             + "}\n"
             + "document.getElementById('clickId').onkeydown = handler;\n"
@@ -223,7 +223,7 @@ public class EventTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
         final HtmlElement element = page.getHtmlElementById("clickId");
         element.type('A');
         element.type('B');

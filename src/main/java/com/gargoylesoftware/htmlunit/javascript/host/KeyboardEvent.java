@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
+
 /**
  * JavaScript object representing a Keyboard Event.
  * For general information on which properties and functions
@@ -373,6 +375,33 @@ public class KeyboardEvent extends UIEvent {
     /** Constant for DOM_VK_NUMPAD9. */
     public static final int DOM_VK_NUMPAD9 = 105;
 
+    private int charCode_;
+
+    /**
+     * Creates a new Keyboard instance.
+     */
+    public KeyboardEvent() {
+        // Empty.
+    }
+
+    /**
+     * Creates a new event instance for a keypress event.
+     * @param domNode the DOM node that triggered the event
+     * @param type the event type
+     * @param keyCode the key code associated with the event
+     * @param shiftKey true if SHIFT is pressed
+     * @param ctrlKey true if CTRL is pressed
+     * @param altKey true if ALT is pressed
+     */
+    public KeyboardEvent(final DomNode domNode, final String type, final int keyCode,
+            final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+        super(domNode, type);
+        setKeyCode(keyCode);
+        setShiftKey(shiftKey);
+        setCtrlKey(ctrlKey);
+        setAltKey(altKey);
+    }
+
     /**
      * Implementation of the DOM Level 3 Event method for initializing the key event.
      *
@@ -404,6 +433,14 @@ public class KeyboardEvent extends UIEvent {
         setAltKey(altKey);
         setShiftKey(shiftKey);
         setKeyCode(keyCode);
-        //TODO: what about charCode
+        charCode_ = charCode;
+    }
+
+    /**
+     * Returns the char code associated with the event.
+     * @return the char code associated with the event
+     */
+    public Object jsxGet_charCode() {
+        return charCode_;
     }
 }

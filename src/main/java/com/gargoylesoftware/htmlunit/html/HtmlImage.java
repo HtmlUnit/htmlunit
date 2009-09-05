@@ -131,6 +131,7 @@ public class HtmlImage extends HtmlElement {
                 final Event event = new Event(this, Event.TYPE_LOAD);
                 final Node scriptObject = (Node) getScriptObject();
                 final PostponedAction action = new PostponedAction(getPage()) {
+                    @Override
                     public void execute() throws Exception {
                         scriptObject.executeEvent(event);
                     }

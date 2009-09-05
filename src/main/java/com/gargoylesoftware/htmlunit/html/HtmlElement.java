@@ -52,8 +52,8 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
+import com.gargoylesoftware.htmlunit.javascript.host.KeyboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.UIEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 /**
@@ -467,10 +467,10 @@ public abstract class HtmlElement extends DomElement {
             focus();
         }
 
-        final Event keyDown = new UIEvent(this, Event.TYPE_KEY_DOWN, c, shiftKey, ctrlKey, altKey);
+        final Event keyDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, c, shiftKey, ctrlKey, altKey);
         final ScriptResult keyDownResult = fireEvent(keyDown);
 
-        final Event keyPress = new UIEvent(this, Event.TYPE_KEY_PRESS, c, shiftKey, ctrlKey, altKey);
+        final Event keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, c, shiftKey, ctrlKey, altKey);
         final ScriptResult keyPressResult = fireEvent(keyPress);
 
         if (!keyDown.isAborted(keyDownResult) && !keyPress.isAborted(keyPressResult)) {
@@ -482,11 +482,11 @@ public abstract class HtmlElement extends DomElement {
             && (this instanceof HtmlTextInput
             || this instanceof HtmlTextArea
             || this instanceof HtmlPasswordInput)) {
-            final Event input = new UIEvent(this, Event.TYPE_INPUT, c, shiftKey, ctrlKey, altKey);
+            final Event input = new KeyboardEvent(this, Event.TYPE_INPUT, c, shiftKey, ctrlKey, altKey);
             fireEvent(input);
         }
 
-        final Event keyUp = new UIEvent(this, Event.TYPE_KEY_UP, c, shiftKey, ctrlKey, altKey);
+        final Event keyUp = new KeyboardEvent(this, Event.TYPE_KEY_UP, c, shiftKey, ctrlKey, altKey);
         fireEvent(keyUp);
 
         final HtmlForm form = getEnclosingForm();

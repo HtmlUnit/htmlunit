@@ -118,6 +118,7 @@ public class HTMLImageElement extends HTMLElement {
         public ImageOnLoadAction(final Page page) {
             super(page);
         }
+        @Override
         public void execute() throws Exception {
             final HtmlImage img = (HtmlImage) getDomNodeOrNull();
             if (img != null) {

@@ -20,6 +20,7 @@ import java.util.LinkedList;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -264,46 +265,14 @@ public class Event extends SimpleScriptable {
      * @param type the event type
      */
     public Event(final DomNode domNode, final String type) {
-        this(domNode, type, false, false, false);
-    }
-
-    /**
-     * Creates a new event instance.
-     * @param domNode the DOM node that triggered the event
-     * @param type the event type
-     * @param shiftKey true if SHIFT is pressed
-     * @param ctrlKey true if CTRL is pressed
-     * @param altKey true if ALT is pressed
-     */
-    public Event(final DomNode domNode, final String type,
-            final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         final Object target = domNode.getScriptObject();
         srcElement_ = target;
         target_ = target;
         currentTarget_ = target;
         type_ = type;
-        shiftKey_ = shiftKey;
-        ctrlKey_ = ctrlKey;
-        altKey_ = altKey;
-        setKeyCode(Context.getUndefinedValue());
         setParentScope((SimpleScriptable) target);
         setPrototype(getPrototype(getClass()));
         setDomNode(domNode, false);
-    }
-
-    /**
-     * Creates a new event instance for a keypress event.
-     * @param domNode the DOM node that triggered the event
-     * @param type the event type
-     * @param keyCode the key code associated with the event
-     * @param shiftKey true if SHIFT is pressed
-     * @param ctrlKey true if CTRL is pressed
-     * @param altKey true if ALT is pressed
-     */
-    public Event(final DomNode domNode, final String type, final int keyCode,
-            final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        this(domNode, type, shiftKey, ctrlKey, altKey);
-        setKeyCode(keyCode);
     }
 
     /**
@@ -432,6 +401,12 @@ public class Event extends SimpleScriptable {
      * @return the key code associated with the event
      */
     public Object jsxGet_keyCode() {
+        if (keyCode_ == null) {
+            if (getBrowserVersion().isFirefox()) {
+                return 0;
+            }
+            return Undefined.instance;
+        }
         return keyCode_;
     }
 

@@ -240,6 +240,7 @@ public class HTMLFormElement extends HTMLElement {
         final JavaScriptEngine jsEngine = page.getWebClient().getJavaScriptEngine();
         final WebRequestSettings requestSettings = getHtmlForm().getWebRequestSettings(null);
         final PostponedAction action = new PostponedAction(page) {
+            @Override
             public void execute() throws IOException {
                 page.getWebClient().getPage(
                         page.getEnclosingWindow(),

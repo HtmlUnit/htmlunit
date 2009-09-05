@@ -204,6 +204,7 @@ public class HtmlScript extends HtmlElement {
             LOG.debug("Script node added: " + asXml());
         }
         final PostponedAction action = new PostponedAction(getPage()) {
+            @Override
             public void execute() {
                 final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
                 if (ie) {

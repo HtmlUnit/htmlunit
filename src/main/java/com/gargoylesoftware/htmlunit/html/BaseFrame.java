@@ -311,6 +311,7 @@ public abstract class BaseFrame extends HtmlElement {
             else {
                 final String src = attributeValue;
                 final PostponedAction action = new PostponedAction(getPage()) {
+                    @Override
                     public void execute() throws Exception {
                         if (getSrcAttribute().equals(src)) {
                             loadInnerPage();

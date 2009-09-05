@@ -187,6 +187,7 @@ public class Location extends SimpleScriptable {
         final HtmlPage page = (HtmlPage) getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
         final PostponedAction action = new PostponedAction(page) {
 
+            @Override
             public void execute() throws Exception {
                 if (newLocation.startsWith(JAVASCRIPT_PREFIX)) {
                     final String script = newLocation.substring(11);
