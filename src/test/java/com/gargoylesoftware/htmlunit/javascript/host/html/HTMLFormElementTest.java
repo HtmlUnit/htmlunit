@@ -1295,7 +1295,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void target() throws Exception {
+    public void target_changed_after_submit_call() throws Exception {
         final String html = "<html><head><script>"
             + "function test() {"
             + "  var f = document.forms[0];"
