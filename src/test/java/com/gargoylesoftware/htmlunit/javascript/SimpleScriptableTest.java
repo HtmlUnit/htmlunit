@@ -131,6 +131,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("MimeType");
         names.remove("MimeTypeArray");
         names.remove("MouseEvent");
+        names.remove("MutationEvent");
         names.remove("Namespace");
         names.remove("NamespaceCollection");
         names.remove("Navigator");
