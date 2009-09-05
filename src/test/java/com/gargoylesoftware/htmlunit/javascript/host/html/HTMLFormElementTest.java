@@ -20,9 +20,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -1287,5 +1289,38 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("");
         loadPageWithAlerts2(html);
         assertEquals(2, getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void target() throws Exception {
+        final String html = "<html><head><script>"
+            + "function test() {"
+            + "  var f = document.forms[0];"
+            + "  f.submit();"
+            + "  f.target = 'foo2';"
+            + "}"
+            + "</script></head><body>"
+            + "<form action='page1.html' name='myForm' target='foo1'>"
+            + "  <input name='myField' value='some value'>"
+            + "</form>\n"
+            + "<div id='clickMe' onclick='test()'>click me</div></body></html>";
+
+        getMockWebConnection().setDefaultResponse("<html><head><script>alert(window.name)</script></head></html>");
+        final WebDriver driver = loadPageWithAlerts2(html);
+        driver.findElement(By.id("clickMe")).click();
+
+        try {
+            driver.switchTo().window("foo2");
+            Assert.fail("Window foo2 found");
+        }
+        catch (final NoSuchWindowException e) {
+            // ok
+        }
+        driver.switchTo().window("foo1");
+        setExpectedAlerts("foo1");
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 }

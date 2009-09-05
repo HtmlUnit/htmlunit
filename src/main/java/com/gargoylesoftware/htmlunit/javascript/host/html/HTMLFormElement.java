@@ -238,14 +238,14 @@ public class HTMLFormElement extends HTMLElement {
 
         final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
         final JavaScriptEngine jsEngine = page.getWebClient().getJavaScriptEngine();
+        // what matters are the current request settings and target, not the ones at the time
+        // the postponed action is executed
         final WebRequestSettings requestSettings = getHtmlForm().getWebRequestSettings(null);
+        final String target = page.getResolvedTarget(jsxGet_target());
         final PostponedAction action = new PostponedAction(page) {
             @Override
             public void execute() throws IOException {
-                page.getWebClient().getPage(
-                        page.getEnclosingWindow(),
-                        page.getResolvedTarget(jsxGet_target()),
-                        requestSettings);
+                page.getWebClient().getPage(page.getEnclosingWindow(), target, requestSettings);
             }
         };
         jsEngine.addPostponedAction(action);
