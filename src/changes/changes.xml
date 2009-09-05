@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes">
+            <action type="add" dev="asashour">
+                JavaScript: add primitive support for MutationEvent.
+            </action>
             <action type="update" dev="asashour">
                 JavaScript: use KeyboardEvent in htmlElement.type() and add support for .charCode.
             </action>

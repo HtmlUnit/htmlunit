@@ -2353,6 +2353,9 @@
         </function>
     </class>
 
+    <class name="MutationEvent" extends="Event" classname="com.gargoylesoftware.htmlunit.javascript.host.MutationEvent" JSObject="true">
+    </class>
+
     <class name="NamedNodeMap" classname="com.gargoylesoftware.htmlunit.javascript.NamedNodeMap" JSObject="true">
         <property name="length" readable="true" writable="false"/>
         <function name="getNamedItem"/>

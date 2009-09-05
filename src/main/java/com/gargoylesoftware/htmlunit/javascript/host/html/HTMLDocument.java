@@ -72,6 +72,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.KeyboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.MutationEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.NamespaceCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.NodeFilter;
@@ -180,10 +181,12 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         eventMap.put("KeyboardEvent", KeyboardEvent.class);
         eventMap.put("KeyEvents", KeyboardEvent.class);
         eventMap.put("HTMLEvents", Event.class);
-        eventMap.put("UIEvent", UIEvent.class);
-        eventMap.put("UIEvents", UIEvent.class);
         eventMap.put("MouseEvent", MouseEvent.class);
         eventMap.put("MouseEvents", MouseEvent.class);
+        eventMap.put("MutationEvent", MutationEvent.class);
+        eventMap.put("MutationEvents", MutationEvent.class);
+        eventMap.put("UIEvent", UIEvent.class);
+        eventMap.put("UIEvents", UIEvent.class);
         SUPPORTED_EVENT_TYPE_MAP = Collections.unmodifiableMap(eventMap);
     }
 

@@ -18,8 +18,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 
 /**
  * JavaScript object representing a Keyboard Event.
- * For general information on which properties and functions
- * should be supported, see
+ * For general information on which properties and functions should be supported, see
  * <a href="http://www.w3.org/TR/DOM-Level-3-Events/events.html#Events-KeyboardEvents-Interfaces">
  * DOM Level 3 Events</a>.
  *
