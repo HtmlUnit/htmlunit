@@ -93,7 +93,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     @AfterClass
     public static void shutDownAll() throws Exception {
         if (WEB_DRIVER_ != null) {
-            WEB_DRIVER_.close();
+            WEB_DRIVER_.quit();
         }
         WEB_DRIVER_ = null;
         if (STATIC_SERVER_ != null) {
