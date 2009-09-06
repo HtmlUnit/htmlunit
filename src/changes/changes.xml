@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                JavaScript: fix button.type attribute.
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: perform delayed form submission with fields and target values at the moment where HtmlFormElement.submit is called.
             </action>

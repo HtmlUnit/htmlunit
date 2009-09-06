@@ -20,7 +20,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link HTMLButtonElement}.
@@ -64,7 +63,6 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     @Alerts(IE = { "button", "exception", "button" }, FF = { "submit", "button" })
     public void type() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

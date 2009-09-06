@@ -1135,6 +1135,7 @@
         <property name="accessKey" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>
+        <property name="type" readable="true" writable="true"/>
         <function name="click">
             <browser name="Firefox"/>
         </function>
