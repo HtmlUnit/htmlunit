@@ -18,17 +18,19 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link HTMLButtonElement}.
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HTMLButtonElementTest extends WebTestCase {
+public class HTMLButtonElementTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if an error occurs
@@ -54,7 +56,29 @@ public class HTMLButtonElementTest extends WebTestCase {
             + "alert(a1.accessKey);\n"
             + "alert(a2.accessKey);\n"
             + "</script></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Tests setting the <tt>type</tt> property.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    @Alerts(IE = { "button", "exception", "button" }, FF = { "submit", "button" })
+    public void type() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var b = document.createElement('button');\n"
+            + "    alert(b.type);\n"
+            + "    try {\n"
+            + "      b.type = 'button';\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "    alert(b.type);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
     }
 
 }
