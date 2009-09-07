@@ -377,14 +377,15 @@ public class KeyboardEvent extends UIEvent {
     private int charCode_;
 
     /**
-     * Creates a new Keyboard instance.
+     * Creates a new keyboard event instance.
      */
     public KeyboardEvent() {
         // Empty.
     }
 
     /**
-     * Creates a new event instance for a keypress event.
+     * Creates a new keyboard event instance.
+     *
      * @param domNode the DOM node that triggered the event
      * @param type the event type
      * @param keyCode the key code associated with the event
