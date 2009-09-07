@@ -55,7 +55,7 @@ public class HTMLBRElement extends HTMLElement {
      */
     public void jsxSet_clear(final String clear) {
         if (!contains(VALID_CLEAR_VALUES, clear) && getBrowserVersion().isIE()) {
-            Context.throwAsScriptRuntimeEx(new Exception("Invalid clear property value: '" + clear + "'."));
+            throw Context.reportRuntimeError("Invalid clear property value: '" + clear + "'.");
         }
         getDomNodeOrDie().setAttribute("clear", clear);
     }

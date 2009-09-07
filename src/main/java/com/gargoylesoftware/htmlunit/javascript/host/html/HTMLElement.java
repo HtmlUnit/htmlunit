@@ -2168,8 +2168,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     public void jsxFunction_doScroll(final String scrollAction) {
         if (((HtmlPage) getDomNodeOrDie().getPage()).isBeingParsed()) {
-            Context.throwAsScriptRuntimeEx(
-                new Exception("The data necessary to complete this operation is not yet available."));
+            throw Context.reportRuntimeError("The data necessary to complete this operation is not yet available.");
         }
         // Ignore because we aren't displaying anything!
     }
@@ -2322,7 +2321,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             }
         }
         else {
-            Context.throwAsScriptRuntimeEx(new Exception("Cannot set the align property to invalid value: " + align));
+            throw Context.reportRuntimeError("Cannot set the align property to invalid value: " + align);
         }
     }
 
@@ -2351,7 +2350,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             getDomNodeOrDie().setAttribute("valign", s);
         }
         else {
-            Context.throwAsScriptRuntimeEx(new Exception("Cannot set the vAlign property to invalid value: " + vAlign));
+            throw Context.reportRuntimeError("Cannot set the vAlign property to invalid value: " + vAlign);
         }
     }
 

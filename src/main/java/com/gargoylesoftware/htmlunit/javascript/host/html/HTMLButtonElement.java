@@ -68,7 +68,7 @@ public class HTMLButtonElement extends FormField {
      */
     public void jsxSet_type(final String newType) {
         if (getBrowserVersion().isIE()) {
-            Context.throwAsScriptRuntimeEx(new RuntimeException("Object doesn't support this action"));
+            throw Context.reportRuntimeError("Object doesn't support this action");
         }
         getDomNodeOrDie().setAttribute("type", newType);
     }

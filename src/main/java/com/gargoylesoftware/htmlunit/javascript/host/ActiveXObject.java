@@ -128,7 +128,7 @@ public class ActiveXObject extends SimpleScriptable {
             }
         }
 
-        throw Context.throwAsScriptRuntimeEx(new Exception("Automation server can't create object"));
+        throw Context.reportRuntimeError("Automation server can't create object");
     }
 
     /**
