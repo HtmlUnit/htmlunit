@@ -896,7 +896,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @NotYetImplemented(Browser.FF2)
-    @Alerts(FF2 = {"undefined" }, FF3 = { "true", "I was here" }, IE = { "true", "I was here" })
+    @Alerts(FF2 = "undefined", FF3 = { "true", "I was here" }, IE = { "true", "I was here" })
     public void firedEvent_equals_original_event() throws Exception {
         final String html =
             "<html><head><title>First</title>\n"
