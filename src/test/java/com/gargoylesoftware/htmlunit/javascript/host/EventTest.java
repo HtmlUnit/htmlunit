@@ -1008,4 +1008,38 @@ public class EventTest extends WebDriverTestCase {
         final HtmlPage page2 = page.<HtmlInput>getHtmlElementById("mySubmit").click();
         assertEquals(getDefaultUrl(), page2.getWebResponse().getRequestSettings().getUrl());
     }
+
+    /**
+     * Regression test for bug
+     * <a href="http://sourceforge.net/tracker/?func=detail&aid=2851920&group_id=47038&atid=448266">2851920</a>.
+     * Name resolution doesn't work the same in inline handlers than in "normal" JS code!
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    @Alerts(FF = { "form1 -> custom", "form2 -> [object HTMLFormElement]",
+            "form1: [object HTMLFormElement]", "form2: [object HTMLFormElement]",
+            "form1 -> custom", "form2 -> [object HTMLFormElement]" },
+            IE = { "form1 -> custom", "form2 -> [object]",
+            "form1: [object]", "form2: [object]",
+            "form1 -> custom", "form2 -> [object]" })
+    public void nameResolution() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "var form1 = 'custom';\n"
+            + "function testFunc() {\n"
+            + " alert('form1 -> ' + form1);\n"
+            + " alert('form2 -> ' + form2);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='testFunc()'>\n"
+            + "<form name='form1'></form>\n"
+            + "<form name='form2'></form>\n"
+            + "<button onclick=\"alert('form1: ' + form1); alert('form2: ' + form2); testFunc()\">click me</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.tagName("button")).click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
 }
