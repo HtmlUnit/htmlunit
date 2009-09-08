@@ -23,12 +23,14 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
@@ -53,7 +55,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class EventTest extends WebTestCase {
+public class EventTest extends WebDriverTestCase {
 
     /**
      * Verify the "this" object refers to the Element being clicked when an
@@ -147,8 +149,7 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("pass")
-    @Browsers(Browser.IE)
+    @Alerts(FF = { "undefined", "false" }, IE = { "[object]", "true" })
     public void testEventSrcElementSameAsThis() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -156,7 +157,8 @@ public class EventTest extends WebTestCase {
             + "<script>\n"
             + "function handler(event) {\n"
             + "event = event ? event : window.event;\n"
-            + "alert(event.srcElement == this ? 'pass' : event.srcElement + '!=' + this); }\n"
+            + "alert(event.srcElement);\n"
+            + "alert(event.srcElement == this); }\n"
             + "document.getElementById('clickId').onclick = handler;</script>\n"
             + "</body></html>";
         onClickPageTest(content);
@@ -268,7 +270,7 @@ public class EventTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = { "124A", "1A2A4AB1AB2AB4ABC" }, FF = { "123A4A", "1A2A3AB4AB1AB2AB3ABC4ABC" })
+    @Alerts(IE = { "124a", "1a2a4ab1ab2ab4abc" }, FF = { "123a4a", "1a2a3ab4ab1ab2ab3abc4abc" })
     public void testTyping() throws Exception {
         testTyping("<input type='text'", "");
         testTyping("<input type='password'", "");
@@ -289,15 +291,14 @@ public class EventTest extends WebTestCase {
             + "<div id='d' onclick='alert(x); x=\"\"'>abc</div>\n"
             + "</body></html>";
 
-        final List<String> actual = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), html, actual);
-        page.<HtmlElement>getHtmlElementById("t").type('A');
-        page.<HtmlDivision>getHtmlElementById("d").click();
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("t")).sendKeys("a");
+        driver.findElement(By.id("d")).click();
 
-        page.<HtmlElement>getHtmlElementById("t").type("BC");
-        page.<HtmlDivision>getHtmlElementById("d").click();
+        driver.findElement(By.id("t")).sendKeys("bc");
+        driver.findElement(By.id("d")).click();
 
-        assertEquals(getExpectedAlerts(), actual);
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 
     /**
@@ -359,11 +360,11 @@ public class EventTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
-    private void onClickPageTest(final String content) throws Exception {
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        page.<HtmlElement>getHtmlElementById("clickId").click();
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+    private void onClickPageTest(final String html) throws Exception {
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("clickId")).click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 
     /**
@@ -383,7 +384,7 @@ public class EventTest extends WebTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -419,20 +420,21 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
-    @Alerts({ "false", "false" })
+    @Alerts(FF = { "true", "exception" }, IE = { "false", "false" })
     public void testIEWindowEvent() throws Exception {
         final String html =
             "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  alert(window.event == null);\n"
-            + "  alert(event == null);\n"
+            + "  try {\n"
+            + "    alert(event == null);\n"
+            + "  } catch(e) { alert('exception'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='test()'></body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -453,7 +455,7 @@ public class EventTest extends WebTestCase {
             + "alert(2)'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -630,14 +632,16 @@ public class EventTest extends WebTestCase {
             + "<div id='myDiv'/>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
+    @NotYetImplemented(Browser.FF3)
     @Test
-    @Alerts(FF = {"object", "true" },
+    @Alerts(FF2 = {"object", "true" },
+            FF3 = {"object", "false" },
             IE = {"object", "undefined" })
     public void testBubbles() throws Exception {
         final String html =
@@ -648,7 +652,7 @@ public class EventTest extends WebTestCase {
             + "    }\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -666,7 +670,7 @@ public class EventTest extends WebTestCase {
             + "    }\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -717,7 +721,7 @@ public class EventTest extends WebTestCase {
             + "    }\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -793,7 +797,7 @@ public class EventTest extends WebTestCase {
             + "  }\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -891,7 +895,8 @@ public class EventTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "true", "I was here" })
+    @NotYetImplemented(Browser.FF2)
+    @Alerts(FF2 = {"undefined" }, FF3 = { "true", "I was here" }, IE = { "true", "I was here" })
     public void firedEvent_equals_original_event() throws Exception {
         final String html =
             "<html><head><title>First</title>\n"
@@ -924,7 +929,7 @@ public class EventTest extends WebTestCase {
             + "<div id='myDiv'>toti</div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -971,7 +976,7 @@ public class EventTest extends WebTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**

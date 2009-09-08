@@ -105,7 +105,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private WebDriver buildWebDriver() {
         final String property = System.getProperty(PROPERTY, "").toLowerCase();
         if (property.contains("ff2") || property.contains("ff3")) {
-            return new FirefoxDriver();
+       	    return new FirefoxDriver();
         }
         if (property.contains("ie6") || property.contains("ie7")) {
             return new InternetExplorerDriver();
@@ -229,6 +229,23 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
+     * Same as {@link #loadPageWithAlerts(String)}... but doesn't verify the alerts.
+     * @param html the HTML to use
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPage2(final String html) throws Exception {
+        final MockWebConnection mockWebConnection = getMockWebConnection();
+        mockWebConnection.setResponse(URL_FIRST, html);
+        startWebServer(mockWebConnection);
+
+        final WebDriver driver = getWebDriver();
+        driver.get(URL_FIRST.toExternalForm());
+
+        return driver;
+    }
+
+    /**
      * Same as {@link #loadPageWithAlerts(String)}, but using WebDriver instead.
      * @param html the HTML to use
      * @return the web driver
@@ -236,12 +253,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected final WebDriver loadPageWithAlerts2(final String html) throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
-        final MockWebConnection mockWebConnection = getMockWebConnection();
-        mockWebConnection.setResponse(URL_FIRST, html);
-        startWebServer(mockWebConnection);
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts); // still useful sometimes
 
-        final WebDriver driver = getWebDriver();
-        driver.get(URL_FIRST.toExternalForm());
+        final WebDriver driver = loadPage2(html);
 
         assertEquals(expectedAlerts, getCollectedAlerts(driver));
         return driver;
