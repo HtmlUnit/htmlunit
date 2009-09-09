@@ -36,8 +36,31 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "(*%a", "%28%A" })
+    @Alerts({ "hi", "%28%29" })
     public void href_js_escaping() throws Exception {
+        final String html =
+              "<html><head><script>\n"
+            + "  function sayHello(text) {\n"
+            + "    alert(text);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body>\n"
+            + "  <a id='myAnchor' href=\"javascript:sayHello%28'hi'%29\">My Link</a>\n"
+            + "  <input id='myButton' type=button onclick=\"javascript:sayHello('%28%29')\" value='My Button'>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myAnchor")).click();
+        driver.findElement(By.id("myButton")).click();
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "(*%a", "%28%A" })
+    public void href_js_escaping2() throws Exception {
         final String html =
               "<html><head><script>\n"
             + "  function sayHello(text) {\n"
@@ -54,5 +77,4 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
         driver.findElement(By.id("myButton")).click();
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
-
 }

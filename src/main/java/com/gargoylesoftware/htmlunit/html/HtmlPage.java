@@ -35,8 +35,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.httpclient.URIException;
-import org.apache.commons.httpclient.util.URIUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -888,12 +886,6 @@ public class HtmlPage extends SgmlPage {
 
         if (sourceCode.toLowerCase().startsWith(JAVASCRIPT_PREFIX)) {
             sourceCode = sourceCode.substring(JAVASCRIPT_PREFIX.length());
-            try {
-                sourceCode = URIUtil.decode(sourceCode);
-            }
-            catch (final URIException e) {
-                // Move on using the original source code; who knows, it may work.
-            }
         }
 
         final Object result = getWebClient().getJavaScriptEngine().execute(this, sourceCode, sourceName, startLine);
