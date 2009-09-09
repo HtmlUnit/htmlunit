@@ -23,12 +23,14 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
@@ -48,7 +50,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class NodeTest extends WebTestCase {
+public class NodeTest extends WebDriverTestCase {
 
     /**
      * @throws Exception on test failure
@@ -66,7 +68,7 @@ public class NodeTest extends WebTestCase {
                 + "<p id='myNode'>hello world<span>Child Node</span></p>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -85,7 +87,7 @@ public class NodeTest extends WebTestCase {
                 + "<p id='myNode'></p>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -108,7 +110,7 @@ public class NodeTest extends WebTestCase {
             + "<form name='form1'><div id='formChild'/></form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -135,7 +137,7 @@ public class NodeTest extends WebTestCase {
             + "<form name='form1'><div id='formChild'/></form>\n"
             + "</body><div id='newChild'/></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -172,7 +174,7 @@ public class NodeTest extends WebTestCase {
                 + "<div id='myNode'>hello world<span>Child Node</span></div>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -199,7 +201,7 @@ public class NodeTest extends WebTestCase {
             + "<h2>Child Node 2-A</h2></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -217,7 +219,7 @@ public class NodeTest extends WebTestCase {
             + "  alert(nodes[i].nodeType);\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -248,7 +250,7 @@ public class NodeTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -296,7 +298,7 @@ public class NodeTest extends WebTestCase {
             + "<h1>Child Node 2-A</h1></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -319,7 +321,7 @@ public class NodeTest extends WebTestCase {
                 + "some text<!-- some comment -->\n"
                 + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -327,15 +329,17 @@ public class NodeTest extends WebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Browsers(Browser.IE)
+    @Alerts(FF = "exception", IE = { "in foo1", "in foo2" })
     public void testAttachEvent() throws Exception {
         final String html = "<html><head>\n"
             + "<title>First</title>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "    var oField = document.getElementById('div1');\n"
+            + "  var oField = document.getElementById('div1');\n"
+            + "  try {\n"
             + "    oField.attachEvent('onclick', foo1);\n"
             + "    oField.attachEvent('onclick', foo2);\n"
+            + "  } catch(e) { alert('exception') };\n"
             + "}\n"
             + "function foo1() {alert('in foo1');}\n"
             + "function foo2() {alert('in foo2');}\n"
@@ -343,13 +347,10 @@ public class NodeTest extends WebTestCase {
             + "<div id='div1'>bla</div>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"in foo1", "in foo2"};
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("div1")).click();
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
-        page.<HtmlElement>getHtmlElementById("div1").click();
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 
     /**
@@ -373,7 +374,7 @@ public class NodeTest extends WebTestCase {
             + "<div id='div1'/>\n"
             + "<div id='div2'/>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -399,7 +400,7 @@ public class NodeTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -425,7 +426,7 @@ public class NodeTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -451,7 +452,7 @@ public class NodeTest extends WebTestCase {
             + "<div id='myDiv'></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -482,7 +483,7 @@ public class NodeTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -511,7 +512,7 @@ public class NodeTest extends WebTestCase {
             + "  <div id='myDiv'><div id='myDiv2'></div><div id='myDiv3'></div></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -540,14 +541,14 @@ public class NodeTest extends WebTestCase {
             + "  <div id='myDiv'><div id='myDiv2'></div><div id='myDiv3'></div></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Alerts(FF = "exception", IE = { "[object]", "[object]" })
     public void event() throws Exception {
         final String firstHtml = "<html>\n"
             + "<head><title>First Page</title>\n"
@@ -574,7 +575,9 @@ public class NodeTest extends WebTestCase {
             + "        alert(parent.event);\n"
             + "      }\n"
             + "      function test() {\n"
-            + "        parent.document.body.attachEvent('onclick', handler);\n"
+            + "        try {\n"
+            + "          parent.document.body.attachEvent('onclick', handler);\n"
+            + "        } catch(e) { alert('exception') };\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -582,7 +585,6 @@ public class NodeTest extends WebTestCase {
             + "  </body>\n"
             + "</html>";
 
-        final String[] expectedAlerts = {"[object]", "[object]"};
         final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -593,7 +595,7 @@ public class NodeTest extends WebTestCase {
 
         final HtmlPage page = client.getPage(URL_FIRST);
         page.<HtmlButtonInput>getHtmlElementById("myInput").click();
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
@@ -664,7 +666,7 @@ public class NodeTest extends WebTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -690,7 +692,7 @@ public class NodeTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -727,7 +729,28 @@ public class NodeTest extends WebTestCase {
             + "</div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "0", "16" }, IE = "exception")
+    public void compareDocumentPosition2() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var div = document.createElement('div');\n"
+            + "    var childDiv = document.createElement('div');\n"
+            + "    try {\n"
+            + "      alert(div.compareDocumentPosition(childDiv) & Node.DOCUMENT_POSITION_CONTAINED_BY);\n"
+            + "      div.appendChild(childDiv);\n"
+            + "      alert(div.compareDocumentPosition(childDiv) & Node.DOCUMENT_POSITION_CONTAINED_BY);\n"
+            + "    } catch(e) {alert('exception');}\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -748,7 +771,7 @@ public class NodeTest extends WebTestCase {
             + "  <table id='myTable'></table>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -909,7 +932,7 @@ public class NodeTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -937,7 +960,7 @@ public class NodeTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -959,7 +982,7 @@ public class NodeTest extends WebTestCase {
                 + "</head><body onload='doTest()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -981,6 +1004,52 @@ public class NodeTest extends WebTestCase {
                 + "</head><body onload='doTest()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "4", "3", "abc", "def", "123456", "false", "0", "2", "123", "456", "1", "false" },
+            FF = { "4", "3", "abc", "def", "123456", "true", "0", "2", "123", "456", "1", "true" })
+    public void normalize() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    var root = doc.appendChild(doc.createElement('root'));\n"
+            + "    var cdata = root.appendChild(doc.createCDATASection('abcdef'));\n"
+            + "    cdata.splitText(3);\n"
+            + "    var text = root.appendChild(doc.createTextNode('123456'));\n"
+            + "    text.splitText(3);\n"
+            + "    alert(root.childNodes.length);\n"
+            + "    root.normalize();\n"
+            + "    alert(root.childNodes.length);\n"
+            + "    alert(root.childNodes.item(0).data);\n"
+            + "    alert(root.childNodes.item(1).data);\n"
+            + "    alert(root.childNodes.item(2).data);\n"
+            + "    alert(root.childNodes.item(2) == text);\n"
+            + "\n"
+            + "    var body = document.body;\n"
+            + "    alert(body.childNodes.length);\n"
+            + "    text = body.appendChild(document.createTextNode('123456'));\n"
+            + "    text.splitText(3);\n"
+            + "    alert(body.childNodes.length);\n"
+            + "    alert(body.childNodes.item(0).nodeValue);\n"
+            + "    alert(body.childNodes.item(1).nodeValue);\n"
+            + "    body.normalize();\n"
+            + "    alert(body.childNodes.length);\n"
+            + "    alert(body.childNodes.item(0) == text);\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }
