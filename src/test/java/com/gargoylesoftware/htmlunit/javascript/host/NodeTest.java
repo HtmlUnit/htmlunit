@@ -404,6 +404,31 @@ public class NodeTest extends WebDriverTestCase {
     }
 
     /**
+     * The HTML node can't be inserted anywhere else!
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "1", "exception", "1", "exception", "1", "exception", "1" },
+            IE = { "1", "1", "1", "exception", "1" })
+    public void append_insert_html_node() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var htmlNode = document.documentElement;\n"
+            + "  var body = document.body;\n"
+            + "  alert(body.childNodes.length);\n"
+            + "  try { body.appendChild(htmlNode); } catch(e) { alert('exception'); };\n"
+            + "  alert(body.childNodes.length);\n"
+            + "  try { body.insertBefore(htmlNode, body.firstChild); } catch(e) { alert('exception'); };\n"
+            + "  alert(body.childNodes.length);\n"
+            + "  try { body.replaceChild(htmlNode, body.firstChild); } catch(e) { alert('exception'); };\n"
+            + "  alert(body.childNodes.length);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'><span>hi</span></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Test element.appendChild: If the parent has a null parentNode,
      * IE creates a DocumentFragment be the parent's parentNode.
      *

@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLSerializer;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -160,8 +161,18 @@ public class Node extends SimpleScriptable {
     public Object jsxFunction_appendChild(final Object childObject) {
         Object appendedChild = null;
         if (childObject instanceof Node) {
+            final Node childNode = (Node) childObject;
+
+            // is the node allowed here?
+            if (!isNodeInsertable(childNode)) {
+                if (getBrowserVersion().isIE()) {
+                    return childObject; // IE silently ignores it
+                }
+                throw Context.reportRuntimeError("Node cannopt be inserted at the specified point in the hierarchy");
+            }
+
             // Get XML node for the DOM node passed in
-            final DomNode childDomNode = ((Node) childObject).getDomNodeOrDie();
+            final DomNode childDomNode = childNode.getDomNodeOrDie();
 
             // Get the parent XML node that the child should be added to.
             final DomNode parentNode = getDomNodeOrDie();
@@ -180,6 +191,15 @@ public class Node extends SimpleScriptable {
             }
         }
         return appendedChild;
+    }
+
+    /**
+     * Indicates if the node can be inserted.
+     * @param childObject the node
+     * @return <code>false</code> if it is not allowed here
+     */
+    private boolean isNodeInsertable(final Node childObject) {
+        return !(childObject instanceof HTMLHtmlElement);
     }
 
     /**
@@ -247,8 +267,17 @@ public class Node extends SimpleScriptable {
         Object appendedChild = null;
 
         if (newChildObject instanceof Node) {
+            final Node newChild = (Node) newChildObject;
+            final DomNode newChildNode = newChild.getDomNodeOrDie();
 
-            final DomNode newChildNode = ((Node) newChildObject).getDomNodeOrDie();
+            // is the node allowed here?
+            if (!isNodeInsertable(newChild)) {
+                if (getBrowserVersion().isIE()) {
+                    return newChildNode; // IE silently ignores it
+                }
+                throw Context.reportRuntimeError("Node cannopt be inserted at the specified point in the hierarchy");
+            }
+
             if (newChildNode instanceof DomDocumentFragment) {
                 final DomDocumentFragment fragment = (DomDocumentFragment) newChildNode;
                 for (final DomNode child : fragment.getChildren()) {
@@ -384,8 +413,15 @@ public class Node extends SimpleScriptable {
             removedChild = oldChildObject;
         }
         else if (newChildObject instanceof Node && oldChildObject instanceof Node) {
+            final Node newChild = (Node) newChildObject;
+
+            // is the node allowed here?
+            if (!isNodeInsertable(newChild)) {
+                throw Context.reportRuntimeError("Node cannopt be inserted at the specified point in the hierarchy");
+            }
+
             // Get XML nodes for the DOM nodes passed in
-            final DomNode newChildNode = ((Node) newChildObject).getDomNodeOrDie();
+            final DomNode newChildNode = newChild.getDomNodeOrDie();
             final DomNode oldChildNode;
             // Replace the old child with the new child.
             oldChildNode = ((Node) oldChildObject).getDomNodeOrDie();

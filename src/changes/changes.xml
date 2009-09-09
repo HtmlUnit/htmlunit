@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes">
+            <action type="fix" dev="mguillem">
+                JavaScript: appendChild, insertBefore and replaceChild throw exception (FF) or silently fail (IE) when parameter is the HTML node.
+            </action>
             <action type="fix" dev="asashour">
                 HtmlAnchor: fix characters escaping if 'href' is a javascript.
             </action>
