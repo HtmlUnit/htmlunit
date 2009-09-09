@@ -99,8 +99,13 @@ public class BrowserVersion implements Serializable {
 
     /** Internet Explorer 7. */
     public static final BrowserVersion INTERNET_EXPLORER_7 = new BrowserVersion(
-        INTERNET_EXPLORER, "4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322)",
-        "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322)", 7, "IE7", null);
+        INTERNET_EXPLORER, "4.0 (compatible; MSIE 7.0; Windows NT 5.1)",
+        "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)", 7, "IE7", null);
+
+    /** Internet Explorer 8. */
+    public static final BrowserVersion INTERNET_EXPLORER_8 = new BrowserVersion(
+        INTERNET_EXPLORER, "4.0 (compatible; MSIE 8.0; Windows NT 6.0)",
+        "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0)", 8, "IE8", null);
 
     /** The default browser version. */
     private static BrowserVersion DefaultBrowserVersion_ = INTERNET_EXPLORER_7;

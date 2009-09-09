@@ -5,7 +5,10 @@
     </properties>
 
     <body>
-        <release version="2.7" date="?" description="Bugfixes">
+        <release version="2.7" date="?" description="Bugfixes, (initial)??? IE8 support">
+            <action type="add" dev="asashour">
+                Add IE8 support.
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: appendChild, insertBefore and replaceChild throw exception (FF) or silently fail (IE) when parameter is the HTML node.
             </action>
