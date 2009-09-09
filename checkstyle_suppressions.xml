@@ -21,7 +21,7 @@
     <suppress checks="LineLength" files="Dojo102Test.java"/>
     <suppress checks="LineLength" files="BoxObjectTest.java"/>
     <suppress checks="LineLength" files="HTMLBodyElementTest.java"/>
-    <suppress checks="LineLength" files="GWTSourceTest.java" lines="41, 103, 165, 200, 240"/>
+    <suppress checks="LineLength" files="GWTSourceTest.java"/>
     <suppress checks="MethodLength" files="DefaultElementFactory.java"/>
     <suppress checks="MethodLength" files="Dojo102Test.java"/>
     <suppress checks="MethodLength" files="CSSStyleDeclarationTest.java"/>

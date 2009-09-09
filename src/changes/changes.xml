@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                HtmlAnchor: fix characters escaping if 'href' is a javascript.
+            </action>
             <action type="fix" dev="mguillem" issue="2854634" due-to="Rodney Gitzel">
                 Correctly clean up "/./" and "/../" sequences from URLs.
             </action>

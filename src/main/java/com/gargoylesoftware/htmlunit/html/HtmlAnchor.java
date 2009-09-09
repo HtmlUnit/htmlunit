@@ -79,7 +79,22 @@ public class HtmlAnchor extends HtmlElement {
         }
         final HtmlPage page = (HtmlPage) getPage();
         if (TextUtil.startsWithIgnoreCase(href, JAVASCRIPT_PREFIX)) {
-            page.executeJavaScriptIfPossible(href, "javascript url", getStartLineNumber());
+            final StringBuilder builder = new StringBuilder(href.length());
+            for (int i = 0; i < href.length(); i++) {
+                final char ch = href.charAt(i);
+                if (ch == '%' && i + 2 < href.length()) {
+                    final char ch1 = Character.toUpperCase(href.charAt(i + 1));
+                    final char ch2 = Character.toUpperCase(href.charAt(i + 2));
+                    if ((Character.isDigit(ch1) || ch1 >= 'A' && ch1 <= 'F')
+                            && (Character.isDigit(ch2) || ch2 >= 'A' && ch2 <= 'F')) {
+                        builder.append((char) Integer.parseInt(href.substring(i + 1, i + 3), 16));
+                        i += 2;
+                        continue;
+                    }
+                }
+                builder.append(ch);
+            }
+            page.executeJavaScriptIfPossible(builder.toString(), "javascript url", getStartLineNumber());
             return;
         }
         final URL url = page.getFullyQualifiedUrl(href);
