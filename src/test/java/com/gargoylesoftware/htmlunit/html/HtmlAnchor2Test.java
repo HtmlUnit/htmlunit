@@ -21,6 +21,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link HtmlAnchor}.
@@ -35,6 +36,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({ "(*%a", "%28%A" })
     public void href_js_escaping() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -47,13 +49,10 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
             + "  <input id='myButton' type=button onclick=\"javascript:sayHello('%28%A')\" value='My Button'>\n"
             + "</body></html>";
 
-        //should be withoutAlerts
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myAnchor")).click();
         driver.findElement(By.id("myButton")).click();
-        //should be @Alert
-        final String[] expectedAlerts = {"(*%a", "%28%A"};
-        assertEquals(expectedAlerts, getCollectedAlerts(driver));
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 
 }
