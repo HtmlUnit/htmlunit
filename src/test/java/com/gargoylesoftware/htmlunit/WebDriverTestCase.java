@@ -147,7 +147,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     /**
      * Servlet delivering content from a MockWebConnection.
-     * @author Marc Guillemot
      */
     public static class MockWebConnectionServlet extends HttpServlet {
         private static final long serialVersionUID = -3417522859381706421L;
