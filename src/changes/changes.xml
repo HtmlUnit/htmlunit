@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="2854634" due-to="Rodney Gitzel">
+                Correctly clean up "/./" and "/../" sequences from URLs.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: fix button.type attribute.
             </action>
@@ -2680,7 +2683,7 @@
                 JavaScript: configure correctly the prototype hierarchy on created host objects.
             </action>
             <action type="update" dev="mguillem" issue="1613119" due-to="Karel Kolman">
-                JavaScript: fixed non executed scripts added wit document.write.
+                JavaScript: fixed non executed scripts added with document.write.
             </action>
             <action type="update" dev="mguillem" issue="1689798">
                 JavaScript: "this" should be the window and not the current node in JavaScript href of link and area as well as in JavaScript action of forms.

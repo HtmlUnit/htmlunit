@@ -24,6 +24,7 @@ import org.junit.Test;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Rodney Gitzel
  */
 public class WebRequestSettingsTest extends WebServerTestCase {
 
@@ -43,12 +44,16 @@ public class WebRequestSettingsTest extends WebServerTestCase {
     }
 
     /**
+     * A number of these refer to '285434' which is this defect:
+     *  https://sourceforge.net/tracker/?func=detail&aid=2854634&group_id=47038&atid=448266.
+     *
      * @throws Exception if the test fails
      */
     @Test
     public void setUrl_eliminateDirUp() throws Exception {
         final URL url1 = new URL("http://htmlunit.sf.net/foo.html");
         final URL url2 = new URL("http://htmlunit.sf.net/dir/foo.html");
+        final URL url3 = new URL("http://htmlunit.sf.net/dir/foo.htmla=1&b=2");
 
         // with directory/..
         WebRequestSettings settings = new WebRequestSettings(new URL("http://htmlunit.sf.net/bla/../foo.html"));
@@ -58,13 +63,29 @@ public class WebRequestSettingsTest extends WebServerTestCase {
         settings = new WebRequestSettings(new URL("http://htmlunit.sf.net/../foo.html"));
         assertEquals(url1, settings.getUrl());
 
+        // with /(\w\w)/.. (c.f. 2854634)
+        settings = new WebRequestSettings(new URL("http://htmlunit.sf.net/dir/fu/../foo.html"));
+        assertEquals(url2, settings.getUrl());
+
         // with /../..
         settings = new WebRequestSettings(new URL("http://htmlunit.sf.net/../../foo.html"));
         assertEquals(url1, settings.getUrl());
 
+        // with ../.. (c.f. 2854634)
+        settings = new WebRequestSettings(new URL("http://htmlunit.sf.net/dir/foo/bar/../../foo.html"));
+        assertEquals(url2, settings.getUrl());
+
+        settings = new WebRequestSettings(
+                          new URL("http://htmlunit.sf.net/dir/foo/bar/boo/hoo/silly/../../../../../foo.html"));
+        assertEquals(url2, settings.getUrl());
+
         // with /.
         settings = new WebRequestSettings(new URL("http://htmlunit.sf.net/./foo.html"));
         assertEquals(url1, settings.getUrl());
+
+        // with /\w//. (c.f. 2854634)
+        settings = new WebRequestSettings(new URL("http://htmlunit.sf.net/a/./foo.html"));
+        assertEquals(new URL("http://htmlunit.sf.net/a/foo.html"), settings.getUrl());
 
         // with /.
         settings = new WebRequestSettings(new URL("http://htmlunit.sf.net/dir/./foo.html"));
@@ -72,6 +93,11 @@ public class WebRequestSettingsTest extends WebServerTestCase {
 
         // with /. and query
         settings = new WebRequestSettings(new URL("http://htmlunit.sf.net/dir/./foo.html?a=1&b=2"));
-        assertEquals("http://htmlunit.sf.net/dir/foo.htmla=1&b=2", settings.getUrl());
+        assertEquals(url3, settings.getUrl());
+
+        // pathological
+        settings = new WebRequestSettings(
+                new URL("http://htmlunit.sf.net/dir/foo/bar/./boo/hoo/silly/.././../../../.././foo.html?a=1&b=2"));
+        assertEquals(url3, settings.getUrl());
     }
 }
