@@ -16,11 +16,11 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
-import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.javascript.host.FormField;
 
 /**
- * The JavaScript object that represents a button (&lt;button type=...&gt;).
+ * The JavaScript object that represents a {@link HtmlButton} (&lt;button type=...&gt;).
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -45,22 +45,6 @@ public class HTMLButtonElement extends FormField {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setDomNode(final DomNode domNode) {
-        super.setDomNode(domNode);
-        if (jsxGet_type().equals("")) {
-            if (getBrowserVersion().isIE()) {
-                getDomNodeOrDie().setAttribute("type", "button");
-            }
-            else {
-                getDomNodeOrDie().setAttribute("type", "submit");
-            }
-        }
-    }
-
-    /**
      * Sets the value of the attribute "type".
      * <p>Note that there is no GUI change in the shape of the button,
      * so we don't treat it like {@link HTMLInputElement#jsxSet_type(String)}.</p>
@@ -71,5 +55,13 @@ public class HTMLButtonElement extends FormField {
             throw Context.reportRuntimeError("Object doesn't support this action");
         }
         getDomNodeOrDie().setAttribute("type", newType);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String jsxGet_type() {
+        return ((HtmlButton) getDomNodeOrDie()).getTypeAttribute();
     }
 }
