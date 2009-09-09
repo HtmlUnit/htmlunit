@@ -114,6 +114,7 @@ public class BrowserVersion implements Serializable {
     static {
         INTERNET_EXPLORER_6.initDefaultFeatures();
         INTERNET_EXPLORER_7.initDefaultFeatures();
+        INTERNET_EXPLORER_8.initDefaultFeatures();
         FIREFOX_2.initDefaultFeatures();
         FIREFOX_3.initDefaultFeatures();
         final PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
