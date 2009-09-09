@@ -1007,7 +1007,6 @@ public class NodeTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
-
     /**
      * @throws Exception if the test fails
      */
