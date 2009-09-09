@@ -105,7 +105,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private WebDriver buildWebDriver() {
         final String property = System.getProperty(PROPERTY, "").toLowerCase();
         if (property.contains("ff2") || property.contains("ff3")) {
-       	    return new FirefoxDriver();
+            return new FirefoxDriver();
         }
         if (property.contains("ie6") || property.contains("ie7")) {
             return new InternetExplorerDriver();
