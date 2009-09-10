@@ -315,6 +315,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     @Alerts("exception")
     public void nullRoot() throws Exception {
         final String script = "try {\n"
@@ -372,6 +373,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     @Alerts("exception")
     public void emptyFilter() throws Exception {
         final String script = "try {\n"
