@@ -31,9 +31,9 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.sourceforge.htmlunit.corejs.javascript.Callable;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.UniqueTag;
@@ -1367,7 +1367,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @throws DOMException on attempt to create a TreeWalker with a root that is <code>null</code>
      * @return a new TreeWalker
      */
-    public Object jsxFunction_createTreeWalker(final Node root, final int whatToShow, final NativeObject filter,
+    public Object jsxFunction_createTreeWalker(final Node root, final int whatToShow, final Scriptable filter,
             final boolean expandEntityReferences) throws DOMException {
 
         NodeFilter filterWrapper = null;
@@ -1377,7 +1377,14 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
                 @Override
                 public short acceptNode(final Node n) {
-                    final Object response = ScriptableObject.callMethod(filter, "acceptNode", new Object[] {n});
+                    final Object[] args = new Object[] {n};
+                    final Object response;
+                    if (filter instanceof Callable) {
+                        response = ((Callable) filter).call(Context.getCurrentContext(), filter, filter, args);
+                    }
+                    else {
+                        response = ScriptableObject.callMethod(filter, "acceptNode", args);
+                    }
                     return (short) Context.toNumber(response);
                 }
             };
