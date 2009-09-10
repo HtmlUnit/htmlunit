@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, (initial)??? IE8 support">
+            <action type="fix" dev="sdanig" issue="2854240">
+                Fix memory leak when many different BrowserVersion instances used.
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: HtmlButtonElement.type falls back to default value ("submit" for FF, "button" for IE) when attribute "type" is removed.
             </action>

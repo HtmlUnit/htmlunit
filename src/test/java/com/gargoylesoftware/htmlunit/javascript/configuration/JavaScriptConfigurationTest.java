@@ -23,11 +23,13 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.HashMap;
+import java.text.MessageFormat;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.After;
@@ -572,12 +574,40 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         // get a reference to the leaky map
         final Field field = JavaScriptConfiguration.class.getDeclaredField("ConfigurationMap_");
         field.setAccessible(true);
-        final HashMap< ? , ? > leakyMap = (HashMap< ? , ? >) field.get(null);
+        final Map< ? , ? > leakyMap = (Map< ? , ? >) field.get(null);
         for (int i = 0; i < 3; i++) {
             final BrowserVersion browserVersion = new BrowserVersion("App", "Version", "User agent", 1);
             JavaScriptConfiguration.getInstance(browserVersion);
         }
         assertEquals(1, leakyMap.size());
+    }
+
+    /**
+     * Regression test for bug 2854240.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void memoryLeak() throws Exception {
+        long count = 0;
+        while (count++ < 3000) {
+            final BrowserVersion browserVersion = new BrowserVersion(
+                "App" + RandomStringUtils.randomAlphanumeric(20),
+                "Version" + RandomStringUtils.randomAlphanumeric(20),
+                "User Agent" + RandomStringUtils.randomAlphanumeric(20),
+                1);
+            JavaScriptConfiguration.getInstance(browserVersion);
+            LOG.info("count: " + count + "; memory stats: " + getMemoryStats());
+        }
+    }
+
+    private String getMemoryStats() {
+        final Runtime rt = Runtime.getRuntime();
+        final long free = rt.freeMemory() / 1024;
+        final long total = rt.totalMemory() / 1024;
+        final long max = rt.maxMemory() / 1024;
+        final long used = total - free;
+        final String format = "used: {0,number,0}K, free: {1,number,0}K, total: {2,number,0}K, max: {3,number,0}K";
+        return MessageFormat.format(format, used, free, total, max);
     }
 
     /**

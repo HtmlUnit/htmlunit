@@ -25,6 +25,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.WeakHashMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -56,6 +57,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlDefinitionTerm;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlEmphasis;
+import com.gargoylesoftware.htmlunit.html.HtmlExample;
 import com.gargoylesoftware.htmlunit.html.HtmlHeading1;
 import com.gargoylesoftware.htmlunit.html.HtmlHeading2;
 import com.gargoylesoftware.htmlunit.html.HtmlHeading3;
@@ -89,7 +91,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableHeader;
 import com.gargoylesoftware.htmlunit.html.HtmlTeletype;
 import com.gargoylesoftware.htmlunit.html.HtmlUnderlined;
 import com.gargoylesoftware.htmlunit.html.HtmlVariable;
-import com.gargoylesoftware.htmlunit.html.HtmlExample;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.StrictErrorHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDivElement;
@@ -112,6 +113,7 @@ public final class JavaScriptConfiguration {
 
     private static final Log LOG = LogFactory.getLog(JavaScriptConfiguration.class);
 
+    /** The JavaScript configuration XML document. */
     private static Document XmlDocument_;
 
     /** Constant indicating that this function/property is used by the specified browser version. */
@@ -123,28 +125,28 @@ public final class JavaScriptConfiguration {
     /** Constant indicating that this function/property is not defined in the configuration file. */
     public static final int NOT_FOUND = 3;
 
+    /** Cache of browser versions and their corresponding JavaScript configurations. */
     private static Map<BrowserVersion, JavaScriptConfiguration> ConfigurationMap_ =
-        new HashMap<BrowserVersion, JavaScriptConfiguration>(11);
+        new WeakHashMap<BrowserVersion, JavaScriptConfiguration>(11);
+
     private static Map<String, String> ClassnameMap_ = new HashMap<String, String>();
+
     private static Map<Class < ? extends HtmlElement>, Class < ? extends SimpleScriptable>> HtmlJavaScriptMap_;
 
     private final Map<String, ClassConfiguration> configuration_;
-    private final BrowserVersion browser_;
 
     /**
      * Constructor is only called from {@link #getInstance(BrowserVersion)} which is synchronized.
      * @param browser the browser version to use
      */
     private JavaScriptConfiguration(final BrowserVersion browser) {
-        browser_ = browser;
         if (XmlDocument_ == null) {
             loadConfiguration();
         }
-
         if (XmlDocument_ == null) {
             throw new IllegalStateException("Configuration was not initialized - see log for details");
         }
-        configuration_ = buildUsageMap();
+        configuration_ = buildUsageMap(browser);
     }
 
     /**
@@ -157,13 +159,11 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Reset the this class to it's initial state. This method is
-     * used for testing only.
-     *
+     * Resets this class to its initial state. This method is used for testing only.
      */
     protected static void resetClassForTesting() {
         XmlDocument_ = null;
-        ConfigurationMap_ = new HashMap<BrowserVersion, JavaScriptConfiguration>(11);
+        ConfigurationMap_ = new WeakHashMap<BrowserVersion, JavaScriptConfiguration>(11);
     }
 
     /**
@@ -287,7 +287,7 @@ public final class JavaScriptConfiguration {
         return configuration_.keySet();
     }
 
-    private Map<String, ClassConfiguration> buildUsageMap() {
+    private Map<String, ClassConfiguration> buildUsageMap(final BrowserVersion browser) {
         final Map<String, ClassConfiguration> classMap = new HashMap<String, ClassConfiguration>(30);
         Node node = XmlDocument_.getDocumentElement().getFirstChild();
         while (node != null) {
@@ -295,11 +295,11 @@ public final class JavaScriptConfiguration {
                 final Element element = (Element) node;
                 if (element.getTagName().equals("class")) {
                     final String className = element.getAttribute("name");
-                    if (!testToExcludeElement(element)) {
+                    if (!testToExcludeElement(element, browser)) {
                         try {
-                            final ClassConfiguration classConfiguration = parseClassElement(className, element);
-                            if (classConfiguration != null) {
-                                classMap.put(className, classConfiguration);
+                            final ClassConfiguration config = parseClassElement(className, element, browser);
+                            if (config != null) {
+                                classMap.put(className, config);
                             }
                         }
                         catch (final ClassNotFoundException e) {
@@ -317,11 +317,12 @@ public final class JavaScriptConfiguration {
      * Parses the class element to build the class configuration.
      * @param className the name of the class element
      * @param element the element to parse
+     * @param browser the browser version under consideration
      * @return the class element to build the class configuration
      * @throws ClassNotFoundException if the specified class could not be found
      */
-    private ClassConfiguration parseClassElement(final String className, final Element element)
-        throws ClassNotFoundException {
+    private ClassConfiguration parseClassElement(final String className, final Element element,
+        final BrowserVersion browser) throws ClassNotFoundException {
         final String notImplemented = element.getAttribute("notImplemented");
         if ("true".equalsIgnoreCase(notImplemented)) {
             return null;
@@ -345,13 +346,13 @@ public final class JavaScriptConfiguration {
                 final Element childElement = (Element) node;
                 final String tagName = childElement.getTagName();
                 if (tagName.equals("property")) {
-                    parsePropertyElement(classConfiguration, childElement);
+                    parsePropertyElement(classConfiguration, childElement, browser);
                 }
                 else if (tagName.equals("function")) {
-                    parseFunctionElement(classConfiguration, childElement);
+                    parseFunctionElement(classConfiguration, childElement, browser);
                 }
                 else if (tagName.equals("constant")) {
-                    parseConstantElement(classConfiguration, childElement);
+                    parseConstantElement(classConfiguration, childElement, browser);
                 }
                 else if (tagName.equals("browser")) {
                     LOG.debug("browser tag not yet handled for class " + linkedClassname);
@@ -374,13 +375,15 @@ public final class JavaScriptConfiguration {
      *
      * @param classConfiguration the configuration that is being built
      * @param element the property element
+     * @param browser the browser version under consideration
      */
-    private void parsePropertyElement(final ClassConfiguration classConfiguration, final Element element) {
+    private void parsePropertyElement(final ClassConfiguration classConfiguration, final Element element,
+        final BrowserVersion browser) {
         final String notImplemented = element.getAttribute("notImplemented");
         if ("true".equalsIgnoreCase(notImplemented)) {
             return;
         }
-        if (testToExcludeElement(element)) {
+        if (testToExcludeElement(element, browser)) {
             return;
         }
         final String propertyName = element.getAttribute("name");
@@ -402,14 +405,16 @@ public final class JavaScriptConfiguration {
      *
      * @param classConfiguration the configuration that is being built
      * @param element the function element
+     * @param browser the browser version under consideration
      */
-    private void parseFunctionElement(final ClassConfiguration classConfiguration, final Element element) {
+    private void parseFunctionElement(final ClassConfiguration classConfiguration, final Element element,
+        final BrowserVersion browser) {
         final String notImplemented = element.getAttribute("notImplemented");
         if ("true".equalsIgnoreCase(notImplemented)) {
             return;
         }
         final String propertyName = element.getAttribute("name");
-        if (testToExcludeElement(element)) {
+        if (testToExcludeElement(element, browser)) {
             return;
         }
         classConfiguration.addFunction(propertyName);
@@ -420,9 +425,11 @@ public final class JavaScriptConfiguration {
      *
      * @param classConfiguration the configuration that is being built
      * @param element the property element
+     * @param browser the browser version under consideration
      */
-    private void parseConstantElement(final ClassConfiguration classConfiguration, final Element element) {
-        if (testToExcludeElement(element)) {
+    private void parseConstantElement(final ClassConfiguration classConfiguration, final Element element,
+        final BrowserVersion browser) {
+        if (testToExcludeElement(element, browser)) {
             return;
         }
         final String constantName = element.getAttribute("name");
@@ -433,10 +440,11 @@ public final class JavaScriptConfiguration {
      * Test for the browser and JavaScript constraints. Returns true if any constraints are present
      * and the browser does not meet the constraints.
      * @param element the element to scan the children of
+     * @param browser the browser version under consideration
      * @return true to exclude this element
      */
-    private boolean testToExcludeElement(final Element element) {
-        if (browser_ == null) {
+    private boolean testToExcludeElement(final Element element, final BrowserVersion browser) {
+        if (browser == null) {
             return false;
         }
         Node node = element.getFirstChild();
@@ -447,7 +455,7 @@ public final class JavaScriptConfiguration {
                 final Element childElement = (Element) node;
                 if (childElement.getTagName().equals("browser")) {
                     browserConstraint = true;
-                    if (testToIncludeForBrowserConstraint(childElement, browser_)) {
+                    if (testToIncludeForBrowserConstraint(childElement, browser)) {
                         allowBrowser = true;
                     }
                 }
@@ -471,13 +479,6 @@ public final class JavaScriptConfiguration {
     protected boolean classConfigEquals(final String classname, final ClassConfiguration config) {
         final ClassConfiguration myConfig = configuration_.get(classname);
         return config.equals(myConfig);
-    }
-
-    /**
-     * @return the browser
-     */
-    public BrowserVersion getBrowser() {
-        return browser_;
     }
 
     /**
