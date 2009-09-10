@@ -14,22 +14,22 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.ScriptException;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link TreeWalker}.
  *
  * @version $Revision$
  * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
+ * @author Marc Guillemot
  */
-public class TreeWalkerTest extends WebTestCase {
+@RunWith(BrowserRunner.class)
+public class TreeWalkerTest extends WebDriverTestCase {
     private static final String contentStart = "<html><head><title>TreeWalker Test</title>\n"
         + "<script>\n"
         + "function safeTagName(o) {\n"
@@ -41,8 +41,10 @@ public class TreeWalkerTest extends WebTestCase {
         + "  alert(tw.whatToShow);\n"
         + "  alert(tw.expandEntityReferences);\n"
         + "}\n"
-        + "function test() {\n";
-    private static final String contentEnd = "\n}\n</script></head>\n"
+        + "function test() {\n"
+        + "  try {\n";
+    private static final String contentEnd = "\n  } catch(e) { alert('exception') };\n"
+        + "\n}\n</script></head>\n"
         + "<body onload='test()'>\n"
         + "<div id='theDiv'>Hello, <span id='theSpan'>this is a test for"
         + "<a  id='theA' href='http://htmlunit.sf.net'>HtmlUnit</a> support"
@@ -50,15 +52,10 @@ public class TreeWalkerTest extends WebTestCase {
         + "<p id='theP'>for TreeWalker's</p>\n"
         + "</body></html>";
 
-    private void test(final String script, final String[] expectedAlerts) throws Exception {
-        final String content = contentStart + script + contentEnd;
+    private void test(final String script) throws Exception {
+        final String html = contentStart + script + contentEnd;
 
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts2(html);
     }
 
     private static final String contentStart2 = "<html><head><title>TreeWalker Test</title>\n"
@@ -66,8 +63,10 @@ public class TreeWalkerTest extends WebTestCase {
         + "function safeTagName(o) {\n"
         + "  return o ? o.tagName : undefined\n"
         + "}\n"
-        + "function test() {\n";
-    private static final String contentEnd2 = "\n}\n</script></head>\n"
+        + "function test() {\n"
+        + "  try {\n";
+    private static final String contentEnd2 = "\n  } catch(e) { alert('exception') };\n"
+        + "\n}\n</script></head>\n"
         + "<body onload='test()'>\n"
         + "<div id='theDiv'>Hello, <span id='theSpan'>this is a test for"
         + "<a  id='theA' href='http://htmlunit.sf.net'>HtmlUnit</a> support"
@@ -76,288 +75,356 @@ public class TreeWalkerTest extends WebTestCase {
         + "<span>something <code>codey</code>goes <pre>  here</pre></span>"
         + "</body></html>";
 
-    private void test2(final String script, final String[] expectedAlerts) throws Exception {
-        final String content = contentStart2 + script + contentEnd2;
+    private void test2(final String script) throws Exception {
+        final String html = contentStart2 + script + contentEnd2;
 
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "BODY", "BODY", "1", "false" }, IE = "exception")
     public void getters1() throws Exception {
-        final String[] expectedAlerts = {"BODY", "BODY", Integer.toString(NodeFilter.SHOW_ELEMENT), "false"};
         final String script = "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, false);"
                             + "alertTreeWalker(tw);";
 
-        test(script, expectedAlerts);
+        test(script);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "A", "A", "4294967295", "true" }, IE = "exception")
     public void getters2() throws Exception {
-        final String[] expectedAlerts = {"A", "A", "" + 0xFFFFFFFF, "true"};
-        final String script = "var tw = document.createTreeWalker(document.getElementById('theA'), NodeFilter.SHOW_ALL,"
-                                            + "null, true); alertTreeWalker(tw);";
+        final String script = "var theA = document.getElementById('theA');\n"
+            + "var tw = document.createTreeWalker(theA, NodeFilter.SHOW_ALL, null, true);\n"
+            + "alertTreeWalker(tw);\n";
 
-        test(script, expectedAlerts);
+        test(script);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "BODY", "DIV", "1", "true" }, IE = "exception")
     public void firstChild() throws Exception {
-        final String[] expectedAlerts = {"BODY", "DIV", Integer.toString(NodeFilter.SHOW_ELEMENT), "true"};
-        final String script = "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);"
-                            + "tw.firstChild(); alertTreeWalker(tw);";
+        final String script =
+            "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);\n"
+            + "tw.firstChild();\n"
+            + "alertTreeWalker(tw);\n";
 
-        test(script, expectedAlerts);
-
-        final String[] expectedAlerts1 = {"BODY", "SPAN", Integer.toString(NodeFilter.SHOW_ELEMENT), "true"};
-        final String script1 = "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);"
-                        + "tw.currentNode = document.getElementById('theDiv'); tw.firstChild(); alertTreeWalker(tw);";
-
-        test(script1, expectedAlerts1);
+        test(script);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "BODY", "SPAN", "1", "true" }, IE = "exception")
+    public void firstChild2() throws Exception {
+        final String script =
+            "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);\n"
+            + "tw.currentNode = document.getElementById('theDiv');\n"
+            + "tw.firstChild();\n"
+            + "alertTreeWalker(tw);\n";
+
+        test(script);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "BODY", "P", "1", "true" }, IE = "exception")
     public void lastChild() throws Exception {
-        final String[] expectedAlerts = {"BODY", "P", Integer.toString(NodeFilter.SHOW_ELEMENT), "true"};
-        final String script = "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);"
-                            + "tw.lastChild(); alertTreeWalker(tw);";
+        final String script =
+            "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);\n"
+            + "tw.lastChild();\n"
+            + "alertTreeWalker(tw);\n";
 
-        test(script, expectedAlerts);
-
-        final String[] expectedAlerts1 = {"BODY", "SPAN", Integer.toString(NodeFilter.SHOW_ELEMENT), "true"};
-        final String script1 = "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);"
-                        + "tw.currentNode = document.getElementById('theDiv'); tw.lastChild(); alertTreeWalker(tw);";
-
-        test(script1, expectedAlerts1);
+        test(script);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "BODY", "SPAN", "1", "true" }, IE = "exception")
+    public void lastChild2() throws Exception {
+        final String script =
+            "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);\n"
+            + "tw.currentNode = document.getElementById('theDiv');\n"
+            + "tw.lastChild();\n"
+            + "alertTreeWalker(tw);\n";
+
+        test(script);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "BODY", "BODY", "1", "true", "null" }, IE = "exception")
     public void parentNode() throws Exception {
-        final String[] expectedAlerts = {"BODY", "BODY", Integer.toString(NodeFilter.SHOW_ELEMENT), "true", "null"};
-        final String script = "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);"
-                            + "tw.currentNode = document.getElementById('theDiv'); tw.parentNode();"
-                            + "alertTreeWalker(tw); alert(tw.parentNode());";
+        final String script =
+            "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);\n"
+            + "tw.currentNode = document.getElementById('theDiv');\n"
+            + "tw.parentNode();\n"
+            + "alertTreeWalker(tw);\n"
+            + "alert(tw.parentNode());";
 
-        test(script, expectedAlerts);
-
-        final String[] expectedAlerts1 = {"BODY", "DIV", Integer.toString(NodeFilter.SHOW_ELEMENT), "true"};
-        final String script1 = "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);"
-                        + "tw.currentNode = document.getElementById('theSpan'); tw.parentNode(); alertTreeWalker(tw);";
-
-        test(script1, expectedAlerts1);
+        test(script);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "BODY", "DIV", "1", "true" }, IE = "exception")
+    public void parentNode2() throws Exception {
+        final String script =
+            "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);\n"
+            + "tw.currentNode = document.getElementById('theSpan');\n"
+            + "tw.parentNode();\n"
+            + "alertTreeWalker(tw);";
+
+        test(script);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "BODY", "P", "1", "true", "null" }, IE = "exception")
     public void siblings() throws Exception {
-        final String[] expectedAlerts = {"BODY", "P", Integer.toString(NodeFilter.SHOW_ELEMENT), "true", "null"};
-        final String script = "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);"
-                            + "tw.currentNode = document.getElementById('theDiv'); tw.nextSibling();"
-                            + "alertTreeWalker(tw); alert(tw.nextSibling());";
+        final String script =
+            "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);\n"
+            + "tw.currentNode = document.getElementById('theDiv');\n"
+            + "tw.nextSibling();\n"
+            + "alertTreeWalker(tw);\n"
+            + "alert(tw.nextSibling());\n";
 
-        test(script, expectedAlerts);
-
-        final String[] expectedAlerts1 = {"BODY", "DIV", Integer.toString(NodeFilter.SHOW_ELEMENT), "true", "null"};
-        final String script1 = "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);"
-                            + "tw.currentNode = document.getElementById('theP'); tw.previousSibling();"
-                            + "alertTreeWalker(tw); alert(tw.previousSibling());";
-
-        test(script1, expectedAlerts1);
+        test(script);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "BODY", "DIV", "1", "true", "null" }, IE = "exception")
+    public void siblings2() throws Exception {
+        final String script1 =
+            "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);\n"
+            + "tw.currentNode = document.getElementById('theP');\n"
+            + "tw.previousSibling();\n"
+            + "alertTreeWalker(tw);\n"
+            + "alert(tw.previousSibling());\n";
+
+        test(script1);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "BODY", "DIV", "SPAN", "A", "P", "undefined", "P" }, IE = "exception")
     public void next() throws Exception {
-        final String[] expectedAlerts = {"BODY", "DIV", "SPAN", "A", "P", "undefined", "P"};
-        final String script = "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);"
-                            + "alert(safeTagName(tw.currentNode)); alert(safeTagName(tw.nextNode()));"
-                            + "alert(safeTagName(tw.nextNode())); alert(safeTagName(tw.nextNode()));"
-                            + "alert(safeTagName(tw.nextNode())); alert(safeTagName(tw.nextNode()));"
-                            + "alert(safeTagName(tw.currentNode));";
+        final String script =
+            "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);\n"
+            + "alert(safeTagName(tw.currentNode));\n"
+            + "alert(safeTagName(tw.nextNode()));\n"
+            + "alert(safeTagName(tw.nextNode()));\n"
+            + "alert(safeTagName(tw.nextNode()));\n"
+            + "alert(safeTagName(tw.nextNode()));\n"
+            + "alert(safeTagName(tw.nextNode()));\n"
+            + "alert(safeTagName(tw.currentNode));\n";
 
-        test(script, expectedAlerts);
+        test(script);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "P", "A", "SPAN", "DIV", "BODY", "undefined", "BODY" }, IE = "exception")
     public void previous() throws Exception {
-        final String[] expectedAlerts = {"P", "A", "SPAN", "DIV", "BODY", "undefined", "BODY"};
-        final String script = "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);"
-                            + "tw.currentNode = document.getElementById('theP'); alert(safeTagName(tw.currentNode));"
-                            + "alert(safeTagName(tw.previousNode())); alert(safeTagName(tw.previousNode()));"
-                            + "alert(safeTagName(tw.previousNode())); alert(safeTagName(tw.previousNode()));"
-                            + "alert(safeTagName(tw.previousNode())); alert(safeTagName(tw.currentNode));";
+        final String script =
+            "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);\n"
+            + "tw.currentNode = document.getElementById('theP');\n"
+            + "alert(safeTagName(tw.currentNode));\n"
+            + "alert(safeTagName(tw.previousNode()));\n"
+            + "alert(safeTagName(tw.previousNode()));\n"
+            + "alert(safeTagName(tw.previousNode()));\n"
+            + "alert(safeTagName(tw.previousNode()));\n"
+            + "alert(safeTagName(tw.previousNode()));\n"
+            + "alert(safeTagName(tw.currentNode));\n";
 
-        test(script, expectedAlerts);
+        test(script);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "DIV", "SPAN", "A", "undefined", "P", "BODY", "undefined", "SPAN", "undefined",
+            "P", "SPAN", "CODE", "PRE", "undefined" }, IE = "exception")
     public void walking() throws Exception {
-        final String[] expectedAlerts = {"DIV", "SPAN", "A", "undefined", "P", "BODY", "undefined", "SPAN", "undefined",
-                                         "P", "SPAN", "CODE", "PRE", "undefined"};
-        final String script = "var tw = document.createTreeWalker(document.body, 1, null, true);"
-                            + "alert(safeTagName(tw.firstChild())); alert(safeTagName(tw.firstChild()));"
-                            + "alert(safeTagName(tw.lastChild())); alert(safeTagName(tw.lastChild()));"
-                            + "alert(safeTagName(tw.nextNode())); alert(safeTagName(tw.parentNode()));"
-                            + "alert(safeTagName(tw.parentNode())); alert(safeTagName(tw.lastChild()));"
-                            + "alert(safeTagName(tw.nextSibling()));  alert(safeTagName(tw.previousSibling()));"
-                            + "alert(safeTagName(tw.nextSibling())); alert(safeTagName(tw.nextNode()));"
-                            + "alert(safeTagName(tw.nextNode())); alert(safeTagName(tw.nextNode()));";
+        final String script = "var tw = document.createTreeWalker(document.body, 1, null, true);\n"
+            + "alert(safeTagName(tw.firstChild()));\n"
+            + "alert(safeTagName(tw.firstChild()));\n"
+            + "alert(safeTagName(tw.lastChild()));\n"
+            + "alert(safeTagName(tw.lastChild()));\n"
+            + "alert(safeTagName(tw.nextNode()));\n"
+            + "alert(safeTagName(tw.parentNode()));\n"
+            + "alert(safeTagName(tw.parentNode()));\n"
+            + "alert(safeTagName(tw.lastChild()));\n"
+            + "alert(safeTagName(tw.nextSibling()));\n"
+            + "alert(safeTagName(tw.previousSibling()));\n"
+            + "alert(safeTagName(tw.nextSibling()));\n"
+            + "alert(safeTagName(tw.nextNode()));\n"
+            + "alert(safeTagName(tw.nextNode()));\n"
+            + "alert(safeTagName(tw.nextNode()));\n";
 
-        test2(script, expectedAlerts);
+        test2(script);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "TITLE", "SCRIPT", "HEAD", "HTML", "HEAD", "BODY", "undefined" }, IE = "exception")
     public void walkingOutsideTheRoot() throws Exception {
-        final String[] expectedAlerts = {"TITLE", "SCRIPT", "HEAD", "HTML", "HEAD", "BODY", "undefined"};
-        final String script = "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);"
-                            + "tw.currentNode = document.firstChild.firstChild; alert(safeTagName(tw.firstChild()));"
-                            + "alert(safeTagName(tw.nextNode())); alert(safeTagName(tw.parentNode()));"
-                            + "alert(safeTagName(tw.previousNode())); alert(safeTagName(tw.firstChild()));"
-                            + "alert(safeTagName(tw.nextSibling())); alert(safeTagName(tw.previousSibling()));";
+        final String script =
+            "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);\n"
+            + "tw.currentNode = document.firstChild.firstChild;\n"
+            + "alert(safeTagName(tw.firstChild()));\n"
+            + "alert(safeTagName(tw.nextNode()));\n"
+            + "alert(safeTagName(tw.parentNode()));\n"
+            + "alert(safeTagName(tw.previousNode()));\n"
+            + "alert(safeTagName(tw.firstChild()));\n"
+            + "alert(safeTagName(tw.nextSibling()));\n"
+            + "alert(safeTagName(tw.previousSibling()));\n";
 
-        test2(script, expectedAlerts);
+        test2(script);
     }
 
     /**
      * @throws Exception if the test fails
      */
-    @Test(expected = ScriptException.class)
+    @Alerts("exception")
     public void nullRoot() throws Exception {
-        final String[] expectedAlerts = {};
-        final String script = "var tw = document.createTreeWalker(null, NodeFilter.SHOW_ELEMENT, null, true);";
+        final String script = "try {\n"
+            + "var tw = document.createTreeWalker(null, NodeFilter.SHOW_ELEMENT, null, true);\n"
+            + "} catch(e) { alert('exception'); }\n";
 
-        test2(script, expectedAlerts);
+        test2(script);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "TITLE", "undefined", "HEAD", "HTML", "HEAD", "BODY", "undefined" }, IE = "exception")
     public void simpleFilter() throws Exception {
-        final String[] expectedAlerts = {"TITLE", "undefined", "HEAD", "HTML", "HEAD", "BODY", "undefined"};
         final String script = "var noScripts = {acceptNode: function(node) {"
             + "if (node.tagName == 'SCRIPT') return NodeFilter.FILTER_REJECT;"
             // using number rather that object field causes Rhino to pass a Double
-            + "return 1; // NodeFilter.FILTER_ACCEPT \n}};"
-            + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts,"
-            + "true); tw.currentNode = document.firstChild.firstChild;"
-            + "alert(safeTagName(tw.firstChild())); alert(safeTagName(tw.nextSibling()));"
-            + "alert(safeTagName(tw.parentNode())); alert(safeTagName(tw.previousNode()));"
-            + "alert(safeTagName(tw.firstChild())); alert(safeTagName(tw.nextSibling()));"
+            + "return 1; // NodeFilter.FILTER_ACCEPT \n}};\n"
+            + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts, true);\n"
+            + "tw.currentNode = document.firstChild.firstChild;\n"
+            + "alert(safeTagName(tw.firstChild()));\n"
+            + "alert(safeTagName(tw.nextSibling()));\n"
+            + "alert(safeTagName(tw.parentNode()));\n"
+            + "alert(safeTagName(tw.previousNode()));\n"
+            + "alert(safeTagName(tw.firstChild()));\n"
+            + "alert(safeTagName(tw.nextSibling()));\n"
+            + "alert(safeTagName(tw.previousSibling()));\n";
+
+        test2(script);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts("exception")
+    public void emptyFilter() throws Exception {
+        final String script = "try {\n"
+            + "var tw = document.createTreeWalker(null, NodeFilter.SHOW_ELEMENT, {}, true);\n"
+            + "} catch(e) { alert('exception'); }\n";
+
+        test2(script);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "P", "undefined" }, IE = "exception")
+    public void secondFilterReject() throws Exception {
+        final String script = "var noScripts = {acceptNode: function(node) {if (node.tagName == 'SPAN' ||"
+            + "node.tagName == 'DIV') return NodeFilter.FILTER_REJECT;"
+            + "return NodeFilter.FILTER_ACCEPT}};\n"
+            + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts, true);\n"
+            + "alert(safeTagName(tw.firstChild()));\n"
+            + "alert(safeTagName(tw.nextSibling()));\n";
+
+        test2(script);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "A", "P", "CODE", "PRE", "undefined" }, IE = "exception")
+    public void secondFilterSkip() throws Exception {
+        final String script = "var noScripts = {acceptNode: function(node) {if (node.tagName == 'SPAN' ||"
+            + "node.tagName == 'DIV') return NodeFilter.FILTER_SKIP;"
+            + "return NodeFilter.FILTER_ACCEPT}};\n"
+            + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts, true);\n"
+            + "alert(safeTagName(tw.firstChild()));\n"
+            + "alert(safeTagName(tw.nextSibling()));\n"
+            + "alert(safeTagName(tw.nextSibling()));\n"
+            + "alert(safeTagName(tw.nextSibling()));\n"
+            + "alert(safeTagName(tw.nextSibling()));\n";
+
+        test2(script);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "P", "undefined" }, IE = "exception")
+    public void secondFilterRejectReverse() throws Exception {
+        final String script = "var noScripts = {acceptNode: function(node) {if (node.tagName == 'SPAN' ||"
+            + "node.tagName == 'DIV') return NodeFilter.FILTER_REJECT;"
+            + "return NodeFilter.FILTER_ACCEPT}};\n"
+            + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts, true);\n"
+            + "alert(safeTagName(tw.lastChild()));\n"
+            + "alert(safeTagName(tw.previousSibling()));\n";
+
+        test2(script);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "PRE", "CODE", "P", "A", "undefined" }, IE = "exception")
+    public void secondFilterSkipReverse() throws Exception {
+        final String script = "var noScripts = {acceptNode: function(node) {if (node.tagName == 'SPAN' ||"
+            + "node.tagName == 'DIV') return NodeFilter.FILTER_SKIP; return NodeFilter.FILTER_ACCEPT}};\n"
+            + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts, true);\n"
+            + "alert(safeTagName(tw.lastChild()));\n"
+            + "alert(safeTagName(tw.previousSibling()));\n"
+            + "alert(safeTagName(tw.previousSibling()));\n"
+            + "alert(safeTagName(tw.previousSibling()));\n"
             + "alert(safeTagName(tw.previousSibling()));";
 
-        test2(script, expectedAlerts);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test(expected = ScriptException.class)
-    public void emptyFilter() throws Exception {
-        final String[] expectedAlerts = {"TITLE", "undefined", "HEAD", "HTML", "HEAD", "BODY", "undefined"};
-        final String script = "var noScripts = {};"
-                            + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts,"
-                                            + "true); tw.currentNode = document.firstChild.firstChild;"
-                            + "alert(safeTagName(tw.firstChild())); alert(safeTagName(tw.nextSibling()));"
-                            + "alert(safeTagName(tw.parentNode())); alert(safeTagName(tw.previousNode()));"
-                            + "alert(safeTagName(tw.firstChild())); alert(safeTagName(tw.nextSibling()));"
-                            + "alert(safeTagName(tw.previousSibling()));";
-
-        test2(script, expectedAlerts);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void secondFilterReject() throws Exception {
-        final String[] expectedAlerts = {"P", "undefined"};
-        final String script = "var noScripts = {acceptNode: function(node) {if (node.tagName == 'SPAN' ||"
-                                    + "node.tagName == 'DIV') return NodeFilter.FILTER_REJECT;"
-                                + "return NodeFilter.FILTER_ACCEPT}};"
-                            + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts,"
-                            + "true); alert(safeTagName(tw.firstChild())); alert(safeTagName(tw.nextSibling()));";
-
-        test2(script, expectedAlerts);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void secondFilterSkip() throws Exception {
-        final String[] expectedAlerts = {"A", "P", "CODE", "PRE", "undefined"};
-        final String script = "var noScripts = {acceptNode: function(node) {if (node.tagName == 'SPAN' ||"
-                                    + "node.tagName == 'DIV') return NodeFilter.FILTER_SKIP;"
-                                + "return NodeFilter.FILTER_ACCEPT}};"
-                            + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts,"
-                                + "true); alert(safeTagName(tw.firstChild())); alert(safeTagName(tw.nextSibling()));"
-                            + "alert(safeTagName(tw.nextSibling())); alert(safeTagName(tw.nextSibling()));"
-                            + "alert(safeTagName(tw.nextSibling()));";
-
-        test2(script, expectedAlerts);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void secondFilterRejectReverse() throws Exception {
-        final String[] expectedAlerts = {"P", "undefined"};
-        final String script = "var noScripts = {acceptNode: function(node) {if (node.tagName == 'SPAN' ||"
-                                    + "node.tagName == 'DIV') return NodeFilter.FILTER_REJECT;"
-                                + "return NodeFilter.FILTER_ACCEPT}};"
-                            + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts,"
-                            + "true); alert(safeTagName(tw.lastChild())); alert(safeTagName(tw.previousSibling()));";
-
-        test2(script, expectedAlerts);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void secondFilterSkipReverse() throws Exception {
-        final String[] expectedAlerts = {"PRE", "CODE", "P", "A", "undefined"};
-        final String script = "var noScripts = {acceptNode: function(node) {if (node.tagName == 'SPAN' ||"
-                            + "node.tagName == 'DIV') return NodeFilter.FILTER_SKIP; return NodeFilter.FILTER_ACCEPT}};"
-                            + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts,"
-                            + "true); alert(safeTagName(tw.lastChild())); alert(safeTagName(tw.previousSibling()));"
-                            + "alert(safeTagName(tw.previousSibling())); alert(safeTagName(tw.previousSibling()));"
-                            + "alert(safeTagName(tw.previousSibling()));";
-
-        test2(script, expectedAlerts);
+        test2(script);
     }
 }
