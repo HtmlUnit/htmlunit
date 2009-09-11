@@ -277,4 +277,30 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "0", "0", "3", "1" })
+    public void rowIndex_sectionRowIndex() throws Exception {
+        final String html
+            = "<html><body><table>\n"
+            + "  <tr id='tr1'><td>a</td></tr>\n"
+            + "  <tr id='tr2'><td>b</td></tr>\n"
+            + "  <tfoot>\n"
+            + "    <tr id='trf1'><td>a</td></tr>\n"
+            + "    <tr id='trf2'><td>a</td></tr>\n"
+            + "  </tfoot>\n"
+            + "</table>\n"
+            + "<script>\n"
+            + "  var tr1 = document.getElementById('tr1');\n"
+            + "  var trf2 = document.getElementById('trf2');\n"
+            + "  alert(tr1.rowIndex);\n"
+            + "  alert(tr1.sectionRowIndex);\n"
+            + "  alert(trf2.rowIndex);\n"
+            + "  alert(trf2.sectionRowIndex);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

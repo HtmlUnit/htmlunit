@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
@@ -52,6 +53,25 @@ public class HTMLTableRowElement extends HTMLTableComponent {
         final HtmlTableRow row = (HtmlTableRow) getDomNodeOrDie();
         final HtmlTable table = row.getEnclosingTable();
         return table.getRows().indexOf(row);
+    }
+
+    /**
+     * Returns the index of the row within the enclosing thead, tbody or tfoot.
+     * @return the index of the row within the enclosing thead, tbody or tfoot
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534621.aspx">MSDN Documentation</a>
+     * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-79105901">
+     * DOM Level 1</a>
+     */
+    public int jsxGet_sectionRowIndex() {
+        DomNode row = (HtmlTableRow) getDomNodeOrDie();
+        int index = -1;
+        while (row != null) {
+            if (row instanceof HtmlTableRow) {
+                ++index;
+            }
+            row = row.getPreviousSibling();
+        }
+        return index;
     }
 
     /**
