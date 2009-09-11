@@ -107,7 +107,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         if (property.contains("ff2") || property.contains("ff3")) {
             return new FirefoxDriver();
         }
-        if (property.contains("ie6") || property.contains("ie7")) {
+        if (property.contains("ie6") || property.contains("ie7") || property.contains("ie8")) {
             return new InternetExplorerDriver();
         }
         final WebClient webClient = getWebClient();

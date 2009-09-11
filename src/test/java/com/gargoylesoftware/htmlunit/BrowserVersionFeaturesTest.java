@@ -53,6 +53,7 @@ public class BrowserVersionFeaturesTest extends WebTestCase {
     public void lexicographicOrder_properties() throws Exception {
         lexicographicOrder_properties(BrowserVersion.INTERNET_EXPLORER_6);
         lexicographicOrder_properties(BrowserVersion.INTERNET_EXPLORER_7);
+        lexicographicOrder_properties(BrowserVersion.INTERNET_EXPLORER_8);
         lexicographicOrder_properties(BrowserVersion.FIREFOX_2);
         lexicographicOrder_properties(BrowserVersion.FIREFOX_3);
     }

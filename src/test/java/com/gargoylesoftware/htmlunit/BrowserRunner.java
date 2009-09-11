@@ -68,6 +68,9 @@ public class BrowserRunner extends Suite {
             if (runAll || property.contains("ie7")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_7));
             }
+            if (runAll || property.contains("ie8")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8));
+            }
             if (runAll || property.contains("ff2")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_2));
             }
@@ -103,6 +106,9 @@ public class BrowserRunner extends Suite {
 
         /** Internet Explorer 7. */
         IE7,
+
+        /** Internet Explorer 8. */
+        IE8,
 
         /** All versions of Firefox. */
         FF,
@@ -153,6 +159,9 @@ public class BrowserRunner extends Suite {
         /** Alerts for Internet Explorer 7. If not defined, {@link #IE()} is used. */
         String[] IE7() default {EMPTY_DEFAULT };
 
+        /** Alerts for Internet Explorer 8. If not defined, {@link #IE()} is used. */
+        String[] IE8() default {EMPTY_DEFAULT };
+
         /** Alerts for any Firefox, it can be overridden by specific FF version. */
         String[] FF() default {EMPTY_DEFAULT };
 
@@ -179,21 +188,4 @@ public class BrowserRunner extends Suite {
         };
     }
 
-    static String getDescription(final BrowserVersion browserVersion) {
-        if (browserVersion == BrowserVersion.INTERNET_EXPLORER_6) {
-            return "IE6";
-        }
-        else if (browserVersion == BrowserVersion.INTERNET_EXPLORER_7) {
-            return "IE7";
-        }
-        else if (browserVersion == BrowserVersion.FIREFOX_2) {
-            return "FF2";
-        }
-        else if (browserVersion == BrowserVersion.FIREFOX_3) {
-            return "FF3";
-        }
-        else {
-            return browserVersion.getApplicationName() + browserVersion.getApplicationVersion();
-        }
-    }
 }

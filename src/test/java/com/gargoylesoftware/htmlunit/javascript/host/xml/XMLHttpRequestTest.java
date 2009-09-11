@@ -127,7 +127,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE6 = "activeX created", IE7 = "[object]",  FF = "[object XMLHttpRequest]")
+    @Alerts(IE = "[object]", IE6 = "activeX created", FF = "[object XMLHttpRequest]")
     public void creation() throws Exception {
         final String html =
             "<html>\n"
@@ -1336,7 +1336,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.IE7, Browser.FF })
+    @Browsers({ Browser.IE7, Browser.IE8, Browser.FF })
     @Alerts("undefined")
     public void caseSensitivity_XMLHttpRequest() throws Exception {
         final String html = "<html><head><script>\n"

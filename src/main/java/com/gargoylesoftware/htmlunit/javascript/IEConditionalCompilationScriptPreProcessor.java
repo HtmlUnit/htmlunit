@@ -177,13 +177,19 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
             if (browserVersion.getBrowserVersionNumeric() <= 6) {
                 return "5.6";
             }
-            return "5.7";
+            else if (browserVersion.getBrowserVersionNumeric() == 7) {
+                return "5.7";
+            }
+            return "5.8";
         }
         else if ("@_jscript_build".equals(variable)) {
             if (browserVersion.getBrowserVersionNumeric() <= 6) {
-                return "6626"; // that's what my IE6 currently returns
+                return "6626";
             }
-            return "5730";
+            if (browserVersion.getBrowserVersionNumeric() == 7) {
+                return "5730";
+            }
+            return "18702";
         }
         else if (ArrayUtils.contains(varNaN, variable)) {
             return "NaN";

@@ -63,7 +63,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
      * DOM Level 1</a>
      */
     public int jsxGet_sectionRowIndex() {
-        DomNode row = (HtmlTableRow) getDomNodeOrDie();
+        DomNode row = getDomNodeOrDie();
         int index = -1;
         while (row != null) {
             if (row instanceof HtmlTableRow) {

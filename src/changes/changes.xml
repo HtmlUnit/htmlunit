@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, (initial)??? IE8 support">
+            <action type="fix" dev="asashour" issue="2855470">
+                JavaScript: fix style 'pixel' attributes.
+            </action>
             <action type="add" dev="mguillem">
                 JavaScript: HTMLTableElement's properties caption, tHead and tFoot are writable (FF only) with right parameters,
                 otherwise an exception is thrown.

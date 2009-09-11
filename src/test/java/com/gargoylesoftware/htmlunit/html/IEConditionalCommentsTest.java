@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class IEConditionalCommentsTest extends WebTestCase {
+public class IEConditionalCommentsTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -41,33 +41,33 @@ public class IEConditionalCommentsTest extends WebTestCase {
             + "<script>alert('hello')</script>\n"
             + "<!--[if IE]><script>alert('IE')</script><![endif]-->\n"
             + "</head><body></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE6 = { "hello", "IE6" }, IE7 = "hello", FF = "hello")
+    @Alerts(IE = "hello", IE6 = { "hello", "IE6" }, FF = "hello")
     public void if_lte_IE6() throws Exception {
         final String html = "<html><head>"
             + "<script>alert('hello')</script>\n"
             + "<!--[if lte IE 6]><script>alert('IE6')</script><![endif]-->\n"
             + "</head><body></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "hello", "IE up to 7" }, FF = "hello")
+    @Alerts(IE = { "hello", "IE up to 7" }, IE8 = "hello", FF = "hello")
     public void if_lte_IE_7() throws Exception {
         final String html = "<html><head>"
             + "<script>alert('hello')</script>\n"
             + "<!--[if lte IE 7]><script>alert('IE up to 7')</script><![endif]-->\n"
             + "</head><body></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -81,7 +81,7 @@ public class IEConditionalCommentsTest extends WebTestCase {
             + "<!--[if gte mso 9]><script>alert('gte mso 9')</script><![endif]-->\n"
             + "<!--[if lt mso 9]><script>alert('lt mso 9')</script><![endif]-->\n"
             + "</head><body></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -98,6 +98,6 @@ public class IEConditionalCommentsTest extends WebTestCase {
             + "alert(document.getElementById('div2').innerText);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }

@@ -40,7 +40,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
             + "<a id='myAnchor' href='javascript:'>Hello</a>\n"
             + "</body>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myAnchor")).click();
     }
 }

@@ -24,6 +24,7 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.internal.runners.model.ReflectiveCallable;
 import org.junit.internal.runners.statements.Fail;
+import org.junit.rules.MethodRule;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
@@ -74,6 +75,14 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                     expectedAlerts = alerts.IE();
                 }
             }
+            else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_8) {
+                if (isDefined(alerts.IE8())) {
+                    expectedAlerts = alerts.IE8();
+                }
+                else if (isDefined(alerts.IE())) {
+                    expectedAlerts = alerts.IE();
+                }
+            }
             else if (browserVersion_ == BrowserVersion.FIREFOX_2) {
                 if (isDefined(alerts.FF2())) {
                     expectedAlerts = alerts.FF2();
@@ -105,7 +114,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
     @Override
     protected String getName() {
-        return String.format("[%s]", BrowserRunner.getDescription(browserVersion_));
+        return String.format("[%s]", browserVersion_.getNickname());
     }
 
     @Override
@@ -124,7 +133,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         }
 
         return String.format("%s%s [%s]", prefix, className + '.' + method.getName(),
-            BrowserRunner.getDescription(browserVersion_));
+            browserVersion_.getNickname());
     }
 
     @Override
@@ -170,7 +179,8 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
             switch(browser) {
                 case IE:
                     if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_6
-                            || browserVersion_ == BrowserVersion.INTERNET_EXPLORER_7) {
+                            || browserVersion_ == BrowserVersion.INTERNET_EXPLORER_7
+                            || browserVersion_ == BrowserVersion.INTERNET_EXPLORER_8) {
                         return true;
                     }
                     break;
@@ -183,6 +193,12 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
                 case IE7:
                     if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_7) {
+                        return true;
+                    }
+                    break;
+
+                case IE8:
+                    if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_8) {
                         return true;
                     }
                     break;
@@ -232,6 +248,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         Statement statement = methodInvoker(method, test);
         statement = possiblyExpectingExceptions(method, test, statement);
         statement = withPotentialTimeout(method, test, statement);
+        statement = withRules(method, test, statement);
         statement = withBefores(method, test, statement);
         statement = withAfters(method, test, statement);
 
@@ -241,7 +258,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
         if (testCase instanceof WebDriverTestCase
                 && (property.contains("ff2") || property.contains("ff3")
-                    || property.contains("ie6") || property.contains("ie7"))) {
+                    || property.contains("ie6") || property.contains("ie7") || property.contains("ie8"))) {
             notYetImplemented = false;
         }
         else {
@@ -249,8 +266,16 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         }
         setAlerts(testCase, method.getMethod());
         statement = new BrowserStatement(statement, method.getMethod(), shouldFail,
-                notYetImplemented, BrowserRunner.getDescription(browserVersion_));
+                notYetImplemented, browserVersion_.getNickname());
         return statement;
+    }
+
+    private Statement withRules(final FrameworkMethod method, final Object target, final Statement statement) {
+        Statement result = statement;
+        for (final MethodRule each : rules(target)) {
+            result = each.apply(result, method, target);
+        }
+        return result;
     }
 
     private boolean isExpectedToFail(final FrameworkMethod method) {

@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
@@ -29,13 +29,13 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class IEConditionalCompilationTest extends WebTestCase {
+public class IEConditionalCompilationTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "testing @cc_on", IE7 = "testing @cc_on")
+    @Alerts(IE = "testing @cc_on")
     public void simple() throws Exception {
         final String script = "/*@cc_on alert('testing @cc_on'); @*/";
         testScript(script);
@@ -83,7 +83,7 @@ public class IEConditionalCompilationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE6 = "5.6", IE7 = "5.7")
+    @Alerts(IE6 = "5.6", IE7 = "5.7", IE8 = "5.8")
     public void ifTest() throws Exception {
         final String script = "/*@cc_on@if(@_jscript_version>=5){alert(@_jscript_version)}@end@*/";
         testScript(script);
@@ -93,7 +93,7 @@ public class IEConditionalCompilationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE6 = "5.6", IE7 = "5.7")
+    @Alerts(IE6 = "5.6", IE7 = "5.7", IE8 = "5.8")
     public void variables_jscript_version() throws Exception {
         final String script = "/*@cc_on alert(@_jscript_version) @*/";
         testScript(script);
@@ -103,7 +103,7 @@ public class IEConditionalCompilationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE6 = "6626", IE7 = "5730")
+    @Alerts(IE6 = "6626", IE7 = "5730", IE8 = "18702")
     public void variables_jscript_build() throws Exception {
         final String script = "/*@cc_on alert(@_jscript_build) @*/";
         testScript(script);
@@ -139,16 +139,15 @@ public class IEConditionalCompilationTest extends WebTestCase {
         testScript(script);
     }
 
-    private void testScript(final String script)
-        throws Exception {
+    private void testScript(final String script) throws Exception {
         final String html
             = "<html><head><title>foo</title>\n"
             + "<script>\n"
-            + script
+            + script + "\n"
             + "</script>\n"
             + "</head><body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }

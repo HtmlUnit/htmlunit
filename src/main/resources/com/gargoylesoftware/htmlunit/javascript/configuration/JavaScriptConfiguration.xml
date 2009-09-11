@@ -482,6 +482,7 @@
         </property>
         <property name="outlineWidth" readable="true" writable="true">
             <browser name="Firefox"/>
+            <browser name="Internet Explorer" min-version="8"/>
         </property>
         <property name="overflow" readable="true" writable="true"/>
         <property name="overflowX" readable="true" writable="true"/>

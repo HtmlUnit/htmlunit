@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HTMLSpanElementTest extends WebTestCase {
+public class HTMLSpanElementTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if an error occurs
@@ -57,14 +57,14 @@ public class HTMLSpanElementTest extends WebTestCase {
             + "  <body onload='test()'><span id='s'>abc</span></body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE6 = {"[object] undefined", "[object] undefined" }, IE7 = {"[object] ", "[object] undefined" },
+    @Alerts(IE6 = {"[object] undefined", "[object] undefined" }, IE = {"[object] ", "[object] undefined" },
             FF = {"[object HTMLSpanElement] undefined", "[object HTMLSpanElement] undefined" })
     public void cite() throws Exception {
         final String html =
@@ -83,6 +83,6 @@ public class HTMLSpanElementTest extends WebTestCase {
             + "  <body onload='test()'></body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }
