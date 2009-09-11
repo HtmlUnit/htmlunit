@@ -7,6 +7,13 @@
     <body>
         <release version="2.7" date="?" description="Bugfixes, (initial)??? IE8 support">
             <action type="add" dev="mguillem">
+                JavaScript: HTMLTableElement's properties caption, tHead and tFoot are writable (FF only) with right parameters,
+                otherwise an exception is thrown.
+            </action>
+            <action type="add" dev="mguillem">
+                JavaScript: add support for HTMLTableRowElement.sectionRowIndex.
+            </action>
+            <action type="add" dev="mguillem">
                 JavaScript: add support for DOMException constants (FF only).
             </action>
             <action type="update" dev="mguillem">

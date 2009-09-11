@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import java.util.List;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.host.RowContainer;
 
@@ -55,6 +57,25 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
+     * Sets the caption.
+     * @param o the caption
+     */
+    public void jsxSet_caption(final Object o) {
+        if (getBrowserVersion().isIE()) {
+            throw Context.reportRuntimeError("Can't set caption");
+        }
+        else if (!(o instanceof HTMLTableCaptionElement)) {
+            throw Context.reportRuntimeError("Not a caption");
+        }
+
+        // remove old caption (if any)
+        jsxFunction_deleteCaption();
+
+        final HTMLTableCaptionElement caption = (HTMLTableCaptionElement) o;
+        getDomNodeOrDie().appendChild(caption.getDomNodeOrDie());
+    }
+
+    /**
      * Returns the table's tfoot element, or <tt>null</tt> if none exists. If more than one
      * tfoot is declared in the table, this method returns the first one.
      * @return the table's tfoot element
@@ -68,6 +89,26 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
+     * Sets the tFoot.
+     * @param o the tFoot
+     */
+    public void jsxSet_tFoot(final Object o) {
+        if (getBrowserVersion().isIE()) {
+            throw Context.reportRuntimeError("Can't set tFoot");
+        }
+        else if (!(o instanceof HTMLTableSectionElement
+            && "TFOOT".equals(((HTMLTableSectionElement) o).jsxGet_tagName()))) {
+            throw Context.reportRuntimeError("Not a tFoot");
+        }
+
+        // remove old caption (if any)
+        jsxFunction_deleteTFoot();
+
+        final HTMLTableSectionElement tfoot = (HTMLTableSectionElement) o;
+        getDomNodeOrDie().appendChild(tfoot.getDomNodeOrDie());
+    }
+
+    /**
      * Returns the table's thead element, or <tt>null</tt> if none exists. If more than one
      * thead is declared in the table, this method returns the first one.
      * @return the table's thead element
@@ -78,6 +119,26 @@ public class HTMLTableElement extends RowContainer {
             return null;
         }
         return getScriptableFor(theads.get(0));
+    }
+
+    /**
+     * Sets the tHead.
+     * @param o the tHead
+     */
+    public void jsxSet_tHead(final Object o) {
+        if (getBrowserVersion().isIE()) {
+            throw Context.reportRuntimeError("Can't set tHead");
+        }
+        else if (!(o instanceof HTMLTableSectionElement
+            && "THEAD".equals(((HTMLTableSectionElement) o).jsxGet_tagName()))) {
+            throw Context.reportRuntimeError("Not a tHead");
+        }
+
+        // remove old caption (if any)
+        jsxFunction_deleteTHead();
+
+        final HTMLTableSectionElement thead = (HTMLTableSectionElement) o;
+        getDomNodeOrDie().appendChild(thead.getDomNodeOrDie());
     }
 
     /**

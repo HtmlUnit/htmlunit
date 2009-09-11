@@ -2034,7 +2034,7 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTable">
         <property name="bgColor" readable="true" writable="true"/>
         <property name="border" readable="true" writable="true"/>
-        <property name="caption" readable="true" writable="false"/>
+        <property name="caption" readable="true" writable="true"/>
         <property name="cellPadding" readable="true" writable="true"/>
         <property name="cellSpacing" readable="true" writable="true"/>
         <property name="dataFld" notImplemented="true" readable="true" writable="true">
@@ -2047,8 +2047,8 @@
             <browser name="Internet Explorer"/>
         </property>
         <property name="tBodies" readable="true" writable="false"/>
-        <property name="tFoot" readable="true" writable="false"/>
-        <property name="tHead" readable="true" writable="false"/>
+        <property name="tFoot" readable="true" writable="true"/>
+        <property name="tHead" readable="true" writable="true"/>
         <property name="width" readable="true" writable="true"/>
 
         <function name="createCaption">
