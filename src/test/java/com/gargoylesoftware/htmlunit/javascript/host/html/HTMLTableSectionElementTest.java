@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @author Daniel Gredler
  */
 @RunWith(BrowserRunner.class)
-public class HTMLTableSectionElementTest extends WebTestCase {
+public class HTMLTableSectionElementTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if an error occurs
@@ -94,7 +94,7 @@ public class HTMLTableSectionElementTest extends WebTestCase {
             + "    </table>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -173,7 +173,7 @@ public class HTMLTableSectionElementTest extends WebTestCase {
             + "    </table>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -249,7 +249,7 @@ public class HTMLTableSectionElementTest extends WebTestCase {
             + "    </table>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -325,7 +325,7 @@ public class HTMLTableSectionElementTest extends WebTestCase {
             + "    </table>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -349,6 +349,6 @@ public class HTMLTableSectionElementTest extends WebTestCase {
             + "    <tbody id='myId'><tr><td>hello</td></tr></tbody>\n"
             + "  </table>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }

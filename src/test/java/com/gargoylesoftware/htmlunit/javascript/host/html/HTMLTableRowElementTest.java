@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class HTMLTableRowElementTest extends WebTestCase {
+public class HTMLTableRowElementTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -47,7 +47,7 @@ public class HTMLTableRowElementTest extends WebTestCase {
             + "    <tr id='myId'/>\n"
             + "  </table>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -83,7 +83,7 @@ public class HTMLTableRowElementTest extends WebTestCase {
             + "    </tr>\n"
             + "  </table>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -111,7 +111,7 @@ public class HTMLTableRowElementTest extends WebTestCase {
             + "    </tr>\n"
             + "  </table>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -149,7 +149,7 @@ public class HTMLTableRowElementTest extends WebTestCase {
             + "  alert(tr3.align);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -179,7 +179,7 @@ public class HTMLTableRowElementTest extends WebTestCase {
             + "  alert(tr3.ch);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -209,7 +209,7 @@ public class HTMLTableRowElementTest extends WebTestCase {
             + "  alert(tr3.chOff);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -247,7 +247,7 @@ public class HTMLTableRowElementTest extends WebTestCase {
             + "  alert(tr3.vAlign);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -274,7 +274,7 @@ public class HTMLTableRowElementTest extends WebTestCase {
             + "  <table><tr id='tr'><td>a</td></tr></table>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
 }

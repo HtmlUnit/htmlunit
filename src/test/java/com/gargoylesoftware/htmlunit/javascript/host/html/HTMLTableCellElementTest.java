@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
  * @author Daniel Gredler
  */
 @RunWith(BrowserRunner.class)
-public class HTMLTableCellElementTest extends WebTestCase {
+public class HTMLTableCellElementTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if an error occurs
@@ -69,7 +69,7 @@ public class HTMLTableCellElementTest extends WebTestCase {
             + "  alert(td3.align);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -101,7 +101,7 @@ public class HTMLTableCellElementTest extends WebTestCase {
             + "  alert(td3.ch);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -133,7 +133,7 @@ public class HTMLTableCellElementTest extends WebTestCase {
             + "  alert(td3.chOff);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -173,7 +173,7 @@ public class HTMLTableCellElementTest extends WebTestCase {
             + "  alert(td3.vAlign);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -200,7 +200,7 @@ public class HTMLTableCellElementTest extends WebTestCase {
             + "  <table><tr><td id='td'>a</td></tr></table>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -237,7 +237,7 @@ public class HTMLTableCellElementTest extends WebTestCase {
             + "  <table><tr><td id='td'>a</td></tr></table>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -266,7 +266,7 @@ public class HTMLTableCellElementTest extends WebTestCase {
             + "  <table><tr><td id='td'>a</td></tr></table>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -312,7 +312,7 @@ public class HTMLTableCellElementTest extends WebTestCase {
             + "  alert(td3.colSpan);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -363,7 +363,7 @@ public class HTMLTableCellElementTest extends WebTestCase {
             + "  alert(td3.rowSpan);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -394,7 +394,7 @@ public class HTMLTableCellElementTest extends WebTestCase {
             + "  <table><tr><td id='td'>a</td></tr></table>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -423,7 +423,7 @@ public class HTMLTableCellElementTest extends WebTestCase {
             + "alert(td2.offsetWidth + ',' + td2.offsetHeight);\n"
             + "alert(td3.offsetWidth + ',' + td3.offsetHeight);\n"
             + "</script></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
 }
