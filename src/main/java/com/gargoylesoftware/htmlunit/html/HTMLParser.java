@@ -553,7 +553,7 @@ public final class HTMLParser {
 
         /** {@inheritDoc ContentHandler#startElement(String,String,String,Attributes)} */
         public void startElement(
-                final String namespaceURI, final String localName,
+                String namespaceURI, final String localName,
                 final String qName, final Attributes atts)
             throws SAXException {
 
@@ -593,6 +593,9 @@ public final class HTMLParser {
             }
 
             // Add the new node.
+            if (!(page_ instanceof XHtmlPage) && XHTML_NAMESPACE.equals(namespaceURI)) {
+                namespaceURI = null;
+            }
             final IElementFactory factory = getElementFactory(namespaceURI, qName);
             final HtmlElement newElement = factory.createElementNS(page_, namespaceURI, qName, atts);
             newElement.setStartLocation(locator_.getLineNumber(), locator_.getColumnNumber());
@@ -771,7 +774,8 @@ public final class HTMLParser {
          * @return the pre-registered element factory corresponding to the specified tag, or an UnknownElementFactory
          */
         public static IElementFactory getElementFactory(final String namespaceURI, final String qualifiedName) {
-            if (namespaceURI.length() == 0 || !qualifiedName.contains(":") || namespaceURI.equals(XHTML_NAMESPACE)) {
+            if (namespaceURI == null || namespaceURI.length() == 0
+                || !qualifiedName.contains(":") || namespaceURI.equals(XHTML_NAMESPACE)) {
                 String tagName = qualifiedName;
                 final int index = tagName.indexOf(":");
                 if (index != -1) {

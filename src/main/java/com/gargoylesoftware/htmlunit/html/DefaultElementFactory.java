@@ -437,7 +437,11 @@ class DefaultElementFactory implements IElementFactory {
                 final String qName = attributes.getQName(i);
                 // browsers consider only first attribute (ex: <div id='foo' id='something'>...</div>)
                 if (!attributeMap.containsKey(qName)) {
-                    HtmlElement.addAttributeToMap(page, attributeMap, attributes.getURI(i),
+                    String namespaceURI = attributes.getURI(i);
+                    if (namespaceURI != null && namespaceURI.length() == 0) {
+                        namespaceURI = null;
+                    }
+                    HtmlElement.addAttributeToMap(page, attributeMap, namespaceURI,
                         qName, attributes.getValue(i));
                 }
             }

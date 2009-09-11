@@ -361,22 +361,21 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.FF)
-    @Alerts(FF = { "Some:Div,Some:Div,myNS,Some,Div" })
+    @Alerts(FF = { "Some:Div,Some:Div,myNS,Some,Div", "svg,svg,http://www.w3.org/2000/svg,null,svg" })
     public void createElementNS() throws Exception {
         final String html
-            = "<html>\n"
-            + "  <head>\n"
-            + "    <script>\n"
-            + "      function doTest() {\n"
-            + "        div = document.createElementNS('myNS', 'Some:Div');\n"
-            + "        alert(div.nodeName + ',' + div.tagName + ',' + div.namespaceURI + ',' + "
-            +   "div.prefix + ',' + div.localName);\n"
-            + "      }\n"
-            + "    </script>\n"
-            + "  </head>\n"
-            + "  <body onload='doTest()'>\n"
-            + "  </body>\n"
-            + "</html>";
+            = "<html><head><script>\n"
+            + "function doTest() {\n"
+            + "  var div = document.createElementNS('myNS', 'Some:Div');\n"
+            + "  alert(div.nodeName + ',' + div.tagName + ',' + div.namespaceURI + ',' + "
+            + "div.prefix + ',' + div.localName);\n"
+            + "  var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');\n"
+            + "  alert(svg.nodeName + ',' + svg.tagName + ',' + svg.namespaceURI + ',' + "
+            + "svg.prefix + ',' + svg.localName);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
 
         loadPageWithAlerts(html);
     }
