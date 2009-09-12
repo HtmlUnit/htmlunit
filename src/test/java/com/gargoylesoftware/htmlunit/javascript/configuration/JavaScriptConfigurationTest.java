@@ -35,6 +35,7 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.xml.sax.EntityResolver;
@@ -626,7 +627,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         final DocumentBuilder documentBuilder = factory.newDocumentBuilder();
         documentBuilder.setErrorHandler(new StrictErrorHandler());
 
-        final org.w3c.dom.Document doc =
+        final Document doc =
             documentBuilder.parse(createInputSourceForFile(directory + "JavaScriptConfiguration.xml"));
 
         String lastClassName = null;

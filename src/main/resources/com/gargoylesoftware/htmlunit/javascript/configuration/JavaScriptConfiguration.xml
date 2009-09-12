@@ -2098,7 +2098,6 @@
             url="http://msdn.microsoft.com/en-us/library/ms535911.aspx"
             descr="MSDN documentation"/>
         <property name="bgColor" readable="true" writable="true"/>
-        <property name="sectionRowIndex" readable="true" writable="false"/>
         <property name="cells" readable="true" writable="false"/>
         <property name="rowIndex" readable="true" writable="false">
             <doclink
@@ -2108,6 +2107,7 @@
                 url="http://msdn.microsoft.com/en-us/library/ms534377.aspx"
                 descr="MSDN documentation"/>
         </property>
+        <property name="sectionRowIndex" readable="true" writable="false"/>
         <function name="deleteCell">
             <doclink
                 url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-11738598"
