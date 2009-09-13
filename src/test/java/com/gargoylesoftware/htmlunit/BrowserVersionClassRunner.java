@@ -44,12 +44,14 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
     private final BrowserVersion browserVersion_;
+    private final boolean useWebDriver_;
     static final boolean maven_ = System.getProperties().contains("env.M2_HOME");
 
     public BrowserVersionClassRunner(final Class<WebTestCase> klass,
-        final BrowserVersion browserVersion) throws InitializationError {
+        final BrowserVersion browserVersion, final boolean useWebDriver) throws InitializationError {
         super(klass);
-        this.browserVersion_ = browserVersion;
+        browserVersion_ = browserVersion;
+        useWebDriver_ = useWebDriver;
     }
 
     private void setAlerts(final WebTestCase testCase, final Method method) {
@@ -106,15 +108,22 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
     @Override
     protected Object createTest() throws Exception {
         final Object test = super.createTest();
-        assertTrue("Test class must inherit WebTestCase", WebTestCase.class.isInstance(test));
+        assertTrue("Test class must inherit WebTestCase", test instanceof WebTestCase);
         final WebTestCase object = (WebTestCase) test;
         object.setBrowserVersion(browserVersion_);
+        if (test instanceof WebDriverTestCase) {
+            ((WebDriverTestCase) test).setUseWebDriver(useWebDriver_);
+        }
         return object;
     }
 
     @Override
     protected String getName() {
-        return String.format("[%s]", browserVersion_.getNickname());
+        String browserString = browserVersion_.getNickname();
+        if (useWebDriver_) {
+            browserString = "Real " + browserString;
+        }
+        return String.format("[%s]", browserString);
     }
 
     @Override
@@ -125,15 +134,18 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         String className = method.getMethod().getDeclaringClass().getName();
         className = className.substring(className.lastIndexOf('.') + 1);
         String prefix = "";
-        if (isNotYetImplemented(method)) {
+        if (isNotYetImplemented(method) && !useWebDriver_) {
             prefix = "(NYI) ";
         }
         else if (isExpectedToFail(method)) {
             prefix = "(failure expected) ";
         }
 
-        return String.format("%s%s [%s]", prefix, className + '.' + method.getName(),
-            browserVersion_.getNickname());
+        String browserString = browserVersion_.getNickname();
+        if (useWebDriver_) {
+            browserString = "Real " + browserString;
+        }
+        return String.format("%s%s [%s]", prefix, className + '.' + method.getName(), browserString);
     }
 
     @Override
@@ -253,12 +265,9 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         statement = withAfters(method, test, statement);
 
         final boolean shouldFail = isExpectedToFail(method);
-        final String property = System.getProperty(WebDriverTestCase.PROPERTY, "").toLowerCase();
         final boolean notYetImplemented;
 
-        if (testCase instanceof WebDriverTestCase
-                && (property.contains("ff2") || property.contains("ff3")
-                    || property.contains("ie6") || property.contains("ie7") || property.contains("ie8"))) {
+        if (testCase instanceof WebDriverTestCase && useWebDriver_) {
             notYetImplemented = false;
         }
         else {

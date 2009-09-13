@@ -21,6 +21,7 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.internal.runners.model.ReflectiveCallable;
 import org.junit.internal.runners.statements.Fail;
+import org.junit.rules.MethodRule;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
@@ -62,6 +63,7 @@ class BrowserNoneClassRunner extends BlockJUnit4ClassRunner {
         Statement statement = methodInvoker(method, test);
         statement = possiblyExpectingExceptions(method, test, statement);
         statement = withPotentialTimeout(method, test, statement);
+        statement = withRules(method, test, statement);
         statement = withBefores(method, test, statement);
         statement = withAfters(method, test, statement);
 
@@ -130,5 +132,13 @@ class BrowserNoneClassRunner extends BlockJUnit4ClassRunner {
         for (final Throwable error : collectederrors) {
             errors.add(error);
         }
+    }
+
+    private Statement withRules(final FrameworkMethod method, final Object target, final Statement statement) {
+        Statement result = statement;
+        for (final MethodRule each : rules(target)) {
+            result = each.apply(result, method, target);
+        }
+        return result;
     }
 }

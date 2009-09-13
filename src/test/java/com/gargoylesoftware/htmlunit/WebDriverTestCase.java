@@ -15,18 +15,23 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
@@ -36,13 +41,16 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.AfterClass;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.webapp.WebAppContext;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -52,15 +60,30 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 /**
  * Base class for tests using WebDriver.
  * <p>
- * This test runs with HtmlUnit unless the system property "htmlunit.webdriver" is set to "ff2"
- * in which case the test will run in the "real" firefox browser.
+ * By default, this test runs with HtmlUnit, but this behavior can be changed by having a property file named
+ * "htmlunit.properties" in the user home directory.
+ * Sample:
+ * <pre>
+   browsers=hu,ff2,ff3,ie8
+   ff2.bin=c:\\location_to_firefox.exe              [Windows]
+   ff3.bin=/use/bin/firefox                         [Unix-like]
+ * </pre>
+ * The file should contain three properties: "browsers", "ff2.bin" and "ff3.bin".
+ * <ul>
+ *   <li>browsers: is a comma separated list contains any combination of "hu" (for HtmlUnit),
+ *   "ff2", "ff3", "ie6", "ie7", "ie8", which will be used to driver real browsers,
+ *   note that you can't define more than one IE as there is no standard way
+ *   to have multiple IEs on the same machine</li>
+ *   <li>ff2.bin: is the location of the FF2 binary, in Windows use double back-slashes</li>
+ *   <li>ff3.bin: is the location of the FF3 binary, in Windows use double back-slashes</li>
+ * </ul>
  * </p>
  * <p>
- * You can set the property in maven by modifying the POM value of the system properties in maven-surefire-plugin.
- * In eclipse you can change the "Run configurations" -> "Arguments" tab -> "VM arguments"
- * -> "-Dhtmlunit.webdriver=ff2"
+ *   Note: if you encounter java.lang.NoClassDefFoundError: com/sun/jna/win32/StdCallLibrary,
+ *   then make sure you manually download JNA 3.0.9 and copy it to
+ *   ~/.m2/repository/com/sun/jna/jna/3.0.9/jna-3.0.9.jar
  * </p>
- * <p>To change the firefox binary, you can also setup the system property "webdriver.firefox.bin".</p>
+ *
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
@@ -68,22 +91,48 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 public abstract class WebDriverTestCase extends WebTestCase {
 
     private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
-    static final String PROPERTY = "htmlunit.webdriver";
+    private static String BROWSERS_PROPERTY_;
+    private static String FF2_BIN_;
+    private static String FF3_BIN_;
 
-    private static WebDriver WEB_DRIVER_;
+    private static Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<BrowserVersion, WebDriver>();
     private static Server STATIC_SERVER_;
 
     private static String JSON_;
+    private boolean useWebDriver_;
+
+    static String getBrowsersProperty() {
+        if (BROWSERS_PROPERTY_ == null) {
+            try {
+                final Properties properties = new Properties();
+                final File file = new File(System.getProperty("user.home"), "htmlunit.properties");
+                if (file.exists()) {
+                    properties.load(new FileInputStream(file));
+                    BROWSERS_PROPERTY_ = properties.getProperty("browsers", "hu").toLowerCase();
+                    FF2_BIN_ = properties.getProperty("ff2.bin");
+                    FF3_BIN_ = properties.getProperty("ff3.bin");
+                }
+            }
+            catch (final Exception e) {
+                LOG.info("Error reading ~/htmlunit.properties", e);
+            }
+            if (BROWSERS_PROPERTY_ == null) {
+                BROWSERS_PROPERTY_ = "hu";
+            }
+        }
+        return BROWSERS_PROPERTY_;
+    }
 
     /**
      * Configure the driver only once.
      * @return the driver
      */
     protected WebDriver getWebDriver() {
-        if (WEB_DRIVER_ == null) {
-            WEB_DRIVER_ = buildWebDriver();
+        final BrowserVersion browserVersion = getBrowserVersion();
+        if (!WEB_DRIVERS_.containsKey(browserVersion)) {
+            WEB_DRIVERS_.put(browserVersion, buildWebDriver());
         }
-        return WEB_DRIVER_;
+        return WEB_DRIVERS_.get(browserVersion);
     }
 
     /**
@@ -92,26 +141,32 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     @AfterClass
     public static void shutDownAll() throws Exception {
-        if (WEB_DRIVER_ != null) {
-            WEB_DRIVER_.quit();
+        for (WebDriver driver : WEB_DRIVERS_.values()) {
+            driver.quit();
         }
-        WEB_DRIVER_ = null;
+        WEB_DRIVERS_.clear();
         if (STATIC_SERVER_ != null) {
             STATIC_SERVER_.stop();
         }
         STATIC_SERVER_ = null;
     }
 
+    void setUseWebDriver(final boolean useWebDriver) {
+        useWebDriver_ = useWebDriver;
+    }
+
     private WebDriver buildWebDriver() {
-        final String property = System.getProperty(PROPERTY, "").toLowerCase();
-        if (property.contains("ff2") || property.contains("ff3")) {
-            return new FirefoxDriver();
-        }
-        if (property.contains("ie6") || property.contains("ie7") || property.contains("ie8")) {
-            return new InternetExplorerDriver();
+        if (useWebDriver_) {
+            if (getBrowserVersion().isIE()) {
+                return new InternetExplorerDriver();
+            }
+            if (getBrowserVersion().getNickname().equals("FF2")) {
+                return new FirefoxDriver(new FirefoxBinary(new File(FF2_BIN_)), new FirefoxProfile());
+            }
+            return new FirefoxDriver(new FirefoxBinary(new File(FF3_BIN_)), new FirefoxProfile());
         }
         final WebClient webClient = getWebClient();
-        final HtmlUnitDriver driver = new HtmlUnitDriver(true) {
+        return new HtmlUnitDriver(true) {
             @Override
             protected WebClient newWebClient(final BrowserVersion browserVersion) {
                 return webClient;
@@ -122,7 +177,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 return new FixedWebDriverHtmlUnitWebElement(this, element);
             }
         };
-        return driver;
     }
 
     /**
@@ -274,8 +328,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             if (result != Undefined.instance) {
                 final NativeArray resp = (NativeArray) result;
                 for (int i = 0; i < resp.getLength(); ++i) {
-                    collectedAlerts.add(
-                            net.sourceforge.htmlunit.corejs.javascript.Context.toString(resp.get(i, resp)));
+                    collectedAlerts.add(Context.toString(resp.get(i, resp)));
                 }
             }
         }
@@ -285,16 +338,25 @@ public abstract class WebDriverTestCase extends WebTestCase {
             if (jsonResult  != null) {
                 final JSONArray array = new JSONArray(jsonResult);
                 for (int i = 0; i < array.length(); i++) {
-                    collectedAlerts.add(net.sourceforge.htmlunit.corejs.javascript.Context.toString(array.get(i)));
+                    collectedAlerts.add(Context.toString(array.get(i)));
                 }
             }
         }
         else {
-            final JSONArray array = (JSONArray) ((JavascriptExecutor) driver)
-                .executeScript("return window.__huCatchedAlerts");
-            if (array != null) {
-                for (int i = 0; i < array.length(); i++) {
-                    collectedAlerts.add(net.sourceforge.htmlunit.corejs.javascript.Context.toString(array.get(i)));
+            final Object object = ((JavascriptExecutor) driver) .executeScript("return window.__huCatchedAlerts");
+
+            if (object instanceof JSONObject) {
+                final JSONObject jsonObject = (JSONObject) object;
+                for (int i = 0; i < jsonObject.length(); i++) {
+                    collectedAlerts.add(Context.toString(jsonObject.get(String.valueOf(i))));
+                }
+            }
+            else {
+                final JSONArray array = (JSONArray) object;
+                if (array != null) {
+                    for (int i = 0; i < array.length(); i++) {
+                        collectedAlerts.add(Context.toString(array.get(i)));
+                    }
                 }
             }
         }

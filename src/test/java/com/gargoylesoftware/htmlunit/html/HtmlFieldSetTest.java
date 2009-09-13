@@ -16,9 +16,12 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
@@ -29,7 +32,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @author Daniel Gredler
  */
 @RunWith(BrowserRunner.class)
-public class HtmlFieldSetTest extends WebTestCase {
+public class HtmlFieldSetTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -54,8 +57,11 @@ public class HtmlFieldSetTest extends WebTestCase {
             + "    </fieldset>\n"
             + "  </form>\n"
             + "</body></html>";
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertTrue(HtmlFieldSet.class.isInstance(page.getHtmlElementById("fs")));
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlElement element = toHtmlElement(driver.findElement(By.id("fs")));
+            assertTrue(element instanceof HtmlFieldSet);
+        }
     }
 
     /**
@@ -100,7 +106,7 @@ public class HtmlFieldSetTest extends WebTestCase {
             + "  alert(fs3.align);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
 }

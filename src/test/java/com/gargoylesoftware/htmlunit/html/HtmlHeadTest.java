@@ -14,13 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link HtmlHead}.
@@ -29,32 +31,30 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlHeadTest extends WebTestCase {
+@RunWith(BrowserRunner.class)
+public class HtmlHeadTest extends WebDriverTestCase {
 
     /**
      * IE and FF both add a head element when it's not present in the HTML code.
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("HEAD")
     public void testAddedWhenMissing() throws Exception {
         final String htmlContent = "<html><body>\n"
             + "<script>\n"
-            + "alert(document.firstChild.firstChild.tagName);\n"
+            + "  alert(document.firstChild.firstChild.tagName);\n"
             + "</script>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final String[] expectedAlerts = {"HEAD"};
-        createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
-
-        loadPage(htmlContent, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(htmlContent);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = "[object HTMLHeadElement]", IE = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head id='myId'><script>\n"
             + "  function test() {\n"
@@ -64,10 +64,10 @@ public class HtmlHeadTest extends WebTestCase {
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"[object HTMLHeadElement]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertTrue(HtmlHead.class.isInstance(page.getHtmlElementById("myId")));
-        assertEquals(expectedAlerts, collectedAlerts);
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlElement element = toHtmlElement(driver.findElement(By.id("myId")));
+            assertTrue(element instanceof HtmlHead);
+        }
     }
 }
