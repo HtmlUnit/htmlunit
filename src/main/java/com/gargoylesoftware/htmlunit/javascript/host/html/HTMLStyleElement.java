@@ -53,11 +53,8 @@ public class HTMLStyleElement extends HTMLElement {
             return sheet_;
         }
 
-        String css = "";
         final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
-        if (style.getFirstChild() != null) {
-            css = style.getFirstChild().asText();
-        }
+        final String css = style.getTextContent();
 
         final Cache cache = getWindow().getWebWindow().getWebClient().getCache();
         final CSSStyleSheet cached = cache.getCachedStyleSheet(css);
