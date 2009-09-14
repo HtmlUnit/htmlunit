@@ -81,7 +81,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  * <p>
  *   Note: if you encounter java.lang.NoClassDefFoundError: com/sun/jna/win32/StdCallLibrary,
  *   then make sure you manually download JNA 3.0.9 and copy it to
- *   ~/.m2/repository/com/sun/jna/jna/3.0.9/jna-3.0.9.jar
+ *   ~/.m2/repository/com/sun/jna/jna/3.0.9/jna-3.0.9.jar<br>
+ *   To run maven with real IE, you have to remove the &lt;exclusions&gt; part of "webdriver-ie" artifact in pom.xml.
  * </p>
  *
  * @version $Revision$

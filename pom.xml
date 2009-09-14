@@ -667,6 +667,12 @@
             <artifactId>webdriver-ie</artifactId>
             <version>0.9.7089</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.sun.jna</groupId>
+                    <artifactId>jna</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
     <distributionManagement>
