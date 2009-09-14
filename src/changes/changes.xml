@@ -6,8 +6,11 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, (initial)??? IE8 support">
+            <action type="update" dev="mguillem">
+                CSS: add support for CSS3 pseudo classes :root, :enabled, :checked.
+            </action>
             <action type="fix" dev="mguillem">
-                JavaScript: HTMLStyleElement.sheet parses all children nodes and not only the first one.
+                JavaScript: HTMLStyleElement.sheet parses all child nodes and not only the first one.
             </action>
             <action type="fix" dev="asashour" issue="2855470">
                 JavaScript: fix style 'pixel' attributes.

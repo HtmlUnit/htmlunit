@@ -54,10 +54,14 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlHtml;
+import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
+import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
@@ -367,9 +371,15 @@ public class Stylesheet extends SimpleScriptable {
                 final ContentCondition cc = (ContentCondition) condition;
                 return element.asText().contains(cc.getData());
             case Condition.SAC_LANG_CONDITION:
-                final LangCondition lc = (LangCondition) condition;
+                if (getBrowserVersion().isIE()) {
+                    return false;
+                }
+                final String lcLang = ((LangCondition) condition).getLang();
                 for (DomNode node = element; node instanceof HtmlElement; node = node.getParentNode()) {
-                    if (((HtmlElement) node).getAttribute("lang").startsWith(lc.getLang())) {
+                    final String nodeLang = ((HtmlElement) node).getAttribute("lang");
+                    // "en", "en-GB" should be matched by "en" but not "english"
+                    if (nodeLang.startsWith(lcLang)
+                        && (nodeLang.length() == lcLang.length() || '-' == nodeLang.charAt(lcLang.length()))) {
                         return true;
                     }
                 }
@@ -377,13 +387,34 @@ public class Stylesheet extends SimpleScriptable {
             case Condition.SAC_ONLY_TYPE_CONDITION:
                 final String tagName = element.getTagName();
                 return ((HtmlPage) element.getPage()).getElementsByTagName(tagName).getLength() == 1;
-            case Condition.SAC_POSITIONAL_CONDITION:
             case Condition.SAC_PSEUDO_CLASS_CONDITION:
+                return selectsPseudoClass((AttributeCondition) condition, element);
+            case Condition.SAC_POSITIONAL_CONDITION:
                 return false;
             default:
                 LOG.error("Unknown CSS condition type '" + condition.getConditionType() + "'.");
                 return false;
         }
+    }
+
+    private boolean selectsPseudoClass(final AttributeCondition condition, final HtmlElement element) {
+        if (getBrowserVersion().isIE()) {
+            return false;
+        }
+
+        final String value = condition.getValue();
+        if ("root".equals(value)) {
+            return element == element.getPage().getDocumentElement();
+        }
+        else if ("enabled".equals(value)) {
+            return (element instanceof HtmlInput && !((HtmlInput) element).isDisabled())
+                || (element instanceof HtmlSelect && !((HtmlSelect) element).isDisabled());
+        }
+        else if ("checked".equals(value)) {
+            return (element instanceof HtmlCheckBoxInput && ((HtmlCheckBoxInput) element).isChecked())
+                || (element instanceof HtmlRadioButtonInput && ((HtmlRadioButtonInput) element).isChecked());
+        }
+        return false;
     }
 
     /**

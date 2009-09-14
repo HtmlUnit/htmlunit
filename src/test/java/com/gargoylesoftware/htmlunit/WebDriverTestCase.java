@@ -106,7 +106,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         if (BROWSERS_PROPERTY_ == null) {
             try {
                 final Properties properties = new Properties();
-                final File file = new File(System.getProperty("user.home"), "htmlunit.properties");
+                final File file = new File("htmlunit.properties");
                 if (file.exists()) {
                     properties.load(new FileInputStream(file));
                     BROWSERS_PROPERTY_ = properties.getProperty("browsers", "hu").toLowerCase();
@@ -115,7 +115,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 }
             }
             catch (final Exception e) {
-                LOG.info("Error reading ~/htmlunit.properties", e);
+                LOG.info("Error reading htmlunit.properties", e);
             }
             if (BROWSERS_PROPERTY_ == null) {
                 BROWSERS_PROPERTY_ = "hu";
@@ -283,18 +283,29 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
-     * Same as {@link #loadPageWithAlerts(String)}... but doesn't verify the alerts.
+     * Same as {@link #loadPageWithAlerts2(String)}... but doesn't verify the alerts.
      * @param html the HTML to use
      * @return the web driver
      * @throws Exception if something goes wrong
      */
     protected final WebDriver loadPage2(final String html) throws Exception {
+        return loadPage2(html, URL_FIRST);
+    }
+
+    /**
+     * Same as {@link #loadPageWithAlerts(String)}... but doesn't verify the alerts.
+     * @param html the HTML to use
+     * @param url the url to use to load the page
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPage2(final String html, final URL url) throws Exception {
         final MockWebConnection mockWebConnection = getMockWebConnection();
-        mockWebConnection.setResponse(URL_FIRST, html);
+        mockWebConnection.setResponse(url, html);
         startWebServer(mockWebConnection);
 
         final WebDriver driver = getWebDriver();
-        driver.get(URL_FIRST.toExternalForm());
+        driver.get(url.toExternalForm());
 
         return driver;
     }
@@ -306,10 +317,22 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception if something goes wrong
      */
     protected final WebDriver loadPageWithAlerts2(final String html) throws Exception {
+        return loadPageWithAlerts2(html, URL_FIRST);
+    }
+
+    /**
+     * Same as {@link #loadPageWithAlerts(String)}, but using WebDriver instead.
+     * @param html the HTML to use
+     * @param url the URL to use to load the page
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPageWithAlerts2(final String html, final URL url) throws Exception {
+        expandExpectedAlertsVariables(URL_FIRST);
         final String[] expectedAlerts = getExpectedAlerts();
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts); // still useful sometimes
 
-        final WebDriver driver = loadPage2(html);
+        final WebDriver driver = loadPage2(html, url);
 
         assertEquals(expectedAlerts, getCollectedAlerts(driver));
         return driver;

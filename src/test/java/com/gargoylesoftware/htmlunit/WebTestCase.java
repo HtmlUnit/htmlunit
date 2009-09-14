@@ -741,9 +741,7 @@ public abstract class WebTestCase {
         }
 
         // expand variables in expected alerts
-        for (int i = 0; i < expectedAlerts_.length; ++i) {
-            expectedAlerts_[i] = expectedAlerts_[i].replaceAll("§§URL§§", url.toExternalForm());
-        }
+        expandExpectedAlertsVariables(url);
 
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts_);
 
@@ -755,11 +753,22 @@ public abstract class WebTestCase {
         webConnection.setResponse(url, html);
 
         final HtmlPage page = client.getPage(url);
+        System.out.println(page.asXml());
         if (waitForJS > 0) {
             assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(waitForJS));
         }
         assertEquals(expectedAlerts_, collectedAlerts);
         return page;
+    }
+
+    /**
+     * Expand "§§URL§§" to the provided URL in the expected alerts.
+     * @param url the url to expand
+     */
+    protected void expandExpectedAlertsVariables(final URL url) {
+        for (int i = 0; i < expectedAlerts_.length; ++i) {
+            expectedAlerts_[i] = expectedAlerts_[i].replaceAll("§§URL§§", url.toExternalForm());
+        }
     }
 
     /**

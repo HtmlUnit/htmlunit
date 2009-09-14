@@ -16,8 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.StringReader;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,10 +24,8 @@ import org.w3c.css.sac.Selector;
 import org.w3c.dom.css.CSSStyleSheet;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
@@ -51,7 +47,7 @@ import com.steadystate.css.parser.SACParserCSS21;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class StyleSheetTest extends WebTestCase {
+public class StyleSheetTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -100,7 +96,7 @@ public class StyleSheetTest extends WebTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void selects_anyNodeSelector() throws Exception {
-        testSelects("* { color: red; }", true, true, true);
+        testSelects("* { color: red; }", true, true, true, true);
     }
 
     /**
@@ -109,7 +105,7 @@ public class StyleSheetTest extends WebTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void selects_childSelector() throws Exception {
-        testSelects("body > div { color: red; }", false, true, false);
+        testSelects("body > div { color: red; }", false, true, false, false);
     }
 
     /**
@@ -118,7 +114,7 @@ public class StyleSheetTest extends WebTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void selects_descendantSelector() throws Exception {
-        testSelects("body span { color: red; }", false, false, true);
+        testSelects("body span { color: red; }", false, false, true, false);
     }
 
     /**
@@ -127,7 +123,7 @@ public class StyleSheetTest extends WebTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void selects_elementSelector() throws Exception {
-        testSelects("div { color: red; }", false, true, false);
+        testSelects("div { color: red; }", false, true, false, false);
     }
 
     /**
@@ -136,7 +132,7 @@ public class StyleSheetTest extends WebTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void selects_directAdjacentSelector() throws Exception {
-        testSelects("span + span { color: red; }", false, false, true);
+        testSelects("span + span { color: red; }", false, false, true, false);
     }
 
     /**
@@ -145,9 +141,9 @@ public class StyleSheetTest extends WebTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void selects_conditionalSelector_idCondition() throws Exception {
-        testSelects("span#s { color: red; }", false, false, true);
-        testSelects("#s { color: red; }", false, false, true);
-        testSelects("span[id=s] { color: red; }", false, false, true);
+        testSelects("span#s { color: red; }", false, false, true, false);
+        testSelects("#s { color: red; }", false, false, true, false);
+        testSelects("span[id=s] { color: red; }", false, false, true, false);
     }
 
     /**
@@ -156,12 +152,32 @@ public class StyleSheetTest extends WebTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void selects_conditionalSelector_classCondition() throws Exception {
-        testSelects("div.bar { color: red; }", false, true, false);
-        testSelects(".bar { color: red; }", false, true, false);
-        testSelects("div[class~=bar] { color: red; }", false, true, false);
+        testSelects("div.bar { color: red; }", false, true, false, false);
+        testSelects(".bar { color: red; }", false, true, false, false);
+        testSelects("div[class~=bar] { color: red; }", false, true, false, false);
     }
 
-    private void testSelects(final String css, final boolean b, final boolean d, final boolean s) throws Exception {
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.NONE)
+    public void selects_pseudoClass_root() throws Exception {
+        testSelects(":root { color: red; }", false, false, false, true);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.NONE)
+    @NotYetImplemented
+    public void selects_pseudoClass_negation() throws Exception {
+        testSelects(":not(div)", true, false, true, true);
+    }
+
+    private void testSelects(final String css, final boolean selectBody, final boolean selectDivD,
+        final boolean selectSpanS, final boolean selectHtml) throws Exception {
         final String html =
               "<html><body id='b'><style></style>\n"
             + "<div id='d' class='foo bar'><span>x</span><span id='s'>a</span>b</div>\n"
@@ -171,9 +187,9 @@ public class StyleSheetTest extends WebTestCase {
         final HTMLStyleElement host = (HTMLStyleElement) node.getScriptObject();
         final Stylesheet sheet = host.jsxGet_sheet();
         final Selector selector = sheet.parseSelectors(new InputSource(new StringReader(css))).item(0);
-        assertEquals(b, sheet.selects(selector, page.getHtmlElementById("b")));
-        assertEquals(d, sheet.selects(selector, page.getHtmlElementById("d")));
-        assertEquals(s, sheet.selects(selector, page.getHtmlElementById("s")));
+        assertEquals(selectBody, sheet.selects(selector, page.getHtmlElementById("b")));
+        assertEquals(selectDivD, sheet.selects(selector, page.getHtmlElementById("d")));
+        assertEquals(selectSpanS, sheet.selects(selector, page.getHtmlElementById("s")));
     }
 
     /**
@@ -198,7 +214,7 @@ public class StyleSheetTest extends WebTestCase {
                 + "<style id='myStyle' type='text/css'></style>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -229,7 +245,7 @@ public class StyleSheetTest extends WebTestCase {
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -237,15 +253,16 @@ public class StyleSheetTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF2 = { "4", "http://x/style2.css", "http://x/style4.css", "http://x/test.html", "http://x/test.html" },
-            FF3 = { "4", "http://x/style2.css", "http://x/style4.css", "null", "null" },
-            IE = { "4", "http://x/style2.css", "style4.css", "", "" })
+    @Alerts(FF2 = { "4", "§§URL§§style2.css", "§§URL§§style4.css", "§§URL§§test.html", "§§URL§§test.html" },
+            FF3 = { "4", "§§URL§§style2.css", "§§URL§§style4.css", "null", "null" },
+            IE = { "4", "§§URL§§style2.css", "style4.css", "", "" })
     public void href() throws Exception {
+        final String baseUrl = getDefaultUrl().toExternalForm();
         final String html = "<html>\n"
             + "  <head>\n"
-            + "    <link href='http://x/style1.css' type='text/css'></link>\n" // Ignored.
-            + "    <link href='http://x/style2.css' rel='stylesheet'></link>\n"
-            + "    <link href='http://x/style3.css'></link>\n" // Ignored.
+            + "    <link href='" + baseUrl + "style1.css' type='text/css'></link>\n" // Ignored.
+            + "    <link href='" + baseUrl + "style2.css' rel='stylesheet'></link>\n"
+            + "    <link href='" + baseUrl + "style3.css'></link>\n" // Ignored.
             + "    <link href='style4.css' rel='stylesheet'></link>\n"
             + "    <style>div.x { color: red; }</style>\n"
             + "  </head>\n" + "  <body>\n"
@@ -259,20 +276,13 @@ public class StyleSheetTest extends WebTestCase {
             + "    </script>\n" + "  </body>\n"
             + "</html>";
 
-        final WebClient client = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setResponse(new URL(getDefaultUrl(), "style1.css"), "");
+        conn.setResponse(new URL(getDefaultUrl(), "style2.css"), "");
+        conn.setResponse(new URL(getDefaultUrl(), "style3.css"), "");
+        conn.setResponse(new URL(getDefaultUrl(), "style4.css"), "");
 
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(new URL("http://x/test.html"), html);
-        conn.setResponse(new URL("http://x/style1.css"), "");
-        conn.setResponse(new URL("http://x/style2.css"), "");
-        conn.setResponse(new URL("http://x/style3.css"), "");
-        conn.setResponse(new URL("http://x/style4.css"), "");
-        client.setWebConnection(conn);
-
-        client.getPage("http://x/test.html");
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        loadPageWithAlerts2(html, new URL(getDefaultUrl(), "test.html"));
     }
 
     /**
@@ -302,7 +312,7 @@ public class StyleSheetTest extends WebTestCase {
             + "</head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -327,7 +337,7 @@ public class StyleSheetTest extends WebTestCase {
             + "</head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -352,20 +362,84 @@ public class StyleSheetTest extends WebTestCase {
      * @throws Exception on test failure
      */
     @Test
+    @Alerts(FF = { "false", "false", "true", "true", "false" },
+            IE = { "false", "false", "false", "false", "false" })
     public void langCondition() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String htmlSnippet = "<div id='elt2' lang='en'></div>\n"
+                + "  <div id='elt3' lang='en-GB'></div>\n"
+                + "  <div id='elt4' lang='english'></div>\n";
+        doTest(":lang(en)", htmlSnippet);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(FF = { "true", "false" }, IE = { "false", "false" })
+    public void css2_root() throws Exception {
+        doTest(":root", "");
+    }
+
+    /**
+     * CSS3 pseudo selector :not is not yet supported.
+     * @throws Exception on test failure
+     */
+    @Test
+    @NotYetImplemented(Browser.FF)
+    @Alerts(FF = { "true", "true", "false" }, IE = { "false", "false", "false" })
+    public void css3_not() throws Exception {
+        doTest(":not(span)", "<span id='elt2'></span>");
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(FF = { "false", "false", "true", "false", "true" }, IE = { "false", "false", "false", "false", "false" })
+    public void css3_enabled() throws Exception {
+        final String htmlSnippet = "<input id='elt2'>\n"
+            + "<input id='elt3' disabled>\n"
+            + "<input id='elt4' type='checkbox'>\n";
+        doTest(":enabled", htmlSnippet);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(FF = { "false", "false", "false", "false", "true", "false", "true", "false" },
+            IE = { "false", "false", "false", "false", "false", "false", "false", "false" })
+    public void css3_checked() throws Exception {
+        final String htmlSnippet = "<input id='elt2'>\n"
+            + "<input id='elt3' checked>\n"
+            + "<input id='elt4' type='checkbox' checked>\n"
+            + "<input id='elt5' type='checkbox'>\n"
+            + "<input id='elt6' type='radio' checked>\n"
+            + "<input id='elt7' type='radio'>\n";
+        doTest(":checked", htmlSnippet);
+    }
+
+    private void doTest(final String cssSelector, final String htmlSnippet) throws Exception {
+        final String html = "<html id='elt0'><head><title>First</title>\n"
                 + "<style>\n"
-                + "  :lang(en) { color: black }\n"
+                + cssSelector + " { z-index: 10 }\n"
                 + "</style>\n"
                 + "<script>\n"
                 + "  function test(){\n"
-                + "    var x = document.getElementById('myDiv').offsetWidth;\n"
+                + "    var getStyle = function(e) {\n"
+                + "      return window.getComputedStyle ? window.getComputedStyle(e,'') : e.currentStyle; };\n"
+                + "    var i = 0;\n"
+                + "    while (true) {\n"
+                + "      var elt = document.getElementById('elt' + i++);\n"
+                + "      if (!elt) return;\n"
+                + "      alert(getStyle(elt).zIndex == 10);\n"
+                + "    }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
-                + "  <div id='myDiv'></div>\n"
+                + "  <div id='elt1'></div>\n"
+                + htmlSnippet
                 + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
-
 }
