@@ -20,8 +20,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link CSSStyleDeclaration}.
@@ -105,9 +103,9 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      */
     @Test
     //TODO: This test fails with WebDriver with real FF3, but succeed if test is done outside WebDriver
-    //TODO: check value of document.createElement('div').style.outlineWidth in those real browsers
-    @NotYetImplemented({ Browser.IE6, Browser.IE7 })
-    @Alerts("success")
+    @Alerts(FF = "success", IE = "success",
+            IE7 = "error: outlineWidth-error: outlineWidth-error: outlineWidth-error: outlineWidth-",
+            IE6 = "error: outlineWidth-error: outlineWidth-error: outlineWidth-error: outlineWidth-")
     public void width_like_properties() throws Exception {
         final String html
             = "<html><head><script>\n"
