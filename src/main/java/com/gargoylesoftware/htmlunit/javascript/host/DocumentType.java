@@ -33,7 +33,19 @@ public class DocumentType extends Node {
      * @return the name
      */
     public String jsxGet_name() {
-        return ((DomDocumentType) getDomNodeOrDie()).getName();
+        final String name = ((DomDocumentType) getDomNodeOrDie()).getName();
+        if ("html".equals(name) && "FF3".equals(getBrowserVersion().getNickname())) {
+            return "HTML";
+        }
+        return name;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String jsxGet_nodeName() {
+        return jsxGet_name();
     }
 
     /**

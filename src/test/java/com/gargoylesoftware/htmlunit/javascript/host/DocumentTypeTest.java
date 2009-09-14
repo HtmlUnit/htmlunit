@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
@@ -26,16 +26,20 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class DocumentTypeTest extends WebTestCase {
+public class DocumentTypeTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "null", FF = { "[object DocumentType]", "html,10,null,null,null,null",
-            "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,,null,null" })
+    @Alerts(IE = "null",
+            FF2 = { "[object DocumentType]", "true", "html,10,null,null,null,null",
+            "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,,null,null" },
+            FF3 = { "[object DocumentType]", "true", "HTML,10,null,null,null,null",
+            "HTML,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,,null,null" })
     public void doctype() throws Exception {
         final String html = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n"
             + "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
@@ -47,6 +51,7 @@ public class DocumentTypeTest extends WebTestCase {
             + "      var t = document.doctype;\n"
             + "      alert(t);\n"
             + "      if (t != null) {\n"
+            + "        alert(t == document.firstChild);\n"
             + "        alert(t.nodeName + ',' + t.nodeType + ',' + t.nodeValue + ',' + t.prefix "
             + "+ ',' + t.localName + ',' + t.namespaceURI);\n"
             + "        alert(t.name + ',' + t.publicId + ',' + t.systemId + ',' + t.internalSubset"
@@ -59,7 +64,7 @@ public class DocumentTypeTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -102,6 +107,6 @@ public class DocumentTypeTest extends WebTestCase {
               + "<greeting/>";
 
         getMockWebConnection().setDefaultResponse(xml, "text/xml");
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }

@@ -848,6 +848,7 @@ public final class HTMLParser {
         public void startDTD(final String name, final String publicId, final String systemId) {
             final DomDocumentType type = new DomDocumentType(page_, name, publicId, systemId);
             page_.setDocumentType(type);
+            page_.appendChild(type);
         }
 
         /** {@inheritDoc} */
