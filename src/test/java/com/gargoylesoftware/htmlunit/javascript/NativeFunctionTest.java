@@ -20,6 +20,8 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Function is a native JavaScript object and therefore provided by Rhino but some tests are needed here
@@ -28,6 +30,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class NativeFunctionTest extends WebDriverTestCase {
@@ -36,8 +39,13 @@ public class NativeFunctionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "apply: function", "arguments: object", "bind: undefined", "call: function", "constructor: function",
-        "toSource: function", "toString: function" })
+    @NotYetImplemented(Browser.IE8)
+    @Alerts(FF = { "apply: function", "arguments: object", "bind: undefined", "call: function", "constructor: function",
+        "toSource: function", "toString: function" },
+        IE = { "apply: function", "arguments: object", "bind: undefined", "call: function", "constructor: function",
+                "toSource: function", "toString: function" },
+        IE8 = { "apply: function", "arguments: object", "bind: undefined", "call: function", "constructor: function",
+                "toSource: undefined", "toString: function" })
     public void methods() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
