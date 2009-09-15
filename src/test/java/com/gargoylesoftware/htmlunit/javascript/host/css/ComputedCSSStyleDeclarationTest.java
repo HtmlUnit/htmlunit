@@ -21,14 +21,14 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 /**
  * Tests for {@link ComputedCSSStyleDeclaration}.
@@ -38,7 +38,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class ComputedCSSStyleDeclarationTest extends WebTestCase {
+public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -60,7 +60,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
             + "  <div id='myDiv'></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -124,15 +124,18 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
             + "MozOutlineRadiusBottomright=:0px,MozOutlineStyle=:none,MozOutlineWidth=:0px,MozOutlineOffset=:0px,"
             + "MozPaddingEnd=:,MozPaddingStart=:,MozUserFocus=:none,MozUserInput=:auto,MozUserModify=:read-only,"
             + "MozUserSelect=:auto,opacity=:1,outlineOffset=:0px,overflowX=:visible,overflowY=:visible,";
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+
+        final WebDriver driver = loadPage2(html);
         final List<String> expectedValues = stringProperties(expectedText);
-        final List<String> collectedValues =
-            stringProperties(page.<HtmlTextArea>getHtmlElementById("myTextarea").getText());
+        final List<String> collectedValues = stringProperties(driver.findElement(By.id("myTextarea")).getValue());
         assertEquals(expectedValues.toString(), collectedValues.toString());
     }
 
     private List<String> stringProperties(final String string) throws Exception {
         final List<String> values = new ArrayList<String>();
+        if (string.length() == 0) {
+            return values;
+        }
 
         //string.split(",") will not work because we have values of 'rgb(0, 0, 0)'
         int i = string.indexOf('=');
@@ -185,7 +188,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
             + "  <div id='myDiv2'/>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -220,7 +223,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
             + "  <div id='myDiv2'/>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -244,7 +247,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
             + "  <div id='myDiv'></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -265,7 +268,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
             + "</script>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -299,7 +302,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
             + "alert(d.style.marginRight + ' ' + cs.marginRight);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -326,7 +329,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
             + "    alert(x('table') + ' ' + x('thead') + ' ' + x('tbody') + ' ' + x('th') + ' ' + x('tr') +\n"
             + "      ' ' + x('td') + ' ' + x('ul') + ' ' + x('li') + ' ' + x('div'));</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -356,7 +359,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
             + "alert(cs2.backgroundColor);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -380,7 +383,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
             + "alert(cs1.fontSize);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -402,7 +405,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
             + "  <div id='myDiv1'></div>\n"
             + "  <div id='myDiv2' style='display:none'/>\n"
             + "</body></html>";
-        loadPageWithAlerts(content);
+        loadPageWithAlerts2(content);
     }
 
     /**
@@ -427,7 +430,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
             + "alert(as.borderCollapse + ',' + bs.borderCollapse);\n"
             + "alert(acs.borderCollapse + ',' + bcs.borderCollapse);\n"
             + "</script></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -462,6 +465,6 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
             + "<div class='A' id='fooA'>A\n"
             + "<div class='B' id='fooB'>B</div></div>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }

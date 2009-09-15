@@ -14,24 +14,24 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 /**
  * Tests for {@link CSSStyleDeclaration}.
@@ -44,7 +44,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @author Sudhan Moghe
  */
 @RunWith(BrowserRunner.class)
-public class CSSStyleDeclarationTest extends WebTestCase {
+public class CSSStyleDeclarationTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -64,8 +64,8 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "}\n</script></head>\n"
             + "<body onload='doTest()'><div id='div1' style='color: black'>foo</div></body></html>";
 
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertEquals("color: pink;", page.<HtmlElement>getHtmlElementById("div1").getAttribute("style"));
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertEquals("color: pink;", driver.findElement(By.id("div1")).getAttribute("style"));
     }
 
     /**
@@ -85,11 +85,10 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "<body onload='doTest()'>\n"
             + "<div id='div1' style='color: black;background:blue;foo:bar'>foo</div></body></html>";
 
-        final HtmlPage page = loadPageWithAlerts(html);
-
+        final WebDriver driver = loadPageWithAlerts2(html);
         assertEquals(
             "color: pink; background: blue; foo: bar;",
-            page.<HtmlElement>getHtmlElementById("div1").getAttribute("style"));
+            driver.findElement(By.id("div1")).getAttribute("style"));
     }
 
     /**
@@ -109,8 +108,8 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "}\n</script></head>\n"
             + "<body onload='doTest()'><div id='div1'>foo</div></body></html>";
 
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertEquals("color: pink;", page.<HtmlElement>getHtmlElementById("div1").getAttribute("style"));
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertEquals("color: pink;", driver.findElement(By.id("div1")).getAttribute("style"));
     }
 
     /**
@@ -133,7 +132,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "}\n</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<div id='div1'>foo</div></body></html>";
-        loadPageWithAlerts(content);
+        loadPageWithAlerts2(content);
     }
 
     /**
@@ -152,7 +151,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "<body onload='doTest()'>\n"
             + "<div id='div1'>foo</div></body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -161,7 +160,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      */
     @Test
     public void onclickAccessStyle() throws Exception {
-        final String content = "<html><head><title>Color Change Page</title>\n"
+        final String html = "<html><head><title>Color Change Page</title>\n"
              + "<script>\n"
              + "function test(obj) {\n"
              + "   obj.style.backgroundColor = 'yellow';\n"
@@ -172,8 +171,8 @@ public class CSSStyleDeclarationTest extends WebTestCase {
              + "<span id='red' onclick='test(this)'>foo</span>\n"
              + "</body></html>";
 
-        final HtmlPage page = loadPage(getBrowserVersion(), content, null);
-        page.<HtmlElement>getHtmlElementById("red").click();
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("red")).click();
     }
 
     /**
@@ -192,7 +191,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
                 + "}\n</script></head>\n"
                 + "<body onload='doTest()'>\n"
                 + "<div id='div1'>foo</div></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -210,7 +209,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
                 + "}\n</script></head>\n"
                 + "<body onload='doTest()'>\n"
                 + "<div id='div1'>foo</div></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -228,7 +227,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<div id='div1' style='background: blue'>foo</div></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -254,7 +253,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "</script>\n"
             + "<span id='span'>x</span>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -274,7 +273,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "<div id='div1'>foo</div>\n"
             + "<div id='div2' style='filter:alpha(opacity=50)'>bar</div>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -315,7 +314,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "alert(s);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -332,7 +331,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "  <div id='div1'/>\n"
             + "</body></html>";
-        loadPage(getBrowserVersion(), html, null);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -350,7 +349,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "  <div id='div1'/>\n"
             + "</body></html>";
-        loadPage(getBrowserVersion(), html, null);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -383,7 +382,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<div id='div1'>foo</div></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -404,16 +403,18 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<div id='div1' style='border-width: 1px 2px 3px 4px';'>foo</div></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
+     * Expected values are missing for FF3, IE7 and IE8.
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.NONE)
+    @NotYetImplemented({ Browser.FF3, Browser.IE7, Browser.IE8 })
     public void properties() throws Exception {
-        properties(BrowserVersion.INTERNET_EXPLORER_6, new String[]{
+        final Map<BrowserVersion, String[]> properties = new HashMap<BrowserVersion, String[]>();
+        properties.put(BrowserVersion.INTERNET_EXPLORER_6, new String[]{
             "background",
             "backgroundAttachment",
             "backgroundColor",
@@ -550,7 +551,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             "zIndex",
             "zoom"
         });
-        properties(BrowserVersion.FIREFOX_2, new String[]{
+        properties.put(BrowserVersion.FIREFOX_2, new String[]{
             "azimuth",
             "background",
             "backgroundAttachment",
@@ -725,9 +726,12 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             "wordSpacing",
             "zIndex"
         });
+
+        final String[] expectedProperties = properties.get(getBrowserVersion());
+        properties(expectedProperties);
     }
 
-    private void properties(final BrowserVersion browserVersion, final String[] expectedProperties) throws Exception {
+    private void properties(final String[] expectedProperties) throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function test() {\n"
@@ -745,23 +749,27 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(browserVersion, html, null);
+        final WebDriver driver = loadPage2(html);
         final List<String> expectedStyles = Arrays.asList(expectedProperties);
         Collections.sort(expectedStyles);
+
         final List<String> collectedStyles =
-            Arrays.asList(((HtmlTextArea) page.getHtmlElementById("myTextarea")).getText().split(" "));
+            Arrays.asList(driver.findElement(By.id("myTextarea")).getValue().split(" "));
         Collections.sort(collectedStyles);
-        assertEquals(expectedStyles.toString(), collectedStyles.toString());
+
+        assertEquals(expectedStyles, collectedStyles);
     }
 
     /**
      * Test types of properties.
+     * Expected values are missing for FF3, IE7 and IE8.
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.NONE)
+    @NotYetImplemented({ Browser.FF3, Browser.IE7, Browser.IE8 })
     public void properties2() throws Exception {
-        properties2(BrowserVersion.INTERNET_EXPLORER_6, new String[]{
+        final Map<BrowserVersion, String[]> properties = new HashMap<BrowserVersion, String[]>();
+        properties.put(BrowserVersion.INTERNET_EXPLORER_6, new String[]{
             "background",
             "backgroundAttachment",
             "backgroundColor",
@@ -882,7 +890,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             "writingMode",
             "zoom"
         });
-        properties2(BrowserVersion.FIREFOX_2, new String[]{
+        properties.put(BrowserVersion.FIREFOX_2, new String[]{
             "azimuth",
             "background",
             "backgroundAttachment",
@@ -1056,9 +1064,12 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             "wordSpacing",
             "zIndex"
         });
+
+        final String[] expectedProperties = properties.get(getBrowserVersion());
+        properties2(expectedProperties);
     }
 
-    private void properties2(final BrowserVersion browserVersion, final String[] expectedProperties) throws Exception {
+    private void properties2(final String[] expectedProperties) throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function test() {\n"
@@ -1076,12 +1087,14 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(browserVersion, html, null);
+        final WebDriver driver = loadPage2(html);
         final List<String> expectedStyles = Arrays.asList(expectedProperties);
         Collections.sort(expectedStyles);
+
         final List<String> collectedStyles =
-            Arrays.asList(page.<HtmlTextArea>getHtmlElementById("myTextarea").getText().split(" "));
+            Arrays.asList(driver.findElement(By.id("myTextarea")).getValue().split(" "));
         Collections.sort(collectedStyles);
+
         assertEquals(expectedStyles, collectedStyles);
     }
 
@@ -1120,7 +1133,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "  <div id='myDiv'/>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1144,7 +1157,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myDiv'/>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1164,7 +1177,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myDiv' style='border: red 1px solid'/>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1184,7 +1197,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myDiv'/>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1205,7 +1218,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "  <div id='myDiv'/>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1227,7 +1240,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "  <div id='myDiv'/>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1281,7 +1294,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "    <div id='m6' style='margin: 2px; margin-left: 7px;'>m6</div>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1335,7 +1348,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "    <div id='m6' style='padding: 2px; padding-left: 7px;'>m6</div>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1393,10 +1406,9 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "    alert(style." + attribute + ");\n"
             + "}\n</script></head>\n"
             + "<body onload='test()'><div id='d' style='" + style + "'>foo</div></body></html>";
-        final String[] expected = {expectedValue};
-        final List<String> actual = new ArrayList<String>();
-        loadPage(getBrowserVersion(), html, actual);
-        assertEquals(expected, actual);
+
+        setExpectedAlerts(expectedValue);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1420,9 +1432,9 @@ public class CSSStyleDeclarationTest extends WebTestCase {
         final String html =
               "<html><body onload='alert(document.all[\"a\"].style.getAttribute(" + params + "))'>\n"
             + "<a id='a' href='#' style='color:green'>go</a></body></html>";
-        final List<String> actual = new ArrayList<String>();
-        loadPage(getBrowserVersion(), html, actual);
-        assertEquals(expected, actual);
+
+        setExpectedAlerts(expected);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1454,9 +1466,9 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
-        final List<String> actual = new ArrayList<String>();
-        loadPage(getBrowserVersion(), html, actual);
-        assertEquals(expected, actual);
+
+        setExpectedAlerts(expected);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1488,9 +1500,9 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
-        final List<String> actual = new ArrayList<String>();
-        loadPage(getBrowserVersion(), html, actual);
-        assertEquals(expected, actual);
+
+        setExpectedAlerts(expected);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1511,8 +1523,8 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "}\n</script></head>\n"
             + "<body onload='doTest()'><div id='div1' style='COLOR: BLACK'>foo</div></body></html>";
 
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertEquals("color: pink;", page.<HtmlElement>getHtmlElementById("div1").getAttribute("style"));
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertEquals("color: pink;", driver.findElement(By.id("div1")).getAttribute("style"));
     }
 
     /**
@@ -1539,7 +1551,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1566,7 +1578,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1593,7 +1605,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1620,7 +1632,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1647,7 +1659,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "alert(div.style.display);\n"
             + "\n"
             + "</script></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
 }

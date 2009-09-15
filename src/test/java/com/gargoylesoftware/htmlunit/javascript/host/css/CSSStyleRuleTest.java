@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class CSSStyleRuleTest extends WebTestCase {
+public class CSSStyleRuleTest extends WebDriverTestCase {
 
     /**
      * @throws Exception on test failure
@@ -70,7 +70,7 @@ public class CSSStyleRuleTest extends WebTestCase {
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -102,7 +102,7 @@ public class CSSStyleRuleTest extends WebTestCase {
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -131,7 +131,7 @@ public class CSSStyleRuleTest extends WebTestCase {
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -156,6 +156,6 @@ public class CSSStyleRuleTest extends WebTestCase {
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }

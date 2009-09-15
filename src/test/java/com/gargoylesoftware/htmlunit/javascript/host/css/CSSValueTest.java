@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class CSSValueTest extends WebTestCase {
+public class CSSValueTest extends WebDriverTestCase {
 
     /**
      * @throws Exception on test failure
@@ -53,6 +53,6 @@ public class CSSValueTest extends WebTestCase {
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }

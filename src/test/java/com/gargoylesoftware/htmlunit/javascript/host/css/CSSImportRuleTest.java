@@ -20,7 +20,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class CSSImportRuleTest extends WebTestCase {
+public class CSSImportRuleTest extends WebDriverTestCase {
 
     /**
      * Regression test for bug 2658249.
@@ -71,7 +71,7 @@ public class CSSImportRuleTest extends WebTestCase {
 
         setExpectedAlerts("[object CSSImportRule]", cssRef,
             "[object MediaList]", "0", "[object CSSStyleSheet]");
-        loadPageWithAlerts(html, pageUrl, -1);
+        loadPageWithAlerts2(html, pageUrl);
     }
 
     /**
@@ -94,7 +94,7 @@ public class CSSImportRuleTest extends WebTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, css, "text/css");
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -122,6 +122,6 @@ public class CSSImportRuleTest extends WebTestCase {
         getMockWebConnection().setResponse(urlCss1, css1, "text/css");
         getMockWebConnection().setResponse(urlCss2, css2, "text/css");
 
-        loadPageWithAlerts(html, urlPage, -1);
+        loadPageWithAlerts2(html, urlPage);
     }
 }

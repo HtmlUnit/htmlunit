@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class CSSPrimitiveValueTest extends WebTestCase {
+public class CSSPrimitiveValueTest extends WebDriverTestCase {
 
     /**
      * @throws Exception on test failure
@@ -58,7 +58,7 @@ public class CSSPrimitiveValueTest extends WebTestCase {
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -79,6 +79,6 @@ public class CSSPrimitiveValueTest extends WebTestCase {
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<div id='div1' style='color: rgb(0, 0, 255)'>foo</div></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }
