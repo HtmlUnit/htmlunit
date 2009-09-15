@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @author Daniel Gredler
  */
 @RunWith(BrowserRunner.class)
-public class HTMLBaseElementTest extends WebTestCase {
+public class HTMLBaseElementTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if an error occurs
@@ -51,7 +51,7 @@ public class HTMLBaseElementTest extends WebTestCase {
             + "  </head>\n"
             + "  <body onload='test()'>foo</body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
 }
