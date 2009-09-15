@@ -753,7 +753,6 @@ public abstract class WebTestCase {
         webConnection.setResponse(url, html);
 
         final HtmlPage page = client.getPage(url);
-        System.out.println(page.asXml());
         if (waitForJS > 0) {
             assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(waitForJS));
         }
