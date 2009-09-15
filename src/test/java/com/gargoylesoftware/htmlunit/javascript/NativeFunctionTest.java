@@ -41,7 +41,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Test
     @NotYetImplemented(Browser.IE8)
     @Alerts(FF = { "apply: function", "arguments: object", "bind: undefined", "call: function", "constructor: function",
-        "toSource: function", "toString: function" },
+                "toSource: function", "toString: function" },
         IE = { "apply: function", "arguments: object", "bind: undefined", "call: function", "constructor: function",
                 "toSource: function", "toString: function" },
         IE8 = { "apply: function", "arguments: object", "bind: undefined", "call: function", "constructor: function",

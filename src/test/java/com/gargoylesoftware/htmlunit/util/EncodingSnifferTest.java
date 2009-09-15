@@ -21,7 +21,6 @@ import static com.gargoylesoftware.htmlunit.util.EncodingSniffer.sniffEncodingFr
 import static java.util.Collections.singletonList;
 import static org.junit.Assert.assertEquals;
 
-import org.apache.commons.httpclient.NameValuePair;
 import org.junit.Test;
 
 /**

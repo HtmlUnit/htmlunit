@@ -23,9 +23,10 @@ import java.util.List;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.InflaterInputStream;
 
-import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
+
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Simple data object to simplify WebResponse creation.

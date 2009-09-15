@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import org.apache.commons.httpclient.NameValuePair;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * An element that can have it's values sent to the server during a form submit.

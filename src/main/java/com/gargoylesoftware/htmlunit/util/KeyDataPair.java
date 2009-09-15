@@ -12,11 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit;
+package com.gargoylesoftware.htmlunit.util;
 
 import java.io.File;
-
-import org.apache.commons.httpclient.NameValuePair;
 
 /**
  * A holder for a key/value pair that represents a file to upload.

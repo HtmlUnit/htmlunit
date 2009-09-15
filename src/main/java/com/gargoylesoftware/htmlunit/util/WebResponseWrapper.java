@@ -19,8 +19,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 
-import org.apache.commons.httpclient.NameValuePair;
-
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;

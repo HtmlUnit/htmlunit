@@ -25,7 +25,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.util.EncodingUtil;
 import org.apache.commons.lang.StringUtils;
 
@@ -41,6 +40,7 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Wrapper for the HTML element "form".
@@ -157,17 +157,14 @@ public class HtmlForm extends HtmlElement {
         String actionUrl = getActionAttribute();
         if (HttpMethod.GET == method) {
             final String anchor = StringUtils.substringAfter(actionUrl, "#");
-            actionUrl = StringUtils.substringBefore(actionUrl, "#");
-
-            final NameValuePair[] pairs = new NameValuePair[parameters.size()];
-            parameters.toArray(pairs);
-            final String queryFromFields = EncodingUtil.formUrlEncode(pairs, getPage().getPageEncoding());
+            final String enc = getPage().getPageEncoding();
+            final String queryFromFields = EncodingUtil.formUrlEncode(NameValuePair.toHttpClient(parameters), enc);
 
             // action may already contain some query parameters: they have to be removed
+            actionUrl = StringUtils.substringBefore(actionUrl, "#");
             actionUrl = StringUtils.substringBefore(actionUrl, "?");
-            final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
-            if (!(browserVersion.isIE() && browserVersion.getBrowserVersionNumeric() >= 7)
-                    || queryFromFields.length() > 0) {
+            final BrowserVersion browser = getPage().getWebClient().getBrowserVersion();
+            if (!(browser.isIE() && browser.getBrowserVersionNumeric() >= 7) || queryFromFields.length() > 0) {
                 actionUrl += "?" + queryFromFields;
             }
             if (anchor.length() > 0) {
@@ -232,7 +229,6 @@ public class HtmlForm extends HtmlElement {
 
         final List<NameValuePair> parameterList = new ArrayList<NameValuePair>(submittableElements.size());
         for (final SubmittableElement element : submittableElements) {
-
             for (final NameValuePair pair : element.getSubmitKeyValuePairs()) {
                 parameterList.add(pair);
             }

@@ -30,7 +30,6 @@ import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
-import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.auth.CredentialsProvider;
@@ -55,6 +54,9 @@ import org.apache.commons.httpclient.util.EncodingUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.logging.impl.SimpleLog;
+
+import com.gargoylesoftware.htmlunit.util.KeyDataPair;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Default implementation of {@link WebConnection}, using the HttpClient library to perform HTTP requests.
@@ -190,7 +192,7 @@ public class HttpWebConnection implements WebConnection {
             else {
                 final NameValuePair[] pairs = new NameValuePair[webRequestSettings.getRequestParameters().size()];
                 webRequestSettings.getRequestParameters().toArray(pairs);
-                httpMethod.setQueryString(pairs);
+                httpMethod.setQueryString(NameValuePair.toHttpClient(pairs));
             }
         }
         else { // POST as well as PUT

@@ -19,7 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.httpclient.NameValuePair;
+
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * A simple WebResponse created from a string. Content is assumed to be of type <tt>text/html</tt>.

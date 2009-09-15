@@ -17,10 +17,10 @@ package com.gargoylesoftware.htmlunit.html;
 import java.io.PrintWriter;
 import java.util.Map;
 
-import org.apache.commons.httpclient.NameValuePair;
 import org.w3c.dom.ranges.Range;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Wrapper for the HTML element "textarea".

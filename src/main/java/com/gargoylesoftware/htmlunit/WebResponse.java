@@ -20,7 +20,7 @@ import java.io.Serializable;
 import java.net.URL;
 import java.util.List;
 
-import org.apache.commons.httpclient.NameValuePair;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * A response from a web server.

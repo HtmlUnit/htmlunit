@@ -24,8 +24,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.httpclient.Header;
-import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.lang.time.DateUtils;
 import org.junit.Test;
@@ -35,6 +33,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Tests for {@link Cache}.
@@ -151,8 +150,8 @@ public class CacheTest extends WebTestCase {
         final URL urlPage2 = new URL(URL_FIRST, "page2.html");
         connection.setResponse(urlPage2, content2);
 
-        final List<Header> headers = new ArrayList<Header>();
-        headers.add(new Header("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
+        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        headers.add(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
         connection.setResponse(new URL(URL_FIRST, "foo1.js"), script1, 200, "ok", "text/javascript", headers);
         connection.setResponse(new URL(URL_FIRST, "foo2.js"), script2, 200, "ok", "text/javascript", headers);
 
@@ -190,8 +189,8 @@ public class CacheTest extends WebTestCase {
         final URL pageUrl = new URL(URL_FIRST, "page1.html");
         connection.setResponse(pageUrl, html);
 
-        final List<Header> headers =
-            Collections.singletonList(new Header("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
+        final List<NameValuePair> headers =
+            Collections.singletonList(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
         connection.setResponse(new URL(URL_FIRST, "foo1.js"), ";", 200, "ok", "text/javascript", headers);
         connection.setResponse(new URL(URL_FIRST, "foo2.js"), ";", 200, "ok", "text/javascript", headers);
 
@@ -223,8 +222,8 @@ public class CacheTest extends WebTestCase {
         final URL pageUrl = new URL(URL_FIRST, "page1.html");
         connection.setResponse(pageUrl, html);
 
-        final List<Header> headers =
-            Collections.singletonList(new Header("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
+        final List<NameValuePair> headers =
+            Collections.singletonList(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
         connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", "text/javascript", headers);
 
         client.getPage(pageUrl);
@@ -256,8 +255,8 @@ public class CacheTest extends WebTestCase {
 
         final MockWebConnection connection = getMockWebConnection();
 
-        final List<Header> headers =
-            Collections.singletonList(new Header("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
+        final List<NameValuePair> headers =
+            Collections.singletonList(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
         connection.setResponse(new URL(getDefaultUrl(), "foo.txt"), "hello", 200, "OK", "text/plain", headers);
 
         loadPageWithAlerts(html);
