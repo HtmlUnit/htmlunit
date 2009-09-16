@@ -7,6 +7,9 @@
     <body>
         <release version="2.7" date="?" description="Bugfixes, (initial)??? IE8 support">
             <action type="update" dev="mguillem">
+                HTMLElement.offsetWidth tries to compute width depending on the content when CSS attribute float is set to "right" or "left".
+            </action>
+            <action type="update" dev="mguillem">
                 CSS: add support for CSS3 pseudo classes :root, :enabled, :checked.
             </action>
             <action type="fix" dev="mguillem">

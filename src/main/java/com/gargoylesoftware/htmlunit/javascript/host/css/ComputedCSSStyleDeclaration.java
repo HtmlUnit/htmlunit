@@ -1178,10 +1178,22 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final DomNode parent = getElement().getDomNodeOrDie().getParentNode();
         if (StringUtils.isEmpty(styleWidth) && parent instanceof HtmlElement) {
             // Width not explicitly set; just assume we fill the width provided by the parent...
-            // AS LONG AS we can use the parent!
-            final HTMLElement parentJS = (HTMLElement) parent.getScriptObject();
-            final String parentWidth = getWindow().jsxFunction_getComputedStyle(parentJS, null).jsxGet_width();
-            width = pixelValue(parentWidth);
+            // ... unless we're floating
+            final String cssFloat = jsxGet_cssFloat();
+            if ("right".equals(cssFloat) || "left".equals(cssFloat)) {
+                // simplistic approximation: text content * 10 pixels per character
+                width = getDomNodeOrDie().getTextContent().length() * 10;
+            }
+            else {
+                final HTMLElement parentJS = (HTMLElement) parent.getScriptObject();
+                final String parentWidth = getWindow().jsxFunction_getComputedStyle(parentJS, null).jsxGet_width();
+                if (getBrowserVersion().isIE() && "auto".equals(parentWidth)) {
+                    width = 1256; // this is our standard default width
+                }
+                else {
+                    width = pixelValue(parentWidth);
+                }
+            }
         }
         else {
             // Width explicitly set in the style attribute, or there was no parent to provide guidance.
