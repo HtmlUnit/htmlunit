@@ -105,7 +105,9 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
     //TODO: This test fails with WebDriver with real FF3, but succeed if test is done outside WebDriver
     @Alerts(FF = "success", IE = "success",
             IE7 = "error: outlineWidth-error: outlineWidth-error: outlineWidth-error: outlineWidth-",
-            IE6 = "error: outlineWidth-error: outlineWidth-error: outlineWidth-error: outlineWidth-")
+            IE6 = "error: maxHeight-error: maxHeight-error: maxHeight-error: maxHeight-error: maxWidth-error: "
+                + "maxWidth-error: maxWidth-error: maxWidth-error: minWidth-error: minWidth-error: minWidth-error: "
+                + "minWidth-error: outlineWidth-error: outlineWidth-error: outlineWidth-error: outlineWidth-")
     public void width_like_properties() throws Exception {
         final String html
             = "<html><head><script>\n"

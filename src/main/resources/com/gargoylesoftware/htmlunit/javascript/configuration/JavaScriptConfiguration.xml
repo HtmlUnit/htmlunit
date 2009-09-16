@@ -317,10 +317,19 @@
         <property name="marks" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>
-        <property name="maxHeight" readable="true" writable="true"/>
-        <property name="maxWidth" readable="true" writable="true"/>
+        <property name="maxHeight" readable="true" writable="true">
+            <browser name="Firefox"/>
+            <browser name="Internet Explorer" min-version="7"/>
+        </property>
+        <property name="maxWidth" readable="true" writable="true">
+            <browser name="Firefox"/>
+            <browser name="Internet Explorer" min-version="7"/>
+        </property>
         <property name="minHeight" readable="true" writable="true"/>
-        <property name="minWidth" readable="true" writable="true"/>
+        <property name="minWidth" readable="true" writable="true">
+            <browser name="Firefox"/>
+            <browser name="Internet Explorer" min-version="7"/>
+        </property>
         <property name="MozAppearance" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>
