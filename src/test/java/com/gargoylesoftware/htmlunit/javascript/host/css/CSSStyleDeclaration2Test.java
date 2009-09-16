@@ -20,6 +20,8 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link CSSStyleDeclaration}.
@@ -102,6 +104,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented(Browser.IE6)
     //TODO: This test fails with WebDriver with real FF3, but succeed if test is done outside WebDriver
     @Alerts(FF = "success", IE = "success",
             IE7 = "error: outlineWidth-error: outlineWidth-error: outlineWidth-error: outlineWidth-",
