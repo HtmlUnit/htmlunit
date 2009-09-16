@@ -39,12 +39,10 @@ public class NativeFunctionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.IE8)
+    @NotYetImplemented(Browser.IE)
     @Alerts(FF = { "apply: function", "arguments: object", "bind: undefined", "call: function", "constructor: function",
                 "toSource: function", "toString: function" },
         IE = { "apply: function", "arguments: object", "bind: undefined", "call: function", "constructor: function",
-                "toSource: function", "toString: function" },
-        IE8 = { "apply: function", "arguments: object", "bind: undefined", "call: function", "constructor: function",
                 "toSource: undefined", "toString: function" })
     public void methods() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

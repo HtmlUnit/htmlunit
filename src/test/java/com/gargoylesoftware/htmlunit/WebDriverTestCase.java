@@ -61,7 +61,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * Base class for tests using WebDriver.
  * <p>
  * By default, this test runs with HtmlUnit, but this behavior can be changed by having a property file named
- * "htmlunit.properties" in the user home directory.
+ * "test.properties" in the HtmlUnit root directory.
  * Sample:
  * <pre>
    browsers=hu,ff2,ff3,ie8
@@ -106,7 +106,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         if (BROWSERS_PROPERTY_ == null) {
             try {
                 final Properties properties = new Properties();
-                final File file = new File("htmlunit.properties");
+                final File file = new File("test.properties");
                 if (file.exists()) {
                     properties.load(new FileInputStream(file));
                     BROWSERS_PROPERTY_ = properties.getProperty("browsers", "hu").toLowerCase();
