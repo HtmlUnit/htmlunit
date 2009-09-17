@@ -226,22 +226,22 @@ public class WebClient2Test extends WebServerTestCase {
 
         final byte[] bytes = SerializationUtils.serialize(page);
         page.getWebClient().closeAllWindows();
-        
+
         // deserialize page and verify that 1 background job exists
         final HtmlPage clonedPage = (HtmlPage) SerializationUtils.deserialize(bytes);
         assertEquals(1, clonedPage.getEnclosingWindow().getJobManager().getJobCount());
-        
+
         // configure a new CollectingAlertHandler (in fact it has surely already one and we could get and cast it)
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         final AlertHandler alertHandler = new CollectingAlertHandler(collectedAlerts);
         clonedPage.getWebClient().setAlertHandler(alertHandler);
-        
+
         // make some change in the page on which background script reacts
         clonedPage.getEnclosingWindow().setName("hello");
-        
+
         clonedPage.getWebClient().waitForBackgroundJavaScriptStartingBefore(100);
         assertEquals(0, clonedPage.getEnclosingWindow().getJobManager().getJobCount());
-        final String[] expectedAlerts = { "exiting" };
+        final String[] expectedAlerts = {"exiting"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
