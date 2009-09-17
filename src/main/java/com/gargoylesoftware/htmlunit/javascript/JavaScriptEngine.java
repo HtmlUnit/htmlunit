@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.Serializable;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -24,9 +23,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -35,6 +31,10 @@ import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -42,7 +42,7 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
@@ -68,7 +68,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @see <a href="http://groups-beta.google.com/group/netscape.public.mozilla.jseng/browse_thread/thread/b4edac57329cf49f/069e9307ec89111f">
  * Rhino and Java Browser</a>
  */
-public class JavaScriptEngine implements Serializable {
+public class JavaScriptEngine {
 
     private static final long serialVersionUID = -5414040051465432088L;
     private static final Log LOG = LogFactory.getLog(JavaScriptEngine.class);
@@ -156,7 +156,7 @@ public class JavaScriptEngine implements Serializable {
         final Map<Class< ? extends SimpleScriptable>, Scriptable> prototypes =
             new HashMap<Class< ? extends SimpleScriptable>, Scriptable>();
         final Map<String, Scriptable> prototypesPerJSName = new HashMap<String, Scriptable>();
-        final Window window = new Window(this);
+        final Window window = new Window();
         final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(webClient.getBrowserVersion());
         context.initStandardObjects(window);
 
@@ -175,22 +175,7 @@ public class JavaScriptEngine implements Serializable {
         }
 
         // put custom object to be called as very last prototype to call the fallback getter (if any)
-        final Scriptable fallbackCaller = new ScriptableObject() {
-            private static final long serialVersionUID = -7124423159070941606L;
-
-            @Override
-            public Object get(final String name, final Scriptable start) {
-                if (start instanceof ScriptableWithFallbackGetter) {
-                    return ((ScriptableWithFallbackGetter) start).getWithFallback(name);
-                }
-                return NOT_FOUND;
-            }
-
-            @Override
-            public String getClassName() {
-                return "htmlUnitHelper-fallbackCaller";
-            }
-        };
+        final Scriptable fallbackCaller = new FallbackCaller();
         ScriptableObject.getObjectPrototype(window).setPrototype(fallbackCaller);
 
         for (final String jsClassName : jsConfig.keySet()) {
@@ -214,9 +199,7 @@ public class JavaScriptEngine implements Serializable {
 
                         if (obj.getClass() == Element.class && webWindow.getEnclosedPage() instanceof HtmlPage) {
                             final DomNode domNode =
-                                new HtmlElement(null, "", (SgmlPage) webWindow.getEnclosedPage(), null) {
-                                    private static final long serialVersionUID = -5614158965497997095L;
-                                };
+                                new HtmlDivision(null, "", (SgmlPage) webWindow.getEnclosedPage(), null);
                             obj.setDomNode(domNode);
                         }
                     }
@@ -637,4 +620,22 @@ public class JavaScriptEngine implements Serializable {
         postponedActions_ = new ThreadLocal<List<PostponedAction>>();
         holdPostponedActions_ = new ThreadLocal<Boolean>();
     }
+
+    private static class FallbackCaller extends ScriptableObject {
+        private static final long serialVersionUID = -7124423159070941606L;
+
+        @Override
+        public Object get(final String name, final Scriptable start) {
+            if (start instanceof ScriptableWithFallbackGetter) {
+                return ((ScriptableWithFallbackGetter) start).getWithFallback(name);
+            }
+            return NOT_FOUND;
+        }
+
+        @Override
+        public String getClassName() {
+            return "htmlUnitHelper-fallbackCaller";
+        }
+    };
+
 }

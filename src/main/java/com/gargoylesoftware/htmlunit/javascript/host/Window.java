@@ -63,7 +63,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptFunctionJob;
@@ -118,7 +117,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     private HTMLCollection frames_; // has to be a member to have equality (==) working
     private Map<Class< ? extends SimpleScriptable>, Scriptable> prototypes_ =
         new HashMap<Class< ? extends SimpleScriptable>, Scriptable>();
-    private final JavaScriptEngine scriptEngine_;
     private EventListenersContainer eventListenersContainer_;
     private Object controllers_;
 
@@ -144,19 +142,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Creates an instance.
-     *
-     * @param scriptEngine the JavaScript engine responsible for the new window instance
      */
-    public Window(final JavaScriptEngine scriptEngine) {
-        scriptEngine_ = scriptEngine;
-    }
-
-    /**
-     * Gets the JavaScript Engine responsible for this object.
-     * @return the JavaScript engine
-     */
-    public JavaScriptEngine getJavaScriptEngine() {
-        return scriptEngine_;
+    public Window() {
     }
 
     /**

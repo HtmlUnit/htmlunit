@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -120,13 +121,13 @@ public class WebClient implements Serializable {
     /** Like the Firefox default value for network.http.redirection-limit. */
     private static final int ALLOWED_REDIRECTIONS_SAME_URL = 20;
 
-    private transient WebConnection webConnection_;
+    private transient WebConnection webConnection_ = new HttpWebConnection(this);
     private boolean printContentOnFailingStatusCode_ = true;
     private boolean throwExceptionOnFailingStatusCode_ = true;
     private CredentialsProvider credentialsProvider_ = new DefaultCredentialsProvider();
     private ProxyConfig proxyConfig_;
     private CookieManager cookieManager_ = new CookieManager();
-    private JavaScriptEngine scriptEngine_;
+    private transient JavaScriptEngine scriptEngine_;
     private boolean javaScriptEnabled_ = true;
     private boolean cssEnabled_ = true;
     private boolean appletEnabled_ = false;
@@ -209,35 +210,12 @@ public class WebClient implements Serializable {
         homePage_ = "http://www.gargoylesoftware.com/";
         browserVersion_ = browserVersion;
         proxyConfig_ = proxyConfig;
-        try {
-            scriptEngine_ = createJavaScriptEngineIfPossible(this);
-        }
-        catch (final NoClassDefFoundError e) {
-            scriptEngine_ = null;
-        }
+
+        scriptEngine_ = new JavaScriptEngine(this);
         // The window must be constructed AFTER the script engine.
         addWebWindowListener(new CurrentWindowTracker());
         currentWindow_ = new TopLevelWindow("", this);
         fireWindowOpened(new WebWindowEvent(currentWindow_, WebWindowEvent.OPEN, null, null));
-    }
-
-    /**
-     * Creates a JavaScript engine if possible.
-     *
-     * @param webClient the webclient that we are creating the script engine for
-     * @return a JavaScript engine or <tt>null</tt> if one could not be created
-     */
-    private static JavaScriptEngine createJavaScriptEngineIfPossible(final WebClient webClient) {
-        try {
-            Class.forName("net.sourceforge.htmlunit.corejs.javascript.Context");
-            return new JavaScriptEngine(webClient);
-        }
-        catch (final ClassNotFoundException e) {
-            return null;
-        }
-        catch (final NoClassDefFoundError e) {
-            return null;
-        }
     }
 
     /**
@@ -246,10 +224,7 @@ public class WebClient implements Serializable {
      * <p>Return the object that will resolve all URL requests<p>
      * @return the connection that will be used
      */
-    public synchronized WebConnection getWebConnection() {
-        if (webConnection_ == null) {
-            webConnection_ = new HttpWebConnection(this);
-        }
+    public WebConnection getWebConnection() {
         return webConnection_;
     }
 
@@ -612,7 +587,7 @@ public class WebClient implements Serializable {
      * @return <tt>true</tt> if JavaScript is enabled
      */
     public boolean isJavaScriptEnabled() {
-        return javaScriptEnabled_ && scriptEngine_ != null;
+        return javaScriptEnabled_;
     }
 
     /**
@@ -1111,9 +1086,7 @@ public class WebClient implements Serializable {
      */
     public void initialize(final WebWindow webWindow) {
         WebAssert.notNull("webWindow", webWindow);
-        if (scriptEngine_ != null) {
-            scriptEngine_.initialize(webWindow);
-        }
+        scriptEngine_.initialize(webWindow);
     }
 
     /**
@@ -1124,9 +1097,7 @@ public class WebClient implements Serializable {
      */
     public void initialize(final Page newPage) {
         WebAssert.notNull("newPage", newPage);
-        if (scriptEngine_ != null) {
-            ((Window) newPage.getEnclosingWindow().getScriptObject()).initialize(newPage);
-        }
+        ((Window) newPage.getEnclosingWindow().getScriptObject()).initialize(newPage);
     }
 
     /**
@@ -1138,10 +1109,8 @@ public class WebClient implements Serializable {
      */
     public void initializeEmptyWindow(final WebWindow webWindow) {
         WebAssert.notNull("webWindow", webWindow);
-        if (scriptEngine_ != null) {
-            initialize(webWindow);
-            ((Window) webWindow.getScriptObject()).initialize();
-        }
+        initialize(webWindow);
+        ((Window) webWindow.getScriptObject()).initialize();
     }
 
     /**
@@ -2130,4 +2099,12 @@ public class WebClient implements Serializable {
         return count;
     }
 
+    /**
+     * When we deserialize, re-initializie transient fields.
+     */
+    private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        webConnection_ = new HttpWebConnection(this);
+        scriptEngine_ = new JavaScriptEngine(this);
+    }
 }

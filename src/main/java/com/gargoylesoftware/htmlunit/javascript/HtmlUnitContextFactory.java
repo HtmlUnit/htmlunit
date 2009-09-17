@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import java.io.Serializable;
-
 import net.sourceforge.htmlunit.corejs.javascript.Callable;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
@@ -45,7 +43,7 @@ import com.gargoylesoftware.htmlunit.javascript.regexp.HtmlUnitRegExpProxy;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
-public class HtmlUnitContextFactory extends ContextFactory implements Serializable {
+public class HtmlUnitContextFactory extends ContextFactory {
 
     private static final long serialVersionUID = -1282169475857079041L;
 

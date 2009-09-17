@@ -71,7 +71,8 @@ public class HTMLImageElement extends HTMLElement {
     public void jsxSet_src(final String src) {
         final HtmlElement img = getDomNodeOrDie();
         img.setAttribute("src", src);
-        getWindow().getJavaScriptEngine().addPostponedAction(new ImageOnLoadAction(img.getPage()));
+        getWindow().getWebWindow().getWebClient()
+            .getJavaScriptEngine().addPostponedAction(new ImageOnLoadAction(img.getPage()));
     }
 
     /**
@@ -100,7 +101,8 @@ public class HTMLImageElement extends HTMLElement {
      */
     public void jsxSet_onload(final Object onloadHandler) {
         setEventHandlerProp("onload", onloadHandler);
-        getWindow().getJavaScriptEngine().addPostponedAction(new ImageOnLoadAction(getDomNodeOrDie().getPage()));
+        getWindow().getWebWindow().getWebClient()
+            .getJavaScriptEngine().addPostponedAction(new ImageOnLoadAction(getDomNodeOrDie().getPage()));
     }
 
     /**
