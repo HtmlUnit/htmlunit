@@ -17,12 +17,15 @@ package com.gargoylesoftware.htmlunit;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang.SerializationUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -193,6 +196,53 @@ public class WebClient2Test extends WebServerTestCase {
         final HtmlPage pageCopy = (HtmlPage) clientCopy.getCurrentWindow().getTopWindow().getEnclosedPage();
         pageCopy.getElementById("clicklink").click();
         assertEquals("hello world", pageCopy.getElementById("mybox").getTextContent());
+    }
+
+    /**
+     * Background tasks that have been registered before the serialization should
+     * wake up and run normally after the deserialization.
+     * Until now (2.7-SNAPSHOT 17.09.09) HtmlUnit has probably never supported it.
+     * This is currently not requested and this test is just to document the current status.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @NotYetImplemented
+    public void serialization_withJSBackgroundTasks() throws Exception {
+        final String html =
+              "<html><head>\n"
+            + "<script>\n"
+            + "  function foo() {\n"
+            + "    if (window.name == 'hello') {\n"
+            + "      alert('exiting');\n"
+            + "      clearInterval(intervalId);\n"
+            + "    }\n"
+            + "  }\n"
+            + "  var intervalId = setInterval(foo, 10);\n"
+            + "</script></head>\n"
+            + "<body></body></html>";
+        final HtmlPage page = loadPageWithAlerts(html);
+        // verify that 1 background job exists
+        assertEquals(1, page.getEnclosingWindow().getJobManager().getJobCount());
+
+        final byte[] bytes = SerializationUtils.serialize(page);
+        page.getWebClient().closeAllWindows();
+        
+        // deserialize page and verify that 1 background job exists
+        final HtmlPage clonedPage = (HtmlPage) SerializationUtils.deserialize(bytes);
+        assertEquals(1, clonedPage.getEnclosingWindow().getJobManager().getJobCount());
+        
+        // configure a new CollectingAlertHandler (in fact it has surely already one and we could get and cast it)
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        final AlertHandler alertHandler = new CollectingAlertHandler(collectedAlerts);
+        clonedPage.getWebClient().setAlertHandler(alertHandler);
+        
+        // make some change in the page on which background script reacts
+        clonedPage.getEnclosingWindow().setName("hello");
+        
+        clonedPage.getWebClient().waitForBackgroundJavaScriptStartingBefore(100);
+        assertEquals(0, clonedPage.getEnclosingWindow().getJobManager().getJobCount());
+        final String[] expectedAlerts = { "exiting" };
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
