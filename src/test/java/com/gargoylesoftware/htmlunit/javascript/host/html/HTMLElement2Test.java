@@ -51,7 +51,6 @@ public class HTMLElement2Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
-
     /**
      * @throws Exception if an error occurs
      */
