@@ -185,4 +185,49 @@ public class HTMLImageElement extends HTMLElement {
         setAlign(align, false);
     }
 
+    /**
+     * Returns the value of the "width" property.
+     * @return the value of the "width" property
+     */
+    public int jsxGet_width() {
+        final HtmlImage img = (HtmlImage) getDomNodeOrDie();
+        final String width = img.getWidthAttribute();
+        try {
+            return Integer.parseInt(width);
+        }
+        catch (final NumberFormatException e) {
+            return 24; // anything else
+        }
+    }
+
+    /**
+     * Sets the value of the "width" property.
+     * @param width the value of the "width" property
+     */
+    public void jsxSet_width(final String width) {
+        getDomNodeOrDie().setAttribute("width", width);
+    }
+
+    /**
+     * Returns the value of the "height" property.
+     * @return the value of the "height" property
+     */
+    public int jsxGet_height() {
+        final HtmlImage img = (HtmlImage) getDomNodeOrDie();
+        final String height = img.getHeightAttribute();
+        try {
+            return Integer.parseInt(height);
+        }
+        catch (final NumberFormatException e) {
+            return 24; // anything else
+        }
+    }
+
+    /**
+     * Sets the value of the "height" property.
+     * @param height the value of the "height" property
+     */
+    public void jsxSet_height(final String height) {
+        getDomNodeOrDie().setAttribute("height", height);
+    }
 }
