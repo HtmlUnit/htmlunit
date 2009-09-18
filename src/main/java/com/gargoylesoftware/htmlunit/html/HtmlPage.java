@@ -1902,13 +1902,23 @@ public class HtmlPage extends SgmlPage {
 
         pageInputs.removeAll(formInputs);
 
+        boolean found = false;
         for (final HtmlRadioButtonInput input : pageInputs) {
             if (input == radioButtonInput) {
                 input.setAttribute("checked", "checked");
+                found = true;
             }
             else {
                 input.removeAttribute("checked");
             }
+        }
+        for (final HtmlRadioButtonInput input : formInputs) {
+            if (input == radioButtonInput) {
+                found = true;
+            }
+        }
+        if (!found) {
+            radioButtonInput.setAttribute("checked", "checked");
         }
     }
 

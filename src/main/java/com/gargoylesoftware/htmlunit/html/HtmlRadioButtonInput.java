@@ -176,5 +176,16 @@ public class HtmlRadioButtonInput extends HtmlInput {
     protected boolean isStateUpdateFirst() {
         return true;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void onAddedToPage() {
+        if (getPage().getWebClient().getBrowserVersion().isIE()) {
+            setChecked(isDefaultChecked());
+        }
+    }
+
 }
 

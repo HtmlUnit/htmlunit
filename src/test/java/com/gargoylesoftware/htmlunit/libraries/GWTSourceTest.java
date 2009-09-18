@@ -205,7 +205,6 @@ public class GWTSourceTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     @Alerts(IE = { "true", "false", "false", "false", "true", "true" },
             FF = { "true", "true", "true", "true", "true", "true" })
     public void testProperties() throws Exception {
