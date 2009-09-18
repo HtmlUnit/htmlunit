@@ -78,12 +78,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  *   <li>ff3.bin: is the location of the FF3 binary, in Windows use double back-slashes</li>
  * </ul>
  * </p>
- * <p>
- *   Note: if you encounter java.lang.NoClassDefFoundError: com/sun/jna/win32/StdCallLibrary,
- *   then make sure you manually download JNA 3.0.9 and copy it to
- *   ~/.m2/repository/com/sun/jna/jna/3.0.9/jna-3.0.9.jar<br>
- *   To run maven with real IE, you have to remove the &lt;exclusions&gt; part of "webdriver-ie" artifact in pom.xml.
- * </p>
  *
  * @version $Revision$
  * @author Marc Guillemot
