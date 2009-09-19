@@ -659,22 +659,10 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>net.java.dev.jna</groupId>
-            <artifactId>jna</artifactId>
-            <version>3.2.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.seleniumhq.webdriver</groupId>
             <artifactId>webdriver-ie</artifactId>
             <version>0.9.7089</version>
             <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.sun.jna</groupId>
-                    <artifactId>jna</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
     </dependencies>
     <distributionManagement>
