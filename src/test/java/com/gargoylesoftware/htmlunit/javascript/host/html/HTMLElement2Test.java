@@ -114,4 +114,60 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "something", "something" }, FF = { "something", "0" })
+    public void textContent_null() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    checkChildren();\n"
+            + "    myTestDiv.textContent = null;\n"
+            + "    checkChildren();\n"
+            + "  }\n"
+            + "  function checkChildren() {\n"
+            + "    if (myTestDiv.childNodes.length == 0)\n"
+            + "      alert('0');\n"
+            + "    else\n"
+            + "      alert(myTestDiv.childNodes.item(0).data);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myTestDiv'>something</div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "something", "null" }, FF = { "something", "something" })
+    public void innerText_null() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    checkChildren();\n"
+            + "    myTestDiv.innerText = null;\n"
+            + "    checkChildren();\n"
+            + "  }\n"
+            + "  function checkChildren() {\n"
+            + "    if (myTestDiv.childNodes.length == 0)\n"
+            + "      alert('0');\n"
+            + "    else\n"
+            + "      alert(myTestDiv.childNodes.item(0).data);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myTestDiv'>something</div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

@@ -20,21 +20,25 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
- * Tests for {@link HtmlRadioButtonInput}.
+ * Tests for {@link HtmlCheckBoxInput}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
+public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
 
     /**
+     * Verifies the behavior of 'checked' property on being attached to a page.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "true", "false", "false", "false", "true", "true" },
+    @NotYetImplemented(Browser.IE)
+    @Alerts(IE = { "true", "false", "false", "false", "false", "false" },
             FF = { "true", "true", "true", "true", "true", "true" })
     public void checked_on_attachment() throws Exception {
         final String html = "<html>\n"
@@ -42,7 +46,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "  <script>\n"
             + "    function test() {\n"
             + "      var input = document.createElement('input');\n"
-            + "      input.type = 'radio';\n"
+            + "      input.type = 'checkbox';\n"
             + "      input.checked = true;\n"
             + "      alert(input.checked);\n"
             + "      document.body.appendChild(input);\n"

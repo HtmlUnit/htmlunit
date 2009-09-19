@@ -842,6 +842,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param value - the new value for the contents of this node
      */
     public void jsxSet_innerText(final String value) {
+        setInnerText(Context.toString(value));
+    }
+
+    private void setInnerText(final Object value) {
         final DomNode domNode = getDomNodeOrDie();
 
         if (INNER_TEXT_READONLY.contains(domNode.getNodeName())) {
@@ -850,8 +854,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         domNode.removeAllChildren();
 
-        final DomNode node = new DomText(getDomNodeOrDie().getPage(), value);
-        domNode.appendChild(node);
+        if (value != null) {
+            domNode.appendChild(new DomText(domNode.getPage(), Context.toString(value)));
+        }
 
         //if the parentNode has null parentNode in IE,
         //create a DocumentFragment to be the parentNode's parentNode.
@@ -865,8 +870,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Replace all children elements of this element with the supplied value.
      * @param value - the new value for the contents of this node
      */
-    public void jsxSet_textContent(final String value) {
-        jsxSet_innerText(value);
+    public void jsxSet_textContent(final Object value) {
+        setInnerText(value);
     }
 
     /**
