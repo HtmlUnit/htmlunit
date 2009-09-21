@@ -51,4 +51,67 @@ public class DateTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Test for the methods with the same expectations for all browsers.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "constructor: function", "getDate: function", "getDay: function", "getFullYear: function",
+            "getHours: function", "getMilliseconds: function", "getMinutes: function", "getMonth: function",
+            "getSeconds: function", "getTime: function", "getTimezoneOffset: function", "getUTCDate: function",
+            "getUTCDay: function", "getUTCFullYear: function", "getUTCHours: function", "getUTCMilliseconds: function",
+            "getUTCMinutes: function", "getUTCMonth: function", "getUTCSeconds: function", "getYear: function",
+            "now: undefined", "parse: undefined", "setDate: function", "setFullYear: function", "setHours: function",
+            "setMilliseconds: function", "setMinutes: function", "setMonth: function", "setSeconds: function",
+            "setTime: function", "setUTCDate: function", "setUTCFullYear: function", "setUTCHours: function",
+            "setUTCMilliseconds: function", "setUTCMinutes: function", "setUTCMonth: function",
+            "setUTCSeconds: function", "setYear: function", "toDateString: function", "toISOString: undefined",
+            "toJSON: undefined", "toLocaleDateString: function", "toLocaleString: function",
+            "toLocaleTimeString: function", "toString: function", "toTimeString: function",
+            "toUTCString: function", "valueOf: function", "UTC: undefined" })
+    public void methods_common() throws Exception {
+        final String[] methods = {"constructor", "getDate", "getDay", "getFullYear", "getHours", "getMilliseconds",
+            "getMinutes", "getMonth", "getSeconds", "getTime", "getTimezoneOffset", "getUTCDate", "getUTCDay",
+            "getUTCFullYear", "getUTCHours", "getUTCMilliseconds", "getUTCMinutes", "getUTCMonth", "getUTCSeconds",
+            "getYear", "now", "parse", "setDate", "setFullYear", "setHours", "setMilliseconds", "setMinutes",
+            "setMonth", "setSeconds", "setTime", "setUTCDate", "setUTCFullYear", "setUTCHours",
+            "setUTCMilliseconds", "setUTCMinutes", "setUTCMonth", "setUTCSeconds", "setYear", "toDateString",
+            "toISOString", "toJSON", "toLocaleDateString", "toLocaleString", "toLocaleTimeString", "toString",
+            "toTimeString", "toUTCString", "valueOf", "UTC"};
+        final String html = createHTMLTestMethods("new Date()", methods);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test for the methods with different expectations depending on the browsers.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "toSource: function", IE = "toSource: undefined")
+    public void methods_differences() throws Exception {
+        final String[] methods = {"toSource"};
+        final String html = createHTMLTestMethods("new Date()", methods);
+        loadPageWithAlerts2(html);
+    }
+
+    static String createHTMLTestMethods(final String object, final String... methodNames) throws Exception {
+        final StringBuilder methodList = new StringBuilder();
+        for (final String methodName : methodNames) {
+            methodList.append(", '").append(methodName).append("'");
+        }
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "  var o = " + object + ";\n"
+            + "  var props = [" + methodList.substring(2) + "];\n"
+            + "  for (var i=0; i<props.length; ++i) {\n"
+            + "    var p = props[i];\n"
+            + "    alert(p + ': ' + typeof(o[p]));\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        return html;
+    }
 }

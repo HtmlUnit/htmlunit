@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class StringTest extends WebTestCase {
+public class StringTest extends WebDriverTestCase {
 
     /**
      * Test for bug <a href="http://sourceforge.net/support/tracker.php?aid=2783950">2783950</a>.
@@ -46,5 +46,41 @@ public class StringTest extends WebTestCase {
             + "</body></html>";
 
         loadPageWithAlerts(html);
+    }
+
+    /**
+     * Test for the methods with the same expectations for all browsers.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "anchor: function", "big: function", "blink: function", "bold: function", "charAt: function",
+        "charCodeAt: function", "concat: function", "constructor: function", "equals: undefined",
+        "equalsIgnoreCase: undefined", "fixed: function", "fontcolor: function", "fontsize: function",
+        "fromCharCode: undefined", "indexOf: function", "italics: function", "lastIndexOf: function",
+        "link: function", "localeCompare: function", "match: function", "replace: function", "search: function",
+        "slice: function", "small: function", "split: function", "strike: function", "sub: function",
+        "substr: function", "substring: function", "sup: function", "toLocaleLowerCase: function",
+        "toLocaleUpperCase: function", "toLowerCase: function", "toString: function", "toUpperCase: function",
+        "trim: undefined", "valueOf: function" })
+    public void methods_common() throws Exception {
+        final String[] methods = {"anchor", "big", "blink", "bold", "charAt", "charCodeAt", "concat", "constructor",
+            "equals", "equalsIgnoreCase", "fixed", "fontcolor", "fontsize", "fromCharCode", "indexOf", "italics",
+            "lastIndexOf", "link", "localeCompare", "match", "replace", "search", "slice", "small", "split",
+            "strike", "sub", "substr", "substring", "sup", "toLocaleLowerCase", "toLocaleUpperCase", "toLowerCase",
+            "toString", "toUpperCase", "trim", "valueOf"};
+        final String html = DateTest.createHTMLTestMethods("'hello'", methods);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test for the methods with different expectations depending on the browsers.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "toSource: function", IE = "toSource: undefined")
+    public void methods_differences() throws Exception {
+        final String[] methods = {"toSource"};
+        final String html = DateTest.createHTMLTestMethods("'hello'", methods);
+        loadPageWithAlerts2(html);
     }
 }

@@ -20,8 +20,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Function is a native JavaScript object and therefore provided by Rhino but some tests are needed here
@@ -36,27 +34,26 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 public class NativeFunctionTest extends WebDriverTestCase {
 
     /**
+     * Test for the methods with the same expectations for all browsers.
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.IE)
-    @Alerts(FF = { "apply: function", "arguments: object", "bind: undefined", "call: function", "constructor: function",
-                "toSource: function", "toString: function" },
-        IE = { "apply: function", "arguments: object", "bind: undefined", "call: function", "constructor: function",
-                "toSource: undefined", "toString: function" })
-    public void methods() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "function doTest() {\n"
-            + "  var o = function() {};\n"
-            + "  var props = ['apply', 'arguments', 'bind', 'call', 'constructor', 'toSource', 'toString'];\n"
-            + "  for (var i=0; i<props.length; ++i) {\n"
-            + "    var p = props[i];\n"
-            + "    alert(p + ': ' + typeof(o[p]));\n"
-            + "  }\n"
-            + "}\n"
-            + "</script></head><body onload='doTest()'>\n"
-            + "</body></html>";
+    @Alerts({ "apply: function", "arguments: object", "bind: undefined", "call: function", "constructor: function",
+            "toString: function" })
+    public void methods_common() throws Exception {
+        final String[] methods = {"apply", "arguments", "bind", "call", "constructor", "toString"};
+        final String html = DateTest.createHTMLTestMethods("function() {}", methods);
+        loadPageWithAlerts2(html);
+    }
 
+    /**
+     * Test for the methods with the different expectations depending on the browsers.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "toSource: function", IE = "toSource: undefined")
+    public void methods_different() throws Exception {
+        final String html = DateTest.createHTMLTestMethods("function() {}", "toSource");
         loadPageWithAlerts2(html);
     }
 }

@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class GlobalFunctionsTest extends WebTestCase {
+public class GlobalFunctionsTest extends WebDriverTestCase {
 
     /**
      * Test for bug <a href="http://sourceforge.net/support/tracker.php?aid=2815674">2815674</a>
@@ -47,5 +47,33 @@ public class GlobalFunctionsTest extends WebTestCase {
             + "</body></html>";
 
         loadPageWithAlerts(html);
+    }
+
+    /**
+     * Test for the methods with the same expectations for all browsers.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "decodeURI: function", "decodeURIComponent: function", "encodeURI: function",
+        "encodeURIComponent: function", "escape: function", "eval: function", "isFinite: function", "isNaN: function",
+        "parseFloat: function", "parseInt: function", "unescape: function" })
+    public void methods_common() throws Exception {
+        final String[] methods = {"decodeURI", "decodeURIComponent", "encodeURI", "encodeURIComponent", "escape",
+            "eval", "isFinite", "isNaN", "parseFloat", "parseInt", "unescape"};
+        final String html = DateTest.createHTMLTestMethods("this", methods);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test for the methods with the different expectations depending on the browsers.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "isXMLName: function", "uneval: function" },
+            IE = { "isXMLName: undefined", "uneval: undefined" })
+    public void methods_different() throws Exception {
+        final String[] methods = {"isXMLName", "uneval"};
+        final String html = DateTest.createHTMLTestMethods("this", methods);
+        loadPageWithAlerts2(html);
     }
 }

@@ -161,17 +161,9 @@ public class JavaScriptEngine {
         context.initStandardObjects(window);
 
         // remove some objects, that Rhino defines in top scope but that we don't want
-        final String[] undesirableWindowProps = {"javax", "org", "com", "edu", "net", "JavaAdapter",
-            "JavaImporter", "Continuation"};
-        for (final String property : undesirableWindowProps) {
-            window.delete(property);
-        }
+        deleteProperties(window, "javax", "org", "com", "edu", "net", "JavaAdapter", "JavaImporter", "Continuation");
         if (webClient.getBrowserVersion().isIE()) {
-            final String[] undesirableWindowPropsIE = {"Packages", "java", "getClass", "XML", "XMLList",
-                "Namespace", "QName"};
-            for (final String property : undesirableWindowPropsIE) {
-                window.delete(property);
-            }
+            deleteProperties(window, "Packages", "java", "getClass", "XML", "XMLList", "Namespace", "QName");
         }
 
         // put custom object to be called as very last prototype to call the fallback getter (if any)
@@ -245,18 +237,37 @@ public class JavaScriptEngine {
             }
         }
 
+        // Rhino defines too much methods on String for us!
+        removePrototypeProperties(window, "String", "equals", "equalsIgnoreCase");
+
         // in IE, not all standard methods exists
         if (webClient.getBrowserVersion().isIE()) {
-            final String[] objectPropertiesToRemove = {"__defineGetter__", "__defineSetter__", "__lookupGetter__",
-                "__lookupSetter__", "toSource"};
-            removePrototypeProperties(window, "Object", objectPropertiesToRemove);
-            final String[] arrayPropertiesToRemove = {"every", "filter", "forEach", "indexOf", "lastIndexOf", "map",
-                "some", "toSource"};
-            removePrototypeProperties(window, "Array", arrayPropertiesToRemove);
+            deleteProperties(window, "isXMLName", "uneval");
+            removePrototypeProperties(window, "Object", "__defineGetter__", "__defineSetter__", "__lookupGetter__",
+                    "__lookupSetter__", "toSource");
+            removePrototypeProperties(window, "Array", "every", "filter", "forEach", "indexOf", "lastIndexOf", "map",
+                    "reduce", "reduceRight", "some", "toSource");
+            removePrototypeProperties(window, "Date", "toSource");
+            removePrototypeProperties(window, "Function", "toSource");
+            removePrototypeProperties(window, "String", "toSource");
+        }
+        else if ("FF2".equals(webClient.getBrowserVersion().getNickname())) {
+            removePrototypeProperties(window, "Array", "reduce", "reduceRight");
         }
 
         window.setPrototypes(prototypes);
         window.initialize(webWindow);
+    }
+
+    /**
+     * Deletes the properties with the provided names.
+     * @param window the scope from which properties have to be remmoved
+     * @param propertiesToDelete the list of property names
+     */
+    private void deleteProperties(final Window window, final String... propertiesToDelete) {
+        for (final String property : propertiesToDelete) {
+            window.delete(property);
+        }
     }
 
     /**
@@ -265,7 +276,7 @@ public class JavaScriptEngine {
      * @param className the class for which properties should be removed
      * @param properties the properties to remove
      */
-    private void removePrototypeProperties(final Window window, final String className, final String[] properties) {
+    private void removePrototypeProperties(final Window window, final String className, final String... properties) {
         final ScriptableObject prototype = (ScriptableObject) ScriptableObject.getClassPrototype(window, className);
         for (final String property : properties) {
             prototype.delete(property);
