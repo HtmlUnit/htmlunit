@@ -48,7 +48,7 @@ public class NativeObjectTest extends WebDriverTestCase {
             "getOwnPropertyDescriptor", "getOwnPropertyNames", "getPrototypeOf", "hasOwnProperty", "isExtensible",
             "isFrozen", "isPrototypeOf", "isSealed", "keys", "preventExtensions", "propertyIsEnumerable", "seal",
             "toLocaleString", "toString", "valueOf"};
-        final String html = DateTest.createHTMLTestMethods("new Object()", methods);
+        final String html = NativeDateTest.createHTMLTestMethods("new Object()", methods);
         loadPageWithAlerts2(html);
     }
 
@@ -64,7 +64,7 @@ public class NativeObjectTest extends WebDriverTestCase {
     public void methods_different() throws Exception {
         final String[] methods = {"__defineGetter__", "__defineSetter__", "__lookupGetter__", "__lookupSetter__",
             "toSource"};
-        final String html = DateTest.createHTMLTestMethods("new Object()", methods);
+        final String html = NativeDateTest.createHTMLTestMethods("new Object()", methods);
         loadPageWithAlerts2(html);
     }
 }

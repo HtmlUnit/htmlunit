@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class DateTest extends WebDriverTestCase {
+public class NativeDateTest extends WebDriverTestCase {
 
     /**
      * Test for bug <a href="http://sourceforge.net/support/tracker.php?aid=2615817">2615817</a>.

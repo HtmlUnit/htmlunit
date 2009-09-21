@@ -60,7 +60,7 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
     public void methods_common() throws Exception {
         final String[] methods = {"decodeURI", "decodeURIComponent", "encodeURI", "encodeURIComponent", "escape",
             "eval", "isFinite", "isNaN", "parseFloat", "parseInt", "unescape"};
-        final String html = DateTest.createHTMLTestMethods("this", methods);
+        final String html = NativeDateTest.createHTMLTestMethods("this", methods);
         loadPageWithAlerts2(html);
     }
 
@@ -73,7 +73,7 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
             IE = { "isXMLName: undefined", "uneval: undefined" })
     public void methods_different() throws Exception {
         final String[] methods = {"isXMLName", "uneval"};
-        final String html = DateTest.createHTMLTestMethods("this", methods);
+        final String html = NativeDateTest.createHTMLTestMethods("this", methods);
         loadPageWithAlerts2(html);
     }
 }

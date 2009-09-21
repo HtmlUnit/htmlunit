@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class ArrayTest extends WebDriverTestCase {
+public class NativeArrayTest extends WebDriverTestCase {
 
     /**
      * Test for sort algorithm used (when sort is called with callback).
@@ -70,7 +70,7 @@ public class ArrayTest extends WebDriverTestCase {
     public void methods_common() throws Exception {
         final String[] methods = {"concat", "constructor", "isArray", "join", "pop", "push", "reverse", "shift",
             "slice", "sort", "splice", "toLocaleString", "toString", "unshift"};
-        final String html = DateTest.createHTMLTestMethods("[]", methods);
+        final String html = NativeDateTest.createHTMLTestMethods("[]", methods);
         loadPageWithAlerts2(html);
     }
 
@@ -91,7 +91,7 @@ public class ArrayTest extends WebDriverTestCase {
     public void methods_different() throws Exception {
         final String[] methods = {"every", "filter", "forEach", "indexOf", "lastIndexOf", "map", "reduce",
             "reduceRight", "some", "toSource"};
-        final String html = DateTest.createHTMLTestMethods("[]", methods);
+        final String html = NativeDateTest.createHTMLTestMethods("[]", methods);
         loadPageWithAlerts2(html);
     }
 }

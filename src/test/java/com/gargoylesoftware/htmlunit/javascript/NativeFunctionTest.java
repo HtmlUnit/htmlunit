@@ -42,7 +42,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
             "toString: function" })
     public void methods_common() throws Exception {
         final String[] methods = {"apply", "arguments", "bind", "call", "constructor", "toString"};
-        final String html = DateTest.createHTMLTestMethods("function() {}", methods);
+        final String html = NativeDateTest.createHTMLTestMethods("function() {}", methods);
         loadPageWithAlerts2(html);
     }
 
@@ -53,7 +53,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = "toSource: function", IE = "toSource: undefined")
     public void methods_different() throws Exception {
-        final String html = DateTest.createHTMLTestMethods("function() {}", "toSource");
+        final String html = NativeDateTest.createHTMLTestMethods("function() {}", "toSource");
         loadPageWithAlerts2(html);
     }
 }

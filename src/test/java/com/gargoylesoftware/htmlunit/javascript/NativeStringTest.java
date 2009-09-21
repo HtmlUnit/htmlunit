@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class StringTest extends WebDriverTestCase {
+public class NativeStringTest extends WebDriverTestCase {
 
     /**
      * Test for bug <a href="http://sourceforge.net/support/tracker.php?aid=2783950">2783950</a>.
@@ -68,7 +68,7 @@ public class StringTest extends WebDriverTestCase {
             "lastIndexOf", "link", "localeCompare", "match", "replace", "search", "slice", "small", "split",
             "strike", "sub", "substr", "substring", "sup", "toLocaleLowerCase", "toLocaleUpperCase", "toLowerCase",
             "toString", "toUpperCase", "trim", "valueOf"};
-        final String html = DateTest.createHTMLTestMethods("'hello'", methods);
+        final String html = NativeDateTest.createHTMLTestMethods("'hello'", methods);
         loadPageWithAlerts2(html);
     }
 
@@ -80,7 +80,7 @@ public class StringTest extends WebDriverTestCase {
     @Alerts(FF = "toSource: function", IE = "toSource: undefined")
     public void methods_differences() throws Exception {
         final String[] methods = {"toSource"};
-        final String html = DateTest.createHTMLTestMethods("'hello'", methods);
+        final String html = NativeDateTest.createHTMLTestMethods("'hello'", methods);
         loadPageWithAlerts2(html);
     }
 }
