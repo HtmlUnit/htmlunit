@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, (initial)??? IE8 support">
+            <action type="update" dev="mguillem">
+                Upgrade HtmlUnit-core-js to 2.7-SNAPSHOT (corresponds to head of Rhino trunk from Sep 21, 2009 + minimal adaptations).
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: remove String functions "equals" and "equalsIgnoreCase",
                 Array functions "reduce" and "reduceRight" (FF2 and IE),

@@ -237,8 +237,10 @@ public class JavaScriptEngine {
             }
         }
 
-        // Rhino defines too much methods on String for us!
-        removePrototypeProperties(window, "String", "equals", "equalsIgnoreCase");
+        // Rhino defines too much methods for us, particularly since implementation of ECMAScript5
+        removePrototypeProperties(window, "String", "equals", "equalsIgnoreCase", "trim");
+        removePrototypeProperties(window, "Function", "bind");
+        removePrototypeProperties(window, "Date", "toISOString", "toJSON");
 
         // in IE, not all standard methods exists
         if (webClient.getBrowserVersion().isIE()) {
