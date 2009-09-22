@@ -53,7 +53,7 @@ public class WebRequestSettingsTest extends WebServerTestCase {
     public void setUrl_eliminateDirUp() throws Exception {
         final URL url1 = new URL("http://htmlunit.sf.net/foo.html");
         final URL url2 = new URL("http://htmlunit.sf.net/dir/foo.html");
-        final URL url3 = new URL("http://htmlunit.sf.net/dir/foo.htmla=1&b=2");
+        final URL url3 = new URL("http://htmlunit.sf.net/dir/foo.html?a=1&b=2");
 
         // with directory/..
         WebRequestSettings settings = new WebRequestSettings(new URL("http://htmlunit.sf.net/bla/../foo.html"));

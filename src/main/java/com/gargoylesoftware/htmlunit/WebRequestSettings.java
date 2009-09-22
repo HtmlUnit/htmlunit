@@ -106,7 +106,7 @@ public class WebRequestSettings implements Serializable {
                 url = buildUrlWithNewFile(url, "/" + url.getFile());
             }
             else if (path.contains("./")) {
-                final String query = (url.getQuery() != null) ? url.getQuery() : "";
+                final String query = (url.getQuery() != null) ? "?" + url.getQuery() : "";
                 url = buildUrlWithNewFile(url, removeDots(path) + query);
             }
             url_ = url.toExternalForm();
