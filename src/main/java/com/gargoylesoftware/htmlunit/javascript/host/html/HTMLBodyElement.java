@@ -207,7 +207,7 @@ public class HTMLBodyElement extends HTMLElement {
     public String jsxGet_vLink() {
         String vLink = getDomNodeOrDie().getAttribute("vLink");
         if (vLink == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().isFirefox()) {
-            vLink = "#000000";
+            vLink = "#551a8b";
         }
         return vLink;
     }

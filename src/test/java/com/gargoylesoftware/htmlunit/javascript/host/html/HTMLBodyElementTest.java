@@ -14,19 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Unit tests for {@link HTMLBodyElement}.
@@ -37,7 +32,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class HTMLBodyElementTest extends WebTestCase {
+public class HTMLBodyElementTest extends WebDriverTestCase {
 
     /**
      * Tests the default body padding and margins.
@@ -63,15 +58,14 @@ public class HTMLBodyElementTest extends WebTestCase {
             + "  </head>\n"
             + "  <body id='body' onload='test()'>blah</body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("[object]")
-    @Browsers(Browser.IE)
+    @Alerts(FF = "exception", IE = "[object]")
     public void attachEvent() throws Exception {
         final String html =
             "<html>\n"
@@ -81,7 +75,9 @@ public class HTMLBodyElementTest extends WebTestCase {
             + "        alert(event);\n"
             + "      }\n"
             + "      function test() {\n"
-            + "        document.body.attachEvent('onclick', handler);\n"
+            + "        try {\n"
+            + "          document.body.attachEvent('onclick', handler);\n"
+            + "        } catch(e) { alert('exception'); }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -90,10 +86,9 @@ public class HTMLBodyElementTest extends WebTestCase {
             + "  </body>\n"
             + "</html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
-        page.<HtmlButtonInput>getHtmlElementById("myInput").click();
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myInput")).click();
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 
     /**
@@ -121,7 +116,7 @@ public class HTMLBodyElementTest extends WebTestCase {
             + "  <body onload='test()'>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -147,7 +142,7 @@ public class HTMLBodyElementTest extends WebTestCase {
             + "  </head>\n"
             + "  <body id='body' onload='test()'>blah</body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -173,7 +168,7 @@ public class HTMLBodyElementTest extends WebTestCase {
             + "  </head>\n"
             + "  <body id='body' onload='test()'>blah</body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -199,7 +194,7 @@ public class HTMLBodyElementTest extends WebTestCase {
             + "  </head>\n"
             + "  <body id='body' onload='test()'>blah</body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -225,7 +220,7 @@ public class HTMLBodyElementTest extends WebTestCase {
             + "  </head>\n"
             + "  <body id='body' onload='test()'>blah</body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -251,14 +246,14 @@ public class HTMLBodyElementTest extends WebTestCase {
             + "  </head>\n"
             + "  <body id='body' onload='test()'>blah</body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"#000000", "#0000aa", "#000000" },
+    @Alerts(FF = {"#551a8b", "#0000aa", "#000000" },
             IE = {"", "#0000aa", "#000000" })
     public void vLink() throws Exception {
         final String html =
@@ -277,7 +272,6 @@ public class HTMLBodyElementTest extends WebTestCase {
             + "  </head>\n"
             + "  <body id='body' onload='test()'>blah</body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
-
 }
