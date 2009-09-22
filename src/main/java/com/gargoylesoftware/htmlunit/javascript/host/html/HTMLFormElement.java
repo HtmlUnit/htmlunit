@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.Iterator;
 import java.util.List;
 
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -320,22 +321,18 @@ public class HTMLFormElement extends HTMLElement {
             if (elements.isEmpty()) {
                 return NOT_FOUND;
             }
+
+            // filter out elements that can't be accessed this way
+            for (final Iterator<HtmlElement> iter = elements.iterator(); iter.hasNext();) {
+                if (!isAccessibleByIdOrName(form, iter.next())) {
+                    iter.remove();
+                }
+            }
+            if (elements.isEmpty()) {
+                return NOT_FOUND;
+            }
             if (elements.size() == 1) {
-                final HtmlElement element = elements.get(0);
-                final String tagName = element.getTagName();
-                final String type = element.getAttribute("type").toLowerCase();
-                if ((HtmlInput.TAG_NAME.equals(tagName) && !"image".equals(type))
-                        || HtmlButton.TAG_NAME.equals(tagName)
-                        || HtmlSelect.TAG_NAME.equals(tagName)
-                        || HtmlTextArea.TAG_NAME.equals(tagName)
-                        || HtmlImage.TAG_NAME.equals(tagName)) {
-                    if (form.isAncestorOf(element) || form.getLostChildren().contains(element)) {
-                        return getScriptableFor(element);
-                    }
-                }
-                else {
-                    return NOT_FOUND;
-                }
+                return getScriptableFor(elements.get(0));
             }
         }
         // The shortcut wasn't enough, which means we probably need to perform the XPath operation anyway.
@@ -369,6 +366,27 @@ public class HTMLFormElement extends HTMLElement {
             result = collection.get(0, collection);
         }
         return result;
+    }
+
+    /**
+     * Indicates if the element can be reached by id or name in expressions like "myForm.myField".
+     * @param form the owning form
+     * @param element the element to test
+     * @return <code>true</code> if this element matches the conditions
+     */
+    private boolean isAccessibleByIdOrName(final HtmlForm form, final HtmlElement element) {
+        final String tagName = element.getTagName();
+        final String type = element.getAttribute("type").toLowerCase();
+        if ((HtmlInput.TAG_NAME.equals(tagName) && !"image".equals(type))
+                || HtmlButton.TAG_NAME.equals(tagName)
+                || HtmlSelect.TAG_NAME.equals(tagName)
+                || HtmlTextArea.TAG_NAME.equals(tagName)
+                || HtmlImage.TAG_NAME.equals(tagName)) {
+            if (form.isAncestorOf(element) || form.getLostChildren().contains(element)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

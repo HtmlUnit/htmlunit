@@ -1585,8 +1585,7 @@ public class HtmlPage extends SgmlPage {
 
     /**
      * Returns the HTML elements with the specified string for their name or ID. If there are
-     * no elements with the specified name or ID, this method returns an empty list. Please note
-     * that lists returned by this method are immutable.
+     * no elements with the specified name or ID, this method returns an empty list.
      *
      * @param idAndOrName the value to search for
      * @return the HTML elements with the specified string for their name or ID
@@ -1605,7 +1604,7 @@ public class HtmlPage extends SgmlPage {
                 }
             }
         }
-        return Collections.unmodifiableList(list);
+        return list;
     }
 
     /**

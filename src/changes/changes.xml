@@ -6,6 +6,13 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, (initial)??? IE8 support">
+            <action type="update" dev="mguillem" issue="2860541">
+                JavaScript: improve resolution performance of "someForm.someField" when many elements in the page
+                have "someField" as id or name attribute but only one in the provided form.
+            </action>
+            <action type="update" dev="mguillem">
+                List returned by HtmlPage.getElementsByIdAndOrName is now mutable.
+            </action>
             <action type="fix" dev="mguillem" issue="2834335">
                 JavaScript: delete operator should not walk property chain.
             </action>
