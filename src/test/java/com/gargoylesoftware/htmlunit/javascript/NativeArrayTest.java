@@ -94,4 +94,27 @@ public class NativeArrayTest extends WebDriverTestCase {
         final String html = NativeDateTest.createHTMLTestMethods("[]", methods);
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Rhino version used in HtmlUnit incorrectly walked the prototype chain while deleting property.
+     * @see <a href="http://sf.net/support/tracker.php?aid=2834335">Bug 2834335</a>
+     * @see <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=510504">corresponding Rhino bug</a>
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "hello", "foo", "hello" })
+    public void deleteShouldNotWalkPrototypeChain() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "Array.prototype.foo = function() { alert('hello')};\n"
+            + "[].foo();\n"
+            + "var x = [];\n"
+            + "for (var i in x) {\n"
+            + "  alert(i);\n"
+            + "  delete x[i];\n"
+            + "}\n"
+            + "[].foo();\n"
+            + "</script></body>";
+
+        loadPageWithAlerts2(html);
+    }
 }

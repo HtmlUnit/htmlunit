@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, (initial)??? IE8 support">
+            <action type="fix" dev="mguillem" issue="2834335">
+                JavaScript: delete operator should not walk property chain.
+            </action>
             <action type="update" dev="mguillem">
                 Upgrade HtmlUnit-core-js to 2.7-SNAPSHOT (corresponds to head of Rhino trunk from Sep 21, 2009 + minimal adaptations).
             </action>
