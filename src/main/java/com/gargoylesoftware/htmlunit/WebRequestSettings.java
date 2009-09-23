@@ -61,7 +61,6 @@ public class WebRequestSettings implements Serializable {
     public WebRequestSettings(final URL url) {
         setUrl(url);
         setAdditionalHeader("Accept", "*/*");
-        setAdditionalHeader("Accept-Language", "en-us");
     }
 
     /**
@@ -127,7 +126,7 @@ public class WebRequestSettings implements Serializable {
     private String removeDots(final String path) {
         String newPath = path;
 
-        // remove occurences at the beginning
+        // remove occurrences at the beginning
         newPath = newPath.replaceAll("^/(\\.\\.?/)*", "/");
 
         // single dots have no effect, so just remove them
@@ -291,6 +290,20 @@ public class WebRequestSettings implements Serializable {
      */
     public void setAdditionalHeaders(final Map<String, String> additionalHeaders) {
         additionalHeaders_ = additionalHeaders;
+    }
+
+    /**
+     * Returns whether the specified header name is already included in the additional HTTP headers.
+     * @param name the name of the additional HTTP header
+     * @return true if the specified header name is included in the additional HTTP headers
+     */
+    public boolean isAdditionalHeader(final String name) {
+        for (final String key : additionalHeaders_.keySet()) {
+            if (name.equalsIgnoreCase(key)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

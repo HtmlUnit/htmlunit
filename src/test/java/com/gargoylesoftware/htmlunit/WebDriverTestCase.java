@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +44,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.AfterClass;
 import org.mortbay.jetty.Server;
+import org.mortbay.jetty.webapp.WebAppClassLoader;
 import org.mortbay.jetty.webapp.WebAppContext;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -195,6 +197,41 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
+     * Starts the web server on the default {@link #PORT}.
+     * The given resourceBase is used to be the ROOT directory that serves the default context.
+     * <p><b>Don't forget to stop the returned HttpServer after the test</b>
+     *
+     * @param resourceBase the base of resources for the default context
+     * @param classpath additional classpath entries to add (may be null)
+     * @param servlets map of {String, Class} pairs: String is the path spec, while class is the class
+     * @throws Exception if the test fails
+     */
+    protected void startWebServer(final String resourceBase, final String[] classpath,
+            final Map<String, Class< ? extends Servlet>> servlets) throws Exception {
+        if (STATIC_SERVER_ == null) {
+            STATIC_SERVER_ = new Server(PORT);
+
+            final WebAppContext context = new WebAppContext();
+            context.setContextPath("/");
+            context.setResourceBase(resourceBase);
+
+            for (final String pathSpec : servlets.keySet()) {
+                final Class< ? extends Servlet> servlet = servlets.get(pathSpec);
+                context.addServlet(servlet, pathSpec);
+            }
+            final WebAppClassLoader loader = new WebAppClassLoader(context);
+            if (classpath != null) {
+                for (final String path : classpath) {
+                    loader.addClassPath(path);
+                }
+            }
+            context.setClassLoader(loader);
+            STATIC_SERVER_.setHandler(context);
+            STATIC_SERVER_.start();
+        }
+    }
+
+    /**
      * Servlet delivering content from a MockWebConnection.
      */
     public static class MockWebConnectionServlet extends HttpServlet {
@@ -267,13 +304,22 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 response.addHeader(responseHeader.getName(), responseHeader.getValue());
             }
 
-            final String newContent = StringUtils.replace(resp.getContentAsString(), "alert(",
-                "(function(t){var x = top.__huCatchedAlerts; x = x ? x : []; "
-                + "top.__huCatchedAlerts = x; x.push(String(t))})(");
+            final String newContent = getModifiedContent(resp.getContentAsString());
 
             response.getWriter().print(newContent);
             response.flushBuffer();
         }
+    }
+
+    /**
+     * Returns the modified JavaScript after changing how 'alerts' are called.
+     * @param html the html
+     * @return the modified html
+     */
+    protected static String getModifiedContent(final String html) {
+        return StringUtils.replace(html, "alert(",
+                "(function(t){var x = top.__huCatchedAlerts; x = x ? x : []; "
+                + "top.__huCatchedAlerts = x; x.push(String(t))})(");
     }
 
     /**

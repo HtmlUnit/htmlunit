@@ -1570,8 +1570,9 @@ public class WebClient implements Serializable {
      */
     private void addDefaultHeaders(final WebRequestSettings wrs) {
         // Add standard HtmlUnit headers.
-        wrs.setAdditionalHeader("Accept", "*/*");
-        wrs.setAdditionalHeader("Accept-Language", getBrowserVersion().getBrowserLanguage());
+        if (!wrs.isAdditionalHeader("Accept-Language")) {
+            wrs.setAdditionalHeader("Accept-Language", getBrowserVersion().getBrowserLanguage());
+        }
         // Add user-specified headers last so that they can override HtmlUnit defaults.
         wrs.getAdditionalHeaders().putAll(requestHeaders_);
     }

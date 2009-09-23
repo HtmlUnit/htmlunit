@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, (initial)??? IE8 support">
+            <action type="fix" dev="asashour" issue="2862553">
+                JavaScript: respect headers set by XMLHttpRequest.setRequestHeader().
+            </action>
             <action type="update" dev="mguillem" issue="2860541">
                 JavaScript: improve resolution performance of "someForm.someField" when many elements in the page
                 have "someField" as id or name attribute but only one in the provided form.
