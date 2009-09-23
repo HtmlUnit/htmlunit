@@ -1199,9 +1199,11 @@ public abstract class HtmlElement extends DomElement {
         }
 
         mouseDown(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
-        if (this instanceof SubmittableElement) {
-            ((HtmlPage) getPage()).setFocusedElement(this);
-        }
+
+        // give focus to current element (if possible) or only remove it from previous one
+        final HtmlElement elementToFocus = this instanceof SubmittableElement ? this : null;
+        ((HtmlPage) getPage()).setFocusedElement(elementToFocus);
+
         mouseUp(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
 
         final Event event = new MouseEvent(this, MouseEvent.TYPE_CLICK, shiftKey, ctrlKey, altKey,
