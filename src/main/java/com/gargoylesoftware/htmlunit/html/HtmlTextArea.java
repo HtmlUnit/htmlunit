@@ -406,7 +406,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
         valueAtFocus_ = getText();
         if (getPage() instanceof HtmlPage) {
             final Range selection = ((HtmlPage) getPage()).getSelection();
-            selection.setStart(this, 0);
+            selection.setStart(this, getText().length());
             selection.setEnd(this, getText().length());
         }
     }

@@ -271,9 +271,18 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "124a", "1a2a4ab1ab2ab4abc" }, FF = { "123a4a", "1a2a3ab4ab1ab2ab3abc4abc" })
-    public void testTyping() throws Exception {
+    public void testTyping_input() throws Exception {
         testTyping("<input type='text'", "");
         testTyping("<input type='password'", "");
+        testTyping("<textarea", "</textarea>");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE = { "124a", "1a2a4ab1ab2ab4abc" }, FF = { "123a4a", "1a2a3ab4ab1ab2ab3abc4abc" })
+    public void testTyping_textara() throws Exception {
         testTyping("<textarea", "</textarea>");
     }
 

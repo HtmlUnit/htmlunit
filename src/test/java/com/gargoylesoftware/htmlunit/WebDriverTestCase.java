@@ -34,7 +34,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
@@ -388,8 +387,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
     protected List<String> getCollectedAlerts(final WebDriver driver) throws Exception {
         final List<String> collectedAlerts = new ArrayList<String>();
         if (driver instanceof HtmlUnitDriver) {
-            final Object result = ((JavascriptExecutor) driver) .executeScript("return window.__huCatchedAlerts");
-            if (result != Undefined.instance) {
+            final Object result = ((JavascriptExecutor) driver) .executeScript("return top.__huCatchedAlerts");
+            if (result != null) {
                 final NativeArray resp = (NativeArray) result;
                 for (int i = 0; i < resp.getLength(); ++i) {
                     collectedAlerts.add(Context.toString(resp.get(i, resp)));
@@ -398,7 +397,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
         else if (driver instanceof InternetExplorerDriver) {
             final String jsonResult = (String) ((JavascriptExecutor) driver)
-                .executeScript(getJSON() + ";return JSON.stringify(window.__huCatchedAlerts)");
+                .executeScript(getJSON() + ";return JSON.stringify(top.__huCatchedAlerts)");
             if (jsonResult  != null) {
                 final JSONArray array = new JSONArray(jsonResult);
                 for (int i = 0; i < array.length(); i++) {
@@ -407,7 +406,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
         }
         else {
-            final Object object = ((JavascriptExecutor) driver) .executeScript("return window.__huCatchedAlerts");
+            final Object object = ((JavascriptExecutor) driver) .executeScript("return top.__huCatchedAlerts");
 
             if (object instanceof JSONObject) {
                 final JSONObject jsonObject = (JSONObject) object;

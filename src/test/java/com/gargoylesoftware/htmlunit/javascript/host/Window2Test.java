@@ -21,13 +21,15 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.DialogWindow;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
@@ -46,7 +48,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class Window2Test extends WebTestCase {
+public class Window2Test extends WebDriverTestCase {
 
     /**
      * "window.controllers" is used by some JavaScript libraries to determine if the
@@ -73,7 +75,7 @@ public class Window2Test extends WebTestCase {
             + "alert(window.controllers == 'hello');\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -94,7 +96,7 @@ public class Window2Test extends WebTestCase {
             + "alert(window.controllers == 'hello');\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -218,7 +220,7 @@ public class Window2Test extends WebTestCase {
             = "<html><body onload='alert(1)'>\n"
             + "<script>Function.prototype.x='a'; alert(window.onload.x);</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -236,7 +238,7 @@ public class Window2Test extends WebTestCase {
             + "  alert(atob(data));\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -258,11 +260,12 @@ public class Window2Test extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "java: object", "getClass: function" },
+    @NotYetImplemented(Browser.FF3)
+    @Alerts(FF2 = { "java: object", "getClass: function" },
+            FF3 = { "java: object", "getClass: undefined" },
             IE = { "java: undefined", "getClass: undefined" })
     public void rhino_lazilyNames2() throws Exception {
-        final String[] properties = {"java", "getClass"};
-        doTestRhinoLazilyNames(properties);
+        doTestRhinoLazilyNames("java", "getClass");
     }
 
     /**
@@ -276,11 +279,10 @@ public class Window2Test extends WebTestCase {
             IE = { "Packages: undefined", "XML: undefined", "XMLList: undefined",
             "Namespace: undefined", "QName: undefined" })
     public void rhino_lazilyNames3() throws Exception {
-        final String[] properties = {"Packages", "XML", "XMLList", "Namespace", "QName"};
-        doTestRhinoLazilyNames(properties);
+        doTestRhinoLazilyNames("Packages", "XML", "XMLList", "Namespace", "QName");
     }
 
-    private void doTestRhinoLazilyNames(final String[] properties) throws Exception {
+    private void doTestRhinoLazilyNames(final String... properties) throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
             + "  var props = ['" + StringUtils.join(properties, "', '") + "'];\n"
@@ -288,7 +290,7 @@ public class Window2Test extends WebTestCase {
             + "    alert(props[i] + ': ' + typeof(window[props[i]]));\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -327,7 +329,7 @@ public class Window2Test extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -347,9 +349,8 @@ public class Window2Test extends WebTestCase {
             + "    <input value='Click Me' type=button onclick='performAction()'>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
-        final HtmlButtonInput input = page.getFirstByXPath("//input");
-        input.click();
+        final WebDriver driver = loadPageWithAlerts2(html);
+        driver.findElement(By.xpath("//input")).click();
     }
 
     /**
@@ -365,7 +366,7 @@ public class Window2Test extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -387,7 +388,7 @@ public class Window2Test extends WebTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -408,7 +409,7 @@ public class Window2Test extends WebTestCase {
             + "<form name='myForm'></form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -424,7 +425,7 @@ public class Window2Test extends WebTestCase {
             + "alert(window.frames.length);\n"
             + "</script></head><body>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -450,7 +451,7 @@ public class Window2Test extends WebTestCase {
             + "</frameset>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -478,7 +479,7 @@ public class Window2Test extends WebTestCase {
             + "</frameset>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -633,7 +634,49 @@ public class Window2Test extends WebTestCase {
             + "alert(window.self == window.frames.self);\n"
             + "alert(window.self == window.frames.frames.self);\n"
             + "</script></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
+    /**
+     * For FF, window's opener can't be set unless to its current value.
+     * Note: this test causes problems to WebDriver + FF2
+     * Note 2: this test doesn't run currently with our version of HtmlUnitDriver due to a problem in determining
+     * current windows. This problem has probably been fixed by WebDriver's HtmlUnitDriver.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "[object Window]", "[object Window] (true)", "exception", "null (true)", "null (false)",
+                "null (false)", "null (false)", "null (false)" },
+            IE = { "[object]", "[object] (true)", "1234 (true)", "null (true)", "undefined (true)", "[object] (true)",
+                "[object] (true)", "[object] (true)" })
+    public void set_opener() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "var otherWindow = window.open('about:blank');\n"
+            + "function trySetOpener1(_win, value) {\n"
+            + "    try {\n"
+            + "        _win.opener = value;\n"
+            + "        alert(_win.opener + ' (' + (_win.opener === value) + ')');\n"
+            + "    }\n"
+            + "    catch(e) { alert('exception') }\n"
+            + "}\n"
+            + "function trySetOpener(_win) {\n"
+            + "    var originalValue = _win.opener;\n"
+            + "    alert(originalValue);\n"
+            + "    trySetOpener1(_win, _win.opener);\n"
+            + "    trySetOpener1(_win, 1234);\n"
+            + "    trySetOpener1(_win, null);\n"
+            + "    trySetOpener1(_win, undefined);\n"
+            + "    trySetOpener1(_win, _win);\n"
+            + "    trySetOpener1(_win, otherWindow);\n"
+            + "    trySetOpener1(_win, originalValue);\n"
+            + "}\n"
+            + "function doTest() {\n"
+            + "    trySetOpener(window.open('about:blank'));\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }

@@ -1825,32 +1825,35 @@ public class HtmlPage extends SgmlPage {
             throw new IllegalArgumentException("Can't move focus to an element from an other page");
         }
 
+        final HtmlElement oldFocusedElement = elementWithFocus_;
+        elementWithFocus_ = null;
+
         if (!windowActivated) {
-            if (elementWithFocus_ != null) {
-                elementWithFocus_.fireEvent(Event.TYPE_FOCUS_OUT);
+            if (oldFocusedElement != null) {
+                oldFocusedElement.fireEvent(Event.TYPE_FOCUS_OUT);
             }
 
             if (newElement != null) {
                 newElement.fireEvent(Event.TYPE_FOCUS_IN);
             }
 
-            if (elementWithFocus_ != null) {
+            if (oldFocusedElement != null) {
                 if (getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.BLUR_BEFORE_ONCHANGE)) {
-                    elementWithFocus_.fireEvent(Event.TYPE_BLUR);
-                    elementWithFocus_.removeFocus();
+                    oldFocusedElement.fireEvent(Event.TYPE_BLUR);
+                    oldFocusedElement.removeFocus();
                 }
                 else { // IE, FF3
-                    elementWithFocus_.removeFocus();
-                    elementWithFocus_.fireEvent(Event.TYPE_BLUR);
+                    oldFocusedElement.removeFocus();
+                    oldFocusedElement.fireEvent(Event.TYPE_BLUR);
                 }
             }
         }
 
         elementWithFocus_ = newElement;
 
-        if (newElement != null) {
+        if (elementWithFocus_ != null) {
             elementWithFocus_.focus();
-            newElement.fireEvent(Event.TYPE_FOCUS);
+            elementWithFocus_.fireEvent(Event.TYPE_FOCUS);
         }
 
         // If a page reload happened as a result of the focus change then obviously this

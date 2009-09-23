@@ -119,6 +119,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         new HashMap<Class< ? extends SimpleScriptable>, Scriptable>();
     private EventListenersContainer eventListenersContainer_;
     private Object controllers_;
+    private Object opener_;
 
     /**
      * Cache computed styles when possible, because their calculation is very expensive, involving lots
@@ -534,6 +535,14 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         // like a JS new Object()
         final Context ctx = Context.getCurrentContext();
         controllers_ = ctx.newObject(this);
+
+        if (webWindow_ instanceof TopLevelWindow) {
+            final WebWindow opener = ((TopLevelWindow) webWindow_).getOpener();
+            if (opener != null) {
+                opener_ = opener.getScriptObject();
+            }
+        }
+
     }
 
     /**
@@ -585,14 +594,24 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the value of window.opener, <code>null</code> for a top level window
      */
     public Object jsxGet_opener() {
-        if (webWindow_ instanceof TopLevelWindow) {
-            final WebWindow opener = ((TopLevelWindow) webWindow_).getOpener();
-            if (opener != null) {
-                return opener.getScriptObject();
+        return opener_;
+    }
+
+    /**
+     * Sets the opener property.
+     * @param newValue the new value
+     */
+    public void jsxSet_opener(Object newValue) {
+        if (getBrowserVersion().isFirefox() && newValue != opener_) {
+            if (opener_ == null || newValue == null || newValue == Context.getUndefinedValue()) {
+                newValue = null;
+            }
+            else {
+                throw Context.reportRuntimeError("Can't set opener!");
             }
         }
 
-        return null;
+        opener_ = newValue;
     }
 
     /**

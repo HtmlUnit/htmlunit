@@ -2850,7 +2850,7 @@
         <property name="ondblclick" readable="true" writable="true"/>
         <property name="onerror" readable="true" writable="true"/>
         <property name="onload" readable="true" writable="true"/>
-        <property name="opener" readable="true" writable="false"/>
+        <property name="opener" readable="true" writable="true"/>
         <property name="outerHeight" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
