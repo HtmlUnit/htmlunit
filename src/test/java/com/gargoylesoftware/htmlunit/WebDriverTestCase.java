@@ -33,7 +33,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
@@ -41,6 +40,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.junit.After;
 import org.junit.AfterClass;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.webapp.WebAppClassLoader;
@@ -95,7 +95,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static Server STATIC_SERVER_;
 
     private static String JSON_;
-    private boolean useWebDriver_;
+    private boolean useWebDriverWithRealBrowser_;
 
     static String getBrowsersProperty() {
         if (BROWSERS_PROPERTY_ == null) {
@@ -125,10 +125,15 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected WebDriver getWebDriver() {
         final BrowserVersion browserVersion = getBrowserVersion();
-        if (!WEB_DRIVERS_.containsKey(browserVersion)) {
-            WEB_DRIVERS_.put(browserVersion, buildWebDriver());
+        WebDriver driver = WEB_DRIVERS_.get(browserVersion);
+        if (driver == null) {
+            driver = buildWebDriver();
+            // cache driver instances for real browsers but not for HtmlUnit
+            if (!(driver instanceof HtmlUnitDriver)) {
+                WEB_DRIVERS_.put(browserVersion, driver);
+            }
         }
-        return WEB_DRIVERS_.get(browserVersion);
+        return driver;
     }
 
     /**
@@ -148,11 +153,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     void setUseWebDriver(final boolean useWebDriver) {
-        useWebDriver_ = useWebDriver;
+        useWebDriverWithRealBrowser_ = useWebDriver;
     }
 
     private WebDriver buildWebDriver() {
-        if (useWebDriver_) {
+        if (useWebDriverWithRealBrowser_) {
             if (getBrowserVersion().isIE()) {
                 return new InternetExplorerDriver();
             }
@@ -384,19 +389,18 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @return the collected alerts
      * @throws Exception in case of problem
      */
+    @SuppressWarnings("unchecked")
     protected List<String> getCollectedAlerts(final WebDriver driver) throws Exception {
         final List<String> collectedAlerts = new ArrayList<String>();
+        final JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         if (driver instanceof HtmlUnitDriver) {
-            final Object result = ((JavascriptExecutor) driver) .executeScript("return top.__huCatchedAlerts");
+            final Object result = jsExecutor.executeScript("return top.__huCatchedAlerts");
             if (result != null) {
-                final NativeArray resp = (NativeArray) result;
-                for (int i = 0; i < resp.getLength(); ++i) {
-                    collectedAlerts.add(Context.toString(resp.get(i, resp)));
-                }
+                return (List<String>) result;
             }
         }
         else if (driver instanceof InternetExplorerDriver) {
-            final String jsonResult = (String) ((JavascriptExecutor) driver)
+            final String jsonResult = (String) jsExecutor
                 .executeScript(getJSON() + ";return JSON.stringify(top.__huCatchedAlerts)");
             if (jsonResult  != null) {
                 final JSONArray array = new JSONArray(jsonResult);
@@ -406,7 +410,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
         }
         else {
-            final Object object = ((JavascriptExecutor) driver) .executeScript("return top.__huCatchedAlerts");
+            final Object object = jsExecutor.executeScript("return top.__huCatchedAlerts");
 
             if (object instanceof JSONObject) {
                 final JSONObject jsonObject = (JSONObject) object;
@@ -473,6 +477,29 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
         catch (final Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Release resources but DON'T close the browser if we are running with a real browser.
+     * Note that HtmlUnitDriver instances are not cached.
+     */
+    @After
+    public void releaseResources() {
+        super.releaseResources();
+
+        if (useWebDriverWithRealBrowser_) {
+            final WebDriver driver = getWebDriver();
+            final String currentWindow = driver.getWindowHandle();
+
+            // close all windows except the current one
+            for (final String handle : driver.getWindowHandles()) {
+                if (!currentWindow.equals(handle)) {
+                    driver.switchTo().window(handle).close();
+                }
+            }
+            // in the remaining window, load a blank page
+            driver.get("about:blank");
         }
     }
 }

@@ -542,7 +542,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                 opener_ = opener.getScriptObject();
             }
         }
-
     }
 
     /**

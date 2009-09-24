@@ -246,7 +246,7 @@ public class WebClient2Test extends WebServerTestCase {
     }
 
     /**
-     * Regression test for bug 2812769.
+     * Regression test for bug 2812769.useWebDriver_
      * @throws Exception if an error occurs
      */
     @Test
@@ -268,4 +268,20 @@ public class WebClient2Test extends WebServerTestCase {
         }
     }
 
+    /**
+     * As of HtmlUnit-2.7-SNAPSHOT from 24.09.09, loading about:blank in a page didn't
+     * reinitialized the window host object.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void newWindowScopeForAboutBlank() throws Exception {
+        final HtmlPage p = loadPage("<html><body></body></html>");
+        p.executeJavaScript("top.foo = 'hello';");
+        final ScriptResult result = p.executeJavaScript("top.foo");
+        assertEquals("hello", result.getJavaScriptResult());
+
+        p.getWebClient().getPage("about:blank");
+        final ScriptResult result2 = p.executeJavaScript("String(top.foo)");
+        assertEquals("undefined", result2.getJavaScriptResult());
+    }
 }

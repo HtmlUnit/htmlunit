@@ -640,8 +640,6 @@ public class Window2Test extends WebDriverTestCase {
     /**
      * For FF, window's opener can't be set unless to its current value.
      * Note: this test causes problems to WebDriver + FF2
-     * Note 2: this test doesn't run currently with our version of HtmlUnitDriver due to a problem in determining
-     * current windows. This problem has probably been fixed by WebDriver's HtmlUnitDriver.
      * @throws Exception if an error occurs
      */
     @Test
@@ -677,6 +675,6 @@ public class Window2Test extends WebDriverTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }
