@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -32,7 +29,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.HtmlImageInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
-import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Tests for {@link HTMLInputElement} and buttons.
@@ -357,7 +353,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "}\n"
             + "</script></head><body>\n"
             + "<p>hello world</p>\n"
-            + "<form name='form1' method='post' onsubmit='doTest()'>\n"
+            + "<form name='form1' onsubmit='doTest()'>\n"
             + " <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
             + " <input type='submit' name='button1' id='clickMe' value='pushme' />\n"
             + "</form>\n"
@@ -367,11 +363,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickMe")).click();
 
-        final List<NameValuePair> expectedParameters = Arrays.asList(new NameValuePair[] {
-            new NameValuePair("button1", "pushme"),
-            new NameValuePair("changed", "foo")
-        });
-        assertEquals(expectedParameters, getMockWebConnection().getLastParameters());
+        assertEquals(getDefaultUrl() + "?changed=foo&button1=pushme", driver.getCurrentUrl());
     }
 
     /**
