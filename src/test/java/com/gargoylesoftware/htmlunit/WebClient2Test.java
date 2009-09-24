@@ -246,7 +246,7 @@ public class WebClient2Test extends WebServerTestCase {
     }
 
     /**
-     * Regression test for bug 2812769.useWebDriver_
+     * Regression test for bug 2812769.
      * @throws Exception if an error occurs
      */
     @Test
