@@ -485,6 +485,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * Note that HtmlUnitDriver instances are not cached.
      */
     @After
+    @Override
     public void releaseResources() {
         super.releaseResources();
 
