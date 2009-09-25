@@ -171,6 +171,13 @@ public class HtmlPage extends SgmlPage {
      */
     @Override
     public void initialize() throws IOException, FailingHttpStatusCodeException {
+        // a frame contains first a faked "about:blank" before its real content specified by src gets loaded
+        final WebWindow enclosingWindow = getEnclosingWindow();
+        if (enclosingWindow instanceof FrameWindow
+            && getWebResponse().getRequestSettings().getUrl() == WebClient.URL_ABOUT_BLANK
+            && !((FrameWindow) enclosingWindow).getFrameElement().isContentLoaded()) {
+            return;
+        }
         loadFrames();
         setReadyState(READY_STATE_COMPLETE);
         getDocumentElement().setReadyState(READY_STATE_COMPLETE);

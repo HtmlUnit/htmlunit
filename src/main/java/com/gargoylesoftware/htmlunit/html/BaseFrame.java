@@ -50,6 +50,7 @@ public abstract class BaseFrame extends HtmlElement {
     private static final long serialVersionUID = -7658106924909626296L;
     private static final Log LOG = LogFactory.getLog(BaseFrame.class);
     private final WebWindow enclosedWindow_ = new FrameWindow(this);
+    private boolean contentLoaded_ = false;
 
     /**
      * Creates an instance of BaseFrame.
@@ -88,12 +89,11 @@ public abstract class BaseFrame extends HtmlElement {
     void loadInnerPage() throws FailingHttpStatusCodeException {
         String source = getSrcAttribute();
         if (source.length() == 0) {
-            // Nothing to load
             source = "about:blank";
         }
-        else {
-            loadInnerPageIfPossible(source);
-        }
+
+        loadInnerPageIfPossible(source);
+
         final Page enclosedPage = getEnclosedPage();
         if (enclosedPage instanceof HtmlPage) {
             ((HtmlPage) enclosedPage).setReadyState(READY_STATE_COMPLETE);
@@ -101,10 +101,21 @@ public abstract class BaseFrame extends HtmlElement {
     }
 
     /**
+     * Indicates if the content specified by the src attribute has been loaded or not.
+     * The initial state of a frame contains an "about:blank" that is not loaded like
+     * something specified in src attribute.
+     * @return <code>false</code> if the frame is still in its initial state.
+     */
+    boolean isContentLoaded() {
+        return contentLoaded_;
+    }
+
+    /**
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      *      {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to true
      */
     private void loadInnerPageIfPossible(final String src) throws FailingHttpStatusCodeException {
+        contentLoaded_ = true;
         if (src.length() != 0) {
             final URL url;
             try {
