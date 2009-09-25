@@ -14,7 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
+import java.util.Date;
 import java.util.List;
+
+import org.apache.commons.httpclient.util.DateParseException;
+import org.apache.commons.httpclient.util.DateUtil;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.gargoylesoftware.htmlunit.WebAssert;
 
 /**
  * String utilities class for utility functions not covered by third party libraries.
@@ -25,6 +33,8 @@ import java.util.List;
  * @author Martin Tamme
  */
 public final class StringUtils {
+
+    private static final Log LOG = LogFactory.getLog(StringUtils.class);
 
     /**
      * Disallow instantiation of this class.
@@ -63,20 +73,16 @@ public final class StringUtils {
     }
 
     /**
-     * Returns the index within a given string of the first occurrence of
+     * Returns the index within the specified string of the first occurrence of
      * the specified search character.
      *
-     * @param s          a string.
-     * @param searchChar a search character.
-     * @param beginIndex the index to start the search from.
-     * @param endIndex   the index to stop the search.
-     * @return the index of the first occurrence of the character in the string or <tt>-1</tt>.
+     * @param s the string to search
+     * @param searchChar the character to search for
+     * @param beginIndex the index at which to start the search
+     * @param endIndex the index at which to stop the search
+     * @return the index of the first occurrence of the character in the string or <tt>-1</tt>
      */
-    public static int indexOf(
-            final String s,
-            final char searchChar,
-            final int beginIndex,
-            final int endIndex) {
+    public static int indexOf(final String s, final char searchChar, final int beginIndex, final int endIndex) {
         for (int i = beginIndex; i < endIndex; i++) {
             if (s.charAt(i) == searchChar) {
                 return i;
@@ -86,7 +92,8 @@ public final class StringUtils {
     }
 
     /**
-     * Returns <tt>true</tt> if the specified string is a valid float, possibly triming the string before checking.
+     * Returns <tt>true</tt> if the specified string is a valid float, possibly trimming the string before checking.
+     *
      * @param s the string to check
      * @param trim whether or not to trim the string before checking
      * @return <tt>true</tt> if the specified string is a valid float, <tt>false</tt> otherwise
@@ -110,6 +117,7 @@ public final class StringUtils {
 
     /**
      * Returns <tt>true</tt> if the specified list of strings contains the specified string, ignoring case.
+     *
      * @param strings the strings to search
      * @param string the string to search for
      * @return <tt>true</tt> if the specified list of strings contains the specified string, ignoring case
@@ -122,6 +130,37 @@ public final class StringUtils {
             }
         }
         return false;
+    }
+
+    /**
+     * Parses the specified date string, assuming that it is formatted according to RFC 1123, RFC 1036 or as an ANSI
+     * C HTTP date header. This method returns <tt>null</tt> if the specified string is <tt>null</tt> or unparseable.
+     *
+     * @param s the string to parse as a date
+     * @return the date version of the specified string, or <tt>null</tt>
+     */
+    public static Date parseHttpDate(final String s) {
+        if (s == null) {
+            return null;
+        }
+        try {
+            return DateUtil.parseDate(s);
+        }
+        catch (final DateParseException e) {
+            LOG.warn("Unable to parse date: " + s);
+            return null;
+        }
+    }
+
+    /**
+     * Formats the specified date according to RFC 1123.
+     *
+     * @param date the date to format
+     * @return the specified date, formatted according to RFC 1123
+     */
+    public static String formatHttpDate(final Date date) {
+        WebAssert.notNull("date", date);
+        return DateUtil.formatDate(date);
     }
 
 }

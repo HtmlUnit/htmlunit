@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.util.StringUtils.containsCaseInsensitive;
+import static com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate;
 import static com.gargoylesoftware.htmlunit.util.UrlUtils.getUrlWithNewHost;
 import static com.gargoylesoftware.htmlunit.util.UrlUtils.getUrlWithNewPort;
 
@@ -27,6 +28,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,11 +40,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.UniqueTag;
 
-import org.apache.commons.httpclient.Cookie;
-import org.apache.commons.httpclient.cookie.CookiePolicy;
-import org.apache.commons.httpclient.cookie.CookieSpec;
-import org.apache.commons.httpclient.util.DateParseException;
-import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -83,6 +80,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Stylesheet;
 import com.gargoylesoftware.htmlunit.javascript.host.TreeWalker;
 import com.gargoylesoftware.htmlunit.javascript.host.UIEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.util.Cookie;
 
 /**
  * A JavaScript object for a Document.
@@ -553,25 +551,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         URL url = page.getWebResponse().getRequestSettings().getUrl();
         url = replaceForCookieIfNecessary(url);
 
-        final boolean secure = "https".equals(url.getProtocol());
-
-        final int port;
-        if (url.getPort() != -1) {
-            port = url.getPort();
-        }
-        else {
-            port = url.getDefaultPort();
-        }
-
-        final CookieSpec spec = CookiePolicy.getCookieSpec(CookieManager.HTMLUNIT_COOKIE_POLICY);
-        final Cookie[] allCookies = page.getWebClient().getCookieManager().getCookies().toArray(new Cookie[0]);
-        final Cookie[] matchingCookies = spec.match(url.getHost(), port, url.getPath(), secure, allCookies);
-        if (matchingCookies == null) {
-            return "";
-        }
-
         final StringBuilder buffer = new StringBuilder();
-        for (final Cookie cookie : matchingCookies) {
+        final Set<Cookie> cookies = page.getWebClient().getCookieManager().getCookies(url);
+        for (final Cookie cookie : cookies) {
             if (buffer.length() != 0) {
                 buffer.append("; ");
             }
@@ -704,22 +686,14 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
 
         // Try to parse the <expires> value as a date if specified.
-        Date expires = null;
         final String date = (String) atts.get("expires");
-        if (date != null) {
-            try {
-                expires = DateUtil.parseDate(date);
-            }
-            catch (final DateParseException e) {
-                // Ignore.
-            }
-        }
+        final Date expires = parseHttpDate(date);
 
         // Build the cookie.
         final String domain = (String) atts.get("domain");
         final String path = (String) atts.get("path");
         final boolean secure = (atts.get("secure") != null);
-        final Cookie cookie = new Cookie(domain, name, value, path, expires, secure);
+        final Cookie cookie = new Cookie(name, value, domain, path, expires, secure);
 
         return cookie;
     }

@@ -34,7 +34,7 @@ public final class IncorrectnessListenerTest extends WebTestCase {
     @Test
     public void testNotification() throws Exception {
         final String html = "<html><head>\n"
-                + "<meta http-equiv='set-cookie' content='webm=none; path=/; expires=abcdef;'>\n"
+                + "<meta http-equiv='set-cookie' content='webm=none; path=/; a=b;'>\n"
                 + "</head>\n"
                 + "<body></body>\n"
                 + "</html>";
@@ -54,7 +54,7 @@ public final class IncorrectnessListenerTest extends WebTestCase {
         webClient.getPage(URL_FIRST);
 
         final String[] expectedIncorrectness = {
-            "set-cookie http-equiv meta tag: can't parse expiration date >abcdef<."
+            "set-cookie http-equiv meta tag: unknown attribute 'a'."
         };
         assertEquals(expectedIncorrectness, collectedIncorrectness);
     }

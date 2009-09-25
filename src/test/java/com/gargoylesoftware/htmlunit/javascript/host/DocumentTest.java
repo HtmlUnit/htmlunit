@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument.EMPTY_COOKIE_NAME;
+import static com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
@@ -23,8 +24,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.httpclient.Cookie;
-import org.apache.commons.httpclient.util.DateUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -49,6 +48,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
+import com.gargoylesoftware.htmlunit.util.Cookie;
 
 /**
  * Tests for {@link Document}.
@@ -1795,8 +1795,8 @@ public class DocumentTest extends WebTestCase {
         webClient.setWebConnection(webConnection);
 
         final CookieManager mgr = webClient.getCookieManager();
-        mgr.addCookie(new Cookie(URL_FIRST.getHost(), "one", "two", "/", -1, false));
-        mgr.addCookie(new Cookie(URL_FIRST.getHost(), "three", "four", "/", -1, false));
+        mgr.addCookie(new Cookie("one", "two", URL_FIRST.getHost(), "/", null, false));
+        mgr.addCookie(new Cookie("three", "four", URL_FIRST.getHost(), "/", null, false));
 
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -2157,7 +2157,7 @@ public class DocumentTest extends WebTestCase {
 
         // Check that we are able to parse and set the expiration date correctly
         final String dateString = "Fri, 21 Jul 2006 20:47:11 UTC";
-        final Date date = DateUtil.parseDate(dateString);
+        final Date date = parseHttpDate(dateString);
         checkCookie(HTMLDocument.buildCookie("toto=foo; expires=" + dateString, URL_FIRST),
                 "toto", "foo", "", domain, false, date);
     }
@@ -2166,11 +2166,10 @@ public class DocumentTest extends WebTestCase {
             final String path, final String domain, final boolean secure, final Date date) {
         assertEquals(name, cookie.getName());
         assertEquals(value, cookie.getValue());
-        assertNull(cookie.getComment());
         assertEquals(path, cookie.getPath());
         assertEquals(domain, cookie.getDomain());
-        assertEquals(secure, cookie.getSecure());
-        assertEquals(date, cookie.getExpiryDate());
+        assertEquals(secure, cookie.isSecure());
+        assertEquals(date, cookie.getExpires());
     }
 
     /**

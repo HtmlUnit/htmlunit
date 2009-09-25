@@ -27,12 +27,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpState;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.util.Cookie;
 
 /**
  * Unit tests for {@link CookieManager}.
@@ -111,7 +111,7 @@ public class CookieManagerTest extends WebServerTestCase {
         // Update the manager with a new state.
         final Cookie cookie2 = new Cookie("x", "y", "z");
         final HttpState state2 = new HttpState();
-        state2.addCookie(cookie2);
+        state2.addCookie(cookie2.toHttpClient());
         mgr.updateFromState(state2);
         assertEquals(1, mgr.getCookies().size());
         assertEquals(cookie2, mgr.getCookies().iterator().next());
@@ -355,7 +355,7 @@ public class CookieManagerTest extends WebServerTestCase {
         webClient.setWebConnection(webConnection);
 
         final CookieManager mgr = webClient.getCookieManager();
-        mgr.addCookie(new Cookie(URL_FIRST.getHost(), "my_key", null, "/", -1, false));
+        mgr.addCookie(new Cookie("my_key", null, URL_FIRST.getHost(), "/", null, false));
 
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));

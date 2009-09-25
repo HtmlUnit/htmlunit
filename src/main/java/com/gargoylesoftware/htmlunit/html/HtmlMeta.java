@@ -14,14 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate;
+
+import java.net.URL;
+import java.util.Date;
 import java.util.Map;
 
-import org.apache.commons.httpclient.Cookie;
-import org.apache.commons.httpclient.util.DateParseException;
-import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.lang.StringUtils;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.util.Cookie;
 
 /**
  * Wrapper for the HTML element "meta".
@@ -63,28 +65,26 @@ public class HtmlMeta extends HtmlElement {
         final String[] parts = getContentAttribute().split("\\s*;\\s*");
         final String name = StringUtils.substringBefore(parts[0], "=");
         final String value = StringUtils.substringAfter(parts[0], "=");
-        final Cookie cookie = new Cookie(getPage().getWebResponse().getRequestSettings().getUrl().getHost(),
-                name, value);
+        final URL url = getPage().getWebResponse().getRequestSettings().getUrl();
+        final String host = url.getHost();
+        final boolean secure = "https".equals(url.getProtocol());
+        String path = null;
+        Date expires = null;
         for (int i = 1; i < parts.length; i++) {
             final String partName = StringUtils.substringBefore(parts[i], "=").trim().toLowerCase();
             final String partValue = StringUtils.substringAfter(parts[i], "=").trim();
             if ("path".equals(partName)) {
-                cookie.setPath(partValue);
+                path = partValue;
             }
             else if ("expires".equals(partName)) {
-                try {
-                    cookie.setExpiryDate(DateUtil.parseDate(partValue));
-                }
-                catch (final DateParseException e) {
-                    notifyIncorrectness("set-cookie http-equiv meta tag: can't parse expiration date >"
-                            + partValue + "<.");
-                }
+                expires = parseHttpDate(partValue);
             }
             else {
-                notifyIncorrectness("set-cookie http-equiv meta tag: unknown attribute >" + partName + "<");
+                notifyIncorrectness("set-cookie http-equiv meta tag: unknown attribute '" + partName + "'.");
             }
-            getPage().getWebClient().getCookieManager().addCookie(cookie);
         }
+        final Cookie cookie = new Cookie(name, value, host, path, expires, secure);
+        getPage().getWebClient().getCookieManager().addCookie(cookie);
     }
 
     /**

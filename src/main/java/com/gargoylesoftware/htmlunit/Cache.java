@@ -14,14 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate;
+
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.httpclient.util.DateParseException;
-import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.lang.time.DateUtils;
 import org.w3c.dom.css.CSSStyleSheet;
@@ -180,15 +180,7 @@ public class Cache implements Serializable {
      */
     protected Date parseDateHeader(final WebResponse response, final String headerName) {
         final String value = response.getResponseHeaderValue(headerName);
-        Date date = null;
-        if (value != null) {
-            try {
-                date = DateUtil.parseDate(value);
-            }
-            catch (final DateParseException e) {
-                // Empty.
-            }
-        }
+        final Date date = parseHttpDate(value);
         return date;
     }
 

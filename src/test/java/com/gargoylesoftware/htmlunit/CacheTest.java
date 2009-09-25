@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.util.StringUtils.formatHttpDate;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -24,7 +26,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.lang.time.DateUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -67,13 +68,13 @@ public class CacheTest extends WebTestCase {
         headers.put("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT");
         assertFalse(cache.isDynamicContent(response));
 
-        headers.put("Last-Modified", DateUtil.formatDate(DateUtils.addMinutes(new Date(), -5)));
+        headers.put("Last-Modified", formatHttpDate(DateUtils.addMinutes(new Date(), -5)));
         assertTrue(cache.isDynamicContent(response));
 
-        headers.put("Expires", DateUtil.formatDate(DateUtils.addMinutes(new Date(), 5)));
+        headers.put("Expires", formatHttpDate(DateUtils.addMinutes(new Date(), 5)));
         assertTrue(cache.isDynamicContent(response));
 
-        headers.put("Expires", DateUtil.formatDate(DateUtils.addHours(new Date(), 1)));
+        headers.put("Expires", formatHttpDate(DateUtils.addHours(new Date(), 1)));
         assertFalse(cache.isDynamicContent(response));
 
         headers.remove("Last-Modified");
