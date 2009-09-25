@@ -68,7 +68,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
     }
 
     /**
-     * about:blank has as special meaning as it is what is loaded in the frame.
+     * URL about:blank has as special meaning as it is what is loaded in the frame.
      * before the real content is loaded.
      * @throws Exception if an error occurs
      */
