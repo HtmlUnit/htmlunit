@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -1322,5 +1323,54 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         driver.switchTo().window("foo1");
         setExpectedAlerts("foo1");
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * Verify Content-Type header sent with form submission.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void enctype() throws Exception {
+        enctypeTest("", "post", "application/x-www-form-urlencoded");
+        enctypeTest("application/x-www-form-urlencoded", "post", "application/x-www-form-urlencoded");
+        enctypeTest("multipart/form-data", "post", "multipart/form-data");
+
+        // for GET, no Content-Type header should be sent
+        enctypeTest("", "get", null);
+        enctypeTest("application/x-www-form-urlencoded", "get", null);
+        enctypeTest("multipart/form-data", "get", null);
+    }
+
+    /**
+     * Regression test for bug
+     * <a href="http://sf.net/suppor/tracker.php?aid=2860721">2860721</a>: incorrect enctype form attribute
+     * should be ignored.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void enctype_incorrect() throws Exception {
+        enctypeTest("text/html", "post", "application/x-www-form-urlencoded");
+        enctypeTest("text/html", "get", null);
+    }
+
+    private void enctypeTest(final String enctype, final String method, final String expectedCntType) throws Exception {
+        final String html = "<html><head><script>"
+            + "function test() {"
+            + "  var f = document.forms[0];"
+            + "  f.submit();"
+            + "}"
+            + "</script></head><body onload='test()'>"
+            + "<form action='foo.html' enctype='" + enctype + "' method='" + method + "'>"
+            + "  <input name='myField' value='some value'>"
+            + "</form></body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        loadPageWithAlerts2(html);
+        String headerValue = getMockWebConnection().getLastWebRequestSettings().getAdditionalHeaders()
+            .get("Content-Type");
+        // Can't test equality for multipart/form-data as it will have the form:
+        // multipart/form-data; boundary=---------------------------42937861433140731107235900
+        headerValue = StringUtils.substringBefore(headerValue, ";");
+        assertEquals(expectedCntType, headerValue);
     }
 }

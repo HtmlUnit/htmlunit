@@ -194,7 +194,9 @@ public class HtmlForm extends HtmlElement {
 
         final WebRequestSettings settings = new WebRequestSettings(url, method);
         settings.setRequestParameters(parameters);
-        settings.setEncodingType(FormEncodingType.getInstance(getEnctypeAttribute()));
+        if (HttpMethod.POST == method) {
+            settings.setEncodingType(FormEncodingType.getInstance(getEnctypeAttribute()));
+        }
         settings.setCharset(getSubmitCharset());
         settings.setAdditionalHeader("Referer", htmlPage.getWebResponse().getRequestSettings().getUrl()
                 .toExternalForm());

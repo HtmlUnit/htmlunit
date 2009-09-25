@@ -6,6 +6,12 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, (initial)??? IE8 support">
+            <action type="fix" dev="mguillem">
+                Form submission: don't send a Content-Type header when method is GET.
+            </action>
+            <action type="fix" dev="mguillem" issue="2860721">
+                FormEncodingType.getInstance returns URL_ENCODED if the requested encoding type doesn't exist.
+            </action>
             <action type="fix" dev="mguillem" issue="2819477">
                 JavaScript: don't call (i)frame's onload handler for the dummy page that fill the frame until the real content is loaded.
             </action>

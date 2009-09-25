@@ -54,23 +54,16 @@ public final class FormEncodingType implements Serializable {
      * Returns the constant that matches the specified name.
      *
      * @param name the name to search by
-     * @return the constant that matches the specified name
+     * @return the constant corresponding to the specified name, {@link #URL_ENCODED} if none match.
      */
     public static FormEncodingType getInstance(final String name) {
         final String lowerCaseName = name.toLowerCase();
 
-        for (final FormEncodingType type : new FormEncodingType[] {URL_ENCODED, MULTIPART}) {
-            if (type.getName().equals(lowerCaseName)) {
-                return type;
-            }
+        if (MULTIPART.getName().equals(lowerCaseName)) {
+            return MULTIPART;
         }
 
-        // Special case: empty string defaults to URL encoded
-        if (name.equals("")) {
-            return URL_ENCODED;
-        }
-
-        throw new IllegalArgumentException("No encoding type found for [" + name + "]");
+        return URL_ENCODED;
     }
 
     /**
