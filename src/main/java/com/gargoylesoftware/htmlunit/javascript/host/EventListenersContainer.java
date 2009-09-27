@@ -196,7 +196,7 @@ public class EventListenersContainer implements Serializable {
         ScriptResult result = null;
 
         // the handler declared as property if any (not on body, as handler declared on body goes to the window)
-        if (!(jsNode_.getDomNodeOrDie() instanceof HtmlBody)) {
+        if (!(jsNode_.<DomNode>getDomNodeOrDie() instanceof HtmlBody)) {
             result = executeEventHandler(event, propHandlerArgs);
             if (event.isPropagationStopped()) {
                 return result;

@@ -22,8 +22,9 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import org.apache.commons.lang.StringUtils;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+
+import org.apache.commons.lang.StringUtils;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -1182,7 +1183,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             final String cssFloat = jsxGet_cssFloat();
             if ("right".equals(cssFloat) || "left".equals(cssFloat)) {
                 // simplistic approximation: text content * 10 pixels per character
-                width = getDomNodeOrDie().getTextContent().length() * 10;
+                width = this.<DomNode>getDomNodeOrDie().getTextContent().length() * 10;
             }
             else {
                 final HTMLElement parentJS = (HTMLElement) parent.getScriptObject();

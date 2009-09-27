@@ -17,11 +17,13 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.collections.ListUtils;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+
+import org.apache.commons.collections.ListUtils;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
@@ -232,7 +234,7 @@ public class Range extends SimpleScriptable {
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:range.createContextualFragment">Mozilla documentation</a>
      */
     public Object jsxFunction_createContextualFragment(final String valueAsString) {
-        final SgmlPage page = startContainer_.getDomNodeOrDie().getPage();
+        final SgmlPage page = startContainer_.<DomNode>getDomNodeOrDie().getPage();
         final DomDocumentFragment fragment = new DomDocumentFragment(page);
         HTMLElement.parseHtmlSnippet(fragment, true, valueAsString);
         return fragment.getScriptObject();

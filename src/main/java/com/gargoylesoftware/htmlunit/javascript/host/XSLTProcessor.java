@@ -262,7 +262,7 @@ public class XSLTProcessor extends SimpleScriptable {
      */
     public void jsxFunction_transform() {
         final Node input = input_;
-        final SgmlPage page = input.getDomNodeOrDie().getPage();
+        final SgmlPage page = input.<DomNode>getDomNodeOrDie().getPage();
 
         if (output_ == null || !(output_ instanceof Node)) {
             final DomDocumentFragment fragment = page.createDomDocumentFragment();
@@ -277,7 +277,7 @@ public class XSLTProcessor extends SimpleScriptable {
         final XMLSerializer serializer = new XMLSerializer();
         serializer.setParentScope(getParentScope());
         String output = "";
-        for (final DomNode child : ((Node) output_).getDomNodeOrDie().getChildren()) {
+        for (final DomNode child : ((Node) output_).<DomNode>getDomNodeOrDie().getChildren()) {
             if (child instanceof DomText) {
                 //IE: XmlPage ignores all empty text nodes (if 'xml:space' is 'default')
                 //Maybe this should be changed for 'xml:space' = preserve

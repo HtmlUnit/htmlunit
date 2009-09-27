@@ -210,7 +210,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @SuppressWarnings("unchecked")
     public <N extends DomNode> N getDomNodeOrDie() throws IllegalStateException {
         try {
-            return super.getDomNodeOrDie();
+            return (N) super.getDomNodeOrDie();
         }
         catch (final IllegalStateException e) {
             final DomNode node = getDomNodeOrNullFromRealDocument();

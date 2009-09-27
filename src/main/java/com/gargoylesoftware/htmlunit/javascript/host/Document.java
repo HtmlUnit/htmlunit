@@ -214,7 +214,7 @@ public class Document extends EventNode {
      * @return a newly created document fragment
      */
     public Object jsxFunction_createDocumentFragment() {
-        final DomDocumentFragment fragment = getDomNodeOrDie().getPage().createDomDocumentFragment();
+        final DomDocumentFragment fragment = this.<DomNode>getDomNodeOrDie().getPage().createDomDocumentFragment();
         final DocumentFragment node = new DocumentFragment();
         node.setParentScope(getParentScope());
         node.setPrototype(getPrototype(node.getClass()));
@@ -253,7 +253,7 @@ public class Document extends EventNode {
      * @return the imported node that belongs to this Document
      */
     public Object jsxFunction_importNode(final Node importedNode, final boolean deep) {
-        return importedNode.getDomNodeOrDie().cloneNode(deep).getScriptObject();
+        return importedNode.<DomNode>getDomNodeOrDie().cloneNode(deep).getScriptObject();
     }
 
     /**
@@ -302,7 +302,7 @@ public class Document extends EventNode {
     public Object jsxFunction_createTextNode(final String newData) {
         Object result = NOT_FOUND;
         try {
-            final DomNode domNode = new DomText(getDomNodeOrDie().getPage(), newData);
+            final DomNode domNode = new DomText(this.<DomNode>getDomNodeOrDie().getPage(), newData);
             final Object jsElement = getScriptableFor(domNode);
 
             if (jsElement == NOT_FOUND) {
@@ -326,7 +326,7 @@ public class Document extends EventNode {
      * @return the new Comment
      */
     public Object jsxFunction_createComment(final String comment) {
-        final DomNode domNode = new DomComment(getDomNodeOrDie().getPage(), comment);
+        final DomNode domNode = new DomComment(this.<DomNode>getDomNodeOrDie().getPage(), comment);
         return getScriptableFor(domNode);
     }
 
@@ -348,7 +348,7 @@ public class Document extends EventNode {
             xPathResult.setParentScope(getParentScope());
             xPathResult.setPrototype(getPrototype(xPathResult.getClass()));
         }
-        xPathResult.init(contextNode.getDomNodeOrDie().getByXPath(expression), type);
+        xPathResult.init(contextNode.<DomNode>getDomNodeOrDie().getByXPath(expression), type);
         return xPathResult;
     }
 

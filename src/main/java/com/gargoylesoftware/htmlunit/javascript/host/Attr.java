@@ -207,7 +207,7 @@ public class Attr extends Node {
     @Override
     public Node jsxGet_lastChild() {
         if (getBrowserVersion().isFirefox()) {
-            final DomText text = new DomText(getDomNodeOrDie().getPage(), jsxGet_nodeValue());
+            final DomText text = new DomText(this.<DomNode>getDomNodeOrDie().getPage(), jsxGet_nodeValue());
             return (Node) text.getScriptObject();
         }
         return null;

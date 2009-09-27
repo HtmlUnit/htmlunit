@@ -129,7 +129,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     }
 
     private boolean useRecursiveAttributeForIE() {
-        return getBrowserVersion().isIE() && getDomNodeOrDie() instanceof HtmlElement;
+        return getBrowserVersion().isIE() && this.<DomNode>getDomNodeOrDie() instanceof HtmlElement;
     }
 
     /**
@@ -157,7 +157,8 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     }
 
     private boolean isRecursiveAttribute(final String name) {
-        for (Scriptable object = getDomNodeOrDie().getScriptObject(); object != null; object = object.getPrototype()) {
+        for (Scriptable object = this.<DomNode>getDomNodeOrDie().getScriptObject(); object != null;
+            object = object.getPrototype()) {
             for (final Object id : object.getIds()) {
                 if (name.equals(Context.toString(id))) {
                     return true;
@@ -177,7 +178,8 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
 
     private String getRecusiveAttributeNameAt(final int index) {
         int i = 0;
-        for (Scriptable object = getDomNodeOrDie().getScriptObject(); object != null; object = object.getPrototype()) {
+        for (Scriptable object = this.<DomNode>getDomNodeOrDie().getScriptObject(); object != null;
+            object = object.getPrototype()) {
             for (final Object id : object.getIds()) {
                 if (i == index) {
                     return Context.toString(id);
