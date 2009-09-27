@@ -1989,6 +1989,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("unchecked")
     public HtmlElement getDomNodeOrNull() {
         return (HtmlElement) super.getDomNodeOrNull();
     }

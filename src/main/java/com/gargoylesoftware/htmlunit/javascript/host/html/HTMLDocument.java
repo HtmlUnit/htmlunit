@@ -207,14 +207,15 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * {@inheritDoc}
      */
     @Override
-    public DomNode getDomNodeOrDie() throws IllegalStateException {
+    @SuppressWarnings("unchecked")
+    public <N extends DomNode> N getDomNodeOrDie() throws IllegalStateException {
         try {
             return super.getDomNodeOrDie();
         }
         catch (final IllegalStateException e) {
             final DomNode node = getDomNodeOrNullFromRealDocument();
             if (node != null) {
-                return node;
+                return (N) node;
             }
             throw e;
         }
@@ -224,6 +225,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("unchecked")
     public DomNode getDomNodeOrNull() {
         DomNode node = super.getDomNodeOrNull();
         if (node == null) {
@@ -425,7 +427,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     protected void write(final String content) {
         LOG.debug("write: " + content);
 
-        final HtmlPage page = (HtmlPage) getDomNodeOrDie();
+        final HtmlPage page = getDomNodeOrDie();
         if (!page.isBeingParsed()) {
             writeInCurrentDocument_ = false;
         }
@@ -916,7 +918,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         Object result = null;
         try {
             final boolean caseSensitive = getBrowserVersion().isFirefox();
-            final HtmlElement htmlElement = ((HtmlPage) getDomNodeOrDie()).getHtmlElementById(id, caseSensitive);
+            final HtmlElement htmlElement = this.<HtmlPage>getDomNodeOrDie().getHtmlElementById(id, caseSensitive);
             final Object jsElement = getScriptableFor(htmlElement);
             if (jsElement == NOT_FOUND) {
                 LOG.debug("getElementById(" + id

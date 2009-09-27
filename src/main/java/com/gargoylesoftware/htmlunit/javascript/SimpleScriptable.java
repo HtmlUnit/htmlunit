@@ -117,12 +117,13 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
      * @return the DOM node
      * @exception IllegalStateException If the DOM node could not be found.
      */
-    public DomNode getDomNodeOrDie() throws IllegalStateException {
+    @SuppressWarnings("unchecked")
+    public <N extends DomNode> N getDomNodeOrDie() throws IllegalStateException {
         if (domNode_ == null) {
             final String clazz = getClass().getName();
             throw new IllegalStateException("DomNode has not been set for this SimpleScriptable: " + clazz);
         }
-        return domNode_;
+        return (N) domNode_;
     }
 
     /**
@@ -130,8 +131,9 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
      * or null if a node hasn't been set.
      * @return the DOM node or null
      */
-    public DomNode getDomNodeOrNull() {
-        return domNode_;
+    @SuppressWarnings("unchecked")
+    public <N extends DomNode> N getDomNodeOrNull() {
+        return (N) domNode_;
     }
 
     /**

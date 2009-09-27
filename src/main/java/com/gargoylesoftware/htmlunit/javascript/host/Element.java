@@ -235,6 +235,7 @@ public class Element extends EventNode {
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("unchecked")
     public DomElement getDomNodeOrDie() {
         return (DomElement) super.getDomNodeOrDie();
     }
