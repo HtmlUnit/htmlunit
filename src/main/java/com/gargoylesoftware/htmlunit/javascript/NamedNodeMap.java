@@ -170,7 +170,8 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
 
     private int getRecursiveAttributesLength() {
         int length = 0;
-        for (Scriptable object = getDomNodeOrDie().getScriptObject(); object != null; object = object.getPrototype()) {
+        for (Scriptable object = this.<DomNode>getDomNodeOrDie().getScriptObject(); object != null;
+            object = object.getPrototype()) {
             length += object.getIds().length;
         }
         return length;
