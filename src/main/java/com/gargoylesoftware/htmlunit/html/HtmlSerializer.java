@@ -198,14 +198,11 @@ class HtmlSerializer {
         doAppendBlockSeparator();
         boolean first = true;
         for (final DomNode item : htmlUnorderedList.getChildren()) {
-            if (!(item instanceof HtmlListItem)) {
-                continue;
-            }
             if (!first) {
                 doAppendBlockSeparator();
             }
             first = false;
-            appendChildren(item);
+            appendNode(item);
         }
         doAppendBlockSeparator();
     }

@@ -14,12 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -35,40 +31,23 @@ public class HtmlUnorderedListTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSimpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <ul id='myId'/>\n"
-            + "</body></html>";
-
-        final String[] expectedAlerts = {"[object HTMLUListElement]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertTrue(HtmlUnorderedList.class.isInstance(page.getHtmlElementById("myId")));
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     public void asText() throws Exception {
         final String html = "<html><head>\n"
             + "</head><body>\n"
             + "  <ul id='foo'>"
             + "  <li>first item</li>\n"
             + "  <li>second item</li>\n"
+            + "something without li node\n"
+            + "  <li>third item</li>\n"
             + "  </ul>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(html);
         final HtmlElement node = page.getHtmlElementById("foo");
-        final String expectedText = "first item" + LINE_SEPARATOR + "second item";
+        final String expectedText = "first item" + LINE_SEPARATOR
+            + "second item" + LINE_SEPARATOR
+            + "something without li node" + LINE_SEPARATOR
+            + "third item";
 
         assertEquals(expectedText, node.asText());
         assertEquals(expectedText, page.asText());

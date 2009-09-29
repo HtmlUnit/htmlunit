@@ -16,19 +16,48 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.html.HtmlUnorderedList;
 
 /**
  * Unit tests for {@link HTMLUListElement}.
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class HTMLUListElementTest extends WebTestCase {
+public class HTMLUListElementTest extends WebDriverTestCase {
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "[object HTMLUListElement]", IE = "[object]")
+    public void testSimpleScriptable() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myId'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <ul id='myId'/>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final WebElement element = driver.findElement(By.id("myId"));
+            assertTrue(toHtmlElement(element) instanceof HtmlUnorderedList);
+        }
+    }
 
     /**
      * @throws Exception if an error occurs
@@ -67,7 +96,7 @@ public class HTMLUListElementTest extends WebTestCase {
             + "alert(document.getElementById('u4').getAttribute('compact'));\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
 }
