@@ -21,7 +21,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  * Tests for {@link DomAttr}.
  *
- * @version $Revision: 4002 $
+ * @version $Revision$
  * @author Marc Guillemot
  */
 public class DomAttrTest extends WebTestCase {

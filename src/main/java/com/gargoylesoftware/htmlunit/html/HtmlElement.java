@@ -1479,6 +1479,7 @@ public abstract class HtmlElement extends DomElement {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getCanonicalXPath() {
         final DomNode parent = getParentNode();
         if (parent.getNodeType() == DOCUMENT_NODE) {
