@@ -1475,4 +1475,37 @@ public abstract class HtmlElement extends DomElement {
     protected boolean isStateUpdateFirst() {
         return false;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getCanonicalXPath() {
+        final DomNode parent = getParentNode();
+        if (parent.getNodeType() == DOCUMENT_NODE) {
+            return "/" + getNodeName();
+        }
+        return parent.getCanonicalXPath() + '/' + getXPathToken();
+    }
+
+    /**
+     * Returns the XPath token for this node only.
+     */
+    private String getXPathToken() {
+        final DomNode parent = getParentNode();
+        int total = 0;
+        int nodeIndex = 0;
+        for (final DomNode child : parent.getChildren()) {
+            if (child.getNodeType() == ELEMENT_NODE && child.getNodeName().equals(getNodeName())) {
+                total++;
+            }
+            if (child == this) {
+                nodeIndex = total;
+            }
+        }
+
+        if (nodeIndex == 1 && total == 1) {
+            return getNodeName();
+        }
+        return getNodeName() + '[' + nodeIndex + ']';
+    }
 }

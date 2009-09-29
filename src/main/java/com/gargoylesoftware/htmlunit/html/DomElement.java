@@ -345,10 +345,9 @@ public class DomElement extends DomNamespaceNode implements Element {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
-    public Attr getAttributeNode(final String name) {
-        throw new UnsupportedOperationException("DomElement.getAttributeNode is not yet implemented.");
+    public DomAttr getAttributeNode(final String name) {
+        return attributes_.get(name);
     }
 
     /**

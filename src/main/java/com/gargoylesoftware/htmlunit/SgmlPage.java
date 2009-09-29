@@ -226,4 +226,11 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
         getDocumentElement().normalize();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getCanonicalXPath() {
+        return "/";
+    }
 }

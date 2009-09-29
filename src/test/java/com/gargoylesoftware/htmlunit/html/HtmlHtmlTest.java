@@ -14,12 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -49,21 +45,23 @@ public class HtmlHtmlTest extends WebTestCase {
     }
 
     /**
+     * Regression test for
+     * <a href="http://sf.net/support/tracker.php?aid=2865948">Bug 2865948</a>:
+     * canonical XPath for html element was computed to "/html[2]" where a doctype
+     * was present.
      * @throws Exception if the test fails
      */
     @Test
-    public void testSimpleScriptable() throws Exception {
-        final String content = "<html id='myId'><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
+    public void canonicalXPath() throws Exception {
+        final String htmlContent = "<?xml version=\"1.0\"?>\n"
+            + "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" "
+            + "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
+            + "<html xmlns='http://www.w3.org/1999/xhtml' lang='en' xml:lang='en'>\n"
+            + "<head><title>test</title></head>\n"
+            + "<body></body></html>";
 
-        final String[] expectedAlerts = {"[object HTMLHtmlElement]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-        assertTrue(HtmlHtml.class.isInstance(page.getHtmlElementById("myId")));
-        assertEquals(expectedAlerts, collectedAlerts);
+        final HtmlPage page = loadPage(htmlContent);
+        final HtmlHtml root = (HtmlHtml) page.getDocumentElement();
+        assertEquals("/html", root.getCanonicalXPath());
     }
 }

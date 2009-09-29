@@ -16,10 +16,15 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.html.HtmlHtml;
 
 /**
  * Unit tests for {@link HTMLHtmlElement}.
@@ -30,6 +35,26 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  */
 @RunWith(BrowserRunner.class)
 public class HTMLHtmlElementTest extends WebDriverTestCase {
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "[object HTMLHtmlElement]", IE = "[object]")
+    public void testSimpleScriptable() throws Exception {
+        final String html = "<html id='myId'><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myId'));\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final WebElement element = driver.findElement(By.id("myId"));
+            assertTrue(toHtmlElement(element) instanceof HtmlHtml);
+        }
+    }
 
     /**
      * @throws Exception if the test fails

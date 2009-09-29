@@ -24,6 +24,7 @@ import java.util.NoSuchElementException;
 
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -1284,33 +1285,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @see #getByXPath(String)
      */
     public String getCanonicalXPath() {
-        final DomNode parent = getParentNode();
-        if (parent == null) {
-            return "";
-        }
-        return parent.getCanonicalXPath() + '/' + getXPathToken();
-    }
-
-    /**
-     * Returns the XPath token for this node only.
-     */
-    private String getXPathToken() {
-        final DomNode parent = getParentNode();
-        int total = 0;
-        int nodeIndex = 0;
-        for (final DomNode child : parent.getChildren()) {
-            if (child.getNodeName().equals(getNodeName())) {
-                total++;
-            }
-            if (child == this) {
-                nodeIndex = total;
-            }
-        }
-
-        if (nodeIndex == 1 && total == 1) {
-            return getNodeName();
-        }
-        return getNodeName() + '[' + nodeIndex + ']';
+        throw new NotImplementedException("Not implemented for nodes of type " + getNodeType());
     }
 
     /**

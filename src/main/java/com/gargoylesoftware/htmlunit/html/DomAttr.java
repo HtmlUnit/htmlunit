@@ -134,4 +134,11 @@ public class DomAttr extends DomNamespaceNode implements Attr {
         return getClass().getSimpleName() + "[name=" + getNodeName() + " value=" + getNodeValue() + "]";
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getCanonicalXPath() {
+        return getParentNode().getCanonicalXPath() + "/@" + getName();
+    }
 }
