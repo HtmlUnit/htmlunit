@@ -18,8 +18,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link Attr}.
@@ -30,7 +31,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @author Daniel Gredler
  */
 @RunWith(BrowserRunner.class)
-public class AttrTest extends WebTestCase {
+public class AttrTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -61,7 +62,7 @@ public class AttrTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -86,7 +87,7 @@ public class AttrTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -109,7 +110,34 @@ public class AttrTest extends WebTestCase {
             + "<div iD='d' name='d' width='40'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    @Alerts(IE = { "[object]", "undefined", "[object]", "" }, FF = {"[object Attr]", "", "[object Attr]", "" })
+    public void value() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var attr = document.createAttribute('hi');\n"
+            + "    alert(attr);\n"
+            + "    alert(attr.value)\n"
+            + "    attr = createXmlDocument().createAttribute('hi');\n"
+            + "    alert(attr);\n"
+            + "    alert(attr.value)\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
