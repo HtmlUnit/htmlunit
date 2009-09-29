@@ -81,6 +81,10 @@ public class IEWeirdSyntaxTest extends WebTestCase {
             +  "alert('2');\n"
             +  "}\n"
             +  "</script></html>";
+        doTestWithEvaluatorExceptionExceptForIE(html);
+    }
+
+    private void doTestWithEvaluatorExceptionExceptForIE(final String html) throws Exception {
         try {
             loadPageWithAlerts(html);
         }
@@ -92,5 +96,20 @@ public class IEWeirdSyntaxTest extends WebTestCase {
                 throw e;
             }
         }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented(Browser.IE)
+    public void windowDotHandlerFunction() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function window.onload() {\n"
+            + "  alert(1);\n"
+            + "}\n"
+            + "</script></head>"
+            + "<body></body></html>";
+        doTestWithEvaluatorExceptionExceptForIE(html);
     }
 }
