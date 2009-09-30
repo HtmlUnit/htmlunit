@@ -9,9 +9,6 @@
             <action type="fix" dev="mguillem" issue="2868052">
                 DomNode.asText() considers UL content that is not within a LI too.
             </action>
-            <action type="fix" dev="asashour">
-                JavaScript: fix attribute.value property.
-            </action>
             <action type="fix" dev="mguillem" issue="2865948">
                 Fix HtmlHtml.getCanonicalXPath() when document contains a doctype declaration.
             </action>
