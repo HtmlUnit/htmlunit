@@ -171,7 +171,7 @@ public class XMLDocument extends Document {
             scriptable = attribute;
         }
         else {
-            scriptable = super.makeScriptableFor(domNode);
+            return super.makeScriptableFor(domNode);
         }
 
         scriptable.setPrototype(getPrototype(scriptable.getClass()));
