@@ -55,11 +55,14 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "30px", "46", "55px", "71" })
+    @Alerts({ "30px", "46", "55px", "71", "71", "0", "0" })
     public void offsetWidthAndHeight() throws Exception {
         final String html =
-              "<html>\n"
-            + "<head>\n"
+              "<html><head>\n"
+            + "<style>\n"
+            + ".dontDisplay { display: none } \n"
+            + ".hideMe { visibility: hidden } \n"
+            + "</style>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var e = document.getElementById('myDiv');\n"
@@ -69,6 +72,11 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "    e.style.height = 55;\n"
             + "    alert(e.style.height);\n"
             + "    alert(e.offsetHeight);\n"
+            + "    e.className = 'hideMe';\n"
+            + "    alert(e.offsetHeight);\n"
+            + "    e.className = 'dontDisplay';\n"
+            + "    alert(e.offsetHeight);\n"
+            + "    alert(e.offsetWidth);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"

@@ -1174,6 +1174,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the element's width in pixels, possibly including its padding and border
      */
     public int getCalculatedWidth(final boolean includeBorder, final boolean includePadding) {
+        if ("none".equals(jsxGet_display())) {
+            return 0;
+        }
         int width;
         final String styleWidth = super.jsxGet_width();
         final DomNode parent = getElement().getDomNodeOrDie().getParentNode();
@@ -1220,6 +1223,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the element's height, possibly including its padding and border
      */
     public int getCalculatedHeight(final boolean includeBorder, final boolean includePadding) {
+        if ("none".equals(jsxGet_display())) {
+            return 0;
+        }
         int height = pixelValue(super.jsxGet_height());
         if (includeBorder) {
             final int borderTop = pixelValue(jsxGet_borderTopWidth());
