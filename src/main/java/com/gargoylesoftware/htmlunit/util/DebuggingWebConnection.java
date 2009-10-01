@@ -20,6 +20,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
+import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
+import net.sourceforge.htmlunit.corejs.javascript.Script;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -31,6 +36,8 @@ import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebConnection;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.WebResponseData;
+import com.gargoylesoftware.htmlunit.WebResponseImpl;
 
 /**
  * Wrapper around a "real" WebConnection that will use the wrapped web connection
@@ -61,6 +68,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
     private final WebConnection wrappedWebConnection_;
     private final File javaScriptFile_;
     private final File reportFolder_;
+    private boolean uncompressJavaScript_ = true;
 
     /**
      * Wraps a web connection to have a report generated of the received responses.
@@ -91,8 +99,46 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
      */
     @Override
     public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
-        final WebResponse response = wrappedWebConnection_.getResponse(settings);
+        WebResponse response = wrappedWebConnection_.getResponse(settings);
+        if (isUncompressJavaScript() && isJavaScript(response)) {
+            response = uncompressJavaScript(response);
+        }
         saveResponse(response, settings);
+        return response;
+    }
+
+    /**
+     * Tries to uncompress the JavaScript code in the provided response.
+     * @param response the response to uncompress
+     * @return a new response with uncompressed JavaScript code or the original response in case of failure
+     */
+    protected WebResponse uncompressJavaScript(final WebResponse response) {
+        final WebRequestSettings requestSettings = response.getRequestSettings();
+        final String scriptName = requestSettings.getUrl().toString();
+        final String scriptSource = response.getContentAsString();
+
+        // skip if it is already formatted? => TODO
+
+        final ContextFactory factory = new ContextFactory();
+        final ContextAction action = new ContextAction() {
+            public Object run(final Context cx) {
+                cx.setOptimizationLevel(-1);
+                final Script script = cx.compileString(scriptSource, scriptName, 0, null);
+                return cx.decompileScript(script, 4);
+            }
+        };
+
+        try {
+            final String decompileScript = (String) factory.call(action);
+            final WebResponseData wrd = new WebResponseData(decompileScript.getBytes(), response.getStatusCode(),
+                response.getStatusMessage(), response.getResponseHeaders());
+            return new WebResponseImpl(wrd, response.getRequestSettings().getUrl(),
+                response.getRequestSettings().getHttpMethod(), response.getLoadTime());
+        }
+        catch (final Exception e) {
+            LOG.warn("Failed to decompress JavaScript response. Delivering as it.", e);
+        }
+
         return response;
     }
 
@@ -116,7 +162,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         throws IOException {
         counter_++;
         final String extension;
-        if (response.getContentType().contains("javascript")) {
+        if (isJavaScript(response)) {
             extension = ".js";
         }
         else if ("text/html".equals(response.getContentType())) {
@@ -145,6 +191,35 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         buffer.append("responseHeaders: " + nameValueListToJsMap(response.getResponseHeaders()));
         buffer.append("};\n");
         appendToJSFile(buffer.toString());
+    }
+
+    /**
+     * Indicates if the response contains JavaScript content.
+     * @param response the response to inspect
+     * @return <code>false</code> if it is not recognized as JavaScript
+     */
+    protected boolean isJavaScript(final WebResponse response) {
+        final String contentType = response.getContentType();
+        return contentType.contains("javascript") || contentType.contains("ecmascript")
+            || (contentType.startsWith("text/") && contentType.contains("js"));
+    }
+
+    /**
+     * Indicates if it should try to format responses recognized as JavaScript.
+     * @return default is <code>false</code> to deliver the original content
+     */
+    public boolean isUncompressJavaScript() {
+        return uncompressJavaScript_;
+    }
+
+    /**
+     * Indicates that responses recognized as JavaScript should be formatted or not.
+     * Formatting is interesting for debugging when the original script is compressed on a single line.
+     * It allows to better follow with a debugger and to obtain more interesting error messages.
+     * @param decompress <code>true</code> if JavaScript responses should be uncompressed
+     */
+    public void setUncompressJavaScript(final boolean decompress) {
+        uncompressJavaScript_ = decompress;
     }
 
     private void appendToJSFile(final String str) throws IOException {
@@ -211,7 +286,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
     private void createOverview() throws IOException {
         FileUtils.writeStringToFile(javaScriptFile_, "var tab = [];\n", TextUtil.DEFAULT_CHARSET);
 
-        final URL indexResource = getClass().getResource("DebuggingWebConnection.index.html");
+        final URL indexResource = DebuggingWebConnection.class.getResource("DebuggingWebConnection.index.html");
         if (indexResource == null) {
             throw new RuntimeException("Missing dependency DebuggingWebConnection.index.html");
         }
