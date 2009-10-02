@@ -174,7 +174,6 @@ public class XMLDocument extends Document {
             else {
                 attribute = new Attr();
             }
-            attribute.init(domNode.getNodeName(), (DomElement) domNode.getParentNode());
             scriptable = attribute;
         }
         else {

@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -137,11 +138,8 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * @return a new unspecified attribute node
      */
     private Attr getUnspecifiedAttributeNode(final String attrName) {
-        final Attr attribute = new Attr();
-        attribute.setParentScope(this);
-        attribute.setPrototype(getPrototype(attribute.getClass()));
-        attribute.init(attrName, (DomElement) getDomNodeOrDie());
-        return attribute;
+        ((HtmlElement) getDomNodeOrDie()).setAttribute(attrName, "");
+        return (Attr) ((DomAttr) getDomNodeOrDie().getAttributes().getNamedItem(attrName)).getScriptObject();
     }
 
     /**

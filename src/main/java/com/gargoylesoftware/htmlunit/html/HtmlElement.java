@@ -770,7 +770,8 @@ public abstract class HtmlElement extends DomElement {
      */
     static DomAttr addAttributeToMap(final SgmlPage page, final Map<String, DomAttr> attributeMap,
             final String namespaceURI, final String qualifiedName, final String value) {
-        final DomAttr newAttr = new DomAttr(page, namespaceURI, qualifiedName, value);
+        final DomAttr newAttr = new DomAttr(page, namespaceURI, qualifiedName, "");
+        newAttr.setValue(value);
         attributeMap.put(qualifiedName, newAttr);
         return newAttr;
     }

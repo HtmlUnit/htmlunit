@@ -35,6 +35,8 @@ public class DomAttr extends DomNamespaceNode implements Attr {
 
     private String value_;
 
+    private boolean specified_;
+
     /**
      * Instantiate a new attribute.
      *
@@ -94,6 +96,7 @@ public class DomAttr extends DomNamespaceNode implements Attr {
      */
     public void setValue(final String value) {
         value_ = value;
+        specified_ = true;
     }
 
     /**
@@ -105,10 +108,9 @@ public class DomAttr extends DomNamespaceNode implements Attr {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     public boolean getSpecified() {
-        return true;
+        return specified_;
     }
 
     /**
