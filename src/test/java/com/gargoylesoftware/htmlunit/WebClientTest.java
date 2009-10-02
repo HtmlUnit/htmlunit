@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersion.FIREFOX_3;
+import static com.gargoylesoftware.htmlunit.BrowserVersion.INTERNET_EXPLORER_8;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
@@ -1610,6 +1612,32 @@ public class WebClientTest extends WebServerTestCase {
     }
 
     /**
+     * Verifies that URLs are automatically encoded before being sent to the server, like
+     * regular browsers do (verified by sniffing HTTP headers).
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testUrlEncoding() throws Exception {
+        final URL url = new URL("http://host/x+yé/aé b?c é d");
+        final HtmlPage page = loadPage(FIREFOX_3, "<html></html>", new ArrayList<String>(), url);
+        final WebRequestSettings wrs = page.getWebResponse().getRequestSettings();
+        assertEquals("http://host/x+y%C3%A9/a%C3%A9%20b?c%20%E9%20d", wrs.getUrl());
+    }
+
+    /**
+     * Verifies that URLs are automatically encoded before being sent to the server, like
+     * regular browsers do (verified by sniffing HTTP headers).
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testUrlEncoding2() throws Exception {
+        final URL url = new URL("http://host/x+yé/aé b?c é d");
+        final HtmlPage page = loadPage(INTERNET_EXPLORER_8, "<html></html>", new ArrayList<String>(), url);
+        final WebRequestSettings wrs = page.getWebResponse().getRequestSettings();
+        assertEquals("http://host/x+y%C3%A9/a%C3%A9%20b?c%20\u00E9%20d", wrs.getUrl());
+    }
+
+    /**
      * Test that '+' is not encoded in URLs.
      * @throws Exception if the test fails
      */
@@ -1617,7 +1645,8 @@ public class WebClientTest extends WebServerTestCase {
     public void testPlusNotEncodedInUrl() throws Exception {
         final URL url = new URL("http://host/search/my+category/");
         final HtmlPage page = loadPage("<html></html>", new ArrayList<String>(), url);
-        assertEquals("http://host/search/my+category/", page.getWebResponse().getRequestSettings().getUrl());
+        final WebRequestSettings wrs = page.getWebResponse().getRequestSettings();
+        assertEquals("http://host/search/my+category/", wrs.getUrl());
     }
 
     /**

@@ -57,6 +57,7 @@ import org.apache.commons.logging.impl.SimpleLog;
 
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * Default implementation of {@link WebConnection}, using the HttpClient library to perform HTTP requests.
@@ -86,9 +87,10 @@ public class HttpWebConnection implements WebConnection {
     /**
      * {@inheritDoc}
      */
-    public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
-        final URL url = settings.getUrl();
+    public WebResponse getResponse(final WebRequestSettings settings)
+        throws IOException {
 
+        final URL url = settings.getUrl();
         final HttpClient httpClient = getHttpClient();
         webClient_.getCookieManager().updateState(httpClient.getState());
 
@@ -173,20 +175,25 @@ public class HttpWebConnection implements WebConnection {
     private HttpMethodBase makeHttpMethod(final WebRequestSettings webRequestSettings)
         throws IOException {
 
-        String path = webRequestSettings.getUrl().getPath();
+        // Make sure that the URL is fully encoded. IE actually sends some Unicode chars in request
+        // URLs; because of this we allow some Unicode chars in URLs. However, at this point we're
+        // handing things over the HttpClient, and HttpClient will blow up if we leave these Unicode
+        // chars in the URL.
+        final URL url = UrlUtils.encodeUrl(webRequestSettings.getUrl(), false);
+
+        String path = url.getPath();
         if (path.length() == 0) {
             path = "/";
         }
         else if (path.startsWith("//")) {
-            path = "//" + path; // cf https://issues.apache.org/jira/browse/HTTPCLIENT-727
+            path = "//" + path; // see https://issues.apache.org/jira/browse/HTTPCLIENT-727
         }
+
         final HttpMethodBase httpMethod = buildHttpMethod(webRequestSettings.getHttpMethod(), path);
         if (!(httpMethod instanceof EntityEnclosingMethod)) {
             // this is the case for GET as well as TRACE, DELETE, OPTIONS and HEAD
-
             if (webRequestSettings.getRequestParameters().isEmpty()) {
-                String queryString = webRequestSettings.getUrl().getQuery();
-                queryString = webClient_.encodeQuery(queryString, true);
+                final String queryString = url.getQuery();
                 httpMethod.setQueryString(queryString);
             }
             else {
@@ -199,8 +206,7 @@ public class HttpWebConnection implements WebConnection {
             final EntityEnclosingMethod method = (EntityEnclosingMethod) httpMethod;
             method.getParams().setContentCharset(webRequestSettings.getCharset());
 
-            String queryString = webRequestSettings.getUrl().getQuery();
-            queryString = webClient_.encodeQuery(queryString, true);
+            final String queryString = url.getQuery();
             method.setQueryString(queryString);
             if (webRequestSettings.getRequestBody() != null) {
                 final String body = webRequestSettings.getRequestBody();

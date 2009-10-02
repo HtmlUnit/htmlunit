@@ -29,7 +29,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
-import java.util.BitSet;
 import java.util.Collections;
 import java.util.ConcurrentModificationException;
 import java.util.HashMap;
@@ -40,18 +39,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.httpclient.URI;
-import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.auth.CredentialsProvider;
 import org.apache.commons.httpclient.protocol.Protocol;
 import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
-import org.apache.commons.httpclient.util.URIUtil;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
@@ -1351,13 +1343,16 @@ public class WebClient implements Serializable {
     private WebResponse loadWebResponseFromWebConnection(final WebRequestSettings webRequestSettings,
         final int nbAllowedRedirections) throws IOException {
 
-        final URL url = webRequestSettings.getUrl();
+        URL url = webRequestSettings.getUrl();
         final HttpMethod method = webRequestSettings.getHttpMethod();
         final List<NameValuePair> parameters = webRequestSettings.getRequestParameters();
 
         WebAssert.notNull("url", url);
         WebAssert.notNull("method", method);
         WebAssert.notNull("parameters", parameters);
+
+        url = UrlUtils.encodeUrl(url, getBrowserVersion().isIE());
+        webRequestSettings.setUrl(url);
 
         LOG.debug("Load response for " + url.toExternalForm());
 
@@ -1389,12 +1384,6 @@ public class WebClient implements Serializable {
             }
         }
 
-        // Encode the URL.
-        // TODO: This should probably be handled inside of WebRequestSettings and
-        // could cause a bug if anything above here reads the URL again.
-        final URL fixedUrl = encodeUrl(url);
-        webRequestSettings.setUrl(fixedUrl);
-
         // Add the headers that are sent with every request.
         addDefaultHeaders(webRequestSettings);
 
@@ -1422,7 +1411,7 @@ public class WebClient implements Serializable {
             String locationString = null;
             try {
                 locationString = webResponse.getResponseHeaderValue("Location");
-                newUrl = expandUrl(fixedUrl, locationString);
+                newUrl = expandUrl(url, locationString);
             }
             catch (final MalformedURLException e) {
                 getIncorrectnessListener().notify("Got a redirect status code [" + statusCode + " "
@@ -1467,101 +1456,6 @@ public class WebClient implements Serializable {
         }
 
         return webResponse;
-    }
-
-    /**
-     * Encodes illegal parameter in path or query string (if any) as done by browsers.
-     * Example: changes "http://first/?a=b c" to "http://first/?a=b%20c"
-     * @param url the URL to encode
-     * @return the provided URL if no change needed, the fixed URL else
-     * @throws MalformedURLException if the new URL could note be instantiated
-     * @throws URIException if the default protocol charset is not supported
-     */
-    protected URL encodeUrl(final URL url) throws MalformedURLException, URIException {
-        final String path = url.getPath();
-        final String fixedPath = encode(path, URI.allowed_abs_path);
-        final String query = url.getQuery();
-        final String fixedQuery = encodeQuery(query, false);
-
-        if (!StringUtils.equals(path, fixedPath) || !StringUtils.equals(query, fixedQuery)) {
-            final StringBuilder newUrl = new StringBuilder();
-            newUrl.append(url.getProtocol());
-            newUrl.append("://");
-            newUrl.append(url.getHost());
-            if (url.getPort() != -1) {
-                newUrl.append(":");
-                newUrl.append(url.getPort());
-            }
-            newUrl.append(fixedPath);
-            if (url.getUserInfo() != null) {
-                newUrl.append(url.getUserInfo());
-            }
-            if (fixedQuery != null) {
-                newUrl.append("?");
-                newUrl.append(fixedQuery);
-            }
-            if (url.getRef() != null) {
-                newUrl.append("#");
-                newUrl.append(url.getRef());
-            }
-
-            return new URL(newUrl.toString());
-        }
-        return url;
-    }
-
-    /**
-     * Encodes unallowed characters in a string
-     * @param str the string to encode
-     * @param allowed the allowed characters
-     * @return the encoded string
-     * @throws URIException if encoding fails
-     */
-    private String encode(final String str, final BitSet allowed) throws URIException {
-        if (str == null) {
-            return null;
-        }
-        final BitSet bits = new BitSet(str.length());
-        bits.set('%');
-        bits.set('+');
-        bits.or(allowed);
-        return URIUtil.encode(str, bits);
-    }
-
-    /**
-     * Encodes the URL query.
-     * @param query the URL query
-     * @param forceEncoding force encoding or no
-     * @return the encoded value
-     */
-    protected String encodeQuery(final String query, final boolean forceEncoding) {
-        if (query == null) {
-            return null;
-        }
-        if (forceEncoding || getBrowserVersion().isFirefox()) {
-            final BitSet allowed = URI.allowed_query;
-            allowed.set('%');
-            final Context cx = ContextFactory.getGlobal().enterContext();
-            try {
-                final Scriptable scope = cx.initStandardObjects();
-                final StringBuilder builder = new StringBuilder();
-                for (int i = 0; i < query.length(); i++) {
-                    final char ch = query.charAt(i);
-                    if (allowed.get(ch)) {
-                        builder.append(ch);
-                    }
-                    else {
-                        final Object escaped = cx.evaluateString(scope, "escape('" + ch + "')", "<escaped>", 1, null);
-                        builder.append(Context.toString(escaped));
-                    }
-                }
-                return builder.toString();
-            }
-            finally {
-                Context.exit();
-            }
-        }
-        return query.replace(" ", "%20");
     }
 
     /**

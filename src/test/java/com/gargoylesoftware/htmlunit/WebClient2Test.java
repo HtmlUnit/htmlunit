@@ -38,7 +38,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public class WebClient2Test extends WebServerTestCase {
 
     /**
-     * @throws Exception If an error occurs
+     * @throws Exception if an error occurs
      */
     @Test
     @Alerts(IE = "http://first/?param=\u00A3", FF = "http://first/?param=%A3")

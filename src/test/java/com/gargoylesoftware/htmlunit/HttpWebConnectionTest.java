@@ -172,7 +172,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testMakeWebResponse() throws Exception {
+    public void makeWebResponse() throws Exception {
         final URL url = new URL("http://htmlunit.sourceforge.net/");
         final String content = "<html><head></head><body></body></html>";
         final int httpStatus = HttpStatus.SC_OK;
@@ -212,7 +212,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
      * @throws Exception on failure
      */
     @Test
-    public void testJettyProofOfConcept() throws Exception {
+    public void jettyProofOfConcept() throws Exception {
         startWebServer("./");
 
         final WebClient client = new WebClient();
@@ -229,7 +229,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testDesignedForExtension() throws Exception {
+    public void designedForExtension() throws Exception {
         startWebServer("./");
 
         final WebClient webClient = new WebClient();
@@ -252,7 +252,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testBuildFilePart() throws Exception {
+    public void buildFilePart() throws Exception {
         final String encoding = "ISO8859-1";
         final KeyDataPair pair = new KeyDataPair("myFile", new File("this/doesnt_exist.txt"), "text/plain", encoding);
         final FilePart part = new HttpWebConnection(new WebClient()).buildFilePart(pair, encoding);
@@ -274,7 +274,6 @@ public class HttpWebConnectionTest extends WebServerTestCase {
     @Test
     public void unicode() throws Exception {
         startWebServer("./");
-
         final WebClient client = new WebClient();
         client.getPage("http://localhost:" + PORT + "/src/test/resources/event_coordinates.html?param=\u00F6");
     }

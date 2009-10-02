@@ -15,11 +15,16 @@
 package com.gargoylesoftware.htmlunit.util;
 
 import static com.gargoylesoftware.htmlunit.WebClient.URL_ABOUT_BLANK;
+import static org.apache.commons.httpclient.util.URIUtil.encode;
 import static org.apache.commons.lang.StringUtils.equalsIgnoreCase;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLStreamHandler;
+import java.util.BitSet;
+
+import org.apache.commons.httpclient.URI;
+import org.apache.commons.httpclient.URIException;
 
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebAssert;
@@ -38,6 +43,23 @@ public final class UrlUtils {
     private static final URLStreamHandler JS_HANDLER = new com.gargoylesoftware.htmlunit.protocol.javascript.Handler();
     private static final URLStreamHandler ABOUT_HANDLER = new com.gargoylesoftware.htmlunit.protocol.about.Handler();
     private static final URLStreamHandler DATA_HANDLER = new com.gargoylesoftware.htmlunit.protocol.data.Handler();
+
+    private static final BitSet PATH_ALLOWED_CHARS = new BitSet(256);
+    static {
+        PATH_ALLOWED_CHARS.or(URI.allowed_abs_path);
+        PATH_ALLOWED_CHARS.set('+');
+    }
+
+    private static final BitSet QUERY_ALLOWED_CHARS = new BitSet(256);
+    static {
+        QUERY_ALLOWED_CHARS.or(URI.allowed_query);
+        QUERY_ALLOWED_CHARS.set('%');
+    }
+
+    private static final BitSet ANCHOR_ALLOWED_CHARS = new BitSet(256);
+    static {
+        ANCHOR_ALLOWED_CHARS.or(URI.allowed_fragment);
+    }
 
     /**
      * Disallow instantiation of this class.
@@ -95,6 +117,52 @@ public final class UrlUtils {
         }
         else {
             return new URL(url);
+        }
+    }
+
+    /**
+     * <p>Encodes illegal characters in the specified URL's path, query string and anchor according to the URL
+     * encoding rules observed in real browsers.</p>
+     *
+     * <p>For example, this method changes <tt>"http://first/?a=b c"</tt> to <tt>"http://first/?a=b%20c"</tt>.</p>
+     *
+     * @param url the URL to encode
+     * @param minimalQueryEncoding whether or not to perform minimal query encoding, like IE does
+     * @return the encoded URL
+     */
+    public static URL encodeUrl(final URL url, final boolean minimalQueryEncoding) {
+        final String p = url.getProtocol();
+        if ("javascript".equalsIgnoreCase(p) || "about".equalsIgnoreCase(p) || "data".equalsIgnoreCase(p)) {
+            // Special exception.
+            return url;
+        }
+        try {
+            String path = url.getPath();
+            if (path != null) {
+                path = encode(url.getPath(), PATH_ALLOWED_CHARS);
+            }
+            String query = url.getQuery();
+            if (query != null) {
+                if (minimalQueryEncoding) {
+                    query = query.replace(" ", "%20");
+                }
+                else {
+                    query = encode(url.getQuery(), QUERY_ALLOWED_CHARS, "windows-1252");
+                }
+            }
+            String anchor = url.getRef();
+            if (anchor != null) {
+                anchor = encode(url.getRef(), ANCHOR_ALLOWED_CHARS);
+            }
+            return createNewUrl(url.getProtocol(), url.getHost(), url.getPort(), path, anchor, query);
+        }
+        catch (final URIException e) {
+            // Impossible... I think.
+            throw new RuntimeException(e);
+        }
+        catch (final MalformedURLException e) {
+            // Impossible... I think.
+            throw new RuntimeException(e);
         }
     }
 
