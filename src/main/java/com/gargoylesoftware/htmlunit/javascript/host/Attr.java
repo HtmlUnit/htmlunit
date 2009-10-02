@@ -56,10 +56,9 @@ public class Attr extends Node {
 
     /**
      * Initializes this attribute.
-     * @param name the name of the attribute
      * @param parent the parent HTML element
      */
-    public void init(final String name, final DomElement parent) {
+    private void init(final DomElement parent) {
         parent_ = parent;
         if (parent_ == null) {
             value_ = "";
@@ -76,9 +75,8 @@ public class Attr extends Node {
     protected void setDomNode(final DomNode domNode, final boolean assignScriptObject) {
         super.setDomNode(domNode, assignScriptObject);
 
-        final String name = domNode.getNodeName();
         final DomElement parent = (DomElement) domNode.getParentNode();
-        this.init(name, parent);
+        this.init(parent);
     }
 
     /**
