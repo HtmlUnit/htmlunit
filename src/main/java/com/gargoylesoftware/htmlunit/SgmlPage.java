@@ -20,6 +20,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
 
+import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomDocumentType;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -233,4 +234,12 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
     public String getCanonicalXPath() {
         return "/";
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public DomAttr createAttribute(final String name) {
+        return new DomAttr(getPage(), null, name, "");
+    }
+
 }

@@ -464,14 +464,6 @@ public class HtmlPage extends SgmlPage {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
-     */
-    public Attr createAttribute(final String qualifiedName) {
-        throw new UnsupportedOperationException("HtmlPage.createAttribute is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
      */
     public Comment createComment(final String data) {
         return new DomComment(this, data);

@@ -24,7 +24,6 @@ import org.apache.commons.logging.LogFactory;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
-import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -229,8 +228,7 @@ public class Document extends EventNode {
      * @return an attribute with the specified name
      */
     public Attr jsxFunction_createAttribute(final String attributeName) {
-        final DomAttr attr = new DomAttr(getPage(), null, attributeName, "");
-        return (Attr) attr.getScriptObject();
+        return (Attr) getPage().createAttribute(attributeName).getScriptObject();
     }
 
     /**

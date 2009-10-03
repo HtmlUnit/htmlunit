@@ -191,14 +191,6 @@ public class XmlPage extends SgmlPage {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public Attr createAttribute(final String name) {
-        throw new UnsupportedOperationException("XmlPage.createAttribute is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
     public Attr createAttributeNS(final String namespaceURI, final String qualifiedName) {
         throw new UnsupportedOperationException("XmlPage.createAttributeNS is not yet implemented.");
     }
