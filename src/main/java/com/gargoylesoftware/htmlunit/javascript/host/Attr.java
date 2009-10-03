@@ -16,9 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
-import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
  * A JavaScript object for an Attribute.
@@ -36,57 +34,20 @@ public class Attr extends Node {
     private static final long serialVersionUID = 3256441425892750900L;
 
     /**
-     * The value of this attribute, used only when this attribute is detached from
-     * a parent HTML element (<tt>parent_</tt> is <tt>null</tt>).
-     */
-    private String value_;
-
-    /**
-     * The element to which this attribute belongs. May be <tt>null</tt> if
-     * document.createAttribute() has been called but element.setAttributeNode()
-     * has not been called yet, or if document.setAttributeNode() has been called
-     * and this is the replaced attribute returned by said method.
-     */
-    private DomElement parent_;
-
-    /**
      * Creates an instance. JavaScript objects must have a default constructor.
      */
     public Attr() { }
 
     /**
-     * Initializes this attribute.
-     * @param parent the parent HTML element
-     */
-    private void init(final DomElement parent) {
-        parent_ = parent;
-        if (parent_ == null) {
-            value_ = "";
-        }
-    }
-
-    /**
-     * Ensures that all attributes are initialized correctly via
-     * {@link #init(String, com.gargoylesoftware.htmlunit.html.HtmlElement)}.
-     *
-     * {@inheritDoc}
-     */
-    @Override
-    protected void setDomNode(final DomNode domNode, final boolean assignScriptObject) {
-        super.setDomNode(domNode, assignScriptObject);
-
-        final DomElement parent = (DomElement) domNode.getParentNode();
-        this.init(parent);
-    }
-
-    /**
      * Detaches this attribute from the parent HTML element after caching the attribute value.
      */
     public void detachFromParent() {
-        if (parent_ != null) {
-            value_ = parent_.getAttribute(jsxGet_name());
+        final DomAttr domNode = getDomNodeOrDie();
+        final DomElement parent = (DomElement) domNode.getParentNode();
+        if (parent != null) {
+            domNode.setValue(parent.getAttribute(jsxGet_name()));
         }
-        parent_ = null;
+        domNode.remove();
     }
 
     /**
@@ -126,9 +87,10 @@ public class Attr extends Node {
      * Returns the owner element.
      * @return the owner element
      */
-    public SimpleScriptable jsxGet_ownerElement() {
-        if (parent_ != null) {
-            return getScriptableFor(parent_);
+    public Object jsxGet_ownerElement() {
+        final DomElement parent = getDomNodeOrDie().getOwnerElement();
+        if (parent != null) {
+            return parent.getScriptObject();
         }
         return null;
     }
@@ -155,10 +117,7 @@ public class Attr extends Node {
      * @return the value of this attribute
      */
     public String jsxGet_value() {
-        if (parent_ != null) {
-            return parent_.getAttribute(jsxGet_name());
-        }
-        return value_;
+        return getDomNodeOrDie().getValue();
     }
 
     /**
@@ -166,12 +125,7 @@ public class Attr extends Node {
      * @param value the new value of this attribute
      */
     public void jsxSet_value(final String value) {
-        if (parent_ != null) {
-            parent_.setAttribute(jsxGet_name(), value);
-        }
-        else {
-            value_ = value;
-        }
+        getDomNodeOrDie().setValue(value);
     }
 
     /**

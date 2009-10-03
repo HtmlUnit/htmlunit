@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import org.w3c.dom.Attr;
-import org.w3c.dom.Element;
 import org.w3c.dom.TypeInfo;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -48,6 +47,9 @@ public class DomAttr extends DomNamespaceNode implements Attr {
     public DomAttr(final SgmlPage page, final String namespaceURI, final String qualifiedName, final String value) {
         super(namespaceURI, qualifiedName, page);
         value_ = value;
+        if (value == null) {
+            value_ = "";
+        }
     }
 
     /**
@@ -76,7 +78,6 @@ public class DomAttr extends DomNamespaceNode implements Attr {
 
     /**
      * {@inheritDoc}
-     * @return the qualified name of this attribute
      */
     public String getName() {
         return getQualifiedName();
@@ -84,15 +85,13 @@ public class DomAttr extends DomNamespaceNode implements Attr {
 
     /**
      * {@inheritDoc}
-     * @return the value of this attribute
      */
     public String getValue() {
         return value_;
     }
 
     /**
-     * Sets this attribute's value.
-     * @param value the attribute's new value
+     * {@inheritDoc}
      */
     public void setValue(final String value) {
         value_ = value;
@@ -102,8 +101,8 @@ public class DomAttr extends DomNamespaceNode implements Attr {
     /**
      * {@inheritDoc}
      */
-    public Element getOwnerElement() {
-        return (Element) getParentNode();
+    public DomElement getOwnerElement() {
+        return (DomElement) getParentNode();
     }
 
     /**
