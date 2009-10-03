@@ -15,16 +15,15 @@
 package com.gargoylesoftware.htmlunit.util;
 
 import static com.gargoylesoftware.htmlunit.WebClient.URL_ABOUT_BLANK;
-import static org.apache.commons.httpclient.util.URIUtil.encode;
 import static org.apache.commons.lang.StringUtils.equalsIgnoreCase;
 
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLStreamHandler;
 import java.util.BitSet;
 
-import org.apache.commons.httpclient.URI;
-import org.apache.commons.httpclient.URIException;
+import org.apache.commons.codec.net.URLCodec;
 
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebAssert;
@@ -45,20 +44,115 @@ public final class UrlUtils {
     private static final URLStreamHandler DATA_HANDLER = new com.gargoylesoftware.htmlunit.protocol.data.Handler();
 
     private static final BitSet PATH_ALLOWED_CHARS = new BitSet(256);
-    static {
-        PATH_ALLOWED_CHARS.or(URI.allowed_abs_path);
-        PATH_ALLOWED_CHARS.set('+');
-    }
-
     private static final BitSet QUERY_ALLOWED_CHARS = new BitSet(256);
-    static {
-        QUERY_ALLOWED_CHARS.or(URI.allowed_query);
-        QUERY_ALLOWED_CHARS.set('%');
-    }
-
     private static final BitSet ANCHOR_ALLOWED_CHARS = new BitSet(256);
+
+    /**
+     * URI allowed char initialization; based on HttpClient 3.1's URI bit sets.
+     */
     static {
-        ANCHOR_ALLOWED_CHARS.or(URI.allowed_fragment);
+        final BitSet reserved = new BitSet(256);
+        reserved.set(';');
+        reserved.set('/');
+        reserved.set('?');
+        reserved.set(':');
+        reserved.set('@');
+        reserved.set('&');
+        reserved.set('=');
+        reserved.set('+');
+        reserved.set('$');
+        reserved.set(',');
+
+        final BitSet mark = new BitSet(256);
+        mark.set('-');
+        mark.set('_');
+        mark.set('.');
+        mark.set('!');
+        mark.set('~');
+        mark.set('*');
+        mark.set('\'');
+        mark.set('(');
+        mark.set(')');
+
+        final BitSet alpha = new BitSet(256);
+        for (int i = 'a'; i <= 'z'; i++) {
+            alpha.set(i);
+        }
+        for (int i = 'A'; i <= 'Z'; i++) {
+            alpha.set(i);
+        }
+
+        final BitSet digit = new BitSet(256);
+        for (int i = '0'; i <= '9'; i++) {
+            digit.set(i);
+        }
+
+        final BitSet alphanumeric = new BitSet(256);
+        alphanumeric.or(alpha);
+        alphanumeric.or(digit);
+
+        final BitSet unreserved = new BitSet(256);
+        unreserved.or(alphanumeric);
+        unreserved.or(mark);
+
+        final BitSet hex = new BitSet(256);
+        hex.or(digit);
+        for (int i = 'a'; i <= 'f'; i++) {
+            hex.set(i);
+        }
+        for (int i = 'A'; i <= 'F'; i++) {
+            hex.set(i);
+        }
+
+        final BitSet escaped = new BitSet(256);
+        escaped.set('%');
+        escaped.or(hex);
+
+        final BitSet uric = new BitSet(256);
+        uric.or(reserved);
+        uric.or(unreserved);
+        uric.or(escaped);
+
+        final BitSet pchar = new BitSet(256);
+        pchar.or(unreserved);
+        pchar.or(escaped);
+        pchar.set(':');
+        pchar.set('@');
+        pchar.set('&');
+        pchar.set('=');
+        pchar.set('+');
+        pchar.set('$');
+        pchar.set(',');
+
+        final BitSet param = pchar;
+
+        final BitSet segment = new BitSet(256);
+        segment.or(pchar);
+        segment.set(';');
+        segment.or(param);
+
+        final BitSet pathSegments = new BitSet(256);
+        pathSegments.set('/');
+        pathSegments.or(segment);
+
+        final BitSet absPath = new BitSet(256);
+        absPath.set('/');
+        absPath.or(pathSegments);
+
+        final BitSet allowedAbsPath = new BitSet(256);
+        allowedAbsPath.or(absPath);
+        allowedAbsPath.clear('%');
+
+        final BitSet allowedFragment = new BitSet(256);
+        allowedFragment.or(uric);
+        allowedFragment.clear('%');
+
+        final BitSet allowedQuery = new BitSet(256);
+        allowedQuery.or(uric);
+
+        PATH_ALLOWED_CHARS.or(allowedAbsPath);
+        QUERY_ALLOWED_CHARS.or(allowedQuery);
+        ANCHOR_ALLOWED_CHARS.or(allowedFragment);
     }
 
     /**
@@ -139,7 +233,7 @@ public final class UrlUtils {
         try {
             String path = url.getPath();
             if (path != null) {
-                path = encode(url.getPath(), PATH_ALLOWED_CHARS);
+                path = encode(url.getPath(), PATH_ALLOWED_CHARS, "utf-8");
             }
             String query = url.getQuery();
             if (query != null) {
@@ -152,16 +246,32 @@ public final class UrlUtils {
             }
             String anchor = url.getRef();
             if (anchor != null) {
-                anchor = encode(url.getRef(), ANCHOR_ALLOWED_CHARS);
+                anchor = encode(url.getRef(), ANCHOR_ALLOWED_CHARS, "utf-8");
             }
             return createNewUrl(url.getProtocol(), url.getHost(), url.getPort(), path, anchor, query);
         }
-        catch (final URIException e) {
+        catch (final MalformedURLException e) {
             // Impossible... I think.
             throw new RuntimeException(e);
         }
-        catch (final MalformedURLException e) {
-            // Impossible... I think.
+    }
+
+    /**
+     * Escapes and encodes the specified string. Based on HttpClient 3.1's <tt>URIUtil.encode()</tt> method.
+     *
+     * @param unescaped the string to encode
+     * @param allowed allowed characters that shouldn't be escaped
+     * @param charset the charset to use
+     * @return the escaped string
+     */
+    private static String encode(final String unescaped, final BitSet allowed, final String charset) {
+        try {
+            final byte[] bytes = unescaped.getBytes(charset);
+            final byte[] bytes2 = URLCodec.encodeUrl(allowed, bytes);
+            return new String(bytes2, "US-ASCII");
+        }
+        catch (final UnsupportedEncodingException e) {
+            // Should never happen.
             throw new RuntimeException(e);
         }
     }
