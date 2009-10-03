@@ -23,6 +23,7 @@ import java.net.URL;
 import java.net.URLStreamHandler;
 import java.util.BitSet;
 
+import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.net.URLCodec;
 
 import com.gargoylesoftware.htmlunit.TextUtil;
@@ -233,7 +234,7 @@ public final class UrlUtils {
         try {
             String path = url.getPath();
             if (path != null) {
-                path = encode(url.getPath(), PATH_ALLOWED_CHARS, "utf-8");
+                path = encode(path, PATH_ALLOWED_CHARS, "utf-8");
             }
             String query = url.getQuery();
             if (query != null) {
@@ -241,17 +242,52 @@ public final class UrlUtils {
                     query = query.replace(" ", "%20");
                 }
                 else {
-                    query = encode(url.getQuery(), QUERY_ALLOWED_CHARS, "windows-1252");
+                    query = encode(query, QUERY_ALLOWED_CHARS, "windows-1252");
                 }
             }
             String anchor = url.getRef();
             if (anchor != null) {
-                anchor = encode(url.getRef(), ANCHOR_ALLOWED_CHARS, "utf-8");
+                anchor = encode(anchor, ANCHOR_ALLOWED_CHARS, "utf-8");
             }
             return createNewUrl(url.getProtocol(), url.getHost(), url.getPort(), path, anchor, query);
         }
         catch (final MalformedURLException e) {
             // Impossible... I think.
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Encodes and escapes the specified URI anchor string.
+     *
+     * @param anchor the anchor string to encode and escape
+     * @return the encoded and escaped anchor string
+     */
+    public static String encodeAnchor(String anchor) {
+        if (anchor != null) {
+            anchor = encode(anchor, ANCHOR_ALLOWED_CHARS, "utf-8");
+        }
+        return anchor;
+    }
+
+    /**
+     * Unescapes and decodes the specified string.
+     *
+     * @param escaped the string to be unescaped and decoded
+     * @return the unescaped and decoded string
+     */
+    public static String decode(final String escaped) {
+        try {
+            final byte[] bytes = escaped.getBytes("US-ASCII");
+            final byte[] bytes2 = URLCodec.decodeUrl(bytes);
+            return new String(bytes2, "UTF-8");
+        }
+        catch (final UnsupportedEncodingException e) {
+            // Should never happen.
+            throw new RuntimeException(e);
+        }
+        catch (final DecoderException e) {
+            // Should never happen.
             throw new RuntimeException(e);
         }
     }

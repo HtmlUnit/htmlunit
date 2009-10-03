@@ -20,8 +20,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.apache.commons.httpclient.URIException;
-import org.apache.commons.httpclient.util.URIUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -259,14 +257,8 @@ public class Location extends SimpleScriptable {
         if (hash_ == null || hash_.length() == 0) {
             return null;
         }
-
         if (encoded) {
-            try {
-                return URIUtil.encodeQuery(hash_);
-            }
-            catch (final URIException e) {
-                LOG.error(e.getMessage(), e);
-            }
+            return UrlUtils.encodeAnchor(hash_);
         }
         return hash_;
     }
@@ -280,23 +272,18 @@ public class Location extends SimpleScriptable {
     public void jsxSet_hash(String hash) {
         // IMPORTANT: This method must not call setUrl(), because
         // we must not hit the server just to change the hash!
-        try {
-            if (hash != null) {
-                if (hash.startsWith("#")) {
-                    hash = hash.substring(1);
-                }
-                final boolean decodeHash = !getBrowserVersion().isIE();
-                if (decodeHash) {
-                    hash = URIUtil.decode(hash);
-                }
-                hash_ = hash;
+        if (hash != null) {
+            if (hash.startsWith("#")) {
+                hash = hash.substring(1);
             }
-            else {
-                hash_ = null;
+            final boolean decodeHash = !getBrowserVersion().isIE();
+            if (decodeHash) {
+                hash = UrlUtils.decode(hash);
             }
+            hash_ = hash;
         }
-        catch (final URIException e) {
-            LOG.error(e.getMessage(), e);
+        else {
+            hash_ = null;
         }
     }
 
