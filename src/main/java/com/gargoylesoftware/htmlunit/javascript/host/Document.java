@@ -229,7 +229,7 @@ public class Document extends EventNode {
      * @return an attribute with the specified name
      */
     public Attr jsxFunction_createAttribute(final String attributeName) {
-        final DomAttr attr = new DomAttr(getPage(), null, attributeName, null);
+        final DomAttr attr = new DomAttr(getPage(), null, attributeName, "");
         return (Attr) attr.getScriptObject();
     }
 

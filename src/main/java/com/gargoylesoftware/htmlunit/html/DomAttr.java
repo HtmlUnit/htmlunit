@@ -47,9 +47,6 @@ public class DomAttr extends DomNamespaceNode implements Attr {
     public DomAttr(final SgmlPage page, final String namespaceURI, final String qualifiedName, final String value) {
         super(namespaceURI, qualifiedName, page);
         value_ = value;
-        if (value == null) {
-            value_ = "";
-        }
     }
 
     /**
