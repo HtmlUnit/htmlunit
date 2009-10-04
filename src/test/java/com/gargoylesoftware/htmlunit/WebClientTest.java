@@ -1618,7 +1618,7 @@ public class WebClientTest extends WebServerTestCase {
      */
     @Test
     public void testUrlEncoding() throws Exception {
-        final URL url = new URL("http://host/x+yé/aé b?c é d");
+        final URL url = new URL("http://host/x+y\u00E9/a\u00E9 b?c \u00E9 d");
         final HtmlPage page = loadPage(FIREFOX_3, "<html></html>", new ArrayList<String>(), url);
         final WebRequestSettings wrs = page.getWebResponse().getRequestSettings();
         assertEquals("http://host/x+y%C3%A9/a%C3%A9%20b?c%20%E9%20d", wrs.getUrl());
@@ -1631,7 +1631,7 @@ public class WebClientTest extends WebServerTestCase {
      */
     @Test
     public void testUrlEncoding2() throws Exception {
-        final URL url = new URL("http://host/x+yé/aé b?c é d");
+        final URL url = new URL("http://host/x+y\u00E9/a\u00E9 b?c \u00E9 d");
         final HtmlPage page = loadPage(INTERNET_EXPLORER_8, "<html></html>", new ArrayList<String>(), url);
         final WebRequestSettings wrs = page.getWebResponse().getRequestSettings();
         assertEquals("http://host/x+y%C3%A9/a%C3%A9%20b?c%20\u00E9%20d", wrs.getUrl());
