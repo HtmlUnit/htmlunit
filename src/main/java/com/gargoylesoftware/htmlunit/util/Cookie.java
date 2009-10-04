@@ -95,7 +95,7 @@ public class Cookie implements Serializable {
 
     /**
      * Creates a new cookie with the specified name and value which applies to the specified domain,
-     * the specified path, and expires on the specified date.
+     * the specified path, and expires after the specified amount of time.
      * @param domain the domain to which this cookie applies
      * @param name the cookie name
      * @param value the cookie name
