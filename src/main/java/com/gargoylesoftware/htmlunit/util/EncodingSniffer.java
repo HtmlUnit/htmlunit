@@ -31,7 +31,7 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * Sniffs encoding settings from HTML, XML or other content. The HTML encoding sniffing algorithm is based on the
- * <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#determining-the-character-encoding">HTML5
+ * <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/parsing.html#determining-the-character-encoding">HTML5
  * encoding sniffing algorithm</a>.
  *
  * @version $Revision$
@@ -108,7 +108,7 @@ public final class EncodingSniffer {
     /**
      * <p>If the specified content is HTML content, this method sniffs encoding settings
      * from the specified HTML content and/or the corresponding HTTP headers based on the
-     * <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#determining-the-character-encoding">HTML5
+     * <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/parsing.html#determining-the-character-encoding">HTML5
      * encoding sniffing algorithm</a>.</p>
      *
      * <p>If the specified content is XML content, this method sniffs encoding settings
@@ -194,7 +194,7 @@ public final class EncodingSniffer {
 
     /**
      * <p>Sniffs encoding settings from the specified HTML content and/or the corresponding HTTP headers based on the
-     * <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#determining-the-character-encoding">HTML5
+     * <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/parsing.html#determining-the-character-encoding">HTML5
      * encoding sniffing algorithm</a>.</p>
      *
      * <p>Note that if an encoding is found but it is not supported on the current platform, this method returns
@@ -414,7 +414,7 @@ public final class EncodingSniffer {
 
     /**
      * Extracts an attribute from the specified byte array, starting at the specified index, using the
-     * <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#concept-get-attributes-when-sniffing">HTML5
+     * <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/parsing.html#concept-get-attributes-when-sniffing">HTML5
      * attribute algorithm</a>.
      *
      * @param bytes the byte array to extract an attribute from
