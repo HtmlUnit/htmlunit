@@ -1795,8 +1795,8 @@ public class DocumentTest extends WebTestCase {
         webClient.setWebConnection(webConnection);
 
         final CookieManager mgr = webClient.getCookieManager();
-        mgr.addCookie(new Cookie("one", "two", URL_FIRST.getHost(), "/", null, false));
-        mgr.addCookie(new Cookie("three", "four", URL_FIRST.getHost(), "/", null, false));
+        mgr.addCookie(new Cookie(URL_FIRST.getHost(), "one", "two", "/", null, false));
+        mgr.addCookie(new Cookie(URL_FIRST.getHost(), "three", "four", "/", null, false));
 
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));

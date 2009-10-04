@@ -695,7 +695,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         final String domain = (String) atts.get("domain");
         final String path = (String) atts.get("path");
         final boolean secure = (atts.get("secure") != null);
-        final Cookie cookie = new Cookie(name, value, domain, path, expires, secure);
+        final Cookie cookie = new Cookie(domain, name, value, path, expires, secure);
 
         return cookie;
     }

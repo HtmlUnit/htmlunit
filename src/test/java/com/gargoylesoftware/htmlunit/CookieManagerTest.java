@@ -55,7 +55,7 @@ public class CookieManagerTest extends WebServerTestCase {
         assertTrue(mgr.getCookies().isEmpty());
 
         // Add a cookie to the manager.
-        final Cookie cookie = new Cookie("a", "b", "c");
+        final Cookie cookie = new Cookie("a", "b");
         mgr.addCookie(cookie);
         assertFalse(mgr.getCookies().isEmpty());
 
@@ -109,7 +109,7 @@ public class CookieManagerTest extends WebServerTestCase {
         assertEquals(1, state.getCookies().length);
 
         // Update the manager with a new state.
-        final Cookie cookie2 = new Cookie("x", "y", "z");
+        final Cookie cookie2 = new Cookie("x", "y");
         final HttpState state2 = new HttpState();
         state2.addCookie(cookie2.toHttpClient());
         mgr.updateFromState(state2);
@@ -355,7 +355,7 @@ public class CookieManagerTest extends WebServerTestCase {
         webClient.setWebConnection(webConnection);
 
         final CookieManager mgr = webClient.getCookieManager();
-        mgr.addCookie(new Cookie("my_key", null, URL_FIRST.getHost(), "/", null, false));
+        mgr.addCookie(new Cookie(URL_FIRST.getHost(), "my_key", null, "/", null, false));
 
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));

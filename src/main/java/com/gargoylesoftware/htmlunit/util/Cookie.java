@@ -59,38 +59,69 @@ public class Cookie implements Serializable {
      * @param value the cookie name
      */
     public Cookie(final String name, final String value) {
-        this(name, value, null);
+        this(null, name, value);
     }
 
     /**
      * Creates a new cookie with the specified name and value which applies to the specified domain.
      * The new cookie applies to all paths, never expires and is not secure.
+     * @param domain the domain to which this cookie applies
      * @param name the cookie name
      * @param value the cookie name
-     * @param domain the domain to which this cookie applies
      */
-    public Cookie(final String name, final String value, final String domain) {
-        this(name, value, domain, null, null, false);
+    public Cookie(final String domain, final String name, final String value) {
+        this(domain, name, value, null, null, false);
     }
 
     /**
      * Creates a new cookie with the specified name and value which applies to the specified domain,
      * the specified path, and expires on the specified date.
+     * @param domain the domain to which this cookie applies
      * @param name the cookie name
      * @param value the cookie name
-     * @param domain the domain to which this cookie applies
      * @param path the path to which this cookie applies
      * @param expires the date on which this cookie expires
      * @param secure whether or not this cookie is secure (i.e. HTTPS vs HTTP)
      */
-    public Cookie(final String name, final String value, final String domain, final String path, final Date expires,
+    public Cookie(final String domain, final String name, final String value, final String path, final Date expires,
         final boolean secure) {
+        domain_ = domain;
         name_ = name;
         value_ = (value != null ? value : ""); // HttpClient 3.1 doesn't like null cookie values
-        domain_ = domain;
         path_ = path;
         expires_ = expires;
         secure_ = secure;
+    }
+
+    /**
+     * Creates a new cookie with the specified name and value which applies to the specified domain,
+     * the specified path, and expires on the specified date.
+     * @param domain the domain to which this cookie applies
+     * @param name the cookie name
+     * @param value the cookie name
+     * @param path the path to which this cookie applies
+     * @param maxAge the number of seconds for which this cookie is valid; <tt>-1</tt> indicates that the
+     *        cookie should never expire; other negative numbers are not allowed
+     * @param secure whether or not this cookie is secure (i.e. HTTPS vs HTTP)
+     */
+    public Cookie(final String domain, final String name, final String value, final String path, final int maxAge,
+        final boolean secure) {
+
+        domain_ = domain;
+        name_ = name;
+        value_ = (value != null ? value : ""); // HttpClient 3.1 doesn't like null cookie values
+        path_ = path;
+        secure_ = secure;
+
+        if (maxAge < -1) {
+            throw new IllegalArgumentException("invalid max age:  " + maxAge);
+        }
+        else if (maxAge >= 0) {
+            expires_ = new Date(System.currentTimeMillis() + (maxAge * 1000L));
+        }
+        else {
+            expires_ = null;
+        }
     }
 
     /**
@@ -206,7 +237,7 @@ public class Cookie implements Serializable {
         for (int i = 0; i < cookies.length; i++) {
             final org.apache.commons.httpclient.Cookie c = cookies[i];
             final Cookie cookie =
-                new Cookie(c.getName(), c.getValue(), c.getDomain(), c.getPath(), c.getExpiryDate(), c.getSecure());
+                new Cookie(c.getDomain(), c.getName(), c.getValue(), c.getPath(), c.getExpiryDate(), c.getSecure());
             list.add(cookie);
         }
         return list;
