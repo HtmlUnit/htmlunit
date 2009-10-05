@@ -264,6 +264,15 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void onLoad_BadUrl() throws Exception {
+        final String html = "<html><body><img src='http:// [/url]http://x.com/a/b' onload='alert(1)'/></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

@@ -115,8 +115,7 @@ public class HtmlImage extends HtmlElement {
         final HtmlPage htmlPage = (HtmlPage) getPage();
         final Function onload = getEventHandler("onload");
         if (onload != null) {
-            // An onload handler is defined; we need to download the image and then call the onload
-            // handler.
+            // An onload handler is defined; we need to download the image and then call the onload handler.
             boolean ok;
             try {
                 downloadImageIfNeeded();

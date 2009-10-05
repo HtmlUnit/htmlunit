@@ -145,8 +145,10 @@ public class HttpWebConnection implements WebConnection {
      * Returns a new HttpClient host configuration, initialized based on the specified request settings.
      * @param webRequestSettings the request settings to use to initialize the returned host configuration
      * @return a new HttpClient host configuration, initialized based on the specified request settings
+     * @throws IOException if the specified request settings contains an invalid URL
      */
-    private static HostConfiguration getHostConfiguration(final WebRequestSettings webRequestSettings) {
+    private static HostConfiguration getHostConfiguration(final WebRequestSettings webRequestSettings)
+        throws IOException {
         final HostConfiguration hostConfiguration = new HostConfiguration();
         final URL url = webRequestSettings.getUrl();
         final URI uri;
@@ -154,8 +156,7 @@ public class HttpWebConnection implements WebConnection {
             uri = new URI(url.toExternalForm(), false);
         }
         catch (final URIException e) {
-            // Theoretically impossible but ....
-            throw new IllegalStateException("Unable to create URI from URL: " + url.toExternalForm());
+            throw new IOException("Unable to create URI from URL: " + url.toExternalForm());
         }
         hostConfiguration.setHost(uri);
         if (webRequestSettings.getProxyHost() != null) {
