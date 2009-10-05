@@ -422,6 +422,22 @@ public class HTMLDocumentTest extends WebTestCase {
     }
 
     /**
+     * <a href="https://sourceforge.net/tracker/?func=detail&aid=2855731&group_id=47038&atid=448266">Bug 2855731</a>.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented
+    public void write_nested() throws Exception {
+        final String html =
+              "<html><body><script>\n"
+            + "var s = '\"<script>alert(1);<\\/scr\" + \"ipt>\"';\n"
+            + "document.write('<script><!--\\ndocument.write(' + s + ');\\n--><\\/script>');\n"
+            + "</script></body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
