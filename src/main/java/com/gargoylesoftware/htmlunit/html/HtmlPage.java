@@ -399,34 +399,10 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * Returns the charset used in the page.
-     * The sources of this information are from 1).meta element which
-     * http-equiv attribute value is 'content-type', or if not from
-     * the response header.
-     * @return the value of charset
+     * {@inheritDoc}
      */
     @Override
     public String getPageEncoding() {
-        // If we've already calculated it, return it.
-        if (originalCharset_ != null) {
-            return originalCharset_;
-        }
-        // Try to get the encoding from any <meta> tags.
-        for (final HtmlMeta meta : getMetaTags("content-type")) {
-            final String contents = meta.getContentAttribute();
-            final int pos = contents.toLowerCase().indexOf("charset=");
-            if (pos >= 0) {
-                final String charset = contents.substring(pos + 8);
-                if (charset.length() > 0) {
-                    originalCharset_ = charset;
-                    if (LOG.isDebugEnabled()) {
-                        LOG.debug("Page Encoding detected: " + originalCharset_);
-                    }
-                    return originalCharset_;
-                }
-            }
-        }
-        // Try to get the encoding from HTTP headers, or based on the content itself.
         if (originalCharset_ == null) {
             originalCharset_ = getWebResponse().getContentCharset();
         }

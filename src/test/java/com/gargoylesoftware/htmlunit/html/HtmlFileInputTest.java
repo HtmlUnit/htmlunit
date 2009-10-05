@@ -49,7 +49,6 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
-import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
 
 /**
  * Tests for {@link HtmlFileInput}.
@@ -300,20 +299,24 @@ public class HtmlFileInputTest extends WebServerTestCase {
     /**
      * Servlet for '/upload1'.
      */
-    public static class Upload1Servlet extends ServletContentWrapper {
+    public static class Upload1Servlet extends HttpServlet {
 
         private static final long serialVersionUID = 6693252829875297263L;
 
         /**
-         * Creates an instance.
+         * {@inheritDoc}
          */
-        public Upload1Servlet() {
-            super("<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/></head>\n"
-            + "<form action='upload2' method='post' enctype='multipart/form-data'>\n"
-            + "Name: <input name='myInput' type='file'><br>\n"
-            + "Name 2 (should stay empty): <input name='myInput2' type='file'><br>\n"
-            + "<input type='submit' value='Upload' id='mySubmit'>\n"
-            + "</form>\n");
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+            throws ServletException, IOException {
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html");
+            response.getWriter().write("<html>"
+                + "<body><form action='upload2' method='post' enctype='multipart/form-data'>\n"
+                + "Name: <input name='myInput' type='file'><br>\n"
+                + "Name 2 (should stay empty): <input name='myInput2' type='file'><br>\n"
+                + "<input type='submit' value='Upload' id='mySubmit'>\n"
+                + "</form></body></html>\n");
         }
     }
 

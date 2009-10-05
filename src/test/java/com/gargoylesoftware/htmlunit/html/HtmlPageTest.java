@@ -615,7 +615,7 @@ public class HtmlPageTest extends WebServerTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        assertEquals("Shift_JIS", page.getPageEncoding());
+        assertEquals("shift_jis", page.getPageEncoding());
     }
 
     /**
@@ -629,6 +629,23 @@ public class HtmlPageTest extends WebServerTestCase {
             + "</head><body>abc</body></html>";
         final HtmlPage page = loadPage(html);
         assertEquals(TextUtil.DEFAULT_CHARSET, page.getPageEncoding());
+    }
+
+    /**
+     * <a href="https://sourceforge.net/tracker/?func=detail&aid=2860732&group_id=47038&atid=448266">Bug 2860732</a>.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testGetPageEncoding_HeaderHasPrecedenceOverMetaTag() throws Exception {
+        final String html = "<html><head><meta content='text/html; charset=iso-8859-1' http-equiv='Content-Type'/>"
+            + "</head><body></body></html>";
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html, "text/html; charset=UTF-8");
+        final WebClient client = new WebClient();
+        client.setWebConnection(conn);
+        final HtmlPage page = client.getPage(URL_FIRST);
+        assertEquals("UTF-8", page.getPageEncoding());
+        assertEquals(page.getWebResponse().getContentCharset(), page.getPageEncoding());
     }
 
     /**

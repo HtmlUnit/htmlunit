@@ -1016,17 +1016,16 @@ public class HtmlFormTest extends WebTestCase {
     }
 
     /**
-     * Utility for {@link #testUrlAfterSubmit()}.
      * @throws Exception if the test fails
      */
     @Test
     public void testSubmitRequestCharset() throws Exception {
-        testSubmitRequestCharset("UTF-8", null, null, "UTF-8");
-        testSubmitRequestCharset(null, "UTF-8", null, "UTF-8");
-        testSubmitRequestCharset("ISO-8859-1", null, "UTF-8", "UTF-8");
-        testSubmitRequestCharset("ISO-8859-1", null, "UTF-8, ISO-8859-1", "UTF-8");
-        testSubmitRequestCharset("UTF-8", null, "ISO-8859-1 UTF-8", "ISO-8859-1");
-        testSubmitRequestCharset("ISO-8859-1", null, "UTF-8, ISO-8859-1", "UTF-8");
+        testSubmitRequestCharset("utf-8", null, null, "utf-8");
+        testSubmitRequestCharset(null, "utf-8", null, "utf-8");
+        testSubmitRequestCharset("iso-8859-1", null, "utf-8", "utf-8");
+        testSubmitRequestCharset("iso-8859-1", null, "utf-8, iso-8859-1", "utf-8");
+        testSubmitRequestCharset("utf-8", null, "iso-8859-1 utf-8", "iso-8859-1");
+        testSubmitRequestCharset("iso-8859-1", null, "utf-8, iso-8859-1", "utf-8");
     }
 
     /**
