@@ -2384,6 +2384,7 @@
         <property name="length" readable="true" writable="false"/>
         <function name="getNamedItem"/>
         <function name="item"/>
+        <function name="setNamedItem"/>
     </class>
 
     <class name="Namespace" classname="com.gargoylesoftware.htmlunit.javascript.host.Namespace"
@@ -2986,6 +2987,9 @@
             <browser name="Internet Explorer"/>
         </property>
         <function name="createCDATASection"/>
+        <function name="createNode">
+            <browser name="Internet Explorer"/>
+        </function>
         <function name="createProcessingInstruction"/>
         <function name="getElementById">
             <browser name="Firefox"/>

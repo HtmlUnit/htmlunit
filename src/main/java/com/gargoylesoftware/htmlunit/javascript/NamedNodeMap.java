@@ -22,6 +22,7 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Attr;
+import com.gargoylesoftware.htmlunit.javascript.host.Node;
 
 /**
  * A collection of nodes that can be accessed by name. String comparisons in this class are case-insensitive when
@@ -107,6 +108,14 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
             return getUnspecifiedAttributeNode(name);
         }
         return null;
+    }
+
+    /**
+     * Sets the specified attribute.
+     * @param node the attribute
+     */
+    public void jsxFunction_setNamedItem(final Node node) {
+        attributes_.setNamedItem(node.getDomNodeOrDie());
     }
 
     /**

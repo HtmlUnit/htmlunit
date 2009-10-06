@@ -66,4 +66,32 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "<root><child Sci-Fi=\"\"/></root>")
+    public void createNode() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    if (document.all) {\n"
+            + "      doc.async = false;\n"
+            + "      doc.loadXML('<root><child/></root>');\n"
+            + "      var node = doc.createNode(2, 'Sci-Fi', '');\n"
+            + "      doc.documentElement.childNodes.item(0).attributes.setNamedItem(node);\n"
+            + "      alert(doc.documentElement.xml);\n"
+            + "    }\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

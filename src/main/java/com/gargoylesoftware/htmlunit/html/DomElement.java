@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.html;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +49,7 @@ public class DomElement extends DomNamespaceNode implements Element {
     public static final String ATTRIBUTE_VALUE_EMPTY = new String("");
 
     /** The map holding the attributes, keyed by name. */
-    private NamedAttrNodeMapImpl attributes_ = NamedAttrNodeMapImpl.EMPTY_MAP;
+    private NamedAttrNodeMapImpl attributes_ = new NamedAttrNodeMapImpl(this, isAttributeCaseSensitive());
 
     /** The map holding the namespaces, keyed by URI. */
     private Map<String, String> namespaces_ = new HashMap<String, String>();
@@ -305,9 +304,6 @@ public class DomElement extends DomNamespaceNode implements Element {
             final String attributeValue) {
         final String value = attributeValue;
 
-        if (attributes_ == NamedAttrNodeMapImpl.EMPTY_MAP) {
-            attributes_ = new NamedAttrNodeMapImpl(this, isAttributeCaseSensitive());
-        }
         final DomAttr newAttr = new DomAttr(getPage(), namespaceURI, qualifiedName, value);
         newAttr.setParentNode(this);
         attributes_.put(qualifiedName, newAttr);
@@ -444,7 +440,7 @@ class NamedAttrNodeMapImpl extends MapWrapper<String, DomAttr> implements NamedN
     private final boolean caseSensitive_;
 
     private NamedAttrNodeMapImpl() {
-        super(Collections.<String, DomAttr>emptyMap());
+        super(new HashMap<String, DomAttr>());
         domNode_ = null;
         caseSensitive_ = true;
     }

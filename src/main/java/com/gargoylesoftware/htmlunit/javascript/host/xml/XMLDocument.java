@@ -24,6 +24,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
@@ -329,5 +330,26 @@ public class XMLDocument extends Document {
     public Object jsxFunction_createCDATASection(final String data) {
         final DomCDataSection node = ((XmlPage) getPage()).createCDATASection(data);
         return getScriptableFor(node);
+    }
+
+    /**
+     * Creates a node using the supplied type, name, and namespace.
+     * @param type a value that uniquely identifies the node type
+     * @param name the value for the new node's nodeName property
+     * @param namespaceURI A string defining the namespace URI.
+     *        If specified, the node is created in the context of the namespaceURI parameter
+     *        with the prefix specified on the node name.
+     *        If the name parameter does not have a prefix, this is treated as the default namespace.
+     * @return the newly created node
+     */
+    public Object jsxFunction_createNode(final Object type, final String name, final Object namespaceURI) {
+        switch((short) Context.toNumber(type)) {
+            case Node.ATTRIBUTE_NODE:
+                return jsxFunction_createAttribute(name);
+
+            default:
+                Context.reportRuntimeError("xmlDoc.createNode(): Unsupported type " + type);
+                return null;
+        }
     }
 }

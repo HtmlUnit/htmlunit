@@ -220,6 +220,7 @@ public class ActiveXObject extends SimpleScriptable {
         addProperty(document, "xml", true, false);
 
         // the functions
+        addFunction(document, "createNode");
         addFunction(document, "createCDATASection");
         addFunction(document, "createProcessingInstruction");
         addFunction(document, "getElementsByTagName");
