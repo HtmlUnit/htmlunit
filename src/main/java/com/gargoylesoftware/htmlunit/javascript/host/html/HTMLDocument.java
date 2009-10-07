@@ -1316,7 +1316,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @see <a href="http://www.xulplanet.com/references/objref/HTMLDocument.html#method_createRange">XUL Planet</a>
      */
     public Object jsxFunction_createRange() {
-        final Range r = new Range();
+        final Range r = new Range(this);
         r.setParentScope(getWindow());
         r.setPrototype(getPrototype(Range.class));
         return r;

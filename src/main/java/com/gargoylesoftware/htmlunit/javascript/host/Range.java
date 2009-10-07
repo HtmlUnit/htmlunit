@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 /**
@@ -36,6 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Daniel Gredler
  */
 public class Range extends SimpleScriptable {
     private static final long serialVersionUID = 4326375945958952177L;
@@ -43,9 +45,19 @@ public class Range extends SimpleScriptable {
     private int startOffset_, endOffset_;
 
     /**
-     * Creates an instance.
+     * Creates a new instance.
      */
     public Range() {
+        // Empty.
+    }
+
+    /**
+     * Creates a new instance.
+     * @param document the HTML document creating the range
+     */
+    public Range(final HTMLDocument document) {
+        startContainer_ = document;
+        endContainer_ = document;
     }
 
     /**

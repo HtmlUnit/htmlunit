@@ -36,7 +36,7 @@ public class RangeTest extends WebTestCase {
     private static final String contentStart = "<html><head><title>Range Test</title>\n"
         + "<script>\n"
         + "function safeTagName(o) {\n"
-        + "  return o ? o.tagName : undefined\n"
+        + "  return o ? (o.tagName ? o.tagName : o) : undefined;\n"
         + "}\n"
         + "function alertRange(r) {\n"
         + "  alert(r.collapsed);\n"
@@ -62,7 +62,7 @@ public class RangeTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.FF)
-    @Alerts({ "true", "undefined", "undefined", "0", "undefined", "0" })
+    @Alerts({ "true", "[object HTMLDocument]", "[object HTMLDocument]", "0", "[object HTMLDocument]", "0" })
     public void testEmptyRange() throws Exception {
         loadPageWithAlerts(contentStart + "alertRange(r);" + contentEnd);
     }
