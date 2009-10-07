@@ -1585,10 +1585,8 @@ public class WebClientTest extends WebServerTestCase {
         final URL[] calledUrls = {null};
         final WebClient wc = new WebClient() {
             private static final long serialVersionUID = -8065766721260679248L;
-
             @Override
-            @SuppressWarnings("unchecked")
-            public Page getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
+            public <P extends Page> P getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
                 calledUrls[0] = url;
                 return null;
             }
