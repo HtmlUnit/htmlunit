@@ -94,4 +94,32 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "undefined", "test", "uri:test", "test:element" })
+    public void createNode_element() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    if (document.all) {\n"
+            + "      var node = doc.createNode(1, 'test:element', 'uri:test');\n"
+            + "      alert(node.localName);\n"
+            + "      alert(node.prefix);\n"
+            + "      alert(node.namespaceURI);\n"
+            + "      alert(node.nodeName);\n"
+            + "    }\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

@@ -6,13 +6,16 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, (initial)??? IE8 support">
+            <action type="fix" dev="asashour" issue="2855731">
+                JavaScript: fix how document.write() detects complete string.
+            </action>
             <action type="fix" dev="sdanig" issue="2873035">
                 The default value of range.startContainer and range.endContainer is the document itself (Firefox only).
             </action>
             <action type="add" dev="asashour" issue="2856764">
                 JavaScript: primitive support for xmlDocument.createNode() (IE only).
             </action>
-            <action type="add" dev="asashour" issue="2856764">
+            <action type="add" dev="asashour">
                 JavaScript: implement attributes.setNamedItem().
             </action>
             <action type="fix" dev="sdanig">

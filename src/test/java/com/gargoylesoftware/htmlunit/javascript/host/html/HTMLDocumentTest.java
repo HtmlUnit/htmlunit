@@ -427,7 +427,6 @@ public class HTMLDocumentTest extends WebTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void write_nested() throws Exception {
         final String html =
               "<html><body><script>\n"

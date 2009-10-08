@@ -344,12 +344,14 @@ public class XMLDocument extends Document {
      */
     public Object jsxFunction_createNode(final Object type, final String name, final Object namespaceURI) {
         switch((short) Context.toNumber(type)) {
+            case Node.ELEMENT_NODE:
+                return jsxFunction_createElementNS((String) namespaceURI, name);
             case Node.ATTRIBUTE_NODE:
                 return jsxFunction_createAttribute(name);
 
             default:
-                Context.reportRuntimeError("xmlDoc.createNode(): Unsupported type " + type);
-                return null;
+                throw Context.reportRuntimeError("xmlDoc.createNode(): Unsupported type "
+                        + (short) Context.toNumber(type));
         }
     }
 }

@@ -743,10 +743,11 @@ public class Node extends SimpleScriptable {
      * @return the URI that identifies an XML namespace
      */
     public String jsxGet_namespaceURI() {
-        if (getBrowserVersion().isIE()) {
+        final String namespaceURI = this.<DomNode>getDomNodeOrDie().getNamespaceURI();
+        if (namespaceURI == null && getBrowserVersion().isIE()) {
             return "";
         }
-        return this.<DomNode>getDomNodeOrDie().getNamespaceURI();
+        return namespaceURI;
     }
 
     /**

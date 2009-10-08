@@ -450,9 +450,10 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         page.writeInParsedStream(bufferedContent.toString());
     }
 
+    private enum PARSING_STATUS { OUTSIDE, START, IN_NAME, INSIDE, IN_STRING }
+
     /**
-     * Indicates if the content is a well formed HTML snippet that can already be parsed to be added
-     * to the DOM.
+     * Indicates if the content is a well formed HTML snippet that can already be parsed to be added to the DOM.
      *
      * @param content the HTML snippet
      * @return <code>false</code> if it not well formed
@@ -460,24 +461,27 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     private static boolean canAlreadyBeParsed(final String content) {
         // all <script> must have their </script> because the parser doesn't close automatically this tag
         // All tags must be complete, that is from '<' to '>'.
-        final int tagOutside = 0;
-        final int tagStart = 1;
-        final int tagInName = 2;
-        final int tagInside = 3;
-        int tagState = tagOutside;
+        PARSING_STATUS tagState = PARSING_STATUS.OUTSIDE;
         int tagNameBeginIndex = 0;
         int scriptTagCount = 0;
         boolean tagIsOpen = true;
+        char stringBoundary = 0;
+        boolean stringSkipNextChar = false;
         int index = 0;
         for (final char currentChar : content.toCharArray()) {
             switch (tagState) {
-                case tagOutside:
+                case OUTSIDE:
                     if (currentChar == '<') {
-                        tagState = tagStart;
+                        tagState = PARSING_STATUS.START;
                         tagIsOpen = true;
                     }
+                    else if (currentChar == '\'' || currentChar == '"') {
+                        tagState = PARSING_STATUS.IN_STRING;
+                        stringBoundary = currentChar;
+                        stringSkipNextChar = false;
+                    }
                     break;
-                case tagStart:
+                case START:
                     if (currentChar == '/') {
                         tagIsOpen = false;
                         tagNameBeginIndex = index + 1;
@@ -485,9 +489,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                     else {
                         tagNameBeginIndex = index;
                     }
-                    tagState = tagInName;
+                    tagState = PARSING_STATUS.IN_NAME;
                     break;
-                case tagInName:
+                case IN_NAME:
                     if (Character.isWhitespace(currentChar) || currentChar == '>') {
                         final String tagName = content.substring(tagNameBeginIndex, index);
                         if (tagName.equalsIgnoreCase("script")) {
@@ -500,19 +504,32 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                             }
                         }
                         if (currentChar == '>') {
-                            tagState = tagOutside;
+                            tagState = PARSING_STATUS.OUTSIDE;
                         }
                         else {
-                            tagState = tagInside;
+                            tagState = PARSING_STATUS.INSIDE;
                         }
                     }
                     else if (!Character.isLetter(currentChar)) {
-                        tagState = tagOutside;
+                        tagState = PARSING_STATUS.OUTSIDE;
                     }
                     break;
-                case tagInside:
+                case INSIDE:
                     if (currentChar == '>') {
-                        tagState = tagOutside;
+                        tagState = PARSING_STATUS.OUTSIDE;
+                    }
+                    break;
+                case IN_STRING:
+                    if (stringSkipNextChar) {
+                        stringSkipNextChar = false;
+                    }
+                    else {
+                        if (currentChar == stringBoundary) {
+                            tagState = PARSING_STATUS.OUTSIDE;
+                        }
+                        else if (currentChar == '\\') {
+                            stringSkipNextChar = true;
+                        }
                     }
                     break;
                 default:
@@ -520,7 +537,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             }
             index++;
         }
-        if (scriptTagCount > 0 || tagState != tagOutside) {
+        if (scriptTagCount > 0 || tagState != PARSING_STATUS.OUTSIDE) {
             return false;
         }
 
