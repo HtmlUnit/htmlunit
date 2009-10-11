@@ -649,27 +649,21 @@
         </dependency>
         <!-- WebDriver -->
         <dependency>
-            <groupId>net.sourceforge.htmlunit</groupId>
-            <artifactId>webdriver</artifactId>
-            <version>2.7-SNAPSHOT</version>
+            <groupId>org.seleniumhq.webdriver</groupId>
+            <artifactId>webdriver-htmlunit</artifactId>
+            <version>0.9.7376</version>
             <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>net.sourceforge.htmlunit</groupId>
-                    <artifactId>htmlunit</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.webdriver</groupId>
             <artifactId>webdriver-firefox</artifactId>
-            <version>0.9.7089</version>
+            <version>0.9.7376</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.webdriver</groupId>
             <artifactId>webdriver-ie</artifactId>
-            <version>0.9.7089</version>
+            <version>0.9.7376</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
