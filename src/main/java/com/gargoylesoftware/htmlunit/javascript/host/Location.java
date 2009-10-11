@@ -167,7 +167,13 @@ public class Location extends SimpleScriptable {
             if (hash != null) {
                 url = UrlUtils.getUrlWithNewRef(url, hash);
             }
-            return url.toExternalForm();
+            String s = url.toExternalForm();
+            if (s.startsWith("file:/") && !s.startsWith("file:///")) {
+                // Java (sometimes?) returns file URLs with a single slash; however, browsers return
+                // three slashes. See http://www.cyanwerks.com/file-url-formats.html for more info.
+                s = "file:///" + s.substring("file:/".length());
+            }
+            return s;
         }
         catch (final MalformedURLException e) {
             LOG.error(e.getMessage(), e);

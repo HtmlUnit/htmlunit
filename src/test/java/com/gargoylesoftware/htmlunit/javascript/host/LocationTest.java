@@ -705,4 +705,22 @@ public class LocationTest extends WebDriverTestCase {
 
         assertEquals(new URL(getDefaultUrl(), "foo2.html").toString(), driver.getCurrentUrl());
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void fileUrlFormat() throws Exception {
+        final URL url = getClass().getResource("LocationTest_fileUrlFormat.html");
+        assertNotNull(url);
+
+        final WebClient client = getWebClient();
+        final List<String> alerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(alerts));
+        client.getPage(url);
+
+        assertEquals(1, alerts.size());
+        assertTrue(alerts.get(0).startsWith("file:///"));
+    }
+
 }
