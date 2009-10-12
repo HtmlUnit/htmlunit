@@ -7,6 +7,9 @@
     <body>
         <release version="2.7" date="?" description="Bugfixes, (initial)??? IE8 support">
             <action type="fix" dev="sdanig">
+                JavaScript: fix computed element widths and heights when percentages are involved in the CSS.
+            </action>
+            <action type="fix" dev="sdanig">
                 JavaScript: window.location should start with 'file:///' instead of just 'file:/' when dealing with a local file.
             </action>
             <action type="fix" dev="mguillem">

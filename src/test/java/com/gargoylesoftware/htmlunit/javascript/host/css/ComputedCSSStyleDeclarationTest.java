@@ -467,4 +467,32 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "200px,400px", "200,400", "200px,400px", "50%,25%", "100,100", "100px,100px" },
+            IE = { "200px,400px", "200,400", "200px,400px", "50%,25%", "100,100", "50%,25%" })
+    public void widthAndHeightPercentages() throws Exception {
+        final String html = "<html><body onload='test()'>\n"
+            + "<div id='d1' style='width:200px;height:400px'><div id='d2' style='width:50%;height:25%'></div></div>\n"
+            + "<script>\n"
+            + "  function test(){\n"
+            + "    var d1 = document.getElementById('d1');\n"
+            + "    var s1 = window.getComputedStyle ? window.getComputedStyle(d1, null) : d1.currentStyle;\n"
+            + "    var d2 = document.getElementById('d2');\n"
+            + "    var s2 = window.getComputedStyle ? window.getComputedStyle(d2, null) : d2.currentStyle;\n"
+            + "    alert(d1.style.width + ',' + d1.style.height);\n"
+            + "    alert(d1.offsetWidth + ',' + d1.offsetHeight);\n"
+            + "    alert(s1.width + ',' + s1.height);\n"
+            + "    alert(d2.style.width + ',' + d2.style.height);\n"
+            + "    alert(d2.offsetWidth + ',' + d2.offsetHeight);\n"
+            + "    alert(s2.width + ',' + s2.height);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }
