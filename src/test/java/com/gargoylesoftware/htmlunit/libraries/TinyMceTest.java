@@ -54,9 +54,9 @@ public class TinyMceTest extends WebDriverTestCase {
         final URL url = getClass().getClassLoader().getResource("tinymce/3.2.7/tests/" + fileName + ".html");
         assertNotNull(url);
 
-        final WebClient client_ = getWebClient();
-        final HtmlPage page = (HtmlPage) client_.getPage(url);
-        client_.waitForBackgroundJavaScript(5000L);
+        final WebClient client = getWebClient();
+        final HtmlPage page = (HtmlPage) client.getPage(url);
+        client.waitForBackgroundJavaScript(5000L);
 
         final HtmlElement result = page.getElementById("testresult");
         final HtmlSpan totalSpan = result.getFirstByXPath("span[@class='all']");
