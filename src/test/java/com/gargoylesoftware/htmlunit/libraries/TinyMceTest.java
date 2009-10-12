@@ -18,7 +18,6 @@ import static org.junit.Assert.assertNotNull;
 
 import java.net.URL;
 
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -42,8 +41,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 @RunWith(BrowserRunner.class)
 public class TinyMceTest extends WebDriverTestCase {
 
-    private WebClient client_;
-
     /**
      * @throws Exception if an error occurs
      */
@@ -57,7 +54,7 @@ public class TinyMceTest extends WebDriverTestCase {
         final URL url = getClass().getClassLoader().getResource("tinymce/3.2.7/tests/" + fileName + ".html");
         assertNotNull(url);
 
-        client_ = new WebClient(getBrowserVersion());
+        final WebClient client_ = getWebClient();
         final HtmlPage page = (HtmlPage) client_.getPage(url);
         client_.waitForBackgroundJavaScript(5000L);
 
@@ -70,16 +67,4 @@ public class TinyMceTest extends WebDriverTestCase {
         final int failed = Integer.parseInt(failedSpan.asText());
         assertEquals(expectedFailed, failed);
     }
-
-    /**
-     * Performs post-test deconstruction.
-     * @throws Exception if an error occurs
-     */
-    @After
-    public void tearDown() throws Exception {
-        if (client_ != null) {
-            client_.closeAllWindows();
-        }
-    }
-
 }
