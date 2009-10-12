@@ -100,6 +100,9 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     public Integer jsxGet_cellIndex() {
         final HtmlTableCell cell = (HtmlTableCell) getDomNodeOrDie();
         final HtmlTableRow row = cell.getEnclosingRow();
+        if (row == null) { // a not attached document.createElement('TD')
+            return -1;
+        }
         return new Integer(row.getCells().indexOf(cell));
     }
 

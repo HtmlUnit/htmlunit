@@ -299,7 +299,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "0", "1" })
+    @Alerts({ "0", "1", "0", "1", "-1" })
     public void cellIndex() throws Exception {
         final String html
             = "<html><head><title>Test</title>\n"
@@ -309,6 +309,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "    alert(document.getElementById('th2').cellIndex);\n"
             + "    alert(document.getElementById('td1').cellIndex);\n"
             + "    alert(document.getElementById('td2').cellIndex);\n"
+            + "    alert(document.createElement('td').cellIndex);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'><table>\n"

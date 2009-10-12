@@ -275,9 +275,10 @@ public class HtmlUnitContextFactory extends ContextFactory {
                 return browserVersion_.isIE();
             case Context.FEATURE_HTMLUNIT_WRITE_READONLY_PROPERTIES:
                 return browserVersion_.hasFeature(BrowserVersionFeatures.SET_READONLY_PROPERTIES);
+            case Context.FEATURE_HTMLUNIT_JS_CATCH_JAVA_EXCEPTION:
+                return false;
             default:
                 return super.hasFeature(cx, featureIndex);
         }
     }
-
 }

@@ -52,6 +52,9 @@ public class HTMLTableRowElement extends HTMLTableComponent {
     public int jsxGet_rowIndex() {
         final HtmlTableRow row = (HtmlTableRow) getDomNodeOrDie();
         final HtmlTable table = row.getEnclosingTable();
+        if (table == null) { // a not attached document.createElement('TR')
+            return -1;
+        }
         return table.getRows().indexOf(row);
     }
 
@@ -64,6 +67,17 @@ public class HTMLTableRowElement extends HTMLTableComponent {
      */
     public int jsxGet_sectionRowIndex() {
         DomNode row = getDomNodeOrDie();
+        final HtmlTable table = ((HtmlTableRow) row).getEnclosingTable();
+        if (table == null) { // a not attached document.createElement('TR')
+            if (!getBrowserVersion().isIE()) {
+                return -1;
+            }
+            else {
+                // IE 6, 7 and 8 return really strange values: large integers that are not constants
+                // as tests on different browsers give different results
+                return 5461640;
+            }
+        }
         int index = -1;
         while (row != null) {
             if (row instanceof HtmlTableRow) {

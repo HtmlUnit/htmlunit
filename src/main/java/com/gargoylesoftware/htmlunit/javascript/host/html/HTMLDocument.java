@@ -850,7 +850,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public Object jsxFunction_appendChild(final Object childObject) {
         if (limitAppendChildToIE() && !getBrowserVersion().isIE()) {
             // Firefox does not allow insertion at the document level.
-            throw new RuntimeException("Node cannot be inserted at the specified point in the hierarchy.");
+            throw Context.reportRuntimeError("Node cannot be inserted at the specified point in the hierarchy.");
         }
         // We're emulating IE; we can allow insertion.
         return super.jsxFunction_appendChild(childObject);
@@ -1274,7 +1274,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public Event jsxFunction_createEvent(final String eventType) throws DOMException {
         final Class< ? extends Event> clazz = SUPPORTED_EVENT_TYPE_MAP.get(eventType);
         if (clazz == null) {
-            throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Event Type is not supported: " + eventType);
+            Context.throwAsScriptRuntimeEx(new DOMException(DOMException.NOT_SUPPORTED_ERR,
+                "Event Type is not supported: " + eventType));
         }
         try {
             final Event event = clazz.newInstance();

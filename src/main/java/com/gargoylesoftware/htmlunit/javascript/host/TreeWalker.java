@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 import org.w3c.dom.DOMException;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -60,8 +62,8 @@ public class TreeWalker extends SimpleScriptable {
                       final NodeFilter filter,
                       final Boolean expandEntityReferences) throws DOMException {
         if (root == null) {
-            throw new DOMException(DOMException.NOT_SUPPORTED_ERR,
-                                   "root must not be null");
+            Context.throwAsScriptRuntimeEx(new DOMException(DOMException.NOT_SUPPORTED_ERR,
+                                   "root must not be null"));
         }
         root_ = root;
         whatToShow_ = whatToShow;

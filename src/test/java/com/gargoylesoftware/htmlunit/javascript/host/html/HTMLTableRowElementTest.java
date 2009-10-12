@@ -281,7 +281,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "0", "0", "3", "1" })
+    @Alerts(FF = { "0", "0", "3", "1", "-1", "true", "false" },
+            IE = { "0", "0", "3", "1", "-1", "false", "true" })
     public void rowIndex_sectionRowIndex() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -299,6 +300,10 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
             + "  alert(tr1.sectionRowIndex);\n"
             + "  alert(trf2.rowIndex);\n"
             + "  alert(trf2.sectionRowIndex);\n"
+            + "  var tr3 = document.createElement('tr');\n"
+            + "  alert(tr3.rowIndex);\n"
+            + "  alert(tr3.sectionRowIndex == -1);\n"
+            + "  alert(tr3.sectionRowIndex > 1000);\n"
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);

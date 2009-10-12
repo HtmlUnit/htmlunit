@@ -6,6 +6,13 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, (initial)??? IE8 support">
+            <action type="fix" dev="mguillem">
+                JavaScript: HTMLTableCellElement.cellIndex, HTMLTableRowElement.rowIndex
+                and sectionRowIndex (FF only) return -1 when the element is not added to the document.
+            </action>
+            <action type="update" dev="mguillem">
+                Don't allow JavaScript catch statements to catch HtmlUnit internal errors.
+            </action>
             <action type="fix" dev="asashour" issue="2855731">
                 JavaScript: fix how document.write() detects complete string.
             </action>
