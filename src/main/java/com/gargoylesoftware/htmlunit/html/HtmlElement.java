@@ -107,7 +107,7 @@ public abstract class HtmlElement extends DomElement {
         if (page != null && page.getWebClient().getBrowserVersion().isFirefox()) {
             final String value = getAttribute("class");
             if (value != ATTRIBUTE_NOT_DEFINED) {
-                setAttribute("class", value.trim());
+                getAttributeNode("class").setValue(value.trim());
             }
         }
     }

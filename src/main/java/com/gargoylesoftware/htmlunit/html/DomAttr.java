@@ -33,7 +33,6 @@ public class DomAttr extends DomNamespaceNode implements Attr {
     private static final long serialVersionUID = 4832218455328064213L;
 
     private String value_;
-
     private boolean specified_;
 
     /**

@@ -21,6 +21,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
@@ -63,6 +64,28 @@ public class AttrTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Trimming of "class" attributes during Firefox emulation was having the unintended side effect
+     * of setting the attribute's "specified" attribute to "false".
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.FF)
+    @Alerts(FF = { "true", "true" })
+    public void specified2() throws Exception {
+        final String html
+            = "<html><body onload='test()'><div id='div' class='test'></div>\n"
+            + "<script>\n"
+            + "  function test(){\n"
+            + "    var div = document.getElementById('div');\n"
+            + "    alert(div.attributes.id.specified);\n"
+            + "    alert(div.attributes.class.specified);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
         loadPageWithAlerts2(html);
     }
 
