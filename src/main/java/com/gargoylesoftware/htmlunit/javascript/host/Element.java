@@ -93,24 +93,38 @@ public class Element extends EventNode {
     }
 
     /**
-     * Gets the specified attribute.
+     * Returns the value of the specified attribute.
      * @param attributeName attribute name
+     * @param flags IE-specific flags (see the MSDN documentation for more info)
      * @return the value of the specified attribute, <code>null</code> if the attribute is not defined
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536429.aspx">MSDN Documentation</a>
+     * @see <a href="http://reference.sitepoint.com/javascript/Element/getAttribute">IE Bug Documentation</a>
      */
-    public Object jsxFunction_getAttribute(String attributeName) {
+    public Object jsxFunction_getAttribute(String attributeName, final Integer flags) {
+        final boolean ie = getBrowserVersion().isIE();
         attributeName = fixAttributeName(attributeName);
-        final String value = getDomNodeOrDie().getAttribute(attributeName);
+
+        Object value;
+        if (ie && flags != null && flags == 2 && "style".equalsIgnoreCase(attributeName)) {
+            value = "";
+        }
+        else {
+            value = getDomNodeOrDie().getAttribute(attributeName);
+        }
+
         if (value == DomElement.ATTRIBUTE_NOT_DEFINED) {
-            if (getBrowserVersion().isIE()) {
+            value = null;
+            if (ie) {
                 for (Scriptable object = this; object != null; object = object.getPrototype()) {
                     final Object property = object.get(attributeName, this);
                     if (property != NOT_FOUND) {
-                        return property;
+                        value = property;
+                        break;
                     }
                 }
             }
-            return null;
         }
+
         return value;
     }
 

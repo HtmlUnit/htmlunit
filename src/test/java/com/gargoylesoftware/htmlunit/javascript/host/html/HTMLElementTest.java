@@ -126,6 +126,24 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(FF = "color: green;", IE = "")
+    public void getAttribute_styleAttributeWithFlag() throws Exception {
+        final String html =
+              "<html><body onload='test()'><div id='div' style='color: green;'>abc</div>\n"
+            + "<script>\n"
+            + "  function test(){\n"
+            + "    var div = document.getElementById('div');\n"
+            + "    alert(div.getAttribute('style', 2));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
      * Some libraries like MochiKit looks after the number of attributes of a freshly created node.
      * When this is fixed for IE, all {@link com.gargoylesoftware.htmlunit.libraries.MochiKitTest}
      * working for FF will work for IE too.

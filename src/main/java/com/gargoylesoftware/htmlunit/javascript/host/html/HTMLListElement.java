@@ -51,11 +51,11 @@ public class HTMLListElement extends HTMLElement {
      * {@inheritDoc}
      */
     @Override
-    public Object jsxFunction_getAttribute(final String attributeName) {
+    public Object jsxFunction_getAttribute(final String attributeName, final Integer flags) {
         if ("compact".equals(attributeName) && getBrowserVersion().isIE()) {
             return jsxGet_compact();
         }
-        return super.jsxFunction_getAttribute(attributeName);
+        return super.jsxFunction_getAttribute(attributeName, flags);
     }
 
 }
