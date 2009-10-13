@@ -653,6 +653,12 @@
             <artifactId>webdriver-htmlunit</artifactId>
             <version>0.9.7376</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>net.sourceforge.htmlunit</groupId>
+                    <artifactId>htmlunit</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.webdriver</groupId>
