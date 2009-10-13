@@ -1333,7 +1333,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return a new range
      * @see <a href="http://www.xulplanet.com/references/objref/HTMLDocument.html#method_createRange">XUL Planet</a>
      */
-    public Object jsxFunction_createRange() {
+    public Range jsxFunction_createRange() {
         final Range r = new Range(this);
         r.setParentScope(getWindow());
         r.setPrototype(getPrototype(Range.class));
@@ -1466,6 +1466,12 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the value of the "activeElement" property
      */
     public Object jsxGet_activeElement() {
+        if (activeElement_ == null) {
+            final HtmlElement body = getHtmlPage().getBody();
+            if (body != null) {
+                activeElement_ = (HTMLElement) getScriptableFor(body);
+            }
+        }
         return activeElement_;
     }
 

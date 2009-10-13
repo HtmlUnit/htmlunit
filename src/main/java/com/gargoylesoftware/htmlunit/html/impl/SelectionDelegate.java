@@ -26,24 +26,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.html;
+package com.gargoylesoftware.htmlunit.html.impl;
 
 import java.io.Serializable;
 
 import org.w3c.dom.ranges.Range;
 
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+
 /**
- * Contains standard selection-related functionality used by various input elements.
+ * <p>Contains standard selection-related functionality used by various input elements.</p>
+ *
+ * <p>From <a href="http://www.whatwg.org/specs/web-apps/current-work/#selection">the HTML5 spec</a>:</p>
+ *
+ * <blockquote>Mostly for historical reasons, in addition to the browsing context's selection, each
+ * textarea and input element has an independent selection. These are the text field selections.</blockquote>
  *
  * @version $Revision$
  * @author Daniel Gredler
  */
-class SelectionDelegate implements Serializable {
+public class SelectionDelegate implements Serializable {
 
     private static final long serialVersionUID = -5611492671640559880L;
 
     /** The owner element. */
     private final SelectableTextInput element_;
+
+    /** The field selection, which is independent of the browsing context's selection. */
+    private final Range selection_;
 
     /**
      * Creates a new instance for the specified element.
@@ -51,6 +62,7 @@ class SelectionDelegate implements Serializable {
      */
     public SelectionDelegate(final SelectableTextInput element) {
         element_ = element;
+        selection_ = new SimpleRange(element, element.getText().length());
     }
 
     /**
@@ -58,8 +70,8 @@ class SelectionDelegate implements Serializable {
      */
     public void select() {
         element_.focus();
-        element_.setSelectionStart(0);
-        element_.setSelectionEnd(element_.getText().length());
+        setSelectionStart(0);
+        setSelectionEnd(element_.getText().length());
     }
 
     /**
@@ -67,11 +79,7 @@ class SelectionDelegate implements Serializable {
      * @return the selected text in the owner element, or <tt>null</tt> if there is no selected text
      */
     public String getSelectedText() {
-        final Range selection = getSelectionInner();
-        if (selection != null) {
-            return element_.getText().substring(selection.getStartOffset(), selection.getEndOffset());
-        }
-        return null;
+        return selection_.toString();
     }
 
     /**
@@ -79,11 +87,7 @@ class SelectionDelegate implements Serializable {
      * @return the start position of the selected text in the owner element
      */
     public int getSelectionStart() {
-        final Range selection = getSelectionInner();
-        if (selection != null) {
-            return selection.getStartOffset();
-        }
-        return element_.getText().length();
+        return selection_.getStartOffset();
     }
 
     /**
@@ -91,18 +95,13 @@ class SelectionDelegate implements Serializable {
      * @param selectionStart the start position of the selected text in the owner element
      */
     public void setSelectionStart(int selectionStart) {
-        if (element_.getPage() instanceof HtmlPage) {
-            final HtmlPage page = (HtmlPage) element_.getPage();
-            final int length = element_.getText().length();
-            selectionStart = Math.max(0, Math.min(selectionStart, length));
-            page.getSelection().setStart(element_, selectionStart);
-            if (page.getSelection().getEndContainer() != element_) {
-                page.getSelection().setEnd(element_, length);
-            }
-            else if (page.getSelection().getEndOffset() < selectionStart) {
-                page.getSelection().setEnd(element_, selectionStart);
-            }
+        final int length = element_.getText().length();
+        selectionStart = Math.max(0, Math.min(selectionStart, length));
+        selection_.setStart(element_, selectionStart);
+        if (selection_.getEndOffset() < selectionStart) {
+            selection_.setEnd(element_, selectionStart);
         }
+        makeThisTheOnlySelectionIfEmulatingIE();
     }
 
     /**
@@ -110,11 +109,7 @@ class SelectionDelegate implements Serializable {
      * @return the end position of the selected text in the owner element
      */
     public int getSelectionEnd() {
-        final Range selection = getSelectionInner();
-        if (selection != null) {
-            return selection.getEndOffset();
-        }
-        return element_.getText().length();
+        return selection_.getEndOffset();
     }
 
     /**
@@ -122,28 +117,23 @@ class SelectionDelegate implements Serializable {
      * @param selectionEnd the end position of the selected text in the owner element
      */
     public void setSelectionEnd(int selectionEnd) {
-        if (element_.getPage() instanceof HtmlPage) {
-            final HtmlPage page = (HtmlPage) element_.getPage();
-            final int length = element_.getText().length();
-            selectionEnd = Math.min(length, Math.max(selectionEnd, 0));
-            page.getSelection().setEnd(element_, selectionEnd);
-            if (page.getSelection().getStartContainer() != element_) {
-                page.getSelection().setStart(element_, 0);
-            }
-            else if (page.getSelection().getStartOffset() > selectionEnd) {
-                page.getSelection().setStart(element_, selectionEnd);
-            }
+        final int length = element_.getText().length();
+        selectionEnd = Math.min(length, Math.max(selectionEnd, 0));
+        selection_.setEnd(element_, selectionEnd);
+        if (selection_.getStartOffset() > selectionEnd) {
+            selection_.setStart(element_, selectionEnd);
         }
+        makeThisTheOnlySelectionIfEmulatingIE();
     }
 
-    private Range getSelectionInner() {
-        if (element_.getPage() instanceof HtmlPage) {
-            final Range selection = ((HtmlPage) element_.getPage()).getSelection();
-            if (selection.getStartContainer() == element_ && selection.getEndContainer() == element_) {
-                return selection;
+    private void makeThisTheOnlySelectionIfEmulatingIE() {
+        final Page page = element_.getPage();
+        if (page instanceof HtmlPage) {
+            final HtmlPage htmlPage = (HtmlPage) page;
+            if (htmlPage.getWebClient().getBrowserVersion().isIE()) {
+                htmlPage.setSelectionRange(selection_);
             }
         }
-        return null;
     }
 
 }

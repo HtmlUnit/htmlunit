@@ -26,7 +26,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.html;
+package com.gargoylesoftware.htmlunit.html.impl;
 
 import org.w3c.dom.Node;
 
@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.Page;
  * @version $Revision$
  * @author Daniel Gredler
  */
-interface SelectableTextInput extends Node {
+public interface SelectableTextInput extends Node {
 
     /**
      * Returns the page which contains this element.
@@ -64,6 +64,12 @@ interface SelectableTextInput extends Node {
      * @return all of the text in this element
      */
     String getText();
+
+    /**
+     * Sets the text in this element.
+     * @param text the text to put in this element
+     */
+    void setText(String text);
 
     /**
      * Returns the selected text in this element, or <tt>null</tt> if there is no selected text in this element.

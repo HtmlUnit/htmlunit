@@ -16,8 +16,9 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
+import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
 
 /**
  * Wrapper for the HTML element "input" with type="text".
@@ -102,6 +103,13 @@ public class HtmlTextInput extends HtmlInput implements SelectableTextInput {
     /**
      * {@inheritDoc}
      */
+    public void setText(final String text) {
+        setValueAttribute(text);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public int getSelectionStart() {
         return selectionDelegate_.getSelectionStart();
     }
@@ -133,11 +141,7 @@ public class HtmlTextInput extends HtmlInput implements SelectableTextInput {
     @Override
     public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
-
-        // if value is changed and this element has the focus, then select the new value
-        final Page page = getPage();
-        if (qualifiedName.equals("value") && page instanceof HtmlPage
-                && ((HtmlPage) page).getFocusedElement() == this) {
+        if (qualifiedName.equals("value") && getPage() instanceof HtmlPage) {
             setSelectionStart(attributeValue.length());
             setSelectionEnd(attributeValue.length());
         }

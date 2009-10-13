@@ -2678,6 +2678,9 @@
         <property name="type" readable="true" writable="false">
             <browser name="Internet Explorer"/>
         </property>
+        <function name="addRange">
+            <browser name="Firefox"/>
+        </function>
         <function name="collapse">
             <browser name="Firefox"/>
         </function>
@@ -2697,6 +2700,12 @@
             <browser name="Firefox"/>
         </function>
         <function name="getRangeAt">
+            <browser name="Firefox"/>
+        </function>
+        <function name="removeAllRanges">
+            <browser name="Firefox"/>
+        </function>
+        <function name="removeRange">
             <browser name="Firefox"/>
         </function>
         <function name="selectAllChildren">
@@ -2748,12 +2757,14 @@
 
     <class name="TextRange" classname="com.gargoylesoftware.htmlunit.javascript.host.TextRange" JSObject="true">
         <browser name="Internet Explorer"/>
+        <property name="htmlText" readable="true" writable="false"/>
         <property name="text" readable="true" writable="true"/>
         <function name="collapse"/>
         <function name="duplicate"/>
         <function name="inRange"/>
         <function name="moveEnd"/>
         <function name="moveStart"/>
+        <function name="moveToElementText"/>
         <function name="parentElement"/>
         <function name="select"/>
     </class>

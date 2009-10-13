@@ -24,6 +24,7 @@ import org.apache.commons.collections.ListUtils;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
@@ -193,8 +194,8 @@ public class Range extends SimpleScriptable {
     }
 
     /**
-     * Collapse a Range onto one of its boundary-points.
-     * @param toStart If <code>true</code>, collapses the Range onto its start; else collapses it onto its end
+     * Collapse a Range onto one of its boundaries.
+     * @param toStart if <code>true</code>, collapses the Range onto its start; else collapses it onto its end
      */
     public void jsxFunction_collapse(final boolean toStart) {
         if (toStart) {
@@ -251,4 +252,14 @@ public class Range extends SimpleScriptable {
         HTMLElement.parseHtmlSnippet(fragment, true, valueAsString);
         return fragment.getScriptObject();
     }
+
+    /**
+     * Returns a W3C {@link org.w3c.dom.ranges.Range} version of this object.
+     * @return a W3C {@link org.w3c.dom.ranges.Range} version of this object
+     */
+    public org.w3c.dom.ranges.Range toW3C() {
+        return new SimpleRange(startContainer_.getDomNodeOrDie(), startOffset_,
+            endContainer_.getDomNodeOrDie(), endOffset_);
+    }
+
 }

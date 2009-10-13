@@ -22,16 +22,16 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.ranges.Range;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
-import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
+import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 /**
- * A JavaScript object for a TextRange.
- * Note: implementation is not complete at all (not even coherent), it just allows test to pass!
- * @see <a href="http://msdn2.microsoft.com/en-us/library/ms535872.aspx">MSDN doc</a>
+ * A JavaScript object for a TextRange (IE only).
+ *
+ * @see <a href="http://msdn2.microsoft.com/en-us/library/ms535872.aspx">MSDN documentation (1)</a>
+ * @see <a href="http://msdn2.microsoft.com/en-us/library/ms533042.aspx">MSDN documentation (2)</a>
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
@@ -41,14 +41,14 @@ public class TextRange extends SimpleScriptable {
     private static final long serialVersionUID = -3763822832184277966L;
     private static final Log LOG = LogFactory.getLog(TextRange.class);
 
-    private boolean collapsed_ = false; // minimal effort to support collapse()
+    /** The wrapped selection range. */
     private Range range_;
 
     /**
      * Default constructor used to build the prototype.
      */
     public TextRange() {
-        // nothing, used to instantiate the prototype
+        // Empty.
     }
 
     /**
@@ -71,25 +71,8 @@ public class TextRange extends SimpleScriptable {
      * Retrieves the text contained within the range.
      * @return the text contained within the range
      */
-    public Object jsxGet_text() {
-        if (collapsed_) {
-            return "";
-        }
-
-        final HtmlPage page = (HtmlPage) getWindow().getDomNodeOrDie();
-        final Range selection = page.getSelection();
-        // currently only working for text input and textarea
-        if (selection.getStartContainer() == selection.getEndContainer()) {
-            if (selection.getStartContainer() instanceof HtmlTextInput) {
-                final HtmlTextInput input = (HtmlTextInput) selection.getStartContainer();
-                return input.getValueAttribute().substring(input.getSelectionStart(), input.getSelectionEnd());
-            }
-            else if (selection.getStartContainer() instanceof HtmlTextArea) {
-                final HtmlTextArea input = (HtmlTextArea) selection.getStartContainer();
-                return input.getText().substring(input.getSelectionStart(), input.getSelectionEnd());
-            }
-        }
-        return "";
+    public String jsxGet_text() {
+        return range_.toString();
     }
 
     /**
@@ -97,36 +80,34 @@ public class TextRange extends SimpleScriptable {
      * @param text the text contained within the range
      */
     public void jsxSet_text(final String text) {
-        collapsed_ = false;
-        final HtmlPage page = (HtmlPage) getWindow().getDomNodeOrDie();
-        final Range selection = page.getSelection();
-        // currently only working for text input and textarea
-        if (selection.getStartContainer() == selection.getEndContainer()) {
-            if (selection.getStartContainer() instanceof HtmlTextInput) {
-                final HtmlTextInput input = (HtmlTextInput) selection.getStartContainer();
-                final String oldValue = input.getValueAttribute();
-                input.setValueAttribute(oldValue.substring(0, input.getSelectionStart()) + text
-                        + oldValue.substring(input.getSelectionEnd()));
-            }
-            else if (selection.getStartContainer() instanceof HtmlTextArea) {
-                final HtmlTextArea input = (HtmlTextArea) selection.getStartContainer();
-                final String oldValue = input.getText();
-                input.setText(oldValue.substring(0, input.getSelectionStart()) + text
-                        + oldValue.substring(input.getSelectionEnd()));
-            }
+        if (range_.getStartContainer() == range_.getEndContainer()
+            && range_.getStartContainer() instanceof SelectableTextInput) {
+            final SelectableTextInput input = (SelectableTextInput) range_.getStartContainer();
+            final String oldValue = input.getText();
+            input.setText(oldValue.substring(0, input.getSelectionStart()) + text
+                + oldValue.substring(input.getSelectionEnd()));
         }
     }
 
     /**
-     * Duplicates this instance.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536416.aspx">MSDN doc</a>
-     * @return a duplicate
+     * Retrieves the HTML fragment contained within the range.
+     * @return the HTML fragment contained within the range
+     */
+    public String jsxGet_htmlText() {
+        final org.w3c.dom.Node node = range_.getCommonAncestorContainer();
+        final HTMLElement element = (HTMLElement) getScriptableFor(node);
+        return element.jsxGet_outerHTML(); // TODO: not quite right, but good enough for now
+    }
+
+    /**
+     * Duplicates this TextRange instance.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536416.aspx">MSDN documentation</a>
+     * @return a duplicate of this TextRange instance
      */
     public Object jsxFunction_duplicate() {
-        final TextRange range = new TextRange();
+        final TextRange range = new TextRange(range_.cloneRange());
         range.setParentScope(getParentScope());
         range.setPrototype(getPrototype());
-        range.range_ = range_.cloneRange();
         return range;
     }
 
@@ -151,18 +132,17 @@ public class TextRange extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536371.aspx">MSDN doc</a>
      */
     public void jsxFunction_collapse(final boolean toStart) {
-        collapsed_ = true;
         range_.collapse(toStart);
     }
 
     /**
      * Makes the current range the active selection.
-     * Warning: dummy implementation!
      *
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536735.aspx">MSDN doc</a>
      */
     public void jsxFunction_select() {
-        // nothing yet
+        final HtmlPage page = (HtmlPage) getWindow().getDomNodeOrDie();
+        page.setSelectionRange(range_);
     }
 
     /**
@@ -172,25 +152,18 @@ public class TextRange extends SimpleScriptable {
      * @return the number of units moved
      */
     public int jsxFunction_moveStart(final String unit, final Object count) {
-        if ("characters".equals(unit)) {
-            LOG.info("moveStart('" + unit + "' is not yet supported.");
+        if (!"character".equals(unit)) {
+            LOG.warn("moveStart('" + unit + "') is not yet supported");
+            return 0;
         }
         int c = 1;
         if (count != Undefined.instance) {
             c = (int) Context.toNumber(count);
         }
-        final HtmlPage page = (HtmlPage) getWindow().getDomNodeOrDie();
-        final Range selection = page.getSelection();
-        // currently only working for text input and textarea
-        if (selection.getStartContainer() == selection.getEndContainer()) {
-            if (selection.getStartContainer() instanceof HtmlTextInput) {
-                final HtmlTextInput input = (HtmlTextInput) selection.getStartContainer();
-                selection.setStart(input, selection.getStartOffset() + c);
-            }
-            else if (selection.getStartContainer() instanceof HtmlTextArea) {
-                final HtmlTextArea input = (HtmlTextArea) selection.getStartContainer();
-                selection.setStart(input, selection.getStartOffset() + c);
-            }
+        if (range_.getStartContainer() == range_.getEndContainer()
+            && range_.getStartContainer() instanceof SelectableTextInput) {
+            final SelectableTextInput input = (SelectableTextInput) range_.getStartContainer();
+            range_.setStart(input, range_.getStartOffset() + c);
         }
         return c;
     }
@@ -202,27 +175,30 @@ public class TextRange extends SimpleScriptable {
      * @return the number of units moved
      */
     public int jsxFunction_moveEnd(final String unit, final Object count) {
-        if ("characters".equals(unit)) {
-            LOG.info("moveEnd('" + unit + "' is not yet supported.");
+        if (!"character".equals(unit)) {
+            LOG.warn("moveEnd('" + unit + "') is not yet supported");
+            return 0;
         }
         int c = 1;
         if (count != Undefined.instance) {
             c = (int) Context.toNumber(count);
         }
-        final HtmlPage page = (HtmlPage) getWindow().getDomNodeOrDie();
-        final Range selection = page.getSelection();
-        // currently only working for text input and textarea
-        if (selection.getStartContainer() == selection.getEndContainer()) {
-            if (selection.getStartContainer() instanceof HtmlTextInput) {
-                final HtmlTextInput input = (HtmlTextInput) selection.getStartContainer();
-                selection.setEnd(input, selection.getEndOffset() + c);
-            }
-            else if (selection.getStartContainer() instanceof HtmlTextArea) {
-                final HtmlTextArea input = (HtmlTextArea) selection.getStartContainer();
-                selection.setEnd(input, selection.getEndOffset() + c);
-            }
+        if (range_.getStartContainer() == range_.getEndContainer()
+            && range_.getStartContainer() instanceof SelectableTextInput) {
+            final SelectableTextInput input = (SelectableTextInput) range_.getStartContainer();
+            range_.setEnd(input, range_.getEndOffset() + c);
         }
         return c;
+    }
+
+    /**
+     * Moves the text range so that the start and end positions of the range encompass
+     * the text in the specified element.
+     * @param element the element to move to
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536630.aspx">MSDN Documentation</a>
+     */
+    public void jsxFunction_moveToElementText(final HTMLElement element) {
+        range_.selectNode(element.getDomNodeOrDie());
     }
 
     /**
@@ -257,4 +233,5 @@ public class TextRange extends SimpleScriptable {
 
         return false;
     }
+
 }

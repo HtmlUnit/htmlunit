@@ -69,6 +69,7 @@ import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParser.HtmlUnitDOMBuilder;
+import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
@@ -130,7 +131,7 @@ public class HtmlPage extends SgmlPage {
     private int inlineSnippetParserCount_;
     private List<HtmlAttributeChangeListener> attributeListeners_;
     private final Object lock_ = new String(); // used for synchronization
-    private Range selection_;
+    private List<Range> selectionRanges_ = new ArrayList< Range >(3);
     private final List<PostponedAction> afterLoadActions_ = new ArrayList<PostponedAction>();
     private boolean cleaning_;
     private HtmlBase base_;
@@ -1797,7 +1798,7 @@ public class HtmlPage extends SgmlPage {
             return true;
         }
         else if (newElement != null && newElement.getPage() != this) {
-            throw new IllegalArgumentException("Can't move focus to an element from an other page");
+            throw new IllegalArgumentException("Can't move focus to an element from a different page.");
         }
 
         final HtmlElement oldFocusedElement = elementWithFocus_;
@@ -1825,6 +1826,12 @@ public class HtmlPage extends SgmlPage {
         }
 
         elementWithFocus_ = newElement;
+
+        final boolean ie = getWebClient().getBrowserVersion().isIE();
+        if (ie && elementWithFocus_ instanceof SelectableTextInput) {
+            final SelectableTextInput sti = (SelectableTextInput) elementWithFocus_;
+            setSelectionRange(new SimpleRange(sti, sti.getSelectionStart(), sti, sti.getSelectionEnd()));
+        }
 
         if (elementWithFocus_ != null) {
             elementWithFocus_.focus();
@@ -2163,20 +2170,33 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * @return the current selection
+     * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
+     *
+     * <p>Returns the page's current selection ranges. Note that some browsers, like IE, only allow
+     * a single selection at a time.</p>
+     *
+     * @return the page's current selection ranges
      */
-    public Range getSelection() {
-        if (selection_ == null) {
-            selection_ = new SimpleRange();
-        }
-        return selection_;
+    public List<Range> getSelectionRanges() {
+        return selectionRanges_;
     }
 
     /**
-     * Returns all namespaces defined in the root element of this page.
-     * <p> The default namespace has a key of an empty string.
-     * @return namespaces
+     * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
+     *
+     * <p>Makes the specified selection range the *only* selection range on this page.</p>
+     *
+     * @param selectionRange the selection range
+     */
+    public void setSelectionRange(final Range selectionRange) {
+        selectionRanges_.clear();
+        selectionRanges_.add(selectionRange);
+    }
+
+    /**
+     * <p>Returns all namespaces defined in the root element of this page.</p>
+     * <p>The default namespace has a key of an empty string.</p>
+     * @return all namespaces defined in the root element of this page
      */
     public Map<String, String> getNamespaces() {
         final org.w3c.dom.NamedNodeMap attributes = getDocumentElement().getAttributes();
@@ -2204,7 +2224,7 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * Saves the current page with all images at the specified location.
+     * Saves the current page, with all images, to the specified location.
      * The default behavior removes all script elements.
      *
      * @param file file to write this page into

@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
@@ -182,8 +183,7 @@ public class Document extends EventNode {
                 if (page instanceof HtmlPage) {
                     final HtmlPage htmlPage = (HtmlPage) page;
                     final DomNode child = htmlPage.getBody().getFirstChild();
-                    htmlPage.getSelection().setStart(child, 0);
-                    htmlPage.getSelection().collapse(true);
+                    htmlPage.setSelectionRange(new SimpleRange(child, 0));
                 }
             }
             else if ("off".equalsIgnoreCase(mode)) {

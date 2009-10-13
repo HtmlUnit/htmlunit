@@ -224,4 +224,25 @@ public class TextRangeTest extends WebTestCase {
             + "</body></html>";
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.IE)
+    @Alerts("s3 foo <SPAN id=s3>foo</SPAN>")
+    public void moveToElementText() throws Exception {
+        final String html = "<html><body onload='test()'>\n"
+            + "<span id='s1'>abc</span><span id='s2'>xyz</span><span id='s3'>foo</span>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var r = document.selection.createRange();\n"
+            + "    r.moveToElementText(document.getElementById('s3'));\n"
+            + "    alert(r.parentElement().id + ' ' + r.text + ' ' + r.htmlText);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }

@@ -2283,7 +2283,7 @@ public class HTMLElementTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.IE)
-    @Alerts({"[object]", "text1", "[object]", "onfocus text2", "text2", "onfocus text1", "onfocus text2" })
+    @Alerts({"body1", "button1", "text1", "[object]", "onfocus text2", "text2", "onfocus text1", "onfocus text2" })
     public void setActiveAndFocus() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
@@ -2293,25 +2293,25 @@ public class HTMLElementTest extends WebTestCase {
 
         final String firstHtml = "<html><head><title>First</title>\n"
             + "<script>var win2;</script></head>\n"
-            + "<body><form name='form1'>\n"
+            + "<body id='body1' onload='alert(document.activeElement.id)'><form name='form1'>\n"
             + "<input id='text1' onfocus='alert(\"onfocus text1\");win2.focus();'>\n"
             + "<button id='button1' onClick='win2=window.open(\"" + URL_SECOND + "\");'>Click me</a>\n"
             + "</form></body></html>";
         webConnection.setResponse(URL_FIRST, firstHtml);
 
         final String secondHtml = "<html><head><title>Second</title></head>\n"
-            + "<body>\n"
+            + "<body id='body2'>\n"
             + "<input id='text2' onfocus='alert(\"onfocus text2\")'>\n"
             + "<button id='button2' onClick='doTest();'>Click me</a>\n"
             + "<script>\n"
             + "     function doTest() {\n"
-            + "         alert(opener.document.activeElement);\n"
+            + "         alert(opener.document.activeElement.id);\n"
             + "         opener.document.getElementById('text1').setActive();\n"
             + "         alert(opener.document.activeElement.id);\n"
             + "         alert(document.activeElement);\n"
             + "         document.getElementById('text2').setActive();\n"
             + "         alert(document.activeElement.id);\n"
-            + "         opener.focus();"
+            + "         opener.focus();\n"
             + "    }\n"
             + "</script></body></html>";
         webConnection.setResponse(URL_SECOND, secondHtml);

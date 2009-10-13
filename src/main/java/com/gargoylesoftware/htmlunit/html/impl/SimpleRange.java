@@ -16,50 +16,89 @@ package com.gargoylesoftware.htmlunit.html.impl;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.mutable.MutableBoolean;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.DocumentFragment;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.ranges.Range;
 import org.w3c.dom.ranges.RangeException;
 
-import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.gargoylesoftware.htmlunit.html.DomText;
 
 /**
  * Simple implementation of {@link Range}.
+ *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Daniel Gredler
  */
 public class SimpleRange implements Range, Serializable {
 
     private static final long serialVersionUID = 5779974839466976193L;
 
-    private org.w3c.dom.Node startContainer_, endContainer_;
-    private int startOffset_, endOffset_;
+    /** The start (anchor) container. */
+    private Node startContainer_;
+
+    /** The end (focus) container. */
+    private Node endContainer_;
+
+    /**
+     * The start (anchor) offset; units are chars if the start container is a text node or an
+     * input element, DOM nodes otherwise.
+     */
+    private int startOffset_;
+
+    /**
+     * The end (focus) offset; units are chars if the end container is a text node or an input
+     * element, DOM nodes otherwise.
+     */
+    private int endOffset_;
 
     /**
      * Constructs a range without any content.
      */
     public SimpleRange() {
-        // nothing
+        // Empty.
     }
 
     /**
-     * Constructs a range for the provided element.
-     * @param domElement the element for the range
+     * Constructs a range for the specified element.
+     * @param node the node for the range
      */
-    public SimpleRange(final DomElement domElement) {
-        startContainer_ = domElement;
-        endContainer_ = domElement;
+    public SimpleRange(final Node node) {
+        startContainer_ = node;
+        endContainer_ = node;
         startOffset_ = 0;
-        endOffset_ = domElement.getTextContent().length();
+        endOffset_ = getMaxOffset(node);
     }
 
-    private SimpleRange(final SimpleRange other) {
-        startContainer_ = other.getStartContainer();
-        endContainer_ = other.getEndContainer();
-        startOffset_ = other.getStartOffset();
-        endOffset_ = other.getEndOffset();
+    /**
+     * Constructs a range for the provided element and start and end offset.
+     * @param node the node for the range
+     * @param offset the start and end offset
+     */
+    public SimpleRange(final Node node, final int offset) {
+        startContainer_ = node;
+        endContainer_ = node;
+        startOffset_ = offset;
+        endOffset_ = offset;
+    }
+
+    /**
+     * Constructs a range for the provided elements and offsets.
+     * @param startNode the start node
+     * @param startOffset the start offset
+     * @param endNode the end node
+     * @param endOffset the end offset
+     */
+    public SimpleRange(final Node startNode, final int startOffset, final Node endNode, final int endOffset) {
+        startContainer_ = startNode;
+        endContainer_ = endNode;
+        startOffset_ = startOffset;
+        endOffset_ = endOffset;
     }
 
     /**
@@ -73,7 +112,7 @@ public class SimpleRange implements Range, Serializable {
      * {@inheritDoc}
      */
     public Range cloneRange() throws DOMException {
-        return new SimpleRange(this);
+        return new SimpleRange(this.startContainer_, this.startOffset_, this.endContainer_, this.endOffset_);
     }
 
     /**
@@ -128,10 +167,10 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
-    public org.w3c.dom.Node getCommonAncestorContainer() throws DOMException {
+    public Node getCommonAncestorContainer() throws DOMException {
         if (startContainer_ != null && endContainer_ != null) {
-            for (org.w3c.dom.Node p1 = startContainer_; p1 != null; p1 = p1.getParentNode()) {
-                for (org.w3c.dom.Node p2 = endContainer_; p2 != null; p2 = p2.getParentNode()) {
+            for (Node p1 = startContainer_; p1 != null; p1 = p1.getParentNode()) {
+                for (Node p2 = endContainer_; p2 != null; p2 = p2.getParentNode()) {
                     if (p1 == p2) {
                         return p1;
                     }
@@ -144,7 +183,7 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
-    public org.w3c.dom.Node getEndContainer() throws DOMException {
+    public Node getEndContainer() throws DOMException {
         return endContainer_;
     }
 
@@ -158,7 +197,7 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
-    public org.w3c.dom.Node getStartContainer() throws DOMException {
+    public Node getStartContainer() throws DOMException {
         return startContainer_;
     }
 
@@ -172,34 +211,34 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
-    public void insertNode(final org.w3c.dom.Node newNode) throws DOMException, RangeException {
+    public void insertNode(final Node newNode) throws DOMException, RangeException {
         throw new RuntimeException("Not implemented!");
     }
 
     /**
      * {@inheritDoc}
      */
-    public void selectNode(final org.w3c.dom.Node refNode) throws RangeException, DOMException {
-        startContainer_ = refNode;
+    public void selectNode(final Node node) throws RangeException, DOMException {
+        startContainer_ = node;
         startOffset_ = 0;
-        endContainer_ = refNode;
-        endOffset_ = refNode.getTextContent().length();
+        endContainer_ = node;
+        endOffset_ = getMaxOffset(node);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void selectNodeContents(final org.w3c.dom.Node refNode) throws RangeException, DOMException {
-        startContainer_ = refNode.getFirstChild();
+    public void selectNodeContents(final Node node) throws RangeException, DOMException {
+        startContainer_ = node.getFirstChild();
         startOffset_ = 0;
-        endContainer_ = refNode.getLastChild();
-        endOffset_ = refNode.getLastChild().getTextContent().length();
+        endContainer_ = node.getLastChild();
+        endOffset_ = getMaxOffset(node.getLastChild());
     }
 
     /**
      * {@inheritDoc}
      */
-    public void setEnd(final org.w3c.dom.Node refNode, final int offset) throws RangeException, DOMException {
+    public void setEnd(final Node refNode, final int offset) throws RangeException, DOMException {
         endContainer_ = refNode;
         endOffset_ = offset;
     }
@@ -207,21 +246,21 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
-    public void setEndAfter(final org.w3c.dom.Node refNode) throws RangeException, DOMException {
+    public void setEndAfter(final Node refNode) throws RangeException, DOMException {
         throw new RuntimeException("Not implemented!");
     }
 
     /**
      * {@inheritDoc}
      */
-    public void setEndBefore(final org.w3c.dom.Node refNode) throws RangeException, DOMException {
+    public void setEndBefore(final Node refNode) throws RangeException, DOMException {
         throw new RuntimeException("Not implemented!");
     }
 
     /**
      * {@inheritDoc}
      */
-    public void setStart(final org.w3c.dom.Node refNode, final int offset) throws RangeException, DOMException {
+    public void setStart(final Node refNode, final int offset) throws RangeException, DOMException {
         startContainer_ = refNode;
         startOffset_ = offset;
     }
@@ -229,22 +268,50 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
-    public void setStartAfter(final org.w3c.dom.Node refNode) throws RangeException, DOMException {
+    public void setStartAfter(final Node refNode) throws RangeException, DOMException {
         throw new RuntimeException("Not implemented!");
     }
 
     /**
      * {@inheritDoc}
      */
-    public void setStartBefore(final org.w3c.dom.Node refNode) throws RangeException, DOMException {
+    public void setStartBefore(final Node refNode) throws RangeException, DOMException {
         throw new RuntimeException("Not implemented!");
     }
 
     /**
      * {@inheritDoc}
      */
-    public void surroundContents(final org.w3c.dom.Node newParent) throws DOMException, RangeException {
+    public void surroundContents(final Node newParent) throws DOMException, RangeException {
         throw new RuntimeException("Not implemented!");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (!(obj instanceof SimpleRange)) {
+            return false;
+        }
+        final SimpleRange other = (SimpleRange) obj;
+        return new EqualsBuilder()
+            .append(startContainer_, other.startContainer_)
+            .append(endContainer_, other.endContainer_)
+            .append(startOffset_, other.startOffset_)
+            .append(endOffset_, other.endOffset_).isEquals();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+            .append(startContainer_)
+            .append(endContainer_)
+            .append(startOffset_)
+            .append(endOffset_).toHashCode();
     }
 
     /**
@@ -253,44 +320,49 @@ public class SimpleRange implements Range, Serializable {
      */
     @Override
     public String toString() {
-        final org.w3c.dom.Node ancestor = getCommonAncestorContainer();
         final StringBuilder sb = new StringBuilder();
+        final Node ancestor = getCommonAncestorContainer();
         if (ancestor != null) {
-            getText(ancestor, sb, new MutableBoolean(false));
+            if (ancestor == startContainer_) {
+                append(sb, ancestor, startOffset_, endOffset_);
+            }
+            else {
+                append(sb, ancestor, new MutableBoolean(false));
+            }
         }
         return sb.toString();
     }
 
-    private boolean getText(final org.w3c.dom.Node node, final StringBuilder sb, final MutableBoolean started) {
+    private boolean append(final StringBuilder sb, final Node node, final MutableBoolean started) {
         final NodeList children = node.getChildNodes();
         for (int i = 0; i < children.getLength(); i++) {
-            final org.w3c.dom.Node child = children.item(i);
+            final Node child = children.item(i);
             if (started.booleanValue()) {
                 if (child == endContainer_) {
                     // We're finished getting text.
-                    sb.append(endContainer_.getTextContent().substring(0, endOffset_));
+                    append(sb, child, 0, endOffset_);
                     return true;
                 }
                 // We're in the middle of getting text.
                 if (child.hasChildNodes()) {
-                    final boolean stop = getText(child, sb, started);
+                    final boolean stop = append(sb, child, started);
                     if (stop) {
                         return true;
                     }
                 }
                 else {
-                    sb.append(child.getTextContent());
+                    sb.append(getText(child));
                 }
             }
             else {
                 started.setValue(child == startContainer_);
                 if (started.booleanValue()) {
                     // We're starting to get text.
-                    sb.append(startContainer_.getTextContent().substring(startOffset_));
+                    append(sb, child, startOffset_, null);
                 }
                 else {
                     // We're still haven't started getting text.
-                    final boolean stop = getText(child, sb, started);
+                    final boolean stop = append(sb, child, started);
                     if (stop) {
                         return true;
                     }
@@ -299,4 +371,44 @@ public class SimpleRange implements Range, Serializable {
         }
         return false;
     }
+
+    private static void append(final StringBuilder sb, final Node node, final int startOffset, Integer endOffset) {
+        if (isOffsetChars(node)) {
+            // Offset units are chars.
+            if (endOffset != null) {
+                sb.append(getText(node).substring(startOffset, endOffset));
+            }
+            else {
+                sb.append(getText(node).substring(startOffset));
+            }
+        }
+        else {
+            // Offset units are DOM nodes.
+            final NodeList children = node.getChildNodes();
+            if (endOffset == null) {
+                endOffset = children.getLength();
+            }
+            for (int j = startOffset; j < endOffset; j++) {
+                sb.append(getText(children.item(j)));
+            }
+        }
+    }
+
+    private static boolean isOffsetChars(final Node node) {
+        return node instanceof DomText || node instanceof SelectableTextInput;
+    }
+
+    private static String getText(final Node node) {
+        if (node instanceof SelectableTextInput) {
+            return ((SelectableTextInput) node).getText();
+        }
+        else {
+            return node.getTextContent();
+        }
+    }
+
+    private static int getMaxOffset(final Node node) {
+        return isOffsetChars(node) ? getText(node).length() : node.getChildNodes().getLength();
+    }
+
 }

@@ -17,9 +17,9 @@ package com.gargoylesoftware.htmlunit.html;
 import java.io.PrintWriter;
 import java.util.Map;
 
-import org.w3c.dom.ranges.Range;
-
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
+import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -404,17 +404,14 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     public void focus() {
         super.focus();
         valueAtFocus_ = getText();
-        if (getPage() instanceof HtmlPage) {
-            final Range selection = ((HtmlPage) getPage()).getSelection();
-            selection.setStart(this, getText().length());
-            selection.setEnd(this, getText().length());
-        }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     void removeFocus() {
         super.removeFocus();
-
         if (!valueAtFocus_.equals(getText())) {
             HtmlInput.executeOnChangeHandlerIfAppropriate(this);
         }

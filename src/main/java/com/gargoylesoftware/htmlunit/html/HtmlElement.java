@@ -1122,8 +1122,9 @@ public abstract class HtmlElement extends DomElement {
      * Sets the focus on this element.
      */
     public void focus() {
-        ((HtmlPage) getPage()).setFocusedElement(this);
-        final WebClient webClient = getPage().getWebClient();
+        final HtmlPage page = (HtmlPage) getPage();
+        page.setFocusedElement(this);
+        final WebClient webClient = page.getWebClient();
         if (webClient.getBrowserVersion().isIE()) {
             final HTMLElement jsElt = (HTMLElement) getScriptObject();
             jsElt.jsxFunction_setActive();

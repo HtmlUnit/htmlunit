@@ -6,6 +6,15 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, (initial)??? IE8 support">
+            <action type="fix" dev="sdanig">
+                JavaScript: document.activeElement is the document body by default (IE only).
+            </action>
+            <action type="fix" dev="sdanig">
+                JavaScript: add support for selection.addRange(), selection.removeAllRanges() and selection.removeRange() (FF only).
+            </action>
+            <action type="fix" dev="sdanig" issue="2874300">
+                JavaScript: add support for TextRange.htmlText and TextRange.moveToElementText (IE only).
+            </action>
             <action type="fix" dev="asashour" issue="2856764">
                 JavaScript: handle namespaces when serializing XML.
             </action>

@@ -14,10 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.util.List;
+
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 import org.w3c.dom.ranges.Range;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -42,7 +46,11 @@ public class Selection extends SimpleScriptable {
     public Object getDefaultValue(final Class< ? > hint) {
         final boolean ff = getBrowserVersion().isFirefox();
         if (ff && (String.class.equals(hint) || hint == null)) {
-            return getPageSelection().toString();
+            final StringBuilder sb = new StringBuilder();
+            for (Range r : getRanges()) {
+                sb.append(r.toString());
+            }
+            return sb.toString();
         }
         return super.getDefaultValue(hint);
     }
@@ -52,7 +60,11 @@ public class Selection extends SimpleScriptable {
      * @return the node in which the selection begins
      */
     public Node jsxGet_anchorNode() {
-        return (Node) getScriptableNullSafe(getPageSelection().getStartContainer());
+        final Range last = getLastRange();
+        if (last == null) {
+            return null;
+        }
+        return (Node) getScriptableNullSafe(last.getStartContainer());
     }
 
     /**
@@ -60,7 +72,11 @@ public class Selection extends SimpleScriptable {
      * @return the number of characters that the selection's anchor is offset within the anchor node
      */
     public int jsxGet_anchorOffset() {
-        return getPageSelection().getStartOffset();
+        final Range last = getLastRange();
+        if (last == null) {
+            return 0;
+        }
+        return last.getStartOffset();
     }
 
     /**
@@ -68,7 +84,11 @@ public class Selection extends SimpleScriptable {
      * @return the node in which the selection ends
      */
     public Node jsxGet_focusNode() {
-        return (Node) getScriptableNullSafe(getPageSelection().getEndContainer());
+        final Range last = getLastRange();
+        if (last == null) {
+            return null;
+        }
+        return (Node) getScriptableNullSafe(last.getEndContainer());
     }
 
     /**
@@ -76,7 +96,11 @@ public class Selection extends SimpleScriptable {
      * @return the number of characters that the selection's focus is offset within the focus node
      */
     public int jsxGet_focusOffset() {
-        return getPageSelection().getEndOffset();
+        final Range last = getLastRange();
+        if (last == null) {
+            return 0;
+        }
+        return last.getEndOffset();
     }
 
     /**
@@ -84,7 +108,8 @@ public class Selection extends SimpleScriptable {
      * @return a boolean indicating whether the selection's start and end points are at the same position
      */
     public boolean jsxGet_isCollapsed() {
-        return getPageSelection().getCollapsed();
+        final List<Range> ranges = getRanges();
+        return (ranges.isEmpty() || (ranges.size() == 1 && ranges.get(0).getCollapsed()));
     }
 
     /**
@@ -92,12 +117,7 @@ public class Selection extends SimpleScriptable {
      * @return the number of ranges in the selection
      */
     public int jsxGet_rangeCount() {
-        final Range r = getPageSelection();
-        final boolean valid = (r.getStartContainer() != null && r.getEndContainer() != null);
-        if (valid) {
-            return 1;
-        }
-        return 0;
+        return getRanges().size();
     }
 
     /**
@@ -109,43 +129,99 @@ public class Selection extends SimpleScriptable {
     }
 
     /**
-     * Collapses the current selection to a single point. The document is not modified.
-     * @param parentNode the caret location will be within this node
-     * @param offset the caret will be placed this number of characters from the beginning of the parentNode's text
-     */
-    public void jsxFunction_collapse(final Node parentNode, final int offset) {
-        final Range selection = getPageSelection();
-        selection.setStart(parentNode.getDomNodeOrDie(), offset);
-        selection.setEnd(parentNode.getDomNodeOrDie(), offset);
-    }
-
-    /**
-     * Moves the anchor of the selection to the same point as the focus. The focus does not move.
-     */
-    public void jsxFunction_collapseToEnd() {
-        getPageSelection().collapse(false);
-    }
-
-    /**
-     * Moves the focus of the selection to the same point at the anchor. The anchor does not move.
-     */
-    public void jsxFunction_collapseToStart() {
-        getPageSelection().collapse(true);
-    }
-
-    /**
-     * Creates a TextRange object from the current text selection.
+     * Creates a TextRange object from the current text selection (IE only).
      * @return the created TextRange object
      */
     public TextRange jsxFunction_createRange() {
-        final TextRange range = new TextRange(getPageSelection());
+        final TextRange range;
+        final Range first = getFirstRange();
+        if (first != null) {
+            range = new TextRange(first);
+        }
+        else {
+            range = new TextRange(new SimpleRange());
+        }
         range.setParentScope(getParentScope());
         range.setPrototype(getPrototype(range.getClass()));
         return range;
     }
 
     /**
-     * Cancels the current selection, sets the selection type to none, and sets the item property to null.
+     * Adds a range to the selection.
+     * @param range the range to add
+     */
+    public void jsxFunction_addRange(final com.gargoylesoftware.htmlunit.javascript.host.Range range) {
+        getRanges().add(range.toW3C());
+    }
+
+    /**
+     * Removes a range from the selection.
+     * @param range the range to remove
+     */
+    public void jsxFunction_removeRange(final com.gargoylesoftware.htmlunit.javascript.host.Range range) {
+        getRanges().remove(range.toW3C());
+    }
+
+    /**
+     * Removes all ranges from the selection.
+     */
+    public void jsxFunction_removeAllRanges() {
+        getRanges().clear();
+    }
+
+    /**
+     * Returns the range at the specified index.
+     *
+     * @param index the index of the range to return
+     * @return the range at the specified index
+     */
+    public Range jsxFunction_getRangeAt(final int index) {
+        final List<Range> ranges = getRanges();
+        if (index < 0 || index >= ranges.size()) {
+            throw Context.reportRuntimeError("Invalid range index: " + index);
+        }
+        return ranges.get(index);
+    }
+
+    /**
+     * Collapses the current selection to a single point. The document is not modified.
+     * @param parentNode the caret location will be within this node
+     * @param offset the caret will be placed this number of characters from the beginning of the parentNode's text
+     */
+    public void jsxFunction_collapse(final Node parentNode, final int offset) {
+        final List<Range> ranges = getRanges();
+        ranges.clear();
+        ranges.add(new SimpleRange(parentNode.getDomNodeOrDie(), offset));
+    }
+
+    /**
+     * Moves the anchor of the selection to the same point as the focus. The focus does not move.
+     */
+    public void jsxFunction_collapseToEnd() {
+        final Range last = getLastRange();
+        if (last != null) {
+            final List<Range> ranges = getRanges();
+            ranges.clear();
+            ranges.add(last);
+            last.collapse(false);
+        }
+    }
+
+    /**
+     * Moves the focus of the selection to the same point at the anchor. The anchor does not move.
+     */
+    public void jsxFunction_collapseToStart() {
+        final Range first = getFirstRange();
+        if (first != null) {
+            final List<Range> ranges = getRanges();
+            ranges.clear();
+            ranges.add(first);
+            first.collapse(true);
+        }
+    }
+
+    /**
+     * Cancels the current selection, sets the selection type to none, and sets the item property to null (IE only).
      */
     public void jsxFunction_empty() {
         type_ = "None";
@@ -157,8 +233,10 @@ public class Selection extends SimpleScriptable {
      * @param offset the number of characters from the beginning of parentNode's text the focus will be placed
      */
     public void jsxFunction_extend(final Node parentNode, final int offset) {
-        final Range selection = getPageSelection();
-        selection.setEnd(parentNode.getDomNodeOrDie(), offset);
+        final Range last = getLastRange();
+        if (last != null) {
+            last.setEnd(parentNode.getDomNodeOrDie(), offset);
+        }
     }
 
     /**
@@ -166,36 +244,60 @@ public class Selection extends SimpleScriptable {
      * @param parentNode all children of parentNode will be selected; parentNode itself is not part of the selection
      */
     public void jsxFunction_selectAllChildren(final Node parentNode) {
-        final Range selection = getPageSelection();
-        selection.selectNodeContents(parentNode.getDomNodeOrDie());
+        final List<Range> ranges = getRanges();
+        ranges.clear();
+        ranges.add(new SimpleRange(parentNode.getDomNodeOrDie()));
     }
 
     /**
-     * Returns the range at the specified index. Note that the HtmlUnit DOM only supports a single range,
-     * but multiple ranges can be created via JavaScript.
-     *
-     * TODO: This method does not currently support indices > 0, but such indices should probably return
-     * ranges created programmatically via createRange().
-     *
-     * @param index the index of the range to return
-     * @return the range at the specified index
+     * Returns the current HtmlUnit DOM selection ranges.
+     * @return the current HtmlUnit DOM selection ranges
      */
-    public Range jsxFunction_getRangeAt(final int index) {
-        final Range r = getPageSelection();
-        final boolean valid = (r.getStartContainer() != null && r.getEndContainer() != null);
-        if (!valid || index < 0 || index > 0) {
-            throw Context.reportRuntimeError("Invalid range index: " + index);
-        }
-        return r;
-    }
-
-    /**
-     * Returns the current HtmlUnit DOM selection range.
-     * @return the current HtmlUnit DOM selection range
-     */
-    private Range getPageSelection() {
+    private List<Range> getRanges() {
         final HtmlPage page = (HtmlPage) getWindow().getDomNodeOrDie();
-        return page.getSelection();
+        return page.getSelectionRanges();
+    }
+
+    /**
+     * Returns the first selection range in the current document, by document position.
+     * @return the first selection range in the current document, by document position
+     */
+    private Range getFirstRange() {
+        Range first = null;
+        for (final Range range : getRanges()) {
+            if (first == null) {
+                first = range;
+            }
+            else {
+                final org.w3c.dom.Node firstStart = first.getStartContainer();
+                final org.w3c.dom.Node rangeStart = range.getStartContainer();
+                if ((firstStart.compareDocumentPosition(rangeStart) & Node.DOCUMENT_POSITION_PRECEDING) != 0) {
+                    first = range;
+                }
+            }
+        }
+        return first;
+    }
+
+    /**
+     * Returns the last selection range in the current document, by document position.
+     * @return the last selection range in the current document, by document position
+     */
+    private Range getLastRange() {
+        Range last = null;
+        for (final Range range : getRanges()) {
+            if (last == null) {
+                last = range;
+            }
+            else {
+                final org.w3c.dom.Node lastStart = last.getStartContainer();
+                final org.w3c.dom.Node rangeStart = range.getStartContainer();
+                if ((lastStart.compareDocumentPosition(rangeStart) & Node.DOCUMENT_POSITION_FOLLOWING) != 0) {
+                    last = range;
+                }
+            }
+        }
+        return last;
     }
 
     /**

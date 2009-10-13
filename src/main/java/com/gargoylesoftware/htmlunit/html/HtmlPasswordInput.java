@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
+import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
 
 /**
  * Wrapper for the HTML element "input".
@@ -83,6 +85,13 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
      */
     public String getText() {
         return getValueAttribute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setText(final String text) {
+        setValueAttribute(text);
     }
 
     /**

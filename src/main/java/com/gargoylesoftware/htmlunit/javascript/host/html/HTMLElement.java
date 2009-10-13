@@ -2002,8 +2002,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Creates a TextRange object for the element.
-     * @return TextRange object if successful, or null otherwise.
+     * Creates a new TextRange object for this element.
+     * @return a new TextRange object for this element
      */
     public Object jsxFunction_createTextRange() {
         final TextRange range = new TextRange(this);
