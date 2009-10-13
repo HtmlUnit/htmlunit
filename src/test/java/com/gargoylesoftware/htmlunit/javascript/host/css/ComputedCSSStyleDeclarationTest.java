@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link ComputedCSSStyleDeclaration}.
@@ -472,6 +473,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @NotYetImplemented
     @Alerts(FF = { "200px,400px", "200,400", "200px,400px", "50%,25%", "100,100", "100px,100px" },
             IE = { "200px,400px", "200,400", "200px,400px", "50%,25%", "100,100", "50%,25%" })
     public void widthAndHeightPercentages() throws Exception {
