@@ -42,6 +42,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     private static final long serialVersionUID = -1883166331827717255L;
 
+    private static final int DEFAULT_WIDTH = 1256;
+    private static final int DEFAULT_HEIGHT = 363;
+
     /**
      * Local modifications maintained here rather than in the element. We use a sorted
      * map so that results are deterministic and thus easily testable.
@@ -530,9 +533,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_height() {
-        return pixelString(getElement(), new CssValue() {
-            @Override public String get(final CSSStyleDeclaration style) {
-                return defaultIfEmpty(style.jsxGet_height(), "363px");
+        return pixelString(getElement(), new CssValue(DEFAULT_HEIGHT + "px") {
+            @Override public String get(final ComputedCSSStyleDeclaration style) {
+                return style.getStyleAttribute("height", true);
             }
         });
     }
@@ -1166,11 +1169,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             defaultWidth = "auto";
         }
         else {
-            defaultWidth = "1256px";
+            defaultWidth = DEFAULT_WIDTH + "px";
         }
-        return pixelString(getElement(), new CssValue() {
-            @Override public String get(final CSSStyleDeclaration style) {
-                return defaultIfEmpty(style.jsxGet_width(), defaultWidth);
+        return pixelString(getElement(), new CssValue(defaultWidth) {
+            @Override public String get(final ComputedCSSStyleDeclaration style) {
+                return style.getStyleAttribute("width", true);
             }
         });
     }
@@ -1200,11 +1203,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 final HTMLElement parentJS = (HTMLElement) parent.getScriptObject();
                 final String parentWidth = getWindow().jsxFunction_getComputedStyle(parentJS, null).jsxGet_width();
                 if (getBrowserVersion().isIE() && "auto".equals(parentWidth)) {
-                    width = 1256; // this is our standard default width
+                    width = DEFAULT_WIDTH;
                 }
                 else {
-                    width = pixelValue(parentJS, new CssValue() {
-                        @Override public String get(ComputedCSSStyleDeclaration style) {
+                    width = pixelValue(parentJS, new CssValue(DEFAULT_WIDTH + "px") {
+                        @Override public String get(final ComputedCSSStyleDeclaration style) {
                             return style.jsxGet_width();
                         }
                     });
@@ -1213,9 +1216,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
         else {
             // Width explicitly set in the style attribute, or there was no parent to provide guidance.
-            width = pixelValue(getElement(), new CssValue() {
-                @Override public String get(CSSStyleDeclaration style) {
-                    return style.jsxGet_width();
+            width = pixelValue(getElement(), new CssValue(DEFAULT_WIDTH + "px") {
+                @Override public String get(final ComputedCSSStyleDeclaration style) {
+                    return style.getStyleAttribute("width", true);
                 }
             });
             if (includeBorder) {
@@ -1242,9 +1245,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         if ("none".equals(jsxGet_display())) {
             return 0;
         }
-        int height = pixelValue(getElement(), new CssValue() {
-            @Override public String get(CSSStyleDeclaration style) {
-                return style.jsxGet_height();
+        int height = pixelValue(getElement(), new CssValue(DEFAULT_HEIGHT + "px") {
+            @Override public String get(final ComputedCSSStyleDeclaration style) {
+                return style.getStyleAttribute("height", true);
             }
         });
         if (includeBorder) {

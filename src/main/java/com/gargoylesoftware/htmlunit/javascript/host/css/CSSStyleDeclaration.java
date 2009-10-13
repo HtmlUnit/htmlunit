@@ -4594,20 +4594,34 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * the style attribute to be retrieved is computed or not.
      */
     protected abstract class CssValue {
+        private final String defaultValue_;
+        /**
+         * Creates a new instance.
+         * @param defaultValue the default value to use if no value is available
+         */
+        public CssValue(final String defaultValue) {
+            defaultValue_ = defaultValue;
+        }
         /**
          * Returns the CSS attribute value for the specified element.
          * @param element the element for which the CSS attribute value is to be retrieved
          * @return the CSS attribute value for the specified element
          */
         public final String get(final HTMLElement element) {
+            if(element == null) {
+                return defaultValue_;
+            }
             final CSSStyleDeclaration style1 = element.jsxGet_style();
             String value = get(style1);
             if (value == null) {
                 final Window window = element.getWindow();
                 final ComputedCSSStyleDeclaration style2 = window.jsxFunction_getComputedStyle(element, null);
                 value = get(style2);
+                if (value == null) {
+                    value = defaultValue_;
+                }
             }
-            return value;
+            return StringUtils.defaultIfEmpty(value, defaultValue_);
         }
         /**
          * Returns the CSS attribute value from the specified style. Intended to be overridden.
