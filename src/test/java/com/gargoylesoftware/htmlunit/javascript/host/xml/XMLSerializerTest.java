@@ -250,4 +250,36 @@ public class XMLSerializerTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "<root><my:parent xmlns:my=\"myUri\"><my:child/><another_child/></my:parent></root>",
+            IE = "<root><my:parent xmlns:my=\"myUri\"><my:child/><another_child/></my:parent></root>\r\n")
+    public void namespace() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    var root = doc.createElement('root');\n"
+            + "    doc.appendChild(root);\n"
+            + "    var parent = createNS(doc, 'my:parent', 'myUri');\n"
+            + "    root.appendChild(parent);\n"
+            + "    parent.appendChild(createNS(doc, 'my:child', 'myUri'));\n"
+            + "    parent.appendChild(doc.createElement('another_child'));\n"
+            + "    alert(document.all ? doc.xml : new XMLSerializer().serializeToString(doc));\n"
+            + "  }\n"
+            + "  function createNS(doc, name, uri) {\n"
+            + "    return document.all ? doc.createNode(1, name, uri) : doc.createElementNS(uri, name);\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

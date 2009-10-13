@@ -186,25 +186,25 @@ public class Element extends EventNode {
 
     private void toText(final DomNode node, final StringBuilder buffer) {
         switch (node.getNodeType()) {
-            case org.w3c.dom.Node.DOCUMENT_TYPE_NODE:
-            case org.w3c.dom.Node.NOTATION_NODE:
+            case Node.DOCUMENT_TYPE_NODE:
+            case Node.NOTATION_NODE:
                 return;
-            case org.w3c.dom.Node.TEXT_NODE:
-            case org.w3c.dom.Node.CDATA_SECTION_NODE:
-            case org.w3c.dom.Node.COMMENT_NODE:
-            case org.w3c.dom.Node.PROCESSING_INSTRUCTION_NODE:
+            case Node.TEXT_NODE:
+            case Node.CDATA_SECTION_NODE:
+            case Node.COMMENT_NODE:
+            case Node.PROCESSING_INSTRUCTION_NODE:
                 buffer.append(node.getNodeValue());
                 break;
             default:
         }
         for (final DomNode child : node.getChildren()) {
             switch (child.getNodeType()) {
-                case org.w3c.dom.Node.ELEMENT_NODE:
+                case ELEMENT_NODE:
                     toText(child, buffer);
                     break;
 
-                case org.w3c.dom.Node.TEXT_NODE:
-                case org.w3c.dom.Node.CDATA_SECTION_NODE:
+                case TEXT_NODE:
+                case CDATA_SECTION_NODE:
                     buffer.append(child.getNodeValue());
                     break;
                 default:

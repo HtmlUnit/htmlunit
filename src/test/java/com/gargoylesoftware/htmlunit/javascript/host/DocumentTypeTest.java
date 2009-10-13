@@ -60,7 +60,7 @@ public class DocumentTypeTest extends WebDriverTestCase {
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
-            + "<body onload='test()'>"
+            + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
 

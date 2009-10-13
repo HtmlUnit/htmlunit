@@ -72,11 +72,9 @@ public class HTMLTableRowElement extends HTMLTableComponent {
             if (!getBrowserVersion().isIE()) {
                 return -1;
             }
-            else {
-                // IE 6, 7 and 8 return really strange values: large integers that are not constants
-                // as tests on different browsers give different results
-                return 5461640;
-            }
+            // IE 6, 7 and 8 return really strange values: large integers that are not constants
+            // as tests on different browsers give different results
+            return 5461640;
         }
         int index = -1;
         while (row != null) {

@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 import org.w3c.dom.NamedNodeMap;
 
 import com.gargoylesoftware.htmlunit.html.DomAttr;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -76,6 +77,18 @@ public class XMLSerializer extends SimpleScriptable {
             nodeName = nodeName.toUpperCase();
         }
         buffer.append('<').append(nodeName);
+        if (node.getNamespaceURI() != null && node.getPrefix() != null) {
+            boolean sameNamespace = false;
+            for (DomNode parentNode = node.getParentNode(); parentNode instanceof DomElement;
+                    parentNode = parentNode.getParentNode()) {
+                if (node.getNamespaceURI().equals(parentNode.getNamespaceURI())) {
+                    sameNamespace = true;
+                }
+            }
+            if (node.getParentNode() == null || !sameNamespace) {
+                ((DomElement) node).setAttribute("xmlns:" + node.getPrefix(), node.getNamespaceURI());
+            }
+        }
         final NamedNodeMap attributesMap = node.getAttributes();
         for (int i = 0; i < attributesMap.getLength(); i++) {
             final DomAttr attrib = (DomAttr) attributesMap.item(i);
@@ -89,16 +102,16 @@ public class XMLSerializer extends SimpleScriptable {
                 startTagClosed = true;
             }
             switch (child.getNodeType()) {
-                case org.w3c.dom.Node.ELEMENT_NODE:
+                case Node.ELEMENT_NODE:
                     toXml(indent + 1, child, buffer, isIE);
                     break;
 
-                case org.w3c.dom.Node.TEXT_NODE:
+                case Node.TEXT_NODE:
                     final String value = child.getNodeValue();
                     if (isIE && value.trim().length() == 0) {
                         buffer.append('\r').append('\n');
                         final DomNode sibling = child.getNextSibling();
-                        if (sibling != null && sibling.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
+                        if (sibling != null && sibling.getNodeType() == Node.ELEMENT_NODE) {
                             for (int i = 0; i < indent; i++) {
                                 buffer.append('\t');
                             }
@@ -109,7 +122,7 @@ public class XMLSerializer extends SimpleScriptable {
                     }
                     break;
 
-                case org.w3c.dom.Node.CDATA_SECTION_NODE:
+                case Node.CDATA_SECTION_NODE:
                     buffer.append(child.asXml());
                     break;
 
