@@ -402,9 +402,7 @@ public class SimpleRange implements Range, Serializable {
         if (node instanceof SelectableTextInput) {
             return ((SelectableTextInput) node).getText();
         }
-        else {
-            return node.getTextContent();
-        }
+        return node.getTextContent();
     }
 
     private static int getMaxOffset(final Node node) {
