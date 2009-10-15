@@ -14,26 +14,17 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
-
-import javax.servlet.Servlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
 
 /**
  * Additional tests for {@link XMLHttpRequest} using already WebDriverTestCase.
@@ -121,55 +112,27 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("text/javascript, application/javascript, */*:ar-eg")
     public void setRequestHeader() throws Exception {
-        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
-        servlets.put("/first.html", SetRequestHeaderServlet1.class);
-        servlets.put("/second.html", SetRequestHeaderServlet2.class);
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    var request;\n"
+            + "    if (window.XMLHttpRequest)\n"
+            + "      request = new XMLHttpRequest();\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "    request.open('GET', 'second.html', false);\n"
+            + "    request.setRequestHeader('Accept', 'text/javascript, application/javascript, */*');\n"
+            + "    request.setRequestHeader('Accept-Language', 'ar-eg');\n"
+            + "    request.send('');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'></body></html>";
 
-        startWebServer(".", null, servlets);
-        final WebDriver driver = getWebDriver();
-        driver.get("http://localhost:" + PORT + "/first.html");
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        getMockWebConnection().setDefaultResponse("");
+        loadPage2(html);
+
+        final WebRequestSettings lastRequest = getMockWebConnection().getLastWebRequestSettings();
+        final Map<String, String> headers = lastRequest.getAdditionalHeaders();
+        assertEquals("text/javascript, application/javascript, */*", headers.get("Accept"));
+        assertEquals("ar-eg", headers.get("Accept-Language"));
     }
-
-    /**
-     * Servlet for {@link #setRequestHeader}.
-     */
-    public static class SetRequestHeaderServlet1 extends ServletContentWrapper {
-        private static final long serialVersionUID = -7430217650295223528L;
-
-        /** Constructor. */
-        public SetRequestHeaderServlet1() {
-            super(getModifiedContent("<html><head><script>\n"
-                + "  function test() {\n"
-                + "    var request;\n"
-                + "    if (window.XMLHttpRequest)\n"
-                + "      request = new XMLHttpRequest();\n"
-                + "    else if (window.ActiveXObject)\n"
-                + "      request = new ActiveXObject('Microsoft.XMLHTTP');\n"
-                + "    request.open('GET', 'second.html', false);\n"
-                + "    request.setRequestHeader('Accept', 'text/javascript, application/javascript, */*');\n"
-                + "    request.setRequestHeader('Accept-Language', 'ar-eg');\n"
-                + "    request.send('');\n"
-                + "    alert(request.responseText);\n"
-                + "  }\n"
-                + "</script></head><body onload='test()'></body></html>"));
-        }
-    }
-
-    /**
-     * Servlet for {@link #setRequestHeader}.
-     */
-    public static class SetRequestHeaderServlet2 extends HttpServlet {
-        private static final long serialVersionUID = 738149883022903302L;
-
-        /** {@inheritDoc} */
-        @Override
-        protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
-            resp.setContentType("text/html");
-            resp.getWriter().write(req.getHeader("Accept") + ':' + req.getHeader("Accept-Language"));
-        }
-    }
-
 }
