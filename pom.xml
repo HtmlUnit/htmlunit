@@ -53,6 +53,12 @@
                             <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                         </manifest>
+                        <manifestEntries>
+                            <Url>${pom.url}</Url>
+                            <!-- Following entries should be passed by CruiseControl on the CI server -->
+                            <SVN-Revision>${svnrevision}</SVN-Revision>
+                            <Build-Number>${label}</Build-Number>
+                        </manifestEntries>
                     </archive>
                 </configuration>
             </plugin>
