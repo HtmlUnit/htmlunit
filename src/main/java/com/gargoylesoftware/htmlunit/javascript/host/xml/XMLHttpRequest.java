@@ -360,13 +360,19 @@ public class XMLHttpRequest extends SimpleScriptable {
     /**
      * Assigns the destination URL, method and other optional attributes of a pending request.
      * @param method the method to use to send the request to the server (GET, POST, etc)
-     * @param url the URL to send the request to
+     * @param urlParam the URL to send the request to
      * @param async Whether or not to send the request to the server asynchronously
      * @param user If authentication is needed for the specified URL, the username to use to authenticate
      * @param password If authentication is needed for the specified URL, the password to use to authenticate
      */
-    public void jsxFunction_open(final String method, final String url, final boolean async,
+    public void jsxFunction_open(final String method, final Object urlParam, final boolean async,
         final String user, final String password) {
+        if (urlParam == null || "".equals(urlParam)) {
+            throw Context.reportRuntimeError("URL for XHR.open can't be empty!");
+        }
+
+        final String url = Context.toString(urlParam);
+
         // (URL + Method + User + Password) become a WebRequestSettings instance.
         containingPage_ = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
         try {

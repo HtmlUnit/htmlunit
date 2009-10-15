@@ -24,6 +24,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
@@ -134,5 +135,35 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         final Map<String, String> headers = lastRequest.getAdditionalHeaders();
         assertEquals("text/javascript, application/javascript, */*", headers.get("Accept"));
         assertEquals("ar-eg", headers.get("Accept-Language"));
+    }
+
+    /**
+     * XHR.open throws an exception if URL parameter is null or empty string.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "exception", "exception", "pass", "pass" })
+    public void openThrowOnEmptyUrl() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "var request;\n"
+            + "if (window.XMLHttpRequest)\n"
+            + "  request = new XMLHttpRequest();\n"
+            + "else\n"
+            + "  request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "var values = [null, '', ' ', '  \\t  '];\n"
+            + "for (var i=0; i<values.length; ++i) {\n"
+            + "  try {\n"
+            + "    request.open('GET', values[i], false);\n"
+            + "    request.send('');\n"
+            + "    alert('pass');\n"
+            + "  } catch(e) { alert('exception') }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body></body>\n</html>";
+
+        loadPageWithAlerts2(html);
+        assertEquals(3, getMockWebConnection().getRequestCount());
     }
 }

@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, (initial)??? IE8 support">
+            <action type="fix" dev="mguillem">
+                JavaScript: XMLHttpRequest.open throws an exception when the provided url is null or an empty string.
+            </action>
             <action type="fix" dev="sdanig">
                 Fix caching of page's document element even after the document element has been removed from the page.
             </action>
