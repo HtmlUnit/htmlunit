@@ -3052,6 +3052,9 @@
         <browser name="Firefox"/>
         <browser name="Internet Explorer" min-version="7"/>
         <property name="onerror" readable="true" writable="true"/>
+        <property name="onload" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
         <property name="onreadystatechange" readable="true" writable="true"/>
         <property name="readyState" readable="true" writable="false"/>
         <property name="responseText" readable="true" writable="false"/>

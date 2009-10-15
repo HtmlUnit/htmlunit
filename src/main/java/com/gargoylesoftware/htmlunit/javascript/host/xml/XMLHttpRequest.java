@@ -79,6 +79,7 @@ public class XMLHttpRequest extends SimpleScriptable {
 
     private int state_;
     private Function stateChangeHandler_;
+    private Function loadHandler_;
     private Function errorHandler_;
     private WebRequestSettings requestSettings_;
     private boolean async_;
@@ -140,8 +141,8 @@ public class XMLHttpRequest extends SimpleScriptable {
         state_ = state;
 
         //Firefox doesn't trigger onreadystatechange handler for sync requests
-        final boolean isIE = getBrowserVersion().isIE();
-        if (stateChangeHandler_ != null && (isIE || async_)) {
+        final boolean ie = getBrowserVersion().isIE();
+        if (stateChangeHandler_ != null && (ie || async_)) {
             if (context == null) {
                 context = Context.getCurrentContext();
             }
@@ -173,6 +174,32 @@ public class XMLHttpRequest extends SimpleScriptable {
                 LOG.debug("Calling onreadystatechange handler for state " + state + ". Done.");
             }
         }
+
+        // Firefox has a separate onload handler, too.
+        if (!ie && loadHandler_ != null && state == STATE_COMPLETED) {
+            if (context == null) {
+                context = Context.getCurrentContext();
+            }
+            final Scriptable scope = loadHandler_.getParentScope();
+            final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
+            jsEngine.callFunction(containingPage_, loadHandler_, context, scope, this, ArrayUtils.EMPTY_OBJECT_ARRAY);
+        }
+    }
+
+    /**
+     * Returns the event handler that fires on load.
+     * @return the event handler that fires on load
+     */
+    public Function jsxGet_onload() {
+        return loadHandler_;
+    }
+
+    /**
+     * Sets the event handler that fires on load.
+     * @param loadHandler the event handler that fires on load
+     */
+    public void jsxSet_onload(final Function loadHandler) {
+        loadHandler_ = loadHandler;
     }
 
     /**
