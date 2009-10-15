@@ -122,4 +122,34 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "a", "null", "b" })
+    public void documentElementCaching() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    var a = doc.createElement('a');\n"
+            + "    var b = doc.createElement('b');\n"
+            + "    doc.appendChild(a);\n"
+            + "    alert(doc.documentElement.tagName);\n"
+            + "    doc.removeChild(a);\n"
+            + "    alert(doc.documentElement);\n"
+            + "    doc.appendChild(b);\n"
+            + "    alert(doc.documentElement.tagName);\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }
