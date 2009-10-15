@@ -233,7 +233,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
      * {@inheritDoc}
      */
     public DomAttr createAttribute(final String name) {
-        return new DomAttr(getPage(), null, name, "");
+        return new DomAttr(getPage(), null, name, "", false);
     }
 
 }

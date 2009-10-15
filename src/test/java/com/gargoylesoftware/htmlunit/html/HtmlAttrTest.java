@@ -36,7 +36,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class HtmlAttrTest extends WebTestCase {
 
     /** Test object. */
-    private final DomAttr htmlAttr_ = new DomAttr(null, null, ENTRY_KEY, ENTRY_VALUE);
+    private final DomAttr htmlAttr_ = new DomAttr(null, null, ENTRY_KEY, ENTRY_VALUE, false);
 
     /** Single test key value. */
     private static final String ENTRY_KEY = "key";

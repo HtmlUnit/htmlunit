@@ -477,6 +477,16 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
+     * Returns the specified attribute.
+     * @param namespaceURI the namespace URI
+     * @param localName the local name of the attribute to look for
+     * @return the specified attribute, <code>null</code> if the attribute is not defined
+     */
+    public Object jsxFunction_getAttributeNodeNS(final String namespaceURI, final String localName) {
+        return getDomNodeOrDie().getAttributeNodeNS(namespaceURI, localName).getScriptObject();
+    }
+
+    /**
      * Gets the specified attribute.
      * @param namespaceURI the namespace URI
      * @param localName the local name of the attribute to look for

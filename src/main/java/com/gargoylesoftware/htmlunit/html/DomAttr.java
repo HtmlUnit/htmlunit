@@ -42,10 +42,14 @@ public class DomAttr extends DomNamespaceNode implements Attr {
      * @param namespaceURI the namespace that defines the attribute name (may be <tt>null</tt>)
      * @param qualifiedName the name of the attribute
      * @param value the value of the attribute
+     * @param specified <tt>true</tt> if this attribute was explicitly given a value in the source document,
+     *        or if the application changed the value of the attribute
      */
-    public DomAttr(final SgmlPage page, final String namespaceURI, final String qualifiedName, final String value) {
+    public DomAttr(final SgmlPage page, final String namespaceURI, final String qualifiedName, final String value,
+        final boolean specified) {
         super(namespaceURI, qualifiedName, page);
         value_ = value;
+        specified_ = specified;
     }
 
     /**
@@ -113,7 +117,7 @@ public class DomAttr extends DomNamespaceNode implements Attr {
      * Not yet implemented.
      */
     public TypeInfo getSchemaTypeInfo() {
-        throw new UnsupportedOperationException("HtmlAttr.getSchemaTypeInfo is not yet implemented.");
+        throw new UnsupportedOperationException("DomAttr.getSchemaTypeInfo is not yet implemented.");
     }
 
     /**

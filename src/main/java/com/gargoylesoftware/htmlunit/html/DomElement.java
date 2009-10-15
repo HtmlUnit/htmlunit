@@ -303,8 +303,7 @@ public class DomElement extends DomNamespaceNode implements Element {
     public void setAttributeNS(final String namespaceURI, final String qualifiedName,
             final String attributeValue) {
         final String value = attributeValue;
-
-        final DomAttr newAttr = new DomAttr(getPage(), namespaceURI, qualifiedName, value);
+        final DomAttr newAttr = new DomAttr(getPage(), namespaceURI, qualifiedName, value, true);
         newAttr.setParentNode(this);
         attributes_.put(qualifiedName, newAttr);
 
@@ -348,10 +347,13 @@ public class DomElement extends DomNamespaceNode implements Element {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
-    public Attr getAttributeNodeNS(final String namespaceURI, final String localName) {
-        throw new UnsupportedOperationException("DomElement.getAttributeNodeNS is not yet implemented.");
+    public DomAttr getAttributeNodeNS(final String namespaceURI, final String localName) {
+        final String qualifiedName = getQualifiedName(namespaceURI, localName);
+        if (qualifiedName != null) {
+            return attributes_.get(qualifiedName);
+        }
+        return null;
     }
 
     /**

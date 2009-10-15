@@ -1490,6 +1490,9 @@
         <function name="focus"/>
         <function name="getAttribute"/>
         <function name="getAttributeNode"/>
+        <function name="getAttributeNodeNS">
+            <browser name="Firefox"/>
+        </function>
         <function name="getAttributeNS">
             <browser name="Firefox"/>
         </function>

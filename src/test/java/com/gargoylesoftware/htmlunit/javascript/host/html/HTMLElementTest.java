@@ -178,7 +178,7 @@ public class HTMLElementTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.FF)
-    @Alerts({ "", "bla" })
+    @Alerts({ "", "bla", "true" })
     public void getSetAttributeNS() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -189,6 +189,7 @@ public class HTMLElementTest extends WebTestCase {
                 + "       alert(myNode.getAttributeNS('myNamespaceURI', 'my:foo'));\n"
                 + "       myNode.setAttributeNS('myNamespaceURI', 'my:foo', 'bla');\n"
                 + "       alert(myNode.getAttributeNS('myNamespaceURI', 'foo'));\n"
+                + "       alert(myNode.getAttributeNodeNS('myNamespaceURI', 'foo').specified);\n"
                 + "   }\n"
                 + "    </script>\n"
                 + "</head>\n"

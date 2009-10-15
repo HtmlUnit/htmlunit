@@ -25,6 +25,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
 import org.w3c.dom.NamedNodeMap;
@@ -153,7 +154,8 @@ public final class XmlUtil {
         final Map<String, DomAttr> attributes = new HashMap<String, DomAttr>();
         final NamedNodeMap nodeAttributes = source.getAttributes();
         for (int i = 0; i < nodeAttributes.getLength(); i++) {
-            final Node attribute = nodeAttributes.item(i);
+            final Attr attribute = (Attr) nodeAttributes.item(i);
+            final String namespaceURI = attribute.getNamespaceURI();
             final String qualifiedName;
             if (attribute.getPrefix() != null) {
                 qualifiedName = attribute.getPrefix() + ':' + attribute.getLocalName();
@@ -161,8 +163,9 @@ public final class XmlUtil {
             else {
                 qualifiedName = attribute.getLocalName();
             }
-            final DomAttr xmlAttribute =
-                new DomAttr(page, attribute.getNamespaceURI(), qualifiedName, attribute.getNodeValue());
+            final String value = attribute.getNodeValue();
+            final boolean specified = attribute.getSpecified();
+            final DomAttr xmlAttribute = new DomAttr(page, namespaceURI, qualifiedName, value, specified);
             attributes.put(attribute.getNodeName(), xmlAttribute);
         }
         if (page instanceof HtmlPage) {
