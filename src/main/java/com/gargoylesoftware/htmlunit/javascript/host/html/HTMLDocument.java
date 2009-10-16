@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.util.StringUtils.containsCaseInsensitive;
+import static com.gargoylesoftware.htmlunit.util.StringUtils.formatHttpDate;
 import static com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate;
 import static com.gargoylesoftware.htmlunit.util.UrlUtils.getUrlWithNewHost;
 import static com.gargoylesoftware.htmlunit.util.UrlUtils.getUrlWithNewPort;
@@ -40,8 +41,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.UniqueTag;
 
-import org.apache.commons.httpclient.util.DateParseException;
-import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -318,23 +317,19 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             }
 
             final Date lastModified = parseDateOrNow(stringDate);
-            lastModified_ = DateUtil.formatDate(lastModified);
+            lastModified_ = formatHttpDate(lastModified);
         }
 
         return lastModified_;
     }
 
     private Date parseDateOrNow(final String stringDate) {
-        if (stringDate != null) {
-            try  {
-                return DateUtil.parseDate(stringDate);
-            }
-            catch (final DateParseException e) {
-                return new Date();
-            }
+        final Date date = parseHttpDate(stringDate);
+        if (date == null) {
+            return new Date();
         }
 
-        return new Date();
+        return date;
     }
 
     /**
