@@ -40,6 +40,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.UniqueTag;
 
+import org.apache.commons.httpclient.util.DateParseException;
+import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -170,6 +172,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     private boolean writeInCurrentDocument_ = true;
     private String domain_;
     private String uniqueID_;
+    private String lastModified_;
 
     /** Initializes the supported event type map. */
     static {
@@ -299,6 +302,39 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             links_.init(getDomNodeOrDie(), ".//a[@href] | .//area[@href]");
         }
         return links_;
+    }
+
+    /**
+     * Returns the last modification date of the document.
+     * @see <a href="https://developer.mozilla.org/en/DOM/document.lastModified">Mozilla documentation</a>
+     * @return the date as string
+     */
+    public String jsxGet_lastModified() {
+        if (lastModified_ == null) {
+            final WebResponse webResponse = getPage().getWebResponse();
+            String stringDate = webResponse.getResponseHeaderValue("Last-Modified");
+            if (stringDate == null) {
+                stringDate = webResponse.getResponseHeaderValue("Date");
+            }
+
+            final Date lastModified = parseDateOrNow(stringDate);
+            lastModified_ = DateUtil.formatDate(lastModified);
+        }
+
+        return lastModified_;
+    }
+
+    private Date parseDateOrNow(final String stringDate) {
+        if (stringDate != null) {
+            try  {
+                return DateUtil.parseDate(stringDate);
+            }
+            catch (final DateParseException e) {
+                return new Date();
+            }
+        }
+
+        return new Date();
     }
 
     /**
@@ -646,8 +682,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * {@link CookieSpec#match(String, int, String, boolean, Cookie[])} doesn't like empty hosts and
-     * negative ports, but these things happen if we're dealing with a local file. This method
+     * {@link org.apache.commons.httpclient.cookie.CookieSpec#match(String, int, String, boolean, Cookie[])} doesn't
+     * like empty hosts and negative ports, but these things happen if we're dealing with a local file. This method
      * allows us to work around this limitation in HttpClient by feeding it a bogus host and port.
      *
      * @param url the URL to replace if necessary

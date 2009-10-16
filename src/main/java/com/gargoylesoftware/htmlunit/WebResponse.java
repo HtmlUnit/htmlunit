@@ -64,7 +64,7 @@ public interface WebResponse extends Serializable {
     /**
      * Returns the value of the specified response header.
      * @param headerName the name of the header whose value is to be returned
-     * @return the value of the specified response header
+     * @return the header value, <code>null</code> if no response header exists with this name
      */
     String getResponseHeaderValue(final String headerName);
 

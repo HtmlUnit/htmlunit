@@ -345,7 +345,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected final WebDriver loadPage2(final String html, final URL url) throws Exception {
         final MockWebConnection mockWebConnection = getMockWebConnection();
-        mockWebConnection.setResponse(url, html);
+        if (!mockWebConnection.hasResponse(url)) {
+            mockWebConnection.setResponse(url, html);
+        }
         startWebServer(mockWebConnection);
 
         final WebDriver driver = getWebDriver();

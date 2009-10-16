@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Tests for {@link HTMLDocument}.
@@ -774,4 +775,60 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * Property lastModified returns the last modification date of the document.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "string", "Fri, 16 Oct 2009 13:59:47 GMT" })
+    public void lastModified() throws Exception {
+        final List<NameValuePair> responseHeaders = new ArrayList<NameValuePair>();
+        responseHeaders.add(new NameValuePair("Last-Modified", "Fri, 16 Oct 2009 13:59:47 GMT"));
+        testLastModified(responseHeaders);
+
+        // Last-Modified header has priority compared to Date header
+        responseHeaders.add(new NameValuePair("Date", "Fri, 17 Oct 2009 13:59:47 GMT"));
+        testLastModified(responseHeaders);
+
+        // but Date is taken, if no Last-Modified header is present
+        responseHeaders.clear();
+        responseHeaders.add(new NameValuePair("Date", "Fri, 16 Oct 2009 13:59:47 GMT"));
+        testLastModified(responseHeaders);
+    }
+
+    private void testLastModified(final List<NameValuePair> responseHeaders) throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "  alert(typeof document.lastModified);\n"
+            + "  var d = new Date(document.lastModified);\n"
+            + "  alert(d.toGMTString());\n" // to have results not depending on the user's time zone
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setResponse(getDefaultUrl(), html, 200, "OK", "text/html", responseHeaders);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * If neither Date header nor Last-Modified header is present, current time is taken.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "true", "true" })
+    public void lastModified_noDateHeader() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "  var justBeforeLoading = " + System.currentTimeMillis() + ";\n"
+            + "  var d = new Date(document.lastModified);\n"
+            + "  alert(d.valueOf() >= justBeforeLoading - 1000);\n" // date string format has no ms, take 1s marge
+            + "  alert(d.valueOf() <= new Date().valueOf());\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

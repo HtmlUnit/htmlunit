@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, (initial)??? IE8 support">
+            <action type="add" dev="mguillem" issue="2875273">
+                JavaScript: add support for HTMLDocument.lastModified.
+            </action>
             <action type="fix" dev="sdanig">
                 JavaScript: support the serialization of comments in .xml property (IE) and XMLSerializer (FF).
             </action>

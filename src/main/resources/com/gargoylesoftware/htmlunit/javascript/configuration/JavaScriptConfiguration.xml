@@ -1275,7 +1275,7 @@
             <browser name="Internet Explorer"/>
         </property>
         <property name="images" readable="true" writable="false"/>
-        <property name="lastModified" notImplemented="true" readable="true" writable="false"/>
+        <property name="lastModified" readable="true" writable="false"/>
         <property name="linkColor" notImplemented="true" readable="true" writable="false"/>
         <property name="links" readable="true" writable="false"/>
         <property name="namespaces" readable="true" writable="false">

@@ -340,4 +340,12 @@ public class MockWebConnection implements WebConnection {
         return requestCount_;
     }
 
+    /**
+     * Indicates if a response has already been configured for this URL.
+     * @param url the url
+     * @return <code>false</code> if no response has been configured
+     */
+    public boolean hasResponse(final URL url) {
+        return responseMap_.containsKey(url.toExternalForm());
+    }
 }
