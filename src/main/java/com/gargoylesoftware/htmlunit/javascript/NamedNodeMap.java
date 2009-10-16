@@ -148,8 +148,10 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      */
     private Attr getUnspecifiedAttributeNode(final String attrName) {
         final HtmlElement domNode = (HtmlElement) getDomNodeOrDie();
-        domNode.setAttribute(attrName, "");
-        return (Attr) ((DomAttr) domNode.getAttributes().getNamedItem(attrName)).getScriptObject();
+
+        final DomAttr attr = domNode.getPage().createAttribute(attrName);
+        domNode.setAttributeNode(attr);
+        return (Attr) attr.getScriptObject();
     }
 
     /**
