@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.DocumentFragment;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
+import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
  * A JavaScript object for XMLSerializer.
@@ -107,7 +108,8 @@ public class XMLSerializer extends SimpleScriptable {
                     break;
 
                 case Node.TEXT_NODE:
-                    final String value = child.getNodeValue();
+                    String value = child.getNodeValue();
+                    value = StringUtils.escapeXmlChars(value);
                     if (isIE && value.trim().length() == 0) {
                         buffer.append('\r').append('\n');
                         final DomNode sibling = child.getNextSibling();
@@ -118,7 +120,7 @@ public class XMLSerializer extends SimpleScriptable {
                         }
                     }
                     else {
-                        buffer.append(child.getNodeValue());
+                        buffer.append(value);
                     }
                     break;
 
