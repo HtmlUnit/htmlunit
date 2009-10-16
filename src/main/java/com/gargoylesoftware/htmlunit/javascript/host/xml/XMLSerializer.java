@@ -123,6 +123,7 @@ public class XMLSerializer extends SimpleScriptable {
                     break;
 
                 case Node.CDATA_SECTION_NODE:
+                case Node.COMMENT_NODE:
                     buffer.append(child.asXml());
                     break;
 

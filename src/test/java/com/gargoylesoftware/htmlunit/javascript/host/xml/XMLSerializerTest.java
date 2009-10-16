@@ -71,6 +71,21 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void comment() throws Exception {
+        String expectedString = "<a><!--32abc32--></a>";
+        if (getBrowserVersion().isIE()) {
+            expectedString += "1310";
+        }
+        final String serializationText = "<a><!-- abc --></a>";
+        final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        assertEquals(expectedString, textArea.getValue());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @NotYetImplemented
     public void nameSpaces() throws Exception {
         final String expectedString;
