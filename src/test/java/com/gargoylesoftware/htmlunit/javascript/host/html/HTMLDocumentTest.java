@@ -25,7 +25,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.ScriptException;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class HTMLDocumentTest extends WebTestCase {
+public class HTMLDocumentTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -68,7 +68,7 @@ public class HTMLDocumentTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -105,7 +105,7 @@ public class HTMLDocumentTest extends WebTestCase {
             + "<span class='red' id='span4'>bye</span>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -198,7 +198,7 @@ public class HTMLDocumentTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -220,7 +220,7 @@ public class HTMLDocumentTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -248,7 +248,7 @@ public class HTMLDocumentTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -276,7 +276,7 @@ public class HTMLDocumentTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -299,7 +299,7 @@ public class HTMLDocumentTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -327,7 +327,7 @@ public class HTMLDocumentTest extends WebTestCase {
             + "  <span id='s1'></span>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -352,7 +352,7 @@ public class HTMLDocumentTest extends WebTestCase {
             + "</script>\n"
             + "<body onload='doTest()'>foo</body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -380,7 +380,7 @@ public class HTMLDocumentTest extends WebTestCase {
             + "}\n"
             + "catch(e) { alert('exception') }\n"
             + "</script></body>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -388,14 +388,17 @@ public class HTMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
-    @Alerts(IE = { "d", "1" })
+    @Alerts(FF = "exception", IE = { "d", "1" })
     public void documentMethodsWithoutDocument() throws Exception {
         final String html
             = "<div id='d' name='d'>d</div>\n"
-            + "<script>var i = document.getElementById; alert(i('d').id);</script>\n"
-            + "<script>var n = document.getElementsByName; alert(n('d').length);</script>";
-        loadPageWithAlerts(html);
+            + "<script>\n"
+            + "try {\n"
+            + "  var i = document.getElementById; alert(i('d').id);\n"
+            + "  var n = document.getElementsByName; alert(n('d').length);\n"
+            + "} catch(e) { alert('exception') }\n"
+            + "</script>";
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -433,7 +436,7 @@ public class HTMLDocumentTest extends WebTestCase {
             + "var s = '\"<script>alert(1);<\\/scr\" + \"ipt>\"';\n"
             + "document.write('<script><!--\\ndocument.write(' + s + ');\\n--><\\/script>');\n"
             + "</script></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -457,7 +460,7 @@ public class HTMLDocumentTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -524,15 +527,16 @@ public class HTMLDocumentTest extends WebTestCase {
             + "  </head>\n"
             + "  <body id='body' onload='test()'>blah</body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"[object HTMLSpanElement]", "undefined" },
-            IE = {"[object]", "4", "red" })
+    @Alerts(FF2 = { "[object HTMLSpanElement]", "undefined" },
+            FF3 = { "[object HTMLCollection]", "4", "red" },
+            IE = { "[object]", "4", "red" })
     public void identicalIDs() throws Exception {
         final String html =
             "<html>\n"
@@ -554,7 +558,7 @@ public class HTMLDocumentTest extends WebTestCase {
             + "    <span id='Item' style='color:blue'></span>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -730,7 +734,7 @@ public class HTMLDocumentTest extends WebTestCase {
             + "</head><body>\n"
             + "</body></html>\n";
 
-        loadPageWithAlerts(html);
+        loadPage2(html);
     }
 
     /**
@@ -744,7 +748,7 @@ public class HTMLDocumentTest extends WebTestCase {
               "<html><body><script>\n"
             + "  document.write('<scr'+'ipt>alert(1<2)</sc'+'ript>');\n"
             + "</script></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -767,7 +771,7 @@ public class HTMLDocumentTest extends WebTestCase {
             + "  </s:form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
 }

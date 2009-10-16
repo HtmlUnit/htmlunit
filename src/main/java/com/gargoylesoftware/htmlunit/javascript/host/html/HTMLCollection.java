@@ -332,7 +332,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             if (next instanceof DomElement) {
                 final String id = ((DomElement) next).getAttribute("id");
                 if (id != null && id.equals(name)) {
-                    if (getBrowserVersion().isIE()) {
+                    if (getBrowserVersion().isIE() || "FF3".equals(getBrowserVersion().getNickname())) {
                         int totalIDs = 0;
                         for (final Object o : elements) {
                             if (o instanceof DomElement && name.equals(((DomElement) o).getAttribute("id"))) {

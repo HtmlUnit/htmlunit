@@ -217,7 +217,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             if (node != null) {
                 return (N) node;
             }
-            throw e;
+            throw Context.reportRuntimeError("No node attached to this object");
         }
     }
 
