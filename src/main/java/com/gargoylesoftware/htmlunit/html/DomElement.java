@@ -83,9 +83,6 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     @Override
     public String getNodeName() {
-        if (getNamespaceURI() == null) {
-            return getLocalName();
-        }
         return getQualifiedName();
     }
 
