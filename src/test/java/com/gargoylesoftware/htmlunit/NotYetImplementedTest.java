@@ -67,7 +67,6 @@ public class NotYetImplementedTest {
         for (final String line : lines) {
             if (line.contains("notYetImplemented()")) {
                 String methodName = null;
-                int lineNumber = -1;
                 for (int i = index; i >= 0; i--) {
                     final String l = lines.get(i);
                     if (l.startsWith("    public ")) {
@@ -75,14 +74,9 @@ public class NotYetImplementedTest {
                         break;
                     }
                 }
-                for (int i = index; i >= 0; i--) {
-                    final String l = lines.get(i);
-                    if (l.startsWith("    /**")) {
-                        lineNumber = i;
-                        break;
-                    }
-                }
-                entries_.add(path + ';' + methodName + ';' + lineNumber);
+                final int lineNumber = getLineNumber(lines, index);
+                final String description = getDescription(lines, index);
+                entries_.add(path + ';' + methodName + ';' + lineNumber + ';' + description);
             }
             else if (line.contains("@NotYetImplemented")) {
                 final String browser;
@@ -94,7 +88,6 @@ public class NotYetImplementedTest {
                     browser = "";
                 }
                 String methodName = null;
-                int lineNumber = -1;
                 for (int i = index; i < lines.size(); i++) {
                     final String l = lines.get(i);
                     if (l.startsWith("    public ")) {
@@ -102,17 +95,44 @@ public class NotYetImplementedTest {
                         break;
                     }
                 }
-                for (int i = index; i >= 0; i--) {
-                    final String l = lines.get(i);
-                    if (l.startsWith("    /**")) {
-                        lineNumber = i;
-                        break;
-                    }
-                }
-                entries_.add(path + ';' + methodName + ';' + lineNumber + ";" + browser);
+                final int lineNumber = getLineNumber(lines, index);
+                final String description = getDescription(lines, index);
+                entries_.add(path + ';' + methodName + ';' + lineNumber + ";" + browser + ';' + description);
             }
             index++;
         }
+    }
+
+    private static int getLineNumber(final List<String> lines, final int index) {
+        for (int i = index; i >= 0; i--) {
+            final String l = lines.get(i);
+            if (l.startsWith("    /**")) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    private static String getDescription(final List<String> lines, final int index) {
+        final StringBuilder builder = new StringBuilder();
+        for (int i = getLineNumber(lines, index); i < lines.size(); i++) {
+            final String line = lines.get(i).trim();
+            final int start = line.indexOf(' ') != -1 ? line.indexOf(' ') + 1 : -1;
+            final boolean end = line.endsWith("*/");
+            if (line.contains("* @throws ") || line.contains("* @exception")) {
+                break;
+            }
+            if (start != -1) {
+                if (builder.length() != 0) {
+                    builder.append(' ');
+                }
+                builder.append(line.substring(start, line.length() - (end ? 2 : 0)));
+            }
+            if (end) {
+                break;
+            }
+        }
+        return builder.toString().replace(";", "__semicolon__");
     }
 
     private void save() throws Exception {
@@ -120,7 +140,7 @@ public class NotYetImplementedTest {
         builder.append("<html><head></head><body>\n");
         builder.append("NotYetImplemented is a condition in which a test is known to fail with HtmlUnit.");
         builder.append("<table border='1'>\n");
-        builder.append("  <tr><th>File</th><th>Method</th><th>Line</th></tr>\n");
+        builder.append("  <tr><th>File</th><th>Method</th><th>Line</th><th>Description</th></tr>\n");
         String lastFile = null;
         for (final String entry : entries_) {
             final String[] values = entry.split(";");
@@ -128,7 +148,9 @@ public class NotYetImplementedTest {
             final String fileName = file.substring(file.lastIndexOf('/') + 1, file.length() - 5);
             final String method = values[1];
             final String line = values[2];
-            final String browser = values.length > 3 ? values[3] : "";
+            final String browser = values.length > 4 ? values[3] : "";
+            final String description = entry.endsWith(";") ? "&nbsp;"
+                    : values[values.length - 1].replace("__semicolon__", ";");
             builder.append("  <tr>\n");
             if (!file.equals(lastFile)) {
                 int totalCount = 0;
@@ -151,6 +173,7 @@ public class NotYetImplementedTest {
                     + file + "?view=markup#l_" + line + "'>").append(method).append("</a> ")
                     .append(browser).append("</td>\n");
             builder.append("    <td>").append(line).append("</td>\n");
+            builder.append("    <td>").append(description).append("</td>\n");
             builder.append("  </tr>\n");
         }
         builder.append("</table>\n").append("</body></html>");

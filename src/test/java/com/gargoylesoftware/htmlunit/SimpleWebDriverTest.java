@@ -238,6 +238,8 @@ public class SimpleWebDriverTest extends WebDriverTestCase {
     }
 
     /**
+     * Firefox should not run scripts with "event" and "for" attributes.
+     *
      * @throws Exception if the test fails
      */
     @Test
