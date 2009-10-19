@@ -422,7 +422,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         else if (driver instanceof InternetExplorerDriver) {
             final String jsonResult = (String) jsExecutor
                 .executeScript(getJSON() + ";return JSON.stringify(top.__huCatchedAlerts)");
-            if (jsonResult  != null) {
+            if (jsonResult != null) {
                 final JSONArray array = new JSONArray(jsonResult);
                 for (int i = 0; i < array.length(); i++) {
                     collectedAlerts.add(Context.toString(array.get(i)));
@@ -432,17 +432,22 @@ public abstract class WebDriverTestCase extends WebTestCase {
         else {
             final Object object = jsExecutor.executeScript("return top.__huCatchedAlerts");
 
-            if (object instanceof JSONObject) {
-                final JSONObject jsonObject = (JSONObject) object;
-                for (int i = 0; i < jsonObject.length(); i++) {
-                    collectedAlerts.add(Context.toString(jsonObject.get(String.valueOf(i))));
+            if (object != null) {
+                if (object instanceof JSONObject) {
+                    final JSONObject jsonObject = (JSONObject) object;
+                    for (int i = 0; i < jsonObject.length(); i++) {
+                        collectedAlerts.add(Context.toString(jsonObject.get(String.valueOf(i))));
+                    }
                 }
-            }
-            else {
-                final JSONArray array = (JSONArray) object;
-                if (array != null) {
+                else if (object instanceof JSONArray) {
+                    final JSONArray array = (JSONArray) object;
                     for (int i = 0; i < array.length(); i++) {
                         collectedAlerts.add(Context.toString(array.get(i)));
+                    }
+                }
+                else {
+                    for (final Object alert : (List) object) {
+                        collectedAlerts.add(Context.toString(alert));
                     }
                 }
             }
