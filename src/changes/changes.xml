@@ -5,7 +5,11 @@
     </properties>
 
     <body>
-        <release version="2.7" date="?" description="Bugfixes, (initial)??? IE8 support">
+        <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration">
+            <action type="fix" dev="sdanig">
+                Fix Node.setTextContent() to set the text for comment, cdata, text and processing instruction nodes,
+                rather than appending a new text node.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: mouse event 'ondblclick' should not trigger 'onclick' handler.
             </action>

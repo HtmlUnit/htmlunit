@@ -105,6 +105,14 @@ public class DomProcessingInstruction extends DomNode implements ProcessingInstr
      * {@inheritDoc}
      */
     @Override
+    public void setTextContent(final String textContent) {
+        setNodeValue(textContent);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected void printXml(final String indent, final PrintWriter printWriter) {
         printWriter.print("<?");
         printWriter.print(getTarget());

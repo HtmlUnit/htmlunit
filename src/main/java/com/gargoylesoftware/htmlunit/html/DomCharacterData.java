@@ -69,6 +69,14 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setTextContent(final String textContent) {
+        data_ = textContent;
+    }
+
+    /**
      * Returns the number of characters in the character data.
      * @return the number of characters
      */

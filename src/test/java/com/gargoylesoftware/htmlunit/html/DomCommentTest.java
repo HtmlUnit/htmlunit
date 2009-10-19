@@ -32,10 +32,9 @@ public class DomCommentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAsText() throws Exception {
+    public void asText() throws Exception {
         final String content = "<html><body><!-- a comment --></body></html>";
         final HtmlPage page = loadPage(content);
-
         assertEquals("", page.asText());
     }
 
@@ -44,13 +43,12 @@ public class DomCommentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAsXml() throws Exception {
+    public void asXml() throws Exception {
         final String comment = "<!-- a comment -->";
         final String content = "<html><body><span id='foo'>" + comment + "</span></body></html>";
         final HtmlPage page = loadPage(content);
         final HtmlElement elt = page.getHtmlElementById("foo");
         final DomNode node = elt.getFirstChild();
-
         assertEquals(comment, node.asXml());
     }
 
@@ -59,11 +57,24 @@ public class DomCommentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testTextSibling() throws Exception {
+    public void textSibling() throws Exception {
         final String content = "<html><body id='body'><!-- c1 -->text<!-- c2 --></body></html>";
         final HtmlPage page = loadPage(content);
         final DomNode node = page.<HtmlElement>getHtmlElementById("body").getFirstChild();
-
         assertEquals(DomText.NODE_NAME, node.getNextSibling().getNodeName());
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void setTextContent() throws Exception {
+        final String html = "<html><body><span id='s'><!--abc--></span></body></html>";
+        final HtmlPage page = loadPage(html);
+        final DomComment comment = (DomComment) page.getElementById("s").getFirstChild();
+        assertEquals("abc", comment.getTextContent());
+        comment.setTextContent("xyz");
+        assertEquals("xyz", comment.getTextContent());
+    }
+
 }

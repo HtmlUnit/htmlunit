@@ -43,7 +43,7 @@ public class DomTextTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAsText_nbsp() throws Exception {
+    public void asText_nbsp() throws Exception {
         testPlainText("a b&nbsp;c  d &nbsp;e",  "a b c d  e");
         testPlainText("a b&nbsp;c  d &nbsp; e", "a b c d   e");
         testPlainText("&nbsp;a&nbsp;", " a ");
@@ -58,7 +58,7 @@ public class DomTextTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAsText_fontFormat() throws Exception {
+    public void asText_fontFormat() throws Exception {
         testAsText("a <b>b</b> c",  "a b c");
         testAsText("a <b>b</b>c",   "a bc");
         testAsText("a<b>b</b> c",   "ab c");
@@ -95,7 +95,7 @@ public class DomTextTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAsText_regression() throws Exception {
+    public void asText_regression() throws Exception {
         String expected = "a" + LINE_SEPARATOR + "b" + LINE_SEPARATOR + "c";
         testAsText("a<ul><li>b</ul>c", expected);
         testAsText("a<p>b<br>c", expected);
@@ -111,7 +111,7 @@ public class DomTextTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAsText_table_elements() throws Exception {
+    public void asText_table_elements() throws Exception {
         final String html = "<table id='table'><tr id='row'><td id='cell'> b </td></tr>\n</table>\n";
         final String content = "<html><body><span id='foo'>" + html + "</span></body></html>";
 
@@ -121,8 +121,6 @@ public class DomTextTest extends WebTestCase {
         assertEquals("b", page.<HtmlElement>getHtmlElementById("row").asText());
         assertEquals("b", page.<HtmlElement>getHtmlElementById("table").asText());
     }
-
-    // ====================================================================================
 
     private void testPlainText(final String html, final String expectedText) throws Exception {
         final String content = "<html><body><span id='foo'>" + html + "</span></body></html>";
@@ -149,7 +147,7 @@ public class DomTextTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAsXml() throws Exception {
+    public void asXml() throws Exception {
         final String unicodeString = "\u064A\u0627 \u0644\u064A\u064A\u0644";
         final String html = "<html>\n"
             + "<head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'></head>\n"
@@ -282,4 +280,19 @@ public class DomTextTest extends WebTestCase {
         loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void setTextContent() throws Exception {
+        final String html = "<html><body><span id='s'>abc</span></body></html>";
+        final HtmlPage page = loadPage(html);
+        final DomText text = (DomText) page.getElementById("s").getFirstChild();
+        assertEquals("abc", text.getTextContent());
+        text.setTextContent("xyz");
+        assertEquals("xyz", text.getTextContent());
+        assertEquals("xyz", page.asText());
+    }
+
 }
