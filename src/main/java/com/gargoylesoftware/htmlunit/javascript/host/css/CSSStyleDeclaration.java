@@ -4585,7 +4585,21 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     protected static class StyleElement implements Comparable<StyleElement> {
         private final String name_;
         private final String value_;
+        private final String priority_;
         private final long index_;
+        /**
+         * Creates a new instance.
+         * @param name the style element's name
+         * @param value the style element's value
+         * @param priority the style element's priority like "important"
+         * @param index the style element's index
+         */
+        protected StyleElement(final String name, final String value, final String priority, final long index) {
+            this.name_ = name;
+            this.value_ = value;
+            this.priority_ = priority;
+            this.index_ = index;
+        }
         /**
          * Creates a new instance.
          * @param name the style element's name
@@ -4593,20 +4607,18 @@ public class CSSStyleDeclaration extends SimpleScriptable {
          * @param index the style element's index
          */
         protected StyleElement(final String name, final String value, final long index) {
-            this.name_ = name;
-            this.value_ = value;
-            this.index_ = index;
+            this(name, value, "", index);
         }
+
         /**
          * Creates a new default instance.
          * @param name the style element's name
          * @param value the style element's value
          */
         protected StyleElement(final String name, final String value) {
-            this.name_ = name;
-            this.value_ = value;
-            this.index_ = Long.MIN_VALUE;
+            this(name, value, Long.MIN_VALUE);
         }
+
         /**
          * Returns the style element's name.
          * @return the style element's name
@@ -4620,6 +4632,13 @@ public class CSSStyleDeclaration extends SimpleScriptable {
          */
         public String getValue() {
             return value_;
+        }
+        /**
+         * Returns the style element's priority.
+         * @return the style element's priority
+         */
+        public String getPriority() {
+            return priority_;
         }
         /**
          * Returns the style element's index.

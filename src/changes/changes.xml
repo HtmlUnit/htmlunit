@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, (initial)??? IE8 support">
+            <action type="fix" dev="mguillem" issue="2880057">
+                CSS: add support for rule priority.
+            </action>
             <action type="fix" dev="sdanig">
                 JavaScript: properly escape XML entities in .xml property (IE) and XMLSerializer (FF).
             </action>

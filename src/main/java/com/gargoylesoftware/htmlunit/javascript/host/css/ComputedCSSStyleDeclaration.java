@@ -152,9 +152,16 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      *
      * @param name the name of the style attribute to set
      * @param newValue the value of the style attribute to set
+     * @param priority the priority of the style attribute to set
      */
-    public void setLocalStyleAttribute(final String name, final String newValue) {
-        final StyleElement element = new StyleElement(name, newValue, getCurrentElementIndex());
+    public void setLocalStyleAttribute(final String name, final String newValue, final String priority) {
+        if (!"important".equals(priority)) {
+            final StyleElement existingElement = localModifications_.get(name);
+            if (existingElement != null && "important".equals(existingElement.getPriority())) {
+                return; // can't override a !important rule by a normal rule. Ignore it!
+            }
+        }
+        final StyleElement element = new StyleElement(name, newValue, priority, getCurrentElementIndex());
         localModifications_.put(name, element);
     }
 

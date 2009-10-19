@@ -173,7 +173,8 @@ public class Stylesheet extends SimpleScriptable {
                         for (int k = 0; k < dec.getLength(); k++) {
                             final String name = dec.item(k);
                             final String value = dec.getPropertyValue(name);
-                            style.setLocalStyleAttribute(name, value);
+                            final String priority = dec.getPropertyPriority(name);
+                            style.setLocalStyleAttribute(name, value, priority);
                         }
                     }
                 }

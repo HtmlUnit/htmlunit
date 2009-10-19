@@ -442,4 +442,30 @@ public class StyleSheetTest extends WebDriverTestCase {
                 + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Test for handling priority !important.
+     * @see <a href="http://sf.net/support/tracker.php?aid=2880057">Bug 2880057</a>
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("width=100")
+    public void important() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "  var e = document.getElementById('style1');\n"
+            + "  alert('width=' + e.clientWidth);\n"
+            + "}\n"
+            + "</script>\n"
+            + "<style>\n"
+            + "#style1 {left: 25px; width: 100px !important;}\n"
+            + "#style1 {position: absolute; left: 100px; width: 50px; height: 50px;}\n"
+            + "</style>\n"
+            + "</head><body onload='doTest()'>\n"
+            + "<div id='style1'>Hello</div>"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }
