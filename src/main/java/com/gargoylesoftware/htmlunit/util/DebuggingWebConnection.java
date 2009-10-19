@@ -187,7 +187,8 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         }
         buffer.append("url: '" + url + "', ");
         buffer.append("loadTime: " + response.getLoadTime() + ", ");
-        buffer.append("responseSize: " + response.getContentAsBytes().length + ", ");
+        final byte[] bytes = response.getContentAsBytes();
+        buffer.append("responseSize: " + ((bytes == null) ? 0 : bytes.length) + ", ");
         buffer.append("responseHeaders: " + nameValueListToJsMap(response.getResponseHeaders()));
         buffer.append("};\n");
         appendToJSFile(buffer.toString());
