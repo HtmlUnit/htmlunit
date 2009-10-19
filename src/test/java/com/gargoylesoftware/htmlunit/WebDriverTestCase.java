@@ -383,6 +383,26 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
+     * Loads the provided URL serving responses from {@link #getMockWebConnection()}
+     * and verifies that the captured alerts are correct.
+     * @param url the URL to use to load the page
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPageWithAlerts2(final URL url) throws Exception {
+        expandExpectedAlertsVariables(url);
+        final String[] expectedAlerts = getExpectedAlerts();
+
+        startWebServer(getMockWebConnection());
+
+        final WebDriver driver = getWebDriver();
+        driver.get(url.toExternalForm());
+
+        assertEquals(expectedAlerts, getCollectedAlerts(driver));
+        return driver;
+    }
+
+    /**
      * Gets the alerts collected by the driver.
      * Note: it currently works only if no new page has been loaded in the window
      * @param driver the driver

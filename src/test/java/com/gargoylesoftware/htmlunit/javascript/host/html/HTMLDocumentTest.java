@@ -808,7 +808,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</body></html>";
 
         getMockWebConnection().setResponse(getDefaultUrl(), html, 200, "OK", "text/html", responseHeaders);
-        loadPageWithAlerts2(html);
+
+        loadPageWithAlerts2(getDefaultUrl());
     }
 
     /**
