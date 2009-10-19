@@ -1960,25 +1960,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         event.setTarget(this);
         final HtmlElement element = getDomNodeOrDie();
         ScriptResult result = null;
-        if (event instanceof MouseEvent) {
-            if (event.jsxGet_type().equals(MouseEvent.TYPE_CLICK)) {
-                try {
-                    element.click(event);
-                }
-                catch (final IOException e) {
-                    throw Context.reportRuntimeError("Error calling click(): " + e.getMessage());
-                }
+        if (event.jsxGet_type().equals(MouseEvent.TYPE_CLICK)) {
+            try {
+                element.click(event);
             }
-            else if (event.jsxGet_type().equals(MouseEvent.TYPE_DBL_CLICK)) {
-                try {
-                    element.dblClick(event.jsxGet_shiftKey(), event.jsxGet_ctrlKey(), event.jsxGet_altKey());
-                }
-                catch (final IOException e) {
-                    throw Context.reportRuntimeError("Error calling dblClick(): " + e.getMessage());
-                }
-            }
-            else {
-                result = fireEvent(event);
+            catch (final IOException e) {
+                throw Context.reportRuntimeError("Error calling click(): " + e.getMessage());
             }
         }
         else {

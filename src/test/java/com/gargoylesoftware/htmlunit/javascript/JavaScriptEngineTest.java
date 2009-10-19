@@ -746,27 +746,6 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @NotYetImplemented
-    @Alerts({ "true", "false", "false", "true" })
-    public void functionCaller() throws Exception {
-        final String html = "<html><head><script>\n"
-            + "function myFunc() {\n"
-            + "  alert(myFunc.caller == null);\n"
-            + "  alert(myFunc.caller == foo);\n"
-            + "}\n"
-            + "myFunc()\n"
-            + "function foo() { myFunc() }\n"
-            + "foo()\n"
-            + "</script>\n"
-            + "</head><body></body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
      * Test case for bug 707134. Currently I am unable to reproduce the problem.
      * @throws Exception if the test fails
      */

@@ -22,6 +22,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
@@ -29,6 +30,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class JavaScriptEngine2Test extends WebDriverTestCase {
@@ -92,4 +94,26 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
 
         assertEquals("single threaded", element.getText());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    @Alerts({ "true", "false", "false", "true" })
+    public void functionCaller() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function myFunc() {\n"
+            + "  alert(myFunc.caller == null);\n"
+            + "  alert(myFunc.caller == foo);\n"
+            + "}\n"
+            + "myFunc()\n"
+            + "function foo() { myFunc() }\n"
+            + "foo()\n"
+            + "</script>\n"
+            + "</head><body></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }
