@@ -35,7 +35,7 @@ public class DomCDataSection extends DomText implements CDATASection {
     public static final String NODE_NAME = "#cdata-section";
 
     /**
-     * Creates an instance of DomText.
+     * Creates a new instance.
      *
      * @param page the Page that contains this element
      * @param data the string data held by this node
