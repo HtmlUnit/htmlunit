@@ -588,7 +588,7 @@ public final class HTMLParser {
             // If we're adding a body element, keep track of any temporary synthetic ones
             // that we may have had to create earlier (for document.write(), for example).
             HtmlBody oldBody = null;
-            if (tagLower.equals("body") && page_.getBody() instanceof HtmlBody) {
+            if (qName.equals("body") && page_.getBody() instanceof HtmlBody) {
                 oldBody = (HtmlBody) page_.getBody();
             }
 
