@@ -20,6 +20,8 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Test for {@link IEConditionalCompilationScriptPreProcessor}.
@@ -151,4 +153,17 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "true", FF = "false")
+    @NotYetImplemented(Browser.IE)
+    public void escaping() throws Exception {
+        final String script = "var isMSIE=eval('false;/*@cc_on@if(@\\x5fwin32)isMSIE=true@end@*/');\n"
+            + "alert(isMSIE);";
+        testScript(script);
+    }
+
 }
