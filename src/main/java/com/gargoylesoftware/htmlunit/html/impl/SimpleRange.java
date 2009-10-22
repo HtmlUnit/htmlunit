@@ -21,11 +21,9 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.mutable.MutableBoolean;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.w3c.dom.ranges.Range;
 import org.w3c.dom.ranges.RangeException;
 
@@ -436,71 +434,69 @@ public class SimpleRange implements Range, Serializable {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        final Node ancestor = getCommonAncestorContainer();
-        if (ancestor != null) {
-            final MutableBoolean started = new MutableBoolean(ancestor == startContainer_);
-            append(sb, ancestor, started);
-        }
+        append(sb);
         return sb.toString();
     }
 
-    private boolean append(final StringBuilder sb, final Node node, final MutableBoolean started) {
-        final NodeList children = node.getChildNodes();
-        for (int i = 0; i < children.getLength(); i++) {
-            final Node child = children.item(i);
-            if (started.booleanValue()) {
-                if (child == endContainer_) {
-                    // We're finished getting text.
-                    append(sb, child, 0, endOffset_);
-                    return true;
-                }
-                // We're in the middle of getting text.
-                if (child.hasChildNodes()) {
-                    final boolean stop = append(sb, child, started);
-                    if (stop) {
-                        return true;
-                    }
-                }
-                else {
-                    sb.append(getText(child));
-                }
+    private void append(final StringBuilder sb) {
+        if (startContainer_ == endContainer_) {
+            if (startOffset_ == endOffset_) {
+                return;
             }
-            else {
-                started.setValue(child == startContainer_);
-                if (started.booleanValue()) {
-                    // We're starting to get text.
-                    append(sb, child, startOffset_, null);
-                }
-                else {
-                    // We still haven't started getting text.
-                    final boolean stop = append(sb, child, started);
-                    if (stop) {
-                        return true;
-                    }
-                }
+            else if (isOffsetChars(startContainer_)) {
+                sb.append(getText(startContainer_).substring(startOffset_, endOffset_));
+                return;
             }
         }
-        return false;
-    }
 
-    private static void append(final StringBuilder sb, final Node node, final int startOffset, Integer endOffset) {
-        if (isOffsetChars(node)) {
-            // Offset units are chars.
-            if (endOffset != null) {
-                sb.append(getText(node).substring(startOffset, endOffset));
+        final DomNode ancestor = (DomNode) getCommonAncestorContainer();
+        final DomNode start = (DomNode) startContainer_;
+        final DomNode end = (DomNode) endContainer_;
+        boolean foundStartNode = (ancestor == start); // whether or not we have found the start node yet
+        boolean started = false; // whether or not we have found the start node *and* start offset yet
+        boolean foundEndNode = false; // whether or not we have found the end node yet
+        final Iterator<DomNode> i = ancestor.getDescendants().iterator();
+        while (i.hasNext()) {
+            final DomNode n = i.next();
+            if (!foundStartNode) {
+                foundStartNode = (n == start);
+                if (foundStartNode && isOffsetChars(n)) {
+                    started = true;
+                    String text = getText(n);
+                    text = text.substring(startOffset_);
+                    sb.append(text);
+                }
             }
-            else {
-                sb.append(getText(node).substring(startOffset));
+            else if (!started) {
+                final boolean atStart = (n.getParentNode() == start && n.getIndex() == startOffset_);
+                final boolean beyondStart = !start.isAncestorOf(n);
+                started = (atStart || beyondStart);
             }
-        }
-        else {
-            // Offset units are DOM nodes.
-            final NodeList children = node.getChildNodes();
-            if (endOffset == null) {
-                endOffset = children.getLength();
-            }
-            for (int j = startOffset; j < endOffset; j++) {
-                sb.append(getText(children.item(j)));
+            if (started) {
+                if (!foundEndNode) {
+                    foundEndNode = (n == end);
+                }
+                if (!foundEndNode) {
+                    // We're inside the range.
+                    if (!n.isAncestorOfAny(start, end) && isOffsetChars(n)) {
+                        sb.append(getText(n));
+                    }
+                }
+                else {
+                    // We've reached the end of the range.
+                    if (isOffsetChars(n)) {
+                        String text = getText(n);
+                        text = text.substring(0, endOffset_);
+                        sb.append(text);
+                    }
+                    else {
+                        final DomNodeList<DomNode> children = n.getChildNodes();
+                        for (int j = 0; j < endOffset_; j++) {
+                            sb.append(getText(children.get(j)));
+                        }
+                    }
+                    break;
+                }
             }
         }
     }

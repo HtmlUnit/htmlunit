@@ -707,6 +707,22 @@ public class DomNodeTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getChildNodes_remove() throws Exception {
+        final String content = "<html><body id='b'><div id='d1'></div><div id='d2'></div></body></html>";
+        final HtmlPage page = loadPage(content);
+        final DomNodeList<DomNode> children = page.getElementById("b").getChildNodes();
+        assertEquals(2, children.getLength());
+        page.getElementById("d1").remove();
+        assertEquals(1, children.getLength());
+        page.getElementById("d2").remove();
+        assertEquals(0, children.getLength());
+        assertNull(children.get(0));
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test

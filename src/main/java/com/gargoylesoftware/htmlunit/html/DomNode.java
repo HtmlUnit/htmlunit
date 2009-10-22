@@ -397,7 +397,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      */
     public DomNodeList<DomNode> getChildNodes() {
-        return new SiblingDomNodeList(firstChild_);
+        return new SiblingDomNodeList(this);
     }
 
     /**

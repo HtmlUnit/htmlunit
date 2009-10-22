@@ -28,10 +28,10 @@ import org.w3c.dom.Node;
  */
 class SiblingDomNodeList extends AbstractSequentialList<DomNode> implements DomNodeList<DomNode> {
 
-    private DomNode root_;
+    private DomNode parent_;
 
-    public SiblingDomNodeList(final DomNode root) {
-        root_ = root;
+    public SiblingDomNodeList(final DomNode parent) {
+        parent_ = parent;
     }
 
     /**
@@ -39,7 +39,7 @@ class SiblingDomNodeList extends AbstractSequentialList<DomNode> implements DomN
      */
     public int getLength() {
         int length = 0;
-        for (DomNode node = root_; node != null; node = node.getNextSibling()) {
+        for (DomNode node = parent_.getFirstChild(); node != null; node = node.getNextSibling()) {
             length++;
         }
         return length;
@@ -66,7 +66,7 @@ class SiblingDomNodeList extends AbstractSequentialList<DomNode> implements DomN
     @Override
     public DomNode get(final int index) {
         int i = 0;
-        for (DomNode node = root_; node != null; node = node.getNextSibling()) {
+        for (DomNode node = parent_.getFirstChild(); node != null; node = node.getNextSibling()) {
             if (i == index) {
                 return node;
             }
@@ -88,7 +88,7 @@ class SiblingDomNodeList extends AbstractSequentialList<DomNode> implements DomN
      */
     @Override
     public String toString() {
-        return "SiblingDomNodeList[" + root_ + "]";
+        return "SiblingDomNodeList[" + parent_ + "]";
     }
 
     private class SiblingListIterator implements ListIterator<DomNode> {
@@ -97,7 +97,7 @@ class SiblingDomNodeList extends AbstractSequentialList<DomNode> implements DomN
         private int nextIndex_;
 
         public SiblingListIterator(final int index) {
-            next_ = root_;
+            next_ = parent_.getFirstChild();
             nextIndex_ = 0;
             for (int i = 0; i < index; i++) {
                 next();
