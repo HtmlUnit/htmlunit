@@ -2599,6 +2599,7 @@
 
         <function name="collapse"/>
         <function name="createContextualFragment"/>
+        <function name="extractContents"/>
         <function name="selectNode"/>
         <function name="selectNodeContents"/>
         <function name="setEnd"/>

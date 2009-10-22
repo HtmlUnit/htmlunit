@@ -62,6 +62,14 @@ public class Range extends SimpleScriptable {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getDefaultValue(final Class< ? > hint) {
+        return toW3C().toString();
+    }
+
+    /**
      * Gets the node within which the Range begins.
      * @return <code>undefined</code> if not initialized
      */
@@ -105,6 +113,9 @@ public class Range extends SimpleScriptable {
      * @param offset the offset value within the node
      */
     public void jsxFunction_setStart(final Node refNode, final int offset) {
+        if (refNode == null) {
+            throw Context.reportRuntimeError("It is illegal to call Range.setStart() with a null node.");
+        }
         startContainer_ = refNode;
         startOffset_ = offset;
     }
@@ -114,6 +125,9 @@ public class Range extends SimpleScriptable {
      * @param refNode the reference node
      */
     public void jsxFunction_setStartAfter(final Node refNode) {
+        if (refNode == null) {
+            throw Context.reportRuntimeError("It is illegal to call Range.setStartAfter() with a null node.");
+        }
         startContainer_ = refNode.jsxGet_parentNode();
         startOffset_ = getPositionInContainer(refNode) + 1;
     }
@@ -123,6 +137,9 @@ public class Range extends SimpleScriptable {
      * @param refNode the reference node
      */
     public void jsxFunction_setStartBefore(final Node refNode) {
+        if (refNode == null) {
+            throw Context.reportRuntimeError("It is illegal to call Range.setStartBefore() with a null node.");
+        }
         startContainer_ = refNode.jsxGet_parentNode();
         startOffset_ = getPositionInContainer(refNode);
     }
@@ -151,6 +168,9 @@ public class Range extends SimpleScriptable {
      * @param offset the offset value within the node
      */
     public void jsxFunction_setEnd(final Node refNode, final int offset) {
+        if (refNode == null) {
+            throw Context.reportRuntimeError("It is illegal to call Range.setEnd() with a null node.");
+        }
         endContainer_ = refNode;
         endOffset_ = offset;
     }
@@ -160,6 +180,9 @@ public class Range extends SimpleScriptable {
      * @param refNode the reference node
      */
     public void jsxFunction_setEndAfter(final Node refNode) {
+        if (refNode == null) {
+            throw Context.reportRuntimeError("It is illegal to call Range.setEndAfter() with a null node.");
+        }
         endContainer_ = refNode.jsxGet_parentNode();
         endOffset_ = getPositionInContainer(refNode) + 1;
     }
@@ -169,6 +192,9 @@ public class Range extends SimpleScriptable {
      * @param refNode the reference node
      */
     public void jsxFunction_setEndBefore(final Node refNode) {
+        if (refNode == null) {
+            throw Context.reportRuntimeError("It is illegal to call Range.setEndBefore() with a null node.");
+        }
         startContainer_ = refNode.jsxGet_parentNode();
         startOffset_ = getPositionInContainer(refNode);
     }
@@ -209,28 +235,38 @@ public class Range extends SimpleScriptable {
     }
 
     /**
-     * Gets the deepest common ancestor container of the Range's two boundary-points.
-     * @return the ancestor
+     * Returns the deepest common ancestor container of the Range's two boundary points.
+     * @return the deepest common ancestor container of the Range's two boundary points
      */
-    @SuppressWarnings("unchecked")
     public Object jsxGet_commonAncestorContainer() {
-        if (startContainer_ == null) {
+        final Node ancestor = getCommonAncestor();
+        if (ancestor == null) {
             return Context.getUndefinedValue();
         }
+        return ancestor;
+    }
 
-        final List<Node> startContainerAncestor = getAncestorsAndSelf(startContainer_);
-        final List<Node> endContainerAncestor = getAncestorsAndSelf(endContainer_);
-
-        final List<Node> commonAncestors = ListUtils.intersection(startContainerAncestor, endContainerAncestor);
+    /**
+     * Returns the deepest common ancestor container of the Range's two boundary points.
+     * @return the deepest common ancestor container of the Range's two boundary points
+     */
+    @SuppressWarnings("unchecked")
+    private Node getCommonAncestor() {
+        final List<Node> startAncestors = getAncestorsAndSelf(startContainer_);
+        final List<Node> endAncestors = getAncestorsAndSelf(endContainer_);
+        final List<Node> commonAncestors = ListUtils.intersection(startAncestors, endAncestors);
+        if (commonAncestors.isEmpty()) {
+            return null;
+        }
         return commonAncestors.get(commonAncestors.size() - 1);
     }
 
     /**
-     * Gets the ancestors of the node.
+     * Returns the ancestors of the specified node.
      * @param node the node to start with
-     * @return a list of node
+     * @return the ancestors of the specified node
      */
-    protected List<Node> getAncestorsAndSelf(final Node node) {
+    private List<Node> getAncestorsAndSelf(final Node node) {
         final List<Node> ancestors = new ArrayList<Node>();
         Node ancestor = node;
         while (ancestor != null) {
@@ -254,10 +290,18 @@ public class Range extends SimpleScriptable {
     }
 
     /**
+     * Moves this range's contents from the document tree into a document fragment.
+     * @return the new document fragment containing the range contents
+     */
+    public Object jsxFunction_extractContents() {
+        return toW3C().extractContents().getScriptObject();
+    }
+
+    /**
      * Returns a W3C {@link org.w3c.dom.ranges.Range} version of this object.
      * @return a W3C {@link org.w3c.dom.ranges.Range} version of this object
      */
-    public org.w3c.dom.ranges.Range toW3C() {
+    public SimpleRange toW3C() {
         return new SimpleRange(startContainer_.getDomNodeOrDie(), startOffset_,
             endContainer_.getDomNodeOrDie(), endOffset_);
     }

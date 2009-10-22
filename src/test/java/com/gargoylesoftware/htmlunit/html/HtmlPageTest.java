@@ -1380,8 +1380,8 @@ public class HtmlPageTest extends WebServerTestCase {
         final ObjectInputStream objectIS = new ObjectInputStream(byteIS);
         final HtmlPage page2 = (HtmlPage) objectIS.readObject();
 
-        final Iterator<HtmlElement> iterator1 = page1.getAllHtmlChildElements().iterator();
-        final Iterator<HtmlElement> iterator2 = page2.getAllHtmlChildElements().iterator();
+        final Iterator<HtmlElement> iterator1 = page1.getHtmlElementDescendants().iterator();
+        final Iterator<HtmlElement> iterator2 = page2.getHtmlElementDescendants().iterator();
         while (iterator1.hasNext()) {
             assertTrue(iterator2.hasNext());
             final HtmlElement element1 = iterator1.next();

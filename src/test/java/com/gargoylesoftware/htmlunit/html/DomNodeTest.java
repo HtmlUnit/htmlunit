@@ -424,11 +424,11 @@ public class DomNodeTest extends WebTestCase {
     }
 
     /**
-     * Verifies that {@link DomNode#getAllHtmlChildElements()} returns descendant elements in the correct order.
+     * Verifies that {@link DomNode#getHtmlElementDescendants()} returns descendant elements in the correct order.
      * @throws Exception if an error occurs
      */
     @Test
-    public void testGetAllHtmlChildElementsOrder() throws Exception {
+    public void testGetHtmlElementDescendantsOrder() throws Exception {
         final String html = "<html><body id='0'>\n"
             + "<span id='I'><span id='I.1'><span id='I.1.a'/><span id='I.1.b'/><span id='I.1.c'/></span>\n"
             + "<span id='I.2'><span id='I.2.a'/></span></span>\n"
@@ -436,22 +436,44 @@ public class DomNodeTest extends WebTestCase {
             + "<span id='III'><span id='III.1'><span id='III.1.a'/></span></span>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(html);
-        final DescendantElementsIterator iterator = (DescendantElementsIterator)
-            page.getDocumentElement().getAllHtmlChildElements().iterator();
-        assertEquals("", iterator.nextElement().getId());
-        assertEquals("0", iterator.nextElement().getId());
-        assertEquals("I", iterator.nextElement().getId());
-        assertEquals("I.1", iterator.nextElement().getId());
-        assertEquals("I.1.a", iterator.nextElement().getId());
-        assertEquals("I.1.b", iterator.nextElement().getId());
-        assertEquals("I.1.c", iterator.nextElement().getId());
-        assertEquals("I.2", iterator.nextElement().getId());
-        assertEquals("I.2.a", iterator.nextElement().getId());
-        assertEquals("II", iterator.nextElement().getId());
-        assertEquals("III", iterator.nextElement().getId());
-        assertEquals("III.1", iterator.nextElement().getId());
-        assertEquals("III.1.a", iterator.nextElement().getId());
+        final DescendantElementsIterator<HtmlElement> iterator = (DescendantElementsIterator<HtmlElement>)
+            page.getDocumentElement().getHtmlElementDescendants().iterator();
+        assertEquals("", iterator.nextNode().getId());
+        assertEquals("0", iterator.nextNode().getId());
+        assertEquals("I", iterator.nextNode().getId());
+        assertEquals("I.1", iterator.nextNode().getId());
+        assertEquals("I.1.a", iterator.nextNode().getId());
+        assertEquals("I.1.b", iterator.nextNode().getId());
+        assertEquals("I.1.c", iterator.nextNode().getId());
+        assertEquals("I.2", iterator.nextNode().getId());
+        assertEquals("I.2.a", iterator.nextNode().getId());
+        assertEquals("II", iterator.nextNode().getId());
+        assertEquals("III", iterator.nextNode().getId());
+        assertEquals("III.1", iterator.nextNode().getId());
+        assertEquals("III.1.a", iterator.nextNode().getId());
         assertFalse(iterator.hasNext());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testGetDescendants_remove() throws Exception {
+        final String html =
+              "<html><body id='body'>\n"
+            + "<div id='a'>a<div id='b'>b</div>a<div id='c'>c</div>a</div><div id='d'>d</div>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPage(html);
+        assertEquals("abacad", page.asText().replaceAll("\\s", ""));
+        final DescendantElementsIterator<HtmlElement> iterator = (DescendantElementsIterator<HtmlElement>)
+            page.getDocumentElement().getHtmlElementDescendants().iterator();
+        assertEquals("", iterator.nextNode().getId());
+        assertEquals("body", iterator.nextNode().getId());
+        assertEquals("a", iterator.nextNode().getId());
+        iterator.remove();
+        assertEquals("d", iterator.nextNode().getId());
+        assertFalse(iterator.hasNext());
+        assertEquals("d", page.asText().replaceAll("\\s", ""));
     }
 
     static class DomChangeListenerTestImpl implements DomChangeListener {
@@ -677,7 +699,7 @@ public class DomNodeTest extends WebTestCase {
     public void getCanonicalXPath() throws Exception {
         final String content = "<html><head></head><body><div id='div1'/><div id='div2'/></body></html>";
         final HtmlPage page = loadPage(content);
-        for (final HtmlElement element : page.getAllHtmlChildElements()) {
+        for (final HtmlElement element : page.getHtmlElementDescendants()) {
             final List< ? extends Object> foundElements = page.getByXPath(element.getCanonicalXPath());
             assertEquals(1, foundElements.size());
             assertSame(element, foundElements.get(0));

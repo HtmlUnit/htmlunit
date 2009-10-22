@@ -115,4 +115,69 @@ public class RangeTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.FF)
+    @Alerts({ "qwerty", "tyxy", "[object DocumentFragment]", "[object HTMLSpanElement] [object Text]", "qwer",
+        "[object HTMLSpanElement]" })
+    public void testExtractContents() throws Exception {
+        final String html =
+              "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div><script>\n"
+            + "var d = document.getElementById('d');\n"
+            + "var s = document.getElementById('s');\n"
+            + "var r = document.createRange();\n"
+            + "r.setStart(s.firstChild, 4);\n"
+            + "r.setEnd(d.childNodes[2], 2);\n"
+            + "alert(s.innerHTML);\n"
+            + "alert(r);\n"
+            + "var fragment = r.extractContents();\n"
+            + "alert(fragment);\n"
+            + "alert(fragment.childNodes[0] + ' ' + fragment.childNodes[1]);\n"
+            + "alert(s.innerHTML);\n"
+            + "alert(document.getElementById('s'));\n"
+            + "</script></body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.FF)
+    @Alerts({
+        "1 <p><b id=\"b\">text1<span id=\"s\">inner</span>text2</b></p>",
+        "2 text1",
+        "3 [object DocumentFragment]",
+        "4 1: [object HTMLParagraphElement]: <b id=\"b\">text1</b>",
+        "5 <p><b id=\"b\"><span id=\"s\">inner</span>text2</b></p>",
+        "6 1: [object HTMLParagraphElement]: <b id=\"b\"><span id=\"s\"></span>text2</b>",
+        "7 <p><b id=\"b\"><span id=\"s\">inner</span></b></p>" })
+    public void testExtractContents2() throws Exception {
+        final String html =
+              "<html><body><div id='d'><p><b id='b'>text1<span id='s'>inner</span>text2</b></p></div><script>\n"
+            + "var d = document.getElementById('d');\n"
+            + "var b = document.getElementById('b');\n"
+            + "var s = document.getElementById('s');\n"
+            + "var r = document.createRange();\n"
+            + "r.setStart(d, 0);\n"
+            + "r.setEnd(b, 1);\n"
+            + "alert('1 ' + d.innerHTML);\n"
+            + "alert('2 ' + r);\n"
+            + "var frag = r.extractContents();\n"
+            + "alert('3 ' + frag);\n"
+            + "alert('4 ' + frag.childNodes.length + ': ' + frag.childNodes[0] + ': ' + frag.childNodes[0].innerHTML);\n"
+            + "alert('5 ' + d.innerHTML);\n"
+            + "var r2 = document.createRange();\n"
+            + "r2.setStart(s, 1);\n"
+            + "r2.setEnd(d, 1);\n"
+            + "var frag2 = r2.extractContents();\n"
+            + "alert('6 ' + frag2.childNodes.length + ': ' + frag2.childNodes[0] + ': ' + frag2.childNodes[0].innerHTML);\n"
+            + "alert('7 ' + d.innerHTML);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }

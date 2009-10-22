@@ -194,7 +194,7 @@ public abstract class HtmlElement extends DomElement {
     public final <E extends HtmlElement> List<E> getHtmlElementsByTagName(final String tagName) {
         final List<E> list = new ArrayList<E>();
         final String lowerCaseTagName = tagName.toLowerCase();
-        final Iterable<HtmlElement> iterable = getAllHtmlChildElements();
+        final Iterable<HtmlElement> iterable = getHtmlElementDescendants();
         for (final HtmlElement element : iterable) {
             if (lowerCaseTagName.equals(element.getTagName())) {
                 list.add((E) element);
@@ -632,7 +632,7 @@ public abstract class HtmlElement extends DomElement {
         final List<E> list = new ArrayList<E>();
         final String lowerCaseTagName = elementName.toLowerCase();
 
-        for (final HtmlElement next : getAllHtmlChildElements()) {
+        for (final HtmlElement next : getHtmlElementDescendants()) {
             if (next.getTagName().equals(lowerCaseTagName)) {
                 final String attValue = next.getAttribute(attributeName);
                 if (attValue != null && attValue.equals(attributeValue)) {

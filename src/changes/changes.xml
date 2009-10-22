@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration">
+            <action type="add" dev="sdanig">
+                JavaScript: implement range.extractContents() (Firefox only).
+            </action>
             <action type="fix" dev="asashour" issue="2881794">
                 JavaScript: properly handle body elements with qualified name.
             </action>

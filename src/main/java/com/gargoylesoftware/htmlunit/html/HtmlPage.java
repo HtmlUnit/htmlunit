@@ -708,7 +708,7 @@ public class HtmlPage extends SgmlPage {
         final List<String> tags = Arrays
             .asList(new String[] {"a", "area", "button", "input", "object", "select", "textarea"});
         final List<HtmlElement> tabbableElements = new ArrayList<HtmlElement>();
-        for (final HtmlElement element : getAllHtmlChildElements()) {
+        for (final HtmlElement element : getHtmlElementDescendants()) {
             final String tagName = element.getTagName();
             if (tags.contains(tagName)) {
                 final boolean disabled = element.hasAttribute("disabled");
@@ -809,7 +809,7 @@ public class HtmlPage extends SgmlPage {
         final List<String> acceptableTagNames = Arrays.asList(
                 new String[]{"a", "area", "button", "input", "label", "legend", "textarea"});
 
-        for (final HtmlElement element : getAllHtmlChildElements()) {
+        for (final HtmlElement element : getHtmlElementDescendants()) {
             if (acceptableTagNames.contains(element.getTagName())) {
                 final String accessKeyAttribute = element.getAttribute("accesskey");
                 if (searchString.equalsIgnoreCase(accessKeyAttribute)) {
@@ -1931,7 +1931,7 @@ public class HtmlPage extends SgmlPage {
         result.setScriptObject(getScriptObject());
         if (deep) {
             // fix up idMap_ and result's idMap_s
-            for (final HtmlElement child : result.getAllHtmlChildElements()) {
+            for (final HtmlElement child : result.getHtmlElementDescendants()) {
                 removeMappedElement(child);
                 result.addMappedElement(child);
             }

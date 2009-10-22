@@ -253,7 +253,7 @@ public class HtmlForm extends HtmlElement {
             return scriptResult.getNewPage();
         }
 
-        for (final HtmlElement next : getAllHtmlChildElements()) {
+        for (final HtmlElement next : getHtmlElementDescendants()) {
             if (next instanceof SubmittableElement) {
                 ((SubmittableElement) next).reset();
             }
@@ -273,7 +273,7 @@ public class HtmlForm extends HtmlElement {
     Collection<SubmittableElement> getSubmittableElements(final SubmittableElement submitElement) {
         final List<SubmittableElement> submittableElements = new ArrayList<SubmittableElement>();
 
-        for (final HtmlElement element : getAllHtmlChildElements()) {
+        for (final HtmlElement element : getHtmlElementDescendants()) {
             if (isSubmittable(element, submitElement)) {
                 submittableElements.add((SubmittableElement) element);
             }

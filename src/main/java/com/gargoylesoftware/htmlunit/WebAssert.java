@@ -431,7 +431,7 @@ public final class WebAssert {
      */
     public static void assertAllAccessKeyAttributesUnique(final HtmlPage page) {
         final List<String> list = new ArrayList<String>();
-        for (final HtmlElement element : page.getAllHtmlChildElements()) {
+        for (final HtmlElement element : page.getHtmlElementDescendants()) {
             final String key = element.getAttribute("accesskey");
             if (key != null && key.length() != 0) {
                 if (list.contains(key)) {
@@ -449,7 +449,7 @@ public final class WebAssert {
      */
     public static void assertAllIdAttributesUnique(final HtmlPage page) {
         final List<String> list = new ArrayList<String>();
-        for (final HtmlElement element : page.getAllHtmlChildElements()) {
+        for (final HtmlElement element : page.getHtmlElementDescendants()) {
             final String id = element.getAttribute("id");
             if (id != null && id.length() != 0) {
                 if (list.contains(id)) {

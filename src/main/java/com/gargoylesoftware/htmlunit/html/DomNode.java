@@ -269,6 +269,18 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
+     * Returns this node's index within its parent's child nodes (zero-based).
+     * @return this node's index within its parent's child nodes (zero-based)
+     */
+    public int getIndex() {
+        int index = 0;
+        for (DomNode n = previousSibling_; n != null && n.nextSibling_ != null; n = n.previousSibling_) {
+            index++;
+        }
+        return index;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public DomNode getPreviousSibling() {
@@ -305,6 +317,21 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 return true;
             }
             node = node.getParentNode();
+        }
+        return false;
+    }
+
+    /**
+     * Returns <tt>true</tt> if this node is an ancestor of any of the specified nodes.
+     *
+     * @param nodes the nodes to check
+     * @return <tt>true</tt> if this node is an ancestor of any of the specified nodes
+     */
+    public boolean isAncestorOfAny(DomNode... nodes) {
+        for (final DomNode node : nodes) {
+            if (isAncestorOf(node)) {
+                return true;
+            }
         }
         return false;
     }
@@ -1094,12 +1121,12 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         private DomNode nextNode_ = firstChild_;
         private DomNode currentNode_ = null;
 
-        /** @return whether there is a next object */
+        /** {@inheritDoc} */
         public boolean hasNext() {
             return nextNode_ != null;
         }
 
-        /** @return the next object */
+        /** {@inheritDoc} */
         public DomNode next() {
             if (nextNode_ != null) {
                 currentNode_ = nextNode_;
@@ -1109,7 +1136,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             throw new NoSuchElementException();
         }
 
-        /** Removes the current object. */
+        /** {@inheritDoc} */
         public void remove() {
             if (currentNode_ == null) {
                 throw new IllegalStateException();
@@ -1119,96 +1146,142 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Returns an {@link Iterable} that will recursively iterate over all of this node's descendants.
+     * Returns an {@link Iterable} that will recursively iterate over all of this node's descendants,
+     * including {@link DomText} elements, {@link DomComment} elements, etc. If you want to iterate
+     * only over {@link HtmlElement} descendants, please use {@link #getHtmlElementDescendants()}.
      * @return an {@link Iterable} that will recursively iterate over all of this node's descendants
      */
-    public final Iterable<HtmlElement> getAllHtmlChildElements() {
-        return new Iterable<HtmlElement>() {
-            public Iterator<HtmlElement> iterator() {
-                return new DescendantElementsIterator();
+    public final Iterable<DomNode> getDescendants() {
+        return new Iterable<DomNode>() {
+            public Iterator<DomNode> iterator() {
+                return new DescendantElementsIterator<DomNode>(DomNode.class);
             }
         };
     }
 
     /**
-     * An iterator over all HtmlElement descendants in document order.
+     * Returns an {@link Iterable} that will recursively iterate over all of this node's {@link HtmlElement}
+     * descendants. If you want to iterate over all descendants (including {@link DomText} elements,
+     * {@link DomComment} elements, etc.), please use {@link #getDescendants()}.
+     * @return an {@link Iterable} that will recursively iterate over all of this node's {@link HtmlElement}
+     *         descendants
      */
-    protected class DescendantElementsIterator implements Iterator<HtmlElement> {
+    public final Iterable<HtmlElement> getHtmlElementDescendants() {
+        return new Iterable<HtmlElement>() {
+            public Iterator<HtmlElement> iterator() {
+                return new DescendantElementsIterator<HtmlElement>(HtmlElement.class);
+            }
+        };
+    }
 
-        private HtmlElement nextElement_ = getFirstChildElement(DomNode.this);
+    /**
+     * Returns an {@link Iterable} that will recursively iterate over all of this node's {@link HtmlElement}
+     * descendants.
+     * @return an {@link Iterable} that will recursively iterate over all of this node's {@link HtmlElement}
+     *         descendants
+     * @deprecated as of 2.7, please use {@link #getHtmlElementDescendants()} instead
+     */
+    @Deprecated
+    public final Iterable<HtmlElement> getAllHtmlChildElements() {
+        return getHtmlElementDescendants();
+    }
 
-        /** @return is there a next one? */
+    /**
+     * Iterates over all descendants of a specific type, in document order.
+     * @param <T> the type of nodes over which to iterate
+     */
+    protected class DescendantElementsIterator<T extends DomNode> implements Iterator<T> {
+
+        private DomNode currentNode_;
+        private DomNode nextNode_;
+        private Class<T> type_;
+
+        /**
+         * Creates a new instance which iterates over the specified node type.
+         * @param type the type of nodes over which to iterate
+         */
+        public DescendantElementsIterator(final Class<T> type) {
+            type_ = type;
+            nextNode_ = getFirstChildElement(DomNode.this);
+        }
+
+        /** {@inheritDoc} */
         public boolean hasNext() {
-            return nextElement_ != null;
+            return nextNode_ != null;
         }
 
-        /** @return the next one */
-        public HtmlElement next() {
-            return nextElement();
+        /** {@inheritDoc} */
+        public T next() {
+            return nextNode();
         }
 
-        /** @throws UnsupportedOperationException always */
-        public void remove() throws UnsupportedOperationException {
-            throw new UnsupportedOperationException();
+        /** {@inheritDoc} */
+        public void remove() {
+            if (currentNode_ == null) {
+                throw new IllegalStateException("Unable to remove current node, because there is no current node.");
+            }
+            final DomNode current = currentNode_;
+            while (nextNode_ != null && current.isAncestorOf(nextNode_)) {
+                next();
+            }
+            current.remove();
         }
 
-        /** @return is there a next one? */
-        public HtmlElement nextElement() {
-            final HtmlElement result = nextElement_;
+        /** @return the next node, if there is one */
+        @SuppressWarnings("unchecked")
+        public T nextNode() {
+            currentNode_ = nextNode_;
             setNextElement();
-            return result;
+            return (T) currentNode_;
         }
 
         private void setNextElement() {
-            HtmlElement next = getFirstChildElement(nextElement_);
+            DomNode next = getFirstChildElement(nextNode_);
             if (next == null) {
-                next = getNextDomSibling(nextElement_);
+                next = getNextDomSibling(nextNode_);
             }
             if (next == null) {
-                next = getNextElementUpwards(nextElement_);
+                next = getNextElementUpwards(nextNode_);
             }
-            nextElement_ = next;
+            nextNode_ = next;
         }
 
-        private HtmlElement getNextElementUpwards(final DomNode startingNode) {
+        private DomNode getNextElementUpwards(final DomNode startingNode) {
             if (startingNode == DomNode.this) {
                 return null;
             }
-
             final DomNode parent = startingNode.getParentNode();
             if (parent == DomNode.this) {
                 return null;
             }
-
             DomNode next = parent.getNextSibling();
-            while (next != null && next instanceof HtmlElement == false) {
+            while (next != null && !type_.isAssignableFrom(next.getClass())) {
                 next = next.getNextSibling();
             }
-
             if (next == null) {
                 return getNextElementUpwards(parent);
             }
-            return (HtmlElement) next;
+            return next;
         }
 
-        private HtmlElement getFirstChildElement(final DomNode parent) {
+        private DomNode getFirstChildElement(final DomNode parent) {
             if (parent instanceof HtmlNoScript
                     && getPage().getEnclosingWindow().getWebClient().isJavaScriptEnabled()) {
                 return null;
             }
             DomNode node = parent.getFirstChild();
-            while (node != null && node instanceof HtmlElement == false) {
+            while (node != null && !type_.isAssignableFrom(node.getClass())) {
                 node = node.getNextSibling();
             }
-            return (HtmlElement) node;
+            return node;
         }
 
-        private HtmlElement getNextDomSibling(final HtmlElement element) {
+        private DomNode getNextDomSibling(final DomNode element) {
             DomNode node = element.getNextSibling();
-            while (node != null && node instanceof HtmlElement == false) {
+            while (node != null && !type_.isAssignableFrom(node.getClass())) {
                 node = node.getNextSibling();
             }
-            return (HtmlElement) node;
+            return node;
         }
     }
 
