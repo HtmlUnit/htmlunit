@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration">
+            <action type="add" dev="sdanig">
+                JavaScript: allow MouseEvent to have independent client coordinate values, if necessary.
+            </action>
             <action type="fix" dev="sdanig">
                 Fix the DomNodeList returned by DomNode.getChildNodes() so that it behaves correctly when children are removed from the DOM.
             </action>

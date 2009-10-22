@@ -70,8 +70,11 @@ public class MouseEvent extends UIEvent {
     /** The button code for IE (1: left button, 4: middle button, 2: right button). */
     private static final int[] buttonCodeToIE = {1, 4, 2};
 
-    /** The mouse event's coordinates; initially <tt>null</tt> and lazily initialized for performance reasons. */
+    /** The event's screen coordinates; initially <tt>null</tt> and lazily initialized for performance reasons. */
     private Integer screenX_, screenY_;
+
+    /** The event's client coordinates; initially <tt>null</tt> and lazily initialized for performance reasons. */
+    private Integer clientX_, clientY_;
 
     /** The button code according to W3C (0: left button, 1: middle button, 2: right button). */
     private int button_;
@@ -121,10 +124,13 @@ public class MouseEvent extends UIEvent {
 
     /**
      * The horizontal coordinate at which the event occurred relative to the DOM implementation's client area.
-     * @return the horizontal coordinate (currently the same as {@link #jsxGet_screenX()})
+     * @return the horizontal coordinate
      */
     public int jsxGet_clientX() {
-        return jsxGet_screenX();
+        if (clientX_ == null) {
+            clientX_ = jsxGet_screenX();
+        }
+        return clientX_;
     }
 
     /**
@@ -153,10 +159,13 @@ public class MouseEvent extends UIEvent {
 
     /**
      * The vertical coordinate at which the event occurred relative to the DOM implementation's client area.
-     * @return the horizontal coordinate (currently the same as {@link #jsxGet_screenY()})
+     * @return the horizontal coordinate
      */
     public int jsxGet_clientY() {
-        return jsxGet_screenY();
+        if (clientY_ == null) {
+            clientY_ = jsxGet_screenY();
+        }
+        return clientY_;
     }
 
     /**
@@ -253,8 +262,8 @@ public class MouseEvent extends UIEvent {
         jsxFunction_initUIEvent(type, bubbles, cancelable, view, detail);
         screenX_ = screenX;
         screenY_ = screenY;
-        // Ignore the clientX parameter; we always use screenX.
-        // Ignore the clientY parameter; we always use screenY.
+        clientX_ = clientX;
+        clientY_ = clientY;
         setCtrlKey(ctrlKey);
         setAltKey(altKey);
         setShiftKey(shiftKey);

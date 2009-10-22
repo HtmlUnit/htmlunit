@@ -80,7 +80,7 @@ public class MouseEventTest extends WebTestCase {
     public void testInitMouseEvent() throws Exception {
         final String html = "<html><body><script>\n"
             + "  var e = document.createEvent('MouseEvents');\n"
-            + "  e.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, true, true, true, true, 0, null);\n"
+            + "  e.initMouseEvent('click', true, true, window, 0, 1, 2, 3, 4, true, true, true, true, 0, null);\n"
             + "  alert(e.type);\n"
             + "  alert(e.bubbles);\n"
             + "  alert(e.cancelable);\n"
@@ -95,7 +95,7 @@ public class MouseEventTest extends WebTestCase {
             + "</script></body></html>";
         final List<String> actual = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, html, actual);
-        final String[] expected = {"click", "true", "true", "true", "0", "0", "0", "0", "true", "true", "true"};
+        final String[] expected = {"click", "true", "true", "true", "1", "2", "3", "4", "true", "true", "true"};
         assertEquals(expected, actual);
     }
 
