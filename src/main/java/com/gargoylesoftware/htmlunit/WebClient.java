@@ -199,7 +199,7 @@ public class WebClient implements Serializable {
      * @param proxyConfig the proxy configuration to use
      */
     private void init(final BrowserVersion browserVersion, final ProxyConfig proxyConfig) {
-        homePage_ = "http://www.gargoylesoftware.com/";
+        homePage_ = "http://htmlunit.sf.net/";
         browserVersion_ = browserVersion;
         proxyConfig_ = proxyConfig;
 
