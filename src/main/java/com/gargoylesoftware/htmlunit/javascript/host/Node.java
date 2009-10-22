@@ -168,7 +168,7 @@ public class Node extends SimpleScriptable {
                 if (getBrowserVersion().isIE()) {
                     return childObject; // IE silently ignores it
                 }
-                throw Context.reportRuntimeError("Node cannopt be inserted at the specified point in the hierarchy");
+                throw Context.reportRuntimeError("Node cannot be inserted at the specified point in the hierarchy");
             }
 
             // Get XML node for the DOM node passed in
@@ -275,7 +275,7 @@ public class Node extends SimpleScriptable {
                 if (getBrowserVersion().isIE()) {
                     return newChildNode; // IE silently ignores it
                 }
-                throw Context.reportRuntimeError("Node cannopt be inserted at the specified point in the hierarchy");
+                throw Context.reportRuntimeError("Node cannot be inserted at the specified point in the hierarchy");
             }
 
             if (newChildNode instanceof DomDocumentFragment) {
@@ -417,7 +417,7 @@ public class Node extends SimpleScriptable {
 
             // is the node allowed here?
             if (!isNodeInsertable(newChild)) {
-                throw Context.reportRuntimeError("Node cannopt be inserted at the specified point in the hierarchy");
+                throw Context.reportRuntimeError("Node cannot be inserted at the specified point in the hierarchy");
             }
 
             // Get XML nodes for the DOM nodes passed in
