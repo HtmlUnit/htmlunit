@@ -227,7 +227,7 @@ public class SimpleRange implements Range, Serializable {
                 if (foundStartNode && isOffsetChars(n)) {
                     started = true;
                     String text = getText(n);
-                    text = text.substring(0, startOffset_ + 1);
+                    text = text.substring(0, startOffset_);
                     setText(n, text);
                 }
             }

@@ -327,7 +327,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param nodes the nodes to check
      * @return <tt>true</tt> if this node is an ancestor of any of the specified nodes
      */
-    public boolean isAncestorOfAny(DomNode... nodes) {
+    public boolean isAncestorOfAny(final DomNode... nodes) {
         for (final DomNode node : nodes) {
             if (isAncestorOf(node)) {
                 return true;
