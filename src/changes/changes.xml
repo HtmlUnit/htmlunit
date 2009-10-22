@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration">
+            <action type="fix" dev="asashour" issue="2881627">
+                JavaScript: pre-process \xDD in string literals before IE conditional compilation.
+            </action>
             <action type="add" dev="sdanig">
                 JavaScript: allow MouseEvent to have independent client coordinate values, if necessary.
             </action>
