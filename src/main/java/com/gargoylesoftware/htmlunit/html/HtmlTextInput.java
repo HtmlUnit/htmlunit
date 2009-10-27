@@ -168,4 +168,12 @@ public class HtmlTextInput extends HtmlInput implements SelectableTextInput {
         }
         valueAtFocus_ = null;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return new HtmlTextInput(getNamespaceURI(), getQualifiedName(), getPage(), getAttributesMap());
+    }
 }
