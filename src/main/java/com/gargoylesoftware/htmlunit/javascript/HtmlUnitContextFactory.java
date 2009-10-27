@@ -144,8 +144,6 @@ public class HtmlUnitContextFactory extends ContextFactory {
                 .getThreadLocal(JavaScriptEngine.KEY_STARTING_PAGE);
             source = preProcess(page, source, sourceName, null);
 
-            source = new StringScriptPreProcessor().preProcess(page, source, sourceName, null);
-
             // PreProcess IE Conditional Compilation if needed
             if (browserVersion_.isIE()) {
                 final ScriptPreProcessor ieCCPreProcessor = new IEConditionalCompilationScriptPreProcessor();
