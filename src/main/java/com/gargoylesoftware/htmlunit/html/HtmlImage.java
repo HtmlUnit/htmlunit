@@ -282,12 +282,12 @@ public class HtmlImage extends HtmlElement {
     }
 
     /**
-     * <span style="color:red">POTENIAL PERFORMANCE KILLER - DOWNLOADS THE IMAGE - USE AT YOUR OWN RISK.</span><br/>
-     * If the image is not already downloaded it triggers a download. Then it stores the image in the HtmlImage
-     * object for later use.<br/>
+     * <p>Returns the image's actual height (<b>not</b> the image's {@link #getHeightAttribute() height attribute}).</p>
+     * <p><span style="color:red">POTENTIAL PERFORMANCE KILLER - DOWNLOADS THE IMAGE - USE AT YOUR OWN RISK</span></p>
+     * <p>If the image has not already been downloaded, this method triggers a download and caches the image.</p>
      *
-     * @return returns the real height of the image
-     * @throws IOException if an error occurs while downloading the image or reading it
+     * @return the image's actual height
+     * @throws IOException if an error occurs while downloading or reading the image
      */
     public int getHeight() throws IOException {
         readImageIfNeeded();
@@ -295,12 +295,12 @@ public class HtmlImage extends HtmlElement {
     }
 
     /**
-     * <span style="color:red">POTENIAL PERFORMANCE KILLER - DOWNLOADS THE IMAGE - USE AT YOUR OWN RISK.</span><br/>
-     * If the image is not already downloaded it triggers a download. Then it stores the image in the HtmlImage
-     * object for later use.<br/>
+     * <p>Returns the image's actual width (<b>not</b> the image's {@link #getWidthAttribute() width attribute}).</p>
+     * <p><span style="color:red">POTENTIAL PERFORMANCE KILLER - DOWNLOADS THE IMAGE - USE AT YOUR OWN RISK</span></p>
+     * <p>If the image has not already been downloaded, this method triggers a download and caches the image.</p>
      *
-     * @return returns the real width of the image
-     * @throws IOException if an error occurs while downloading the image or reading it
+     * @return the image's actual width
+     * @throws IOException if an error occurs while downloading or reading the image
      */
     public int getWidth() throws IOException {
         readImageIfNeeded();
@@ -308,12 +308,12 @@ public class HtmlImage extends HtmlElement {
     }
 
     /**
-     * <span style="color:red">POTENIAL PERFORMANCE KILLER - DOWNLOADS THE IMAGE - USE AT YOUR OWN RISK.</span><br/>
-     * If the image is not already downloaded it triggers a download. Then it stores the image in the HtmlImage
-     * object for later use.<br/>
+     * <p>Returns the <tt>ImageReader</tt> which can be used to read the image contained by this image element.</p>
+     * <p><span style="color:red">POTENTIAL PERFORMANCE KILLER - DOWNLOADS THE IMAGE - USE AT YOUR OWN RISK</span></p>
+     * <p>If the image has not already been downloaded, this method triggers a download and caches the image.</p>
      *
-     * @return the ImageReader representing the image from the download stream
-     * @throws IOException if an error occurs while downloading the image and if its of an unsupported content-type
+     * @return the <tt>ImageReader</tt> which can be used to read the image contained by this image element
+     * @throws IOException if an error occurs while downloading or reading the image
      */
     public ImageReader getImageReader() throws IOException {
         readImageIfNeeded();
@@ -321,13 +321,14 @@ public class HtmlImage extends HtmlElement {
     }
 
     /**
-     * <span style="color:red">POTENIAL PERFORMANCE KILLER - DOWNLOADS THE IMAGE - USE AT YOUR OWN RISK.</span><br/>
-     * If the image is not already downloaded it triggers a download. Then it stores the image in the HtmlImage
-     * object for later use.<br/>
+     * <p>Returns the <tt>WebResponse</tt> for the image contained by this image element.</p>
+     * <p><span style="color:red">POTENTIAL PERFORMANCE KILLER - DOWNLOADS THE IMAGE - USE AT YOUR OWN RISK</span></p>
+     * <p>If the image has not already been downloaded and <tt>downloadIfNeeded</tt> is <tt>true</tt>, this method
+     * triggers a download and caches the image.</p>
      *
-     * @param downloadIfNeeded indicates if a request should be performed this hasn't been done previously
-     * @return <code>null</code> if no download should be performed and when this wasn't already done; the response
-     * received when performing a request for the image referenced by this tag otherwise
+     * @param downloadIfNeeded whether or not the image should be downloaded (if it hasn't already been downloaded)
+     * @return <tt>null</tt> if no download should be performed and one hasn't already been triggered; otherwise,
+     *         the response received when performing a request for the image referenced by this element
      * @throws IOException if an error occurs while downloading the image
      */
     public WebResponse getWebResponse(final boolean downloadIfNeeded) throws IOException {
@@ -338,14 +339,11 @@ public class HtmlImage extends HtmlElement {
     }
 
     /**
-     * <span style="color:red">POTENIAL PERFORMANCE KILLER - DOWNLOADS THE IMAGE - USE AT YOUR OWN RISK.</span><br/>
-     * If the image is not already downloaded it triggers a download. Then it stores the image in the HtmlImage
-     * object for later use.<br/>
+     * <p>Downloads the image contained by this image element.</p>
+     * <p><span style="color:red">POTENTIAL PERFORMANCE KILLER - DOWNLOADS THE IMAGE - USE AT YOUR OWN RISK</span></p>
+     * <p>If the image has not already been downloaded, this method triggers a download and caches the image.</p>
      *
-     * Downloads the image specified in the src attribute.
-     *
-     * @throws IOException if an error occurs while downloading the image or if the stream is of an
-     * unsupported content-type
+     * @throws IOException if an error occurs while downloading the image
      */
     private void downloadImageIfNeeded() throws IOException {
         if (!downloaded_) {
