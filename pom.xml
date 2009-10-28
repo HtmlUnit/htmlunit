@@ -37,10 +37,13 @@
                 <version>2.3</version>
                 <configuration>
                     <configLocation>checkstyle.xml</configLocation>
-                    <suppressionsLocation>checkstyle_suppressions.xml</suppressionsLocation>
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>true</failsOnError>
+                    <propertyExpansion>
+                        checkstyle.suppressions.file=checkstyle_suppressions.xml
+                        checkstyle.header.file=LICENSE.txt
+                    </propertyExpansion>
                 </configuration>
             </plugin>
             <plugin>

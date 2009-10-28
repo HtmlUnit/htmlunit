@@ -3,9 +3,13 @@
     "-//Puppy Crawl//DTD Check Configuration 1.1//EN"
     "http://www.puppycrawl.com/dtds/configuration_1_1.dtd">
 
-<!-- Checkstyle checks configured for Maven. -->
-
 <module name="Checker">
+
+    <!-- Suppresses certain checks. -->
+    <module name="SuppressionFilter">
+        <property name="file" value="${checkstyle.suppressions.file}"/>
+    </module>
+
     <!-- Checks that a package.html file exists for each package.     -->
     <!-- See http://checkstyle.sf.net/config_javadoc.html#PackageHtml -->
     <module name="PackageHtml"/>
@@ -21,8 +25,7 @@
     <module name="TreeWalker">
 
         <module name="Header">
-            <property name="headerFile" value="LICENSE.txt"/>
-            <property name="ignoreLines" value="1,2,3,4,5,6"/>
+            <property name="headerFile" value="${checkstyle.header.file}"/>
         </module>
         <property name="tabWidth" value="4"/>
         <module name="LeftCurly">
@@ -113,13 +116,12 @@
 
         <!-- Checks for correct basic indentation                -->
         <!-- See http://checkstyle.sf.net/config_misc.html       -->
-<!-- -->
         <module name="Indentation">
             <property name="basicOffset"      value="4"/>
             <property name="braceAdjustment"  value="0"/>
             <property name="caseIndent"       value="4"/>
         </module>
-<!-- -->
+
         <!-- Modifier Checks                                    -->
         <!-- See http://checkstyle.sf.net/config_modifiers.html -->
         <module name="ModifierOrder"/>
@@ -178,8 +180,6 @@
             <property name="tokens" value="VARIABLE_DEF,PARAMETER_DEF"/>
         </module>
 
-        <!-- Uncomment to find the TODOs without a helpful IDE -->
-        <!--<module name="TodoComment"/>-->
     </module>
 
 </module>
