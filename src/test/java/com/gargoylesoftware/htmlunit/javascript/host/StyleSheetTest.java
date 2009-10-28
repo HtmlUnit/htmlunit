@@ -253,7 +253,8 @@ public class StyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF2 = { "4", "§§URL§§style2.css", "§§URL§§style4.css", "§§URL§§test.html", "§§URL§§test.html" },
+    @Alerts(FF2 = { "4", "§§URL§§style2.css", "§§URL§§style4.css", "§§URL§§test.html",
+                "§§URL§§test.html" },
             FF3 = { "4", "§§URL§§style2.css", "§§URL§§style4.css", "null", "null" },
             IE = { "4", "§§URL§§style2.css", "style4.css", "", "" })
     public void href() throws Exception {
