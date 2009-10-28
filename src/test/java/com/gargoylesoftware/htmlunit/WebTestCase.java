@@ -714,8 +714,8 @@ public abstract class WebTestCase {
 
     /**
      * Defines the provided HTML as the response of the MockWebConnection for {@link #getDefaultUrl()}
-     * and loads the page with this URL using the current browser version.
-     * Finally asserts the alerts equal the expected alerts (in which "§§URL§§" has been expanded to the default URL).
+     * and loads the page with this URL using the current browser version; finally, asserts that the
+     * alerts equal the expected alerts (in which "§§URL§§" has been expanded to the default URL).
      * @param html the HTML to use
      * @return the new page
      * @throws Exception if something goes wrong
@@ -726,8 +726,8 @@ public abstract class WebTestCase {
 
     /**
      * Defines the provided HTML as the response of the MockWebConnection for {@link #getDefaultUrl()}
-     * and loads the page with this URL using the current browser version.
-     * Finally asserts the alerts equal the expected alerts.
+     * and loads the page with this URL using the current browser version; finally, asserts the alerts
+     * equal the expected alerts.
      * @param html the HTML to use
      * @param url the URL from which the provided HTML code should be delivered
      * @param waitForJS the milliseconds to wait for background JS tasks to complete. Ignored if -1.
