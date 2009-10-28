@@ -7,7 +7,7 @@
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration">
             <action type="fix" dev="mguillem">
-                Fixed StringIndexOutOfBoundsException occurring when typing in a cloned text node.
+                Fixed StringIndexOutOfBoundsException occurring when typing in a cloned text input or textarea node.
             </action>
 <!--
             <action type="fix" dev="asashour" issue="2881627">

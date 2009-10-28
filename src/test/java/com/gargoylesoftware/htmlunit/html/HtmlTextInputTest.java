@@ -66,21 +66,29 @@ public class HtmlTextInputTest extends WebTestCase {
      */
     @Test
     public void type_StringIndexOutOfBoundsException() throws Exception {
-        final String html = "<html><head></head><body><input id='t' onkeyup='copy(this)'/>"
+        type_StringIndexOutOfBoundsException("<input type='text' id='t'>");
+        type_StringIndexOutOfBoundsException("<input type='password' id='t'>");
+        type_StringIndexOutOfBoundsException("<textarea id='t'></textarea>");
+    }
+
+    void type_StringIndexOutOfBoundsException(final String tag) throws Exception {
+        final String html = "<html><head></head><body>\n"
+            + tag + "\n"
             + "<script>\n"
-            + "var e = document.getElementById('t');\n"
-            + "var c = e.cloneNode();\n"
-            + "c.id = 't2';\n"
-            + "document.body.appendChild(c);\n"
             + "function copy(node) {\n"
             + "  e.value = '231';"
             + "}"
+            + "var e = document.getElementById('t');\n"
+            + "e.onkeyup = copy;\n"
+            + "var c = e.cloneNode();\n"
+            + "c.id = 't2';\n"
+            + "document.body.appendChild(c);\n"
             + "</script>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(getBrowserVersion(), html, null);
-        final HtmlTextInput t = (HtmlTextInput) page.getElementById("t2");
+        final HtmlElement t = page.getElementById("t2");
         t.type("abc");
-        assertEquals("abc", t.getValueAttribute());
+        assertEquals("abc", t.asText());
     }
 
     /**

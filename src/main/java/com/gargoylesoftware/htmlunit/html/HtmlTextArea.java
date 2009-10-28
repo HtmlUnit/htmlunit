@@ -440,4 +440,11 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
         return hasAttribute("readOnly");
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return new HtmlTextArea(getNamespaceURI(), getQualifiedName(), getPage(), getAttributesMap());
+    }
 }

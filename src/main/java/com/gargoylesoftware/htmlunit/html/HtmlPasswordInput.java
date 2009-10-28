@@ -131,4 +131,11 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
             c, shiftKey, ctrlKey, altKey);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return new HtmlPasswordInput(getNamespaceURI(), getQualifiedName(), getPage(), getAttributesMap());
+    }
 }
