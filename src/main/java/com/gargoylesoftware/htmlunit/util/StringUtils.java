@@ -14,8 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 import org.apache.commons.httpclient.util.DateParseException;
 import org.apache.commons.httpclient.util.DateUtil;
@@ -116,13 +116,13 @@ public final class StringUtils {
     }
 
     /**
-     * Returns <tt>true</tt> if the specified list of strings contains the specified string, ignoring case.
+     * Returns <tt>true</tt> if the specified collection of strings contains the specified string, ignoring case.
      *
      * @param strings the strings to search
      * @param string the string to search for
-     * @return <tt>true</tt> if the specified list of strings contains the specified string, ignoring case
+     * @return <tt>true</tt> if the specified collection of strings contains the specified string, ignoring case
      */
-    public static boolean containsCaseInsensitive(final List<String> strings, String string) {
+    public static boolean containsCaseInsensitive(final Collection<String> strings, String string) {
         string = string.toLowerCase();
         for (String s : strings) {
             if (s.toLowerCase().equals(string)) {
