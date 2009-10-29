@@ -32,6 +32,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.logging.Log;
@@ -309,8 +310,12 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
      */
     private boolean waitForCompletion(final ScheduledFuture< ? > job) {
         try {
-            LOG.debug("Waiting for completion of job: " + job + ".");
-            job.get();
+            final long delay = job.getDelay(TimeUnit.MILLISECONDS);
+            LOG.debug("Waiting for completion of job starting in " + delay + "ms: " + job);
+            // job.get() is not safe here because the job may have been completed
+            // before get() is called.
+            // See WebClientWaitForBackgroundJobsTest#waitForBackgroundJavaScriptStartingBefore_hangs
+            job.get(delay + 100, TimeUnit.MILLISECONDS);
             LOG.debug("Job done: " + job.isDone() + ".");
         }
         catch (final CancellationException e) {
@@ -323,6 +328,9 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         }
         catch (final ExecutionException e) {
             LOG.debug(e.getMessage(), e);
+            return false;
+        }
+        catch (final TimeoutException e) {
             return false;
         }
         return true;

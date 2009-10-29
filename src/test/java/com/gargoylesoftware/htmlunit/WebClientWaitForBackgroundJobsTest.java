@@ -489,6 +489,49 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /**
+     * HtmlUnit-2.7-SNAPSHOT (as of 29.10.09) had bug with 
+     * WebClient.waitForBackgroundJavaScriptStartingBefore: it could be totally blocking
+     * under some circumstances. This test reproduces the problem but ensures
+     * that the test terminates (calling clearInterval when waitForBackgroundJavaScriptStartingBefore
+     * has not done its job correctly).
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void waitForBackgroundJavaScriptStartingBefore_hangs() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <title>test</title>\n"
+            + "  <script>\n"
+            + "    var start = new Date().getTime();\n"
+            + "    var id = setInterval(doWork1, 10);\n"
+            + "    function stopTimer() {\n"
+            + "      clearInterval(id);\n"
+            + "    }\n"
+            + "    function doWork1() {\n"
+            + "      if (start + 3000 < new Date().getTime()) {\n"
+            + "        clearInterval(id);\n"
+            + "        document.title = 'failed';\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<button onclick='stopTimer()'>stop</button>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebClient client =  new WebClient(BrowserVersion.FIREFOX_3);
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setDefaultResponse(html);
+
+        client.setWebConnection(webConnection);
+
+        final HtmlPage page = client.getPage(URL_FIRST);
+        client.waitForBackgroundJavaScriptStartingBefore(2000);
+        assertEquals("test", page.getTitleText());
+    }
 }
 
 /**
