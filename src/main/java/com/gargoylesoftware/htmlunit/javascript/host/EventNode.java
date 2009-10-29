@@ -303,6 +303,22 @@ public class EventNode extends Node {
     }
 
     /**
+     * Sets the <tt>onerror</tt> event handler for this element.
+     * @param handler the <tt>onerror</tt> event handler for this element
+     */
+    public void jsxSet_onerror(final Object handler) {
+        setEventHandlerProp("onerror", handler);
+    }
+
+    /**
+     * Returns the <tt>onerror</tt> event handler for this element.
+     * @return the <tt>onerror</tt> event handler for this element
+     */
+    public Object jsxGet_onerror() {
+        return getEventHandlerProp("onerror");
+    }
+
+    /**
      * Fires a specified event on this element (IE only). See the
      * <a href="http://msdn.microsoft.com/en-us/library/ms536423.aspx">MSDN documentation</a>
      * for more information.

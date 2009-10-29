@@ -997,6 +997,7 @@
         <property name="onclick" readable="true" writable="true"/>
         <property name="oncontextmenu" readable="true" writable="true"/>
         <property name="ondblclick" readable="true" writable="true"/>
+        <property name="onerror" readable="true" writable="true"/>
         <property name="onfocus" readable="true" writable="true"/>
         <property name="onfocusin" readable="true" writable="true">
             <browser name="Internet Explorer"/>

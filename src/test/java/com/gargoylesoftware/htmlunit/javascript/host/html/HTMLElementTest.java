@@ -1202,6 +1202,14 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setOnerror() throws Exception {
+        eventHandlerSetterGetterTest("onerror");
+    }
+
+    /**
      * @param eventName the name of the event
      * @throws Exception if the test fails
      */
