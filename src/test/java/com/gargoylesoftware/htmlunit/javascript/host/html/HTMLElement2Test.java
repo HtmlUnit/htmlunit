@@ -14,8 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -177,5 +181,68 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Blur isn't fired on DIV elements for instance.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "input handler", "blur input" })
+    public void eventHandlerBubble_blur() throws Exception {
+        events("blur");
+    }
+
+    /**
+     * Focus isn't fired on DIV elements for instance.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "input handler", "focus input" })
+    public void eventHandlerBubble_focus() throws Exception {
+        events("focus");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "input handler", "click input", "div handler", "click div" })
+    public void eventHandlerBubble_click() throws Exception {
+        events("click");
+    }
+
+    private void events(final String type) throws Exception {
+        final String html = "<html><head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<div id='div' on" + type + "='log(\"div handler\")'>\n"
+            + "<input id='input' on" + type + "='log(\"input handler\")'>\n"
+            + "</div>\n"
+            + "<textarea id='log'></textarea>\n"
+            + "<script>\n"
+            + "function log(x) {\n"
+            + "  var log = document.getElementById('log');\n"
+            + "  log.value += x + '\\n';\n"
+            + "}\n"
+            + "function addListener(id, event) {\n"
+            + "  var handler = function(e) { log(event + ' ' + id) };\n"
+            + "  var e = document.getElementById(id);\n"
+            + "  if (e.addEventListener) {\n"
+            + "    e.addEventListener(event, handler, false)\n"
+            + "  } else e.attachEvent('on' + event, handler);\n"
+            + "}\n"
+            + "var eventType = '" + type + "';\n"
+            + "addListener('div', eventType);\n"
+            + "addListener('input', eventType);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("input")).click();
+        final WebElement log = driver.findElement(By.id("log"));
+        log.click();
+        final String text = log.getValue().trim().replaceAll("\r", "");
+        assertEquals(StringUtils.join(getExpectedAlerts(), "\n"), text);
     }
 }

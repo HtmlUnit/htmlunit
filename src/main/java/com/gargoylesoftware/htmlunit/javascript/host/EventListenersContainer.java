@@ -142,12 +142,16 @@ public class EventListenersContainer implements Serializable {
     }
 
     private ScriptResult executeEventListeners(final boolean useCapture, final Event event, final Object[] args) {
+        final DomNode node = jsNode_.getDomNodeOrDie();
+        // some event don't apply on all kind of nodes, for instance "blur"
+        if (!event.applies(node)) {
+            return null;
+        }
         final boolean ie = jsNode_.getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE();
         ScriptResult allResult = null;
         final List<Function> handlers = getHandlers(event.jsxGet_type(), useCapture);
         if (handlers != null && !handlers.isEmpty()) {
             event.setCurrentTarget(jsNode_);
-            final DomNode node = jsNode_.getDomNodeOrDie();
             final HtmlPage page = (HtmlPage) node.getPage();
             // make a copy of the list as execution of an handler may (de-)register handlers
             final List<Function> handlersToExecute = new ArrayList<Function>(handlers);
@@ -173,9 +177,13 @@ public class EventListenersContainer implements Serializable {
     }
 
     private ScriptResult executeEventHandler(final Event event, final Object[] propHandlerArgs) {
+        final DomNode node = jsNode_.getDomNodeOrDie();
+        // some event don't apply on all kind of nodes, for instance "blur"
+        if (!event.applies(node)) {
+            return null;
+        }
         final Function handler = getEventHandler(event.jsxGet_type());
         if (handler != null) {
-            final DomNode node = jsNode_.getDomNodeOrDie();
             event.setCurrentTarget(jsNode_);
             final HtmlPage page = (HtmlPage) node.getPage();
             LOG.debug("Executing " + event.jsxGet_type() + " handler for " + node);

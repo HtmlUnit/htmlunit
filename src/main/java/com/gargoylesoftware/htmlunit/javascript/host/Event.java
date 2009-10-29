@@ -24,6 +24,9 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlArea;
+import com.gargoylesoftware.htmlunit.html.SubmittableElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -585,6 +588,20 @@ public class Event extends SimpleScriptable {
         buffer.append(currentTarget_);
         buffer.append(");");
         return buffer.toString();
+    }
+
+    /**
+     * Indicates if the current event can be applied to the provided node.
+     * TODO: investigate systematically ALL nodes and ALL events!
+     * @param node the node to test
+     * @return <code>false</code> if the event can't be applied
+     */
+    public boolean applies(final DomNode node) {
+        if (TYPE_BLUR.equals(jsxGet_type()) || TYPE_FOCUS.equals(jsxGet_type())) {
+            return node instanceof SubmittableElement || node instanceof HtmlAnchor
+                || node instanceof HtmlArea;
+        }
+        return true;
     }
 
 }
