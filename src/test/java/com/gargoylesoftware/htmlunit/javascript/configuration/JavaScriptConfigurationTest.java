@@ -585,6 +585,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
 
     /**
      * Regression test for bug 2854240.
+     * This test was throwing an OutOfMemoryError when the bug existed.
      * @throws Exception if an error occurs
      */
     @Test
