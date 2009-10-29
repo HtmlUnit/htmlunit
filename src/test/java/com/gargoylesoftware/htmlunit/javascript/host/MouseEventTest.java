@@ -17,14 +17,14 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import static org.junit.Assert.assertNotNull;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
@@ -35,22 +35,18 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class MouseEventTest extends WebTestCase {
+@RunWith(BrowserRunner.class)
+public class MouseEventTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
     public void testEventCoordinates() throws Exception {
-        testEventCoordinates(BrowserVersion.FIREFOX_2);
-        testEventCoordinates(BrowserVersion.INTERNET_EXPLORER_6);
-    }
-
-    private void testEventCoordinates(final BrowserVersion browser) throws Exception {
         final URL url = getClass().getClassLoader().getResource("event_coordinates.html");
         assertNotNull(url);
 
-        final WebClient client = new WebClient(browser);
+        final WebClient client = getWebClient();
         final HtmlPage page = client.getPage(url);
         assertEquals("Mouse Event coordinates", page.getTitleText());
 
@@ -77,8 +73,11 @@ public class MouseEventTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(FF = { "click", "true", "true", "true", "1", "2", "3", "4", "true", "true", "true", "true" },
+            IE = "exception")
     public void testInitMouseEvent() throws Exception {
         final String html = "<html><body><script>\n"
+            + "try {\n"
             + "  var e = document.createEvent('MouseEvents');\n"
             + "  e.initMouseEvent('click', true, true, window, 0, 1, 2, 3, 4, true, true, true, true, 0, null);\n"
             + "  alert(e.type);\n"
@@ -92,11 +91,11 @@ public class MouseEventTest extends WebTestCase {
             + "  alert(e.ctrlKey);\n"
             + "  alert(e.altKey);\n"
             + "  alert(e.shiftKey);\n"
+            + "  alert(e.metaKey);\n"
+            + "} catch(e) { alert('exception') }\n"
             + "</script></body></html>";
-        final List<String> actual = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, html, actual);
-        final String[] expected = {"click", "true", "true", "true", "1", "2", "3", "4", "true", "true", "true"};
-        assertEquals(expected, actual);
+
+        loadPageWithAlerts2(html);
     }
 
 }

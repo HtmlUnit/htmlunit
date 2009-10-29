@@ -31,6 +31,9 @@ public class UIEvent extends Event {
     /** Specifies some detail information about the event. */
     private long detail_;
 
+    /** Whether or not the "meta" key was pressed during the firing of the event. */
+    private boolean metaKey_;
+
     /**
      * Creates a new UI event instance.
      */
@@ -95,6 +98,21 @@ public class UIEvent extends Event {
         jsxFunction_initEvent(type, bubbles, cancelable);
         // Ignore the view parameter; we always use the window.
         setDetail(detail);
+    }
+
+    /**
+     * Returns whether or not the "meta" key was pressed during the event firing.
+     * @return whether or not the "meta" key was pressed during the event firing
+     */
+    public boolean jsxGet_metaKey() {
+        return metaKey_;
+    }
+
+    /**
+     * @param metaKey whether Meta has been pressed during this event or not
+     */
+    protected void setMetaKey(final boolean metaKey) {
+        metaKey_ = metaKey;
     }
 
 }

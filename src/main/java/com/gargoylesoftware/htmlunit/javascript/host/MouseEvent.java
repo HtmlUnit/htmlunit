@@ -79,9 +79,6 @@ public class MouseEvent extends UIEvent {
     /** The button code according to W3C (0: left button, 1: middle button, 2: right button). */
     private int button_;
 
-    /** Whether or not the "meta" key was pressed during the firing of the event. */
-    private boolean metaKey_;
-
     /**
      * Used to build the prototype.
      */
@@ -107,12 +104,12 @@ public class MouseEvent extends UIEvent {
         setShiftKey(shiftKey);
         setCtrlKey(ctrlKey);
         setAltKey(altKey);
+        setMetaKey(false);
 
         if (button != BUTTON_LEFT && button != BUTTON_MIDDLE && button != BUTTON_RIGHT) {
             throw new IllegalArgumentException("Invalid button code: " + button);
         }
         button_ = button;
-        metaKey_ = false;
 
         if (TYPE_DBL_CLICK.equals(type)) {
             setDetail(2);
@@ -208,14 +205,6 @@ public class MouseEvent extends UIEvent {
     }
 
     /**
-     * Returns whether or not the "meta" key was pressed during the event firing.
-     * @return whether or not the "meta" key was pressed during the event firing
-     */
-    public boolean jsxGet_metaKey() {
-        return metaKey_;
-    }
-
-    /**
      * Special for FF (old stuff from Netscape time).
      * @see <a href="http://unixpapa.com/js/mouse.html">Javascript Madness: Mouse Events</a>
      * @return the button code
@@ -267,7 +256,7 @@ public class MouseEvent extends UIEvent {
         setCtrlKey(ctrlKey);
         setAltKey(altKey);
         setShiftKey(shiftKey);
-        // Ignore the metaKey parameter; we don't support it yet.
+        setMetaKey(metaKey);
         button_ = button;
         // Ignore the relatedTarget parameter; we don't support it yet.
     }

@@ -2358,9 +2358,6 @@
         <property name="ctrlKey" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
-        <property name="metaKey" readable="true" writable="false">
-            <browser name="Firefox"/>
-        </property>
         <property name="pageX" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
@@ -2816,6 +2813,9 @@
             <browser name="Firefox"/>
         </property>
         <property name="detail" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="metaKey" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
         <property name="shiftKey" readable="true" writable="false">

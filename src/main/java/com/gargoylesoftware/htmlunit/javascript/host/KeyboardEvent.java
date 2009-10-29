@@ -433,7 +433,8 @@ public class KeyboardEvent extends UIEvent {
         setAltKey(altKey);
         setShiftKey(shiftKey);
         setKeyCode(keyCode);
-        charCode_ = charCode;
+        setMetaKey(metaKey);
+        charCode_ = 0;
     }
 
     /**
