@@ -279,24 +279,23 @@ public class HtmlScript extends HtmlElement {
                 event = event.substring(0, event.length() - 2);
             }
 
-            if ("window".equals(forr)) {
-                // everything fine, accepted by IE and FF
-                final Window window = (Window) getPage().getEnclosingWindow().getScriptObject();
-                final BaseFunction function = new EventHandler(this, event, scriptCode);
-                window.jsxFunction_attachEvent(event, function);
-            }
-            else if (ie) {
-                try {
-                    final HtmlElement elt = ((HtmlPage) getPage()).getHtmlElementById(forr);
-                    elt.setEventHandler(event, scriptCode);
+            if (ie) {
+                if ("window".equals(forr)) {
+                    // everything fine, accepted by IE and FF
+                    final Window window = (Window) getPage().getEnclosingWindow().getScriptObject();
+                    final BaseFunction function = new EventHandler(this, event, scriptCode);
+                    window.jsxFunction_attachEvent(event, function);
                 }
-                catch (final ElementNotFoundException e) {
-                    LOG.warn("<script for='" + forr + "' ...>: no element found with id \""
-                        + forr + "\". Ignoring.");
+                else {
+                    try {
+                        final HtmlElement elt = ((HtmlPage) getPage()).getHtmlElementById(forr);
+                        elt.setEventHandler(event, scriptCode);
+                    }
+                    catch (final ElementNotFoundException e) {
+                        LOG.warn("<script for='" + forr + "' ...>: no element found with id \""
+                                + forr + "\". Ignoring.");
+                    }
                 }
-            }
-            else {
-                return; // FF seems to handle this IE stuff only for window
             }
         }
         else {

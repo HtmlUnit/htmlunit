@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration">
+            <action type="fix" dev="asashour">
+                HtmlScipt: "for" and "event" attributes for 'window' are ignored by FF.
+            </action>
             <action type="fix" dev="mguillem" issue="2888366">
                 JavaScript: MouseEvent.initMouseEvent and KeyboardEvent.initKeyEvent initialize metaKey
             </action>

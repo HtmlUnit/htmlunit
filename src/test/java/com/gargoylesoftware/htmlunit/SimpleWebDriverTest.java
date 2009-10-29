@@ -23,7 +23,6 @@ import org.openqa.selenium.WebElement;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Proof of concept for using WebDriver to run (some) HtmlUnit tests and have the possibility
@@ -243,7 +242,6 @@ public class SimpleWebDriverTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.FF)
     public void scriptEventFor() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
