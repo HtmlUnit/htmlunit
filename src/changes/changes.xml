@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration">
+            <action type="fix" dev="mguillem" issue="2888604">
+                Meta refresh: handle space as separator between delay and url.
+            </action>
             <action type="fix" dev="mguillem" issue="2888289">
                 JavaScript: events focus and blur don't apply to all kind of HTML elements.
             </action>

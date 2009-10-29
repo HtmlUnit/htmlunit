@@ -1169,7 +1169,7 @@ public class HtmlPage extends SgmlPage {
         final double time;
         final URL url;
 
-        int index = refreshString.indexOf(";");
+        int index = StringUtils.indexOfAnyBut(refreshString, "0123456789");
         final boolean timeOnly = (index == -1);
 
         if (timeOnly) {
@@ -1234,15 +1234,12 @@ public class HtmlPage extends SgmlPage {
 
     /**
      * Returns an auto-refresh string if specified. This will look in both the meta
-     * tags (taking care of &lt;noscript&gt; if any) and inside the HTTP response headers.
+     * tags and inside the HTTP response headers.
      * @return the auto-refresh string
      */
     private String getRefreshStringOrNull() {
-        final boolean javaScriptEnabled = getWebClient().isJavaScriptEnabled();
         for (final HtmlMeta meta : getMetaTags("refresh")) {
-            if ((!javaScriptEnabled || getFirstParent(meta, HtmlNoScript.TAG_NAME) == null)) {
-                return meta.getContentAttribute();
-            }
+            return meta.getContentAttribute().trim();
         }
         return getWebResponse().getResponseHeaderValue("Refresh");
     }
@@ -1284,25 +1281,6 @@ public class HtmlPage extends SgmlPage {
                 }
             }
         }
-    }
-
-    /**
-     * Returns the first parent with the specified node name, or <tt>null</tt> if no parent
-     * with the specified node name can be found.
-     *
-     * @param node the node to start with
-     * @param nodeName the name of the search node
-     * @return the first parent with the specified node name
-     */
-    private DomNode getFirstParent(final DomNode node, final String nodeName) {
-        DomNode parent = node.getParentNode();
-        while (parent != null) {
-            if (parent.getNodeName().equals(nodeName)) {
-                return parent;
-            }
-            parent = parent.getParentNode();
-        }
-        return null;
     }
 
     /**

@@ -679,21 +679,7 @@ public class HtmlPageTest extends WebServerTestCase {
      */
     @Test
     public void testRefresh_MetaTag_DefaultRefreshHandler() throws Exception {
-        final String firstContent = "<html><head><title>first</title>\n"
-            + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3;URL=" + URL_SECOND + "\">\n"
-            + "</head><body></body></html>";
-        final String secondContent = "<html><head><title>second</title></head><body></body></html>";
-
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
-        client.setWebConnection(webConnection);
-
-        final HtmlPage page = client.getPage(URL_FIRST);
-
-        assertEquals("second", page.getTitleText());
+        testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3;URL=§§URL§§\">");
     }
 
     /**
@@ -701,21 +687,17 @@ public class HtmlPageTest extends WebServerTestCase {
      */
     @Test
     public void testRefresh_MetaTag_caseSensitivity() throws Exception {
-        final String firstContent = "<html><head><title>first</title>\n"
-            + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3;Url=" + URL_SECOND + "\">\n"
-            + "</head><body></body></html>";
-        final String secondContent = "<html><head><title>second</title></head><body></body></html>";
+        testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3;Url=§§URL§§\">");
+    }
 
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
-        client.setWebConnection(webConnection);
-
-        final HtmlPage page = client.getPage(URL_FIRST);
-
-        assertEquals("second", page.getTitleText());
+    /**
+     * Regression test for bug 2888604.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testRefresh_MetaTag_spaceSeparator() throws Exception {
+        testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3 Url=§§URL§§\">");
+        testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3\nUrl=§§URL§§\">");
     }
 
     /**
@@ -774,21 +756,7 @@ public class HtmlPageTest extends WebServerTestCase {
      */
     @Test
     public void testRefresh_MetaTagQuoted() throws Exception {
-        final String firstContent = "<html><head><title>first</title>\n"
-            + "<META HTTP-EQUIV='Refresh' CONTENT='0;URL=\"" + URL_SECOND + "\"'>\n"
-            + "</head><body></body></html>";
-        final String secondContent = "<html><head><title>second</title></head><body></body></html>";
-
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
-        client.setWebConnection(webConnection);
-
-        final HtmlPage page = client.getPage(URL_FIRST);
-
-        assertEquals("second", page.getTitleText());
+        testRefresh_MetaTag("<META HTTP-EQUIV='Refresh' CONTENT='0;URL=\"§§URL§§\"'>");
     }
 
     /**
@@ -797,7 +765,12 @@ public class HtmlPageTest extends WebServerTestCase {
      */
     @Test
     public void testRefresh_MetaTagPartlyQuoted() throws Exception {
+        testRefresh_MetaTag("<META HTTP-EQUIV='Refresh' CONTENT=\"0;URL='§§URL§§\">");
+    }
+
+    private void testRefresh_MetaTag(final String metaTag) throws Exception {
         final String firstContent = "<html><head><title>first</title>\n"
+            + metaTag.replace("§§URL§§", URL_SECOND.toString()) + "\n"
             + "<META HTTP-EQUIV='Refresh' CONTENT=\"0;URL='" + URL_SECOND + "\">\n"
             + "</head><body></body></html>";
         final String secondContent = "<html><head><title>second</title></head><body></body></html>";
@@ -879,21 +852,7 @@ public class HtmlPageTest extends WebServerTestCase {
      */
     @Test
     public void testRefresh_MetaTag_Whitespace() throws Exception {
-        final String firstContent = "<html><head><title>first</title>\n"
-            + "<META HTTP-EQUIV='Refresh' CONTENT='0  ;  URL=" + URL_SECOND + "'>\n"
-            + "</head><body></body></html>";
-        final String secondContent = "<html><head><title>second</title></head><body></body></html>";
-
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
-        client.setWebConnection(webConnection);
-
-        final HtmlPage page = client.getPage(URL_FIRST);
-
-        assertEquals("second", page.getTitleText());
+        testRefresh_MetaTag("<META HTTP-EQUIV='Refresh' CONTENT='0  ;  URL=§§URL§§'>");
     }
 
     /**
@@ -903,19 +862,7 @@ public class HtmlPageTest extends WebServerTestCase {
      */
     @Test
     public void testRefresh_MetaTag_Double() throws Exception {
-        final String html1 = "<html><head><title>first</title>\n"
-            + "<META HTTP-EQUIV='Refresh' CONTENT='1.2  ;  URL=" + URL_SECOND + "'>\n"
-            + "</head><body></body></html>";
-        final String html2 = "<html><head><title>second</title></head><body>abc</body></html>";
-
-        final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, html1);
-        webConnection.setResponse(URL_SECOND, html2);
-        client.setWebConnection(webConnection);
-
-        final HtmlPage page = client.getPage(URL_FIRST);
-        assertEquals("second", page.getTitleText());
+        testRefresh_MetaTag("<META HTTP-EQUIV='Refresh' CONTENT='1.2  ;  URL=§§URL§§'>");
     }
 
     /**
