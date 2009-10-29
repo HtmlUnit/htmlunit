@@ -490,7 +490,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
     }
 
     /**
-     * HtmlUnit-2.7-SNAPSHOT (as of 29.10.09) had bug with 
+     * HtmlUnit-2.7-SNAPSHOT (as of 29.10.09) had bug with
      * WebClient.waitForBackgroundJavaScriptStartingBefore: it could be totally blocking
      * under some circumstances. This test reproduces the problem but ensures
      * that the test terminates (calling clearInterval when waitForBackgroundJavaScriptStartingBefore
