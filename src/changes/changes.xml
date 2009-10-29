@@ -12,11 +12,9 @@
             <action type="fix" dev="mguillem">
                 Fixed StringIndexOutOfBoundsException occurring when typing in a cloned text input or textarea node.
             </action>
-<!--
             <action type="fix" dev="asashour" issue="2881627">
                 JavaScript: pre-process \xDD in string literals before IE conditional compilation.
             </action>
--->
             <action type="add" dev="sdanig">
                 JavaScript: allow MouseEvent to have independent client coordinate values, if necessary.
             </action>
