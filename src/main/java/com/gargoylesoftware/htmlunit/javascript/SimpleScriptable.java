@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 /**
- * A JavaScript object for a Location.
+ * Base class for Rhino host objects in HtmlUnit.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
