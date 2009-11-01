@@ -855,7 +855,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         setInnerText(Context.toString(value));
     }
 
-    private void setInnerText(final Object value) {
+    private void setInnerText(final String value) {
         final DomNode domNode = getDomNodeOrDie();
 
         if (INNER_TEXT_READONLY.contains(domNode.getNodeName())) {
@@ -864,7 +864,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         domNode.removeAllChildren();
 
-        if (value != null) {
+        if (value != null && value.length() != 0) {
             domNode.appendChild(new DomText(domNode.getPage(), Context.toString(value)));
         }
 
@@ -881,7 +881,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param value - the new value for the contents of this node
      */
     public void jsxSet_textContent(final Object value) {
-        setInnerText(value);
+        setInnerText(value == null ? null : Context.toString(value));
     }
 
     /**
