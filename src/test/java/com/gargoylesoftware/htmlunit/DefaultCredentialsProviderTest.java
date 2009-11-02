@@ -18,6 +18,8 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.NTCredentials;
+import org.apache.commons.httpclient.UsernamePasswordCredentials;
+import org.apache.commons.httpclient.auth.BasicScheme;
 import org.apache.commons.httpclient.auth.NTLMScheme;
 import org.junit.Test;
 
@@ -90,4 +92,29 @@ public class DefaultCredentialsProviderTest extends WebTestCase {
         assertNull(provider.getCredentials(scheme, "invalidHost", port, true));
     }
 
+    /**
+     * Test that successive calls to {@link DefaultCredentialsProvider#addCredentials(String, String)}
+     * overwrite values previously set.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void overwrite() throws Exception {
+        final DefaultCredentialsProvider provider = new DefaultCredentialsProvider();
+        provider.addCredentials("username", "password");
+
+        UsernamePasswordCredentials credentials =
+            (UsernamePasswordCredentials) provider.getCredentials(new BasicScheme(), "host", 80, false);
+        assertEquals("username", credentials.getUserName());
+        assertEquals("password", credentials.getPassword());
+
+        provider.addCredentials("username", "new password");
+        credentials = (UsernamePasswordCredentials) provider.getCredentials(new BasicScheme(), "host", 80, false);
+        assertEquals("username", credentials.getUserName());
+        assertEquals("new password", credentials.getPassword());
+
+        provider.addCredentials("new username", "other password");
+        credentials = (UsernamePasswordCredentials) provider.getCredentials(new BasicScheme(), "host", 80, false);
+        assertEquals("new username", credentials.getUserName());
+        assertEquals("other password", credentials.getPassword());
+    }
 }

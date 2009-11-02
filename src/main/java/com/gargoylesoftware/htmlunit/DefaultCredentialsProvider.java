@@ -66,7 +66,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * The credentials may be for any authentication scheme, including NTLM, digest and basic
      * HTTP authentication. If you are using sensitive username/password information, please do
      * NOT use this method. If you add credentials using this method, any server that requires
-     * authentication will receive the specified username and password.
+     * authentication may receive the specified username and password.
      * @param username the username for the new credentials
      * @param password the password for the new credentials
      */
@@ -314,6 +314,14 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
             final String realm = (String) stream.readObject();
             final String scheme = (String) stream.readObject();
             authScope_ = new AuthScope(host, port, realm, scheme);
+        }
+        @Override
+        public int hashCode() {
+            return authScope_.hashCode();
+        }
+        @Override
+        public boolean equals(final Object obj) {
+            return obj instanceof AuthScopeProxy && authScope_.equals(((AuthScopeProxy) obj).getAuthScope());
         }
     }
 
