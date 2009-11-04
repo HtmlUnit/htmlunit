@@ -70,17 +70,17 @@ class SimpleHTMLParserListener implements HTMLParserListener {
 
     public void error(final String message, final URL url, final int line, final int column, final String key) {
         if (LOG.isErrorEnabled()) {
-            LOG.error(format(message, url, line, column, key));
+            LOG.error(format(message, url, line, column));
         }
     }
 
     public void warning(final String message, final URL url, final int line, final int column, final String key) {
         if (LOG.isWarnEnabled()) {
-            LOG.warn(format(message, url, line, column, key));
+            LOG.warn(format(message, url, line, column));
         }
     }
 
-    private String format(final String message, final URL url, final int line, final int column, final String key) {
+    private String format(final String message, final URL url, final int line, final int column) {
         final StringBuilder buffer = new StringBuilder(message);
         buffer.append(" (");
         buffer.append(url.toExternalForm());
