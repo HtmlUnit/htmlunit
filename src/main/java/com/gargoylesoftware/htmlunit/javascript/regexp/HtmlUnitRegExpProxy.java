@@ -85,6 +85,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             }
             else if (arg0 instanceof NativeRegExp) {
                 replacement = replacement.replaceAll("\\\\", "\\\\\\\\");
+                replacement = replacement.replaceAll("(?<!\\$)\\$(?!\\d)", "\\\\\\$");
                 try {
                     final NativeRegExp regexp = (NativeRegExp) arg0;
                     final RegExpData reData = new RegExpData(regexp);

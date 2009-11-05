@@ -6,8 +6,11 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration">
+            <action type="fix" dev="mguillem" issue="2891013">
+                JavaScript HtmlUnit RegExp proxy: escape "$" in replacement string for String.replace.
+            </action>
             <action type="fix" dev="mguillem" issue="2890953">
-                JavaScript: replace "$$" by "$" in replacement string for String.replace.
+                JavaScript HtmlUnit RegExp proxy: replace "$$" by "$" in replacement string for String.replace.
             </action>
             <action type="fix" dev="mguillem">
                 DefaultCredentialsProvider: addCredentials should overwrite previous values.

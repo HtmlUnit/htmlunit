@@ -107,9 +107,8 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * Tests if custom patch is still needed.
      */
     @Test
-    @Browsers(Browser.NONE)
     public void needCustomFix() {
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
         final Context ctx = cf.enterContext();
         try {
@@ -137,14 +136,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Test
     @Alerts("123456")
     public void replaceNormalStringWithRegexpChars() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    alert('123456'.replace('/{\\d+}', ''));\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testEvaluate("'123456'.replace('/{\\d+}', '')");
     }
 
     /**
@@ -243,14 +235,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Test
     @Alerts("ab,a")
     public void match_NotFirstCharacter() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    alert(\"ab\".match(/^(.)[^\\1]$/))\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testEvaluate("\"ab\".match(/^(.)[^\\1]$/)");
     }
 
     /**
@@ -306,9 +291,9 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
             + "(\\/|-|\\.)(?:(?:(?:0?[13578]|1[02])\\2(?:31))|(?:(?:0?[1,3-9]|1[0-2])\\2(29|30))|(?:(?:0?[1-9])|"
             + "(?:1[0-2]))\\2(?:0?[1-9]|1\\d|2[0-8]))))$/;\n"
             + "    var str = '2001-06-16';\n"
-            + "    alert(regexp.test(str))\n"
-            + "    alert(regexp.test('hello'))\n"
-            + "    alert(regexp.exec(str) != null)\n"
+            + "    alert(regexp.test(str));\n"
+            + "    alert(regexp.test('hello'));\n"
+            + "    alert(regexp.exec(str) != null);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -456,15 +441,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void dollarSignAndCurlyBracket() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var value = ''.replace(/\\${/g, '');\n"
-            + "    alert(value)\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testEvaluate("''.replace(/\\${/g, '')");
     }
 
     /**
@@ -491,7 +468,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "div" })
+    @Alerts("div")
     public void jquerySizzleChunker() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + " var re = /((?:\\((?:\\([^()]+\\)|[^()]+)+\\)|\\[(?:\\[[^[\\]]*\\]|['\"][^'\"]+['\"]|[^[\\]'\"]+)+\\]"
@@ -554,8 +531,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Test
     @Alerts("afood$0$7b")
     public void replace_backReferences() throws Exception {
-        final String html = "<script>alert('afoob'.replace(/(foo)/g, '$1d$0$7'));</script>";
-        loadPageWithAlerts2(html);
+        testEvaluate("'afoob'.replace(/(foo)/g, '$1d$0$7')");
     }
 
     /**
@@ -565,8 +541,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Test
     @Alerts("I$want$these$periods$to$be$$s")
     public void replace_backReferences_2() throws Exception {
-        final String html = buildHtml("alert('I.want.these.periods.to.be.$s'.replace(/\\./g, '$'));");
-        loadPageWithAlerts2(html);
+        testEvaluate("'I.want.these.periods.to.be.$s'.replace(/\\./g, '$')");
     }
 
     /**
@@ -575,9 +550,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Test
     @Alerts("kid\\'s toys")
     public void escapeQuote() throws Exception {
-        final String script = "alert(\"kid's toys\".replace(/'/g, \"\\\\'\"))";
-        final String html = buildHtml(script);
-        loadPageWithAlerts2(html);
+        testEvaluate("\"kid's toys\".replace(/'/g, \"\\\\'\")");
     }
 
     private String buildHtml(final String script) {
@@ -615,7 +588,6 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
-
     /**
      * Regression test for bug 2890953.
      * @throws Exception if an error occurs
@@ -623,10 +595,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Test
     @Alerts("$$x$")
     public void replaceDollarDollar() throws Exception {
-        final String script = "alert('x'.replace(/(x)/g, '$$$$x$$'));";
-        final String html = buildHtml(script);
-
-        loadPageWithAlerts2(html);
+        testEvaluate("'x'.replace(/(x)/g, '$$$$x$$')");
     }
 
     /**
@@ -684,6 +653,23 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
             + "  </script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Regression test for bug 2890953.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("\\$0")
+    public void replaceBackslashDollar() throws Exception {
+        testEvaluate("'$0'.replace(/\\$/g, '\\\\$')");
+    }
+
+    private void testEvaluate(final String expression) throws Exception {
+        final String script = "alert(" + expression + ");";
+        final String html = buildHtml(script);
 
         loadPageWithAlerts2(html);
     }
