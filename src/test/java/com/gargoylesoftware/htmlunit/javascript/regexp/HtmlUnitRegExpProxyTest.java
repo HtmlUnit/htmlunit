@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.regexp;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
@@ -24,9 +21,15 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
@@ -37,7 +40,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlUnitRegExpProxyTest extends WebTestCase {
+@RunWith(BrowserRunner.class)
+public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
 
     private final String str_ = "(?:<script.*?>)((\\n|\\r|.)*?)(?:<\\/script>)";
     private final String begin_ = "<div>bla</div>";
@@ -88,6 +92,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.NONE)
     public void fixedInHtmlUnit() throws Exception {
         final String html = "<html></html>";
         final HtmlPage page = loadPage(html);
@@ -102,6 +107,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      * Tests if custom patch is still needed.
      */
     @Test
+    @Browsers(Browser.NONE)
     public void needCustomFix() {
         final WebClient client = new WebClient();
         final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
@@ -129,27 +135,25 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("123456")
     public void replaceNormalStringWithRegexpChars() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    alert('123456'.replace('/{\\d+}', ''));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"123456"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("123456")
     public void replaceWithUndefinedPattern() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var pattern;\n"
             + "    alert('123456'.replace(pattern, ''));\n"
@@ -157,19 +161,16 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"123456"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("123456")
     public void replace() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var pattern = /{\\d+}/g;\n"
             + "    alert('123456'.replace(pattern, ''));\n"
@@ -177,11 +178,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"123456"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -189,16 +186,12 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      */
     @Test
     public void match() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + scriptTestMatch_
             + "</script></head><body>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -209,7 +202,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      */
     @Test
     public void matchFixNeeded() throws Exception {
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
         final Context cx = cf.enterContext();
         try {
@@ -231,8 +224,9 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("0")
     public void index() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var match = '#{tests} tests'.match(/(^|.|\\r|\\n)(#\\{(.*?)\\})/);\n"
             + "    alert(match.index);\n"
@@ -240,41 +234,33 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"0"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("ab,a")
     public void match_NotFirstCharacter() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    alert(\"ab\".match(/^(.)[^\\1]$/))\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"ab,a"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented
+    @Alerts("boo();")
     public void regExp_exec() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var re = new RegExp('(?:<s' + 'cript.*?>)(.*)<\\/script>');\n"
             + "    var t = 'foo <scr' + 'ipt>boo();</' + 'script>bar';\n"
@@ -284,19 +270,16 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"boo();"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("<script>boo();</script>")
     public void flag_global() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var str = 'foo <script>boo();<'+'/script>bar';\n"
             + "    var regExp = new RegExp('<script[^>]*>([\\\\S\\\\s]*?)<\\/script>', 'img');\n"
@@ -305,11 +288,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"<script>boo();</script>"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -317,10 +296,9 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "true", "false", "true" })
+    @NotYetImplemented
     public void test_prototype() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var regexp = /^(?:(?:(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|"
@@ -335,11 +313,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"true", "false", "true"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
-        loadPage(html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -357,19 +331,17 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "  function test() {\n"
             + "    var regexp = " + regexp + ";\n"
             + "    var str = '" + testString + "';\n"
-            + "    alert(regexp.test(str))\n"
-            + "    alert(regexp.exec(str) != null)\n"
-            + "    alert(regexp.test('blabla'))\n"
+            + "    alert(regexp.test(str));\n"
+            + "    alert(regexp.exec(str) != null);\n"
+            + "    alert(regexp.test('blabla'));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {String.valueOf(expectedResults[0]), String.valueOf(expectedResults[1]),
-            String.valueOf(expectedResults[2])};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
-        loadPage(html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        setExpectedAlerts(String.valueOf(expectedResults[0]), String.valueOf(expectedResults[1]),
+            String.valueOf(expectedResults[2]));
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -377,10 +349,9 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("true")
+    @NotYetImplemented
     public void test_minimal() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var regexp = /((?:2001)-)/;\n"
@@ -390,17 +361,14 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"true"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
-        loadPage(html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * Verifies that curly braces can be used non escaped in JS regexp.
      */
     @Test
+    @Browsers(Browser.NONE)
     public void testEscapeCurlyBraces() {
         assertEquals("\\{", HtmlUnitRegExpProxy.escapeJSCurly("{"));
         assertEquals("\\{", HtmlUnitRegExpProxy.escapeJSCurly("\\{"));
@@ -417,6 +385,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      * Verifies that curly braces can be used non escaped in JS regexp.
      */
     @Test
+    @Browsers(Browser.NONE)
     public void escapeOpeningSquareBracketInCharacterClass() {
         assertEquals("[ab\\[]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("[ab[]"));
         assertEquals("[\\[]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("[[]"));
@@ -436,6 +405,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      * @see #ignoreBackReferenceInCharacterClass()
      */
     @Test
+    @Browsers(Browser.NONE)
     public void removeBackReferencesInCharacterClasses() {
         assertEquals("(a)(b)[^c]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("(a)(b)[^\\2c]"));
         assertEquals("(a)(b)[c]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("(a)(b)[\\2c]"));
@@ -447,6 +417,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "{#abcd},{,abcd,}" })
     public void testRegexWithNonEscapedCurlyBraces() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -457,11 +428,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"{#abcd},{,abcd,}"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
-        loadPage(html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -469,6 +436,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("aa-b-b-")
     public void testBackSpace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -479,17 +447,14 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"aa-b-b-"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
-        loadPage(html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("")
     public void dollarSignAndCurlyBracket() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -499,32 +464,25 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {""};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
-        loadPage(html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "null", "[" })
     public void openingSquareBracketInCharacterClass() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "  var re = /[[]/\n"
-            + "  alert('div'.match(re))\n"
-            + "  alert('['.match(re))\n"
+            + "  var re = /[[]/;\n"
+            + "  alert('div'.match(re));\n"
+            + "  alert('['.match(re));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"null", "["};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
-        loadPage(html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -533,6 +491,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "div" })
     public void jquerySizzleChunker() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + " var re = /((?:\\((?:\\([^()]+\\)|[^()]+)+\\)|\\[(?:\\[[^[\\]]*\\]|['\"][^'\"]+['\"]|[^[\\]'\"]+)+\\]"
@@ -543,11 +502,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"div"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
-        loadPage(html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -556,22 +511,19 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ ":toto,toto,,", "null" })
     public void jqueryPseudo() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + " var re = /:((?:[\\w\\u00c0-\\uFFFF_-]|\\\\.)+)(?:\\((['\"]*)((?:\\([^\\)]+\\)"
-            + "|[^\\2\\(\\)]*)+)\\2\\))?/\n"
+            + "|[^\\2\\(\\)]*)+)\\2\\))?/;\n"
             + "  function test() {\n"
-            + "    alert(':toto'.match(re))\n"
-            + "    alert('foo'.match(re))\n"
+            + "    alert(':toto'.match(re));\n"
+            + "    alert('foo'.match(re));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {":toto,toto,,", "null"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
-        loadPage(html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -580,6 +532,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "null", "abb,a,b", "abd,a,b" })
     public void ignoreBackReferenceInCharacterClass() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -591,11 +544,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"null", "abb,a,b", "abd,a,b"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
-        loadPage(html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -603,12 +552,10 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("afood$0$7b")
     public void replace_backReferences() throws Exception {
         final String html = "<script>alert('afoob'.replace(/(foo)/g, '$1d$0$7'));</script>";
-        final String[] expected = {"afood$0$7b"};
-        final List<String> actual = new ArrayList<String>();
-        loadPage(html, actual);
-        assertEquals(expected, actual);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -616,26 +563,21 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("I$want$these$periods$to$be$$s")
     public void replace_backReferences_2() throws Exception {
         final String html = buildHtml("alert('I.want.these.periods.to.be.$s'.replace(/\\./g, '$'));");
-        final String[] expected = {"I$want$these$periods$to$be$$s"};
-        final List<String> actual = new ArrayList<String>();
-        loadPage(html, actual);
-        assertEquals(expected, actual);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("kid\\'s toys")
     public void escapeQuote() throws Exception {
         final String script = "alert(\"kid's toys\".replace(/'/g, \"\\\\'\"))";
-        final String[] expected = {"kid\\'s toys"};
-        final List<String> actual = new ArrayList<String>();
         final String html = buildHtml(script);
-        createTestPageForRealBrowserIfNeeded(html, expected);
-        loadPage(html, actual);
-        assertEquals(expected, actual);
+        loadPageWithAlerts2(html);
     }
 
     private String buildHtml(final String script) {
@@ -649,34 +591,100 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("INPUT")
+    @NotYetImplemented
     public void test2() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String html = buildHtml("var description = 'INPUT#BasisRenameInput';\n"
                 + "if(description.match(/^\\s*([a-z0-9\\_\\-]+)/i)) {\n"
                 + "  alert(RegExp.$1);\n"
                 + "}");
-        final String[] expected = {"INPUT"};
-        final List<String> actual = new ArrayList<String>();
-        loadPage(html, actual);
-        assertEquals(expected, actual);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("a")
     public void stackOverflow() throws Exception {
         final String s = IOUtils.toString(getClass().getResourceAsStream("stackOverflow.txt"));
         final String html = buildHtml(
                   "var s = '" + s + "';\n"
                 + "s = s.replace(/(\\s*\\S+)*/, 'a');\n"
                 + "alert(s);\n");
-        final String[] expected = {"a"};
-        final List<String> actual = new ArrayList<String>();
-        loadPage(html, actual);
-        assertEquals(expected, actual);
+        loadPageWithAlerts2(html);
     }
 
+
+    /**
+     * Regression test for bug 2890953.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("$$x$")
+    public void replaceDollarDollar() throws Exception {
+        final String script = "alert('x'.replace(/(x)/g, '$$$$x$$'));";
+        final String html = buildHtml(script);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Original test resides in
+     * <a href="http://code.google.com/p/google-web-toolkit/source/browse/trunk/user/test/com/google/gwt/emultest/java/lang/StringTest.java">StringTest</a>.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "\\*\\[", "\\\\", "+1", "abcdef", "1\\1abc123\\123de1234\\1234f", "\n  \n", "x  x", "x\"\\", "$$x$" })
+    public void testReplaceAll() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var regex, replacement, x1, x2, x3, x4, x5;\n"
+            + "      regex = $replaceAll('*[', "
+            + "'([/\\\\\\\\\\\\.\\\\*\\\\+\\\\?\\\\|\\\\(\\\\)\\\\[\\\\]\\\\{\\\\}])', '\\\\\\\\$1');\n"
+            + "      alert(regex);\n"
+            + "      replacement = "
+            + "$replaceAll($replaceAll('\\\\', '\\\\\\\\', '\\\\\\\\\\\\\\\\'), '\\\\$', '\\\\\\\\$');\n"
+            + "      alert(replacement);\n"
+            + "      alert($replaceAll('*[1', regex, '+'));\n"
+            + "      x1 = 'xxxabcxxdexf';\n"
+            + "      alert($replaceAll(x1, 'x*', ''));\n"
+            + "      x2 = '1abc123de1234f';\n"
+            + "      alert($replaceAll(x2, '([1234]+)', '$1\\\\\\\\$1'));\n"
+            + "      x3 = 'x  x';\n"
+            + "      alert($replaceAll(x3, 'x', '\\n'));\n"
+            + "      x4 = 'x  \\n';\n"
+            + "      alert($replaceAll(x4, '\\\\\\n', 'x'));\n"
+            + "      x5 = 'x';\n"
+            + "      alert($replaceAll(x5, 'x', '\\\\x\\\\\"\\\\\\\\'));\n"
+            + "      alert($replaceAll(x5, '(x)', '\\\\$\\\\$$1\\\\$'));\n"
+            + "    }\n"
+            + "    function $replaceAll(this$static, regex, replace){\n"
+            + "      replace = __translateReplaceString(replace);\n"
+            + "      return this$static.replace(RegExp(regex, 'g'), replace);\n"
+            + "    }\n"
+            + "    function __translateReplaceString(replaceStr){\n"
+            + "      var pos = 0;\n"
+            + "      while (0 <= (pos = replaceStr.indexOf('\\\\', pos))) {\n"
+            + "        if (replaceStr.charCodeAt(pos + 1) == 36) {\n"
+            + "          replaceStr = replaceStr.substr(0, pos - 0) + '$' + $substring(replaceStr, ++pos);\n"
+            + "        }\n"
+            + "        else {\n"
+            + "          replaceStr = replaceStr.substr(0, pos - 0) + $substring(replaceStr, ++pos);\n"
+            + "        }\n"
+            + "      }\n"
+            + "      return replaceStr;\n"
+            + "    }\n"
+            + "    function $substring(this$static, beginIndex){\n"
+            + "      return this$static.substr(beginIndex, this$static.length - beginIndex);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
