@@ -19,8 +19,7 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
 
 /**
- * Intermediate base class for DOM Nodes that have namespaces. That includes HtmlElement
- * and HtmlAttr.
+ * Intermediate base class for DOM Nodes that have namespaces. That includes HtmlElement and HtmlAttr.
  *
  * @version $Revision$
  * @author David K. Taylor

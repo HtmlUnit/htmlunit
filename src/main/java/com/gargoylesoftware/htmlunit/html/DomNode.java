@@ -764,7 +764,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
-    public void setNodeValue(final String x) {
+    public void setNodeValue(final String value) {
         // Default behavior is to do nothing, overridden in some subclasses
     }
 

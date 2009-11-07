@@ -93,6 +93,14 @@ public class DomAttr extends DomNamespaceNode implements Attr {
     /**
      * {@inheritDoc}
      */
+    @Override
+    public void setNodeValue(final String value) {
+        setValue(value);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public void setValue(final String value) {
         value_ = value;
         specified_ = true;

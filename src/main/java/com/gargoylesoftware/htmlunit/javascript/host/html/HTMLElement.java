@@ -601,7 +601,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final String name = newAtt.jsxGet_name();
         final String value = newAtt.jsxGet_value();
         final Attr replacedAtt = (Attr) jsxFunction_getAttributeNode(name);
-        replacedAtt.detachFromParent();
+        if (replacedAtt != null) {
+            replacedAtt.detachFromParent();
+        }
         getDomNodeOrDie().setAttribute(name, value);
         return replacedAtt;
     }

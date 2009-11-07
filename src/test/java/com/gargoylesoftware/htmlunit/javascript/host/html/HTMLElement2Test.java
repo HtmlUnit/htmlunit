@@ -279,4 +279,24 @@ public class HTMLElement2Test extends WebDriverTestCase {
         final String text = log.getValue().trim().replaceAll("\r", "");
         assertEquals(StringUtils.join(getExpectedAlerts(), "\n"), text);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "null", "klazz" })
+    public void setAttributeNode() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var attribute = document.createAttribute('class');\n"
+            + "    attribute.nodeValue = 'klazz';\n"
+            + "    alert(document.body.setAttributeNode(attribute));\n"
+            + "    alert(document.body.getAttributeNode('class').nodeValue);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
