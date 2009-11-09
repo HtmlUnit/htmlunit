@@ -1822,32 +1822,22 @@ public class WebClient implements Serializable {
          */
         public void webWindowContentChanged(final WebWindowEvent event) {
             final WebWindow window = event.getWebWindow();
-
-            final boolean takeItAsNew;
-            if (window instanceof TopLevelWindow && event.getOldPage() == null) {
-                takeItAsNew = true;
+            boolean use = false;
+            if (window instanceof DialogWindow) {
+                use = true;
             }
-            // content loaded in an other window as the "current" one
-            // by js becomes "current" only if new top window is opened
-            else if (getJavaScriptEngine().isScriptRunning()) {
-                if (window instanceof FrameWindow
-                    && !HtmlPage.READY_STATE_COMPLETE.equals(
-                        ((FrameWindow) window).getEnclosingPage().getDocumentElement().getReadyState())) {
-                    // Content of frame window has changed without javascript while enclosing page is loading,
-                    // it will NOT become current response");
-                    takeItAsNew = false;
-                }
-                else {
-                    // Content of window changed without javascript, it will become current response
-                    takeItAsNew = true;
+            else if (window instanceof TopLevelWindow) {
+                use = (event.getOldPage() == null);
+            }
+            else if (window instanceof FrameWindow) {
+                final FrameWindow fw = (FrameWindow) window;
+                final String enclosingPageState = fw.getEnclosingPage().getDocumentElement().getReadyState();
+                final URL frameUrl = fw.getEnclosedPage().getWebResponse().getRequestSettings().getUrl();
+                if (HtmlPage.READY_STATE_COMPLETE.equals(enclosingPageState) && frameUrl != URL_ABOUT_BLANK) {
+                    use = true;
                 }
             }
-            else {
-                // Content of window changed with javascript, it will NOT become current response
-                takeItAsNew = false;
-            }
-
-            if (takeItAsNew) {
+            if (use) {
                 setCurrentWindow(window);
             }
         }
@@ -1860,7 +1850,7 @@ public class WebClient implements Serializable {
                 final TopLevelWindow tlw = (TopLevelWindow) event.getWebWindow();
                 topLevelWindows_.push(tlw);
             }
-            // page is not loaded yet, don't set it now as current window
+            // Page is not loaded yet, don't set it now as current window.
         }
     }
 

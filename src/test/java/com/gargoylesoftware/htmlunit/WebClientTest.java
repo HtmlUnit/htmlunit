@@ -1829,23 +1829,24 @@ public class WebClientTest extends WebServerTestCase {
     @Test
     public void testWindowTracking_SpecialCase1() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection conn = new MockWebConnection();
 
-        final String firstContent = "<html><head><title>First</title></head>\n"
+        final String html1 = "<html><head><title>First</title></head>\n"
             + "<body><form name='form1'>\n"
             + "<button id='clickme' onClick='window.open(\"" + URL_SECOND + "\");'>Click me</button>\n"
             + "</form></body></html>";
-        webConnection.setResponse(URL_FIRST, firstContent);
+        conn.setResponse(URL_FIRST, html1);
 
-        final String secondContent = "<html><head><title>Second</title></head>\n"
+        final String html2 = "<html><head><title>Second</title></head>\n"
             + "<body  onload='doTest()'>\n"
             + "<script>\n"
             + "     function doTest() {\n"
             + "         window.close();\n"
             + "    }\n"
             + "</script></body></html>";
-        webConnection.setResponse(URL_SECOND, secondContent);
-        webClient.setWebConnection(webConnection);
+        conn.setResponse(URL_SECOND, html2);
+
+        webClient.setWebConnection(conn);
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         final HtmlButton buttonA = firstPage.getHtmlElementById("clickme");
         buttonA.click();
@@ -1859,21 +1860,21 @@ public class WebClientTest extends WebServerTestCase {
     @Test
     public void testWindowTracking_SpecialCase2() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection conn = new MockWebConnection();
 
-        final String firstContent = "<html><head><title>First</title></head>\n"
+        final String html1 = "<html><head><title>First</title></head>\n"
             + "<body><form name='form1'>\n"
             + "<button id='clickme' onClick='window.open(\"" + URL_SECOND + "\");'>Click me</button>\n"
             + "</form></body></html>";
-        webConnection.setResponse(URL_FIRST, firstContent);
+        conn.setResponse(URL_FIRST, html1);
 
-        final String secondContent = "<html><head><title>Third</title>"
+        final String html2 = "<html><head><title>Third</title>"
             + "<script type=\"text/javascript\">\n"
             + "     window.close();\n"
             + "</script></head></html>";
+        conn.setResponse(URL_SECOND, html2);
 
-        webConnection.setResponse(URL_SECOND, secondContent);
-        webClient.setWebConnection(webConnection);
+        webClient.setWebConnection(conn);
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         final HtmlButton buttonA = firstPage.getHtmlElementById("clickme");
         buttonA.click();
@@ -1890,19 +1891,20 @@ public class WebClientTest extends WebServerTestCase {
         testWindowTracking_SpecialCase3(BrowserVersion.FIREFOX_2, new String[]{});
     }
 
-    private void testWindowTracking_SpecialCase3(final BrowserVersion browserVersion,
-            final String[] expectedAlerts) throws Exception {
+    private void testWindowTracking_SpecialCase3(final BrowserVersion browserVersion, final String[] expectedAlerts)
+        throws Exception {
         final WebClient webClient = new WebClient(browserVersion);
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection conn = new MockWebConnection();
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final String firstContent = "<html><head><title>First</title></head>\n"
+
+        final String html1 = "<html><head><title>First</title></head>\n"
             + "<body>\n"
             + "<button id='clickme' onClick='window.open(\"" + URL_SECOND + "\");'>Click me</button>\n"
             + "</body></html>";
-        webConnection.setResponse(URL_FIRST, firstContent);
+        conn.setResponse(URL_FIRST, html1);
 
-        final String secondContent = "<html><head><title>Second</title></head>\n"
+        final String html2 = "<html><head><title>Second</title></head>\n"
             + "<body onUnload='doTest()'>"
             + "<form name='form1' action='" + URL_THIRD + "'>\n"
             + "<button id='clickme' type='button' onclick='postBack();'>Submit</button></form>\n"
@@ -1915,18 +1917,17 @@ public class WebClientTest extends WebServerTestCase {
             + "         frm.submit();\n"
             + "    }\n"
             + "</script></body></html>";
+        conn.setResponse(URL_SECOND, html2);
 
-        webConnection.setResponse(URL_SECOND, secondContent);
-
-        final String thirdContent = "<html><head><title>Third</title>"
+        final String html3 = "<html><head><title>Third</title>"
             + "<script type=\"text/javascript\">\n"
             + "     alert('Third page loaded');\n"
             + "     window.close();\n"
             + "</script></head></html>";
+        conn.setResponse(URL_THIRD, html3);
+        conn.setDefaultResponse(html3);
 
-        webConnection.setResponse(URL_THIRD, thirdContent);
-        webConnection.setDefaultResponse(thirdContent);
-        webClient.setWebConnection(webConnection);
+        webClient.setWebConnection(conn);
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
 
         final HtmlButton buttonA = firstPage.getHtmlElementById("clickme");
@@ -1938,6 +1939,26 @@ public class WebClientTest extends WebServerTestCase {
         buttonB.click();
         assertEquals("First", ((HtmlPage) webClient.getCurrentWindow().getEnclosedPage()).getTitleText());
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Bug 2890847: Triggering the creation of an empty frame based on some user action should not
+     * make the empty frame the current window.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testWindowTracking_SpecialCase4() throws Exception {
+        final WebClient client = new WebClient();
+        final MockWebConnection conn = new MockWebConnection();
+        client.setWebConnection(conn);
+
+        final String html = "<html><head><title>Test</title></head><body>\n"
+            + "<div id='d' onclick='this.innerHTML+=\"<iframe></iframe>\";'>go</div></body></html>";
+        conn.setResponse(URL_FIRST, html);
+
+        final HtmlPage page = client.getPage(URL_FIRST);
+        page.getHtmlElementById("d").click();
+        assertEquals("Test", ((HtmlPage) client.getCurrentWindow().getEnclosedPage()).getTitleText());
     }
 
     /**
