@@ -64,6 +64,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
+import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.Document;
@@ -172,6 +173,13 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     private String domain_;
     private String uniqueID_;
     private String lastModified_;
+
+    private static ThreadLocal<Boolean> CLOSE_POSTPONED_ACTION_ = new ThreadLocal<Boolean>() {
+        @Override
+        protected Boolean initialValue() {
+            return false;
+        }
+    };
 
     /** Initializes the supported event type map. */
     static {
@@ -465,6 +473,17 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
         // Add content to the content buffer.
         writeBuffer_.append(content);
+
+        if (!CLOSE_POSTPONED_ACTION_.get()) {
+            getPage().getWebClient().getJavaScriptEngine().addPostponedAction(new PostponedAction(getPage()) {
+                @Override
+                public void execute() throws Exception {
+                    jsxFunction_close();
+                    CLOSE_POSTPONED_ACTION_.set(false);
+                }
+            });
+            CLOSE_POSTPONED_ACTION_.set(true);
+        }
 
         // If open() was called; don't write to doc yet -- wait for call to close().
         if (!writeInCurrentDocument_) {

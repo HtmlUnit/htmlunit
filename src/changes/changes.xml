@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration">
+            <action type="fix" dev="asashour" issue="2892533">
+                JavaScript: document.write() should have an affect (by implicit postponed call to close()).
+            </action>
             <action type="fix" dev="sdanig" issue="2890847">
                 Empty frames added via JavaScript shouldn't ever really become the "current window".
             </action>

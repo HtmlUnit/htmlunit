@@ -406,7 +406,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     @Alerts("Hello There")
     public void write() throws Exception {
         final String html = "<html>\n"
