@@ -27,6 +27,9 @@ public enum BrowserVersionFeatures {
     /** Indicates that a blur event should be triggered before an onchange event. */
     BLUR_BEFORE_ONCHANGE,
 
+    /** Indicates that the browser can inherit CSS property values. */
+    CAN_INHERIT_CSS_PROPERTY_VALUES,
+
     /** Indicates that document.createEvent() initializes the target property. This is what FF2 does but not FF3. */
     CREATEEVENT_INITALIZES_TARGET,
 
@@ -59,9 +62,6 @@ public enum BrowserVersionFeatures {
 
     /** Indicates that "\n" are replaced by "\r\n" in textarea values. */
     TEXTAREA_CRNL,
-
-    /** Indicates that the browser can inherit CSS property values. */
-    CAN_INHERIT_CSS_PROPERTY_VALUES,
 
     /** Indicates that the browser treats "position: fixed" as if it were "position: static". */
     TREATS_POSITION_FIXED_LIKE_POSITION_STATIC,
