@@ -24,53 +24,49 @@ package com.gargoylesoftware.htmlunit;
  */
 public enum BrowserVersionFeatures {
 
-    /** */
+    /** Indicates that a blur event should be triggered before an onchange event. */
     BLUR_BEFORE_ONCHANGE,
 
-    /**
-     * (Firefox only)
-     * Indicates that document.createEvent initializes the target property. This is what FF2 does but not FF3.
-     **/
+    /** Indicates that document.createEvent() initializes the target property. This is what FF2 does but not FF3. */
     CREATEEVENT_INITALIZES_TARGET,
 
-    /**
-     * Indicates if document.execCommand should throw when called with an illegal command.
-     **/
+    /** Indicates that document.execCommand() should throw an exception when called with an illegal command. */
     EXECCOMMAND_THROWS_ON_WRONG_COMMAND,
 
     /** */
     HTMLOPTION_PREVENT_DISABLED,
 
-    /** */
+    /** Indicates that the browser should ignore contents of inner head elements. */
     IGNORE_CONTENTS_OF_INNER_HEAD,
 
-    /**
-     * Indicates that the URL of parent window is used to resolve URLs in frames with javascript src.
-     **/
+    /** Indicates that the URL of parent window is used to resolve URLs in frames with javascript src. */
     JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW,
 
-    /**
-     * Indicates that a read only JS property can be... set as done by IE and FF2 but not FF3.
-     **/
+    /** Indicates that a read only JS property can be... set as done by IE and FF2 but not FF3. */
     SET_READONLY_PROPERTIES,
 
     /**
-     * Indicates if href property for a &lt;link rel="stylesheet" type="text/css" href="..." /&gt;
-     * is the fully qualified url.
+     * Indicates that the href property for a &lt;link rel="stylesheet" type="text/css" href="..." /&gt;
+     * is the fully qualified URL.
      */
     STYLESHEET_HREF_EXPANDURL,
 
-    /** Indicates the the href property for a &lt;style type="text/css"&gt; ... &lt;/style&gt; is "" */
+    /** Indicates that the href property for a &lt;style type="text/css"&gt; ... &lt;/style&gt; is "". */
     STYLESHEET_HREF_STYLE_EMPTY,
 
-    /** Indicates the the href property for a &lt;style type="text/css"&gt; ... &lt;/style&gt; is null */
+    /** Indicates that the href property for a &lt;style type="text/css"&gt; ... &lt;/style&gt; is null. */
     STYLESHEET_HREF_STYLE_NULL,
 
-    /** Indicates that \n are replaced by \r\n in textarea values. */
+    /** Indicates that "\n" are replaced by "\r\n" in textarea values. */
     TEXTAREA_CRNL,
 
-    /**
-     * Indicates if 'this' corresponds to the handler function when a XMLHttpRequest handler is executed (as in FF2).
-     **/
+    /** Indicates that the browser can inherit CSS property values. */
+    CAN_INHERIT_CSS_PROPERTY_VALUES,
+
+    /** Indicates that the browser treats "position: fixed" as if it were "position: static". */
+    TREATS_POSITION_FIXED_LIKE_POSITION_STATIC,
+
+    /** Indicates that 'this' corresponds to the handler function when a XMLHttpRequest handler is executed. */
     XMLHTTPREQUEST_HANDLER_THIS_IS_FUNCTION;
+
 }

@@ -1649,7 +1649,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         left += element.jsxGet_currentStyle().getLeft(true, false, false);
 
         // If this node is absolutely positioned, we're done.
-        final String position = element.jsxGet_currentStyle().jsxGet_position();
+        final String position = element.jsxGet_currentStyle().getPositionWithInheritance();
         if ("absolute".equals(position)) {
             return left;
         }
@@ -1695,7 +1695,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         top += element.jsxGet_currentStyle().getTop(true, false, false);
 
         // If this node is absolutely positioned, we're done.
-        final String position = element.jsxGet_currentStyle().jsxGet_position();
+        final String position = element.jsxGet_currentStyle().getPositionWithInheritance();
         if ("absolute".equals(position)) {
             return top;
         }
@@ -1735,7 +1735,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         final HTMLElement htmlElement = (HTMLElement) currentElement.getScriptObject();
         final ComputedCSSStyleDeclaration style = htmlElement.jsxGet_currentStyle();
-        final String position = style.jsxGet_position();
+        final String position = style.getPositionWithInheritance();
         final boolean ie = getBrowserVersion().isIE();
         final boolean staticPos = "static".equals(position);
         final boolean fixedPos = "fixed".equals(position);
@@ -1754,7 +1754,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             if (parentNode != null && parentNode.getScriptObject() instanceof HTMLElement) {
                 final HTMLElement parentElement = (HTMLElement) parentNode.getScriptObject();
                 final ComputedCSSStyleDeclaration parentStyle = parentElement.jsxGet_currentStyle();
-                final String parentPosition = parentStyle.jsxGet_position();
+                final String parentPosition = parentStyle.getPositionWithInheritance();
                 final boolean parentIsStatic = "static".equals(parentPosition);
                 final boolean parentIsFixed = "fixed".equals(parentPosition);
                 if ((ie && !parentIsStatic && !parentIsFixed) || (!ie && !parentIsStatic)) {

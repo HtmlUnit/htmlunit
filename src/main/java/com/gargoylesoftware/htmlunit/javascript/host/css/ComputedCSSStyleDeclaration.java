@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.TREATS_POSITION_FIXED_LIKE_POSITION_STATIC;
 import static org.apache.commons.lang.StringUtils.defaultIfEmpty;
 
 import java.util.Collections;
@@ -1255,9 +1257,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the computed top (Y coordinate), relative to the node's parent's top edge
      */
     public int getTop(final boolean includeMargin, final boolean includeBorder, final boolean includePadding) {
-        final String p = jsxGet_position();
-        final String t = jsxGet_top();
-        final String b = jsxGet_bottom();
+        final String p = getPositionWithInheritance();
+        final String t = getTopWithInheritance();
+        final String b = getBottomWithInheritance();
 
         int top;
         if ("absolute".equals(p) && !"auto".equals(t)) {
@@ -1319,9 +1321,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the computed left (X coordinate), relative to the node's parent's left edge
      */
     public int getLeft(final boolean includeMargin, final boolean includeBorder, final boolean includePadding) {
-        final String p = jsxGet_position();
-        final String l = jsxGet_left();
-        final String r = jsxGet_right();
+        String p = getPositionWithInheritance();
+        final String l = getLeftWithInheritance();
+        final String r = getRightWithInheritance();
+
+        if ("fixed".equals(p) && getBrowserVersion().hasFeature(TREATS_POSITION_FIXED_LIKE_POSITION_STATIC)) {
+            p = "static";
+        }
 
         int left;
         if ("absolute".equals(p) && !"auto".equals(l)) {
@@ -1335,12 +1341,21 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             // scenario arises that requires a more exact calculation.
             left = 200 - pixelValue(r);
         }
+        else if ("fixed".equals(p) && "auto".equals(l)) {
+            // Fixed to the location at which the browser puts it via normal element flowing.
+            left = pixelValue(getElement().getParentHTMLElement().jsxGet_currentStyle().getLeftWithInheritance());
+        }
         else {
             // We *should* calculate the horizontal displacement caused by *previous* siblings.
             // However, that would require us to retrieve computed styles for these siblings,
-            // and that also sounds like a lot of work. We'll just use 0, which is actually correct
-            // for block elements.
-            left = 0;
+            // and that also sounds like a lot of work. We'll just use the specified left value
+            // (or 0), which is actually correct for block elements.
+            if ("static".equals(p)) {
+                left = 0;
+            }
+            else {
+                left = pixelValue(l);
+            }
         }
 
         if (includeMargin) {
@@ -1359,6 +1374,96 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         return left;
+    }
+
+    /**
+     * Returns the CSS <tt>position</tt> attribute, replacing inherited values with the actual parent values.
+     * @return the CSS <tt>position</tt> attribute, replacing inherited values with the actual parent values
+     */
+    public String getPositionWithInheritance() {
+        String p = jsxGet_position();
+        if ("inherit".equals(p)) {
+            if (getBrowserVersion().hasFeature(CAN_INHERIT_CSS_PROPERTY_VALUES)) {
+                final HTMLElement parent = getElement().getParentHTMLElement();
+                p = (parent != null ? parent.jsxGet_currentStyle().getPositionWithInheritance() : "static");
+            }
+            else {
+                p = "static";
+            }
+        }
+        return p;
+    }
+
+    /**
+     * Returns the CSS <tt>left</tt> attribute, replacing inherited values with the actual parent values.
+     * @return the CSS <tt>left</tt> attribute, replacing inherited values with the actual parent values
+     */
+    public String getLeftWithInheritance() {
+        String left = jsxGet_left();
+        if ("inherit".equals(left)) {
+            if (getBrowserVersion().hasFeature(CAN_INHERIT_CSS_PROPERTY_VALUES)) {
+                final HTMLElement parent = getElement().getParentHTMLElement();
+                left = (parent != null ? parent.jsxGet_currentStyle().getLeftWithInheritance() : "auto");
+            }
+            else {
+                left = "auto";
+            }
+        }
+        return left;
+    }
+
+    /**
+     * Returns the CSS <tt>right</tt> attribute, replacing inherited values with the actual parent values.
+     * @return the CSS <tt>right</tt> attribute, replacing inherited values with the actual parent values
+     */
+    public String getRightWithInheritance() {
+        String right = jsxGet_right();
+        if ("inherit".equals(right)) {
+            if (getBrowserVersion().hasFeature(CAN_INHERIT_CSS_PROPERTY_VALUES)) {
+                final HTMLElement parent = getElement().getParentHTMLElement();
+                right = (parent != null ? parent.jsxGet_currentStyle().getRightWithInheritance() : "auto");
+            }
+            else {
+                right = "auto";
+            }
+        }
+        return right;
+    }
+
+    /**
+     * Returns the CSS <tt>top</tt> attribute, replacing inherited values with the actual parent values.
+     * @return the CSS <tt>top</tt> attribute, replacing inherited values with the actual parent values
+     */
+    public String getTopWithInheritance() {
+        String top = jsxGet_top();
+        if ("inherit".equals(top)) {
+            if (getBrowserVersion().hasFeature(CAN_INHERIT_CSS_PROPERTY_VALUES)) {
+                final HTMLElement parent = getElement().getParentHTMLElement();
+                top = (parent != null ? parent.jsxGet_currentStyle().getTopWithInheritance() : "auto");
+            }
+            else {
+                top = "auto";
+            }
+        }
+        return top;
+    }
+
+    /**
+     * Returns the CSS <tt>bottom</tt> attribute, replacing inherited values with the actual parent values.
+     * @return the CSS <tt>bottom</tt> attribute, replacing inherited values with the actual parent values
+     */
+    public String getBottomWithInheritance() {
+        String bottom = jsxGet_bottom();
+        if ("inherit".equals(bottom)) {
+            if (getBrowserVersion().hasFeature(CAN_INHERIT_CSS_PROPERTY_VALUES)) {
+                final HTMLElement parent = getElement().getParentHTMLElement();
+                bottom = (parent != null ? parent.jsxGet_currentStyle().getBottomWithInheritance() : "auto");
+            }
+            else {
+                bottom = "auto";
+            }
+        }
+        return bottom;
     }
 
     /**
