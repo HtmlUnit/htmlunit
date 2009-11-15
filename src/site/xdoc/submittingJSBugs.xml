@@ -17,12 +17,12 @@
             </p>
             <p>
 				Before reporting an issue with JavaScript, it is very preferred if you 
-				isolate the root cause, but just saying 'Dojo' is not working doesn't help much.<br/>
+				isolate the root cause, but just saying 'Dojo' or a given web site is not working, doesn't help much.<br/>
 				To find the offending line, you can put <code>alert()</code> at various places,
 				compare the result of HtmlUnit to a real browser (Internet Explorer or Firefox),
 				and you will mostly be able to provide a tiny failing test case which contains
 				few lines of JavaScript with or without Html (independent of the whole JavaScript library),
-				please have a look in <a href="http://htmlunit.svn.sourceforge.net/viewvc/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/html">these cases</a>.<br/>
+				please have a look at <a href="http://htmlunit.svn.sourceforge.net/viewvc/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/html">some sample test cases</a>.<br/>
 				Once the cause is identified, it is very likely to be fixed in a timely manner.<br/>
             </p>
             <p>
