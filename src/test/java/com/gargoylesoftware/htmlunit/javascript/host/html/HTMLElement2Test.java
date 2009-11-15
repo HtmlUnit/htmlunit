@@ -261,7 +261,6 @@ public class HTMLElement2Test extends WebDriverTestCase {
     }
 
     /**
-     * TODO: Need correct IE8 expectations.
      * @throws Exception if an error occurs
      */
     @Test
@@ -274,7 +273,6 @@ public class HTMLElement2Test extends WebDriverTestCase {
             "5 fixed_length 0", "6 fixed_inherit 0", "7 relative_auto 0", "8 relative_length 50",
             "9 relative_inherit 0", "10 static_auto 0", "11 static_length 0", "12 static_inherit 0",
             "13 inherit_auto 0", "14 inherit_length 0", "15 inherit_inherit 0" })
-    @NotYetImplemented(Browser.IE8)
     public void offsetLeft_PositionLeft_DifferentCombinations() throws Exception {
         final String html = "<html><body onload='test()'><script language='javascript'>\n"
             + "String.prototype.trim = function() {\n"
