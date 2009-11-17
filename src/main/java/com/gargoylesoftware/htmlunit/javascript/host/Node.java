@@ -806,7 +806,7 @@ public class Node extends SimpleScriptable {
      * @return the contents of this node as text
      */
     public String jsxGet_textContent() {
-        return getDomNodeOrDie().getTextContent();
+        return this.<DomNode>getDomNodeOrDie().getTextContent();
     }
 
     /**
@@ -814,6 +814,6 @@ public class Node extends SimpleScriptable {
      * @param value - the new value for the contents of this node
      */
     public void jsxSet_textContent(final Object value) {
-        getDomNodeOrDie().setTextContent(value == null ? null : Context.toString(value));
+        this.<DomNode>getDomNodeOrDie().setTextContent(value == null ? null : Context.toString(value));
     }
 }
