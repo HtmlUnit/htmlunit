@@ -150,4 +150,27 @@ public class DomAttr extends DomNamespaceNode implements Attr {
     public String getCanonicalXPath() {
         return getParentNode().getCanonicalXPath() + "/@" + getName();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getTextContent() {
+        return getNodeValue();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setTextContent(final String textContent) {
+        final boolean mappedElement = HtmlPage.isMappedElement(getOwnerDocument(), getName());
+        if (mappedElement) {
+            ((HtmlPage) getPage()).removeMappedElement((HtmlElement) getOwnerElement());
+        }
+        setValue(textContent);
+        if (mappedElement) {
+            ((HtmlPage) getPage()).addMappedElement((HtmlElement) getOwnerElement());
+        }
+    }
 }

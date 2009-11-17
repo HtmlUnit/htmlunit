@@ -137,6 +137,25 @@ public class AttrTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "test()", IE = "undefined")
+    public void textContent() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var a = document.body.getAttributeNode('onload');\n"
+            + "  alert(a.textContent);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
     /**
      * @throws Exception if the test fails
      */

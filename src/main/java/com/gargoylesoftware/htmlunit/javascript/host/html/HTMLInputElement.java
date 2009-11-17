@@ -20,6 +20,7 @@ import org.xml.sax.helpers.AttributesImpl;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.html.InputElementFactory;
+import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.javascript.host.FormField;
 
 /**
@@ -190,7 +191,7 @@ public class HTMLInputElement extends FormField {
      * @return the selection start
      */
     public int jsxGet_selectionStart() {
-        return ((HtmlTextInput) getDomNodeOrDie()).getSelectionStart();
+        return ((SelectableTextInput) getDomNodeOrDie()).getSelectionStart();
     }
 
     /**
@@ -198,7 +199,7 @@ public class HTMLInputElement extends FormField {
      * @param start selection start
      */
     public void jsxSet_selectionStart(final int start) {
-        ((HtmlTextInput) getDomNodeOrDie()).setSelectionStart(start);
+        ((SelectableTextInput) getDomNodeOrDie()).setSelectionStart(start);
     }
 
     /**
@@ -206,7 +207,7 @@ public class HTMLInputElement extends FormField {
      * @return the selection end
      */
     public int jsxGet_selectionEnd() {
-        return ((HtmlTextInput) getDomNodeOrDie()).getSelectionEnd();
+        return ((SelectableTextInput) getDomNodeOrDie()).getSelectionEnd();
     }
 
     /**
@@ -214,7 +215,7 @@ public class HTMLInputElement extends FormField {
      * @param end selection end
      */
     public void jsxSet_selectionEnd(final int end) {
-        ((HtmlTextInput) getDomNodeOrDie()).setSelectionEnd(end);
+        ((SelectableTextInput) getDomNodeOrDie()).setSelectionEnd(end);
     }
 
     /**

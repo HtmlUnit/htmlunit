@@ -1455,9 +1455,6 @@
         <property name="tagUrn" readable="true" writable="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="textContent" readable="true" writable="true">
-            <browser name="Firefox"/>
-        </property>
         <property name="title" readable="true" writable="true"/>
         <property name="uniqueID" readable="true" writable="false">
             <browser name="Internet Explorer"/>
@@ -2478,6 +2475,9 @@
             <browser name="Firefox"/>
         </property>
         <property name="previousSibling" readable="true" writable="false"/>
+        <property name="textContent" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
         <property name="xml" readable="true" writable="false">
             <doclink
                 url="http://msdn.microsoft.com/en-us/library/ms755989.aspx"

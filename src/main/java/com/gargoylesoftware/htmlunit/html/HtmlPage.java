@@ -2211,5 +2211,16 @@ public class HtmlPage extends SgmlPage {
     public void save(final File file) throws IOException {
         new XmlSerializer().save(this, file);
     }
+
+    /**
+     * Indicates if the attribute name indicates that the owning element is mapped.
+     * @param document the owning document
+     * @param attributeName the name of the attribute to consider
+     * @return <code>true</code> if the owning element should be mapped in its owning page
+     */
+    static boolean isMappedElement(final Document document, final String attributeName) {
+        return (document instanceof HtmlPage)
+            && ("name".equals(attributeName) || "id".equals(attributeName));
+    }
 }
 

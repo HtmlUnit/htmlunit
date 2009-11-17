@@ -553,7 +553,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public void setTextContent(final String textContent) {
         removeAllChildren();
-        appendChild(new DomText(getPage(), textContent));
+        if (textContent != null) {
+            appendChild(new DomText(getPage(), textContent));
+        }
     }
 
     /**

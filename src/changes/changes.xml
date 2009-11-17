@@ -6,6 +6,12 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration">
+            <action type="fix" dev="mguillem">
+                Implement setter and getter for textContent on DomAttr.
+            </action>
+            <action type="fix" dev="mguillem">
+                JavaScript: fix exception accessing selectionStart and selectionEnd on inputs of type password.
+            </action>
             <action type="fix" dev="sdanig" issue="2888451">
                 JavaScript: better calculation of element.offsetLeft property.
             </action>

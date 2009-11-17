@@ -37,4 +37,21 @@ public class DomAttrTest extends WebTestCase {
 
         assertEquals("/html/@id", attr.getCanonicalXPath());
     }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void textContent() throws Exception {
+        final String html = "<html id='foo'><body></body></html>";
+        final HtmlPage page = loadPage(html);
+        final DomAttr attr = page.getDocumentElement().getAttributeNode("id");
+
+        assertEquals("foo", attr.getTextContent());
+        attr.setTextContent("hello");
+        assertEquals("hello", attr.getTextContent());
+
+        assertEquals(page.getDocumentElement(), page.getHtmlElementById("hello"));
+    }
 }

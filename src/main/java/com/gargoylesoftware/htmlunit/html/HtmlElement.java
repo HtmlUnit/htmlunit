@@ -129,8 +129,7 @@ public abstract class HtmlElement extends DomElement {
         final String oldAttributeValue = getAttribute(qualifiedName);
         String value = attributeValue;
 
-        final boolean mappedElement = (qualifiedName.equals("name") || qualifiedName.equals("id"))
-            && getOwnerDocument() instanceof HtmlPage;
+        final boolean mappedElement = HtmlPage.isMappedElement(getOwnerDocument(), qualifiedName);
         if (mappedElement) {
             ((HtmlPage) getPage()).removeMappedElement(this);
         }

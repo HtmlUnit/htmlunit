@@ -736,14 +736,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Gets the textContent attribute.
-     * @return the contents of this node as text
-     */
-    public String jsxGet_textContent() {
-        return jsxGet_innerText();
-    }
-
-    /**
      * Gets the outerHTML of the node.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534310.aspx">MSDN documentation</a>
      * @return the contents of this node as HTML

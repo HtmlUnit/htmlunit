@@ -801,4 +801,19 @@ public class Node extends SimpleScriptable {
         return Undefined.instance;
     }
 
+    /**
+     * Gets the textContent attribute.
+     * @return the contents of this node as text
+     */
+    public String jsxGet_textContent() {
+        return getDomNodeOrDie().getTextContent();
+    }
+
+    /**
+     * Replace all children elements of this element with the supplied value.
+     * @param value - the new value for the contents of this node
+     */
+    public void jsxSet_textContent(final Object value) {
+        getDomNodeOrDie().setTextContent(value == null ? null : Context.toString(value));
+    }
 }

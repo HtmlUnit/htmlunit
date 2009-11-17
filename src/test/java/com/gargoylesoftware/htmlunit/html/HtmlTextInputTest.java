@@ -191,7 +191,8 @@ public class HtmlTextInputTest extends WebTestCase {
     @Alerts(IE = { "undefined,undefined", "undefined,undefined", "3,undefined", "3,10" },
             FF = { "7,7", "11,11", "3,11", "3,10" })
     public void selection2_1() throws Exception {
-        selection2(3, 10);
+        selection2("text", 3, 10);
+        selection2("password", 3, 10);
     }
 
     /**
@@ -201,7 +202,8 @@ public class HtmlTextInputTest extends WebTestCase {
     @Alerts(IE = { "undefined,undefined", "undefined,undefined", "-3,undefined", "-3,15" },
             FF = { "7,7", "11,11", "0,11", "0,11" })
     public void selection2_2() throws Exception {
-        selection2(-3, 15);
+        selection2("text", -3, 15);
+        selection2("password", -3, 15);
     }
 
     /**
@@ -211,13 +213,14 @@ public class HtmlTextInputTest extends WebTestCase {
     @Alerts(IE = { "undefined,undefined", "undefined,undefined", "10,undefined", "10,5" },
             FF = { "7,7", "11,11", "10,11", "5,5" })
     public void selection2_3() throws Exception {
-        selection2(10, 5);
+        selection2("text", 10, 5);
+        selection2("password", 10, 5);
     }
 
-    private void selection2(final int selectionStart, final int selectionEnd) throws Exception {
+    private void selection2(final String type, final int selectionStart, final int selectionEnd) throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
-            + "<input id='myTextInput' value='Bonjour'>\n"
+            + "<input id='myTextInput' value='Bonjour' type='" + type + "'>\n"
             + "<script>\n"
             + "    var input = document.getElementById('myTextInput');\n"
             + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
