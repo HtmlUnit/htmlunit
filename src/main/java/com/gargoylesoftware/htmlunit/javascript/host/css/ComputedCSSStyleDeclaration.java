@@ -1232,20 +1232,49 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the element's height, possibly including its padding and border
      */
     public int getCalculatedHeight(final boolean includeBorder, final boolean includePadding) {
+
         if ("none".equals(jsxGet_display())) {
             return 0;
         }
-        int height = pixelValue(super.jsxGet_height());
+
+        final boolean ie = getBrowserVersion().isIE();
+        final int defaultHeight = (ie ? 15 : 20);
+
+        final String h = super.jsxGet_height();
+        int elementHeight = pixelValue(h);
+        if (elementHeight == 0 || (ie && elementHeight < defaultHeight)) {
+            elementHeight = defaultHeight;
+        }
+
+        Integer childrenHeight = null;
+        for (DomNode child : getDomNodeOrDie().getChildren()) {
+            if (child.getScriptObject() instanceof HTMLElement) {
+                final HTMLElement e = (HTMLElement) child.getScriptObject();
+                final int x = e.jsxGet_currentStyle().getCalculatedHeight(includeBorder, includePadding);
+                childrenHeight = (childrenHeight != null ? childrenHeight + x : x);
+            }
+        }
+
+        int height;
+        if (childrenHeight != null && (h.length() == 0 || ie)) {
+            height = childrenHeight;
+        }
+        else {
+            height = elementHeight;
+        }
+
         if (includeBorder) {
             final int borderTop = pixelValue(jsxGet_borderTopWidth());
             final int borderBottom = pixelValue(jsxGet_borderBottomWidth());
             height += borderTop + borderBottom;
         }
+
         if (includePadding) {
             final int paddingTop = getPaddingTop();
             final int paddingBottom = pixelValue(jsxGet_paddingBottom());
             height += paddingTop + paddingBottom;
         }
+
         return height;
     }
 

@@ -418,6 +418,28 @@ public class HTMLElement2Test extends WebDriverTestCase {
     }
 
     /**
+     * Partial regression test for bug 2892939.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "77", "2", "5", "20", "50", "50", "20" }, IE = { "100", "15", "20", "20", "50", "50", "15" })
+    public void offsetHeight_calculatedBasedOnChildren() throws Exception {
+        final String html
+            = "<html>\n"
+            + "  <body onload='h(\"d1\"); h(\"d2\"); h(\"d3\"); h(\"d4\"); h(\"d5\"); h(\"d6\"); h(\"d7\");'>\n"
+            + "    <div id='d1'>\n"
+            + "      <div id='d2' style='height:2px;'>x</div>\n"
+            + "      <div id='d3' style='height:5px;'><div id='d4' style='height:20px;'>x</div></div>\n"
+            + "      <div id='d5'><div id='d6' style='height:50px;'>x</div></div>\n"
+            + "      <div id='d7'>x</div>\n"
+            + "    </div>\n"
+            + "    <script>function h(id) { alert(document.getElementById(id).offsetHeight); }</script>\n"
+            + "  </body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
