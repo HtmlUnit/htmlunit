@@ -1703,6 +1703,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
 
         if (offsetParent != null) {
+            final HTMLElement thiz = (HTMLElement) getDomNodeOrDie().getScriptObject();
+            final boolean thisElementHasTopMargin = (thiz.jsxGet_currentStyle().getMarginTop() != 0);
+            if (!thisElementHasTopMargin) {
+                top += offsetParent.jsxGet_currentStyle().getMarginTop();
+            }
             top += offsetParent.jsxGet_currentStyle().getPaddingTop();
         }
 

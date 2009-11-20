@@ -367,6 +367,22 @@ public class HTMLElement2Test extends WebDriverTestCase {
     }
 
     /**
+     * Partial regression test for bug 2892939.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "8", "8" }, IE = { "10", "15" })
+    public void offsetTopAndLeftWhenParentIsBody() throws Exception {
+        final String html
+            = "<html>\n"
+            + "  <body onload='var d = document.getElementById(\"d\"); alert(d.offsetLeft); alert(d.offsetTop);'>\n"
+            + "    <div id='d'>foo</div>\n"
+            + "  </body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
