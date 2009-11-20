@@ -1475,6 +1475,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     /**
+     * Gets the top margin of the element.
+     * @return the value in pixels
+     */
+    public int getMarginTop() {
+        return pixelValue(jsxGet_marginTop());
+    }
+
+    /**
      * Gets the left padding of the element.
      * @return the value in pixels
      */
