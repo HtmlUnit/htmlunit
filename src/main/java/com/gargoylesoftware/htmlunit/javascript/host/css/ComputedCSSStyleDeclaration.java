@@ -1247,7 +1247,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         Integer childrenHeight = null;
-        for (DomNode child : getDomNodeOrDie().getChildren()) {
+        final DomNode thiz = getDomNodeOrDie();
+        for (DomNode child : thiz.getChildren()) {
             if (child.getScriptObject() instanceof HTMLElement) {
                 final HTMLElement e = (HTMLElement) child.getScriptObject();
                 final int x = e.jsxGet_currentStyle().getCalculatedHeight(includeBorder, includePadding);
