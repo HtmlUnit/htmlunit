@@ -38,7 +38,6 @@ public class DomAttrTest extends WebTestCase {
         assertEquals("/html/@id", attr.getCanonicalXPath());
     }
 
-
     /**
      * @throws Exception if the test fails
      */

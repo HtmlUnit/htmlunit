@@ -1232,7 +1232,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the element's height, possibly including its padding and border
      */
     public int getCalculatedHeight(final boolean includeBorder, final boolean includePadding) {
-
         if ("none".equals(jsxGet_display())) {
             return 0;
         }
