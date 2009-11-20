@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration">
+            <action type="fix" dev="sdanig" issue="2892939">
+                JavaScript: better calculation of element.offsetTop property.
+            </action>
             <action type="fix" dev="mguillem">
                 Implement setter and getter for textContent on DomAttr.
             </action>
