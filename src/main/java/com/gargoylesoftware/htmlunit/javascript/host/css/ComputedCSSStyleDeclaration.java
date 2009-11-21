@@ -48,6 +48,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     /** The number of (horizontal) pixels to assume that each character occupies. */
     private static final int PIXELS_PER_CHAR = 10;
 
+    /** The default element width (in pixels) for elements taking up the full "screen" width. */
+    private static final int DEFAULT_ELEMENT_WIDTH = 1256;
+
     /**
      * Local modifications maintained here rather than in the element. We use a sorted
      * map so that results are deterministic and thus easily testable.
@@ -1175,7 +1178,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             defaultWidth = "auto";
         }
         else {
-            defaultWidth = "1256px";
+            defaultWidth = DEFAULT_ELEMENT_WIDTH + "px";
         }
         return pixelString(defaultIfEmpty(super.jsxGet_width(), defaultWidth));
     }
@@ -1206,7 +1209,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 final HTMLElement parentJS = (HTMLElement) parent.getScriptObject();
                 final String parentWidth = getWindow().jsxFunction_getComputedStyle(parentJS, null).jsxGet_width();
                 if (getBrowserVersion().isIE() && "auto".equals(parentWidth)) {
-                    width = 1256; // This is our standard default width.
+                    width = DEFAULT_ELEMENT_WIDTH;
                 }
                 else {
                     width = pixelValue(parentWidth);
@@ -1384,15 +1387,15 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             left = pixelValue(l);
         }
         else if ("absolute".equals(p) && !"auto".equals(r)) {
-            // We *should* calculate the horizontal displacement caused by *all* siblings.
-            // However, that would require us to retrieve computed styles for all siblings,
-            // and that sounds like a lot of work. We'll use a bogus parent width until a
-            // scenario arises that requires a more exact calculation.
-            left = 200 - pixelValue(r);
+            // Need to calculate the horizontal displacement caused by *all* siblings.
+            final HTMLElement parent = getElement().getParentHTMLElement();
+            final int parentWidth = parent.jsxGet_currentStyle().getCalculatedWidth(false, false);
+            left = parentWidth - pixelValue(r);
         }
         else if ("fixed".equals(p) && "auto".equals(l)) {
             // Fixed to the location at which the browser puts it via normal element flowing.
-            left = pixelValue(getElement().getParentHTMLElement().jsxGet_currentStyle().getLeftWithInheritance());
+            final HTMLElement parent = getElement().getParentHTMLElement();
+            left = pixelValue(parent.jsxGet_currentStyle().getLeftWithInheritance());
         }
         else if ("static".equals(p)) {
             // We need to calculate the horizontal displacement caused by *previous* siblings.
