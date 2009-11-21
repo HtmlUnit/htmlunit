@@ -31,6 +31,7 @@ import org.apache.commons.lang.StringUtils;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlHead;
+import com.gargoylesoftware.htmlunit.javascript.host.Text;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 /**
@@ -43,6 +44,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     private static final long serialVersionUID = -1883166331827717255L;
+
+    /** The number of (horizontal) pixels to assume that each character occupies. */
+    private static final int PIXELS_PER_CHAR = 10;
 
     /**
      * Local modifications maintained here rather than in the element. We use a sorted
@@ -1183,28 +1187,44 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the element's width in pixels, possibly including its padding and border
      */
     public int getCalculatedWidth(final boolean includeBorder, final boolean includePadding) {
-        if ("none".equals(jsxGet_display())) {
+        final String display = jsxGet_display();
+        if ("none".equals(display)) {
             return 0;
         }
         int width;
         final String styleWidth = super.jsxGet_width();
         final DomNode parent = getElement().getDomNodeOrDie().getParentNode();
         if (StringUtils.isEmpty(styleWidth) && parent instanceof HtmlElement) {
-            // Width not explicitly set; just assume we fill the width provided by the parent...
-            // ... unless we're floating
+            // Width not explicitly set.
             final String cssFloat = jsxGet_cssFloat();
             if ("right".equals(cssFloat) || "left".equals(cssFloat)) {
-                // simplistic approximation: text content * 10 pixels per character
-                width = this.<DomNode>getDomNodeOrDie().getTextContent().length() * 10;
+                // We're floating; simplistic approximation: text content * pixels per character.
+                width = this.<DomNode>getDomNodeOrDie().getTextContent().length() * PIXELS_PER_CHAR;
             }
-            else {
+            else if ("block".equals(display)) {
+                // Block elements take up 100% of the parent's width.
                 final HTMLElement parentJS = (HTMLElement) parent.getScriptObject();
                 final String parentWidth = getWindow().jsxFunction_getComputedStyle(parentJS, null).jsxGet_width();
                 if (getBrowserVersion().isIE() && "auto".equals(parentWidth)) {
-                    width = 1256; // this is our standard default width
+                    width = 1256; // This is our standard default width.
                 }
                 else {
                     width = pixelValue(parentWidth);
+                }
+            }
+            else {
+                // Inline elements take up however much space is required by their children.
+                width = 0;
+                final DomNode thiz = getDomNodeOrDie();
+                for (DomNode child : thiz.getChildren()) {
+                    if (child.getScriptObject() instanceof HTMLElement) {
+                        final HTMLElement e = (HTMLElement) child.getScriptObject();
+                        final int w = e.jsxGet_currentStyle().getCalculatedWidth(true, true);
+                        width += w;
+                    }
+                    else if (child.getScriptObject() instanceof Text) {
+                        width += child.getTextContent().length() * PIXELS_PER_CHAR;
+                    }
                 }
             }
         }
@@ -1256,7 +1276,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         int height;
-        if (childrenHeight != null && (h.length() == 0 || ie)) {
+        if (childrenHeight != null && ((ie && childrenHeight > elementHeight) || (!ie && h.length() == 0))) {
             height = childrenHeight;
         }
         else {
@@ -1374,17 +1394,28 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             // Fixed to the location at which the browser puts it via normal element flowing.
             left = pixelValue(getElement().getParentHTMLElement().jsxGet_currentStyle().getLeftWithInheritance());
         }
+        else if ("static".equals(p)) {
+            // We need to calculate the horizontal displacement caused by *previous* siblings.
+            left = 0;
+            for (DomNode n = getDomNodeOrDie(); n != null; n = n.getPreviousSibling()) {
+                if (n.getScriptObject() instanceof HTMLElement) {
+                    final HTMLElement e = (HTMLElement) n.getScriptObject();
+                    final String d = e.jsxGet_currentStyle().jsxGet_display();
+                    if ("block".equals(d)) {
+                        break;
+                    }
+                    else if (!"none".equals(d)) {
+                        left += e.jsxGet_currentStyle().getCalculatedWidth(true, true);
+                    }
+                }
+                else if (n.getScriptObject() instanceof Text) {
+                    left += n.getTextContent().length() * PIXELS_PER_CHAR;
+                }
+            }
+        }
         else {
-            // We *should* calculate the horizontal displacement caused by *previous* siblings.
-            // However, that would require us to retrieve computed styles for these siblings,
-            // and that also sounds like a lot of work. We'll just use the specified left value
-            // (or 0), which is actually correct for block elements.
-            if ("static".equals(p)) {
-                left = 0;
-            }
-            else {
-                left = pixelValue(l);
-            }
+            // Just use the CSS specified value.
+            left = pixelValue(l);
         }
 
         if (includeMargin) {
