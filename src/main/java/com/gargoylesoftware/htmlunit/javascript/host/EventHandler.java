@@ -100,7 +100,8 @@ public class EventHandler extends BaseFunction {
         // quick and dirty
         if ("toString".equals(name)) {
             return new BaseFunction() {
-                private static final long serialVersionUID = 3761409724511435061L;
+                //checkstyle bug: http://sourceforge.net/tracker/?func=detail&atid=397078&aid=2853482&group_id=29721
+                //private static final long serialVersionUID = 3761409724511435061L;
 
                 @Override
                 public Object call(final Context cx, final Scriptable scope,

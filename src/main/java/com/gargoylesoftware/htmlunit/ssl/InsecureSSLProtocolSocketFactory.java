@@ -34,7 +34,6 @@ import org.apache.commons.httpclient.protocol.SecureProtocolSocketFactory;
  *
  * @version $Revision$
  * @author Daniel Gredler
- * @created Nov 12, 2004
  * @see com.gargoylesoftware.htmlunit.WebClient#setUseInsecureSSL(boolean)
  */
 public class InsecureSSLProtocolSocketFactory implements SecureProtocolSocketFactory {

@@ -11,8 +11,10 @@
     </module>
 
     <!-- Checks that a package.html file exists for each package.     -->
-    <!-- See http://checkstyle.sf.net/config_javadoc.html#PackageHtml -->
-    <module name="PackageHtml"/>
+    <!-- See http://checkstyle.sf.net/config_javadoc.html#JavadocPackage -->
+    <module name="JavadocPackage">
+        <property name="allowLegacy" value="true"/>
+    </module>
 
     <!-- Checks whether files end with a new line.                        -->
     <!-- See http://checkstyle.sf.net/config_misc.html#NewlineAtEndOfFile -->
@@ -22,11 +24,27 @@
     <!-- See http://checkstyle.sf.net/config_misc.html#Translation -->
     <module name="Translation"/>
 
-    <module name="TreeWalker">
+    <module name="Header">
+        <property name="headerFile" value="${checkstyle.header.file}"/>
+    </module>
 
-        <module name="Header">
-            <property name="headerFile" value="${checkstyle.header.file}"/>
-        </module>
+    <module name="FileLength"/>
+
+    <module name="FileTabCharacter">
+        <property name="eachLine" value="true"/>
+    </module>
+
+    <!-- Prevent two spaces after @xxxx -->
+    <module name="RegexpSingleline">
+        <property name="format" value="\* *@\w*  "/>
+    </module>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="\s$"/>
+        <property name="message" value="Trailing whitespace found."/>
+    </module>
+
+    <module name="TreeWalker">
         <property name="tabWidth" value="4"/>
         <module name="LeftCurly">
             <property name="option" value="eol"/>
@@ -92,7 +110,6 @@
 
         <!-- Checks for Size Violations.                    -->
         <!-- See http://checkstyle.sf.net/config_sizes.html -->
-        <module name="FileLength"/>
         <module name="ParameterNumber"/>
 
         <!-- Checks for whitespace                               -->
@@ -107,7 +124,6 @@
         <module name="OperatorWrap"/>
         <module name="ParenPad"/>
         <module name="TypecastParenPad"/>
-        <module name="TabCharacter"/>
         <module name="WhitespaceAfter"/>
         <module name="WhitespaceAround">
             <!-- All except 'GENERIC_START' and 'GENERIC_END' -->
@@ -163,16 +179,6 @@
 
         <!-- Miscellaneous other checks.                   -->
         <!-- See http://checkstyle.sf.net/config_misc.html -->
-
-        <!-- Prevent two spaces after @xxxx -->
-        <module name="GenericIllegalRegexp">
-            <property name="format" value="\* *@\w*  "/>
-        </module>
-
-        <module name="GenericIllegalRegexp">
-            <property name="format" value="\s$"/>
-            <property name="message" value="Trailing whitespace found."/>
-        </module>
 
         <module name="UpperEll"/>
 

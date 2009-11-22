@@ -425,12 +425,11 @@ public class XMLDocumentTest extends WebTestCase {
     /**
      * Tests "xml:space" attribute.
      *
-     * Xalan team response:
-     * <quote>See the DOM Level 3 recommendation for discussion of this. XPath returns the start of the XPath text node,
+     * Xalan team response:<br>
+     * "See the DOM Level 3 recommendation for discussion of this. XPath returns the start of the XPath text node,
      * which spans multiple DOM nodes. It is the DOM user's responsibility to gather the additional nodes,
-     * either manually or by retrieving wholeText rather than value.
-     *
-     * This is unavoidable since DOM and XPath define the concept of "node" differently.</quote>
+     * either manually or by retrieving wholeText rather than value.<br>
+     * This is unavoidable since DOM and XPath define the concept of "node" differently."
      *
      * @throws Exception if the test fails
      */
