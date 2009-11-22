@@ -474,30 +474,36 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         // Add content to the content buffer.
         writeBuffer_.append(content);
 
-        if (!CLOSE_POSTPONED_ACTION_.get()) {
-            getPage().getWebClient().getJavaScriptEngine().addPostponedAction(new PostponedAction(getPage()) {
-                @Override
-                public void execute() throws Exception {
-                    jsxFunction_close();
-                    CLOSE_POSTPONED_ACTION_.set(false);
-                }
-            });
-            CLOSE_POSTPONED_ACTION_.set(true);
-        }
-
         // If open() was called; don't write to doc yet -- wait for call to close().
         if (!writeInCurrentDocument_) {
             LOG.debug("wrote content to buffer");
+            scheduleImplicitClose();
             return;
         }
         final String bufferedContent = writeBuffer_.toString();
         if (!canAlreadyBeParsed(bufferedContent)) {
-            LOG.debug("write: not enough content to parsed it now");
+            LOG.debug("write: not enough content to parse it now");
             return;
         }
 
         writeBuffer_.setLength(0);
         page.writeInParsedStream(bufferedContent.toString());
+    }
+
+    private void scheduleImplicitClose() {
+        if (!CLOSE_POSTPONED_ACTION_.get()) {
+            final HtmlPage page = getDomNodeOrDie();
+            page.getWebClient().getJavaScriptEngine().addPostponedAction(new PostponedAction(page) {
+                @Override
+                public void execute() throws Exception {
+                    if (writeBuffer_.length() > 0) {
+                        jsxFunction_close();
+                    }
+                    CLOSE_POSTPONED_ACTION_.set(false);
+                }
+            });
+            CLOSE_POSTPONED_ACTION_.set(true);
+        }
     }
 
     private enum PARSING_STATUS { OUTSIDE, START, IN_NAME, INSIDE, IN_STRING }
@@ -1081,7 +1087,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
         // The shortcut wasn't enough, which means we probably need to perform the XPath operation anyway.
         // Note that the XPath expression below HAS TO MATCH the tag name checks performed in the shortcut above.
-        // TODO: Behavior for iframe seems to differ between IE and Moz.
+        // TODO: Behavior for iframe seems to differ between IE and Mozilla.
         final HTMLCollection collection = new HTMLCollection(this);
         final String xpath = ".//*[(@name = '" + name + "' and (name() = 'img' or name() = 'form'))]";
         collection.init(page, xpath);
@@ -1494,7 +1500,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param cmd the command identifier
      * @param userInterface display a user interface if the command supports one
      * @param value the string, number, or other value to assign (possible values depend on the command)
-     * @return <code>true</code> if the command is successful
+     * @return <tt>true</tt> if the command was successful, <tt>false</tt> otherwise
      */
     public boolean jsxFunction_execCommand(final String cmd, final boolean userInterface, final Object value) {
         final boolean ie = getBrowserVersion().isIE();
