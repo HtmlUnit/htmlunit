@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocumentTest;
 
 /**
  * The runner for test methods that run with a specific browser ({@link BrowserRunner.Browser})
@@ -242,6 +243,9 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
     @Override
     protected Statement methodBlock(final FrameworkMethod method) {
+        if (getTestClass().getJavaClass().isAssignableFrom(HTMLDocumentTest.class)) {
+            System.out.println("Evaluating " + method.getName());
+        }
         final Object test;
         final WebTestCase testCase;
         try {
