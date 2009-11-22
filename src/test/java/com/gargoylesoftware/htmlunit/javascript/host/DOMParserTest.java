@@ -20,6 +20,9 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link DOMParser}.
@@ -67,7 +70,7 @@ public class DOMParserTest extends WebTestCase {
      */
     @Test
     @Alerts()
-    public void parseFromString_EmptyString() throws Exception {
+    public void parseFromString_emptyString() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var text='';\n"
@@ -85,4 +88,32 @@ public class DOMParserTest extends WebTestCase {
             + "</body></html>";
         loadPageWithAlerts(content);
     }
+
+    /**
+     * Regression test for bug 2899485.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.FF)
+    @Alerts({ "5", "[object CDATASection]", "[object Comment]", "[object Element]", "[object ProcessingInstruction]",
+        "[object Text]" })
+    @NotYetImplemented
+    public void parseFromString_processingInstructionKept() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    var s = '<elementWithChildren>' + '<![CDATA[sampl<<< >>e data]]>' + '<!--a sample comment-->'\n"
+            + "      + '<elementWithChildren/>' + '<?target processing instruction data?>' + 'sample text node'\n"
+            + "      + '</elementWithChildren>'\n"
+            + "    var parser = new DOMParser();\n"
+            + "    var doc = parser.parseFromString(s, 'text/xml');\n"
+            + "    alert(doc.documentElement.childNodes.length);\n"
+            + "    for(var i = 0; i < doc.documentElement.childNodes.length; i++) {\n"
+            + "      alert(doc.documentElement.childNodes[i]);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'></body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }
