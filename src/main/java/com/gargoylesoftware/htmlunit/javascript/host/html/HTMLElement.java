@@ -874,6 +874,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Replace all children elements of this element with the supplied value.
      * @param value - the new value for the contents of this node
      */
+    @Override
     public void jsxSet_textContent(final Object value) {
         setInnerText(value == null ? null : Context.toString(value));
     }
