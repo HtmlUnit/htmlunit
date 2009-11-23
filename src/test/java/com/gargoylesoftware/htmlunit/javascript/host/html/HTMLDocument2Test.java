@@ -49,6 +49,6 @@ public class HTMLDocument2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageWithAlerts(html);
     }
 }
