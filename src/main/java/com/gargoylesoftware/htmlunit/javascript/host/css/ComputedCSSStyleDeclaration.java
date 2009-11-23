@@ -1218,8 +1218,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             else {
                 // Inline elements take up however much space is required by their children.
                 width = 0;
-                final DomNode thiz = getDomNodeOrDie();
-                for (DomNode child : thiz.getChildren()) {
+                for (DomNode child : this.<DomNode>getDomNodeOrDie().getChildren()) {
                     if (child.getScriptObject() instanceof HTMLElement) {
                         final HTMLElement e = (HTMLElement) child.getScriptObject();
                         final int w = e.jsxGet_currentStyle().getCalculatedWidth(true, true);
@@ -1269,8 +1268,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         Integer childrenHeight = null;
-        final DomNode thiz = getDomNodeOrDie();
-        for (DomNode child : thiz.getChildren()) {
+        for (DomNode child : this.<DomNode>getDomNodeOrDie().getChildren()) {
             if (child.getScriptObject() instanceof HTMLElement) {
                 final HTMLElement e = (HTMLElement) child.getScriptObject();
                 final int x = e.jsxGet_currentStyle().getCalculatedHeight(includeBorder, includePadding);
