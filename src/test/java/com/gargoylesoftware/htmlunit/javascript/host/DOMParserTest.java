@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link DOMParser}.
@@ -97,7 +96,6 @@ public class DOMParserTest extends WebTestCase {
     @Browsers(Browser.FF)
     @Alerts({ "5", "[object CDATASection]", "[object Comment]", "[object Element]", "[object ProcessingInstruction]",
         "[object Text]" })
-    @NotYetImplemented
     public void parseFromString_processingInstructionKept() throws Exception {
         final String html
             = "<html><head><script>\n"

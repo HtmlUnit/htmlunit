@@ -47,6 +47,7 @@ import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomDocumentType;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.DomProcessingInstruction;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -211,18 +212,19 @@ public final class XmlUtil {
                     break;
 
                 case Node.TEXT_NODE:
-                    final DomText text = new DomText(page, child.getNodeValue());
-                    dest.appendChild(text);
+                    dest.appendChild(new DomText(page, child.getNodeValue()));
                     break;
 
                 case Node.CDATA_SECTION_NODE:
-                    final DomCDataSection cdata = new DomCDataSection(page, child.getNodeValue());
-                    dest.appendChild(cdata);
+                    dest.appendChild(new DomCDataSection(page, child.getNodeValue()));
                     break;
 
                 case Node.COMMENT_NODE:
-                    final DomComment comment = new DomComment(page, child.getNodeValue());
-                    dest.appendChild(comment);
+                    dest.appendChild(new DomComment(page, child.getNodeValue()));
+                    break;
+
+                case Node.PROCESSING_INSTRUCTION_NODE:
+                    dest.appendChild(new DomProcessingInstruction(page, child.getNodeName(), child.getNodeValue()));
                     break;
 
                 default:

@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration">
+            <action type="fix" dev="asashour" issue="2899485">
+                JavaScript: add support for ProcessingInstruction during parsing.
+            </action>
             <action type="fix" dev="sdanig" issue="2892939">
                 JavaScript: better calculation of element.offsetTop and element.offsetHeight properties.
             </action>
