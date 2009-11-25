@@ -403,6 +403,27 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Hello There")
+    public void write() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<title>Test</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  document.write('<html><body><scr'+'ipt>alert(\"Hello There\")</scr'+'ipt></body></html>');\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * <a href="https://sourceforge.net/tracker/?func=detail&aid=2855731&group_id=47038&atid=448266">Bug 2855731</a>.
      * @throws Exception if an error occurs
      */

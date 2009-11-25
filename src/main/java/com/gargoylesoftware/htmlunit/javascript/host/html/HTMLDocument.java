@@ -174,12 +174,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     private String uniqueID_;
     private String lastModified_;
 
-    private static ThreadLocal<Boolean> CLOSE_POSTPONED_ACTION_ = new ThreadLocal<Boolean>() {
-        @Override
-        protected Boolean initialValue() {
-            return false;
-        }
-    };
+    private boolean closePostponedAction_;
 
     /** Initializes the supported event type map. */
     static {
@@ -491,7 +486,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     private void scheduleImplicitClose() {
-        if (!CLOSE_POSTPONED_ACTION_.get()) {
+        if (!closePostponedAction_) {
+            closePostponedAction_ = true;
             final HtmlPage page = getDomNodeOrDie();
             page.getWebClient().getJavaScriptEngine().addPostponedAction(new PostponedAction(page) {
                 @Override
@@ -499,10 +495,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                     if (writeBuffer_.length() > 0) {
                         jsxFunction_close();
                     }
-                    CLOSE_POSTPONED_ACTION_.set(false);
+                    closePostponedAction_ = false;
                 }
             });
-            CLOSE_POSTPONED_ACTION_.set(true);
         }
     }
 
