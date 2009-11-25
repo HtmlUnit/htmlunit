@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.PrintWriter;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -46,4 +47,22 @@ public class HtmlNoFrames extends HtmlElement {
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void printChildrenAsXml(final String indent, final PrintWriter printWriter) {
+        DomNode child = getFirstChild();
+        while (child != null) {
+            if (child instanceof DomText) {
+                printWriter.write(child.getNodeValue());
+            }
+            else {
+                child.printXml(indent + "  ", printWriter);
+            }
+            child = child.getNextSibling();
+        }
+    }
+
 }
