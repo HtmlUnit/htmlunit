@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
@@ -39,7 +40,7 @@ public class HtmlTable2Test extends WebDriverTestCase {
     @Test
     @Alerts(IE = { "TBODY->TR->TD->Two", "THEAD->TR->TD->One", "THEAD->TR->TD->Three" },
             FF = { "TBODY->TR->TD->Two", "THEAD->TD->One", "THEAD->TR->TD->Three" })
-    @NotYetImplemented
+    @NotYetImplemented(Browser.FF)
     public void two_theads() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
