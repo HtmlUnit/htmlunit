@@ -36,9 +36,9 @@ public class HtmlTableSectionTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"[object]", "[object]", "[object]"},
-            FF = {"[object HTMLTableSectionElement]",
-            "[object HTMLTableSectionElement]", "[object HTMLTableSectionElement]"})
+    @Alerts(IE = { "[object]", "[object]", "[object]" },
+            FF = { "[object HTMLTableSectionElement]",
+            "[object HTMLTableSectionElement]", "[object HTMLTableSectionElement]" })
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
