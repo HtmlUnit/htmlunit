@@ -52,11 +52,11 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
     public String preProcess(final HtmlPage htmlPage, final String sourceCode,
             final String sourceName, final HtmlElement htmlElement) {
 
-        final int startPos = sourceCode.indexOf("/*@cc_on");
+        final int startPos = StringScriptPreProcessor.indexOf(sourceCode, "/*@cc_on", 0);
         if (startPos == -1) {
             return sourceCode;
         }
-        final int endPos = sourceCode.indexOf("@*/", startPos);
+        final int endPos = StringScriptPreProcessor.indexOf(sourceCode, "@*/", startPos);
         if (endPos == -1) {
             return sourceCode;
         }
@@ -92,6 +92,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
         if (body.startsWith("cc_on")) {
             body = body.substring(5);
         }
+        //TODO: StringScriptPreProcessor.indexOf() should be used (in order to ignore string literals)
         body = body.replaceAll("/\\*@end", "");
         body = processIfs(body);
         body = replaceCompilationVariables(body, browserVersion);
@@ -137,6 +138,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
     }
 
     private static String processIfs(String code) {
+        //TODO: StringScriptPreProcessor.indexOf() should be used (in order to ignore string literals)
         code = code.replaceAll("@if\\s*\\(([^\\)]+)\\)", "if ($1) {");
         code = code.replaceAll("@elif\\s*\\(([^\\)]+)\\)", "} else if ($1) {");
         code = code.replaceAll("@else", "} else {");

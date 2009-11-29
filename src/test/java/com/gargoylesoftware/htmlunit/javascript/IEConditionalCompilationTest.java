@@ -20,8 +20,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Test for {@link IEConditionalCompilationScriptPreProcessor}.
@@ -170,7 +168,6 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = "true", FF = "false")
-    @NotYetImplemented(Browser.IE)
     public void eval() throws Exception {
         final String script =
             "var isMSIE;\n"
