@@ -39,7 +39,6 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     private static String XHRInstanciation_ = "(window.XMLHttpRequest ? "
         + "new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP'))";
 
-
     /**
      * This produced a deadlock situation with HtmlUnit-2.6 and HttmlUnit-2.7-SNAPSHOT on 17.09.09.
      * The reason is that HtmlUnit has currently one "JS execution thread" per window, synchronizing on the
