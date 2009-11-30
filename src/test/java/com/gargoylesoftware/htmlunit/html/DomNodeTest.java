@@ -735,4 +735,23 @@ public class DomNodeTest extends WebTestCase {
         page.removeDomChangeListener(listener);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void isDisplayed() throws Exception {
+        final String html = "<html><head>\n"
+            + "<style>\n"
+            + "#d2 { display: none; }\n"
+            + "#d3 { visibility: hidden; }\n"
+            + "</style>\n"
+            + "<div id='d1'>hello</div>\n"
+            + "<div id='d2'>world</div>\n"
+            + "<div id='d3'>again</div>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        assertTrue(page.getElementById("d1").isDisplayed());
+        assertFalse(page.getElementById("d3").isDisplayed());
+    }
 }
