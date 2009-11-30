@@ -2162,6 +2162,9 @@
             <browser name="Firefox"/>
         </property>
         <function name="select"/>
+        <function name="setSelectionRange">
+            <browser name="Firefox"/>
+        </function>
     </class>
 
     <class name="HTMLTitleElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTitleElement"

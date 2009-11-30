@@ -23,6 +23,8 @@ import org.openqa.selenium.WebElement;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
@@ -424,6 +426,31 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
             + "  alert(a1.rows);\n"
             + "  alert(a2.rows);\n"
             + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.FF)
+    @Alerts({ "9", "9", "2", "7" })
+    public void selectionRange() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "    var ta = document.getElementById('myInput');\n"
+            + "    ta.setSelectionRange(15, 15);\n"
+            + "    alert(ta.selectionStart);"
+            + "    alert(ta.selectionEnd);"
+            + "    ta.setSelectionRange(2, 7);\n"
+            + "    alert(ta.selectionStart);"
+            + "    alert(ta.selectionEnd);"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<textarea id='myInput'>some test</textarea>\n"
+            + "</body></html>";
+
         loadPageWithAlerts2(html);
     }
 
