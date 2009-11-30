@@ -98,6 +98,10 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             try {
                 job_.run();
             }
+            catch (final RuntimeException e) {
+                LOG.error("Job run failed with unexpected RuntimeException: " + e.getMessage(), e);
+                throw e;
+            }
             finally {
                 synchronized (currentlyRunningJobs_) {
                     currentlyRunningJobs_.remove(job_);

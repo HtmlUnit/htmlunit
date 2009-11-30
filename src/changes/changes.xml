@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration">
+            <action type="update" dev="asashour" issue="2900487">
+                JavaScript: log exceptions thrown in background threads.
+            </action>
             <action type="fix" dev="asashour" issue="2881627">
                 IEConditionalCompilationScriptPreProcessor should ignore string literals.
             </action>
