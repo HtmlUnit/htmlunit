@@ -126,7 +126,8 @@ class HtmlSerializer {
         }
         else if (node instanceof HtmlHiddenInput
                 || node instanceof HtmlScript
-                || node instanceof HtmlStyle) {
+                || node instanceof HtmlStyle
+                || node instanceof HtmlNoFrames) {
             // nothing
         }
         else if (node instanceof HtmlTextArea) {

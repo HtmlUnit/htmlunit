@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -25,6 +26,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
 public class HtmlNoFramesTest extends WebTestCase {
@@ -43,5 +45,22 @@ public class HtmlNoFramesTest extends WebTestCase {
 
         final HtmlPage page = loadPage(html);
         assertTrue(page.asXml().contains("<b>"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asText() throws Exception {
+        final String html
+            = "<html>\n"
+            + "  <noframes id='it'>\n"
+            + "    Some text\n"
+            + "  </noframes>\n"
+            + "</html>";
+
+        final HtmlPage page = loadPage(html);
+        assertEquals("", page.getElementById("it").asText());
+        Assert.assertFalse(page.asText(), page.asText().contains("Some text"));
     }
 }
