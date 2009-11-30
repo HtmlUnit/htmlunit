@@ -36,6 +36,9 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  */
 @RunWith(BrowserRunner.class)
 public class XMLHttpRequest2Test extends WebDriverTestCase {
+    private static String XHRInstanciation_ = "(window.XMLHttpRequest ? "
+        + "new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP'))";
+
 
     /**
      * This produced a deadlock situation with HtmlUnit-2.6 and HttmlUnit-2.7-SNAPSHOT on 17.09.09.
@@ -51,20 +54,12 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @NotYetImplemented
     public void deadlock() throws Exception {
         final String jsCallSynchXHR = "function callSynchXHR(url) {\n"
-            + "  var xhr;\n"
-            + "  if (window.XMLHttpRequest)\n"
-            + "    xhr = new XMLHttpRequest();\n"
-            + "  else\n"
-            + "    xhr = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "  var xhr = " + XHRInstanciation_ + ";\n"
             + "  xhr.open('GET', url, false);\n"
             + "  xhr.send('');\n"
             + "}\n";
         final String jsCallASynchXHR = "function callASynchXHR(url) {\n"
-            + "  var xhr;\n"
-            + "  if (window.XMLHttpRequest)\n"
-            + "    xhr = new XMLHttpRequest();\n"
-            + "  else\n"
-            + "    xhr = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "  var xhr = " + XHRInstanciation_ + ";\n"
             + "  var handler = function() {\n"
             + "    if (xhr.readyState == 4)\n"
             + "      alert(xhr.responseText);\n"
@@ -116,11 +111,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     public void setRequestHeader() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
-            + "    var request;\n"
-            + "    if (window.XMLHttpRequest)\n"
-            + "      request = new XMLHttpRequest();\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "    var request = " + XHRInstanciation_ + ";\n"
             + "    request.open('GET', 'second.html', false);\n"
             + "    request.setRequestHeader('Accept', 'text/javascript, application/javascript, */*');\n"
             + "    request.setRequestHeader('Accept-Language', 'ar-eg');\n"
@@ -146,11 +137,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     public void openThrowOnEmptyUrl() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
-            + "var request;\n"
-            + "if (window.XMLHttpRequest)\n"
-            + "  request = new XMLHttpRequest();\n"
-            + "else\n"
-            + "  request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "var request = " + XHRInstanciation_ + ";\n"
             + "var values = [null, '', ' ', '  \\t  '];\n"
             + "for (var i=0; i<values.length; ++i) {\n"
             + "  try {\n"
@@ -165,5 +152,93 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
         assertEquals(3, getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * Test access to the XML DOM.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "1", "bla", "someAttr", "someValue", "true", "foo", "2", "fi1" })
+    public void responseXML() throws Exception {
+        testResponseXML("text/xml");
+        testResponseXML(null);
+    }
+
+    /**
+     * Test access to responseXML when the content type indicates that it is not XML.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void responseXML_badContentType() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var request = " + XHRInstanciation_ + ";\n"
+            + "  request.open('GET', 'foo.xml', false);\n"
+            + "  request.send('');\n"
+            + "  alert(request.responseXML);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        final URL urlFoo = new URL(URL_FIRST + "foo.xml");
+        getMockWebConnection().setResponse(urlFoo, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
+            "text/plain");
+        loadPageWithAlerts2(html);
+    }
+
+    private void testResponseXML(final String contentType) throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var request = " + XHRInstanciation_ + ";\n"
+            + "  request.open('GET', 'foo.xml', false);\n"
+            + "  request.send('');\n"
+            + "  var childNodes = request.responseXML.childNodes;\n"
+            + "  alert(childNodes.length);\n"
+            + "  var rootNode = childNodes[0];\n"
+            + "  alert(rootNode.nodeName);\n"
+            + "  alert(rootNode.attributes[0].nodeName);\n"
+            + "  alert(rootNode.attributes[0].nodeValue);\n"
+            + "  alert(rootNode.attributes['someAttr'] == rootNode.attributes[0]);\n"
+            + "  alert(rootNode.firstChild.nodeName);\n"
+            + "  alert(rootNode.firstChild.childNodes.length);\n"
+            + "  alert(request.responseXML.getElementsByTagName('fi').item(0).attributes[0].nodeValue);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        final URL urlFoo = new URL(URL_FIRST + "foo.xml");
+        getMockWebConnection().setResponse(urlFoo, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
+            contentType);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test access to responseXML when the content type indicates that it is not XML.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void responseXML_sendNotCalled() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var request = " + XHRInstanciation_ + ";\n"
+            + "  request.open('GET', 'foo.xml', false);\n"
+            + "  alert(request.responseXML);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        final URL urlFoo = new URL(URL_FIRST + "foo.xml");
+        getMockWebConnection().setResponse(urlFoo, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
+            "text/plain");
+        loadPageWithAlerts2(html);
     }
 }

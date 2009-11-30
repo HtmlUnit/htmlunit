@@ -6,6 +6,12 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration">
+            <action type="fix" dev="mguillem">
+                JavaScript: XMLHttpRequest.responseXML is null when send() has not been called.
+            </action>
+            <action type="fix" dev="mguillem">
+                JavaScript: XMLHttpRequest.responseXML is accessible when no content type header is present.
+            </action>
             <action type="update" dev="asashour" issue="2900487">
                 JavaScript: log exceptions thrown in background threads.
             </action>

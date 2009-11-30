@@ -270,7 +270,11 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @return a DOM-compatible document object version of the data retrieved from the server
      */
     public Object jsxGet_responseXML() {
-        if (webResponse_.getContentType().contains("xml")) {
+        if (webResponse_ == null) {
+            return null; // send() has not been called
+        }
+        final String contentType = webResponse_.getContentType();
+        if (contentType.length() == 0 || contentType.contains("xml")) {
             try {
                 final XmlPage page = new XmlPage(webResponse_, getWindow().getWebWindow());
                 final XMLDocument doc;

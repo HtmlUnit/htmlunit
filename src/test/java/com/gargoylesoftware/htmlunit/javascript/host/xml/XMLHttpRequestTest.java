@@ -341,52 +341,6 @@ public class XMLHttpRequestTest extends WebServerTestCase {
     }
 
     /**
-     * Test access to the XML DOM.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testResponseXML() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "function test() {\n"
-            + "  var request;\n"
-            + "  if (window.XMLHttpRequest)\n"
-            + "    request = new XMLHttpRequest();\n"
-            + "  else if (window.ActiveXObject)\n"
-            + "    request = new ActiveXObject('Microsoft.XMLHTTP');\n"
-            + "  request.open('GET', 'foo.xml', false);\n"
-            + "  request.send('');\n"
-            + "  var childNodes = request.responseXML.childNodes;\n"
-            + "  alert(childNodes.length);\n"
-            + "  var rootNode = childNodes[0];\n"
-            + "  alert(rootNode.nodeName);\n"
-            + "  alert(rootNode.attributes[0].nodeName);\n"
-            + "  alert(rootNode.attributes[0].nodeValue);\n"
-            + "  alert(rootNode.attributes['someAttr'] == rootNode.attributes[0]);\n"
-            + "  alert(rootNode.firstChild.nodeName);\n"
-            + "  alert(rootNode.firstChild.childNodes.length);\n"
-            + "  alert(request.responseXML.getElementsByTagName('fi').item(0).attributes[0].nodeValue);\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'></body></html>";
-
-        final WebClient client = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
-        final URL urlPage2 = new URL(URL_FIRST + "foo.xml");
-        conn.setResponse(urlPage2, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
-                "text/xml");
-        client.setWebConnection(conn);
-        client.getPage(URL_FIRST);
-
-        final String[] alerts = {"1", "bla", "someAttr", "someValue", "true", "foo", "2", "fi1" };
-        assertEquals(alerts, collectedAlerts);
-    }
-
-    /**
      * Regression test for IE specific properties attribute.text & attribute.xml.
      * @throws Exception if the test fails
      */
