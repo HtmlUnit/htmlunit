@@ -14,17 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
@@ -38,7 +36,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @author Daniel Gredler
  */
 @RunWith(BrowserRunner.class)
-public class HTMLTextAreaElementTest extends WebTestCase {
+public class HTMLTextAreaElementTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -59,15 +57,16 @@ public class HTMLTextAreaElementTest extends WebTestCase {
             + "<textarea name='textarea1' cols='45' rows='4'>1234</textarea>\n"
             + "</form></body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("foo")
     public void onChange() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title>\n"
+        final String html = "<html><head><title>foo</title>\n"
             + "</head><body>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1'>\n"
@@ -76,17 +75,13 @@ public class HTMLTextAreaElementTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), htmlContent, collectedAlerts);
+        final WebDriver driver = loadPage2(html);
 
-        final HtmlForm form = page.getFormByName("form1");
-        final HtmlTextArea textarea = form.getTextAreaByName("textarea1");
-        textarea.setText("foo");
-        final HtmlButtonInput button = form.getInputByName("myButton");
-        button.click();
+        final WebElement textarea = driver.findElement(By.name("textarea1"));
+        textarea.sendKeys("foo");
+        driver.findElement(By.name("myButton")).click();
 
-        final String[] expectedAlerts = {"foo"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 
     /**
@@ -150,7 +145,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(content);
+        loadPageWithAlerts2(content);
     }
 
     /**
@@ -173,7 +168,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(content);
+        loadPageWithAlerts2(content);
     }
 
     /**
@@ -222,7 +217,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -250,7 +245,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
             + "  <body onload='test()'><textarea id='t'>abc</textarea></body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -284,7 +279,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
             + "</textarea>\n"
             + "</form></body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -308,7 +303,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
             + "<textarea id='textArea'>\n foo \n bar </textarea>\n"
             + "</form></body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -332,7 +327,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
             + "<textarea id='textArea' readonly>\n foo \n bar </textarea>\n"
             + "</form></body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -359,7 +354,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
             + "alert(a1.accessKey);\n"
             + "alert(a2.accessKey);\n"
             + "</script></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -394,7 +389,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
             + "  alert(a1.cols);\n"
             + "  alert(a2.cols);\n"
             + "</script></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -429,7 +424,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
             + "  alert(a1.rows);\n"
             + "  alert(a2.rows);\n"
             + "</script></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
 }
