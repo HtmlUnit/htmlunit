@@ -76,7 +76,10 @@ public abstract class WebTestCase {
     /** Constant for the URL which is used in the tests. */
     public static final URL URL_SECOND;
 
-    /** Constant for the URL which is used in the tests. */
+    /**
+     * Constant for the URL which is used in the tests.
+     * This URL doesn't use the same host name as {@link #URL_FIRST} and {@link #URL_SECOND}.
+     **/
     public static final URL URL_THIRD;
 
     /**
@@ -106,7 +109,7 @@ public abstract class WebTestCase {
         try {
             URL_FIRST = new URL("http://localhost:" + PORT + "/");
             URL_SECOND = new URL("http://localhost:" + PORT + "/second/");
-            URL_THIRD = new URL("http://localhost:" + PORT + "/third/");
+            URL_THIRD = new URL("http://127.0.0.1:" + PORT + "/third/");
         }
         catch (final MalformedURLException e) {
             // This is theoretically impossible.

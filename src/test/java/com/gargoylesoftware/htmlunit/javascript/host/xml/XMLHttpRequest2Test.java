@@ -240,4 +240,29 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             "text/plain");
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Test for Bug 2891430: HtmlUnit should not violate the same-origin policy with FF3.
+     * Note: FF3.5 doesn't enforce this same-origin policy.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void sameOriginPolicy() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var xhr = " + XHRInstanciation_ + ";\n"
+            + "  try {\n"
+            + "    xhr.open('GET', '" + URL_THIRD + "', false);\n"
+            + "    alert('ok');\n"
+            + "  } catch(e) { alert('exception'); }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        getMockWebConnection().setResponse(URL_THIRD, "<bla/>", "text/xml");
+        loadPageWithAlerts2(html);
+    }
 }

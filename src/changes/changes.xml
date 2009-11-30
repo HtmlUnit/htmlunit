@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration">
+            <action type="fix" dev="mguillem" issue="2891430">
+                JavaScript: enforce same-origin policy for XMLHttpRequest.
+            </action>
             <action type="fix" dev="mguillem">
                 Use style sheets too to compute DomNode.isDisplayed.
             </action>

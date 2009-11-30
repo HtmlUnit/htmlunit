@@ -381,6 +381,11 @@ public class XMLHttpRequest extends SimpleScriptable {
         containingPage_ = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
         try {
             final URL fullUrl = containingPage_.getFullyQualifiedUrl(url);
+            final URL originUrl = containingPage_.getWebResponse().getRequestSettings().getUrl();
+            if (!originUrl.getHost().equals(fullUrl.getHost())) {
+                throw Context.reportRuntimeError("Access to restricted URI denied");
+            }
+
             final WebRequestSettings settings = new WebRequestSettings(fullUrl);
             settings.setCharset("UTF-8");
             settings.setAdditionalHeader("Referer", containingPage_.getWebResponse().getRequestSettings().getUrl()
