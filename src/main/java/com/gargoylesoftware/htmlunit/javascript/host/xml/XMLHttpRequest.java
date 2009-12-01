@@ -382,7 +382,7 @@ public class XMLHttpRequest extends SimpleScriptable {
         try {
             final URL fullUrl = containingPage_.getFullyQualifiedUrl(url);
             final URL originUrl = containingPage_.getWebResponse().getRequestSettings().getUrl();
-            if (!originUrl.getHost().equals(fullUrl.getHost())) {
+            if (!isSameOrigin(originUrl, fullUrl)) {
                 throw Context.reportRuntimeError("Access to restricted URI denied");
             }
 
@@ -407,6 +407,13 @@ public class XMLHttpRequest extends SimpleScriptable {
         async_ = async;
         // Change the state!
         setState(STATE_LOADING, null);
+    }
+
+    private boolean isSameOrigin(final URL originUrl, final URL newUrl) {
+        if (getBrowserVersion().isIE() && "about".equals(newUrl.getProtocol())) {
+            return true;
+        }
+        return originUrl.getHost().equals(newUrl.getHost());
     }
 
     /**

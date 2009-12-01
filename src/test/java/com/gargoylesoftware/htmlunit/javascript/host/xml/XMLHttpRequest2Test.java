@@ -249,12 +249,25 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void sameOriginPolicy() throws Exception {
+        sameOriginPolicy(URL_THIRD.toString());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "exception", IE = "ok")
+    public void sameOriginPolicy_aboutBlank() throws Exception {
+        sameOriginPolicy("about:blank");
+    }
+
+    private void sameOriginPolicy(final String url) throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  var xhr = " + XHRInstanciation_ + ";\n"
             + "  try {\n"
-            + "    xhr.open('GET', '" + URL_THIRD + "', false);\n"
+            + "    xhr.open('GET', '" + url + "', false);\n"
             + "    alert('ok');\n"
             + "  } catch(e) { alert('exception'); }\n"
             + "}\n"

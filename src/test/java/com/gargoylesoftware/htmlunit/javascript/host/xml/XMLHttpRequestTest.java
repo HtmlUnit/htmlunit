@@ -605,7 +605,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "        else if (window.ActiveXObject)\n"
             + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
             + "        request.onreadystatechange = onReadyStateChange;\n"
-            + "        request.open('GET', 'about:blank', true);\n"
+            + "        request.open('GET', 'foo.xml', true);\n"
             + "        request.send('');\n"
             + "      }\n"
             + "      function onReadyStateChange() {\n"
@@ -619,6 +619,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             + "  </body>\n"
             + "</html>";
 
+        getMockWebConnection().setDefaultResponse("");
         final WebWindow window = loadPage(getBrowserVersion(), content, null).getEnclosingWindow();
         assertEquals(0, window.getWebClient().waitForBackgroundJavaScriptStartingBefore(1000));
         assertEquals("about:blank", window.getEnclosedPage().getWebResponse().getRequestSettings().getUrl());
