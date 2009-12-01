@@ -44,7 +44,7 @@ public class HtmlNoFramesTest extends WebTestCase {
             + "</html>";
 
         final HtmlPage page = loadPage(html);
-        assertTrue(page.asXml().contains("<b>"));
+        assertTrue(page.asXml().contains("&lt;b&gt;"));
     }
 
     /**
