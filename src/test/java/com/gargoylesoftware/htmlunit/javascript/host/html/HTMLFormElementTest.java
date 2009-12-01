@@ -1373,4 +1373,38 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         headerValue = StringUtils.substringBefore(headerValue, ";");
         assertEquals(expectedCntType, headerValue);
     }
+
+    /**
+     * Failed as of HtmlUnit-2.7-SNAPSHOT 01.12.2009 as the '#' from the
+     * link together with the fact that submission occurs to the same url
+     * let HtmlUnit think that it as just navigation to an anchor.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void submitToSameUrlFromLinkOnclick_post() throws Exception {
+        submitToSameUrlFromLinkOnclick("post");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void submitToSameUrlFromLinkOnclick_get() throws Exception {
+        submitToSameUrlFromLinkOnclick("get");
+    }
+
+    private void submitToSameUrlFromLinkOnclick(final String method) throws Exception {
+        final String html
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1' method='" + method + "'>\n"
+            + "<input name='foo'>\n"
+            + "<a href='#' onclick='document.forms[0].submit()' id='clickMe'>submit it</a>\n"
+            + "</form></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("clickMe")).click();
+        driver.findElement(By.id("clickMe")).click(); // a second time to be sure to have same resulting Url
+
+        assertEquals(3, getMockWebConnection().getRequestCount());
+    }
 }

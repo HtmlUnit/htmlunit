@@ -262,7 +262,8 @@ public class WebClient implements Serializable {
         if (page != null) {
             final URL prev = page.getWebResponse().getRequestSettings().getUrl();
             final URL current = parameters.getUrl();
-            if (current.sameFile(prev) && !StringUtils.equals(current.getRef(), prev.getRef())) {
+            if (current.sameFile(prev) && current.getRef() != null
+                && !StringUtils.equals(current.getRef(), prev.getRef())) {
                 // We're just navigating to an anchor within the current page.
                 page.getWebResponse().getRequestSettings().setUrl(current);
                 webWindow.getHistory().addPage(page);
