@@ -16,6 +16,9 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -26,6 +29,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
 public class KeyboardEventTest extends WebDriverTestCase {
@@ -97,5 +101,29 @@ public class KeyboardEventTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81",
+        "82", "83", "84", "85", "86", "87", "88", "89", "90" })
+    public void keyCodes() throws Exception {
+        final String html = "<html><head>"
+            + "<script>"
+            + "function handleKey(e) {\n"
+            + "  alert(e.keyCode);"
+            + "}"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "<input id='t' onkeyup='handleKey(event)'/>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement field = driver.findElement(By.id("t"));
+
+        field.sendKeys("abcdefghijklmnopqrstuvwxyz");
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 }

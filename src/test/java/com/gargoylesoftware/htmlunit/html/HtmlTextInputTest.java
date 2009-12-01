@@ -331,7 +331,7 @@ public class HtmlTextInputTest extends WebTestCase {
         final HtmlTextInput lastKey = page.getHtmlElementById("lastKey");
         t.type("abc");
         assertEquals("abc", t.getValueAttribute());
-        assertEquals("99", lastKey.getValueAttribute());
+        assertEquals("67", lastKey.getValueAttribute());
 
         // character in private use area E000–F8FF
         t.type("\uE014");

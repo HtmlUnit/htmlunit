@@ -19,7 +19,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 /**
  * JavaScript object representing a Keyboard Event.
  * For general information on which properties and functions should be supported, see
- * <a href="http://www.w3.org/TR/DOM-Level-3-Events/events.html#Events-KeyboardEvents-Interfaces">
+ * <a href="http://www.w3c.org/TR/DOM-Level-3-Events/#Events-KeyboardEvents-Interfaces">
  * DOM Level 3 Events</a>.
  *
  * @version $Revision$
@@ -443,5 +443,19 @@ public class KeyboardEvent extends UIEvent {
      */
     public Object jsxGet_charCode() {
         return charCode_;
+    }
+
+    /**
+     * Converts a Java character to a keyCode.
+     * @see <a href="http://www.w3.org/TR/DOM-Level-3-Events/#keyset-keyidentifiers">DOM 3 Events</a>
+     * @param c the character
+     * @return the corresponding keycode
+     */
+    public static int charToKeyCode(final char c) {
+        if (c >= 'a' && c <= 'z') {
+            return 'A' + c - 'a';
+        }
+
+        return c;
     }
 }
