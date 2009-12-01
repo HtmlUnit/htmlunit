@@ -25,6 +25,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -162,6 +163,11 @@ public class MochiKitTest extends LibraryTestCase {
         webClient_ = getWebClient();
         final HtmlPage page = webClient_.getPage(url);
         webClient_.waitForBackgroundJavaScriptStartingBefore(2000);
+
+        // make single test results visible
+        ((HtmlElement) page.getFirstByXPath("//a[text() = 'Toggle passed tests']")).click();
+        ((HtmlElement) page.getFirstByXPath("//a[text() = 'Toggle failed tests']")).click();
+
         final String expected = loadExpectation("test-" + testName);
         final HtmlDivision div = page.getFirstByXPath("//div[@class = 'tests_report']");
 
