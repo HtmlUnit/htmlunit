@@ -677,4 +677,26 @@ public class Window2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "exception", "exception", "exception", "exception" },
+            IE6 = { "JScript", "5", "6", "number" },
+            IE7 = { "JScript", "5", "7", "number" },
+            IE8 = { "JScript", "5", "8", "number" })
+    public void IEScriptEngineXxx() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "try { alert(ScriptEngine()); } catch(e) { alert('exception') }\n"
+            + "try { alert(ScriptEngineMajorVersion()); } catch(e) { alert('exception') }\n"
+            + "try { alert(ScriptEngineMinorVersion()); } catch(e) { alert('exception') }\n"
+            + "try { alert(typeof ScriptEngineBuildVersion()); } catch(e) { alert('exception') }\n"
+            + "</script></head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }

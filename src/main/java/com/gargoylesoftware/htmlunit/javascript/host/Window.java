@@ -1526,4 +1526,39 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         }
     }
 
+    /**
+     * Gets the name of the scripting engine.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/efy5bay1.aspx">MSDN doc</a>
+     * @return "JScript"
+     */
+    public String jsxFunction_ScriptEngine() {
+        return "JScript";
+    }
+
+    /**
+     * Gets the build version of the scripting engine.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/yftk84kt.aspx">MSDN doc</a>
+     * @return the build version
+     */
+    public int jsxFunction_ScriptEngineBuildVersion() {
+        return 12345;
+    }
+
+    /**
+     * Gets the major version of the scripting engine.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/x7cbaet3.aspx">MSDN doc</a>
+     * @return the major version
+     */
+    public int jsxFunction_ScriptEngineMajorVersion() {
+        return 5;
+    }
+
+    /**
+     * Gets the minor version of the scripting engine.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/wzaz8hhz.aspx">MSDN doc</a>
+     * @return the minor version
+     */
+    public int jsxFunction_ScriptEngineMinorVersion() {
+        return (int) getBrowserVersion().getBrowserVersionNumeric();
+    }
 }

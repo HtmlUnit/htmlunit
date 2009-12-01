@@ -2949,6 +2949,18 @@
         </function>
         <function name="resizeBy"/>
         <function name="resizeTo"/>
+        <function name="ScriptEngine">
+            <browser name="Internet Explorer"/>
+        </function>
+        <function name="ScriptEngineBuildVersion">
+            <browser name="Internet Explorer"/>
+        </function>
+        <function name="ScriptEngineMajorVersion">
+            <browser name="Internet Explorer"/>
+        </function>
+        <function name="ScriptEngineMinorVersion">
+            <browser name="Internet Explorer"/>
+        </function>
         <function name="scroll"/>
         <function name="scrollBy"/>
         <function name="scrollByLines"/>
