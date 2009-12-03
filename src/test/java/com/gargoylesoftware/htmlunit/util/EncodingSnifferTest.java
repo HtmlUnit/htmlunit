@@ -28,6 +28,7 @@ import org.junit.Test;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public class EncodingSnifferTest {
 
@@ -56,6 +57,7 @@ public class EncodingSnifferTest {
     public void testSniffEncodingFromMetaTag() throws Exception {
         testMeta(null, "");
         testMeta(null, "foo");
+        testMeta(null, "<!--");
         testMeta(null, " <!-- blah");
         testMeta(null, " <!-- blah --> ");
         testMeta(null, "<");

@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration">
+            <action type="fix" dev="asashour" issue="2906062">
+                MetaTag: fix NPE in encoding detection.
+            </action>
             <action type="fix" dev="mguillem">
                 Don't skip form submission to same URL when triggered from an anchor with href="#".
             </action>

@@ -36,6 +36,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public final class EncodingSniffer {
 
@@ -711,6 +712,9 @@ public final class EncodingSniffer {
     static int indexOfSubArray(final byte[] array, final byte[] subarray, final int startIndex) {
         for (int i = startIndex; i < array.length; i++) {
             boolean found = true;
+            if (i + subarray.length > array.length) {
+                break;
+            }
             for (int j = 0; j < subarray.length; j++) {
                 final byte a = array[i + j];
                 final byte b = subarray[j];
