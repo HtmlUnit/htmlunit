@@ -673,4 +673,18 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * In RegularExpression, backslash can be followed by a letter.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("null")
+    @NotYetImplemented
+    public void backslash() throws Exception {
+        final String html = buildHtml("var regexp = /(\\https:\\/\\/)/;\n"
+                + "var url = 'http://localhost/test.html';\n"
+                + "alert(url.match(regexp));");
+        loadPageWithAlerts2(html);
+    }
 }
