@@ -25,10 +25,11 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -40,9 +41,10 @@ import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class SelectionTest extends WebTestCase {
+public class SelectionTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if an error occurs
@@ -52,7 +54,7 @@ public class SelectionTest extends WebTestCase {
     @Alerts(IE = "true")
     public void equality_IE() throws Exception {
         final String html = "<html><body><script>alert(document.selection==document.selection);</script></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -65,7 +67,7 @@ public class SelectionTest extends WebTestCase {
         final String html = "<html><body><script>\n"
             + "alert(window.getSelection()==window.getSelection());\n"
             + "</script></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -299,7 +301,7 @@ public class SelectionTest extends WebTestCase {
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -319,20 +321,9 @@ public class SelectionTest extends WebTestCase {
             "9:s2/1/s3/1/false/undefined/2/abcfoo/abc/foo",
             "10:s2/1/s3/3/false/undefined/2/abcfoo---foo/abc/foo---foo",
             "11:s1/0/s1/0/true/undefined/1//",
-            "12:null/0/null/0/true/undefined/0/",
-            "13:[object Text]/1/[object Text]/2/false/undefined/1/yzfo/yzfo",
-            "14:null/0/null/0/true/undefined/0/",
-            "false", "true" })
+            "12:null/0/null/0/true/undefined/0/" })
     public void aLittleBitOfEverything() throws Exception {
-        final String html = "<html><body onload='test()'>\n"
-            + "<span id='s1'>abc</span><span id='s2'>xyz</span><span id='s3'>foo<span>---</span>foo</span>\n"
-            + "<script>\n"
-            + "  var x = 1;\n"
-            + "  function test() {\n"
-            + "    var selection = window.getSelection();\n"
-            + "    var s1 = document.getElementById('s1');\n"
-            + "    var s2 = document.getElementById('s2');\n"
-            + "    var s3 = document.getElementById('s3');\n"
+        final String jsSnippet = ""
             + "    alertSelection(selection);\n"
             + "    selection.selectAllChildren(s2);\n"
             + "    alertSelection(selection);\n"
@@ -357,7 +348,25 @@ public class SelectionTest extends WebTestCase {
             + "    selection.collapseToStart();\n"
             + "    alertSelection(selection);\n"
             + "    selection.removeAllRanges();\n"
-            + "    alertSelection(selection);\n"
+            + "    alertSelection(selection);\n";
+
+        aLittleBitOfEverything(jsSnippet);
+    }
+
+    /**
+     * Test selection's anchorNode and focusNode after call to removeRange. Surprisingly, this is
+     * not null.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.FF)
+    @NotYetImplemented
+    @Alerts(FF = {
+            "1:[object Text]/1/[object Text]/2/false/undefined/1/yzfo/yzfo",
+            "2:[object Text]/1/[object Text]/2/true/undefined/0/",
+            "false", "true" })
+    public void aLittleBitOfEverything_removeRange() throws Exception {
+        final String jsSnippet = ""
             + "    var range = document.createRange();\n"
             + "    range.setStart(s2.firstChild, 1);\n"
             + "    range.setEnd(s3.firstChild, 2);\n"
@@ -367,7 +376,22 @@ public class SelectionTest extends WebTestCase {
             + "    alertSelection(selection);\n"
             + "    alert(range.collapsed);\n"
             + "    selection.addRange(range);\n"
-            + "    alert(selection.getRangeAt(0) == selection.getRangeAt(0));\n"
+            + "    alert(selection.getRangeAt(0) == selection.getRangeAt(0));\n";
+
+        aLittleBitOfEverything(jsSnippet);
+    }
+
+    private void aLittleBitOfEverything(final String jsSnippet) throws Exception {
+        final String html = "<html><body onload='test()'>\n"
+            + "<span id='s1'>abc</span><span id='s2'>xyz</span><span id='s3'>foo<span>---</span>foo</span>\n"
+            + "<script>\n"
+            + "  var x = 1;\n"
+            + "  function test() {\n"
+            + "    var selection = window.getSelection();\n"
+            + "    var s1 = document.getElementById('s1');\n"
+            + "    var s2 = document.getElementById('s2');\n"
+            + "    var s3 = document.getElementById('s3');\n"
+            + jsSnippet
             + "  }\n"
             + "  function alertSelection(s) {\n"
             + "    var anchorNode = (s.anchorNode && s.anchorNode.id ? s.anchorNode.id : s.anchorNode);\n"
@@ -381,7 +405,7 @@ public class SelectionTest extends WebTestCase {
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
 }
