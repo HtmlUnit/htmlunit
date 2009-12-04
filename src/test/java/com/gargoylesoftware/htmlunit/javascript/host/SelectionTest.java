@@ -408,4 +408,27 @@ public class SelectionTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.FF)
+    @Alerts(FF = { "", "", "null", "null" })
+    public void getSelection_display() throws Exception {
+        final String html = "<html><body onload='test()'>\n"
+            + "<iframe id='frame1' src='about:blank'></iframe>\n"
+            + "<iframe id='frame2' src='about:blank' style='display: none'></iframe>\n"
+            + "<div style='display: none'><iframe id='frame3' src='about:blank'></iframe></div>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(window.getSelection());\n"
+            + "    alert(document.getElementById('frame1').contentWindow.getSelection());"
+            + "    alert(document.getElementById('frame2').contentWindow.getSelection());"
+            + "    alert(document.getElementById('frame3').contentWindow.getSelection());"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }

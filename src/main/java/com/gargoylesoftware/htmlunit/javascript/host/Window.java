@@ -1324,6 +1324,13 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the current selection
      */
     public Selection jsxFunction_getSelection() {
+        // return null if the window is in a frame that is not displayed
+        if (webWindow_ instanceof FrameWindow) {
+            final FrameWindow frameWindow = (FrameWindow) webWindow_;
+            if (!frameWindow.getFrameElement().isDisplayed()) {
+                return null;
+            }
+        }
         return getSelection();
     }
 
