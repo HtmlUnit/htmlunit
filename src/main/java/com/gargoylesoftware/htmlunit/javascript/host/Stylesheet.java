@@ -170,12 +170,7 @@ public class Stylesheet extends SimpleScriptable {
                     final boolean selected = selects(selector, e);
                     if (selected) {
                         final org.w3c.dom.css.CSSStyleDeclaration dec = styleRule.getStyle();
-                        for (int k = 0; k < dec.getLength(); k++) {
-                            final String name = dec.item(k);
-                            final String value = dec.getPropertyValue(name);
-                            final String priority = dec.getPropertyPriority(name);
-                            style.setLocalStyleAttribute(name, value, priority);
-                        }
+                        style.applyStyleFromSelector(dec, selector);
                     }
                 }
             }
@@ -452,7 +447,7 @@ public class Stylesheet extends SimpleScriptable {
      * @param source the source from which to retrieve the selectors to be parsed
      * @return the selectors parsed from the specified input source
      */
-    SelectorList parseSelectors(final InputSource source) {
+    public SelectorList parseSelectors(final InputSource source) {
         SelectorList selectors;
         try {
             final ErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();

@@ -27,6 +27,7 @@ import java.util.TreeMap;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import org.apache.commons.lang.StringUtils;
+import org.w3c.css.sac.Selector;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -159,18 +160,33 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     /**
      * Makes a local, "computed", modification to this CSS style.
      *
-     * @param name the name of the style attribute to set
-     * @param newValue the value of the style attribute to set
-     * @param priority the priority of the style attribute to set
+     * @param declaration the style declaration
+     * @param selector the selector determining that the style applies to this element
      */
-    public void setLocalStyleAttribute(final String name, final String newValue, final String priority) {
+    public void applyStyleFromSelector(final org.w3c.dom.css.CSSStyleDeclaration declaration, final Selector selector) {
+        final SelectorSpecificity specificity = new SelectorSpecificity(selector);
+        for (int k = 0; k < declaration.getLength(); k++) {
+            final String name = declaration.item(k);
+            final String value = declaration.getPropertyValue(name);
+            final String priority = declaration.getPropertyPriority(name);
+            applyLocalStyleAttribute(name, value, priority, specificity);
+        }
+    }
+
+    private void applyLocalStyleAttribute(final String name, final String newValue, final String priority,
+            final SelectorSpecificity specificity) {
         if (!"important".equals(priority)) {
             final StyleElement existingElement = localModifications_.get(name);
-            if (existingElement != null && "important".equals(existingElement.getPriority())) {
-                return; // can't override a !important rule by a normal rule. Ignore it!
+            if (existingElement != null) {
+                if ("important".equals(existingElement.getPriority())) {
+                    return; // can't override a !important rule by a normal rule. Ignore it!
+                }
+                else if (specificity.compareTo(existingElement.getSpecificity()) < 0) {
+                    return; // can't override a rule with a rule having higher specificity
+                }
             }
         }
-        final StyleElement element = new StyleElement(name, newValue, priority, getCurrentElementIndex());
+        final StyleElement element = new StyleElement(name, newValue, priority, specificity, getCurrentElementIndex());
         localModifications_.put(name, element);
     }
 

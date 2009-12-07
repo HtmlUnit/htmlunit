@@ -7,6 +7,9 @@
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration">
             <action type="fix" dev="mguillem">
+                CSS: don't override rules with a higher specificity.
+            </action>
+            <action type="fix" dev="mguillem">
                 JavaScript: window.getSelection() returns null for frame windows that are not displayed (FF only).
             </action>
             <action type="fix" dev="asashour" issue="2906062">

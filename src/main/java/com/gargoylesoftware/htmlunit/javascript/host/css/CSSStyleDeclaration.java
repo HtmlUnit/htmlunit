@@ -4587,18 +4587,23 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         private final String value_;
         private final String priority_;
         private final long index_;
+        private final SelectorSpecificity specificity_;
+
         /**
          * Creates a new instance.
          * @param name the style element's name
          * @param value the style element's value
          * @param priority the style element's priority like "important"
+         * @param specificity the specifity of the rule providign this style information
          * @param index the style element's index
          */
-        protected StyleElement(final String name, final String value, final String priority, final long index) {
+        protected StyleElement(final String name, final String value, final String priority,
+                final SelectorSpecificity specificity, final long index) {
             this.name_ = name;
             this.value_ = value;
             this.priority_ = priority;
             this.index_ = index;
+            this.specificity_ = specificity;
         }
         /**
          * Creates a new instance.
@@ -4607,7 +4612,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
          * @param index the style element's index
          */
         protected StyleElement(final String name, final String value, final long index) {
-            this(name, value, "", index);
+            this(name, value, "", SelectorSpecificity.FROM_STYLE_ATTRIBUTE, index);
         }
 
         /**
@@ -4639,6 +4644,13 @@ public class CSSStyleDeclaration extends SimpleScriptable {
          */
         public String getPriority() {
             return priority_;
+        }
+        /**
+         * Returns the specificity of the rule specifying this element.
+         * @return the specificity
+         */
+        public SelectorSpecificity getSpecificity() {
+            return specificity_;
         }
         /**
          * Returns the style element's index.

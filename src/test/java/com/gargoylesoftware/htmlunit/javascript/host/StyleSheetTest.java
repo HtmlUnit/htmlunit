@@ -77,7 +77,7 @@ public class StyleSheetTest extends WebDriverTestCase {
         final HTMLStyleElement host = (HTMLStyleElement) node.getScriptObject();
         final Stylesheet sheet = host.jsxGet_sheet();
 
-        Selector selector = sheet.parseSelectors(new InputSource(new StringReader("*.yui-log input { }"))).item(0);
+        Selector selector = parseSelector(sheet, "*.yui-log input { }");
         assertFalse(sheet.selects(selector, body));
         assertFalse(sheet.selects(selector, form));
         assertTrue(sheet.selects(selector, input1));
@@ -85,9 +85,13 @@ public class StyleSheetTest extends WebDriverTestCase {
         assertFalse(sheet.selects(selector, button1));
         assertFalse(sheet.selects(selector, button2));
 
-        selector = sheet.parseSelectors(new InputSource(new StringReader("#m1 { margin: 3px; }"))).item(0);
+        selector = parseSelector(sheet, "#m1 { margin: 3px; }");
         assertTrue(sheet.selects(selector, input1));
         assertFalse(sheet.selects(selector, input2));
+    }
+
+    private Selector parseSelector(final Stylesheet sheet, final String rule) {
+        return sheet.parseSelectors(new InputSource(new StringReader(rule))).item(0);
     }
 
     /**
@@ -469,4 +473,84 @@ public class StyleSheetTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * Test that the rule with higher specifity wins.
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("60")
+    public void rulePriority_specificity() throws Exception {
+        final String html = "<html><head>\n"
+            + "<style>\n"
+            + "div { z-index: 60 }\n"
+            + "* { z-index: 10 }\n"
+            + "</style></head>\n"
+            + "<body>\n"
+            + "<div id='it'>hello</div>\n"
+            + "<script>\n"
+            + "var getStyle = function(e) {\n"
+            + "return window.getComputedStyle ? window.getComputedStyle(e,'') : e.currentStyle; \n"
+            + "};\n"
+            + "alert(getStyle(document.getElementById('it')).zIndex);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test that the rule with higher specifity wins. More comple case.
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("60")
+    public void rulePriority_specificity2() throws Exception {
+        final String html = "<html><head>\n"
+            + "<style>\n"
+            + ".classA .classB .classC { z-index: 60 }\n"
+            + ".classA .classC { z-index: 10 }\n"
+            + "</style></head>\n"
+            + "<body>\n"
+            + "<div class='classA'>\n"
+            + "<div class='classB'>\n"
+            + "<div id='it' class='classC'>hello</div>\n"
+            + "</div>\n"
+            + "</div>\n"
+            + "<script>\n"
+            + "var getStyle = function(e) {\n"
+            + "return window.getComputedStyle ? window.getComputedStyle(e,'') : e.currentStyle; \n"
+            + "};\n"
+            + "alert(getStyle(document.getElementById('it')).zIndex);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test that the last one wins when selectors have the same specificity.
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({ "10", "10" })
+    public void rulePriority_position() throws Exception {
+        final String html = "<html><head>\n"
+            + "<style>\n"
+            + ".classA { z-index: 60 }\n"
+            + ".classB { z-index: 10 }\n"
+            + "</style></head>\n"
+            + "<body>\n"
+            + "<div id='it1' class='classA classB'>hello</div>\n"
+            + "<div id='it2' class='classA classB'>hello</div>\n"
+            + "<script>\n"
+            + "var getStyle = function(e) {\n"
+            + "return window.getComputedStyle ? window.getComputedStyle(e,'') : e.currentStyle; \n"
+            + "};\n"
+            + "alert(getStyle(document.getElementById('it1')).zIndex);\n"
+            + "alert(getStyle(document.getElementById('it2')).zIndex);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
