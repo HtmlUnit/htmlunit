@@ -27,6 +27,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import junit.framework.Assert;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -269,6 +271,7 @@ public class GWT17Test extends WebServerTestCase {
     @Test
     public void mail() throws Exception {
         final HtmlPage page = loadGWTPage("Mail", null);
+        Assert.assertSame(page.getEnclosingWindow(), page.getWebClient().getCurrentWindow());
         final HtmlTableDataCell cell =
             page.getFirstByXPath("//table[@class='mail-TopPanel']//div[@class='gwt-HTML']//..");
         tableDataCell(cell, "Welcome back, foo@example.com");
@@ -282,12 +285,23 @@ public class GWT17Test extends WebServerTestCase {
             tableDataCell(selectedRowCell, selectedRow[i]);
         }
 
+        verifyStartMailBody(page, "Dear Friend,",
+                "I am Mr. Mark Boland the Bank Manager of ABN AMRO BANK 101 Moorgate, London, EC2M 6SB.");
+
+        // click on email from Hollie Voss
+        final HtmlElement elt = page.getFirstByXPath("//td[text() = 'Hollie Voss']");
+        final HtmlPage page2 = elt.click();
+        Assert.assertSame(page, page2);
+        verifyStartMailBody(page, ">> Componentes e decodificadores; confira aqui;",
+                "http://br.geocities.com/listajohn/index.htm",
+                "THE GOVERNING AWARD");
+    }
+
+    private void verifyStartMailBody(final HtmlPage page, final String... details) {
         final List< ? > detailsCells = page.getByXPath("//div[@class='mail-DetailBody']/text()");
-        final String[] details = {"Dear Friend,",
-            "I am Mr. Mark Boland the Bank Manager of ABN AMRO BANK 101 Moorgate, London, EC2M 6SB."};
         for (int i = 0; i < details.length; i++) {
             final DomText text = (DomText) detailsCells.get(i);
-            assertEquals(details[i], text.getData());
+            assertEquals(details[i], text.asText());
         }
     }
 

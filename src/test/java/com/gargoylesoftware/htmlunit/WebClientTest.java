@@ -2129,6 +2129,28 @@ public class WebClientTest extends WebServerTestCase {
     }
 
     /**
+     * @throws Exception if test fails
+     */
+    @Test
+    public void testCurrentWindow2() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function createFrame() {\n"
+            + "  var f = document.createElement('iframe');\n"
+            + "  f.setAttribute('style', 'width: 0pt; height: 0pt');\n"
+            + "  document.body.appendChild(f);\n"
+            + "  f.src = \"javascript:''\";\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='setTimeout(createFrame, 10)'></body></html>";
+
+        final HtmlPage page = loadPage(html);
+        assertTrue(page.getEnclosingWindow() instanceof TopLevelWindow);
+        page.getWebClient().waitForBackgroundJavaScriptStartingBefore(1000);
+
+        assertSame(page.getEnclosingWindow(), page.getWebClient().getCurrentWindow());
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test

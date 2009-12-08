@@ -39,6 +39,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.auth.CredentialsProvider;
@@ -52,6 +54,7 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.css.sac.ErrorHandler;
 
 import com.gargoylesoftware.htmlunit.attachment.AttachmentHandler;
+import com.gargoylesoftware.htmlunit.html.BaseFrame;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
@@ -61,6 +64,7 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.ProxyAutoConfig;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.protocol.data.DataUrlDecoder;
 import com.gargoylesoftware.htmlunit.ssl.InsecureSSLProtocolSocketFactory;
@@ -1834,8 +1838,17 @@ public class WebClient implements Serializable {
                 final FrameWindow fw = (FrameWindow) window;
                 final String enclosingPageState = fw.getEnclosingPage().getDocumentElement().getReadyState();
                 final URL frameUrl = fw.getEnclosedPage().getWebResponse().getRequestSettings().getUrl();
-                if (HtmlPage.READY_STATE_COMPLETE.equals(enclosingPageState) && frameUrl != URL_ABOUT_BLANK) {
-                    use = true;
+                if (!HtmlPage.READY_STATE_COMPLETE.equals(enclosingPageState) || frameUrl == URL_ABOUT_BLANK) {
+                    return;
+                }
+
+                // now looks at the visibility of the frame window
+                final BaseFrame frameElement = fw.getFrameElement();
+                if (frameElement.isDisplayed()) {
+                    final ScriptableObject scriptableObject = frameElement.getScriptObject();
+                    final ComputedCSSStyleDeclaration style = ((HTMLElement) scriptableObject).jsxGet_currentStyle();
+                    use = (style.getCalculatedWidth(false, false) != 0)
+                        && (style.getCalculatedHeight(false, false) != 0);
                 }
             }
             if (use) {
