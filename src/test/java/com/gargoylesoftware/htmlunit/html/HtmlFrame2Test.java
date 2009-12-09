@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link HtmlFrame}.
@@ -75,10 +76,41 @@ public class HtmlFrame2Test extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void iframeOnloadAboutBlank() throws Exception {
-        final String firstHtml = "<html><body>\n"
+        final String html = "<html><body>\n"
             + "<iframe src='about:blank' onload='alert(1)'></iframe>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(firstHtml);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE = {"second [object]", "third [object]", "parent [object]"},
+            FF = {"third [object HTMLFormElement]", "second [object HTMLFormElement]",
+            "parent [object HTMLFormElement]"})
+    @NotYetImplemented
+    //real FF sometimes alerts 'second' before 'third'
+    public void postponeLoading() throws Exception {
+        final String html = "<FRAMESET onload=\"alert('parent ' + window.parent.frames.third.document.frm)\">\n"
+            + "  <FRAME name=second frameborder=0 src='" + URL_SECOND + "'>\n"
+            + "  <FRAME name=third frameborder=0 src='" + URL_THIRD + "'>\n"
+            + "</FRAMSET>";
+
+        final String secondHtml = "<html>\n"
+            + "<body onload=\"alert('second ' + window.parent.frames.third.document.frm)\">\n"
+            + "</body></html>";
+
+        final String thirdHtml = "<html>\n"
+            + "<body onload=\"alert('third ' + window.parent.frames.third.document.frm)\">\n"
+            + "  <form name='frm' id='frm'>\n"
+            + "      <input type='text' id='one' name='one' value='something'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondHtml);
+        getMockWebConnection().setResponse(URL_THIRD, thirdHtml);
+        loadPageWithAlerts2(html);
     }
 }
