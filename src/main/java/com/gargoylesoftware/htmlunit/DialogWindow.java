@@ -34,7 +34,7 @@ public class DialogWindow extends WebWindowImpl {
      * @param webClient the web client that "owns" this window
      * @param arguments the arguments object exposed via the <tt>dialogArguments</tt> JavaScript property
      */
-    public DialogWindow(final WebClient webClient, final Object arguments) {
+    protected DialogWindow(final WebClient webClient, final Object arguments) {
         super(webClient);
         arguments_ = arguments;
     }

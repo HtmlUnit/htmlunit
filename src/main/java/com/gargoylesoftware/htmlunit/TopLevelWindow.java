@@ -43,7 +43,7 @@ public class TopLevelWindow extends WebWindowImpl {
      * @param name the name of the new window
      * @param webClient the web client that "owns" this window
      */
-    public TopLevelWindow(final String name, final WebClient webClient) {
+    protected TopLevelWindow(final String name, final WebClient webClient) {
         super(webClient);
         WebAssert.notNull("name", name);
         setName(name);
