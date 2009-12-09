@@ -87,9 +87,9 @@ public class HtmlFrame2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = {"second [object]", "third [object]", "parent [object]"},
-            FF = {"third [object HTMLFormElement]", "second [object HTMLFormElement]",
-            "parent [object HTMLFormElement]"})
+    @Alerts(IE = { "second [object]", "third [object]", "parent [object]" },
+            FF = { "third [object HTMLFormElement]", "second [object HTMLFormElement]",
+            "parent [object HTMLFormElement]" })
     @NotYetImplemented
     //real FF sometimes alerts 'second' before 'third'
     public void postponeLoading() throws Exception {
