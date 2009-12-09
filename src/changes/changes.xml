@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration">
+            <action type="fix" dev="asashour" issue="2903679">
+                JavaScript: fix XMLHttpRequest with empty body of 'PUT' method.
+            </action>
             <action type="update" dev="mguillem">
                 Change TopLevelWindow and DialogWindow constructors' visibility to protected.
             </action>

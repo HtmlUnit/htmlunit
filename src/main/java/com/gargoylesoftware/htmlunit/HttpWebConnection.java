@@ -250,9 +250,11 @@ public class HttpWebConnection implements WebConnection {
             }
             else { // for instance a PUT request
                 final String body = webRequestSettings.getRequestBody();
-                final String contentType = webRequestSettings.getAdditionalHeaders().get("Content-type");
-                final String charset = webRequestSettings.getCharset();
-                method.setRequestEntity(new StringRequestEntity(body, contentType, charset));
+                if (body != null) {
+                    final String contentType = webRequestSettings.getAdditionalHeaders().get("Content-type");
+                    final String charset = webRequestSettings.getCharset();
+                    method.setRequestEntity(new StringRequestEntity(body, contentType, charset));
+                }
             }
         }
 

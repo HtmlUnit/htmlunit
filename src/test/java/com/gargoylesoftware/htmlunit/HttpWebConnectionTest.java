@@ -23,6 +23,12 @@ import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.Servlet;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethodBase;
@@ -35,6 +41,7 @@ import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
+import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
 
 /**
  * Tests methods in {@link HttpWebConnection}.
@@ -278,4 +285,44 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         client.getPage("http://localhost:" + PORT + "/src/test/resources/event_coordinates.html?param=\u00F6");
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void emptyPut() throws Exception {
+        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        servlets.put("/test", EmptyPutServlet.class);
+        startWebServer("./", null, servlets);
+
+        final String[] expectedAlerts = {"1"};
+        final WebClient client = new WebClient();
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        
+        client.getPage("http://localhost:" + PORT + "/test");
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Servlet for {@link #emptyPut()}.
+     */
+    public static class EmptyPutServlet extends ServletContentWrapper {
+        private static final long serialVersionUID = -8674500186401667484L;
+
+        public EmptyPutServlet() {
+            super("<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      var xhr = window.ActiveXObject ? new ActiveXObject('Microsoft.XMLHTTP') : new XMLHttpRequest();\n"
+                + "      xhr.open('PUT', '" + "http://localhost:" + PORT + "/test" + "', true);\n"
+                + "      xhr.send();\n"
+                + "      alert(1);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body>\n"
+                + "</html>");
+        }
+    }
 }
