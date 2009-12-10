@@ -509,7 +509,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
             + "      clearInterval(id);\n"
             + "    }\n"
             + "    function doWork1() {\n"
-            + "      if (start + 3000 < new Date().getTime()) {\n"
+            + "      if (start + 6000 < new Date().getTime()) {\n"
             + "        clearInterval(id);\n"
             + "        document.title = 'failed';\n"
             + "      }\n"
