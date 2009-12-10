@@ -298,7 +298,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         final WebClient client = new WebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        
+
         client.getPage("http://localhost:" + PORT + "/test");
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -309,12 +309,13 @@ public class HttpWebConnectionTest extends WebServerTestCase {
     public static class EmptyPutServlet extends ServletContentWrapper {
         private static final long serialVersionUID = -8674500186401667484L;
 
+        /** Constructor. */
         public EmptyPutServlet() {
             super("<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + "    function test() {\n"
-                + "      var xhr = window.ActiveXObject ? new ActiveXObject('Microsoft.XMLHTTP') : new XMLHttpRequest();\n"
+                + "      var xhr = window.ActiveXObject?new ActiveXObject('Microsoft.XMLHTTP'):new XMLHttpRequest();\n"
                 + "      xhr.open('PUT', '" + "http://localhost:" + PORT + "/test" + "', true);\n"
                 + "      xhr.send();\n"
                 + "      alert(1);\n"
