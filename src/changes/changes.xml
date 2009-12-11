@@ -6,6 +6,12 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration">
+            <action type="fix" dev="mguillem" issue="2906293">
+                JavaScript HtmlUnit RegExp proxy: escape dollar after escaped backslash.
+            </action>
+            <action type="fix" dev="mguillem" issue="2879412">
+                JavaScript HtmlUnit RegExp proxy: un-escape illegally escaped characters.
+            </action>
             <action type="fix" dev="asashour" issue="2903679">
                 JavaScript: fix XMLHttpRequest with empty body of 'PUT' method.
             </action>

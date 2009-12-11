@@ -385,6 +385,38 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     }
 
     /**
+     * Invalid back references are treated as it in JS but not in Java.
+     */
+    @Test
+    @Browsers(Browser.NONE)
+    public void escapeInvalidBackReferences() {
+        assertEquals("\\$1", HtmlUnitRegExpProxy.escapeInvalidBackReferences("", "$1"));
+        assertEquals("\\$2", HtmlUnitRegExpProxy.escapeInvalidBackReferences("", "$2"));
+        assertEquals("$1", HtmlUnitRegExpProxy.escapeInvalidBackReferences("(x)", "$1"));
+        assertEquals("\\$2", HtmlUnitRegExpProxy.escapeInvalidBackReferences("(x)", "$2"));
+
+        assertEquals("\\$", HtmlUnitRegExpProxy.escapeInvalidBackReferences("", "$"));
+        assertEquals("\\$", HtmlUnitRegExpProxy.escapeInvalidBackReferences("(x)", "$"));
+        assertEquals("\\\\\\$", HtmlUnitRegExpProxy.escapeInvalidBackReferences("", "\\\\$"));
+    }
+
+    /**
+     * A \ before a character doesn't necessarily escape it.
+     */
+    @Test
+    @Browsers(Browser.NONE)
+    public void isEscaped() {
+        assertFalse(HtmlUnitRegExpProxy.isEscaped("x", 0));
+        assertTrue(HtmlUnitRegExpProxy.isEscaped("\\x", 1));
+
+        assertFalse(HtmlUnitRegExpProxy.isEscaped("\\a x", 3));
+        assertTrue(HtmlUnitRegExpProxy.isEscaped("\\a \\x", 4));
+
+        assertFalse(HtmlUnitRegExpProxy.isEscaped("\\\\x", 2));
+        assertTrue(HtmlUnitRegExpProxy.isEscaped("\\\\\\x", 3));
+    }
+
+    /**
      * Verifies that back references in character classes are removed.
      * @see #jqueryPseudo()
      * @see #ignoreBackReferenceInCharacterClass()
@@ -395,6 +427,21 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
         assertEquals("(a)(b)[^c]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("(a)(b)[^\\2c]"));
         assertEquals("(a)(b)[c]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("(a)(b)[\\2c]"));
         assertEquals("(a)(b)[\\\\2c]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("(a)(b)[\\\\2c]"));
+    }
+
+    /**
+     * Verifies that character without need are "un-escaped".
+     * @see #backslash()
+     */
+    @Test
+    @Browsers(Browser.NONE)
+    public void unescapeIllegallyEscapedChars() {
+        assertEquals("a", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("\\a"));
+
+        final char[] specials = {'b', 'B', 'c', 'd', 'D', 'f', 'n', 'o', 'r', 's', 'S', 't', 'v', 'w', 'W', 'x'};
+        for (final char c : specials) {
+            assertEquals("\\" + c, HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("\\" + c));
+        }
     }
 
     /**
@@ -535,6 +582,26 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     }
 
     /**
+     * Use back reference in replacement when it exists.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("hllo")
+    public void replace_backReference_existing() throws Exception {
+        testEvaluate("'hello'.replace(/(h)e/g, '$1')");
+    }
+
+    /**
+     * If no back reference is present, use $ as litteral.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("$1llo")
+    public void replace_backReference_notExisting() throws Exception {
+        testEvaluate("'hello'.replace(/he/g, '$1')");
+    }
+
+    /**
      * Regression test for bug 2638813 (dollar signs with no index are not back references).
      * @throws Exception if an error occurs
      */
@@ -554,7 +621,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     }
 
     private String buildHtml(final String script) {
-        return "<html><head><script>function test() {"
+        return "<html><head><script>function test() {\n"
             + script
             + "\n}</script>"
             + "</head><body onload='test()'></body></html>";
@@ -675,16 +742,27 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     }
 
     /**
-     * In RegularExpression, backslash can be followed by a letter.
+     * Regression test for bug 2879412.
+     * In RegularExpression, backslash followed by a letter that has no special
+     * signification are ignored.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("null")
-    @NotYetImplemented
     public void backslash() throws Exception {
         final String html = buildHtml("var regexp = /(\\https:\\/\\/)/;\n"
                 + "var url = 'http://localhost/test.html';\n"
                 + "alert(url.match(regexp));");
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Regression test for bug 2906293.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("\\\\$11")
+    public void dollar() throws Exception {
+        testEvaluate("'\\\\$1'.replace(/\\$/g, '\\\\$1')");
     }
 }

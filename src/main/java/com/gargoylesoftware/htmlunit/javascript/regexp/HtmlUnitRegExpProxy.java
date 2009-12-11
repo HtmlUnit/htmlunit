@@ -84,8 +84,8 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
                 return StringUtils.replaceOnce(thisString, (String) arg0, replacement);
             }
             else if (arg0 instanceof NativeRegExp) {
-                replacement = replacement.replaceAll("\\\\", "\\\\\\\\");
-                replacement = replacement.replaceAll("(?<!\\$)\\$(?!\\d)", "\\\\\\$");
+                replacement = replacement.replaceAll("\\\\", "\\\\\\\\"); // \\ -> \\\\
+                replacement = replacement.replaceAll("(?<!\\$)\\$(?!\\d)", "\\\\\\$"); // \$ -> \\\$
                 try {
                     final NativeRegExp regexp = (NativeRegExp) arg0;
                     final RegExpData reData = new RegExpData(regexp);
@@ -154,7 +154,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
      * Escapes all invalid back references (<tt>$n</tt>, where <tt>n</tt> is the index of the back reference),
      * because invalid back references in JavaScript regex are treated as if they were escaped.
      */
-    private String escapeInvalidBackReferences(final String regex, final String replacement) {
+    static String escapeInvalidBackReferences(final String regex, final String replacement) {
         final StringBuilder ret = new StringBuilder();
 
         final Matcher m = Pattern.compile(regex).matcher(replacement);
@@ -164,8 +164,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         final char[] rep = replacement.toCharArray();
         for (int i = ArrayUtils.indexOf(rep, '$'); i != -1; i = ArrayUtils.indexOf(rep, '$', i + 1)) {
             ret.append(rep, prevIndex, i - prevIndex);
-            final boolean escaped = (i != 0 && rep[i - 1] == '\\');
-            if (!escaped) {
+            if (!isEscaped(replacement, i)) {
                 final StringBuilder sb = new StringBuilder(2);
                 for (int j = i + 1; j < rep.length && Character.isDigit(rep[j]); j++) {
                     sb.append(rep[j]);
@@ -187,6 +186,21 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         ret.append(rep, prevIndex, rep.length - prevIndex);
 
         return ret.toString();
+    }
+
+    /**
+     * Indicates if the character at the given position is escaped or not.
+     * @param characters the characters to consider
+     * @param position the position
+     * @return <code>true</code> if escaped
+     */
+    static boolean isEscaped(final String characters, final int position) {
+        int p = position;
+        int nbBackslash = 0;
+        while (p > 0 && characters.charAt(--p) == '\\') {
+            nbBackslash++;
+        }
+        return (nbBackslash % 2 == 1);
     }
 
     /**
@@ -295,6 +309,9 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
 
         // back reference in character classes are simply ignored by browsers
         re = re.replaceAll("(?<!\\\\)\\[([^\\]]*)(?<!\\\\)\\\\\\d", "[$1"); // [...ab\5cd...] -> [...abcd...]
+
+        // characters escaped without need should be "un-escaped"
+        re = re.replaceAll("(?<!\\\\)\\\\([ACE-RT-VX-Zaeg-mpquyz])", "$1");
 
         re = escapeJSCurly(re);
         return re;

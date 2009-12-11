@@ -46,7 +46,6 @@ public class GWTSourceTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     @Alerts({ "foobar", "$0bar", "$1bar", "\\$1bar", "\\1", "cb", "cb", "a$$b", "a$1b", "a$`b", "a$'b" })
     public void testReplaceString() throws Exception {
         final String html = "<html>\n"
