@@ -4594,7 +4594,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
          * @param name the style element's name
          * @param value the style element's value
          * @param priority the style element's priority like "important"
-         * @param specificity the specifity of the rule providign this style information
+         * @param specificity the specifity of the rule providing this style information
          * @param index the style element's index
          */
         protected StyleElement(final String name, final String value, final String priority,
