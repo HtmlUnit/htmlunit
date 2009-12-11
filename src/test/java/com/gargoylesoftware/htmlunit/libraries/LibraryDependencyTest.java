@@ -21,8 +21,9 @@ import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -34,6 +35,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class LibraryDependencyTest extends WebTestCase {
 
     /**
@@ -71,15 +73,15 @@ public class LibraryDependencyTest extends WebTestCase {
 
         final String[] expectedAlerts = {"2"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient webClient =  new WebClient(BrowserVersion.FIREFOX_2);
+        final WebClient webClient = getWebClientWithMockWebConnection();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webClient.setWebConnection(webConnection);
 
         webConnection.setResponse(URL_FIRST, firstHtml);
         webConnection.setResponse(URL_SECOND, secondHtml);
-        webConnection.setResponse(URL_THIRD, getContent("prototype/1.6.0/dist/prototype.js"), "text/javascript");
+        webConnection.setResponse(URL_THIRD, getContent("prototype/1.6.0/dist/prototype.js"), "application/javascript");
 
         webClient.getPage(URL_FIRST);
         webClient.waitForBackgroundJavaScript(10000);

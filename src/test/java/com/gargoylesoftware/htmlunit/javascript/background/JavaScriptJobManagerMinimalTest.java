@@ -18,6 +18,7 @@ import junit.framework.Assert;
 
 import org.apache.commons.lang.mutable.MutableInt;
 import org.easymock.EasyMock;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -144,4 +145,13 @@ public class JavaScriptJobManagerMinimalTest {
         Assert.assertEquals(1, manager_.getJobCount());
     }
 
+    /**
+     * Cleanup after a test.
+     */
+    @After
+    public void releaseResources() {
+        if (manager_ != null) {
+            manager_.shutdown();
+        }
+    }
 }

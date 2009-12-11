@@ -81,6 +81,8 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     /** Logging support. */
     private static final Log LOG = LogFactory.getLog(JavaScriptJobManagerImpl.class);
 
+    private Thread executorThread_; // keep a reference to be able to call join(...) on it
+
     /**
      * Helper to track the job being executed.
      */
@@ -134,10 +136,10 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                 // running unnecessarily; we also bump up the thread's priority so that
                 // JavaScript jobs execute ASAP.
                 final String name = "JavaScript Job Thread " + NEXT_THREAD_ID.getAndIncrement();
-                final Thread t = new Thread(r, name);
-                t.setDaemon(true);
-                t.setPriority(PRIORITY);
-                return t;
+                executorThread_ = new Thread(r, name);
+                executorThread_.setDaemon(true);
+                executorThread_.setPriority(PRIORITY);
+                return executorThread_;
             }
         });
     }
@@ -345,8 +347,19 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         executor_.purge();
         final List<Runnable> jobsStillRunning = executor_.shutdownNow();
         futures_.clear();
+        if (executorThread_ != null) {
+            try {
+                executorThread_.join(5000);
+            }
+            catch (final InterruptedException e) {
+                // ignore, this doesn't matter, we want to stop it
+            }
+            if (executorThread_.isAlive()) {
+                LOG.warn("Executor thread " + executorThread_.getName() + " still alive");
+            }
+        }
         if (jobsStillRunning.size() > 0) {
-            LOG.debug("Jobs still running after shutdown: " + jobsStillRunning.size());
+            LOG.warn("Jobs still running after shutdown: " + jobsStillRunning.size());
         }
     }
 

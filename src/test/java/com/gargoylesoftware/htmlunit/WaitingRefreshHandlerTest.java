@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -24,6 +25,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author Brad Clarke
  */
+@RunWith(BrowserRunner.class)
 public final class WaitingRefreshHandlerTest extends WebTestCase {
 
     /**
@@ -40,7 +42,7 @@ public final class WaitingRefreshHandlerTest extends WebTestCase {
             + "}\n"
             + "</script>\n"
             + "</head>\n"
-            + "<body onload='setTimeout(\"doRedirect()\", 1);'>first page body</body>\n"
+            + "<body onload='setTimeout(doRedirect, 1);'>first page body</body>\n"
             + "</html>";
         final String secondContent = "<html>\n"
             + "<head><title>Meta Redirect Page</title>\n"
@@ -53,12 +55,11 @@ public final class WaitingRefreshHandlerTest extends WebTestCase {
             + "<body>Success!</body>\n"
             + "</html>";
 
-        final WebClient client = new WebClient();
-        final MockWebConnection conn = new MockWebConnection();
+        final WebClient client = getWebClientWithMockWebConnection();
+        final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(URL_FIRST, firstContent);
         conn.setResponse(URL_SECOND, secondContent);
         conn.setResponse(URL_THIRD, thirdContent);
-        client.setWebConnection(conn);
         client.setRefreshHandler(new WaitingRefreshHandler(0));
 
         client.getPage(URL_FIRST);

@@ -788,7 +788,7 @@ public class WebClient implements Serializable {
             return;
         }
         //onBlur event is triggered for focused element of old current window
-        if (currentWindow_ != null) {
+        if (currentWindow_ != null && !currentWindow_.isClosed()) {
             final Page enclosedPage = currentWindow_.getEnclosedPage();
             if (enclosedPage instanceof HtmlPage) {
                 final HtmlElement focusedElement = ((HtmlPage) enclosedPage).getFocusedElement();

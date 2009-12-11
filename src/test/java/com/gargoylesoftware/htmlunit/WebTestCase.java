@@ -130,7 +130,7 @@ public abstract class WebTestCase {
      * @return the new page
      * @throws Exception if something goes wrong
      */
-    public static final HtmlPage loadPage(final String html) throws Exception {
+    public final HtmlPage loadPage(final String html) throws Exception {
         return loadPage(html, null);
     }
 
@@ -158,9 +158,10 @@ public abstract class WebTestCase {
      * @return the new page
      * @throws Exception if something goes wrong
      */
-    public static final HtmlPage loadPage(final String html, final List<String> collectedAlerts) throws Exception {
+    public final HtmlPage loadPage(final String html, final List<String> collectedAlerts) throws Exception {
         generateTest_browserVersion_.set(FLAG_ALL_BROWSERS);
-        return loadPage(BrowserVersion.getDefault(), html, collectedAlerts, getDefaultUrl());
+        final BrowserVersion version = (browserVersion_ != null) ? browserVersion_ : BrowserVersion.getDefault();
+        return loadPage(version, html, collectedAlerts, getDefaultUrl());
     }
 
     /**
@@ -201,7 +202,7 @@ public abstract class WebTestCase {
      * @return the new page
      * @throws Exception if something goes wrong
      */
-    protected static final HtmlPage loadPage(final String html, final List<String> collectedAlerts,
+    protected final HtmlPage loadPage(final String html, final List<String> collectedAlerts,
             final URL url) throws Exception {
 
         return loadPage(BrowserVersion.getDefault(), html, collectedAlerts, url);
@@ -216,11 +217,11 @@ public abstract class WebTestCase {
      * @return the new page
      * @throws Exception if something goes wrong
      */
-    protected static final HtmlPage loadPage(final BrowserVersion browserVersion,
+    protected final HtmlPage loadPage(final BrowserVersion browserVersion,
             final String html, final List<String> collectedAlerts, final URL url) throws Exception {
 
-        final WebClient client = new WebClient(browserVersion);
-        return loadPage(client, html, collectedAlerts, url);
+        webClient_ = new WebClient(browserVersion);
+        return loadPage(webClient_, html, collectedAlerts, url);
     }
 
     /**
@@ -847,5 +848,35 @@ public abstract class WebTestCase {
         }
         webClient_ = null;
         mockWebConnection_ = null;
+
+        final List<Thread> jsThreads = getJavaScriptThreads();
+        if (!jsThreads.isEmpty()) {
+            System.err.println("JS threads still running:");
+            for (final Thread t : jsThreads) {
+                System.err.println(t.getName());
+                final StackTraceElement elts[] = t.getStackTrace();
+                for (final StackTraceElement elt : elts) {
+                    System.err.println(elt);
+                }
+            }
+            throw new RuntimeException("JS threads are still running: " + jsThreads.size());
+        }
+    }
+
+    /**
+     * Gets the active JavaScript threads.
+     * @return the threads
+     */
+    protected List<Thread> getJavaScriptThreads() {
+        final Thread[] threads = new Thread[Thread.activeCount() + 10];
+        Thread.enumerate(threads);
+        final List<Thread> jsThreads = new ArrayList<Thread>();
+        for (final Thread t : threads) {
+            if (t != null && t.getName().startsWith("JavaScript Job Thread")) {
+                jsThreads.add(t);
+            }
+        }
+
+        return jsThreads;
     }
 }

@@ -22,6 +22,9 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -117,7 +120,7 @@ public class ThreadTest extends TestCase {
          * @throws Exception if the test failed
          */
         public void testCallInheritedFunction() throws Exception {
-            final String content
+            final String html
                 = "<html><head><title>foo</title><script>\n"
                 + "function doTest() {\n"
                 + "    document.form1.textfield1.focus();\n"
@@ -131,14 +134,25 @@ public class ThreadTest extends TestCase {
                 + "</body></html>";
 
             final List<String> collectedAlerts = new ArrayList<String>();
-            final HtmlPage page = WebTestCase.loadPage(content, collectedAlerts);
 
-            assertEquals("foo", page.getTitleText());
-            assertEquals("focus not changed to textfield1",
-                         page.getFormByName("form1").getInputByName("textfield1"),
-                         page.getFocusedElement());
-            final List<String> expectedAlerts = Collections.singletonList("past focus");
-            assertEquals(expectedAlerts, collectedAlerts);
+            final WebClient webClient = new WebClient();
+            webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+            final MockWebConnection connection = new MockWebConnection();
+            connection.setDefaultResponse(html);
+            webClient.setWebConnection(connection);
+            try {
+                final HtmlPage page = webClient.getPage(WebTestCase.URL_FIRST);
+
+                assertEquals("foo", page.getTitleText());
+                assertEquals("focus not changed to textfield1",
+                             page.getFormByName("form1").getInputByName("textfield1"),
+                             page.getFocusedElement());
+                final List<String> expectedAlerts = Collections.singletonList("past focus");
+                assertEquals(expectedAlerts, collectedAlerts);
+            }
+            finally {
+                webClient.closeAllWindows();
+            }
         }
     }
 

@@ -22,6 +22,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -61,7 +63,11 @@ public class AttributesTest extends TestCase {
      * @throws Exception if the tests cannot be created
      */
     public static Test suite() throws Exception {
-        final HtmlPage page = WebTestCase.loadPage("<html><head><title>foo</title></head><body></body></html>");
+        final WebClient webClient = new WebClient();
+        final MockWebConnection connection = new MockWebConnection();
+        connection.setDefaultResponse("<html><head><title>foo</title></head><body></body></html>");
+        webClient.setWebConnection(connection);
+        final HtmlPage page = webClient.getPage(WebTestCase.URL_FIRST);
 
         final TestSuite suite = new TestSuite();
         final String[] classesToTest = {

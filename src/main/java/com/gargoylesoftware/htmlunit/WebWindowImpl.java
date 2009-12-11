@@ -47,6 +47,7 @@ public abstract class WebWindowImpl implements WebWindow {
     private List<WebWindowImpl> childWindows_ = new ArrayList<WebWindowImpl>();
     private String name_ = "";
     private History history_ = new History(this);
+    private boolean closed_;
 
     /**
      * Never call this, used for Serialization.
@@ -159,12 +160,13 @@ public abstract class WebWindowImpl implements WebWindow {
         getJobManager().removeAllJobs();
         for (final ListIterator<WebWindowImpl> iter = childWindows_.listIterator(); iter.hasNext();) {
             final WebWindowImpl window = iter.next();
+            window.setClosed();
+            window.getJobManager().shutdown();
             final Page page = window.getEnclosedPage();
             if (page instanceof HtmlPage) {
                 ((HtmlPage) page).cleanUp();
             }
             window.destroyChildren();
-            window.getJobManager().shutdown();
             iter.remove();
         }
     }
@@ -191,4 +193,17 @@ public abstract class WebWindowImpl implements WebWindow {
         return history_;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public boolean isClosed() {
+        return closed_;
+    }
+
+    /**
+     * Sets this window as closed.
+     */
+    protected void setClosed() {
+        closed_ = true;
+    }
 }

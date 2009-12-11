@@ -2301,4 +2301,45 @@ public class WebClientTest extends WebServerTestCase {
         }
     }
 
+    /**
+     * Test that closeAllWindows stops all threads. This wasn't the case as
+     * of HtmlUnit-2.7-SNAPSHOT 11.12.2009.
+     * @throws Exception if test fails
+     */
+    @Test
+    public void closeAllWindows() throws Exception {
+        final String html = "<html><head></head>\n"
+            + "<body onload='setInterval(addFrame, 1)'>\n"
+            + "<iframe src='second.html'></iframe>\n"
+            + "<script>\n"
+            + "function addFrame() {\n"
+            + "  var f = document.createElement('iframe');\n"
+            + "  f.src = 'second.html';\n"
+            + "  document.body.appendChild(f);\n"
+            + "}\n"
+            + "</script>"
+            + "</body></html>";
+
+        final String html2 = "<html><head><script>\n"
+            + "function doSomething() {}\n"
+            + "setInterval(doSomething, 100);\n"
+            + "</script>\n"
+            + "</head><body></body></html>";
+
+        getMockWebConnection().setResponse(getDefaultUrl(), html);
+        getMockWebConnection().setDefaultResponse(html2);
+
+        final WebClient webClient = new WebClient();
+        webClient.setWebConnection(getMockWebConnection());
+        webClient.getPage(getDefaultUrl());
+
+        int nbJSThreads = getJavaScriptThreads().size();
+        assertTrue(nbJSThreads + " threads", nbJSThreads > 0);
+
+        // close and verify that the WebClient is clean
+        webClient.closeAllWindows();
+        assertEquals(1, webClient.getWebWindows().size());
+        nbJSThreads = getJavaScriptThreads().size();
+        assertEquals(0, nbJSThreads);
+    }
 }

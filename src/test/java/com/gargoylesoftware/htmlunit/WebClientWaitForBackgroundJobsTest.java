@@ -24,6 +24,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
@@ -35,7 +36,10 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
  * @version $Revision$
  * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
+    private static String XHRInstanciation_ = "(window.XMLHttpRequest ? "
+        + "new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP'))";
 
     private long startTime_;
 
@@ -151,7 +155,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
             + "    function doWork() {\n"
             + "      clearTimeout(intervalId);\n"
             + "      // waitForBackgroundJavaScriptStartingBefore should be called when JS execution is here\n"
-            + "      var request = new XMLHttpRequest();\n"
+            + "      var request = " + XHRInstanciation_ + ";\n"
             + "      request.open('GET', 'wait', false);\n"
             + "      request.send('');\n"
             + "      alert('end work');\n"
@@ -176,7 +180,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, html);
         webConnection.setDefaultResponse("");
 
-        final WebClient client = new WebClient(BrowserVersion.FIREFOX_3); // just to simplify test code using XHR
+        final WebClient client = getWebClient();
         client.setWebConnection(webConnection);
 
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
@@ -272,7 +276,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final WebClient client =  new WebClient(BrowserVersion.FIREFOX_2);
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -317,7 +321,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
             + "      }\n"
             + "    }\n"
             + "    function test() {\n"
-            + "      request = new XMLHttpRequest();\n"
+            + "      request = " + XHRInstanciation_ + ";\n"
             + "      request.open('GET', 'wait', true);\n"
             + "      request.onreadystatechange = onReadyStateChange;\n"
             + "      // waitForBackgroundJavaScriptStartingBefore should be called when JS execution is in send()\n"
@@ -346,7 +350,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, html);
         webConnection.setDefaultResponse("");
 
-        final WebClient client = new WebClient(BrowserVersion.FIREFOX_3); // just to simplify test code using XHR
+        final WebClient client = getWebClient();
         client.setWebConnection(webConnection);
 
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
@@ -399,7 +403,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, html);
         webConnection.setDefaultResponse("");
 
-        final WebClient client = new WebClient(BrowserVersion.FIREFOX_3); // just to simplify test code using XHR
+        final WebClient client = getWebClient();
         client.setWebConnection(webConnection);
 
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
@@ -521,7 +525,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final WebClient client =  new WebClient(BrowserVersion.FIREFOX_3);
+        final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(html);
