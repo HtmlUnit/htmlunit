@@ -95,7 +95,14 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
 public class Window extends SimpleScriptable implements ScriptableWithFallbackGetter, Function {
 
     private static final long serialVersionUID = -7730298149962810325L;
+
     private static final Log LOG = LogFactory.getLog(Window.class);
+
+    /** HtmlUnit's "window" width, in pixels. */
+    public static final int WINDOW_WIDTH = 1256;
+
+    /** HtmlUnit's "window" height, in pixels. */
+    public static final int WINDOW_HEIGHT = 605;
 
     /**
      * The minimum delay that can be used with setInterval() or setTimeout(). Browser minimums are
@@ -1227,7 +1234,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref28.html">Mozilla doc</a>
      */
     public int jsxGet_innerWidth() {
-        return 1276; // why this value? this is the current value of my Mozilla
+        return WINDOW_WIDTH;
     }
 
     /**
@@ -1236,7 +1243,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref79.html">Mozilla doc</a>
      */
     public int jsxGet_outerWidth() {
-        return 1276; // why this value? this is the current value of my Mozilla
+        return WINDOW_WIDTH + 8;
     }
 
     /**
@@ -1245,7 +1252,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref27.html">Mozilla doc</a>
      */
     public int jsxGet_innerHeight() {
-        return 778; // why this value? this is the current value of my Mozilla
+        return WINDOW_HEIGHT;
     }
 
     /**
@@ -1254,7 +1261,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref78.html">Mozilla doc</a>
      */
     public int jsxGet_outerHeight() {
-        return 936; // why this value? this is the current value of my Mozilla
+        return WINDOW_HEIGHT + 150;
     }
 
     /**

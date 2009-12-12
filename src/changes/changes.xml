@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration">
+            <action type="fix" dev="sdanig" issue="2897473">
+                JavaScript: better value for document.body.clientHeight.
+            </action>
             <action type="fix" dev="mguillem">
                 WebClient.closeAllWindows: improved JavaScript threads termination.
             </action>

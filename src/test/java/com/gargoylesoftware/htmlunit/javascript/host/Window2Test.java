@@ -695,7 +695,29 @@ public class Window2Test extends WebDriverTestCase {
             + "</script></head>\n"
             + "<body>\n"
             + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 
+    /**
+     * Regression test for bug 2897473.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.FF)
+    @Alerts(FF = { "true", "true", "true", "true", "true", "true" })
+    public void heightsAndWidths() throws Exception {
+        final String html
+            = "<html><body onload='test()'><script>\n"
+            + "function test() {\n"
+            + "  alert(window.innerHeight > 0);\n"
+            + "  alert(window.innerHeight == document.body.clientHeight);\n"
+            + "  alert(window.outerHeight == window.innerHeight + 150);\n"
+            + "  alert(window.innerWidth > 0);\n"
+            + "  alert(window.innerWidth == document.body.clientWidth);\n"
+            + "  alert(window.outerWidth == window.innerWidth + 8);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</body></html>";
         loadPageWithAlerts2(html);
     }
 

@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.TREATS_POSITION_FIXED_LIKE_POSITION_STATIC;
+import static com.gargoylesoftware.htmlunit.javascript.host.Window.WINDOW_HEIGHT;
+import static com.gargoylesoftware.htmlunit.javascript.host.Window.WINDOW_WIDTH;
 import static org.apache.commons.lang.StringUtils.defaultIfEmpty;
 
 import java.util.Collections;
@@ -33,6 +35,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlHead;
 import com.gargoylesoftware.htmlunit.javascript.host.Text;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 /**
@@ -48,12 +51,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     /** The number of (horizontal) pixels to assume that each character occupies. */
     private static final int PIXELS_PER_CHAR = 10;
-
-    /** HtmlUnit's "window" width, in pixels. */
-    private static final int WINDOW_WIDTH = 1256;
-
-    /** HtmlUnit's "window" height, in pixels. */
-    private static final int WINDOW_HEIGHT = 605;
 
     /**
      * Local modifications maintained here rather than in the element. We use a sorted
@@ -1322,6 +1319,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
         if ("none".equals(jsxGet_display())) {
             height_ = 0;
+            return height_;
+        }
+
+        if (getElement() instanceof HTMLBodyElement) {
+            height_ = WINDOW_HEIGHT;
             return height_;
         }
 
