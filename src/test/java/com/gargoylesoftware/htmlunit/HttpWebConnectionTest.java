@@ -296,6 +296,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
 
         final String[] expectedAlerts = {"1"};
         final WebClient client = new WebClient();
+        client.setAjaxController(new NicelyResynchronizingAjaxController());
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
