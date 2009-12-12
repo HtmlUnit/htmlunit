@@ -49,8 +49,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     /** The number of (horizontal) pixels to assume that each character occupies. */
     private static final int PIXELS_PER_CHAR = 10;
 
-    /** The default element width (in pixels) for elements taking up the full "screen" width. */
-    private static final int DEFAULT_ELEMENT_WIDTH = 1256;
+    /** HtmlUnit's "window" width, in pixels. */
+    private static final int WINDOW_WIDTH = 1256;
+
+    /** HtmlUnit's "window" height, in pixels. */
+    private static final int WINDOW_HEIGHT = 605;
 
     /**
      * Local modifications maintained here rather than in the element. We use a sorted
@@ -60,6 +63,24 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     /** Maps element types to custom display types (display types that are not "block". */
     private Map<String, String> defaultDisplays_;
+
+    /** The computed, cached width of the element to which this computed style belongs (no padding, borders, etc). */
+    private Integer width_;
+
+    /** The computed, cached height of the element to which this computed style belongs (no padding, borders, etc). */
+    private Integer height_;
+
+    /** The computed, cached horizontal padding (left + right) of the element to which this computed style belongs. */
+    private Integer paddingHorizontal_;
+
+    /** The computed, cached vertical padding (top + bottom) of the element to which this computed style belongs. */
+    private Integer paddingVertical_;
+
+    /** The computed, cached horizontal border (left + right) of the element to which this computed style belongs. */
+    private Integer borderHorizontal_;
+
+    /** The computed, cached vertical border (top + bottom) of the element to which this computed style belongs. */
+    private Integer borderVertical_;
 
     /**
      * Creates an instance. JavaScript objects must have a default constructor.
@@ -1194,7 +1215,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             defaultWidth = "auto";
         }
         else {
-            defaultWidth = DEFAULT_ELEMENT_WIDTH + "px";
+            defaultWidth = WINDOW_WIDTH + "px";
         }
         return pixelString(defaultIfEmpty(super.jsxGet_width(), defaultWidth));
     }
@@ -1206,10 +1227,30 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the element's width in pixels, possibly including its padding and border
      */
     public int getCalculatedWidth(final boolean includeBorder, final boolean includePadding) {
+        int width = getCalculatedWidth();
+        final String display = jsxGet_display();
+        if (!"none".equals(display)) {
+            if (includeBorder) {
+                width += getBorderHorizontal();
+            }
+            if (includePadding) {
+                width += getPaddingHorizontal();
+            }
+        }
+        return width;
+    }
+
+    private int getCalculatedWidth() {
+        if (width_ != null) {
+            return width_;
+        }
+
         final String display = jsxGet_display();
         if ("none".equals(display)) {
-            return 0;
+            width_ = 0;
+            return width_;
         }
+
         int width;
         final String styleWidth = super.jsxGet_width();
         final DomNode parent = getElement().getDomNodeOrDie().getParentNode();
@@ -1225,7 +1266,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 final HTMLElement parentJS = (HTMLElement) parent.getScriptObject();
                 final String parentWidth = getWindow().jsxFunction_getComputedStyle(parentJS, null).jsxGet_width();
                 if (getBrowserVersion().isIE() && "auto".equals(parentWidth)) {
-                    width = DEFAULT_ELEMENT_WIDTH;
+                    width = WINDOW_WIDTH;
                 }
                 else {
                     width = pixelValue(parentWidth);
@@ -1249,17 +1290,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         else {
             // Width explicitly set in the style attribute, or there was no parent to provide guidance.
             width = pixelValue(styleWidth);
-            if (includeBorder) {
-                final int borderLeft = pixelValue(jsxGet_borderLeftWidth());
-                final int borderRight = pixelValue(jsxGet_borderRightWidth());
-                width += borderLeft + borderRight;
-            }
-            if (includePadding) {
-                final int paddingLeft = getPaddingLeft();
-                final int paddingRight = pixelValue(jsxGet_paddingRight());
-                width += paddingLeft + paddingRight;
-            }
         }
+
+        width_ = width;
         return width;
     }
 
@@ -1270,8 +1303,26 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the element's height, possibly including its padding and border
      */
     public int getCalculatedHeight(final boolean includeBorder, final boolean includePadding) {
+        int height = getCalculatedHeight();
+        if (!"none".equals(jsxGet_display())) {
+            if (includeBorder) {
+                height += getBorderVertical();
+            }
+            if (includePadding) {
+                height += getPaddingVertical();
+            }
+        }
+        return height;
+    }
+
+    private int getCalculatedHeight() {
+        if (height_ != null) {
+            return height_;
+        }
+
         if ("none".equals(jsxGet_display())) {
-            return 0;
+            height_ = 0;
+            return height_;
         }
 
         final boolean ie = getBrowserVersion().isIE();
@@ -1287,7 +1338,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         for (DomNode child : this.<DomNode>getDomNodeOrDie().getChildren()) {
             if (child.getScriptObject() instanceof HTMLElement) {
                 final HTMLElement e = (HTMLElement) child.getScriptObject();
-                final int x = e.jsxGet_currentStyle().getCalculatedHeight(includeBorder, includePadding);
+                final int x = e.jsxGet_currentStyle().getCalculatedHeight(true, true);
                 childrenHeight = (childrenHeight != null ? childrenHeight + x : x);
             }
         }
@@ -1300,19 +1351,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             height = elementHeight;
         }
 
-        if (includeBorder) {
-            final int borderTop = pixelValue(jsxGet_borderTopWidth());
-            final int borderBottom = pixelValue(jsxGet_borderBottomWidth());
-            height += borderTop + borderBottom;
-        }
-
-        if (includePadding) {
-            final int paddingTop = getPaddingTop();
-            final int paddingBottom = pixelValue(jsxGet_paddingBottom());
-            height += paddingTop + paddingBottom;
-        }
-
-        return height;
+        height_ = height;
+        return height_;
     }
 
     /**
@@ -1544,11 +1584,19 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     /**
-     * Gets the top padding of the element.
+     * Gets the left margin of the element.
      * @return the value in pixels
      */
-    public int getPaddingTop() {
-        return pixelValue(jsxGet_paddingTop());
+    public int getMarginLeft() {
+        return pixelValue(jsxGet_marginLeft());
+    }
+
+    /**
+     * Gets the right margin of the element.
+     * @return the value in pixels
+     */
+    public int getMarginRight() {
+        return pixelValue(jsxGet_marginRight());
     }
 
     /**
@@ -1560,6 +1608,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     /**
+     * Gets the bottom margin of the element.
+     * @return the value in pixels
+     */
+    public int getMarginBottom() {
+        return pixelValue(jsxGet_marginBottom());
+    }
+
+    /**
      * Gets the left padding of the element.
      * @return the value in pixels
      */
@@ -1568,11 +1624,41 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     /**
-     * Gets the left margin of the element.
+     * Gets the right padding of the element.
      * @return the value in pixels
      */
-    public int getMarginLeft() {
-        return pixelValue(jsxGet_marginLeft());
+    public int getPaddingRight() {
+        return pixelValue(jsxGet_paddingRight());
+    }
+
+    /**
+     * Gets the top padding of the element.
+     * @return the value in pixels
+     */
+    public int getPaddingTop() {
+        return pixelValue(jsxGet_paddingTop());
+    }
+
+    /**
+     * Gets the bottom padding of the element.
+     * @return the value in pixels
+     */
+    public int getPaddingBottom() {
+        return pixelValue(jsxGet_paddingBottom());
+    }
+
+    private int getPaddingHorizontal() {
+        if (paddingHorizontal_ == null) {
+            paddingHorizontal_ = getPaddingLeft() + getPaddingRight();
+        }
+        return paddingHorizontal_;
+    }
+
+    private int getPaddingVertical() {
+        if (paddingVertical_ == null) {
+            paddingVertical_ = getPaddingTop() + getPaddingBottom();
+        }
+        return paddingVertical_;
     }
 
     /**
@@ -1597,6 +1683,28 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     public int getBorderTop() {
         return pixelValue(jsxGet_borderTopWidth());
+    }
+
+    /**
+     * Gets the size of the bottom border of the element.
+     * @return the value in pixels
+     */
+    public int getBorderBottom() {
+        return pixelValue(jsxGet_borderBottomWidth());
+    }
+
+    private int getBorderHorizontal() {
+        if (borderHorizontal_ == null) {
+            borderHorizontal_ = getBorderLeft() + getBorderRight();
+        }
+        return borderHorizontal_;
+    }
+
+    private int getBorderVertical() {
+        if (borderVertical_ == null) {
+            borderVertical_ = getBorderTop() + getBorderBottom();
+        }
+        return borderVertical_;
     }
 
     /**
