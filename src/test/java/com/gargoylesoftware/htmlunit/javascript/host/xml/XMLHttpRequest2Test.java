@@ -36,7 +36,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  */
 @RunWith(BrowserRunner.class)
 public class XMLHttpRequest2Test extends WebDriverTestCase {
-    private static String XHRInstanciation_ = "(window.XMLHttpRequest ? "
+    private static String XHRInstantiation_ = "(window.XMLHttpRequest ? "
         + "new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP'))";
 
     /**
@@ -53,12 +53,12 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @NotYetImplemented
     public void deadlock() throws Exception {
         final String jsCallSynchXHR = "function callSynchXHR(url) {\n"
-            + "  var xhr = " + XHRInstanciation_ + ";\n"
+            + "  var xhr = " + XHRInstantiation_ + ";\n"
             + "  xhr.open('GET', url, false);\n"
             + "  xhr.send('');\n"
             + "}\n";
         final String jsCallASynchXHR = "function callASynchXHR(url) {\n"
-            + "  var xhr = " + XHRInstanciation_ + ";\n"
+            + "  var xhr = " + XHRInstantiation_ + ";\n"
             + "  var handler = function() {\n"
             + "    if (xhr.readyState == 4)\n"
             + "      alert(xhr.responseText);\n"
@@ -110,7 +110,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     public void setRequestHeader() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
-            + "    var request = " + XHRInstanciation_ + ";\n"
+            + "    var request = " + XHRInstantiation_ + ";\n"
             + "    request.open('GET', 'second.html', false);\n"
             + "    request.setRequestHeader('Accept', 'text/javascript, application/javascript, */*');\n"
             + "    request.setRequestHeader('Accept-Language', 'ar-eg');\n"
@@ -136,7 +136,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     public void openThrowOnEmptyUrl() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
-            + "var request = " + XHRInstanciation_ + ";\n"
+            + "var request = " + XHRInstantiation_ + ";\n"
             + "var values = [null, '', ' ', '  \\t  '];\n"
             + "for (var i=0; i<values.length; ++i) {\n"
             + "  try {\n"
@@ -174,7 +174,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  var request = " + XHRInstanciation_ + ";\n"
+            + "  var request = " + XHRInstantiation_ + ";\n"
             + "  request.open('GET', 'foo.xml', false);\n"
             + "  request.send('');\n"
             + "  alert(request.responseXML);\n"
@@ -193,7 +193,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  var request = " + XHRInstanciation_ + ";\n"
+            + "  var request = " + XHRInstantiation_ + ";\n"
             + "  request.open('GET', 'foo.xml', false);\n"
             + "  request.send('');\n"
             + "  var childNodes = request.responseXML.childNodes;\n"
@@ -227,7 +227,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  var request = " + XHRInstanciation_ + ";\n"
+            + "  var request = " + XHRInstantiation_ + ";\n"
             + "  request.open('GET', 'foo.xml', false);\n"
             + "  alert(request.responseXML);\n"
             + "}\n"
@@ -265,7 +265,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  var xhr = " + XHRInstanciation_ + ";\n"
+            + "  var xhr = " + XHRInstantiation_ + ";\n"
             + "  try {\n"
             + "    xhr.open('GET', '" + url + "', false);\n"
             + "    alert('ok');\n"
