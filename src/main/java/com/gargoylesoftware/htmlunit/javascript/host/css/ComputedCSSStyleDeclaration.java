@@ -1225,14 +1225,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     public int getCalculatedWidth(final boolean includeBorder, final boolean includePadding) {
         int width = getCalculatedWidth();
-        final String display = jsxGet_display();
-        if (!"none".equals(display)) {
-            if (includeBorder) {
-                width += getBorderHorizontal();
-            }
-            if (includePadding) {
-                width += getPaddingHorizontal();
-            }
+        if (includeBorder) {
+            width += getBorderHorizontal();
+        }
+        if (includePadding) {
+            width += getPaddingHorizontal();
         }
         return width;
     }
@@ -1268,6 +1265,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 else {
                     width = pixelValue(parentWidth);
                 }
+                width -= (getBorderHorizontal() + getPaddingHorizontal());
             }
             else {
                 // Inline elements take up however much space is required by their children.
@@ -1301,13 +1299,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     public int getCalculatedHeight(final boolean includeBorder, final boolean includePadding) {
         int height = getCalculatedHeight();
-        if (!"none".equals(jsxGet_display())) {
-            if (includeBorder) {
-                height += getBorderVertical();
-            }
-            if (includePadding) {
-                height += getPaddingVertical();
-            }
+        if (includeBorder) {
+            height += getBorderVertical();
+        }
+        if (includePadding) {
+            height += getPaddingVertical();
         }
         return height;
     }
@@ -1651,14 +1647,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     private int getPaddingHorizontal() {
         if (paddingHorizontal_ == null) {
-            paddingHorizontal_ = getPaddingLeft() + getPaddingRight();
+            paddingHorizontal_ = "none".equals(jsxGet_display()) ? 0 : getPaddingLeft() + getPaddingRight();
         }
         return paddingHorizontal_;
     }
 
     private int getPaddingVertical() {
         if (paddingVertical_ == null) {
-            paddingVertical_ = getPaddingTop() + getPaddingBottom();
+            paddingVertical_ = "none".equals(jsxGet_display()) ? 0 : getPaddingTop() + getPaddingBottom();
         }
         return paddingVertical_;
     }
@@ -1697,14 +1693,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     private int getBorderHorizontal() {
         if (borderHorizontal_ == null) {
-            borderHorizontal_ = getBorderLeft() + getBorderRight();
+            borderHorizontal_ = "none".equals(jsxGet_display()) ? 0 : getBorderLeft() + getBorderRight();
         }
         return borderHorizontal_;
     }
 
     private int getBorderVertical() {
         if (borderVertical_ == null) {
-            borderVertical_ = getBorderTop() + getBorderBottom();
+            borderVertical_ = "none".equals(jsxGet_display()) ? 0 : getBorderTop() + getBorderBottom();
         }
         return borderVertical_;
     }

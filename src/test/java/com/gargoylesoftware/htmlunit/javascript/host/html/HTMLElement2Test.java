@@ -453,6 +453,19 @@ public class HTMLElement2Test extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("30")
+    public void offsetWidth_parentWidthConstrainsChildWidth2() throws Exception {
+        final String html = "<html><head><style>#a{width:30px;} #b{border:2px;padding:3px;}</style></head><body>\n"
+            + "<div id='a'><div id='b'>foo</div></div>\n"
+            + "<script>alert(document.getElementById('b').offsetWidth);</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * When CSS float is set to "right" or "left", the width of an element is related to
      * its content and it doesn't takes the full available width.
      * @throws Exception if an error occurs
