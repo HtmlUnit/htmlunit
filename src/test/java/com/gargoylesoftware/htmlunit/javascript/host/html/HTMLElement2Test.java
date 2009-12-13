@@ -53,7 +53,24 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "blah", "http://www.blah.com/blah" }, FF = { "undefined", "undefined" })
+    public void scopeName2() throws Exception {
+        final String html = "<html xmlns:blah='http://www.blah.com/blah'><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('x').scopeName);\n"
+            + "    alert(document.getElementById('x').tagUrn);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'><blah:abc id='x'></blah:abc></body></html>";
         loadPageWithAlerts2(html);
     }
 

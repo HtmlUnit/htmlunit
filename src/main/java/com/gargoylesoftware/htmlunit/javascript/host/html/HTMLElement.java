@@ -1833,8 +1833,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534388.aspx">MSDN documentation</a>
      */
     public String jsxGet_scopeName() {
-        //TODO: implement other behavior
-        return "HTML";
+        final String prefix = getDomNodeOrDie().getPrefix();
+        return prefix != null ? prefix : "HTML";
     }
 
     /**
@@ -1843,8 +1843,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534658.aspx">MSDN documentation</a>
      */
     public String jsxGet_tagUrn() {
-        //TODO: implement other behavior
-        return "";
+        final String urn = getDomNodeOrDie().getNamespaceURI();
+        return urn != null ? urn : "";
     }
 
     /**
