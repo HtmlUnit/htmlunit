@@ -45,6 +45,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -104,6 +105,7 @@ public abstract class WebTestCase {
     private List<String> generateTest_expectedAlerts_;
     private boolean generateTest_notYetImplemented_;
     private String generateTest_testName_;
+    private int nbJSThreadsBeforeTest_;
 
     static {
         try {
@@ -839,6 +841,15 @@ public abstract class WebTestCase {
     }
 
     /**
+     * Reads the number of JS threads remaining from unit tests run before the current one.
+     * Ideally it should be always 0.
+     */
+    @Before
+    public void readJSThreadsBeforeTest() {
+        nbJSThreadsBeforeTest_ = getJavaScriptThreads().size();
+    }
+
+    /**
      * Cleanup after a test.
      */
     @After
@@ -850,7 +861,7 @@ public abstract class WebTestCase {
         mockWebConnection_ = null;
 
         final List<Thread> jsThreads = getJavaScriptThreads();
-        if (!jsThreads.isEmpty()) {
+        if (jsThreads.size() > nbJSThreadsBeforeTest_) {
             System.err.println("JS threads still running:");
             for (final Thread t : jsThreads) {
                 System.err.println(t.getName());
