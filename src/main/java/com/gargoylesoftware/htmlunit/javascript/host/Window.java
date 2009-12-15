@@ -920,7 +920,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the value of the window's <tt>onbeforeunload</tt> property
      */
     public Object jsxGet_onbeforeunload() {
-        return getHandlerForJavaScript("beforeunload");
+        return getHandlerForJavaScript(Event.TYPE_BEFORE_UNLOAD);
     }
 
     /**
@@ -928,7 +928,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param onbeforeunload the value of the window's <tt>onbeforeunload</tt> property
      */
     public void jsxSet_onbeforeunload(final Object onbeforeunload) {
-        setHandlerForJavaScript("beforeunload", onbeforeunload);
+        setHandlerForJavaScript(Event.TYPE_BEFORE_UNLOAD, onbeforeunload);
     }
 
     /**
@@ -936,7 +936,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the value of the window's <tt>onerror</tt> property
      */
     public Object jsxGet_onerror() {
-        return getHandlerForJavaScript("error");
+        return getHandlerForJavaScript(Event.TYPE_ERROR);
     }
 
     /**
@@ -944,7 +944,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param onerror the value of the window's <tt>onerror</tt> property
      */
     public void jsxSet_onerror(final Object onerror) {
-        setHandlerForJavaScript("error", onerror);
+        setHandlerForJavaScript(Event.TYPE_ERROR, onerror);
     }
 
     /**

@@ -106,6 +106,9 @@ public class Event extends SimpleScriptable {
     /** The event type triggered by "onreadystatechange" event handlers. */
     public static final String TYPE_READY_STATE_CHANGE = "readystatechange";
 
+    /** The event type triggered by "onerror" event handlers. */
+    public static final String TYPE_ERROR = "error";
+
     /** The first event phase: the capturing phase. */
     public static final short CAPTURING_PHASE = 1;
 
