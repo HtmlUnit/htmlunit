@@ -171,7 +171,7 @@ public class JavaScriptJobManagerTest extends WebTestCase {
         Assert.assertEquals("new page should load", "Third", newPage.getTitleText());
         Assert.assertEquals("frame should be gone", 0, newPage.getFrames().size());
 
-        mgr.waitForJobs(1000);
+        mgr.waitForJobs(3000);
         Assert.assertEquals("thread should stop", 0, mgr.getJobCount());
     }
 
