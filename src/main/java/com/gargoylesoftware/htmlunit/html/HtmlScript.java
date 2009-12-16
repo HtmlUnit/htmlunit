@@ -27,8 +27,10 @@ import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.TextUtil;
+import com.gargoylesoftware.htmlunit.html.HtmlPage.JavaScriptLoadResult;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
@@ -166,10 +168,9 @@ public class HtmlScript extends HtmlElement {
         return getDeferAttribute() != ATTRIBUTE_NOT_DEFINED;
     }
 
-       /**
+    /**
      * If setting the <tt>src</tt> attribute, this method executes the new JavaScript if necessary
      * (behavior varies by browser version). {@inheritDoc}
-     * {@inheritDoc}
      */
     @Override
     public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
@@ -221,12 +222,7 @@ public class HtmlScript extends HtmlElement {
                     }
                 }
                 else {
-                    final boolean loadedExternalFile = executeScriptIfNeeded(true);
-                    if (loadedExternalFile) {
-                        final HTMLScriptElement script = (HTMLScriptElement) getScriptObject();
-                        final Event event = new Event(HtmlScript.this, Event.TYPE_LOAD);
-                        script.executeEvent(event);
-                    }
+                    executeScriptIfNeeded(true);
                 }
             }
         };
@@ -315,22 +311,22 @@ public class HtmlScript extends HtmlElement {
      *
      * @param executeIfDeferred if <tt>false</tt>, and we are emulating IE, and the <tt>defer</tt>
      * attribute is defined, the script is not executed
-     * @return <tt>true</tt> if an external JavaScript file was loaded
      */
-    boolean executeScriptIfNeeded(final boolean executeIfDeferred) {
+    void executeScriptIfNeeded(final boolean executeIfDeferred) {
         if (!isExecutionNeeded()) {
-            return false;
+            return;
         }
 
-        final BrowserVersion browser = getPage().getWebClient().getBrowserVersion();
+        final HtmlPage page = (HtmlPage) getPage();
+        final BrowserVersion browser = page.getWebClient().getBrowserVersion();
         final boolean ie = browser.isIE();
         if (!executeIfDeferred && isDeferred() && ie) {
-            return false;
+            return;
         }
 
         final String src = getSrcAttribute();
         if (src.equals(SLASH_SLASH_COLON)) {
-            return false;
+            return;
         }
 
         if (src != ATTRIBUTE_NOT_DEFINED) {
@@ -346,7 +342,7 @@ public class HtmlScript extends HtmlElement {
                             if (LOG.isDebugEnabled()) {
                                 LOG.debug("Executing JavaScript: " + code);
                             }
-                            ((HtmlPage) getPage()).executeJavaScriptIfPossible(code, code, getStartLineNumber());
+                            page.executeJavaScriptIfPossible(code, code, getStartLineNumber());
                         }
                     }
                 }
@@ -356,15 +352,33 @@ public class HtmlScript extends HtmlElement {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("Loading external JavaScript: " + src);
                 }
-                return ((HtmlPage) getPage()).loadExternalJavaScriptFile(src, getCharsetAttribute());
+                try {
+                    final JavaScriptLoadResult result = page.loadExternalJavaScriptFile(src, getCharsetAttribute());
+                    if (result == JavaScriptLoadResult.SUCCESS) {
+                        executeEventIfNotIE(Event.TYPE_LOAD);
+                    }
+                    else if (result == JavaScriptLoadResult.DOWNLOAD_ERROR) {
+                        executeEventIfNotIE(Event.TYPE_ERROR);
+                    }
+                }
+                catch (final FailingHttpStatusCodeException e) {
+                    executeEventIfNotIE(Event.TYPE_ERROR);
+                    throw e;
+                }
             }
         }
         else if (getFirstChild() != null) {
             // <script>[code]</script>
             executeInlineScriptIfNeeded(executeIfDeferred);
         }
+    }
 
-        return false;
+    private void executeEventIfNotIE(final String type) {
+        if (!getPage().getWebClient().getBrowserVersion().isIE()) {
+            final HTMLScriptElement script = (HTMLScriptElement) getScriptObject();
+            final Event event = new Event(HtmlScript.this, type);
+            script.executeEvent(event);
+        }
     }
 
     /**

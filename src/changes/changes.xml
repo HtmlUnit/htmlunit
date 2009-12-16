@@ -11,6 +11,9 @@
                 APIs (rather than HttpClient's NameValuePair class); use internal Cookie class in the public APIs (rather
                 than HttpClient's Cookie class).
             </action>
+            <action type="fix" dev="sdanig" issue="2815823">
+                JavaScript: add support for "onerror" event handlers on script nodes (FF only).
+            </action>
             <action type="fix" dev="sdanig" issue="2897473">
                 JavaScript: better value for document.body.clientHeight.
             </action>

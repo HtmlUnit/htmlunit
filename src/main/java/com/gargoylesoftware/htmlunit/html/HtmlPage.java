@@ -895,17 +895,36 @@ public class HtmlPage extends SgmlPage {
         return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
     }
 
+    /** Various possible external JavaScript file loading results. */
+    enum JavaScriptLoadResult {
+        /** The load was aborted and nothing was done. */
+        NOOP,
+        /** The external JavaScript file was downloaded and compiled successfully. */
+        SUCCESS,
+        /** The external JavaScript file was not downloaded successfully. */
+        DOWNLOAD_ERROR,
+        /** The external JavaScript file was downloaded but was not compiled successfully. */
+        COMPILATION_ERROR
+    }
+
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * @param srcAttribute the source attribute from the script tag
      * @param charset the charset attribute from the script tag
-     * @return <tt>true</tt> if an external JavaScript file was loaded
+     * @return the result of loading the specified external JavaScript file
+     * @throws FailingHttpStatusCodeException if the request's status code indicates a request
+     *         failure and the {@link WebClient} was configured to throw exceptions on failing
+     *         HTTP status codes
      */
-    boolean loadExternalJavaScriptFile(final String srcAttribute, final String charset) {
-        if (StringUtils.isBlank(srcAttribute) || !getWebClient().isJavaScriptEnabled()) {
-            return false;
+    JavaScriptLoadResult loadExternalJavaScriptFile(final String srcAttribute, final String charset)
+        throws FailingHttpStatusCodeException {
+
+        final WebClient client = getWebClient();
+        if (StringUtils.isBlank(srcAttribute) || !client.isJavaScriptEnabled()) {
+            return JavaScriptLoadResult.NOOP;
         }
+
         final URL scriptURL;
         try {
             scriptURL = getFullyQualifiedUrl(srcAttribute);
@@ -913,24 +932,36 @@ public class HtmlPage extends SgmlPage {
                 if (LOG.isInfoEnabled()) {
                     LOG.info("Ignoring script src [" + srcAttribute + "]");
                 }
-                return false;
+                return JavaScriptLoadResult.NOOP;
             }
         }
         catch (final MalformedURLException e) {
             if (LOG.isErrorEnabled()) {
                 LOG.error("Unable to build URL for script src tag [" + srcAttribute + "]");
             }
-            if (getWebClient().isThrowExceptionOnScriptError()) {
+            if (client.isThrowExceptionOnScriptError()) {
                 throw new ScriptException(this, e);
             }
-            return false;
+            return JavaScriptLoadResult.NOOP;
         }
-        final Script script = loadJavaScriptFromUrl(scriptURL, charset);
-        final boolean loaded = (script != null);
-        if (loaded) {
-            getWebClient().getJavaScriptEngine().execute(this, script);
+
+        final Script script;
+        try {
+            script = loadJavaScriptFromUrl(scriptURL, charset);
         }
-        return loaded;
+        catch (final IOException e) {
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Error loading JavaScript from [" + scriptURL + "].", e);
+            }
+            return JavaScriptLoadResult.DOWNLOAD_ERROR;
+        }
+
+        if (script == null) {
+            return JavaScriptLoadResult.COMPILATION_ERROR;
+        }
+
+        client.getJavaScriptEngine().execute(this, script);
+        return JavaScriptLoadResult.SUCCESS;
     }
 
     /**
@@ -939,36 +970,32 @@ public class HtmlPage extends SgmlPage {
      *
      * @param url the URL of the script
      * @param charset the charset to use to read the text
-     * @return the content of the file
+     * @return the content of the file, or <tt>null</tt> if we ran into a compile error
+     * @throws IOException if there is a problem downloading the JavaScript file
+     * @throws FailingHttpStatusCodeException if the request's status code indicates a request
+     *         failure and the {@link WebClient} was configured to throw exceptions on failing
+     *         HTTP status codes
      */
-    private Script loadJavaScriptFromUrl(final URL url, final String charset) {
+    private Script loadJavaScriptFromUrl(final URL url, final String charset) throws IOException,
+        FailingHttpStatusCodeException {
+
         String scriptEncoding = charset;
         final String pageEncoding = getPageEncoding();
+        final WebRequestSettings referringRequest = getWebResponse().getRequestSettings();
 
         final WebClient client = getWebClient();
         final Cache cache = client.getCache();
 
         final WebRequestSettings request = new WebRequestSettings(url);
-
-        final WebRequestSettings referringRequest = getWebResponse().getRequestSettings();
         request.setAdditionalHeaders(new HashMap<String, String>(referringRequest.getAdditionalHeaders()));
         request.setAdditionalHeader("Referer", referringRequest.getUrl().toString());
+
         final Object cachedScript = cache.getCachedObject(request);
-        if (cachedScript != null && cachedScript instanceof Script) {
+        if (cachedScript instanceof Script) {
             return (Script) cachedScript;
         }
 
-        WebResponse response;
-        try {
-            response = client.loadWebResponse(request);
-        }
-        catch (final IOException e) {
-            if (LOG.isErrorEnabled()) {
-                LOG.error("Error loading JavaScript from [" + url + "].", e);
-            }
-            return null;
-        }
-
+        final WebResponse response = client.loadWebResponse(request);
         client.printContentIfNecessary(response);
         client.throwFailingHttpStatusCodeExceptionIfNecessary(response);
 
@@ -976,7 +1003,7 @@ public class HtmlPage extends SgmlPage {
         final boolean successful = (statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES);
         final boolean noContent = (statusCode == HttpStatus.SC_NO_CONTENT);
         if (!successful || noContent) {
-            return null;
+            throw new IOException("Unable to download JavaScript from '" + url + "' (status " + statusCode + ").");
         }
 
         //http://www.ietf.org/rfc/rfc4329.txt
@@ -1011,7 +1038,10 @@ public class HtmlPage extends SgmlPage {
         final String scriptCode = response.getContentAsString(scriptEncoding);
         final JavaScriptEngine javaScriptEngine = client.getJavaScriptEngine();
         final Script script = javaScriptEngine.compile(this, scriptCode, url.toExternalForm(), 1);
-        cache.cacheIfPossible(request, response, script);
+        if (script != null) {
+            cache.cacheIfPossible(request, response, script);
+        }
+
         return script;
     }
 

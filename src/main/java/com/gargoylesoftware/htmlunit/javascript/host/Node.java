@@ -718,8 +718,8 @@ public class Node extends SimpleScriptable {
     }
 
     /**
-     * Returns The Namespace prefix.
-     * @return the Namespace prefix
+     * Returns the namespace prefix.
+     * @return the namespace prefix
      */
     public String jsxGet_prefix() {
         final DomNode domNode = getDomNodeOrDie();

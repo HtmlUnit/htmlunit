@@ -308,6 +308,79 @@ public class HtmlScript2Test extends WebTestCase {
     }
 
     /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(FF = "f")
+    public void addEventListener_error_clientThrows() throws Exception {
+        addEventListener_error(true);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(FF = "f")
+    public void addEventListener_error_clientDoesNotThrow() throws Exception {
+        addEventListener_error(false);
+    }
+
+    private void addEventListener_error(final boolean throwOnFailingStatusCode) throws Exception {
+        final URL fourOhFour = new URL(URL_FIRST, "/404");
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var s1 = document.createElement('script');\n"
+            + "    s1.text = 'var foo';\n"
+            + "    if(s1.addEventListener) s1.addEventListener('error', function(){alert('a')}, false);\n"
+            + "    document.body.insertBefore(s1, document.body.firstChild);\n"
+            + "    \n"
+            + "    var s2 = document.createElement('script');\n"
+            + "    s2.text = 'varrrr foo';\n"
+            + "    if(s2.addEventListener) s2.addEventListener('error', function(){alert('b')}, false);\n"
+            + "    document.body.insertBefore(s2, document.body.firstChild);\n"
+            + "    \n"
+            + "    var s3 = document.createElement('script');\n"
+            + "    s3.src = '//:';\n"
+            + "    if(s3.addEventListener) s3.addEventListener('error', function(){alert('c')}, false);\n"
+            + "    document.body.insertBefore(s3, document.body.firstChild);\n"
+            + "    \n"
+            + "    var s4 = document.createElement('script');\n"
+            + "    s4.src = '" + URL_SECOND + "';\n"
+            + "    if(s4.addEventListener) s4.addEventListener('error', function(){alert('d')}, false);\n"
+            + "    document.body.insertBefore(s4, document.body.firstChild);\n"
+            + "    \n"
+            + "    var s5 = document.createElement('script');\n"
+            + "    s5.src = '" + URL_THIRD + "';\n"
+            + "    if(s5.addEventListener) s5.addEventListener('error', function(){alert('e')}, false);\n"
+            + "    document.body.insertBefore(s5, document.body.firstChild);\n"
+            + "    \n"
+            + "    var s6 = document.createElement('script');\n"
+            + "    s6.src = '" + fourOhFour + "';\n"
+            + "    if(s6.addEventListener) s6.addEventListener('error', function(){alert('f')}, false);\n"
+            + "    document.body.insertBefore(s6, document.body.firstChild);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+        final WebClient client = getWebClient();
+        client.setThrowExceptionOnFailingStatusCode(throwOnFailingStatusCode);
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(URL_SECOND, "var foo;", "text/javascript");
+        conn.setResponse(URL_THIRD, "varrrr foo;", "text/javascript");
+        conn.setResponse(fourOhFour, "", 404, "Missing", "text/javascript", new ArrayList< NameValuePair >());
+        client.setWebConnection(conn);
+        final List<String> actual = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(actual));
+        client.setThrowExceptionOnScriptError(false);
+        client.getPage(URL_FIRST);
+        assertEquals(getExpectedAlerts(), actual);
+    }
+
+    /**
      * @exception Exception If the test fails
      */
     @Test
