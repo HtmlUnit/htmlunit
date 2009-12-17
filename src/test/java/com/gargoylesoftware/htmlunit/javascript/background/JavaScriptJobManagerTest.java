@@ -147,7 +147,7 @@ public class JavaScriptJobManagerTest extends WebTestCase {
             + "</body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body>\n"
             + "<script>\n"
-            + "setInterval('', 10000);\n"
+            + "setInterval('', 30000);\n"
             + "</script>\n"
             + "</body></html>";
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
@@ -171,7 +171,7 @@ public class JavaScriptJobManagerTest extends WebTestCase {
         Assert.assertEquals("new page should load", "Third", newPage.getTitleText());
         Assert.assertEquals("frame should be gone", 0, newPage.getFrames().size());
 
-        mgr.waitForJobs(3000);
+        mgr.waitForJobs(10000);
         Assert.assertEquals("thread should stop", 0, mgr.getJobCount());
     }
 
