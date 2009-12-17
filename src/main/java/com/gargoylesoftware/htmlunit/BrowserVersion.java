@@ -85,6 +85,7 @@ public class BrowserVersion implements Serializable {
      * @deprecated since HtmlUnit-2.7. This means that no effort will be made to improve
      * simulation for this browser version until it is definitely removed.
      **/
+    @Deprecated
     public static final BrowserVersion FIREFOX_2 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows; en-US)",
         "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.4) Gecko/20070515 Firefox/2.0.0.4",
