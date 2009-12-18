@@ -532,9 +532,9 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_FIRST);
-        assertEquals(client.waitForBackgroundJavaScriptStartingBefore(500), 1);
+        assertEquals(1, client.waitForBackgroundJavaScriptStartingBefore(500));
         assertEquals("test", page.getTitleText());
-        assertEquals(client.waitForBackgroundJavaScriptStartingBefore(500), 1);
+        assertEquals(1, client.waitForBackgroundJavaScriptStartingBefore(500));
     }
 }
 
