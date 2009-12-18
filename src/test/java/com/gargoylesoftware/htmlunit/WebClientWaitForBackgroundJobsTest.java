@@ -508,7 +508,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
             + "  <title>test</title>\n"
             + "  <script>\n"
             + "    var start = new Date().getTime();\n"
-            + "    var id = setInterval(doWork1, 10);\n"
+            + "    var id = setInterval(doWork1, 35);\n"
             + "    function stopTimer() {\n"
             + "      clearInterval(id);\n"
             + "    }\n"
