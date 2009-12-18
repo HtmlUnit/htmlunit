@@ -38,7 +38,7 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
  */
 @RunWith(BrowserRunner.class)
 public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
-    private static String XHRInstanciation_ = "(window.XMLHttpRequest ? "
+    private static String XHRInstantiation_ = "(window.XMLHttpRequest ? "
         + "new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP'))";
 
     private long startTime_;
@@ -155,7 +155,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
             + "    function doWork() {\n"
             + "      clearTimeout(intervalId);\n"
             + "      // waitForBackgroundJavaScriptStartingBefore should be called when JS execution is here\n"
-            + "      var request = " + XHRInstanciation_ + ";\n"
+            + "      var request = " + XHRInstantiation_ + ";\n"
             + "      request.open('GET', 'wait', false);\n"
             + "      request.send('');\n"
             + "      alert('end work');\n"
@@ -321,7 +321,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
             + "      }\n"
             + "    }\n"
             + "    function test() {\n"
-            + "      request = " + XHRInstanciation_ + ";\n"
+            + "      request = " + XHRInstantiation_ + ";\n"
             + "      request.open('GET', 'wait', true);\n"
             + "      request.onreadystatechange = onReadyStateChange;\n"
             + "      // waitForBackgroundJavaScriptStartingBefore should be called when JS execution is in send()\n"
@@ -513,9 +513,9 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
             + "      clearInterval(id);\n"
             + "    }\n"
             + "    function doWork1() {\n"
-            + "      if (start + 6000 < new Date().getTime()) {\n"
-            + "        clearInterval(id);\n"
+            + "      if (start + 8000 < new Date().getTime()) {\n"
             + "        document.title = 'failed';\n"
+            + "        clearInterval(id);\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"
@@ -529,12 +529,12 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(html);
-
         client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_FIRST);
-        client.waitForBackgroundJavaScriptStartingBefore(2000);
+        assertEquals(client.waitForBackgroundJavaScriptStartingBefore(500), 1);
         assertEquals("test", page.getTitleText());
+        assertEquals(client.waitForBackgroundJavaScriptStartingBefore(500), 1);
     }
 }
 
