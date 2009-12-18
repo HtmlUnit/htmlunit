@@ -48,7 +48,7 @@ public class ExtJS22Test extends WebTestCase {
      * After.
      */
     @After
-    public void After() {
+    public void after() {
         webClient_.closeAllWindows();
     }
 
