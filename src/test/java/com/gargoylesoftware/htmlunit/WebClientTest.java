@@ -2338,7 +2338,6 @@ public class WebClientTest extends WebServerTestCase {
 
         // close and verify that the WebClient is clean
         webClient.closeAllWindows();
-        Thread.sleep(2000);
         assertEquals(1, webClient.getWebWindows().size());
         nbJSThreads = getJavaScriptThreads().size();
         assertEquals(0, nbJSThreads);
