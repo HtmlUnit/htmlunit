@@ -137,6 +137,9 @@ public class JavaScriptJobManagerTest extends WebTestCase {
      */
     @Test
     public void navigationStopThreadsInChildWindows() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
         final String firstContent = "<html><head><title>First</title></head><body>\n"
             + "<iframe id='iframe1' src='"
             + URL_SECOND
