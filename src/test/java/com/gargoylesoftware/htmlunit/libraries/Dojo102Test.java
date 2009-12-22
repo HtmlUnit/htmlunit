@@ -47,7 +47,7 @@ public class Dojo102Test extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     public Dojo102Test() throws Exception {
-        startWebServer("src/test/resources/dojo/1.0.2");
+        startWebServer("src/test/resources/libraries/dojo/1.0.2");
     }
 
     /**
