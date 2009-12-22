@@ -136,7 +136,7 @@ public class GWT17Test extends WebServerTestCase {
         final Locale locale = Locale.getDefault();
         Locale.setDefault(Locale.US);
 
-        startWebServer("src/test/resources/gwt/" + getDirectory() + "/I18N");
+        startWebServer("src/test/resources/libraries/gwt/" + getDirectory() + "/I18N");
         final WebClient client = getWebClient();
 
         final String url = "http://localhost:" + PORT + "/I18N.html?locale=fr";
@@ -326,8 +326,8 @@ public class GWT17Test extends WebServerTestCase {
      */
     @Test
     public void dynaTable() throws Exception {
-        startWebServer("src/test/resources/gwt/" + getDirectory() + "/DynaTable",
-                new String[] {"src/test/resources/gwt/" + getDirectory() + "/gwt-servlet.jar"});
+        startWebServer("src/test/resources/libraries/gwt/" + getDirectory() + "/DynaTable",
+                new String[] {"src/test/resources/libraries/gwt/" + getDirectory() + "/gwt-servlet.jar"});
 
         final WebClient client = getWebClient();
 
@@ -363,7 +363,7 @@ public class GWT17Test extends WebServerTestCase {
      * @return the loaded page
      */
     protected HtmlPage loadGWTPage(final String testName, final List<String> collectedAlerts) throws Exception {
-        final String resource = "gwt/" + getDirectory() + "/" + testName + "/" + testName + ".html";
+        final String resource = "libraries/gwt/" + getDirectory() + "/" + testName + "/" + testName + ".html";
         final URL url = getClass().getClassLoader().getResource(resource);
         assertNotNull(url);
 
