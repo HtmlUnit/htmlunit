@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 @RunWith(BrowserRunner.class)
 public class CurvyCornersTest extends WebTestCase {
 
-    private static final String BASE_FILE_PATH = "curvyCorners/1.2.9-beta/";
+    private static final String BASE_FILE_PATH = "libraries/curvyCorners/1.2.9-beta/";
 
     /**
      * @throws Exception if the test fails
