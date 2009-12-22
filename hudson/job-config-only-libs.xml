@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <maven2-moduleset>
   <actions/>
-  <description>Builds HtmlUnit without running any of the JavaScript library integration tests.</description>
+  <description>Builds HtmlUnit, running ONLY the JavaScript library integration tests.</description>
   <logRotator>
     <daysToKeep>14</daysToKeep>
     <numToKeep>-1</numToKeep>
@@ -32,7 +32,7 @@
     <groupId>net.sourceforge.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
   </rootModule>
-  <goals>install -Dmaven.test.failure.ignore=false -DwithoutLibs</goals>
+  <goals>install -Dmaven.test.failure.ignore=false -DonlyLibs</goals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
   <usePrivateRepository>false</usePrivateRepository>
