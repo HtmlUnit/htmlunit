@@ -70,6 +70,7 @@ public class LibraryDependencyTest extends WebTestCase {
             + "<div id='id2'>Page2</div>\n"
             + "</body>\n"
             + "</html>";
+        final String prototype = getContent("libraries/prototype/1.6.0/dist/prototype.js");
 
         final String[] expectedAlerts = {"2"};
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -81,7 +82,7 @@ public class LibraryDependencyTest extends WebTestCase {
 
         webConnection.setResponse(URL_FIRST, firstHtml);
         webConnection.setResponse(URL_SECOND, secondHtml);
-        webConnection.setResponse(URL_THIRD, getContent("prototype/1.6.0/dist/prototype.js"), "application/javascript");
+        webConnection.setResponse(URL_THIRD, prototype, "application/javascript");
 
         webClient.getPage(URL_FIRST);
         webClient.waitForBackgroundJavaScript(10000);

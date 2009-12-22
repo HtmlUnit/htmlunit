@@ -85,7 +85,7 @@ public abstract class PrototypeTestBase extends WebServerTestCase {
     private String getExpectations(final BrowserVersion browserVersion, final String filename)
         throws IOException {
         final String fileNameBase = StringUtils.substringBeforeLast(filename, ".");
-        final String baseName = "src/test/resources/prototype/" + getVersion() + "/expected." + fileNameBase;
+        final String baseName = "src/test/resources/libraries/prototype/" + getVersion() + "/expected." + fileNameBase;
 
         File expectationsFile = null;
         // version specific to this browser (or browser group)?
@@ -117,7 +117,7 @@ public abstract class PrototypeTestBase extends WebServerTestCase {
      */
     @Before
     public void setUp() throws Exception {
-        startWebServer("src/test/resources/prototype/" + getVersion());
+        startWebServer("src/test/resources/libraries/prototype/" + getVersion());
     }
 
     /**
