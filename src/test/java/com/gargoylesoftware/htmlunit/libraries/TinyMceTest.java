@@ -61,7 +61,7 @@ public class TinyMceTest extends WebDriverTestCase {
     }
 
     private void test(final String fileName, final int expectedTotal, final int expectedFailed) throws Exception {
-        final URL url = getClass().getClassLoader().getResource("tinymce/3.2.7/tests/" + fileName + ".html");
+        final URL url = getClass().getClassLoader().getResource("libraries/tinymce/3.2.7/tests/" + fileName + ".html");
         assertNotNull(url);
 
         final WebClient client = getWebClient();

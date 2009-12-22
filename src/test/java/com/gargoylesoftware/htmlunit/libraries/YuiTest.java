@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 public class YuiTest extends WebTestCase {
 
     private static final long DEFAULT_TIME_TO_WAIT = 3 * 60 * 1000L;
-    private static final String BASE_FILE_PATH = "yui/2.3.0/tests/";
+    private static final String BASE_FILE_PATH = "libraries/yui/2.3.0/tests/";
     private final List<String> emptyList_ = Collections.emptyList();
     private WebClient client_;
 
