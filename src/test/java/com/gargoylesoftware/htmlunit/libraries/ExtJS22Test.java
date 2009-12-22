@@ -138,10 +138,10 @@ public class ExtJS22Test extends WebTestCase {
     }
 
     /**
-     * Returns the Ext JS directory being tested.
-     * @return the Ext JS directory being tested
+     * Returns the Ext JS version being tested.
+     * @return the Ext JS version being tested
      */
-    protected String getDirectory() {
+    protected String getVersion() {
         return "2.2";
     }
 
@@ -154,7 +154,7 @@ public class ExtJS22Test extends WebTestCase {
      * @throws Exception if an error occurs
      */
     protected HtmlPage getPage(final String example, final String htmlName) throws Exception {
-        final String resource = "ExtJS/" + getDirectory() + "/examples/" + example + "/" + htmlName + ".html";
+        final String resource = "libraries/ExtJS/" + getVersion() + "/examples/" + example + "/" + htmlName + ".html";
         final URL url = getClass().getClassLoader().getResource(resource);
         assertNotNull(url);
         webClient_ = getWebClient();
