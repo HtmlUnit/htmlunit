@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -543,5 +544,51 @@ public class HTMLIFrameElementTest extends WebTestCase {
 
         webClient.getPage(URL_FIRST);
         assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("128")
+    public void width_px() throws Exception {
+        final String html
+            = "<html><head>"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var iframe = document.getElementById('myFrame');\n"
+            + "    iframe.width = '128px';\n"
+            + "    alert(iframe.width);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<body onload='test()'>\n"
+            + "  <iframe id='myFrame'></iframe>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * IE: getElementById() returns a different object than with direct 'id' variable.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE = { "[object]", "[object]", "undefined", "" },
+            FF = { "[object HTMLIFrameElement]", "[object HTMLIFrameElement]", "", "" })
+    @NotYetImplemented(Browser.IE)
+    public void idByName() throws Exception {
+        final String html
+            = "<html><head>"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(myFrame);\n"
+            + "    alert(document.getElementById('myFrame'));\n"
+            + "    alert(myFrame.width);\n"
+            + "    alert(document.getElementById('myFrame').width);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<body onload='test()'>\n"
+            + "  <iframe id='myFrame'></iframe>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
     }
 }

@@ -2233,21 +2233,24 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Sets the value of the specified attribute (width or height).
      * @param attributeName the name of the attribute to set (<tt>"width"</tt> or <tt>"height"</tt>)
-     * @param s the value of the specified attribute (width or height)
+     * @param value the value of the specified attribute (width or height)
      * @param allowNegativeValues if <tt>true</tt>, negative values will be stored;
      *        if <tt>false</tt>, negative values cause an exception to be thrown;
      *        if <tt>null</tt>, negative values set the value to <tt>0</tt>
      */
-    protected void setWidthOrHeight(final String attributeName, String s, final Boolean allowNegativeValues) {
+    protected void setWidthOrHeight(final String attributeName, String value, final Boolean allowNegativeValues) {
+        if (value.endsWith("px")) {
+            value = value.substring(0, value.length() - 2);
+        }
         if (getBrowserVersion().isIE()) {
             boolean error = false;
-            if (!s.matches("\\d+%")) {
+            if (!value.matches("\\d+%")) {
                 try {
-                    final Float f = Float.parseFloat(s);
+                    final Float f = Float.parseFloat(value);
                     final Integer i = f.intValue();
                     if (i < 0) {
                         if (allowNegativeValues == null) {
-                            s = "0";
+                            value = "0";
                         }
                         else if (!allowNegativeValues) {
                             error = true;
@@ -2259,11 +2262,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 }
             }
             if (error) {
-                final Exception e = new Exception("Cannot set the width property to invalid value: " + s);
+                final Exception e = new Exception("Cannot set the width property to invalid value: " + value);
                 Context.throwAsScriptRuntimeEx(e);
             }
         }
-        getDomNodeOrDie().setAttribute(attributeName, s);
+        getDomNodeOrDie().setAttribute(attributeName, value);
     }
 
     /**

@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class HTMLTableColElementTest extends WebDriverTestCase {
@@ -283,6 +284,28 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
             + "  alert(c5.width);\n"
             + "  alert(c6.width);\n"
             + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("128")
+    public void width_px() throws Exception {
+        final String html
+            = "<html><head>"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    myCol.width = '128px';\n"
+            + "    alert(myCol.width);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<body onload='test()'>\n"
+            + "<table>\n"
+            + "  <col id='myCol'></col>\n"
+            + "</table>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }

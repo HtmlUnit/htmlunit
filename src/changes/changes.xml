@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration preparation">
+            <action type="fix" dev="asashour">
+                JavaScript: allow setting element.width and .height to a value that ends with 'px'.
+            </action>
             <action type="update" dev="sdanig">
                 INCOMPATIBLE CHANGES (HttpClient 4 migration preparation): use internal NameValuePair class in the public
                 APIs (rather than HttpClient's NameValuePair class); use internal Cookie class in the public APIs (rather
