@@ -40,7 +40,8 @@ public class JQuery126LocalTest extends JQueryTestBase {
      */
     @Override
     protected String getExpectedPath() throws Exception {
-        final String resource = "jquery/" + getVersion() + "/local." + getBrowserVersion().getNickname() + ".txt";
+        final String v = getVersion();
+        final String resource = "libraries/jquery/" + v + "/local." + getBrowserVersion().getNickname() + ".txt";
         final URL url = getClass().getClassLoader().getResource(resource);
         return url.toURI().getPath();
     }
@@ -50,7 +51,8 @@ public class JQuery126LocalTest extends JQueryTestBase {
      */
     @Override
     protected String getUrl() {
-        return getClass().getClassLoader().getResource("jquery/" + getVersion() + "/test/index.html").toExternalForm();
+        final String v = getVersion();
+        return getClass().getClassLoader().getResource("libraries/jquery/" + v + "/test/index.html").toExternalForm();
     }
 
     /**

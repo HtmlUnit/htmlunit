@@ -40,7 +40,8 @@ public class JQuery126Test extends JQueryTestBase {
      */
     @Override
     protected String getExpectedPath() throws Exception {
-        final String resource = "jquery/" + getVersion() + "/webServer." + getBrowserVersion().getNickname() + ".txt";
+        final String v = getVersion();
+        final String resource = "libraries/jquery/" + v + "/webServer." + getBrowserVersion().getNickname() + ".txt";
         final URL url = getClass().getClassLoader().getResource(resource);
         return url.toURI().getPath();
     }
@@ -59,7 +60,7 @@ public class JQuery126Test extends JQueryTestBase {
     @Test
     @NotYetImplemented(Browser.IE8)
     public void test() throws Exception {
-        startWebServer("src/test/resources/jquery/" + getVersion());
+        startWebServer("src/test/resources/libraries/jquery/" + getVersion());
         runTest();
     }
 
