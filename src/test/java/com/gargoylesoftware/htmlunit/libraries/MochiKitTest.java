@@ -40,7 +40,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 @RunWith(BrowserRunner.class)
 public class MochiKitTest extends LibraryTestCase {
 
-    private static final String BASE_FILE_PATH = "MochiKit/1.4.1";
+    private static final String BASE_FILE_PATH = "libraries/MochiKit/1.4.1";
     private WebClient webClient_;
 
     /**
