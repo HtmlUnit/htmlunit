@@ -6,13 +6,16 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration preparation">
-            <action type="update" dev="mguillem">
-                Deprecated BrowserVersion.FIREFOX_2.
-            </action>
             <action type="update" dev="sdanig">
                 INCOMPATIBLE CHANGES (HttpClient 4 migration preparation): use internal NameValuePair class in the public
                 APIs (rather than HttpClient's NameValuePair class); use internal Cookie class in the public APIs (rather
                 than HttpClient's Cookie class).
+            </action>
+            <action type="update" dev="mguillem">
+                Deprecated BrowserVersion.FIREFOX_2.
+            </action>
+            <action type="add" dev="sdanig">
+                Add WebClientUtils.attachVisualDebugger(WebClient).
             </action>
             <action type="fix" dev="sdanig" issue="2815823">
                 JavaScript: add support for "onerror" event handlers on script nodes (FF only).
