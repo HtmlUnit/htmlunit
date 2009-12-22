@@ -55,7 +55,7 @@ public class Dojo102Test extends WebServerTestCase {
      */
     @Test
     public void dojo() throws Exception {
-        client_ = new WebClient(BrowserVersion.FIREFOX_2);
+        client_ = new WebClient(BrowserVersion.FIREFOX_3);
         final String url = "http://localhost:" + PORT + "/util/doh/runner.html";
 
         final HtmlPage page = client_.getPage(url);
