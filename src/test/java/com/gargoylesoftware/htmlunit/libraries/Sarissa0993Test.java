@@ -71,7 +71,7 @@ public class Sarissa0993Test extends WebServerTestCase {
         catch (final Exception e) {
             return;
         }
-        startWebServer("src/test/resources/sarissa/" + getVersion());
+        startWebServer("src/test/resources/libraries/sarissa/" + getVersion());
         if (Page_ == null) {
             final WebClient client = getWebClient();
             final String url = "http://localhost:" + PORT + "/test/testsarissa.html";
