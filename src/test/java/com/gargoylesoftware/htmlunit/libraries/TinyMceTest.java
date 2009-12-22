@@ -32,8 +32,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 /**
  * <p>Tests for compatibility with <a href="http://tinymce.moxiecode.com/">TinyMCE</a>.</p>
  *
- * <p>TODO: API test is "not yet implemented"</p>
- * <p>TODO: more tests to add (not just API)</p>
+ * <p>TODO: fix "not yet implemented" tests</p>
+ * <p>TODO: more tests to add</p>
+ * <p>TODO: don't depend on external jQuery</p>
  *
  * @version $Revision$
  * @author Daniel Gredler
@@ -48,6 +49,15 @@ public class TinyMceTest extends WebDriverTestCase {
     @NotYetImplemented
     public void api() throws Exception {
         test("api", 348, 0);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @NotYetImplemented
+    public void basic() throws Exception {
+        test("basic", 89, 0);
     }
 
     private void test(final String fileName, final int expectedTotal, final int expectedFailed) throws Exception {
@@ -67,4 +77,5 @@ public class TinyMceTest extends WebDriverTestCase {
         final int failed = Integer.parseInt(failedSpan.asText());
         assertEquals(expectedFailed, failed);
     }
+
 }
