@@ -169,8 +169,8 @@ public class GWT20Test extends WebServerTestCase {
      */
     @Test
     public void dynaTable() throws Exception {
-        startWebServer("src/test/resources/libraries/GWT2/" + getDirectory() + "/DynaTable",
-                new String[] {"src/test/resources/libraries/GWT2/" + getDirectory() + "/gwt-servlet.jar"});
+        startWebServer("src/test/resources/libraries/GWT/" + getDirectory() + "/DynaTable",
+                new String[] {"src/test/resources/libraries/GWT/" + getDirectory() + "/gwt-servlet.jar"});
 
         final WebClient client = getWebClient();
 
@@ -206,7 +206,7 @@ public class GWT20Test extends WebServerTestCase {
      * @return the loaded page
      */
     protected HtmlPage loadGWTPage(final String testName, final List<String> collectedAlerts) throws Exception {
-        final String resource = "libraries/GWT2/" + getDirectory() + "/" + testName + "/" + testName + ".html";
+        final String resource = "libraries/GWT/" + getDirectory() + "/" + testName + "/" + testName + ".html";
         final URL url = getClass().getClassLoader().getResource(resource);
         assertNotNull(url);
 
