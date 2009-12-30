@@ -278,4 +278,24 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_THIRD, "<bla/>", "text/xml");
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void put() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    var request = " + XHRInstantiation_ + ";\n"
+            + "    request.open('PUT', 'second.html', false);\n"
+            + "    request.send('Something');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'></body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        loadPage2(html);
+
+        final String requestBody = getMockWebConnection().getLastWebRequestSettings().getRequestBody();
+        assertEquals("Something", requestBody);
+    }
 }

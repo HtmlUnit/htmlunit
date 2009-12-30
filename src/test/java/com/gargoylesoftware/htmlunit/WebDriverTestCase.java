@@ -299,7 +299,15 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     requestParameters.add(new NameValuePair(name, value));
                 }
             }
-            settings.setRequestParameters(requestParameters);
+
+            if (request.getMethod().equals("PUT") && request.getContentLength() > 0) {
+                final byte[] buffer = new byte[request.getContentLength()];
+                request.getInputStream().readLine(buffer, 0, buffer.length);
+                settings.setRequestBody(new String(buffer));
+            }
+            else {
+                settings.setRequestParameters(requestParameters);
+            }
 
             final WebResponse resp = MockConnection_.getResponse(settings);
 

@@ -460,8 +460,9 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @param content the content to send
      */
     private void prepareRequest(final Object content) {
-        if (HttpMethod.POST == requestSettings_.getHttpMethod()
-            && content != null
+        if (content != null
+            && (HttpMethod.POST == requestSettings_.getHttpMethod()
+                    || HttpMethod.PUT == requestSettings_.getHttpMethod())
             && !Context.getUndefinedValue().equals(content)) {
             final String body = Context.toString(content);
             if (body.length() > 0) {

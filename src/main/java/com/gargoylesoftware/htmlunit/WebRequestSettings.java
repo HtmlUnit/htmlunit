@@ -242,10 +242,12 @@ public class WebRequestSettings implements Serializable {
     }
 
     /**
-     * Sets the body content to be submitted if this is a <tt>POST</tt> request. Ignored for all other request
-     * types. Should not be used in combination with {@link #setRequestParameters(List) request parameters}.
+     * Sets the body content to be submitted if this is a <tt>POST</tt> or <tt>PUT</tt> request.
+     * Ignored for all other request types.
+     * Should not be used in combination with {@link #setRequestParameters(List) request parameters}.
      * @param requestBody the body content to be submitted if this is a <tt>POST</tt> request
-     * @throws RuntimeException if the request parameters have already been set or this is not a <tt>POST</tt> request
+     * @throws RuntimeException if the request parameters have already been set
+     *                          or this is not a <tt>POST</tt> or <tt>PUT </tt> request
      */
     public void setRequestBody(final String requestBody) throws RuntimeException {
         if (requestParameters_ != null && !requestParameters_.isEmpty()) {

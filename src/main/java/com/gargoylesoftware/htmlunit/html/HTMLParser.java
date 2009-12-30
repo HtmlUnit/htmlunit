@@ -618,7 +618,6 @@ public final class HTMLParser {
 
             currentNode_ = newElement;
             stack_.push(currentNode_);
-
         }
 
         /**
