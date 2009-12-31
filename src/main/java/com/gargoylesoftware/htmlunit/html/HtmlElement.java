@@ -18,8 +18,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -30,7 +30,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 
-import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.lang.ClassUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -754,9 +753,8 @@ public abstract class HtmlElement extends DomElement {
      * @param attributeCount the initial number of attributes to be added to the map
      * @return the attribute map
      */
-    @SuppressWarnings("unchecked")
     static Map<String, DomAttr> createAttributeMap(final int attributeCount) {
-        return ListOrderedMap.decorate(new HashMap<String, DomAttr>(attributeCount)); // preserve insertion order
+        return new LinkedHashMap<String, DomAttr>(attributeCount); // preserve insertion order
     }
 
     /**
