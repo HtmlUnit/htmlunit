@@ -671,7 +671,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns "clientHeight" attribute.
-     * @return the clientHeight attribute
+     * @return the "clientHeight" attribute
      */
     public int jsxGet_clientHeight() {
         final boolean includePadding = !getBrowserVersion().isIE();
@@ -681,7 +681,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns "clientWidth" attribute.
-     * @return the clientWidth attribute
+     * @return the "clientWidth" attribute
      */
     public int jsxGet_clientWidth() {
         final boolean includePadding = !getBrowserVersion().isIE();
@@ -691,7 +691,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns "clientLeft" attribute.
-     * @return the clientTop attribute
+     * @return the "clientLeft" attribute
      */
     public int jsxGet_clientLeft() {
         return 2; // TODO!!!
@@ -699,7 +699,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns "clientTop" attribute.
-     * @return the clientTop attribute
+     * @return the "clientTop" attribute
      */
     public int jsxGet_clientTop() {
         return 2; // TODO!!!
@@ -707,7 +707,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Sets the class attribute for this element.
-     * @param className - the new class name
+     * @param className the new class name
      */
     public void jsxSet_className(final String className) {
         getDomNodeOrDie().setAttribute("class", className);
