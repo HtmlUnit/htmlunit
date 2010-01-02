@@ -2317,7 +2317,7 @@ public class WebClientTest extends WebServerTestCase {
             + "  f.src = 'second.html';\n"
             + "  document.body.appendChild(f);\n"
             + "}\n"
-            + "</script>"
+            + "</script>\n"
             + "</body></html>";
 
         final String html2 = "<html><head><script>\n"

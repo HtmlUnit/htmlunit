@@ -4542,9 +4542,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             final HTMLElement parent = element.getParentHTMLElement();
             return (int) ((i / 100D) * pixelValue(parent, value));
         }
-        else {
-            return pixelValue(s);
-        }
+        return pixelValue(s);
     }
 
     /**
