@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link ComputedCSSStyleDeclaration}.
@@ -473,12 +472,38 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented
     @Alerts(FF = { "200px,400px", "200,400", "200px,400px", "50%,25%", "100,100", "100px,100px" },
             IE = { "200px,400px", "200,400", "200px,400px", "50%,25%", "100,100", "50%,25%" })
-    public void widthAndHeightPercentages() throws Exception {
+    public void widthAndHeightPercentagesAndPx() throws Exception {
         final String html = "<html><body onload='test()'>\n"
             + "<div id='d1' style='width:200px;height:400px'><div id='d2' style='width:50%;height:25%'></div></div>\n"
+            + "<script>\n"
+            + "  function test(){\n"
+            + "    var d1 = document.getElementById('d1');\n"
+            + "    var s1 = window.getComputedStyle ? window.getComputedStyle(d1, null) : d1.currentStyle;\n"
+            + "    var d2 = document.getElementById('d2');\n"
+            + "    var s2 = window.getComputedStyle ? window.getComputedStyle(d2, null) : d2.currentStyle;\n"
+            + "    alert(d1.style.width + ',' + d1.style.height);\n"
+            + "    alert(d1.offsetWidth + ',' + d1.offsetHeight);\n"
+            + "    alert(s1.width + ',' + s1.height);\n"
+            + "    alert(d2.style.width + ',' + d2.style.height);\n"
+            + "    alert(d2.offsetWidth + ',' + d2.offsetHeight);\n"
+            + "    alert(s2.width + ',' + s2.height);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "10em,20em", "160,320", "160px,320px", "50%,25%", "80,80", "80px,80px" },
+            IE = { "10em,20em", "160,320", "10em,20em", "50%,25%", "80,80", "50%,25%" })
+    public void widthAndHeightPercentagesAndEm() throws Exception {
+        final String html = "<html><body onload='test()'>\n"
+            + "<div id='d1' style='width:10em;height:20em'><div id='d2' style='width:50%;height:25%'></div></div>\n"
             + "<script>\n"
             + "  function test(){\n"
             + "    var d1 = document.getElementById('d1');\n"

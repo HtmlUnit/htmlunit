@@ -580,7 +580,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_height() {
-        return pixelString(defaultIfEmpty(super.jsxGet_height(), "363px"));
+        return pixelString(getElement(), new CssValue() {
+            @Override public String get(final ComputedCSSStyleDeclaration style) {
+                return defaultIfEmpty(style.getStyleAttribute("height", true), "363px");
+            }
+        });
     }
 
     /**
@@ -1214,7 +1218,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         else {
             defaultWidth = WINDOW_WIDTH + "px";
         }
-        return pixelString(defaultIfEmpty(super.jsxGet_width(), defaultWidth));
+        return pixelString(getElement(), new CssValue() {
+            @Override public String get(final ComputedCSSStyleDeclaration style) {
+                return defaultIfEmpty(style.getStyleAttribute("width", true), defaultWidth);
+            }
+        });
     }
 
     /**
@@ -1263,7 +1271,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     width = WINDOW_WIDTH;
                 }
                 else {
-                    width = pixelValue(parentWidth);
+                    width = pixelValue(parentJS, new CssValue() {
+                        @Override public String get(final ComputedCSSStyleDeclaration style) {
+                            return style.jsxGet_width();
+                        }
+                    });
                 }
                 width -= (getBorderHorizontal() + getPaddingHorizontal());
             }
@@ -1284,7 +1296,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
         else {
             // Width explicitly set in the style attribute, or there was no parent to provide guidance.
-            width = pixelValue(styleWidth);
+            width = pixelValue(getElement(), new CssValue() {
+                @Override public String get(final ComputedCSSStyleDeclaration style) {
+                    return style.getStyleAttribute("width", true);
+                }
+            });
         }
 
         width_ = width;
@@ -1327,7 +1343,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final int defaultHeight = (ie ? 15 : 20);
 
         final String h = super.jsxGet_height();
-        int elementHeight = pixelValue(h);
+        int elementHeight = pixelValue(getElement(), new CssValue() {
+            @Override public String get(final ComputedCSSStyleDeclaration style) {
+                return style.getStyleAttribute("height", true);
+            }
+        });
         if (elementHeight == 0 || (ie && elementHeight < defaultHeight)) {
             elementHeight = defaultHeight;
         }
@@ -1740,8 +1760,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     /**
      * Returns the specified length value as a pixel length value, as long as we're not emulating IE.
+     * This method does <b>NOT</b> handle percentages correctly; use {@link #pixelValue(HTMLElement, CssValue)}
+     * if you need percentage support).
      * @param value the length value to convert to a pixel length value
      * @return the specified length value as a pixel length value
+     * @see #pixelString(HTMLElement, CssValue)
      */
     protected String pixelString(final String value) {
         if (getBrowserVersion().isIE()) {
@@ -1751,6 +1774,26 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return value;
         }
         return pixelValue(value) + "px";
+    }
+
+    /**
+     * Returns the specified length CSS attribute value value as a pixel length value, as long as
+     * we're not emulating IE. If the specified CSS attribute value is a percentage, this method
+     * uses the specified value object to recursively retrieve the base (parent) CSS attribute value.
+     * @param element the element for which the CSS attribute value is to be retrieved
+     * @param value the CSS attribute value which is to be retrieved
+     * @return the specified length CSS attribute value as a pixel length value
+     * @see #pixelString(String)
+     */
+    protected String pixelString(final HTMLElement element, final CssValue value) {
+        final String s = value.get(element);
+        if (getBrowserVersion().isIE()) {
+            return s;
+        }
+        if (s.endsWith("px")) {
+            return s;
+        }
+        return pixelValue(element, value) + "px";
     }
 
 }

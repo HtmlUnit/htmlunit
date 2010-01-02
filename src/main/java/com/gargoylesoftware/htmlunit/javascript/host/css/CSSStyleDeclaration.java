@@ -4527,10 +4527,34 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     }
 
     /**
-     * Converts the specified length string value into an integer number of pixels.
+     * Converts the specified length CSS attribute value into an integer number of pixels. If the
+     * specified CSS attribute value is a percentage, this method uses the specified value object
+     * to recursively retrieve the base (parent) CSS attribute value.
+     * @param element the element for which the CSS attribute value is to be retrieved
+     * @param value the CSS attribute value which is to be retrieved
+     * @return the integer number of pixels corresponding to the specified length CSS attribute value
+     * @see #pixelValue(String)
+     */
+    protected static int pixelValue(final HTMLElement element, final CssValue value) {
+        final String s = value.get(element);
+        final int i = NumberUtils.toInt(s.replaceAll("(\\d+).*", "$1"), 0);
+        if (s.endsWith("%")) {
+            final HTMLElement parent = element.getParentHTMLElement();
+            return (int) ((i / 100D) * pixelValue(parent, value));
+        }
+        else {
+            return pixelValue(s);
+        }
+    }
+
+    /**
+     * Converts the specified length string value into an integer number of pixels. This method does
+     * <b>NOT</b> handle percentages correctly; use {@link #pixelValue(HTMLElement, CssValue)} if you
+     * need percentage support).
      * @param value the length string value to convert to an integer number of pixels
      * @return the integer number of pixels corresponding to the specified length string value
      * @see <a href="http://htmlhelp.com/reference/css/units.html">CSS Units</a>
+     * @see #pixelValue(HTMLElement, CssValue)
      */
     protected static int pixelValue(final String value) {
         final int i = NumberUtils.toInt(value.replaceAll("(\\d+).*", "$1"), 0);
@@ -4558,12 +4582,31 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         else if (value.endsWith("pc")) {
             return i * 24;
         }
-        else if (value.endsWith("%")) {
-            return i;
-        }
         else {
             return i;
         }
+    }
+
+    /**
+     * Encapsulates the retrieval of a style attribute, given a DOM element from which to retrieve it.
+     */
+    protected abstract static class CssValue {
+        /**
+         * Returns the CSS attribute value for the specified element.
+         * @param element the element for which the CSS attribute value is to be retrieved
+         * @return the CSS attribute value for the specified element
+         */
+        public final String get(final HTMLElement element) {
+            final ComputedCSSStyleDeclaration style = element.jsxGet_currentStyle();
+            final String value = get(style);
+            return value;
+        }
+        /**
+         * Returns the CSS attribute value from the specified computed style.
+         * @param style the computed style from which to retrieve the CSS attribute value
+         * @return the CSS attribute value from the specified computed style
+         */
+        public abstract String get(final ComputedCSSStyleDeclaration style);
     }
 
     /**
