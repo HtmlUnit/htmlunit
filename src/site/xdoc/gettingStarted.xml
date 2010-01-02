@@ -1,20 +1,20 @@
 <?xml version="1.0"?>
-<document>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
 
     <properties>
         <title>Getting Started with HtmlUnit</title>
         <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
-        <revision>$Revision$</revision>
     </properties>
 
     <body>
-        <section>
+        <section name="Introduction">
             <p>
                 The <a href="dependencies.html">dependencies page</a> lists all the jars that you will need
                 to have in your classpath.
             </p>
             <p>
-                The class <javadoc>com.gargoylesoftware.htmlunit.WebClient</javadoc> is the
+                The class com.gargoylesoftware.htmlunit.WebClient is the
                 main starting point.  This simulates a web browser and will be used to execute
                 all of the tests.
             </p>
@@ -26,7 +26,7 @@
                 In the first sample, we create the web client and have it load the homepage from the HtmlUnit website.
                 We then verify that this page has the correct title.  Note that getPage() can return different types
                 of pages based on the content type of the returned data.  In this case we are expecting a content
-                type of text/html so we cast the result to an <javadoc>com.gargoylesoftware.htmlunit.html.HtmlPage</javadoc>.
+                type of text/html so we cast the result to an com.gargoylesoftware.htmlunit.html.HtmlPage.
             </p>
             <source><![CDATA[
 @Test
@@ -46,7 +46,7 @@ public void homePage() throws Exception {
         <section name="Imitating a specific browser">
             <p>
                 Often you will want to simulate a specific browser.  This is done by passing a
-                <javadoc>com.gargoylesoftware.htmlunit.BrowserVersion</javadoc> into the WebClient constructor.
+                com.gargoylesoftware.htmlunit.BrowserVersion into the WebClient constructor.
                 Constants have been provided for some common browsers but you can create your own specific
                 version by instantiating a BrowserVersion.
             </p>

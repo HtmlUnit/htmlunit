@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
-<document>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
 
     <properties>
         <title>HtmlUnit Coding Conventions</title>
         <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
-        <revision>$Revision$</revision>
     </properties>
 
     <body>
-        <section>
+        <section name="Introduction">
             <p>
                 This page outlines the coding conventions used in HtmlUnit.  If you wish to contribute
                 code to this project then the code will be expected to follow these conventions.

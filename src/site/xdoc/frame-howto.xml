@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
-<document>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
 
     <properties>
         <title>Frames Tutorial</title>
         <author>Ahmed Ashour</author>
-        <revision>$Revision$</revision>
     </properties>
 
     <body>
-        <section>
+        <section name="Example I">
             <p>
                 Getting the page inside &lt;frame&gt; element or &lt;iframe&gt; element can be done by using
                 HtmlPage.getFrames().<br/>
@@ -28,7 +28,7 @@ final List<FrameWindow> window = page.getFrames();
 final HtmlPage pageTwo = (HtmlPage) window.get(0).getEnclosedPage();]]></source>
         </section>
 
-        <section>
+        <section name="Example II">
             <p>
                 Another example that navigates API docs to get a desired page of a class:
             </p>

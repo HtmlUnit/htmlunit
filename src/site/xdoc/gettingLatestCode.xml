@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<document>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
 
     <properties>
         <title>Getting latest HtmlUnit build</title>
@@ -7,11 +8,10 @@
         <author email="BarnabyCourt@users.sourceforge.net">BarnabyCourt</author>
         <author email="mguillem@users.sourceforge.net">Marc Guillemot</author>
         <author email="asashour@users.sourceforge.net">Ahmed Ashour</author>
-        <revision>$Revision$</revision>
     </properties>
 
     <body>
-        <section>
+        <section name="Introduction">
             <p>
                 At any time, all the code in SVN should be compilable and should pass all the unit tests.  There
                 is no guarantee that it will be full featured - this is a work in progress.
@@ -77,9 +77,11 @@ svn co https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit .]]>
             <p>
                 This will run only the specified test class.
             </p>
-            Tests currently assume that port 12345 is free on the machine, 
-            if you have <tt>java.net.BindException: Address already in use: JVM_Bind</tt>,
-            then set the system property <code>htmlunit.test.port</code> e.g. <code>-Dhtmlunit.test.port=10101</code>.
+            <p>
+                Tests currently assume that port 12345 is free on the machine, 
+                if you have <tt>java.net.BindException: Address already in use: JVM_Bind</tt>,
+                then set the system property <code>htmlunit.test.port</code> e.g. <code>-Dhtmlunit.test.port=10101</code>.
+            </p>
         </section>
 
         <section name="Packaging">
