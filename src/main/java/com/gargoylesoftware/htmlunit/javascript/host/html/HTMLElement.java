@@ -812,7 +812,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Replace all children elements of this element with the supplied value.
-     * @param value - the new value for the contents of this node
+     * @param value the new value for the contents of this node
      */
     public void jsxSet_innerHTML(final Object value) {
         final DomNode domNode = getDomNodeOrDie();
@@ -843,7 +843,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Replace all children elements of this element with the supplied value.
-     * @param value - the new value for the contents of this node
+     * @param value the new value for the contents of this node
      */
     public void jsxSet_innerText(final String value) {
         setInnerText(Context.toString(value));
@@ -872,7 +872,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Replace all children elements of this element with the supplied value.
-     * @param value - the new value for the contents of this node
+     * @param value the new value for the contents of this node
      */
     @Override
     public void jsxSet_textContent(final Object value) {
@@ -882,8 +882,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Replace all children elements of this element with the supplied value.
      * Sets the outerHTML of the node.
+     * @param value the new value for replacing this node
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534310.aspx">MSDN documentation</a>
-     * @param value - the new value for replacing this node
      */
     public void jsxSet_outerHTML(final String value) {
         final DomNode domNode = getDomNodeOrDie();
