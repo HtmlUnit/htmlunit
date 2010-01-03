@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.util.StringUtils.containsCaseInsensitive;
-import static com.gargoylesoftware.htmlunit.util.StringUtils.formatHttpDate;
 import static com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate;
 import static com.gargoylesoftware.htmlunit.util.UrlUtils.getUrlWithNewHost;
 import static com.gargoylesoftware.htmlunit.util.UrlUtils.getUrlWithNewPort;
@@ -23,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.util.UrlUtils.getUrlWithNewPort;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
@@ -112,6 +112,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
     /** The cookie name used for cookies with no name (HttpClient doesn't like empty names). */
     public static final String EMPTY_COOKIE_NAME = "HTMLUNIT_EMPTY_COOKIE";
+
+    /** The format to use for the <tt>lastModified</tt> attribute. */
+    private static final String LAST_MODIFIED_DATE_FORMAT = "MM/dd/yyyy HH:mm:ss";
 
     /**
      * Map<String, Class> which maps strings a caller may use when calling into
@@ -318,20 +321,17 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             if (stringDate == null) {
                 stringDate = webResponse.getResponseHeaderValue("Date");
             }
-
             final Date lastModified = parseDateOrNow(stringDate);
-            lastModified_ = formatHttpDate(lastModified);
+            lastModified_ = new SimpleDateFormat(LAST_MODIFIED_DATE_FORMAT).format(lastModified);
         }
-
         return lastModified_;
     }
 
-    private Date parseDateOrNow(final String stringDate) {
+    private static Date parseDateOrNow(final String stringDate) {
         final Date date = parseHttpDate(stringDate);
         if (date == null) {
             return new Date();
         }
-
         return date;
     }
 

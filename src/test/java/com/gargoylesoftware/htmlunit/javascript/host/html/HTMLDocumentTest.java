@@ -17,11 +17,15 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.ScriptException;
@@ -830,4 +834,26 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Regression test for bug 2919853 (format of <tt>document.lastModified</tt> was incorrect).
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void lastModified_format() throws Exception {
+        final String html
+            = "<html><body onload='document.getElementById(\"i\").value = document.lastModified'>\n"
+            + "<input id='i'></input></body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        final String lastModified = driver.findElement(By.id("i")).getValue();
+
+        try {
+            new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").parse(lastModified);
+        }
+        catch (final ParseException e) {
+            fail(e.getMessage());
+        }
+    }
+
 }

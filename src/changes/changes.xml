@@ -6,16 +6,19 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration preparation">
+            <action type="update" dev="sdanig">
+                INCOMPATIBLE CHANGES (HttpClient 4 migration preparation): use internal NameValuePair class in the public
+                APIs (rather than HttpClient's NameValuePair class); use internal Cookie class in the public APIs (rather
+                than HttpClient's Cookie class).
+            </action>
+            <action type="fix" dev="sdanig" issue="2919853" due-to="Richard Eggert">
+                JavaScript: fix format of document.lastModified attribute.
+            </action>
             <action type="fix" dev="asashour" issue="2903679">
                 JavaScript: fix XMLHttpRequest with empty body of 'PUT' method.
             </action>
             <action type="fix" dev="asashour">
                 JavaScript: allow setting element.width and .height to a value that ends with 'px'.
-            </action>
-            <action type="update" dev="sdanig">
-                INCOMPATIBLE CHANGES (HttpClient 4 migration preparation): use internal NameValuePair class in the public
-                APIs (rather than HttpClient's NameValuePair class); use internal Cookie class in the public APIs (rather
-                than HttpClient's Cookie class).
             </action>
             <action type="fix" dev="sdanig">
                 JavaScript: fix computed element widths and heights when percentages are involved in the CSS.
