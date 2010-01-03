@@ -32,7 +32,7 @@
     <groupId>net.sourceforge.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
   </rootModule>
-  <goals>install -Dmaven.test.failure.ignore=false -Dhtmlunit.test.port=12347 -DwithoutLibs</goals>
+  <goals>clean install -Dmaven.test.failure.ignore=false -Dhtmlunit.test.port=12347 -DwithoutLibs</goals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
   <usePrivateRepository>false</usePrivateRepository>
