@@ -17,7 +17,9 @@ package com.gargoylesoftware.htmlunit.libraries;
 import static org.junit.Assert.assertNotNull;
 
 import java.net.URL;
+import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -61,6 +63,7 @@ public class TinyMceTest extends WebDriverTestCase {
         test("basic", 89, 0);
     }
 
+    @SuppressWarnings("unchecked")
     private void test(final String fileName, final int expectedTotal, final int expectedFailed) throws Exception {
         final URL url = getClass().getClassLoader().getResource("libraries/tinymce/3.2.7/tests/" + fileName + ".html");
         assertNotNull(url);
@@ -74,9 +77,15 @@ public class TinyMceTest extends WebDriverTestCase {
         final int total = Integer.parseInt(totalSpan.asText());
         assertEquals(expectedTotal, total);
 
+        final List<HtmlElement> failures = (List<HtmlElement>) page.getByXPath("//li[@class='fail']");
+        String msg = "";
+        for (HtmlElement failure : failures) {
+            msg += failure.asXml() + "\n\n";
+        }
+
         final HtmlSpan failedSpan = result.getFirstByXPath("span[@class='bad']");
         final int failed = Integer.parseInt(failedSpan.asText());
-        assertEquals(expectedFailed, failed);
+        Assert.assertEquals(msg, expectedFailed, failed);
     }
 
 }
