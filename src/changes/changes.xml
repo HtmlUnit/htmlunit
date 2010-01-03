@@ -11,6 +11,9 @@
                 APIs (rather than HttpClient's NameValuePair class); use internal Cookie class in the public APIs (rather
                 than HttpClient's Cookie class).
             </action>
+            <action type="fix" dev="sdanig" issue="2915453">
+                Redirect limit should apply regardless of whether or not the redirects are to the same URL.
+            </action>
             <action type="fix" dev="sdanig" issue="2912255">
                 JavaScript: fix value of element.offsetTop attribute when element's position is relative.
             </action>

@@ -1342,11 +1342,12 @@ public class WebClient implements Serializable {
     /**
      * Loads a {@link WebResponse} from the server through the WebConnection.
      * @param webRequestSettings settings to use when making the request
+     * @param allowedRedirects the number of allowed redirects remaining
      * @throws IOException if an IO problem occurs
      * @return the resultant {@link WebResponse}
      */
     private WebResponse loadWebResponseFromWebConnection(final WebRequestSettings webRequestSettings,
-        final int nbAllowedRedirections) throws IOException {
+        final int allowedRedirects) throws IOException {
 
         URL url = webRequestSettings.getUrl();
         final HttpMethod method = webRequestSettings.getHttpMethod();
@@ -1404,14 +1405,15 @@ public class WebClient implements Serializable {
         }
 
         // Continue according to the HTTP status code.
-        final int statusCode = webResponse.getStatusCode();
-        if (statusCode == HttpStatus.SC_USE_PROXY) {
+        final int status = webResponse.getStatusCode();
+        if (status == HttpStatus.SC_USE_PROXY) {
             getIncorrectnessListener().notify("Ignoring HTTP status code [305] 'Use Proxy'", this);
         }
-        else if (statusCode >= HttpStatus.SC_MOVED_PERMANENTLY
-            && statusCode <= HttpStatus.SC_TEMPORARY_REDIRECT
-            && statusCode != HttpStatus.SC_NOT_MODIFIED
+        else if (status >= HttpStatus.SC_MOVED_PERMANENTLY
+            && status <= HttpStatus.SC_TEMPORARY_REDIRECT
+            && status != HttpStatus.SC_NOT_MODIFIED
             && isRedirectEnabled()) {
+
             final URL newUrl;
             String locationString = null;
             try {
@@ -1419,44 +1421,34 @@ public class WebClient implements Serializable {
                 newUrl = expandUrl(url, locationString);
             }
             catch (final MalformedURLException e) {
-                getIncorrectnessListener().notify("Got a redirect status code [" + statusCode + " "
+                getIncorrectnessListener().notify("Got a redirect status code [" + status + " "
                     + webResponse.getStatusMessage()
                     + "] but the location is not a valid URL [" + locationString
                     + "]. Skipping redirection processing.", this);
                 return webResponse;
             }
 
-            LOG.debug("Got a redirect status code [" + statusCode + "] new location=[" + locationString + "]");
+            LOG.debug("Got a redirect status code [" + status + "] new location = [" + locationString + "]");
 
-            if (webRequestSettings.getHttpMethod() == HttpMethod.GET
-                    && webResponse.getRequestSettings().getUrl().toExternalForm().equals(locationString)) {
-
-                if (nbAllowedRedirections == 0) {
-                    LOG.warn("Max redirections allowed to the same location reached for ["
-                            + locationString + "]. Skipping redirection.");
-                }
-                else {
-                    LOG.debug("Got a redirect with location same as the page we just loaded. "
-                            + "Nb self redirection allowed: " + nbAllowedRedirections);
-                    return loadWebResponseFromWebConnection(webRequestSettings, nbAllowedRedirections - 1);
-                }
+            if (allowedRedirects == 0) {
+                LOG.warn("Max redirections allowed reached at [" + locationString + "]. Skipping redirection.");
             }
-            else if ((statusCode == HttpStatus.SC_MOVED_PERMANENTLY || statusCode == HttpStatus.SC_TEMPORARY_REDIRECT)
+            else if ((status == HttpStatus.SC_MOVED_PERMANENTLY || status == HttpStatus.SC_TEMPORARY_REDIRECT)
                 && method.equals(HttpMethod.GET)) {
                 final WebRequestSettings wrs = new WebRequestSettings(newUrl);
                 wrs.setRequestParameters(parameters);
                 for (Map.Entry<String, String> entry : webRequestSettings.getAdditionalHeaders().entrySet()) {
                     wrs.setAdditionalHeader(entry.getKey(), entry.getValue());
                 }
-                return loadWebResponse(wrs);
+                return loadWebResponseFromWebConnection(wrs, allowedRedirects - 1);
             }
-            else if (statusCode <= HttpStatus.SC_SEE_OTHER) {
+            else if (status <= HttpStatus.SC_SEE_OTHER) {
                 final WebRequestSettings wrs = new WebRequestSettings(newUrl);
                 wrs.setHttpMethod(HttpMethod.GET);
                 for (Map.Entry<String, String> entry : webRequestSettings.getAdditionalHeaders().entrySet()) {
                     wrs.setAdditionalHeader(entry.getKey(), entry.getValue());
                 }
-                return loadWebResponse(wrs);
+                return loadWebResponseFromWebConnection(wrs, allowedRedirects - 1);
             }
         }
 

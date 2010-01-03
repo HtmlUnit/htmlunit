@@ -16,9 +16,17 @@ package com.gargoylesoftware.htmlunit;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.Servlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.SerializationUtils;
 import org.junit.Test;
@@ -284,4 +292,77 @@ public class WebClient2Test extends WebServerTestCase {
         final ScriptResult result2 = p.executeJavaScript("String(top.foo)");
         assertEquals("undefined", result2.getJavaScriptResult());
     }
+
+    /**
+     * Verifies that a redirect limit kicks in even if the redirects aren't for the same URL
+     * and don't use the same redirect HTTP status code (see bug 2915453).
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void redirectInfinite303And307() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        servlets.put(RedirectServlet307.URL, RedirectServlet307.class);
+        servlets.put(RedirectServlet303.URL, RedirectServlet303.class);
+        startWebServer("./", new String[0], servlets);
+
+        final WebClient client = getWebClient();
+        client.setThrowExceptionOnFailingStatusCode(false);
+
+        final HtmlPage page = client.getPage("http://localhost:" + PORT + RedirectServlet307.URL);
+        final int status = page.getWebResponse().getStatusCode();
+        assertTrue(status == 303 || status == 307);
+    }
+
+    /**
+     * Helper class for {@link #redirectInfinite303And307}.
+     */
+    public static class RedirectServlet extends HttpServlet {
+        private static final long serialVersionUID = -140725579463205715L;
+        private int count_;
+        private int status_;
+        private String location_;
+        /**
+         * Creates a new instance.
+         * @param status the HTTP status to return
+         * @param location the location to redirect to
+         */
+        public RedirectServlet(final int status, final String location) {
+            count_ = 0;
+            status_ = status;
+            location_ = location;
+        }
+        /** {@inheritDoc} */
+        @Override
+        protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
+            count_++;
+            resp.setStatus(status_);
+            resp.setHeader("Location", location_);
+            resp.getWriter().write(status_ + " " + req.getContextPath() + " " + count_);
+        }
+    }
+
+    /**
+     * Helper class for {@link #redirectInfinite303And307}.
+     */
+    public static class RedirectServlet303 extends RedirectServlet {
+        private static final long serialVersionUID = 3744682108187160138L;
+        static final String URL = "/test";
+        /** Creates a new instance. */
+        public RedirectServlet303() {
+            super(303, RedirectServlet307.URL);
+        }
+    }
+
+    /**
+     * Helper class for {@link #redirectInfinite303And307}.
+     */
+    public static class RedirectServlet307 extends RedirectServlet {
+        private static final long serialVersionUID = 3670046341988874716L;
+        static final String URL = "/test2";
+        /** Creates a new instance. */
+        public RedirectServlet307() {
+            super(307, RedirectServlet303.URL);
+        }
+    }
+
 }
