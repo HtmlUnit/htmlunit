@@ -1417,6 +1417,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 }
                 prev = prev.getPreviousSibling();
             }
+            // If the position is relative, we also need to add the specified "top" displacement.
+            if ("relative".equals(p)) {
+                top += pixelValue(t);
+            }
         }
 
         if (includeMargin) {

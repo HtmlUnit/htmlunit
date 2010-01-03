@@ -400,6 +400,34 @@ public class HTMLElement2Test extends WebDriverTestCase {
     }
 
     /**
+     * Regression test for bug 2912255.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "23", "19" })
+    public void offsetTopAndLeftWithRelativePosition() throws Exception {
+        final String html
+            = "<html><body onload='test()'><script language='javascript'>\n"
+            + "  function test() {\n"
+            + "    var inner = document.createElement('div');\n"
+            + "    var outer = document.createElement('div');\n"
+            + "    \n"
+            + "    document.body.appendChild(outer);\n"
+            + "    outer.appendChild(inner);\n"
+            + "    \n"
+            + "    outer.style.position = 'absolute';\n"
+            + "    inner.style.position = 'relative';\n"
+            + "    inner.style.left = '19.0px';\n"
+            + "    inner.style.top = '23.0px';\n"
+            + "    \n"
+            + "    alert(inner.offsetTop);\n"
+            + "    alert(inner.offsetLeft);\n"
+            + "  }\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test

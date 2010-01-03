@@ -11,6 +11,9 @@
                 APIs (rather than HttpClient's NameValuePair class); use internal Cookie class in the public APIs (rather
                 than HttpClient's Cookie class).
             </action>
+            <action type="fix" dev="sdanig" issue="2912255">
+                JavaScript: fix value of element.offsetTop attribute when element's position is relative.
+            </action>
             <action type="fix" dev="sdanig" issue="2919853" due-to="Richard Eggert">
                 JavaScript: fix format of document.lastModified attribute.
             </action>
