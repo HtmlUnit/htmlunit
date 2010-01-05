@@ -21,7 +21,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.0.2</version>
+                <version>2.1</version>
                 <configuration>
                     <!-- Update the links reference in javadoc, PDM and clover plugins when this changes -->
                     <source>1.5</source>
