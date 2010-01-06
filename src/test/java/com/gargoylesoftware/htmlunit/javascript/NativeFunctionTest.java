@@ -56,4 +56,27 @@ public class NativeFunctionTest extends WebDriverTestCase {
         final String html = NativeDateTest.createHTMLTestMethods("function() {}", "toSource");
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Ensure that "arguments" object doesn't see anything from Array's prototype.
+     * This was a bug in Rhino from Head as of 06.01.2010 due to adaptation to ES5 (or to some early state
+     * of the draft).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void arguments_prototype() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "var f1 = function(){};\n"
+            + "var f2 = function(){};\n"
+            + "Object.prototype.myFunction = f1;\n"
+            + "Array.prototype.myFunction = f2;\n"
+            + "var a = (function() { return arguments;})();\n"
+            + "alert(a.myFunction == f1);\n"
+            + "</script></head><body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
