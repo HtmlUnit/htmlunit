@@ -20,7 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
@@ -40,6 +42,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Sudhan Moghe
  * @author Daniel Gredler
  */
+@RunWith(BrowserRunner.class)
 public class AttachmentTest extends WebTestCase {
 
     /**
@@ -56,7 +59,7 @@ public class AttachmentTest extends WebTestCase {
             + "</body></html>";
         final String content2 = "download file contents";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final List<Attachment> attachments = new ArrayList<Attachment>();
         client.setAttachmentHandler(new CollectingAttachmentHandler(attachments));
 
@@ -94,7 +97,7 @@ public class AttachmentTest extends WebTestCase {
     public void filename() throws Exception {
         final String content = "<html>But is it really?</html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
         client.setWebConnection(conn);
         final List<Attachment> attachments = new ArrayList<Attachment>();
