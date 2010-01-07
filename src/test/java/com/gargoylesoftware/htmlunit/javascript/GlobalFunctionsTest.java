@@ -20,7 +20,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Test for functions/properties of the global object.
@@ -33,35 +32,18 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
 
     /**
      * Test for bug <a href="http://sourceforge.net/support/tracker.php?aid=2815674">2815674</a>
-     * due to Rhino bug <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=501972">501972</a>.
+     * due to Rhino bug <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=501972">501972</a>
+     * and for bug <a href="http://sourceforge.net/support/tracker.php?aid=2903514">2903514</a>
+     * due to Rhino bug <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=531436">531436</a>.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("7.89")
+    @Alerts({ "7.89", "7.89" })
     public void parseFloat() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    alert(parseFloat('\\n 7.89 '));\n"
-            + "}\n"
-            + "</script></head><body onload='doTest()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * Test for bug <a href="http://sourceforge.net/support/tracker.php?aid=2903514">2903514</a>
-     * due to Rhino bug <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=531436">531436</a>.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("7.89")
-    @NotYetImplemented
-    public void parseFloat2() throws Exception {
-        final String html
-            = "<html><head><title>foo</title><script>\n"
-            + "function doTest() {\n"
             + "    alert(parseFloat('7.89em'));\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"

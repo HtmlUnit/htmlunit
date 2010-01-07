@@ -99,7 +99,6 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     @Alerts({ "true", "false", "false", "true" })
     public void functionCaller() throws Exception {
         final String html = "<html><head><script>\n"

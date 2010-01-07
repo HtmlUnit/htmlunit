@@ -107,7 +107,6 @@ public class GWTSourceTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     @Alerts({ "true", "function", "function" })
     public void callee() throws Exception {
         final String html

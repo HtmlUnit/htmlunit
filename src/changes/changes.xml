@@ -11,6 +11,15 @@
                 APIs (rather than HttpClient's NameValuePair class); use internal Cookie class in the public APIs (rather
                 than HttpClient's Cookie class).
             </action>
+            <action type="fix" dev="mguillem" issue="2903514">
+                JavaScript: fix parseFloat for values like "40em".
+            </action>
+            <action type="fix" dev="mguillem" issue="2914283">
+                JavaScript: add support for Function.caller.
+            </action>
+            <action type="update" dev="mguillem">
+                Update htmlunit-core-js to Rhino head of 07.01.2010 + custom patches.
+            </action>
             <action type="fix" dev="sdanig" issue="2915453">
                 Redirect limit should apply regardless of whether or not the redirects are to the same URL.
             </action>
@@ -3609,7 +3618,7 @@
             <action type="update" dev="mguillem">
                 JavaScript: default conversion of host objects to string is now "[object Xxxx]" like what Mozilla does
             </action>
-            <action type="update" dev="mguillem" issue="1289462" due-to="Lothar Märkle">
+            <action type="update" dev="mguillem" issue="1289462" due-to="Lothar Mï¿½rkle">
                 DomNode.asXml() now produces correct xml encoding special characters.
             </action>
             <action type="update" dev="mguillem" issue="1267106" due-to="Bruce Faulkner">
