@@ -52,7 +52,7 @@ public final class WebClientUtils {
         final Main main = Main.mainEmbedded(cf, sp, "HtmlUnit JavaScript Debugger");
 
         final SourceProvider sourceProvider = new SourceProvider() {
-            public String getSource(final DebuggableScript script, final String knownSource) {
+            public String getSource(final DebuggableScript script) {
                 String sourceName = script.getSourceName();
                 if (sourceName.startsWith("script in ")) {
                     sourceName = StringUtils.substringBetween(sourceName, "script in ", " from");
@@ -63,7 +63,7 @@ public final class WebClientUtils {
                         }
                     }
                 }
-                return knownSource;
+                return null;
             }
         };
         main.setSourceProvider(sourceProvider);
