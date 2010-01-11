@@ -306,11 +306,13 @@ public class WebClient2Test extends WebServerTestCase {
         startWebServer("./", new String[0], servlets);
 
         final WebClient client = getWebClient();
-        client.setThrowExceptionOnFailingStatusCode(false);
 
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + RedirectServlet307.URL);
-        final int status = page.getWebResponse().getStatusCode();
-        assertTrue(status == 303 || status == 307);
+        try {
+            client.getPage("http://localhost:" + PORT + RedirectServlet307.URL);
+        }
+        catch (final Exception e) {
+            assertTrue(e.getMessage(), e.getMessage().contains("Too much redirect"));
+        }
     }
 
     /**

@@ -34,6 +34,16 @@ public class FailingHttpStatusCodeException extends RuntimeException {
      * @param failingResponse the failing response
      */
     public FailingHttpStatusCodeException(final WebResponse failingResponse) {
+        this(buildMessage(failingResponse), failingResponse);
+    }
+
+    /**
+     * Creates an instance.
+     * @param message the message
+     * @param failingResponse the failing response
+     */
+    FailingHttpStatusCodeException(final String message, final WebResponse failingResponse) {
+        super(message);
         response_ = failingResponse;
     }
 
@@ -53,14 +63,10 @@ public class FailingHttpStatusCodeException extends RuntimeException {
         return response_.getStatusMessage();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMessage() {
-        final int code = getStatusCode();
-        final String msg = getStatusMessage();
-        final URL url = getResponse().getRequestSettings().getUrl();
+    private static String buildMessage(final WebResponse failingResponse) {
+        final int code = failingResponse.getStatusCode();
+        final String msg = failingResponse.getStatusMessage();
+        final URL url = failingResponse.getRequestSettings().getUrl();
         return code + " " + msg + " for " + url;
     }
 

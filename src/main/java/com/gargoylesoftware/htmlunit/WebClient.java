@@ -1431,7 +1431,8 @@ public class WebClient implements Serializable {
             LOG.debug("Got a redirect status code [" + status + "] new location = [" + locationString + "]");
 
             if (allowedRedirects == 0) {
-                LOG.warn("Max redirections allowed reached at [" + locationString + "]. Skipping redirection.");
+                throw new FailingHttpStatusCodeException("Too much redirect for "
+                    + webResponse.getRequestSettings().getUrl(), webResponse);
             }
             else if ((status == HttpStatus.SC_MOVED_PERMANENTLY || status == HttpStatus.SC_TEMPORARY_REDIRECT)
                 && method.equals(HttpMethod.GET)) {

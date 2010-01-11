@@ -11,6 +11,9 @@
                 APIs (rather than HttpClient's NameValuePair class); use internal Cookie class in the public APIs (rather
                 than HttpClient's Cookie class).
             </action>
+            <action type="update" dev="mguillem">
+                Throw exception with explicit message when maximum of allowed HTTP redirects is reached.
+            </action>
             <action type="fix" dev="mguillem" issue="2903514">
                 JavaScript: fix parseFloat for values like "40em".
             </action>
