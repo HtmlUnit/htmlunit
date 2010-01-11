@@ -521,8 +521,12 @@ public class WebClientTest extends WebServerTestCase {
         final HtmlPage page1 = getPageWithRedirectionsSameURL(1);
         assertEquals("Second", page1.getTitleText());
 
-        final HtmlPage page2 = getPageWithRedirectionsSameURL(30);
-        assertEquals("Redirect needed 21", page2.getWebResponse().getStatusMessage());
+        try {
+            getPageWithRedirectionsSameURL(30);
+        }
+        catch (final Exception e) {
+            assertTrue(e.getMessage(), e.getMessage().contains("Too much redirect"));
+        }
     }
 
     private HtmlPage getPageWithRedirectionsSameURL(final int nbRedirections) throws Exception {
