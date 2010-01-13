@@ -16,6 +16,10 @@ package com.gargoylesoftware.htmlunit.javascript.background;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.io.PrintStream;
+import java.lang.management.ManagementFactory;
+import java.lang.management.ThreadInfo;
+import java.lang.management.ThreadMXBean;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -171,8 +175,34 @@ public class JavaScriptJobManagerTest extends WebTestCase {
         Assert.assertEquals("new page should load", "Third", newPage.getTitleText());
         Assert.assertEquals("frame should be gone", 0, newPage.getFrames().size());
 
-        mgr.waitForJobs(10000);
         Assert.assertEquals("thread should stop", 0, mgr.getJobCount());
+        mgr.waitForJobs(10000);
+        final int nbJobs = mgr.getJobCount();
+        if (nbJobs != 0) {
+            dumpThreads(System.out);
+        }
+        Assert.assertEquals("thread should stop", 1, mgr.getJobCount());
+    }
+
+    private void dumpThreads(final PrintStream out) {
+        final ThreadMXBean mxBean = ManagementFactory.getThreadMXBean();
+        final ThreadInfo[] threadInfo = mxBean.dumpAllThreads(true, true);
+        for (final ThreadInfo oneInfo : threadInfo) {
+            out.println();
+            out.println("\"" + oneInfo.getThreadName() + "\" " + oneInfo.getThreadState());
+
+            final StackTraceElement[] stackTrace = oneInfo.getStackTrace();
+            boolean first = true;
+            for (final StackTraceElement stackElement : stackTrace) {
+                if (!first) {
+                    out.print("at ");
+                }
+                first = false;
+                out.println(stackElement.getClassName()
+                    + "(" + stackElement.getFileName()
+                    + ":" + stackElement.getLineNumber() + ")");
+            }
+        }
     }
 
     /**
