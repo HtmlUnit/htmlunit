@@ -187,7 +187,7 @@ public class JavaScriptJobManagerTest extends WebTestCase {
     private void dumpThreads(final PrintStream out) {
         final ThreadMXBean mxBean = ManagementFactory.getThreadMXBean();
         final long[] allIds = mxBean.getAllThreadIds();
-        final ThreadInfo[] threadInfo = mxBean.getThreadInfo(allIds, true, true);
+        final ThreadInfo[] threadInfo = mxBean.getThreadInfo(allIds);
         for (final ThreadInfo oneInfo : threadInfo) {
             out.println();
             out.println("\"" + oneInfo.getThreadName() + "\" " + oneInfo.getThreadState());
