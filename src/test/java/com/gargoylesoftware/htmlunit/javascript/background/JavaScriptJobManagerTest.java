@@ -175,7 +175,6 @@ public class JavaScriptJobManagerTest extends WebTestCase {
         Assert.assertEquals("new page should load", "Third", newPage.getTitleText());
         Assert.assertEquals("frame should be gone", 0, newPage.getFrames().size());
 
-        Assert.assertEquals("thread should stop", 0, mgr.getJobCount());
         mgr.waitForJobs(10000);
         final int nbJobs = mgr.getJobCount();
         if (nbJobs != 0) {
@@ -185,6 +184,7 @@ public class JavaScriptJobManagerTest extends WebTestCase {
     }
 
     private void dumpThreads(final PrintStream out) {
+        out.println("Thread dump:");
         final ThreadMXBean mxBean = ManagementFactory.getThreadMXBean();
         final long[] allIds = mxBean.getAllThreadIds();
         final ThreadInfo[] threadInfo = mxBean.getThreadInfo(allIds);
