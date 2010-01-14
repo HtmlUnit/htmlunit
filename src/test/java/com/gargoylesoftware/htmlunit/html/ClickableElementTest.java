@@ -18,12 +18,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link ClickableElement}.
@@ -34,7 +38,8 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class ClickableElementTest extends WebTestCase {
+@RunWith(BrowserRunner.class)
+public class ClickableElementTest extends WebDriverTestCase {
     /**
      * Full page driver for onClick tests.
      *
@@ -44,8 +49,8 @@ public class ClickableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     private void onClickPageTest(final String htmlContent) throws Exception {
-        final String[] expectedAlerts = {"foo"};
-        onClickPageTest(htmlContent, 1, expectedAlerts);
+        setExpectedAlerts("foo");
+        onClickPageTest(htmlContent, 1);
     }
 
     /**
@@ -57,9 +62,9 @@ public class ClickableElementTest extends WebTestCase {
      * @param expectedAlerts array of expected popup values
      * @throws Exception if the test fails
      */
-    private void onClickPageTest(final String htmlContent, final int numClicks, final String[] expectedAlerts)
+    private void onClickPageTest(final String htmlContent, final int numClicks)
         throws Exception {
-        onClickPageTest(htmlContent, numClicks, expectedAlerts, false);
+        onClickPageTest(htmlContent, numClicks, false);
     }
 
         /**
@@ -73,13 +78,12 @@ public class ClickableElementTest extends WebTestCase {
         * @throws Exception if the test fails
         */
     private void onClickPageTest(final String htmlContent, final int numClicks,
-            final String[] expectedAlerts, final boolean exceptionOnError) throws Exception {
-        final BrowserVersion bv = new BrowserVersion("Netscape", "7", "", 7);
-        final WebClient client = new WebClient(bv);
+            final boolean exceptionOnError) throws Exception {
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final WebClient client = getWebClientWithMockWebConnection();
+
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setDefaultResponse(htmlContent);
-        client.setWebConnection(webConnection);
         client.setThrowExceptionOnScriptError(exceptionOnError);
 
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -93,7 +97,7 @@ public class ClickableElementTest extends WebTestCase {
             clickable.click();
         }
 
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
@@ -223,12 +227,12 @@ public class ClickableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "foo0", "foo1" })
     public void testButton_onClickTwice() throws Exception {
-        final String[] expectedAlerts = {"foo0", "foo1"};
         onClickPageTest("<body><form>\n"
                 + "<button id='clickId' onClick='alert(\"foo\" + count++); return false;'>Item</button>\n"
                 + "<script> var count = 0 </script>\n"
-                + "</form></body>\n", 2, expectedAlerts);
+                + "</form></body>\n", 2);
     }
 
     /**
@@ -321,7 +325,7 @@ public class ClickableElementTest extends WebTestCase {
         onClickPageTest("<html><head></head><body>\n"
                 + "<form method='POST'><input type='button' id='clickId' onclick='y()'></form>\n"
                 + "</body></html>",
-                1, new String[0], false);
+                1, false);
     }
 
     /**
@@ -964,11 +968,11 @@ public class ClickableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("foo")
     public void testSetOnClick() throws Exception {
-        final String[] expectedAlerts = {"foo"};
         onClickPageTest("<html><body><form>\n"
                 + "<button type='button' id='clickId' onclick='alert(\"foo\"); onclick=null;'>Item</button>\n"
-                + "</form></body></html>", 2, expectedAlerts);
+                + "</form></body></html>", 2);
     }
 
     /**
@@ -993,6 +997,8 @@ public class ClickableElementTest extends WebTestCase {
 
         final HtmlPage page = loadPage(content);
         final HtmlBody body = page.getHtmlElementById("myBody");
+        // WebDriver has currently no support for double click
+        // (http://code.google.com/p/webdriver/issues/detail?id=161)
         body.dblClick();
         final HtmlTextArea textArea = page.getHtmlElementById("myTextarea");
         assertEquals("click-dblclick-", textArea.getText());
@@ -1002,19 +1008,18 @@ public class ClickableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("1")
     public void clickOnFocus() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form>\n"
             + "    <input type='button' id='textfield1' onfocus='alert(1)'>\n"
             + "</form>\n"
             + "</body></html>";
-        final String[] expectedAlerts = {"1"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
 
-        page.<HtmlElement>getHtmlElementById("textfield1").click();
-        assertEquals(expectedAlerts, collectedAlerts);
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("textfield1")).click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
-
 }
