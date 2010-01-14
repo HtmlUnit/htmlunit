@@ -61,6 +61,16 @@ public class Range extends SimpleScriptable {
         endContainer_ = document;
     }
 
+    Range(final org.w3c.dom.ranges.Range w3cRange) {
+        final DomNode domNodeStartContainer = (DomNode) w3cRange.getStartContainer();
+        startContainer_ = (Node) (domNodeStartContainer).getScriptObject();
+        startOffset_ = w3cRange.getStartOffset();
+
+        final DomNode domNodeEndContainer = (DomNode) w3cRange.getEndContainer();
+        endContainer_ = (Node) (domNodeEndContainer).getScriptObject();
+        endOffset_ = w3cRange.getEndOffset();
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -302,7 +312,7 @@ public class Range extends SimpleScriptable {
      * @return a W3C {@link org.w3c.dom.ranges.Range} version of this object
      */
     public SimpleRange toW3C() {
-        return new SimpleRange(startContainer_.getDomNodeOrDie(), startOffset_,
+        return new SimpleRange(startContainer_.getDomNodeOrNull(), startOffset_,
             endContainer_.getDomNodeOrDie(), endOffset_);
     }
 

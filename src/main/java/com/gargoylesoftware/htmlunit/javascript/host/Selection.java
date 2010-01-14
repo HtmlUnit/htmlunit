@@ -175,12 +175,18 @@ public class Selection extends SimpleScriptable {
      * @param index the index of the range to return
      * @return the range at the specified index
      */
-    public Range jsxFunction_getRangeAt(final int index) {
+    public com.gargoylesoftware.htmlunit.javascript.host.Range jsxFunction_getRangeAt(final int index) {
         final List<Range> ranges = getRanges();
         if (index < 0 || index >= ranges.size()) {
             throw Context.reportRuntimeError("Invalid range index: " + index);
         }
-        return ranges.get(index);
+        final Range range = ranges.get(index);
+        final com.gargoylesoftware.htmlunit.javascript.host.Range jsRange =
+            new com.gargoylesoftware.htmlunit.javascript.host.Range(range);
+        jsRange.setParentScope(getWindow());
+        jsRange.setPrototype(getPrototype(com.gargoylesoftware.htmlunit.javascript.host.Range.class));
+
+        return jsRange;
     }
 
     /**

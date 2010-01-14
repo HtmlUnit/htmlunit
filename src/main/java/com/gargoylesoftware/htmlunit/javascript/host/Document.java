@@ -183,7 +183,8 @@ public class Document extends EventNode {
                 if (page instanceof HtmlPage) {
                     final HtmlPage htmlPage = (HtmlPage) page;
                     final DomNode child = htmlPage.getBody().getFirstChild();
-                    htmlPage.setSelectionRange(new SimpleRange(child, 0));
+                    final DomNode rangeNode = child != null ? child : htmlPage.getBody();
+                    htmlPage.setSelectionRange(new SimpleRange(rangeNode, 0));
                 }
             }
             else if ("off".equalsIgnoreCase(mode)) {

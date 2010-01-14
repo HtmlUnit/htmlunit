@@ -856,4 +856,39 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         }
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "1", "[object HTMLBodyElement]" }, IE = "exception")
+    public void designMode_selectionRange_empty() throws Exception {
+        designMode_selectionRange("");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "1", "[object Text]" }, IE = "exception")
+    public void designMode_selectionRange_text() throws Exception {
+        designMode_selectionRange("hello");
+    }
+
+    private void designMode_selectionRange(final String bodyContent) throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "  try {\n"
+            + "    document.designMode = 'on';\n"
+            + "    var s = window.getSelection();\n"
+            + "    alert(s.rangeCount);\n"
+            + "    alert(s.getRangeAt(0).startContainer);\n"
+            + "  } catch(e) {alert('exception'); }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>" // no \n here!
+            + bodyContent
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

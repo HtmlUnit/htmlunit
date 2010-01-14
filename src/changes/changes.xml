@@ -12,6 +12,12 @@
                 than HttpClient's Cookie class).
             </action>
             <action type="update" dev="mguillem">
+                JavaScript: ensure that elements returned by Selection.getRangeAt are of the right type (FF only).
+            </action>
+            <action type="update" dev="mguillem">
+                JavaScript: document body is selection's start element when designMode='on' is set and body has no child element (FF only).
+            </action>
+            <action type="update" dev="mguillem">
                 Throw exception with explicit message when maximum of allowed HTTP redirects is reached.
             </action>
             <action type="fix" dev="mguillem" issue="2903514">
