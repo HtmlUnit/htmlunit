@@ -202,7 +202,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
     protected boolean isJavaScript(final WebResponse response) {
         final String contentType = response.getContentType();
         return contentType.contains("javascript") || contentType.contains("ecmascript")
-            || (contentType.startsWith("text/") && contentType.contains("js"));
+            || (contentType.startsWith("text/") && contentType.endsWith("js"));
     }
 
     /**
