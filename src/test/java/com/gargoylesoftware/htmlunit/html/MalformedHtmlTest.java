@@ -20,6 +20,8 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Set of tests for ill formed HTML code.
@@ -195,5 +197,35 @@ public class MalformedHtmlTest extends WebTestCase {
 
         final HtmlPage page = loadPageWithAlerts(html);
         assertEquals("foo", page.getTitleText());
+    }
+
+    /**
+    * Regression test for bug 2838901.
+    * @throws Exception if an error occurs
+    */
+    @Test
+    @NotYetImplemented
+    @Alerts(FF = "1", IE = "0")
+    public void missingSingleQuote() throws Exception {
+        final String html = "<html><body>"
+            + "Go to <a href='http://blah.com>blah</a> now."
+            + "<script>alert(document.links.length)</script>"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+    * Regression test for bug 2838901.
+    * @throws Exception if an error occurs
+    */
+    @Test
+    @NotYetImplemented
+    @Alerts(FF = "1", IE = "0")
+    public void missingDoubleQuote() throws Exception {
+        final String html = "<html><body>"
+            + "Go to <a href=\"http://blah.com>blah</a> now."
+            + "<script>alert(document.links.length)</script>"
+            + "</body></html>";
+        loadPageWithAlerts(html);
     }
 }
