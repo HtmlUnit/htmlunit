@@ -410,42 +410,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("Hello There")
-    public void write() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "<title>Test</title>\n"
-            + "<script>\n"
-            + "function test() {\n"
-            + "  document.write('<html><body><scr'+'ipt>alert(\"Hello There\")</scr'+'ipt></body></html>');\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>"
-            + "</body>\n"
-            + "</html>";
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * <a href="https://sourceforge.net/tracker/?func=detail&aid=2855731&group_id=47038&atid=448266">Bug 2855731</a>.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void write_nested() throws Exception {
-        final String html =
-              "<html><body><script>\n"
-            + "var s = '\"<script>alert(1);<\\/scr\" + \"ipt>\"';\n"
-            + "document.write('<script><!--\\ndocument.write(' + s + ');\\n--><\\/script>');\n"
-            + "</script></body></html>";
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(IE = "[object]", FF = "null")
     public void getElementById_caseSensitivity() throws Exception {
         final String html = "<html>\n"
@@ -721,37 +685,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts(html, new URL("http://www.gargoylesoftware.com/"), -1);
-    }
-
-    /**
-     * Caused infinite loop at some point of 2.6 snapshot.
-     * See <a href="http://sourceforge.net/support/tracker.php?aid=2824922">Bug 2824922</a>
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void write2_html_endhtml_in_head() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "document.write('<HTML></HTML>');\n"
-            + "</script>\n"
-            + "</head><body>\n"
-            + "</body></html>\n";
-
-        loadPage2(html);
-    }
-
-    /**
-     * We couldn't document.write() script elements that contained the '<' character...
-     * @exception Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void writeScript() throws Exception {
-        final String html =
-              "<html><body><script>\n"
-            + "  document.write('<scr'+'ipt>alert(1<2)</sc'+'ript>');\n"
-            + "</script></body></html>";
-        loadPageWithAlerts2(html);
     }
 
     /**

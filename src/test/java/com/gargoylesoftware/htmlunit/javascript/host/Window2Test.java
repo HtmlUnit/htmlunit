@@ -21,8 +21,6 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -331,28 +329,6 @@ public class Window2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void open_FF() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function performAction() {\n"
-            + "    actionwindow = window.open('', '1205399746518', "
-            + "'location=no,scrollbars=no,resizable=no,width=200,height=275');\n"
-            + "    actionwindow.document.writeln('Please wait while connecting to server...');\n"
-            + "    actionwindow.focus();\n"
-            + "    actionwindow.close();\n"
-            + "  }\n"
-            + "</script></head><body>\n"
-            + "    <input value='Click Me' type=button onclick='performAction()'>\n"
-            + "</body></html>";
-
-        final WebDriver driver = loadPageWithAlerts2(html);
-        driver.findElement(By.xpath("//input")).click();
-    }
-
     /**
      * @throws Exception if the test fails
      */
@@ -720,5 +696,4 @@ public class Window2Test extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
-
 }

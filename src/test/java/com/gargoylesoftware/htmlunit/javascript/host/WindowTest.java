@@ -489,7 +489,7 @@ public class WindowTest extends WebTestCase {
 
         final String[] expectedAlerts = {"about:blank"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        loadPage(BrowserVersion.FIREFOX_3, content, collectedAlerts);
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
 
@@ -758,32 +758,6 @@ public class WindowTest extends WebTestCase {
 
         final String[] expectedAlerts = {"null", "one", "two", "three"};
         assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void aboutURL() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection =
-            new MockWebConnection();
-        final String firstContent =
-            "<html><body><script language='JavaScript'>\n"
-            + "w2 = window.open('about:blank', 'AboutBlank');\n"
-            + "w2.document.open();\n"
-            + "w2.document.write('<html><head><title>hello</title></head><body></body></html>');\n"
-            + "w2.document.close();\n"
-            + "</script></body></html>";
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webClient.setWebConnection(webConnection);
-
-        webClient.getPage(URL_FIRST);
-        final WebWindow webWindow = webClient.getWebWindowByName("AboutBlank");
-        assertNotNull(webWindow);
-
-        //  final HtmlPage page = (HtmlPage) webWindow.getEnclosedPage();
-        //  assertEquals("<html><head><title>hello</title></head><body></body></html>",page.getDocument().toString());
     }
 
     /**
@@ -1345,7 +1319,7 @@ public class WindowTest extends WebTestCase {
         final String[] expectedAlerts = {"form1", "form2", "DIV"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        loadPage(BrowserVersion.FIREFOX_3, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1463,7 +1437,7 @@ public class WindowTest extends WebTestCase {
         final String[] expectedAlerts = {"false", "true", "false", "true", "test1", "test2", "onload"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        loadPage(BrowserVersion.FIREFOX_3, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1606,7 +1580,7 @@ public class WindowTest extends WebTestCase {
         final List<String> expectedAlerts = Collections.nCopies(4, "number");
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        loadPage(BrowserVersion.FIREFOX_3, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1869,7 +1843,7 @@ public class WindowTest extends WebTestCase {
         testOpenWindow_refererHeader(BrowserVersion.INTERNET_EXPLORER_6, headerIE);
         testOpenWindow_refererHeader(BrowserVersion.INTERNET_EXPLORER_7, headerIE);
         final String headerFF = URL_FIRST.toString();
-        testOpenWindow_refererHeader(BrowserVersion.FIREFOX_2, headerFF);
+        testOpenWindow_refererHeader(BrowserVersion.FIREFOX_3, headerFF);
     }
 
     /**
@@ -2015,7 +1989,7 @@ public class WindowTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_3, content, collectedAlerts);
         page.<HtmlElement>getHtmlElementById("theDiv").click();
 
         final String[] expectedAlerts = {"123", "captured"};
@@ -2027,7 +2001,7 @@ public class WindowTest extends WebTestCase {
      */
     @Test
     public void getComputedStyle() throws Exception {
-        testGetComputedStyle(BrowserVersion.FIREFOX_2);
+        testGetComputedStyle(BrowserVersion.FIREFOX_3);
         try {
             testGetComputedStyle(BrowserVersion.INTERNET_EXPLORER_6);
             fail("'getComputedStyle' is not defined for IE");
@@ -2073,7 +2047,7 @@ public class WindowTest extends WebTestCase {
             + "</html>";
         final String[] expectedAlerts = {"red"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
