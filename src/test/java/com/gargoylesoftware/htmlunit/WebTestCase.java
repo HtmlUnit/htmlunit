@@ -84,6 +84,11 @@ public abstract class WebTestCase {
     public static final URL URL_THIRD;
 
     /**
+     * The content type for JavaScript.
+     */
+    public static final String JAVASCRIPT_MIME_TYPE = "application/javascript";
+
+    /**
      * The name of the system property used to determine if files should be generated
      * or not in {@link #createTestPageForRealBrowserIfNeeded(String,List)}.
      */

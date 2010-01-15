@@ -252,6 +252,7 @@ public class SimpleWebDriverTest extends WebDriverTestCase {
             + "    }\n"
             + "  </script>\n"
             + "</head><body>\n"
+            + "  <textarea id='myTextarea' cols='80' rows='10'></textarea>\n"
             + "  <script event='onload' for='window'>\n"
             + "    log('onload for window')\n"
             + "  </script>\n"
@@ -263,7 +264,6 @@ public class SimpleWebDriverTest extends WebDriverTestCase {
             + "  <script event='onclick' for='document.all.div2'>\n"
             + "    log('onclick for div2')\n"
             + "  </script>\n"
-            + "  <textarea id='myTextarea' cols='80' rows='10'></textarea>\n"
             + "</body></html>";
 
         final WebDriver webDriver = loadPageWithAlerts2(html);
@@ -274,7 +274,7 @@ public class SimpleWebDriverTest extends WebDriverTestCase {
             expected = "onload for window,onclick for div1,";
         }
         else {
-            expected = "";
+            expected = "onload for window,";
         }
         assertEquals(expected, webDriver.findElement(By.id("myTextarea")).getValue());
     }

@@ -11,6 +11,9 @@
                 APIs (rather than HttpClient's NameValuePair class); use internal Cookie class in the public APIs (rather
                 than HttpClient's Cookie class).
             </action>
+            <action type="fix" dev="mguillem">
+                JavaScript: execute script with event attribute only when value is "onload" (FF).
+            </action>
             <action type="fix" dev="mguillem" issue="2930676">
                 DomNode.asText(): H1, H2, H3, H4, H5 and H6 are blocks.
             </action>

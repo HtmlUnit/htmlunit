@@ -267,34 +267,31 @@ public class HtmlScript extends HtmlElement {
         final DomCharacterData textNode = (DomCharacterData) getFirstChild();
         final String forr = getHtmlForAttribute();
         String event = getEventAttribute();
+        // The event name can be like "onload" or "onload()".
+        if (event.endsWith("()")) {
+            event = event.substring(0, event.length() - 2);
+        }
 
         final String scriptCode = textNode.getData();
-        if (event != ATTRIBUTE_NOT_DEFINED && forr != ATTRIBUTE_NOT_DEFINED) {
-            // The event name can be like "onload" or "onload()".
-            if (event.endsWith("()")) {
-                event = event.substring(0, event.length() - 2);
+        if (ie && event != ATTRIBUTE_NOT_DEFINED && forr != ATTRIBUTE_NOT_DEFINED) {
+            if ("window".equals(forr)) {
+                // everything fine, accepted by IE and FF
+                final Window window = (Window) getPage().getEnclosingWindow().getScriptObject();
+                final BaseFunction function = new EventHandler(this, event, scriptCode);
+                window.jsxFunction_attachEvent(event, function);
             }
-
-            if (ie) {
-                if ("window".equals(forr)) {
-                    // everything fine, accepted by IE and FF
-                    final Window window = (Window) getPage().getEnclosingWindow().getScriptObject();
-                    final BaseFunction function = new EventHandler(this, event, scriptCode);
-                    window.jsxFunction_attachEvent(event, function);
+            else {
+                try {
+                    final HtmlElement elt = ((HtmlPage) getPage()).getHtmlElementById(forr);
+                    elt.setEventHandler(event, scriptCode);
                 }
-                else {
-                    try {
-                        final HtmlElement elt = ((HtmlPage) getPage()).getHtmlElementById(forr);
-                        elt.setEventHandler(event, scriptCode);
-                    }
-                    catch (final ElementNotFoundException e) {
-                        LOG.warn("<script for='" + forr + "' ...>: no element found with id \""
-                                + forr + "\". Ignoring.");
-                    }
+                catch (final ElementNotFoundException e) {
+                    LOG.warn("<script for='" + forr + "' ...>: no element found with id \""
+                            + forr + "\". Ignoring.");
                 }
             }
         }
-        else {
+        else if (forr == ATTRIBUTE_NOT_DEFINED || "onload".equals(event)) {
             final String url = getPage().getWebResponse().getRequestSettings().getUrl().toExternalForm();
             final int line1 = getStartLineNumber();
             final int line2 = getEndLineNumber();

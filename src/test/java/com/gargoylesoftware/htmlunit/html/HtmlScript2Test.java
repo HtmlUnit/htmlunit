@@ -101,7 +101,7 @@ public class HtmlScript2Test extends WebTestCase {
 
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
-        conn.setResponse(URL_SECOND, js, "text/javascript");
+        conn.setResponse(URL_SECOND, js, JAVASCRIPT_MIME_TYPE);
         client.setWebConnection(conn);
 
         final List<String> actual = new ArrayList<String>();
@@ -167,6 +167,7 @@ public class HtmlScript2Test extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("hello")
     public void testAsXml() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -174,16 +175,11 @@ public class HtmlScript2Test extends WebTestCase {
             + "    alert('hello');\n"
             + "</script></body></html>";
 
-        final String[] expectedAlerts = {"hello"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        final HtmlPage page = loadPageWithAlerts(html);
 
         // asXml() should be reusable
         final String xml = page.asXml();
-        collectedAlerts.clear();
-        loadPage(xml, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(xml);
     }
 
     /**
@@ -262,7 +258,7 @@ public class HtmlScript2Test extends WebTestCase {
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
         final ArrayList<NameValuePair> headers = new ArrayList<NameValuePair>();
-        conn.setResponse(URL_SECOND, (String) null, SC_NO_CONTENT, "No Content", "text/javascript", headers);
+        conn.setResponse(URL_SECOND, (String) null, SC_NO_CONTENT, "No Content", JAVASCRIPT_MIME_TYPE, headers);
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
     }
@@ -288,7 +284,7 @@ public class HtmlScript2Test extends WebTestCase {
             + "    document.body.insertBefore(s2, document.body.firstChild);\n"
             + "    \n"
             + "    var s3 = document.createElement('script');\n"
-            + "    s3.src = '" + URL_SECOND + "';\n"
+            + "    s3.src = 'script.js';\n"
             + "    if(s3.addEventListener) s3.addEventListener('load', function(){alert('z')}, false);\n"
             + "    document.body.insertBefore(s3, document.body.firstChild);\n"
             + "  }\n"
@@ -296,15 +292,9 @@ public class HtmlScript2Test extends WebTestCase {
             + "</head>\n"
             + "<body onload='test()'></body>\n"
             + "</html>";
-        final WebClient client = getWebClient();
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
-        conn.setResponse(URL_SECOND, "", "text/javascript");
-        client.setWebConnection(conn);
-        final List<String> actual = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(actual));
-        client.getPage(URL_FIRST);
-        assertEquals(getExpectedAlerts(), actual);
+
+        getMockWebConnection().setDefaultResponse("", JAVASCRIPT_MIME_TYPE);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -369,9 +359,9 @@ public class HtmlScript2Test extends WebTestCase {
         client.setThrowExceptionOnFailingStatusCode(throwOnFailingStatusCode);
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
-        conn.setResponse(URL_SECOND, "var foo;", "text/javascript");
-        conn.setResponse(URL_THIRD, "varrrr foo;", "text/javascript");
-        conn.setResponse(fourOhFour, "", 404, "Missing", "text/javascript", new ArrayList< NameValuePair >());
+        conn.setResponse(URL_SECOND, "var foo;", JAVASCRIPT_MIME_TYPE);
+        conn.setResponse(URL_THIRD, "varrrr foo;", JAVASCRIPT_MIME_TYPE);
+        conn.setResponse(fourOhFour, "", 404, "Missing", JAVASCRIPT_MIME_TYPE, new ArrayList< NameValuePair >());
         client.setWebConnection(conn);
         final List<String> actual = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(actual));
