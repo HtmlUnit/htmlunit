@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -242,6 +246,18 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * Creates a new clipping region.
      */
     public void jsxFunction_clip() {
+        //empty
+    }
+
+    /**
+     * Draws images onto the canvas.
+     * @param context the JavaScript context
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method
+     * @param function the function
+     */
+    public static void jsxFunction_drawImage(
+            final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
         //empty
     }
 }

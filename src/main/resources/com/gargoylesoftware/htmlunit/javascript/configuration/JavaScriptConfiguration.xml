@@ -68,6 +68,7 @@
         <function name="clip"/>
         <function name="closePath"/>
         <function name="createLinearGradient"/>
+        <function name="drawImage"/>
         <function name="fill"/>
         <function name="fillRect"/>
         <function name="lineTo"/>
