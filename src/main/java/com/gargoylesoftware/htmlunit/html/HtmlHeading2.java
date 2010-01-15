@@ -57,4 +57,12 @@ public class HtmlHeading2 extends HtmlElement {
     public final String getAlignAttribute() {
         return getAttribute("align");
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isBlock() {
+        return true;
+    }
 }

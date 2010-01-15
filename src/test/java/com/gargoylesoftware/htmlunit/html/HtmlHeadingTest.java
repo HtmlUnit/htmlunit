@@ -55,4 +55,38 @@ public class HtmlHeadingTest extends WebDriverTestCase {
             assertTrue(element instanceof HtmlHeading2);
         }
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asText() throws Exception {
+        final String html = "<html><head>\n"
+            + "</head><body>\n"
+            + "begin"
+            + "<h1>in h1</h1>after h1\n"
+            + "<h2>in h2</h2>after h2\n"
+            + "<h3>in h3</h3>after h3\n"
+            + "<h4>in h4</h4>after h4\n"
+            + "<h5>in h5</h5>after h5\n"
+            + "<h6>in h6</h6>after h6\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final String expectedText = "begin" + LINE_SEPARATOR
+            + "in h1" + LINE_SEPARATOR
+            + "after h1" + LINE_SEPARATOR
+            + "in h2" + LINE_SEPARATOR
+            + "after h2" + LINE_SEPARATOR
+            + "in h3" + LINE_SEPARATOR
+            + "after h3" + LINE_SEPARATOR
+            + "in h4" + LINE_SEPARATOR
+            + "after h4" + LINE_SEPARATOR
+            + "in h5" + LINE_SEPARATOR
+            + "after h5" + LINE_SEPARATOR
+            + "in h6" + LINE_SEPARATOR
+            + "after h6";
+
+        assertEquals(expectedText, page.asText());
+    }
 }
