@@ -47,7 +47,7 @@ public class HtmlHorizontalRuleTest extends WebTestCase {
 
         final String[] expectedAlerts = {"[object HTMLHRElement]"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
         assertTrue(HtmlHorizontalRule.class.isInstance(page.getHtmlElementById("myId")));
         assertEquals(expectedAlerts, collectedAlerts);
     }

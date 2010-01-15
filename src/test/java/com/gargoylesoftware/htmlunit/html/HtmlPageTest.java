@@ -1253,7 +1253,7 @@ public class HtmlPageTest extends WebServerTestCase {
             + "</body></html>";
 
         final String secondContent = "<html><body></body></html>";
-        final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
+        final WebClient client = new WebClient(BrowserVersion.FIREFOX_3);
 
         final URL secondURL = new URL("http://second/");
         final MockWebConnection webConnection = new MockWebConnection();
@@ -1677,8 +1677,8 @@ public class HtmlPageTest extends WebServerTestCase {
     public void testOnbeforeunloadHandler() throws Exception {
         testOnbeforeunloadHandler(BrowserVersion.INTERNET_EXPLORER_7, false, "first");
         testOnbeforeunloadHandler(BrowserVersion.INTERNET_EXPLORER_7, true, "second");
-        testOnbeforeunloadHandler(BrowserVersion.FIREFOX_2, false, "first");
-        testOnbeforeunloadHandler(BrowserVersion.FIREFOX_2, true, "second");
+        testOnbeforeunloadHandler(BrowserVersion.FIREFOX_3, false, "first");
+        testOnbeforeunloadHandler(BrowserVersion.FIREFOX_3, true, "second");
     }
 
     /**

@@ -128,13 +128,13 @@ public class ObjectsTest extends WebTestCase {
             realList = IE7_;
             simulatedList = IE7_SIMULATED_;
         }
-        else if (browserVersion_ == BrowserVersion.FIREFOX_2) {
-            realList = FF2_;
-            simulatedList = FF2_SIMULATED_;
-        }
-        else {
+        else if (browserVersion_ == BrowserVersion.FIREFOX_3) {
             realList = FF3_;
             simulatedList = FF3_SIMULATED_;
+        }
+        else {
+            realList = FF2_;
+            simulatedList = FF2_SIMULATED_;
         }
 
         Assert.assertEquals("Test for [" + browserVersion_.getNickname() + ':' + name_ + ']',

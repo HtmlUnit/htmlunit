@@ -1436,7 +1436,7 @@ public class WebClientTest extends WebServerTestCase {
      */
     @Test
     public void testBinaryFileFromFileSystem() throws Exception {
-        testBinaryFileFromFileSystem(BrowserVersion.FIREFOX_2);
+        testBinaryFileFromFileSystem(BrowserVersion.FIREFOX_3);
         testBinaryFileFromFileSystem(BrowserVersion.INTERNET_EXPLORER_6);
     }
 
@@ -1892,7 +1892,7 @@ public class WebClientTest extends WebServerTestCase {
     @Test
     public void testWindowTracking_SpecialCase3() throws Exception {
         testWindowTracking_SpecialCase3(BrowserVersion.INTERNET_EXPLORER_6, new String[]{"Third page loaded"});
-        testWindowTracking_SpecialCase3(BrowserVersion.FIREFOX_2, new String[]{});
+        testWindowTracking_SpecialCase3(BrowserVersion.FIREFOX_3, new String[]{});
     }
 
     private void testWindowTracking_SpecialCase3(final BrowserVersion browserVersion, final String[] expectedAlerts)
@@ -1972,7 +1972,7 @@ public class WebClientTest extends WebServerTestCase {
     public void testOpenWindowWithAboutBlank() throws Exception {
         testOpenWindowWithAboutBlank(BrowserVersion.INTERNET_EXPLORER_6);
         testOpenWindowWithAboutBlank(BrowserVersion.INTERNET_EXPLORER_7);
-        testOpenWindowWithAboutBlank(BrowserVersion.FIREFOX_2);
+        testOpenWindowWithAboutBlank(BrowserVersion.FIREFOX_3);
     }
 
     private void testOpenWindowWithAboutBlank(final BrowserVersion browserVersion) throws Exception {

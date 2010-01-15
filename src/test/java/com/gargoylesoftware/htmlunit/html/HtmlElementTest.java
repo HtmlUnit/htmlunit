@@ -770,7 +770,7 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testMouseDown() throws Exception {
-        testMouseDown(BrowserVersion.FIREFOX_2, "mousedown-0");
+        testMouseDown(BrowserVersion.FIREFOX_3, "mousedown-0");
         testMouseDown(BrowserVersion.INTERNET_EXPLORER_6, "mousedown-1");
     }
 
@@ -823,7 +823,7 @@ public class HtmlElementTest extends WebTestCase {
     @Test
     public void testRightClick() throws Exception {
         testRightClick(BrowserVersion.INTERNET_EXPLORER_7, "mousedown-2-mouseup-2-contextmenu-0-");
-        testRightClick(BrowserVersion.FIREFOX_2, "mousedown-3-mouseup-3-contextmenu-3-");
+        testRightClick(BrowserVersion.FIREFOX_3, "mousedown-3-mouseup-3-contextmenu-3-");
     }
 
     private void testRightClick(final BrowserVersion browserVersion, final String expected)
@@ -864,7 +864,7 @@ public class HtmlElementTest extends WebTestCase {
     @Test
     public void testMouse_Down_Up() throws Exception {
         testMouse_Down_Up(BrowserVersion.INTERNET_EXPLORER_7, "mousedown-1-mouseup-1-");
-        testMouse_Down_Up(BrowserVersion.FIREFOX_2, "mousedown-1-mouseup-1-");
+        testMouse_Down_Up(BrowserVersion.FIREFOX_3, "mousedown-1-mouseup-1-");
     }
 
     private void testMouse_Down_Up(final BrowserVersion browserVersion, final String expected)
@@ -1089,7 +1089,7 @@ public class HtmlElementTest extends WebTestCase {
             + "Welcome" + LINE_SEPARATOR
             + "hidden text to the world some more hidden text";
         assertEquals(expected, iePage.asText());
-        final HtmlPage ffPage = loadPage(BrowserVersion.FIREFOX_2, html, null);
+        final HtmlPage ffPage = loadPage(BrowserVersion.FIREFOX_3, html, null);
         assertEquals("test" + LINE_SEPARATOR + "Welcome" + LINE_SEPARATOR + "to the world", ffPage.asText());
     }
 

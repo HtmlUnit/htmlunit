@@ -49,7 +49,7 @@ public class HtmlQuoteTest extends WebTestCase {
 
         final String[] expectedAlerts = {"[object HTMLQuoteElement]", "[object HTMLQuoteElement]"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
         assertTrue(HtmlInlineQuotation.class.isInstance(page.getHtmlElementById("myId1")));
         assertTrue(HtmlBlockQuote.class.isInstance(page.getHtmlElementById("myId2")));
         assertEquals(expectedAlerts, collectedAlerts);

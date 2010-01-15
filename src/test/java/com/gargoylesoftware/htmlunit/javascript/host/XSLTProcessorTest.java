@@ -41,7 +41,7 @@ public class XSLTProcessorTest extends WebTestCase {
         final String[] expectedAlertsIE = {"97"};
         test(BrowserVersion.INTERNET_EXPLORER_7, expectedAlertsIE);
         final String[] expectedAlertsFF = {"97", "null"};
-        test(BrowserVersion.FIREFOX_2, expectedAlertsFF);
+        test(BrowserVersion.FIREFOX_3, expectedAlertsFF);
     }
 
     private void test(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {

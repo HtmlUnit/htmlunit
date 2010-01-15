@@ -47,7 +47,7 @@ public class HtmlMetaTest extends WebTestCase {
 
         final String[] expectedAlerts = {"[object HTMLMetaElement]"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
         assertTrue(HtmlMeta.class.isInstance(page.getHtmlElementById("myId")));
         assertEquals(expectedAlerts, collectedAlerts);
     }

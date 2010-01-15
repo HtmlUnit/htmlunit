@@ -169,7 +169,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             + "</configuration>\n";
         final Reader reader = new StringReader(configurationString);
         JavaScriptConfiguration.loadConfiguration(reader);
-        final BrowserVersion browser = BrowserVersion.FIREFOX_2;
+        final BrowserVersion browser = BrowserVersion.FIREFOX_3;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
         final ClassConfiguration expectedConfig = new ClassConfiguration("Document",
             HTMLDocument.class.getName(), null, null, null, true);

@@ -47,7 +47,7 @@ public class HtmlCanvasTest extends WebTestCase {
 
         final String[] expectedAlerts = {"[object HTMLCanvasElement]"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
         assertTrue(HtmlCanvas.class.isInstance(page.getHtmlElementById("myId")));
         assertEquals(expectedAlerts, collectedAlerts);
     }

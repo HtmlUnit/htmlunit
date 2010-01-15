@@ -104,7 +104,7 @@ public class HTMLScriptElementTest extends WebTestCase {
     public void srcWithJavaScriptProtocol_Static() throws Exception {
         srcWithJavaScriptProtocol_Static(BrowserVersion.INTERNET_EXPLORER_6, "1");
         srcWithJavaScriptProtocol_Static(BrowserVersion.INTERNET_EXPLORER_7);
-        srcWithJavaScriptProtocol_Static(BrowserVersion.FIREFOX_2, "1");
+        srcWithJavaScriptProtocol_Static(BrowserVersion.FIREFOX_3, "1");
     }
 
     private void srcWithJavaScriptProtocol_Static(final BrowserVersion version, final String... expected) throws Exception {
@@ -122,7 +122,7 @@ public class HTMLScriptElementTest extends WebTestCase {
     public void srcWithJavaScriptProtocol_Dynamic() throws Exception {
         srcWithJavaScriptProtocol_Dynamic(BrowserVersion.INTERNET_EXPLORER_6, "1");
         srcWithJavaScriptProtocol_Dynamic(BrowserVersion.INTERNET_EXPLORER_7);
-        srcWithJavaScriptProtocol_Dynamic(BrowserVersion.FIREFOX_2, "1");
+        srcWithJavaScriptProtocol_Dynamic(BrowserVersion.FIREFOX_3, "1");
     }
 
     private void srcWithJavaScriptProtocol_Dynamic(final BrowserVersion version, final String... expected) throws Exception {
@@ -177,7 +177,7 @@ public class HTMLScriptElementTest extends WebTestCase {
      */
     @Test
     public void onReadyStateChange_Order() throws Exception {
-        onReadyStateChange_Order(BrowserVersion.FIREFOX_2, "3", "4", "2", "5");
+        onReadyStateChange_Order(BrowserVersion.FIREFOX_3, "3", "4", "2", "5");
         //onReadyStateChange_Order(BrowserVersion.INTERNET_EXPLORER_6_0, "1", "2", "3", "4", "5", "6", "7");
         //onReadyStateChange_Order(BrowserVersion.INTERNET_EXPLORER_7_0, "1", "2", "3", "4", "5", "6", "7");
     }
@@ -228,7 +228,7 @@ public class HTMLScriptElementTest extends WebTestCase {
      */
     @Test
     public void onReadyStateChange_Order_NoBody() throws Exception {
-        onReadyStateChange_Order_NoBody(BrowserVersion.FIREFOX_2, "3", "4", "2");
+        onReadyStateChange_Order_NoBody(BrowserVersion.FIREFOX_3, "3", "4", "2");
         onReadyStateChange_Order_NoBody(BrowserVersion.INTERNET_EXPLORER_6, "1", "2", "3", "4", "5", "6");
         onReadyStateChange_Order_NoBody(BrowserVersion.INTERNET_EXPLORER_7, "1", "2", "3", "4", "5", "6");
     }
@@ -258,7 +258,7 @@ public class HTMLScriptElementTest extends WebTestCase {
     public void text() throws Exception {
         text(BrowserVersion.INTERNET_EXPLORER_6);
         text(BrowserVersion.INTERNET_EXPLORER_7);
-        text(BrowserVersion.FIREFOX_2);
+        text(BrowserVersion.FIREFOX_3);
     }
 
     private void text(final BrowserVersion browserVersion) throws Exception {

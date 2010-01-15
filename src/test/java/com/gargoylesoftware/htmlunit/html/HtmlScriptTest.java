@@ -171,7 +171,7 @@ public class HtmlScriptTest extends WebTestCase {
             + "</html>";
 
         final List<String> actualFF = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, html, actualFF);
+        loadPage(BrowserVersion.FIREFOX_3, html, actualFF);
         final String[] expectedFF = new String[] {"deferred", "normal", "onload"};
         assertEquals(expectedFF, actualFF);
 

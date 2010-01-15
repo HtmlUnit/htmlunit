@@ -192,7 +192,7 @@ public class HtmlOptionTest extends WebTestCase {
 
         final String[] expectedAlerts = {"[object HTMLOptionElement]"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
         assertTrue(HtmlOption.class.isInstance(page.getHtmlElementById("myId")));
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -202,7 +202,7 @@ public class HtmlOptionTest extends WebTestCase {
      */
     @Test
     public void testDisabled() throws Exception {
-        testDisabled(BrowserVersion.FIREFOX_2, true, false);
+        testDisabled(BrowserVersion.FIREFOX_3, true, false);
         testDisabled(BrowserVersion.INTERNET_EXPLORER_6, false, false);
         testDisabled(BrowserVersion.INTERNET_EXPLORER_7, false, false);
     }

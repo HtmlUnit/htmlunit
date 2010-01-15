@@ -187,7 +187,7 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
      */
     @Test
     public void testPreventDefault() throws Exception {
-        testPreventDefault(BrowserVersion.FIREFOX_2);
+        testPreventDefault(BrowserVersion.FIREFOX_3);
         testPreventDefault(BrowserVersion.INTERNET_EXPLORER_7);
     }
 

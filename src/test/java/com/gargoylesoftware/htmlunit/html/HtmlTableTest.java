@@ -351,7 +351,7 @@ public class HtmlTableTest extends WebTestCase {
         final String[] expectedAlerts = {"[object HTMLTableElement]"};
         final List<String> collectedAlerts = new ArrayList<String>();
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
         assertTrue(HtmlTable.class.isInstance(page.getHtmlElementById("myId")));
         assertEquals(expectedAlerts, collectedAlerts);
     }

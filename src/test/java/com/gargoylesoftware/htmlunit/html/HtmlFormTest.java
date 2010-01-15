@@ -1094,7 +1094,7 @@ public class HtmlFormTest extends WebTestCase {
     public void testSumbit_submitInputValue() throws Exception {
         testSumbit_submitInputValue(BrowserVersion.INTERNET_EXPLORER_6);
         //test FF separately as value is not to DEFAULT_VALUE if not specified.
-        testSumbit_submitInputValue(BrowserVersion.FIREFOX_2);
+        testSumbit_submitInputValue(BrowserVersion.FIREFOX_3);
     }
 
     private void testSumbit_submitInputValue(final BrowserVersion browserVersion) throws Exception {
@@ -1159,7 +1159,7 @@ public class HtmlFormTest extends WebTestCase {
     public void testSubmitURLWithoutParameters() throws Exception {
         testSubmitURLWithoutParameters(BrowserVersion.INTERNET_EXPLORER_7, URL_SECOND.toExternalForm());
         testSubmitURLWithoutParameters(BrowserVersion.INTERNET_EXPLORER_6, URL_SECOND.toExternalForm() + '?');
-        testSubmitURLWithoutParameters(BrowserVersion.FIREFOX_2, URL_SECOND.toExternalForm() + '?');
+        testSubmitURLWithoutParameters(BrowserVersion.FIREFOX_3, URL_SECOND.toExternalForm() + '?');
     }
 
     private void testSubmitURLWithoutParameters(final BrowserVersion browserVersion, final String expectedURL)

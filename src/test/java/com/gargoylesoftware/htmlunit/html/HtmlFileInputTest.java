@@ -261,7 +261,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
         servlets.put("/upload2", Upload2Servlet.class);
         startWebServer("./", null, servlets);
 
-        testUploadFileWithNonASCIIName(BrowserVersion.FIREFOX_2);
+        testUploadFileWithNonASCIIName(BrowserVersion.FIREFOX_3);
         testUploadFileWithNonASCIIName(BrowserVersion.INTERNET_EXPLORER_7);
     }
 

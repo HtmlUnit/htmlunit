@@ -56,7 +56,7 @@ public class MimeTypeTest extends WebTestCase {
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -80,14 +80,14 @@ public class MimeTypeTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final Set<PluginConfiguration> plugins =
-            new HashSet<PluginConfiguration>(BrowserVersion.FIREFOX_2.getPlugins());
-        BrowserVersion.FIREFOX_2.getPlugins().clear();
+            new HashSet<PluginConfiguration>(BrowserVersion.FIREFOX_3.getPlugins());
+        BrowserVersion.FIREFOX_3.getPlugins().clear();
         try {
-            loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+            loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
             assertEquals(expectedAlerts, collectedAlerts);
         }
         finally {
-            BrowserVersion.FIREFOX_2.getPlugins().addAll(plugins);
+            BrowserVersion.FIREFOX_3.getPlugins().addAll(plugins);
         }
     }
 }

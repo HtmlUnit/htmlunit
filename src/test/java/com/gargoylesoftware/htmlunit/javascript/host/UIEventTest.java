@@ -50,7 +50,7 @@ public class UIEventTest extends WebTestCase {
             + "</body></html>";
         final String[] expected = {"undefined", "1", "2"};
         final List<String> actual = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, actual);
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_3, html, actual);
         page.<HtmlDivision>getHtmlElementById("a").click();
         page.<HtmlDivision>getHtmlElementById("b").dblClick();
         assertEquals(expected, actual);
@@ -71,7 +71,7 @@ public class UIEventTest extends WebTestCase {
             + "</body></html>";
         final String[] expected = {"undefined", "[object Window]"};
         final List<String> actual = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, actual);
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_3, html, actual);
         final HtmlButtonInput button = page.getHtmlElementById("b");
         button.click();
         assertEquals(expected, actual);
@@ -92,7 +92,7 @@ public class UIEventTest extends WebTestCase {
             + "  alert(e.detail);\n"
             + "</script></body></html>";
         final List<String> actual = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, html, actual);
+        loadPage(BrowserVersion.FIREFOX_3, html, actual);
         final String[] expected = {"click", "true", "true", "true", "7"};
         assertEquals(expected, actual);
     }

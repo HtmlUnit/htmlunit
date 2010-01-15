@@ -180,21 +180,21 @@ public class PropertiesTest extends WebTestCase {
             actualPropertyCount = IE7_ACTUAL_PROPERTY_COUNT_;
             remainingPropertyCount = IE7_REMAINING_PROPERTY_COUNT_;
         }
-        else if (browserVersion_ == BrowserVersion.FIREFOX_2) {
-            realList = FF2_;
-            simulatedList = FF2_SIMULATED_;
-            dataset = CATEGORY_DATASET_FF2_;
-            html = FF2_HTML_;
-            actualPropertyCount = FF2_ACTUAL_PROPERTY_COUNT_;
-            remainingPropertyCount = FF2_REMAINING_PROPERTY_COUNT_;
-        }
-        else {
+        else if (browserVersion_ == BrowserVersion.FIREFOX_3) {
             realList = FF3_;
             simulatedList = FF3_SIMULATED_;
             dataset = CATEGORY_DATASET_FF3_;
             html = FF3_HTML_;
             actualPropertyCount = FF3_ACTUAL_PROPERTY_COUNT_;
             remainingPropertyCount = FF3_REMAINING_PROPERTY_COUNT_;
+        }
+        else {
+            realList = FF2_;
+            simulatedList = FF2_SIMULATED_;
+            dataset = CATEGORY_DATASET_FF2_;
+            html = FF2_HTML_;
+            actualPropertyCount = FF2_ACTUAL_PROPERTY_COUNT_;
+            remainingPropertyCount = FF2_REMAINING_PROPERTY_COUNT_;
         }
 
         List<String> realProperties = Arrays.asList(getValueOf(realList, name_).split(","));

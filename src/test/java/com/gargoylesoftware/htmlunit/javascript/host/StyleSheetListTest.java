@@ -88,7 +88,7 @@ public class StyleSheetListTest extends WebTestCase {
 
         final String[] expectedAlerts = {"red", "red"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_2);
+        final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_3);
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, html);
@@ -130,7 +130,7 @@ public class StyleSheetListTest extends WebTestCase {
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> actual = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, html, actual);
+        loadPage(BrowserVersion.FIREFOX_3, html, actual);
         assertEquals(expectedAlerts, actual);
     }
 

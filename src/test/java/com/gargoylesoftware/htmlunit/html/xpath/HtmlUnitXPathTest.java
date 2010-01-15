@@ -188,7 +188,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
 
         final String[] expectedAlerts = {"102", "111", "111", "160", "97", "110", "100", "160", "102", "111", "111"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        loadPage(BrowserVersion.FIREFOX_3, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

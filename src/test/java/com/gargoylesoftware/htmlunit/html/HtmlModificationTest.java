@@ -50,7 +50,7 @@ public class HtmlModificationTest extends WebTestCase {
         //see http://forums.mozillazine.org/viewtopic.php?t=623715
         final String[] expectedAlerts = {"[object HTMLInsElement]", "[object HTMLDelElement]"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
         assertTrue(HtmlInsertedText.class.isInstance(page.getHtmlElementById("myId1")));
         assertTrue(HtmlDeletedText.class.isInstance(page.getHtmlElementById("myId2")));
         assertEquals(expectedAlerts, collectedAlerts);

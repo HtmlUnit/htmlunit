@@ -433,11 +433,11 @@ public class HtmlAnchorTest extends WebTestCase {
      */
     @Test
     public void testPreventDefault() throws Exception {
-        testPreventDefault1(BrowserVersion.FIREFOX_2);
+        testPreventDefault1(BrowserVersion.FIREFOX_3);
         testPreventDefault1(BrowserVersion.INTERNET_EXPLORER_7);
-        testPreventDefault2(BrowserVersion.FIREFOX_2);
+        testPreventDefault2(BrowserVersion.FIREFOX_3);
         testPreventDefault2(BrowserVersion.INTERNET_EXPLORER_7);
-        testPreventDefault3(BrowserVersion.FIREFOX_2);
+        testPreventDefault3(BrowserVersion.FIREFOX_3);
         testPreventDefault3(BrowserVersion.INTERNET_EXPLORER_7);
     }
 
