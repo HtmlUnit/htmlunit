@@ -177,7 +177,7 @@ public class JavaScriptJobManagerTest extends WebTestCase {
 
         mgr.waitForJobs(10000);
         final int nbJobs = mgr.getJobCount();
-        if (nbJobs != 0) {
+        if (nbJobs != 1) {
             dumpThreads(System.err);
         }
         Assert.assertEquals("thread should stop", 0, mgr.getJobCount());
@@ -187,7 +187,7 @@ public class JavaScriptJobManagerTest extends WebTestCase {
         out.println("Thread dump:");
         final ThreadMXBean mxBean = ManagementFactory.getThreadMXBean();
         final long[] allIds = mxBean.getAllThreadIds();
-        final ThreadInfo[] threadInfo = mxBean.getThreadInfo(allIds);
+        final ThreadInfo[] threadInfo = mxBean.getThreadInfo(allIds, Integer.MAX_VALUE);
         for (final ThreadInfo oneInfo : threadInfo) {
             out.println();
             out.println("\"" + oneInfo.getThreadName() + "\" " + oneInfo.getThreadState());
