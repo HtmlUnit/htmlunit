@@ -22,6 +22,7 @@ import java.util.List;
  * TODO: simplify it (it is just copied from what was available in DomNode and subclasses).
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 class HtmlSerializer {
     private final StringBuilder buffer_ = new StringBuilder();
@@ -166,6 +167,9 @@ class HtmlSerializer {
         }
         else if (node instanceof HtmlUnorderedList) {
             appendHtmlUnorderedList((HtmlUnorderedList) node);
+        }
+        else if (node instanceof HtmlNoScript && node.getPage().getWebClient().isJavaScriptEnabled()) {
+            return;
         }
         else {
             final boolean block = node.isBlock();

@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration preparation">
+            <action type="update" dev="asashour">
+                DomNode.asText(): don't include children of &lt;noscript&gt; if JavaScript is enabled.
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: empty implementation of CanvasRenderingContext2D.drawImage() (FF).
             </action>

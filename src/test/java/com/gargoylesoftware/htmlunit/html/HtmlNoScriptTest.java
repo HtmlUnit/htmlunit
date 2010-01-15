@@ -177,4 +177,41 @@ public class HtmlNoScriptTest extends WebTestCase {
         final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals(expected, page.getBody().asXml().replaceAll("\\r", ""));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asText_jsEnabled() throws Exception {
+        final String htmlContent
+            = "<html><body>\n"
+            + "<noscript>hello</noscript>"
+            + "</body></html>";
+
+        final String expected = "";
+        final HtmlPage page = loadPage(htmlContent);
+        assertEquals(expected, page.getBody().asText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asText_jsDisabled() throws Exception {
+        final String html = "<html><body>\n"
+            + "<noscript>hello</noscript>"
+            + "</body></html>";
+
+        final String expected = "hello";
+
+        final WebClient client = new WebClient();
+        client.setJavaScriptEnabled(false);
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setDefaultResponse(html);
+        client.setWebConnection(webConnection);
+
+        final HtmlPage page = client.getPage(URL_FIRST);
+        assertEquals(expected, page.getBody().asText().replaceAll("\\r", ""));
+    }
 }
