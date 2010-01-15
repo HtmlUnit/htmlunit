@@ -191,8 +191,9 @@ public class JavaScriptJobManagerTest extends WebTestCase {
         for (final ThreadInfo oneInfo : threadInfo) {
             out.println();
             out.println("\"" + oneInfo.getThreadName() + "\" " + oneInfo.getThreadState());
-
             final StackTraceElement[] stackTrace = oneInfo.getStackTrace();
+            out.println(stackTrace.length + " stack trace elements");
+
             boolean first = true;
             for (final StackTraceElement stackElement : stackTrace) {
                 if (!first) {
