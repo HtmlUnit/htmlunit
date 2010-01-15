@@ -719,7 +719,6 @@ public class HTMLDocumentWriteTest extends WebDriverTestCase {
         loadPageWithAlerts(html);
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -746,9 +745,8 @@ public class HTMLDocumentWriteTest extends WebDriverTestCase {
      */
     @Test
     public void aboutURL() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection =
-            new MockWebConnection();
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
         final String firstContent =
             "<html><body><script language='JavaScript'>\n"
             + "w2 = window.open('about:blank', 'AboutBlank');\n"

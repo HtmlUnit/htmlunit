@@ -1090,7 +1090,6 @@ public class DocumentTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -1836,7 +1835,6 @@ public class DocumentTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
-
 
      /**
      * @throws Exception if the test fails
