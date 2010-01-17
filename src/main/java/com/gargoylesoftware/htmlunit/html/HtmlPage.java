@@ -427,7 +427,7 @@ public class HtmlPage extends SgmlPage {
      */
     @Override
     public HtmlElement createElementNS(final String namespaceURI, final String qualifiedName) {
-        return HtmlUnitDOMBuilder.getElementFactory(namespaceURI, qualifiedName)
+        return HTMLParser.getElementFactory(namespaceURI, qualifiedName)
             .createElementNS(this, namespaceURI, qualifiedName, null);
     }
 

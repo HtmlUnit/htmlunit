@@ -433,6 +433,32 @@ public final class HTMLParser {
     }
 
     /**
+     * Returns the pre-registered element factory corresponding to the specified tag, or an UnknownElementFactory.
+     * @param namespaceURI the namespace URI
+     * @param qualifiedName the qualified name
+     * @return the pre-registered element factory corresponding to the specified tag, or an UnknownElementFactory
+     */
+    static IElementFactory getElementFactory(final String namespaceURI, final String qualifiedName) {
+        if (namespaceURI == null || namespaceURI.length() == 0
+            || !qualifiedName.contains(":") || namespaceURI.equals(XHTML_NAMESPACE)) {
+            String tagName = qualifiedName;
+            final int index = tagName.indexOf(":");
+            if (index != -1) {
+                tagName = tagName.substring(index + 1);
+            }
+            else {
+                tagName = tagName.toLowerCase();
+            }
+            final IElementFactory factory = ELEMENT_FACTORIES.get(tagName);
+
+            if (factory != null) {
+                return factory;
+            }
+        }
+        return UnknownElementFactory.instance;
+    }
+
+    /**
      * The parser and DOM builder. This class subclasses Xerces's AbstractSAXParser and implements
      * the ContentHandler interface. Thus all parser APIs are kept private. The ContentHandler methods
      * consume SAX events to build the page DOM
@@ -764,32 +790,6 @@ public final class HTMLParser {
                     currentNode_.appendChild(text);
                 }
             }
-        }
-
-        /**
-         * Returns the pre-registered element factory corresponding to the specified tag, or an UnknownElementFactory.
-         * @param namespaceURI the namespace URI
-         * @param qualifiedName the qualified name
-         * @return the pre-registered element factory corresponding to the specified tag, or an UnknownElementFactory
-         */
-        public static IElementFactory getElementFactory(final String namespaceURI, final String qualifiedName) {
-            if (namespaceURI == null || namespaceURI.length() == 0
-                || !qualifiedName.contains(":") || namespaceURI.equals(XHTML_NAMESPACE)) {
-                String tagName = qualifiedName;
-                final int index = tagName.indexOf(":");
-                if (index != -1) {
-                    tagName = tagName.substring(index + 1);
-                }
-                else {
-                    tagName = tagName.toLowerCase();
-                }
-                final IElementFactory factory = ELEMENT_FACTORIES.get(tagName);
-
-                if (factory != null) {
-                    return factory;
-                }
-            }
-            return UnknownElementFactory.instance;
         }
 
         /** {@inheritDoc} */
