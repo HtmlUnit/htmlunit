@@ -764,4 +764,36 @@ public class HTMLDocumentWriteTest extends WebDriverTestCase {
         //  final HtmlPage page = (HtmlPage) webWindow.getEnclosedPage();
         //  assertEquals("<html><head><title>hello</title></head><body></body></html>",page.getDocument().toString());
     }
+
+    /**
+     * Regression test for bug 2884585.
+     * As of HtmlUnit-2.7-SNAPSHOT 17.01.2010 <script src="..."... written
+     * by document.write was not loaded and executed after the </script>
+     * when the page was loaded as result of a click.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    @Alerts("HelloHello")
+    public void writeExternalScriptAfterClick() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "document.write('<scr'+'ipt src=\"script.js\"></scr'+'ipt>');\n"
+            + "</script>\n"
+            + "<script>\n"
+            + "window.name += window.foo;\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<a href='?again'>a link</a>\n"
+            + "<div id='clickMe' onclick='alert(window.name)'>click me</div>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse("window.foo = 'Hello'", JAVASCRIPT_MIME_TYPE);
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.linkText("a link")).click();
+        driver.findElement(By.id("clickMe")).click();
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
 }
