@@ -177,7 +177,7 @@ public class JavaScriptJobManagerTest extends WebTestCase {
 
         mgr.waitForJobs(10000);
         final int nbJobs = mgr.getJobCount();
-        if (nbJobs != 1) {
+        if (nbJobs != 0) {
             dumpThreads(System.err);
         }
         Assert.assertEquals("thread should stop", 0, mgr.getJobCount());
