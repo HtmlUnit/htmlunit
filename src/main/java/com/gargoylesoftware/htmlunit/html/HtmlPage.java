@@ -63,6 +63,7 @@ import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.TextUtil;
+import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
@@ -135,6 +136,7 @@ public class HtmlPage extends SgmlPage {
     private final List<PostponedAction> afterLoadActions_ = new ArrayList<PostponedAction>();
     private boolean cleaning_;
     private HtmlBase base_;
+    private URL baseUrl_;
 
     /**
      * Creates an instance of HtmlPage.
@@ -172,12 +174,24 @@ public class HtmlPage extends SgmlPage {
      */
     @Override
     public void initialize() throws IOException, FailingHttpStatusCodeException {
-        // a frame contains first a faked "about:blank" before its real content specified by src gets loaded
         final WebWindow enclosingWindow = getEnclosingWindow();
-        if (enclosingWindow instanceof FrameWindow
-            && getWebResponse().getRequestSettings().getUrl() == WebClient.URL_ABOUT_BLANK
-            && !((FrameWindow) enclosingWindow).getFrameElement().isContentLoaded()) {
-            return;
+        if (getWebResponse().getRequestSettings().getUrl() == WebClient.URL_ABOUT_BLANK) {
+            // a frame contains first a faked "about:blank" before its real content specified by src gets loaded
+            if (enclosingWindow instanceof FrameWindow
+                    && getWebResponse().getRequestSettings().getUrl() == WebClient.URL_ABOUT_BLANK
+                    && !((FrameWindow) enclosingWindow).getFrameElement().isContentLoaded()) {
+                return;
+            }
+
+            // save the URL that should be used to resolve relative URLs in this page
+            if (enclosingWindow instanceof TopLevelWindow) {
+                final TopLevelWindow topWindow = (TopLevelWindow) enclosingWindow;
+                final WebWindow openerWindow = topWindow.getOpener();
+                if (openerWindow != null && openerWindow.getEnclosedPage() != null) {
+                    baseUrl_ = openerWindow.getEnclosedPage().getWebResponse()
+                    .getRequestSettings().getUrl();
+                }
+            }
         }
         loadFrames();
         setReadyState(READY_STATE_COMPLETE);
@@ -595,6 +609,9 @@ public class HtmlPage extends SgmlPage {
                     baseUrl = ((HtmlPage) window.getTopWindow().getEnclosedPage()).getWebResponse()
                         .getRequestSettings().getUrl();
                 }
+            }
+            else if (baseUrl_ != null) {
+                baseUrl = baseUrl_;
             }
         }
         else {

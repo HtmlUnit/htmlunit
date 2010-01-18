@@ -158,7 +158,7 @@ public class HTMLDocumentWriteTest extends WebDriverTestCase {
         webConnection.setResponse(URL_FIRST, html);
 
         final String script = "document.write(\"<div id='div1'></div>\");\n";
-        webConnection.setResponse(new URL("http://script/"), script, "text/javascript");
+        webConnection.setResponse(new URL("http://script/"), script, JAVASCRIPT_MIME_TYPE);
 
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -199,7 +199,7 @@ public class HTMLDocumentWriteTest extends WebDriverTestCase {
         webConnection.setResponse(URL_SECOND, secondHtml);
 
         final String script = "document.getElementById('iframe').src = '" + URL_SECOND + "';\n";
-        webConnection.setResponse(new URL("http://script/"), script, "text/javascript");
+        webConnection.setResponse(new URL("http://script/"), script, JAVASCRIPT_MIME_TYPE);
 
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -416,12 +416,12 @@ public class HTMLDocumentWriteTest extends WebDriverTestCase {
         final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
-        conn.setResponse(new URL(URL_FIRST, "a.js"), "log(1)", "text/javascript");
-        conn.setResponse(new URL(URL_FIRST, "b.js"), "log(4)", "text/javascript");
-        conn.setResponse(new URL(URL_FIRST, "c.js"), "log(5)", "text/javascript");
-        conn.setResponse(new URL(URL_FIRST, "d.js"), "log(10)", "text/javascript");
-        conn.setResponse(new URL(URL_FIRST, "e.js"), "log(11)", "text/javascript");
-        conn.setResponse(new URL(URL_FIRST, "f.js"), "log(12)", "text/javascript");
+        conn.setResponse(new URL(URL_FIRST, "a.js"), "log(1)", JAVASCRIPT_MIME_TYPE);
+        conn.setResponse(new URL(URL_FIRST, "b.js"), "log(4)", JAVASCRIPT_MIME_TYPE);
+        conn.setResponse(new URL(URL_FIRST, "c.js"), "log(5)", JAVASCRIPT_MIME_TYPE);
+        conn.setResponse(new URL(URL_FIRST, "d.js"), "log(10)", JAVASCRIPT_MIME_TYPE);
+        conn.setResponse(new URL(URL_FIRST, "e.js"), "log(11)", JAVASCRIPT_MIME_TYPE);
+        conn.setResponse(new URL(URL_FIRST, "f.js"), "log(12)", JAVASCRIPT_MIME_TYPE);
         client.setWebConnection(conn);
         final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals("1 2 3 4 5 6 7 8 9 10 11 12", page.getBody().asText().trim());
@@ -564,7 +564,7 @@ public class HTMLDocumentWriteTest extends WebDriverTestCase {
         final MockWebConnection webConnection = new MockWebConnection();
         client.setWebConnection(webConnection);
         webConnection.setDefaultResponse(html);
-        webConnection.setResponse(scriptUrl, "alert('foo');\n", "text/javascript");
+        webConnection.setResponse(scriptUrl, "alert('foo');\n", JAVASCRIPT_MIME_TYPE);
 
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -795,5 +795,55 @@ public class HTMLDocumentWriteTest extends WebDriverTestCase {
         driver.findElement(By.linkText("a link")).click();
         driver.findElement(By.id("clickMe")).click();
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * Regression test for bug 2921851.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented
+    public void writeInNewWindowAndReadFormCollection() throws Exception {
+        final String html = "<html><head>"
+            + "<script>"
+            + "function test() {"
+            + "  var newWin = window.open('', 'myPopup', '');"
+            + "  var newDoc = newWin.document;"
+            + "  newDoc.write('<html><body><form name=newForm></form></body></html>');"
+            + "  alert(newDoc.forms.length);"
+            + "}\n"
+            + "</script></head>"
+            + "<body onload='test()'>"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Partial regression test for bug 2921851: use opener URL as base URL
+     * for resolution of relative URLs in document.write.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void urlResolutionInWriteForm() throws Exception {
+        final String html = "<html><head>"
+            + "<script>"
+            + "function test() {"
+            + "  var newWin = window.open('', 'myPopup', '');"
+            + "  var d = newWin.document;"
+            + "  d.write('<html><body><form action=foo method=post><input type=submit id=it></form></body></html>');"
+            + "  d.close();\n"
+            + "}\n"
+            + "</script></head>"
+            + "<body onload='test()'>"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        final WebDriver driver = loadPage2(html);
+        driver.switchTo().window("myPopup");
+        driver.findElement(By.id("it")).click();
+
+        assertEquals(new URL(getDefaultUrl(), "foo"), getMockWebConnection().getLastWebRequestSettings().getUrl());
     }
 }
