@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static org.junit.Assert.assertSame;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -36,6 +37,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -1406,5 +1408,43 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         driver.findElement(By.id("clickMe")).click(); // a second time to be sure to have same resulting Url
 
         assertEquals(3, getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * Calling form.submit() immediately triggers a request but only the
+     * last response for a page is parsed.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    public void submitTriggersRequestNotParsed() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var f = document.forms[0];\n"
+            + "  for (var i=0; i<5; ++i) {\n"
+            + "    f.action = 'foo' + i;\n"
+            + "    f.submit();\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>"
+            + "<form>\n"
+            + "<input name='foo'>\n"
+            + "</form></body></html>";
+
+        final MockWebConnection connection = getMockWebConnection();
+        for (int i = 0; i < 5; ++i) {
+            final String htmlX = "<html><head>\n"
+                + "<title>Page " + i + "</title>\n"
+                + "<script src='script" + i + ".js'></script>\n"
+                + "</head></html>";
+            connection.setResponse(new URL(getDefaultUrl(), "foo" + i), htmlX);
+            connection.setResponse(new URL(getDefaultUrl(), "script" + i + ".js"), "", JAVASCRIPT_MIME_TYPE);
+        }
+        final WebDriver driver = loadPage2(html);
+        assertEquals("Page 4", driver.getTitle());
+
+        // NB: comparing the sequence order here is not 100% safe with a real browser
+        final String[] expectedRequests = {"", "foo0", "foo1", "foo2", "foo3", "foo4", "script4.js"};
+        assertEquals(expectedRequests, getMockWebConnection().getRequestedUrls(getDefaultUrl()));
     }
 }

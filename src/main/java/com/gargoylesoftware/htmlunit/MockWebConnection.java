@@ -45,6 +45,7 @@ public class MockWebConnection implements WebConnection {
     private WebResponseData defaultResponse_;
     private WebRequestSettings lastRequest_;
     private int requestCount_ = 0;
+    private final List<URL> requestedUrls_ = Collections.synchronizedList(new ArrayList<URL>());
 
     /**
      * {@inheritDoc}
@@ -56,6 +57,7 @@ public class MockWebConnection implements WebConnection {
 
         lastRequest_ = settings;
         requestCount_++;
+        requestedUrls_.add(url);
 
         WebResponseData response = responseMap_.get(url.toExternalForm());
         if (response == null) {
@@ -68,6 +70,25 @@ public class MockWebConnection implements WebConnection {
         }
 
         return new WebResponseImpl(response, settings, 0);
+    }
+
+    /**
+     * Gets the list of requested URLs relative to the provided URL.
+     * @param relativeTo what should be removed from the requested URLs.
+     * @return the list of relative URLs
+     */
+    public List<String> getRequestedUrls(final URL relativeTo) {
+        final String baseUrl = relativeTo.toString();
+        final List<String> response = new ArrayList<String>();
+        for (final URL url : requestedUrls_) {
+            String s = url.toString();
+            if (s.startsWith(baseUrl)) {
+                s = s.substring(baseUrl.length());
+            }
+            response.add(s);
+        }
+
+        return response;
     }
 
     /**
