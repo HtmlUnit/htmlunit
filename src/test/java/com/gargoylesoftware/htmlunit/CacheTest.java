@@ -153,8 +153,8 @@ public class CacheTest extends WebTestCase {
 
         final List<NameValuePair> headers = new ArrayList<NameValuePair>();
         headers.add(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
-        connection.setResponse(new URL(URL_FIRST, "foo1.js"), script1, 200, "ok", "text/javascript", headers);
-        connection.setResponse(new URL(URL_FIRST, "foo2.js"), script2, 200, "ok", "text/javascript", headers);
+        connection.setResponse(new URL(URL_FIRST, "foo1.js"), script1, 200, "ok", JAVASCRIPT_MIME_TYPE, headers);
+        connection.setResponse(new URL(URL_FIRST, "foo2.js"), script2, 200, "ok", JAVASCRIPT_MIME_TYPE, headers);
 
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -192,8 +192,8 @@ public class CacheTest extends WebTestCase {
 
         final List<NameValuePair> headers =
             Collections.singletonList(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
-        connection.setResponse(new URL(URL_FIRST, "foo1.js"), ";", 200, "ok", "text/javascript", headers);
-        connection.setResponse(new URL(URL_FIRST, "foo2.js"), ";", 200, "ok", "text/javascript", headers);
+        connection.setResponse(new URL(URL_FIRST, "foo1.js"), ";", 200, "ok", JAVASCRIPT_MIME_TYPE, headers);
+        connection.setResponse(new URL(URL_FIRST, "foo2.js"), ";", 200, "ok", JAVASCRIPT_MIME_TYPE, headers);
 
         client.getPage(pageUrl);
         assertEquals(1, client.getCache().getSize());
@@ -225,7 +225,7 @@ public class CacheTest extends WebTestCase {
 
         final List<NameValuePair> headers =
             Collections.singletonList(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
-        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", "text/javascript", headers);
+        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", JAVASCRIPT_MIME_TYPE, headers);
 
         client.getPage(pageUrl);
         assertEquals(2, client.getCache().getSize());
