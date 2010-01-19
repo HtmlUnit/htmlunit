@@ -21,8 +21,11 @@ import java.util.List;
 
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebAssert;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -32,8 +35,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
-import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 
 /**
  * A JavaScript object for a Form.
@@ -238,18 +239,19 @@ public class HTMLFormElement extends HTMLElement {
         throws IOException {
 
         final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
-        final JavaScriptEngine jsEngine = page.getWebClient().getJavaScriptEngine();
-        // what matters are the current request settings and target, not the ones at the time
-        // the postponed action is executed
-        final WebRequestSettings requestSettings = getHtmlForm().getWebRequestSettings(null);
-        final String target = page.getResolvedTarget(jsxGet_target());
-        final PostponedAction action = new PostponedAction(page) {
-            @Override
-            public void execute() throws IOException {
-                page.getWebClient().getPage(page.getEnclosingWindow(), target, requestSettings);
-            }
-        };
-        jsEngine.addPostponedAction(action);
+        final WebClient webClient = page.getWebClient();
+
+        final String action = getHtmlForm().getActionAttribute();
+        if (action.startsWith("javascript:")) {
+            final String js = StringUtils.substringAfter(action, "javascript:");
+            webClient.getJavaScriptEngine().execute(page, js, "Form action", 0);
+        }
+        else {
+            // download should be done ASAP, response will be loaded into a window later
+            final WebRequestSettings requestSettings = getHtmlForm().getWebRequestSettings(null);
+            final String target = page.getResolvedTarget(jsxGet_target());
+            webClient.download(page.getEnclosingWindow(), target, requestSettings, "JS form.submit()");
+        }
     }
 
     /**

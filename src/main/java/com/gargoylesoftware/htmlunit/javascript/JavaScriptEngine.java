@@ -548,6 +548,13 @@ public class JavaScriptEngine {
             return;
         }
 
+        try {
+            getWebClient().loadDownloadedResponses();
+        }
+        catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
+
         final List<PostponedAction> actions = postponedActions_.get();
         postponedActions_.set(null);
         if (actions != null) {

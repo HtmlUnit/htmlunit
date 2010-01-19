@@ -6,6 +6,13 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration preparation">
+            <action type="fix" dev="mguillem">
+                JavaScript: many calls to form.submit after change of the action attribute causes many downloads
+                and only the last one is parsed and loaded into the window.
+            </action>
+            <action type="fix" dev="mguillem" issue="2884585">
+                JavaScript: fix dynamically loading of external script when loading a page as result of a click.
+            </action>
             <action type="update" dev="mguillem" issue="2921851">
                 JavaScript: resolve relative URLs from opener's URL when document.write is used in a window opened with window.open.
             </action>

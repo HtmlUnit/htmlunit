@@ -179,6 +179,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
         final String firstContent = "<html><head></head><body>\n"
             + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
             + "  <input type='file' name='image' />\n"
+            + "  <input type='submit' name='mysubmit'/>\n"
             + "</form>\n"
             + "</body>\n"
             + "</html>";
@@ -198,13 +199,13 @@ public class HtmlFileInputTest extends WebServerTestCase {
         final URL fileURL = getClass().getClassLoader().getResource("testfiles/empty.png");
 
         fileInput.setValueAttribute(fileURL.toExternalForm());
-        f.submit((SubmittableElement) null);
+        f.getInputByName("mysubmit").click();
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
         assertNotNull(pair.getFile());
         Assert.assertFalse("Content type: " + pair.getContentType(), "text/webtest".equals(pair.getContentType()));
 
         fileInput.setContentType("text/webtest");
-        f.submit((SubmittableElement) null);
+        f.getInputByName("mysubmit").click();
         final KeyDataPair pair2 = (KeyDataPair) webConnection.getLastParameters().get(0);
         assertNotNull(pair2.getFile());
         assertEquals("text/webtest", pair2.getContentType());

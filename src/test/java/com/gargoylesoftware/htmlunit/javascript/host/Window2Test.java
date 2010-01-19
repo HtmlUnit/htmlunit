@@ -26,6 +26,8 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.DialogWindow;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.OnbeforeunloadHandler;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -511,6 +513,36 @@ public class Window2Test extends WebDriverTestCase {
             + "  window.location = 'about:blank';\n"
             + "</script></body></html>";
         loadPageWithAlerts(html);
+    }
+
+    /**
+     * Download of next page is done first after onbeforeunload is done.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("x")
+    public void onbeforeunload_calledBeforeDownload() throws Exception {
+        final String html
+            = "<html><body><script>\n"
+            + "  window.onbeforeunload = function() { alert('x'); return 'hello'; };\n"
+            + "  window.location = 'foo.html';\n"
+            + "</script></body></html>";
+
+        final WebClient webClient = getWebClientWithMockWebConnection();
+        getMockWebConnection().setDefaultResponse("");
+
+        final OnbeforeunloadHandler handler = new OnbeforeunloadHandler() {
+            public boolean handleEvent(final Page page, final String returnValue) {
+                final String[] expectedRequests = {""};
+                assertEquals(expectedRequests, getMockWebConnection().getRequestedUrls(getDefaultUrl()));
+                return true;
+            }
+        };
+        webClient.setOnbeforeunloadHandler(handler);
+        loadPageWithAlerts(html);
+
+        final String[] expectedRequests = {"", "foo.html"};
+        assertEquals(expectedRequests, getMockWebConnection().getRequestedUrls(getDefaultUrl()));
     }
 
     /**

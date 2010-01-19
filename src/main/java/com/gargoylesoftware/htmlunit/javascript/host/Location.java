@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
@@ -189,38 +188,27 @@ public class Location extends SimpleScriptable {
      */
     public void jsxSet_href(final String newLocation) throws IOException {
         final HtmlPage page = (HtmlPage) getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
-        final PostponedAction action = new PostponedAction(page) {
-
-            @Override
-            public void execute() throws Exception {
-                if (newLocation.startsWith(JAVASCRIPT_PREFIX)) {
-                    final String script = newLocation.substring(11);
-                    page.executeJavaScriptIfPossible(script, "new location value", 1);
-                    return;
-                }
-
-                try {
-                    final URL url = page.getFullyQualifiedUrl(newLocation);
-                    final URL oldUrl = page.getWebResponse().getRequestSettings().getUrl();
-                    if (url.sameFile(oldUrl) && !StringUtils.equals(url.getRef(), oldUrl.getRef())) {
-                        // If we're just setting or modifying the hash, avoid a server hit.
-                        jsxSet_hash(newLocation);
-                        return;
-                    }
-                    final WebWindow webWindow = getWindow().getWebWindow();
-                    webWindow.getWebClient().getPage(webWindow, new WebRequestSettings(url));
-                }
-                catch (final MalformedURLException e) {
-                    LOG.error("jsxSet_location('" + newLocation + "') Got MalformedURLException", e);
-                    throw e;
-                }
-                catch (final IOException e) {
-                    LOG.error("jsxSet_location('" + newLocation + "') Got IOException", e);
-                    throw e;
-                }
+        if (newLocation.startsWith(JAVASCRIPT_PREFIX)) {
+            final String script = newLocation.substring(11);
+            page.executeJavaScriptIfPossible(script, "new location value", 1);
+            return;
+        }
+        try {
+            final URL url = page.getFullyQualifiedUrl(newLocation);
+            final URL oldUrl = page.getWebResponse().getRequestSettings().getUrl();
+            if (url.sameFile(oldUrl) && !StringUtils.equals(url.getRef(), oldUrl.getRef())) {
+                // If we're just setting or modifying the hash, avoid a server hit.
+                jsxSet_hash(newLocation);
+                return;
             }
-        };
-        page.getWebClient().getJavaScriptEngine().addPostponedAction(action);
+
+            final WebWindow webWindow = getWindow().getWebWindow();
+            webWindow.getWebClient().download(webWindow, "", new WebRequestSettings(url), "JS set location");
+        }
+        catch (final MalformedURLException e) {
+            LOG.error("jsxSet_location('" + newLocation + "') Got MalformedURLException", e);
+            throw e;
+        }
     }
 
     /**

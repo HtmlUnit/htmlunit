@@ -452,7 +452,7 @@ public abstract class HtmlElement extends DomElement {
      * @param shiftKey <tt>true</tt> if SHIFT is pressed during the typing
      * @param ctrlKey <tt>true</tt> if CTRL is pressed during the typing
      * @param altKey <tt>true</tt> if ALT is pressed during the typing
-     * @return the page that occupies this window after typing
+     * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
      * @exception IOException if an IO error occurs
      */
     public Page type(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
@@ -461,7 +461,8 @@ public abstract class HtmlElement extends DomElement {
             return getPage();
         }
 
-        if (((HtmlPage) getPage()).getFocusedElement() != this) {
+        final HtmlPage page = (HtmlPage) getPage();
+        if (page.getFocusedElement() != this) {
             focus();
         }
 
@@ -476,7 +477,7 @@ public abstract class HtmlElement extends DomElement {
             doType(c, shiftKey, ctrlKey, altKey);
         }
 
-        final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
+        final boolean ie = page.getWebClient().getBrowserVersion().isIE();
         if (!ie
             && (this instanceof HtmlTextInput
             || this instanceof HtmlTextArea
@@ -496,9 +497,10 @@ public abstract class HtmlElement extends DomElement {
                     return submit.click();
                 }
             }
-            return form.submit((SubmittableElement) this);
+            form.submit((SubmittableElement) this);
+            page.getWebClient().getJavaScriptEngine().processPostponedActions();
         }
-        return getPage();
+        return page.getWebClient().getCurrentWindow().getEnclosedPage();
     }
 
     /**

@@ -703,6 +703,9 @@ public class LocationTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         driver.findElement(By.tagName("a")).click();
 
+        final String[] expectedRequests = {"", "foo3.html", "foo2.html"};
+        assertEquals(expectedRequests, getMockWebConnection().getRequestedUrls(getDefaultUrl()));
+
         assertEquals(new URL(getDefaultUrl(), "foo2.html").toString(), driver.getCurrentUrl());
     }
 

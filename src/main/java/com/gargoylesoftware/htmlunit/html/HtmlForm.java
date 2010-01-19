@@ -37,6 +37,7 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebAssert;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
@@ -98,9 +99,10 @@ public class HtmlForm extends HtmlElement {
      * @return a new page that reflects the results of this submission
      * @exception IOException if an IO error occurs
      */
-    public Page submit(final SubmittableElement submitElement) throws IOException {
+    Page submit(final SubmittableElement submitElement) throws IOException {
         final HtmlPage htmlPage = (HtmlPage) getPage();
-        if (htmlPage.getWebClient().isJavaScriptEnabled()) {
+        final WebClient webClient = htmlPage.getWebClient();
+        if (webClient.isJavaScriptEnabled()) {
             if (submitElement != null) {
                 isPreventDefault_ = false;
                 final ScriptResult scriptResult = fireEvent(Event.TYPE_SUBMIT);
@@ -123,12 +125,11 @@ public class HtmlForm extends HtmlElement {
         }
 
         final WebRequestSettings settings = getWebRequestSettings(submitElement);
+        final String target = htmlPage.getResolvedTarget(getTargetAttribute());
 
         final WebWindow webWindow = htmlPage.getEnclosingWindow();
-        return htmlPage.getWebClient().getPage(
-                webWindow,
-                htmlPage.getResolvedTarget(getTargetAttribute()),
-                settings);
+        webClient.download(webWindow, target, settings, "JS form.submit()");
+        return htmlPage;
     }
 
     /**

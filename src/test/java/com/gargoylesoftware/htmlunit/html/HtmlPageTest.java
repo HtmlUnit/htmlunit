@@ -1674,11 +1674,18 @@ public class HtmlPageTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testOnbeforeunloadHandler() throws Exception {
-        testOnbeforeunloadHandler(BrowserVersion.INTERNET_EXPLORER_7, false, "first");
+    public void testOnbeforeunloadHandler_ok() throws Exception {
         testOnbeforeunloadHandler(BrowserVersion.INTERNET_EXPLORER_7, true, "second");
-        testOnbeforeunloadHandler(BrowserVersion.FIREFOX_3, false, "first");
         testOnbeforeunloadHandler(BrowserVersion.FIREFOX_3, true, "second");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testOnbeforeunloadHandler_cancel() throws Exception {
+        testOnbeforeunloadHandler(BrowserVersion.INTERNET_EXPLORER_7, false, "first");
+        testOnbeforeunloadHandler(BrowserVersion.FIREFOX_3, false, "first");
     }
 
     /**

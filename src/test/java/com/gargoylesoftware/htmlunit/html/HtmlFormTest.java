@@ -827,9 +827,10 @@ public class HtmlFormTest extends WebTestCase {
             + "     <option>first value</option>\n"
             + "     <option selected>second value</option>\n"
             + "</select>\n"
+            + "<input type='submit' id='mySubmit'>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(html);
-        final HtmlPage secondPage = (HtmlPage) page.getFormByName("form").submit((SubmittableElement) null);
+        final HtmlPage secondPage = (HtmlPage) page.getElementById("mySubmit").click();
 
         assertNotNull(secondPage);
         assertEquals(page.getWebResponse().getRequestSettings().getUrl() + "action.html?select=second+value",
@@ -996,8 +997,7 @@ public class HtmlFormTest extends WebTestCase {
             + "<button type='button' name='buttonButton' value='foo'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(html, null, url);
-        final HtmlForm form = page.getHtmlElementById("form1");
-        final Page page2 = form.submit((HtmlSubmitInput) page.getHtmlElementById("submitButton"));
+        final Page page2 = page.getHtmlElementById("submitButton").click();
 
         assertEquals(expectedUrl, page2.getWebResponse().getRequestSettings().getUrl());
     }

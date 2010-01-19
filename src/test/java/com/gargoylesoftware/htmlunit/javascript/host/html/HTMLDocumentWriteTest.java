@@ -773,7 +773,6 @@ public class HTMLDocumentWriteTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     @Alerts("HelloHello")
     public void writeExternalScriptAfterClick() throws Exception {
         final String html = "<html><head>\n"

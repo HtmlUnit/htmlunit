@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
+import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -928,33 +929,12 @@ public class WebClient implements Serializable {
             windowToOpen = defaultName;
         }
 
-        WebWindow webWindow = null;
-        if (windowToOpen.equals("_self")) {
-            webWindow = opener;
-            windowToOpen = "";
-        }
-        else if (windowToOpen.equals("_parent")) {
-            webWindow = opener.getParentWindow();
-            windowToOpen = "";
-        }
-        else if (windowToOpen.equals("_top")) {
-            webWindow = opener.getTopWindow();
-            windowToOpen = "";
-        }
-        else if (windowToOpen.equals("_blank")) {
-            // Leave window null to create a new window.
-            windowToOpen = "";
-        }
-        else if (windowToOpen.length() != 0) {
-            try {
-                webWindow = getWebWindowByName(windowToOpen);
-            }
-            catch (final WebWindowNotFoundException e) {
-                // Fall through - a new window will be created below
-            }
-        }
+        WebWindow webWindow = resolveWindow(opener, windowToOpen);
 
         if (webWindow == null) {
+            if ("_blank".equals(windowToOpen)) {
+                windowToOpen = "";
+            }
             webWindow = new TopLevelWindow(windowToOpen, this);
             fireWindowOpened(new WebWindowEvent(webWindow, WebWindowEvent.OPEN, null, null));
         }
@@ -964,6 +944,30 @@ public class WebClient implements Serializable {
         }
 
         return webWindow;
+    }
+
+    private WebWindow resolveWindow(final WebWindow opener, final String name) {
+        if (name == null || name.length() == 0 || name.equals("_self")) {
+            return opener;
+        }
+        else if (name.equals("_parent")) {
+            return opener.getParentWindow();
+        }
+        else if (name.equals("_top")) {
+            return opener.getTopWindow();
+        }
+        else if (name.equals("_blank")) {
+            return null;
+        }
+        else if (name.length() != 0) {
+            try {
+                return getWebWindowByName(name);
+            }
+            catch (final WebWindowNotFoundException e) {
+                // Fall through - a new window will be created below
+            }
+        }
+        return null;
     }
 
     /**
@@ -1998,5 +2002,146 @@ public class WebClient implements Serializable {
         in.defaultReadObject();
         webConnection_ = new HttpWebConnection(this);
         scriptEngine_ = new JavaScriptEngine(this);
+    }
+
+    private static class LoadJob {
+        private final WebWindow requestingWindow_;
+        private final String target_;
+        private final WebResponse response_;
+        private final URL urlWithOnlyHashChange_;
+        private final WeakReference<Page> originalPage_;
+
+        LoadJob(final WebWindow requestingWindow, final String target, final WebResponse response) {
+            requestingWindow_ = requestingWindow;
+            target_ = target;
+            response_ = response;
+            urlWithOnlyHashChange_ = null;
+            originalPage_ = new WeakReference<Page>(requestingWindow.getEnclosedPage());
+        }
+        LoadJob(final WebWindow requestingWindow, final String target, final URL urlWithOnlyHashChange) {
+            requestingWindow_ = requestingWindow;
+            target_ = target;
+            response_ = null;
+            urlWithOnlyHashChange_ = urlWithOnlyHashChange;
+            originalPage_ = new WeakReference<Page>(requestingWindow.getEnclosedPage());
+        }
+        public boolean isOutdated() {
+            if (target_ != null && target_.length() != 0) {
+                return false;
+            }
+            else if (requestingWindow_.isClosed()) {
+                return true;
+            }
+            else if (requestingWindow_.getEnclosedPage() != originalPage_.get()) {
+                return true;
+            }
+
+            return false;
+        }
+    }
+
+    private final List<LoadJob> loadQueue_ = new ArrayList<LoadJob>();
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Perform the downloads and stores it for loading later into a window.
+     * In the future downloads should be performed in parallel in separated threads.
+     * TODO: refactor it before next release.
+     * @param requestingWindow the window from which the request comes
+     * @param target the name of the target window
+     * @param requestSettings the request to perform
+     * @param description information about the origin of the request. Useful for debugging.
+     */
+    public void download(final WebWindow requestingWindow, final String target,
+        final WebRequestSettings requestSettings, final String description) {
+        final WebWindow win = resolveWindow(requestingWindow, target);
+        final URL url = requestSettings.getUrl();
+        boolean justHashJump = false;
+        if (win != null) {
+            final Page page = win.getEnclosedPage();
+            if (page instanceof HtmlPage && !((HtmlPage) page).isOnbeforeunloadAccepted()) {
+                return;
+            }
+            final URL current = page.getWebResponse().getRequestSettings().getUrl();
+            if (url.sameFile(current) && !StringUtils.equals(current.getRef(), url.getRef())) {
+                justHashJump = true;
+            }
+        }
+
+        for (final LoadJob loadJob : loadQueue_) {
+            final WebRequestSettings otherRequest = loadJob.response_.getRequestSettings();
+            final URL otherUrl = otherRequest.getUrl();
+            // TODO: investigate but it seems that IE considers query string too but not FF
+            if (url.getPath().equals(otherUrl.getPath())
+                && url.getHost().equals(otherUrl.getHost())
+                && url.getProtocol().equals(otherUrl.getProtocol())
+                && url.getPort() == otherUrl.getPort()
+                && requestSettings.getHttpMethod() == otherRequest.getHttpMethod()) {
+                return; // skip it;
+            }
+        }
+
+        final LoadJob loadJob;
+        if (justHashJump) {
+            loadJob = new LoadJob(win, target, url);
+        }
+        else {
+            try {
+                final WebResponse response = loadWebResponse(requestSettings);
+                loadJob = new LoadJob(requestingWindow, target, response);
+            }
+            catch (final IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        loadQueue_.add(loadJob);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Loads downloaded responses into the corresponding windows.
+     * TODO: refactor it before next release.
+     * @throws IOException in case of exception
+     * @throws FailingHttpStatusCodeException in case of exception
+     */
+    public void loadDownloadedResponses() throws FailingHttpStatusCodeException, IOException {
+        if (loadQueue_.isEmpty()) {
+            return;
+        }
+        final List<LoadJob> queue = new ArrayList<LoadJob>(loadQueue_);
+        loadQueue_.clear();
+
+        final HashSet<WebWindow> updatedWindows = new HashSet<WebWindow>();
+        for (int i = queue.size() - 1; i >= 0; --i) {
+            final LoadJob downloadedResponse = queue.get(i);
+            if (downloadedResponse.isOutdated()) {
+                LOG.info("No usage of download: " + downloadedResponse);
+                continue;
+            }
+            if (downloadedResponse.urlWithOnlyHashChange_ != null) {
+                final WebWindow window = downloadedResponse.requestingWindow_;
+                final HtmlPage page = (HtmlPage) window.getEnclosedPage();
+                page.getWebResponse().getRequestSettings().setUrl(downloadedResponse.urlWithOnlyHashChange_);
+                window.getHistory().addPage(page);
+            }
+            else {
+                final WebWindow window = resolveWindow(downloadedResponse.requestingWindow_,
+                    downloadedResponse.target_);
+                if (!updatedWindows.contains(window)) {
+                    final WebWindow win = openTargetWindow(downloadedResponse.requestingWindow_,
+                            downloadedResponse.target_, "_self");
+                    final Page pageBeforeLoad = win.getEnclosedPage();
+                    loadWebResponseInto(downloadedResponse.response_, win);
+                    if (pageBeforeLoad != win.getEnclosedPage()) {
+                        updatedWindows.add(win);
+                    }
+                }
+                else {
+                    LOG.info("No usage of download: " + downloadedResponse);
+                }
+            }
+        }
     }
 }

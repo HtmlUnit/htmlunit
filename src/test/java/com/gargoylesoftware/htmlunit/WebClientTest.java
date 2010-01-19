@@ -68,7 +68,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.SubmittableElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
@@ -1329,7 +1328,6 @@ public class WebClientTest extends WebServerTestCase {
 
     /**
      * Test reuse of a single {@link HtmlPage} object to submit the same form multiple times.
-     *
      * @throws Exception if test fails
      */
     @Test
@@ -1351,7 +1349,7 @@ public class WebClientTest extends WebServerTestCase {
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
         for (int i = 0; i < 100; i++) {
-            page.getFormByName("myform").submit((SubmittableElement) null);
+            page.getFormByName("myform").getInputByName("mysubmit").click();
         }
     }
 

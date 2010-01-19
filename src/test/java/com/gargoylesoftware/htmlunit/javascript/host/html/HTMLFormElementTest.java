@@ -37,7 +37,6 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -1416,7 +1415,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void submitTriggersRequestNotParsed() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
@@ -1441,10 +1439,11 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             connection.setResponse(new URL(getDefaultUrl(), "script" + i + ".js"), "", JAVASCRIPT_MIME_TYPE);
         }
         final WebDriver driver = loadPage2(html);
-        assertEquals("Page 4", driver.getTitle());
 
         // NB: comparing the sequence order here is not 100% safe with a real browser
         final String[] expectedRequests = {"", "foo0", "foo1", "foo2", "foo3", "foo4", "script4.js"};
         assertEquals(expectedRequests, getMockWebConnection().getRequestedUrls(getDefaultUrl()));
+
+        assertEquals("Page 4", driver.getTitle());
     }
 }

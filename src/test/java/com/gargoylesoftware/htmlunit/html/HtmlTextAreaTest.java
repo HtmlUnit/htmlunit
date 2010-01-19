@@ -53,6 +53,7 @@ public class HtmlTextAreaTest extends WebTestCase {
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<textarea name='textArea1'>" + textAreaText + "</textarea>\n"
+            + "<input type='submit' id='mysubmit'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(content);
         final MockWebConnection webConnection = getMockConnection(page);
@@ -61,7 +62,7 @@ public class HtmlTextAreaTest extends WebTestCase {
         final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
         assertNotNull(textArea);
 
-        final Page secondPage = form.submit((SubmittableElement) null);
+        final Page secondPage = page.getElementById("mysubmit").click();
 
         assertEquals("url", getDefaultUrl() + "?textArea1=" + expectedValue,
                 secondPage.getWebResponse().getRequestSettings().getUrl());
@@ -77,6 +78,7 @@ public class HtmlTextAreaTest extends WebTestCase {
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<textarea name='textArea1'>foo</textarea>\n"
+            + "<input type='submit' id='mysubmit'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(content);
         final MockWebConnection webConnection = getMockConnection(page);
@@ -84,7 +86,7 @@ public class HtmlTextAreaTest extends WebTestCase {
 
         final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
         textArea.setText("Flintstone");
-        final Page secondPage = form.submit((SubmittableElement) null);
+        final Page secondPage = page.getElementById("mysubmit").click();
 
         assertEquals("url", getDefaultUrl() + "?textArea1=Flintstone",
                 secondPage.getWebResponse().getRequestSettings().getUrl());

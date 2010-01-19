@@ -107,10 +107,9 @@ public class HtmlAnchor extends HtmlElement {
                     + "', using the originating URL "
                     + page.getWebResponse().getRequestSettings().getUrl());
         }
-        page.getWebClient().getPage(
-                page.getEnclosingWindow(),
+        page.getWebClient().download(page.getEnclosingWindow(),
                 page.getResolvedTarget(getTargetAttribute()),
-                wrs);
+                wrs, "Link click");
     }
 
     /**
