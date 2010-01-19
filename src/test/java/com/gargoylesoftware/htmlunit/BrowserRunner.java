@@ -23,6 +23,9 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.runner.Runner;
+import org.junit.runner.manipulation.Filter;
+import org.junit.runner.manipulation.NoTestsRemainException;
+import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.Suite;
 
 /**
@@ -94,6 +97,17 @@ public class BrowserRunner extends Suite {
         }
         if (BrowserNoneClassRunner.containsTestMethods(klass)) {
             runners_.add(new BrowserNoneClassRunner(klass));
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void filter(final Filter filter) throws NoTestsRemainException {
+        for (final Runner runner : getChildren()) {
+            final BlockJUnit4ClassRunner junit4Runner = (BlockJUnit4ClassRunner) runner;
+            junit4Runner.filter(filter);
         }
     }
 

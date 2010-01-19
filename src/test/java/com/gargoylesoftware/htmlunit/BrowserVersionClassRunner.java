@@ -20,11 +20,15 @@ import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.junit.Test;
 import org.junit.internal.runners.model.ReflectiveCallable;
 import org.junit.internal.runners.statements.Fail;
 import org.junit.rules.MethodRule;
+import org.junit.runner.Description;
+import org.junit.runner.manipulation.Filter;
+import org.junit.runner.manipulation.NoTestsRemainException;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
@@ -117,6 +121,31 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         return object;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void filter(final Filter filter) throws NoTestsRemainException {
+        computeTestMethods();
+
+        for (final ListIterator<FrameworkMethod> iter = testMethods_.listIterator(); iter.hasNext();) {
+            final FrameworkMethod method = iter.next();
+            // compute 2 descriptions to verify if it is the intended test:
+            // - one "normal", this is what Eclipse's filter awaits when typing Ctrl+X T
+            //   when cursor is located on a test method
+            // - one with browser nickname, this is what is needed when re-running a test from
+            //   the JUnit view
+            // as the list of methods is cached, this is what will be returned when computeTestMethods() is called
+            final Description description = Description.createTestDescription(getTestClass().getJavaClass(),
+                method.getName());
+            final Description description2 = Description.createTestDescription(getTestClass().getJavaClass(),
+                testName(method));
+            if (!filter.shouldRun(description) && !filter.shouldRun(description2)) {
+                iter.remove();
+            }
+        }
+    }
+
     @Override
     protected String getName() {
         String browserString = browserVersion_.getNickname();
@@ -148,8 +177,13 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         return String.format("%s%s [%s]", prefix, className + '.' + method.getName(), browserString);
     }
 
+    private List<FrameworkMethod> testMethods_;
+
     @Override
     protected List<FrameworkMethod> computeTestMethods() {
+        if (testMethods_ != null) {
+            return testMethods_;
+        }
         final List<FrameworkMethod> methods = super.computeTestMethods();
         for (int i = 0; i < methods.size(); i++) {
             final Method method = methods.get(i).getMethod();
@@ -164,7 +198,8 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
             }
         };
         Collections.sort(methods, comparator);
-        return methods;
+        testMethods_ = methods;
+        return testMethods_;
     }
 
     static boolean containsTestMethods(final Class<WebTestCase> klass) {
@@ -190,9 +225,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         for (final Browser browser : browsers) {
             switch(browser) {
                 case IE:
-                    if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_6
-                            || browserVersion_ == BrowserVersion.INTERNET_EXPLORER_7
-                            || browserVersion_ == BrowserVersion.INTERNET_EXPLORER_8) {
+                    if (browserVersion_.isIE()) {
                         return true;
                     }
                     break;
@@ -216,8 +249,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                     break;
 
                 case FF:
-                    if (browserVersion_ == BrowserVersion.FIREFOX_2
-                            || browserVersion_ == BrowserVersion.FIREFOX_3) {
+                    if (browserVersion_.isFirefox()) {
                         return true;
                     }
                     break;
