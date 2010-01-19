@@ -43,6 +43,7 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
 import com.steadystate.css.dom.CSSValueImpl;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.parser.SACParserCSS21;
@@ -4537,10 +4538,11 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     protected static int pixelValue(final HTMLElement element, final CssValue value) {
         final String s = value.get(element);
-        final int i = NumberUtils.toInt(s.replaceAll("(\\d+).*", "$1"), 0);
-        if (s.endsWith("%")) {
+        if (s.endsWith("%") || (s.length() == 0 && element instanceof HTMLHtmlElement)) {
+            final int i = NumberUtils.toInt(s.replaceAll("(\\d+).*", "$1"), 100);
             final HTMLElement parent = element.getParentHTMLElement();
-            return (int) ((i / 100D) * pixelValue(parent, value));
+            final int absoluteValue = (parent == null) ? value.getWindowDefaultValue() : pixelValue(parent, value);
+            return (int) ((i / 100D) * absoluteValue);
         }
         return pixelValue(s);
     }
@@ -4589,6 +4591,24 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Encapsulates the retrieval of a style attribute, given a DOM element from which to retrieve it.
      */
     protected abstract static class CssValue {
+        private final int windowDefaultValue_;
+
+        /**
+         * C'tor.
+         * @param windowDefaultValue the default value for the window
+         */
+        public CssValue(final int windowDefaultValue) {
+            windowDefaultValue_ = windowDefaultValue;
+        }
+
+        /**
+         * Gets the default size for the window.
+         * @return the default value for the window
+         */
+        public int getWindowDefaultValue() {
+            return windowDefaultValue_;
+        }
+
         /**
          * Returns the CSS attribute value for the specified element.
          * @param element the element for which the CSS attribute value is to be retrieved

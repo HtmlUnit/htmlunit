@@ -522,4 +522,21 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * NullPointerException occurred in offsetX computation in HtmlUnit-2.7-SNAPSHOT (19.01.2010).
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "true", "true" })
+    public void widthAndHeightPercentagesHTML() throws Exception {
+        final String html = "<html style='height: 100%'>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  var h = document.documentElement;\n"
+            + "  alert(h.offsetWidth > 0);\n"
+            + "  alert(h.offsetHeight > 0);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

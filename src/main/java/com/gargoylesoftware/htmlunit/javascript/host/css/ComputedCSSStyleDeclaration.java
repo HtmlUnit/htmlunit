@@ -580,7 +580,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_height() {
-        return pixelString(getElement(), new CssValue() {
+        return pixelString(getElement(), new CssValue(WINDOW_HEIGHT) {
             @Override public String get(final ComputedCSSStyleDeclaration style) {
                 return defaultIfEmpty(style.getStyleAttribute("height", true), "363px");
             }
@@ -1218,7 +1218,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         else {
             defaultWidth = WINDOW_WIDTH + "px";
         }
-        return pixelString(getElement(), new CssValue() {
+        return pixelString(getElement(), new CssValue(WINDOW_WIDTH) {
             @Override public String get(final ComputedCSSStyleDeclaration style) {
                 return defaultIfEmpty(style.getStyleAttribute("width", true), defaultWidth);
             }
@@ -1271,7 +1271,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     width = WINDOW_WIDTH;
                 }
                 else {
-                    width = pixelValue(parentJS, new CssValue() {
+                    width = pixelValue(parentJS, new CssValue(WINDOW_WIDTH) {
                         @Override public String get(final ComputedCSSStyleDeclaration style) {
                             return style.jsxGet_width();
                         }
@@ -1296,7 +1296,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
         else {
             // Width explicitly set in the style attribute, or there was no parent to provide guidance.
-            width = pixelValue(getElement(), new CssValue() {
+            width = pixelValue(getElement(), new CssValue(WINDOW_WIDTH) {
                 @Override public String get(final ComputedCSSStyleDeclaration style) {
                     return style.getStyleAttribute("width", true);
                 }
@@ -1343,7 +1343,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final int defaultHeight = (ie ? 15 : 20);
 
         final String h = super.jsxGet_height();
-        int elementHeight = pixelValue(getElement(), new CssValue() {
+        int elementHeight = pixelValue(getElement(), new CssValue(WINDOW_HEIGHT) {
             @Override public String get(final ComputedCSSStyleDeclaration style) {
                 return style.getStyleAttribute("height", true);
             }
