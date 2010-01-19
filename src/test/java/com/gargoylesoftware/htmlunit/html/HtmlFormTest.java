@@ -997,7 +997,7 @@ public class HtmlFormTest extends WebTestCase {
             + "<button type='button' name='buttonButton' value='foo'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(html, null, url);
-        final Page page2 = page.getHtmlElementById("submitButton").click();
+        final Page page2 = page.<HtmlElement>getHtmlElementById("submitButton").click();
 
         assertEquals(expectedUrl, page2.getWebResponse().getRequestSettings().getUrl());
     }

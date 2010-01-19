@@ -1349,7 +1349,8 @@ public class WebClientTest extends WebServerTestCase {
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
         for (int i = 0; i < 100; i++) {
-            page.getFormByName("myform").getInputByName("mysubmit").click();
+            final HtmlElement button = page.getFormByName("myform").getInputByName("mysubmit");
+            button.click();
         }
     }
 

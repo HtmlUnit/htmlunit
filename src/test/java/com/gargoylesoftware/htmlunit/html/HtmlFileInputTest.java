@@ -199,13 +199,13 @@ public class HtmlFileInputTest extends WebServerTestCase {
         final URL fileURL = getClass().getClassLoader().getResource("testfiles/empty.png");
 
         fileInput.setValueAttribute(fileURL.toExternalForm());
-        f.getInputByName("mysubmit").click();
+        f.<HtmlInput>getInputByName("mysubmit").click();
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
         assertNotNull(pair.getFile());
         Assert.assertFalse("Content type: " + pair.getContentType(), "text/webtest".equals(pair.getContentType()));
 
         fileInput.setContentType("text/webtest");
-        f.getInputByName("mysubmit").click();
+        f.<HtmlInput>getInputByName("mysubmit").click();
         final KeyDataPair pair2 = (KeyDataPair) webConnection.getLastParameters().get(0);
         assertNotNull(pair2.getFile());
         assertEquals("text/webtest", pair2.getContentType());
