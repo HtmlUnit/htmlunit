@@ -128,9 +128,6 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
     @Override
     protected String testName(final FrameworkMethod method) {
-//        if (!maven_) {
-//            return super.testName(method);
-//        }
         String className = method.getMethod().getDeclaringClass().getName();
         className = className.substring(className.lastIndexOf('.') + 1);
         String prefix = "";
@@ -144,6 +141,9 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         String browserString = browserVersion_.getNickname();
         if (useWebDriver_) {
             browserString = "Real " + browserString;
+        }
+        if (!maven_) {
+            return String.format("%s [%s]", method.getName(), browserString);
         }
         return String.format("%s%s [%s]", prefix, className + '.' + method.getName(), browserString);
     }
