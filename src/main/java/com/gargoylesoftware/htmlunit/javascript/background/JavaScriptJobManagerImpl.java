@@ -361,6 +361,10 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         if (jobsStillRunning.size() > 0) {
             LOG.warn("Jobs still running after shutdown: " + jobsStillRunning.size());
         }
+        if (getJobCount() > 0) {
+            LOG.warn("jobCount: " + getJobCount() + "(taskCount: " + executor_.getTaskCount()
+                + ", completedTaskCount: " + executor_.getCompletedTaskCount() + ")");
+        }
     }
 
     /**
