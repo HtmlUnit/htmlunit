@@ -846,4 +846,50 @@ public class HTMLDocumentWriteTest extends WebDriverTestCase {
 
         assertEquals(new URL(getDefaultUrl(), "foo"), getMockWebConnection().getLastWebRequestSettings().getUrl());
     }
+
+    /**
+     * Partial regression test for bug 2921851: the window returned by <tt>window.open()</tt> should
+     * be proxied (i.e. "live").
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @NotYetImplemented
+    @Alerts(FF = { "<form></form>", "[object HTMLFormElement]" }, IE = { "<FORM></FORM>", "[object]" })
+    public void testWriteOnOpenedWindow_WindowIsProxied() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test(){\n"
+            + "var w = window.open('','blah','width=460,height=420');\n"
+            + "w.document.write('<html><body><form></form></body></html>');\n"
+            + "w.document.close();\n"
+            + "alert(w.document.body.innerHTML);\n"
+            + "alert(w.document.forms[0]);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>foo</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Partial regression test for bug 2921851: the document returned by <tt>window.document</tt> should
+     * be proxied (i.e. "live").
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @NotYetImplemented
+    @Alerts(FF = { "<form></form>", "[object HTMLFormElement]" }, IE = { "<FORM></FORM>", "[object]" })
+    public void testWriteOnOpenedWindow_DocumentIsProxied() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test(){\n"
+            + "var w = window.open('','blah','width=460,height=420');\n"
+            + "var d = w.document;\n"
+            + "d.write('<html><body><form></form></body></html>');\n"
+            + "d.close();\n"
+            + "alert(d.body.innerHTML);\n"
+            + "alert(d.forms[0]);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>foo</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }
