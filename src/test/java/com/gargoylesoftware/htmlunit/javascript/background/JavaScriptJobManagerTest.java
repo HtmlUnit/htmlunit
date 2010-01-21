@@ -180,7 +180,7 @@ public class JavaScriptJobManagerTest extends WebTestCase {
         if (nbJobs != 0) {
             dumpThreads(System.err);
         }
-        Assert.assertEquals("thread should stop", 0, mgr.getJobCount());
+        Assert.assertEquals("job manager should have no jobs left", 0, mgr.getJobCount());
     }
 
     private void dumpThreads(final PrintStream out) {
