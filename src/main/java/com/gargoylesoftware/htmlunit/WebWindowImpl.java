@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
@@ -39,6 +42,7 @@ public abstract class WebWindowImpl implements WebWindow {
 
     /** Serial version UID. */
     private static final long serialVersionUID = -8407026088913790772L;
+    private static final Log LOG = LogFactory.getLog(WebWindowImpl.class);
 
     private WebClient webClient_;
     private Page enclosedPage_;
@@ -95,6 +99,7 @@ public abstract class WebWindowImpl implements WebWindow {
      * {@inheritDoc}
      */
     public void setEnclosedPage(final Page page) {
+        LOG.debug("setEnclosedPage: " + page);
         if (page == enclosedPage_) {
             return;
         }
@@ -157,9 +162,11 @@ public abstract class WebWindowImpl implements WebWindow {
     }
 
     void destroyChildren() {
+        LOG.debug("destroyChildren");
         getJobManager().removeAllJobs();
         for (final ListIterator<WebWindowImpl> iter = childWindows_.listIterator(); iter.hasNext();) {
             final WebWindowImpl window = iter.next();
+            LOG.debug("closing child window: " + window);
             window.setClosed();
             window.getJobManager().shutdown();
             final Page page = window.getEnclosedPage();

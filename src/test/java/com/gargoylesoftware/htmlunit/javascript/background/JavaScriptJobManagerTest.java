@@ -24,6 +24,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
+import org.apache.log4j.spi.LoggerRepository;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -44,8 +52,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  */
 public class JavaScriptJobManagerTest extends WebTestCase {
+    private static final Log LOG = LogFactory.getLog(JavaScriptJobManagerTest.class);
 
     private long startTime_;
+    private boolean logChanged_;
 
     private void startTimedTest() {
         startTime_ = System.currentTimeMillis();
@@ -141,6 +151,8 @@ public class JavaScriptJobManagerTest extends WebTestCase {
      */
     @Test
     public void navigationStopThreadsInChildWindows() throws Exception {
+        setLogLevel(Level.DEBUG);
+
         final String firstContent = "<html><head><title>First</title></head><body>\n"
             + "<iframe id='iframe1' src='"
             + URL_SECOND
@@ -170,7 +182,9 @@ public class JavaScriptJobManagerTest extends WebTestCase {
         Assert.assertEquals("inner frame should show child thread", 1, mgr.getJobCount());
 
         final HtmlAnchor anchor = page.getHtmlElementById("clickme");
+        LOG.debug("before click");
         final HtmlPage newPage = anchor.click();
+        LOG.debug("after click");
 
         Assert.assertEquals("new page should load", "Third", newPage.getTitleText());
         Assert.assertEquals("frame should be gone", 0, newPage.getFrames().size());
@@ -181,6 +195,27 @@ public class JavaScriptJobManagerTest extends WebTestCase {
             dumpThreads(System.err);
         }
         Assert.assertEquals("job manager should have no jobs left", 0, mgr.getJobCount());
+    }
+
+    private void setLogLevel(final Level level) {
+        logChanged_ = true;
+        final LoggerRepository lr = Logger.getRootLogger().getLoggerRepository();
+        lr.resetConfiguration();
+        lr.setThreshold(level);
+        lr.getRootLogger().setLevel(level);
+        lr.getRootLogger().addAppender(new ConsoleAppender(
+            new PatternLayout(PatternLayout.TTCC_CONVERSION_PATTERN)));
+    }
+
+    /**
+     * Restore log level to original value.
+     */
+    @After
+    public void restoreLog() {
+        if (logChanged_) {
+            setLogLevel(Level.ERROR);
+            logChanged_ = false;
+        }
     }
 
     private void dumpThreads(final PrintStream out) {
