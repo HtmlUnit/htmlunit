@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Number is a native JavaScript object and therefore provided by Rhino but some tests are needed here
@@ -53,6 +54,21 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Alerts(FF = "toSource: function", IE = "toSource: undefined")
     public void methods_different() throws Exception {
         final String html = NativeDateTest.createHTMLTestMethods("new Number()", "toSource");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test for Rhino bug 538172.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    @Alerts("2.274341322658976e-309")
+    public void toStringRhinoBug538172() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "alert(2.274341322658976E-309);\n"
+            + "</script></head><body>\n"
+            + "</body></html>";
         loadPageWithAlerts2(html);
     }
 }
