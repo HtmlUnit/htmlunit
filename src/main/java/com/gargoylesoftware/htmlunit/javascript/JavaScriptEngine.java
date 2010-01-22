@@ -251,6 +251,7 @@ public class JavaScriptEngine {
                     "reduce", "reduceRight", "some", "toSource");
             removePrototypeProperties(window, "Date", "toSource");
             removePrototypeProperties(window, "Function", "toSource");
+            removePrototypeProperties(window, "Number", "toSource");
             removePrototypeProperties(window, "String", "toSource");
         }
         else if ("FF2".equals(webClient.getBrowserVersion().getNickname())) {
