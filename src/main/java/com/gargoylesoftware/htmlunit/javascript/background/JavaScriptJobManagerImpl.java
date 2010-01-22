@@ -146,6 +146,10 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     /** {@inheritDoc} */
     public int getJobCount() {
+        if (executor_.isShutdown()) {
+            return 0;
+        }
+
         // This method reads the job count a couple of times, to make sure that the count returned
         // is stable; the underlying ThreadPoolExecutor API only guarantees approximate results, so
         // we need to do a little bit of extra work to ensure that we return results that are as
@@ -345,7 +349,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     /** {@inheritDoc} */
     public synchronized void shutdown() {
         executor_.purge();
-        final List<Runnable> jobsStillRunning = executor_.shutdownNow();
+        final List<Runnable> neverStartedTasks = executor_.shutdownNow();
         futures_.clear();
         if (executorThread_ != null) {
             try {
@@ -358,12 +362,10 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                 LOG.warn("Executor thread " + executorThread_.getName() + " still alive");
             }
         }
-        if (jobsStillRunning.size() > 0) {
-            LOG.warn("Jobs still running after shutdown: " + jobsStillRunning.size());
-        }
-        if (getJobCount() > 0) {
+        if (getJobCount() - neverStartedTasks.size() > 0) {
             LOG.warn("jobCount: " + getJobCount() + "(taskCount: " + executor_.getTaskCount()
-                + ", completedTaskCount: " + executor_.getCompletedTaskCount() + ")");
+                + ", completedTaskCount: " + executor_.getCompletedTaskCount()
+                + ", never started tasks: " + neverStartedTasks.size() + ")");
         }
     }
 
