@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  * to be sure that we have the expected results (for instance EcmaScript 5 adds methods that are not
  * available in FF2 or FF3).
  *
- * @version $Revision: 5301 $
+ * @version $Revision$
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
