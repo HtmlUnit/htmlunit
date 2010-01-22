@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration preparation">
+            <action type="fix" dev="asashour" issue="2924097">
+                JavaScript: correctly handle division operator in pre-processing of string literals.
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: many calls to form.submit after change of the action attribute causes many downloads
                 and only the last one is parsed and loaded into the window.

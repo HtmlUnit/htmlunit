@@ -54,8 +54,21 @@ public class StringScriptPreProcessor implements ScriptPreProcessor {
                             parsingStatus = PARSING_STATUS.IN_MULTI_LINE_COMMENT;
                         }
                         else {
-                            stringChar = ch;
-                            parsingStatus = PARSING_STATUS.IN_REG_EXP;
+                            boolean regExp = true;
+                            for (int x  = i - 1; x >= 0; x--) {
+                                char c = sourceCode.charAt(x);
+                                if (!Character.isWhitespace(c)) {
+                                    if (Character.isLetterOrDigit(c)) {
+                                        //division operator, not Regular Expression
+                                        regExp = false;
+                                    }
+                                    break;
+                                }
+                            }
+                            if (regExp) {
+                                stringChar = ch;
+                                parsingStatus = PARSING_STATUS.IN_REG_EXP;
+                            }
                         }
                     }
                     else if (parsingStatus == PARSING_STATUS.IN_REG_EXP && ch == stringChar) {

@@ -116,11 +116,9 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     }
 
     /**
-     * Regression test for bug 2924097 (Rhino JS parsing error: "missing ) after argument list").
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented
     public void javaScriptParsingError() throws Exception {
         final String html = "<html><body><script>\n"
             + "x=function(a){a/2};\n"
