@@ -16,22 +16,12 @@ package com.gargoylesoftware.htmlunit.javascript.background;
 
 import static org.junit.Assert.assertNotNull;
 
-import java.io.PrintStream;
-import java.lang.management.ManagementFactory;
-import java.lang.management.ThreadInfo;
-import java.lang.management.ThreadMXBean;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
-import org.apache.log4j.spi.LoggerRepository;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -55,7 +45,6 @@ public class JavaScriptJobManagerTest extends WebTestCase {
     private static final Log LOG = LogFactory.getLog(JavaScriptJobManagerTest.class);
 
     private long startTime_;
-    private boolean logChanged_;
 
     private void startTimedTest() {
         startTime_ = System.currentTimeMillis();
@@ -151,8 +140,6 @@ public class JavaScriptJobManagerTest extends WebTestCase {
      */
     @Test
     public void navigationStopThreadsInChildWindows() throws Exception {
-        setLogLevel(Level.DEBUG);
-
         final String firstContent = "<html><head><title>First</title></head><body>\n"
             + "<iframe id='iframe1' src='"
             + URL_SECOND
@@ -190,56 +177,7 @@ public class JavaScriptJobManagerTest extends WebTestCase {
         Assert.assertEquals("frame should be gone", 0, newPage.getFrames().size());
 
         mgr.waitForJobs(10000);
-        final int nbJobs = mgr.getJobCount();
-        if (nbJobs != 0) {
-            dumpThreads(System.err);
-        }
         Assert.assertEquals("job manager should have no jobs left", 0, mgr.getJobCount());
-    }
-
-    private void setLogLevel(final Level level) {
-        logChanged_ = true;
-        final LoggerRepository lr = Logger.getRootLogger().getLoggerRepository();
-        lr.resetConfiguration();
-        lr.setThreshold(level);
-        lr.getRootLogger().setLevel(level);
-        lr.getRootLogger().addAppender(new ConsoleAppender(
-            new PatternLayout(PatternLayout.TTCC_CONVERSION_PATTERN)));
-    }
-
-    /**
-     * Restore log level to original value.
-     */
-    @After
-    public void restoreLog() {
-        if (logChanged_) {
-            setLogLevel(Level.ERROR);
-            logChanged_ = false;
-        }
-    }
-
-    private void dumpThreads(final PrintStream out) {
-        out.println("Thread dump:");
-        final ThreadMXBean mxBean = ManagementFactory.getThreadMXBean();
-        final long[] allIds = mxBean.getAllThreadIds();
-        final ThreadInfo[] threadInfo = mxBean.getThreadInfo(allIds, Integer.MAX_VALUE);
-        for (final ThreadInfo oneInfo : threadInfo) {
-            out.println();
-            out.println("\"" + oneInfo.getThreadName() + "\" " + oneInfo.getThreadState());
-            final StackTraceElement[] stackTrace = oneInfo.getStackTrace();
-            out.println(stackTrace.length + " stack trace elements");
-
-            boolean first = true;
-            for (final StackTraceElement stackElement : stackTrace) {
-                if (!first) {
-                    out.print("at ");
-                }
-                first = false;
-                out.println(stackElement.getClassName()
-                    + "(" + stackElement.getFileName()
-                    + ":" + stackElement.getLineNumber() + ")");
-            }
-        }
     }
 
     /**
