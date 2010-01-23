@@ -1391,6 +1391,82 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
+     * NOTE: When running this test with Firefox (3.6, at least), it's important to reload the page with Ctrl+F5
+     * in order to completely clear the cache; otherwise, Firefox appears to incorrectly cache some style attributes.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "0", "0", "0", "0", "0", "17", "0", "0" })
+    public void scrollLeft() throws Exception {
+        final String html
+            = "<html><body onload='test()'>\n"
+            + "<div id='d1' style='width:100px;height:100px;background-color:green;'>\n"
+            + "  <div id='d2' style='width:50px;height:50px;background-color:blue;'></div>"
+            + "</div>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var d1 = document.getElementById('d1'), d2 = document.getElementById('d2');\n"
+            + "  alert(d1.scrollLeft);\n"
+            + "  d1.scrollLeft = -1;\n"
+            + "  alert(d1.scrollLeft);\n"
+            + "  d1.scrollLeft = 5;\n"
+            + "  alert(d1.scrollLeft);\n"
+            + "  d2.style.width = '200px';\n"
+            + "  d2.style.height = '200px';\n"
+            + "  d1.scrollLeft = 7;\n"
+            + "  alert(d1.scrollLeft);\n"
+            + "  d1.style.overflow = 'scroll';\n"
+            + "  alert(d1.scrollLeft);\n"
+            + "  d1.scrollLeft = 17;\n"
+            + "  alert(d1.scrollLeft);\n"
+            + "  d1.style.overflow = 'visible';\n"
+            + "  alert(d1.scrollLeft);\n"
+            + "  d1.scrollLeft = 19;\n"
+            + "  alert(d1.scrollLeft);\n"
+            + "}\n"
+            + "</script></body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * NOTE: When running this test with Firefox (3.6, at least), it's important to reload the page with Ctrl+F5
+     * in order to completely clear the cache; otherwise, Firefox appears to incorrectly cache some style attributes.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "0", "0", "0", "0", "0", "17", "0", "0" })
+    public void scrollTop() throws Exception {
+        final String html
+            = "<html><body onload='test()'>\n"
+            + "<div id='d1' style='width:100px;height:100px;background-color:green;'>\n"
+            + "  <div id='d2' style='width:50px;height:50px;background-color:blue;'></div>"
+            + "</div>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var d1 = document.getElementById('d1'), d2 = document.getElementById('d2');\n"
+            + "  alert(d1.scrollTop);\n"
+            + "  d1.scrollTop = -1;\n"
+            + "  alert(d1.scrollTop);\n"
+            + "  d1.scrollTop = 5;\n"
+            + "  alert(d1.scrollTop);\n"
+            + "  d2.style.width = '200px';\n"
+            + "  d2.style.height = '200px';\n"
+            + "  d1.scrollTop = 7;\n"
+            + "  alert(d1.scrollTop);\n"
+            + "  d1.style.overflow = 'scroll';\n"
+            + "  alert(d1.scrollTop);\n"
+            + "  d1.scrollTop = 17;\n"
+            + "  alert(d1.scrollTop);\n"
+            + "  d1.style.overflow = 'visible';\n"
+            + "  alert(d1.scrollTop);\n"
+            + "  d1.scrollTop = 19;\n"
+            + "  alert(d1.scrollTop);\n"
+            + "}\n"
+            + "</script></body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
      * Tests that JavaScript scrollIntoView() function doesn't fail.
      * @throws Exception if the test fails
      */
