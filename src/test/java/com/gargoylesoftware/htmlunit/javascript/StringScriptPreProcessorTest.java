@@ -63,4 +63,32 @@ public class StringScriptPreProcessorTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void divisionOperator() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "x=function(a){a/2};\n"
+            + "y='/';\n"
+            + "z=function(b){b(/\\xAD/)};\n"
+            + "p=function(c){c(/d/)};\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void divisionOperatorAfterParentheses() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "x=function(a){b()/2};\n"
+            + "y='/';\n"
+            + "z=function(b){b(/\\xAD/)};\n"
+            + "p=function(c){c(/d/)};\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
 }
