@@ -95,9 +95,9 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
                     final Matcher matcher = pattern.matcher(thisString);
                     replacement = escapeInvalidBackReferences(regex, replacement);
                     if (reData.hasFlag('g')) {
-                        return matcher.replaceAll(replacement);
+                        return doReplacement(thisString, replacement, matcher, true);
                     }
-                    return matcher.replaceFirst(replacement);
+                    return doReplacement(thisString, replacement, matcher, false);
                 }
                 catch (final PatternSyntaxException e) {
                     LOG.warn(e.getMessage(), e);
@@ -148,6 +148,30 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         }
 
         return wrappedAction(cx, scope, thisObj, args, actionType);
+    }
+
+    private String doReplacement(final String originalString, final String replacement, final Matcher matcher,
+        final boolean replaceAll) {
+        final StringBuffer sb = new StringBuffer();
+        while (matcher.find()) {
+            final String localReplacement;
+            if (replacement.contains("$")) {
+                String str = replacement;
+                str = str.replaceAll("\\$&", Matcher.quoteReplacement(matcher.group()));
+                str = str.replaceAll("\\$`", Matcher.quoteReplacement(originalString.substring(0, matcher.start())));
+                str = str.replaceAll("\\$'", Matcher.quoteReplacement(originalString.substring(matcher.end())));
+                localReplacement = str;
+            }
+            else {
+                localReplacement = replacement;
+            }
+            matcher.appendReplacement(sb, localReplacement);
+            if (!replaceAll) {
+                break;
+            }
+        }
+        matcher.appendTail(sb);
+        return sb.toString();
     }
 
     /**

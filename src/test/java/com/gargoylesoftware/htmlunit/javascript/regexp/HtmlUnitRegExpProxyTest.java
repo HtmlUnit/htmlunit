@@ -615,6 +615,36 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("food bar")
+    public void replace_backReference_ampersand()  throws Exception {
+        testEvaluate("'foo bar'.replace(/foo/g, '$&d')");
+        testEvaluate("'foo bar'.replace(/foo/, '$&d')");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("foo foo ")
+    public void replace_backReference_backtick()  throws Exception {
+        testEvaluate("'foo bar'.replace(/bar/g, '$`')");
+        testEvaluate("'foo bar'.replace(/bar/, '$`')");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(" bar bar")
+    public void replace_backReference_tick()  throws Exception {
+        testEvaluate("'foo bar'.replace(/foo/g, '$\\'')");
+        testEvaluate("'foo bar'.replace(/foo/, '$\\'')");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts("kid\\'s toys")
     public void escapeQuote() throws Exception {
         testEvaluate("\"kid's toys\".replace(/'/g, \"\\\\'\")");
