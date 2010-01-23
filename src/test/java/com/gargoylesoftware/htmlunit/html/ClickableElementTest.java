@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
- * Tests for {@link ClickableElement}.
+ * Tests for various clickable elements.
  *
  * @version $Revision$
  * @author David K. Taylor
@@ -40,6 +40,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  */
 @RunWith(BrowserRunner.class)
 public class ClickableElementTest extends WebDriverTestCase {
+
     /**
      * Full page driver for onClick tests.
      *
@@ -62,21 +63,19 @@ public class ClickableElementTest extends WebDriverTestCase {
      * @param expectedAlerts array of expected popup values
      * @throws Exception if the test fails
      */
-    private void onClickPageTest(final String htmlContent, final int numClicks)
-        throws Exception {
+    private void onClickPageTest(final String htmlContent, final int numClicks) throws Exception {
         onClickPageTest(htmlContent, numClicks, false);
     }
 
-        /**
-        * Full page driver for onClick tests.
-        *
-        * @param htmlContent HTML fragment for body of page with clickable element
-        * identified by clickId ID attribute.
-        * @param numClicks number of times to click element
-        * @param expectedAlerts array of expected popup values
-        * @param exceptionOnError
-        * @throws Exception if the test fails
-        */
+    /**
+     * Full page driver for onClick tests.
+     *
+     * @param htmlContent HTML fragment for body of page with clickable element identified by clickId ID attribute
+     * @param numClicks number of times to click element
+     * @param expectedAlerts array of expected popup values
+     * @param exceptionOnError
+     * @throws Exception if the test fails
+     */
     private void onClickPageTest(final String htmlContent, final int numClicks,
             final boolean exceptionOnError) throws Exception {
 

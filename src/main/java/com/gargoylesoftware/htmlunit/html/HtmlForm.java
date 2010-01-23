@@ -136,7 +136,6 @@ public class HtmlForm extends HtmlElement {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * Gets the settings for a submission of this form request settings necessary to submit this form.
-     * @param submitElement
      * @param submitElement the element that caused the submit to occur
      * @return the request settings
      */

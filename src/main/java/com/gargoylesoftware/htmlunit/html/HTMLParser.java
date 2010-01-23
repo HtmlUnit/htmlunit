@@ -718,7 +718,7 @@ public final class HTMLParser {
             previousNode.onAllChildrenAddedToPage(postponed);
         }
 
-        /** @inheritDoc ContentHandler#characters(char,int,int) */
+        /** {@inheritDoc} */
         public void characters(final char[] ch, final int start, final int length) throws SAXException {
             if ((characters_ == null || characters_.length() == 0)
                     && new String(ch, start, length).trim().length() == 0
@@ -765,7 +765,7 @@ public final class HTMLParser {
             return true;
         }
 
-        /** @inheritDoc ContentHandler#ignorableWhitespace(char,int,int) */
+        /** {@inheritDoc} */
         public void ignorableWhitespace(final char[] ch, final int start, final int length) throws SAXException {
             if (characters_ == null) {
                 characters_ = new StringBuilder();

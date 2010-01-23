@@ -161,12 +161,12 @@ abstract class NodeIterator implements Iterator<DomNode> {
         node_ = getFirstNode(contextNode);
     }
 
-    /** @inheritDoc Iterator#hasNext() */
+    /** {@inheritDoc} */
     public boolean hasNext() {
         return (node_ != null);
     }
 
-    /** @inheritDoc Iterator#next() */
+    /** {@inheritDoc} */
     public DomNode next() {
         if (node_ == null) {
             throw new NoSuchElementException();
@@ -176,7 +176,7 @@ abstract class NodeIterator implements Iterator<DomNode> {
         return ret;
     }
 
-    /** @inheritDoc Iterator#remove() */
+    /** {@inheritDoc} */
     public void remove() {
         throw new UnsupportedOperationException();
     }

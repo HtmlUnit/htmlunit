@@ -498,7 +498,6 @@ public class HttpWebConnection implements WebConnection {
     /**
      * This implementation overrides the superclass' method by encoding filename according to the page charset.
      * @see <a href="http://issues.apache.org/jira/browse/HTTPCLIENT-293">HTTPCLIENT-293</a>
-     * {@inheritDoc}
      */
     private static final class FilePartPageCharSet extends FilePart {
         private KeyDataPair pairWithFile_;

@@ -1113,7 +1113,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             super(client);
         }
 
-        /** @inheritDoc ScriptEngine#execute(HtmlPage,String,String,int) */
+        /** {@inheritDoc} */
         @Override
         public Object execute(
                 final HtmlPage htmlPage, final String sourceCode,
@@ -1121,13 +1121,15 @@ public class JavaScriptEngineTest extends WebTestCase {
             scriptExecutionCount_++;
             return super.execute(htmlPage, sourceCode, sourceName, startLine);
         }
-        /** @inheritDoc ScriptEngine#execute(HtmlPage,Script) */
+
+        /** {@inheritDoc} */
         @Override
         public Object execute(final HtmlPage htmlPage, final Script script) {
             scriptExecuteScriptCount_++;
             return super.execute(htmlPage, script);
         }
-        /** @inheritDoc ScriptEngine#compile(HtmlPage,String,String,int) */
+
+        /** {@inheritDoc} */
         @Override
         public Script compile(final HtmlPage htmlPage, final String sourceCode,
                 final String sourceName, final int startLine) {
@@ -1135,7 +1137,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             return super.compile(htmlPage, sourceCode, sourceName, startLine);
         }
 
-        /** @inheritDoc ScriptEngine#callFunction(HtmlPage,Object,Object,Object[],HtmlElement) */
+        /** {@inheritDoc} */
         @Override
         public Object callFunction(
                 final HtmlPage htmlPage, final Object javaScriptFunction,

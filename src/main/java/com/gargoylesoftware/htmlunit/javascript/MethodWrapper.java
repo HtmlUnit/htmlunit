@@ -24,7 +24,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
- * Wraps a java method to make it available as a JavaScript function
+ * Wraps a Java method to make it available as a JavaScript function
  * (more flexible than Rhino's {@link FunctionObject}.
  *
  * @version $Revision$
@@ -38,7 +38,7 @@ public class MethodWrapper extends ScriptableObject implements Function {
     private final int[] jsTypeTags_;
 
     /**
-     * Facility constructor to wrap a method without arguments
+     * Facility constructor to wrap a method without arguments.
      * @param methodName the name of the method to wrap
      * @param clazz the class declaring the method
      * @throws NoSuchMethodException if the method is no found
@@ -76,7 +76,6 @@ public class MethodWrapper extends ScriptableObject implements Function {
     }
 
     /**
-     * @see net.sourceforge.htmlunit.corejs.javascript.Function#call(Context, Scriptable, Scriptable, Object[])
      * {@inheritDoc}
      */
     public Object call(final Context context, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
@@ -114,7 +113,7 @@ public class MethodWrapper extends ScriptableObject implements Function {
     }
 
     /**
-     * Converts js arguments to java arguments
+     * Converts JavaScript arguments to Java arguments.
      * @param context the current context
      * @param scope the current scope
      * @param jsArgs the JavaScript arguments
@@ -134,7 +133,6 @@ public class MethodWrapper extends ScriptableObject implements Function {
     }
 
     /**
-     * @see net.sourceforge.htmlunit.corejs.javascript.Function#construct(Context, Scriptable, Object[])
      * {@inheritDoc}
      */
     public Scriptable construct(final Context context, final Scriptable scope, final Object[] args) {
