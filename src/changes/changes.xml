@@ -13,7 +13,7 @@
                 Removed public method HtmlForm.submit(SubmittableElement) without replacement (method was marked as internal API).
             </action>
             <action type="fix" dev="asashour" issue="2924097">
-                JavaScript: correctly handle division operator in pre-processing of string literals.
+                JavaScript: StringScriptPreProcessor to use Rhino AST.
             </action>
             <action type="fix" dev="mguillem">
                 JavaScript: many calls to form.submit after change of the action attribute causes many downloads
