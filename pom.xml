@@ -685,9 +685,9 @@
         </dependency>
         <!-- WebDriver -->
         <dependency>
-            <groupId>org.seleniumhq.webdriver</groupId>
-            <artifactId>webdriver-htmlunit</artifactId>
-            <version>0.9.7376</version>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-htmlunit-driver</artifactId>
+            <version>2.0a1</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -697,15 +697,15 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.seleniumhq.webdriver</groupId>
-            <artifactId>webdriver-firefox</artifactId>
-            <version>0.9.7376</version>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-firefox-driver</artifactId>
+            <version>2.0a1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.seleniumhq.webdriver</groupId>
-            <artifactId>webdriver-ie</artifactId>
-            <version>0.9.7376</version>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-ie-driver</artifactId>
+            <version>2.0a1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
