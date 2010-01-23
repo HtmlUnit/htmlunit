@@ -56,7 +56,7 @@ public class StringScriptPreProcessor implements ScriptPreProcessor {
                         else {
                             boolean regExp = true;
                             for (int x  = i - 1; x >= 0; x--) {
-                                char c = sourceCode.charAt(x);
+                                final char c = sourceCode.charAt(x);
                                 if (!Character.isWhitespace(c)) {
                                     if (Character.isLetterOrDigit(c)) {
                                         //division operator, not Regular Expression
