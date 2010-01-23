@@ -413,7 +413,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * JavaScript function "writeln" may accept a variable number of args.
+     * JavaScript function "writeln" may accept a variable number of arguments.
      * It's not documented by W3C, Mozilla or MSDN but works with Mozilla and IE.
      * @param context the JavaScript context
      * @param thisObj the scriptable
@@ -423,7 +423,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     public static void jsxFunction_writeln(
         final Context context, final Scriptable thisObj, final Object[] args,  final Function function) {
-
         final HTMLDocument thisAsDocument = getDocument(thisObj);
         thisAsDocument.write(concatArgsAsString(args) + "\n");
     }

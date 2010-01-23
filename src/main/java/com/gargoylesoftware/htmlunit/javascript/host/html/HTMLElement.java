@@ -1853,7 +1853,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534658.aspx">MSDN documentation</a>
      */
     public void jsxSet_tagUrn(final String tagUrn) {
-        //TODO: implement other behavior
+        throw Context.reportRuntimeError("Error trying to set tagUrn to '" + tagUrn + "'.");
     }
 
     /**

@@ -60,13 +60,22 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "blah", "http://www.blah.com/blah" }, FF = { "undefined", "undefined" })
+    @Alerts(IE = { "blah", "http://www.blah.com/blah", "error" },
+            FF = { "undefined", "undefined", "undefined", "http://www.meh.com/meh" })
     public void scopeName2() throws Exception {
         final String html = "<html xmlns:blah='http://www.blah.com/blah'><head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    alert(document.getElementById('x').scopeName);\n"
-            + "    alert(document.getElementById('x').tagUrn);\n"
+            + "    var x = document.getElementById('x');\n"
+            + "    alert(x.scopeName);\n"
+            + "    alert(x.tagUrn);\n"
+            + "    try {\n"
+            + "      x.tagUrn = 'http://www.meh.com/meh';\n"
+            + "      alert(x.scopeName);\n"
+            + "      alert(x.tagUrn);\n"
+            + "    } catch(e) {\n"
+            + "      alert('error');\n"
+            + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
