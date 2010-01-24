@@ -139,21 +139,6 @@ public class HtmlUnitContextFactory extends ContextFactory {
             // which is used for window.eval. We have to take care in which case we are.
             final boolean isWindowEval = (compiler != null);
 
-            // Pre process the source code
-            final HtmlPage page = (HtmlPage) Context.getCurrentContext()
-                .getThreadLocal(JavaScriptEngine.KEY_STARTING_PAGE);
-            source = preProcess(page, source, sourceName, null);
-
-            source = new StringScriptPreProcessor().preProcess(page, source, sourceName, null);
-
-            // PreProcess IE Conditional Compilation if needed
-            if (browserVersion_.isIE()) {
-                final ScriptPreProcessor ieCCPreProcessor = new IEConditionalCompilationScriptPreProcessor();
-                source = ieCCPreProcessor.preProcess(page, source, sourceName, null);
-//                sourceCode = IEWeirdSyntaxScriptPreProcessor.getInstance()
-//                    .preProcess(htmlPage, sourceCode, sourceName, null);
-            }
-
             // Remove HTML comments around the source if needed
             if (!isWindowEval) {
                 final String sourceCodeTrimmed = source.trim();
@@ -168,6 +153,22 @@ public class HtmlUnitContextFactory extends ContextFactory {
                         source = source.substring(0, lastNewLine);
                     }
                 }
+            }
+
+            // Pre process the source code
+            final HtmlPage page = (HtmlPage) Context.getCurrentContext()
+                .getThreadLocal(JavaScriptEngine.KEY_STARTING_PAGE);
+            source = preProcess(page, source, sourceName, null);
+
+            source = new StringScriptPreProcessor(HtmlUnitContextFactory.this, lineno)
+                .preProcess(page, source, sourceName, null);
+
+            // PreProcess IE Conditional Compilation if needed
+            if (browserVersion_.isIE()) {
+                final ScriptPreProcessor ieCCPreProcessor = new IEConditionalCompilationScriptPreProcessor();
+                source = ieCCPreProcessor.preProcess(page, source, sourceName, null);
+//                sourceCode = IEWeirdSyntaxScriptPreProcessor.getInstance()
+//                    .preProcess(htmlPage, sourceCode, sourceName, null);
             }
 
             return super.compileString(source, compiler, compilationErrorReporter,

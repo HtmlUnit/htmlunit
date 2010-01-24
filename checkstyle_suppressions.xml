@@ -16,14 +16,14 @@
     <suppress checks="FileLength" files="JQuery126Test.java"/>
     <suppress checks="FileLength" files="WebClientTest.java"/>
     <suppress checks="Header" files=".+.properties"/>
-    <suppress checks="LineLength" files="JavaScriptEngine.java" lines="68"/>
+    <suppress checks="LineLength" files="JavaScriptEngine.java"/>
     <suppress checks="LineLength" files="EncodingSniffer.java"/>
     <suppress checks="LineLength" files="HTMLScriptElementTest.java"/>
     <suppress checks="LineLength" files="Dojo102Test.java"/>
     <suppress checks="LineLength" files="BoxObjectTest.java"/>
     <suppress checks="LineLength" files="HTMLBodyElementTest.java"/>
     <suppress checks="LineLength" files="GWTSourceTest.java"/>
-    <suppress checks="LineLength" files="HtmlUnitRegExpProxyTest.java" lines="670"/>
+    <suppress checks="LineLength" files="HtmlUnitRegExpProxyTest.java"/>
     <suppress checks="MethodLength" files="DefaultElementFactory.java"/>
     <suppress checks="MethodLength" files="Dojo102Test.java"/>
     <suppress checks="MethodLength" files="CSSStyleDeclarationTest.java"/>

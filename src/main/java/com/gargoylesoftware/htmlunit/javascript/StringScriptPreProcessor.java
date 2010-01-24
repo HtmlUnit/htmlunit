@@ -17,6 +17,9 @@ package com.gargoylesoftware.htmlunit.javascript;
 import java.util.Map;
 import java.util.TreeMap;
 
+import net.sourceforge.htmlunit.corejs.javascript.CompilerEnvirons;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Parser;
 import net.sourceforge.htmlunit.corejs.javascript.ast.AstNode;
 import net.sourceforge.htmlunit.corejs.javascript.ast.NodeVisitor;
@@ -37,34 +40,57 @@ public class StringScriptPreProcessor implements ScriptPreProcessor {
 
     private enum PARSING_STATUS { NORMAL, IN_MULTI_LINE_COMMENT, IN_SINGLE_LINE_COMMENT, IN_STRING, IN_REG_EXP }
 
+    private ContextFactory contextFactory_;
+    private int lineNo_;
+
+    /**
+     * Constructs a new StringScriptPreProcessor.
+     * @param contextFactory the context factory, can be <tt>null</tt>
+     * @param lineno the line number of the source code
+     */
+    public StringScriptPreProcessor(ContextFactory contextFactory, final int lineno) {
+        if (contextFactory == null) {
+            contextFactory = ContextFactory.getGlobal();
+        }
+        contextFactory_ = contextFactory;
+        lineNo_ = lineno;
+    }
+
     /**
      * {@inheritDoc}
      */
     public String preProcess(final HtmlPage htmlPage, String sourceCode, final String sourceName,
                 final HtmlElement htmlElement) {
 
-        final AstNode root = new Parser().parse(sourceCode, sourceName, 0);
-        final Map<Integer, Integer> strings = new TreeMap<Integer, Integer>();
-        root.visit(new NodeVisitor() {
+        try {
+            final CompilerEnvirons environs = new CompilerEnvirons();
+            environs.initFromContext(contextFactory_.enterContext());
+            final AstNode root = new Parser(environs).parse(sourceCode, sourceName, lineNo_);
+            final Map<Integer, Integer> strings = new TreeMap<Integer, Integer>();
+            root.visit(new NodeVisitor() {
 
-            public boolean visit(final AstNode node) {
-                if (node instanceof StringLiteral) {
-                    strings.put(node.getAbsolutePosition() + 1, node.getLength() - 2);
+                public boolean visit(final AstNode node) {
+                    if (node instanceof StringLiteral) {
+                        strings.put(node.getAbsolutePosition() + 1, node.getLength() - 2);
+                    }
+                    return true;
                 }
-                return true;
-            }
-        });
+            });
 
-        int variant = 0;
-        for (int index : strings.keySet()) {
-            final int length = strings.get(index);
-            final String string = sourceCode.substring(index + variant, index +  variant + length);
-            final String newString = replace(string);
-            if (newString != null) {
-                sourceCode = sourceCode.substring(0, index + variant)
-                    + newString + sourceCode.substring(index + variant + length);
-                variant = newString.length() - string.length();
+            int variant = 0;
+            for (int index : strings.keySet()) {
+                final int length = strings.get(index);
+                final String string = sourceCode.substring(index + variant, index +  variant + length);
+                final String newString = replace(string);
+                if (newString != null) {
+                    sourceCode = sourceCode.substring(0, index + variant)
+                        + newString + sourceCode.substring(index + variant + length);
+                    variant = newString.length() - string.length();
+                }
             }
+        }
+        finally {
+            Context.exit();
         }
         return sourceCode;
     }
