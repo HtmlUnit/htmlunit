@@ -85,7 +85,7 @@ public class StringScriptPreProcessor implements ScriptPreProcessor {
                 if (newString != null) {
                     sourceCode = sourceCode.substring(0, index + variant)
                         + newString + sourceCode.substring(index + variant + length);
-                    variant = newString.length() - string.length();
+                    variant += newString.length() - string.length();
                 }
             }
         }
