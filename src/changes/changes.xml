@@ -6,11 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration preparation">
-<!--
             <action type="fix" dev="sdanig" issue="2889077">
                 JavaScript: better implementation of element.scrollLeft and element.scrollTop properties.
             </action>
--->
             <action type="fix" dev="mguillem" issue="2935350">
                 JavaScript HtmlUnit RegExp proxy: handle $&amp;, $' and $` in replacement string.
             </action>

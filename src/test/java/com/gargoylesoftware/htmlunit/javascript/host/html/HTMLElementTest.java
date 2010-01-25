@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
@@ -1398,7 +1397,6 @@ public class HTMLElementTest extends WebTestCase {
      */
     @Test
     @Alerts({ "0", "0", "0", "0", "0", "17", "0", "0" })
-    @NotYetImplemented
     public void scrollLeft() throws Exception {
         final String html
             = "<html><body onload='test()'>\n"
@@ -1437,7 +1435,6 @@ public class HTMLElementTest extends WebTestCase {
      */
     @Test
     @Alerts({ "0", "0", "0", "0", "0", "17", "0", "0" })
-    @NotYetImplemented
     public void scrollTop() throws Exception {
         final String html
             = "<html><body onload='test()'>\n"
