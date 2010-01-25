@@ -11,11 +11,9 @@
                 JavaScript: better implementation of element.scrollLeft and element.scrollTop properties.
             </action>
 -->
-<!--
             <action type="fix" dev="mguillem" issue="2935350">
                 JavaScript HtmlUnit RegExp proxy: handle $&amp;, $' and $` in replacement string.
             </action>
--->
             <action type="update" dev="mguillem">
                 Removed public method HtmlForm.submit(SubmittableElement) without replacement (method was marked as internal API).
             </action>

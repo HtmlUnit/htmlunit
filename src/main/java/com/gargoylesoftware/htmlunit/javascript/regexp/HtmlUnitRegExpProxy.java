@@ -95,9 +95,9 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
                     final Matcher matcher = pattern.matcher(thisString);
                     replacement = escapeInvalidBackReferences(regex, replacement);
                     if (reData.hasFlag('g')) {
-                        return matcher.replaceAll(replacement);
+                        return doReplacement(thisString, replacement, matcher, true);
                     }
-                    return matcher.replaceFirst(replacement);
+                    return doReplacement(thisString, replacement, matcher, false);
                 }
                 catch (final PatternSyntaxException e) {
                     LOG.warn(e.getMessage(), e);
