@@ -105,17 +105,24 @@ public class StringScriptPreProcessor implements ScriptPreProcessor {
         final StringBuilder sb = new StringBuilder();
         for (int i = 0; i < string.length(); i++) {
             final char ch = string.charAt(i);
-            if (ch == '\\' && i + 3 < string.length() && string.charAt(i + 1) == 'x') {
-                final char ch1 = Character.toUpperCase(string.charAt(i + 2));
-                final char ch2 = Character.toUpperCase(string.charAt(i + 3));
-                if ((ch1 >= '0' && ch1 <= '9' || ch1 >= 'A' && ch1 <= 'F')
-                        && (ch2 >= '0' && ch2 <= '9' || ch2 >= 'A' && ch2 <= 'F')) {
-                    final char character = (char) Integer.parseInt(string.substring(i + 2, i + 4), 16);
-                    if (character >= ' ') {
-                        sb.append(character);
-                        i += 3;
-                        continue;
+            if (ch == '\\') {
+                if (i + 3 < string.length() && string.charAt(i + 1) == 'x') {
+                    final char ch1 = Character.toUpperCase(string.charAt(i + 2));
+                    final char ch2 = Character.toUpperCase(string.charAt(i + 3));
+                    if ((ch1 >= '0' && ch1 <= '9' || ch1 >= 'A' && ch1 <= 'F')
+                            && (ch2 >= '0' && ch2 <= '9' || ch2 >= 'A' && ch2 <= 'F')) {
+                        final char character = (char) Integer.parseInt(string.substring(i + 2, i + 4), 16);
+                        if (character >= ' ') {
+                            sb.append(character);
+                            i += 3;
+                            continue;
+                        }
                     }
+                }
+                else if (i + 1 < string.length()) {
+                    sb.append(ch).append(string.charAt(i + 1));
+                    i++;
+                    continue;
                 }
             }
             sb.append(ch);
