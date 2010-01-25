@@ -616,6 +616,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("food bar")
+    @NotYetImplemented
     public void replace_backReference_ampersand()  throws Exception {
         testEvaluate("'foo bar'.replace(/foo/g, '$&d')");
         testEvaluate("'foo bar'.replace(/foo/, '$&d')");
@@ -626,6 +627,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("foo foo ")
+    @NotYetImplemented
     public void replace_backReference_backtick()  throws Exception {
         testEvaluate("'foo bar'.replace(/bar/g, '$`')");
         testEvaluate("'foo bar'.replace(/bar/, '$`')");
@@ -636,6 +638,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(" bar bar")
+    @NotYetImplemented
     public void replace_backReference_tick()  throws Exception {
         testEvaluate("'foo bar'.replace(/foo/g, '$\\'')");
         testEvaluate("'foo bar'.replace(/foo/, '$\\'')");
