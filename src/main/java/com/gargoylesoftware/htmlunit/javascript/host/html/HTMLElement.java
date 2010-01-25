@@ -1783,12 +1783,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public int jsxGet_scrollTop() {
         // It's easier to perform these checks and adjustments in the getter, rather than in the setter,
         // because modifying the CSS style of the element is supposed to affect the attribute value.
-        if (scrollTop_ < 0) {
-            scrollTop_ = 0;
-        }
-        else if (!"scroll".equals(jsxGet_currentStyle().jsxGet_overflow())) { // TODO: inherit, auto, overflow-y
-            scrollTop_ = 0;
-        }
+        //if (scrollTop_ < 0) {
+        //    scrollTop_ = 0;
+        //}
+        //else if (!"scroll".equals(jsxGet_currentStyle().jsxGet_overflow())) { // TODO: inherit, auto, overflow-y
+        //    scrollTop_ = 0;
+        //}
         return scrollTop_;
     }
 
@@ -1808,12 +1808,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public int jsxGet_scrollLeft() {
         // It's easier to perform these checks and adjustments in the getter, rather than in the setter,
         // because modifying the CSS style of the element is supposed to affect the attribute value.
-        if (scrollLeft_ < 0) {
-            scrollLeft_ = 0;
-        }
-        else if (!"scroll".equals(jsxGet_currentStyle().jsxGet_overflow())) { // TODO: inherit, auto, overflow-x
-            scrollLeft_ = 0;
-        }
+        //if (scrollLeft_ < 0) {
+        //    scrollLeft_ = 0;
+        //}
+        //else if (!"scroll".equals(jsxGet_currentStyle().jsxGet_overflow())) { // TODO: inherit, auto, overflow-x
+        //    scrollLeft_ = 0;
+        //}
         return scrollLeft_;
     }
 
