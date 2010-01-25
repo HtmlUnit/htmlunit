@@ -105,9 +105,20 @@ public class BrowserRunner extends Suite {
      */
     @Override
     public void filter(final Filter filter) throws NoTestsRemainException {
+        boolean atLeastOne = false;
         for (final Runner runner : getChildren()) {
             final BlockJUnit4ClassRunner junit4Runner = (BlockJUnit4ClassRunner) runner;
-            junit4Runner.filter(filter);
+            try {
+                junit4Runner.filter(filter);
+                atLeastOne = true;
+            }
+            catch (final NoTestsRemainException e) {
+                // nothing
+            }
+        }
+
+        if (!atLeastOne) {
+            throw new NoTestsRemainException();
         }
     }
 
