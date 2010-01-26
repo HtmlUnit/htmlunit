@@ -27,7 +27,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.regexp.NativeRegExp;
 import net.sourceforge.htmlunit.corejs.javascript.regexp.RegExpImpl;
 
-import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -77,15 +76,13 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         if (RA_REPLACE == actionType && args.length == 2 && (args[1] instanceof String)) {
             final String thisString = Context.toString(thisObj);
             String replacement = (String) args[1];
-            replacement = replacement.replaceAll("\\$\\$", "\\$");
             final Object arg0 = args[0];
             if (arg0 instanceof String) {
+                replacement = replacement.replaceAll("\\$\\$", "\\$");
                 // arg0 should *not* be interpreted as a RegExp
                 return StringUtils.replaceOnce(thisString, (String) arg0, replacement);
             }
             else if (arg0 instanceof NativeRegExp) {
-                replacement = replacement.replaceAll("\\\\", "\\\\\\\\"); // \\ -> \\\\
-                replacement = replacement.replaceAll("(?<!\\$)\\$(?!\\d)", "\\\\\\$"); // \$ -> \\\$
                 try {
                     final NativeRegExp regexp = (NativeRegExp) arg0;
                     final RegExpData reData = new RegExpData(regexp);
@@ -93,7 +90,6 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
                     final int flags = reData.getJavaFlags();
                     final Pattern pattern = Pattern.compile(regex, flags);
                     final Matcher matcher = pattern.matcher(thisString);
-                    replacement = escapeInvalidBackReferences(regex, replacement);
                     if (reData.hasFlag('g')) {
                         return doReplacement(thisString, replacement, matcher, true);
                     }
@@ -152,64 +148,78 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
 
     private String doReplacement(final String originalString, final String replacement, final Matcher matcher,
         final boolean replaceAll) {
+//        replacement = replacement.replaceAll("\\\\", "\\\\\\\\"); // \\ -> \\\\
+//        replacement = replacement.replaceAll("(?<!\\$)\\$(?!\\d)", "\\\\\\$"); // \$ -> \\\$
+
         final StringBuffer sb = new StringBuffer();
+        int previousIndex = 0;
         while (matcher.find()) {
-            final String localReplacement;
+            sb.append(originalString.substring(previousIndex, matcher.start()));
+            String localReplacement = replacement;
             if (replacement.contains("$")) {
-                String str = replacement;
-                str = str.replaceAll("\\$&", Matcher.quoteReplacement(matcher.group()));
-                str = str.replaceAll("\\$`", Matcher.quoteReplacement(originalString.substring(0, matcher.start())));
-                str = str.replaceAll("\\$'", Matcher.quoteReplacement(originalString.substring(matcher.end())));
-                localReplacement = str;
+                localReplacement = computeReplacementValue(replacement, originalString, matcher);
             }
-            else {
-                localReplacement = replacement;
-            }
-            matcher.appendReplacement(sb, localReplacement);
+            sb.append(localReplacement);
+            previousIndex = matcher.end();
             if (!replaceAll) {
                 break;
             }
         }
-        matcher.appendTail(sb);
+        sb.append(originalString.substring(previousIndex));
         return sb.toString();
     }
 
-    /**
-     * Escapes all invalid back references (<tt>$n</tt>, where <tt>n</tt> is the index of the back reference),
-     * because invalid back references in JavaScript regex are treated as if they were escaped.
-     */
-    static String escapeInvalidBackReferences(final String regex, final String replacement) {
-        final StringBuilder ret = new StringBuilder();
+    static String computeReplacementValue(final String replacement,
+            final String originalString, final Matcher matcher) {
 
-        final Matcher m = Pattern.compile(regex).matcher(replacement);
-        final int groups = m.groupCount();
-
-        int prevIndex = 0;
-        final char[] rep = replacement.toCharArray();
-        for (int i = ArrayUtils.indexOf(rep, '$'); i != -1; i = ArrayUtils.indexOf(rep, '$', i + 1)) {
-            ret.append(rep, prevIndex, i - prevIndex);
-            if (!isEscaped(replacement, i)) {
-                final StringBuilder sb = new StringBuilder(2);
-                for (int j = i + 1; j < rep.length && Character.isDigit(rep[j]); j++) {
-                    sb.append(rep[j]);
-                }
-                final boolean valid;
-                if (sb.length() > 0) {
-                    final int num = Integer.parseInt(sb.toString());
-                    valid = (num > 0 && num <= groups);
+        int lastIndex = 0;
+        final StringBuilder result = new StringBuilder();
+        int i;
+        while ((i = replacement.indexOf('$', lastIndex)) > -1) {
+            if (i > 0) {
+                result.append(replacement.substring(lastIndex, i));
+            }
+            String ss = null;
+            if (i < replacement.length() - 1 && (i == lastIndex || replacement.charAt(i - 1) != '$')) {
+                final char next = replacement.charAt(i + 1);
+                // only valid back reference are "evaluated"
+                if (next >= '1' && next <= '9') {
+                    final int num = next - '0';
+                    if (num <= matcher.groupCount()) {
+                        ss = matcher.group(num);
+                    }
                 }
                 else {
-                    valid = false;
-                }
-                if (!valid) {
-                    ret.append('\\');
+                    switch (next) {
+                        case '&':
+                            ss = matcher.group();
+                            break;
+                        case '`':
+                            ss = originalString.substring(0, matcher.start());
+                            break;
+                        case '\'':
+                            ss = originalString.substring(matcher.end());
+                            break;
+                        case '$':
+                            ss = "$";
+                            break;
+                        default:
+                    }
                 }
             }
-            prevIndex = i;
+            if (ss != null) {
+                result.append(ss);
+                lastIndex = i + 2;
+            }
+            else {
+                result.append('$');
+                lastIndex = i + 1;
+            }
         }
-        ret.append(rep, prevIndex, rep.length - prevIndex);
 
-        return ret.toString();
+        result.append(replacement.substring(lastIndex));
+
+        return result.toString();
     }
 
     /**

@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.regexp;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
@@ -385,19 +388,30 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     }
 
     /**
-     * Invalid back references are treated as it in JS but not in Java.
+     * Compute replacement value. Following cases occur:
+     * - Invalid back references are treated as it in JS but not in Java.
+     * - $$: should be replaced by $
      */
     @Test
     @Browsers(Browser.NONE)
-    public void escapeInvalidBackReferences() {
-        assertEquals("\\$1", HtmlUnitRegExpProxy.escapeInvalidBackReferences("", "$1"));
-        assertEquals("\\$2", HtmlUnitRegExpProxy.escapeInvalidBackReferences("", "$2"));
-        assertEquals("$1", HtmlUnitRegExpProxy.escapeInvalidBackReferences("(x)", "$1"));
-        assertEquals("\\$2", HtmlUnitRegExpProxy.escapeInvalidBackReferences("(x)", "$2"));
+    public void computeReplacementValue() {
+        final String theString = "hello";
+        final Matcher matcher0group = Pattern.compile("h").matcher("hello");
+        final Matcher matcher1group = Pattern.compile("(h)").matcher("hello");
+        matcher1group.find();
 
-        assertEquals("\\$", HtmlUnitRegExpProxy.escapeInvalidBackReferences("", "$"));
-        assertEquals("\\$", HtmlUnitRegExpProxy.escapeInvalidBackReferences("(x)", "$"));
-        assertEquals("\\\\\\$", HtmlUnitRegExpProxy.escapeInvalidBackReferences("", "\\\\$"));
+        assertEquals("$", HtmlUnitRegExpProxy.computeReplacementValue("$$", theString, matcher0group));
+        assertEquals("$$x$", HtmlUnitRegExpProxy.computeReplacementValue("$$$$x$$", theString, matcher0group));
+
+        assertEquals("$1", HtmlUnitRegExpProxy.computeReplacementValue("$1", theString, matcher0group));
+        assertEquals("$2", HtmlUnitRegExpProxy.computeReplacementValue("$2", theString, matcher0group));
+        assertEquals("h", HtmlUnitRegExpProxy.computeReplacementValue("$1", theString, matcher1group));
+        assertEquals("$2", HtmlUnitRegExpProxy.computeReplacementValue("$2", theString, matcher1group));
+
+        assertEquals("$", HtmlUnitRegExpProxy.computeReplacementValue("$", theString, matcher0group));
+        assertEquals("$", HtmlUnitRegExpProxy.computeReplacementValue("$", theString, matcher1group));
+        assertEquals("\\\\$", HtmlUnitRegExpProxy.computeReplacementValue("\\\\$", theString, matcher1group));
+        assertEquals("$", HtmlUnitRegExpProxy.computeReplacementValue("$", theString, matcher1group));
     }
 
     /**
@@ -639,6 +653,16 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     public void replace_backReference_tick()  throws Exception {
         testEvaluate("'foo bar'.replace(/foo/g, '$\\'')");
         testEvaluate("'foo bar'.replace(/foo/, '$\\'')");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("$' bar")
+    public void replace_$backReference_tick()  throws Exception {
+        testEvaluate("'foo bar'.replace(/foo/g, '$$\\'')");
+        testEvaluate("'foo bar'.replace(/foo/, '$$\\'')");
     }
 
     /**
