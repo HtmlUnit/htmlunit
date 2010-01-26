@@ -62,7 +62,6 @@ public class NativeNumberTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     @Alerts("2.274341322658976e-309")
     public void toStringRhinoBug538172() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
