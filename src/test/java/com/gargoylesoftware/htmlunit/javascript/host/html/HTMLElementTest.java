@@ -1391,17 +1391,33 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
-     * NOTE: When running this test with Firefox (3.6, at least), it's important to reload the page with Ctrl+F5
-     * in order to completely clear the cache; otherwise, Firefox appears to incorrectly cache some style attributes.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts({ "0", "0", "0", "0", "0", "17", "0", "0" })
-    public void scrollLeft() throws Exception {
+    public void scrollLeft_overflowScroll() throws Exception {
+        scrollLeft("scroll");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "0", "0", "0", "0", "0", "17", "0", "0" })
+    public void scrollLeft_overflowAuto() throws Exception {
+        scrollLeft("auto");
+    }
+
+    /**
+     * NOTE: When running this test with Firefox (3.6, at least), it's important to reload the page with Ctrl+F5
+     * in order to completely clear the cache; otherwise, Firefox appears to incorrectly cache some style attributes.
+     * @throws Exception if an error occurs
+     */
+    private void scrollLeft(final String overflow) throws Exception {
         final String html
             = "<html><body onload='test()'>\n"
             + "<div id='d1' style='width:100px;height:100px;background-color:green;'>\n"
-            + "  <div id='d2' style='width:50px;height:50px;background-color:blue;'></div>"
+            + "  <div id='d2' style='width:50px;height:50px;background-color:blue;'></div>\n"
             + "</div>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -1415,7 +1431,7 @@ public class HTMLElementTest extends WebTestCase {
             + "  d2.style.height = '200px';\n"
             + "  d1.scrollLeft = 7;\n"
             + "  alert(d1.scrollLeft);\n"
-            + "  d1.style.overflow = 'scroll';\n"
+            + "  d1.style.overflow = '" + overflow + "';\n"
             + "  alert(d1.scrollLeft);\n"
             + "  d1.scrollLeft = 17;\n"
             + "  alert(d1.scrollLeft);\n"
@@ -1429,17 +1445,33 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
-     * NOTE: When running this test with Firefox (3.6, at least), it's important to reload the page with Ctrl+F5
-     * in order to completely clear the cache; otherwise, Firefox appears to incorrectly cache some style attributes.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts({ "0", "0", "0", "0", "0", "17", "0", "0" })
-    public void scrollTop() throws Exception {
+    public void scrollTop_overflowScroll() throws Exception {
+        scrollTop("scroll");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "0", "0", "0", "0", "0", "17", "0", "0" })
+    public void scrollTop_overflowAuto() throws Exception {
+        scrollTop("auto");
+    }
+
+    /**
+     * NOTE: When running this test with Firefox (3.6, at least), it's important to reload the page with Ctrl+F5
+     * in order to completely clear the cache; otherwise, Firefox appears to incorrectly cache some style attributes.
+     * @throws Exception if an error occurs
+     */
+    private void scrollTop(final String overflow) throws Exception {
         final String html
             = "<html><body onload='test()'>\n"
             + "<div id='d1' style='width:100px;height:100px;background-color:green;'>\n"
-            + "  <div id='d2' style='width:50px;height:50px;background-color:blue;'></div>"
+            + "  <div id='d2' style='width:50px;height:50px;background-color:blue;'></div>\n"
             + "</div>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -1453,7 +1485,7 @@ public class HTMLElementTest extends WebTestCase {
             + "  d2.style.height = '200px';\n"
             + "  d1.scrollTop = 7;\n"
             + "  alert(d1.scrollTop);\n"
-            + "  d1.style.overflow = 'scroll';\n"
+            + "  d1.style.overflow = '" + overflow + "';\n"
             + "  alert(d1.scrollTop);\n"
             + "  d1.scrollTop = 17;\n"
             + "  alert(d1.scrollTop);\n"
