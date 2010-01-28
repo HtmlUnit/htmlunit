@@ -58,6 +58,7 @@ public abstract class WebServerTestCase extends WebTestCase {
 
         final ResourceHandler resourceHandler = new ResourceHandler();
         resourceHandler.setResourceBase(resourceBase);
+        resourceHandler.getMimeTypes().addMimeMapping("js", "application/javascript");
 
         final HandlerList handlers = new HandlerList();
         handlers.setHandlers(new Handler[]{resourceHandler, context});
