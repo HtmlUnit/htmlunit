@@ -357,7 +357,7 @@ public class XMLHttpRequest extends SimpleScriptable {
         if (webResponse_ != null) {
             return webResponse_.getResponseHeaderValue(headerName);
         }
-        LOG.error("XMLHttpRequest.getResponseHeader() was called before the response was available.");
+
         return null;
     }
 
