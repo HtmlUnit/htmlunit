@@ -67,13 +67,25 @@
 			</answer>
 		</faq>
 
-		<faq id="HowToSubmitAPatch">
+		<faq id="HowToModifyRequestOrResponse">
 			<question>
-				How do I submit a patch?
+				How to modify the outgoing request or incoming response?
 			</question>
 			<answer>
 				<p>
-					Refer to <a href="submittingPatches.html">"How to submit a patch"</a>
+					You can subclass HttpWebConnection and override getResponse() as:
+            <source><![CDATA[
+
+        webClient.setWebConnection(new HttpWebConnection(webClient) {
+
+            public WebResponse getResponse(WebRequestSettings settings) throws IOException {
+                // modify the request settings
+                WebResponseImpl response = (WebResponseImpl) super.getResponse(settings);
+                // modify the response
+                return response;
+            }
+        });
+            ]]></source>
 				</p>
 			</answer>
 		</faq>
