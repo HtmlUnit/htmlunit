@@ -2134,6 +2134,7 @@ public class WebClient implements Serializable {
                             downloadedResponse.target_, "_self");
                     final Page pageBeforeLoad = win.getEnclosedPage();
                     loadWebResponseInto(downloadedResponse.response_, win);
+                    throwFailingHttpStatusCodeExceptionIfNecessary(downloadedResponse.response_);
                     if (pageBeforeLoad != win.getEnclosedPage()) {
                         updatedWindows.add(win);
                     }

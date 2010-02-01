@@ -20,7 +20,9 @@ import java.util.List;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.lang.ArrayUtils;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -29,13 +31,14 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @version $Revision$
  * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public final class FailingHttpStatusCodeExceptionTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testConstructorWitWebResponse() throws Exception {
+    public void testConstructorWithWebResponse() throws Exception {
         final List<NameValuePair> emptyList = Collections.emptyList();
         final WebResponseData webResponseData = new WebResponseData(
                 ArrayUtils.EMPTY_BYTE_ARRAY, HttpStatus.SC_NOT_FOUND, "not found",
@@ -47,5 +50,25 @@ public final class FailingHttpStatusCodeExceptionTest extends WebTestCase {
         assertEquals(webResponse.getStatusMessage(), e.getStatusMessage());
         assertEquals(webResponse.getStatusCode(), e.getStatusCode());
         assertTrue("message doesn't contain failing url", e.getMessage().indexOf(URL_FIRST.toExternalForm()) > -1);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test(expected = FailingHttpStatusCodeException.class)
+    public void failureByGetPage() throws Exception {
+        getMockWebConnection().setDefaultResponse("", 404, "Not found", "text/html");
+        getWebClientWithMockWebConnection().getPage(getDefaultUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test(expected = FailingHttpStatusCodeException.class)
+    public void failureByClickLink() throws Exception {
+        final String html = "<html><body><a href='doesntExist'>go</a></body></html>";
+        getMockWebConnection().setDefaultResponse("", 404, "Not found", "text/html");
+        final HtmlPage page = loadPageWithAlerts(html);
+        page.getAnchors().get(0).click();
     }
 }
