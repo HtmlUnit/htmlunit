@@ -76,7 +76,7 @@
 					You can subclass HttpWebConnection and override getResponse() as:
             <source><![CDATA[
 
-        webClient.setWebConnection(new HttpWebConnection(webClient) {
+        new WebConnectionWrapper(webClient) {
 
             public WebResponse getResponse(WebRequestSettings settings) throws IOException {
                 // modify the request settings
@@ -84,7 +84,7 @@
                 // modify the response
                 return response;
             }
-        });
+        };
             ]]></source>
 				</p>
 			</answer>
