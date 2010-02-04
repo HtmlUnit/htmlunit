@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.7" date="?" description="Bugfixes, initial IE8 support, HttpClient 4 migration preparation">
+            <action type="fix" dev="mguillem">
+                JavaScript: allow access to a frame through document.frameName (IE only).
+            </action>
             <action type="fix" dev="sdanig" issue="2889077">
                 JavaScript: better implementation of element.scrollLeft and element.scrollTop properties.
             </action>

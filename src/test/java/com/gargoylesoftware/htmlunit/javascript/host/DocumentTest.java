@@ -1878,32 +1878,6 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "not defined",
-            IE = { "true", "1", "about:blank", "about:blank" })
-    public void frames() throws Exception {
-        final String html = "<html><head><script>\n"
-            + "function test(){\n"
-            + "  if (document.frames)\n"
-            + "  {\n"
-            + "    alert(document.frames == window.frames);\n"
-            + "    alert(document.frames.length);\n"
-            + "    alert(document.frames(0).location);\n"
-            + "    alert(document.frames('foo').location);\n"
-            + "  }\n"
-            + "  else\n"
-            + "    alert('not defined');\n"
-            + "}\n"
-            + "</script></head><body onload='test();'>\n"
-            + "<iframe src='about:blank' name='foo'></iframe>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(FF = { "true", "false" },
             IE = { "false", "true" })
     public void defaultViewAndParentWindow() throws Exception {

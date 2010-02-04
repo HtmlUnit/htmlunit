@@ -824,4 +824,50 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "not defined",
+            IE = { "true", "1", "about:blank", "about:blank" })
+    public void frames() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function test(){\n"
+            + "  if (document.frames)\n"
+            + "  {\n"
+            + "    alert(document.frames == window.frames);\n"
+            + "    alert(document.frames.length);\n"
+            + "    alert(document.frames(0).location);\n"
+            + "    alert(document.frames('foo').location);\n"
+            + "  }\n"
+            + "  else\n"
+            + "    alert('not defined');\n"
+            + "}\n"
+            + "</script></head><body onload='test();'>\n"
+            + "<iframe src='about:blank' name='foo'></iframe>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * IE allows document.frameName to access a frame window.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "undefined", "false" },
+            IE = { "[object]", "true" })
+    public void frameAccessByName() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function test(){\n"
+            + "  alert(document.foo);\n"
+            + "  alert(window.frames[0] == document.foo);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<iframe src='about:blank' name='foo'></iframe>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

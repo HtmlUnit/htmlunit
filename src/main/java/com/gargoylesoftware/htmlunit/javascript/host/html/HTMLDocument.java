@@ -55,6 +55,7 @@ import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.BaseFrame;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
@@ -1075,6 +1076,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             if (HtmlImage.TAG_NAME.equals(tagName) || HtmlForm.TAG_NAME.equals(tagName)
                 || HtmlApplet.TAG_NAME.equals(tagName)) {
                 return getScriptableFor(element);
+            }
+            else if (getBrowserVersion().isIE() && element instanceof BaseFrame) {
+                return ((BaseFrame) element).getEnclosedWindow().getScriptObject();
             }
             return NOT_FOUND;
         }
