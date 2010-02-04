@@ -37,6 +37,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -1445,5 +1446,32 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         assertEquals(expectedRequests, getMockWebConnection().getRequestedUrls(getDefaultUrl()));
 
         assertEquals("Page 4", driver.getTitle());
+    }
+
+    /**
+     * When the name of a form field changes... it is still reachable through the original name!
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    @Alerts(FF = { "[object HTMLInputElement]", "undefined", "[object HTMLInputElement]", "[object HTMLInputElement]" },
+            IE = { "[object]", "undefined", "[object]", "undefined" })
+    public void accessByNameAfterNameChange() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function go() {\n"
+            + "   alert(document.simple_form.originalName);\n"
+            + "   alert(document.simple_form.newName);\n"
+            + "   document.simple_form.originalName.name = 'newName';\n"
+            + "   alert(document.simple_form.originalName);\n"
+            + "   alert(document.simple_form.newName);\n"
+            + "}</script></head>\n"
+            + "<body onload='go()'>\n"
+            + "<form name='simple_form'>\n"
+            + "   <input name='originalName'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
     }
 }
