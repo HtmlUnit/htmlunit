@@ -114,4 +114,20 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("123")
+    @NotYetImplemented
+    public void undefined() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "var undefined = 123;\n"
+            + "alert(undefined);\n"
+            + "</script>\n"
+            + "</head><body></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
