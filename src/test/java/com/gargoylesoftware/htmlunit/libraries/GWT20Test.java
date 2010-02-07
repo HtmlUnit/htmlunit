@@ -194,7 +194,7 @@ public class GWT20Test extends WebServerTestCase {
      * @return the GWT directory being tested
      */
     protected String getDirectory() {
-        return "2.0.0";
+        return "2.0.1";
     }
 
     /**
