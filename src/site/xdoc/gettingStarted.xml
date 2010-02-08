@@ -75,12 +75,12 @@ public void homePage_Firefox() throws Exception {
 @Test
 public void getElements() throws Exception {
     final WebClient webClient = new WebClient();
-    final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
+    final HtmlPage page = webClient.getPage("http://some_url");
     final HtmlDivision div = page.getHtmlElementById("some_div_id");
     final HtmlAnchor anchor = page.getAnchorByName("anchor_name");
 }]]></source>
             <p>
-                XPath is a suggested way for more complex searches, a brief tutorial can be found in
+                XPath is the suggested way for more complex searches, a brief tutorial can be found in
                 <a href="http://www.w3schools.com/XPath/default.asp">W3Schools</a>
             </p>
             <source><![CDATA[
