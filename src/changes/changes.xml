@@ -12,6 +12,11 @@
             <action type="fix" dev="asashour" issue="2898484" due-to="Tomasz Kalkosinski">
                 JavaScript: fix document.getElementsByName() to handle empty and null values.
             </action>
+            <action type="remove" dev="asashour">
+                Deprecation: remove DomText.splitDomText(), HtmlPage.getFirstAnchorByText(), WebClient.setIgnoreOutsideContent(),
+                WebResponse.getRequestUrl, .getRequestMethod() and .getContentCharSet(), HTMLParser.parse()
+                and WebRequestSettings.addAdditionalHeader(). 
+            </action>
         </release>
         <release version="2.7" date="Feb 9, 2010" description="Bugfixes, initial IE8 support, HttpClient 4 migration preparation">
             <action type="fix" dev="mguillem">

@@ -1385,23 +1385,6 @@ public class WebClientTest extends WebServerTestCase {
     }
 
     /**
-     * Test setting the NekoHTML logging and parsing flags.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Deprecated
-    public void testNekoFlagSetters() throws Exception {
-        try {
-            Assert.assertEquals("Default ignore content is wrong", false, WebClient.getIgnoreOutsideContent());
-            WebClient.setIgnoreOutsideContent(true);
-            assertTrue("Ignore content did not get set", WebClient.getIgnoreOutsideContent());
-        }
-        finally {
-            WebClient.setIgnoreOutsideContent(false);
-        }
-    }
-
-    /**
      * @throws Exception if an error occurs
      */
     @Test

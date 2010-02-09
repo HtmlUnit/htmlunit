@@ -324,17 +324,6 @@ public class WebRequestSettings implements Serializable {
     }
 
     /**
-     * Adds the specified name/value pair to the additional HTTP headers.
-     * @param name the name of the additional HTTP header
-     * @param value the value of the additional HTTP header
-     * @deprecated As of 2.6, please use {@link #setAdditionalHeader(String, String)} instead
-     */
-    @Deprecated
-    public void addAdditionalHeader(final String name, final String value) {
-        setAdditionalHeader(name, value);
-    }
-
-    /**
      * Removed the specified name/value pair from the additional HTTP headers.
      * @param name the name of the additional HTTP header
      */

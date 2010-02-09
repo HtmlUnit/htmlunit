@@ -57,7 +57,6 @@ import org.w3c.css.sac.ErrorHandler;
 import com.gargoylesoftware.htmlunit.attachment.AttachmentHandler;
 import com.gargoylesoftware.htmlunit.html.BaseFrame;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
-import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -1609,32 +1608,6 @@ public class WebClient implements Serializable {
     public void setCssErrorHandler(final ErrorHandler cssErrorHandler) {
         WebAssert.notNull("cssErrorHandler", cssErrorHandler);
         cssErrorHandler_ = cssErrorHandler;
-    }
-
-    /**
-     * Sets the flag on the HtmlParser telling it to ignore the content that is outside
-     * of the BODY and HTML tags.
-     * @param ignoreOutsideContent the boolean flag to enable or disable the support of
-     *        content outside of the HTML and BODY tags
-     * @deprecated As of 2.6 without replacement (HtmlUnit tries to mimic browser's
-     * behavior and browsers don't ignore outside content)
-     */
-    @Deprecated
-    public static void setIgnoreOutsideContent(final boolean ignoreOutsideContent) {
-        HTMLParser.setIgnoreOutsideContent(ignoreOutsideContent);
-    }
-
-    /**
-     * Gets the state of the flag indicating whether or not to ignore content outside the
-     * BODY and HTML tags.
-     * @return the state of the flag indicating whether or not to ignore content outside
-     *         the BODY and HTML tags
-     * @deprecated As of 2.6 without replacement (HtmlUnit tries to mimic browser's
-     * behavior and browsers don't ignore outside content)
-     */
-    @Deprecated
-    public static boolean getIgnoreOutsideContent() {
-        return HTMLParser.getIgnoreOutsideContent();
     }
 
     /**

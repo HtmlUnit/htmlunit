@@ -601,24 +601,6 @@ public class XMLHttpRequest extends SimpleScriptable {
             return new byte[0];
         }
 
-        /**
-         * {@inheritDoc}
-         * @deprecated As of 2.6, please use {@link #getRequestSettings()}.getUrl()
-         */
-        @Deprecated
-        public URL getRequestUrl() {
-            return webRequestSettings_.getUrl();
-        }
-
-        /**
-         * {@inheritDoc}
-         * @deprecated As of 2.6, please use {@link #getRequestSettings()}.getHttpMethod()
-         */
-        @Deprecated
-        public HttpMethod getRequestMethod() {
-            return webRequestSettings_.getHttpMethod();
-        }
-
         public List<NameValuePair> getResponseHeaders() {
             return Collections.emptyList();
         }

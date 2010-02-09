@@ -60,21 +60,6 @@ public class WebResponseImpl implements WebResponse {
      * Constructs with all data.
      *
      * @param responseData      Data that was send back
-     * @param charset           Charset used if not returned in the response
-     * @param requestSettings   the request settings used to get this response
-     * @param loadTime          How long the response took to be sent
-     * @deprecated As of 2.6, please use @link {@link #WebResponseImpl(WebResponseData, WebRequestSettings, long)}
-     */
-    @Deprecated
-    public WebResponseImpl(final WebResponseData responseData, final String charset,
-            final WebRequestSettings requestSettings, final long loadTime) {
-        this(responseData, requestSettings, loadTime);
-    }
-
-    /**
-     * Constructs with all data.
-     *
-     * @param responseData      Data that was send back
      * @param requestSettings   the request settings used to get this response
      * @param loadTime          How long the response took to be sent
      */
@@ -90,24 +75,6 @@ public class WebResponseImpl implements WebResponse {
      */
     public WebRequestSettings getRequestSettings() {
         return requestSettings_;
-    }
-
-    /**
-     * {@inheritDoc}
-     * @deprecated As of 2.6, please use {@link #getRequestSettings()}.getHttpMethod()
-     */
-    @Deprecated
-    public HttpMethod getRequestMethod() {
-        return getRequestSettings().getHttpMethod();
-    }
-
-    /**
-     * {@inheritDoc}
-     * @deprecated As of 2.6, please use {@link #getRequestSettings()}.getUrl()
-     */
-    @Deprecated
-    public URL getRequestUrl() {
-        return getRequestSettings().getUrl();
     }
 
     /**
@@ -157,18 +124,6 @@ public class WebResponseImpl implements WebResponse {
             return contentTypeHeader;
         }
         return contentTypeHeader.substring(0, index);
-    }
-
-    /**
-     * {@inheritDoc}
-     * If no charset is specified in headers, then try to guess it from the content.
-     * @see <a href="http://en.wikipedia.org/wiki/Byte_Order_Mark">Wikipedia - Byte Order Mark</a>
-     * @return the charset, {@link TextUtil#DEFAULT_CHARSET} if it can't be determined
-     * @deprecated As of 2.6, please use @link {@link #getContentCharset()}
-     */
-    @Deprecated
-    public String getContentCharSet() {
-        return getContentCharset();
     }
 
     /**

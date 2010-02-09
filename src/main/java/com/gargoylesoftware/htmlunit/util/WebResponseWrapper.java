@@ -16,10 +16,8 @@ package com.gargoylesoftware.htmlunit.util;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 
@@ -85,16 +83,6 @@ public class WebResponseWrapper implements WebResponse {
 
     /**
      * {@inheritDoc}
-     * The default behavior of this method is to return getContentCharSet() on the wrapped connection object.
-     * @deprecated As of 2.6, please use @link {@link #getContentCharset()}
-     */
-    @Deprecated
-    public String getContentCharSet() {
-        return wrappedWebResponse_.getContentCharSet();
-    }
-
-    /**
-     * {@inheritDoc}
      * The default behavior of this method is to return getContentCharsetOrNull() on the wrapped connection object.
      */
     public String getContentCharsetOrNull() {
@@ -127,16 +115,6 @@ public class WebResponseWrapper implements WebResponse {
 
     /**
      * {@inheritDoc}
-     * The default behavior of this method is to return getRequestMethod() on the wrapped connection object.
-     * @deprecated As of 2.6, please use {@link #getRequestSettings()}.getHttpMethod()
-     */
-    @Deprecated
-    public HttpMethod getRequestMethod() {
-        return wrappedWebResponse_.getRequestMethod();
-    }
-
-    /**
-     * {@inheritDoc}
      * The default behavior of this method is to return getResponseHeaders() on the wrapped connection object.
      */
     public List<NameValuePair> getResponseHeaders() {
@@ -165,16 +143,6 @@ public class WebResponseWrapper implements WebResponse {
      */
     public String getStatusMessage() {
         return wrappedWebResponse_.getStatusMessage();
-    }
-
-    /**
-     * {@inheritDoc}
-     * The default behavior of this method is to return getRequestUrl() on the wrapped connection object.
-     * @deprecated As of 2.6, please use {@link #getRequestSettings()}.getUrl()
-     */
-    @Deprecated
-    public URL getRequestUrl() {
-        return wrappedWebResponse_.getRequestUrl();
     }
 
     /**

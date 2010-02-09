@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.net.URL;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -38,22 +37,6 @@ public interface WebResponse extends Serializable {
      * @return the request settings used to load this response
      */
     WebRequestSettings getRequestSettings();
-
-    /**
-     * Returns the method used for the request resulting in this response.
-     * @return the method used for the request resulting in this response
-     * @deprecated as of 2.6, please use {@link #getRequestSettings()}.getHttpMethod()
-     */
-    @Deprecated
-    HttpMethod getRequestMethod();
-
-    /**
-     * Returns the URL that was used to load this page.
-     * @return the URL that was used to load this page
-     * @deprecated as of 2.6, please use {@link #getRequestSettings()}.getUrl()
-     */
-    @Deprecated
-    URL getRequestUrl();
 
     /**
      * Returns the response headers as a list of {@link NameValuePair}s.
@@ -85,14 +68,6 @@ public interface WebResponse extends Serializable {
      * @return the content type returned from the server, e.g. "text/html"
      */
     String getContentType();
-
-    /**
-     * Returns the content charset; may be <tt>null</tt>.
-     * @return the content charset
-     * @deprecated as of 2.6, please use {@link #getContentCharset()}
-     */
-    @Deprecated
-    String getContentCharSet();
 
     /**
      * Returns the content charset specified explicitly in the header or in the content,

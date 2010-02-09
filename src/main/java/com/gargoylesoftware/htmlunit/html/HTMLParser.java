@@ -79,7 +79,6 @@ public final class HTMLParser {
     public static final String XHTML_NAMESPACE = "http://www.w3.org/1999/xhtml";
 
     private static final Map<String, IElementFactory> ELEMENT_FACTORIES = new HashMap<String, IElementFactory>();
-    private static boolean IgnoreOutsideContent_;
 
     static {
         ELEMENT_FACTORIES.put(HtmlInput.TAG_NAME, InputElementFactory.instance);
@@ -191,30 +190,6 @@ public final class HTMLParser {
     }
 
     /**
-     * Sets the flag to control validation of the HTML content that is outside of the
-     * BODY and HTML tags. This flag is false by default to maintain compatibility with
-     * current NekoHTML defaults.
-     * @param ignoreOutsideContent - boolean flag to set
-     * @deprecated As of 2.6 without replacement (HtmlUnit tries to mimic browser's
-     * behavior and browsers don't ignore outside content)
-     */
-    @Deprecated
-    public static void setIgnoreOutsideContent(final boolean ignoreOutsideContent) {
-        IgnoreOutsideContent_ = ignoreOutsideContent;
-    }
-
-    /**
-     * Gets the state of the flag to ignore content outside the BODY and HTML tags.
-     * @return the current state
-     * @deprecated As of 2.6 without replacement (HtmlUnit tries to mimic browser's
-     * behavior and browsers don't ignore outside content)
-     */
-    @Deprecated
-    public static boolean getIgnoreOutsideContent() {
-        return IgnoreOutsideContent_;
-    }
-
-    /**
      * @param tagName an HTML element tag name
      * @return a factory for creating HtmlElements representing the given tag
      */
@@ -275,20 +250,6 @@ public final class HTMLParser {
             page.registerParsingEnd();
             page.registerSnippetParsingEnd();
         }
-    }
-
-    /**
-     * Parses the HTML content from the given WebResponse into an object tree representation.
-     *
-     * @param webResponse the response data
-     * @param webWindow the web window into which the page is to be loaded
-     * @return the page object which is the root of the DOM tree
-     * @throws IOException if there is an IO error
-     * @deprecated as of version 2.6, please use {@link #parseHtml(WebResponse, WebWindow)} instead
-     */
-    @Deprecated
-    public static HtmlPage parse(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
-        return parseHtml(webResponse, webWindow);
     }
 
     /**
@@ -530,8 +491,6 @@ public final class HTMLParser {
                 setFeature(FEATURE_AUGMENTATIONS, true);
                 setProperty("http://cyberneko.org/html/properties/names/elems", "default");
                 setFeature("http://cyberneko.org/html/features/report-errors", reportErrors);
-                setFeature("http://cyberneko.org/html/features/balance-tags/ignore-outside-content",
-                    IgnoreOutsideContent_);
                 setFeature(FEATURE_PARSE_NOSCRIPT, !page_.getWebClient().isJavaScriptEnabled());
 
                 setContentHandler(this);

@@ -310,15 +310,6 @@ class DummyWebResponse implements WebResponse {
         throw new RuntimeException("not implemented");
     }
 
-    /**
-     * {@inheritDoc}
-     * @deprecated As of 2.6, please use {@link #getRequestSettings()}.getHttpMethod()
-     */
-    @Deprecated
-    public HttpMethod getRequestMethod() {
-        throw new RuntimeException("not implemented");
-    }
-
     public List<NameValuePair> getResponseHeaders() {
         throw new RuntimeException("not implemented");
     }
@@ -332,15 +323,6 @@ class DummyWebResponse implements WebResponse {
     }
 
     public String getStatusMessage() {
-        throw new RuntimeException("not implemented");
-    }
-
-    /**
-     * {@inheritDoc}
-     * @deprecated As of 2.6, please use {@link #getRequestSettings()}.getUrl()
-     */
-    @Deprecated
-    public URL getRequestUrl() {
         throw new RuntimeException("not implemented");
     }
 

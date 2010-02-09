@@ -80,17 +80,6 @@ public class DomText extends DomCharacterData implements Text {
     }
 
     /**
-     * Splits a DomText node in two.
-     * @param offset the character position at which to split the DomText node
-     * @return the DomText node that was split from this node
-     * @deprecated as of 2.6, please use {@link #splitText(int)} instead
-     */
-    @Deprecated
-    public DomText splitDomText(final int offset) {
-        return splitText(offset);
-    }
-
-    /**
      * {@inheritDoc}
      * Not yet implemented.
      */

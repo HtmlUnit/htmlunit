@@ -540,18 +540,6 @@ public class HtmlPage extends SgmlPage {
      * @param text the text to search for
      * @return the first anchor that was found
      * @throws ElementNotFoundException if no anchors are found with the specified text
-     * @deprecated As of 2.6, please use {@link #getAnchorByText(String)} instead
-     */
-    @Deprecated
-    public HtmlAnchor getFirstAnchorByText(final String text) throws ElementNotFoundException {
-        return getAnchorByText(text);
-    }
-
-    /**
-     * Returns the first anchor with the specified text.
-     * @param text the text to search for
-     * @return the first anchor that was found
-     * @throws ElementNotFoundException if no anchors are found with the specified text
      */
     public HtmlAnchor getAnchorByText(final String text) throws ElementNotFoundException {
         WebAssert.notNull("text", text);
