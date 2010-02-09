@@ -495,6 +495,17 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
+     * Returns the "external" property.
+     * @return the "external" property
+     */
+    public External jsxGet_external() {
+        final External external = new External();
+        external.setParentScope(this);
+        external.setPrototype(getPrototype(external.getClass()));
+        return external;
+    }
+
+    /**
      * Initializes this window.
      * @param webWindow the web window corresponding to this window
      */
@@ -504,7 +515,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
         document_ = new HTMLDocument();
         document_.setParentScope(this);
-        document_.setPrototype(getPrototype(HTMLDocument.class));
+        document_.setPrototype(getPrototype(document_.getClass()));
         document_.setWindow(this);
         if (webWindow.getEnclosedPage() instanceof SgmlPage) {
             final SgmlPage page = (SgmlPage) webWindow.getEnclosedPage();
@@ -520,24 +531,24 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
         navigator_ = new Navigator();
         navigator_.setParentScope(this);
-        navigator_.setPrototype(getPrototype(Navigator.class));
+        navigator_.setPrototype(getPrototype(navigator_.getClass()));
 
         screen_ = new Screen();
         screen_.setParentScope(this);
-        screen_.setPrototype(getPrototype(Screen.class));
+        screen_.setPrototype(getPrototype(screen_.getClass()));
 
         history_ = new History();
         history_.setParentScope(this);
-        history_.setPrototype(getPrototype(History.class));
+        history_.setPrototype(getPrototype(history_.getClass()));
 
         location_ = new Location();
         location_.setParentScope(this);
-        location_.setPrototype(getPrototype(Location.class));
+        location_.setPrototype(getPrototype(location_.getClass()));
         location_.initialize(this);
 
         applicationCache_ = new OfflineResourceList();
         applicationCache_.setParentScope(this);
-        applicationCache_.setPrototype(getPrototype(OfflineResourceList.class));
+        applicationCache_.setPrototype(getPrototype(applicationCache_.getClass()));
 
         // like a JS new Object()
         final Context ctx = Context.getCurrentContext();

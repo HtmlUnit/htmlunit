@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes">
+            <action type="add" dev="asashour" issue="2899323" due-to="Peter Faller">
+                JavaScript: add dummy support for window.external.AutoCompletionSave() (IE only).
+            </action>
             <action type="fix" dev="asashour" issue="2898484" due-to="Tomasz Kalkosinski">
                 JavaScript: fix document.getElementsByName() to handle empty and null values.
             </action>

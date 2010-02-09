@@ -116,6 +116,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("EventNode");
         names.remove("EventHandler");
         names.remove("EventListenersContainer");
+        names.remove("External");
         names.remove("FormChild");
         names.remove("FormField");
         names.remove("History");

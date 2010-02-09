@@ -875,8 +875,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "2", "2" },
-            IE = { "0", "0" })
+    @Alerts(FF = { "2", "2" }, IE = { "0", "0" })
     public void getElementsByName() throws Exception {
         final String html
             = "<html><head><title>Test</title><script>\n"

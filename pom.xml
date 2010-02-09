@@ -560,6 +560,9 @@
         <contributor>
             <name>Tomasz Kalkosinski</name>
         </contributor>
+        <contributor>
+            <name>Peter Faller</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

@@ -1026,6 +1026,12 @@
         </function>
     </class>
 
+    <class name="External" classname="com.gargoylesoftware.htmlunit.javascript.host.External" JSObject="true">
+        <doclink url="http://msdn.microsoft.com/en-us/library/ms535246.aspx" descr="MSDN Documentation"/>
+        <browser name="Internet Explorer"/>
+        <function name="AutoCompleteSaveForm"/>
+    </class>
+
     <class name="FormChild" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FormChild"
         JSObject="false">
         <property name="form" readable="true" writable="false"/>
@@ -2851,6 +2857,9 @@
         </property>
         <property name="document" readable="true" writable="false"/>
         <property name="event" readable="true" writable="false">
+            <browser name="Internet Explorer"/>
+        </property>
+        <property name="external" readable="true" writable="false">
             <browser name="Internet Explorer"/>
         </property>
         <property name="frameElement" readable="true" writable="false"/>
