@@ -435,11 +435,11 @@ public final class EncodingSniffer {
         if (bytes[i] == '>') {
             return null;
         }
-        String name = "";
-        String value = "";
+        final StringBuilder name = new StringBuilder();
+        final StringBuilder value = new StringBuilder();
         for ( ;; i++) {
             if (i >= bytes.length) {
-                return new Attribute(name, value, i);
+                return new Attribute(name.toString(), value.toString(), i);
             }
             if (bytes[i] == '=' && name.length() > 0) {
                 i++;
@@ -449,27 +449,27 @@ public final class EncodingSniffer {
                 while (bytes[i] == 0x09 || bytes[i] == 0x0A || bytes[i] == 0x0C || bytes[i] == 0x0D || bytes[i] == 0x20) {
                     i++;
                     if (i >= bytes.length) {
-                        return new Attribute(name, value, i);
+                        return new Attribute(name.toString(), value.toString(), i);
                     }
                 }
                 if (bytes[i] != '=') {
-                    return new Attribute(name, value, i);
+                    return new Attribute(name.toString(), value.toString(), i);
                 }
                 i++;
                 break;
             }
             if (bytes[i] == '/' || bytes[i] == '>') {
-                return new Attribute(name, value, i);
+                return new Attribute(name.toString(), value.toString(), i);
             }
-            name += (char) bytes[i];
+            name.append((char) bytes[i]);
         }
         if (i >= bytes.length) {
-            return new Attribute(name, value, i);
+            return new Attribute(name.toString(), value.toString(), i);
         }
         while (bytes[i] == 0x09 || bytes[i] == 0x0A || bytes[i] == 0x0C || bytes[i] == 0x0D || bytes[i] == 0x20) {
             i++;
             if (i >= bytes.length) {
-                return new Attribute(name, value, i);
+                return new Attribute(name.toString(), value.toString(), i);
             }
         }
         if (bytes[i] == '"' || bytes[i] == '\'') {
@@ -477,43 +477,43 @@ public final class EncodingSniffer {
             for (i++; i < bytes.length; i++) {
                 if (bytes[i] == b) {
                     i++;
-                    return new Attribute(name, value, i);
+                    return new Attribute(name.toString(), value.toString(), i);
                 }
                 else if (bytes[i] >= 'A' && bytes[i] <= 'Z') {
                     final byte b2 = (byte) (bytes[i] + 0x20);
-                    value += (char) b2;
+                    value.append((char) b2);
                 }
                 else {
-                    value += (char) bytes[i];
+                    value.append((char) bytes[i]);
                 }
             }
-            return new Attribute(name, value, i);
+            return new Attribute(name.toString(), value.toString(), i);
         }
         else if (bytes[i] == '>') {
-            return new Attribute(name, value, i);
+            return new Attribute(name.toString(), value.toString(), i);
         }
         else if (bytes[i] >= 'A' && bytes[i] <= 'Z') {
             final byte b = (byte) (bytes[i] + 0x20);
-            value += (char) b;
+            value.append((char) b);
             i++;
         }
         else {
-            value += (char) bytes[i];
+            value.append((char) bytes[i]);
             i++;
         }
         for ( ; i < bytes.length; i++) {
             if (bytes[i] == 0x09 || bytes[i] == 0x0A || bytes[i] == 0x0C || bytes[i] == 0x0D || bytes[i] == 0x20 || bytes[i] == 0x3E) {
-                return new Attribute(name, value, i);
+                return new Attribute(name.toString(), value.toString(), i);
             }
             else if (bytes[i] >= 'A' && bytes[i] <= 'Z') {
                 final byte b = (byte) (bytes[i] + 0x20);
-                value += (char) b;
+                value.append((char) b);
             }
             else {
-                value += (char) bytes[i];
+                value.append((char) bytes[i]);
             }
         }
-        return new Attribute(name, value, i);
+        return new Attribute(name.toString(), value.toString(), i);
     }
 
     /**
