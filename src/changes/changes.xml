@@ -5,6 +5,8 @@
     </properties>
 
     <body>
+        <release version="2.8" date="?" description="Bugfixes">
+        </release>
         <release version="2.7" date="Feb 9, 2010" description="Bugfixes, initial IE8 support, HttpClient 4 migration preparation">
             <action type="fix" dev="mguillem">
                 JavaScript: allow access to a frame through document.frameName (IE only).
