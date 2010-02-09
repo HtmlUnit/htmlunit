@@ -870,4 +870,28 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "2", "2" },
+            IE = { "0", "0" })
+    public void getElementsByName() throws Exception {
+        final String html
+            = "<html><head><title>Test</title><script>\n"
+            + "function doTest() {\n"
+            + "    alert(document.getElementsByName('').length);\n"
+            + "    alert(document.getElementsByName(null).length);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<div name=''></div>\n"
+            + "<div name=''></div>\n"
+            + "<div></div>\n"
+            + "<div></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }

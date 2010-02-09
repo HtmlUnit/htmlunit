@@ -1035,7 +1035,12 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public HTMLCollection jsxFunction_getElementsByName(final String elementName) {
         implicitCloseIfNecessary();
         final HTMLCollection collection = new HTMLCollection(this);
-        final String exp = ".//*[@name='" + elementName + "']";
+        if (getBrowserVersion().isIE() && (StringUtils.isEmpty(elementName) || elementName.equals("null"))) {
+            return collection;
+        }
+        // Null must me changed to '' for proper collection initialization.
+        final String expElementName = elementName.equals("null") ? "" : elementName;
+        final String exp = ".//*[@name='" + expElementName + "']";
         collection.init(getDomNodeOrDie(), exp);
         return collection;
     }

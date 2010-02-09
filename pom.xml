@@ -557,6 +557,9 @@
         <contributor>
             <name>Richard Eggert</name>
         </contributor>
+        <contributor>
+            <name>Tomasz Kalkosinski</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
