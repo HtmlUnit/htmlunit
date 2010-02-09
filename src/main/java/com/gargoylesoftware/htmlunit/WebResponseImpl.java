@@ -201,4 +201,11 @@ public class WebResponseImpl implements WebResponse {
     public long getLoadTime() {
         return loadTime_;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public URL getRequestUrl() {
+        return getRequestSettings().getUrl();
+    }
 }

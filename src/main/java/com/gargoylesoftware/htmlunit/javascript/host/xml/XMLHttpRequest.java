@@ -613,10 +613,6 @@ public class XMLHttpRequest extends SimpleScriptable {
             return 0;
         }
 
-        public String getContentCharSet() {
-            return "";
-        }
-
         public String getContentCharset() {
             return "";
         }
@@ -627,6 +623,10 @@ public class XMLHttpRequest extends SimpleScriptable {
 
         public WebRequestSettings getRequestSettings() {
             return webRequestSettings_;
+        }
+
+        public URL getRequestUrl() {
+            return getRequestSettings().getUrl();
         }
     }
 }

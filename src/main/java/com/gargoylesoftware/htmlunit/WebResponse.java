@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.net.URL;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -119,4 +120,13 @@ public interface WebResponse extends Serializable {
      * @return the time it took to load this web response, in milliseconds
      */
     long getLoadTime();
+
+    /**
+     * Returns the URL that was used to load this page.
+     * @return the URL that was used to load this page
+     * @deprecated as of 2.6, please use {@link #getRequestSettings()}.getUrl()
+     */
+    @Deprecated
+    URL getRequestUrl();
+
 }

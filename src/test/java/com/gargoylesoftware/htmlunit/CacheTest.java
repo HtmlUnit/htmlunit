@@ -329,4 +329,8 @@ class DummyWebResponse implements WebResponse {
     public WebRequestSettings getRequestSettings() {
         throw new RuntimeException("not implemented");
     }
+
+    public URL getRequestUrl() {
+        return getRequestSettings().getUrl();
+    }
 }

@@ -18,7 +18,7 @@
             <action type="remove" dev="asashour">
                 Deprecation: remove DomText.splitDomText(), HtmlPage.getFirstAnchorByText(), WebClient.setIgnoreOutsideContent(),
                 WebResponse.getRequestUrl, .getRequestMethod() and .getContentCharSet(), HTMLParser.parse()
-                and WebRequestSettings.addAdditionalHeader(). 
+                and WebRequestSettings.addAdditionalHeader().
             </action>
         </release>
         <release version="2.7" date="Feb 9, 2010" description="Bugfixes, initial IE8 support, HttpClient 4 migration preparation">

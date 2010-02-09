@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.util;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
@@ -151,5 +152,12 @@ public class WebResponseWrapper implements WebResponse {
      */
     public WebRequestSettings getRequestSettings() {
         return wrappedWebResponse_.getRequestSettings();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public URL getRequestUrl() {
+        return getRequestSettings().getUrl();
     }
 }
