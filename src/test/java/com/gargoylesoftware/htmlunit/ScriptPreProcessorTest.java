@@ -70,7 +70,7 @@ public class ScriptPreProcessorTest extends WebServerTestCase {
         // Test null return from pre processor
         client.setScriptPreProcessor(new ScriptPreProcessor() {
             public String preProcess(final HtmlPage htmlPage, final String sourceCode, final String sourceName,
-                                      final HtmlElement htmlElement) {
+                    final int lineNumber, final HtmlElement htmlElement) {
                 return null;
             }
         });
@@ -85,7 +85,7 @@ public class ScriptPreProcessorTest extends WebServerTestCase {
         // Test modify script in pre processor
         client.setScriptPreProcessor(new ScriptPreProcessor() {
             public String preProcess(final HtmlPage htmlPage, final String sourceCode, final String sourceName,
-                                      final HtmlElement htmlElement) {
+                    final int lineNumber, final HtmlElement htmlElement) {
                 final int start = sourceCode.indexOf(alertText);
                 final int end = start + alertText.length();
 
@@ -124,7 +124,7 @@ public class ScriptPreProcessorTest extends WebServerTestCase {
 
         client.setScriptPreProcessor(new ScriptPreProcessor() {
             public String preProcess(final HtmlPage htmlPage, final String sourceCode, final String sourceName,
-                                      final HtmlElement htmlElement) {
+                    final int lineNumber, final HtmlElement htmlElement) {
                 if (sourceCode.indexOf("unimplementedFunction") > -1) {
                     return "";
                 }
@@ -153,7 +153,8 @@ public class ScriptPreProcessorTest extends WebServerTestCase {
         client.setWebConnection(conn);
 
         client.setScriptPreProcessor(new ScriptPreProcessor() {
-            public String preProcess(final HtmlPage p, final String src, final String srcName, final HtmlElement e) {
+            public String preProcess(final HtmlPage p, final String src, final String srcName,
+                    final int lineNumber, final HtmlElement htmlElement) {
                 return src.replaceAll("aXert", "alert");
             }
         });

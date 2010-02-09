@@ -41,31 +41,28 @@ public class StringScriptPreProcessor implements ScriptPreProcessor {
     private enum PARSING_STATUS { NORMAL, IN_MULTI_LINE_COMMENT, IN_SINGLE_LINE_COMMENT, IN_STRING, IN_REG_EXP }
 
     private ContextFactory contextFactory_;
-    private int lineNo_;
 
     /**
      * Constructs a new StringScriptPreProcessor.
      * @param contextFactory the context factory, can be <tt>null</tt>
-     * @param lineno the line number of the source code
      */
-    public StringScriptPreProcessor(ContextFactory contextFactory, final int lineno) {
+    public StringScriptPreProcessor(ContextFactory contextFactory) {
         if (contextFactory == null) {
             contextFactory = ContextFactory.getGlobal();
         }
         contextFactory_ = contextFactory;
-        lineNo_ = lineno;
     }
 
     /**
      * {@inheritDoc}
      */
     public String preProcess(final HtmlPage htmlPage, String sourceCode, final String sourceName,
-                final HtmlElement htmlElement) {
+                final int lineNumber, final HtmlElement htmlElement) {
 
         try {
             final CompilerEnvirons environs = new CompilerEnvirons();
             environs.initFromContext(contextFactory_.enterContext());
-            final AstNode root = new Parser(environs).parse(sourceCode, sourceName, lineNo_);
+            final AstNode root = new Parser(environs).parse(sourceCode, sourceName, lineNumber);
             final Map<Integer, Integer> strings = new TreeMap<Integer, Integer>();
             root.visit(new NodeVisitor() {
 

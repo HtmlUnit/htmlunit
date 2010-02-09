@@ -30,9 +30,11 @@ public interface ScriptPreProcessor {
      * @param htmlPage the page
      * @param sourceCode the code to execute
      * @param sourceName a name for the chunk of code that is going to be executed (used in error messages)
+     * @param lineNumber the line number of the source code
      * @param htmlElement the HTML element that will act as the context
      * @return the source code after pre processing
      */
     String preProcess(
-        final HtmlPage htmlPage, final String sourceCode, final String sourceName, final HtmlElement htmlElement);
+        final HtmlPage htmlPage, final String sourceCode, final String sourceName, final int lineNumber,
+        final HtmlElement htmlElement);
 }

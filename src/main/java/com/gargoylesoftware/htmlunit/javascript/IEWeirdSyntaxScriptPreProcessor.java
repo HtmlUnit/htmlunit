@@ -47,7 +47,7 @@ public class IEWeirdSyntaxScriptPreProcessor implements ScriptPreProcessor {
      * {@inheritDoc}
      */
     public String preProcess(final HtmlPage htmlPage, String sourceCode,
-            final String sourceName, final HtmlElement htmlElement) {
+            final String sourceName, final int lineNumber, final HtmlElement htmlElement) {
 
         if (sourceCode.contains("catch")) {
             sourceCode = patternCatch_.matcher(sourceCode).replaceAll("$1 $2");

@@ -43,7 +43,7 @@ public class StringScriptPreProcessorTest extends WebDriverTestCase {
     }
 
     private void test(final String input, final String expectedOutput) {
-        final String output = new StringScriptPreProcessor(null, 0).preProcess(null, input, null, null);
+        final String output = new StringScriptPreProcessor(null).preProcess(null, input, null, 0, null);
         assertEquals(expectedOutput, output);
     }
 

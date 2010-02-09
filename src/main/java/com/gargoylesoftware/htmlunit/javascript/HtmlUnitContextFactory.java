@@ -158,15 +158,15 @@ public class HtmlUnitContextFactory extends ContextFactory {
             // Pre process the source code
             final HtmlPage page = (HtmlPage) Context.getCurrentContext()
                 .getThreadLocal(JavaScriptEngine.KEY_STARTING_PAGE);
-            source = preProcess(page, source, sourceName, null);
+            source = preProcess(page, source, sourceName, lineno, null);
 
-            source = new StringScriptPreProcessor(HtmlUnitContextFactory.this, lineno)
-                .preProcess(page, source, sourceName, null);
+            source = new StringScriptPreProcessor(HtmlUnitContextFactory.this)
+                .preProcess(page, source, sourceName, lineno, null);
 
             // PreProcess IE Conditional Compilation if needed
             if (browserVersion_.isIE()) {
                 final ScriptPreProcessor ieCCPreProcessor = new IEConditionalCompilationScriptPreProcessor();
-                source = ieCCPreProcessor.preProcess(page, source, sourceName, null);
+                source = ieCCPreProcessor.preProcess(page, source, sourceName, lineno, null);
 //                sourceCode = IEWeirdSyntaxScriptPreProcessor.getInstance()
 //                    .preProcess(htmlPage, sourceCode, sourceName, null);
             }
@@ -184,17 +184,19 @@ public class HtmlUnitContextFactory extends ContextFactory {
      * @param htmlPage the page
      * @param sourceCode the code to process
      * @param sourceName a name for the chunk of code (used in error messages)
+     * @param lineNumber the line number of the source code
      * @param htmlElement the HTML element that will act as the context
      * @return the source code after being pre processed
      * @see com.gargoylesoftware.htmlunit.ScriptPreProcessor
      */
     protected String preProcess(
-        final HtmlPage htmlPage, final String sourceCode, final String sourceName, final HtmlElement htmlElement) {
+        final HtmlPage htmlPage, final String sourceCode, final String sourceName, final int lineNumber,
+        final HtmlElement htmlElement) {
 
         String newSourceCode = sourceCode;
         final ScriptPreProcessor preProcessor = webClient_.getScriptPreProcessor();
         if (preProcessor != null) {
-            newSourceCode = preProcessor.preProcess(htmlPage, sourceCode, sourceName, htmlElement);
+            newSourceCode = preProcessor.preProcess(htmlPage, sourceCode, sourceName, lineNumber, htmlElement);
             if (newSourceCode == null) {
                 newSourceCode = "";
             }

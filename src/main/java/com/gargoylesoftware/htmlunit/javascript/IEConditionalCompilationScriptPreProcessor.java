@@ -50,7 +50,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
      * {@inheritDoc}
      */
     public String preProcess(final HtmlPage htmlPage, final String sourceCode,
-            final String sourceName, final HtmlElement htmlElement) {
+            final String sourceName, final int lineNumber, final HtmlElement htmlElement) {
 
         final int startPos = StringScriptPreProcessor.indexOf(sourceCode, "/*@cc_on", 0);
         if (startPos == -1) {

@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes">
+            <action type="update" dev="asashour">
+                INCOMPATIBLE CHANGE: add an extra parameter (int lineNumber) to ScriptPreProcessor.preProcess().
+            </action>
             <action type="add" dev="asashour" issue="2899323" due-to="Peter Faller">
                 JavaScript: add dummy support for window.external.AutoCompletionSave() (IE only).
             </action>
