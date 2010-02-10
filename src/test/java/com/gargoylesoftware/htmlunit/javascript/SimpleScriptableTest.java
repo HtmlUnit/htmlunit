@@ -423,4 +423,24 @@ public class SimpleScriptableTest extends WebTestCase {
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "true", "function", "function" })
+    public void callee() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var fun = arguments.callee.toString();\n"
+            + "  alert(fun.indexOf('test()') != -1);\n"
+            + "  alert(typeof arguments.callee);\n"
+            + "  alert(typeof arguments.callee.caller);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }

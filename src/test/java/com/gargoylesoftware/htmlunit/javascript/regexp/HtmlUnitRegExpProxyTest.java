@@ -819,4 +819,61 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     public void dollar() throws Exception {
         testEvaluate("'\\\\$1'.replace(/\\$/g, '\\\\$1')");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "foobar", "$0bar", "$1bar", "\\$1bar", "\\1", "cb", "cb", "a$$b", "a$1b", "a$`b", "a$'b" })
+    public void replaceString() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert($replace('bazbar', 'baz', 'foo'));\n"
+            + "      alert($replace('foobar', 'foo', '$0'));\n"
+            + "      alert($replace('foobar', 'foo', '$1'));\n"
+            + "      alert($replace('foobar', 'foo', '\\\\$1'));\n"
+            + "      alert($replace('*[)1', '*[)', '\\\\'));\n"
+            + "      alert($replace('$ab', '$a', 'c'));\n"
+            + "      alert($replace('^ab', '^a', 'c'));\n"
+            + "      alert($replace('a[x]b', '[x]', '$$'));\n"
+            + "      alert($replace('a[x]b', '[x]', '$1'));\n"
+            + "      alert($replace('a[x]b', '[x]', '$`'));\n"
+            + "      alert($replace('a[x]b', '[x]', \"$'\"));\n"
+            + "    }\n"
+            + "    function $replace(this$static, from, to){\n"
+            + "      var regex, replacement;\n"
+            + "      regex = $replaceAll(from, "
+            + "'([/\\\\\\\\\\\\.\\\\*\\\\+\\\\?\\\\|\\\\(\\\\)\\\\[\\\\]\\\\{\\\\}$^])', '\\\\\\\\$1');\n"
+            + "      replacement = $replaceAll("
+            + "$replaceAll(to, '\\\\\\\\', '\\\\\\\\\\\\\\\\'), '\\\\$', '\\\\\\\\$');\n"
+            + "      return $replaceAll(this$static, regex, replacement);\n"
+            + "    }\n"
+            + "    function $replaceAll(this$static, regex, replace){\n"
+            + "      replace = __translateReplaceString(replace);\n"
+            + "      return this$static.replace(RegExp(regex, 'g'), replace);\n"
+            + "    }\n"
+            + "    function __translateReplaceString(replaceStr){\n"
+            + "      var pos = 0;\n"
+            + "      while (0 <= (pos = replaceStr.indexOf('\\\\', pos))) {\n"
+            + "        if (replaceStr.charCodeAt(pos + 1) == 36) {\n"
+            + "          replaceStr = replaceStr.substr(0, pos - 0) + '$' + $substring(replaceStr, ++pos);\n"
+            + "        }\n"
+            + "        else {\n"
+            + "          replaceStr = replaceStr.substr(0, pos - 0) + $substring(replaceStr, ++pos);\n"
+            + "        }\n"
+            + "      }\n"
+            + "      return replaceStr;\n"
+            + "    }\n"
+            + "    function $substring(this$static, beginIndex){\n"
+            + "      return this$static.substr(beginIndex, this$static.length - beginIndex);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }
