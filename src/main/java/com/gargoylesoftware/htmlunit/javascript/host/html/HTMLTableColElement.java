@@ -85,8 +85,8 @@ public class HTMLTableColElement extends HTMLTableComponent {
      * Sets the value of the "width" property.
      * @param width the value of the "width" property
      */
-    public void jsxSet_width(final String width) {
-        setWidthOrHeight("width", width, false);
+    public void jsxSet_width(final Object width) {
+        setWidthOrHeight("width", (width == null ? "" : Context.toString(width)), false);
     }
 
 }

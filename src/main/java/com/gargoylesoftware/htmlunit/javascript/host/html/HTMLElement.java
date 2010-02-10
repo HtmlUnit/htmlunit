@@ -2264,7 +2264,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         if (value.endsWith("px")) {
             value = value.substring(0, value.length() - 2);
         }
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().isIE() && value.length() > 0) {
             boolean error = false;
             if (!value.matches("\\d+%")) {
                 try {

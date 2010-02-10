@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="2948498">
+                JavaScript: allow to set HTMLTableColElement's width to null.
+            </action>
             <action type="update" dev="asashour">
                 INCOMPATIBLE CHANGE: add an extra parameter (int lineNumber) to ScriptPreProcessor.preProcess().
             </action>
