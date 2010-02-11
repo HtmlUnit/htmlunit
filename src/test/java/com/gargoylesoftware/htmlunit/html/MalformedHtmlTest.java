@@ -227,4 +227,24 @@ public class MalformedHtmlTest extends WebTestCase {
             + "</body></html>";
         loadPageWithAlerts(html);
     }
+
+    /**
+     * Regression test for bug 2940936.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void tableTextOutsideTD() throws Exception {
+        final String html = "<html><body>"
+            + "<table border='1'>\n"
+            + "<tr><td>1</td>\n"
+            + "<td>2</td>\n"
+            + "some text\n"
+            + "</tr>\n"
+            + "</table>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPageWithAlerts(html);
+        final String expectedText = "some text" + LINE_SEPARATOR
+            + "1\t2";
+        assertEquals(expectedText, page.asText());
+    }
 }

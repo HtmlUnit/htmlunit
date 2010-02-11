@@ -746,7 +746,15 @@ public final class HTMLParser {
                     // Use the normal behavior: append a text node for the accumulated text.
                     final DomText text = new DomText(page_, characters_.toString());
                     characters_.setLength(0);
-                    currentNode_.appendChild(text);
+
+                    // malformed HTML: </td>some text</tr> => text comes before the table
+                    if (currentNode_ instanceof HtmlTableRow) {
+                        final HtmlTableRow row = (HtmlTableRow) currentNode_;
+                        row.getEnclosingTable().insertBefore(text);
+                    }
+                    else {
+                        currentNode_.appendChild(text);
+                    }
                 }
             }
         }

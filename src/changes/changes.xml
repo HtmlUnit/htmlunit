@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="2940936">
+                Parser: place text located between &lt;/TD&gt; and &lt;/TR&gt; before the enclosing TABLE.
+            </action>
             <action type="fix" dev="mguillem" issue="2949446">
                 JavaScript HtmlUnit RegExp proxy: handle two digits replacement references.
             </action>
