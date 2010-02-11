@@ -184,9 +184,23 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
                 final char next = replacement.charAt(i + 1);
                 // only valid back reference are "evaluated"
                 if (next >= '1' && next <= '9') {
-                    final int num = next - '0';
-                    if (num <= matcher.groupCount()) {
-                        ss = matcher.group(num);
+                    final int num1digit = next - '0';
+                    final char next2 = (i + 2 < replacement.length()) ? replacement.charAt(i + 2) : 'x';
+                    final int num2digits;
+                    // if there are 2 digits, the second one is considered as part of the group number
+                    // only if there is such a group
+                    if (next2 >= '1' && next2 <= '9') {
+                        num2digits = num1digit * 10 + (next2 - '0');
+                    }
+                    else {
+                        num2digits = Integer.MAX_VALUE;
+                    }
+                    if (num2digits <= matcher.groupCount()) {
+                        ss = matcher.group(num2digits);
+                        i++;
+                    }
+                    else if (num1digit <= matcher.groupCount()) {
+                        ss = matcher.group(num1digit);
                     }
                 }
                 else {

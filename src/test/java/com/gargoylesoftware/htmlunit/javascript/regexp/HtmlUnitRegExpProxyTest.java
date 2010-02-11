@@ -876,4 +876,23 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * Regression test for bug 2949446.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("[k]")
+    public void replace_group2digits() throws Exception {
+        testEvaluate("'abcdefghijkl'.replace(/(a)(b)(c)(d)(e)(f)(g)(h)(i)(j)(k)(l)/g, '[\\$11]')");
+    }
+
+    /**
+     * When replacement reference is two digits but not so much groups exist, one digit replacement index is taken.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("[a8]")
+    public void replace_group2digits_doesntExist() throws Exception {
+        testEvaluate("'abcdefghijkl'.replace(/(a)(b)(c)(d)(e)(f)(g)(h)(i)(j)(k)(l)/g, '[\\$18]')");
+    }
 }
