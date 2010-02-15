@@ -85,16 +85,21 @@ public class HtmlScriptTest extends WebTestCase {
      */
     @Test
     public void testAsText() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
-            + "<script id='script1'>\n"
-            + "    var foo = 132;\n"
-            + "</script></body></html>";
-
-        final HtmlPage page = loadPage(htmlContent);
-
-        final HtmlScript script = page.getHtmlElementById("script1");
+        final String html = "<html><body><script id='s'>var foo = 132;</script></body></html>";
+        final HtmlPage page = loadPage(html);
+        final HtmlScript script = page.getHtmlElementById("s");
         assertEquals("", script.asText());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testIsDisplayed() throws Exception {
+        final String html = "<html><body><script id='s'>var foo = 132;</script></body></html>";
+        final HtmlPage page = loadPage(html);
+        final HtmlScript script = page.getHtmlElementById("s");
+        assertFalse(script.isDisplayed());
     }
 
     /**

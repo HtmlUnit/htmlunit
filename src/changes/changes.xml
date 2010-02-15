@@ -6,6 +6,10 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes">
+            <action type="fix" dev="sdanig" issue="2897457">
+                JavaScript: implement window.scroll(x, y), window.scrollBy(x, y), window.scrollTo(x, y), window.scrollByLines(lines)
+                and window.scrollByPages(pages).
+            </action>
             <action type="fix" dev="mguillem" issue="2940936">
                 Parser: place text located between &lt;/TD&gt; and &lt;/TR&gt; before the enclosing TABLE.
             </action>

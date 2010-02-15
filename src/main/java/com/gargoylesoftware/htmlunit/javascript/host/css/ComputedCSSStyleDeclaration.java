@@ -22,7 +22,9 @@ import static org.apache.commons.lang.StringUtils.defaultIfEmpty;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -33,7 +35,6 @@ import org.w3c.css.sac.Selector;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlHead;
 import com.gargoylesoftware.htmlunit.javascript.host.Text;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
@@ -64,8 +65,17 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     /** The computed, cached width of the element to which this computed style belongs (no padding, borders, etc). */
     private Integer width_;
 
-    /** The computed, cached height of the element to which this computed style belongs (no padding, borders, etc). */
+    /**
+     * The computed, cached height of the element to which this computed style belongs (no padding, borders, etc),
+     * taking child elements into account.
+     */
     private Integer height_;
+
+    /**
+     * The computed, cached height of the element to which this computed style belongs (no padding, borders, etc),
+     * <b>not</b> taking child elements into account.
+     */
+    private Integer height2_;
 
     /** The computed, cached horizontal padding (left + right) of the element to which this computed style belongs. */
     private Integer paddingHorizontal_;
@@ -1247,6 +1257,12 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return width_;
         }
 
+        final DomNode node = getElement().getDomNodeOrDie();
+        if (!node.mayBeDisplayed()) {
+            width_ = 0;
+            return width_;
+        }
+
         final String display = jsxGet_display();
         if ("none".equals(display)) {
             width_ = 0;
@@ -1255,7 +1271,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
         int width;
         final String styleWidth = super.jsxGet_width();
-        final DomNode parent = getElement().getDomNodeOrDie().getParentNode();
+        final DomNode parent = node.getParentNode();
         if (StringUtils.isEmpty(styleWidth) && parent instanceof HtmlElement) {
             // Width not explicitly set.
             final String cssFloat = jsxGet_cssFloat();
@@ -1281,17 +1297,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
             else {
                 // Inline elements take up however much space is required by their children.
-                width = 0;
-                for (DomNode child : this.<DomNode>getDomNodeOrDie().getChildren()) {
-                    if (child.getScriptObject() instanceof HTMLElement) {
-                        final HTMLElement e = (HTMLElement) child.getScriptObject();
-                        final int w = e.jsxGet_currentStyle().getCalculatedWidth(true, true);
-                        width += w;
-                    }
-                    else if (child.getScriptObject() instanceof Text) {
-                        width += child.getTextContent().length() * PIXELS_PER_CHAR;
-                    }
-                }
+                width = getContentWidth();
             }
         }
         else {
@@ -1304,6 +1310,25 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         width_ = width;
+        return width;
+    }
+
+    /**
+     * Returns the total width of the element's children.
+     * @return the total width of the element's children
+     */
+    public int getContentWidth() {
+        int width = 0;
+        for (DomNode child : this.<DomNode> getDomNodeOrDie().getChildren()) {
+            if (child.getScriptObject() instanceof HTMLElement) {
+                final HTMLElement e = (HTMLElement) child.getScriptObject();
+                final int w = e.jsxGet_currentStyle().getCalculatedWidth(true, true);
+                width += w;
+            }
+            else if (child.getScriptObject() instanceof Text) {
+                width += child.getTextContent().length() * PIXELS_PER_CHAR;
+            }
+        }
         return width;
     }
 
@@ -1324,46 +1349,23 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         return height;
     }
 
+    /**
+     * Returns the element's calculated height, taking both relevant CSS and the element's children into account.
+     * @return the element's calculated height, taking both relevant CSS and the element's children into account
+     */
     private int getCalculatedHeight() {
         if (height_ != null) {
             return height_;
         }
 
-        if ("none".equals(jsxGet_display())) {
-            height_ = 0;
-            return height_;
-        }
-
-        if (getElement() instanceof HTMLBodyElement) {
-            height_ = WINDOW_HEIGHT;
-            return height_;
-        }
-
+        final int elementHeight = getEmptyHeight();
+        final int contentHeight = getContentHeight();
         final boolean ie = getBrowserVersion().isIE();
-        final int defaultHeight = (ie ? 15 : 20);
-
-        final String h = super.jsxGet_height();
-        int elementHeight = pixelValue(getElement(), new CssValue(WINDOW_HEIGHT) {
-            @Override public String get(final ComputedCSSStyleDeclaration style) {
-                return style.getStyleAttribute("height", true);
-            }
-        });
-        if (elementHeight == 0 || (ie && elementHeight < defaultHeight)) {
-            elementHeight = defaultHeight;
-        }
-
-        Integer childrenHeight = null;
-        for (DomNode child : this.<DomNode>getDomNodeOrDie().getChildren()) {
-            if (child.getScriptObject() instanceof HTMLElement) {
-                final HTMLElement e = (HTMLElement) child.getScriptObject();
-                final int x = e.jsxGet_currentStyle().getCalculatedHeight(true, true);
-                childrenHeight = (childrenHeight != null ? childrenHeight + x : x);
-            }
-        }
+        final boolean explicitHeightSpecified = (super.jsxGet_height().length() > 0);
 
         int height;
-        if (childrenHeight != null && ((ie && childrenHeight > elementHeight) || (!ie && h.length() == 0))) {
-            height = childrenHeight;
+        if (contentHeight > 0 && ((ie && contentHeight > elementHeight) || (!ie && !explicitHeightSpecified))) {
+            height = contentHeight;
         }
         else {
             height = elementHeight;
@@ -1371,6 +1373,120 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
         height_ = height;
         return height_;
+    }
+
+    /**
+     * Returns the element's calculated height taking relevant CSS into account, but <b>not</b> the element's child
+     * elements.
+     *
+     * @return the element's calculated height taking relevant CSS into account, but <b>not</b> the element's child
+     *         elements
+     */
+    private int getEmptyHeight() {
+        if (height2_ != null) {
+            return height2_;
+        }
+
+        final DomNode node = getElement().getDomNodeOrDie();
+        if (!node.mayBeDisplayed()) {
+            height2_ = 0;
+            return height2_;
+        }
+
+        if ("none".equals(jsxGet_display())) {
+            height2_ = 0;
+            return height2_;
+        }
+
+        if (getElement() instanceof HTMLBodyElement) {
+            height2_ = WINDOW_HEIGHT;
+            return height2_;
+        }
+
+        final boolean ie = getBrowserVersion().isIE();
+        final int defaultHeight = (ie ? 15 : 20);
+
+        int height = pixelValue(getElement(), new CssValue(WINDOW_HEIGHT) {
+            @Override public String get(final ComputedCSSStyleDeclaration style) {
+                return style.getStyleAttribute("height", true);
+            }
+        });
+        if (height == 0 || (ie && height < defaultHeight)) {
+            height = defaultHeight;
+        }
+
+        height2_ = height;
+        return height2_;
+    }
+
+    /**
+     * Returns the total height of the element's children.
+     * @return the total height of the element's children
+     */
+    public int getContentHeight() {
+        // There are two different kinds of elements that might determine the content height:
+        //  - elements with position:static or position:relative (elements that flow and build on each other)
+        //  - elements with position:absolute (independent elements)
+
+        final DomNode node = getElement().getDomNodeOrDie();
+        if (!node.mayBeDisplayed()) {
+            return 0;
+        }
+
+        HTMLElement lastFlowing = null;
+        final Set<HTMLElement> independent = new HashSet<HTMLElement>();
+        for (DomNode child : node.getChildren()) {
+            if (child.mayBeDisplayed() && child.getScriptObject() instanceof HTMLElement) {
+                final HTMLElement e = (HTMLElement) child.getScriptObject();
+                final ComputedCSSStyleDeclaration style = e.jsxGet_currentStyle();
+                final String pos = style.getPositionWithInheritance();
+                if ("static".equals(pos) || "relative".equals(pos)) {
+                    lastFlowing = e;
+                }
+                else if ("absolute".equals(pos)) {
+                    independent.add(e);
+                }
+            }
+        }
+
+        final Set<HTMLElement> relevant = new HashSet<HTMLElement>();
+        relevant.addAll(independent);
+        if (lastFlowing != null) {
+            relevant.add(lastFlowing);
+        }
+
+        int max = 0;
+        for (HTMLElement e : relevant) {
+            final ComputedCSSStyleDeclaration style = e.jsxGet_currentStyle();
+            final int h = style.getTop(true, false, false) + style.getCalculatedHeight(true, true);
+            if (h > max) {
+                max = h;
+            }
+        }
+        return max;
+    }
+
+    /**
+     * Returns <tt>true</tt> if the element is scrollable along the specified axis.
+     * @param horizontal if <tt>true</tt>, the caller is interested in scrollability along the x-axis;
+     *        if <tt>false</tt>, the caller is interested in scrollability along the y-axis
+     * @return <tt>true</tt> if the element is scrollable along the specified axis
+     */
+    public boolean isScrollable(final boolean horizontal) {
+        final boolean scrollable;
+        final HTMLElement node = getElement();
+        final String overflow = jsxGet_overflow();
+        if (horizontal) {
+            // TODO: inherit, overflow-x
+            scrollable = (node instanceof HTMLBodyElement || "scroll".equals(overflow) || "auto".equals(overflow))
+                && getContentWidth() > getCalculatedWidth();
+        }
+        else {
+            // TODO: inherit, overflow-y
+            scrollable = (node instanceof HTMLBodyElement || "scroll".equals(overflow) || "auto".equals(overflow))
+                && getContentHeight() > getEmptyHeight();
+        }
+        return scrollable;
     }
 
     /**
@@ -1392,30 +1508,29 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
         else if ("absolute".equals(p) && !"auto".equals(b)) {
             // Estimate the vertical displacement caused by *all* siblings.
-            // This is very rough, and doesn't even take position or display types into account (hence the
-            // need for the explicit check for HtmlHead elements, which are display:none in regular UAs).
+            // This is very rough, and doesn't even take position or display types into account.
             // It also doesn't take into account the fact that the parent's height may be hardcoded in CSS.
             top = 0;
             DomNode child = this.getElement().getDomNodeOrDie().getParentNode().getFirstChild();
             while (child != null) {
-                if (child instanceof HtmlElement && !(child instanceof HtmlHead)) {
+                if (child instanceof HtmlElement && child.mayBeDisplayed()) {
                     top += 20;
                 }
-                child = child.getPreviousSibling();
+                child = child.getNextSibling();
             }
             top -= pixelValue(b);
         }
         else {
-            // Estimate the vertical displacement caused by *previous* siblings.
-            // This is very rough, and doesn't even take position or display types into account (hence the
-            // need for the explicit check for HtmlHead elements, which are display:none in regular UAs).
+            // Calculate the vertical displacement caused by *previous* siblings.
             top = 0;
             DomNode prev = this.getElement().getDomNodeOrDie().getPreviousSibling();
-            while (prev != null) {
-                if (prev instanceof HtmlElement && !(prev instanceof HtmlHead)) {
-                    top += 20;
-                }
+            while (prev != null && !(prev instanceof HtmlElement)) {
                 prev = prev.getPreviousSibling();
+            }
+            if (prev != null) {
+                final HTMLElement e = (HTMLElement) ((HtmlElement) prev).getScriptObject();
+                final ComputedCSSStyleDeclaration style = e.jsxGet_currentStyle();
+                top = style.getTop(true, false, false) + style.getCalculatedHeight(true, true);
             }
             // If the position is relative, we also need to add the specified "top" displacement.
             if ("relative".equals(p)) {

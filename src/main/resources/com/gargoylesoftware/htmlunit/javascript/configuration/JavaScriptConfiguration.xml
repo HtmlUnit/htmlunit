@@ -2973,8 +2973,12 @@
         </function>
         <function name="scroll"/>
         <function name="scrollBy"/>
-        <function name="scrollByLines"/>
-        <function name="scrollByPages"/>
+        <function name="scrollByLines">
+            <browser name="Firefox"/>
+        </function>
+        <function name="scrollByPages">
+            <browser name="Firefox"/>
+        </function>
         <function name="scrollTo"/>
         <function name="setInterval">
             <doclink

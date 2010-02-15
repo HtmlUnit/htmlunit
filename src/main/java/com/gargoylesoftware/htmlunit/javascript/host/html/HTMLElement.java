@@ -1787,8 +1787,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             scrollTop_ = 0;
         }
         else if (scrollTop_ > 0) {
-            final String overflow = jsxGet_currentStyle().jsxGet_overflow();
-            if (!"scroll".equals(overflow) && !"auto".equals(overflow)) { // TODO: inherit, overflow-y
+            if (!jsxGet_currentStyle().isScrollable(false)) {
                 scrollTop_ = 0;
             }
         }
@@ -1815,8 +1814,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             scrollLeft_ = 0;
         }
         else if (scrollLeft_ > 0) {
-            final String overflow = jsxGet_currentStyle().jsxGet_overflow();
-            if (!"scroll".equals(overflow) && !"auto".equals(overflow)) { // TODO: inherit, overflow-x
+            if (!jsxGet_currentStyle().isScrollable(true)) {
                 scrollLeft_ = 0;
             }
         }

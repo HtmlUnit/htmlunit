@@ -104,7 +104,7 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
  * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535862.aspx">MSDN documentation</a>
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919">
- * W3C Dom Level 1</a>
+ * W3C DOM Level 1</a>
  */
 public class HTMLDocument extends Document implements ScriptableWithFallbackGetter {
 
@@ -1066,7 +1066,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         // XPath operations are very expensive, and this method gets invoked quite a bit.
         // This little shortcut shaves ~35% off the build time (3 min -> 2 min, as of 8/10/2007).
         final List<HtmlElement> elements;
-        if (getBrowserVersion().isIE()) {
+        final boolean ie = getBrowserVersion().isIE();
+        if (ie) {
             elements = page.getElementsByIdAndOrName(name);
         }
         else {
@@ -1078,11 +1079,12 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         if (elements.size() == 1) {
             final HtmlElement element = elements.get(0);
             final String tagName = element.getTagName();
-            if (HtmlImage.TAG_NAME.equals(tagName) || HtmlForm.TAG_NAME.equals(tagName)
+            if (HtmlImage.TAG_NAME.equals(tagName)
+                || HtmlForm.TAG_NAME.equals(tagName)
                 || HtmlApplet.TAG_NAME.equals(tagName)) {
                 return getScriptableFor(element);
             }
-            else if (getBrowserVersion().isIE() && element instanceof BaseFrame) {
+            else if (ie && element instanceof BaseFrame) {
                 return ((BaseFrame) element).getEnclosedWindow().getScriptObject();
             }
             return NOT_FOUND;
@@ -1118,7 +1120,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns this document's <tt>body</tt> element.
      * @return this document's <tt>body</tt> element
      */
-    public Object jsxGet_body() {
+    public HTMLElement jsxGet_body() {
         final HtmlPage page = getHtmlPage();
         // for IE, the body of a not yet loaded page is null whereas it already exists for FF
         if (getBrowserVersion().isIE() && (page.getEnclosingWindow() instanceof FrameWindow)) {
@@ -1130,7 +1132,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
         final HtmlElement body = getHtmlPage().getBody();
         if (body != null) {
-            return body.getScriptObject();
+            return (HTMLElement) body.getScriptObject();
         }
         return null;
     }

@@ -729,4 +729,76 @@ public class Window2Test extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Regression test for bug 2897457.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1210" },
+            IE = { "0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()" })
+    public void scrolling1() throws Exception {
+        scrolling(true);
+    }
+
+    /**
+     * Regression test for bug 2897457.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "0,0", "0,0", "0,0", "0,0", "0,0", "0,0", "0,0" },
+            IE = { "0,0", "0,0", "0,0", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()" })
+    public void scrolling2() throws Exception {
+        scrolling(false);
+    }
+
+    private void scrolling(final boolean addHugeDiv) throws Exception {
+        final String html
+            = "<html><body onload='test()'>\n"
+            + (addHugeDiv ? "<div id='d' style='width:10000px;height:10000px;background-color:blue;'></div>\n" : "")
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var b = document.body;\n"
+            + "  alert(b.scrollLeft + ',' + b.scrollTop);\n"
+            + "  if(window.scrollTo) {\n"
+            + "    window.scrollTo(100, 200);\n"
+            + "    alert(b.scrollLeft + ',' + b.scrollTop);\n"
+            + "  } else {\n"
+            + "    alert('no scrollTo()');\n"
+            + "  }\n"
+            + "  if(window.scrollBy) {\n"
+            + "    window.scrollBy(10, 30);\n"
+            + "    alert(b.scrollLeft + ',' + b.scrollTop);\n"
+            + "  } else {\n"
+            + "    alert('no scrollBy()');\n"
+            + "  }\n"
+            + "  if(window.scrollTo) {\n"
+            + "    window.scrollTo(-5, -20);\n"
+            + "    alert(b.scrollLeft + ',' + b.scrollTop);\n"
+            + "  } else {\n"
+            + "    alert('no scrollTo()');\n"
+            + "  }\n"
+            + "  if(window.scrollByLines) {\n"
+            + "    window.scrollByLines(5);\n"
+            + "    alert(b.scrollLeft + ',' + b.scrollTop);\n"
+            + "  } else {\n"
+            + "    alert('no scrollByLines()');\n"
+            + "  }\n"
+            + "  if(window.scroll) {\n"
+            + "    window.scroll(0, 0);\n"
+            + "    alert(b.scrollLeft + ',' + b.scrollTop);\n"
+            + "  } else {\n"
+            + "    alert('no scroll()');\n"
+            + "  }\n"
+            + "  if(window.scrollByPages) {\n"
+            + "    window.scrollByPages(2);\n"
+            + "    alert(b.scrollLeft + ',' + b.scrollTop);\n"
+            + "  } else {\n"
+            + "    alert('no scrollByPages()');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }

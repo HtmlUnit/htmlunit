@@ -1186,7 +1186,7 @@ public class WindowTest extends WebTestCase {
             + "window.scrollByLines(2);\n"
             + "</script></head><body>\n"
             + "</body></html>";
-        loadPage(content);
+        loadPage(BrowserVersion.FIREFOX_3, content, new ArrayList<String>());
     }
 
     /**
@@ -1200,7 +1200,7 @@ public class WindowTest extends WebTestCase {
             + "window.scrollByPages(2);\n"
             + "</script></head><body>\n"
             + "</body></html>";
-        loadPage(content);
+        loadPage(BrowserVersion.FIREFOX_3, content, new ArrayList<String>());
     }
 
     /**

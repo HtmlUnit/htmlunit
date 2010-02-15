@@ -754,46 +754,60 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Does nothing.
+     * Scrolls to the specified location on the page.
      * @param x the horizontal position to scroll to
      * @param y the vertical position to scroll to
      */
     public void jsxFunction_scroll(final int x, final int y) {
-        LOG.debug("window.scroll() not implemented");
+        jsxFunction_scrollTo(x, y);
     }
 
     /**
-     * Does nothing.
+     * Scrolls the window content the specified distance.
      * @param x the horizontal distance to scroll by
      * @param y the vertical distance to scroll by
      */
     public void jsxFunction_scrollBy(final int x, final int y) {
-        LOG.debug("window.scrollBy() not implemented");
+        final HTMLElement body = document_.jsxGet_body();
+        if (body != null) {
+            body.jsxSet_scrollLeft(body.jsxGet_scrollLeft() + x);
+            body.jsxSet_scrollTop(body.jsxGet_scrollTop() + y);
+        }
     }
 
     /**
-     * Does nothing.
+     * Scrolls the window content down by the specified number of lines.
      * @param lines the number of lines to scroll down
      */
     public void jsxFunction_scrollByLines(final int lines) {
-        LOG.debug("window.scrollByLines() not implemented");
+        final HTMLElement body = document_.jsxGet_body();
+        if (body != null) {
+            body.jsxSet_scrollTop(body.jsxGet_scrollTop() + (19 * lines));
+        }
     }
 
     /**
-     * Does nothing.
+     * Scrolls the window content down by the specified number of pages.
      * @param pages the number of pages to scroll down
      */
     public void jsxFunction_scrollByPages(final int pages) {
-        LOG.debug("window.scrollByPages() not implemented");
+        final HTMLElement body = document_.jsxGet_body();
+        if (body != null) {
+            body.jsxSet_scrollTop(body.jsxGet_scrollTop() + (WINDOW_HEIGHT * pages));
+        }
     }
 
     /**
-     * Does nothing.
+     * Scrolls to the specified location on the page.
      * @param x the horizontal position to scroll to
      * @param y the vertical position to scroll to
      */
     public void jsxFunction_scrollTo(final int x, final int y) {
-        LOG.debug("window.scrollTo() not implemented");
+        final HTMLElement body = document_.jsxGet_body();
+        if (body != null) {
+            body.jsxSet_scrollLeft(x);
+            body.jsxSet_scrollTop(y);
+        }
     }
 
     /**

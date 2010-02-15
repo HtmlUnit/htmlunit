@@ -646,9 +646,13 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @see <a href="http://www.w3.org/TR/CSS2/visufx.html#visibility">CSS2 Visibility</a>
      * @see <a href="http://www.w3.org/TR/CSS2/visuren.html#propdef-display">CSS2 Display</a>
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms531180.aspx">MSDN Documentation</a>
-     * @return true if the node is visible to the user
+     * @return <tt>true</tt> if the node is visible to the user, <tt>false</tt> otherwise
+     * @see #mayBeDisplayed()
      */
     public boolean isDisplayed() {
+        if (!mayBeDisplayed()) {
+            return false;
+        }
         final Page page = getPage();
         if (page instanceof HtmlPage) {
             // display: iterate top to bottom, because if a parent is display:none,
@@ -684,6 +688,16 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 node = node.getParentNode();
             } while (node != null);
         }
+        return true;
+    }
+
+    /**
+     * Returns <tt>true</tt> if nodes of this type can ever be displayed, <tt>false</tt> otherwise. Examples of nodes
+     * that can never be displayed are <tt>&lt;head&gt;</tt>, <tt>&lt;meta&gt;</tt>, <tt>&lt;script&gt;</tt>, etc.
+     * @return <tt>true</tt> if nodes of this type can ever be displayed, <tt>false</tt> otherwise
+     * @see #isDisplayed()
+     */
+    public boolean mayBeDisplayed() {
         return true;
     }
 

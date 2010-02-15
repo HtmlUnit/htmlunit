@@ -57,4 +57,12 @@ public class HtmlHead extends HtmlElement {
         return getAttribute("profile");
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean mayBeDisplayed() {
+        return false;
+    }
+
 }

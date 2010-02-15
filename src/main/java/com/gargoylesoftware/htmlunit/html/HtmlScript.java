@@ -169,6 +169,14 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean mayBeDisplayed() {
+        return false;
+    }
+
+    /**
      * If setting the <tt>src</tt> attribute, this method executes the new JavaScript if necessary
      * (behavior varies by browser version). {@inheritDoc}
      */
