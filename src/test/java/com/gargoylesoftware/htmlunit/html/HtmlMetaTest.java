@@ -57,7 +57,7 @@ public class HtmlMetaTest extends WebTestCase {
     public void asText() throws Exception {
         final String html = "<html><head><meta id='m' http-equiv='a' content='b'></head><body></body></html>";
         final HtmlPage page = loadPageWithAlerts(html);
-        assertEquals("", page.getHtmlElementById("m").asText());
+        assertEquals("", page.getElementById("m").asText());
     }
 
     /**
@@ -67,7 +67,7 @@ public class HtmlMetaTest extends WebTestCase {
     public void isDisplayed() throws Exception {
         final String html = "<html><head><meta id='m' http-equiv='a' content='b'></head><body></body></html>";
         final HtmlPage page = loadPageWithAlerts(html);
-        assertFalse(page.getHtmlElementById("m").isDisplayed());
+        assertFalse(page.getElementById("m").isDisplayed());
     }
 
 }
