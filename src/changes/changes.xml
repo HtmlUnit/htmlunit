@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes">
+            <action type="update" dev="mguillem">
+                JavaScript: added simple implementation of TextRange.setEndPoint (IE only).
+            </action>
             <action type="fix" dev="sdanig" issue="2897457">
                 JavaScript: implement window.scroll(x, y), window.scrollBy(x, y), window.scrollTo(x, y), window.scrollByLines(lines)
                 and window.scrollByPages(pages).

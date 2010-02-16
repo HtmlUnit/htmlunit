@@ -234,4 +234,31 @@ public class TextRange extends SimpleScriptable {
         return false;
     }
 
+    /**
+     * Sets the endpoint of the range based on the endpoint of another range..
+     * @param type end point transfer type. One of "StartToEnd", "StartToStart", "EndToStart" and "EndToEnd"
+     * @param other the other range
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536745.aspx">MSDN doc</a>
+     */
+    public void jsxFunction_setEndPoint(final String type, final TextRange other) {
+        final Range otherRange = other.range_;
+
+        final org.w3c.dom.Node target;
+        final int offset;
+        if (type.endsWith("ToStart")) {
+            target = otherRange.getStartContainer();
+            offset = otherRange.getStartOffset();
+        }
+        else {
+            target = otherRange.getEndContainer();
+            offset = otherRange.getEndOffset();
+        }
+
+        if (type.startsWith("Start")) {
+            range_.setStart(target, offset);
+        }
+        else {
+            range_.setEnd(target, offset);
+        }
+    }
 }

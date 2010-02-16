@@ -245,4 +245,27 @@ public class TextRangeTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.IE)
+    @Alerts({ "hello", "world", "hello world" })
+    public void setEndRange() throws Exception {
+        final String html = "<html><body>\n"
+            + "<form name='f'><input name='q' value='hello world'></form>\n"
+            + "<script>\n"
+            + "var range1 = document.f.q.createTextRange();\n"
+            + "var range2 = range1.duplicate();\n"
+            + "range1.moveEnd('character', -6);\n"
+            + "alert(range1.text);\n"
+            + "range2.moveStart('character', 6);\n"
+            + "alert(range2.text);\n"
+            + "var r3 = range1.duplicate();\n"
+            + "r3.setEndPoint('EndToEnd',  range2)\n"
+            + "alert(r3.text)\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
 }
