@@ -49,7 +49,7 @@ public abstract class BaseFrame extends HtmlElement {
 
     private static final long serialVersionUID = -7658106924909626296L;
     private static final Log LOG = LogFactory.getLog(BaseFrame.class);
-    private final WebWindow enclosedWindow_ = new FrameWindow(this);
+    private final WebWindow enclosedWindow_;
     private boolean contentLoaded_ = false;
 
     /**
@@ -64,13 +64,17 @@ public abstract class BaseFrame extends HtmlElement {
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
 
+        WebWindow enclosedWindow = null;
         try {
-            // put about:blank in the window to allow JS to run on this frame before the
-            // real content is loaded
-            final WebClient webClient = getPage().getEnclosingWindow().getWebClient();
-            final HtmlPage temporaryPage = webClient.getPage(enclosedWindow_,
-                new WebRequestSettings(WebClient.URL_ABOUT_BLANK));
-            temporaryPage.setReadyState(READY_STATE_LOADING);
+            if (getPage() instanceof HtmlPage) { // if loaded as part of XHR.responseXML, don't load content
+                enclosedWindow = new FrameWindow(this);
+                // put about:blank in the window to allow JS to run on this frame before the
+                // real content is loaded
+                final WebClient webClient = getPage().getEnclosingWindow().getWebClient();
+                final HtmlPage temporaryPage = webClient.getPage(enclosedWindow,
+                    new WebRequestSettings(WebClient.URL_ABOUT_BLANK));
+                temporaryPage.setReadyState(READY_STATE_LOADING);
+            }
         }
         catch (final FailingHttpStatusCodeException e) {
             // should never occur
@@ -78,6 +82,7 @@ public abstract class BaseFrame extends HtmlElement {
         catch (final IOException e) {
             // should never occur
         }
+        enclosedWindow_ = enclosedWindow;
     }
 
     /**

@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="2952333">
+                Fixed ClassCastException occurring while accessing XMLHttpRequest.responseXML when content uses XHTML namespace and contains an (i)frame.
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript: added simple implementation of TextRange.setEndPoint (IE only).
             </action>

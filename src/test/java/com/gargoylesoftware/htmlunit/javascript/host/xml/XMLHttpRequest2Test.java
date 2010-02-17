@@ -298,4 +298,26 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         final String requestBody = getMockWebConnection().getLastWebRequestSettings().getRequestBody();
         assertEquals("Something", requestBody);
     }
+
+    /**
+     * Regression test for bug 2952333.
+     * This test was causing a java.lang.ClassCastException:
+     * com.gargoylesoftware.htmlunit.xml.XmlPage cannot be cast to com.gargoylesoftware.htmlunit.html.HtmlPage
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "[object XMLDocument]", IE = "[object]")
+    public void iframeInResponse() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "var xhr = " + XHRInstantiation_ + ";\n"
+            + "xhr.open('GET', 'foo.xml', false);\n"
+            + "xhr.send();\n"
+            + "alert(xhr.responseXML);\n"
+            + "</script></head><body></body></html>";
+
+        final String xml = "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
+            + "<body><iframe></iframe></body></html>";
+        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        loadPageWithAlerts2(html);
+    }
 }
