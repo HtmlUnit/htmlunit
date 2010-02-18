@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="2815614">
+                Clicking an element should make enclosing window the current one.
+            </action>
             <action type="fix" dev="mguillem" issue="2952333">
                 Fixed ClassCastException occurring while accessing XMLHttpRequest.responseXML when content uses XHTML namespace and contains an (i)frame.
             </action>

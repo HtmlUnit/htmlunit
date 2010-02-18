@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.ArrayList;
 import java.util.List;
 
+import junit.framework.Assert;
+
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -271,4 +273,44 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
         assertTrue(radio4.isChecked());
     }
 
+    /**
+     * Regression test for bug 2815614.
+     * Clicking an element should force the enclosing window to become the current one.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void clickResponse() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<form name='myForm'>\n"
+            + "  <input type='radio' name='myRadio' id='radio1' value=v1>\n"
+            + "  <input type='radio' name='myRadio' value=v2>\n"
+            + "  <button onclick='openPopup()' id='clickMe'>click me</button>\n"
+            + "</form>\n"
+            + "<script>\n"
+            + "function doSomething() {\n"
+            + "  // nothing\n"
+            + "}\n"
+            + "function openPopup() {\n"
+            + "  window.open('popup.html');\n"
+            + "}\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final WebClient webClient = page.getWebClient();
+        Assert.assertSame(page.getEnclosingWindow(), webClient.getCurrentWindow());
+
+        // open popup
+        final HtmlPage page2 = page.getElementById("clickMe").click();
+        Assert.assertNotSame(page, page2);
+        Assert.assertSame(page2.getEnclosingWindow(), webClient.getCurrentWindow());
+
+        // click radio buttons in the original page
+        final HtmlPage page3 = page.getElementById("radio1").click();
+        Assert.assertSame(page, page3);
+        Assert.assertSame(page3.getEnclosingWindow(), webClient.getCurrentWindow());
+    }
 }

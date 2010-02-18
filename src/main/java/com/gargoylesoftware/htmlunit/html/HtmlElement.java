@@ -1195,6 +1195,10 @@ public abstract class HtmlElement extends DomElement {
     @SuppressWarnings("unchecked")
     public <P extends Page> P click(final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
         throws IOException {
+
+        // make enclosing window the current one
+        getPage().getWebClient().setCurrentWindow(getPage().getEnclosingWindow());
+
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return (P) getPage();
         }
