@@ -92,17 +92,6 @@ public class HtmlScriptTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void testIsDisplayed() throws Exception {
-        final String html = "<html><body><script id='s'>var foo = 132;</script></body></html>";
-        final HtmlPage page = loadPage(html);
-        final HtmlScript script = page.getHtmlElementById("s");
-        assertFalse(script.isDisplayed());
-    }
-
-    /**
      * Verifies that the weird script src attribute used by the jQuery JavaScript library is
      * ignored silently (bug 1695279).
      * @throws Exception if the test fails
