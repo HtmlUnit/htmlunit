@@ -238,6 +238,50 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     }
 
     /**
+     * Verifies that if an image has an <tt>onload</tt> attribute set from a script, it gets downloaded
+     * and the <tt>onload</tt> handler gets invoked.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "image one", "image two" })
+    public void onLoad_calledWhenImageDownloaded_mixed() throws Exception {
+        final String html
+            = "<html><body><img id='img' name='img'/><script>\n"
+            + "  var i = document.getElementById('img');\n"
+            + "  i.onload = function(){\n"
+            + "    alert('image one');\n"
+            + "    i.onload = function(){\n"
+            + "      alert('image two');\n"
+            + "    };\n"
+            + "    i.src = '" + URL_THIRD + "';\n"
+            + "  };\n"
+            + "  i.src = '" + URL_SECOND + "';\n"
+            + "  var t = setTimeout(function(){clearTimeout(t);}, 500);\n"
+            + "</script></body></html>";
+
+        final WebClient client = getWebClient();
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(URL_SECOND, "foo", "image/png");
+        conn.setResponse(URL_THIRD, "foo", "image/png");
+        client.setWebConnection(conn);
+
+        final List<String> actual = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(actual));
+
+        client.getPage(URL_FIRST);
+        client.waitForBackgroundJavaScript(1200);
+
+        final List<String> requestedUrls = conn.getRequestedUrls(URL_FIRST);
+        assertEquals(requestedUrls.size(), 3);
+        assertEquals("", requestedUrls.get(0));
+        assertEquals("second/", requestedUrls.get(1));
+        assertEquals(URL_THIRD.toString(), requestedUrls.get(2));
+        assertEquals(URL_THIRD, conn.getLastWebRequestSettings().getUrl());
+    }
+
+    /**
      * Verifies that if an image has an <tt>onload</tt> attribute, the <tt>onload</tt> handler
      * does not get invoked if we can't download the image.
      * @throws Exception if an error occurs

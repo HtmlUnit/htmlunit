@@ -88,6 +88,22 @@ public class HtmlImage extends HtmlElement {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String value) {
+        if ("src".equals(qualifiedName) && value != ATTRIBUTE_NOT_DEFINED && getPage() instanceof HtmlPage) {
+            final String oldValue = getAttributeNS(namespaceURI, qualifiedName);
+            if (!oldValue.equals(value)) {
+                // onload handlers may need to be invoked again, and a new image may need to be downloaded
+                onloadInvoked_ = false;
+                downloaded_ = false;
+            }
+        }
+        super.setAttributeNS(namespaceURI, qualifiedName, value);
+    }
+
+    /**
      * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
      *
      * <p>Executes this element's <tt>onload</tt> handler if it has one. This method also downloads the image

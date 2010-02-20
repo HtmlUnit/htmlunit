@@ -213,7 +213,6 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     public String getAttribute(final String attributeName) {
         final DomAttr attr = attributes_.get(attributeName);
-
         if (attr != null) {
             return attr.getNodeValue();
         }
