@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 public abstract class DomCharacterData extends DomNode implements CharacterData {
 
     private static final long serialVersionUID = -1880335251566663985L;
+
     /** The data string. */
     private String data_;
 

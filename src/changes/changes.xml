@@ -6,10 +6,13 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes">
-            <action type="update" dev="sdanig" issue="2954910">
+            <action type="add" dev="sdanig" issue="2952882">
+                Add implementation of DomText.getCanonicalXPath().
+            </action>
+            <action type="fix" dev="sdanig" issue="2954910">
                 JavaScript: img.onload functions not always called when img.src modified.
             </action>
-            <action type="update" dev="sdanig" issue="2955073">
+            <action type="fix" dev="sdanig" issue="2955073">
                 JavaScript: Dynamically-added frame.onload and img.onload functions were sometimes being ignored.
             </action>
             <action type="fix" dev="mguillem" issue="2815614">

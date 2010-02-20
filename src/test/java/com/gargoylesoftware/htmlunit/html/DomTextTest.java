@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  * @author Rodney Gitzel
  * @author Sudhan Moghe
+ * @author Philip Graf
  */
 public class DomTextTest extends WebTestCase {
 
@@ -293,6 +294,41 @@ public class DomTextTest extends WebTestCase {
         text.setTextContent("xyz");
         assertEquals("xyz", text.getTextContent());
         assertEquals("xyz", page.asText());
+    }
+
+    /**
+     * Tests if {@code getCanonicalXPath()} returns the correct XPath for a text
+     * node without other text node siblings.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void getCanonicalXPath_withoutTextSiblings() throws Exception {
+        final String html = "<html><body><span id='s'>abc</span></body></html>";
+        final HtmlPage page = loadPage(html);
+        final DomText text = (DomText) page.getElementById("s").getFirstChild();
+        assertEquals("/html/body/span/text()", text.getCanonicalXPath());
+        assertEquals(text, page.getFirstByXPath(text.getCanonicalXPath()));
+    }
+
+    /**
+     * Tests if {@code getCanonicalXPath()} returns the correct XPath for a text
+     * node with other text node siblings.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void getCanonicalXPath_withTextSiblings() throws Exception {
+        final String html = "<html><body><span id='s'>abc<br/>def</span></body></html>";
+        final HtmlPage page = loadPage(html);
+
+        final DomText text1 = (DomText) page.getElementById("s").getFirstChild();
+        assertEquals("abc", text1.getData());
+        assertEquals("/html/body/span/text()[1]", text1.getCanonicalXPath());
+        assertEquals(text1, page.getFirstByXPath(text1.getCanonicalXPath()));
+
+        final DomText text2 = (DomText) page.getElementById("s").getChildNodes().get(2);
+        assertEquals("def", text2.getData());
+        assertEquals("/html/body/span/text()[2]", text2.getCanonicalXPath());
+        assertEquals(text2, page.getFirstByXPath(text2.getCanonicalXPath()));
     }
 
 }
