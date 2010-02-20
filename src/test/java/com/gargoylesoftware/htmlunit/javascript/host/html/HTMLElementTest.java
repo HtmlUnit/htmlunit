@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
@@ -1238,8 +1237,7 @@ public class HTMLElementTest extends WebTestCase {
         final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
         final HtmlElement div = page.getHtmlElementById("myDiv");
 
-        assertNotNull("Event handler was not set", div.getEventHandler(eventName));
-
+        assertTrue("Event handler was not set", div.hasEventHandlers(eventName));
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

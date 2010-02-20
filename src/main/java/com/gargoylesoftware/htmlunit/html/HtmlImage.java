@@ -28,8 +28,6 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -113,8 +111,7 @@ public class HtmlImage extends HtmlElement {
         }
         onloadInvoked_ = true;
         final HtmlPage htmlPage = (HtmlPage) getPage();
-        final Function onload = getEventHandler("onload");
-        if (onload != null) {
+        if (hasEventHandlers("onload")) {
             // An onload handler is defined; we need to download the image and then call the onload handler.
             boolean ok;
             try {

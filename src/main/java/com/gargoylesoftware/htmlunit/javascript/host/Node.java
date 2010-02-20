@@ -664,9 +664,9 @@ public class Node extends SimpleScriptable {
     }
 
     /**
-     * Gets an event handler.
-     * @param eventName the event name (ex: "onclick")
-     * @return the handler function, <code>null</code> if the property is null or not a function
+     * Returns the specified event handler.
+     * @param eventName the event name (e.g. "onclick")
+     * @return the handler function, or <tt>null</tt> if the property is null or not a function
      */
     public Function getEventHandler(final String eventName) {
         if (eventListenersContainer_ == null) {
@@ -676,8 +676,20 @@ public class Node extends SimpleScriptable {
     }
 
     /**
+     * Returns <tt>true</tt> if there are any event handlers for the specified event.
+     * @param eventName the event name (e.g. "onclick")
+     * @return <tt>true</tt> if there are any event handlers for the specified event, <tt>false</tt> otherwise
+     */
+    public boolean hasEventHandlers(final String eventName) {
+        if (eventListenersContainer_ == null) {
+            return false;
+        }
+        return eventListenersContainer_.hasEventHandlers(StringUtils.substring(eventName, 2));
+    }
+
+    /**
      * Defines an event handler.
-     * @param eventName the event name (like "onclick")
+     * @param eventName the event name (e.g. "onclick")
      * @param eventHandler the handler (<code>null</code> to reset it)
      */
     public void setEventHandler(final String eventName, final Function eventHandler) {
@@ -686,7 +698,7 @@ public class Node extends SimpleScriptable {
 
     /**
      * Defines an event handler (or maybe any other object).
-     * @param eventName the event name (like "onclick")
+     * @param eventName the event name (e.g. "onclick")
      * @param value the property (<code>null</code> to reset it)
      */
     protected void setEventHandlerProp(final String eventName, final Object value) {
@@ -695,7 +707,7 @@ public class Node extends SimpleScriptable {
 
     /**
      * Gets the property defined as event handler (not necessary a Function if something else has been set).
-     * @param eventName the event name (like "onclick")
+     * @param eventName the event name (e.g. "onclick")
      * @return the property
      */
     protected Object getEventHandlerProp(final String eventName) {

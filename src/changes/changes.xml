@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes">
+            <action type="update" dev="sdanig" issue="2955073">
+                JavaScript: Dynamically-added frame.onload and img.onload functions were sometimes being ignored.
+            </action>
             <action type="fix" dev="mguillem" issue="2815614">
                 Clicking an element should make enclosing window the current one.
             </action>

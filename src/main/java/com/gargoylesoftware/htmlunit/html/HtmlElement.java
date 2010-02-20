@@ -777,20 +777,21 @@ public abstract class HtmlElement extends DomElement {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * Return a Function to be executed when a given event occurs.
-     * @param eventName Name of event such as "onclick" or "onblur", etc
-     * @return a Rhino JavaScript executable Function, or <tt>null</tt> if no event handler has been defined
+     * Returns <tt>true</tt> if this element has any JavaScript functions that need to be executed when the
+     * specified event occurs.
+     * @param eventName the name of the event, such as "onclick" or "onblur", etc
+     * @return a Rhino JavaScript function, or <tt>null</tt> if no event handler has been defined
      */
-    public final Function getEventHandler(final String eventName) {
+    public final boolean hasEventHandlers(final String eventName) {
         final HTMLElement jsObj = (HTMLElement) getScriptObject();
-        return jsObj.getEventHandler(eventName);
+        return jsObj.hasEventHandlers(eventName);
     }
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * Register a Function as an event handler.
-     * @param eventName Name of event such as "onclick" or "onblur", etc
-     * @param eventHandler a Rhino JavaScript executable Function
+     * Registers a JavaScript function as an event handler.
+     * @param eventName the name of the event, such as "onclick" or "onblur", etc
+     * @param eventHandler a Rhino JavaScript function
      */
     public final void setEventHandler(final String eventName, final Function eventHandler) {
         final HTMLElement jsObj = (HTMLElement) getScriptObject();

@@ -1149,8 +1149,7 @@ public class HtmlPage extends SgmlPage {
         if (window instanceof FrameWindow) {
             final FrameWindow fw = (FrameWindow) window;
             final BaseFrame frame = fw.getFrameElement();
-            final Function frameTagEventHandler = frame.getEventHandler("on" + eventType);
-            if (frameTagEventHandler != null) {
+            if (frame.hasEventHandlers("on" + eventType)) {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("Executing on" + eventType + " handler for " + frame);
                 }

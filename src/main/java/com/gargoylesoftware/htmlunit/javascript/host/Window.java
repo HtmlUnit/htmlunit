@@ -69,6 +69,7 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptFunctionJob
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptStringJob;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
@@ -863,7 +864,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             final HtmlPage page = (HtmlPage) webWindow_.getEnclosedPage();
             final HtmlElement body = page.getBody();
             if (body != null) {
-                return body.getEventHandler("onload");
+                final HTMLBodyElement b = (HTMLBodyElement) body.getScriptObject();
+                return b.getEventHandler("onload");
             }
             return null;
         }
