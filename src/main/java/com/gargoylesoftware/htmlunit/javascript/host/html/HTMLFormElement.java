@@ -19,7 +19,10 @@ import java.net.MalformedURLException;
 import java.util.Iterator;
 import java.util.List;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -50,21 +53,25 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  *
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535249.aspx">MSDN documentation</a>
  */
-public class HTMLFormElement extends HTMLElement {
+public class HTMLFormElement extends HTMLElement implements Function {
 
     private static final long serialVersionUID = -1860993922147246513L;
+
     private HTMLCollection elements_; // has to be a member to have equality (==) working
 
     /**
      * Creates an instance. A default constructor is required for all JavaScript objects.
      */
-    public HTMLFormElement() { }
+    public HTMLFormElement() {
+        // Empty.
+    }
 
     /**
      * JavaScript constructor. This must be declared in every JavaScript file because
      * the rhino engine won't walk up the hierarchy looking for constructors.
      */
     public final void jsConstructor() {
+        // Empty.
     }
 
     /**
@@ -146,7 +153,6 @@ public class HTMLFormElement extends HTMLElement {
                 // nothing, return action attribute
             }
         }
-
         return action;
     }
 
@@ -404,4 +410,34 @@ public class HTMLFormElement extends HTMLElement {
         }
         return jsxGet_elements().get(index, ((HTMLFormElement) start).jsxGet_elements());
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
+        if (!getBrowserVersion().isIE()) {
+            throw Context.reportRuntimeError("Not a function.");
+        }
+        if (args.length > 0) {
+            final Object arg = args[0];
+            if (arg instanceof String) {
+                return ScriptableObject.getProperty(this, (String) arg);
+            }
+            else if (arg instanceof Number) {
+                return ScriptableObject.getProperty(this, ((Number) arg).intValue());
+            }
+        }
+        return Context.getUndefinedValue();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
+        if (!getBrowserVersion().isIE()) {
+            throw Context.reportRuntimeError("Not a function.");
+        }
+        return null;
+    }
+
 }

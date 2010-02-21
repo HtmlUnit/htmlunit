@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
@@ -39,7 +40,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 public class HtmlForm2Test extends WebTestCase {
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     @NotYetImplemented(Browser.FF)
@@ -85,4 +86,34 @@ public class HtmlForm2Test extends WebTestCase {
         assertEquals(url.toExternalForm() + submitSuffix, submitPage.getWebResponse().getRequestSettings().getUrl());
         assertEquals(url.toExternalForm() + linkSuffix, linkPage.getWebResponse().getRequestSettings().getUrl());
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE = { "textfieldid", "textfieldname", "textfieldid", "textfieldid", "textfieldname", "textfieldid" },
+            FF = { "error", "error", "error", "error", "error", "error" })
+    public void asFunction() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test(){\n"
+            + "  var f1 = document.forms[0];\n"
+            + "  var f2 = document.forms(0);\n"
+            + "  try { alert(f1('textfieldid').id) } catch (e) { alert('error') }\n"
+            + "  try { alert(f1('textfieldname').name) } catch (e) { alert('error') }\n"
+            + "  try { alert(f1(0).id) } catch (e) { alert('error') }\n"
+            + "  try { alert(f2('textfieldid').id) } catch (e) { alert('error') }\n"
+            + "  try { alert(f2('textfieldname').name) } catch (e) { alert('error') }\n"
+            + "  try { alert(f2(0).id) } catch (e) { alert('error') }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form id='firstid' name='firstname'>\n"
+            + "  <input type='text' id='textfieldid' value='foo' />\n"
+            + "  <input type='text' name='textfieldname' value='foo' />\n"
+            + "</form>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
 }
