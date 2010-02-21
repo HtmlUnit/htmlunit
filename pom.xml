@@ -563,6 +563,9 @@
         <contributor>
             <name>Peter Faller</name>
         </contributor>
+        <contributor>
+            <name>Benoit Heinrich</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

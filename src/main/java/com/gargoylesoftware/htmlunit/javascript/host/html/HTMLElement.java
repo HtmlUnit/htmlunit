@@ -562,6 +562,16 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
+     * Removes the specified attribute.
+     * @param attribute the attribute to remove
+     */
+    public void jsxFunction_removeAttributeNode(final Attr attribute) {
+        final String name = attribute.jsxGet_name();
+        final String namespaceUri = attribute.jsxGet_namespaceURI();
+        jsxFunction_removeAttributeNS(namespaceUri, name);
+    }
+
+    /**
      * Removes this object from the document hierarchy.
      * @param removeChildren whether to remove children or no
      * @return a reference to the object that is removed

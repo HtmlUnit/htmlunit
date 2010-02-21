@@ -6,13 +6,16 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes">
-            <action type="add" dev="sdanig" issue="2952882">
+            <action type="add" dev="sdanig" issue="2954288" due-to="Benoit Heinrich">
+                JavaScript: add support for element.removeAttributeNode() (FF only).
+            </action>
+            <action type="add" dev="sdanig" issue="2952882" due-to="Philip Graf">
                 Add implementation of DomText.getCanonicalXPath().
             </action>
-            <action type="fix" dev="sdanig" issue="2954910">
+            <action type="fix" dev="sdanig" issue="2954910" due-to="Benoit Heinrich">
                 JavaScript: img.onload functions not always called when img.src modified.
             </action>
-            <action type="fix" dev="sdanig" issue="2955073">
+            <action type="fix" dev="sdanig" issue="2955073" due-to="Benoit Heinrich">
                 JavaScript: Dynamically-added frame.onload and img.onload functions were sometimes being ignored.
             </action>
             <action type="fix" dev="mguillem" issue="2815614">

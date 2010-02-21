@@ -1547,6 +1547,9 @@
         <function name="onhelp" notImplemented="true">
             <browser name="Internet Explorer"/>
         </function>
+        <function name="removeAttributeNode">
+            <browser name="Firefox"/>
+        </function>
         <function name="removeAttributeNS">
             <browser name="Firefox"/>
         </function>
