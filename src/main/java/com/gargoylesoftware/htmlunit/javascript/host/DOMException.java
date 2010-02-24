@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -57,4 +59,81 @@ public class DOMException extends SimpleScriptable {
     public static final short SYNTAX_ERR = org.w3c.dom.DOMException.SYNTAX_ERR;
     /** If a node is used in a different document than the one that created it (that doesn't support it). */
     public static final short WRONG_DOCUMENT_ERR = org.w3c.dom.DOMException.WRONG_DOCUMENT_ERR;
+
+    private final short code_;
+    private final String message_;
+    private int lineNumber_;
+    private String fileName_;
+
+    /**
+     * Default constructor used to build the prototype.
+     */
+    public DOMException() {
+        code_ = -1;
+        message_ = null;
+    }
+
+    /**
+     * Constructor.
+     * @param message the exception message
+     * @param errorCode the error code
+     */
+    public DOMException(final String message, final short errorCode) {
+        code_ = errorCode;
+        message_ = message;
+    }
+
+    /**
+     * Gets the exception code.
+     * @return the exception code
+     */
+    public Object jsxGet_code() {
+        if (code_ == -1) {
+            return Context.getUndefinedValue();
+        }
+        return code_;
+    }
+
+    /**
+     * Gets the exception message.
+     * @return the exception message
+     */
+    public Object jsxGet_message() {
+        if (message_ == null) {
+            return Context.getUndefinedValue();
+        }
+        return message_;
+    }
+
+    /**
+     * Gets the line at which the exception occurred.
+     * @return the line of the exception
+     */
+    public Object jsxGet_lineNumber() {
+        if (lineNumber_ == -1) {
+            return Context.getUndefinedValue();
+        }
+        return lineNumber_;
+    }
+
+    /**
+     * Gets the name of the in  which the exception occurred.
+     * @return the name of the source file
+     */
+    public Object jsxGet_filename() {
+        if (fileName_ == null) {
+            return Context.getUndefinedValue();
+        }
+        return fileName_;
+    }
+
+    /**
+     * Sets the location in JavaScript source where this exception occurred.
+     * @param fileName the name of the source file
+     * @param lineNumber the line number
+     */
+    public void setLocation(final String fileName, final int lineNumber) {
+        fileName_ = fileName;
+        lineNumber_ = lineNumber;
+    }
 }

@@ -20,8 +20,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link DOMException}.
@@ -57,12 +55,33 @@ public class DOMExceptionTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "undefined", "undefined", "undefined", "undefined" },
+            IE = "exception")
+    public void properties() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    alert(DOMException.code);\n"
+            + "    alert(DOMException.filename);\n"
+            + "    alert(DOMException.lineNumber);\n"
+            + "    alert(DOMException.message);\n"
+            + "  } catch(e) { alert('exception');}\n"
+            + "</script></head>\n"
+            + "<body></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Test exception throw by an illegal DOM appendChild.
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.FF)
-    @Alerts(FF = { "exception: 3", "HIERARCHY_REQUEST_ERR: 3", "1" },
+    @Alerts(FF = { "3", "Node cannot be inserted at the specified point in the hierarchy",
+            "6", "§§URL§§", "HIERARCHY_REQUEST_ERR: 3", "1" },
             IE = { "1" })
     public void appendChild_illegal_node() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -72,7 +91,10 @@ public class DOMExceptionTest extends WebDriverTestCase {
             + "  try {\n"
             + "    body.appendChild(htmlNode);\n"
             + "  } catch(e) {\n"
-            + "    alert('exception: ' + e.code);\n"
+            + "    alert(e.code);\n"
+            + "    alert(e.message);\n"
+            + "    alert(e.lineNumber);\n"
+            + "    alert(e.filename);\n"
             + "    alert('HIERARCHY_REQUEST_ERR: ' + e.HIERARCHY_REQUEST_ERR);\n"
             + "  };\n"
             + "  alert(body.childNodes.length);\n"

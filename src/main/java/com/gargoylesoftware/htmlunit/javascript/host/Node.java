@@ -19,6 +19,9 @@ import java.util.List;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Interpreter;
+import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
+import net.sourceforge.htmlunit.corejs.javascript.RhinoException;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
@@ -168,7 +171,10 @@ public class Node extends SimpleScriptable {
                 if (getBrowserVersion().isIE()) {
                     return childObject; // IE silently ignores it
                 }
-                throw Context.reportRuntimeError("Node cannot be inserted at the specified point in the hierarchy");
+
+                throw asJavaScriptException(
+                    new DOMException("Node cannot be inserted at the specified point in the hierarchy",
+                        DOMException.HIERARCHY_REQUEST_ERR));
             }
 
             // Get XML node for the DOM node passed in
@@ -191,6 +197,30 @@ public class Node extends SimpleScriptable {
             }
         }
         return appendedChild;
+    }
+
+    private RhinoException asJavaScriptException(final DOMException exception) {
+        exception.setPrototype(getWindow().getPrototype(exception.getClass()));
+        exception.setParentScope(getWindow());
+
+        // get current line and file name
+        // this method can only be used in interpreted mode. If one day we choose to use compiled mode,
+        // then we'll have to find an other way here.
+        final String fileName;
+        final int lineNumber;
+        if (Context.getCurrentContext().getOptimizationLevel() == -1) {
+            final int[] linep = new int[1];
+            final String sourceName = new Interpreter().getSourcePositionFromStack(Context.getCurrentContext(), linep);
+            fileName = sourceName.replaceFirst("script in (.*) from .*", "$1");
+            lineNumber = linep[0];
+        }
+        else {
+            throw new Error("HtmlUnit not ready to run in compiled mode");
+        }
+
+        exception.setLocation(fileName, lineNumber);
+
+        return new JavaScriptException(exception, fileName, lineNumber);
     }
 
     /**

@@ -832,6 +832,10 @@
         <constant name="NO_MODIFICATION_ALLOWED_ERR"/>
         <constant name="SYNTAX_ERR"/>
         <constant name="WRONG_DOCUMENT_ERR"/>
+        <property name="code" readable="true" writable="false"/>
+        <property name="filename" readable="true" writable="false"/>
+        <property name="lineNumber" readable="true" writable="false"/>
+        <property name="message" readable="true" writable="false"/>
     </class>
 
     <class name="DOMImplementation" classname="com.gargoylesoftware.htmlunit.javascript.host.DOMImplementation"
