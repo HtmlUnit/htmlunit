@@ -1342,7 +1342,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         final StyleSheetList sheets = document_.jsxGet_styleSheets();
         for (int i = 0; i < sheets.jsxGet_length(); i++) {
             final Stylesheet sheet = (Stylesheet) sheets.jsxFunction_item(i);
-            LOG.debug("modifyIfNecessary: " + sheet + ", " + style + ", " + element);
+            LOG.trace("modifyIfNecessary: " + sheet + ", " + style + ", " + element);
             sheet.modifyIfNecessary(style, element);
         }
 
