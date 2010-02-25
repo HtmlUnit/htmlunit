@@ -1359,6 +1359,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         final int elementHeight = getEmptyHeight();
+        if (elementHeight == 0) {
+            height_ = elementHeight;
+            return height_;
+        }
+
         final int contentHeight = getContentHeight();
         final boolean ie = getBrowserVersion().isIE();
         final boolean explicitHeightSpecified = (super.jsxGet_height().length() > 0);

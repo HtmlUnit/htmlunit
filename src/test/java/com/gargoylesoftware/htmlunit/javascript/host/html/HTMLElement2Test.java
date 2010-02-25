@@ -472,6 +472,22 @@ public class HTMLElement2Test extends WebDriverTestCase {
     }
 
     /**
+     * Regression test for bug 2959014.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "0", "0" })
+    public void offsetWidthAndHeight_displayNoneAndChildren() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<div id='div' style='display: none;'><div style='width: 20px; height: 30px;'></div></div>\n"
+            + "<script>alert(document.getElementById('div').offsetWidth);</script>\n"
+            + "<script>alert(document.getElementById('div').offsetHeight);</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Partial regression test for bug 2892939.
      * @throws Exception if an error occurs
      */
