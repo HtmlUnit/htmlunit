@@ -508,7 +508,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param content the HTML snippet
      * @return <code>false</code> if it not well formed
      */
-    private static boolean canAlreadyBeParsed(final String content) {
+    static boolean canAlreadyBeParsed(final String content) {
         // all <script> must have their </script> because the parser doesn't close automatically this tag
         // All tags must be complete, that is from '<' to '>'.
         PARSING_STATUS tagState = PARSING_STATUS.OUTSIDE;
@@ -518,6 +518,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         char stringBoundary = 0;
         boolean stringSkipNextChar = false;
         int index = 0;
+        char openingQuote = 0;
         for (final char currentChar : content.toCharArray()) {
             switch (tagState) {
                 case OUTSIDE:
@@ -565,8 +566,16 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                     }
                     break;
                 case INSIDE:
-                    if (currentChar == '>') {
-                        tagState = PARSING_STATUS.OUTSIDE;
+                    if (currentChar == openingQuote) {
+                        openingQuote = 0;
+                    }
+                    else if (openingQuote == 0) {
+                        if (currentChar == '\'' || currentChar == '"') {
+                            openingQuote = currentChar;
+                        }
+                        else if (currentChar == '>' && openingQuote == 0) {
+                            tagState = PARSING_STATUS.OUTSIDE;
+                        }
                     }
                     break;
                 case IN_STRING:

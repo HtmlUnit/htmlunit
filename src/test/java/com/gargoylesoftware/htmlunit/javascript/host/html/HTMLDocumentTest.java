@@ -893,4 +893,11 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     */
+    @Browsers(Browser.NONE)
+    @Test
+    public void canAlreadyBeParsed() {
+        assertTrue(HTMLDocument.canAlreadyBeParsed("<img src='foo' alt=\"<'>\"></img>"));
+    }
 }
