@@ -107,7 +107,6 @@ public class TopLevelWindow extends WebWindowImpl {
      */
     public void close() {
         setClosed();
-        getJobManager().shutdown();
         final Page page = getEnclosedPage();
         if (page instanceof HtmlPage) {
             final HtmlPage htmlPage = (HtmlPage) page;
@@ -117,6 +116,7 @@ public class TopLevelWindow extends WebWindowImpl {
             }
             htmlPage.cleanUp();
         }
+        getJobManager().shutdown();
         destroyChildren();
         getWebClient().deregisterWebWindow(this);
     }

@@ -24,8 +24,10 @@ import java.util.List;
 
 import org.apache.commons.lang.mutable.MutableInt;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.base.testing.EventCatcher;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
@@ -38,6 +40,7 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
+@RunWith(BrowserRunner.class)
 public class TopLevelWindowTest extends WebTestCase {
 
     /**
@@ -46,7 +49,7 @@ public class TopLevelWindowTest extends WebTestCase {
      */
     @Test
     public void closeTheOnlyWindow() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final EventCatcher eventCatcher = new EventCatcher();
         eventCatcher.listenTo(webClient);
 
@@ -126,15 +129,14 @@ public class TopLevelWindowTest extends WebTestCase {
             }
         };
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
         client.addWebWindowListener(listener);
 
         final TopLevelWindow window = (TopLevelWindow) client.getCurrentWindow();
         window.setJobManager(mgr);
 
-        final MockWebConnection conn = new MockWebConnection();
+        final MockWebConnection conn = getMockWebConnection();
         conn.setDefaultResponse("<html><body><script>window.setTimeout('', 500);</script></body></html>");
-        client.setWebConnection(conn);
 
         client.getPage(URL_FIRST);
         assertEquals(1, jobCount.intValue());
@@ -148,16 +150,15 @@ public class TopLevelWindowTest extends WebTestCase {
      */
     @Test
     public void history() throws Exception {
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
         final TopLevelWindow window = (TopLevelWindow) client.getCurrentWindow();
         final History history = window.getHistory();
 
-        final MockWebConnection conn = new MockWebConnection();
+        final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(URL_FIRST, "<html><body><a name='a' href='" + URL_SECOND + "'>foo</a>"
             + "<a name='b' href='#b'>bar</a></body></html>");
         conn.setResponse(URL_SECOND, "<html><body><a name='a' href='" + URL_THIRD + "'>foo</a></body></html>");
         conn.setResponse(URL_THIRD, "<html><body><a name='a' href='" + URL_FIRST + "'>foo</a></body></html>");
-        client.setWebConnection(conn);
 
         assertEquals(0, history.getLength());
         assertEquals(-1, history.getIndex());
@@ -256,6 +257,36 @@ public class TopLevelWindowTest extends WebTestCase {
         final TopLevelWindow w = (TopLevelWindow) page.getEnclosingWindow();
         w.close();
         assertEquals(Arrays.asList("7"), alerts);
+    }
+
+    /**
+     * Test that no JavaScript error is thrown when using the setTimeout() JS function
+     * while the page is unloading.
+     * Regression test for bug 2956550.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("closing")
+    public void setTimeoutDuringOnUnload() throws Exception {
+        final String html = "<html><head>"
+            + "<script>\n"
+            + "function f() {\n"
+            + "  alert('closing');\n"
+            + "  setTimeout(function(){ alert('started in onunload'); }, 0);\n"
+            + "}\n"
+            + "if (window.addEventListener)\n"
+            + "  window.addEventListener('unload', f, true);\n"
+            + "else\n"
+            + "  attachEvent('onunload', f);\n"
+            + "</script></head>\n"
+            + "<body></body></html>";
+        final List<String> alerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(html, alerts);
+        assertTrue(alerts.isEmpty());
+        final TopLevelWindow w = (TopLevelWindow) page.getEnclosingWindow();
+        w.close();
+        getWebClient().waitForBackgroundJavaScript(1000);
+        assertEquals(getExpectedAlerts(), alerts);
     }
 
 }

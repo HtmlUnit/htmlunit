@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="2956550">
+                JavaScript: fixed exception when calling setTimeout during window unload.
+            </action>
             <action type="add" dev="asashour">
                 Add BigContentPage to support download of large files.
             </action>

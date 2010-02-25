@@ -73,6 +73,10 @@ public abstract class JavaScriptExecutionJob extends JavaScriptJob {
                 LOG.debug("The page that originated this job doesn't exist anymore. Execution cancelled.");
                 return;
             }
+            else if (w.isClosed()) {
+                LOG.debug("Enclosing window is now closed. Execution cancelled.");
+                return;
+            }
             runJavaScript(page);
         }
         finally {
