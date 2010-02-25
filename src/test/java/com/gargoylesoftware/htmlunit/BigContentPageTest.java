@@ -34,7 +34,6 @@ import org.junit.Test;
  */
 public class BigContentPageTest extends WebServerTestCase {
 
-
     /**
      * @throws Exception if the test fails
      */
