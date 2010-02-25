@@ -894,9 +894,10 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     }
 
     /**
+     * Test having &lt; and &gt; in attribute values.
      */
-    @Browsers(Browser.NONE)
     @Test
+    @Browsers(Browser.NONE)
     public void canAlreadyBeParsed() {
         assertTrue(HTMLDocument.canAlreadyBeParsed("<img src='foo' alt=\"<'>\"></img>"));
     }
