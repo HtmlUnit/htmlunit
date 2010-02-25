@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes">
+            <action type="add" dev="asashour">
+                Add BigContentPage to support download of large files.
+            </action>
             <action type="fix" dev="sdanig" issue="2902466">
                 JavaScript: Form elements are also functions that take a child element's id, name or index and return the corresponding element (IE only).
             </action>

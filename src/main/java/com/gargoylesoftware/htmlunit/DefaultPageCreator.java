@@ -93,6 +93,10 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
      * @return the new page object
      */
     public Page createPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
+        if (WebResponseData.isBigContent(webResponse.getResponseHeaders())) {
+            return createBigContentPage(webResponse, webWindow);
+        }
+
         final String contentType = webResponse.getContentType().toLowerCase();
         final Page newPage;
 
@@ -181,6 +185,19 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
      */
     protected UnexpectedPage createUnexpectedPage(final WebResponse webResponse, final WebWindow webWindow) {
         final UnexpectedPage newPage = new UnexpectedPage(webResponse, webWindow);
+        webWindow.setEnclosedPage(newPage);
+        return newPage;
+    }
+
+    /**
+     * Creates a BigContentPage for this WebResponse.
+     *
+     * @param webResponse the page's source
+     * @param webWindow the WebWindow to place the BigContentPage in
+     * @return the newly created BigContentPage
+     */
+    protected BigContentPage createBigContentPage(final WebResponse webResponse, final WebWindow webWindow) {
+        final BigContentPage newPage = new BigContentPage(webResponse, webWindow);
         webWindow.setEnclosedPage(newPage);
         return newPage;
     }
