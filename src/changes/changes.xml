@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes">
+            <action type="fix" dev="sdanig" issue="2958675">
+                When applying CSS rules to elements, take the media type into account.
+            </action>
             <action type="fix" dev="mguillem" issue="2956550">
                 JavaScript: fixed exception when calling setTimeout during window unload.
             </action>

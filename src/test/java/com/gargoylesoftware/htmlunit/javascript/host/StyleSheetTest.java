@@ -553,4 +553,182 @@ public class StyleSheetTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "none", "1" })
+    public void mediaOnStyleTag_noMedia() throws Exception {
+        mediaOnStyleTag("");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "none", "1" })
+    public void mediaOnStyleTag_screen() throws Exception {
+        mediaOnStyleTag("screen");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "block", "1" })
+    public void mediaOnStyleTag_notScreen() throws Exception {
+        mediaOnStyleTag("print");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "none", "1" })
+    public void mediaOnStyleTag_multipleWithScreen() throws Exception {
+        mediaOnStyleTag("print, screen, tv");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "block", "1" })
+    public void mediaOnStyleTag_multipleWithoutScreen() throws Exception {
+        mediaOnStyleTag("print, projection, tv");
+    }
+
+    private void mediaOnStyleTag(final String media) throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<style media='" + media + "'> div { display: none }</style>\n"
+            + "</head><body>\n"
+            + "<div id='d'>hello</div>\n"
+            + "<script>\n"
+            + "  var getStyle = function(e) {\n"
+            + "    return window.getComputedStyle ? window.getComputedStyle(e,'') : e.currentStyle; \n"
+            + "  };\n"
+            + "  alert(getStyle(document.getElementById('d')).display);\n"
+            + "  alert(document.styleSheets.length);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "none", "1" })
+    public void mediaOnLinkTag_noMedia() throws Exception {
+        mediaOnLinkTag("");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "none", "1" })
+    public void mediaOnLinkTag_screen() throws Exception {
+        mediaOnLinkTag("screen");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "block", "1" })
+    public void mediaOnLinkTag_notScreen() throws Exception {
+        mediaOnLinkTag("print");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "none", "1" })
+    public void mediaOnLinkTag_multipleWithScreen() throws Exception {
+        mediaOnLinkTag("print, screen, tv");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "block", "1" })
+    public void mediaOnLinkTag_multipleWithoutScreen() throws Exception {
+        mediaOnLinkTag("print, projection, tv");
+    }
+
+    private void mediaOnLinkTag(final String media) throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<link rel='stylesheet' media='" + media + "' href='" + URL_SECOND + "'></link>\n"
+            + "</head><body>\n"
+            + "<div id='d'>hello</div>\n"
+            + "<script>\n"
+            + "  var getStyle = function(e) {\n"
+            + "    return window.getComputedStyle ? window.getComputedStyle(e,'') : e.currentStyle; \n"
+            + "  };\n"
+            + "  alert(getStyle(document.getElementById('d')).display);\n"
+            + "  alert(document.styleSheets.length);\n"
+            + "</script></body></html>";
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(URL_SECOND, "div { display: none }", "text/css");
+        loadPageWithAlerts2(conn);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "none", "1" })
+    public void mediaRule_screen() throws Exception {
+        mediaRule("screen");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "block", "1" })
+    public void mediaRule_notScreen() throws Exception {
+        mediaRule("print");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "none", "1" })
+    public void mediaRule_multipleWithScreen() throws Exception {
+        mediaRule("print, screen, tv");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "block", "1" })
+    public void mediaRule_multipleWithoutScreen() throws Exception {
+        mediaRule("print, projection, tv");
+    }
+
+    private void mediaRule(final String media) throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<style> @media " + media + " { div { display: none } }</style>\n"
+            + "</head><body>\n"
+            + "<div id='d'>hello</div>\n"
+            + "<script>\n"
+            + "  var getStyle = function(e) {\n"
+            + "    return window.getComputedStyle ? window.getComputedStyle(e,'') : e.currentStyle; \n"
+            + "  };\n"
+            + "  alert(getStyle(document.getElementById('d')).display);\n"
+            + "  alert(document.styleSheets.length);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }

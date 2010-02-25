@@ -62,11 +62,13 @@ import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
+import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.steadystate.css.dom.CSSImportRuleImpl;
+import com.steadystate.css.dom.CSSMediaRuleImpl;
 import com.steadystate.css.dom.CSSStyleRuleImpl;
 import com.steadystate.css.dom.CSSStyleSheetImpl;
 import com.steadystate.css.parser.CSSOMParser;
@@ -155,11 +157,16 @@ public class Stylesheet extends SimpleScriptable {
      *        the specified style
      */
     void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final HTMLElement element) {
-        final HtmlElement e = element.getDomNodeOrDie();
         final CSSRuleList rules = getWrappedSheet().getCssRules();
+        modifyIfNecessary(style, element, rules);
+    }
+
+    private void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final HTMLElement element,
+        final CSSRuleList rules) {
         if (rules == null) {
             return;
         }
+        final HtmlElement e = element.getDomNodeOrDie();
         for (int i = 0; i < rules.getLength(); i++) {
             final CSSRule rule = rules.item(i);
             if (rule.getType() == CSSRule.STYLE_RULE) {
@@ -187,6 +194,14 @@ public class Stylesheet extends SimpleScriptable {
                     imports_.put(importRule, sheet);
                 }
                 sheet.modifyIfNecessary(style, element);
+            }
+            else if (rule.getType() == CSSRule.MEDIA_RULE) {
+                final CSSMediaRuleImpl mediaRule = (CSSMediaRuleImpl) rule;
+                final String media = mediaRule.getMedia().getMediaText();
+                if (isActive(media)) {
+                    final CSSRuleList internalRules = mediaRule.getCssRules();
+                    modifyIfNecessary(style, element, internalRules);
+                }
             }
         }
     }
@@ -605,6 +620,39 @@ public class Stylesheet extends SimpleScriptable {
      */
     public String getUri() {
         return uri_;
+    }
+
+    /**
+     * Returns <tt>true</tt> if this stylesheet is active, based on the media types it is associated with (if any).
+     * @return <tt>true</tt> if this stylesheet is active, based on the media types it is associated with (if any)
+     */
+    boolean isActive() {
+        final String media;
+        final HtmlElement e = ownerNode_.getDomNodeOrNull();
+        if (e instanceof HtmlStyle) {
+            final HtmlStyle style = (HtmlStyle) e;
+            media = style.getMediaAttribute();
+        }
+        else if (e instanceof HtmlLink) {
+            final HtmlLink link = (HtmlLink) e;
+            media = link.getMediaAttribute();
+        }
+        else {
+            media = "";
+        }
+        return isActive(media);
+    }
+
+    private static boolean isActive(final String media) {
+        if (media.length() == 0) {
+            return true;
+        }
+        for (String s : media.split(",")) {
+            if ("screen".equals(s.trim())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
