@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -180,7 +181,14 @@ public class WebResponseImpl implements WebResponse {
      * {@inheritDoc}
      */
     public InputStream getContentAsStream() throws IOException {
-        return responseData_.getInputStream();
+        if (WebResponseData.isBigContent(responseData_.getResponseHeaders())) {
+            return responseData_.getInputStream();
+        }
+        final byte[] body = responseData_.getBody();
+        if (body != null) {
+            return new ByteArrayInputStream(body);
+        }
+        return null;
     }
 
     /**
