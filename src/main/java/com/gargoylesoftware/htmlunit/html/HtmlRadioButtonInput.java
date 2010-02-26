@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
  * @author Daniel Gredler
  * @author Bruce Faulkner
  * @author Ahmed Ashour
+ * @author Benoit Heinrich
  */
 public class HtmlRadioButtonInput extends HtmlInput {
 
@@ -89,19 +90,18 @@ public class HtmlRadioButtonInput extends HtmlInput {
         final HtmlForm form = getEnclosingForm();
         final boolean changed = isChecked() != isChecked;
 
+        Page page = getPage();
         if (isChecked) {
             if (form != null) {
                 form.setCheckedRadioButton(this);
             }
-            else {
-                ((HtmlPage) getPage()).setCheckedRadioButton(this);
+            else if (page instanceof HtmlPage) {
+                ((HtmlPage) page).setCheckedRadioButton(this);
             }
         }
         else {
             removeAttribute("checked");
         }
-
-        Page page = getPage();
 
         if (changed) {
             final ScriptResult scriptResult = fireEvent(Event.TYPE_CHANGE);

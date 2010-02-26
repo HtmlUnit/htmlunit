@@ -26,6 +26,8 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
+ * @author Benoit Heinrich
  */
 @RunWith(BrowserRunner.class)
 public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
@@ -61,6 +63,38 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Regression test for bug 2956588.
+     * As of HttmlUnit-2.8-SNAPSHOT on 26.02.10, reading responseXML with xhtml namespace
+     * was causing ClassCastException for IE simulation when it contained a checked radio button.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({ "send request", "response read" })
+    public void testCheckedOnXmlResponse() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<script>\n"
+            + "  alert('send request');\n"
+            + "  var xhr = (window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP'));\n"
+            + "  xhr.open('GET', 'foo.xml', false);\n"
+            + "  xhr.send('');\n"
+            + "  var x = xhr.responseXML;\n" // this is what caused the exception
+            + "  alert('response read');\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final String xml
+            = "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
+            + "<body>\n"
+            + "<input type='radio' name='radio' checked='checked'/>"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse(xml, "text/xml");
         loadPageWithAlerts2(html);
     }
 }

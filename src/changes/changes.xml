@@ -6,6 +6,10 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes, large file download">
+            <action type="fix" dev="mguillem" issue="2956588" due-to="Benoit Heinrich">
+                JavaScript: fixed ClassCastException occurring in IE simulation while accessing XMLHttpRequest.responseXML
+                when content uses XHTML namespace and contains a checked radio button.
+            </action>
             <action type="fix" dev="sdanig" issue="2959014">
                 JavaScript: offsetHeight and offsetWidth should be 0 for elements with display:none, regardless of their contents.
             </action>
