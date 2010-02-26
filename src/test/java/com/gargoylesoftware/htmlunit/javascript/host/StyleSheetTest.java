@@ -673,10 +673,9 @@ public class StyleSheetTest extends WebDriverTestCase {
             + "  alert(getStyle(document.getElementById('d')).display);\n"
             + "  alert(document.styleSheets.length);\n"
             + "</script></body></html>";
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
-        conn.setResponse(URL_SECOND, "div { display: none }", "text/css");
-        loadPageWithAlerts2(conn);
+
+        getMockWebConnection().setResponse(URL_SECOND, "div { display: none }", "text/css");
+        loadPageWithAlerts2(html);
     }
 
     /**

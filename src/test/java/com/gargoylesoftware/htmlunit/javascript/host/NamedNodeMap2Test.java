@@ -18,7 +18,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
@@ -64,9 +63,7 @@ public class NamedNodeMap2Test extends WebDriverTestCase {
 
         final String xml = "<test></test>";
 
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
-        conn.setResponse(URL_SECOND, xml, "text/xml");
-        loadPageWithAlerts2(conn);
+        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        loadPageWithAlerts2(html);
     }
 }

@@ -463,23 +463,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
         return collectedAlerts;
     }
 
-    /**
-     * Same as {@link #loadPageWithAlerts2(String)}, but using a MockConnection instead.
-     * @param conn the connection to use
-     * @return the web driver
-     * @throws Exception if something goes wrong
-     */
-    protected final WebDriver loadPageWithAlerts2(final MockWebConnection conn) throws Exception {
-        final String[] expectedAlerts = getExpectedAlerts();
-        startWebServer(conn);
-
-        final WebDriver driver = getWebDriver();
-        driver.get(URL_FIRST.toExternalForm());
-
-        assertEquals(expectedAlerts, getCollectedAlerts(driver));
-        return driver;
-    }
-
     private String getJSON() {
         if (JSON_ == null) {
             try {
