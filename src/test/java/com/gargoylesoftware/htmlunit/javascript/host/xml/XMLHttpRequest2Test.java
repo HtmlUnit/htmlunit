@@ -321,7 +321,6 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
-
     /**
      * Ensures that XHR download is performed without altering other JS jobs.
      * Currently HtmlUnit doesn't behave correctly here because download and callback execution
