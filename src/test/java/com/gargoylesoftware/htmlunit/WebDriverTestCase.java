@@ -386,7 +386,15 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         final WebDriver driver = loadPage2(html, url);
 
-        assertEquals(expectedAlerts, getCollectedAlerts(driver));
+        // gets the collected alerts, waiting a bit if necessary
+        List<String> actualAlerts = getCollectedAlerts(driver);
+        final long maxWait = System.currentTimeMillis() + 1000; // TODO: allow tests to configure the max wait time
+        while (actualAlerts.size() < expectedAlerts.length && System.currentTimeMillis() < maxWait) {
+            Thread.sleep(30);
+            actualAlerts = getCollectedAlerts(driver);
+        }
+
+        assertEquals(expectedAlerts, actualAlerts);
         return driver;
     }
 

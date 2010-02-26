@@ -320,4 +320,31 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse(xml, "text/xml");
         loadPageWithAlerts2(html);
     }
+
+
+    /**
+     * Ensures that XHR download is performed without altering other JS jobs.
+     * Currently HtmlUnit doesn't behave correctly here because download and callback execution
+     * are executed within the same synchronize block on the HtmlPage.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @NotYetImplemented
+    @Alerts({ "in timeout", "hello" })
+    public void xhrDownloadInBackground() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "var xhr = " + XHRInstantiation_ + ";\n"
+            + "var handler = function() {\n"
+            + "  if (xhr.readyState == 4)\n"
+            + "    alert(xhr.responseText);\n"
+            + "}\n"
+            + "xhr.onreadystatechange = handler;\n"
+            + "xhr.open('GET', '/delay200/foo.txt', true);\n"
+            + "xhr.send('');\n"
+            + "setTimeout(function(){ alert('in timeout');}, 5);\n"
+            + "</script></head><body></body></html>";
+
+        getMockWebConnection().setDefaultResponse("hello", "text/plain");
+        loadPageWithAlerts2(html);
+    }
 }
