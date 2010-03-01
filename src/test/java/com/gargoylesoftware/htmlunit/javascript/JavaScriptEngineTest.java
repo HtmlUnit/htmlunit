@@ -1537,4 +1537,18 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("that's it")
+    public void quoteAsUnicodeInString() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "alert('that\\x27s it');\n"
+            + "</script></head><body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }
