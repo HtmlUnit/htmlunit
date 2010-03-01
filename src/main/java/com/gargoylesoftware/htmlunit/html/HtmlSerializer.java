@@ -253,15 +253,38 @@ class HtmlSerializer {
             doAppend(caption);
             doAppendBlockSeparator();
         }
+
         boolean first = true;
-        for (final HtmlTableRow row : htmlTable.getRows()) {
+
+        // first thead has to be displayed first and first tfoot has to be displayed last
+        final HtmlTableHeader tableHeader = htmlTable.getHeader();
+        if (tableHeader != null) {
+            first = appendHtmlTableRows(tableHeader.getRows(), true, null, null);
+        }
+        final HtmlTableFooter tableFooter = htmlTable.getFooter();
+
+        first = appendHtmlTableRows(htmlTable.getRows(), first, tableHeader, tableFooter);
+
+        if (tableFooter != null) {
+            first = appendHtmlTableRows(tableFooter.getRows(), first, null, null);
+        }
+
+        doAppendBlockSeparator();
+    }
+
+    private boolean appendHtmlTableRows(final List<HtmlTableRow> rows, boolean first, final TableRowGroup skipParent1,
+            final TableRowGroup skipParent2) {
+        for (final HtmlTableRow row : rows) {
+            if (row.getParentNode() == skipParent1 || row.getParentNode() == skipParent2) {
+                continue;
+            }
             if (!first) {
                 doAppendBlockSeparator();
             }
             first = false;
             appendHtmlTableRow(row);
         }
-        doAppendBlockSeparator();
+        return first;
     }
 
     private void appendHtmlSubmitInput(final HtmlSubmitInput htmlSubmitInput) {

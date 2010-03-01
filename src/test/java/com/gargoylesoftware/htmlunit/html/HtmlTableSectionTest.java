@@ -20,7 +20,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link HtmlTableBody}, {@link HtmlTableHeader}, and {@link HtmlTableFooter}.
@@ -66,7 +65,6 @@ public class HtmlTableSectionTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void asText() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -81,6 +79,6 @@ public class HtmlTableSectionTest extends WebTestCase {
 
         final HtmlPage page = loadPageWithAlerts(html);
         assertEquals("One" + LINE_SEPARATOR + "Two" + LINE_SEPARATOR + "Three" + LINE_SEPARATOR
-                + "Four" + LINE_SEPARATOR + "Five" + LINE_SEPARATOR, page.asText());
+                + "Four" + LINE_SEPARATOR + "Five", page.asText());
     }
 }
