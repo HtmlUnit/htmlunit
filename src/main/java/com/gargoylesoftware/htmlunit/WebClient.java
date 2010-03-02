@@ -1421,6 +1421,9 @@ public class WebClient implements Serializable {
             String locationString = null;
             try {
                 locationString = webResponse.getResponseHeaderValue("Location");
+                if (locationString == null) {
+                    return webResponse;
+                }
                 newUrl = expandUrl(url, locationString);
             }
             catch (final MalformedURLException e) {
