@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes, large file download">
+            <action type="fix" dev="mguillem" issue="2885136">
+                JavaScript: implement stack property on exceptions.
+            </action>
             <action type="fix" dev="mguillem" issue="2884462">
                 HtmlTable.asText(): display first thead at the top, even if it appears after some tbody.
             </action>

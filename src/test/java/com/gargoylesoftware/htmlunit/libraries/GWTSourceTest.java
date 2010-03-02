@@ -46,7 +46,7 @@ public class GWTSourceTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.FF)
+    @NotYetImplemented(Browser.IE)
     @Alerts(IE = "undefined", FF = "true")
     public void stack() throws Exception {
         final String html
