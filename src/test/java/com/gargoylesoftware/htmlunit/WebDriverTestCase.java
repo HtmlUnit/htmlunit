@@ -313,7 +313,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
             // write WebResponse to HttpServletResponse
             response.setStatus(resp.getStatusCode());
-            
+
             for (final NameValuePair responseHeader : resp.getResponseHeaders()) {
                 response.addHeader(responseHeader.getName(), responseHeader.getValue());
             }

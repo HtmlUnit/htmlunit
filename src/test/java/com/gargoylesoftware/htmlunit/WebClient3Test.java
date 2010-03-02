@@ -28,7 +28,7 @@ import org.openqa.selenium.WebDriver;
 @RunWith(BrowserRunner.class)
 public class WebClient3Test extends WebDriverTestCase {
 
-	/**
+    /**
      * Regression test for bug 2822048: a 302 redirect without Location header.
      * @throws Exception if an error occurs
      */

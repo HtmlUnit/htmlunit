@@ -866,16 +866,29 @@ public abstract class WebTestCase {
         mockWebConnection_ = null;
 
         final List<Thread> jsThreads = getJavaScriptThreads();
+        // collect stack traces
+        // caution: the threads may terminate after the threads have been returned by getJavaScriptThreads()
+        // and before stack traces are retrieved
         if (jsThreads.size() > nbJSThreadsBeforeTest_) {
-            System.err.println("JS threads still running:");
+            final Map<String, StackTraceElement[]> stackTraces = new HashMap<String, StackTraceElement[]>();
             for (final Thread t : jsThreads) {
-                System.err.println(t.getName());
                 final StackTraceElement elts[] = t.getStackTrace();
-                for (final StackTraceElement elt : elts) {
-                    System.err.println(elt);
+                if (elts != null) {
+                    stackTraces.put(t.getName(), elts);
                 }
             }
-            throw new RuntimeException("JS threads are still running: " + jsThreads.size());
+
+            if (!stackTraces.isEmpty()) {
+                System.err.println("JS threads still running:");
+                for (final Map.Entry<String, StackTraceElement[]> entry : stackTraces.entrySet()) {
+                    System.err.println("Thread: " + entry.getKey());
+                    final StackTraceElement elts[] = entry.getValue();
+                    for (final StackTraceElement elt : elts) {
+                        System.err.println(elt);
+                    }
+                }
+                throw new RuntimeException("JS threads are still running: " + jsThreads.size());
+            }
         }
     }
 
