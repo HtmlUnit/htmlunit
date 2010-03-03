@@ -73,7 +73,8 @@
                     </li>
                     <li>
                         Upload the two zip files to
-                        <a href="https://sourceforge.net/project/admin/explorer.php?group_id=47038">SourceForge</a>
+                        <a href="https://sourceforge.net/project/admin/explorer.php?group_id=47038">SourceForge</a>,
+                        and make sure the binary file is the default download for all platforms.
                     </li>
                     <li>
                         Add a new Group in SourceForge tracker system.
