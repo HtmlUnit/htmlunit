@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes, large file download">
+            <action type="fix" dev="mguillem" issue="2822048" due-to="Chris Frost">
+                JavaScript HtmlUnit RegExp proxy: don't escape unicode escape sequence in regular expression.
+            </action>
             <action type="fix" dev="mguillem" issue="2822048">
                 Fix exception on HTTP response with code 302 without Location header.
             </action>

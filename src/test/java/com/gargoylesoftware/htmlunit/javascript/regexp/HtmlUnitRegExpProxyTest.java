@@ -895,4 +895,14 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     public void replace_group2digits_doesntExist() throws Exception {
         testEvaluate("'abcdefghijkl'.replace(/(a)(b)(c)(d)(e)(f)(g)(h)(i)(j)(k)(l)/g, '[\\$18]')");
     }
+
+    /**
+     * When replacement reference is two digits but not so much groups exist, one digit replacement index is taken.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(":")
+    public void replaceUnicode() throws Exception {
+        testEvaluate("'\\u003a'.replace(/[\\u00c0-\\u00c1]/, 'cat')");
+    }
 }

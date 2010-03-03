@@ -359,7 +359,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         re = re.replaceAll("(?<!\\\\)\\[([^\\]]*)(?<!\\\\)\\\\\\d", "[$1"); // [...ab\5cd...] -> [...abcd...]
 
         // characters escaped without need should be "un-escaped"
-        re = re.replaceAll("(?<!\\\\)\\\\([ACE-RT-VX-Zaeg-mpquyz])", "$1");
+        re = re.replaceAll("(?<!\\\\)\\\\([ACE-RT-VX-Zaeg-mpqyz])", "$1");
 
         re = escapeJSCurly(re);
         return re;
