@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class HTMLTableCellElementTest extends WebDriverTestCase {
@@ -426,4 +427,47 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE = { "100", "200", "400", "error", "400", "error", "400", "100", "10%" },
+            FF = { "100", "200", "400", "abc", "0", "100", "10%" })
+    public void width() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function set(e, value) {\n"
+            + "        try {\n"
+            + "          e.width = value;\n"
+            + "        } catch (e) {\n"
+            + "          alert('error');\n"
+            + "        }\n"
+            + "      }\n"
+            + "      function test() {\n"
+            + "        var td = document.getElementById('td');\n"
+            + "        set(td, '100px');\n"
+            + "        alert(td.width);\n"
+            + "        td.height = '200px';\n"
+            + "        alert(td.height);\n"
+            + "        set(td, '400');\n"
+            + "        alert(td.width);\n"
+            + "        set(td, 'abc');\n"
+            + "        alert(td.width);\n"
+            + "        set(td, -5);\n"
+            + "        alert(td.width);\n"
+            + "        set(td, 100.2);\n"
+            + "        alert(td.width);\n"
+            + "        set(td, '10%');\n"
+            + "        alert(td.width);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  <table><tr><td id='td'>a</td></tr></table>\n"
+            + "  </body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
 }

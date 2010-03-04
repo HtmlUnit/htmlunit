@@ -2027,8 +2027,10 @@
                 descr="MSDN documentation"/>
         </property>
         <property name="colSpan" readable="true" writable="true"/>
+        <property name="height" readable="true" writable="true"/>
         <property name="noWrap" readable="true" writable="true"/>
         <property name="rowSpan" readable="true" writable="true"/>
+        <property name="width" readable="true" writable="true"/>
     </class>
 
     <!--
