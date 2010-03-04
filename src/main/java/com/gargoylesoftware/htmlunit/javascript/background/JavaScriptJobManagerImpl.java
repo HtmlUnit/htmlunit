@@ -92,7 +92,9 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             job_ = job;
         }
         public void run() {
-            LOG.debug("Running job " + job_);
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Running job " + job_);
+            }
             synchronized (currentlyRunningJobs_) {
                 currentlyRunningJobs_.add(job_);
                 currentlyRunningJobs_.notifyAll();
@@ -101,7 +103,9 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                 job_.run();
             }
             catch (final RuntimeException e) {
-                LOG.error("Job run failed with unexpected RuntimeException: " + e.getMessage(), e);
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("Job run failed with unexpected RuntimeException: " + e.getMessage(), e);
+                }
                 throw e;
             }
             finally {
@@ -202,7 +206,9 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         }
 
         futures_.put(id, future);
-        LOG.debug("Added job: " + job + ".");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Added job: " + job + ".");
+        }
         return id;
     }
 
@@ -210,9 +216,13 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     public synchronized void removeJob(final int id) {
         final ScheduledFuture< ? > future = futures_.remove(id);
         if (future != null) {
-            LOG.debug("Removing job " + id + ".");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Removing job " + id + ".");
+            }
             future.cancel(false);
-            LOG.debug("Removed job " + id + ".");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Removed job " + id + ".");
+            }
         }
     }
 
@@ -220,29 +230,37 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     public synchronized void stopJob(final int id) {
         final Future< ? > future = futures_.remove(id);
         if (future != null) {
-            LOG.debug("Stopping job " + id + ".");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Stopping job " + id + ".");
+            }
             future.cancel(true);
-            LOG.debug("Stopped job " + id + ".");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Stopped job " + id + ".");
+            }
         }
     }
 
     /** {@inheritDoc} */
     public synchronized void removeAllJobs() {
-        LOG.debug("Removing all jobs.");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Removing all jobs.");
+        }
         int count = 0;
         for (final Future< ? > future : futures_.values()) {
             future.cancel(false);
             ++count;
         }
         futures_.clear();
-        if (count > 0) {
+        if (count > 0 && LOG.isDebugEnabled()) {
             LOG.debug("Removed all jobs (" + count + ").");
         }
     }
 
     /** {@inheritDoc} */
     public int waitForJobs(final long timeoutMillis) {
-        LOG.debug("Waiting for all jobs to finish (will wait max " + timeoutMillis + " millis).");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Waiting for all jobs to finish (will wait max " + timeoutMillis + " millis).");
+        }
         if (timeoutMillis > 0) {
             final long start = System.currentTimeMillis();
             final long interval = Math.min(timeoutMillis, 100);
@@ -251,13 +269,17 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             }
         }
         final int jobs = getJobCount();
-        LOG.debug("Finished waiting for all jobs to finish (final job count is " + jobs + ").");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Finished waiting for all jobs to finish (final job count is " + jobs + ").");
+        }
         return jobs;
     }
 
     /** {@inheritDoc} */
     public int waitForJobsStartingBefore(final long delayMillis) {
-        LOG.debug("Waiting for all jobs to finish that start within " + delayMillis + " millis.");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Waiting for all jobs to finish that start within " + delayMillis + " millis.");
+        }
         final long maxStartTime = System.currentTimeMillis() + delayMillis;
         try {
             ScheduledFuture< ? > lastJobWithinDelay = getLastJobStartingBefore(maxStartTime);
@@ -275,7 +297,9 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             throw new RuntimeException(e);
         }
         final int jobs = getJobCount();
-        LOG.debug("Finished waiting for all jobs to finish (final job count is " + jobs + ").");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Finished waiting for all jobs to finish (final job count is " + jobs + ").");
+        }
         return jobs;
     }
 
@@ -309,7 +333,9 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                 job = future;
             }
         }
-        LOG.debug("Last job starting before " + maxStartTime + ": " + job + ".");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Last job starting before " + maxStartTime + ": " + job + ".");
+        }
         return job;
     }
 
@@ -321,23 +347,33 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     private boolean waitForCompletion(final ScheduledFuture< ? > job) {
         try {
             final long delay = job.getDelay(TimeUnit.MILLISECONDS);
-            LOG.debug("Waiting for completion of job starting in " + delay + "ms: " + job);
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Waiting for completion of job starting in " + delay + "ms: " + job);
+            }
             // job.get() is not safe here because the job may have been completed
             // before get() is called.
             // See WebClientWaitForBackgroundJobsTest#waitForBackgroundJavaScriptStartingBefore_hangs
             job.get(delay + 100, TimeUnit.MILLISECONDS);
-            LOG.debug("Job done: " + job.isDone() + ".");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Job done: " + job.isDone() + ".");
+            }
         }
         catch (final CancellationException e) {
-            LOG.debug("Job cancelled: " + job + ".");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Job cancelled: " + job + ".");
+            }
             return false;
         }
         catch (final InterruptedException e) {
-            LOG.debug(e.getMessage(), e);
+            if (LOG.isDebugEnabled()) {
+                LOG.debug(e.getMessage(), e);
+            }
             return false;
         }
         catch (final ExecutionException e) {
-            LOG.debug(e.getMessage(), e);
+            if (LOG.isDebugEnabled()) {
+                LOG.debug(e.getMessage(), e);
+            }
             return false;
         }
         catch (final TimeoutException e) {
@@ -359,13 +395,17 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                 // ignore, this doesn't matter, we want to stop it
             }
             if (executorThread_.isAlive()) {
-                LOG.warn("Executor thread " + executorThread_.getName() + " still alive");
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn("Executor thread " + executorThread_.getName() + " still alive");
+                }
             }
         }
         if (getJobCount() - neverStartedTasks.size() > 0) {
-            LOG.warn("jobCount: " + getJobCount() + "(taskCount: " + executor_.getTaskCount()
-                + ", completedTaskCount: " + executor_.getCompletedTaskCount()
-                + ", never started tasks: " + neverStartedTasks.size() + ")");
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("jobCount: " + getJobCount() + "(taskCount: " + executor_.getTaskCount()
+                        + ", completedTaskCount: " + executor_.getCompletedTaskCount()
+                        + ", never started tasks: " + neverStartedTasks.size() + ")");
+            }
         }
     }
 

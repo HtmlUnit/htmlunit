@@ -53,7 +53,9 @@ public class MockWebConnection implements WebConnection {
     public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
         final URL url = settings.getUrl();
 
-        LOG.debug("Getting response for " + url.toExternalForm());
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Getting response for " + url.toExternalForm());
+        }
 
         lastRequest_ = settings;
         requestCount_++;

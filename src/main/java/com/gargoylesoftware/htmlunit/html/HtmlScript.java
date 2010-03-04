@@ -294,8 +294,10 @@ public class HtmlScript extends HtmlElement {
                     elt.setEventHandler(event, scriptCode);
                 }
                 catch (final ElementNotFoundException e) {
-                    LOG.warn("<script for='" + forr + "' ...>: no element found with id \""
+                    if (LOG.isWarnEnabled()) {
+                        LOG.warn("<script for='" + forr + "' ...>: no element found with id \""
                             + forr + "\". Ignoring.");
+                    }
                 }
             }
         }

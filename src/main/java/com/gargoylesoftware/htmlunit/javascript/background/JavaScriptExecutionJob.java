@@ -70,11 +70,15 @@ public abstract class JavaScriptExecutionJob extends JavaScriptJob {
             // Verify that the window is still open and the current page is the same.
             final HtmlPage page = (HtmlPage) w.getEnclosedPage();
             if (w.getEnclosedPage() != page || !w.getWebClient().getWebWindows().contains(w)) {
-                LOG.debug("The page that originated this job doesn't exist anymore. Execution cancelled.");
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("The page that originated this job doesn't exist anymore. Execution cancelled.");
+                }
                 return;
             }
             else if (w.isClosed()) {
-                LOG.debug("Enclosing window is now closed. Execution cancelled.");
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Enclosing window is now closed. Execution cancelled.");
+                }
                 return;
             }
             runJavaScript(page);

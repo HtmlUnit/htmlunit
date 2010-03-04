@@ -80,7 +80,9 @@ public class EventListenersContainer implements Serializable {
     public boolean addEventListener(final String type, final Function listener, final boolean useCapture) {
         final List<Function> listeners = getHandlersOrCreateIt(type).getHandlers(useCapture);
         if (listeners.contains(listener)) {
-            LOG.debug(type + " listener already registered, skipping it (" + listener + ")");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug(type + " listener already registered, skipping it (" + listener + ")");
+            }
             return false;
         }
         listeners.add(listener);
@@ -186,7 +188,9 @@ public class EventListenersContainer implements Serializable {
         if (handler != null) {
             event.setCurrentTarget(jsNode_);
             final HtmlPage page = (HtmlPage) node.getPage();
-            LOG.debug("Executing " + event.jsxGet_type() + " handler for " + node);
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Executing " + event.jsxGet_type() + " handler for " + node);
+            }
             return page.executeJavaScriptFunctionIfPossible(handler, jsNode_, propHandlerArgs, node);
         }
         return null;

@@ -181,7 +181,9 @@ public final class JavaScriptConfiguration {
         try {
             final Reader reader = getConfigurationFileAsReader();
             if (reader == null) {
-                LOG.error("Unable to load JavaScriptConfiguration.xml");
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("Unable to load JavaScriptConfiguration.xml");
+                }
             }
             else {
                 loadConfiguration(reader);
@@ -189,7 +191,9 @@ public final class JavaScriptConfiguration {
             }
         }
         catch (final Exception e) {
-            LOG.error("Error when loading JavascriptConfiguration.xml", e);
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Error when loading JavascriptConfiguration.xml", e);
+            }
             e.printStackTrace();
         }
     }
@@ -213,13 +217,17 @@ public final class JavaScriptConfiguration {
             XmlDocument_ = documentBuilder.parse(inputSource);
         }
         catch (final SAXParseException parseException) {
-            LOG.error("line=[" + parseException.getLineNumber()
+            if (LOG.isErrorEnabled()) {
+                LOG.error("line=[" + parseException.getLineNumber()
                     + "] columnNumber=[" + parseException.getColumnNumber()
                     + "] systemId=[" + parseException.getSystemId()
                     + "] publicId=[" + parseException.getPublicId() + "]", parseException);
+            }
         }
         catch (final Exception e) {
-            LOG.error("Error when loading JavascriptConfiguration.xml", e);
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Error when loading JavascriptConfiguration.xml", e);
+            }
         }
     }
 
@@ -355,7 +363,9 @@ public final class JavaScriptConfiguration {
                     parseConstantElement(classConfiguration, childElement, browser);
                 }
                 else if (tagName.equals("browser")) {
-                    LOG.debug("browser tag not yet handled for class " + linkedClassname);
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("browser tag not yet handled for class " + linkedClassname);
+                    }
                 }
                 else if (tagName.equals("doclink")) {
                     // ignore this link
@@ -714,7 +724,9 @@ public final class JavaScriptConfiguration {
                     final Class< ? extends HtmlElement> htmlClass =
                         (Class< ? extends HtmlElement>) Class.forName(htmlClassname);
                     // preload and validate that the class exists
-                    LOG.debug("Mapping " + htmlClass.getName() + " to " + jsClassname);
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("Mapping " + htmlClass.getName() + " to " + jsClassname);
+                    }
                     while (!classConfig.isJsObject()) {
                         jsClassname = classConfig.getExtendedClass();
                         classConfig = configuration.getClassConfiguration(jsClassname);

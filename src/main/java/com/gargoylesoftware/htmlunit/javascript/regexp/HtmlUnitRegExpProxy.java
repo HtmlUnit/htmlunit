@@ -65,7 +65,9 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         catch (final StackOverflowError e) {
             // TODO: We shouldn't have to catch this exception and fall back to Rhino's regex support!
             // See HtmlUnitRegExpProxyTest.stackOverflow()
-            LOG.warn(e.getMessage(), e);
+            if (LOG.isWarnEnabled()) {
+                LOG.warn(e.getMessage(), e);
+            }
             return wrapped_.action(cx, scope, thisObj, args, actionType);
         }
     }
@@ -96,7 +98,9 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
                     return doReplacement(thisString, replacement, matcher, false);
                 }
                 catch (final PatternSyntaxException e) {
-                    LOG.warn(e.getMessage(), e);
+                    if (LOG.isWarnEnabled()) {
+                        LOG.warn(e.getMessage(), e);
+                    }
                 }
             }
         }
@@ -277,8 +281,10 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             return wrapped_.compileRegExp(cx, source, flags);
         }
         catch (final Exception e) {
-            LOG.warn("compileRegExp() threw for >" + source + "<, flags: >" + flags + "<. "
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("compileRegExp() threw for >" + source + "<, flags: >" + flags + "<. "
                     + "Replacing with a '####shouldNotFindAnything###'");
+            }
             return wrapped_.compileRegExp(cx, "####shouldNotFindAnything###", "");
         }
     }

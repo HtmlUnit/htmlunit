@@ -52,7 +52,9 @@ public class ThreadedRefreshHandler implements RefreshHandler {
                     new WaitingRefreshHandler().handleRefresh(page, url, seconds);
                 }
                 catch (final IOException e) {
-                    LOG.error("Unable to refresh page!", e);
+                    if (LOG.isErrorEnabled()) {
+                        LOG.error("Unable to refresh page!", e);
+                    }
                     throw new RuntimeException("Unable to refresh page!", e);
                 }
             }

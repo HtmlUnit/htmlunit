@@ -171,7 +171,9 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
         // given Credentials to avoid infinite loop if it is incorrect:
         // see http://issues.apache.org/bugzilla/show_bug.cgi?id=8140
         if (alreadyAnswered(scheme, host, port, proxy)) {
-            LOG.debug("Already answered for " + buildKey(scheme, host, port, proxy) + ", returning null");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Already answered for " + buildKey(scheme, host, port, proxy) + ", returning null");
+            }
             return null;
         }
 
@@ -189,12 +191,16 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
             if (matchScheme(scope, scheme) && matchHost(scope, host)
                 && matchPort(scope, port) && matchRealm(scope, scheme)) {
                 markAsAnswered(scheme, host, port, proxy);
-                LOG.debug("Returning " + c + " for " + buildKey(scheme, host, port, proxy));
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Returning " + c + " for " + buildKey(scheme, host, port, proxy));
+                }
                 return c;
             }
         }
 
-        LOG.debug("No credential found for " + buildKey(scheme, host, port, proxy));
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("No credential found for " + buildKey(scheme, host, port, proxy));
+        }
         return null;
     }
 
@@ -263,7 +269,9 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      */
     protected void clearAnswered() {
         answerMarks_.clear();
-        LOG.debug("Flushed marked answers");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Flushed marked answers");
+        }
     }
 
     /**

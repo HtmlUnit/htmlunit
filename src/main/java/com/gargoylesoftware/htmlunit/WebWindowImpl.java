@@ -99,7 +99,9 @@ public abstract class WebWindowImpl implements WebWindow {
      * {@inheritDoc}
      */
     public void setEnclosedPage(final Page page) {
-        LOG.debug("setEnclosedPage: " + page);
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("setEnclosedPage: " + page);
+        }
         if (page == enclosedPage_) {
             return;
         }
@@ -162,11 +164,15 @@ public abstract class WebWindowImpl implements WebWindow {
     }
 
     void destroyChildren() {
-        LOG.debug("destroyChildren");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("destroyChildren");
+        }
         getJobManager().removeAllJobs();
         for (final ListIterator<WebWindowImpl> iter = childWindows_.listIterator(); iter.hasNext();) {
             final WebWindowImpl window = iter.next();
-            LOG.debug("closing child window: " + window);
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("closing child window: " + window);
+            }
             window.setClosed();
             window.getJobManager().shutdown();
             final Page page = window.getEnclosedPage();

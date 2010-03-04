@@ -110,7 +110,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 }
             }
             catch (final Exception e) {
-                LOG.info("Error reading htmlunit.properties", e);
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("Error reading htmlunit.properties", e);
+                }
             }
             if (BROWSERS_PROPERTY_ == null) {
                 BROWSERS_PROPERTY_ = "hu";
@@ -275,7 +277,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
             if (url.contains("/delay")) {
                 final String delay = StringUtils.substringBetween(url, "/delay", "/");
                 final int ms = Integer.parseInt(delay);
-                LOG.debug("Sleeping for " + ms + " before to deliver " + url);
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Sleeping for " + ms + " before to deliver " + url);
+                }
                 Thread.sleep(ms);
             }
 

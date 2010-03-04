@@ -442,7 +442,9 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getAllEntries();
 
         for (final String classname : configuration.keySet()) {
-            LOG.debug("Now testing for class " + classname);
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Now testing for class " + classname);
+            }
             final Class< ? > clazz = configuration.getClassObject(classname);
             final Method[] methods = clazz.getMethods();
             String elementName;
@@ -598,7 +600,9 @@ public class JavaScriptConfigurationTest extends WebTestCase {
                 "User Agent" + RandomStringUtils.randomAlphanumeric(20),
                 1);
             JavaScriptConfiguration.getInstance(browserVersion);
-            LOG.info("count: " + count + "; memory stats: " + getMemoryStats());
+            if (LOG.isInfoEnabled()) {
+                LOG.info("count: " + count + "; memory stats: " + getMemoryStats());
+            }
         }
     }
 

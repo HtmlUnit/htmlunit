@@ -65,7 +65,9 @@ public class AppletClassLoader extends ClassLoader {
     }
 
     private void defineClass(final String name) {
-        LOG.debug("Defining class " + name);
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Defining class " + name);
+        }
         final String classFileName = name.replace('.', '/') + ".class";
         final JarFile jarFile = jarFiles_.get(name);
         try {
@@ -103,7 +105,9 @@ public class AppletClassLoader extends ClassLoader {
             if (name.endsWith(".class")) {
                 final String className = name.replace('/', '.').substring(0, name.length() - 6);
                 jarFiles_.put(className, jarFile);
-                LOG.trace("Jar entry: " + className);
+                if (LOG.isTraceEnabled()) {
+                    LOG.trace("Jar entry: " + className);
+                }
             }
         }
     }

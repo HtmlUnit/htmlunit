@@ -183,7 +183,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         final String stringMessage = Context.toString(message);
         final AlertHandler handler = getWebWindow().getWebClient().getAlertHandler();
         if (handler == null) {
-            LOG.warn("window.alert(\"" + stringMessage + "\") no alert handler installed");
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("window.alert(\"" + stringMessage + "\") no alert handler installed");
+            }
         }
         else {
             handler.handleAlert(document_.getHtmlPage(), stringMessage);
@@ -216,8 +218,10 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     public boolean jsxFunction_confirm(final String message) {
         final ConfirmHandler handler = getWebWindow().getWebClient().getConfirmHandler();
         if (handler == null) {
-            LOG.warn("window.confirm(\""
-                    + message + "\") no confirm handler installed, simulating the OK button");
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("window.confirm(\""
+                        + message + "\") no confirm handler installed, simulating the OK button");
+            }
             return true;
         }
         return handler.handleConfirm(document_.getHtmlPage(), message);
@@ -231,7 +235,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     public String jsxFunction_prompt(final String message) {
         final PromptHandler handler = getWebWindow().getWebClient().getPromptHandler();
         if (handler == null) {
-            LOG.warn("window.prompt(\"" + message + "\") no prompt handler installed");
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("window.prompt(\"" + message + "\") no prompt handler installed");
+            }
             return null;
         }
         return handler.handlePrompt(document_.getHtmlPage(), message);
@@ -310,18 +316,22 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         final WebClient webClient = webWindow_.getWebClient();
 
         if (webClient.isPopupBlockerEnabled()) {
-            LOG.debug("Ignoring window.open() invocation because popups are blocked.");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Ignoring window.open() invocation because popups are blocked.");
+            }
             return null;
         }
 
         if (featuresString != null || replaceCurrentEntryInBrowsingHistory) {
-            LOG.debug(
-                "window.open: features and replaceCurrentEntryInBrowsingHistory "
-                + "not implemented: url=[" + urlString
-                + "] windowName=[" + windowName
-                + "] features=[" + featuresString
-                + "] replaceCurrentEntry=[" + replaceCurrentEntryInBrowsingHistory
-                + "]");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug(
+                        "window.open: features and replaceCurrentEntryInBrowsingHistory "
+                        + "not implemented: url=[" + urlString
+                        + "] windowName=[" + windowName
+                        + "] features=[" + featuresString
+                        + "] replaceCurrentEntry=[" + replaceCurrentEntryInBrowsingHistory
+                        + "]");
+            }
         }
 
         // if specified name is the name of an existing window, then hold it
@@ -366,7 +376,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             return new URL(urlString);
         }
         catch (final MalformedURLException e) {
-            LOG.error("Unable to create URL for openWindow: relativeUrl=[" + urlString + "]", e);
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Unable to create URL for openWindow: relativeUrl=[" + urlString + "]", e);
+            }
             return null;
         }
     }
@@ -415,7 +427,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param timeoutId identifier for the timeout to clear (returned by <tt>setTimeout</tt>)
      */
     public void jsxFunction_clearTimeout(final int timeoutId) {
-        LOG.debug("clearTimeout(" + timeoutId + ")");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("clearTimeout(" + timeoutId + ")");
+        }
         getWebWindow().getJobManager().removeJob(timeoutId);
     }
 
@@ -694,7 +708,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Removes focus from this element.
      */
     public void jsxFunction_blur() {
-        LOG.debug("window.blur() not implemented");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("window.blur() not implemented");
+        }
     }
 
     /**
@@ -724,7 +740,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param y the vertical position
      */
     public void jsxFunction_moveTo(final int x, final int y) {
-        LOG.debug("window.moveTo() not implemented");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("window.moveTo() not implemented");
+        }
     }
 
     /**
@@ -733,7 +751,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param y the vertical position
      */
     public void jsxFunction_moveBy(final int x, final int y) {
-        LOG.debug("window.moveBy() not implemented");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("window.moveBy() not implemented");
+        }
     }
 
     /**
@@ -742,7 +762,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param height the height offset
      */
     public void jsxFunction_resizeBy(final int width, final int height) {
-        LOG.debug("window.resizeBy() not implemented");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("window.resizeBy() not implemented");
+        }
     }
 
     /**
@@ -751,7 +773,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param height the height of the Window in pixel after resize
      */
     public void jsxFunction_resizeTo(final int width, final int height) {
-        LOG.debug("window.resizeTo() not implemented");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("window.resizeTo() not implemented");
+        }
     }
 
     /**
@@ -1162,7 +1186,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             return null;
         }
         else if ("vbscript".equalsIgnoreCase(languageStr)) {
-            LOG.warn("VBScript not supported in Window.execScript().");
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("VBScript not supported in Window.execScript().");
+            }
         }
         else {
             // Unrecognized language: use the IE error message ("Invalid class string").
@@ -1251,7 +1277,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536353.aspx">MSDN documentation</a>
      */
     public void jsxFunction_clearInterval(final int intervalID) {
-        LOG.debug("clearInterval(" + intervalID + ")");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("clearInterval(" + intervalID + ")");
+        }
         getWebWindow().getJobManager().removeJob(intervalID);
     }
 
@@ -1298,7 +1326,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536672.aspx">MSDN documentation</a>
      */
     public void jsxFunction_print() {
-        LOG.debug("window.print() not implemented");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("window.print() not implemented");
+        }
     }
 
     /**

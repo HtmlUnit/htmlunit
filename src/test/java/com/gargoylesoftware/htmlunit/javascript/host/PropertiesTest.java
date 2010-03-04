@@ -226,9 +226,11 @@ public class PropertiesTest extends WebTestCase {
         actualPropertyCount.add(realProperties.size());
         remainingPropertyCount.add(remainingProperties.size());
 
-        LOG.debug(name_ + ':' + browserVersion_.getNickname() + ':' + realProperties);
-        LOG.debug("Remaining" + ':' + remainingProperties);
-        LOG.debug("Error" + ':' + erroredProperties);
+        if (LOG.isDebugEnabled()) {
+            LOG.debug(name_ + ':' + browserVersion_.getNickname() + ':' + realProperties);
+            LOG.debug("Remaining" + ':' + remainingProperties);
+            LOG.debug("Error" + ':' + erroredProperties);
+        }
 
         appendHtml(html, originalRealProperties, simulatedProperties, erroredProperties);
         if (dataset.getColumnCount() == IE7_.size()) {

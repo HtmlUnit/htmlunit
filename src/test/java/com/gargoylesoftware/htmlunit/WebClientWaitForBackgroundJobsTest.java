@@ -557,7 +557,9 @@ class ThreadSynchronizer {
      */
     public void sleep(final long millis) {
         try {
-            LOG.debug("Sleeping for " + millis + "ms");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Sleeping for " + millis + "ms");
+            }
             Thread.sleep(millis);
         }
         catch (final InterruptedException e) {

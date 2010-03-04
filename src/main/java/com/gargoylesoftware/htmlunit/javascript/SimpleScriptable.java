@@ -206,7 +206,9 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
         if (javaScriptClass == null) {
             // We don't have a specific subclass for this element so create something generic.
             scriptable = new HTMLElement();
-            LOG.debug("No JavaScript class found for element <" + domNode.getNodeName() + ">. Using HTMLElement");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("No JavaScript class found for element <" + domNode.getNodeName() + ">. Using HTMLElement");
+            }
         }
         else {
             try {

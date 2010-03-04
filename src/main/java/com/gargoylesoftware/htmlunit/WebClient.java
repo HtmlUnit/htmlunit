@@ -278,12 +278,16 @@ public class WebClient implements Serializable {
         if (page instanceof HtmlPage) {
             final HtmlPage htmlPage = (HtmlPage) page;
             if (!htmlPage.isOnbeforeunloadAccepted()) {
-                LOG.debug("The registered OnbeforeunloadHandler rejected to load a new page.");
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("The registered OnbeforeunloadHandler rejected to load a new page.");
+                }
                 return (P) page;
             }
         }
 
-        LOG.debug("Get page for window named '" + webWindow.getName() + "', using " + parameters);
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Get page for window named '" + webWindow.getName() + "', using " + parameters);
+        }
 
         final WebResponse webResponse;
         final String protocol = parameters.getUrl().getProtocol();
@@ -465,7 +469,7 @@ public class WebClient implements Serializable {
         final String contentType = webResponse.getContentType();
         final int statusCode = webResponse.getStatusCode();
         final boolean successful = (statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES);
-        if (getPrintContentOnFailingStatusCode() && !successful) {
+        if (getPrintContentOnFailingStatusCode() && !successful && LOG.isInfoEnabled()) {
             LOG.info("statusCode=[" + statusCode + "] contentType=[" + contentType + "]");
             LOG.info(webResponse.getContentAsString());
         }
@@ -892,7 +896,9 @@ public class WebClient implements Serializable {
                 getPage(window, settings);
             }
             catch (final IOException e) {
-                LOG.error("Error loading content into window", e);
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("Error loading content into window", e);
+                }
             }
         }
         else {
@@ -1363,7 +1369,9 @@ public class WebClient implements Serializable {
         url = UrlUtils.encodeUrl(url, getBrowserVersion().isIE());
         webRequestSettings.setUrl(url);
 
-        LOG.debug("Load response for " + url.toExternalForm());
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Load response for " + url.toExternalForm());
+        }
 
         // If the request settings don't specify a custom proxy, use the default client proxy...
         if (webRequestSettings.getProxyHost() == null) {
@@ -1376,7 +1384,9 @@ public class WebClient implements Serializable {
                         proxyConfig_.setProxyAutoConfigContent(content);
                     }
                     final String allValue = ProxyAutoConfig.evaluate(content, url);
-                    LOG.debug("Proxy Auto-Config: value '" + allValue + "' for URL " + url);
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("Proxy Auto-Config: value '" + allValue + "' for URL " + url);
+                    }
                     String value = allValue.split(";")[0].trim();
                     if (value.startsWith("PROXY")) {
                         value = value.substring(6);
@@ -1434,7 +1444,9 @@ public class WebClient implements Serializable {
                 return webResponse;
             }
 
-            LOG.debug("Got a redirect status code [" + status + "] new location = [" + locationString + "]");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Got a redirect status code [" + status + "] new location = [" + locationString + "]");
+            }
 
             if (allowedRedirects == 0) {
                 throw new FailingHttpStatusCodeException("Too much redirect for "
@@ -2088,7 +2100,9 @@ public class WebClient implements Serializable {
         for (int i = queue.size() - 1; i >= 0; --i) {
             final LoadJob downloadedResponse = queue.get(i);
             if (downloadedResponse.isOutdated()) {
-                LOG.info("No usage of download: " + downloadedResponse);
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("No usage of download: " + downloadedResponse);
+                }
                 continue;
             }
             if (downloadedResponse.urlWithOnlyHashChange_ != null) {
@@ -2111,7 +2125,9 @@ public class WebClient implements Serializable {
                     }
                 }
                 else {
-                    LOG.info("No usage of download: " + downloadedResponse);
+                    if (LOG.isInfoEnabled()) {
+                        LOG.info("No usage of download: " + downloadedResponse);
+                    }
                 }
             }
         }

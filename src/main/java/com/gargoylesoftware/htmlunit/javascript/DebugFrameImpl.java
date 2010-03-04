@@ -143,10 +143,12 @@ public class DebugFrameImpl extends DebugFrameAdapter {
         if (LOG.isTraceEnabled()) {
             if (t instanceof JavaScriptException) {
                 final JavaScriptException e = (JavaScriptException) t;
-                LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx)
+                if (LOG.isTraceEnabled()) {
+                    LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx)
                         + " Exception thrown: " + Context.toString(e.getValue()));
+                }
             }
-            else {
+            else if (LOG.isTraceEnabled()) {
                 LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx) + " Exception thrown: " + t.getCause());
             }
         }

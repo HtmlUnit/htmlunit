@@ -169,9 +169,13 @@ public class JavaScriptJobManagerTest extends WebTestCase {
         Assert.assertEquals("inner frame should show child thread", 1, mgr.getJobCount());
 
         final HtmlAnchor anchor = page.getHtmlElementById("clickme");
-        LOG.debug("before click");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("before click");
+        }
         final HtmlPage newPage = anchor.click();
-        LOG.debug("after click");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("after click");
+        }
 
         Assert.assertEquals("new page should load", "Third", newPage.getTitleText());
         Assert.assertEquals("frame should be gone", 0, newPage.getFrames().size());

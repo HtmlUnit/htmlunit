@@ -537,7 +537,9 @@ public class WindowTest extends WebTestCase {
             = "<html><head><title>First</title><script>function doTest(){alert('foo')}</script></head>\n"
             + "<body onload='doTest()'></body></html>";
 
-        LOG.warn("Warning for no alert handler expected next");
+        if (LOG.isWarnEnabled()) {
+            LOG.warn("Warning for no alert handler expected next");
+        }
         final HtmlPage firstPage = loadPage(firstContent);
         assertEquals("First", firstPage.getTitleText());
     }
@@ -635,7 +637,9 @@ public class WindowTest extends WebTestCase {
             = "<html><head><title>First</title><script>function doTest(){alert(confirm('foo'))}</script>\n"
             + "</head><body onload='doTest()'></body></html>";
 
-        LOG.warn("Warning for no confirm handler expected next");
+        if (LOG.isWarnEnabled()) {
+            LOG.warn("Warning for no confirm handler expected next");
+        }
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(html, collectedAlerts);
 
@@ -692,7 +696,9 @@ public class WindowTest extends WebTestCase {
 
         webConnection.setResponse(URL_FIRST, firstContent);
         webClient.setWebConnection(webConnection);
-        LOG.warn("Warning for no prompt handler expected next");
+        if (LOG.isWarnEnabled()) {
+            LOG.warn("Warning for no prompt handler expected next");
+        }
 
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());

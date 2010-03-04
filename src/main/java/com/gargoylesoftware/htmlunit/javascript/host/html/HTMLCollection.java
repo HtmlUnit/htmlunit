@@ -347,7 +347,9 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
                             return collection;
                         }
                     }
-                    LOG.debug("Property \"" + name + "\" evaluated (by id) to " + next);
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("Property \"" + name + "\" evaluated (by id) to " + next);
+                    }
                     return getScriptableForElement(next);
                 }
             }
@@ -355,16 +357,20 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
                 final WebWindow window = (WebWindow) next;
                 final String windowName = window.getName();
                 if (windowName != null && windowName.equals(name)) {
-                    LOG.debug("Property \"" + name + "\" evaluated (by name) to " + window);
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("Property \"" + name + "\" evaluated (by name) to " + window);
+                    }
                     return getScriptableForElement(window);
                 }
                 if (getBrowserVersion().isIE() && window instanceof FrameWindow
                         && ((FrameWindow) window).getFrameElement().getAttribute("id").equals(name)) {
-                    LOG.debug("Property \"" + name + "\" evaluated (by id) to " + window);
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("Property \"" + name + "\" evaluated (by id) to " + window);
+                    }
                     return getScriptableForElement(window);
                 }
             }
-            else {
+            else if (LOG.isWarnEnabled()) {
                 LOG.warn("Unrecognized type in collection: " + next + " (" + next.getClass().getName() + ")");
             }
         }
@@ -383,13 +389,17 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
 
         final List<Object> subElements = array.getElements();
         if (subElements.size() > 1) {
-            LOG.debug("Property \"" + name + "\" evaluated (by name) to " + array + " with "
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Property \"" + name + "\" evaluated (by name) to " + array + " with "
                     + subElements.size() + " elements");
+            }
             return array;
         }
         else if (subElements.size() == 1) {
             final Scriptable singleResult = getScriptableForElement(subElements.get(0));
-            LOG.debug("Property \"" + name + "\" evaluated (by name) to " + singleResult);
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Property \"" + name + "\" evaluated (by name) to " + singleResult);
+            }
             return singleResult;
         }
 
@@ -598,7 +608,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
                         idList.add(windowName);
                     }
                 }
-                else {
+                else if (LOG.isDebugEnabled()) {
                     LOG.debug("Unrecognized type in array: \"" + next.getClass().getName() + "\"");
                 }
             }

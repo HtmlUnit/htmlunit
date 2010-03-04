@@ -305,9 +305,11 @@ public class Document extends EventNode {
             final Object jsElement = getScriptableFor(domNode);
 
             if (jsElement == NOT_FOUND) {
-                LOG.debug("createTextNode(" + newData
-                    + ") cannot return a result as there isn't a JavaScript object for the DOM node "
-                    + domNode.getClass().getName());
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("createTextNode(" + newData
+                            + ") cannot return a result as there isn't a JavaScript object for the DOM node "
+                            + domNode.getClass().getName());
+                }
             }
             else {
                 result = jsElement;
@@ -365,7 +367,9 @@ public class Document extends EventNode {
             if (tagName.startsWith("<") && tagName.endsWith(">") && browserVersion.isFirefox()) {
                 tagName = tagName.substring(1, tagName.length() - 1);
                 if (!tagName.matches("\\w+")) {
-                    LOG.error("Unexpected exception occurred while parsing HTML snippet");
+                    if (LOG.isErrorEnabled()) {
+                        LOG.error("Unexpected exception occurred while parsing HTML snippet");
+                    }
                     throw Context.reportRuntimeError("Unexpected exception occurred while parsing HTML snippet: "
                             + tagName);
                 }
@@ -376,9 +380,11 @@ public class Document extends EventNode {
             final Object jsElement = getScriptableFor(element);
 
             if (jsElement == NOT_FOUND) {
-                LOG.debug("createElement(" + tagName
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("createElement(" + tagName
                         + ") cannot return a result as there isn't a JavaScript object for the element "
                         + element.getClass().getName());
+                }
             }
             else {
                 result = jsElement;

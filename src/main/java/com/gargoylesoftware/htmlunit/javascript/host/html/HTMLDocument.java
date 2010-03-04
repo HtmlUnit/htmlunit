@@ -458,7 +458,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param content the content to write
      */
     protected void write(final String content) {
-        LOG.debug("write: " + content);
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("write: " + content);
+        }
 
         final HtmlPage page = getDomNodeOrDie();
         if (!page.isBeingParsed()) {
@@ -470,13 +472,17 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
         // If open() was called; don't write to doc yet -- wait for call to close().
         if (!writeInCurrentDocument_) {
-            LOG.debug("wrote content to buffer");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("wrote content to buffer");
+            }
             scheduleImplicitClose();
             return;
         }
         final String bufferedContent = writeBuffer_.toString();
         if (!canAlreadyBeParsed(bufferedContent)) {
-            LOG.debug("write: not enough content to parse it now");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("write: not enough content to parse it now");
+            }
             return;
         }
 
@@ -697,9 +703,11 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             url = replaceForCookieIfNecessary(url);
             final Cookie cookie = buildCookie(newCookie, url);
             cookieManager.addCookie(cookie);
-            LOG.debug("Added cookie: " + cookie);
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Added cookie: " + cookie);
+            }
         }
-        else {
+        else if (LOG.isDebugEnabled()) {
             LOG.debug("Skipped adding cookie: " + newCookie);
         }
     }
@@ -841,12 +849,14 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         // writeln() invocations will directly append content to the current insertion point.
         final HtmlPage page = getHtmlPage();
         if (page.isBeingParsed()) {
-            LOG.warn("Ignoring call to open() during the parsing stage.");
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("Ignoring call to open() during the parsing stage.");
+            }
             return null;
         }
 
         // We're not in the parsing stage; OK to continue.
-        if (!writeInCurrentDocument_) {
+        if (!writeInCurrentDocument_ && LOG.isWarnEnabled()) {
             LOG.warn("Function open() called when document is already open.");
         }
         writeInCurrentDocument_ = false;
@@ -863,7 +873,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     public void jsxFunction_close() throws IOException {
         if (writeInCurrentDocument_) {
-            LOG.warn("close() called when document is not open.");
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("close() called when document is not open.");
+            }
         }
         else {
             final HtmlPage page = getHtmlPage();
@@ -997,9 +1009,11 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             final HtmlElement htmlElement = this.<HtmlPage>getDomNodeOrDie().getHtmlElementById(id, caseSensitive);
             final Object jsElement = getScriptableFor(htmlElement);
             if (jsElement == NOT_FOUND) {
-                LOG.debug("getElementById(" + id
-                    + ") cannot return a result as there isn't a JavaScript object for the HTML element "
-                    + htmlElement.getClass().getName());
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("getElementById(" + id
+                            + ") cannot return a result as there isn't a JavaScript object for the HTML element "
+                            + htmlElement.getClass().getName());
+                }
             }
             else {
                 result = jsElement;
@@ -1014,10 +1028,14 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                 if (result instanceof UniqueTag) {
                     return null;
                 }
-                LOG.warn("getElementById(" + id + ") did a getElementByName for Internet Explorer");
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn("getElementById(" + id + ") did a getElementByName for Internet Explorer");
+                }
                 return result;
             }
-            LOG.debug("getElementById(" + id + "): no DOM node found with this id");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("getElementById(" + id + "): no DOM node found with this id");
+            }
         }
         return result;
     }
@@ -1525,7 +1543,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             }
             return false;
         }
-        LOG.warn("Nothing done for execCommand(" + cmd + ", ...) (feature not implemented)");
+        if (LOG.isWarnEnabled()) {
+            LOG.warn("Nothing done for execCommand(" + cmd + ", ...) (feature not implemented)");
+        }
         return true;
     }
 

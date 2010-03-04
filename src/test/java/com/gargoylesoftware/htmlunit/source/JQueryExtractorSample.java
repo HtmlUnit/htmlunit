@@ -106,8 +106,11 @@ public class JQueryExtractorSample extends WebTestCase {
             final File f = new File(tmpDir,
                 "jquery" + getVersion() + '_' + getBrowserVersion().getNickname() + "_result.html");
             FileUtils.writeStringToFile(f, page.asXml(), "UTF-8");
-            LOG.info("Test result for "
-                + getVersion() + '_' + getBrowserVersion().getNickname() + " written to: " + f.getAbsolutePath());
+            if (LOG.isInfoEnabled()) {
+                LOG.info("Test result for "
+                        + getVersion() + '_' + getBrowserVersion().getNickname()
+                        + " written to: " + f.getAbsolutePath());
+            }
         }
 
         final HtmlElement doc = page.getDocumentElement();

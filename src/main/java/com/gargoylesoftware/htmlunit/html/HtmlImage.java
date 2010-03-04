@@ -157,7 +157,9 @@ public class HtmlImage extends HtmlElement {
                 }
             }
             else {
-                LOG.debug("Unable to download image for tag " + this + "; not firing onload event.");
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Unable to download image for tag " + this + "; not firing onload event.");
+                }
             }
         }
     }

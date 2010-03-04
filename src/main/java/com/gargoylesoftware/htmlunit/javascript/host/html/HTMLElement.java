@@ -364,8 +364,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             if (htmlElement != null && isAttributeName(name)) {
                 final String value = htmlElement.getAttribute(name);
                 if (HtmlElement.ATTRIBUTE_NOT_DEFINED != value) {
-                    LOG.debug("Found attribute for evaluation of property \"" + name
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("Found attribute for evaluation of property \"" + name
                             + "\" for of " + this);
+                    }
                     return value;
                 }
             }
@@ -1156,7 +1158,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             return BEHAVIOR_ID_DOWNLOAD;
         }
         else {
-            LOG.warn("Unimplemented behavior: " + behavior);
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("Unimplemented behavior: " + behavior);
+            }
             return BEHAVIOR_ID_UNKNOWN;
         }
     }
@@ -1200,7 +1204,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 behaviors_.remove(BEHAVIOR_DOWNLOAD);
                 break;
             default:
-                LOG.warn("Unexpected behavior id: " + id + ". Ignoring.");
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn("Unexpected behavior id: " + id + ". Ignoring.");
+                }
         }
     }
 
@@ -1346,7 +1352,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param minVersion the minimum version of the component to install
      */
     public void addComponentRequest(final String id, final String idType, final String minVersion) {
-        LOG.debug("Call to addComponentRequest(" + id + ", " + idType + ", " + minVersion + ") ignored.");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Call to addComponentRequest(" + id + ", " + idType + ", " + minVersion + ") ignored.");
+        }
     }
 
     /**
@@ -1355,7 +1363,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * default IE behavior implementation.
      */
     public void clearComponentRequest() {
-        LOG.debug("Call to clearComponentRequest() ignored.");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Call to clearComponentRequest() ignored.");
+        }
     }
 
     /**
@@ -1458,7 +1468,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             try {
                 final WebResponse webResponse = client.loadWebResponse(settings);
                 final String content = webResponse.getContentAsString();
-                LOG.debug("Downloaded content: " + StringUtils.abbreviate(content, 512));
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Downloaded content: " + StringUtils.abbreviate(content, 512));
+                }
                 final Object[] args = new Object[] {content};
                 final ContextAction action = new ContextAction() {
                     public Object run(final Context cx) {
@@ -1470,7 +1482,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 cf.call(action);
             }
             catch (final IOException e) {
-                LOG.error("Behavior #default#download: Cannot download " + url_, e);
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("Behavior #default#download: Cannot download " + url_, e);
+                }
             }
         }
     }

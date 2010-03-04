@@ -331,7 +331,9 @@ public class JavaScriptEngineTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = client.getPage(URL_FIRST);
-        LOG.debug(page.asXml());
+        if (LOG.isDebugEnabled()) {
+            LOG.debug(page.asXml());
+        }
         assertEquals(expectedAlerts, collectedAlerts);
 
         assertNotNull(page.getHtmlElementById("script1"));

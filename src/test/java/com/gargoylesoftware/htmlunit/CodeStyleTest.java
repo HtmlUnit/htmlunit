@@ -95,6 +95,7 @@ public class CodeStyleTest {
                 staticJSMethod(lines, relativePath);
                 singleAlert(lines, relativePath);
                 staticLoggers(lines, relativePath);
+                loggingEnabled(lines, relativePath);
             }
         }
     }
@@ -301,10 +302,7 @@ public class CodeStyleTest {
      */
     private void badIndentationLevels(final List<String> lines, final String relativePath) {
         for (int i = 0; i < lines.size(); i++) {
-            final String line = lines.get(i);
-            final int length1 = line.length();
-            final int length2 = line.trim().length();
-            final int indentation = length1 - length2;
+            final int indentation = getIndentation(lines.get(i));
             if (indentation % 4 != 0) {
                 addFailure("Bad indentation level (" + indentation + ") in " + relativePath + ", line: " + (i + 1));
             }
@@ -472,6 +470,64 @@ public class CodeStyleTest {
             }
             i++;
         }
+    }
+
+    /**
+     * Verifies that there is code to check log enablement.
+     * <p> For example,
+     * <code><pre>
+     *    if (log.isDebugEnabled()) {
+     *        ... do something expensive ...
+     *        log.debug(theResult);
+     *    }
+     * </pre></code>
+     * </p>
+     */
+    private void loggingEnabled(final List<String> lines, final String relativePath) {
+        if (relativePath.contains("CodeStyleTest")) {
+            return;
+        }
+        int i = 0;
+        for (String line : lines) {
+            if (line.contains("LOG.trace(")) {
+                loggingEnabled(lines, i, "Trace", relativePath);
+            }
+            else if (line.contains("LOG.debug(")) {
+                loggingEnabled(lines, i, "Debug", relativePath);
+            }
+            else if (line.contains("LOG.info(")) {
+                loggingEnabled(lines, i, "Info", relativePath);
+            }
+            else if (line.contains("LOG.warn(")) {
+                loggingEnabled(lines, i, "Warn", relativePath);
+            }
+            else if (line.contains("LOG.error(")) {
+                loggingEnabled(lines, i, "Error", relativePath);
+            }
+            else if (line.contains("LOG.fatal(")) {
+                loggingEnabled(lines, i, "Fatal", relativePath);
+            }
+            i++;
+        }
+    }
+
+    private void loggingEnabled(final List<String> lines, final int index, final String method,
+            final String relativePath) {
+        final int indentation = getIndentation(lines.get(index));
+        for (int i = index - 1; i >= 0; i--) {
+            final String line = lines.get(i);
+            if (getIndentation(line) == indentation - 4) {
+                if (!line.contains("LOG.is" + method + "Enabled()")) {
+                    addFailure("You must check \"if (LOG.is" + method + "Enabled())\" around " + relativePath
+                            + ", line: " + (index + 1));
+                }
+                return;
+            }
+        }
+    }
+
+    private int getIndentation(final String line) {
+        return line.length() - line.trim().length();
     }
 
 }

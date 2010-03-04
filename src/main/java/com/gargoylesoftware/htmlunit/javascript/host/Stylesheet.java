@@ -254,13 +254,17 @@ public class Stylesheet extends SimpleScriptable {
         }
         catch (final FailingHttpStatusCodeException e) {
             // Got a 404 response or something like that; behave nicely.
-            LOG.error(e.getMessage());
+            if (LOG.isErrorEnabled()) {
+                LOG.error(e.getMessage());
+            }
             final InputSource source = new InputSource(new StringReader(""));
             sheet = new Stylesheet(element, source, uri);
         }
         catch (final IOException e) {
             // Got a basic IO error; behave nicely.
-            LOG.error(e.getMessage());
+            if (LOG.isErrorEnabled()) {
+                LOG.error(e.getMessage());
+            }
             final InputSource source = new InputSource(new StringReader(""));
             sheet = new Stylesheet(element, source, uri);
         }
@@ -329,7 +333,9 @@ public class Stylesheet extends SimpleScriptable {
             case Selector.SAC_TEXT_NODE_SELECTOR:
                 return false;
             default:
-                LOG.error("Unknown CSS selector type '" + selector.getSelectorType() + "'.");
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("Unknown CSS selector type '" + selector.getSelectorType() + "'.");
+                }
                 return false;
         }
     }
@@ -403,7 +409,9 @@ public class Stylesheet extends SimpleScriptable {
             case Condition.SAC_POSITIONAL_CONDITION:
                 return false;
             default:
-                LOG.error("Unknown CSS condition type '" + condition.getConditionType() + "'.");
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("Unknown CSS condition type '" + condition.getConditionType() + "'.");
+                }
                 return false;
         }
     }
@@ -444,12 +452,16 @@ public class Stylesheet extends SimpleScriptable {
             ss = parser.parseStyleSheet(source, null, null);
         }
         catch (final Exception e) {
-            LOG.error("Error parsing CSS from '" + toString(source) + "': " + e.getMessage(), e);
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Error parsing CSS from '" + toString(source) + "': " + e.getMessage(), e);
+            }
             ss = new CSSStyleSheetImpl();
         }
         catch (final Error e) {
             // SACParser sometimes throws Error: "Missing return statement in function"
-            LOG.error("Error parsing CSS from '" + toString(source) + "': " + e.getMessage(), e);
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Error parsing CSS from '" + toString(source) + "': " + e.getMessage(), e);
+            }
             ss = new CSSStyleSheetImpl();
         }
         return ss;
@@ -471,12 +483,16 @@ public class Stylesheet extends SimpleScriptable {
             selectors = parser.parseSelectors(source);
         }
         catch (final Exception e) {
-            LOG.error("Error parsing CSS selectors from '" + toString(source) + "': " + e.getMessage(), e);
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Error parsing CSS selectors from '" + toString(source) + "': " + e.getMessage(), e);
+            }
             selectors = new SelectorListImpl();
         }
         catch (final Error e) {
             // SACParser sometimes throws Error: "Missing return statement in function"
-            LOG.error("Error parsing CSS selectors from '" + toString(source) + "': " + e.getMessage(), e);
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Error parsing CSS selectors from '" + toString(source) + "': " + e.getMessage(), e);
+            }
             selectors = new SelectorListImpl();
         }
         return selectors;
@@ -570,7 +586,9 @@ public class Stylesheet extends SimpleScriptable {
                 }
                 catch (final MalformedURLException e) {
                     // Log the error and fall through to the return values below.
-                    LOG.warn(e.getMessage(), e);
+                    if (LOG.isWarnEnabled()) {
+                        LOG.warn(e.getMessage(), e);
+                    }
                 }
             }
         }

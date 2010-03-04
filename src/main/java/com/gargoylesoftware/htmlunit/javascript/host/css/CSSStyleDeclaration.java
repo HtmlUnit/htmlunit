@@ -165,7 +165,9 @@ public class CSSStyleDeclaration extends SimpleScriptable {
                         }
                     }
                     catch (final ParseException e) {
-                        LOG.warn("Invalid behavior: '" + element.getValue() + "'.");
+                        if (LOG.isWarnEnabled()) {
+                            LOG.warn("Invalid behavior: '" + element.getValue() + "'.");
+                        }
                     }
                 }
             }
@@ -604,7 +606,9 @@ public class CSSStyleDeclaration extends SimpleScriptable {
                 }
             }
             catch (final ParseException e) {
-                LOG.warn("Invalid behavior: '" + behavior + "'.");
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn("Invalid behavior: '" + behavior + "'.");
+                }
             }
         }
     }
@@ -4239,7 +4243,9 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @return the value
      */
     public CSSValue jsxFunction_getPropertyCSSValue(final String name) {
-        LOG.info("getPropertyCSSValue(" + name + "): getPropertyCSSValue support is experimental");
+        if (LOG.isInfoEnabled()) {
+            LOG.info("getPropertyCSSValue(" + name + "): getPropertyCSSValue support is experimental");
+        }
         // following is a hack, just to have basic support for getPropertyCSSValue
         // TODO: rework the whole CSS processing here! we should *always* parse the style!
         if (styleDeclaration_ == null) {

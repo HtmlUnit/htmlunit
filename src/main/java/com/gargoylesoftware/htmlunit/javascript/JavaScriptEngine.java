@@ -134,7 +134,9 @@ public class JavaScriptEngine {
                     init(webWindow, cx);
                 }
                 catch (final Exception e) {
-                    LOG.error("Exception while initializing JavaScript for the page", e);
+                    if (LOG.isErrorEnabled()) {
+                        LOG.error("Exception while initializing JavaScript for the page", e);
+                    }
                     throw new ScriptException(null, e); // BUG: null is not useful.
                 }
 
@@ -531,7 +533,9 @@ public class JavaScriptEngine {
                 if (getWebClient().isThrowExceptionOnScriptError()) {
                     throw new RuntimeException(e);
                 }
-                LOG.info("Caught script timeout error", e);
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("Caught script timeout error", e);
+                }
                 return null;
             }
             finally {
@@ -611,7 +615,9 @@ public class JavaScriptEngine {
             throw scriptException;
         }
         // Log the error; ScriptException instances provide good debug info.
-        LOG.info("Caught script exception", scriptException);
+        if (LOG.isInfoEnabled()) {
+            LOG.info("Caught script exception", scriptException);
+        }
     }
 
     /**

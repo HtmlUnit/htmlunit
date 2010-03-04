@@ -89,7 +89,9 @@ public class WebDriverOldTestsTest extends WebDriverTestCase {
                 response.add(new File[] {f});
             }
         }
-        LOG.info(response.size() + " tests found in folder " + testsDir);
+        if (LOG.isInfoEnabled()) {
+            LOG.info(response.size() + " tests found in folder " + testsDir);
+        }
         return response;
     }
 
@@ -100,7 +102,9 @@ public class WebDriverOldTestsTest extends WebDriverTestCase {
     @Test
     @Ignore
     public void test() throws Throwable {
-        LOG.info("Running " + testFile_);
+        if (LOG.isInfoEnabled()) {
+            LOG.info("Running " + testFile_);
+        }
 
         final WebDriver webDriver = getWebDriver();
         final JavascriptExecutor jsExecutor = (JavascriptExecutor) webDriver;

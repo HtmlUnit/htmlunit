@@ -111,7 +111,9 @@ public class TopLevelWindow extends WebWindowImpl {
         if (page instanceof HtmlPage) {
             final HtmlPage htmlPage = (HtmlPage) page;
             if (!htmlPage.isOnbeforeunloadAccepted()) {
-                LOG.debug("The registered OnbeforeunloadHandler rejected the window close event.");
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("The registered OnbeforeunloadHandler rejected the window close event.");
+                }
                 return;
             }
             htmlPage.cleanUp();

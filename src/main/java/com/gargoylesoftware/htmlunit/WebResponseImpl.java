@@ -134,7 +134,9 @@ public class WebResponseImpl implements WebResponse {
             return EncodingSniffer.sniffEncoding(getResponseHeaders(), getContentAsStream());
         }
         catch (final IOException e) {
-            LOG.warn("Error trying to sniff encoding.", e);
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("Error trying to sniff encoding.", e);
+            }
             return null;
         }
     }
@@ -170,7 +172,10 @@ public class WebResponseImpl implements WebResponse {
                 return new String(body, encoding);
             }
             catch (final UnsupportedEncodingException e) {
-                LOG.warn("Attempted to use unsupported encoding '" + encoding + "'; using default system encoding.");
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn("Attempted to use unsupported encoding '"
+                            + encoding + "'; using default system encoding.");
+                }
                 return new String(body);
             }
         }

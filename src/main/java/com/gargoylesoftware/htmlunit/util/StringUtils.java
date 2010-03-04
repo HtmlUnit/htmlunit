@@ -147,7 +147,9 @@ public final class StringUtils {
             return DateUtil.parseDate(s);
         }
         catch (final DateParseException e) {
-            LOG.warn("Unable to parse date: " + s);
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("Unable to parse date: " + s);
+            }
             return null;
         }
     }

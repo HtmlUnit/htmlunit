@@ -167,11 +167,15 @@ public class XMLHttpRequest extends SimpleScriptable {
                 thisValue = this;
             }
             for (int i = 0; i < nbExecutions; i++) {
-                LOG.debug("Calling onreadystatechange handler for state " + state);
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Calling onreadystatechange handler for state " + state);
+                }
                 jsEngine.callFunction(containingPage_, stateChangeHandler_, context,
                         scope, thisValue, ArrayUtils.EMPTY_OBJECT_ARRAY);
-                LOG.debug("onreadystatechange handler: " + context.decompileFunction(stateChangeHandler_, 4));
-                LOG.debug("Calling onreadystatechange handler for state " + state + ". Done.");
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("onreadystatechange handler: " + context.decompileFunction(stateChangeHandler_, 4));
+                    LOG.debug("Calling onreadystatechange handler for state " + state + ". Done.");
+                }
             }
         }
 
@@ -231,10 +235,14 @@ public class XMLHttpRequest extends SimpleScriptable {
             final Scriptable scope = errorHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
 
-            LOG.debug("Calling onerror handler");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Calling onerror handler");
+            }
             jsEngine.callFunction(containingPage_, errorHandler_, context, this, scope, ArrayUtils.EMPTY_OBJECT_ARRAY);
-            LOG.debug("onerror handler: " + context.decompileFunction(errorHandler_, 4));
-            LOG.debug("Calling onerror handler done.");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("onerror handler: " + context.decompileFunction(errorHandler_, 4));
+                LOG.debug("Calling onerror handler done.");
+            }
         }
     }
 
@@ -261,7 +269,9 @@ public class XMLHttpRequest extends SimpleScriptable {
         if (webResponse_ != null) {
             return webResponse_.getContentAsString();
         }
-        LOG.debug("XMLHttpRequest.responseText was retrieved before the response was available.");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("XMLHttpRequest.responseText was retrieved before the response was available.");
+        }
         return "";
     }
 
@@ -290,13 +300,17 @@ public class XMLHttpRequest extends SimpleScriptable {
                 return doc;
             }
             catch (final IOException e) {
-                LOG.warn("Failed parsing XML document " + webResponse_.getRequestSettings().getUrl() + ": "
-                        + e.getMessage());
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn("Failed parsing XML document " + webResponse_.getRequestSettings().getUrl() + ": "
+                            + e.getMessage());
+                }
                 return null;
             }
         }
-        LOG.debug("XMLHttpRequest.responseXML was called but the response is "
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("XMLHttpRequest.responseXML was called but the response is "
                 + webResponse_.getContentType());
+        }
         return null;
     }
 
@@ -309,7 +323,9 @@ public class XMLHttpRequest extends SimpleScriptable {
         if (webResponse_ != null) {
             return webResponse_.getStatusCode();
         }
-        LOG.error("XMLHttpRequest.status was retrieved before the response was available.");
+        if (LOG.isErrorEnabled()) {
+            LOG.error("XMLHttpRequest.status was retrieved before the response was available.");
+        }
         return 0;
     }
 
@@ -321,7 +337,9 @@ public class XMLHttpRequest extends SimpleScriptable {
         if (webResponse_ != null) {
             return webResponse_.getStatusMessage();
         }
-        LOG.error("XMLHttpRequest.statusText was retrieved before the response was available.");
+        if (LOG.isErrorEnabled()) {
+            LOG.error("XMLHttpRequest.statusText was retrieved before the response was available.");
+        }
         return null;
     }
 
@@ -344,7 +362,9 @@ public class XMLHttpRequest extends SimpleScriptable {
             }
             return buffer.toString();
         }
-        LOG.error("XMLHttpRequest.getAllResponseHeaders() was called before the response was available.");
+        if (LOG.isErrorEnabled()) {
+            LOG.error("XMLHttpRequest.getAllResponseHeaders() was called before the response was available.");
+        }
         return null;
     }
 
@@ -400,7 +420,9 @@ public class XMLHttpRequest extends SimpleScriptable {
             requestSettings_ = settings;
         }
         catch (final MalformedURLException e) {
-            LOG.error("Unable to initialize XMLHttpRequest using malformed URL '" + url + "'.");
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Unable to initialize XMLHttpRequest using malformed URL '" + url + "'.");
+            }
             return;
         }
         // Async stays a boolean.
@@ -450,7 +472,9 @@ public class XMLHttpRequest extends SimpleScriptable {
                     return "XMLHttpRequest Job " + getId();
                 }
             };
-            LOG.debug("Starting XMLHttpRequest thread for asynchronous request");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Starting XMLHttpRequest thread for asynchronous request");
+            }
             threadID_ = getWindow().getWebWindow().getJobManager().addJob(job, page);
         }
     }
@@ -466,7 +490,9 @@ public class XMLHttpRequest extends SimpleScriptable {
             && !Context.getUndefinedValue().equals(content)) {
             final String body = Context.toString(content);
             if (body.length() > 0) {
-                LOG.debug("Setting request body to: " + body);
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Setting request body to: " + body);
+                }
                 requestSettings_.setRequestBody(body);
             }
         }
@@ -481,7 +507,9 @@ public class XMLHttpRequest extends SimpleScriptable {
         try {
             setState(STATE_LOADED, context);
             final WebResponse webResponse = wc.loadWebResponse(requestSettings_);
-            LOG.debug("Web response loaded successfully.");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Web response loaded successfully.");
+            }
             if (overriddenMimeType_ == null) {
                 webResponse_ = webResponse;
             }
@@ -498,7 +526,9 @@ public class XMLHttpRequest extends SimpleScriptable {
             setState(STATE_COMPLETED, context);
         }
         catch (final IOException e) {
-            LOG.debug("IOException: returning a network error response.");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("IOException: returning a network error response.");
+            }
             webResponse_ = new NetworkErrorWebResponse(requestSettings_);
             setState(STATE_COMPLETED, context);
             processError(context);

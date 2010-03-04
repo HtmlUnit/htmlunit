@@ -80,7 +80,9 @@ public class WaitingRefreshHandler implements RefreshHandler {
              * ignore it since this is the thread now doing the navigation. Eventually we should
              * refactor to force all navigation to happen back on the main thread.
              */
-            LOG.debug("Waiting thread was interrupted. Ignoring interruption to continue navigation.");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Waiting thread was interrupted. Ignoring interruption to continue navigation.");
+            }
         }
         final WebWindow window = page.getEnclosingWindow();
         if (window == null) {
