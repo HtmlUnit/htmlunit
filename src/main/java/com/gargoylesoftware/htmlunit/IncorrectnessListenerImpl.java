@@ -36,9 +36,7 @@ public class IncorrectnessListenerImpl implements IncorrectnessListener, Seriali
      * {@inheritDoc}
      */
     public void notify(final String message, final Object origin) {
-        if (LOG.isWarnEnabled()) {
-            LOG.warn(message);
-        }
+        LOG.warn(message);
     }
 
 }

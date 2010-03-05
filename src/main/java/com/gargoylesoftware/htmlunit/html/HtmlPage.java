@@ -934,16 +934,12 @@ public class HtmlPage extends SgmlPage {
         try {
             scriptURL = getFullyQualifiedUrl(srcAttribute);
             if (scriptURL.getProtocol().equals("javascript")) {
-                if (LOG.isInfoEnabled()) {
-                    LOG.info("Ignoring script src [" + srcAttribute + "]");
-                }
+                LOG.info("Ignoring script src [" + srcAttribute + "]");
                 return JavaScriptLoadResult.NOOP;
             }
         }
         catch (final MalformedURLException e) {
-            if (LOG.isErrorEnabled()) {
-                LOG.error("Unable to build URL for script src tag [" + srcAttribute + "]");
-            }
+            LOG.error("Unable to build URL for script src tag [" + srcAttribute + "]");
             if (client.isThrowExceptionOnScriptError()) {
                 throw new ScriptException(this, e);
             }
@@ -955,9 +951,7 @@ public class HtmlPage extends SgmlPage {
             script = loadJavaScriptFromUrl(scriptURL, charset);
         }
         catch (final IOException e) {
-            if (LOG.isErrorEnabled()) {
-                LOG.error("Error loading JavaScript from [" + scriptURL + "].", e);
-            }
+            LOG.error("Error loading JavaScript from [" + scriptURL + "].", e);
             return JavaScriptLoadResult.DOWNLOAD_ERROR;
         }
 
@@ -1168,10 +1162,8 @@ public class HtmlPage extends SgmlPage {
         if (event.jsxGet_type().equals(Event.TYPE_BEFORE_UNLOAD) && event.jsxGet_returnValue() != null) {
             final OnbeforeunloadHandler handler = getWebClient().getOnbeforeunloadHandler();
             if (handler == null) {
-                if (LOG.isWarnEnabled()) {
-                    LOG.warn("document.onbeforeunload() returned a string in event.returnValue,"
-                            + " but no onbeforeunload handler installed.");
-                }
+                LOG.warn("document.onbeforeunload() returned a string in event.returnValue,"
+                        + " but no onbeforeunload handler installed.");
             }
             else {
                 final String message = Context.toString(event.jsxGet_returnValue());
@@ -1212,9 +1204,7 @@ public class HtmlPage extends SgmlPage {
                 time = Double.parseDouble(refreshString);
             }
             catch (final NumberFormatException e) {
-                if (LOG.isErrorEnabled()) {
-                    LOG.error("Malformed refresh string (no ';' but not a number): " + refreshString, e);
-                }
+                LOG.error("Malformed refresh string (no ';' but not a number): " + refreshString, e);
                 return;
             }
             url = getWebResponse().getRequestSettings().getUrl();
@@ -1225,16 +1215,12 @@ public class HtmlPage extends SgmlPage {
                 time = Double.parseDouble(refreshString.substring(0, index).trim());
             }
             catch (final NumberFormatException e) {
-                if (LOG.isErrorEnabled()) {
-                    LOG.error("Malformed refresh string (no valid number before ';') " + refreshString, e);
-                }
+                LOG.error("Malformed refresh string (no valid number before ';') " + refreshString, e);
                 return;
             }
             index = refreshString.toLowerCase().indexOf("url=", index);
             if (index == -1) {
-                if (LOG.isErrorEnabled()) {
-                    LOG.error("Malformed refresh string (found ';' but no 'url='): " + refreshString);
-                }
+                LOG.error("Malformed refresh string (found ';' but no 'url='): " + refreshString);
                 return;
             }
             final StringBuilder buffer = new StringBuilder(refreshString.substring(index + 4));
@@ -1254,9 +1240,7 @@ public class HtmlPage extends SgmlPage {
                     url = getFullyQualifiedUrl(urlString);
                 }
                 catch (final MalformedURLException e) {
-                    if (LOG.isErrorEnabled()) {
-                        LOG.error("Malformed URL in refresh string: " + refreshString, e);
-                    }
+                    LOG.error("Malformed URL in refresh string: " + refreshString, e);
                     throw e;
                 }
             }

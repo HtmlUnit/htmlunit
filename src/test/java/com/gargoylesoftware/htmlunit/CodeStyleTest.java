@@ -495,18 +495,6 @@ public class CodeStyleTest {
             else if (line.contains("LOG.debug(")) {
                 loggingEnabled(lines, i, "Debug", relativePath);
             }
-            else if (line.contains("LOG.info(")) {
-                loggingEnabled(lines, i, "Info", relativePath);
-            }
-            else if (line.contains("LOG.warn(")) {
-                loggingEnabled(lines, i, "Warn", relativePath);
-            }
-            else if (line.contains("LOG.error(")) {
-                loggingEnabled(lines, i, "Error", relativePath);
-            }
-            else if (line.contains("LOG.fatal(")) {
-                loggingEnabled(lines, i, "Fatal", relativePath);
-            }
             i++;
         }
     }

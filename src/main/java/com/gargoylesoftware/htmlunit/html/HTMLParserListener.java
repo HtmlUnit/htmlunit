@@ -69,15 +69,11 @@ class SimpleHTMLParserListener implements HTMLParserListener {
     private static final Log LOG = LogFactory.getLog(HTMLParserListener.class);
 
     public void error(final String message, final URL url, final int line, final int column, final String key) {
-        if (LOG.isErrorEnabled()) {
-            LOG.error(format(message, url, line, column));
-        }
+        LOG.error(format(message, url, line, column));
     }
 
     public void warning(final String message, final URL url, final int line, final int column, final String key) {
-        if (LOG.isWarnEnabled()) {
-            LOG.warn(format(message, url, line, column));
-        }
+        LOG.warn(format(message, url, line, column));
     }
 
     private String format(final String message, final URL url, final int line, final int column) {

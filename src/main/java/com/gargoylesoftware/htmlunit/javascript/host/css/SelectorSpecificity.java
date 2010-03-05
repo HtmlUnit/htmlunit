@@ -82,10 +82,8 @@ class SelectorSpecificity implements Comparable<SelectorSpecificity> {
                 readSelectorSpecificity(ss.getSiblingSelector());
                 return;
             default:
-                if (LOG.isWarnEnabled()) {
-                    LOG.warn("Unhandled CSS selector type for specificity computation: '"
-                            + selector.getSelectorType() + "'.");
-                }
+                LOG.warn("Unhandled CSS selector type for specificity computation: '"
+                        + selector.getSelectorType() + "'.");
                 return;
         }
     }
@@ -116,10 +114,8 @@ class SelectorSpecificity implements Comparable<SelectorSpecificity> {
                 fieldD_++;
                 return;
             default:
-                if (LOG.isWarnEnabled()) {
-                    LOG.warn("Unhandled CSS condition type for specifity computation: '"
-                            + condition.getConditionType() + "'.");
-                }
+                LOG.warn("Unhandled CSS condition type for specifity computation: '"
+                        + condition.getConditionType() + "'.");
                 return;
         }
     }

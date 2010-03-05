@@ -1158,9 +1158,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             return BEHAVIOR_ID_DOWNLOAD;
         }
         else {
-            if (LOG.isWarnEnabled()) {
-                LOG.warn("Unimplemented behavior: " + behavior);
-            }
+            LOG.warn("Unimplemented behavior: " + behavior);
             return BEHAVIOR_ID_UNKNOWN;
         }
     }
@@ -1204,9 +1202,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 behaviors_.remove(BEHAVIOR_DOWNLOAD);
                 break;
             default:
-                if (LOG.isWarnEnabled()) {
-                    LOG.warn("Unexpected behavior id: " + id + ". Ignoring.");
-                }
+                LOG.warn("Unexpected behavior id: " + id + ". Ignoring.");
         }
     }
 
@@ -1482,9 +1478,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 cf.call(action);
             }
             catch (final IOException e) {
-                if (LOG.isErrorEnabled()) {
-                    LOG.error("Behavior #default#download: Cannot download " + url_, e);
-                }
+                LOG.error("Behavior #default#download: Cannot download " + url_, e);
             }
         }
     }

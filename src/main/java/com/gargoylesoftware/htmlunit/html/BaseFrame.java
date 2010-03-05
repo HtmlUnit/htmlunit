@@ -141,10 +141,7 @@ public abstract class BaseFrame extends HtmlElement {
                 getPage().getEnclosingWindow().getWebClient().getPage(enclosedWindow_, settings);
             }
             catch (final IOException e) {
-                if (LOG.isErrorEnabled()) {
-                    LOG.error("IOException when getting content for " + getTagName()
-                            + ": url=[" + url + "]", e);
-                }
+                LOG.error("IOException when getting content for " + getTagName() + ": url=[" + url + "]", e);
             }
         }
     }

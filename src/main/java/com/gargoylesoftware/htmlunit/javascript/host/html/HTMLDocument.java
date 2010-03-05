@@ -849,14 +849,12 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         // writeln() invocations will directly append content to the current insertion point.
         final HtmlPage page = getHtmlPage();
         if (page.isBeingParsed()) {
-            if (LOG.isWarnEnabled()) {
-                LOG.warn("Ignoring call to open() during the parsing stage.");
-            }
+            LOG.warn("Ignoring call to open() during the parsing stage.");
             return null;
         }
 
         // We're not in the parsing stage; OK to continue.
-        if (!writeInCurrentDocument_ && LOG.isWarnEnabled()) {
+        if (!writeInCurrentDocument_) {
             LOG.warn("Function open() called when document is already open.");
         }
         writeInCurrentDocument_ = false;
@@ -873,9 +871,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     public void jsxFunction_close() throws IOException {
         if (writeInCurrentDocument_) {
-            if (LOG.isWarnEnabled()) {
-                LOG.warn("close() called when document is not open.");
-            }
+            LOG.warn("close() called when document is not open.");
         }
         else {
             final HtmlPage page = getHtmlPage();
@@ -1028,9 +1024,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                 if (result instanceof UniqueTag) {
                     return null;
                 }
-                if (LOG.isWarnEnabled()) {
-                    LOG.warn("getElementById(" + id + ") did a getElementByName for Internet Explorer");
-                }
+                LOG.warn("getElementById(" + id + ") did a getElementByName for Internet Explorer");
                 return result;
             }
             if (LOG.isDebugEnabled()) {
@@ -1543,9 +1537,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             }
             return false;
         }
-        if (LOG.isWarnEnabled()) {
-            LOG.warn("Nothing done for execCommand(" + cmd + ", ...) (feature not implemented)");
-        }
+        LOG.warn("Nothing done for execCommand(" + cmd + ", ...) (feature not implemented)");
         return true;
     }
 

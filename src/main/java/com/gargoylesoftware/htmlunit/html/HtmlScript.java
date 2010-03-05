@@ -294,10 +294,8 @@ public class HtmlScript extends HtmlElement {
                     elt.setEventHandler(event, scriptCode);
                 }
                 catch (final ElementNotFoundException e) {
-                    if (LOG.isWarnEnabled()) {
-                        LOG.warn("<script for='" + forr + "' ...>: no element found with id \""
-                            + forr + "\". Ignoring.");
-                    }
+                    LOG.warn("<script for='" + forr + "' ...>: no element found with id \""
+                        + forr + "\". Ignoring.");
                 }
             }
         }
@@ -423,9 +421,7 @@ public class HtmlScript extends HtmlElement {
         if (!isJavaScript(getTypeAttribute(), getLanguageAttribute())) {
             final String t = getTypeAttribute();
             final String l = getLanguageAttribute();
-            if (LOG.isWarnEnabled()) {
-                LOG.warn("Script is not JavaScript (type: " + t + ", language: " + l + "). Skipping execution.");
-            }
+            LOG.warn("Script is not JavaScript (type: " + t + ", language: " + l + "). Skipping execution.");
             return false;
         }
 

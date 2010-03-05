@@ -370,7 +370,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
                     return getScriptableForElement(window);
                 }
             }
-            else if (LOG.isWarnEnabled()) {
+            else {
                 LOG.warn("Unrecognized type in collection: " + next + " (" + next.getClass().getName() + ")");
             }
         }

@@ -181,9 +181,7 @@ public final class JavaScriptConfiguration {
         try {
             final Reader reader = getConfigurationFileAsReader();
             if (reader == null) {
-                if (LOG.isErrorEnabled()) {
-                    LOG.error("Unable to load JavaScriptConfiguration.xml");
-                }
+                LOG.error("Unable to load JavaScriptConfiguration.xml");
             }
             else {
                 loadConfiguration(reader);
@@ -191,9 +189,7 @@ public final class JavaScriptConfiguration {
             }
         }
         catch (final Exception e) {
-            if (LOG.isErrorEnabled()) {
-                LOG.error("Error when loading JavascriptConfiguration.xml", e);
-            }
+            LOG.error("Error when loading JavascriptConfiguration.xml", e);
             e.printStackTrace();
         }
     }
@@ -217,17 +213,13 @@ public final class JavaScriptConfiguration {
             XmlDocument_ = documentBuilder.parse(inputSource);
         }
         catch (final SAXParseException parseException) {
-            if (LOG.isErrorEnabled()) {
-                LOG.error("line=[" + parseException.getLineNumber()
-                    + "] columnNumber=[" + parseException.getColumnNumber()
-                    + "] systemId=[" + parseException.getSystemId()
-                    + "] publicId=[" + parseException.getPublicId() + "]", parseException);
-            }
+            LOG.error("line=[" + parseException.getLineNumber()
+                + "] columnNumber=[" + parseException.getColumnNumber()
+                + "] systemId=[" + parseException.getSystemId()
+                + "] publicId=[" + parseException.getPublicId() + "]", parseException);
         }
         catch (final Exception e) {
-            if (LOG.isErrorEnabled()) {
-                LOG.error("Error when loading JavascriptConfiguration.xml", e);
-            }
+            LOG.error("Error when loading JavascriptConfiguration.xml", e);
         }
     }
 

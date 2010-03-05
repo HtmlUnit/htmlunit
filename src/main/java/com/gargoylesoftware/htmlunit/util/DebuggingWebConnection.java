@@ -136,9 +136,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
                 response.getRequestSettings().getHttpMethod(), response.getLoadTime());
         }
         catch (final Exception e) {
-            if (LOG.isWarnEnabled()) {
-                LOG.warn("Failed to decompress JavaScript response. Delivering as it.", e);
-            }
+            LOG.warn("Failed to decompress JavaScript response. Delivering as it.", e);
         }
 
         return response;
@@ -151,9 +149,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
      */
     public void addMark(final String mark) throws IOException {
         appendToJSFile("tab[tab.length] = \"" + mark + "\";\n");
-        if (LOG.isInfoEnabled()) {
-            LOG.info("--- " + mark + " ---");
-        }
+        LOG.info("--- " + mark + " ---");
     }
 
     /**
@@ -179,9 +175,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         final String content = response.getContentAsString();
         final URL url = response.getRequestSettings().getUrl();
         FileUtils.writeStringToFile(f, content, response.getContentCharset());
-        if (LOG.isInfoEnabled()) {
-            LOG.info("Created file " + f.getAbsolutePath() + " for response " + counter_ + ": " + url);
-        }
+        LOG.info("Created file " + f.getAbsolutePath() + " for response " + counter_ + ": " + url);
 
         final StringBuilder buffer = new StringBuilder();
         buffer.append("tab[tab.length] = {code: " + response.getStatusCode() + ", ");
@@ -300,8 +294,6 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         final File summary = new File(reportFolder_, "index.html");
         FileUtils.copyURLToFile(indexResource, summary);
 
-        if (LOG.isInfoEnabled()) {
-            LOG.info("Summary will be in " + summary.getAbsolutePath());
-        }
+        LOG.info("Summary will be in " + summary.getAbsolutePath());
     }
 }

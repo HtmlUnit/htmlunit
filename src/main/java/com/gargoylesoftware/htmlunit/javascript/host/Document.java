@@ -367,9 +367,7 @@ public class Document extends EventNode {
             if (tagName.startsWith("<") && tagName.endsWith(">") && browserVersion.isFirefox()) {
                 tagName = tagName.substring(1, tagName.length() - 1);
                 if (!tagName.matches("\\w+")) {
-                    if (LOG.isErrorEnabled()) {
-                        LOG.error("Unexpected exception occurred while parsing HTML snippet");
-                    }
+                    LOG.error("Unexpected exception occurred while parsing HTML snippet");
                     throw Context.reportRuntimeError("Unexpected exception occurred while parsing HTML snippet: "
                             + tagName);
                 }

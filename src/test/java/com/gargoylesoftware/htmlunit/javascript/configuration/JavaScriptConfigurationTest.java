@@ -600,9 +600,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
                 "User Agent" + RandomStringUtils.randomAlphanumeric(20),
                 1);
             JavaScriptConfiguration.getInstance(browserVersion);
-            if (LOG.isInfoEnabled()) {
-                LOG.info("count: " + count + "; memory stats: " + getMemoryStats());
-            }
+            LOG.info("count: " + count + "; memory stats: " + getMemoryStats());
         }
     }
 

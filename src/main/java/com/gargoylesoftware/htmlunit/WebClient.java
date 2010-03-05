@@ -469,7 +469,7 @@ public class WebClient implements Serializable {
         final String contentType = webResponse.getContentType();
         final int statusCode = webResponse.getStatusCode();
         final boolean successful = (statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES);
-        if (getPrintContentOnFailingStatusCode() && !successful && LOG.isInfoEnabled()) {
+        if (getPrintContentOnFailingStatusCode() && !successful) {
             LOG.info("statusCode=[" + statusCode + "] contentType=[" + contentType + "]");
             LOG.info(webResponse.getContentAsString());
         }
@@ -896,9 +896,7 @@ public class WebClient implements Serializable {
                 getPage(window, settings);
             }
             catch (final IOException e) {
-                if (LOG.isErrorEnabled()) {
-                    LOG.error("Error loading content into window", e);
-                }
+                LOG.error("Error loading content into window", e);
             }
         }
         else {
@@ -2100,9 +2098,7 @@ public class WebClient implements Serializable {
         for (int i = queue.size() - 1; i >= 0; --i) {
             final LoadJob downloadedResponse = queue.get(i);
             if (downloadedResponse.isOutdated()) {
-                if (LOG.isInfoEnabled()) {
-                    LOG.info("No usage of download: " + downloadedResponse);
-                }
+                LOG.info("No usage of download: " + downloadedResponse);
                 continue;
             }
             if (downloadedResponse.urlWithOnlyHashChange_ != null) {
@@ -2125,9 +2121,7 @@ public class WebClient implements Serializable {
                     }
                 }
                 else {
-                    if (LOG.isInfoEnabled()) {
-                        LOG.info("No usage of download: " + downloadedResponse);
-                    }
+                    LOG.info("No usage of download: " + downloadedResponse);
                 }
             }
         }

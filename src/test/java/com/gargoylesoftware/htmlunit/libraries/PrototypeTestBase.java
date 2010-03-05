@@ -76,9 +76,7 @@ public abstract class PrototypeTestBase extends WebServerTestCase {
             final File tmpDir = new File(System.getProperty("java.io.tmpdir"));
             final File f = new File(tmpDir, "prototype" + getVersion() + "_result_" + filename);
             FileUtils.writeStringToFile(f, page.asXml(), "UTF-8");
-            if (LOG.isInfoEnabled()) {
-                LOG.info("Test result for " + filename + " written to: " + f.getAbsolutePath());
-            }
+            LOG.info("Test result for " + filename + " written to: " + f.getAbsolutePath());
         }
 
         assertEquals(expected, actual);

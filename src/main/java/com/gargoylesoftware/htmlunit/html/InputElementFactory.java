@@ -123,9 +123,7 @@ public final class InputElementFactory implements IElementFactory {
             result = new HtmlFileInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         else {
-            if (LOG.isInfoEnabled()) {
-                LOG.info("Bad input type: \"" + type + "\", creating a text input");
-            }
+            LOG.info("Bad input type: \"" + type + "\", creating a text input");
             result = new HtmlTextInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         return result;

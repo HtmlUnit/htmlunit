@@ -110,9 +110,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 }
             }
             catch (final Exception e) {
-                if (LOG.isInfoEnabled()) {
-                    LOG.info("Error reading htmlunit.properties", e);
-                }
+                LOG.info("Error reading htmlunit.properties", e);
             }
             if (BROWSERS_PROPERTY_ == null) {
                 BROWSERS_PROPERTY_ = "hu";

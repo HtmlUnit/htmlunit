@@ -122,15 +122,11 @@ public class ActiveXObject extends SimpleScriptable {
                 return new ActiveXObjectImpl(activeXName);
             }
             catch (final Exception e) {
-                if (LOG.isWarnEnabled()) {
-                    LOG.warn("Error initiating Jacob", e);
-                }
+                LOG.warn("Error initiating Jacob", e);
             }
         }
 
-        if (LOG.isWarnEnabled()) {
-            LOG.warn("Automation server can't create object for " + activeXName);
-        }
+        LOG.warn("Automation server can't create object for " + activeXName);
         throw Context.reportRuntimeError("Automation server can't create object");
     }
 

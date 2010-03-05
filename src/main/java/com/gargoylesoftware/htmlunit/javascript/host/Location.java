@@ -124,9 +124,7 @@ public class Location extends SimpleScriptable {
     public void jsxFunction_reload(final boolean force) throws IOException {
         final String url = jsxGet_href();
         if (UNKNOWN.equals(url)) {
-            if (LOG.isErrorEnabled()) {
-                LOG.error("Unable to reload location: current URL is unknown.");
-            }
+            LOG.error("Unable to reload location: current URL is unknown.");
         }
         else {
             jsxSet_href(url);
@@ -177,9 +175,7 @@ public class Location extends SimpleScriptable {
             return s;
         }
         catch (final MalformedURLException e) {
-            if (LOG.isErrorEnabled()) {
-                LOG.error(e.getMessage(), e);
-            }
+            LOG.error(e.getMessage(), e);
             return page.getWebResponse().getRequestSettings().getUrl().toExternalForm();
         }
     }
@@ -210,9 +206,7 @@ public class Location extends SimpleScriptable {
             webWindow.getWebClient().download(webWindow, "", new WebRequestSettings(url), "JS set location");
         }
         catch (final MalformedURLException e) {
-            if (LOG.isErrorEnabled()) {
-                LOG.error("jsxSet_location('" + newLocation + "') Got MalformedURLException", e);
-            }
+            LOG.error("jsxSet_location('" + newLocation + "') Got MalformedURLException", e);
             throw e;
         }
     }

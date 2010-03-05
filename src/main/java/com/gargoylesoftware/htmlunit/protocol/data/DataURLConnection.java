@@ -53,14 +53,10 @@ public class DataURLConnection extends URLConnection {
             data = DataUrlDecoder.decode(url).getBytes();
         }
         catch (final UnsupportedEncodingException e) {
-            if (LOG.isErrorEnabled()) {
-                LOG.error("Exception decoding " + url, e);
-            }
+            LOG.error("Exception decoding " + url, e);
         }
         catch (final DecoderException e) {
-            if (LOG.isErrorEnabled()) {
-                LOG.error("Exception decoding " + url, e);
-            }
+            LOG.error("Exception decoding " + url, e);
         }
         content_ = data;
     }

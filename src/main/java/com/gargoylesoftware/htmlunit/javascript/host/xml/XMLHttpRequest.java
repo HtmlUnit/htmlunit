@@ -300,10 +300,8 @@ public class XMLHttpRequest extends SimpleScriptable {
                 return doc;
             }
             catch (final IOException e) {
-                if (LOG.isWarnEnabled()) {
-                    LOG.warn("Failed parsing XML document " + webResponse_.getRequestSettings().getUrl() + ": "
-                            + e.getMessage());
-                }
+                LOG.warn("Failed parsing XML document " + webResponse_.getRequestSettings().getUrl() + ": "
+                        + e.getMessage());
                 return null;
             }
         }
@@ -323,9 +321,7 @@ public class XMLHttpRequest extends SimpleScriptable {
         if (webResponse_ != null) {
             return webResponse_.getStatusCode();
         }
-        if (LOG.isErrorEnabled()) {
-            LOG.error("XMLHttpRequest.status was retrieved before the response was available.");
-        }
+        LOG.error("XMLHttpRequest.status was retrieved before the response was available.");
         return 0;
     }
 
@@ -337,9 +333,7 @@ public class XMLHttpRequest extends SimpleScriptable {
         if (webResponse_ != null) {
             return webResponse_.getStatusMessage();
         }
-        if (LOG.isErrorEnabled()) {
-            LOG.error("XMLHttpRequest.statusText was retrieved before the response was available.");
-        }
+        LOG.error("XMLHttpRequest.statusText was retrieved before the response was available.");
         return null;
     }
 
@@ -362,9 +356,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             }
             return buffer.toString();
         }
-        if (LOG.isErrorEnabled()) {
-            LOG.error("XMLHttpRequest.getAllResponseHeaders() was called before the response was available.");
-        }
+        LOG.error("XMLHttpRequest.getAllResponseHeaders() was called before the response was available.");
         return null;
     }
 
@@ -420,9 +412,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             requestSettings_ = settings;
         }
         catch (final MalformedURLException e) {
-            if (LOG.isErrorEnabled()) {
-                LOG.error("Unable to initialize XMLHttpRequest using malformed URL '" + url + "'.");
-            }
+            LOG.error("Unable to initialize XMLHttpRequest using malformed URL '" + url + "'.");
             return;
         }
         // Async stays a boolean.

@@ -103,9 +103,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                 job_.run();
             }
             catch (final RuntimeException e) {
-                if (LOG.isErrorEnabled()) {
-                    LOG.error("Job run failed with unexpected RuntimeException: " + e.getMessage(), e);
-                }
+                LOG.error("Job run failed with unexpected RuntimeException: " + e.getMessage(), e);
                 throw e;
             }
             finally {
@@ -395,17 +393,13 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                 // ignore, this doesn't matter, we want to stop it
             }
             if (executorThread_.isAlive()) {
-                if (LOG.isWarnEnabled()) {
-                    LOG.warn("Executor thread " + executorThread_.getName() + " still alive");
-                }
+                LOG.warn("Executor thread " + executorThread_.getName() + " still alive");
             }
         }
         if (getJobCount() - neverStartedTasks.size() > 0) {
-            if (LOG.isWarnEnabled()) {
-                LOG.warn("jobCount: " + getJobCount() + "(taskCount: " + executor_.getTaskCount()
-                        + ", completedTaskCount: " + executor_.getCompletedTaskCount()
-                        + ", never started tasks: " + neverStartedTasks.size() + ")");
-            }
+            LOG.warn("jobCount: " + getJobCount() + "(taskCount: " + executor_.getTaskCount()
+                    + ", completedTaskCount: " + executor_.getCompletedTaskCount()
+                    + ", never started tasks: " + neverStartedTasks.size() + ")");
         }
     }
 

@@ -466,16 +466,12 @@ public abstract class WebTestCase {
                 newContent = StringUtils.replaceOnce(newContent, "</body>",  endScript + "</body>");
             }
             else {
-                if (LOG.isInfoEnabled()) {
-                    LOG.info("No test generated: currently only content with a <head> and a </body> is supported");
-                }
+                LOG.info("No test generated: currently only content with a <head> and a </body> is supported");
             }
 
             final File f = File.createTempFile("TEST" + '_', ".html");
             FileUtils.writeStringToFile(f, newContent, "ISO-8859-1");
-            if (LOG.isInfoEnabled()) {
-                LOG.info("Test file written: " + f.getAbsolutePath());
-            }
+            LOG.info("Test file written: " + f.getAbsolutePath());
         }
         else {
             if (LOG.isDebugEnabled()) {
@@ -549,16 +545,12 @@ public abstract class WebTestCase {
 
         final Method testMethod = findRunningJUnitTestMethod();
         try {
-            if (LOG.isInfoEnabled()) {
-                LOG.info("Running " + testMethod.getName() + " as not yet implemented");
-            }
+            LOG.info("Running " + testMethod.getName() + " as not yet implemented");
             testMethod.invoke(this, (Object[]) new Class[] {});
             Assert.fail(testMethod.getName() + " is marked as not implemented but already works");
         }
         catch (final Exception e) {
-            if (LOG.isInfoEnabled()) {
-                LOG.info(testMethod.getName() + " fails which is normal as it is not yet implemented");
-            }
+            LOG.info(testMethod.getName() + " fails which is normal as it is not yet implemented");
             // method execution failed, it is really "not yet implemented"
         }
         finally {

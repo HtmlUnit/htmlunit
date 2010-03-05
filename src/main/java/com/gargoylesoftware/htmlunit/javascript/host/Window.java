@@ -183,9 +183,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         final String stringMessage = Context.toString(message);
         final AlertHandler handler = getWebWindow().getWebClient().getAlertHandler();
         if (handler == null) {
-            if (LOG.isWarnEnabled()) {
-                LOG.warn("window.alert(\"" + stringMessage + "\") no alert handler installed");
-            }
+            LOG.warn("window.alert(\"" + stringMessage + "\") no alert handler installed");
         }
         else {
             handler.handleAlert(document_.getHtmlPage(), stringMessage);
@@ -218,10 +216,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     public boolean jsxFunction_confirm(final String message) {
         final ConfirmHandler handler = getWebWindow().getWebClient().getConfirmHandler();
         if (handler == null) {
-            if (LOG.isWarnEnabled()) {
-                LOG.warn("window.confirm(\""
-                        + message + "\") no confirm handler installed, simulating the OK button");
-            }
+            LOG.warn("window.confirm(\""
+                    + message + "\") no confirm handler installed, simulating the OK button");
             return true;
         }
         return handler.handleConfirm(document_.getHtmlPage(), message);
@@ -235,9 +231,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     public String jsxFunction_prompt(final String message) {
         final PromptHandler handler = getWebWindow().getWebClient().getPromptHandler();
         if (handler == null) {
-            if (LOG.isWarnEnabled()) {
-                LOG.warn("window.prompt(\"" + message + "\") no prompt handler installed");
-            }
+            LOG.warn("window.prompt(\"" + message + "\") no prompt handler installed");
             return null;
         }
         return handler.handlePrompt(document_.getHtmlPage(), message);
@@ -376,9 +370,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             return new URL(urlString);
         }
         catch (final MalformedURLException e) {
-            if (LOG.isErrorEnabled()) {
-                LOG.error("Unable to create URL for openWindow: relativeUrl=[" + urlString + "]", e);
-            }
+            LOG.error("Unable to create URL for openWindow: relativeUrl=[" + urlString + "]", e);
             return null;
         }
     }
@@ -1186,9 +1178,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             return null;
         }
         else if ("vbscript".equalsIgnoreCase(languageStr)) {
-            if (LOG.isWarnEnabled()) {
-                LOG.warn("VBScript not supported in Window.execScript().");
-            }
+            LOG.warn("VBScript not supported in Window.execScript().");
         }
         else {
             // Unrecognized language: use the IE error message ("Invalid class string").

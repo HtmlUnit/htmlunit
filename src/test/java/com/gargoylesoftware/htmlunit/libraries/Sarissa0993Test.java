@@ -83,9 +83,7 @@ public class Sarissa0993Test extends WebServerTestCase {
                 final File tmpDir = new File(System.getProperty("java.io.tmpdir"));
                 final File f = new File(tmpDir, "sarissa0993_result.html");
                 FileUtils.writeStringToFile(f, Page_.asXml(), "UTF-8");
-                if (LOG.isInfoEnabled()) {
-                    LOG.info("Test result written to: " + f.getAbsolutePath());
-                }
+                LOG.info("Test result written to: " + f.getAbsolutePath());
             }
         }
     }

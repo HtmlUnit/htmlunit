@@ -46,9 +46,7 @@ public class StrictErrorReporter implements ErrorReporter, Serializable {
     public void warning(
             final String message, final String sourceName, final int line,
             final String lineSource, final int lineOffset) {
-        if (LOG.isWarnEnabled()) {
-            LOG.warn(format("warning", message, sourceName, line, lineSource, lineOffset));
-        }
+        LOG.warn(format("warning", message, sourceName, line, lineSource, lineOffset));
     }
 
     /**
@@ -60,12 +58,9 @@ public class StrictErrorReporter implements ErrorReporter, Serializable {
      * @param lineSource the source code that failed
      * @param lineOffset the line offset
      */
-    public void error(
-            final String message, final String sourceName, final int line,
+    public void error(final String message, final String sourceName, final int line,
             final String lineSource, final int lineOffset) {
-        if (LOG.isErrorEnabled()) {
-            LOG.error(format("error", message, sourceName, line, lineSource, lineOffset));
-        }
+        LOG.error(format("error", message, sourceName, line, lineSource, lineOffset));
         throw new EvaluatorException(message, sourceName, line, lineSource, lineOffset);
     }
 
@@ -82,9 +77,7 @@ public class StrictErrorReporter implements ErrorReporter, Serializable {
     public EvaluatorException runtimeError(
             final String message, final String sourceName, final int line,
             final String lineSource, final int lineOffset) {
-        if (LOG.isErrorEnabled()) {
-            LOG.error(format("runtimeError", message, sourceName, line, lineSource, lineOffset));
-        }
+        LOG.error(format("runtimeError", message, sourceName, line, lineSource, lineOffset));
         return new EvaluatorException(message, sourceName, line, lineSource, lineOffset);
     }
 
