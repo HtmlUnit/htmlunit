@@ -45,9 +45,10 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.w3c.dom.NodeList;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.HttpMethod;
@@ -62,6 +63,8 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlElementTest.HtmlAttributeChangeListenerTestImpl;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -78,6 +81,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class HtmlPageTest extends WebServerTestCase {
 
     /**
@@ -312,7 +316,7 @@ public class HtmlPageTest extends WebServerTestCase {
             + "<form id='form1'>\n"
             + "<table><tr><td><input type='text' id='foo'/></td></tr></table>\n"
             + "</form></body></html>";
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(htmlContent);
@@ -405,7 +409,7 @@ public class HtmlPageTest extends WebServerTestCase {
             + "  <a href='somepage.html'>\n"
             + "</body></html>";
 
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final List<String> collectedIncorrectness = new ArrayList<String>();
         final IncorrectnessListener listener = new IncorrectnessListener() {
             public void notify(final String message, final Object origin) {
@@ -438,7 +442,7 @@ public class HtmlPageTest extends WebServerTestCase {
             + "  <a href='somepage.html'>\n"
             + "</body></html>";
 
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final List<String> collectedIncorrectness = new ArrayList<String>();
         final IncorrectnessListener listener = new IncorrectnessListener() {
             public void notify(final String message, final Object origin) {
@@ -641,7 +645,7 @@ public class HtmlPageTest extends WebServerTestCase {
             + "</head><body></body></html>";
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html, "text/html; charset=UTF-8");
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         client.setWebConnection(conn);
         final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals("UTF-8", page.getPageEncoding());
@@ -710,7 +714,7 @@ public class HtmlPageTest extends WebServerTestCase {
             + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"1\">\n"
             + "</head><body></body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final List<Object> collectedItems = new ArrayList<Object>();
         client.setRefreshHandler(new LoggingRefreshHandler(collectedItems));
 
@@ -738,7 +742,7 @@ public class HtmlPageTest extends WebServerTestCase {
             + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"1\">\n"
             + "</head><body></body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         assertTrue(ImmediateRefreshHandler.class.isInstance(client.getRefreshHandler()));
         try {
             loadPage(firstContent);
@@ -775,7 +779,7 @@ public class HtmlPageTest extends WebServerTestCase {
             + "</head><body></body></html>";
         final String secondContent = "<html><head><title>second</title></head><body></body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -800,7 +804,7 @@ public class HtmlPageTest extends WebServerTestCase {
             + "</head><body></body></html>";
         final String secondContent = "<html><head><title>second</title></head><body></body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -826,7 +830,7 @@ public class HtmlPageTest extends WebServerTestCase {
             + "</head><body></body></html>";
         final String secondContent = "<html><head><title>second</title></head><body></body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final List<Object> collectedItems = new ArrayList<Object>();
         client.setRefreshHandler(new LoggingRefreshHandler(collectedItems));
 
@@ -875,7 +879,7 @@ public class HtmlPageTest extends WebServerTestCase {
             + "</head><body></body></html>";
         final String secondContent = "<html><head><title>second</title></head><body></body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections
@@ -999,7 +1003,7 @@ public class HtmlPageTest extends WebServerTestCase {
             + "<body><div></div><iframe src='about:blank'></iframe></body>"
             + "</html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(html);
         webConnection.setResponse(new URL(URL_FIRST, "script.js"), "", "text/javascript");
@@ -1045,7 +1049,7 @@ public class HtmlPageTest extends WebServerTestCase {
             + "<head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'></head>\n"
             + "<body><span id='foo'>" + unicodeString + "</span></body></html>";
 
-        final WebClient client = new WebClient(BrowserVersion.getDefault());
+        final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
         webConnection.setDefaultResponse(TextUtil.stringToByteArray(html, "UTF-8"), 200, "OK", "text/html");
@@ -1241,6 +1245,7 @@ public class HtmlPageTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented(Browser.IE) // in fact IE seems to perform other requests
     public void testNoSlashURL() throws Exception {
         testNoSlashURL("http:/second");
         testNoSlashURL("http:second");
@@ -1253,7 +1258,7 @@ public class HtmlPageTest extends WebServerTestCase {
             + "</body></html>";
 
         final String secondContent = "<html><body></body></html>";
-        final WebClient client = new WebClient(BrowserVersion.FIREFOX_3);
+        final WebClient client = getWebClient();
 
         final URL secondURL = new URL("http://second/");
         final MockWebConnection webConnection = new MockWebConnection();
@@ -1273,7 +1278,7 @@ public class HtmlPageTest extends WebServerTestCase {
      */
     @Test
     public void testMetaTagWithEmptyURL() throws Exception {
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         client.setRefreshHandler(new ImmediateRefreshHandler());
 
         // connection will return a page with <meta ... refresh> for the first call
@@ -1658,7 +1663,7 @@ public class HtmlPageTest extends WebServerTestCase {
 
         final String[] expectedAlerts = {"foo", "bar"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, htmlContent);
@@ -1675,8 +1680,7 @@ public class HtmlPageTest extends WebServerTestCase {
      */
     @Test
     public void testOnbeforeunloadHandler_ok() throws Exception {
-        testOnbeforeunloadHandler(BrowserVersion.INTERNET_EXPLORER_7, true, "second");
-        testOnbeforeunloadHandler(BrowserVersion.FIREFOX_3, true, "second");
+        testOnbeforeunloadHandler(true, "second");
     }
 
     /**
@@ -1684,8 +1688,7 @@ public class HtmlPageTest extends WebServerTestCase {
      */
     @Test
     public void testOnbeforeunloadHandler_cancel() throws Exception {
-        testOnbeforeunloadHandler(BrowserVersion.INTERNET_EXPLORER_7, false, "first");
-        testOnbeforeunloadHandler(BrowserVersion.FIREFOX_3, false, "first");
+        testOnbeforeunloadHandler(false, "first");
     }
 
     /**
@@ -1693,9 +1696,8 @@ public class HtmlPageTest extends WebServerTestCase {
      * @param handlerOk whether <tt>OnbeforeunloadHandler.handleEvent</tt> will return <tt>true</tt> of <tt>false</tt>
      * @param expectedPageTitle the expected title of the page after clicking
      */
-    private void testOnbeforeunloadHandler(final BrowserVersion browserVersion, final boolean handlerOk,
-        final String expectedPageTitle) throws Exception {
-        final WebClient webClient = new WebClient(browserVersion);
+    private void testOnbeforeunloadHandler(final boolean handlerOk, final String expectedPageTitle) throws Exception {
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         final List<String> collectedConfirms = new ArrayList<String>();
 
@@ -1831,7 +1833,7 @@ public class HtmlPageTest extends WebServerTestCase {
         map.put("/one.html", RefreshServlet.class);
         map.put("/two.html", RefreshServlet.class);
         startWebServer(".", null, map);
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final HtmlPage page = client.getPage("http://localhost:" + PORT + "/one.html");
         final HtmlSubmitInput submit = page.getHtmlElementById("myButton");
         final HtmlPage secondPage = submit.click();

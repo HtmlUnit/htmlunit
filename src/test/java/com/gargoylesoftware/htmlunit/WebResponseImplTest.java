@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.lang.ArrayUtils;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -41,6 +42,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class WebResponseImplTest extends WebServerTestCase {
 
     /**
@@ -55,7 +57,7 @@ public class WebResponseImplTest extends WebServerTestCase {
     }
 
     private void recognizeBOM(final String encoding, final byte[] markerBytes) throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
 
@@ -91,7 +93,7 @@ public class WebResponseImplTest extends WebServerTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         final List< ? extends NameValuePair> emptyList = Collections.emptyList();
@@ -117,7 +119,7 @@ public class WebResponseImplTest extends WebServerTestCase {
             + "</books>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         final List< ? extends NameValuePair> emptyList = Collections.emptyList();
@@ -136,11 +138,7 @@ public class WebResponseImplTest extends WebServerTestCase {
             + "<head><meta content='text/html; charset=utf-8' http-equiv='Content-Type'/></head>\n"
             + "<body>foo</body>\n"
             + "</html>";
-        final WebClient client = new WebClient();
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
-        client.setWebConnection(conn);
-        final HtmlPage page = client.getPage(URL_FIRST);
+        final HtmlPage page = loadPage(html);
         assertEquals("utf-8", page.getWebResponse().getContentCharsetOrNull());
     }
 
@@ -161,7 +159,7 @@ public class WebResponseImplTest extends WebServerTestCase {
         final List<NameValuePair> headers = new ArrayList<NameValuePair>();
         headers.add(new NameValuePair("Content-Type", cntTypeHeader));
         conn.setDefaultResponse("<html/>", 200, "OK", "text/html", headers);
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         webClient.setWebConnection(conn);
 
         final Page page = webClient.getPage(URL_FIRST);
@@ -177,7 +175,7 @@ public class WebResponseImplTest extends WebServerTestCase {
         final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
         servlets.put("/test", ResponseHeadersServlet.class);
         startWebServer("./", null, servlets);
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final HtmlPage page = client.getPage("http://localhost:" + PORT + "/test");
         assertEquals("some_value", page.getWebResponse().getResponseHeaderValue("some_header"));
     }

@@ -28,7 +28,9 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -39,6 +41,9 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -52,6 +57,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ahmed Ashour
  * @author Philip Graf
  */
+@RunWith(BrowserRunner.class)
 public class HtmlFormTest extends WebTestCase {
 
     /**
@@ -187,7 +193,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</body></html>";
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -220,7 +226,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</body></html>";
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -253,7 +259,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</body></html>";
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstHtml);
         webConnection.setDefaultResponse(secondHtml);
@@ -278,7 +284,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</body></html>";
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         client.setJavaScriptEnabled(false);
 
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -313,7 +319,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</body></html>";
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -344,7 +350,7 @@ public class HtmlFormTest extends WebTestCase {
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         client.setJavaScriptEnabled(false);
 
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -431,7 +437,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</body></html>";
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -777,7 +783,7 @@ public class HtmlFormTest extends WebTestCase {
             + "<form id='form1' target='window2' action='" + URL_SECOND + "' method='post'>\n"
             + "    <input type='submit' name='button' value='push me'/>\n"
             + "</form></body></html>";
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, html);
@@ -875,7 +881,7 @@ public class HtmlFormTest extends WebTestCase {
             + "<input type='submit' name='dispatch' value='Save' id='submitButton'>\n"
             + "<input type='hidden' name='dispatch' value='TAB'>\n"
             + "</form></body></html>";
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(html);
@@ -908,7 +914,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</body></html>";
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstHtml);
@@ -933,6 +939,7 @@ public class HtmlFormTest extends WebTestCase {
       * @throws Exception if the test fails
       */
     @Test
+    @Alerts("clicked")
     public void testJSSubmit_JavaScriptAction() throws Exception {
         final String html
             = "<html><head><title>First</title></head>\n"
@@ -941,13 +948,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"clicked"};
-        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(html, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -1066,7 +1067,7 @@ public class HtmlFormTest extends WebTestCase {
             + "<input type='text' name='nonAscii' value='Flo\u00DFfahrt'/>\n"
             + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         client.setWebConnection(webConnection);
@@ -1092,12 +1093,6 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSumbit_submitInputValue() throws Exception {
-        testSumbit_submitInputValue(BrowserVersion.INTERNET_EXPLORER_6);
-        //test FF separately as value is not to DEFAULT_VALUE if not specified.
-        testSumbit_submitInputValue(BrowserVersion.FIREFOX_3);
-    }
-
-    private void testSumbit_submitInputValue(final BrowserVersion browserVersion) throws Exception {
         final String html =
             "<html><head>\n"
             + "</head>\n"
@@ -1107,7 +1102,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final HtmlPage firstPage = loadPage(browserVersion, html, null);
+        final HtmlPage firstPage = loadPage(html);
         final HtmlSubmitInput submitInput = firstPage.getHtmlElementById("myButton");
         final HtmlPage secondPage = submitInput.click();
         assertEquals(URL_SECOND + "?Save=Submit+Query", secondPage.getWebResponse().getRequestSettings().getUrl());
@@ -1136,7 +1131,7 @@ public class HtmlFormTest extends WebTestCase {
 
         final String[] expectedAlerts = {"number", "false"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, firstHtml);
@@ -1157,13 +1152,6 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     public void testSubmitURLWithoutParameters() throws Exception {
-        testSubmitURLWithoutParameters(BrowserVersion.INTERNET_EXPLORER_7, URL_SECOND.toExternalForm());
-        testSubmitURLWithoutParameters(BrowserVersion.INTERNET_EXPLORER_6, URL_SECOND.toExternalForm() + '?');
-        testSubmitURLWithoutParameters(BrowserVersion.FIREFOX_3, URL_SECOND.toExternalForm() + '?');
-    }
-
-    private void testSubmitURLWithoutParameters(final BrowserVersion browserVersion, final String expectedURL)
-        throws Exception {
         final String firstHtml = "<html><head><title>foo</title></head><body>\n"
             + "<form action='" + URL_SECOND + "'>\n"
             + "  <input type='submit' name='mySubmit' onClick='document.forms[0].submit(); return false;'>\n"
@@ -1172,7 +1160,7 @@ public class HtmlFormTest extends WebTestCase {
         final String secondHtml = "<html><head><title>second</title></head></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = new WebClient(browserVersion);
+        final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, firstHtml);
@@ -1183,6 +1171,11 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlForm form = page.getForms().get(0);
         final HtmlSubmitInput submit = form.getInputByName("mySubmit");
         final HtmlPage secondPage = submit.click();
+
+        String expectedURL = URL_SECOND.toString();
+        if (getBrowserVersion().isFirefox() || getBrowserVersion().equals(BrowserVersion.INTERNET_EXPLORER_6)) {
+            expectedURL += "?";
+        }
         assertEquals(expectedURL, secondPage.getWebResponse().getRequestSettings().getUrl());
     }
 
@@ -1190,6 +1183,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test page can't be loaded
      */
     @Test
+    @Alerts({ "1", "val2" })
     public void malformedHtml_nestedForms() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -1206,12 +1200,7 @@ public class HtmlFormTest extends WebTestCase {
             + "    </form>\n"
             + "</form></body></html>";
 
-        final String[] expectedAlerts = {"1", "val2"};
-        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -1315,6 +1304,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented(Browser.FF3)
     public void base() throws Exception {
         final String html
             = "<html><head>\n"
@@ -1325,13 +1315,20 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         HtmlPage page = loadPage(html);
         page = page.<HtmlSubmitInput>getFirstByXPath("//input").click();
-        assertEquals(URL_SECOND.toExternalForm() + "two.html", page.getWebResponse().getRequestSettings().getUrl());
+
+        String expectedUrl = URL_SECOND.toExternalForm() + "two.html";
+        if (BrowserVersion.FIREFOX_2.equals(getBrowserVersion())
+            || BrowserVersion.INTERNET_EXPLORER_6.equals(getBrowserVersion())) {
+            expectedUrl += "?";
+        }
+        assertEquals(expectedUrl, page.getWebResponse().getRequestSettings().getUrl());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented(Browser.FF3)
     public void emptyActionWithBase() throws Exception {
         final String html
             = "<html><head>\n"
@@ -1342,7 +1339,13 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         HtmlPage page = loadPage(html);
         page = page.<HtmlSubmitInput>getFirstByXPath("//input").click();
-        assertEquals(getDefaultUrl(), page.getWebResponse().getRequestSettings().getUrl());
+
+        String expectedUrl = getDefaultUrl().toExternalForm();
+        if (BrowserVersion.FIREFOX_2.equals(getBrowserVersion())
+            || BrowserVersion.INTERNET_EXPLORER_6.equals(getBrowserVersion())) {
+            expectedUrl += "?";
+        }
+        assertEquals(expectedUrl, page.getWebResponse().getRequestSettings().getUrl());
     }
 
     /**

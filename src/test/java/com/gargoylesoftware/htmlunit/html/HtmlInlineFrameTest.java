@@ -20,12 +20,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Unit tests for {@link HtmlInlineFrame}.
@@ -36,6 +38,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Daniel Gredler
  */
+@RunWith(BrowserRunner.class)
 public class HtmlInlineFrameTest extends WebTestCase {
 
     /**
@@ -49,7 +52,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
             + "</body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -81,7 +84,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
             + "</body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -128,7 +131,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
             + "</body></html>";
         final String secondContent = "<html><head><title>Second</title></head>\n"
             + "<body><iframe id='iframe2_1' src='" + URL_FIRST + "'></iframe></body></html>";
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -176,7 +179,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
             + "</script></body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -209,7 +212,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
             = "<html><body><script>alert(2);</script></body></html>";
         final String thirdContent
             = "alert('3');";
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -230,6 +233,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = "[object HTMLIFrameElement]", IE = "[object]")
     public void testSimpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -241,11 +245,8 @@ public class HtmlInlineFrameTest extends WebTestCase {
             + "  <iframe id='myId'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"[object HTMLIFrameElement]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
+        final HtmlPage page = loadPageWithAlerts(html);
         assertTrue(HtmlInlineFrame.class.isInstance(page.getHtmlElementById("myId")));
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -257,7 +258,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
         final String html1 = "<html><body><iframe src='" + URL_SECOND + "'></iframe></body></html>";
         final String html2 = "<html><body>abc</body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html1);
@@ -283,7 +284,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
             + "</body></html>";
         final String html2 = "<html><body>abc</body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html1);

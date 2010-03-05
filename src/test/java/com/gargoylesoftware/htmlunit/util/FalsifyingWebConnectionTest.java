@@ -21,7 +21,9 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -36,6 +38,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public class FalsifyingWebConnectionTest extends WebTestCase {
 
     /**
@@ -43,7 +46,7 @@ public class FalsifyingWebConnectionTest extends WebTestCase {
      */
     @Test
     public void blockSomeRequests() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
 
         final String html = "<html><head>\n"
             + "<script src='http://www.google-analytics.com/ga.js'></script>\n"
@@ -84,7 +87,7 @@ public class FalsifyingWebConnectionTest extends WebTestCase {
      */
     @Test
     public void simulateHttpError() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
 
         final String html = "<html><head>\n"
             + "<script src='myJs.js'></script>\n"

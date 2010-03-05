@@ -29,7 +29,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.httpclient.HttpState;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.Cookie;
@@ -41,6 +44,7 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class CookieManagerTest extends WebServerTestCase {
 
     /**
@@ -48,6 +52,7 @@ public class CookieManagerTest extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Browsers(Browser.NONE)
     public void basicBehavior() throws Exception {
         // Create a new cookie manager.
         final CookieManager mgr = new CookieManager();
@@ -127,7 +132,7 @@ public class CookieManagerTest extends WebServerTestCase {
         startWebServer("./", null, servlets);
 
         final String[] expectedAlerts = {"my_key=\"Hello, big, big, world\"; another_key=Hi"};
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         client.getPage("http://localhost:" + PORT + "/test");
@@ -166,7 +171,7 @@ public class CookieManagerTest extends WebServerTestCase {
         startWebServer("./", null, servlets);
 
         final String[] expectedAlerts = {"key1=; key2="};
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         client.getPage("http://localhost:" + PORT + "/test");
@@ -205,7 +210,7 @@ public class CookieManagerTest extends WebServerTestCase {
         startWebServer("./", null, servlets);
 
         final String[] expectedAlerts = {"nbCalls=1", "nbCalls=2"};
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -296,7 +301,7 @@ public class CookieManagerTest extends WebServerTestCase {
         startWebServer("./", null, servlets);
 
         final String[] expectedAlerts = {"first=1", "first=1; second=2"};
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -339,7 +344,7 @@ public class CookieManagerTest extends WebServerTestCase {
      */
     @Test
     public void cookie_nullValue() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
         final String html

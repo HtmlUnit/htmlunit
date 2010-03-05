@@ -227,7 +227,9 @@ public abstract class WebTestCase {
     protected final HtmlPage loadPage(final BrowserVersion browserVersion,
             final String html, final List<String> collectedAlerts, final URL url) throws Exception {
 
-        webClient_ = new WebClient(browserVersion);
+        if (webClient_ == null) {
+            webClient_ = new WebClient(browserVersion);
+        }
         return loadPage(webClient_, html, collectedAlerts, url);
     }
 

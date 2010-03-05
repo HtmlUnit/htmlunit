@@ -161,6 +161,8 @@ public class WebClient2Test extends WebServerTestCase {
 
         textPage = copy.getPage("http://localhost:" + PORT + "/LICENSE.txt");
         assertTrue(textPage.getContent().contains("Gargoyle Software"));
+
+        copy.closeAllWindows();
     }
 
     /**
@@ -178,6 +180,7 @@ public class WebClient2Test extends WebServerTestCase {
         final WebClient copy = clone(client);
         final HtmlPage page2 = loadPage(copy, page2Content, null, URL_SECOND);
         assertEquals("hello 2", page2.asText());
+        copy.closeAllWindows();
     }
 
     /**
