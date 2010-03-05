@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link HtmlFrameSet}.
@@ -364,10 +365,8 @@ public class HtmlFrameSetTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented
     public void onunload() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String mainHtml =
             "<frameset onunload=\"document.location.href='3.html'\">\n"
             + "<frame name='f1' src='1.html'/>\n"
