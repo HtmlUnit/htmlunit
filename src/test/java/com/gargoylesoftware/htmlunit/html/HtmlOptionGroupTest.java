@@ -14,13 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link HtmlOptionGroup}.
@@ -29,12 +28,14 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
+@RunWith(BrowserRunner.class)
 public class HtmlOptionGroupTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = "[object HTMLOptGroupElement]", IE = "[object]")
     public void testSimpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -50,24 +51,16 @@ public class HtmlOptionGroupTest extends WebTestCase {
             + "  </select>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"[object HTMLOptGroupElement]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
+        final HtmlPage page = loadPageWithAlerts(html);
         assertTrue(HtmlOptionGroup.class.isInstance(page.getHtmlElementById("myId")));
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({ "false", "false", "true", "false", "true", "false", "false", "false" })
     public void testDisabled() throws Exception {
-        testDisabled(BrowserVersion.FIREFOX_3, true, false);
-        testDisabled(BrowserVersion.INTERNET_EXPLORER_6, false, false);
-        testDisabled(BrowserVersion.INTERNET_EXPLORER_7, false, false);
-    }
-
-    private void testDisabled(final BrowserVersion version, final boolean d1, final boolean d2) throws Exception {
         final String html = "<html><body onload='test()'><form name='f'>\n"
             + "  <select name='s' id='s'>\n"
             + "    <optgroup id='g1' label='group 1'>\n"
@@ -98,12 +91,11 @@ public class HtmlOptionGroupTest extends WebTestCase {
             + "    }\n"
             + "  </script>\n"
             + "</form></body></html>";
-        final String[] expected = {"false", "false", "true", "false", "true", "false", "false", "false"};
-        final List<String> actual = new ArrayList<String>();
-        final HtmlPage page = loadPage(version, html, actual);
-        assertEquals(expected, actual);
-        assertEquals(d1, ((HtmlOptionGroup) page.getElementById("g1")).isDisabled());
-        assertEquals(d2, ((HtmlOptionGroup) page.getElementById("g2")).isDisabled());
+
+        final HtmlPage page = loadPageWithAlerts(html);
+        final boolean disabled = getBrowserVersion().isFirefox();
+        assertEquals(disabled, ((HtmlOptionGroup) page.getElementById("g1")).isDisabled());
+        assertFalse(((HtmlOptionGroup) page.getElementById("g2")).isDisabled());
     }
 
 }
