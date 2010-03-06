@@ -14,9 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-
 import com.gargoylesoftware.htmlunit.html.BaseFrame;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLDocumentProxy;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.WindowProxy;
 
@@ -48,22 +47,20 @@ public class HTMLFrameElement extends HTMLElement {
     /**
      * Returns the document the frame contains, if any.
      * @return <code>null</code> if no document is contained
-     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_frame_ref4.html">
-     * Gecko DOM Reference</a>
+     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_frame_ref4.html">Gecko DOM Reference</a>
      */
-    public HTMLDocument jsxGet_contentDocument() {
+    public HTMLDocumentProxy jsxGet_contentDocument() {
         return ((Window) getFrame().getEnclosedWindow().getScriptObject()).jsxGet_document();
     }
 
     /**
      * Returns the window the frame contains, if any.
      * @return the window
-     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_frame_ref5.html">
-     * Gecko DOM Reference</a>
+     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_frame_ref5.html">Gecko DOM Reference</a>
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533692.aspx">MSDN documentation</a>
      */
-    public Scriptable jsxGet_contentWindow() {
-        return new WindowProxy(getFrame().getEnclosedWindow());
+    public WindowProxy jsxGet_contentWindow() {
+        return Window.getProxy(getFrame().getEnclosedWindow());
     }
 
     /**

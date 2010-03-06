@@ -809,7 +809,7 @@ public class WebClient implements Serializable {
             final Window jsWindow = (Window) currentWindow_.getScriptObject();
             if (jsWindow != null) {
                 if (getBrowserVersion().isIE()) {
-                    final HTMLElement activeElement = (HTMLElement) jsWindow.jsxGet_document().jsxGet_activeElement();
+                    final HTMLElement activeElement = (HTMLElement) jsWindow.getDocument().jsxGet_activeElement();
                     if (activeElement != null) {
                         ((HtmlPage) enclosedPage).setFocusedElement(activeElement.getDomNodeOrDie(), true);
                     }
@@ -904,7 +904,7 @@ public class WebClient implements Serializable {
             if (openerPage != null) {
                 final Window jsWindow = (Window) window.getScriptObject();
                 jsWindow.setDomNode(openerPage);
-                jsWindow.jsxGet_document().setDomNode(openerPage);
+                jsWindow.getDocument().setDomNode(openerPage);
             }
         }
         return window;

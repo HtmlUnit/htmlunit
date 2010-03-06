@@ -16,24 +16,29 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptableProxy;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 
 /**
- * Proxy for a {@link Window} script object.
+ * Proxy for a {@link HTMLDocument} script object. In theory we could satisfy single-document requirements
+ * without a proxy, by reusing (with appropriate cleanup and re-initialization) a single {@link HTMLDocument}
+ * instance across various pages. However, we allow users to keep references to old pages as they navigate
+ * across a series of pages, and all of these pages need to be usable -- so we can't just leave these old
+ * pages without a <tt>window.document</tt> object.
  *
  * @version $Revision$
- * @author Marc Guillemot
+ * @author Daniel Gredler
  */
-public class WindowProxy extends SimpleScriptableProxy<Window> {
+public class HTMLDocumentProxy extends SimpleScriptableProxy<HTMLDocument> {
 
-    private static final long serialVersionUID = -9124838618636683398L;
+    private static final long serialVersionUID = -6997147276828365589L;
 
     private final WebWindow webWindow_;
 
     /**
-     * Construct a proxy for the {@link Window} of the {@link WebWindow}.
+     * Construct a proxy for the {@link HTMLDocument} of the {@link WebWindow}.
      * @param webWindow the window
      */
-    public WindowProxy(final WebWindow webWindow) {
+    public HTMLDocumentProxy(final WebWindow webWindow) {
         webWindow_ = webWindow;
     }
 
@@ -41,8 +46,9 @@ public class WindowProxy extends SimpleScriptableProxy<Window> {
      * {@inheritDoc}
      */
     @Override
-    public Window getDelegee() {
-        return (Window) webWindow_.getScriptObject();
+    public HTMLDocument getDelegee() {
+        final Window w = (Window) webWindow_.getScriptObject();
+        return w.getDocument();
     }
 
 }

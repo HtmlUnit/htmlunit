@@ -901,4 +901,19 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     public void canAlreadyBeParsed() {
         assertTrue(HTMLDocument.canAlreadyBeParsed("<img src='foo' alt=\"<'>\"></img>"));
     }
+
+    /**
+     * Regression test for a bug introduced by the document proxy and detected by the Dojo JavaScript library tests.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void equalityViaDifferentPaths() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<script>alert(document.body.parentNode.parentNode === document)</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }

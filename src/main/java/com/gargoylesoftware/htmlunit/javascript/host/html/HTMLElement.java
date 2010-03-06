@@ -72,6 +72,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.BoxObject;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLDocumentProxy;
 import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.TextRange;
@@ -306,7 +307,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns the document.
      * @return the document
      */
-    public HTMLDocument jsxGet_document() {
+    public HTMLDocumentProxy jsxGet_document() {
         return getWindow().jsxGet_document();
     }
 
@@ -1900,7 +1901,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @see #jsxGet_parentNode()
      */
     public HTMLElement jsxGet_parentElement() {
-        final Node parent = jsxGet_parentNode();
+        final Node parent = getParent();
         if (!(parent instanceof HTMLElement)) {
             return null;
         }
@@ -1909,14 +1910,14 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Gets the first ancestor instance of {@link HTMLElement}. It is mostly identical
-     * to {@link #jsxGet_parentNode()} except that it skips XML nodes.
+     * to {@link #getParent()} except that it skips XML nodes.
      * @return the parent HTML element
-     * @see #jsxGet_parentNode()
+     * @see #getParent()
      */
     public HTMLElement getParentHTMLElement() {
-        Node parent = jsxGet_parentNode();
+        Node parent = getParent();
         while (parent != null && !(parent instanceof HTMLElement)) {
-            parent = parent.jsxGet_parentNode();
+            parent = parent.getParent();
         }
         return (HTMLElement) parent;
     }
@@ -2074,7 +2075,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     public void jsxFunction_setActive() {
         final Window window = getWindow();
-        final HTMLDocument document = window.jsxGet_document();
+        final HTMLDocument document = window.getDocument();
         document.setActiveElement(this);
         if (window.getWebWindow() == window.getWebWindow().getWebClient().getCurrentWindow()) {
             final HtmlElement element = getDomNodeOrDie();

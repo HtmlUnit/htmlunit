@@ -6,6 +6,10 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes, large file download">
+            <action type="fix" dev="sdanig" issue="2911299">
+                JavaScript: return window proxies from window.open(), window.top, window.parent, window.self, window.window and window.opener;
+                proxy window.document and frame.contentDocument, too.
+            </action>
             <action type="add" dev="asashour" issue="2892289">
                 JavaScript: add support for HTMLTableCellElement.width and .height attributes.
             </action>

@@ -463,11 +463,19 @@ public class Node extends SimpleScriptable {
     }
 
     /**
+     * Returns this node's parent node.
+     * @return this node's parent node
+     */
+    public Node getParent() {
+        return getJavaScriptNode(this.<DomNode>getDomNodeOrDie().getParentNode());
+    }
+
+    /**
      * Gets the JavaScript property "parentNode" for the node that
      * contains the current node.
      * @return the parent node
      */
-    public Node jsxGet_parentNode() {
+    public Object jsxGet_parentNode() {
         return getJavaScriptNode(this.<DomNode>getDomNodeOrDie().getParentNode());
     }
 

@@ -95,7 +95,7 @@ public class JavaScriptEngine {
     public static final String KEY_STARTING_PAGE = "startingPage";
 
     /**
-     * Creates an instance for the specified webclient.
+     * Creates an instance for the specified {@link WebClient}.
      *
      * @param webClient the client that will own this engine
      */
@@ -264,7 +264,7 @@ public class JavaScriptEngine {
 
     /**
      * Deletes the properties with the provided names.
-     * @param window the scope from which properties have to be remmoved
+     * @param window the scope from which properties have to be removed
      * @param propertiesToDelete the list of property names
      */
     private void deleteProperties(final Window window, final String... propertiesToDelete) {
@@ -471,7 +471,7 @@ public class JavaScriptEngine {
     /**
      * Calls the given function taking care of synchronization issues.
      * @param htmlPage the HTML page that caused this script to executed
-     * @param function the js function to execute
+     * @param function the JavaScript function to execute
      * @param context the context in which execution should occur
      * @param scope the execution scope
      * @param thisObject the 'this' object
@@ -489,8 +489,8 @@ public class JavaScriptEngine {
     }
 
     /**
-     * Indicates if JavaScript is running in current thread. <br/>
-     * This allows code to know if there own evaluation is has been  triggered by some JS code.
+     * Indicates if JavaScript is running in current thread.<br/>
+     * This allows code to know if there own evaluation is has been triggered by some JS code.
      * @return <code>true</code> if JavaScript is running
      */
     public boolean isScriptRunning() {

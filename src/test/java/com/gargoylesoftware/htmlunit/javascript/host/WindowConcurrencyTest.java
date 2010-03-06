@@ -460,14 +460,11 @@ public class WindowConcurrencyTest extends WebTestCase {
     }
 
     /**
-     * Our Window proxy causes troubles.
+     * Our Window proxy caused troubles.
      * @throws Exception if the test fails
      */
     @Test
     public void setTimeoutOnFrameWindow() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    frames[0].setTimeout(f, 0);\n"

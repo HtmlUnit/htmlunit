@@ -16,13 +16,14 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import java.lang.reflect.Method;
 
-import org.apache.commons.collections.Transformer;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
+import org.apache.commons.collections.Transformer;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebAssert;
@@ -62,6 +63,7 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
      */
     @Override
     public Object get(String name, final Scriptable start) {
+        // If this object is not case-sensitive about property names, transform the property name accordingly.
         if (!caseSensitive_) {
             for (final Object o : getAllIds()) {
                 if (name.equalsIgnoreCase(Context.toString(o))) {
@@ -70,12 +72,11 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
                 }
             }
         }
-        // try to get property configured on object itself
+        // Try to get property configured on object itself.
         final Object response = super.get(name, start);
         if (response != NOT_FOUND) {
             return response;
         }
-
         if (this == start) {
             return getWithPreemption(name);
         }
@@ -417,8 +418,8 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
      */
     @Override
     protected Object equivalentValues(Object value) {
-        if (value instanceof SimpleScriptableProxy) {
-            value = ((SimpleScriptableProxy) value).getWrappedScriptable();
+        if (value instanceof SimpleScriptableProxy<?>) {
+            value = ((SimpleScriptableProxy<?>) value).getDelegee();
         }
         return super.equivalentValues(value);
     }

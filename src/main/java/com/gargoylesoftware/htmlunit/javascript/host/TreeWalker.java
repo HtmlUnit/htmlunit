@@ -198,8 +198,7 @@ public class TreeWalker extends SimpleScriptable {
         if (acceptNode(n) == NodeFilter.FILTER_ACCEPT) {
             if (filter_ == null || filter_.acceptNode(n) == NodeFilter.FILTER_ACCEPT) {
                 if (!expandEntityReferences_) {
-                    if (n.jsxGet_parentNode() != null
-                            && n.jsxGet_parentNode().jsxGet_nodeType() == Node.ENTITY_REFERENCE_NODE) {
+                    if (n.getParent() != null && n.getParent().jsxGet_nodeType() == Node.ENTITY_REFERENCE_NODE) {
                         return false;
                     }
                 }
@@ -218,8 +217,7 @@ public class TreeWalker extends SimpleScriptable {
             return true;
         }
         if (!expandEntityReferences_) {
-            if (n.jsxGet_parentNode() != null
-                    && n.jsxGet_parentNode().jsxGet_nodeType() == Node.ENTITY_REFERENCE_NODE) {
+            if (n.getParent() != null && n.getParent().jsxGet_nodeType() == Node.ENTITY_REFERENCE_NODE) {
                 return true;
             }
         }
@@ -248,7 +246,7 @@ public class TreeWalker extends SimpleScriptable {
         Node newNode = currentNode_;
 
         do {
-            newNode = newNode.jsxGet_parentNode();
+            newNode = newNode.getParent();
         } while (newNode != null && !isNodeVisible(newNode) && newNode != root_);
 
         if (newNode == null || !isNodeVisible(newNode)) {
@@ -320,7 +318,7 @@ public class TreeWalker extends SimpleScriptable {
             if (n == root_) {
                 return null;
             }
-            return getSibling(n.jsxGet_parentNode(), lookLeft);
+            return getSibling(n.getParent(), lookLeft);
 
         }
         return getEquivalentLogical(sibling, lookLeft);
@@ -436,7 +434,7 @@ public class TreeWalker extends SimpleScriptable {
         }
         final Node left = getEquivalentLogical(n.jsxGet_previousSibling(), true);
         if (left == null) {
-            final Node parent = n.jsxGet_parentNode();
+            final Node parent = n.getParent();
             if (parent == null) {
                 return null;
             }
@@ -496,7 +494,7 @@ public class TreeWalker extends SimpleScriptable {
             return null;
         }
 
-        final Node parent = n.jsxGet_parentNode();
+        final Node parent = n.getParent();
         if (parent == null) {
             return null;
         }

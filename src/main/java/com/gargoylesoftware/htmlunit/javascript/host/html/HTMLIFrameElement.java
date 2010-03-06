@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import com.gargoylesoftware.htmlunit.html.BaseFrame;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLDocumentProxy;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
@@ -47,7 +48,7 @@ public class HTMLIFrameElement extends HTMLElement {
      * @return <code>null</code> if no document is contained
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_frame_ref4.html">Gecko DOM Reference</a>
      */
-    public HTMLDocument jsxGet_contentDocument() {
+    public HTMLDocumentProxy jsxGet_contentDocument() {
         return ((Window) getFrame().getEnclosedWindow().getScriptObject()).jsxGet_document();
     }
 

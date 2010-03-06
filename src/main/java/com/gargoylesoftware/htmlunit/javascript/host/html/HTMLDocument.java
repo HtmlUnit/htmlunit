@@ -70,6 +70,7 @@ import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLDocumentProxy;
 import com.gargoylesoftware.htmlunit.javascript.host.KeyboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.MutationEvent;
@@ -260,7 +261,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             final Scriptable scope = getParentScope();
             if (scope instanceof Window) {
                 final Window w = (Window) scope;
-                final HTMLDocument realDocument = w.jsxGet_document();
+                final HTMLDocument realDocument = w.getDocument();
                 if (realDocument != this) {
                     node = realDocument.getDomNodeOrDie();
                 }
@@ -441,10 +442,13 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         if (thisObj instanceof HTMLDocument && thisObj.getPrototype() instanceof HTMLDocument) {
             return (HTMLDocument) thisObj;
         }
+        else if (thisObj instanceof HTMLDocumentProxy && thisObj.getPrototype() instanceof HTMLDocument) {
+            return ((HTMLDocumentProxy) thisObj).getDelegee();
+        }
         final Window window = getWindow(thisObj);
         final BrowserVersion browser = window.getWebWindow().getWebClient().getBrowserVersion();
         if (browser.isIE()) {
-            return window.jsxGet_document();
+            return window.getDocument();
         }
         throw Context.reportRuntimeError("Function can't be used detached from document");
     }

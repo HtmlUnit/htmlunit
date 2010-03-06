@@ -113,8 +113,10 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     private static final int MIN_TIMER_DELAY = 1;
 
     private HTMLDocument document_;
+    private HTMLDocumentProxy documentProxy_;
     private Navigator navigator_;
     private WebWindow webWindow_;
+    private WindowProxy windowProxy_;
     private Screen screen_;
     private History history_;
     private Location location_;
@@ -241,7 +243,15 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the JavaScript property "document".
      * @return the document
      */
-    public HTMLDocument jsxGet_document() {
+    public HTMLDocumentProxy jsxGet_document() {
+        return documentProxy_;
+    }
+
+    /**
+     * Returns the window's current document.
+     * @return the window's current document
+     */
+    public HTMLDocument getDocument() {
         return document_;
     }
 
@@ -289,7 +299,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see WebClient#isPopupBlockerEnabled()
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536651.aspx">MSDN documentation</a>
      */
-    public Object jsxFunction_open(final Object url, final Object name, final Object features,
+    public WindowProxy jsxFunction_open(final Object url, final Object name, final Object features,
             final Object replace) {
         String urlString = null;
         if (url != Undefined.instance) {
@@ -333,7 +343,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             final WebWindow webWindow;
             try {
                 webWindow = webClient.getWebWindowByName(windowName);
-                return webWindow.getScriptObject();
+                return getProxy(webWindow);
             }
             catch (final WebWindowNotFoundException e) {
                 // nothing
@@ -341,7 +351,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         }
         final URL newUrl = makeUrlForOpenWindow(urlString);
         final WebWindow newWebWindow = webClient.openWindow(newUrl, windowName, webWindow_);
-        return newWebWindow.getScriptObject();
+        return getProxy(newWebWindow);
     }
 
     /**
@@ -456,16 +466,16 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the window property. This is a synonym for "self".
      * @return the window property (a reference to <tt>this</tt>)
      */
-    public Window jsxGet_window() {
-        return this;
+    public WindowProxy jsxGet_window() {
+        return windowProxy_;
     }
 
     /**
      * Returns the "self" property.
      * @return this
      */
-    public Window jsxGet_self() {
-        return this;
+    public WindowProxy jsxGet_self() {
+        return windowProxy_;
     }
 
     /**
@@ -520,6 +530,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         webWindow_ = webWindow;
         webWindow_.setScriptObject(this);
 
+        windowProxy_ = new WindowProxy(webWindow_);
+
         document_ = new HTMLDocument();
         document_.setParentScope(this);
         document_.setPrototype(getPrototype(document_.getClass()));
@@ -535,6 +547,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                 ((HtmlPage) page).addHtmlAttributeChangeListener(listener);
             }
         }
+
+        documentProxy_ = new HTMLDocumentProxy(webWindow_);
 
         navigator_ = new Navigator();
         navigator_.setParentScope(this);
@@ -599,26 +613,30 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the value of the top property.
      * @return the value of "top"
      */
-    public SimpleScriptable jsxGet_top() {
-        final WebWindow topWebWindow = webWindow_.getTopWindow();
-        return (SimpleScriptable) topWebWindow.getScriptObject();
+    public WindowProxy jsxGet_top() {
+        final WebWindow top = webWindow_.getTopWindow();
+        return getProxy(top);
     }
 
     /**
      * Returns the value of the parent property.
      * @return the value of window.parent
      */
-    public SimpleScriptable jsxGet_parent() {
-        final WebWindow parentWebWindow = webWindow_.getParentWindow();
-        return (SimpleScriptable) parentWebWindow.getScriptObject();
+    public WindowProxy jsxGet_parent() {
+        final WebWindow parent = webWindow_.getParentWindow();
+        return getProxy(parent);
     }
 
     /**
      * Returns the value of the opener property.
-     * @return the value of window.opener, <code>null</code> for a top level window
+     * @return the value of window.opener, <tt>null</tt> for a top level window
      */
     public Object jsxGet_opener() {
-        return opener_;
+        Object opener = opener_;
+        if (opener instanceof Window) {
+            opener = ((Window) opener).windowProxy_;
+        }
+        return opener;
     }
 
     /**
@@ -634,7 +652,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                 throw Context.reportRuntimeError("Can't set opener!");
             }
         }
-
         opener_ = newValue;
     }
 
@@ -654,8 +671,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the value of the frames property.
      * @return the value of the frames property
      */
-    public Object jsxGet_frames() {
-        return new WindowProxy(getWebWindow());
+    public WindowProxy jsxGet_frames() {
+        return windowProxy_;
     }
 
     /**
@@ -1090,7 +1107,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
             if (result instanceof Window) {
                 final WebWindow webWindow = ((Window) result).getWebWindow();
-                result = new WindowProxy(webWindow);
+                result = getProxy(webWindow);
             }
             else if (result instanceof HTMLUnknownElement && getBrowserVersion().isIE()) {
                 final HtmlElement unknownElement = ((HTMLUnknownElement) result).getDomNodeOrDie();
@@ -1160,6 +1177,15 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         catch (final ElementNotFoundException e) {
             return NOT_FOUND;
         }
+    }
+
+    /**
+     * Returns the proxy for the specified window.
+     * @param w the window whose proxy is to be returned
+     * @return the proxy for the specified window
+     */
+    public static WindowProxy getProxy(final WebWindow w) {
+        return ((Window) w.getScriptObject()).windowProxy_;
     }
 
     /**

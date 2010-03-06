@@ -138,7 +138,7 @@ public class Range extends SimpleScriptable {
         if (refNode == null) {
             throw Context.reportRuntimeError("It is illegal to call Range.setStartAfter() with a null node.");
         }
-        startContainer_ = refNode.jsxGet_parentNode();
+        startContainer_ = refNode.getParent();
         startOffset_ = getPositionInContainer(refNode) + 1;
     }
 
@@ -150,7 +150,7 @@ public class Range extends SimpleScriptable {
         if (refNode == null) {
             throw Context.reportRuntimeError("It is illegal to call Range.setStartBefore() with a null node.");
         }
-        startContainer_ = refNode.jsxGet_parentNode();
+        startContainer_ = refNode.getParent();
         startOffset_ = getPositionInContainer(refNode);
     }
 
@@ -193,7 +193,7 @@ public class Range extends SimpleScriptable {
         if (refNode == null) {
             throw Context.reportRuntimeError("It is illegal to call Range.setEndAfter() with a null node.");
         }
-        endContainer_ = refNode.jsxGet_parentNode();
+        endContainer_ = refNode.getParent();
         endOffset_ = getPositionInContainer(refNode) + 1;
     }
 
@@ -205,7 +205,7 @@ public class Range extends SimpleScriptable {
         if (refNode == null) {
             throw Context.reportRuntimeError("It is illegal to call Range.setEndBefore() with a null node.");
         }
-        startContainer_ = refNode.jsxGet_parentNode();
+        startContainer_ = refNode.getParent();
         startOffset_ = getPositionInContainer(refNode);
     }
 
@@ -281,7 +281,7 @@ public class Range extends SimpleScriptable {
         Node ancestor = node;
         while (ancestor != null) {
             ancestors.add(0, ancestor);
-            ancestor = ancestor.jsxGet_parentNode();
+            ancestor = ancestor.getParent();
         }
         return ancestors;
     }

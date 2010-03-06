@@ -852,9 +852,8 @@ public class HTMLDocumentWriteTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented
     @Alerts(FF = { "<form></form>", "[object HTMLFormElement]" }, IE = { "<FORM></FORM>", "[object]" })
-    public void testWriteOnOpenedWindow_WindowIsProxied() throws Exception {
+    public void writeOnOpenedWindow_WindowIsProxied() throws Exception {
         final String html
             = "<html><head><script>\n"
             + "function test(){\n"
@@ -874,9 +873,8 @@ public class HTMLDocumentWriteTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented
     @Alerts(FF = { "<form></form>", "[object HTMLFormElement]" }, IE = { "<FORM></FORM>", "[object]" })
-    public void testWriteOnOpenedWindow_DocumentIsProxied() throws Exception {
+    public void writeOnOpenedWindow_DocumentIsProxied() throws Exception {
         final String html
             = "<html><head><script>\n"
             + "function test(){\n"

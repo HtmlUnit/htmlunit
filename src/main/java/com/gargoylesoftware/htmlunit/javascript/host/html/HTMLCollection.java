@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
-import com.gargoylesoftware.htmlunit.javascript.host.WindowProxy;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -694,7 +694,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             return (Scriptable) object;
         }
         else if (object instanceof WebWindow) {
-            return new WindowProxy((WebWindow) object);
+            return Window.getProxy((WebWindow) object);
         }
         return getScriptableFor(object);
     }

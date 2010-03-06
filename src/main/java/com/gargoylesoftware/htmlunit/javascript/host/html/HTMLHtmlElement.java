@@ -32,19 +32,19 @@ public class HTMLHtmlElement extends HTMLElement {
         // Empty.
     }
 
-    /**
-     * Returns "clientWidth" attribute.
-     * @return the clientWidth attribute
-     */
+    /** {@inheritDoc} */
+    @Override
+    public Object jsxGet_parentNode() {
+        return getWindow().jsxGet_document();
+    }
+
+    /** {@inheritDoc} */
     @Override
     public int jsxGet_clientWidth() {
         return getWindow().jsxGet_innerWidth();
     }
 
-    /**
-     * Returns "clientWidth" attribute.
-     * @return the clientWidth attribute
-     */
+    /** {@inheritDoc} */
     @Override
     public int jsxGet_clientHeight() {
         return getWindow().jsxGet_innerHeight();

@@ -123,6 +123,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("HTMLCollection");
         names.remove("HTMLCollectionTags");
         names.remove("HTMLDocument");
+        names.remove("HTMLDocumentProxy");
         names.remove("HTMLListElement");
         names.remove("HTMLOptionsCollection");
         names.remove("HTMLTableComponent");
