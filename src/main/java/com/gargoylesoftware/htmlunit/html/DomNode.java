@@ -641,8 +641,12 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Returns <tt>true</tt> if this node is displayed and can be visible to the user
-     * (ignoring screen size, scrolling limitations, color, font-size, or overlapping nodes).
+     * <p>Returns <tt>true</tt> if this node is displayed and can be visible to the user
+     * (ignoring screen size, scrolling limitations, color, font-size, or overlapping nodes).</p>
+     *
+     * <p><b>NOTE:</b> If CSS is {@link WebClient#setCssEnabled(boolean) disabled}, this method
+     * does <b>not</b> take this element's style into consideration!</p>
+     *
      * @see <a href="http://www.w3.org/TR/CSS2/visufx.html#visibility">CSS2 Visibility</a>
      * @see <a href="http://www.w3.org/TR/CSS2/visuren.html#propdef-display">CSS2 Display</a>
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms531180.aspx">MSDN Documentation</a>
@@ -654,7 +658,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             return false;
         }
         final Page page = getPage();
-        if (page instanceof HtmlPage) {
+        if (page instanceof HtmlPage && page.getEnclosingWindow().getWebClient().isCssEnabled()) {
             // display: iterate top to bottom, because if a parent is display:none,
             // there's nothing that a child can do to override it
             for (final Node node : getAncestors(true)) {
