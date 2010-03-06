@@ -591,4 +591,39 @@ public class HTMLIFrameElementTest extends WebTestCase {
             + "</body></html>";
         loadPageWithAlerts(html);
     }
+
+    /**
+     * Regression test for bug 2940926.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @NotYetImplemented
+    public void settingInnerHtmlTriggersFrameLoad() throws Exception {
+        final String html
+            = "<html><body><div id='d' onclick='loadFrame()'>Click me to show frame</div><script>\n"
+            + "function loadFrame() {\n"
+            + "  var s = '<iframe id=\"i\" src=\"frame.html\">';\n"
+            + "  s += '<p>Your browser does not support frames</p>';\n"
+            + "  s += '</iframe>';\n"
+            + "  var d = document.getElementById('d');\n"
+            + "  d.innerHTML = s;\n"
+            + "}\n"
+            + "</script></body></html>";
+        final String html2 = "<html><body>foo</body></html>";
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(new URL(URL_FIRST, "frame.html"), html2);
+
+        final WebClient client = getWebClient();
+        client.setWebConnection(conn);
+
+        final HtmlPage page = client.getPage(URL_FIRST);
+        page.getElementById("d").click();
+
+        final HtmlInlineFrame frame = (HtmlInlineFrame) page.getElementById("i");
+        final HtmlPage framePage = (HtmlPage) frame.getEnclosedPage();
+        assertEquals("foo", framePage.getBody().asText());
+    }
+
 }
