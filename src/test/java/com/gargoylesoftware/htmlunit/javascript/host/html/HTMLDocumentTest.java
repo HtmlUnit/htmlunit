@@ -916,4 +916,69 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "[object BoxObject]", "true", "true", "true" }, IE = "exception")
+    public void getBoxObjectFor() throws Exception {
+        final String html = "<html><head><title>Test</title><script>\n"
+            + "function doTest() {\n"
+            + "  var e = document.getElementById('log');\n"
+            + "  try {\n"
+            + "    var a = document.getBoxObjectFor(e);\n"
+            + "    alert(a);\n"
+            + "    alert(a === document.getBoxObjectFor(e));\n"
+            + "    alert(a.screenX > 0);\n"
+            + "    alert(a.screenY > 0);\n"
+            + "  } catch (e) { alert('exception') }\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<div id='log'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "exception", "0 commands supported" },
+            IE = { "Not supported: foo", "Not supported: 123", "78 commands supported" })
+    public void queryCommandSupported() throws Exception {
+        final String html = "<html><head><title>Test</title><script>\n"
+            + "function doTest() {\n"
+            + "  var cmds = ['2D-Position', 'AbsolutePosition', 'BackColor', 'BlockDirLTR', 'BlockDirRTL', 'Bold', "
+            + "'BrowseMode', 'ClearAuthenticationCache', 'Copy', 'CreateBookmark', 'CreateLink', 'Cut', 'Delete', "
+            + "'DirLTR', 'DirRTL', 'EditMode', 'FontName', 'FontSize', 'ForeColor', 'FormatBlock', 'Indent', "
+            + "'InlineDirLTR', 'InlineDirRTL', 'InsertButton', 'InsertFieldset', 'InsertHorizontalRule', "
+            + "'InsertIFrame', 'InsertImage', 'InsertInputButton', 'InsertInputCheckbox', 'InsertInputFileUpload', "
+            + "'InsertInputHidden', 'InsertInputImage', 'InsertInputPassword', 'InsertInputRadio', "
+            + "'InsertInputReset', 'InsertInputSubmit', 'InsertInputText', 'InsertMarquee', 'InsertOrderedList', "
+            + "'InsertParagraph', 'InsertSelectDropdown', 'InsertSelectListbox', 'InsertTextArea', "
+            + "'InsertUnorderedList', 'Italic', 'JustifyCenter', 'JustifyFull', 'JustifyLeft', 'JustifyNone', "
+            + "'JustifyRight', 'LiveResize', 'MultipleSelection', 'Open', 'Outdent', 'OverWrite', 'Paste', "
+            + "'PlayImage', 'Print', 'Redo', 'Refresh', 'RemoveFormat', 'RemoveParaFormat', 'SaveAs', 'SelectAll', "
+            + "'SizeToControl', 'SizeToControlHeight', 'SizeToControlWidth', 'Stop', 'StopImage', 'StrikeThrough', "
+            + "'Subscript', 'Superscript', 'UnBookmark', 'Underline', 'Undo', 'Unlink', 'Unselect', 'foo', 123];\n"
+            + "  var nbSupported = 0;\n"
+            + "  try {\n"
+            + "    for (var i=0; i<cmds.length; ++i) {\n"
+            + "      var cmd = cmds[i];"
+            + "      var b = document.queryCommandSupported(cmd);"
+            + "      if (b)\n"
+            + "        nbSupported++;\n"
+            + "      else\n"
+            + "        alert('Not supported: ' + cmd);\n"
+            + "    }"
+            + "  } catch (e) { alert('exception'); }\n"
+            + "  alert(nbSupported + ' commands supported');\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<div id='log'></div>\n"
+            + "</body></html>";
+
+            loadPageWithAlerts2(html);
+    }
 }

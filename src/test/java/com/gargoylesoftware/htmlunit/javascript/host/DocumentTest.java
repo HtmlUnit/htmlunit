@@ -578,14 +578,6 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getBoxObjectFor() throws Exception {
-        testHTMLFile("DocumentTest_getBoxObjectFor.html");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({ "bar", "null", "null" })
     public void getElementById() throws Exception {
         final String html
@@ -2169,14 +2161,6 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void queryCommandSupported() throws Exception {
-        testHTMLFile("DocumentTest_queryCommandSupported.html");
     }
 
     /**
