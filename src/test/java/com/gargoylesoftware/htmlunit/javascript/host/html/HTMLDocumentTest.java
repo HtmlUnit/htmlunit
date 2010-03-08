@@ -979,6 +979,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "<div id='log'></div>\n"
             + "</body></html>";
 
-            loadPageWithAlerts2(html);
+        loadPageWithAlerts2(html);
     }
 }
