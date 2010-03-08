@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests for {@link BigContentPage}.
@@ -32,6 +33,7 @@ import org.junit.Test;
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class BigContentPageTest extends WebServerTestCase {
 
     /**
@@ -43,7 +45,7 @@ public class BigContentPageTest extends WebServerTestCase {
         servlets.put("/big", BigContentServlet.class);
         startWebServer("./", null, servlets);
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final Page page = client.getPage("http://localhost:" + PORT + "/big");
         assertTrue(page instanceof BigContentPage);

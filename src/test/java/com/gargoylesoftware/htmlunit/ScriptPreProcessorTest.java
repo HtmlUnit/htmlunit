@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -41,6 +42,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Daniel Gredler
  * @author Sudhan Moghe
  */
+@RunWith(BrowserRunner.class)
 public class ScriptPreProcessorTest extends WebServerTestCase {
 
     /**
@@ -49,7 +51,7 @@ public class ScriptPreProcessorTest extends WebServerTestCase {
      */
     @Test
     public void testScriptPreProcessor() throws IOException {
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         final String alertText = "content";
         final String newAlertText = "newcontent";
@@ -111,7 +113,7 @@ public class ScriptPreProcessorTest extends WebServerTestCase {
      */
     @Test
     public void testScriptPreProcessor_UnimplementedJavascript() throws Exception {
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         final String content = "<html><head><title>foo</title></head><body>\n"
             + "<p>hello world</p>\n"
@@ -147,7 +149,7 @@ public class ScriptPreProcessorTest extends WebServerTestCase {
     public void testScriptPreProcessor_Eval() throws Exception {
         final String html = "<html><body><script>eval('aX'+'ert(\"abc\")');</script></body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
         conn.setDefaultResponse(html);
         client.setWebConnection(conn);

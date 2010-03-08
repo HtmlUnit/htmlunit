@@ -22,14 +22,14 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.xml.sax.helpers.AttributesImpl;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.html.DomNode.DescendantElementsIterator;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -40,6 +40,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class DomNodeTest extends WebTestCase {
 
     /**
@@ -49,8 +50,7 @@ public class DomNodeTest extends WebTestCase {
     @Test
     public void testElementHasAttributesWith() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getDocumentElement().getElementById("tag");
         Assert.assertEquals("Element should have attribute", true, node.hasAttributes());
@@ -63,8 +63,7 @@ public class DomNodeTest extends WebTestCase {
     @Test
     public void testElementHasAttributesNone() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getDocumentElement().getElementById("tag");
         final DomNode parent = node.getParentNode();
@@ -78,8 +77,7 @@ public class DomNodeTest extends WebTestCase {
     @Test
     public void testNonElementHasAttributes() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getDocumentElement().getElementById("tag");
         final DomNode child = node.getFirstChild();
@@ -93,8 +91,7 @@ public class DomNodeTest extends WebTestCase {
     @Test
     public void testNonElementGetPrefix() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getDocumentElement().getElementById("tag");
         final DomNode child = node.getFirstChild();
@@ -108,8 +105,7 @@ public class DomNodeTest extends WebTestCase {
     @Test
     public void testNonElementGetNamespaceURI() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getDocumentElement().getElementById("tag");
         final DomNode child = node.getFirstChild();
@@ -123,8 +119,7 @@ public class DomNodeTest extends WebTestCase {
     @Test
     public void testNonElementGetLocalName() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getDocumentElement().getElementById("tag");
         final DomNode child = node.getFirstChild();
@@ -138,8 +133,7 @@ public class DomNodeTest extends WebTestCase {
     @Test
     public void testNonElementSetPrefix() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getDocumentElement().getElementById("tag");
         final DomNode child = node.getFirstChild();
@@ -158,8 +152,7 @@ public class DomNodeTest extends WebTestCase {
             + "<tr><td>row 1</td></tr>\n"
             + "<tr><td>row 2</td></tr>\n"
             + "</table></p></body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getDocumentElement().getElementById("tag");
         node.removeAllChildren();
@@ -359,16 +352,19 @@ public class DomNodeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "book", "exception" } , IE = { "book", "0", "1" })
     public void selectNodes() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
             + "    doc.async = false;\n"
-            + "    doc.load('" + URL_SECOND + "');\n"
+            + "    doc.load('foo.xml');\n"
             + "    var child = doc.documentElement.firstChild;\n"
             + "    alert(child.tagName);\n"
-            + "    alert(child.selectNodes('/title').length);\n"
-            + "    alert(child.selectNodes('title').length);\n"
+            + "    try {\n"
+            + "      alert(child.selectNodes('/title').length);\n"
+            + "      alert(child.selectNodes('title').length);\n"
+            + "    } catch (e) { alert('exception') }\n"
             + "  }\n"
             + "  function createXmlDocument() {\n"
             + "    if (document.implementation && document.implementation.createDocument)\n"
@@ -381,17 +377,9 @@ public class DomNodeTest extends WebTestCase {
 
         final String xml = "<books><book><title>Immortality</title><author>John Smith</author></book></books>";
 
-        final String[] expectedAlerts = {"book", "0", "1"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7);
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
-        conn.setResponse(URL_SECOND, xml, "text/xml");
-        client.setWebConnection(conn);
+        getMockWebConnection().setDefaultResponse(xml, "text/xml");
 
-        client.getPage(URL_FIRST);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -503,7 +491,7 @@ public class DomNodeTest extends WebTestCase {
             + "  function clickMe() {\n"
             + "    var p1 = document.getElementById('p1');\n"
             + "    var div = document.createElement('DIV');\n"
-            + "    p1.insertBefore(div);\n"
+            + "    p1.insertBefore(div, null);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -514,6 +502,7 @@ public class DomNodeTest extends WebTestCase {
 
         final String[] expectedValues = {"nodeAdded: p,div", "nodeAdded: p,div"};
         final HtmlPage page = loadPage(htmlContent);
+        System.out.println(page.asXml());
         final HtmlElement p1 = page.getHtmlElementById("p1");
         final DomChangeListenerTestImpl listenerImpl = new DomChangeListenerTestImpl();
         p1.addDomChangeListener(listenerImpl);
@@ -654,10 +643,8 @@ public class DomNodeTest extends WebTestCase {
             + "  </book>\n"
             + "</books>";
 
-        final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, xml, "text/xml");
-        client.setWebConnection(webConnection);
+        getMockWebConnection().setResponse(URL_FIRST, xml, "text/xml");
+        final WebClient client = getWebClientWithMockWebConnection();
         final XmlPage page = (XmlPage) client.getPage(URL_FIRST);
 
         final List< ? > results = page.getByXPath("//title");

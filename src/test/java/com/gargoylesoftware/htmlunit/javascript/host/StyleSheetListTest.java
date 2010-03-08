@@ -14,17 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Unit tests for {@link StyleSheetList}.
@@ -34,12 +29,14 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public class StyleSheetListTest extends WebTestCase {
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("4")
     public void testLength() throws Exception {
         final String html =
               "<html>\n"
@@ -54,16 +51,15 @@ public class StyleSheetListTest extends WebTestCase {
             + "    <style>div.y { color: green; }</style>\n"
             + "  </body>\n"
             + "</html>";
-        final List<String> actual = new ArrayList<String>();
-        loadPage(html, actual);
-        final String[] expected = {"4"};
-        assertEquals(expected, actual);
+
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(FF = { "red", "red" }, IE = "exception")
     public void testGetComputedStyle_Link() throws Exception {
         final String html =
               "<html>\n"
@@ -72,9 +68,11 @@ public class StyleSheetListTest extends WebTestCase {
             + "    <script>\n"
             + "      function test() {\n"
             + "        var div = document.getElementById('myDiv');\n"
-            + "        alert(window.getComputedStyle(div, null).color);\n"
-            + "        var div2 = document.getElementById('myDiv2');\n"
-            + "        alert(window.getComputedStyle(div2, null).color);\n"
+            + "        try {\n"
+            + "          alert(window.getComputedStyle(div, null).color);\n"
+            + "          var div2 = document.getElementById('myDiv2');\n"
+            + "          alert(window.getComputedStyle(div2, null).color);\n"
+            + "        } catch(e) { alert('exception'); }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -86,24 +84,15 @@ public class StyleSheetListTest extends WebTestCase {
 
         final String css = "div {color:red}";
 
-        final String[] expectedAlerts = {"red", "red"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_3);
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, html);
-        webConnection.setResponse(URL_SECOND, css, "text/css");
-        webClient.setWebConnection(webConnection);
-
-        webClient.getPage(URL_FIRST);
-        assertEquals(expectedAlerts, collectedAlerts);
-        assertEquals(2, webConnection.getRequestCount());
+        getMockWebConnection().setDefaultResponse(css, "text/css");
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({ "0", "undefined", "undefined", "exception for -2" })
     public void testArrayIndexOutOfBoundAccess() throws Exception {
         final String html =
               "<html>\n"
@@ -126,12 +115,7 @@ public class StyleSheetListTest extends WebTestCase {
             + "  </body>\n"
             + "</html>";
 
-        final String[] expectedAlerts = {"0", "undefined", "undefined", "exception for -2"};
-        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
-
-        final List<String> actual = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_3, html, actual);
-        assertEquals(expectedAlerts, actual);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -139,11 +123,12 @@ public class StyleSheetListTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(FF = {"1", "[object CSSStyleSheet]", "[object CSSStyleSheet]" }, IE = { "1", "[object]", "[object]" })
     public void testNonExistentStylesheet() throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + URL_SECOND + "'/>\n"
+            + "    <link rel='stylesheet' type='text/css' href='foo.css'/>\n"
             + "    <script>\n"
             + "      function test() {\n"
             + "        alert(document.styleSheets.length);\n"
@@ -155,20 +140,7 @@ public class StyleSheetListTest extends WebTestCase {
             + "  <body onload='test()'>abc</body>\n"
             + "</html>";
 
-        final WebClient client = new WebClient();
-
-        final List<String> actual = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(actual));
-
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setDefaultResponse(html);
-        conn.setResponse(URL_SECOND, "Not Found", 404, "Not Found", "text/html", new ArrayList<NameValuePair>());
-        client.setWebConnection(conn);
-
-        client.getPage(URL_FIRST);
-
-        final String[] expected = new String[] {"1", "[object]", "[object]"};
-        assertEquals(expected, actual);
+        getMockWebConnection().setDefaultResponse("Not Found", 404, "Not Found", "text/html");
+        loadPageWithAlerts(html);
     }
-
 }

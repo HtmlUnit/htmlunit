@@ -43,11 +43,15 @@ import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.Part;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
 
 /**
@@ -57,6 +61,7 @@ import com.gargoylesoftware.htmlunit.util.KeyDataPair;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class HtmlFileInputTest extends WebServerTestCase {
 
     /**
@@ -96,7 +101,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
             + "</body>\n"
             + "</html>";
         final String secondContent = "<html><head><title>second</title></head></html>";
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -120,11 +125,12 @@ public class HtmlFileInputTest extends WebServerTestCase {
         final String firstContent = "<html><head></head><body>\n"
             + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
             + "  <input type='file' name='image' />\n"
+            + "  <input type='submit' id='clickMe'>\n"
             + "</form>\n"
             + "</body>\n"
             + "</html>";
         final String secondContent = "<html><head><title>second</title></head></html>";
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -136,7 +142,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
         final HtmlForm f = firstPage.getForms().get(0);
         final HtmlFileInput fileInput = f.getInputByName("image");
         fileInput.setValueAttribute(fileURL);
-        f.submit((SubmittableElement) null);
+        f.getElementById("clickMe").click();
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
         assertNotNull(pair.getFile());
         assertTrue(pair.getFile().length() != 0);
@@ -155,7 +161,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
             + "</body>\n"
             + "</html>";
         final String secondContent = "<html><head><title>second</title></head></html>";
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -184,7 +190,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
             + "</body>\n"
             + "</html>";
         final String secondContent = "<html><head><title>second</title></head></html>";
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -220,11 +226,9 @@ public class HtmlFileInputTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented
+    @Browsers(Browser.NONE)
     public void testUploadFileWithNonASCIIName_HttpClient() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-
         final String filename = "\u6A94\u6848\uD30C\uC77C\u30D5\u30A1\u30A4\u30EB\u0645\u0644\u0641.txt";
         final String path = getClass().getClassLoader().getResource(filename).toExternalForm();
         final File file = new File(new URI(path));
@@ -262,17 +266,12 @@ public class HtmlFileInputTest extends WebServerTestCase {
         servlets.put("/upload2", Upload2Servlet.class);
         startWebServer("./", null, servlets);
 
-        testUploadFileWithNonASCIIName(BrowserVersion.FIREFOX_3);
-        testUploadFileWithNonASCIIName(BrowserVersion.INTERNET_EXPLORER_7);
-    }
-
-    private void testUploadFileWithNonASCIIName(final BrowserVersion browserVersion) throws Exception {
         final String filename = "\u6A94\u6848\uD30C\uC77C\u30D5\u30A1\u30A4\u30EB\u0645\u0644\u0641.txt";
         final String path = getClass().getClassLoader().getResource(filename).toExternalForm();
         final File file = new File(new URI(path));
         assertTrue(file.exists());
 
-        final WebClient client = new WebClient(browserVersion);
+        final WebClient client = getWebClient();
         final HtmlPage firstPage = client.getPage("http://localhost:" + PORT + "/upload1");
 
         final HtmlForm form = firstPage.getForms().get(0);
@@ -289,7 +288,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
 
         assertTrue("Invalid Response: " + response, response.contains(expectedResponse));
 
-        if (browserVersion.isIE()) {
+        if (getBrowserVersion().isIE()) {
             assertTrue(expectedResponse.length() < response.length());
         }
         else {

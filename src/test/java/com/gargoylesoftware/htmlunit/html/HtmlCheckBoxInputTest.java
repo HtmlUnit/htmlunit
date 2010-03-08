@@ -21,8 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -35,6 +36,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class HtmlCheckBoxInputTest extends WebTestCase {
 
     /**
@@ -167,7 +169,7 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
         final String secondContent
             = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -187,11 +189,6 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
      */
     @Test
     public void testPreventDefault() throws Exception {
-        testPreventDefault(BrowserVersion.FIREFOX_3);
-        testPreventDefault(BrowserVersion.INTERNET_EXPLORER_7);
-    }
-
-    private void testPreventDefault(final BrowserVersion browserVersion) throws Exception {
         final String html =
               "<html><head><script>\n"
             + "  function handler(e) {\n"
@@ -207,7 +204,7 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
             + "<body onload='init()'>\n"
             + "<input type='checkbox' id='checkbox1'/>\n"
             + "</body></html>";
-        final HtmlPage page = loadPage(browserVersion, html, null);
+        final HtmlPage page = loadPage(html);
         final HtmlCheckBoxInput checkbox1 = page.getHtmlElementById("checkbox1");
         checkbox1.click();
         assertFalse(checkbox1.isChecked());

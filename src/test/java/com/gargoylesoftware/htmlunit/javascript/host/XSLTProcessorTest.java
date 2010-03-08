@@ -14,16 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link XSLTProcessor}.
@@ -31,20 +28,15 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class XSLTProcessorTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "97", "null" }, IE = "97")
     public void test() throws Exception {
-        final String[] expectedAlertsIE = {"97"};
-        test(BrowserVersion.INTERNET_EXPLORER_7, expectedAlertsIE);
-        final String[] expectedAlertsFF = {"97", "null"};
-        test(BrowserVersion.FIREFOX_3, expectedAlertsFF);
-    }
-
-    private void test(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var xmlDoc = createXmlDocument();\n"
@@ -117,16 +109,10 @@ public class XSLTProcessorTest extends WebTestCase {
             + "  </xsl:template>\n"
             + "</xsl:stylesheet>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = new WebClient(browserVersion);
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
+        final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(URL_SECOND, xml, "text/xml");
         conn.setResponse(URL_THIRD, xsl, "text/xml");
-        client.setWebConnection(conn);
 
-        client.getPage(URL_FIRST);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 }

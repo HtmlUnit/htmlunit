@@ -22,10 +22,13 @@ import java.util.List;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Test class for {@link HTMLParserListener}.<br/>
@@ -35,6 +38,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public class HTMLParserListenerTest extends WebTestCase {
     static class MessageInfo {
         private boolean error_; // versus warning
@@ -108,10 +112,8 @@ public class HTMLParserListenerTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     @Test
+    @NotYetImplemented
     public void testSimple() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         testSimple(4, -1);
     }
 
@@ -130,7 +132,7 @@ public class HTMLParserListenerTest extends WebTestCase {
         final String htmlContent = "<html>\n" + "<head>\n<title>foo\n</head>\n"
                 + "<body>\nfoo\n</body>\n</html>";
 
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         assertNull(webClient.getHTMLParserListener());
 
         final List<MessageInfo> messages = new ArrayList<MessageInfo>();

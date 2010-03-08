@@ -22,7 +22,9 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -36,6 +38,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class HtmlFrameTest extends WebTestCase {
 
     /**
@@ -63,7 +66,7 @@ public class HtmlFrameTest extends WebTestCase {
      */
     @Test
     public void onLoadHandler() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -121,7 +124,7 @@ public class HtmlFrameTest extends WebTestCase {
      */
     @Test
     public void deregisterNonHtmlFrame() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
         final String html
@@ -161,7 +164,7 @@ public class HtmlFrameTest extends WebTestCase {
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
         final String thirdHtml  = "<html><head><title>Third</title></head><body></body></html>";
 
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(failingHtml, 404, "No Found", "text/html");
@@ -204,7 +207,7 @@ public class HtmlFrameTest extends WebTestCase {
 
         final String frame3 = "<html><head><title>page 3</title></head><body></body></html>";
 
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
         webClient.setWebConnection(conn);
 

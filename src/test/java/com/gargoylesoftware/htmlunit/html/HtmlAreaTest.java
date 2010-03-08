@@ -21,7 +21,9 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
@@ -36,6 +38,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author David K. Taylor
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class HtmlAreaTest extends WebTestCase {
 
     private WebClient createWebClient(final String onClick) {
@@ -49,7 +52,7 @@ public class HtmlAreaTest extends WebTestCase {
             + "</map></body></html>";
         final String secondContent = "<html><head><title>second</title></head><body></body></html>";
         final String thirdContent = "<html><head><title>third</title></head><body></body></html>";
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -140,7 +143,7 @@ public class HtmlAreaTest extends WebTestCase {
             = "<html><head><title>foo</title></head><body><map>\n"
             + "<area href='javascript:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>\n"
             + "</map></body></html>";
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         client.setJavaScriptEnabled(false);
 
         final List<String> collectedAlerts = new ArrayList<String>();

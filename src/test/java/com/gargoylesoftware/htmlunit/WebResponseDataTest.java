@@ -32,6 +32,7 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -43,6 +44,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class WebResponseDataTest extends WebServerTestCase {
 
     private static final String GZIPPED_FILE = "testfiles/test.html.gz";
@@ -86,7 +88,7 @@ public class WebResponseDataTest extends WebServerTestCase {
         final  WebRequestSettings settings = new WebRequestSettings(new URL("http://localhost:"
             + PORT + "/index.html"));
         settings.setAdditionalHeader("Accept-Encoding", "deflate");
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final HtmlPage page = webClient.getPage(settings);
         assertEquals("Hello Compressed World!", page.asText());
     }
@@ -101,7 +103,7 @@ public class WebResponseDataTest extends WebServerTestCase {
         servlets.put("/folder2/page2", RedirectionServlet.class);
         startWebServer("./", null, servlets);
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final HtmlPage page = client.getPage("http://localhost:" + PORT + "/folder1/page1");
         assertEquals("Hello Redirected!", page.asText());

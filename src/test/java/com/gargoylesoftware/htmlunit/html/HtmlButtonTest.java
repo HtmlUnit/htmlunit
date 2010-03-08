@@ -23,7 +23,9 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -40,6 +42,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class HtmlButtonTest extends WebTestCase {
 
     /**
@@ -206,24 +209,12 @@ public class HtmlButtonTest extends WebTestCase {
 
     /**
      * According to the HTML spec, the default type for a button is "submit".
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testDefaultButtonType_StandardsCompliantBrowser() throws Exception {
-        doTestDefaultButtonType(BrowserVersion.FIREFOX_3, "submit");
-    }
-
-    /**
      * IE is different than the HTML spec and has a default type of "button".
      * @throws Exception if the test fails
      */
     @Test
-    public void testDefaultButtonType_InternetExplorer() throws Exception {
-        doTestDefaultButtonType(BrowserVersion.INTERNET_EXPLORER_6, "button");
-    }
-
-    private void doTestDefaultButtonType(final BrowserVersion browserVersion,
-            final String expectedType) throws Exception {
+    public void testDefaultButtonType_StandardsCompliantBrowser() throws Exception {
+        final String expectedType = getBrowserVersion().isFirefox() ? "submit" : "button";
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<form id='form1' action='" + URL_SECOND + "' method='post'>\n"
@@ -231,7 +222,7 @@ public class HtmlButtonTest extends WebTestCase {
             + "</form></body></html>";
         final String secondContent
             = "<html><head><title>Second</title></head><body'></body></html>";
-        final WebClient client = new WebClient(browserVersion);
+        final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);

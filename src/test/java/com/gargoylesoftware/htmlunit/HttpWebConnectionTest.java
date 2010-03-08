@@ -38,6 +38,7 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.multipart.FilePart;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
@@ -51,6 +52,7 @@ import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class HttpWebConnectionTest extends WebServerTestCase {
 
     /**
@@ -222,7 +224,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
     public void jettyProofOfConcept() throws Exception {
         startWebServer("./");
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final Page page = client.getPage("http://localhost:" + PORT + "/src/test/resources/event_coordinates.html");
         final WebConnection defaultConnection = client.getWebConnection();
         Assert.assertTrue(
@@ -239,7 +241,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
     public void designedForExtension() throws Exception {
         startWebServer("./");
 
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final boolean[] tabCalled = {false};
         final WebConnection myWebConnection = new HttpWebConnection(webClient) {
             @Override
@@ -281,7 +283,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
     @Test
     public void unicode() throws Exception {
         startWebServer("./");
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         client.getPage("http://localhost:" + PORT + "/src/test/resources/event_coordinates.html?param=\u00F6");
     }
 
@@ -295,7 +297,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         startWebServer("./", null, servlets);
 
         final String[] expectedAlerts = {"1"};
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         client.setAjaxController(new NicelyResynchronizingAjaxController());
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));

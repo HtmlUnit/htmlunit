@@ -19,7 +19,10 @@ import java.net.URL;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 
@@ -31,6 +34,7 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public class HtmlImageDownloadTest extends WebServerTestCase {
     private static final String base_file_path_ = "src/test/resources/com/gargoylesoftware/htmlunit/html";
 
@@ -116,7 +120,8 @@ public class HtmlImageDownloadTest extends WebServerTestCase {
      */
     private HtmlImage getHtmlElementToTest(final String id) throws Exception {
         final String url = "http://localhost:" + PORT + "/HtmlImageDownloadTest.html";
-        final HtmlPage page = loadUrl(url);
+        final WebClient client = getWebClient();
+        final HtmlPage page = client.getPage(url);
         return (HtmlImage) page.getElementById(id);
     }
 }
