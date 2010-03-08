@@ -197,7 +197,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         statusLineField.setAccessible(true);
         statusLineField.set(httpMethod, statusLine);
 
-        final HttpWebConnection connection = new HttpWebConnection(new WebClient());
+        final HttpWebConnection connection = new HttpWebConnection(getWebClient());
         final Method method =
                 connection.getClass().getDeclaredMethod("makeWebResponse", new Class[]{
                     int.class, HttpMethodBase.class, WebRequestSettings.class, long.class});
