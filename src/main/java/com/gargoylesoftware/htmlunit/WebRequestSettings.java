@@ -24,6 +24,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.httpclient.auth.CredentialsProvider;
 import org.apache.commons.lang.ClassUtils;
+import org.mortbay.log.Log;
 
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
@@ -109,6 +110,21 @@ public class WebRequestSettings implements Serializable {
                 url = buildUrlWithNewFile(url, removeDots(path) + query);
             }
             url_ = url.toExternalForm();
+            if (url.getUserInfo() != null) {
+                if (getCredentialsProvider() == null) {
+                    setCredentialsProvider(new DefaultCredentialsProvider());
+                }
+                if (getCredentialsProvider() instanceof DefaultCredentialsProvider) {
+                    final String userInfo = url.getUserInfo();
+                    final String username = userInfo.substring(0, userInfo.indexOf(':'));
+                    final String password = userInfo.substring(userInfo.indexOf(':') + 1);
+                    ((DefaultCredentialsProvider) getCredentialsProvider()).addCredentials(username, password);
+                }
+                else {
+                    Log.warn("URL userInfo is defined for a WebRequestSettings "
+                            + "without an underlying DefaultCredentialsProvider");
+                }
+            }
         }
         else {
             url_ = null;

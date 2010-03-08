@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes, large file download">
+            <action type="add" dev="asashour" issue="2958709">
+                WebRequestSettings: add support for basic authentication inside the URL.
+            </action>
             <action type="fix" dev="sdanig" issue="2964137">
                 DomNode.isDisplayed() (and by extension, DomNode.asText()) should ignore CSS styling when CSS has been disabled.
             </action>

@@ -14,8 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static org.junit.Assert.assertEquals;
+
 import java.net.URL;
 
+import org.apache.commons.httpclient.UsernamePasswordCredentials;
+import org.apache.commons.httpclient.auth.BasicScheme;
 import org.junit.Test;
 
 /**
@@ -26,14 +30,14 @@ import org.junit.Test;
  * @author Marc Guillemot
  * @author Rodney Gitzel
  */
-public class WebRequestSettingsTest extends WebServerTestCase {
+public class WebRequestSettingsTest {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
     public void headers() throws Exception {
-        final WebRequestSettings settings = new WebRequestSettings(getDefaultUrl());
+        final WebRequestSettings settings = new WebRequestSettings(WebTestCase.getDefaultUrl());
         final int initialSize = settings.getAdditionalHeaders().size();
         settings.setAdditionalHeader("Accept", "nothing");
         assertEquals(initialSize, settings.getAdditionalHeaders().size());
@@ -99,5 +103,18 @@ public class WebRequestSettingsTest extends WebServerTestCase {
         settings = new WebRequestSettings(
                 new URL("http://htmlunit.sf.net/dir/foo/bar/./boo/hoo/silly/.././../../../.././foo.html?a=1&b=2"));
         assertEquals(url3, settings.getUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void credentials() throws Exception{
+        final URL url = new URL("http://john.smith:secret@localhost/");
+        final WebRequestSettings settings = new WebRequestSettings(url);
+        final UsernamePasswordCredentials credentials = (UsernamePasswordCredentials) 
+            settings.getCredentialsProvider().getCredentials(new BasicScheme(), "localhost", 80, false);
+        assertEquals("john.smith", credentials.getUserName());
+        assertEquals("secret", credentials.getPassword());
     }
 }
