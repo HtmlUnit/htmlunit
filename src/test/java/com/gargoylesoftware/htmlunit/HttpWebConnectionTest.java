@@ -264,7 +264,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
     public void buildFilePart() throws Exception {
         final String encoding = "ISO8859-1";
         final KeyDataPair pair = new KeyDataPair("myFile", new File("this/doesnt_exist.txt"), "text/plain", encoding);
-        final FilePart part = new HttpWebConnection(new WebClient()).buildFilePart(pair, encoding);
+        final FilePart part = new HttpWebConnection(getWebClient()).buildFilePart(pair, encoding);
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         part.send(baos);
 
