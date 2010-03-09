@@ -338,13 +338,20 @@ public class CodeStyleTest {
     private void runWith(final List<String> lines, final String relativePath) {
         if (relativePath.replace('\\', '/').contains("src/test/java") && !relativePath.contains("CodeStyleTest")) {
             boolean runWith = false;
+            boolean browserNone = true;
             int index = 1;
             for (final String line : lines) {
                 if (line.contains("@RunWith(BrowserRunner.class)")) {
                     runWith = true;
                 }
+                if (line.contains("@Browsers(Browser.NONE)")) {
+                    browserNone = true;
+                }
+                if (line.contains("@Test")) {
+                    browserNone = false;
+                }
                 if (runWith) {
-                    if (line.contains("new WebClient(")) {
+                    if (!browserNone && line.contains("new WebClient(") && !line.contains("getBrowserVersion()")) {
                         addFailure("Test " + relativePath + " line " + index
                             + " should never directly instantiate WebClient, please use getWebClient() instead.");
                     }
@@ -504,11 +511,12 @@ public class CodeStyleTest {
         final int indentation = getIndentation(lines.get(index));
         for (int i = index - 1; i >= 0; i--) {
             final String line = lines.get(i);
-            if (getIndentation(line) == indentation - 4) {
-                if (!line.contains("LOG.is" + method + "Enabled()")) {
-                    addFailure("You must check \"if (LOG.is" + method + "Enabled())\" around " + relativePath
-                            + ", line: " + (index + 1));
-                }
+            if (getIndentation(line) < indentation && line.contains("LOG.is" + method + "Enabled()")) {
+                return;
+            }
+            if (getIndentation(line) == 4) { // a method
+                addFailure("You must check \"if (LOG.is" + method + "Enabled())\" around " + relativePath
+                        + ", line: " + (index + 1));
                 return;
             }
         }
