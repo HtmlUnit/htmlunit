@@ -49,7 +49,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
     private final BrowserVersion browserVersion_;
     private final boolean useWebDriver_;
-    static final boolean maven_ = System.getProperties().contains("env.M2_HOME");
+    static final boolean maven_ = System.getProperty("htmlunit.maven") != null;
 
     public BrowserVersionClassRunner(final Class<WebTestCase> klass,
         final BrowserVersion browserVersion, final boolean useWebDriver) throws InitializationError {

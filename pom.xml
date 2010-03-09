@@ -162,6 +162,9 @@
                         <version>2.5</version>
                         <configuration>
                             <argLine>-Xmx512m -Xms128m</argLine>
+                            <systemPropertyVariables>
+                            	<htmlunit.maven>maven</htmlunit.maven>
+                            </systemPropertyVariables>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -185,6 +188,9 @@
                                 <exclude>**/libraries/*.java</exclude>
                             </excludes>
                             <argLine>-Xmx512m -Xms128m</argLine>
+                            <systemPropertyVariables>
+                            	<htmlunit.maven>maven</htmlunit.maven>
+                            </systemPropertyVariables>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -216,6 +222,9 @@
                                 <include>**/libraries/*.java</include>
                             </includes>
                             <argLine>-Xmx512m -Xms128m</argLine>
+                            <systemPropertyVariables>
+                            	<htmlunit.maven>maven</htmlunit.maven>
+                            </systemPropertyVariables>
                         </configuration>
                     </plugin>
                 </plugins>
