@@ -112,6 +112,14 @@ public class TopLevelWindowTest extends WebTestCase {
                 jobCount.increment();
                 return jobCount.intValue();
             }
+            /** {@inheritDoc} */
+            public JavaScriptJob getEarliestJob() {
+                return null;
+            }
+            /** {@inheritDoc} */
+            public void runSingleJob(final JavaScriptJob job) {
+                // Empty
+            }
         };
 
         final WebWindowListener listener = new WebWindowListener() {

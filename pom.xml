@@ -566,6 +566,9 @@
         <contributor>
             <name>Benoit Heinrich</name>
         </contributor>
+        <contributor>
+            <name>Amit Manjhi</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

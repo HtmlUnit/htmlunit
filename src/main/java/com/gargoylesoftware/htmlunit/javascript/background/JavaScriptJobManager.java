@@ -88,4 +88,15 @@ public interface JavaScriptJobManager extends Serializable {
      */
     void shutdown();
 
+    /**
+     * Gets the earliest job for this manager.
+     * @return <code>null</code> if none
+     */
+    JavaScriptJob getEarliestJob();
+
+    /**
+     * Runs the provided job.
+     * @param job the job to run
+     */
+    void runSingleJob(final JavaScriptJob job);
 }

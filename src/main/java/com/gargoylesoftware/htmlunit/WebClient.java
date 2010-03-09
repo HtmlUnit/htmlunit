@@ -62,6 +62,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.ProxyAutoConfig;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptExecutor;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
@@ -105,6 +106,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Bruce Chapman
  * @author Sudhan Moghe
  * @author Martin Tamme
+ * @author Amit Manjhi
  */
 public class WebClient implements Serializable {
 
@@ -131,6 +133,9 @@ public class WebClient implements Serializable {
     private String homePage_;
     private final Map<String, String> requestHeaders_ = Collections.synchronizedMap(new HashMap<String, String>(89));
     private IncorrectnessListener incorrectnessListener_ = new IncorrectnessListenerImpl();
+
+    /** The eventLoop corresponding to all windows of this Web client */
+    private transient JavaScriptExecutor eventLoop_ = null;
 
     private AlertHandler   alertHandler_;
     private ConfirmHandler confirmHandler_;
@@ -305,6 +310,9 @@ public class WebClient implements Serializable {
         printContentIfNecessary(webResponse);
         loadWebResponseInto(webResponse, webWindow);
         throwFailingHttpStatusCodeExceptionIfNecessary(webResponse);
+
+        // start execution here.
+        registerWindowAndMaybeStartEventLoop(webWindow);
 
         return (P) webWindow.getEnclosedPage();
     }
@@ -1850,6 +1858,10 @@ public class WebClient implements Serializable {
      * Closes all opened windows, stopping all background JavaScript processing.
      */
     public void closeAllWindows() {
+        if (eventLoop_ != null) {
+            eventLoop_.shutdown();
+            eventLoop_ = null;
+        }
         // NB: this implementation is too simple as a new TopLevelWindow may be opened by
         // some JS script while we are closing the others
         final List<TopLevelWindow> topWindows = new ArrayList<TopLevelWindow>();
@@ -1863,6 +1875,13 @@ public class WebClient implements Serializable {
                 topWindow.close();
             }
         }
+    }
+
+    void registerWindowAndMaybeStartEventLoop(final WebWindow webWindow) {
+        if (eventLoop_ == null) {
+            eventLoop_ = new JavaScriptExecutor(this);
+        }
+        eventLoop_.addWindow(webWindow);
     }
 
     /**

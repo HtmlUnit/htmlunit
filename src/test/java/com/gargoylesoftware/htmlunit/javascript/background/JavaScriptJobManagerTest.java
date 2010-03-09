@@ -24,7 +24,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -41,6 +43,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Brad Clarke
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class JavaScriptJobManagerTest extends WebTestCase {
     private static final Log LOG = LogFactory.getLog(JavaScriptJobManagerTest.class);
 
@@ -154,7 +157,7 @@ public class JavaScriptJobManagerTest extends WebTestCase {
             + "</script>\n"
             + "</body></html>";
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);

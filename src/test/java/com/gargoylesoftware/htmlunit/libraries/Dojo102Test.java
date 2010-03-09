@@ -776,10 +776,8 @@ public class Dojo102Test extends WebServerTestCase {
         eq("GROUP \"t\" has 3 tests to run", logs);
         eq("PASSED test: ../../dojo/tests/io/script.html::t::ioScriptSimple", logs);
         eq("PASSED test: ../../dojo/tests/io/script.html::t::ioScriptJsonp", logs);
-        // TODO: this test fails in FF as well... seems to be normal
-        logs.next(); // eq("PASSED test: ../../dojo/tests/io/script.html::t::ioScriptJsonpTimeout", logs);
-        logs.next();
-        logs.next();
+        // ioScriptJsonpTimeout passes when using a single thread for all background JS tasks.
+        eq("PASSED test: ../../dojo/tests/io/script.html::t::ioScriptJsonpTimeout", logs);
         eq("PASSED test: ../../dojo/tests/io/script.html", logs);
         eq(GROUP_DELIMITER, logs);
 

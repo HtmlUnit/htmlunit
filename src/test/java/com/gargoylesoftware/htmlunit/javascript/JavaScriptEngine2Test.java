@@ -44,7 +44,6 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void jsRunSingleThreadedBrowserWide() throws Exception {
         final String html = "<html><head><script>"
             + "function test(prefix) {\n"
