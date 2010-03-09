@@ -616,26 +616,19 @@ public abstract class WebTestCase {
         final String resourcePath = getClass().getPackage().getName().replace('.', '/') + '/' + fileName;
         final URL url = getClass().getClassLoader().getResource(resourcePath);
 
-        final Map<String, BrowserVersion> testedBrowser = new HashMap<String, BrowserVersion>();
-        testedBrowser.put("FIREFOX_2", BrowserVersion.FIREFOX_2);
-        testedBrowser.put("INTERNET_EXPLORER_6_0", BrowserVersion.INTERNET_EXPLORER_6);
+        final String browserKey = getBrowserVersion().getNickname().substring(0, 2);
 
-        for (final Map.Entry<String, BrowserVersion> entry : testedBrowser.entrySet()) {
-            final String browserKey = entry.getKey();
-            final BrowserVersion browserVersion = entry.getValue();
+        final WebClient client = getWebClient();
 
-            final WebClient client = new WebClient(browserVersion);
+        final HtmlPage page = client.getPage(url);
+        final HtmlElement want = page.getHtmlElementById(browserKey);
 
-            final HtmlPage page = client.getPage(url);
-            final HtmlElement want = page.getHtmlElementById(browserKey);
+        final HtmlElement got = page.getHtmlElementById("log");
 
-            final HtmlElement got = page.getHtmlElementById("log");
+        final List<String> expected = readChildElementsText(want);
+        final List<String> actual = readChildElementsText(got);
 
-            final List<String> expected = readChildElementsText(want);
-            final List<String> actual = readChildElementsText(got);
-
-            Assert.assertEquals(expected, actual);
-        }
+        Assert.assertEquals(expected, actual);
     }
 
     private List<String> readChildElementsText(final HtmlElement elt) {

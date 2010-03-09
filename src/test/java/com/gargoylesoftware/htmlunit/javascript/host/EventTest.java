@@ -814,7 +814,6 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.NONE) // TODO: use browsers to test for all
     public void testDOMContentLoaded() throws Exception {
         testHTMLFile("EventTest_DOMContentLoaded.html");
     }
@@ -823,7 +822,6 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.NONE) // TODO: use browsers to test for all
     public void testPreventDefault() throws Exception {
         testHTMLFile("EventTest_preventDefault.html");
     }

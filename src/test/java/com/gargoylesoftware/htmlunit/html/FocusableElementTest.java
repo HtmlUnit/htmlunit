@@ -22,8 +22,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 
 /**
  * Tests for elements with onblur and onfocus attributes.
@@ -195,7 +193,6 @@ public class FocusableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.NONE)
     public void testOnAllElements() throws Exception {
         testHTMLFile("FocusableElementTest_onAllElements.html");
     }

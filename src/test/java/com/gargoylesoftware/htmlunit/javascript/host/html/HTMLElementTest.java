@@ -2090,7 +2090,6 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.NONE)
     public void dispatchEvent2() throws Exception {
         testHTMLFile("HTMLElementTest_dispatchEvent2.html");
     }

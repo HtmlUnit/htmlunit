@@ -20,10 +20,13 @@ import java.util.List;
 import junit.framework.Assert;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link HtmlRadioButtonInput}.
@@ -34,6 +37,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Bruce Faulkner
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class HtmlRadioButtonInputTest extends WebTestCase {
 
     /**
@@ -168,7 +172,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
         final String secondContent
             = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -188,8 +192,9 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "false,false", "true,false", "false,true" })
     public void testRadioInputChecked() throws Exception {
-        final String content
+        final String html
             = "<html><head>\n"
             + "</head>\n"
             + "<body>\n"
@@ -208,10 +213,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"false,false", "true,false", "false,true"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -287,7 +289,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
             + "<form name='myForm'>\n"
             + "  <input type='radio' name='myRadio' id='radio1' value=v1>\n"
             + "  <input type='radio' name='myRadio' value=v2>\n"
-            + "  <button onclick='openPopup()' id='clickMe'>click me</button>\n"
+            + "  <button onclick='openPopup();' type='button' id='clickMe'>click me</button>\n"
             + "</form>\n"
             + "<script>\n"
             + "function doSomething() {\n"
