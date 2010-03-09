@@ -109,10 +109,10 @@ public class WebRequestSettingsTest {
      * @throws Exception if the test fails
      */
     @Test
-    public void credentials() throws Exception{
+    public void credentials() throws Exception {
         final URL url = new URL("http://john.smith:secret@localhost/");
         final WebRequestSettings settings = new WebRequestSettings(url);
-        final UsernamePasswordCredentials credentials = (UsernamePasswordCredentials) 
+        final UsernamePasswordCredentials credentials = (UsernamePasswordCredentials)
             settings.getCredentialsProvider().getCredentials(new BasicScheme(), "localhost", 80, false);
         assertEquals("john.smith", credentials.getUserName());
         assertEquals("secret", credentials.getPassword());
