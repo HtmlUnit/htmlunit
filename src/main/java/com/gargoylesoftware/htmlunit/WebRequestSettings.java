@@ -24,7 +24,8 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.httpclient.auth.CredentialsProvider;
 import org.apache.commons.lang.ClassUtils;
-import org.mortbay.log.Log;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
@@ -40,6 +41,8 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Rodney Gitzel
  */
 public class WebRequestSettings implements Serializable {
+
+    private static final Log LOG = LogFactory.getLog(WebRequestSettings.class);
 
     private static final long serialVersionUID = -7405507885099274031L;
     private String url_; // String instead of java.net.URL because "about:blank" URLs don't serialize correctly
@@ -121,7 +124,7 @@ public class WebRequestSettings implements Serializable {
                     ((DefaultCredentialsProvider) getCredentialsProvider()).addCredentials(username, password);
                 }
                 else {
-                    Log.warn("URL userInfo is defined for a WebRequestSettings "
+                    LOG.warn("URL userInfo is defined for a WebRequestSettings "
                             + "without an underlying DefaultCredentialsProvider");
                 }
             }
