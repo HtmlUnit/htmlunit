@@ -287,7 +287,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         job = currentlyRunningJob_;
         final boolean isIntervalJob = job.getPeriod() != null;
         if (isIntervalJob) {
-            job.setTargetExecutionTime(System.currentTimeMillis() + job.getPeriod());
+            job.setTargetExecutionTime(job.getTargetExecutionTime() + job.getPeriod());
             // queue
             if (!cancelledJobs_.contains(job.getId())) {
                 if (LOG.isDebugEnabled()) {
