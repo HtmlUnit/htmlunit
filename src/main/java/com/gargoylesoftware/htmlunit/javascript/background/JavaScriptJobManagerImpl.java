@@ -177,18 +177,20 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         }
         final long targetExecutionTime = System.currentTimeMillis() + delayMillis;
         JavaScriptJob earliestJob = getEarliestJob();
-        while ((currentlyRunningJob_ != null && currentlyRunningJob_.getTargetExecutionTime() < targetExecutionTime)
+        JavaScriptJob currentlyRunningJob = currentlyRunningJob_;
+        while ((currentlyRunningJob != null && currentlyRunningJob.getTargetExecutionTime() < targetExecutionTime)
             || (earliestJob != null && earliestJob.getTargetExecutionTime() < targetExecutionTime)) {
             try {
                 /* TODO (amitmanjhi): how to set this value? For tests in WebClientWaitForBackgroundJobsTest to
-                 * pass reliably, this value can't be more than 100. */
-                Thread.sleep(50);
+                 * pass reliably, this value must be less than 50. */
+                Thread.sleep(40);
             }
             catch (final InterruptedException e) {
                 e.printStackTrace();
                 LOG.error("InterruptedException while in waitForJobsStartingBefore");
             }
             earliestJob = getEarliestJob();
+            currentlyRunningJob = currentlyRunningJob_;
         }
         final int jobs = getJobCount();
         if (LOG.isDebugEnabled()) {
@@ -283,7 +285,14 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         job = currentlyRunningJob_;
         final boolean isIntervalJob = job.getPeriod() != null;
         if (isIntervalJob) {
-            job.setTargetExecutionTime(job.getTargetExecutionTime() + job.getPeriod());
+            final long currentTime = System.currentTimeMillis();
+            long timeDifference = currentTime - job.getTargetExecutionTime();
+            if (timeDifference % job.getPeriod() > 0) {
+                timeDifference = (timeDifference / job.getPeriod()) * job.getPeriod()
+                    + job.getPeriod();
+            }
+            // reference: http://ejohn.org/blog/how-javascript-timers-work/
+            job.setTargetExecutionTime(job.getTargetExecutionTime() + timeDifference);
             // queue
             if (!cancelledJobs_.contains(job.getId())) {
                 if (LOG.isDebugEnabled()) {
