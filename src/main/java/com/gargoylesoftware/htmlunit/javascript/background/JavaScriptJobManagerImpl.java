@@ -290,7 +290,9 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             job.setTargetExecutionTime(System.currentTimeMillis() + job.getPeriod());
             // queue
             if (!cancelledJobs_.contains(job.getId())) {
-                LOG.debug("Reschedulling job " + job);
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Reschedulling job " + job);
+                }
                 scheduledJobsQ_.add(job);
             }
         }

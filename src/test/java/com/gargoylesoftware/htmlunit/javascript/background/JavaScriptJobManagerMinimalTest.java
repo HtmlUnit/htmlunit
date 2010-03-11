@@ -70,7 +70,6 @@ public class JavaScriptJobManagerMinimalTest {
         eventLoop_.shutdown();
     }
 
-
     /**
      * Didn't pass reliably.
      * @throws Exception if an error occurs
