@@ -70,6 +70,26 @@ public class JavaScriptJobManagerMinimalTest {
         eventLoop_.shutdown();
     }
 
+
+    /**
+     * Didn't pass reliably.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void addJob_periodicJob() throws Exception {
+        final MutableInt count = new MutableInt(0);
+        final JavaScriptJob job = new JavaScriptJob(5, 100) {
+            public void run() {
+                count.increment();
+            }
+        };
+        manager_.addJob(job, page_);
+        assertEquals(1, manager_.getJobCount());
+        final int remainingJobs = manager_.waitForJobs(1000);
+        Assert.assertTrue(remainingJobs >= 1);
+        Assert.assertTrue(count.intValue() >= 10);
+    }
+
     /**
      * @throws Exception if an error occurs
      */

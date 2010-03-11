@@ -230,9 +230,6 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         catch (final RuntimeException e) {
             LOG.error("Job run failed with unexpected RuntimeException: " + e.getMessage(), e);
         }
-        finally {
-            scheduledJobsQ_.remove(job);
-        }
     }
 
     /**
@@ -291,6 +288,11 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         final boolean isIntervalJob = job.getPeriod() != null;
         if (isIntervalJob) {
             job.setTargetExecutionTime(System.currentTimeMillis() + job.getPeriod());
+            // queue
+            if (!cancelledJobs_.contains(job.getId())) {
+                LOG.debug("Reschedulling job " + job);
+                scheduledJobsQ_.add(job);
+            }
         }
         final String intervalJob = (isIntervalJob ? "interval " : "");
         if (LOG.isDebugEnabled()) {
@@ -301,10 +303,5 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             LOG.debug("Finished " + intervalJob + "job " + job);
         }
         currentlyRunningJob_ = null;
-        // queue
-        if (isIntervalJob && !cancelledJobs_.contains(job.getId())) {
-            LOG.debug("Reschedulling job " + job);
-            scheduledJobsQ_.add(job);
-        }
     }
 }
