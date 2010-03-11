@@ -89,6 +89,35 @@ public class JavaScriptJobManagerMinimalTest {
         Assert.assertTrue(count.intValue() >= 10);
     }
 
+
+    /**
+     * Test for changes of revision 5589.
+     * Ensures that interval jobs are scheduled at fix rate, no matter how long each one takes.
+     * This test failed as of revision 5588 as consequence of the single threaded JS execution changes.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void addJob_periodicJob2() throws Exception {
+        final MutableInt count = new MutableInt(0);
+        final JavaScriptJob job = new JavaScriptJob(5, 10) {
+            public void run() {
+                if (count.intValue() == 0) {
+                    try {
+                        Thread.sleep(100);
+                    }
+                    catch (final InterruptedException e) {
+                        // ignore
+                    }
+                }
+                count.increment();
+            }
+        };
+        manager_.addJob(job, page_);
+        final int remainingJobs = manager_.waitForJobs(500);
+        Assert.assertTrue(remainingJobs >= 1);
+        Assert.assertTrue("Counter: " + count.intValue(), count.intValue() >= 40);
+    }
+
     /**
      * @throws Exception if an error occurs
      */
