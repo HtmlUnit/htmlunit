@@ -54,6 +54,7 @@ public abstract class JavaScriptJob implements Runnable, Comparable<JavaScriptJo
     public JavaScriptJob(final int initialDelay, final Integer period) {
         initialDelay_ = initialDelay;
         period_ = period;
+        setTargetExecutionTime(initialDelay + System.currentTimeMillis());
     }
 
     /**

@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.background;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.PriorityQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -100,9 +99,6 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         final int id = NEXT_JOB_ID_.getAndIncrement();
         job.setId(id);
 
-        // compute the target time at which this job should be executed (again)
-        final long targetExecutionTime = (new Date()).getTime() + job.getInitialDelay();
-        job.setTargetExecutionTime(targetExecutionTime);
         scheduledJobsQ_.add(job);
 
         if (LOG.isDebugEnabled()) {
