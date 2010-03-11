@@ -21,7 +21,6 @@ import org.apache.commons.lang.mutable.MutableInt;
 import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.Page;
@@ -97,14 +96,13 @@ public class JavaScriptJobManagerMinimalTest {
      * @throws Exception if an error occurs
      */
     @Test
-    @Ignore("NotYetImplemented")
     public void addJob_periodicJob2() throws Exception {
         final MutableInt count = new MutableInt(0);
-        final JavaScriptJob job = new JavaScriptJob(5, 10) {
+        final JavaScriptJob job = new JavaScriptJob(5, 100) {
             public void run() {
                 if (count.intValue() == 0) {
                     try {
-                        Thread.sleep(100);
+                        Thread.sleep(1000);
                     }
                     catch (final InterruptedException e) {
                         // ignore
@@ -114,7 +112,7 @@ public class JavaScriptJobManagerMinimalTest {
             }
         };
         manager_.addJob(job, page_);
-        final int remainingJobs = manager_.waitForJobs(500);
+        final int remainingJobs = manager_.waitForJobs(5000);
         Assert.assertTrue(remainingJobs >= 1);
         Assert.assertTrue("Counter: " + count.intValue(), count.intValue() >= 40);
     }
