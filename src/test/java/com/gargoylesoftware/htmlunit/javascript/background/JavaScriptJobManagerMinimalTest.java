@@ -89,7 +89,6 @@ public class JavaScriptJobManagerMinimalTest {
         Assert.assertTrue(count.intValue() >= 10);
     }
 
-
     /**
      * Test for changes of revision 5589.
      * Ensures that interval jobs are scheduled at fix rate, no matter how long each one takes.
