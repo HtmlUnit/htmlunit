@@ -79,6 +79,12 @@ public class CacheTest extends WebTestCase {
 
         headers.remove("Last-Modified");
         assertFalse(cache.isDynamicContent(response));
+
+        headers.put("Expires", "0");
+        assertTrue(cache.isDynamicContent(response));
+
+        headers.put("Expires", "-1");
+        assertTrue(cache.isDynamicContent(response));
     }
 
     /**
