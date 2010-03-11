@@ -135,7 +135,10 @@ public abstract class JQueryTestBase extends WebServerTestCase {
      */
     protected Iterator<HtmlElement> loadPage() throws Exception {
         final HtmlPage page = client_.getPage(getUrl());
+
+        final long before = System.currentTimeMillis();
         client_.waitForBackgroundJavaScriptStartingBefore(4 * 60 * 1000);
+        System.out.println("JQuery test waited: " + (System.currentTimeMillis() - before));
 
         // dump the result page if not OK
         if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null) {
