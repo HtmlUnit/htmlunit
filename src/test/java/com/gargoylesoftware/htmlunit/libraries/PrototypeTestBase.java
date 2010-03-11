@@ -61,9 +61,9 @@ public abstract class PrototypeTestBase extends WebServerTestCase {
         final HtmlPage page =
             webClient_.getPage("http://localhost:" + PORT + "/test/unit/" + filename);
 
-        final long before = System.currentTimeMillis(); 
+        final long before = System.currentTimeMillis();
         webClient_.waitForBackgroundJavaScript(25000);
-        System.out.println("Prototype test for " + filename + " waited: " + (System.currentTimeMillis() - before)); 
+        System.out.println("Prototype test for " + filename + " waited: " + (System.currentTimeMillis() - before));
 
         String expected = getExpectations(getBrowserVersion(), filename);
         final HtmlElement testlog = page.getHtmlElementById("testlog");
