@@ -98,11 +98,11 @@ public class JavaScriptJobManagerMinimalTest {
     @Test
     public void addJob_periodicJob2() throws Exception {
         final MutableInt count = new MutableInt(0);
-        final JavaScriptJob job = new JavaScriptJob(5, 100) {
+        final JavaScriptJob job = new JavaScriptJob(5, 200) {
             public void run() {
                 if (count.intValue() == 0) {
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(200);
                     }
                     catch (final InterruptedException e) {
                         // ignore
@@ -112,9 +112,13 @@ public class JavaScriptJobManagerMinimalTest {
             }
         };
         manager_.addJob(job, page_);
-        final int remainingJobs = manager_.waitForJobs(5000);
+        final int remainingJobs = manager_.waitForJobs(300);
         Assert.assertTrue(remainingJobs >= 1);
-        Assert.assertTrue("Counter: " + count.intValue(), count.intValue() >= 40);
+        // first interval starts at 5 and ends at 205
+        // with a fix delay (what would be wrong), we would have second interval start at 205+200 = 405
+        // and therefore count == 1
+        // with a fix rate (correct), second interval starts at 205 and therefore count == 2
+        Assert.assertEquals(2, count.intValue());
     }
 
     /**
