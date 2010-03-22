@@ -21,10 +21,12 @@ import java.util.List;
 import org.apache.commons.httpclient.HttpState;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.Cookie;
@@ -144,6 +146,28 @@ public class CookieManagerTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse(HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader);
 
         loadPageWithAlerts2(getDefaultUrl());
+    }
+
+    /**
+     * Regression test for issue 2973040.
+     * When a cookie is set with value within quotes, this value should be sent within quotes
+     * in the following requests. This is a problem (bug?) in HttpClient which is not fixed in HttpClient-4.0.1.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    public void valueQuoted() throws Exception {
+        final List<NameValuePair> responseHeader = new ArrayList<NameValuePair>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "key=value"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "test=\"aa= xx==\""));
+        getMockWebConnection().setResponse(getDefaultUrl(), "", 200, "OK", "text/html", responseHeader);
+        getMockWebConnection().setDefaultResponse("");
+
+        final WebDriver driver = loadPageWithAlerts2(getDefaultUrl());
+
+        driver.get(URL_SECOND.toExternalForm());
+
+        assertEquals("key=value; test=\"aa= xx==\"", getMockWebConnection().getLastAdditionalHeaders().get("Cookie"));
     }
 
     /**
