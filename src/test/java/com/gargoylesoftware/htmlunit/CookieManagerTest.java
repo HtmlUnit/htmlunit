@@ -14,28 +14,21 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.io.IOException;
-import java.io.Writer;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.Servlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.httpclient.HttpState;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.Cookie;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Unit tests for {@link CookieManager}.
@@ -43,9 +36,12 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class CookieManagerTest extends WebServerTestCase {
+public class CookieManagerTest extends WebDriverTestCase {
+    private static final String HTML_ALERT_COOKIE = "<html><head><script>alert(document.cookie)</script>"
+        + "<body></body></html>";
 
     /**
      * Verifies the basic cookie manager behavior.
@@ -126,121 +122,48 @@ public class CookieManagerTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("my_key=\"Hello, big, big, world\"; another_key=Hi")
     public void comma() throws Exception {
-        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
-        servlets.put("/test", CommaCookieServlet.class);
-        startWebServer("./", null, servlets);
+        final List<NameValuePair> responseHeader = new ArrayList<NameValuePair>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "my_key=\"Hello, big, big, world\""));
+        responseHeader.add(new NameValuePair("Set-Cookie", "another_key=Hi"));
+        getMockWebConnection().setDefaultResponse(HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader);
 
-        final String[] expectedAlerts = {"my_key=\"Hello, big, big, world\"; another_key=Hi"};
-        final WebClient client = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        client.getPage("http://localhost:" + PORT + "/test");
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * Servlet for {@link #comma()}.
-     */
-    public static class CommaCookieServlet extends HttpServlet {
-
-        private static final long serialVersionUID = 4094440276952531020L;
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-            response.setContentType("text/html");
-            response.addCookie(new javax.servlet.http.Cookie("my_key", "Hello, big, big, world"));
-            response.addCookie(new javax.servlet.http.Cookie("another_key", "Hi"));
-            final Writer writer = response.getWriter();
-            writer.write("<html><head><script>function test() {alert(document.cookie)}</script>"
-                + "<body onload='test()'></body></html>");
-            writer.close();
-        }
+        loadPageWithAlerts2(getDefaultUrl());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("key1=; key2=")
     public void emptyCookie() throws Exception {
-        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
-        servlets.put("/test", EmptyCookieServlet.class);
-        startWebServer("./", null, servlets);
+        final List<NameValuePair> responseHeader = new ArrayList<NameValuePair>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "key1="));
+        responseHeader.add(new NameValuePair("Set-Cookie", "key2="));
+        getMockWebConnection().setDefaultResponse(HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader);
 
-        final String[] expectedAlerts = {"key1=; key2="};
-        final WebClient client = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        client.getPage("http://localhost:" + PORT + "/test");
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * Servlet for {@link #emptyCookie()}.
-     */
-    public static class EmptyCookieServlet extends HttpServlet {
-
-        private static final long serialVersionUID = 8871931124128513797L;
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-            response.setContentType("text/html");
-            response.addCookie(new javax.servlet.http.Cookie("key1", ""));
-            response.addCookie(new javax.servlet.http.Cookie("key2", null));
-            final Writer writer = response.getWriter();
-            writer.write("<html><head><script>function test() {alert(document.cookie)}</script>"
-                + "<body onload='test()'></body></html>");
-            writer.close();
-        }
+        loadPageWithAlerts2(getDefaultUrl());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("nbCalls=1")
     public void serverModifiesCookieValue() throws Exception {
-        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
-        servlets.put("/test", SimpleCookieServlet.class);
-        startWebServer("./", null, servlets);
+        final List<NameValuePair> responseHeader = new ArrayList<NameValuePair>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "nbCalls=1"));
+        getMockWebConnection().setDefaultResponse(HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader);
 
-        final String[] expectedAlerts = {"nbCalls=1", "nbCalls=2"};
-        final WebClient client = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        loadPageWithAlerts2(getDefaultUrl());
 
-        // get the page a first time
-        client.getPage("http://localhost:" + PORT + "/test");
+        final List<NameValuePair> responseHeader2 = new ArrayList<NameValuePair>();
+        responseHeader2.add(new NameValuePair("Set-Cookie", "nbCalls=2"));
+        getMockWebConnection().setResponse(getDefaultUrl(), HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader2);
 
-        // and a second one
-        client.getPage("http://localhost:" + PORT + "/test");
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * Servlet for {@link #serverModifiesCookieValue()}.
-     */
-    public static class SimpleCookieServlet extends HttpServlet {
-        private static final long serialVersionUID = -2581456646146725479L;
-        private int nbCalls_ = 0;
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-            response.setContentType("text/html");
-            response.addCookie(new javax.servlet.http.Cookie("nbCalls", String.valueOf(++nbCalls_)));
-            final Writer writer = response.getWriter();
-            writer.write("<html><head><script>function test() {alert(document.cookie)}</script>"
-                + "<body onload='test()'></body></html>");
-            writer.close();
-        }
+        setExpectedAlerts("nbCalls=2");
+        loadPageWithAlerts2(getDefaultUrl());
     }
 
     /**
@@ -295,48 +218,20 @@ public class CookieManagerTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("first=1")
     public void cookie2() throws Exception {
-        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
-        servlets.put("/test", Cookie2Servlet.class);
-        startWebServer("./", null, servlets);
+        final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
+        responseHeader1.add(new NameValuePair("Set-Cookie", "first=1"));
+        getMockWebConnection().setResponse(getDefaultUrl(), HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader1);
 
-        final String[] expectedAlerts = {"first=1", "first=1; second=2"};
-        final WebClient client = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        loadPageWithAlerts2(getDefaultUrl());
 
-        // get the page a first time
-        client.getPage("http://localhost:" + PORT + "/test");
+        final List<NameValuePair> responseHeader2 = new ArrayList<NameValuePair>();
+        responseHeader2.add(new NameValuePair("Set-Cookie", "second=2"));
+        getMockWebConnection().setResponse(getDefaultUrl(), HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader2);
 
-        // and a second one
-        client.getPage("http://localhost:" + PORT + "/test");
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * Servlet for {@link #cookie2()}.
-     */
-    public static class Cookie2Servlet extends HttpServlet {
-        private static final long serialVersionUID = -5384006255925285388L;
-        private int nbCalls_ = 0;
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-            response.setContentType("text/html");
-            if (nbCalls_++ == 0) {
-                response.addCookie(new javax.servlet.http.Cookie("first", "1"));
-            }
-            else {
-                response.addCookie(new javax.servlet.http.Cookie("second", "2"));
-            }
-            final Writer writer = response.getWriter();
-            writer.write("<html><head><script>function test() {alert(document.cookie)}</script>"
-                + "<body onload='test()'></body></html>");
-            writer.close();
-        }
+        setExpectedAlerts("first=1; second=2");
+        loadPageWithAlerts2(getDefaultUrl());
     }
 
     /**
@@ -347,16 +242,8 @@ public class CookieManagerTest extends WebServerTestCase {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        final String html
-            = "<html><head><title>First</title><script>\n"
-            + "function doTest() {\n"
-            + "    alert(document.cookie);\n"
-            + "}\n"
-            + "</script></head><body onload='doTest()'>\n"
-            + "</body></html>";
-
         final URL url = URL_FIRST;
-        webConnection.setResponse(url, html);
+        webConnection.setResponse(url, HTML_ALERT_COOKIE);
         webClient.setWebConnection(webConnection);
 
         final CookieManager mgr = webClient.getCookieManager();

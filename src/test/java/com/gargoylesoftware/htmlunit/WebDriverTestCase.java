@@ -527,8 +527,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     driver.switchTo().window(handle).close();
                 }
             }
+
+            // reset cookies to have a clean state
+            driver.manage().deleteAllCookies();
+
             // in the remaining window, load a blank page
             driver.get("about:blank");
+
         }
     }
 }
