@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes, large file download, single thread for JavaScript background tasks">
+            <action type="fix" dev="mguillem">
+                JavaScript: fire (i)frames onload event even for non-HTML pages.
+            </action>
             <action type="add" dev="mguillem" issue="2952960" due-to="Amit Manjhi">
                 JavaScript: use a single Java thread for executing background JavaScript tasks.
             </action>

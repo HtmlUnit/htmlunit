@@ -64,6 +64,7 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.ProxyAutoConfig;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptExecutor;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
@@ -436,6 +437,19 @@ public class WebClient implements Serializable {
                 // The page being loaded may already have been replaced by another page via JavaScript code.
                 if (webWindow.getEnclosedPage() == newPage) {
                     newPage.initialize();
+                    // hack: onload should be fired the same way for all type of pages
+                    // here is a hack to handle non HTML pages
+                    if (webWindow instanceof FrameWindow && !(newPage instanceof HtmlPage)) {
+                        final FrameWindow fw = (FrameWindow) webWindow;
+                        final BaseFrame frame = fw.getFrameElement();
+                        if (frame.hasEventHandlers("onload")) {
+                            if (LOG.isDebugEnabled()) {
+                                LOG.debug("Executing onload handler for " + frame);
+                            }
+                            final Event event = new Event(frame, "load");
+                            ((Node) frame.getScriptObject()).executeEvent(event);
+                        }
+                    }
                 }
             }
         }
