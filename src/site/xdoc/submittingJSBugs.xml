@@ -17,7 +17,7 @@
             </p>
             <p>
 				Before reporting an issue with JavaScript, it is very preferred if you 
-				isolate the root cause, but just saying 'Dojo' or a given web site is not working, doesn't help much.<br/>
+				isolate the root cause, but just saying 'jQuery' or a given web site is not working, doesn't help much.<br/>
 				To find the offending line, you can put <code>alert()</code> at various places,
 				compare the result of HtmlUnit to a real browser (Internet Explorer or Firefox),
 				and you will mostly be able to provide a tiny failing test case which contains
@@ -30,5 +30,128 @@
             </p>
         </section>
 
+        <section name="Example">
+            <p>
+                The below are sample steps demonstrating putting 'alerts()' for a bug reported with HtmlUnit 2.7 and Dojo 1.4.
+                Dojo is a complex JavaScript library, and you will mostly find it easier to debug simpler web applications.
+
+                Please also note the exact bug may have already been fixed and you may get different result.
+            </p>
+            <p>
+                The user complained that an error occurs: 
+            </p>
+            <source><![CDATA[
+net.sourceforge.htmlunit.corejs.javascript.EcmaError: TypeError: Cannot call method "getAttribute" of undefined
+(http://download.dojotoolkit.org/release-1.4.0/dojo-release-1.4.0/dojo/dojo.js#16(eval)#16)]]></source>
+            <p>
+                which means that in some_variable.getAttribute(), HtmlUnit evaluated it to 'undefined'
+                during execution of that line.<br/><br/>
+                The first thing to do it to be able to change the JavaScript/HTML source, which can be done by locally
+                deploying the Dojo examples in this case, or to modify the incoming JavaScript code as mentioned 
+                <a href="http://htmlunit.sourceforge.net/faq.html#HowToModifyRequestOrResponse">here</a>.<br/><br/>
+                By looking into dojo.js line #16, it is compressed very long line, so we need to beautify it,
+                again we can get the uncompressed version, modify the WebResponse, or using a beautifier 
+                <a href="http://htmlunit.svn.sourceforge.net/viewvc/htmlunit/trunk/proxy/">proxy</a>.<br/><br/>
+                To make it simpler for now, the uncompressed dojo-release-1.4.2-src.zip was locally deployed and the following test was run again:
+            </p>
+            <source><![CDATA[
+@Test
+public void dojoTest() throws Exception {
+    WebClient webClient = new WebClient();
+    List<String> collectedAlerts = new ArrayList<String>();
+    webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+    try {
+        webClient.getPage("http://localhost/dojo/dijit/tests/form/test_Button.html");
+    }
+    catch(Exception e){
+        e.printStackTrace();
+    }
+    finally {
+        webClient.closeAllWindows();
+    }
+    for (String alert : collectedAlerts) {
+        System.out.println("ALERT: " + alert);
+    }
+}
+]]></source>
+            <p>
+                giving the error 
+            </p>
+            <source><![CDATA[TypeError: Cannot call method "getAttribute" of undefined (http://localhost/dojo/dojo/_base/_loader/bootstrap.js#468(eval)#299)
+...
+at net.sourceforge.htmlunit.corejs.javascript.Interpreter.interpretLoop(Interpreter.java:1515)
+at script(http://localhost/dojo/dojo/_base/_loader/bootstrap.js#468(eval):299)
+at script(http://localhost/dojo/dojo/_base/_loader/bootstrap.js#468(eval):191)
+at script(http://localhost/dojo/dojo/_base/_loader/bootstrap.js#468(eval):238)
+at script(http://localhost/dojo/dojo/_base/_loader/bootstrap.js#468(eval):131)
+            ]]></source>
+            <p>
+                By looking into bootstrap.js line #468, you would see
+            </p>
+            <source><![CDATA[
+dojo["eval"] = function(scriptFragment){
+    return d.global.eval ? d.global.eval(scriptFragment) : eval(scriptFragment); // line #468
+}
+]]></source>
+            <p>
+                We then add "alert(scriptFragment);" just before that line, and re-run the test, and since the alerted strings
+                are too large, we print them to outside files
+            </p>
+            <source><![CDATA[
+    private int counter = 1;
+    public void dojoTest() throws Exception {
+
+        ...
+
+        for (String alert : collectedAlerts) {
+            System.out.println("ALERT: " + alert);
+            FileUtils.writeStringToFile(new File("path_to_dir\\testOutput_" + counter++ + ".txt"), alert);
+        }
+    }
+]]></source>
+            <p>
+                then search for any line #299 with 'getAttribute()', you would see the below line for the file for dijit/_base/manager.js
+            </p>
+            <source><![CDATA[dijit.byNode = function(node){
+	return dijit.registry.byId(node.getAttribute("widgetId")); // line #299
+};]]></source>
+            <p>
+                By putting 'alert(node)' just before that line, you will get 'undefined' alert.<br/><br/>
+                Going back to the stack trace, we know that something.byNode() was called on #191, searching in the files again,
+                you will see the below for the file for dijit/form/Button.js'
+            </p>
+            <source><![CDATA[if(!this.dropDown){
+    var dropDownNode = dojo.query("[widgetId]", this.dropDownContainer)[0];
+    this.dropDown = dijit.byNode(dropDownNode); // line #191
+    delete this.dropDownContainer;
+}]]></source>
+            <p>
+                That means that dropDownNode was evaluated to 'undefined', which was passed to dijit.byNode().
+                To further debug the issue of dojo.query() and since it is called many times, we change the calling code to: 
+            </p>
+            <source><![CDATA[if(!this.dropDown){
+    window.top.debugMe = true;  // ADDED FOR DEBUGGING
+    var dropDownNode = dojo.query("[widgetId]", this.dropDownContainer)[0];
+    window.top.debugMe = false;  // ADDED FOR DEBUGGING
+    this.dropDown = dijit.byNode(dropDownNode); // line #191
+    delete this.dropDownContainer;
+}]]></source>
+            <p>
+                And add the below alerts in dojo/_base/query.js
+            </p>
+            <source><![CDATA[d.query = function(query, root){
+    ...
+    var r = getQueryFunc(query)(root);
+    if (window.top.debugMe)        // ADDED FOR DEBUGGING
+       alert(getQueryFunc(query))  // ADDED FOR DEBUGGING
+    ...
+}]]></source>
+            <p>
+                you will find getQueryFunc() returns different value in HtmlUnit than with real browser.<br/><br/>
+                
+                You could follow that technique to debug further and reach a single line where HtmlUnit incorrectly behaves, and provide minimal test case.
+            </p>
+        </section>
     </body>
 </document>
