@@ -3012,6 +3012,12 @@
                 descr="MSDN documentation"/>
             <browser name="Internet Explorer"/>
         </function>
+        <function name="stop">
+            <doclink
+                url="https://developer.mozilla.org/en/DOM/window.stop"
+                descr="Mozilla documentation"/>
+            <browser name="Firefox"/>
+        </function>
     </class>
 
     <class name="XMLAttr" extends="Attr" classname="com.gargoylesoftware.htmlunit.javascript.host.xml.XMLAttr"

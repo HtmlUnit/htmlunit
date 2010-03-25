@@ -1653,4 +1653,13 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     public int jsxFunction_ScriptEngineMinorVersion() {
         return (int) getBrowserVersion().getBrowserVersionNumeric();
     }
+    
+    /**
+     * Should implement the stop() function on the window object.
+     * (currently empty implementation)
+     * @see <a href="https://developer.mozilla.org/en/DOM/window.stop">window.stop</a>
+     */
+    public void jsxFunction_stop() {
+        //empty
+    }
 }

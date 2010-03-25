@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes, large file download, single thread for JavaScript background tasks">
+            <action type="add" dev="asashour" issue="2971861">
+                JavaScript: add empty implementation of window.stop (FF only).
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: fire (i)frames onload event even for non-HTML pages.
             </action>
