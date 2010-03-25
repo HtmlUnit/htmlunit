@@ -50,10 +50,9 @@ public class GAESupportTest extends WebTestCase {
     @SuppressWarnings("unchecked")
     public void init() throws IOException {
         if (whitelist.isEmpty()) {
-            System.out.println(getClass().getResource("whitelist.txt"));
             final InputStream is = getClass().getResourceAsStream("whitelist.txt");
             Assert.assertNotNull(is);
-            final List<String> lines = (List<String>) IOUtils.readLines(is);
+            final List<String> lines = IOUtils.readLines(is);
             IOUtils.closeQuietly(is);
 
             whitelist.addAll(lines);
@@ -65,8 +64,8 @@ public class GAESupportTest extends WebTestCase {
      * Fails as of HtmlUnit-2.7 due to usage of java.net.URLStreamHandler (and problably other classes).
      * @throws Exception if the test fails
      */
-    @NotYetImplemented
     @Test
+    @NotYetImplemented
     public void whitelist() throws Exception {
         final ClassLoader cl = new ClassLoader(ClassLoader.getSystemClassLoader()) {
             @Override
