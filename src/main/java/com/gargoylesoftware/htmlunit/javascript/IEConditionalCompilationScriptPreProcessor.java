@@ -210,7 +210,6 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
      * @return the index
      */
     private static int indexOf(final String sourceCode, final String str, final int fromIndex) {
-        // parsing logic should be synchronized with #preProcess()
         PARSING_STATUS parsingStatus = PARSING_STATUS.NORMAL;
         char stringChar = 0;
         for (int i = 0; i < sourceCode.length(); i++) {

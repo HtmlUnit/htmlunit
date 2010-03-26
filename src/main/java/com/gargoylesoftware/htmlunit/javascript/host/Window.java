@@ -133,9 +133,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     private Object opener_;
 
     /**
-     * Cache computed styles when possible, because their calculation is very expensive, involving lots
-     * of CSS parsing and lots of XPath expression evaluation (CSS selectors are translated to XPath and
-     * then evaluated). We use a weak hash map because we don't want this cache to be the only reason
+     * Cache computed styles when possible, because their calculation is very expensive.
+     * We use a weak hash map because we don't want this cache to be the only reason
      * nodes are kept around in the JVM, if all other references to them are gone.
      */
     private transient WeakHashMap<Node, ComputedCSSStyleDeclaration> computedStyles_ =
