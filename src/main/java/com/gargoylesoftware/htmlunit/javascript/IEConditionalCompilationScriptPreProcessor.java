@@ -44,6 +44,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProcessor {
 
     private static final String CC_VARIABLE_PREFIX = "htmlunit_cc_variable_";
+    private enum PARSING_STATUS { NORMAL, IN_MULTI_LINE_COMMENT, IN_SINGLE_LINE_COMMENT, IN_STRING, IN_REG_EXP }
+
     private final Set<String> setVariables_ = new HashSet<String>();
 
     /**
@@ -52,11 +54,11 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
     public String preProcess(final HtmlPage htmlPage, final String sourceCode,
             final String sourceName, final int lineNumber, final HtmlElement htmlElement) {
 
-        final int startPos = StringScriptPreProcessor.indexOf(sourceCode, "/*@cc_on", 0);
+        final int startPos = indexOf(sourceCode, "/*@cc_on", 0);
         if (startPos == -1) {
             return sourceCode;
         }
-        final int endPos = StringScriptPreProcessor.indexOf(sourceCode, "@*/", startPos);
+        final int endPos = indexOf(sourceCode, "@*/", startPos);
         if (endPos == -1) {
             return sourceCode;
         }
@@ -197,5 +199,98 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
             return "NaN";
         }
         return variable;
+    }
+
+    /**
+     * Returns the index within the JavaScript code of the first occurrence of the specified substring.
+     * This method searches inside multi-lines comments, but ignores the string literals and single line comments.
+     * @param sourceCode JavaScript source
+     * @param str any string
+     * @param fromIndex the index from which to start the search
+     * @return the index
+     */
+    private static int indexOf(final String sourceCode, final String str, final int fromIndex) {
+        // parsing logic should be synchronized with #preProcess()
+        PARSING_STATUS parsingStatus = PARSING_STATUS.NORMAL;
+        char stringChar = 0;
+        for (int i = 0; i < sourceCode.length(); i++) {
+            if ((parsingStatus == PARSING_STATUS.NORMAL || parsingStatus == PARSING_STATUS.IN_MULTI_LINE_COMMENT)
+                    && i >= fromIndex && i + str.length() <= sourceCode.length()
+                    && sourceCode.substring(i, i + str.length()).equals(str)) {
+                return i;
+            }
+            final char ch = sourceCode.charAt(i);
+            switch (ch) {
+                case '/':
+                    if (parsingStatus == PARSING_STATUS.NORMAL && i + 1 < sourceCode.length()) {
+                        final char nextCh = sourceCode.charAt(i + 1);
+                        if (nextCh == '/') {
+                            parsingStatus = PARSING_STATUS.IN_SINGLE_LINE_COMMENT;
+                        }
+                        else if (nextCh == '*') {
+                            parsingStatus = PARSING_STATUS.IN_MULTI_LINE_COMMENT;
+                        }
+                        else {
+                            stringChar = ch;
+                            parsingStatus = PARSING_STATUS.IN_REG_EXP;
+                        }
+                    }
+                    else if (parsingStatus == PARSING_STATUS.IN_REG_EXP && ch == stringChar) {
+                        stringChar = 0;
+                        parsingStatus = PARSING_STATUS.NORMAL;
+                    }
+                    break;
+
+                case '*':
+                    if (parsingStatus == PARSING_STATUS.IN_MULTI_LINE_COMMENT && i + 1 < sourceCode.length()) {
+                        final char nextCh = sourceCode.charAt(i + 1);
+                        if (nextCh == '/') {
+                            parsingStatus = PARSING_STATUS.NORMAL;
+                        }
+                    }
+                    break;
+
+                case '\n':
+                    if (parsingStatus == PARSING_STATUS.IN_SINGLE_LINE_COMMENT) {
+                        parsingStatus = PARSING_STATUS.NORMAL;
+                    }
+                    break;
+
+                case '\'':
+                case '"':
+                    if (parsingStatus == PARSING_STATUS.NORMAL) {
+                        stringChar = ch;
+                        parsingStatus = PARSING_STATUS.IN_STRING;
+                    }
+                    else if (parsingStatus == PARSING_STATUS.IN_STRING && ch == stringChar) {
+                        stringChar = 0;
+                        parsingStatus = PARSING_STATUS.NORMAL;
+                    }
+                    break;
+
+                case '\\':
+                    if (parsingStatus == PARSING_STATUS.IN_STRING) {
+                        if (i + 3 < sourceCode.length() && sourceCode.charAt(i + 1) == 'x') {
+                            final char ch1 = Character.toUpperCase(sourceCode.charAt(i + 2));
+                            final char ch2 = Character.toUpperCase(sourceCode.charAt(i + 3));
+                            if ((ch1 >= '0' && ch1 <= '9' || ch1 >= 'A' && ch1 <= 'F')
+                                    && (ch2 >= '0' && ch2 <= '9' || ch2 >= 'A' && ch2 <= 'F')) {
+                                final char character = (char) Integer.parseInt(sourceCode.substring(i + 2, i + 4), 16);
+                                if (character >= ' ') {
+                                    i += 3;
+                                    continue;
+                                }
+                            }
+                        }
+                        else if (i + 1 < sourceCode.length()) {
+                            i++;
+                            continue;
+                        }
+                    }
+
+                default:
+            }
+        }
+        return -1;
     }
 }
