@@ -546,7 +546,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             return true;
         }
         if (!getBrowserVersion().isIE()) {
-            final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(BrowserVersion.FIREFOX_2);
+            final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(BrowserVersion.FIREFOX_3);
             for (final String functionName : jsConfig.getClassConfiguration(getClassName()).functionKeys()) {
                 if (name.equals(functionName)) {
                     return true;
@@ -574,7 +574,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             }
 
             idList.add("length");
-            final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(BrowserVersion.FIREFOX_2);
+            final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(BrowserVersion.FIREFOX_3);
             for (final String name : jsConfig.getClassConfiguration(getClassName()).functionKeys()) {
                 idList.add(name);
             }
@@ -668,20 +668,6 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      */
     public Node item(final int index) {
         return (DomNode) transformer_.transform(getElements().get(index));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getDefaultValue(final Class< ? > hint) {
-        if (String.class.equals(hint) || hint == null) {
-            if (getBrowserVersion().isIE()) {
-                return "[object]"; // the super helpful IE solution
-            }
-            return "[object HTMLCollection]";
-        }
-        return super.getDefaultValue(hint);
     }
 
     /**
