@@ -2240,5 +2240,35 @@ public class HtmlPage extends SgmlPage {
         return (document instanceof HtmlPage)
             && ("name".equals(attributeName) || "id".equals(attributeName));
     }
+
+    /**
+     * Returns whether the current page mode is in quirks mode or in standards mode.
+     * @return true for quirks mode, false for standards mode
+     */
+    public boolean isQuirksMode() {
+        boolean quirks = true;
+        final DocumentType docType = getDoctype();
+        if (docType != null) {
+            final String publicId = docType.getPublicId();
+            final String systemId = docType.getSystemId();
+            if (systemId != null) {
+                if (systemId.equals("http://www.w3.org/TR/html4/strict.dtd")) {
+                    quirks = false;
+                }
+                else if (systemId.equals("http://www.w3.org/TR/html4/loose.dtd")) {
+                    if (publicId.equals("-//W3C//DTD HTML 4.01 Transitional//EN")
+                        || (publicId.equals("-//W3C//DTD HTML 4.0 Transitional//EN")
+                                && getWebClient().getBrowserVersion().isIE())) {
+                        quirks = false;
+                    }
+                }
+                else if (systemId.equals("http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd")
+                    || systemId.equals("http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd")) {
+                    quirks = false;
+                }
+            }
+        }
+       return quirks;
+    }
 }
 

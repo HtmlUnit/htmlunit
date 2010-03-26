@@ -684,4 +684,12 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         }
         return getScriptableFor(object);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getClassName() {
+        return "HTMLCollection";
+    }
 }

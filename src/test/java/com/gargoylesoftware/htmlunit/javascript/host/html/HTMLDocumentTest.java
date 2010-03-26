@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static org.junit.Assert.fail;
 
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,10 +27,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
@@ -203,7 +206,15 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlUnitDriver huDriver = (HtmlUnitDriver) driver;
+            final Field field = HtmlUnitDriver.class.getDeclaredField("currentWindow");
+            field.setAccessible(true);
+            final WebWindow webWindow = (WebWindow) field.get(huDriver);
+            final HtmlPage page = (HtmlPage) webWindow.getEnclosedPage();
+            assertEquals(getExpectedAlerts()[0].equals("BackCompat"), page.isQuirksMode());
+        }
     }
 
     /**
