@@ -69,6 +69,7 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptFunctionJob
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptStringJob;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
@@ -1387,7 +1388,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
         final StyleSheetList sheets = document_.jsxGet_styleSheets();
         for (int i = 0; i < sheets.jsxGet_length(); i++) {
-            final Stylesheet sheet = (Stylesheet) sheets.jsxFunction_item(i);
+            final CSSStyleSheet sheet = (CSSStyleSheet) sheets.jsxFunction_item(i);
             if (sheet.isActive()) {
                 if (LOG.isTraceEnabled()) {
                     LOG.trace("modifyIfNecessary: " + sheet + ", " + style + ", " + element);

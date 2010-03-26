@@ -18,6 +18,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
@@ -97,7 +98,7 @@ public class StyleSheetList extends SimpleScriptable {
 
         final HTMLElement element = (HTMLElement) nodes_.jsxFunction_item(new Integer(index));
 
-        final Stylesheet sheet;
+        final CSSStyleSheet sheet;
         // <style type="text/css"> ... </style>
         if (element instanceof HTMLStyleElement) {
             sheet = ((HTMLStyleElement) element).jsxGet_sheet();

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 
 /**
  * A JavaScript object for a MediaList.
@@ -41,7 +42,7 @@ public class MediaList extends SimpleScriptable {
      * @param parent the parent style
      * @param wrappedList the wrapped media list that this host object exposes
      */
-    public MediaList(final Stylesheet parent, final org.w3c.dom.stylesheets.MediaList wrappedList) {
+    public MediaList(final CSSStyleSheet parent, final org.w3c.dom.stylesheets.MediaList wrappedList) {
         wrappedList_ = wrappedList;
         setParentScope(parent);
         setPrototype(getPrototype(getClass()));

@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
-import com.gargoylesoftware.htmlunit.javascript.host.Stylesheet;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
 
 /**
@@ -86,7 +85,7 @@ public class SelectorSpecificityTest extends WebTestCase {
         final HtmlPage page = loadPage(html);
         final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
         final HTMLStyleElement host = (HTMLStyleElement) node.getScriptObject();
-        final Stylesheet sheet = host.jsxGet_sheet();
+        final CSSStyleSheet sheet = host.jsxGet_sheet();
 
         final Selector selectorObject = parseSelector(sheet, selector);
         final SelectorSpecificity specificity = new SelectorSpecificity(selectorObject);
@@ -94,7 +93,7 @@ public class SelectorSpecificityTest extends WebTestCase {
         return specificity;
     }
 
-    private Selector parseSelector(final Stylesheet sheet, final String rule) {
+    private Selector parseSelector(final CSSStyleSheet sheet, final String rule) {
         return sheet.parseSelectors(new InputSource(new StringReader(rule))).item(0);
     }
 }

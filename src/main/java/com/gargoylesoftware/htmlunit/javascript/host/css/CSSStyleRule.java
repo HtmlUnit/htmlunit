@@ -17,8 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.gargoylesoftware.htmlunit.javascript.host.Stylesheet;
-
 /**
  * A JavaScript object for a CSSStyleRule.
  *
@@ -42,7 +40,7 @@ public class CSSStyleRule extends CSSRule {
      * @param stylesheet the Stylesheet of this rule.
      * @param rule the wrapped rule
      */
-    protected CSSStyleRule(final Stylesheet stylesheet, final org.w3c.dom.css.CSSRule rule) {
+    protected CSSStyleRule(final CSSStyleSheet stylesheet, final org.w3c.dom.css.CSSRule rule) {
         super(stylesheet, rule);
     }
 

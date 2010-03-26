@@ -730,6 +730,31 @@
         <property name="style" readable="true" writable="false"/>
     </class>
 
+    <class name="CSSStyleSheet" classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet" JSObject="true">
+        <doclink
+            url="http://msdn2.microsoft.com/en-us/library/ms535871.aspx"
+            descr="MSDN documentation"/>
+        <property name="cssRules" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="href" readable="true" writable="false"/>
+        <property name="ownerNode" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="owningElement" readable="true" writable="false">
+            <browser name="Internet Explorer"/>
+        </property>
+        <property name="rules" readable="true" writable="false">
+            <browser name="Internet Explorer"/>
+        </property>
+        <function name="addRule">
+            <browser name="Internet Explorer"/>
+        </function>
+        <function name="insertRule">
+            <browser name="Firefox"/>
+        </function>
+    </class>
+
     <class name="CSSValue" classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSValue" JSObject="true">
         <browser name="Firefox"/>
         <constant name="CSS_INHERIT"/>
@@ -2739,31 +2764,6 @@
         <property name="length" readable="true" writable="false"/>
         <function name="item"/>
         <function name="namedItem"/>
-    </class>
-
-    <class name="Stylesheet" classname="com.gargoylesoftware.htmlunit.javascript.host.Stylesheet" JSObject="true">
-        <doclink
-            url="http://msdn2.microsoft.com/en-us/library/ms535871.aspx"
-            descr="MSDN documentation"/>
-        <property name="cssRules" readable="true" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="href" readable="true" writable="false"/>
-        <property name="ownerNode" readable="true" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="owningElement" readable="true" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="rules" readable="true" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <function name="addRule">
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="insertRule">
-            <browser name="Firefox"/>
-        </function>
     </class>
 
     <class name="StyleSheetList" classname="com.gargoylesoftware.htmlunit.javascript.host.StyleSheetList" JSObject="true">

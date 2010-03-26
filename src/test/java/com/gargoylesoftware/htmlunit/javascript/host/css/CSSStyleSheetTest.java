@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import java.io.StringReader;
 import java.net.URL;
@@ -21,7 +21,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.w3c.css.sac.InputSource;
 import org.w3c.css.sac.Selector;
-import org.w3c.dom.css.CSSStyleSheet;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -40,14 +39,14 @@ import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.parser.SACParserCSS21;
 
 /**
- * Unit tests for {@link Stylesheet}.
+ * Unit tests for {@link CSSStyleSheet}.
  *
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class StyleSheetTest extends WebDriverTestCase {
+public class CSSStyleSheetTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -75,7 +74,7 @@ public class StyleSheetTest extends WebDriverTestCase {
 
         final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
         final HTMLStyleElement host = (HTMLStyleElement) node.getScriptObject();
-        final Stylesheet sheet = host.jsxGet_sheet();
+        final CSSStyleSheet sheet = host.jsxGet_sheet();
 
         Selector selector = parseSelector(sheet, "*.yui-log input { }");
         assertFalse(sheet.selects(selector, body));
@@ -90,7 +89,7 @@ public class StyleSheetTest extends WebDriverTestCase {
         assertFalse(sheet.selects(selector, input2));
     }
 
-    private Selector parseSelector(final Stylesheet sheet, final String rule) {
+    private Selector parseSelector(final CSSStyleSheet sheet, final String rule) {
         return sheet.parseSelectors(new InputSource(new StringReader(rule))).item(0);
     }
 
@@ -189,7 +188,7 @@ public class StyleSheetTest extends WebDriverTestCase {
         final HtmlPage page = loadPage(html);
         final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
         final HTMLStyleElement host = (HTMLStyleElement) node.getScriptObject();
-        final Stylesheet sheet = host.jsxGet_sheet();
+        final CSSStyleSheet sheet = host.jsxGet_sheet();
         final Selector selector = sheet.parseSelectors(new InputSource(new StringReader(css))).item(0);
         assertEquals(selectBody, sheet.selects(selector, page.getHtmlElementById("b")));
         assertEquals(selectDivD, sheet.selects(selector, page.getHtmlElementById("d")));
@@ -357,7 +356,7 @@ public class StyleSheetTest extends WebDriverTestCase {
     public void npe_root() throws Exception {
         final CSSOMParser parser = new CSSOMParser(new SACParserCSS21());
         final InputSource source = new InputSource(new StringReader(""));
-        final CSSStyleSheet ss = parser.parseStyleSheet(source, null, null);
+        final org.w3c.dom.css.CSSStyleSheet ss = parser.parseStyleSheet(source, null, null);
 
         ss.insertRule(".testStyle { width: 24px;}", 0);
         ss.insertRule(" .testStyleDef { height: 42px; }", 0);

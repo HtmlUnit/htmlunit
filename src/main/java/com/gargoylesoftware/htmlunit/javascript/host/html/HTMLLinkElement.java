@@ -18,7 +18,7 @@ import java.net.MalformedURLException;
 
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.host.Stylesheet;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 
 /**
  * The JavaScript object "HTMLLinkElement".
@@ -34,7 +34,7 @@ public class HTMLLinkElement extends HTMLElement {
      * The associated style sheet (only valid for links of type
      * <tt>&lt;link rel="stylesheet" type="text/css" href="..." /&gt;</tt>).
      */
-    private Stylesheet sheet_;
+    private CSSStyleSheet sheet_;
 
     /**
      * Creates an instance.
@@ -109,9 +109,9 @@ public class HTMLLinkElement extends HTMLElement {
      * <tt>&lt;link rel="stylesheet" type="text/css" href="..." /&gt;</tt>).
      * @return the associated style sheet
      */
-    public Stylesheet getSheet() {
+    public CSSStyleSheet getSheet() {
         if (sheet_ == null) {
-            sheet_ = Stylesheet.loadStylesheet(getWindow(), this, (HtmlLink) getDomNodeOrDie(), null);
+            sheet_ = CSSStyleSheet.loadStylesheet(getWindow(), this, (HtmlLink) getDomNodeOrDie(), null);
         }
         return sheet_;
     }

@@ -20,7 +20,6 @@ import java.util.List;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.host.Stylesheet;
 
 /**
  * A JavaScript object for a CSSRuleList.
@@ -32,7 +31,7 @@ public class CSSRuleList extends SimpleScriptable {
 
     private static final long serialVersionUID = 6068213884501456020L;
 
-    private final Stylesheet stylesheet_;
+    private final CSSStyleSheet stylesheet_;
     private final org.w3c.dom.css.CSSRuleList rules_;
 
     /**
@@ -48,7 +47,7 @@ public class CSSRuleList extends SimpleScriptable {
      * Creates a new instance.
      * @param stylesheet the stylesheet
      */
-    public CSSRuleList(final Stylesheet stylesheet) {
+    public CSSRuleList(final CSSStyleSheet stylesheet) {
         stylesheet_ = stylesheet;
         rules_ = stylesheet.getWrappedSheet().getCssRules();
         setParentScope(stylesheet.getParentScope());

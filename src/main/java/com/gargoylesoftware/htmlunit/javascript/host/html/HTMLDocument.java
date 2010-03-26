@@ -79,10 +79,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.NodeFilter;
 import com.gargoylesoftware.htmlunit.javascript.host.Range;
 import com.gargoylesoftware.htmlunit.javascript.host.Selection;
 import com.gargoylesoftware.htmlunit.javascript.host.StyleSheetList;
-import com.gargoylesoftware.htmlunit.javascript.host.Stylesheet;
 import com.gargoylesoftware.htmlunit.javascript.host.TreeWalker;
 import com.gargoylesoftware.htmlunit.javascript.host.UIEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 
 /**
@@ -982,15 +982,15 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
     /**
      * Creates a new Stylesheet.
-     * Current implementation just creates an empty {@link Stylesheet} object.
+     * Current implementation just creates an empty {@link CSSStyleSheet} object.
      * @param url the stylesheet URL
      * @param index where to insert the sheet in the collection
      * @return the newly created stylesheet
      */
-    public Stylesheet jsxFunction_createStyleSheet(final String url, final int index) {
+    public CSSStyleSheet jsxFunction_createStyleSheet(final String url, final int index) {
         // minimal implementation
-        final Stylesheet stylesheet = new Stylesheet();
-        stylesheet.setPrototype(getPrototype(Stylesheet.class));
+        final CSSStyleSheet stylesheet = new CSSStyleSheet();
+        stylesheet.setPrototype(getPrototype(CSSStyleSheet.class));
         stylesheet.setParentScope(getWindow());
         return stylesheet;
     }

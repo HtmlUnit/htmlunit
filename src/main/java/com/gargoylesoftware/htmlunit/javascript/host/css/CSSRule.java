@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.host.Stylesheet;
 
 /**
  * A JavaScript object for a CSSRule.
@@ -56,7 +55,7 @@ public class CSSRule extends SimpleScriptable {
 
     private static final long serialVersionUID = -8392071769970424557L;
 
-    private final Stylesheet stylesheet_;
+    private final CSSStyleSheet stylesheet_;
 
     private final org.w3c.dom.css.CSSRule rule_;
 
@@ -75,7 +74,7 @@ public class CSSRule extends SimpleScriptable {
      * @param rule the wrapped rule
      * @return a CSSRule subclass according to the rule type
      */
-    public static CSSRule create(final Stylesheet stylesheet, final org.w3c.dom.css.CSSRule rule) {
+    public static CSSRule create(final CSSStyleSheet stylesheet, final org.w3c.dom.css.CSSRule rule) {
         switch (rule.getType()) {
             case STYLE_RULE:
                 return new CSSStyleRule(stylesheet, rule);
@@ -92,7 +91,7 @@ public class CSSRule extends SimpleScriptable {
      * @param stylesheet the Stylesheet of this rule.
      * @param rule the wrapped rule
      */
-    protected CSSRule(final Stylesheet stylesheet, final org.w3c.dom.css.CSSRule rule) {
+    protected CSSRule(final CSSStyleSheet stylesheet, final org.w3c.dom.css.CSSRule rule) {
         stylesheet_ = stylesheet;
         rule_ = rule;
         setParentScope(stylesheet);
@@ -128,7 +127,7 @@ public class CSSRule extends SimpleScriptable {
      * Returns the style sheet that contains this rule.
      * @return the style sheet that contains this rule.
      */
-    public Stylesheet jsxGet_parentStyleSheet() {
+    public CSSStyleSheet jsxGet_parentStyleSheet() {
         return stylesheet_;
     }
 

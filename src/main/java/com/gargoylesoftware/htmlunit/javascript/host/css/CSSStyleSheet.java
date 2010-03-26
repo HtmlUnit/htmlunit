@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -44,7 +44,6 @@ import org.w3c.css.sac.SiblingSelector;
 import org.w3c.dom.css.CSSImportRule;
 import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSRuleList;
-import org.w3c.dom.css.CSSStyleSheet;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
@@ -64,7 +63,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.steadystate.css.dom.CSSImportRuleImpl;
@@ -84,13 +83,13 @@ import com.steadystate.css.parser.SelectorListImpl;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public class Stylesheet extends SimpleScriptable {
+public class CSSStyleSheet extends SimpleScriptable {
 
     private static final long serialVersionUID = -8341675386925348206L;
-    private static final Log LOG = LogFactory.getLog(Stylesheet.class);
+    private static final Log LOG = LogFactory.getLog(CSSStyleSheet.class);
 
     /** The parsed stylesheet which this host object wraps. */
-    private final CSSStyleSheet wrapped_;
+    private final org.w3c.dom.css.CSSStyleSheet wrapped_;
 
     /** The HTML element which owns this stylesheet. */
     private final HTMLElement ownerNode_;
@@ -99,7 +98,7 @@ public class Stylesheet extends SimpleScriptable {
     private com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList cssRules_;
 
     /** The CSS import rules and their corresponding stylesheets. */
-    private Map<CSSImportRule, Stylesheet> imports_ = new HashMap<CSSImportRule, Stylesheet>();
+    private Map<CSSImportRule, CSSStyleSheet> imports_ = new HashMap<CSSImportRule, CSSStyleSheet>();
 
     /** This stylesheet's URI (used to resolved contained @import rules). */
     private String uri_;
@@ -107,7 +106,7 @@ public class Stylesheet extends SimpleScriptable {
     /**
      * Creates a new empty stylesheet.
      */
-    public Stylesheet() {
+    public CSSStyleSheet() {
         wrapped_ = new CSSStyleSheetImpl();
         ownerNode_ = null;
     }
@@ -118,9 +117,9 @@ public class Stylesheet extends SimpleScriptable {
      * @param source the input source which contains the CSS stylesheet which this stylesheet host object represents
      * @param uri this stylesheet's URI (used to resolved contained @import rules)
      */
-    public Stylesheet(final HTMLElement element, final InputSource source, final String uri) {
+    public CSSStyleSheet(final HTMLElement element, final InputSource source, final String uri) {
         setParentScope(element.getWindow());
-        setPrototype(getPrototype(Stylesheet.class));
+        setPrototype(getPrototype(CSSStyleSheet.class));
         wrapped_ = parseCSS(source);
         uri_ = uri;
         ownerNode_ = element;
@@ -132,9 +131,9 @@ public class Stylesheet extends SimpleScriptable {
      * @param wrapped the CSS stylesheet which this stylesheet host object represents
      * @param uri this stylesheet's URI (used to resolved contained @import rules)
      */
-    public Stylesheet(final HTMLElement element, final CSSStyleSheet wrapped, final String uri) {
+    public CSSStyleSheet(final HTMLElement element, final org.w3c.dom.css.CSSStyleSheet wrapped, final String uri) {
         setParentScope(element.getWindow());
-        setPrototype(getPrototype(Stylesheet.class));
+        setPrototype(getPrototype(CSSStyleSheet.class));
         wrapped_ = wrapped;
         uri_ = uri;
         ownerNode_ = element;
@@ -144,7 +143,7 @@ public class Stylesheet extends SimpleScriptable {
      * Returns the wrapped stylesheet.
      * @return the wrapped stylesheet
      */
-    public CSSStyleSheet getWrappedSheet() {
+    public org.w3c.dom.css.CSSStyleSheet getWrappedSheet() {
         return wrapped_;
     }
 
@@ -156,7 +155,7 @@ public class Stylesheet extends SimpleScriptable {
      * @param element the element to which style rules must apply in order for them to be added to
      *        the specified style
      */
-    void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final HTMLElement element) {
+    public void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final HTMLElement element) {
         final CSSRuleList rules = getWrappedSheet().getCssRules();
         modifyIfNecessary(style, element, rules);
     }
@@ -183,7 +182,7 @@ public class Stylesheet extends SimpleScriptable {
             }
             else if (rule.getType() == CSSRule.IMPORT_RULE) {
                 final CSSImportRuleImpl importRule = (CSSImportRuleImpl) rule;
-                Stylesheet sheet = imports_.get(importRule);
+                CSSStyleSheet sheet = imports_.get(importRule);
                 if (sheet == null) {
                     // TODO: surely wrong: in which case is it null and why?
                     final String uri = (uri_ != null) ? uri_
@@ -214,9 +213,9 @@ public class Stylesheet extends SimpleScriptable {
      * @param url the stylesheet's url (may be <tt>null</tt> if a <tt>link</tt> is specified)
      * @return the loaded stylesheet
      */
-    public static Stylesheet loadStylesheet(final Window window, final HTMLElement element,
+    public static CSSStyleSheet loadStylesheet(final Window window, final HTMLElement element,
         final HtmlLink link, final String url) {
-        Stylesheet sheet;
+        CSSStyleSheet sheet;
         final HtmlPage page = (HtmlPage) element.getDomNodeOrDie().getPage(); // fallback uri for exceptions
         String uri = page.getWebResponse().getRequestSettings().getUrl().toExternalForm();
         try {
@@ -237,8 +236,8 @@ public class Stylesheet extends SimpleScriptable {
             uri = request.getUrl().toExternalForm();
             final Cache cache = client.getCache();
             final Object fromCache = cache.getCachedObject(request);
-            if (fromCache != null && fromCache instanceof CSSStyleSheet) {
-                sheet = new Stylesheet(element, (CSSStyleSheet) fromCache, uri);
+            if (fromCache != null && fromCache instanceof org.w3c.dom.css.CSSStyleSheet) {
+                sheet = new CSSStyleSheet(element, (org.w3c.dom.css.CSSStyleSheet) fromCache, uri);
             }
             else {
                 final WebResponse response = client.loadWebResponse(request);
@@ -248,7 +247,7 @@ public class Stylesheet extends SimpleScriptable {
                 // CSS content must have downloaded OK; go ahead and build the corresponding stylesheet.
                 final String css = response.getContentAsString();
                 final InputSource source = new InputSource(new StringReader(css));
-                sheet = new Stylesheet(element, source, uri);
+                sheet = new CSSStyleSheet(element, source, uri);
                 cache.cacheIfPossible(request, response, sheet.getWrappedSheet());
             }
         }
@@ -256,13 +255,13 @@ public class Stylesheet extends SimpleScriptable {
             // Got a 404 response or something like that; behave nicely.
             LOG.error(e.getMessage());
             final InputSource source = new InputSource(new StringReader(""));
-            sheet = new Stylesheet(element, source, uri);
+            sheet = new CSSStyleSheet(element, source, uri);
         }
         catch (final IOException e) {
             // Got a basic IO error; behave nicely.
             LOG.error(e.getMessage());
             final InputSource source = new InputSource(new StringReader(""));
-            sheet = new Stylesheet(element, source, uri);
+            sheet = new CSSStyleSheet(element, source, uri);
         }
         catch (final Exception e) {
             // Got something unexpected; we can throw an exception in this case.
@@ -435,8 +434,8 @@ public class Stylesheet extends SimpleScriptable {
      * @param source the source from which to retrieve the CSS to be parsed
      * @return the stylesheet parsed from the specified input source
      */
-    private CSSStyleSheet parseCSS(final InputSource source) {
-        CSSStyleSheet ss;
+    private org.w3c.dom.css.CSSStyleSheet parseCSS(final InputSource source) {
+        org.w3c.dom.css.CSSStyleSheet ss;
         try {
             final ErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
             final CSSOMParser parser = new CSSOMParser(new SACParserCSS21());
@@ -510,20 +509,6 @@ public class Stylesheet extends SimpleScriptable {
      */
     public HTMLElement jsxGet_owningElement() {
         return ownerNode_;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getDefaultValue(final Class< ? > hint) {
-        if (String.class.equals(hint) || hint == null) {
-            if (getBrowserVersion().isIE()) {
-                return "[object]"; // the super helpful IE solution
-            }
-            return "[object CSSStyleSheet]";
-        }
-        return super.getDefaultValue(hint);
     }
 
     /**
@@ -626,7 +611,7 @@ public class Stylesheet extends SimpleScriptable {
      * Returns <tt>true</tt> if this stylesheet is active, based on the media types it is associated with (if any).
      * @return <tt>true</tt> if this stylesheet is active, based on the media types it is associated with (if any)
      */
-    boolean isActive() {
+    public boolean isActive() {
         final String media;
         final HtmlElement e = ownerNode_.getDomNodeOrNull();
         if (e instanceof HtmlStyle) {

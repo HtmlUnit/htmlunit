@@ -14,10 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import org.w3c.dom.css.CSSStyleSheet;
-
 import com.gargoylesoftware.htmlunit.javascript.host.MediaList;
-import com.gargoylesoftware.htmlunit.javascript.host.Stylesheet;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 /**
@@ -31,7 +28,7 @@ public class CSSImportRule extends CSSRule {
     private static final long serialVersionUID = -3352769444872087531L;
 
     private MediaList media_;
-    private Stylesheet importedStylesheet_;
+    private CSSStyleSheet importedStylesheet_;
 
     /**
      * Creates a new instance. JavaScript objects must have a default constructor.
@@ -46,7 +43,7 @@ public class CSSImportRule extends CSSRule {
      * @param stylesheet the Stylesheet of this rule.
      * @param rule the wrapped rule
      */
-    protected CSSImportRule(final Stylesheet stylesheet, final org.w3c.dom.css.CSSRule rule) {
+    protected CSSImportRule(final CSSStyleSheet stylesheet, final org.w3c.dom.css.CSSRule rule) {
         super(stylesheet, rule);
     }
 
@@ -64,7 +61,7 @@ public class CSSImportRule extends CSSRule {
      */
     public MediaList jsxGet_media() {
         if (media_ == null) {
-            final Stylesheet parent = this.jsxGet_parentStyleSheet();
+            final CSSStyleSheet parent = this.jsxGet_parentStyleSheet();
             final org.w3c.dom.stylesheets.MediaList ml = getImportRule().getMedia();
             media_ = new MediaList(parent, ml);
         }
@@ -75,12 +72,12 @@ public class CSSImportRule extends CSSRule {
      * Returns the style sheet referred to by this rule.
      * @return the style sheet referred to by this rule
      */
-    public Stylesheet jsxGet_styleSheet() {
+    public CSSStyleSheet jsxGet_styleSheet() {
         if (importedStylesheet_ == null) {
-            final Stylesheet owningSheet = this.jsxGet_parentStyleSheet();
+            final CSSStyleSheet owningSheet = this.jsxGet_parentStyleSheet();
             final HTMLElement ownerNode = owningSheet.jsxGet_ownerNode();
-            final CSSStyleSheet importedStylesheet = getImportRule().getStyleSheet();
-            importedStylesheet_ = new Stylesheet(ownerNode, importedStylesheet, owningSheet.getUri());
+            final org.w3c.dom.css.CSSStyleSheet importedStylesheet = getImportRule().getStyleSheet();
+            importedStylesheet_ = new CSSStyleSheet(ownerNode, importedStylesheet, owningSheet.getUri());
         }
         return importedStylesheet_;
     }
