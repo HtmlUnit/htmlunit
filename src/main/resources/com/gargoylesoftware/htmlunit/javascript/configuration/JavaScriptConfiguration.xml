@@ -2766,7 +2766,7 @@
         <function name="namedItem"/>
     </class>
 
-    <class name="StyleSheetList" classname="com.gargoylesoftware.htmlunit.javascript.host.StyleSheetList" JSObject="true">
+    <class name="StyleSheetList" classname="com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList" JSObject="true">
         <property name="length" readable="true" writable="false"/>
         <function name="item"/>
     </class>
