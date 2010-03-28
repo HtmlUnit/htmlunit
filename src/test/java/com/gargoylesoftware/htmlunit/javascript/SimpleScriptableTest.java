@@ -150,6 +150,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("ScoperFunctionObject");
         names.remove("Selection");
         names.remove("SimpleArray");
+        names.remove("StaticNodeList");
         names.remove("Stylesheet");
         names.remove("StyleSheetList");
         names.remove("TextRange");

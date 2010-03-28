@@ -20,9 +20,11 @@ import static com.gargoylesoftware.htmlunit.util.UrlUtils.getUrlWithNewHost;
 import static com.gargoylesoftware.htmlunit.util.UrlUtils.getUrlWithNewPort;
 
 import java.io.IOException;
+import java.lang.reflect.Member;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
@@ -37,6 +39,7 @@ import java.util.regex.Pattern;
 import net.sourceforge.htmlunit.corejs.javascript.Callable;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.UniqueTag;
@@ -78,6 +81,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.NodeFilter;
 import com.gargoylesoftware.htmlunit.javascript.host.Range;
 import com.gargoylesoftware.htmlunit.javascript.host.Selection;
+import com.gargoylesoftware.htmlunit.javascript.host.StaticNodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.TreeWalker;
 import com.gargoylesoftware.htmlunit.javascript.host.UIEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -1569,4 +1573,38 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         return !event.isAborted(result);
     }
 
+    /**
+     * Retrieves all element nodes from descendants of the starting element node that match any selector
+     * within the supplied selector strings.
+     * The NodeList object returned by the querySelectorAll() method must be static, not live.
+     * @param selectors the selectors
+     * @return the static node list
+     */
+    public StaticNodeList jsxFunction_querySelectorAll(final String selectors) {
+        final List<Node> nodes = new ArrayList<Node>();
+        for (final DomNode domNode : getHtmlPage().querySelectorAll(selectors)) {
+            nodes.add((Node) domNode.getScriptObject());
+        }
+        return new StaticNodeList(nodes, this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object get(final String name, final Scriptable start) {
+        if ("querySelectorAll".equals(name)
+                && getBrowserVersion().hasFeature(BrowserVersionFeatures.QUERYSELECTORALL_QUIRKS)
+                && !getHtmlPage().isQuirksMode()) {
+            try {
+                final Member function =
+                    HTMLDocument.class.getMethod("jsxFunction_querySelectorAll", new Class[]{String.class});
+                return new FunctionObject("querySelectorAll", function, start);
+            }
+            catch (final NoSuchMethodException e) {
+                Context.throwAsScriptRuntimeEx(e);
+            }
+        }
+        return super.get(name, start);
+    }
 }

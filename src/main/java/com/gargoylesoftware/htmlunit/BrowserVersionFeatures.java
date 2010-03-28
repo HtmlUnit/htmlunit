@@ -45,6 +45,9 @@ public enum BrowserVersionFeatures {
     /** Indicates that the URL of parent window is used to resolve URLs in frames with javascript src. */
     JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW,
 
+    /** Indicates .querySelectorAll() is supported in only quirks mode. */
+    QUERYSELECTORALL_QUIRKS,
+
     /** Indicates that a read only JS property can be... set as done by IE and FF2 but not FF3. */
     SET_READONLY_PROPERTIES,
 

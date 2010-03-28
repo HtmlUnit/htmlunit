@@ -278,6 +278,19 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @return <tt>true</tt> if it does apply, <tt>false</tt> if it doesn't apply
      */
     boolean selects(final Selector selector, final HtmlElement element) {
+        return selects(getBrowserVersion(), selector, element);
+    }
+
+    /**
+     * Returns <tt>true</tt> if the specified selector selects the specified element.
+     *
+     * @param browserVersion the browser version
+     * @param selector the selector to test
+     * @param element the element to test
+     * @return <tt>true</tt> if it does apply, <tt>false</tt> if it doesn't apply
+     */
+    public static boolean selects(final BrowserVersion browserVersion, final Selector selector,
+            final HtmlElement element) {
         final String tagName = element.getTagName();
         switch (selector.getSelectorType()) {
             case Selector.SAC_ANY_NODE_SELECTOR:
@@ -288,14 +301,14 @@ public class CSSStyleSheet extends SimpleScriptable {
                 }
                 final DescendantSelector cs = (DescendantSelector) selector;
                 final HtmlElement parent = (HtmlElement) element.getParentNode();
-                return selects(cs.getSimpleSelector(), element) && parent != null
-                    && selects(cs.getAncestorSelector(), parent);
+                return selects(browserVersion, cs.getSimpleSelector(), element) && parent != null
+                    && selects(browserVersion, cs.getAncestorSelector(), parent);
             case Selector.SAC_DESCENDANT_SELECTOR:
                 final DescendantSelector ds = (DescendantSelector) selector;
-                if (selects(ds.getSimpleSelector(), element)) {
+                if (selects(browserVersion, ds.getSimpleSelector(), element)) {
                     DomNode ancestor = element.getParentNode();
                     while (ancestor instanceof HtmlElement) {
-                        if (selects(ds.getAncestorSelector(), (HtmlElement) ancestor)) {
+                        if (selects(browserVersion, ds.getAncestorSelector(), (HtmlElement) ancestor)) {
                             return true;
                         }
                         ancestor = ancestor.getParentNode();
@@ -305,7 +318,8 @@ public class CSSStyleSheet extends SimpleScriptable {
             case Selector.SAC_CONDITIONAL_SELECTOR:
                 final ConditionalSelector conditional = (ConditionalSelector) selector;
                 final Condition condition = conditional.getCondition();
-                return selects(conditional.getSimpleSelector(), element) && selects(condition, element);
+                return selects(browserVersion, conditional.getSimpleSelector(), element)
+                    && selects(browserVersion, condition, element);
             case Selector.SAC_ELEMENT_NODE_SELECTOR:
                 final ElementSelector es = (ElementSelector) selector;
                 final String name = es.getLocalName();
@@ -316,11 +330,11 @@ public class CSSStyleSheet extends SimpleScriptable {
                 final SiblingSelector ss = (SiblingSelector) selector;
                 final DomNode prev = element.getPreviousSibling();
                 return prev instanceof HtmlElement
-                    && selects(ss.getSelector(), (HtmlElement) prev)
-                    && selects(ss.getSiblingSelector(), element);
+                    && selects(browserVersion, ss.getSelector(), (HtmlElement) prev)
+                    && selects(browserVersion, ss.getSiblingSelector(), element);
             case Selector.SAC_NEGATIVE_SELECTOR:
                 final NegativeSelector ns = (NegativeSelector) selector;
-                return !selects(ns.getSimpleSelector(), element);
+                return !selects(browserVersion, ns.getSimpleSelector(), element);
             case Selector.SAC_PSEUDO_ELEMENT_SELECTOR:
             case Selector.SAC_COMMENT_NODE_SELECTOR:
             case Selector.SAC_CDATA_SECTION_NODE_SELECTOR:
@@ -336,11 +350,12 @@ public class CSSStyleSheet extends SimpleScriptable {
     /**
      * Returns <tt>true</tt> if the specified condition selects the specified element.
      *
+     * @param browserVersion the browser version
      * @param condition the condition to test
      * @param element the element to test
      * @return <tt>true</tt> if it does apply, <tt>false</tt> if it doesn't apply
      */
-    boolean selects(final Condition condition, final HtmlElement element) {
+    static boolean selects(final BrowserVersion browserVersion, final Condition condition, final HtmlElement element) {
         switch (condition.getConditionType()) {
             case Condition.SAC_ID_CONDITION:
                 final AttributeCondition ac4 = (AttributeCondition) condition;
@@ -352,7 +367,8 @@ public class CSSStyleSheet extends SimpleScriptable {
                 return a3.equals(v3) || a3.startsWith(v3 + " ") || a3.endsWith(" " + v3) || a3.contains(" " + v3 + " ");
             case Condition.SAC_AND_CONDITION:
                 final CombinatorCondition cc1 = (CombinatorCondition) condition;
-                return selects(cc1.getFirstCondition(), element) && selects(cc1.getSecondCondition(), element);
+                return selects(browserVersion, cc1.getFirstCondition(), element)
+                    && selects(browserVersion, cc1.getSecondCondition(), element);
             case Condition.SAC_ATTRIBUTE_CONDITION:
                 final AttributeCondition ac1 = (AttributeCondition) condition;
                 if (ac1.getSpecified()) {
@@ -371,17 +387,18 @@ public class CSSStyleSheet extends SimpleScriptable {
                 return a2.equals(v2) || a2.startsWith(v2 + " ") || a2.endsWith(" " + v2) || a2.contains(" " + v2 + " ");
             case Condition.SAC_OR_CONDITION:
                 final CombinatorCondition cc2 = (CombinatorCondition) condition;
-                return selects(cc2.getFirstCondition(), element) || selects(cc2.getSecondCondition(), element);
+                return selects(browserVersion, cc2.getFirstCondition(), element)
+                    || selects(browserVersion, cc2.getSecondCondition(), element);
             case Condition.SAC_NEGATIVE_CONDITION:
                 final NegativeCondition nc = (NegativeCondition) condition;
-                return !selects(nc.getCondition(), element);
+                return !selects(browserVersion, nc.getCondition(), element);
             case Condition.SAC_ONLY_CHILD_CONDITION:
                 return element.getParentNode().getChildNodes().getLength() == 1;
             case Condition.SAC_CONTENT_CONDITION:
                 final ContentCondition cc = (ContentCondition) condition;
                 return element.asText().contains(cc.getData());
             case Condition.SAC_LANG_CONDITION:
-                if (getBrowserVersion().isIE()) {
+                if (browserVersion.isIE()) {
                     return false;
                 }
                 final String lcLang = ((LangCondition) condition).getLang();
@@ -398,7 +415,7 @@ public class CSSStyleSheet extends SimpleScriptable {
                 final String tagName = element.getTagName();
                 return ((HtmlPage) element.getPage()).getElementsByTagName(tagName).getLength() == 1;
             case Condition.SAC_PSEUDO_CLASS_CONDITION:
-                return selectsPseudoClass((AttributeCondition) condition, element);
+                return selectsPseudoClass(browserVersion, (AttributeCondition) condition, element);
             case Condition.SAC_POSITIONAL_CONDITION:
                 return false;
             default:
@@ -407,8 +424,9 @@ public class CSSStyleSheet extends SimpleScriptable {
         }
     }
 
-    private boolean selectsPseudoClass(final AttributeCondition condition, final HtmlElement element) {
-        if (getBrowserVersion().isIE()) {
+    private static boolean selectsPseudoClass(final BrowserVersion browserVersion,
+            final AttributeCondition condition, final HtmlElement element) {
+        if (browserVersion.isIE()) {
             return false;
         }
 

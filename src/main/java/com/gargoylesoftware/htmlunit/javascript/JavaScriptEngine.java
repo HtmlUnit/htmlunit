@@ -220,8 +220,7 @@ public class JavaScriptEngine {
         }
 
         // eval hack (cf unit tests testEvalScopeOtherWindow and testEvalScopeLocal)
-        final Class< ? >[] evalFnTypes = {String.class};
-        final Member evalFn = Window.class.getMethod("custom_eval", evalFnTypes);
+        final Member evalFn = Window.class.getMethod("custom_eval", new Class[]{String.class});
         final FunctionObject jsCustomEval = new FunctionObject("eval", evalFn, window);
         window.associateValue("custom_eval", jsCustomEval);
 

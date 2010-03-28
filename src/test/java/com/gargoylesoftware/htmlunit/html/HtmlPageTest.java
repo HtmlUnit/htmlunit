@@ -84,6 +84,10 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 @RunWith(BrowserRunner.class)
 public class HtmlPageTest extends WebServerTestCase {
 
+    /** The doctype prefix for standards mode. */
+    public static final String STANDARDS_MODE_PREFIX_
+        = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n";
+
     /**
      * @throws Exception if the test fails
      */

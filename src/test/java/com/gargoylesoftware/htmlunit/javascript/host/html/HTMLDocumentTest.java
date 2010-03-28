@@ -38,6 +38,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -988,6 +989,71 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='log'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "undefined", IE = "undefined", IE8 = { "3", "div1" })
+    //FF 3.5 supports querySelectorAll() :)
+    public void querySelectorAll() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>Test</title>\n"
+            + "<style>\n"
+            + "  .red   {color:#FF0000;}\n"
+            + "  .green {color:#00FF00;}\n"
+            + "  .blue  {color:#0000FF;}\n"
+            + "</style>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if(document.querySelectorAll) {\n"
+            + "    var redTags = document.querySelectorAll('.red,.green');\n"
+            + "    alert(redTags.length);\n"
+            + "    alert(redTags.item(0).id);\n"
+            + "  }\n"
+            + "  else\n"
+            + "    alert('undefined');\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='div1' class='red'>First</div>\n"
+            + "  <div id='div2' class='red'>Second</div>\n"
+            + "  <div id='div3' class='green'>Third</div>\n"
+            + "  <div id='div4' class='blue'>Fourth</div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void querySelectorAll_quirks() throws Exception {
+        final String html = "<html><head><title>Test</title>\n"
+            + "<style>\n"
+            + "  .red   {color:#FF0000;}\n"
+            + "  .green {color:#00FF00;}\n"
+            + "  .blue  {color:#0000FF;}\n"
+            + "</style>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if(document.querySelectorAll) {\n"
+            + "    var redTags = document.querySelectorAll('.red,.green');\n"
+            + "    alert(redTags.length);\n"
+            + "    alert(redTags.item(0).id);\n"
+            + "  }\n"
+            + "  else\n"
+            + "    alert('undefined');\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='div1' class='red'>First</div>\n"
+            + "  <div id='div2' class='red'>Second</div>\n"
+            + "  <div id='div3' class='green'>Third</div>\n"
+            + "  <div id='div4' class='blue'>Fourth</div>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
