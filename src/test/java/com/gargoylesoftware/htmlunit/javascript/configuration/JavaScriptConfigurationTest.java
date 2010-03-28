@@ -491,6 +491,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             "Textarea|jsxGet_form",
             "Input|jsxGet_form",
             "Password|jsxGet_form",
+            "HTMLDocument|jsxFunction_querySelector",
             "HTMLDocument|jsxFunction_querySelectorAll",
             "HTMLSpanElement|jsxGet_cite",
             "HTMLSpanElement|jsxSet_cite",

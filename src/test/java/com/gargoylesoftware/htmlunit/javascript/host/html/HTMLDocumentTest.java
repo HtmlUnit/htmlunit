@@ -1010,7 +1010,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "<script>\n"
             + "function test() {\n"
             + "  if(document.querySelectorAll) {\n"
-            + "    var redTags = document.querySelectorAll('.red,.green');\n"
+            + "    var redTags = document.querySelectorAll('.green,.red');\n"
             + "    alert(redTags.length);\n"
             + "    alert(redTags.item(0).id);\n"
             + "  }\n"
@@ -1045,6 +1045,38 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "    var redTags = document.querySelectorAll('.red,.green');\n"
             + "    alert(redTags.length);\n"
             + "    alert(redTags.item(0).id);\n"
+            + "  }\n"
+            + "  else\n"
+            + "    alert('undefined');\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='div1' class='red'>First</div>\n"
+            + "  <div id='div2' class='red'>Second</div>\n"
+            + "  <div id='div3' class='green'>Third</div>\n"
+            + "  <div id='div4' class='blue'>Fourth</div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "undefined", IE = "undefined", IE8 = { "div1", "null" })
+    //FF 3.5 supports querySelector() :)
+    public void querySelector() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>Test</title>\n"
+            + "<style>\n"
+            + "  .red   {color:#FF0000;}\n"
+            + "  .green {color:#00FF00;}\n"
+            + "  .blue  {color:#0000FF;}\n"
+            + "</style>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if(document.querySelector) {\n"
+            + "    alert(document.querySelector('.green,.red').id);\n"
+            + "    alert(document.querySelector('.orange'));\n"
             + "  }\n"
             + "  else\n"
             + "    alert('undefined');\n"

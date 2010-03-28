@@ -2283,7 +2283,7 @@ public class HtmlPage extends SgmlPage {
     /**
      * Retrieves all element nodes from descendants of the starting element node that match any selector
      * within the supplied selector strings.
-     * @param selectors the selectors
+     * @param selectors one or more CSS selectors separated by commas
      * @return list of all found nodes
      */
     public DomNodeList<DomNode> querySelectorAll(final String selectors) {
@@ -2294,9 +2294,9 @@ public class HtmlPage extends SgmlPage {
             parser.setErrorHandler(errorHandler);
             final SelectorList selectorList = parser.parseSelectors(new InputSource(new StringReader(selectors)));
             final BrowserVersion browserVersion = getWebClient().getBrowserVersion();
-            for (int i = 0; i < selectorList.getLength(); i++) {
-                final Selector selector = selectorList.item(i);
-                for (final HtmlElement child : getHtmlElementDescendants()) {
+            for (final HtmlElement child : getHtmlElementDescendants()) {
+                for (int i = 0; i < selectorList.getLength(); i++) {
+                    final Selector selector = selectorList.item(i);
                     if (CSSStyleSheet.selects(browserVersion, selector, child)) {
                         elements.add(child);
                     }
@@ -2310,5 +2310,18 @@ public class HtmlPage extends SgmlPage {
         }
         return new StaticDomNodeList(elements);
     }
-}
 
+    /**
+     * Returns the first element within the document that matches the specified group of selectors.
+     * @param selectors one or more CSS selectors separated by commas
+     * @return null if no matches are found; otherwise, it returns the first matching element
+     */
+    public DomNode querySelector(final String selectors) {
+        final DomNodeList<DomNode> list = querySelectorAll(selectors);
+        if (!list.isEmpty()) {
+            return list.get(0);
+        }
+        return null;
+    }
+
+}

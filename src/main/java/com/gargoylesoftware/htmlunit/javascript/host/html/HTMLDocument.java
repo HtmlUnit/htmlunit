@@ -1589,6 +1589,19 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
+     * Returns the first element within the document that matches the specified group of selectors.
+     * @param selectors the selectors
+     * @return null if no matches are found; otherwise, it returns the first matching element
+     */
+    public Node jsxFunction_querySelector(final String selectors) {
+        final DomNode node = getHtmlPage().querySelector(selectors);
+        if (node != null) {
+            return (Node) node.getScriptObject();
+        }
+        return null;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -1600,6 +1613,18 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                 final Member function =
                     HTMLDocument.class.getMethod("jsxFunction_querySelectorAll", new Class[]{String.class});
                 return new FunctionObject("querySelectorAll", function, start);
+            }
+            catch (final NoSuchMethodException e) {
+                Context.throwAsScriptRuntimeEx(e);
+            }
+        }
+        if ("querySelector".equals(name)
+                && getBrowserVersion().hasFeature(BrowserVersionFeatures.QUERYSELECTORALL_QUIRKS)
+                && !getHtmlPage().isQuirksMode()) {
+            try {
+                final Member function =
+                    HTMLDocument.class.getMethod("jsxFunction_querySelector", new Class[]{String.class});
+                return new FunctionObject("querySelector", function, start);
             }
             catch (final NoSuchMethodException e) {
                 Context.throwAsScriptRuntimeEx(e);
