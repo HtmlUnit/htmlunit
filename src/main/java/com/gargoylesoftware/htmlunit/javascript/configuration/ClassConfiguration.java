@@ -94,12 +94,12 @@ public final class ClassConfiguration {
      * Add the property to the configuration.
      * @param name name of the property
      * @param readable flag for if the property is readable
-     * @param writeable flag for if the property is writable
+     * @param writable flag for if the property is writable
      */
-    public void addProperty(final String name, final boolean readable, final boolean writeable) {
+    public void addProperty(final String name, final boolean readable, final boolean writable) {
         final PropertyInfo info = new PropertyInfo();
         info.setReadable(readable);
-        info.setWriteable(writeable);
+        info.setWritable(writable);
         try {
             if (readable) {
                 info.setReadMethod(hostClass_.getMethod(GETTER_PREFIX + name, (Class []) null));
@@ -111,7 +111,7 @@ public final class ClassConfiguration {
         }
         // For the setters, we have to loop through the methods since we do not know what type of argument
         // the method takes.
-        if (writeable) {
+        if (writable) {
             final String setMethodName = SETTER_PREFIX + name;
             for (final Method method : hostClass_.getMethods()) {
                 if (method.getName().equals(setMethodName) && method.getParameterTypes().length == 1) {
@@ -337,12 +337,12 @@ public final class ClassConfiguration {
     }
 
     /**
-     * Class used to contain the property information if the property is readable, writeable and the
+     * Class used to contain the property information if the property is readable, writable and the
      * methods that implement the get and set functions.
      */
     protected class PropertyInfo {
         private boolean readable_ = false;
-        private boolean writeable_ = false;
+        private boolean writable_ = false;
         private boolean hasBrowsers_ = false;
         private Map<String, BrowserInfo> browserMap_;
         private Method readMethod_;
@@ -412,7 +412,7 @@ public final class ClassConfiguration {
 
             }
             return (readable_ == info.readable_)
-                && (writeable_ == info.writeable_);
+                && (writable_ == info.writable_);
         }
 
         /**
@@ -423,10 +423,10 @@ public final class ClassConfiguration {
         }
 
         /**
-         * @param writeable the writeable to set
+         * @param writable the writable to set
          */
-        private void setWriteable(final boolean writeable) {
-            writeable_ = writeable;
+        private void setWritable(final boolean writable) {
+            writable_ = writable;
         }
     }
 

@@ -390,16 +390,16 @@ public final class JavaScriptConfiguration {
         }
         final String propertyName = element.getAttribute("name");
         boolean readable = false;
-        boolean writeable = false;
+        boolean writable = false;
         final String readFlag = element.getAttribute("readable");
         if ("true".equalsIgnoreCase(readFlag)) {
             readable = true;
         }
         final String writeFlag = element.getAttribute("writable");
         if ("true".equalsIgnoreCase(writeFlag)) {
-            writeable = true;
+            writable = true;
         }
-        classConfiguration.addProperty(propertyName, readable, writeable);
+        classConfiguration.addProperty(propertyName, readable, writable);
     }
 
     /**

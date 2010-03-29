@@ -225,7 +225,7 @@ public class Event extends SimpleScriptable {
 
     private static final long serialVersionUID = 4050485607908455730L;
 
-    private Object srcElement_;        // IE-only writeable equivalent of target.
+    private Object srcElement_;        // IE-only writable equivalent of target.
     private Object target_;            // W3C standard read-only equivalent of srcElement.
     private Object currentTarget_;     // Changes during event capturing and bubbling.
     private String type_;              // The event type.

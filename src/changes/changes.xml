@@ -4178,7 +4178,7 @@
                 JavaScript: Fixed bug with frames.length not working.
             </action>
             <action type="add" dev="mguillem" due-to="Daniel Gredler" issue="1100321">
-                JavaScript: Implement writeable document.location.
+                JavaScript: Implement writable document.location.
             </action>
             <action type="update" dev="mguillem" issue="1100089">
                 JavaScript: added window.status and removed erroneous document.status.
