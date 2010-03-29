@@ -1170,4 +1170,34 @@ public class HtmlElementTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * Ensure that we don't escape when not needed.
+     * @throws Exception on test failure
+     */
+    @Test
+    public void asXml() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "    <title>test</title>\n"
+            + "</head>\n"
+            + "<body>Welcome\n"
+            + "<div id='div1' onclick=\"alert('hello')\">click me</div>\n"
+            + "<div id='div2' onclick='alert(\"hello again\")'>click me again</div>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final HtmlPage page = loadPage(html);
+
+        final String htmlDiv1XML = "<div id=\"div1\" onclick=\"alert('hello')\">" + LINE_SEPARATOR
+            + "  click me" + LINE_SEPARATOR
+            + "</div>" + LINE_SEPARATOR;
+        assertEquals(htmlDiv1XML, page.getElementById("div1").asXml());
+
+        final String htmlDiv2XML = "<div id=\"div2\" onclick=\"alert(&quot;hello again&quot;)\">" + LINE_SEPARATOR
+            + "  click me again" + LINE_SEPARATOR
+            + "</div>" + LINE_SEPARATOR;
+        assertEquals(htmlDiv2XML, page.getElementById("div2").asXml());
+    }
+
 }
