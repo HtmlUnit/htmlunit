@@ -298,7 +298,7 @@ public final class JavaScriptConfiguration {
                         try {
                             final ClassConfiguration config = parseClassElement(element, browser);
                             if (config != null) {
-                                classMap.put(config.getLinkedClass().getSimpleName(), config);
+                                classMap.put(config.getHostClass().getSimpleName(), config);
                             }
                         }
                         catch (final ClassNotFoundException e) {
@@ -327,19 +327,19 @@ public final class JavaScriptConfiguration {
         if ("true".equalsIgnoreCase(notImplemented)) {
             return null;
         }
-        final String linkedClassname = element.getAttribute("classname");
+        final String hostClassName = element.getAttribute("classname");
         final String jsConstructor = element.getAttribute("jsConstructor");
-        final String superclassName = element.getAttribute("extends");
-        final String htmlClassname = element.getAttribute("htmlClass");
+        final String extendsClassName = element.getAttribute("extends");
+        final String htmlClassName = element.getAttribute("htmlClass");
         boolean jsObjectFlag = false;
         final String jsObjectStr = element.getAttribute("JSObject");
         if ("true".equalsIgnoreCase(jsObjectStr)) {
             jsObjectFlag = true;
         }
-        final ClassConfiguration classConfiguration = new ClassConfiguration(linkedClassname, jsConstructor,
-                    superclassName, htmlClassname, jsObjectFlag);
-        final String simpleClassName = linkedClassname.substring(linkedClassname.lastIndexOf('.') + 1);
-        ClassnameMap_.put(linkedClassname, simpleClassName);
+        final ClassConfiguration classConfiguration = new ClassConfiguration(hostClassName, jsConstructor,
+                    extendsClassName, htmlClassName, jsObjectFlag);
+        final String simpleClassName = hostClassName.substring(hostClassName.lastIndexOf('.') + 1);
+        ClassnameMap_.put(hostClassName, simpleClassName);
         Node node = element.getFirstChild();
         while (node != null) {
             if (node instanceof Element) {
@@ -356,7 +356,7 @@ public final class JavaScriptConfiguration {
                 }
                 else if (tagName.equals("browser")) {
                     if (LOG.isDebugEnabled()) {
-                        LOG.debug("browser tag not yet handled for class " + linkedClassname);
+                        LOG.debug("browser tag not yet handled for class " + hostClassName);
                     }
                 }
                 else if (tagName.equals("doclink")) {
@@ -364,7 +364,7 @@ public final class JavaScriptConfiguration {
                 }
                 else {
                     throw new IllegalStateException("Do not understand element type '"
-                        + tagName + "' in '" + linkedClassname + "'");
+                        + tagName + "' in '" + hostClassName + "'");
                 }
             }
             node = node.getNextSibling();
@@ -530,7 +530,7 @@ public final class JavaScriptConfiguration {
      */
     protected Class< ? > getClassObject(final String classname) {
         final ClassConfiguration config = configuration_.get(classname);
-        return config.getLinkedClass();
+        return config.getHostClass();
     }
 
     /**
@@ -563,7 +563,7 @@ public final class JavaScriptConfiguration {
             if (theMethod != null) {
                 return theMethod;
             }
-            classname = config.getExtendedClass();
+            classname = config.getExtendedClassName();
         }
         return null;
     }
@@ -577,7 +577,7 @@ public final class JavaScriptConfiguration {
             if (info != null) {
                 return info;
             }
-            workname = config.getExtendedClass();
+            workname = config.getExtendedClassName();
         }
         return null;
     }
@@ -609,7 +609,7 @@ public final class JavaScriptConfiguration {
             if (theMethod != null) {
                 return theMethod;
             }
-            classname = config.getExtendedClass();
+            classname = config.getExtendedClassName();
         }
         return null;
     }
@@ -642,7 +642,7 @@ public final class JavaScriptConfiguration {
             if (theMethod != null) {
                 return theMethod;
             }
-            classname = config.getExtendedClass();
+            classname = config.getExtendedClassName();
         }
         return null;
     }
@@ -720,10 +720,10 @@ public final class JavaScriptConfiguration {
                         LOG.debug("Mapping " + htmlClass.getName() + " to " + jsClassname);
                     }
                     while (!classConfig.isJsObject()) {
-                        jsClassname = classConfig.getExtendedClass();
+                        jsClassname = classConfig.getExtendedClassName();
                         classConfig = configuration.getClassConfiguration(jsClassname);
                     }
-                    map.put(htmlClass, classConfig.getLinkedClass());
+                    map.put(htmlClass, classConfig.getHostClass());
                 }
                 catch (final ClassNotFoundException e) {
                     throw new NoClassDefFoundError(e.getMessage());

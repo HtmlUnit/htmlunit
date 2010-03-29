@@ -39,34 +39,34 @@ public final class ClassConfiguration {
     private Map<String, PropertyInfo> propertyMap_ = new HashMap<String, PropertyInfo>();
     private Map<String, FunctionInfo> functionMap_ = new HashMap<String, FunctionInfo>();
     private List<String> constants_ = new ArrayList<String>();
-    private String extendedClass_;
-    private final Class< ? extends SimpleScriptable> linkedClass_;
+    private String extendedClassName_;
+    private final Class< ? extends SimpleScriptable> hostClass_;
     /**
-     * The constructor method in the {@link #linkedClass_}
+     * The constructor method in the {@link #hostClass_}
      */
     private final Method jsConstructor_;
-    private final String htmlClassname_;
+    private final String htmlClassName_;
     private final boolean jsObject_;
 
     /**
      * Constructor.
      *
-     * @param implementingClass - the fully qualified name of the class implementing this functionality
+     * @param hostClassName - the fully qualified name of the class implementing this functionality
      * @param jsConstructor the constructor of method <code>implementingClass</code>
-     * @param extendedClass - The name of the class that this class extends
-     * @param htmlClass the name of the HTML class that this object supports
+     * @param extendedClassName - The name of the class that this class extends
+     * @param htmlClassName the name of the HTML class that this object supports
      * @param jsObject boolean flag for if this object is a JavaScript object
      * @throws ClassNotFoundException - if the implementing class is not found
      */
     @SuppressWarnings("unchecked")
-    public ClassConfiguration(final String implementingClass, final String jsConstructor,
-        final String extendedClass, final String htmlClass, final boolean jsObject)
+    public ClassConfiguration(final String hostClassName, final String jsConstructor,
+        final String extendedClassName, final String htmlClassName, final boolean jsObject)
         throws ClassNotFoundException {
-        extendedClass_ = extendedClass;
-        linkedClass_ = (Class< ? extends SimpleScriptable>) Class.forName(implementingClass);
+        extendedClassName_ = extendedClassName;
+        hostClass_ = (Class< ? extends SimpleScriptable>) Class.forName(hostClassName);
         if (jsConstructor != null && jsConstructor.length() != 0) {
             Method foundCtor = null;
-            for (final Method method : linkedClass_.getMethods()) {
+            for (final Method method : hostClass_.getMethods()) {
                 if (method.getName().equals(jsConstructor)) {
                     foundCtor = method;
                     break;
@@ -74,7 +74,7 @@ public final class ClassConfiguration {
             }
             if (foundCtor == null) {
                 throw new IllegalStateException("Constructor method \"" + jsConstructor
-                        + "\" in class \"" + implementingClass + " is not found.");
+                        + "\" in class \"" + hostClassName + " is not found.");
             }
             jsConstructor_ = foundCtor;
         }
@@ -82,11 +82,11 @@ public final class ClassConfiguration {
             jsConstructor_ = null;
         }
         jsObject_ = jsObject;
-        if (htmlClass != null && htmlClass.length() != 0) {
-            htmlClassname_ = htmlClass;
+        if (htmlClassName != null && htmlClassName.length() != 0) {
+            htmlClassName_ = htmlClassName;
         }
         else {
-            htmlClassname_ = null;
+            htmlClassName_ = null;
         }
     }
 
@@ -94,7 +94,7 @@ public final class ClassConfiguration {
      * Add the property to the configuration.
      * @param name name of the property
      * @param readable flag for if the property is readable
-     * @param writeable flag for if the property is writeable
+     * @param writeable flag for if the property is writable
      */
     public void addProperty(final String name, final boolean readable, final boolean writeable) {
         final PropertyInfo info = new PropertyInfo();
@@ -102,18 +102,18 @@ public final class ClassConfiguration {
         info.setWriteable(writeable);
         try {
             if (readable) {
-                info.setReadMethod(linkedClass_.getMethod(GETTER_PREFIX + name, (Class []) null));
+                info.setReadMethod(hostClass_.getMethod(GETTER_PREFIX + name, (Class []) null));
             }
         }
         catch (final NoSuchMethodException e) {
             throw new IllegalStateException("Method '" + GETTER_PREFIX + name + "' was not found for "
-                + name + " property in " + linkedClass_.getName());
+                + name + " property in " + hostClass_.getName());
         }
         // For the setters, we have to loop through the methods since we do not know what type of argument
         // the method takes.
         if (writeable) {
             final String setMethodName = SETTER_PREFIX + name;
-            for (final Method method : linkedClass_.getMethods()) {
+            for (final Method method : hostClass_.getMethods()) {
                 if (method.getName().equals(setMethodName) && method.getParameterTypes().length == 1) {
                     info.setWriteMethod(method);
                     break;
@@ -121,7 +121,7 @@ public final class ClassConfiguration {
             }
             if (info.getWriteMethod() == null) {
                 throw new IllegalStateException("Method '" + SETTER_PREFIX + name + "' was not found for " + name
-                    + " property in " + linkedClass_.getName());
+                    + " property in " + hostClass_.getName());
             }
         }
         propertyMap_.put(name, info);
@@ -166,7 +166,7 @@ public final class ClassConfiguration {
     public void addFunction(final String name) {
         final FunctionInfo info = new FunctionInfo();
         final String setMethodName = FUNCTION_PREFIX + name;
-        for (final Method method : linkedClass_.getMethods()) {
+        for (final Method method : hostClass_.getMethods()) {
             if (method.getName().equals(setMethodName)) {
                 info.setFunctionMethod(method);
                 break;
@@ -174,7 +174,7 @@ public final class ClassConfiguration {
         }
         if (info.getFunctionMethod() == null) {
             throw new IllegalStateException("Method '" + FUNCTION_PREFIX + name + "' was not found for " + name
-                + " function in " + linkedClass_.getName());
+                + " function in " + hostClass_.getName());
         }
         functionMap_.put(name, info);
     }
@@ -197,15 +197,15 @@ public final class ClassConfiguration {
     /**
      * @return the extendedClass
      */
-    public String getExtendedClass() {
-        return extendedClass_;
+    public String getExtendedClassName() {
+        return extendedClassName_;
     }
 
     /**
      * @param extendedClass the extendedClass to set
      */
-    public void setExtendedClass(final String extendedClass) {
-        extendedClass_ = extendedClass;
+    public void setExtendedClassName(final String extendedClass) {
+        extendedClassName_ = extendedClass;
     }
 
     /**
@@ -261,7 +261,7 @@ public final class ClassConfiguration {
      */
     @Override
     public int hashCode() {
-        return linkedClass_.getName().hashCode();
+        return hostClass_.getName().hashCode();
     }
 
     /**
@@ -310,13 +310,13 @@ public final class ClassConfiguration {
      * Gets the class of the JavaScript host object.
      * @return the class of the JavaScript host object
      */
-    public Class< ? extends SimpleScriptable> getLinkedClass() {
-        return linkedClass_;
+    public Class< ? extends SimpleScriptable> getHostClass() {
+        return hostClass_;
     }
 
     /**
-     * Gets the JavaScript constructor method in {@link #getLinkedClass()}.
-     * @return the JavaScript constructor method in {@link #getLinkedClass()}
+     * Gets the JavaScript constructor method in {@link #getHostClass()}.
+     * @return the JavaScript constructor method in {@link #getHostClass()}
      */
     public Method getJsConstructor() {
         return jsConstructor_;
@@ -326,7 +326,7 @@ public final class ClassConfiguration {
      * @return the htmlClassname
      */
     public String getHtmlClassname() {
-        return htmlClassname_;
+        return htmlClassName_;
     }
 
     /**

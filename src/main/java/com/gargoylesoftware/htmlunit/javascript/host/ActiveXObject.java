@@ -243,7 +243,7 @@ public class ActiveXObject extends SimpleScriptable {
                         classConfig.getPropertyReadMethod(property) != null,
                         classConfig.getPropertyWriteMethod(property) != null);
             }
-            className = classConfig.getExtendedClass();
+            className = classConfig.getExtendedClassName();
 
         }
         return document;

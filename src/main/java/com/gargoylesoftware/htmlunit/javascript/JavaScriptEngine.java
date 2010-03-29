@@ -172,7 +172,7 @@ public class JavaScriptEngine {
 
         for (final String jsClassName : jsConfig.keySet()) {
             final ClassConfiguration config = jsConfig.getClassConfiguration(jsClassName);
-            final boolean isWindow = Window.class.getName().equals(config.getLinkedClass().getName());
+            final boolean isWindow = Window.class.getName().equals(config.getHostClass().getName());
             if (isWindow) {
                 configureConstantsPropertiesAndFunctions(config, window);
             }
@@ -181,7 +181,7 @@ public class JavaScriptEngine {
                 if (config.isJsObject()) {
                     // for FF, place object with prototype property in Window scope
                     if (!getWebClient().getBrowserVersion().isIE()) {
-                        final SimpleScriptable obj = config.getLinkedClass().newInstance();
+                        final SimpleScriptable obj = config.getHostClass().newInstance();
                         prototype.defineProperty("__proto__", prototype, ScriptableObject.DONTENUM);
                         obj.defineProperty("prototype", prototype, ScriptableObject.DONTENUM); // but not setPrototype!
                         obj.setParentScope(window);
@@ -195,9 +195,9 @@ public class JavaScriptEngine {
                             obj.setDomNode(domNode);
                         }
                     }
-                    prototypes.put(config.getLinkedClass(), prototype);
+                    prototypes.put(config.getHostClass(), prototype);
                 }
-                prototypesPerJSName.put(config.getLinkedClass().getSimpleName(), prototype);
+                prototypesPerJSName.put(config.getHostClass().getSimpleName(), prototype);
             }
         }
 
@@ -210,8 +210,8 @@ public class JavaScriptEngine {
             if (prototype.getPrototype() != null) {
                 prototype = prototype.getPrototype(); // "double prototype" hack for FF
             }
-            if (!StringUtils.isEmpty(config.getExtendedClass())) {
-                final Scriptable parentPrototype = prototypesPerJSName.get(config.getExtendedClass());
+            if (!StringUtils.isEmpty(config.getExtendedClassName())) {
+                final Scriptable parentPrototype = prototypesPerJSName.get(config.getExtendedClassName());
                 prototype.setPrototype(parentPrototype);
             }
             else {
@@ -296,7 +296,7 @@ public class JavaScriptEngine {
     private ScriptableObject configureClass(final ClassConfiguration config, final Scriptable window)
         throws InstantiationException, IllegalAccessException {
 
-        final Class< ? > jsHostClass = config.getLinkedClass();
+        final Class< ? > jsHostClass = config.getHostClass();
         final ScriptableObject prototype = (ScriptableObject) jsHostClass.newInstance();
         prototype.setParentScope(window);
 
@@ -338,14 +338,14 @@ public class JavaScriptEngine {
     private void configureConstants(final ClassConfiguration config,
             final ScriptableObject scriptable) {
         for (final String constant : config.constants()) {
-            final Class< ? > linkedClass = config.getLinkedClass();
+            final Class< ? > linkedClass = config.getHostClass();
             try {
                 final Object value = linkedClass.getField(constant).get(null);
                 scriptable.defineProperty(constant, value, ScriptableObject.EMPTY);
             }
             catch (final Exception e) {
                 throw Context.reportRuntimeError("Cannot get field '" + constant + "' for type: "
-                    + config.getLinkedClass().getName());
+                    + config.getHostClass().getName());
             }
         }
     }
