@@ -294,16 +294,16 @@ public final class JavaScriptConfiguration {
             if (node instanceof Element) {
                 final Element element = (Element) node;
                 if (element.getTagName().equals("class")) {
-                    final String className = element.getAttribute("name");
                     if (!testToExcludeElement(element, browser)) {
                         try {
-                            final ClassConfiguration config = parseClassElement(className, element, browser);
+                            final ClassConfiguration config = parseClassElement(element, browser);
                             if (config != null) {
-                                classMap.put(className, config);
+                                classMap.put(config.getLinkedClass().getSimpleName(), config);
                             }
                         }
                         catch (final ClassNotFoundException e) {
-                            throw new IllegalStateException("The class was not found for '" + className + "'");
+                            throw new IllegalStateException("The class was not found for '"
+                                    + element.getAttribute("classname") + "'");
                         }
                     }
                 }
@@ -321,7 +321,7 @@ public final class JavaScriptConfiguration {
      * @return the class element to build the class configuration
      * @throws ClassNotFoundException if the specified class could not be found
      */
-    private ClassConfiguration parseClassElement(final String className, final Element element,
+    private ClassConfiguration parseClassElement(final Element element,
         final BrowserVersion browser) throws ClassNotFoundException {
         final String notImplemented = element.getAttribute("notImplemented");
         if ("true".equalsIgnoreCase(notImplemented)) {
@@ -336,10 +336,10 @@ public final class JavaScriptConfiguration {
         if ("true".equalsIgnoreCase(jsObjectStr)) {
             jsObjectFlag = true;
         }
-        final ClassConfiguration classConfiguration =
-            new ClassConfiguration(className, linkedClassname, jsConstructor,
+        final ClassConfiguration classConfiguration = new ClassConfiguration(linkedClassname, jsConstructor,
                     superclassName, htmlClassname, jsObjectFlag);
-        ClassnameMap_.put(linkedClassname, className);
+        final String simpleClassName = linkedClassname.substring(linkedClassname.lastIndexOf('.') + 1);
+        ClassnameMap_.put(linkedClassname, simpleClassName);
         Node node = element.getFirstChild();
         while (node != null) {
             if (node instanceof Element) {

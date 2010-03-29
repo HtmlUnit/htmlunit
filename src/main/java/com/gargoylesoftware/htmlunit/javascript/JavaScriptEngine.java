@@ -185,7 +185,7 @@ public class JavaScriptEngine {
                         prototype.defineProperty("__proto__", prototype, ScriptableObject.DONTENUM);
                         obj.defineProperty("prototype", prototype, ScriptableObject.DONTENUM); // but not setPrototype!
                         obj.setParentScope(window);
-                        ScriptableObject.defineProperty(window, config.getClassName(), obj, ScriptableObject.DONTENUM);
+                        ScriptableObject.defineProperty(window, obj.getClassName(), obj, ScriptableObject.DONTENUM);
                         // this obj won't have prototype, constants need to be configured on it again
                         configureConstants(config, obj);
 
@@ -197,7 +197,7 @@ public class JavaScriptEngine {
                     }
                     prototypes.put(config.getLinkedClass(), prototype);
                 }
-                prototypesPerJSName.put(config.getClassName(), prototype);
+                prototypesPerJSName.put(config.getLinkedClass().getSimpleName(), prototype);
             }
         }
 
@@ -345,7 +345,7 @@ public class JavaScriptEngine {
             }
             catch (final Exception e) {
                 throw Context.reportRuntimeError("Cannot get field '" + constant + "' for type: "
-                    + config.getClassName());
+                    + config.getLinkedClass().getName());
             }
         }
     }

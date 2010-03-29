@@ -43,9 +43,9 @@ public class ClassConfigurationTest extends WebTestCase {
      */
     @Test
     public void testConfigurationSimplePropertyEquality() throws Exception {
-        final ClassConfiguration config1 = new ClassConfiguration("c1",
+        final ClassConfiguration config1 = new ClassConfiguration(
             ConfigTestClass.class.getName(), null, null, null, true);
-        final ClassConfiguration config2 = new ClassConfiguration("c2",
+        final ClassConfiguration config2 = new ClassConfiguration(
             ConfigTestClass.class.getName(), null, null, null, true);
 
         config1.addProperty("test", true, true);
@@ -60,9 +60,9 @@ public class ClassConfigurationTest extends WebTestCase {
      */
     @Test
     public void testConfigurationSimpleFunctionEquality() throws Exception {
-        final ClassConfiguration config1 = new ClassConfiguration("c1",
+        final ClassConfiguration config1 = new ClassConfiguration(
             ConfigTestClass.class.getName(), null, null, null, true);
-        final ClassConfiguration config2 = new ClassConfiguration("c2",
+        final ClassConfiguration config2 = new ClassConfiguration(
             ConfigTestClass.class.getName(), null, null, null, true);
 
         config1.addFunction("testFunction");
@@ -77,9 +77,9 @@ public class ClassConfigurationTest extends WebTestCase {
      */
     @Test
     public void testConfigurationSimpleUnequalProperties() throws Exception {
-        final ClassConfiguration config1 = new ClassConfiguration("c1",
+        final ClassConfiguration config1 = new ClassConfiguration(
             ConfigTestClass.class.getName(), null, null, null, true);
-        final ClassConfiguration config2 = new ClassConfiguration("c2",
+        final ClassConfiguration config2 = new ClassConfiguration(
             ConfigTestClass.class.getName(), null, null, null, true);
 
         config1.addProperty("test", true, true);
@@ -93,7 +93,7 @@ public class ClassConfigurationTest extends WebTestCase {
      */
     @Test
     public void testForJSFlagTrue() throws Exception {
-        final ClassConfiguration config1 = new ClassConfiguration("c1",
+        final ClassConfiguration config1 = new ClassConfiguration(
             ConfigTestClass.class.getName(), null, null, null, true);
         assertTrue("JSObject Flag should have been set", config1.isJsObject());
     }
@@ -103,7 +103,7 @@ public class ClassConfigurationTest extends WebTestCase {
      */
     @Test
     public void testForJSFlagFalse() throws Exception {
-        final ClassConfiguration config1 = new ClassConfiguration("c1",
+        final ClassConfiguration config1 = new ClassConfiguration(
             ConfigTestClass.class.getName(), null, null, null, false);
         Assert.assertFalse("JSObject Flag should not have been set", config1.isJsObject());
     }
@@ -114,9 +114,9 @@ public class ClassConfigurationTest extends WebTestCase {
      */
     @Test
     public void testConfigurationPropertyEqualityWithBrowser() throws Exception {
-        final ClassConfiguration config1 = new ClassConfiguration("c1",
+        final ClassConfiguration config1 = new ClassConfiguration(
             ConfigTestClass.class.getName(), null, null, null, true);
-        final ClassConfiguration config2 = new ClassConfiguration("c2",
+        final ClassConfiguration config2 = new ClassConfiguration(
             ConfigTestClass.class.getName(), null, null, null, true);
 
         config1.addProperty("test", true, true);
@@ -133,9 +133,9 @@ public class ClassConfigurationTest extends WebTestCase {
      */
     @Test
     public void testConfigurationPropertyEqualityWithDifferentBrowsers() throws Exception {
-        final ClassConfiguration config1 = new ClassConfiguration("c1",
+        final ClassConfiguration config1 = new ClassConfiguration(
             ConfigTestClass.class.getName(), null, null, null, true);
-        final ClassConfiguration config2 = new ClassConfiguration("c2",
+        final ClassConfiguration config2 = new ClassConfiguration(
             ConfigTestClass.class.getName(), null, null, null, true);
 
         config1.addProperty("test", true, true);
@@ -152,7 +152,7 @@ public class ClassConfigurationTest extends WebTestCase {
      */
     @Test
     public void testNoSetterMethod() throws Exception {
-        final ClassConfiguration config1 = new ClassConfiguration("c1",
+        final ClassConfiguration config1 = new ClassConfiguration(
             ConfigTestClass.class.getName(), null, null, null, true);
         try {
             config1.addProperty("getterOnly", true, true);
@@ -169,7 +169,7 @@ public class ClassConfigurationTest extends WebTestCase {
      */
     @Test
     public void testNoFunctionMethod() throws Exception {
-        final ClassConfiguration config1 = new ClassConfiguration("c1",
+        final ClassConfiguration config1 = new ClassConfiguration(
             ConfigTestClass.class.getName(), null, null, null, true);
         try {
             config1.addFunction("noTestFunction");

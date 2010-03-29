@@ -40,10 +40,6 @@ public final class ClassConfiguration {
     private Map<String, FunctionInfo> functionMap_ = new HashMap<String, FunctionInfo>();
     private List<String> constants_ = new ArrayList<String>();
     private String extendedClass_;
-    /**
-     * The fully qualified name of the class that implements this class.
-     */
-    private final String className_;
     private final Class< ? extends SimpleScriptable> linkedClass_;
     /**
      * The constructor method in the {@link #linkedClass_}
@@ -55,7 +51,6 @@ public final class ClassConfiguration {
     /**
      * Constructor.
      *
-     * @param classname the name of the configuration class this entry is for
      * @param implementingClass - the fully qualified name of the class implementing this functionality
      * @param jsConstructor the constructor of method <code>implementingClass</code>
      * @param extendedClass - The name of the class that this class extends
@@ -64,10 +59,9 @@ public final class ClassConfiguration {
      * @throws ClassNotFoundException - if the implementing class is not found
      */
     @SuppressWarnings("unchecked")
-    public ClassConfiguration(final String classname, final String implementingClass, final String jsConstructor,
+    public ClassConfiguration(final String implementingClass, final String jsConstructor,
         final String extendedClass, final String htmlClass, final boolean jsObject)
         throws ClassNotFoundException {
-        className_ = classname;
         extendedClass_ = extendedClass;
         linkedClass_ = (Class< ? extends SimpleScriptable>) Class.forName(implementingClass);
         if (jsConstructor != null && jsConstructor.length() != 0) {
@@ -94,13 +88,6 @@ public final class ClassConfiguration {
         else {
             htmlClassname_ = null;
         }
-    }
-
-    /**
-     * @return the className
-     */
-    public String getClassName() {
-        return className_;
     }
 
     /**
@@ -269,12 +256,12 @@ public final class ClassConfiguration {
     }
 
     /**
-     * Currently, this is the hashcode for the name.
+     * Currently, this is the hashcode for the linkedClass name.
      * {@inheritDoc}
      */
     @Override
     public int hashCode() {
-        return className_.hashCode();
+        return linkedClass_.getName().hashCode();
     }
 
     /**

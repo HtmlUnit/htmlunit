@@ -28,7 +28,6 @@
 			<xsd:element name="property" type="propertyType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="function" type="functionType" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:sequence>
-		<xsd:attribute name="name" type="xsd:string" use="required"/>
 		<xsd:attribute name="notImplemented" type="xsd:boolean" default="false"/>
 		<xsd:attribute name="classname" type="xsd:string" use="required"/>
 		<xsd:attribute name="jsConstructor" type="xsd:string"/>
