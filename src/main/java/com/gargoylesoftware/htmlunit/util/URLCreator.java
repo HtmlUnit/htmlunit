@@ -54,6 +54,7 @@ abstract class URLCreator {
             = new com.gargoylesoftware.htmlunit.protocol.about.Handler();
         private static final URLStreamHandler DATA_HANDLER = new com.gargoylesoftware.htmlunit.protocol.data.Handler();
 
+        @Override
         URL toUrlUnsafeClassic(final String url) throws MalformedURLException {
             if (TextUtil.startsWithIgnoreCase(url, "javascript:")) {
                 return new URL(null, url, JS_HANDLER);
@@ -77,6 +78,8 @@ abstract class URLCreator {
      * For working on GoogleAppEngine. The URL hack will require special handling from a dedicated WebConnection.
      */
     static class URLCreatorGAE extends URLCreator {
+
+        @Override
         URL toUrlUnsafeClassic(final String url) throws MalformedURLException {
             if (TextUtil.startsWithIgnoreCase(url, "javascript:")) {
                 return new URL("http://gaeHack_" + url.replaceFirst(":", "/"));
