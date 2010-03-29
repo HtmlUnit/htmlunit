@@ -22,6 +22,7 @@ import org.junit.Test;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -54,6 +55,7 @@ public class Dojo102Test extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Tries(3)
     public void dojo() throws Exception {
         client_ = new WebClient(BrowserVersion.FIREFOX_3);
         final String url = "http://localhost:" + PORT + "/util/doh/runner.html";

@@ -22,6 +22,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 
 /**
  * Tests for compatibility with local loading of
@@ -60,6 +61,7 @@ public class JQuery126LocalTest extends JQueryTestBase {
      */
     @Test
     @NotYetImplemented(Browser.IE8)
+    @Tries(3)
     public void test() throws Exception {
         runTest();
     }

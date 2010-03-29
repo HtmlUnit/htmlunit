@@ -26,6 +26,7 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 
@@ -502,6 +503,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Tries(3)
     public void waitForBackgroundJavaScriptStartingBefore_hangs() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

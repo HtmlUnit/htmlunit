@@ -31,18 +31,38 @@ class BrowserStatement extends Statement {
     private final boolean notYetImplemented_;
     private final Method method_;
     private final String browserVersionString_;
+    private final int tries_;
 
     BrowserStatement(final Statement next, final Method method, final boolean shouldFail,
-            final boolean notYetImplemented, final String browserVersionString) {
+            final boolean notYetImplemented, final int tries, final String browserVersionString) {
         next_ = next;
         method_ = method;
         shouldFail_ = shouldFail;
         notYetImplemented_ = notYetImplemented;
+        tries_ = tries;
         browserVersionString_ = browserVersionString;
     }
 
     @Override
     public void evaluate() throws Throwable {
+        for (int i = 0; i < tries_; i++) {
+            try {
+                evaluateSolo();
+                break;
+            }
+            catch (final Throwable t) {
+                if (shouldFail_ || notYetImplemented_) {
+                    throw t;
+                }
+                System.out.println("Failed test "
+                        + method_.getDeclaringClass().getName() + '.' + method_.getName() + " #" + (i + 1));
+                if (i == tries_ - 1) {
+                    throw t;
+                }
+            }
+        }
+    }
+    public void evaluateSolo() throws Throwable {
         Exception toBeThrown = null;
         try {
             next_.evaluate();

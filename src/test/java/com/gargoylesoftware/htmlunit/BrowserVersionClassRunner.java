@@ -38,6 +38,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 
 /**
  * The runner for test methods that run with a specific browser ({@link BrowserRunner.Browser})
@@ -305,9 +306,10 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         else {
             notYetImplemented = isNotYetImplemented(method);
         }
+        final int tries = method.getAnnotation(Tries.class).value();
         setAlerts(testCase, method.getMethod());
         statement = new BrowserStatement(statement, method.getMethod(), shouldFail,
-                notYetImplemented, browserVersion_.getNickname());
+                notYetImplemented, tries, browserVersion_.getNickname());
         return statement;
     }
 

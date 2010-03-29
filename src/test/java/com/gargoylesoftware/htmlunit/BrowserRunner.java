@@ -227,4 +227,18 @@ public class BrowserRunner extends Suite {
         };
     }
 
+    /**
+     * The number of tries that test will be executed.
+     * The test will fail if and only if all trials failed.
+     */
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.METHOD)
+    public static @interface Tries {
+
+        /**
+         * The browsers which the case succeeds (but fails with remaining ones).
+         */
+        int value() default 1;
+    }
+
 }

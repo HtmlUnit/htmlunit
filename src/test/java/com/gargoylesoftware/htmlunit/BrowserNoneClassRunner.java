@@ -70,7 +70,7 @@ class BrowserNoneClassRunner extends BlockJUnit4ClassRunner {
         final NotYetImplemented notYetImplementedBrowsers = method.getAnnotation(NotYetImplemented.class);
         final boolean notYetImplemented = notYetImplementedBrowsers != null;
         statement = new BrowserStatement(statement, method.getMethod(), false,
-                notYetImplemented, "");
+                notYetImplemented, 1, "");
         return statement;
     }
 
