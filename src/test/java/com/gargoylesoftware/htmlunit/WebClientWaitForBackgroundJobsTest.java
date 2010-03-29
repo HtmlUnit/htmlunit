@@ -97,6 +97,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Tries(3)
     public void dontWaitWhenUnnecessary_jobRemovesOtherJob() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
