@@ -306,7 +306,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         else {
             notYetImplemented = isNotYetImplemented(method);
         }
-        final int tries = method.getAnnotation(Tries.class).value();
+        final int tries = getTries(method);
         setAlerts(testCase, method.getMethod());
         statement = new BrowserStatement(statement, method.getMethod(), shouldFail,
                 notYetImplemented, tries, browserVersion_.getNickname());
@@ -329,5 +329,10 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
     private boolean isNotYetImplemented(final FrameworkMethod method) {
         final NotYetImplemented notYetImplementedBrowsers = method.getAnnotation(NotYetImplemented.class);
         return notYetImplementedBrowsers != null && isDefinedIn(notYetImplementedBrowsers.value());
+    }
+
+    private int getTries(final FrameworkMethod method) {
+        final Tries tries = method.getAnnotation(Tries.class);
+        return tries != null ? tries.value() : 1;
     }
 }

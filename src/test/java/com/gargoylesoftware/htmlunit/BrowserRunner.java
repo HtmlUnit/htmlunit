@@ -236,7 +236,7 @@ public class BrowserRunner extends Suite {
     public static @interface Tries {
 
         /**
-         * The browsers which the case succeeds (but fails with remaining ones).
+         * The value.
          */
         int value() default 1;
     }
