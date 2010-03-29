@@ -62,6 +62,7 @@ class BrowserStatement extends Statement {
             }
         }
     }
+
     public void evaluateSolo() throws Throwable {
         Exception toBeThrown = null;
         try {
