@@ -14,19 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
-import static com.gargoylesoftware.htmlunit.WebClient.URL_ABOUT_BLANK;
-import static org.apache.commons.lang.StringUtils.equalsIgnoreCase;
-
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLStreamHandler;
 import java.util.BitSet;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.net.URLCodec;
 
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebAssert;
 
 /**
@@ -37,16 +32,13 @@ import com.gargoylesoftware.htmlunit.WebAssert;
  * @author Daniel Gredler
  * @author Martin Tamme
  * @author Sudhan Moghe
+ * @author Marc Guillemot
  */
 public final class UrlUtils {
-
-    private static final URLStreamHandler JS_HANDLER = new com.gargoylesoftware.htmlunit.protocol.javascript.Handler();
-    private static final URLStreamHandler ABOUT_HANDLER = new com.gargoylesoftware.htmlunit.protocol.about.Handler();
-    private static final URLStreamHandler DATA_HANDLER = new com.gargoylesoftware.htmlunit.protocol.data.Handler();
-
     private static final BitSet PATH_ALLOWED_CHARS = new BitSet(256);
     private static final BitSet QUERY_ALLOWED_CHARS = new BitSet(256);
     private static final BitSet ANCHOR_ALLOWED_CHARS = new BitSet(256);
+    private static final URLCreator URL_CREATOR = URLCreator.getCreator();
 
     /**
      * URI allowed char initialization; based on HttpClient 3.1's URI bit sets.
@@ -198,21 +190,7 @@ public final class UrlUtils {
      */
     public static URL toUrlUnsafe(final String url) throws MalformedURLException {
         WebAssert.notNull("url", url);
-        if (TextUtil.startsWithIgnoreCase(url, "javascript:")) {
-            return new URL(null, url, JS_HANDLER);
-        }
-        else if (TextUtil.startsWithIgnoreCase(url, "about:")) {
-            if (URL_ABOUT_BLANK != null && equalsIgnoreCase(URL_ABOUT_BLANK.toExternalForm(), url)) {
-                return URL_ABOUT_BLANK;
-            }
-            return new URL(null, url, ABOUT_HANDLER);
-        }
-        else if (TextUtil.startsWithIgnoreCase(url, "data:")) {
-            return new URL(null, url, DATA_HANDLER);
-        }
-        else {
-            return new URL(url);
-        }
+        return URL_CREATOR.toUrlUnsafeClassic(url);
     }
 
     /**
