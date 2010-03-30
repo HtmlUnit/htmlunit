@@ -23,6 +23,7 @@ import org.openqa.selenium.WebElement;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link KeyboardEvent}.
@@ -126,4 +127,33 @@ public class KeyboardEventTest extends WebDriverTestCase {
         field.sendKeys("abcdefghijklmnopqrstuvwxyz");
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
+
+    private void keysPageTest(final String html, final CharSequence... keysToSend) throws Exception {
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("keyId")).sendKeys(keysToSend);
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "0,65,65", "0,97,97", "13,0,13" },
+            IE = { "65,undefined,undefined", "97,undefined,undefined", "13,undefined,undefined" })
+    @NotYetImplemented
+    public void which() throws Exception {
+        final String html
+            = "<html><head></head><body>\n"
+            + "<input type='text' id='keyId'/>\n"
+            + "<script>\n"
+            + "function handler(e) {\n"
+            + "  e = e ? e : window.event;\n"
+            + "  alert(e.keyCode + ',' + e.charCode + ',' + e.which);\n"
+            + "}\n"
+            + "document.getElementById('keyId').onkeypress = handler;</script>\n"
+            + "</body></html>";
+        keysPageTest(html, "Aa\n");
+    }
+
 }
