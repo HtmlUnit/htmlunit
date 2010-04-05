@@ -305,7 +305,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             final Object replace) {
         String urlString = null;
         if (url != Undefined.instance) {
-            urlString = (String) url;
+            urlString = Context.toString(url);
         }
         String windowName = "";
         if (name != Undefined.instance) {
@@ -313,7 +313,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         }
         String featuresString = null;
         if (features != Undefined.instance) {
-            featuresString = (String) features;
+            featuresString = Context.toString(features);
         }
         boolean replaceCurrentEntryInBrowsingHistory = false;
         if (replace != Undefined.instance) {

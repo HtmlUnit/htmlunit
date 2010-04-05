@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes, large file download, single thread for JavaScript background tasks">
+            <action type="update" dev="asashour" issue="2982020">
+                JavaScript: fix ClassCastException in window.open().
+            </action>
             <action type="update" dev="mguillem">
                 DomElement.asXml(): escape only &lt;, &amp; and &quot; in attribute values.
             </action>

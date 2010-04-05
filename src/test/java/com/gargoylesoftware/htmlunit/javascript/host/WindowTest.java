@@ -2149,4 +2149,29 @@ public class WindowTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void open() throws Exception {
+        final String firstHtml = "<html><head></head>\n"
+            + "<body>\n"
+            + "<button id='clickme' onClick='window.open(new String(\"" + URL_SECOND + "\"));'>Click me</a>\n"
+            + "</body></html>";
+
+        final String secondHtml
+            = "<html><head><title>Second</title></head><body></body></html>";
+
+        final WebClient client = getWebClient();
+        final MockWebConnection conn = new MockWebConnection();
+        client.setWebConnection(conn);
+
+        conn.setResponse(URL_FIRST, firstHtml);
+        conn.setResponse(URL_SECOND, secondHtml);
+
+        final HtmlPage page = client.getPage(URL_FIRST);
+        final HtmlButton buttonA = page.getHtmlElementById("clickme");
+
+        buttonA.click();
+    }
 }
