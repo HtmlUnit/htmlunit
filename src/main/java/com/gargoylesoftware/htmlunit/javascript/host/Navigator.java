@@ -130,6 +130,15 @@ public final class Navigator extends SimpleScriptable {
     }
 
     /**
+     * Returns the build number of the current browser.
+     * @see <a href="https://developer.mozilla.org/en/navigator.productSub">Mozilla Doc</a>
+     * @return false
+     */
+    public String jsxGet_productSub() {
+        return "20100215";
+    }
+
+    /**
      * Returns the property "systemLanguage".
      * @return the property "systemLanguage"
      */

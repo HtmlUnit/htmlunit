@@ -2471,6 +2471,9 @@
         <property name="product" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
+        <property name="productSub" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
         <property name="systemLanguage" readable="true" writable="false"/>
         <property name="userAgent" readable="true" writable="false"/>
         <property name="userLanguage" readable="true" writable="false"/>
