@@ -388,15 +388,30 @@ public class KeyboardEvent extends UIEvent {
      *
      * @param domNode the DOM node that triggered the event
      * @param type the event type
-     * @param keyCode the key code associated with the event
+     * @param character the character associated with the event
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
      */
-    public KeyboardEvent(final DomNode domNode, final String type, final int keyCode,
+    public KeyboardEvent(final DomNode domNode, final String type, final int character,
             final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         super(domNode, type);
-        setKeyCode(keyCode);
+        if (getBrowserVersion().isIE()) {
+            if (jsxGet_type().equals(Event.TYPE_KEY_PRESS)) {
+                setKeyCode(character);
+            }
+            else {
+                setKeyCode(charToKeyCode(character));
+            }
+        }
+        else {
+            if (jsxGet_type().equals(Event.TYPE_KEY_PRESS) && character >= 33 && character <= 126) {
+                charCode_ = character;
+            }
+            else {
+                setKeyCode(charToKeyCode(character));
+            }
+        }
         setShiftKey(shiftKey);
         setCtrlKey(ctrlKey);
         setAltKey(altKey);
@@ -441,8 +456,16 @@ public class KeyboardEvent extends UIEvent {
      * Returns the char code associated with the event.
      * @return the char code associated with the event
      */
-    public Object jsxGet_charCode() {
+    public int jsxGet_charCode() {
         return charCode_;
+    }
+
+    /**
+     * Returns the numeric keyCode of the key pressed, or the charCode for an alphanumeric key pressed.
+     * @return the numeric keyCode of the key pressed, or the charCode for an alphanumeric key pressed
+     */
+    public Object jsxGet_which() {
+        return charCode_ != 0 ? charCode_ : jsxGet_keyCode();
     }
 
     /**
@@ -451,11 +474,23 @@ public class KeyboardEvent extends UIEvent {
      * @param c the character
      * @return the corresponding keycode
      */
-    public static int charToKeyCode(final char c) {
+    private static int charToKeyCode(final int c) {
         if (c >= 'a' && c <= 'z') {
             return 'A' + c - 'a';
         }
 
-        return c;
+        switch (c) {
+            case '.':
+                return DOM_VK_PERIOD;
+
+            case ',':
+                return DOM_VK_COMMA;
+
+            case '/':
+                return DOM_VK_SLASH;
+
+            default:
+                return c;
+        }
     }
 }

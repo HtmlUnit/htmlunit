@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes, large file download, single thread for JavaScript background tasks">
+            <action type="add" dev="asashour" issue="2979275">
+                JavaScript: add support for KeyboardEvent.which (FF only).
+            </action>
             <action type="add" dev="mguillem" issue="2981752">
                 JavaScript: add support for navigator.productSub (FF only).
             </action>

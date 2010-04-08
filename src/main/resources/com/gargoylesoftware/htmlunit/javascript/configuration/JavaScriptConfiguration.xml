@@ -2346,6 +2346,9 @@
         <property name="keyCode" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
+        <property name="which" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
         <function name="initKeyEvent">
             <browser name="Firefox"/>
         </function>

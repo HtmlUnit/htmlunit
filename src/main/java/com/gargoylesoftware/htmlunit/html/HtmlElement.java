@@ -466,11 +466,10 @@ public abstract class HtmlElement extends DomElement {
             focus();
         }
 
-        final int keyCode = KeyboardEvent.charToKeyCode(c);
-        final Event keyDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, keyCode, shiftKey, ctrlKey, altKey);
+        final Event keyDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, c, shiftKey, ctrlKey, altKey);
         final ScriptResult keyDownResult = fireEvent(keyDown);
 
-        final Event keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, keyCode, shiftKey, ctrlKey, altKey);
+        final Event keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, c, shiftKey, ctrlKey, altKey);
         final ScriptResult keyPressResult = fireEvent(keyPress);
 
         if (!keyDown.isAborted(keyDownResult) && !keyPress.isAborted(keyPressResult)) {
@@ -482,11 +481,11 @@ public abstract class HtmlElement extends DomElement {
             && (this instanceof HtmlTextInput
             || this instanceof HtmlTextArea
             || this instanceof HtmlPasswordInput)) {
-            final Event input = new KeyboardEvent(this, Event.TYPE_INPUT, keyCode, shiftKey, ctrlKey, altKey);
+            final Event input = new KeyboardEvent(this, Event.TYPE_INPUT, c, shiftKey, ctrlKey, altKey);
             fireEvent(input);
         }
 
-        final Event keyUp = new KeyboardEvent(this, Event.TYPE_KEY_UP, keyCode, shiftKey, ctrlKey, altKey);
+        final Event keyUp = new KeyboardEvent(this, Event.TYPE_KEY_UP, c, shiftKey, ctrlKey, altKey);
         fireEvent(keyUp);
 
         final HtmlForm form = getEnclosingForm();

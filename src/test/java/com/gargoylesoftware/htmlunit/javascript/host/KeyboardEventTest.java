@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -23,7 +25,6 @@ import org.openqa.selenium.WebElement;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link KeyboardEvent}.
@@ -128,32 +129,58 @@ public class KeyboardEventTest extends WebDriverTestCase {
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 
-    private void keysPageTest(final String html, final CharSequence... keysToSend) throws Exception {
-        final WebDriver driver = loadPage2(html);
-        driver.findElement(By.id("keyId")).sendKeys(keysToSend);
-
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
-    }
-
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "0,65,65", "0,97,97", "13,0,13" },
-            IE = { "65,undefined,undefined", "97,undefined,undefined", "13,undefined,undefined" })
-    @NotYetImplemented
+    @Alerts(FF = { "keydown:65,0,65",
+                   "keypress:0,65,65",
+                   "keyup:65,0,65",
+                   "keydown:65,0,65",
+                   "keypress:0,97,97",
+                   "keyup:65,0,65",
+                   "keydown:190,0,190",
+                   "keypress:0,46,46",
+                   "keyup:190,0,190",
+                   "keydown:13,0,13",
+                   "keypress:13,0,13",
+                   "keyup:13,0,13"
+                   },
+            IE = { "keydown:65,undefined,undefined",
+                   "keypress:65,undefined,undefined",
+                   "keyup:65,undefined,undefined",
+                   "keydown:65,undefined,undefined",
+                   "keypress:97,undefined,undefined",
+                   "keyup:65,undefined,undefined",
+                   "keydown:190,undefined,undefined",
+                   "keypress:46,undefined,undefined",
+                   "keyup:190,undefined,undefined",
+                   "keydown:13,undefined,undefined",
+                   "keypress:13,undefined,undefined",
+                   "keyup:13,undefined,undefined"
+                   })
     public void which() throws Exception {
         final String html
             = "<html><head></head><body>\n"
-            + "<input type='text' id='keyId'/>\n"
+            + "<input type='text' id='keyId'>\n"
             + "<script>\n"
             + "function handler(e) {\n"
             + "  e = e ? e : window.event;\n"
-            + "  alert(e.keyCode + ',' + e.charCode + ',' + e.which);\n"
+            + "  document.getElementById('myTextarea').value "
+            + "+= e.type + ':' + e.keyCode + ',' + e.charCode + ',' + e.which + '\\n';\n"
             + "}\n"
-            + "document.getElementById('keyId').onkeypress = handler;</script>\n"
+            + "document.getElementById('keyId').onkeyup = handler;\n"
+            + "document.getElementById('keyId').onkeydown = handler;\n"
+            + "document.getElementById('keyId').onkeypress = handler;\n"
+            + "</script>\n"
+            + "<textarea id='myTextarea' cols=80 rows=20></textarea>\n"
             + "</body></html>";
-        keysPageTest(html, "Aa\n");
+        final String keysToSend = "Aa.\r";
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("keyId")).sendKeys(keysToSend);
+
+        final String[] actual = driver.findElement(By.id("myTextarea")).getValue().split("\r\n|\n");
+        assertEquals(Arrays.asList(getExpectedAlerts()).toString(), Arrays.asList(actual).toString());
     }
 
 }
