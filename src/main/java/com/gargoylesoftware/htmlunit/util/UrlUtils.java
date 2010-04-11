@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.WebAssert;
  * @author Martin Tamme
  * @author Sudhan Moghe
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public final class UrlUtils {
     private static final BitSet PATH_ALLOWED_CHARS = new BitSet(256);
@@ -134,7 +135,6 @@ public final class UrlUtils {
 
         final BitSet allowedAbsPath = new BitSet(256);
         allowedAbsPath.or(absPath);
-        allowedAbsPath.clear('%');
 
         final BitSet allowedFragment = new BitSet(256);
         allowedFragment.or(uric);

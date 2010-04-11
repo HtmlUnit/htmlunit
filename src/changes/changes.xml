@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes, large file download, single thread for JavaScript background tasks">
+            <action type="update" dev="asashour">
+                Correctly handle URLs with '%'.
+            </action>
             <action type="add" dev="asashour" issue="2979275">
                 JavaScript: add support for KeyboardEvent.which (FF only).
             </action>

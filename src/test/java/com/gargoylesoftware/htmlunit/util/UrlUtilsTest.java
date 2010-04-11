@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Daniel Gredler
  * @author Martin Tamme
  * @author Sudhan Moghe
+ * @author Ahmed Ashour
  */
 public class UrlUtilsTest extends WebTestCase {
 
@@ -183,5 +184,14 @@ public class UrlUtilsTest extends WebTestCase {
 
         assertEquals("http://a/f.html", UrlUtils.resolveUrl("http://a/otherFile.html", "../f.html"));
         assertEquals("http://a/f.html", UrlUtils.resolveUrl("http://a/otherFile.html", "../../f.html"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void percent() throws Exception {
+        final URL url = new URL("http://localhost/bug%21.html");
+        assertEquals("http://localhost/bug%21.html", UrlUtils.encodeUrl(url, false).toExternalForm());
     }
 }
