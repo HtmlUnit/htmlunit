@@ -24,8 +24,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.httpclient.ChunkedOutputStream;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link BigContentPage}.
@@ -67,6 +70,44 @@ public class BigContentPageTest extends WebServerTestCase {
             response.setContentLength(length);
             final byte[] buffer = new byte[1024];
             final OutputStream out = response.getOutputStream();
+            for (int i = length / buffer.length; i >= 0; i--) {
+                out.write(buffer);
+            }
+            out.close();
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    public void chunkedBigContent() throws Exception {
+        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        servlets.put("/bigChunked", ChunkedBigContentServlet.class);
+        startWebServer("./", null, servlets);
+
+        final WebClient client = getWebClient();
+
+        final Page page = client.getPage("http://localhost:" + PORT + "/bigChunked");
+        assertTrue(page instanceof BigContentPage);
+    }
+
+    /**
+     * Servlet for {@link #chunkedBigContent()}.
+     */
+    public static class ChunkedBigContentServlet extends HttpServlet {
+
+        private static final long serialVersionUID = 8341425725771441517L;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            final int length = 60 * 1024 * 1024;
+            final byte[] buffer = new byte[1024];
+            final OutputStream out = new ChunkedOutputStream(response.getOutputStream());
             for (int i = length / buffer.length; i >= 0; i--) {
                 out.write(buffer);
             }
