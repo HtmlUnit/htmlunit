@@ -29,6 +29,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for {@link BigContentPage}.
@@ -110,6 +111,42 @@ public class BigContentPageTest extends WebServerTestCase {
             final OutputStream out = new ChunkedOutputStream(response.getOutputStream());
             for (int i = length / buffer.length; i >= 0; i--) {
                 out.write(buffer);
+            }
+            out.close();
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    public void chunked() throws Exception {
+        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        servlets.put("/chunked", ChunkedServlet.class);
+        startWebServer("./", null, servlets);
+
+        final WebClient client = getWebClient();
+
+        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/chunked");
+        assertTrue(page.asText().startsWith("ABCDEF"));
+    }
+
+    /**
+     * Servlet for {@link #chunked()}.
+     */
+    public static class ChunkedServlet extends HttpServlet {
+
+        private static final long serialVersionUID = 1454574979267029963L;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            final OutputStream out = new ChunkedOutputStream(response.getOutputStream(), 5);
+            for (char ch = 'A'; ch <= 'Z'; ch++) {
+                out.write(ch);
             }
             out.close();
         }
