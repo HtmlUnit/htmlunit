@@ -106,6 +106,7 @@ public class BigContentPageTest extends WebServerTestCase {
          */
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            response.setHeader("Transfer-Encoding", "chunked");
             final int length = 60 * 1024 * 1024;
             final byte[] buffer = new byte[1024];
             final OutputStream out = new ChunkedOutputStream(response.getOutputStream());
@@ -144,6 +145,7 @@ public class BigContentPageTest extends WebServerTestCase {
          */
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            response.setHeader("Transfer-Encoding", "chunked");
             final OutputStream out = new ChunkedOutputStream(response.getOutputStream(), 5);
             for (char ch = 'A'; ch <= 'Z'; ch++) {
                 out.write(ch);
