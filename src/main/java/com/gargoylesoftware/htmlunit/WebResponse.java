@@ -110,6 +110,12 @@ public interface WebResponse extends Serializable {
     InputStream getContentAsStream() throws IOException;
 
     /**
+     * Returns true for big content, in which case you must use {@link #getContentAsStream()}.
+     * @return true for big content
+     */
+    boolean isBigContent();
+
+    /**
      * Returns the response content as a byte array.
      * @return the response content as a byte array
      */

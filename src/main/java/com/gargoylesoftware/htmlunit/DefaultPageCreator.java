@@ -93,7 +93,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
      * @return the new page object
      */
     public Page createPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
-        if (WebResponseData.isBigContent(webResponse.getResponseHeaders())) {
+        if (webResponse.isBigContent()) {
             return createBigContentPage(webResponse, webWindow);
         }
 

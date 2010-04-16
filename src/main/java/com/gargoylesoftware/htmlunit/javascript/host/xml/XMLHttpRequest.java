@@ -645,6 +645,10 @@ public class XMLHttpRequest extends SimpleScriptable {
             return webRequestSettings_;
         }
 
+        public boolean isBigContent() {
+            return false;
+        }
+
         public URL getRequestUrl() {
             return getRequestSettings().getUrl();
         }

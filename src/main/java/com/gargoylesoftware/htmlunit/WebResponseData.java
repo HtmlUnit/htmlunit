@@ -39,10 +39,11 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 public class WebResponseData implements Serializable {
 
     private static final long serialVersionUID = 2979956380280496543L;
-    private static final long BIG_CONTENT_SIZE_ = 50 * 1024 * 1024;
+    private static final int IN_MEMORY_SIZE = 300 * 1024;
 
     private byte[] body_;
     private InputStream inputStream_;
+    private boolean isBigContent_;
     private int statusCode_;
     private String statusMessage_;
     private List<NameValuePair> responseHeaders_;
@@ -86,27 +87,31 @@ public class WebResponseData implements Serializable {
         statusCode_ = statusCode;
         statusMessage_ = statusMessage;
         responseHeaders_ = Collections.unmodifiableList(responseHeaders);
-        if (isBigContent()) {
-            String encoding = null;
-            for (final NameValuePair header : responseHeaders) {
-                final String headerName = header.getName().trim();
-                if (headerName.equalsIgnoreCase("content-encoding")) {
-                    encoding = header.getValue();
-                    break;
+        if (bodyStream != null) {
+            final MemoryInputStream memoryInputStream = new MemoryInputStream(bodyStream, IN_MEMORY_SIZE);
+            if (!memoryInputStream.isInMemory()) {
+                String encoding = null;
+                for (final NameValuePair header : responseHeaders) {
+                    final String headerName = header.getName().trim();
+                    if (headerName.equalsIgnoreCase("content-encoding")) {
+                        encoding = header.getValue();
+                        break;
+                    }
                 }
-            }
-            if (encoding != null && StringUtils.contains(encoding, "gzip")) {
-                inputStream_ = new GZIPInputStream(bodyStream);
-            }
-            else if (encoding != null && StringUtils.contains(encoding, "deflate")) {
-                inputStream_ = new InflaterInputStream(bodyStream);
+                if (encoding != null && StringUtils.contains(encoding, "gzip")) {
+                    inputStream_ = new GZIPInputStream(memoryInputStream);
+                }
+                else if (encoding != null && StringUtils.contains(encoding, "deflate")) {
+                    inputStream_ = new InflaterInputStream(memoryInputStream);
+                }
+                else {
+                    inputStream_ = memoryInputStream;
+                }
+                isBigContent_ = true;
             }
             else {
-                inputStream_ = bodyStream;
+                body_ = getBody(memoryInputStream, responseHeaders);
             }
-        }
-        else {
-            body_ = getBody(bodyStream, responseHeaders);
         }
     }
 
@@ -154,7 +159,18 @@ public class WebResponseData implements Serializable {
         else if (encoding != null && StringUtils.contains(encoding, "deflate")) {
             stream = new InflaterInputStream(stream);
         }
+        if (stream instanceof MemoryInputStream) {
+            return ((MemoryInputStream) stream).getData();
+        }
         return IOUtils.toByteArray(stream);
+    }
+
+    /**
+     * Returns true for big content, in which case you must use {@link #getInputStream()}.
+     * @return true for big content
+     */
+    public boolean isBigContent() {
+        return isBigContent_;
     }
 
     /**
@@ -196,24 +212,5 @@ public class WebResponseData implements Serializable {
      */
     public String getStatusMessage() {
         return statusMessage_;
-    }
-
-    /**
-     * Returns true if this is a big content data.
-     * @return true if the content size is big
-     */
-    public boolean isBigContent() {
-        return isBigContent(responseHeaders_);
-    }
-
-    static boolean isBigContent(final List<NameValuePair> headers) {
-        for (final NameValuePair header : headers) {
-            final String headerName = header.getName().trim();
-            if (headerName.equalsIgnoreCase("Content-Length")
-                        && Long.parseLong(header.getValue()) >= BIG_CONTENT_SIZE_) {
-                return true;
-            }
-        }
-        return false;
     }
 }

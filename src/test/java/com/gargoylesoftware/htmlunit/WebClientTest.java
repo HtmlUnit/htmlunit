@@ -97,16 +97,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 public class WebClientTest extends WebServerTestCase {
 
     /**
-     * Performs post-test deconstruction.
-     * @throws Exception if an error occurs
-     */
-    @After
-    @Override
-    public void tearDown() throws Exception {
-        super.tearDown();
-    }
-
-    /**
      * Tests if all JUnit 4 candidate test methods declare <tt>@Test</tt> annotation.
      * @throws Exception if the test fails
      */

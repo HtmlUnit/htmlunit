@@ -181,8 +181,15 @@ public class WebResponseImpl implements WebResponse {
     /**
      * {@inheritDoc}
      */
+    public boolean isBigContent() {
+        return responseData_.isBigContent();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public InputStream getContentAsStream() throws IOException {
-        if (WebResponseData.isBigContent(responseData_.getResponseHeaders())) {
+        if (responseData_.isBigContent()) {
             return responseData_.getInputStream();
         }
         final byte[] body = responseData_.getBody();

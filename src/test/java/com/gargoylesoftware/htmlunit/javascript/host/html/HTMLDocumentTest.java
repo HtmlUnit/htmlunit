@@ -70,7 +70,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "    }\n"
             + "    </script>\n"
             + "</head>\n"
-            + "<body onload='test()'>"
+            + "<body onload='test()'>\n"
             + "<div id='myDiv'>\n"
             + "  <div></div>\n"
             + "</div>\n"
@@ -261,7 +261,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "}\n"
             + "</script>\n"
             + "</head>\n"
-            + "<body onload='test()'>"
+            + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
 
@@ -289,7 +289,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "}\n"
             + "</script>\n"
             + "</head>\n"
-            + "<body onload='test()'>"
+            + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
 
@@ -312,7 +312,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "}\n"
             + "</script>\n"
             + "</head>\n"
-            + "<body onload='test()'>"
+            + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
 
@@ -432,7 +432,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "    }\n"
             + "    </script>\n"
             + "</head>\n"
-            + "<body onload='test()'>"
+            + "<body onload='test()'>\n"
             + "<div id='myDiv'>\n"
             + "  <div></div>\n"
             + "</div>\n"
@@ -466,7 +466,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "    }\n"
             + "    </script>\n"
             + "</head>\n"
-            + "<body onload='test()'>"
+            + "<body onload='test()'>\n"
             + "<div>\n"
             + "  <textarea id='myTextarea' cols='80'></textarea>\n"
             + "</div>\n"

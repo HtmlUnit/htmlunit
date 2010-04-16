@@ -82,7 +82,6 @@ public class BigContentPageTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void chunkedBigContent() throws Exception {
         final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
         servlets.put("/bigChunked", ChunkedBigContentServlet.class);

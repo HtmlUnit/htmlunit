@@ -156,6 +156,14 @@ public class WebResponseWrapper implements WebResponse {
 
     /**
      * {@inheritDoc}
+     * The default behavior of this method is to return isBigContent() on the wrapped connection object.
+     */
+    public boolean isBigContent() {
+        return wrappedWebResponse_.isBigContent();
+    }
+
+    /**
+     * {@inheritDoc}
      */
     public URL getRequestUrl() {
         return getRequestSettings().getUrl();
