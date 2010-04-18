@@ -81,7 +81,7 @@
             public WebResponse getResponse(WebRequestSettings settings) throws IOException {
                 // modify the request settings
                 WebResponseImpl response = (WebResponseImpl) super.getResponse(settings);
-                // modify the response
+                // modify the response by creating a new WebResponse/WebResponseImpl
                 return response;
             }
         };
