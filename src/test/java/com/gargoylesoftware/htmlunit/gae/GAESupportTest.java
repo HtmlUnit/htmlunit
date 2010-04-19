@@ -14,80 +14,41 @@
  */
 package com.gargoylesoftware.htmlunit.gae;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import static org.junit.Assert.assertEquals;
 
-import org.apache.commons.io.IOUtils;
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * Tests for <a href="http://code.google.com/appengine/">Google App Engine</a> support.
+ * Tests for <a href="http://code.google.com/appengine/">Google App Engine</a>
+ * support. Tests are run through the {@link GAETestRunner} which tries to enforce (some of) GAE rules
+ * like for instance class white list.
  *
  * @version $Revision$
  * @author Marc Guillemot
  */
-@RunWith(BrowserRunner.class)
-public class GAESupportTest extends WebTestCase {
-    private static final Set<String> whitelist = new HashSet<String>();
+@RunWith(GAETestRunner.class)
+public class GAESupportTest {
 
     /**
-     * Loads the white list.
-     * @throws IOException in case of problem
+     * Test that the test runner prohibits loading of some classes like
+     * {@link java.net.URLStreamHandler}.
      */
-    @Before
-    @SuppressWarnings("unchecked")
-    public void init() throws IOException {
-        if (whitelist.isEmpty()) {
-            final InputStream is = getClass().getResourceAsStream("whitelist.txt");
-            Assert.assertNotNull(is);
-            final List<String> lines = IOUtils.readLines(is);
-            IOUtils.closeQuietly(is);
-
-            whitelist.addAll(lines);
-        }
+    @Test(expected = NoClassDefFoundError.class)
+    public void whitelist() {
+        new com.gargoylesoftware.htmlunit.protocol.javascript.Handler();
     }
 
     /**
-     * Simulates GAE white list restrictions.
-     * Fails as of HtmlUnit-2.7 due to usage of java.net.URLStreamHandler (and problably other classes).
+     * Simulates GAE white list restrictions. Fails as of HtmlUnit-2.7 due to
+     * usage of java.net.URLStreamHandler (and problably other classes).
      * @throws Exception if the test fails
      */
     @Test
-    public void whitelist() throws Exception {
-        final ClassLoader cl = new ClassLoader(ClassLoader.getSystemClassLoader()) {
-            @Override
-            public Class<?> loadClass(final String name) throws ClassNotFoundException {
-                if (name.startsWith("java") && !whitelist.contains(name)) {
-                    throw new NoClassDefFoundError(name + " is a restricted class for GAE");
-                }
-                if (!name.startsWith("com.gargoylesoftware")) {
-                    return super.loadClass(name);
-                }
-                final InputStream is = getResourceAsStream(name.replaceAll("\\.", "/") + ".class");
-                final ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                try {
-                    IOUtils.copy(is, bos);
-                    final byte[] bytes = bos.toByteArray();
-                    return defineClass(name, bytes, 0, bytes.length);
-                }
-                catch (final IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        };
-
-        final Class<?> clazz = cl.loadClass(WebClient.class.getName());
-        clazz.newInstance();
+    public void instantiation() throws Exception {
+        new WebClient();
+        assertEquals("http://gaeHack_about/blank", WebClient.URL_ABOUT_BLANK.toString());
     }
 }
