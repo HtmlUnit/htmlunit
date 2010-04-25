@@ -30,9 +30,9 @@ import java.net.URL;
 @Deprecated
 public class WebRequestSettings extends WebRequest {
 
-	private static final long serialVersionUID = -4873887377590383345L;
+    private static final long serialVersionUID = -4873887377590383345L;
 
-	/**
+    /**
      * Instantiates a {@link WebRequestSettings} for the specified URL.
      * @param url the target URL
      */
