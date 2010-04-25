@@ -261,10 +261,10 @@ public class WebClient implements Serializable {
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      *         {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true
      *
-     * @see WebRequestSettings
+     * @see WebRequest
      */
     @SuppressWarnings("unchecked")
-    public <P extends Page> P getPage(final WebWindow webWindow, final WebRequestSettings parameters)
+    public <P extends Page> P getPage(final WebWindow webWindow, final WebRequest parameters)
         throws IOException, FailingHttpStatusCodeException {
 
         final Page page = webWindow.getEnclosedPage();
@@ -322,7 +322,7 @@ public class WebClient implements Serializable {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * <p>Open a new web window and populate it with a page loaded by
-     * {@link #getPage(WebWindow,WebRequestSettings)}</p>
+     * {@link #getPage(WebWindow,WebRequest)}</p>
      *
      * @param opener the web window that initiated the request
      * @param target the name of the window to be opened (the name that will be passed into the
@@ -335,14 +335,14 @@ public class WebClient implements Serializable {
      * @throws IOException if an IO problem occurs
      */
     @SuppressWarnings("unchecked")
-    public <P extends Page> P getPage(final WebWindow opener, final String target, final WebRequestSettings params)
+    public <P extends Page> P getPage(final WebWindow opener, final String target, final WebRequest params)
         throws FailingHttpStatusCodeException, IOException {
         return (P) getPage(openTargetWindow(opener, target, "_self"), params);
     }
 
     /**
      * Convenient method to build an URL and load it into the current WebWindow as it would be done
-     * by {@link #getPage(WebWindow, WebRequestSettings)}.
+     * by {@link #getPage(WebWindow, WebRequest)}.
      * @param url the URL of the new content
      * @param <P> the page type
      * @return the new page
@@ -359,7 +359,7 @@ public class WebClient implements Serializable {
 
     /**
      * Convenient method to load a URL into the current top WebWindow as it would be done
-     * by {@link #getPage(WebWindow, WebRequestSettings)}.
+     * by {@link #getPage(WebWindow, WebRequest)}.
      * @param url the URL of the new content
      * @param <P> the page type
      * @return the new page
@@ -369,7 +369,7 @@ public class WebClient implements Serializable {
      */
     @SuppressWarnings("unchecked")
     public <P extends Page> P getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
-        return (P) getPage(getCurrentWindow().getTopWindow(), new WebRequestSettings(url));
+        return (P) getPage(getCurrentWindow().getTopWindow(), new WebRequest(url));
     }
 
     /**
@@ -380,10 +380,10 @@ public class WebClient implements Serializable {
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      *         {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      * @throws IOException if an IO problem occurs
-     * @see #getPage(WebWindow,WebRequestSettings)
+     * @see #getPage(WebWindow,WebRequest)
      */
     @SuppressWarnings("unchecked")
-    public <P extends Page> P getPage(final WebRequestSettings request) throws IOException,
+    public <P extends Page> P getPage(final WebRequest request) throws IOException,
         FailingHttpStatusCodeException {
         return (P) getPage(getCurrentWindow().getTopWindow(), request);
     }
@@ -910,7 +910,7 @@ public class WebClient implements Serializable {
         final HtmlPage openerPage = (HtmlPage) opener.getEnclosedPage();
         if (url != null) {
             try {
-                final WebRequestSettings settings = new WebRequestSettings(url);
+                final WebRequest settings = new WebRequest(url);
                 if (!getBrowserVersion().isIE() && openerPage != null) {
                     final String referer = openerPage.getWebResponse().getRequestSettings().getUrl().toExternalForm();
                     settings.setAdditionalHeader("Referer", referer);
@@ -1015,7 +1015,7 @@ public class WebClient implements Serializable {
         fireWindowOpened(new WebWindowEvent(window, WebWindowEvent.OPEN, null, null));
 
         final HtmlPage openerPage = (HtmlPage) opener.getEnclosedPage();
-        final WebRequestSettings settings = new WebRequestSettings(url);
+        final WebRequest settings = new WebRequest(url);
         if (!getBrowserVersion().isIE()) {
             final String referer = openerPage.getWebResponse().getRequestSettings().getUrl().toExternalForm();
             settings.setAdditionalHeader("Referer", referer);
@@ -1181,7 +1181,7 @@ public class WebClient implements Serializable {
         return UrlUtils.toUrlUnsafe(newUrl);
     }
 
-    private WebResponse makeWebResponseForDataUrl(final WebRequestSettings webRequestSettings) throws IOException {
+    private WebResponse makeWebResponseForDataUrl(final WebRequest webRequestSettings) throws IOException {
         final URL url = webRequestSettings.getUrl();
         final List<NameValuePair> responseHeaders = new ArrayList<NameValuePair>();
         DataUrlDecoder decoder;
@@ -1321,7 +1321,7 @@ public class WebClient implements Serializable {
             Page currentPage = webWindow.getEnclosedPage();
             if (currentPage == null) {
                 // Starting with a JavaScript URL; quickly fill an "about:blank".
-                currentPage = getPage(webWindow, new WebRequestSettings(WebClient.URL_ABOUT_BLANK));
+                currentPage = getPage(webWindow, new WebRequest(WebClient.URL_ABOUT_BLANK));
             }
             page = (HtmlPage) currentPage;
         }
@@ -1342,7 +1342,7 @@ public class WebClient implements Serializable {
      * @throws IOException if an IO problem occurs
      * @return the WebResponse
      */
-    public WebResponse loadWebResponse(final WebRequestSettings webRequestSettings)
+    public WebResponse loadWebResponse(final WebRequest webRequestSettings)
         throws IOException {
 
         final WebResponse response;
@@ -1375,7 +1375,7 @@ public class WebClient implements Serializable {
      * @throws IOException if an IO problem occurs
      * @return the resultant {@link WebResponse}
      */
-    private WebResponse loadWebResponseFromWebConnection(final WebRequestSettings webRequestSettings,
+    private WebResponse loadWebResponseFromWebConnection(final WebRequest webRequestSettings,
         final int allowedRedirects) throws IOException {
 
         URL url = webRequestSettings.getUrl();
@@ -1474,7 +1474,7 @@ public class WebClient implements Serializable {
             }
             else if ((status == HttpStatus.SC_MOVED_PERMANENTLY || status == HttpStatus.SC_TEMPORARY_REDIRECT)
                 && method.equals(HttpMethod.GET)) {
-                final WebRequestSettings wrs = new WebRequestSettings(newUrl);
+                final WebRequest wrs = new WebRequest(newUrl);
                 wrs.setRequestParameters(parameters);
                 for (Map.Entry<String, String> entry : webRequestSettings.getAdditionalHeaders().entrySet()) {
                     wrs.setAdditionalHeader(entry.getKey(), entry.getValue());
@@ -1482,7 +1482,7 @@ public class WebClient implements Serializable {
                 return loadWebResponseFromWebConnection(wrs, allowedRedirects - 1);
             }
             else if (status <= HttpStatus.SC_SEE_OTHER) {
-                final WebRequestSettings wrs = new WebRequestSettings(newUrl);
+                final WebRequest wrs = new WebRequest(newUrl);
                 wrs.setHttpMethod(HttpMethod.GET);
                 for (Map.Entry<String, String> entry : webRequestSettings.getAdditionalHeaders().entrySet()) {
                     wrs.setAdditionalHeader(entry.getKey(), entry.getValue());
@@ -1495,10 +1495,10 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Adds the headers that are sent with every request to the specified {@link WebRequestSettings} instance.
+     * Adds the headers that are sent with every request to the specified {@link WebRequest} instance.
      * @param wrs the <tt>WebRequestSettings</tt> instance to modify
      */
-    private void addDefaultHeaders(final WebRequestSettings wrs) {
+    private void addDefaultHeaders(final WebRequest wrs) {
         // Add standard HtmlUnit headers.
         if (!wrs.isAdditionalHeader("Accept-Language")) {
             wrs.setAdditionalHeader("Accept-Language", getBrowserVersion().getBrowserLanguage());
@@ -2068,7 +2068,7 @@ public class WebClient implements Serializable {
      * @param description information about the origin of the request. Useful for debugging.
      */
     public void download(final WebWindow requestingWindow, final String target,
-        final WebRequestSettings requestSettings, final String description) {
+        final WebRequest requestSettings, final String description) {
         final WebWindow win = resolveWindow(requestingWindow, target);
         final URL url = requestSettings.getUrl();
         boolean justHashJump = false;
@@ -2084,7 +2084,7 @@ public class WebClient implements Serializable {
         }
 
         for (final LoadJob loadJob : loadQueue_) {
-            final WebRequestSettings otherRequest = loadJob.response_.getRequestSettings();
+            final WebRequest otherRequest = loadJob.response_.getRequestSettings();
             final URL otherUrl = otherRequest.getUrl();
             // TODO: investigate but it seems that IE considers query string too but not FF
             if (url.getPath().equals(otherUrl.getPath())

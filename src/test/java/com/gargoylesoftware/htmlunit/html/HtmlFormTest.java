@@ -38,7 +38,7 @@ import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -887,7 +887,7 @@ public class HtmlFormTest extends WebTestCase {
         webConnection.setDefaultResponse(html);
         client.setWebConnection(webConnection);
 
-        final WebRequestSettings settings = new WebRequestSettings(getDefaultUrl(), HttpMethod.POST);
+        final WebRequest settings = new WebRequest(getDefaultUrl(), HttpMethod.POST);
 
         final HtmlPage page = client.getPage(settings);
         final HtmlInput submitButton = page.getHtmlElementById("submitButton");

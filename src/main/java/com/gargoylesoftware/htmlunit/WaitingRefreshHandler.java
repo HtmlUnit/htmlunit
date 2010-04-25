@@ -89,7 +89,7 @@ public class WaitingRefreshHandler implements RefreshHandler {
             return;
         }
         final WebClient client = window.getWebClient();
-        client.getPage(window, new WebRequestSettings(url));
+        client.getPage(window, new WebRequest(url));
     }
 
 }

@@ -29,7 +29,7 @@ import org.apache.commons.lang.StringUtils;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -254,7 +254,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
         }
         else {
             // download should be done ASAP, response will be loaded into a window later
-            final WebRequestSettings requestSettings = getHtmlForm().getWebRequestSettings(null);
+            final WebRequest requestSettings = getHtmlForm().getWebRequestSettings(null);
             final String target = page.getResolvedTarget(jsxGet_target());
             webClient.download(page.getEnclosingWindow(), target, requestSettings, "JS form.submit()");
         }

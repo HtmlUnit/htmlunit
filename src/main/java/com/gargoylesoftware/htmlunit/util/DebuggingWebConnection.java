@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebConnection;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebResponseData;
 import com.gargoylesoftware.htmlunit.WebResponseImpl;
@@ -98,7 +98,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
      * {@inheritDoc}
      */
     @Override
-    public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
+    public WebResponse getResponse(final WebRequest settings) throws IOException {
         WebResponse response = wrappedWebConnection_.getResponse(settings);
         if (isUncompressJavaScript() && isJavaScript(response)) {
             response = uncompressJavaScript(response);
@@ -113,7 +113,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
      * @return a new response with uncompressed JavaScript code or the original response in case of failure
      */
     protected WebResponse uncompressJavaScript(final WebResponse response) {
-        final WebRequestSettings requestSettings = response.getRequestSettings();
+        final WebRequest requestSettings = response.getRequestSettings();
         final String scriptName = requestSettings.getUrl().toString();
         final String scriptSource = response.getContentAsString();
 
@@ -158,7 +158,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
      * @param settings the settings used to get the response
      * @throws IOException if a problem occurs writing the file
      */
-    protected void saveResponse(final WebResponse response, final WebRequestSettings settings)
+    protected void saveResponse(final WebResponse response, final WebRequest settings)
         throws IOException {
         counter_++;
         final String extension;

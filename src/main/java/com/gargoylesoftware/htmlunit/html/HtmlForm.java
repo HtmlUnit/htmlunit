@@ -38,7 +38,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -124,7 +124,7 @@ public class HtmlForm extends HtmlElement {
             }
         }
 
-        final WebRequestSettings settings = getWebRequestSettings(submitElement);
+        final WebRequest settings = getWebRequestSettings(submitElement);
         final String target = htmlPage.getResolvedTarget(getTargetAttribute());
 
         final WebWindow webWindow = htmlPage.getEnclosingWindow();
@@ -139,7 +139,7 @@ public class HtmlForm extends HtmlElement {
      * @param submitElement the element that caused the submit to occur
      * @return the request settings
      */
-    public WebRequestSettings getWebRequestSettings(final SubmittableElement submitElement) {
+    public WebRequest getWebRequestSettings(final SubmittableElement submitElement) {
         final HtmlPage htmlPage = (HtmlPage) getPage();
         final List<NameValuePair> parameters = getParameterListForSubmit(submitElement);
         final HttpMethod method;
@@ -192,7 +192,7 @@ public class HtmlForm extends HtmlElement {
             throw new IllegalArgumentException("Not a valid url: " + actionUrl);
         }
 
-        final WebRequestSettings settings = new WebRequestSettings(url, method);
+        final WebRequest settings = new WebRequest(url, method);
         settings.setRequestParameters(parameters);
         if (HttpMethod.POST == method) {
             settings.setEncodingType(FormEncodingType.getInstance(getEnctypeAttribute()));

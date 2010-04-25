@@ -27,7 +27,7 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.HttpMethod;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebResponseData;
 import com.gargoylesoftware.htmlunit.WebResponseImpl;
@@ -116,7 +116,7 @@ public class XMLDocument extends Document {
         }
         try {
             final HtmlPage htmlPage = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
-            final WebRequestSettings settings = new WebRequestSettings(htmlPage.getFullyQualifiedUrl(xmlSource));
+            final WebRequest settings = new WebRequest(htmlPage.getFullyQualifiedUrl(xmlSource));
             final WebResponse webResponse = getWindow().getWebWindow().getWebClient().loadWebResponse(settings);
             final XmlPage page = new XmlPage(webResponse, getWindow().getWebWindow(), false);
             setDomNode(page);

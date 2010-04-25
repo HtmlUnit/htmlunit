@@ -104,8 +104,8 @@ public class CacheTest extends WebTestCase {
                 return contentType[0];
             }
             @Override
-            public WebRequestSettings getRequestSettings() {
-                return new WebRequestSettings(url[0]);
+            public WebRequest getRequestSettings() {
+                return new WebRequest(url[0]);
             }
         };
 
@@ -332,7 +332,7 @@ class DummyWebResponse implements WebResponse {
         throw new RuntimeException("not implemented");
     }
 
-    public WebRequestSettings getRequestSettings() {
+    public WebRequest getRequestSettings() {
         throw new RuntimeException("not implemented");
     }
 

@@ -65,6 +65,6 @@ public class StringWebResponse extends WebResponseImpl {
      * @param originatingURL the URL that this should be associated with
      */
     public StringWebResponse(final String content, final String charset, final URL originatingURL) {
-        super(getWebResponseData(content, charset), new WebRequestSettings(originatingURL, HttpMethod.GET), 0);
+        super(getWebResponseData(content, charset), new WebRequest(originatingURL, HttpMethod.GET), 0);
     }
 }

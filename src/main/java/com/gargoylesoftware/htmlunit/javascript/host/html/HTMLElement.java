@@ -46,7 +46,7 @@ import org.xml.sax.helpers.AttributesImpl;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
@@ -1460,7 +1460,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         public void run() {
             final WebClient client = getWindow().getWebWindow().getWebClient();
             final Scriptable scope = callback_.getParentScope();
-            final WebRequestSettings settings = new WebRequestSettings(url_);
+            final WebRequest settings = new WebRequest(url_);
             try {
                 final WebResponse webResponse = client.loadWebResponse(settings);
                 final String content = webResponse.getContentAsString();

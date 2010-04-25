@@ -166,7 +166,7 @@ public class WebClientTest extends WebServerTestCase {
         client.setWebConnection(webConnection);
 
         try {
-            client.getPage(new WebRequestSettings(getDefaultUrl(), HttpMethod.POST));
+            client.getPage(new WebRequest(getDefaultUrl(), HttpMethod.POST));
             fail("Expected FailingHttpStatusCodeException");
         }
         catch (final FailingHttpStatusCodeException e) {
@@ -332,7 +332,7 @@ public class WebClientTest extends WebServerTestCase {
         final MockWebConnection webConnection = new MockWebConnection() {
             private int count_ = 0;
             @Override
-            public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
+            public WebResponse getResponse(final WebRequest webRequestSettings) throws IOException {
                 ++count_;
                 if (count_ == 1) {
                     final WebResponse response = super.getResponse(webRequestSettings);
@@ -345,7 +345,7 @@ public class WebClientTest extends WebServerTestCase {
         webConnection.setResponse(URL_FIRST, firstContent, statusCode, "Some error", "text/html", headers);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = webClient.getPage(new WebRequestSettings(URL_FIRST, HttpMethod.POST));
+        final HtmlPage page = webClient.getPage(new WebRequest(URL_FIRST, HttpMethod.POST));
         final WebResponse webResponse = page.getWebResponse();
         // A redirect should have happened
         assertEquals(200, webResponse.getStatusCode());
@@ -546,7 +546,7 @@ public class WebClientTest extends WebServerTestCase {
         final MockWebConnection webConnection = new MockWebConnection() {
             private int count_ = 0;
             @Override
-            public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
+            public WebResponse getResponse(final WebRequest webRequestSettings) throws IOException {
                 ++count_;
                 if (count_ < nbRedirections) {
                     setResponse(url, firstContent, 302, "Redirect needed " + count_, "text/html", headers);
@@ -570,7 +570,7 @@ public class WebClientTest extends WebServerTestCase {
     }
 
     /**
-     * Verifies that any additional headers in the original {@link WebRequestSettings} instance are kept
+     * Verifies that any additional headers in the original {@link WebRequest} instance are kept
      * and sent to the redirect location. Specifically, the "Referer" header set in various locations was
      * being lost during redirects (see bug 1987911).
      * @throws Exception if an error occurs
@@ -590,7 +590,7 @@ public class WebClientTest extends WebServerTestCase {
         conn.setResponse(URL_FIRST, "", statusCode, "", "text/html", headers);
         conn.setResponse(URL_SECOND, "<html><body>abc</body></html>");
 
-        final WebRequestSettings request = new WebRequestSettings(URL_FIRST);
+        final WebRequest request = new WebRequest(URL_FIRST);
         request.setAdditionalHeader("foo", "bar");
         client.getPage(request);
 
@@ -652,7 +652,7 @@ public class WebClientTest extends WebServerTestCase {
         //
         // Second time redirection is turned on (default setting)
         //
-        page = webClient.getPage(new WebRequestSettings(url, initialRequestMethod));
+        page = webClient.getPage(new WebRequest(url, initialRequestMethod));
         webResponse = page.getWebResponse();
         if (expectedRedirectedRequestMethod == null) {
             // No redirect should have happened
@@ -673,7 +673,7 @@ public class WebClientTest extends WebServerTestCase {
         // Second time redirection is turned off
         //
         webClient.setRedirectEnabled(false);
-        page = webClient.getPage(new WebRequestSettings(url, initialRequestMethod));
+        page = webClient.getPage(new WebRequest(url, initialRequestMethod));
         webResponse = page.getWebResponse();
         assertEquals(statusCode, webResponse.getStatusCode());
         assertEquals(initialRequestMethod, webConnection.getLastMethod());
@@ -769,7 +769,7 @@ public class WebClientTest extends WebServerTestCase {
 
         final String urlString = "http://first?a=b";
         final URL url = new URL(urlString);
-        final HtmlPage page = client.getPage(new WebRequestSettings(url, HttpMethod.POST));
+        final HtmlPage page = client.getPage(new WebRequest(url, HttpMethod.POST));
 
         assertEquals("http://first/?a=b", page.getWebResponse().getRequestSettings().getUrl());
     }
@@ -1168,7 +1168,7 @@ public class WebClientTest extends WebServerTestCase {
         // Make sure the custom proxy settings are used.
         final String customProxyHost = "customProxyHost";
         final int customProxyPort = 1000;
-        final WebRequestSettings settings = new WebRequestSettings(URL_FIRST);
+        final WebRequest settings = new WebRequest(URL_FIRST);
         settings.setProxyHost(customProxyHost);
         settings.setProxyPort(customProxyPort);
         webClient.getPage(settings);
@@ -1592,7 +1592,7 @@ public class WebClientTest extends WebServerTestCase {
     }
 
     /**
-     * Verifies that {@link WebClient#getPage(WebWindow, WebRequestSettings)} calls OnBeforeUnload
+     * Verifies that {@link WebClient#getPage(WebWindow, WebRequest)} calls OnBeforeUnload
      * on the specified window's page, not on the client's "current" page.
      * @throws Exception if an error occurs
      */
@@ -1613,7 +1613,7 @@ public class WebClientTest extends WebServerTestCase {
     public void testUrlEncoding() throws Exception {
         final URL url = new URL("http://host/x+y\u00E9/a\u00E9 b?c \u00E9 d");
         final HtmlPage page = loadPage(FIREFOX_3, "<html></html>", new ArrayList<String>(), url);
-        final WebRequestSettings wrs = page.getWebResponse().getRequestSettings();
+        final WebRequest wrs = page.getWebResponse().getRequestSettings();
         assertEquals("http://host/x+y%C3%A9/a%C3%A9%20b?c%20%E9%20d", wrs.getUrl());
     }
 
@@ -1626,7 +1626,7 @@ public class WebClientTest extends WebServerTestCase {
     public void testUrlEncoding2() throws Exception {
         final URL url = new URL("http://host/x+y\u00E9/a\u00E9 b?c \u00E9 d");
         final HtmlPage page = loadPage(INTERNET_EXPLORER_8, "<html></html>", new ArrayList<String>(), url);
-        final WebRequestSettings wrs = page.getWebResponse().getRequestSettings();
+        final WebRequest wrs = page.getWebResponse().getRequestSettings();
         assertEquals("http://host/x+y%C3%A9/a%C3%A9%20b?c%20\u00E9%20d", wrs.getUrl());
     }
 
@@ -1638,7 +1638,7 @@ public class WebClientTest extends WebServerTestCase {
     public void testPlusNotEncodedInUrl() throws Exception {
         final URL url = new URL("http://host/search/my+category/");
         final HtmlPage page = loadPage("<html></html>", new ArrayList<String>(), url);
-        final WebRequestSettings wrs = page.getWebResponse().getRequestSettings();
+        final WebRequest wrs = page.getWebResponse().getRequestSettings();
         assertEquals("http://host/search/my+category/", wrs.getUrl());
     }
 

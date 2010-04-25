@@ -43,14 +43,14 @@ public class MockWebConnection implements WebConnection {
 
     private final Map<String, WebResponseData> responseMap_ = new HashMap<String, WebResponseData>(10);
     private WebResponseData defaultResponse_;
-    private WebRequestSettings lastRequest_;
+    private WebRequest lastRequest_;
     private int requestCount_ = 0;
     private final List<URL> requestedUrls_ = Collections.synchronizedList(new ArrayList<URL>());
 
     /**
      * {@inheritDoc}
      */
-    public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
+    public WebResponse getResponse(final WebRequest settings) throws IOException {
         final URL url = settings.getUrl();
 
         if (LOG.isDebugEnabled()) {
@@ -341,21 +341,21 @@ public class MockWebConnection implements WebConnection {
 
     /**
      * Returns the additional headers that were used in the in the last call
-     * to {@link #getResponse(WebRequestSettings)}.
+     * to {@link #getResponse(WebRequest)}.
      * @return the additional headers that were used in the in the last call
-     *         to {@link #getResponse(WebRequestSettings)}
+     *         to {@link #getResponse(WebRequest)}
      */
     public Map<String, String> getLastAdditionalHeaders() {
         return lastRequest_.getAdditionalHeaders();
     }
 
     /**
-     * Returns the {@link WebRequestSettings} that was used in the in the last call
-     * to {@link #getResponse(WebRequestSettings)}.
-     * @return the {@link WebRequestSettings} that was used in the in the last call
-     *         to {@link #getResponse(WebRequestSettings)}
+     * Returns the {@link WebRequest} that was used in the in the last call
+     * to {@link #getResponse(WebRequest)}.
+     * @return the {@link WebRequest} that was used in the in the last call
+     *         to {@link #getResponse(WebRequest)}
      */
-    public WebRequestSettings getLastWebRequestSettings() {
+    public WebRequest getLastWebRequestSettings() {
         return lastRequest_;
     }
 

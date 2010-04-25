@@ -60,7 +60,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
@@ -1290,7 +1290,7 @@ public class HtmlPageTest extends WebServerTestCase {
         final MockWebConnection webConnection = new MockWebConnection() {
             private int nbCalls_ = 0;
             @Override
-            public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
+            public WebResponse getResponse(final WebRequest settings) throws IOException {
                 String content = "<html><head>\n";
                 if (nbCalls_ == 0) {
                     content += "<meta http-equiv='refresh' content='1; URL='>\n";
@@ -1305,7 +1305,7 @@ public class HtmlPageTest extends WebServerTestCase {
         };
         client.setWebConnection(webConnection);
 
-        final WebRequestSettings settings = new WebRequestSettings(getDefaultUrl());
+        final WebRequest settings = new WebRequest(getDefaultUrl());
         settings.setHttpMethod(HttpMethod.POST);
         client.getPage(settings);
     }

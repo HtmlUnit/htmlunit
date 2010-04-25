@@ -40,9 +40,9 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Marc Guillemot
  * @author Rodney Gitzel
  */
-public class WebRequestSettings implements Serializable {
+public class WebRequest implements Serializable {
 
-    private static final Log LOG = LogFactory.getLog(WebRequestSettings.class);
+    private static final Log LOG = LogFactory.getLog(WebRequest.class);
 
     private static final long serialVersionUID = -7405507885099274031L;
     private String url_; // String instead of java.net.URL because "about:blank" URLs don't serialize correctly
@@ -59,32 +59,32 @@ public class WebRequestSettings implements Serializable {
     private String requestBody_;
 
     /**
-     * Instantiates a {@link WebRequestSettings} for the specified URL.
+     * Instantiates a {@link WebRequest} for the specified URL.
      * @param url the target URL
      */
-    public WebRequestSettings(final URL url) {
+    public WebRequest(final URL url) {
         setUrl(url);
         setAdditionalHeader("Accept", "*/*");
     }
 
     /**
-     * Instantiates a {@link WebRequestSettings} for the specified URL using the proxy configuration from the
+     * Instantiates a {@link WebRequest} for the specified URL using the proxy configuration from the
      * specified original request.
      * @param originalRequest the original request
      * @param url the target URL
      */
-    public WebRequestSettings(final WebRequestSettings originalRequest, final URL url) {
+    public WebRequest(final WebRequest originalRequest, final URL url) {
         this(url);
         setProxyHost(originalRequest.getProxyHost());
         setProxyPort(originalRequest.getProxyPort());
     }
 
     /**
-     * Instantiates a {@link WebRequestSettings} for the specified URL using the specified HTTP submit method.
+     * Instantiates a {@link WebRequest} for the specified URL using the specified HTTP submit method.
      * @param url the target URL
      * @param submitMethod the HTTP submit method to use
      */
-    public WebRequestSettings(final URL url, final HttpMethod submitMethod) {
+    public WebRequest(final URL url, final HttpMethod submitMethod) {
         this(url);
         setHttpMethod(submitMethod);
     }

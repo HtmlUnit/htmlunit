@@ -91,7 +91,7 @@ public class Cache implements Serializable {
      * @param toCache the object that is to be cached, if possible (may be for instance a compiled script or
      * simply a WebResponse)
      */
-    public void cacheIfPossible(final WebRequestSettings request, final WebResponse response, final Object toCache) {
+    public void cacheIfPossible(final WebRequest request, final WebResponse response, final Object toCache) {
         if (isCacheable(request, response)) {
             final String url = response.getRequestSettings().getUrl().toString();
             final Entry entry = new Entry(url, toCache);
@@ -136,7 +136,7 @@ public class Cache implements Serializable {
      * @param response the received response
      * @return <code>true</code> if the response can be cached
      */
-    protected boolean isCacheable(final WebRequestSettings request, final  WebResponse response) {
+    protected boolean isCacheable(final WebRequest request, final  WebResponse response) {
         return HttpMethod.GET == response.getRequestSettings().getHttpMethod()
             && !isDynamicContent(response);
     }
@@ -216,7 +216,7 @@ public class Cache implements Serializable {
      * @param request the request whose corresponding cached compiled script is sought
      * @return the cached object corresponding to the specified request if any
      */
-    public Object getCachedObject(final WebRequestSettings request) {
+    public Object getCachedObject(final WebRequest request) {
         if (HttpMethod.GET != request.getHttpMethod()) {
             return null;
         }

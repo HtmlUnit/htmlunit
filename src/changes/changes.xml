@@ -10,6 +10,9 @@
                 BigContentPage: change threshold to 300 KB, and handle chunked content.
             </action>
             <action type="update" dev="asashour">
+                Deprecate WebRequestSettings.
+            </action>
+            <action type="update" dev="asashour">
                 Correctly handle URLs with '%'.
             </action>
             <action type="add" dev="asashour" issue="2979275">

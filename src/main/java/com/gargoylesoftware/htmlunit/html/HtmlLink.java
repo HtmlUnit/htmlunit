@@ -21,7 +21,7 @@ import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 
 /**
@@ -175,10 +175,10 @@ public class HtmlLink extends HtmlElement {
      * @return the request settings which will allow us to retrieve the content referenced by the "href" attribute
      * @throws MalformedURLException in case of problem resolving the URL
      */
-    public WebRequestSettings getWebRequestSettings() throws MalformedURLException {
+    public WebRequest getWebRequestSettings() throws MalformedURLException {
         final HtmlPage page = (HtmlPage) getPage();
         final URL url = page.getFullyQualifiedUrl(getHrefAttribute());
-        final WebRequestSettings request = new WebRequestSettings(url);
+        final WebRequest request = new WebRequest(url);
         request.setAdditionalHeader("Referer", page.getWebResponse().getRequestSettings().getUrl().toExternalForm());
         return request;
     }

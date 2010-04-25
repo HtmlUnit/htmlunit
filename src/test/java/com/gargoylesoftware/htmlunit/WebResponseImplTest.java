@@ -99,7 +99,7 @@ public class WebResponseImplTest extends WebServerTestCase {
         final List< ? extends NameValuePair> emptyList = Collections.emptyList();
         webConnection.setResponse(URL_FIRST, content.getBytes("UTF-8"), 200, "OK", "text/html", emptyList);
         client.setWebConnection(webConnection);
-        final WebRequestSettings settings = new WebRequestSettings(URL_FIRST);
+        final WebRequest settings = new WebRequest(URL_FIRST);
         settings.setCharset("UTF-8");
         final HtmlPage page = client.getPage(settings);
         assertEquals(title, page.getTitleText());

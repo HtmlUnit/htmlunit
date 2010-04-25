@@ -19,7 +19,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 
 /**
@@ -150,7 +150,7 @@ public class WebResponseWrapper implements WebResponse {
      * {@inheritDoc}
      * The default behavior of this method is to return getRequestSettings() on the wrapped connection object.
      */
-    public WebRequestSettings getRequestSettings() {
+    public WebRequest getRequestSettings() {
         return wrappedWebResponse_.getRequestSettings();
     }
 

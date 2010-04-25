@@ -27,7 +27,7 @@ import org.apache.commons.logging.LogFactory;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.TextUtil;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
 
 /**
@@ -98,7 +98,7 @@ public class HtmlAnchor extends HtmlElement {
             return;
         }
         final URL url = page.getFullyQualifiedUrl(href);
-        final WebRequestSettings wrs = new WebRequestSettings(url);
+        final WebRequest wrs = new WebRequest(url);
         wrs.setAdditionalHeader("Referer", page.getWebResponse().getRequestSettings().getUrl().toExternalForm());
         if (LOG.isDebugEnabled()) {
             LOG.debug(

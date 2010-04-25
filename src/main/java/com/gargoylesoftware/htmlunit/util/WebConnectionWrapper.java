@@ -18,7 +18,7 @@ import java.io.IOException;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebConnection;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 
 /**
@@ -64,7 +64,7 @@ public class WebConnectionWrapper implements WebConnection {
      * {@inheritDoc}
      * The default behavior of this method is to return getResponse() on the wrapped connection object.
      */
-    public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
+    public WebResponse getResponse(final WebRequest settings) throws IOException {
         return wrappedWebConnection_.getResponse(settings);
     }
 

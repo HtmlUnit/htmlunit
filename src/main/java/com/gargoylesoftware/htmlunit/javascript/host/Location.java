@@ -26,7 +26,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -203,7 +203,7 @@ public class Location extends SimpleScriptable {
             }
 
             final WebWindow webWindow = getWindow().getWebWindow();
-            webWindow.getWebClient().download(webWindow, "", new WebRequestSettings(url), "JS set location");
+            webWindow.getWebClient().download(webWindow, "", new WebRequest(url), "JS set location");
         }
         catch (final MalformedURLException e) {
             LOG.error("jsxSet_location('" + newLocation + "') Got MalformedURLException", e);
@@ -421,6 +421,6 @@ public class Location extends SimpleScriptable {
      * @throws IOException if there is a problem loading the new location
      */
     private void setUrl(final URL url) throws IOException {
-        window_.getWebWindow().getWebClient().getPage(window_.getWebWindow(), new WebRequestSettings(url));
+        window_.getWebWindow().getWebClient().getPage(window_.getWebWindow(), new WebRequest(url));
     }
 }

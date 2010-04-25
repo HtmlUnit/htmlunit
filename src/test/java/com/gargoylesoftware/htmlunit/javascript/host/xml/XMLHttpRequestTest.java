@@ -38,7 +38,7 @@ import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -665,7 +665,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection() {
             @Override
-            public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
+            public WebResponse getResponse(final WebRequest webRequestSettings) throws IOException {
                 collectedAlerts.add(webRequestSettings.getUrl().toExternalForm());
                 return super.getResponse(webRequestSettings);
             }
@@ -712,7 +712,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
 
-        final WebRequestSettings settings = conn.getLastWebRequestSettings();
+        final WebRequest settings = conn.getLastWebRequestSettings();
         assertEquals(urlPage2, settings.getUrl());
         assertEquals(URL_FIRST.toExternalForm(), settings.getAdditionalHeaders().get("Referer"));
     }
@@ -778,7 +778,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
 
-        final WebRequestSettings settings = conn.getLastWebRequestSettings();
+        final WebRequest settings = conn.getLastWebRequestSettings();
         assertEquals(urlPage2, settings.getUrl());
         assertSame(method, settings.getHttpMethod());
     }
@@ -876,7 +876,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             private boolean gotFoo1_ = false;
 
             @Override
-            public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
+            public WebResponse getResponse(final WebRequest webRequestSettings) throws IOException {
                 final String url = webRequestSettings.getUrl().toExternalForm();
 
                 synchronized (this) {
@@ -1146,7 +1146,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
     private static final class DisconnectedMockWebConnection extends MockWebConnection {
         /** {@inheritDoc} */
         @Override
-        public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
+        public WebResponse getResponse(final WebRequest settings) throws IOException {
             if (settings.getUrl().equals(URL_SECOND)) {
                 throw new IOException("Connection refused");
             }

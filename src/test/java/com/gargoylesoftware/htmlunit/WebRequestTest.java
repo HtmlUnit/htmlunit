@@ -23,21 +23,21 @@ import org.apache.commons.httpclient.auth.BasicScheme;
 import org.junit.Test;
 
 /**
- * Tests for {@link WebRequestSettings}.
+ * Tests for {@link WebRequest}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Rodney Gitzel
  */
-public class WebRequestSettingsTest {
+public class WebRequestTest {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
     public void headers() throws Exception {
-        final WebRequestSettings settings = new WebRequestSettings(WebTestCase.getDefaultUrl());
+        final WebRequest settings = new WebRequest(WebTestCase.getDefaultUrl());
         final int initialSize = settings.getAdditionalHeaders().size();
         settings.setAdditionalHeader("Accept", "nothing");
         assertEquals(initialSize, settings.getAdditionalHeaders().size());
@@ -60,47 +60,47 @@ public class WebRequestSettingsTest {
         final URL url3 = new URL("http://htmlunit.sf.net/dir/foo.html?a=1&b=2");
 
         // with directory/..
-        WebRequestSettings settings = new WebRequestSettings(new URL("http://htmlunit.sf.net/bla/../foo.html"));
+        WebRequest settings = new WebRequest(new URL("http://htmlunit.sf.net/bla/../foo.html"));
         assertEquals(url1, settings.getUrl());
 
         // with /..
-        settings = new WebRequestSettings(new URL("http://htmlunit.sf.net/../foo.html"));
+        settings = new WebRequest(new URL("http://htmlunit.sf.net/../foo.html"));
         assertEquals(url1, settings.getUrl());
 
         // with /(\w\w)/.. (c.f. 2854634)
-        settings = new WebRequestSettings(new URL("http://htmlunit.sf.net/dir/fu/../foo.html"));
+        settings = new WebRequest(new URL("http://htmlunit.sf.net/dir/fu/../foo.html"));
         assertEquals(url2, settings.getUrl());
 
         // with /../..
-        settings = new WebRequestSettings(new URL("http://htmlunit.sf.net/../../foo.html"));
+        settings = new WebRequest(new URL("http://htmlunit.sf.net/../../foo.html"));
         assertEquals(url1, settings.getUrl());
 
         // with ../.. (c.f. 2854634)
-        settings = new WebRequestSettings(new URL("http://htmlunit.sf.net/dir/foo/bar/../../foo.html"));
+        settings = new WebRequest(new URL("http://htmlunit.sf.net/dir/foo/bar/../../foo.html"));
         assertEquals(url2, settings.getUrl());
 
-        settings = new WebRequestSettings(
+        settings = new WebRequest(
                           new URL("http://htmlunit.sf.net/dir/foo/bar/boo/hoo/silly/../../../../../foo.html"));
         assertEquals(url2, settings.getUrl());
 
         // with /.
-        settings = new WebRequestSettings(new URL("http://htmlunit.sf.net/./foo.html"));
+        settings = new WebRequest(new URL("http://htmlunit.sf.net/./foo.html"));
         assertEquals(url1, settings.getUrl());
 
         // with /\w//. (c.f. 2854634)
-        settings = new WebRequestSettings(new URL("http://htmlunit.sf.net/a/./foo.html"));
+        settings = new WebRequest(new URL("http://htmlunit.sf.net/a/./foo.html"));
         assertEquals(new URL("http://htmlunit.sf.net/a/foo.html"), settings.getUrl());
 
         // with /.
-        settings = new WebRequestSettings(new URL("http://htmlunit.sf.net/dir/./foo.html"));
+        settings = new WebRequest(new URL("http://htmlunit.sf.net/dir/./foo.html"));
         assertEquals(url2, settings.getUrl());
 
         // with /. and query
-        settings = new WebRequestSettings(new URL("http://htmlunit.sf.net/dir/./foo.html?a=1&b=2"));
+        settings = new WebRequest(new URL("http://htmlunit.sf.net/dir/./foo.html?a=1&b=2"));
         assertEquals(url3, settings.getUrl());
 
         // pathological
-        settings = new WebRequestSettings(
+        settings = new WebRequest(
                 new URL("http://htmlunit.sf.net/dir/foo/bar/./boo/hoo/silly/.././../../../.././foo.html?a=1&b=2"));
         assertEquals(url3, settings.getUrl());
     }
@@ -111,7 +111,7 @@ public class WebRequestSettingsTest {
     @Test
     public void credentials() throws Exception {
         final URL url = new URL("http://john.smith:secret@localhost/");
-        final WebRequestSettings settings = new WebRequestSettings(url);
+        final WebRequest settings = new WebRequest(url);
         final UsernamePasswordCredentials credentials = (UsernamePasswordCredentials)
             settings.getCredentialsProvider().getCredentials(new BasicScheme(), "localhost", 80, false);
         assertEquals("john.smith", credentials.getUserName());

@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
@@ -72,7 +72,7 @@ public abstract class BaseFrame extends HtmlElement {
                 // real content is loaded
                 final WebClient webClient = getPage().getEnclosingWindow().getWebClient();
                 final HtmlPage temporaryPage = webClient.getPage(enclosedWindow,
-                    new WebRequestSettings(WebClient.URL_ABOUT_BLANK));
+                    new WebRequest(WebClient.URL_ABOUT_BLANK));
                 temporaryPage.setReadyState(READY_STATE_LOADING);
             }
         }
@@ -135,7 +135,7 @@ public abstract class BaseFrame extends HtmlElement {
                 return;
             }
             try {
-                final WebRequestSettings settings = new WebRequestSettings(url);
+                final WebRequest settings = new WebRequest(url);
                 settings.setAdditionalHeader("Referer", getPage().getWebResponse().getRequestSettings().getUrl()
                         .toExternalForm());
                 getPage().getEnclosingWindow().getWebClient().getPage(enclosedWindow_, settings);

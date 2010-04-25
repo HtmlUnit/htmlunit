@@ -37,7 +37,7 @@ public interface WebResponse extends Serializable {
      * Returns the request settings used to load this response.
      * @return the request settings used to load this response
      */
-    WebRequestSettings getRequestSettings();
+    WebRequest getRequestSettings();
 
     /**
      * Returns the response headers as a list of {@link NameValuePair}s.

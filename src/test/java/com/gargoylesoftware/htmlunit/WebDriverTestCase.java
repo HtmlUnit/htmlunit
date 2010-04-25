@@ -282,7 +282,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
 
             final URL requestedUrl = new URL(url);
-            final WebRequestSettings settings = new WebRequestSettings(requestedUrl);
+            final WebRequest settings = new WebRequest(requestedUrl);
             settings.setHttpMethod(HttpMethod.valueOf(request.getMethod()));
 
             // copy headers

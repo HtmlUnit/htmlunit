@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
@@ -220,7 +220,7 @@ public class CSSStyleSheet extends SimpleScriptable {
         String uri = page.getWebResponse().getRequestSettings().getUrl().toExternalForm();
         try {
             // Retrieve the associated content and respect client settings regarding failing HTTP status codes.
-            final WebRequestSettings request;
+            final WebRequest request;
             final WebClient client = page.getWebClient();
             if (link != null) {
                 // Use link.
@@ -228,7 +228,7 @@ public class CSSStyleSheet extends SimpleScriptable {
             }
             else {
                 // Use href.
-                request = new WebRequestSettings(new URL(url));
+                request = new WebRequest(new URL(url));
                 final String referer = page.getWebResponse().getRequestSettings().getUrl().toExternalForm();
                 request.setAdditionalHeader("Referer", referer);
             }

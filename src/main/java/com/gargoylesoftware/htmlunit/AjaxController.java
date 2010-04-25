@@ -37,7 +37,7 @@ public class AjaxController implements Serializable {
      * @param async indicates if the request should originally be asynchron
      * @return if the call should be synchron or not; here just like the original call
      */
-    public boolean processSynchron(final HtmlPage page, final WebRequestSettings settings, final boolean async) {
+    public boolean processSynchron(final HtmlPage page, final WebRequest settings, final boolean async) {
         return !async;
     }
 

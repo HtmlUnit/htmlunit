@@ -21,7 +21,7 @@ import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.applets.AppletClassLoader;
 import com.gargoylesoftware.htmlunit.html.applets.AppletStubImpl;
@@ -205,7 +205,7 @@ public class HtmlApplet extends HtmlElement {
 
             final String src = getArchiveAttribute();
             final URL url = page.getFullyQualifiedUrl(src);
-            appletWebResponse_ = webclient.loadWebResponse(new WebRequestSettings(url));
+            appletWebResponse_ = webclient.loadWebResponse(new WebRequest(url));
 
             downloaded_ = true;
         }

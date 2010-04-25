@@ -29,7 +29,7 @@ import org.apache.commons.lang.StringUtils;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
 
 /**
@@ -86,7 +86,7 @@ public class HtmlArea extends HtmlElement {
                 throw new IllegalStateException(
                         "Not a valid url: " + getHrefAttribute());
             }
-            final WebRequestSettings settings = new WebRequestSettings(url);
+            final WebRequest settings = new WebRequest(url);
             final WebWindow webWindow = enclosingPage.getEnclosingWindow();
             webClient.getPage(
                     webWindow,

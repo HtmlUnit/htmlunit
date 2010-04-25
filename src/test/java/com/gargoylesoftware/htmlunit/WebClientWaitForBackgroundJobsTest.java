@@ -171,7 +171,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
         final ThreadSynchronizer threadSynchronizer = new ThreadSynchronizer();
         final MockWebConnection webConnection = new MockWebConnection() {
             @Override
-            public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
+            public WebResponse getResponse(final WebRequest settings) throws IOException {
                 if (settings.getUrl().toExternalForm().endsWith("/wait")) {
                     threadSynchronizer.waitForState("just before waitForBackgroundJavaScriptStartingBefore");
                     threadSynchronizer.sleep(400); // main thread need to be able to process next instruction
@@ -341,7 +341,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
         final ThreadSynchronizer threadSynchronizer = new ThreadSynchronizer();
         final MockWebConnection webConnection = new MockWebConnection() {
             @Override
-            public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
+            public WebResponse getResponse(final WebRequest settings) throws IOException {
                 if (settings.getUrl().toExternalForm().endsWith("/wait")) {
                     threadSynchronizer.waitForState("just before waitForBackgroundJavaScriptStartingBefore");
                     threadSynchronizer.sleep(400); // main thread need to be able to process next instruction

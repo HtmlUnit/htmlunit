@@ -24,7 +24,7 @@ import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebConnection;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebResponseData;
 import com.gargoylesoftware.htmlunit.WebResponseImpl;
@@ -46,10 +46,10 @@ public class WebConnectionWrapperTest extends WebTestCase {
         final List<NameValuePair> emptyList = Collections.emptyList();
         final WebResponseData data = new WebResponseData(new byte[]{}, HttpStatus.SC_OK, "", emptyList);
         final WebResponse response = new WebResponseImpl(data, URL_FIRST, HttpMethod.GET, 0);
-        final WebRequestSettings wrs = new WebRequestSettings(URL_FIRST);
+        final WebRequest wrs = new WebRequest(URL_FIRST);
 
         final WebConnection realConnection = new WebConnection() {
-            public WebResponse getResponse(final WebRequestSettings settings) {
+            public WebResponse getResponse(final WebRequest settings) {
                 assertSame(wrs, settings);
                 return response;
             }

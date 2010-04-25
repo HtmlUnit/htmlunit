@@ -87,7 +87,7 @@ public class HttpWebConnection implements WebConnection {
     /**
      * {@inheritDoc}
      */
-    public WebResponse getResponse(final WebRequestSettings settings)
+    public WebResponse getResponse(final WebRequest settings)
         throws IOException {
 
         final URL url = settings.getUrl();
@@ -119,7 +119,7 @@ public class HttpWebConnection implements WebConnection {
                     buffer.append(url.getQuery());
                 }
                 //TODO: There might be a bug here since the original encoding type is lost.
-                final WebRequestSettings newRequest = new WebRequestSettings(new URL(buffer.toString()));
+                final WebRequest newRequest = new WebRequest(new URL(buffer.toString()));
                 newRequest.setHttpMethod(settings.getHttpMethod());
                 newRequest.setRequestParameters(settings.getRequestParameters());
                 newRequest.setAdditionalHeaders(settings.getAdditionalHeaders());
@@ -147,7 +147,7 @@ public class HttpWebConnection implements WebConnection {
      * @return a new HttpClient host configuration, initialized based on the specified request settings
      * @throws IOException if the specified request settings contains an invalid URL
      */
-    private static HostConfiguration getHostConfiguration(final WebRequestSettings webRequestSettings)
+    private static HostConfiguration getHostConfiguration(final WebRequest webRequestSettings)
         throws IOException {
         final HostConfiguration hostConfiguration = new HostConfiguration();
         final URL url = webRequestSettings.getUrl();
@@ -173,7 +173,7 @@ public class HttpWebConnection implements WebConnection {
      * @return the <tt>HttpMethod</tt> instance constructed according to the specified parameters
      * @throws IOException
      */
-    private HttpMethodBase makeHttpMethod(final WebRequestSettings webRequestSettings)
+    private HttpMethodBase makeHttpMethod(final WebRequest webRequestSettings)
         throws IOException {
 
         // Make sure that the URL is fully encoded. IE actually sends some Unicode chars in request
@@ -416,7 +416,7 @@ public class HttpWebConnection implements WebConnection {
      * Converts an HttpMethod into a WebResponse.
      */
     private WebResponse makeWebResponse(final int statusCode, final HttpMethodBase method,
-            final WebRequestSettings requestSettings, final long loadTime) throws IOException {
+            final WebRequest requestSettings, final long loadTime) throws IOException {
 
         String statusMessage = method.getStatusText();
         if (statusMessage == null || statusMessage.length() == 0) {
@@ -463,7 +463,7 @@ public class HttpWebConnection implements WebConnection {
     protected WebResponse newWebResponseInstance(
             final WebResponseData responseData,
             final long loadTime,
-            final WebRequestSettings requestSettings) {
+            final WebRequest requestSettings) {
         return new WebResponseImpl(responseData, requestSettings, loadTime);
     }
 

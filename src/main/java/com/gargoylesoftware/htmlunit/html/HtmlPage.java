@@ -72,7 +72,7 @@ import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParser.HtmlUnitDOMBuilder;
@@ -989,12 +989,12 @@ public class HtmlPage extends SgmlPage {
 
         String scriptEncoding = charset;
         final String pageEncoding = getPageEncoding();
-        final WebRequestSettings referringRequest = getWebResponse().getRequestSettings();
+        final WebRequest referringRequest = getWebResponse().getRequestSettings();
 
         final WebClient client = getWebClient();
         final Cache cache = client.getCache();
 
-        final WebRequestSettings request = new WebRequestSettings(url);
+        final WebRequest request = new WebRequest(url);
         request.setAdditionalHeaders(new HashMap<String, String>(referringRequest.getAdditionalHeaders()));
         request.setAdditionalHeader("Referer", referringRequest.getUrl().toString());
 

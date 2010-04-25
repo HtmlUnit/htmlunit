@@ -23,7 +23,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
@@ -121,7 +121,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html);
 
-        final WebRequestSettings lastRequest = getMockWebConnection().getLastWebRequestSettings();
+        final WebRequest lastRequest = getMockWebConnection().getLastWebRequestSettings();
         final Map<String, String> headers = lastRequest.getAdditionalHeaders();
         assertEquals("text/javascript, application/javascript, */*", headers.get("Accept"));
         assertEquals("ar-eg", headers.get("Accept-Language"));

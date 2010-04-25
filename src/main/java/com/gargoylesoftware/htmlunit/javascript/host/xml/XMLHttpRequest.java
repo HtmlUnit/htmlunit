@@ -36,7 +36,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.DefaultCredentialsProvider;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
@@ -81,7 +81,7 @@ public class XMLHttpRequest extends SimpleScriptable {
     private Function stateChangeHandler_;
     private Function loadHandler_;
     private Function errorHandler_;
-    private WebRequestSettings requestSettings_;
+    private WebRequest requestSettings_;
     private boolean async_;
     private int threadID_;
     private WebResponse webResponse_;
@@ -398,7 +398,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                 throw Context.reportRuntimeError("Access to restricted URI denied");
             }
 
-            final WebRequestSettings settings = new WebRequestSettings(fullUrl);
+            final WebRequest settings = new WebRequest(fullUrl);
             settings.setCharset("UTF-8");
             settings.setAdditionalHeader("Referer", containingPage_.getWebResponse().getRequestSettings().getUrl()
                     .toExternalForm());
@@ -587,9 +587,9 @@ public class XMLHttpRequest extends SimpleScriptable {
 
         private static final long serialVersionUID = 6354426394575804571L;
 
-        private final WebRequestSettings webRequestSettings_;
+        private final WebRequest webRequestSettings_;
 
-        private NetworkErrorWebResponse(final WebRequestSettings webRequestSettings) {
+        private NetworkErrorWebResponse(final WebRequest webRequestSettings) {
             webRequestSettings_ = webRequestSettings;
         }
 
@@ -641,7 +641,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             return "";
         }
 
-        public WebRequestSettings getRequestSettings() {
+        public WebRequest getRequestSettings() {
             return webRequestSettings_;
         }
 

@@ -34,7 +34,7 @@ import org.apache.commons.logging.LogFactory;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
@@ -366,7 +366,7 @@ public class HtmlImage extends HtmlElement {
             final WebClient webclient = page.getWebClient();
 
             final URL url = page.getFullyQualifiedUrl(getSrcAttribute());
-            final WebRequestSettings request = new WebRequestSettings(url);
+            final WebRequest request = new WebRequest(url);
             request.setAdditionalHeader("Referer",
                 page.getWebResponse().getRequestSettings().getUrl().toExternalForm());
             imageWebResponse_ = webclient.loadWebResponse(request);

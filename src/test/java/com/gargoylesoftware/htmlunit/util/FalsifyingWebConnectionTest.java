@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
@@ -67,7 +67,7 @@ public class FalsifyingWebConnectionTest extends WebTestCase {
         // c'tor configures connection on the web client
         new FalsifyingWebConnection(webClient) {
             @Override
-            public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
+            public WebResponse getResponse(final WebRequest settings) throws IOException {
                 if ("www.google-analytics.com".equals(settings.getUrl().getHost())) {
                     return createWebResponse(settings, "", "application/javascript"); // -> empty script
                 }
@@ -114,7 +114,7 @@ public class FalsifyingWebConnectionTest extends WebTestCase {
         // c'tor configures connection on the web client
         new FalsifyingWebConnection(webClient) {
             @Override
-            public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
+            public WebResponse getResponse(final WebRequest settings) throws IOException {
                 if (settings.getUrl().getPath().endsWith(".js")) {
                     return createWebResponse(settings, "", "text/html", 500, "Application Error");
                 }

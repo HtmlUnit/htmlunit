@@ -41,7 +41,7 @@ public class WebResponseImpl implements WebResponse {
 
     private long loadTime_;
     private WebResponseData responseData_;
-    private WebRequestSettings requestSettings_;
+    private WebRequest requestSettings_;
 
     /**
      * Constructs with all data.
@@ -53,7 +53,7 @@ public class WebResponseImpl implements WebResponse {
      */
     public WebResponseImpl(final WebResponseData responseData, final URL url,
             final HttpMethod requestMethod, final long loadTime) {
-        this(responseData, new WebRequestSettings(url, requestMethod), loadTime);
+        this(responseData, new WebRequest(url, requestMethod), loadTime);
     }
 
     /**
@@ -64,7 +64,7 @@ public class WebResponseImpl implements WebResponse {
      * @param loadTime          How long the response took to be sent
      */
     public WebResponseImpl(final WebResponseData responseData,
-            final WebRequestSettings requestSettings, final long loadTime) {
+            final WebRequest requestSettings, final long loadTime) {
         responseData_ = responseData;
         requestSettings_ = requestSettings;
         loadTime_ = loadTime;
@@ -73,7 +73,7 @@ public class WebResponseImpl implements WebResponse {
     /**
      * {@inheritDoc}
      */
-    public WebRequestSettings getRequestSettings() {
+    public WebRequest getRequestSettings() {
         return requestSettings_;
     }
 

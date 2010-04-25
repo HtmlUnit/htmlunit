@@ -21,7 +21,7 @@ import java.util.List;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebConnection;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebResponseData;
 import com.gargoylesoftware.htmlunit.WebResponseImpl;
@@ -60,7 +60,7 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
      * @return the response
      * @throws IOException if a problem occurred
      */
-    protected WebResponse deliverFromAlternateUrl(final WebRequestSettings webRequestSettings, final URL url)
+    protected WebResponse deliverFromAlternateUrl(final WebRequest webRequestSettings, final URL url)
         throws IOException {
         final URL originalUrl = webRequestSettings.getUrl();
         webRequestSettings.setUrl(url);
@@ -92,7 +92,7 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
      * @return a web response with the provided content
      * @throws IOException if an encoding problem occurred
      */
-    protected WebResponse createWebResponse(final WebRequestSettings wr, final String content,
+    protected WebResponse createWebResponse(final WebRequest wr, final String content,
             final String contentType) throws IOException {
         return createWebResponse(wr, content, contentType, 200, "OK");
     }
@@ -107,7 +107,7 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
      * @return a web response with the provided content
      * @throws IOException if an encoding problem occurred
      */
-    protected WebResponse createWebResponse(final WebRequestSettings wr, final String content,
+    protected WebResponse createWebResponse(final WebRequest wr, final String content,
             final String contentType, final int responseCode, final String responseMessage) throws IOException {
         final List<NameValuePair> headers = new ArrayList<NameValuePair>();
         final String encoding = "UTF-8";
