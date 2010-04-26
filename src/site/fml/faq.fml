@@ -103,6 +103,19 @@
 			</answer>
 		</faq>
 
+		<faq id="SOCKSProxy">
+			<question>
+				How do I configure SOCKS proxy server?
+			</question>
+			<answer>
+				<p>
+					You can configure the SOCKS proxy server at JVM level by setting <tt>socksProxyHost</tt> and optionally <tt>socksProxyPort</tt>
+					system properties.
+					Please read more at "SOCKS" section of <a href="http://java.sun.com/javase/6/docs/technotes/guides/net/proxies.html">Java Networking and Proxies</a>.
+				</p>
+			</answer>
+		</faq>
+
 		<faq id="RedirectionDiagnosticMessages">
 			<question>
 				I get error messages about redirection being disabled but I've turned it on.
@@ -144,25 +157,6 @@ INFO: Redirect requested but followRedirects is disabled
 					and nobody seems to be working on it then perhaps you should consider 
 					writing it yourself and <a href="submittingPatches.html">submitting a 
 					patch</a>.
-				</p>
-			</answer>
-		</faq>
-
-		<faq id="SVNRights">
-			<question>
-				How do I get commit rights for the SVN repository?
-			</question>
-			<answer>
-				<p>
-					Submit a bunch of patches that improve the product and when the
-					existing committers are satisfied with your work, you will be given
-					commit access.
-				</p>
-				<p>
-					As a rule of thumb, if your patches need to be "touched up" before
-					they can be committed, then you won't be getting commit access.  Refer
-					to the page on <a href="submittingPatches.html">submitting patches</a>
-					for an idea of what is expected.
 				</p>
 			</answer>
 		</faq>
