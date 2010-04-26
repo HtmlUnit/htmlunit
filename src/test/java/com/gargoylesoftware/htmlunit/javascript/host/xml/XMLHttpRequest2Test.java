@@ -121,7 +121,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html);
 
-        final WebRequest lastRequest = getMockWebConnection().getLastWebRequestSettings();
+        final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
         final Map<String, String> headers = lastRequest.getAdditionalHeaders();
         assertEquals("text/javascript, application/javascript, */*", headers.get("Accept"));
         assertEquals("ar-eg", headers.get("Accept-Language"));
@@ -295,7 +295,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html);
 
-        final String requestBody = getMockWebConnection().getLastWebRequestSettings().getRequestBody();
+        final String requestBody = getMockWebConnection().getLastWebRequest().getRequestBody();
         assertEquals("Something", requestBody);
     }
 

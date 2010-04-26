@@ -665,9 +665,9 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection() {
             @Override
-            public WebResponse getResponse(final WebRequest webRequestSettings) throws IOException {
-                collectedAlerts.add(webRequestSettings.getUrl().toExternalForm());
-                return super.getResponse(webRequestSettings);
+            public WebResponse getResponse(final WebRequest webRequest) throws IOException {
+                collectedAlerts.add(webRequest.getUrl().toExternalForm());
+                return super.getResponse(webRequest);
             }
         };
         conn.setResponse(URL_FIRST, content);
@@ -712,9 +712,9 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
 
-        final WebRequest settings = conn.getLastWebRequestSettings();
-        assertEquals(urlPage2, settings.getUrl());
-        assertEquals(URL_FIRST.toExternalForm(), settings.getAdditionalHeaders().get("Referer"));
+        final WebRequest request = conn.getLastWebRequest();
+        assertEquals(urlPage2, request.getUrl());
+        assertEquals(URL_FIRST.toExternalForm(), request.getAdditionalHeaders().get("Referer"));
     }
 
     /**
@@ -778,7 +778,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
 
-        final WebRequest settings = conn.getLastWebRequestSettings();
+        final WebRequest settings = conn.getLastWebRequest();
         assertEquals(urlPage2, settings.getUrl());
         assertSame(method, settings.getHttpMethod());
     }

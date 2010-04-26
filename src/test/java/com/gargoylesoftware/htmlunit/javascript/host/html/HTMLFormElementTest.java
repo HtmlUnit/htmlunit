@@ -1370,7 +1370,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPageWithAlerts2(html);
-        String headerValue = getMockWebConnection().getLastWebRequestSettings().getAdditionalHeaders()
+        String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
             .get("Content-Type");
         // Can't test equality for multipart/form-data as it will have the form:
         // multipart/form-data; boundary=---------------------------42937861433140731107235900

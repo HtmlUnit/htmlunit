@@ -237,7 +237,7 @@ public class LocationTest extends WebDriverTestCase {
 
         // Verify that we didn't reload the page.
         assertTrue(page == page2);
-        assertEquals(URL_FIRST, conn.getLastWebRequestSettings().getUrl());
+        assertEquals(URL_FIRST, conn.getLastWebRequest().getUrl());
     }
 
     /**

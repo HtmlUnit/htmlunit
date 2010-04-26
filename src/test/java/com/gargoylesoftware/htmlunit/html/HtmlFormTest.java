@@ -1085,7 +1085,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlForm form = page.getFormByName("form1");
         form.<HtmlInput>getInputByName("button").click();
 
-        assertEquals(expectedRequestCharset, webConnection.getLastWebRequestSettings().getCharset());
+        assertEquals(expectedRequestCharset, webConnection.getLastWebRequest().getCharset());
     }
 
     /**

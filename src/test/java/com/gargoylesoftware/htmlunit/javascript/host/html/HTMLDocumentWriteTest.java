@@ -843,7 +843,7 @@ public class HTMLDocumentWriteTest extends WebDriverTestCase {
         driver.switchTo().window("myPopup");
         driver.findElement(By.id("it")).click();
 
-        assertEquals(new URL(getDefaultUrl(), "foo"), getMockWebConnection().getLastWebRequestSettings().getUrl());
+        assertEquals(new URL(getDefaultUrl(), "foo"), getMockWebConnection().getLastWebRequest().getUrl());
     }
 
     /**

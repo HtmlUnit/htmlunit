@@ -10,7 +10,7 @@
                 BigContentPage: change threshold to 300 KB, and handle chunked content.
             </action>
             <action type="update" dev="asashour">
-                Deprecate WebRequestSettings and WebResponse.getRequestSettings().
+                Deprecate WebRequestSettings, WebResponse.getRequestSettings() and MockWebConnection.getLastWebRequestSettings().
             </action>
             <action type="update" dev="asashour">
                 Correctly handle URLs with '%'.

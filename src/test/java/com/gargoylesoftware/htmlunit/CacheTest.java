@@ -174,7 +174,7 @@ public class CacheTest extends WebTestCase {
 
         assertEquals(new String[] {"in foo2"}, collectedAlerts);
         assertEquals("no request for scripts should have been performed",
-                urlPage2, connection.getLastWebRequestSettings().getUrl());
+                urlPage2, connection.getLastWebRequest().getUrl());
     }
 
     /**

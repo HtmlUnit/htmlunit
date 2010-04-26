@@ -199,7 +199,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
         client.setAlertHandler(new CollectingAlertHandler(actual));
 
         client.getPage(getDefaultUrl());
-        assertEquals(imageUrl, conn.getLastWebRequestSettings().getUrl());
+        assertEquals(imageUrl, conn.getLastWebRequest().getUrl());
 
         final String[] expected = {"0", "1"};
         assertEquals(expected, actual);
@@ -231,7 +231,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
         client.setAlertHandler(new CollectingAlertHandler(actual));
 
         client.getPage(URL_FIRST);
-        assertEquals(URL_THIRD, conn.getLastWebRequestSettings().getUrl());
+        assertEquals(URL_THIRD, conn.getLastWebRequest().getUrl());
 
         final String[] expected = {"1"};
         assertEquals(expected, actual);
@@ -278,7 +278,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
         assertEquals("", requestedUrls.get(0));
         assertEquals("second/", requestedUrls.get(1));
         assertEquals(URL_THIRD.toString(), requestedUrls.get(2));
-        assertEquals(URL_THIRD, conn.getLastWebRequestSettings().getUrl());
+        assertEquals(URL_THIRD, conn.getLastWebRequest().getUrl());
     }
 
     /**
@@ -301,7 +301,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
         client.setAlertHandler(new CollectingAlertHandler(actual));
 
         client.getPage(URL_FIRST);
-        assertEquals(URL_SECOND, conn.getLastWebRequestSettings().getUrl());
+        assertEquals(URL_SECOND, conn.getLastWebRequest().getUrl());
 
         final String[] expected = {};
         assertEquals(expected, actual);
