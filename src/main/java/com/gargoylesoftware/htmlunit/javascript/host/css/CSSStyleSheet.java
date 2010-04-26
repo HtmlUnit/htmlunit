@@ -224,7 +224,7 @@ public class CSSStyleSheet extends SimpleScriptable {
             final WebClient client = page.getWebClient();
             if (link != null) {
                 // Use link.
-                request = link.getWebRequestSettings();
+                request = link.getWebRequest();
             }
             else {
                 // Use href.

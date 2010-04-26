@@ -165,7 +165,7 @@ public class HtmlLink extends HtmlElement {
     public WebResponse getWebResponse(final boolean downloadIfNeeded) throws IOException {
         if (downloadIfNeeded && cachedWebResponse_ == null) {
             final WebClient webclient = getPage().getWebClient();
-            cachedWebResponse_ = webclient.loadWebResponse(getWebRequestSettings());
+            cachedWebResponse_ = webclient.loadWebResponse(getWebRequest());
         }
         return cachedWebResponse_;
     }
@@ -174,8 +174,19 @@ public class HtmlLink extends HtmlElement {
      * Returns the request settings which will allow us to retrieve the content referenced by the "href" attribute.
      * @return the request settings which will allow us to retrieve the content referenced by the "href" attribute
      * @throws MalformedURLException in case of problem resolving the URL
+     * @deprecated as of 2.8, please use {@link #getWebRequest()} instead
      */
+    @Deprecated
     public WebRequest getWebRequestSettings() throws MalformedURLException {
+        return getWebRequest();
+    }
+
+    /**
+     * Returns the request which will allow us to retrieve the content referenced by the "href" attribute.
+     * @return the request which will allow us to retrieve the content referenced by the "href" attribute
+     * @throws MalformedURLException in case of problem resolving the URL
+     */
+    public WebRequest getWebRequest() throws MalformedURLException {
         final HtmlPage page = (HtmlPage) getPage();
         final URL url = page.getFullyQualifiedUrl(getHrefAttribute());
         final WebRequest request = new WebRequest(url);
