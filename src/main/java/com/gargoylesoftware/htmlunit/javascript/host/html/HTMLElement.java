@@ -1460,9 +1460,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         public void run() {
             final WebClient client = getWindow().getWebWindow().getWebClient();
             final Scriptable scope = callback_.getParentScope();
-            final WebRequest settings = new WebRequest(url_);
+            final WebRequest request = new WebRequest(url_);
             try {
-                final WebResponse webResponse = client.loadWebResponse(settings);
+                final WebResponse webResponse = client.loadWebResponse(request);
                 final String content = webResponse.getContentAsString();
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("Downloaded content: " + StringUtils.abbreviate(content, 512));

@@ -254,9 +254,9 @@ public class HTMLFormElement extends HTMLElement implements Function {
         }
         else {
             // download should be done ASAP, response will be loaded into a window later
-            final WebRequest requestSettings = getHtmlForm().getWebRequestSettings(null);
+            final WebRequest request = getHtmlForm().getWebRequest(null);
             final String target = page.getResolvedTarget(jsxGet_target());
-            webClient.download(page.getEnclosingWindow(), target, requestSettings, "JS form.submit()");
+            webClient.download(page.getEnclosingWindow(), target, request, "JS form.submit()");
         }
     }
 

@@ -50,14 +50,14 @@ public class MockWebConnection implements WebConnection {
     /**
      * {@inheritDoc}
      */
-    public WebResponse getResponse(final WebRequest settings) throws IOException {
-        final URL url = settings.getUrl();
+    public WebResponse getResponse(final WebRequest request) throws IOException {
+        final URL url = request.getUrl();
 
         if (LOG.isDebugEnabled()) {
             LOG.debug("Getting response for " + url.toExternalForm());
         }
 
-        lastRequest_ = settings;
+        lastRequest_ = request;
         requestCount_++;
         requestedUrls_.add(url);
 
@@ -71,7 +71,7 @@ public class MockWebConnection implements WebConnection {
             }
         }
 
-        return new WebResponseImpl(response, settings, 0);
+        return new WebResponseImpl(response, request, 0);
     }
 
     /**

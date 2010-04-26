@@ -778,9 +778,9 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
 
-        final WebRequest settings = conn.getLastWebRequest();
-        assertEquals(urlPage2, settings.getUrl());
-        assertSame(method, settings.getHttpMethod());
+        final WebRequest request = conn.getLastWebRequest();
+        assertEquals(urlPage2, request.getUrl());
+        assertSame(method, request.getHttpMethod());
     }
 
     /**
@@ -876,8 +876,8 @@ public class XMLHttpRequestTest extends WebServerTestCase {
             private boolean gotFoo1_ = false;
 
             @Override
-            public WebResponse getResponse(final WebRequest webRequestSettings) throws IOException {
-                final String url = webRequestSettings.getUrl().toExternalForm();
+            public WebResponse getResponse(final WebRequest webRequest) throws IOException {
+                final String url = webRequest.getUrl().toExternalForm();
 
                 synchronized (this) {
                     while (!gotFoo1_ && url.endsWith("foo2.txt")) {
@@ -892,7 +892,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
                 if (url.endsWith("foo1.txt")) {
                     gotFoo1_ = true;
                 }
-                return super.getResponse(webRequestSettings);
+                return super.getResponse(webRequest);
             }
         };
         connection.setDefaultResponse("");
@@ -1146,11 +1146,11 @@ public class XMLHttpRequestTest extends WebServerTestCase {
     private static final class DisconnectedMockWebConnection extends MockWebConnection {
         /** {@inheritDoc} */
         @Override
-        public WebResponse getResponse(final WebRequest settings) throws IOException {
-            if (settings.getUrl().equals(URL_SECOND)) {
+        public WebResponse getResponse(final WebRequest request) throws IOException {
+            if (request.getUrl().equals(URL_SECOND)) {
                 throw new IOException("Connection refused");
             }
-            return super.getResponse(settings);
+            return super.getResponse(request);
         }
     }
 

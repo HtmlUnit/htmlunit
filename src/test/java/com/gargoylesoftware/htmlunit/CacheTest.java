@@ -107,6 +107,10 @@ public class CacheTest extends WebTestCase {
             public WebRequest getRequestSettings() {
                 return new WebRequest(url[0]);
             }
+            @Override
+            public WebRequest getWebRequest() {
+                return new WebRequest(url[0]);
+            }
         };
 
         assertFalse(cache.isJavaScript(response));

@@ -55,16 +55,16 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
 
     /**
      * Delivers the content for an alternate URL as if it comes from the requested URL.
-     * @param webRequestSettings the original web request settings
+     * @param webRequest the original web request
      * @param url the URL from which the content should be retrieved
      * @return the response
      * @throws IOException if a problem occurred
      */
-    protected WebResponse deliverFromAlternateUrl(final WebRequest webRequestSettings, final URL url)
+    protected WebResponse deliverFromAlternateUrl(final WebRequest webRequest, final URL url)
         throws IOException {
-        final URL originalUrl = webRequestSettings.getUrl();
-        webRequestSettings.setUrl(url);
-        final WebResponse resp = super.getResponse(webRequestSettings);
+        final URL originalUrl = webRequest.getUrl();
+        webRequest.setUrl(url);
+        final WebResponse resp = super.getResponse(webRequest);
         resp.getWebRequest().setUrl(originalUrl);
         return resp;
     }

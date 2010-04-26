@@ -171,12 +171,12 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
         final ThreadSynchronizer threadSynchronizer = new ThreadSynchronizer();
         final MockWebConnection webConnection = new MockWebConnection() {
             @Override
-            public WebResponse getResponse(final WebRequest settings) throws IOException {
-                if (settings.getUrl().toExternalForm().endsWith("/wait")) {
+            public WebResponse getResponse(final WebRequest request) throws IOException {
+                if (request.getUrl().toExternalForm().endsWith("/wait")) {
                     threadSynchronizer.waitForState("just before waitForBackgroundJavaScriptStartingBefore");
                     threadSynchronizer.sleep(400); // main thread need to be able to process next instruction
                 }
-                return super.getResponse(settings);
+                return super.getResponse(request);
             }
         };
         webConnection.setResponse(URL_FIRST, html);
@@ -341,12 +341,12 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
         final ThreadSynchronizer threadSynchronizer = new ThreadSynchronizer();
         final MockWebConnection webConnection = new MockWebConnection() {
             @Override
-            public WebResponse getResponse(final WebRequest settings) throws IOException {
-                if (settings.getUrl().toExternalForm().endsWith("/wait")) {
+            public WebResponse getResponse(final WebRequest request) throws IOException {
+                if (request.getUrl().toExternalForm().endsWith("/wait")) {
                     threadSynchronizer.waitForState("just before waitForBackgroundJavaScriptStartingBefore");
                     threadSynchronizer.sleep(400); // main thread need to be able to process next instruction
                 }
-                return super.getResponse(settings);
+                return super.getResponse(request);
             }
         };
         webConnection.setResponse(URL_FIRST, html);

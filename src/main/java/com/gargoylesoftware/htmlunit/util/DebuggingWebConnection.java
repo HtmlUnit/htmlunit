@@ -113,8 +113,8 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
      * @return a new response with uncompressed JavaScript code or the original response in case of failure
      */
     protected WebResponse uncompressJavaScript(final WebResponse response) {
-        final WebRequest requestSettings = response.getWebRequest();
-        final String scriptName = requestSettings.getUrl().toString();
+        final WebRequest request = response.getWebRequest();
+        final String scriptName = request.getUrl().toString();
         final String scriptSource = response.getContentAsString();
 
         // skip if it is already formatted? => TODO
@@ -155,10 +155,10 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
     /**
      * Saves the response content in the temp dir and adds it to the summary page.
      * @param response the response to save
-     * @param settings the settings used to get the response
+     * @param request the request used to get the response
      * @throws IOException if a problem occurs writing the file
      */
-    protected void saveResponse(final WebResponse response, final WebRequest settings)
+    protected void saveResponse(final WebResponse response, final WebRequest request)
         throws IOException {
         counter_++;
         final String extension;
@@ -171,7 +171,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         else {
             extension = ".txt";
         }
-        final File f = createFile(settings.getUrl(), extension);
+        final File f = createFile(request.getUrl(), extension);
         final String content = response.getContentAsString();
         final URL url = response.getWebRequest().getUrl();
         FileUtils.writeStringToFile(f, content, response.getContentCharset());
@@ -181,9 +181,9 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         buffer.append("tab[tab.length] = {code: " + response.getStatusCode() + ", ");
         buffer.append("fileName: '" + f.getName() + "', ");
         buffer.append("contentType: '" + response.getContentType() + "', ");
-        buffer.append("method: '" + settings.getHttpMethod().name() + "', ");
-        if (settings.getHttpMethod() == HttpMethod.POST && settings.getEncodingType() == FormEncodingType.URL_ENCODED) {
-            buffer.append("postParameters: " + nameValueListToJsMap(settings.getRequestParameters()) + ", ");
+        buffer.append("method: '" + request.getHttpMethod().name() + "', ");
+        if (request.getHttpMethod() == HttpMethod.POST && request.getEncodingType() == FormEncodingType.URL_ENCODED) {
+            buffer.append("postParameters: " + nameValueListToJsMap(request.getRequestParameters()) + ", ");
         }
         buffer.append("url: '" + url + "', ");
         buffer.append("loadTime: " + response.getLoadTime() + ", ");

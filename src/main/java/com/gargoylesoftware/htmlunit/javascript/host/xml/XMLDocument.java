@@ -116,8 +116,8 @@ public class XMLDocument extends Document {
         }
         try {
             final HtmlPage htmlPage = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
-            final WebRequest settings = new WebRequest(htmlPage.getFullyQualifiedUrl(xmlSource));
-            final WebResponse webResponse = getWindow().getWebWindow().getWebClient().loadWebResponse(settings);
+            final WebRequest request = new WebRequest(htmlPage.getFullyQualifiedUrl(xmlSource));
+            final WebResponse webResponse = getWindow().getWebWindow().getWebClient().loadWebResponse(request);
             final XmlPage page = new XmlPage(webResponse, getWindow().getWebWindow(), false);
             setDomNode(page);
             return true;

@@ -389,7 +389,7 @@ public class XMLHttpRequest extends SimpleScriptable {
 
         final String url = Context.toString(urlParam);
 
-        // (URL + Method + User + Password) become a WebRequestSettings instance.
+        // (URL + Method + User + Password) become a WebRequest instance.
         containingPage_ = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
         try {
             final URL fullUrl = containingPage_.getFullyQualifiedUrl(url);
@@ -470,7 +470,7 @@ public class XMLHttpRequest extends SimpleScriptable {
     }
 
     /**
-     * Prepares the WebRequestSettings that will be sent.
+     * Prepares the WebRequest that will be sent.
      * @param content the content to send
      */
     private void prepareRequest(final Object content) {
@@ -587,10 +587,10 @@ public class XMLHttpRequest extends SimpleScriptable {
 
         private static final long serialVersionUID = 6354426394575804571L;
 
-        private final WebRequest webRequestSettings_;
+        private final WebRequest request_;
 
-        private NetworkErrorWebResponse(final WebRequest webRequestSettings) {
-            webRequestSettings_ = webRequestSettings;
+        private NetworkErrorWebResponse(final WebRequest webRequest) {
+            request_ = webRequest;
         }
 
         public int getStatusCode() {
@@ -642,11 +642,11 @@ public class XMLHttpRequest extends SimpleScriptable {
         }
 
         public WebRequest getRequestSettings() {
-            return webRequestSettings_;
+            return request_;
         }
 
         public WebRequest getWebRequest() {
-            return webRequestSettings_;
+            return request_;
         }
 
         public boolean isBigContent() {

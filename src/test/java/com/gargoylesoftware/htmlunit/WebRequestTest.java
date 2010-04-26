@@ -37,14 +37,14 @@ public class WebRequestTest {
      */
     @Test
     public void headers() throws Exception {
-        final WebRequest settings = new WebRequest(WebTestCase.getDefaultUrl());
-        final int initialSize = settings.getAdditionalHeaders().size();
-        settings.setAdditionalHeader("Accept", "nothing");
-        assertEquals(initialSize, settings.getAdditionalHeaders().size());
-        settings.setAdditionalHeader("ACCEPT", "compares");
-        assertEquals(initialSize, settings.getAdditionalHeaders().size());
-        settings.removeAdditionalHeader("ACcEpT");
-        assertEquals(initialSize - 1, settings.getAdditionalHeaders().size());
+        final WebRequest request = new WebRequest(WebTestCase.getDefaultUrl());
+        final int initialSize = request.getAdditionalHeaders().size();
+        request.setAdditionalHeader("Accept", "nothing");
+        assertEquals(initialSize, request.getAdditionalHeaders().size());
+        request.setAdditionalHeader("ACCEPT", "compares");
+        assertEquals(initialSize, request.getAdditionalHeaders().size());
+        request.removeAdditionalHeader("ACcEpT");
+        assertEquals(initialSize - 1, request.getAdditionalHeaders().size());
     }
 
     /**
@@ -60,49 +60,49 @@ public class WebRequestTest {
         final URL url3 = new URL("http://htmlunit.sf.net/dir/foo.html?a=1&b=2");
 
         // with directory/..
-        WebRequest settings = new WebRequest(new URL("http://htmlunit.sf.net/bla/../foo.html"));
-        assertEquals(url1, settings.getUrl());
+        WebRequest request = new WebRequest(new URL("http://htmlunit.sf.net/bla/../foo.html"));
+        assertEquals(url1, request.getUrl());
 
         // with /..
-        settings = new WebRequest(new URL("http://htmlunit.sf.net/../foo.html"));
-        assertEquals(url1, settings.getUrl());
+        request = new WebRequest(new URL("http://htmlunit.sf.net/../foo.html"));
+        assertEquals(url1, request.getUrl());
 
         // with /(\w\w)/.. (c.f. 2854634)
-        settings = new WebRequest(new URL("http://htmlunit.sf.net/dir/fu/../foo.html"));
-        assertEquals(url2, settings.getUrl());
+        request = new WebRequest(new URL("http://htmlunit.sf.net/dir/fu/../foo.html"));
+        assertEquals(url2, request.getUrl());
 
         // with /../..
-        settings = new WebRequest(new URL("http://htmlunit.sf.net/../../foo.html"));
-        assertEquals(url1, settings.getUrl());
+        request = new WebRequest(new URL("http://htmlunit.sf.net/../../foo.html"));
+        assertEquals(url1, request.getUrl());
 
         // with ../.. (c.f. 2854634)
-        settings = new WebRequest(new URL("http://htmlunit.sf.net/dir/foo/bar/../../foo.html"));
-        assertEquals(url2, settings.getUrl());
+        request = new WebRequest(new URL("http://htmlunit.sf.net/dir/foo/bar/../../foo.html"));
+        assertEquals(url2, request.getUrl());
 
-        settings = new WebRequest(
+        request = new WebRequest(
                           new URL("http://htmlunit.sf.net/dir/foo/bar/boo/hoo/silly/../../../../../foo.html"));
-        assertEquals(url2, settings.getUrl());
+        assertEquals(url2, request.getUrl());
 
         // with /.
-        settings = new WebRequest(new URL("http://htmlunit.sf.net/./foo.html"));
-        assertEquals(url1, settings.getUrl());
+        request = new WebRequest(new URL("http://htmlunit.sf.net/./foo.html"));
+        assertEquals(url1, request.getUrl());
 
         // with /\w//. (c.f. 2854634)
-        settings = new WebRequest(new URL("http://htmlunit.sf.net/a/./foo.html"));
-        assertEquals(new URL("http://htmlunit.sf.net/a/foo.html"), settings.getUrl());
+        request = new WebRequest(new URL("http://htmlunit.sf.net/a/./foo.html"));
+        assertEquals(new URL("http://htmlunit.sf.net/a/foo.html"), request.getUrl());
 
         // with /.
-        settings = new WebRequest(new URL("http://htmlunit.sf.net/dir/./foo.html"));
-        assertEquals(url2, settings.getUrl());
+        request = new WebRequest(new URL("http://htmlunit.sf.net/dir/./foo.html"));
+        assertEquals(url2, request.getUrl());
 
         // with /. and query
-        settings = new WebRequest(new URL("http://htmlunit.sf.net/dir/./foo.html?a=1&b=2"));
-        assertEquals(url3, settings.getUrl());
+        request = new WebRequest(new URL("http://htmlunit.sf.net/dir/./foo.html?a=1&b=2"));
+        assertEquals(url3, request.getUrl());
 
         // pathological
-        settings = new WebRequest(
+        request = new WebRequest(
                 new URL("http://htmlunit.sf.net/dir/foo/bar/./boo/hoo/silly/.././../../../.././foo.html?a=1&b=2"));
-        assertEquals(url3, settings.getUrl());
+        assertEquals(url3, request.getUrl());
     }
 
     /**
@@ -111,9 +111,9 @@ public class WebRequestTest {
     @Test
     public void credentials() throws Exception {
         final URL url = new URL("http://john.smith:secret@localhost/");
-        final WebRequest settings = new WebRequest(url);
+        final WebRequest request = new WebRequest(url);
         final UsernamePasswordCredentials credentials = (UsernamePasswordCredentials)
-            settings.getCredentialsProvider().getCredentials(new BasicScheme(), "localhost", 80, false);
+            request.getCredentialsProvider().getCredentials(new BasicScheme(), "localhost", 80, false);
         assertEquals("john.smith", credentials.getUserName());
         assertEquals("secret", credentials.getPassword());
     }

@@ -887,9 +887,9 @@ public class HtmlFormTest extends WebTestCase {
         webConnection.setDefaultResponse(html);
         client.setWebConnection(webConnection);
 
-        final WebRequest settings = new WebRequest(getDefaultUrl(), HttpMethod.POST);
+        final WebRequest request = new WebRequest(getDefaultUrl(), HttpMethod.POST);
 
-        final HtmlPage page = client.getPage(settings);
+        final HtmlPage page = client.getPage(request);
         final HtmlInput submitButton = page.getHtmlElementById("submitButton");
         submitButton.click();
 

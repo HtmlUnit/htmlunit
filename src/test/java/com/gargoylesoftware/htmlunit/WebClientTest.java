@@ -332,14 +332,14 @@ public class WebClientTest extends WebServerTestCase {
         final MockWebConnection webConnection = new MockWebConnection() {
             private int count_ = 0;
             @Override
-            public WebResponse getResponse(final WebRequest webRequestSettings) throws IOException {
+            public WebResponse getResponse(final WebRequest webRequest) throws IOException {
                 ++count_;
                 if (count_ == 1) {
-                    final WebResponse response = super.getResponse(webRequestSettings);
-                    setResponse(webRequestSettings.getUrl(), secondContent);
+                    final WebResponse response = super.getResponse(webRequest);
+                    setResponse(webRequest.getUrl(), secondContent);
                     return response;
                 }
-                return super.getResponse(webRequestSettings);
+                return super.getResponse(webRequest);
             }
         };
         webConnection.setResponse(URL_FIRST, firstContent, statusCode, "Some error", "text/html", headers);
@@ -546,19 +546,19 @@ public class WebClientTest extends WebServerTestCase {
         final MockWebConnection webConnection = new MockWebConnection() {
             private int count_ = 0;
             @Override
-            public WebResponse getResponse(final WebRequest webRequestSettings) throws IOException {
+            public WebResponse getResponse(final WebRequest webRequest) throws IOException {
                 ++count_;
                 if (count_ < nbRedirections) {
                     setResponse(url, firstContent, 302, "Redirect needed " + count_, "text/html", headers);
-                    return super.getResponse(webRequestSettings);
+                    return super.getResponse(webRequest);
                 }
                 else if (count_ == nbRedirections) {
-                    final WebResponse response = super.getResponse(webRequestSettings);
-                    setResponse(webRequestSettings.getUrl(), secondContent);
+                    final WebResponse response = super.getResponse(webRequest);
+                    setResponse(webRequest.getUrl(), secondContent);
                     return response;
                 }
                 else {
-                    return super.getResponse(webRequestSettings);
+                    return super.getResponse(webRequest);
                 }
             }
         };
@@ -1168,10 +1168,10 @@ public class WebClientTest extends WebServerTestCase {
         // Make sure the custom proxy settings are used.
         final String customProxyHost = "customProxyHost";
         final int customProxyPort = 1000;
-        final WebRequest settings = new WebRequest(URL_FIRST);
-        settings.setProxyHost(customProxyHost);
-        settings.setProxyPort(customProxyPort);
-        webClient.getPage(settings);
+        final WebRequest request = new WebRequest(URL_FIRST);
+        request.setProxyHost(customProxyHost);
+        request.setProxyPort(customProxyPort);
+        webClient.getPage(request);
         assertEquals(customProxyHost, webConnection.getLastWebRequest().getProxyHost());
         assertEquals(customProxyPort, webConnection.getLastWebRequest().getProxyPort());
 
@@ -1182,7 +1182,7 @@ public class WebClientTest extends WebServerTestCase {
         assertEquals(0, webConnection.getLastWebRequest().getProxyPort());
 
         // Make sure the proxy bypass doesn't work with custom proxy settings.
-        webClient.getPage(settings);
+        webClient.getPage(request);
         assertEquals(customProxyHost, webConnection.getLastWebRequest().getProxyHost());
         assertEquals(customProxyPort, webConnection.getLastWebRequest().getProxyPort());
 

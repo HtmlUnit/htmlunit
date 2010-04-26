@@ -27,7 +27,7 @@ class WebResponseFromCache extends WebResponseWrapper {
 
     private static final long serialVersionUID = 450330231180187171L;
 
-    private final WebRequest settings_;
+    private final WebRequest request_;
 
     /**
      * Wraps the provide response for the given request
@@ -36,7 +36,7 @@ class WebResponseFromCache extends WebResponseWrapper {
      */
     WebResponseFromCache(final WebResponse cachedResponse, final WebRequest currentRequest) {
         super(cachedResponse);
-        settings_ = currentRequest;
+        request_ = currentRequest;
     }
 
     /**
@@ -44,6 +44,14 @@ class WebResponseFromCache extends WebResponseWrapper {
      */
     @Override
     public WebRequest getRequestSettings() {
-        return settings_;
+        return request_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public WebRequest getWebRequest() {
+        return request_;
     }
 }

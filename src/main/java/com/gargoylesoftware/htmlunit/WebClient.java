@@ -1015,13 +1015,13 @@ public class WebClient implements Serializable {
         fireWindowOpened(new WebWindowEvent(window, WebWindowEvent.OPEN, null, null));
 
         final HtmlPage openerPage = (HtmlPage) opener.getEnclosedPage();
-        final WebRequest settings = new WebRequest(url);
+        final WebRequest request = new WebRequest(url);
         if (!getBrowserVersion().isIE()) {
             final String referer = openerPage.getWebResponse().getWebRequest().getUrl().toExternalForm();
-            settings.setAdditionalHeader("Referer", referer);
+            request.setAdditionalHeader("Referer", referer);
         }
 
-        getPage(window, settings);
+        getPage(window, request);
 
         return window;
     }
@@ -1181,8 +1181,8 @@ public class WebClient implements Serializable {
         return UrlUtils.toUrlUnsafe(newUrl);
     }
 
-    private WebResponse makeWebResponseForDataUrl(final WebRequest webRequestSettings) throws IOException {
-        final URL url = webRequestSettings.getUrl();
+    private WebResponse makeWebResponseForDataUrl(final WebRequest webRequest) throws IOException {
+        final URL url = webRequest.getUrl();
         final List<NameValuePair> responseHeaders = new ArrayList<NameValuePair>();
         DataUrlDecoder decoder;
         try {
@@ -1194,7 +1194,7 @@ public class WebClient implements Serializable {
         responseHeaders.add(new NameValuePair("content-type",
             decoder.getMediaType() + ";charset=" + decoder.getCharset()));
         final WebResponseData data = new WebResponseData(url.openStream(), 200, "OK", responseHeaders);
-        return new WebResponseImpl(data, url, webRequestSettings.getHttpMethod(), 0);
+        return new WebResponseImpl(data, url, webRequest.getHttpMethod(), 0);
     }
 
     private WebResponse makeWebResponseForAboutUrl(final URL url) {
@@ -2064,13 +2064,13 @@ public class WebClient implements Serializable {
      * TODO: refactor it before next release.
      * @param requestingWindow the window from which the request comes
      * @param target the name of the target window
-     * @param requestSettings the request to perform
+     * @param request the request to perform
      * @param description information about the origin of the request. Useful for debugging.
      */
     public void download(final WebWindow requestingWindow, final String target,
-        final WebRequest requestSettings, final String description) {
+        final WebRequest request, final String description) {
         final WebWindow win = resolveWindow(requestingWindow, target);
-        final URL url = requestSettings.getUrl();
+        final URL url = request.getUrl();
         boolean justHashJump = false;
         if (win != null) {
             final Page page = win.getEnclosedPage();
@@ -2091,7 +2091,7 @@ public class WebClient implements Serializable {
                 && url.getHost().equals(otherUrl.getHost())
                 && url.getProtocol().equals(otherUrl.getProtocol())
                 && url.getPort() == otherUrl.getPort()
-                && requestSettings.getHttpMethod() == otherRequest.getHttpMethod()) {
+                && request.getHttpMethod() == otherRequest.getHttpMethod()) {
                 return; // skip it;
             }
         }
@@ -2102,7 +2102,7 @@ public class WebClient implements Serializable {
         }
         else {
             try {
-                final WebResponse response = loadWebResponse(requestSettings);
+                final WebResponse response = loadWebResponse(request);
                 loadJob = new LoadJob(requestingWindow, target, response);
             }
             catch (final IOException e) {

@@ -67,11 +67,11 @@ public class FalsifyingWebConnectionTest extends WebTestCase {
         // c'tor configures connection on the web client
         new FalsifyingWebConnection(webClient) {
             @Override
-            public WebResponse getResponse(final WebRequest settings) throws IOException {
-                if ("www.google-analytics.com".equals(settings.getUrl().getHost())) {
-                    return createWebResponse(settings, "", "application/javascript"); // -> empty script
+            public WebResponse getResponse(final WebRequest request) throws IOException {
+                if ("www.google-analytics.com".equals(request.getUrl().getHost())) {
+                    return createWebResponse(request, "", "application/javascript"); // -> empty script
                 }
-                return super.getResponse(settings);
+                return super.getResponse(request);
             }
         };
 
@@ -114,11 +114,11 @@ public class FalsifyingWebConnectionTest extends WebTestCase {
         // c'tor configures connection on the web client
         new FalsifyingWebConnection(webClient) {
             @Override
-            public WebResponse getResponse(final WebRequest settings) throws IOException {
-                if (settings.getUrl().getPath().endsWith(".js")) {
-                    return createWebResponse(settings, "", "text/html", 500, "Application Error");
+            public WebResponse getResponse(final WebRequest request) throws IOException {
+                if (request.getUrl().getPath().endsWith(".js")) {
+                    return createWebResponse(request, "", "text/html", 500, "Application Error");
                 }
-                return super.getResponse(settings);
+                return super.getResponse(request);
             }
         };
 

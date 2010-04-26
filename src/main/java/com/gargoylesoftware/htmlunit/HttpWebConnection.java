@@ -87,21 +87,21 @@ public class HttpWebConnection implements WebConnection {
     /**
      * {@inheritDoc}
      */
-    public WebResponse getResponse(final WebRequest settings)
+    public WebResponse getResponse(final WebRequest request)
         throws IOException {
 
-        final URL url = settings.getUrl();
+        final URL url = request.getUrl();
         final HttpClient httpClient = getHttpClient();
         webClient_.getCookieManager().updateState(httpClient.getState());
 
-        final HttpMethodBase httpMethod = makeHttpMethod(settings);
+        final HttpMethodBase httpMethod = makeHttpMethod(request);
         try {
-            final HostConfiguration hostConfiguration = getHostConfiguration(settings);
+            final HostConfiguration hostConfiguration = getHostConfiguration(request);
             final long startTime = System.currentTimeMillis();
             final int responseCode = httpClient.executeMethod(hostConfiguration, httpMethod);
             final long endTime = System.currentTimeMillis();
             webClient_.getCookieManager().updateFromState(httpClient.getState());
-            return makeWebResponse(responseCode, httpMethod, settings, endTime - startTime);
+            return makeWebResponse(responseCode, httpMethod, request, endTime - startTime);
         }
         catch (final HttpException e) {
             // KLUDGE: hitting www.yahoo.com will cause an exception to be thrown while
@@ -120,9 +120,9 @@ public class HttpWebConnection implements WebConnection {
                 }
                 //TODO: There might be a bug here since the original encoding type is lost.
                 final WebRequest newRequest = new WebRequest(new URL(buffer.toString()));
-                newRequest.setHttpMethod(settings.getHttpMethod());
-                newRequest.setRequestParameters(settings.getRequestParameters());
-                newRequest.setAdditionalHeaders(settings.getAdditionalHeaders());
+                newRequest.setHttpMethod(request.getHttpMethod());
+                newRequest.setRequestParameters(request.getRequestParameters());
+                newRequest.setAdditionalHeaders(request.getAdditionalHeaders());
                 return getResponse(newRequest);
             }
             throw new RuntimeException("HTTP Error: " + e.getMessage(), e);
@@ -142,15 +142,15 @@ public class HttpWebConnection implements WebConnection {
     }
 
     /**
-     * Returns a new HttpClient host configuration, initialized based on the specified request settings.
-     * @param webRequestSettings the request settings to use to initialize the returned host configuration
-     * @return a new HttpClient host configuration, initialized based on the specified request settings
-     * @throws IOException if the specified request settings contains an invalid URL
+     * Returns a new HttpClient host configuration, initialized based on the specified request.
+     * @param webRequest the request to use to initialize the returned host configuration
+     * @return a new HttpClient host configuration, initialized based on the specified request
+     * @throws IOException if the specified request contains an invalid URL
      */
-    private static HostConfiguration getHostConfiguration(final WebRequest webRequestSettings)
+    private static HostConfiguration getHostConfiguration(final WebRequest webRequest)
         throws IOException {
         final HostConfiguration hostConfiguration = new HostConfiguration();
-        final URL url = webRequestSettings.getUrl();
+        final URL url = webRequest.getUrl();
         final URI uri;
         try {
             uri = new URI(url.toExternalForm(), false);
@@ -159,9 +159,9 @@ public class HttpWebConnection implements WebConnection {
             throw new IOException("Unable to create URI from URL: " + url.toExternalForm());
         }
         hostConfiguration.setHost(uri);
-        if (webRequestSettings.getProxyHost() != null) {
-            final String proxyHost = webRequestSettings.getProxyHost();
-            final int proxyPort = webRequestSettings.getProxyPort();
+        if (webRequest.getProxyHost() != null) {
+            final String proxyHost = webRequest.getProxyHost();
+            final int proxyPort = webRequest.getProxyPort();
             hostConfiguration.setProxy(proxyHost, proxyPort);
         }
         return hostConfiguration;
@@ -169,18 +169,18 @@ public class HttpWebConnection implements WebConnection {
 
     /**
      * Creates an <tt>HttpMethod</tt> instance according to the specified parameters.
-     * @param webRequestSettings the parameters
+     * @param webRequest the request
      * @return the <tt>HttpMethod</tt> instance constructed according to the specified parameters
      * @throws IOException
      */
-    private HttpMethodBase makeHttpMethod(final WebRequest webRequestSettings)
+    private HttpMethodBase makeHttpMethod(final WebRequest webRequest)
         throws IOException {
 
         // Make sure that the URL is fully encoded. IE actually sends some Unicode chars in request
         // URLs; because of this we allow some Unicode chars in URLs. However, at this point we're
         // handing things over the HttpClient, and HttpClient will blow up if we leave these Unicode
         // chars in the URL.
-        final URL url = UrlUtils.encodeUrl(webRequestSettings.getUrl(), false);
+        final URL url = UrlUtils.encodeUrl(webRequest.getUrl(), false);
 
         String path = url.getPath();
         if (path.length() == 0) {
@@ -190,55 +190,55 @@ public class HttpWebConnection implements WebConnection {
             path = "//" + path; // see https://issues.apache.org/jira/browse/HTTPCLIENT-727
         }
 
-        final HttpMethodBase httpMethod = buildHttpMethod(webRequestSettings.getHttpMethod(), path);
+        final HttpMethodBase httpMethod = buildHttpMethod(webRequest.getHttpMethod(), path);
         if (!(httpMethod instanceof EntityEnclosingMethod)) {
             // this is the case for GET as well as TRACE, DELETE, OPTIONS and HEAD
-            if (webRequestSettings.getRequestParameters().isEmpty()) {
+            if (webRequest.getRequestParameters().isEmpty()) {
                 final String queryString = url.getQuery();
                 httpMethod.setQueryString(queryString);
             }
             else {
-                final NameValuePair[] pairs = new NameValuePair[webRequestSettings.getRequestParameters().size()];
-                webRequestSettings.getRequestParameters().toArray(pairs);
+                final NameValuePair[] pairs = new NameValuePair[webRequest.getRequestParameters().size()];
+                webRequest.getRequestParameters().toArray(pairs);
                 httpMethod.setQueryString(NameValuePair.toHttpClient(pairs));
             }
         }
         else { // POST as well as PUT
             final EntityEnclosingMethod method = (EntityEnclosingMethod) httpMethod;
-            method.getParams().setContentCharset(webRequestSettings.getCharset());
+            method.getParams().setContentCharset(webRequest.getCharset());
 
             final String queryString = url.getQuery();
             method.setQueryString(queryString);
-            if (webRequestSettings.getRequestBody() != null) {
-                final String body = webRequestSettings.getRequestBody();
-                final String charset = webRequestSettings.getCharset();
+            if (webRequest.getRequestBody() != null) {
+                final String body = webRequest.getRequestBody();
+                final String charset = webRequest.getCharset();
                 method.setRequestEntity(new StringRequestEntity(body, null, charset));
             }
 
             // Note that this has to be done in two loops otherwise it won't
             // be able to support two elements with the same name.
-            if (webRequestSettings.getEncodingType() == FormEncodingType.URL_ENCODED
+            if (webRequest.getEncodingType() == FormEncodingType.URL_ENCODED
                     && method instanceof PostMethod) {
                 final PostMethod postMethod = (PostMethod) httpMethod;
-                for (final NameValuePair pair : webRequestSettings.getRequestParameters()) {
+                for (final NameValuePair pair : webRequest.getRequestParameters()) {
                     postMethod.removeParameter(pair.getName(), pair.getValue());
                 }
 
-                for (final NameValuePair pair : webRequestSettings.getRequestParameters()) {
+                for (final NameValuePair pair : webRequest.getRequestParameters()) {
                     postMethod.addParameter(pair.getName(), pair.getValue());
                 }
             }
-            else if (FormEncodingType.MULTIPART == webRequestSettings.getEncodingType()) {
+            else if (FormEncodingType.MULTIPART == webRequest.getEncodingType()) {
                 final List<PartBase> partList = new ArrayList<PartBase>();
-                for (final NameValuePair pair : webRequestSettings.getRequestParameters()) {
+                for (final NameValuePair pair : webRequest.getRequestParameters()) {
                     final PartBase newPart;
                     if (pair instanceof KeyDataPair) {
                         final KeyDataPair pairWithFile = (KeyDataPair) pair;
-                        final String charset = webRequestSettings.getCharset();
+                        final String charset = webRequest.getCharset();
                         newPart = buildFilePart(pairWithFile, charset);
                     }
                     else {
-                        newPart = new StringPart(pair.getName(), pair.getValue(), webRequestSettings.getCharset());
+                        newPart = new StringPart(pair.getName(), pair.getValue(), webRequest.getCharset());
                         newPart.setContentType(null); // Firefox and IE seem not to send a content type
                     }
                     newPart.setTransferEncoding(null); // Firefox and IE don't send transfer encoding headers
@@ -249,10 +249,10 @@ public class HttpWebConnection implements WebConnection {
                 method.setRequestEntity(new MultipartRequestEntity(parts, method.getParams()));
             }
             else { // for instance a PUT request
-                final String body = webRequestSettings.getRequestBody();
+                final String body = webRequest.getRequestBody();
                 if (body != null) {
-                    final String contentType = webRequestSettings.getAdditionalHeaders().get("Content-type");
-                    final String charset = webRequestSettings.getCharset();
+                    final String contentType = webRequest.getAdditionalHeaders().get("Content-type");
+                    final String charset = webRequest.getCharset();
                     method.setRequestEntity(new StringRequestEntity(body, contentType, charset));
                 }
             }
@@ -260,12 +260,12 @@ public class HttpWebConnection implements WebConnection {
 
         httpMethod.setRequestHeader("User-Agent", webClient_.getBrowserVersion().getUserAgent());
 
-        writeRequestHeadersToHttpMethod(httpMethod, webRequestSettings.getAdditionalHeaders());
+        writeRequestHeadersToHttpMethod(httpMethod, webRequest.getAdditionalHeaders());
         httpMethod.setFollowRedirects(false);
 
-        if (webRequestSettings.getCredentialsProvider() != null) {
+        if (webRequest.getCredentialsProvider() != null) {
             httpMethod.getParams().setParameter(CredentialsProvider.PROVIDER,
-                    webRequestSettings.getCredentialsProvider());
+                    webRequest.getCredentialsProvider());
         }
 
         if (webClient_.getCookieManager().isCookiesEnabled()) {
@@ -416,7 +416,7 @@ public class HttpWebConnection implements WebConnection {
      * Converts an HttpMethod into a WebResponse.
      */
     private WebResponse makeWebResponse(final int statusCode, final HttpMethodBase method,
-            final WebRequest requestSettings, final long loadTime) throws IOException {
+            final WebRequest request, final long loadTime) throws IOException {
 
         String statusMessage = method.getStatusText();
         if (statusMessage == null || statusMessage.length() == 0) {
@@ -430,7 +430,7 @@ public class HttpWebConnection implements WebConnection {
             headers.add(new NameValuePair(header.getName(), header.getValue()));
         }
         final WebResponseData responseData = newWebResponseDataInstance(statusMessage, headers, statusCode, method);
-        return newWebResponseInstance(responseData, loadTime, requestSettings);
+        return newWebResponseInstance(responseData, loadTime, request);
     }
 
     /**
@@ -456,15 +456,15 @@ public class HttpWebConnection implements WebConnection {
      * Constructs an appropriate WebResponse.
      * May be overridden by subclasses to return a specialized WebResponse.
      * @param responseData Data that was send back
-     * @param requestSettings the request settings used to get this response
+     * @param request the request used to get this response
      * @param loadTime How long the response took to be sent
      * @return the new WebResponse
      */
     protected WebResponse newWebResponseInstance(
             final WebResponseData responseData,
             final long loadTime,
-            final WebRequest requestSettings) {
-        return new WebResponseImpl(responseData, requestSettings, loadTime);
+            final WebRequest request) {
+        return new WebResponseImpl(responseData, request, loadTime);
     }
 
     private static void writeRequestHeadersToHttpMethod(final org.apache.commons.httpclient.HttpMethod httpMethod,

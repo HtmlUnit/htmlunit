@@ -282,14 +282,14 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
 
             final URL requestedUrl = new URL(url);
-            final WebRequest settings = new WebRequest(requestedUrl);
-            settings.setHttpMethod(HttpMethod.valueOf(request.getMethod()));
+            final WebRequest webRequest = new WebRequest(requestedUrl);
+            webRequest.setHttpMethod(HttpMethod.valueOf(request.getMethod()));
 
             // copy headers
             for (final Enumeration<String> en = request.getHeaderNames(); en.hasMoreElements();) {
                 final String headerName = en.nextElement();
                 final String headerValue = request.getHeader(headerName);
-                settings.setAdditionalHeader(headerName, headerValue);
+                webRequest.setAdditionalHeader(headerName, headerValue);
             }
 
             // copy parameters
@@ -305,13 +305,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
             if (request.getMethod().equals("PUT") && request.getContentLength() > 0) {
                 final byte[] buffer = new byte[request.getContentLength()];
                 request.getInputStream().readLine(buffer, 0, buffer.length);
-                settings.setRequestBody(new String(buffer));
+                webRequest.setRequestBody(new String(buffer));
             }
             else {
-                settings.setRequestParameters(requestParameters);
+                webRequest.setRequestParameters(requestParameters);
             }
 
-            final WebResponse resp = MockConnection_.getResponse(settings);
+            final WebResponse resp = MockConnection_.getResponse(webRequest);
 
             // write WebResponse to HttpServletResponse
             response.setStatus(resp.getStatusCode());

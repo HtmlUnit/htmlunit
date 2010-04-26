@@ -124,11 +124,11 @@ public class HtmlForm extends HtmlElement {
             }
         }
 
-        final WebRequest settings = getWebRequestSettings(submitElement);
+        final WebRequest request = getWebRequest(submitElement);
         final String target = htmlPage.getResolvedTarget(getTargetAttribute());
 
         final WebWindow webWindow = htmlPage.getEnclosingWindow();
-        webClient.download(webWindow, target, settings, "JS form.submit()");
+        webClient.download(webWindow, target, request, "JS form.submit()");
         return htmlPage;
     }
 
@@ -138,8 +138,21 @@ public class HtmlForm extends HtmlElement {
      * Gets the settings for a submission of this form request settings necessary to submit this form.
      * @param submitElement the element that caused the submit to occur
      * @return the request settings
+     * @deprecated as of 2.8, please use {@link #getWebRequest()} instead
      */
+    @Deprecated
     public WebRequest getWebRequestSettings(final SubmittableElement submitElement) {
+        return getWebRequest(submitElement);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Gets the request for a submission of this form with the specified SubmittableElement.
+     * @param submitElement the element that caused the submit to occur
+     * @return the request
+     */
+    public WebRequest getWebRequest(final SubmittableElement submitElement) {
         final HtmlPage htmlPage = (HtmlPage) getPage();
         final List<NameValuePair> parameters = getParameterListForSubmit(submitElement);
         final HttpMethod method;
@@ -192,15 +205,15 @@ public class HtmlForm extends HtmlElement {
             throw new IllegalArgumentException("Not a valid url: " + actionUrl);
         }
 
-        final WebRequest settings = new WebRequest(url, method);
-        settings.setRequestParameters(parameters);
+        final WebRequest request = new WebRequest(url, method);
+        request.setRequestParameters(parameters);
         if (HttpMethod.POST == method) {
-            settings.setEncodingType(FormEncodingType.getInstance(getEnctypeAttribute()));
+            request.setEncodingType(FormEncodingType.getInstance(getEnctypeAttribute()));
         }
-        settings.setCharset(getSubmitCharset());
-        settings.setAdditionalHeader("Referer", htmlPage.getWebResponse().getWebRequest().getUrl()
+        request.setCharset(getSubmitCharset());
+        request.setAdditionalHeader("Referer", htmlPage.getWebResponse().getWebRequest().getUrl()
                 .toExternalForm());
-        return settings;
+        return request;
     }
 
     /**

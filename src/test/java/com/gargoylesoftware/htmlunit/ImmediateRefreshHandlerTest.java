@@ -42,7 +42,7 @@ public final class ImmediateRefreshHandlerTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection() {
             private int nbCalls_ = 0;
             @Override
-            public WebResponse getResponse(final WebRequest settings) throws IOException {
+            public WebResponse getResponse(final WebRequest request) throws IOException {
                 String content = "<html><head>\n";
                 if (nbCalls_ == 0) {
                     content += "<meta http-equiv='refresh' content='0;url="
@@ -51,15 +51,15 @@ public final class ImmediateRefreshHandlerTest extends WebTestCase {
                 }
                 content += "</head><body></body></html>";
                 nbCalls_++;
-                final StringWebResponse response = new StringWebResponse(content, settings.getUrl());
-                response.getWebRequest().setHttpMethod(settings.getHttpMethod());
+                final StringWebResponse response = new StringWebResponse(content, request.getUrl());
+                response.getWebRequest().setHttpMethod(request.getHttpMethod());
                 return response;
             }
         };
         client.setWebConnection(webConnection);
 
-        final WebRequest settings = new WebRequest(getDefaultUrl());
-        settings.setHttpMethod(HttpMethod.POST);
-        client.getPage(settings);
+        final WebRequest request = new WebRequest(getDefaultUrl());
+        request.setHttpMethod(HttpMethod.POST);
+        client.getPage(request);
     }
 }
