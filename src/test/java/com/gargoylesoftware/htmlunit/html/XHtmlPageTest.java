@@ -89,7 +89,7 @@ public class XHtmlPageTest extends WebTestCase {
         webConnection.setDefaultResponse(content, 200, "OK", "text/xml");
         client.setWebConnection(webConnection);
         final Page page = client.getPage(URL_FIRST);
-        assertEquals(URL_FIRST, page.getWebResponse().getRequestSettings().getUrl());
+        assertEquals(URL_FIRST, page.getWebResponse().getWebRequest().getUrl());
         assertEquals("OK", page.getWebResponse().getStatusMessage());
         assertEquals(HttpStatus.SC_OK, page.getWebResponse().getStatusCode());
         assertEquals("text/xml", page.getWebResponse().getContentType());

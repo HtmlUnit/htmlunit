@@ -336,11 +336,15 @@ class DummyWebResponse implements WebResponse {
         throw new RuntimeException("not implemented");
     }
 
+    public WebRequest getWebRequest() {
+        throw new RuntimeException("not implemented");
+    }
+
     public boolean isBigContent() {
         throw new RuntimeException("not implemented");
     }
 
     public URL getRequestUrl() {
-        return getRequestSettings().getUrl();
+        return getWebRequest().getUrl();
     }
 }

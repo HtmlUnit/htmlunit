@@ -115,14 +115,14 @@ public class XmlPage extends SgmlPage {
             }
         }
         catch (final SAXException e) {
-            LOG.warn("Failed parsing XML document " + webResponse.getRequestSettings().getUrl()
+            LOG.warn("Failed parsing XML document " + webResponse.getWebRequest().getUrl()
                     + ": " + e.getMessage());
             if (!ignoreSAXException) {
                 throw new IOException(e.getMessage());
             }
         }
         catch (final ParserConfigurationException e) {
-            LOG.warn("Failed parsing XML document " + webResponse.getRequestSettings().getUrl()
+            LOG.warn("Failed parsing XML document " + webResponse.getWebRequest().getUrl()
                     + ": " + e.getMessage());
         }
     }

@@ -486,7 +486,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         conn.setDefaultResponse("");
         client.setWebConnection(conn);
         final HtmlPage page = client.getPage(URL_FIRST);
-        assertEquals(URL_FIRST, page.getWebResponse().getRequestSettings().getUrl());
+        assertEquals(URL_FIRST, page.getWebResponse().getWebRequest().getUrl());
         assertEquals("foo", page.getTitleText());
     }
 
@@ -624,7 +624,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         getMockWebConnection().setDefaultResponse("");
         final WebWindow window = loadPage(getBrowserVersion(), content, null).getEnclosingWindow();
         assertEquals(0, window.getWebClient().waitForBackgroundJavaScriptStartingBefore(1000));
-        assertEquals("about:blank", window.getEnclosedPage().getWebResponse().getRequestSettings().getUrl());
+        assertEquals("about:blank", window.getEnclosedPage().getWebResponse().getWebRequest().getUrl());
     }
 
     /**

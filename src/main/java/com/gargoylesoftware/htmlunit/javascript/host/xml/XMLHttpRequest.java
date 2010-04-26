@@ -81,7 +81,7 @@ public class XMLHttpRequest extends SimpleScriptable {
     private Function stateChangeHandler_;
     private Function loadHandler_;
     private Function errorHandler_;
-    private WebRequest requestSettings_;
+    private WebRequest webRequest_;
     private boolean async_;
     private int threadID_;
     private WebResponse webResponse_;
@@ -300,7 +300,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                 return doc;
             }
             catch (final IOException e) {
-                LOG.warn("Failed parsing XML document " + webResponse_.getRequestSettings().getUrl() + ": "
+                LOG.warn("Failed parsing XML document " + webResponse_.getWebRequest().getUrl() + ": "
                         + e.getMessage());
                 return null;
             }
@@ -393,23 +393,23 @@ public class XMLHttpRequest extends SimpleScriptable {
         containingPage_ = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
         try {
             final URL fullUrl = containingPage_.getFullyQualifiedUrl(url);
-            final URL originUrl = containingPage_.getWebResponse().getRequestSettings().getUrl();
+            final URL originUrl = containingPage_.getWebResponse().getWebRequest().getUrl();
             if (!isSameOrigin(originUrl, fullUrl)) {
                 throw Context.reportRuntimeError("Access to restricted URI denied");
             }
 
-            final WebRequest settings = new WebRequest(fullUrl);
-            settings.setCharset("UTF-8");
-            settings.setAdditionalHeader("Referer", containingPage_.getWebResponse().getRequestSettings().getUrl()
+            final WebRequest request = new WebRequest(fullUrl);
+            request.setCharset("UTF-8");
+            request.setAdditionalHeader("Referer", containingPage_.getWebResponse().getWebRequest().getUrl()
                     .toExternalForm());
             final HttpMethod submitMethod = HttpMethod.valueOf(method.toUpperCase());
-            settings.setHttpMethod(submitMethod);
+            request.setHttpMethod(submitMethod);
             if (user != null) {
                 final DefaultCredentialsProvider dcp = new DefaultCredentialsProvider();
                 dcp.addCredentials(user, password);
-                settings.setCredentialsProvider(dcp);
+                request.setCredentialsProvider(dcp);
             }
-            requestSettings_ = settings;
+            webRequest_ = request;
         }
         catch (final MalformedURLException e) {
             LOG.error("Unable to initialize XMLHttpRequest using malformed URL '" + url + "'.");
@@ -438,7 +438,7 @@ public class XMLHttpRequest extends SimpleScriptable {
         final WebClient client = getWindow().getWebWindow().getWebClient();
         final AjaxController ajaxController = client.getAjaxController();
         final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
-        final boolean synchron = ajaxController.processSynchron(page, requestSettings_, async_);
+        final boolean synchron = ajaxController.processSynchron(page, webRequest_, async_);
         if (synchron) {
             doSend(Context.getCurrentContext());
         }
@@ -475,15 +475,15 @@ public class XMLHttpRequest extends SimpleScriptable {
      */
     private void prepareRequest(final Object content) {
         if (content != null
-            && (HttpMethod.POST == requestSettings_.getHttpMethod()
-                    || HttpMethod.PUT == requestSettings_.getHttpMethod())
+            && (HttpMethod.POST == webRequest_.getHttpMethod()
+                    || HttpMethod.PUT == webRequest_.getHttpMethod())
             && !Context.getUndefinedValue().equals(content)) {
             final String body = Context.toString(content);
             if (body.length() > 0) {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("Setting request body to: " + body);
                 }
-                requestSettings_.setRequestBody(body);
+                webRequest_.setRequestBody(body);
             }
         }
     }
@@ -496,7 +496,7 @@ public class XMLHttpRequest extends SimpleScriptable {
         final WebClient wc = getWindow().getWebWindow().getWebClient();
         try {
             setState(STATE_LOADED, context);
-            final WebResponse webResponse = wc.loadWebResponse(requestSettings_);
+            final WebResponse webResponse = wc.loadWebResponse(webRequest_);
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Web response loaded successfully.");
             }
@@ -519,7 +519,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("IOException: returning a network error response.");
             }
-            webResponse_ = new NetworkErrorWebResponse(requestSettings_);
+            webResponse_ = new NetworkErrorWebResponse(webRequest_);
             setState(STATE_COMPLETED, context);
             processError(context);
         }
@@ -532,8 +532,8 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @param value the value of the header being set
      */
     public void jsxFunction_setRequestHeader(final String name, final String value) {
-        if (requestSettings_ != null) {
-            requestSettings_.setAdditionalHeader(name, value);
+        if (webRequest_ != null) {
+            webRequest_.setAdditionalHeader(name, value);
         }
         else {
             throw Context.reportRuntimeError("The open() method must be called before setRequestHeader().");
@@ -645,12 +645,16 @@ public class XMLHttpRequest extends SimpleScriptable {
             return webRequestSettings_;
         }
 
+        public WebRequest getWebRequest() {
+            return webRequestSettings_;
+        }
+
         public boolean isBigContent() {
             return false;
         }
 
         public URL getRequestUrl() {
-            return getRequestSettings().getUrl();
+            return getWebRequest().getUrl();
         }
     }
 }

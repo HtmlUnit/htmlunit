@@ -641,7 +641,7 @@ public class HTMLDocumentWriteTest extends WebDriverTestCase {
 
         assertNotNull(frame);
         assertEquals(frameURL.toExternalForm(),
-                framePage.getWebResponse().getRequestSettings().getUrl().toExternalForm());
+                framePage.getWebResponse().getWebRequest().getUrl().toExternalForm());
         assertEquals("frame", framePage.getTitleText());
     }
 

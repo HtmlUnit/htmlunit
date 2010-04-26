@@ -209,7 +209,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
                     new Long(loadTime)});
 
         Assert.assertEquals(httpStatus, response.getStatusCode());
-        Assert.assertEquals(url, response.getRequestSettings().getUrl());
+        Assert.assertEquals(url, response.getWebRequest().getUrl());
         Assert.assertEquals(loadTime, response.getLoadTime());
         Assert.assertEquals(content, response.getContentAsString());
         assertEquals(content.getBytes(), response.getContentAsBytes());

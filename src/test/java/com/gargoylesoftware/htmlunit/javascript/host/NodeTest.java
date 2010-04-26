@@ -835,7 +835,7 @@ public class NodeTest extends WebDriverTestCase {
         Collections.sort(collectedAlerts);
         assertEquals(getExpectedAlerts(), collectedAlerts);
         assertEquals(URL_SECOND.toExternalForm(),
-                page2.getWebResponse().getRequestSettings().getUrl().toExternalForm());
+                page2.getWebResponse().getWebRequest().getUrl().toExternalForm());
     }
 
     /**
@@ -883,7 +883,7 @@ public class NodeTest extends WebDriverTestCase {
             expectedURL = URL_SECOND;
         }
         assertEquals(expectedURL.toExternalForm(),
-                page2.getWebResponse().getRequestSettings().getUrl().toExternalForm());
+                page2.getWebResponse().getWebRequest().getUrl().toExternalForm());
     }
 
     /**
@@ -932,7 +932,7 @@ public class NodeTest extends WebDriverTestCase {
             expectedURL = URL_SECOND;
         }
         assertEquals(expectedURL.toExternalForm(),
-                page2.getWebResponse().getRequestSettings().getUrl().toExternalForm());
+                page2.getWebResponse().getWebRequest().getUrl().toExternalForm());
     }
 
     /**

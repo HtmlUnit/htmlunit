@@ -90,31 +90,31 @@ public class WebClient2Test extends WebServerTestCase {
         else {
             expected = "?a=b%20c&d=%E9%E8";
         }
-        assertEquals("http://first/" + expected, page.getWebResponse().getRequestSettings().getUrl());
+        assertEquals("http://first/" + expected, page.getWebResponse().getWebRequest().getUrl());
 
         // with query string already encoded
         page = client.getPage("http://first?a=b%20c&d=%C3%A9%C3%A8");
-        assertEquals("http://first/?a=b%20c&d=%C3%A9%C3%A8", page.getWebResponse().getRequestSettings().getUrl());
+        assertEquals("http://first/?a=b%20c&d=%C3%A9%C3%A8", page.getWebResponse().getWebRequest().getUrl());
 
         // with query string partially encoded
         page = client.getPage("http://first?a=b%20c&d=e f");
-        assertEquals("http://first/?a=b%20c&d=e%20f", page.getWebResponse().getRequestSettings().getUrl());
+        assertEquals("http://first/?a=b%20c&d=e%20f", page.getWebResponse().getWebRequest().getUrl());
 
         // with anchor
         page = client.getPage("http://first?a=b c#myAnchor");
-        assertEquals("http://first/?a=b%20c#myAnchor", page.getWebResponse().getRequestSettings().getUrl());
+        assertEquals("http://first/?a=b%20c#myAnchor", page.getWebResponse().getWebRequest().getUrl());
 
         // with query string containing encoded "&", "=", "+", ",", and "$"
         page = client.getPage("http://first?a=%26%3D%20%2C%24");
-        assertEquals("http://first/?a=%26%3D%20%2C%24", page.getWebResponse().getRequestSettings().getUrl());
+        assertEquals("http://first/?a=%26%3D%20%2C%24", page.getWebResponse().getWebRequest().getUrl());
 
         // with character to encode in path
         page = client.getPage("http://first/page 1.html");
-        assertEquals("http://first/page%201.html", page.getWebResponse().getRequestSettings().getUrl());
+        assertEquals("http://first/page%201.html", page.getWebResponse().getWebRequest().getUrl());
 
         // with character to encode in path
         page = client.getPage("http://first/page 1.html");
-        assertEquals("http://first/page%201.html", page.getWebResponse().getRequestSettings().getUrl());
+        assertEquals("http://first/page%201.html", page.getWebResponse().getWebRequest().getUrl());
     }
 
     /**
@@ -264,14 +264,14 @@ public class WebClient2Test extends WebServerTestCase {
     public void acceptLanguage() throws Exception {
         final String html = "<html><body></body></html>";
         final HtmlPage p = loadPageWithAlerts(html);
-        assertEquals("en-us", p.getWebResponse().getRequestSettings().getAdditionalHeaders().get("Accept-Language"));
+        assertEquals("en-us", p.getWebResponse().getWebRequest().getAdditionalHeaders().get("Accept-Language"));
 
         final WebClient client = p.getWebClient();
         final String lang = client.getBrowserVersion().getBrowserLanguage();
         try {
             client.getBrowserVersion().setBrowserLanguage("fr");
             final HtmlPage p2 = client.getPage(getDefaultUrl());
-            assertEquals("fr", p2.getWebResponse().getRequestSettings().getAdditionalHeaders().get("Accept-Language"));
+            assertEquals("fr", p2.getWebResponse().getWebRequest().getAdditionalHeaders().get("Accept-Language"));
         }
         finally {
             // Restore original language.

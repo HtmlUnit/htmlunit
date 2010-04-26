@@ -133,7 +133,7 @@ public class MalformedHtmlTest extends WebTestCase {
         else {
             query = "a=1%A9=2&prod=3";
         }
-        assertEquals(query, page2.getWebResponse().getRequestSettings().getUrl().getQuery());
+        assertEquals(query, page2.getWebResponse().getWebRequest().getUrl().getQuery());
     }
 
     /**

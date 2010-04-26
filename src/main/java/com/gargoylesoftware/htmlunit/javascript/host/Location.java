@@ -77,7 +77,7 @@ public class Location extends SimpleScriptable {
     public void initialize(final Window window) {
         window_ = window;
         if (window_ != null && window_.getWebWindow().getEnclosedPage() != null) {
-            hash_ = window_.getWebWindow().getEnclosedPage().getWebResponse().getRequestSettings().getUrl().getRef();
+            hash_ = window_.getWebWindow().getEnclosedPage().getWebResponse().getWebRequest().getUrl().getRef();
         }
     }
 
@@ -160,7 +160,7 @@ public class Location extends SimpleScriptable {
             return UNKNOWN;
         }
         try {
-            URL url = page.getWebResponse().getRequestSettings().getUrl();
+            URL url = page.getWebResponse().getWebRequest().getUrl();
             final boolean encodeHash = !getBrowserVersion().isIE();
             final String hash = getHash(encodeHash);
             if (hash != null) {
@@ -176,7 +176,7 @@ public class Location extends SimpleScriptable {
         }
         catch (final MalformedURLException e) {
             LOG.error(e.getMessage(), e);
-            return page.getWebResponse().getRequestSettings().getUrl().toExternalForm();
+            return page.getWebResponse().getWebRequest().getUrl().toExternalForm();
         }
     }
 
@@ -195,7 +195,7 @@ public class Location extends SimpleScriptable {
         }
         try {
             final URL url = page.getFullyQualifiedUrl(newLocation);
-            final URL oldUrl = page.getWebResponse().getRequestSettings().getUrl();
+            final URL oldUrl = page.getWebResponse().getWebRequest().getUrl();
             if (url.sameFile(oldUrl) && !StringUtils.equals(url.getRef(), oldUrl.getRef())) {
                 // If we're just setting or modifying the hash, avoid a server hit.
                 jsxSet_hash(newLocation);
@@ -411,7 +411,7 @@ public class Location extends SimpleScriptable {
      * @return this location's current URL
      */
     private URL getUrl() {
-        return window_.getWebWindow().getEnclosedPage().getWebResponse().getRequestSettings().getUrl();
+        return window_.getWebWindow().getEnclosedPage().getWebResponse().getWebRequest().getUrl();
     }
 
     /**

@@ -34,10 +34,18 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 public interface WebResponse extends Serializable {
 
     /**
-     * Returns the request settings used to load this response.
-     * @return the request settings used to load this response
+     * Returns the request used to load this response.
+     * @return the request used to load this response
+     * @deprecated as of 2.8, please use {@link #getWebRequest()} instead
      */
+    @Deprecated
     WebRequest getRequestSettings();
+
+    /**
+     * Returns the request used to load this response.
+     * @return the request used to load this response
+     */
+    WebRequest getWebRequest();
 
     /**
      * Returns the response headers as a list of {@link NameValuePair}s.
@@ -130,7 +138,7 @@ public interface WebResponse extends Serializable {
     /**
      * Returns the URL that was used to load this page.
      * @return the URL that was used to load this page
-     * @deprecated as of 2.6, please use {@link #getRequestSettings()}.getUrl()
+     * @deprecated as of 2.6, please use {@link #getWebRequest()}.getUrl()
      */
     @Deprecated
     URL getRequestUrl();

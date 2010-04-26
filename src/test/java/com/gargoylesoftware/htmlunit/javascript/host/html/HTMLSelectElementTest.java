@@ -112,7 +112,7 @@ public class HTMLSelectElementTest extends WebTestCase {
         final HtmlSubmitInput button = page.getHtmlElementById("clickMe");
         final HtmlPage newPage = button.click();
 
-        assertEquals("http://test/?submit=button", newPage.getWebResponse().getRequestSettings().getUrl());
+        assertEquals("http://test/?submit=button", newPage.getWebResponse().getWebRequest().getUrl());
         assertSame("method", HttpMethod.GET, getMockWebConnection().getLastMethod());
     }
 
@@ -704,7 +704,7 @@ public class HTMLSelectElementTest extends WebTestCase {
         final HtmlForm form = page.getFormByName("form1");
         final HtmlSelect select = form.getSelectByName("select1");
         final Page page2 = select.setSelectedAttribute("option2", true);
-        assertEquals("http://first/", page2.getWebResponse().getRequestSettings().getUrl());
+        assertEquals("http://first/", page2.getWebResponse().getWebRequest().getUrl());
     }
 
     /**
@@ -828,7 +828,7 @@ public class HTMLSelectElementTest extends WebTestCase {
 
         final HtmlPage page = loadPage(getBrowserVersion(), html, null);
         final Page page2 = page.<HtmlElement>getHtmlElementById("testButton").click();
-        final URL url2 = page2.getWebResponse().getRequestSettings().getUrl();
+        final URL url2 = page2.getWebResponse().getWebRequest().getUrl();
         assertTrue("Select in URL " + url2, url2.toExternalForm().contains("testSelect=testValue"));
     }
 

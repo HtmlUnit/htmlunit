@@ -639,7 +639,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public String jsxGet_cookie() {
         final HtmlPage page = getHtmlPage();
 
-        URL url = page.getWebResponse().getRequestSettings().getUrl();
+        URL url = page.getWebResponse().getWebRequest().getUrl();
         url = replaceForCookieIfNecessary(url);
 
         final StringBuilder buffer = new StringBuilder();
@@ -681,7 +681,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public void jsxSet_cookie(final String newCookie) {
         final CookieManager cookieManager = getHtmlPage().getWebClient().getCookieManager();
         if (cookieManager.isCookiesEnabled()) {
-            URL url = getHtmlPage().getWebResponse().getRequestSettings().getUrl();
+            URL url = getHtmlPage().getWebResponse().getWebRequest().getUrl();
             url = replaceForCookieIfNecessary(url);
             final Cookie cookie = buildCookie(newCookie, url);
             cookieManager.addCookie(cookie);
@@ -783,7 +783,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the value of the "URL" property
      */
     public String jsxGet_URL() {
-        return getHtmlPage().getWebResponse().getRequestSettings().getUrl().toExternalForm();
+        return getHtmlPage().getWebResponse().getWebRequest().getUrl().toExternalForm();
     }
 
     /**
@@ -857,7 +857,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
         else {
             final HtmlPage page = getHtmlPage();
-            final URL url = page.getWebResponse().getRequestSettings().getUrl();
+            final URL url = page.getWebResponse().getWebRequest().getUrl();
             final WebResponse webResponse = new StringWebResponse(writeBuffer_.toString(), url);
             final WebClient webClient = page.getWebClient();
             final WebWindow window = page.getEnclosingWindow();
@@ -1128,7 +1128,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         // for IE, the body of a not yet loaded page is null whereas it already exists for FF
         if (getBrowserVersion().isIE() && (page.getEnclosingWindow() instanceof FrameWindow)) {
             final HtmlPage enclosingPage = (HtmlPage) page.getEnclosingWindow().getParentWindow().getEnclosedPage();
-            if (WebClient.URL_ABOUT_BLANK.equals(page.getWebResponse().getRequestSettings().getUrl())
+            if (WebClient.URL_ABOUT_BLANK.equals(page.getWebResponse().getWebRequest().getUrl())
                     && enclosingPage.getReadyState() != DomNode.READY_STATE_COMPLETE) {
                 return null;
             }
@@ -1202,11 +1202,11 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     public String jsxGet_domain() {
         if (domain_ == null) {
-            URL url = getHtmlPage().getWebResponse().getRequestSettings().getUrl();
+            URL url = getHtmlPage().getWebResponse().getWebRequest().getUrl();
             if (url == WebClient.URL_ABOUT_BLANK) {
                 final WebWindow w = getWindow().getWebWindow();
                 if (w instanceof FrameWindow) {
-                    url = ((FrameWindow) w).getEnclosingPage().getWebResponse().getRequestSettings().getUrl();
+                    url = ((FrameWindow) w).getEnclosingPage().getWebResponse().getWebRequest().getUrl();
                 }
                 else {
                     return null;
@@ -1254,7 +1254,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         final BrowserVersion browserVersion = getBrowserVersion();
 
         // IE (at least 6) doesn't allow to set domain of about:blank
-        if (WebClient.URL_ABOUT_BLANK == getPage().getWebResponse().getRequestSettings().getUrl()
+        if (WebClient.URL_ABOUT_BLANK == getPage().getWebResponse().getWebRequest().getUrl()
             && browserVersion.isIE()) {
             throw Context.reportRuntimeError("Illegal domain value, cannot set domain from about:blank to: \""
                     + newDomain + "\"");

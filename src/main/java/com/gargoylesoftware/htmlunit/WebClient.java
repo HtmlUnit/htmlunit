@@ -270,12 +270,12 @@ public class WebClient implements Serializable {
         final Page page = webWindow.getEnclosedPage();
 
         if (page != null) {
-            final URL prev = page.getWebResponse().getRequestSettings().getUrl();
+            final URL prev = page.getWebResponse().getWebRequest().getUrl();
             final URL current = parameters.getUrl();
             if (current.sameFile(prev) && current.getRef() != null
                 && !StringUtils.equals(current.getRef(), prev.getRef())) {
                 // We're just navigating to an anchor within the current page.
-                page.getWebResponse().getRequestSettings().setUrl(current);
+                page.getWebResponse().getWebRequest().setUrl(current);
                 webWindow.getHistory().addPage(page);
                 return (P) page;
             }
@@ -910,12 +910,12 @@ public class WebClient implements Serializable {
         final HtmlPage openerPage = (HtmlPage) opener.getEnclosedPage();
         if (url != null) {
             try {
-                final WebRequest settings = new WebRequest(url);
+                final WebRequest request = new WebRequest(url);
                 if (!getBrowserVersion().isIE() && openerPage != null) {
-                    final String referer = openerPage.getWebResponse().getRequestSettings().getUrl().toExternalForm();
-                    settings.setAdditionalHeader("Referer", referer);
+                    final String referer = openerPage.getWebResponse().getWebRequest().getUrl().toExternalForm();
+                    request.setAdditionalHeader("Referer", referer);
                 }
-                getPage(window, settings);
+                getPage(window, request);
             }
             catch (final IOException e) {
                 LOG.error("Error loading content into window", e);
@@ -1017,7 +1017,7 @@ public class WebClient implements Serializable {
         final HtmlPage openerPage = (HtmlPage) opener.getEnclosedPage();
         final WebRequest settings = new WebRequest(url);
         if (!getBrowserVersion().isIE()) {
-            final String referer = openerPage.getWebResponse().getRequestSettings().getUrl().toExternalForm();
+            final String referer = openerPage.getWebResponse().getWebRequest().getUrl().toExternalForm();
             settings.setAdditionalHeader("Referer", referer);
         }
 
@@ -1338,31 +1338,31 @@ public class WebClient implements Serializable {
 
     /**
      * Loads a {@link WebResponse} from the server.
-     * @param webRequestSettings settings to use when making the request
+     * @param webRequest the request
      * @throws IOException if an IO problem occurs
      * @return the WebResponse
      */
-    public WebResponse loadWebResponse(final WebRequest webRequestSettings)
+    public WebResponse loadWebResponse(final WebRequest webRequest)
         throws IOException {
 
         final WebResponse response;
-        final String protocol = webRequestSettings.getUrl().getProtocol();
+        final String protocol = webRequest.getUrl().getProtocol();
         if (protocol.equals("about")) {
-            response = makeWebResponseForAboutUrl(webRequestSettings.getUrl());
+            response = makeWebResponseForAboutUrl(webRequest.getUrl());
         }
         else if (protocol.equals("file")) {
-            response = makeWebResponseForFileUrl(webRequestSettings.getUrl(), webRequestSettings.getCharset());
+            response = makeWebResponseForFileUrl(webRequest.getUrl(), webRequest.getCharset());
         }
         else if (protocol.equals("data")) {
             if (browserVersion_.isFirefox()) {
-                response = makeWebResponseForDataUrl(webRequestSettings);
+                response = makeWebResponseForDataUrl(webRequest);
             }
             else {
                 throw new MalformedURLException("Unknown protocol: data");
             }
         }
         else {
-            response = loadWebResponseFromWebConnection(webRequestSettings, ALLOWED_REDIRECTIONS_SAME_URL);
+            response = loadWebResponseFromWebConnection(webRequest, ALLOWED_REDIRECTIONS_SAME_URL);
         }
 
         return response;
@@ -1370,31 +1370,31 @@ public class WebClient implements Serializable {
 
     /**
      * Loads a {@link WebResponse} from the server through the WebConnection.
-     * @param webRequestSettings settings to use when making the request
+     * @param webRequest the request
      * @param allowedRedirects the number of allowed redirects remaining
      * @throws IOException if an IO problem occurs
      * @return the resultant {@link WebResponse}
      */
-    private WebResponse loadWebResponseFromWebConnection(final WebRequest webRequestSettings,
+    private WebResponse loadWebResponseFromWebConnection(final WebRequest webRequest,
         final int allowedRedirects) throws IOException {
 
-        URL url = webRequestSettings.getUrl();
-        final HttpMethod method = webRequestSettings.getHttpMethod();
-        final List<NameValuePair> parameters = webRequestSettings.getRequestParameters();
+        URL url = webRequest.getUrl();
+        final HttpMethod method = webRequest.getHttpMethod();
+        final List<NameValuePair> parameters = webRequest.getRequestParameters();
 
         WebAssert.notNull("url", url);
         WebAssert.notNull("method", method);
         WebAssert.notNull("parameters", parameters);
 
         url = UrlUtils.encodeUrl(url, getBrowserVersion().isIE());
-        webRequestSettings.setUrl(url);
+        webRequest.setUrl(url);
 
         if (LOG.isDebugEnabled()) {
             LOG.debug("Load response for " + url.toExternalForm());
         }
 
         // If the request settings don't specify a custom proxy, use the default client proxy...
-        if (webRequestSettings.getProxyHost() == null) {
+        if (webRequest.getProxyHost() == null) {
             if (proxyConfig_.getProxyAutoConfigUrl() != null) {
                 if (!proxyConfig_.getProxyAutoConfigUrl().equals(url.toExternalForm())) {
                     String content = proxyConfig_.getProxyAutoConfigContent();
@@ -1411,30 +1411,30 @@ public class WebClient implements Serializable {
                     if (value.startsWith("PROXY")) {
                         value = value.substring(6);
                         final int colonIndex = value.indexOf(':');
-                        webRequestSettings.setProxyHost(value.substring(0, colonIndex));
-                        webRequestSettings.setProxyPort(Integer.parseInt(value.substring(colonIndex + 1)));
+                        webRequest.setProxyHost(value.substring(0, colonIndex));
+                        webRequest.setProxyPort(Integer.parseInt(value.substring(colonIndex + 1)));
                     }
                 }
             }
             // ...unless the host needs to bypass the configured client proxy!
-            else if (!proxyConfig_.shouldBypassProxy(webRequestSettings.getUrl().getHost())) {
-                webRequestSettings.setProxyHost(proxyConfig_.getProxyHost());
-                webRequestSettings.setProxyPort(proxyConfig_.getProxyPort());
+            else if (!proxyConfig_.shouldBypassProxy(webRequest.getUrl().getHost())) {
+                webRequest.setProxyHost(proxyConfig_.getProxyHost());
+                webRequest.setProxyPort(proxyConfig_.getProxyPort());
             }
         }
 
         // Add the headers that are sent with every request.
-        addDefaultHeaders(webRequestSettings);
+        addDefaultHeaders(webRequest);
 
         // Retrieve the response, either from the cache or from the server.
-        final Object fromCache = getCache().getCachedObject(webRequestSettings);
+        final Object fromCache = getCache().getCachedObject(webRequest);
         final WebResponse webResponse;
         if (fromCache != null && fromCache instanceof WebResponse) {
-            webResponse = new WebResponseFromCache((WebResponse) fromCache, webRequestSettings);
+            webResponse = new WebResponseFromCache((WebResponse) fromCache, webRequest);
         }
         else {
-            webResponse = getWebConnection().getResponse(webRequestSettings);
-            getCache().cacheIfPossible(webRequestSettings, webResponse, webResponse);
+            webResponse = getWebConnection().getResponse(webRequest);
+            getCache().cacheIfPossible(webRequest, webResponse, webResponse);
         }
 
         // Continue according to the HTTP status code.
@@ -1470,13 +1470,13 @@ public class WebClient implements Serializable {
 
             if (allowedRedirects == 0) {
                 throw new FailingHttpStatusCodeException("Too much redirect for "
-                    + webResponse.getRequestSettings().getUrl(), webResponse);
+                    + webResponse.getWebRequest().getUrl(), webResponse);
             }
             else if ((status == HttpStatus.SC_MOVED_PERMANENTLY || status == HttpStatus.SC_TEMPORARY_REDIRECT)
                 && method.equals(HttpMethod.GET)) {
                 final WebRequest wrs = new WebRequest(newUrl);
                 wrs.setRequestParameters(parameters);
-                for (Map.Entry<String, String> entry : webRequestSettings.getAdditionalHeaders().entrySet()) {
+                for (Map.Entry<String, String> entry : webRequest.getAdditionalHeaders().entrySet()) {
                     wrs.setAdditionalHeader(entry.getKey(), entry.getValue());
                 }
                 return loadWebResponseFromWebConnection(wrs, allowedRedirects - 1);
@@ -1484,7 +1484,7 @@ public class WebClient implements Serializable {
             else if (status <= HttpStatus.SC_SEE_OTHER) {
                 final WebRequest wrs = new WebRequest(newUrl);
                 wrs.setHttpMethod(HttpMethod.GET);
-                for (Map.Entry<String, String> entry : webRequestSettings.getAdditionalHeaders().entrySet()) {
+                for (Map.Entry<String, String> entry : webRequest.getAdditionalHeaders().entrySet()) {
                     wrs.setAdditionalHeader(entry.getKey(), entry.getValue());
                 }
                 return loadWebResponseFromWebConnection(wrs, allowedRedirects - 1);
@@ -1837,7 +1837,7 @@ public class WebClient implements Serializable {
             else if (window instanceof FrameWindow) {
                 final FrameWindow fw = (FrameWindow) window;
                 final String enclosingPageState = fw.getEnclosingPage().getDocumentElement().getReadyState();
-                final URL frameUrl = fw.getEnclosedPage().getWebResponse().getRequestSettings().getUrl();
+                final URL frameUrl = fw.getEnclosedPage().getWebResponse().getWebRequest().getUrl();
                 if (!HtmlPage.READY_STATE_COMPLETE.equals(enclosingPageState) || frameUrl == URL_ABOUT_BLANK) {
                     return;
                 }
@@ -2077,14 +2077,14 @@ public class WebClient implements Serializable {
             if (page instanceof HtmlPage && !((HtmlPage) page).isOnbeforeunloadAccepted()) {
                 return;
             }
-            final URL current = page.getWebResponse().getRequestSettings().getUrl();
+            final URL current = page.getWebResponse().getWebRequest().getUrl();
             if (url.sameFile(current) && !StringUtils.equals(current.getRef(), url.getRef())) {
                 justHashJump = true;
             }
         }
 
         for (final LoadJob loadJob : loadQueue_) {
-            final WebRequest otherRequest = loadJob.response_.getRequestSettings();
+            final WebRequest otherRequest = loadJob.response_.getWebRequest();
             final URL otherUrl = otherRequest.getUrl();
             // TODO: investigate but it seems that IE considers query string too but not FF
             if (url.getPath().equals(otherUrl.getPath())
@@ -2137,7 +2137,7 @@ public class WebClient implements Serializable {
             if (downloadedResponse.urlWithOnlyHashChange_ != null) {
                 final WebWindow window = downloadedResponse.requestingWindow_;
                 final HtmlPage page = (HtmlPage) window.getEnclosedPage();
-                page.getWebResponse().getRequestSettings().setUrl(downloadedResponse.urlWithOnlyHashChange_);
+                page.getWebResponse().getWebRequest().setUrl(downloadedResponse.urlWithOnlyHashChange_);
                 window.getHistory().addPage(page);
             }
             else {

@@ -65,7 +65,7 @@ public class HtmlMeta extends HtmlElement {
         final String[] parts = getContentAttribute().split("\\s*;\\s*");
         final String name = StringUtils.substringBefore(parts[0], "=");
         final String value = StringUtils.substringAfter(parts[0], "=");
-        final URL url = getPage().getWebResponse().getRequestSettings().getUrl();
+        final URL url = getPage().getWebResponse().getWebRequest().getUrl();
         final String host = url.getHost();
         final boolean secure = "https".equals(url.getProtocol());
         String path = null;

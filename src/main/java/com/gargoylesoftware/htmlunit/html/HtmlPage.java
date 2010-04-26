@@ -184,10 +184,10 @@ public class HtmlPage extends SgmlPage {
     @Override
     public void initialize() throws IOException, FailingHttpStatusCodeException {
         final WebWindow enclosingWindow = getEnclosingWindow();
-        if (getWebResponse().getRequestSettings().getUrl() == WebClient.URL_ABOUT_BLANK) {
+        if (getWebResponse().getWebRequest().getUrl() == WebClient.URL_ABOUT_BLANK) {
             // a frame contains first a faked "about:blank" before its real content specified by src gets loaded
             if (enclosingWindow instanceof FrameWindow
-                    && getWebResponse().getRequestSettings().getUrl() == WebClient.URL_ABOUT_BLANK
+                    && getWebResponse().getWebRequest().getUrl() == WebClient.URL_ABOUT_BLANK
                     && !((FrameWindow) enclosingWindow).getFrameElement().isContentLoaded()) {
                 return;
             }
@@ -198,7 +198,7 @@ public class HtmlPage extends SgmlPage {
                 final WebWindow openerWindow = topWindow.getOpener();
                 if (openerWindow != null && openerWindow.getEnclosedPage() != null) {
                     baseUrl_ = openerWindow.getEnclosedPage().getWebResponse()
-                    .getRequestSettings().getUrl();
+                    .getWebRequest().getUrl();
                 }
             }
         }
@@ -594,7 +594,7 @@ public class HtmlPage extends SgmlPage {
     public URL getFullyQualifiedUrl(String relativeUrl) throws MalformedURLException {
         URL baseUrl;
         if (base_ == null) {
-            baseUrl = getWebResponse().getRequestSettings().getUrl();
+            baseUrl = getWebResponse().getWebRequest().getUrl();
             final WebWindow window = getEnclosingWindow();
             final boolean frame = (window != window.getTopWindow());
             if (frame) {
@@ -604,7 +604,7 @@ public class HtmlPage extends SgmlPage {
                     .hasFeature(BrowserVersionFeatures.JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW);
                 if (frameSrcIsNotSet || (frameSrcIsJs && jsFrameUseParentUrl)) {
                     baseUrl = ((HtmlPage) window.getTopWindow().getEnclosedPage()).getWebResponse()
-                        .getRequestSettings().getUrl();
+                        .getWebRequest().getUrl();
                 }
             }
             else if (baseUrl_ != null) {
@@ -627,7 +627,7 @@ public class HtmlPage extends SgmlPage {
 
             final String href = base_.getHrefAttribute();
             if (!insideHead || StringUtils.isEmpty(href)) {
-                baseUrl = getWebResponse().getRequestSettings().getUrl();
+                baseUrl = getWebResponse().getWebRequest().getUrl();
             }
             else {
                 try {
@@ -635,7 +635,7 @@ public class HtmlPage extends SgmlPage {
                 }
                 catch (final MalformedURLException e) {
                     notifyIncorrectness("Invalid base url: \"" + href + "\", ignoring it");
-                    baseUrl = getWebResponse().getRequestSettings().getUrl();
+                    baseUrl = getWebResponse().getWebRequest().getUrl();
                 }
             }
         }
@@ -989,7 +989,7 @@ public class HtmlPage extends SgmlPage {
 
         String scriptEncoding = charset;
         final String pageEncoding = getPageEncoding();
-        final WebRequest referringRequest = getWebResponse().getRequestSettings();
+        final WebRequest referringRequest = getWebResponse().getWebRequest();
 
         final WebClient client = getWebClient();
         final Cache cache = client.getCache();
@@ -1216,7 +1216,7 @@ public class HtmlPage extends SgmlPage {
                 LOG.error("Malformed refresh string (no ';' but not a number): " + refreshString, e);
                 return;
             }
-            url = getWebResponse().getRequestSettings().getUrl();
+            url = getWebResponse().getWebRequest().getUrl();
         }
         else {
             // Format: <meta http-equiv='refresh' content='10;url=http://www.blah.com'>
@@ -1235,7 +1235,7 @@ public class HtmlPage extends SgmlPage {
             final StringBuilder buffer = new StringBuilder(refreshString.substring(index + 4));
             if (buffer.toString().trim().length() == 0) {
                 //content='10; URL=' is treated as content='10'
-                url = getWebResponse().getRequestSettings().getUrl();
+                url = getWebResponse().getWebRequest().getUrl();
             }
             else {
                 if (buffer.charAt(0) == '"' || buffer.charAt(0) == 0x27) {
@@ -1748,7 +1748,7 @@ public class HtmlPage extends SgmlPage {
             // test if the frame should really be loaded:
             // if a script has already changed its content, it should be skipped
             // use == and not equals(...) to identify initial content (versus URL set to "about:blank")
-            if (frame.getEnclosedPage().getWebResponse().getRequestSettings().getUrl() == WebClient.URL_ABOUT_BLANK) {
+            if (frame.getEnclosedPage().getWebResponse().getWebRequest().getUrl() == WebClient.URL_ABOUT_BLANK) {
                 frame.loadInnerPage();
             }
         }
@@ -1762,7 +1762,7 @@ public class HtmlPage extends SgmlPage {
     public String toString() {
         final StringBuilder buffer = new StringBuilder();
         buffer.append("HtmlPage(");
-        buffer.append(getWebResponse().getRequestSettings().getUrl());
+        buffer.append(getWebResponse().getWebRequest().getUrl());
         buffer.append(")@");
         buffer.append(hashCode());
         return buffer.toString();
@@ -2143,7 +2143,7 @@ public class HtmlPage extends SgmlPage {
      * @throws IOException if an IO problem occurs
      */
     public Page refresh() throws IOException {
-        return getWebClient().getPage(getWebResponse().getRequestSettings());
+        return getWebClient().getPage(getWebResponse().getWebRequest());
     }
 
     /**

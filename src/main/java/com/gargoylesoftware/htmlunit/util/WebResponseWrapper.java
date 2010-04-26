@@ -149,9 +149,19 @@ public class WebResponseWrapper implements WebResponse {
     /**
      * {@inheritDoc}
      * The default behavior of this method is to return getRequestSettings() on the wrapped connection object.
+     * @deprecated as of 2.8, please use {@link #getWebRequest()} instead
      */
+    @Deprecated
     public WebRequest getRequestSettings() {
-        return wrappedWebResponse_.getRequestSettings();
+        return wrappedWebResponse_.getWebRequest();
+    }
+
+    /**
+     * {@inheritDoc}
+     * The default behavior of this method is to return getWebRequest() on the wrapped connection object.
+     */
+    public WebRequest getWebRequest() {
+        return wrappedWebResponse_.getWebRequest();
     }
 
     /**
@@ -166,6 +176,6 @@ public class WebResponseWrapper implements WebResponse {
      * {@inheritDoc}
      */
     public URL getRequestUrl() {
-        return getRequestSettings().getUrl();
+        return getWebRequest().getUrl();
     }
 }

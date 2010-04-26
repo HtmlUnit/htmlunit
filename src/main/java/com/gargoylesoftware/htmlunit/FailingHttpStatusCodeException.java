@@ -66,7 +66,7 @@ public class FailingHttpStatusCodeException extends RuntimeException {
     private static String buildMessage(final WebResponse failingResponse) {
         final int code = failingResponse.getStatusCode();
         final String msg = failingResponse.getStatusMessage();
-        final URL url = failingResponse.getRequestSettings().getUrl();
+        final URL url = failingResponse.getWebRequest().getUrl();
         return code + " " + msg + " for " + url;
     }
 

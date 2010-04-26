@@ -61,7 +61,7 @@ public final class WebClientUtils {
                     sourceName = StringUtils.substringBetween(sourceName, "script in ", " from");
                     for (final WebWindow ww : client.getWebWindows()) {
                         final WebResponse wr = ww.getEnclosedPage().getWebResponse();
-                        if (sourceName.equals(wr.getRequestSettings().getUrl().toString())) {
+                        if (sourceName.equals(wr.getWebRequest().getUrl().toString())) {
                             return wr.getContentAsString();
                         }
                     }

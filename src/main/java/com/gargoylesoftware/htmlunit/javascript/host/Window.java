@@ -1018,7 +1018,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         if (o instanceof Function) {
             final Function f = (Function) o;
             final String msg = e.getMessage();
-            final String url = e.getPage().getWebResponse().getRequestSettings().getUrl().toExternalForm();
+            final String url = e.getPage().getWebResponse().getWebRequest().getUrl().toExternalForm();
             final int line = e.getFailingLineNumber();
             final Object[] args = new Object[] {msg, url, line};
             f.call(Context.getCurrentContext(), this, this, args);

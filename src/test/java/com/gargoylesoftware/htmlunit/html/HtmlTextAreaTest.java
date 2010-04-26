@@ -65,7 +65,7 @@ public class HtmlTextAreaTest extends WebTestCase {
         final Page secondPage = page.getElementById("mysubmit").click();
 
         assertEquals("url", getDefaultUrl() + "?textArea1=" + expectedValue,
-                secondPage.getWebResponse().getRequestSettings().getUrl());
+                secondPage.getWebResponse().getWebRequest().getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
     }
 
@@ -89,7 +89,7 @@ public class HtmlTextAreaTest extends WebTestCase {
         final Page secondPage = page.getElementById("mysubmit").click();
 
         assertEquals("url", getDefaultUrl() + "?textArea1=Flintstone",
-                secondPage.getWebResponse().getRequestSettings().getUrl());
+                secondPage.getWebResponse().getWebRequest().getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
     }
 

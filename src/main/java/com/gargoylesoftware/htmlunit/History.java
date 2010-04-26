@@ -160,7 +160,7 @@ public class History implements Serializable {
         while (urls_.size() > index_) {
             urls_.remove(index_);
         }
-        urls_.add(page.getWebResponse().getRequestSettings().getUrl().toExternalForm());
+        urls_.add(page.getWebResponse().getWebRequest().getUrl().toExternalForm());
     }
 
     /**

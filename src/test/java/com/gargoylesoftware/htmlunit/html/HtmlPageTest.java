@@ -121,7 +121,7 @@ public class HtmlPageTest extends WebServerTestCase {
         expectedParameters.add(new NameValuePair("submitInput1", "push me"));
 
         final URL expectedUrl = new URL(getDefaultUrl() + "formSubmit");
-        final URL actualUrl = secondPage.getWebResponse().getRequestSettings().getUrl();
+        final URL actualUrl = secondPage.getWebResponse().getWebRequest().getUrl();
         assertEquals("url", expectedUrl, actualUrl);
         Assert.assertSame("method", HttpMethod.POST, webConnection.getLastMethod());
         Assert.assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
@@ -395,7 +395,7 @@ public class HtmlPageTest extends WebServerTestCase {
 
         // invalid base URL should be ignored
         assertEquals("http://somewhere.com/", page.getFullyQualifiedUrl("http://somewhere.com/"));
-        assertEquals(page.getWebResponse().getRequestSettings().getUrl() + "foo.html",
+        assertEquals(page.getWebResponse().getWebRequest().getUrl() + "foo.html",
                 page.getFullyQualifiedUrl("foo.html"));
     }
 
@@ -466,7 +466,7 @@ public class HtmlPageTest extends WebServerTestCase {
             "Element 'base' must appear in <head>, it is ignored."
         };
         assertEquals(expectedIncorrectness, collectedIncorrectness);
-        assertEquals(URL_FIRST + "somepage.html", secondPage.getWebResponse().getRequestSettings().getUrl());
+        assertEquals(URL_FIRST + "somepage.html", secondPage.getWebResponse().getWebRequest().getUrl());
     }
 
     /**
@@ -1214,7 +1214,7 @@ public class HtmlPageTest extends WebServerTestCase {
         final Set<Cookie> cookies = page.getWebClient().getCookieManager().getCookies();
         assertEquals(1, cookies.size());
         final Cookie cookie = cookies.iterator().next();
-        assertEquals(page.getWebResponse().getRequestSettings().getUrl().getHost(), cookie.getDomain());
+        assertEquals(page.getWebResponse().getWebRequest().getUrl().getHost(), cookie.getDomain());
         assertEquals("webm", cookie.getName());
         assertEquals("none", cookie.getValue());
         assertEquals("/", cookie.getPath());
@@ -1274,7 +1274,7 @@ public class HtmlPageTest extends WebServerTestCase {
         final HtmlPage firstPage = client.getPage(URL_FIRST);
         final HtmlInlineFrame iframe = firstPage.getHtmlElementById("myIFrame");
 
-        assertEquals(secondURL, iframe.getEnclosedPage().getWebResponse().getRequestSettings().getUrl());
+        assertEquals(secondURL, iframe.getEnclosedPage().getWebResponse().getWebRequest().getUrl());
     }
 
     /**
@@ -1299,7 +1299,7 @@ public class HtmlPageTest extends WebServerTestCase {
                 nbCalls_++;
 
                 final StringWebResponse response = new StringWebResponse(content, settings.getUrl());
-                response.getRequestSettings().setHttpMethod(settings.getHttpMethod());
+                response.getWebRequest().setHttpMethod(settings.getHttpMethod());
                 return response;
             }
         };

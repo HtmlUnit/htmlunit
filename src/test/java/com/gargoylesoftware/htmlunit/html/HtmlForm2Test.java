@@ -66,7 +66,7 @@ public class HtmlForm2Test extends WebTestCase {
         webConnection.setDefaultResponse(html, "text/html", "UTF-8");
 
         final HtmlPage page = client.getPage(url);
-        assertEquals(url.toExternalForm(), page.getWebResponse().getRequestSettings().getUrl());
+        assertEquals(url.toExternalForm(), page.getWebResponse().getWebRequest().getUrl());
         final HtmlPage submitPage = page.<HtmlElement>getHtmlElementById("mySubmit").click();
         final HtmlPage linkPage = page.<HtmlElement>getHtmlElementById("myLink").click();
         final String submitSuffix;
@@ -83,8 +83,8 @@ public class HtmlForm2Test extends WebTestCase {
             submitSuffix = "?par\u00F6m=Hello+G\u00FCnter";
             linkSuffix = "bug.html?h\u00F6=G\u00FCnter";
         }
-        assertEquals(url.toExternalForm() + submitSuffix, submitPage.getWebResponse().getRequestSettings().getUrl());
-        assertEquals(url.toExternalForm() + linkSuffix, linkPage.getWebResponse().getRequestSettings().getUrl());
+        assertEquals(url.toExternalForm() + submitSuffix, submitPage.getWebResponse().getWebRequest().getUrl());
+        assertEquals(url.toExternalForm() + linkSuffix, linkPage.getWebResponse().getWebRequest().getUrl());
     }
 
     /**

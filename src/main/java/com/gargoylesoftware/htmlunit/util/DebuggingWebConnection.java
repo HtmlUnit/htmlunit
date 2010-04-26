@@ -98,12 +98,12 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
      * {@inheritDoc}
      */
     @Override
-    public WebResponse getResponse(final WebRequest settings) throws IOException {
-        WebResponse response = wrappedWebConnection_.getResponse(settings);
+    public WebResponse getResponse(final WebRequest request) throws IOException {
+        WebResponse response = wrappedWebConnection_.getResponse(request);
         if (isUncompressJavaScript() && isJavaScript(response)) {
             response = uncompressJavaScript(response);
         }
-        saveResponse(response, settings);
+        saveResponse(response, request);
         return response;
     }
 
@@ -113,7 +113,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
      * @return a new response with uncompressed JavaScript code or the original response in case of failure
      */
     protected WebResponse uncompressJavaScript(final WebResponse response) {
-        final WebRequest requestSettings = response.getRequestSettings();
+        final WebRequest requestSettings = response.getWebRequest();
         final String scriptName = requestSettings.getUrl().toString();
         final String scriptSource = response.getContentAsString();
 
@@ -132,8 +132,8 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
             final String decompileScript = (String) factory.call(action);
             final WebResponseData wrd = new WebResponseData(decompileScript.getBytes(), response.getStatusCode(),
                 response.getStatusMessage(), response.getResponseHeaders());
-            return new WebResponseImpl(wrd, response.getRequestSettings().getUrl(),
-                response.getRequestSettings().getHttpMethod(), response.getLoadTime());
+            return new WebResponseImpl(wrd, response.getWebRequest().getUrl(),
+                response.getWebRequest().getHttpMethod(), response.getLoadTime());
         }
         catch (final Exception e) {
             LOG.warn("Failed to decompress JavaScript response. Delivering as it.", e);
@@ -173,7 +173,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         }
         final File f = createFile(settings.getUrl(), extension);
         final String content = response.getContentAsString();
-        final URL url = response.getRequestSettings().getUrl();
+        final URL url = response.getWebRequest().getUrl();
         FileUtils.writeStringToFile(f, content, response.getContentCharset());
         LOG.info("Created file " + f.getAbsolutePath() + " for response " + counter_ + ": " + url);
 

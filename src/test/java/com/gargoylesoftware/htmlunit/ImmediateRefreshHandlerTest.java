@@ -52,7 +52,7 @@ public final class ImmediateRefreshHandlerTest extends WebTestCase {
                 content += "</head><body></body></html>";
                 nbCalls_++;
                 final StringWebResponse response = new StringWebResponse(content, settings.getUrl());
-                response.getRequestSettings().setHttpMethod(settings.getHttpMethod());
+                response.getWebRequest().setHttpMethod(settings.getHttpMethod());
                 return response;
             }
         };

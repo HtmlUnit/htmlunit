@@ -219,7 +219,7 @@ public final class HTMLParser {
      */
     public static void parseFragment(final DomNode parent, final String source) throws SAXException, IOException {
         final HtmlPage page = (HtmlPage) parent.getPage();
-        final URL url = page.getWebResponse().getRequestSettings().getUrl();
+        final URL url = page.getWebResponse().getWebRequest().getUrl();
 
         final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(parent, url);
         domBuilder.setFeature("http://cyberneko.org/html/features/balance-tags/document-fragment", true);
@@ -261,7 +261,7 @@ public final class HTMLParser {
      * @throws IOException if there is an IO error
      */
     public static HtmlPage parseHtml(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
-        final HtmlPage page = new HtmlPage(webResponse.getRequestSettings().getUrl(), webResponse, webWindow);
+        final HtmlPage page = new HtmlPage(webResponse.getWebRequest().getUrl(), webResponse, webWindow);
         parse(webResponse, webWindow, page);
         return page;
     }
@@ -275,7 +275,7 @@ public final class HTMLParser {
      * @throws IOException if there is an IO error
      */
     public static XHtmlPage parseXHtml(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
-        final XHtmlPage page = new XHtmlPage(webResponse.getRequestSettings().getUrl(), webResponse, webWindow);
+        final XHtmlPage page = new XHtmlPage(webResponse.getWebRequest().getUrl(), webResponse, webWindow);
         parse(webResponse, webWindow, page);
         return page;
     }
@@ -285,7 +285,7 @@ public final class HTMLParser {
 
         webWindow.setEnclosedPage(page);
 
-        final URL url = webResponse.getRequestSettings().getUrl();
+        final URL url = webResponse.getWebRequest().getUrl();
         final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(page, url);
         String charset = webResponse.getContentCharsetOrNull();
         if (charset != null) {
@@ -297,7 +297,7 @@ public final class HTMLParser {
             }
         }
         else {
-            final String specifiedCharset = webResponse.getRequestSettings().getCharset();
+            final String specifiedCharset = webResponse.getWebRequest().getCharset();
             if (specifiedCharset != null) {
                 charset = specifiedCharset;
             }
@@ -453,7 +453,7 @@ public final class HTMLParser {
             try {
                 final WebResponse webResponse = page_.getWebResponse();
                 final String charset = webResponse.getContentCharset();
-                final String url = webResponse.getRequestSettings().getUrl().toString();
+                final String url = webResponse.getWebRequest().getUrl().toString();
                 final XMLInputSource in = new XMLInputSource(null, url, null, new StringReader(html), charset);
                 ((HTMLConfiguration) fConfiguration).evaluateInputSource(in);
             }

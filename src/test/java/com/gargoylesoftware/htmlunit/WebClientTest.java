@@ -349,9 +349,9 @@ public class WebClientTest extends WebServerTestCase {
         final WebResponse webResponse = page.getWebResponse();
         // A redirect should have happened
         assertEquals(200, webResponse.getStatusCode());
-        assertEquals(URL_FIRST, webResponse.getRequestSettings().getUrl());
+        assertEquals(URL_FIRST, webResponse.getWebRequest().getUrl());
         assertEquals("Second", page.getTitleText());
-        assertSame(HttpMethod.GET, webResponse.getRequestSettings().getHttpMethod());
+        assertSame(HttpMethod.GET, webResponse.getWebRequest().getHttpMethod());
     }
 
     /**
@@ -662,7 +662,7 @@ public class WebClientTest extends WebServerTestCase {
         else {
             // A redirect should have happened
             assertEquals(HttpStatus.SC_OK, webResponse.getStatusCode());
-            assertEquals(newLocation, webResponse.getRequestSettings().getUrl());
+            assertEquals(newLocation, webResponse.getWebRequest().getUrl());
             assertEquals("Second", page.getTitleText());
             assertEquals(expectedRedirectedRequestMethod, webConnection.getLastMethod());
         }
@@ -771,7 +771,7 @@ public class WebClientTest extends WebServerTestCase {
         final URL url = new URL(urlString);
         final HtmlPage page = client.getPage(new WebRequest(url, HttpMethod.POST));
 
-        assertEquals("http://first/?a=b", page.getWebResponse().getRequestSettings().getUrl());
+        assertEquals("http://first/?a=b", page.getWebResponse().getWebRequest().getUrl());
     }
 
     /**
@@ -794,7 +794,7 @@ public class WebClientTest extends WebServerTestCase {
         final HtmlPage page = client.getPage(URL_FIRST);
         final Page page2 = page.getAnchors().get(0).click();
         final URL url2 = new URL(URL_FIRST, "foo.html?id=UYIUYTY//YTYUY..F");
-        assertEquals(url2.toExternalForm(), page2.getWebResponse().getRequestSettings().getUrl());
+        assertEquals(url2.toExternalForm(), page2.getWebResponse().getWebRequest().getUrl());
     }
 
     /**
@@ -1219,7 +1219,7 @@ public class WebClientTest extends WebServerTestCase {
         webClient.getPage(URL_FIRST);
         assertEquals(null, webConnection.getLastWebRequestSettings().getProxyHost());
         assertEquals(0, webConnection.getLastWebRequestSettings().getProxyPort());
-        assertEquals(location2, page2.getWebResponse().getRequestSettings().getUrl());
+        assertEquals(location2, page2.getWebResponse().getWebRequest().getUrl());
 
         // Make sure default proxy settings are used.
         webClient.setThrowExceptionOnFailingStatusCode(false);
@@ -1227,7 +1227,7 @@ public class WebClientTest extends WebServerTestCase {
         final Page page1 = webClient.getPage(URL_FIRST);
         assertEquals(defaultProxyHost, webConnection.getLastWebRequestSettings().getProxyHost());
         assertEquals(defaultProxyPort, webConnection.getLastWebRequestSettings().getProxyPort());
-        assertEquals(URL_FIRST, page1.getWebResponse().getRequestSettings().getUrl());
+        assertEquals(URL_FIRST, page1.getWebResponse().getWebRequest().getUrl());
 
         webClient.closeAllWindows();
     }
@@ -1613,7 +1613,7 @@ public class WebClientTest extends WebServerTestCase {
     public void testUrlEncoding() throws Exception {
         final URL url = new URL("http://host/x+y\u00E9/a\u00E9 b?c \u00E9 d");
         final HtmlPage page = loadPage(FIREFOX_3, "<html></html>", new ArrayList<String>(), url);
-        final WebRequest wrs = page.getWebResponse().getRequestSettings();
+        final WebRequest wrs = page.getWebResponse().getWebRequest();
         assertEquals("http://host/x+y%C3%A9/a%C3%A9%20b?c%20%E9%20d", wrs.getUrl());
     }
 
@@ -1626,7 +1626,7 @@ public class WebClientTest extends WebServerTestCase {
     public void testUrlEncoding2() throws Exception {
         final URL url = new URL("http://host/x+y\u00E9/a\u00E9 b?c \u00E9 d");
         final HtmlPage page = loadPage(INTERNET_EXPLORER_8, "<html></html>", new ArrayList<String>(), url);
-        final WebRequest wrs = page.getWebResponse().getRequestSettings();
+        final WebRequest wrs = page.getWebResponse().getWebRequest();
         assertEquals("http://host/x+y%C3%A9/a%C3%A9%20b?c%20\u00E9%20d", wrs.getUrl());
     }
 
@@ -1638,7 +1638,7 @@ public class WebClientTest extends WebServerTestCase {
     public void testPlusNotEncodedInUrl() throws Exception {
         final URL url = new URL("http://host/search/my+category/");
         final HtmlPage page = loadPage("<html></html>", new ArrayList<String>(), url);
-        final WebRequest wrs = page.getWebResponse().getRequestSettings();
+        final WebRequest wrs = page.getWebResponse().getWebRequest();
         assertEquals("http://host/search/my+category/", wrs.getUrl());
     }
 
@@ -1696,7 +1696,7 @@ public class WebClientTest extends WebServerTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         Page page = webClient.getPage("javascript:void(alert(document.location))");
-        assertEquals("about:blank", page.getWebResponse().getRequestSettings().getUrl());
+        assertEquals("about:blank", page.getWebResponse().getWebRequest().getUrl());
         assertEquals(new String[] {"about:blank"}, collectedAlerts);
         collectedAlerts.clear();
 
@@ -2107,7 +2107,7 @@ public class WebClientTest extends WebServerTestCase {
         client.getPage(URL_FIRST);
         assertEquals(2, client.getWebWindows().size());
         assertEquals(frameUrl,
-                client.getCurrentWindow().getEnclosedPage().getWebResponse().getRequestSettings().getUrl());
+                client.getCurrentWindow().getEnclosedPage().getWebResponse().getWebRequest().getUrl());
 
         // loading a new page should be done in the top window
         client.getPage(URL_SECOND);
@@ -2194,7 +2194,7 @@ public class WebClientTest extends WebServerTestCase {
         client.setWebConnection(webConnection);
 
         final Page page = client.getPage(urlWithDirectoryUp);
-        assertEquals(url, page.getWebResponse().getRequestSettings().getUrl());
+        assertEquals(url, page.getWebResponse().getWebRequest().getUrl());
     }
 
     /**

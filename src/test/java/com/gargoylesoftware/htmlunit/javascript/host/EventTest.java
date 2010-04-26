@@ -1013,7 +1013,7 @@ public class EventTest extends WebDriverTestCase {
 
         final HtmlPage page = loadPageWithAlerts(html);
         final HtmlPage page2 = page.<HtmlInput>getHtmlElementById("mySubmit").click();
-        assertEquals(getDefaultUrl(), page2.getWebResponse().getRequestSettings().getUrl());
+        assertEquals(getDefaultUrl(), page2.getWebResponse().getWebRequest().getUrl());
     }
 
     /**

@@ -72,8 +72,17 @@ public class WebResponseImpl implements WebResponse {
 
     /**
      * {@inheritDoc}
+     * @deprecated as of 2.8, please use {@link #getWebRequest()} instead
      */
+    @Deprecated
     public WebRequest getRequestSettings() {
+        return requestSettings_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public WebRequest getWebRequest() {
         return requestSettings_;
     }
 
@@ -145,7 +154,7 @@ public class WebResponseImpl implements WebResponse {
     public String getContentCharset() {
         String charset = getContentCharsetOrNull();
         if (charset == null) {
-            charset = getRequestSettings().getCharset();
+            charset = getWebRequest().getCharset();
         }
         if (charset == null) {
             charset = TextUtil.DEFAULT_CHARSET;
@@ -217,6 +226,6 @@ public class WebResponseImpl implements WebResponse {
      * {@inheritDoc}
      */
     public URL getRequestUrl() {
-        return getRequestSettings().getUrl();
+        return getWebRequest().getUrl();
     }
 }

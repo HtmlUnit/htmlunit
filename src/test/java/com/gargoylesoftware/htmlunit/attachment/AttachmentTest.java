@@ -86,7 +86,7 @@ public class AttachmentTest extends WebTestCase {
         HttpWebConnectionTest.assertEquals(new ByteArrayInputStream(content2.getBytes()), attachmentStream);
         assertEquals("text/html", attachmentResponse.getContentType());
         assertEquals(200, attachmentResponse.getStatusCode());
-        assertEquals(URL_SECOND, attachmentResponse.getRequestSettings().getUrl());
+        assertEquals(URL_SECOND, attachmentResponse.getWebRequest().getUrl());
     }
 
     /**

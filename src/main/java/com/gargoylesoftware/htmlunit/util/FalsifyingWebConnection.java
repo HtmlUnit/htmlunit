@@ -65,7 +65,7 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
         final URL originalUrl = webRequestSettings.getUrl();
         webRequestSettings.setUrl(url);
         final WebResponse resp = super.getResponse(webRequestSettings);
-        resp.getRequestSettings().setUrl(originalUrl);
+        resp.getWebRequest().setUrl(originalUrl);
         return resp;
     }
 
@@ -80,7 +80,7 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
         final byte[] body = newContent.getBytes(wr.getContentCharset());
         final WebResponseData wrd = new WebResponseData(body, wr.getStatusCode(), wr.getStatusMessage(),
             wr.getResponseHeaders());
-        return new WebResponseImpl(wrd, wr.getRequestSettings().getUrl(), wr.getRequestSettings().getHttpMethod(),
+        return new WebResponseImpl(wrd, wr.getWebRequest().getUrl(), wr.getWebRequest().getHttpMethod(),
                 wr.getLoadTime());
     }
 

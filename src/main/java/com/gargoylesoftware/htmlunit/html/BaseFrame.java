@@ -135,10 +135,10 @@ public abstract class BaseFrame extends HtmlElement {
                 return;
             }
             try {
-                final WebRequest settings = new WebRequest(url);
-                settings.setAdditionalHeader("Referer", getPage().getWebResponse().getRequestSettings().getUrl()
+                final WebRequest request = new WebRequest(url);
+                request.setAdditionalHeader("Referer", getPage().getWebResponse().getWebRequest().getUrl()
                         .toExternalForm());
-                getPage().getEnclosingWindow().getWebClient().getPage(enclosedWindow_, settings);
+                getPage().getEnclosingWindow().getWebClient().getPage(enclosedWindow_, request);
             }
             catch (final IOException e) {
                 LOG.error("IOException when getting content for " + getTagName() + ": url=[" + url + "]", e);
@@ -154,7 +154,7 @@ public abstract class BaseFrame extends HtmlElement {
     private boolean isAlreadyLoadedByAncestor(final URL url) {
         WebWindow window = getPage().getEnclosingWindow();
         while (window != null) {
-            if (url.sameFile(window.getEnclosedPage().getWebResponse().getRequestSettings().getUrl())) {
+            if (url.sameFile(window.getEnclosedPage().getWebResponse().getWebRequest().getUrl())) {
                 return true;
             }
             if (window == window.getParentWindow()) {

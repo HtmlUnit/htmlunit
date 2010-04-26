@@ -470,7 +470,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         final HtmlPage page = loadPageWithAlerts(html);
         final Page page2 = page.<HtmlElement>getHtmlElementById("button1").click();
 
-        assertEquals(URL_THIRD.toExternalForm(), page2.getWebResponse().getRequestSettings().getUrl());
+        assertEquals(URL_THIRD.toExternalForm(), page2.getWebResponse().getWebRequest().getUrl());
     }
 
     /**
@@ -638,7 +638,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         final HtmlButton button = page.getHtmlElementById("button1");
         final HtmlPage secondPage = button.click();
         assertEquals("second", secondPage.getTitleText());
-        assertEquals(URL_SECOND + "?button1=", secondPage.getWebResponse().getRequestSettings().getUrl());
+        assertEquals(URL_SECOND + "?button1=", secondPage.getWebResponse().getWebRequest().getUrl());
     }
 
     /**

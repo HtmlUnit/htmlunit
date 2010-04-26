@@ -68,7 +68,7 @@ public class HtmlLinkTest extends WebTestCase {
 
         final HtmlLink link = page.getFirstByXPath("//link");
         final WebResponse respCss = link.getWebResponse(true);
-        assertEquals(page.getWebResponse().getRequestSettings().getUrl().toExternalForm(),
-            respCss.getRequestSettings().getAdditionalHeaders().get("Referer"));
+        assertEquals(page.getWebResponse().getWebRequest().getUrl().toExternalForm(),
+            respCss.getWebRequest().getAdditionalHeaders().get("Referer"));
     }
 }

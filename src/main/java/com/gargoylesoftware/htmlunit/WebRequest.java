@@ -124,7 +124,7 @@ public class WebRequest implements Serializable {
                     ((DefaultCredentialsProvider) getCredentialsProvider()).addCredentials(username, password);
                 }
                 else {
-                    LOG.warn("URL userInfo is defined for a WebRequestSettings "
+                    LOG.warn("URL userInfo is defined for a WebRequest "
                             + "without an underlying DefaultCredentialsProvider");
                 }
             }

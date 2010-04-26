@@ -975,7 +975,7 @@ public class HTMLElementTest extends WebTestCase {
         client.setWebConnection(webConnection);
         final HtmlPage page = client.getPage(url1);
         assertEquals(getExpectedAlerts(), collectedAlerts);
-        assertEquals(url2.toExternalForm(), page.getWebResponse().getRequestSettings().getUrl().toExternalForm());
+        assertEquals(url2.toExternalForm(), page.getWebResponse().getWebRequest().getUrl().toExternalForm());
     }
 
     /**

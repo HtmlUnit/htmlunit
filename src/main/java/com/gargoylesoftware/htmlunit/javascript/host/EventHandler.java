@@ -74,7 +74,7 @@ public class EventHandler extends BaseFunction {
         // compile "just in time"
         if (realFunction_ == null) {
             realFunction_ = cx.compileFunction(jsObj, jsSnippet_, eventName_ + " event for " + node_
-                + " in " + node_.getPage().getWebResponse().getRequestSettings().getUrl(), 0, null);
+                + " in " + node_.getPage().getWebResponse().getWebRequest().getUrl(), 0, null);
         }
 
         final Object result = realFunction_.call(cx, scope, thisObj, args);

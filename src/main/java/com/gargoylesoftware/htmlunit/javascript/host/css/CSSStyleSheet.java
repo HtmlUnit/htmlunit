@@ -186,7 +186,7 @@ public class CSSStyleSheet extends SimpleScriptable {
                 if (sheet == null) {
                     // TODO: surely wrong: in which case is it null and why?
                     final String uri = (uri_ != null) ? uri_
-                        : e.getPage().getWebResponse().getRequestSettings().getUrl().toExternalForm();
+                        : e.getPage().getWebResponse().getWebRequest().getUrl().toExternalForm();
                     final String href = importRule.getHref();
                     final String url = UrlUtils.resolveUrl(uri, href);
                     sheet = loadStylesheet(getWindow(), ownerNode_, null, url);
@@ -217,7 +217,7 @@ public class CSSStyleSheet extends SimpleScriptable {
         final HtmlLink link, final String url) {
         CSSStyleSheet sheet;
         final HtmlPage page = (HtmlPage) element.getDomNodeOrDie().getPage(); // fallback uri for exceptions
-        String uri = page.getWebResponse().getRequestSettings().getUrl().toExternalForm();
+        String uri = page.getWebResponse().getWebRequest().getUrl().toExternalForm();
         try {
             // Retrieve the associated content and respect client settings regarding failing HTTP status codes.
             final WebRequest request;
@@ -229,7 +229,7 @@ public class CSSStyleSheet extends SimpleScriptable {
             else {
                 // Use href.
                 request = new WebRequest(new URL(url));
-                final String referer = page.getWebResponse().getRequestSettings().getUrl().toExternalForm();
+                final String referer = page.getWebResponse().getWebRequest().getUrl().toExternalForm();
                 request.setAdditionalHeader("Referer", referer);
             }
 
@@ -241,7 +241,7 @@ public class CSSStyleSheet extends SimpleScriptable {
             }
             else {
                 final WebResponse response = client.loadWebResponse(request);
-                uri = response.getRequestSettings().getUrl().toExternalForm();
+                uri = response.getWebRequest().getUrl().toExternalForm();
                 client.printContentIfNecessary(response);
                 client.throwFailingHttpStatusCodeExceptionIfNecessary(response);
                 // CSS content must have downloaded OK; go ahead and build the corresponding stylesheet.
@@ -588,7 +588,7 @@ public class CSSStyleSheet extends SimpleScriptable {
         else {
             final DomNode node = ownerNode_.getDomNodeOrDie();
             final HtmlPage page = (HtmlPage) node.getPage();
-            final URL url = page.getWebResponse().getRequestSettings().getUrl();
+            final URL url = page.getWebResponse().getWebRequest().getUrl();
             return url.toExternalForm();
         }
     }

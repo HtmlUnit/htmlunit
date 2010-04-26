@@ -68,7 +68,7 @@ public final class HtmlInputTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) pushButton.click();
 
         assertEquals("url", getDefaultUrl() + "?foo=2&button=foo",
-                secondPage.getWebResponse().getRequestSettings().getUrl());
+                secondPage.getWebResponse().getWebRequest().getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
     }

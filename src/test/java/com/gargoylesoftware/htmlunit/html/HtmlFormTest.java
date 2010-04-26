@@ -91,7 +91,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) pushButton.click();
 
         assertEquals("url", getDefaultUrl() + "?foo=2&button=foo",
-                secondPage.getWebResponse().getRequestSettings().getUrl());
+                secondPage.getWebResponse().getWebRequest().getUrl());
         Assert.assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
     }
 
@@ -839,8 +839,8 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) page.getElementById("mySubmit").click();
 
         assertNotNull(secondPage);
-        assertEquals(page.getWebResponse().getRequestSettings().getUrl() + "action.html?select=second+value",
-                secondPage.getWebResponse().getRequestSettings().getUrl());
+        assertEquals(page.getWebResponse().getWebRequest().getUrl() + "action.html?select=second+value",
+                secondPage.getWebResponse().getWebRequest().getUrl());
     }
 
     /**
@@ -1000,7 +1000,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage page = loadPage(html, null, url);
         final Page page2 = page.<HtmlElement>getHtmlElementById("submitButton").click();
 
-        assertEquals(expectedUrl, page2.getWebResponse().getRequestSettings().getUrl());
+        assertEquals(expectedUrl, page2.getWebResponse().getWebRequest().getUrl());
     }
 
     /**
@@ -1105,7 +1105,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage firstPage = loadPage(html);
         final HtmlSubmitInput submitInput = firstPage.getHtmlElementById("myButton");
         final HtmlPage secondPage = submitInput.click();
-        assertEquals(URL_SECOND + "?Save=Submit+Query", secondPage.getWebResponse().getRequestSettings().getUrl());
+        assertEquals(URL_SECOND + "?Save=Submit+Query", secondPage.getWebResponse().getWebRequest().getUrl());
     }
 
     /**
@@ -1176,7 +1176,7 @@ public class HtmlFormTest extends WebTestCase {
         if (getBrowserVersion().isFirefox() || getBrowserVersion().equals(BrowserVersion.INTERNET_EXPLORER_6)) {
             expectedURL += "?";
         }
-        assertEquals(expectedURL, secondPage.getWebResponse().getRequestSettings().getUrl());
+        assertEquals(expectedURL, secondPage.getWebResponse().getWebRequest().getUrl());
     }
 
     /**
@@ -1321,7 +1321,7 @@ public class HtmlFormTest extends WebTestCase {
             || BrowserVersion.INTERNET_EXPLORER_6.equals(getBrowserVersion())) {
             expectedUrl += "?";
         }
-        assertEquals(expectedUrl, page.getWebResponse().getRequestSettings().getUrl());
+        assertEquals(expectedUrl, page.getWebResponse().getWebRequest().getUrl());
     }
 
     /**
@@ -1345,7 +1345,7 @@ public class HtmlFormTest extends WebTestCase {
             || BrowserVersion.INTERNET_EXPLORER_6.equals(getBrowserVersion())) {
             expectedUrl += "?";
         }
-        assertEquals(expectedUrl, page.getWebResponse().getRequestSettings().getUrl());
+        assertEquals(expectedUrl, page.getWebResponse().getWebRequest().getUrl());
     }
 
     /**
@@ -1364,7 +1364,7 @@ public class HtmlFormTest extends WebTestCase {
         HtmlPage page = loadPage(html);
         page = page.<HtmlSubmitInput>getFirstByXPath("//input[2]").click();
         assertEquals(getDefaultUrl() + "?myName=myValue",
-                page.getWebResponse().getRequestSettings().getUrl());
+                page.getWebResponse().getWebRequest().getUrl());
     }
 
     /**

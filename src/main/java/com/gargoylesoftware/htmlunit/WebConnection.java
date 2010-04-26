@@ -28,10 +28,10 @@ public interface WebConnection {
 
     /**
      * Submits a request and retrieves a response.
-     * @param settings Settings to make the request with
-     * @return the response to the request defined by the specified request settings
+     * @param request the request
+     * @return the response to the request defined by the specified request
      * @exception IOException if an IO error occurs
      */
-    WebResponse getResponse(final WebRequest settings) throws IOException;
+    WebResponse getResponse(final WebRequest request) throws IOException;
 
 }
