@@ -75,7 +75,8 @@ public class HtmlImageInput extends HtmlInput {
         if (wasPositionSpecified_) {
             final NameValuePair valueX = new NameValuePair(prefix + 'x', String.valueOf(xPosition_));
             final NameValuePair valueY = new NameValuePair(prefix + 'y', String.valueOf(yPosition_));
-            if (prefix.length() > 0 && getPage().getWebClient().getBrowserVersion().isFirefox()) {
+            if (prefix.length() > 0 && getPage().getWebClient().getBrowserVersion().isFirefox()
+                    && getValueAttribute().length() > 0) {
                 return new NameValuePair[] {valueX, valueY,
                     new NameValuePair(getNameAttribute(), getValueAttribute()) };
             }

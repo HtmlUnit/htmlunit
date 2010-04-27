@@ -76,6 +76,26 @@ public class HtmlImageInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void testClick_NoPosition_NoValue() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "<input type='image' name='button'>\n"
+            + "</form></body></html>";
+        final HtmlPage page = loadPageWithAlerts(htmlContent);
+        getMockConnection(page).setDefaultResponse(htmlContent);
+        final HtmlForm form = page.getHtmlElementById("form1");
+
+        final HtmlImageInput imageInput = form.getInputByName("button");
+        final HtmlPage secondPage = (HtmlPage) imageInput.click();
+        final String url = secondPage.getWebResponse().getWebRequest().getUrl().toExternalForm();
+        assertTrue(url.endsWith("?button.x=0&button.y=0"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void testClick_WithPosition() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
