@@ -25,10 +25,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.httpclient.ChunkedOutputStream;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -39,6 +39,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 @RunWith(BrowserRunner.class)
 public class BigContentPageTest extends WebServerTestCase {
+
+    private SimpleWebServer simpleWebServer_;
 
     /**
      * @throws Exception if the test fails
@@ -120,36 +122,38 @@ public class BigContentPageTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void chunked() throws Exception {
-        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
-        servlets.put("/chunked", ChunkedServlet.class);
-        startWebServer("./", null, servlets);
+        final String response = "HTTP/1.1 200 OK\r\n"
+            + "Transfer-Encoding: chunked\r\n\r\n"
+            + "5\r\n"
+            + "ABCDE\r\n"
+            + "5\r\n"
+            + "FGHIJ\r\n"
+            + "5\r\n"
+            + "KLMNO\r\n"
+            + "5\r\n"
+            + "PQRST\r\n"
+            + "5\r\n"
+            + "UVWXY\r\n"
+            + "1\r\n"
+            + "Z\r\n"
+            + "0\r\n\r\n";
 
+        simpleWebServer_ = new SimpleWebServer(PORT, response.getBytes());
+        simpleWebServer_.start();
         final WebClient client = getWebClient();
 
         final HtmlPage page = client.getPage("http://localhost:" + PORT + "/chunked");
-        assertTrue(page.asText().startsWith("ABCDEF"));
+        assertTrue(page.asText().equals("ABCDEFGHIJKLMNOPQRSTUVWXYZ"));
     }
 
     /**
-     * Servlet for {@link #chunked()}.
+     * @throws Exception if an error occurs
      */
-    public static class ChunkedServlet extends HttpServlet {
-
-        private static final long serialVersionUID = 1454574979267029963L;
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-            response.setHeader("Transfer-Encoding", "chunked");
-            final OutputStream out = new ChunkedOutputStream(response.getOutputStream(), 5);
-            for (char ch = 'A'; ch <= 'Z'; ch++) {
-                out.write(ch);
-            }
-            out.close();
+    @After
+    public void stopServer() throws Exception {
+        if (simpleWebServer_ != null) {
+            simpleWebServer_.stop();
         }
     }
 }
