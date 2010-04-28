@@ -1090,4 +1090,52 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "1", "0" }, IE = {"0", "1"})
+    @NotYetImplemented(Browser.FF)
+    public void getElementsByTagName2() throws Exception {
+        final String html = "<html xmlns:ns1='http://example.com'>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.getElementsByTagName('ns1:ele').length);\n"
+            + "      alert(document.getElementsByTagName('ele').length);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <ns1:ele>&nbsp;</ns1:ele>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "1", "0" })
+    @NotYetImplemented
+    public void getElementsByTagName3() throws Exception {
+        final String html = "<html xmlns:ns1='http://example.com'>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.getElementsByTagName('ns1:ele').length);\n"
+            + "      alert(document.getElementsByTagName('ele').length);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <ns1:ele>&nbsp;</ns1:ele>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
