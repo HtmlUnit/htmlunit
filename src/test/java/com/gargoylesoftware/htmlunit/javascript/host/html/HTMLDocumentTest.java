@@ -1122,7 +1122,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts({ "1", "0" })
     @NotYetImplemented
     public void getElementsByTagName3() throws Exception {
-        final String html = "<html xmlns:ns1='http://example.com'>\n"
+        final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + "    function test() {\n"
