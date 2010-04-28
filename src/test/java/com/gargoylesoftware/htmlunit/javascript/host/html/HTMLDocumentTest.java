@@ -1095,8 +1095,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "1", "0" }, IE = {"0", "1"})
-    @NotYetImplemented(Browser.FF)
+    @Alerts(FF = { "1", "0" }, IE = { "0", "1" })
     public void getElementsByTagName2() throws Exception {
         final String html = "<html xmlns:ns1='http://example.com'>\n"
             + "<head>\n"
@@ -1120,7 +1119,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "0" })
-    @NotYetImplemented
+    @NotYetImplemented(Browser.IE)
     public void getElementsByTagName3() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

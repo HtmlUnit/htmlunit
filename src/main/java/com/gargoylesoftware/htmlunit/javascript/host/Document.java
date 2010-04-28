@@ -429,7 +429,12 @@ public class Document extends EventNode {
             exp = "//*";
         }
         else {
-            exp = "//*[lower-case(local-name()) = '" + tagName.toLowerCase() + "']";
+            if (getBrowserVersion().isIE()) {
+                exp = "//*[lower-case(local-name()) = '" + tagName.toLowerCase() + "']";
+            }
+            else {
+                exp = "//*[lower-case(name()) = '" + tagName.toLowerCase() + "']";
+            }
         }
         collection.init(getDomNodeOrDie(), exp);
         return collection;
