@@ -95,10 +95,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
     // we need to preserve this method as it is there since many versions with the above documentation.
     @Override
     public String asText() {
-        if (isChecked()) {
-            return "checked";
-        }
-        return "unchecked";
+        return super.asText();
     }
 
     /**

@@ -45,17 +45,18 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void test_asTextWhenNotChecked() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+    public void asTextWhenNotChecked() throws Exception {
+        final String html
+            = "<html><head></head><body>\n"
             + "<form id='form1'>\n"
             + "    <input type='radio' name='radio' id='radio'>Check me</input>\n"
             + "</form></body></html>";
 
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(html);
 
         final HtmlRadioButtonInput radio = page.getHtmlElementById("radio");
         assertEquals("unchecked", radio.asText());
+        assertEquals("uncheckedCheck me", page.asText());
         radio.setChecked(true);
         assertEquals("checked", radio.asText());
     }
@@ -64,15 +65,15 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testOnchangeHandlerInvoked() throws Exception {
-        final String htmlContent
+    public void onchangeHandlerInvoked() throws Exception {
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "    <input type='radio' name='radio' id='radio'"
             + "onchange='this.value=\"new\" + this.checked'>Check me</input>\n"
             + "</form></body></html>";
 
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(html);
 
         final HtmlRadioButtonInput radio = page.getHtmlElementById("radio");
 
@@ -89,15 +90,15 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testOnchangeHandlerNotInvokedIfNotChanged() throws Exception {
-        final String htmlContent
+    public void onchangeHandlerNotInvokedIfNotChanged() throws Exception {
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "    <input type='radio' name='radio' id='radio'"
             + "onchange='this.value=\"new\" + this.checked'>Check me</input>\n"
             + "</form></body></html>";
 
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(html);
 
         final HtmlRadioButtonInput radio = page.getHtmlElementById("radio");
 
@@ -114,8 +115,8 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testUpdateStateFirstForOnclickHandler() throws Exception {
-        final String htmlContent
+    public void updateStateFirstForOnclickHandler() throws Exception {
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<script type='text/javascript'>\n"
             + "    function itemOnClickHandler() {\n"
@@ -134,7 +135,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
             + "</form></body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlRadioButtonInput oneItem = page.getHtmlElementById("oneItem");
         final HtmlRadioButtonInput twoItems = page.getHtmlElementById("twoItems");
@@ -162,21 +163,21 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetChecked() throws Exception {
-        final String firstContent
+    public void setChecked() throws Exception {
+        final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
             + "<form>\n"
             + "<input id='myRadio' type='radio' onchange=\"window.location.href='" + URL_SECOND + "'\">\n"
             + "</form>\n"
             + "</body></html>";
-        final String secondContent
+        final String secondHtml
             = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(URL_FIRST, firstHtml);
+        webConnection.setResponse(URL_SECOND, secondHtml);
         client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_FIRST);
@@ -193,7 +194,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
      */
     @Test
     @Alerts({ "false,false", "true,false", "false,true" })
-    public void testRadioInputChecked() throws Exception {
+    public void radioInputChecked() throws Exception {
         final String html
             = "<html><head>\n"
             + "</head>\n"
@@ -220,8 +221,8 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetCheckedOutsideForm() throws Exception {
-        final String content
+    public void setCheckedOutsideForm() throws Exception {
+        final String html
             = "<html><head>\n"
             + "</head>\n"
             + "<body>\n"
@@ -234,7 +235,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlRadioButtonInput radio1 = page.getHtmlElementById("radio1");
         final HtmlRadioButtonInput radio2 = page.getHtmlElementById("radio2");

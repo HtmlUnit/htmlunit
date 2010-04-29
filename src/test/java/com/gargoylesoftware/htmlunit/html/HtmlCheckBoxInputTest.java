@@ -45,13 +45,13 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void test_defaultState() throws Exception {
-        final String htmlContent
+    public void defaultState() throws Exception {
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "    <input type='checkbox' name='checkbox' id='checkbox'>Check me</input>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(html);
         final HtmlCheckBoxInput checkBox = page.getHtmlElementById("checkbox");
 
         assertFalse(checkBox.isChecked());
@@ -67,8 +67,8 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void test_onClick() throws Exception {
-        final String htmlContent
+    public void onClick() throws Exception {
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>\n"
             + "    <input type='checkbox' name='checkbox' id='checkbox' "
@@ -76,7 +76,7 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
             + "</form></body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         final HtmlCheckBoxInput checkBox = page.getHtmlElementById("checkbox");
         final HtmlPage secondPage = checkBox.click();
 
@@ -97,14 +97,14 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void test_onClickThatSubmitsForm() throws Exception {
-        final String htmlContent
+    public void onClickThatSubmitsForm() throws Exception {
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' name='form1'>\n"
             + "    <input type='checkbox' name='checkbox' id='checkbox' "
             + "onClick='document.form1.submit()'>Check me</input>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(html);
         final HtmlCheckBoxInput checkBox = page.getHtmlElementById("checkbox");
 
         final HtmlPage secondPage = checkBox.click();
@@ -118,17 +118,18 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAsText() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+    public void asText() throws Exception {
+        final String html
+            = "<html><head></head><body>\n"
             + "<form id='form1'>\n"
             + "    <input type='checkbox' name='checkbox' id='checkbox'>Check me</input>\n"
             + "</form></body></html>";
 
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(html);
 
         final HtmlCheckBoxInput checkBox = page.getHtmlElementById("checkbox");
         assertEquals("unchecked", checkBox.asText());
+        assertEquals("uncheckedCheck me", page.asText());
         checkBox.setChecked(true);
         assertEquals("checked", checkBox.asText());
     }
@@ -137,8 +138,8 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testOnchangeFires() throws Exception {
-        final String content = "<html><head><title>foo</title>\n"
+    public void onchangeFires() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
             + "</head><body>\n"
             + "<form>\n"
             + "<input type='checkbox' id='chkbox' onchange='alert(\"foo\");' />\n"
@@ -148,7 +149,7 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
         final String[] expectedAlerts = {"foo"};
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         final HtmlCheckBoxInput checkbox = page.getHtmlElementById("chkbox");
         checkbox.setChecked(true);
 
@@ -159,21 +160,21 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetChecked() throws Exception {
-        final String firstContent
+    public void setChecked() throws Exception {
+        final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
             + "<form>\n"
             + "<input id='myCheckbox' type='checkbox' onchange=\"window.location.href='" + URL_SECOND + "'\">\n"
             + "</form>\n"
             + "</body></html>";
-        final String secondContent
+        final String secondHtml
             = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(URL_FIRST, firstHtml);
+        webConnection.setResponse(URL_SECOND, secondHtml);
         client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_FIRST);
@@ -188,7 +189,7 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testPreventDefault() throws Exception {
+    public void preventDefault() throws Exception {
         final String html =
               "<html><head><script>\n"
             + "  function handler(e) {\n"

@@ -146,13 +146,7 @@ class HtmlSerializer {
         else if (node instanceof HtmlSubmitInput) {
             appendHtmlSubmitInput((HtmlSubmitInput) node);
         }
-        else if (node instanceof HtmlInput) {
-            doAppend(((HtmlInput) node).getValueAttribute());
-        }
-        else if (node instanceof HtmlTable) {
-            appendHtmlTable((HtmlTable) node);
-        }
-        else if (node instanceof HtmlCheckBoxInput || node instanceof HtmlRadioButtonInput) {
+        else if (node instanceof HtmlCheckBoxInput) {
             final String str;
             if (((HtmlCheckBoxInput) node).isChecked()) {
                 str = "checked";
@@ -161,6 +155,22 @@ class HtmlSerializer {
                 str = "unchecked";
             }
             doAppend(str);
+        }
+        else if (node instanceof HtmlRadioButtonInput) {
+            final String str;
+            if (((HtmlRadioButtonInput) node).isChecked()) {
+                str = "checked";
+            }
+            else {
+                str = "unchecked";
+            }
+            doAppend(str);
+        }
+        else if (node instanceof HtmlInput) {
+            doAppend(((HtmlInput) node).getValueAttribute());
+        }
+        else if (node instanceof HtmlTable) {
+            appendHtmlTable((HtmlTable) node);
         }
         else if (node instanceof HtmlOrderedList) {
             appendHtmlOrderedList((HtmlOrderedList) node);
