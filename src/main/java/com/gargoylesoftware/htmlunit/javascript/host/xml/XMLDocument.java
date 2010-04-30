@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebResponseData;
-import com.gargoylesoftware.htmlunit.WebResponseImpl;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCDataSection;
@@ -149,7 +148,7 @@ public class XMLDocument extends Document {
         try {
             final List<NameValuePair> emptyList = Collections.emptyList();
             final WebResponseData data = new WebResponseData(strXML.getBytes(), HttpStatus.SC_OK, null, emptyList);
-            final WebResponse webResponse = new WebResponseImpl(data, (URL) null, (HttpMethod) null, 0);
+            final WebResponse webResponse = new WebResponse(data, (URL) null, (HttpMethod) null, 0);
             final XmlPage page = new XmlPage(webResponse, getWindow().getWebWindow());
             setDomNode(page);
             return true;

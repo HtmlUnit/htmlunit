@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.util.StringUtils.formatHttpDate;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
@@ -276,78 +275,90 @@ public class CacheTest extends WebTestCase {
     }
 }
 
-class DummyWebResponse implements WebResponse {
+class DummyWebResponse extends WebResponse {
 
     private static final long serialVersionUID = 631259170130126480L;
 
-    public InputStream getContentAsStream() throws IOException {
+    DummyWebResponse() {
+        super(null, null, 0);
+    }
+
+    @Override
+    public InputStream getContentAsStream() {
         throw new RuntimeException("not implemented");
     }
 
+    @Override
     public String getContentAsString() {
         throw new RuntimeException("not implemented");
     }
 
+    @Override
     public String getContentAsString(final String encoding) {
         throw new RuntimeException("not implemented");
     }
 
+    @Override
     public byte[] getContentAsBytes() {
         throw new RuntimeException("not implemented");
     }
 
-    public String getContentCharSet() {
-        throw new RuntimeException("not implemented");
-    }
-
+    @Override
     public String getContentCharset() {
         throw new RuntimeException("not implemented");
     }
 
+    @Override
     public String getContentCharsetOrNull() {
         throw new RuntimeException("not implemented");
     }
 
+    @Override
     public String getContentType() {
         throw new RuntimeException("not implemented");
     }
 
-    public long getLoadTimeInMilliSeconds() {
-        throw new RuntimeException("not implemented");
-    }
-
+    @Override
     public long getLoadTime() {
         throw new RuntimeException("not implemented");
     }
 
+    @Override
     public List<NameValuePair> getResponseHeaders() {
         throw new RuntimeException("not implemented");
     }
 
+    @Override
     public String getResponseHeaderValue(final String headerName) {
         throw new RuntimeException("not implemented");
     }
 
+    @Override
     public int getStatusCode() {
         throw new RuntimeException("not implemented");
     }
 
+    @Override
     public String getStatusMessage() {
         throw new RuntimeException("not implemented");
     }
 
+    @Override
     public WebRequest getRequestSettings() {
         throw new RuntimeException("not implemented");
     }
 
+    @Override
     public WebRequest getWebRequest() {
         throw new RuntimeException("not implemented");
     }
 
+    @Override
     public boolean isBigContent() {
         throw new RuntimeException("not implemented");
     }
 
+    @Override
     public URL getRequestUrl() {
         return getWebRequest().getUrl();
     }

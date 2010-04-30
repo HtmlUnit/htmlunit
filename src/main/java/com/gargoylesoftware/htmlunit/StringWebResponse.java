@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Brad Clarke
  * @author Ahmed Ashour
  */
-public class StringWebResponse extends WebResponseImpl {
+public class StringWebResponse extends WebResponse {
 
     private static final long serialVersionUID = 8001886227379566491L;
 

@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes, large file download, single thread for JavaScript background tasks">
+            <action type="update" dev="asashour">
+                INCOMPATIBLE CHANGE: WebResponse is now a class not an interface. WebResponseImpl is deprecated.
+            </action>
             <action type="fix" dev="asashour" issue="2993991">
                 Fix asText() of HtmlCheckBoxInput and HtmlRadioButtonInput.
             </action>

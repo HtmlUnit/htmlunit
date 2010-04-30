@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.WebConnection;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebResponseData;
-import com.gargoylesoftware.htmlunit.WebResponseImpl;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -45,7 +44,7 @@ public class WebConnectionWrapperTest extends WebTestCase {
     public void wrapper() throws Exception {
         final List<NameValuePair> emptyList = Collections.emptyList();
         final WebResponseData data = new WebResponseData(new byte[]{}, HttpStatus.SC_OK, "", emptyList);
-        final WebResponse response = new WebResponseImpl(data, URL_FIRST, HttpMethod.GET, 0);
+        final WebResponse response = new WebResponse(data, URL_FIRST, HttpMethod.GET, 0);
         final WebRequest wrs = new WebRequest(URL_FIRST);
 
         final WebConnection realConnection = new WebConnection() {

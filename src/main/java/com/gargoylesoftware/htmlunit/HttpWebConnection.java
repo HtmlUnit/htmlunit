@@ -464,7 +464,7 @@ public class HttpWebConnection implements WebConnection {
             final WebResponseData responseData,
             final long loadTime,
             final WebRequest request) {
-        return new WebResponseImpl(responseData, request, loadTime);
+        return new WebResponse(responseData, request, loadTime);
     }
 
     private static void writeRequestHeadersToHttpMethod(final org.apache.commons.httpclient.HttpMethod httpMethod,

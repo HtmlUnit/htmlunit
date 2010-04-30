@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.WebConnection;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebResponseData;
-import com.gargoylesoftware.htmlunit.WebResponseImpl;
 
 /**
  * Extension of {@link WebConnectionWrapper} providing facility methods to deliver something other than
@@ -80,7 +79,7 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
         final byte[] body = newContent.getBytes(wr.getContentCharset());
         final WebResponseData wrd = new WebResponseData(body, wr.getStatusCode(), wr.getStatusMessage(),
             wr.getResponseHeaders());
-        return new WebResponseImpl(wrd, wr.getWebRequest().getUrl(), wr.getWebRequest().getHttpMethod(),
+        return new WebResponse(wrd, wr.getWebRequest().getUrl(), wr.getWebRequest().getHttpMethod(),
                 wr.getLoadTime());
     }
 
@@ -114,6 +113,6 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
         headers.add(new NameValuePair("content-type", contentType + "; charset=" + encoding));
         final byte[] body = content.getBytes(encoding);
         final WebResponseData wrd = new WebResponseData(body, responseCode, responseMessage, headers);
-        return new WebResponseImpl(wrd, wr.getUrl(), wr.getHttpMethod(), 0);
+        return new WebResponse(wrd, wr.getUrl(), wr.getHttpMethod(), 0);
     }
 }

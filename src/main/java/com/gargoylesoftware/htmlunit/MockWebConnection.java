@@ -71,7 +71,7 @@ public class MockWebConnection implements WebConnection {
             }
         }
 
-        return new WebResponseImpl(response, request, 0);
+        return new WebResponse(response, request, 0);
     }
 
     /**

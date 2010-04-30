@@ -37,7 +37,6 @@ import com.gargoylesoftware.htmlunit.WebConnection;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebResponseData;
-import com.gargoylesoftware.htmlunit.WebResponseImpl;
 
 /**
  * Wrapper around a "real" WebConnection that will use the wrapped web connection
@@ -132,7 +131,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
             final String decompileScript = (String) factory.call(action);
             final WebResponseData wrd = new WebResponseData(decompileScript.getBytes(), response.getStatusCode(),
                 response.getStatusMessage(), response.getResponseHeaders());
-            return new WebResponseImpl(wrd, response.getWebRequest().getUrl(),
+            return new WebResponse(wrd, response.getWebRequest().getUrl(),
                 response.getWebRequest().getHttpMethod(), response.getLoadTime());
         }
         catch (final Exception e) {

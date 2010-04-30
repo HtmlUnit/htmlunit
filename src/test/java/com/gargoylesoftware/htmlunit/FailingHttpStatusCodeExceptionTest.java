@@ -43,7 +43,7 @@ public final class FailingHttpStatusCodeExceptionTest extends WebTestCase {
         final WebResponseData webResponseData = new WebResponseData(
                 ArrayUtils.EMPTY_BYTE_ARRAY, HttpStatus.SC_NOT_FOUND, "not found",
                 emptyList);
-        final WebResponse webResponse = new WebResponseImpl(webResponseData, URL_FIRST, HttpMethod.GET, 10);
+        final WebResponse webResponse = new WebResponse(webResponseData, URL_FIRST, HttpMethod.GET, 10);
         final FailingHttpStatusCodeException e = new FailingHttpStatusCodeException(webResponse);
 
         assertEquals(webResponse, e.getResponse());

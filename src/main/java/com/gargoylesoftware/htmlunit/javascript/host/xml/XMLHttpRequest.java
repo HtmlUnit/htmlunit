@@ -583,76 +583,93 @@ public class XMLHttpRequest extends SimpleScriptable {
         super.put(name, start, value);
     }
 
-    private static final class NetworkErrorWebResponse implements WebResponse {
+    private static final class NetworkErrorWebResponse extends WebResponse {
 
         private static final long serialVersionUID = 6354426394575804571L;
 
         private final WebRequest request_;
 
         private NetworkErrorWebResponse(final WebRequest webRequest) {
+            super(null, null, 0);
             request_ = webRequest;
         }
 
+        @Override
         public int getStatusCode() {
             return 0;
         }
 
+        @Override
         public String getStatusMessage() {
             return "";
         }
 
+        @Override
         public String getContentType() {
             return "";
         }
 
+        @Override
         public String getContentAsString() {
             return "";
         }
 
+        @Override
         public String getContentAsString(final String encoding) {
             return "";
         }
 
-        public InputStream getContentAsStream() throws IOException {
+        @Override
+        public InputStream getContentAsStream() {
             return null;
         }
 
+        @Override
         public byte[] getContentAsBytes() {
             return new byte[0];
         }
 
+        @Override
         public List<NameValuePair> getResponseHeaders() {
             return Collections.emptyList();
         }
 
+        @Override
         public String getResponseHeaderValue(final String headerName) {
             return "";
         }
 
+        @Override
         public long getLoadTime() {
             return 0;
         }
 
+        @Override
         public String getContentCharset() {
             return "";
         }
 
+        @Override
         public String getContentCharsetOrNull() {
             return "";
         }
 
+        @Override
         public WebRequest getRequestSettings() {
             return request_;
         }
 
+        @Override
         public WebRequest getWebRequest() {
             return request_;
         }
 
+        @Override
         public boolean isBigContent() {
             return false;
         }
 
+        @Override
         public URL getRequestUrl() {
             return getWebRequest().getUrl();
         }

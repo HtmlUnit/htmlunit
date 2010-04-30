@@ -1194,7 +1194,7 @@ public class WebClient implements Serializable {
         responseHeaders.add(new NameValuePair("content-type",
             decoder.getMediaType() + ";charset=" + decoder.getCharset()));
         final WebResponseData data = new WebResponseData(url.openStream(), 200, "OK", responseHeaders);
-        return new WebResponseImpl(data, url, webRequest.getHttpMethod(), 0);
+        return new WebResponse(data, url, webRequest.getHttpMethod(), 0);
     }
 
     private WebResponse makeWebResponseForAboutUrl(final URL url) {
@@ -1248,7 +1248,7 @@ public class WebClient implements Serializable {
      *
      * @author Paul King
      */
-    private static final class BinaryWebResponse extends WebResponseImpl {
+    private static final class BinaryWebResponse extends WebResponse {
 
         private static final long serialVersionUID = 8000117717229261957L;
 
