@@ -25,7 +25,9 @@ import java.net.URL;
  * @author Noboru Sinohara
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @deprecated as of 2.8, use {@link WebResponse} instead
  */
+@Deprecated
 public class WebResponseImpl extends WebResponse {
 
     private static final long serialVersionUID = -4419537702781437059L;
