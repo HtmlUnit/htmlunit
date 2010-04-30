@@ -36,14 +36,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
- * Tests for {@link WebResponseImpl}.
+ * Tests for {@link WebResponse}.
  *
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class WebResponseImplTest extends WebServerTestCase {
+public class WebResponseTest extends WebServerTestCase {
 
     /**
      * Verifies that when no encoding header is provided, encoding may be recognized with its Byte Order Mark.
