@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  * Provides a convenient implementation of the {@link WebResponse} interface that can be subclassed
  * by developers wishing to adapt a particular WebResponse.
  * This class implements the Wrapper or Decorator pattern. Methods default to calling through to the wrapped
- * web connection object.
+ * web response object.
  *
  * @version $Revision$
  * @author Marc Guillemot
@@ -40,7 +40,7 @@ public class WebResponseWrapper extends WebResponse {
     /**
      * Constructs a WebResponse object wrapping provided WebResponse.
      * @param webResponse the webResponse that does the real work
-     * @throws IllegalArgumentException if the connection is <code>null</code>
+     * @throws IllegalArgumentException if the webResponse is <code>null</code>
      */
     public WebResponseWrapper(final WebResponse webResponse) throws IllegalArgumentException {
         super(null, null, 0);
@@ -52,7 +52,7 @@ public class WebResponseWrapper extends WebResponse {
 
     /**
      * {@inheritDoc}
-     * The default behavior of this method is to return getContentAsStream() on the wrapped connection object.
+     * The default behavior of this method is to return getContentAsStream() on the wrapped webResponse object.
      */
     @Override
     public InputStream getContentAsStream() {
@@ -61,7 +61,7 @@ public class WebResponseWrapper extends WebResponse {
 
     /**
      * {@inheritDoc}
-     * The default behavior of this method is to return getContentAsString() on the wrapped connection object.
+     * The default behavior of this method is to return getContentAsString() on the wrapped webResponse object.
      */
     @Override
     public String getContentAsString() {
@@ -70,7 +70,7 @@ public class WebResponseWrapper extends WebResponse {
 
     /**
      * {@inheritDoc}
-     * The default behavior of this method is to return getContentAsString(String) on the wrapped connection object.
+     * The default behavior of this method is to return getContentAsString(String) on the wrapped webResponse object.
      */
     @Override
     public String getContentAsString(final String encoding) {
@@ -79,7 +79,7 @@ public class WebResponseWrapper extends WebResponse {
 
     /**
      * {@inheritDoc}
-     * The default behavior of this method is to return getContentAsBytes() on the wrapped connection object.
+     * The default behavior of this method is to return getContentAsBytes() on the wrapped webResponse object.
      */
     @Override
     public byte[] getContentAsBytes() {
@@ -88,7 +88,7 @@ public class WebResponseWrapper extends WebResponse {
 
     /**
      * {@inheritDoc}
-     * The default behavior of this method is to return getContentCharsetOrNull() on the wrapped connection object.
+     * The default behavior of this method is to return getContentCharsetOrNull() on the wrapped webResponse object.
      */
     @Override
     public String getContentCharsetOrNull() {
@@ -97,7 +97,7 @@ public class WebResponseWrapper extends WebResponse {
 
     /**
      * {@inheritDoc}
-     * The default behavior of this method is to return getContentCharset() on the wrapped connection object.
+     * The default behavior of this method is to return getContentCharset() on the wrapped webResponse object.
      */
     @Override
     public String getContentCharset() {
@@ -106,7 +106,7 @@ public class WebResponseWrapper extends WebResponse {
 
     /**
      * {@inheritDoc}
-     * The default behavior of this method is to return getContentType() on the wrapped connection object.
+     * The default behavior of this method is to return getContentType() on the wrapped webResponse object.
      */
     @Override
     public String getContentType() {
@@ -115,7 +115,7 @@ public class WebResponseWrapper extends WebResponse {
 
     /**
      * {@inheritDoc}
-     * The default behavior of this method is to return getLoadTime() on the wrapped connection object.
+     * The default behavior of this method is to return getLoadTime() on the wrapped webResponse object.
      */
     @Override
     public long getLoadTime() {
@@ -124,7 +124,7 @@ public class WebResponseWrapper extends WebResponse {
 
     /**
      * {@inheritDoc}
-     * The default behavior of this method is to return getResponseHeaders() on the wrapped connection object.
+     * The default behavior of this method is to return getResponseHeaders() on the wrapped webResponse object.
      */
     @Override
     public List<NameValuePair> getResponseHeaders() {
@@ -133,7 +133,7 @@ public class WebResponseWrapper extends WebResponse {
 
     /**
      * {@inheritDoc}
-     * The default behavior of this method is to return getResponseHeaderValue() on the wrapped connection object.
+     * The default behavior of this method is to return getResponseHeaderValue() on the wrapped webResponse object.
      */
     @Override
     public String getResponseHeaderValue(final String headerName) {
@@ -142,7 +142,7 @@ public class WebResponseWrapper extends WebResponse {
 
     /**
      * {@inheritDoc}
-     * The default behavior of this method is to return getStatusCode() on the wrapped connection object.
+     * The default behavior of this method is to return getStatusCode() on the wrapped webResponse object.
      */
     @Override
     public int getStatusCode() {
@@ -151,7 +151,7 @@ public class WebResponseWrapper extends WebResponse {
 
     /**
      * {@inheritDoc}
-     * The default behavior of this method is to return getStatusMessage() on the wrapped connection object.
+     * The default behavior of this method is to return getStatusMessage() on the wrapped webResponse object.
      */
     @Override
     public String getStatusMessage() {
@@ -160,7 +160,7 @@ public class WebResponseWrapper extends WebResponse {
 
     /**
      * {@inheritDoc}
-     * The default behavior of this method is to return getRequestSettings() on the wrapped connection object.
+     * The default behavior of this method is to return getRequestSettings() on the wrapped webResponse object.
      * @deprecated as of 2.8, please use {@link #getWebRequest()} instead
      */
     @Override
@@ -171,7 +171,7 @@ public class WebResponseWrapper extends WebResponse {
 
     /**
      * {@inheritDoc}
-     * The default behavior of this method is to return getWebRequest() on the wrapped connection object.
+     * The default behavior of this method is to return getWebRequest() on the wrapped webResponse object.
      */
     @Override
     public WebRequest getWebRequest() {
@@ -180,7 +180,7 @@ public class WebResponseWrapper extends WebResponse {
 
     /**
      * {@inheritDoc}
-     * The default behavior of this method is to return isBigContent() on the wrapped connection object.
+     * The default behavior of this method is to return isBigContent() on the wrapped webResponse object.
      */
     @Override
     public boolean isBigContent() {
