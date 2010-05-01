@@ -30,6 +30,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -48,6 +49,7 @@ public class MooTools121Test extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Tries(3)
     @SuppressWarnings("unchecked")
     public void mooTools() throws Exception {
         final String resource = "libraries/mootools/1.2.1/Specs/index.html";
