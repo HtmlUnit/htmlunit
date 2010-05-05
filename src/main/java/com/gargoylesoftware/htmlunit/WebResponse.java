@@ -222,7 +222,6 @@ public class WebResponse implements Serializable {
     /**
      * Returns the response content as an input stream.
      * @return the response content as an input stream
-     * @exception IOException if an IO problem occurs
      */
     public InputStream getContentAsStream() {
         if (responseData_.isBigContent()) {
