@@ -156,35 +156,4 @@ public class DomText extends DomCharacterData implements Text {
         return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getCanonicalXPath() {
-        return getParentNode().getCanonicalXPath() + '/' + getXPathToken();
-    }
-
-    /**
-     * Returns the XPath token for this node only.
-     * @return the XPath token for this node only
-     */
-    private String getXPathToken() {
-        final DomNode parent = getParentNode();
-        int total = 0;
-        int nodeIndex = 0;
-        for (final DomNode child : parent.getChildren()) {
-            if (child.getNodeType() == TEXT_NODE) {
-                total++;
-            }
-            if (child == this) {
-                nodeIndex = total;
-            }
-        }
-        final String nodeName = "text()";
-        if (nodeIndex == 1 && total == 1) {
-            return nodeName;
-        }
-        return nodeName + '[' + nodeIndex + ']';
-    }
-
 }

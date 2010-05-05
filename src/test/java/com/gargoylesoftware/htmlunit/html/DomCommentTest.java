@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Karel Kolman
  * @author Ahmed Ashour
+ * @author Philip Graf
  */
 public class DomCommentTest extends WebTestCase {
 
@@ -75,6 +76,43 @@ public class DomCommentTest extends WebTestCase {
         assertEquals("abc", comment.getTextContent());
         comment.setTextContent("xyz");
         assertEquals("xyz", comment.getTextContent());
+    }
+
+    /**
+     * Tests if {@code getCanonicalXPath()} returns the correct XPath for a
+     * comment node.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void getCanonicalXPath_withoutCommentSiblings() throws Exception {
+        final String html = "<html><body><span id='s'><!--abc--></span></body></html>";
+        final HtmlPage page = loadPage(html);
+        final DomComment comment = (DomComment) page.getElementById("s").getFirstChild();
+        assertEquals("/html/body/span/comment()", comment.getCanonicalXPath());
+        assertEquals(comment, page.getFirstByXPath(comment.getCanonicalXPath()));
+    }
+
+    /**
+     * Tests if {@code getCanonicalXPath()} returns the correct XPath for a
+     * comment node with other comment node siblings.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void getCanonicalXPath_withCommentSiblings() throws Exception {
+        final String html = "<html><body><span id='s'><!--abc--><br/><!--def--></span></body></html>";
+        final HtmlPage page = loadPage(html);
+
+        final DomComment comment1 = (DomComment) page.getElementById("s").getFirstChild();
+        assertEquals("abc", comment1.getData());
+        assertEquals("/html/body/span/comment()[1]", comment1.getCanonicalXPath());
+        assertEquals(comment1, page.getFirstByXPath(comment1.getCanonicalXPath()));
+
+        final DomComment comment2 = (DomComment) page.getElementById("s").getChildNodes().get(2);
+        assertEquals("def", comment2.getData());
+        assertEquals("/html/body/span/comment()[2]", comment2.getCanonicalXPath());
+        assertEquals(comment2, page.getFirstByXPath(comment2.getCanonicalXPath()));
     }
 
 }
