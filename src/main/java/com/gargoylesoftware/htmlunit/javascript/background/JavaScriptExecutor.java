@@ -34,7 +34,9 @@ import java.util.List;
  */
 public class JavaScriptExecutor implements Runnable, Serializable {
 
-    /*
+	private static final long serialVersionUID = 8525230714555970165L;
+
+	/*
      * Currently, go for a simple implementation
      */
     private final class JobExecutor {

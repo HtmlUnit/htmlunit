@@ -75,7 +75,8 @@ public class WebResponse implements Serializable {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the request used to load this response.
+     * @return the request used to load this response
      * @deprecated as of 2.8, please use {@link #getWebRequest()} instead
      */
     @Deprecated
@@ -84,21 +85,25 @@ public class WebResponse implements Serializable {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the request used to load this response.
+     * @return the request used to load this response
      */
     public WebRequest getWebRequest() {
         return request_;
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the response headers as a list of {@link NameValuePair}s.
+     * @return the response headers as a list of {@link NameValuePair}s
      */
     public List<NameValuePair> getResponseHeaders() {
         return responseData_.getResponseHeaders();
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the value of the specified response header.
+     * @param headerName the name of the header whose value is to be returned
+     * @return the header value, <code>null</code> if no response header exists with this name
      */
     public String getResponseHeaderValue(final String headerName) {
         for (final NameValuePair pair : responseData_.getResponseHeaders()) {
@@ -110,21 +115,24 @@ public class WebResponse implements Serializable {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the status code that was returned by the server.
+     * @return the status code that was returned by the server
      */
     public int getStatusCode() {
         return responseData_.getStatusCode();
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the status message that was returned from the server.
+     * @return the status message that was returned from the server
      */
     public String getStatusMessage() {
         return responseData_.getStatusMessage();
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the content type returned from the server, e.g. "text/html".
+     * @return the content type returned from the server, e.g. "text/html"
      */
     public String getContentType() {
         final String contentTypeHeader = getResponseHeaderValue("content-type");
@@ -140,7 +148,10 @@ public class WebResponse implements Serializable {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the content charset specified explicitly in the header or in the content,
+     * or <tt>null</tt> if none was specified.
+     * @return the content charset specified explicitly in the header or in the content,
+     *         or <tt>null</tt> if none was specified
      */
     public String getContentCharsetOrNull() {
         try {
@@ -153,7 +164,11 @@ public class WebResponse implements Serializable {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the content charset for this response, even if no charset was specified explicitly.
+     * This method always returns a valid charset. This method first checks the "Content-Type"
+     * header; if not found, it checks the response content; as a last resort, this method
+     * returns {@link TextUtil#DEFAULT_CHARSET}.
+     * @return the content charset for this response
      */
     public String getContentCharset() {
         String charset = getContentCharsetOrNull();
@@ -167,14 +182,19 @@ public class WebResponse implements Serializable {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the response content as a string, using the charset/encoding specified in the server response.
+     * @return the response content as a string, using the charset/encoding specified in the server response
      */
     public String getContentAsString() {
         return getContentAsString(getContentCharset());
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the response content as a string, using the specified charset/encoding,
+     * rather than the charset/encoding specified in the server response. If the specified
+     * charset/encoding is not supported then the default system encoding is used.
+     * @param encoding the charset/encoding to use to convert the response content into a string
+     * @return the response content as a string
      */
     public String getContentAsString(final String encoding) {
         final byte[] body = responseData_.getBody();
@@ -192,14 +212,17 @@ public class WebResponse implements Serializable {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns true for big content, in which case you must use {@link #getContentAsStream()}.
+     * @return true for big content
      */
     public boolean isBigContent() {
         return responseData_.isBigContent();
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the response content as an input stream.
+     * @return the response content as an input stream
+     * @exception IOException if an IO problem occurs
      */
     public InputStream getContentAsStream() {
         if (responseData_.isBigContent()) {
@@ -213,22 +236,27 @@ public class WebResponse implements Serializable {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the response content as a byte array.
+     * @return the response content as a byte array
      */
     public byte[] getContentAsBytes() {
         return responseData_.getBody();
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the time it took to load this web response, in milliseconds.
+     * @return the time it took to load this web response, in milliseconds
      */
     public long getLoadTime() {
         return loadTime_;
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the URL that was used to load this page.
+     * @return the URL that was used to load this page
+     * @deprecated as of 2.6, please use {@link #getWebRequest()}.getUrl()
      */
+    @Deprecated
     public URL getRequestUrl() {
         return getWebRequest().getUrl();
     }

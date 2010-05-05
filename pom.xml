@@ -266,6 +266,65 @@
             </build>
         </profile>
     </profiles>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <excludePackageNames>com.gargoylesoftware.htmlunit.javascript:com.gargoylesoftware.htmlunit.protocol:com.gargoylesoftware.htmlunit.ssl:com.gargoylesoftware.htmlunit.html.xpath:com.gargoylesoftware.htmlunit.html.applets:com.gargoylesoftware.htmlunit.html.impl</excludePackageNames>
+                    <links>
+                        <link>http://java.sun.com/j2se/1.5.0/docs/api/</link>
+                        <link>http://commons.apache.org/logging/apidocs/</link>
+                        <link>http://commons.apache.org/codec/apidocs/</link>
+                        <link>http://hc.apache.org/httpclient-3.x/apidocs/</link>
+                    </links>
+                    <stylesheet>maven</stylesheet>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <configuration>
+                    <targetJdk>1.5</targetJdk>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-changes-plugin</artifactId>
+                <version>2.3</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>changes-report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+                <configuration>
+                    <issueLinkTemplate>
+                        http://sourceforge.net/support/tracker.php?aid=%ISSUE%
+                    </issueLinkTemplate>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jdepend-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <showSuccess>false</showSuccess>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
     <issueManagement>
         <system>sourceforge</system>
         <url>http://sourceforge.net/tracker/?group_id=47038</url>
