@@ -19,7 +19,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
-
 /**
  * Contains some missing features of Rhino NativeString.
  *
