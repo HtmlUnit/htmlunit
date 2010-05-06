@@ -94,8 +94,14 @@ public class BrowserVersion implements Serializable {
     /** Firefox 3. */
     public static final BrowserVersion FIREFOX_3 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows; en-US)",
-        "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.1) Gecko/2008070208 Firefox/3.0.1",
+        "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.19) Gecko/2010031422 Firefox/3.0.19",
         3, "FF3", null);
+
+    /** Firefox 3.6. */
+    public static final BrowserVersion FIREFOX_3_6 = new BrowserVersion(
+        NETSCAPE, "5.0 (Windows; en-US)",
+        "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3",
+        (float) 3.6, "FF3.6", null);
 
     /** Internet Explorer 6. */
     public static final BrowserVersion INTERNET_EXPLORER_6 = new BrowserVersion(
@@ -122,12 +128,14 @@ public class BrowserVersion implements Serializable {
         INTERNET_EXPLORER_8.initDefaultFeatures();
         FIREFOX_2.initDefaultFeatures();
         FIREFOX_3.initDefaultFeatures();
+        FIREFOX_3_6.initDefaultFeatures();
         final PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
             "Shockwave Flash 9.0 r31", "libflashplayer.so");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
             "Shockwave Flash", "swf"));
         FIREFOX_2.getPlugins().add(flash);
         FIREFOX_3.getPlugins().add(flash);
+        FIREFOX_3_6.getPlugins().add(flash);
     }
 
     /**

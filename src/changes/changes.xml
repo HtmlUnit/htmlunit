@@ -5,7 +5,10 @@
     </properties>
 
     <body>
-        <release version="2.8" date="?" description="Bugfixes, large file download, single thread for JavaScript background tasks">
+        <release version="2.8" date="?" description="Bugfixes, large file download, single thread for JavaScript background tasks, initial FF 3.6">
+            <action type="add" dev="asashour">
+                Initial support for FF 3.6.
+            </action>
             <action type="update" dev="mguillem" issue="2996583" due-to="Philip Graf">
                 Implement DomComment.getCanonicalXPath().
             </action>
