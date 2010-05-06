@@ -49,14 +49,14 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
     private final BrowserVersion browserVersion_;
-    private final boolean useWebDriver_;
+    private final boolean realBrowser_;
     static final boolean maven_ = System.getProperty("htmlunit.maven") != null;
 
     public BrowserVersionClassRunner(final Class<WebTestCase> klass,
-        final BrowserVersion browserVersion, final boolean useWebDriver) throws InitializationError {
+        final BrowserVersion browserVersion, final boolean realBrowser) throws InitializationError {
         super(klass);
         browserVersion_ = browserVersion;
-        useWebDriver_ = useWebDriver;
+        realBrowser_ = realBrowser;
     }
 
     private void setAlerts(final WebTestCase testCase, final Method method) {
@@ -117,7 +117,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         final WebTestCase object = (WebTestCase) test;
         object.setBrowserVersion(browserVersion_);
         if (test instanceof WebDriverTestCase) {
-            ((WebDriverTestCase) test).setUseWebDriver(useWebDriver_);
+            ((WebDriverTestCase) test).setUseRealBrowser(realBrowser_);
         }
         return object;
     }
@@ -150,7 +150,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
     @Override
     protected String getName() {
         String browserString = browserVersion_.getNickname();
-        if (useWebDriver_) {
+        if (realBrowser_) {
             browserString = "Real " + browserString;
         }
         return String.format("[%s]", browserString);
@@ -161,7 +161,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         String className = method.getMethod().getDeclaringClass().getName();
         className = className.substring(className.lastIndexOf('.') + 1);
         String prefix = "";
-        if (isNotYetImplemented(method) && !useWebDriver_) {
+        if (isNotYetImplemented(method) && !realBrowser_) {
             prefix = "(NYI) ";
         }
         else if (isExpectedToFail(method)) {
@@ -169,7 +169,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         }
 
         String browserString = browserVersion_.getNickname();
-        if (useWebDriver_) {
+        if (realBrowser_) {
             browserString = "Real " + browserString;
         }
         if (!maven_) {
@@ -299,14 +299,16 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
         final boolean shouldFail = isExpectedToFail(method);
         final boolean notYetImplemented;
+        final int tries;
 
-        if (testCase instanceof WebDriverTestCase && useWebDriver_) {
+        if (testCase instanceof WebDriverTestCase && realBrowser_) {
             notYetImplemented = false;
+            tries = 1;
         }
         else {
             notYetImplemented = isNotYetImplemented(method);
+            tries = getTries(method);
         }
-        final int tries = getTries(method);
         setAlerts(testCase, method.getMethod());
         statement = new BrowserStatement(statement, method.getMethod(), shouldFail,
                 notYetImplemented, tries, browserVersion_.getNickname());

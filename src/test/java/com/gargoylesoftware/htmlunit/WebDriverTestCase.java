@@ -95,7 +95,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static Server STATIC_SERVER_;
 
     private static String JSON_;
-    private boolean useWebDriverWithRealBrowser_;
+    private boolean useRealBrowser_;
 
     static String getBrowsersProperty() {
         if (BROWSERS_PROPERTY_ == null) {
@@ -152,12 +152,12 @@ public abstract class WebDriverTestCase extends WebTestCase {
         STATIC_SERVER_ = null;
     }
 
-    void setUseWebDriver(final boolean useWebDriver) {
-        useWebDriverWithRealBrowser_ = useWebDriver;
+    void setUseRealBrowser(final boolean useWebDriver) {
+        useRealBrowser_ = useWebDriver;
     }
 
     private WebDriver buildWebDriver() {
-        if (useWebDriverWithRealBrowser_) {
+        if (useRealBrowser_) {
             if (getBrowserVersion().isIE()) {
                 return new InternetExplorerDriver();
             }
@@ -517,7 +517,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     public void releaseResources() {
         super.releaseResources();
 
-        if (useWebDriverWithRealBrowser_) {
+        if (useRealBrowser_) {
             final WebDriver driver = getWebDriver();
             final String currentWindow = driver.getWindowHandle();
 
@@ -533,7 +533,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
             // in the remaining window, load a blank page
             driver.get("about:blank");
-
         }
     }
 }
