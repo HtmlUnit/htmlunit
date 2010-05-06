@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class NativeStringTest extends WebDriverTestCase {
@@ -83,4 +84,27 @@ public class NativeStringTest extends WebDriverTestCase {
         final String html = NativeDateTest.createHTMLTestMethods("'hello'", methods);
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void trim() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "    var string = ' hi  ';\n"
+            + "    if (''.trim) {\n"
+            + "      alert(string.trim().length);\n"
+            + "      alert(string.trimRight().length);\n"
+            + "      alert(string.trimLeft().length);\n"
+            + "    }\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
 }

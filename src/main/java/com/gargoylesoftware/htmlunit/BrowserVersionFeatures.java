@@ -51,6 +51,9 @@ public enum BrowserVersionFeatures {
     /** Indicates that a read only JS property can be... set as done by IE and FF2 but not FF3. */
     SET_READONLY_PROPERTIES,
 
+    /** Indicates that string.trim(), .trimLeft() and .trimRight() are supported. */
+    STRING_TRIM,
+
     /**
      * Indicates that the href property for a &lt;link rel="stylesheet" type="text/css" href="..." /&gt;
      * is the fully qualified URL.

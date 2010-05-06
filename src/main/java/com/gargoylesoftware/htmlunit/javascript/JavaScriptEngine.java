@@ -35,6 +35,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -47,6 +49,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
+import com.gargoylesoftware.htmlunit.javascript.host.StringCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
@@ -153,16 +156,17 @@ public class JavaScriptEngine {
      */
     private void init(final WebWindow webWindow, final Context context) throws Exception {
         final WebClient webClient = webWindow.getWebClient();
+        final BrowserVersion browserVersion = webClient.getBrowserVersion();
         final Map<Class< ? extends SimpleScriptable>, Scriptable> prototypes =
             new HashMap<Class< ? extends SimpleScriptable>, Scriptable>();
         final Map<String, Scriptable> prototypesPerJSName = new HashMap<String, Scriptable>();
         final Window window = new Window();
-        final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(webClient.getBrowserVersion());
+        final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(browserVersion);
         context.initStandardObjects(window);
 
         // remove some objects, that Rhino defines in top scope but that we don't want
         deleteProperties(window, "javax", "org", "com", "edu", "net", "JavaAdapter", "JavaImporter", "Continuation");
-        if (webClient.getBrowserVersion().isIE()) {
+        if (browserVersion.isIE()) {
             deleteProperties(window, "Packages", "java", "getClass", "XML", "XMLList", "Namespace", "QName");
         }
 
@@ -180,7 +184,7 @@ public class JavaScriptEngine {
                 final ScriptableObject prototype = configureClass(config, window);
                 if (config.isJsObject()) {
                     // for FF, place object with prototype property in Window scope
-                    if (!getWebClient().getBrowserVersion().isIE()) {
+                    if (!browserVersion.isIE()) {
                         final SimpleScriptable obj = config.getHostClass().newInstance();
                         prototype.defineProperty("__proto__", prototype, ScriptableObject.DONTENUM);
                         obj.defineProperty("prototype", prototype, ScriptableObject.DONTENUM); // but not setPrototype!
@@ -237,12 +241,21 @@ public class JavaScriptEngine {
         }
 
         // Rhino defines too much methods for us, particularly since implementation of ECMAScript5
-        removePrototypeProperties(window, "String", "equals", "equalsIgnoreCase", "trim");
+        removePrototypeProperties(window, "String", "equals", "equalsIgnoreCase");
+        if (browserVersion.hasFeature(BrowserVersionFeatures.STRING_TRIM)) {
+            final ScriptableObject stringPrototype =
+                (ScriptableObject) ScriptableObject.getClassPrototype(window, "String");
+            stringPrototype.defineFunctionProperties(new String[] {"trimLeft", "trimRight"},
+                StringCustom.class, ScriptableObject.EMPTY);
+        }
+        else {
+            removePrototypeProperties(window, "String", "trim");
+        }
         removePrototypeProperties(window, "Function", "bind");
         removePrototypeProperties(window, "Date", "toISOString", "toJSON");
 
         // in IE, not all standard methods exists
-        if (webClient.getBrowserVersion().isIE()) {
+        if (browserVersion.isIE()) {
             deleteProperties(window, "isXMLName", "uneval");
             removePrototypeProperties(window, "Object", "__defineGetter__", "__defineSetter__", "__lookupGetter__",
                     "__lookupSetter__", "toSource");
@@ -253,7 +266,7 @@ public class JavaScriptEngine {
             removePrototypeProperties(window, "Number", "toSource");
             removePrototypeProperties(window, "String", "toSource");
         }
-        else if ("FF2".equals(webClient.getBrowserVersion().getNickname())) {
+        else if ("FF2".equals(browserVersion.getNickname())) {
             removePrototypeProperties(window, "Array", "reduce", "reduceRight");
         }
 
