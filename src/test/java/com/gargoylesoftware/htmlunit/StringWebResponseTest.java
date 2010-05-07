@@ -24,9 +24,9 @@ import org.junit.Test;
  */
 public class StringWebResponseTest extends WebTestCase {
 
-	/**
-	 * Regression test for bug 2998004.
-	 */
+    /**
+     * Regression test for bug 2998004.
+     */
     @Test
     public void charset() {
         final StringWebResponse webResponse = new StringWebResponse("hello", "UTF-8", getDefaultUrl());

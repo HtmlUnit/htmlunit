@@ -45,7 +45,7 @@ public class StringWebResponse extends WebResponse {
     private static WebResponseData getWebResponseData(final String contentString, final String charset) {
         final byte[] content = TextUtil.stringToByteArray(contentString, charset);
         final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>();
-        compiledHeaders.add(new NameValuePair("Content-Type", "text/html;charset=" + charset));
+        compiledHeaders.add(new NameValuePair("Content-Type", "text/html"));
         return new WebResponseData(content, HttpStatus.SC_OK, "OK", compiledHeaders);
     }
 
@@ -65,6 +65,12 @@ public class StringWebResponse extends WebResponse {
      * @param originatingURL the URL that this should be associated with
      */
     public StringWebResponse(final String content, final String charset, final URL originatingURL) {
-        super(getWebResponseData(content, charset), new WebRequest(originatingURL, HttpMethod.GET), 0);
+        super(getWebResponseData(content, charset), buildWebRequest(originatingURL, charset), 0);
+    }
+
+    private static WebRequest buildWebRequest(final URL originatingURL, final String charset) {
+        final WebRequest webRequest = new WebRequest(originatingURL, HttpMethod.GET);
+        webRequest.setCharset(charset);
+        return webRequest;
     }
 }
