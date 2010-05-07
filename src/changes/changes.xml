@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes, large file download, single thread for JavaScript background tasks, initial FF 3.6">
+            <action type="fix" dev="mguillem" issue="2998004">
+                StringWebResponse: take care of provided charset for parsing.
+            </action>
             <action type="add" dev="asashour" issue="2973509">
                 JavaScript: support string.trim(), .trimLeft() and .trimRight() (FF 3.6 only).
             </action>

@@ -45,7 +45,7 @@ public class StringWebResponse extends WebResponse {
     private static WebResponseData getWebResponseData(final String contentString, final String charset) {
         final byte[] content = TextUtil.stringToByteArray(contentString, charset);
         final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>();
-        compiledHeaders.add(new NameValuePair("Content-Type", "text/html"));
+        compiledHeaders.add(new NameValuePair("Content-Type", "text/html;charset=" + charset));
         return new WebResponseData(content, HttpStatus.SC_OK, "OK", compiledHeaders);
     }
 
