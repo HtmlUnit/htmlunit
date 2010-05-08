@@ -242,6 +242,7 @@ public class SimpleWebDriverTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(IE = "onload for window,onclick for div1,", FF = "onload for window,")
     public void scriptEventFor() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -266,17 +267,10 @@ public class SimpleWebDriverTest extends WebDriverTestCase {
             + "  </script>\n"
             + "</body></html>";
 
-        final WebDriver webDriver = loadPageWithAlerts2(html);
+        final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.id("div1")).click();
         webDriver.findElement(By.id("div2")).click();
-        final String expected;
-        if (getBrowserVersion().isIE()) {
-            expected = "onload for window,onclick for div1,";
-        }
-        else {
-            expected = "onload for window,";
-        }
-        assertEquals(expected, webDriver.findElement(By.id("myTextarea")).getValue());
+        assertEquals(getExpectedAlerts()[0], webDriver.findElement(By.id("myTextarea")).getValue());
     }
 
     /**

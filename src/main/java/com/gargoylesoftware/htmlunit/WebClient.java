@@ -830,7 +830,7 @@ public class WebClient implements Serializable {
         if (enclosedPage instanceof HtmlPage) {
             final Window jsWindow = (Window) currentWindow_.getScriptObject();
             if (jsWindow != null) {
-                if (getBrowserVersion().isIE()) {
+                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.WINDOW_ACTIVE_ELEMENT_FOCUSED)) {
                     final HTMLElement activeElement = (HTMLElement) jsWindow.getDocument().jsxGet_activeElement();
                     if (activeElement != null) {
                         ((HtmlPage) enclosedPage).setFocusedElement(activeElement.getDomNodeOrDie(), true);
@@ -911,7 +911,8 @@ public class WebClient implements Serializable {
         if (url != null) {
             try {
                 final WebRequest request = new WebRequest(url);
-                if (!getBrowserVersion().isIE() && openerPage != null) {
+                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.DIALOGWINDOW_REFERER)
+                        && openerPage != null) {
                     final String referer = openerPage.getWebResponse().getWebRequest().getUrl().toExternalForm();
                     request.setAdditionalHeader("Referer", referer);
                 }
@@ -1016,7 +1017,7 @@ public class WebClient implements Serializable {
 
         final HtmlPage openerPage = (HtmlPage) opener.getEnclosedPage();
         final WebRequest request = new WebRequest(url);
-        if (!getBrowserVersion().isIE()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.DIALOGWINDOW_REFERER)) {
             final String referer = openerPage.getWebResponse().getWebRequest().getUrl().toExternalForm();
             request.setAdditionalHeader("Referer", referer);
         }

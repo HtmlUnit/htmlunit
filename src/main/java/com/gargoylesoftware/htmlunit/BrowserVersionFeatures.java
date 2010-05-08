@@ -33,6 +33,9 @@ public enum BrowserVersionFeatures {
     /** Indicates that document.createEvent() initializes the target property. This is what FF2 does but not FF3. */
     CREATEEVENT_INITALIZES_TARGET,
 
+    /** */
+    DIALOGWINDOW_REFERER,
+
     /** Indicates that document.execCommand() should throw an exception when called with an illegal command. */
     EXECCOMMAND_THROWS_ON_WRONG_COMMAND,
 
@@ -79,5 +82,8 @@ public enum BrowserVersionFeatures {
     XMLHTTPREQUEST_HANDLER_THIS_IS_FUNCTION,
 
     /** */
-    URL_MINIMAL_QUERY_ENCODING;
+    URL_MINIMAL_QUERY_ENCODING,
+
+    /** */
+    WINDOW_ACTIVE_ELEMENT_FOCUSED;
 }
