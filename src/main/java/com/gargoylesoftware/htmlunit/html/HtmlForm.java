@@ -29,6 +29,7 @@ import org.apache.commons.httpclient.util.EncodingUtil;
 import org.apache.commons.lang.StringUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.HttpMethod;
@@ -177,7 +178,8 @@ public class HtmlForm extends HtmlElement {
             actionUrl = StringUtils.substringBefore(actionUrl, "#");
             actionUrl = StringUtils.substringBefore(actionUrl, "?");
             final BrowserVersion browser = getPage().getWebClient().getBrowserVersion();
-            if (!(browser.isIE() && browser.getBrowserVersionNumeric() >= 7) || queryFromFields.length() > 0) {
+            if (browser.hasFeature(BrowserVersionFeatures.FORM_SUBMISSION_URL_END_WITH_QUESTIONMARK)
+                    || queryFromFields.length() > 0) {
                 actionUrl += "?" + queryFromFields;
             }
             if (anchor.length() > 0) {

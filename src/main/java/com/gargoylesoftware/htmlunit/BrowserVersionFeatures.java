@@ -55,6 +55,12 @@ public enum BrowserVersionFeatures {
     EXECCOMMAND_THROWS_ON_WRONG_COMMAND,
 
     /** */
+    FILEINPUT_EMPTY_DEFAULT_VALUE,
+
+    /** */
+    FORM_SUBMISSION_URL_END_WITH_QUESTIONMARK,
+
+    /** */
     HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH,
 
     /** */

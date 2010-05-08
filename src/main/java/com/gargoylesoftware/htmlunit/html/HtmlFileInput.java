@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -54,7 +55,7 @@ public class HtmlFileInput extends HtmlInput {
         final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
         setAttribute("value", "");
-        if (page.getWebClient().getBrowserVersion().isIE()) {
+        if (page.getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.FILEINPUT_EMPTY_DEFAULT_VALUE)) {
             setDefaultValue("");
         }
     }
