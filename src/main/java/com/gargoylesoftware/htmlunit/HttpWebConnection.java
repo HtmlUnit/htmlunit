@@ -516,7 +516,8 @@ public class HttpWebConnection implements WebConnection {
             if (pairWithFile_.getFile() == null) {
                 return pairWithFile_.getValue();
             }
-            else if (webClient_.getBrowserVersion().isIE()) {
+            else if (webClient_.getBrowserVersion().hasFeature(
+                    BrowserVersionFeatures.HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH)) {
                 return pairWithFile_.getFile().getAbsolutePath();
             }
             else {

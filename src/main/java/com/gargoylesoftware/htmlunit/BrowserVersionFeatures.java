@@ -37,6 +37,9 @@ public enum BrowserVersionFeatures {
     EXECCOMMAND_THROWS_ON_WRONG_COMMAND,
 
     /** */
+    HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH,
+
+    /** */
     HTMLOPTION_PREVENT_DISABLED,
 
     /** Indicates that the browser should ignore contents of inner head elements. */
@@ -73,6 +76,8 @@ public enum BrowserVersionFeatures {
     TREATS_POSITION_FIXED_LIKE_POSITION_STATIC,
 
     /** Indicates that 'this' corresponds to the handler function when a XMLHttpRequest handler is executed. */
-    XMLHTTPREQUEST_HANDLER_THIS_IS_FUNCTION;
+    XMLHTTPREQUEST_HANDLER_THIS_IS_FUNCTION,
 
+    /** */
+    URL_MINIMAL_QUERY_ENCODING;
 }
