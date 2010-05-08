@@ -24,6 +24,9 @@ package com.gargoylesoftware.htmlunit;
  */
 public enum BrowserVersionFeatures {
 
+    /** If the "type" attribute of HtmlButton should be evaluated to 'button' if not specified. */
+    BUTTON_EMPTY_TYPE_BUTTON,
+
     /** Indicates that a blur event should be triggered before an onchange event. */
     BLUR_BEFORE_ONCHANGE,
 
@@ -38,6 +41,15 @@ public enum BrowserVersionFeatures {
 
     /** Indicates that "\n" are replaced by "\r\n" in textarea values. */
     DISPLAYED_COLLAPSE,
+
+    /** IE removes all child text nodes, but FF preserves the first. */
+    DOM_NORMALIZE_REMOVE_CHILDREN,
+
+    /** Triggers "input" event. */
+    EVENT_INPUT,
+
+    /** Triggers "propertychange" event. */
+    EVENT_PROPERTY_CHANGE,
 
     /** Indicates that document.execCommand() should throw an exception when called with an illegal command. */
     EXECCOMMAND_THROWS_ON_WRONG_COMMAND,

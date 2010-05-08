@@ -42,6 +42,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
@@ -164,7 +165,7 @@ public abstract class HtmlElement extends DomElement {
             fireHtmlAttributeReplaced(htmlEvent);
             ((HtmlPage) getPage()).fireHtmlAttributeReplaced(htmlEvent);
         }
-        if (getPage().getWebClient().getBrowserVersion().isIE()) {
+        if (getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.EVENT_PROPERTY_CHANGE)) {
             fireEvent(Event.createPropertyChangeEvent(this, qualifiedName));
         }
     }
@@ -476,8 +477,7 @@ public abstract class HtmlElement extends DomElement {
             doType(c, shiftKey, ctrlKey, altKey);
         }
 
-        final boolean ie = page.getWebClient().getBrowserVersion().isIE();
-        if (!ie
+        if (page.getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.EVENT_INPUT)
             && (this instanceof HtmlTextInput
             || this instanceof HtmlTextArea
             || this instanceof HtmlPasswordInput)) {
@@ -490,7 +490,8 @@ public abstract class HtmlElement extends DomElement {
 
         final HtmlForm form = getEnclosingForm();
         if (form != null && c == '\n' && isSubmittableByEnter()) {
-            if (!ie) {
+            if (!getPage().getWebClient().getBrowserVersion()
+                    .hasFeature(BrowserVersionFeatures.BUTTON_EMPTY_TYPE_BUTTON)) {
                 final HtmlSubmitInput submit = form.getFirstByXPath(".//input[@type='submit']");
                 if (submit != null) {
                     return submit.click();
@@ -1124,7 +1125,7 @@ public abstract class HtmlElement extends DomElement {
         final HtmlPage page = (HtmlPage) getPage();
         page.setFocusedElement(this);
         final WebClient webClient = page.getWebClient();
-        if (webClient.getBrowserVersion().isIE()) {
+        if (webClient.getBrowserVersion().hasFeature(BrowserVersionFeatures.WINDOW_ACTIVE_ELEMENT_FOCUSED)) {
             final HTMLElement jsElt = (HTMLElement) getScriptObject();
             jsElt.jsxFunction_setActive();
         }

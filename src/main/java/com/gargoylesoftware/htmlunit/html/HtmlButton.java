@@ -20,7 +20,7 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -194,8 +194,8 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     public final String getTypeAttribute() {
         String type = getAttribute("type");
         if (type == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
-            final BrowserVersion browser = getPage().getWebClient().getBrowserVersion();
-            if (browser.isIE()) {
+            if (getPage().getWebClient().getBrowserVersion()
+                    .hasFeature(BrowserVersionFeatures.BUTTON_EMPTY_TYPE_BUTTON)) {
                 type = "button";
             }
             else {
