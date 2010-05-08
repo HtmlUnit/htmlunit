@@ -24,11 +24,11 @@ package com.gargoylesoftware.htmlunit;
  */
 public enum BrowserVersionFeatures {
 
-    /** If the "type" attribute of HtmlButton should be evaluated to 'button' if not specified. */
-    BUTTON_EMPTY_TYPE_BUTTON,
-
     /** Indicates that a blur event should be triggered before an onchange event. */
     BLUR_BEFORE_ONCHANGE,
+
+    /** If the "type" attribute of HtmlButton should be evaluated to 'button' if not specified. */
+    BUTTON_EMPTY_TYPE_BUTTON,
 
     /** Indicates that the browser can inherit CSS property values. */
     CAN_INHERIT_CSS_PROPERTY_VALUES,
@@ -64,10 +64,19 @@ public enum BrowserVersionFeatures {
     HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH,
 
     /** */
+    HTMLOPTIONGROUP_NO_DISABLED,
+
+    /** */
+    HTMLOPTION_EMPTY_TEXT_IS_NO_CHILDREN,
+
+    /** */
     HTMLOPTION_PREVENT_DISABLED,
 
     /** Indicates that the browser should ignore contents of inner head elements. */
     IGNORE_CONTENTS_OF_INNER_HEAD,
+
+    /** */
+    JS_DEFERRED,
 
     /** Indicates that the URL of parent window is used to resolve URLs in frames with javascript src. */
     JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW,

@@ -1278,16 +1278,15 @@ public class HtmlPage extends SgmlPage {
         if (!getWebClient().isJavaScriptEnabled()) {
             return;
         }
-        if (!getWebClient().getBrowserVersion().isIE()) {
-            return;
-        }
-        final HtmlElement doc = getDocumentElement();
-        final List<HtmlElement> elements = doc.getHtmlElementsByTagName("script");
-        for (final HtmlElement e : elements) {
-            if (e instanceof HtmlScript) {
-                final HtmlScript script = (HtmlScript) e;
-                if (script.isDeferred()) {
-                    script.executeScriptIfNeeded(true);
+        if (getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_DEFERRED)) {
+            final HtmlElement doc = getDocumentElement();
+            final List<HtmlElement> elements = doc.getHtmlElementsByTagName("script");
+            for (final HtmlElement e : elements) {
+                if (e instanceof HtmlScript) {
+                    final HtmlScript script = (HtmlScript) e;
+                    if (script.isDeferred()) {
+                        script.executeScriptIfNeeded(true);
+                    }
                 }
             }
         }
@@ -1297,7 +1296,8 @@ public class HtmlPage extends SgmlPage {
      * Sets the ready state on any deferred scripts, if necessary.
      */
     private void setReadyStateOnDeferredScriptsIfNeeded() {
-        if (getWebClient().isJavaScriptEnabled() && getWebClient().getBrowserVersion().isIE()) {
+        if (getWebClient().isJavaScriptEnabled() && getWebClient().getBrowserVersion()
+                .hasFeature(BrowserVersionFeatures.JS_DEFERRED)) {
             final List<HtmlElement> elements = getDocumentElement().getHtmlElementsByTagName("script");
             for (final HtmlElement e : elements) {
                 if (e instanceof HtmlScript) {
