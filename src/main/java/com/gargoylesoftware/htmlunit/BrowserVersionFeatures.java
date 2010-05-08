@@ -36,6 +36,9 @@ public enum BrowserVersionFeatures {
     /** */
     DIALOGWINDOW_REFERER,
 
+    /** Indicates that "\n" are replaced by "\r\n" in textarea values. */
+    DISPLAYED_COLLAPSE,
+
     /** Indicates that document.execCommand() should throw an exception when called with an illegal command. */
     EXECCOMMAND_THROWS_ON_WRONG_COMMAND,
 
@@ -78,12 +81,13 @@ public enum BrowserVersionFeatures {
     /** Indicates that the browser treats "position: fixed" as if it were "position: static". */
     TREATS_POSITION_FIXED_LIKE_POSITION_STATIC,
 
-    /** Indicates that 'this' corresponds to the handler function when a XMLHttpRequest handler is executed. */
-    XMLHTTPREQUEST_HANDLER_THIS_IS_FUNCTION,
-
     /** */
     URL_MINIMAL_QUERY_ENCODING,
 
     /** */
-    WINDOW_ACTIVE_ELEMENT_FOCUSED;
+    WINDOW_ACTIVE_ELEMENT_FOCUSED,
+
+    /** Indicates that 'this' corresponds to the handler function when a XMLHttpRequest handler is executed. */
+    XMLHTTPREQUEST_HANDLER_THIS_IS_FUNCTION;
+
 }

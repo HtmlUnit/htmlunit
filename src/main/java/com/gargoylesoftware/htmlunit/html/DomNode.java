@@ -31,6 +31,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.UserDataHandler;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.IncorrectnessListener;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -673,7 +674,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             }
             // visibility: iterate bottom to top, because children can override
             // the visibility used by parent nodes
-            final boolean isNotIE = !((HtmlPage) page).getWebClient().getBrowserVersion().isIE();
+            final boolean collapseInvisible = ((HtmlPage) page).getWebClient().getBrowserVersion()
+                .hasFeature(BrowserVersionFeatures.DISPLAYED_COLLAPSE);
             DomNode node = this;
             do {
                 final ScriptableObject scriptableObject = node.getScriptObject();
@@ -684,7 +686,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                         if (visibility.equals("visible")) {
                             return true;
                         }
-                        else if (visibility.equals("hidden") || (isNotIE && visibility.equals("collapse"))) {
+                        else if (visibility.equals("hidden") || (collapseInvisible && visibility.equals("collapse"))) {
                             return false;
                         }
                     }
