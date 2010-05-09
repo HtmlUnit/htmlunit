@@ -267,7 +267,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      */
     public void setText(final String text) {
         if ((text == null || text.length() == 0)
-                &&getPage().getWebClient().getBrowserVersion()
+                && getPage().getWebClient().getBrowserVersion()
                 .hasFeature(BrowserVersionFeatures.HTMLOPTION_EMPTY_TEXT_IS_NO_CHILDREN)) {
             removeAllChildren();
         }

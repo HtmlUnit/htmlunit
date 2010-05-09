@@ -45,6 +45,9 @@ public enum BrowserVersionFeatures {
     /** IE removes all child text nodes, but FF preserves the first. */
     DOM_NORMALIZE_REMOVE_CHILDREN,
 
+    /** Triggers "DOMContentLoaded" event. */
+    EVENT_DOM_CONTENT_LOADED,
+
     /** Triggers "input" event. */
     EVENT_INPUT,
 

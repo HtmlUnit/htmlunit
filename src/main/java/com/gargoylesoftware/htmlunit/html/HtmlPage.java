@@ -205,7 +205,7 @@ public class HtmlPage extends SgmlPage {
         loadFrames();
         setReadyState(READY_STATE_COMPLETE);
         getDocumentElement().setReadyState(READY_STATE_COMPLETE);
-        if (!getWebClient().getBrowserVersion().isIE()) {
+        if (getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.EVENT_DOM_CONTENT_LOADED)) {
             executeEventHandlersIfNeeded(Event.TYPE_DOM_DOCUMENT_LOADED);
         }
         executeDeferredScriptsIfNeeded();
