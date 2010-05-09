@@ -71,11 +71,6 @@
 	                    makes more work for the committer.  Please also submit it as one single diff, 
 	                    not zipped up - again because it's easier for the committers.
                     </li>
-                    <li>
-                        For all newly added .java files, please make sure they have two SVN properties:
-                        <tt>svn:keywords</tt> with a value of "<tt>Author Date Id Revision</tt>"
-                        (without the double quotes), and <tt>svn:eol-style</tt> with a value of "<tt>native</tt>".
-                    </li>
                 </ul>
             </p>
             <p>
