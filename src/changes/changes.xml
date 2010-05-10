@@ -7,7 +7,7 @@
     <body>
         <release version="2.8" date="?" description="Bugfixes, large file download, single thread for JavaScript background tasks, initial FF 3.6">
             <action type="update" dev="asashour">
-                Deprecate BrowserVersion static constants. 
+                Deprecate BrowserVersion static constants.
             </action>
             <action type="fix" dev="mguillem" issue="2998004">
                 StringWebResponse: take care of provided charset for parsing.

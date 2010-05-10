@@ -1832,8 +1832,8 @@ public class HtmlPage extends SgmlPage {
 
         elementWithFocus_ = newElement;
 
-        final boolean ie = getWebClient().getBrowserVersion().isIE();
-        if (ie && elementWithFocus_ instanceof SelectableTextInput) {
+        if (elementWithFocus_ instanceof SelectableTextInput && getWebClient().getBrowserVersion()
+                .hasFeature(BrowserVersionFeatures.PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT)) {
             final SelectableTextInput sti = (SelectableTextInput) elementWithFocus_;
             setSelectionRange(new SimpleRange(sti, sti.getSelectionStart(), sti, sti.getSelectionEnd()));
         }
@@ -2267,7 +2267,8 @@ public class HtmlPage extends SgmlPage {
                 else if (systemId.equals("http://www.w3.org/TR/html4/loose.dtd")) {
                     if (publicId.equals("-//W3C//DTD HTML 4.01 Transitional//EN")
                         || (publicId.equals("-//W3C//DTD HTML 4.0 Transitional//EN")
-                                && getWebClient().getBrowserVersion().isIE())) {
+                                && getWebClient().getBrowserVersion()
+                                    .hasFeature(BrowserVersionFeatures.DOCTYPE_4_0_TRANSITIONAL_STANDARDS))) {
                         quirks = false;
                     }
                 }

@@ -42,6 +42,9 @@ public enum BrowserVersionFeatures {
     /** Indicates that "\n" are replaced by "\r\n" in textarea values. */
     DISPLAYED_COLLAPSE,
 
+    /** */
+    DOCTYPE_4_0_TRANSITIONAL_STANDARDS,
+
     /** IE removes all child text nodes, but FF preserves the first. */
     DOM_NORMALIZE_REMOVE_CHILDREN,
 
@@ -83,6 +86,12 @@ public enum BrowserVersionFeatures {
 
     /** Indicates that the URL of parent window is used to resolve URLs in frames with javascript src. */
     JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW,
+
+    /** */
+    PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT,
+
+    /** */
+    PAGE_WAIT_LAOD_BEFORE_BODY,
 
     /** Indicates .querySelectorAll() is supported in only quirks mode. */
     QUERYSELECTORALL_QUIRKS,

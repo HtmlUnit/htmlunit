@@ -335,8 +335,9 @@ public final class HTMLParser {
     private static void addBodyToPageIfNecessary(
             final HtmlPage page, final boolean originalCall, final boolean checkInsideFrameOnly) {
         // IE waits for the whole page to load before initializing bodies for frames.
-        final boolean ie = page.getWebClient().getBrowserVersion().isIE();
-        if (page.getEnclosingWindow() instanceof FrameWindow && ie && originalCall) {
+        final boolean waitToLoad = page.getWebClient().getBrowserVersion()
+            .hasFeature(BrowserVersionFeatures.PAGE_WAIT_LAOD_BEFORE_BODY);
+        if (page.getEnclosingWindow() instanceof FrameWindow && originalCall && waitToLoad) {
             return;
         }
 
@@ -358,7 +359,7 @@ public final class HTMLParser {
 
         // If this is IE, we need to initialize the bodies of any frames, as well.
         // This will already have been done when emulating FF (see above).
-        if (ie) {
+        if (waitToLoad) {
             for (final FrameWindow frame : page.getFrames()) {
                 final Page containedPage = frame.getEnclosedPage();
                 if (containedPage instanceof HtmlPage) {
