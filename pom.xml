@@ -781,4 +781,32 @@
             <uniqueVersion>false</uniqueVersion>
         </snapshotRepository>
     </distributionManagement>
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <id>HtmlUnitSnapshots</id>
+            <name>HtmlUnit Snapshots</name>
+            <url>http://htmlunit.sourceforge.net/m2-repo-snapshots</url>
+            <layout>default</layout>
+        </repository>
+        <repository>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <id>NekoHTMLSnapshots</id>
+            <name>NekoHTML Snapshots</name>
+            <url>http://build.canoo.com/NekoHTML/artifacts/m2-repo</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
 </project>
