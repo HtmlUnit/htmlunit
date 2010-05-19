@@ -14,13 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static org.apache.commons.httpclient.HttpStatus.SC_NO_CONTENT;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -258,7 +257,8 @@ public class HtmlScript2Test extends WebTestCase {
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
         final ArrayList<NameValuePair> headers = new ArrayList<NameValuePair>();
-        conn.setResponse(URL_SECOND, (String) null, SC_NO_CONTENT, "No Content", JAVASCRIPT_MIME_TYPE, headers);
+        conn.setResponse(URL_SECOND, (String) null, HttpStatus.SC_NO_CONTENT, "No Content", JAVASCRIPT_MIME_TYPE,
+                headers);
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
     }

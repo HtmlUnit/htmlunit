@@ -24,7 +24,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.httpclient.ChunkedOutputStream;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -110,7 +109,7 @@ public class BigContentPageTest extends WebServerTestCase {
             response.setHeader("Transfer-Encoding", "chunked");
             final int length = 60 * 1024 * 1024;
             final byte[] buffer = new byte[1024];
-            final OutputStream out = new ChunkedOutputStream(response.getOutputStream());
+            final OutputStream out = response.getOutputStream();
             for (int i = length / buffer.length; i >= 0; i--) {
                 out.write(buffer);
             }

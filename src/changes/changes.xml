@@ -5,7 +5,10 @@
     </properties>
 
     <body>
-        <release version="2.8" date="?" description="Bugfixes, large file download, single thread for JavaScript background tasks, initial FF 3.6">
+        <release version="2.8" date="?" description="Bugfixes, large file download, single thread for JavaScript background tasks, HttpClient 4, initial FF 3.6">
+            <action type="update" dev="asashour" issue="2950332" due-to="Nicolas Belisle">
+                Upgrade HttpClient to 4.0.1.
+            </action>
             <action type="update" dev="asashour">
                 Deprecate BrowserVersion static constants.
             </action>

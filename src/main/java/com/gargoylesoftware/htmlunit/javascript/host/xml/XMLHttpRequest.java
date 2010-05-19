@@ -30,6 +30,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
 
 import com.gargoylesoftware.htmlunit.AjaxController;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
@@ -406,7 +408,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             request.setHttpMethod(submitMethod);
             if (user != null) {
                 final DefaultCredentialsProvider dcp = new DefaultCredentialsProvider();
-                dcp.addCredentials(user, password);
+                dcp.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(user, password));
                 request.setCredentialsProvider(dcp);
             }
             webRequest_ = request;

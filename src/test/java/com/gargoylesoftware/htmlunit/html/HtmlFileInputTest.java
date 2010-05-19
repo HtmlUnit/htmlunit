@@ -18,6 +18,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Writer;
 import java.net.URI;
 import java.net.URL;
@@ -36,11 +37,15 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.httpclient.methods.multipart.FilePart;
-import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
-import org.apache.commons.httpclient.methods.multipart.Part;
+import org.apache.commons.io.IOUtils;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.james.mime4j.util.CharsetUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,7 +56,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
 
 /**
@@ -226,7 +230,6 @@ public class HtmlFileInputTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     @Browsers(Browser.NONE)
     public void testUploadFileWithNonASCIIName_HttpClient() throws Exception {
         final String filename = "\u6A94\u6848\uD30C\uC77C\u30D5\u30A1\u30A4\u30EB\u0645\u0644\u0641.txt";
@@ -234,22 +237,31 @@ public class HtmlFileInputTest extends WebServerTestCase {
         final File file = new File(new URI(path));
         assertTrue(file.exists());
 
-        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
         servlets.put("/upload2", Upload2Servlet.class);
 
         startWebServer("./", null, servlets);
-        final PostMethod filePost = new PostMethod("http://localhost:" + PORT + "/upload2");
+        final HttpPost filePost = new HttpPost("http://localhost:" + PORT + "/upload2");
 
-        final FilePart part = new FilePart("myInput", file);
-        part.setCharSet("UTF-8");
+        final MultipartEntity reqEntity =
+            new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE, null, CharsetUtil.getCharset("UTF-8"));
+        reqEntity.addPart("myInput", new FileBody(file, "application/octet-stream"));
 
-        filePost.setRequestEntity(new MultipartRequestEntity(new Part[] {part}, filePost.getParams()));
-        final HttpClient client = new HttpClient();
-        client.executeMethod(filePost);
+        filePost.setEntity(reqEntity);
 
-        final String response = filePost.getResponseBodyAsString();
-        //this is the value with ASCII encoding
-        assertFalse("3F 3F 3F 3F 3F 3F 3F 3F 3F 3F 3F 2E 74 78 74 <br>myInput".equals(response));
+        final HttpClient client = new DefaultHttpClient();
+        final HttpResponse httpResponse = client.execute(filePost);
+
+        InputStream content = null;
+        try {
+            content = httpResponse.getEntity().getContent();
+            final String response = new String(IOUtils.toByteArray(content));
+            //this is the value with ASCII encoding
+            assertFalse("3F 3F 3F 3F 3F 3F 3F 3F 3F 3F 3F 2E 74 78 74 <br>myInput".equals(response));
+        }
+        finally {
+            IOUtils.closeQuietly(content);
+        }
     }
 
     /**

@@ -21,9 +21,9 @@ import java.util.List;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
-import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.HttpStatus;
 import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.HttpMethod;

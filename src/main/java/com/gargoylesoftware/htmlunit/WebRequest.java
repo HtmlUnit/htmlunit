@@ -22,8 +22,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.apache.commons.httpclient.auth.CredentialsProvider;
 import org.apache.commons.lang.ClassUtils;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -121,7 +123,8 @@ public class WebRequest implements Serializable {
                     final String userInfo = url.getUserInfo();
                     final String username = userInfo.substring(0, userInfo.indexOf(':'));
                     final String password = userInfo.substring(userInfo.indexOf(':') + 1);
-                    ((DefaultCredentialsProvider) getCredentialsProvider()).addCredentials(username, password);
+                    ((DefaultCredentialsProvider) getCredentialsProvider()).setCredentials(
+                            AuthScope.ANY, new UsernamePasswordCredentials(username, password));
                 }
                 else {
                     LOG.warn("URL userInfo is defined for a WebRequest "

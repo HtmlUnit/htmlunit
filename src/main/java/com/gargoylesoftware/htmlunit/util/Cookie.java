@@ -29,6 +29,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Nicolas Belisle
  */
 public class Cookie implements Serializable {
 
@@ -209,8 +210,14 @@ public class Cookie implements Serializable {
      * Converts this cookie to an HttpClient cookie.
      * @return an HttpClient version of this cookie
      */
-    public org.apache.commons.httpclient.Cookie toHttpClient() {
-        return new org.apache.commons.httpclient.Cookie(domain_, name_, value_, path_, expires_, secure_);
+    public org.apache.http.cookie.Cookie toHttpClient() {
+        final org.apache.http.impl.cookie.BasicClientCookie cookie =
+            new org.apache.http.impl.cookie.BasicClientCookie(name_, value_);
+        cookie.setDomain(domain_);
+        cookie.setPath(path_);
+        cookie.setExpiryDate(expires_);
+        cookie.setSecure(secure_);
+        return cookie;
     }
 
     /**
@@ -218,9 +225,9 @@ public class Cookie implements Serializable {
      * @param cookies the cookies to be converted
      * @return the specified cookies, as HttpClient cookies
      */
-    public static org.apache.commons.httpclient.Cookie[] toHttpClient(final Collection< Cookie > cookies) {
-        final org.apache.commons.httpclient.Cookie[] array = new org.apache.commons.httpclient.Cookie[cookies.size()];
-        final Iterator< Cookie > it = cookies.iterator();
+    public static org.apache.http.cookie.Cookie[] toHttpClient(final Collection<Cookie> cookies) {
+        final org.apache.http.cookie.Cookie[] array = new org.apache.http.cookie.Cookie[cookies.size()];
+        final Iterator<Cookie> it = cookies.iterator();
         for (int i = 0; i < cookies.size(); i++) {
             array[i] = it.next().toHttpClient();
         }
@@ -232,12 +239,11 @@ public class Cookie implements Serializable {
      * @param cookies the cookies to be converted
      * @return the specified HttpClient cookies, as cookies
      */
-    public static List< Cookie > fromHttpClient(final org.apache.commons.httpclient.Cookie[] cookies) {
-        final List< Cookie > list = new ArrayList< Cookie >(cookies.length);
-        for (int i = 0; i < cookies.length; i++) {
-            final org.apache.commons.httpclient.Cookie c = cookies[i];
+    public static List< Cookie > fromHttpClient(final List< org.apache.http.cookie.Cookie > cookies) {
+        final List< Cookie > list = new ArrayList< Cookie >(cookies.size());
+        for (org.apache.http.cookie.Cookie c : cookies) {
             final Cookie cookie =
-                new Cookie(c.getDomain(), c.getName(), c.getValue(), c.getPath(), c.getExpiryDate(), c.getSecure());
+                new Cookie(c.getDomain(), c.getName(), c.getValue(), c.getPath(), c.getExpiryDate(), c.isSecure());
             list.add(cookie);
         }
         return list;

@@ -18,8 +18,9 @@ import static org.junit.Assert.assertEquals;
 
 import java.net.URL;
 
-import org.apache.commons.httpclient.UsernamePasswordCredentials;
-import org.apache.commons.httpclient.auth.BasicScheme;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.BasicUserPrincipal;
+import org.apache.http.auth.Credentials;
 import org.junit.Test;
 
 /**
@@ -112,9 +113,9 @@ public class WebRequestTest {
     public void credentials() throws Exception {
         final URL url = new URL("http://john.smith:secret@localhost/");
         final WebRequest request = new WebRequest(url);
-        final UsernamePasswordCredentials credentials = (UsernamePasswordCredentials)
-            request.getCredentialsProvider().getCredentials(new BasicScheme(), "localhost", 80, false);
-        assertEquals("john.smith", credentials.getUserName());
+        final Credentials credentials =
+            request.getCredentialsProvider().getCredentials(AuthScope.ANY);
+        assertEquals(new BasicUserPrincipal("john.smith"), credentials.getUserPrincipal());
         assertEquals("secret", credentials.getPassword());
     }
 }

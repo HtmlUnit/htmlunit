@@ -16,14 +16,19 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.httpclient.HttpState;
-import org.apache.commons.httpclient.cookie.CookiePolicy;
-import org.apache.commons.httpclient.cookie.CookieSpec;
 import org.apache.commons.lang.StringUtils;
+import org.apache.http.client.CookieStore;
+import org.apache.http.client.params.CookiePolicy;
+import org.apache.http.cookie.CookieOrigin;
+import org.apache.http.cookie.CookieSpec;
+import org.apache.http.cookie.CookieSpecRegistry;
+import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.gargoylesoftware.htmlunit.util.Cookie;
 
@@ -33,6 +38,7 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Nicolas Belisle
  */
 public class CookieManager implements Serializable {
 
@@ -51,6 +57,9 @@ public class CookieManager implements Serializable {
 
     /** The cookies added to this cookie manager. */
     private final Set<Cookie> cookies_;
+
+    /** The cookies spec registry */
+    private final transient CookieSpecRegistry registry_ = new DefaultHttpClient().getCookieSpecs();
 
     /**
      * Creates a new instance.
@@ -102,9 +111,15 @@ public class CookieManager implements Serializable {
             port = url.getDefaultPort();
         }
 
-        final CookieSpec spec = CookiePolicy.getCookieSpec(HTMLUNIT_COOKIE_POLICY);
-        final org.apache.commons.httpclient.Cookie[] all = Cookie.toHttpClient(cookies_);
-        final org.apache.commons.httpclient.Cookie[] matches = spec.match(host, port, path, secure, all);
+        final CookieSpec spec = registry_.getCookieSpec(HTMLUNIT_COOKIE_POLICY);
+        final org.apache.http.cookie.Cookie[] all = Cookie.toHttpClient(cookies_);
+        final CookieOrigin cookieOrigin = new CookieOrigin(host, port, path, secure);
+        final List<org.apache.http.cookie.Cookie> matches = new ArrayList<org.apache.http.cookie.Cookie>();
+        for (final org.apache.http.cookie.Cookie cookie : all) {
+            if (spec.match(cookie, cookieOrigin)) {
+                matches.add(cookie);
+            }
+        }
 
         final Set<Cookie> cookies = new LinkedHashSet<Cookie>();
         cookies.addAll(Cookie.fromHttpClient(matches));
@@ -154,11 +169,11 @@ public class CookieManager implements Serializable {
      * @param state the HTTP state to update
      * @see #updateFromState(HttpState)
      */
-    protected synchronized void updateState(final HttpState state) {
+    protected synchronized void updateState(final CookieStore state) {
         if (!cookiesEnabled_) {
             return;
         }
-        state.clearCookies();
+        state.clear();
         for (Cookie cookie : cookies_) {
             state.addCookie(cookie.toHttpClient());
         }
@@ -169,7 +184,7 @@ public class CookieManager implements Serializable {
      * @param state the HTTP state to update from
      * @see #updateState(HttpState)
      */
-    protected synchronized void updateFromState(final HttpState state) {
+    protected synchronized void updateFromState(final CookieStore state) {
         if (!cookiesEnabled_) {
             return;
         }

@@ -25,8 +25,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.httpclient.util.EncodingUtil;
 import org.apache.commons.lang.StringUtils;
+import org.apache.http.client.utils.URLEncodedUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
@@ -172,7 +172,8 @@ public class HtmlForm extends HtmlElement {
         if (HttpMethod.GET == method) {
             final String anchor = StringUtils.substringAfter(actionUrl, "#");
             final String enc = getPage().getPageEncoding();
-            final String queryFromFields = EncodingUtil.formUrlEncode(NameValuePair.toHttpClient(parameters), enc);
+            final String queryFromFields =
+                URLEncodedUtils.format(Arrays.asList(NameValuePair.toHttpClient(parameters)), enc);
 
             // action may already contain some query parameters: they have to be removed
             actionUrl = StringUtils.substringBefore(actionUrl, "#");

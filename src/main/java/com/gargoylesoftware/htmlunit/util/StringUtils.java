@@ -17,10 +17,10 @@ package com.gargoylesoftware.htmlunit.util;
 import java.util.Collection;
 import java.util.Date;
 
-import org.apache.commons.httpclient.util.DateParseException;
-import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.impl.cookie.DateParseException;
+import org.apache.http.impl.cookie.DateUtils;
 
 import com.gargoylesoftware.htmlunit.WebAssert;
 
@@ -144,7 +144,7 @@ public final class StringUtils {
             return null;
         }
         try {
-            return DateUtil.parseDate(s);
+            return DateUtils.parseDate(s);
         }
         catch (final DateParseException e) {
             LOG.warn("Unable to parse date: " + s);
@@ -160,7 +160,7 @@ public final class StringUtils {
      */
     public static String formatHttpDate(final Date date) {
         WebAssert.notNull("date", date);
-        return DateUtil.formatDate(date);
+        return DateUtils.formatDate(date);
     }
 
 }

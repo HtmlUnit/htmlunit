@@ -16,11 +16,8 @@ package com.gargoylesoftware.htmlunit;
 
 import static org.junit.Assert.assertNotNull;
 
-import org.apache.commons.httpclient.Credentials;
-import org.apache.commons.httpclient.NTCredentials;
-import org.apache.commons.httpclient.UsernamePasswordCredentials;
-import org.apache.commons.httpclient.auth.BasicScheme;
-import org.apache.commons.httpclient.auth.NTLMScheme;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
 import org.junit.Test;
 
 /**
@@ -31,34 +28,7 @@ import org.junit.Test;
  */
 public class DefaultCredentialsProviderTest extends WebTestCase {
 
-    /**
-     * Test for NTLM credentials.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void addNTLMCredentials() throws Exception {
-        final String username = "foo";
-        final String domain = "myDomain";
-        final String password = "password";
-        final String host = "my.host";
-        final String clientHost = "client.host";
-        final int port = 1234;
-
-        final DefaultCredentialsProvider provider = new DefaultCredentialsProvider();
-        provider.addNTLMCredentials(username, password, host, port, clientHost, domain);
-
-        final NTLMScheme scheme = new NTLMScheme("NTLM");
-        final Credentials credentials = provider.getCredentials(scheme, host, port, false);
-        assertNotNull(credentials);
-        assertTrue(NTCredentials.class.isInstance(credentials));
-
-        final NTCredentials ntCredentials = (NTCredentials) credentials;
-        assertEquals(username, ntCredentials.getUserName());
-        assertEquals(password, ntCredentials.getPassword());
-        assertEquals(clientHost, ntCredentials.getHost());
-        assertEquals(domain, ntCredentials.getDomain());
-    }
-
+    //FIXME NTLM Is only partially supported in HttpClient 4.0
     /**
      * @throws Exception if an error occurs
      */
@@ -69,27 +39,28 @@ public class DefaultCredentialsProviderTest extends WebTestCase {
         final String host = "my.host";
         final int port = 1234;
         final String realm = "blah";
-        final String clientDomain = "myDomain";
         final String clientHost = "client.host";
-        final NTLMScheme scheme = new NTLMScheme("NTLM");
+        final AuthScope authScope = new AuthScope(host, port, realm);
+        final AuthScope proxyAuthScope = new AuthScope(clientHost, port);
+
+        final AuthScope invalidAuthScope = new AuthScope("invalidHost", port, realm);
+        final AuthScope invalidProxyAuthScope = new AuthScope("invalidHost", port);
 
         DefaultCredentialsProvider provider = new DefaultCredentialsProvider();
-        provider.addCredentials(username, password, host, port, realm);
-        provider.addProxyCredentials(username, password, clientHost, port);
-        provider.addNTLMCredentials(username, password, host, port, clientHost, clientDomain);
-        provider.addNTLMProxyCredentials(username, password, host, port, clientHost, clientDomain);
+        provider.setCredentials(authScope, new UsernamePasswordCredentials(username, password));
+        provider.setCredentials(proxyAuthScope, new UsernamePasswordCredentials(username, password));
 
-        assertNotNull(provider.getCredentials(scheme, host, port, false));
-        assertNull(provider.getCredentials(scheme, "invalidHost", port, false));
-        assertNotNull(provider.getCredentials(scheme, host, port, true));
-        assertNull(provider.getCredentials(scheme, "invalidHost", port, true));
+        assertNotNull(provider.getCredentials(authScope));
+        assertNull(provider.getCredentials(invalidAuthScope));
+        assertNotNull(provider.getCredentials(proxyAuthScope));
+        assertNull(provider.getCredentials(invalidProxyAuthScope));
 
         provider = clone(provider);
 
-        assertNotNull(provider.getCredentials(scheme, host, port, false));
-        assertNull(provider.getCredentials(scheme, "invalidHost", port, false));
-        assertNotNull(provider.getCredentials(scheme, host, port, true));
-        assertNull(provider.getCredentials(scheme, "invalidHost", port, true));
+        assertNotNull(provider.getCredentials(authScope));
+        assertNull(provider.getCredentials(invalidAuthScope));
+        assertNotNull(provider.getCredentials(proxyAuthScope));
+        assertNull(provider.getCredentials(invalidProxyAuthScope));
     }
 
     /**
@@ -100,20 +71,20 @@ public class DefaultCredentialsProviderTest extends WebTestCase {
     @Test
     public void overwrite() throws Exception {
         final DefaultCredentialsProvider provider = new DefaultCredentialsProvider();
-        provider.addCredentials("username", "password");
+        provider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials("username", "password"));
 
         UsernamePasswordCredentials credentials =
-            (UsernamePasswordCredentials) provider.getCredentials(new BasicScheme(), "host", 80, false);
+            (UsernamePasswordCredentials) provider.getCredentials(AuthScope.ANY);
         assertEquals("username", credentials.getUserName());
         assertEquals("password", credentials.getPassword());
 
-        provider.addCredentials("username", "new password");
-        credentials = (UsernamePasswordCredentials) provider.getCredentials(new BasicScheme(), "host", 80, false);
+        provider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials("username", "new password"));
+        credentials = (UsernamePasswordCredentials) provider.getCredentials(AuthScope.ANY);
         assertEquals("username", credentials.getUserName());
         assertEquals("new password", credentials.getPassword());
 
-        provider.addCredentials("new username", "other password");
-        credentials = (UsernamePasswordCredentials) provider.getCredentials(new BasicScheme(), "host", 80, false);
+        provider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials("new username", "other password"));
+        credentials = (UsernamePasswordCredentials) provider.getCredentials(AuthScope.ANY);
         assertEquals("new username", credentials.getUserName());
         assertEquals("other password", credentials.getPassword());
     }

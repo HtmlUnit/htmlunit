@@ -14,46 +14,71 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.io.File;
+import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.httpclient.Header;
-import org.apache.commons.httpclient.HostConfiguration;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpException;
-import org.apache.commons.httpclient.HttpMethodBase;
-import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
-import org.apache.commons.httpclient.URI;
-import org.apache.commons.httpclient.URIException;
-import org.apache.commons.httpclient.auth.CredentialsProvider;
-import org.apache.commons.httpclient.cookie.CookiePolicy;
-import org.apache.commons.httpclient.methods.DeleteMethod;
-import org.apache.commons.httpclient.methods.EntityEnclosingMethod;
-import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.commons.httpclient.methods.HeadMethod;
-import org.apache.commons.httpclient.methods.OptionsMethod;
-import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.httpclient.methods.PutMethod;
-import org.apache.commons.httpclient.methods.StringRequestEntity;
-import org.apache.commons.httpclient.methods.TraceMethod;
-import org.apache.commons.httpclient.methods.multipart.ByteArrayPartSource;
-import org.apache.commons.httpclient.methods.multipart.FilePart;
-import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
-import org.apache.commons.httpclient.methods.multipart.Part;
-import org.apache.commons.httpclient.methods.multipart.PartBase;
-import org.apache.commons.httpclient.methods.multipart.StringPart;
-import org.apache.commons.httpclient.params.HttpMethodParams;
-import org.apache.commons.httpclient.util.EncodingUtil;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.logging.impl.SimpleLog;
+import org.apache.http.Header;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpEntityEnclosingRequest;
+import org.apache.http.HttpHost;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.CookieStore;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpHead;
+import org.apache.http.client.methods.HttpOptions;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.client.methods.HttpTrace;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.params.ClientPNames;
+import org.apache.http.client.protocol.ClientContext;
+import org.apache.http.client.utils.URIUtils;
+import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.conn.params.ConnRoutePNames;
+import org.apache.http.conn.scheme.PlainSocketFactory;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.cookie.Cookie;
+import org.apache.http.cookie.params.CookieSpecPNames;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.ContentBody;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.InputStreamBody;
+import org.apache.http.entity.mime.content.StringBody;
+import org.apache.http.impl.client.AbstractHttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.DefaultRedirectHandler;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.CoreConnectionPNames;
+import org.apache.http.params.HttpParams;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.protocol.HttpContext;
+import org.apache.james.mime4j.util.CharsetUtil;
 
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -69,11 +94,12 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Marc Guillemot
  * @author Brad Clarke
  * @author Ahmed Ashour
+ * @author Nicolas Belisle
  */
 public class HttpWebConnection implements WebConnection {
 
+    private AbstractHttpClient httpClient_;
     private final WebClient webClient_;
-    private HttpClient httpClient_;
     private String virtualHost_;
 
     /**
@@ -92,53 +118,36 @@ public class HttpWebConnection implements WebConnection {
 
         final URL url = request.getUrl();
         final HttpClient httpClient = getHttpClient();
-        webClient_.getCookieManager().updateState(httpClient.getState());
+        webClient_.getCookieManager().updateState(getHttpClient().getCookieStore());
 
-        final HttpMethodBase httpMethod = makeHttpMethod(request);
+        HttpUriRequest httpMethod = null;
         try {
-            final HostConfiguration hostConfiguration = getHostConfiguration(request);
+            httpMethod = makeHttpMethod(request);
+            final HttpHost hostConfiguration = getHostConfiguration(request);
+            final HttpHost proxyConfiguration = getProxyConfiguration(request);
+            this.getHttpClient().getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxyConfiguration);
             final long startTime = System.currentTimeMillis();
-            final int responseCode = httpClient.executeMethod(hostConfiguration, httpMethod);
+            final HttpResponse httpResponse = httpClient.execute(hostConfiguration, httpMethod);
             final long endTime = System.currentTimeMillis();
-            webClient_.getCookieManager().updateFromState(httpClient.getState());
-            return makeWebResponse(responseCode, httpMethod, request, endTime - startTime);
+            webClient_.getCookieManager().updateFromState(this.getHttpClient().getCookieStore());
+            return makeWebResponse(httpResponse, request, endTime - startTime);
         }
-        catch (final HttpException e) {
-            // KLUDGE: hitting www.yahoo.com will cause an exception to be thrown while
-            // www.yahoo.com/ (note the trailing slash) will not. If an exception is
-            // caught here then check to see if this is the situation. If so, then retry
-            // it with a trailing slash. The bug manifests itself with httpClient
-            // complaining about not being able to find a line with HTTP/ on it.
-            if (url.getPath().length() == 0) {
-                final StringBuilder buffer = new StringBuilder();
-                buffer.append(url.getProtocol());
-                buffer.append("://");
-                buffer.append(url.getHost());
-                buffer.append("/");
-                if (url.getQuery() != null) {
-                    buffer.append(url.getQuery());
-                }
-                //TODO: There might be a bug here since the original encoding type is lost.
-                final WebRequest newRequest = new WebRequest(new URL(buffer.toString()));
-                newRequest.setHttpMethod(request.getHttpMethod());
-                newRequest.setRequestParameters(request.getRequestParameters());
-                newRequest.setAdditionalHeaders(request.getAdditionalHeaders());
-                return getResponse(newRequest);
-            }
-            throw new RuntimeException("HTTP Error: " + e.getMessage(), e);
+        catch (final URISyntaxException e) {
+            throw new IOException("Unable to create URI from URL: " + url.toExternalForm());
         }
         finally {
-            onResponseGenerated(httpMethod);
+            if (httpMethod != null) {
+                onResponseGenerated(httpMethod);
+            }
         }
     }
 
     /**
      * Called when the response has been generated. Default action is to release
      * the HttpMethod's connection. Subclasses may override.
-     * @param httpMethod the httpMethod used
+     * @param httpMethod the httpMethod used (can be null)
      */
-    protected void onResponseGenerated(final HttpMethodBase httpMethod) {
-        httpMethod.releaseConnection();
+    protected void onResponseGenerated(final HttpUriRequest httpMethod) {
     }
 
     /**
@@ -147,24 +156,37 @@ public class HttpWebConnection implements WebConnection {
      * @return a new HttpClient host configuration, initialized based on the specified request
      * @throws IOException if the specified request contains an invalid URL
      */
-    private static HostConfiguration getHostConfiguration(final WebRequest webRequest)
+    private static HttpHost getHostConfiguration(final WebRequest webRequest)
         throws IOException {
-        final HostConfiguration hostConfiguration = new HostConfiguration();
         final URL url = webRequest.getUrl();
-        final URI uri;
+        final HttpHost hostConfiguration = new HttpHost(url.getHost(), url.getPort(), url.getProtocol());
         try {
-            uri = new URI(url.toExternalForm(), false);
+            new URI(url.toExternalForm());
         }
-        catch (final URIException e) {
+        catch (final URISyntaxException e) {
             throw new IOException("Unable to create URI from URL: " + url.toExternalForm());
         }
-        hostConfiguration.setHost(uri);
+        return hostConfiguration;
+    }
+
+    /**
+     * Returns a new HttpClient proxy configuration, initialized based on the
+     * specified request settings.
+     *
+     * @param webRequestSettings
+     *            the request settings to use to initialize the returned host
+     *            configuration
+     * @return a new HttpClient proxy configuration, initialized based on the
+     *         specified request settings
+     */
+    private static HttpHost getProxyConfiguration(
+            final WebRequest webRequest) {
         if (webRequest.getProxyHost() != null) {
             final String proxyHost = webRequest.getProxyHost();
             final int proxyPort = webRequest.getProxyPort();
-            hostConfiguration.setProxy(proxyHost, proxyPort);
+            return new HttpHost(proxyHost, proxyPort);
         }
-        return hostConfiguration;
+        return null;
     }
 
     /**
@@ -172,134 +194,138 @@ public class HttpWebConnection implements WebConnection {
      * @param webRequest the request
      * @return the <tt>HttpMethod</tt> instance constructed according to the specified parameters
      * @throws IOException
+     * @throws URISyntaxException
      */
-    private HttpMethodBase makeHttpMethod(final WebRequest webRequest)
-        throws IOException {
-
+    private HttpUriRequest makeHttpMethod(final WebRequest webRequest)
+        throws IOException, URISyntaxException {
         // Make sure that the URL is fully encoded. IE actually sends some Unicode chars in request
         // URLs; because of this we allow some Unicode chars in URLs. However, at this point we're
         // handing things over the HttpClient, and HttpClient will blow up if we leave these Unicode
         // chars in the URL.
         final URL url = UrlUtils.encodeUrl(webRequest.getUrl(), false);
-
-        String path = url.getPath();
-        if (path.length() == 0) {
-            path = "/";
-        }
-        else if (path.startsWith("//")) {
-            path = "//" + path; // see https://issues.apache.org/jira/browse/HTTPCLIENT-727
-        }
-
-        final HttpMethodBase httpMethod = buildHttpMethod(webRequest.getHttpMethod(), path);
-        if (!(httpMethod instanceof EntityEnclosingMethod)) {
+        final String charset = webRequest.getCharset();
+        final HttpRequestBase httpMethod = buildHttpMethod(webRequest.getHttpMethod(), url.getPath());
+        if (!(httpMethod instanceof HttpEntityEnclosingRequest)) {
             // this is the case for GET as well as TRACE, DELETE, OPTIONS and HEAD
             if (webRequest.getRequestParameters().isEmpty()) {
-                final String queryString = url.getQuery();
-                httpMethod.setQueryString(queryString);
+                final URI uri = URIUtils.createURI(url.getProtocol(), url.getHost(), url.getPort(), url.getPath(),
+                        url.getQuery(), null);
+                httpMethod.setURI(uri);
             }
             else {
-                final NameValuePair[] pairs = new NameValuePair[webRequest.getRequestParameters().size()];
-                webRequest.getRequestParameters().toArray(pairs);
-                httpMethod.setQueryString(NameValuePair.toHttpClient(pairs));
+                final List<NameValuePair> pairs = webRequest.getRequestParameters();
+                final org.apache.http.NameValuePair[] httpClientPairs = NameValuePair.toHttpClient(pairs);
+                final String query = URLEncodedUtils.format(Arrays.asList(httpClientPairs), charset);
+                final URI uri =
+                    URIUtils.createURI(url.getProtocol(), url.getHost(), url.getPort(), url.getPath(), query, null);
+                httpMethod.setURI(uri);
             }
         }
         else { // POST as well as PUT
-            final EntityEnclosingMethod method = (EntityEnclosingMethod) httpMethod;
-            method.getParams().setContentCharset(webRequest.getCharset());
+            final HttpEntityEnclosingRequest method = (HttpEntityEnclosingRequest) httpMethod;
 
-            final String queryString = url.getQuery();
-            method.setQueryString(queryString);
-            if (webRequest.getRequestBody() != null) {
-                final String body = webRequest.getRequestBody();
-                final String charset = webRequest.getCharset();
-                method.setRequestEntity(new StringRequestEntity(body, null, charset));
-            }
+            if (webRequest.getEncodingType() == FormEncodingType.URL_ENCODED && method instanceof HttpPost) {
+                final HttpPost postMethod = (HttpPost) method;
+                final List<NameValuePair> pairs = webRequest.getRequestParameters();
+                final org.apache.http.NameValuePair[] httpClientPairs = NameValuePair.toHttpClient(pairs);
+                final String query = URLEncodedUtils.format(Arrays.asList(httpClientPairs), charset);
+                final URI uri =
+                    URIUtils.createURI(url.getProtocol(), url.getHost(), url.getPort(), url.getPath(), query, null);
+                postMethod.setURI(uri);
 
-            // Note that this has to be done in two loops otherwise it won't
-            // be able to support two elements with the same name.
-            if (webRequest.getEncodingType() == FormEncodingType.URL_ENCODED
-                    && method instanceof PostMethod) {
-                final PostMethod postMethod = (PostMethod) httpMethod;
-                for (final NameValuePair pair : webRequest.getRequestParameters()) {
-                    postMethod.removeParameter(pair.getName(), pair.getValue());
-                }
-
-                for (final NameValuePair pair : webRequest.getRequestParameters()) {
-                    postMethod.addParameter(pair.getName(), pair.getValue());
-                }
+                final String body = StringUtils.defaultString(webRequest.getRequestBody());
+                final StringEntity urlEncodedEntity = new StringEntity(body, charset);
+                urlEncodedEntity.setContentType(URLEncodedUtils.CONTENT_TYPE + HTTP.CHARSET_PARAM + charset);
+                postMethod.setEntity(urlEncodedEntity);
             }
             else if (FormEncodingType.MULTIPART == webRequest.getEncodingType()) {
-                final List<PartBase> partList = new ArrayList<PartBase>();
+                final MultipartEntity multipartEntity =
+                    new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE, null, CharsetUtil.getCharset(charset));
+
                 for (final NameValuePair pair : webRequest.getRequestParameters()) {
-                    final PartBase newPart;
                     if (pair instanceof KeyDataPair) {
                         final KeyDataPair pairWithFile = (KeyDataPair) pair;
-                        final String charset = webRequest.getCharset();
-                        newPart = buildFilePart(pairWithFile, charset);
+                        final ContentBody contentBody = buildFilePart(pairWithFile, charset);
+                        multipartEntity.addPart(pair.getName(), contentBody);
                     }
                     else {
-                        newPart = new StringPart(pair.getName(), pair.getValue(), webRequest.getCharset());
-                        newPart.setContentType(null); // Firefox and IE seem not to send a content type
+                        final StringBody stringBody =
+                            new StringBody(pair.getValue(), Charset.forName(webRequest.getCharset()));
+                        multipartEntity.addPart(pair.getName(), stringBody);
                     }
-                    newPart.setTransferEncoding(null); // Firefox and IE don't send transfer encoding headers
-                    partList.add(newPart);
                 }
-                Part[] parts = new Part[partList.size()];
-                parts = partList.toArray(parts);
-                method.setRequestEntity(new MultipartRequestEntity(parts, method.getParams()));
+                method.setEntity(multipartEntity);
             }
             else { // for instance a PUT request
                 final String body = webRequest.getRequestBody();
                 if (body != null) {
-                    final String contentType = webRequest.getAdditionalHeaders().get("Content-type");
-                    final String charset = webRequest.getCharset();
-                    method.setRequestEntity(new StringRequestEntity(body, contentType, charset));
+                    method.setEntity(new StringEntity(body, charset));
                 }
             }
         }
 
-        httpMethod.setRequestHeader("User-Agent", webClient_.getBrowserVersion().getUserAgent());
+        httpMethod.setHeader(new BasicHeader("User-Agent", webClient_.getBrowserVersion().getUserAgent()));
 
         writeRequestHeadersToHttpMethod(httpMethod, webRequest.getAdditionalHeaders());
-        httpMethod.setFollowRedirects(false);
+        getHttpClient().getParams().setParameter(ClientPNames.HANDLE_REDIRECTS, true);
 
         if (webRequest.getCredentialsProvider() != null) {
-            httpMethod.getParams().setParameter(CredentialsProvider.PROVIDER,
-                    webRequest.getCredentialsProvider());
+            getHttpClient().setCredentialsProvider(webRequest.getCredentialsProvider());
         }
 
         if (webClient_.getCookieManager().isCookiesEnabled()) {
             // Cookies are enabled. Note that it's important that we enable single cookie headers,
             // for compatibility purposes.
-            httpMethod.getParams().setBooleanParameter(HttpMethodParams.SINGLE_COOKIE_HEADER, true);
-            httpMethod.getParams().setCookiePolicy(CookieManager.HTMLUNIT_COOKIE_POLICY);
+            getHttpClient().getParams().setParameter(CookieSpecPNames.SINGLE_COOKIE_HEADER, true);
+            getHttpClient().getParams().setParameter(ClientPNames.COOKIE_POLICY, CookieManager.HTMLUNIT_COOKIE_POLICY);
         }
         else {
             // Cookies are disabled.
-            httpMethod.getParams().setCookiePolicy(CookiePolicy.IGNORE_COOKIES);
+            getHttpClient().setCookieStore(new CookieStore() {
+                public void addCookie(final Cookie cookie) { }
+                public void clear() { }
+                public boolean clearExpired(final Date date) {
+                    return false;
+                }
+                @SuppressWarnings("unchecked")
+                public List<Cookie> getCookies() {
+                    return Collections.EMPTY_LIST;
+                }
+            });
         }
-
         return httpMethod;
     }
 
-    FilePart buildFilePart(final KeyDataPair pairWithFile, final String charset) throws FileNotFoundException {
-        final FilePartPageCharSet part;
+    // FIXME Change signature ?
+    ContentBody buildFilePart(final KeyDataPair pairWithFile, final String charset) throws FileNotFoundException {
+        String contentType = pairWithFile.getContentType();
+        if (contentType == null) {
+            contentType = "application/octet-stream";
+        }
+
         if (pairWithFile.getData() != null) {
-            part = new FilePartPageCharSet(pairWithFile.getName(),
-                    new ByteArrayPartSource(pairWithFile.getValue(), pairWithFile.getData()),
-                    pairWithFile.getContentType(), charset);
+            return new InputStreamBody(
+                    new ByteArrayInputStream(pairWithFile.getData()), contentType, pairWithFile.getName());
         }
-        else {
-            part = new FilePartPageCharSet(pairWithFile.getName(), pairWithFile.getValue(), pairWithFile.getFile(),
-                pairWithFile.getContentType(), charset);
+        else if (pairWithFile.getFile() == null) {
+            return new InputStreamBody(new ByteArrayInputStream(new byte[0]), contentType, pairWithFile.getName());
         }
-        part.pairWithFile_ = pairWithFile;
-        part.webClient_ = webClient_;
 
-        // Firefox and IE seem not to specify a charset for a file part
-        part.setCharSet(null);
-
-        return part;
+        return new FileBody(pairWithFile.getFile(), contentType) {
+            @Override
+            public  String getFilename() {
+                if (getFile() == null) {
+                    return pairWithFile.getValue();
+                }
+                else if (webClient_.getBrowserVersion().hasFeature(
+                    BrowserVersionFeatures.HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH)) {
+                    return getFile().getAbsolutePath();
+                }
+                else {
+                    return super.getFilename();
+                }
+            }
+        };
     }
 
     /**
@@ -308,35 +334,35 @@ public class HttpWebConnection implements WebConnection {
      * @param path the path being used
      * @return a new HttpClient HTTP method based on the specified parameters
      */
-    private static HttpMethodBase buildHttpMethod(final HttpMethod submitMethod, final String path) {
-        final HttpMethodBase method;
+    private static HttpRequestBase buildHttpMethod(final HttpMethod submitMethod, final String path) {
+        final HttpRequestBase method;
         switch (submitMethod) {
             case GET:
-                method = new GetMethod(path);
+                method = new HttpGet(path);
                 break;
 
             case POST:
-                method = new PostMethod(path);
+                method = new HttpPost(path);
                 break;
 
             case PUT:
-                method = new PutMethod(path);
+                method = new HttpPut(path);
                 break;
 
             case DELETE:
-                method = new DeleteMethod(path);
+                method = new HttpDelete(path);
                 break;
 
             case OPTIONS:
-                method = new OptionsMethod(path);
+                method = new HttpOptions(path);
                 break;
 
             case HEAD:
-                method = new HeadMethod(path);
+                method = new HttpHead(path);
                 break;
 
             case TRACE:
-                method = new TraceMethod(path);
+                method = new HttpTrace(path);
                 break;
 
             default:
@@ -347,11 +373,18 @@ public class HttpWebConnection implements WebConnection {
 
     /**
      * Lazily initializes the internal HTTP client.
+     *
      * @return the initialized HTTP client
      */
-    protected synchronized HttpClient getHttpClient() {
+    protected synchronized AbstractHttpClient getHttpClient() {
         if (httpClient_ == null) {
             httpClient_ = createHttpClient();
+            httpClient_.setRedirectHandler(new DefaultRedirectHandler() {
+                public boolean isRedirectRequested(final HttpResponse response,
+                        final HttpContext context) {
+                    return super.isRedirectRequested(response, context) && response.getFirstHeader("location") != null;
+                }
+            });
 
             // Disable informational messages from httpclient
             final Log log = LogFactory.getLog("httpclient.wire");
@@ -359,17 +392,22 @@ public class HttpWebConnection implements WebConnection {
                 ((SimpleLog) log).setLevel(SimpleLog.LOG_LEVEL_WARN);
             }
 
-            httpClient_.getHttpConnectionManager().getParams().setSoTimeout(getTimeout());
-            httpClient_.getHttpConnectionManager().getParams().setConnectionTimeout(getTimeout());
+            httpClient_.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, getTimeout());
+            httpClient_.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, getTimeout());
 
             if (virtualHost_ != null) {
-                httpClient_.getParams().setVirtualHost(virtualHost_);
+                httpClient_.getParams().setParameter(ClientPNames.VIRTUAL_HOST, virtualHost_);
+
             }
         }
 
         // Tell the client where to get its credentials from
         // (it may have changed on the webClient since last call to getHttpClientFor(...))
-        httpClient_.getParams().setParameter(CredentialsProvider.PROVIDER, webClient_.getCredentialsProvider());
+        httpClient_.getParams().setParameter(ClientContext.CREDS_PROVIDER, webClient_.getCredentialsProvider());
+
+        //Set timeouts
+        httpClient_.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, webClient_.getTimeout());
+        httpClient_.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, webClient_.getTimeout());
 
         return httpClient_;
     }
@@ -385,15 +423,21 @@ public class HttpWebConnection implements WebConnection {
     }
 
     /**
-     * Creates the <tt>HttpClient</tt> that will be used by this WebConnection. Extensions may
-     * override this method in order to create a customized <tt>HttpClient</tt> instance (e.g. with
-     * a custom {@link org.apache.commons.httpclient.HttpConnectionManager} to perform some tracking;
-     * see feature request 1438216).
+     * Creates the <tt>HttpClient</tt> that will be used by this WebClient.
+     * Extensions may override this method in order to create a customized
+     * <tt>HttpClient</tt> instance (e.g. with a custom
+     * {@link org.apache.commons.httpclient.HttpConnectionManager} to perform
+     * some tracking; see feature request 1438216).
      * @return the <tt>HttpClient</tt> that will be used by this WebConnection
      */
-    protected HttpClient createHttpClient() {
-        final MultiThreadedHttpConnectionManager connectionManager = new MultiThreadedHttpConnectionManager();
-        return new HttpClient(connectionManager);
+    protected AbstractHttpClient createHttpClient() {
+        final HttpParams httpsParams = new BasicHttpParams();
+        final SchemeRegistry schemeRegistry = new SchemeRegistry();
+        schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+        schemeRegistry.register(new Scheme("https", SSLSocketFactory.getSocketFactory(), 443));
+        final ThreadSafeClientConnManager connectionManager =
+            new ThreadSafeClientConnManager(httpsParams, schemeRegistry);
+        return new DefaultHttpClient(connectionManager, httpsParams);
     }
 
     /**
@@ -402,6 +446,9 @@ public class HttpWebConnection implements WebConnection {
      */
     public void setVirtualHost(final String virtualHost) {
         virtualHost_ = virtualHost;
+        if (virtualHost_ != null) {
+            this.getHttpClient().getParams().setParameter(ClientPNames.VIRTUAL_HOST, virtualHost_);
+        }
     }
 
     /**
@@ -415,21 +462,18 @@ public class HttpWebConnection implements WebConnection {
     /**
      * Converts an HttpMethod into a WebResponse.
      */
-    private WebResponse makeWebResponse(final int statusCode, final HttpMethodBase method,
+    private WebResponse makeWebResponse(final HttpResponse httpResponse,
             final WebRequest request, final long loadTime) throws IOException {
 
-        String statusMessage = method.getStatusText();
-        if (statusMessage == null || statusMessage.length() == 0) {
-            statusMessage = HttpStatus.getStatusText(statusCode);
-        }
+        String statusMessage = httpResponse.getStatusLine().getReasonPhrase();
         if (statusMessage == null) {
             statusMessage = "Unknown status code";
         }
         final List<NameValuePair> headers = new ArrayList<NameValuePair>();
-        for (final Header header : method.getResponseHeaders()) {
+        for (final Header header : httpResponse.getAllHeaders()) {
             headers.add(new NameValuePair(header.getName(), header.getValue()));
         }
-        final WebResponseData responseData = newWebResponseDataInstance(statusMessage, headers, statusCode, method);
+        final WebResponseData responseData = newWebResponseDataInstance(statusMessage, headers, httpResponse);
         return newWebResponseInstance(responseData, loadTime, request);
     }
 
@@ -438,18 +482,25 @@ public class HttpWebConnection implements WebConnection {
      * May be overridden by subclasses to return a specialized WebResponseData.
      * @param statusMessage StatusMessage from the response
      * @param headers response headers
-     * @param statusCode response status code
-     * @param method request method
+     * @param httpResponse HTTP response
      * @return the WebResponseData to use for this response
      * @throws IOException if there is a problem reading the response body
      */
     protected WebResponseData newWebResponseDataInstance(
             final String statusMessage,
             final List<NameValuePair> headers,
-            final int statusCode,
-            final HttpMethodBase method
+            final HttpResponse httpResponse
     ) throws IOException {
-        return new WebResponseData(method.getResponseBodyAsStream(), statusCode, statusMessage, headers);
+        final HttpEntity httpEntity = httpResponse.getEntity();
+        final InputStream inputStream;
+        if (httpEntity != null) {
+            inputStream = httpEntity.getContent();
+        }
+        else {
+            inputStream = null;
+        }
+        return new WebResponseData(inputStream, httpResponse.getStatusLine().getStatusCode(),
+            statusMessage, headers);
     }
 
     /**
@@ -467,62 +518,34 @@ public class HttpWebConnection implements WebConnection {
         return new WebResponse(responseData, request, loadTime);
     }
 
-    private static void writeRequestHeadersToHttpMethod(final org.apache.commons.httpclient.HttpMethod httpMethod,
+    private static void writeRequestHeadersToHttpMethod(final HttpUriRequest httpMethod,
         final Map<String, String> requestHeaders) {
         synchronized (requestHeaders) {
             for (final Map.Entry<String, String> entry : requestHeaders.entrySet()) {
-                httpMethod.setRequestHeader(entry.getKey(), entry.getValue());
+                httpMethod.setHeader(entry.getKey(), entry.getValue());
             }
         }
     }
 
     /**
-     * This implementation overrides the superclass' method by encoding filename according to the page charset.
-     * @see <a href="http://issues.apache.org/jira/browse/HTTPCLIENT-293">HTTPCLIENT-293</a>
+     * If set to <tt>true</tt>, the client will accept connections to any host, regardless of
+     * whether they have valid certificates or not. This is especially useful when you are trying to
+     * connect to a server with expired or corrupt certificates.
+     *
+     * @param useInsecureSSL whether or not to use insecure SSL
+     * @throws GeneralSecurityException if a security error occurs
      */
-    private static final class FilePartPageCharSet extends FilePart {
-        private KeyDataPair pairWithFile_;
-        private WebClient webClient_;
-        private String pageCharset_;
+    public void setUseInsecureSSL(final boolean useInsecureSSL) throws GeneralSecurityException {
+        HttpWebConnectionInsecureSSL.setUseInsecureSSL(getHttpClient(), useInsecureSSL);
+    }
 
-        private FilePartPageCharSet(final String name, final ByteArrayPartSource byteArrayPartSource,
-            final String contentType, final String charset) {
-            super(name, byteArrayPartSource, contentType, charset);
-            pageCharset_ = charset;
-        }
-
-        private FilePartPageCharSet(final String name, final String value, final File file, final String contentType,
-            final String charset) throws FileNotFoundException {
-            super(name, value, file, contentType, charset);
-            pageCharset_ = charset;
-        }
-
-        @Override
-        protected void sendDispositionHeader(final OutputStream out) throws IOException {
-            out.write(CONTENT_DISPOSITION_BYTES);
-            out.write(QUOTE_BYTES);
-            out.write(EncodingUtil.getAsciiBytes(getName()));
-            out.write(QUOTE_BYTES);
-            final String filename = getSource().getFileName();
-            if (filename != null) {
-                out.write(EncodingUtil.getAsciiBytes(FILE_NAME));
-                out.write(QUOTE_BYTES);
-                out.write(EncodingUtil.getBytes(getFileName(), pageCharset_));
-                out.write(QUOTE_BYTES);
-            }
-        }
-
-        private String getFileName() {
-            if (pairWithFile_.getFile() == null) {
-                return pairWithFile_.getValue();
-            }
-            else if (webClient_.getBrowserVersion().hasFeature(
-                    BrowserVersionFeatures.HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH)) {
-                return pairWithFile_.getFile().getAbsolutePath();
-            }
-            else {
-                return pairWithFile_.getValue();
-            }
+    /**
+     * Shutdown the connection manager.
+     */
+    public void shutdown() {
+        if (httpClient_ != null) {
+            httpClient_.getConnectionManager().shutdown();
+            httpClient_ = null;
         }
     }
 }

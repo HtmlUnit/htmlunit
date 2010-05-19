@@ -17,13 +17,15 @@ package com.gargoylesoftware.htmlunit.util;
 import java.io.Serializable;
 import java.util.List;
 
-import org.apache.commons.httpclient.util.LangUtils;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.LangUtils;
 
 /**
  * A name/value pair.
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Nicolas Belisle
  */
 public class NameValuePair implements Serializable {
 
@@ -97,12 +99,12 @@ public class NameValuePair implements Serializable {
      * @param pairs the name/value pairs to convert
      * @return the converted name/value pairs
      */
-    public static org.apache.commons.httpclient.NameValuePair[] toHttpClient(final NameValuePair[] pairs) {
-        final org.apache.commons.httpclient.NameValuePair[] pairs2 =
-            new org.apache.commons.httpclient.NameValuePair[pairs.length];
+    public static org.apache.http.NameValuePair[] toHttpClient(final NameValuePair[] pairs) {
+        final org.apache.http.NameValuePair[] pairs2 =
+            new org.apache.http.NameValuePair[pairs.length];
         for (int i = 0; i < pairs.length; i++) {
             final NameValuePair pair = pairs[i];
-            pairs2[i] = new org.apache.commons.httpclient.NameValuePair(pair.getName(), pair.getValue());
+            pairs2[i] = new BasicNameValuePair(pair.getName(), pair.getValue());
         }
         return pairs2;
     }
@@ -112,12 +114,11 @@ public class NameValuePair implements Serializable {
      * @param pairs the name/value pairs to convert
      * @return the converted name/value pairs
      */
-    public static org.apache.commons.httpclient.NameValuePair[] toHttpClient(final List<NameValuePair> pairs) {
-        final org.apache.commons.httpclient.NameValuePair[] pairs2 =
-            new org.apache.commons.httpclient.NameValuePair[pairs.size()];
+    public static org.apache.http.NameValuePair[] toHttpClient(final List<NameValuePair> pairs) {
+        final org.apache.http.NameValuePair[] pairs2 = new org.apache.http.NameValuePair[pairs.size()];
         for (int i = 0; i < pairs.size(); i++) {
             final NameValuePair pair = pairs.get(i);
-            pairs2[i] = new org.apache.commons.httpclient.NameValuePair(pair.getName(), pair.getValue());
+            pairs2[i] = new BasicNameValuePair(pair.getName(), pair.getValue());
         }
         return pairs2;
     }

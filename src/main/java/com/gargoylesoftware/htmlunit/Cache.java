@@ -20,10 +20,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.httpclient.util.DateParseException;
-import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.lang.math.NumberUtils;
-import org.apache.commons.lang.time.DateUtils;
+import org.apache.http.impl.cookie.DateParseException;
+import org.apache.http.impl.cookie.DateUtils;
 import org.w3c.dom.css.CSSStyleSheet;
 
 /**
@@ -160,7 +159,7 @@ public class Cache implements Serializable {
         final Date lastModified = parseDateHeader(response, "Last-Modified");
         final Date expires = parseDateHeader(response, "Expires");
 
-        final long delay = 10 * DateUtils.MILLIS_PER_MINUTE;
+        final long delay = 10 * org.apache.commons.lang.time.DateUtils.MILLIS_PER_MINUTE;
         final long now = System.currentTimeMillis();
 
         final boolean cacheableContent = (expires != null && (expires.getTime() - now > delay)
@@ -187,7 +186,7 @@ public class Cache implements Serializable {
             return new Date();
         }
         try {
-            return DateUtil.parseDate(value);
+            return DateUtils.parseDate(value);
         }
         catch (final DateParseException e) {
             return null;

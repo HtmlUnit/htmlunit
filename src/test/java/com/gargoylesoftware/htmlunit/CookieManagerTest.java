@@ -18,7 +18,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.httpclient.HttpState;
+import org.apache.http.client.CookieStore;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -63,9 +64,9 @@ public class CookieManagerTest extends WebDriverTestCase {
         assertFalse(mgr.getCookies().isEmpty());
 
         // Update an HTTP state.
-        final HttpState state = new HttpState();
+        final CookieStore state = new BasicCookieStore();
         mgr.updateState(state);
-        assertEquals(1, state.getCookies().length);
+        assertEquals(1, state.getCookies().size());
 
         // Remove the cookie from the manager.
         mgr.removeCookie(cookie);
@@ -73,7 +74,7 @@ public class CookieManagerTest extends WebDriverTestCase {
 
         // Update an HTTP state after removing the cookie.
         mgr.updateState(state);
-        assertEquals(0, state.getCookies().length);
+        assertEquals(0, state.getCookies().size());
 
         // Add the cookie back to the manager.
         mgr.addCookie(cookie);
@@ -81,7 +82,7 @@ public class CookieManagerTest extends WebDriverTestCase {
 
         // Update an HTTP state after adding the cookie back to the manager.
         mgr.updateState(state);
-        assertEquals(1, state.getCookies().length);
+        assertEquals(1, state.getCookies().size());
 
         // Clear all cookies from the manager.
         mgr.clearCookies();
@@ -89,7 +90,7 @@ public class CookieManagerTest extends WebDriverTestCase {
 
         // Update an HTTP state after clearing all cookies from the manager.
         mgr.updateState(state);
-        assertEquals(0, state.getCookies().length);
+        assertEquals(0, state.getCookies().size());
 
         // Disable cookies.
         mgr.setCookiesEnabled(false);
@@ -101,7 +102,7 @@ public class CookieManagerTest extends WebDriverTestCase {
 
         // Update an HTTP state after adding a cookie while cookies are disabled.
         mgr.updateState(state);
-        assertEquals(0, state.getCookies().length);
+        assertEquals(0, state.getCookies().size());
 
         // Enable cookies again.
         mgr.setCookiesEnabled(true);
@@ -109,11 +110,11 @@ public class CookieManagerTest extends WebDriverTestCase {
 
         // Update an HTTP state after enabling cookies again.
         mgr.updateState(state);
-        assertEquals(1, state.getCookies().length);
+        assertEquals(1, state.getCookies().size());
 
         // Update the manager with a new state.
         final Cookie cookie2 = new Cookie("x", "y");
-        final HttpState state2 = new HttpState();
+        final CookieStore state2 = new BasicCookieStore();
         state2.addCookie(cookie2.toHttpClient());
         mgr.updateFromState(state2);
         assertEquals(1, mgr.getCookies().size());

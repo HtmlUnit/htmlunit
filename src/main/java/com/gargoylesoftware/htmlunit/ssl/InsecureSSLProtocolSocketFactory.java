@@ -23,8 +23,10 @@ import java.security.GeneralSecurityException;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 
-import org.apache.commons.httpclient.params.HttpConnectionParams;
-import org.apache.commons.httpclient.protocol.SecureProtocolSocketFactory;
+import org.apache.http.conn.ConnectTimeoutException;
+import org.apache.http.conn.scheme.SocketFactory;
+import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.params.HttpParams;
 
 /**
  * A completely insecure (yet very easy to use) SSL socket factory. This socket factory will
@@ -34,11 +36,12 @@ import org.apache.commons.httpclient.protocol.SecureProtocolSocketFactory;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Nicolas Belisle
  * @see com.gargoylesoftware.htmlunit.WebClient#setUseInsecureSSL(boolean)
  */
-public class InsecureSSLProtocolSocketFactory implements SecureProtocolSocketFactory {
+public class InsecureSSLProtocolSocketFactory implements SocketFactory {
 
-    private SSLContext context_;
+    private SSLSocketFactory decoratedSSLSocketFactory_;
 
     /**
      * Creates a new insecure SSL protocol socket factory.
@@ -46,39 +49,40 @@ public class InsecureSSLProtocolSocketFactory implements SecureProtocolSocketFac
      * @throws GeneralSecurityException if a security error occurs
      */
     public InsecureSSLProtocolSocketFactory() throws GeneralSecurityException {
-        context_ = SSLContext.getInstance("SSL");
-        context_.init(null, new TrustManager[] {new InsecureTrustManager()}, null);
+        final SSLContext context = SSLContext.getInstance("SSL");
+        context.init(null, new TrustManager[] {new InsecureTrustManager()}, null);
+        decoratedSSLSocketFactory_ = new SSLSocketFactory(SSLContext.getInstance("SSL"));
     }
 
     /**
      * {@inheritDoc}
      */
     public Socket createSocket(final Socket socket, final String host, final int port, final boolean autoClose)
-        throws IOException {
-        return context_.getSocketFactory().createSocket(socket, host, port, autoClose);
+        throws IOException, UnknownHostException {
+        return decoratedSSLSocketFactory_.createSocket(socket, host, port, autoClose);
     }
 
     /**
      * {@inheritDoc}
      */
-    public Socket createSocket(final String host, final int port) throws IOException, UnknownHostException {
-        return context_.getSocketFactory().createSocket(host, port);
+    public Socket connectSocket(final Socket sock, final String host, final int port, final InetAddress localAddress,
+        final int localPort, final HttpParams params)
+        throws IOException, UnknownHostException, ConnectTimeoutException {
+        return decoratedSSLSocketFactory_.connectSocket(sock, host, port, localAddress, localPort, params);
     }
 
     /**
      * {@inheritDoc}
      */
-    public Socket createSocket(final String host, final int port, final InetAddress localAddress, final int localPort)
-        throws IOException {
-        return context_.getSocketFactory().createSocket(host, port, localAddress, localPort);
+    public Socket createSocket() throws IOException {
+        return decoratedSSLSocketFactory_.createSocket();
     }
 
     /**
      * {@inheritDoc}
      */
-    public Socket createSocket(final String host, final int port, final InetAddress localAddress, final int localPort,
-        final HttpConnectionParams params) throws IOException {
-        return context_.getSocketFactory().createSocket(host, port, localAddress, localPort);
+    public boolean isSecure(final Socket sock) throws IllegalArgumentException {
+        return decoratedSSLSocketFactory_.isSecure(sock);
     }
 
 }

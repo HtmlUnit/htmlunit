@@ -14,10 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static org.apache.commons.httpclient.HttpStatus.SC_MULTIPLE_CHOICES;
-import static org.apache.commons.httpclient.HttpStatus.SC_OK;
-import static org.apache.commons.httpclient.HttpStatus.SC_USE_PROXY;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -30,6 +26,7 @@ import javax.imageio.stream.ImageInputStream;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.HttpStatus;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -133,7 +130,7 @@ public class HtmlImage extends HtmlElement {
             try {
                 downloadImageIfNeeded();
                 final int i = imageWebResponse_.getStatusCode();
-                ok = (i >= SC_OK && i < SC_MULTIPLE_CHOICES) || i == SC_USE_PROXY;
+                ok = (i >= HttpStatus.SC_OK && i < HttpStatus.SC_MULTIPLE_CHOICES) || i == HttpStatus.SC_USE_PROXY;
             }
             catch (final IOException e) {
                 ok = false;

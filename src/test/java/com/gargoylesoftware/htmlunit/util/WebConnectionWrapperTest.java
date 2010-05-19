@@ -19,7 +19,7 @@ import static org.junit.Assert.assertSame;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.httpclient.HttpStatus;
+import org.apache.http.HttpStatus;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.HttpMethod;

@@ -43,15 +43,13 @@ import java.util.Stack;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.commons.codec.DecoderException;
-import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.httpclient.auth.CredentialsProvider;
-import org.apache.commons.httpclient.protocol.Protocol;
-import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.CredentialsProvider;
 import org.w3c.css.sac.ErrorHandler;
 
 import com.gargoylesoftware.htmlunit.attachment.AttachmentHandler;
@@ -69,7 +67,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.protocol.data.DataUrlDecoder;
-import com.gargoylesoftware.htmlunit.ssl.InsecureSSLProtocolSocketFactory;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
@@ -108,6 +105,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Sudhan Moghe
  * @author Martin Tamme
  * @author Amit Manjhi
+ * @author Nicolas Belisle
  */
 public class WebClient implements Serializable {
 
@@ -129,14 +127,14 @@ public class WebClient implements Serializable {
     private transient JavaScriptEngine scriptEngine_;
     private boolean javaScriptEnabled_ = true;
     private boolean cssEnabled_ = true;
-    private boolean appletEnabled_ = false;
+    private boolean appletEnabled_;
     private boolean popupBlockerEnabled_;
     private String homePage_;
     private final Map<String, String> requestHeaders_ = Collections.synchronizedMap(new HashMap<String, String>(89));
     private IncorrectnessListener incorrectnessListener_ = new IncorrectnessListenerImpl();
 
     /** The eventLoop corresponding to all windows of this Web client */
-    private transient JavaScriptExecutor eventLoop_ = null;
+    private transient JavaScriptExecutor eventLoop_;
 
     private AlertHandler   alertHandler_;
     private ConfirmHandler confirmHandler_;
@@ -1054,13 +1052,9 @@ public class WebClient implements Serializable {
      * @throws GeneralSecurityException if a security error occurs
      */
     public void setUseInsecureSSL(final boolean useInsecureSSL) throws GeneralSecurityException {
-        if (useInsecureSSL) {
-            final ProtocolSocketFactory factory = new InsecureSSLProtocolSocketFactory();
-            final Protocol https = new Protocol("https", factory, 443);
-            Protocol.registerProtocol("https", https);
-        }
-        else {
-            Protocol.unregisterProtocol("https");
+        //FIXME Depends on the implementation.
+        if (webConnection_ instanceof HttpWebConnection) {
+            ((HttpWebConnection) webConnection_).setUseInsecureSSL(useInsecureSSL);
         }
     }
 
@@ -1890,6 +1884,10 @@ public class WebClient implements Serializable {
             if (topLevelWindows_.contains(topWindow)) {
                 topWindow.close();
             }
+        }
+        //FIXME Depends on the implementation
+        if (webConnection_ instanceof HttpWebConnection) {
+            ((HttpWebConnection) webConnection_).shutdown();
         }
     }
 
