@@ -188,7 +188,7 @@ public class ActiveXObjectImpl extends SimpleScriptable {
     public void put(final String name, final Scriptable start, final Object value) {
         try {
             final Method setMethod = activeXComponentClass_.getMethod("setProperty", String.class, value.getClass());
-            setMethod.invoke(object_, name, value);
+            setMethod.invoke(object_, name, Context.toString(value));
         }
         catch (final Exception e) {
             throw Context.throwAsScriptRuntimeEx(e);
