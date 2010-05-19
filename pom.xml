@@ -278,7 +278,7 @@
                         <link>http://java.sun.com/j2se/1.5.0/docs/api/</link>
                         <link>http://commons.apache.org/logging/apidocs/</link>
                         <link>http://commons.apache.org/codec/apidocs/</link>
-                        <link>http://hc.apache.org/httpclient-3.x/apidocs/</link>
+                        <link>http://hc.apache.org/httpcomponents-client/httpclient/apidocs/</link>
                     </links>
                     <stylesheet>maven</stylesheet>
                 </configuration>
@@ -605,6 +605,9 @@
         <contributor>
             <name>Amit Manjhi</name>
         </contributor>
+        <contributor>
+            <name>Nicolas Belisle</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
@@ -629,9 +632,14 @@
             <version>2.4</version>
         </dependency>
         <dependency>
-            <groupId>commons-httpclient</groupId>
-            <artifactId>commons-httpclient</artifactId>
-            <version>3.1</version>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>4.0.1</version>
         </dependency>
         <dependency>
             <groupId>commons-codec</groupId>
