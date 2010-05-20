@@ -58,7 +58,7 @@ public class Dojo102Test extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Reries(3)
+    @Reries(5)
     public void dojo() throws Exception {
         client_ = new WebClient(BrowserVersion.FIREFOX_3);
         final String url = "http://localhost:" + PORT + "/util/doh/runner.html";
