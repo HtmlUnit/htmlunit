@@ -33,7 +33,7 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.commons.logging.impl.SimpleLog;
+import org.apache.commons.logging.impl.Log4JLogger;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpEntityEnclosingRequest;
@@ -79,6 +79,7 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
 import org.apache.james.mime4j.util.CharsetUtil;
+import org.apache.log4j.Level;
 
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -387,9 +388,9 @@ public class HttpWebConnection implements WebConnection {
             });
 
             // Disable informational messages from httpclient
-            final Log log = LogFactory.getLog("httpclient.wire");
-            if (log instanceof SimpleLog) {
-                ((SimpleLog) log).setLevel(SimpleLog.LOG_LEVEL_WARN);
+            final Log log = LogFactory.getLog("org.apache.http");
+            if (log instanceof Log4JLogger) {
+                ((Log4JLogger) log).getLogger().setLevel(Level.WARN);
             }
 
             httpClient_.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, getTimeout());
